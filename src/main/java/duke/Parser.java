@@ -48,18 +48,23 @@ public class Parser {
         case "bye":
             taskList.saveTasksToStorage();
             return Ui.bye();
+        case "l": // fallthrough
         case "list":
             return Ui.list(taskList);
         case "done":
             return handleDone();
+        case "t": // fallthrough
         case "todo":
             return handleTodo();
+        case "d": // fallthrough
         case "deadline":
             return handleDeadline();
+        case "e": // fallthrough
         case "event":
             return handleEvent();
         case "delete":
             return handleDelete();
+        case "f": // fallthrough
         case "find":
             return handleFind();
         default:
@@ -103,7 +108,8 @@ public class Parser {
         if (words.length == 1) {
             throw new MissingTaskNameException("Missing task name");
         }
-        String remaining = userString.substring(5);
+        int indexWhereTaskNameStarts = words[0].length() + 1;
+        String remaining = userString.substring(indexWhereTaskNameStarts);
         taskList.add(new ToDo(remaining));
         taskList.saveTasksToStorage();
         return Ui.added("todo")
@@ -123,8 +129,8 @@ public class Parser {
         if (words.length == 1) {
             throw new MissingTaskNameException("Missing task name");
         }
-        String deadlineName = getDeadlineName(userString);
-        LocalDate dueDate = getDueDate(userString);
+        String deadlineName = getDeadlineNameFromString(userString);
+        LocalDate dueDate = getDueDateFromString(userString);
         taskList.add(new Deadline(deadlineName, dueDate));
         taskList.saveTasksToStorage();
         return Ui.added("deadline")
@@ -138,12 +144,13 @@ public class Parser {
      * @return Name of deadline task
      * @throws MissingDeadlineException If no due date is provided
      */
-    public static String getDeadlineName(String userString) throws MissingDeadlineException {
-        int byIndex = userString.indexOf("/by");
-        if (byIndex == -1) {
+    public static String getDeadlineNameFromString(String userString) throws MissingDeadlineException {
+        int indexOfBy = userString.indexOf("/by");
+        if (indexOfBy == -1) {
             throw new MissingDeadlineException("Missing deadline");
         }
-        return userString.substring(9, byIndex - 1);
+        int indexOfTaskName = words[0].length() + 1;
+        return userString.substring(indexOfTaskName, indexOfBy - 1);
     }
 
     /**
@@ -153,12 +160,13 @@ public class Parser {
      * @return LocalDate object of the due date
      * @throws MissingDeadlineException If no due date is provided
      */
-    public static LocalDate getDueDate(String userString) throws MissingDeadlineException {
-        int byIndex = userString.indexOf("/by");
-        if (byIndex == -1) {
+    public static LocalDate getDueDateFromString(String userString) throws MissingDeadlineException {
+        int indexOfBy = userString.indexOf("/by");
+        if (indexOfBy == -1) {
             throw new MissingDeadlineException("Missing deadline");
         }
-        String dueDateString = userString.substring(byIndex + 4);
+        int indexOfDueDate = indexOfBy + 4;
+        String dueDateString = userString.substring(indexOfDueDate);
         return LocalDate.parse(dueDateString);
     }
 
@@ -174,8 +182,8 @@ public class Parser {
         if (words.length == 1) {
             throw new MissingTaskNameException("Missing task name");
         }
-        String eventName = getEventName(userString);
-        LocalDate eventDate = getEventDate(userString);
+        String eventName = getEventNameFromString(userString);
+        LocalDate eventDate = getEventDateFromString(userString);
         taskList.add(new Event(eventName, eventDate));
         taskList.saveTasksToStorage();
         return Ui.added("event")
@@ -189,12 +197,13 @@ public class Parser {
      * @return Name of event task
      * @throws MissingEventTimeException If the event date is not provided
      */
-    public static String getEventName(String userString) throws MissingEventTimeException {
-        int atIndex = userString.indexOf("/at");
-        if (atIndex == -1) {
+    public static String getEventNameFromString(String userString) throws MissingEventTimeException {
+        int indexOfAt = userString.indexOf("/at");
+        if (indexOfAt == -1) {
             throw new MissingEventTimeException("Missing event time");
         }
-        return userString.substring(6, atIndex - 1);
+        int indexOfTaskName = words[0].length() + 1;
+        return userString.substring(indexOfTaskName, indexOfAt - 1);
     }
 
     /**
@@ -204,12 +213,12 @@ public class Parser {
      * @return Date of the event task
      * @throws MissingEventTimeException If the event date is not provided
      */
-    public static LocalDate getEventDate(String userString) throws MissingEventTimeException {
-        int atIndex = userString.indexOf("/at");
-        if (atIndex == -1) {
+    public static LocalDate getEventDateFromString(String userString) throws MissingEventTimeException {
+        int indexOfAt = userString.indexOf("/at");
+        if (indexOfAt == -1) {
             throw new MissingEventTimeException("Missing event time");
         }
-        String eventDateString = userString.substring(atIndex + 4);
+        String eventDateString = userString.substring(indexOfAt + 4);
         return LocalDate.parse(eventDateString);
     }
 
