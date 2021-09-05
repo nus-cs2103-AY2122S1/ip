@@ -22,7 +22,7 @@
         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
-        <ScrollPane fx:id="scrollPane" prefHeight="637.0" prefWidth="475.0" GridPane.rowIndex="1">
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="637.0" prefWidth="475.0" GridPane.rowIndex="1">
                 <VBox fx:id="dialogContainer" alignment="CENTER" minWidth="0.0" prefHeight="267.0" prefWidth="467.0" />
         </ScrollPane>
         <HBox alignment="BOTTOM_CENTER" GridPane.rowIndex="2">
@@ -38,13 +38,13 @@
      <menus>
        <Menu mnemonicParsing="false" text="File">
          <items>
-           <MenuItem fx:id="closeMenu" mnemonicParsing="false" text="Close" onAction="#setCloseMenuListener" />
+           <MenuItem fx:id="closeMenu" mnemonicParsing="false" onAction="#setCloseMenuListener" text="Close" />
          </items>
        </Menu>
 
        <Menu mnemonicParsing="false" text="Export">
          <items>
-           <MenuItem mnemonicParsing="false" text="As CSV" onAction="#setExportCsvListener" />
+           <MenuItem mnemonicParsing="false" onAction="#setExportCsvListener" text="As CSV" />
            <MenuItem mnemonicParsing="false" text="more Coming Soon" />
          </items>
        </Menu>

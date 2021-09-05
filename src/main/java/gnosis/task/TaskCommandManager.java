@@ -96,6 +96,7 @@ public class TaskCommandManager {
     }
 
     public List<Task> findMatchingTasks(String taskKeyword) {
+        // using stream to filter out only matching task in task list
         return this.tasks.stream()
                 .filter(task -> task.getTaskName().toLowerCase().contains(taskKeyword.toLowerCase()))
                 .collect(Collectors.toList());
