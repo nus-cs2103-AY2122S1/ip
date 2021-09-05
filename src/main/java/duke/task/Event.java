@@ -28,8 +28,8 @@ public class Event extends Task {
         startTimeOfEvent = logicDateTimeParser.getTime();
         startDateOfEvent = logicDateTimeParser.getDate();
 
-        if (endEventDateTime == null ||
-            endEventDateTime.trim().isEmpty()) {
+        if (endEventDateTime == null
+            || endEventDateTime.trim().isEmpty()) {
             endDateOfEvent = startDateOfEvent;
             endTimeOfEvent = startTimeOfEvent;
         } else {

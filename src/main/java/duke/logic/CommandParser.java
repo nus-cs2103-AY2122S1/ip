@@ -120,6 +120,9 @@ public class CommandParser {
      * @return the task that is added.
      */
     private static Task addTask(String action, String otherInput, TaskList taskList) {
+        assert !action.isBlank() : "action cannot be blank";
+        assert !otherInput.isBlank() : "other input cannot be blank";
+        assert taskList != null : "task list cannot be null";
         TasksEnum tasksEnum = TasksEnum.valueOf(action);
         Task result = tasksEnum.getTask(otherInput);
         if (!taskList.addTask(result)) { // if adding task is unsuccessful
