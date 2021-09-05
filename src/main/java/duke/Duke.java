@@ -45,4 +45,13 @@ public class Duke {
             return ui.showException(new DukeException(DukeExceptionType.INVALID_DATETIME));
         }
     }
+
+    /**
+     * Returns Duke program closing message.
+     *
+     * @return Duke program closing message string.
+     */
+    String byeMessage() {
+        return "Bye! Program closing...";
+    }
 }
