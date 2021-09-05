@@ -8,7 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -24,14 +23,18 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Tom.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Jerry.png"));
+    private Image userImage;
+    private Image dukeImage;
 
     /**
      * Initialize the MainWindow.
      * */
     @FXML
     public void initialize() {
+        assert this.getClass().getResourceAsStream("/images/Tom.png") != null;
+        assert this.getClass().getResourceAsStream("/images/Jerry.png") != null;
+        userImage = new Image(this.getClass().getResourceAsStream("/images/Tom.png"));
+        dukeImage = new Image(this.getClass().getResourceAsStream("/images/Jerry.png"));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String welcome = "Hello! I'm Peoduo\n" + "Can I help you?\n";
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcome, dukeImage));

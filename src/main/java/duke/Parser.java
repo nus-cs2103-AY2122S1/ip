@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Parse user's input, identify whether it is a valid command and calls relevant method(s) to execute the command.
@@ -66,8 +67,8 @@ public class Parser {
             return tasks.search(userInput, tasks.getStorage().getUserInputRecords());
         } else if (userInput.equals("help")) {
             return printHelpMessage();
-        } else if (userInput.startsWith("todo") || userInput.startsWith("deadline")
-                || userInput.startsWith("event")) {
+        } else if (userInput.startsWith("todo ") || userInput.startsWith("deadline ")
+                || userInput.startsWith("event ")) {
             return tasks.add(userInput, tasks.getStorage().getUserInputRecords());
         } else {
             return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
