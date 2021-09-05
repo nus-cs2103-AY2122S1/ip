@@ -26,6 +26,12 @@ public class Storage {
 
     private String filePath;
 
+    private final String DIRECTORY = "data/";
+
+    private final int TASK_STATUS_INDEX = 4;
+
+    private final int START_OF_DESC_INDEX = 7;
+
     /**
      * Constructs a new Storage object.
      *
@@ -36,12 +42,12 @@ public class Storage {
     }
 
     private void createDirIfNotExists() {
-        Path path = Paths.get("data/");
+        Path path = Paths.get(DIRECTORY);
 
         // check if data directory exists in the current working directory
         // if doesn't, create the directory
         if (!Files.exists(path)) {
-            new File("data/").mkdir();
+            new File(DIRECTORY).mkdir();
         }
 
     }
@@ -105,7 +111,7 @@ public class Storage {
                 throw new IllegalArgumentException();
             }
 
-            if (taskText.charAt(4) == 'X') {
+            if (taskText.charAt(TASK_STATUS_INDEX) == 'X') {
                 currentTask.markAsDone();
             }
 
@@ -124,9 +130,9 @@ public class Storage {
     private Deadline addDeadline(String taskText) {
 
         // [D][X] return laptop (by: Aug 3 2021)
-        int index = taskText.lastIndexOf(" (by: ");
-        String description = taskText.substring(7, index);
-        String date = taskText.substring(index + 6, taskText.length() - 1);
+        int lastIndexOfDesc = taskText.lastIndexOf(" (by: ");
+        String description = taskText.substring(START_OF_DESC_INDEX, lastIndexOfDesc);
+        String date = taskText.substring(lastIndexOfDesc + 6, taskText.length() - 1);
         date = LocalDate.parse(date, DateTimeFormatter.ofPattern("MMM d yyy")).toString();
         return new Deadline(description, date);
 
@@ -135,9 +141,8 @@ public class Storage {
     private Event addEvent(String taskText) {
 
         // [E][ ] interview meeting (at: Aug 7 2021 9:00 PM)
-
         int index = taskText.lastIndexOf(" (at: ");
-        String description = taskText.substring(7, index);
+        String description = taskText.substring(START_OF_DESC_INDEX, index);
         String dateAndTime = taskText.substring(index + 6, taskText.length() - 1);
 
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM d yyyy h:mm a");

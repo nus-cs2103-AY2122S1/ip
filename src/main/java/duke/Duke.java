@@ -30,8 +30,7 @@ public class Duke {
     public String getResponse(String userInput) {
         try {
             Command cmd = Parser.parse(userInput);
-            String outputMsg = cmd.execute(tasks, ui, storage);
-            return outputMsg;
+            return cmd.execute(tasks, ui, storage);
         } catch (DukeException error) {
             return error.getMessage();
         }

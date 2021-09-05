@@ -25,18 +25,26 @@ public class Main extends Application {
         }
     }
 
-    private Image logo = new Image(this.getClass().getResourceAsStream("/images/telegram.png"));
+    private final String LOGO_DIR = "/images/telegram.png";
+
+    private final String MAIN_WINDOW_DIR = "/view/MainWindow.fxml";
+
+    private final String CSS_DIR = "/css/index.css";
+
+    private final String GUI_TITLE = "Duke on Telegram";
+
+    private Image logo = new Image(this.getClass().getResourceAsStream(LOGO_DIR));
 
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(MAIN_WINDOW_DIR));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setTitle("Duke on Telegram");
+            stage.setTitle(GUI_TITLE);
             stage.getIcons().add(logo);
-            scene.getStylesheets().add(getClass().getResource("/css/index.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource(CSS_DIR).toExternalForm());
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
