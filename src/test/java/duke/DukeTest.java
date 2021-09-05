@@ -2,30 +2,17 @@ package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.PrintStream;
-
 import org.junit.jupiter.api.Test;
 
 
 public class DukeTest {
-
-    private final PrintStream stdout = System.out;
-    private final InputStream stdin = System.in;
-
-    public void resetStreams() {
-        System.setIn(stdin);
-        System.setOut(stdout);
-    }
 
     @Test
     public void byeTest() {
         String data = "bye\n";
         String output = "";
         try {
-            output = new Duke("data/test.txt").getResponse("bye");
+            output = new Duke("data/test.txt").getResponse(data);
         } catch (DukeException e) {
             e.printStackTrace();
         }
@@ -45,7 +32,7 @@ public class DukeTest {
         }
         String expected = ("Meow. I've added this task:\n"
                 + "   [E][ ] christmas day (at: Dec 25 2021 All day)\n"
-                + "Now you have 1 tasks in the list.\n").replaceAll("\n", "").replaceAll("\r", "");
+                + "Now you have 4 tasks in the list.\n").replaceAll("\n", "").replaceAll("\r", "");
 
         assertEquals(expected, output.replaceAll("\n", "").replaceAll("\r", ""));
     }
