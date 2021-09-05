@@ -58,7 +58,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        isBye = input.equals("bye") ? isBye = true : false;
+        isBye = input.equals("bye") && (isBye = true);
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog("I say: " + input + " ", userImage),
@@ -66,8 +66,8 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (isBye) {
-            PauseTransition delay = new PauseTransition(Duration.seconds(2));
-            delay.setOnFinished( event -> Platform.exit());
+            PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
+            delay.setOnFinished(event -> Platform.exit());
             delay.play();
         }
     }

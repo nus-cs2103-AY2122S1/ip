@@ -10,24 +10,17 @@ import static java.lang.Integer.parseInt;
  * Represents the main logic of the code when the user enters an input.
  */
 public class Parser {
-    private Scanner scan;
-    private Storage storage;
     private TaskList taskList;
     private Ui ui;
     private String arr[];
-    private String input = "";
 
     /**
      * A constructor to create a parser object.
      *
-     * @param scan A scanner that takes in the input from the user.
-     * @param storage A storage that deals with loading and saving files.
      * @param taskList A list that keeps track of all tasks.
      * @param ui An object that perform tasks related to interactions with user.
      */
-    Parser(Scanner scan, Storage storage, TaskList taskList, Ui ui) {
-        this.scan = scan;
-        this.storage = storage;
+    Parser(TaskList taskList, Ui ui) {
         this.taskList = taskList;
         this.ui = ui;
     }
