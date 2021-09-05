@@ -1,10 +1,5 @@
 package duke;
 
-import duke.task.DeadlineTask;
-import duke.task.EventTask;
-import duke.task.Task;
-import duke.task.TodoTask;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,13 +7,18 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.Task;
+import duke.task.TodoTask;
+
 /**
  * Read and Write Duke chatbot's list of tasks to/from a file.
  */
 public class Storage {
 
     private final File file;
-    
+
     public Storage(String filePath) {
         this.file = new File(filePath);
     }
@@ -33,17 +33,17 @@ public class Storage {
 
         Task task;
         switch (type) {
-            case "T":
-                task = new TodoTask(description);
-                break;
-            case "D":
-                task = new DeadlineTask(description, time);
-                break;
-            case "E":
-                task = new EventTask(description, time);
-                break;
-            default:
-                throw new DukeException("Incorrect Task Format!");
+        case "T":
+            task = new TodoTask(description);
+            break;
+        case "D":
+            task = new DeadlineTask(description, time);
+            break;
+        case "E":
+            task = new EventTask(description, time);
+            break;
+        default:
+            throw new DukeException("Incorrect Task Format!");
         };
         if (isDone) {
             task.finishTask();
@@ -96,5 +96,5 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw new DukeException("File Not Found!");
         }
-    }      
+    }
 }

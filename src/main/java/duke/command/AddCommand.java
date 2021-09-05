@@ -12,8 +12,12 @@ import duke.task.TodoTask;
 public class AddCommand extends Command {
 
     private Task taskToAdd;
-    
-    public AddCommand(String fullCommand) throws DukeException{
+
+    /**
+     * Create a new Command indicating a task is add.
+     * @param fullCommand Unedited user command.
+     */
+    public AddCommand(String fullCommand) throws DukeException {
         parseTask(fullCommand);
     }
 
@@ -22,7 +26,7 @@ public class AddCommand extends Command {
      * @param fullCommand Unedited user command.
      * @throws DukeException If an invalid command format is written.
      */
-    private void parseTask(String fullCommand) throws DukeException{
+    private void parseTask(String fullCommand) throws DukeException {
         String type = fullCommand.split(" ")[0];
         switch (type) {
         case "todo":

@@ -1,12 +1,16 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
 
 public class ExitCommand extends Command {
 
+    /**
+     * Create a new Command indicating exit from Duke chatbot.
+     * @param fullCommand Unedited user command.
+     */
     public ExitCommand(String fullCommand) {}
 
     /**
@@ -19,7 +23,7 @@ public class ExitCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showGoodbye();
     }
-    
+
     /**
      * Check if user is ending the chatbot.
      * @return True if user is ending the chatbot.

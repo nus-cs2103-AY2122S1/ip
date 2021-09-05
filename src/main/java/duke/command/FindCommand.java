@@ -1,15 +1,19 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
 import duke.task.Task;
 
 public class FindCommand extends Command {
 
     private String terms;
 
+    /**
+     * Create a new Command indicating a task is to be found.
+     * @param fullCommand Unedited user command.
+     */
     public FindCommand(String fullCommand) throws DukeException {
         String terms = fullCommand.replace("find", "").trim();
         if (terms.isEmpty()) {

@@ -1,15 +1,19 @@
 package duke.command;
 
+import duke.DukeException;
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
-import duke.DukeException;
 import duke.task.Task;
 
 public class DeleteCommand extends Command {
-    
+
     private int taskIndex;
 
+    /**
+     * Create a new Command indicating a task is deleted.
+     * @param fullCommand Unedited user command.
+     */
     public DeleteCommand(String fullCommand) throws DukeException {
         try {
             String taskIndexString = fullCommand.replace("delete", "").trim();

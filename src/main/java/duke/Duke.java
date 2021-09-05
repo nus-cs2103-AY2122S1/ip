@@ -20,7 +20,6 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-    
     private void run() {
         ui.showWelcome();
         boolean isExit = false;

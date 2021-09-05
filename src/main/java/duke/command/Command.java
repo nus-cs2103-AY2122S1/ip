@@ -5,7 +5,7 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-abstract public class Command {
+public abstract class Command {
 
     /**
      * Execute user command
@@ -14,12 +14,12 @@ abstract public class Command {
      * @param storage Storage of Duke Chatbot.
      * @throws DukeException If execution fails.
      */
-    abstract public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Check if user is ending the chatbot.
      * @return True if user is ending the chatbot.
      */
-    abstract public boolean isExit();
+    public abstract boolean isExit();
 
 }

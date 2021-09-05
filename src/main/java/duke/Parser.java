@@ -19,13 +19,13 @@ public class Parser {
      * @return requested command.
      * @throws DukeException If raised by the command during further parsing.
      */
-    public static Command parse(String fullCommand) throws DukeException{
+    public static Command parse(String fullCommand) throws DukeException {
         String type = fullCommand.split(" ")[0];
         switch (type) {
         case "bye":
             return new ExitCommand(fullCommand);
         case "list":
-            return  new ListCommand(fullCommand);
+            return new ListCommand(fullCommand);
         case "done":
             return new DoneCommand(fullCommand);
         case "delete":
@@ -33,7 +33,7 @@ public class Parser {
         case "find":
             return new FindCommand(fullCommand);
         default:
-            return new AddCommand(fullCommand);              
+            return new AddCommand(fullCommand);
         }
     }
 }

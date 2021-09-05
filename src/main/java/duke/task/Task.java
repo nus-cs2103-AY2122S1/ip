@@ -1,11 +1,10 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.DukeException;
 
 /**
  * Represents outstanding task for the user to keep track.
@@ -14,9 +13,9 @@ public class Task {
 
     protected static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyy HH:mm");
 
+    protected LocalDateTime time = null;
     private String description;
     private boolean isDone;
-    protected LocalDateTime time = null;
 
     protected Task(String description) {
         this.description = description;

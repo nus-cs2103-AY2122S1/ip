@@ -1,15 +1,19 @@
 package duke.command;
 
+import duke.DukeException;
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
-import duke.DukeException;
 import duke.task.Task;
 
 public class DoneCommand extends Command {
 
     private int taskIndex;
 
+    /**
+     * Create a new Command indicating a task is done.
+     * @param fullCommand Unedited user command.
+     */
     public DoneCommand(String fullCommand) {
         String taskIndexString = fullCommand.replace("done", "").trim();
         this.taskIndex = Integer.parseInt(taskIndexString);
