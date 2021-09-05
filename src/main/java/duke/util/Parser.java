@@ -14,6 +14,10 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.exception.InvalidInputException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Utility class that contains static methods useful in parsing
@@ -82,5 +86,42 @@ public final class Parser {
             return new String[] {splitInput[0], ""};
         }
         return splitInput;
+    }
+
+    /**
+     * Generates the task from a string in the savefile
+     *
+     * @param input String input from the savefile
+     * @return Task to be added to a task list
+     * @throws InvalidInputException if task cannot be parsed
+     */
+    public static Task parseSaveFileLine(String input) throws InvalidInputException {
+        String[] currTaskSplit = input.split("\\|\\|");
+        Task newTask;
+        switch (currTaskSplit[0]) {
+        case "[T]":
+            newTask = new Todo(currTaskSplit[2]);
+            if (currTaskSplit[1].equals("true")) {
+                newTask.complete();
+            }
+            break;
+        case "[E]":
+            LocalDateTime eventTime = Parser.parseDate(currTaskSplit[3]);
+            newTask = new Event(currTaskSplit[2], eventTime);
+            if (currTaskSplit[1].equals("true")) {
+                newTask.complete();
+            }
+            break;
+        case "[D]":
+            LocalDateTime deadline = Parser.parseDate(currTaskSplit[3]);
+            newTask = new Deadline(currTaskSplit[2], deadline);
+            if (currTaskSplit[1].equals("true")) {
+                newTask.complete();
+            }
+            break;
+        default:
+            throw new InvalidInputException("Unrecognised task type detected in save file.");
+        }
+        return newTask;
     }
 }

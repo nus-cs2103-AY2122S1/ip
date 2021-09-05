@@ -9,7 +9,6 @@ import duke.exception.NoActionException;
 import duke.exception.SaveFileException;
 import duke.task.Task;
 import duke.task.Todo;
-import duke.util.Reply;
 import duke.util.TaskList;
 
 
@@ -29,7 +28,6 @@ public class TodoCommandTest {
         assertThrows(NoActionException.class, () -> {
             command.execute(taskListStub, new StorageStub());
         });
-
     }
 
     private class TaskListStub extends duke.util.TaskList {
@@ -45,11 +43,6 @@ public class TodoCommandTest {
         }
     }
 
-    private static class ReplyStub extends Reply {
-        public static String showTaskAdded(Task newTask, TaskList tasks) {
-            return "";
-        }
-    }
 
     private class StorageStub extends duke.util.Storage {
         public StorageStub() {
