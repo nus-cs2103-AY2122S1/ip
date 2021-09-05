@@ -138,6 +138,7 @@ public class TaskList {
 
     /**
      * Prints the list of tasks.
+     * @return A string that contains the list of tasks.
      */
     public String displayList() {
         if (ls.size() == 0) {
@@ -154,6 +155,7 @@ public class TaskList {
 
     /**
      * Prints the acknowledgement and the current number of tasks in the list.
+     * @return A string to show that a task has been added.
      */
     public String printAddTask() {
         String str = "";
@@ -167,6 +169,7 @@ public class TaskList {
      * Allows the user to find a task in the list.
      *
      * @param search The search term.
+     * @return A string to show if a task is found in the list of not.
      */
     public String findTask(String search) {
         searchList = new ArrayList<>();
