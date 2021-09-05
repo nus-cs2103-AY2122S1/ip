@@ -12,7 +12,6 @@ public class Duke {
     private static final String FILEPATH = "./data/duke.txt";
     private final Storage storage;
     private final TaskList list;
-    private final Ui ui;
 
     /**
      * Class constructor to initialize a Duke instance.
@@ -20,7 +19,6 @@ public class Duke {
     public Duke() {
         this.storage = new Storage(FILEPATH);
         this.list = new TaskList();
-        this.ui = new Ui();
         try {
             storage.readTasks(list);
         } catch (Exception e) {
