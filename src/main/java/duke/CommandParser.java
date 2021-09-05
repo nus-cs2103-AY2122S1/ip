@@ -9,6 +9,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.MarkDoneCommand;
 import duke.storage.TaskList;
@@ -20,16 +21,17 @@ import duke.task.TodoTask;
  * Include utilities for parsing a string input into a command
  */
 public class CommandParser {
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    public static final String EXIT_PREFIX = "bye";
+    public static final String LIST_PREFIX = "list";
+    public static final String TODO_PREFIX = "todo";
+    public static final String DEADLINE_PREFIX = "deadline";
+    public static final String EVENT_PREFIX = "event";
+    public static final String DONE_PREFIX = "done";
+    public static final String DELETE_PREFIX = "delete";
+    public static final String FIND_PREFIX = "find";
+    public static final String HELP_PREFIX = "help";
 
-    private static final String EXIT_PREFIX = "bye";
-    private static final String LIST_PREFIX = "list";
-    private static final String TODO_PREFIX = "todo";
-    private static final String DEADLINE_PREFIX = "deadline";
-    private static final String EVENT_PREFIX = "event";
-    private static final String DONE_PREFIX = "done";
-    private static final String DELETE_PREFIX = "delete";
-    private static final String FIND_PREFIX = "find";
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     /**
      * Check if a string input represents an exit command
@@ -65,6 +67,8 @@ public class CommandParser {
             return parseFindCommand(commandString);
         } else if (commandString.startsWith(EXIT_PREFIX)) {
             return new ExitCommand();
+        } else if (commandString.startsWith(HELP_PREFIX)) {
+            return parseHelpCommand(commandString);
         } else {
             throw new DukeException("Sorry, I don't understand that command...");
         }
@@ -179,5 +183,11 @@ public class CommandParser {
         } else {
             return new FindCommand(payload);
         }
+    }
+
+    private static Command parseHelpCommand(String commandString) {
+        assert commandString.startsWith(HELP_PREFIX);
+        String payload = commandString.substring(HELP_PREFIX.length()).trim();
+        return new HelpCommand(payload);
     }
 }

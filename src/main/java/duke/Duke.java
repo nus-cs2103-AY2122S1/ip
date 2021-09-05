@@ -53,7 +53,7 @@ public class Duke {
      * @return greeting message
      */
     public String greet() {
-        return "Yo, I'm Xiri.\nHow can I help you?";
+        return "Yo, I'm Xiri.\nHow can I help you?\nType `help` to see all available commands";
     }
 
     /**
