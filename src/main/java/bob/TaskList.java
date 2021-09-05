@@ -45,7 +45,9 @@ public class TaskList {
     public String getList() {
         String result = "";
         for (int index = 0; index < this.taskList.size(); index++) {
-            result = result + (index + 1) + "." + this.taskList.get(index).printTask() + "\n";
+            String currTask = this.taskList.get(index).printTask();
+            String currNumber = (index + 1) + ".";
+            result = result + currNumber + currTask + "\n";
         }
         return result;
     }
@@ -106,15 +108,16 @@ public class TaskList {
      */
     public String searchList(String keyword) throws NoSearchResultException {
         String result = "";
-        int count = 1;
+        int noOfResults = 0;
         for (int index = 0; index < this.taskList.size(); index++) {
             String currTask = this.taskList.get(index).printTask();
             if (currTask.contains(keyword)) {
-                result = result + count + "." + currTask + "\n";
-                count++;
+                String currNumber = (noOfResults + 1) + ".";
+                result = result + currNumber + currTask + "\n";
+                noOfResults++;
             }
         }
-        if (count == 1) {
+        if (noOfResults == 0) {
             throw new NoSearchResultException();
         } else {
             return result;
