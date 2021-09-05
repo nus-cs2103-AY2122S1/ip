@@ -14,12 +14,10 @@ public class TaskList {
     protected ArrayList<Task> allTasks;
 
     /**
-     * Constructor for the Tasks class.
-     *
-     * @param allTasks the list of tasks.
+     * Constructor for the TaskList class.
      */
-    public TaskList(ArrayList<Task> allTasks) {
-        this.allTasks = allTasks;
+    public TaskList() {
+        this.allTasks = new ArrayList<>();
     }
 
     /**
@@ -47,6 +45,7 @@ public class TaskList {
      * @return the task.
      */
     public Task getTask(int index) {
+        assert index >= 0;
         return allTasks.get(index);
     }
     

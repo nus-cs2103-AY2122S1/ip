@@ -72,6 +72,7 @@ public class Duke extends Application {
                     new File(storage.getFilePath()));
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
+            tasks = new TaskList();
         }
     }
 
@@ -142,6 +143,7 @@ public class Duke extends Application {
      */
     public void addToScreen() {
         try {
+            assert !userInput.getText().equals("");
             Label userText = new Label(userInput.getText());
             Parser p = new Parser(userInput.getText());
             if (!userInput.getText().equals("bye")) {

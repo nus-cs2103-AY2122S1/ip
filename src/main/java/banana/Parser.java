@@ -89,6 +89,7 @@ public class Parser {
      */
     public String doneCommand(TaskList tasks) {
         int index = Integer.parseInt(input.substring(5, 6)) - 1;
+        assert index >= 0;
         tasks.getTask(index).setIsDone();
         return displayLabel("Nice! I've marked this task as done: \n" +
                 "       " + tasks.getTask(index).toString());
@@ -104,6 +105,7 @@ public class Parser {
     public String addTaskCommand(String input, TaskList tasks) {
         if (input.contains("todo")) {
             String info = input.substring(5);
+            assert !info.equals("");
             tasks.addTask(new ToDo(info));
         } else {
             tasks.addTask(new Task(input));
@@ -124,9 +126,11 @@ public class Parser {
      */
     public String deadlineOrEventCommand(String input, TaskList tasks) {
         if (input.contains("deadline")) {
+            assert input.contains("/by");
             String[] info = input.substring(9).split(" /by ");
             tasks.addTask(getDateAndTime(info, input, "deadline"));
         } else {
+            assert input.contains("/at");
             String[] info = input.substring(6).split(" /at ");
             tasks.addTask(getDateAndTime(info, input, "event"));
         }
@@ -163,6 +167,7 @@ public class Parser {
      */
     public String deleteCommand(TaskList tasks) {
         int index = Integer.parseInt(input.substring(7, 8)) - 1;
+        assert index >= 0;
         Task removedTask = tasks.getTask(index);
         tasks.removeTask(removedTask);
         return displayLabel("Noted. I've removed this task:  \n" +
@@ -178,8 +183,9 @@ public class Parser {
      * @return the label.
      */
     public String findCommand(TaskList tasks) {
-        TaskList newTasks = new TaskList(new ArrayList<>());
+        TaskList newTasks = new TaskList();
         if (input.contains("find")) {
+            assert input.split(" ").length > 0;
             String item = input.split(" ")[1];
             for (int i = 0; i < tasks.getSize(); i++) {
                 if (tasks.getTask(i).getDescription().contains(item)) {
@@ -236,6 +242,7 @@ public class Parser {
         if (potentialDate.length > 1 && potentialDate[0].contains("/")) {
             date = LocalDate.parse(parseDates(potentialDate[0]));
         }
+        assert type.equals("deadline") || type.equals("event");
         if (type.equals("deadline")) {
             if (date != null) {
                 return new Deadline(info[0], date, potentialDate[1]);
@@ -259,7 +266,9 @@ public class Parser {
      * @return the date.
      */
     public String parseDates(String date) {
+
         String[] sepIntoYearMonthDate = date.split("/");
+        assert sepIntoYearMonthDate.length == 3;
         if (Integer.parseInt(sepIntoYearMonthDate[0]) < 10) {
             sepIntoYearMonthDate[0] = "0" + sepIntoYearMonthDate[0];
         }
