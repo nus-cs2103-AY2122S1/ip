@@ -53,6 +53,7 @@ public class Ui {
 
     /**
      * Displays deleted task.
+     *
      * @param removed deleted task.
      * @param taskList TaskList containing remaining tasks.
      */
@@ -67,6 +68,7 @@ public class Ui {
 
     /**
      * Displays finished task.
+     *
      * @param done done task.
      * @param taskList TaskList containing remaining tasks.
      */
@@ -89,6 +91,7 @@ public class Ui {
 
     /**
      * Displays added task.
+     *
      * @param taskAdded Added task.
      */
     public String displayAdd(Task taskAdded) {
@@ -111,6 +114,7 @@ public class Ui {
 
     /**
      * Displays taskList.
+     *
      * @param taskList task list with all the tasks.
      */
     public String displayList(TaskList taskList) {
@@ -133,9 +137,9 @@ public class Ui {
         }
     }
 
-
     /**
      * Displays items searched by user.
+     *
      * @param taskList
      * @return
      */
@@ -147,6 +151,7 @@ public class Ui {
 
     /**
      * Displays how many tasks are remaining in the list.
+     *
      * @param taskList TaskList with all tasks.
      */
     public void displayTaskListSize(TaskList taskList) {
@@ -186,5 +191,4 @@ public class Ui {
         System.out.println(defaultLine);
         return defaultLine;
     }
-
 }

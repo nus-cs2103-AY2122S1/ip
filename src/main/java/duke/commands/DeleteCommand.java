@@ -10,7 +10,7 @@ import duke.tasktypes.TaskList;
  */
 public class DeleteCommand extends Command {
 
-    private int numToBeRemoved;
+    private final int numToBeRemoved;
 
     public DeleteCommand(int numToBeRemoved) {
         this.numToBeRemoved = numToBeRemoved;
@@ -18,6 +18,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes the command.
+     *
      * @param taskList taskList with all tasks.
      * @param ui User Interface to deal with interactions with user.
      * @param storage Storage to store data of user.
@@ -28,7 +29,7 @@ public class DeleteCommand extends Command {
         assert storage != null;
         try {
             if (numToBeRemoved < 0 || numToBeRemoved > taskList.getSize()) {
-                ui.displayWrongCommand();
+                return ui.displayWrongCommand();
             } else {
                 Task removedTask = taskList.get(numToBeRemoved);
                 taskList.remove(numToBeRemoved);
@@ -38,6 +39,5 @@ public class DeleteCommand extends Command {
         } catch (Exception e) {
             return ui.showError(e);
         }
-        return "";
     }
 }

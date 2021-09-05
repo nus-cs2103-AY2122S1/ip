@@ -10,7 +10,7 @@ import duke.tasktypes.TaskList;
  */
 public class DoneCommand extends Command {
 
-    private int numToBeMarked;
+    private final int numToBeMarked;
 
     public DoneCommand(int numToBeMarked) {
         this.numToBeMarked = numToBeMarked;
@@ -18,6 +18,7 @@ public class DoneCommand extends Command {
 
     /**
      * Executes the command.
+     *
      * @param taskList taskList with all tasks.
      * @param ui User Interface to deal with interactions with user.
      * @param storage Storage to store data of user.
@@ -28,7 +29,7 @@ public class DoneCommand extends Command {
         assert storage != null;
         try {
             if (numToBeMarked < 0 || numToBeMarked > taskList.getSize()) {
-                ui.displayWrongCommand();
+                return ui.displayWrongCommand();
             } else {
                 Task done = taskList.get(numToBeMarked);
                 taskList.get(numToBeMarked).markAsDone();
@@ -38,7 +39,5 @@ public class DoneCommand extends Command {
         } catch (Exception e) {
             return ui.showError(e);
         }
-        return "";
     }
-
 }

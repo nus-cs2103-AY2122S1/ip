@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    private ArrayList<Task> taskList;
+    private final ArrayList<Task> taskList;
 
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
@@ -15,6 +15,7 @@ public class TaskList {
 
     /**
      * Retrieves taskList.
+     *
      * @return ArrayList.
      */
     public ArrayList<Task> getTaskList() {
@@ -23,6 +24,7 @@ public class TaskList {
 
     /**
      * Gets the size of list.
+     *
      * @return size of list.
      */
     public int getSize() {
@@ -31,6 +33,7 @@ public class TaskList {
 
     /**
      * Gets the task at specified index in list.
+     *
      * @param index Index to be taken.
      * @return Task at index.
      */
@@ -40,6 +43,7 @@ public class TaskList {
 
     /**
      * Removes the task from the list.
+     *
      * @param index Index of task to be removed.
      */
     public void remove(int index) {
@@ -48,6 +52,7 @@ public class TaskList {
 
     /**
      * Adds the tasks to the list.
+     *
      * @param task Task to be added.
      */
     public void add(Task task) {
