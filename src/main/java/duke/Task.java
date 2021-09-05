@@ -25,10 +25,10 @@ public class Task {
     /**
      * Change the boolean value of isDone to true if completed.
      */
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
     }
-    public String toString(){
+    public String toString() {
         return "[" + getStatusIcon() +"] " + this.description;
     }
 }

@@ -32,43 +32,45 @@ public class Storage {
      */
     public ArrayList<Task> loadTasks() throws DukeException, IOException {
         File f = new File(pathName);
-        ArrayList<Task> t = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
         try {
             if (!f.exists()) {
                 f.createNewFile();
             }
-        }catch(IOException e){
+        } catch (IOException e) {
                Files.createDirectories(Paths.get("data/"));
                f.createNewFile();
+        }
+        Scanner sc = new Scanner(f);
+        while (sc.hasNext()) {
+            String task = sc.nextLine();
+            String[] taskArr = task.split("///");
+            if (taskArr[0].equals("T")) {
+                Todo td = new Todo(taskArr[2]);
+                if (taskArr[1].equals("1")) {
+                    td.markAsDone();
+                }
+                taskList.add(td);
             }
-            Scanner sc = new Scanner(f);
-            while (sc.hasNext()) {
-                String task = sc.nextLine();
-                String[] taskArr = task.split("///");
-                if (taskArr[0].equals("T")) {
-                    Todo td = new Todo(taskArr[2]);
-                    if (taskArr[1].equals("1")) {
-                        td.markAsDone();
-                    }
-                    t.add(td);
+
+            if (taskArr[0].equals("D")) {
+                System.out.println(taskArr[3]);
+                Deadline d = new Deadline(taskArr[2], taskArr[3]);
+                if (taskArr[1].equals("1")) {
+                    d.markAsDone();
                 }
-                if (taskArr[0].equals("D")) {
-                    System.out.println(taskArr[3]);
-                    Deadline d = new Deadline(taskArr[2], taskArr[3]);
-                    if (taskArr[1].equals("1")) {
-                        d.markAsDone();
-                    }
-                    t.add(d);
-                }
-                if (taskArr[0].equals("E")) {
-                    Event e = new Event(taskArr[2], taskArr[3]);
-                    if (taskArr[1].equals("1")) {
-                        e.markAsDone();
-                    }
-                    t.add(e);
-                }
+                taskList.add(d);
             }
-        return t;
+
+            if (taskArr[0].equals("E")) {
+                Event e = new Event(taskArr[2], taskArr[3]);
+                if (taskArr[1].equals("1")) {
+                    e.markAsDone();
+                }
+                taskList.add(e);
+            }
+        }
+        return taskList;
     }
 
     /**
@@ -82,6 +84,7 @@ public class Storage {
         for (int i = 0; i < tasks.size(); i++) {
             Task t = task.get(i);
             String text = "";
+
             if (t.label.equals("T")) {
                 text = text.concat("T|");
                 if (t.isDone) {
@@ -91,6 +94,7 @@ public class Storage {
                 }
                 text = text.concat(t.description + "\n");
             }
+
             if (t.label.equals("D")) {
                 text = text.concat("D|");
                 if (t.isDone) {
@@ -100,6 +104,7 @@ public class Storage {
                 }
                 text = text.concat(t.description + "|" + ((Deadline) t).time + "\n");
             }
+
             if (t.label.equals("E")) {
                 text = text.concat("E|");
                 if (t.isDone) {

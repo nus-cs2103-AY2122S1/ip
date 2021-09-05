@@ -1,13 +1,13 @@
 package duke;
 
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     private Task task;
 
     /**
      * Initializes the inputted task that is supposed to be added.
      * @param task
      */
-    public AddCommand(Task task){
+    public AddCommand(Task task) {
         this.task = task;
     }
 
@@ -18,7 +18,7 @@ public class AddCommand extends Command{
      * @param storage
      */
     @Override
-    public void execute(TaskList tasks, Ui u, Storage storage){
+    public void execute(TaskList tasks, Ui u, Storage storage) {
         tasks.addTask(task);
         u.displayTaskAdded(task, tasks.size() - 1);
     }

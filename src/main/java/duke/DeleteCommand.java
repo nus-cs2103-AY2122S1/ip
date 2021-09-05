@@ -3,9 +3,10 @@ package duke;
 /**
  * Class that removes a current tasks from the task list.
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private int index;
-    public DeleteCommand(int index){
+
+    public DeleteCommand(int index) {
         this.index = index;
     }
 
@@ -15,7 +16,7 @@ public class DeleteCommand extends Command{
      * @param u
      * @param storage
      */
-    public  void execute(TaskList tasks, Ui u, Storage storage){
+    public  void execute(TaskList tasks, Ui u, Storage storage) {
         tasks.deleteTask(this.index);
         u.displayTaskRemoved(tasks.getTask(index), tasks.size());
     }

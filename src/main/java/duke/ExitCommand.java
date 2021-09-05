@@ -1,6 +1,6 @@
 package duke;
 
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
     /**
      * Command that tells the bot to exit.
      * @param tasks

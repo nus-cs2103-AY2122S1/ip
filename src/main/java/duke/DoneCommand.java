@@ -3,9 +3,10 @@ package duke;
 /**
  * Class that updates the status of a task.
  */
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
     private int index;
-    public DoneCommand(int index){
+
+    public DoneCommand(int index) {
         this.index = index;
     }
 

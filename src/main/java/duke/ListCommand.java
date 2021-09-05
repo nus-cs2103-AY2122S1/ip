@@ -1,6 +1,6 @@
 package duke;
 
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     /**
      * A command that displays the tasks in the list.
      * @param tasks
