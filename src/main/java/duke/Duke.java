@@ -17,7 +17,7 @@ public class Duke {
     /**
      * Creates a new instance of a duke chat-bot.
      *
-     * @param filePath  the path where the data of the tasks will be saved
+     * @param filePath the path where the data of the tasks will be saved
      */
     public Duke(String filePath) throws IOException {
         taskList = new TaskList();

@@ -18,11 +18,22 @@ public class DateTimeParser {
     private final LocalDate date;
 
     /**
-     * Creates a new instance of a Date
+     * Creates a new instance of a Date.
      *
      * @param dateTime The string to be parsed
      */
     public DateTimeParser(String dateTime) {
+        this(dateTime, LocalDate.now(), LocalTime.now());
+    }
+
+    /**
+     * Creates a new instance of a Date. This is used when there is a different start date and time.
+     *
+     * @param dateTime          the string to be parsed
+     * @param relativeStartDate the relative starting date of the task (by default now)
+     * @param relativeStartTime the relative starting time of the task (by default now)
+     */
+    public DateTimeParser(String dateTime, LocalDate relativeStartDate, LocalTime relativeStartTime) {
         String[] dateAndTime = Arrays.stream(dateTime.split("[ |,]", 2))
             .map(String::trim).toArray(String[]::new);
         try {
@@ -32,7 +43,7 @@ public class DateTimeParser {
                     time = LocalTime.parse("23:59");
                 } else { // User likely entered time
                     time = LocalTime.parse(dateAndTime[0], DateTimeFormatter.ofPattern("H:m"));
-                    date = time.isAfter(LocalTime.now()) ? LocalDate.now() : LocalDate.now().plusDays(1);
+                    date = time.isAfter(relativeStartTime) ? relativeStartDate : relativeStartDate.plusDays(1);
                 }
             } else {
                 date = LocalDate.parse(dateAndTime[0], DateTimeFormatter.ofPattern("d/M/yyyy"));

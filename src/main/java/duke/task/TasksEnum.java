@@ -18,12 +18,16 @@ public enum TasksEnum {
     EVENT() {
         @Override
         public Task getTask(String input) {
-            if (input == null || !input.contains(" /at ")) {
-                throw new DukeException("There should be a description followed by \"/at\" and"
-                    + " then the date and time of the event.");
+            if (input == null || !input.contains(" /from ")) {
+                throw new DukeException("There should be a description followed by \"/from\" and"
+                    + " then the starting date and time of the event. To specify end time, use \"/to\".");
             }
-            String[] splitOtherInput = input.split(" /at ", 2);
-            return new Event(splitOtherInput[0], splitOtherInput[1]);
+            String[] splitOtherInput = input.split(" /from ", 2);
+            String[] splitStartAndEnd = splitOtherInput[1].split(" /to ", 2);
+
+            return splitStartAndEnd.length < 2 // No end time
+                ? new Event(splitOtherInput[0], splitOtherInput[1], splitOtherInput[1])
+                : new Event(splitOtherInput[0], splitStartAndEnd[0], splitStartAndEnd[1]);
         }
     },
     DEADLINE() {

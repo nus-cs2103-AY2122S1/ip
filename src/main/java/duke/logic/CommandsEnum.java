@@ -41,14 +41,14 @@ public enum CommandsEnum {
     }, EVENT() {
         @Override
         public String helpMessage() {
-            return "Usage: event <task description> /at <date and/or time>"
+            return "Usage: event <task description> /from <date and/or time> [/to <date and/or time>]\n"
                 + "Where date and time is in the format: D/M/YYYY hh:mm\n"
-                + "For example: event Shopee 21.7 sale /at 21/7/2021\n"
+                + "For example: event Shopee 21.7 sale /from 21/7/2021 00:00 /to 23:59\n"
                 + "This will add an event task \"Shopee 21.7 sale\" to the list,"
-                + " with the date on 21 July 2021, 23:59 by default.\n"
-                + "             event first date /at 31/12/2090 12:00\n"
+                + " with the duration on 21 July 2021 00:00 to 21 July 2021 23:59 by default.\n"
+                + "             event first date /from 31/12/2090 12:00\n"
                 + "This will add an event task \"first date\" to the list,"
-                + " with the date on 31 December 2090 on 12pm.";
+                + " with the date on 31 December 2090 on 12pm to 31 December 2090 12pm.";
         }
 
     }, HELP() {

@@ -62,18 +62,23 @@ public class Storage {
         String corruptFileMsg = "Storage file is corrupted. Please fix it or delete the file.";
         char taskType = line.charAt(0); //'T' or 'D' or 'E'
         boolean isDone = Integer.parseInt(line.substring(4, 5)) == 1; // 1 if isDone, 0 otherwise
-        String[] descriptionAndDatetime = line.substring(8).split(" \\| ", 2);
+        String[] descriptionAndDatetime = line.substring(8).split(" \\| ", 3);
         Task task;
         if (taskType == 'T') {
             task = new Todo(descriptionAndDatetime[0]);
-        } else if (descriptionAndDatetime.length != 2) { // no date time
-            throw new DukeException(corruptFileMsg);
         } else if (taskType == 'D') {
+            if (descriptionAndDatetime.length != 2) {
+                throw new DukeException(corruptFileMsg);
+            }
             task = new Deadline(descriptionAndDatetime[0],
                 DateTimeParser.getDateTimeFromDataString(descriptionAndDatetime[1]));
         } else if (taskType == 'E') {
+            if (descriptionAndDatetime.length != 3) { // includes start and end
+                throw new DukeException(corruptFileMsg);
+            }
             task = new Event(descriptionAndDatetime[0],
-                DateTimeParser.getDateTimeFromDataString(descriptionAndDatetime[1]));
+                DateTimeParser.getDateTimeFromDataString(descriptionAndDatetime[1]),
+                DateTimeParser.getDateTimeFromDataString(descriptionAndDatetime[2]));
         } else {
             throw new DukeException(corruptFileMsg);
         }

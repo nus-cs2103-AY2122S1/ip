@@ -16,7 +16,8 @@ public class DukeException extends RuntimeException {
 
     /**
      * Creates a new runtime exception when there is a problem with inputs or adding tasks.
-     * This constructor takes in a formatted string as the message just like <code>String::format</code>.
+     * This constructor takes in a formatted string as the message just like
+     * {@link java.lang.String#format(String, Object...)}.
      *
      * @param formattedMessage a format string
      * @param args             the arguments to String::format
