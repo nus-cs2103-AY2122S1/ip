@@ -34,11 +34,10 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) throws TaskIndexOutOfBoundsException,
             TaskAlreadyDoneException {
-        // Marks the task as done
         Task completedTask = tasks.markAsDone(this.taskId);
         assert completedTask != null : "The task should be marked as done and returned accordingly";
 
-        // Saves the current task list to the hard drive
+        // Saves the updated task list to the hard drive
         storage.save(tasks);
 
         // Returns a message indicating the task has been successfully marked as done

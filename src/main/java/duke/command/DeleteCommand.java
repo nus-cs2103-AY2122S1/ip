@@ -31,11 +31,10 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws TaskIndexOutOfBoundsException {
-        // Removes a Task from the TaskList instance
         Task removedTask = tasks.deleteTask(taskId);
         assert removedTask != null : "The deleted task should be returned";
 
-        // Displays a message indicating the task has been successfully deleted from the list
+        // Constructs a message indicating the task has been successfully deleted from the list
         String message = "Got it! I've removed this task:\n" + "  " + removedTask + "\nNow you have ";
         int numberOfTasks = tasks.getNumberOfTasks();
         assert numberOfTasks >= 0 : "Number of tasks should not be negative";
@@ -45,7 +44,7 @@ public class DeleteCommand extends Command {
             message += numberOfTasks + " tasks in the list.";
         }
 
-        // Saves the current task list to the hard drive
+        // Saves the updated task list to the hard drive
         storage.save(tasks);
 
         return message;
