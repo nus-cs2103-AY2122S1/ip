@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class FindCommand extends Command {
 
-    private String inputToFind;
+    private final String inputToFind;
 
     public FindCommand(String inputToFind) {
         this.inputToFind = inputToFind;
@@ -16,6 +16,7 @@ public class FindCommand extends Command {
 
     /**
      * Executes the command.
+     *
      * @param taskList taskList with all tasks.
      * @param ui User Interface to deal with interactions with user.
      * @param storage Storage to store data of user.

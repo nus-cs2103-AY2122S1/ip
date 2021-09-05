@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class Storage {
 
-    private String filePath;
+    private final String filePath;
 
     /**
      * Constructor for Storage class.
@@ -32,69 +32,97 @@ public class Storage {
 
     /**
      * Loads the data previously stored in the file.
+     *
      * @return ArrayList of data.
      */
     public ArrayList<Task> load() {
-        // load data from hard disk when Dory starts up and starts bot
         Path dataFolderPath = Paths.get("data");
-        Path dataFilePath = Paths.get("data/dory.txt");
+        Path dataFilePath = Paths.get(filePath);
         boolean doesFolderExist = Files.exists(dataFolderPath);
         boolean doesFileExist = Files.exists(dataFilePath);
-        ArrayList<Task> dataForDory = new ArrayList<>();
-        if (doesFolderExist) {
-            if (doesFileExist) {
-                try {
-                    List<String> data = Files.readAllLines(dataFilePath);
-                    for (int i = 0; i < data.size(); i++) {
-                        String[] lineTask = data.get(i).split("/");
-                        String taskType = lineTask[0];
-                        boolean isDone = lineTask[1].equals("true");
-                        String taskDesc = lineTask[2];
-
-
-                        if (taskType.equals("T")) {
-                            ToDo toDo = new ToDo(taskDesc);
-                            toDo.changeStatus(isDone);
-                            dataForDory.add(toDo);
-                        } else if (taskType.equals("D")) {
-                            String date = lineTask[3];
-                            Deadline deadline = new Deadline(taskDesc, date);
-                            deadline.changeStatus(isDone);
-                            dataForDory.add(deadline);
-                        } else if (taskType.equals("E")) {
-                            String dateOfEvent = lineTask[3];
-                            Event event = new Event(taskDesc, dateOfEvent);
-                            event.changeStatus(isDone);
-                            dataForDory.add(event);
-                        }
-                    }
-                    return dataForDory;
-                    //startChatBot(dataForDory);
-                } catch (IOException e) {
-                    return dataForDory;
-                    //startChatBot(dataForDory);
-                }
-            } else {
-                try {
-                    Files.createFile(dataFilePath);
-                } catch (IOException e) {
-                    System.out.println("failed to create a data file");
-                }
-            }
-        } else {
-            try {
-                Files.createDirectories(dataFolderPath);
-                Files.createFile(dataFilePath);
-            } catch (IOException e) {
-                System.out.println("failed to create a data folder");
-            }
+        if (!doesFolderExist) {
+            handleNoFolderCase(dataFolderPath, dataFilePath);
         }
-        return dataForDory;
+        if (!doesFileExist) {
+            handleNoFileCase(dataFilePath);
+        }
+        return readFile(dataFilePath);
     }
 
+    /**
+     * Reads data file if folder and file exists.
+     *
+     * @param dataFilePath Data file.
+     * @return Returns list of tasks from local file.
+     */
+    public ArrayList<Task> readFile(Path dataFilePath) {
+        ArrayList<Task> dataForDory = new ArrayList<>();
+        try {
+            List<String> data = Files.readAllLines(dataFilePath);
+            for (int i = 0; i < data.size(); i++) {
+                String[] lineTask = data.get(i).split("/");
+                String taskType = lineTask[0];
+                boolean isDone = lineTask[1].equals("true");
+                String taskDesc = lineTask[2];
+                switch (taskType) {
+                case "T":
+                    ToDo toDo = new ToDo(taskDesc);
+                    toDo.changeStatus(isDone);
+                    dataForDory.add(toDo);
+                    break;
+                case "D":
+                    String date = lineTask[3];
+                    Deadline deadline = new Deadline(taskDesc, date);
+                    deadline.changeStatus(isDone);
+                    dataForDory.add(deadline);
+                    break;
+                case "E":
+                    String dateOfEvent = lineTask[3];
+                    Event event = new Event(taskDesc, dateOfEvent);
+                    event.changeStatus(isDone);
+                    dataForDory.add(event);
+                    break;
+                default:
+                    System.out.println("error in data file");
+                }
+            }
+            return dataForDory;
+        } catch (IOException e) {
+            return dataForDory;
+        }
+    }
+
+    /**
+     * Handles the case when no data folder exists.
+     *
+     * @param dataFolderPath Directory for data file to exist.
+     * @param dataFilePath Data file.
+     */
+    public void handleNoFolderCase(Path dataFolderPath, Path dataFilePath) {
+        try {
+            Files.createDirectories(dataFolderPath);
+            Files.createFile(dataFilePath);
+        } catch (IOException e) {
+            System.out.println("failed to create a data folder");
+        }
+    }
+
+    /**
+     * Handles the case when no data file exists within data folder.
+     *
+     * @param dataFilePath Data file.
+     */
+    public void handleNoFileCase(Path dataFilePath) {
+        try {
+            Files.createFile(dataFilePath);
+        } catch (IOException e) {
+            System.out.println("failed to create a data file");
+        }
+    }
 
     /**
      * Updates the data in the file with new data.
+     *
      * @param taskList TaskList containing all tasks.
      */
     public void updateHardDisk(TaskList taskList) {
@@ -112,5 +140,4 @@ public class Storage {
             System.out.println("IO Exception");
         }
     }
-
 }

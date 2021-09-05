@@ -4,24 +4,23 @@ package duke.tasktypes;
  * Task class, consisting of Deadlines, Events, ToDos.
  */
 public class Task {
-    private String description;
-    private String taskType;
+    private final String description;
     private boolean isDone;
 
     /**
      * Constructor for Task class.
-     * @param description
-     * @param taskType
+     *
+     * @param description Description of task.
      */
-    public Task(String description, String taskType) {
+    public Task(String description) {
         this.description = description;
-        this.taskType = taskType;
         this.isDone = false;
     }
 
     /**
      * Changes status to input.
-     * @param result New Boolean.
+     *
+     * @param result Changed Boolean.
      */
     public void changeStatus(boolean result) {
         this.isDone = result;
@@ -29,6 +28,7 @@ public class Task {
 
     /**
      * Retrieves current status.
+     *
      * @return Current status.
      */
     public boolean getBooleanStatus() {
@@ -37,6 +37,7 @@ public class Task {
 
     /**
      * Retrieves task's description.
+     *
      * @return Task's description.
      */
     public String getDescription() {
@@ -45,6 +46,7 @@ public class Task {
 
     /**
      * Retrieves task's status in X or O.
+     *
      * @return X or O.
      */
     public String getStatus() {
@@ -59,6 +61,12 @@ public class Task {
     }
 
 
+    /**
+     * Returns if description contains user's input.
+     *
+     * @param input User's input.
+     * @return Boolean.
+     */
     public boolean containsMatch(String input) {
         return this.description.contains(input);
     }

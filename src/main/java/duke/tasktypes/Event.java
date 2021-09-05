@@ -1,5 +1,6 @@
 package duke.tasktypes;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -8,26 +9,32 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    protected String date;
-    protected LocalDate at;
+    private final String date;
 
     /**
      * Constructor for Events class.
-     * @param description
-     * @param eventDate
+     *
+     * @param description Description of event.
+     * @param eventDate Date of event.
      */
     public Event(String description, String eventDate) {
-        super(description, "E");
+        super(description);
         this.date = eventDate;
     }
 
     /**
      * Modifies inputted date.
+     *
      * @return Date in a different format.
      */
     public String understandDate() {
-        at = LocalDate.parse(this.date);
-        return at.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        try {
+            LocalDate date = LocalDate.parse(this.date);
+            return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        } catch (DateTimeException exception) {
+            System.out.println(exception.getMessage());
+        }
+        return "";
     }
 
     /**

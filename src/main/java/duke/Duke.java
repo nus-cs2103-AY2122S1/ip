@@ -4,15 +4,14 @@ import duke.commands.Command;
 import duke.tasktypes.TaskList;
 import java.util.Scanner;
 
-
 /**
  * Represents the chat bot.
  */
 public class Duke {
 
-    private Storage storage;
-    private TaskList taskList;
-    private Ui ui;
+    private final Storage storage;
+    private final TaskList taskList;
+    private final Ui ui;
 
     /**
      * Constructor for the class.
@@ -25,13 +24,11 @@ public class Duke {
         taskList = new TaskList(storage.load());
     }
 
-
     /**
      * Starts the Dory chat bot.
      */
     public void run() {
         ui.showIntro();
-
         Scanner input = new Scanner(System.in);
         while (input.hasNextLine()) {
             try {
@@ -53,7 +50,7 @@ public class Duke {
      * Generates response for user's input.
      *
      * @param input user's input typed in console.
-     * @return
+     * @return Returns response back to user.
      */
     public String getResponse(String input) {
         Command c = Parser.parse(input);
@@ -63,12 +60,10 @@ public class Duke {
     /**
      * Main method.
      *
-     * @param args
+     * @param args arguments.
      */
     public static void main(String[] args) {
         // start running the chat bot
         new Duke("data/dory.txt").run();
     }
-
 }
-
