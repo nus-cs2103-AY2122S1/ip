@@ -36,6 +36,9 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        assert !d.greet().isEmpty() : "Greet message should not be empty";
+        assert dukeImage != null : "Bot image should not be null";
+        assert userImage != null : "User image should not be null";
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(d.greet(), dukeImage));
     }
 
@@ -45,8 +48,10 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        assert duke != null : "duke should be initialized first";
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        assert !response.isEmpty() : "Response should be non-empty";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
