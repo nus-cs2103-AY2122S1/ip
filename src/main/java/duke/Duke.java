@@ -44,6 +44,7 @@ public class Duke extends Application {
     public String getResponse(String userInput) {
         try {
             Command c = Parser.parse(userInput);
+            assert c != null : "c should not be a null command";
             return c.execute(taskManager);
         } catch (DukeException | IllegalArgumentException | DateTimeException e) {
             return e.getMessage();

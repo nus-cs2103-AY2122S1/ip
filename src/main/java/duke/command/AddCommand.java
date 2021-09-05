@@ -23,6 +23,8 @@ public class AddCommand extends Command {
      * @param args the argument for the task to be added.
      */
     public AddCommand(String type, String... args) {
+        assert type != null : "command type should not be null";
+        assert args != null : "command args should not be null";
         this.type = type;
         this.args = args;
     }
@@ -43,7 +45,7 @@ public class AddCommand extends Command {
         default:
             throw new InvalidDukeCommandException();
         }
-
+        assert task != null : "A task should not be null, either exception thrown or task created";
         taskManager.addTask(task);
 
         return String.format("Got it. I've added this task: \n"

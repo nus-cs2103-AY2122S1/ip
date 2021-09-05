@@ -30,6 +30,7 @@ public class TaskManager {
      * @param task any Task object is accepted.
      */
     public void addTask(Task task) {
+        assert task != null : "Should not try to add a null task";
         taskList.add(task);
         save();
     }

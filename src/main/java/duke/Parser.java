@@ -23,6 +23,7 @@ public class Parser {
      * @throws IllegalArgumentException If there are missing arguments for given command.
      */
     public static Command parse(String fullCommand) throws DukeException, IllegalArgumentException {
+        assert fullCommand != null : "Commands should not be null";
         String[] parts = fullCommand.split(" ", 2);
         String[] args;
         String action = parts[0];
