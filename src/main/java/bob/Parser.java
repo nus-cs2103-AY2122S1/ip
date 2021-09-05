@@ -30,6 +30,10 @@ public class Parser {
         try {
             checkInput(input, tasks);
             String response = "";
+            assert (Objects.equals(input, "list") || input.matches("done(.*)")
+                    || input.matches("delete(.*)") || input.matches("todo(.*)")
+                    || input.matches("deadline(.*)") || input.matches("event(.*)")
+                    || input.matches("find(.*)"));
             boolean isListCommand = Objects.equals(input, "list");
             boolean isDoneCommand = input.matches("done(.*)");
             boolean isDeleteCommand = input.matches("delete(.*)");

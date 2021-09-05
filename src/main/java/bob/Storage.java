@@ -62,6 +62,8 @@ public class Storage {
                 String curr = s.nextLine();
                 Task newTask;
                 boolean isComplete;
+                assert (curr.matches("\\[T](.*)") || curr.matches("\\[D](.*)")
+                        || curr.matches("\\[E](.*)"));
                 if (curr.matches("\\[T](.*)")) {
                     String[] splitCurr = curr.split(" \\Q[\\E.\\Q]\\E ", 2);
                     newTask = new Todo(splitCurr[1]);
@@ -106,7 +108,13 @@ public class Storage {
         String year;
         String[] splitDate = date.split(" ", 3);
 
+        assert (splitDate[1].length() == 1 || splitDate[1].length() == 2);
         day = splitDate[1].length() == 1 ? "0" + splitDate[1] : splitDate[1];
+
+        assert (splitDate[0] == "Jan" || splitDate[0] == "Feb" || splitDate[0] == "Mar" || splitDate[0] == "Apr"
+                || splitDate[0] == "May" || splitDate[0] == "Jun" || splitDate[0] == "Jul" || splitDate[0] == "Aug"
+                || splitDate[0] == "Sep" || splitDate[0] == "Oct" || splitDate[0] == "Nov" || splitDate[0] == "Dec");
+
         switch (splitDate[0]) {
         case "Jan":
             month = "01";
@@ -135,6 +143,8 @@ public class Storage {
         default:
             month = "00"; // Should never reach this branch.
         }
+
+        assert (splitDate[2].length() == 4);
         year = splitDate[2];
 
         // Return year, month and day Strings in the required format.

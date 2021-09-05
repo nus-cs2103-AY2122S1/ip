@@ -59,6 +59,7 @@ public class TaskList {
      * @return String representation of the completed task.
      */
     public String markIndexCompleted(int index) {
+        assert (index < this.taskList.size() && index > -1);
         Task selectedTask = this.taskList.get(index);
         selectedTask.markCompleted();
         return selectedTask.printTask();
@@ -71,6 +72,7 @@ public class TaskList {
      * @return String representation of the deleted task.
      */
     public String deleteIndex(int index) {
+        assert (index < this.taskList.size() && index > -1);
         Task selectedTask = this.taskList.get(index);
         this.taskList.remove(index);
         return selectedTask.printTask();
@@ -93,6 +95,7 @@ public class TaskList {
      * @return Specified task.
      */
     public Task getTask(int index) {
+        assert (index < this.taskList.size() && index > -1);
         return this.taskList.get(index);
     }
 
