@@ -131,8 +131,12 @@ public class Duke {
                 throw new DukeException(e.getMessage(), e);
             }
         }
+    }
 
-        //return output;
+    private String parseUserInput(String input) throws IOException, DukeException {
+        String userInput = input.strip();
+        Command toExecute = Parser.parse(userInput, this);
+        return toExecute.execute(this.listOfTasks);
     }
 
     /**
@@ -142,18 +146,16 @@ public class Duke {
      * @throws DukeException if user input violates given rules.
      */
     public String getResponse(String input) throws DukeException {
+        if (!this.isOpen) {
+            return "PROBLEM";
+        }
+
         createFileIfNoFile();
 
-        if (this.isOpen) {
-            try {
-                String userInput = input.strip();
-                Command toExecute = Parser.parse(userInput, this);
-                return toExecute.execute(this.listOfTasks);
-            } catch (DukeException | IOException e) {
-                throw new DukeException(e.getMessage(), e);
-            }
-        } else {
-            return "PROBLEM";
+        try {
+            return parseUserInput(input);
+        } catch (DukeException | IOException e) {
+            throw new DukeException(e.getMessage(), e);
         }
 
     }
