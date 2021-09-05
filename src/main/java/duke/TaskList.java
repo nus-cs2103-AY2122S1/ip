@@ -11,10 +11,11 @@ import duke.task.Task;
  */
 public class TaskList {
 
+    private final ArrayList<Task> tasks;
+    
     /**
      * Class constuctor.
      */
-    private final ArrayList<Task> tasks;
     public TaskList() {
         tasks = new ArrayList<>();
     }

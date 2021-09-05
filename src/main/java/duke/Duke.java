@@ -61,8 +61,12 @@ public class Duke extends Application {
      * Main body to loop through reading commands and displaying outputs.
      */
     private void run() {
-        ui.showWelcome();
+        assert storage != null : "Storage not properly initialized";
+        assert tasks != null : "TaskList not properly initialized";
+        
         boolean isExit = false;
+        ui.showWelcome();
+
         while (!isExit) {
             ui.showLine();
             try {
