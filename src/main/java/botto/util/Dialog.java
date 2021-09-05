@@ -1,8 +1,13 @@
 package botto.util;
 
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
+import botto.task.Deadline;
+import botto.task.Event;
 import botto.task.Task;
+import botto.task.Todo;
 import botto.ui.DialogBox;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
@@ -51,12 +56,41 @@ public class Dialog {
      * @return formatted message that shows the user's tasks
      */
     private String processTaskMessage(List<Task> list, String header) {
-        StringBuilder taskMessage = new StringBuilder();
-        taskMessage.append(header).append("\n");
+        List<Todo> todos = new LinkedList<>();
+        List<Deadline> deadlines = new LinkedList<>();
+        List<Event> events = new LinkedList<>();
+        for (Task task: list) {
+            if (task instanceof Todo) {
+                todos.add((Todo) task);
+            } else if (task instanceof Deadline) {
+                deadlines.add((Deadline) task);
+            } else if (task instanceof Event) {
+                events.add((Event) task);
+            } else {
+                assert false;
+            }
+        }
+        Collections.sort(deadlines);
+        Collections.sort(events);
 
-        for (int i = 0; i < list.size(); i++) {
-            Task task = list.get(i);
-            taskMessage.append(i + 1).append(". ").append(task).append("\n");
+        StringBuilder taskMessage = new StringBuilder();
+        taskMessage.append(header).append("\n\n");
+
+        taskMessage.append("---------- Todo ----------\n");
+        for (Todo todo: todos) {
+            taskMessage.append(list.indexOf(todo) + 1).append(". ").append(todo).append("\n");
+        }
+        taskMessage.append("\n");
+
+        taskMessage.append("---------- Deadline ----------\n");
+        for (Deadline deadline: deadlines) {
+            taskMessage.append(list.indexOf(deadline) + 1).append(". ").append(deadline).append("\n");
+        }
+        taskMessage.append("\n");
+
+        taskMessage.append("---------- Event ----------\n");
+        for (Event event: events) {
+            taskMessage.append(list.indexOf(event) + 1).append(". ").append(event).append("\n");
         }
         return taskMessage.toString();
     }

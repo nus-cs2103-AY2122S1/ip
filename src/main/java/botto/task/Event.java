@@ -7,8 +7,7 @@ import java.util.Locale;
 /**
  * Format for the Botto bot's event task
  */
-public class Event extends Task {
-
+public class Event extends Task implements Comparable<Event> {
     protected LocalDateTime dateTime;
 
     /**
@@ -31,5 +30,10 @@ public class Event extends Task {
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a", Locale.getDefault());
         return "[E]" + super.toString() + " (at: " + formatter.format(this.dateTime) + ")";
+    }
+
+    @Override
+    public int compareTo(Event o) {
+        return this.dateTime.compareTo(o.dateTime);
     }
 }
