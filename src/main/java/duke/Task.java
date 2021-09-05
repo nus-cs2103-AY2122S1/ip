@@ -10,7 +10,8 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * To create a task
+     * Creates a task
+     *
      * @param description The name/description of the task
      */
     public Task(String description) {
@@ -19,7 +20,8 @@ public class Task {
     }
 
     /**
-     * Return a status icon to indicate if a task has been completed
+     * Returns a status icon to indicate if a task has been completed
+     *
      * @return "[X]" if completed and "[ ]" otherwise
      */
     public String getStatusIcon() {
@@ -34,8 +36,9 @@ public class Task {
     }
 
     /**
-     * To mark a given task as completed and to update its status icon in the list of tasks
+     * Marks a given task as completed and to update its status icon in the list of tasks
      * in user's hard disk
+     *
      * @throws IOException if there is an error when overwriting/appending to the contents of
      * the file
      */
@@ -56,6 +59,7 @@ public class Task {
 
     /**
      * Returns the task as a string that is to be displayed to the user
+     *
      * @return the given task as a string that is to be displayed to the user
      */
     public String getDescription() {
@@ -64,6 +68,7 @@ public class Task {
 
     /**
      * Returns the task as a string that is to be displayed to the user
+     *
      * @return the given task as a string that is to be displayed to the user
      */
     @Override
@@ -74,6 +79,7 @@ public class Task {
     /**
      * Returns the task as a string that is to be appended to the contents of the list of
      * tasks in user's hard disk
+     *
      * @return the task as a string that is to be appended to the contents of the list of
      * tasks in user's hard disk
      */
@@ -82,8 +88,9 @@ public class Task {
     }
 
     /**
-     * To write to the file in user's hard disk that stores a list of tasks or to overwrite
+     * Writes to the file in user's hard disk that stores a list of tasks or to overwrite
      * the contents of this file
+     *
      * @param filePath the relative path to the file
      * @param textToAdd the content that is to be written
      * @throws IOException if there is an error in writing to/overwriting the file
@@ -95,7 +102,8 @@ public class Task {
     }
 
     /**
-     * To append content to the file in user's hard disk that stores a list of tasks
+     * Appends content to the file in user's hard disk that stores a list of tasks
+     *
      * @param filePath the relative path to the file
      * @param textToAppend the content that is to be appended
      * @throws IOException if there is an error in appending to existing content of the file
