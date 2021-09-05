@@ -3,6 +3,7 @@ package duke;
 import java.io.File;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -30,15 +31,6 @@ public class Duke extends Application {
     public Duke() {
         this.list = new MyList();
         this.storage = new Storage(this.list, "./Data.txt");
-    }
-
-    /**
-     * Main method to start duke.
-     * @param args
-     */
-    public static void main(String[] args) {
-        new Duke().start();
-        //launch();
     }
 
     /**
@@ -80,7 +72,7 @@ public class Duke extends Application {
     /**
      * Method to start the bot and waits for the user's input.
      */
-    public void start() {
+    public void startCli() {
 
         Ui.welcomeMessage();
 
@@ -89,7 +81,8 @@ public class Duke extends Application {
         Parser p = new Parser(this.list, this.storage);
 
         while (p.isRunning()) {
-            p.readInput();
+            Scanner s = new Scanner(System.in);
+            System.out.println(p.getDukeResponse(s.nextLine()));
         }
     }
 }
