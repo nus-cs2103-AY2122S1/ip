@@ -24,6 +24,9 @@ public class DoneCommand extends Command {
      * @param storage Storage to store data of user.
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        assert taskList != null;
+        assert ui != null;
+        assert storage != null;
         try {
             if (numToBeMarked < 0 || numToBeMarked > taskList.getSize()) {
                 return ui.displayWrongCommand();

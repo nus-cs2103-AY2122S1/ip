@@ -22,6 +22,9 @@ public class FindCommand extends Command {
      * @param storage Storage to store data of user.
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        assert taskList != null;
+        assert ui != null;
+        assert storage != null;
         try {
             ArrayList<Task> list = new ArrayList<>();
             TaskList listAfterSearch = new TaskList(list);

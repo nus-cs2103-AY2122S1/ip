@@ -19,6 +19,7 @@ public class ListCommand extends Command {
      * @param storage Storage to store data of user.
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        assert taskList != null;
         return ui.displayList(taskList);
     }
 
