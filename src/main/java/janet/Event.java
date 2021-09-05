@@ -36,6 +36,7 @@ public class Event extends Task {
      * @return Date of the event
      */
     public LocalDate getAtDate() {
+        assert(atDate != null);
         return atDate;
     }
 
@@ -46,6 +47,7 @@ public class Event extends Task {
      * @return Formatted date string
      */
     public String parseAtDate() {
+        assert(atDate != null);
         return getAtDate().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 

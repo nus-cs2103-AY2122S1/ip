@@ -22,6 +22,7 @@ public class TaskList implements Serializable {
      * @param task Task to be added
      */
     public void add(Task task) {
+        assert(task != null);
         tasks.add(task);
     }
 
@@ -32,6 +33,7 @@ public class TaskList implements Serializable {
      * @return The task that has been deleted
      */
     public Task delete(int index) {
+        assert(index <= tasks.size());
         return tasks.remove(index);
     }
 
@@ -51,6 +53,7 @@ public class TaskList implements Serializable {
      * @return Task found at that index in the list
      */
     public Task get(int index) {
+        assert(index <= tasks.size());
         return tasks.get(index);
     }
 
@@ -62,6 +65,7 @@ public class TaskList implements Serializable {
      * @return The filtered TaskList
      */
     public TaskList find(String query) {
+        assert(query != null);
         TaskList output = new TaskList();
         for (int i = 0; i < this.size(); i++) {
             if (this.get(i).toString().contains(query)) {

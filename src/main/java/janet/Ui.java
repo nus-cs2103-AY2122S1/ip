@@ -34,6 +34,7 @@ public class Ui {
      * @return String representation of list
      */
     public static String taskListString(TaskList taskList) {
+        assert(taskList != null);
         String output = "Here's what I found:\n";
         for (int i = 0; i < taskList.size(); i++) {
             output += String.format("%d. %s\n", i + 1, taskList.get(i));
@@ -49,6 +50,7 @@ public class Ui {
      * @return String confirming that the task has been added
      */
     public static String addedString(Task task, int size) {
+        assert(task != null);
         return String.format("Alright, I've added this task: \n"
                         + "\t%s\n"
                         + "Now, you have %d tasks in the list.\n",
@@ -62,6 +64,7 @@ public class Ui {
      * @return String confirming that the task has been marked as complete
      */
     public static String doneString(Task task) {
+        assert(task != null);
         return String.format("Certainly, I've marked this task as done: \n"
                         + "\t%s\n",
                 task);
@@ -75,6 +78,7 @@ public class Ui {
      * @return String confirming that the task has been deleted
      */
     public static String deletedString(Task task, int size) {
+        assert(task != null);
         return String.format("Certainly, I've deleted this task: \n"
                         + "\t%s"
                         + "\nNow, you have %d tasks in the list.\n",

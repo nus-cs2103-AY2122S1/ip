@@ -44,6 +44,7 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setJanet(Janet janet) {
+        assert(janet != null);
         this.janet = janet;
     }
 
@@ -54,6 +55,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() throws IOException {
         String input = userInput.getText();
+        assert(input != null);
         String response = janet.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
@@ -63,6 +65,7 @@ public class MainWindow extends AnchorPane {
     }
 
     void addDialogsInChatBox(DialogBox... dialogs) {
+        assert(dialogs.length > 0);
         dialogContainer.getChildren().addAll(dialogs[0]);
         if (dialogs.length != 1) {
             addDialogsInChatBox(Arrays.copyOfRange(dialogs, 1, dialogs.length));

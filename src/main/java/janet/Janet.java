@@ -18,6 +18,7 @@ public class Janet {
      */
     public Janet(MainWindow window) {
         storage = new Storage("janet.txt");
+        assert(window != null);
         this.window = window;
         try {
             tasks = storage.readSave();
@@ -34,6 +35,7 @@ public class Janet {
             return e.toString();
         }
         Task task;
+        assert(command.getOperation() != null);
         switch (command.getOperation()) {
         case "bye":
             Platform.exit();

@@ -19,6 +19,7 @@ public class Storage {
      * @param path Path of the save file
      */
     public Storage(String path) {
+        assert(path != null);
         this.path = path;
     }
 

@@ -36,6 +36,7 @@ public class Deadline extends Task {
      * @return Deadline of the task
      */
     public LocalDate getByDate() {
+        assert(byDate != null);
         return byDate;
     }
 
@@ -46,6 +47,7 @@ public class Deadline extends Task {
      * @return Formatted date string
      */
     public String parseByDate() {
+        assert(byDate != null);
         return getByDate().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
