@@ -29,7 +29,7 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/bezos.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/elon.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/elon.jpg"));
 
     /**
      * Initialize main window with greeting message.
@@ -68,7 +68,7 @@ public class MainWindow extends AnchorPane {
                 public void run() {
                     System.exit(0);
                 }
-            }, 1500);
+            }, 1000);
         }
 
     }

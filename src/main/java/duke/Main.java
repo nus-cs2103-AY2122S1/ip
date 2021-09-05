@@ -6,6 +6,7 @@ import duke.controller.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -24,6 +25,8 @@ public class Main extends Application {
         }
     }
 
+    private Image logo = new Image(this.getClass().getResourceAsStream("/images/telegram.png"));
+
     @Override
     public void start(Stage stage) {
         try {
@@ -31,6 +34,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Duke on Telegram");
+            stage.getIcons().add(logo);
             scene.getStylesheets().add(getClass().getResource("/css/index.css").toExternalForm());
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
