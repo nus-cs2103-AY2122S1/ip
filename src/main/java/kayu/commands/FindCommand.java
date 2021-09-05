@@ -7,7 +7,7 @@ import static kayu.commands.CommandType.FIND;
 
 import java.util.Map;
 
-import kayu.exception.DukeException;
+import kayu.exception.KayuException;
 import kayu.exception.StorageException;
 import kayu.service.TaskList;
 import kayu.storage.Storage;
@@ -35,10 +35,10 @@ public class FindCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) throws DukeException, StorageException {
+    public String execute(TaskList taskList, Storage storage) throws KayuException, StorageException {
         String keyword = commandParams.trim();
         if (keyword.isEmpty()) {
-            throw new DukeException(String.format(ERROR_EMPTY_PARAMS, COMMAND_WORD));
+            throw new KayuException(String.format(ERROR_EMPTY_PARAMS, COMMAND_WORD));
         }
         
         String[] keywords = keyword.split(" ");

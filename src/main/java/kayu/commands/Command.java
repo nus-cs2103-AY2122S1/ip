@@ -2,7 +2,7 @@ package kayu.commands;
 
 import java.util.List;
 
-import kayu.exception.DukeException;
+import kayu.exception.KayuException;
 import kayu.exception.StorageException;
 import kayu.service.TaskList;
 import kayu.storage.Storage;
@@ -45,10 +45,10 @@ public abstract class Command {
      * @param taskList {@link kayu.service.TaskList} instance to execute on.
      * @param storage {@link kayu.storage.Storage} instance to save information with.
      * @return String feedback of execution/outcome.
-     * @throws DukeException If execution of Command fails.
+     * @throws KayuException If execution of Command fails.
      * @throws StorageException If saving of information using <code>storage</code> fails.
      */
-    public abstract String execute(TaskList taskList, Storage storage) throws DukeException, StorageException;
+    public abstract String execute(TaskList taskList, Storage storage) throws KayuException, StorageException;
 
     /**
      * Returns the of the instance.

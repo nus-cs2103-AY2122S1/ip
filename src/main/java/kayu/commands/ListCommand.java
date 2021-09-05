@@ -6,7 +6,7 @@ import static kayu.commands.CommandType.LIST;
 
 import java.util.List;
 
-import kayu.exception.DukeException;
+import kayu.exception.KayuException;
 import kayu.exception.StorageException;
 import kayu.service.TaskList;
 import kayu.storage.Storage;
@@ -32,7 +32,7 @@ public class ListCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) throws DukeException, StorageException {
+    public String execute(TaskList taskList, Storage storage) throws KayuException, StorageException {
         List<Task> tasks = taskList.getTasks();
         if (tasks.isEmpty()) {
             return MESSAGE_EMPTY_LIST;

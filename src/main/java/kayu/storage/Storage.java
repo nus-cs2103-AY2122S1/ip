@@ -72,17 +72,25 @@ public class Storage {
 
     protected void initializeFilePath() throws StorageException {
         try {
-            File directory = new File(taskDirectoryPath);
-            if (!directory.exists() && !directory.mkdir()) {
-                throw new StorageException(String.format(UNABLE_TO_CREATE_DIRECTORY, taskDirectoryPath));
-            }
-            
-            File file = new File(taskFilePath);
-            if (!file.exists() && !file.createNewFile()) {
-                throw new StorageException(String.format(UNABLE_TO_CREATE_FILE, taskFilePath));
-            }
+            initializeDirectory();
+            initializeFile();
+
         } catch (IOException exception) {
             throw new StorageException(String.format(UNABLE_TO_LOAD_PATH, taskFilePath));
+        }
+    }
+    
+    private void initializeDirectory() throws StorageException {
+        File directory = new File(taskDirectoryPath);
+        if (!directory.exists() && !directory.mkdir()) {
+            throw new StorageException(String.format(UNABLE_TO_CREATE_DIRECTORY, taskDirectoryPath));
+        }
+    }
+    
+    private void initializeFile() throws StorageException, IOException {
+        File file = new File(taskFilePath);
+        if (!file.exists() && !file.createNewFile()) {
+            throw new StorageException(String.format(UNABLE_TO_CREATE_FILE, taskFilePath));
         }
     }
 

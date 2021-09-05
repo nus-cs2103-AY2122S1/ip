@@ -3,7 +3,7 @@ package kayu.commands;
 import static kayu.commands.CommandMessage.ERROR_EMPTY_COMMAND;
 import static kayu.commands.CommandType.EMPTY;
 
-import kayu.exception.DukeException;
+import kayu.exception.KayuException;
 import kayu.exception.StorageException;
 import kayu.service.TaskList;
 import kayu.storage.Storage;
@@ -24,7 +24,7 @@ public class EmptyCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) throws DukeException, StorageException {
-        throw new DukeException(ERROR_EMPTY_COMMAND);
+    public String execute(TaskList taskList, Storage storage) throws KayuException, StorageException {
+        throw new KayuException(ERROR_EMPTY_COMMAND);
     }
 }

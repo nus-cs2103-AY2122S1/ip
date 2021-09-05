@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import kayu.exception.DukeException;
+import kayu.exception.KayuException;
 import kayu.exception.StorageException;
 import kayu.task.Task;
 
@@ -61,12 +61,12 @@ public class TaskList {
      * Returns saved {@link kayu.task.Task}.
      *
      * @param newTask {@link kayu.task.Task} to save.
-     * @throws DukeException If {@link kayu.task.Task} cannot be saved or
+     * @throws KayuException If {@link kayu.task.Task} cannot be saved or
      * due to full capacity of {@link #tasks} list.
      */
-    public void addTask(Task newTask) throws DukeException {
+    public void addTask(Task newTask) throws KayuException {
         if (tasks.size() >= MAX_STORAGE) {
-            throw new DukeException(FULL_CAPACITY_ERROR_MESSAGE);
+            throw new KayuException(FULL_CAPACITY_ERROR_MESSAGE);
         }
         tasks.add(newTask);
     }
@@ -77,9 +77,9 @@ public class TaskList {
      *
      * @param taskNumber String format of the {@link kayu.task.Task} number to delete.
      * @return String message of successful completion marking of {@link kayu.task.Task}.
-     * @throws DukeException If <code>taskNumber</code> is not valid.
+     * @throws KayuException If <code>taskNumber</code> is not valid.
      */
-    public Task updateTaskAsDone(int taskNumber) throws DukeException {
+    public Task updateTaskAsDone(int taskNumber) throws KayuException {
         Task selectedTask = getTaskByNumber(taskNumber);
         selectedTask.markAsDone();
         return selectedTask;
@@ -91,9 +91,9 @@ public class TaskList {
      *
      * @param taskNumber String format of the {@link kayu.task.Task} number to delete.
      * @return String message of successful deletion of {@link kayu.task.Task}.
-     * @throws DukeException If <code>taskNumber</code> is not valid.
+     * @throws KayuException If <code>taskNumber</code> is not valid.
      */
-    public Task deleteTask(int taskNumber) throws DukeException {
+    public Task deleteTask(int taskNumber) throws KayuException {
         Task selectedTask = getTaskByNumber(taskNumber);
         tasks.remove(selectedTask);
         return selectedTask;
@@ -104,15 +104,15 @@ public class TaskList {
      *
      * @param taskNumber {@link kayu.task.Task} number to obtain.
      * @return Associated {@link kayu.task.Task}.
-     * @throws DukeException If the {@link #tasks} List is empty or
+     * @throws KayuException If the {@link #tasks} List is empty or
      * the <code>taskNumber</code> is not valid.
      */
-    private Task getTaskByNumber(int taskNumber) throws DukeException {
+    private Task getTaskByNumber(int taskNumber) throws KayuException {
         if (tasks.isEmpty()) {
-            throw new DukeException(EMPTY_LIST_ERROR_MESSAGE);
+            throw new KayuException(EMPTY_LIST_ERROR_MESSAGE);
         }
         if (taskNumber <= 0 || tasks.size() < taskNumber) {
-            throw new DukeException(String.format(INVALID_TASK_ERROR_MESSAGE, taskNumber));
+            throw new KayuException(String.format(INVALID_TASK_ERROR_MESSAGE, taskNumber));
         }
         return tasks.get(taskNumber - 1); // shift to 0-indexing
     }
@@ -128,18 +128,23 @@ public class TaskList {
         SortedMap<Integer, Task> taskMap = new TreeMap<>();
         
         for (String key: keywords) {
-            key = key.toLowerCase(Locale.ROOT);
-            if (key.isBlank()) {
-                continue; // in case parsed keywords has blanks
-            }
-            
-            for (int idx = 0; idx < tasks.size(); idx++) {
-                Task task = tasks.get(idx);
-                if (task.getDescription().toLowerCase(Locale.ROOT).contains(key)) {
-                    taskMap.put(idx, task);
-                }
-            }
+            addTasksToSearchMap(taskMap, key);
         }
         return taskMap;
+    }
+    
+    private void addTasksToSearchMap(Map<Integer, Task> taskMap, String key) {
+        if (key.isBlank()) {
+            return; // in case parsed keywords has blanks
+        }
+        
+        key = key.toLowerCase(Locale.ROOT);
+        for (int idx = 0; idx < tasks.size(); idx++) {
+            Task task = tasks.get(idx);
+            String desc = task.getDescription().toLowerCase(Locale.ROOT);
+            if (desc.contains(key)) {
+                taskMap.put(idx, task);
+            }
+        }
     }
 }

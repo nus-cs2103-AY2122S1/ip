@@ -4,7 +4,7 @@ import static kayu.commands.CommandMessage.ERROR_NOT_AN_INT_PARAM;
 import static kayu.commands.CommandMessage.MESSAGE_TASK_DONE;
 import static kayu.commands.CommandType.DONE;
 
-import kayu.exception.DukeException;
+import kayu.exception.KayuException;
 import kayu.exception.StorageException;
 import kayu.service.TaskList;
 import kayu.storage.Storage;
@@ -32,7 +32,7 @@ public class DoneCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) throws DukeException, StorageException {
+    public String execute(TaskList taskList, Storage storage) throws KayuException, StorageException {
         try {
             int taskNumber = Integer.parseInt(commandParams);
             Task selectedTask = taskList.updateTaskAsDone(taskNumber);
@@ -40,7 +40,7 @@ public class DoneCommand extends Command {
             return String.format(MESSAGE_TASK_DONE, selectedTask);
 
         } catch (NumberFormatException exception) {
-            throw new DukeException(String.format(ERROR_NOT_AN_INT_PARAM, commandParams));
+            throw new KayuException(String.format(ERROR_NOT_AN_INT_PARAM, commandParams));
         }
     }
 }

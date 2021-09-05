@@ -77,8 +77,8 @@ public class DialogBox extends HBox {
      * @param img Kayu's image.
      * @return A DialogBox representing Kayu's response text.
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DialogBox getKayuDialog(String text, Image img) {
+        DialogBox db = new DialogBox(text, img);
         db.flip();
         return db;
     }

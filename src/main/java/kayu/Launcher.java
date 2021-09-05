@@ -1,7 +1,7 @@
 package kayu;
 
 import java.io.IOException;
-import java.util.Objects;
+import java.io.InputStream;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +19,8 @@ public class Launcher extends Application {
     private static final String ICON_PATH = "/images/icon.png";
     private static final String FXML_PATH = "/view/MainWindow.fxml";
     
+    private static final String ASSERT_FAIL_ABSENT_IMAGE = "Image path not present/valid.";
+    
     /**
      * Starts the Kayu UI window.
      * {@inheritDoc}
@@ -29,17 +31,31 @@ public class Launcher extends Application {
     public void start(Stage stage) {
         try {
             stage.setTitle("Kayu");
-            stage.getIcons().add(new Image(Objects.requireNonNull(this.getClass().getResourceAsStream(ICON_PATH))));
-            
-            FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource(FXML_PATH));
-            AnchorPane ap = fxmlLoader.load();
-            
-            Scene scene = new Scene(ap);
-            stage.setScene(scene);
-            stage.show();
+            setIconToStage(stage);
+            AnchorPane anchorPane = loadMainWindow();
+            showStage(stage, anchorPane);
             
         } catch (IOException exception) {
             exception.printStackTrace();
         }
+    }
+    
+    private void setIconToStage(Stage stage) {
+        InputStream iconImageStream = this.getClass().getResourceAsStream(ICON_PATH);
+        assert (iconImageStream != null) : ASSERT_FAIL_ABSENT_IMAGE;
+        
+        Image icon = new Image(iconImageStream);
+        stage.getIcons().add(icon);
+    }
+    
+    private AnchorPane loadMainWindow() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource(FXML_PATH));
+        return fxmlLoader.load();
+    }
+    
+    private void showStage(Stage stage, AnchorPane anchorPane) {
+        Scene scene = new Scene(anchorPane);
+        stage.setScene(scene);
+        stage.show();
     }
 }

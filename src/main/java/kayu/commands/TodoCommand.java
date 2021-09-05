@@ -3,7 +3,7 @@ package kayu.commands;
 import static kayu.commands.CommandMessage.MESSAGE_CREATED_TODO;
 import static kayu.commands.CommandType.TODO;
 
-import kayu.exception.DukeException;
+import kayu.exception.KayuException;
 import kayu.exception.StorageException;
 import kayu.parser.DateTimeFormat;
 import kayu.service.TaskList;
@@ -34,7 +34,7 @@ public class TodoCommand extends AddTaskCommand {
      * {@inheritDoc}
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) throws DukeException, StorageException {
+    public String execute(TaskList taskList, Storage storage) throws KayuException, StorageException {
         String desc = super.extractDesc(new String[] {commandParams}, COMMAND_WORD);
         Task todo = new Todo(desc);
         taskList.addTask(todo);
