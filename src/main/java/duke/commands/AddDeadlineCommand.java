@@ -34,23 +34,22 @@ public class AddDeadlineCommand extends Command {
             throw new DukeException("invalidDeadline");
         } else if (!command.contains("/by")) {
             throw new DukeException("invalidDeadline");
-        } else {
-            try {
-                LocalDate.parse(words[3]);
-                int position = command.indexOf("/by");
-                String name = command.substring(9, position);
-                String date = command.substring(position + 4);
-                Task task = new Deadline(name, date);
-                tasks.add(task);
-                storage.appendToFile("data/duke.txt", "D - 0 - " + name + "- " + date);
-                return Ui.printTaskAdded(task, tasks.size());
-            } catch (IOException e) {
-                return new String[]{e.toString()};
-            } catch (DateTimeParseException e) {
-                return new String[]{("Enter valid date format!")};
-            } catch (DukeException e) {
-                return new String[]{e.toString()};
-            }
+        }
+        try {
+            LocalDate.parse(words[3]);
+            int position = command.indexOf("/by");
+            String name = command.substring(9, position);
+            String date = command.substring(position + 4);
+            Task task = new Deadline(name, date);
+            tasks.add(task);
+            storage.appendToFile("data/duke.txt", "D - 0 - " + name + "- " + date);
+            return Ui.printTaskAdded(task, tasks.size());
+        } catch (IOException e) {
+            return new String[]{e.toString()};
+        } catch (DateTimeParseException e) {
+            return new String[]{("Enter valid date format!")};
+        } catch (DukeException e) {
+            return new String[]{e.toString()};
         }
     }
 }

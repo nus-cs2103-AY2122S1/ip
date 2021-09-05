@@ -32,18 +32,16 @@ public class DeleteTaskCommand extends Command {
         } catch (NumberFormatException err) {
             numeric = false;
         }
-        if (numeric) {
-            int taskNum = Integer.parseInt(restOfCommand) - 1;
-            if (taskNum < tasks.size()) {
-                storage.editFileContentsForDeletion(taskNum + 1);
-                Task currTask = tasks.get(taskNum);
-                tasks.remove(taskNum);
-                return Ui.printDeleteTask(currTask, tasks.size());
-            } else {
-                throw new DukeException("invalidTaskNumber");
-            }
-        } else {
+        if (!numeric) {
             throw new DukeException("invalidNumberFormatDelete");
         }
+        int taskNum = Integer.parseInt(restOfCommand) - 1;
+        if (!(taskNum < tasks.size())) {
+            throw new DukeException("invalidTaskNumber");
+        }
+        storage.editFileContentsForDeletion(taskNum + 1);
+        Task currTask = tasks.get(taskNum);
+        tasks.remove(taskNum);
+        return Ui.printDeleteTask(currTask, tasks.size());
     }
 }
