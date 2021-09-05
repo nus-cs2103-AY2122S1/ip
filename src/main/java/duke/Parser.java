@@ -168,23 +168,23 @@ public class Parser {
      * @throws DukeException If the command is invalid
      */
     public static Command parse(String command) throws DukeException {
-        if (command.equals("list")) {
+        if (command.equals("ls")) {
             return getListCommand(command);
-        } else if (command.startsWith("done")) {
-            return getDoneCommand(command);
-        } else if (command.startsWith("delete")) {
-            return getDeleteCommand(command);
-        } else if (command.startsWith("todo")) {
-            return getTodoCommand(command);
-        } else if (command.startsWith("deadline")) {
-            return getDeadlineCommand(command);
-        } else if (command.startsWith(("event"))) {
-            return getEventCommand(command);
-        } else if (command.startsWith(("date"))) {
+        } else if (command.startsWith("dt")) {
             return getDateCommand(command);
-        } else if (command.equals("bye")) {
+        } else if (command.startsWith("rm")) {
+            return getDeleteCommand(command);
+        } else if (command.startsWith("td")) {
+            return getTodoCommand(command);
+        } else if (command.startsWith("dl")) {
+            return getDeadlineCommand(command);
+        } else if (command.startsWith(("ev"))) {
+            return getEventCommand(command);
+        } else if (command.startsWith(("d"))) {
+            return getDoneCommand(command);
+        } else if (command.equals("q")) {
             return getByeCommand(command);
-        } else if (command.startsWith("find")) {
+        } else if (command.startsWith("ff")) {
             return getFindCommand(command);
         } else {
             throw new DukeException("I do not understand what that means :(");
