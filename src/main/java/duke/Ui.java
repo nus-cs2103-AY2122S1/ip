@@ -9,8 +9,8 @@ public class Ui {
      */
     public static String showWelcomeMessage() {
         String logo = "DUKE!!";
-        StringBuilder result = new StringBuilder("Hello from \nWhat can I do for you\n");
-        result.insert(11, logo);
+        StringBuilder result = new StringBuilder("\tHello from \n\tWhat can I do for you\n");
+        result.insert(12, logo);
         return result.toString();
     }
 
@@ -89,6 +89,6 @@ public class Ui {
         String foundReply = "Here are the tasks matching the keyword: ";
         String notFoundReply = "No task matching the keyword: ";
         String correctReply = tasksFound.isEmpty() ? notFoundReply : foundReply;
-        return correctReply + task + "\n" + tasksFound;
+        return "\t" + correctReply + task + "\n" + tasksFound;
     }
 }

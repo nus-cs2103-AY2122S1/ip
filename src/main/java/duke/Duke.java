@@ -43,6 +43,7 @@ public class Duke extends Application {
      * @throws DukeException Exceptions specific to Duke's input
      */
     public String handleInput(String input) throws DukeException {
+        assert !input.isEmpty() : "String is empty!!";
         return Parser.parseInput(this.list, input);
     }
 }
