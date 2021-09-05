@@ -2,15 +2,16 @@ package duke;
 
 import duke.task.Task;
 
+/** The class responsible for the responses provided by the chatbot. */
 public class ResponseLogic {
 
-    /** Returns the welcome message response */
+    /** Returns the welcome message response. */
     public String welcomeResponse() {
         return "Lollipop: Hello! I am your personal chatbot, Lollipop! "
                 + "What would you like to do today?";
     }
 
-    /** Returns the goodbye message response */
+    /** Returns the goodbye message response. */
     public String goodByeResponse() {
         return "Lollipop: See you again soon!";
     }
@@ -91,17 +92,17 @@ public class ResponseLogic {
         return String.format("Lollipop: %s%n", e.getMessage());
     }
 
-    /** Returns a response for IndexOutOfBoundsException */
+    /** Returns a response for IndexOutOfBoundsException. */
     public String indexOutOfBoundsExceptionResponse() {
         return "Lollipop: No such duke.task number found.";
     }
 
-    /** Returns a response for NumberFormatException */
+    /** Returns a response for NumberFormatException. */
     public String numberFormatExceptionResponse() {
         return "Lollipop: Please input a number.";
     }
 
-    /** Returns a response for DateTimeParseException */
+    /** Returns a response for DateTimeParseException. */
     public String dateTimeParseExceptionResponse() {
         return "Lollipop: Please specify a valid date format, such as YYYY-MM-DD";
     }

@@ -10,6 +10,7 @@ import duke.command.Command;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/** The main Duke class that encapsulates all the internal workings of the chatbot. */
 public class Duke {
 
     private String filePath;

@@ -4,6 +4,7 @@ import duke.ResponseLogic;
 import duke.Storage;
 import duke.task.TaskList;
 
+/** The Command class responsible for retrieving the list of tasks. */
 public class ListCommand extends Command {
 
     @Override

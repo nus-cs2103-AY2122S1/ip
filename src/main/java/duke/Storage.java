@@ -12,10 +12,16 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/** The class that handles the loading and storing of data to a data file. */
 public class Storage {
 
     private String filePath;
 
+    /**
+     * Initialize the Storage object with a filepath.
+     *
+     * @param filePath The filePath of the data file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }

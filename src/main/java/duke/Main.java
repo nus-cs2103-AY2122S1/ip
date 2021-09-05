@@ -9,13 +9,16 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/**
- * A GUI for Duke using FXML.
- */
+/** A GUI for Duke using FXML. */
 public class Main extends Application {
 
     private Duke duke = new Duke("./data/task_list.txt");
 
+    /**
+     * Starts the JavaFX application.
+     *
+     * @param stage The JavaFX stage where the UI will be displayed on.
+     */
     @Override
     public void start(Stage stage) {
         try {

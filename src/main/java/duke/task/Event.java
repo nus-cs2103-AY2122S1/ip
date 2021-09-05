@@ -3,6 +3,7 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/** The class that encapsulates a Task with a time. */
 public class Event extends Task {
 
     private LocalDate time;
@@ -18,12 +19,12 @@ public class Event extends Task {
         this.time = LocalDate.parse(time);
     }
 
-    /** Returns the time of the event as a LocalDate object */
+    /** Returns the time of the event as a LocalDate object. */
     public LocalDate getTime() {
         return this.time;
     }
 
-    /** Returns the time of the event as a String */
+    /** Returns the time of the event as a String. */
     private String timeToString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
         return this.time.format(formatter);

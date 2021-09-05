@@ -13,6 +13,7 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 
+/** The class takes in a command, parses it and returns an executable Command object. */
 public class Parser {
 
     /**

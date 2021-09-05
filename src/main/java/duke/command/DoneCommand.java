@@ -6,10 +6,16 @@ import duke.ResponseLogic;
 import duke.Storage;
 import duke.task.TaskList;
 
+/** The Command class responsible for marking tasks as done. */
 public class DoneCommand extends Command {
 
     private int taskNumber;
 
+    /**
+     * Initialize the task number of the task to be marked as done.
+     *
+     * @param taskNumber The task number of the task to be marked as done.
+     */
     public DoneCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }
