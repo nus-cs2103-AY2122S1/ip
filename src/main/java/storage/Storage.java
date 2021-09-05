@@ -185,6 +185,8 @@ public class Storage {
                 dataWriter.write("D,0," + taskName + "," + time + "\n");
                 dataWriter.close();
             } else {
+                // Type at this point should be EVENT
+                assert type == Duke.Type.EVENT;
                 dataWriter.write("E,0," + taskName + "," + time + "\n");
                 dataWriter.close();
             }

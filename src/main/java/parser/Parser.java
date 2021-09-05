@@ -70,6 +70,7 @@ public class Parser {
             if (matchingTasks.size() == 0) {
                 return "There are no tasks that include your keyword.";
             } else {
+                assert matchingTasks.size() > 0;
                 String result = "Here are the matching tasks in your list:\n";
                 for (int i = 0; i < matchingTasks.size(); i++) {
                     result += ((i + 1) + "." + matchingTasks.getTask(i).toString() + "\n");
@@ -176,6 +177,8 @@ public class Parser {
             return "Got it. I've added this task:\n" + "  " + tasks.getTask(tasks.size() - 1).toString() + "\n"
                     + "Now you have " + tasks.size() + " tasks in the list.";
         } else {
+            // At this point, type must be of Event
+            assert type == Duke.Type.EVENT;
             if (isEventDescEmpty(userInput)) {
                 return " OOPS!!! The description of an event cannot be empty.";
             }
