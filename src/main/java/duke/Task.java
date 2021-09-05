@@ -5,6 +5,7 @@ package duke;
  * Handles operations that are common for all Tasks.
  */
 public class Task {
+    public static final String STORAGE_SEPARATOR = "|";
     private String name;
     private boolean done;
 
@@ -71,6 +72,6 @@ public class Task {
     }
 
     public String toDataString() {
-        return (this.done ? "T|" : "F|") + this.name;
+        return (this.done ? "T" : "F") + Task.STORAGE_SEPARATOR + this.name;
     }
 }

@@ -10,6 +10,8 @@ import java.util.Scanner;
  * A representation of a class that handles the reading and writing of the data.
  */
 public class Storage {
+    public static final String FILENAME = "filename.txt";
+    public static final String WRITE_TO_FILE_ERROR_MESSAGE = "ERROR!";
     private File file;
 
     /**
@@ -34,7 +36,7 @@ public class Storage {
 
         while (myReader.hasNextLine()) {
             String line = myReader.nextLine();
-            result.add(Task.create(line.split("\\|")));
+            result.add(Task.create(line.split("\\" + Task.STORAGE_SEPARATOR)));
         }
         myReader.close();
         return result;
@@ -47,7 +49,7 @@ public class Storage {
      */
     public void writeToFile(List list) {
         try {
-            FileWriter myWriter = new FileWriter("filename.txt");
+            FileWriter myWriter = new FileWriter(Storage.FILENAME);
 
             for (int i = 0; i < list.getTodos().size(); i++) {
                 myWriter.write(list.getTodos().get(i).toDataString());
@@ -55,7 +57,7 @@ public class Storage {
             }
             myWriter.close();
         } catch (IOException e) {
-            System.out.println("ERROR!");
+            System.out.println(WRITE_TO_FILE_ERROR_MESSAGE);
         }
     }
 }

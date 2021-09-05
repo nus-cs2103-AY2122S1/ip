@@ -21,6 +21,7 @@ import javafx.stage.Stage;
  * Entry point to the programme.
  */
 public class Duke extends Application {
+    public static final String QUIT_COMMAND = "bye";
     private List todoList;
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -65,9 +66,7 @@ public class Duke extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
         userInput.setPrefWidth(325.0);
 
         sendButton.setPrefWidth(55.0);
@@ -81,10 +80,16 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        this.addDuke();
+    }
 
+    /**
+     * Add Duke setups after initial GUI setups.
+     */
+    public void addDuke() {
         Duke dukeBot = new Duke();
         Parser parser = new Parser();
-        File myObj = new File("filename.txt");
+        File myObj = new File(Storage.FILENAME);
         Storage data = new Storage(myObj);
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput(dukeBot, parser, data);
@@ -118,7 +123,7 @@ public class Duke extends Application {
      * @param data The data used for storage.
      */
     private void handleUserInput(Duke dukeBot, Parser parser, Storage data) {
-        if (userInput.getText().equals("bye")) {
+        if (userInput.getText().equals(QUIT_COMMAND)) {
             System.exit(0);
         }
         Label userText = new Label(userInput.getText());

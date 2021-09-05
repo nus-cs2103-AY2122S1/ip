@@ -5,8 +5,11 @@ package duke;
  * Thrown when the description of todolist is empty.
  */
 public class DukeTodoException extends DukeException {
+
+    public static final String TODO_ERROR_MESSAGE = "OOPS!!! The description of todo cannot be empty!";
+
     @Override
     public String getMessage() {
-        return "OOPS!!! The description of todo cannot be empty!";
+        return TODO_ERROR_MESSAGE;
     }
 }
