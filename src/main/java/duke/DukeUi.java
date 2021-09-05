@@ -37,19 +37,32 @@ public class DukeUi {
     /**
      * Used to release what Duke wants to say from the buffer.
      * This would print the message between 2 line separators.
+     *
+     * @return the String containing what Duke says at one go.
      */
-    public void dukeBufferRelease() {
+    public String dukeBufferRelease() {
+        // GUI Output
+        String returnThis = "";
+
+        for (String dukeLine : dukeUiBuffer) {
+            returnThis = returnThis + dukeLine + "\n";
+        }
+
+
+        // Text Output
         System.out.println("");
         System.out.println(sepLineOpen);
 
-        for (String dukeLine : dukeUiBuffer) {
-            System.out.println(dukeLine);
-        }
+
+        System.out.println(returnThis);
+
 
         System.out.println(sepLineClose);
 
         // Clear Duke output buffer so it can accept new lines
         this.dukeUiBuffer.clear();
+
+        return returnThis;
     }
 
 

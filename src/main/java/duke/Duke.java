@@ -100,8 +100,8 @@ public class Duke {
         // Show Welcome Message
         currDuke.currUiCtrl.printWelcomeMessage();
 
-        // Start accepting input
-        currDuke.runInputLoopMain();
+        // Start accepting input (Not necessary anymore)
+        // currDuke.runInputLoopMain();
     }
 
     /**
@@ -127,6 +127,19 @@ public class Duke {
         }
 
 
+    }
+
+    /**
+     * Use when the user enters something new in the GUI, in order to process the command.
+     *
+     * @param lastInput What the user entered into the GUI.
+     */
+    public void acceptUserInput(String lastInput) {
+        try {
+            this.processCmdInput(lastInput);
+        } catch (DukeExceptionBase dukeE) {
+            dukeE.dukeSayErrorMsg();
+        }
     }
 
     /**
@@ -170,7 +183,6 @@ public class Duke {
 
     /**
      * Used when Duke is supposed to say something.
-     * This would use the UI controller to print the message between 2 line separators.
      *
      * @param printThis The message to print inside Duke's text bubble
      */
@@ -179,7 +191,9 @@ public class Duke {
 
         // Updated to work with new UI Controller which contains a buffer
         currDuke.currUiCtrl.addToDukeBuffer(printThis);
-        currDuke.currUiCtrl.dukeBufferRelease();
+
+        // Buffer release is now done by Main Window
+        // currDuke.currUiCtrl.dukeBufferRelease();
     }
 
     /**
@@ -191,6 +205,15 @@ public class Duke {
         Duke currDuke = Duke.getCurrDuke();
 
         currDuke.currUiCtrl.addToDukeBuffer(printLater);
+    }
+
+    /**
+     * Used to empty the text buffer containing what Duke is going to say.
+     *
+     * @return what Duke is going to say.
+     */
+    public String flushUiBuffer() {
+        return this.currUiCtrl.dukeBufferRelease();
     }
 
     private void unknownCommandEntered() throws DukeExceptionBase {
