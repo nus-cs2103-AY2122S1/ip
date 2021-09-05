@@ -13,7 +13,7 @@ public class Duke {
         try {
             sc = new Scanner(System.in);
             inputH = new Parser(true);
-            Ui.reply(inputH.query("greet").msg());
+            Ui.reply("Loading Duke...");
         } catch (DukeException e) {
             Ui.reply(e.getMessage());
         }
@@ -48,7 +48,8 @@ public class Duke {
                 "|_|" + " | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         Duke duke = new Duke();
-        
+        Ui.reply(duke.getResponse("greet").msg());
+
         duke.mainLoop();
     }
 }

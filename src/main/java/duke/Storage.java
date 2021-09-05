@@ -14,16 +14,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
-    public final static char TASK = 'T';
-    public final static char DEADLINE = 'D';
-    public final static char EVENT = 'E';
+    public final static String TASK = "T";
+    public final static String DEADLINE = "D";
+    public final static String EVENT = "E";
     public final static DukeException ERROR_DB = new DukeException("Error loading database.");
     private final RandomAccessFile raf;
     private final File txt;
 
     public Storage(TaskList db) throws DukeException {
         try {
-            txt = new File("duke.txt");
+            String filename = Main.class.getResource("bin/duke.txt").getPath();
+            txt = new File(filename);
             raf = new RandomAccessFile(txt, "rwd");
             while (raf.getFilePointer() < raf.length()) {
                 Task t = parse(raf.readLine());
@@ -45,11 +46,11 @@ public class Storage {
             }
             boolean done = Integer.parseInt(args[1]) == 1;
             switch (args[0]) {
-            case "T":
+            case TASK:
                 return new Todo(args[2], done);
-            case "D":
+            case DEADLINE:
                 return new Deadline(args[2], done);
-            case "E":
+            case EVENT:
                 return new Event(args[2], done);
             default:
                 throw ERROR_DB;

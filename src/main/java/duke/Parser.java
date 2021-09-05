@@ -75,7 +75,8 @@ public class Parser {
     }
 
     private Record greet(String args) {
-        return new Record("Hello! I'm Duke\n\t What can I do for you?");
+        return new Record("Hello! I'm Duke\n\t What can I do for you?" +
+                "\n\t (Tip: type help [COMMAND] to get help with my functions!)");
     }
 
     private boolean verify() {
@@ -167,7 +168,13 @@ public class Parser {
     }
 
     private Record help(String raw) throws DukeException {
-        return new Record(Ui.help());
+        if (raw.equals(new String())) {
+            return new Record(Ui.help());
+        } else if (commandList.containsKey(raw)) {
+            return new Record(Ui.help(raw));
+        } else {
+            throw new DukeException("This command isn't in my books!");
+        }
     }
 
     private Record clear(String raw) throws DukeException {
