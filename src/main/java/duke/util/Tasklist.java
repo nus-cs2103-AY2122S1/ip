@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import duke.exception.DukeException;
 import duke.exception.IndexOutOfRangeException;
@@ -243,16 +246,10 @@ public class Tasklist {
     @Override
     public String toString() {
 
-        String listString = "";
-        for (int i = 0; i < tasks.size(); i++) {
-            String listItem = String.format("%d.%s", (i + 1), tasks.get(i).toString());
-            if (i == (tasks.size() - 1)) {
-                listString += listItem;
-            } else {
-                listString += listItem + "\n";
-            }
+        String listString = IntStream.range(0, tasks.size())
+                .mapToObj(index -> String.format("%d.%s\n", index + 1 , tasks.get(index).toString()))
+                .collect(Collectors.joining());
 
-        }
         return listString;
 
     }
