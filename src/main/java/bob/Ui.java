@@ -16,6 +16,7 @@ public class Ui {
     public String getStartMessage() {
         return "I'm waking up... please wait...\n";
     }
+
     /**
      * Returns message for when the Data directory for the Bob.txt file does not yet exist.
      * Bob.txt does not exist yet either.
@@ -24,6 +25,7 @@ public class Ui {
         return "You don't have the data directory and Bob text file yet." +
                 " I'll make them for you now, you're welcome! :D\n";
     }
+
     /**
      * Returns message for when the Bob.txt file does not yet exist.
      */
@@ -48,6 +50,7 @@ public class Ui {
         result = result + tasks.getList();
         return result;
     }
+
     /**
      * Adds new task to the task list and returns the corresponding message.
      *

@@ -16,6 +16,7 @@ public class Task {
      * @param description Description of the Task.
      */
     public Task(String description) {
+        assert !description.isEmpty();
         this.description = description;
         this.isCompleted = false;
     }
@@ -42,6 +43,7 @@ public class Task {
      * @return String representation of the current Task.
      */
     public String printTask() {
+        assert (this.getStatusIcon() == "X" || this.getStatusIcon() == " ");
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }
