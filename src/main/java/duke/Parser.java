@@ -75,6 +75,7 @@ public class Parser {
      * @throws DukeException If there is no task number or wrong task number
      */
     public static String handleDone() throws DukeException {
+        assert words[0].toLowerCase().equals("done") : "wrong method";
         if (words.length < 2) {
             throw new MissingTaskNumberException("Missing task number");
         }
@@ -95,6 +96,7 @@ public class Parser {
      * @throws DukeException If no name is provided
      */
     public static String handleTodo() throws DukeException {
+        assert words[0].toLowerCase().equals("todo") : "wrong method";
         if (words.length < 2) {
             throw new MissingTaskNameException("Missing task name");
         }
@@ -112,6 +114,7 @@ public class Parser {
      * @throws DukeException If no name or no deadline is provided
      */
     public static String handleDeadline() throws DukeException {
+        assert words[0].toLowerCase().equals("deadline") : "wrong method";
         if (words.length < 2) {
             throw new MissingTaskNameException("Missing task name");
         }
@@ -134,6 +137,7 @@ public class Parser {
      * @throws DukeException If no task name or event date is provided
      */
     public static String handleEvent() throws DukeException {
+        assert words[0].toLowerCase().equals("event") : "wrong method";
         if (words.length < 2) {
             throw new MissingTaskNameException("Missing task name");
         }
@@ -156,6 +160,7 @@ public class Parser {
      * @throws DukeException If there is none or invalid task number provided
      */
     public static String handleDelete() throws DukeException {
+        assert words[0].toLowerCase().equals("delete") : "wrong method";
         if (words.length < 2) {
             throw new MissingTaskNumberException("Missing task number");
         }
@@ -177,6 +182,7 @@ public class Parser {
      * @throws MissingTaskNameException If no task name provided
      */
     public static String handleFind() throws MissingTaskNameException {
+        assert words[0].toLowerCase().equals("find") : "wrong method";
         if (words.length < 2) {
             throw new MissingTaskNameException("Missing task name");
         }
