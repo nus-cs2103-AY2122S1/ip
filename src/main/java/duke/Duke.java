@@ -89,7 +89,7 @@ public class Duke {
     }
 
     private String listHandler() {
-        return taskList.isEmpty() ? "No tasks added so yet!" : taskList.toString();
+        return taskList.isEmpty() ? "No tasks added yet!" : taskList.toString();
     }
 
     private String doneHandler(String args) {
