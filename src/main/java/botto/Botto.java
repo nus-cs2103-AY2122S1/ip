@@ -26,7 +26,7 @@ public class Botto {
         try {
             taskList = new TaskList(storage.load());
         } catch (BottoException e) {
-            System.out.println(e.getMessage());
+            dialog.showError(e.getMessage());
         }
     }
 
