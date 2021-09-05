@@ -57,6 +57,7 @@ public class TaskList {
                     // Should not reach this case due to regex check above
                     throw new InvalidFileFormatException();
                 }
+                assert newTask != null;
                 loadedTasks.add(newTask);
             }
             this.tasks = loadedTasks;
@@ -93,6 +94,7 @@ public class TaskList {
         // Handle invalid index
         if (taskIdx >= 1 && taskIdx <= tasks.size()) {
             Task t = tasks.get(taskIdx - 1);
+            assert t != null;
             t.markAsDone();
             return String.format("Nice! I've marked this task as done:\n  %s\n", t);
         } else {
@@ -115,6 +117,7 @@ public class TaskList {
             throw new EmptyTodoDescriptionException();
         }
         Todo newTodo = new Todo(description);
+        assert newTodo != null;
         this.tasks.add(newTodo);
         return this.formatAddTaskString(newTodo);
     }
@@ -138,6 +141,7 @@ public class TaskList {
         }
 
         Deadline newDeadline = new Deadline(matches[1].trim(), date);
+        assert newDeadline != null;
         tasks.add(newDeadline);
         return formatAddTaskString(newDeadline);
     }
@@ -154,6 +158,7 @@ public class TaskList {
                 "event {description} /at {time}");
 
         Event newEvent = new Event(matches[1].trim(), matches[2].trim());
+        assert newEvent != null;
         tasks.add(newEvent);
         return formatAddTaskString(newEvent);
     }
@@ -172,6 +177,7 @@ public class TaskList {
         // Handle invalid index
         if (taskIdx >= 1 && taskIdx <= tasks.size()) {
             Task t = tasks.get(taskIdx - 1);
+            assert t != null;
             tasks.remove(taskIdx - 1);
             return String.format("Noted. I've removed this task:\n  %s\n%s\n", t, formatNumTaskString());
         } else {

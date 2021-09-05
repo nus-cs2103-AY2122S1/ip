@@ -21,6 +21,7 @@ public class Duke {
 
         try {
             tasks = new TaskList(storage.load());
+            assert tasks != null;
         } catch (IOException e) {
             Ui.showLoadingError();
             tasks = new TaskList();
@@ -37,6 +38,7 @@ public class Duke {
         String response;
         try {
             response = Parser.parse(input).execute(tasks);
+            assert response != null;
             storage.save(tasks.toSaveFormat());
         } catch (DukeException e) {
             response = e.getMessage() + "\n";
