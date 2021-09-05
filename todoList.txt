@@ -1,7 +1,6 @@
-T fly true
 E run run run /at: 2020-02-12 4-6pm true
-D run and run /by: 2020-11-20 4pm false
-T run false
+D run and run /by: 2020-11-20 4pm true
+T run true
 T test false
 E test //at 2020-11-02 4pm - 6pm false
 D test //by 2020-11-03 4pm false
@@ -9,6 +8,5 @@ T run false
 T jump false
 T flight false
 T run false
-T flight false
 E efaeg sg /by: 2020-11-11 3 false
 D 23q4 /by: 2020-11-11 eww false

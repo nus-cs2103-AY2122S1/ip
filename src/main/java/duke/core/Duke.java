@@ -276,7 +276,7 @@ public class Duke extends Application {
 
                 task.remove(num.intValue());
                 response += s + "\n";
-                response += indentation + "Now you have " + task.size() + " " + "tasks in the list.%n" + "\n";
+                response += indentation + "Now you have " + task.size() + " " + "tasks in the list." + "\n";
 
                 return response;
             } catch (NullPointerException e) {
