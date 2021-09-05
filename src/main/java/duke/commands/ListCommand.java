@@ -18,8 +18,8 @@ public class ListCommand extends Command {
      * @param ui Ui to show messages to user when ListCommand is executed.
      * @param storage Storage where tasks should be stored.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.printTaskList();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return tasks.printTaskList();
     }
 
     /**

@@ -15,10 +15,9 @@ public class ByeCommand extends Command {
      * @param ui Ui that displays messages to users.
      * @param storage Storage that is used to save tasks.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.saveTasks(tasks);
-        ui.showBye();
-        ui.close();
+        return ui.showBye();
     }
 
     /**

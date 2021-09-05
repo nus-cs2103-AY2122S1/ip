@@ -29,15 +29,17 @@ public class TaskList {
     /**
      * Prints the tasks in the TaskList.
      */
-    public void printTaskList() {
+    public String printTaskList() {
         if (tasks.size() == 0) {
-            System.out.println("There are no tasks in the list.");
-            return;
+            return "There are no tasks in the list.";
         }
-        System.out.println("Here are the tasks in your list:");
+
+        StringBuilder message = new StringBuilder();
+        message.append("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i));
+            message.append((i + 1) + ". " + tasks.get(i) + "\n");
         }
+        return message.toString();
     }
 
     /**
@@ -45,15 +47,17 @@ public class TaskList {
      *
      * @param isFindCommand True if user is finding tasks. False if user is printing entire task list.
      */
-    public void printTaskList(boolean isFindCommand) {
+    public String printTaskList(boolean isFindCommand) {
         if (tasks.size() == 0) {
-            System.out.println("There are no matching tasks in the list.");
-            return;
+            return "There are no matching tasks in the list.";
         }
-        System.out.println("Here are the matching tasks in your list:");
+        
+        StringBuilder message = new StringBuilder();
+        message.append("Here are the matching tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i));
+            message.append((i + 1) + ". " + tasks.get(i) + "\n");
         }
+        return message.toString();
     }
 
     protected int getLength() {

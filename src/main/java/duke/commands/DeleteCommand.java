@@ -28,9 +28,9 @@ public class DeleteCommand extends Command {
      * @param ui Ui that will display the messages to user when a Task is deleted.
      * @param storage Storage where the TaskList should be saved.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.deleteTask(taskIndex);
-        ui.showDelete(task, tasks);
+        return ui.showDelete(task, tasks);
     };
 
     /**
