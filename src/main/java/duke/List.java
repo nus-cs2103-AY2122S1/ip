@@ -49,7 +49,7 @@ public class List {
             return showList();
         } else {
             try {
-                return parser.process(input, this, storage);
+                return parser.process(input, this);
             } catch (DukeException e) {
                 return (e.getMessage());
             }
