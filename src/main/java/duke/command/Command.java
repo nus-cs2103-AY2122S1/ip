@@ -12,6 +12,7 @@ import duke.task.Task;
 public abstract class Command {
     /**
      * Makes a command based on input.
+     *
      * @param type command type.
      * @param task the task to be executed.
      * @return the command that is made.
@@ -19,7 +20,7 @@ public abstract class Command {
      */
     public static Command makeCommand(CommandsTypes type, Task task) throws DukeException {
         switch (type) {
-        case Add: {
+        case ADD: {
             return new AddCommand(task);
         }
         default:
@@ -29,6 +30,7 @@ public abstract class Command {
 
     /**
      * Makes a command based on input.
+     *
      * @param type command type.
      * @param index index of command to be executed.
      * @return the command that is made.
@@ -36,16 +38,16 @@ public abstract class Command {
      */
     public static Command makeCommand(CommandsTypes type, int index) throws DukeException {
         switch (type) {
-        case Delete: {
+        case DELETE: {
             return new DeleteCommand(index);
         }
-        case MarkDone: {
+        case MARK_DONE: {
             return new MarkDoneCommand(index);
         }
-        case Exit: {
+        case EXIT: {
             return new ExitCommand();
         }
-        case List: {
+        case LIST: {
             return new ListCommand();
         }
         default:
@@ -55,16 +57,17 @@ public abstract class Command {
 
     /**
      * Makes a command based on input.
+     *
      * @param type command type.
      * @return the command that is made.
      * @throws DukeException if input is invalid.
      */
     public static Command makeCommand(CommandsTypes type) throws DukeException {
         switch (type) {
-        case Exit: {
+        case EXIT: {
             return new ExitCommand();
         }
-        case List: {
+        case LIST: {
             return new ListCommand();
         }
         default:
@@ -74,6 +77,7 @@ public abstract class Command {
 
     /**
      * Makes a command based on input.
+     *
      * @param type command type.
      * @param keywords keywords to be executed on.
      * @return the command that is made.
@@ -81,7 +85,7 @@ public abstract class Command {
      */
     public static Command makeCommand(CommandsTypes type, String ...keywords) throws DukeException {
         switch (type) {
-        case Find:
+        case FIND:
             return new FindCommand(keywords);
         default:
             throw new DukeException("Invalid command inputted");
@@ -97,5 +101,6 @@ public abstract class Command {
      * @throws DukeException if command has issues.
      */
     public abstract String execute(Tasklist task, Ui ui, FileManager fileManager) throws DukeException;
+
     public abstract boolean isExit();
 }

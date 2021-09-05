@@ -58,7 +58,12 @@ public class Event extends Task {
         } catch (DateTimeException e) {
             throw new DukeException("Invalid date inputed. Please check that the date is correct\nEg."
                     + Event.inputExample);
+        } catch (Exception e) {
+            assert false : "Unknown exception being thrown in Event";
         }
+
+        assert false : "Error in of function in event";
+        return null;
     }
 
     /**
