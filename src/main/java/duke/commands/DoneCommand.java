@@ -26,15 +26,13 @@ public class DoneCommand extends Command {
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + " <number> - mark task <number> as done\n" + "    📍 Example: " + COMMAND_WORD + " 1";
 
-    private String userCommand;
-
     /**
      * Instantiates DoneCommand object.
      *
      * @param userCommand Full user input.
      */
     public DoneCommand(String userCommand) {
-        this.userCommand = userCommand;
+        super(userCommand);
     }
 
     @Override

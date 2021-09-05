@@ -32,7 +32,9 @@ public class HelpCommand extends Command {
                 + DoneCommand.MESSAGE_USAGE + "\n👉"
                 + DeleteCommand.MESSAGE_USAGE + "\n👉"
                 + FindCommand.MESSAGE_USAGE + "\n👉"
+                + ScheduleCommand.MESSAGE_USAGE + "\n👉"
                 + ListCommand.MESSAGE_USAGE + "\n👉"
+                + SortCommand.MESSAGE_USAGE + "\n👉"
                 + HelpCommand.MESSAGE_USAGE + "\n👉"
                 + ExitCommand.MESSAGE_USAGE;
     }

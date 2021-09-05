@@ -23,15 +23,13 @@ public class FindCommand extends Command {
 
     private static final String MISSING_DESC_ERR = "Please add a description for the task you want to find!";
 
-    private String userCommand;
-
     /**
      * Instantiates FindCommand object.
      *
      * @param userCommand Full user input.
      */
     public FindCommand(String userCommand) {
-        this.userCommand = userCommand;
+        super(userCommand);
     }
 
     /**

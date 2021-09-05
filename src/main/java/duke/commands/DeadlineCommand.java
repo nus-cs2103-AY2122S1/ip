@@ -30,16 +30,13 @@ public class DeadlineCommand extends Command {
             + " <description> /by <date> - add a task to be completed by <date> in yyyy/MM/dd HHmm (24-hour format)\n"
             + "    📍 Example: " + COMMAND_WORD + " project submission /by 2021/08/30 2359";
 
-    private String userCommand;
-
     /**
      * Instantiates DeadlineCommand object.
      *
      * @param userCommand Full user input.
      */
     public DeadlineCommand(String userCommand) {
-        super();
-        this.userCommand = userCommand;
+        super(userCommand);
     }
 
     @Override
