@@ -22,7 +22,7 @@ public class TaskList {
     }
 
     /**
-     * Mark the task with the given task number as done
+     * Marks the task with the given task number as done
      *
      * @param taskNumber the task number of the task
      * @return           the task marked as done
@@ -34,7 +34,7 @@ public class TaskList {
     }
 
     /**
-     * Add the given task to the TaskList
+     * Adds the given task to the TaskList
      *
      * @param task a task
      */
@@ -43,7 +43,7 @@ public class TaskList {
     }
 
     /**
-     * Remove the task with the given task number
+     * Removes the task with the given task number
      *
      * @param taskNumber the task number of the task
      * @return           the task removed
@@ -55,7 +55,7 @@ public class TaskList {
     }
 
     /**
-     * Find the tasks that match the given description
+     * Finds the tasks that match the given description
      *
      * @param description the description of tasks to be found
      * @return            the tasks that match the description
@@ -71,7 +71,7 @@ public class TaskList {
     }
 
     /**
-     * Return the task list
+     * Returns the task list
      *
      * @return           the task list
      */
@@ -80,7 +80,7 @@ public class TaskList {
     }
 
     /**
-     * Return the toString of TaskList
+     * Returns the toString of TaskList
      *
      * @return           the toString of TaskList
      */
