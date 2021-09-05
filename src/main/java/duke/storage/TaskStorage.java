@@ -18,7 +18,6 @@ import duke.task.TodoTask;
  * Responsible for reading and writing tasks to the memory
  */
 public class TaskStorage {
-    static final String DATA_FILE_DIR = "./data";
     static final String DATA_FILE_PATH = "./data/tasks.txt";
 
     private File dataFile;
@@ -33,9 +32,9 @@ public class TaskStorage {
     }
 
     private File initializeDataFile() throws IOException {
-        File dataDir = new File(DATA_FILE_DIR);
         File dataFile = new File(DATA_FILE_PATH);
-        if (!dataDir.exists()) {
+        File dataDir = new File(dataFile.getParent());
+        if (!dataFile.exists()) {
             dataDir.mkdirs();
         }
         if (!dataFile.exists()) {
@@ -54,16 +53,14 @@ public class TaskStorage {
         try {
             Scanner scanner = new Scanner(this.dataFile);
             while (scanner.hasNextLine()) {
-                try {
-                    Task task = parseTask(scanner.nextLine());
-                    tasks.add(task);
-                } catch (DukeException e) {
-                    // ignore task with invalid format
-                }
+                Task task = parseTask(scanner.nextLine());
+                tasks.add(task);
             }
             scanner.close();
         } catch (FileNotFoundException e) {
             System.out.printf("File not found: %s\n", this.dataFile.toString());
+        } catch (DukeException e) {
+            // ignore task with invalid format
         }
         return tasks;
     }
