@@ -7,7 +7,7 @@ import java.util.Locale;
 /**
  * Format for the Botto bot's deadline task
  */
-public class Deadline extends Task {
+public class Deadline extends Task implements Comparable<Deadline> {
 
     protected LocalDateTime dateTime;
 
@@ -35,4 +35,8 @@ public class Deadline extends Task {
     }
 
 
+    @Override
+    public int compareTo(Deadline o) {
+        return this.dateTime.compareTo(o.dateTime);
+    }
 }
