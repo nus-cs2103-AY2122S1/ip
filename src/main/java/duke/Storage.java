@@ -23,7 +23,8 @@ public class Storage {
 
     public Storage(TaskList db) throws DukeException {
         try {
-            String filename = Main.class.getResource("bin/duke.txt").getPath();
+            // String filename = Main.class.getResource("bin/duke.txt").getPath();
+            String filename = "build/resources/main/duke/bin/duke.txt";
             txt = new File(filename);
             raf = new RandomAccessFile(txt, "rwd");
             assert txt != null && raf != null;

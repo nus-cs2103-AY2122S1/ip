@@ -6,6 +6,7 @@ import duke.utils.DukeException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class TaskList {
     private final static DukeException ERROR_DB = new DukeException("Error loading database.");
@@ -123,11 +124,8 @@ public class TaskList {
         if (database.size() == 0) {
             return "You have no tasks!";
         }
-        for (int i = 1; i <= database.size(); i++) {
-            sb.append("\n\t ");
-            sb.append(i + "." + database.get(i - 1));
-        }
-        sb.deleteCharAt(0);
-        return sb.toString();
+        IntStream.range(0, database.size())
+                .forEach(x -> sb.append(String.format("\n\t %d. %s", x + 1, database.get(x))));
+        return sb.substring(1);
     }
 }
