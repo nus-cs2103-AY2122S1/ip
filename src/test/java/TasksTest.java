@@ -1,8 +1,8 @@
-import edith.exceptions.DukeException;
+import tokio.exceptions.DukeException;
 import org.junit.jupiter.api.Test;
-import edith.tasks.Deadlines;
-import edith.tasks.Events;
-import edith.tasks.Todos;
+import tokio.tasks.Deadlines;
+import tokio.tasks.Events;
+import tokio.tasks.Todos;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

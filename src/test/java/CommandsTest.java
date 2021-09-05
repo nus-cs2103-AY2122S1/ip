@@ -1,10 +1,10 @@
 import org.junit.jupiter.api.Test;
-import edith.commands.AddCommand;
-import edith.commands.ByeCommand;
-import edith.commands.Command;
-import edith.commands.ListCommand;
-import edith.exceptions.DukeException;
-import edith.parser.Parser;
+import tokio.commands.AddCommand;
+import tokio.commands.ByeCommand;
+import tokio.commands.Command;
+import tokio.commands.ListCommand;
+import tokio.exceptions.DukeException;
+import tokio.parser.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

@@ -1,11 +1,11 @@
-package edith.commands;
-
-import edith.storage.Storage;
-import edith.tasks.Task;
-import edith.tasks.TaskList;
-import edith.ui.Ui;
+package tokio.commands;
 
 import java.io.IOException;
+
+import tokio.storage.Storage;
+import tokio.tasks.Task;
+import tokio.tasks.TaskList;
+import tokio.ui.Ui;
 
 /**
  * Marks task specified by user as done, using index.
@@ -22,7 +22,11 @@ public class DoneCommand extends Command {
     public DoneCommand(String cmdLine) {
         this.cmdLine = cmdLine;
         String[] splitLine = cmdLine.split(" ", 2);
-        index = Integer.parseInt(splitLine[1]);
+        if (splitLine.length < 2) {
+            index = Integer.MAX_VALUE;
+        } else {
+            index = Integer.parseInt(splitLine[1]);
+        }
     }
 
     @Override

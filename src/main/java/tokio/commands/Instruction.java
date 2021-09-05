@@ -1,4 +1,4 @@
-package edith.commands;
+package tokio.commands;
 
 /**
  * Stores the types of Instruction a command can have.

@@ -1,11 +1,11 @@
-package edith.commands;
-
-import edith.storage.Storage;
-import edith.tasks.Task;
-import edith.tasks.TaskList;
-import edith.ui.Ui;
+package tokio.commands;
 
 import java.io.IOException;
+
+import tokio.storage.Storage;
+import tokio.tasks.Task;
+import tokio.tasks.TaskList;
+import tokio.ui.Ui;
 
 /**
  * Deletes command specified by user based on index
@@ -22,7 +22,11 @@ public class DeleteCommand extends Command {
     public DeleteCommand(String cmdLine) {
         this.cmdLine = cmdLine;
         String[] splitLine = cmdLine.split(" ", 2);
-        this.index = Integer.parseInt(splitLine[1]);
+        if (splitLine.length < 2) {
+            this.index = Integer.MAX_VALUE;
+        } else {
+            this.index = Integer.parseInt(splitLine[1]);
+        }
     }
 
     /**
@@ -39,11 +43,9 @@ public class DeleteCommand extends Command {
             Task deleteTask = tasks.getTask(index - 1);
             tasks.deleteTask(index - 1);
             storage.deleteTask(deleteTask);
-            String[] msg = {"OK!! I have removed the following task from your list: " + deleteTask,
-                    "Now you have " + tasks.getSize() + " task(s) left~ Yay!!!!!"};
             return ui.printDeleteCommand(deleteTask, tasks);
         } else {
-           return ui.printInvalidIndexError();
+            return ui.printInvalidIndexError();
         }
     }
 

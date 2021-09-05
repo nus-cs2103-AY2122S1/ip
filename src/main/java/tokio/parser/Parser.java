@@ -1,18 +1,20 @@
-package edith.parser;
+package tokio.parser;
 
-import edith.commands.AddCommand;
-import edith.commands.ByeCommand;
-import edith.commands.Command;
-import edith.commands.DeleteCommand;
-import edith.commands.DoneCommand;
-import edith.commands.FindCommand;
-import edith.commands.ListCommand;
-import edith.exceptions.DukeException;
+import tokio.commands.AddCommand;
+import tokio.commands.ByeCommand;
+import tokio.commands.Command;
+import tokio.commands.DeleteCommand;
+import tokio.commands.DoneCommand;
+import tokio.commands.FindCommand;
+import tokio.commands.ListCommand;
+import tokio.exceptions.DukeException;
+import tokio.ui.Ui;
 
 /**
  * deals with making sense of the user command.
  */
 public class Parser {
+    protected static Ui ui = new Ui();
 
     /**
      * Returns a command based on user input.
@@ -39,10 +41,10 @@ public class Parser {
             } else if (splitStr[0].equalsIgnoreCase("bye")) {
                 return new ByeCommand();
             } else {
-                throw new DukeException("Please enter a valid command so that I will be able to help you :p");
+                throw new DukeException("Please enter a valid command so that I will be able to help you...");
             }
         } catch (Exception e) {
-            throw new DukeException("Oops! Please enter a command to proceed~");
+            throw new DukeException("Río! Please enter a command to proceed...");
         }
     }
 }

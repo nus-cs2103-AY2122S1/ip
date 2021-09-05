@@ -1,9 +1,9 @@
-package edith.tasks;
-
-import edith.commands.Instruction;
+package tokio.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import tokio.commands.Instruction;
 
 /**
  * Represents a Deadline task that takes in date.

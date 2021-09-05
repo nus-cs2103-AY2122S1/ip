@@ -1,18 +1,18 @@
-package edith;
-
-import edith.commands.Command;
-import edith.exceptions.DukeException;
-import edith.parser.Parser;
-import edith.storage.Storage;
-import edith.tasks.TaskList;
-import edith.ui.Ui;
-import javafx.animation.PauseTransition;
-import javafx.application.Platform;
-import javafx.util.Duration;
+package tokio;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
+
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
+import javafx.util.Duration;
+import tokio.commands.Command;
+import tokio.exceptions.DukeException;
+import tokio.parser.Parser;
+import tokio.storage.Storage;
+import tokio.tasks.TaskList;
+import tokio.ui.Ui;
 
 /**
  * A chatbot that manages user input tasks.
@@ -39,8 +39,7 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-    
-    
+
     /**
      * Creates a Duke, initialise Ui, Storage and TaskList.
      *
@@ -75,14 +74,17 @@ public class Duke {
             }
         }
     }
-    
+
+    /**
+     * Main function for Duke.
+     */
     public static void main(String[] args) throws IOException {
         Duke duke = new Duke("data/tasks.txt");
         duke.run();
     }
-    
+
     /**
-     *  * You should have your own function to generate a response to user input.
+     * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {

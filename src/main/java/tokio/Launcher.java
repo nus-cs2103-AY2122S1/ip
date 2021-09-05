@@ -1,4 +1,4 @@
-package edith;
+package tokio;
 
 import javafx.application.Application;
 

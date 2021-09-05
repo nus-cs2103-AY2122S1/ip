@@ -1,4 +1,4 @@
-package edith.tasks;
+package tokio.tasks;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,15 +9,29 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private ArrayList<Task> tasks;
-    
+
+    /**
+     * Constructor used when task list needs to be created.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
-    
+
+    /**
+     * Constructor used when task list already exists.
+     *
+     * @param tasks Task list.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
-    
+
+    /**
+     * Adds newTask into the current task list.
+     *
+     * @param newTask Task to be added.
+     * @throws IOException If new task cannot be added.
+     */
     public void addTask(Task newTask) throws IOException {
         tasks.add(newTask);
     }

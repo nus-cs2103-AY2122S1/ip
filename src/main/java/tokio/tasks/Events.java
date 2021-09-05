@@ -1,11 +1,11 @@
-package edith.tasks;
+package tokio.tasks;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import edith.commands.Instruction;
-import edith.exceptions.DukeException;
+import tokio.commands.Instruction;
+import tokio.exceptions.DukeException;
 
 /**
  * Represents an event task that takes in date and time.

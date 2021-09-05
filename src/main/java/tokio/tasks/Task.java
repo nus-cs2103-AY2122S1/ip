@@ -1,6 +1,6 @@
-package edith.tasks;
+package tokio.tasks;
 
-import edith.commands.Instruction;
+import tokio.commands.Instruction;
 
 /**
  * Represents a task in Viper.

@@ -1,4 +1,7 @@
-package edith;
+package tokio;
+
+import java.io.IOException;
+import java.util.Collections;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,9 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-
-import java.io.IOException;
-import java.util.Collections;
+import javafx.scene.layout.Region;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -36,6 +38,8 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
+        displayPicture.setClip(new Circle(50, 50, 50));
         displayPicture.setImage(img);
     }
 
@@ -49,13 +53,28 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Initialise a new dialog box for user input.
+     *
+     * @param text User input.
+     * @param img User image.
+     * @return Dialog box with user text and image.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Initialise a new dialog box for duke text.
+     *
+     * @param text Duke text.
+     * @param img Duke image.
+     * @return Flipped dialog box with duke text and image.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.dialog.setStyle("-fx-background-radius: 12; -fx-label-padding: 10; -fx-background-color: #303034");
         return db;
     }
 }
