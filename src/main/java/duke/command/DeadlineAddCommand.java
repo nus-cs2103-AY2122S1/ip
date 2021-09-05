@@ -31,13 +31,16 @@ public class DeadlineAddCommand extends AddCommand {
      * @param taskList Tasklist that contains an Arraylist of agendas on the list.
      * @param ui Ui that outputs something based on the command given.
      * @param storage Storage that changes the list stored in data/duke.txt based on the command.
+     * @return The message that states that Deadline has been added.
      * @throws DukeException catches an error when input is wrong.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        String toPrint;
         int totalTasks = taskList.addToList("D", description, time);
         storage.addToText("D", description, time);
-        ui.addingTask(totalTasks, description, time, "D");
+        toPrint = ui.addingTask(totalTasks, description, time, "D");
+        return toPrint;
     }
 
     @Override

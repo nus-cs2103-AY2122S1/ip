@@ -15,10 +15,11 @@ public class ExitCommand implements Command {
      * @param taskList Tasklist that contains an Arraylist of agendas on the list.
      * @param ui Ui that outputs something based on the command given.
      * @param storage Storage that changes the list stored in data/duke.txt based on the command.
+     * @return A message that prints goodbye to the user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.byeMessage();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.byeMessage();
     }
 
     /**

@@ -44,16 +44,13 @@ public class Ui {
      * @return Welcome message.
      */
     public String welcomeMessage() {
-        lineProducer();
-        String toWelcome = ("    Hello I'm your friendly task-planning chatbot Duke!"
-                + indentationAdder() + "To enter a deadline, please type in this format: 'deadline {title of item} "
-                + "/by d/mm/yyyy hh:mm'" + indentationAdder()
-                + "To enter an event, please type in this format: 'event {title of item} /on d/mm/yyyy hh:mm''"
-                + indentationAdder()
-                + "To enter a todo, please type in this format: 'todo {title of item}'" + indentationAdder()
+        String toWelcome = ("Hello I'm your friendly task-planning chatbot Duke!\n"
+                + "To enter a deadline, please type in this format: 'deadline {title of item} "
+                + "/by d/mm/yyyy hh:mm'\n"
+                + "To enter an event, please type in this format: 'event {title of item} /on d/mm/yyyy hh:mm'\n"
+                + "To enter a todo, please type in this format: 'todo {title of item}'\n"
                 + "type help to know more commands available in this bot!");
         System.out.println(toWelcome);
-        lineProducer();
         return toWelcome;
     }
 
@@ -94,11 +91,11 @@ public class Ui {
     /**
      * A method that prints the final goodbye message when the program exits.
      *
-     * @return A boolean that states false as the program exits.
+     * @return The goodbye message.
      */
-    public boolean byeMessage() {
-        System.out.println("    Bye! Please visit me again!");
-        return false;
+    public String byeMessage() {
+        String goodbye = "Bye! Please visit me again!";
+        return goodbye;
     }
 
     /**
@@ -107,7 +104,7 @@ public class Ui {
      * @return String that shows the completion message.
      */
     public String printCompleted() {
-        String completionMessage = ("    " + "Congratulations! You've completed all your tasks!");
+        String completionMessage = ("Congratulations! You've completed all your tasks!");
         System.out.println(completionMessage);
         return completionMessage;
     }
@@ -119,8 +116,8 @@ public class Ui {
      * @return Message that tells us it is marked as done.
      */
     public String markAsDone(Task taskToChange) {
-        String markedAsDone = ("    Great job! I've marked the following as done"
-                + indentationAdder() + taskToChange);
+        String markedAsDone = ("Great job! I've marked the following as done:\n"
+                + taskToChange);
         System.out.println(markedAsDone);
         return markedAsDone;
     }
@@ -132,8 +129,8 @@ public class Ui {
      * @return The deleted message.
      */
     public String markAsDeleted(Task toDelete) {
-        String deletedMessage = ("    Note: I've removed the following task from your list:"
-                + indentationAdder() + toDelete);
+        String deletedMessage = ("Note: I've removed the following task from your list:\n"
+                + toDelete);
         System.out.println(deletedMessage);
         return deletedMessage;
     }
@@ -169,8 +166,9 @@ public class Ui {
         } else {
             toAdd = new Todo(description);
         }
-        String addedMessage = ("    Understood! The following task has been added:" + indentationAdder() + " " + toAdd
-        + "\n    You have " + totalTasks + " " + (totalTasks == 1 ? "task" : "tasks" ) + " in your current list");
+        String addedMessage = ("Understood! The following task has been added:\n" + " " + toAdd
+                + "\nYou have " + totalTasks + " " + (totalTasks == 1 ? "task" : "tasks")
+                + " in your current list");
         System.out.println(addedMessage);
         return addedMessage;
     }
@@ -182,15 +180,11 @@ public class Ui {
      * @return The helpful message.
      */
     public String helpMessage() {
-        String helpfulMessage = ("    The following commands are compatible with our task-planning chatbot!"
-                + indentationAdder()
-                + "list:" + indentationAdder() + "provides a list of items in your task list."
-                + indentationAdder()
-                + "done {number}:" + indentationAdder() + "ticks the task with that number as done!"
-                + indentationAdder()
-                + "delete {number}:" + indentationAdder() + "deletes the task with that number off the list."
-                + indentationAdder()
-                + "bye:" + indentationAdder() + "ends the program.");
+        String helpfulMessage = ("The following commands are compatible with our task-planning chatbot!\n"
+                + "list:" + "\nprovides a list of items in your task list.\n"
+                + "done {number}:" + "\nticks the task with that number as done!\n"
+                + "delete {number}:\n" + "deletes the task with that number off the list.\n"
+                + "bye:\n" + "ends the program.");
         System.out.println(helpfulMessage);
         return helpfulMessage;
     }

@@ -20,7 +20,7 @@ public interface Command {
      * @param storage Storage that changes the list stored in data/duke.txt based on the command.
      * @throws DukeException Deals with any errors that rises due to the user's input.
      */
-    void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     /**
      * A method that checks whether the current command will cause the program to exit or not.

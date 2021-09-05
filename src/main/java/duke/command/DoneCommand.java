@@ -24,13 +24,14 @@ public class DoneCommand implements Command {
      * @param taskList Tasklist that contains an Arraylist of agendas on the list.
      * @param ui Ui that outputs something based on the command given.
      * @param storage Storage that changes the list stored in data/duke.txt based on the command.
+     * @return A message that says that a task has been marked as done.
      * @throws DukeException catches an error when there is an error in input.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task taskToChange = taskList.retrieveTask(startOfString);
         storage.changeDone(taskToChange);
-        ui.markAsDone(taskToChange);
+        return ui.markAsDone(taskToChange);
     }
 
     /**

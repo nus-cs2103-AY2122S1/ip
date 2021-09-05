@@ -13,11 +13,26 @@ public class FindCommand implements Command {
         this.keyWords = keyWords;
     }
 
+    /**
+     * Executes a command to find similar tasks that have the same name as the keywords given.
+     *
+     * @param taskList Tasklist that contains an Arraylist of agendas on the list.
+     * @param ui Ui that outputs something based on the command given.
+     * @param storage Storage that changes the list stored in data/duke.txt based on the command.
+     * @return A messsage that includes all tasks that match the given keywords.
+     * @throws DukeException An exception thrown if nothing is found.
+     */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.findSimilarTasks(keyWords);
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        String toPrint = taskList.findSimilarTasks(keyWords);
+        return toPrint;
     }
 
+    /**
+     * A method that causes the program not to exit.
+     *
+     * @return a boolean that tells the program it is not exiting.
+     */
     @Override
     public boolean isExit() {
         return false;

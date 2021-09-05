@@ -31,13 +31,16 @@ public class EventAddCommand extends AddCommand {
      * @param taskList Tasklist that contains an Arraylist of agendas on the list.
      * @param ui Ui that outputs something based on the command given.
      * @param storage Storage that changes the list stored in data/duke.txt based on the command.
+     * @return A message that says that an event has been successfully added.
      * @throws DukeException catches errors in user input.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        String toPrint;
         int totalTasks = taskList.addToList("E", description, time);
         storage.addToText("E", description, time);
-        ui.addingTask(totalTasks, description, time, "E");
+        toPrint = ui.addingTask(totalTasks, description, time, "E");
+        return toPrint;
     }
 
     @Override

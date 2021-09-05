@@ -116,18 +116,15 @@ public class TaskList {
      * @return A boolean that states whether all tasks in the list have been completed.
      * @throws DukeException A message thrown as there are no items that currently are in the list.
      */
-    public boolean printItems() throws DukeException {
-        boolean allDone = true;
+    public String printItems() throws DukeException {
+        String toPrint = "";
         if (xs.size() == 0) {
-            throw new DukeException("    There are no items in the list!");
+            throw new DukeException("There are no items in the list!");
         }
         for (int i = 0; i < xs.size(); i++) {
-            System.out.println("    " + (i + 1) + ": " + xs.get(i));
-            if (!xs.get(i).getIsDone() || xs.size() == 0) {
-                allDone = false;
-            }
+            toPrint += ("\n" + (i + 1) + ": " + xs.get(i));
         }
-        return allDone;
+        return toPrint;
     }
 
     /**
@@ -140,7 +137,7 @@ public class TaskList {
      */
     public Task retrieveTask(int startOfString) throws DukeException {
         if (startOfString > xs.size() || startOfString < 0) {
-            throw new DukeException("    Uh oh! Item " + startOfString + " does not seem to exist!");
+            throw new DukeException("Uh oh! Item " + startOfString + " does not seem to exist!");
         }
         Task taskToChange = xs.get(startOfString - 1);
         taskToChange.changeIsDone(true);
@@ -157,7 +154,7 @@ public class TaskList {
      */
     public Task deleteTask(int startOfString) throws DukeException {
         if (startOfString > xs.size() || startOfString < 0) {
-            throw new DukeException("    Uh oh! Item " + startOfString + " does not seem to exist!");
+            throw new DukeException("Uh oh! Item " + startOfString + " does not seem to exist!");
         }
         Task taskToDelete = xs.get(startOfString - 1);
         xs.remove(startOfString - 1);
@@ -180,7 +177,7 @@ public class TaskList {
                 ld = dateFormatting(time);
             }
             if (ld.compareTo(LocalDateTime.now()) < 0 && (type.equals("D") || type.equals("E"))) {
-                throw new DukeException("    Please key in a date that's not in the past!");
+                throw new DukeException("Please key in a date that's not in the past!");
             }
             Task toAdd;
             if (type.equals("D")) {
@@ -193,7 +190,7 @@ public class TaskList {
             xs.add(toAdd);
             return xs.size();
         } catch (DateTimeParseException e) {
-            throw new DukeException("    Oh oh! Please follow the format strictly and key in a suitable date!");
+            throw new DukeException("Oh oh! Please follow the format strictly and key in a suitable date!");
         }
     }
 
@@ -201,19 +198,22 @@ public class TaskList {
      * Finds tasks that contains such a keyword typed in by the user.
      *
      * @param keyWords The user input that will be searched for to obtain tasks that have such words.
+     * @return The String to print with regards to all the similar tasks.
      */
-    public void findSimilarTasks(String keyWords) {
-        System.out.println("    Here are the matching tasks in your list:");
+    public String findSimilarTasks(String keyWords) {
+        String toPrint;
+        toPrint = ("Here are the matching tasks in your list:");
         int count = 0;
         for (Task task : xs) {
             if (task.getItemName().contains(keyWords)) {
-                System.out.println("    " + task);
+                toPrint += ("\n" + task);
                 count++;
             }
         }
         if (count == 0) {
-            System.out.println("    Sorry! There does not seem to be any matching tasks!");
+            toPrint += ("\nSorry! There does not seem to be any matching tasks!");
         }
+        return toPrint;
     }
 
     @Override

@@ -17,15 +17,13 @@ public class ListCommand implements Command {
      * @param taskList Tasklist that contains an Arraylist of agendas on the list.
      * @param ui Ui that outputs something based on the command given.
      * @param storage Storage that changes the list stored in data/duke.txt based on the command.
+     * @return The list of items in your taskList.
      * @throws DukeException throws an exception that catches error in user input.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        boolean allDone;
-        allDone = taskList.printItems();
-        if (allDone) {
-            ui.printCompleted();
-        }
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        String toPrint = taskList.printItems();
+        return toPrint;
     }
 
     /**
