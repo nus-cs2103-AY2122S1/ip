@@ -21,18 +21,17 @@ public final class DeleteCommand extends Command {
         super(userInput);
     }
 
-
     /**
      * Executes the command.
      *
-     * @param lst the TaskList object that stores the list of tasks
+     * @param list the TaskList object that stores the list of tasks
      * @param ui the Ui object that interacts with the user
      * @param storage the Storage object that saves changes to stored tasks, if any
      * @return the message displaying the result
      */
     @Override
-    public String execute(TaskList lst, Ui ui, Storage storage) {
-        assert lst != null : "invalid TaskList object detected";
+    public String execute(TaskList list, Ui ui, Storage storage) {
+        assert list != null : "invalid TaskList object detected";
         assert ui != null : "invalid Ui object detected";
         assert storage != null : "invalid Storage object detected";
         if (getInput().size() == 1) {
@@ -43,14 +42,13 @@ public final class DeleteCommand extends Command {
         if (getInput().size() > 2) {
             return "     Please input in the form: 'delete <index>'.";
         }
-
-        if (lst.getTasks().isEmpty()) {
+        if (list.getTasks().isEmpty()) {
             return "     List is empty, no tasks to delete, looking good!";
         }
         try {
             int index = Integer.parseInt(getInput().get(1)) - 1;
-            String result = lst.deleteTask(index);
-            storage.resetFile(lst.getTasks());
+            String result = list.deleteTask(index);
+            storage.resetFile(list.getTasks());
             return result;
         } catch (NumberFormatException e) {
             return "     Please use a number instead :(";

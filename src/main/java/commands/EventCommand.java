@@ -14,7 +14,6 @@ import ui.Ui;
  */
 public final class EventCommand extends Command {
 
-
     /**
      * Constructs the EventCommand object.
      *
@@ -27,21 +26,21 @@ public final class EventCommand extends Command {
     /**
      * Executes the command.
      *
-     * @param lst the TaskList object that stores the list of tasks
+     * @param list the TaskList object that stores the list of tasks
      * @param ui the Ui object that interacts with the user
      * @param storage the Storage object that saves changes to stored tasks, if any
      * @return the message displaying the result
      */
     @Override
-    public String execute(TaskList lst, Ui ui, Storage storage) {
-        assert lst != null : "invalid TaskList object detected";
+    public String execute(TaskList list, Ui ui, Storage storage) {
+        assert list != null : "invalid TaskList object detected";
         assert ui != null : "invalid Ui object detected";
         assert storage != null : "invalid Storage object detected";
         try {
-            EventTask e = new EventTask(lst.filterInfo(getInput()),
-                    lst.getEventDay(getInput()));
-            String result = lst.addTask(e);
-            storage.resetFile(lst.getTasks());
+            EventTask task = new EventTask(list.filterInfo(getInput()),
+                    list.getEventDay(getInput()));
+            String result = list.addTask(task);
+            storage.resetFile(list.getTasks());
             return result;
         } catch (DukeException e) {
             if (e.getMessage().equals("event")) {

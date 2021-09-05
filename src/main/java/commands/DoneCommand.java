@@ -13,7 +13,6 @@ import ui.Ui;
  */
 public final class DoneCommand extends Command {
 
-
     /**
      * Constructs the DoneCommand object.
      *
@@ -23,21 +22,21 @@ public final class DoneCommand extends Command {
         super(userInput);
     }
 
-
     /**
      * Executes the command.
      *
-     * @param lst the TaskList object that stores the list of tasks
+     * @param list the TaskList object that stores the list of tasks
      * @param ui the Ui object that interacts with the user
      * @param storage the Storage object that saves changes to stored tasks, if any
      * @return the message displaying the result
      */
     @Override
-    public String execute(TaskList lst, Ui ui, Storage storage) {
-        assert lst != null : "invalid TaskList object detected";
+    public String execute(TaskList list, Ui ui, Storage storage) {
+        ArrayList<Task> tasks = list.getTasks();
+        assert list != null : "invalid TaskList object detected";
         assert ui != null : "invalid Ui object detected";
         assert storage != null : "invalid Storage object detected";
-        ArrayList<Task> tasks = lst.getTasks();
+        ArrayList<Task> tasks = list.getTasks();
         try {
             if (getInput().size() == 1) {
                 throw new IllegalArgumentException("Please input index :)");

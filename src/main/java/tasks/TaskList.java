@@ -163,7 +163,7 @@ public final class TaskList {
      * @param userInput the date which user wants to check
      */
     public ArrayList<Task> findTasksDue(String userInput) {
-        ArrayList<Task> dueItems = new ArrayList<>();
+        ArrayList<Task> tasksDue = new ArrayList<>();
         String[] date = userInput.split("/");
         LocalDate ref = LocalDate.parse(date[0] + "-" + date[1] + "-" + date[2]);
         for (Task t : tasks) {
@@ -171,12 +171,12 @@ public final class TaskList {
                 LocalDate temp = t.getLocalDate();
                 if (temp != null) {
                     if (temp.equals(ref)) {
-                        dueItems.add(t);
+                        tasksDue.add(t);
                     }
                 }
             }
         }
-        return dueItems;
+        return tasksDue;
     }
 
     /**
@@ -186,15 +186,15 @@ public final class TaskList {
      * @return list containing all tasks that match input keywords
      */
     public ArrayList<Task> findTask(String target) {
-        ArrayList<Task> matched = new ArrayList<>();
+        ArrayList<Task> tasksFound = new ArrayList<>();
         if (!target.equals("")) {
             for (Task t : tasks) {
                 String temp = t.getDescription();
                 if (temp.toLowerCase().contains(target.toLowerCase())) {
-                    matched.add(t);
+                    tasksFound.add(t);
                 }
             }
         }
-        return matched;
+        return tasksFound;
     }
 }

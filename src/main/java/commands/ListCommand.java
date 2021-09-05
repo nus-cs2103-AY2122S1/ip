@@ -12,7 +12,6 @@ import ui.Ui;
  */
 public final class ListCommand extends Command {
 
-
     /**
      * Constructs the ListCommand object.
      *
@@ -25,16 +24,16 @@ public final class ListCommand extends Command {
     /**
      * Executes the command.
      *
-     * @param lst the TaskList object that stores the list of tasks
+     * @param list the TaskList object that stores the list of tasks
      * @param ui the Ui object that interacts with the user
      * @param storage the Storage object that saves changes to stored tasks, if any
      * @return the message displaying the result
      */
     @Override
-    public String execute(TaskList lst, Ui ui, Storage storage) {
-        assert lst != null : "invalid TaskList object detected";
+    public String execute(TaskList list, Ui ui, Storage storage) {
+        assert list != null : "invalid TaskList object detected";
         assert ui != null : "invalid Ui object detected";
         assert storage != null : "invalid Storage object detected";
-        return lst.getList();
+        return list.getList();
     }
 }
