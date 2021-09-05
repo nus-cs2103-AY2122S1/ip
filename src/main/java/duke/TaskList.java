@@ -27,39 +27,34 @@ public class TaskList {
      */
     public String add(String userInput, ArrayList<Task> userInputRecords) {
         Task task;
-        if (userInput.startsWith("todo")) {
-            String description = userInput.substring(5);
+        if (userInput.startsWith("todo ")) {
+            int lengthOfDeadlineString = 5;
+            String description = userInput.substring(lengthOfDeadlineString);
             if (description.trim().isEmpty()) {
                 return "OOPS!!! The description of a todo cannot be empty.\n";
             }
             task = new ToDo(description);
-        } else if (userInput.startsWith("deadline")) {
+        } else if (userInput.startsWith("deadline ")) {
             try {
                 int lengthOfDeadlineString = 9;
                 int byPosition = userInput.lastIndexOf("/by");
                 String description = userInput.substring(lengthOfDeadlineString, byPosition);
                 LocalDate deadline = LocalDate.parse(userInput.substring(byPosition + 4));
                 task = new Deadline(description, deadline);
-            } catch (StringIndexOutOfBoundsException e) {
-                return "OOPS!!! The description of a deadline cannot be empty.\n";
             } catch (DateTimeParseException e) {
                 return "Please enter a valid date in the format:/at yyyy-mm-dd!\n";
             }
-        } else if (userInput.startsWith("event")) {
+        } else {
+            assert userInput.startsWith("event ");
             try {
                 int lengthOfEventString = 6;
                 int atPosition = userInput.lastIndexOf("/at");
                 String description = userInput.substring(lengthOfEventString, atPosition);
                 LocalDate time = LocalDate.parse(userInput.substring(atPosition + 4));
                 task = new Event(description, time);
-            } catch (StringIndexOutOfBoundsException e) {
-                return "OOPS!!! The description of an event cannot be empty.\n";
             } catch (DateTimeParseException e) {
                 return "Please enter a valid date in the format:/at yyyy-mm-dd!\n";
             }
-        } else {
-            //Should not reach here
-            return "unexpected error.";
         }
         userInputRecords.add(task);
         storage.autoSave();

@@ -6,7 +6,7 @@
 - [x] Autosave to and autoload user's data from a default directory;
 - [x] Allows user to save/load data from a specified directory;
 - [x] Search for task according to a specified key word.
-- [ ]  An in-app user guideline (to be developed)
+- [x]  An in-app user guideline
 
 ### Syntax List:
 >Legend for datatype:
@@ -21,4 +21,4 @@
 - delete <*number*>: delete the task with *number* index;
 - deleteAll: delete all saved tasks in the task list;
 - find <**keyword**>: find all tasks with description containing the **keyword**.
-- help: shows the list of avaliable command(work in progress ⛔)Description of the outcome.
+- help: shows the list of avaliable command.

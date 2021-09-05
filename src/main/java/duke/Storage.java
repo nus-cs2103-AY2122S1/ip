@@ -38,6 +38,21 @@ public class Storage {
             }
             scanner.close();
         } catch (IOException e) {
+            boolean directoryExists = Files.exists(Paths.get("data"));
+            boolean fileExists = Files.exists(Paths.get("data", "record"));
+            if (!directoryExists) {
+                try {
+                    Files.createDirectory(Path.of("data"));
+                } catch (IOException error) {
+                    System.out.println("This directory already exists!\n");
+                }
+            } else if (!fileExists) {
+                try {
+                    Files.createFile(Path.of("data", "record"));
+                } catch (IOException error) {
+                    System.out.println("This file already exists!\n");
+                }
+            }
             System.out.println("Saved data not found, a new data file created.\n");
         }
     }
@@ -46,21 +61,6 @@ public class Storage {
      * Automatically(without any user command) saves the users inputs to ../data/record.
      */
     public void autoSave() {
-        boolean directoryExists = Files.exists(Paths.get("data"));
-        boolean fileExists = Files.exists(Paths.get("data", "record"));
-        if (!directoryExists) {
-            try {
-                Files.createDirectory(Path.of("data"));
-            } catch (IOException e) {
-                System.out.println("This directory already exists!\n");
-            }
-        } else if (!fileExists) {
-            try {
-                Files.createFile(Path.of("data", "record"));
-            } catch (IOException e) {
-                System.out.println("This file already exists!\n");
-            }
-        }
         try {
             FileWriter writer = new FileWriter(Paths.get("data", "record").toString());
             for (Task task : userInputRecords) {
@@ -133,13 +133,11 @@ public class Storage {
             task = new Deadline(taskRecord.substring(indexForDescriptionStart, taskRecord.indexOf("(by")),
                     LocalDate.parse(taskRecord.substring(taskRecord.indexOf("(by") + indexForTimeStart,
                             taskRecord.length() - 1)));
-        } else if (taskRecord.startsWith("[E]")) {
+        } else {
+            assert taskRecord.startsWith("[E]");
             task = new Event(taskRecord.substring(indexForDescriptionStart, taskRecord.indexOf("(at")),
                     LocalDate.parse(taskRecord.substring(taskRecord.indexOf("(at") + indexForTimeStart,
                             taskRecord.length() - 1)));
-        } else {
-            //Should not reach here unless the file is corrupted; skip the line that is not properly formatted.
-            return;
         }
         setDone(taskRecord, task);
         userInputRecords.add(task);
