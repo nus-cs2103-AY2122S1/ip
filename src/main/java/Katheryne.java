@@ -1,20 +1,59 @@
-import java.time.format.DateTimeParseException;
-import java.util.*;
-
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.PROPERTY;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
+@JsonTypeInfo(use = NAME, include = PROPERTY)
+
+/**
+ * Chat bot Katheryne, used for simple todo lists
+ */
 public class Katheryne {
     public static void main(String[] args) throws KatheryneExceptions {
-        ArrayList<Task> lst = new ArrayList<Task>();
+        List<Task> lst = new ArrayList<>();
+        ObjectMapper mapper = new ObjectMapper().enableDefaultTyping();
+        mapper.registerModule(new JavaTimeModule());
+
+//        loadTaskList("tasks.json", mapper);
+        if (Files.isReadable(Paths.get("tasks.json"))) {
+            try {
+                lst.addAll(Arrays.asList(mapper.readValue(
+                        Paths.get("tasks.json").toFile(), 
+                        Task[].class)));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         System.out.println("Ad astra abyssosque! I am Katheryne, the receptionist here at the Adventurers' Guild.");
         System.out.println("How may I assist?");
+        if (!lst.isEmpty()) {
+            System.out.println("I still have your list of tasks from last time, it has " + lst.size() + " items.");
+        }
         Scanner in = new Scanner(System.in);
         while (true) {
             try {
                 String userInput = in.nextLine();
                 String[] keywordInput = userInput.split(" ", 2);
                 if (userInput.equalsIgnoreCase("BYE")) {
-                    System.out.println("Ad Astra Abyssoque, Traveller!");
                     break;
                 } else if (keywordInput[0].equalsIgnoreCase("done") || keywordInput[0].equalsIgnoreCase("complete")) {
                     if (keywordInput.length == 1) {
@@ -39,6 +78,7 @@ public class Katheryne {
                         throw new KatheryneExceptions("That's not a valid index...");
                     }
                 } else if (userInput.equalsIgnoreCase("list")) {
+                    // return the list of items stored
                     System.out.println("Here's the list I've stored for you:");
                     for (int i = 1; i <= lst.size(); i++) {
                         System.out.println(i + ") " + lst.get(i - 1));
@@ -88,7 +128,7 @@ public class Katheryne {
                     if (keywordInput.length == 1) {
                         throw new KatheryneExceptions("A todo needs a description ");
                     } else {
-                        lst.add(new Todo(keywordInput[1]));
+                        lst.add(new Todo(keywordInput[1].trim()));
                         System.out.println("Todo item '" + keywordInput[1] + "' added to your list");
                     }
                 } else {
@@ -103,11 +143,18 @@ public class Katheryne {
                 System.out.println("You need to specify a number in the correct format. ERROR: "
                         + e.getMessage());
             }
-//            finally {
-//                continue;
-//            }
+        }
+        // give object mapper the ability to write the properties of tasks to json
+        mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+        ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
 
+        // try to save the file
+        try {
+            writer.writeValue(Paths.get("tasks.json").toFile(), lst);
+            System.out.println("Ad Astra Abyssoque, Traveller!");
+        } catch (IOException e) {
+            System.out.println("Oh wait! Traveller, I couldn't catch that...");
+            e.printStackTrace();
         }
     }
-
 }
