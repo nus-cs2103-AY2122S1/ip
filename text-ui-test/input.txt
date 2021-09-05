@@ -1,22 +1,29 @@
 todo read book
-deadline return book /by June 6th
-event project meeting /at Aug 6th 2-4pm
-todo join sports club
-done 1
-done 4
-todo borrow book
-list
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
-delete 3
-rubbish
-delete 30
-delete a
-delete
-done 30
-done a
-done
-todoo
+todo
+todoee
+deadline do homework /by 2021-05-09
+deadline do homework /by tomorrow
+deadline do homework by tomorrow
+deadline /by tomorrow
 deadline
-deadline need to do homework
+event meet friend /at 2021-08-10
+event meet friend /at tomorrow night
+event meet friend tomorrow night
+event /at tomorrow
+event
+delete 1
+delete
+delete 5
+delete a
+delete -1
+done 1
+done
+done 5
+done a
+done -1
+list
+list a
+asdf
+delete 2
+delete 1
 bye

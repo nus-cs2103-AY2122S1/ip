@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -8,12 +10,16 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " ");
     }
 
     public void setDone() {
         this.isDone = true;
     }
+
+    public LocalDate getDate() {
+        return null;
+    };
 
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
