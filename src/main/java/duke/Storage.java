@@ -55,6 +55,7 @@ public class Storage {
      */
     public ArrayList<String> produceReadableString() {
         try {
+            assert savefile != null;
             s = new Scanner(savefile);
             ArrayList<String> output = new ArrayList<>();
 

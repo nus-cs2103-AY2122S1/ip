@@ -65,6 +65,8 @@ public class Ui {
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         dialogContainer.getChildren().add(DialogBox.getUserDialog(userText, userImage));
+        //assert duke object is not empty
+        assert this.duke != null;
         this.duke.runCommand(userInput.getText());
         userInput.clear();
     }
