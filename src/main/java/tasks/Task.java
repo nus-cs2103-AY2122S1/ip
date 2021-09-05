@@ -29,8 +29,10 @@ public class Task {
     /**
      * Sets a task as complete by changing
      * the String representation and display a confirmation message.
+     *
+     * @return the message in response to the action
      */
-    public void setIsDone() {
+    public String setIsDone() {
         String result = "";
         if (this.isDone.equals("[ ]")) {
             this.isDone = "[X]";
@@ -38,7 +40,7 @@ public class Task {
         } else {
             result = "You have already completed this task before!";
         }
-        Ui.showInput(result, getType() + isDone + " " + getDescription());
+       return "     " + result + "\n" + "     " + getType() + isDone + " " + getDescription();
     }
 
     /**
