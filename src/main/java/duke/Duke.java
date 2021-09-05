@@ -7,15 +7,15 @@ import java.util.List;
 public class Duke {
     protected static List<Task> todoList;
     protected Storage storage;
-
     /**
      * Generate new Duke
      *
      * @param filePath path to store data
      */
     public Duke(String filePath) {
-        storage = new Storage(filePath);
-        todoList = new ArrayList<>();
+        this.storage = new Storage(filePath);
+        this.todoList = new ArrayList<>();
+
         try {
             storage.createFile();
             storage.download();
@@ -27,16 +27,39 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke duke = new Duke("/Users/hungkhoaitay/Duke.Duke/data/duke.txt");
-        duke.run();
+        Ui ui = new Ui();
+        System.out.println(ui.printWelcome());
+
+        boolean isContinue = true;
+
+        while (isContinue) {
+            try {
+                String userInput = ui.getUserInput();
+
+                Response response = duke.getResponse(userInput);
+
+                isContinue = response.isContinue();
+                System.out.println(response);
+            } catch (DukeException.DukeEmptyTask dukeEmptyTask) {
+                dukeEmptyTask.printStackTrace();
+            } catch (DukeException.DukeEmptyNote dukeEmptyNote) {
+                dukeEmptyNote.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         duke.finish();
     }
 
     /**
      * Print Welcome message and process user's command
      */
-    public void run() {
-        Ui.printWelcome();
-        Command.process();
+    public Response getResponse(String input) throws DukeException.DukeEmptyTask, DukeException.DukeEmptyNote, IOException {
+        UserInput userInputProcessed = Command.analyze(input);
+        Response response = Command.process(userInputProcessed);
+
+        return response;
     }
 
     /**
