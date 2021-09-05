@@ -65,7 +65,8 @@ public class Parser {
      * @return true if input is a remove command.
      */
     public static boolean isRemove(String input) {
-        return input.startsWith("remove ");
+        String[] separated = input.split(" ");
+        return separated[0].equals("remove");
     }
 
     /**
@@ -75,7 +76,8 @@ public class Parser {
      * @return true if input is a done command.
      */
     public static boolean isDone(String input) {
-        return input.startsWith("done ");
+        String[] separated = input.split(" ");
+        return separated[0].equals("done");
     }
 
     /**
@@ -85,7 +87,61 @@ public class Parser {
      * @return true if it is a find command, else false.
      */
     public static boolean isFind(String input) {
-        return input.startsWith("find ");
+        String[] separated = input.split(" ");
+        return separated[0].equals("find");
+    }
+
+    /**
+     * Checks if input is a list command.
+     *
+     * @param input Input which is being checked.
+     * @return true if input is a list command.
+     */
+    private static boolean isList(String input) {
+        return input.equals("list");
+    }
+
+    /**
+     * Checks if input is an event command.
+     *
+     * @param input Input which is being checked.
+     * @return true if input is a event command.
+     */
+    private static boolean isEvent(String input) {
+        String[] separated = input.split(" ");
+        return separated[0].equals("event");
+    }
+
+    /**
+     * Checks if input is a deadline command.
+     *
+     * @param input Input which is being checked.
+     * @return true if input is a deadline command.
+     */
+    private static boolean isDeadline(String input) {
+        String[] separated = input.split(" ");
+        return separated[0].equals("deadline");
+    }
+
+    /**
+     * Checks if input is a todo command.
+     *
+     * @param input Input which is being checked.
+     * @return true if input is a todo command.
+     */
+    private static boolean isTodo(String input) {
+        String[] separated = input.split(" ");
+        return separated[0].equals("todo");
+    }
+
+    /**
+     * Checks if input is a bye command.
+     *
+     * @param input Input which is being checked.
+     * @return true if input is a bye command.
+     */
+    private static boolean isBye(String input) {
+        return input.equals("bye");
     }
 
     /**
@@ -97,68 +153,91 @@ public class Parser {
      * @throws DukeException If no deadline or description for respective Task objects.
      */
     public static String[] splitInput(String input, String type) throws DukeException {
-        if (type.equals("deadline") || type.equals("event")) {
+        if (Parser.isDeadline(type) || Parser.isEvent(type)) {
             String[] str = input.split("/");
 
             if (str.length == 1) {
                 if (type.equals("deadline")) {
                     throw new IncompleteDeadlineException();
-                } else {
+                } else if (type.equals("event")) {
                     throw new IncompleteEventException();
+                } else {
+                    throw new InvalidCommandException();
                 }
             } else {
                 String[] first = str[0].split(" ");
                 String[] second = str[1].split(" ");
 
-                String description = "";
-                String deadline = "";
-
-                // starts from 1 as 0 is the type of command
-                for (int i = 1; i < first.length; i++) {
-                    description += first[i];
-                    if (i != first.length - 1) {
-                        description += " ";
-                    }
-                }
-
-                for (int i = 1; i < second.length; i++) {
-                    if (i == 1 && (second[i].equals("by") || second[i].equals("at"))) {
-                        // handle the case where user formatted command wrongly (include a space after "/")
-                        continue;
-                    }
-                    if (Parser.isValidDate(second[i], DateTimeFormatter.ISO_LOCAL_DATE)) {
-                        deadline += LocalDate.parse(second[i], DateTimeFormatter.ISO_LOCAL_DATE)
-                                .format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-                    } else if (Parser.isValidTime(second[i], DateTimeFormatter.ISO_LOCAL_TIME)) {
-                        deadline += LocalTime.parse(second[i], DateTimeFormatter.ISO_LOCAL_TIME)
-                                .format(DateTimeFormatter.ofPattern("hh:mm a"));
-                    } else {
-                        deadline += second[i];
-                    }
-
-                    if (i != second.length - 1) {
-                        deadline += " ";
-                    }
-                }
+                String description = getDescription(first);
+                String deadline = getDeadline(second);
 
                 return new String[]{description, deadline};
             }
-        } else {
+        } else if (Parser.isTodo(type)) {
             String[] str = input.split(" ");
 
             if (str.length == 1) {
                 throw new IncompleteToDoException();
             } else {
-                String description = "";
-                for (int i = 1; i < str.length; i++) {
-                    description += str[i];
-                    if (i != str.length - 1) {
-                        description += " ";
-                    }
-                }
+                String description = getDescription(str);
                 return new String[]{description};
             }
+        } else {
+            throw new InvalidCommandException();
         }
+    }
+
+    /**
+     * Gets the deadline from an array of string.
+     *
+     * @param strings Array which deadline will be derived from.
+     * @return The deadline.
+     */
+    private static String getDeadline(String[] strings) {
+        String deadline = "";
+
+        for (int i = 1; i < strings.length; i++) {
+
+            if (i == 1 && (strings[i].equals("by") || strings[i].equals("at"))) {
+                // handle the case where user formatted command wrongly (include a space after "/")
+                continue;
+            }
+
+            if (Parser.isValidDate(strings[i], DateTimeFormatter.ISO_LOCAL_DATE)) {
+                deadline += LocalDate.parse(strings[i], DateTimeFormatter.ISO_LOCAL_DATE)
+                        .format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            } else if (Parser.isValidTime(strings[i], DateTimeFormatter.ISO_LOCAL_TIME)) {
+                deadline += LocalTime.parse(strings[i], DateTimeFormatter.ISO_LOCAL_TIME)
+                        .format(DateTimeFormatter.ofPattern("hh:mm a"));
+            } else {
+                deadline += strings[i];
+            }
+
+            if (i != strings.length - 1) {
+                deadline += " ";
+            }
+        }
+
+        return deadline;
+    }
+
+    /**
+     * Gets the description from an array of strings.
+     *
+     * @param strings Array which description would be derived from.
+     * @return The description.
+     */
+    private static String getDescription(String[] strings) {
+        String description = "";
+
+        for (int i = 1; i < strings.length; i++) {
+            description += strings[i];
+            if (i != strings.length - 1) {
+                description += " ";
+            }
+        }
+
+        return description;
     }
 
     /**
@@ -166,68 +245,145 @@ public class Parser {
      *
      * @param userInput Input which needs to be parsed.
      * @param ui Ui object from Duke class.
-     * @param tasks TaskList object from Duke class.
+     * @param taskList TaskList object from Duke class.
      * @return Command to execute.
      * @throws DukeException If incorrect values are passed for remove or done commands.
      */
-    public static Command parse(String userInput, Ui ui, TaskList tasks) throws DukeException {
-        if (userInput.equals("list")) {
+    public static Command parse(String userInput, Ui ui, TaskList taskList) throws DukeException {
+        if (Parser.isList(userInput)) {
             return new ListCommand();
         } else if (Parser.isDone(userInput)) {
-            String[] splited = userInput.split(" ");
-
-            if (splited.length < 2 || !splited[1].matches("\\d+")
-                    || Integer.valueOf(splited[1]) > tasks.getSize()) {
-                throw new DukeException("Please key in valid number to mark as done.");
-            } else {
-                int index = Integer.valueOf(splited[1]) - 1;
-                return new DoneCommand(index);
-            }
+            return parseDoneCommand(userInput, taskList);
         } else if (Parser.isRemove(userInput)) {
-            String[] str = userInput.split(" ");
-
-            if (str.length < 2 || !str[1].matches("\\d+") || Integer.valueOf(str[1]) > tasks.getSize()) {
-                throw new DukeException("Please key in valid number to remove.");
-            } else {
-                return new RemoveCommand(Integer.valueOf(str[1]) - 1);
-            }
-        } else if (userInput.equals("bye")) {
+            return parseRemoveCommand(userInput, taskList);
+        } else if (Parser.isBye(userInput)) {
             return new ExitCommand();
         } else if (Parser.isFind(userInput)) {
-            String[] splitInput = userInput.split(" ");
-
-            if (splitInput.length == 1) {
-                throw new IncompleteFindException();
-            }
-
-            String keyword = splitInput[1];
-
-            return new FindCommand(keyword);
+            return parseFindCommand(userInput);
+        } else if (Parser.isTodo(userInput)) {
+            return parseToDoCommand(userInput);
+        } else if (Parser.isDeadline(userInput)) {
+            return parseDeadlineCommand(userInput);
+        } else if (Parser.isEvent(userInput)) {
+            return parseEventCommand(userInput);
         } else {
-            String[] splited = userInput.split(" ");
+            throw new InvalidCommandException();
+        }
+    }
 
-            if (splited[0].equals("todo") || splited[0].equals("deadline") || splited[0].equals("event")) {
-                String[] str = Parser.splitInput(userInput, splited[0]);
+    /**
+     * Parses the command string into an AddCommand which adds an
+     * Event object.
+     *
+     * @param userInput Command which user entered.
+     * @return An AddCommand which adds the new Event object.
+     * @throws DukeException If insufficient values are passed in.
+     */
+    private static AddCommand parseEventCommand(String userInput) throws DukeException {
+        String[] separated = userInput.split(" ");
+        String[] str = Parser.splitInput(userInput, separated[0]);
 
-                if (splited[0].equals("todo")) {
-                    assert str.length == 1;
+        assert str.length == 2;
 
-                    ToDo add = new ToDo(str[0]);
-                    return new AddCommand(add);
-                } else if (splited[0].equals("deadline")) {
-                    assert str.length == 2;
+        Event add = new Event(str[0], str[1]);
+        return new AddCommand(add);
+    }
 
-                    Deadline add = new Deadline(str[0], str[1]);
-                    return new AddCommand(add);
-                } else {
-                    assert str.length == 2;
+    /**
+     * Parses the command string into an AddCommand which adds an
+     * deadline object.
+     *
+     * @param userInput Command which user entered.
+     * @return An AddCommand which adds the new Deadline object.
+     * @throws DukeException If insufficient values are passed in.
+     */
+    private static AddCommand parseDeadlineCommand(String userInput) throws DukeException {
+        String[] separated = userInput.split(" ");
+        String[] str = Parser.splitInput(userInput, separated[0]);
 
-                    Event add = new Event(str[0], str[1]);
-                    return new AddCommand(add);
-                }
-            } else {
-                throw new InvalidCommandException();
-            }
+        assert str.length == 2;
+
+        Deadline add = new Deadline(str[0], str[1]);
+        return new AddCommand(add);
+    }
+
+    /**
+     * Parses the command string into an AddCommand which adds an
+     * Todo object.
+     *
+     * @param userInput Command which user entered.
+     * @return An AddCommand which adds the new Todo object.
+     * @throws DukeException If insufficient values are passed in.
+     */
+    private static AddCommand parseToDoCommand(String userInput) throws DukeException {
+        String[] separated = userInput.split(" ");
+        String[] str = Parser.splitInput(userInput, separated[0]);
+
+        assert str.length == 1;
+
+        ToDo add = new ToDo(str[0]);
+        return new AddCommand(add);
+    }
+
+    /**
+     * Parses the command string into a FindCommand.
+     *
+     * @param userInput Command which user entered.
+     * @return A FindCommand with a keyword to find.
+     * @throws IncompleteFindException If insufficient values are passed in.
+     */
+    private static FindCommand parseFindCommand(String userInput) throws IncompleteFindException {
+        String[] separated = userInput.split(" ");
+
+        if (separated.length == 1) {
+            throw new IncompleteFindException();
+        }
+
+        String keyword = separated[1];
+
+        return new FindCommand(keyword);
+    }
+
+    /**
+     * Parses the command string into a RemoveCommand.
+     *
+     * @param userInput Command which user entered.
+     * @param taskList taskList which RemoveCommand remove from.
+     * @return A RemoveCommand with index to remove.
+     * @throws DukeException If insufficient values are passed in.
+     */
+    private static RemoveCommand parseRemoveCommand(
+            String userInput, TaskList taskList) throws DukeException {
+
+        String[] separated = userInput.split(" ");
+
+        if (separated.length < 2 || !separated[1].matches("\\d+")
+                || Integer.valueOf(separated[1]) > taskList.getSize()) {
+            throw new DukeException("Please key in valid number to remove.");
+        } else {
+            return new RemoveCommand(Integer.valueOf(separated[1]) - 1);
+        }
+    }
+
+    /**
+     * Parses the command string into a DoneCommand.
+     *
+     * @param userInput Command which user entered.
+     * @param taskList taskList which DoneCommand marks as done from.
+     * @return A DoneCommand with index to mark as done.
+     * @throws DukeException If insufficient values are passed in.
+     */
+    private static DoneCommand parseDoneCommand(
+            String userInput, TaskList taskList) throws DukeException {
+
+        String[] separated = userInput.split(" ");
+
+        if (separated.length < 2 || !separated[1].matches("\\d+")
+                || Integer.valueOf(separated[1]) > taskList.getSize()) {
+            throw new DukeException("Please key in valid number to mark as done.");
+        } else {
+            int index = Integer.valueOf(separated[1]) - 1;
+            return new DoneCommand(index);
         }
     }
 }

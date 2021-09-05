@@ -32,22 +32,30 @@ public class DoneCommand extends Command {
     /**
      * Executes the DoneCommand.
      *
-     * @param tasks TaskList to mark Task at index indexToMarkAsDone as Done.
+     * @param taskList TaskList to mark Task at index indexToMarkAsDone as Done.
      * @param ui Ui to print to users of Duke.
      * @param storage Storage to save and load TaskList for Duke.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.markAsDone(this.indexToMarkAsDone);
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
+        taskList.markAsDone(this.indexToMarkAsDone);
         String message = "Nice! I've marked this task as done:\n" + "  "
-                + tasks.taskToString(this.indexToMarkAsDone);
+                + taskList.taskToString(this.indexToMarkAsDone);
         ui.print(message);
     }
 
+    /**
+     * Gets the String representation of the things printed in the
+     * execute method as well as execute the marking of the task as done.
+     *
+     * @param taskList TaskList to mark Task at index indexToMarkAsDone as Done.
+     * @param ui Ui to get the String representation of the text printed.
+     * @param storage Storage to save and load TaskList for Duke.
+     */
     @Override
-    public String getExecutedString(TaskList tasks, Ui ui, Storage storage) {
-        tasks.markAsDone(this.indexToMarkAsDone);
+    public String getExecutedString(TaskList taskList, Ui ui, Storage storage) {
+        taskList.markAsDone(this.indexToMarkAsDone);
         return "Nice! I've marked this task as done:\n" + "  "
-                + tasks.taskToString(this.indexToMarkAsDone);
+                + taskList.taskToString(this.indexToMarkAsDone);
     }
 }

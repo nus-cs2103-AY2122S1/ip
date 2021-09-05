@@ -22,19 +22,27 @@ public class ExitCommand extends Command {
     /**
      * Executes the Exit Command.
      *
-     * @param tasks TaskList of Tasks.
+     * @param taskList TaskList of Tasks.
      * @param ui Ui to print to users of Duke.
      * @param storage Storage to save and load TaskList of Duke.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        storage.saveFile(tasks);
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
+        storage.saveFile(taskList);
         ui.exit();
     }
 
+    /**
+     * Gets the String representation of the things printed in the
+     * execute method as well as execute exiting of the gui.
+     *
+     * @param taskList TaskList of Tasks.
+     * @param ui Ui to get String representation of the text printed.
+     * @param storage Storage to save and load TaskList of Duke.
+     */
     @Override
-    public String getExecutedString(TaskList tasks, Ui ui, Storage storage) {
-        storage.saveFile(tasks);
+    public String getExecutedString(TaskList taskList, Ui ui, Storage storage) {
+        storage.saveFile(taskList);
         return ui.getExitString();
     }
 }

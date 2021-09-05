@@ -33,19 +33,28 @@ public class AddCommand extends Command {
     /**
      * Executes the AddCommand.
      *
-     * @param tasks TaskList object to add toAdd to.
+     * @param taskList TaskList object to add toAdd to.
      * @param ui Ui Object to print to user.
      * @param storage Storage object which saves and loads the taskList.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.add(this.toAdd);
-        ui.printAdd(this.toAdd, tasks.getSize());
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
+        taskList.add(this.toAdd);
+        ui.printAdd(this.toAdd, taskList.getSize());
     }
 
+    /**
+     * Gets the String representation of the things printed in the
+     * execute method as well as execute the adding of the task.
+     *
+     * @param taskList TaskList object to add toAdd to.
+     * @param ui Ui Object to get the String representation from.
+     * @param storage Storage object which saves and loads the taskList.
+     * @return String representation of the things printed in the execute method.
+     */
     @Override
-    public String getExecutedString(TaskList tasks, Ui ui, Storage storage) {
-        tasks.add(this.toAdd);
-        return ui.getPrintAddString(this.toAdd, tasks.getSize());
+    public String getExecutedString(TaskList taskList, Ui ui, Storage storage) {
+        taskList.add(this.toAdd);
+        return ui.getPrintAddString(this.toAdd, taskList.getSize());
     }
 }

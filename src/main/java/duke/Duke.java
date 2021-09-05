@@ -10,7 +10,7 @@ import duke.exception.DukeException;
 public class Duke {
     private final Ui ui;
     private final Storage storage;
-    private final TaskList tasks;
+    private final TaskList taskList;
 
     /**
      * Constructor for Duke. Initialises Ui, Storage and TaskList objects.
@@ -18,7 +18,7 @@ public class Duke {
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage();
-        this.tasks = new TaskList(storage.initialise());
+        this.taskList = new TaskList(storage.initialise());
     }
 
     /**
@@ -30,8 +30,8 @@ public class Duke {
         while (!isExit) {
             try {
                 String userInput = ui.readInput();
-                Command c = Parser.parse(userInput, ui, tasks);
-                c.execute(tasks, ui, storage);
+                Command c = Parser.parse(userInput, ui, taskList);
+                c.execute(taskList, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
@@ -48,8 +48,8 @@ public class Duke {
      */
     public String processInput(String input) {
         try {
-            Command c = Parser.parse(input, ui, tasks);
-            return c.getExecutedString(tasks, ui, storage);
+            Command c = Parser.parse(input, ui, taskList);
+            return c.getExecutedString(taskList, ui, storage);
         } catch (DukeException e) {
             return e.getMessage();
         }

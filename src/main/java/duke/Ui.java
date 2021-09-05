@@ -33,24 +33,30 @@ public class Ui {
     /**
      * Prints out TaskList in a form of a list for users to see.
      *
-     * @param tasks TaskList to be printed.
+     * @param taskList TaskList to be printed.
      */
-    public void print(TaskList tasks) {
+    public void print(TaskList taskList) {
         System.out.println(LINE);
         System.out.println("Here are the tasks in your list:");
 
-        for (int i = 0; i < tasks.getSize(); i++) {
-            System.out.println((i + 1) + "." + tasks.taskToString(i));
+        for (int i = 0; i < taskList.getSize(); i++) {
+            System.out.println((i + 1) + "." + taskList.taskToString(i));
 
         }
         System.out.println(LINE);
     }
 
-    public String getPrintString(TaskList tasks) {
+    /**
+     * Gets String representation of what is printed out when print is called.
+     *
+     * @param taskList TaskList to be printed.
+     * @return String representation of what gets printed out of print method.
+     */
+    public String getPrintString(TaskList taskList) {
         String output = "Here are the tasks in your list:";
 
-        for (int i = 0; i < tasks.getSize(); i++) {
-            output += "\n" + (i + 1) + "." + tasks.taskToString(i);
+        for (int i = 0; i < taskList.getSize(); i++) {
+            output += "\n" + (i + 1) + "." + taskList.taskToString(i);
         }
         return output;
     }
@@ -69,6 +75,13 @@ public class Ui {
         print(message);
     }
 
+    /**
+     * Gets String representation of what is printed when printAdd is called.
+     *
+     * @param toAdd Task to be added.
+     * @param size Size of TaskList.
+     * @return String representation of what is printed from printAdd.
+     */
     public String getPrintAddString(Task toAdd, int size) {
         return "Got it. I've added this task:\n" + "  " + toAdd
                 + "\nNow you have " + size + " tasks in the list.";
@@ -126,6 +139,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Gets String representation of what is printed out when printKeywordTasks is called.
+     *
+     * @param tasksWithKeyword TaskList of tasks with given keyword.
+     * @param keyword Keyword which tasks in tasksWithKeyword contains.
+     * @return String representation of what is printed out from printKeywordTasks.
+     */
     public String getPrintKeywordTasksString(TaskList tasksWithKeyword, String keyword) {
         if (tasksWithKeyword.getSize() > 0) {
             String output = "Here are the matching tasks in your list:";
@@ -147,6 +167,11 @@ public class Ui {
         sc.close();
     }
 
+    /**
+     * Gets String representation of what gets printed out when exit is called.
+     *
+     * @return String representation of what gets printed out when exit is called.
+     */
     public String getExitString() {
         return "Bye. Hope to see you again soon!";
     }
