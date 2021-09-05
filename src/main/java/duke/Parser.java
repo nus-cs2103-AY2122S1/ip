@@ -48,6 +48,7 @@ public class Parser {
 
     /**
      * Makes sense of the user input.
+     * @return A response given an input from the user.
      */
     public String parse(String input) {
         do {
@@ -89,6 +90,7 @@ public class Parser {
      *
      * @param arr Array of strings from the user input.
      * @throws InvalidCommandException If the following input is not valid.
+     * @return A response when the user types done.
      */
     public String parseDone(String[] arr) throws InvalidCommandException {
         assert arr.length == 2 : "Please enter [done] [number]";
@@ -115,6 +117,7 @@ public class Parser {
      * @param arr Array of strings from the user input.
      * @throws InvalidCommandException If the following input is not valid.
      * @throws InvalidValueException If the following input is not a valid number.
+     * @return A response when the user types delete.
      */
     public String parseDelete(String[] arr) throws InvalidCommandException,
             InvalidValueException {
@@ -141,6 +144,7 @@ public class Parser {
      *
      * @param arr Array of strings from the user input.
      * @throws EmptyDescriptionException If the next input is missing.
+     * @return A response when the user types todo.
      */
     public String parseTodo(String[] arr) throws EmptyDescriptionException {
         if (arr.length < 2) {
@@ -155,6 +159,7 @@ public class Parser {
      *
      * @param arr Array of strings from the user input.
      * @throws EmptyDescriptionException If the next input is missing.
+     * @return A response when the user types deadline.
      */
     public String parseDeadline(String[] arr) throws EmptyDescriptionException {
         if (arr.length < 2) {
@@ -169,6 +174,7 @@ public class Parser {
      *
      * @param arr Array of strings from the user input.
      * @throws EmptyDescriptionException If the next input is missing.
+     * @return A response when the user types event.
      */
     public String parseEvent(String[] arr) throws EmptyDescriptionException {
         String str = "";
@@ -181,6 +187,7 @@ public class Parser {
 
     /**
      * Deals with the user input when the user types "list".
+     * @return A response when the user types list.
      */
     public String parseList() {
         return ui.displayList(taskList);
@@ -191,6 +198,7 @@ public class Parser {
      *
      * @param arr Array of strings from the user input.
      * @throws InvalidCommandException If the following input is not valid.
+     * @return A response when the user types find.
      */
     public String parseFind(String[] arr) throws InvalidCommandException {
         if (arr.length == 1) {
