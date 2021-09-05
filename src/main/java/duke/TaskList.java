@@ -178,6 +178,7 @@ public class TaskList {
             for(int j = 0; j < arr.length; j++) {
                 if (arr[j].equals(search)) {
                     searchList.add(ls.get(i));
+                    break;
                 }
             }
         }
@@ -185,9 +186,9 @@ public class TaskList {
             return "No matching tasks!";
         } else {
             String str = "";
-            str += "Here are the matching tasks in your list: ";
+            str += "Here are the matching tasks in your list: \n";
             for (int i = 0; i < searchList.size(); i++) {
-                str += (i + 1) + "." + searchList.get(i).toString();
+                str += (i + 1) + "." + searchList.get(i).toString() + "\n";
             }
             return str;
         }

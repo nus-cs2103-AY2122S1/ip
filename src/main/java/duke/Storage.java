@@ -36,11 +36,22 @@ public class Storage {
                 String data = myScanner.nextLine();
                 arr = data.split(" ");
                 String task = arr[0];
-                String description = arr[1] + " ";
+                String description = "";
+                int counter = 0;
+                for(int i = 1; i < arr.length; i++) {
+                    if (!(arr[i].charAt(0) == '(')) {
+                        description += arr[i] + " ";
+                    }
+                    else {
+                        counter = i;
+                        break;
+                    }
+                }
+                //String description = arr[1] + " ";
                 if (task.charAt(2) == 'D') {
                     String deadline = "";
-                    for (int i = 2; i < arr.length; i++) {
-                        if (i == 2) {
+                    for (int i = counter; i < arr.length; i++) {
+                        if (i == counter) {
                             deadline += arr[i].substring(1);
                         } else if (i == arr.length - 1) {
                             deadline += " " + arr[i].substring(0, arr[i].length() - 1);
@@ -55,8 +66,8 @@ public class Storage {
                     }
                 } else if (task.charAt(2) == 'E') {
                     String deadline = "";
-                    for (int i = 2; i < arr.length; i++) {
-                        if (i == 2) {
+                    for (int i = counter; i < arr.length; i++) {
+                        if (i == counter) {
                             deadline += arr[i].substring(1);
                         } else if (i == arr.length - 1) {
                             deadline += " " + arr[i].substring(0, arr[i].length() - 1);

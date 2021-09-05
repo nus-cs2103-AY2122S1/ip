@@ -1,3 +1,4 @@
-1.D|Done a (by: )
-2.E|Done b (at: )
-3.E|NotDone ;ladf (by: 10 Oct 2020)
+1.E|NotDone swim (at: )
+2.E|NotDone swim swim (at: )
+3.T|NotDone bring back 
+4.T|NotDone swim swim swim 
