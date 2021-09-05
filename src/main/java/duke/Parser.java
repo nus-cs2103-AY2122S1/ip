@@ -113,6 +113,7 @@ public class Parser {
                 String description = "";
                 String deadline = "";
 
+                // starts from 1 as 0 is the type of command
                 for (int i = 1; i < first.length; i++) {
                     description += first[i];
                     if (i != first.length - 1) {
@@ -209,12 +210,18 @@ public class Parser {
                 String[] str = Parser.splitInput(userInput, splited[0]);
 
                 if (splited[0].equals("todo")) {
+                    assert str.length == 1;
+
                     ToDo add = new ToDo(str[0]);
                     return new AddCommand(add);
                 } else if (splited[0].equals("deadline")) {
+                    assert str.length == 2;
+
                     Deadline add = new Deadline(str[0], str[1]);
                     return new AddCommand(add);
                 } else {
+                    assert str.length == 2;
+
                     Event add = new Event(str[0], str[1]);
                     return new AddCommand(add);
                 }
