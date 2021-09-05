@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.io.IOException;
 import java.util.Collections;
 
@@ -10,7 +9,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
@@ -52,14 +50,28 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-        this.setBackground(new Background(new BackgroundFill(Paint.valueOf("#d4d4d4"),null, null)));
+        this.setBackground(new Background(new BackgroundFill(Paint.valueOf("#d4d4d4"), null, null)));
         dialog.setMinHeight(Region.USE_PREF_SIZE);
     }
 
+    /**
+     * Obtains the dialog box for the user.
+     *
+     * @param text The input text to be used for the dialog box.
+     * @param img The image to be used for the user image.
+     * @return User Dialog Box to be rendered on the main screen.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Obtains the dialog box for the duke.
+     *
+     * @param text The input text to be used for the dialog box.
+     * @param img The image to be used for the duke image.
+     * @return Duke Dialog Box to be rendered on the main screen.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

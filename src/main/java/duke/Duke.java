@@ -51,6 +51,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Takes in user input and returns a response from duke based on the command of user input.
+     *
+     * @param input The user input that will be converted to a command.
+     * @return The correct response based on the user input.
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input.split(" ", 2));

@@ -51,9 +51,9 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskArr = new ArrayList<>();
-        File file = new File(".\\src\\main\\data");
+        File file = new File(filePath);
         if (!file.isDirectory()) {
-            Path path = Paths.get(".\\src\\main\\data");
+            Path path = Paths.get(filePath);
             try {
                 Files.createDirectories(path);
             } catch (IOException e) {
