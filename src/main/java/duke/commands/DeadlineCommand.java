@@ -35,7 +35,8 @@ public class DeadlineCommand extends Command {
             return "Please enter the deadline of the task after /by";
         }
 
-        String description, dateString;
+        String description;
+        String dateString;
         String[] tags = new String[0];
         if (args.contains("/t")) {
             ArrayList<String> parts = Parser.parseCommandArguments(args, "by", "t");

@@ -1,8 +1,8 @@
 package duke;
 
-import duke.commands.*;
-
 import java.util.ArrayList;
+
+import duke.commands.*;
 
 /**
  * Encapsulates a parser class which parses user input
@@ -39,6 +39,14 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Parses the command input by the user and splits it based on the given splitters
+     * into distinct arguments.
+     *
+     * @param command The command input by the user.
+     * @param splitters The String array of given splitters.
+     * @return The ArrayList of arguments.
+     */
     public static ArrayList<String> parseCommandArguments(String command, String ... splitters) {
         ArrayList<String> result = new ArrayList<>();
         int firstSplitterIndex = command.indexOf("/");
@@ -62,6 +70,14 @@ public class Parser {
         return result;
     }
 
+    /**
+     * Parses the Strings that are read from the output file and splits it based on the given splitters
+     * into distinct arguments.
+     *
+     * @param outputString The line read from the output file.
+     * @param splitters The given splitters.
+     * @return The ArrayList of arguments.
+     */
     public static ArrayList<String> parseFileOutputArguments(String outputString, String ... splitters) {
         ArrayList<String> result = new ArrayList<>();
         int firstSplitterIndex = outputString.indexOf("(");

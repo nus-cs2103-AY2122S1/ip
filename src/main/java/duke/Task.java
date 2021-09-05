@@ -50,7 +50,7 @@ public abstract class Task {
             return "";
         }
         StringBuilder result = new StringBuilder(" (Tags:");
-        for(String t : tags) {
+        for (String t : tags) {
             result.append(" ").append(t);
         }
         result.append(")");

@@ -34,7 +34,8 @@ public class EventCommand extends Command {
         if (!args.contains("/at")) {
             return "Please enter the start date of the task after /at";
         }
-        String description, dateString;
+        String description;
+        String dateString;
         String[] tags = new String[0];
         if (args.contains("/t")) {
             ArrayList<String> parts = Parser.parseCommandArguments(args, "at", "t");

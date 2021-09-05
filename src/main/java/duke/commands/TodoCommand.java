@@ -1,13 +1,13 @@
 package duke.commands;
 
+import java.util.ArrayList;
+
 import duke.DateTimeHandler;
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Todo;
 import duke.Ui;
-
-import java.util.ArrayList;
 
 /**
  * Encapsulates the todo command, used to create a todo task
