@@ -30,6 +30,7 @@ public class DeleteCommand extends Command {
      *
      * @param tasks List of existing tasks
      * @param storage Storage class handling the persistence of the tasks
+     * @return CommandResult of the encapsulating the effects of the command after it completes
      * @throws TaskNotFoundException if task does not exist
      * @throws InvalidInputException if input cannot be parsed into a number
      * @throws SaveFileException if there are issues with the save file

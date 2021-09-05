@@ -21,6 +21,14 @@ public class FindCommand extends Command {
         this.searchTerms = searchTerms;
     }
 
+    /**
+     * Finds the tasks based on the search terms provided by user
+     *
+     * @param tasks List of existing tasks
+     * @param storage Storage class handling the persistence of the tasks
+     * @return CommandResult of the encapsulating the effects of the command after it completes
+     * @throws NoActionException Thrown if no action is provided
+     */
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) throws NoActionException {
         assert tasks != null;
@@ -32,6 +40,10 @@ public class FindCommand extends Command {
         for (int i = 0; i < tasks.size(); i++) {
             Task currTask = tasks.get(i);
             if (currTask.contains(searchTerms)) {
+                matchList.add(currTask);
+                continue;
+            }
+            if (currTask.getTag().contains(searchTerms)) {
                 matchList.add(currTask);
             }
         }

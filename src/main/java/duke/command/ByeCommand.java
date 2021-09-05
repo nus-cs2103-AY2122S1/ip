@@ -21,6 +21,7 @@ public class ByeCommand extends Command {
      *
      * @param tasks List of existing tasks
      * @param storage Storage class handling the persistence of the tasks
+     * @return CommandResult of the encapsulating the effects of the command after it completes
      */
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) {

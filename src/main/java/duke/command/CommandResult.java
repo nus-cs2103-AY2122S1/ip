@@ -4,9 +4,9 @@ package duke.command;
  * CommandResult class abstracts behavior of the command after completing
  */
 public class CommandResult {
-    private String feedbackToUser;
-    private boolean isReply;
-    private boolean isExit;
+    private final String feedbackToUser;
+    private final boolean isReply;
+    private final boolean isExit;
 
     /**
      * Constructor of the CommandResult class

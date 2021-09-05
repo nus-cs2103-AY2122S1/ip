@@ -8,6 +8,7 @@ public abstract class Task {
     private final String action;
     /** Whether a task is completed */
     private boolean isCompleted;
+    private String tag;
 
     /**
      * Constructor of the task. Can only be called by subclasses
@@ -63,6 +64,14 @@ public abstract class Task {
         return this.action.contains(searchTerms);
     }
 
+    public String getTag() {
+        return this.tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
     /**
      * Returns a string representing the task
      *
@@ -70,6 +79,11 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", isCompleted ? "X" : " ", this.action);
+        System.out.println(this.tag);
+        return String.format("%s[%s] %s",
+                this.tag == null ? "" : "(#" + this.tag + ")",
+                isCompleted ? "X" : " ",
+                this.action
+        );
     }
 }

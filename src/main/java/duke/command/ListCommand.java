@@ -17,6 +17,7 @@ public class ListCommand extends Command {
      *
      * @param tasks List of existing tasks
      * @param storage Storage class handling the persistence of the tasks
+     * @return CommandResult of the encapsulating the effects of the command after it completes
      */
     public CommandResult execute(TaskList tasks, Storage storage) {
         assert tasks != null;

@@ -26,6 +26,7 @@ public abstract class Command {
      *
      * @param tasks List of existing tasks
      * @param storage Storage class handling the persistence of the tasks
+     * @return CommandResult of the encapsulating the effects of the command after it completes
      * @throws DukeException if there is a Duke related exception
      */
     public abstract CommandResult execute(TaskList tasks, Storage storage) throws DukeException;

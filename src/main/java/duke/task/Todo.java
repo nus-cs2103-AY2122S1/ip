@@ -23,7 +23,7 @@ public class Todo extends Task {
      */
     @Override
     public String toSaveFormat() {
-        return String.format("%s||%s||%s", symbol, super.isComplete(), super.getAction());
+        return String.format("%s||%s||%s||%s", symbol, super.getTag(), super.isComplete(), super.getAction());
     }
 
     /**
