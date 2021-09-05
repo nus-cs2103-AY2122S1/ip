@@ -66,7 +66,6 @@ public class Pilcrow {
             Storage storage, TaskList taskList, Parser parser) {
         String text;
         switch (commandWord) {
-        // To fix indentation
         case "todo":
             // Fallthrough
         case "deadline":
