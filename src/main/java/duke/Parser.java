@@ -88,23 +88,10 @@ public class Parser {
      * @throws InvalidCommandException If the following input is not valid.
      * @return A response when the user types done.
      */
-    public String parseDone(String[] arr) throws InvalidCommandException {
+    public String parseDone(String[] arr) throws InvalidCommandException,
+            InvalidValueException {
         assert arr.length == 2 : "Please enter [done] [number]";
-        if (arr.length == 1) {
-            throw new InvalidCommandException("Please specify a number");
-        } else if (!isNumeric(arr[1])) {
-            throw new InvalidCommandException("Please enter a number");
-        } else if (taskList.getSize() == 0) {
-            throw new InvalidCommandException("You have not added any task!");
-        } else if ((Integer.parseInt(arr[1]) > taskList.getSize()
-                || Integer.parseInt(arr[1]) <= 0)) {
-            throw new InvalidValueException("Enter a valid number!");
-        } else {
-            taskList.markAsDone(parseInt(arr[1]) - 1);
-            String str = ui.printDone() + "\n";
-            str += ui.printCurrentTask(taskList, parseInt(arr[1]) - 1) + "\n";
-            return str;
-        }
+        return check(arr);
     }
 
     /**
@@ -118,21 +105,7 @@ public class Parser {
     public String parseDelete(String[] arr) throws InvalidCommandException,
             InvalidValueException {
         assert arr.length == 2 : "Please enter [delete] [number]";
-        if (arr.length == 1) {
-            throw new InvalidCommandException("Please specify a number");
-        } else if (!isNumeric(arr[1])) {
-            throw new InvalidCommandException("Please enter a number");
-        } else if (taskList.getSize() == 0) {
-            throw new InvalidCommandException("You have not added any task!");
-        } else if ((Integer.parseInt(arr[1]) > taskList.getSize()
-                || Integer.parseInt(arr[1]) <= 0)) {
-            throw new InvalidValueException("Enter a valid number!");
-        } else {
-            String str = ui.printRemove() + "\n";
-            str += ui.printCurrentTask(taskList, parseInt(arr[1]) - 1) + "\n";
-            taskList.removeTask(parseInt(arr[1]) - 1);
-            return str;
-        }
+        return check(arr);
     }
 
     /**
@@ -173,7 +146,6 @@ public class Parser {
      * @return A response when the user types event.
      */
     public String parseEvent(String[] arr) throws EmptyDescriptionException {
-        String str = "";
         if (arr.length < 2) {
             throw new EmptyDescriptionException("Missing description / date");
         }
@@ -205,6 +177,36 @@ public class Parser {
             throw new InvalidCommandException("Please enter a single keyword!");
         } else {
             return taskList.findTask(arr[1]);
+        }
+    }
+
+    /**
+     * Checks for invalid inputs for parseDone and parseDelete.
+     * @param arr An input from the user.
+     * @return An appropriate response for done or delete.
+     */
+    public String check(String[] arr) {
+        if (arr.length == 1) {
+            throw new InvalidCommandException("Please specify a number");
+        } else if (!isNumeric(arr[1])) {
+            throw new InvalidCommandException("Please enter a number");
+        } else if (taskList.getSize() == 0) {
+            throw new InvalidCommandException("You have not added any task!");
+        } else if ((Integer.parseInt(arr[1]) > taskList.getSize()
+                || Integer.parseInt(arr[1]) <= 0)) {
+            throw new InvalidValueException("Enter a valid number!");
+        } else {
+            if (arr[0].equals("done")) {
+                taskList.markAsDone(parseInt(arr[1]) - 1);
+                String str = ui.printDone() + "\n";
+                str += ui.printCurrentTask(taskList, parseInt(arr[1]) - 1) + "\n";
+                return str;
+            } else {
+                String str = ui.printRemove() + "\n";
+                str += ui.printCurrentTask(taskList, parseInt(arr[1]) - 1) + "\n";
+                taskList.removeTask(parseInt(arr[1]) - 1);
+                return str;
+            }
         }
     }
 }
