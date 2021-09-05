@@ -24,7 +24,7 @@ public class Command {
      *
      * @return A boolean indicating if the arguments are in a valid format.
      */
-    public boolean isArgumentValid() {
+    public boolean isValidArgument() {
         return true;
     }
 

@@ -8,11 +8,7 @@ public class CommandTest {
 
     @Test
     public void test01() {
-        assertEquals(testCommand.isArgumentValid(), true);
+        assertEquals(testCommand.isValidArgument(), true);
     }
 
-    @Test
-    public void test02() {
-        assertEquals(testCommand.isExit(), false);
-    }
 }

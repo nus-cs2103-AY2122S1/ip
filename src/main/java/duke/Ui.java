@@ -42,8 +42,10 @@ public class Ui {
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
+     * @param isDobie Boolean toggling the dialog portraits
+     * @return A label with the specified text that has word wrap enabled.
      */
     public void addDialog(String text, boolean isDobie) {
         Label textToAdd = new Label(text);

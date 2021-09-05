@@ -35,7 +35,7 @@ public class CommandEvent extends Command {
      * @return A boolean indicating if the arguments are in a valid format.
      */
     @Override
-    public boolean isArgumentValid() {
+    public boolean isValidArgument() {
         try {
 
             if (arguments.size() >= 4 && arguments.get(1).contains("/at")) {
@@ -62,7 +62,7 @@ public class CommandEvent extends Command {
 
     @Override
     public void execute(TaskList tl, Storage st, Ui ui) {
-        if (isArgumentValid()) {
+        if (isValidArgument()) {
             Event newEvent;
             newEvent = new Event(arguments.get(0), arguments.get(2), arguments.get(3));
             tl.addTask(newEvent);

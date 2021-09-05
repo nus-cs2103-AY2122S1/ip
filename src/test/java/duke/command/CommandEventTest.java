@@ -22,7 +22,7 @@ public class CommandEventTest {
         args.add(word03);
         args.add(word04);
         Command testCommandEvent = new CommandEvent(args);
-        assertEquals(testCommandEvent.isArgumentValid(), true);
+        assertEquals(testCommandEvent.isValidArgument(), true);
         args.clear();
     }
 
@@ -33,7 +33,7 @@ public class CommandEventTest {
         args.add(word02);
         args.add(word03);
         Command testCommandEvent = new CommandEvent(args);
-        assertEquals(testCommandEvent.isArgumentValid(), false);
+        assertEquals(testCommandEvent.isValidArgument(), false);
         args.clear();
     }
 
@@ -41,7 +41,7 @@ public class CommandEventTest {
     public void test03() {
         args.add(word01);
         Command testCommandEvent = new CommandEvent(args);
-        assertEquals(testCommandEvent.isArgumentValid(), false);
+        assertEquals(testCommandEvent.isValidArgument(), false);
         args.clear();
     }
 
@@ -50,7 +50,7 @@ public class CommandEventTest {
         args.add(word01);
         args.add(word02);
         Command testCommandEvent = new CommandEvent(args);
-        assertEquals(testCommandEvent.isArgumentValid(), false);
+        assertEquals(testCommandEvent.isValidArgument(), false);
         args.clear();
     }
 
@@ -60,7 +60,7 @@ public class CommandEventTest {
         args.add(word02);
         args.add(word05);
         Command testCommandEvent = new CommandEvent(args);
-        assertEquals(testCommandEvent.isArgumentValid(), false);
+        assertEquals(testCommandEvent.isValidArgument(), false);
         args.clear();
     }
 
@@ -71,7 +71,7 @@ public class CommandEventTest {
         args.add(word03);
         args.add(word05);
         Command testCommandEvent = new CommandEvent(args);
-        assertEquals(testCommandEvent.isArgumentValid(), false);
+        assertEquals(testCommandEvent.isValidArgument(), false);
         args.clear();
     }
 
@@ -82,7 +82,7 @@ public class CommandEventTest {
         args.add(word03);
         args.add(word06);
         Command testCommandEvent = new CommandEvent(args);
-        assertEquals(testCommandEvent.isArgumentValid(), false);
+        assertEquals(testCommandEvent.isValidArgument(), false);
         args.clear();
     }
 

@@ -35,7 +35,7 @@ public class CommandDeadline extends Command {
      * @return A boolean indicating if the arguments are in a valid format.
      */
     @Override
-    public boolean isArgumentValid() {
+    public boolean isValidArgument() {
         try {
 
             if (arguments.size() >= 3 && arguments.get(1).contains("/by")) {
@@ -56,7 +56,7 @@ public class CommandDeadline extends Command {
 
     @Override
     public void execute(TaskList tl, Storage st, Ui ui) {
-        if (isArgumentValid()) {
+        if (isValidArgument()) {
             Deadline newDeadline;
             if (arguments.size() >= 4) {
                 newDeadline = new Deadline(arguments.get(0), arguments.get(2), arguments.get(3));

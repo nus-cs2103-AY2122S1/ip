@@ -89,7 +89,7 @@ public class TaskList {
         ui.addDialog("Got it. I'll add this task: " + t.toString(), true);
         listOfTasks.add(t);
         ui.addDialog("Now you've got " + listOfTasks.size() + " tasks in your list.", true);
-        this.storage.updateSavefile(this);
+        this.storage.updateSaveFile(this);
     }
 
     /**
@@ -140,7 +140,7 @@ public class TaskList {
         } else {
             listOfTasks.remove(i);
         }
-        this.storage.updateSavefile(this);
+        this.storage.updateSaveFile(this);
     }
 
     /**
@@ -171,7 +171,7 @@ public class TaskList {
         } else {
             listOfTasks.get(i).markAsDone();
         }
-        this.storage.updateSavefile(this);
+        this.storage.updateSaveFile(this);
     }
 
     /**
@@ -241,7 +241,7 @@ public class TaskList {
      *
      * @param s The specified word.
      */
-    public void printAllTasksWith(String s) {
+    public void printAllTasksContaining(String s) {
         assert this.ui != null;
         ui.addDialog("Here are the tasks in your list with the word: " + s + ":", true);
         int counter = 1;

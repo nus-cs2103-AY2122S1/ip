@@ -32,7 +32,7 @@ public class CommandCheck extends Command {
      * @return A boolean indicating if the arguments are in a valid format.
      */
     @Override
-    public boolean isArgumentValid() {
+    public boolean isValidArgument() {
         try {
             if (arguments.size() == 1) {
                 DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -48,7 +48,7 @@ public class CommandCheck extends Command {
 
     @Override
     public void execute(TaskList tl, Storage st, Ui ui) {
-        if (isArgumentValid()) {
+        if (isValidArgument()) {
             tl.printAllTasksOnDate(arguments.get(0));
         } else {
             throw new DukeException("Invalid argument for Command: check");

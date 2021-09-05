@@ -13,8 +13,8 @@ public class Todo extends Task {
 
     @Override
     public String getReadableString() {
-        String status = this.isDone ? "1" : "0";
-        return "T | " + status + " | " + this.description + "\n";
+        String binaryStatus = this.isDone ? "1" : "0";
+        return "T | " + binaryStatus + " | " + this.description + "\n";
     }
 
     @Override

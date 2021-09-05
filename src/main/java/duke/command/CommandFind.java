@@ -32,7 +32,7 @@ public class CommandFind extends Command {
      * @return A boolean indicating if the arguments are in a valid format.
      */
     @Override
-    public boolean isArgumentValid() {
+    public boolean isValidArgument() {
         if (arguments.size() == 1) {
             Pattern pattern = Pattern.compile(ARG_FORMAT);
             Matcher matcher = pattern.matcher(arguments.get(0));
@@ -44,8 +44,8 @@ public class CommandFind extends Command {
 
     @Override
     public void execute(TaskList tl, Storage st, Ui ui) {
-        if (isArgumentValid()) {
-            tl.printAllTasksWith(arguments.get(0));
+        if (isValidArgument()) {
+            tl.printAllTasksContaining(arguments.get(0));
         } else {
             throw new DukeException("Invalid argument for Command: find");
         }

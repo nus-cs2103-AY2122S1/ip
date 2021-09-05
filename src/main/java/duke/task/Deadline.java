@@ -42,11 +42,11 @@ public class Deadline extends Task {
 
     @Override
     public String getReadableString() {
-        String status = this.isDone ? "1" : "0";
+        String binaryStatus = this.isDone ? "1" : "0";
         if (this.time.isEmpty()) {
-            return "D | " + status + " | " + this.description + " | " + this.date + "\n";
+            return "D | " + binaryStatus + " | " + this.description + " | " + this.date + "\n";
         } else {
-            return "D | " + status + " | " + this.description + " | " + this.date + " " + this.time + "\n";
+            return "D | " + binaryStatus + " | " + this.description + " | " + this.date + " " + this.time + "\n";
         }
 
     }

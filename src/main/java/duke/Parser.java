@@ -32,7 +32,7 @@ public class Parser {
      * If it does, return its index number in the TASK_TYPES array.
      * If it does not, return -1.
      *
-     * @param s  String to be checked.
+     * @param s String to be checked.
      * @return Integer representing corresponding task type.
      */
     public static int getTaskID(String s) {
@@ -47,7 +47,7 @@ public class Parser {
     /**
      * Takes the user input and returns a valid command if it has been typed.
      *
-     * @param userInput  String representing input typed in by user.
+     * @param userInput String representing input typed in by user.
      * @return A command responding to the user input.
      */
     public static Command parseCommand(String userInput) {

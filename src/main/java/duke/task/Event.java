@@ -51,8 +51,8 @@ public class Event extends Task {
 
     @Override
     public String getReadableString() {
-        String status = this.isDone ? "1" : "0";
-        return "E | " + status + " | " + this.description + " | " + this.date + " " + this.time + "\n";
+        String binaryStatus = this.isDone ? "1" : "0";
+        return "E | " + binaryStatus + " | " + this.description + " | " + this.date + " " + this.time + "\n";
     }
 
     @Override

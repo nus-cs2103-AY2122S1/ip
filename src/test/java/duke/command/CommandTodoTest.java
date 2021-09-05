@@ -13,7 +13,7 @@ public class CommandTodoTest {
     public void test01() {
         args.add(correctFormat);
         Command testCommandTodo = new CommandTodo(args);
-        assertEquals(testCommandTodo.isArgumentValid(), true);
+        assertEquals(testCommandTodo.isValidArgument(), true);
         args.clear();
     }
 
@@ -21,7 +21,7 @@ public class CommandTodoTest {
     public void test02() {
         args.add(wrongFormat);
         Command testCommandTodo = new CommandTodo(args);
-        assertEquals(testCommandTodo.isArgumentValid(), false);
+        assertEquals(testCommandTodo.isValidArgument(), false);
         args.clear();
     }
 

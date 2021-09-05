@@ -18,7 +18,7 @@ public class CommandDeadlineTest {
         args.add(word02);
         args.add(word03);
         Command testCommandDeadline = new CommandDeadline(args);
-        assertEquals(testCommandDeadline.isArgumentValid(), true);
+        assertEquals(testCommandDeadline.isValidArgument(), true);
         args.clear();
     }
 
@@ -29,7 +29,7 @@ public class CommandDeadlineTest {
         args.add(word03);
         args.add(word04);
         Command testCommandDeadline = new CommandDeadline(args);
-        assertEquals(testCommandDeadline.isArgumentValid(), true);
+        assertEquals(testCommandDeadline.isValidArgument(), true);
         args.clear();
     }
 
@@ -37,7 +37,7 @@ public class CommandDeadlineTest {
     public void test03() {
         args.add(word01);
         Command testCommandDeadline = new CommandDeadline(args);
-        assertEquals(testCommandDeadline.isArgumentValid(), false);
+        assertEquals(testCommandDeadline.isValidArgument(), false);
         args.clear();
     }
 
@@ -46,7 +46,7 @@ public class CommandDeadlineTest {
         args.add(word01);
         args.add(word02);
         Command testCommandDeadline = new CommandDeadline(args);
-        assertEquals(testCommandDeadline.isArgumentValid(), false);
+        assertEquals(testCommandDeadline.isValidArgument(), false);
         args.clear();
     }
 
@@ -56,7 +56,7 @@ public class CommandDeadlineTest {
         args.add(word02);
         args.add(word05);
         Command testCommandDeadline = new CommandDeadline(args);
-        assertEquals(testCommandDeadline.isArgumentValid(), false);
+        assertEquals(testCommandDeadline.isValidArgument(), false);
         args.clear();
     }
 
@@ -67,7 +67,7 @@ public class CommandDeadlineTest {
         args.add(word03);
         args.add(word05);
         Command testCommandDeadline = new CommandDeadline(args);
-        assertEquals(testCommandDeadline.isArgumentValid(), false);
+        assertEquals(testCommandDeadline.isValidArgument(), false);
         args.clear();
     }
 

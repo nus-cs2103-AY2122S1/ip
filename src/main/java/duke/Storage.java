@@ -17,7 +17,7 @@ import duke.task.Task;
 public class Storage {
     private Scanner s;
     private final String filePath;
-    private File savefile;
+    private File saveFile;
 
     /**
      * Storage constructor that takes in the file path for the save file.
@@ -34,12 +34,12 @@ public class Storage {
      *
      */
     public void initialiseSaveFile() {
-        this.savefile = new File(this.filePath);
+        this.saveFile = new File(this.filePath);
 
         try {
-            if (savefile.getParentFile().mkdir()) {
+            if (saveFile.getParentFile().mkdir()) {
                 System.out.println("File path created.");
-                if (savefile.createNewFile()) {
+                if (saveFile.createNewFile()) {
                     System.out.println("File created.");
                 }
             }
@@ -55,8 +55,8 @@ public class Storage {
      */
     public ArrayList<String> produceReadableString() {
         try {
-            assert savefile != null;
-            s = new Scanner(savefile);
+            assert saveFile != null;
+            s = new Scanner(saveFile);
             ArrayList<String> output = new ArrayList<>();
 
             while (s.hasNextLine()) {
@@ -79,17 +79,17 @@ public class Storage {
      * Updates the save file's list of tasks.
      *
      */
-    public void updateSavefile(TaskList tl) {
+    public void updateSaveFile(TaskList tl) {
         try {
-            FileWriter myWriter = new FileWriter("saves/saves.txt");
+            FileWriter writer = new FileWriter("saves/saves.txt");
             System.out.println("Updating Save File");
 
             for (int i = 0; i < tl.numberOfTasks(); i++) {
                 Task thisTask = tl.getTask(i);
-                myWriter.write(thisTask.getReadableString());
+                writer.write(thisTask.getReadableString());
             }
 
-            myWriter.close();
+            writer.close();
 
         } catch (Exception e) {
             throw new DukeException("File could not be found!");

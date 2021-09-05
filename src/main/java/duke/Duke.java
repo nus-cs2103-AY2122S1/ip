@@ -37,7 +37,7 @@ public class Duke extends Application {
     }
 
     /**
-     * This method runs the program.
+     * Runs the program.
      *
      */
     public void runCommand(String userInput) {

@@ -34,7 +34,7 @@ public class CommandTodo extends Command {
      * @return A boolean indicating if the arguments are in a valid format.
      */
     @Override
-    public boolean isArgumentValid() {
+    public boolean isValidArgument() {
         if (arguments.size() == 1) {
             Pattern pattern = Pattern.compile(ARG_FORMAT);
             Matcher matcher = pattern.matcher(arguments.get(0));
@@ -46,7 +46,7 @@ public class CommandTodo extends Command {
 
     @Override
     public void execute(TaskList tl, Storage st, Ui ui) {
-        if (isArgumentValid()) {
+        if (isValidArgument()) {
             Todo newTodo = new Todo(arguments.get(0), "", "");
             tl.addTask(newTodo);
         } else {
