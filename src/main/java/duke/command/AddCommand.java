@@ -1,8 +1,10 @@
 package duke.command;
 
 
+import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
+import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -43,8 +45,10 @@ public class AddCommand extends Command {
             return TaskType.EVENT;
         } else if (task instanceof Todo) {
             return TaskType.TODO;
-        } else {
+        } else if (task instanceof Deadline) {
             return TaskType.DEADLINE;
+        } else {
+            throw new DukeException(" Something wrong happened: Not an addable Task!");
         }
     }
 
