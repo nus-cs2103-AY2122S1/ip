@@ -56,6 +56,7 @@ public class Storage {
      * @return The corresponding task object.
      */
     public Task getTaskFromString(String s) {
+        assert (s.length() > 6);
         String taskType = s.substring(0, 3);
         String taskDescription = s.substring(7);
         Task t = null;
