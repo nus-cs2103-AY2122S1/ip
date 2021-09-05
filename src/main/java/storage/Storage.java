@@ -38,37 +38,13 @@ public class Storage {
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> tasks = new ArrayList<>();
         File dataFilePath = new File(filePath);
+        Scanner dataScanner = null;
         // check if data directory exists
         if (dataFilePath.exists()) {
             File dataFile = new File(filePath.concat(fileName));
             // if data file already exists, load the file's data into tasks, else create a new data file
             if (dataFile.exists()) {
-                Scanner dataScanner = new Scanner(dataFile);
-                while (dataScanner.hasNextLine()) {
-                    String[] arr = dataScanner.nextLine().split(",");
-                    // if task is a task.Todo
-                    if (arr[0].equals("T")) {
-                        tasks.add(new Todo(arr[2]));
-                        // if task is done, mark as done
-                        if (arr[1].equals("1")) {
-                            tasks.get(tasks.size() - 1).markAsDone();
-                        }
-                    } else if (arr[0].equals("D")) {
-                        tasks.add(new Deadline(arr[2], LocalDate.parse(arr[3].substring(0, 10)),
-                                LocalTime.parse(arr[3].substring(11))));
-                        // if task is done, mark as done
-                        if (arr[1].equals("1")) {
-                            tasks.get(tasks.size() - 1).markAsDone();
-                        }
-                    } else {
-                        tasks.add(new Event(arr[2], LocalDate.parse(arr[3].substring(0, 10)),
-                                LocalTime.parse(arr[3].substring(11))));
-                        // if task is done, mark as done
-                        if (arr[1].equals("1")) {
-                            tasks.get(tasks.size() - 1).markAsDone();
-                        }
-                    }
-                }
+                dataScanner = new Scanner(dataFile);
             } else {
                 dataFile.createNewFile();
             }
@@ -76,6 +52,30 @@ public class Storage {
             dataFilePath.mkdirs();
             File dataFile = new File(filePath.concat(fileName));
             dataFile.createNewFile();
+        }
+
+        // If there is no data file loaded in
+        if (dataScanner == null) {
+            return tasks;
+        }
+        while (dataScanner.hasNextLine()) {
+            // taskInfoArr is an array of information for the task, including its type, done-ness, date/time
+            String[] taskInfoArr = dataScanner.nextLine().split(",");
+            if (taskInfoArr[0].equals("T")) {
+                tasks.add(new Todo(taskInfoArr[2]));
+            } else if (taskInfoArr[0].equals("D")) {
+                tasks.add(new Deadline(taskInfoArr[2],
+                        LocalDate.parse(getDateFromString(taskInfoArr[3])),
+                        LocalTime.parse(getTimeFromString(taskInfoArr[3]))));
+            } else {
+                tasks.add(new Event(taskInfoArr[2],
+                        LocalDate.parse(getDateFromString(taskInfoArr[3])),
+                        LocalTime.parse(getTimeFromString(taskInfoArr[3]))));
+            }
+            // if task is done, mark as done
+            if (taskInfoArr[1].equals("1")) {
+                tasks.get(tasks.size() - 1).markAsDone();
+            }
         }
         return tasks;
     }
@@ -127,8 +127,8 @@ public class Storage {
             while (scanner.hasNextLine()) {
                 String nextLine = scanner.nextLine();
                 if (current == number) {
-                    String[] arr = nextLine.split(",");
-                    newContent = newContent + arr[0] + ",1," + arr[2] + "," + arr[3] + "\n";
+                    String[] strArr = nextLine.split(",");
+                    newContent = newContent + markTaskStringAsDone(strArr);
                 } else {
                     newContent = newContent + nextLine + "\n";
                 }
@@ -149,6 +149,24 @@ public class Storage {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Gets date from the String representation of a task's datetime in the data file.
+     * @param init String representation of a task's datetime
+     * @return String representation of a task's date only
+     */
+    private String getDateFromString(String init) {
+        return init.substring(0, 10);
+    }
+
+    /**
+     * Gets time from the String representation of task's datetime in the data file.
+     * @param init String representation of a task's datetime
+     * @return String representation of a task's time only
+     */
+    private String getTimeFromString(String init) {
+        return init.substring(11);
     }
 
     /**
@@ -174,5 +192,13 @@ public class Storage {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Takes an array of Strings which represents a task and marks it as done
+     * @param taskStr Array of Strings which represents a task
+     */
+    private String markTaskStringAsDone(String[] taskStr) {
+        return taskStr[0] + ",1," + taskStr[2] + "," + taskStr[3] + "\n";
     }
 }
