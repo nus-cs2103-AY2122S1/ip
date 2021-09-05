@@ -20,6 +20,7 @@ public class Parser {
      * @return Type of Command to be executed.
      */
     public static Command process(String command) {
+        assert command != null;
         String[] words = command.split(" ");
         String parsed = words[0];
         try {

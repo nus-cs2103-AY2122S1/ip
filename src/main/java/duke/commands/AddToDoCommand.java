@@ -16,6 +16,7 @@ public class AddToDoCommand extends Command {
     private String command;
 
     public AddToDoCommand(String command) {
+        assert command.startsWith("todo");
         this.command = command;
     }
 

@@ -13,6 +13,7 @@ public class FindCommand extends Command {
     private String command;
 
     public FindCommand(String command) {
+        assert command.startsWith("find");
         this.command = command;
     }
 

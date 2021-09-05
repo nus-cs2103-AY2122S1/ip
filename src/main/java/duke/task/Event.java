@@ -18,6 +18,7 @@ public class Event extends Task {
      */
     public Event(String name, String date) {
         super(name);
+        assert !(name == null);
         this.date = LocalDate.parse(date);
     }
 

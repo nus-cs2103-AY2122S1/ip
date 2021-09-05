@@ -11,6 +11,7 @@ public class EndCommand extends Command {
     private String command;
 
     public EndCommand(String command) {
+        assert command.startsWith("bye");
         this.command = command;
     }
 

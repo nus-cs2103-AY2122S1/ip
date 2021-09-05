@@ -13,6 +13,7 @@ public class DoneCommand extends Command {
     private String command;
 
     public DoneCommand(String command) {
+        assert command.startsWith("done");
         this.command = command;
     }
 
