@@ -29,10 +29,12 @@ public class Storage {
     protected static final String UNABLE_TO_LOAD_PATH = "Path ./%s cannot be accessed/loaded.";
     protected static final String UNABLE_TO_SAVE = "Error updating task file.";
     protected static final String UNABLE_TO_PARSE_TASK = "'%s' is an invalid Task entry.";
+
+    private static final String ASSERT_FAIL_IMPROPER_FILEPATH = "Filepath specified is not legitimate.";
     
     // Default task file directory.
     private String taskDirectoryPath = "data";
-    private String taskFilePath = taskDirectoryPath + "/task_list.txt";
+    private String taskFilePath = "data/task_list.txt";
 
     /**
      * Sets the desired file path of {@link kayu.task.Task} storage.
@@ -40,8 +42,9 @@ public class Storage {
      * @param taskFilePath File path for reading/writing of data.
      */
     public void setDirectoryAndFilePath(String taskFilePath) {
-        setTaskFilePath(taskFilePath);
+        assert (taskFilePath.contains("/") || taskFilePath.contains("\\")) : ASSERT_FAIL_IMPROPER_FILEPATH;
         
+        setTaskFilePath(taskFilePath);
         int splitIdx = taskFilePath.lastIndexOf('/'); // mac/unix
         if (splitIdx < 0) {
             splitIdx = taskFilePath.lastIndexOf('\\'); // win
