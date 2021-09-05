@@ -96,7 +96,7 @@ public class Storage {
             if (taskStatus.equals("[X]")) {
                 result.setDone();
             }
-            return result;
+            break;
         case ("[D]"):
             String[] deadlineDescription = taskDetail
                     .substring(0, taskDetail.length() - 1)
@@ -106,16 +106,18 @@ public class Storage {
                 result = new Deadline(deadlineDescription[0]
                         .substring(0, deadlineDescription[0].length() - 2),
                         LocalDate.parse(dateTimeOfDeadline[0], DateTimeFormatter.ofPattern("dd MMM yyyy")));
-            } else {
+            } else if (dateTimeOfDeadline.length == 2) {
                 result = new Deadline(deadlineDescription[0]
                         .substring(0, deadlineDescription[0].length() - 2),
                         LocalDate.parse(dateTimeOfDeadline[0], DateTimeFormatter.ofPattern("dd MMM yyyy")),
                         LocalTime.parse(dateTimeOfDeadline[1]));
+            } else {
+                assert false;
             }
             if (taskStatus.equals("[X]")) {
                 result.setDone();
             }
-            return result;
+            break;
         case ("[E]"):
             String[] eventDescription = taskDetail
                     .substring(0, taskDetail.length() - 1)
@@ -125,18 +127,21 @@ public class Storage {
                 result = new Event(eventDescription[0]
                         .substring(0, eventDescription[0].length() - 2),
                         LocalDate.parse(dateTimeOfEvent[0], DateTimeFormatter.ofPattern("dd MMM yyyy")));
-            } else {
+            } else if (dateTimeOfEvent.length == 2) {
                 result = new Deadline(eventDescription[0]
                         .substring(0, eventDescription[0].length() - 2),
                         LocalDate.parse(dateTimeOfEvent[0], DateTimeFormatter.ofPattern("dd MMM yyyy")),
                         LocalTime.parse(dateTimeOfEvent[1]));
+            } else {
+                assert false;
             }
             if (taskStatus.equals("[X]")) {
                 result.setDone();
             }
-            return result;
+            break;
         default:
-            return result;
+            assert false;
         }
+        return result;
     }
 }

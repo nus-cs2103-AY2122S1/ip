@@ -36,7 +36,7 @@ public class Parser {
      */
     public String parseCommand(String input) throws DukeException {
         String action = input.split(" ", 2)[0].toLowerCase();
-        String response;
+        String response = "";
         switch (action) {
         case ("bye"):
             response = "bye";
@@ -112,7 +112,8 @@ public class Parser {
             }
             if (dateTime.length == 1) {
                 newDeadline = new Deadline(description[0], date);
-            } else {
+                response = taskList.add(newDeadline);
+            } else if (dateTime.length == 2) {
                 try {
                     time = LocalTime.parse(dateTime[1]);
                 } catch (DateTimeParseException e) {
@@ -120,8 +121,10 @@ public class Parser {
                             + "The format of the time must be in hh:mm.");
                 }
                 newDeadline = new Deadline(description[0], date, time);
+                response = taskList.add(newDeadline);
+            } else {
+                assert false;
             }
-            response = taskList.add(newDeadline);
             storage.saveData(taskList);
         }
             break;
@@ -148,7 +151,8 @@ public class Parser {
             }
             if (dateTime.length == 1) {
                 newEvent = new Event(description[0], date);
-            } else {
+                response = taskList.add(newEvent);
+            } else if (dateTime.length == 2) {
                 try {
                     time = LocalTime.parse(dateTime[1]);
                 } catch (DateTimeParseException e) {
@@ -156,8 +160,10 @@ public class Parser {
                             + "The format of the time must be in hh:mm.");
                 }
                 newEvent = new Event(description[0], date, time);
+                response = taskList.add(newEvent);
+            } else {
+                assert false;
             }
-            response = taskList.add(newEvent);
             storage.saveData(taskList);
             break;
         case ("find"):
@@ -169,6 +175,7 @@ public class Parser {
             response = taskList.findTasks(searchInfo[1]);
             break;
         default:
+            assert false;
             throw new DukeException(":( OOPS!!! "
                     + "I'm sorry, but I don't know what that means :-(");
         }
