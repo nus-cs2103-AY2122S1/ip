@@ -42,4 +42,9 @@ public class Event extends Task {
     public String toData() {
         return taskName.getTaskIcon() + " | " + super.toData() + " | " + this.at;
     }
+
+    @Override
+    public Task copy() {
+        return new Event(this.description, this.at, this.isDone);
+    }
 }

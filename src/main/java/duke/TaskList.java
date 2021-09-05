@@ -1,6 +1,8 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
 import java.util.function.Function;
 
 import duke.task.Task;
@@ -10,10 +12,17 @@ import duke.task.TaskName;
  *  A class that encapsulates the list of task inputted by Duke
  */
 public class TaskList {
-    private final ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
+    private final LinkedList<ArrayList<Task>> previousTasks;
+    private final LinkedList<ArrayList<Task>> nextTasks;
 
+    /**
+     * Constructor for TaskList.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
+        this.previousTasks = new LinkedList<>();
+        this.nextTasks = new LinkedList<>();
     }
 
     /**
@@ -26,9 +35,12 @@ public class TaskList {
      * @throws DukeException Exceptions specific to Duke's input
      */
     public String addTask(TaskName type, String input, Boolean isDone) throws DukeException {
+        assert !input.isBlank() : "Input cannot be null!";
+
         Task task;
         String[] inputArray;
-        assert !input.isBlank() : "Input cannot be null!";
+        this.saveCurrentTasks();
+
 
         switch (type) {
         case TODO:
@@ -59,6 +71,7 @@ public class TaskList {
             throw new DukeException("Unexpected value: " + type);
         }
 
+        this.tasks = this.copyTaskList();
         this.tasks.add(task);
         return Ui.showAddTaskReply(task.toString(), this.tasks.size());
     }
@@ -101,8 +114,10 @@ public class TaskList {
      * @throws DukeException Exceptions specific to Duke's input
      */
     public String markTask(String input) throws DukeException {
-        int index;
         assert !input.isBlank() : "Input cannot be null!";
+
+        int index;
+        this.saveCurrentTasks();
 
         try {
             index = Integer.parseInt(input);
@@ -113,7 +128,8 @@ public class TaskList {
             throw new DukeException("The index provided is not within the valid range");
         }
 
-        String taskName = tasks.get(index - 1).markDone();
+        this.tasks = this.copyTaskList();
+        String taskName = this.tasks.get(index - 1).markDone();
         return Ui.showMarkTaskReply(taskName);
     }
 
@@ -125,8 +141,10 @@ public class TaskList {
      * @throws DukeException Exceptions specific to Duke's input
      */
     public String deleteTask(String input) throws DukeException {
-        int index;
         assert !input.isBlank() : "Input cannot be null!";
+
+        int index;
+        this.saveCurrentTasks();
 
         try {
             index = Integer.parseInt(input);
@@ -137,6 +155,7 @@ public class TaskList {
             throw new DukeException("The index provided is not within the valid range");
         }
 
+        this.tasks = this.copyTaskList();
         Task deleted = this.tasks.remove(index - 1);
         return Ui.showDeleteTaskReply(deleted.toString(), this.tasks.size());
     }
@@ -172,5 +191,52 @@ public class TaskList {
         for (Task t: this.tasks) {
             f.apply(t);
         }
+    }
+
+    /**
+     * Undoes the TaskList to the state before the previous command.
+     *
+     * @return The reply for Duke showing the previous state
+     * @throws DukeException Exceptions specific to Duke's input
+     */
+    public String undoList() throws DukeException {
+        try {
+            this.nextTasks.addFirst(this.copyTaskList());
+            this.tasks = this.previousTasks.remove();
+
+            String displayedTasks = this.displayTask();
+            return Ui.showUndoRedoListReply(displayedTasks, true);
+        } catch (NoSuchElementException e) {
+            throw new DukeException("Already at the oldest possible state");
+        }
+    }
+
+
+    /**
+     * Redoes the TaskList to the state before the previous undoList.
+     *
+     * @return The reply for Duke showing the previous state
+     * @throws DukeException Exceptions specific to Duke's input
+     */
+    public String redoList() throws DukeException {
+        try {
+            this.previousTasks.addFirst(this.tasks);
+            this.tasks = this.nextTasks.remove();
+
+            String displayedTasks = this.displayTask();
+            return Ui.showUndoRedoListReply(displayedTasks, false);
+        } catch (NoSuchElementException e) {
+            throw new DukeException("Already at the latest possible state");
+        }
+    }
+
+    private ArrayList<Task> copyTaskList() {
+        ArrayList<Task> copy = new ArrayList<>();
+        this.tasks.forEach(task -> copy.add(task.copy()));
+        return copy;
+    }
+
+    private void saveCurrentTasks() {
+        this.previousTasks.addFirst(this.tasks);
     }
 }

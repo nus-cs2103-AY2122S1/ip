@@ -56,4 +56,9 @@ public class Deadline extends Task {
     public String toData() {
         return taskName.getTaskIcon() + " | " + super.toData() + " | " + this.by;
     }
+
+    @Override
+    public Task copy() {
+        return new Deadline(this.description, this.by, this.isDone);
+    }
 }
