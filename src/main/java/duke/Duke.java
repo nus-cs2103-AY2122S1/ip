@@ -37,7 +37,7 @@ public class Duke extends Application {
      * @param args
      */
     public static void main(String[] args) {
-        new Duke().start();
+        new Duke().startCli();
         //launch();
     }
 
@@ -80,7 +80,7 @@ public class Duke extends Application {
     /**
      * Method to start the bot and waits for the user's input.
      */
-    public void start() {
+    public void startCli() {
 
         Ui.welcomeMessage();
 
