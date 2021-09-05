@@ -59,7 +59,8 @@ public class Storage {
         }
 
         BufferedReader file = Files.newBufferedReader(path);
-        return file.lines().collect(Collectors.toList());
-
+        List<String> lines = file.lines().collect(Collectors.toList());
+        file.close();
+        return lines;
     }
 }
