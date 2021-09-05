@@ -1,6 +1,10 @@
 package duke.Command;
 
-import duke.*;
+import duke.DukeException;
+import duke.Storage;
+import duke.Task;
+import duke.TaskList;
+import duke.Ui;
 
 public class AddCommand extends Command {
     private String type;

@@ -1,13 +1,16 @@
 package dukeTest;
 
-import duke.DukeException;
-import duke.Task;
-import duke.TaskList;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
+import duke.Task;
+import duke.TaskList;
+
+
 
 public class TaskListTest {
     @Test
@@ -20,7 +23,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void removeTaskTest() throws DukeException{
+    public void removeTaskTest() throws DukeException {
         Task task = new Task.Deadline("test", false, "2021-12-12");
         ArrayList<Task> temp = new ArrayList<>();
         temp.add(task);
