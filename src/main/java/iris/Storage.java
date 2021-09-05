@@ -23,13 +23,13 @@ public class Storage {
         this.taskFilePath = taskFilePath;
     }
 
-    private void createTaskFile() {
+    private void createTaskFile() throws IrisException {
         try {
             File taskFile = new File(taskFilePath);
             taskFile.getParentFile().mkdirs();
             taskFile.createNewFile();
         } catch (IOException exception) {
-            // TODO: handle IOException?
+            throw new IrisException("IOException: " + exception.getMessage());
         }
     }
 
@@ -60,7 +60,7 @@ public class Storage {
      *
      * @param tasks TaskList object representing current list of tasks
      */
-    public void writeTasks(TaskList tasks) {
+    public void writeTasks(TaskList tasks) throws IrisException {
         try {
             FileWriter fw = new FileWriter(taskFilePath);
             String[] commands = tasks.toCommands();
@@ -69,7 +69,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException exception) {
-            // TODO: handle IOException?
+            throw new IrisException("IOException: " + exception.getMessage());
         }
     }
 }

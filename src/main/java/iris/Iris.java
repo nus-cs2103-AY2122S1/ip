@@ -19,7 +19,7 @@ public class Iris {
         try {
             storage.readTasks(tasks);
         } catch (IrisException exception) {
-            System.out.println(String.format("An error has occurred: %s", exception.toString()));
+            System.out.printf("An error has occurred: %s%n", exception.toString());
         }
     }
 

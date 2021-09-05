@@ -5,7 +5,7 @@ import iris.Storage;
 import iris.TaskList;
 
 public abstract class Command {
-    public void store(TaskList tasks, Storage storage) {
+    public void store(TaskList tasks, Storage storage) throws IrisException {
 
     }
 
