@@ -6,6 +6,11 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task{
     protected LocalDate time;
 
+    /**
+     * Initializes a Deadline object
+     * @param description    The description of the task
+     * @param by             The date it is due
+     */
     public Deadline(String description, String by) {
         super(description);
         this.label = "D";

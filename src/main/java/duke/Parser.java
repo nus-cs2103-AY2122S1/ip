@@ -1,6 +1,15 @@
 package duke;
 
+/**
+ * Class that associates user input to its respective Command.
+ */
 public class Parser{
+    /**
+     * Receives input and parses it into its respective task command.
+     * @param response
+     * @return Command object     The command inputted by the user
+     * @throws DukeException
+     */
     public static Command parse(String response) throws DukeException {
          if (response.equals("list")) {
                 return new ListCommand();

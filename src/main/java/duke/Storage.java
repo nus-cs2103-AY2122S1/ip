@@ -8,14 +8,28 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class that load and writes the tasks.
+ */
+
 public class Storage {
     private static String pathName;
 
+    /**
+     * Initializes a Storage object.
+     * @param pathName   The path to the directory of the file.
+     */
     public Storage(String pathName) {
         this.pathName = pathName;
 
     }
 
+    /**
+     * Loads the files and returns an ArrayList of the tasks stored.
+     * @return ArrayList of type Task
+     * @throws DukeException
+     * @throws IOException
+     */
     public ArrayList<Task> loadTasks() throws DukeException, IOException {
         File f = new File(pathName);
         ArrayList<Task> t = new ArrayList<>();
@@ -57,7 +71,12 @@ public class Storage {
         return t;
     }
 
-    public static void writeFile( TaskList tasks) throws IOException {
+    /**
+     * Updates the current task list with tasks inputted.
+     * @param tasks
+     * @throws IOException
+     */
+    public static void writeFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(pathName);
         ArrayList<Task> task = tasks.getTasks();
         for (int i = 0; i < tasks.size(); i++) {

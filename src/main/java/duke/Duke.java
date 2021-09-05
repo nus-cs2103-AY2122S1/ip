@@ -7,6 +7,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Initializes Duke object
+     * @param filePath The file where tasks are stored
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -18,6 +22,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke bot.
+     */
     public void run() {
         ui.greetUser();
         boolean isExit = false;

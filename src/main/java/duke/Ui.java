@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Class that deals with the user interface of Duke bot.
+ */
 public class Ui {
     Scanner sc = new Scanner(System.in);
     private String dashedLine = "_______________________________________________";
