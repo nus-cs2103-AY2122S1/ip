@@ -43,6 +43,8 @@ public class DeadlineCommand extends Command {
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) throws InvalidInputException,
             NoActionException, NoTimeException, SaveFileException {
+        assert tasks != null;
+        assert storage != null;
         String[] deadlineInputs = action.split("/by", 2);
         if (deadlineInputs[0].length() == 0) {
             throw new NoActionException("Command 'deadline' requires a task action");

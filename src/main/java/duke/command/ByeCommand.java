@@ -24,6 +24,8 @@ public class ByeCommand extends Command {
      */
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) {
+        assert tasks != null;
+        assert storage != null;
         return new CommandResult(Reply.showBye(), true, super.isExit());
     }
 }
