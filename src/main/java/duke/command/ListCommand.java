@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.data.Storage;
-import duke.data.TaskList;
+import duke.data.InformationList;
 import duke.data.Ui;
 
 /**
@@ -17,7 +17,7 @@ public class ListCommand extends Command {
      * @return The message produced by ui.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(InformationList tasks, Ui ui, Storage storage) {
         if (tasks.getTotalSize() == 0) {
             return ui.showMessage("You have no tasks saved!");
         } else {

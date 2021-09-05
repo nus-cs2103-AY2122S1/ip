@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.data.DukeException;
 import duke.data.Storage;
-import duke.data.TaskList;
+import duke.data.InformationList;
 import duke.data.Ui;
 
 /**
@@ -15,14 +15,14 @@ public class DoneCommand extends Command{
     /**
      * Constructs DoneCommand class.
      *
-     * @param taskNumber Index of task in Tasklist that is to be mark as done.
+     * @param taskNumber Index of task in InformationList that is to be mark as done.
      */
     public DoneCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }
 
     /**
-     * Marks a task from Tasklist as done.
+     * Marks a task from InformationList as done.
      *
      * @param tasks The list of tasks that a user has.
      * @param ui The ui that sends a message to the user once the task is marked as done.
@@ -30,7 +30,7 @@ public class DoneCommand extends Command{
      * @return The message produced by ui.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(InformationList tasks, Ui ui, Storage storage) {
         if (taskNumber > tasks.getTasksSize() || taskNumber < 0) {
             throw new DukeException("Please insert a valid task.Task Number!");
         } else {

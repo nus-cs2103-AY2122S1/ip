@@ -2,11 +2,11 @@ package duke.command;
 
 import duke.data.DukeException;
 import duke.data.Storage;
-import duke.data.TaskList;
+import duke.data.InformationList;
 import duke.data.Ui;
 
 /**
- * Command that deletes a Task from Tasklist when executed.
+ * Command that deletes a Task from InformationList when executed.
  */
 public class DeleteCommand extends Command {
     /** Index of the task in TaskList. */
@@ -15,14 +15,14 @@ public class DeleteCommand extends Command {
     /**
      * Constructs DeleteCommand class.
      *
-     * @param taskNumber Index of task in Tasklist that is to be deleted.
+     * @param taskNumber Index of task in InformationList that is to be deleted.
      */
     public DeleteCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }
 
     /**
-     * Deletes a task from the Tasklist.
+     * Deletes a task from the InformationList.
      *
      * @param tasks The list of tasks that a user has.
      * @param ui The ui that sends a message to the user once the task is deleted.
@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
      * @return The message produced by ui.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(InformationList tasks, Ui ui, Storage storage) {
         if (taskNumber > tasks.getTasksSize() || taskNumber <= 0) {
             throw new DukeException("Please insert a valid Task Number!");
         } else {

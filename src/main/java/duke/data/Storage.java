@@ -41,14 +41,14 @@ public class Storage {
     }
 
     /**
-     * Returns a TaskList containing the user's saved tasks.
-     * If user has no saved tasks, returns an empty TaskList.
+     * Returns an InformationList containing the user's saved tasks and contacts.
+     * If user has no saved tasks nor contacts, returns an empty InformationList.
      *
-     * @return a TaskList.
+     * @return An InformationList.
      * @throws DukeException If file is not found or file path cannot be accessed.
      */
-    public TaskList load() throws DukeException {
-        TaskList userDataList = new TaskList();
+    public InformationList load() throws DukeException {
+        InformationList userDataList = new InformationList();
         try {
             Scanner sc = new Scanner(userData);
             while (sc.hasNextLine()) {
@@ -107,16 +107,16 @@ public class Storage {
     /**
      * Updates the USERDATA.TXT to reflect changes that the user made.
      *
-     * @param listOfUserTasks Updated TaskList.
+     * @param listOfUserInformation Updated InformationList.
      */
-    public void save(TaskList listOfUserTasks) {
+    public void save(InformationList listOfUserInformation) {
         try {
             FileWriter newFile = new FileWriter(pathname);
-            for (int j = 0; j < listOfUserTasks.getTasksSize(); j++) {
-                newFile.write(listOfUserTasks.getTask(j).toData());
+            for (int j = 0; j < listOfUserInformation.getTasksSize(); j++) {
+                newFile.write(listOfUserInformation.getTask(j).toData());
             }
-            for (int i = 0; i < listOfUserTasks.getContactsSize(); i++) {
-                newFile.write(listOfUserTasks.getContact(i).toData());
+            for (int i = 0; i < listOfUserInformation.getContactsSize(); i++) {
+                newFile.write(listOfUserInformation.getContact(i).toData());
             }
             newFile.close();
         } catch (IOException e) {

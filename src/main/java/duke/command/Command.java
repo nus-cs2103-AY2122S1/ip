@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.data.Storage;
-import duke.data.TaskList;
+import duke.data.InformationList;
 import duke.data.Ui;
 
 /**
@@ -17,5 +17,5 @@ public abstract class Command {
      * @param storage The class that reads and writes to the user's txt file.
      * @return A response that is displayed to the user.
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(InformationList tasks, Ui ui, Storage storage);
 }

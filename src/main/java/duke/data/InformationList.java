@@ -6,20 +6,20 @@ import duke.information.Task;
 import java.util.ArrayList;
 
 /**
- * Class that deals with updating the ArrayList of tasks.
+ * Class that deals with updating the ArrayLists of information.
  */
-public class TaskList {
+public class InformationList {
     /** Arraylist that contains the user's saved tasks. */
     private ArrayList<Task> tasks;
     /** Arraylist that contains the user's saved contacts. */
     private ArrayList<Contact> contacts;
 
     /**
-     * Constructs TaskList class.
-     * Creates a TaskList with 0 saved tasks and 0 saved contacts.
+     * Constructs InformationList class.
+     * Creates a InformationList with 0 saved tasks and 0 saved contacts.
      *
      */
-    public TaskList() {
+    public InformationList() {
         this.tasks = new ArrayList<>();
         this.contacts = new ArrayList<>();
     }
@@ -70,7 +70,7 @@ public class TaskList {
     }
 
     /**
-     * Gets the total size of all ArrayLists in TaskList.
+     * Gets the total size of all ArrayLists in InformationList.
      *
      * @return The total length of all ArrayLists.
      */
