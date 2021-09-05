@@ -1,20 +1,20 @@
 package duke.command;
 
 import duke.data.Storage;
-import duke.data.TaskList;
+import duke.data.InformationList;
 import duke.data.Ui;
 
 /**
- * Command that displays a filtered Tasklist when executed.
+ * Command that displays a filtered InformationList when executed.
  */
 public class FindCommand extends Command {
-    /** Keyword that the Tasklist will be filtered by. */
+    /** Keyword that the InformationList will be filtered by. */
     private String keyword;
 
     /**
      * Constructs FindCommand class.
      *
-     * @param keyword String that is used to filter through Tasklist.
+     * @param keyword String that is used to filter through InformationList.
      */
     public FindCommand(String keyword) {
         this.keyword = keyword;
@@ -24,12 +24,12 @@ public class FindCommand extends Command {
      * Displays a user's saved tasks containing the keyword.
      *
      * @param tasks The list of tasks that a user has.
-     * @param ui The ui that sends a filtered TaskList as a string to the user.
+     * @param ui The ui that sends a filtered InformationList as a string to the user.
      * @param storage Not used for this command.
      * @return The message produced by ui.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.showTasks(tasks.searchByKeyword(keyword));
+    public String execute(InformationList tasks, Ui ui, Storage storage) {
+        return ui.showTasks(tasks.searchTaskByKeyword(keyword)) + ui.showContacts(tasks.searchContactByKeyword(keyword));
     }
 }

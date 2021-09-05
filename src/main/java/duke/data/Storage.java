@@ -1,9 +1,10 @@
 package duke.data;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.information.Contact;
+import duke.information.Deadline;
+import duke.information.Event;
+import duke.information.Task;
+import duke.information.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -40,14 +41,14 @@ public class Storage {
     }
 
     /**
-     * Returns a TaskList containing the user's saved tasks.
-     * If user has no saved tasks, returns an empty TaskList.
+     * Returns an InformationList containing the user's saved tasks and contacts.
+     * If user has no saved tasks nor contacts, returns an empty InformationList.
      *
-     * @return a TaskList.
+     * @return An InformationList.
      * @throws DukeException If file is not found or file path cannot be accessed.
      */
-    public TaskList load() throws DukeException {
-        TaskList userDataList = new TaskList();
+    public InformationList load() throws DukeException {
+        InformationList userDataList = new InformationList();
         try {
             Scanner sc = new Scanner(userData);
             while (sc.hasNextLine()) {
@@ -55,6 +56,10 @@ public class Storage {
                 assert newTaskArray.length > 3 : "Invalid data found in file!";
                 Task newTask;
                 String taskType = newTaskArray[0];
+                if (taskType.equals("C")) {
+                    userDataList.addContact(new Contact(newTaskArray[1], newTaskArray[2]));
+                    continue;
+                }
                 boolean isDone = newTaskArray[1].equals("1");
                 switch (taskType) {
 
@@ -102,13 +107,16 @@ public class Storage {
     /**
      * Updates the USERDATA.TXT to reflect changes that the user made.
      *
-     * @param listOfUserTasks Updated TaskList.
+     * @param listOfUserInformation Updated InformationList.
      */
-    public void save(TaskList listOfUserTasks) {
+    public void save(InformationList listOfUserInformation) {
         try {
             FileWriter newFile = new FileWriter(pathname);
-            for (int i = 0; i < listOfUserTasks.getSize(); i++) {
-                newFile.write(listOfUserTasks.getTask(i).toData());
+            for (int j = 0; j < listOfUserInformation.getTasksSize(); j++) {
+                newFile.write(listOfUserInformation.getTask(j).toData());
+            }
+            for (int i = 0; i < listOfUserInformation.getContactsSize(); i++) {
+                newFile.write(listOfUserInformation.getContact(i).toData());
             }
             newFile.close();
         } catch (IOException e) {

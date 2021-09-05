@@ -5,7 +5,7 @@ import duke.command.Command;
 import duke.data.DukeException;
 import duke.data.Parser;
 import duke.data.Storage;
-import duke.data.TaskList;
+import duke.data.InformationList;
 import duke.data.Ui;
 
 /**
@@ -14,7 +14,7 @@ import duke.data.Ui;
 public class Duke {
 
     private Storage storage;
-    private TaskList tasks;
+    private InformationList tasks;
     private Ui ui;
 
     /**
@@ -29,7 +29,7 @@ public class Duke {
             tasks = storage.load();
         } catch (DukeException e) {
             ui.showLoadingError();
-            tasks = new TaskList();
+            tasks = new InformationList();
         }
     }
 

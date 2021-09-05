@@ -1,4 +1,4 @@
-package duke.task;
+package duke.information;
 
 /**
  * Class that stores a task.

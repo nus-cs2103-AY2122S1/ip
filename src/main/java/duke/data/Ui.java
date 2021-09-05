@@ -38,13 +38,13 @@ public class Ui {
     }
 
     /** Displays confirmation message to the user when task is added. */
-    public static String showAddedTask() {
-        return showToUser("Task added successfully!");
+    public static String showAddedInformation() {
+        return showToUser("Information added successfully!");
     }
 
     /** Displays confirmation message to the user when task is deleted. */
-    public static String showDeletedTask() {
-        return showToUser("Task deleted successfully!");
+    public static String showDeletedInformation() {
+        return showToUser("Information deleted successfully!");
     }
 
     /** Displays confirmation message to the user when task is marked as done. */
@@ -60,14 +60,20 @@ public class Ui {
     /**
      * Displays the user's saved task(s) to the user.
      *
-     * @param tasks Tasklist containing the user's saved tasks.
+     * @param tasks String containing the user's saved tasks.
      * @return A string of the user's saved task(s).
      */
-    public static String showTasks(TaskList tasks) {
-        String displayedTasks = "Here are your tasks:\n";
-        for (int i = 0; i < tasks.getSize(); i++) {
-            displayedTasks += (tasks.getTask(i).toString() + "\n");
-        }
-        return displayedTasks;
+    public static String showTasks(String tasks) {
+        return showToUser("Here are your tasks:\n" + tasks);
+    }
+
+    /**
+     * Displays the user's saved contact(s) to the user.
+     *
+     * @param contacts String containing the user's saved contacts.
+     * @return A string of the user's saved task(s).
+     */
+    public static String showContacts(String contacts) {
+        return showToUser("Here are your contacts:\n" + contacts);
     }
 }
