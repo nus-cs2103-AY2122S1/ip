@@ -1,7 +1,5 @@
 package duke.common.task;
 
-import duke.common.task.Task;
-
 public class Todo extends Task {
     /**
      * Extension of generic task that indicates that the task has no extra information with a [T] prefix.

@@ -2,17 +2,18 @@ package duke.common;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
 import duke.common.task.Task;
 
 /**
- *
+ * TaskList stores and retrieves tasks created by Duke.
  */
 public class TaskList implements Serializable {
     private ArrayList<Task> tasks;
     private int numberOfTasks;
 
     /**
-     * TaskList stores and retrieves tasks created by Duke.
+     * Default constructor for TaskList
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
@@ -67,7 +68,8 @@ public class TaskList implements Serializable {
                   + "  " + task;
         tasks.remove(taskNumber - 1);
         this.numberOfTasks--;
-        return result + String.format("Now you have %d %s in the list.\n", this.numberOfTasks, this.numberOfTasks == 1 ? "task" : "tasks");
+        return result + String.format("Now you have %d %s in the list.\n", this.numberOfTasks,
+                                                                           this.numberOfTasks == 1 ? "task" : "tasks");
     }
 
     /**
