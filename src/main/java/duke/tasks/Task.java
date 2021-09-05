@@ -5,7 +5,7 @@ import duke.utils.DukeException;
 
 public abstract class Task {
     public final static DukeException FORMAT_EXCEPTION = new DukeException("I don't understand this entry, enter " + 
-            "'help' to learn the correct formatting!");
+            "help (cmd) for assistance.");
     protected boolean done;
     protected String desc = "";
     protected String details = "";
