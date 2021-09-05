@@ -1,9 +1,5 @@
 package duke.storage;
 
-import duke.ui.Ui;
-
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -11,13 +7,24 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.ui.Ui;
+
+
 
 
 /**
  * Stores in real-time the edits to the TaskList directly into the destination text file.
  */
 public class Storage {
+    private static ArrayList<String> history;
+    private static ArrayList<Task> deleted;
     private String filepath;
 
     /**
@@ -28,8 +35,66 @@ public class Storage {
     public Storage(String filepath) {
         assert filepath != null;
         this.filepath = filepath;
+        this.history = new ArrayList<>();
+        this.deleted = new ArrayList<>();
         makeFile();
         load();
+    }
+
+    /**
+     * Stores command into history ArrayList.
+     *
+     * @param command Command to be stored.
+     */
+    public void storeHistory(String command) {
+        history.add(command);
+    }
+
+    /**
+     * Deletes last item in history ArrayList.
+     */
+    public static void deleteLastCommand() {
+        int index = history.size() - 1;
+        history.remove(index);
+    }
+
+    /**
+     * Gets the last command in history ArrayList.
+     *
+     * @return Command last added into history.
+     */
+    public static String getLastCommand() {
+        int index = history.size() - 1;
+        if (index < 0) {
+            throw new DukeException("noChangesToUndo");
+        }
+        return history.get(index);
+    }
+
+    /**
+     * Stores recently deleted task into ArrayList.
+     *
+     * @param task Task that was recently deleted.
+     */
+    public static void storeDeleted(Task task) {
+        deleted.add(task);
+    }
+
+    /**
+     * Gets the most recently deleted task.
+     *
+     * @return Most recently deleted task.
+     */
+    public static Task getDeleted() {
+        return deleted.get(deleted.size() - 1);
+    }
+
+    /**
+     * Removes most recently deleted task from ArrayList.
+     */
+    public static void removeDeletedTask() {
+        int index = deleted.size() - 1;
+        deleted.remove(index);
     }
 
     /**
@@ -41,8 +106,7 @@ public class Storage {
         try {
             if (!Files.isDirectory(path)) {
                 Files.createDirectories(path);
-            }
-            else if (!textFile.exists()) {
+            } else if (!textFile.exists()) {
                 textFile.createNewFile();
             }
         } catch (IOException e) {
@@ -156,6 +220,42 @@ public class Storage {
         while (s.hasNextLine()) {
             String command = s.nextLine();
             if (count == taskNum) {
+            } else {
+                appendToFile("data/duke.txt", command);
+            }
+            count++;
+        }
+        s.close();
+    }
+
+    /**
+     * Edits text file to undo completion command.
+     *
+     * @param taskNum Task Number to carry out operation on.
+     */
+    public void editFileContentsForUndoCompletion(int taskNum) {
+        File temp = new File("data/temp.txt");
+        if (!temp.exists()) {
+            try {
+                Files.copy(Paths.get("data/duke.txt"), Paths.get("data/temp.txt"), REPLACE_EXISTING);
+                new FileWriter("data/duke.txt", false).close();
+                editFileContentsForUndoCompletionHelper(taskNum);
+                Files.delete(Paths.get("data/temp.txt"));
+            } catch (IOException e) {
+                Ui.display(e.getMessage());
+            }
+        }
+    }
+
+    private void editFileContentsForUndoCompletionHelper(int taskNum) throws IOException {
+        Scanner s = new Scanner(new File("data/temp.txt"));
+        int count = 1;
+        while (s.hasNextLine()) {
+            String command = s.nextLine();
+            if (count == taskNum) {
+                String head = command.substring(0, 4);
+                String tail = command.substring(5);
+                appendToFile("data/duke.txt", head + "0" + tail);
             } else {
                 appendToFile("data/duke.txt", command);
             }

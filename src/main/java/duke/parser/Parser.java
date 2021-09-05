@@ -1,6 +1,15 @@
 package duke.parser;
 
-import duke.commands.*;
+import duke.commands.AddDeadlineCommand;
+import duke.commands.AddEventCommand;
+import duke.commands.AddToDoCommand;
+import duke.commands.Command;
+import duke.commands.DeleteTaskCommand;
+import duke.commands.DoneCommand;
+import duke.commands.EndCommand;
+import duke.commands.FindCommand;
+import duke.commands.InvalidCommand;
+import duke.commands.ListCommand;
 import duke.exception.DukeException;
 
 /**
@@ -25,24 +34,26 @@ public class Parser {
         String parsed = words[0];
         try {
             switch (parsed) {
-                case ("bye"):
-                    return new EndCommand(command);
-                case ("list"):
-                    return new ListCommand(command);
-                case ("deadline"):
-                    return new AddDeadlineCommand(command);
-                case ("event"):
-                    return new AddEventCommand(command);
-                case ("done"):
-                    return new DoneCommand(command);
-                case ("delete"):
-                    return new DeleteTaskCommand(command);
-                case ("find"):
-                    return new FindCommand(command);
-                case ("todo"):
-                    return new AddToDoCommand(command);
-                default:
-                    return new InvalidCommand(command);
+            case ("undo"):
+                return UndoParser.process(command);
+            case ("bye"):
+                return new EndCommand(command);
+            case ("list"):
+                return new ListCommand(command);
+            case ("deadline"):
+                return new AddDeadlineCommand(command);
+            case ("event"):
+                return new AddEventCommand(command);
+            case ("done"):
+                return new DoneCommand(command);
+            case ("delete"):
+                return new DeleteTaskCommand(command);
+            case ("find"):
+                return new FindCommand(command);
+            case ("todo"):
+                return new AddToDoCommand(command);
+            default:
+                return new InvalidCommand(command);
             }
         } catch (DukeException err) {
             return new InvalidCommand(command);

@@ -1,10 +1,10 @@
 package duke.commands;
 
-import duke.storage.Storage;
-import duke.ui.Ui;
 import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Creates an AddDeadlineCommand to add deadlines to the task list.
@@ -46,6 +46,7 @@ public class DoneCommand extends Command {
         Task currTask = tasks.get(taskNum);
         currTask.setCompleted();
         storage.editFileContentsForCompletion(taskNum + 1);
+        storage.storeHistory(command);
         return Ui.printTaskCompleted(currTask);
     }
 }

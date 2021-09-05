@@ -27,6 +27,10 @@ public abstract class Task {
         this.isCompleted = true;
     }
 
+    public void setUncompleted() {
+        this.isCompleted = false;
+    }
+
 
     /**
      * Indicates task object's completion using an 'X' or a blank space ' '.

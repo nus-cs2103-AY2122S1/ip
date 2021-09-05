@@ -1,8 +1,8 @@
 package duke.gui;
 
 import duke.Duke;
-import duke.ui.Ui;
 import duke.task.TaskList;
+import duke.ui.Ui;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -37,7 +37,7 @@ public class MainWindow extends AnchorPane {
         String[] listContent = TaskList.printList("list");
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(String.join("\n", content), dukeImage),
-                DialogBox.getDukeDialog(String.join("\n",listContent), dukeImage)
+                DialogBox.getDukeDialog(String.join("\n", listContent), dukeImage)
         );
 
     }

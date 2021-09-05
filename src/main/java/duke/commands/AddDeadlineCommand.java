@@ -1,15 +1,16 @@
 package duke.commands;
 
-import duke.storage.Storage;
-import duke.ui.Ui;
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Task;
-import duke.task.TaskList;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 
 /**
  * Creates an AddDeadlineCommand to add deadlines to the task list.
@@ -17,10 +18,14 @@ import java.time.format.DateTimeParseException;
 public class AddDeadlineCommand extends Command {
     private String command;
 
+    /**
+     * Constructs new AddDeadlineCommand object.
+     *
+     * @param command Command the object carries out.
+     */
     public AddDeadlineCommand(String command) {
         assert command.startsWith("deadline");
         this.command = command;
-
     }
 
     /**
@@ -45,6 +50,7 @@ public class AddDeadlineCommand extends Command {
             Task task = new Deadline(name, date);
             tasks.add(task);
             storage.appendToFile("data/duke.txt", "D - 0 - " + name + "- " + date);
+            storage.storeHistory(command);
             return Ui.printTaskAdded(task, tasks.size());
         } catch (IOException e) {
             return new String[]{e.toString()};

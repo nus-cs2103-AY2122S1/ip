@@ -1,17 +1,14 @@
 package duke.commands;
 
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-/**
- * Creates an AddDeadlineCommand to add deadlines to the task list.
- */
-public class EndCommand extends Command {
+public class UndoAddTaskCommand extends Command {
     private String command;
 
-    public EndCommand(String command) {
-        assert command.startsWith("bye");
+    public UndoAddTaskCommand(String command) {
         this.command = command;
     }
 
@@ -23,6 +20,10 @@ public class EndCommand extends Command {
      * @return A String array containing output.
      */
     public String[] execute(Storage storage, TaskList tasks) {
-        return Ui.end();
+        storage.editFileContentsForDeletion(tasks.size());
+        Task currTask = tasks.get(tasks.size() - 1);
+        tasks.remove(tasks.size() - 1);
+        Storage.deleteLastCommand();
+        return Ui.printDeleteTask(currTask, tasks.size());
     }
 }

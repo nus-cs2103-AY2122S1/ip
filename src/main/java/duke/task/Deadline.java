@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     private LocalDate date;
+    private String unformattedDate;
 
     /**
      * Creates Deadline object.
@@ -21,6 +22,7 @@ public class Deadline extends Task {
         super(name);
         assert !(name == null);
         this.date = LocalDate.parse(date);
+        this.unformattedDate = date;
     }
 
     /**
@@ -31,5 +33,9 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+    }
+
+    public String getUnformattedDate() {
+        return this.unformattedDate;
     }
 }

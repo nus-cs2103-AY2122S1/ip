@@ -13,6 +13,7 @@ public class DukeException extends RuntimeException {
     private final String INVALID_COMMAND = "Enter a valid command!";
     private final String INVALID_NUMBER_FORMAT_DELETE = "Enter a valid number in this format 'delete <number>'";
     private final String INVALID_FIND_TASK = "Enter a valid find task format 'find <task name>";
+    private final String NO_CHANGES_TO_UNDO = "No changes to undo!";
     private String type;
     private String errorMessage;
 
@@ -25,6 +26,9 @@ public class DukeException extends RuntimeException {
     public DukeException(String type) {
         this.type = type;
         switch (type) {
+        case ("noChangesToUndo"):
+            errorMessage = NO_CHANGES_TO_UNDO;
+            break;
         case ("invalidToDo"):
             errorMessage = INVALID_TODO;
             break;

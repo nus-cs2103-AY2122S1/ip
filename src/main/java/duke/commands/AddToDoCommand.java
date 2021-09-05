@@ -1,13 +1,13 @@
 package duke.commands;
 
-import duke.storage.Storage;
-import duke.ui.Ui;
+import java.io.IOException;
+
 import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
-
-import java.io.IOException;
+import duke.ui.Ui;
 
 /**
  * Creates an AddDeadlineCommand to add deadlines to the task list.
@@ -39,6 +39,7 @@ public class AddToDoCommand extends Command {
         } catch (IOException e) {
             return new String[] {e.toString()};
         }
+        storage.storeHistory(command);
         return Ui.printTaskAdded(task, tasks.size());
 
     }

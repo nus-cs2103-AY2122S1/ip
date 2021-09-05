@@ -1,8 +1,6 @@
 package duke.ui;
 
-import java.util.Scanner;
 
-import duke.exception.DukeException;
 import duke.task.Task;
 
 /**
@@ -79,6 +77,17 @@ public class Ui {
      */
     public static String[] printTaskCompleted(Task task) {
         return display("Nice! I've marked this task as done:",
+                task.toString());
+    }
+
+    /**
+     * Prints simple message to indicate that a certain task has been marked as uncompleted.
+     *
+     * @param task Task that user has indicated as completed.
+     * @return String Array of output.
+     */
+    public static String[] printTaskUncompleted(Task task) {
+        return display("OHNOES! I've marked this task as not completed:",
                 task.toString());
     }
 

@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
     private LocalDate date;
+    private String unformattedDate;
 
     /**
      * Creates Event object.
@@ -20,6 +21,7 @@ public class Event extends Task {
         super(name);
         assert !(name == null);
         this.date = LocalDate.parse(date);
+        this.unformattedDate = date;
     }
 
     /**
@@ -30,5 +32,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+    }
+
+    public String getUnformattedDate() {
+        return this.unformattedDate;
     }
 }
