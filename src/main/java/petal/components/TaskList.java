@@ -3,7 +3,6 @@ package petal.components;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import petal.exception.EmptyDescException;
 import petal.exception.InvalidInputException;
@@ -19,15 +18,17 @@ import petal.task.ToDo;
  */
 public class TaskList {
 
-    private final List<Task> tasks;
+    private final List<Task> currentTasks;
+    private final List<Task> archivedTasks;
     private final Calendar calendar;
 
     /**
      * Constructs a TaskList instance
      */
     public TaskList() {
-        this.tasks = new ArrayList<>();
-        calendar = new Calendar();
+        this.currentTasks = new ArrayList<>();
+        this.calendar = new Calendar();
+        this.archivedTasks = new ArrayList<>();
     }
 
     /**
@@ -35,8 +36,10 @@ public class TaskList {
      *
      * @param addTasks The arraylist of previously saved tasks
      */
-    public void addSavedTasks(ArrayList<Task> addTasks) {
-        tasks.addAll(addTasks);
+    @SafeVarargs
+    public final void addTasks(ArrayList<Task>... addTasks) {
+        currentTasks.addAll(addTasks[0]);
+        archivedTasks.addAll(addTasks[1]);
     }
 
     /**
@@ -45,9 +48,9 @@ public class TaskList {
      * @param task The task to be added
      */
     public String addTask(Task task) {
-        tasks.add(task);
-        String plural = (tasks.size() + 1) > 0 ? " tasks!" : " task!";
-        return "Okay. I've added this task:\n" + task + "\nYou now have " + tasks.size() + plural;
+        currentTasks.add(task);
+        String plural = (currentTasks.size() + 1) > 0 ? " tasks!" : " task!";
+        return "Okay. I've added this task:\n" + task + "\nYou now have " + currentTasks.size() + plural;
     }
 
     /**
@@ -61,11 +64,11 @@ public class TaskList {
     public String deleteTask(String index) throws InvalidInputException {
         try {
             int indexOfTask = Integer.parseInt(index) - 1;
-            Task toBeDeleted = tasks.remove(indexOfTask);
+            Task toBeDeleted = currentTasks.remove(indexOfTask);
             if (toBeDeleted.isTimeable()) {
-                calendar.updateCalendar(tasks);
+                calendar.updateCalendar(currentTasks);
             }
-            return "Okay. I've deleted this task:\n" + toBeDeleted + "\nYou now have " + tasks.size()
+            return "Okay. I've deleted this task:\n" + toBeDeleted + "\nYou now have " + currentTasks.size()
                     + " task(s)!";
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidInputException(Responses.INVALID_TASK_NUMBER, e);
@@ -121,6 +124,23 @@ public class TaskList {
     }
 
     /**
+     * Adds the task to the list of archived task
+     *
+     * @param index The index of the index
+     * @throws InvalidInputException If index is invalid
+     */
+    public void archiveTask(String index) throws InvalidInputException {
+        try {
+            int indexOfTask = Integer.parseInt(index) - 1;
+            Task toArchive = currentTasks.get(indexOfTask);
+            deleteTask(index);
+            archivedTasks.add(toArchive);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new InvalidInputException(Responses.INVALID_TASK_NO);
+        }
+    }
+
+    /**
      * Checks if the task command was given in the correct format
      *
      * @param type The type of task
@@ -148,7 +168,7 @@ public class TaskList {
      */
     public String markTaskAsDone(String indexOfTask) throws InvalidInputException {
         try {
-            Task taskToBeCompleted = tasks.get(Integer.parseInt(indexOfTask) - 1);
+            Task taskToBeCompleted = currentTasks.get(Integer.parseInt(indexOfTask) - 1);
             return taskToBeCompleted.taskDone();
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidInputException(Responses.INVALID_TASK_NO);
@@ -156,11 +176,30 @@ public class TaskList {
     }
 
     /**
-     * Returns a string representation of the tasks
+     * Returns a string representation of the current tasks
      *
-     * @return String containing the number, type, and description of tasks
+     * @return String containing the number, type, and description of the saved tasks
      */
-    public String printList() {
+    public String printCurrTasks() {
+        return printListOfTasks(currentTasks);
+    }
+
+    /**
+     * Returns a string representation of the archived tasks
+     *
+     * @return String containing, the number, type, and description of the archived tasks
+     */
+    public String printArchive() {
+        return printListOfTasks(archivedTasks);
+    }
+
+    /**
+     * Returns a string representation of the tasks in the given list
+     *
+     * @param tasks The given list of tasks
+     * @return String containing, the number, type, and description of the archived tasks
+     */
+    public static String printListOfTasks(List<Task> tasks) {
         if (tasks.size() == 0) {
             return "No items in list yet!";
         }
@@ -194,8 +233,8 @@ public class TaskList {
     public String findTaskWithKeyword(String keyword) throws InvalidInputException {
         final int[] count = {1};
         StringBuilder result = new StringBuilder("Here are the tasks:");
-        tasks.stream().filter(x -> x.isKeyWordPresent(keyword))
-                      .forEach(x -> result.append('\n').append(count[0]++).append(". ").append(x));
+        currentTasks.stream().filter(x -> x.isKeyWordPresent(keyword))
+                .forEach(x -> result.append('\n').append(count[0]++).append(". ").append(x));
         if (count[0] == 1) {
             return "No tasks!";
         }
@@ -203,13 +242,32 @@ public class TaskList {
     }
 
     /**
-     * Returns a formatted string representation of the list of tasks that can be used for saving
+     * Returns the string representation of the current tasks for saving
      *
-     * @return Formatted string representation of all the user-added tasks
+     * @return Formatted string representation for saving
      */
-    public String formatForSaving() {
-        int count = 1;
+    public String formatForArchivesSaving() {
+        return formatTasksForSaving(archivedTasks);
+    }
+
+    /**
+     * Returns a formatted string representation of the archived tasks for saving
+     *
+     * @return Formatted string representation for saving
+     */
+    public String formatForCurrSaving() {
+        return formatTasksForSaving(currentTasks);
+    }
+
+    /**
+     * Returns the string representation of the tasks in the list
+     *
+     * @param tasks The list of tasks
+     * @return Formatted string representation for saving
+     */
+    private String formatTasksForSaving(List<Task> tasks) {
         StringBuilder result = new StringBuilder();
+        int count = 1;
         for (Task m : tasks) {
             if (count == 1) {
                 result.append(m.formatStrForSaving());

@@ -61,7 +61,7 @@ public abstract class Task {
      * @param str The string
      * @return String but with first letter capitalized
      */
-    public String capsFirstLetter(String str) {
+    private String capsFirstLetter(String str) {
         str = str.substring(0, 1).toUpperCase() + str.substring(1);
         return str;
     }

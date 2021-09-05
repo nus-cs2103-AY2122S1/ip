@@ -46,9 +46,9 @@ public class ParserTest {
     public void parseInput_todo_taskCommand() {
         Command command = parser.handleInput("todo go for a run");
         assertEquals("Okay. I've added this task:\n"
-                        + "[ ] Go for a run"
+                        + "[T][ ] Go for a run"
                         + "\nYou now have " + "1"
-                        + "task!",
+                        + " task!",
                 command.execute(taskListStub, storageStub));
     }
 

@@ -4,7 +4,7 @@ import petal.components.Storage;
 import petal.components.TaskList;
 
 /**
- * The Command interface represents all Command
+ * The Command interface represents all commands
  */
 public interface Command {
 

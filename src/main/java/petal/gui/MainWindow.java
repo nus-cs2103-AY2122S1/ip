@@ -4,12 +4,10 @@ import java.io.IOException;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import petal.components.Responses;
 import petal.components.Ui;
 
 /**
@@ -76,7 +74,7 @@ public class MainWindow extends AnchorPane {
      * Terminates the current bot instance by exiting the GUI
      */
     public void terminatePetal() {
-          Platform.exit();
+        Platform.exit();
     }
 
     /**

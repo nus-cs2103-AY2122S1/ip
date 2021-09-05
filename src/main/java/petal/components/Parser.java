@@ -4,11 +4,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
+import petal.command.ArchiveCommand;
 import petal.command.ByeCommand;
 import petal.command.Command;
 import petal.command.DateCommand;
 import petal.command.DeleteCommand;
 import petal.command.DoneCommand;
+import petal.command.DossiersCommand;
 import petal.command.FindCommand;
 import petal.command.ListCommand;
 import petal.command.TaskCommand;
@@ -35,6 +37,8 @@ public class Parser {
             return new ListCommand();
         case "bye":
             return new ByeCommand();
+        case "dossiers":
+            return new DossiersCommand();
         case "done":
             return new DoneCommand(formatted);
         case "delete":
@@ -48,6 +52,8 @@ public class Parser {
             return new DateCommand(formatted);
         case "find":
             return new FindCommand(formatted);
+        case "archive":
+            return new ArchiveCommand(formatted);
         default:
             return new UnintelligibleCommand();
         }

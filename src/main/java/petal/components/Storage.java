@@ -26,7 +26,8 @@ public class Storage {
     private boolean isFolderAndFilePresent;
 
     private final String folderPath;
-    private final String filePath;
+    private final String saveFilePath;
+    private final String archiveFilePath;
 
     private final TaskList taskList;
 
@@ -38,7 +39,8 @@ public class Storage {
     public Storage(TaskList taskList) {
         this.taskList = taskList;
         this.folderPath = System.getProperty("user.dir") + "/PetalData";
-        this.filePath = folderPath + "/Tasks.txt";
+        this.saveFilePath = folderPath + "/Tasks.txt";
+        this.archiveFilePath = folderPath + "/Archive.txt";
         isFolderAndFilePresent = true;
     }
 
@@ -54,8 +56,12 @@ public class Storage {
         try {
             Path path = Paths.get(folderPath);
             Files.createDirectories(path);
-            File petalData = new File(filePath);
-            petalData.createNewFile();
+
+            File petalData = new File(saveFilePath);
+            File archiveData = new File(archiveFilePath);
+
+            assert petalData.createNewFile();
+            assert archiveData.createNewFile();
         } catch (IOException e) {
             isFolderAndFilePresent = false;
         }
@@ -71,11 +77,9 @@ public class Storage {
      */
     public boolean hasUsedPetalBefore() {
         try {
-            File tasks = new File(filePath);
-            Scanner scanner = new Scanner(tasks);
-            ArrayList<Task> savedTasks = readTasks(new ArrayList<>(), scanner);
-            taskList.addSavedTasks(savedTasks);
-            scanner.close();
+            ArrayList<Task> savedTasks = readFile(saveFilePath);
+            ArrayList<Task> archive = readFile(archiveFilePath);
+            taskList.addTasks(savedTasks, archive);
             return true;
         } catch (FileNotFoundException | NoSuchElementException e) {
             return false;
@@ -86,14 +90,15 @@ public class Storage {
      * Reads the saved tasks from the PetalData.txt file.
      * Parses the text and converts them into the relevant Task objects
      *
-     * @param tasks The ArrayList of tasks to be returned
-     * @param fileScanner The scanner that is used to scan the file
+     * @param filePath The address of the file to be read
      * @return ArrayList of the saved tasks
      */
-    public ArrayList<Task> readTasks(ArrayList<Task> tasks, Scanner fileScanner) {
-        while (fileScanner.hasNextLine()) {
-            String taskLine = fileScanner.nextLine();
-
+    private ArrayList<Task> readFile(String filePath) throws FileNotFoundException {
+        File file = new File(filePath);
+        ArrayList<Task> tasks = new ArrayList<>();
+        Scanner sc = new Scanner(file);
+        while (sc.hasNextLine()) {
+            String taskLine = sc.nextLine();
             String[] components = taskLine.split("\\|");
             String typeOfTask = components[0];
             String descOfTask = components[2];
@@ -121,9 +126,14 @@ public class Storage {
         if (!isFolderAndFilePresent) {
             return;
         }
-        FileWriter fileWriter = new FileWriter(filePath);
-        fileWriter.write(taskList.formatForSaving());
-        fileWriter.close();
+        FileWriter currFileWriter = new FileWriter(saveFilePath);
+        FileWriter archiveFileWriter = new FileWriter(archiveFilePath);
+
+        currFileWriter.write(taskList.formatForCurrSaving());
+        archiveFileWriter.write(taskList.formatForArchivesSaving());
+
+        currFileWriter.close();
+        archiveFileWriter.close();
     }
 
 

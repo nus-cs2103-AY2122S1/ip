@@ -1,7 +1,5 @@
 package stubs;
 
-import java.time.LocalDate;
-
 import petal.task.Task;
 
 public class TaskStub extends Task {
@@ -28,7 +26,7 @@ public class TaskStub extends Task {
 
     @Override
     public String toString() {
-        return "[" + super.getStatusIcon() + "] " + "Go for a run";
+        return "[T][" + super.getStatusIcon() + "] " + "Go for a run";
     }
 
 }

@@ -8,7 +8,7 @@ import petal.task.Task;
 
 public class TaskListStub extends TaskList {
 
-    private List<TaskStub> tasks = new ArrayList<>();
+    private final List<TaskStub> tasks = new ArrayList<>();
 
     /**
      * Constructor for the TaskListStub class
@@ -18,8 +18,8 @@ public class TaskListStub extends TaskList {
     }
 
     @Override
-    public String printList() {
-        return "1. [T][ ] Go for a run";
+    public String printCurrTasks() {
+        return "1. " + tasks.get(0).toString();
     }
 
     @Override
@@ -40,7 +40,7 @@ public class TaskListStub extends TaskList {
 
     @Override
     public String addTask(Task task) {
-        return "Okay. I've added this task:\n" + task + "\nYou now have " + tasks.size() + "task!";
+        return "Okay. I've added this task:\n" + task + "\nYou now have " + tasks.size() + " task!";
     }
 
     @Override
