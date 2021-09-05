@@ -28,7 +28,7 @@ public class DoneCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.getIndex(index).setDone();
-        ui.showMessage(message(tasks));
+        ui.showMessage(getMessage(tasks));
     }
 
     /**
@@ -38,7 +38,7 @@ public class DoneCommand extends Command {
      * @return Message to display to the user.
      */
     @Override
-    public String message(TaskList tasks) {
+    public String getMessage(TaskList tasks) {
         return "Nice! I've marked this task as done: \n"
                 + tasks.getIndex(index).toString()
                 + "\n";

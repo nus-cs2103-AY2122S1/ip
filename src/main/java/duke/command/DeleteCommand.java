@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showMessage(this.message(tasks));
+        ui.showMessage(this.getMessage(tasks));
         tasks.removeIndex(index);
     }
 
@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
      * @return Message to display to the user.
      */
     @Override
-    public String message(TaskList tasks) {
+    public String getMessage(TaskList tasks) {
         return "Noted. I've removed this task:\n"
                 + tasks.getIndex(index).toString() + "\n"
                 + "Now you have " + (tasks.getSize() - 1) + " tasks in the list.\n";

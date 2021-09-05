@@ -17,7 +17,7 @@ public class CommandStub extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showMessage(message(tasks));
+        ui.showMessage(getMessage(tasks));
     }
 
     /**
@@ -27,7 +27,7 @@ public class CommandStub extends Command {
      * @return Message to display to the user.
      */
     @Override
-    public String message(TaskList tasks) {
+    public String getMessage(TaskList tasks) {
         return "Stub message";
     }
 }

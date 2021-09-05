@@ -3,13 +3,7 @@ package duke;
 import java.time.LocalDate;
 
 // Duke Commands
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 // Duke Exceptions
 import duke.exception.DukeException;
 // Duke Tasks
@@ -37,6 +31,8 @@ public class Parser {
         int selectedTask;
 
         switch (inputArray[0]) {
+        case "help":
+            return new HelpCommand();
         case "bye":
             return new ExitCommand();
         case "list":
