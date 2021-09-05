@@ -11,6 +11,8 @@ import java.io.*;
 
 public class Duke {
 
+    // Already uses Gradle
+
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
