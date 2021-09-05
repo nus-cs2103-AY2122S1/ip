@@ -18,8 +18,8 @@ public class HelpCommand implements Command {
      * @param storage Storage that changes the list stored in data/duke.txt based on the command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.helpMessage();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.helpMessage();
     }
 
     /**

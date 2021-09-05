@@ -24,13 +24,14 @@ public class DeleteCommand implements Command {
      * @param taskList Tasklist that contains an Arraylist of agendas on the list.
      * @param ui Ui that outputs something based on the command given.
      * @param storage Storage that changes the list stored in data/duke.txt based on the command.
+     * @return A message that tells the user that task has been deleted.
      * @throws DukeException catches an error where someone inputs something wrong.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task taskToDelete = taskList.deleteTask(startOfString);
         storage.deleteFromFile(taskToDelete);
-        ui.markAsDeleted(taskToDelete);
+        return ui.markAsDeleted(taskToDelete);
     }
 
     /**

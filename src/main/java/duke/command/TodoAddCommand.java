@@ -23,13 +23,16 @@ public class TodoAddCommand extends AddCommand {
      * @param taskList Tasklist that contains an Arraylist of agendas on the list.
      * @param ui Ui that outputs something based on the command given.
      * @param storage Storage that changes the list stored in data/duke.txt based on the command.
+     * @return A message that tells the user that they have added a Todo.
      * @throws DukeException throws an exception for user input error.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        String toPrint;
         int totalTasks = taskList.addToList("T", description, "NA");
         storage.addToText("T", description, "NA");
-        ui.addingTask(totalTasks, description, "NA", "T");
+        toPrint = ui.addingTask(totalTasks, description, "NA", "T");
+        return toPrint;
     }
 
     @Override

@@ -97,7 +97,7 @@ public class Storage {
             fw = new FileWriter(file, true);
             bw = new BufferedWriter(fw);
         } catch (IOException e) {
-            throw new DukeException("oh oh! Something went wrong!");
+            throw new DukeException("Oh oh! Something went wrong!");
         }
     }
 
@@ -167,7 +167,7 @@ public class Storage {
             fw = new FileWriter(file, true);
             bw = new BufferedWriter(fw);
         } catch (IOException e) {
-            throw new DukeException("    Oh oh! Something went wrong!");
+            throw new DukeException("Oh oh! Something went wrong!");
         }
     }
 
@@ -189,7 +189,7 @@ public class Storage {
             bw.write(type + "|0|" + description + "|" + time);
             bw.flush();
         } catch (IOException e) {
-            throw new DukeException("oh oh! Something went wrong!");
+            throw new DukeException("Oh oh! Something went wrong!");
         }
     }
 
