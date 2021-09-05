@@ -36,7 +36,8 @@ public class Parser {
     public static Command parse(String fullCommand, TaskList taskList) throws DukeException {
         // Find case based on first word of command
         String[] parsedCommand = fullCommand.split("\\s+", 3);
-        switch (parsedCommand[0]) {
+        String commandName = parsedCommand[0];
+        switch (commandName) {
 
         // "bye" command given
         case "bye":
@@ -48,138 +49,232 @@ public class Parser {
 
         // "done" command given
         case "done":
-            if (parsedCommand.length == 1) {
-                throw new DukeException(DukeExceptionType.INVALID_TASK_INDEX);
-            } else {
-                int toSet = Integer.parseInt(parsedCommand[1]);
-                if (taskList.isInvalidIndex(toSet)) {
-                    throw new DukeException(DukeExceptionType.INVALID_TASK_INDEX);
-                } else {
-                    return new DoneCommand(toSet - 1);
-                }
-            }
+            return parseDone(parsedCommand, taskList);
 
         // "delete" command given
         case "delete":
-            if (parsedCommand.length == 1) {
-                throw new DukeException(DukeExceptionType.INVALID_TASK_INDEX);
-            } else {
-                int toDelete = Integer.parseInt(parsedCommand[1]);
-                if (taskList.isInvalidIndex(toDelete)) {
-                    throw new DukeException(DukeExceptionType.INVALID_TASK_INDEX);
-                } else {
-                    return new DeleteCommand(toDelete - 1);
-                }
-            }
+            return parseDelete(parsedCommand, taskList);
 
         // "find" command given
         case "find":
-            if (parsedCommand.length == 1) {
-                throw new DukeException(DukeExceptionType.INVALID_FIND);
-            } else {
-                if (parsedCommand[1].contains("/date")) {
-                    if (parsedCommand.length == 2) {
-                        throw new DukeException(DukeExceptionType.MISSING_FIND_DATE);
-                    } else {
-                        LocalDate desiredDate = LocalDate.parse(parsedCommand[2]);
-                        return new FindDateCommand(desiredDate);
-                    }
-                } else if (parsedCommand[1].contains("/keyword")) {
-                    if (parsedCommand.length == 2) {
-                        throw new DukeException(DukeExceptionType.MISSING_FIND_KEYWORD);
-                    } else {
-                        String keyword = parsedCommand[2];
-                        return new FindKeywordCommand(keyword);
-                    }
-                } else {
-                    throw new DukeException(DukeExceptionType.INVALID_FIND);
-                }
-            }
+            return parseFind(parsedCommand);
 
         // Task command given
         default:
-            // Incomplete or invalid command
-            if (parsedCommand.length == 1) {
-                switch (fullCommand) {
-                case "deadline":
-                    throw new DukeException(DukeExceptionType.MISSING_DEADLINE_DESC);
+            return parseAdd(fullCommand);
+        }
+    }
 
-                case "event":
-                    throw new DukeException(DukeExceptionType.MISSING_EVENT_DESC);
+    /**
+     * Further parses a 'done' instruction from the user and returns a DoneCommand.
+     *
+     * @param parsedCommand Array of parsed instructions from the parse function.
+     * @param taskList Task list where task to set to done is located.
+     * @return DoneCommand based on user input.
+     * @throws DukeException if invalid command is given.
+     */
+    public static DoneCommand parseDone(String[] parsedCommand, TaskList taskList) throws DukeException {
+        if (parsedCommand.length == 1) {
+            throw new DukeException(DukeExceptionType.INVALID_TASK_INDEX);
+        }
 
-                case "todo":
-                    throw new DukeException(DukeExceptionType.MISSING_TODO_DESC);
+        String indexString = parsedCommand[1];
+        int toSet = Integer.parseInt(indexString);
 
-                default:
-                    throw new DukeException(DukeExceptionType.INVALID_INPUT);
-                }
+        if (taskList.isInvalidIndex(toSet)) {
+            throw new DukeException(DukeExceptionType.INVALID_TASK_INDEX);
+        }
 
-            } else {
-                Task newTask;
+        int doneIndex = toSet - 1;
+        return new DoneCommand(doneIndex);
+    }
 
-                String[] taskString = fullCommand.split("\\s+", 2);
-                String taskType = taskString[0];
-                String taskDetails = taskString[1];
+    /**
+     * Further parses a 'delete' instruction from the user and returns a DeleteCommand.
+     *
+     * @param parsedCommand Array of parsed instructions from the parse function.
+     * @param taskList Task list where task to delete is located.
+     * @return DeleteCommand based on user input.
+     * @throws DukeException if invalid command is given.
+     */
+    public static DeleteCommand parseDelete(String[] parsedCommand, TaskList taskList) throws DukeException {
+        if (parsedCommand.length == 1) {
+            throw new DukeException(DukeExceptionType.INVALID_TASK_INDEX);
+        }
 
-                switch (taskType) {
+        String indexString = parsedCommand[1];
+        int toDelete = Integer.parseInt(indexString);
 
-                // "deadline" command given
-                case "deadline": {
-                    String[] details = taskDetails.split(" /by ");
+        if (taskList.isInvalidIndex(toDelete)) {
+            throw new DukeException(DukeExceptionType.INVALID_TASK_INDEX);
+        }
 
-                    if (details.length == 1) {
-                        throw new DukeException(DukeExceptionType.MISSING_DEADLINE_DATETIME);
-                    } else {
-                        String[] deadline = details[1].split(" ");
-                        if (deadline.length == 1) {
-                            newTask = new Deadline(details[0], LocalDate.parse(details[1]));
-                        } else if (deadline.length == 2) {
-                            newTask = new Deadline(details[0], LocalDate.parse(deadline[0]),
-                                    LocalTime.parse(deadline[1]));
-                        } else {
-                            throw new DukeException(DukeExceptionType.INVALID_DATETIME);
-                        }
-                    }
-                    break;
-                }
+        int deleteIndex = toDelete - 1;
+        return new DeleteCommand(deleteIndex);
+    }
 
-                // "event" command given
-                case "event": {
-                    String[] details = taskDetails.split(" /at ");
+    /**
+     * Further parses a 'find' instruction from the user and returns a FindCommand.
+     *
+     * @param parsedCommand Array of parsed instructions from the parse function.
+     * @return FindKeywordCommand or FindDateCommand based on user input.
+     * @throws DukeException if invalid command is given.
+     */
+    public static Command parseFind(String[] parsedCommand) throws DukeException {
+        if (parsedCommand.length == 1) {
+            throw new DukeException(DukeExceptionType.INVALID_FIND);
+        }
 
-                    if (details.length == 1) {
-                        throw new DukeException(DukeExceptionType.MISSING_EVENT_PERIOD);
-                    } else {
-                        String[] periodRange = details[1].split(" ");
-                        if (periodRange.length == 2) {
-                            newTask = new Event(details[0], LocalDate.parse(periodRange[0]),
-                                    LocalDate.parse(periodRange[1]));
-                        } else if (periodRange.length == 3) {
-                            newTask = new Event(details[0], LocalDate.parse(periodRange[0]),
-                                    LocalTime.parse(periodRange[1]), LocalTime.parse(periodRange[2]));
-                        } else if (periodRange.length == 4) {
-                            newTask = new Event(details[0],
-                                    LocalDate.parse(periodRange[0]), LocalTime.parse(periodRange[1]),
-                                    LocalDate.parse(periodRange[2]), LocalTime.parse(periodRange[3]));
-                        } else {
-                            throw new DukeException(DukeExceptionType.INVALID_PERIOD);
-                        }
-                    }
-                    break;
-                }
+        String findDetails = parsedCommand[1];
 
-                // "todo" command given
-                case "todo":
-                    newTask = new Todo(taskDetails);
-                    break;
-
-                // Invalid command
-                default:
-                    throw new DukeException(DukeExceptionType.INVALID_INPUT);
-                }
-
-                return new AddCommand(newTask);
+        if (findDetails.contains("/date")) {
+            if (parsedCommand.length == 2) {
+                throw new DukeException(DukeExceptionType.MISSING_FIND_DATE);
             }
+
+            LocalDate desiredDate = LocalDate.parse(parsedCommand[2]);
+            return new FindDateCommand(desiredDate);
+
+        } else if (findDetails.contains("/keyword")) {
+            if (parsedCommand.length == 2) {
+                throw new DukeException(DukeExceptionType.MISSING_FIND_KEYWORD);
+            }
+
+            String keyword = parsedCommand[2];
+            return new FindKeywordCommand(keyword);
+
+        } else {
+            throw new DukeException(DukeExceptionType.INVALID_FIND);
+        }
+    }
+
+    /**
+     * Further parses an add instruction from the user and returns an AddCommand.
+     *
+     * @param fullCommand User input string in its entirety.
+     * @return AddCommand based on user input.
+     * @throws DukeException if invalid command is given.
+     */
+    public static Command parseAdd(String fullCommand) throws DukeException {
+        String[] parsedCommand = fullCommand.split("\\s+", 2);
+        String taskName = parsedCommand[0];
+
+        // Incomplete or invalid command
+        if (parsedCommand.length == 1) {
+            switch (taskName) {
+            case "deadline":
+                throw new DukeException(DukeExceptionType.MISSING_DEADLINE_DESC);
+
+            case "event":
+                throw new DukeException(DukeExceptionType.MISSING_EVENT_DESC);
+
+            case "todo":
+                throw new DukeException(DukeExceptionType.MISSING_TODO_DESC);
+
+            default:
+                throw new DukeException(DukeExceptionType.INVALID_INPUT);
+            }
+        }
+
+        Task newTask;
+        String taskDetails = parsedCommand[1];
+
+        switch (taskName) {
+
+        // "deadline" command given
+        case "deadline": {
+            newTask = parseDeadline(taskDetails);
+            break;
+        }
+
+        // "event" command given
+        case "event": {
+            newTask = parseEvent(taskDetails);
+            break;
+        }
+
+        // "todo" command given
+        case "todo":
+            newTask = new Todo(taskDetails);
+            break;
+
+        // Invalid command
+        default:
+            throw new DukeException(DukeExceptionType.INVALID_INPUT);
+        }
+
+        return new AddCommand(newTask);
+    }
+
+    /**
+     * Further parses a 'parseAdd' instruction from the user and returns a Deadline.
+     *
+     * @param taskDetails String containing concatenated task details.
+     * @return Deadline based on user input.
+     * @throws DukeException if invalid taskDetails string is given.
+     */
+    public static Deadline parseDeadline(String taskDetails) throws DukeException {
+        String[] details = taskDetails.split(" /by ");
+        String deadlineDescription = details[0];
+
+        if (details.length == 1) {
+            throw new DukeException(DukeExceptionType.MISSING_DEADLINE_DATETIME);
+        }
+
+        String[] deadline = details[1].split(" ");
+        String deadlineDate = details[0];
+        if (deadline.length == 1) { // only date provided
+            return new Deadline(deadlineDescription, LocalDate.parse(deadlineDate));
+        } else if (deadline.length == 2) { // date and time provided
+            String deadlineTime = details[1];
+            return new Deadline(deadlineDescription, LocalDate.parse(deadlineDate),
+                    LocalTime.parse(deadlineTime));
+        } else {
+            throw new DukeException(DukeExceptionType.INVALID_DATETIME);
+        }
+    }
+
+    /**
+     * Further parses a 'parseAdd' instruction from the user and returns an Event.
+     *
+     * @param taskDetails String containing concatenated task details.
+     * @return Event based on user input.
+     * @throws DukeException if invalid taskDetails string is given.
+     */
+    public static Event parseEvent(String taskDetails) throws DukeException {
+        String[] details = taskDetails.split(" /at ");
+        String eventDescription = details[0];
+
+        if (details.length == 1) {
+            throw new DukeException(DukeExceptionType.MISSING_EVENT_PERIOD);
+        }
+
+        String[] periodRange = details[1].split(" ");
+
+        if (periodRange.length == 2) { // start and end date provided
+            String startDate = periodRange[0];
+            String endDate = periodRange[1];
+            return new Event(eventDescription, LocalDate.parse(startDate),
+                    LocalDate.parse(endDate));
+
+        } else if (periodRange.length == 3) { // date, start and end time provided
+            String eventDate = periodRange[0];
+            String startTime = periodRange[1];
+            String endTime = periodRange[2];
+            return new Event(eventDescription, LocalDate.parse(eventDate),
+                    LocalTime.parse(startTime), LocalTime.parse(endTime));
+
+        } else if (periodRange.length == 4) { // start date and time, end date and time provided
+            String startDate = periodRange[0];
+            String startTime = periodRange[1];
+            String endDate = periodRange[2];
+            String endTime = periodRange[3];
+            return new Event(eventDescription,
+                    LocalDate.parse(startDate), LocalTime.parse(startTime),
+                    LocalDate.parse(endDate), LocalTime.parse(endTime));
+
+        } else {
+            throw new DukeException(DukeExceptionType.INVALID_PERIOD);
         }
     }
 }
