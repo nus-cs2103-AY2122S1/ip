@@ -58,7 +58,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput(ActionEvent event) {
         String input = userInput.getText();
-        if (input.equals("bye")) { // Not ideal, how to fix?
+        if (input.equals("q")) { // Not ideal, how to fix?
             handleExitProgram(event);
         }
 
