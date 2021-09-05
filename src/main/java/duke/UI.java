@@ -73,6 +73,9 @@ public class UI {
      * @return String of tasks
      */
     public static String list(TaskList taskList) {
+        if (taskList.size() == 0) {
+            return "You currently have no tasks!";
+        }
         String list = "Here are your current tasks:\n";
         for (int i = 1; i <= taskList.size(); i++) {
             list += i + "." + taskList.get(i).toString() + "\n";
