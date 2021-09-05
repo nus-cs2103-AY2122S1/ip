@@ -1,17 +1,25 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-    private String time;
-
-    public Deadline(String desc, String time) {
-        super(desc);
-        this.time = time;
+    public Deadline(String title, LocalDate timeDue) {
+        super(title, Type.DEADLINE);
+        this.timeDue = timeDue;
     }
 
-    public String getDeadline() {
-        return time;
+    public Deadline(String title, LocalDate timeDue, boolean isDone) {
+        super(title, Type.DEADLINE);
+        this.timeDue = timeDue;
+        this.isDone = isDone;
     }
-
+    /**
+     * Returns the string representation of a Deadline.
+     *
+     * @return A string describing the Deadline.
+     */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + this.time + ")";
+        String formattedTimeDue = this.timeDue == null ? "" : this.timeDue.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return super.toString() + String.format(" (by: %s)", formattedTimeDue);
     }
 }

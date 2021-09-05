@@ -1,17 +1,27 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    private String time;
 
-    public Event (String desc, String time) {
-        super(desc);
-        this.time = time;
+    public Event (String desc, LocalDate timeDue) {
+        super(desc, Type.EVENT);
+        this.timeDue = timeDue;
     }
 
-    public String getTime() {
-        return time;
+    public Event(String title, LocalDate timeDue, boolean isDone) {
+        super(title, Type.EVENT);
+        this.timeDue = timeDue;
+        this.isDone = isDone;
     }
 
+    /**
+     * Returns the string representation of a Event.
+     *
+     * @return A string describing the Event.
+     */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + this.time + ")";
+        String formattedTimeDue = this.timeDue == null ? "" : this.timeDue.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            return super.toString() + String.format(" (at: %s)", formattedTimeDue);
     }
 }
