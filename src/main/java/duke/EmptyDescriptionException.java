@@ -3,7 +3,7 @@ package duke;
 /**
  * Represents an error when the description is empty.
  */
-public class EmptyDescriptionException extends RuntimeException {
+public class EmptyDescriptionException extends DukeException {
     EmptyDescriptionException(String message) {
         super(message);
     }

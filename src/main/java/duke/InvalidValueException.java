@@ -3,7 +3,7 @@ package duke;
 /**
  * Represents an error when the value is invalid.
  */
-public class InvalidValueException extends RuntimeException {
+public class InvalidValueException extends DukeException {
     InvalidValueException(String message) {
         super(message);
     }

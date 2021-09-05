@@ -3,7 +3,7 @@ package duke;
 /**
  * Represents an error when the command is invalid.
  */
-public class InvalidCommandException extends RuntimeException {
+public class InvalidCommandException extends DukeException {
     InvalidCommandException(String message) {
         super(message);
     }
