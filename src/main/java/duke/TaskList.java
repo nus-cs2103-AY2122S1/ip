@@ -98,8 +98,8 @@ public class TaskList {
         int taskIndex = 7;
         try {
             //Delete from ArrayList
-            assert taskToDel >= 0;
             int taskToDel = Integer.parseInt(userInput.substring(taskIndex)) - 1;
+            assert taskToDel >= 0;
             Task task = this.tasks.get(taskToDel);
             this.tasks.remove(taskToDel);
             return(String.format("Noted. I've removed this task:\n%s\nNow you have %s tasks in list"
