@@ -14,8 +14,8 @@ public class Parser {
     public Command parse(String command, TaskList taskArr) throws DukeException {
         String[] commandArr = command.split(" ");
         int commandArrLength = commandArr.length;
-        if (command.equals("bye")) {
-            return new ByeCommand();
+        if (command.equals("save")) {
+            return new SaveCommand();
         } else if (command.equals("list")) {
             return new ListCommand();
         } else if (commandArr[0].equals("done")) {

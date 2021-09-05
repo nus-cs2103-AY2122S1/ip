@@ -108,8 +108,8 @@ public class Ui {
      *
      * @return
      */
-    public String goodbye() {
-        return "Bye. Hope to see you again soon!";
+    public String saveMessage() {
+        return "Your data has been saved";
     }
 
     /**
