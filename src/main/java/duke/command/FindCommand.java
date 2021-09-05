@@ -9,7 +9,7 @@ public class FindCommand extends Command {
 
     public FindCommand(Duke duke, String keyword) {
         super(duke);
-        this.keyword = keyword;
+        this.keyword = keyword.toLowerCase();
     }
 
     @Override

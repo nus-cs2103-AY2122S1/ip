@@ -100,7 +100,7 @@ public class TaskList {
         TaskList tasksWithKey = new TaskList();
 
         for (int i = 0; i < len; i++) {
-            if (this.listOfTasks.get(i).task.contains(keyword)) {
+            if (this.listOfTasks.get(i).task.toLowerCase().contains(keyword)) {
                 tasksWithKey.listOfTasks.add(this.listOfTasks.get(i));
             }
         }
