@@ -22,6 +22,7 @@ public class Main extends Application {
         if (iconStream != null) {
             stage.getIcons().add(new Image(iconStream));
         }
+        stage.setTitle("Nekobot v0.3");
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
 
         AnchorPane ap = null;
