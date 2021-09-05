@@ -27,7 +27,7 @@ public class Duke {
      * input.
      *
      * @param input the user input
-     * @return reponse from the program
+     * @return response from the program
      */
     public String getResponse(String input) {
         String response = feedIntoParser(input);
