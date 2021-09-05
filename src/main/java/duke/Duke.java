@@ -25,8 +25,8 @@ public class Duke {
      */
     public Duke(String filePath) {
         this.filePath = filePath;
-        responseLogic = new ResponseLogic();
-        storage = new Storage(filePath);
+        this.responseLogic = new ResponseLogic();
+        this.storage = new Storage(filePath);
     }
 
     /**
@@ -36,19 +36,19 @@ public class Duke {
      */
     public String initializeTaskList() {
         try {
-            tasks = new TaskList(storage.load());
-            return responseLogic.welcomeResponse();
+            this.tasks = new TaskList(this.storage.load());
+            return this.responseLogic.welcomeResponse();
         } catch (FileNotFoundException e) {
             new File("./data").mkdirs();
             try {
                 File file = new File("./data/task_list.txt");
                 file.createNewFile();
-                tasks = new TaskList(new ArrayList<Task>());
+                this.tasks = new TaskList(new ArrayList<Task>());
             } catch (IOException ioE) {
                 System.out.println(ioE);
             }
 
-            return responseLogic.loadingErrorResponse(filePath);
+            return this.responseLogic.loadingErrorResponse(this.filePath);
         }
     }
 
@@ -63,15 +63,15 @@ public class Duke {
             Command c = Parser.parse(input);
             return c.execute(this.tasks, this.responseLogic, this.storage);
         } catch (DukeException e) {
-            return responseLogic.dukeExceptionResponse(e);
+            return this.responseLogic.dukeExceptionResponse(e);
         } catch (IndexOutOfBoundsException e) {
-            return responseLogic.indexOutOfBoundsExceptionResponse();
+            return this.responseLogic.indexOutOfBoundsExceptionResponse();
         } catch (NumberFormatException e) {
-            return responseLogic.numberFormatExceptionResponse();
+            return this.responseLogic.numberFormatExceptionResponse();
         } catch (FileNotFoundException e) {
-            return responseLogic.loadingErrorResponse(filePath);
+            return this.responseLogic.loadingErrorResponse(this.filePath);
         } catch (DateTimeParseException e) {
-            return responseLogic.dateTimeParseExceptionResponse();
+            return this.responseLogic.dateTimeParseExceptionResponse();
         }
     }
 }
