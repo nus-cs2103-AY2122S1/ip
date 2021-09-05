@@ -1,52 +1,99 @@
 package duke.components;
-import duke.task.*;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Storage {
     private final File dataFile;
     private final File dataFolder;
+    private final File dukeFolder;
     private final String filePath;
 
     public Storage(String filePath) {
-        this.dataFile = new File(filePath);
-        this.dataFolder = new File(filePath.substring(0, 6));
+        this.dataFile = new File(filePath); // "./duke/data/data.txt"
+        this.dukeFolder = new File(filePath.substring(0, 6)); // "./duke"
+        this.dataFolder = new File(filePath.substring(0, 11)); // "./duke/data"
         this.filePath = filePath;
     }
 
     public void loadInto(TaskList taskList) {
 
-        // if data folder does not exist, create folder and file
-        if (!dataFolder.exists()) {
-            try {
-                File dataDirectory = new File("./duke/data/data.txt");
-                if (dataDirectory.createNewFile()) {
-                    System.out.println("Data file has been created.");
-                }
-            } catch (IOException e) {
-                System.out.println("An error occurred.");
-                e.printStackTrace();
-            }
+        String dataPath = "./duke/data/data.txt";
+
+        try {
+            Path path = Paths.get(dataPath);
+            Files.createDirectories(path.getParent());
+            Files.createFile(path);
+            System.out.println("Directories for data.txt is created.");
+        } catch (IOException e) {
+            System.out.println("Failed to create data directories" + e.getMessage());
         }
 
-        // if data.txt does not exist, create file
-        if (!dataFile.exists()) {
-            try {
-                File dataDirectory = new File("./duke/data/data.txt");
-                if (dataDirectory.createNewFile()) {
-                    System.out.println("Data file has been created.");
-                }
-            } catch (IOException e) {
-                System.out.println("An error occurred.");
-                e.printStackTrace();
-            }
-        }
+        // if duke folder does not exist, create duke folder, data folder and data file
+//        if (!dukeFolder.exists()) {
+//            dukeFolder.mkdir();
+//            try {
+//                File dataFolder = new File("./duke/data");
+//                if (dataFolder.createNewFile()) {
+//                    System.out.println("Data folder has been created.");
+//                }
+//            } catch (IOException e) {
+//                System.out.println("An error occurred.");
+//                e.printStackTrace();
+//            }
+//
+//            try {
+//                File dataFile = new File("./duke/data/data.txt");
+//                if (dataFile.createNewFile()) {
+//                    System.out.println("Data file has been created.");
+//                }
+//            } catch (IOException e) {
+//                System.out.println("An error occurred.");
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        // if data folder does not exist, create folder and file
+//        if (!dataFolder.exists()) {
+//            dataFolder.mkdir();
+//            try {
+//                File dataDirectory = new File("./duke/data/data.txt");
+//                if (dataDirectory.createNewFile()) {
+//                    System.out.println("Data file has been created.");
+//                } else {
+//                    //
+//                }
+//            } catch (IOException e) {
+//                System.out.println("An error occurred.");
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        // if data.txt does not exist, create file
+//        if (!dataFile.exists()) {
+//            try {
+//                File dataDirectory = new File("./duke/data/data.txt");
+//                if (dataDirectory.createNewFile()) {
+//                    System.out.println("Data file has been created.");
+//                } else {
+//                    //
+//                }
+//            } catch (IOException e) {
+//                System.out.println("An error occurred.");
+//                e.printStackTrace();
+//            }
+//        }
 
         // a List to store all Tasks read from data.txt
         ArrayList<String> dataRead = new ArrayList<>();

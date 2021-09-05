@@ -1,6 +1,8 @@
-package duke;
-import duke.components.*;
-import duke.task.*;
+import duke.components.Parser;
+import duke.components.Storage;
+import duke.components.Ui;
+import duke.components.TaskList;
+import duke.task.Task;
 import java.util.Scanner;
 
 public class Duke {

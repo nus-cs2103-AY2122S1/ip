@@ -1,5 +1,5 @@
 package duke.components;
-import duke.task.*;
+import duke.task.Task;
 
 public class Ui {
     private final String lineBreak;
