@@ -1,6 +1,9 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.IntPredicate;
 import java.util.stream.IntStream;
 
 import duke.tasks.Task;
@@ -94,6 +97,37 @@ public class TaskList {
         } else {
             return res.substring(0, res.length() - 1);
         }
+    }
+
+    /**
+     * Returns a String for Sort command.
+     *
+     * @param sortFilter filtering predicate
+     * @param order 0 for ascending, 1 for descending
+     *
+     * @return String for Sort
+     */
+    public String stringifyTasksForSort(IntPredicate sortFilter, int order) {
+        assert order == 0 || order == 1;
+
+        if (this.tasks.size() == 0) {
+            return "No tasks added yet!";
+        }
+
+        AtomicInteger count = new AtomicInteger();
+
+        String res = IntStream
+                .range(0, this.tasks.size())
+                .filter(sortFilter)
+                .mapToObj(this.tasks::get)
+                .sorted(order == 0 ? Task::compareTo : Comparator.reverseOrder())
+                .map(t -> {
+                    count.getAndIncrement();
+                    return count + ". " + t.toString() + "\n";
+                })
+                .reduce("", (x, y) -> x + y);
+
+        return res.substring(0, res.length() - 1);
     }
 
     /**

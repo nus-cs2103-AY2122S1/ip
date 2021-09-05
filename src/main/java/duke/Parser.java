@@ -9,6 +9,7 @@ import duke.command.Command;
 import duke.command.End;
 import duke.command.Find;
 import duke.command.List;
+import duke.command.Sort;
 import duke.exception.DukeException;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidFormatException;
@@ -60,6 +61,9 @@ public class Parser {
                 break;
             case "find":
                 command = new Find(words);
+                break;
+            case "sort":
+                command = new Sort(words);
                 break;
             case "todo":
                 String[] split = input.split(" ");

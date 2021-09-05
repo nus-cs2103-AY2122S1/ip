@@ -20,6 +20,7 @@ public class Duke {
             + "\t\t `done ${i}` to mark task i as completed\n"
             + "\t\t `delete ${i}` to delete task i\n"
             + "\t\t `find ${keyword}` to find tasks by keyword\n"
+            + "\t\t `sort ${flag}` to sort tasks. [Opt] Flags; -T, -E, -D and -d for descending\n"
             + "\t\t `bye` to end this chat\n";
 
     private final Storage storage;
