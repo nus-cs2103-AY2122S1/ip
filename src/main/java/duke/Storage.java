@@ -46,11 +46,11 @@ public class Storage {
                 try {
                     List<String> data = Files.readAllLines(dataFilePath);
                     for (int i = 0; i < data.size(); i++) {
+                        assert data.get(i).contains("/");
                         String[] lineTask = data.get(i).split("/");
                         String taskType = lineTask[0];
                         boolean isDone = lineTask[1].equals("true");
                         String taskDesc = lineTask[2];
-
 
                         if (taskType.equals("T")) {
                             ToDo toDo = new ToDo(taskDesc);

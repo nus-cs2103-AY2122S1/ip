@@ -23,6 +23,9 @@ public class DeleteCommand extends Command {
      * @param storage Storage to store data of user.
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        assert taskList != null;
+        assert ui != null;
+        assert storage != null;
         try {
             if (numToBeRemoved < 0 || numToBeRemoved > taskList.getSize()) {
                 ui.displayWrongCommand();

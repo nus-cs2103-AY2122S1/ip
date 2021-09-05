@@ -21,6 +21,7 @@ public class Duke {
      */
     public Duke(String filePath) {
         ui = new Ui();
+        assert !filePath.equals("");
         storage = new Storage(filePath);
         taskList = new TaskList(storage.load());
     }
@@ -53,7 +54,7 @@ public class Duke {
      * Generates response for user's input.
      *
      * @param input user's input typed in console.
-     * @return
+     * @return Response from dory
      */
     public String getResponse(String input) {
         Command c = Parser.parse(input);
