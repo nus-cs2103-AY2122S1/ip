@@ -1,54 +1,33 @@
 package duke;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class Ui {
-    private final BufferedReader in;
-    private final PrintWriter out;
-
-    /**
-     * Handles user interaction. I/O dependencies are exposed for injection in tests.
-     *
-     * @param in source of user input.
-     * @param out output to respond to user input.
-     */
-    public Ui(BufferedReader in, PrintWriter out) {
-        this.in = in;
-        this.out = out;
-    }
-
     /**
      * Displays default Duke startup banner.
      */
-    public void init() {
+    public String init() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        out.println("Hello from\n" + logo);
-        out.println("Hello! I'm Duke.Duke");
-        out.println("What can I do for you?");
-        out.flush();
+        return "Hello from\n" + logo
+               + "What can I do for you?";
     }
 
     /**
      * Displays bye message.
      */
-    public void terminate() {
-        out.println("Bye. Hope to see you again soon!");
-        out.flush();
+    public String terminate() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * Displays failure message.
      */
-    public void fail() {
-        out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
-        out.flush();
+    public String fail() {
+        return "OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 
     /**
@@ -56,14 +35,15 @@ public class Ui {
      *
      * @param tasks tasks found by taskList
      */
-    public void printFind(ArrayList<Task> tasks) {
-        out.println("____________________________________________________________");
-        out.println("Here are the matching tasks in your list:");
+    public String printFind(ArrayList<Task> tasks) {
+        String response = "";
+        response += "____________________________________________________________\n"
+                    + "Here are the matching tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
-            out.println((i + 1) + ". " + tasks.get(i));
+            response += (i + 1) + ". " + tasks.get(i) + "\n";
         }
-        out.println("____________________________________________________________");
-        out.flush();
+        response += "____________________________________________________________";
+        return response;
     }
 
     /**
@@ -71,18 +51,7 @@ public class Ui {
      *
      * @param response string reply to command
      */
-    public void printResponse(String response) {
-        out.println(response);
-        out.flush();
-    }
-
-    /**
-     * Reads next user input.
-     *
-     * @return user input in string format.
-     * @throws IOException issue found in reading file.
-     */
-    public String getNextCommand() throws IOException {
-        return this.in.readLine();
+    public String printResponse(String response) {
+        return response;
     }
 }

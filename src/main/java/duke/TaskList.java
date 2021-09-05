@@ -35,10 +35,12 @@ public class TaskList implements Serializable {
     /**
      * Retrieves all stored tasks and displays them.
      */
-    public void list() {
+    public String list() {
+        String result = "";
         for (int i = 0; i < this.numberOfTasks; i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i));
+            result += (i + 1) + ". " + tasks.get(i) + "\n";
         }
+        return result;
     }
 
     /**
@@ -46,10 +48,10 @@ public class TaskList implements Serializable {
      *
      * @param taskNumber position of task in the TaskList
      */
-    public void done(int taskNumber) {
+    public String done(int taskNumber) {
         tasks.get(taskNumber - 1).complete();
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("  " + tasks.get(taskNumber - 1));
+        return "Nice! I've marked this task as done: \n"
+               + "  " + tasks.get(taskNumber - 1);
     }
 
     /**
@@ -57,13 +59,14 @@ public class TaskList implements Serializable {
      *
      * @param taskNumber position of target task
      */
-    public void delete(int taskNumber) {
+    public String delete(int taskNumber) {
+        String result = "";
         Task task = tasks.get(taskNumber - 1);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + task);
+        result += "Noted. I've removed this task:\n"
+                  + "  " + task;
         tasks.remove(taskNumber - 1);
         this.numberOfTasks--;
-        System.out.printf("Now you have %d %s in the list.\n", this.numberOfTasks, this.numberOfTasks == 1 ? "task" : "tasks");
+        return result + String.format("Now you have %d %s in the list.\n", this.numberOfTasks, this.numberOfTasks == 1 ? "task" : "tasks");
     }
 
     /**

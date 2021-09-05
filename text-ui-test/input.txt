@@ -1,5 +1,0 @@
-normal task
-todo todotask
-event eventtask /at time
-deadline deadlinetask /by deadline
-done 3

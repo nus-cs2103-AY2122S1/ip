@@ -4,26 +4,18 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Parses inputs provided by ui, and directs ui to print corresponding output.
+ */
 public class Parser {
-    private Ui ui;
-
-    /**
-     * Parses inputs provided by ui, and directs ui to print corresponding output.
-     *
-     * @param ui ui used to interact with users.
-     */
-    public Parser(Ui ui) {
-        this.ui = ui;
-    }
-
     /**
      * Executes action associated with provided string input, and prints out relevant details to console.
      *
-     * @param input command associated with an action
+     * @param input    command associated with an action
      * @param taskList storage used to carry out actions
      * @return whether Duke has completed executing
      */
-    public boolean parse(String input, TaskList taskList) {
+    public static String parse(String input, TaskList taskList, Ui ui) {
         Pattern todoPattern = Pattern.compile("todo (.*)");
         Pattern deadlinePattern = Pattern.compile("deadline (.*) /by (.*)");
         Pattern eventPattern = Pattern.compile("event (.*) /at (.*)");
@@ -31,68 +23,58 @@ public class Parser {
 
         // Print out list
         if (input.equals("list")) {
-            taskList.list();
-            return false;
+            return ui.printResponse(taskList.list());
         }
 
         // Find related tasks
         Matcher findMatcher = findPattern.matcher(input);
         if (findMatcher.find()) {
             ArrayList<Task> tasks = taskList.find(findMatcher.group(1));
-            this.ui.printFind(tasks);
-            return false;
+            return ui.printFind(tasks);
         }
 
         // Complete a task
         if (Pattern.matches("done \\d", input)) {
             String[] items = input.split(" ");
-            taskList.done(Integer.parseInt(items[1]));
-            return false;
+            return ui.printResponse(taskList.done(Integer.parseInt(items[1])));
         }
 
         // Delete a task
         if (Pattern.matches("delete \\d", input)) {
             String[] items = input.split(" ");
-            taskList.delete(Integer.parseInt(items[1]));
-            return false;
+            return ui.printResponse(taskList.delete(Integer.parseInt(items[1])));
         }
 
         // Add a Todo type task
         Matcher todoMatcher = todoPattern.matcher(input);
         if (todoMatcher.find()) {
             String response = taskList.addCustom(new Todo(todoMatcher.group(1)));
-            ui.printResponse(response);
-            return false;
+            return ui.printResponse(response);
         }
 
         // Add a Deadline type task
         Matcher deadlineMatcher = deadlinePattern.matcher(input);
         if (deadlineMatcher.find()) {
             String response = taskList.addCustom(new Deadline(deadlineMatcher.group(1), deadlineMatcher.group(2)));
-            ui.printResponse(response);
-            return false;
+            return ui.printResponse(response);
         }
 
         // Add an Event type task
         Matcher eventMatcher = eventPattern.matcher(input);
         if (eventMatcher.find()) {
             String response = taskList.addCustom(new Event(eventMatcher.group(1), eventMatcher.group(2)));
-            ui.printResponse(response);
-            return false;
+            return ui.printResponse(response);
         }
 
         // Exit application
         if (input.equals("bye")) {
-            ui.terminate();
-            return true;
+            return ui.terminate();
         }
 
         // Identify reason for mis-input
         if (input.length() >= 4 && input.substring(0, 4).equals("todo")) {
-            ui.printResponse("OOPS!!! The description of a todo cannot be empty.");
-            return false;
+            return ui.printResponse("OOPS!!! The description of a todo cannot be empty.");
         }
-        ui.fail();
-        return false;
+        return ui.fail();
     }
 }
