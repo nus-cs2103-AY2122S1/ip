@@ -1,6 +1,7 @@
-package duke;
+package duke.task;
 
 public class Event extends DatedTask {
+    protected static final String COMMAND_EVENT = "event";
 
     /**
      * Returns an Event instance.
@@ -33,13 +34,13 @@ public class Event extends DatedTask {
         return output;
     }
 
+    @Override
     /**
      * Returns proper format to write to txt file.
      */
     public String toWriteString() {
-        String output = Duke.COMMAND_EVENT;
-        String isDone = (this.isDone ? "1" : "0");
-        output += DIVIDER + isDone + DIVIDER + this.description + DIVIDER + this.date;
+        String output = COMMAND_EVENT;
+        output += super.toWriteString();
         return output;
     }
 }

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import duke.task.Task;
+
 abstract class Formatter {
 
     private static final String INDENTATION_1 = " ";

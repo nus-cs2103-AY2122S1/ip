@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.task.Task;
+
 public class Storage {
 
     private String filepath;

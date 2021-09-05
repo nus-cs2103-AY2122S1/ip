@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 abstract class DatedTask extends Task {
     protected String date;
@@ -11,6 +11,11 @@ abstract class DatedTask extends Task {
         this.description = description;
         this.date = date;
         this.isDone = isDone;
+    }
+
+    public String toWriteString() {
+        String isDone = (this.isDone ? "1" : "0");
+        return DIVIDER + isDone + DIVIDER + this.description + DIVIDER + this.date;
     }
 
 }
