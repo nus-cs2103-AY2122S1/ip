@@ -39,6 +39,8 @@ public class Parser {
         int selectedTask;
 
         switch (inputArray[0]) {
+        case "help":
+            return new HelpCommand();
         case "bye":
             return new ExitCommand();
         case "list":

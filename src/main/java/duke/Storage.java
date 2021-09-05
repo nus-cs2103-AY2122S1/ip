@@ -36,7 +36,11 @@ public class Storage {
      * @return TaskList of the tasks stored in the file.
      */
     protected TaskList load() {
+        final String DONE_FLAG = "1";
+        final String STRING_SEPERATOR = "\\|";
+
         TaskList tasks = new TaskList();
+
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
             String line;
@@ -45,8 +49,8 @@ public class Storage {
                 String[] arr;
                 boolean isDone;
 
-                arr = line.split("\\|");
-                isDone = arr[1].equals("1");
+                arr = line.split(STRING_SEPERATOR);
+                isDone = arr[1].equals(DONE_FLAG);
 
                 switch (arr[0]) {
                 case "T":

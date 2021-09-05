@@ -28,7 +28,7 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         results = tasks.findTasks(this.regex);
-        ui.showMessage(this.message(results));
+        ui.showMessage(this.getMessage(results));
     }
 
     /**
@@ -37,7 +37,7 @@ public class FindCommand extends Command {
      * @return Text representation of the found results.
      */
     @Override
-    public String message(TaskList tasks) {
+    public String getMessage(TaskList tasks) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Here are the matching tasks in your list:\n");
         for (int i = 0; i < tasks.getSize(); i++) {

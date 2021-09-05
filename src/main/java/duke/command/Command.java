@@ -33,5 +33,5 @@ public abstract class Command {
      * @param tasks TaskList of current tasks.
      * @return Message to display to the user.
      */
-    public abstract String message(TaskList tasks);
+    protected abstract String getMessage(TaskList tasks);
 }

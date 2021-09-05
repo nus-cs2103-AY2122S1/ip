@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.InputStream;
 import java.util.Scanner;
 
 import javafx.scene.control.Label;
@@ -16,8 +17,10 @@ import javafx.scene.layout.VBox;
 public class Ui {
     private Scanner inputReader = null;
     private VBox dialogContainer = null;
-    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/duk.jpg"));
-    private final Image user = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
+    private final InputStream dukImageStream = this.getClass().getResourceAsStream("/images/duk.jpg");
+    private final InputStream userImageStream = this.getClass().getResourceAsStream("/images/user.jpg");
+    private final Image duke = new Image(dukImageStream);
+    private final Image user = new Image(userImageStream);
 
     /**
      * Sole constructor for invocation by Duke.
@@ -48,19 +51,6 @@ public class Ui {
      */
     protected String readCommand() {
         return inputReader.nextLine();
-    }
-
-    /**
-     * Displays an error message for unknown commands
-     *
-     * @param error Error message to be displayed.
-     */
-    protected void showLoadingError(String error) {
-        String loadingErrorMessage = "OOPS!!! I'm sorry, but I don't know what that means :-(";
-        System.out.println(loadingErrorMessage);
-        if (dialogContainer != null) {
-            printDialog(loadingErrorMessage);
-        }
     }
 
     /**

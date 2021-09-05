@@ -33,7 +33,7 @@ public class AddCommand extends Command {
         assert tasks != null : "AddCommand must execute with a TaskList";
 
         tasks.add(task);
-        ui.showMessage(this.message(tasks));
+        ui.showMessage(this.getMessage(tasks));
     }
 
     /**
@@ -43,7 +43,7 @@ public class AddCommand extends Command {
      * @return Message to display to the user.
      */
     @Override
-    public String message(TaskList tasks) {
+    public String getMessage(TaskList tasks) {
         return "Got it. I've added this task:\n"
                 + task.toString()
                 + "\n";
