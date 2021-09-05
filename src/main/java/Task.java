@@ -1,34 +1,112 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected char type;
+    protected LocalDate timeDue;
 
-    public Task(String description) {
+    protected enum Type {
+        TODO('T'),
+        EVENT('E'),
+        DEADLINE('D');
+        public final char indicator;
+        Type(char indicator) {
+            this.indicator = indicator;
+        }
+        public void setType(Task task) {
+            task.type = this.indicator;
+        }
+    }
+
+    /**
+     * A constructor for a Task.
+     *
+     * @param description a String representing the user-input title of the task.
+     * @param task the type of the task
+     */
+    public Task(String description, Type task) {
         this.description = description;
         this.isDone = false;
+        task.setType(this);
+
     }
 
-    public String getName() {
-        return description;
+    /**
+     * A factory method for creating tasks with additional details.
+     * @param taskType a TypeIndicator enum representing the type of the task
+     * @param isDone a boolean representing whether or not the task has been completed
+     * @param title a String representing the title of the task
+     * @param timeDue a String representing when the task is due, if it is due.
+     * @return
+     */
+    public static Task createTask(Type taskType, boolean isDone, String title, LocalDate timeDue) {
+        switch (taskType) {
+            case TODO:
+                return new ToDo(title, isDone);
+            case DEADLINE:
+                return new Deadline(title, timeDue, isDone);
+            case EVENT:
+                return new Event(title, timeDue, isDone);
+        }
+        // If the type cannot be parsed, it defaults to TO-DO.
+        return new ToDo(title, isDone);
     }
 
-    public boolean isDone() {
-        return isDone;
+    /**
+     * Parses structured text into a Task.
+     * Text must be of the format <typeIndicator><done><deadline>|<title>
+     * @param text The text to be parsed into a Task.
+     * @return a Task based on the parsed text
+     */
+    public static Task parseTaskFromSavedText(String text) {
+        char typeIndicator = text.charAt(0);
+        char doneIndicator = text.charAt(1);
+        boolean isDone = doneIndicator == '1';
+        LocalDate timeDue = LocalDate.parse(text.substring(2, text.indexOf('|')));
+        String title = text.substring(text.indexOf('|') + 1);
+        return createTask(charToTypeEnum(typeIndicator), isDone, title, timeDue);
     }
 
-    public void setName(String desc) {
-        this.description = desc;
+    /**
+     * Convert a task to a String that can be loaded as load data.
+     * @return a String that represents its saved state
+     */
+    public String toSaveData() {
+        int doneIndicator = this.isDone ? 1 : 0;
+        String timeDueString = this.timeDue == null ? "" : this.timeDue.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        return String.format("%s%s%s|%s\n", this.type, doneIndicator, timeDueString, this.description);
     }
 
-    public void setDone(boolean val) {
-        this.isDone = val;
+    /**
+     * Marks a task as done.
+     */
+    public void completeTask() {
+        this.isDone = true;
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
-    }
-
+    /**
+     * Returns the string representation of a task.
+     *
+     * @return A string describing the task.
+     */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + this.description;
+        String doneIndicator = this.isDone ? "x" : " ";
+        return String.format("[%s][%s] %s", type, doneIndicator, this.description);
+    }
+
+    public static Type charToTypeEnum(char t) {
+        switch (t) {
+            case 'T':
+                return Type.TODO;
+            case 'D':
+                return Type.DEADLINE;
+            case 'E':
+                return Type.EVENT;
+        }
+        // If the type cannot be inferred, return a TO-DO as default.
+        return Type.TODO;
     }
 }

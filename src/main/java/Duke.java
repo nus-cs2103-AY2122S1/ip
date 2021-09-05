@@ -1,112 +1,158 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * A personal assistant chatbot that helps a person to keep track of various things.
+ *
+ * @author Samay Sagar
+ * @version CS2103 AY21/22 Sem 1
+ */
 public class Duke {
-    private final static String welcome_default = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-    private final static String line = "\t----------------------------------------------------\n";
-    private final static String welcome_changed = line + "\t" + "Hewwo fweind, I am fuwwy, your personal assitant,\n" +
-            "\t" + "How can I help you?\n" + line;
-    private static ArrayList<Task> tasklist = new ArrayList<>();
+    private static final String GREETING_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
+    private static final String FAREWELL_MESSAGE = "See you soon! :)";
+    private static final String FAREWELL_COMMAND = "bye";
+    private static final String LIST_COMMAND = "list";
+    private static final String COMPLETE_TASK_COMMAND = "done";
+    private static final String DELETE_TASK_COMMAND = "delete";
+    private static final String CREATE_TODO_COMMAND = "todo";
+    private static final String CREATE_EVENT_COMMAND = "event";
+    private static final String CREATE_DEADLINE_COMMAND = "deadline";
 
-    private static void fuwwyEcho(String echo) {
-        System.out.println(line + "\t" + echo + "\n" + line);
-    }
+    private TaskList taskList;
 
-    private static void addTask(Task task) {
-        tasklist.add(task);
-        fuwwyEcho("Uwu added:\t"
-                + task);
-    }
+    private Scanner sc;
+    private final String DATA_STORAGE_PATH = "../../data/duke_storage.txt";
 
-    private static void deleteTask(int num) {
-        int id = num - 1;
-        Task delete = tasklist.get(id);
-        tasklist.remove(id);
-        fuwwyEcho("Ono, this task got yeeted:\n\t" + delete + "\n\tNow you have "
-                + tasklist.size() + " tasks in the list, Yay!\n");
-    }
-
-    private static void taskDone(int n) {
-        Task t = tasklist.get(n - 1);
-        t.setDone(true);
-        fuwwyEcho("Uwu! I've marked this task as done:\n\t" + t + "\n");
-    }
-
-    private static void eorD(String command, String task) throws DukeException {
-
-
-        String keyword1 = task == "deadline" ? "/by " : "/at ";
-        String[] keyword2 = command.split(keyword1);
-
-        if (keyword2.length <= 1) {
-            throw new DukeException("OwO Incomplete command, add time" + "\n");
-        }
-
-        String t = keyword2[0].split(task)[1];
-        String time = keyword2[1];
-
-        if (task == "deadline") {
-            addTask(new Deadline(t, time));
-        } else {
-            addTask(new Event(t, time));
-        }
-    }
-
+    /**
+     * The entrypoint of the Duke chat bot.
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
-        System.out.println(welcome_changed);
-        Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
+        Duke duke = new Duke();
+        duke.greet();
+        duke.taskMode();
+    }
 
-        while (!command.equals("bye")) {
-            try {
-                if (command.equals("list")) {
-                    String output = "\n";
-                    if (tasklist.size() == 0) {
-                        fuwwyEcho("Owo the list is empty boouwu");
-                    } else {
-                        for (int i = 0; i < tasklist.size(); i++) {
-                            int n = i + 1;
-                            String list = "\t" + n + ". " + tasklist.get(i);
-                            output += list + "\n";
-                        }
-                        fuwwyEcho(output);
-                    }
-                    command = sc.nextLine();
-                } else if (command.startsWith("done")) {
-                    if (command.equals("done")) {
-                        throw new DukeException("OwO incomplete done!\n");
-                    }
-                    taskDone(Integer.parseInt(command.split(" ")[1]));
-                } else if (command.startsWith("delete")) {
-                    if (command.equals("delete")) {
-                        throw new DukeException("OwO incomplete delete!\n");
-                    }
-                    deleteTask(Integer.parseInt(command.split(" ")[1]));
-                } else if (command.startsWith("todo")) {
-                    if (command.equals("todo")) {
-                        throw new DukeException("OwO incomplete todo!\n");
-                    } else {
-                        addTask(new ToDo(command.split("todo")[1]));
-                    }
-                } else if (command.startsWith("deadline")) {
-                    eorD(command, "deadline");
-                } else if (command.startsWith("event")) {
-                    eorD(command, "event");
-                } else {
-                    throw new DukeException("UwU oops, I don't understand\n");
-                }
-            } catch (DukeException e) {
-                fuwwyEcho(e.getMessage());
-            }
+    /**
+     * A constructor for Duke chatbot.
+     */
+    public Duke() {
+        this.taskList = new TaskList();
+        this.loadData();
+        this.sc = new Scanner(System.in);
+    }
 
-            command = sc.nextLine();
+    /**
+     * Loads data that is saved in a given filename, and parses the data to load tasks.
+     */
+    public void loadData() {
+        ArrayList<String> lines = DataHandler.readLinesFromFile(this.DATA_STORAGE_PATH);
+        for (int i = 0; i < lines.size(); i++) {
+            Task task = Task.parseTaskFromSavedText(lines.get(i));
+            this.taskList.addTask(task);
         }
+        ChatbotUI.printMessage("Loaded tasks from save file!" + this.taskList.countTasks());
+    }
 
-        fuwwyEcho("Bye. Hope to see you again soon!\n");
-        sc.close();
+    /**
+     * Saves Chatbot data to a given filename.
+     */
+    public void saveData() {
+        String content = this.taskList.toSaveData();
+        DataHandler.overwriteNewFile(this.DATA_STORAGE_PATH);
+        DataHandler.writeToFile(content, this.DATA_STORAGE_PATH);
+    }
+    public void endDuke() {
+        this.saveData();
+        ChatbotUI.printMessage(FAREWELL_MESSAGE);
+    }
+    /**
+     * Prints a greeting to the user.
+     */
+    public void greet() {
+        ChatbotUI.printMessage(GREETING_MESSAGE);
+    }
+    /**
+     * Echoes the user's input, until the user says "bye".
+     */
+    public void echo() {
+        String message = ChatbotUI.acceptUserInput(this.sc);
+        if (message.equals("bye")) {
+            ChatbotUI.printMessage(FAREWELL_MESSAGE);
+        } else {
+            ChatbotUI.printMessage(message);
+            echo();
+        }
+    }
+    /**
+     * Gets the description supplied by the user after a command.
+     * @param command a String that describes the command (e.g. "event")
+     * @param message the String that is input by the user (e.g. "event Meeting /at tomorrow")
+     * @return a String representing the description after the command (e.g. "Meeting /at tomorrow")
+     * @throws DukeException indicates that the description is invalid
+     */
+    public String getStringFrom(String command, String message) throws DukeException {
+        if (message.length() <= command.length()) {
+            throw new DukeException(
+                    String.format("The description of a %s cannot be empty.", command)
+            );
+        }
+        String description = message.substring(command.length()).trim();
+        if (description.length() == 0) {
+            throw new DukeException(
+                    String.format("The description of a %s cannot be empty.", command)
+            );
+        }
+        return description;
+    }
+    /**
+     * Parses a user-input for a number supplied after a given command.
+     * @param command A String command that comes before the desired number. (e.g. "delete")
+     * @param message The String that is the full input by the user. (e.g. "delete 2")
+     * @return an int representing the description of the command. (e.g. "2")
+     * @throws DukeException indicates that the description is invalid
+     */
+    public int getIntFrom(String command, String message) throws DukeException {
+        return Integer.parseInt(getStringFrom(command, message));
+    }
+    /**
+     * Handles the logic for managing a user's tasks.
+     */
+    public void taskMode() {
+        String message = ChatbotUI.acceptUserInput(this.sc).trim();
+        if (message.equals(FAREWELL_COMMAND)) {
+            this.endDuke();
+            return;
+        }
+        try {
+            String output;
+            if (message.equals(LIST_COMMAND)) {
+                output = this.taskList.toString();
+            } else if (message.startsWith(COMPLETE_TASK_COMMAND)) {
+                output = this.taskList.completeTask(getIntFrom(COMPLETE_TASK_COMMAND, message));
+            } else if (message.startsWith(DELETE_TASK_COMMAND)) {
+                output = this.taskList.deleteTask(getIntFrom(DELETE_TASK_COMMAND, message));
+            } else if (message.startsWith(CREATE_TODO_COMMAND)) {
+                output = this.taskList.addNewTodo(getStringFrom(CREATE_TODO_COMMAND, message));
+            } else if (message.startsWith(CREATE_EVENT_COMMAND)) {
+                output = this.taskList.addNewEvent(getStringFrom(CREATE_EVENT_COMMAND, message));
+            } else if (message.startsWith(CREATE_DEADLINE_COMMAND)) {
+                output = this.taskList.addNewDeadline(getStringFrom(CREATE_DEADLINE_COMMAND, message));
+            } else {
+                throw new DukeException("I don't know what that command means." +
+                        "\nPlease input a valid command.");
+            }
+            ChatbotUI.printMessage(output);
+        } catch (DukeException e) {
+            ChatbotUI.printMessage(e.getMessage());
+        } finally {
+            taskMode();
+        }
     }
 }
