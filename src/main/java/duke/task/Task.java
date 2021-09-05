@@ -102,6 +102,15 @@ public class Task {
     }
 
     /**
+     * Checks if the task title contains a given String.
+     * @param keyword a String that may be contained in the task title.
+     * @return a boolean representing whether or not the task contains the keyword.
+     */
+    public boolean titleContains(String keyword) {
+        return this.description.contains(keyword);
+    }
+
+    /**
      * Returns the string representation of a task.
      *
      * @return A string describing the task.

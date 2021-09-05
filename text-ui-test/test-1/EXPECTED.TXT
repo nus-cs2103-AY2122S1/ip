@@ -64,7 +64,7 @@ No save data found.
 ---------------------------------------------------------
 ---------------------------------------------------------
 	Got it. I've added this task:
-		[T][ ] return book
+		[T][ ] bookmark pages
 	Now you have 4 tasks in the list.
 ---------------------------------------------------------
 ---------------------------------------------------------
@@ -72,7 +72,14 @@ No save data found.
 	1.[T][x] borrow book
 	2.[D][ ] return book  (by: Aug 24 2021)
 	3.[E][x] project meeting  (at: Aug 25 2021)
-	4.[T][ ] return book
+	4.[T][ ] bookmark pages
+---------------------------------------------------------
+---------------------------------------------------------
+    I've filtered tasks containing 'book'.
+    Here are the tasks in your list:
+    1.[T][x] borrow book
+    2.[D][ ] return book  (by: Aug 24 2021)
+    3.[T][ ] bookmark pages
 ---------------------------------------------------------
 ---------------------------------------------------------
 	Noted. I've removed this task:
@@ -83,7 +90,7 @@ No save data found.
 	Here are the tasks in your list:
 	1.[T][x] borrow book
 	2.[E][x] project meeting  (at: Aug 25 2021)
-	3.[T][ ] return book
+	3.[T][ ] bookmark pages
 ---------------------------------------------------------
 ---------------------------------------------------------
 	See you soon! :)
