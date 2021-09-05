@@ -55,6 +55,6 @@ public class Deadline extends Task {
 
     @Override
     public String toDataString() {
-        return "D|" + super.toDataString() + "|" + this.deadline;
+        return "D" + Task.STORAGE_SEPARATOR + super.toDataString() + Task.STORAGE_SEPARATOR + this.deadline;
     }
 }

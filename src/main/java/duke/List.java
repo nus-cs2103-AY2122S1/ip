@@ -9,6 +9,8 @@ import java.util.ArrayList;
  * Represents the Todo List for Duke.
  */
 public class List {
+    public static final String DISPLAY_LIST_COMMAND = "list";
+    public static final String DONE_MESSAGE = "Nice! I've marked this task as done:\n";
     private ArrayList<Task> todos;
 
     /**
@@ -43,7 +45,7 @@ public class List {
      * @returns The response in String after the action is executed.
      */
     public String addTask(String input, Parser parser, Storage storage) throws IOException {
-        if (input.equals("list")) {
+        if (input.equals(DISPLAY_LIST_COMMAND)) {
             return showList();
         } else {
             try {
@@ -82,7 +84,7 @@ public class List {
         int index = parseInt(array[1]);
         Task temp = todos.get(index - 1);
         temp.markAsDone();
-        return "Nice! I've marked this task as done:\n" + temp;
+        return DONE_MESSAGE + temp;
     }
 
     /**

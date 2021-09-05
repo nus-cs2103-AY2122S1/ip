@@ -6,6 +6,7 @@ package duke;
  * Contains additional field of time of type String.
  */
 public class Event extends Task {
+    public static final String IDENTIFIER = " /at ";
     private String time;
 
     /**
@@ -15,8 +16,8 @@ public class Event extends Task {
      * @throws DukeEventException If the name of the task is empty.
      */
     public Event(String name) throws DukeEventException {
-        super(name.substring(0, name.indexOf(" /at ") + 1));
-        this.time = name.substring(name.indexOf(" /at ") + 5);
+        super(name.substring(0, name.indexOf(IDENTIFIER) + 1));
+        this.time = name.substring(name.indexOf(IDENTIFIER) + 5);
         if (name.equals("")) {
             throw new DukeEventException();
         }
@@ -49,6 +50,6 @@ public class Event extends Task {
 
     @Override
     public String toDataString() {
-        return "E|" + super.toDataString() + "|" + this.time;
+        return "E" + Task.STORAGE_SEPARATOR + super.toDataString() + Task.STORAGE_SEPARATOR + this.time;
     }
 }

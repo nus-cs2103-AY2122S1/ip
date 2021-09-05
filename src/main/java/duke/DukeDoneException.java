@@ -5,8 +5,11 @@ package duke;
  * Thrown when the description of done is empty.
  */
 public class DukeDoneException extends DukeException {
+
+    public static final String DONE_ERROR_MESSAGE = "OOPS!!! Please specify which task.";
+
     @Override
     public String getMessage() {
-        return "OOPS!!! Please specify which task.";
+        return DONE_ERROR_MESSAGE;
     }
 }
