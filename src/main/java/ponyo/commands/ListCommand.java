@@ -18,7 +18,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public boolean isExit() {
+    public boolean isExitCommand() {
         return false;
     }
 }

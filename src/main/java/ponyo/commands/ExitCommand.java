@@ -7,15 +7,13 @@ import ponyo.storage.Storage;
  * Exits the program.
  */
 public class ExitCommand extends Command {
-    private static final String MESSAGE_BYE = "\tBye. Hope to see you again soon!";
-
     @Override
     public String[] execute(TaskList tasks, Storage storage) {
         return null;
     }
 
     @Override
-    public boolean isExit() {
+    public boolean isExitCommand() {
         return true;
     }
 }

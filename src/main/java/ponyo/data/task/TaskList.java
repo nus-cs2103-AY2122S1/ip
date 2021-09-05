@@ -29,20 +29,20 @@ public class TaskList {
     /**
      * Removes a task from the task list.
      *
-     * @param task the task to be removed from the list.
+     * @param taskId the task to be removed from the list.
      */
-    public void remove(int task) {
-        tasks.remove(task);
+    public void remove(int taskId) {
+        tasks.remove(taskId);
     }
 
     /**
      * Get a task from the task list
      *
-     * @param task the task to be retrieved
+     * @param taskId the task to be retrieved
      * @return the requested task
      */
-    public Task retrieveTask(int task) {
-        return tasks.get(task);
+    public Task retrieveTask(int taskId) {
+        return tasks.get(taskId);
     }
 
     /**

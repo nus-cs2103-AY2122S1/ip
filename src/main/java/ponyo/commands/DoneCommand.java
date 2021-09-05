@@ -22,7 +22,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public boolean isExit() {
+    public boolean isExitCommand() {
         return false;
     }
 }

@@ -7,13 +7,13 @@ import ponyo.commands.DoneCommand;
 import ponyo.commands.ExitCommand;
 import ponyo.commands.FindCommand;
 import ponyo.commands.ListCommand;
+import ponyo.common.Messages;
 import ponyo.data.exceptions.PonyoException;
 
 /**
  * Makes sense of the user commands
  */
 public class Parser {
-    private static final String MESSAGE_IDK = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
     /**
      * Parses the full input command to produce the type of command
@@ -23,29 +23,31 @@ public class Parser {
      * @return the type of command to be executed
      */
     public static Command parse(String cmd) {
-        String[] cmds = cmd.split(" ", 2);
+        String[] commands = cmd.split(" ", 2);
+        String prefix = commands[0];
+        String commandArg = commands.length > 1 ? commands[1] : null;
 
         try {
-            switch (cmds[0]) {
+            switch (prefix) {
             case "list":
                 return new ListCommand();
             case "bye":
                 return new ExitCommand();
             case "done":
-                return new DoneCommand(Integer.parseInt(cmds[1]));
+                return new DoneCommand(Integer.parseInt(commandArg));
             case "todo":
             case "deadline":
             case "event":
-                return new AddCommand(cmds);
+                return new AddCommand(commands);
             case "find":
-                return new FindCommand(cmds[1]);
+                return new FindCommand(commandArg);
             case "delete":
-                return new DeleteCommand(Integer.parseInt(cmds[1]));
+                return new DeleteCommand(Integer.parseInt(commandArg));
             default:
-                throw new PonyoException("Invalid command given!");
+                throw new PonyoException(Messages.MESSAGE_INVALID);
             }
         } catch (PonyoException e) {
-            throw new PonyoException(MESSAGE_IDK);
+            throw new PonyoException(Messages.MESSAGE_IDK);
         }
     }
 }

@@ -8,7 +8,6 @@ public class Todo extends Task {
         super(description);
     }
 
-    // File operations
     @Override
     public String toStringInFile() {
         return "T - " + super.toStringInFile();

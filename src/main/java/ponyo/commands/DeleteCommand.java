@@ -9,23 +9,23 @@ import ponyo.ui.Ui;
  * Deletes a task identified using its index in the task list.
  */
 public class DeleteCommand extends Command {
-    private final int taskToDelete;
+    private final int taskIdToDelete;
 
-    public DeleteCommand(int taskToDelete) {
-        this.taskToDelete = taskToDelete;
+    public DeleteCommand(int taskIdToDelete) {
+        this.taskIdToDelete = taskIdToDelete;
     }
 
     @Override
     public String[] execute(TaskList tasks, Storage storage) {
-        Task task = tasks.retrieveTask(taskToDelete - 1);
-        tasks.remove(taskToDelete - 1);
+        Task task = tasks.retrieveTask(taskIdToDelete - 1);
+        tasks.remove(taskIdToDelete - 1);
         storage.getFullContents(tasks);
         return Ui.show("Noted. I've removed this task: \n\t" + task,
                 "\nNow you have " + tasks.size() + " tasks in the list.");
     }
 
     @Override
-    public boolean isExit() {
+    public boolean isExitCommand() {
         return false;
     }
 }

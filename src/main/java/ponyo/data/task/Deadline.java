@@ -17,7 +17,6 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    // File operations
     @Override
     public String toStringInFile() {
         return "D - " + super.toStringInFile() + " - " + by;

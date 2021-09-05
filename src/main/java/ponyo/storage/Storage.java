@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+import ponyo.common.Messages;
 import ponyo.data.exceptions.PonyoException;
 import ponyo.data.task.Deadline;
 import ponyo.data.task.Event;
@@ -14,14 +15,11 @@ import ponyo.data.task.Task;
 import ponyo.data.task.TaskList;
 import ponyo.data.task.Todo;
 
-
 /**
  * Handles loading and saving of tasks into the file created.
  */
 public class Storage {
     private static final String PATH = "src/main/data";
-    private static final String FILENAME = "tasks.txt";
-
     protected String filePath;
 
     /**
@@ -36,11 +34,9 @@ public class Storage {
      */
     public ArrayList<Task> load() {
         try {
-            ArrayList<Task> tasks = new ArrayList();
-            readTasksFromFile(tasks, filePath);
-            return tasks;
+            return readTasksFromFile(filePath);
         } catch (IOException e) {
-            throw new PonyoException("Error loading from file :(");
+            throw new PonyoException(Messages.MESSAGE_ERROR_LOADING_FILE);
         }
     }
 
@@ -63,14 +59,15 @@ public class Storage {
     }
 
     /**
-     * Read the tasks from the file separated with delimiter (-)
+     * Returns a list of tasks stored in the file
      *
-     * @param tasks stores the list of tasks read from the file
      * @param filePath path of file
      * @throws IOException if error reading file
      */
-    public void readTasksFromFile(ArrayList tasks, String filePath) throws IOException {
+    public ArrayList<Task> readTasksFromFile(String filePath) throws IOException {
+        ArrayList<Task> tasks = new ArrayList();
         checkIfFileFolderExists(filePath);
+
         Scanner read = new Scanner(new File(filePath));
         read.useDelimiter(Pattern.compile("(\\n)| - "));
 
@@ -114,7 +111,9 @@ public class Storage {
                 break;
             }
         }
+
         read.close();
+        return tasks;
     }
 
     /**
@@ -122,9 +121,9 @@ public class Storage {
      *
      * @param t task to be written into file
      */
-    public void fileLineToWrite(Task t) {
+    public void writeToFile(Task t) {
         try {
-            appendToFile(PATH + "/" + FILENAME, t.toStringInFile() + "\n");
+            appendToFile(filePath, t.toStringInFile() + "\n");
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
@@ -142,7 +141,7 @@ public class Storage {
             for (int i = 0; i < tasks.size(); i++) {
                 allContent += tasks.retrieveTask(i).toStringInFile() + "\n";
             }
-            overwriteFile(PATH + "/" + FILENAME, allContent);
+            overwriteFile(filePath, allContent);
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
@@ -171,7 +170,7 @@ public class Storage {
      */
     public void overwriteFile(String filePath, String fileContent) throws IOException {
         checkIfFileFolderExists(filePath);
-        FileWriter fw = new FileWriter(filePath); // create a FileWriter
+        FileWriter fw = new FileWriter(filePath);
         fw.write(fileContent);
         fw.close();
     }

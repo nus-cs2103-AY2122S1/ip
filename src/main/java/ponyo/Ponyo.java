@@ -6,7 +6,6 @@ import ponyo.data.exceptions.PonyoException;
 import ponyo.data.task.TaskList;
 import ponyo.parser.Parser;
 import ponyo.storage.Storage;
-import ponyo.ui.Ui;
 
 public class Ponyo {
     // CONSTANTS
@@ -33,10 +32,6 @@ public class Ponyo {
         Application.launch(Main.class, args);
     }
 
-    public void runWhenFirstStartup() {
-        Ui.showWelcomeMessage();
-    }
-
     /**
      * Generates response to user input.
      *
@@ -44,8 +39,6 @@ public class Ponyo {
      * @return Response message by system.
      */
     public String[] handleInput(String input) {
-        boolean isExit = false;
-
         try {
             Command c = Parser.parse(input);
             return c.execute(tasks, storage);
