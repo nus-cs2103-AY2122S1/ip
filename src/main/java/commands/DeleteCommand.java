@@ -21,7 +21,6 @@ public final class DeleteCommand extends Command {
         super(userInput);
     }
 
-
     /**
      * Executes the command.
      *
@@ -32,28 +31,30 @@ public final class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
+        assert list != null : "invalid TaskList object detected";
+        assert ui != null : "invalid Ui object detected";
+        assert storage != null : "invalid Storage object detected";
         if (getInput().size() == 1) {
             return "     Unable to delete task without an index. Please input index :)\n"
                     + "     Please input in the form: 'delete <task index>'.\n"
                     + "     Note: list can be used to see the current tasks.";
-        } else {
-            if (list.getTasks().isEmpty()) {
-                return "     List is empty, no tasks to delete, looking good!";
-            }
-            if (getInput().size() > 2) {
-                return "     Please input in the form: 'delete <index>'.";
-            }
-            try {
-                int index = Integer.parseInt(getInput().get(1)) - 1;
-                String result = list.deleteTask(index);
-                storage.resetFile(list.getTasks());
-                return result;
-            } catch (NumberFormatException e) {
-                return "     Please use a number instead :(";
-            } catch (IndexOutOfBoundsException e) {
-                return "     Please input a valid index :)\n"
-                        + "     Note: 'list' can be used to see the current tasks.";
-            }
+        }
+        if (getInput().size() > 2) {
+            return "     Please input in the form: 'delete <index>'.";
+        }
+        if (list.getTasks().isEmpty()) {
+            return "     List is empty, no tasks to delete, looking good!";
+        }
+        try {
+            int index = Integer.parseInt(getInput().get(1)) - 1;
+            String result = list.deleteTask(index);
+            storage.resetFile(list.getTasks());
+            return result;
+        } catch (NumberFormatException e) {
+            return "     Please use a number instead :(";
+        } catch (IndexOutOfBoundsException e) {
+            return "     Please input a valid index :)\n"
+                    + "     Note: 'list' can be used to see the current tasks.";
         }
     }
 }

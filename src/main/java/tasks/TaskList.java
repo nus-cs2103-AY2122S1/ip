@@ -120,6 +120,8 @@ public final class TaskList {
      * @param task the task to be added
      */
     public String addTask(Task task) {
+        assert (task instanceof DeadLineTask) || (task instanceof EventTask) ||
+                (task instanceof ToDoTask) : "incorrect task created";
         if (tasks == null) {
             tasks = new ArrayList<>();
         }

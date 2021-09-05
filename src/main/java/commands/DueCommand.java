@@ -34,22 +34,25 @@ public final class DueCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
+        assert list != null : "invalid TaskList object detected";
+        assert ui != null : "invalid Ui object detected";
+        assert storage != null : "invalid Storage object detected";
         try {
             ArrayList<Task> tasksDue = list.findTasksDue(getInput().get(1));
             if (tasksDue.isEmpty()) {
                 return "     No tasks due!";
             }
-            String temp = "     The tasks due are: \n";
+            String result = "     The tasks due are: \n";
             for (int i = 0; i < tasksDue.size(); i++) {
                 if (i + 1 < tasksDue.size()) {
-                    temp += "     " + (i + 1) + "." + tasksDue.get(i).getType()
+                    result += "     " + (i + 1) + "." + tasksDue.get(i).getType()
                             + tasksDue.get(i).getStatus() + " " + tasksDue.get(i).getDescription() + "\n";
                 } else {
-                    temp += "     " + (i + 1) + "." + tasksDue.get(i).getType()
+                    result += "     " + (i + 1) + "." + tasksDue.get(i).getType()
                             + tasksDue.get(i).getStatus() + " " + tasksDue.get(i).getDescription();
                 }
             }
-            return temp;
+            return result;
         } catch (IndexOutOfBoundsException e) {
             return "     Invalid input :(\n" + Ui.getHelperMessage();
         } catch (DateTimeParseException e) {

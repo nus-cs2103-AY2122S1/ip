@@ -33,11 +33,14 @@ public final class ToDoCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
+        assert list != null : "invalid TaskList object detected";
+        assert ui != null : "invalid Ui object detected";
+        assert storage != null : "invalid Storage object detected";
         if (getInput().size() < 2) {
             return "     Oops, you have left out the task description for todo!";
         } else {
-            ToDoTask t = new ToDoTask(list.filterInfo(getInput()));
-            String result = list.addTask(t);
+            ToDoTask task = new ToDoTask(list.filterInfo(getInput()));
+            String result = list.addTask(task);
             storage.resetFile(list.getTasks());
             return result;
         }

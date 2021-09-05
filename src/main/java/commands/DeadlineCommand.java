@@ -14,7 +14,6 @@ import ui.Ui;
  */
 public final class DeadlineCommand extends Command {
 
-
     /**
      * Constructs the DeadlineCommand object.
      *
@@ -34,10 +33,13 @@ public final class DeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
+        assert list != null : "invalid TaskList object detected";
+        assert ui != null : "invalid Ui object detected";
+        assert storage != null : "invalid Storage object detected";
         try {
-            DeadLineTask d = new DeadLineTask(list.filterInfo(getInput()),
+            DeadLineTask task = new DeadLineTask(list.filterInfo(getInput()),
                     list.getDeadline(getInput()));
-            String result = list.addTask(d);
+            String result = list.addTask(task);
             storage.resetFile(list.getTasks());
             return result;
         } catch (DukeException e) {

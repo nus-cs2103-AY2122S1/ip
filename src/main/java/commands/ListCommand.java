@@ -12,7 +12,6 @@ import ui.Ui;
  */
 public final class ListCommand extends Command {
 
-
     /**
      * Constructs the ListCommand object.
      *
@@ -32,6 +31,9 @@ public final class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
+        assert list != null : "invalid TaskList object detected";
+        assert ui != null : "invalid Ui object detected";
+        assert storage != null : "invalid Storage object detected";
         return list.getList();
     }
 }

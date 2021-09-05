@@ -13,7 +13,6 @@ import ui.Ui;
  */
 public final class DoneCommand extends Command {
 
-
     /**
      * Constructs the DoneCommand object.
      *
@@ -22,7 +21,6 @@ public final class DoneCommand extends Command {
     public DoneCommand(ArrayList<String> userInput) {
         super(userInput);
     }
-
 
     /**
      * Executes the command.
@@ -34,6 +32,10 @@ public final class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
+        ArrayList<Task> tasks = list.getTasks();
+        assert list != null : "invalid TaskList object detected";
+        assert ui != null : "invalid Ui object detected";
+        assert storage != null : "invalid Storage object detected";
         ArrayList<Task> tasks = list.getTasks();
         try {
             if (getInput().size() == 1) {

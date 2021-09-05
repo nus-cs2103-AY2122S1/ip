@@ -32,29 +32,32 @@ public final class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
-        String target = "";
+        assert list != null : "invalid TaskList object detected";
+        assert ui != null : "invalid Ui object detected";
+        assert storage != null : "invalid Storage object detected";
+        String keyword = "";
         for (int i = 1; i < getInput().size(); i++) {
             if (i + 1 < getInput().size()) {
-                target += getInput().get(i) + " ";
+                keyword += getInput().get(i) + " ";
             } else {
-                target += getInput().get(i);
+                keyword += getInput().get(i);
             }
         }
-        ArrayList<Task> tasksFound = list.findTask(target);
+        ArrayList<Task> tasksFound = list.findTask(keyword);
         if (tasksFound.isEmpty()) {
             return "     No task tasks found!";
         } else {
-            String temp = "     The tasks found are: \n";
+            String result = "     The tasks found are: \n";
             for (int i = 0; i < tasksFound.size(); i++) {
                 if (i + 1 < tasksFound.size()) {
-                    temp += "     " + (i + 1) + "." + tasksFound.get(i).getType()
+                    result += "     " + (i + 1) + "." + tasksFound.get(i).getType()
                             + tasksFound.get(i).getStatus() + " " + tasksFound.get(i).getDescription() + "\n";
                 } else {
-                    temp += "     " + (i + 1) + "." + tasksFound.get(i).getType()
+                    result += "     " + (i + 1) + "." + tasksFound.get(i).getType()
                             + tasksFound.get(i).getStatus() + " " + tasksFound.get(i).getDescription();
                 }
             }
-            return temp;
+            return result;
         }
     }
 }
