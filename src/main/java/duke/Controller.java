@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 
 public class Controller {
@@ -52,48 +51,33 @@ public class Controller {
             } catch (IOException | DukeException e) {
                 tasks = new TaskList();
             }
-            String listContent = "";
-            for (int i = 0; i < tasks.size(); i++) {
-                listContent += (i + 1) + ". " + tasks.getTask(i).toString() + "\n";
-            }
-            listLabel.setText("Here are the tasks in your list:\n" + listContent);
+            listLabel.setText(tasks.toString());
         }
     }
 
     public void load() {
-        String listContent = "";
-        for (int i = 0; i < tasks.size(); i++) {
-            listContent += (i + 1) + ". " + tasks.getTask(i).toString() + "\n";
-        }
-        listLabel.setText("Here are the tasks in your list:\n" + listContent);
+        listLabel.setText(tasks.toString());
         try {
             storage.save(tasks);
         } catch (IOException e) {
             e.printStackTrace();
         }
         addTaskError.setText("");
+        assert addTaskError.getText().equals("");
         deleteError.setText("");
+        assert deleteError.getText().equals("");
         doneError.setText("");
+        assert doneError.getText().equals("");
     }
 
-    public Task taskParse(String type, String description, String dateTime){
-        if (type.equalsIgnoreCase("T")) {
-            return new Todo(description);
-        } else if (type.equalsIgnoreCase("D")) {
-            return new Deadline(description,dateTime);
-        } else if (type.equalsIgnoreCase("E")) {
-            return new Event(description,dateTime);
-        } else {
-            return null;
-        }
-    }
+
 
     public void add(ActionEvent a) {
         if (taskType.getText().equalsIgnoreCase("T")) {
-            tasks.addTask(taskParse(taskType.getText(), taskDescription.getText(), ""));
+            tasks.addTask(Parser.taskParse(taskType.getText(), taskDescription.getText(), ""));
             this.load();
         } else if (taskType.getText().equalsIgnoreCase("D") || taskType.getText().equalsIgnoreCase( "E")) {
-            tasks.addTask(taskParse(taskType.getText(), taskDescription.getText(),
+            tasks.addTask(Parser.taskParse(taskType.getText(), taskDescription.getText(),
                     taskDate.getValue().toString()));
             this.load();
         } else {
@@ -123,7 +107,6 @@ public class Controller {
                 deleteError.setText("Please enter a number in the list");
             } else {
                 tasks.removeTask(deleteIndex);
-
                 this.load();
             }
         } catch (NumberFormatException e) {
@@ -132,21 +115,6 @@ public class Controller {
     }
 
     public void find(ActionEvent a) {
-        ArrayList<Task> result = new ArrayList<>();
-        String listContent = "";
-
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.getTask(i).description.contains(findText.getText())) {
-                result.add(tasks.getTask(i));
-            }
-        }
-        if (result.size() == 0) {
-            listLabel.setText("There are no matching task in your list!\nPress load to go back!");
-        } else {
-            for (int i = 0; i < result.size(); i++) {
-                listContent += (i + 1) + ". " + result.get(i).toString() + "\n";
-            }
-            listLabel.setText("Here are the matching tasks in your list:\n" + listContent + "Press load to go back!");
-        }
+        listLabel.setText(tasks.findTask(findText.getText()) + "Press load to go back!");
     }
 }

@@ -26,8 +26,8 @@ public class DukeTest {
 
     @Test
     public void EventTest() {
-        Task test = new Event("bomb world trade center", "11/09/2001");
+        Task test = new Event("find house", "11/09/2001");
         test.markAsDone();
-        assertEquals("[E][X] bomb world trade center (at:Sep 11 2001)", test.toString());
+        assertEquals("[E][X] find house (at: Sep 11 2001)", test.toString());
     }
 }

@@ -8,7 +8,7 @@ public class TaskList {
 
     public TaskList(ArrayList<Task> list) throws DukeException {
         if (list.isEmpty()) {
-            throw new DukeException("Task list is empty");
+            throw new DukeException("Task list is empty!");
         }
         this.list = list;
     }
@@ -37,29 +37,37 @@ public class TaskList {
         return this.list.size();
     }
 
-    public void showTasks() {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println((i + 1) + ". " + list.get(i).toString());
-        }
-    }
-
-    public void findTask(String find) {
+    public String findTask(String find) {
         ArrayList<Task> result = new ArrayList<>();
         for (Task t :
                 this.list) {
-            if (t.description.contains(find)) {
+            if (t.toString().toLowerCase().contains(find.toLowerCase())) {
                 result.add(t);
             }
         }
         if (result.size() == 0) {
-            System.out.println("There are no matching task in your list!");
+            return "There are no matching task in your list!\n";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            String listContent = "Here are the matching tasks in your list:\n";
             for (int i = 0; i < result.size(); i++) {
-                System.out.println((i + 1) + ". " + result.get(i).toString());
+                listContent += (i + 1) + ". " + result.get(i).toString() + "\n";
             }
+            return listContent;
         }
     }
+
+    @Override
+    public String toString() {
+        if(this.list.isEmpty()) {
+            return "There are no tasks in your list!\n";
+        } else {
+            String listContent = "Here are the tasks in your list:\n";
+            for (int i = 0 ; i < list.size() ; i++) {
+                listContent += (i + 1) + ". " + list.get(i).toString() + "\n";
+            }
+            return listContent;
+        }
+    }
+
 
 }
