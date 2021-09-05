@@ -23,12 +23,13 @@ public class TaskList implements Serializable {
      *
      * @param task the task to be stored
      */
-    public void addCustom(Task task) {
+    public String addCustom(Task task) {
         tasks.add(task);
         this.numberOfTasks++;
-        System.out.println("Got it. I've added this task: ");
-        System.out.println("  " + task);
-        System.out.printf("Now you have %d %s in the list.\n", this.numberOfTasks, this.numberOfTasks == 1 ? "task" : "tasks");
+        return "Got it. I've added this task: \n"
+               + String.format("  %s\n", task)
+               + String.format("Now you have %d %s in the list.", this.numberOfTasks,
+                                                                  this.numberOfTasks == 1 ? "task" : "tasks");
     }
 
     /**

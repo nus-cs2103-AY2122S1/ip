@@ -36,17 +36,44 @@ public class Ui {
     }
 
     /**
+     * Displays bye message.
+     */
+    public void terminate() {
+        out.println("Bye. Hope to see you again soon!");
+        out.flush();
+    }
+
+    /**
+     * Displays failure message.
+     */
+    public void fail() {
+        out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        out.flush();
+    }
+
+    /**
      * Prints tasks found from find query
      *
      * @param tasks tasks found by taskList
      */
     public void printFind(ArrayList<Task> tasks) {
-        System.out.println("____________________________________________________________");
-        System.out.println("Here are the matching tasks in your list:");
+        out.println("____________________________________________________________");
+        out.println("Here are the matching tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i));
+            out.println((i + 1) + ". " + tasks.get(i));
         }
-        System.out.println("____________________________________________________________");
+        out.println("____________________________________________________________");
+        out.flush();
+    }
+
+    /**
+     * Prints data-reliant response to a command. Responses are fed by Parser
+     *
+     * @param response string reply to command
+     */
+    public void printResponse(String response) {
+        out.println(response);
+        out.flush();
     }
 
     /**

@@ -60,36 +60,39 @@ public class Parser {
         // Add a Todo type task
         Matcher todoMatcher = todoPattern.matcher(input);
         if (todoMatcher.find()) {
-            taskList.addCustom(new Todo(todoMatcher.group(1)));
+            String response = taskList.addCustom(new Todo(todoMatcher.group(1)));
+            ui.printResponse(response);
             return false;
         }
 
         // Add a Deadline type task
         Matcher deadlineMatcher = deadlinePattern.matcher(input);
         if (deadlineMatcher.find()) {
-            taskList.addCustom(new Deadline(deadlineMatcher.group(1), deadlineMatcher.group(2)));
+            String response = taskList.addCustom(new Deadline(deadlineMatcher.group(1), deadlineMatcher.group(2)));
+            ui.printResponse(response);
             return false;
         }
 
         // Add an Event type task
         Matcher eventMatcher = eventPattern.matcher(input);
         if (eventMatcher.find()) {
-            taskList.addCustom(new Event(eventMatcher.group(1), eventMatcher.group(2)));
+            String response = taskList.addCustom(new Event(eventMatcher.group(1), eventMatcher.group(2)));
+            ui.printResponse(response);
             return false;
         }
 
         // Exit application
         if (input.equals("bye")) {
-            System.out.println("Bye. Hope to see you again soon!");
+            ui.terminate();
             return true;
         }
 
         // Identify reason for mis-input
         if (input.length() >= 4 && input.substring(0, 4).equals("todo")) {
-            System.out.println("OOPS!!! The description of a todo cannot be empty.");
+            ui.printResponse("OOPS!!! The description of a todo cannot be empty.");
             return false;
         }
-        System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        ui.fail();
         return false;
     }
 }
