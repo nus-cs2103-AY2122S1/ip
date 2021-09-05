@@ -89,6 +89,7 @@ public class Parser {
      */
     public String doneCommand(TaskList tasks) {
         int index = Integer.parseInt(input.substring(5, 6)) - 1;
+        assert index >= 0;
         tasks.getTask(index).setIsDone();
         return displayLabel("Nice! I've marked this task as done: \n" +
                 "       " + tasks.getTask(index).toString());
@@ -123,10 +124,13 @@ public class Parser {
      * @return the label.
      */
     public String deadlineOrEventCommand(String input, TaskList tasks) {
+        assert input.contains("deadline") || input.contains("event");
         if (input.contains("deadline")) {
+            assert input.contains("/by");
             String[] info = input.substring(9).split(" /by ");
             tasks.addTask(getDateAndTime(info, input, "deadline"));
         } else {
+            assert input.contains("/at");
             String[] info = input.substring(6).split(" /at ");
             tasks.addTask(getDateAndTime(info, input, "event"));
         }
@@ -163,6 +167,7 @@ public class Parser {
      */
     public String deleteCommand(TaskList tasks) {
         int index = Integer.parseInt(input.substring(7, 8)) - 1;
+        assert index >= 0;
         Task removedTask = tasks.getTask(index);
         tasks.removeTask(removedTask);
         return displayLabel("Noted. I've removed this task:  \n" +
@@ -218,9 +223,9 @@ public class Parser {
      * Gets the date and time in correct
      * notation/format if necessary.
      *
-     * @param info the task information.
+     * @param info  the task information.
      * @param input the user input.
-     * @param type the Task type.
+     * @param type  the Task type.
      * @return the new Task.
      */
     public Task getDateAndTime(String[] info, String input, String type) {
@@ -260,6 +265,7 @@ public class Parser {
      */
     public String parseDates(String date) {
         String[] sepIntoYearMonthDate = date.split("/");
+        assert sepIntoYearMonthDate.length == 3;
         if (Integer.parseInt(sepIntoYearMonthDate[0]) < 10) {
             sepIntoYearMonthDate[0] = "0" + sepIntoYearMonthDate[0];
         }
@@ -284,5 +290,5 @@ public class Parser {
             return "";
         }
     }
-    
+
 }

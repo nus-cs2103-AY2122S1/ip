@@ -1,5 +1,5 @@
 T ~ Yes ~ finish training
 T ~ Yes ~ eat food
 T ~ No ~ cook food
-E ~ No ~ eat food ~ 7pm
 T ~ No ~ kill titan
+No ~ food

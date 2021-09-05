@@ -1,10 +1,9 @@
 package banana;
 
-import java.util.ArrayList;
-
 import java.io.FileNotFoundException;
 import java.io.File;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -49,6 +48,7 @@ public class Storage {
         Scanner sc = new Scanner(f);
         while (sc.hasNext()) {
             String line = sc.nextLine();
+            assert line.contains(" ~ ");
             String[] taskInfo = line.split(" ~ ");
             Task newTask;
             if (taskInfo[0].equals("T")) {

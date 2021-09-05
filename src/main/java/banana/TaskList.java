@@ -14,12 +14,10 @@ public class TaskList {
     protected ArrayList<Task> allTasks;
 
     /**
-     * Constructor for the Tasks class.
-     *
-     * @param allTasks the list of tasks.
+     * Constructor for the TaskList class.
      */
-    public TaskList(ArrayList<Task> allTasks) {
-        this.allTasks = allTasks;
+    public TaskList(ArrayList<Task> tasks) {
+        this.allTasks = tasks;
     }
 
     /**
@@ -39,7 +37,7 @@ public class TaskList {
     public void removeTask(Task t) {
         allTasks.remove(t);
     }
-    
+
     /**
      * Retrives a task from the list.
      *
@@ -47,9 +45,10 @@ public class TaskList {
      * @return the task.
      */
     public Task getTask(int index) {
+        //assert index >= 0;
         return allTasks.get(index);
     }
-    
+
     /**
      * Gets the size of the list.
      *

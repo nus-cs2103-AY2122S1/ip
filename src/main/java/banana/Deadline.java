@@ -20,7 +20,7 @@ class Deadline extends Task {
      * Constructor for Deadline.
      *
      * @param description user input.
-     * @param deadline date, day and/or time.
+     * @param deadline    date, day and/or time.
      */
     public Deadline(String description, String deadline) {
         super(description);
