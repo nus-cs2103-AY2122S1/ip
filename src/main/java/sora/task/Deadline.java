@@ -23,6 +23,11 @@ public class Deadline extends Task {
         this.dateTime = dateTime;
     }
 
+    @Override
+    LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
     /**
      * Formats deadline in the form of: [D][ ] description (by: MMM d yyyy, h:mm a)
      *

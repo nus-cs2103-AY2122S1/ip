@@ -12,19 +12,11 @@ import org.junit.jupiter.api.Test;
 
 class TaskTest {
     @Test
-    public void constructor_success() {
-        Task task = new Task("test task");
-
-        String expected = "[ ] test task";
-        assertEquals(expected, task.toString());
-    }
-
-    @Test
     public void markAsDone_success() {
-        Task task = new Task("test task");
+        Task task = new Todo("test task");
         task.markAsDone();
 
-        String expected = "[X] test task";
+        String expected = "[T][X] test task";
         assertEquals(expected, task.toString());
     }
 
@@ -58,8 +50,8 @@ class TaskTest {
         Task event = new Event("", date, startTime, null);
 
         assertEquals(0, todo1.compareTo(todo2));
-        assertEquals(1, todo1.compareTo(deadline));
-        assertEquals(-1, event.compareTo(todo2));
+        assertTrue(todo1.compareTo(deadline) > 0);
+        assertTrue(event.compareTo(todo2) < 0);
 
         assertEquals(0, event.compareTo(event));
         assertTrue(deadline.compareTo(event) < 0);

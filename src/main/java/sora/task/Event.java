@@ -32,7 +32,8 @@ public class Event extends Task {
         this.endTime = endTime;
     }
 
-    protected LocalDateTime extractDateTime() {
+    @Override
+    LocalDateTime getDateTime() {
         return LocalDateTime.of(date, startTime);
     }
 

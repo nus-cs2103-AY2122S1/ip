@@ -25,10 +25,9 @@ class TaskListTest {
     @Test
     public void constructor_listInput_success() {
         ArrayList<Task> list = new ArrayList<>();
-        list.add(new Task("task 1"));
-        list.add(new Todo("todo 2"));
-        list.add(new Deadline("deadline 3", null));
-        list.add(new Event("event 4", null, null, null));
+        list.add(new Todo("todo 1"));
+        list.add(new Deadline("deadline 2", null));
+        list.add(new Event("event 3", null, null, null));
 
         assertEquals(list, new TaskList(list).getTasks());
     }
@@ -67,7 +66,7 @@ class TaskListTest {
         };
 
         ArrayList<Task> list = new ArrayList<>();
-        list.add(new Task("task 1"));
+        list.add(new Todo("todo 1"));
         list.add(new Todo("todo 2"));
 
         TaskList taskList = new TaskList(list);
@@ -83,14 +82,14 @@ class TaskListTest {
     @Test
     void taskDelete_success() throws SoraException {
         ArrayList<Task> list = new ArrayList<>();
-        list.add(new Task("task 1"));
+        list.add(new Todo("task 1"));
         list.add(new Todo("todo 2"));
         list.add(new Todo("test 3"));
 
         TaskList taskList = new TaskList(list);
 
         assertEquals("Sure, I've deleted this task:\n"
-                        + "  [ ] task 1\n"
+                        + "  [T][ ] task 1\n"
                         + "You still have 2 tasks in the list.",
                 taskList.taskDelete("delete 1"));
 
@@ -139,7 +138,7 @@ class TaskListTest {
         };
 
         ArrayList<Task> list = new ArrayList<>();
-        list.add(new Task("task 1"));
+        list.add(new Todo("task 1"));
         list.add(new Todo("todo 2"));
 
         TaskList taskList = new TaskList(list);
@@ -155,13 +154,13 @@ class TaskListTest {
     @Test
     void taskDone_success() throws SoraException {
         ArrayList<Task> list = new ArrayList<>();
-        list.add(new Task("task 1"));
+        list.add(new Todo("task 1"));
         list.add(new Todo("todo 2"));
 
         TaskList taskList = new TaskList(list);
 
         assertEquals("Congrats! You have accomplished the following task:\n"
-                        + "  [X] task 1",
+                        + "  [T][X] task 1",
                 taskList.taskDone("done 1"));
 
         assertEquals("Congrats! You have accomplished the following task:\n"
@@ -322,13 +321,13 @@ class TaskListTest {
     @Test
     void printFullList_success() throws EmptyListException {
         ArrayList<Task> list = new ArrayList<>();
-        list.add(new Task("task 1"));
+        list.add(new Todo("task 1"));
         list.add(new Todo("todo 2"));
 
         TaskList taskList = new TaskList(list);
 
         assertEquals("Here are the tasks in your list:\n"
-                        + "1. [ ] task 1\n"
+                        + "1. [T][ ] task 1\n"
                         + "2. [T][ ] todo 2",
                 taskList.printFullList());
     }
@@ -366,7 +365,7 @@ class TaskListTest {
         assertEquals(expected, exception.getMessage());
 
         ArrayList<Task> list = new ArrayList<>();
-        list.add(new Task("task 1"));
+        list.add(new Todo("task 1"));
         list.add(new Todo("todo 2"));
 
         TaskList taskList2 = new TaskList(list);
@@ -380,13 +379,14 @@ class TaskListTest {
     @Test
     void findInList_success() throws SoraException {
         ArrayList<Task> list = new ArrayList<>();
-        list.add(new Task("task 1"));
+        list.add(new Todo("task 1"));
         list.add(new Todo("todo 2"));
 
         TaskList taskList = new TaskList(list);
 
         assertEquals("Here are the tasks in your list:\n"
-                        + "1. [T][ ] todo 2",
+                        + "1. [T][ ] task 1\n"
+                        + "2. [T][ ] todo 2",
                 taskList.findInList("find todo"));
     }
 
@@ -421,7 +421,7 @@ class TaskListTest {
     }
 
     @Test
-    void sort_success() throws EmptyListException, IllegalFormatException {
+    void sort_success() throws SoraException {
         ArrayList<Task> list = new ArrayList<>();
         list.add(new Todo("todo 1"));
         list.add(new Todo("todo 2"));

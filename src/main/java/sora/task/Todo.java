@@ -1,5 +1,7 @@
 package sora.task;
 
+import java.time.LocalDateTime;
+
 /**
  * Represents a todo.
  * A todo is the same as a task.
@@ -14,6 +16,11 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         super(description);
+    }
+
+    @Override
+    LocalDateTime getDateTime() {
+        return LocalDateTime.MAX;
     }
 
     /**

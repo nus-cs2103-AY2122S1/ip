@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
  *
  * @author Zhang Shi Chen
  */
-public class Task implements Comparable<Task> {
+public abstract class Task implements Comparable<Task> {
     private final String description;
     private boolean isDone;
 
@@ -17,7 +17,7 @@ public class Task implements Comparable<Task> {
      *
      * @param description Description of the task
      */
-    public Task(String description) {
+    Task(String description) {
         this.description = description;
         isDone = false;
     }
@@ -58,6 +58,8 @@ public class Task implements Comparable<Task> {
         return description.contains(keyword);
     }
 
+    abstract LocalDateTime getDateTime();
+
     /**
      * Formats task in the form of: [ ] description
      *
@@ -74,37 +76,11 @@ public class Task implements Comparable<Task> {
      * This method compares the date and time of deadline vs date and start time of event.
      *
      * @return An int value: 0 if the 2 tasks are same timing;
-     *         -1 if the current task occurs earlier than the other task;
-     *         1 if the current task occurs later than the other task.
+     *         < 0 if the current task occurs earlier than the other task;
+     *         > 0 if the current task occurs later than the other task.
      */
     @Override
     public int compareTo(Task task) {
-        // Nothing to compare to yourself
-        if (this == task) {
-            return 0;
-        }
-
-        // Handle the case where there is a Todo
-        if (this instanceof Todo && task instanceof Todo) {
-            return 0;
-        }
-
-        if (this instanceof Todo) {
-            return 1;
-        }
-
-        if (task instanceof Todo) {
-            return -1;
-        }
-
-        // Obtain date time depending on whether they are Deadline or Event
-        LocalDateTime currTask = this instanceof Deadline
-                                 ? ((Deadline) this).dateTime
-                                 : ((Event) this).extractDateTime();
-        LocalDateTime otherTask = task instanceof Deadline
-                                  ? ((Deadline) task).dateTime
-                                  : ((Event) task).extractDateTime();
-
-        return currTask.compareTo(otherTask);
+        return this.getDateTime().compareTo(task.getDateTime());
     }
 }
