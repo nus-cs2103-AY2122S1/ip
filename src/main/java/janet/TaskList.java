@@ -2,8 +2,6 @@ package janet;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
@@ -78,6 +76,13 @@ public class TaskList implements Serializable {
         return output;
     }
 
+    /**
+     * Returns a new TaskList containing only elements from the original TaskList
+     * which have the same date as the query.
+     *
+     * @param query The string of format YYYY-MM-DD
+     * @return The filtered TaskList
+     */
     public TaskList findByDate(String query) {
         LocalDate date = LocalDate.parse(query);
         TaskList output = new TaskList();
