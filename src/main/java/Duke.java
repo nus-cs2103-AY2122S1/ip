@@ -10,7 +10,17 @@ public class Duke {
     private final static String line = "\t----------------------------------------------------\n";
     private final static String welcome_changed = line + "\t" + "Hewwo fweind, I am fuwwy, your personal assitant,\n" +
             "\t" + "How can I help you?\n" + line;
-    private static ArrayList<Task> tasklist = new ArrayList<>();
+    private static ArrayList<Task> tasklist;
+    private Storage storage;
+
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
+        try {
+            tasklist = new ArrayList(storage.load());
+        } catch (DukeException e) {
+            tasklist = new ArrayList();
+        }
+    }
 
     private static void fuwwyEcho(String echo) {
         System.out.println(line + "\t" + echo + "\n" + line);
@@ -57,6 +67,10 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        new Duke("data/duke.txt").main2();
+    }
+
+    public void main2() {
         System.out.println(welcome_changed);
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
@@ -99,6 +113,7 @@ public class Duke {
                 } else {
                     throw new DukeException("UwU oops, I don't understand\n");
                 }
+                storage.write(tasklist);
             } catch (DukeException e) {
                 fuwwyEcho(e.getMessage());
             }
