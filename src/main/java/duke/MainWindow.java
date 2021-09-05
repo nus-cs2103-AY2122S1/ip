@@ -43,6 +43,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        if (input.isBlank()) {
+            return;
+        }
+        assert !input.isBlank() : "Input has to be not empty!";
         String[] responses = duke.getResponse(input);
         if (responses == null) {
             dialogContainer.getChildren().add(
