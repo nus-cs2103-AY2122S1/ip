@@ -16,7 +16,7 @@ public class ParserTest {
     @Test
     public void testParseCommandString_exitCommand_returnExitCommand() {
         Parser parser = new Parser();
-        Command finalCommand = new InvalidCommand();
+        Command finalCommand;
         Store storage = new Store("/Users/keithtan/Desktop/NUS/CS2103 IP/ip/data/duke.txt");
         Tasklist tempList = new Tasklist();
         try {
