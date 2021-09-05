@@ -32,6 +32,7 @@ public class Duke {
         storage = new Storage(filePath);
         tasks = new TaskList(storage.loadFromFile());
         ui = new Ui();
+        assert storage != null;
     }
 
     /**
@@ -39,9 +40,7 @@ public class Duke {
      * Required for JavaFX GUI
      */
     public Duke() {
-        storage = new Storage("data/Duke.txt");
-        tasks = new TaskList(storage.loadFromFile());
-        ui = new Ui();
+        this("data/Duke.txt");
     }
 
     /**
