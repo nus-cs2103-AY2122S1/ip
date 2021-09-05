@@ -1,12 +1,10 @@
-package tasks;
-
-import tasks.Task;
+package duke.logic.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * tasks.Task that start at a specific time and ends at a specific time
+ * duke.logic.tasks.Task that start at a specific time and ends at a specific time
  */
 public class Event extends Task {
 

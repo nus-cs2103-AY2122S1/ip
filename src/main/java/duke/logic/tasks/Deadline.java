@@ -1,12 +1,10 @@
-package tasks;
-
-import tasks.Task;
+package duke.logic.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * tasks.Task that need to be done before a specific date/time
+ * duke.logic.tasks.Task that need to be done before a specific date/time
  */
 public class Deadline extends Task {
 

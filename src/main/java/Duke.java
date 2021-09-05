@@ -1,11 +1,14 @@
-import duke.Ui;
+import duke.gui.TextUi;
 
 /**
  * Main program
  */
 public class Duke {
-    public static void main(String[] args) {
-        Ui ui = new Ui();
+    /**
+     * Initiate the duke bot.
+     */
+    public static void init() {
+        TextUi ui = new TextUi();
         ui.start();
     }
 }

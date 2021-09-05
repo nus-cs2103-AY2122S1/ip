@@ -1,9 +1,11 @@
-package duke;
+package duke.logic.parser;
 
-import tasks.Deadline;
-import tasks.Event;
-import tasks.TaskList;
-import tasks.ToDo;
+import duke.exception.DukeInvalidCommandException;
+import duke.logic.command.*;
+import duke.logic.tasks.Deadline;
+import duke.logic.tasks.Event;
+import duke.logic.tasks.TaskList;
+import duke.logic.tasks.ToDo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -21,7 +23,7 @@ public class Parser {
         this.taskList = new TaskList();
     }
 
-    public String[] parseInput(String input) {
+    private String[] parseInput(String input) {
         return input.trim().split(" ", 2);
     }
 
@@ -39,15 +41,15 @@ public class Parser {
         return parsedNumber;
     }
 
-    private void handleList(String[] parsedInput) throws DukeInvalidCommandException {
+    private String handleList(String[] parsedInput) throws DukeInvalidCommandException {
         if (parsedInput.length >= 2) {
             throw new DukeInvalidCommandException("OOPS!!! Do you mean 'list' ?");
         } else {
-            Ui.displayWithLines(taskList.toString());
+            return new ListCommand().executeCommand(taskList);
         }
     }
 
-    private void handleDone(String[] parsedInput) throws DukeInvalidCommandException {
+    private String handleDone(String[] parsedInput) throws DukeInvalidCommandException {
         if (parsedInput.length < 2) {
             throw new DukeInvalidCommandException("OOPS!!! Which task do you want to mark as done?");
         }
@@ -56,10 +58,10 @@ public class Parser {
         if (taskList.getSize() == 0) {
             throw new DukeInvalidCommandException("OOPS!!! The task list is currently empty.");
         }
-        Ui.displayWithLines(taskList.markTaskAsDone(taskIndex));
+        return new DoneCommand(taskIndex).executeCommand(taskList);
     }
 
-    private void handleDeadline(String[] parsedInput) throws DukeInvalidCommandException {
+    private String handleDeadline(String[] parsedInput) throws DukeInvalidCommandException {
         if (parsedInput.length < 2) {
             throw new DukeInvalidCommandException("OOPS!!! The description of a deadline cannot be empty.");
         }
@@ -70,13 +72,13 @@ public class Parser {
         }
         try {
             LocalDate date = LocalDate.parse(parsedArguments[1]);
-            Ui.displayWithLines(taskList.addTask(new Deadline(parsedArguments[0], date)));
+            return new DeadlineCommand(new Deadline(parsedArguments[0], date)).executeCommand(taskList);
         } catch (DateTimeParseException e) {
             throw new DukeInvalidCommandException("OOPS!!! Wrong time format. Correct format should be yyyy-mm-dd");
         }
     }
 
-    private void handleEvent(String[] parsedInput) throws DukeInvalidCommandException {
+    private String handleEvent(String[] parsedInput) throws DukeInvalidCommandException {
         if (parsedInput.length < 2) {
             throw new DukeInvalidCommandException("OOPS!!! The description of an event cannot be empty.");
         }
@@ -87,20 +89,20 @@ public class Parser {
         }
         try {
             LocalDate date = LocalDate.parse(parsedArguments[1]);
-            Ui.displayWithLines(taskList.addTask(new Event(parsedArguments[0], date)));
+            return new EventCommand(new Event(parsedArguments[0], date)).executeCommand(taskList);
         } catch (DateTimeParseException e) {
             throw new DukeInvalidCommandException("OOPS!!! Wrong time format. Correct format should be yyyy-mm-dd");
         }
     }
 
-    private void handleTodo(String[] parsedInput) throws DukeInvalidCommandException {
+    private String handleTodo(String[] parsedInput) throws DukeInvalidCommandException {
         if (parsedInput.length < 2) {
             throw new DukeInvalidCommandException("OOPS!!! The description of a todo task cannot be empty.");
         }
-        Ui.displayWithLines(taskList.addTask(new ToDo(parsedInput[1])));
+        return new ToDoCommand(new ToDo(parsedInput[1])).executeCommand(taskList);
     }
 
-    private void handleDelete(String[] parsedInput) throws DukeInvalidCommandException {
+    private String handleDelete(String[] parsedInput) throws DukeInvalidCommandException {
         if (parsedInput.length < 2) {
             throw new DukeInvalidCommandException("OOPS!!! Which task do you want to delete?");
         }
@@ -109,39 +111,33 @@ public class Parser {
         if (taskList.getSize() == 0) {
             throw new DukeInvalidCommandException("OOPS!!! The task list is currently empty.");
         }
-        Ui.displayWithLines(taskList.delete(taskIndex));
+        return new DeleteCommand(taskIndex).executeCommand(taskList);
     }
 
-    private void handleFind(String[] parsedInput) throws DukeInvalidCommandException {
+    private String handleFind(String[] parsedInput) throws DukeInvalidCommandException {
         if (parsedInput.length < 2) {
             throw new DukeInvalidCommandException("OOPS!!! Type in the keyword you want to search");
         }
-        Ui.displayWithLines(taskList.findTask(parsedInput[1]));
+        return new FindCommand(parsedInput[1]).executeCommand(taskList);
     }
-    public void invokeCommand(String input) throws DukeInvalidCommandException {
+
+    public String invokeCommand(String input) throws DukeInvalidCommandException {
         String[] parsedInput = parseInput(input);
         switch (parsedInput[0]) {
         case "list":
-            handleList(parsedInput);
-            break;
+            return handleList(parsedInput);
         case "done":
-            handleDone(parsedInput);
-            break;
+            return handleDone(parsedInput);
         case "deadline":
-            handleDeadline(parsedInput);
-            break;
+            return handleDeadline(parsedInput);
         case "event":
-            handleEvent(parsedInput);
-            break;
+            return handleEvent(parsedInput);
         case "todo":
-            handleTodo(parsedInput);
-            break;
+            return handleTodo(parsedInput);
         case "delete":
-            handleDelete(parsedInput);
-            break;
+            return handleDelete(parsedInput);
         case "find":
-            handleFind(parsedInput);
-            break;
+            return handleFind(parsedInput);
         default:
             throw new DukeInvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

@@ -1,11 +1,15 @@
-package duke;
+package duke.gui;
+
+import duke.exception.DukeInvalidCommandException;
+import duke.logic.command.ByeCommand;
+import duke.logic.parser.Parser;
 
 import java.util.Scanner;
 
 /**
  * Utility to help deals with interactions with the user
  */
-public class Ui {
+public class TextUi {
     private final Scanner sc = new Scanner(System.in);
 
     /**
@@ -23,14 +27,6 @@ public class Ui {
         display("Hello! I'm Duke");
         display("What can I do for you?");
         insertSeparateLine();
-    }
-
-    /**
-     * Send a "goodbye" message when the user closes the application.
-     */
-    private void sendFarewell() {
-        Ui.displayWithLines("Bye. Hope to see you again soon!");
-        sc.close();
     }
 
     /**
@@ -69,14 +65,19 @@ public class Ui {
         sendGreetings();
         String currentCommand = sc.nextLine().trim();
         Parser parser = new Parser();
+
+        // a bit of hard-code here
+        // find a way to get rid of this while loop condition
         while (!currentCommand.equals("bye")) {
             try {
-                parser.invokeCommand(currentCommand);
+                displayWithLines(parser.invokeCommand(currentCommand));
             } catch (DukeInvalidCommandException e) {
-                Ui.displayWithLines(e.getMessage());
+                displayWithLines(e.getMessage());
             }
             currentCommand = sc.nextLine().trim();
         }
-        sendFarewell();
+        // can't access the task list from here so null is used
+        displayWithLines(new ByeCommand().executeCommand(null));
+        sc.close();
     }
 }

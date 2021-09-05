@@ -2,10 +2,11 @@ package duke;
 
 import org.junit.jupiter.api.Test;
 
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.ToDo;
+import duke.storage.Storage;
+import duke.logic.tasks.Deadline;
+import duke.logic.tasks.Event;
+import duke.logic.tasks.Task;
+import duke.logic.tasks.ToDo;
 
 import java.io.File;
 import java.io.IOException;

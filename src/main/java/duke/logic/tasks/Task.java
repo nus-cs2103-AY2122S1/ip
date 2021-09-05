@@ -1,14 +1,14 @@
-package tasks;
+package duke.logic.tasks;
 
 /**
  * An individual task
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
     /**
-     * Constructor for the tasks.Task class
+     * Constructor for the duke.logic.tasks.Task class
      *
      * @param description The description of the task.
      */
@@ -29,7 +29,7 @@ public class Task {
     /**
      * Return the completion status of the task
      *
-     * @return tasks.Task completion status.
+     * @return duke.logic.tasks.Task completion status.
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
@@ -54,9 +54,7 @@ public class Task {
      *
      * @return The string representation.
      */
-    public String toSaveInHardDisk() {
-        return "Placeholder"; // tobe fixed later
-    }
+    public abstract String toSaveInHardDisk();
 
     @Override
     public String toString() {

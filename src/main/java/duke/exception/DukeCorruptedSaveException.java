@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * Exception when a save file is corrupted.
@@ -6,7 +6,7 @@ package duke;
 public class DukeCorruptedSaveException extends Exception {
 
     /**
-     * Constructor for the exception.
+     * Constructor for the duke.exception.
      *
      * @param message Exception message.
      */

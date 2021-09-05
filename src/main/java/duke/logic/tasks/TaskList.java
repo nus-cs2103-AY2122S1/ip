@@ -1,20 +1,20 @@
-package tasks;
+package duke.logic.tasks;
 
-import duke.Storage;
-import duke.Ui;
+import duke.gui.TextUi;
+import duke.storage.Storage;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * The task list to save all the tasks
+ * The task list to save all the duke.logic.tasks
  */
 public class TaskList {
-    // Saved tasks
+    // Saved duke.logic.tasks
     private final ArrayList<Task> tasks;
 
     /**
-     * Constructor for tasks.TaskList
+     * Constructor for duke.logic.tasks.TaskList
      */
     public TaskList() {
         ArrayList<Task> temp;
@@ -22,7 +22,7 @@ public class TaskList {
             temp = Storage.loadTaskListFromHardDisk();
         } catch (IOException e) {
             temp = new ArrayList<>();
-            Ui.display("Can't read the save file.");
+            TextUi.display("Can't read the save file.");
         }
         this.tasks = temp;
     }
@@ -42,7 +42,7 @@ public class TaskList {
         if (tasks.size() == 1) {
             response.append(" task in the list.");
         } else {
-            response.append(" tasks in the list.");
+            response.append(" duke.logic.tasks in the list.");
         }
         Storage.saveTaskListToHardDisk(tasks);
         return response.toString();
@@ -66,7 +66,7 @@ public class TaskList {
         return response.toString();
     }
 
-    public String delete(int index) {
+    public String deleteTask(int index) {
         Task temp = tasks.get(index - 1);
         tasks.remove(index - 1);
 
@@ -76,7 +76,7 @@ public class TaskList {
         if (tasks.size() == 1) {
             response.append(" task in the list.");
         } else {
-            response.append(" tasks in the list.");
+            response.append(" duke.logic.tasks in the list.");
         }
         Storage.saveTaskListToHardDisk(tasks);
         return response.toString();
@@ -90,7 +90,7 @@ public class TaskList {
      */
     public String findTask(String keyword) {
         int count = 0;
-        StringBuilder res = new StringBuilder("Here are the matching tasks in your list:\n");
+        StringBuilder res = new StringBuilder("Here are the matching duke.logic.tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDescription().contains(keyword)) {
                 String temp = "\t" + " " + (i + 1) + "." + tasks.get(i).toString() + "\n";
@@ -100,7 +100,7 @@ public class TaskList {
         }
         res.deleteCharAt(res.toString().length() - 1);
         if (count == 0) {
-            return "There are no tasks with the given keyword";
+            return "There are no duke.logic.tasks with the given keyword";
         } else {
             return res.toString();
         }
@@ -120,7 +120,7 @@ public class TaskList {
         if (this.getSize() == 0) {
             return "There is no task in the list";
         } else {
-            StringBuilder res = new StringBuilder("Here are the tasks in your list:\n");
+            StringBuilder res = new StringBuilder("Here are the duke.logic.tasks in your list:\n");
             for (int i = 0; i < tasks.size(); i++) {
                 String temp = "\t" + " " + (i + 1) + "." + tasks.get(i).toString();
                 if (i < tasks.size() - 1) { // remove the last \n char, ugly but get the job done

@@ -1,4 +1,4 @@
-package tasks;
+package duke.logic.tasks;
 
 /**
  * Task without any date/time attached to it

@@ -1,9 +1,11 @@
-package duke;
+package duke.storage;
 
-import tasks.Deadline;
-import tasks.Event;
-import tasks.ToDo;
-import tasks.Task;
+import duke.gui.TextUi;
+import duke.exception.DukeCorruptedSaveException;
+import duke.logic.tasks.Deadline;
+import duke.logic.tasks.Event;
+import duke.logic.tasks.ToDo;
+import duke.logic.tasks.Task;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -37,12 +39,12 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException e) {
-            Ui.display("Can't save the tasks");
+            TextUi.display("Can't save the duke.logic.tasks");
         }
     }
 
     /**
-     * Load the saved task list, if the task list does not exist, then raise an exception
+     * Load the saved task list, if the task list does not exist, then raise an duke.exception
      *
      * @return Saved task list.
      * @throws IOException Task list does not exist.
@@ -63,7 +65,7 @@ public class Storage {
         } catch (DukeCorruptedSaveException e) {
             logs.delete();
             logs.createNewFile();
-            Ui.display("There's an error with the save file, the saved task list is deleted");
+            TextUi.display("There's an error with the save file, the saved task list is deleted");
         }
         return results;
     }
