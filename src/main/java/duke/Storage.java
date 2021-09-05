@@ -17,15 +17,15 @@ import java.util.Scanner;
  */
 public class Storage {
     private ArrayList<Task> toStore;
-    private final String FILEPATH = "data" + File.separator + "history.txt";
-    private final String DIRPATH = "data";
+    private final String FILE_PATH;
+    private final String DIR_PATH;
 
     /**
      * Constructor for Storage.
      */
     public Storage() {
-        //        this.FILE_PATH = "data" + File.separator + "history.txt";
-        //        this.DIR_PATH = "data";
+        this.FILE_PATH = "data" + File.separator + "history.txt";
+        this.DIR_PATH = "data";
     }
 
     /**
@@ -35,7 +35,7 @@ public class Storage {
      */
     public ArrayList<Task> initialise() {
         //read from the data/history.text and return an ArrayList of Tasks
-        File file = new File(FILEPATH);
+        File file = new File(FILE_PATH);
 
         try {
             Scanner s = new Scanner(file);
@@ -91,7 +91,7 @@ public class Storage {
      */
     public void saveFile(TaskList tasks) {
         try {
-            FileWriter fw = new FileWriter(FILEPATH);
+            FileWriter fw = new FileWriter(FILE_PATH);
 
             String textToAdd = "";
 
@@ -106,7 +106,7 @@ public class Storage {
             fw.write(textToAdd);
             fw.close();
         } catch (IOException e) {
-            File file = new File(DIRPATH);
+            File file = new File(DIR_PATH);
 
             if (file.mkdir()) {
                 saveFile(tasks);
