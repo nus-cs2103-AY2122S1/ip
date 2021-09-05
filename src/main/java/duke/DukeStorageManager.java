@@ -59,20 +59,15 @@ public class DukeStorageManager {
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 
             // Setting the error handler for the xml parser makes it such that when there is an
-            // error in the XML file, instead of a line saying "Fatal Error" printing in the console
+            // error in the XML file, instead of a line saying "Fatal Error" forcibly printed in the console
             // along with the SAXParseException being thrown, only the Exception is thrown.
-
-            // This stops "Fatal Error" from printing in console when a XML file with invalid contents is used
-            // because Duke is able to handle invalid XML files by creating a new file, thus printing the
-            // "Fatal Error" is not needed since this error has been foreseen and can be automatically handled.
-            // The SAXParseException is still thrown and caught as shown in the lines below,
-            // and when it happens, a new save file will be created instead.
 
             // According to this website:
             // https://stackoverflow.com/questions/1575925/
             // the fatal error is automatically logged into the console even if the exception is caught.
             // It also says that the next line below is the only way to stop the unwanted line from being printed.
-            documentBuilder.setErrorHandler(null);
+            // documentBuilder.setErrorHandler(null);
+            // We no longer have to set the redundant error message to not print because we are using a GUI.
 
             this.xmlSaveFileDoc = documentBuilder.parse(this.saveFile);
 
@@ -138,7 +133,7 @@ public class DukeStorageManager {
      */
     public void reloadSaveFromXmlDoc() {
         if (this.xmlSaveFileDoc == null) {
-            System.out.println("No save file to load from.");
+            Duke.dukeLaterSay("No save file to load from.");
             return;
         }
 
@@ -147,7 +142,7 @@ public class DukeStorageManager {
 
         // There should be only 1 taskList node
         if (taskList.getLength() > 1) {
-            System.out.println("Loaded XML file contains more than 1 task list. Only first one will be loaded.");
+            Duke.dukeLaterSay("Loaded XML file contains more than 1 task list. Only first one will be loaded.");
         }
 
         Node firstTaskList = taskList.item(0);

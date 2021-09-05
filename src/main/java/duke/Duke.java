@@ -98,7 +98,7 @@ public class Duke {
         System.out.println("Duke is running in the folder: " + System.getProperty("user.dir"));
 
         // Show Welcome Message
-        currDuke.currUiCtrl.printWelcomeMessage();
+        // currDuke.currUiCtrl.printWelcomeMessage();
 
         // Start accepting input (Not necessary anymore)
         // currDuke.runInputLoopMain();
@@ -214,6 +214,15 @@ public class Duke {
      */
     public String flushUiBuffer() {
         return this.currUiCtrl.dukeBufferRelease();
+    }
+
+    /**
+     * Used to get the Welcome Message in String form. Also prints the welcome message in the console.
+     *
+     * @return the Welcome Message.
+     */
+    public String getWelcomeMessage() {
+        return this.currUiCtrl.printWelcomeMessage();
     }
 
     private void unknownCommandEntered() throws DukeExceptionBase {

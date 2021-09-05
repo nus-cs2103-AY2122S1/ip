@@ -67,18 +67,21 @@ public class DukeUi {
 
 
     /**
-     * Prints the welcome message.
+     * Prints and returns the welcome message.
+     *
+     * @return the Welcome Message.
      */
-    public void printWelcomeMessage() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Give me something to do!");
+    public String printWelcomeMessage() {
+        String returnThis;
 
+        String logo = "The DUKE SEAGULL";
+        returnThis = "Hello from\n" + logo;
+        returnThis = returnThis + "\nGive me something to do!";
+
+        System.out.println(returnThis);
         System.out.println(sepLine);
+
+        return returnThis;
     }
 
 
