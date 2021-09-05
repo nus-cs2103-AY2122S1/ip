@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import duke.task.Task;
 
@@ -109,12 +110,9 @@ public class TaskList {
      * @throws DukeException thrown when there is no tasks matching the keyWord.
      */
     public String findTasks(String keyWord) throws DukeException {
-        ArrayList<Task> filteredTasks = new ArrayList<>();
-        for (Task t : tasks) {
-            if (t.getDescription().contains(keyWord)) {
-                filteredTasks.add(t);
-            }
-        }
+        ArrayList<Task> filteredTasks = tasks.stream()
+                .filter(t -> t.getDescription().contains(keyWord))
+                .collect(Collectors.toCollection(ArrayList::new));
         if (filteredTasks.size() == 0) {
             throw new DukeException("☹ OOPS!!! "
                     + "There isn't a task matching the keyword: "
