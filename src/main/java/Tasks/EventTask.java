@@ -7,11 +7,15 @@ public class EventTask extends Task {
         this.at = at;
     }
 
+    public String getDate(){
+        return at;
+    }
+
     @Override
     public String toString(){
         String typeString = type == TaskType.TODO ? "T" : type == TaskType.EVENT? "E" : "D";
         String doneSymbol = isDone? "X" : " ";
-        String result = "[" + typeString + "] " + "[" + doneSymbol + "] " + name + "(at: " + at + ")";
+        String result = "[" + typeString + "] " + "[" + doneSymbol + "] " + name + " (at: " + at + ")";
         return result;
     }
 }
