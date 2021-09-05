@@ -10,9 +10,9 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import duke.Duke;
-import duke.Storage;
-import duke.TaskList;
+import duke.common.Duke;
+import duke.common.Storage;
+import duke.common.TaskList;
 
 public class StorageTest {
     @Test

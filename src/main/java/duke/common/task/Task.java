@@ -1,4 +1,4 @@
-package duke;
+package duke.common.task;
 
 import java.io.Serializable;
 

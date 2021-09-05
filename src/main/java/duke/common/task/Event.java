@@ -1,4 +1,6 @@
-package duke;
+package duke.common.task;
+
+import duke.common.task.Task;
 
 public class Event extends Task {
     private String eventTime;

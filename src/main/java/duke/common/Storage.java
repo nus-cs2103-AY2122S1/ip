@@ -1,4 +1,4 @@
-package duke;
+package duke.common;
 
 import java.io.File;
 import java.io.FileInputStream;
