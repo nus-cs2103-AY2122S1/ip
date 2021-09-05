@@ -51,7 +51,7 @@ public class Event extends DatedTask {
     public boolean equals(Object obj) {
         if (obj instanceof Event) {
             Event e = (Event) obj;
-            return this.name.equals(e.name) && e.lDate.equals(this.lDate);
+            return this.name.equals(e.name) && e.localDate.equals(this.localDate);
         }
         return false;
     }
@@ -63,6 +63,6 @@ public class Event extends DatedTask {
                 ? Task.DONE
                 : Task.NOTDONE;
 
-        return Task.Label.E + Task.DELIMITER + d + Task.DELIMITER + this.name + Task.DELIMITER + this.lDate;
+        return Task.Label.E + Task.DELIMITER + d + Task.DELIMITER + this.name + Task.DELIMITER + this.localDate;
     }
 }

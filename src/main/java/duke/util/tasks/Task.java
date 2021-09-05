@@ -4,6 +4,8 @@
  */
 package duke.util.tasks;
 
+import java.time.LocalDate;
+
 public abstract class Task {
 
     protected static final String DELIMITER = "/ghx-124";
@@ -146,6 +148,14 @@ public abstract class Task {
         return false;
     }
 
+    /**
+     * The date that this task is limited by.
+     *
+     * @return The local date object representing that date.
+     */
+    public LocalDate getDate() {
+        throw new NullPointerException("Cannot get date from Task");
+    }
 
 
 
@@ -167,6 +177,10 @@ public abstract class Task {
         }
         return false;
     }
+
+
+
+
 
 
 }

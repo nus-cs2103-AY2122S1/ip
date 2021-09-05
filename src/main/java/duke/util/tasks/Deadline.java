@@ -61,7 +61,7 @@ public class Deadline extends DatedTask {
     public boolean equals(Object obj) {
         if (obj instanceof Deadline) {
             Deadline dl = (Deadline) obj;
-            return this.name.equals(dl.name) && this.lDate.equals(dl.lDate);
+            return this.name.equals(dl.name) && this.localDate.equals(dl.localDate);
         }
         return false;
     }
@@ -73,6 +73,6 @@ public class Deadline extends DatedTask {
                 ? Task.DONE
                 : Task.NOTDONE;
 
-        return Task.Label.D + Task.DELIMITER + d + Task.DELIMITER + this.name + Task.DELIMITER + this.lDate;
+        return Task.Label.D + Task.DELIMITER + d + Task.DELIMITER + this.name + Task.DELIMITER + this.localDate;
     }
 }

@@ -41,7 +41,7 @@ public class Parser {
     private static final String LIST = "list";
     private static final String BYE = "bye";
     private static final String FIND = "find";
-    private static final String THOROUGHFIND = "hfind";
+    private static final String REMIND = "remind";
     //is it just me or does the parser
     //have to contain all the objects to send the information to
     private final Ui ui;
@@ -90,6 +90,14 @@ public class Parser {
         switch(cmd) {
         case BYE:
             commands.add(new ExitCommand());
+            break;
+        case REMIND:
+            find(commands, task -> {
+                if (task.isDated()) {
+                    return task.getDate().equals(LocalDate.now());
+                }
+                return false;
+            });
             break;
         case LIST:
             listCommandFromArray(commands, this.taskList);

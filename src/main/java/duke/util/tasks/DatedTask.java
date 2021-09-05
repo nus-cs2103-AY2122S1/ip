@@ -5,13 +5,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import duke.util.commons.Messages;
 import duke.util.parser.Parser;
 
 
 
 public abstract class DatedTask extends Task {
-    protected LocalDate lDate;
+    protected LocalDate localDate;
 
     /**
      * The constructor for a datedtask.
@@ -21,7 +20,7 @@ public abstract class DatedTask extends Task {
      */
     public DatedTask(String name, String date) {
         super(name);
-        this.lDate = Parser.dateParse(date);
+        this.localDate = Parser.dateParse(date);
     }
 
 
@@ -32,7 +31,7 @@ public abstract class DatedTask extends Task {
      * @return The local date in the format MMM dd yyyy
      */
     public String localDate() {
-        return lDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
     /**
@@ -42,11 +41,11 @@ public abstract class DatedTask extends Task {
      * @param table The hashmap to put the dated task in.
      */
     public void addTo(HashMap<LocalDate, ArrayList<DatedTask>> table) {
-        ArrayList<DatedTask> list = table.get(this.lDate);
+        ArrayList<DatedTask> list = table.get(this.localDate);
         if (list == null) {
             list = new ArrayList<>();
-            table.put(this.lDate, list);
-            table.get(this.lDate).add(this);
+            table.put(this.localDate, list);
+            table.get(this.localDate).add(this);
 
         } else if (TaskList.isAdded(this, list)) {
             //it has been added before
@@ -67,7 +66,7 @@ public abstract class DatedTask extends Task {
      * @param table
      */
     public void removeFromTable(DateTaskTable table) {
-        ArrayList<DatedTask> ls = table.get(this.lDate);
+        ArrayList<DatedTask> ls = table.get(this.localDate);
         if (ls != null) {
             ls.remove(this);
         }
@@ -95,6 +94,8 @@ public abstract class DatedTask extends Task {
         return true;
     }
 
-
-
+    @Override
+    public LocalDate getDate() {
+        return this.localDate;
+    }
 }
