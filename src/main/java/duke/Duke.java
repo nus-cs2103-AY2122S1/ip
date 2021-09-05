@@ -27,7 +27,7 @@ public class Duke {
      * input.
      *
      * @param input the user input
-     * @return reponse from the program
+     * @return response from the program
      */
     public String getResponse(String input) {
         String response = feedIntoParser(input);
@@ -41,8 +41,7 @@ public class Duke {
      * @return response received by the program
      */
     private String feedIntoParser(String command) {
-        String response = PARSER.parse(command.toLowerCase(Locale.ROOT));
-        return response;
+        return PARSER.parse(command.toLowerCase(Locale.ROOT)); 
     }
 
     /**
