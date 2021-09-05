@@ -41,6 +41,7 @@ public class EventCommand extends Command {
         if (descInput.length() == 0) {
             throw new DukeException("Please specify a task description ><");
         } else {
+            assert descInput.length() > 0 : "Improper input length for event description";
             return descInput;
         }
     }
@@ -51,6 +52,7 @@ public class EventCommand extends Command {
         if (timeInput.length() == 0) {
             throw new DukeException("Please specify a time for this task");
         } else {
+            assert timeInput.length() > 0 : "Improper input length for event time";
             return timeInput;
         }
     }
@@ -64,7 +66,9 @@ public class EventCommand extends Command {
     @Override
     public String execute(TaskList taskList) {
         taskList.add(newTask);
+        int listLen = taskList.getLength();
+        assert listLen > 0 : "There should be > 0 tasks in the list after adding";
         return "Just added:\n" + newTask.toString()
-                + "\nYou currently have " + taskList.getLength() + " tasks in the list.";
+                + "\nYou currently have " + listLen + " tasks in the list.";
     }
 }

@@ -52,6 +52,7 @@ public class TaskList {
         String num = input[1];
         int index = Integer.parseInt(num) - 1;
         if (index >= taskList.size() || index == -1) {
+            assert index < 0 || index >= getLength() : "task index should be out of range";
             throw new DukeException("There is no such task in your list D:");
         }
         String command = input[0];
@@ -66,6 +67,7 @@ public class TaskList {
             return "Poof!\n" + deletedTask + "\nis gone"
                     + "\nNow you have " + taskList.size() + " tasks in the list";
         default:
+            assert false: command;
             return "Didn't understand that :(";
         }
     }

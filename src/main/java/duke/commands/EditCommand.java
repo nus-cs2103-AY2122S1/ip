@@ -53,6 +53,7 @@ public class EditCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList) throws DukeException {
+        assert editAction.equals("done") || editAction.equals("delete");
         String[] args = new String[] {editAction, index};
         String response= taskList.editTask(args);
         return response;

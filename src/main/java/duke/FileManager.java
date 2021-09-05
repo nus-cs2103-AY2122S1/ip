@@ -55,7 +55,7 @@ public class FileManager {
                     newTask = new Event(curr[2], curr[3]);
                     break;
                 default:
-                    break;
+                    assert false : taskIcon;
                 }
                 if (isDone) {
                     newTask.markAsDone();

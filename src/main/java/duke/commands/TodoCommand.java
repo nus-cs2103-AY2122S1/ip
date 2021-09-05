@@ -39,7 +39,9 @@ public class TodoCommand extends Command {
     @Override
     public String execute(TaskList taskList) {
         taskList.add(newTask);
+        int listLen = taskList.getLength();
+        assert listLen > 0 : "There should be > 0 tasks in the list after adding";
         return "Just added:\n" + newTask.toString()
-                + "\nYou currently have " + taskList.getLength() + " tasks in the list.";
+                + "\nYou currently have " + listLen + " tasks in the list.";
     }
 }
