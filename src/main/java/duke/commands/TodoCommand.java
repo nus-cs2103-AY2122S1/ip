@@ -23,16 +23,13 @@ public class TodoCommand extends Command {
 
     private static final String MISSING_DESC_ERR = "Please add a description for your todo!";
 
-    private String userCommand;
-
     /**
      * Instantiates TodoCommand object.
      *
      * @param userCommand Full user input.
      */
     public TodoCommand(String userCommand) {
-        super();
-        this.userCommand = userCommand;
+        super(userCommand);
     }
 
     @Override

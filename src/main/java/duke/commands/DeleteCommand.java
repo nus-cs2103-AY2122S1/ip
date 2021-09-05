@@ -21,16 +21,13 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " <number> - delete the specified task <number>\n"
                     + "    📍 Example: " + COMMAND_WORD + " 1";
 
-    private String userCommand;
-
     /**
      * Instantiates DeleteCommand object.
      *
      * @param userCommand Full user input.
      */
     public DeleteCommand(String userCommand) {
-        super();
-        this.userCommand = userCommand;
+        super(userCommand);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package duke.tasks;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -21,6 +22,9 @@ public class Task {
      */
     protected boolean isDone;
 
+    /** Date at which the task is scheduled to be completed at. */
+    protected LocalDateTime date;
+
     /**
      * Instantiates a Task object
      *
@@ -29,6 +33,19 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.date = LocalDateTime.MAX;
+    }
+
+    /**
+     * Instantiates a Task object with the specified description and date.
+     *
+     * @param description Description of the task.
+     * @param date Date at which the task is scheduled to be completed.
+     */
+    public Task(String description, LocalDateTime date) {
+        this.description = description;
+        this.isDone = false;
+        this.date = date;
     }
 
     /**
@@ -40,6 +57,24 @@ public class Task {
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
+        this.date = LocalDateTime.MAX;
+    }
+
+    /**
+     * Instantiates a Task object with the specified description, completion status and date.
+     *
+     * @param description Description of the task.
+     * @param isDone True if the task has been completed, false otherwise.
+     * @param date Date at which the task is scheduled to be completed at.
+     */
+    public Task(String description, boolean isDone, LocalDateTime date) {
+        this.description = description;
+        this.isDone = isDone;
+        this.date = date;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
     }
 
     /**

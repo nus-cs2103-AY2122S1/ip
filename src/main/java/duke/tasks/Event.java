@@ -1,23 +1,20 @@
 package duke.tasks;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
  * Container for an event task.
  */
 public class Event extends Task {
-    private LocalDateTime at;
 
     /**
      * Instantiates an Event
      *
      * @param description Description of the event
-     * @param at Scheduled date of the event
+     * @param date Scheduled date of the event
      */
-    public Event(String description, LocalDateTime at) {
-        super(description);
-        this.at = at;
+    public Event(String description, LocalDateTime date) {
+        super(description, date);
     }
 
     /**
@@ -25,15 +22,10 @@ public class Event extends Task {
      *
      * @param description Description of the task.
      * @param isDone True if the task has been completed.
-     * @param at Date when the task is scheduled at.
+     * @param date Date when the task is scheduled at.
      */
-    public Event(String description, boolean isDone, LocalDateTime at) {
-        super(description, isDone);
-        this.at = at;
-    }
-
-    public LocalDate getAtDate() {
-        return this.at.toLocalDate();
+    public Event(String description, boolean isDone, LocalDateTime date) {
+        super(description, isDone, date);
     }
 
     /**
@@ -43,7 +35,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at.format(outputFormatter) + ")";
+        return "[E]" + super.toString() + " (at: " + date.format(outputFormatter) + ")";
     }
 
     /**
@@ -53,6 +45,6 @@ public class Event extends Task {
      */
     @Override
     public String toSaveString() {
-        return "E" + super.toSaveString() + "|" + this.at.format(outputFormatter);
+        return "E" + super.toSaveString() + "|" + date.format(outputFormatter);
     }
 }

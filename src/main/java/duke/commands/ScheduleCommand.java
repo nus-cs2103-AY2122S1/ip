@@ -9,13 +9,11 @@ import duke.TaskList;
 import duke.Ui;
 
 public class ScheduleCommand extends Command {
-    /** The command word that identifies a DeleteCommand instance. */
+    /** The command word that identifies a ScheduleCommand instance. */
     public static final String COMMAND_WORD = "schedule";
 
     /** Length of the command word. */
     public static final int COMMAND_LENGTH = COMMAND_WORD.length();
-
-    private String userCommand;
 
     /**
      * Instantiates a ScheduleCommand object.
@@ -23,8 +21,7 @@ public class ScheduleCommand extends Command {
      * @param userCommand Full user input.
      */
     public ScheduleCommand(String userCommand) {
-        super();
-        this.userCommand = userCommand;
+        super(userCommand);
     }
 
     /**

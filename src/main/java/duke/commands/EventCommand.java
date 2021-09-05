@@ -30,16 +30,13 @@ public class EventCommand extends Command {
             + " <description> /at <date> - add an event scheduled at <date> in yyyy/MM/dd HHmm (24-hour format)\n"
             + "    📍 Example: " + COMMAND_WORD + " project meeting /at 2021/08/24 1500";
 
-    private String userCommand;
-
     /**
      * Instantiates EventCommand object.
      *
      * @param userCommand Full user input.
      */
     public EventCommand(String userCommand) {
-        super();
-        this.userCommand = userCommand;
+        super(userCommand);
     }
 
     @Override

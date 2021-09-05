@@ -10,6 +10,7 @@ import duke.commands.FindCommand;
 import duke.commands.HelpCommand;
 import duke.commands.ListCommand;
 import duke.commands.ScheduleCommand;
+import duke.commands.SortCommand;
 import duke.commands.TodoCommand;
 import duke.commands.WelcomeCommand;
 
@@ -55,6 +56,9 @@ public class Parser {
 
         case ScheduleCommand.COMMAND_WORD:
             return new ScheduleCommand(userCommand.strip());
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();

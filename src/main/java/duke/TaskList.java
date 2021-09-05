@@ -2,11 +2,10 @@ package duke;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import duke.tasks.Deadline;
-import duke.tasks.Event;
 import duke.tasks.Task;
 
 /**
@@ -127,9 +126,7 @@ public class TaskList {
         List<Task> scheduledTasks = new ArrayList<>();
 
         for (Task item : items) {
-            if (item instanceof Event && ((Event) item).getAtDate().equals(date)) {
-                scheduledTasks.add(item);
-            } else if (item instanceof Deadline && ((Deadline) item).getByDate().equals(date)) {
+            if (item.getDate().toLocalDate().equals(date)) {
                 scheduledTasks.add(item);
             }
         }
@@ -143,6 +140,20 @@ public class TaskList {
             scheduledTasksStr.append(i + 1).append(". ").append(scheduledTasks.get(i)).append("\n");
         }
         return scheduledTasksStr.toString();
+    }
+
+    /**
+     * Sorts the list of tasks in ascending date order.
+     *
+     * @return String representation of the list of sorted tasks.
+     */
+    public String sortList() {
+        if (items.size() == 0) {
+            return "You have no tasks in your list to sort.";
+        }
+
+        items.sort(Comparator.comparing(Task::getDate));
+        return printList();
     }
 
     /**

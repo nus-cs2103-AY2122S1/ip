@@ -27,6 +27,14 @@ public abstract class Command {
     /** Error message if there is missing description or date for deadline or event tasks. */
     static final String MISSING_DESC_DATE_ERR = "Please add a description and/or date for your task!";
 
+    protected String userCommand;
+
+    public Command() {}
+
+    public Command(String userCommand) {
+        this.userCommand = userCommand;
+    }
+
     /**
      * Returns true if the command is an exit command, return false otherwise.
      *
