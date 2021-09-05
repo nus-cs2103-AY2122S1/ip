@@ -10,6 +10,7 @@ import java.util.Scanner;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Period;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
@@ -53,6 +54,9 @@ public class Storage {
                     break;
                 case "E":
                     task = new Event(taskString[2], taskString[3]);
+                    break;
+                case "P":
+                    task = new Period(taskString[2], taskString[3], taskString[4]);
                     break;
                 default:
                     throw new DukeException("Invalid task type found!");
