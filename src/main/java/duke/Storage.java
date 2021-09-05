@@ -35,33 +35,7 @@ public class Storage {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNext()) {
                 String str = scanner.nextLine();
-                String[] taskArr = str.split(" \\| ");
-
-                switch (taskArr[0]) {
-                    case "T":
-                        Todo todo = new Todo(taskArr[2]);
-                        list.add(todo);
-                        if (taskArr[1].equals("1")) {
-                            todo.setDone();
-                        }
-                        break;
-                    case "E":
-                        Event event = new Event(taskArr[2], LocalDate.parse(taskArr[3]));
-                        list.add(event);
-                        if (taskArr[1].equals("1")) {
-                            event.setDone();
-                        }
-                        break;
-                    case "D":
-                        Deadline deadline = new Deadline(taskArr[2], LocalDate.parse(taskArr[3]));
-                        list.add(deadline);
-                        if (taskArr[1].equals("1")) {
-                            deadline.setDone();
-                        }
-                        break;
-                    default:
-                        break;
-                }
+                list.add(parseInput(str));
             }
         } catch (FileNotFoundException e) {
             throw new DukeException("File not found. Here is your error message: " + e.getMessage());
@@ -77,30 +51,46 @@ public class Storage {
 
             for (int i = 0; i < tasks.getSize(); i++) {
                 Task task = tasks.getTask(i);
-                char taskType = task.toString().charAt(2);
-                char isDone = '0';
-                if (task.getDone()) {
-                    isDone = '1';
-                }
-
-                switch (taskType) {
-                    case 'T':
-                        bw.write(taskType + " | " + isDone + " | " + task.getDescription());
-                        bw.newLine();
-                        break;
-                    case 'E':
-                    case 'D':
-                        bw.write(taskType + " | " + isDone + " | " + task.getDescription() + " | " + task.getDate());
-                        bw.newLine();
-                        break;
-                    default:
-                        throw new DukeException("File corrupted. Please either create new file or check your existing file.");
-                }
+                bw.write(task.toFileFormat());
+                bw.newLine();
             }
 
             bw.close();
         } catch (IOException e) {
             throw new DukeException("File not updated properly. Here is your error message: " + e.getMessage());
         }
+    }
+
+    private static Task parseInput(String str) throws DukeException {
+        String[] taskArr = str.split(" \\| ");
+        Task newTask;
+
+        switch (taskArr[0]) {
+            case "T":
+                Todo todo = new Todo(taskArr[2]);
+                if (taskArr[1].equals("1")) {
+                    todo.setDone();
+                }
+                newTask = todo;
+                break;
+            case "E":
+                Event event = new Event(taskArr[2], LocalDate.parse(taskArr[3]));
+                if (taskArr[1].equals("1")) {
+                    event.setDone();
+                }
+                newTask = event;
+                break;
+            case "D":
+                Deadline deadline = new Deadline(taskArr[2], LocalDate.parse(taskArr[3]));
+                if (taskArr[1].equals("1")) {
+                    deadline.setDone();
+                }
+                newTask = deadline;
+                break;
+            default:
+                throw new DukeException("File is corrupted. Please either create a new file or check your existing file.");
+        }
+
+        return newTask;
     }
 }

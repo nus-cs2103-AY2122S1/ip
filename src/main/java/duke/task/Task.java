@@ -29,7 +29,11 @@ public class Task {
 
     public LocalDate getDate() {
         return null;
-    };
+    }
+
+    public String toFileFormat() {
+        return "";
+    }
 
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;

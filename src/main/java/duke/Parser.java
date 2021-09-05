@@ -56,7 +56,7 @@ public class Parser {
         }
     }
 
-    public static Command parseFurther(String command, String rest) throws DukeException {
+    private static Command parseFurther(String command, String rest) throws DukeException {
         int index;
 
         try {

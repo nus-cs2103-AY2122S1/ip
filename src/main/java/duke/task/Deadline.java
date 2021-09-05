@@ -12,12 +12,22 @@ public class Deadline extends Task{
     }
 
     @Override
+    public LocalDate getDate() {
+        return by;
+    }
+
+    @Override
+    public String toFileFormat() {
+        char done = '0';
+        if (super.isDone) {
+            done = '1';
+        }
+        return "D | " + done + " | " + getDescription() + " | " + getDate();
+    }
+
+    @Override
     public String toString() {
         return " [D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
-    @Override
-    public LocalDate getDate() {
-        return by;
-    }
 }
