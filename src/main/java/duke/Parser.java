@@ -35,7 +35,7 @@ public class Parser {
             return getDoneCommand(splitBySpace[1], CommandsTypes.MARK_DONE, "Invalid index inputted after done. Please enter a positive integer");
         }
         if (splitBySpace[0].toLowerCase().equals("delete")) {
-            return getDoneCommand(splitBySpace[1], CommandsTypes.MARK_DONE, "Invalid index inputted after done. Please enter a positive integer");
+            return getDoneCommand(splitBySpace[1], CommandsTypes.DELETE, "Invalid index inputted after done. Please enter a positive integer");
         }
 
         if (splitBySpace[0].toLowerCase().equals("find")) {

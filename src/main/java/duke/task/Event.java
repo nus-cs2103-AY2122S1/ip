@@ -75,12 +75,7 @@ public class Event extends Task {
         if (eachWord.length == 0 || eachWord[0].length() == 0 || eachWord[0].equals(" ")) {
             throw new DukeException("Description cannot be empty. Type description before /at\nEg."
                     + Event.inputExample);
-        } catch (Exception e) {
-            assert false : "Unknown exception being thrown in Event";
         }
-
-        assert false : "Error in of function in event";
-        return null;
     }
 
     /**
