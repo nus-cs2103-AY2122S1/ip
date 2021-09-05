@@ -1,8 +1,6 @@
 package duke;
 
-public class Event extends Task {
-
-    private String date;
+public class Event extends DatedTask {
 
     /**
      * Returns an Event instance.
@@ -10,7 +8,7 @@ public class Event extends Task {
      * @param date
      */
     public Event(String description, String date) {
-        this(description, date, false);
+        super(description, date);
     }
 
     /**
@@ -19,9 +17,7 @@ public class Event extends Task {
      * @param date
      */
     public Event(String description, String date, boolean isDone) {
-        this.description = description;
-        this.date = date;
-        this.isDone = isDone;
+        super(description, date, isDone);
     }
 
     @Override

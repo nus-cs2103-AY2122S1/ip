@@ -93,8 +93,8 @@ public class TaskList {
      *
      * @param command
      */
-    public String handleAddToDo(String[] command) {
-        String newTaskDescription = Formatter.getTaskName(command);
+    public String handleAddToDo(String[] commands) {
+        String newTaskDescription = Formatter.getTaskName(commands);
         if (newTaskDescription.equals("")) {
             return Formatter.getResponseString(ERROR_TODO_MISSING_DESCRIPTION);
         }
@@ -107,9 +107,9 @@ public class TaskList {
      *
      * @param command
      */
-    public String handleAddDeadline(String[] command) {
-        String newTaskDescription = Formatter.getTaskName(command);
-        String newTaskDate = Formatter.getTaskDate(command);
+    public String handleAddDeadline(String[] commands) {
+        String newTaskDescription = Formatter.getTaskName(commands);
+        String newTaskDate = Formatter.getTaskDate(commands);
         Deadline newTask = new Deadline(newTaskDescription, newTaskDate);
         return handleAddHelper(newTask);
     }
@@ -119,9 +119,9 @@ public class TaskList {
      *
      * @param command
      */
-    public String handleAddEvent(String[] command) {
-        String newTaskDescription = Formatter.getTaskName(command);
-        String newTaskDate = Formatter.getTaskDate(command);
+    public String handleAddEvent(String[] commands) {
+        String newTaskDescription = Formatter.getTaskName(commands);
+        String newTaskDate = Formatter.getTaskDate(commands);
         Event newTask = new Event(newTaskDescription, newTaskDate);
         return handleAddHelper(newTask);
     }

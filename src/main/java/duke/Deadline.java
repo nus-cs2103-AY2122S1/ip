@@ -1,8 +1,6 @@
 package duke;
 
-public class Deadline extends Task {
-
-    private String date;
+public class Deadline extends DatedTask {
 
     /**
      * Returns a Deadline instance.
@@ -10,7 +8,7 @@ public class Deadline extends Task {
      * @param date
      */
     public Deadline(String description, String date) {
-        this(description, date, false);
+        super(description, date);
     }
 
     /**
@@ -19,9 +17,7 @@ public class Deadline extends Task {
      * @param date
      */
     public Deadline(String description, String date, boolean isDone) {
-        this.description = description;
-        this.date = date;
-        this.isDone = isDone;
+        super(description, date, isDone);
     }
 
     @Override
