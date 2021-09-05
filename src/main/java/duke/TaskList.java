@@ -26,6 +26,7 @@ public class TaskList {
      * @return A String that acts as a confirmation message by Duke for Task completion.
      */
     public String completeTask(int index) {
+        assert list.size() >= index : "Task index should not be out of bounds, tried to complete!";
         Task task = this.list.get(index - 1);
         task.setDone();
         return ("Nice! I've marked this task as done:\n" + "  " + task);
@@ -39,6 +40,7 @@ public class TaskList {
      */
     public String addToList(Task task) {
         this.list.add(task);
+        assert !list.isEmpty() : "The task did not get added!";
         return ("Got it. I've added this task:\n" + "  " + task.toString() + "\n"
                 + "Now you have " + list.size() + " task" + (list.size() == 1 ? "" : "s")
                 + " in the list.");
@@ -54,6 +56,7 @@ public class TaskList {
         if (this.list.size() < 1) {
             throw new DukeException("You haven't added anything to the list yet! Try adding something.");
         } else {
+            assert !list.isEmpty() : "List should not be empty, tried to print!";
             String taskQuantifier;
             if (this.list.size() == 1) {
                 taskQuantifier = "Here is the sole task in your list:";
@@ -80,6 +83,7 @@ public class TaskList {
             throw new DukeException("You haven't added anything to the list yet! Try adding something before "
                     + "deleting.");
         } else if (index <= this.list.size() && index >= 1) {
+            assert !list.isEmpty() : "List should not be empty, tried to delete!";
             Task toDelete = list.get(index - 1);
             list.remove(index - 1);
             return ("Noted. I've removed this task:\n" + "  " + toDelete + "\n" + "Now you have "
@@ -115,6 +119,8 @@ public class TaskList {
         if (filteredList.size() < 1) {
             throw new DukeException("I couldn't find any tasks with that particular search term. Try again.");
         } else {
+            assert !filteredList.isEmpty() : "Filtered list should not be empty, tried to print!";
+            assert filteredList.size() <= list.size() : "Filtered list should not be larger than original list!";
             String filteredTaskQuantifier;
             if (filteredList.size() == 1) {
                 filteredTaskQuantifier = "Here is the sole matching task in your list:";

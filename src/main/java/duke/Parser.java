@@ -88,6 +88,8 @@ public class Parser {
                             throw new DukeException("Please ensure that there is a task description and deadline. "
                                     + "Try again");
                         }
+                        assert restOfDeadlineSplit.length == 2 : "Deadline should not have anything other than"
+                                + " exactly 2 parts!";
                         String deadlineDescription = restOfDeadlineSplit[0];
                         String deadlineDateString = restOfDeadlineSplit[1];
                         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy");
@@ -110,6 +112,8 @@ public class Parser {
                             throw new DukeException("Please ensure that there is a task description with a date and "
                                     + "time. Try again");
                         }
+                        assert restOfEventSplit.length == 2 : "Event should not have anything other than "
+                                + "exactly 2 parts!";
                         String eventDescription = restOfEventSplit[0];
                         String eventDateTimeString = restOfEventSplit[1];
                         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
