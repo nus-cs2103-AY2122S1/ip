@@ -29,6 +29,7 @@ public class Parser {
      * @throws BottoException when the type of commands cannot be resolved
      */
     public static Command parse(String fullCommand) throws BottoException {
+        assert fullCommand != null : "Command is not supposed to be null here";
         String command = findCommand(fullCommand);
 
         switch (command) {
