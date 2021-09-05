@@ -15,12 +15,12 @@ public class ClearCommand extends Command {
      * Clears the contents of the <code>ItemList</code> object.
      * Optionally updates the UI.
      * 
-     * @param itemList The list itself.
+     * @param items The list itself.
      * @param Ui Ui object to update if necessary.
      */
     @Override
-    public void execute(ItemList itemList, Ui ui) {
-        itemList.clear();
+    public void execute(ItemList items, Ui ui) {
+        items.clear();
         ui.println("cleared!!");
     }
 }

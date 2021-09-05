@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a event entry in a to-do list. It has a occurance time and
+ * Represents a event entry in a to-do list. It has an occurrence time and
  * a name.
  */
 public class Event extends Item {

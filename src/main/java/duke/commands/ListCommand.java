@@ -8,7 +8,7 @@ import java.util.ListIterator;
 
 /**
  * Represents a command to display all <code>Item</code> objects
- * in a <code>itemList</code> though an UI.
+ * in a <code>items</code> though an UI.
  */
 public class ListCommand extends Command {
     @Override
@@ -16,14 +16,14 @@ public class ListCommand extends Command {
 
     /**
     * Displays all <code>Item</code> objects
-    * in the <code>itemList</code> though the UI.
+    * in the <code>items</code> though the UI.
     * 
-    * @param itemList List to print.
+    * @param items List to print.
     * @param ui UI to update.
     */
     @Override
-    public void execute(ItemList itemList, Ui ui) {
-        ListIterator<Item> iterator = itemList.listIterator();
+    public void execute(ItemList items, Ui ui) {
+        ListIterator<Item> iterator = items.listIterator();
         if (!iterator.hasNext()) {
             ui.println("No tasks uwu!");
         } else {

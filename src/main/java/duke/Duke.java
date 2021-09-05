@@ -30,7 +30,7 @@ public class Duke extends Application {
     private static final String LOGO = "Hewwo from dUWUk *w* OwO";
     private final Image IMAGE_USER = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
     private final Image IMAGE_DUKE = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
-    private ItemList itemList;
+    private ItemList items;
     private Storage storage;
     private Ui ui;
 
@@ -49,7 +49,7 @@ public class Duke extends Application {
 
         try {
             this.storage = new Storage("duke/data/duke.txt");
-            this.itemList = this.storage.loadState();
+            this.items = this.storage.loadState();
         } catch (DukeException e) {
             e.printStackTrace();
         }
@@ -178,8 +178,8 @@ public class Duke extends Application {
     private String getResponse(String currLine) {
         try {
             Command currCommand = Parser.parse(currLine);
-            currCommand.execute(this.itemList, this.ui);
-            this.storage.saveState(this.itemList);
+            currCommand.execute(this.items, this.ui);
+            this.storage.saveState(this.items);
         } catch (DukeException e) {
             return e.toString();
         }

@@ -27,13 +27,13 @@ public class FindCommand extends Command {
     * Displays all <code>Item</code> objects
     * matching the query though the UI.
     * 
-    * @param itemList Source of items.
+    * @param items Source of items.
     * @param ui UI to update.
     */
     @Override
-    public void execute(ItemList itemList, Ui ui) {
+    public void execute(ItemList items, Ui ui) {
         Item currItem;
-        ListIterator<Item> iterator = itemList.listIterator();
+        ListIterator<Item> iterator = items.listIterator();
         if (!iterator.hasNext()) {
             ui.println("Nwo tasks uwu!");
         } else {

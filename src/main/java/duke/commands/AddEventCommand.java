@@ -12,6 +12,8 @@ import java.util.ArrayList;
  * <code>content</code> and <code>time</code>.
  */
 public class AddEventCommand extends Command {
+    private static final int AT_LENGTH = 3;
+    private static final int COMMAND_LENGTH = 6;
     private String content;
     private String time;
 
@@ -25,15 +27,15 @@ public class AddEventCommand extends Command {
     public void parseLine(String line) throws DukeException {
         int idx = line.indexOf("/at");
         if (idx == -1) {
-            throw new DukeException("Pwease specify /at!!");
-        } else if (idx == line.length() - 3 || idx == line.length() - 4) {
-            throw new DukeException("/at cannot emptyyy!!");
-        } else if (idx == 6 || idx == 7) {
+            throw new DukeException("Pwease specify /by!!");
+        } else if (idx == line.length() - AT_LENGTH || idx == line.length() - AT_LENGTH - 1) {
+            throw new DukeException("/by cannot emptyyy!!");
+        } else if (idx == COMMAND_LENGTH || idx == COMMAND_LENGTH + 1) {
             throw new DukeException("Message cannot be emptyyy!1!");
         }
 
-        this.content = line.substring(6, idx - 1);
-        this.time = line.substring(idx + 4);
+        this.content = line.substring(COMMAND_LENGTH + 1, idx - 1);
+        this.time = line.substring(idx + AT_LENGTH + 1);
     }
 
     /**
@@ -41,17 +43,17 @@ public class AddEventCommand extends Command {
      * Adds in-place, and updates the <code>Ui</code> object. The arguments
      * are taken from the class members.
      * 
-     * @param itemList List to add the item to.
+     * @param items List to add the item to.
      * @param ui Ui to update.
      */
     @Override
-    public void execute(ItemList itemList, Ui ui) throws DukeException {
+    public void execute(ItemList items, Ui ui) throws DukeException {
         ArrayList<String> printBuffer = new ArrayList<>();
         printBuffer.add("Rawr x3 *notices task* OwO, what's this? Oo a new task:");
         Event toAdd = new Event(this.content, this.time);
-        itemList.add(toAdd);
+        items.add(toAdd);
         printBuffer.add("  " + toAdd.toString());
-        printBuffer.add(String.format("Now u habe %d tasks in da list. OwO", itemList.size()));
+        printBuffer.add(String.format("Now u habe %d tasks in da list. OwO", items.size()));
         ui.println(printBuffer);
     }
 }
