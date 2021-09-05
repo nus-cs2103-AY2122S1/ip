@@ -51,7 +51,7 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
         setStyle("-fx-background-color: #abdff9");
-        dialog.setPadding(new Insets(0,0,0,0));
+        dialog.setPadding(new Insets(0, 0, 0, 0));
         dialog.setTranslateX(2.5);
     }
 

@@ -155,7 +155,7 @@ public class Parser {
      *
      * @param input Input string from the user.
      */
-    private void findTask(String input){
+    private void findTask(String input) {
         String searchTerm = input.split(" ", 2)[1];
         System.out.println("These tasks have descriptions that contain the phrase:\n"
                 + "'" + searchTerm + "'\n");
@@ -224,7 +224,7 @@ public class Parser {
             System.out.println("This Task is successfully updated from:\n\n"
                     + "    " + oldTask + "\n\n"
                     + "to:\n\n"
-                    + "    "+ newTask);
+                    + "    " + newTask);
 
         } catch (NumberFormatException e1) {
 
