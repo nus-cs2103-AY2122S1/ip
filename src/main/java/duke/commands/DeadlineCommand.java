@@ -3,8 +3,8 @@ package duke.commands;
 import java.time.LocalDateTime;
 
 import duke.PersistentStorage;
+import duke.Response;
 import duke.Tasklist;
-import duke.UI;
 import duke.tasks.Deadline;
 
 /**
@@ -34,12 +34,13 @@ public class DeadlineCommand extends Command {
      * Tasklist and displaying the updated Tasklist.
      *
      * @param taskList The Tasklist associated with the Duke instance.
-     * @param ui The UI associated with the Duke instance.
+     * @param response The UI associated with the Duke instance.
      * @param storage The PersistentStorage associated with the Duke instance.
+     * @return A CommandResult detailing the added Task.
      */
-    public void executeCommand(Tasklist taskList, UI ui, PersistentStorage storage) {
+    public CommandResult executeCommand(Tasklist taskList, Response response, PersistentStorage storage) {
         Deadline deadline = new Deadline(this.description, this.dueDateTime);
         taskList.addTask(deadline);
-        ui.showAddedTask(taskList, deadline);
+        return new CommandResult(response.showAddedTask(taskList, deadline));
     }
 }

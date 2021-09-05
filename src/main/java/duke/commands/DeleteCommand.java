@@ -2,8 +2,8 @@ package duke.commands;
 
 import duke.DukeException;
 import duke.PersistentStorage;
+import duke.Response;
 import duke.Tasklist;
-import duke.UI;
 import duke.tasks.Task;
 
 /**
@@ -28,17 +28,19 @@ public class DeleteCommand extends Command {
      * deleted task.
      *
      * @param taskList The Tasklist associated with the Duke instance.
-     * @param ui The UI associated with the Duke instance.
+     * @param response The UI associated with the Duke instance.
      * @param storage The PersistentStorage associated with the Duke instance.
+     * @return A CommandResult detailing the result of deleting a Task.
      * @throws DukeException if the provided target index is not in range.
      */
-    public void executeCommand(Tasklist taskList, UI ui, PersistentStorage storage) throws DukeException {
+    public CommandResult executeCommand(Tasklist taskList, Response response, PersistentStorage storage)
+            throws DukeException {
         // Check for valid task number provided
         if (this.target < 1 || this.target > taskList.getTotalTasks()) {
             throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
         }
 
         Task removed = taskList.deleteTask(target);
-        ui.showRemovedTask(taskList, removed);
+        return new CommandResult(response.showRemovedTask(taskList, removed));
     }
 }

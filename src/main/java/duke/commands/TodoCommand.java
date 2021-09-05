@@ -2,8 +2,8 @@ package duke.commands;
 
 import duke.DukeException;
 import duke.PersistentStorage;
+import duke.Response;
 import duke.Tasklist;
-import duke.UI;
 import duke.tasks.ToDo;
 
 /**
@@ -28,14 +28,15 @@ public class TodoCommand extends Command {
      * Tasklist and displaying the updated Tasklist.
      *
      * @param taskList The Tasklist associated with the Duke instance.
-     * @param ui The UI associated with the Duke instance.
+     * @param response The UI associated with the Duke instance.
      * @param storage The PersistentStorage associated with the Duke instance.
+     * @return A CommandResult detailing the result of adding a ToDo task.
      * @throws DukeException if the provided target index is not in range.
      */
-    public void executeCommand(Tasklist taskList, UI ui, PersistentStorage storage) {
+    public CommandResult executeCommand(Tasklist taskList, Response response, PersistentStorage storage) {
         ToDo task = new ToDo(this.description);
 
         taskList.addTask(task);
-        ui.showAddedTask(taskList, task);
+        return new CommandResult(response.showAddedTask(taskList, task));
     }
 }
