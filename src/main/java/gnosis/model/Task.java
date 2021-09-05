@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class Task {
 
     /** Type of task in character */
-    private final char TASK_TYPE;
+    private char taskType;
 
     /** Task name */
     private String taskName;
@@ -32,7 +32,7 @@ public class Task {
      */
     public Task(String taskName, TaskType type) {
         this.taskName = taskName;
-        this.TASK_TYPE = TaskType.getTask(type);
+        this.taskType = TaskType.getTask(type);
         isDone = false;
         dateTime = LocalDateTime.now();
     }
@@ -47,7 +47,7 @@ public class Task {
      */
     public Task(String taskName, TaskType type, LocalDateTime dateTime) {
         this.taskName = taskName;
-        this.TASK_TYPE = TaskType.getTask(type);
+        this.taskType = TaskType.getTask(type);
         this.dateTime = dateTime;
         isDone = false;
     }
@@ -64,7 +64,7 @@ public class Task {
      */
     public Task(String taskName, TaskType type, LocalDateTime dateTime, boolean isDone) {
         this.taskName = taskName;
-        this.TASK_TYPE = TaskType.getTask(type);
+        this.taskType = TaskType.getTask(type);
         this.isDone = isDone;
         this.dateTime = dateTime;
     }
@@ -109,7 +109,7 @@ public class Task {
     }
 
     /**
-     * Retrieves character resprentative of task type
+     * Retrieves character representative of task type
      *
      * 'T' - 'T0DO' type.
      * 'E' - 'EVENT' type.
@@ -118,7 +118,7 @@ public class Task {
      * @return Character of task type.
      */
     public char getTaskType() {
-        return this.TASK_TYPE;
+        return this.taskType;
     }
 
     /**

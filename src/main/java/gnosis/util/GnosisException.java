@@ -7,7 +7,7 @@ package gnosis.util;
  * */
 public class GnosisException extends Exception {
 
-    private final String ERROR_MESSAGE;
+    private String errorMessage;
 
     /**
      * GnosisException constructor to initialise exception.
@@ -16,7 +16,7 @@ public class GnosisException extends Exception {
      */
     public GnosisException(String errorMessage) {
         super(errorMessage);
-        this.ERROR_MESSAGE = errorMessage;
+        this.errorMessage = errorMessage;
     }
 
     /**
@@ -26,6 +26,6 @@ public class GnosisException extends Exception {
      */
     @Override
     public String toString() {
-        return "~~" + this.ERROR_MESSAGE + "~~\nPLEASE TRY AGAIN:";
+        return "~~" + this.errorMessage + "~~\nPLEASE TRY AGAIN:";
     }
 }

@@ -1,6 +1,5 @@
 package gnosis.task;
 
-import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -27,20 +26,28 @@ public class TaskCommandManager {
     /**
      * Adds a t0do tasks and returns the t0do.
      *
-     * @param todo The t0do input to save
-     * @throws GnosisException If input is empty
+     * @param tdo The t0do input to save.
+     * @return t0do The t0do that is saved.
+     * @throws GnosisException If input is empty.
      */
-    public Todo addTodo(String todo) throws GnosisException {
-        if (todo.trim().equalsIgnoreCase("")) {
+    public Todo addTodo(String tdo) throws GnosisException {
+        if (tdo.trim().equalsIgnoreCase("")) {
             throw new GnosisException(GnosisConstants.TODO_EMPTY_EXCEPT_MESSAGE);
         }
 
-        Todo td = new Todo(todo);
+        Todo td = new Todo(tdo);
         tasks.add(td);
 
         return td;
     }
 
+    /**
+     * Adds an event tasks to save.
+     *
+     * @param event event to save.
+     * @return event The event that is saved.
+     * @throws GnosisException If input is empty.
+     */
     public Event addEvent(String event) throws GnosisException {
         String[] splitTaskInput = event.split("/at");
 
@@ -58,6 +65,13 @@ public class TaskCommandManager {
         return et;
     }
 
+    /**
+     * Adds an deadline task to save.
+     *
+     * @param deadline deadline to save.
+     * @return deadline the deadline task that is saved.
+     * @throws GnosisException If input is empty.
+     */
     public Deadline addDeadline(String deadline) throws GnosisException {
         String[] splitTaskInput = deadline.split("/by");
 
@@ -75,6 +89,13 @@ public class TaskCommandManager {
         return dl;
     }
 
+    /**
+     * Marks selected task as done.
+     *
+     * @param taskIndex taskIndex indicates task to mark done.
+     * @return task Task that is marked done.
+     * @throws GnosisException If taskIndex is out of bounds
+     */
     public Task markTaskAsDone(int taskIndex) throws GnosisException {
         if (taskIndex < 0 || taskIndex >= tasks.size()) {
             throw new GnosisException(GnosisConstants.TASK_INDEX_OUT_OF_BOUNDS_EXCEPT_MESSAGE);
@@ -84,6 +105,13 @@ public class TaskCommandManager {
         return tasks.get(taskIndex);
     }
 
+    /**
+     * Deletes selected task.
+     *
+     * @param taskIndex taskIndex indicates which task to delete.
+     * @return deadline the deadline task that is saved.
+     * @throws GnosisException If taskIndex is out of bounds
+     */
     public Task deleteTask(int taskIndex) throws GnosisException {
         if (taskIndex < 0 || taskIndex >= tasks.size()) {
             throw new GnosisException(GnosisConstants.TASK_INDEX_OUT_OF_BOUNDS_EXCEPT_MESSAGE);
@@ -95,6 +123,12 @@ public class TaskCommandManager {
         return t;
     }
 
+    /**
+     * Finds matching tasks with specified keyword
+     *
+     * @param taskKeyword Matching Keyword to filter tasks.
+     * @return List of filtered task matching keyword.
+     */
     public List<Task> findMatchingTasks(String taskKeyword) {
         // using stream to filter out only matching task in task list
         return this.tasks.stream()
@@ -110,8 +144,15 @@ public class TaskCommandManager {
         return this.getTasks().size();
     }
 
-    // helper function
+    /**
+     * Converts a string to a DateTime.
+     *
+     * @param dateString to convert to a date.
+     * @return LocalDateTime formatted datetime.
+     * @throws GnosisException If String date does not match date format.
+     */
     public static LocalDateTime stringToDate(String dateString) throws GnosisException {
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
 
         LocalDateTime ldt;
