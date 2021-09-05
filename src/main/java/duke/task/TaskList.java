@@ -13,6 +13,7 @@ public class TaskList {
 
     /**
      * Constructs an instance of task list from a List of Tasks.
+     *
      * @param taskList a List of Tasks.
      */
     public TaskList(List<Task> taskList) {
@@ -83,6 +84,7 @@ public class TaskList {
 
     /**
      * Returns a list of tasks whose descriptions contains a specified pattern.
+     *
      * @param pattern a string of the pattern to be matched.
      * @return a list of matching tasks.
      */
@@ -109,6 +111,7 @@ public class TaskList {
 
     /**
      * Returns a string that shows the details of the list of tasks.
+     *
      * @return a string of the tasks' details.
      */
     @Override

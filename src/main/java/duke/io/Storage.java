@@ -24,6 +24,7 @@ public class Storage {
 
     /**
      * Constructs a new instance of Storage that loads and stores data into the file path that is specified.
+     *
      * @param filePath a string literal of the file path where the information is accessed from.
      * @throws IOException if the file path is not found and cannot be created automatically by Storage.
      */

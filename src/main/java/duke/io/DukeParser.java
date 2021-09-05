@@ -11,6 +11,8 @@ import duke.type.DukeCommand;
  * A class that handles anything related to the parsing of information for Duke.
  */
 public class DukeParser {
+    // Defines the representation of a task that is done in Duke's store format
+    private static final String TRUTH_REPRESENTATION = "1";
     /**
      * Provides a task based on data read from line.
      *
@@ -19,11 +21,11 @@ public class DukeParser {
      * @throws DukeFileSystemException if the line provided does not conform to the Duke storing format.
      */
     public Task parseTaskFromLine(String line) throws DukeFileSystemException {
-        String[] lineArgs = line.split(" \\| ");
-        String taskType = lineArgs[0];
-        boolean isDone = lineArgs[1].equals("1");
-        String taskDescription = lineArgs[2];
-        String date = lineArgs.length > 3 ? lineArgs[3] : "";
+        String[] args = line.split(" \\| ");
+        String taskType = args[0];
+        boolean isDone = args[1].equals(TRUTH_REPRESENTATION);
+        String taskDescription = args[2];
+        String date = args.length > 3 ? args[3] : "";
         Task task;
         switch (taskType) {
         case "T":
