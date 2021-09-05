@@ -37,6 +37,8 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) throws TaskNotFoundException,
             InvalidInputException, SaveFileException {
+        assert tasks != null;
+        assert storage != null;
         try {
             int taskNumber = Integer.parseInt(todoNumber);
             if (taskNumber <= tasks.size() && taskNumber > 0) {

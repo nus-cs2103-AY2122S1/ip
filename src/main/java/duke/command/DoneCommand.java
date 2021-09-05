@@ -38,6 +38,8 @@ public class DoneCommand extends Command {
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) throws TaskNotFoundException,
             InvalidInputException, TaskCompletedException, SaveFileException {
+        assert tasks != null;
+        assert storage != null;
         try {
             int taskNumber = Integer.parseInt(action);
             if (taskNumber <= tasks.size() && taskNumber > 0) {

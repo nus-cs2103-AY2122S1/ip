@@ -31,6 +31,7 @@ public final class Parser {
      * @throws InvalidInputException if command is not recognised.
      */
     public static Command parse(String[] fullCommand) throws InvalidInputException {
+        assert fullCommand.length == 2;
         String command = fullCommand[0];
         String action = fullCommand[1];
         switch (command) {
@@ -81,6 +82,7 @@ public final class Parser {
         if (splitInput.length == 1) {
             return new String[] {splitInput[0], ""};
         }
+        assert splitInput.length == 2;
         return splitInput;
     }
 }

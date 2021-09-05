@@ -35,6 +35,8 @@ public class TodoCommand extends Command {
     @Override
     public CommandResult execute(TaskList tasks, Storage storage)
             throws NoActionException, SaveFileException {
+        assert tasks != null;
+        assert storage != null;
         if (action.length() == 0) {
             throw new NoActionException("Command 'todo' requires a task action");
         }

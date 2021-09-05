@@ -49,6 +49,9 @@ public class Reply {
      * @param tasks Tasklist which the task has been added to.
      */
     public static String showTaskAdded(Task task, TaskList tasks) {
+        assert task != null;
+        assert tasks != null;
+
         return String.format("Got it. I've added this task: \n   %s \nNow you have %d task in the list.\n",
                 task, tasks.size());
     }
@@ -60,6 +63,8 @@ public class Reply {
      * @param tasks Tasklist which the task has been added to.
      */
     public static String showTaskRemoved(Task task, TaskList tasks) {
+        assert task != null;
+        assert tasks != null;
         return String.format("Noted. I've removed this task:\n  %s\nNow you have %d task in the list.\n",
                 task, tasks.size());
     }
@@ -70,6 +75,7 @@ public class Reply {
      * @param task Task that has been completed.
      */
     public static String showTaskDone(Task task) {
+        assert task != null;
         return String.format("Nice! I've marked this task as done:\n%s", task);
     }
 
@@ -77,6 +83,7 @@ public class Reply {
      * Shows a user friendly text version of the tasks in the tasklist.
      */
     public static String showList(TaskList tasks) {
+        assert tasks != null;
         StringBuilder out = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             out.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
@@ -90,6 +97,7 @@ public class Reply {
      * @param tasks Tasklist of tasks that matches the search terms.
      */
     public static String showMatchingTasks(TaskList tasks) {
+        assert tasks != null;
         if (tasks.size() == 0) {
             return "There are no matches in your list.\nUse command 'list' to see your whole list";
         } else {
