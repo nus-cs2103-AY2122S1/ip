@@ -17,6 +17,7 @@ public class Duke implements ChatbotUI, Parser {
     private static final String FAREWELL_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
     private static final String COMPLETE_TASK_COMMAND = "done";
+    private static final String FIND_TASK_COMMAND = "find";
     private static final String DELETE_TASK_COMMAND = "delete";
     private static final String CREATE_TODO_COMMAND = "todo";
     private static final String CREATE_EVENT_COMMAND = "event";
@@ -114,6 +115,8 @@ public class Duke implements ChatbotUI, Parser {
                 output = tasks.toString();
             } else if (msg.startsWith(COMPLETE_TASK_COMMAND)) {
                 output = tasks.completeTask(Parser.getIntFrom(COMPLETE_TASK_COMMAND, msg));
+            } else if (msg.startsWith(FIND_TASK_COMMAND)) {
+                    output = tasks.findTasks(Parser.getStringFrom(FIND_TASK_COMMAND, msg));
             } else if (msg.startsWith(DELETE_TASK_COMMAND)) {
                 output = tasks.deleteTask(Parser.getIntFrom(DELETE_TASK_COMMAND, msg));
             } else if (msg.startsWith(CREATE_TODO_COMMAND)) {

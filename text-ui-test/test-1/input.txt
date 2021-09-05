@@ -9,8 +9,9 @@ invalidcommand
 todo
 deadline
 event
-todo return book
+todo bookmark pages
 list
+find book
 delete 2
 list
 bye

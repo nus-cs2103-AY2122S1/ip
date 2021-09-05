@@ -91,6 +91,22 @@ public class TaskList {
     public String countTasks() {
         return String.format("\nNow you have %d tasks in the list.", this.tasks.size());
     }
+
+    /**
+     * Returns the list of tasks that match a given keyword or phrase.
+     * @param keyword a String that must be contained by tasks.
+     * @return a filtered list of tasks that contain the keyword.
+     */
+    public String findTasks(String keyword) {
+        TaskList filteredList = new TaskList();
+        for (Task task : this.tasks) {
+            if (task.titleContains(keyword)) {
+                filteredList.addTask(task);
+            }
+        }
+        return String.format("I've filtered tasks containing '%s'.\n", keyword) + filteredList.toString();
+    }
+
     /**
      * Deletes a task when given its index number.
      *
