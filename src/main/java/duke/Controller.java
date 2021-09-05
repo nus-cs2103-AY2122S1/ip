@@ -46,7 +46,7 @@ public class Controller {
             dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
             this.dialogContainer.getChildren().addAll(
                     new DialogBox(getUserDialog(), new ImageView(icon), true),
-                    new DialogBox(getDukeResponse(), new ImageView(icon), false)
+                    new DialogBox(getDukeDialog(), new ImageView(icon), false)
             );
         }
     }
@@ -56,9 +56,9 @@ public class Controller {
         return textToAdd;
     }
 
-    public Label getDukeResponse() {
+    public Label getDukeDialog() {
         Parser p = new Parser(this.list, this.storage);
-        String response = p.dukeResponse(this.command);
+        String response = p.getDukeResponse(this.command);
         Label textToAdd = new Label(response);
         return textToAdd;
 

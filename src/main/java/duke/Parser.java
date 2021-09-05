@@ -146,7 +146,7 @@ public class Parser {
      * @param command The command the user enters.
      * @return The String representing Duke's response.
      */
-    public String dukeResponse(String command) {
+    public String getDukeResponse(String command) {
         Scanner s = new Scanner(command);
         String input = s.next();
         String response = "";
