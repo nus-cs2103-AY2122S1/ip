@@ -48,9 +48,7 @@ public class Storage {
             File file = new File(filePath);
             // Create a new file if it does not already exist
             file.createNewFile();
-
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
-
             String task = "";
             while ((task = reader.readLine()) != null) {
                 char type = task.charAt(1);
@@ -107,8 +105,11 @@ public class Storage {
             throw new DukeException("Invalid task");
         }
 
+        int endOfDateString = task.indexOf(')');
+        assert endOfDateString >= 0: "DateString is within brackets.";
+
         String timeDescription = task.substring(timeIndex + command.length(),
-                task.indexOf(')'));
+                endOfDateString);
         LocalDate time = LocalDate.parse(timeDescription);
         return time;
     }
@@ -150,7 +151,6 @@ public class Storage {
      */
     public void deleteTaskFromFile(TaskList taskList) {
         try {
-            File file = new File(filePath);
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
             writer.write(taskList.toString());
         } catch (IOException e) {
