@@ -93,6 +93,7 @@ public class Duke {
     }
 
     private String doneHandler(String args) {
+        assert (args != null);
         if (args.equals("")) {
             return "The done command expects an integer argument indicating the index of a task.";
         }
@@ -111,6 +112,7 @@ public class Duke {
     }
 
     private String deleteHandler(String args) {
+        assert (args != null);
         if (args.equals("")) {
             return "The delete command expects an integer argument indicating the index of a task.";
         }
@@ -128,6 +130,7 @@ public class Duke {
     }
 
     private String findHandler(String args) {
+        assert (taskList != null);
         TaskList filteredList = this.taskList.findTasks(args);
         if (filteredList.size() > 0) {
             return "Here are the matching tasks in your list:\n" + filteredList;
