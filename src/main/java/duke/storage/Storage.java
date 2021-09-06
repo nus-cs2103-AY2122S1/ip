@@ -28,6 +28,8 @@ public class Storage {
         if (!f.exists()) {
             f.getParentFile().mkdirs();
         }
+
+        assert f.exists() : "filePath should be initiated.";
     }
 
     /**
@@ -39,12 +41,18 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         try {
             File f = new File(filePath);
+
+            assert f.exists() : "File to read from should exist.";
+
             Scanner s = new Scanner(f);
             ArrayList<Task> tasks = new ArrayList<Task>();
             while (s.hasNext()) {
                 String item = s.nextLine();
                 String[] details = item.split(",");
                 boolean isDone = Boolean.parseBoolean(details[1]);
+
+                assert details.length >= 2 : "Task description fields should not be empty.";
+
                 switch (details[0]) {
                 case "T":
                     tasks.add(new ToDo(details[2], isDone));
@@ -57,6 +65,7 @@ public class Storage {
                     break;
                 }
             }
+            s.close();
             return tasks;
         } catch (FileNotFoundException e) {
             throw new DukeException("File not found.");
@@ -71,6 +80,9 @@ public class Storage {
      */
     public void write(TaskList tasks) {
         try {
+            File f = new File(filePath);
+            assert f.exists() : "File to write to should be valid.";
+
             FileWriter fw = new FileWriter(filePath);
             for (Task item : tasks.getList()) {
                 String toAdd = item.getText();
