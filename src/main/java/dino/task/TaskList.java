@@ -2,6 +2,7 @@ package dino.task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import dino.exception.*;
 
@@ -96,26 +97,24 @@ public class TaskList {
     /**
      * Prints out the task(s) that contains the input keyword(s) in description
      *
-     * @param keyword a list of keywords for searching tasks
+     * @param keywords a list of keywords for searching tasks
      * @return the list of task that contains the keyword(s)
      * @throws TaskNotFoundException if there's no task in the task list that
      * matches the given keyword(s)
      */
-    public String searchKeyword(String ...keyword) throws TaskNotFoundException {
-        List<Task> matchingTasks = new ArrayList<>();
-        for (Task task: taskList) {
-            for (String s : keyword) {
-                if (task.getDescription().contains(s)) {
-                    matchingTasks.add(task);
-                }
-            }
+    public String searchTaskFromKeyword(String ...keywords) throws TaskNotFoundException {
+        List<Task> matchingTasksList = new ArrayList<>();
+        Stream<Task> matchingTasksStream;
+        for (String keyword : keywords) {
+            matchingTasksStream = taskList.stream().filter(task -> task.getDescription().contains(keyword));
+            matchingTasksStream.forEach(task -> matchingTasksList.add(task));
         }
-        if (matchingTasks.isEmpty()) {
+        if (matchingTasksList.isEmpty()) {
             throw new TaskNotFoundException();
         } else {
             StringBuilder list = new StringBuilder();
-            for (int i = 0; i < matchingTasks.size(); i++) {
-                list.append(i + 1).append(". ").append(matchingTasks.get(i)).append("\n");
+            for (int i = 0; i < matchingTasksList.size(); i++) {
+                list.append(i + 1).append(". ").append(matchingTasksList.get(i)).append("\n");
             }
             return "Here are the matching tasks in your list:\n" + list;
         }
