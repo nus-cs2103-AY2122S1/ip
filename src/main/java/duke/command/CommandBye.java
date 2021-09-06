@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.DukeStorage;
 import duke.DukeUi;
+import duke.exception.DukeCommandException;
 import duke.exception.DukeFileException;
 import duke.task.TaskList;
 
@@ -25,7 +26,7 @@ public class CommandBye extends DukeCommand {
             response = DukeUi.getGoodBye();
         } catch (DukeFileException e) {
             response = e.getMessage();
-            this.isEnd = false;
+            isEnd = false;
         }
         return response;
     }
@@ -33,5 +34,21 @@ public class CommandBye extends DukeCommand {
     @Override
     public boolean isExit() {
         return isEnd;
+    }
+
+    /**
+     * Parses the user input into the right format for the command
+     *
+     * @param userArgs Arguments to the command as provided by the user.
+     */
+    public static DukeCommand parseCommand(String[] userArgs) throws DukeCommandException {
+        assert userArgs != null;
+        assert userArgs.length != 0;
+        assert userArgs[0].equals("bye");
+        if (userArgs.length > 1) {
+            throw new DukeCommandException("bye");
+        }
+
+        return new CommandBye();
     }
 }

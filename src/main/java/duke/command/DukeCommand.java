@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeCommandException;
 import duke.task.TaskList;
 
 /**
@@ -10,6 +11,7 @@ public abstract class DukeCommand {
      * Executes the command.
      *
      * @param tl Task list for the user.
+     * @return A string to be displayed by the GUI
      */
     public abstract String execute(TaskList tl);
 

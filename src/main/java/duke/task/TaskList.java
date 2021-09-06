@@ -37,22 +37,23 @@ public class TaskList {
             return "The list is empty! *quack*";
         }
         StringBuilder sb = new StringBuilder();
-        Task t;
-        String time;
         for (int i = 1; i <= this.listSize; i++) {
-            t = userList.get(i - 1);
-            time = getTaskTime(t);
+            int taskIndex = taskIdToIndex(i);
+            Task task = userList.get(taskIndex);
+            String time = getTaskTime(task);
+            String isCompleted = task.hasCompleted() ? "X" : " ";
             sb.append(
                     String.format(
                             "%d. %s  [%s] [%s] (%s)\n",
                             i,
-                            t.getName(),
-                            t.getTaskType(),
-                            t.hasCompleted() ? "X" : " ",
+                            task.getName(),
+                            task.getTaskType(),
+                            isCompleted,
                             time
                     )
             );
         }
+        //Remove trailing new line character
         sb.setLength(sb.length() - 1);
         return sb.toString();
     }
@@ -84,19 +85,19 @@ public class TaskList {
      * @return Message depending on the outcome of the action.
      */
     public String markComplete(int taskId) {
-        if (taskId - 1 < listSize) {
-            if (userList.get(taskId - 1).completeTask()) {
-                return String.format(
-                        "You have completed duke.task %d. %s",
-                        taskId,
-                        userList.get(taskId - 1).getName()
-                );
-            } else {
-                return "Something seems to have went terribly wrong";
-            }
-        } else {
-            return String.format("Uh oh, seems like there is no duke.task number %d", taskId);
+        if (!isValidId(taskId)) {
+            return String.format("Uh oh, seems like there is no task number %d", taskId);
         }
+
+        int taskIndex = taskIdToIndex(taskId);
+        Task task = userList.get(taskIndex);
+        assert task != null;
+        task.completeTask();
+        return String.format(
+                "You have completed duke.task %d. %s",
+                taskId,
+                userList.get(taskId - 1).getName()
+        );
     }
 
     /**
@@ -107,21 +108,23 @@ public class TaskList {
      * @return Message depending on the outcome of the action.
      */
     public String deleteTask(int taskId) {
-        if (taskId - 1 < listSize) {
-            Task t = userList.get(taskId - 1);
-            userList.remove(taskId - 1);
-            listSize--;
-            return String.format(
-                    "Alright,\nduke.duke.Task.Task: %s [%s] [%s] (%s)\nHas been removed, you have %d tasks in the list",
-                    t.getName(),
-                    t.getTaskType(),
-                    t.hasCompleted() ? "X" : " ",
-                    getTaskTime(t),
-                    listSize
-            );
-        } else {
+        if (!isValidId(taskId)) {
             return String.format("Uh oh, seems like there is no duke.task number %d", taskId);
         }
+
+        int taskIndex = taskIdToIndex(taskId);
+        Task task = userList.get(taskIndex);
+        userList.remove(taskIndex);
+        listSize--;
+        String isCompleted = task.hasCompleted() ? "X" : " ";
+        return String.format(
+                "Alright,\nduke.duke.Task.Task: %s [%s] [%s] (%s)\nHas been removed, you have %d tasks in the list",
+                task.getName(),
+                task.getTaskType(),
+                isCompleted,
+                getTaskTime(task),
+                listSize
+        );
     }
 
     /**
@@ -131,12 +134,12 @@ public class TaskList {
      * @return String representing the Task.
      */
     public String getTaskSaveFormat(int taskIndex) {
-        if (taskIndex < listSize) {
-            Task t = userList.get(taskIndex);
-            return t.getSaveFormat();
-        } else {
+        if (!isValidIndex(taskIndex)) {
             return "";
         }
+
+        Task task = userList.get(taskIndex);
+        return task.getSaveFormat();
     }
 
     /**
@@ -149,36 +152,26 @@ public class TaskList {
     public String searchKeyword(String keyword) {
         int tasksMatched = 0;
         StringBuilder sb = new StringBuilder();
-        Task t;
-
         for (int i = 1; i <= this.listSize; i++) {
-            t = userList.get((i - 1));
-            if (t.getName().contains(keyword)) {
-                sb.append(
-                        String.format(
-                                "%d. %s [%s]\n",
-                                i,
-                                t.getName(),
-                                t.getTaskType()
-                        )
-                );
+            Task task = userList.get(taskIdToIndex(i));
+            if (task.getName().contains(keyword)) {
+                sb.append(String.format("%d. %s [%s]\n", i, task.getName(), task.getTaskType()));
                 tasksMatched++;
             }
         }
-
         if (tasksMatched == 0) {
             return String.format(
                     "I couldn't find any tasks that matched the keyword \"%s\", *Quack*!",
                     keyword
             );
-        } else {
-            return String.format(
-                    "I found %d results when looking for \"%s\"!\n%s",
-                    tasksMatched,
-                    keyword,
-                    sb.toString()
-            );
         }
+
+        return String.format(
+                "I found %d results when looking for \"%s\"!\n%s",
+                tasksMatched,
+                keyword,
+                sb.toString()
+        );
     }
 
     private String getTaskTime(Task t) {
@@ -196,5 +189,21 @@ public class TaskList {
             time = "No time specified";
         }
         return time;
+    }
+
+    private boolean isValidId(int id) {
+        boolean isBiggerThanZero = id > 0;
+        boolean isWithinListLength = id <= listSize;
+        return isBiggerThanZero && isWithinListLength;
+    }
+
+    private boolean isValidIndex(int index) {
+        boolean isNonNegative = index >= 0;
+        boolean isLessThanListLength = index < listSize;
+        return isNonNegative && isLessThanListLength;
+    }
+
+    private int taskIdToIndex(int taskId) {
+        return taskId - 1;
     }
 }

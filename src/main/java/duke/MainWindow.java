@@ -27,7 +27,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         this.sendDuckMessage(SELF_INTRO);
-        this.sendDuckMessage(DukeStorage.loadTasks(Duke.getTList()));
+        this.sendDuckMessage(DukeStorage.loadTasks(Duke.getTaskList()));
     }
 
 

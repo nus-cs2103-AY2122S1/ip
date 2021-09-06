@@ -46,15 +46,6 @@ public class Task {
     }
 
     /**
-     * Returns the name attribute.
-     *
-     * @return Name of the task.
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
      * Sets the task to be completed.
      *
      * @return True.
@@ -65,12 +56,21 @@ public class Task {
     }
 
     /**
+     * Returns the name attribute.
+     *
+     * @return Name of the task.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
      * Returns whether the task is completed.
      *
      * @return True if task is completed, false otherwise.
      */
     public boolean hasCompleted() {
-        return this.isComplete;
+        return isComplete;
     }
 
     /**
@@ -88,6 +88,6 @@ public class Task {
      * @return String representing the Task.
      */
     public String getSaveFormat() {
-        return String.format("%s|%s|%s", this.taskType, this.isComplete ? "c" : "i", this.name);
+        return String.format("%s|%s|%s", taskType, isComplete ? "c" : "i", name);
     }
 }

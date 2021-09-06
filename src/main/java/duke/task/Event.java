@@ -53,7 +53,7 @@ public class Event extends Task {
         return String.format(
                 "%s|%s",
                 super.getSaveFormat(),
-                DukeDate.formatDateSave(this.time)
+                DukeDate.formatDateSave(time)
         );
     }
 }

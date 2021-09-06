@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.exception.DukeArgumentException;
+import duke.exception.DukeCommandException;
 import duke.task.TaskList;
 
 /**
@@ -30,5 +32,29 @@ public class CommandDone extends DukeCommand {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    /**
+     * Parses the user input into the right format for the command
+     *
+     * @param userArgs Arguments to the command as provided by the user.
+     */
+    public static DukeCommand parseCommand(String[] userArgs) throws DukeCommandException, DukeArgumentException {
+        assert userArgs != null;
+        assert userArgs.length != 0;
+        assert userArgs[0].equals("done");
+
+        if (userArgs.length < 2) {
+            throw new DukeCommandException("done");
+        }
+
+        assert userArgs.length == 2;
+
+        try {
+            int taskId = Integer.parseInt(userArgs[1]);
+            return new CommandDone(taskId);
+        } catch (NumberFormatException nfe) {
+            throw new DukeArgumentException("Incorrect argument for command Delete, must be an integer");
+        }
     }
 }
