@@ -39,8 +39,4 @@ public class Duke {
 
         return output;
     }
-
-    public static void main(String[] args) {
-
-    }
 }
