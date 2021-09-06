@@ -2,7 +2,6 @@ package duke.tasks;
 
 import duke.dukeException.DukeException;
 
-import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -24,7 +23,8 @@ public class Deadline extends Task{
         super(description.substring(0, description.indexOf("/by ")).trim());
         this.dateTime = description.substring(description.indexOf("/by ") + 4).trim();
         if (dateTime.length() < 16) {
-            String message = "\nOOPS!!! Please follow this format: \n deadline {task} /by {YYYY-MM-DDTHH:MM}";
+            String message = "\nOOPS!!! Please follow this format: " +
+                    "\n deadline {task} /by {YYYY-MM-DDTHH:MM}";
             throw new DukeException(message);
         }
         this.dt = LocalDateTime.parse(this.dateTime);  //eg LocalDateTime.parse("2015-02-20T06:30");
