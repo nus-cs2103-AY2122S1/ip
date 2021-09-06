@@ -92,6 +92,7 @@ public class Storage {
         }
     }
 
+
     /**
      * Handles the case when no data folder exists.
      *

@@ -59,4 +59,24 @@ public class TaskList {
         taskList.add(task);
     }
 
+    /**
+     * Checks if there is an event that clashes with existing task list.
+     *
+     * @param dateOfEvent date of event to check.
+     * @return Returns boolean value if there is indeed a clash.
+     */
+    public boolean clashChecker(String dateOfEvent) {
+        for (int i = 0; i < this.taskList.size(); i++) {
+            Task task = this.taskList.get(i);
+            if (task instanceof Event) {
+                Event eventTask = (Event) task;
+                String dateOfExistingEvent = eventTask.getDate();
+                if (dateOfEvent.equals(dateOfExistingEvent)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }

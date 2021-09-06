@@ -67,6 +67,20 @@ public class Ui {
     }
 
     /**
+     * Displays clashing event.
+     *
+     * @param dateOfEvent date at which event clashes.
+     * @return response back to user that there is a clashing event.
+     */
+    public String displayClashDate(String dateOfEvent) {
+        String defaultLine = " > you have an existing event on the same date:";
+        String date = "  " + dateOfEvent;
+        String resultingLine = defaultLine + '\n' + date;
+        System.out.println(resultingLine);
+        return resultingLine;
+    }
+
+    /**
      * Displays finished task.
      *
      * @param done done task.

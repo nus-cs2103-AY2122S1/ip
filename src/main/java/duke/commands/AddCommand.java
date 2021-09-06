@@ -109,6 +109,11 @@ public class AddCommand extends Command {
         }
         String eventToAdd = updatedTask.split("/at ")[0].trim();
         String dateOfEvent = updatedTask.split("/at ")[1].trim();
+
+        if (taskList.clashChecker(dateOfEvent)) {
+            return ui.displayClashDate(dateOfEvent);
+        }
+
         Event eventTask = new Event(eventToAdd, dateOfEvent);
         taskList.add(eventTask);
         storage.updateHardDisk(taskList);
