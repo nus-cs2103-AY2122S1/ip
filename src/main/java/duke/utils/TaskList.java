@@ -53,7 +53,7 @@ public class TaskList {
 
     /**
      * Adds a specific task to memory and prints out confirmations
-     * @param input   the task of interest
+     * @param task   the task of interest
      * 
      */
     public void addTask(Task task) throws DukeException {
@@ -71,6 +71,7 @@ public class TaskList {
         try {
             System.out.println("Noted. I've removed this task: ");
             int taskIndex = Integer.parseInt(input);
+            assert (taskIndex-1 >= 0);
             Task task = userInputs.get(taskIndex - 1);
             userInputs.remove(taskIndex - 1);
             System.out.println(" " + task);

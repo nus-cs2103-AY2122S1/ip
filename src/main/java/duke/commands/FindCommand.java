@@ -15,6 +15,7 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             String tasksToPrint = "";
+            assert (tasksToPrint == "");
             ArrayList<Task> userInputs = tasks.getTasks();
             for (int i = 0; i < userInputs.size(); i++) {
                 Task task = userInputs.get(i);
