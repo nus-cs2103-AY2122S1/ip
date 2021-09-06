@@ -1,10 +1,17 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import duke.gui.Main;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 import exception.DukeException;
 import javafx.application.Application;
+
+
 
 /**
  * Personal Assistant Chat bot to keep track of tasks
@@ -31,6 +38,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         Parser parser = new Parser();
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         try {
             Command inputCommand = parser.parseCommand(input);
             assert inputCommand != null;
@@ -70,14 +78,18 @@ public class Duke {
             }
 
             case DEADLINE: {
-                Task newTask = parser.parseDescription(input, "by");
+                String[] parsed = parser.parseDescription(input, "by");
+                LocalDateTime dateTime = LocalDateTime.parse(parsed[1], inputFormatter);
+                Task newTask = new Deadline(parsed[0], dateTime);
                 this.tasks.add(newTask);
                 this.storage.writeTask(newTask.toString());
                 return this.ui.showAddTaskMessage(newTask, this.tasks.size());
             }
 
             case EVENT: {
-                Task newTask = parser.parseDescription(input, "at");
+                String[] parsed = parser.parseDescription(input, "by");
+                LocalDateTime dateTime = LocalDateTime.parse(parsed[1], inputFormatter);
+                Task newTask = new Event(parsed[0], dateTime);
                 this.tasks.add(newTask);
                 this.storage.writeTask(newTask.toString());
                 return this.ui.showAddTaskMessage(newTask, this.tasks.size());
@@ -90,6 +102,20 @@ public class Duke {
 
             case BYE: {
                 return this.ui.bye();
+            }
+
+            case EDIT: {
+                int taskNo = parser.getTaskNo(input);
+                String oldTask = this.tasks.get(taskNo).toString();
+                String[] parsedContent = parser.parseDescription(input, "to");
+                if (parsedContent[0].equals("description")) {
+                    this.tasks.get(taskNo).setDescription(parsedContent[1]);
+                } else {
+                    this.tasks.get(taskNo).setDateTime(LocalDateTime.parse(parsedContent[1], inputFormatter));
+                }
+                Task newTask = this.tasks.get(taskNo);
+                this.storage.editTask(oldTask, newTask.toString());
+                return this.ui.showEditMessage(newTask);
             }
 
             default: {

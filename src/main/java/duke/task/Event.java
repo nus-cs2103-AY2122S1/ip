@@ -29,4 +29,9 @@ public class Event extends TaskWithTime {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at.format(super.outputFormatter) + ")";
     }
+
+    @Override
+    public void setDateTime(LocalDateTime dateTime) {
+        this.at = dateTime;
+    }
 }

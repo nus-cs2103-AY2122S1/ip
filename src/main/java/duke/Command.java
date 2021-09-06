@@ -5,7 +5,7 @@ package duke;
  */
 public enum Command {
     LIST("list"), DONE("done"), DELETE("delete"), FIND("find"),
-    TODO("todo"), DEADLINE("deadline"), EVENT("event"), BYE("bye");
+    TODO("todo"), DEADLINE("deadline"), EVENT("event"), BYE("bye"), EDIT("edit");
 
     public final String command;
 

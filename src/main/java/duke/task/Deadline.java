@@ -28,4 +28,9 @@ public class Deadline extends TaskWithTime {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by.format(super.outputFormatter) + ")";
     }
+
+    @Override
+    public void setDateTime(LocalDateTime dateTime) {
+        this.by = dateTime;
+    }
 }

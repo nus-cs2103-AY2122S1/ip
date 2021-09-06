@@ -105,4 +105,15 @@ public class Ui {
         }
         return list.toString();
     }
+
+    /**
+     * Informs the user the task is edited
+     *
+     * @param editTask the task that was edited
+     * @return edit message
+     */
+    public String showEditMessage(Task editTask) {
+        return String.format("Got it. I've edited this task:\n  %s",
+                editTask);
+    }
 }

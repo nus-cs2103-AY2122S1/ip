@@ -1,12 +1,14 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 /**
  * Represents the task object
  */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
-
+    protected LocalDateTime dateTime;
     /**
      * Class Constructor
      *
@@ -35,6 +37,18 @@ public abstract class Task {
         return description;
     }
 
+    /**
+     * Changes the description of the task
+     *
+     * @param description the description of the task
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
     /**
      * Marks the task as done
      */
