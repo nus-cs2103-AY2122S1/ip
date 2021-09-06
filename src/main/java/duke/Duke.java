@@ -6,25 +6,35 @@ import java.io.FileNotFoundException;
  * Class which operates Jarvis the chat-bot
  */
 public class Duke {
-    private Storage storage;
+    private Storage taskStorage;
+    private Storage notesStorage;
     private TaskList tasks;
+    private NoteList notes;
     private Ui ui;
 
     private final String NO_TASKS = "There are currently no tasks on your list :)";
+    private final String NO_NOTES = "There are currently no notes on your list!";
     private final String UNRECOGNISED_COMMAND = "I'm sorry, but I don't know what that means :(";
     private final String BYE = "Bye! Hope to see you soon :)";
 
     /**
      * Retrieves all the tasks stored by Jarvis in the hard disk upon running the main method.
      *
-     * @param filePath The file in which the tasks are stored
+     * @param taskFilePath The file in which the tasks are stored
+     * @param noteFilePath The file in which the notes are stored
      */
-    public Duke(String filePath) {
+    public Duke(String taskFilePath, String noteFilePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
+
+        taskStorage = new Storage(taskFilePath); //To load user tasks
+        notesStorage = new Storage(noteFilePath); //To load user notes as well
+
         tasks = new TaskList();
+        notes = new NoteList();
+
         try {
-            storage.retrieveFileContents();
+            taskStorage.retrieveFileContents();
+            notesStorage.retrieveFileContents();
         } catch (FileNotFoundException e) {
             System.err.println(e);
         }
@@ -45,6 +55,13 @@ public class Duke {
                         } else {
                             return Parser.parseList();
                         }
+                    case "notes":
+                        // If there are no tasks in the task list
+                        if (NoteList.getCounter() == 0) {
+                            return "\t" + NO_NOTES;
+                        } else {
+                            return Parser.parseNoteList();
+                        }
                     case "done":
                         return Parser.parseDone(input);
                     case "delete":
@@ -59,6 +76,10 @@ public class Duke {
                         return Parser.parseToday();
                     case "find":
                         return Parser.parseFind(input);
+                    case "note":
+                        return Parser.parseNote(input);
+                    case "delete note":
+                        return Parser.parseDeleteNote(input);
                     case "bye":
                         return BYE;
                     default:
