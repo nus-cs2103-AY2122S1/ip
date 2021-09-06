@@ -65,6 +65,7 @@ public class TaskList {
      * @return Message that the task has been successfully added.
      */
     public String addTask(Task task) {
+        assert task != null;
         userList.add(task);
         listSize++;
         String time = getTaskTime(task);
@@ -94,7 +95,7 @@ public class TaskList {
         assert task != null;
         task.completeTask();
         return String.format(
-                "You have completed duke.task %d. %s",
+                "You have completed task %d. %s",
                 taskId,
                 userList.get(taskId - 1).getName()
         );
@@ -118,7 +119,7 @@ public class TaskList {
         listSize--;
         String isCompleted = task.hasCompleted() ? "X" : " ";
         return String.format(
-                "Alright,\nduke.duke.Task.Task: %s [%s] [%s] (%s)\nHas been removed, you have %d tasks in the list",
+                "Alright,\nTask: %s [%s] [%s] (%s)\nHas been removed, you have %d tasks in the list",
                 task.getName(),
                 task.getTaskType(),
                 isCompleted,
@@ -175,6 +176,7 @@ public class TaskList {
     }
 
     private String getTaskTime(Task t) {
+        assert t != null;
         String time;
         switch (t.getTaskType()) {
         case "D":
