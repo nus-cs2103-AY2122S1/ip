@@ -1,16 +1,23 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
-import java.util.ArrayList;
-
 public class TagCommand extends Command {
-    private final boolean IS_EXIT = false;
+    private static final boolean IS_EXIT = false;
     private String taskDescription;
     private String keyword;
+
+    /**
+     * Public constructor for a tag command.
+     *
+     * @param taskDescription The description of the task.
+     * @param keyword The keyword to tag the specific task.
+     */
 
     public TagCommand(String taskDescription, String keyword) {
         this.taskDescription = taskDescription;

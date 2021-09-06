@@ -12,7 +12,7 @@ import duke.task.Task;
  * ListCommand class which displays the current tasks in the list.
  */
 public class ListCommand extends Command {
-    private final boolean IS_EXIT = false;
+    private static final boolean IS_EXIT = false;
 
     /**
      * Gets the user interface to display all the current tasks in the active

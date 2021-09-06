@@ -71,9 +71,9 @@ public class Ui {
      */
     public String notifyMultiDone(ArrayList<Task> doneTasks) {
         assert(doneTasks.size() > 1);
-        String output =  "You've finished the task? Good job!\n"
+        String output = "You've finished the task? Good job!\n"
                 + "This task has been marked as done:\n";
-        for (int i = 0 ; i < doneTasks.size(); i++) {
+        for (int i = 0; i < doneTasks.size(); i++) {
             output += doneTasks.get(i).displayInfo() + "\n";
         }
         return output;
@@ -93,7 +93,7 @@ public class Ui {
      */
     public String notifyMultiDelete(ArrayList<Task> removedTasks) {
         assert(removedTasks.size() > 1);
-        String output =  "Okay! Removing the task:\n";
+        String output = "Okay! Removing the task:\n";
         for (int i = 0; i < removedTasks.size(); i++) {
             output += removedTasks.get(i).displayInfo() + "\n";
         }
@@ -232,9 +232,9 @@ public class Ui {
                 + "todo - Adds a toDo activity to the list. Optional to specify duration in brackets.\n"
                 + "Eg. todo read book (2h)\n"
                 + "event - Adds an event activity to the list.\n"
-                + "Eg. event Dinner /at 19/02/2021 19:00\n"
+                + "Eg. event Dinner /at 19/02/2021 1900\n"
                 + "deadline - Adds a deadline activity to the list. \n"
-                + "Eg. deadline Assignment 1 /by 19/03/2021 15:00\n"
+                + "Eg. deadline Assignment 1 /by 19/03/2021 1500\n"
                 + "find - Lists all the tasks with the specified keyword in its description.\n"
                 + "Eg. find books \n"
                 + "bye - Exits the program.";

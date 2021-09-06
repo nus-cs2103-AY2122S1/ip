@@ -10,7 +10,6 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import duke.exception.DukeException;
 import duke.task.Deadline;
@@ -22,7 +21,7 @@ import duke.task.Task;
  * from the local file system.
  */
 public class Storage {
-    private final DateTimeFormatter DATETIMEFORMAT;
+    private static DateTimeFormatter DATETIMEFORMAT;
     private File file;
 
     /**
@@ -109,6 +108,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a todo object from the saved file.
+     * @param lineArr The line entry from the saved file which has been split by its seperator.
+     * @return A todo object in the previous iteration of the program.
+     */
     public Task loadToDo(String[] lineArr) {
         Task toDo = new Task(lineArr[2]);
         if (lineArr[1].equals("1")) {
@@ -122,6 +126,11 @@ public class Storage {
         return toDo;
     }
 
+    /**
+     * Creates a deadline object from the saved file.
+     * @param lineArr The line entry from the saved file which has been split by its seperator.
+     * @return A deadline object in the previous iteration of the program.
+     */
     public Deadline loadDeadline(String[] lineArr) {
         Deadline deadline = new Deadline(lineArr[2], LocalDateTime.parse(lineArr[3],
                 this.DATETIMEFORMAT));
@@ -135,6 +144,11 @@ public class Storage {
         return deadline;
     }
 
+    /**
+     * Creates an event object from the saved file.
+     * @param lineArr The line entry from the saved file which has been split by its seperator.
+     * @return A event object in the previous iteration of the program.
+     */
     public Event loadEvent(String[] lineArr) {
         Event event = new Event(lineArr[2], LocalDateTime.parse(lineArr[3], this.DATETIMEFORMAT));
         if (lineArr[1].equals("1")) {

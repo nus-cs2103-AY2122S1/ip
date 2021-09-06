@@ -1,16 +1,16 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 
-import java.util.Arrays;
-import java.util.ArrayList;
-
 public class DeleteCommand extends Command {
-    private final boolean IS_EXIT = false;
+    private static final boolean IS_EXIT = false;
     private int[] taskIds;
     private Task removedTask;
 

@@ -11,7 +11,7 @@ import duke.task.Task;
  * FindCommand class which searches for tasks with matching keywords
  */
 public class FindCommand extends Command {
-    private final boolean IS_EXIT = false;
+    private static final boolean IS_EXIT = false;
     private String keyword;
 
     /**

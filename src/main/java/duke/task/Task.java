@@ -61,7 +61,7 @@ public class Task {
      * Marks the task as completed.
      */
     public void complete() {
-            this.isDone = true;
+        this.isDone = true;
     }
 
     /**
@@ -70,7 +70,7 @@ public class Task {
      * @return Description of the task
      */
     public String getTaskName() {
-        if (this.duration ==  null) {
+        if (this.duration == null) {
             return this.taskName;
         } else {
             return this.taskName + "(needs " + this.duration + ")";
@@ -139,7 +139,7 @@ public class Task {
         }
 
         for (int i = 0; i < tags.size(); i++) {
-           stringTags += "#" + tags.get(i);
+            stringTags += "#" + tags.get(i);
         }
         return stringTags;
     }

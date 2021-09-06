@@ -7,7 +7,7 @@ import duke.exception.DukeException;
 import duke.task.Task;
 
 public class HelpCommand extends Command {
-    private final boolean IS_EXIT = false;
+    private static final boolean IS_EXIT = false;
 
     /**
      * Displays the list of commands for the bot.
