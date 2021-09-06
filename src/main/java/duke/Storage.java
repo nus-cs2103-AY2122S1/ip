@@ -45,6 +45,8 @@ public class Storage {
             dataDir.mkdirs();
         }
 
+        assert dataDir.exists() == true;
+
         try {
             file.createNewFile();
         } catch (IOException e) {
