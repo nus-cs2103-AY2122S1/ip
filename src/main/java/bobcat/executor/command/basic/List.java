@@ -8,6 +8,12 @@ import bobcat.model.TaskList;
 import bobcat.model.task.Task;
 
 public class List extends BasicCommand {
+    /**
+     * Lists all tasks in the given <code>TaskList</code>
+     * @param taskList <code>TaskList</code> to be added to
+     * @param args NOT USED. Empty String array. Not used for this method
+     * @return Array of Strings to display
+     */
     public static String[] execute(TaskList taskList, String... args) {
         java.util.List<String> initialReply = new ArrayList<String>();
         initialReply.add("Here are the tasks in your list:");
