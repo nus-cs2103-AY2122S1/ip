@@ -1,15 +1,18 @@
-import java.io.IOException;
-
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 
 
 /**
  * Represents the core of Duke.
  */
-public class Duke {
+public class Duke extends Application {
     private Ui ui;
     private Storage storage;
     private TaskList taskList;
@@ -24,6 +27,15 @@ public class Duke {
         storage = new Storage(filePath);
         taskList = new TaskList(storage.load());
         parser = new Parser(taskList, ui, storage);
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
     /**
@@ -43,7 +55,7 @@ public class Duke {
         ui.showGoodBye();
     }
 
-    public static void main(String[] args) throws IOException {
-        new Duke("data/tasks.txt").run();
+    public static void main(String[] args) { // new Duke("data/tasks.txt").run();
+        new Duke("../../../../data/tasks.txt").run();
     }
 }
