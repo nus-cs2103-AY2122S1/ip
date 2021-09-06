@@ -12,7 +12,7 @@ import java.io.File;
 
 public class Duke {
 
-    protected Ui ui;
+    private Ui ui;
     private Storage storage;
     private TaskList tasks;
 
@@ -29,6 +29,16 @@ public class Duke {
         tasks = new TaskList(storage.loadFile());
     }
 
+    public String getFarewellMessage() {
+        return ui.farewellUser();
+    }
+
+    /**
+     * Gets the response from the input.
+     *
+     * @param input The user input to duke.
+     * @return String The String representing Duke's response.
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
