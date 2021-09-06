@@ -30,6 +30,7 @@ public class Parser {
         try {
             switch (prefix) {
             case "list":
+            case "l":
                 return new ListCommand();
             case "bye":
                 return new ExitCommand();
@@ -37,13 +38,18 @@ public class Parser {
                 assert commandArg != null;
                 return new DoneCommand(Integer.parseInt(commandArg));
             case "todo":
+            case "t":
             case "deadline":
+            case "d":
             case "event":
+            case "e":
                 return new AddCommand(commands);
             case "find":
+            case "f":
                 assert commandArg != null;
                 return new FindCommand(commandArg);
             case "delete":
+            case "del":
                 assert commandArg != null;
                 return new DeleteCommand(Integer.parseInt(commandArg));
             default:
