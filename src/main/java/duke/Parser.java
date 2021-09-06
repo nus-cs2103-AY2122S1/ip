@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Locale;
-
 /**
  * Class to represent parsing the commands
  */

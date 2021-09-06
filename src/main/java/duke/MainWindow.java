@@ -80,7 +80,7 @@ public class MainWindow extends Stage {
         if (input.equalsIgnoreCase("bye")) {
             System.out.println("should get out");
             PauseTransition delay = new PauseTransition(Duration.seconds(1));
-            delay.setOnFinished( event -> Platform.exit());
+            delay.setOnFinished(event -> Platform.exit());
             delay.play();
         }
     }
