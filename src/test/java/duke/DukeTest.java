@@ -1,21 +1,25 @@
+package duke;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.*;
 import java.util.ArrayList;
 
-import duke.*;
-import duke.commands.AddCommand;
+import duke.utils.Parser;
+import duke.commands.Command;
 import duke.utils.DukeException;
+import duke.utils.TaskList;
+import duke.tasks.Task;
 
 public class DukeTest {
     @Test
     public void checkParser() {
         try {
-            duke.commands.Command addCom = duke.utils.Parser.parse("todo test");
-            duke.commands.Command delCom = duke.utils.Parser.parse("delete 1");
-            duke.commands.Command listCom = duke.utils.Parser.parse("list");
-            duke.commands.Command exitCom = duke.utils.Parser.parse("bye");
+            Command addCom = Parser.parse("todo test");
+            Command delCom = Parser.parse("delete 1");
+            Command listCom = Parser.parse("list");
+            Command exitCom = Parser.parse("bye");
             assertEquals(addCom.getClass().getName(), duke.commands.AddCommand.class.getName());
             assertEquals(delCom.getClass().getName(), duke.commands.DeleteCommand.class.getName());
             assertEquals(listCom.getClass().getName(), duke.commands.ListCommand.class.getName());
@@ -27,8 +31,8 @@ public class DukeTest {
     @Test
     public void checkTaskList() {
         try {
-            duke.utils.TaskList tasklist = new duke.utils.TaskList();
-            duke.tasks.Task task = new duke.tasks.Todo("test1");
+            TaskList tasklist = new duke.utils.TaskList();
+            Task task = new duke.tasks.Todo("test1");
             tasklist.addTask(task);
             ArrayList<duke.tasks.Task> taskArr = tasklist.getTasks();
             assertEquals(taskArr.size(), 1);
