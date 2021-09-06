@@ -6,6 +6,8 @@ package duke;
  * @author Kleon Ang
  */
 public class Todo extends Task {
+    private static final String taskBadge = "[T]";
+
     /**
      * Constructor for a Todo task.
      *
@@ -32,6 +34,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return taskBadge + super.toString();
     }
 }
