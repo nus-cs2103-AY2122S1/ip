@@ -5,19 +5,13 @@ import java.util.ArrayList;
 import duke.task.Task;
 
 public class Ui {
-    public String logo = "   _       _\n"
-            + "  /_\\  ___| |__  _   _\n"
-            + " //_\\\\/ __| '_ \\| | | |\n"
-            + "/  _  \\__ \\ | | | |_| |\n"
-            + "\\_/ \\_/___/_| |_|\\__, |\n"
-            + "                 |___/\n";
 
     public String greetingMessage() {
-        return "Hello! I'm\n" + logo + "\nWhat can I do for you?";
+        return "Hello! I'm Ashy! What can I do for you?";
     }
 
     public String exitMessaage() {
-        return "\t ByeBye! Hope to see you again!";
+        return "ByeBye! Hope to see you again!";
     }
 
     @SuppressWarnings("checkstyle:MissingJavadocMethod")

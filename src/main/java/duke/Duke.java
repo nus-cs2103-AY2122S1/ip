@@ -108,11 +108,6 @@ public class Duke {
             case LIST:
                 response = taskList.list(commands);
                 break;
-            case BYE:
-                storage.saveCommands(commands);
-                response = ui.exitMessaage();
-                System.exit(0);
-                break;
             case DONE:
                 if (input.equals("")) {
                     throw new EmptyTaskNumberException();
