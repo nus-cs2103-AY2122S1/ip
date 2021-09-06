@@ -149,21 +149,7 @@ public class Duke extends Application {
             handleUserInput();
         });
 
-
         stage.show(); // Render the stage.
-    }
-
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text tat has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
     }
 
     /**
@@ -188,15 +174,5 @@ public class Duke extends Application {
      */
     private String getResponse(String input) {
         return "Duke heard: " + input;
-    }
-
-    /**
-     * Initialises an instance of Duke and runs it.
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke("data/tasks.txt");
-        duke.run();
     }
 }
