@@ -36,8 +36,9 @@ public class Storage {
             Files.createFile(this.path);
         }
         return new TaskList(
-            Files.lines(this.path).map((taskRow) -> parseTaskRow(taskRow))
-                    .collect(Collectors.toList())
+                Files.lines(this.path)
+                        .map((taskRow) -> parseTaskRow(taskRow))
+                        .collect(Collectors.toList())
         );
     }
 
@@ -53,12 +54,12 @@ public class Storage {
     }
 
     private static Task parseTaskRow(String taskRow) {
-        var taskParts = taskRow.split(" \\| ", 3);
-        var taskType = TaskType.convertTaskIcon(taskParts[0]);
-        var taskIsDone = Boolean.parseBoolean(taskParts[1]);
-        var taskLine = taskParts[2];
+        final var taskParts = taskRow.split(" \\| ", 3);
+        final var taskType = TaskType.convertTaskIcon(taskParts[0]);
+        final var taskIsDone = Boolean.parseBoolean(taskParts[1]);
+        final var taskLine = taskParts[2];
 
-        var task = Parser.parseTaskLine(taskLine, taskType);
+        final Task task = Parser.parseTaskLine(taskLine, taskType);
         task.toggle(taskIsDone);
         return task;
     }
@@ -73,12 +74,12 @@ public class Storage {
     }
 
     private static String genTaskLine(Task task) {
-        var taskType = TaskType.identifyTask(task);
+        final TaskType taskType = TaskType.identifyTask(task);
         switch (taskType) {
         case TODO:
             return task.getDescription();
         case DEADLINE:
-            var deadline = (Deadline) task;
+            final var deadline = (Deadline) task;
             return String.format(
                 "%s /by %s",
                 deadline.getDescription(),
@@ -86,7 +87,7 @@ public class Storage {
                         .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
             );
         case EVENT:
-            var event = (Event) task;
+            final var event = (Event) task;
             return String.format(
                 "%s /at %s",
                 event.getDescription(),
@@ -94,9 +95,7 @@ public class Storage {
                         .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
             );
         default:
-            throw new UnsupportedOperationException(
-                "task type is not a valid enum value"
-            );
+            throw new UnsupportedOperationException("task type is not a valid enum value");
         }
     }
 }

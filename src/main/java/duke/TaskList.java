@@ -11,7 +11,7 @@ import java.util.stream.Stream;
  * Wrapper class around List object, representing a list of tasks.
  */
 public class TaskList {
-    private List<Task> tasks;
+    private final List<Task> tasks;
 
     /**
      * Constructor for TaskList object.

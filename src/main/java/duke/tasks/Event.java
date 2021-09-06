@@ -8,7 +8,7 @@ import java.time.LocalDate;
  * Class for Event tasks.
  */
 public class Event extends Task {
-    private LocalDate time;
+    private final LocalDate time;
 
     /**
      * Constructor for Event object.

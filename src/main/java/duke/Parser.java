@@ -5,6 +5,7 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 /**
@@ -12,6 +13,25 @@ import java.time.LocalDate;
  * inputs.
  */
 public class Parser {
+    private static void addTask(TaskList tasks, Storage storage, Task task) throws IOException {
+        tasks.add(task);
+        storage.writeTaskList(tasks);
+    }
+
+    private static Task popTask(TaskList tasks, Storage storage, int i) throws IOException {
+        Task task = tasks.get(i);
+        tasks.remove(i);
+        storage.writeTaskList(tasks);
+        return task;
+    }
+
+    private static Task toggleTask(TaskList tasks, Storage storage, int i, boolean isDone) throws IOException {
+        Task task = tasks.get(i);
+        task.toggle(isDone);
+        storage.writeTaskList(tasks);
+        return task;
+    }
+
     /**
      * Executes a command on the input task list and storage objects, given
      * an input.
@@ -24,25 +44,26 @@ public class Parser {
      * @throws Exception
      */
     public static String runCommand(TaskList tasks, Storage storage, String input) throws Exception {
-        var parameters = input.split(" ");
-        var command = parameters[0];
-        if (command.equals("list") && parameters.length == 1) {
+        final var parameters = input.split(" ");
+        final var command = parameters[0];
+        final var remaining = input.replace(command, "").strip();
+
+        if (command.equals("list")) {
+            if (!remaining.equals("")) {
+                throw new Exception("The list command cannot take in any parameters.");
+            }
             return Duke.renderTaskList(tasks);
-        } else if (command.equals("done") && parameters.length == 2) {
-            int i = Integer.parseInt(parameters[1]) - 1;
-            var task = tasks.get(i);
-            task.toggle(true);
-            storage.writeTaskList(tasks);
+        } else if (command.equals("done")) {
+            final int i = Integer.parseInt(remaining) - 1;
+            final Task task = toggleTask(tasks, storage, i, true);
             return String.join(
                     "\n",
                     "Nice! I've marked this task as done:\n",
                             "  " + Duke.renderTask(task)
             );
-        } else if (command.equals("delete") && parameters.length == 2) {
-            int i = Integer.parseInt(parameters[1]) - 1;
-            var task = tasks.get(i);
-            tasks.remove(i);
-            storage.writeTaskList(tasks);
+        } else if (command.equals("delete")) {
+            final int i = Integer.parseInt(remaining) - 1;
+            final Task task = popTask(tasks, storage, i);
             return String.join(
                     "\n",
                     "Noted. I've removed this task:\n",
@@ -50,31 +71,25 @@ public class Parser {
                     String.format("Now you have %d tasks in the list.", tasks.size())
             );
         } else if (command.equals("todo")) {
-            if (parameters.length == 1) {
-                throw new Exception(
-                    "The description of a todo cannot be empty."
-                );
+            if (remaining.equals("")) {
+                throw new Exception("The description of a todo cannot be empty.");
             }
-            String taskLine = input.replace("todo", "").strip();
-            var task = Parser.parseTaskLine(taskLine, TaskType.TODO);
-            tasks.add(task);
-            storage.writeTaskList(tasks);
+            final Task task = Parser.parseTaskLine(remaining, TaskType.TODO);
+            addTask(tasks, storage, task);
             return Duke.renderTaskAdded(tasks, task);
-        } else if (command.equals("deadline") && input.contains("/by")) {
-            String taskLine = input.replace("deadline", "").strip();
-            var task = Parser.parseTaskLine(taskLine, TaskType.DEADLINE);
-            tasks.add(task);
-            storage.writeTaskList(tasks);
+        } else if (command.equals("deadline") && remaining.contains("/by")) {
+            final Task task = Parser.parseTaskLine(remaining, TaskType.DEADLINE);
+            addTask(tasks, storage, task);
             return Duke.renderTaskAdded(tasks, task);
-        } else if (command.equals("event") && input.contains("/at")) {
-            String taskLine = input.replace("event", "").strip();
-            var task = Parser.parseTaskLine(taskLine, TaskType.EVENT);
-            tasks.add(task);
-            storage.writeTaskList(tasks);
+        } else if (command.equals("event") && remaining.contains("/at")) {
+            final Task task = Parser.parseTaskLine(remaining, TaskType.EVENT);
+            addTask(tasks, storage, task);
             return Duke.renderTaskAdded(tasks, task);
-        } else if (command.equals("find") && parameters.length >= 2) {
-            String query = input.replace("find", "").strip();
-            return Duke.renderFoundTasks(tasks.find(query));
+        } else if (command.equals("find")) {
+            if (remaining.equals("")) {
+                throw new Exception("The search query cannot be empty.");
+            }
+            return Duke.renderFoundTasks(tasks.find(remaining));
         } else {
             throw new Exception("I'm sorry, but I don't know what that means :-(");
         }

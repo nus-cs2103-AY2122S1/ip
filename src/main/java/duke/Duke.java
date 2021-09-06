@@ -40,9 +40,11 @@ public class Duke {
      * @return Input task rendered as a string.
      */
     public static String renderTask(Task task) {
-        var taskType = TaskType.identifyTask(task);
-        String taskIcon = taskType.getTaskIcon();
-        String statusIcon = task.getStatusIcon();
+        final var DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy");
+        final TaskType taskType = TaskType.identifyTask(task);
+        final String statusIcon = task.getStatusIcon();
+        final String taskIcon = taskType.getTaskIcon();
+
         switch (taskType) {
         case TODO:
             return String.format(
@@ -58,8 +60,7 @@ public class Duke {
                     taskIcon,
                     statusIcon,
                     deadline.getDescription(),
-                    deadline.getDeadline()
-                        .format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                    deadline.getDeadline().format(DATE_FORMATTER)
             );
         case EVENT:
             var event = (Event) task;
@@ -68,8 +69,7 @@ public class Duke {
                     taskIcon,
                     statusIcon,
                     event.getDescription(),
-                    event.getTime()
-                            .format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                    event.getTime().format(DATE_FORMATTER)
             );
         default:
             throw new UnsupportedOperationException("task type is not a valid enum value");
@@ -90,7 +90,12 @@ public class Duke {
      * @return Exception message.
      */
     public static String renderException(Exception e) {
-        return "☹ OOPS!!! " + e.getMessage();
+        return "OOPS!!! " + e.getMessage();
+    }
+
+    private static Stream<String> generateTaskStringStream(TaskList tasks) {
+        return IntStream.range(0, tasks.size())
+                .mapToObj(i -> String.format("%d. %s", i + 1, renderTask(tasks.get(i))));
     }
 
     /**
@@ -103,10 +108,9 @@ public class Duke {
                 "\n",
                 Stream.concat(
                         Stream.of("Here are the tasks in your list:"),
-                        IntStream.range(0, tasks.size())
-                                .mapToObj(i -> String.format("%d. %s", i + 1, renderTask(tasks.get(i)))
-                )
-        ).toArray(String[]::new));
+                        generateTaskStringStream(tasks)
+                ).toArray(String[]::new)
+        );
     }
 
     /**
@@ -134,9 +138,7 @@ public class Duke {
                 "\n",
                 Stream.concat(
                         Stream.of("Here are the matching tasks in your list:"),
-                        IntStream.range(0, foundTasks.size())
-                                .mapToObj(i -> String.format("%d. %s", i + 1, renderTask(foundTasks.get(i)))
-                )
+                        generateTaskStringStream(foundTasks)
                 ).toArray(String[]::new)
         );
     }
