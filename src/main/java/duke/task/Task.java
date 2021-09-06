@@ -32,8 +32,12 @@ public class Task {
     /**
      * Marks the task as done.
      */
-    public void setDone() {
-        isDone = true;
+    public void setDone(boolean state) {
+        isDone = state;
+    }
+
+    public boolean getDone() {
+        return isDone;
     }
 
     /**

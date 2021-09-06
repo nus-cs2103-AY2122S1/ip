@@ -72,6 +72,9 @@ public class Parser {
                 storage.save();
             } else if (isValidFind(command)) {
                 response = list.find(body);
+            } else if (isValidUndo(input)) {
+                response = list.undo();
+                storage.save();
             } else if (isValidExit(input)) {
                 response = Ui.DUKE_EXIT;
             } else {
@@ -115,5 +118,9 @@ public class Parser {
 
     private boolean isValidExit(String input) {
         return input.equals("bye");
+    }
+
+    private boolean isValidUndo(String input) {
+        return input.equals("undo");
     }
 }

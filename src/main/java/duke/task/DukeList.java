@@ -12,12 +12,22 @@ import duke.DukeException;
 public class DukeList {
 
     /** The list in which Duke stores Tasks. */
-    private final ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks;
+
+    private ArrayList<Task> previousTasks;
+
+    private int previousTask;
+
+    private String previousCommand;
 
     /**
      * Constructs a DukeList.
      */
-    public DukeList() {}
+    public DukeList() {
+        tasks = new ArrayList<>();
+        previousTasks = new ArrayList<>();
+        previousCommand = "";
+    }
 
     /**
      * Displays the addition of a task.
@@ -29,6 +39,49 @@ public class DukeList {
         String response = "Got it. I've added this task:\n";
         String taskCount = "\nNow you have " + tasks.size() + " tasks in the list.";
         return response + task.toString() + taskCount;
+    }
+
+    private void savePreviousList(String commandName) {
+        previousCommand = commandName;
+        previousTasks = new ArrayList<>(tasks);
+    }
+
+    private void savePreviousList(String commandName, int previousTask) {
+        previousCommand = commandName;
+        this.previousTask = previousTask;
+    }
+
+    private void swapList() {
+        ArrayList<Task> temp = tasks;
+        tasks = previousTasks;
+        previousTasks = temp;
+    }
+
+    /**
+     * Undoes the previous command.
+     *
+     * @return The message associated to a command being undone.
+     */
+    public String undo() {
+        switch (previousCommand) {
+        case "todo":
+            // Fallthrough
+        case "deadline":
+            // Fallthrough
+        case "event":
+            // Fallthrough
+        case "delete":
+            swapList();
+            break;
+        case "done":
+            Task task = tasks.get(previousTask);
+            task.setDone(!task.getDone());
+            break;
+        default:
+            return "No task to undo!";
+        }
+
+        return "Undone!";
     }
 
     /**
@@ -60,12 +113,13 @@ public class DukeList {
         }
 
         if (state.equals("1")) {
-            task.setDone();
+            task.setDone(true);
         } else {
             assert state.equals("0") : "state can only be 0 or 1";
         }
 
         tasks.add(task);
+        previousTasks.add(task);
     }
 
     /**
@@ -83,7 +137,7 @@ public class DukeList {
         }
 
         ToDo input = new ToDo(message);
-
+        savePreviousList("todo");
         tasks.add(input);
 
         return displayTask(input);
@@ -106,7 +160,7 @@ public class DukeList {
 
         try {
             Deadline input = new Deadline(strings[0].trim(), limit);
-
+            savePreviousList("deadline");
             tasks.add(input);
 
             return displayTask(input);
@@ -128,7 +182,7 @@ public class DukeList {
         String limit = strings.length == 1 ? "" : strings[1];
 
         Event input = new Event(strings[0].trim(), limit);
-
+        savePreviousList("event");
         tasks.add(input);
 
         return displayTask(input);
@@ -158,8 +212,11 @@ public class DukeList {
      * @return The message associated to the task being done.
      */
     public String done(int item) {
-        Task task = tasks.get(item - 1);
-        task.setDone();
+        int itemPosition = item - 1;
+
+        savePreviousList("done", itemPosition);
+        Task task = tasks.get(itemPosition);
+        task.setDone(true);
 
         String response = "Nice! I've marked this task as done:\n";
         return response + task.toString();
@@ -179,6 +236,7 @@ public class DukeList {
         }
 
         Task task = tasks.get(item - 1);
+        savePreviousList("delete");
         tasks.remove(item - 1);
 
         String response = "Noted. I've removed this task:\n";
