@@ -69,8 +69,9 @@ public class Parser {
             tl.find(restOfCommand);
             break;
         default:
-            /* will never be executed because the error would have been caught in run() method
+            /* will never be executed because the error would have been caught in readCommand() method in Ui class
                if the user input a command that is invalid */
+            assert false : "Error not caught in readCommand() method in Ui class";
         }
         return shouldContinue;
     }

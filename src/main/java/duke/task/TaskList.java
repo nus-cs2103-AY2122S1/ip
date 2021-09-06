@@ -50,6 +50,7 @@ public class TaskList {
             Task task = this.tasks.get(index);
             task.markAsDone();
             this.ui.showMarkedTask(task);
+            assert index >= 0;
             return this.tasks;
         } catch (IndexOutOfBoundsException e) {
             this.ui.showMarkedTask(null);
@@ -112,6 +113,7 @@ public class TaskList {
             // checked for command validity in duke.Parser class, so this should not execute at all
             throw new InvalidCommandException();
         }
+        assert task != null : "Task not added successfully but error is not caught";
         tasks.add(task);
         this.ui.showAddTask(task, this.tasks.size());
         return this.tasks;
@@ -122,11 +124,13 @@ public class TaskList {
      * @param index The index of the arraylist that contains the task.
      * @return The updated task list after the task is deleted.
      */
+
     public ArrayList<Task> deleteTask(int index) {
         try {
             Task task = this.tasks.get(index);
             this.tasks.remove(index);
             this.ui.showDeletedTask(task, this.tasks.size());
+            assert index >= 0;
             return this.tasks;
         } catch (IndexOutOfBoundsException e) {
             this.ui.showDeletedTask(null, -1);

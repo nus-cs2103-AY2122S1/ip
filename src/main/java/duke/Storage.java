@@ -39,8 +39,10 @@ public class Storage {
             if (!file.exists()) {
                 file.createNewFile();
             }
+            assert this.file != null : "File not created";
         } catch (IOException e) {
             // this exception should not occur because the input(path) is fixed
+            assert false : e.getMessage();
         }
     }
 
