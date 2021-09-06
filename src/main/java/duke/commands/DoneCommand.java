@@ -12,7 +12,8 @@ public class DoneCommand extends Command {
     String index;
 
     public DoneCommand(String input){
-        index = input.replaceAll("[^0-9]", "");
+        String inputString = input.replaceAll("[^0-9]", "");
+        assert (Integer.parseInt(inputString) > 0);
     }
 
     /**

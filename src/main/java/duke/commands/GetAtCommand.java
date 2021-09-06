@@ -30,6 +30,7 @@ public class GetAtCommand extends Command{
     public String execute(TaskList tasks, Ui ui, Storage storage){
         ArrayList<Task> userInputs = tasks.getTasks();
         String tasksToPrint = "";
+        assert (tasksToPrint == "");
         for (int i = 0; i < userInputs.size(); i++) {
             Task task = userInputs.get(i);
             if (task instanceof TaskWithDate) {

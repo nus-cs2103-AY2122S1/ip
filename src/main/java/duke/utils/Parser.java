@@ -21,7 +21,7 @@ public class Parser {
         } else if (input.startsWith("todo") || input.startsWith("event") || input.startsWith("deadline")) {
             return new AddCommand(input);
         } else {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }
