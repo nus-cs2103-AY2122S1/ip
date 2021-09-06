@@ -86,8 +86,7 @@ public class Parser {
             throw new UnclearInstructionException(
                     "OOPS!!! The description of " + task_type + " cannot be extracted properly.");
         }
-
-        int istart = text.indexOf(" ");
+        
         int iend = text.indexOf("/");
         String time = text.substring(iend + 4);
 
