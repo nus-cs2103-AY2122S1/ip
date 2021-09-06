@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
     /** Datetime deadline of task. */
-    private final LocalDateTime dateTime;
+    private LocalDateTime dateTime;
 
     /**
      * Constructs task with a deadline.
@@ -41,5 +41,15 @@ public class Deadline extends Task {
     public String toString() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
         return String.format("[D]%s (by: %s)", super.toString(), this.dateTime.format(dateTimeFormatter));
+    }
+
+    /**
+     * Sets new Deadline.
+     *
+     * @param dateTime date time value to be changed to.
+     */
+    @Override
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 }

@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
     /** Datetime of event taking place. */
-    private final LocalDateTime dateTime;
+    private LocalDateTime dateTime;
 
     /**
      * Construct event with date time.
@@ -41,5 +41,15 @@ public class Event extends Task {
     public String toString() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
         return String.format("[E]%s (at: %s)", super.toString(), this.dateTime.format(dateTimeFormatter));
+    }
+
+    /**
+     * Change datetime value of Event.
+     *
+     * @param dateTime date time value to be changed to.
+     */
+    @Override
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 }

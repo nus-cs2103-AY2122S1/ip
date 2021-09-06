@@ -11,6 +11,8 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.UpdateDateTimeCommand;
+import duke.command.UpdateNameCommand;
 import duke.task.TaskType;
 
 /**
@@ -47,8 +49,27 @@ public class Parser {
             return getAddEventCommand(userInput, indexOfSpace);
         case "todo":
             return getAddTodoCommand(userInput, indexOfSpace);
+        case "update":
+            return getUpdateCommand(userInput, indexOfSpace);
         default:
             throw new DukeException("Say something I can understand!! >:(");
+        }
+    }
+
+    private static Command getUpdateCommand(String userInput, int indexOfSpace) throws DukeException {
+        if (userInput.matches("^update name [0-9]+ .+")) {
+            String[] inputDetails = userInput.split(" ");
+            int taskNumber = Integer.parseInt(inputDetails[2]);
+            String newName = inputDetails[3];
+            return new UpdateNameCommand(taskNumber, newName);
+        } else if (userInput.matches("^update datetime [0-9]+ .+ .+")) {
+            String[] inputDetails = userInput.split(" ");
+            int taskNumber = Integer.parseInt(inputDetails[2]);
+            String dateTimeAsString = inputDetails[3] + " " + inputDetails[4];
+            return new UpdateDateTimeCommand(taskNumber, parseDate(dateTimeAsString));
+        } else {
+            throw new DukeException(">:( follow format below:\n"
+                    + "update <name/datetime> <task number 1 - 100> <text/dd-mm-yyyy HHmm>");
         }
     }
 

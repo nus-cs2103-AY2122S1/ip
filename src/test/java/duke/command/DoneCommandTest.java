@@ -12,15 +12,17 @@ import duke.util.Storage;
 public class DoneCommandTest {
 
     @Test
-    public void executeDoneCommand_invalidTaskNumber_throwDukeException() {
-        int taskNumber = 0;
+    public void executeDoneCommand_validTaskNumber_stringResponse() {
+        int taskNumber = 1;
+        TaskList tl = new TaskList();
+        tl.addTask(new Todo(false, "test"));
+        Storage storage = new Storage();
+        String response = null;
         try {
-            TaskList tl = new TaskList();
-            tl.addTask(new Todo(false, "test"));
-            Storage storage = new Storage();
-            new DoneCommand(taskNumber).execute(storage, tl);
+            response = new DoneCommand(taskNumber).execute(storage, tl);
         } catch (DukeException e) {
-            assertEquals(String.format("Task number %d invalid.", taskNumber), e.getMessage());
+            e.printStackTrace();
         }
+        assertEquals("Ooh yeah! Task 1 marked as done:\n  [T][X] test", response);
     }
 }

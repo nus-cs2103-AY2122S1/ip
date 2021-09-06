@@ -1,12 +1,16 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
+import duke.util.DukeException;
+
 /**
  * Abstract class task contains fundamental attributes such as task name
  * and whether task is completed.
  */
 public abstract class Task {
     /** Task name */
-    private final String taskName;
+    private String taskName;
     /** Indicates if task is complete*/
     private boolean done;
 
@@ -56,4 +60,20 @@ public abstract class Task {
             : String.format("[ ] %s", this.taskName);
     }
 
+    /**
+     * Changes the task name.
+     *
+     * @param newName name to be changed to.
+     */
+    public void setName(String newName) {
+        this.taskName = newName;
+    }
+
+    /**
+     * Changes the datetime information of the task if possible.
+     *
+     * @param dateTime name to be changed to.
+     * @throws DukeException if task is a has no date time attribute.
+     */
+    public abstract void setDateTime(LocalDateTime dateTime) throws DukeException;
 }

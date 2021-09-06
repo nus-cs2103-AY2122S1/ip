@@ -151,4 +151,31 @@ public class TaskList {
                 .filter(task -> task.getTaskName().contains(searchTerm))
                 .toArray(Task[]::new);
     }
+
+    /**
+     * Updates the task name of a task.
+     *
+     * @param taskNumber identifies the task to be updated.
+     * @param newName new task name for identified task.
+     * @return task with name updated.
+     */
+    public Task updateTaskName(int taskNumber, String newName) {
+        Task task = tasks.get(taskNumber - 1);
+        task.setName(newName);
+        return task;
+    }
+
+    /**
+     * Updates datetime of task if applicable
+     *
+     * @param taskNumber identifies task to be updated.
+     * @param dateTime new datetime for identified task.
+     * @return task with datetime updated.
+     * @throws DukeException if task does not have a datetime attribute.
+     */
+    public Task updateTaskDateTime(int taskNumber, LocalDateTime dateTime) throws DukeException {
+        Task task = tasks.get(taskNumber - 1);
+        task.setDateTime(dateTime);
+        return task;
+    }
 }
