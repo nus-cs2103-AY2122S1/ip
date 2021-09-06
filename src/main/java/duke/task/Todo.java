@@ -6,11 +6,11 @@ public class Todo extends Task {
 
     @Override
     public String toFileData() {
-        return "T," + super.toFileData();
+        return String.join(Task.STORAGE_DELIMITER, Task.TODO_ALPHABET, super.toFileData());
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return super.wrapTaskAlphabet(Task.TODO_ALPHABET) + super.toString();
     }
 }

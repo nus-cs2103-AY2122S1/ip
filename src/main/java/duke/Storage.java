@@ -45,21 +45,21 @@ public class Storage {
     private static Task dataToTask(String str) throws DukeException {
         String[] taskArr = str.split(",");
         String taskType = taskArr[0];
-        boolean isTaskDone = taskArr[1].equals("1");
+        boolean isTaskDone = taskArr[1].equals(Task.DONE_STRING);
         String taskDescription = taskArr[2];
         String taskDate = "";
-        if (taskArr.length > 3) {
-            taskDate = taskArr[3];
+        if (taskArr.length > Task.MIN_TASK_ATTRIBUTES) {
+            taskDate = taskArr[Task.MIN_TASK_ATTRIBUTES];
         }
         Task res;
         switch (taskType) {
-        case("T"):
+        case(Task.TODO_ALPHABET):
             res = new Todo(taskDescription, isTaskDone);
             break;
-        case("D"):
+        case(Task.DEADLINE_ALPHABET):
             res = new Deadline(taskDescription, taskDate, isTaskDone);
             break;
-        case("E"):
+        case(Task.EVENT_ALPHABET):
             res = new Event(taskDescription, taskDate, isTaskDone);
             break;
         default:

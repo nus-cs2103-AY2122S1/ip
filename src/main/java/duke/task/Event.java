@@ -10,11 +10,14 @@ public class Event extends Task {
 
     @Override
     public String toFileData() {
-        return String.format("E,%s,%s", super.toFileData(), super.dateToString());
+        return String.join(Task.STORAGE_DELIMITER, Task.EVENT_ALPHABET, super.toFileData(), super.dateToString());
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), super.getDateString());
+        return String.format("%s%s (at: %s)",
+                super.wrapTaskAlphabet(Task.EVENT_ALPHABET),
+                super.toString(),
+                super.getDateString());
     }
 }
