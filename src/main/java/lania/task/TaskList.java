@@ -25,6 +25,7 @@ public class TaskList {
      */
     public void update(Task task) {
         tasks.add(task);
+        assert tasks.contains(task);
     }
 
     /**
@@ -36,6 +37,7 @@ public class TaskList {
     public void complete(int i) {
         i--;
         tasks.get(i).markAsDone();
+        assert tasks.get(i).isDone;
     }
 
     /**
@@ -48,6 +50,7 @@ public class TaskList {
         i--;
         Task task = tasks.get(i);
         tasks.remove(i);
+        assert !tasks.contains(task);
         return task;
     }
 
