@@ -14,22 +14,22 @@ Here are the tasks in your list:
 3.[E][ ] attend seminar (at: Jan 16)
 _________________________________
 _________________________________
-Got it. I've added this task:
+Got it. I've added this duke.task:
 ~~[T][ ] READ BOOK~~
 Now you have 4 tasks in the list.
 _________________________________
 _________________________________
-Got it. I've added this task:
+Got it. I've added this duke.task:
 ~~[D][ ] RETURN BOOK (BY: JUN 21)~~
 Now you have 5 tasks in the list.
 _________________________________
 _________________________________
-Got it. I've added this task:
+Got it. I've added this duke.task:
 ~~[E][ ] PROJECT MEETING (AT: AUG 12)~~
 Now you have 6 tasks in the list.
 _________________________________
 _________________________________
-Got it. I've added this task:
+Got it. I've added this duke.task:
 ~~[T][ ] JOIN SPORTS CLUB~~
 Now you have 7 tasks in the list.
 _________________________________
@@ -44,22 +44,22 @@ Here are the tasks in your list:
 7.[T][ ] join sports club
 _________________________________
 _________________________________
-Got it. I've added this task:
+Got it. I've added this duke.task:
 ~~[T][ ] CREATE GROUP CHAT~~
 Now you have 8 tasks in the list.
 _________________________________
 _________________________________
-Got it. I've added this task:
+Got it. I've added this duke.task:
 ~~[D][ ] SET UP MEETING DATE (BY: AUG 31)~~
 Now you have 9 tasks in the list.
 _________________________________
 _________________________________
-Got it. I've added this task:
+Got it. I've added this duke.task:
 ~~[E][ ] PROJECT MEETING (AT: SEP 30)~~
 Now you have 10 tasks in the list.
 _________________________________
 _________________________________
-Yay, one task down!
+Yay, one duke.task down!
 ~~[D][X] bake chocolate cake (by: Jan 06)~~
 _________________________________
 _________________________________
@@ -93,15 +93,15 @@ Here are the tasks in your list:
 10.[E][ ] project meeting (at: Sep 30)
 _________________________________
 _________________________________
-☹ The task description or command is incomplete.:$
+☹ The duke.task description or duke.command is incomplete.:$
 
 _________________________________
 _________________________________
-☹ The task description or command is incomplete.:$
+☹ The duke.task description or duke.command is incomplete.:$
 
 _________________________________
 _________________________________
-☹ The task description or command is incomplete.:$
+☹ The duke.task description or duke.command is incomplete.:$
 
 _________________________________
 _________________________________
@@ -109,16 +109,16 @@ On Sep 30, you have:
 1.[E][ ] project meeting (at: Sep 30)
 _________________________________
 _________________________________
-Yay, one task down!
+Yay, one duke.task down!
 ~~[T][X] pick up parcel~~
 _________________________________
 _________________________________
-Alrighty, I've removed this task:
+Alrighty, I've removed this duke.task:
 ~~[T][X] pick up parcel~~
 Now, you have 9 tasks remaining
 _________________________________
 _________________________________
-☹ The task description or command is incomplete.:$
+☹ The duke.task description or duke.command is incomplete.:$
 
 _________________________________
 _________________________________
