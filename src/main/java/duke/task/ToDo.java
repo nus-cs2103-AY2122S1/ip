@@ -27,6 +27,9 @@ public class ToDo extends Task {
 
     @Override
     public int compareTo(Task o) {
+        if (this == o) {
+            return 0;
+        }
         if (!(o instanceof ToDo)) {
             return 1;
         } else { // compare lexicographically

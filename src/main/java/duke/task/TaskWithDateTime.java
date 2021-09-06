@@ -26,6 +26,9 @@ public abstract class TaskWithDateTime extends Task {
 
     @Override
     public int compareTo(Task o) {
+        if (this == o) {
+            return 0;
+        }
         if (o instanceof ToDo) {
             return -1; // Deadline and Events in front of ToDo
         } else if (o instanceof TaskWithDateTime) {
