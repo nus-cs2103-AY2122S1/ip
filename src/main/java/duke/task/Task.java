@@ -39,6 +39,11 @@ public abstract class Task {
     }
 
     /**
+     * Get the done status.
+     */
+    public boolean getDone() { return isDone; }
+
+    /**
      * Returns the string representation of the task.
      *
      * @return the string representation of the task

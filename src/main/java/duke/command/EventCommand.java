@@ -39,11 +39,14 @@ public class EventCommand extends Command {
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
             String[] eventPair = DESCRIPTION.split("/at", 2);
-            if (eventPair.length < 2 || eventPair[0].equals("") || eventPair[1].equals("")) {
+            if (eventPair.length < 2) {
                 throw new DukeException("Your add event command is incomplete.");
             }
             String desc = eventPair[0].trim();
             String date = eventPair[1].trim();
+            if (desc.equals("") || date.equals("")) {
+                throw new DukeException("Your add event command is incomplete.");
+            }
             LocalDateTime.parse(date.replace(" ", ""),
                     DateTimeFormatter.ofPattern("yyyy-MM-ddHHmm"));
             storage.add("E", desc, date);

@@ -34,6 +34,7 @@ public class TaskListDuke implements TaskList {
      */
     @Override
     public String addTask(Task task) {
+        int count = count();
         this.list.add(task);
         String str = ADD + task.toString();
         if (this.list.size() == 1) {
@@ -41,6 +42,7 @@ public class TaskListDuke implements TaskList {
         } else {
             str += "\nNow you have " + this.list.size() + " tasks in the list.";
         }
+        assert count + 1 == count() : "Number of tasks should have decreased by 1.";
         return str;
     }
 
@@ -52,8 +54,11 @@ public class TaskListDuke implements TaskList {
      */
     @Override
     public String setDone(int index) {
+        int count = count();
+        assert count > index : "Index should not be greater than the item to be marked done.";
         Task task = this.list.get(index);
         task.setDone();
+        assert task.getDone() : "Task should have been marked done.";
         return DONE + task;
     }
 
@@ -64,8 +69,11 @@ public class TaskListDuke implements TaskList {
      * @return the string representation of deleting the task
      */
     public String delete(int index) {
+        int count = count();
+        assert count > index : "Index should not be greater than the item to be deleted.";
         Task task = this.list.get(index);
         this.list.remove(index);
+        assert count - 1 == count() : "Number of tasks should have decreased by 1.";
         return DELETE + task.toString();
     }
 
@@ -120,6 +128,7 @@ public class TaskListDuke implements TaskList {
         if (this.list.size() == 0) {
             str.append("List is empty!");
         } else {
+            assert this.list.size() > 0 : "List should contain something!";
             final int[] count = {0};
             this.list.stream()
                     .filter(task -> task.containString(searchStr))
