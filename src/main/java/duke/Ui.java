@@ -49,8 +49,9 @@ public class Ui {
     }
     
     /**
-     * Returns the Duke help manual as a formatted string.
+     * Returns manual segment containing the information for a certain command.
      *
+     * @param cmd A command in Duke.
      * @return Duke help manual.
      * @throws DukeException
      */
