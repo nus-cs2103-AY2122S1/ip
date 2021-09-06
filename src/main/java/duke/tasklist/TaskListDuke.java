@@ -79,9 +79,8 @@ public class TaskListDuke implements TaskList {
         if (this.list.size() == 0) {
             str.append("List is empty!");
         } else {
-            for (int i = 0; i < this.list.size(); i++) {
-                str.append(i + 1).append(".").append(this.list.get(i).toString()).append("\n");
-            }
+            final int[] count = {0};
+            this.list.forEach(task -> str.append(++count[0]).append(".").append(task).append("\n"));
         }
         return str.toString();
     }
@@ -98,13 +97,11 @@ public class TaskListDuke implements TaskList {
         if (this.list.size() == 0) {
             str.append("List is empty!");
         } else {
-            int count = 0;
-            for (Task t : this.list) {
-                if (t.onDate(localDate)) {
-                    str.append(++count).append(".").append(t).append("\n");
-                }
-            }
-            if (count == 0) {
+            final int[] count = {0};
+            this.list.stream()
+                    .filter(task -> task.onDate(localDate))
+                    .forEach(task -> str.append(++count[0]).append(".").append(task).append("\n"));
+            if (count[0] == 0) {
                 str.append("There are no tasks pertaining to the specified date.");
             }
         }
@@ -123,13 +120,11 @@ public class TaskListDuke implements TaskList {
         if (this.list.size() == 0) {
             str.append("List is empty!");
         } else {
-            int count = 0;
-            for (Task t : this.list) {
-                if (t.containString(searchStr)) {
-                    str.append(++count).append(".").append(t).append("\n");
-                }
-            }
-            if (count == 0) {
+            final int[] count = {0};
+            this.list.stream()
+                    .filter(task -> task.containString(searchStr))
+                    .forEach(task -> str.append(++count[0]).append(".").append(task).append("\n"));
+            if (count[0] == 0) {
                 str.append("Oh no! There are no tasks containing the specified string.");
             }
         }
