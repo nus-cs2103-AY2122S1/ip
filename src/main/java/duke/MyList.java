@@ -141,7 +141,7 @@ public class MyList {
                 Deadline d = (Deadline) t;
                 LocalDate deadline = d.getDeadline();
                 long daysBetween = ChronoUnit.DAYS.between(currentDate, deadline);
-                if (daysBetween <= noOfDays) {
+                if (daysBetween <= noOfDays && !d.isDone()) {
                     noOfDeadlines++;
                     result += Ui.withinDeadlineMessage(d, daysBetween, i + 1);
                 }
