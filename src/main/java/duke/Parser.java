@@ -39,67 +39,30 @@ public class Parser {
             if (inputArr.length < 1) {
                 throw new DukeException("You didn't put any commands.");
             }
-            String[] messageArr;
             switch (inputArr[0]) {
             case "todo":
-                if (inputArr.length < 2) {
-                    throw new DukeException("The description of a todo cannot be empty.");
-                }
-                message = addTask(new Todo(inputArr[1]));
+                message = addTodo(inputArr);
                 break;
             case "deadline":
-                if (inputArr.length < 2) {
-                    throw new DukeException("The description of a deadline cannot be empty.");
-                }
-                messageArr = inputArr[1].split(" /by ", 2);
-                if (messageArr.length < 2) {
-                    throw new DukeException("duke.Deadline needs a /by clause after the description.");
-                }
-                message = addTask(new Deadline(messageArr[0], messageArr[1]));
+                message = addDeadline(inputArr);
                 break;
             case "event":
-                if (inputArr.length < 2) {
-                    throw new DukeException("The description of a event cannot be empty.");
-                }
-                messageArr = inputArr[1].split(" /at ", 2);
-                message = addTask(new Event(messageArr[0], messageArr[1]));
+                message = addEvent(inputArr);
                 break;
             case "done":
-                if (inputArr.length < 2) {
-                    throw new DukeException("Please specify which task to delete.");
-                }
-                int number = Integer.parseInt(inputArr[1]);
-                if (list.get(number - 1) == null) {
-                    throw new DukeException("This task doesn't exist");
-                }
-                message += "    Nice! I've marked this task as done: \n";
-                list.get(number - 1).markedAsDone();
-                message += "      " + list.get(number - 1).toString();
+                message = markDone(inputArr);
                 break;
             case "list":
                 message = list.listItems();
                 break;
             case "remove":
-                if (inputArr.length < 2) {
-                    throw new DukeException("Please specify which task to delete.");
-                }
-                int removeIndex = Integer.parseInt(inputArr[1]);
-                if (list.get(removeIndex - 1) == null) {
-                    throw new DukeException("This task doesn't exist");
-                }
-                message += "    Noted. I've removed this task: \n";
-                message += "      " + list.get(removeIndex - 1).toString() + "\n";
-                list.remove(removeIndex - 1);
-                message += "     Now you have " + list.getSize() + " tasks in the list.";
+                message = removeTask(inputArr);
                 break;
             case "save":
                 message = storage.save(list);
                 break;
             case "find":
-                if (inputArr.length < 2) {
-                    throw new DukeException("The description of a find cannot be empty.");
-                }
-                message = list.find(inputArr[1]);
+                message = findInTaskList(inputArr);
                 break;
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
@@ -118,4 +81,65 @@ public class Parser {
         return message;
     }
 
+    private String addTodo(String[] inputArr) throws DukeException {
+        if (inputArr.length < 2) {
+            throw new DukeException("The description of a todo cannot be empty.");
+        }
+        return addTask(new Todo(inputArr[1]));
+    }
+
+    private String addDeadline(String[] inputArr) throws DukeException {
+        if (inputArr.length < 2) {
+            throw new DukeException("The description of a deadline cannot be empty.");
+        }
+        String[] messageArr = inputArr[1].split(" /by ", 2);
+        if (messageArr.length < 2) {
+            throw new DukeException("duke.Deadline needs a /by clause after the description.");
+        }
+        return addTask(new Deadline(messageArr[0], messageArr[1]));
+    }
+
+    private String addEvent(String[] inputArr) throws DukeException {
+        if (inputArr.length < 2) {
+            throw new DukeException("The description of a event cannot be empty.");
+        }
+        String[] messageArr = inputArr[1].split(" /at ", 2);
+        return addTask(new Event(messageArr[0], messageArr[1]));
+    }
+
+    private String markDone(String[] inputArr) throws DukeException {
+        if (inputArr.length < 2) {
+            throw new DukeException("Please specify which task to delete.");
+        }
+        int number = Integer.parseInt(inputArr[1]);
+        if (list.get(number - 1) == null) {
+            throw new DukeException("This task doesn't exist");
+        }
+        String message = "    Nice! I've marked this task as done: \n";
+        list.get(number - 1).markedAsDone();
+        message += "      " + list.get(number - 1).toString();
+        return message;
+    }
+
+    private String removeTask(String[] inputArr) throws DukeException {
+        if (inputArr.length < 2) {
+            throw new DukeException("Please specify which task to delete.");
+        }
+        int removeIndex = Integer.parseInt(inputArr[1]);
+        if (list.get(removeIndex - 1) == null) {
+            throw new DukeException("This task doesn't exist");
+        }
+        String message = "    Noted. I've removed this task: \n";
+        message += "      " + list.get(removeIndex - 1).toString() + "\n";
+        list.remove(removeIndex - 1);
+        message += "     Now you have " + list.getSize() + " tasks in the list.";
+        return message;
+    }
+
+    private String findInTaskList(String[] inputArr) throws DukeException {
+        if (inputArr.length < 2) {
+            throw new DukeException("The description of a find cannot be empty.");
+        }
+        return list.find(inputArr[1]);
+    }
 }
