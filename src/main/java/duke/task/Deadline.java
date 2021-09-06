@@ -51,9 +51,9 @@ public class Deadline extends Task {
     @Override
     public String getSaveInfo() {
         if (this.isDone()) {
-            return String.format("D | 1 | %s | %s", this.getTaskName(), this.getWhen());
+            return String.format("D | 1 | %s | %s | %s", this.getTaskName(), this.getWhen(), super.getTagsString());
         } else {
-            return String.format("D | 0 | %s | %s", this.getTaskName(), this.getWhen());
+            return String.format("D | 0 | %s | %s | %s", this.getTaskName(), this.getWhen(), super.getTagsString());
         }
     }
 }

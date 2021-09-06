@@ -1,11 +1,15 @@
 package duke.task;
 
+import java.util.ArrayList;
+
 /**
  * General tasks to be completed by the user with no time property.
  */
 public class Task {
     private boolean isDone;
     private String taskName;
+    private String duration;
+    private ArrayList<String> tags = new ArrayList<>();
 
     /**
      * Public constructor which creates a new Task object.
@@ -15,6 +19,18 @@ public class Task {
     public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;
+    }
+
+    /**
+     * Public constructor which creates a new Task object with specified duration.
+     *
+     * @param taskName The description of the Event.
+     * @param duration The time allocated by the user for the task.
+     */
+    public Task(String taskName, String duration) {
+        this.taskName = taskName;
+        this.isDone = false;
+        this.duration = duration;
     }
 
     /**
@@ -54,7 +70,11 @@ public class Task {
      * @return Description of the task
      */
     public String getTaskName() {
-        return this.taskName;
+        if (this.duration ==  null) {
+            return this.taskName;
+        } else {
+            return this.taskName + "(needs " + this.duration + ")";
+        }
     }
 
     /**
@@ -84,10 +104,43 @@ public class Task {
      */
     public String getSaveInfo() {
         if (this.isDone()) {
-            return String.format("T | 1 | %s", this.getTaskName());
+            return String.format("T | 1 | %s | %s", this.getTaskName(), this.getTagsString());
         } else {
-            return String.format("T | 0 | %s", this.getTaskName());
+            return String.format("T | 0 | %s | %s", this.getTaskName(), this.getTagsString());
         }
     }
 
+    /**
+     * Tags a keyword to the task.
+     */
+    public void tag(String keyword) {
+        this.tags.add(keyword.toLowerCase());
+    }
+
+    /**
+     * Checks if a given tag is present in the tasks tags.
+     */
+    public boolean hasGivenTag(String keyword) {
+        for (int i = 0; i < tags.size(); i++) {
+            if (tags.get(i).equals(keyword)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Get string combination of all tags relevant to a task.
+     */
+    public String getTagsString() {
+        String stringTags = "";
+        if (this.tags.size() == 0) {
+            return "#";
+        }
+
+        for (int i = 0; i < tags.size(); i++) {
+           stringTags += "#" + tags.get(i);
+        }
+        return stringTags;
+    }
 }

@@ -51,9 +51,9 @@ public class Event extends Task {
     @Override
     public String getSaveInfo() {
         if (this.isDone()) {
-            return String.format("E | 1 | %s | %s", this.getTaskName(), this.getWhen());
+            return String.format("E | 1 | %s | %s | %s", this.getTaskName(), this.getWhen(), this.getTagsString());
         } else {
-            return String.format("E | 0 | %s | %s", this.getTaskName(), this.getWhen());
+            return String.format("E | 0 | %s | %s | %s", this.getTaskName(), this.getWhen(), this.getTagsString());
         }
     }
 }

@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import duke.exception.DukeException;
 import duke.task.Deadline;
@@ -85,11 +86,11 @@ public class Storage {
             while ((text = bufferedReader.readLine()) != null) {
                 String[] lineArr = text.split(" \\| ");
                 switch (lineArr.length) {
-                case 3:
+                case 4:
                     Task toDo = loadToDo(lineArr);
                     saved.add(toDo);
                     break;
-                case 4:
+                case 5:
                     if (lineArr[0].equals("D")) {
                         Deadline deadline = loadDeadline(lineArr);
                         saved.add(deadline);
@@ -113,6 +114,11 @@ public class Storage {
         if (lineArr[1].equals("1")) {
             toDo.complete();
         }
+        String[] tags = lineArr[3].split("#");
+        for (int i = 1; i < tags.length; i++) {
+            toDo.tag(tags[i]);
+        }
+
         return toDo;
     }
 
@@ -122,6 +128,10 @@ public class Storage {
         if (lineArr[1].equals("1")) {
             deadline.complete();
         }
+        String[] tags = lineArr[4].split("#");
+        for (int i = 1; i < tags.length; i++) {
+            deadline.tag(tags[i]);
+        }
         return deadline;
     }
 
@@ -129,6 +139,11 @@ public class Storage {
         Event event = new Event(lineArr[2], LocalDateTime.parse(lineArr[3], this.DATETIMEFORMAT));
         if (lineArr[1].equals("1")) {
             event.complete();
+        }
+        String savedTags = lineArr[4].replaceFirst("#", "");
+        String[] tags = savedTags.split("#");
+        for (int i = 1; i < tags.length; i++) {
+            event.tag(tags[i]);
         }
         return event;
     }

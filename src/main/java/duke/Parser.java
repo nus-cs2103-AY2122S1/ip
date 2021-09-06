@@ -12,7 +12,9 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
+import duke.command.TagCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -50,6 +52,10 @@ public class Parser {
             return new ExitCommand();
         case "find":
             return parseFind(inputArr);
+        case "tag":
+            return parseTag(inputArr);
+        case "/help":
+            return new HelpCommand();
         default:
             throw new DukeException("I don't get what you mean? Try again!");
         }
@@ -91,7 +97,17 @@ public class Parser {
         if (inputArr.length == 1) {
             throw new DukeException("Input in the format: todo *description*");
         }
-        String description = inputArr[1];
+
+        String description = "";
+        for (int i = 1; i < inputArr.length; i++) {
+            if (inputArr[i].charAt(0) != '(') {
+                description += (" " +inputArr[i]);
+            } else {
+                String duration = inputArr[i];
+                duration = duration.replaceAll("[()]", "");
+                return new AddCommand(new Task(description, duration));
+            }
+        }
         return new AddCommand(new Task(description));
     }
 
@@ -139,6 +155,14 @@ public class Parser {
             throw new DukeException("Input the keyword to be used for the search!");
         } else {
             return new FindCommand(inputArr[1]);
+        }
+    }
+
+    public static Command parseTag(String[] inputArr) {
+        if (inputArr.length < 3) {
+            throw new DukeException("Indicate the task and the tag with the format: tag *task* *tag*!");
+        } else {
+            return new TagCommand(inputArr[1], inputArr[2]);
         }
     }
 

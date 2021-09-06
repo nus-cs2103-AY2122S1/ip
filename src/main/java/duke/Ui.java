@@ -135,6 +135,20 @@ public class Ui {
     }
 
     /**
+     * Updates the user of the tasks in the list which have been tagged.
+     *
+     * @param taskArrList The ArrayList of tasks with matching keywords.
+     */
+    public String notifyTaggedList(ArrayList<Task> taskArrList, String keyword) {
+        String output = "Here's are the tasks which are tagged with #" + keyword + ":\n";
+        int listLength = taskArrList.size();
+        for (int i = 0; i < listLength; i++) {
+            output += String.format("%d. %s\n", i + 1, taskArrList.get(i).displayInfo());
+        }
+        return output;
+    }
+
+    /**
      * Updates the user of the tasks in the list, after adding the new task.
      *
      * @param taskArrList The ArrayList of tasks in the current list.
@@ -200,6 +214,31 @@ public class Ui {
      */
     public static void notifyCreatedFile() {
         System.out.println("File created.");
+    }
+
+    /**
+     * Displays the list of commands available for the user.
+     */
+    public static String displayHelp() {
+        String botDescription = "Duii is a task manager which helps you keep track your upcoming tasks!\n";
+        String commandList = "The following commands available:\n"
+                + "list - Lists all the tasks in the current task list.\n"
+                + "done - Marks the tasks with the specified IDs as done.\n"
+                + "Eg. done 1,2,3 \n"
+                + "delete - Deletes the tasks with the specified IDs.\n"
+                + "Eg. delete 5,1,2 \n"
+                + "tag - Tags a certain task with the relevant keywords with a tag.\n"
+                + "Eg. tag book nerd\n"
+                + "todo - Adds a toDo activity to the list. Optional to specify duration in brackets.\n"
+                + "Eg. todo read book (2h)\n"
+                + "event - Adds an event activity to the list.\n"
+                + "Eg. event Dinner /at 19/02/2021 19:00\n"
+                + "deadline - Adds a deadline activity to the list. \n"
+                + "Eg. deadline Assignment 1 /by 19/03/2021 15:00\n"
+                + "find - Lists all the tasks with the specified keyword in its description.\n"
+                + "Eg. find books \n"
+                + "bye - Exits the program.";
+        return botDescription + commandList;
     }
 
     /**
