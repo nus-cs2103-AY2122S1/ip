@@ -39,9 +39,9 @@ public class Ui {
     private static final String GREETING = "Hi! How can\n\n" + LOGO + "\nhelp you today?\n";
     private static final String GREETING_LABEL_STYLE = "-fx-font-family: 'monospaced';";
 
-    private final Image bruhImage = new Image(getClass().getResourceAsStream("/images/bruh.jpg"));
-    private final Image userImage = new Image(getClass().getResourceAsStream("/images/user.png"));
-    private final Image errorImage = new Image(getClass().getResourceAsStream("/images/error.png"));
+    private Image bruhImage;
+    private Image userImage;
+    private Image errorImage;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -106,6 +106,17 @@ public class Ui {
         sendButton = new Button(SEND_BUTTON_TEXT);
         mainLayout = new AnchorPane();
         scene = new Scene(mainLayout);
+
+        assert getClass()
+                .getResourceAsStream("/images/bruh.jpg") != null : "Bruh image cannot be null";
+        assert getClass()
+                .getResourceAsStream("/images/user.png") != null : "User image cannot be null";
+        assert getClass()
+                .getResourceAsStream("/images/error.png") != null : "Error image cannot be null";
+
+        bruhImage = new Image(this.getClass().getResourceAsStream("/images/bruh.jpg"));
+        userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+        errorImage = new Image(this.getClass().getResourceAsStream("/images/error.png"));
     }
 
     /**
@@ -201,8 +212,8 @@ public class Ui {
         try {
             Command command = Parser.parseInputToCommand(userInput);
             commandRunner.runCommand(command);
+            assert command.getDescription() != null : "Description cannot be null";
             displayMessage(command.getDescription(), MessageType.BOT);
-
             checkExit(command);
         } catch (BruhException e) {
             displayMessage(e.getMessage(), MessageType.ERROR);

@@ -34,6 +34,7 @@ public abstract class Task implements Serializable {
      * @throws BruhException if an error occurs in creating the task.
      */
     public static Task createTask(String[] inputs) throws BruhException {
+        assert inputs.length == 2 : "2 elements in inputs array";
         String keyword = inputs[0];
 
         switch (keyword) {

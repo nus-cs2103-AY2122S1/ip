@@ -35,6 +35,7 @@ public class LocalDateTimeOrString implements Serializable {
 
     @Override
     public String toString() {
+        assert (dateTime != null || dateTimeString != null) : "Cannot be both null";
         return (dateTime != null) ? OUT_FORMATTER.format(dateTime) : dateTimeString;
     }
 
@@ -46,6 +47,9 @@ public class LocalDateTimeOrString implements Serializable {
             return false;
         }
         LocalDateTimeOrString other = (LocalDateTimeOrString) o;
+        assert (dateTime != null || dateTimeString != null) : "Cannot be both null";
+        assert (other.dateTime != null
+                || other.dateTimeString != null) : "Compared datetime - cannot be both null";
         return Objects.equals(dateTime, other.dateTime)
                 && Objects.equals(dateTimeString, other.dateTimeString);
     }
