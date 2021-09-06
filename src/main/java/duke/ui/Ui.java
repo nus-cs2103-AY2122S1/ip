@@ -8,6 +8,7 @@ import duke.tasklist.TaskList;
 public class Ui {
     /**
      * Returns the farewell message.
+     *
      * @return A string that represents the farewell message.
      */
     public String farewellUser() {
@@ -16,6 +17,7 @@ public class Ui {
 
     /**
      * Returns the message inputted.
+     *
      * @param message The message to be outputted.
      */
     public String returnMessage(String message) {
@@ -24,11 +26,12 @@ public class Ui {
 
     /**
      * Returns the tasks in the task list.
+     *
      * @param taskList The tasks that will be printed.
+     * @return String The string representing all the tasks.
      */
     public String returnTasks(TaskList taskList) {
-        StringBuilder output = new StringBuilder();
-        output = new StringBuilder("Here are the tasks in your list:");
+        StringBuilder output = new StringBuilder("Here are the tasks in your list:");
         output.append("\n");
         for (int i = 0; i < taskList.getAllTasks().size(); i++) {
             output.append(String.format("%d. %s%n", i + 1, taskList.getAllTasks().get(i)));

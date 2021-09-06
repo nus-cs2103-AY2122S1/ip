@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 import java.io.IOException;
 import java.util.Collections;
 
@@ -41,7 +41,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on  the left and text on the right.
+     * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
@@ -52,17 +52,18 @@ public class DialogBox extends HBox {
 
     /**
      * Creates the user's dialog box with text and img provided.
+     *
      * @param text The string representing the dialog.
      * @param img The image of the person.
      * @return the dialog box which contains the text and image.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        DialogBox db = new DialogBox(text, img);
-        return db;
+        return new DialogBox(text, img);
     }
 
     /**
      * Creates the duke's dialog box with text and img provided.
+     *
      * @param text The string representing the dialog.
      * @param img The image of duke.
      * @return the dialog box which contains the text and image.

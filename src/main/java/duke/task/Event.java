@@ -46,7 +46,7 @@ public class Event extends Task {
     }
 
     /**
-     * Return the string representation of event.
+     * Returns the string representation of event.
      *
      * @return the string representation of event.
      */
@@ -58,7 +58,7 @@ public class Event extends Task {
     }
 
     /**
-     * Return the string representation of event for file input/output.
+     * Returns the string representation of event for file input/output.
      *
      * @return the string representation of event for file input/output.
      */

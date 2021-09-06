@@ -14,15 +14,15 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        String output = "";
-        output += (ui.returnMessage("Here are the matching tasks in your list:"));
-        output += "\n";
+        StringBuilder output = new StringBuilder();
+        output.append(ui.returnMessage("Here are the matching tasks in your list:"));
+        output.append("\n");
         int index = 1;
         for (Task task : taskList.getAllTasks()) {
             if (task.isMatchingTask(this.keyword)) {
-                output += ui.returnMessage(String.format("%d.%s", index++, task));
+                output.append(ui.returnMessage(String.format("%d.%s", index++, task)));
             }
         }
-        return output;
+        return output.toString();
     }
 }

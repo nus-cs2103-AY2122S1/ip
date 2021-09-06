@@ -18,6 +18,7 @@ public class TaskList {
 
     /**
      * Returns all the tasks in an array list.
+     *
      * @return ArrayList containing all the list.
      */
     public ArrayList<Task> getAllTasks() {
@@ -26,7 +27,9 @@ public class TaskList {
 
     /**
      * Adds the task to the list and prints the added task.
+     *
      * @param task the task that will be added to the list
+     * @return the string representing the success message.
      */
     public String addTask(Ui ui, Task task) {
         this.tasks.add(task);
@@ -36,7 +39,9 @@ public class TaskList {
 
     /**
      * Deletes the task with taskNo specified.
+     *
      * @param taskNo the taskNo of the task to be deleted.
+     * @return the string representing the success message.
      */
     public String deleteTask(Ui ui, int taskNo) {
         Task task = this.tasks.get(taskNo - 1);
@@ -47,7 +52,9 @@ public class TaskList {
 
     /**
      * Deletes the task with taskNo specified.
+     *
      * @param taskNo the taskNo of the task to be deleted.
+     * @return the string representing the success message.
      */
     public String markTaskAsDone(Ui ui, int taskNo) {
         Task task = this.tasks.get(taskNo - 1);

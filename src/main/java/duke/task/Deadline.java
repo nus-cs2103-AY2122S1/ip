@@ -46,7 +46,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Return the string representation of deadline.
+     * Returns the string representation of deadline.
      *
      * @return the string representation of deadline.
      */
@@ -58,7 +58,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Return the string representation of deadline for file input/output.
+     * Returns the string representation of deadline for file input/output.
      *
      * @return the string representation of deadline for file input/output.
      */
