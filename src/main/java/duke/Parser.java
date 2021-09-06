@@ -54,7 +54,7 @@ public class Parser {
         case "done":
             return setTaskDone(splitInput);
         case "list":
-            ui.showMessage(taskList.toString());
+            ui.setMessage(taskList.toString());
             break;
         case "event":
             return addEvent(splitInput);

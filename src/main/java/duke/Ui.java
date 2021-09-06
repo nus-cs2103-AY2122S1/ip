@@ -1,8 +1,8 @@
 package duke;
 
-import java.util.Scanner;
-
 public class Ui {
+
+    private String message = "";
 
     public void showWelcome() {
         String logo = " ____        _        \n"
@@ -21,8 +21,13 @@ public class Ui {
      * Prints a given String to console.
      * @param message message to be printed to console.
      */
-    public void showMessage(String message) {
-        System.out.println(message);
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+
+    public String getMessage() {
+        return this.message;
     }
 
     /**
@@ -30,7 +35,7 @@ public class Ui {
      * @param errorMessage Error message to show to user.
      */
     public void showError(String errorMessage) {
-        System.out.println(errorMessage);
+        setMessage(errorMessage);
     }
 
 }
