@@ -45,23 +45,25 @@ public class Storage {
     private static Task dataToTask(String str) throws DukeException {
         String[] taskArr = str.split(",");
         String taskType = taskArr[0];
-        boolean taskDone = taskArr[1].equals("1");
+        boolean isTaskDone = taskArr[1].equals(Task.DONE_STRING);
         String taskDescription = taskArr[2];
         String taskDate = "";
-        if (taskArr.length > 3) {
-            taskDate = taskArr[3];
+        if (taskArr.length > Task.MIN_TASK_ATTRIBUTES) {
+            taskDate = taskArr[Task.MIN_TASK_ATTRIBUTES];
         }
-        Task res = null;
+        Task res;
         switch (taskType) {
-            case("T"):
-                res = new Todo(taskDescription, taskDone);
-                break;
-            case("D"):
-                res = new Deadline(taskDescription, taskDate, taskDone);
-                break;
-            case("E"):
-                res = new Event(taskDescription, taskDate, taskDone);
-                break;
+        case(Task.TODO_ALPHABET):
+            res = new Todo(taskDescription, isTaskDone);
+            break;
+        case(Task.DEADLINE_ALPHABET):
+            res = new Deadline(taskDescription, taskDate, isTaskDone);
+            break;
+        case(Task.EVENT_ALPHABET):
+            res = new Event(taskDescription, taskDate, isTaskDone);
+            break;
+        default:
+            throw new DukeException("Incorrect task type!");
         }
         return res;
     }
@@ -89,16 +91,16 @@ public class Storage {
         updateTaskFromFile(taskIndex, false, tasks);
     }
 
-    private void updateTaskFromFile(int taskIndex, boolean delete, TaskList tasks) {
+    private void updateTaskFromFile(int taskIndex, boolean isDeleteTask, TaskList tasks) {
         try {
             StringBuilder newTasks = new StringBuilder();
-            File taskFile = new File("./data/tasks.txt");
+            File taskFile = new File(filePath);
             Scanner fileReader = new Scanner(taskFile);
             int index = 0;
             while (fileReader.hasNextLine()) {
                 if (index != taskIndex) {
                     newTasks.append(fileReader.nextLine()).append("\n");
-                } else if (!delete) {
+                } else if (!isDeleteTask) {
                     newTasks.append(tasks.getTask(taskIndex).toFileData()).append("\n");
                     fileReader.nextLine();
                 } else {
@@ -106,7 +108,7 @@ public class Storage {
                 }
                 index += 1;
             }
-            FileWriter fileWriter = new FileWriter("./data/tasks.txt", false);
+            FileWriter fileWriter = new FileWriter(filePath, false);
             fileWriter.write(String.valueOf(newTasks));
             fileWriter.close();
         } catch (IOException e) {

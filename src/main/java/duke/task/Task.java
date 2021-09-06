@@ -13,6 +13,21 @@ public class Task {
     private boolean isDone;
     private LocalDate date = null;
 
+    /* Alphabetical representation of the Task types */
+    public final static String TODO_ALPHABET = "T";
+    public final static String DEADLINE_ALPHABET = "D";
+    public final static String EVENT_ALPHABET = "E";
+
+    /* String representation of whether the task is done, for saving into the .txt file */
+    public final static String DONE_STRING = "1";
+    public final static String NOT_DONE_STRING = "0";
+
+    /* Number of attributes a task has, excluding the date of the task*/
+    public final static int MIN_TASK_ATTRIBUTES = 3;
+
+    /* The delimiter between the attributes for the task in the .txt file */
+    public final static String STORAGE_DELIMITER = ",";
+
     public Task(String description, boolean done) {
         this.description = description;
         this.isDone = done;
@@ -39,12 +54,12 @@ public class Task {
         return isDone ? "X" : " ";
     }
 
-    private String getDoneString() { return isDone ? "1" : "0"; }
+    private String getDoneString() { return isDone ? DONE_STRING : NOT_DONE_STRING; }
 
     /**
      * Formats the task data for saving in tasks.txt
      */
-    public String toFileData() { return String.format("%s,%s", getDoneString(), description); }
+    public String toFileData() { return String.join(STORAGE_DELIMITER, getDoneString(), description); }
 
     /**
      * Gets the date of the task in the format of DD Month-Name YYYY
@@ -61,6 +76,16 @@ public class Task {
      */
     public String dateToString() {
         return this.date.toString();
+    }
+
+    /**
+     * Wraps the task alphabet in square brackets
+     *
+     * @param alphabet Alphabetical representation of the Task
+     * @return The alphabet wrapped in square brackets
+     */
+    public String wrapTaskAlphabet(String alphabet) {
+        return String.format("[%s]", alphabet);
     }
 
     @Override
