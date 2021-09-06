@@ -3,6 +3,7 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
 /**
  * This class encapsulates the mechanism to parse user commands.
@@ -36,10 +37,10 @@ public class Parser {
      * @throws DukeException A Duke-specific exception that may occur when listing tasks.
      */
     private String list(TaskList tasks) throws DukeException {
-        if (tasks.size() == 0) {
-            throw new DukeException("There are currently no tasks in your list.");
-        }
         String matching = this.toFind ? "matching " : "";
+        if (tasks.size() == 0) {
+            throw new DukeException("There are currently no " + matching + "tasks in your list.");
+        }
         StringBuilder tasksBuilder = new StringBuilder();
         tasksBuilder.append("Here are the ").append(matching).append("tasks in your list:\n");
         for (int i = 0; i < tasks.size(); ++i) {
@@ -171,13 +172,9 @@ public class Parser {
                 this.toFind = true;
                 String[] splitKeywords = arguments.split(" ");
                 TaskList matchingTasks = new TaskList();
-                for (Task task : this.tasks) {
-                    for (String keyword : splitKeywords) {
-                        if (task.containsKeyword(keyword) && !matchingTasks.contains(task)) {
-                            matchingTasks.add(task);
-                        }
-                    }
-                }
+                this.tasks.stream().filter(task -> Arrays.stream(splitKeywords)
+                        .anyMatch(keyword -> task.containsKeyword(keyword) && !matchingTasks.contains(task)))
+                        .forEach(matchingTasks::add);
                 return list(matchingTasks);
             }
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
