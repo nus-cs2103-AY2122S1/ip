@@ -53,7 +53,7 @@ public class DoneCommand extends Command {
      * @param storage Storage to save and load TaskList for Duke.
      */
     @Override
-    public String getExecutedString(TaskList taskList, Ui ui, Storage storage) {
+    public String formatExecutedString(TaskList taskList, Ui ui, Storage storage) {
         taskList.markAsDone(this.indexToMarkAsDone);
         return "Nice! I've marked this task as done:\n" + "  "
                 + taskList.taskToString(this.indexToMarkAsDone);

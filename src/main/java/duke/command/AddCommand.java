@@ -53,8 +53,8 @@ public class AddCommand extends Command {
      * @return String representation of the things printed in the execute method.
      */
     @Override
-    public String getExecutedString(TaskList taskList, Ui ui, Storage storage) {
+    public String formatExecutedString(TaskList taskList, Ui ui, Storage storage) {
         taskList.add(this.toAdd);
-        return ui.getPrintAddString(this.toAdd, taskList.getSize());
+        return ui.formatPrintAddString(this.toAdd, taskList.getSize());
     }
 }

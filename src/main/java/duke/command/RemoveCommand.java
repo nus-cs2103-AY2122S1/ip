@@ -53,7 +53,7 @@ public class RemoveCommand extends Command {
      * @param storage Storage to save and load TaskList of Duke.
      */
     @Override
-    public String getExecutedString(TaskList taskList, Ui ui, Storage storage) {
+    public String formatExecutedString(TaskList taskList, Ui ui, Storage storage) {
         Task toRemove = taskList.remove(this.indexToRemove);
         return "Noted. I've removed this task:\n" + toRemove + "\nNow you have "
                 + taskList.getSize() + " tasks in the list";

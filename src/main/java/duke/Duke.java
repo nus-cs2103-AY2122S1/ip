@@ -49,7 +49,7 @@ public class Duke {
     public String processInput(String input) {
         try {
             Command c = Parser.parse(input, ui, taskList);
-            return c.getExecutedString(taskList, ui, storage);
+            return c.formatExecutedString(taskList, ui, storage);
         } catch (DukeException e) {
             return e.getMessage();
         }
