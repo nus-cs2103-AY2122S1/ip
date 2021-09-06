@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.dukeException.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -17,9 +19,13 @@ public class Event extends Task{
      * A constructor for Event
      * @param description Takes in a user input
      */
-    public Event(String description) {
+    public Event(String description) throws DukeException {
         super(description.substring(0, description.indexOf("/at ")).trim());
         this.dateTime = description.substring(description.indexOf("/at ") + 4).trim();
+        if (dateTime.length() < 16) {
+            String message = "\nOOPS!!! Please follow this format: \n event {task} /at {YYYY-MM-DDTHH:MM}";
+            throw new DukeException(message);
+        }
         this.dt = LocalDateTime.parse(this.dateTime);
     }
 

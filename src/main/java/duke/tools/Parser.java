@@ -40,7 +40,7 @@ public class Parser {
         } else if (command.startsWith("find")) {
             return Duke.findTask(command);
         } else {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-( \n");
+            throw new DukeException("\n OOPS!!! I'm sorry, but I don't know what that means :-( \n");
         }
     }
 }

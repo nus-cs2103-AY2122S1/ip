@@ -35,7 +35,7 @@ public class Duke {
         try {
             storage = new Storage(filePath);
             tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | DukeException e) {
             e.printStackTrace();
         }
 
@@ -124,6 +124,10 @@ public class Duke {
      * @throws DukeException throws an error
      */
     public static String  deadline(String input) throws DukeException {
+        if (!input.contains("/by")){
+            String message = "\nOOPS!!! Please follow this format: \n deadline {task} /by {YYYY-MM-DDTHH:MM}";
+            throw new DukeException(message);
+        }
         String t = input.split("deadline ")[1];
         Deadline dl = new Deadline(t);
         tasks.addNewTask(dl);
@@ -138,6 +142,10 @@ public class Duke {
      * @throws DukeException throws an error
      */
     public static String event(String input) throws DukeException {
+        if (!input.contains("/at ")){
+            String message = "\nOOPS!!! Please follow this format: \n event {task} /at {YYYY-MM-DDTHH:MM}";
+            throw new DukeException(message);
+        }
         String t = input.split("event ")[1];
         Event e = new Event(t);
         tasks.addNewTask(e);
@@ -152,6 +160,9 @@ public class Duke {
      * @throws DukeException throws an error
      */
     public static String deleteTask(int i) throws DukeException {
+        if (i > tasks.getSize()) {
+            throw new DukeException("\nOOPS!!! Invalid index.\nPlease choose between 1 to " + tasks.getSize());
+        }
         String start = "\n Noted. I've removed this task: \n";
         String deleted = tasks.getTask(i-1).toString();
         tasks.deleteGivenTask(i - 1);

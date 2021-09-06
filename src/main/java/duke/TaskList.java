@@ -31,7 +31,7 @@ public class TaskList {
      * @param path takes in the path of the file
      * @throws FileNotFoundException throws an error if file not found
      */
-    public TaskList(Path path) throws FileNotFoundException {
+    public TaskList(Path path) throws FileNotFoundException, DukeException {
         File f = new File(String.valueOf(path));
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
@@ -50,7 +50,7 @@ public class TaskList {
      * Method to update task list.
      * @param arrOfInputs taking in an array of inputs
      */
-    private void updateList(String[] arrOfInputs) {
+    private void updateList(String[] arrOfInputs) throws DukeException {
         //Check for T, D, E and update in the list
         if (arrOfInputs[0].equals("T")) {
             String t = arrOfInputs[2];
