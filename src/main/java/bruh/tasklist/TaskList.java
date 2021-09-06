@@ -71,8 +71,7 @@ public final class TaskList implements Serializable {
         if (tasks.isEmpty()) {
             return "There are no " + filteredDesc + "tasks.";
         }
-        return String.format("Now you have %d %stask%s in the list.", tasks.size(), filteredDesc,
-                plurality);
+        return String.format("Now you have %d %stask%s in the list.", tasks.size(), filteredDesc, plurality);
     }
 
     /**
