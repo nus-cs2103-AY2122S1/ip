@@ -73,6 +73,7 @@ public class Parser {
                         DateTimeFormatter.ofPattern("dd MMM yyyy")).toString();
                 time = date + " " + time.substring(12);
             } else if (time.contains(":")) {
+                // do nothing
             } else {
                 time = LocalDate.parse(time, DateTimeFormatter.ofPattern("dd MMM yyyy")).toString();
             }
