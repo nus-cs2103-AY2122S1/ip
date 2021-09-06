@@ -41,8 +41,8 @@ public class Duke extends Application {
 
     public Duke() {
         this.ui = new Ui();
-        this.taskList = new TaskList();
         this.storage = new Storage("data/tasks.txt");
+        this.taskList = new TaskList(this.storage.readFile());
         this.isRunning = false;
     }
 

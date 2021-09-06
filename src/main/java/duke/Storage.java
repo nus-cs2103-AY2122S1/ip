@@ -81,12 +81,12 @@ public class Storage {
      * @return The ArrayList of Tasks read from the file.
      */
     public ArrayList<Task> readFile() {
-        try (BufferedReader br = new BufferedReader(new FileReader(this.taskFile))) {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(this.taskFile));
             ArrayList<Task> taskList = new ArrayList<>();
             String line;
-            while ((line = br.readLine()) != null && !line.equals("")) {
+            while ((line = br.readLine()) != null) {
                 this.processFileLine(line, taskList);
-                System.out.println(line);
             }
             return taskList;
         } catch (FileNotFoundException e) {
@@ -113,7 +113,7 @@ public class Storage {
      * @throws IOException
      */
     public void writeTasksToFile(TaskList taskList, File taskFile) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(this.taskFile));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(taskFile, false));
         for (int i = 0; i < taskList.numberOfTasks(); i++) {
             String line = taskList.getTask(i).getSaveText();
             writer.write(line);
