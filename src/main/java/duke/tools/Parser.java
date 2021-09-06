@@ -21,7 +21,7 @@ public class Parser {
      */
     public static String parse(String command) throws DukeException, IOException {
         if (command.contains("bye")) {
-            return "Bye. Hope to see you again soon!\n";
+            return "\n Bye. Hope to see you again soon!";
         }
         if (command.startsWith("list")) {
             return Duke.getTaskList();

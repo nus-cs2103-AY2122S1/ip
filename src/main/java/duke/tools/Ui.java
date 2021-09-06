@@ -38,7 +38,7 @@ public class Ui {
     }
 
     public void showGoodbyeMessage() {
-        String end_message = "Bye. I hope to talk to you again soon! :)";
+        String end_message = "\n Bye. I hope to talk to you again soon! :)";
         System.out.println(end_message + "\n" + DIVIDER);
     }
 
@@ -57,7 +57,7 @@ public class Ui {
     }
 
     public static void printMessage(String message) {
-        System.out.println(DIVIDER + "\t" + message + DIVIDER);
+        System.out.println(DIVIDER + "\t" + message);
     }
 }
 

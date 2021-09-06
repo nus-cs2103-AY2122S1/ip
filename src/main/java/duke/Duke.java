@@ -72,7 +72,6 @@ public class Duke {
                 ui.showDivider();
             }
         }
-        ui.showGoodbyeMessage();
     }
 
     /**
@@ -82,11 +81,11 @@ public class Duke {
      * @return result
      */
     public static String markDone(int i) throws DukeException {
-        String start = "Nice! I've marked this task as done: \n";
+        String start = "\n Nice! I've marked this task as done:";
         tasks.getTask(i - 1).markAsDone();
         TaskList.updateMemory(storage.getPath(), tasks);
         String res = tasks.getTask(i-1).toString();
-        String end = res + "\n";
+        String end = "\n" + "     " + res;
         return start + end;
     }
 
@@ -94,11 +93,10 @@ public class Duke {
      * Method to get the Duke TaskList
      */
     public static String getTaskList() {
-        String start = "Here are the tasks in your list: \n";
+        String start = "\n Here are the tasks in your list: \n";
         String res = "";
         for (int i = 0; i < tasks.getSize(); i++) {
-            res += (i + 1) + ". " + tasks.getTask(i) + "\n";
-            //System.out.println(res);
+            res += "\n" + (i + 1) + ". " + tasks.getTask(i);
         }
         return start + res;
     }
