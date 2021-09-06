@@ -8,20 +8,20 @@ import java.util.Scanner;
 
 
 public class FileUpdater {
-    private File f;
+    private File file;
     private TaskList lst;
 
     /**
      * Constructor for a fileupdater class
-     * @param f, file to be read by Duke
+     * @param file, file to be read by Duke
      * @param lst, tasklist for the list of tasks to be modified
      * @throws FileNotFoundException
      */
-    public FileUpdater(File f, TaskList lst) throws FileNotFoundException {
-        this.f = f;
+    public FileUpdater(File file, TaskList lst) throws FileNotFoundException {
+        this.file = file;
         this.lst = lst;
 
-        if (!f.exists()) {
+        if (!file.exists()) {
             throw new FileNotFoundException("file does not exist!");
         }
     }
@@ -31,7 +31,7 @@ public class FileUpdater {
      *
      */
     public File getFile(){
-        return this.f;
+        return this.file;
     }
 
     /**
@@ -43,7 +43,7 @@ public class FileUpdater {
             s = s + lst.get(i).toStringConvert() + "\n";
         }
         try {
-            FileWriter fw = new FileWriter(this.f);
+            FileWriter fw = new FileWriter(this.file);
             fw.write(s);
             fw.close();
         } catch (IOException e){
@@ -57,19 +57,19 @@ public class FileUpdater {
      */
     public void updateLine(String s){
         String fs = "";
-        String ans = "";
+        String answer = "";
         boolean isCompleted = false;
         if(findFirstSection(cut(s)).equals("1")) isCompleted = true;
 
         if(s.charAt(0) == 'T'){
             fs = "todo " + (cut(cut(s)));
-            ans = lst.addTodo(fs, isCompleted);
+            answer = lst.addTodo(fs, isCompleted);
         } else if(s.charAt(0) == 'E'){
             fs = "event " + findFirstSection(cut(cut(s))) + " /at " + (cut(cut(cut(s))));
-            ans =lst.addEvent(fs, isCompleted);
+            answer =lst.addEvent(fs, isCompleted);
         } else if(s.charAt(0) == 'D'){
             fs = "deadline " + findFirstSection(cut(cut(s))) + " /by " + (cut(cut(cut(s))));
-            ans = lst.addDeadline(fs, isCompleted);
+            answer = lst.addDeadline(fs, isCompleted);
         }
     }
 
@@ -85,7 +85,7 @@ public class FileUpdater {
      */
     public void load(){
         try {
-            Scanner sc = new Scanner(f);
+            Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
                 String line = sc.nextLine(); //scanning file's first input
                 this.updateLine(line); // read each line, convert the line into a command and input it to Duke

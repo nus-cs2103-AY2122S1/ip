@@ -1,9 +1,5 @@
 package duke;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-
 import java.util.Scanner;
 
 
@@ -31,44 +27,6 @@ public class GUI{
         System.out.println("What can I do for you? :)");
 
         return "Hello from\n" + "DUKE!" + "\nWhat can I do for you? :)";
-    }
-
-    /**
-     * function to check for DukeException in user's input and acts accordingly
-     * @params String s
-     * @return 0 if there is no error, 1 if DukeError exists
-     */
-    public int checkCommand(String s) {
-        try{
-            InputChecker ic = new InputChecker(s);
-            return 0;
-        } catch (DukeException e){
-            System.out.println(e.getMessage());
-            return 1;
-        }
-    }
-
-    /**
-     * function to set up the bot to take inputs and respond accordingly
-     *
-     */
-    public void listenForInputs(){
-        Scanner sc = new Scanner(System.in); //initialize scanner
-        while(isListening) {
-            String userInput = sc.nextLine(); //scanning user's first input
-            int errorCode = checkCommand(userInput); // check for Duke Exception
-
-            if(errorCode == 1) continue; // if DukeError is caught, continue on with the loop
-            if(userInput.equals("bye")){
-                isListening = false;
-                break;
-            }
-            respond(userInput);
-        }
-    }
-
-    public String goodbye(){
-        return("Goodbye, I will miss you!");
     }
 
     /**
