@@ -37,13 +37,13 @@ public class Duke {
      *
      */
     public Duke() {
-        ui = new Ui();
-        storage = new Storage("src/main/data/tasks.txt");
+        this.ui = new Ui();
+        this.storage = new Storage("src/main/data/tasks.txt");
         try {
-            tasks = new TaskList(storage.load());
+            this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
+            this.ui.showLoadingError();
+            this.tasks = new TaskList();
         }
     }
 
