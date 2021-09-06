@@ -27,6 +27,7 @@ public class FindCommand implements Command {
     @Override
     public void exec(String args) {
         List<Task> tasks = this.dukelist.findTasksByName(args);
+        assert tasks != null;
         this.ui.showTaskList(tasks);
     }
 
