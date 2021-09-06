@@ -175,11 +175,11 @@ public class Parser {
     }
 
     /**
-     * Extract the date for deadline and event commands.
-     * Converts it to readable format.
+     * Extracts the date for deadline and event commands.
+     * Converts it to a readable format.
      *
      * @param dateInput Date input by user.
-     * @return Reformatted date in String representation.
+     * @return String representation of reformatted date.
      */
     private String parseDateToString(String dateInput) {
         DateFormat sdf;

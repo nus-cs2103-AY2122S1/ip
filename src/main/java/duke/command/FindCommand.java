@@ -18,6 +18,6 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskHandler taskHandler, Storage storage, Ui ui) {
-        return taskHandler.filterListByKeyword(keyword);
+        return taskHandler.generateFilteredList(keyword);
     }
 }

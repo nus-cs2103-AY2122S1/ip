@@ -13,13 +13,4 @@ import duke.util.Ui;
  */
 public abstract class Command {
     public abstract String execute(TaskHandler taskHandler, Storage storage, Ui ui) throws DukeException;
-
-    /**
-     * Indicates whether the command is an exit command.
-     *
-     * @return True if the command is an exit command, False otherwise.
-     */
-    public boolean isExit() {
-        return false;
-    }
 }

@@ -37,7 +37,7 @@ public class Storage {
             }
             return loadedTasks;
         } catch (FileNotFoundException e) {
-            newFile();
+            createNewFile();
             return new ArrayList<>();
         }
     }
@@ -47,7 +47,7 @@ public class Storage {
      *
      * @return String message informing user that new file is created.
      **/
-    private static String newFile() {
+    private static String createNewFile() {
         try {
             file.getParentFile().mkdirs();
             file.createNewFile();
@@ -65,7 +65,7 @@ public class Storage {
      */
     public static void writeToFile(Task task) throws DukeIoException {
         if (!file.exists()) {
-            newFile();
+            createNewFile();
         }
         try {
             FileWriter fw = new FileWriter(FILE_NAME, true);
