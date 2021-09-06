@@ -24,8 +24,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/clown.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/pepeok.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/clown.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/pepeok.png"));
 
     @FXML
     public void initialize() {
@@ -48,9 +48,11 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        // Exit the program if bye command is used.
         if (Ui.isByeMsg(response)) {
             Platform.exit();
         }
+        // Otherwise, add new dialog boxes.
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

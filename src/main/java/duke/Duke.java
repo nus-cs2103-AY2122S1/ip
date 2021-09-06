@@ -5,8 +5,6 @@ package duke;
  */
 public class Duke {
     private final String filePath;
-    private Storage storage;
-    private TaskList tasks;
     private Ui ui;
 
     /**
@@ -25,9 +23,10 @@ public class Duke {
      */
     public String initialize() {
         try {
-            storage = new Storage(filePath);
-            tasks = storage.load();
+            Storage storage = new Storage(filePath);
+            TaskList tasks = storage.load();
             ui = new Ui(tasks, storage);
+            // Return the response from the ui initialization.
             return ui.initialize();
         } catch (DukeException e) {
             return e.getMessage();
