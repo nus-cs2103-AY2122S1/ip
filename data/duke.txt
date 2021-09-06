@@ -1,3 +1,3 @@
-T | 1 | say hi
 T | 1 | say bye
 T | 0 | hello everyone
+T | 1 | tutorial

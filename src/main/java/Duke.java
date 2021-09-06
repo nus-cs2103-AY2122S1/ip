@@ -4,15 +4,11 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
-
-
-
 public class Duke {
 
     private TaskList tasks;
     private Storage storage;
     private boolean isExit;
-
 
     /**
      * Constructor for Duke. Initialises tasklist and storage
