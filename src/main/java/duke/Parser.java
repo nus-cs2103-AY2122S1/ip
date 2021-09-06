@@ -12,6 +12,7 @@ class Parser {
      */
     static Task convertRecordToTask(String record) {
         String[] strings = record.split("&&");
+        assert strings.length > 0 : "Number of words in a record should > 0";
         switch (strings[0]) {
         case "T":
             return new Todo(strings[2], strings[1].equals("Done"));
@@ -33,6 +34,7 @@ class Parser {
      */
     static String parseInput(String input, TaskList taskList, Ui ui) {
         String[] infos = input.split(" ", 2);
+        assert infos.length > 0 : "Number of words in input should > 0";
         String type = infos[0];
         switch (type) {
         case "bye":
