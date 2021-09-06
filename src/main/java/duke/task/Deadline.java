@@ -1,26 +1,12 @@
 package duke.task;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a task with deadline
  */
-public class Deadline extends Task {
+public class Deadline extends TaskWithTime {
     protected LocalDateTime by;
-    private final DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("E, dd MMM yyyy HHmm");
-
-    /**
-     * Class Constructor
-     *
-     * @param description description of task
-     * @param by the deadline of the task
-     */
-    public Deadline(String description, String by) {
-        super(description);
-        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-        this.by = LocalDateTime.parse(by, inputFormatter);
-    }
 
     /**
      * Class Constructor
@@ -40,6 +26,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(outputFormatter) + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(super.outputFormatter) + ")";
     }
 }

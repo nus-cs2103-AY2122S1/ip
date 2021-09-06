@@ -1,8 +1,6 @@
 package duke;
 
 import duke.gui.Main;
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 import exception.DukeException;
@@ -72,16 +70,14 @@ public class Duke {
             }
 
             case DEADLINE: {
-                String[] separatedContent = parser.parseDescription(input, "by");
-                Task newTask = new Deadline(separatedContent[0], separatedContent[1]);
+                Task newTask = parser.parseDescription(input, "by");
                 this.tasks.add(newTask);
                 this.storage.writeTask(newTask.toString());
                 return this.ui.showAddTaskMessage(newTask, this.tasks.size());
             }
 
             case EVENT: {
-                String[] separatedContent = parser.parseDescription(input, "at");
-                Task newTask = new Event(separatedContent[0], separatedContent[1]);
+                Task newTask = parser.parseDescription(input, "at");
                 this.tasks.add(newTask);
                 this.storage.writeTask(newTask.toString());
                 return this.ui.showAddTaskMessage(newTask, this.tasks.size());

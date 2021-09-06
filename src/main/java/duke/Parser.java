@@ -1,8 +1,16 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
 import exception.InvalidTaskException;
 import exception.NoDescriptionException;
 import exception.WrongDescriptionException;
+
+
 
 
 /**
@@ -82,14 +90,14 @@ public class Parser {
      * @throws WrongDescriptionException if conjunction not included in user input
      */
 
-    public String[] parseDescription(String input, String conjunction) throws NoDescriptionException,
+    public Task parseDescription(String input, String conjunction) throws NoDescriptionException,
                                                                                 WrongDescriptionException {
         String[] parsed = input.split(" ", 2);
         if (parsed.length == 1) {
-            throw new NoDescriptionException("Please enter the task no.!");
+            throw new NoDescriptionException("Please enter the task description!");
         } else {
-            String description = parsed[1];
-            int index = description.indexOf(conjunction);
+            String taskDetails = parsed[1];
+            int index = taskDetails.indexOf(conjunction);
             if (index == -1) {
                 if (conjunction.equals("by")) {
                     throw new WrongDescriptionException("Deadline not included! Try: deadline ... /by ...");
@@ -97,7 +105,15 @@ public class Parser {
                     throw new WrongDescriptionException("Event time not included! Try: event ... /at ...");
                 }
             } else {
-                return new String[] {description.substring(0, index - 2), description.substring(index + 3)};
+                String description = taskDetails.substring(0, index - 2);
+                String inputTime = taskDetails.substring(index + 3);
+                DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                LocalDateTime dateTime = LocalDateTime.parse(inputTime, inputFormatter);
+                if (conjunction.equals("by")) {
+                    return new Deadline(description, dateTime);
+                } else {
+                    return new Event(description, dateTime);
+                }
             }
         }
     }
