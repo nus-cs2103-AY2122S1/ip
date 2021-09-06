@@ -16,8 +16,12 @@ public class Parser {
         String keyWord = "";
         if (command.equals("list")) {
             keyWord = "list";
+        } else if (command.equals("notes")) {
+            keyWord = "notes";
         } else if (command.startsWith("done")) {
             keyWord = "done";
+        } else if (command.startsWith("delete note")) {
+            keyWord = "delete note";
         } else if (command.startsWith("delete")) {
             keyWord = "delete";
         } else if (command.startsWith("todo")) {
@@ -32,6 +36,8 @@ public class Parser {
             keyWord = "find";
         } else if (command.startsWith("bye")) {
             keyWord = "bye";
+        } else if (command.startsWith("note")) {
+            keyWord = "note";
         }
         return keyWord;
     }
@@ -261,6 +267,92 @@ public class Parser {
         }
         if (num == 1) {
             result += "\tNo matching results found!\n";
+        }
+        return result;
+    }
+
+    /**
+     * Identifies the title and body of the note that is to be added and passes it to
+     * addNoteAndUpdate() method
+     * @param instruction User's input that followed the "note" command word
+     * @throws DukeException if there is no note title/no body/wrongly formatted note
+     * keyed in
+     * @throws IOException if there is an error in updated the list of notes saved in the user's
+     * hard disk
+     */
+    public static String parseNote(String instruction) throws IOException, DukeException {
+        StringBuilder noteTitle = new StringBuilder();
+        String noteBody;
+
+        String result = "";
+
+        int currIndex = 5;
+
+        //Checking for the '/' which separates the note title and body
+        while (currIndex < instruction.length() &&
+                !instruction.substring(currIndex).startsWith(" /")) {
+            noteTitle.append(instruction.charAt(currIndex));
+            currIndex++;
+        }
+
+        //If the '/' cannot be found, note is formatted wrongly
+        if (currIndex == instruction.length()) {
+            throw new DukeException("Oops, the note is formatted incorrectly! Please " +
+                    "write it as title /body");
+        } else {
+            noteBody = instruction.substring(currIndex + 2); //Extracting the note body
+
+            Note newNote = new Note(noteTitle.toString(), noteBody);
+            NoteList.addNoteAndUpdate(newNote);
+
+            result += "Got it! I've added this note:\n";
+            result += "\t" + newNote.toString() + "\n";
+            result += "Now you have " + NoteList.getCounter() + " note(s) in the list.\n";
+            return result;
+        }
+    }
+
+    /**
+     * Prints out the list of notes saved by Jarvis
+     */
+    public static String parseNoteList() {
+        int num = 1;
+        String result = "";
+
+        for (int i = 0; i < NoteList.getNoteList().size(); i++) {
+            result += num + ". " + NoteList.getNoteList().get(i).toString() + "\n";
+            num++;
+        }
+
+        return result;
+    }
+
+    /**
+     * Identifies the note that is to be deleted and passes it to deleteNoteAndUpdate() method
+     * @param instruction User's input that followed the "delete" command word
+     * @throws DukeException if there is no note that has the index keyed in by the user
+     * @throws IOException if there is an error in updated the list of note saved in the user's
+     * hard disk
+     */
+    public static String parseDeleteNote(String instruction) throws DukeException, IOException {
+        String result = "";
+        int noteNum = Integer.parseInt(instruction.substring(13)) - 1;
+
+        //If there is no corresponding note to the number keyed in by the user
+        if (noteNum >= TaskList.getCounter()) {
+            throw new DukeException("Hmm, I don't have task " + (noteNum + 1) +
+                    " in my list. Please key in 'list' if you'd like to " +
+                    "view your list of tasks again!");
+
+        //If there is a corresponding note to the number keyed in by the user
+        } else {
+            result += "Noted. I've removed this task from your main list:\n";
+            result += "\t" + NoteList.getNoteList().get(noteNum).toString() + "\n";
+
+            //Delete the note and update the list on notes on user's hard disk
+            NoteList.deleteNoteAndUpdate(NoteList.getNoteList().get(noteNum));
+
+            result += "Now you have " + NoteList.getCounter() + " note(s) in the list.\n";
         }
         return result;
     }
