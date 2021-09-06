@@ -14,6 +14,9 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     /** The deadline of the task */
     protected LocalDateTime by;
+    
+    /** The identifier of this task */
+    protected static String IDENTIFIER = "D"; 
 
     /**
      * Constructor for Deadline
@@ -52,7 +55,7 @@ public class Deadline extends Task {
     
     @Override
     public String convertToData() {
-        return String.format("D/%s/%s/%s", this.isDone ? "1" : "0", this.description, this.by);
+        return String.format("%s/%s/%s/%s", IDENTIFIER, this.isDone ? "1" : "0", this.description, this.by);
     }
 
     /**
@@ -62,8 +65,18 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String IDENTIFIER = "[D]";
-        return IDENTIFIER + super.toString() + " (by: " 
-                + this.by.format(DateTimeFormatter.ofPattern(OUTPUT_DATE_TIME_FORMAT_PATTERN)) + ")";
+        return String.format("[%s]%s (by: %s)", 
+                IDENTIFIER, 
+                super.toString(), 
+                this.by.format(DateTimeFormatter.ofPattern(OUTPUT_DATE_TIME_FORMAT_PATTERN)));
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Deadline) {
+            Deadline d = (Deadline) obj;
+            return d.description.equals(this.description) && d.by.isEqual(this.by);
+        }
+        return false;
     }
 }

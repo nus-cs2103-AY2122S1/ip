@@ -119,5 +119,14 @@ public class TaskList {
     public int getCount() {
         return this.count;
     }
-    
+
+    /**
+     * Checks if given task is already in the list
+     * 
+     * @param t the task to check for
+     * @return true if it exists in the list, false if otherwise
+     */
+    public boolean contains(Task t) {
+        return this.tasks.contains(t);
+    }
 }
