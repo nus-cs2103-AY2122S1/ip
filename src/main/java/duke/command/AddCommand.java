@@ -14,7 +14,7 @@ import duke.task.Task;
  * AddCommand class which indicates input is adding new tasks.
  */
 public class AddCommand extends Command {
-    private final boolean IS_EXIT = false;
+    private static final boolean IS_EXIT = false;
     private Task newTask;
 
     /**

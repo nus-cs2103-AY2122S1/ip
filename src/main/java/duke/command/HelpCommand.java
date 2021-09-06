@@ -6,11 +6,11 @@ import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 
-public class ExitCommand extends Command {
-    private static final boolean IS_EXIT = true;
+public class HelpCommand extends Command {
+    private static final boolean IS_EXIT = false;
 
     /**
-     * Exits the bot.
+     * Displays the list of commands for the bot.
      *
      * @param task The TaskList associated with the current bot.
      * @param userInt The User Interface associated with the current bot.
@@ -20,13 +20,13 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList task, Ui userInt, Storage storage) {
-        return userInt.exit();
+        return userInt.displayHelp();
     }
 
     /**
      * Gets the task associated with the command.
      *
-     * @return null, as no task is associated with an exit command.
+     * @return null, as no task is associated with a help command.
      */
     @Override
     public Task getTask() {

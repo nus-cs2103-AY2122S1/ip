@@ -12,7 +12,9 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
+import duke.command.TagCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -35,11 +37,11 @@ public class Parser {
         String[] inputArr = input.split(" ");
         switch (inputArr[0]) {
         case "list":
-           return parseList();
+            return parseList();
         case "done":
             return parseDone(inputArr);
         case "delete":
-           return parseDelete(inputArr);
+            return parseDelete(inputArr);
         case "todo":
             return parseToDo(inputArr);
         case "event":
@@ -50,15 +52,30 @@ public class Parser {
             return new ExitCommand();
         case "find":
             return parseFind(inputArr);
+        case "tag":
+            return parseTag(inputArr);
+        case "/help":
+            return new HelpCommand();
         default:
             throw new DukeException("I don't get what you mean? Try again!");
         }
     }
 
+    /**
+     * Parses the input in the case of a list command entered.
+     *
+     * @return The corresponding command for list.
+     */
     public static Command parseList() {
         return new ListCommand();
     }
 
+    /**
+     * Parses the input in the case of a done command entered.
+     *
+     * @param inputArr The input which has been split using whitespaces.
+     * @return The corresponding command for done.
+     */
     public static Command parseDone(String[] inputArr) {
         if (inputArr.length == 1) {
             throw new DukeException("Indicate the id of the task which you have completed, "
@@ -73,6 +90,12 @@ public class Parser {
         return new DoneCommand(taskIds);
     }
 
+    /**
+     * Parses the input in the case of a delete command entered.
+     *
+     * @param inputArr The input which has been split using whitespaces.
+     * @return The corresponding command for delete.
+     */
     public static Command parseDelete(String[] inputArr) {
         if (inputArr.length == 1) {
             throw new DukeException("Indicate the id of the task which you want to remove, "
@@ -87,14 +110,36 @@ public class Parser {
         return new DeleteCommand(taskIds);
     }
 
+    /**
+     * Parses the input in the case of a todo command entered.
+     *
+     * @param inputArr The input which has been split using whitespaces.
+     * @return The corresponding command for todo.
+     */
     public static Command parseToDo(String[] inputArr) {
         if (inputArr.length == 1) {
             throw new DukeException("Input in the format: todo *description*");
         }
-        String description = inputArr[1];
+
+        String description = "";
+        for (int i = 1; i < inputArr.length; i++) {
+            if (inputArr[i].charAt(0) != '(') {
+                description += (" " + inputArr[i]);
+            } else {
+                String duration = inputArr[i];
+                duration = duration.replaceAll("[()]", "");
+                return new AddCommand(new Task(description, duration));
+            }
+        }
         return new AddCommand(new Task(description));
     }
 
+    /**
+     * Parses the input in the case of a event command entered.
+     *
+     * @param input The input entered by the user.
+     * @return The corresponding command for event.
+     */
     public static Command parseEvent(String input) {
         String[] details = input.split(" /at ");
         String description = details[0].replaceFirst("event ", "");
@@ -114,6 +159,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the input in the case of a deadline command entered.
+     *
+     * @param input The input which has been entered by the user.
+     * @return The corresponding command for todo.
+     */
     public static Command parseDeadline(String input) {
         String[] details = input.split(" /by ");
         String description = details[0].replaceFirst("deadline ", "");
@@ -134,11 +185,31 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the input in the case of a find command entered.
+     *
+     * @param inputArr The input which has been entered by the user.
+     * @return The corresponding command for find.
+     */
     public static Command parseFind(String[] inputArr) {
         if (inputArr.length == 1) {
             throw new DukeException("Input the keyword to be used for the search!");
         } else {
             return new FindCommand(inputArr[1]);
+        }
+    }
+
+    /**
+     * Parses the input in the case of a tag command entered.
+     *
+     * @param inputArr The input which has been split using whitespaces.
+     * @return The corresponding command for tag.
+     */
+    public static Command parseTag(String[] inputArr) {
+        if (inputArr.length < 3) {
+            throw new DukeException("Indicate the task and the tag with the format: tag *task* *tag*!");
+        } else {
+            return new TagCommand(inputArr[1], inputArr[2]);
         }
     }
 

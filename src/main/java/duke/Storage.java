@@ -21,7 +21,7 @@ import duke.task.Task;
  * from the local file system.
  */
 public class Storage {
-    private final DateTimeFormatter DATETIMEFORMAT;
+    private static DateTimeFormatter DATETIMEFORMAT;
     private File file;
 
     /**
@@ -85,11 +85,11 @@ public class Storage {
             while ((text = bufferedReader.readLine()) != null) {
                 String[] lineArr = text.split(" \\| ");
                 switch (lineArr.length) {
-                case 3:
+                case 4:
                     Task toDo = loadToDo(lineArr);
                     saved.add(toDo);
                     break;
-                case 4:
+                case 5:
                     if (lineArr[0].equals("D")) {
                         Deadline deadline = loadDeadline(lineArr);
                         saved.add(deadline);
@@ -108,27 +108,56 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a todo object from the saved file.
+     * @param lineArr The line entry from the saved file which has been split by its seperator.
+     * @return A todo object in the previous iteration of the program.
+     */
     public Task loadToDo(String[] lineArr) {
         Task toDo = new Task(lineArr[2]);
         if (lineArr[1].equals("1")) {
             toDo.complete();
         }
+        String[] tags = lineArr[3].split("#");
+        for (int i = 1; i < tags.length; i++) {
+            toDo.tag(tags[i]);
+        }
+
         return toDo;
     }
 
+    /**
+     * Creates a deadline object from the saved file.
+     * @param lineArr The line entry from the saved file which has been split by its seperator.
+     * @return A deadline object in the previous iteration of the program.
+     */
     public Deadline loadDeadline(String[] lineArr) {
         Deadline deadline = new Deadline(lineArr[2], LocalDateTime.parse(lineArr[3],
                 this.DATETIMEFORMAT));
         if (lineArr[1].equals("1")) {
             deadline.complete();
         }
+        String[] tags = lineArr[4].split("#");
+        for (int i = 1; i < tags.length; i++) {
+            deadline.tag(tags[i]);
+        }
         return deadline;
     }
 
+    /**
+     * Creates an event object from the saved file.
+     * @param lineArr The line entry from the saved file which has been split by its seperator.
+     * @return A event object in the previous iteration of the program.
+     */
     public Event loadEvent(String[] lineArr) {
         Event event = new Event(lineArr[2], LocalDateTime.parse(lineArr[3], this.DATETIMEFORMAT));
         if (lineArr[1].equals("1")) {
             event.complete();
+        }
+        String savedTags = lineArr[4].replaceFirst("#", "");
+        String[] tags = savedTags.split("#");
+        for (int i = 1; i < tags.length; i++) {
+            event.tag(tags[i]);
         }
         return event;
     }
