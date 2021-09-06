@@ -18,6 +18,8 @@ public class Duke {
         } catch (DukeException e) {
             tasks = new TaskList();
         }
+        assert tasks != null;
+        assert storage != null;
     }
 
 
