@@ -5,6 +5,10 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import duke.exception.DukeException;
+import duke.exception.DukeFileNotFoundException;
+import duke.exception.DukeInvalidTaskNumberFormatException;
+import duke.exception.DukeTaskNotFoundException;
+import duke.exception.DukeTaskNumberOutOfBoundsException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -15,7 +19,7 @@ import duke.task.ToDo;
  * completed or simply printed out.
  */
 public class TaskList {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructor for empty TaskList.
@@ -43,10 +47,10 @@ public class TaskList {
      * @param taskNum the task number to mark as done
      * @throws DukeException if file not found
      */
-    private String completeTask(int taskNum) throws DukeException {
+    private String completeTask(int taskNum) throws DukeFileNotFoundException {
         Task task = tasks.get(taskNum - 1);
         task.setDone(true);
-        Duke.storage.saveTasks(this.getTasks());
+        Duke.getStorage().saveTasks(this.getTasks());
         return ("Good job! I've marked this task as done:\n\n\t" + task + "\n");
     }
 
@@ -55,11 +59,11 @@ public class TaskList {
      * 
      * @param num the task number to delete
      */
-    private String deleteTask(int num) throws DukeException {
+    private String deleteTask(int num) throws DukeFileNotFoundException {
         int taskIdx = num - 1;
         Task taskToDelete = tasks.get(taskIdx);
         tasks.remove(taskIdx);
-        Duke.storage.saveTasks(this.getTasks());
+        Duke.getStorage().saveTasks(this.getTasks());
         return ("Noted. I've removed this task:\n\t" + taskToDelete + "\n\tNow you have " + tasks.size()
                 + " tasks in the list.\n");
     }
@@ -71,13 +75,14 @@ public class TaskList {
      * @return Task number.
      * @throws DukeException Task number not valid
      */
-    private int getTaskNum(String command) throws DukeException {
+    private int getTaskNum(String command)
+            throws DukeInvalidTaskNumberFormatException, DukeTaskNumberOutOfBoundsException {
         try {
             return Integer.parseInt(command.split(" ")[1]);
         } catch (NumberFormatException err) {
-            throw new DukeException("Please use the task number instead of task name!\n");
+            throw new DukeInvalidTaskNumberFormatException();
         } catch (IndexOutOfBoundsException err) {
-            throw new DukeException("I'm sorry, but that task number is out of range.\n");
+            throw new DukeTaskNumberOutOfBoundsException();
         }
     }
 
@@ -85,11 +90,12 @@ public class TaskList {
      * Handles task deletion.
      * 
      * @param command user input to parse
-     * @throws DukeException task not specified
+     * @throws DukeTaskNotFoundException task not specified
      */
-    public String handleDelete(String command) throws DukeException {
+    public String handleDelete(String command) throws DukeTaskNotFoundException, DukeInvalidTaskNumberFormatException,
+            DukeTaskNumberOutOfBoundsException, DukeFileNotFoundException {
         if (command.equals("delete")) {
-            throw new DukeException("You need to specify the task!\n");
+            throw new DukeTaskNotFoundException();
         }
 
         int taskNum = getTaskNum(command);
@@ -102,9 +108,10 @@ public class TaskList {
      * @param command user input to parse
      * @throws DukeException task not specified
      */
-    public String handleDone(String command) throws DukeException {
+    public String handleDone(String command) throws DukeTaskNotFoundException, DukeInvalidTaskNumberFormatException,
+            DukeTaskNumberOutOfBoundsException, DukeFileNotFoundException {
         if (command.equals("done")) {
-            throw new DukeException("You need to specify the task!\n");
+            throw new DukeTaskNotFoundException();
         }
 
         int taskNum = getTaskNum(command);
@@ -113,24 +120,24 @@ public class TaskList {
 
     /**
      * Adds a task to the ArrayList of tasks.
-     * 
+     *
      * @param t the task to add
      */
-    private String addTask(Task t) throws DukeException {
+    private String addTask(Task t) throws DukeFileNotFoundException {
         this.tasks.add(t);
-        Duke.storage.saveTasks(this.getTasks());
+        Duke.getStorage().saveTasks(this.getTasks());
         return ("Got it. I've added this task:\n\t" + t + "\n\tNow you have " + tasks.size() + " tasks in the list.\n");
     }
 
     /**
      * Adds ToDo task to the ArrayList of tasks.
-     * 
+     *
      * @param command user input to extract task
      * @throws DukeException Task not specified
      */
-    public String addToDo(String command) throws DukeException {
+    public String addToDo(String command) throws DukeTaskNotFoundException, DukeFileNotFoundException {
         if (command.equals("todo")) {
-            throw new DukeException("You need to specify which task you want to add!\n");
+            throw new DukeTaskNotFoundException();
         }
 
         String todo = command.split("todo")[1].trim();
@@ -139,7 +146,7 @@ public class TaskList {
 
     /**
      * Adds event task with datetime.
-     * 
+     *
      * @param command User input to extract task and datetime
      * @throws DukeException Task not specified
      */
@@ -157,7 +164,7 @@ public class TaskList {
 
     /**
      * Adds deadline task with date/time.
-     * 
+     *
      * @param command User input to extract task and datetime
      * @throws DukeException Task not specified
      */
@@ -213,7 +220,7 @@ public class TaskList {
 
     /**
      * Gets the datetime from the split original command.
-     * 
+     *
      * @param commandSplit the original command split into 2 parts
      * @return the datetime in String format
      */
@@ -223,6 +230,9 @@ public class TaskList {
 
     /**
      * Prints all the tasks in the ArrayList of tasks.
+     *
+     * @param keyword string to find in tasks
+     * @return all tasks containing keyword
      */
     public String printTasks(String keyword) {
         if (tasks.isEmpty()) {
@@ -242,6 +252,13 @@ public class TaskList {
         return taskListMessage.toString();
     }
 
+    /**
+     * Searches for tasks.
+     *
+     * @param command find command typed by the user
+     * @return the tasks matching the keywords provided by the user
+     * @throws DukeException no keyword specified
+     */
     public String findTasks(String command) throws DukeException {
         if (command.trim().equals("find")) {
             throw new DukeException("You need to specify a keyword!");

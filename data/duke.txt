@@ -1,3 +1,6 @@
 [D][X] ip (by: 2021-03-23)
 [E][X] diveen (at: today 9pm)
 [D][ ] tp (by: 2021-09-01)
+[D][ ] sleep (by: 2011-09-02)
+[E][ ] meeting (at: sunday 10pm)
+[D][ ] ip (by: 2021-02-02)
