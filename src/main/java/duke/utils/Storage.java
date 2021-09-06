@@ -77,10 +77,10 @@ public class Storage {
 
     public String convertTaskToString(Task task){
 
+
         // Example storage in file:
-        // T | 1 | read book
-        // D | 0 | return book | June 6th
-        // E | 0 | project meeting | Aug 6th 2-4pm
+        // T;0;readbook
+        // D;0;return book ;2/12/2019 1800
 
         String taskType = task.getType() == Task.TaskType.TODO ? "T" :
                 task.getType() == Task.TaskType.EVENT ? "E" : "D";
@@ -107,10 +107,10 @@ public class Storage {
 
     public Task convertStringToTask(String line){
 
-        // Example storage in file:
-        // T | 1 | read book
-        // D | 0 | return book | June 6th
-        // E | 0 | project meeting | Aug 6th 2-4pm
+         // Example storage in file:
+         // T;0;readbook
+         // D;0;return book ;2/12/2019 1800
+
 
         String[] lineSplit = line.split(DELIMITER);
         //System.out.println(lineSplit.length);
