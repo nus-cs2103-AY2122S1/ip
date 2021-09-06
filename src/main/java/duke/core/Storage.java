@@ -15,7 +15,12 @@ import duke.exception.DukeException;
 public class Storage {
     private String filePath;
 
+    /**
+     * Initialises Storage object
+     * @param filePath the relative path of the save file managed by storage
+     */
     public Storage(String filePath) {
+        assert(filePath != null);
         this.filePath = filePath;
     }
 
