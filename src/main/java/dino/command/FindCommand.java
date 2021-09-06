@@ -30,7 +30,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(Storage storage, TaskList taskList) throws InvalidInputException, TaskNotFoundException {
-        return taskList.searchKeyword(this.getKeyword());
+        return taskList.searchTaskFromKeyword(this.getKeyword());
     }
 
     /**
