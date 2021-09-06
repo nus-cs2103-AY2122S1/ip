@@ -28,7 +28,7 @@ public class Parser {
 
     /**
      * Makes sense of the user input.
-     * Handles: bye, list, done, delete, todo, deadline, event, find commands.
+     * Handles: bye, list, done, delete, todo, deadline, event, find, remind commands.
      *
      * @param input the user input from the Ui.
      * @return a boolean that determines if Duke is still inSession.
@@ -66,6 +66,9 @@ public class Parser {
             break;
         case ("find"):
             response = getResponseForFind(input);
+            break;
+        case ("remind"):
+            response = getResponseForRemind(input);
             break;
         default:
             assert false;
@@ -259,6 +262,33 @@ public class Parser {
                     + "Please include a keyword for your search.");
         }
         return taskList.findTasks(searchInfo[1]);
+    }
+
+    /**
+     * Returns the response for "remind" case.
+     *
+     * @param input the input by the user.
+     * @return the response for "remind".
+     * @throws DukeException is thrown when no period is provided.
+     */
+    private String getResponseForRemind(String input) throws DukeException {
+        String[] reminderInfo = input.split(" ", 2);
+        String result = "";
+        if (reminderInfo.length == 1) {
+            throw new DukeException(":( OOPS!!! "
+                    + "Please include a period for your reminder.");
+        }
+        boolean isValidInput = reminderInfo[1].equals("today")
+                || reminderInfo[1].equals("tomorrow")
+                || reminderInfo[1].equals("week")
+                || reminderInfo[1].equals("month");
+        if (isValidInput) {
+            result = taskList.getTasksForReminder(reminderInfo[1]);
+        } else {
+            throw new DukeException(":( OOPS!!! "
+                    + "I can only show reminder for 'today', 'tomorrow', 'week' or 'month'.");
+        }
+        return result;
     }
 
     /**

@@ -19,7 +19,6 @@ import duke.task.Todo;
  */
 public class Storage {
     private final String filePath;
-    private final String DONE = "[X]";
 
     /**
      * Initialises Storage with a filePath for the dataFile.
@@ -116,7 +115,7 @@ public class Storage {
      */
     private Task getTodo(String taskDetail, String taskStatus) {
         Task result = new Todo(taskDetail);
-        if (taskStatus.equals(DONE)) {
+        if (taskStatus.equals("[X]")) {
             result.setDone();
         }
         return result;
@@ -147,7 +146,7 @@ public class Storage {
         } else {
             assert false;
         }
-        if (taskStatus.equals(DONE)) {
+        if (taskStatus.equals("[X]")) {
             result.setDone();
         }
         return result;
@@ -178,7 +177,7 @@ public class Storage {
         } else {
             assert false;
         }
-        if (taskStatus.equals(DONE)) {
+        if (taskStatus.equals("[X]")) {
             result.setDone();
         }
         return result;

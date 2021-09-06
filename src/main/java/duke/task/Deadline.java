@@ -36,6 +36,16 @@ public class Deadline extends Task {
     }
 
     @Override
+    public boolean hasDate() {
+        return true;
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return byDate;
+    }
+
+    @Override
     public String toString() {
         if (byTime != null) {
             return "[D]" + super.toString() + " (by: "

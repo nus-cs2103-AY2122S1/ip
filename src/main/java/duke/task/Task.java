@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * A Task is something that needs to be done.
  */
@@ -51,6 +53,26 @@ public class Task {
      */
     public String getDescription() {
         return this.description;
+    }
+
+    /**
+     * Returns true if the Task has an associated date.
+     *
+     * @return true if the Task has an associated date.
+     */
+    public boolean hasDate() {
+        return false;
+    }
+
+    /**
+     * Returns the date associated with the Task.
+     * If the Task does not have an associated date,
+     * returns the date today.
+     *
+     * @return the atDate.
+     */
+    public LocalDate getDate() {
+        return LocalDate.now();
     }
 
     @Override

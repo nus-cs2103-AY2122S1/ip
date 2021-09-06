@@ -36,6 +36,15 @@ public class Event extends Task {
     }
 
     @Override
+    public boolean hasDate() {
+        return true;
+    }
+
+    public LocalDate getDate() {
+        return atDate;
+    }
+
+    @Override
     public String toString() {
         if (atTime != null) {
             return "[E]" + super.toString() + " (at: "

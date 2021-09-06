@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * A Todo is a Task without a deadline or date.
  */
@@ -11,6 +13,16 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         super(description);
+    }
+
+    @Override
+    public boolean hasDate() {
+        return false;
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return LocalDate.now();
     }
 
     @Override

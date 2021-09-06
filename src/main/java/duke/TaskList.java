@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -100,7 +101,9 @@ public class TaskList {
      *
      * @return the size of the tasksList.
      */
-    public int getSize() { return tasks.size(); }
+    public int getSize() {
+        return tasks.size();
+    }
 
     /**
      * Prints the list of tasks with description matching the keyWord.
@@ -120,6 +123,45 @@ public class TaskList {
         } else {
             return new TaskList(filteredTasks).display("I have found "
                     + "these tasks in your list matching the keyword:");
+        }
+    }
+
+    /**
+     * Finds the list of tasks within the period of the reminder.
+     *
+     * @param period the period of the reminder.
+     * @return the list of tasks as a String.
+     */
+    public String getTasksForReminder(String period) {
+        ArrayList<Task> filteredTasks = tasks.stream()
+                .filter(t -> filterTask(t, period))
+                .collect(Collectors.toCollection(ArrayList::new));
+        if (filteredTasks.size() == 0) {
+            return "You have no tasks for " + period;
+        } else {
+            return new TaskList(filteredTasks).display("I have found "
+                    + "these tasks in your list for " + period);
+        }
+    }
+
+    private boolean filterTask(Task task, String period) {
+        if (task.hasDate()) {
+            switch (period) {
+            case "today":
+                return task.getDate().isEqual(LocalDate.now());
+            case "tomorrow":
+                return task.getDate().isEqual(LocalDate.now().plusDays(1));
+            case "week":
+                return task.getDate().isBefore(LocalDate.now().plusWeeks(1))
+                        && task.getDate().isAfter(LocalDate.now().minusDays(1));
+            case "month":
+                return task.getDate().getMonth().equals(LocalDate.now().getMonth());
+            default:
+                assert false;
+                return false;
+            }
+        } else {
+            return true;
         }
     }
 }
