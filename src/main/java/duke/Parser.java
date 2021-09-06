@@ -12,16 +12,23 @@ import duke.exceptions.NoArgumentDukeException;
 import duke.exceptions.WrongArgumentDukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
+import duke.tasks.RecurringTask;
 import duke.tasks.Todo;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
     /** For separation of name and date in deadline input */
-    private static final String DEADLINE_DELIMITER = " /by";
+    private static final String DEADLINE_DELIMITER = " /by ";
 
     /** For separation of name and date in event input */
-    private static final String EVENT_DELIMITER = " /at";
+    private static final String EVENT_DELIMITER = " /at ";
+
+    /** For separation of name and date in recurring task input */
+    private static final String RECURRING_DELIMITER_1 = " /by ";
+
+    /** For separation of date and interval in recurring task input */
+    private static final String RECURRING_DELIMITER_2 = " /every ";
 
     /**
      * Reads and returns the corresponding command from a given string.
@@ -54,6 +61,8 @@ public class Parser {
                 return delete(getArgs(command));
             case "find":
                 return find(getArgs(command));
+            case "recurring":
+                return addRecurring(getArgs(command));
             default:
                 throw new InvalidCommandDukeException();
             }
@@ -72,7 +81,8 @@ public class Parser {
             LocalDate date = getLocalDate(strArr[1]);
             return new AddTaskCommand(new Deadline(strArr[0], date));
         } else {
-            throw new WrongArgumentDukeException("Did you forget to use /by");
+            throw new WrongArgumentDukeException(String.format("Did you forget to use%s",
+                    DEADLINE_DELIMITER));
         }
 
     }
@@ -83,9 +93,25 @@ public class Parser {
             LocalDate date = getLocalDate(strArr[1]);
             return new AddTaskCommand(new Event(strArr[0], date));
         } else {
-            throw new WrongArgumentDukeException("Did you forget to use /at");
+            throw new WrongArgumentDukeException(String.format("Did you forget to use%s",
+                    EVENT_DELIMITER));
         }
+    }
 
+    private Command addRecurring(String args) throws WrongArgumentDukeException {
+        String[] strArr = args.split(RECURRING_DELIMITER_1);
+        if (strArr.length < 2) {
+            throw new WrongArgumentDukeException(String.format("Did you forget to use%s",
+                    RECURRING_DELIMITER_1));
+        }
+        String[] strArr2 = strArr[1].split(RECURRING_DELIMITER_2);
+        if (strArr2.length < 2) {
+            throw new WrongArgumentDukeException(String.format("Did you forget to use%s",
+                    RECURRING_DELIMITER_2));
+        }
+        LocalDate date = getLocalDate(strArr2[0]);
+        int intervalInDays = getInt(strArr2[1]);
+        return new AddTaskCommand(new RecurringTask(strArr[0], date, intervalInDays));
     }
 
     /**
@@ -159,6 +185,21 @@ public class Parser {
             return LocalDate.parse(str);
         } catch (DateTimeParseException e) {
             throw new WrongArgumentDukeException("Cannot parse date.");
+        }
+    }
+
+    /**
+     * Returns an int from string.
+     *
+     * @param str String representation of a number.
+     * @return Int value represented by string.
+     * @throws WrongArgumentDukeException If str does not represent a number.
+     */
+    private int getInt(String str) throws WrongArgumentDukeException {
+        try {
+            return Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            throw new WrongArgumentDukeException("Cannot parse number");
         }
     }
 }

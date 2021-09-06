@@ -30,7 +30,7 @@ public class Event extends Task {
         if (o == this) {
             return true;
         }
-        if (!(o instanceof Task)) {
+        if (!(o instanceof Event)) {
             return false;
         }
         Event e = (Event) o;

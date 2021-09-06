@@ -38,6 +38,13 @@ public class TaskUtils {
                 }
                 toReturn = new Event(segments[2], LocalDate.parse(segments[3]));
                 break;
+            case "R":
+                if (segments.length != 5) {
+                    return null;
+                }
+                toReturn = new RecurringTask(segments[2], LocalDate.parse(segments[3]),
+                        Integer.parseInt(segments[4]));
+                break;
             default:
                 return null;
         }
