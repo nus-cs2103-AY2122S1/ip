@@ -41,14 +41,15 @@ public class Main extends Application {
     private void loadCustomAvatarImagesFromArgs(MainWindow mainWindow) {
         List<String> args = getParameters().getRaw();
         Image[] images = loadImagesFromFiles(args);
-        if (images.length >= 1) {
-            mainWindow.setUserImage(images[0]);
-        }
-        if (images.length >= 2) {
-            mainWindow.setDukeImage(images[1]);
-        }
         if (images.length >= 3) {
-            mainWindow.setBackgroundImage(images[2]);
+            mainWindow.setBackgroundImage(images[0]);
+            mainWindow.setUserImage(images[1]);
+            mainWindow.setDukeImage(images[2]);
+        } else if (images.length == 2) {
+            mainWindow.setBackgroundImage(images[0]);
+            mainWindow.setUserImage(images[1]);
+        } else if (images.length == 1) {
+            mainWindow.setBackgroundImage(images[0]);
         }
     }
 
