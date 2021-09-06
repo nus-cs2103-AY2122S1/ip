@@ -8,6 +8,8 @@ import bruh.ui.Ui;
  * Represents a command which deletes a specified task from the task list.
  */
 public class DeleteTaskCommand extends Command {
+    private static final String DESCRIPTION = "Got it. I've removed this task:\n  %s\n%s";
+
     private final int indexToDelete;
 
     /**
@@ -20,8 +22,8 @@ public class DeleteTaskCommand extends Command {
     }
 
     @Override
-    public String runAndGenerateDescription(TaskList taskList, Ui ui, Storage storage) {
-        return String.format("Got it. I've removed this task:\n  %s\n%s", taskList.remove(indexToDelete).toString(),
-                taskList.getTaskCountDesc());
+    protected String runAndGenerateDescription(TaskList taskList, Ui ui, Storage storage) {
+        return String.format(DESCRIPTION, taskList.remove(indexToDelete).toString(),
+                taskList.getTaskListDesc());
     }
 }

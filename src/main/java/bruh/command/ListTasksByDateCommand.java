@@ -11,6 +11,8 @@ import bruh.ui.Ui;
  * Represents a command to list all tasks which match a specified date.
  */
 public class ListTasksByDateCommand extends ListTasksCommand {
+    private static final String MISSING_ARG_ERROR_MSG = "Please specify a date & time.";
+
     private final LocalDateTimeOrString dateTimeOrString;
 
     /**
@@ -21,7 +23,7 @@ public class ListTasksByDateCommand extends ListTasksCommand {
      */
     public ListTasksByDateCommand(String input) throws MissingArgumentException {
         String[] inputs = input.split("/date ", 2);
-        Parser.checkMissingArguments(inputs, "Please specify a date & time.");
+        Parser.checkMissingArguments(inputs, MISSING_ARG_ERROR_MSG);
         this.dateTimeOrString = new LocalDateTimeOrString(inputs[1]);
     }
 

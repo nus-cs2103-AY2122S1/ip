@@ -9,6 +9,8 @@ import bruh.ui.Ui;
  * Represents a command which adds a task to the task list.
  */
 public class AddTaskCommand extends Command {
+    private static final String DESCRIPTION = "Got it. I've added this task:\n  %s\n%s";
+
     private final Task taskToAdd;
 
     /**
@@ -21,9 +23,8 @@ public class AddTaskCommand extends Command {
     }
 
     @Override
-    public String runAndGenerateDescription(TaskList taskList, Ui ui, Storage storage) {
+    protected String runAndGenerateDescription(TaskList taskList, Ui ui, Storage storage) {
         taskList.add(taskToAdd);
-        return String.format("Got it. I've added this task:\n  %s\n%s",
-                taskToAdd.toString(), taskList.getTaskCountDesc());
+        return String.format(DESCRIPTION, taskToAdd.toString(), taskList.getTaskListDesc());
     }
 }
