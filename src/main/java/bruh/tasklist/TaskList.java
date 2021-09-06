@@ -102,8 +102,8 @@ public class TaskList implements Serializable {
      * @return A new task list containing the filtered items.
      */
     private TaskList filterByPredicate(Predicate<Task> predicate) {
-        List<Task> filtered = tasks.stream().filter(predicate).collect(Collectors.toList());
-        return new TaskList(filtered);
+        List<Task> filteredTasks = tasks.stream().filter(predicate).collect(Collectors.toList());
+        return new TaskList(filtereTasks);
     }
 
     /**
