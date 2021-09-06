@@ -13,7 +13,7 @@ public class Parser {
      * Returns the command to be executed in response to the user's command.
      *
      * @param command Input by the user.
-     * @return
+     * @return Parsed command.
      */
     public static Command parse(String command) {
         if(command.equals("bye")) {

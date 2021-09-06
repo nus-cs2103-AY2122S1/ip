@@ -3,6 +3,3 @@ T/1/eat
 T/1/yippee
 T/1/bye
 T/1/heyo
-T/0/hey there
-D/1/return book/02/12/2020 18:00
-E/1/meet friend/03/12/2021 18:00-19:00
