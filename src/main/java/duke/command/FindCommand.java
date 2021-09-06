@@ -1,6 +1,9 @@
 package duke.command;
 
+import duke.task.Task;
 import duke.util.ToDoList;
+
+import java.util.ArrayList;
 
 /**
  * FindCommand is a Command that encapsulates the attributes and behavior of looking for a Task
@@ -23,6 +26,22 @@ public class FindCommand extends Command {
 
     @Override
     public String execute() {
-        return this.tdl.find(target);
+        Task[] result = this.tdl.find(target);
+        Integer number = 1;
+        String response = "";
+        if (result.length > 0) {
+            response += "Here are the matching tasks in your list: \n";
+            for (Task t : result) {
+                if (t.isCompleted()) {
+                    response += number.toString() + "." + t.logo() + "[X] " + t.toString() + "\n";
+                } else {
+                    response += number.toString() + "." + t.logo() + "[ ] " + t.toString() + "\n";
+                }
+                number++;
+            }
+        } else {
+            response += "No luck here.. Sorry buddy.";
+        }
+        return response;
     }
 }
