@@ -17,7 +17,7 @@ public abstract class Task implements Serializable {
      * Constructor for a task that can be mark as done.
      *
      * @param description The description of the task.
-     * @param symbol      The symbol representing the task type.
+     * @param symbol The symbol representing the task type.
      */
     public Task(String description, char symbol) {
         this.description = description;
@@ -28,11 +28,13 @@ public abstract class Task implements Serializable {
     /**
      * Returns the appropriate task, as specified by the keyword in the input.
      *
-     * @param inputs An array of the string input, divided into the first word and the rest of the input.
+     * @param inputs An array of the string input, divided into the first word and the rest of the
+     *        input.
      * @return The task as specified by the input.
      * @throws BruhException if an error occurs in creating the task.
      */
     public static Task createTask(String[] inputs) throws BruhException {
+        assert inputs.length == 2 : "2 elements in inputs array";
         String keyword = inputs[0];
 
         switch (keyword) {
@@ -47,8 +49,7 @@ public abstract class Task implements Serializable {
     }
 
     /**
-     * Checks if a task's date & time corresponds with the
-     * specified date & time.
+     * Checks if a task's date & time corresponds with the specified date & time.
      *
      * @param dateTimeOrString The specified date & time to be checked against.
      * @return True if the date & time match, false otherwise.
@@ -70,8 +71,9 @@ public abstract class Task implements Serializable {
     /**
      * Marks the task as done.
      */
-    public void markAsDone() {
+    public Task markAsDone() {
         isDone = true;
+        return this;
     }
 
     private String getStatusIcon() {

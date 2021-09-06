@@ -7,20 +7,21 @@ import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
 /**
- * A class which stores a date as a LocalDateTime object if provided
- * with correctly formatted string input, else simply as a string.
+ * A class which stores a date as a LocalDateTime object if provided with correctly formatted string
+ * input, else simply as a string.
  */
 public class LocalDateTimeOrString implements Serializable {
-    private static final DateTimeFormatter IN_FORMATTER = DateTimeFormatter
-            .ofPattern("" + "[dd-MM-yyyy HHmm]" + "[dd/MM/yyyy HHmm]");
-    private static final DateTimeFormatter OUT_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy, h:mm a");
+    private static final DateTimeFormatter IN_FORMATTER =
+            DateTimeFormatter.ofPattern("" + "[dd-MM-yyyy HHmm]" + "[dd/MM/yyyy HHmm]");
+    private static final DateTimeFormatter OUT_FORMATTER =
+            DateTimeFormatter.ofPattern("dd MMM yyyy, h:mm a");
 
     private LocalDateTime dateTime;
     private String dateTimeString;
 
     /**
-     * Constructor for an object which stores a date as a LocalDateTime object if provided
-     * with correctly formatted string input, else simply as a string.
+     * Constructor for an object which stores a date as a LocalDateTime object if provided with
+     * correctly formatted string input, else simply as a string.
      *
      * @param dateTimeInput The string input to be parsed as a date & time, if possible.
      */
@@ -34,6 +35,7 @@ public class LocalDateTimeOrString implements Serializable {
 
     @Override
     public String toString() {
+        assert (dateTime != null || dateTimeString != null) : "Cannot be both null";
         return (dateTime != null) ? OUT_FORMATTER.format(dateTime) : dateTimeString;
     }
 
@@ -41,12 +43,14 @@ public class LocalDateTimeOrString implements Serializable {
     public boolean equals(Object o) {
         if (this == o) {
             return true;
-        } else if (o == null) {
-            return false;
-        } else if (!(o instanceof LocalDateTimeOrString)) {
+        } else if (o == null || !(o instanceof LocalDateTimeOrString)) {
             return false;
         }
         LocalDateTimeOrString other = (LocalDateTimeOrString) o;
-        return Objects.equals(dateTime, other.dateTime) && Objects.equals(dateTimeString, other.dateTimeString);
+        assert (dateTime != null || dateTimeString != null) : "Cannot be both null";
+        assert (other.dateTime != null
+                || other.dateTimeString != null) : "Compared datetime - cannot be both null";
+        return Objects.equals(dateTime, other.dateTime)
+                && Objects.equals(dateTimeString, other.dateTimeString);
     }
 }
