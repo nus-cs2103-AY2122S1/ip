@@ -10,8 +10,6 @@ import duke.Ui;
 import duke.tasks.Deadline;
 import duke.tasks.Task;
 
-
-
 /**
  * The DeadlineCommand handles when a deadline command is entered.
  */

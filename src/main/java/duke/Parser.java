@@ -17,6 +17,7 @@ import duke.commands.TodoCommand;
  * Represents a parser which parses input from the user.
  */
 public class Parser {
+
     public static final Pattern COMMAND_FORMAT = Pattern.compile("(?<command>\\S+)(?<arguments>.*)");
 
     /**

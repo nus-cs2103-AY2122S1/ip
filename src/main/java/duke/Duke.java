@@ -34,7 +34,12 @@ public class Duke extends Application {
         }
     }
 
-
+    /**
+     * Gets the response from Duke based on the input from the user.
+     *
+     * @param input The input String entered by the user.
+     * @return The response from Duke.
+     */
     public String getResponse(String input) {
         try {
             Command c = parser.parse(input);
@@ -43,11 +48,9 @@ public class Duke extends Application {
                 System.exit(0);
             }
             return response;
-
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            return ui.showError(e.getMessage());
         }
-        return "";
     }
 
     @Override

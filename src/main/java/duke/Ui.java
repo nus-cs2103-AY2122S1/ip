@@ -9,6 +9,8 @@ public class Ui {
 
     /**
      * Displays the goodbye message.
+     *
+     * @return The goodbye string.
      */
     public String showGoodbye() {
         return "Exiting the program, goodbye!";
@@ -18,13 +20,15 @@ public class Ui {
      * Displays the loading error message.
      */
     public void showLoadingError() {
-        System.out.println("No taskfile found, creating a new taskfile...\n");
+        System.out.println("No task file found, creating a new task file...\n");
     }
 
     /**
      * Displays the message when a Task is added to a TaskList.
+     *
      * @param task The task added to the TaskList.
      * @param taskList The TaskList with the Task added.
+     * @return A String listing all the tasks in the TaskList.
      */
     public String showTaskAdded(Task task, TaskList taskList) {
         return "Got it. I have added this task:\n  " + task + "\n Now you have "
@@ -33,8 +37,10 @@ public class Ui {
 
     /**
      * Displays the message when a Task is deleted from a TaskList.
+     *
      * @param task The task deleted from the TaskList.
      * @param taskList The TaskList the Task is deleted from.
+     * @return A String indicating which task was removed.
      */
     public String showTaskDeleted(Task task, TaskList taskList) {
         return "Noted. I have removed this task:\n  " + task + "\n Now you have "
@@ -45,6 +51,7 @@ public class Ui {
      * Displays the message shown when a Task is marked as done
      *
      * @param task The Task which is marked as done.
+     * @return A String which indicates which task was marked as done.
      */
     public String showTaskDone(Task task) {
         return "Great! I've marked this task as done:\n" + task + "\n";
@@ -54,15 +61,17 @@ public class Ui {
      * Displays an error message with the given error.
      *
      * @param error The error message to be displayed.
+     * @return The String containing the error message.
      */
-    public void showError(String error) {
-        System.out.println("ERROR: " + error);
+    public String showError(String error) {
+        return "ERROR: " + error;
     }
 
     /**
      * Displays the contents of the TaskList
      *
      * @param taskList The TaskList whose contents are to be displayed.
+     * @return A String with all the tasks in the list.
      */
     public String showList(TaskList taskList) {
         return "Here are the tasks in your list: " + taskList;
@@ -70,7 +79,9 @@ public class Ui {
 
     /**
      * Displays the matching tasks in the list.
+     *
      * @param taskList List of matching tasks.
+     * @return A string with all matching tasks.
      */
     public String showMatchingTasks(TaskList taskList) {
         return "Here are the matching tasks in your list: " + taskList;
