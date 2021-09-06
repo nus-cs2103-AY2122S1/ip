@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.Arrays;
+
 /**
  * Represents a fixed list of supported user commands.
  *
@@ -15,11 +17,10 @@ public enum CommandType {
      * @return Command representing the given string command, or null if no command matched.
      */
     public static CommandType getCommand(String commandText) {
-        for (CommandType cmd : CommandType.values()) {
-            if (commandText.toUpperCase().equals(cmd.toString())) {
-                return cmd;
-            }
-        }
-        return null;
+        return Arrays.stream(CommandType.values())
+                .reduce(null, (selectedCmd, currentCmd) ->
+                        selectedCmd == null && commandText.toUpperCase().equals(currentCmd.toString())
+                        ? currentCmd
+                        : selectedCmd);
     }
 }
