@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import duke.exception.DatabaseAccessException;
+import duke.task.DurationTask;
 import duke.task.Task;
 import duke.task.TaskType;
 
@@ -19,7 +20,8 @@ import duke.task.TaskType;
  */
 public class Sqlite extends Database {
     private static final String SQLITE_CREATE_TASK_TABLE_STATEMENT = "CREATE TABLE IF NOT EXISTS " + TASK_TABLE_NAME
-            + " (`type` STRING NOT NULL, `name` TEXT NOT NULL, `completed` INTEGER NOT NULL, `date` TEXT);";
+            + " (`type` STRING NOT NULL, `name` TEXT NOT NULL, `completed` INTEGER NOT NULL, `date` TEXT, "
+            + "`duration` INTEGER);";
 
     @Override
     public Connection getSqlConnection() {
@@ -63,7 +65,8 @@ public class Sqlite extends Database {
                 String name = rs.getString("name");
                 boolean isCompleted = rs.getBoolean("completed");
                 String date = rs.getString("date");
-                list.add(this.createTask(type, name, isCompleted, date));
+                int duration = rs.getInt("duration");
+                list.add(this.createTask(type, name, isCompleted, date, duration));
             }
             close(ps);
         } catch (SQLException ex) {
@@ -78,11 +81,15 @@ public class Sqlite extends Database {
         String name = task.getName();
         int isCompleted = task.isCompleted() ? 1 : 0;
         String date = task.getDate() == null ? null : task.getDate().toString();
+        int duration = 0;
+        if (task instanceof DurationTask) {
+            duration = ((DurationTask) task).getDuration();
+        }
         try {
             connection = getSqlConnection();
-            PreparedStatement ps = connection
-                    .prepareStatement("INSERT INTO " + TASK_TABLE_NAME + " (type, name, completed, date) VALUES('"
-                            + type + "', '" + name + "', " + isCompleted + ", '" + date + "')");
+            PreparedStatement ps = connection.prepareStatement(
+                    "INSERT INTO " + TASK_TABLE_NAME + " (type, name, completed, date, duration) VALUES('" + type
+                            + "', '" + name + "', " + isCompleted + ", '" + date + "', " + duration + ")");
             ps.executeUpdate();
             close(ps);
         } catch (SQLException ex) {
@@ -106,7 +113,8 @@ public class Sqlite extends Database {
                     String name = rs.getString("name");
                     boolean isCompleted = rs.getBoolean("completed");
                     String date = rs.getString("date");
-                    result = this.createTask(type, name, isCompleted, date);
+                    int duration = rs.getInt("duration");
+                    result = this.createTask(type, name, isCompleted, date, duration);
 
                     int rowid = rs.getInt("rowid");
                     ps = connection
@@ -135,7 +143,8 @@ public class Sqlite extends Database {
                     TaskType type = TaskType.valueOf(rs.getString("type"));
                     String name = rs.getString("name");
                     String date = rs.getString("date");
-                    result = this.createTask(type, name, true, date);
+                    int duration = rs.getInt("duration");
+                    result = this.createTask(type, name, true, date, duration);
 
                     int rowid = rs.getInt("rowid");
                     ps = connection.prepareStatement(
@@ -163,7 +172,8 @@ public class Sqlite extends Database {
                 String name = rs.getString("name");
                 boolean isCompleted = rs.getBoolean("completed");
                 String date = rs.getString("date");
-                list.add(this.createTask(type, name, isCompleted, date));
+                int duration = rs.getInt("duration");
+                list.add(this.createTask(type, name, isCompleted, date, duration));
             }
             close(ps);
         } catch (SQLException ex) {

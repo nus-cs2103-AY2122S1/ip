@@ -3,7 +3,7 @@ package duke.task;
 import java.util.stream.Stream;
 
 public enum TaskType {
-    TODO(ToDoTask.class), DEADLINE(DeadlineTask.class), EVENT(EventTask.class);
+    TODO(ToDoTask.class), DEADLINE(DeadlineTask.class), EVENT(EventTask.class), DURATION(DurationTask.class);
 
     private Class<? extends Task> type;
 
