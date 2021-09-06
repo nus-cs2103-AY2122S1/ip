@@ -23,11 +23,17 @@ public class TaskList implements Serializable {
     }
 
     public ArrayList<Task> currList() {
-        return this.taskList;
+        return taskList;
     }
 
+    /**
+     * Returns the number of tasks in the task list.
+     *
+     * @return Size of task list ArrayList.
+     */
     public int size() {
-        return this.taskList.size();
+        assert(taskList.size() >= 0);
+        return taskList.size();
     }
 
     private void printItem(Task task) {
@@ -40,6 +46,7 @@ public class TaskList implements Serializable {
     }
 
     String printList() {
+        assert(taskList.size() >= 0);
         taskList.forEach((task) -> printItem(task));
         String response = stringList;
         currIndex = 1;
@@ -50,6 +57,9 @@ public class TaskList implements Serializable {
     String doneItem(int index) throws InputError {
         String response = "";
         try {
+            if (index <= 0) {
+                throw new InputError("Hey you can't put less than 0!");
+            }
             if (index > taskList.size()) {
                 throw new InputError("Invalid Number");
             }
@@ -90,6 +100,9 @@ public class TaskList implements Serializable {
     String deleteItem(int index) throws InputError {
         String response = "";
         try {
+            if (index <= 0) {
+                throw new InputError("Hey you can't put less than 0!");
+            }
             if (index > taskList.size()) {
                 throw new InputError("Invalid Number");
             }
@@ -102,12 +115,6 @@ public class TaskList implements Serializable {
         return response;
     }
 
-    private void addTasks(Task task, ArrayList<Task> list, String word) {
-        if (task.getTask().equals(word)) {
-            list.add(task);
-        }
-    }
-
     /**
      * Returns tasks that have the keyword in the task list.
      *
@@ -116,11 +123,11 @@ public class TaskList implements Serializable {
      *
      */
     public TaskList findTasks(String str) {
-        ArrayList<Task> resultList = new ArrayList<Task>();
         List<Task> foundArray = taskList.stream().filter(task -> task.printTask().contains(str))
                 .collect(Collectors.toList());
-        resultList = new ArrayList<Task>(foundArray);
+        ArrayList<Task> searchList = new ArrayList<Task>(foundArray);
 
-        return new TaskList(resultList, ui);
+        TaskList foundList = new TaskList(searchList, ui);
+        return foundList;
     }
 }
