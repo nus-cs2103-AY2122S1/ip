@@ -36,6 +36,7 @@ public class Ui {
         String task = input.substring(9, input.indexOf('/') - 1);
         String by = input.substring(input.indexOf('/') + 4);
         new TaskList().addTask(new Deadline(task, by), arListTask);
+        assert input.length() > 8 : "deadline input is invalid";
         return "Got it. I've added this task:\n"
                 + arListTask.get(arListTask.size() - 1).toString() + "\n"
                 + "Now you have " + String.valueOf(arListTask.size())
@@ -58,6 +59,7 @@ public class Ui {
         String task = input.substring(6, input.indexOf('/') - 1);
         String at = input.substring(input.indexOf('/') + 4);
         new TaskList().addTask(new Event(task, at), arListTask);
+        assert input.length() > 5 : "event input is invalid";
         return "Got it. I've added this task:\n"
                 + arListTask.get(arListTask.size() - 1).toString() + "\n"
                 + "Now you have " + String.valueOf(arListTask.size())
@@ -77,6 +79,7 @@ public class Ui {
             throw new EmptyDescriptionException("todo");
         }
         new TaskList().addTask(new ToDo(input.substring(5)), arListTask);
+        assert input.length() > 4 : "todo input is invalid";
         return "Got it. I've added this task:\n"
                 + arListTask.get(arListTask.size() - 1).toString() + "\n"
                 + "Now you have " + String.valueOf(arListTask.size())
@@ -138,6 +141,7 @@ public class Ui {
         int index = Integer.parseInt(input.substring(7)) - 1;
         String temp = arListTask.get(index).toString();
         new TaskList().removeTask(index, arListTask);
+        assert input.length() > 6 : "delete input is invalid";
         return "Noted! I've removed this task:\n"
                 + temp + "\n"
                 + "Now you have " + String.valueOf(arListTask.size())
@@ -210,6 +214,8 @@ public class Ui {
             result = "There is no matching task.";
         }
 
+        assert input.length() > 4 : "find input is invalid";
+
         return result;
 
     }
@@ -232,6 +238,7 @@ public class Ui {
         }
         int index = Integer.parseInt(input.substring(5)) - 1;
         arListTask.get(index).markAsDone();
+        assert input.length() > 4 : "done input is invalid";
         return "Good job! I've marked this task as done:\n"
                 + arListTask.get(index).toString();
     }
