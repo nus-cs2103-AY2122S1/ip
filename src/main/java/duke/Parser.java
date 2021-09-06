@@ -5,6 +5,8 @@ import exception.NoDescriptionException;
 import exception.WrongDescriptionException;
 
 
+
+
 /**
  * A parser to make sense of the user's input
  */
@@ -73,7 +75,6 @@ public class Parser {
         }
     }
 
-
     /**
      * Returns the description of the task from the user input
      *
@@ -88,10 +89,10 @@ public class Parser {
                                                                                 WrongDescriptionException {
         String[] parsed = input.split(" ", 2);
         if (parsed.length == 1) {
-            throw new NoDescriptionException("Please enter the task no.!");
+            throw new NoDescriptionException("Please enter the task description!");
         } else {
-            String description = parsed[1];
-            int index = description.indexOf(conjunction);
+            String taskDetails = parsed[1];
+            int index = taskDetails.indexOf(conjunction);
             if (index == -1) {
                 if (conjunction.equals("by")) {
                     throw new WrongDescriptionException("Deadline not included! Try: deadline ... /by ...");
@@ -102,9 +103,9 @@ public class Parser {
                 }
             } else {
                 if (!conjunction.equals("to")) {
-                    return new String[]{description.substring(0, index - 2), description.substring(index + 3)};
+                    return new String[]{taskDetails.substring(0, index - 2), taskDetails.substring(index + 3)};
                 } else {
-                    return new String[]{description.substring(2, index - 2), description.substring(index + 3)};
+                    return new String[]{taskDetails.substring(2, index - 2), taskDetails.substring(index + 3)};
                 }
             }
         }

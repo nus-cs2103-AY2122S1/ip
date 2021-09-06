@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 /**
  * Represents the task object
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected LocalDateTime dateTime;
