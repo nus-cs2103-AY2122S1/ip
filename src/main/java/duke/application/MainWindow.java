@@ -52,10 +52,13 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        userInput.clear();
-        addUserDialog(input);
-        String response = parser.getResponse(input);
-        addDukeDialog(response);
+        // if there is not input, no need to have any action
+        if (!input.equals("")) {
+            userInput.clear();
+            addUserDialog(input);
+            String response = parser.getResponse(input);
+            addDukeDialog(response);
+        }
     }
 
     /**
@@ -64,6 +67,7 @@ public class MainWindow extends AnchorPane {
      * @param input User input.
      */
     private void addUserDialog(String input) {
+        assert dialogContainer != null;
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
     }
 
@@ -73,6 +77,7 @@ public class MainWindow extends AnchorPane {
      * @param response Response from Duke.
      */
     private void addDukeDialog(String response) {
+        assert dialogContainer != null;
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(response, dukeImage));
     }
 }
