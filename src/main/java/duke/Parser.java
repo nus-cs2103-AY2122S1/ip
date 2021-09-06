@@ -1,6 +1,7 @@
 package duke;
 
 import java.nio.file.Path;
+import java.util.function.Supplier;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeExitException;
@@ -21,7 +22,7 @@ public class Parser {
     /**
      * Constructor for Parser.
      *
-     * @param taskList TaskArrayList object to work with.
+     * @param taskList    TaskArrayList object to work with.
      * @param storagePath Path object representing path to savefile.
      */
     Parser(TaskArrayList taskList, Path storagePath) {
@@ -70,75 +71,95 @@ public class Parser {
         }
     }
 
+    // Use Boolean Suppliers for test conditions that can cause crash if previous gate fails
+    // eg will only test arr[1] validity if previous gate of arr.length == 2 passes
+
     private String runBye(String[] cmdArgsArr) throws DukeException {
-        if (cmdArgsArr.length > 1) {
+        boolean hasWrongArgumentCount = cmdArgsArr.length > 1;
+
+        if (hasWrongArgumentCount) {
             throw new DukeException("command bye takes no arguments.");
         }
+
         throw new DukeExitException("BYE");
     }
 
     private String runList(String[] cmdArgsArr) throws DukeException {
-        if (cmdArgsArr.length > 1) {
+        boolean hasWrongArgumentCount = cmdArgsArr.length > 1;
+
+        if (hasWrongArgumentCount) {
             throw new DukeException("command list takes no arguments.");
         }
+
         return taskList.enumerate();
     }
 
     private String runDone(String[] cmdArgsArr) throws DukeException {
-        if (cmdArgsArr.length != 2 || !cmdArgsArr[1].matches("[0-9]+")) {
+        boolean hasWrongArgumentCount = (cmdArgsArr.length != 2);
+        Supplier<Boolean> isNotNumericArgument = () -> !cmdArgsArr[1].matches("[0-9]+");
+
+        if (hasWrongArgumentCount || isNotNumericArgument.get()) {
             throw new DukeException(TaskArrayList.DONE_USAGE_TEXT);
         }
+
         return taskList.markDone(Integer.parseInt(cmdArgsArr[1]));
     }
 
     private String runDelete(String[] cmdArgsArr) throws DukeException {
-        if (cmdArgsArr.length != 2) {
+        boolean hasWrongArgumentCount = (cmdArgsArr.length != 2);
+        Supplier<Boolean> isNotNumericArgument = () -> !cmdArgsArr[1].matches("[0-9]+");
+
+        if (hasWrongArgumentCount || isNotNumericArgument.get()) {
             throw new DukeException(TaskArrayList.DELETE_USAGE_TEXT);
         }
-        if (!cmdArgsArr[1].matches("[0-9]+")) {
-            throw new DukeException(TaskArrayList.DELETE_USAGE_TEXT);
-        }
+
         return taskList.deleteTask(Integer.parseInt(cmdArgsArr[1]));
     }
 
     private String runFind(String[] cmdArgsArr) throws DukeException {
-        if (cmdArgsArr.length != 2) {
+        boolean hasWrongArgumentCount = (cmdArgsArr.length != 2);
+
+        if (hasWrongArgumentCount) {
             throw new DukeException(TaskArrayList.FIND_USAGE_TEXT);
         }
+
         return taskList.find(cmdArgsArr[1]);
     }
 
     private String runTodo(String[] cmdArgsArr) throws DukeException {
-        if (cmdArgsArr.length != 2) {
+        boolean hasWrongArgumentCount = (cmdArgsArr.length != 2);
+
+        if (hasWrongArgumentCount) {
             throw new DukeException(Todo.USAGE_TEXT);
         }
+
         Task toAdd = new Todo(cmdArgsArr[1]);
         return taskList.addTask(toAdd);
     }
 
     private String runDeadline(String[] cmdArgsArr) throws DukeException {
-        if (cmdArgsArr.length != 2) {
+        boolean hasWrongArgumentCount = (cmdArgsArr.length != 2);
+        Supplier<Boolean> isMissingByArgument = () -> (cmdArgsArr[1].split("/by", 2).length != 2);
+
+        if (hasWrongArgumentCount || isMissingByArgument.get()) {
             throw new DukeException(Deadline.USAGE_TEXT);
         }
+
         String[] nameByPair = cmdArgsArr[1].split("/by", 2);
-        if (nameByPair.length != 2) {
-            throw new DukeException(Deadline.USAGE_TEXT);
-        }
         Task toAdd = new Deadline(nameByPair[0], nameByPair[1]);
         return taskList.addTask(toAdd);
     }
 
     private String runEvent(String[] cmdArgsArr) throws DukeException {
-        if (cmdArgsArr.length != 2) {
+        boolean hasWrongArgumentCount = (cmdArgsArr.length != 2);
+        Supplier<Boolean> isMissingAtArgument = () -> (cmdArgsArr[1].split("/at", 2).length != 2);
+
+        if (hasWrongArgumentCount || isMissingAtArgument.get()) {
             throw new DukeException(Event.USAGE_TEXT);
         }
+
         String[] nameAtPair = cmdArgsArr[1].split("/at", 2);
-        if (nameAtPair.length != 2) {
-            throw new DukeException(Event.USAGE_TEXT);
-        }
         Task toAdd = new Event(nameAtPair[0], nameAtPair[1]);
         return taskList.addTask(toAdd);
     }
-
-
 }
