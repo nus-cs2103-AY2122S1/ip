@@ -35,13 +35,14 @@ public class Storage {
     }
 
     /**
-     * Loads store file as a duke.TaskArrayList.
+     * Loads store file as a TaskArrayList.
      *
      * @param path path to store file.
-     * @return duke.TaskArrayList of stored tasks.
+     * @return TaskArrayList of stored tasks.
      */
     public static TaskArrayList load(Path path) throws DukeException, IOException {
         createStore(path);
+        assert Files.exists(path); // path file must exist
         TaskArrayList taskList = new TaskArrayList();
         Scanner sc = new Scanner(path);
         SaveParser saveParser = new SaveParser(sc);
@@ -63,6 +64,7 @@ public class Storage {
      */
     public static void dump(TaskArrayList taskList, Path path) {
         createStore(path);
+        assert Files.exists(path); // path file must exist
         ArrayList<String> strings = new ArrayList<>();
         for (Task task : taskList) {
             String toWrite = "";

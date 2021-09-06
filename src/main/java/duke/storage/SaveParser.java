@@ -76,6 +76,7 @@ public class SaveParser {
                 break;
             }
             String[] key_value = nl.split(":", 2);
+            assert key_value.length == 2;
             switch (key_value[0]) {
             case ("\tName"):
                 name = key_value[1];
@@ -112,6 +113,7 @@ public class SaveParser {
                 break;
             }
             String[] key_value = nl.split(":", 2);
+            assert key_value.length == 2;
             switch (key_value[0]) {
             case ("\tName"):
                 name = key_value[1];
@@ -153,6 +155,7 @@ public class SaveParser {
                 break;
             }
             String[] key_value = nl.split(":", 2);
+            assert key_value.length == 2;
             switch (key_value[0]) {
             case ("\tName"):
                 name = key_value[1];

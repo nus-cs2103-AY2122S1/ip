@@ -99,6 +99,7 @@ public class TaskArrayList extends ArrayList<Task> {
         if (index > this.size()) {
             throw new DukeException(String.format("task %d not found", index));
         }
+        assert this.get(index - 1) instanceof Task;
         this.get(index - 1).markDone();
         return "Nice! I've marked this task as done:\n"
                 + this.get(index - 1).toString();
