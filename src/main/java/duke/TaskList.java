@@ -13,13 +13,13 @@ public class TaskList {
         this.list = new ArrayList<>();
     }
 
-
     public void addTask(Task task) {
         this.list.add(task);
     }
 
     public void removeTask(int i) {
         this.list.remove(i);
+        assert list.size() >= 0 : "List size is negative!";
     }
 
     public TaskList findTask(String input) {

@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 class Storage {
@@ -31,15 +29,13 @@ class Storage {
             for (int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
                 writer.write(task.toString());
+                assert task.toString().length() != 0 : "Empty task being saved";
                 writer.write("\n");
             }
             writer.close();
             if (data_file.createNewFile()) {
                 System.out.println("File created: " + data_file.getName());
             }
-//            else {
-//                System.out.println("File already exists.");
-//            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -55,9 +51,7 @@ class Storage {
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         while (s.hasNext()) {
             String currLine = s.nextLine();
-//            System.out.println(currLine);
             char taskType = currLine.charAt(1);
-//            System.out.println(taskType);
             switch (taskType) {
                 case 'T':
                     tasklist.addTask(new ToDo(currLine.substring(7)));
@@ -65,19 +59,14 @@ class Storage {
                     break;
                 case 'D':
                     int l = currLine.indexOf("(");
-//                    int m = currLine.indexOf("by ");
                     int n = currLine.indexOf(")");
-//                    System.out.println(currLine.substring(7,l));
-//                    System.out.println(currLine.substring(l+1,n));
+                    assert l < n : "Issue with bracketing order!";
                     tasklist.addTask(new Deadline(currLine.substring(7, l), currLine.substring(l + 1, n)));
                     System.out.println(new Deadline(currLine.substring(7, l), currLine.substring(l + 1, n)));
                     break;
                 case 'E':
                     int i = currLine.indexOf("(");
-//                    int j = currLine.indexOf("at ");
                     int k = currLine.indexOf(")");
-//                    System.out.println(currLine.substring(7,i));
-//                    System.out.println(currLine.substring(j,k));
                     tasklist.addTask(new Event(currLine.substring(7, i), currLine.substring(i + 1, k)));
                     System.out.println(new Event(currLine.substring(7, i), currLine.substring(i + 1, k)));
                     break;
