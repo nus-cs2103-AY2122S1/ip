@@ -20,7 +20,7 @@ public class DoneCommand extends DukeCommand {
     @Override
     public String run(DukeList list) throws InvalidArgumentsException {
         try {
-            Task task = list.get(id);
+            Task task = list.getTask(id);
             task.markDone();
             return stringifyMessage(task.toString());
         } catch (IndexOutOfBoundsException e) {

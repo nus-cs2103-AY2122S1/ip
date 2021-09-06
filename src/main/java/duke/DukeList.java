@@ -35,7 +35,7 @@ public class DukeList implements Iterable<Task> {
      * @param i Index of the task.
      * @return Task.
      */
-    public Task get(int i) {
+    public Task getTask(int i) {
         return list.get(i);
     }
 
@@ -53,7 +53,7 @@ public class DukeList implements Iterable<Task> {
      *
      * @param task Task to be added.
      */
-    public void add(Task task) {
+    public void addTask(Task task) {
         list.add(task);
     }
 
@@ -62,7 +62,7 @@ public class DukeList implements Iterable<Task> {
      *
      * @param i Index of the task to be deleted.
      */
-    public void delete(int i) {
+    public void deleteTask(int i) {
         list.remove(i);
     }
 

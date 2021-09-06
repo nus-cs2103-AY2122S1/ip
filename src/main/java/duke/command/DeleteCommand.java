@@ -20,8 +20,8 @@ public class DeleteCommand extends DukeCommand {
     @Override
     public String run(DukeList list) throws InvalidArgumentsException {
         try {
-            Task task = list.get(id);
-            list.delete(id);
+            Task task = list.getTask(id);
+            list.deleteTask(id);
             return stringifyMessage(task.toString(), list.size());
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidArgumentsException();

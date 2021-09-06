@@ -18,7 +18,7 @@ public class TodoCommand extends DukeCommand {
 
     @Override
     public String run(DukeList list) {
-        list.add(task);
+        list.addTask(task);
         return stringifyMessage(list.size());
     }
 

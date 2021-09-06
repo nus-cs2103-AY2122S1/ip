@@ -34,7 +34,7 @@ public class Storage {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 Task task = Parser.parseFileLine(line);
-                list.add(task);
+                list.addTask(task);
             }
             scanner.close();
         } catch (DukeException | FileNotFoundException e) {

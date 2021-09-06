@@ -177,10 +177,10 @@ public class Parser {
                 if (description.trim().isEmpty()) {
                     throw new InvalidArgumentsException();
                 }
+                task = new ToDo(description);
             } catch (StringIndexOutOfBoundsException e) {
                 throw new InvalidArgumentsException();
             }
-            task = new ToDo(description);
             break;
         case DEADLINE:
             try {
@@ -207,7 +207,6 @@ public class Parser {
             } catch (StringIndexOutOfBoundsException | DateTimeParseException e) {
                 throw new InvalidArgumentsException();
             }
-
             break;
         case EVENT:
             try {
