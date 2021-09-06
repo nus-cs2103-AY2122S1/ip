@@ -26,9 +26,19 @@ public class Parser {
         if (command.startsWith("list")) {
             return Duke.getTaskList();
         } else if (command.startsWith("done")) {
+            if (command.trim().equals("done")) {
+                throw new DukeException("\n☹ OOPS!!! The description of done cannot be empty.\n " +
+                        "Please follow this format: \n" +
+                        "    done {task index}");
+            }
             int i = Integer.valueOf(command.substring(5));
             return Duke.markDone(i);
         } else if (command.contains("delete")) {
+            if (command.trim().equals("delete")) {
+                throw new DukeException("\n☹ OOPS!!! The description of delete cannot be empty.\n " +
+                        "Please follow this format: \n" +
+                        "    delete {task index}");
+            }
             int i = Integer.valueOf(command.substring(7));
             return Duke.deleteTask(i);
         } else if (command.startsWith("todo")) {
@@ -38,9 +48,14 @@ public class Parser {
         } else if (command.startsWith("event")) {
             return Duke.event(command);
         } else if (command.startsWith("find")) {
+            if (command.trim().equals("find")) {
+                throw new DukeException("\n☹ OOPS!!! The description of find cannot be empty.\n " +
+                        "Please follow this format: \n" +
+                        "    find {key}");
+            }
             return Duke.findTask(command);
         } else {
-            throw new DukeException("\n OOPS!!! I'm sorry, but I don't know what that means :-( \n");
+            throw new DukeException("\n OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }

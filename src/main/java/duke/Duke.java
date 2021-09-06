@@ -81,6 +81,9 @@ public class Duke {
      * @return result
      */
     public static String markDone(int i) throws DukeException {
+        if (i > tasks.getSize()) {
+            throw new DukeException("\nOOPS!!! Invalid index.\nPlease choose between 1 to " + tasks.getSize());
+        }
         String start = "\n Nice! I've marked this task as done:";
         tasks.getTask(i - 1).markAsDone();
         TaskList.updateMemory(storage.getPath(), tasks);
@@ -178,13 +181,13 @@ public class Duke {
      */
     public static String findTask(String input) {
         String searchKey = input.split("find ")[1];
-        String start = "Here are the matching tasks in your list: \n";
+        String start = "\nHere are the matching tasks in your list: ";
         String res = "";
         int currIndex = 1;
         for (int i = 0; i < tasks.getSize(); i++) {
             String currTask = tasks.getTask(i).getTaskInfo();
             if (currTask.contains(searchKey)) {
-                String foundTask = currIndex + ". " + tasks.getTask(i) + "\n";
+                String foundTask = "\n" + currIndex + ". " + tasks.getTask(i);
                 res += foundTask;
                 currIndex++;
             }
