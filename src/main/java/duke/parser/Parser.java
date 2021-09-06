@@ -48,6 +48,7 @@ public class Parser {
                     throw new DukeException("☹ OOPS!!!"
                             + " Please specify which task you wish to complete.");
                 }
+                assert words.length > 1 : "There should be a number to specify which task.";
                 rest = words[1];
                 index = Integer.parseInt(rest) - 1;
                 return new DoneCommand(index);
@@ -56,6 +57,7 @@ public class Parser {
                     throw new DukeException("☹ OOPS!!!"
                             + " Please specify which task you wish to complete.");
                 }
+                assert words.length > 1 : "There should be a number to specify which task.";
                 rest = words[1];
                 index = Integer.parseInt(rest) - 1;
                 return new DeleteCommand(index);
@@ -63,6 +65,7 @@ public class Parser {
                 if (words.length < 2) {
                     throw new DukeException("☹ OOPS!!! The description of a task cannot be empty.");
                 }
+                assert words.length > 1 : "There should be a description of the task.";
                 rest = words[1];
                 task = new Todo(rest);
                 return new AddCommand(task);
@@ -70,6 +73,7 @@ public class Parser {
                 if (words.length < 2) {
                     throw new DukeException("☹ OOPS!!! The description of a task cannot be empty.");
                 }
+                assert words.length > 1 : "There should be a description of the task.";
                 rest = words[1];
                 splitRest = rest.split(" /by ");
                 if (splitRest.length < 2) {

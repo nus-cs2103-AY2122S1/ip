@@ -41,13 +41,6 @@ public class Ui {
     }
 
     /**
-     * prints out a separator line
-     */
-    public String printLine() {
-        return "____________________________________________________________";
-    }
-
-    /**
      * Prints out that the given tasks has been marked.
      * @param task the given task.
      */
