@@ -91,6 +91,7 @@ public class Duke extends Application {
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
+
         scene = new Scene(mainLayout);
 
         stage.setScene(scene);
