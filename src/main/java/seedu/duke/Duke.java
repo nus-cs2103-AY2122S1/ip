@@ -274,6 +274,16 @@ public class Duke {
         }
     }
 
+    protected String getReminder() {
+        Command reminder = new ReminderCommand(ui, taskList, dateTasks);
+        try {
+            String message = reminder.execute();
+            return message;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
     protected boolean getExit() {
         return isExit;
     }

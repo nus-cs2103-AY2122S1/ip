@@ -1,8 +1,11 @@
 package seedu.duke;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -37,6 +40,8 @@ public class MainWindow extends Stage {
     private Button sendButton;
     @FXML
     private AnchorPane anchorPane;
+    @FXML
+    private Button reminderButton;
 
     private Duke duke;
     private Storage storage;
@@ -82,11 +87,18 @@ public class MainWindow extends Stage {
         }
     }
 
+    @FXML
+    private void handleReminderClick() {
+        String response = duke.getReminder();
+        Alert alert = new Alert(Alert.AlertType.NONE);
+        alert.setAlertType(Alert.AlertType.CONFIRMATION);
+        alert.setContentText(response);
+        alert.show();
+    }
+
     private void handleStart() {
         String greeting = duke.getGreeting();
-        TaskList currentTaskList = storage.loadData(dateTasks, taskList);
-        String currentNumberOfTasks = currentTaskList.status();
-        String currentList = currentNumberOfTasks + "\n" + currentTaskList.toString();
+        String currentList = taskList.status() + "\n" + taskList.toString();
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(greeting, dukeImage),
                 DialogBox.getDukeDialog(currentList, dukeImage)

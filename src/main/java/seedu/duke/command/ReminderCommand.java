@@ -41,6 +41,7 @@ public class ReminderCommand extends Command {
         List<LocalDate> dates = dateTasks.keySet()
                 .stream()
                 .filter(x -> x.compareTo(now) > 0)
+                .sorted()
                 .collect(Collectors.toList());
 
         for (LocalDate date: dates) {
