@@ -11,6 +11,7 @@ public class Ui {
      * @return an array of strings to be printed in order
      */
     public static String[] show(String... messages) {
+        assert messages.length > 0;
         return messages;
     }
 }
