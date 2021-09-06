@@ -50,7 +50,7 @@ public class DeadlineCommand extends Command {
         String description = command.substring(inputValues[0].length() + 1, dateTimeIndex).strip();
         String dateTime = command.substring(dateTimeIndex + 3).strip();
         try {
-            Task deadline = new Deadline(description, dateTime);
+            Deadline deadline = new Deadline(description, dateTime);
             assert !deadline.getDescription().equals("");
             assert !deadline.getBy().equals("");
             return taskList.add(deadline, ui, storage);
@@ -59,7 +59,7 @@ public class DeadlineCommand extends Command {
         } catch (DukeException exception) {
             return ui.showError(exception.getMessage());
         } catch (IOException exception) {
-            return ui.showSavingError();      
+            return ui.showSavingError();
         }
     }
 }

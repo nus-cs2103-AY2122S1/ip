@@ -50,7 +50,7 @@ public class EventCommand extends Command {
         String description = command.substring(inputValues[0].length() + 1, dateTimeIndex).strip();
         String dateTime = command.substring(dateTimeIndex + 3).strip();
         try {
-            Task event = new Event(description, dateTime);
+            Event event = new Event(description, dateTime);
             assert !event.getDescription().equals("") : "Description cannot be empty";
             assert !event.getAt().equals("") : "At cannot be empty:";
             return taskList.add(event, ui, storage);
