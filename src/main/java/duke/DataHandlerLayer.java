@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.function.Function;
 
 /**
  * Handles all things related to data. This includes the in-memory storage represented by an arrayList or
@@ -8,6 +9,19 @@ import java.util.ArrayList;
  */
 public class DataHandlerLayer {
 
+    public static void main(String[] args) {
+        Function<Task, Boolean> tempFunc = a -> !a.getCompleteStatus();
+        addToLog(new Todo("smth"));
+        Task tempTask = new Todo("another");
+        tempTask.completeTask();
+        addToLog(tempTask);
+        addToLog(new Todo("smth"));
+        addToLog(new Todo("smth"));
+        System.out.println("=====================");
+        System.out.println(getFilteredLog(tempFunc));
+        System.out.println("=====================");
+        System.out.println("smth");
+    }
 
     /**
      * In memory storage for log, for history, refer to the history variable
@@ -45,29 +59,19 @@ public class DataHandlerLayer {
     }
 
     /**
-     * Prints log of tasks. No parameters needed. To change task representation, see duke.Task.
-     */
-    public static void printLog() {
-        System.out.println("Here are your tasks summoner. Please do complete them as fast as possible. I have"
-                + "been waiting for so many others for countless of centuries. Perhaps I am just an npc");
-        for (int i = 0; i < log.size(); i++) {
-            Task currentTask = log.get(i);
-            int taskNumber = i + 1;
-            System.out.println(taskNumber + ". " + currentTask.toString());
-        }
-    }
-
-    /**
      * Prints a log of tasks that are filtered. True for completed and False for not completed
      */
-    public static void printFilteredLog(boolean cond) {
+    public static String getFilteredLog(Function<Task , Boolean> function) {
         int taskNumber = 1;
+        StringBuilder sb = new StringBuilder();
+        System.out.println("getFilteredLog caled");
         for (Task temp : log) {
-            if (temp.getCompleteStatus() == cond) {
-                System.out.println(taskNumber + ". " + temp.toString());
+            if (function.apply(temp)) {
+                sb.append(taskNumber + ". " + temp.toString() + "\n");
                 taskNumber++;
             }
         }
+        return sb.toString();
     }
 
     /**
