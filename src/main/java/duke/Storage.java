@@ -1,15 +1,15 @@
 package duke;
 
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
 
 /**
  * Storage class for the storage and retrieval of tasks.

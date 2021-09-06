@@ -1,13 +1,13 @@
 package duke;
 
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
 
 /**
  * Class containing methods for Duke functionality.
@@ -21,6 +21,11 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
 
+    /**
+     * Constructor for Duke object.
+     * @param storage Storage object.
+     * @throws IOException
+     */
     public Duke(Storage storage) throws IOException {
         this.storage = storage;
         this.tasks = storage.readTaskList();
@@ -40,7 +45,7 @@ public class Duke {
      * @return Input task rendered as a string.
      */
     public static String renderTask(Task task) {
-        final var DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy");
+        final var dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
         final TaskType taskType = TaskType.identifyTask(task);
         final String statusIcon = task.getStatusIcon();
         final String taskIcon = taskType.getTaskIcon();
@@ -60,7 +65,7 @@ public class Duke {
                     taskIcon,
                     statusIcon,
                     deadline.getDescription(),
-                    deadline.getDeadline().format(DATE_FORMATTER)
+                    deadline.getDeadline().format(dateFormatter)
             );
         case EVENT:
             var event = (Event) task;
@@ -69,7 +74,7 @@ public class Duke {
                     taskIcon,
                     statusIcon,
                     event.getDescription(),
-                    event.getTime().format(DATE_FORMATTER)
+                    event.getTime().format(dateFormatter)
             );
         default:
             throw new UnsupportedOperationException("task type is not a valid enum value");

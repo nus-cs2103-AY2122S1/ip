@@ -1,7 +1,5 @@
 package duke.tasks;
 
-import duke.tasks.Task;
-
 /**
  * Class for Todo tasks.
  */

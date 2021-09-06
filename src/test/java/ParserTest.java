@@ -4,11 +4,11 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
+import duke.Parser;
+import duke.TaskType;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
-import duke.Parser;
 import duke.tasks.Task;
-import duke.TaskType;
 import duke.tasks.Todo;
 
 public class ParserTest {

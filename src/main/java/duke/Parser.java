@@ -1,12 +1,12 @@
 package duke;
 
+import java.io.IOException;
+import java.time.LocalDate;
+
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
-
-import java.io.IOException;
-import java.time.LocalDate;
 
 /**
  * Parser class containing static methods for the parsing of Duke commands and
