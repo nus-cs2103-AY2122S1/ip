@@ -1,18 +1,20 @@
 package kayu.commands;
 
 import static kayu.commands.CommandMessage.ERROR_EMPTY_PARAMS;
+import static kayu.commands.CommandMessage.MESSAGE_ITEM_FORMAT;
 import static kayu.commands.CommandMessage.MESSAGE_MATCHING_CONTENTS;
 import static kayu.commands.CommandMessage.MESSAGE_NO_MATCHING_CONTENTS;
-import static kayu.commands.CommandMessage.MESSAGE_TASK_FORMAT;
 
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
-import kayu.service.TaskList;
-import kayu.storage.Storage;
+import kayu.note.NoteList;
+import kayu.storage.NoteStorage;
+import kayu.storage.TaskStorage;
 import kayu.task.Task;
+import kayu.task.TaskList;
 
 /**
  * Represents a {@link kayu.commands.Command} that finds the relevant {@link kayu.task.Task}s
@@ -36,7 +38,12 @@ public class FindCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) throws KayuException, StorageException {
+    public String execute(TaskList taskList,
+                          TaskStorage taskStorage,
+                          NoteList noteList,
+                          NoteStorage noteStorage)
+            throws KayuException, StorageException {
+        
         String[] keywords = extractKeywords();
         String formattedParameters = generateFormattedParameters(keywords); // for message
         Map<Integer, Task> taskMap = taskList.findTasksByKeywords(keywords);
@@ -77,6 +84,6 @@ public class FindCommand extends Command {
     private String convertToTaskString(Map.Entry<Integer, Task> entry) {
         int number = entry.getKey() + 1; // for 1-indexing
         String taskAsString = entry.getValue().toString();
-        return String.format(MESSAGE_TASK_FORMAT, number, taskAsString);
+        return String.format(MESSAGE_ITEM_FORMAT, number, taskAsString);
     }
 }

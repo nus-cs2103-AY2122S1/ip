@@ -1,8 +1,8 @@
 package kayu.commands;
 
 import static kayu.commands.CommandMessage.MESSAGE_EMPTY_LIST;
+import static kayu.commands.CommandMessage.MESSAGE_ITEM_FORMAT;
 import static kayu.commands.CommandMessage.MESSAGE_LIST_CONTENTS;
-import static kayu.commands.CommandMessage.MESSAGE_TASK_FORMAT;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,13 +10,15 @@ import java.util.stream.IntStream;
 
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
-import kayu.service.TaskList;
-import kayu.storage.Storage;
+import kayu.note.NoteList;
+import kayu.storage.NoteStorage;
+import kayu.storage.TaskStorage;
 import kayu.task.Task;
+import kayu.task.TaskList;
 
 /**
  * Represents a {@link kayu.commands.Command} that provides the {@link kayu.task.Task}
- * that are present in {@link kayu.service.TaskList}.
+ * that are present in {@link TaskList}.
  */
 public class ListCommand extends Command {
     
@@ -34,7 +36,12 @@ public class ListCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) throws KayuException, StorageException {
+    public String execute(TaskList taskList,
+                          TaskStorage taskStorage,
+                          NoteList noteList,
+                          NoteStorage noteStorage)
+            throws KayuException, StorageException {
+
         List<Task> tasks = taskList.getTasks();
         if (tasks.isEmpty()) {
             return MESSAGE_EMPTY_LIST;
@@ -57,6 +64,6 @@ public class ListCommand extends Command {
     private String convertToTaskString(int idx, List<Task> tasks) {
         Task task = tasks.get(idx);
         int number = idx + 1;
-        return String.format(MESSAGE_TASK_FORMAT, number, task);
+        return String.format(MESSAGE_ITEM_FORMAT, number, task);
     }
 }

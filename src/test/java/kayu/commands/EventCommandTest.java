@@ -17,21 +17,26 @@ import org.junit.jupiter.api.Test;
 
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
-import kayu.service.TaskList;
-import kayu.storage.Storage;
+import kayu.note.NoteList;
+import kayu.storage.NoteStorage;
+import kayu.storage.TaskStorage;
 import kayu.task.Event;
 import kayu.task.Task;
+import kayu.task.TaskList;
 
 public class EventCommandTest {
 
     private static final List<String> DATE_LIST = new ArrayList<>();
     private static final List<String> TIME_LIST = new ArrayList<>();
     private static final String RESOURCE_PATH = "src/test/resources";
-    private static final String FILE_PATH = RESOURCE_PATH + "/storage_test_blank.txt";
-    
-    private TaskList taskList;
-    private Storage storage;
-    
+    private static final String TASK_FILE_PATH = RESOURCE_PATH + "/task_storage_test_blank.txt";
+    private static final String NOTE_FILE_PATH = RESOURCE_PATH + "/note_storage_test_blank.txt";
+
+    private final TaskList taskList = new TaskList();
+    private final TaskStorage taskStorage = TaskStorage.generate(TASK_FILE_PATH);
+    private final NoteList noteList = new NoteList();
+    private final NoteStorage noteStorage = NoteStorage.generate(NOTE_FILE_PATH);
+
     @BeforeAll
     public static void setFormats() {
         DATE_LIST.clear();
@@ -43,7 +48,7 @@ public class EventCommandTest {
         DATE_LIST.add("2021/8/20");
         DATE_LIST.add("20/08/2021");
         DATE_LIST.add("20/8/2021");
-        
+
         TIME_LIST.clear();
         TIME_LIST.add("22:30"); // default format
         TIME_LIST.add("2230");
@@ -55,16 +60,16 @@ public class EventCommandTest {
 
     @BeforeEach
     public void setUp() {
-        taskList = new TaskList();
-        storage = new Storage();
-        storage.setDirectoryAndFilePath(FILE_PATH);
+        taskList.initializeTasks(taskStorage.load());
+        noteList.initializeNotes(noteStorage.load());
     }
-    
+
     @AfterEach
     public void tearDown() throws StorageException {
-        storage.saveTasks(new ArrayList<>());
+        taskStorage.save(new ArrayList<>());
+        noteStorage.save(new ArrayList<>());
     }
-    
+
     @Test
     public void testExecute() {
         String date = DATE_LIST.get(0);
@@ -77,11 +82,11 @@ public class EventCommandTest {
                 LocalDate.parse(DATE_LIST.get(0)),
                 LocalTime.parse(TIME_LIST.get(0)));
         String expectedFeedback = String.format(MESSAGE_CREATED_EVENT, expectedTask, 1);
-        
+
         try {
-            String feedback = eventCommand.execute(taskList, storage);
+            String feedback = eventCommand.execute(taskList, taskStorage, noteList, noteStorage);
             assertEquals(expectedFeedback, feedback);
-            
+
         } catch (KayuException | StorageException exception) {
             System.out.println(exception.getMessage());
             fail();
@@ -97,16 +102,16 @@ public class EventCommandTest {
                 "meeting with friends",
                 LocalDate.parse(DATE_LIST.get(0)),
                 LocalTime.parse(TIME_LIST.get(0)));
-    
+
         for (int idx = 0; idx < DATE_LIST.size(); idx++) {
             try {
                 String parameters = String.format(paramFormat, DATE_LIST.get(idx));
                 Command eventCommand = new EventCommand(parameters);
-                String feedback = eventCommand.execute(taskList, storage);
-                
+                String feedback = eventCommand.execute(taskList, taskStorage, noteList, noteStorage);
+
                 String expectedFeedback = String.format(MESSAGE_CREATED_EVENT, expectedTask, idx + 1);
                 assertEquals(expectedFeedback, feedback);
-                
+
             } catch (KayuException | StorageException exception) {
                 System.out.println(exception.getMessage());
                 fail();
@@ -128,7 +133,7 @@ public class EventCommandTest {
             try {
                 String parameters = String.format(paramFormat, TIME_LIST.get(idx));
                 Command eventCommand = new EventCommand(parameters);
-                String feedback = eventCommand.execute(taskList, storage);
+                String feedback = eventCommand.execute(taskList, taskStorage, noteList, noteStorage);
 
                 String expectedFeedback = String.format(MESSAGE_CREATED_EVENT, expectedTask, idx + 1);
                 assertEquals(expectedFeedback, feedback);
@@ -146,7 +151,7 @@ public class EventCommandTest {
         Command eventCommand = new EventCommand(parameters);
 
         try {
-            eventCommand.execute(taskList, storage);
+            eventCommand.execute(taskList, taskStorage, noteList, noteStorage);
             fail();
 
         } catch (KayuException exception) {
@@ -160,7 +165,7 @@ public class EventCommandTest {
         Command eventCommand = new EventCommand(parameters);
 
         try {
-            eventCommand.execute(taskList, storage);
+            eventCommand.execute(taskList, taskStorage, noteList, noteStorage);
             fail();
 
         } catch (KayuException exception) {

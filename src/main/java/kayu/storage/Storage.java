@@ -5,58 +5,39 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import kayu.exception.StorageException;
-import kayu.task.Deadline;
-import kayu.task.Event;
-import kayu.task.Task;
-import kayu.task.Todo;
 
 /**
  * Handles the reading and writing of {@link kayu.task.Task} into files.
  */
-public class Storage {
+public abstract class Storage<T> {
 
     // Error message templates.
-    protected static final String UNABLE_TO_CREATE_DIRECTORY = "Load/save directory ./%s cannot be created.";
-    protected static final String UNABLE_TO_CREATE_FILE = "Load/save file ./%s cannot be created.";
-    protected static final String UNABLE_TO_LOAD_PATH = "Path ./%s cannot be accessed/loaded.";
-    protected static final String UNABLE_TO_SAVE = "Error updating task file.";
-    protected static final String UNABLE_TO_PARSE_TASK = "'%s' is an invalid Task entry.";
+    protected static final String ERROR_UNABLE_TO_CREATE_DIRECTORY = "Load/save directory ./%s cannot be created.";
+    protected static final String ERROR_UNABLE_TO_CREATE_FILE = "Load/save file ./%s cannot be created.";
+    protected static final String ERROR_UNABLE_TO_LOAD_PATH = "Path ./%s cannot be accessed/loaded.";
+    protected static final String ERROR_UNABLE_TO_SAVE = "Error updating to file.";
 
-    private static final String ASSERT_FAIL_IMPROPER_FILEPATH = "Filepath specified is not legitimate.";
-    
+    // Assert error templates.
+    protected static final String ASSERT_FAIL_IMPROPER_FILEPATH = "Filepath specified is not legitimate.";
+
     // Default task file directory.
-    private String taskDirectoryPath = "data";
-    private String taskFilePath = "data/task_list.txt";
+    private final String directoryPath;
+    private final String filePath;
 
-    /**
-     * Sets the desired file path of {@link kayu.task.Task} storage.
-     *
-     * @param taskFilePath File path for reading/writing of data.
-     */
-    public void setDirectoryAndFilePath(String taskFilePath) {
-        assert (taskFilePath.contains("/") || taskFilePath.contains("\\")) : ASSERT_FAIL_IMPROPER_FILEPATH;
+    public Storage(String directoryPath, String filePath) {
+        this.directoryPath = directoryPath;
+        this.filePath = filePath;
+    }
+    
+    protected static String extractDirectoryPath(String fullPath) {
+        assert (fullPath.contains("/")) : ASSERT_FAIL_IMPROPER_FILEPATH;
+        int splitIdx = fullPath.lastIndexOf('/');
         
-        setTaskFilePath(taskFilePath);
-        int splitIdx = taskFilePath.lastIndexOf('/'); // mac/unix
-        if (splitIdx < 0) {
-            splitIdx = taskFilePath.lastIndexOf('\\'); // win
-        }
-        setTaskDirectoryPath(taskFilePath.substring(0, splitIdx + 1));
-    }
-
-    protected void setTaskDirectoryPath(String taskDirectoryPath) {
-        this.taskDirectoryPath = taskDirectoryPath;
-    }
-
-    protected void setTaskFilePath(String taskFilePath) {
-        this.taskFilePath = taskFilePath;
+        return fullPath.substring(0, splitIdx + 1); // exclusive end
     }
 
     /**
@@ -66,100 +47,76 @@ public class Storage {
      * @return List of {@link kayu.task.Task}.
      * @throws StorageException If unable to read/write to file.
      */
-    public List<Task> load() throws StorageException {
-        initializeFilePath();
-        List<String> taskLines = readFile();
-        return decodeAll(taskLines);
+    public List<T> load() throws StorageException {
+        initializeDirectoryAndFile();
+        List<String> lines = readFile();
+        return decodeAll(lines);
     }
 
-    protected void initializeFilePath() throws StorageException {
+    private void initializeDirectoryAndFile() throws StorageException {
         try {
             initializeDirectory();
             initializeFile();
 
         } catch (IOException exception) {
-            throw new StorageException(String.format(UNABLE_TO_LOAD_PATH, taskFilePath));
+            throw new StorageException(String.format(ERROR_UNABLE_TO_LOAD_PATH, filePath));
         }
     }
     
     private void initializeDirectory() throws StorageException {
-        File directory = new File(taskDirectoryPath);
+        File directory = new File(directoryPath);
         if (!directory.exists() && !directory.mkdir()) {
-            throw new StorageException(String.format(UNABLE_TO_CREATE_DIRECTORY, taskDirectoryPath));
+            throw new StorageException(String.format(ERROR_UNABLE_TO_CREATE_DIRECTORY, directoryPath));
         }
     }
     
     private void initializeFile() throws StorageException, IOException {
-        File file = new File(taskFilePath);
+        File file = new File(filePath);
         if (!file.exists() && !file.createNewFile()) {
-            throw new StorageException(String.format(UNABLE_TO_CREATE_FILE, taskFilePath));
+            throw new StorageException(String.format(ERROR_UNABLE_TO_CREATE_FILE, filePath));
         }
     }
 
-    protected List<String> readFile() throws StorageException {
+    private List<String> readFile() throws StorageException {
         try {
-            Path filePath = Paths.get(taskFilePath);
+            Path filePath = Paths.get(this.filePath);
             return Files.readAllLines(filePath);
             
         } catch (IOException exception) {
-            throw new StorageException(String.format(UNABLE_TO_LOAD_PATH, taskFilePath));
+            throw new StorageException(String.format(ERROR_UNABLE_TO_LOAD_PATH, filePath));
         }
     }
 
-    protected List<Task> decodeAll(List<String> taskLines) throws StorageException {
-        return taskLines.stream()
-                .map(this::decodeToTask)
+    private List<T> decodeAll(List<String> lines) throws StorageException {
+        return lines.stream()
+                .map(this::decode)
                 .collect(Collectors.toList());
     }
+    
+    protected abstract T decode(String encoded) throws StorageException;
 
-    protected Task decodeToTask(String stringTask) throws StorageException {
-        String[] taskAsArray = stringTask.split(Task.SPLIT_TEMPLATE);
-        
-        try {
-            String keyword = taskAsArray[0];
-            boolean isDone = taskAsArray[1].equals(Task.DONE);
-            String desc = taskAsArray[2];
-            LocalDate date;
-            LocalTime time;
-            
-            switch (keyword) {
-            case Todo.KEYWORD:
-                return new Todo(desc, isDone);
-                
-            case Event.KEYWORD:
-                date = LocalDate.parse(taskAsArray[3]);
-                time = LocalTime.parse(taskAsArray[4]);
-                return new Event(desc, isDone, date, time);
-                
-            case Deadline.KEYWORD:
-                date = LocalDate.parse(taskAsArray[3]);
-                time = LocalTime.parse(taskAsArray[4]);
-                return new Deadline(desc, isDone, date, time);
-                
-            default:
-                throw new StorageException(String.format(UNABLE_TO_PARSE_TASK, stringTask));
-            }
-        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException exception) {
-            throw new StorageException(String.format(UNABLE_TO_PARSE_TASK, stringTask));
-        }
+    private List<String> encodeAll(List<T> list) {
+        return list.stream()
+                .map(this::encode)
+                .collect(Collectors.toList());
     }
+    
+    protected abstract String encode(T decoded);
 
     /**
      * Saves the current list of {@link kayu.task.Task} into file memory.
      *
-     * @param taskList List of {@link kayu.task.Task} to write to file.
+     * @param list List of {@link kayu.task.Task} to write to file.
      * @throws StorageException If unable to read/write to file.
      */
-    public void saveTasks(List<Task> taskList) throws StorageException {
+    public void save(List<T> list) throws StorageException {
         try {
-            Path filePath = Paths.get(taskFilePath);
-            List<String> taskLines = taskList.stream()
-                    .map(Task::toEncodedString)
-                    .collect(Collectors.toList());
-            Files.write(filePath, taskLines);
+            Path filePath = Paths.get(this.filePath);
+            List<String> lines = this.encodeAll(list);
+            Files.write(filePath, lines);
             
         } catch (IOException exception) {
-            throw new StorageException(UNABLE_TO_SAVE);
+            throw new StorageException(ERROR_UNABLE_TO_SAVE);
         }
     }
 }

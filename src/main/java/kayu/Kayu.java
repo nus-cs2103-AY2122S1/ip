@@ -5,11 +5,14 @@ import java.util.List;
 import kayu.commands.Command;
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
+import kayu.note.Note;
+import kayu.note.NoteList;
 import kayu.parser.Parser;
 import kayu.service.Logger;
-import kayu.service.TaskList;
-import kayu.storage.Storage;
+import kayu.storage.NoteStorage;
+import kayu.storage.TaskStorage;
 import kayu.task.Task;
+import kayu.task.TaskList;
 
 /**
  * Holds the main logic for Kayu project (CS2103T's iP).
@@ -26,8 +29,10 @@ public class Kayu {
     
     private final Parser parser = new Parser();
     private final TaskList taskList = new TaskList();
-    private final Storage storage = new Storage();
+    private final NoteList noteList = new NoteList();
     private final Logger logger = new Logger();
+    private final TaskStorage taskStorage = TaskStorage.generate();
+    private final NoteStorage noteStorage = NoteStorage.generate();
     
     private boolean isRecentCommandBye = false;
 
@@ -66,8 +71,10 @@ public class Kayu {
     }
     
     private void initializeTasks() throws StorageException {
-        List<Task> tasks = storage.load();
+        List<Task> tasks = taskStorage.load();
+        List<Note> notes = noteStorage.load();
         taskList.initializeTasks(tasks);
+        noteList.initializeNotes(notes);
     }
 
     /**
@@ -82,7 +89,7 @@ public class Kayu {
         isRecentCommandBye = (command.isBye()); // updates internally as a field
         
         try {
-            feedback = command.execute(taskList, storage);
+            feedback = command.execute(taskList, taskStorage, noteList, noteStorage);
             logger.printMessage(feedback);
 
         } catch (KayuException exception) {

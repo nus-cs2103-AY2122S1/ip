@@ -1,4 +1,4 @@
-package kayu.service;
+package kayu.task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,6 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import kayu.exception.KayuException;
-import kayu.task.Task;
 
 /**
  * Manages tasks held by the {@link kayu.Kayu}.

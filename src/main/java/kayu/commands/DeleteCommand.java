@@ -5,13 +5,15 @@ import static kayu.commands.CommandMessage.MESSAGE_DELETED_TASK;
 
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
-import kayu.service.TaskList;
-import kayu.storage.Storage;
+import kayu.note.NoteList;
+import kayu.storage.NoteStorage;
+import kayu.storage.TaskStorage;
 import kayu.task.Task;
+import kayu.task.TaskList;
 
 /**
  * Represents a {@link kayu.commands.Command} that deletes a certain {@link kayu.task.Task}
- * in {@link kayu.service.TaskList}.
+ * in {@link TaskList}.
  */
 public class DeleteCommand extends Command {
 
@@ -31,11 +33,16 @@ public class DeleteCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) throws KayuException, StorageException {
+    public String execute(TaskList taskList,
+                          TaskStorage taskStorage,
+                          NoteList noteList,
+                          NoteStorage noteStorage)
+            throws KayuException, StorageException {
+        
         try {
             int taskNumber = Integer.parseInt(commandParams);
             Task selectedTask = taskList.deleteTask(taskNumber);
-            super.updateFileStorage(taskList, storage);
+            super.updateTaskFileStorage(taskList, taskStorage);
             return String.format(MESSAGE_DELETED_TASK, selectedTask, taskList.getCurrentCapacity());
             
         } catch (NumberFormatException exception) {

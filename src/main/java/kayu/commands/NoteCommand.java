@@ -1,32 +1,31 @@
 package kayu.commands;
 
 import static kayu.commands.CommandMessage.ASSERT_FAIL_NULL_TASK;
-import static kayu.commands.CommandMessage.MESSAGE_CREATED_TODO;
+import static kayu.commands.CommandMessage.MESSAGE_CREATED_NOTE;
 
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
+import kayu.note.Note;
 import kayu.note.NoteList;
 import kayu.storage.NoteStorage;
 import kayu.storage.TaskStorage;
-import kayu.task.Task;
 import kayu.task.TaskList;
-import kayu.task.Todo;
 
 /**
- * Represents an {@link Command} that creates a {@link kayu.task.Todo}
- * and saves it in {@link TaskList}.
+ * Represents an {@link Command} that creates a {@link kayu.note.Note}
+ * and saves it in {@link NoteList}.
  */
-public class TodoCommand extends Command {
+public class NoteCommand extends Command {
 
     /** Keyword for command. */
-    public static final String COMMAND_WORD = "todo";
+    public static final String COMMAND_WORD = "note";
 
     /**
-     * Initializes a Todo- {@link Command}.
+     * Initializes a Note- {@link Command}.
      *
      * @param commandParams String parameters fed into the command by user.
      */
-    public TodoCommand(String commandParams) {
+    public NoteCommand(String commandParams) {
         super(commandParams);
     }
 
@@ -40,15 +39,15 @@ public class TodoCommand extends Command {
                           NoteStorage noteStorage)
             throws KayuException, StorageException {
 
-        Task todo = createTask();
-        updateTasks(taskList, taskStorage, todo);
-        
-        return String.format(MESSAGE_CREATED_TODO, todo, taskList.getCurrentCapacity());
+        Note note = createNote();
+        updateNotes(noteList, noteStorage, note);
+
+        return String.format(MESSAGE_CREATED_NOTE, note, noteList.getCurrentCapacity());
     }
 
-    private Task createTask() throws KayuException {
+    private Note createNote() throws KayuException {
         String desc = extractDesc(commandParams);
-        return new Todo(desc);
+        return new Note(desc);
     }
 
     // call on wrapper method in util class
@@ -56,9 +55,9 @@ public class TodoCommand extends Command {
         return CommandUtils.extractDesc(new String[] {params}, COMMAND_WORD);
     }
 
-    private void updateTasks(TaskList taskList, TaskStorage taskStorage, Task task) throws StorageException {
-        assert (task != null) : ASSERT_FAIL_NULL_TASK;
-        taskList.addTask(task);
-        super.updateTaskFileStorage(taskList, taskStorage);
+    private void updateNotes(NoteList noteList, NoteStorage noteStorage, Note note) throws StorageException {
+        assert (note != null) : ASSERT_FAIL_NULL_TASK;
+        noteList.addNote(note);
+        super.updateNoteFileStorage(noteList, noteStorage);
     }
 }

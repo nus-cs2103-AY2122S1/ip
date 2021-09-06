@@ -11,6 +11,7 @@ import kayu.commands.FindCommand;
 import kayu.commands.HelpCommand;
 import kayu.commands.InvalidCommand;
 import kayu.commands.ListCommand;
+import kayu.commands.NoteCommand;
 import kayu.commands.TodoCommand;
 
 /**
@@ -63,6 +64,10 @@ public class Parser {
             case DeadlineCommand.COMMAND_WORD:
                 params = inputs[1];
                 return new DeadlineCommand(params);
+                
+            case NoteCommand.COMMAND_WORD:
+                params = inputs[1];
+                return new NoteCommand(params);
                                 
             default:
                 return (userInput.isBlank()) ? new EmptyCommand() : new InvalidCommand();

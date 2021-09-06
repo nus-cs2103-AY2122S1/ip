@@ -1,6 +1,6 @@
 package kayu.storage;
 
-import static kayu.storage.Storage.UNABLE_TO_PARSE_TASK;
+import static kayu.storage.TaskStorage.ERROR_UNABLE_TO_PARSE_TASK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -25,13 +25,14 @@ import kayu.task.Event;
 import kayu.task.Task;
 import kayu.task.Todo;
 
-public class StorageTest {
-    
+public class TaskStorageTest {
+
     private static final String RESOURCE_PATH = "src/test/resources";
-    private static final String FILE_PATH = RESOURCE_PATH + "/storage_test_default.txt";
+    private static final String TASK_FILE_PATH = RESOURCE_PATH + "/task_storage_test_default.txt";
     private static final List<Task> TASKS = new ArrayList<>();
-    private Storage storage;
     
+    private TaskStorage taskStorage;
+
     @BeforeAll
     public static void setTaskList() {
         TASKS.clear();
@@ -48,23 +49,22 @@ public class StorageTest {
     }
     
     @BeforeEach
-    public void setUp() {
-        storage = new Storage();
-        storage.setDirectoryAndFilePath(FILE_PATH);
+    public void setUp() throws IOException {
+        taskStorage = TaskStorage.generate(TASK_FILE_PATH);
     }
-    
+
     @AfterEach
     public void reset() throws IOException {
-        Path filePath = Paths.get(FILE_PATH);
+        Path filePath = Paths.get(TASK_FILE_PATH);
         List<String> taskLines = TASKS.stream()
                 .map(Task::toEncodedString)
                 .collect(Collectors.toList());
         Files.write(filePath, taskLines);
     }
-    
+
     @Test
     public void testLoad() throws StorageException {
-        List<Task> tasks = storage.load();
+        List<Task> tasks = taskStorage.load();
         assertEquals(3, tasks.size());
 
         for (int idx = 0; idx < tasks.size(); idx++) {
@@ -73,36 +73,37 @@ public class StorageTest {
             assertEquals(expectedTask.toString(), loadedTask.toString());
         }
     }
-    
+
     @Test
     public void testSave() throws StorageException, IOException {
         List<Task> newTasks = new ArrayList<>();
         newTasks.add(new Todo("test 1"));
         newTasks.add(new Todo("test 2"));
-        
-        storage.saveTasks(newTasks);
-        Path filePath = Paths.get(FILE_PATH);
+
+        taskStorage.save(newTasks);
+        Path filePath = Paths.get(TASK_FILE_PATH);
         List<String> saved = Files.readAllLines(filePath);
         assertEquals(newTasks.size(), saved.size());
-        
+
         for (int idx = 0; idx < newTasks.size(); idx++) {
             Task task = newTasks.get(idx);
             String encoded = saved.get(idx);
             assertEquals(task.toEncodedString(), encoded);
         }
     }
-    
+
     @Test
     public void load_formatIncorrect_throwsException() {
-        String newFilePath = RESOURCE_PATH + "/storage_test_incorrect.txt";
+        String newFilePath = RESOURCE_PATH + "/task_storage_test_incorrect.txt";
         String problematicLine = "T # 1 ? test this program";
-        storage.setDirectoryAndFilePath(newFilePath);
+        taskStorage = TaskStorage.generate(newFilePath);
+        
         try {
-            storage.load();
+            taskStorage.load();
             fail();
-            
+
         } catch (StorageException exception) {
-            String expected = String.format(UNABLE_TO_PARSE_TASK, problematicLine);
+            String expected = String.format(ERROR_UNABLE_TO_PARSE_TASK, problematicLine);
             assertEquals(expected, exception.getMessage());
         }
     }
