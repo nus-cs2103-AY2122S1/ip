@@ -6,6 +6,8 @@ import task.Task;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Deals with user interactions, mostly printing messages to the console following user commands.
@@ -65,12 +67,10 @@ public class Ui {
      * @return The task list in string representation.
      */
     public String showList(ArrayList<Task> taskList) {
-        StringBuilder list = new StringBuilder("  Here are the tasks in your list:\n");
-        for (int i = 0; i < taskList.size(); ++i) {
-            String entry = "  " + (i + 1) + "." + taskList.get(i).listEntry() + "\n";
-            list.append(entry);
-        }
-        return list.toString();
+        return "Here are the tasks in your list:\n"
+                + IntStream.range(0, taskList.size())
+                .mapToObj(i -> (i + 1) + "." + taskList.get(i).listEntry() + "\n")
+                .collect(Collectors.joining());
     }
 
     /**
@@ -101,40 +101,30 @@ public class Ui {
      * Displays a list of tasks in the current task list that takes place on the given date.
      *
      * @param taskList The task list.
-     * @param listLength The length of the current task list.
      * @param desiredDate The date used to find tasks.
      * @return A list of tasks taking place/to be done on the given date.
      */
-    public String showDateFind(ArrayList<Task> taskList, int listLength, LocalDate desiredDate) {
-        StringBuilder findList = new StringBuilder("  Here are the tasks for the given day:\n");
-        for (int i = 0; i < listLength; ++i) {
-            Task currTask = taskList.get(i);
-            if (currTask.isTodayTask(desiredDate)) {
-                String entry = "  " + (i + 1) + "." + taskList.get(i).listEntry() + "\n";
-                findList.append(entry);
-            }
-        }
-        return findList.toString();
+    public String showDateFind(ArrayList<Task> taskList, LocalDate desiredDate) {
+        return "Here are the tasks taking place on that date:\n"
+                + IntStream.range(0, taskList.size())
+                .filter(i -> taskList.get(i).isTodayTask(desiredDate))
+                .mapToObj(i -> (i + 1) + "." + taskList.get(i).listEntry() + "\n")
+                .collect(Collectors.joining());
     }
 
     /**
      * Displays a list of tasks in the current task list that contain the given keyword.
      *
      * @param taskList The task list.
-     * @param listLength The length of the current task list.
      * @param keyword The keyword to look for in the task names.
      * @return A list of tasks containing the given keyword.
      */
-    public String showKeywordFind(ArrayList<Task> taskList, int listLength, String keyword) {
-        StringBuilder findList = new StringBuilder("Here are the tasks with the given keyword:\n");
-        for (int i = 0; i < listLength; ++i) {
-            Task currTask = taskList.get(i);
-            if (currTask.containsKeyword(keyword)) {
-                String entry = "  " + (i + 1) + "." + taskList.get(i).listEntry() + "\n";
-                findList.append(entry);
-            }
-        }
-        return findList.toString();
+    public String showKeywordFind(ArrayList<Task> taskList, String keyword) {
+        return "Here are the tasks with that keyword:\n"
+                + IntStream.range(0, taskList.size())
+                .filter(i -> taskList.get(i).containsKeyword(keyword))
+                .mapToObj(i -> (i + 1) + "." + taskList.get(i).listEntry() + "\n")
+                .collect(Collectors.joining());
     }
 
     /**
