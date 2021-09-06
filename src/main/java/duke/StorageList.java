@@ -25,42 +25,39 @@ public class StorageList {
             char type = input.charAt(0);
             int doneState = Integer.parseInt(input.substring(4, 5));
 
-            if (type == 'T') {
+            if (type == 'T') { // T for todo
                 String taskDesc = input.substring(8);
                 ToDo todo = new ToDo(taskDesc);
+                checkIfDoneAndAdd(todo, doneState);
 
-                if (doneState == 1) {
-                    todo.markAsDone();
-                }
-                storageList.add(todo);
-
-            } else {
+            } else { // D for deadline
                 int thirdBarIdx = input.indexOf('|', 7);
                 String taskDesc = input.substring(8, thirdBarIdx - 1);
                 String taskTime = input.substring(thirdBarIdx + 2);
 
-                if (type == 'D') {
+                if (type == 'D') { // D for deadline
                     Deadline dl = new Deadline(taskDesc, taskTime);
-                    if (doneState == 1) {
-                        dl.markAsDone();
-                    }
-                    storageList.add(dl);
+                    checkIfDoneAndAdd(dl, doneState);
 
-                } else if (type == 'E') {
+                } else if (type == 'E') { // E for event
                     Event event = new Event(taskDesc, taskTime);
-                    if(doneState == 1){
-                        event.markAsDone();
-                    }
-                    storageList.add(event);
+                    checkIfDoneAndAdd(event, doneState);
                 }
             }
         }
     }
 
+    private void checkIfDoneAndAdd(Task task, int doneState) {
+        if(doneState == 1){
+            task.markAsDone();
+        }
+        storageList.add(task);
+    }
+
     /**
      * Adds a task to the storage list/task list.
      *
-     * @param task
+     * @param task The task to be added to the list.
      */
     public void addTask(Task task){
         storageList.add(task);

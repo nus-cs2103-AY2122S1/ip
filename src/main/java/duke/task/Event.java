@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected String at;
     protected LocalDateTime localDateTime;
-    private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
     public Event(String description, String at) {
         super(description);
@@ -35,12 +35,4 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + localDateTime.format(dateTimeFormatter) + ")";
     }
 
-    /**
-     * Prints out event task.
-     */
-    @Override
-    public void displayTask() {
-        System.out.println("        " + toString());
-
-    }
 }

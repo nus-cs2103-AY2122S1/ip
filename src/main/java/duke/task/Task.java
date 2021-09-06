@@ -29,7 +29,4 @@ public class Task {
         return "[" + getStatusIcon() + "]" + " " + description;
     }
 
-    public void displayTask() {
-        System.out.println("        " + toString());
-    }
 }

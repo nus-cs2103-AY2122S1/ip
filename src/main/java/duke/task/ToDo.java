@@ -16,11 +16,4 @@ public class ToDo extends Task {
         return "[T]" + super.toString();
     }
 
-    /**
-     * Prints out todo task.
-     */
-    @Override
-    public void displayTask() {
-        System.out.println("        " + toString());
-    }
 }

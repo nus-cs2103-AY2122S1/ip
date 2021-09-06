@@ -44,7 +44,7 @@ public class Storage {
                 if (task instanceof Deadline) {
                     taskType = "D ";
                     taskTime = ((Deadline) task).getBy();
-                } else if (task instanceof Event) {
+                } else {
                     taskType = "E ";
                     taskTime = ((Event) task).getAt();
                 }

@@ -117,14 +117,19 @@ public class Parser {
         return Integer.parseInt(input.substring(7)) - 1;
     }
 
+    public int getDoneIdx(String input) {
+        return Integer.parseInt(input.substring(5)) - 1;
+    }
+
     /**
      * Checks whether a done command has a valid index.
      *
-     * @param input Done command.
+     * @param taskNum The index of the task to be marked as done.
+     * @param size The size of the list.
      * @return Whether index is valid integer.
      */
-    public boolean isIntegerToBeMarked(String input) {
-        return input.substring(5).matches("[0-9]+");
+    public boolean hasValidInteger(int taskNum, int size) {
+        return taskNum < size && taskNum >= 0;
     }
 
     /**
