@@ -36,4 +36,15 @@ public class Ui {
             }
         }
     }
+
+    public void init() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        display("Hello from\n" + logo);
+        display("hello name is duke");
+        display("how is help today; （´・｀ ）♡");
+    }
 }
