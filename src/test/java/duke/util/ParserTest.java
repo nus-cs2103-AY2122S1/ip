@@ -16,8 +16,8 @@ public class ParserTest {
     @Test
     public void testParseCommandString_exitCommand_returnExitCommand() {
         Parser parser = new Parser();
-        Command finalCommand = new InvalidCommand();
-        Store storage = new Store("/Users/keithtan/Desktop/NUS/CS2103 IP/ip/data/duke.txt");
+        Command finalCommand;
+        Store storage = new Store("data/duke.txt");
         Tasklist tempList = new Tasklist();
         try {
 
@@ -35,7 +35,7 @@ public class ParserTest {
     public void testParseCommandString_invalidCommand_returnInvalidCommand() {
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
-        Store storage = new Store("/Users/keithtan/Desktop/NUS/CS2103 IP/ip/data/duke.txt");
+        Store storage = new Store("data/duke.txt");
         Tasklist tempList = new Tasklist();
         try {
 
@@ -53,7 +53,7 @@ public class ParserTest {
     public void testParseCommandString_todoTask_returnAddCommand() {
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
-        Store storage = new Store("/Users/keithtan/Desktop/NUS/CS2103 IP/ip/data/duke.txt");
+        Store storage = new Store("data/duke.txt");
         Tasklist tempList = new Tasklist();
         try {
 
@@ -71,7 +71,7 @@ public class ParserTest {
     public void testParseCommandString_deadlineTask_returnAddCommand() {
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
-        Store storage = new Store("/Users/keithtan/Desktop/NUS/CS2103 IP/ip/data/duke.txt");
+        Store storage = new Store("data/duke.txt");
         Tasklist tempList = new Tasklist();
         try {
 
@@ -90,7 +90,7 @@ public class ParserTest {
     public void testParseCommandString_eventTask_returnAddCommand() {
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
-        Store storage = new Store("/Users/keithtan/Desktop/NUS/CS2103 IP/ip/data/duke.txt");
+        Store storage = new Store("data/duke.txt");
         Tasklist tempList = new Tasklist();
         try {
 
@@ -109,7 +109,7 @@ public class ParserTest {
     public void testParseCommandString_invalidTask_returnInvalidCommand() {
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
-        Store storage = new Store("/Users/keithtan/Desktop/NUS/CS2103 IP/ip/data/duke.txt");
+        Store storage = new Store("data/duke.txt");
         Tasklist tempList = new Tasklist();
         try {
 
@@ -127,7 +127,7 @@ public class ParserTest {
     public void testParseCommandString_markTask_returnMarkCommand() {
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
-        Store storage = new Store("/Users/keithtan/Desktop/NUS/CS2103 IP/ip/data/duke.txt");
+        Store storage = new Store("data/duke.txt");
         Tasklist tempList = new Tasklist();
         try {
 
@@ -145,7 +145,7 @@ public class ParserTest {
     public void testParseCommandString_deleteTask_returnDeleteCommand() {
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
-        Store storage = new Store("/Users/keithtan/Desktop/NUS/CS2103 IP/ip/data/duke.txt");
+        Store storage = new Store("data/duke.txt");
         Tasklist tempList = new Tasklist();
         try {
 
@@ -163,7 +163,7 @@ public class ParserTest {
     public void testParseCommandString_invalidInteger_returnInvalidCommand() {
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
-        Store storage = new Store("/Users/keithtan/Desktop/NUS/CS2103 IP/ip/data/duke.txt");
+        Store storage = new Store("data/duke.txt");
         Tasklist tempList = new Tasklist();
         try {
 
