@@ -36,10 +36,11 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]"
-                + super.toString()
-                + " (at: "
-                + at.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                + ")";
+        String taskType = "[E]";
+        String taskDescription = super.toString();
+        String atDate = at.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String taskAt = " (at: " + atDate + ")";
+
+        return taskType + taskDescription + taskAt;
     }
 }

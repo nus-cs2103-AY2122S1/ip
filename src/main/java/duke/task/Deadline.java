@@ -38,10 +38,11 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]"
-                + super.toString()
-                + " (by: "
-                + by.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                + ")";
+        String taskType = "[D]";
+        String taskDescription = super.toString();
+        String byDate = by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String taskBy = " (by: " + byDate + ")";
+
+        return taskType + taskDescription + taskBy;
     }
 }

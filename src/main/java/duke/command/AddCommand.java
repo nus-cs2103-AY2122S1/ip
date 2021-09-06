@@ -22,62 +22,111 @@ public class AddCommand extends Command{
         TODO, EVENT, DEADLINE
     }
 
-    private final String taskType;
-    private final String taskDescriptions;
+    private static final String errorMessage = "The task description is incomplete!";
+
+    private final boolean hasTaskDate;
+    private final TaskType taskType;
+    private final String taskDescription;
+    private final LocalDate taskDate;
 
     /**
      * Constructs an AddCommand instance that handles the logic of task-addition.
      *
      * @param taskType The type of the to-be-added task.
-     * @param taskDescriptions The description of the to-be-added task.
+     * @param taskFullDetail The description of the to-be-added task.
+     * @throws IncompleteDescriptionException The exception for handling command with incomplete description.
+     * @throws InvalidDateFormatException The exception for handling command with invalid date format.
      */
-    public AddCommand(String taskType, String taskDescriptions) {
-        this.taskType = taskType;
-        this.taskDescriptions = taskDescriptions;
+    public AddCommand(String taskType, String taskFullDetail) throws IncompleteDescriptionException,
+            InvalidDateFormatException {
+        this.taskType = TaskType.valueOf(taskType);
+        this.hasTaskDate = !taskType.equals("TODO");
+
+        String[] taskDetails = splitDetail(taskFullDetail);
+
+        this.taskDescription = getTaskDescription(taskDetails);
+        this.taskDate = getTaskDate(taskDetails);
     }
 
-    private String[] validateCommand() throws IncompleteDescriptionException, InvalidDateFormatException {
-        // The descriptions of the task splits into two components.
-        String[] descriptionComponents = taskDescriptions.split(" /by | /at ", 2);
-
-        // The messages used to alert the user for unexpected situations.
-        String descriptionMessage = "The description of a %s is incomplete.";
-        String dateMessage = "Please specify the date in yyyy-mm-dd format!";
-
-        if (taskType.equals("TODO")) {
-            return descriptionComponents;
+    private String[] splitDetail(String fullDetail) throws IncompleteDescriptionException {
+        String[] details = fullDetail.split(" /by | /at ", 2);
+        boolean isShortDescription = details.length < 2;
+        if (hasTaskDate && isShortDescription) {
+            throw new IncompleteDescriptionException(errorMessage);
         }
-
-        // Checks whether the command consists of 2 parts and if the date is specified in the command.
-        boolean isShortDescription = descriptionComponents.length < 2;
-        boolean isIncompleteDescription = isShortDescription || descriptionComponents[1].trim().isEmpty();
-
-        if (isIncompleteDescription) {
-            throw new IncompleteDescriptionException(String.format(descriptionMessage, taskType.toLowerCase()));
-        }
-
-        // Checks if the date specified match the format.
-        boolean matchDateFormat = descriptionComponents[1].matches("\\d{4}-\\d{2}-\\d{2}");
-
-        if (matchDateFormat) {
-            return descriptionComponents;
-        } else {
-            throw new InvalidDateFormatException(dateMessage);
-        }
-
+        return details;
     }
 
-    private Task createTask(String description, LocalDate date) {
-        switch (TaskType.valueOf(taskType)) {
+    // Returns task description if it is not empty, else, throws exception.
+    private String getTaskDescription(String[] taskDetails) throws IncompleteDescriptionException {
+        String description = taskDetails[0];
+        identifyAllWhiteSpace(description);
+        return description;
+    }
+
+    // Returns task date if it is not empty/invalid, else, throws exception.
+    private LocalDate getTaskDate(String[] taskDetails) throws IncompleteDescriptionException,
+            InvalidDateFormatException {
+        LocalDate date = null;
+        if (hasTaskDate) {
+            String taskDateString =  taskDetails[1];
+            identifyAllWhiteSpace(taskDateString);
+            identifyInvalidDateFormat(taskDateString);
+
+            date = toLocalDate(taskDateString);
+        }
+
+        return date;
+    }
+
+    // Throws IncompleteDescriptionException when the task description or the task date consists purely whitespace(s).
+    private void identifyAllWhiteSpace(String detail) throws IncompleteDescriptionException {
+        boolean isAllWhiteSpace = detail.trim().isEmpty();
+        if (isAllWhiteSpace) {
+            throw new IncompleteDescriptionException(errorMessage);
+        }
+    }
+
+    // Throws InvalidDateFormatException when the task date specified has invalid format.
+    private void identifyInvalidDateFormat(String dateString) throws InvalidDateFormatException {
+        boolean isInvalidDateFormat = !dateString.matches("\\d{4}-\\d{2}-\\d{2}");
+        String invalidDateFormatMessage = "Please specify the date in yyyy-mm-dd format!";
+
+        if (isInvalidDateFormat) {
+            throw new InvalidDateFormatException(invalidDateFormatMessage);
+        }
+    }
+
+    // Parses date string to LocalDate instance, then, returns it.
+    private LocalDate toLocalDate(String dateString) throws InvalidDateFormatException {
+        try {
+            return LocalDate.parse(dateString);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateFormatException(e.getMessage());
+        }
+    }
+
+    // Returns a task instance according to the type with specified description and date, if any.
+    private Task createTask() {
+        switch (taskType) {
         case TODO:
-            return new Todo(description);
+            return new Todo(taskDescription);
         case EVENT:
-            return new Event(description, date);
+            return new Event(taskDescription, taskDate);
         case DEADLINE:
-            return new Deadline(description, date);
+            return new Deadline(taskDescription, taskDate);
         default:
             return null;
         }
+    }
+
+    // Returns a response telling the user that the task has been successfully added and stored.
+    private String createResponse(TaskList tasks, Task task) {
+        String prefix = "Got it. I've added this task:\n ";
+        int taskNum = tasks.getTaskNum();
+        String summary = "\nNow you have " + taskNum + " tasks in the list.";
+
+        return String.format("%s%s", prefix + task, summary);
     }
 
     /**
@@ -86,29 +135,15 @@ public class AddCommand extends Command{
      * @param tasks The list that stores all the tasks to be added/deleted.
      * @param ui The ui that deals with interactions with the user.
      * @param storage The storage that deals with loading tasks from the file and saving tasks in the file.
-     * @throws IncompleteDescriptionException The exception for handling command with incomplete description.
-     * @throws InvalidDateFormatException The exception for handling command with invalid date format.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws IncompleteDescriptionException,
-            InvalidDateFormatException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            // The components of the command that specifies the task's details.
-            String[] taskComponents = validateCommand();
-            String description = taskComponents[0];
-            LocalDate date = taskType.equals("TODO") ? null : LocalDate.parse(taskComponents[1]);
-
-            // Create task, then add to the list and save it.
-            Task task = createTask(description, date);
+            Task task = createTask();
             tasks.add(task);
             storage.save(tasks);
 
-            return String.format("%s%s",
-                    "Got it. I've added this task:\n "
-                    + task,
-                    "\nNow you have "
-                    + tasks.getTaskNum()
-                    + " tasks in the list.");
+            return createResponse(tasks, task);
         } catch (DateTimeParseException e) {
             return new Ui().showError(e.getMessage());
         }

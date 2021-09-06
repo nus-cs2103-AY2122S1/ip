@@ -9,6 +9,8 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.UnknownCommand;
 import duke.exception.EmptyDescriptionException;
+import duke.exception.IncompleteDescriptionException;
+import duke.exception.InvalidDateFormatException;
 
 /**
  * A class that deals with making sense of the user command.
@@ -29,14 +31,10 @@ public class Parser {
         return CommandType.UNKNOWN;
     }
 
-    private static String[] validateCommand(String fullCommand) throws EmptyDescriptionException {
-        // Split command type and command descriptions.
+    private static String[] splitCommand(String fullCommand) throws EmptyDescriptionException {
         String[] commandComponents = fullCommand.split(" ", 2);
-
-        // The message used to alert the user when command entered is empty.
         String message = "The description of [%s] command cannot be empty.";
 
-        // Checks whether the command consists of 2 parts and if the description is specified in the command.
         boolean isShortCommand = commandComponents.length < 2;
         boolean isEmptyDescription = isShortCommand || commandComponents[1].trim().isEmpty();
 
@@ -54,58 +52,47 @@ public class Parser {
      * @return The command class based on the type specified in the command.
      * @throws EmptyDescriptionException The exception that handles command with empty description.
      */
-    public static Command parse(String fullCommand) throws EmptyDescriptionException {
+    public static Command parse(String fullCommand) throws EmptyDescriptionException, IncompleteDescriptionException,
+            InvalidDateFormatException {
         boolean isEmptyCommand = fullCommand.isEmpty() || fullCommand.trim().isEmpty();
 
         if (isEmptyCommand) {
             throw new EmptyDescriptionException("Please do not enter empty command!");
         }
 
-        // Split command type and command descriptions.
         String[] commandComponents = fullCommand.split(" ", 2);;
         String commandType = commandComponents[0].toUpperCase();
 
         int taskNum;
         String commandDescription;
 
-        Command command;
-
         switch (toEnum(commandType)) {
         case LIST:
-            command = new ListCommand();
-            break;
+            return new ListCommand();
         case BYE:
-            command = new ExitCommand();
-            break;
+            return new ExitCommand();
         case DONE:
-            commandComponents = validateCommand(fullCommand);
+            commandComponents = splitCommand(fullCommand);
             taskNum = Integer.parseInt(commandComponents[1]);
-            command = new DoneCommand(taskNum);
-            break;
+            return new DoneCommand(taskNum);
         case DELETE:
-            commandComponents = validateCommand(fullCommand);
+            commandComponents = splitCommand(fullCommand);
             taskNum = Integer.parseInt(commandComponents[1]);
-            command = new DeleteCommand(taskNum);
-            break;
+            return new DeleteCommand(taskNum);
         case TODO:
             // Fallthrough
         case EVENT:
             // Fallthrough
         case DEADLINE:
-            commandComponents = validateCommand(fullCommand);
+            commandComponents = splitCommand(fullCommand);
             commandDescription = commandComponents[1];
-            command = new AddCommand(commandType, commandDescription);
-            break;
+            return new AddCommand(commandType, commandDescription);
         case FIND:
-            commandComponents = validateCommand(fullCommand);
+            commandComponents = splitCommand(fullCommand);
             commandDescription = commandComponents[1];
-            command = new FindCommand(commandDescription);
-            break;
+            return new FindCommand(commandDescription);
         default:
-            command = new UnknownCommand();
-            break;
+            return new UnknownCommand();
         }
-
-        return command;
     }
 }

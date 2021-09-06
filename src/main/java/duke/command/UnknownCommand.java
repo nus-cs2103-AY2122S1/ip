@@ -17,18 +17,19 @@ public class UnknownCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return String.format("%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n",
-                "I'm sorry, but I don't know what that means :-(",
-                "Try the following commands instead:\n",
-                "1. list - List all the existing tasks",
-                "2. bye - Exit from duke.Duke's service",
-                "3. done {N} -  Mark task of number 'N' as done",
-                "4. delete {N} - Delete task of number 'N'",
-                "5. todo {description} - Add a todo with the specified 'description'",
-                "6. event {description} /at {date} - "
-                        + "Add an event with the specified 'description' happening at 'date'",
-                "7. deadline {description} /by {date} - "
-                        + "Add a deadline with the specified 'description' expires at 'date'");
+        String prefix = "I'm sorry, but I don't know what that means :-(\nTry the following commands instead:";
+        String suggestion1 = "1. list - List all the existing tasks";
+        String suggestion2 = "2. bye - Exit from duke.Duke's service";
+        String suggestion3 = "3. done {N} -  Mark task of number 'N' as done";
+        String suggestion4 = "4. delete {N} - Delete task of number 'N'";
+        String suggestion5 = "5. todo {description} - Add a todo with the specified 'description'";
+        String suggestion6 = "6. event {description} /at {date} - "
+                + "Add an event with the specified 'description' happening at 'date'";
+        String suggestion7 = "7. deadline {description} /by {date} - "
+                + "Add a deadline with the specified 'description' expires at 'date'";
+
+        return String.format("%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n",
+                prefix, suggestion1, suggestion2, suggestion3, suggestion4, suggestion5, suggestion6, suggestion7);
     }
 
     /**

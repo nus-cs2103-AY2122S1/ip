@@ -21,6 +21,12 @@ public class DoneCommand extends Command {
         this.taskNum = taskNum;
     }
 
+    // Returns a response telling the user that the task has been successfully marked as done.
+    private String createResponse(Task task) {
+        String prefix = "Nice! I've marked this task as done:\n ";
+        return String.format("%s%s", prefix, task);
+    }
+
     /**
      * Returns the response after executing the task-mark-as-done command.
      *
@@ -30,14 +36,11 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        // Get the task at specified index, mark it as done, and save the change.
         Task task = tasks.getTasks().get(taskNum - 1);
         task.markAsDone();
         storage.save(tasks);
 
-        return String.format("%s%s",
-                "Nice! I've marked this task as done:\n ",
-                task);
+        return createResponse(task);
     }
 
     /**

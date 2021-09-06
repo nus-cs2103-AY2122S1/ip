@@ -13,12 +13,21 @@ public class DeleteCommand extends Command {
     private final int taskNum;
 
     /**
-     * Construcyts a DeleteCommand object that handles task-deletion command.
+     * Constructs a DeleteCommand object that handles task-deletion command.
      *
      * @param taskNum The number of the to-be-deleted task.
      */
     public DeleteCommand(int taskNum) {
         this.taskNum = taskNum;
+    }
+
+    // Returns a response telling the user that the task has been successfully deleted.
+    private String createResponse(TaskList tasks, Task task) {
+        String prefix = "Noted. I've deleted this task:\n ";
+        int taskNum = tasks.getTaskNum();
+        String summary = "\nNow you have " + taskNum + " tasks in the list.";
+
+        return String.format("%s%s", prefix + task, summary);
     }
 
     /**
@@ -30,17 +39,11 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        // Get the task at specified index, delete it, and save the change.
         Task task = tasks.getTasks().get(taskNum - 1);
         tasks.delete(taskNum - 1);
         storage.save(tasks);
 
-        return String.format("%s%s",
-                "Noted. I've deleted this task:\n "
-                + task,
-                "\nNow you have "
-                + tasks.getTaskNum()
-                + " tasks in the list.");
+        return createResponse(tasks, task);
     }
 
     /**

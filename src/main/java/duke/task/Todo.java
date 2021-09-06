@@ -31,6 +31,9 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        String taskType = "[T]";
+        String taskDescription = super.toString();
+
+        return taskType + taskDescription;
     }
 }

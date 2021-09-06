@@ -28,12 +28,10 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        // The default response message.
         StringBuilder response = new StringBuilder("Here are the matching tasks in your list:\n");
         int index = 1;
 
         for (Task task : tasks.getTasks()) {
-            // Get the string representation of the task.
             String taskString = task.toString();
 
             if (taskString.contains(keyword)) {
