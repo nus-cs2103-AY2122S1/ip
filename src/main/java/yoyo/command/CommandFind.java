@@ -14,9 +14,9 @@ public class CommandFind extends Command {
     /**
      * Executes "find" command.
      *
-     * @param tasks   Tasks currently in the Yoyo program.
-     * @param storage Storage instance of the Yoyo program.
-     * @param dialogHandler      Ui instance of Yoyo program.
+     * @param tasks         Tasks currently in the Yoyo program.
+     * @param storage       Storage instance of the Yoyo program.
+     * @param dialogHandler Ui instance of Yoyo program.
      * @return The result string to be shown to user.
      * @throws YoyoException
      */
@@ -25,6 +25,10 @@ public class CommandFind extends Command {
             throws YoyoException {
         checkCompleteCommand(inputTokens);
         int taskListLength = tasks.size();
+        if (taskListLength == 0) {
+            return dialogHandler.printTaskList(tasks);
+        }
+
         String searchString = inputTokens[1];
         TaskList matchingTasks = new TaskList();
         for (int i = 0; i < taskListLength; i++) {
@@ -33,12 +37,7 @@ public class CommandFind extends Command {
                 matchingTasks.add(currentTask);
             }
         }
-        if (taskListLength == 0) {
-            return dialogHandler.printTaskList(tasks);
-        } else {
-            return dialogHandler.printMatchingTaskList(matchingTasks);
-        }
-
+        return dialogHandler.printMatchingTaskList(matchingTasks);
     }
 
 }

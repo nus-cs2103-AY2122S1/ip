@@ -14,8 +14,8 @@ public class CommandDelete extends Command {
     /**
      * Executes "delete" command.
      *
-     * @param tasks Tasks currently in the Yoyo program.
-     * @param storage Storage instance of the Yoyo program.
+     * @param tasks         Tasks currently in the Yoyo program.
+     * @param storage       Storage instance of the Yoyo program.
      * @param dialogHandler Ui instance of Yoyo program.
      * @return The result string to be shown to user.
      * @throws YoyoException

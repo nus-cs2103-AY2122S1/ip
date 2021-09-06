@@ -1,7 +1,5 @@
 package yoyo.command;
 
-import java.time.LocalDateTime;
-
 import yoyo.core.DialogHandler;
 import yoyo.core.Parser;
 import yoyo.core.Storage;
@@ -9,6 +7,8 @@ import yoyo.exception.YoyoException;
 import yoyo.task.Deadline;
 import yoyo.task.Task;
 import yoyo.task.TaskList;
+
+import java.time.LocalDateTime;
 
 public class CommandDeadline extends Command {
     public CommandDeadline(String[] inputTokens) {
@@ -18,8 +18,8 @@ public class CommandDeadline extends Command {
     /**
      * Executes "deadline" command.
      *
-     * @param tasks Tasks currently in the Yoyo program.
-     * @param storage Storage instance of the Yoyo program.
+     * @param tasks         Tasks currently in the Yoyo program.
+     * @param storage       Storage instance of the Yoyo program.
      * @param dialogHandler Ui instance of Yoyo program.
      * @return The result string to be shown to user.
      * @throws YoyoException
