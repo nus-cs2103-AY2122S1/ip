@@ -60,33 +60,3 @@ public class Ui {
         System.out.println(DIVIDER + "\t" + message);
     }
 }
-
-//Code to expand on in the future
-
-//    public void printMarkedDone(duke.tasks.Task t) {
-//        String message = "Nice! I've marked this task as done:\n";
-//        printUiMessage(message + t);
-//    }
-//
-//    public void printDeleteMessage(duke.tasks.Task t, int size) {
-//        String message = "Noted. I've removed this task: \n";
-//        String update = "Now you have " + size + " duke.tasks in the list.";
-//        printUiMessage(message + t + "\n" + update);
-//    }
-//
-//    public void printAddMessage(duke.tasks.Task t, int size) {
-//        String message = "Noted. I've added this task: \n";
-//        String update = "Now you have " + size + " duke.tasks in the list.";
-//        printUiMessage(message + t + "\n" + update);
-//    }
-//
-//    public void printUiMessage(String message) {
-//        System.out.println(DIVIDER + "\n"  + message);
-//    }
-//
-//    public void showError(String message) {
-//    }
-//
-//    public void showLoadingError() {
-//    }
-
