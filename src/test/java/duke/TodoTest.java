@@ -1,9 +1,10 @@
 package duke;
 
-import duke.tasks.Todo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.tasks.Todo;
 
 public class TodoTest {
     @Test
@@ -15,7 +16,7 @@ public class TodoTest {
     @Test
     public void testOutput2() {
         Todo todo = new Todo("merge branch", false);
-        assertEquals("[T][ ] merge branch", todo.toString());
+        assertEquals("[T][  ] merge branch", todo.toString());
     }
 
     @Test

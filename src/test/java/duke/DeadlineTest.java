@@ -1,11 +1,13 @@
 package duke;
 
-import duke.exceptions.UserInputError;
-import duke.tasks.Deadline;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
+import duke.exceptions.UserInputError;
+import duke.tasks.Deadline;
+
 
 public class DeadlineTest {
     @Test
@@ -17,7 +19,7 @@ public class DeadlineTest {
     @Test
     public void testOutput2() throws UserInputError {
         Deadline deadline = new Deadline("merge branch", "2021-09-09", false);
-        assertEquals("[D][ ] merge branch (by: Sep 9 2021)", deadline.toString());
+        assertEquals("[D][  ] merge branch (by: Sep 9 2021)", deadline.toString());
     }
 
     @Test
@@ -29,7 +31,7 @@ public class DeadlineTest {
     @Test
     public void testInvalidDate2() {
         assertThrows(UserInputError.class, () ->
-                new Deadline("merge branch", "tmr", false));
+                new Deadline("merge branch", "next", false));
     }
 
     @Test

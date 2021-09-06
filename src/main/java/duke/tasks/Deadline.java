@@ -1,10 +1,10 @@
 package duke.tasks;
 
-import duke.exceptions.UserInputError;
-
-import java.time.format.DateTimeFormatter;
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import duke.exceptions.UserInputError;
 
 /**
  * The Deadline class that represents a task with a starting datetime.
