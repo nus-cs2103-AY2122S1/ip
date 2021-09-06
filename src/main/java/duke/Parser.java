@@ -32,7 +32,9 @@ public class Parser {
             throw new InvalidTaskException("Invalid command! Please enter the following commands only:\n"
                                            + "list\ndone (task number)\n"
                                            + "delete (task number)\ntodo (description)\n"
-                                           + "deadline (description) /by (time)\nevent (description) /at (time)");
+                                           + "deadline (description) /by (time)\nevent (description) /at (time)"
+                                           + "find (keyword)"
+                                           + "edit (task number) description/time /to (edited task)");
         } else {
             return parsedCommand;
         }
@@ -51,7 +53,7 @@ public class Parser {
         if (parsed.length == 1) {
             throw new NoDescriptionException("Please enter the task no.!");
         } else {
-            return Integer.parseInt(parsed[1]);
+            return Integer.parseInt(parsed[1].substring(0, 1));
         }
     }
 
@@ -93,11 +95,17 @@ public class Parser {
             if (index == -1) {
                 if (conjunction.equals("by")) {
                     throw new WrongDescriptionException("Deadline not included! Try: deadline ... /by ...");
-                } else {
+                } else if (conjunction.equals("at")) {
                     throw new WrongDescriptionException("Event time not included! Try: event ... /at ...");
+                } else {
+                    throw new WrongDescriptionException("Edited task content not included! Try: edit ... /to ...");
                 }
             } else {
-                return new String[] {description.substring(0, index - 2), description.substring(index + 3)};
+                if (!conjunction.equals("to")) {
+                    return new String[]{description.substring(0, index - 2), description.substring(index + 3)};
+                } else {
+                    return new String[]{description.substring(2, index - 2), description.substring(index + 3)};
+                }
             }
         }
     }

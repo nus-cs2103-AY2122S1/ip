@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import duke.gui.Main;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -7,6 +10,8 @@ import duke.task.Task;
 import duke.task.Todo;
 import exception.DukeException;
 import javafx.application.Application;
+
+
 
 /**
  * Personal Assistant Chat bot to keep track of tasks
@@ -94,6 +99,21 @@ public class Duke {
 
             case BYE: {
                 return this.ui.bye();
+            }
+
+            case EDIT: {
+                int taskNo = parser.getTaskNo(input);
+                String oldTask = this.tasks.get(taskNo).toString();
+                String[] parsedContent = parser.parseDescription(input, "to");
+                if (parsedContent[0].equals("description")) {
+                    this.tasks.get(taskNo).setDescription(parsedContent[1]);
+                } else {
+                    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                    this.tasks.get(taskNo).setDateTime(LocalDateTime.parse(parsedContent[1], inputFormatter));
+                }
+                Task newTask = this.tasks.get(taskNo);
+                this.storage.editTask(oldTask, newTask.toString());
+                return this.ui.showEditMessage(newTask);
             }
 
             default: {
