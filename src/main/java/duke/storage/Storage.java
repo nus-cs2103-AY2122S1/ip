@@ -11,8 +11,6 @@ import duke.exceptions.DukeException;
 import duke.exceptions.DukeReadSaveException;
 import duke.tasks.Task;
 
-
-
 /**
  * Class to handle reading and writing the save file.
  */
@@ -67,7 +65,6 @@ public class Storage {
         assert Files.exists(path); // path file must exist
         ArrayList<String> strings = new ArrayList<>();
         for (Task task : taskList) {
-            String toWrite = "";
             strings.add(task.serialize());
         }
         try {

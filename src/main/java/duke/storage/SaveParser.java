@@ -1,5 +1,6 @@
 package duke.storage;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 import duke.exceptions.DukeReadSaveException;
@@ -8,14 +9,16 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
-
-
 /**
  * Parser class to create Task objects from string commands.
  */
 public class SaveParser {
     private static final DukeReadSaveException MISSING_ARG_EXCEPTION =
             new DukeReadSaveException("missing argument in save");
+    private static final String NAME_KEY = "\tName";
+    private static final String DONE_KEY = "\tDone";
+    private static final String AT_KEY = "\tAt";
+    private static final String BY_KEY = "\tBy";
 
     private Scanner scanner;
 
@@ -60,122 +63,140 @@ public class SaveParser {
         }
     }
 
+    /**
+     * Test if next line of savefile is the start of a new task block
+     *
+     * @return true if next line of savefile is the start of a new task block
+     */
+    private boolean nextLineIsANewTask() {
+        return this.scanner.hasNext("(Task:).*");
+    }
+
+    /**
+     * Parse the next line of the savefile and extract Key:Value as a 2 member string array
+     *
+     * @return Pair of [Key,Value]
+     */
+    private String[] getNextKeyValuePair() {
+        return this.scanner.nextLine().split(":", 2);
+    }
+
+    /**
+     * Create a checklist of arguments to mark found
+     *
+     * @param args String vargs of the keys to add to checklist
+     * @return HashMap checklist of (String Key, Boolean found)
+     */
+    private HashMap<String, Boolean> createArgumentCheckList(String... args) {
+        HashMap<String, Boolean> checkList = new HashMap<String, Boolean>(args.length);
+        for (String arg : args) {
+            checkList.put(arg, false);
+        }
+        return checkList;
+    }
+
     private Todo parseTodo() throws DukeReadSaveException {
+        HashMap<String, Boolean> argsFound = createArgumentCheckList(NAME_KEY, DONE_KEY);
         String name = "";
         boolean isDone = false;
-        boolean[] argsFound = new boolean[2];
 
-        String nl;
-        while (this.scanner.hasNextLine()) {
-            if (this.scanner.hasNext("(Task:).*")) {
+        while (this.hasNextLine()) {
+            if (nextLineIsANewTask()) {
                 //break if next line is the start of a new task
                 break;
             }
-            nl = this.scanner.nextLine();
-            if (nl.equals("")) {
+            String[] keyValuePair = this.getNextKeyValuePair();
+            assert keyValuePair.length == 2;
+            switch (keyValuePair[0]) {
+            case (NAME_KEY):
+                name = keyValuePair[1];
                 break;
-            }
-            String[] key_value = nl.split(":", 2);
-            assert key_value.length == 2;
-            switch (key_value[0]) {
-            case ("\tName"):
-                name = key_value[1];
-                argsFound[0] = true;
-                break;
-            case ("\tDone"):
-                isDone = Boolean.parseBoolean(key_value[1]);
-                argsFound[1] = true;
+            case (DONE_KEY):
+                isDone = Boolean.parseBoolean(keyValuePair[1]);
                 break;
             default:
                 // invalid line
             }
+            if (argsFound.containsKey(keyValuePair[0])) {
+                argsFound.put(keyValuePair[0], true);
+            }
         }
-        if (argsFound[0] && argsFound[1]) {
-            return new Todo(name, isDone);
+        if (argsFound.containsValue(false)) {
+            throw MISSING_ARG_EXCEPTION;
         }
-        throw MISSING_ARG_EXCEPTION;
+        return new Todo(name, isDone);
     }
 
     private Deadline parseDeadline() throws DukeReadSaveException {
+        HashMap<String, Boolean> argsFound = createArgumentCheckList(NAME_KEY, DONE_KEY, BY_KEY);
         String name = "";
         boolean isDone = false;
         String by = "";
-        boolean[] argsFound = new boolean[3];
 
-        String nl;
-        while (this.scanner.hasNextLine()) {
-            if (this.scanner.hasNext("(Task:).*")) {
+        while (this.hasNextLine()) {
+            if (nextLineIsANewTask()) {
                 //break if next line is the start of a new task
                 break;
             }
-            nl = this.scanner.nextLine();
-            if (nl.equals("")) {
+            String[] keyValuePair = this.getNextKeyValuePair();
+            assert keyValuePair.length == 2;
+            switch (keyValuePair[0]) {
+            case (NAME_KEY):
+                name = keyValuePair[1];
                 break;
-            }
-            String[] key_value = nl.split(":", 2);
-            assert key_value.length == 2;
-            switch (key_value[0]) {
-            case ("\tName"):
-                name = key_value[1];
-                argsFound[0] = true;
+            case (DONE_KEY):
+                isDone = Boolean.parseBoolean(keyValuePair[1]);
                 break;
-            case ("\tDone"):
-                isDone = Boolean.parseBoolean(key_value[1]);
-                argsFound[1] = true;
-                break;
-            case ("\tBy"):
-                by = key_value[1];
-                argsFound[2] = true;
+            case (BY_KEY):
+                by = keyValuePair[1];
                 break;
             default:
                 // invalid line
             }
+            if (argsFound.containsKey(keyValuePair[0])) {
+                argsFound.put(keyValuePair[0], true);
+            }
         }
-        if (argsFound[0] && argsFound[1] && argsFound[2]) {
-            return new Deadline(name, isDone, by);
+        if (argsFound.containsValue(false)) {
+            throw MISSING_ARG_EXCEPTION;
         }
-        throw MISSING_ARG_EXCEPTION;
+        return new Deadline(name, isDone, by);
+
     }
 
     private Event parseEvent() throws DukeReadSaveException {
+        HashMap<String, Boolean> argsFound = createArgumentCheckList(NAME_KEY, DONE_KEY, AT_KEY);
         String name = "";
         boolean isDone = false;
         String at = "";
-        boolean[] argsFound = new boolean[3];
 
-        String nl;
-        while (this.scanner.hasNextLine()) {
-            if (this.scanner.hasNext("(Task:).*")) {
+        while (this.hasNextLine()) {
+            if (nextLineIsANewTask()) {
                 //break if next line is the start of a new task
                 break;
             }
-            nl = this.scanner.nextLine();
-            if (nl.equals("")) {
-                //break if we hit an empty line
+            String[] keyValuePair = this.getNextKeyValuePair();
+            assert keyValuePair.length == 2;
+            switch (keyValuePair[0]) {
+            case (NAME_KEY):
+                name = keyValuePair[1];
                 break;
-            }
-            String[] key_value = nl.split(":", 2);
-            assert key_value.length == 2;
-            switch (key_value[0]) {
-            case ("\tName"):
-                name = key_value[1];
-                argsFound[0] = true;
+            case (DONE_KEY):
+                isDone = Boolean.parseBoolean(keyValuePair[1]);
                 break;
-            case ("\tDone"):
-                isDone = Boolean.parseBoolean(key_value[1]);
-                argsFound[1] = true;
-                break;
-            case ("\tAt"):
-                at = key_value[1];
-                argsFound[2] = true;
+            case (AT_KEY):
+                at = keyValuePair[1];
                 break;
             default:
                 // invalid line
             }
+            if (argsFound.containsKey(keyValuePair[0])) {
+                argsFound.put(keyValuePair[0], true);
+            }
         }
-        if (argsFound[0] && argsFound[1] && argsFound[2]) {
-            return new Event(name, isDone, at);
+        if (argsFound.containsValue(false)) {
+            throw MISSING_ARG_EXCEPTION;
         }
-        throw MISSING_ARG_EXCEPTION;
+        return new Event(name, isDone, at);
     }
 }
