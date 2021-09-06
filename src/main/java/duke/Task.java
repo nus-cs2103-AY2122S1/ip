@@ -6,8 +6,14 @@ package duke;
  * @author Kleon Ang
  */
 public abstract class Task {
+    private static final String DATA_DELIMITER = " | ";
     private final String description;
     private boolean isDone;
+    private Priority priority;
+
+    private enum Priority {
+        LOW, MEDIUM, HIGH
+    }
 
     /**
      * Constructor for a Task.
@@ -17,6 +23,7 @@ public abstract class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.priority = Priority.MEDIUM;
     }
 
     private String getStatusIcon() {
@@ -39,7 +46,7 @@ public abstract class Task {
      */
     public String getDataString() {
         String status = this.isDone ? "1" : "0";
-        return status + " | " + this.description;
+        return this.getPriority() + DATA_DELIMITER + status + DATA_DELIMITER + this.description;
     }
 
     /**
@@ -53,12 +60,42 @@ public abstract class Task {
     }
 
     /**
+     * Sets this task's priority to the given priority.
+     *
+     * @param priority A Priority (LOW, MEDIUM or HIGH)
+     */
+    public void setPriority(String priority) throws DukeException {
+        switch (priority) {
+        case "low":
+            this.priority = Priority.LOW;
+            break;
+        case "medium":
+            this.priority = Priority.MEDIUM;
+            break;
+        case "high":
+            this.priority = Priority.HIGH;
+            break;
+        default:
+            throw new DukeException("Please specify either 'low', 'medium' or 'high' priority.");
+        }
+    }
+
+    /**
+     * Gets a string representation of this task's priority level.
+     *
+     * @return A string representation of this task's priority level.
+     */
+    public String getPriority() {
+        return this.priority.toString();
+    }
+
+    /**
      * Returns a string representation of the Task.
      *
      * @return A string including the Task's status icon and description.
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + this.getPriority() + "][" + this.getStatusIcon() + "] " + this.description;
     }
 }

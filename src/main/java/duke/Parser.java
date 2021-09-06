@@ -89,6 +89,24 @@ public class Parser {
     }
 
     /**
+     * Sets a given task to a given priority level.
+     *
+     * @param taskIndex The index of the task to set priority.
+     * @param priorityToSet A string indicating which priority to set the task to.
+     * @return A string containing a success message for setting a priority.
+     * @throws DukeException A Duke-specific exception that may occur when setting priority.
+     */
+    private String priority(int taskIndex, String priorityToSet) throws DukeException {
+        if (taskIndex <= 0 || taskIndex > this.tasks.size()) {
+            throw new DukeException("Sorry, no such task of index " + taskIndex + ".");
+        }
+        Task taskToSetPriority = this.tasks.get(taskIndex - 1);
+        taskToSetPriority.setPriority(priorityToSet);
+        return "Nice! I've marked this task as " + taskToSetPriority.getPriority()
+                + " priority :\n  " + taskToSetPriority;
+    }
+
+    /**
      * Getter for the rewrite status of the last parsed command.
      *
      * @return True if data in Storage needs to be rewritten.
@@ -110,7 +128,7 @@ public class Parser {
      * Parses the user input and runs the corresponding command.
      *
      * @param userInput A string containing the user input.
-     * @return A TaskList containing the updated Tasks after command is parsed.
+     * @return A string containing the output to the user.
      * @throws DukeException A Duke-specific exception that occurs when user input is parsed.
      */
     public String parse(String userInput) throws DukeException {
@@ -125,20 +143,16 @@ public class Parser {
             String arguments = "";
             if (commandArguments.length == 2) {
                 arguments = commandArguments[1];
+            } else if (commandArguments.length < 2) {
+                throw new DukeException("☹ OOPS!!! The arguments of '" + command + "' cannot be empty.");
             }
+            assert !arguments.equals("") : "Argument required, cannot be empty.";
 
             if (command.equals("done")) {
-                if (commandArguments.length < 2) {
-                    throw new DukeException("☹ OOPS!!! The index of '" + command + "' cannot be empty.");
-                }
-                assert !arguments.equals("") : "Argument required, cannot be empty.";
-                int counter = Integer.parseInt(arguments);
-                return done(counter);
+                this.toRewriteData = true;
+                int taskIndex = Integer.parseInt(arguments);
+                return done(taskIndex);
             } else if (command.equals("deadline")) {
-                if (commandArguments.length < 2) {
-                    throw new DukeException("☹ OOPS!!! The description of '" + command + "' cannot be empty.");
-                }
-                assert !arguments.equals("") : "Argument required, cannot be empty.";
                 this.toRewriteData = true;
                 String[] splitTask = arguments.split(" /by ");
                 if (splitTask.length < 2) {
@@ -153,10 +167,6 @@ public class Parser {
                     throw new DukeException("Datetime should be in YYYY-MM-DD hr:min (24h clock) format.");
                 }
             } else if (command.equals("event")) {
-                if (commandArguments.length < 2) {
-                    throw new DukeException("☹ OOPS!!! The description of '" + command + "' cannot be empty.");
-                }
-                assert !arguments.equals("") : "Argument required, cannot be empty.";
                 this.toRewriteData = true;
                 String[] splitTask = arguments.split(" /at ");
                 if (splitTask.length < 2) {
@@ -171,27 +181,21 @@ public class Parser {
                     throw new DukeException("Datetime should be in YYYY-MM-DD hr:min (24h clock) format.");
                 }
             } else if (command.equals("todo")) {
-                if (commandArguments.length < 2) {
-                    throw new DukeException("☹ OOPS!!! The description of '" + command + "' cannot be empty.");
-                }
-                assert !arguments.equals("") : "Argument required, cannot be empty.";
                 this.toRewriteData = true;
                 return this.tasks.addTask(new Todo(arguments));
             } else if (command.equals("delete")) {
-                if (commandArguments.length < 2) {
-                    throw new DukeException("☹ OOPS!!! The index of '" + command + "' cannot be empty.");
-                }
-                assert !arguments.equals("") : "Argument required, cannot be empty.";
                 this.toRewriteData = true;
                 int counter = Integer.parseInt(arguments);
                 return this.tasks.deleteTask(counter);
             } else if (command.equals("find")) {
-                if (commandArguments.length < 2) {
-                    throw new DukeException("☹ OOPS!!! The keyword(s) of '" + command + "' cannot be empty.");
-                }
-                assert !arguments.equals("") : "Argument required, cannot be empty.";
                 this.toRewriteData = false;
                 return find(arguments);
+            } else if (command.equals("priority")) {
+                this.toRewriteData = true;
+                String[] splitArguments = arguments.split(" ");
+                int taskIndex = Integer.parseInt(splitArguments[0]);
+                String priorityToSet = splitArguments[1];
+                return priority(taskIndex, priorityToSet);
             }
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
