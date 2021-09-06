@@ -2,6 +2,7 @@ package iris;
 
 import iris.command.ByeCommand;
 import iris.command.Command;
+import iris.command.CommandWord;
 import iris.command.DeadlineCommand;
 import iris.command.DeleteCommand;
 import iris.command.DoneCommand;
@@ -39,35 +40,38 @@ public class Parser {
      * @throws IrisException if command is invalid
      */
     public static Command parse(String fullCommand) throws IrisException {
-        String command = fullCommand.split(" ")[0];
+        CommandWord commandWord = CommandWord.getCommandWord(fullCommand);
         String[] splitted;
 
-        switch (command) {
-        case "list":
+        switch (commandWord) {
+        case LIST:
             return new ListCommand();
-        case "todo":
+        case TODO:
             return new ToDoCommand(getMetadata(fullCommand));
-        case "deadline":
+        case DEADLINE:
             splitted = getMetadata(fullCommand).split(" /by ");
             if (splitted.length != 2) {
                 throw new IrisException("Expected format: deadline [name] /by [date]");
             }
             return new DeadlineCommand(splitted[0], splitted[1]);
-        case "event":
+        case EVENT:
             splitted = getMetadata(fullCommand).split(" /at ");
             if (splitted.length != 2) {
                 throw new IrisException("Expected format: event [name] /at [date]");
             }
             return new EventCommand(splitted[0], splitted[1]);
-        case "done":
+        case DONE:
             return new DoneCommand(parseInt(getMetadata(fullCommand)));
-        case "delete":
+        case DELETE:
             return new DeleteCommand(parseInt(getMetadata(fullCommand)));
-        case "find":
+        case FIND:
             return new FindCommand(getMetadata(fullCommand));
-        case "bye":
+        case BYE:
             return new ByeCommand();
+        case INVALID:
+            throw new IrisException("I'm sorry, but I don't know what that means.");
         default:
+            assert false;
             throw new IrisException("I'm sorry, but I don't know what that means.");
         }
     }
