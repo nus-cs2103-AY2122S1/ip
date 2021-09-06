@@ -1,7 +1,10 @@
-package duke;
+package duke.util;
+
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.util.Parser;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Ui {
 
@@ -10,7 +13,7 @@ public class Ui {
      */
     public String showGreeting() {
         String output = "    ____________________________________________________________\n"
-                + "     Hello! I'm Duke\n"
+                + "     Hello! I'm duke.Duke\n"
                 + "     What can I do for you?\n"
                 + "    ____________________________________________________________\n";
         return output;

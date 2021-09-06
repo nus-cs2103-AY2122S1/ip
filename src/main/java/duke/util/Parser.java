@@ -1,10 +1,16 @@
-package duke;
+package duke.util;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-class Parser {
+public class Parser {
     /**
      * Returns a Task recovered from the record.
      * @param record contain the information of a task
@@ -142,7 +148,6 @@ class Parser {
         } catch (IndexOutOfBoundsException e) {
             return "The task does not exist in task list.";
         }
-
 
         StringBuilder s = new StringBuilder();
         s.append("    ____________________________________________________________\n");

@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 //import javafx.application.Application;
@@ -14,10 +16,10 @@ import java.util.Scanner;
 //import javafx.scene.image.ImageView;
 //import javafx.stage.Stage;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.exception.DukeException;
+import duke.task.TaskList;
+import duke.util.Storage;
+import duke.util.Ui;
 import javafx.fxml.FXML;
 
 public class Duke {
@@ -37,7 +39,7 @@ public class Duke {
 //    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
-     * Constructs Duke objects
+     * Constructs duke.Duke objects
      */
     public Duke() {
         ui = new Ui();
@@ -52,36 +54,33 @@ public class Duke {
 
     public String process(String input) {
         return ui.readInput(taskList, input);
-
-//        try {
-//            storage.saveData(taskList);
-//        } catch (DukeException e) {
-//            System.out.println(e.toString());
-//        }
     }
 
     /**
      * Runs program.
      */
-//    public void run() {
-//        Scanner sc = new Scanner(System.in);
-//        //ui.showGreeting();
-//
-//        ui.readInput(taskList);
-//
-//        try {
-//            storage.saveData(taskList);
-//        } catch (DukeException e) {
-//            System.out.println(e.toString());
-//        }
-//
-//    }
+    public void run() {
+        ui.showGreeting();
+
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextLine()) {
+            String input = sc.nextLine();
+            ui.readInput(taskList, input);
+        }
+
+        try {
+            storage.saveData(taskList);
+        } catch (DukeException e) {
+            System.out.println(e.toString());
+        }
+
+    }
 
 
 
 
 //    public static void main(String[] args) {
-//        new Duke("data/duke.txt").run();
+//        new duke.Duke("data/duke.txt").run();
 //    }
 
 //    @Override
@@ -101,7 +100,7 @@ public class Duke {
 //        stage.setScene(scene);
 //        stage.show();
 //
-//        stage.setTitle("Duke");
+//        stage.setTitle("duke.Duke");
 //        stage.setResizable(false);
 //        stage.setMinHeight(600.0);
 //        stage.setMinWidth(400.0);
@@ -171,15 +170,15 @@ public class Duke {
 //
 //    /**
 //     * Iteration 2:
-//     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+//     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
 //     * the dialog container. Clears the user input after processing.
 //     */
 //    private void handleUserInput() {
 //        Label userText = new Label(userInput.getText());
 //        Label dukeText = new Label(getResponse(userInput.getText()));
 //        dialogContainer.getChildren().addAll(
-//                DialogBox.getUserDialog(userText, new ImageView(user)),
-//                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+//                duke.ui.DialogBox.getUserDialog(userText, new ImageView(user)),
+//                duke.ui.DialogBox.getDukeDialog(dukeText, new ImageView(duke))
 //        );
 //        userInput.clear();
 //    }
@@ -192,6 +191,6 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        return "Duke heard: " + input;
+        return "duke.Duke heard: " + input;
     }
 }

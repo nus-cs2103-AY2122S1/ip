@@ -1,4 +1,7 @@
-package duke;
+package duke.task;
+
+import duke.exception.DukeException;
+import duke.task.Task;
 
 import java.util.ArrayList;
 
@@ -12,16 +15,16 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    Task getTask(int index) {
+    public Task getTask(int index) {
         assert index < tasks.size();
         return tasks.get(index);
     }
 
-    ArrayList<Task> getTasks() {
+    public ArrayList<Task> getTasks() {
         return tasks;
     }
 
-    void deleteTask(int index) throws DukeException {
+    public void deleteTask(int index) throws DukeException {
         try {
             tasks.remove(index);
         } catch (IndexOutOfBoundsException e) {
@@ -29,7 +32,7 @@ public class TaskList {
         }
     }
 
-    void addTask(Task t) {
+    public void addTask(Task t) {
         tasks.add(t);
     }
 
