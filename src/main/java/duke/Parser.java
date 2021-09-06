@@ -1,5 +1,7 @@
 package duke;
 
+import javafx.application.Platform;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -25,6 +27,7 @@ public class Parser {
         } catch (DateTimeParseException exception) {
             throw new IllegalArgumentException("Date could not be parsed!");
         }
+        assert date != null : "Date should have been initialised and assigned.";
         return date;
     }
 
@@ -80,6 +83,7 @@ public class Parser {
         }
         //case if user wants to exit
         if (firstString.equals("bye")) {
+            Platform.exit();
             return Ui.getEndMessage();
         }
 
@@ -120,11 +124,11 @@ public class Parser {
                 if (firstString.equals("done")) {
                     //case to complete a task
                     currentTask.setCompleted();
-                    str.append(Ui.getTaskCompleted(currentTask));
+                    str.append(Ui.getTaskCompleted(currentTask)).append("\n");
                 } else {
                     //remaining case is to delete the task.
                     taskList.deleteTask(currentTask);
-                    str.append(Ui.getTaskCompleted(currentTask));
+                    str.append(Ui.getTaskCompleted(currentTask)).append("\n");
                 }
                 str.append(Ui.getTaskNumberReminder(taskList.getTotalTasks()));
                 try {
