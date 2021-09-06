@@ -129,6 +129,7 @@ public class Parser {
         if (input.length() == 8) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.\n");
         }
+        assert input.length() != 0 : "Input length shouldn't be 0";
         int byIndex = input.indexOf("/");
         String by = input.substring(byIndex+4);
         String taskDesc = input.substring(9, byIndex-1);
