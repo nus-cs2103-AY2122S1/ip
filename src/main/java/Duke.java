@@ -22,7 +22,7 @@ public class Duke {
 
         String input = "";
         try {while(true){
-            input = sc.nextLine();
+            input = sc.nextLine().strip();
             if(input.equals("bye")){
                 System.out.println("Bye. Hope to see you again soon!\n");
                 break;
@@ -51,8 +51,18 @@ public class Duke {
                     System.out.print("  " + newTask.toString());
 
                 } else if(input.substring(0,5).equals("event")){
-                    String at = input.split("/")[1].substring(3);
-                    EventTask newEvent = new EventTask(input.substring(6).split("/")[0], at);
+                    //String at = input.split("/")[1].substring(3);
+
+                    String[] dateArr = input.split("/");
+                    String date = "";
+                    for(int i=1; i< dateArr.length; i++){
+                        if (i==1){
+                            date+=dateArr[1].substring(3);
+                        } else {
+                            date += "/" + dateArr[i];
+                        }
+                    }
+                    EventTask newEvent = new EventTask(input.substring(6).split("/")[0], date);
                     tasks.add(newEvent);
                     taskCounter++;
                     System.out.println("Got it. I've added this task: ");
@@ -63,7 +73,7 @@ public class Duke {
                 else if(input.substring(0,6).equals("delete")) {
                     // delete from arraylist
                     // reduce counter by 1
-                    int indexToDel = Integer.parseInt(input.substring(7));
+                    int indexToDel = Integer.parseInt(input.substring(7))-1;
                     Task tasktoDel = tasks.get(indexToDel);
                     tasks.remove(indexToDel);
                     taskCounter--;
@@ -72,8 +82,17 @@ public class Duke {
                 }
                 else if(input.substring(0,8).equals("deadline")){
                     // deadline
-                    String by = input.split("/")[1].substring(3);
-                    DeadlineTask newDeadline = new DeadlineTask(input.substring(9).split("/")[0], by);
+                    //String by = input.split("/")[1].substring(3);
+                    String[] dateArr = input.split("/");
+                    String date = "";
+                    for(int i=1; i< dateArr.length; i++){
+                        if (i==1){
+                            date+=dateArr[1].substring(3);
+                        } else {
+                            date += "/" + dateArr[i];
+                        }
+                    }
+                    DeadlineTask newDeadline = new DeadlineTask(input.substring(9).split("/")[0], date);
                     tasks.add(newDeadline);
                     taskCounter++;
                     System.out.println("Got it. I've added this task: ");
