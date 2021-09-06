@@ -67,7 +67,7 @@ public class MarkCommand extends Command {
      * @throws InvalidIndexException if the index specified is out of bounds
      */
     public static int getIndex(String s, Parser.CMDTYPE type)
-            throws IndexNotSpecifiedException, InvalidInputException, InvalidIndexException {
+            throws IndexNotSpecifiedException, InvalidInputException {
         if (s.length() < type.toString().length() + 2) {
             throw new IndexNotSpecifiedException();
         }
@@ -76,11 +76,7 @@ public class MarkCommand extends Command {
             throw new IndexNotSpecifiedException();
         }
         try {
-            int index = Integer.parseInt(thingsAfterCmd); //may throw NumberFormatException
-            if (index < 1) {
-                throw new InvalidIndexException();
-            }
-            return index;
+            return Integer.parseInt(thingsAfterCmd); //may throw NumberFormatException
         } catch (NumberFormatException e) {
             throw new InvalidInputException();
         }

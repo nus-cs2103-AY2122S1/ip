@@ -20,6 +20,7 @@ public class Event extends Task{
      */
     public Event(String description, LocalDate at){
         super(description);
+        assert (at != null); //the date entered is not null
         this.at = at;
     }
 

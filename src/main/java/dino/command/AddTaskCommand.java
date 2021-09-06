@@ -69,6 +69,7 @@ public class AddTaskCommand extends Command {
             break;
         }
         }
+        assert(task != null); //the task to be added is not null
         return taskList.addTask(task);
     }
 

@@ -24,6 +24,7 @@ public class TaskList {
      * @return the output message after execution
      */
     public String addTask(Task task) {
+        assert(task != null); //the task to be added is not empty
         taskList.add(task);
         int size = taskList.size();
         String message = "Got it. I've added this task: \n"
@@ -40,7 +41,9 @@ public class TaskList {
      * @throws EmptyListException if the current task list is empty
      */
     public String printTaskList() throws EmptyListException {
-        if (taskList.isEmpty()) throw new EmptyListException();
+        if (taskList.isEmpty()) {
+            throw new EmptyListException();
+        }
         String list = "";
         for (int i = 0; i < taskList.size(); i++) {
             list += (i + 1) + ". " + taskList.get(i) + "\n";
@@ -57,11 +60,15 @@ public class TaskList {
      * @throws TaskAlreadyDoneException if the task is already marked as done
      */
     public String markTaskDone(int index) throws InvalidIndexException, TaskAlreadyDoneException {
-        if (index > taskList.size()) {
+        if (index < 1 || index > taskList.size()) {
             throw new InvalidIndexException();
         } else {
             Task t = taskList.get(index - 1);
-            if (t.getStatus()) throw new TaskAlreadyDoneException();
+            assert(t != null); //the task we fetched is not null
+            if (t.getStatus()) {
+                throw new TaskAlreadyDoneException();
+            }
+            assert(!t.getStatus()); //the task to be marked as done is not done yet
             t.setDone();
             String message = "Nice! I've marked this task as done: \n" + t;
             return message;
@@ -76,10 +83,11 @@ public class TaskList {
      * @throws InvalidIndexException if the index entered is out of bounds
      */
     public String deleteTask(int index) throws InvalidIndexException {
-        if (index > taskList.size()) {
+        if (index < 1 || index > taskList.size()) {
             throw new InvalidIndexException();
         } else {
             Task t = taskList.remove(index - 1);
+            assert (t != null); //the task that we removed is not null
             int size = taskList.size();
             String message = "Noted. I've removed this task: \n" + t + "\n"
                     + "Now you have " + size +

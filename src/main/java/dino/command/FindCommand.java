@@ -36,15 +36,16 @@ public class FindCommand extends Command {
     /**
      * Extracts the keyword given in the fina command
      * @return the keyword that is extracted from the find command
-     * @throws InvalidInputException
+     * @throws InvalidInputException if the keyword is not specified
      */
     public String[] getKeyword() throws InvalidInputException {
         if (this.cmdString.length() < 6) {
             throw new InvalidInputException();
         }
-        if (this.cmdString.substring(5).trim().length() == 0) {
+        String keywords = this.cmdString.substring(5).trim();
+        if (keywords.length() == 0) {
             throw new InvalidInputException();
         }
-        return this.cmdString.substring(5).split(", ");
+        return keywords.split(", ");
     }
 }

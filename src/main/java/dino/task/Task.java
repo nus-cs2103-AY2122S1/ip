@@ -5,7 +5,7 @@ package dino.task;
  */
 public class Task {
 
-    private String description;
+    private final String description;
     private boolean isDone;
 
     /**
@@ -15,6 +15,7 @@ public class Task {
      * @param description the description for the task
      */
     public Task(String description) {
+        assert (description != null); // the task description is not empty
         this.description = description;
         this.isDone = false;
     }
