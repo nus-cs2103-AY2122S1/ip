@@ -74,6 +74,7 @@ public class Brain {
     public String createTodo(String input, DataStore dataStore, Ui userInt) {
         String query = input.split(" ", 2)[1].strip();
         ToDo todo = new ToDo(query);
+        int prevNumTasks = dataStore.length();
         dataStore.add(todo);
 
         StringBuilder builder = new StringBuilder();
@@ -81,6 +82,10 @@ public class Brain {
                         + "\t" + todo.toString() + "\n"
                         + "Now you have " + dataStore.length() + " tasks in the list.\n"
         );
+
+        int newNumTasks = dataStore.length();
+
+        assert newNumTasks - prevNumTasks == 1 : "Data Store task count is not functioning as expected; Task increment not observed.";
 
         return builder.toString();
     }
@@ -99,6 +104,7 @@ public class Brain {
         String query = input.split("/by")[0];
         String limit = input.split("/by")[1];
         String procLimit = processDate(limit);
+        int prevNumTasks = dataStore.length();
 
         Deadline deadlineTask = new Deadline(query, procLimit);
         dataStore.add(deadlineTask);
@@ -108,6 +114,10 @@ public class Brain {
                 + "\t" + deadlineTask.toString() + "\n"
                 + "Now you have " + dataStore.length() + " tasks in the list.\n"
         );
+
+        int newNumTasks = dataStore.length();
+
+        assert newNumTasks - prevNumTasks == 1 : "Data Store task count is not functioning as expected; Task increment not observed.";
 
         return builder.toString();
     }
@@ -126,6 +136,7 @@ public class Brain {
         String query = input.split("/at")[0];
         String datetime = input.split("/at")[1];
         String procDate = processDate(datetime);
+        int prevNumTasks = dataStore.length();
 
         Event eventTask = new Event(query, procDate);
         dataStore.add(eventTask);
@@ -135,6 +146,10 @@ public class Brain {
                 + "\t" + eventTask.toString() + "\n"
                 + "Now you have " + dataStore.length() + " tasks in the list.\n"
         );
+
+        int newNumTasks = dataStore.length();
+
+        assert newNumTasks - prevNumTasks == 1 : "Data Store task count is not functioning as expected; Task increment not observed.";
 
         return builder.toString();
     }
@@ -163,6 +178,8 @@ public class Brain {
             task.setDone();
             userInt.say("Nice! I've marked this task as done: ");
             userInt.say("\t" + task.toString());
+
+            assert task.getStatus().equals(true) : "Task has not actually been set to true. Task still false;";
 
             builder.append("Nice! I've marked this task as done: \n"
                     + "\t" + task.toString() + "\n"
@@ -209,6 +226,7 @@ public class Brain {
     public String deleteTask(String input, DataStore dataStore, Ui userInt) {
         int idx = Integer.parseInt(input.split(" ")[1]);
         Task task = dataStore.get(idx-1);
+        int prevNumTasks = dataStore.length();
 
         StringBuilder builder = new StringBuilder();
 
@@ -216,6 +234,10 @@ public class Brain {
                         + "\t" + task.toString() + "\n"
         );
         dataStore.remove(idx-1); // actual deletion
+        int newNumTasks = dataStore.length();
+
+        assert prevNumTasks - newNumTasks == 1 : "Data Store task count is not functioning as expected; Task increment not observed.";
+
         builder.append("Now you have " + (dataStore.length()) + " tasks in the list.\n");
 
         return builder.toString();
