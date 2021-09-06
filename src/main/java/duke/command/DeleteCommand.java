@@ -16,15 +16,15 @@ public class DeleteCommand extends Command {
 
         assert userArgument != null;
 
-        int delete = Utils.getInputNumber(userArgument);
+        int indexToDelete = Utils.getInputNumber(userArgument);
 
-        if (delete >= tasks.numberOfTasks() || delete < 0) {
+        if (indexToDelete >= tasks.numberOfTasks() || indexToDelete < 0) {
             throw new DukeException("Task does not exist!");
         }
 
-        Task removedTask = tasks.getTask(delete);
-        storage.deleteTaskFromFile(delete, tasks);
-        tasks.removeTask(delete);
+        Task removedTask = tasks.getTask(indexToDelete);
+        storage.deleteTaskFromFile(indexToDelete, tasks);
+        tasks.removeTask(indexToDelete);
 
         String removedTaskString = String.format("I've removed this task:\n%s", removedTask.toString());
         String tasksLeftString = String.format("Now you have %d tasks in your list.\n", tasks.numberOfTasks());

@@ -1,6 +1,14 @@
 package duke;
 
-import duke.command.*;
+
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.TaskCommand;
 
 public class Parser {
 
@@ -39,19 +47,19 @@ public class Parser {
         String userArgument = getUserArgument(userInput);
 
         switch (userCommand) {
-        case "list":
+        case Command.LIST_COMMAND:
             return new ListCommand(userCommand, userArgument);
-        case "bye":
+        case Command.BYE_COMMAND:
             return new ByeCommand(userCommand, userArgument);
-        case "done":
+        case Command.DONE_COMMAND:
             return new DoneCommand(userCommand, userArgument);
-        case "todo":
-        case "deadline":
-        case "event":
+        case Command.TODO_COMMAND:
+        case Command.DEADLINE_COMMAND:
+        case Command.EVENT_COMMAND:
             return new TaskCommand(userCommand, userArgument);
-        case "delete":
+        case Command.DELETE_COMMAND:
             return new DeleteCommand(userCommand, userArgument);
-        case "find":
+        case Command.FIND_COMMAND:
             return new FindCommand(userCommand, userArgument);
         default:
             return new InvalidCommand(userCommand, userArgument);

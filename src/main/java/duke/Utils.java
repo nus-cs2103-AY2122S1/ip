@@ -9,23 +9,23 @@ public class Utils {
         StringJoiner end = new StringJoiner(" ");
 
         int i = 0;
-        boolean after = false;
+        boolean isAfterSeparator = false;
 
         String[] strArray = str.split(" ");
 
         while (i < strArray.length) {
             String currentString = strArray[i];
-            if (after) {
+            if (isAfterSeparator) {
                 end.add(currentString);
             } else if (currentString.equals(separator)) {
-                after = true;
+                isAfterSeparator = true;
             } else {
                 start.add(currentString);
             }
             i++;
         }
 
-        if (!after) {
+        if (!isAfterSeparator) {
             throw new DukeException("Incorrect format for command.");
         }
 

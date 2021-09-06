@@ -10,11 +10,14 @@ public class Deadline extends Task {
 
     @Override
     public String toFileData() {
-        return String.format("D,%s,%s", super.toFileData(), super.dateToString());
+        return String.join(Task.STORAGE_DELIMITER, Task.DEADLINE_ALPHABET, super.toFileData(), super.dateToString());
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), super.getDateString());
+        return String.format("%s%s (by: %s)",
+                super.wrapTaskAlphabet(Task.DEADLINE_ALPHABET),
+                super.toString(),
+                super.getDateString());
     }
 }

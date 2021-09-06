@@ -26,8 +26,8 @@ public class DoneCommand extends Command {
         doneTask.markAsDone();
         storage.editTaskFromFile(done, tasks);
 
-        return String.format("I've marked this task as done:\n" +
-                "%s\n", doneTask.toString());
+        return String.format("I've marked this task as done:\n"
+                + "%s\n", doneTask.toString());
     }
 
 }
