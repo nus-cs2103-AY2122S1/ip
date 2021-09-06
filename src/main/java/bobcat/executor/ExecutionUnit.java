@@ -1,6 +1,7 @@
 package bobcat.executor;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import bobcat.exception.ExitException;
 import bobcat.executor.command.basic.Bye;
@@ -24,6 +25,7 @@ public class ExecutionUnit {
 
     public ExecutionUnit(String storagePath) {
         this.storagePath = storagePath;
+        assert !Objects.equals(storagePath, null) && !Objects.equals(storagePath, "");
     }
     public void initStorage() throws IOException {
         storeExecutor.initStorage(storagePath, taskList);
