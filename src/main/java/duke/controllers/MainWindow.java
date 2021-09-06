@@ -35,7 +35,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         Logic.preload();
-        String text = startUpText + "\n" + DataHandlerLayer.getLogAsString();
+        String text = startUpText + "\n" + DataHandlerLayer.getFilteredLog(a -> true);
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(text, dukeImage)
         );
@@ -57,7 +57,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = null;
-        String temp = Logic.checkIfSpecialComand(input);
+        String temp = Logic.checkIfSpecialCommand(input);
         if (temp == null) {
             response = "There are no task my dear summoner <3";
         } else {

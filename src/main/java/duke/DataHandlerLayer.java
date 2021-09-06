@@ -9,20 +9,6 @@ import java.util.function.Function;
  */
 public class DataHandlerLayer {
 
-    public static void main(String[] args) {
-        Function<Task, Boolean> tempFunc = a -> !a.getCompleteStatus();
-        addToLog(new Todo("smth"));
-        Task tempTask = new Todo("another");
-        tempTask.completeTask();
-        addToLog(tempTask);
-        addToLog(new Todo("smth"));
-        addToLog(new Todo("smth"));
-        System.out.println("=====================");
-        System.out.println(getFilteredLog(tempFunc));
-        System.out.println("=====================");
-        System.out.println("smth");
-    }
-
     /**
      * In memory storage for log, for history, refer to the history variable
      */
@@ -61,7 +47,7 @@ public class DataHandlerLayer {
     /**
      * Prints a log of tasks that are filtered. True for completed and False for not completed
      */
-    public static String getFilteredLog(Function<Task , Boolean> function) {
+    public static String getFilteredLog(Function<Task, Boolean> function) {
         int taskNumber = 1;
         StringBuilder sb = new StringBuilder();
         System.out.println("getFilteredLog caled");
@@ -75,26 +61,6 @@ public class DataHandlerLayer {
     }
 
     /**
-     * Used for the filter keyword. Searches the log for any strings
-     * and prints any task that contains it.
-     * @param keyword keyword that is being searched
-     */
-    public static String filterLog(String keyword) {
-        assert keyword != "";
-        String acc = "";
-        for (int i = 0; i < log.size(); i++) {
-            Task temp = log.get(i);
-            if (temp.toString().contains(keyword)) {
-                Task currentTask = log.get(i);
-                int taskNumber = i + 1;
-                acc += taskNumber + ". " + currentTask.toString();
-            }
-        }
-        return acc;
-    }
-
-
-    /**
      * Deletes any task in the specified postion of log
      * @param position in the log which is based on index.
      * @throws IndexOutOfBoundsException If the player specifies a postion outside the length of the log
@@ -105,7 +71,6 @@ public class DataHandlerLayer {
         if (position == 0) {
             throw new IndexOutOfBoundsException();
         }
-        ;
         log.remove(position - 1);
     }
 
@@ -152,16 +117,5 @@ public class DataHandlerLayer {
                 appendToHistory(task);
             }
         }
-    }
-
-    public static String getLogAsString() {
-        String acc = "";
-        for (int i = 0; i < log.size(); i++) {
-            Task currTask = log.get(i);
-            String index = String.format("%d. ", i + 1);
-            acc += index + currTask.toString();
-            acc += "\n";
-        }
-        return acc;
     }
 }

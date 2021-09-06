@@ -30,4 +30,7 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " " + formatter.format(deadline);
     }
 
+    public LocalDateTime getDeadline() {
+        return this.deadline;
+    }
 }

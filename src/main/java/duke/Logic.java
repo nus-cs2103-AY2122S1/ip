@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.function.Function;
 
 /**
  * This is the logic layer where most of the commands are processed and errors are handled.
@@ -14,7 +15,7 @@ public class Logic {
      * @param command refers to the parsed string. See presentation for parsing
      * @throws InvalidCommandException is throwed when there is an invalid command in the form of a string
      */
-    public static String checkIfSpecialComand(String command) {
+    public static String checkIfSpecialCommand(String command) {
         //duke.Logic to check each individual commands, checks for special commands first, then checks for other input
         //Use duke.Parser to package command into a packaged command
         try {
@@ -29,7 +30,7 @@ public class Logic {
                 DataHandlerLayer.stopWriting();
                 return "See ya";
             } else if (listOfCommandInputs.size() == 1 && listOfCommandInputs.get(0).equals("list")) {
-                return DataHandlerLayer.getLogAsString();
+                return DataHandlerLayer.getFilteredLog(a -> true);
             } else if (listOfCommandInputs.contains("delete")) {
                 int position = Integer.parseInt(listOfCommandInputs.get(listOfCommandInputs.indexOf("delete") + 1));
                 DataHandlerLayer.delete(position);
@@ -46,7 +47,8 @@ public class Logic {
                 return "Ohhhh myyyy. I have been waiting for this quest to complete for ages.";
             } else if (listOfCommandInputs.contains("find")) {
                 String temp = listOfCommandInputs.get(listOfCommandInputs.indexOf("find") + 1);
-                return DataHandlerLayer.filterLog(temp);
+                Function<Task, Boolean> findKeyword = a -> a.toString().contains(temp);
+                return DataHandlerLayer.getFilteredLog(findKeyword);
             } else {
                 processTask(packagedCommand, true);
                 return loggedCommand;

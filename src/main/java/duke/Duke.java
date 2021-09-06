@@ -18,7 +18,7 @@ public class Duke {
         Logic.preload();
         while (true) {
             String command = UI.scan();
-            Logic.checkIfSpecialComand(command);
+            Logic.checkIfSpecialCommand(command);
             //Check if the logic has made any changes to quit the programme or continue running
             if (!isRunning) {
                 System.out.println("See ya");
