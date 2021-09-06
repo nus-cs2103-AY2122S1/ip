@@ -112,6 +112,8 @@ public class Storage {
                     break;
                 }
 
+                assert task != null : "The task should not be null";
+
                 if (taskBreakdown[1].equals("1")) {
                     task.completeTask();
                 }
