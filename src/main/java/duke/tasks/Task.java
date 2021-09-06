@@ -41,6 +41,13 @@ public abstract class Task {
         this.isDone = done;
     }
 
+    /**
+     * Parse date String to identify natural dates, if existent, and convert them to YYYY-MM-DD format.
+     * Otherwise, parse String and throw an error if date String is in an invalid format.
+     *
+     * @param date String containing the input task date either in natural date format or YYYY-MM-DD
+     * @return Formatted date String of the task
+     */
     protected LocalDate getDateFromString(String date) {
         LocalDate today = LocalDate.now();
 
