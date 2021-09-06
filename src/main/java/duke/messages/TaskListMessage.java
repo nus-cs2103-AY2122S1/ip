@@ -18,7 +18,7 @@ public class TaskListMessage extends Message {
      *
      * @param tasks tasks to include in output message.
      */
-    public TaskListMessage(List<Task> tasks) {
+    public TaskListMessage(List<? extends Task> tasks) {
         super.setMessageText(MessageConstants.MESSAGE_TASK_LIST_HEADER
                 + generateListMessageText(tasks));
     }
@@ -30,7 +30,7 @@ public class TaskListMessage extends Message {
      * @return user-friendly message including textual representations of all tasks
      * provided in the given list.
      */
-    private String generateListMessageText(List<Task> tasks) {
+    private String generateListMessageText(List<? extends Task> tasks) {
         StringBuilder listMessageBuilder = new StringBuilder();
         for (int index = 0; index < tasks.size(); index++) {
             listMessageBuilder

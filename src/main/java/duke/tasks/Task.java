@@ -63,6 +63,10 @@ public abstract class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
     /**
      * Converts this task's data to representation to be saved in file.
      *
