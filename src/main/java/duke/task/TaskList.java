@@ -17,9 +17,7 @@ public class TaskList {
      * @param taskList a List of Tasks.
      */
     public TaskList(List<Task> taskList) {
-        for (Task task : taskList) {
-            this.taskList.add(task);
-        }
+        this.taskList.addAll(taskList);
     }
 
     /**
@@ -104,9 +102,7 @@ public class TaskList {
      * @return a String of the list of tasks in Duke store format.
      */
     public String toDukeStoreFormat() {
-        String outputString =
-                this.taskList.stream().map(task -> task.toDukeStoreFormat() + "\n").collect(Collectors.joining());
-        return outputString;
+        return this.taskList.stream().map(task -> task.toDukeStoreFormat() + "\n").collect(Collectors.joining());
     }
 
     /**

@@ -1,2 +1,4 @@
-E | 0 | meeting | 2020-02-02
-D | 0 | assignment | 2021-09-21
+E | 1 | meeting | 2020-02-02
+D | 1 | assignment | 2021-09-21
+E | 0 | meeting 1 | 2021-09-21
+D | 0 | assignment 2 | 2021-09-21
