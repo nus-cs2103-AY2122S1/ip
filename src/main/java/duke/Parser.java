@@ -26,6 +26,8 @@ import java.time.format.DateTimeParseException;
  * Represents a parser which parses the input given by users of Duke.
  */
 public class Parser {
+        private static final String SPACE = " ";
+
     /**
      * Checks if dateString is in a valid date form depicted by dateFormatter.
      *
@@ -65,7 +67,7 @@ public class Parser {
      * @return true if input is a remove command.
      */
     public static boolean isRemove(String input) {
-        String[] separated = input.split(" ");
+        String[] separated = input.split(SPACE);
         return separated[0].equals("remove");
     }
 
@@ -76,7 +78,7 @@ public class Parser {
      * @return true if input is a done command.
      */
     public static boolean isDone(String input) {
-        String[] separated = input.split(" ");
+        String[] separated = input.split(SPACE);
         return separated[0].equals("done");
     }
 
@@ -87,7 +89,7 @@ public class Parser {
      * @return true if it is a find command, else false.
      */
     public static boolean isFind(String input) {
-        String[] separated = input.split(" ");
+        String[] separated = input.split(SPACE);
         return separated[0].equals("find");
     }
 
@@ -108,7 +110,7 @@ public class Parser {
      * @return true if input is a event command.
      */
     private static boolean isEvent(String input) {
-        String[] separated = input.split(" ");
+        String[] separated = input.split(SPACE);
         return separated[0].equals("event");
     }
 
@@ -119,7 +121,7 @@ public class Parser {
      * @return true if input is a deadline command.
      */
     private static boolean isDeadline(String input) {
-        String[] separated = input.split(" ");
+        String[] separated = input.split(SPACE);
         return separated[0].equals("deadline");
     }
 
@@ -130,7 +132,7 @@ public class Parser {
      * @return true if input is a todo command.
      */
     private static boolean isTodo(String input) {
-        String[] separated = input.split(" ");
+        String[] separated = input.split(SPACE);
         return separated[0].equals("todo");
     }
 
@@ -165,8 +167,8 @@ public class Parser {
                     throw new InvalidCommandException();
                 }
             } else {
-                String[] first = str[0].split(" ");
-                String[] second = str[1].split(" ");
+                String[] first = str[0].split(SPACE);
+                String[] second = str[1].split(SPACE);
 
                 String description = getDescription(first);
                 String deadline = getDeadline(second);
@@ -174,7 +176,7 @@ public class Parser {
                 return new String[]{description, deadline};
             }
         } else if (Parser.isTodo(type)) {
-            String[] str = input.split(" ");
+            String[] str = input.split(SPACE);
 
             if (str.length == 1) {
                 throw new IncompleteToDoException();
@@ -214,7 +216,7 @@ public class Parser {
             }
 
             if (i != strings.length - 1) {
-                deadline += " ";
+                deadline += SPACE;
             }
         }
 
@@ -233,7 +235,7 @@ public class Parser {
         for (int i = 1; i < strings.length; i++) {
             description += strings[i];
             if (i != strings.length - 1) {
-                description += " ";
+                description += SPACE;
             }
         }
 
@@ -280,7 +282,7 @@ public class Parser {
      * @throws DukeException If insufficient values are passed in.
      */
     private static AddCommand parseEventCommand(String userInput) throws DukeException {
-        String[] separated = userInput.split(" ");
+        String[] separated = userInput.split(SPACE);
         String[] str = Parser.splitInput(userInput, separated[0]);
 
         assert str.length == 2;
@@ -298,7 +300,7 @@ public class Parser {
      * @throws DukeException If insufficient values are passed in.
      */
     private static AddCommand parseDeadlineCommand(String userInput) throws DukeException {
-        String[] separated = userInput.split(" ");
+        String[] separated = userInput.split(SPACE);
         String[] str = Parser.splitInput(userInput, separated[0]);
 
         assert str.length == 2;
@@ -316,7 +318,7 @@ public class Parser {
      * @throws DukeException If insufficient values are passed in.
      */
     private static AddCommand parseToDoCommand(String userInput) throws DukeException {
-        String[] separated = userInput.split(" ");
+        String[] separated = userInput.split(SPACE);
         String[] str = Parser.splitInput(userInput, separated[0]);
 
         assert str.length == 1;
@@ -333,7 +335,7 @@ public class Parser {
      * @throws IncompleteFindException If insufficient values are passed in.
      */
     private static FindCommand parseFindCommand(String userInput) throws IncompleteFindException {
-        String[] separated = userInput.split(" ");
+        String[] separated = userInput.split(SPACE);
 
         if (separated.length == 1) {
             throw new IncompleteFindException();
@@ -355,7 +357,7 @@ public class Parser {
     private static RemoveCommand parseRemoveCommand(
             String userInput, TaskList taskList) throws DukeException {
 
-        String[] separated = userInput.split(" ");
+        String[] separated = userInput.split(SPACE);
 
         if (separated.length < 2 || !separated[1].matches("\\d+")
                 || Integer.valueOf(separated[1]) > taskList.getSize()) {
@@ -376,7 +378,7 @@ public class Parser {
     private static DoneCommand parseDoneCommand(
             String userInput, TaskList taskList) throws DukeException {
 
-        String[] separated = userInput.split(" ");
+        String[] separated = userInput.split(SPACE);
 
         if (separated.length < 2 || !separated[1].matches("\\d+")
                 || Integer.valueOf(separated[1]) > taskList.getSize()) {
