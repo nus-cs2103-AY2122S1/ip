@@ -22,19 +22,21 @@ public class Parser {
      * @throws DukeException Exception that duke could generate.
      */
     public Command parse(String input) throws DukeException {
+
         String[] words = input.split(splitRegex);
         if (words[0].equals("list")) {
-            System.out.println("Here are the tasks in your list:");
             return new ListCommand();
         } else if (words[0].equals("done")) {
+            assert (words.length > 1);
             int doneIndex = Integer.parseInt(words[1]);
             return new MarkAsDoneCommand(doneIndex - 1);
         } else if (words[0].equals("delete")) {
+            assert (words.length > 1);
             int deleteIndex = Integer.parseInt(words[1]);
             return new DeleteCommand(deleteIndex - 1);
         } else if (words[0].equals("find")) {
+            assert (input.length() >= 5);
             String keyWords = input.substring(5);
-            System.out.println(keyWords);
             return new FindCommand(keyWords);
         } else if (words[0].equals("bye")) {
             return new ExitCommand();
@@ -45,6 +47,7 @@ public class Parser {
                     throw new DukeException("The description of a todo "
                             + "cannot be empty.");
                 }
+                assert (input.length() > 5);
                 task = new ToDo(input.substring(5));
             } else if (words[0].equals("deadline")) {
                 if (words.length <= 1 || words[1].equals("/by")) {
@@ -54,6 +57,7 @@ public class Parser {
                 if (input.indexOf("/by") < 0) {
                     throw new DukeException("Please enter '/by' followed by a task deadline.");
                 }
+                assert (input.length() > 9);
                 String content = input.substring(9, input.indexOf("/by") - 1);
                 if (input.indexOf("/by") + 4 >= input.length()) {
                     throw new DukeException("Please enter a deadline.");
@@ -74,6 +78,7 @@ public class Parser {
                 if (input.indexOf("/at") < 0) {
                     throw new DukeException("Please enter '/at' followed by an event time.");
                 }
+                assert (input.length() > 6);
                 String content = input.substring(6, input.indexOf("/at") - 1);
                 if (input.indexOf("/at") + 4 >= input.length()) {
                     throw new DukeException("Please provide the event time.");
