@@ -69,7 +69,7 @@ public class DukeParser {
             return new ErrorCommand("An exception occurred! See details above.");
         } catch (ArrayIndexOutOfBoundsException e) {
             return new ErrorCommand("Missing fields in command. Type 'help' for more info.");
-        } catch (Exception e) { //TODO DANGEROUS! please change
+        } catch (Exception e) {
             return new ErrorCommand("An exception occurred!");
         }
     }
