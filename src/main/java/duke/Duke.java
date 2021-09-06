@@ -13,7 +13,6 @@ public class Duke extends Application {
     private static Parser parser;
     private static Storage storage;
     private static TaskList tasks;
-    private Ui ui;
 
     /**
      * Empty constructor for Duke to be launched by Launcher.
@@ -45,14 +44,14 @@ public class Duke extends Application {
      */
     @Override
     public void start(Stage stage) {
-        this.ui = new Ui(stage);
+        Ui ui = new Ui(stage);
         storage = new Storage(DATA_FILENAME);
         try {
             tasks = new TaskList(storage.load());
-            this.ui.showLoadingSuccess(DATA_FILENAME);
+            ui.showLoadingSuccess(DATA_FILENAME);
         } catch (DukeException e) {
             tasks = new TaskList();
-            this.ui.showLoadingError(DATA_FILENAME);
+            ui.showLoadingError(DATA_FILENAME);
         }
         parser = new Parser(tasks);
     }

@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.Objects;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,13 +20,19 @@ import javafx.stage.Stage;
  * @author Kleon Ang
  */
 public class Ui {
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private final Image user = new Image(this.getClass().getResourceAsStream("/images/PepeJam.png"));
-    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/SirDuke.jpg"));
+    public static final double STAGE_MIN_HEIGHT = 600.0;
+    public static final double STAGE_MIN_WIDTH = 400.0;
+    public static final int SCROLL_PANE_WIDTH = 385;
+    public static final int SCROLL_PANE_HEIGHT = 535;
+    public static final double TEXT_FIELD_WIDTH = 325.0;
+    public static final double SEND_BUTTON_WIDTH = 55.0;
+    private final ScrollPane scrollPane;
+    private final VBox dialogContainer;
+    private final TextField userInput;
+    private final Image user = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/PepeJam.png")));
+    private final Image duke = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/SirDuke.jpg")));
 
     /**
      * Constructor for a Ui class.
@@ -39,12 +47,12 @@ public class Ui {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Send");
+        Button sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        scene = new Scene(mainLayout);
+        Scene scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.show();
@@ -52,20 +60,20 @@ public class Ui {
         // Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(STAGE_MIN_HEIGHT);
+        stage.setMinWidth(STAGE_MIN_WIDTH);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(STAGE_MIN_WIDTH, STAGE_MIN_HEIGHT);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(SCROLL_PANE_WIDTH, SCROLL_PANE_HEIGHT);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        userInput.setPrefWidth(325.0);
-        sendButton.setPrefWidth(55.0);
+        userInput.setPrefWidth(TEXT_FIELD_WIDTH);
+        sendButton.setPrefWidth(SEND_BUTTON_WIDTH);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);

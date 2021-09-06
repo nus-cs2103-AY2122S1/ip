@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
  * @author Kleon Ang
  */
 public class Deadline extends Task {
+    private static final String taskBadge = "[D]";
     private final LocalDateTime by;
 
     /**
@@ -41,6 +42,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
-        return "[D]" + super.toString() + " (by: " + this.by.format(formatter) + ")";
+        return taskBadge + super.toString() + " (by: " + this.by.format(formatter) + ")";
     }
 }

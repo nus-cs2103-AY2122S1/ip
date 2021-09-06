@@ -5,7 +5,7 @@ package duke;
  *
  * @author Kleon Ang
  */
-public class Task {
+public abstract class Task {
     private final String description;
     private boolean isDone;
 
@@ -20,7 +20,9 @@ public class Task {
     }
 
     private String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        String doneStatus = "X";
+        String undoneStatus = " ";
+        return (isDone ? doneStatus : undoneStatus); // mark done task with X
     }
 
     /**
