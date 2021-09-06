@@ -235,6 +235,24 @@ public class TaskList {
     }
 
     /**
+     * Clears and empties the current TaskList.
+     */
+    public void clearAllTasks() {
+        tasks = new ArrayList<>();
+    }
+
+    /**
+     * Converts the list of strings into the TaskList format and appends
+     * them to this TaskList.
+     *
+     * @param lines The list of strings from storage file.
+     */
+    public void appendListOfStrings(List<String> lines) {
+        TaskList temp = new TaskList(lines);
+        this.tasks.addAll(temp.tasks);
+    }
+
+    /**
      * Formats the inputted task as a string to be displayed back to the user.
      *
      * @param task The Task created.

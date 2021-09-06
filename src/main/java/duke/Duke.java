@@ -7,7 +7,8 @@ import java.io.IOException;
  */
 public class Duke {
     private final Ui ui;
-    private final Storage storage;
+    private final MainStorage mainStorage;
+    private final ArchiveStorage archiveStorage;
     private TaskList tasks;
 
     /**
@@ -16,11 +17,12 @@ public class Duke {
      * @param filepath The path to the save file (if any).
      */
     public Duke(String filepath) {
-        this.ui = new Ui();
-        this.storage = new Storage(filepath);
+        ui = new Ui();
+        mainStorage = new MainStorage(filepath);
+        archiveStorage = new ArchiveStorage("data/archive.txt");
 
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(mainStorage.load());
             assert tasks != null;
         } catch (IOException e) {
             Ui.showLoadingError();
@@ -37,9 +39,8 @@ public class Duke {
     public String handleInput(String input) {
         String response;
         try {
-            response = Parser.parse(input).execute(tasks);
+            response = Parser.parse(input).execute(tasks, mainStorage, archiveStorage);
             assert response != null;
-            storage.save(tasks.toSaveFormat());
         } catch (DukeException e) {
             response = e.getMessage() + "\n";
         }

@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,19 +17,65 @@ public class Parser {
      */
     public static TaskExecution parse(String command) throws DukeException {
         if (command.equals("list")) {
-            return TaskList::list;
+            return (tasks, mainStorage, archiveStorage) -> tasks.list();
         } else if (command.matches("^done -?[0-9]+$")) {
-            return tasks -> tasks.done(command);
+            return (tasks, mainStorage, archiveStorage) -> {
+                String output = tasks.done(command);
+                mainStorage.save(tasks.toSaveFormat());
+                return output;
+            };
         } else if (command.matches("^todo( .*)?")) {
-            return tasks -> tasks.todo(command);
+            return (tasks, mainStorage, archiveStorage) -> {
+                String output = tasks.todo(command);
+                mainStorage.save(tasks.toSaveFormat());
+                return output;
+            };
         } else if (command.matches("^deadline( .*)?")) {
-            return tasks -> tasks.deadline(command);
+            return (tasks, mainStorage, archiveStorage) -> {
+                String output = tasks.deadline(command);
+                mainStorage.save(tasks.toSaveFormat());
+                return output;
+            };
         } else if (command.matches("^event( .*)?")) {
-            return tasks -> tasks.event(command);
+            return (tasks, mainStorage, archiveStorage) -> {
+                String output = tasks.event(command);
+                mainStorage.save(tasks.toSaveFormat());
+                return output;
+            };
         } else if (command.matches("^delete -?[0-9]+$")) {
-            return tasks -> tasks.delete(command);
+            return (tasks, mainStorage, archiveStorage) -> {
+                String output = tasks.delete(command);
+                mainStorage.save(tasks.toSaveFormat());
+                return output;
+            };
         } else if (command.matches("^find( .*)?")) {
-            return tasks -> tasks.find(command);
+            return (tasks, mainStorage, archiveStorage) -> {
+                String output = tasks.find(command);
+                mainStorage.save(tasks.toSaveFormat());
+                return output;
+            };
+        } else if (command.equals("archive")) {
+            String successMessage = "Successfully archived!";
+            return (tasks, mainStorage, archiveStorage) -> {
+                archiveStorage.save(tasks.toSaveFormat());
+                tasks.clearAllTasks();
+                mainStorage.save(tasks.toSaveFormat());
+                return successMessage;
+            };
+        } else if (command.equals("loadArchive")) {
+            String successMessage = "Successfully loaded archive!";
+            String errorMessage = "Error while loading archive file! Does it exist?";
+            return (tasks, mainStorage, archiveStorage) -> {
+                List<String> fileContents;
+                try {
+                    fileContents = archiveStorage.load();
+                } catch (IOException e) {
+                    return errorMessage;
+                }
+                tasks.appendListOfStrings(fileContents);
+                mainStorage.save(tasks.toSaveFormat());
+                return successMessage;
+            };
         } else {
             throw new UnknownCommandException();
         }
