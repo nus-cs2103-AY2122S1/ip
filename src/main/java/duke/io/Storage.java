@@ -26,7 +26,7 @@ public class Storage {
     /**
      * Loads the taskList from the saveFile.
      *
-     * @return False if the file does not exist, i.e. the user is a new user. True otherwise.
+     * @return The TaskList generated from loading a task from each line in the file.
      */
     public ArrayList<Task> load() {
         try {
