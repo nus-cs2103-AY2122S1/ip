@@ -9,7 +9,7 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 public class DoneCommand extends Command {
-    private boolean isExit = false;
+    private final boolean IS_EXIT = false;
     private int[] taskIds;
     private Task doneTask;
 
@@ -51,6 +51,7 @@ public class DoneCommand extends Command {
 
     /**
      * Gets the task associated with the command.
+     * If multiple, returns the most recent done task.
      *
      * @return The task associated with the given command.
      */
@@ -64,7 +65,8 @@ public class DoneCommand extends Command {
      *
      * @return If the command exits the bot.
      */
+    @Override
     public boolean isExit() {
-        return this.isExit;
+        return this.IS_EXIT;
     }
 }

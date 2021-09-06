@@ -8,17 +8,17 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    private LocalDateTime time;
+    private LocalDateTime at;
 
     /**
      * Public constructor which creates a new Event object with a due date.
      *
      * @param taskName The description of the Event.
-     * @param time The start time of the Event.
+     * @param at The start time of the Event.
      */
-    public Event(String taskName, LocalDateTime time) {
+    public Event(String taskName, LocalDateTime at) {
         super(taskName);
-        this.time = time;
+        this.at = at;
     }
 
     /**
@@ -28,7 +28,7 @@ public class Event extends Task {
      */
     public String getWhen() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
-        return dtf.format(time);
+        return dtf.format(at);
     }
 
     /**

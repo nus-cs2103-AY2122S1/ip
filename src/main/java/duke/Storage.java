@@ -21,14 +21,14 @@ import duke.task.Task;
  * from the local file system.
  */
 public class Storage {
-    private DateTimeFormatter dateTimeFormat;
+    private final DateTimeFormatter DATETIMEFORMAT;
     private File file;
 
     /**
      * Public constructor to initialise the storage for the Duii Bot.
      */
     public Storage() {
-        this.dateTimeFormat = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
+        this.DATETIMEFORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
     }
 
     /**
@@ -43,18 +43,20 @@ public class Storage {
         Path path = Paths.get(home, "ip", "data");
         File directory = new File(path.toString());
         if (!directory.exists()) {
-            System.out.println("'data' directory not found. Creating the directory...");
-            directory.mkdir();
-            System.out.println("Directory created.");
+            Ui.notifyDirNotFound();
+            boolean directoryCreated = directory.mkdir();
+            assert(directoryCreated) : "Error Creating file.";
+            Ui.notifyCreatedDir();
         }
 
         Path filepath = Paths.get(home, "ip", "data", "duke.txt");
         File file = new File(filepath.toString());
         if (!file.exists()) {
-            System.out.println("Data file not found. Creating a new file...");
+            Ui.notifyFileNotFound();
             try {
-                file.createNewFile();
-                System.out.println("File created.");
+                boolean fileCreated = file.createNewFile();
+                assert(fileCreated) : "Error Creating file.";
+                Ui.notifyCreatedFile();
             } catch (IOException e) {
                 System.out.println("IO error occurred");
             }
@@ -74,35 +76,24 @@ public class Storage {
         try {
             file = this.getFiles();
             FileReader reader = new FileReader(file);
-            BufferedReader buffreader = new BufferedReader(reader);
+            BufferedReader bufferedReader = new BufferedReader(reader);
 
             String text;
             ArrayList<Task> saved = new ArrayList<>();
 
-            while ((text = buffreader.readLine()) != null) {
+            while ((text = bufferedReader.readLine()) != null) {
                 String[] lineArr = text.split(" \\| ");
                 switch (lineArr.length) {
                 case 3:
-                    // To complete TaskList class
-                    Task toDo = new Task(lineArr[2]);
+                    Task toDo = loadToDo(lineArr);
                     saved.add(toDo);
-                    if (lineArr[1].equals("1")) {
-                        toDo.complete();
-                    }
                     break;
                 case 4:
                     if (lineArr[0].equals("D")) {
-                        Deadline deadline = new Deadline(lineArr[2], LocalDateTime.parse(lineArr[3],
-                                this.dateTimeFormat));
-                        if (lineArr[1].equals("1")) {
-                            deadline.complete();
-                        }
+                        Deadline deadline = loadDeadline(lineArr);
                         saved.add(deadline);
                     } else if (lineArr[0].equals("E")) {
-                        Event event = new Event(lineArr[2], LocalDateTime.parse(lineArr[3], this.dateTimeFormat));
-                        if (lineArr[1].equals("1")) {
-                            event.complete();
-                        }
+                        Event event = loadEvent(lineArr);
                         saved.add(event);
                     }
                     break;
@@ -114,6 +105,31 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
+    }
+
+    public Task loadToDo(String[] lineArr) {
+        Task toDo = new Task(lineArr[2]);
+        if (lineArr[1].equals("1")) {
+            toDo.complete();
+        }
+        return toDo;
+    }
+
+    public Deadline loadDeadline(String[] lineArr) {
+        Deadline deadline = new Deadline(lineArr[2], LocalDateTime.parse(lineArr[3],
+                this.DATETIMEFORMAT));
+        if (lineArr[1].equals("1")) {
+            deadline.complete();
+        }
+        return deadline;
+    }
+
+    public Event loadEvent(String[] lineArr) {
+        Event event = new Event(lineArr[2], LocalDateTime.parse(lineArr[3], this.DATETIMEFORMAT));
+        if (lineArr[1].equals("1")) {
+            event.complete();
+        }
+        return event;
     }
 
     /**

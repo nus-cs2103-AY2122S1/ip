@@ -14,7 +14,7 @@ import duke.task.Task;
  * AddCommand class which indicates input is adding new tasks.
  */
 public class AddCommand extends Command {
-    private boolean isExit = false;
+    private final boolean IS_EXIT = false;
     private Task newTask;
 
     /**
@@ -57,7 +57,8 @@ public class AddCommand extends Command {
      *
      * @return If the command exits the bot.
      */
+    @Override
     public boolean isExit() {
-        return this.isExit;
+        return this.IS_EXIT;
     }
 }
