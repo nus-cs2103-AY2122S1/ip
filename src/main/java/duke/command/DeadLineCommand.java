@@ -50,7 +50,13 @@ public class DeadLineCommand extends Command {
             by += data[index];
             index++;
         }
+        if (by.length() == 0) {
+            return ui.showError("Time cant be empty :(, input a date in the format: YYYY-MM-DD");
+        }
         DeadLine deadLine = new DeadLine(taskWithDeadLine, by);
+        if (taskList.contains(deadLine)) {
+            return ui.showError("To do event, " + deadLine.toString() + " already exists!");
+        }
         taskList.add(deadLine);
         storage.save(taskList);
         return ui.addMessage() + ui.showTask(deadLine) + ui.showListLength(taskList);

@@ -54,4 +54,12 @@ public class Task {
         String base = "[" + getStatusIcon() + "] " + this.description;
         return base;
     }
+
+    public boolean equals(Task task) {
+        if (task.getClass() == this.getClass()
+                && task.description.equals(this.description)) {
+            return true;
+        }
+        return false;
+    }
 }

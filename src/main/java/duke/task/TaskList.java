@@ -31,7 +31,16 @@ public class TaskList {
      * @param task task to be added to the list
      */
     public void add(Task task) {
-        listOfTasks.add(task);
+            listOfTasks.add(task);
+    }
+
+    public boolean contains(Task task) {
+        for (Task tsk : listOfTasks) {
+            if (tsk.equals(task)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
