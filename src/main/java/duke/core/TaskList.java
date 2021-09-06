@@ -137,15 +137,17 @@ public class TaskList {
     }
 
     /**
-     * Adds task to the taskList if the list is not full. If full, a DukeException is thrown.
+     * Adds task to the taskList if the list is not full. After adding a task,
+     * the TaskList is saved into the save file. If TaskList is full, a DukeException is thrown.
      *
      * @param task the Task object to be added
      * @return String representation of the result.
      * @throws DukeException the TaskList is full
      */
     public String record(Task task) throws DukeException {
+        final boolean overTaskLimitCapacity = currentIdx >= TASKS_LIMIT;
         try {
-            if (currentIdx >= TASKS_LIMIT) {
+            if (overTaskLimitCapacity) {
                 throw new IndexOutOfBoundsException(
                         String.format("ChatBot can only record maximum of %d responses.", TASKS_LIMIT));
             }
@@ -169,7 +171,7 @@ public class TaskList {
         }
         StringBuilder sb = new StringBuilder("--- Start of List ---\n");
         for (int i = 0; i < currentIdx; i++) {
-            sb = sb.append(Integer.toString(i + 1)).append(". ").append(tasks.get(i).toString()).append("\n");
+            sb = sb.append(i + 1).append(". ").append(tasks.get(i).toString()).append("\n");
         }
         sb = sb.append("--- End of List ---");
         return sb.toString();
@@ -185,13 +187,15 @@ public class TaskList {
      */
     public String markAsDone(int taskId) throws DukeException {
         try {
-            if (taskId <= 0 || taskId > currentIdx) {
+            final boolean isOutOfTaskIdRange = taskId <= 0 || taskId > currentIdx;
+            if (isOutOfTaskIdRange) {
                 throw new IllegalArgumentException(
                         String.format("taskId of %1$d invalid as there are %2$d recorded task(s)", taskId, currentIdx));
             }
             Task task = tasks.get(taskId - 1);
             boolean isDone = task.isDone();
             String result = task.markAsDone();
+            // Saves task only if there is a change in Done Status
             if (!isDone) {
                 saveTasks();
             }
@@ -238,6 +242,7 @@ public class TaskList {
     public String findTasks(String searchWord) throws DukeException {
         TaskList matchList = new TaskList();
         for (int i = 0; i < currentIdx; i++) {
+            // Checks whether the searchWord is in the ith Task (1-indexed).
             if (tasks.get(i).toString().indexOf(searchWord) != -1) {
                 matchList.record(tasks.get(i));
             }

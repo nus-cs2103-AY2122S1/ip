@@ -1,7 +1,5 @@
 package duke.core;
 
-import java.util.Scanner;
-
 import duke.command.Command;
 import duke.exception.DukeException;
 
@@ -17,7 +15,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Initialises Duke for whole application to run
+     * Initialises Duke for user to interact with.
      */
     public Duke() {
         ui = new Ui();
@@ -26,49 +24,24 @@ public class Duke {
             taskList = new TaskList(storage);
             taskList.retrieveTasks();
         } catch (DukeException e) {
-            ui.formatDisplay(e.getMessage());
+            e.printStackTrace();
         }
     }
 
     /**
-     * Sends a greeting message when the user first starts up Duke
+     * Sends a greeting message when the user first starts up Duke.
+     *
      * @return the greeting message when user starts up Duke
      */
     public String greetUser() {
-        return "Hello! I'm Duke!\nHow may I be of service to you?";
+        return ui.greetUser();
     }
 
     /**
-     * Runs the whole application with only Text
-     */
-    public void run() {
-        ui.greetUser();
-        Scanner sc = new Scanner(System.in);
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String userInput = sc.nextLine();
-                Command c = Parser.identifyCommand(userInput);
-                ui.formatDisplay(c.execute(taskList, ui, storage));
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.formatDisplay(e.getMessage());
-            }
-        }
-        sc.close();
-    }
-
-    /**
-     * Initialises and runs Duke in text-based form
-     * @param args the user input
-     */
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response based on the user input.
+     *
+     * @param userInput the dialogue that the user entered in the text box.
+     * @return a response matching the user request.
      */
     public String getResponse(String userInput) {
         try {
@@ -76,7 +49,7 @@ public class Duke {
             assert(c != null);
             return c.execute(taskList, ui, storage);
         } catch (DukeException e) {
-            return e.getMessage();
+            return ui.showError(e);
         }
     }
 }

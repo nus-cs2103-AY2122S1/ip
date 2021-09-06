@@ -38,8 +38,8 @@ public abstract class Task {
      */
     public static Task createTaskFromText(String text) throws DukeException {
         String[] taskInformation = text.split(DIVIDER);
-        String taskType = taskInformation[0].trim();
-        String taskStatus = taskInformation[1].trim();
+        final String taskType = taskInformation[0].trim();
+        final String taskStatus = taskInformation[1].trim();
 
         switch (taskType) {
         case "[T]":
@@ -55,7 +55,7 @@ public abstract class Task {
             changeStatusFromText(event, taskStatus);
             return event;
         default:
-            throw new DukeException("duke.task.Task symbol from text is not recognised.");
+            throw new DukeException("Task symbol from text in file is not recognised.");
         }
     }
 
