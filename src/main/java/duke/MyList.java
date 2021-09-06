@@ -1,7 +1,11 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
+import duke.tasktype.Deadline;
 import duke.tasktype.Task;
 
 /**
@@ -16,7 +20,11 @@ public class MyList {
      * An ArrayList Object to store all the items in the list.
      */
     private ArrayList<Task> myList;
-    private Ui ui;
+    public enum taskType {
+        EVENT,
+        TODO,
+        DEADLINE
+    }
 
     /**
      * Constructor for the duke.MyList class.
@@ -115,5 +123,34 @@ public class MyList {
      */
     public void loadTask(Task t) {
         this.myList.add(t);
+    }
+
+    /**
+     * Method to help generate Duke's response to the remind command.
+     * @param noOfDays The number of days specified by the user.
+     * @return Duke's response.
+     */
+    public String findDeadlineWithin(int noOfDays) {
+        String result = "";
+        LocalDate currentDate = LocalDate.now();
+        int noOfDeadlines = 0;
+
+        for (int i = 0; i < getListSize(); i++) {
+            Task t = this.myList.get(i);
+            if (t.getTaskType().equals(taskType.DEADLINE.toString())) {
+                // Safe typecast since it has already been verified that t is of type deadline
+                Deadline d = (Deadline) t;
+                LocalDate deadline = d.getDeadline();
+                long daysBetween = ChronoUnit.DAYS.between(currentDate, deadline);
+                if (daysBetween <= noOfDays) {
+                    noOfDeadlines++;
+                    result += Ui.withinDeadlineMessage(d, daysBetween, i + 1);
+                }
+            }
+        }
+
+        result = Ui.getRemindHeader(noOfDeadlines, noOfDays) + result;
+        System.out.println(result);
+        return result;
     }
 }
