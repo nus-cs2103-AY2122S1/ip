@@ -1,8 +1,7 @@
-T | 0 | fsaf
 T | 1 | saf
-T | 0 | dfa
-T | 0 | play
 E | 0 | aaa ~ 11/11/1212 16.30
+T | 0 |  
+E | 0 | fdaf ~ tt
 T | 0 | fsaf
 E | 0 | to ~ 12ÔÂ 12 1212
 E | 0 | dd ~ 11ÔÂ 11 2011
