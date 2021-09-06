@@ -22,8 +22,8 @@ public class Deadline extends TimedTask {
     public Deadline(String description, String dateString, String... timeArgs) throws DateTimeParseException {
         super(description, dateString, timeArgs);
 
-        assert date != null : "Event date arguments cannot be null.";
-        assert description != null : "Event description cannot be null.";
+        assert date != null : "Date constraints cannot be null.";
+        assert description != null : "Deadline description cannot be null.";
     }
 
     /**

@@ -22,7 +22,7 @@ public class Event extends TimedTask {
     public Event(String description, String date, String... timeArgs) throws DateTimeParseException {
         super(description, date, timeArgs);
 
-        assert date != null : "Event date arguments cannot be null.";
+        assert date != null : "Date constraints cannot be null.";
         assert description != null : "Event description cannot be null.";
     }
 

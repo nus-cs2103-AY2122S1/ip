@@ -23,6 +23,8 @@ public class RescheduleCommand extends Command {
      * @param timeArgs   the new time constraint for the task.
      */
     public RescheduleCommand(int idx, TaskList tasks, String dateString, String... timeArgs) {
+        assert tasks != null : "TaskList cannot be null.";
+        assert dateString != null : "Date constraint cannot be null.";
         this.idx = idx;
         this.tasks = tasks;
         this.dateString = dateString;

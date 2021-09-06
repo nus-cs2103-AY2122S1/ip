@@ -16,7 +16,7 @@ public abstract class Task {
      * @param description the description for a task.
      */
     public Task(String description) {
-        assert description != null : "Event date cannot be null.";
+        assert description != null : "Task description cannot be null.";
 
         this.description = description;
         this.isDone = false;

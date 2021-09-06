@@ -34,6 +34,7 @@ public abstract class TimedTask extends Task {
      */
     public TimedTask(String description, String dateString, String... timeArgs) throws DateTimeParseException {
         super(description);
+        assert dateString != null : "Date constraint cannot be null.";
         scheduleTask(dateString, timeArgs);
     }
 
