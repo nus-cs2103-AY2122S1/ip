@@ -12,6 +12,12 @@ public class Parser {
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * Parses input continously and executes the commands provided.
+     * Type 'bye' to exit the program.
+     *
+     * @param input The input to be parsed.
+     */
     public void parse() {
         while (sc.hasNextLine()) {
             String input = sc.nextLine();

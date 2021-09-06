@@ -14,22 +14,43 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Adds a Task to the Task List.
+     *
+     * @param task The new Task to be added.
+     */
     public void addTask(Task task) {
         tasks.add(task);
         ui.addTask(task, this);
     }
 
+    /**
+     * Marks a specified task as complete.
+     * Parses the string after the "done" command and marks the
+     * specified task.  Expected format: " " + task_number
+     *
+     * @param input The argument string after the "done" command.
+     * @throws DukeException Thrown for any possible error relating to invalid input.
+     */
     public void completeTask(String input) throws DukeException {
         int n = parseTaskNumber(input);
-        Task task = tasks.get(n - 1);
+        Task task = tasks.get(n);
         task.setDone();
         ui.completeTask(task);
     }
 
+    /**
+     * Deletes a specified task.
+     * Parses the string after the "delete" command and deletes the
+     * specified task. Expected format: " " + task_number
+     *
+     * @param input The argument string after the "delete" command.
+     * @throws DukeException Thrown for any possible error relating to invalid input.
+     */
     public void deleteTask(String input) throws DukeException {
         int n = parseTaskNumber(input);
-        Task task = tasks.get(n - 1);
-        tasks.remove(n - 1);
+        Task task = tasks.get(n);
+        tasks.remove(n);
         ui.deleteTask(task, this);
     }
 
@@ -56,7 +77,7 @@ public class TaskList {
                 } else if (i <= 0) {
                     throw new DukeException(DukeException.INVALID_TASK_NUMBER);
                 } else {
-                    return i;
+                    return i - 1;
                 }
             }
         } catch (NumberFormatException e) {

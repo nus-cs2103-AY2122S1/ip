@@ -26,6 +26,11 @@ public class Ui {
                 (taskList.size() == 1 ? "" : "s") + ".");
     }
 
+    /**
+     * Lists out all Tasks numbered and on individual lines.
+     * Calls the toString() method of each Task to display them
+     * and their type/status.
+     */
     public void listTasks(TaskList taskList) {
         if (taskList.size() == 0) {
             display("is no tasks today.");
@@ -46,5 +51,9 @@ public class Ui {
         display("Hello from\n" + logo);
         display("hello name is duke");
         display("how is help today; （´・｀ ）♡");
+    }
+
+    public void exit() {
+        display("okay is bye!!");
     }
 }
