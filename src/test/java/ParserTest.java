@@ -162,10 +162,10 @@ public class ParserTest {
     public void testDateTimeToString() {
         LocalDateTime dateTime = LocalDateTime.parse("2021-11-23T00:00");
 
-        Assertions.assertEquals("23 November 2021", Parser.dateTimeToString(dateTime, true),
-            Parser.dateTimeToString(dateTime, true));
-        Assertions.assertEquals("23 November 2021 00:00", Parser.dateTimeToString(dateTime, false),
-            Parser.dateTimeToString(dateTime, false));
+        Assertions.assertEquals("23 November 2021", Parser.getDateTimeString(dateTime, true),
+            Parser.getDateTimeString(dateTime, true));
+        Assertions.assertEquals("23 November 2021 00:00", Parser.getDateTimeString(dateTime, false),
+            Parser.getDateTimeString(dateTime, false));
     }
 
 

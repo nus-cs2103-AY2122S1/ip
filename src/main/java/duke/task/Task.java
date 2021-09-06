@@ -51,19 +51,17 @@ public class Task {
      * @return Task constructed based of input command.
      * @throws DukeException
      */
-    public static Task taskFactory(TaskType taskType, String input) throws DukeException {
-        Task newTask = null;
+    public static Task of(TaskType taskType, String input) throws DukeException {
+        Task newTask;
+        if (taskType == taskType.TODO) {
 
-        switch (taskType) {
-        case TODO: {
             String description = input.substring(4).trim();
             if (description.isBlank()) {
                 throw new DukeException("Please provide a description of the todo Sir/Mdm.");
             }
             newTask = new Todo(description);
-            break;
-        }
-        case DEADLINE: {
+
+        } else if (taskType == taskType.DEADLINE) {
             int index = input.indexOf("/by");
             if (index == -1) {
                 if (input.equals("deadline")) {
@@ -78,9 +76,8 @@ public class Task {
             }
             String date = input.substring(index + 3).trim();
             newTask = Deadline.of(description, date);
-            break;
-        }
-        case EVENT: {
+
+        } else if (taskType == taskType.EVENT) {
             int index = input.indexOf("/at");
             if (index == -1) {
                 if (input.equals("event")) {
@@ -96,11 +93,8 @@ public class Task {
             }
             String date = input.substring(index + 3).trim();
             newTask = Event.of(description, date);
-            break;
-        }
-        default: {
+        } else {
             throw new DukeException("Something wrong happened: Unknown task type given");
-        }
         }
         return newTask;
     }

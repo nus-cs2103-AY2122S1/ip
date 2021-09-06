@@ -27,7 +27,8 @@ import duke.task.TaskType;
  */
 public class Parser {
 
-    private static String errorMessage = "Wrong format Sir/Mdm. Dates and times must be given as only a date: DATE\n"
+    private static final String ERROR_MESSAGE = "Wrong format Sir/Mdm. Dates and times must be given as only a date: "
+        + "DATE\n"
         + "or as date and time: DATE TIME\n"
         + "Accepted formats for DATE: YYYY-MM-DD, DD/MM/YYYY\n"
         + "Accepted formats for TIME (24H format): TT:TT, TTTT\n"
@@ -58,10 +59,13 @@ public class Parser {
             return generateDeleteTaskCommand(input, ui, tasks, storage);
         } else if (input.split(" ")[0].equals("find/date")) {
             return generateFindByDateCommand(input, ui, tasks);
-        } else if (input.startsWith("find")) {
+        } else if (input.split(" ")[0].equals("find")) {
             return generateFindByDescriptionCommand(input, ui, tasks);
-        } else {
+        } else if (input.split(" ")[0].equals("todo") || input.split(" ")[0].equals("event")
+            || input.split(" ")[0].equals("deadline")) {
             return generateAddCommand(input, ui, tasks, storage);
+        } else {
+            throw new DukeException("Pardon me Sir/Mdm, but I do not understand.");
         }
     }
 
@@ -75,12 +79,9 @@ public class Parser {
      * @throws DukeException
      */
     public static LocalDateTime parseDateAndTime(String dateInput, String timeInput) throws DukeException {
-
-
         LocalDate date = parseDate(dateInput);
         LocalTime time = parseTime(timeInput);
         return LocalDateTime.of(date, time);
-
     }
 
     /**
@@ -90,7 +91,7 @@ public class Parser {
      * @param isDateOnly Determines whether time will be displayed along with the date.
      * @return Formatted date and/or time String.
      */
-    public static String dateTimeToString(LocalDateTime dateTime, boolean isDateOnly) {
+    public static String getDateTimeString(LocalDateTime dateTime, boolean isDateOnly) {
 
         int len = dateTime.toString().length();
 
@@ -111,7 +112,7 @@ public class Parser {
         } catch (DateTimeException e) {
             String[] dayMonthAndTime = input.split("/");
             if (dayMonthAndTime.length != 3) {
-                throw new DukeException(errorMessage);
+                throw new DukeException(ERROR_MESSAGE);
             }
             try {
                 int day = Integer.parseInt(dayMonthAndTime[0]);
@@ -120,7 +121,7 @@ public class Parser {
 
                 date = LocalDate.of(year, month, day);
             } catch (DateTimeException | NumberFormatException f) {
-                throw new DukeException(errorMessage);
+                throw new DukeException(ERROR_MESSAGE);
             }
         }
         return date;
@@ -132,14 +133,14 @@ public class Parser {
             time = LocalTime.parse(input);
         } catch (DateTimeParseException e) {
             if (input.length() != 4) {
-                throw new DukeException(errorMessage);
+                throw new DukeException(ERROR_MESSAGE);
             }
             try {
                 int hour = Integer.parseInt(input.substring(0, 2));
                 int minute = Integer.parseInt(input.substring(2));
                 time = LocalTime.of(hour, minute);
             } catch (NumberFormatException | DateTimeException f) {
-                throw new DukeException(errorMessage);
+                throw new DukeException(ERROR_MESSAGE);
             }
         }
 
@@ -228,13 +229,13 @@ public class Parser {
         Pattern eventPattern = Pattern.compile("(^(event ))");
 
         if (todoPattern.matcher(input).find() || input.equals("todo")) {
-            Task newTask = Task.taskFactory(TaskType.TODO, input);
+            Task newTask = Task.of(TaskType.TODO, input);
             return new AddCommand(newTask, tasks, ui, storage);
         } else if (deadlinePattern.matcher(input).find() || input.equals("deadline")) {
-            Task newTask = Task.taskFactory(TaskType.DEADLINE, input);
+            Task newTask = Task.of(TaskType.DEADLINE, input);
             return new AddCommand(newTask, tasks, ui, storage);
         } else if (eventPattern.matcher(input).find() || input.equals("event")) {
-            Task newTask = Task.taskFactory(TaskType.EVENT, input);
+            Task newTask = Task.of(TaskType.EVENT, input);
             return new AddCommand(newTask, tasks, ui, storage);
         } else {
             throw new DukeException("Pardon me Sir/Mdm, but I do not understand.");
