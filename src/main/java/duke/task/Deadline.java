@@ -1,33 +1,22 @@
 package duke.task;
 
+import duke.exception.IncompleteTaskDescriptionException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Deadline is a specific type of task that contains the description of the task.
  */
 public class Deadline extends Task {
     private static final char TASK_LETTER = 'D';
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy");
     private LocalDate date;
     private LocalTime time;
 
     /**
      * Constructs a deadline task.
-     *
-     * @param description The description of the task.
-     * @param date The deadline date.
-     * @param time The deadline time.
-     */
-    public Deadline(String description, LocalDate date, LocalTime time) {
-        super(description);
-        this.date = date;
-        this.time = time;
-    }
-
-    /**
-     * Constructs a deadline task. It is used to instantiate a deadline that is already marked as done.
      *
      * @param description The description of the ask.
      * @param date The deadline date.
@@ -47,8 +36,9 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
+        String formattedDate = this.date.format(Task.DATE_TIME_FORMATTER);
         return String.format("[%c]%s (by: %s %s)", Deadline.TASK_LETTER,
-                super.toString(), this.date.format(Deadline.DATE_TIME_FORMATTER), this.time);
+                super.toString(), formattedDate, this.time);
     }
 
     /**
@@ -58,7 +48,27 @@ public class Deadline extends Task {
      */
     @Override
     public String stringToStore() {
-        return Deadline.TASK_LETTER + " | " + this.getStatusIcon() + " | " + this.description + " | "
-                + this.date.format(Deadline.DATE_TIME_FORMATTER) + " | " + this.time + "\n";
+        String formattedDate = this.date.format(Task.DATE_TIME_FORMATTER);
+        return String.format("%c | %s | %s | %s | %s\n", Deadline.TASK_LETTER,
+                this.getStatusIcon(), this.description, formattedDate, this.time);
+    }
+
+    public static Deadline create(String description, boolean isDone) throws IncompleteTaskDescriptionException {
+        if (description.matches("[^ ].* /by *[^ ].* [^ ].*")) {
+            String deadlineSeparator = "/by";
+            int separatorIndex = description.indexOf(deadlineSeparator);
+            String taskDetail = description.substring(0, separatorIndex).trim();
+            int len = deadlineSeparator.length();
+            String[] by = description.substring(separatorIndex + len).trim().split(" ");
+            try {
+                LocalDate date = LocalDate.parse(by[0].trim());
+                LocalTime time = LocalTime.parse(by[1].trim());
+                return new Deadline(taskDetail, date, time, isDone);
+            } catch (DateTimeParseException e) {
+                throw new IncompleteTaskDescriptionException("deadline");
+            }
+        } else {
+            throw new IncompleteTaskDescriptionException("deadline");
+        }
     }
 }

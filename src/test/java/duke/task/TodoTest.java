@@ -10,7 +10,7 @@ class TodoTest {
 
     @BeforeEach
     void setUp() {
-        this.todo = new Todo("test description");
+        this.todo = new Todo("test description", false);
     }
 
     @Test

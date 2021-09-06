@@ -1,16 +1,13 @@
 package duke.task;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import duke.Storage;
 import duke.Ui;
 import duke.command.CommandKeyword;
 import duke.exception.DukeException;
-import duke.exception.IncompleteTaskDescriptionException;
 import duke.exception.InvalidCommandException;
 
 /**
@@ -43,18 +40,18 @@ public class TaskList {
      * Mark the task at the given index.
      *
      * @param index The index of the arraylist that contains the task.
+     * @param storage The storage to update the task marked.
      * @return The updated task list after the task is marked.
      */
-    public ArrayList<Task> markTask(int index) {
+    public void markTask(int index, Storage storage) {
         try {
             Task task = this.tasks.get(index);
             task.markAsDone();
             this.ui.showMarkedTask(task);
+            storage.save(this.tasks);
             assert index >= 0;
-            return this.tasks;
         } catch (IndexOutOfBoundsException e) {
             this.ui.showMarkedTask(null);
-            return null;
         }
     }
 
@@ -63,52 +60,21 @@ public class TaskList {
      *
      * @param description The description of the task.
      * @param keyword The command keyword to identify the type of task to be added.
-     * @return The updated task list after the task is added.
+     * @param storage The storage to save the task added.
      * @throws DukeException If the task fails to be added to the list.
      */
-    public ArrayList<Task> addTask(String description, CommandKeyword keyword) throws DukeException {
-        Task task = null;
+    public void addTask(String description, CommandKeyword keyword, Storage storage) throws DukeException {
+        Task task;
         switch (keyword) {
         case TODO:
-            if (!description.equals("")) {
-                task = new Todo(description);
-                break;
-            } else {
-                throw new IncompleteTaskDescriptionException("todo");
-            }
+            task = Todo.create(description, false);
+            break;
         case DEADLINE:
-            if (description.matches("[^ ].* /by *[^ ].* [^ ].*")) {
-                int separator = description.indexOf("/by");
-                String taskDetail = description.substring(0, separator).trim();
-                String[] by = description.substring(separator + 3).trim().split(" ");
-                try {
-                    LocalDate date = LocalDate.parse(by[0].trim());
-                    LocalTime time = LocalTime.parse(by[1].trim());
-                    task = new Deadline(taskDetail, date, time);
-                } catch (DateTimeParseException e) {
-                    throw new IncompleteTaskDescriptionException("deadline");
-                }
-                break;
-            } else {
-                throw new IncompleteTaskDescriptionException("deadline");
-            }
+            task = Deadline.create(description, false);
+            break;
         case EVENT:
-            if (description.matches("[^ ].* /at *[^ ].* [^ ].*")) {
-                int separator = description.indexOf("/at");
-                String taskDetail = description.substring(0, separator).trim();
-                String at = description.substring(separator + 3).trim();
-                try {
-                    int index = at.indexOf(' ');
-                    LocalDate date = LocalDate.parse(at.substring(0, index));
-                    String timeRange = at.substring(index + 1).trim();
-                    task = new Event(taskDetail, date, timeRange);
-                } catch (DateTimeParseException e) {
-                    throw new IncompleteTaskDescriptionException("event");
-                }
-                break;
-            } else {
-                throw new IncompleteTaskDescriptionException("event");
-            }
+            task = Event.create(description, false);
+            break;
         default:
             // checked for command validity in duke.Parser class, so this should not execute at all
             throw new InvalidCommandException();
@@ -116,25 +82,24 @@ public class TaskList {
         assert task != null : "Task not added successfully but error is not caught";
         tasks.add(task);
         this.ui.showAddTask(task, this.tasks.size());
-        return this.tasks;
+        storage.save(this.tasks);
     }
 
     /**
      * Delete the task at the given index.
      * @param index The index of the arraylist that contains the task.
+     * @param storage The storage to update the task marked.
      * @return The updated task list after the task is deleted.
      */
-
-    public ArrayList<Task> deleteTask(int index) {
+    public void deleteTask(int index, Storage storage) {
         try {
             Task task = this.tasks.get(index);
             this.tasks.remove(index);
             this.ui.showDeletedTask(task, this.tasks.size());
+            storage.save(this.tasks);
             assert index >= 0;
-            return this.tasks;
         } catch (IndexOutOfBoundsException e) {
             this.ui.showDeletedTask(null, -1);
-            return null;
         }
     }
 
@@ -149,7 +114,7 @@ public class TaskList {
         } else {
             List<Task> filteredList = this.tasks.stream()
                     .filter(task -> task.toString().contains(keyword)).collect(Collectors.toList());
-            this.ui.showFilteredTasks(new ArrayList<Task>(filteredList));
+            this.ui.showFilteredTasks(new ArrayList<>(filteredList));
         }
     }
 }
