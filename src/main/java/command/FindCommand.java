@@ -38,17 +38,24 @@ public class FindCommand extends Command {
         ArrayList<Task> findResult = new ArrayList<>();
         Pattern pattern = Pattern.compile(keyword, Pattern.CASE_INSENSITIVE);
         for (int i = 0; i < taskList.amountOfTasks(); i++) {
+            System.out.println("[" + taskList.getTask(i).getDescription() + "]");
+            System.out.println("[" + keyword + "]");
             Matcher matcher = pattern.matcher(taskList.getTask(i).getDescription());
             System.out.println(taskList.getTask(i).getDescription() + matcher.find());
-            if (matcher.find()) {
+            if (matcher.matches()) {
                 findResult.add(taskList.getTask(i));
             }
         }
 
-        String[] findResultString = new String[findResult.size() + 1];
-        for (int i = 0; i < findResult.size(); i++) {
-            findResultString[i + 1] = "  " + (i + 1) + ". " + findResult.get(i).toString();
+        if (findResult.size() == 0) {
+            ui.printMessage("Sorry, no matching task found.");
+        } else {
+            String[] findResultString = new String[findResult.size() + 1];
+            findResultString[0] = "Here are the matching task found:";
+            for (int i = 0; i < findResult.size(); i++) {
+                findResultString[i + 1] = "  " + (i + 1) + ". " + findResult.get(i).toString();
+            }
+            ui.printMessage(findResultString);
         }
-        ui.printMessage(findResultString);
     }
 }
