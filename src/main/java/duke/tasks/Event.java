@@ -53,36 +53,39 @@ public class Event extends Task {
     /**
      * Gets the date of the event.
      *
-     * @return LocalDate object denoting the date of the event.
+     * @return String denoting the date of the event.
      */
-    public LocalDate getDate() {
+    public String getDate() {
         String date = at.split(" ")[0];
         this.date = LocalDate.parse(date.split("/")[2] + "-"+ date.split("/")[1] + "-" + date.split("/")[0]);
-        return this.date;
+        String formattedDate = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return formattedDate;
     }
 
     /**
      * Gets the start time of the event.
      *
-     * @return LocalTime object denoting the end time of the event.
+     * @return String denoting the end time of the event.
      */
-    public LocalTime getStartTime() {
+    public String getStartTime() {
         String time = at.split(" ")[1];
         String startTime = time.split("-")[0];
         this.startTime = LocalTime.parse(startTime);
-        return this.startTime;
+        String formattedStartTime = this.startTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+        return formattedStartTime;
     }
 
     /**
      * Gets the end time of the event.
      *
-     * @return LocalTime object denoting the end time of the event.
+     * @return String denoting the end time of the event.
      */
-    public LocalTime getEndTime() {
+    public String getEndTime() {
         String time = at.split(" ")[1];
         String endTime = time.split("-")[1];
         this.endTime = LocalTime.parse(endTime);
-        return this.endTime;
+        String formattedEndTime = this.endTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+        return formattedEndTime;
     }
     /**
      * Stores the task in the hard disk.
@@ -101,8 +104,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + getDate().format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                + " from " + getStartTime().format(DateTimeFormatter.ofPattern("HH:mm")) + " to "
-                + getEndTime().format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
+        return "[E]" + super.toString() + "(at: " + getDate() + " from " + getStartTime() + " to " + getEndTime() + ")";
     }
 }

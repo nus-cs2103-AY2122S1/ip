@@ -1,6 +1,5 @@
 package duke;
 
-import duke.tasks.TaskList;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 import duke.tasks.Event;
@@ -34,23 +33,10 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        /**System.out.println("Hello from\n" + logo);
-        String message = "Hello! I'm Duke \n" + "What can I do for you?\n";
-        showLine();
-        System.out.println(message);
-        showLine();*/
         String welcomeMessage =  "Hello from\n" + logo + showLine() + "Hello! I'm Duke \n" + "What can I do for you?\n"
                 + showLine();
         System.out.println(welcomeMessage);
         return welcomeMessage;
-        /**if(size() == 0) {
-            System.out.println("There are no tasks");
-            return null;
-        } else {
-            System.out.println("im here!!");
-            printFile("data/duke.txt");
-            return nill;
-        }*/
     }
 
     /**
@@ -79,17 +65,10 @@ public class Ui {
      */
     public String respondToList(ArrayList<Task> tasks) {
         String responseToList = "Here are the tasks in your list:";
-        //System.out.println(("\tHere are the tasks in your list:"));
         for (int i = 0; i < tasks.size(); i++) {
-            //System.out.println("\t" + Integer.toString(i + 1) + "." + tasks.get(i).toString());
-            if(i == tasks.size() - 1) {
-                responseToList = responseToList + "\n" + Integer.toString(i + 1) + "." + tasks.get(i).toString();
-            } else {
-                responseToList = responseToList + "\n" + Integer.toString(i + 1) + "." + tasks.get(i).toString();
-            }
+            responseToList = responseToList + "\n" + Integer.toString(i + 1) + "." + tasks.get(i).toString();
         }
         System.out.println(responseToList);
-        //return responseToList + "\n____________________";
         return responseToList;
     }
 
@@ -102,8 +81,6 @@ public class Ui {
     public String respondToDone(ArrayList<Task> tasks, Integer taskNumber) {
         String responseToDone = "\tNice! I've marked this task as done: \n \t \t" + " ["
                 + tasks.get(taskNumber - 1).getStatusIcon() + "] " + tasks.get(taskNumber - 1).getDescription();
-        //System.out.println("\tNice! I've marked this task as done: \n \t \t" +
-                //" [" + tasks.get(taskNumber - 1).getStatusIcon() + "] " + tasks.get(taskNumber - 1).getDescription());
         System.out.println(responseToDone);
         return responseToDone;
     }
@@ -173,9 +150,9 @@ public class Ui {
      * Prints the response on the user interface to the bye input by user.
      */
     public String respondToBye() {
-        String respondToBye = "\tBye. Hope to see you again soon!";
-        System.out.println(respondToBye);
-        return respondToBye;
+        String responseToBye = "\tBye. Hope to see you again soon!";
+        System.out.println(responseToBye);
+        return responseToBye;
     }
 
     /**
@@ -183,13 +160,16 @@ public class Ui {
      */
     public String respondToFind(ArrayList<Task> tasks) {
         String responseToFind = "\tHere are the matching tasks in your list:";
-        //System.out.println("\tHere are the matching tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             responseToFind = responseToFind + "\t" + Integer.toString(i + 1) + "." + tasks.get(i).toString();
-            //System.out.println("\t" + Integer.toString(i + 1) + "." + tasks.get(i).toString());
         }
         System.out.println(responseToFind);
         return responseToFind;
     }
 
+    public String respondToInvalidCommand() {
+        String responseToFind = "\tInvalid command!";
+        System.out.println(responseToFind);
+        return responseToFind;
+    }
 }

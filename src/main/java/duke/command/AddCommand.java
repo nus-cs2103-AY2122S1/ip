@@ -1,7 +1,5 @@
 package duke.command;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import duke.Ui;
 import duke.Storage;
 import duke.tasks.TaskList;
@@ -20,40 +18,44 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            if(command.split(" ")[0].equals("todo")) {
-                if(command.split(" ", 2).length == 1) {
-                    ToDo todo = new ToDo(command.split(" ", 2)[0]);
+            String typeOfTask = command.split(" ")[0];
+            String[] parsedCommand = command.split(" ", 2);
+            Integer lengthOfCommand = parsedCommand.length;
+            String typeOfIncompleteTask = command.split(" ", 2)[0];
+            String descriptionOfTask = command.split(" ", 2)[1];
+            if(typeOfTask.equals("todo")) {
+                if(lengthOfCommand == 1) {
+                    ToDo todo = new ToDo(typeOfIncompleteTask);
                 } else {
-                    ToDo todo = new ToDo(command.split(" ", 2)[1]);
+                    ToDo todo = new ToDo(descriptionOfTask);
                     tasks.addTask(todo);
-                    //ui.respondToTodo(tasks.getTasks(), todo);
                     storage.appendToFile(todo);
                     return ui.respondToTodo(tasks.getTasks(), todo);
                 }
-            } else if(command.split(" ")[0].equals("deadline")) {
-                if (command.split(" ", 2).length == 1) {
-                    Deadline deadline = new Deadline(command.split(" ", 2)[0], "");
+            } else if(typeOfTask.equals("deadline")) {
+                if (lengthOfCommand == 1) {
+                    Deadline deadline = new Deadline(typeOfIncompleteTask, "");
                 } else {
-                    String description = command.split(" ", 2)[1].split(" /")[0];
+                    String descriptionOfDeadline = descriptionOfTask.split(" /")[0];
                     String by = command.split("/by ")[1];
-                    Deadline deadline = new Deadline(description, by);
+                    Deadline deadline = new Deadline(descriptionOfDeadline, by);
                     tasks.addTask(deadline);
-                    //ui.respondToDeadline(tasks.getTasks(), deadline);
                     storage.appendToFile(deadline);
                     return ui.respondToDeadline(tasks.getTasks(), deadline);
                 }
-            } else {
-                if (command.split(" ", 2).length == 1) {
+            } else if(typeOfTask.equals("event")) {
+                if (lengthOfCommand == 1) {
                     Event event = new Event(command.split(" ", 2)[0], "");
                 } else {
                     String description = command.split(" ", 2)[1].split(" /")[0];
                     String at = command.split("/at ")[1];
                     Event event = new Event(description, at);
                     tasks.addTask(event);
-                    //ui.respondToEvent(tasks.getTasks(), event);
                     storage.appendToFile(event);
                     return ui.respondToEvent(tasks.getTasks(), event);
                 }
+            } else {
+                ui.respondToInvalidCommand();
             }
         } catch (DukeException1 e) {
             return ui.showError(e.getMessage());
