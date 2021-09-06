@@ -1,6 +1,5 @@
 package duke.util;
 
-import duke.Duke;
 import duke.TaskList;
 import duke.exception.DukeException;
 
@@ -16,24 +15,22 @@ public class Parser {
 	 * @throws DukeException if the user input is invalid
 	 */
 	public static String parse(String command) throws DukeException {
-		TaskList taskList = Duke.getTasks();
-
 		if (command.startsWith("bye")) {
 			return "Bye. Hope to see you again soon!\n";
 		} else if (command.startsWith("list")) {
-			return taskList.printTasks("");
+			return TaskList.printTasks("");
 		} else if (command.startsWith("find")) {
-			return taskList.findTasks(command);
+			return TaskList.findTasks(command);
 		} else if (command.startsWith("done")) {
-			return taskList.handleDone(command);
+			return TaskList.handleDone(command);
 		} else if (command.startsWith("delete")) {
-			return taskList.handleDelete(command);
+			return TaskList.handleDelete(command);
 		} else if (command.startsWith("todo")) {
-			return taskList.addToDo(command);
+			return TaskList.addToDo(command);
 		} else if (command.startsWith("deadline")) {
-			return taskList.addDeadline(command);
+			return TaskList.addDeadline(command);
 		} else if (command.startsWith("event")) {
-			return taskList.addEvent(command);
+			return TaskList.addEvent(command);
 		} else {
 			throw new DukeException("I don't understand that command!\n");
 		}
