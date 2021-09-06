@@ -27,18 +27,20 @@ public class Deadline extends Task {
     }
 
     /**
-     * Converts the deadline object to a string representation.
+     * String representation of the deadline object
+     * to be stored in the hard disk.
      *
-     * @return The string representation of the deadline object.
+     * @return A string representation of the deadline object.
      */
     public String getStringFormat() {
         return "D|" + this.getStatusIcon() + "|" + this.description + "|" + this.by + "\n";
     }
 
     /**
-     * Another string representation of the deadline object.
+     * String representation of the deadline object
+     * to be displayed to the user.
      *
-     * @return A string representation of the deadline object.
+     * @return Another string representation of the deadline object.
      */
     @Override
     public String toString() {

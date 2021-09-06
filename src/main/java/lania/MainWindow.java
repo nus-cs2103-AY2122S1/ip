@@ -2,7 +2,6 @@ package lania;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -29,8 +28,6 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private TaskList tasks;
     private Ui ui;
@@ -66,22 +63,20 @@ public class MainWindow extends AnchorPane {
             if (c instanceof ExitCommand) {
                 Platform.exit();
             }
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getLaniaDialog(laniaText, laniaImage)
-            );
+            generateDialog(input, laniaText, userImage, laniaImage);
         } catch (LaniaException e) {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getLaniaDialog(ui.showLaniaException(e), laniaImage)
-            );
+            generateDialog(input, ui.showLaniaException(e), userImage, laniaImage);
         } catch (DateTimeParseException e) {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getLaniaDialog(ui.showDateTimeException(), laniaImage)
-            );
+            generateDialog(input, ui.showDateTimeException(), userImage, laniaImage);
         }
         userInput.clear();
+    }
+
+    private void generateDialog(String input, String reply, Image userImage, Image laniaImage) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getLaniaDialog(reply, laniaImage)
+        );
     }
 }
 //@@author

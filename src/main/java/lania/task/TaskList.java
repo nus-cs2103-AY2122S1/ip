@@ -75,16 +75,16 @@ public class TaskList {
      * that matches the keyword by looping through the
      * current list.
      *
-     * @param s The keyword to match.
+     * @param keyword The keyword to match.
      * @return The new task list with only matching tasks.
      */
-    public TaskList find(String s) {
-        TaskList tempTasks = new TaskList();
+    public TaskList find(String keyword) {
+        TaskList matchingTasks = new TaskList();
         for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).toString().contains(s)) {
-                tempTasks.update(tasks.get(i));
+            if (tasks.get(i).toString().contains(keyword)) {
+                matchingTasks.update(tasks.get(i));
             }
         }
-        return tempTasks;
+        return matchingTasks;
     }
 }

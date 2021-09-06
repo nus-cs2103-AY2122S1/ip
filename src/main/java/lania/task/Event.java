@@ -27,18 +27,20 @@ public class Event extends Task {
     }
 
     /**
-     * Converts the event object to a string representation.
+     * String representation of the event object
+     * to be stored in the hard disk.
      *
-     * @return The string representation of the event object.
+     * @return A string representation of the event object.
      */
     public String getStringFormat() {
         return "E|" + this.getStatusIcon() + "|" + this.description + "|" + this.at + "\n";
     }
 
     /**
-     * Another string representation of the event object.
+     * String representation of the event object
+     * to be displayed to the user.
      *
-     * @return A string representation of the event object.
+     * @return Another string representation of the event object.
      */
     @Override
     public String toString() {

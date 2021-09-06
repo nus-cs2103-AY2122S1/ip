@@ -26,9 +26,13 @@ public class LaniaTest {
         String a = "deadline read book /by 24-08-2021 18:00";
         String b = "event read book /by 24-08-2021 18:00";
         String c = "todo read book";
-        assertEquals(parser.parseTaskDescription(a), "read book /by 24-08-2021 18:00");
-        assertEquals(parser.parseTaskDescription(b), "read book /by 24-08-2021 18:00");
-        assertEquals(parser.parseTaskDescription(c), "read book");
+        try {
+            assertEquals(parser.parseTaskDescription(a), "read book /by 24-08-2021 18:00");
+            assertEquals(parser.parseTaskDescription(b), "read book /by 24-08-2021 18:00");
+            assertEquals(parser.parseTaskDescription(c), "read book");
+        } catch (LaniaEmptyDescriptionException e) {
+            System.out.println("Error");
+        }
     }
 
     @Test
@@ -47,10 +51,15 @@ public class LaniaTest {
         Parser parser = new Parser();
         String a = "read book /by 24-08-2021 18:00";
         String b = "read book /at 24-08-2021 18:00";
-        assertEquals(parser.parseDeadline(a)[0], "read book");
-        assertEquals(parser.parseDeadline(a)[1], "24-08-2021 18:00");
-        assertEquals(parser.parseEvent(b)[0], "read book");
-        assertEquals(parser.parseEvent(b)[1], "24-08-2021 18:00");
+        try {
+            assertEquals(parser.parseDeadlineDescription(a)[0], "read book");
+            assertEquals(parser.parseDeadlineDescription(a)[1], "24-08-2021 18:00");
+            assertEquals(parser.parseEventDescription(b)[0], "read book");
+            assertEquals(parser.parseEventDescription(b)[1], "24-08-2021 18:00");
+        } catch (LaniaEmptyDescriptionException e) {
+            System.out.println("Error");
+        }
+
     }
 
     @Test
@@ -59,12 +68,12 @@ public class LaniaTest {
         String c = "read book";
         String d = "borrow book";
         try {
-            parser.parseEvent(c);
+            parser.parseEventDescription(c);
         } catch (LaniaEmptyDescriptionException e) {
             assertEquals(e.getMessage(), "The description of date/time cannot be empty");
         }
         try {
-            parser.parseDeadline(d);
+            parser.parseDeadlineDescription(d);
         } catch (LaniaEmptyDescriptionException e) {
             assertEquals(e.getMessage(), "The description of date/time cannot be empty");
         }

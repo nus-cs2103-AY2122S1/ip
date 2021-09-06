@@ -89,6 +89,6 @@ public class Lania {
      **/
     public static void main(String[] args) {
         Lania lania = new Lania("data/lania.txt");
-        Launcher.main(args);
+        lania.run();
     }
 }

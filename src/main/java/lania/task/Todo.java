@@ -15,18 +15,20 @@ public class Todo extends Task {
     }
 
     /**
-     * Converts the todo object to a string representation.
+     * String representation of the todo object
+     * to be stored in the hard disk.
      *
-     * @return The string representation of the todo object.
+     * @return A string representation of the todo object.
      */
     public String getStringFormat() {
         return "T|" + this.getStatusIcon() + "|" + this.description + "\n";
     }
 
     /**
-     * Another string representation of the todo object.
+     * String representation of the todo object to be
+     * displayed to the user.
      *
-     * @return A string representation of the todo object.
+     * @return Another string representation of the todo object.
      */
     @Override
     public String toString() {

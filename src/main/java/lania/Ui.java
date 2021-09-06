@@ -12,19 +12,23 @@ public class Ui {
     /**
      * Displays a message when the user adds a task.
      *
-     * @param tasks The resulting TaskList.
+     * @param tasks The user's TaskList.
      * @param task The task that has been added.
      * @return The message displayed to user concatenated as a string.
      */
     public String showUpdateMessage(TaskList tasks, Task task) {
-        String message = "Lania has added: ";
-        message = message + "\n" + task.toString();
-        message = message + "\n" + "Great! Now you have "
-                + tasks.size() + (tasks.size() == 1 ? " task" : " tasks") + " in your list.";
+        // display to user
         System.out.println("Lania has added: ");
         System.out.println(task);
         System.out.println("Great! Now you have "
                 + tasks.size() + (tasks.size() == 1 ? " task" : " tasks") + " in your list.");
+
+        // concatenate the messages displayed
+        String message = "Lania has added: ";
+        message += "\n" + task.toString();
+        message += "\n" + "Great! Now you have "
+                + tasks.size() + (tasks.size() == 1 ? " task" : " tasks") + " in your list.";
+
         return message;
     }
 
@@ -34,9 +38,13 @@ public class Ui {
      * @return The message displayed to user concatenated as a string.
      */
     public String showGreetingMessage() {
-        String message = "Hello I am Lania! How may Lania be of assistance?" + "\n" + "Enter 'bye' to exit";
+        // display to user
         System.out.println("Hello I am Lania! How may Lania be of assistance?");
         System.out.println("Enter 'bye' to exit");
+
+        // concatenate the messages displayed
+        String message = "Hello I am Lania! How may Lania be of assistance?" + "\n" + "Enter 'bye' to exit";
+
         return message;
     }
 
@@ -58,12 +66,15 @@ public class Ui {
      * @return The message displayed to user concatenated as a string.
      */
     public String showListMessage(TaskList tasks) {
-        String message = "You have the following task(s):";
         System.out.println("You have the following task(s):");
+        String message = "You have the following task(s):";
+
+        // print and accumulate all messages
         for (int i = 0; i < tasks.size(); i++) {
-            message = message + "\n" + (i + 1) + "." + tasks.get(i).toString();
             System.out.println(i + 1 + "." + tasks.get(i));
+            message += "\n" + (i + 1) + "." + tasks.get(i).toString();
         }
+
         return message;
     }
 
@@ -75,10 +86,14 @@ public class Ui {
      * @return The message displayed to user concatenated as a string.
      */
     public String showCompleteMessage(TaskList tasks, int i) {
-        String message = "Good job! Lania has marked this task as done:";
-        message = message + "\n" + tasks.get(i).toString();
+        // display to user
         System.out.println("Good job! Lania has marked this task as done:");
         System.out.println(tasks.get(i));
+
+        // concatenate the messages displayed
+        String message = "Good job! Lania has marked this task as done:";
+        message += "\n" + tasks.get(i).toString();
+
         return message;
     }
 
@@ -86,19 +101,22 @@ public class Ui {
      * Message that shows after the user deletes a task.
      *
      * @param tasks taskList Contains the user's task list.
-     * @param task Index of the task the user has deleted.
+     * @param task The task the user has deleted.
      * @return The message displayed to user concatenated as a string.
      */
     public String showRemoveMessage(TaskList tasks, Task task) {
-        String message = "Ok, Lania has removed this task:";
-        message = message + "\n" + task.toString();
-        message = message + "\n" + "Great! Now you have "
-                + tasks.size() + (tasks.size() == 1 ? " task" : " tasks") + " in your list.";
-
+        // display to user
         System.out.println("Ok, Lania has removed this task:");
         System.out.println(task);
         System.out.println("Great! Now you have "
                 + tasks.size() + (tasks.size() == 1 ? " task" : " tasks") + " in your list.");
+
+        // concatenate the messages displayed
+        String message = "Ok, Lania has removed this task:";
+        message += "\n" + task.toString();
+        message += "\n" + "Great! Now you have "
+                + tasks.size() + (tasks.size() == 1 ? " task" : " tasks") + " in your list.";
+
         return message;
     }
 
@@ -116,10 +134,11 @@ public class Ui {
     /**
      * Message that indicates invalid command.
      *
+     * @param e The LaniaException to display.
      * @return The message displayed to user as a string.
      */
     public String showLaniaException(LaniaException e) {
-        System.out.println(e);
+        System.out.println(e.toString());
         return e.toString();
     }
 
