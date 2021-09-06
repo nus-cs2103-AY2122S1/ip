@@ -29,7 +29,10 @@ public class Duke {
         this(Storage.SERIALIZATION_PATH);
     }
 
-
+    /**
+     * Main function that runs the Duke chatbot
+     * Consists of conditional branches for all the commands of Duke
+     */
     public void run() {
         Ui.initialize();
         Scanner sc = new Scanner(System.in);
