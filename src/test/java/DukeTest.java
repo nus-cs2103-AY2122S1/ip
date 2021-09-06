@@ -2,7 +2,7 @@ import duke.Event;
 import duke.Duke;
 import duke.Storage;
 import duke.Ui;
-import duke.TaskList;
+import duke.TaskListInternal;
 import duke.ToDo;
 import duke.Deadline;
 
@@ -23,7 +23,7 @@ public class DukeTest {
 
     @Test
     public void initialiseTest(){
-        assertEquals(true,new TaskList().initialise(Duke.file,new Storage()));
+        assertEquals(true,new TaskListInternal().initialise(Duke.file,new Storage()));
     }
 
     @Test

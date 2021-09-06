@@ -31,6 +31,17 @@ import javafx.stage.Stage;
  */
 public class Duke extends Application {
 
+    public static final String WIPE_COMMAND = "WIPE";
+    public static final String FIND_COMMAND = "find";
+    public static final String EVENT_COMMAND = "event";
+    public static final String DEADLINE_COMMAND = "deadline";
+    public static final String TODO_COMMAND = "todo";
+    public static final String DELETE_COMMAND = "delete";
+    public static final String DELETE_COMMAND_ALTERNATE = "remove";
+    public static final String DONE_COMMAND = "done";
+    public static final String LIST_COMMAND = "list";
+    public static final String BYE_COMMAND = "bye";
+
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -41,7 +52,7 @@ public class Duke extends Application {
 
     private static Ui ui = new Ui();
     private static Storage storage = new Storage();
-    private static TaskList taskList = new TaskList();
+    private static TaskListInternal taskListInternal = new TaskListInternal();
     public static File file = new File("data/list.txt");
 
     public static void main(String[] args) {
@@ -51,7 +62,7 @@ public class Duke extends Application {
 
         ui.showFileLocation(file.getAbsolutePath());
 
-        taskList.initialise(file, storage);
+        taskListInternal.initialise(file, storage);
 
         Parser.parse();
     }
@@ -154,100 +165,90 @@ public class Duke extends Application {
      */
     public String getResponse(String command) {
 
-        taskList.initialise(file, storage);
-        if (command.equals("bye")) {
+        taskListInternal.initialise(file, storage);
+        if (command.equals(BYE_COMMAND)) {
             return "Have a SPARKELOUS day.";
-        } else if (command.equals("list")) {
+        } else if (command.equals(LIST_COMMAND)) {
 
-            int c = 1;
-            String output = "";
-            for (String line : TaskList.lines) {
-                output += (c + ". " + line + System.lineSeparator());
-                c++;
-            }
-            if (c == 1) {
-                return "The list is empty. How tragic.";
-            }
-            assert c==TaskList.lines.size();
-            return output;
+            return listStringForm();
 
-        } else if (command.contains("done")) {
+        } else if (command.contains(DONE_COMMAND)) {
             String numbers = command.substring(5);
+
+            //Exception handling for invalid number inputs
             try {
                 int taskNo = Integer.parseInt(numbers);
             } catch (NumberFormatException notANumber) {
                 System.err.println(notANumber);
                 return "HELLO SIR I REQUIRE A NUMBER";
             }
+
             int taskNo = Integer.parseInt(numbers);
 
-            if (TaskList.lines.size() < taskNo) {
+            //Exception handling for numbers that are too big or small
+            if (TaskListInternal.lines.size() < taskNo) {
                 return "HELLO SIR THAT'S TOO MUCH";
             }
             if (taskNo <= 0) {
                 return "HI SIR NO NON-POSITIVE INTEGERS ALLOWED";
             }
-            taskNo--;
-            String toBeDone = TaskList.lines.get(taskNo);
-            boolean notAlreadyDone = taskList.makeDone(storage, taskNo);
-            if (notAlreadyDone) {
-                return "Task " + toBeDone + " is now marked as done. Well done.";
-            } else {
-                return "It is ALREADY DONE WOW!!!!!!";
-            }
-        } else if (command.contains("delete") || command.contains("remove")) {
+
+            int targetIndex = taskNo-1;
+            return markedAsDoneString(targetIndex);
+
+        } else if (command.contains(DELETE_COMMAND) || command.contains(DELETE_COMMAND_ALTERNATE)) {
             String numbers = command.substring(7);
+
+            //Exception handling for invalid number inputs
             try {
                 int taskNo = Integer.parseInt(numbers);
             } catch (NumberFormatException notANumber) {
                 System.err.println(notANumber);
                 return "THAT'S NOT A NUMBER";
             }
+
             int taskNo = Integer.parseInt(numbers);
-            if (TaskList.lines.size() < taskNo) {
+
+            //Exception handling for numbers that are too big or small
+            if (TaskListInternal.lines.size() < taskNo) {
                 return "THAT'S TOO MUCH";
             }
             if (taskNo <= 0) {
                 return "HI SIR NO NON-POSITIVE INTEGERS ALLOWED";
             }
-            taskNo--;
-            String toBeDeleted = TaskList.lines.get(taskNo);
-            taskList.delete(storage, taskNo);
-            return "Task" + toBeDeleted + " has been deleted. How sad.";
 
-        } else if (command.contains("todo")) {
+            int targetIndex = taskNo-1;
+            return taskDeletedString(targetIndex);
+
+        } else if (command.contains(TODO_COMMAND)) {
             String task = command.substring(5);
+
+            //Exception handling for missing name
             if (task.equals("")) {
                 return "I NEED A NAME SIR!!!";
             }
-            ToDo taskToAdd = new ToDo(task);
 
-            String toBeAdded = taskToAdd.toString();
-            boolean notAlreadyInside = taskList.add(storage, toBeAdded);
-            try {
-                storage.writeListToFile(Duke.file.getPath());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (notAlreadyInside) {
-                return "Task " + toBeAdded + " has been added. SPARKTASTIC.";
-            } else {
-                return "It is already inside. WOWZA!";
-            }
+            return todoTaskAddedString(task);
 
 
-        } else if (command.contains("deadline")) {
+        } else if (command.contains(DEADLINE_COMMAND)) {
             String taskNDate = command.substring(9);
+
+            //Exception handling for missing date
             if (!(taskNDate.contains("/by"))) {
                 return "BY WHEN? I DONT KNOW AHHHHHHHHHHH";
             }
+
             int splitIndex = taskNDate.indexOf("/by");
             String task = taskNDate.substring(0, splitIndex - 1);
             String date = taskNDate.substring(splitIndex + 4);
+
+            //Exception handling for missing name
             if (task.equals("")) {
                 return "WHATS THE NAME OF THE THING SIR";
             }
 
+            //Exception handling for invalid date
             try {
                 LocalDate test = LocalDate.parse(date);
             } catch (DateTimeException error) {
@@ -255,21 +256,9 @@ public class Duke extends Application {
                         "So sorry to inconvenience you.";
             }
 
-            Deadline taskToAdd = new Deadline(task, date);
-            String toBeAdded = taskToAdd.toString();
-            boolean notAlreadyInside = taskList.add(storage, toBeAdded);
-            try {
-                storage.writeListToFile(Duke.file.getPath());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (notAlreadyInside) {
-                return "Task " + toBeAdded + " has been added. SPARKTASTIC.";
-            } else {
-                return "It is already inside. WOWZA!";
-            }
+            return deadlineTaskAddedString(task, date);
 
-        } else if (command.contains("event")) {
+        } else if (command.contains(EVENT_COMMAND)) {
             String taskNDate = command.substring(6);
             if (!(taskNDate.contains("/at"))) {
                 return "HELP THERES NO DATE please enter in YYYY-MM-DD format. " +
@@ -288,45 +277,103 @@ public class Duke extends Application {
                 return "WHATS THE DATE WHAT HAPPENED";
             }
 
-            Deadline taskToAdd = new Deadline(task, date);
-            String toBeAdded = taskToAdd.toString();
-            boolean notAlreadyInside = taskList.add(storage, toBeAdded);
-            try {
-                storage.writeListToFile(Duke.file.getPath());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (notAlreadyInside) {
-                return "Task " + toBeAdded + " has been added. SPARKTASTIC.";
-            } else {
-                return "It is already inside. WOWZA!";
-            }
+            return deadlineTaskAddedString(task, date);
 
-        } else if (command.contains("find")) {
+        } else if (command.contains(FIND_COMMAND)) {
             String searchQuery = command.substring(5);
-            int c = 1;
-            String output = "Here are the search results for \"" + searchQuery + "\":" + System.lineSeparator();
-            for (String task : TaskList.lines) {
-                if (task.contains(searchQuery)) {
-                    output += c + ". " + task + System.lineSeparator();
-                }
-                c++;
-            }
-            assert c==TaskList.lines.size();
-            return output;
+            return searchResultsString(searchQuery);
 
-        } else if (command.equals("WIPE")) {
-            TaskList.lines.clear();
-            try {
-                storage.writeListToFile(Duke.file.getPath());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            assert TaskList.lines.isEmpty();
-            return "BAM! The list has been wiped.";
+        } else if (command.equals(WIPE_COMMAND)) {
+            return listWipedString();
         } else {
             return "(WHAT IS THIS PERSON TRYING TO SAY WHY IS HE TYPING GIBBERISH I'M JUST TRYING TO SURVIVE)";
         }
+    }
+
+    String listWipedString() {
+        TaskListInternal.lines.clear();
+        try {
+            storage.writeListToFile(Duke.file.getPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assert TaskListInternal.lines.isEmpty();
+        return "BAM! The list has been wiped.";
+    }
+
+    String searchResultsString(String searchQuery) {
+        int c = 1;
+        String output = "Here are the search results for \"" + searchQuery + "\":" + System.lineSeparator();
+        for (String task : TaskListInternal.lines) {
+            if (task.contains(searchQuery)) {
+                output += c + ". " + task + System.lineSeparator();
+            }
+            c++;
+        }
+        assert c== TaskListInternal.lines.size();
+        return output;
+    }
+
+    String deadlineTaskAddedString(String task, String date) {
+        Deadline taskToAdd = new Deadline(task, date);
+        String toBeAdded = taskToAdd.toString();
+        boolean notAlreadyInside = taskListInternal.add(storage, toBeAdded);
+        try {
+            storage.writeListToFile(Duke.file.getPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (notAlreadyInside) {
+            return "Task " + toBeAdded + " has been added. SPARKTASTIC.";
+        } else {
+            return "It is already inside. WOWZA!";
+        }
+    }
+
+    String todoTaskAddedString(String task) {
+        ToDo taskToAdd = new ToDo(task);
+        String toBeAdded = taskToAdd.toString();
+        boolean notAlreadyInside = taskListInternal.add(storage, toBeAdded);
+        try {
+            storage.writeListToFile(Duke.file.getPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (notAlreadyInside) {
+            return "Task " + toBeAdded + " has been added. SPARKTASTIC.";
+        } else {
+            return "It is already inside. WOWZA!";
+        }
+    }
+
+    String taskDeletedString(int targetIndex) {
+        String toBeDeleted = TaskListInternal.lines.get(targetIndex);
+        taskListInternal.delete(storage, targetIndex);
+        return "Task" + toBeDeleted + " has been deleted. How sad.";
+    }
+
+    private String markedAsDoneString(int index) {
+        String toBeDone = TaskListInternal.lines.get(index);
+        boolean notAlreadyDone = taskListInternal.makeDone(storage, index);
+        if (notAlreadyDone) {
+            return "Task " + toBeDone + " is now marked as done. Well done.";
+        } else {
+            return "It is ALREADY DONE WOW!!!!!!";
+        }
+    }
+
+    private String listStringForm() {
+        int c = 1;
+        String output = "";
+        for (String line : TaskListInternal.lines) {
+            output += (c + ". " + line + System.lineSeparator());
+            c++;
+        }
+        if (c == 1) {
+            return "The list is empty. How tragic.";
+        }
+        assert c== TaskListInternal.lines.size();
+        return output;
     }
 
 }
