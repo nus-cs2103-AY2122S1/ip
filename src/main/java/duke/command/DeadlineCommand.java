@@ -39,11 +39,14 @@ public class DeadlineCommand extends Command {
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
             String[] deadlinePair = DESCRIPTION.split("/by", 2);
-            if (deadlinePair.length < 2 || deadlinePair[0].equals("") || deadlinePair[1].equals("")) {
+            if (deadlinePair.length < 2) {
                 throw new DukeException("Your add deadline command is incomplete.");
             }
             String desc = deadlinePair[0].trim();
             String date = deadlinePair[1].trim();
+            if (desc.equals("") || date.equals("")) {
+                throw new DukeException("Your add deadline command is incomplete.");
+            }
             LocalDateTime.parse(date.replace(" ", ""),
                     DateTimeFormatter.ofPattern("yyyy-MM-ddHHmm"));
             storage.add("D", desc, date);
