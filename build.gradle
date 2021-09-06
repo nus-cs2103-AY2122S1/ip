@@ -31,7 +31,7 @@ test {
 }
 
 application {
-    mainClassName = "dino.Dino"
+    mainClassName = "dino.Launcher"
 }
 
 shadowJar {
@@ -50,4 +50,5 @@ javafx {
 
 run{
     standardInput = System.in
+    enableAssertions(true)
 }
