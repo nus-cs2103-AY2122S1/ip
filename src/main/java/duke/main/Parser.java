@@ -16,6 +16,13 @@ public class Parser {
     private Ui ui;
     private TaskList taskList;
 
+    /**
+     * Constructor for Parser.
+     *
+     * @param storage  Storage from Duke.
+     * @param ui       Ui from Duke.
+     * @param taskList TaskList from Duke.
+     */
     public Parser(Storage storage, Ui ui, TaskList taskList) {
         this.storage = storage;
         this.ui = ui;

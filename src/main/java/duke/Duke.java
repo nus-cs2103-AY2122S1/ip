@@ -6,6 +6,8 @@ import duke.main.Storage;
 import duke.main.Ui;
 import duke.task.TaskList;
 
+import java.io.File;
+
 /**
  * The entry point to the Duke chatbot.
  */
@@ -18,7 +20,8 @@ public class Duke {
     /**
      * Default constructor for GUI Launcher.
      */
-    public Duke(String filePath) {
+    public Duke() {
+        String filePath = System.getProperty("user.dir") + File.separator + "tasks.txt";
         storage = new Storage(filePath);
     }
 
