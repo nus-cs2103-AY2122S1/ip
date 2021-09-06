@@ -15,7 +15,9 @@ public abstract class Task implements Serializable {
      * @param desc Description.
      */
     public Task(String desc) {
+        assert desc != null;
         this.desc = desc;
+    
     }
     
     /**
@@ -23,15 +25,6 @@ public abstract class Task implements Serializable {
      */
     public void markDone() {
         this.isDone = true;
-    }
-    
-    /**
-     * Gets the status of the task.
-     *
-     * @return Boolean representing whether the task is done.
-     */
-    public boolean isDone() {
-        return this.isDone;
     }
     
     /**
@@ -51,5 +44,14 @@ public abstract class Task implements Serializable {
     @Override
     public String toString() {
         return (this.isDone() ? "[X] " : "[ ] ") + this.desc;
+    }
+    
+    /**
+     * Gets the status of the task.
+     *
+     * @return Boolean representing whether the task is done.
+     */
+    public boolean isDone() {
+        return this.isDone;
     }
 }

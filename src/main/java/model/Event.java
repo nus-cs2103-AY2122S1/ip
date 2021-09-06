@@ -18,6 +18,8 @@ public class Event extends Task implements TimedItem {
      */
     public Event(String desc, LocalDateTime time) {
         super(desc);
+        assert time != null;
+    
         this.time = time;
     }
     

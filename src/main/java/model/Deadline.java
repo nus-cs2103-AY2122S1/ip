@@ -19,6 +19,8 @@ public class Deadline extends Task implements TimedItem {
      */
     public Deadline(String desc, LocalDateTime deadline) {
         super(desc);
+        assert deadline != null;
+    
         this.deadline = deadline;
     }
     
