@@ -54,6 +54,12 @@ public class Storage {
         return listOfTasks;
     }
 
+    /**
+     * Initialise Task object and adds it to the arraylist.
+     *
+     * @param taskDetails
+     * @param listOfTasks
+     */
     private void initialiseTask(String[] taskDetails, ArrayList<Task> listOfTasks) {
         Task t;
         switch (taskDetails[0].trim()) {
