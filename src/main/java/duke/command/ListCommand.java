@@ -23,6 +23,6 @@ public class ListCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         assert taskList != null;
         assert storage != null;
-        return taskList.getList();
+        return taskList.getList(ui);
     }
 }

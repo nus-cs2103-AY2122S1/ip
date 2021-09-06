@@ -23,6 +23,6 @@ public class InvalidCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         assert taskList != null;
         assert storage != null;
-        return ui.showError("I'm sorry, but I don't know what that means!");
+        return ui.showInvalidCommandMessage();
     }
 }
