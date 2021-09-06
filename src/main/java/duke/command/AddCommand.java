@@ -48,14 +48,14 @@ public class AddCommand extends Command {
         } else if (task instanceof Deadline) {
             return TaskType.DEADLINE;
         } else {
-            throw new DukeException(" Something wrong happened: Not an addable Task!");
+            throw new DukeException(" Something went wrong: Not an addable Task!");
         }
     }
 
     @Override
     public void execute() {
         tasks.add(task);
-        storage.save(tasks);
+        storage.saveTasks(tasks);
         ui.add(task, tasks);
     }
 }

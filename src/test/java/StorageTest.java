@@ -64,7 +64,7 @@ public class StorageTest {
 
         Storage testStorage = new Storage(filePath);
 
-        Assertions.assertEquals(true, testStorage.load().equals(expectedTaskList));
+        Assertions.assertEquals(true, testStorage.loadTasks().equals(expectedTaskList));
 
 
     }
@@ -74,7 +74,7 @@ public class StorageTest {
 
         String filePath = "testData2/testTaskList.txt";
         Storage testStorage = new Storage(filePath);
-        testStorage.save(makeTasks());
+        testStorage.saveTasks(makeTasks());
 
         File testFile2 = new File("testData2/testTaskList.txt");
         try {
