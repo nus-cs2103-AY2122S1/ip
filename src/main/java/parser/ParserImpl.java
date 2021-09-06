@@ -207,6 +207,8 @@ public class ParserImpl implements IParser {
     }
     
     private void processException(Exception e) {
+        assert e.getMessage() != null;
+    
         ui.printSentence("OOPS!!! " + e.getMessage());
     }
 }

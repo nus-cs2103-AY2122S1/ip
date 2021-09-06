@@ -43,6 +43,7 @@ public class Dude implements IChatbot {
      */
     @Override
     public void processResponse(String s) {
+        assert s != null;
         commandParser.processInput(s);
     }
     

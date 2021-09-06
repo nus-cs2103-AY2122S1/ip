@@ -76,17 +76,21 @@ public class MainWindowController extends AnchorPane implements IWindowControlle
      * {@inheritDoc}
      */
     @Override
-    public void addUserDialog(String s) {
+    public void addBotDialog(String s) {
+        assert s != null;
+    
         System.out.println(this.dialogContainer.toString());
-        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(s, userImage));
+        dialogContainer.getChildren().addAll(DialogBox.getBotDialog(s, chatbotImage));
     }
     
     /**
      * {@inheritDoc}
      */
     @Override
-    public void addBotDialog(String s) {
+    public void addUserDialog(String s) {
+        assert s != null;
+        
         System.out.println(this.dialogContainer.toString());
-        dialogContainer.getChildren().addAll(DialogBox.getBotDialog(s, chatbotImage));
+        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(s, userImage));
     }
 }

@@ -30,6 +30,8 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
     
     private DialogBox(String text, Image img) {
+        assert text != null && img != null;
+    
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -38,7 +40,7 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             logger.severe(e.getMessage());
         }
-        
+    
         dialog.setText(text);
         displayPicture.setImage(img);
     }

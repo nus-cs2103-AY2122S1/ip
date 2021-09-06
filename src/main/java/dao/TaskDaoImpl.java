@@ -28,6 +28,8 @@ public class TaskDaoImpl implements TaskDao {
      */
     @Override
     public void addTask(Task task) {
+        assert task != null;
+    
         synchronized (this) {
             try {
                 ArrayList<Task> tasks = taskFileListStorage.readArrayListFromFile();
@@ -44,10 +46,12 @@ public class TaskDaoImpl implements TaskDao {
      */
     @Override
     public Task deleteTask(int index) {
+        assert index >= 0;
+    
         if (isInvalidIndex(index)) {
             throw new IndexOutOfBoundsException("non valid index for deletion");
         }
-        
+    
         synchronized (this) {
             try {
                 ArrayList<Task> tasks = taskFileListStorage.readArrayListFromFile();
@@ -68,10 +72,12 @@ public class TaskDaoImpl implements TaskDao {
      */
     @Override
     public void markDone(int index) {
+        assert index >= 0;
+    
         if (isInvalidIndex(index)) {
             throw new IndexOutOfBoundsException("non valid index for marking the task done");
         }
-        
+    
         synchronized (this) {
             try {
                 ArrayList<Task> tasks = taskFileListStorage.readArrayListFromFile();
@@ -89,10 +95,12 @@ public class TaskDaoImpl implements TaskDao {
      */
     @Override
     public Task getTask(int index) {
+        assert index >= 0;
+    
         if (isInvalidIndex(index)) {
             throw new IndexOutOfBoundsException("non valid index for marking the task done");
         }
-        
+    
         try {
             ArrayList<Task> tasks = taskFileListStorage.readArrayListFromFile();
             return tasks.get(index);
@@ -120,6 +128,8 @@ public class TaskDaoImpl implements TaskDao {
      */
     @Override
     public List<Task> getByKeyword(String keyword) {
+        assert keyword != null;
+    
         try {
             ArrayList<Task> tasks = taskFileListStorage.readArrayListFromFile();
             return tasks.stream()
