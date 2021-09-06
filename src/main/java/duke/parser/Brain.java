@@ -10,7 +10,7 @@ import duke.tasks.Event;
 import duke.tasks.Deadline;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
-
+import duke.ui.Ui;
 import java.io.IOException;
 
 /**
@@ -171,9 +171,6 @@ public class Brain {
         } else {
             Task task = dataStore.get(idx-1);
             task.setDone();
-            builder.append("Nice! I've marked this task as done: \n");
-            builder.append(String.format("\t %s \n", task));
-
             assert task.getStatus().equals(true) : "Task has not actually been set to true. Task still false;";
 
             String message = "Nice! I've marked this task as done: \n" + "\t" + task + "\n";
@@ -255,6 +252,47 @@ public class Brain {
                 String text = (i+1) + ". " + message + "\n";
                 builder.append(text);
             }
+        }
+
+        return builder.toString();
+    }
+
+    /**
+     * Returns a guide/manual for the user that presents all available commands
+     * that can be used in JarVIS.
+     *
+     * @return string that represents the user manual and available commands for JarVIS.
+     */
+    public String manual() {
+        StringBuilder builder = new StringBuilder();
+        String message = "Hello! Welcome to the JarVIS User Manual.\n" + "Available commands:\n\n";
+        builder.append(message);
+
+        String[] commands = new String[]{
+                "list",
+                "todo <task_name>",
+                "deadline <task_name> \\by yyyy-MM-dd HH:mm",
+                "event  <task_name> \\at yyyy-MM-dd HH:mm",
+                "delete <task_idx>",
+                "done <task_idx>",
+                "find <keyword>"
+        };
+
+        String[] cmdInfo = new String[]{
+                "lists all items in the memory",
+                "creates a ToDo task with no deadline",
+                "creates a Deadline task with a timestamp deadline",
+                "creates a Event task taking place at a timestamp",
+                "deletes the task found at the given index",
+                "sets the specified task's status to done",
+                "finds the tasks containing a given keyword"
+        };
+
+        for (int i = 0; i < commands.length; i++) {
+            String cmd = commands[i];
+            String info = cmdInfo[i];
+            String desc = String.format("%d. %s\n\t%s\n\n", i+1, cmd, info);
+            builder.append(desc);
         }
 
         return builder.toString();

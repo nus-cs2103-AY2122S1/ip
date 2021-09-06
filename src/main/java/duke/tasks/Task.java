@@ -8,26 +8,26 @@ package duke.tasks;
  */
 abstract public class Task {
     protected String description;
-    protected Boolean status;
+    protected Boolean isDone;
 
     public Task(String desc) {
         this.description = desc;
-        this.status = false;
+        this.isDone = false;
     }
 
     // Sets the task as completed
     public void setDone() {
-        this.status = true;
+        this.isDone = true;
     }
 
     // returns the task status
     public Boolean getStatus() {
-        return this.status;
+        return this.isDone;
     }
 
     // returns the string representation of the status
     public String getStatusString() {
-        return this.status ? "[X]" : "[ ]";
+        return this.isDone ? "[X]" : "[ ]";
     }
 
     // returns the textual description of the task

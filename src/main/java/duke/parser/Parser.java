@@ -18,7 +18,7 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
-// import duke.ui.Ui;
+import duke.ui.Ui;
 
 public class Parser {
     private static final String TODO_NO_DESC = "OOPS!!! The description of a todo cannot be empty.";
@@ -43,8 +43,9 @@ public class Parser {
      */
     public String execute(String command, DataStore dataStore, MemoryBuffer memBuff) {
         String result = "";
-
-        if (command.equals("list")) {
+        if (command.equals("JarVIS?")) {
+            result = brain.manual();
+        } else if (command.equals("list")) {
             result = brain.listItems(dataStore);
         } else if (command.contains("todo")) {
             result = brain.createTodo(command, dataStore);
@@ -144,35 +145,31 @@ public class Parser {
                 splitRecord[j] = splitRecord[j].strip();
             }
 
-            switch (splitRecord[0]) {
-                case ("T"):
-                    ToDo todoTask = new ToDo(splitRecord[2]);
-                    if (splitRecord[1].equals("1")) {
-                        todoTask.setDone();
-                    }
+            if (splitRecord[0].equals("T")) {
+                ToDo todoTask = new ToDo(splitRecord[2]);
+                if (splitRecord[1].equals("1")) {
+                    todoTask.setDone();
+                }
 
-                    // add to task data store
-                    dataStore.add(todoTask);
+                // add to task data store
+                dataStore.add(todoTask);
+            } else if (splitRecord[0].equals("D")) {
+                Deadline deadlineTask = new Deadline(splitRecord[2], splitRecord[3]);
+                if (splitRecord[1].equals("1")) {
+                    deadlineTask.setDone();
+                }
 
-                case ("D"):
-                    Deadline deadlineTask = new Deadline(splitRecord[2], splitRecord[3]);
-                    if (splitRecord[1].equals("1")) {
-                        deadlineTask.setDone();
-                    }
+                // add to task data store
+                dataStore.add(deadlineTask);
+            } else if (splitRecord[0].equals("E")) {
+                Event eventTask = new Event(splitRecord[2], splitRecord[3]);
+                if (splitRecord[1].equals("1")) {
+                    eventTask.setDone();
+                }
 
-                    // add to task data store
-                    dataStore.add(deadlineTask);
-                case ("E"):
-                    Event eventTask = new Event(splitRecord[2], splitRecord[3]);
-                    if (splitRecord[1].equals("1")) {
-                        eventTask.setDone();
-                    }
-
-                    // add to task data store
-                    dataStore.add(eventTask);
+                // add to task data store
+                dataStore.add(eventTask);
             }
-
-
         }
 
         return dataStore;

@@ -58,7 +58,6 @@ public class MemoryBuffer {
      * @throws IOException thrown when there is an error reading the file.
      */
     public void writeFile(DataStore dataStore) throws IOException {
-        // BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
         FileWriter fileWriter = new FileWriter(filePath);
         PrintWriter printWriter = new PrintWriter(fileWriter);
 

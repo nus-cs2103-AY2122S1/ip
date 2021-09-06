@@ -20,7 +20,7 @@ public class Ui {
      * Prints out the welcome greeting upon successful summoning.
      */
     public void greet() {
-        System.out.println("Hello, I\'m  JARVIS");
+        System.out.println("Hello, I'm  JARVIS");
         System.out.println("What can I do for you?");
     }
 
@@ -29,7 +29,7 @@ public class Ui {
      * Returns the user's input without any preprocessing.
      *
      * @return the raw string representation of the user's input to console.
-     * @throws IOException
+     * @throws IOException thrown when there's a problem reading a file.
      */
     public String getUserInput() throws IOException {
         Scanner sc = new Scanner(System.in);
@@ -43,7 +43,7 @@ public class Ui {
      *
      * Prints out messages from the chatbot to console.
      *
-     * @param msg the exact message that needs to logged.
+     * @param msg the exact message that needs to be logged.
      */
     public void say(String msg) {
         System.out.println(msg);
