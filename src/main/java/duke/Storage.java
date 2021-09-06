@@ -50,20 +50,21 @@ public class Storage {
                 String line = fileReader.nextLine();
                 String[] data = line.split(DATA_DELIMITER);
                 String taskType = data[0];
-                String doneStatus = data[1];
+                String priority = data[1];
+                String doneStatus = data[2];
                 Task importedTask;
                 // Assign correct Task type to importedTask
                 switch (taskType) {
                 case "T":
-                    importedTask = new Todo(data[2]);
+                    importedTask = new Todo(data[3]);
                     break;
                 case "D":
-                    LocalDateTime deadlineDatetime = LocalDateTime.parse(data[3], FORMATTER);
-                    importedTask = new Deadline(data[2], deadlineDatetime);
+                    LocalDateTime deadlineDatetime = LocalDateTime.parse(data[4], FORMATTER);
+                    importedTask = new Deadline(data[3], deadlineDatetime);
                     break;
                 case "E":
-                    LocalDateTime eventDatetime = LocalDateTime.parse(data[3], FORMATTER);
-                    importedTask = new Event(data[2], eventDatetime);
+                    LocalDateTime eventDatetime = LocalDateTime.parse(data[4], FORMATTER);
+                    importedTask = new Event(data[3], eventDatetime);
                     break;
                 default:
                     throw new IllegalStateException("Unexpected Task value: " + taskType);
@@ -72,6 +73,7 @@ public class Storage {
                 if (doneStatus.equals("1")) {
                     importedTask.markAsDone();
                 }
+                importedTask.setPriority(priority.toLowerCase());
                 tasks.add(importedTask);
             }
             fileReader.close();
