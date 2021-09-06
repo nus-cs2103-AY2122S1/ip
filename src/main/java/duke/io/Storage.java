@@ -29,29 +29,35 @@ public class Storage {
      * @return The TaskList generated from loading a task from each line in the file.
      */
     public ArrayList<Task> load() {
+        ArrayList<Task> tasks = new ArrayList<>();
+        Scanner sc;
+
         try {
-            ArrayList<Task> tasks = new ArrayList<>();
-            Scanner sc = new Scanner(saveFile);
-            while (sc.hasNextLine()) {
-                String[] datas = sc.nextLine().split(",");
-                switch (datas[0]) {
-                case "t":
-                    tasks.add(ToDo.load(datas));
-                    break;
-                case "d":
-                    tasks.add(Deadline.load(datas));
-                    break;
-                case "e":
-                    tasks.add(Event.load(datas));
-                    break;
-                default:
-                    break;
-                }
-            }
-            return tasks;
+            sc = new Scanner(saveFile);
         } catch (FileNotFoundException e) {
+            // no save data, use a fresh list
             return new ArrayList<>();
         }
+
+        while (sc.hasNextLine()) {
+            String[] datas = sc.nextLine().split(",");
+            switch (datas[0]) {
+            case "t":
+                tasks.add(ToDo.load(datas));
+                break;
+            case "d":
+                tasks.add(Deadline.load(datas));
+                break;
+            case "e":
+                tasks.add(Event.load(datas));
+                break;
+            default:
+                // unknown task type
+                break;
+            }
+        }
+
+        return tasks;
     }
 
     /**

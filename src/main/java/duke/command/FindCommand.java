@@ -22,8 +22,8 @@ public class FindCommand extends Command {
      */
     @Override
     public String parse(String input, TaskList taskList) throws DukeException {
-        assert input.substring(0, getCommandLength() - 1).equals(getCommandString()) :
-                "Input should start with command";
+        assert input.substring(0, getCommandLength() - 1).equals(getCommandString())
+                : "Input should start with command";
         assert taskList != null : "taskList should not be null";
 
         if (input.length() <= getCommandLength()) {

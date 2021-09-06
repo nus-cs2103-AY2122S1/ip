@@ -26,35 +26,35 @@ public class EventCommand extends Command {
      */
     @Override
     public String parse(String input, TaskList taskList) throws DukeException {
-        assert input.substring(0, getCommandLength() - 1).equals(getCommandString()) :
-                "Input should start with command";
+        assert input.substring(0, getCommandLength() - 1).equals(getCommandString())
+                : "Input should start with command";
         assert taskList != null : "taskList should not be null";
 
         if (input.length() <= getCommandLength()) {
-            throw new DukeException("Please input the event's name and date!");
+            throw new DukeException("Please input the event's name and date.");
         }
 
         String[] inputs = input.substring(getCommandLength()).split("/at");
 
         if (inputs.length < 2) {
             // /by not specified
-            throw new DukeException("Please input when the event is at!");
+            throw new DukeException("Please input when the event is at.");
         } else if (inputs.length > 2) {
             // more than one /by
-            throw new DukeException("Please input only one timing for the event!");
+            throw new DukeException("Please input only one timing for the event.");
         }
 
         String name = inputs[0].strip();
 
         if (name.equals("")) {
-            throw new DukeException("Please input the event's name!");
+            throw new DukeException("Please input the event's name.");
         }
 
         LocalDate date;
         try {
             date = LocalDate.parse(inputs[1].strip());
         } catch (DateTimeParseException e) {
-            throw new DukeException("Please input your date in the format YYYY-MM-DD");
+            throw new DukeException("Please input your date in the format YYYY-MM-DD.");
         }
 
         Event event = new Event(name, date);

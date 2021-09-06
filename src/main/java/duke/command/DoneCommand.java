@@ -22,8 +22,8 @@ public class DoneCommand extends Command {
      */
     @Override
     public String parse(String input, TaskList taskList) throws DukeException {
-        assert input.substring(0, getCommandLength() - 1).equals(getCommandString()) :
-                "Input should start with command";
+        assert input.substring(0, getCommandLength() - 1).equals(getCommandString())
+                : "Input should start with command";
         assert taskList != null : "taskList should not be null";
 
         if (input.length() <= getCommandLength()) {
@@ -36,7 +36,7 @@ public class DoneCommand extends Command {
         try {
             idx = Integer.parseInt(data);
         } catch (NumberFormatException e) {
-            throw new DukeException("Please input a number");
+            throw new DukeException("Please input a number.");
         }
 
         return taskList.doTask(idx);
