@@ -12,6 +12,7 @@ public abstract class DukeException extends Exception {
      * @param errorCode The error code
      */
     protected DukeException (int errorCode) {
+        assert -1 <= errorCode : "Invalid error code~";
         this.errorCode = errorCode;
     }
 

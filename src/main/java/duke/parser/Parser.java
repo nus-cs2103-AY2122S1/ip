@@ -48,7 +48,10 @@ public class Parser {
     public static Command parse(String fullCommand, TaskList taskList) {
         Cleaner cl = new Cleaner();
         String cleanCommand = cl.clean(fullCommand, taskList.getCapacity());
+        assert !cleanCommand.isBlank() : "Command is blank!";
+
         String firstWord = cleanCommand.split(" ")[0];
+
 
         switch (firstWord) {
         case "bye":
@@ -70,6 +73,7 @@ public class Parser {
         case "find":
             return findParser(cleanCommand);
         default:
+            assert !firstWord.equals("error") : "Invalid fallthrough.";
             return errorParser(cleanCommand);
         }
 
@@ -95,6 +99,7 @@ public class Parser {
      */
     public static Command todoParser(String input) {
         String description = input.substring(5).strip();
+        assert !description.isBlank() : "Description is blank!";
         return new AddCommand(new ToDo(description));
     }
 
@@ -108,6 +113,7 @@ public class Parser {
         String withoutEvent = input.substring(6).strip();
         String[] eventArray = withoutEvent.split("/at");
         String description = eventArray[0].strip();
+        assert !description.isBlank() : "Description is blank!";
         LocalDate date = CustomDateFormatter.getLocalDateFromString(eventArray[1].strip());
         return new AddCommand(new Event(description, date));
     }
@@ -122,6 +128,7 @@ public class Parser {
         String withoutDeadline = input.substring(9).strip();
         String[] deadlineArray = withoutDeadline.split("/by");
         String description = deadlineArray[0].strip();
+        assert !description.isBlank() : "Description is blank!";
         LocalDate date = CustomDateFormatter.getLocalDateFromString(deadlineArray[1].strip());
         return new AddCommand(new Deadline(description, date));
     }

@@ -19,6 +19,7 @@ public class Storage {
     private File storageFile;
 
     public Storage(String filePath) {
+        assert !filePath.isBlank() : "File Path is blank!";
         this.storageFile = new File(filePath);
     }
 
