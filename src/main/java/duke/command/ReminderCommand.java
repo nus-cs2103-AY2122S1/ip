@@ -41,19 +41,20 @@ public class ReminderCommand extends Command {
     @Override
     public String execute(TaskList taskList) {
         String userInput = super.getUserInputBody();
-
         String timeScope = "ALL";
         List<Deadline> deadlines = taskList.getAllTasks().stream().filter(t -> !t.getIsDone() && t instanceof Deadline)
                 .map(Deadline.class::cast).sorted((Comparator.comparing(Deadline::getDueDate))).collect(toList());
 
-        if (userInput != null && userInput.contains("week")) {
-            deadlines = deadlines.stream().filter(d -> d.getDueDate()
-                    .compareTo(LocalDate.now().plusWeeks(1)) < 0).collect(toList());
-            timeScope = "WEEK";
-        } else if (userInput != null && userInput.contains("today")) {
-            deadlines = deadlines.stream().filter(d -> d.getDueDate()
-                    .compareTo(LocalDate.now().plusDays(1)) < 0).collect(toList());
-            timeScope = "TODAY";
+        if (userInput != null) {
+            if (userInput.contains("week")) {
+                deadlines = deadlines.stream().filter(deadline -> deadline.getDueDate()
+                        .compareTo(LocalDate.now().plusWeeks(1)) < 0).collect(toList());
+                timeScope = "WEEK";
+            } else if (userInput.contains("today")) {
+                deadlines = deadlines.stream().filter(deadline -> deadline.getDueDate()
+                        .compareTo(LocalDate.now().plusDays(1)) < 0).collect(toList());
+                timeScope = "TODAY";
+            }
         }
 
         return new DeadlineReminderMessage(deadlines, timeScope).toString();
