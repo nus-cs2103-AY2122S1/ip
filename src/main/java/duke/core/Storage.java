@@ -29,10 +29,10 @@ public class Storage {
     public File retrieveTasks() throws DukeException {
         File file = new File(filePath);
         try {
-            if (file.exists()) {
-                return file;
+            if (!file.exists()) {
+                throw new FileNotFoundException();
             }
-            throw new FileNotFoundException();
+            return file;
         } catch (FileNotFoundException e) {
             createStorageFile(file);
             return null;
@@ -54,7 +54,7 @@ public class Storage {
     }
 
     /**
-     * Creates a save file if there is no save file, then save given
+     * Creates a save file if there is no save file, then save text
      * into the save file, throw DukeException if an IOException
      * occurs during the handling of the file.
      *
@@ -70,13 +70,22 @@ public class Storage {
         } catch (FileNotFoundException e) {
             createStorageFile(file);
         } finally {
-            try {
-                FileWriter fw = new FileWriter(filePath);
-                fw.write(dataText);
-                fw.close();
-            } catch (IOException e) {
-                throw new DukeException("Something happened to the file when saving: " + e.getMessage());
-            }
+            writeToFile(dataText);
+        }
+    }
+
+    /**
+     * Writes the text provided into a text file.
+     * @param dataText the text that will be transferred to the save file
+     * @throws DukeException if there is an IOException when handling the file
+     */
+    private void writeToFile(String dataText) throws DukeException {
+        try {
+            FileWriter fw = new FileWriter(filePath);
+            fw.write(dataText);
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeException("Something happened to the file when saving: " + e.getMessage());
         }
     }
 }
