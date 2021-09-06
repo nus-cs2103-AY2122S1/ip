@@ -64,25 +64,25 @@ public class Storage {
 
                 switch (type) {
                 case 'T':
-                    newTask = new ToDo(description);
-                    taskList = loadTasks(newTask, taskList, isCompleted);
+                    newTask = new ToDo(description, isCompleted);
+                    taskList = taskList.add(newTask);
                     break;
                 case 'D':
                     time = parseTime(task, "by: ");
-                    newTask = new Deadline(description, time);
-                    taskList = loadTasks(newTask, taskList, isCompleted);
+                    newTask = new Deadline(description, time, isCompleted);
+                    taskList = taskList.add(newTask);
                     manager.updateDateTasks(dateTasks, time, newTask);
                     break;
                 case 'E':
                     time = parseTime(task, "at: ");
-                    newTask = new Event(description, time);
-                    taskList = loadTasks(newTask, taskList, isCompleted);
+                    newTask = new Event(description, time, isCompleted);
+                    taskList = taskList.add(newTask);
                     manager.updateDateTasks(dateTasks, time, newTask);
                     break;
                 default:
                     throw new DukeException("Invalid task.");
                 }
-                System.out.println(task);
+                System.out.println(description);
             }
             reader.close();
         } catch (IOException | DukeException e) {
@@ -90,13 +90,6 @@ public class Storage {
         } finally {
             return taskList;
         }
-    }
-
-    private TaskList loadTasks(Task task, TaskList taskList, boolean isCompleted) {
-        if (isCompleted) {
-            task.markAsCompleted();
-        }
-        return taskList.add(task);
     }
 
     private LocalDate parseTime(String task, String command) throws DukeException {
@@ -115,15 +108,15 @@ public class Storage {
     }
 
     private String parseDescription(String task) throws DukeException {
-        int startOfDescription = task.lastIndexOf(']') + 2;
+        int startOfDescription = task.lastIndexOf(']') + 1;
         if (startOfDescription < 0) {
             throw new DukeException("Description cannot be empty.");
         }
 
-        String description = task.substring(startOfDescription);
-        int timeIndex = description.indexOf("  (");
+        String description = task.substring(startOfDescription).strip();
+        int timeIndex = description.indexOf("(");
         if (timeIndex >= 0) {
-            description = description.substring(0, timeIndex);
+            description = description.substring(0, timeIndex - 1);
         }
         return description;
     }
@@ -177,6 +170,20 @@ public class Storage {
                 }
                 newContent += line + System.lineSeparator();
             }
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+            writer.write(newContent);
+            reader.close();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void undo(TaskList taskList) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+            String newContent = taskList.getContentsToWriteToFile();
 
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
             writer.write(newContent);

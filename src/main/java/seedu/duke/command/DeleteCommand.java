@@ -23,7 +23,8 @@ public class DeleteCommand extends Command {
      * @param index Index of task to be deleted.
      * @param storage The storage to handle modifications to the file.
      */
-    public DeleteCommand(Ui ui, TaskList taskList, int index, Storage storage) {
+    public DeleteCommand(Ui ui, TaskList taskList,
+                         int index, Storage storage) {
         super(ui, taskList);
         this.index = index;
         this.storage = storage;
@@ -35,7 +36,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public boolean updatesTaskList() {
+    public boolean isUpdatesTaskList() {
         return true;
     }
 

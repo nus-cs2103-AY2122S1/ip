@@ -23,7 +23,8 @@ public class ToDoCommand extends Command {
      * @param description The description of the task.
      * @param storage The storage to handle modifications to the file.
      */
-    public ToDoCommand(Ui ui, TaskList taskList, String description, Storage storage) {
+    public ToDoCommand(Ui ui, TaskList taskList,
+                       String description, Storage storage) {
         super(ui, taskList);
         task = new ToDo(description);
         this.storage = storage;
@@ -36,7 +37,7 @@ public class ToDoCommand extends Command {
     }
 
     @Override
-    public boolean updatesTaskList() {
+    public boolean isUpdatesTaskList() {
         return true;
     }
 

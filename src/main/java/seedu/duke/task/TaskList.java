@@ -1,6 +1,5 @@
 package seedu.duke.task;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -18,6 +17,8 @@ public class TaskList {
      */
     private int length = 0;
 
+    private TaskList prevTaskList;
+
     /**
      * Empty TaskList constructor.
      */
@@ -28,7 +29,8 @@ public class TaskList {
     /**
      * TaskList constructor with tasks.
      */
-    public TaskList(ArrayList<Task> tasks) {
+    public TaskList(TaskList previous, ArrayList<Task> tasks) {
+        prevTaskList = previous;
         this.tasks = tasks;
         this.length = tasks.size();
     }
@@ -54,6 +56,10 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    public TaskList getPrevTaskList() {
+        return prevTaskList;
+    }
+
     /**
      * Add a new task to the task list.
      *
@@ -63,7 +69,7 @@ public class TaskList {
     public TaskList add(Task newTask) {
         ArrayList<Task> newList = new ArrayList<>(tasks);
         newList.add(newTask);
-        return new TaskList(newList);
+        return new TaskList(this, newList);
     }
 
     /**
@@ -91,10 +97,12 @@ public class TaskList {
      * @param index Index of the task to be marked as completed.
      * @return The task that was marked as completed.
      */
-    public Task markTaskAsCompleted(int index) {
+    public TaskList markTaskAsCompleted(int index) {
         Task task = tasks.get(index);
-        task.markAsCompleted();
-        return task;
+        Task completedTask = task.markAsCompleted();
+        ArrayList<Task> newList = new ArrayList<>(tasks);
+        newList.set(index, completedTask);
+        return new TaskList(this, newList);
     }
 
     /**
@@ -106,7 +114,7 @@ public class TaskList {
     public TaskList deleteTask(int index) {
         ArrayList<Task> newList = new ArrayList<>(tasks);
         newList.remove(index);
-        return new TaskList(newList);
+        return new TaskList(this, newList);
     }
 
     /**
@@ -123,6 +131,14 @@ public class TaskList {
 
     public boolean isEmpty() {
         return length <= 0;
+    }
+
+    public String getContentsToWriteToFile() {
+        String str = "";
+        for (Task item : tasks) {
+            str += item + System.lineSeparator();
+        }
+        return str;
     }
 
     /**

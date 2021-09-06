@@ -8,7 +8,7 @@ public class Task {
     /**
      * String to describe the <code>Task</code> object.
      */
-    private String description;
+    protected String description;
 
     /**
      * Boolean to keep track if <code>Task</code> object
@@ -26,6 +26,11 @@ public class Task {
         isCompleted = false;
     }
 
+    public Task(String description, boolean isCompleted) {
+        this.description = description;
+        this.isCompleted =isCompleted;
+    }
+
     public boolean containsKeyword(String keyword) {
         return this.description.contains(keyword);
     }
@@ -33,8 +38,9 @@ public class Task {
     /**
      * Mark <code>Task</code> object as completed.
      */
-    public void markAsCompleted() {
-        this.isCompleted = true;
+    public Task markAsCompleted() {
+        return new Task(this.description, true);
+        // this.isCompleted = true;
     }
 
     /**

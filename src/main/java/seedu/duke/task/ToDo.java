@@ -16,6 +16,17 @@ public class ToDo extends Task {
         super(description);
     }
 
+    public ToDo(String description, boolean isCompleted) {
+        super(description, isCompleted);
+    }
+
+    /**
+     * Mark <code>Task</code> object as completed.
+     */
+    public Task markAsCompleted() {
+        return new ToDo(super.description, true);
+    }
+
     /**
      * String representation of a <code>ToDo</code>.
      *

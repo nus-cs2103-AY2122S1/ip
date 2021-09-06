@@ -31,7 +31,7 @@ public class EventCommand extends Command {
      * @param storage The storage to handle modifications to the file.
      */
     public EventCommand(Ui ui, TaskList taskList, String description,
-                           LocalDate date, Storage storage) {
+                        LocalDate date, Storage storage) {
         super(ui, taskList);
         task = new Event(description, date);
         this.date = date;
@@ -45,7 +45,7 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public boolean updatesTaskList() {
+    public boolean isUpdatesTaskList() {
         return true;
     }
 
