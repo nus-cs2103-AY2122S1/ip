@@ -1,6 +1,8 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * TaskList is a list for tasks.
@@ -88,10 +90,12 @@ public class TaskList {
 
     @Override
     public String toString() {
-        String result = "Here are the tasks in your list:";
-        for (int i = 0; i < tasks.size(); i++) {
-            result += ("\n" + (i + 1) + "." + tasks.get(i).toString());
-        }
+        String result = "Here are the tasks in your list:\n";
+
+        result += Stream.iterate(0, idx -> idx < tasks.size(), idx -> idx + 1)
+                .map(idx -> (idx + 1) + "." + tasks.get(idx).toString())
+                .collect(Collectors.joining("\n"));
+
         return result;
     }
 
