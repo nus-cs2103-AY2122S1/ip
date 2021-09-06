@@ -51,7 +51,7 @@ public class Storage {
         if (taskArr.length > 3) {
             taskDate = taskArr[3];
         }
-        Task res = null;
+        Task res;
         switch (taskType) {
         case("T"):
             res = new Todo(taskDescription, isTaskDone);
@@ -62,6 +62,8 @@ public class Storage {
         case("E"):
             res = new Event(taskDescription, taskDate, isTaskDone);
             break;
+        default:
+            throw new DukeException("Incorrect task type!");
         }
         return res;
     }
