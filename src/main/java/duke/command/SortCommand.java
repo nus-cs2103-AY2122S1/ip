@@ -22,9 +22,7 @@ public class SortCommand extends Command {
 
     @Override
     public String execute(TaskList taskList) {
-        // Task taskRemoved = this.duke.deleteTask(this.INDEX);
         this.duke.sortTasks();
-        return "Sorted";
-        // return GUI.printDeleteTaskMessage(taskRemoved, taskList.getTotal());
+        return GUI.sendSortedMessage(taskList);
     }
 }

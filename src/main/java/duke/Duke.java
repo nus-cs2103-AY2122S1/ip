@@ -32,7 +32,7 @@ public class Duke {
         try {
             this.loadSavedTasks();
         } catch (IOException | DukeUnableLoadTask e) {
-            System.err.println(GUI.printErrorMessage(e));
+            System.err.println(GUI.sendErrorMessage(e));
         }
 
     }
@@ -163,7 +163,7 @@ public class Duke {
      * @return greeting message.
      */
     public static String getGreeting() {
-        return GUI.printOpeningMessage();
+        return GUI.sendOpeningMessage();
     }
 
     /**

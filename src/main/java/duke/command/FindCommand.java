@@ -15,6 +15,6 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList taskList) {
         TaskList tasksFound = this.duke.findTasks(this.keyword);
-        return GUI.printFindMessage(tasksFound);
+        return GUI.sendFindMessage(tasksFound);
     }
 }

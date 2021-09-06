@@ -27,7 +27,7 @@ public class DoneCommand extends Command {
         this.duke.setTaskAsDone(this.INDEX);
         this.duke.saveTasks();
 
-        return GUI.printDoneMessage(taskList.getTask(this.INDEX - 1));
+        return GUI.sendDoneMessage(taskList.getTask(this.INDEX - 1));
     }
 }
 

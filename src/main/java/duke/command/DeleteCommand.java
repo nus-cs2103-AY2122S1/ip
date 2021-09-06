@@ -27,6 +27,6 @@ public class DeleteCommand extends Command {
     public String execute(TaskList taskList) throws IOException {
         Task taskRemoved = this.duke.deleteTask(this.INDEX);
         this.duke.saveTasks();
-        return GUI.printDeleteTaskMessage(taskRemoved, taskList.getTotal());
+        return GUI.sendDeleteTaskMessage(taskRemoved, taskList.getTotal());
     }
 }
