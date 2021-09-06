@@ -93,7 +93,7 @@ public class Duke {
      * Method to get the Duke TaskList
      */
     public static String getTaskList() {
-        String start = "\n Here are the tasks in your list: \n";
+        String start = "\n Here are the " + tasks.getSize() + " tasks in your list: \n";
         String res = "";
         for (int i = 0; i < tasks.getSize(); i++) {
             res += "\n" + (i + 1) + ". " + tasks.getTask(i);
@@ -114,7 +114,7 @@ public class Duke {
         ToDo td = new ToDo(t);
         tasks.addNewTask(td);
         TaskList.updateMemory(storage.getPath(), tasks);
-        return "Got it. I've added this task: \n " + td +
+        return "\nGot it. I've added this task: \n " + td +
                 "\n" + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 

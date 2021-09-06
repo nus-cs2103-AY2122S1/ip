@@ -129,7 +129,6 @@ public class TaskList {
             FileWriter fileWriter = new FileWriter(file.getAbsolutePath());
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (Task t: taskList.getTaskList()) {
-                System.out.println(t.getTaskInfo());
                 bufferedWriter.write(t.getTaskInfo() + System.lineSeparator());
             }
             bufferedWriter.close();
