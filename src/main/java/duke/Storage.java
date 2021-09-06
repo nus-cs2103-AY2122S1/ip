@@ -17,9 +17,9 @@ public class Storage {
      */
     public static void updateLocalFile(TaskList taskList) throws IOException {
 
-        ArrayList<Task> list = taskList.arrayList;
+        ArrayList<Task> tasks = taskList.arrayList;
         FileWriter fileWriter = new FileWriter(SERIALIZATION_PATH);
-        for (Task task : list) {
+        for (Task task : tasks) {
             StringBuilder sb = new StringBuilder();
             if (task.getClass().equals(Deadline.class)) {
                 sb.append("D |");
@@ -49,14 +49,20 @@ public class Storage {
         }
         fileWriter.close();
     }
+    /**
+     * Loads task list from default local file.
+     * @return Arraylist of tasks. Will be empty if local file path cannot be accessed.
+     */
+    public static ArrayList<Task> load() { return load(SERIALIZATION_PATH); }
 
     /**
      * Loads task list from local file.
      * @param path Given path of local file
      * @return Arraylist of tasks. Will be empty if local file path cannot be accessed.
      */
+
     public static ArrayList<Task> load(String path) {
-        ArrayList<Task> arrayList = new ArrayList<>(100);
+        ArrayList<Task> taskList = new ArrayList<>(100);
         File taskFile = new File(path);
         if (!taskFile.getParentFile().exists()) {
             taskFile.getParentFile().mkdirs();
@@ -72,31 +78,31 @@ public class Storage {
                 String description = inputArray[2];
                 if (type.equals("T")) {
                     Todo newTask = new Todo(description, done);
-                    arrayList.add(newTask);
+                    taskList.add(newTask);
                 } else if (type.equals("D")) {
                     String time = inputArray[3];
                     Deadline newTask = new Deadline(description, time, done);
-                    arrayList.add(newTask);
+                    taskList.add(newTask);
                 } else if (type.equals("E")) {
                     String time = inputArray[3];
                     Event newTask = new Event(description, time, done);
-                    arrayList.add(newTask);
+                    taskList.add(newTask);
                 } else {
-                    arrayList.clear();
+                    taskList.clear();
                     throw new DukeException("Unknown input type in file!");
                 }
 
 
             }
-            return arrayList;
+            return taskList;
 
 
         } catch (FileNotFoundException e) {
             Ui.printStatement("First time use, creating task file...");
-            return arrayList;
+            return taskList;
         } catch (DukeException e) {
             Ui.printError(e.getMessage());
-            return arrayList;
+            return taskList;
         }
     }
 

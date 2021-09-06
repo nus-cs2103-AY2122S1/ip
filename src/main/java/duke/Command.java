@@ -9,6 +9,7 @@ public enum Command {
     DEADLINE("deadline"),
     BYE("bye"),
     FIND("find"),
+    HELP("help"),
     UNKNOWN("unknown");
 
     private final String value;

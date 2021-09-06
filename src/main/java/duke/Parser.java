@@ -11,11 +11,11 @@ public class Parser {
      * @return String array of command and parameter.
      */
     public static String[] inputParser(String input) {
-        String[] processed = input.split(" ", 2);
-        if (processed.length != 2) {
-            processed = new String[]{processed[0], ""};
+        String[] processedInputs = input.split(" ", 2);
+        if (processedInputs.length != 2) {
+            processedInputs = new String[]{processedInputs[0], ""};
         }
-        return processed;
+        return processedInputs;
     }
 
     /**
@@ -23,7 +23,7 @@ public class Parser {
      * @param input String of command to be parsed.
      * @return Enum equivalent of given command.
      */
-    public static Command commandParser(String input) {
+    public static Command parseCommand(String input) {
         for (Command c : Command.values()) {
             if (c.strIsSelf(input)) {
                 return c;
@@ -37,7 +37,7 @@ public class Parser {
      * @param date Provided date string.
      * @return Formatted date (if possible)
      */
-    public static String dateParser(String date) {
+    public static String parseDate(String date) {
         String parsedDate = "";
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

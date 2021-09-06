@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
     protected ArrayList<Task> arrayList;
+
     TaskList(ArrayList<Task> loaded) {
         arrayList = loaded;
     }
@@ -15,7 +16,12 @@ public class TaskList {
         this(new ArrayList<>(100));
     }
 
-    public void listMatchingTasks(String word) {
+    /**
+     * Returns a list of tasks that matches the word to be searched.
+     * @param word Word to be searched in all the tasks in this task list.
+     * @return String of the list of all the tasks that contains this word.
+     */
+    public String listMatchingTasks(String word) {
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the matching tasks in your list:\n");
         int counter = 1;
@@ -29,16 +35,16 @@ public class TaskList {
             sb = new StringBuilder();
             sb.append("No matching tasks found!");
         }
-        Ui.printStatement(sb.toString());
+        return sb.toString();
 
     }
     /**
-     * Lists all of the tasks within the array.
+     * Lists all the tasks within the array.
      * Numbered from 1 onwareds.
      *
      * @return A string containing list of tasks.
      */
-    public void listTasks() {
+    public String listTasks() {
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the tasks in your list: \n");
         int counter = 1;
@@ -47,7 +53,7 @@ public class TaskList {
             counter += 1;
         }
 
-        Ui.printStatement(sb.toString());
+        return sb.toString();
     }
 
     /**
@@ -57,17 +63,18 @@ public class TaskList {
      * @param parameter Description of task.
      * @param date Provided date of task.
      */
-    public void addTask(Command command, String parameter, String date) {
+    public String addTask(Command command, String parameter, String date) {
+        int prevLength = arrayList.size();
         StringBuilder sb = new StringBuilder();
         sb.append("Got it. I've added this task: \n");
-        String parsedDate = Parser.dateParser(date).equals("") ? date : Parser.dateParser(date);
+        String parsedDate = Parser.parseDate(date).equals("") ? date : Parser.parseDate(date);
         Task task;
 
         if (command.equals(Command.TODO)) {
             task = new Todo(parameter);
-        } else if (command.equals(Command.DEADLINE)){
+        } else if (command.equals(Command.DEADLINE)) {
             task = new Deadline(parameter, parsedDate);
-        } else if (command.equals(Command.EVENT)){
+        } else if (command.equals(Command.EVENT)) {
             task = new Event(parameter, parsedDate);
         } else {
             throw new DukeException("Invalid command");
@@ -75,34 +82,35 @@ public class TaskList {
         arrayList.add(task);
         sb.append(task + "\n");
         sb.append("Now you have " + String.valueOf(arrayList.size()) + " tasks in the list.");
-        Ui.printStatement(sb.toString());
+        assert (arrayList.size() - prevLength == 1);
+        return sb.toString();
 
 
 
     }
 
-    public void addTask(Command command, String parameter) {
-        addTask(command, parameter, "");
+    public String addTask(Command command, String parameter) {
+        return addTask(command, parameter, "");
     }
 
     /**
      * Removes task from task list.
      * @param index Index of task to be removed.
      */
-    public void removeTask(int index) {
+    public String removeTask(int index) {
         StringBuilder sb = new StringBuilder();
         sb.append("Noted. I've removed this task:\n");
         sb.append(arrayList.get(index).toString() + "\n");
         arrayList.remove(index);
         sb.append("Now you have " + arrayList.size() + " tasks in the list.");
-        Ui.printStatement(sb.toString());
+        return sb.toString();
     }
 
     /**
      * Returns size of task list.
      * @return Integer showing size of task list.
      */
-    protected int size() {
+    protected int getSize() {
         return arrayList.size();
     }
 
@@ -111,9 +119,9 @@ public class TaskList {
      *
      * @param i Index of task to be done.
      */
-    public void done(Integer i) {
+    public String markAsDone(Integer i) {
         Task task = arrayList.get(i);
         task.markAsDone();
-        Ui.printStatement("Nice! I've marked this task as done:\n" + task);
+        return "Nice! I've marked this task as done:\n" + task;
     }
 }

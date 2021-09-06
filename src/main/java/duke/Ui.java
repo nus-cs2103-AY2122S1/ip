@@ -30,7 +30,6 @@ public class Ui {
     public static void printStatement(String statement) {
         System.out.println();
         printLine();
-//        printPadding();
         System.out.println(statement);
         System.out.println();
         printLine();

@@ -1,7 +1,4 @@
-D | 1 | fsadfasdfsdaf asdfasdfasd | fasdfafasdfs
 E | 1 | fasdfsd  |  fsafasdfs
-T | 1 | fasdfsda
-T | 0 | fasdfsda
 T | 1 | fasdfs
 T | 0 | fsdafasd
 T | 0 | fasdfasd
@@ -11,3 +8,9 @@ E | 0 | fsdfasd | Dec 12 1234
 T | 0 | fdsafsd
 T | 0 | dfasdf
 D | 0 | fasdf | asdfasd
+T | 0 | asdfasdf
+E | 0 | sdafsadf | fsdaf
+T | 0 | kill joshen
+T | 0 | buy roses
+E | 0 | buy rose | evening
+T | 0 | kill prime minister

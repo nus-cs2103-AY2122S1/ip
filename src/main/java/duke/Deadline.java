@@ -4,7 +4,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Deadline class that inherits from Task class.
+ * Consists of description and a due date.
+ */
 public class Deadline extends Task {
+    protected String by;
 
     Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
@@ -15,15 +20,17 @@ public class Deadline extends Task {
         } catch (DateTimeParseException e) {
             date = by;
         }
-
         this.by = date;
     }
 
-    protected String by;
 
+    /**
+     * Creates new Deadline task
+     * @param description Description of task
+     * @param by Due date
+     */
     public Deadline(String description, String by) {
         this(description, by, false);
-
     }
 
     @Override
