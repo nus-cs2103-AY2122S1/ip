@@ -43,7 +43,7 @@ test {
 }
 
 application {
-    mainClassName = "java.duchess.Duchess"
+    mainClassName = "duchess.gui.Launcher"
 }
 
 shadowJar {

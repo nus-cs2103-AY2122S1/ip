@@ -42,7 +42,7 @@ public class DialogBox extends HBox {
      * @param img The display picture of the user or Duchess.
      */
     private DialogBox(String text, Image img) {
-        super(30);
+        super(10);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -76,7 +76,6 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image iv) {
         var db = new DialogBox(text, iv);
         db.setBackground(new Background(new BackgroundFill(Color.SKYBLUE, new CornerRadii(100), new Insets(12))));
-        db.dialog.setTranslateY(40);
         return db;
     }
 
