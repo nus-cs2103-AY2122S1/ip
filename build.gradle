@@ -49,7 +49,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "Sados" as Property<String>
+    archiveBaseName = "Sados"
     archiveClassifier = null
 }
 
