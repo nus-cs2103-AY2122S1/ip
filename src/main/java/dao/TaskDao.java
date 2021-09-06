@@ -2,6 +2,7 @@ package dao;
 
 import model.Task;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -55,6 +56,13 @@ public interface TaskDao {
      * @return Tasks ArrayList of the tasks filtered by keyword.
      */
     List<Task> getByKeyword(String keyword);
+    
+    /**
+     * Gets all the tasks from the list filtered by the time (if the task is a TimedItem).
+     *
+     * @return Tasks ArrayList of the tasks filtered by time.
+     */
+    List<Task> getByTiming(LocalDate time);
     
     /**
      * Gets the size of the current list.

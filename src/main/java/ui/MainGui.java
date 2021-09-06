@@ -33,9 +33,8 @@ public class MainGui extends Application {
             IUi ui = new GuiUiImpl(mainWindow);
             ICommandLogicUnit commandLogicUnit = new CommandLogicUnitImpl(taskDao, ui);
             
-            Dude dude = new Dude(commandLogicUnit, ui);
+            Dude dude = new Dude(commandLogicUnit, taskDao, ui);
             mainWindow.setChatbot(dude);
-            dude.initialize();
             
             Scene scene = new Scene(ap);
             stage.setScene(scene);

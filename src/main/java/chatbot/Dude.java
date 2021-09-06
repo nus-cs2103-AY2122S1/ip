@@ -1,6 +1,8 @@
 package chatbot;
 
+import dao.TaskDao;
 import logic.ICommandLogicUnit;
+import logic.ReminderTask;
 import parser.IParser;
 import parser.ParserImpl;
 import ui.IUi;
@@ -10,7 +12,7 @@ import ui.IUi;
  */
 public class Dude implements IChatbot {
     private final IParser commandParser;
-    
+    private final TaskDao taskDao;
     private final IUi ui;
     
     /**
@@ -19,9 +21,12 @@ public class Dude implements IChatbot {
      * @param commandLogicUnit logic.
      * @param ui Ui to display the interaction.
      */
-    public Dude(ICommandLogicUnit commandLogicUnit, IUi ui) {
+    public Dude(ICommandLogicUnit commandLogicUnit, TaskDao taskDao, IUi ui) {
         this.ui = ui;
+        this.taskDao = taskDao;
         commandParser = new ParserImpl(commandLogicUnit, ui);
+        
+        initialize();
     }
     
     /**
@@ -36,6 +41,9 @@ public class Dude implements IChatbot {
                 + "|____/ \\__,|____\\____|\n";
         
         ui.printSentence("Hello from\n" + logo + " Sup Dude!");
+        
+        ReminderTask reminderTask = new ReminderTask(taskDao, ui);
+        new Thread(reminderTask).start();
     }
     
     /**

@@ -2,8 +2,10 @@ package dao;
 
 import configuration.Setting;
 import model.Task;
+import model.TimedItem;
 import storage.FileListStorage;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +31,7 @@ public class TaskDaoImpl implements TaskDao {
     @Override
     public void addTask(Task task) {
         assert task != null;
-    
+        
         synchronized (this) {
             try {
                 ArrayList<Task> tasks = taskFileListStorage.readArrayListFromFile();
@@ -47,11 +49,11 @@ public class TaskDaoImpl implements TaskDao {
     @Override
     public Task deleteTask(int index) {
         assert index >= 0;
-    
+        
         if (isInvalidIndex(index)) {
             throw new IndexOutOfBoundsException("non valid index for deletion");
         }
-    
+        
         synchronized (this) {
             try {
                 ArrayList<Task> tasks = taskFileListStorage.readArrayListFromFile();
@@ -73,11 +75,11 @@ public class TaskDaoImpl implements TaskDao {
     @Override
     public void markDone(int index) {
         assert index >= 0;
-    
+        
         if (isInvalidIndex(index)) {
             throw new IndexOutOfBoundsException("non valid index for marking the task done");
         }
-    
+        
         synchronized (this) {
             try {
                 ArrayList<Task> tasks = taskFileListStorage.readArrayListFromFile();
@@ -96,11 +98,11 @@ public class TaskDaoImpl implements TaskDao {
     @Override
     public Task getTask(int index) {
         assert index >= 0;
-    
+        
         if (isInvalidIndex(index)) {
             throw new IndexOutOfBoundsException("non valid index for marking the task done");
         }
-    
+        
         try {
             ArrayList<Task> tasks = taskFileListStorage.readArrayListFromFile();
             return tasks.get(index);
@@ -129,11 +131,30 @@ public class TaskDaoImpl implements TaskDao {
     @Override
     public List<Task> getByKeyword(String keyword) {
         assert keyword != null;
-    
+        
         try {
             ArrayList<Task> tasks = taskFileListStorage.readArrayListFromFile();
             return tasks.stream()
                     .filter(x -> Arrays.asList(x.getDesc().split(" ")).contains(keyword))
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            logger.warning(e.getMessage());
+            return List.of();
+        }
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Task> getByTiming(LocalDate time) {
+        assert time != null;
+        
+        try {
+            ArrayList<Task> tasks = taskFileListStorage.readArrayListFromFile();
+            return tasks.stream()
+                    .filter(x -> x instanceof TimedItem)
+                    .filter(x -> ((TimedItem) x).getTime().toLocalDate() == time)
                     .collect(Collectors.toList());
         } catch (Exception e) {
             logger.warning(e.getMessage());
