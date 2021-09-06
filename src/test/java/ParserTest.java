@@ -10,7 +10,9 @@ import duke.command.AddCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.RescheduleCommand;
 import duke.task.TaskList;
 import duke.task.Todo;
 
@@ -22,7 +24,7 @@ public class ParserTest {
     /**
      * Exit command test.
      *
-     * @throws DukeException the duke exception
+     * @throws DukeException the duke exception.
      */
     @Test
     public void checkOperation_exitCommandString_correctCommandReturned() throws DukeException {
@@ -34,7 +36,7 @@ public class ParserTest {
     /**
      * List command test.
      *
-     * @throws DukeException the duke exception
+     * @throws DukeException the duke exception.
      */
     @Test
     public void checkOperation_listCommandString_correctCommandReturned() throws DukeException {
@@ -47,7 +49,7 @@ public class ParserTest {
     /**
      * Todo command test.
      *
-     * @throws DukeException the duke exception
+     * @throws DukeException the duke exception.
      */
     @Test
     public void checkOperation_todoCommandString_correctCommandReturned() throws DukeException {
@@ -59,7 +61,7 @@ public class ParserTest {
     /**
      * Deadline command test.
      *
-     * @throws DukeException the duke exception
+     * @throws DukeException the duke exception.
      */
     @Test
     public void checkOperation_deadlineCommandString_correctCommandReturned() throws DukeException {
@@ -71,7 +73,7 @@ public class ParserTest {
     /**
      * Event command test.
      *
-     * @throws DukeException the duke exception
+     * @throws DukeException the duke exception.
      */
     @Test
     public void checkOperation_eventCommandString_correctCommandReturned() throws DukeException {
@@ -83,12 +85,11 @@ public class ParserTest {
     /**
      * Done command test.
      *
-     * @throws DukeException the duke exception
+     * @throws DukeException the duke exception.
      */
     @Test
     public void checkOperation_doneCommandString_correctCommandReturned() throws DukeException {
         TaskList testList = new TaskList();
-        testList.add(new Todo("work"));
         Parser test = new Parser("done 1", testList);
         assertTrue(test.checkOperation() instanceof DoneCommand);
     }
@@ -96,16 +97,84 @@ public class ParserTest {
     /**
      * Delete command test.
      *
-     * @throws DukeException the duke exception
+     * @throws DukeException the duke exception.
      */
     @Test
     public void checkOperation_deleteCommandString_correctCommandReturned() throws DukeException {
         TaskList testList = new TaskList();
-        testList.add(new Todo("work"));
         Parser test = new Parser("delete 1", testList);
         assertTrue(test.checkOperation() instanceof DeleteCommand);
     }
 
+    /**
+     * Find command test.
+     *
+     * @throws DukeException the duke exception.
+     */
+    @Test
+    public void checkOperation_findCommandString_correctCommandReturned() throws DukeException {
+        TaskList testList = new TaskList();
+        Parser test = new Parser("find work", testList);
+        assertTrue(test.checkOperation() instanceof FindCommand);
+    }
+
+    /**
+     * Find command test.
+     *
+     * @throws DukeException the duke exception.
+     */
+    @Test
+    public void checkOperation_noSubstringFindCommandString_dukeExceptionThrown() throws DukeException {
+        TaskList testList = new TaskList();
+        Parser test = new Parser("find ", testList);
+        Exception exception = assertThrows(DukeException.class, test::checkOperation);
+
+        String expectedMessage = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        String actualMessage = exception.getMessage();
+
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    /**
+     * Reschedule command test with date and time input.
+     *
+     * @throws DukeException the duke exception.
+     */
+    @Test
+    public void checkOperation_rescheduleDateTimeCommandString_correctCommandReturned() throws DukeException {
+        TaskList testList = new TaskList();
+        Parser test = new Parser("reschedule 1 /to 2021-09-10 18:00", testList);
+        assertTrue(test.checkOperation() instanceof RescheduleCommand);
+    }
+
+    /**
+     * Reschedule command test with date input.
+     *
+     * @throws DukeException the duke exception.
+     */
+    @Test
+    public void checkOperation_rescheduleDateCommandString_correctCommandReturned() throws DukeException {
+        TaskList testList = new TaskList();
+        Parser test = new Parser("reschedule 1 /to 2021-09-10", testList);
+        assertTrue(test.checkOperation() instanceof RescheduleCommand);
+    }
+
+    /**
+     * Reschedule command test with invalid index.
+     *
+     * @throws DukeException the duke exception.
+     */
+    @Test
+    public void checkOperation_noIdxRescheduleCommandString_dukeExceptionThrown() throws DukeException {
+        TaskList testList = new TaskList();
+        Parser test = new Parser("reschedule /to 2021-09-10", testList);
+        Exception exception = assertThrows(DukeException.class, test::checkOperation);
+
+        String expectedMessage = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        String actualMessage = exception.getMessage();
+
+        assertEquals(expectedMessage, actualMessage);
+    }
 
     /**
      * Test exit command with incorrect input.
