@@ -59,6 +59,7 @@ public class Storage {
                 System.out.println("IO error occurred");
             }
         }
+        assert(file != null) : "System file used for tasks cannot be null!";
         return file;
     }
 

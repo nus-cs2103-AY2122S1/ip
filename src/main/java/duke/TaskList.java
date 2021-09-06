@@ -62,6 +62,7 @@ public class TaskList {
         } else {
             Task removedTask = this.list.remove(id - 1);
             this.listLength--;
+            assert(this.listLength >= 0) : "List length cannot be negative!";
             return removedTask;
         }
     }
@@ -78,6 +79,7 @@ public class TaskList {
             throw new DukeException("The id you entered was invalid!");
         } else {
             Task doneTask = this.list.get(id - 1);
+            assert(doneTask != null) : "Completed task cannot be null!";
             doneTask.complete();
             return doneTask;
         }
