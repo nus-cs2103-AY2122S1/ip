@@ -1,12 +1,14 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * An array list of tasks.
  */
 public class TaskList extends ArrayList<Task> {
     private ArrayList<Task> list = new ArrayList<>();
+
     /**
      * Create an empty list of task.
      */
@@ -146,5 +148,14 @@ public class TaskList extends ArrayList<Task> {
             result.append("There is not task matched.");
         }
         return result.toString();
+    }
+
+    /**
+     * Sort the tasks by time.
+     *
+     * Todo tasks are not sorted and always put in front.
+     */
+    public void sortByTime() {
+        Collections.<Task>sort(list);
     }
 }
