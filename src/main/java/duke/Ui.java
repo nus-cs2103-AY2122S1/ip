@@ -131,7 +131,6 @@ public class Ui {
      * @param taskList current list of all tasks.
      * @param word given by user.
      */
-
     public String find(TaskList taskList, String word) {
         ArrayList<Task> matchingDates = taskList.find(word);
 
@@ -140,6 +139,10 @@ public class Ui {
             output = output + i + ". " + matchingDates.get(i - 1).toString() + "\n";
         }
         return output;
+    }
+
+    public String clear() {
+        return "Noted, I have cleared your list and hard disk.";
     }
 
     public void printToConsole(String response) {

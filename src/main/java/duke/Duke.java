@@ -41,7 +41,7 @@ public class Duke extends Application {
     public Duke(String filePath) {
         ui = new Ui();
         try {
-            storage = new Storage(filePath);
+            storage = new Storage(filePath, this.ui);
             tasks = new TaskList(storage.load());
         } catch (IOException ioException) {
             System.out.println(ioException);

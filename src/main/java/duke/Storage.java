@@ -19,6 +19,7 @@ import duke.task.Todo;
  */
 public class Storage {
     private String filePath;
+    private Ui ui;
 
     /**
      * Constructor.
@@ -26,7 +27,9 @@ public class Storage {
      * @param filePath to hard disk that stores the tasks.
      * @throws IOException
      */
-    public Storage(String filePath) throws IOException {
+    public Storage(String filePath, Ui ui) throws IOException {
+        this.ui = ui;
+
         try {
             File file = new File(filePath);
             file.getParentFile().mkdirs();
@@ -34,7 +37,7 @@ public class Storage {
 
             this.filePath = filePath;
         } catch (IOException ioException) {
-            System.out.println(ioException);
+            ui.showError(ioException.getMessage());
         }
     }
 
@@ -56,7 +59,7 @@ public class Storage {
                 counter++;
             }
         } catch (IOException ioException) {
-            System.out.println(ioException);
+            ui.showError(ioException.getMessage());
         }
 
         return result;
@@ -75,7 +78,7 @@ public class Storage {
             fw.write(textToSave);
             fw.close();
         } catch (IOException ioException) {
-            System.out.println(ioException);
+            ui.showError(ioException.getMessage());
         }
     }
 
@@ -100,7 +103,7 @@ public class Storage {
 
             Files.write(Path.of("src/data/duke.txt"), fileContent);
         } catch (IOException ioException) {
-            System.out.println(ioException);
+            ui.showError(ioException.getMessage());
         }
     }
 
@@ -117,7 +120,19 @@ public class Storage {
 
             Files.write(Path.of("src/data/duke.txt"), fileContent);
         } catch (IOException ioException) {
-            System.out.println(ioException);
+//            System.out.println(ioException);
+            ui.showError(ioException.getMessage());
+        }
+    }
+
+    public void clear() {
+        File file = new File(filePath);
+        try {
+            if (file.delete()) {
+                file.createNewFile();
+            }
+        } catch (IOException ioException) {
+            ui.showError(ioException.getMessage());
         }
     }
 

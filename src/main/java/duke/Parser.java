@@ -2,14 +2,7 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import duke.command.AddCommand;
-import duke.command.CheckDateCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.InvalidCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -23,7 +16,7 @@ import duke.testinginterface.TaskListInterface;
  */
 public class Parser {
     private TaskListInterface taskList;
-    private enum Command { Exit, List, Done, Delete, Todo, Deadline, Event, CheckDate, Find, Invalid };
+    private enum Command { Exit, List, Done, Delete, Clear, Todo, Deadline, Event, CheckDate, Find, Invalid };
 
     /**
      * Constructor.
@@ -68,7 +61,9 @@ public class Parser {
             int deletePos = Integer.valueOf(input.substring(7));
             c = new DeleteCommand(deletePos);
             break;
-
+        case Clear:
+            c = new ClearCommand();
+            break;
         case Todo:
             isValidTodo(input);
 
@@ -140,6 +135,8 @@ public class Parser {
             return Command.Done;
         } else if (input.startsWith("delete")) {
             return Command.Delete;
+        } else if (input.startsWith("clear")) {
+            return Command.Clear;
         } else if (input.startsWith("todo")) {
             return Command.Todo;
         } else if (input.startsWith("deadline")) {

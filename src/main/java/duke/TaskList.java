@@ -97,4 +97,8 @@ public class TaskList implements TaskListInterface {
         }
         return results;
     }
+
+    public void clear() {
+        this.tasks = new ArrayList<Task>(100);
+    }
 }
