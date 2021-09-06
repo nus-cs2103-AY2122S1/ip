@@ -1,4 +1,4 @@
-import duke.Command.*;
+import duke.command.*;
 import duke.DukeException;
 import duke.Parser;
 

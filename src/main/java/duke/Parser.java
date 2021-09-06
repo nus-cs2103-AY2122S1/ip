@@ -1,6 +1,6 @@
 package duke;
 
-import duke.Command.*;
+import duke.command.*;
 import duke.task.*;
 
 import java.util.Arrays;
@@ -28,7 +28,7 @@ public class Parser {
 
 
     /**
-     * Convert user input to {@link duke.Command ICommand}.
+     * Convert user input to {@link duke.command ICommand}.
      * @param s user command
      * @param listSize size of current task list
      * @return command for duke to execute

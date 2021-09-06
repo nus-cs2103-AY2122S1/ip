@@ -1,21 +1,25 @@
 package duke;
 
-import duke.Command.ICommand;
+import duke.command.ICommand;
+
+import duke.ui.Ui;
 
 /**
  * Wrapper of Duke's implementation.
  * Duke is a Personal Assistant Chatbot that helps a person to keep track of various things.
  */
-public class Duke {
+public class Duke{
     private Ui ui;
     private Storage storage;
     private TaskList taskList;
 
+    private boolean isExit;
+
     /**
      * Initializes duke with default data save path.
      */
-    public Duke() {
-        ui = new Ui();
+    public Duke(boolean useGui) {
+        ui = new Ui(useGui);
         taskList = new TaskList();
         storage = new Storage();
         try {
@@ -23,14 +27,15 @@ public class Duke {
         } catch (DukeException e) {
             Ui.printErrorMessage(e);
         }
+        this.isExit = false;
     }
 
     /**
      * Initializes duke with given data save path.
      * @param pathStr string of save path, ending with the name of save file
      */
-    public Duke(String pathStr) {
-        ui = new Ui();
+    public Duke(String pathStr, boolean useGui) {
+        ui = new Ui(useGui);
         taskList = new TaskList();
         storage = new Storage();
         try {
@@ -38,6 +43,7 @@ public class Duke {
         } catch (DukeException e) {
             Ui.printErrorMessage(e);
         }
+        this.isExit = false;
     }
 
     /**
@@ -45,7 +51,6 @@ public class Duke {
      */
     public void run() {
         Ui.printWelcomeMessage();
-        boolean isExit = false;
 
         try {
             if (!storage.isEmpty()) {
@@ -68,7 +73,7 @@ public class Duke {
 
                 ICommand c = Parser.parse(userInput, taskList.size());
                 c.execute(this.taskList, this.ui, this.storage);
-                isExit = c.isExit();
+                this.isExit = c.isExit();
                 Ui.printDividerLine();
             } catch (DukeException e) {
                 Ui.printErrorMessage(e, userInput);
@@ -77,7 +82,28 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts interacting with user. Exit the loop when detecting {@link duke.Parser#WORD_EXIT Parser.WORD_EXIT}.
+     */
+    public String getResponse(String userInput) {
+        try {
+            if (userInput.contains("|")) {
+                throw new DukeException(ExceptionType.PIPE_SYMBOL);
+            }
+            ICommand c = Parser.parse(userInput, taskList.size());
+            c.execute(this.taskList, this.ui, this.storage);
+        } catch (DukeException e) {
+            Ui.printErrorMessage(e, userInput);
+        }
+        return Ui.getResponse();
+    }
+
+    public boolean isExit() {
+        return this.isExit;
+    }
+
+
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke(false).run();
     }
 }

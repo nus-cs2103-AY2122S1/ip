@@ -6,7 +6,7 @@ package duke;
  */
 public class DukeException extends Exception {
 
-    protected ExceptionType type;
+    public ExceptionType type;
 
     /**
      * Constructs a DukeException with type of that exception.

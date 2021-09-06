@@ -1,7 +1,7 @@
-package duke.Command;
+package duke.command;
 
 import duke.Storage;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.TaskList;
 
 public class ExitCommand implements ICommand{

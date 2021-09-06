@@ -1,5 +1,6 @@
-package duke;
+package duke.ui;
 
+import duke.DukeException;
 import duke.task.*;
 
 import java.util.ArrayList;
@@ -15,34 +16,46 @@ public class Ui {
 
     private Scanner scanner;
 
-    public Ui() {
-        scanner = new Scanner(System.in);
+    private static ArrayList<String> log;
+    private static boolean useGui;
+
+    public Ui(boolean useGui) {
+        Ui.useGui = useGui;
+        if (useGui) {
+            log = new ArrayList<>();
+        } else {
+            this.scanner = new Scanner(System.in);
+        }
     }
 
     /**
      * Read next line of user command from System.in.
      * @return next line of user command as string
      */
-    protected String readCommand() {
+    public String readCommand() {
         return scanner.nextLine();
     }
 
     protected static void printWithIndent(String s) {
-        System.out.println(LEFT_INDENT + s);
+        if (!useGui) {
+            System.out.println(LEFT_INDENT + s);
+        } else {
+            log.add(s);
+        }
     }
 
-    protected static void printDividerLine() {
-        System.out.println(LEFT_INDENT + HORIZONTAL_LINE);
+    public static void printDividerLine() {
+        printWithIndent(HORIZONTAL_LINE);
     }
 
-    protected static void printWelcomeMessage() {
+    public static void printWelcomeMessage() {
         // print logo
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//        System.out.println("Hello from\n" + logo);
 
         // print welcome words
         printDividerLine();
@@ -91,8 +104,8 @@ public class Ui {
     }
 
     public static void printMarkDone(String taskStr) {
-        Ui.printWithIndent("Nice! I've marked this task as done: ");
-        Ui.printWithIndent("  " + taskStr);
+        printWithIndent("Nice! I've marked this task as done: ");
+        printWithIndent("  " + taskStr);
     }
 
     /**
@@ -100,7 +113,7 @@ public class Ui {
      * @param e exception to print
      * @param userInput the lastest user command before exception happens
      */
-    protected static void printErrorMessage(DukeException e, String userInput) {
+    public static void printErrorMessage(DukeException e, String userInput) {
         switch (e.type) {
         case INDEX_OUT_OF_BOUND:
         case INVALID_COMMAND:
@@ -130,11 +143,18 @@ public class Ui {
      * Prints an error message based on exception type of DukeException.
      * @param e exception to print
      */
-    protected static void printErrorMessage(DukeException e) {
+    public static void printErrorMessage(DukeException e) {
         printErrorMessage(e, "");
     }
 
     protected static String getTaskCountString(int listSize) {
-        return "Now you have " + listSize + " tasks in the list.";
+        return "Now you have " + listSize + " task" + (listSize <= 1 ? "" : "s")
+                + " in the list.";
+    }
+
+    public static String getResponse() {
+        String s = log.stream().reduce("", (result, str) -> result + " " + str);
+        log.clear();
+        return s;
     }
 }

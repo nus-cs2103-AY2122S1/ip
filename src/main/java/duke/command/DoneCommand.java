@@ -1,23 +1,24 @@
-package duke.Command;
+package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.TaskList;
+import duke.task.Task;
 
-public class DeleteCommand implements ICommand{
+public class DoneCommand implements ICommand{
     private int lineIndex;
 
-    public DeleteCommand(int lineIndex) {
+    public DoneCommand(int lineIndex) {
         this.lineIndex = lineIndex;
     }
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        storage.removeLine(lineIndex);
-        Ui.printRemoveTask(taskList.get(lineIndex).toString());
-        taskList.remove(lineIndex);
-        Ui.printTaskCount(taskList.size());
+        Task task = taskList.get(lineIndex);
+        storage.setLine(lineIndex, task.populateSaveData());
+        task.setStatus(true);
+        Ui.printMarkDone(task.toString());
     }
 
     @Override
@@ -30,7 +31,7 @@ public class DeleteCommand implements ICommand{
         if (o == this) return true;
 
         if (o != null && o.getClass() == this.getClass()) {
-            return ((DeleteCommand) o).lineIndex == this.lineIndex;
+            return ((DoneCommand) o).lineIndex == this.lineIndex;
         }
         return false;
     }
