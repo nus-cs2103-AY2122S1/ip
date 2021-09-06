@@ -6,7 +6,7 @@ package duke.task;
 public abstract class Task {
 
     /** Description String of the Task. */
-    private final String description;
+    private String description;
     /** Boolean that determines whether a task is done or not. */
     private boolean isDone;
 
@@ -36,6 +36,15 @@ public abstract class Task {
      */
     public String getDescription() {
         return this.description;
+    }
+
+    /**
+     * Updates the description of the task.
+     *
+     * @param newDescription new description of the task.
+     */
+    public void updateDescription(String newDescription) {
+        description = newDescription;
     }
 
     /**

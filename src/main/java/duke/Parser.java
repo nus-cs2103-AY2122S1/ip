@@ -12,6 +12,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.RescheduleCommand;
+import duke.command.UpdateCommand;
 import duke.task.TaskList;
 
 /**
@@ -31,7 +32,7 @@ public class Parser {
      * @param tasks     list of tasks to pass to the commands generated.
      */
     public Parser(String userInput, TaskList tasks) {
-        this.userInput = userInput;
+        this.userInput = userInput.trim();
         this.tasks = tasks;
     }
 
@@ -60,6 +61,8 @@ public class Parser {
             return createDeadlineCommand();
         } else if (isReschedule()) {
             return createRescheduleCommand();
+        } else if (isUpdate()) {
+            return createUpdateCommand();
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -268,6 +271,30 @@ public class Parser {
         }
 
         return new RescheduleCommand(idx, tasks, dateString);
+    }
+
+    /**
+     * Checks if the update command is to be executed to update the description of the task.
+     *
+     * @return boolean.
+     */
+    private boolean isUpdate() {
+        Pattern updatePattern = Pattern.compile("^update\\h\\d+\\h/to\\h.*");
+        Matcher updateMatcher = updatePattern.matcher(userInput);
+        return updateMatcher.find();
+    }
+
+    /**
+     * Creates and returns a new instance of UpdateCommand to be executed.
+     *
+     * @return new instance of UpdateCommand.
+     */
+    private Command createUpdateCommand() {
+        String[] inputs = userInput.split(" ", 2);
+        String[] args = inputs[1].split(" /to ", 2);
+        int idx = Integer.parseInt(args[0]) - 1;
+        String newDescription = args[1];
+        return new UpdateCommand(idx, tasks, newDescription);
 
     }
 }
