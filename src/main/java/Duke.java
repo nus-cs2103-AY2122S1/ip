@@ -36,23 +36,23 @@ public class Duke {
     }
 
 
-    public void run() {
-        boolean isExit = false;
-        while (!isExit && ui.hasUserInput()) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.getResponse(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
-        }
-        ui.closeUserInput();
-    }
+//    public void run() {
+//        boolean isExit = false;
+//        while (!isExit && ui.hasUserInput()) {
+//            try {
+//                String fullCommand = ui.readCommand();
+//                Command c = Parser.parse(fullCommand);
+//                c.getResponse(tasks, ui, storage);
+//                isExit = c.isExit();
+//            } catch (DukeException e) {
+//                ui.showError(e.getMessage());
+//            }
+//        }
+//        ui.closeUserInput();
+//    }
 
     public static void main(String[] args) {
-        new Duke().run();
+//        new Duke().run();
     }
 }
 
