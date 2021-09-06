@@ -23,26 +23,42 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
-        String response = "";
-        switch (type) {
-        case FIND_BY_DATE: {
+        try {
+            switch (type) {
+            case FIND_BY_DATE: {
+                return findByDate(tasks, storage);
+            }
+            case FIND: {
+                return findByKeyword(tasks, storage);
+            }
+            default: {
+                return "";
+            }
+            }
+        } catch (DukeException e) {
+            throw new DukeException(e.getMessage());
+        }
 
+    }
+
+    private String findByDate(TaskList tasks, Storage storage) throws DukeException {
+        String response = "";
+        try {
             Task[] tasksOnDate = tasks.tasksOnDate(commands);
             for (Task task : tasksOnDate) {
                 response += task + "\n";
             }
-            break;
+        } catch (DukeException e) {
+            throw new DukeException(e.getMessage());
         }
-        case FIND: {
-            Task[] searchResults = tasks.findByKeyword(commands);
-            for (Task task : searchResults) {
-                response += task + "\n";
-            }
-            break;
-        }
-        default: {
-            break;
-        }
+        return response;
+    }
+
+    private String findByKeyword(TaskList tasks, Storage storage) {
+        String response = "";
+        Task[] searchResults = tasks.findByKeyword(commands);
+        for (Task task : searchResults) {
+            response += task + "\n";
         }
         return response;
     }
