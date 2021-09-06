@@ -99,7 +99,7 @@ public class TaskList {
      *
      * @param keywords a list of keywords for searching tasks
      * @return the list of task that contains the keyword(s)
-     * @throws TaskNotFoundException if there's no task in the task list that
+     * @throws TaskNotFoundException if there is no task in the task list that
      * matches the given keyword(s)
      */
     public String searchTaskFromKeyword(String ...keywords) throws TaskNotFoundException {
