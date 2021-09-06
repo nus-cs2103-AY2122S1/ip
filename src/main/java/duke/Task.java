@@ -15,6 +15,7 @@ public class Task {
      * @param description The name/description of the task
      */
     public Task(String description) {
+        assert !(description.equals("")) : "Task description is empty";
         this.description = description;
         this.isDone = false;
     }
@@ -63,6 +64,7 @@ public class Task {
      * @return the given task as a string that is to be displayed to the user
      */
     public String getDescription() {
+        assert !(this.description.equals("")) : "Task description is empty.";
         return this.description;
     }
 
