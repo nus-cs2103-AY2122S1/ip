@@ -83,6 +83,7 @@ public class DialogBox extends HBox {
         this.setAlignment(Pos.CENTER_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);
+        assert this.getChildren().size() == tmp.size() : "Number of nodes should be the same after flipping";
         this.getChildren().setAll(tmp);
     }
 }

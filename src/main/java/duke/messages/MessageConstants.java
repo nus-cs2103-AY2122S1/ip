@@ -36,7 +36,7 @@ public class MessageConstants {
                     + "Try \"yyyy-mm-dd\" instead.";
     public static final String MESSAGE_INVALID_TASK_NUMBER =
             "Oof!!! Task number provided is invalid. Please try another number.";
-    public static final String MESSAGE_INVALID_INTEGER = "Oof!!! Task number must be valid integer. eg. \"done 1\"";
+    public static final String MESSAGE_INVALID_INTEGER = "Oof!!! Task number must be valid integer. eg. 1";
     public static final String MESSAGE_TASK_FILE_IO_FAILURE = "Oof!!! Unable to read/write from save file.";
     public static final String MESSAGE_INVALID_TASK_DATA = "Oof!!! Saved task data is corrupted/invalid!"
             + "\nDuke failed to start. Please verify/delete the saved data file and restart Duke!";

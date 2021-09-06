@@ -13,7 +13,7 @@ import duke.tasks.TaskList;
  * @author kevin9foong
  */
 public class Duke {
-    private FulfillmentHandler fulfillmentHandler;
+    private final FulfillmentHandler fulfillmentHandler;
 
     /**
      * Constructs an instance of the <code>Duke</code> chat bot with the provided input and output handlers.
