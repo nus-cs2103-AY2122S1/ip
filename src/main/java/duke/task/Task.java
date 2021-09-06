@@ -3,7 +3,7 @@ package duke.task;
 /**
  * A task representation for Duke.
  */
-public class Task {
+public abstract class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
 
@@ -55,4 +55,7 @@ public class Task {
         }
         return false;
     }
+
+    @Override
+    public abstract int compareTo(Task task);
 }

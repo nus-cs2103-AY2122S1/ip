@@ -36,4 +36,20 @@ public class Event extends Task {
         }
         return false;
     }
+
+    @Override
+    public int compareTo(Task task) {
+        if (task instanceof Todo) {
+            // always put todo task before other types
+            // do not sort it for now
+            return -1;
+        } else if (task instanceof Event) {
+            Event eventTask = (Event) task;
+            return this.at.compareTo(eventTask.at);
+        } else {
+            assert task instanceof Deadline : "Invalid Task type: " + task;
+            Deadline deadlineTask = (Deadline) task;
+            return this.at.compareTo(deadlineTask.by);
+        }
+    }
 }

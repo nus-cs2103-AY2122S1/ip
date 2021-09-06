@@ -188,6 +188,9 @@ public class DukeFx extends Application {
             return delete(input);
         case "find":
             return find(input);
+        case "sort":
+            tasks.sortByTime();
+            return "Your tasks have been sorted.\n" + tasks.toString();
         default:
             // Message for unrecognised task type
             return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";

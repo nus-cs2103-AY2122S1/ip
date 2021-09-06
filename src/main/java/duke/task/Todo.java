@@ -27,4 +27,11 @@ public class Todo extends Task {
         }
         return false;
     }
+
+    @Override
+    public int compareTo(Task task) {
+        // always put todo task before other types
+        // do not sort it for now
+        return -1;
+    }
 }
