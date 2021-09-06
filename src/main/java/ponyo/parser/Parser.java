@@ -34,14 +34,17 @@ public class Parser {
             case "bye":
                 return new ExitCommand();
             case "done":
+                assert commandArg != null;
                 return new DoneCommand(Integer.parseInt(commandArg));
             case "todo":
             case "deadline":
             case "event":
                 return new AddCommand(commands);
             case "find":
+                assert commandArg != null;
                 return new FindCommand(commandArg);
             case "delete":
+                assert commandArg != null;
                 return new DeleteCommand(Integer.parseInt(commandArg));
             default:
                 throw new PonyoException(Messages.MESSAGE_INVALID);

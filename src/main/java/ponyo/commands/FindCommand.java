@@ -36,6 +36,7 @@ public class FindCommand extends Command {
     }
 
     private String[] getMatchingTasks(ArrayList<Task> matchingTasks) {
+        assert matchingTasks.size() > 0;
         String[] args = new String[matchingTasks.size() + 1];
         args[0] = "Here are the matching tasks in your list: ";
 

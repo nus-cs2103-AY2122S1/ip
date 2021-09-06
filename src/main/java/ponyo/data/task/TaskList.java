@@ -32,6 +32,7 @@ public class TaskList {
      * @param taskId the task to be removed from the list.
      */
     public void remove(int taskId) {
+        assert taskId >= 0;
         tasks.remove(taskId);
     }
 
@@ -42,6 +43,7 @@ public class TaskList {
      * @return the requested task
      */
     public Task retrieveTask(int taskId) {
+        assert taskId >= 0;
         return tasks.get(taskId);
     }
 

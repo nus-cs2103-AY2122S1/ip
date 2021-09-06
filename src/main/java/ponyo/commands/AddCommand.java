@@ -59,39 +59,33 @@ public class AddCommand extends Command {
         return false;
     }
 
-    // TODO: Stop mutating arguments in these methods!!!
     private String[] addTodo(TaskList tasks, Storage storage) {
-        TaskList newTasks = tasks;
-        Storage newStorage = storage;
         Task t = new Todo(taskToAdd[1]);
 
-        newTasks.add(t);
-        newStorage.writeToFile(t);
-        return formatTask(t, newTasks.size());
+        tasks.add(t);
+        storage.writeToFile(t);
+        return formatTask(t, tasks.size());
     }
 
     private String[] addDeadline(TaskList tasks, Storage storage) {
-        TaskList newTasks = tasks;
-        Storage newStorage = storage;
         Task t = new Deadline(getTaskDetails()[0], getTaskDetails()[1]);
 
-        newTasks.add(t);
-        newStorage.writeToFile(t);
-        return formatTask(t, newTasks.size());
+        tasks.add(t);
+        storage.writeToFile(t);
+        return formatTask(t, tasks.size());
     }
 
     private String[] addEvent(TaskList tasks, Storage storage) {
-        TaskList newTasks = tasks;
-        Storage newStorage = storage;
         Task t = new Event(getTaskDetails()[0], getTaskDetails()[1]);
 
-        newTasks.add(t);
-        newStorage.writeToFile(t);
-        return formatTask(t, newTasks.size());
+        tasks.add(t);
+        storage.writeToFile(t);
+        return formatTask(t, tasks.size());
     }
 
     private String[] getTaskDetails() {
         int slashIndex = taskToAdd[1].indexOf("/");
+        assert slashIndex >= 0;
         String desc = taskToAdd[1].substring(0, slashIndex);
         String date = formatDate(taskToAdd[1], slashIndex);
 

@@ -16,6 +16,7 @@ public class DoneCommand extends Command {
 
     @Override
     public String[] execute(TaskList tasks, Storage storage) {
+        assert taskToMarkDone > 0;
         tasks.retrieveTask(taskToMarkDone - 1).markAsDone();
         storage.getFullContents(tasks);
         return Ui.show("Nice! I've marked this task as done: \n\t" + tasks.retrieveTask(taskToMarkDone - 1));
