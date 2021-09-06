@@ -18,6 +18,7 @@ public class Parser {
     private boolean isRunning;
     private MyList list;
     private Storage storage;
+    private Scanner s;
 
     /**
      * Constructor for the class
@@ -44,8 +45,8 @@ public class Parser {
      * @return The String representing Duke's response.
      */
     public String getDukeResponse(String command) {
-        Scanner s = new Scanner(command);
-        String input = s.next();
+        this.s = new Scanner(command);
+        String input = this.s.next();
         String response = "";
 
         switch (input) {
@@ -53,51 +54,52 @@ public class Parser {
             response = this.list.listAll();
             break;
         case "done":
-            response = getDoneResponse(s.nextLine());
+            response = getDoneResponse();
             break;
         case "todo":
-            response = getTodoResponse(s.nextLine());
+            response = getTodoResponse();
             break;
         case "deadline":
-            response = getDeadlineResponse(s.nextLine());
+            response = getDeadlineResponse();
             break;
         case "event":
-            response = getEventResponse(s.nextLine());
+            response = getEventResponse();
             break;
         case "delete":
-            response = getDeleteResponse(s.nextLine());
+            response = getDeleteResponse();
             break;
         case "setFormat":
-            response = getSetFormatResponse(s.nextLine());
+            response = getSetFormatResponse();
             break;
         case "format":
             response = Ui.currentDateFormatMessage();
             break;
         case "find":
-            response = getFindResponse(s.nextLine());
+            response = getFindResponse();
             break;
         case "bye":
             response = Ui.botShutdownMessage();
             this.isRunning = false;
             break;
+        case "remind":
+            response = getReminderResponse();
+            break;
         default:
-            response = Ui.noSpecificCmdMessage();
+            response = Ui.getUnrecognisedCmdMessage();
         }
         return response;
     }
 
     /**
      * Method to generate duke's response to a 'done' command.
-     * @param command The command
      * @return Duke's response
      */
-    private String getDoneResponse(String command) {
+    private String getDoneResponse() {
         String response = "";
-        Scanner s = new Scanner(command);
         int counter = 0;
 
-        while (s.hasNextInt()) {
-            int index = s.nextInt();
+        while (this.s.hasNextInt()) {
+            int index = this.s.nextInt();
             response += this.list.markComplete(index);
             this.storage.writeToFile();
             counter++;
@@ -110,15 +112,13 @@ public class Parser {
 
     /**
      * Method to generate duke's response to a 'todo' command.
-     * @param command The 'todo' command
      * @return Duke's response.
      */
-    private String getTodoResponse(String command) {
+    private String getTodoResponse() {
         String response = "";
-        Scanner s = new Scanner(command);
         String description = "";
-        while (s.hasNextLine()) {
-            description = s.nextLine();
+        while (this.s.hasNextLine()) {
+            description = this.s.nextLine();
         }
         try {
             Todo newTodo = new Todo(description, false);
@@ -132,15 +132,13 @@ public class Parser {
 
     /**
      * Method to return duke's response to a 'deadline' command.
-     * @param command The 'deadline' command
      * @return Duke's response.
      */
-    private String getDeadlineResponse(String command) {
+    private String getDeadlineResponse() {
         String response = "";
-        Scanner s = new Scanner(command);
         String description = "";
-        while (s.hasNextLine()) {
-            description = s.nextLine();
+        while (this.s.hasNextLine()) {
+            description = this.s.nextLine();
         }
         try {
             Deadline newDeadline = new Deadline(description, false);
@@ -154,15 +152,13 @@ public class Parser {
 
     /**
      * Method to generate Duke's response to an 'event' command.
-     * @param command The 'event' command.
      * @return Duke's response.
      */
-    private String getEventResponse(String command) {
+    private String getEventResponse() {
         String response = "";
-        Scanner s = new Scanner(command);
         String description = "";
-        while (s.hasNextLine()) {
-            description = s.nextLine();
+        while (this.s.hasNextLine()) {
+            description = this.s.nextLine();
         }
         try {
             Event newEvent = new Event(description, false);
@@ -176,14 +172,12 @@ public class Parser {
 
     /**
      * Method to generate duke's response to a 'delete' command.
-     * @param command The 'delete' command.
      * @return Duke's response.
      */
-    private String getDeleteResponse(String command) {
+    private String getDeleteResponse() {
         String response = "";
-        Scanner s = new Scanner(command);
-        if (s.hasNextInt()) {
-            int index = s.nextInt();
+        if (this.s.hasNextInt()) {
+            int index = this.s.nextInt();
             response = this.list.deleteTask(index);
             this.storage.writeToFile();
         } else {
@@ -194,15 +188,13 @@ public class Parser {
 
     /**
      * Method to generate Duke's reponse to a 'setFormat' command.
-     * @param command The 'setFormat' command.
      * @return Duke's response.
      */
-    private String getSetFormatResponse(String command) {
+    private String getSetFormatResponse() {
         String response = "";
-        Scanner s = new Scanner(command);
-        if (s.hasNextLine()) {
+        if (this.s.hasNextLine()) {
             try {
-                Duke.setFormat(s.nextLine().substring(1));
+                Duke.setFormat(this.s.nextLine().substring(1));
                 response = Ui.formatUpdatedMessage();
                 this.storage.writeToFile();
             } catch (IllegalArgumentException e) {
@@ -216,16 +208,30 @@ public class Parser {
 
     /**
      * Method to generate Duke's response to a 'find' command.
-     * @param command The 'find' command.
      * @return Duke's response.
      */
-    private String getFindResponse(String command) {
+    private String getFindResponse() {
         String response = "";
-        Scanner s = new Scanner(command);
-        if (s.hasNextLine()) {
-            response = this.list.find(s.nextLine());
+        if (this.s.hasNextLine()) {
+            response = this.list.find(this.s.nextLine());
         } else {
             response = Ui.noKeywordSpecifiedMessage();
+        }
+        return response;
+    }
+
+    /**
+     * Method to generate Duke's response to the 'remind' command.
+     * @return Duke's response.
+     */
+    private String getReminderResponse() {
+        String response = "";
+        int daysFromToday = 0;
+        if (this.s.hasNextInt()) {
+            daysFromToday = this.s.nextInt();
+            response = this.list.findDeadlineWithin(daysFromToday);
+        } else {
+            response = Ui.noDaySpecifiedMessage();
         }
         return response;
     }
