@@ -1,5 +1,7 @@
 package ponyo.data.task;
 
+import ponyo.common.Prefixes;
+
 /**
  * An Event task object that has a description and an at-date.
  */
@@ -19,11 +21,11 @@ public class Event extends Task {
 
     @Override
     public String toStringInFile() {
-        return "E - " + super.toStringInFile() + " - " + at;
+        return Prefixes.PREFIX_EVENT + " - " + super.toStringInFile() + " - " + at;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[" + Prefixes.PREFIX_EVENT + "]" + super.toString() + " (at: " + at + ")";
     }
 }

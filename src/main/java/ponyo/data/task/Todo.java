@@ -1,5 +1,7 @@
 package ponyo.data.task;
 
+import ponyo.common.Prefixes;
+
 /**
  * A Todo task object that only has a description.
  */
@@ -10,11 +12,11 @@ public class Todo extends Task {
 
     @Override
     public String toStringInFile() {
-        return "T - " + super.toStringInFile();
+        return Prefixes.PREFIX_TODO + " - " + super.toStringInFile();
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[" + Prefixes.PREFIX_TODO + "]" + super.toString();
     }
 }
