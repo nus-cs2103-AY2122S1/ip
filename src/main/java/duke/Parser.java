@@ -7,6 +7,7 @@ package duke;
 
 public class Parser {
 
+    private static final int COMMAND_SPACING = 4;
     /**
      * Returns the result of parsing the user input in an array of string where index 0 is command, index 1 is
      * task description and index 2 is by/at date and time.
@@ -22,6 +23,8 @@ public class Parser {
 
         String remainder = "";
         int separator = 0;
+
+        //obtain information of task, after the /at or /by command
         if (split.length > 1) {
             remainder = item.substring(firstWordLength + 1);
             for (int i = 0; i < remainder.length(); i++) {
@@ -31,11 +34,13 @@ public class Parser {
                 }
             }
         }
+
+        //separate sections of the input, eg [deadline, return books, 2021-09-06, false]
         if (separator == 0) {
             result[1] = remainder;
         } else {
             result[1] = remainder.substring(0, separator - 1);
-            result[2] = remainder.substring(separator + 4);
+            result[2] = remainder.substring(separator + COMMAND_SPACING);
             System.out.println(result[2]);
         }
         return result;
