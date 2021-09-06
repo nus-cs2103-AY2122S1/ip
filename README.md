@@ -7,11 +7,16 @@ Duke offers you a:
 - Minimalist
 and completely **offline** experience of planning your tasks!
 
+## Duke's features
+- [x] Adding and saving tasks
+- [ ] GUI (coming soon!)
+- [ ] Mystery features 😜
+
 ## Setting up Duke
 1. Download it [here](https://github.com/WangGLJoseph/ip/releases/download/A-Jar/ip.jar)
 2. Double-click to run it
 3. Add your tasks
-4. Enjoy **mastery** over your tasks 😜
+4. Enjoy **mastery** over your tasks 😆
 
 A snippet of the workings of controlling your tasks. Behold, you've got the power!
    ```
