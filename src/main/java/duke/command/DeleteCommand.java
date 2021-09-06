@@ -34,17 +34,13 @@ public class DeleteCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         String[] inputValues = super.getUserInput().split(" ");
         try {
-            return taskList.delete(Integer.parseInt(inputValues[1]), storage);
+            int index = Integer.parseInt(inputValues[1]);
+            return taskList.delete(index, ui, storage);
         } catch (NumberFormatException e) {
-            return ui.showError("Error! Please ensure a number is entered after delete (eg: delete 2)");
+            return ui.showInvalidFormatError(this);
         } catch (IndexOutOfBoundsException e) {
-            if (Integer.parseInt(inputValues[1]) <= 0) {
-                return ui.showError("Error! Please specify a number greater than 0");
-            } else if (Integer.parseInt(inputValues[1]) == 1) {
-                return ui.showError("Error! You do not have any tasks in the list");
-            } else {
-                return ui.showError("Error! You do not have " + inputValues[1] + " tasks in the list");
-            }
+            int index = Integer.parseInt(inputValues[1]);
+            return ui.showInvalidIndexError(index);
         } catch (IOException exception) {
             return ui.showSavingError();
         }
