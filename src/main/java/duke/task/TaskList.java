@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import duke.exception.DukeException;
 import duke.io.Storage;
