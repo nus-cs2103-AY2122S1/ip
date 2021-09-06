@@ -26,16 +26,16 @@ public class Storage {
             for (Task s : list) {
                 if (s instanceof Task.Todo) {
                     fw.write("T" + "\r\n");
-                    fw.write(s.description + "\r\n");
+                    fw.write(s.taskName + "\r\n");
                 } else if (s instanceof Task.Event) {
                     Task.Event e = (Task.Event) s;
                     fw.write("E" + "\r\n");
-                    fw.write(s.description + "\r\n");
+                    fw.write(s.taskName + "\r\n");
                     fw.write(e.date + "\r\n");
                 } else if (s instanceof Task.Deadline) {
                     Task.Deadline e = (Task.Deadline) s;
                     fw.write("D" + "\r\n");
-                    fw.write(s.description + "\r\n");
+                    fw.write(s.taskName + "\r\n");
                     fw.write(e.date + "\r\n");
                 }
                 fw.write((s.isDone ? "1" : "0") + "\r\n");
@@ -56,7 +56,7 @@ public class Storage {
     public static ArrayList<Task> loadFile(File saveFile) throws FileNotFoundException {
 
         Scanner s = new Scanner(saveFile);
-        ArrayList<Task> list = new ArrayList<>();
+        ArrayList<Task> returnList = new ArrayList<>();
 
         while (s.hasNext()) {
             String type = s.nextLine();
@@ -64,27 +64,27 @@ public class Storage {
             String name = s.nextLine();
             assert !name.isEmpty() : "Save file (NAME) corrupted.";
             if (type.equals("T")) {
-                list.add(new Task.Todo(name));
+                returnList.add(new Task.Todo(name));
             } else {
-                String base = s.nextLine();
-                assert(base.matches("^[0-9]{4}([-])(((0[13578]|(10|12))\\1(0[1-9]|[1-2][0-9]|3[0-1]))|(02\\1(0[1-9]" +
+                String fullDate = s.nextLine();
+                assert(fullDate.matches("^[0-9]{4}([-])(((0[13578]|(10|12))\\1(0[1-9]|[1-2][0-9]|3[0-1]))|(02\\1(0[1-9]" +
                         "|[1-2][0-9]))|((0[469]|11)\\1(0[1-9]|[1-2][0-9]|30)))$")) : "Save file (DATE) corrupted.";
-                String[] basesplit = base.split("T", 2);
-                String[] datesplit = basesplit[0].split("-", 3);
-                LocalDate sendThis = LocalDate.of(Integer.parseInt(datesplit[0]),
-                        Integer.parseInt(datesplit[1]), Integer.parseInt(datesplit[2]));
+                String[] fullDateSplit = fullDate.split("-");
+                LocalDate parsedDate = LocalDate.of(Integer.parseInt(fullDateSplit[0]),
+                        Integer.parseInt(fullDateSplit[1]), Integer.parseInt(fullDateSplit[2]));
                 if (type.equals("D")) {
-                    list.add(new Task.Deadline(name, sendThis));
+                    returnList.add(new Task.Deadline(name, parsedDate));
                 } else if (type.equals("E")) {
-                    list.add(new Task.Event(name, sendThis));
+                    returnList.add(new Task.Event(name, parsedDate));
                 }
             }
-            String isDone = s.nextLine();
-            assert isDone.matches("[01]") : "Save file (DONEVALUE) corrupted.";
-            if (isDone.equals("1")) {
-                (list.get(list.size() - 1)).markDone();
+            String taskDoneInt = s.nextLine();
+            assert taskDoneInt.matches("[01]") : "Save file (DONEVALUE) corrupted.";
+            if (taskDoneInt.equals("1")) {
+                Task lastItemInList = returnList.get(returnList.size() - 1);
+                lastItemInList.markDone();
             }
         }
-        return list;
+        return returnList;
     }
 }

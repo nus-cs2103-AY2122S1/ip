@@ -12,7 +12,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -38,7 +43,8 @@ public class Sados extends Application {
 
         stage.setTitle("SaDOS");
 
-        HBox saveLoad = new HBox(); //top left
+        //top left buttons
+        HBox saveLoad = new HBox();
         Button save = new Button("Save");
         save.setOnAction(a -> {
             ArrayList<Task> list = new ArrayList<>(tasks);
@@ -58,10 +64,12 @@ public class Sados extends Application {
         saveLoad.getChildren().addAll(save, load);
         saveLoad.setSpacing(10);
 
-        Label nowDate = new Label(); //top center
+        //top center text
+        Label nowDate = new Label();
         nowDate.setText("Hello! Today's date is: " + Ui.printDate(LocalDate.now()));
 
-        HBox deleteDone = new HBox(); //top right
+        //top right buttons
+        HBox deleteDone = new HBox();
         Button delete = new Button("Delete");
         delete.setOnAction(e -> {
             Task selected = listView.getSelectionModel().getSelectedItem();
@@ -79,42 +87,50 @@ public class Sados extends Application {
         deleteDone.getChildren().addAll(delete, done);
         deleteDone.setSpacing(10);
 
-        BorderPane topPanel = new BorderPane(); //full top row
+        //full top row
+        BorderPane topPanel = new BorderPane();
         topPanel.setPadding(new Insets(10, 10, 10, 10));
         topPanel.setLeft(saveLoad);
         topPanel.setCenter(nowDate);
         topPanel.setRight(deleteDone);
 
+        //bottom left text inputs
         TextField nameInput = new TextField();
         nameInput.setPromptText("Task Name");
         TextField dateInput = new TextField();
         dateInput.setPromptText("Date (YYYY-MM-DD)");
 
+        //bottom right dropdown list and button
         ChoiceBox<String> actions = new ChoiceBox<>();
         actions.getItems().addAll("Todo", "Event", "Deadline", "Search");
         actions.getSelectionModel().select(0);
+        Button go = new Button("Go!");
 
-        Button go = new Button("Go!"); //parsing information from inputs
+        //text inputs parsing
         go.setOnAction(e -> {
             String option = actions.getValue();
+
+            String nameInputString = nameInput.getText();
+            boolean nameInputIsEmpty = nameInputString.isEmpty();
+            String dateInputString = dateInput.getText();
+            boolean dateInputIsEmpty = dateInputString.isEmpty();
+
             if (option.equals("Todo")) {
-                if (nameInput.getText().isEmpty()) {
+                if (nameInputIsEmpty) {
                     Popup.errorPopup("Name field is empty!");
                 } else {
-                    Todo add = new Todo(nameInput.getText());
-                    nameInput.clear();
+                    Todo add = new Todo(nameInputString);
                     tasks.add(add);
                 }
-            } else if (option.equals("Search") && dateInput.getText().isEmpty()) {
-                if (nameInput.getText().isEmpty()) {
+            } else if (option.equals("Search") && dateInputIsEmpty) {
+                if (nameInputIsEmpty) {
                     Popup.errorPopup("Name and Date fields are empty!");
                 } else {
-                    String searchName = nameInput.getText();
-                    filter(1, searchName, LocalDate.of(1, 1, 1));
+                    filterResults(1, nameInputString, LocalDate.of(1, 1, 1));
                 }
             } else {
-                if (dateInput.getText().isEmpty()) {
-                    if (nameInput.getText().isEmpty()) {
+                if (dateInputIsEmpty) {
+                    if (nameInputIsEmpty) {
                         Popup.errorPopup("Name and Date fields are empty!");
                     } else {
                         Popup.errorPopup("Date field is empty!");
@@ -122,31 +138,24 @@ public class Sados extends Application {
                 } else {
                     LocalDate date;
                     try {
-                        date = LocalDate.parse(dateInput.getText());
+                        date = LocalDate.parse(dateInputString);
                         if (option.equals("Search")) {
-                            if (nameInput.getText().isEmpty()) {
-                                filter(2, "", date);
+                            if (nameInputIsEmpty) {
+                                filterResults(2, "", date);
                             } else {
-                                String searchName = nameInput.getText();
-                                filter(3, searchName, date);
-                            }
-                        } else if (option.equals("Event")) {
-                            if (nameInput.getText().isEmpty()) {
-                                Popup.errorPopup("Name field is empty!");
-                            } else {
-                                Event add = new Event(nameInput.getText(), date);
-                                nameInput.clear();
-                                dateInput.clear();
-                                tasks.add(add);
+                                filterResults(3, nameInputString, date);
                             }
                         } else {
-                            if (nameInput.getText().isEmpty()) {
+                            if (nameInputIsEmpty) {
                                 Popup.errorPopup("Name field is empty!");
                             } else {
-                                Deadline add = new Deadline(nameInput.getText(), date);
-                                nameInput.clear();
-                                dateInput.clear();
-                                tasks.add(add);
+                                if (option.equals("Event")) {
+                                    Event add = new Event(nameInputString, date);
+                                    tasks.add(add);
+                                } else if (option.equals("Deadline")) {
+                                    Deadline add = new Deadline(nameInputString, date);
+                                    tasks.add(add);
+                                }
                             }
                         }
                     } catch (DateTimeParseException err) {
@@ -154,9 +163,12 @@ public class Sados extends Application {
                     }
                 }
             }
+            nameInput.clear();
+            dateInput.clear();
         });
 
-        HBox bottomPanel = new HBox(); //full bottom row
+        //full bottom row
+        HBox bottomPanel = new HBox();
         bottomPanel.setPadding(new Insets(10, 10, 10, 10));
         bottomPanel.setSpacing(10);
         bottomPanel.getChildren().addAll(nameInput, dateInput, actions, go);
@@ -167,7 +179,8 @@ public class Sados extends Application {
 
         listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-        BorderPane borders = new BorderPane(); //full window
+        //full window
+        BorderPane borders = new BorderPane();
         borders.setTop(topPanel);
         borders.setCenter(listView);
         borders.setBottom(bottomPanel);
@@ -181,32 +194,33 @@ public class Sados extends Application {
      * Opens a popup window with the filtered items.
      *
      * @param type 1 if filtering only by name, 2 if filtering only by date, 3 if by both.
-     * @param name String name if type 1 or 3.
-     * @param date LocalDate object if type 2 or 3.
+     * @param nameString String to be checked in the task names if type 1 or 3.
+     * @param date LocalDate object representing the date to be checked if type 2 or 3.
      */
-    private void filter(int type, String name, LocalDate date) {
+    private void filterResults(int type, String nameString, LocalDate date) {
 
         ObservableList<String> list = FXCollections.observableArrayList();
         String dateString = Ui.printDate(date);
         String filterString;
 
-        if (type == 1) { //name only
+        //name only
+        if (type == 1) {
             for (Task i : tasks) {
-                if (i.nameContains(name)) {
+                if (i.queryIfNameContains(nameString)) {
                     list.add(i.toString());
                 }
             }
-            filterString = name;
+            filterString = nameString;
         } else if (type == 2) { //date only
             for (Task i : tasks) {
                 if (i instanceof Event) {
                     Event e = (Event) i;
-                    if (e.dateEquals(date)) {
+                    if (e.queryIfDateEquals(date)) {
                         list.add(i.toString());
                     }
                 } else if (i instanceof Deadline) {
                     Deadline d = (Deadline) i;
-                    if (d.dateEquals(date)) {
+                    if (d.queryIfDateEquals(date)) {
                         list.add(i.toString());
                     }
                 }
@@ -214,21 +228,21 @@ public class Sados extends Application {
             filterString = dateString;
         } else { //name and date
             for (Task i : tasks) {
-                if (i.nameContains(name)) {
+                if (i.queryIfNameContains(nameString)) {
                     if (i instanceof Event) {
                         Event e = (Event) i;
-                        if (e.dateEquals(date)) {
+                        if (e.queryIfDateEquals(date)) {
                             list.add(i.toString());
                         }
                     } else if (i instanceof Deadline) {
                         Deadline d = (Deadline) i;
-                        if (d.dateEquals(date)) {
+                        if (d.queryIfDateEquals(date)) {
                             list.add(i.toString());
                         }
                     }
                 }
             }
-            filterString = name + " + " + dateString;
+            filterString = nameString + " + " + dateString;
         }
         Popup.filterPopup(list, filterString);
     }
