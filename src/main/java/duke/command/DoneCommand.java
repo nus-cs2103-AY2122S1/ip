@@ -32,7 +32,7 @@ public class DoneCommand extends Command {
         try {
             idx = Integer.parseInt(data);
         } catch (NumberFormatException e) {
-            throw new DukeException("Please input a number");
+            throw new DukeException("Please input a number.");
         }
 
         return taskList.doTask(idx);

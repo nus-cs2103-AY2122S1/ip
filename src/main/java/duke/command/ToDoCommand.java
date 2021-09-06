@@ -24,13 +24,13 @@ public class ToDoCommand extends Command {
     @Override
     public String parse(String input, TaskList taskList) throws DukeException {
         if (input.length() <= getCommandLength()) {
-            throw new DukeException("Please input the todo's name!");
+            throw new DukeException("Please input the ToDo's name.");
         }
 
         String name = input.substring(getCommandLength()).strip();
 
         if (name.equals("")) {
-            throw new DukeException("Please input the todo's name!");
+            throw new DukeException("Please input the ToDo's name.");
         }
 
         ToDo toDo = new ToDo(name);

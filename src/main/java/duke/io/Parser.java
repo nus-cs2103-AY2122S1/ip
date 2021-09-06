@@ -23,21 +23,23 @@ public class Parser {
     public String getResponse(String input) {
         String firstWord = input.split(" ")[0];
 
-        // if nothing matches, response stays like this
-        String response = "Unsupported Operation!";
+        Commands[] commands = Commands.values();
+        int i = 0;
 
-        try {
-            for (Commands command : Commands.values()) {
-                if (command.isCommand(firstWord)) {
-                    response = command.getCommand().parse(input, taskList);
-                    // terminate out of loop once the command is found
-                    break;
-                }
-            }
-        } catch (DukeException e) {
-            response = e.displayError();
+        // Find the first command that matches
+        while (i != commands.length && !commands[i].isCommand(firstWord)) {
+            i++;
         }
 
-        return response;
+        // None of the commands match
+        if (i == commands.length) {
+            return "Unsupported Operation!";
+        }
+
+        try {
+            return commands[i].getCommand().parse(input, taskList);
+        } catch (DukeException e) {
+            return e.displayError();
+        }
     }
 }

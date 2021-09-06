@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import duke.exception.DukeException;
 import duke.io.Storage;
@@ -108,18 +109,18 @@ public class TaskList {
         StringBuilder sb = new StringBuilder();
 
         if (size == 0) {
-            sb.append("No tasks yet!");
-        } else {
-            for (int i = 0; i < size; i++) {
-                Task task = tasks.get(i);
-                sb.append(i + 1);
-                sb.append(". ");
-                sb.append(task.toString());
-                sb.append('\n');
-            }
-            // delete the last newline character
-            sb.deleteCharAt(sb.length() - 1);
+            return "No tasks yet!";
         }
+
+        for (int i = 0; i < size; i++) {
+            sb.append(i + 1);
+            sb.append(". ");
+            sb.append(tasks.get(i).toString());
+            sb.append('\n');
+        }
+
+        // delete the last newline character
+        sb.deleteCharAt(sb.length() - 1);
 
         return sb.toString();
     }
@@ -140,9 +141,10 @@ public class TaskList {
         for (int i = 0; i < size; i++) {
             Task task = tasks.get(i);
             // case insensitive search
-            if (task.getName().toLowerCase().contains(searchString.toLowerCase())) {
+            String taskName = task.getName().toLowerCase();
+            if (taskName.contains(searchString.toLowerCase())) {
                 // print each task indented, in a new line
-                sb.append('\n');
+                sb.append("\n  ");
                 sb.append(i + 1);
                 sb.append(". ");
                 sb.append(task.toString());
@@ -152,9 +154,9 @@ public class TaskList {
 
         if (foundCount == 0) {
             return "No matching tasks!";
-        } else {
-            return sb.toString();
         }
+
+        return sb.toString();
     }
 
     /**
