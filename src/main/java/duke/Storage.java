@@ -88,6 +88,7 @@ public class Storage {
     public void markAsDone(TaskList taskList, int taskToMark) {
         try {
             Task t = taskList.getTasks().get(taskToMark - 1);
+            assert t != null : "task to get from taskList is null";
             char taskType = t.getTaskType();
             String done = t.isDone() ? "1" : "0";
             String description = t.toSavedFormat();
@@ -132,6 +133,7 @@ public class Storage {
     private static void convertToTask(String s, ArrayList<Task> savedInputs, int counter) {
         String[] savedTasks = s.split("/~/");
 
+        assert (savedTasks.length == 3 || savedTasks.length == 4) : "Improper formatting of ";
         String description = savedTasks[2];
         if (savedTasks.length == 3) {
             savedInputs.add(new Todo(description));
@@ -145,6 +147,8 @@ public class Storage {
             savedInputs.add(new Event(description, date));
         }
 
+        assert (savedTasks[1].equals("0") || savedTasks[1].equals("1"))
+                : "improper saved format for task's done status";
         boolean isDone = savedTasks[1].equals("1");
         if (isDone) {
             savedInputs.get(counter).markAsDone();
