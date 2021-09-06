@@ -52,14 +52,14 @@ public class Tasklist {
     public static Task parseInput(String line) throws NoSuchTaskException {
         try {
             switch(line.split(" \\| ")[0]) {
-                case "D":
-                    return new DeadlinesTask(line.split(" \\| ")[2], line.split(" \\| ")[1].equals("X"), line.split(" \\| ")[3]);
-                case "E":
-                    return new EventsTask(line.split(" \\| ")[2], line.split(" \\| ")[1].equals("X"), line.split(" \\| ")[3]);
-                case "T":
-                    return new ToDosTask(line.split(" \\| ")[2], line.split(" \\| ")[1].equals("X"));
-                default:
-                    throw new NoSuchTaskException("Invalid Line");
+            case "D":
+                return new DeadlinesTask(line.split(" \\| ")[2], line.split(" \\| ")[1].equals("X"), line.split(" \\| ")[3]);
+            case "E":
+                return new EventsTask(line.split(" \\| ")[2], line.split(" \\| ")[1].equals("X"), line.split(" \\| ")[3]);
+            case "T":
+                return new ToDosTask(line.split(" \\| ")[2], line.split(" \\| ")[1].equals("X"));
+            default:
+                throw new NoSuchTaskException("Invalid Line");
             }
 
         } catch (IndexOutOfBoundsException e) {
