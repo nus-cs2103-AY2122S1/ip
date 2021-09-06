@@ -92,6 +92,8 @@ public class Storage {
      */
     public void writeList(TaskList list) {
         try {
+            assert(new File(filePath).exists());
+            assert(new File(filePath).canWrite());
             FileWriter fw = new FileWriter(filePath);
             fw.write(list.toStorageString());
             fw.close();

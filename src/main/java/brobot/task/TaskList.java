@@ -33,6 +33,7 @@ public class TaskList {
      * @return The Task.
      */
     public Task getTask(int taskNumber) {
+        assert(taskNumber > 0);
         return this.list.get(taskNumber - 1);
     }
 
@@ -52,6 +53,7 @@ public class TaskList {
      * @throws NoSuchTaskException
      */
     public void markDone(int taskPos) throws NoSuchTaskException {
+        assert(taskPos >= 0);
         if (taskPos >= 0 && taskPos < list.size()) {
             list.get(taskPos).markComplete();
         } else {
@@ -67,7 +69,7 @@ public class TaskList {
      * @throws NoSuchTaskException
      */
     public Task deleteTask(int taskPos) throws NoSuchTaskException {
-
+        assert(taskPos >= 0);
         if (taskPos >= 0 && taskPos < list.size()) {
             Task temp = list.get(taskPos);
             list.remove(taskPos);

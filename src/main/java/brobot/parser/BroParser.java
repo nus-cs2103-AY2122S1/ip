@@ -106,6 +106,7 @@ public class BroParser {
             NoSuchTaskException {
         if (inputScanner.hasNextInt()) {
             int taskPos = inputScanner.nextInt() - 1;
+            assert(taskPos >= 0);
             list.markDone(taskPos);
             storage.writeList(list);
             return UI.getTaskDoneText(list.getTask(taskPos + 1));
