@@ -53,26 +53,22 @@ public class Storage {
                 curr[1] = line.substring(4,5);
                 curr[2] = line.substring(7);
                 switch (curr[1]) {
-                    case "T" -> {
+                    case "T":
                         TaskList.addSpecificTask("todo " + curr[2]);
                         if (curr[1].equals("X")) {
                             TaskList.getLast().markAsDone();
                         }
-                    }
-                    case "E" -> {
+                    case "E":
                         TaskList.addSpecificTask("event " + curr[2]);
                         if (curr[1].equals("X")) {
                             TaskList.getLast().markAsDone();
                         }
-                    }
-                    case "D" -> {
+                    case "D":
                         TaskList.addSpecificTask("deadline " + curr[2]);
                         if (curr[1].equals("X")) {
                             TaskList.getLast().markAsDone();
                         }
-                    }
-                    default -> {
-                    }
+                    default:
                 }
                 reader.close();
             }
