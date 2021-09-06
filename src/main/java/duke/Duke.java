@@ -149,9 +149,11 @@ public class Duke {
 
     /**
      * Designates the job to the appropriate handler based on the duke command and args
+     * and returns a string of the return message from Duke for that particular input.
      *
-     * @param command     the Duke command read by the parser.
+     * @param command the Duke command read by the parser.
      * @param argsLiteral the arguments read by the parser.
+     * @return a string of Duke's return message for that particular command.
      */
     private String handleInput(DukeCommand command, String argsLiteral) {
         try {
