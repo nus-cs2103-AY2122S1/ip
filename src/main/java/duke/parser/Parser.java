@@ -21,7 +21,7 @@ public class Parser {
      * @param input String input.
      * @return Content of input is digit or not.
      */
-    public static boolean checkDigit(String input) {
+    public static boolean checkIsDigit(String input) {
         boolean isDigit = true;
         int i = 0;
         if (input.charAt(0) == '-') {
@@ -55,19 +55,19 @@ public class Parser {
             Operation op = checkResponse(response, len);
             switch (op) {
             case DEADLINE:
-                return new AddCommand(response, op);
+                return new AddCommand(response, Operation.DEADLINE);
             case EVENT:
-                return new AddCommand(response, op);
+                return new AddCommand(response, Operation.EVENT);
             case TODO:
-                return new AddCommand(response, op);
+                return new AddCommand(response, Operation.TODO);
             case DONE:
                 return new MarkCommand(response);
             case DELETE:
                 return new DeleteCommand(response);
             case DATE:
-                return new SearchCommand(response, op);
+                return new SearchCommand(response, Operation.DATE);
             case FIND:
-                return new SearchCommand(response, op);
+                return new SearchCommand(response, Operation.FIND);
             default:
                 return null;
             }
@@ -93,7 +93,7 @@ public class Parser {
                 && Task.isDateInputFormat(response.substring(5))) {
             return Operation.DATE;
         } else if (response.startsWith("done ")
-                && checkDigit(response.substring(5))) {
+                && checkIsDigit(response.substring(5))) {
             return Operation.DONE;
         } else if (response.startsWith("todo ") && len > 5) {
             return Operation.TODO;
@@ -104,7 +104,7 @@ public class Parser {
                 && response.substring(6).contains(" /at ")) {
             return Operation.EVENT;
         } else if (response.startsWith("delete ")
-                && checkDigit(response.substring(7))) {
+                && checkIsDigit(response.substring(7))) {
             return Operation.DELETE;
         } else if (isEmpty) {
             throw new EmptyInputException(response);

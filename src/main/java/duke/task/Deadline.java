@@ -26,13 +26,29 @@ public class Deadline extends Task {
      * @param time The time's string representation.
      * @return A boolean.
      */
+
     @Override
-    public boolean compareTime(String time) {
+    public boolean isTimeSame(String time) {
+
+
         return by.equals(time);
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
+    }
+
+    @Override
+    public boolean isWithinOneDay(String time) {
+      return true;
+    }
+    @Override
+    public boolean isWithinOneWeek() {
+        return true;
+    }
+    @Override
+    public boolean isWithinOneMonth() {
+        return true;
     }
 }

@@ -29,12 +29,24 @@ public class Event extends Task {
      * @return A boolean.
      */
     @Override
-    public boolean compareTime(String time) {
+    public boolean isTimeSame(String time) {
         return at.equals(time);
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
+    }
+    @Override
+    public boolean isWithinOneDay(String time) {
+        return true;
+    }
+    @Override
+    public boolean isWithinOneWeek() {
+        return true;
+    }
+    @Override
+    public boolean isWithinOneMonth() {
+        return true;
     }
 }

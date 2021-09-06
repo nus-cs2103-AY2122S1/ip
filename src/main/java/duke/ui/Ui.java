@@ -53,18 +53,18 @@ public class Ui {
      * @param count The number of tasks.
      */
     public String showList(TaskList tasks, int count) {
-        StringBuilder curr = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         String end = "\n   ";
         String begin = "   Here are the tasks in your list:\n   ";
-        curr.append(begin);
+        sb.append(begin);
         for (int i = 0; i < count; i++) {
             if (i == count - 1) {
                 end = "";
             }
             String out = ((i + 1)) + "." + tasks.elementToString(i) + end;
-            curr.append(out);
+            sb.append(out);
         }
-        return curr.toString();
+        return sb.toString();
     }
 
     /**
