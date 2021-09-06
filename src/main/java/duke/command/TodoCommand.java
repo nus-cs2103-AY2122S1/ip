@@ -35,6 +35,8 @@ public class TodoCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        assert taskList != null;
+        assert storage != null;
         String command = super.getUserInput();
         String[] inputValues = command.split(" ");
         if (inputValues.length == 1) {
@@ -44,6 +46,7 @@ public class TodoCommand extends Command {
             try {
                 String description = command.substring(inputValues[0].length() + 1);
                 Task toDo = new ToDo(description);
+                assert !toDo.getDescription().equals("") : "Description cannot be empty";
                 return taskList.add(toDo, storage);
             } catch (IOException exception) {
                 return ui.showSavingError();

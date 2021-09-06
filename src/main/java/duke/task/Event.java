@@ -66,6 +66,10 @@ public class Event extends Task {
         }
     }
 
+    public String getAt() {
+        return this.at;
+    }
+
     /**
      * Returns a string that is used to represent events when saved to a file.
      *

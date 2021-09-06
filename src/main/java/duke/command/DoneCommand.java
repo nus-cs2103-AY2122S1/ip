@@ -32,6 +32,8 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        assert taskList != null;
+        assert storage != null;
         String[] inputValues = super.getUserInput().split(" ");
         try {
             return taskList.markAsDone(Integer.parseInt(inputValues[1]), storage);
