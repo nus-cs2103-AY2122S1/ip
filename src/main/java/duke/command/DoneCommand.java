@@ -5,20 +5,26 @@ import duke.data.exception.DukeException;
 import duke.data.task.Task;
 import duke.storage.Storage;
 
+import java.util.Arrays;
+import java.util.TreeSet;
+
 /**
  * This class abstracts the done command that the user wants to execute.
  */
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
-    private final int taskNum;
+    private final Integer[] tasksToMark;
 
     /**
      * Constructs a DoneCommand that will mark the task at the given task index once executed.
      *
-     * @param taskNum The index of the task to be marked as done.
+     * @param tasksToMark The index of the task to be marked as done.
      */
-    public DoneCommand(int taskNum) {
-        this.taskNum = taskNum;
+    public DoneCommand(Integer[] tasksToMark) {
+        //Sort and remove duplicate Integers
+        TreeSet<Integer> tree = new TreeSet<>(Arrays.asList(tasksToMark));
+        this.tasksToMark = new Integer[tree.size()];;
+        tree.toArray(this.tasksToMark);
     }
 
     /**
@@ -30,14 +36,19 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
-        if (taskNum < 0 || tasks.size() >= taskNum) {
-            throw new DukeException("OOPS!!! Please enter a valid task number");
+        StringBuilder doneTasks = new StringBuilder();
+        for (int i = tasksToMark.length - 1; i >= 0; i--) {
+            int taskNum = tasksToMark[i];
+            if (taskNum < 0 || tasks.size() <= taskNum) {
+                throw new DukeException("OOPS!!! Please enter a valid task number");
+            }
+            Task taskToBeDone = tasks.get(taskNum);
+            assert taskToBeDone != null;
+            taskToBeDone.markAsDone();
+            doneTasks.append(taskToBeDone).append("\n ");
         }
-        Task taskToBeDone = tasks.get(taskNum);
-        assert taskToBeDone != null;
-        taskToBeDone.markAsDone();
         storage.update(tasks);
-        return "Nice! I've marked this task as done:\n  "
-                + tasks.get(taskNum).toString();
+        return "Nice! I've marked these tasks as done:\n  "
+                + doneTasks;
     }
 }

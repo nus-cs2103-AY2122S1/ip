@@ -1,8 +1,10 @@
 package duke.command;
 
+import java.util.Arrays;
+import java.util.TreeSet;
+
 import duke.data.TaskList;
 import duke.data.exception.DukeException;
-import duke.data.task.Task;
 import duke.storage.Storage;
 
 /**
@@ -10,15 +12,18 @@ import duke.storage.Storage;
  */
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
-    private final int taskNum;
+    private final Integer[] tasksToDelete;
 
     /**
      * Constructs a DeleteCommand that will delete the given task number when executed.
      *
-     * @param taskNum The index of the task to be executed.
+     * @param tasksToDelete The indexes of the tasks to be deleted.
      */
-    public DeleteCommand(int taskNum) {
-        this.taskNum = taskNum;
+    public DeleteCommand(Integer[] tasksToDelete) {
+        //Sort and remove duplicate Integers
+        TreeSet<Integer> tree = new TreeSet<>(Arrays.asList(tasksToDelete));
+        this.tasksToDelete = new Integer[tree.size()];;
+        tree.toArray(this.tasksToDelete);
     }
 
     /**
@@ -30,13 +35,17 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
-        if (taskNum < 0 || tasks.size() >= taskNum) {
-            throw new DukeException("OOPS!!! Please enter a valid task number");
+        StringBuilder removedTasks = new StringBuilder();
+        for (int i = tasksToDelete.length - 1; i >= 0; i--) {
+            int taskNum = tasksToDelete[i];
+            if (taskNum < 0 || tasks.size() <= taskNum) {
+                throw new DukeException("OOPS!!! Please enter a valid task number");
+            }
+            removedTasks.append(tasks.remove(taskNum)).append("\n ");
         }
-        Task removedTask = tasks.remove(taskNum);
         storage.update(tasks);
-        return "Got it. I've removed this task:\n  "
-                + removedTask
-                + "\nNow you have " + tasks.size() + " tasks in the list.";
+        return "Got it. I've removed these tasks:\n  "
+                + removedTasks
+                + "Now you have " + tasks.size() + " tasks in the list.";
     }
 }

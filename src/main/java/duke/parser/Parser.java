@@ -64,11 +64,10 @@ public class Parser {
     }
 
     private static FindCommand findTask(String[] input) throws DukeException {
-        if (input.length > 1) {
-            return new FindCommand(input[1]);
-        } else {
+        if (input.length < 2) {
             throw new DukeException("OOPS!!! Please type what you want to find");
         }
+        return new FindCommand(input[1]);
     }
     /**
      * Adds a To-do task to the taskList.
@@ -78,11 +77,10 @@ public class Parser {
      * @throws DukeException The exception to be thrown when input is not as expected.
      */
     private static ToDoCommand addToDo(String[] input) throws DukeException {
-        if (input.length > 1) {
-            return new ToDoCommand(new ToDo(input[1]));
-        } else {
+        if (input.length < 2) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty");
         }
+        return new ToDoCommand(new ToDo(input[1]));
     }
 
     /**
@@ -146,8 +144,12 @@ public class Parser {
             throw new DukeException("OOPS!!! Please input the task number to be marked as done");
         }
         try {
-            int taskID = Integer.parseInt(input[1]) - 1;
-            return new DoneCommand(taskID);
+            String[] tasksToBeDone = input[1].trim().split(" ");
+            Integer[] taskIntegersToBeDone = new Integer[tasksToBeDone.length];
+            for (int i = 0; i < tasksToBeDone.length; i++) {
+                taskIntegersToBeDone[i] = Integer.parseInt(tasksToBeDone[i]) - 1;
+            }
+            return new DoneCommand(taskIntegersToBeDone);
         } catch (NumberFormatException e) {
             throw new DukeException("OOPS!!! Please enter a valid task number");
         }
@@ -164,8 +166,12 @@ public class Parser {
             throw new DukeException("OOPS!!! Please input the task number to be removed");
         }
         try {
-            int index = Integer.parseInt(input[1]) - 1;
-            return new DeleteCommand(index);
+            String[] taskStringsToDelete = input[1].trim().split(" ");
+            Integer[] taskIntegersToDelete = new Integer[taskStringsToDelete.length];
+            for (int i = 0; i < taskStringsToDelete.length; i++) {
+                taskIntegersToDelete[i] = Integer.parseInt(taskStringsToDelete[i]) - 1;
+            }
+            return new DeleteCommand(taskIntegersToDelete);
         } catch (NumberFormatException e) {
             throw new DukeException("OOPS!!! Please enter a valid task number");
         }
