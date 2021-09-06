@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import main.java.duke.extensions.Contact;
 import main.java.duke.tasks.Deadline;
 import main.java.duke.tasks.Event;
 import main.java.duke.tasks.Task;
@@ -42,10 +43,14 @@ public class Storage {
             String name = s.split(":")[0].substring(8);
             String date = s.split(":")[1];
             task = new Deadline(name, date);
-        } else {
+        } else if (s.startsWith("[E]")){
             String name = s.split(":")[0].substring(8);
             String time = s.split(":")[1];
             task = new Event(name, time);
+        } else {
+            String name = s.split(": ")[0];
+            String contactNumber = s.split(": ")[1];
+            task = new Contact(name, Integer.parseInt(contactNumber));
         }
         if (isDone) {
             task.markAsDone();
@@ -67,7 +72,6 @@ public class Storage {
             nekoData.getParentFile().mkdir();
             nekoData.createNewFile();
         } else {
-            assert nekoData != null : "File should be present already";
             Scanner scanner = new Scanner(nekoData);
             while (scanner.hasNextLine()) {
                 String s = scanner.nextLine();
@@ -109,7 +113,7 @@ public class Storage {
             fileString += input + "\n";
         }
         System.out.println(task.toString());
-        String newFile = fileString.replace(task.toString() + "\n", "");
+        String newFile = fileString.replace(task.toString(), "");
         FileWriter writer = new FileWriter(new File(this.filePath));
         writer.write(newFile);
         writer.flush();
