@@ -4,7 +4,6 @@ import duke.command.*;
 import duke.exception.*;
 import duke.task.*;
 
-import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 /**
@@ -64,9 +63,9 @@ public class Parser {
     public static int parseDone(String input) throws DukeException {
         String numberString = String.valueOf(input.charAt(5));
         if (!pattern.matcher(numberString).matches()) {
-            throw new DukeException("Please enter \'done [index of item]\' to mark item as done.");
+            throw new DukeException("Please enter 'done [index of item]' to mark item as done.");
         }
-        int number = Integer.parseInt(String.valueOf(numberString));
+        int number = Integer.parseInt(numberString);
         if (number > tasks.getSize() || number < 0) {
             throw new DukeException("Item does not exist, we cannot mark it as done.");
         }
@@ -87,9 +86,9 @@ public class Parser {
     public static int parseDelete(String input) throws DukeException {
         String numberString = String.valueOf(input.charAt(7));
         if (!pattern.matcher(numberString).matches()) {
-            throw new DukeException("Please enter \'delete [index of item]\' to mark item as done.");
+            throw new DukeException("Please enter 'delete [index of item]' to mark item as done.");
         }
-        int number = Integer.parseInt(String.valueOf(numberString));
+        int number = Integer.parseInt(numberString);
         if (number > tasks.getSize() || number < 0) {
             throw new DukeException("Item does not exist, we cannot delete it.");
         }
