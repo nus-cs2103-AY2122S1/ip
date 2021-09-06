@@ -1,6 +1,6 @@
 package yoyo.task;
 
-import yoyo.utility.Separator;
+import yoyo.utility.Constant;
 
 public abstract class Task {
     protected boolean isDone = false;
@@ -63,7 +63,7 @@ public abstract class Task {
      */
     public String showStatusWrite() {
         return this.printType() + this.printCompletionStatus()
-                + Separator.SEPARATOR + this.name;
+                + Constant.SEPARATOR + this.name;
     }
 
     /**

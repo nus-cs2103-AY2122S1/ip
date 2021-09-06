@@ -2,7 +2,7 @@ package yoyo.task;
 
 import java.time.LocalDateTime;
 
-import yoyo.utility.Separator;
+import yoyo.utility.Constant;
 
 /**
  * A subclass of Task of event type.
@@ -52,8 +52,8 @@ public class Event extends Task {
     @Override
     public String showStatusWrite() {
         return this.printType() + this.printCompletionStatus()
-                + Separator.SEPARATOR + this.name
-                + Separator.SEPARATOR + this.datetime;
+                + Constant.SEPARATOR + this.name
+                + Constant.SEPARATOR + this.datetime;
     }
 
     /**

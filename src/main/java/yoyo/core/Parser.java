@@ -1,10 +1,5 @@
 package yoyo.core;
 
-import static java.lang.Integer.parseInt;
-
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
-
 import yoyo.command.Command;
 import yoyo.command.CommandBye;
 import yoyo.command.CommandDeadline;
@@ -16,7 +11,20 @@ import yoyo.command.CommandList;
 import yoyo.command.CommandTodo;
 import yoyo.exception.YoyoException;
 
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+
+import static java.lang.Integer.parseInt;
+
 public class Parser {
+    private static final String COMMAND_BYE = "bye";
+    private static final String COMMAND_LIST = "list";
+    private static final String COMMAND_DONE = "done";
+    private static final String COMMAND_DELETE = "delete";
+    private static final String COMMAND_TODO = "todo";
+    private static final String COMMAND_DEADLINE = "deadline";
+    private static final String COMMAND_EVENT = "event";
+    private static final String COMMAND_FIND = "find";
 
     /**
      * Reads an input string and returns the appropriate Command.
@@ -34,21 +42,21 @@ public class Parser {
         String[] inputTokens = fullCommand.split(" ", 2);
         String commandKeyword = inputTokens[0];
         switch (commandKeyword) {
-        case "bye":
+        case COMMAND_BYE:
             return new CommandBye(inputTokens);
-        case "list":
+        case COMMAND_LIST:
             return new CommandList(inputTokens);
-        case "done":
+        case COMMAND_DONE:
             return new CommandDone(inputTokens);
-        case "delete":
+        case COMMAND_DELETE:
             return new CommandDelete(inputTokens);
-        case "todo":
+        case COMMAND_TODO:
             return new CommandTodo(inputTokens);
-        case "deadline":
+        case COMMAND_DEADLINE:
             return new CommandDeadline(inputTokens);
-        case "event":
+        case COMMAND_EVENT:
             return new CommandEvent(inputTokens);
-        case "find":
+        case COMMAND_FIND:
             return new CommandFind(inputTokens);
         default:
             assertCommandNotMissed(commandKeyword);
@@ -82,6 +90,46 @@ public class Parser {
      */
     public static LocalDateTime parseTimeString(String timeString)
             throws YoyoException {
+        char separator = identifySeparator(timeString);
+
+
+        String[] dateTimeArr = timeString.split(" ");
+        Command.checkCompleteCommand(dateTimeArr);
+        String[] dateArr = dateTimeArr[0].split(String.valueOf(separator));
+        String hourMinuteString = dateTimeArr[1];
+
+        /*
+        dateArr should have exactly 3 values for year, month and day
+        hourMinuteString uses 'hhmm' format and should not be less than 3 characters
+         */
+        if (dateArr.length != 3 || hourMinuteString.length() < 3) {
+            throw new YoyoException.YoyoInvalidFormatException("Invalid datetime format, "
+                    + "use 'yyyy/MM/dd hhmm'");
+        }
+
+        return getLocalDateTime(dateArr, hourMinuteString);
+    }
+
+    private static LocalDateTime getLocalDateTime(String[] dateArr, String time)
+            throws YoyoException.YoyoInvalidFormatException {
+        LocalDateTime result;
+
+        int year = parseInt(dateArr[0]);
+        int month = parseInt(dateArr[1]);
+        int day = parseInt(dateArr[2]);
+        int hour = parseInt(time.substring(0, 2));
+        int min = parseInt(time.substring(2));
+
+        try {
+            result = LocalDateTime.of(year, month, day, hour, min);
+        } catch (DateTimeException e) {
+            throw new YoyoException.YoyoInvalidFormatException("Invalid datetime format, "
+                    + "use 'yyyy/MM/dd hhmm'");
+        }
+        return result;
+    }
+
+    private static char identifySeparator(String timeString) throws YoyoException.YoyoInvalidFormatException {
         char separator;
         if (timeString.indexOf('/') != -1) {
             separator = '/';
@@ -91,34 +139,7 @@ public class Parser {
             throw new YoyoException.YoyoInvalidFormatException("Invalid datetime format, "
                     + "use 'yyyy/MM/dd hhmm'");
         }
-
-
-        String[] dateTimeArr = timeString.split(" ");
-        Command.checkCompleteCommand(dateTimeArr);
-        String[] dateArr = dateTimeArr[0].split(String.valueOf(separator));
-
-        /*
-        dateArr should have exactly 3 values for year, month and day
-        dateTimeArr[1] contains 'hhmm' and should not be less than 3 characters
-         */
-        if (dateArr.length != 3 || dateTimeArr[1].length() < 3) {
-            throw new YoyoException.YoyoInvalidFormatException("Invalid datetime format, "
-                    + "use 'yyyy/MM/dd hhmm'");
-        }
-
-        int year = parseInt(dateArr[0]);
-        int month = parseInt(dateArr[1]);
-        int day = parseInt(dateArr[2]);
-        int hour = parseInt(dateTimeArr[1].substring(0, 2));
-        int min = parseInt(dateTimeArr[1].substring(2));
-        LocalDateTime result;
-        try {
-            result = LocalDateTime.of(year, month, day, hour, min);
-        } catch (DateTimeException e) {
-            throw new YoyoException.YoyoInvalidFormatException("Invalid datetime format, "
-                    + "use 'yyyy/MM/dd hhmm'");
-        }
-        return result;
+        return separator;
     }
 
 }

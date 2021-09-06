@@ -3,6 +3,9 @@ package yoyo.core;
 import yoyo.task.Task;
 import yoyo.task.TaskList;
 
+import static yoyo.utility.Constant.NEWLINE_CHAR;
+
+
 public class DialogHandler {
     public DialogHandler() {
     }
@@ -25,9 +28,10 @@ public class DialogHandler {
             return "You have no task at the moment.";
         } else {
             assert currListLength != 0;
-            String res = "Here are the tasks you currently have:\n";
+
+            String res = "Here are the tasks you currently have:" + NEWLINE_CHAR;
             for (int i = 0; i < currListLength; i++) {
-                String toAdd = i + 1 + "." + tasks.get(i).showStatus() + "\n";
+                String toAdd = i + 1 + "." + tasks.get(i).showStatus() + NEWLINE_CHAR;
                 res += toAdd;
             }
             return res;
@@ -45,9 +49,9 @@ public class DialogHandler {
             return "Sorry :-(. Yoyo has not found any matching tasks.";
         } else {
             String res = "";
-            res += "Here are the matching tasks in your list:\n";
+            res += "Here are the matching tasks in your list:" + NEWLINE_CHAR;
             for (int i = 0; i < currListLength; i++) {
-                String toAdd = i + 1 + "." + tasks.get(i).showStatus() + "\n";
+                String toAdd = i + 1 + "." + tasks.get(i).showStatus() + NEWLINE_CHAR;
                 res += toAdd;
             }
             return res;
@@ -57,13 +61,13 @@ public class DialogHandler {
     /**
      * Prints a message indicating selected task has been marked as done.
      *
-     * @param tasks TaskList of the program.
+     * @param tasks     TaskList of the program.
      * @param taskIndex Index of the Task to be marked as done.
      */
     public String printMarkTaskMessage(TaskList tasks, int taskIndex) {
-        System.out.println(tasks.get(taskIndex).showStatus());
-        String res = "Nice! I've marked this task as done:\n"
-                + tasks.get(taskIndex).showStatus() + "\n";
+        String res = "Nice! I've marked this task as done:"
+                + NEWLINE_CHAR
+                + tasks.get(taskIndex).showStatus() + NEWLINE_CHAR;
         return res;
     }
 
@@ -74,11 +78,14 @@ public class DialogHandler {
      * @param tasks    TaskList of the program.
      */
     public String printRemoveTaskMessage(Task toRemove, TaskList tasks) {
-        String res = "Noted. I've removed this task:\n"
+        String res = "Noted. I've removed this task:"
+                + NEWLINE_CHAR
                 + toRemove.showStatus()
-                + "\nNow you have "
+                + NEWLINE_CHAR
+                + "Now you have "
                 + tasks.size()
-                + " tasks in the list.\n";
+                + " tasks in the list."
+                + NEWLINE_CHAR;
         return res;
     }
 
@@ -89,11 +96,14 @@ public class DialogHandler {
      * @param tasks   Task list.
      */
     public String printAddMessage(Task newTask, TaskList tasks) {
-        String res = "Got it. I've added this task:\n   "
+        String res = "Got it. I've added this task:"
+                + NEWLINE_CHAR
                 + newTask.showStatus()
-                + "\nNow you have "
+                + NEWLINE_CHAR
+                + "Now you have "
                 + tasks.size()
-                + " tasks in the list.\n";
+                + " tasks in the list."
+                + NEWLINE_CHAR;
         return res;
     }
 
