@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Event is a task that represents that should be done at a specific time.
  */
 public class Event extends Task {
+    /** Datetime of event taking place. */
     private final LocalDateTime dateTime;
 
     /**
