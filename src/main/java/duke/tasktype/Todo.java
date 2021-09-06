@@ -13,6 +13,7 @@ import duke.exception.WrongCommandFormatException;
  */
 public class Todo implements Task {
 
+    private final String taskType = "TODO";
     private String description;
     private boolean isDone;
 
@@ -109,5 +110,14 @@ public class Todo implements Task {
                 + " "
                 + this.description;
         return data;
+    }
+
+    /**
+     * Method to return the task type.
+     * @return The string representation of the task type.
+     */
+    @Override
+    public String getTaskType() {
+        return this.taskType;
     }
 }

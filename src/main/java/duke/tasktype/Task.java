@@ -17,4 +17,6 @@ public interface Task {
     String getTypeIcon();
 
     String createData();
+
+    String getTaskType();
 }

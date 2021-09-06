@@ -18,6 +18,7 @@ import duke.exception.WrongCommandFormatException;
  */
 public class Deadline implements Task {
 
+    private final String taskType = "DEADLINE";
     private String command;
     private String description = " ";
     private boolean isDone;
@@ -66,7 +67,6 @@ public class Deadline implements Task {
 
                     );
                 }
-
             } else {
                 this.description += next;
             }
@@ -96,6 +96,15 @@ public class Deadline implements Task {
      */
     public LocalDate getDeadline() {
         return this.deadline;
+    }
+
+    /**
+     * Returns the type of task.
+     * @return The string representation of the task type.
+     */
+    @Override
+    public String getTaskType() {
+        return this.taskType;
     }
 
     /**

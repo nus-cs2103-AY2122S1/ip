@@ -14,6 +14,7 @@ import duke.exception.WrongCommandFormatException;
  */
 public class Event implements Task {
 
+    private final String taskType = "EVENT";
     private String command;
     private String description = " ";
     private String timeframe;
@@ -133,5 +134,14 @@ public class Event implements Task {
                 + " "
                 + this.command;
         return data;
+    }
+
+    /**
+     * Method to return the task type.
+     * @return The string representation of the task type.
+     */
+    @Override
+    public String getTaskType() {
+        return this.taskType;
     }
 }
