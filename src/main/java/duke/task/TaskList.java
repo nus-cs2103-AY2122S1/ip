@@ -5,6 +5,7 @@ import duke.exception.DukeNoSuchTask;
 import duke.exception.DukeUnableToFind;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Represents a Task List that stores the log of
@@ -129,5 +130,12 @@ public class TaskList {
             i++;
         }
         return toPrint;
+    }
+
+    /**
+     * Sorts tasks by their deadline or event occurring time.
+     */
+    public void sortListOfTasks() {
+        listOfTasks.sort(Task::compareTo);
     }
 }

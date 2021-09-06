@@ -28,6 +28,6 @@ public class TaskCommand extends Command {
     public String execute(TaskList taskList) throws IOException, DukeException {
         Task taskAdded = this.duke.addTaskToList(DESCRIPTION);
         this.duke.saveTasks();
-        return GUI.printAddedTaskMessage(taskAdded, taskList.getTotal());
+        return GUI.sendAddedTaskMessage(taskAdded, taskList.getTotal());
     }
 }

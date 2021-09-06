@@ -20,6 +20,6 @@ public class ListCommand extends Command {
 
     @Override
     public String execute(TaskList taskList) {
-        return GUI.printReply(taskList.toString());
+        return GUI.sendReply(taskList.toString());
     }
 }

@@ -45,4 +45,28 @@ public class Deadline extends Task {
     public String saveToFile() {
         return "D | " + super.saveToFile() + "| " + this.deadlineDate;
     }
+
+    /**
+     * Returns the date for the deadline.
+     * @return date for deadline.
+     */
+    public LocalDate getDate() {
+        return this.deadlineDate;
+    }
+
+    @Override
+    public int compareTo(Task task) {
+        if (task instanceof ToDo) {
+            return this.SMALLER;
+        }
+
+        if (task instanceof Event) {
+            return this.SMALLER;
+        }
+
+        @SuppressWarnings("unchecked") // task must be a deadline
+        Deadline d = (Deadline) task;
+
+        return this.getDate().compareTo(d.getDate());
+    }
 }

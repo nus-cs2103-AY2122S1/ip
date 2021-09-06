@@ -4,8 +4,6 @@ import duke.Duke;
 import duke.task.TaskList;
 import duke.GUI;
 
-import java.util.Scanner;
-
 /**
  * Represents a general bye command.
  */
@@ -23,7 +21,7 @@ public class ByeCommand extends Command{
     public String execute(TaskList taskList) {
         this.duke.closeDukeChatBot();
 
-        return GUI.printClosingMessage();
+        return GUI.sendClosingMessage();
     }
 
 }

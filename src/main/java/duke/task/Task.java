@@ -9,9 +9,13 @@ import duke.exception.*;
  *
  * @author Ne Zhijian, Didymus A0218159Y
  */
-public class Task {
+public abstract class Task implements Comparable<Task> {
     protected boolean isDone;
     protected String task;
+
+    protected final int GREATER = 1;
+    protected final int SMALLER = -1;
+    protected final int EQUAL = 0;
 
     protected Task(String task) {
         this.isDone = false;
@@ -107,4 +111,6 @@ public class Task {
         String checker = this.isDone ? "X" : " ";
         return "[" + checker + "]" + " " + this.task;
     }
+
+    public abstract int compareTo(Task task);
 }

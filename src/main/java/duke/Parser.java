@@ -22,6 +22,7 @@ public class Parser {
         FIND("find"),
         TASK("task"),
         DELETE("delete"),
+        SORT("sort"),
         NOT_FOUND("not found");
 
         private final String actionCommand;
@@ -118,6 +119,9 @@ public class Parser {
             break;
         case TASK:
             c = new TaskCommand(d, userInput);
+            break;
+        case SORT:
+            c = new SortCommand(d);
             break;
         default:
             assert false: "Command not found";

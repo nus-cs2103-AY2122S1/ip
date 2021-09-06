@@ -1,2 +1,6 @@
-T | 1 | add do cs2100
-T | 0 | add task
+D | 1 | iP | 2020-01-02
+D | 0 | iP | 2021-08-30
+E | 0 | have fun | 2019-08-05
+E | 0 | no fun | 2021-08-08
+E | 0 | google day | 2021-09-06
+T | 0 | read book

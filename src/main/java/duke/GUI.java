@@ -24,13 +24,13 @@ public class GUI {
      * @return formatted reply that is sent to the user.
      */
     private static String formatDukeMessage(String reply) {
-        return reply ;
+        return reply;
     }
 
     /**
      * Prints the opening message when Duke chatBot first boots up.
      */
-    public static String printOpeningMessage() {
+    public static String sendOpeningMessage() {
         return GUI.formatDukeMessage(
                 "HELLO! I'm Duke\n" +
                 "To ease your experience, here are some commands you can type: \n" +
@@ -40,6 +40,7 @@ public class GUI {
                 "\t 'event': add an event task in your task list\n" +
                 "\t 'delete': delete a task from your task list\n" +
                 "\t 'find': find a task based on the given keyword\n" +
+                "\t 'sort': sort the list of tasks by their date\n" +
                 "\t 'bye': exit chat\n" +
                 "What can I do for you?\n"
 
@@ -49,7 +50,7 @@ public class GUI {
     /**
      * Prints the closing message when Duke chatBot is closed.
      */
-    public static String printClosingMessage() {
+    public static String sendClosingMessage() {
         return GUI.formatDukeMessage("Bye. Hope to see you again soon!\n");
     }
 
@@ -57,7 +58,7 @@ public class GUI {
      * Prints the error messages when Duke chatBot catches an exception.
      * @param e exception that is thrown.
      */
-    public static String printErrorMessage(Exception e) {
+    public static String sendErrorMessage(Exception e) {
         return GUI.formatDukeMessage(e.getMessage() + "\n"); // Error in red
     }
 
@@ -65,7 +66,7 @@ public class GUI {
      * Prints the reply from Duke chatBot to the user.
      * @param message message that is formatted and sent to the user.
      */
-    public static String printReply(String message) {
+    public static String sendReply(String message) {
         return GUI.formatDukeMessage(message);
     }
 
@@ -74,7 +75,7 @@ public class GUI {
      * @param task task to be added.
      * @param total total number of tasks in the task list.
      */
-    public static String printAddedTaskMessage(Task task, String total) {
+    public static String sendAddedTaskMessage(Task task, String total) {
         return GUI.formatDukeMessage("Got it. I've added this task:\n" +
                 "\t" + task + "\n" +
                 "Now you have " + total + " in your list.\n");
@@ -85,7 +86,7 @@ public class GUI {
      * @param task task to be deleted.
      * @param total total number of tasks in the task list.
      */
-    public static String printDeleteTaskMessage(Task task, String total) {
+    public static String sendDeleteTaskMessage(Task task, String total) {
         return GUI.formatDukeMessage("Noted. I've removed this task:\n" +
                 "\t" + task + "\n" +
                 "Now you have " + total + " in your list.\n");
@@ -95,7 +96,7 @@ public class GUI {
      * Prints the success message when task is marked as done.
      * @param task task to be marked as done.
      */
-    public static String printDoneMessage(Task task) {
+    public static String sendDoneMessage(Task task) {
         return GUI.formatDukeMessage("Nice! I've marked this task as done:\n" +
                 "\t" + task + "\n");
     }
@@ -105,8 +106,18 @@ public class GUI {
      * @param tasks list of tasks saved by the Duke chatbot.
      * @return tasks that match the user keyword.
      */
-    public static String printFindMessage(TaskList tasks) {
+    public static String sendFindMessage(TaskList tasks) {
         return GUI.formatDukeMessage("Here are the matching tasks in your list:\n" +
+                tasks.toString());
+    }
+
+    /**
+     * Sends the success message when task list is sorted.
+     * @param tasks list of tasks saved by the Duke chatbot.
+     * @return tasks that are sorted.
+     */
+    public static String sendSortedMessage(TaskList tasks) {
+        return GUI.formatDukeMessage("Sorted! Here are the tasks:\n" +
                 tasks.toString());
     }
 

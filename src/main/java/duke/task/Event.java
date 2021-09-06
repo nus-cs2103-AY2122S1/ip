@@ -46,4 +46,24 @@ public class Event extends Task {
         return "E | " + super.saveToFile() + "| " + this.dateOfEvent;
     }
 
+    public LocalDate getDate() {
+        return this.dateOfEvent;
+    }
+
+    @Override
+    public int compareTo(Task task) {
+        if (task instanceof ToDo) {
+            return this.SMALLER;
+        }
+
+        if (task instanceof Deadline) {
+            return this.GREATER;
+        }
+
+        @SuppressWarnings("unchecked") // task must be a deadline
+        Event d = (Event) task;
+
+        return this.getDate().compareTo(d.getDate());
+    }
+
 }

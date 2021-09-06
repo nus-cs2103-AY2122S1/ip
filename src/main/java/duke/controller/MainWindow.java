@@ -88,7 +88,7 @@ public class MainWindow extends AnchorPane {
         try {
             toReturn = duke.getResponse(input);
         } catch (DukeException e) {
-            toReturn = GUI.printErrorMessage(e);
+            toReturn = GUI.sendErrorMessage(e);
             throw e;
         } finally {
             return toReturn;
