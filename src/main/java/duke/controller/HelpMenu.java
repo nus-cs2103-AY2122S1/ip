@@ -1,13 +1,13 @@
 package duke.controller;
 
+import java.io.IOException;
+
 import duke.Duke;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-
-import java.io.IOException;
 
 /**
  * The HelpMenu class is a controller class that represents a small menu of buttons consisting of

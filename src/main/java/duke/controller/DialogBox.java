@@ -21,6 +21,9 @@ import javafx.scene.text.TextAlignment;
  * similar to most chat-bot user interfaces.
  */
 public class DialogBox extends HBox {
+    private static final Image userImage = new Image(DialogBox.class.getResourceAsStream("/images/DaUser.png"));
+    private static final Image dukeImage = new Image(DialogBox.class.getResourceAsStream("/images/DaDuke.png"));
+
     /** Label containing text from the speaker. */
     @FXML
     private Text dialog;
@@ -28,9 +31,6 @@ public class DialogBox extends HBox {
     /** ImageView containing the speaker's avatar. */
     @FXML
     private ImageView displayPicture;
-
-    private static final Image userImage = new Image(DialogBox.class.getResourceAsStream("/images/DaUser.png"));
-    private static final Image dukeImage = new Image(DialogBox.class.getResourceAsStream("/images/DaDuke.png"));
 
     private DialogBox(String text, Image img) {
         try {
