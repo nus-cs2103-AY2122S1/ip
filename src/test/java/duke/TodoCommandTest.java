@@ -3,6 +3,9 @@ package duke;
 import duke.command.DeadlineCommand;
 import duke.command.EventCommand;
 import duke.command.TodoCommand;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
 import org.junit.jupiter.api.Test;
 
 import duke.task.Deadline;
@@ -16,11 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TodoCommandTest {
     Storage store;
     {
-        try {
-            store = Storage.createStorage("test/db.txt");
-        } catch (DukeException e) {
-            e.printStackTrace();
-        }
+        store = Storage.createStorage("test/db.txt");
     }
     TaskList tl = new TaskList();
 
@@ -29,7 +28,7 @@ public class TodoCommandTest {
         Command c = new TodoCommand(this.tl, "a simple todo task");
         try {
             c.execute();
-        } catch (duke.DukeException e) {
+        } catch (DukeException e) {
             fail();
         }
         Task expected = new Todo("a simple todo task", false);
@@ -68,19 +67,6 @@ public class TodoCommandTest {
             fail(e.getMessage());
         }
         assertEquals(1, tl.size());
-    }
-
-    public class UiStub extends duke.UserInterface {
-
-        public void notifySuccessfulAdd(duke.TaskList tl) {
-            Task t = null;
-            try {
-                t = tl.get(0);
-            } catch (DukeException e) {
-                fail();
-            }
-            System.out.println("You have successfully added " + t);
-        }
     }
 }
 

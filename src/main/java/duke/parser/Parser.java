@@ -1,5 +1,8 @@
-package duke;
+package duke.parser;
 
+import duke.commandresult.CommandResult;
+import duke.exception.DukeException;
+import duke.tasklist.TaskList;
 import duke.command.ListCommand;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
@@ -13,7 +16,7 @@ public class Parser {
 
     TaskList taskList;
 
-    Parser(TaskList taskList) {
+    public Parser(TaskList taskList) {
         this.taskList = taskList;
     }
 

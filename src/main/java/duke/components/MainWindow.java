@@ -1,5 +1,8 @@
-package duke;
+package duke.components;
 
+import duke.Duke;
+import duke.commandresult.CommandResult;
+import duke.exception.DukeException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -57,7 +60,7 @@ public class MainWindow extends AnchorPane {
                 duke.save();
                 dialogContainer.getChildren().addAll(
                         DialogBox.getUserDialog(input, userImage),
-                        DialogBox.getDukeDialog(duke.userInterface.printGoodByeGreeting(), dukeImage)
+                        DialogBox.getDukeDialog("Bye. Hope to see you again soon!", dukeImage)
                 );
                 new Timer().schedule(new TimerTask() {
                     public void run () {

@@ -1,4 +1,4 @@
-package duke;
+package duke.components;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -1,8 +1,7 @@
 package duke.command;
 
-import duke.CommandResult;
-import duke.DukeException;
-import duke.TaskList;
+import duke.commandresult.CommandResult;
+import duke.tasklist.TaskList;
 
 /**
  * A command that can signify duke to render the TaskList items.

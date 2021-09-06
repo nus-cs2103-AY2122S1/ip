@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.CommandResult;
-import duke.DukeException;
+import duke.commandresult.CommandResult;
+import duke.exception.DukeException;
 import duke.task.Task;
-import duke.TaskList;
+import duke.tasklist.TaskList;
 
 /**
  * A command that can mark a task as completed from a taskList.

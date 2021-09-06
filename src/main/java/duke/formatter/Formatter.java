@@ -1,5 +1,6 @@
-package duke;
+package duke.formatter;
 
+import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskType;
 import duke.task.Todo;

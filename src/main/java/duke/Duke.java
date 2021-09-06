@@ -1,11 +1,15 @@
 package duke;
 
+import duke.commandresult.CommandResult;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
 import javafx.fxml.FXML;
 /**
  * The driver class of Duke.
  */
 public class Duke {
-    UserInterface userInterface;
     TaskList list;
     Storage storage;
 
@@ -13,7 +17,7 @@ public class Duke {
      * A constructor method that creates the driver, with the default storage file path used.
      */
     public Duke() {
-        this.userInterface = new UserInterface();
+//        this.userInterface = new UserInterface();
         this.list = new TaskList();
         this.storage = Storage.createStorage();
         try {
@@ -27,7 +31,6 @@ public class Duke {
      * @param filePath the filepath of the file.
      */
     public Duke(String filePath) {
-        this.userInterface = new UserInterface();
         this.list = new TaskList();
         this.storage = Storage.createStorage(filePath);
         try {
@@ -42,7 +45,7 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     @FXML
-    CommandResult getResponse(String input) throws DukeException {
+    public CommandResult getResponse(String input) throws DukeException {
         return new Parser(this.list).parse(input);
     }
 

@@ -1,4 +1,4 @@
-package duke;
+package duke.commandresult;
 
 public class CommandResult {
     private final String feedbackResult;

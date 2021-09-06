@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.CommandResult;
-import duke.DukeException;
+import duke.tasklist.TaskList;
+import duke.commandresult.CommandResult;
+import duke.exception.DukeException;
 import duke.task.Event;
 import duke.task.Task;
 

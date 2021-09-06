@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.CommandResult;
-import duke.DukeException;
-import duke.TaskList;
+import duke.commandresult.CommandResult;
+import duke.exception.DukeException;
+import duke.tasklist.TaskList;
 
 /**
  * Application functionality is implemented by creating classes that extends Command. These classes override

@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.CommandResult;
-import duke.TaskList;
+import duke.commandresult.CommandResult;
+import duke.tasklist.TaskList;
 
 /**
  * A command that can signify duke to exit.

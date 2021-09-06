@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * The exception class that contains the message to be rendered by the UserInterface.

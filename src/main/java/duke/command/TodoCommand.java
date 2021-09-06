@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.CommandResult;
+import duke.tasklist.TaskList;
+import duke.commandresult.CommandResult;
 import duke.task.Task;
 import duke.task.Todo;
 
