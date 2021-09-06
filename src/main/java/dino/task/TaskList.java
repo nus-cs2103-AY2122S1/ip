@@ -41,7 +41,9 @@ public class TaskList {
      * @throws EmptyListException if the current task list is empty
      */
     public String printTaskList() throws EmptyListException {
-        if (taskList.isEmpty()) throw new EmptyListException();
+        if (taskList.isEmpty()) {
+            throw new EmptyListException();
+        }
         String list = "";
         for (int i = 0; i < taskList.size(); i++) {
             list += (i + 1) + ". " + taskList.get(i) + "\n";
