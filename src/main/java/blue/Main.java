@@ -12,8 +12,8 @@ import javafx.stage.Stage;
  * A GUI for Blue using FXML.
  */
 public class Main extends Application {
-
-    private Blue blue = new Blue();
+    private static final String DEFAULT_FILEPATH = "data/tasks.txt";
+    private final Blue blue = new Blue(DEFAULT_FILEPATH);
 
     @Override
     public void start(Stage stage) {
