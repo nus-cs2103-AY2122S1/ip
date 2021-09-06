@@ -23,7 +23,9 @@ public enum Keyword {
     /** duke.util.Keyword for deleting task. */
     DELETE("delete"),
     /** duke.util.Keyword for finding task. */
-    FIND("find");
+    FIND("find"),
+    /** duke.util.Keyword for help. */
+    HELP("help");
 
     /** duke.util.Keyword for command. */
     private String keyword;

@@ -38,6 +38,8 @@ public class Parser {
             return new FindCommand(message);
         } else if (command.equals(Keyword.DELETE.getKeyword())) {
             return new DeleteCommand(message);
+        } else if (command.equals(Keyword.HELP.getKeyword())) {
+            return new HelpCommand();
         }
         throw new DukeException("Command not parsable");
     }
