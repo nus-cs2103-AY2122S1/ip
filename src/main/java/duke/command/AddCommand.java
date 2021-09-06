@@ -28,7 +28,9 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        int numOfTasks = taskList.getAllTasks().size();
         String msg = taskList.addTask(ui, this.task);
+        assert numOfTasks + 1 == taskList.getAllTasks().size();
         storage.updateTasks(taskList);
         return msg;
     }

@@ -14,7 +14,9 @@ public class DoneCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        int numOfTasks = taskList.getAllTasks().size();
         String msg = taskList.markTaskAsDone(ui, this.taskNo);
+        assert numOfTasks == taskList.getAllTasks().size();
         storage.updateTasks(taskList);
         return msg;
     }
