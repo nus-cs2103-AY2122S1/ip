@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import kayu.exception.StorageException;
 
 /**
- * Handles the reading and writing of {@link kayu.task.Task} into files.
+ * Handles the reading and writing of entities into files.
  */
 public abstract class Storage<T> {
 
@@ -28,6 +28,12 @@ public abstract class Storage<T> {
     private final String directoryPath;
     private final String filePath;
 
+    /**
+     * Initializes the {@link kayu.storage.Storage}.
+     *
+     * @param directoryPath Directory/folder path string.
+     * @param filePath File path string.
+     */
     public Storage(String directoryPath, String filePath) {
         this.directoryPath = directoryPath;
         this.filePath = filePath;

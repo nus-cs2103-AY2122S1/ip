@@ -1,7 +1,7 @@
-package kayu.task;
+package kayu.service;
 
-import static kayu.task.TaskList.ERROR_EMPTY_LIST;
-import static kayu.task.TaskList.ERROR_INVALID_TASK;
+import static kayu.service.TaskList.ERROR_EMPTY_LIST;
+import static kayu.service.TaskList.ERROR_INVALID_TASK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -16,6 +16,8 @@ import org.junit.jupiter.api.Test;
 
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
+import kayu.task.Task;
+import kayu.task.Todo;
 
 public class TaskListTest {
 

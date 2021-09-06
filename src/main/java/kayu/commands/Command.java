@@ -7,11 +7,11 @@ import java.util.List;
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
 import kayu.note.Note;
-import kayu.note.NoteList;
+import kayu.service.NoteList;
+import kayu.service.TaskList;
 import kayu.storage.NoteStorage;
 import kayu.storage.TaskStorage;
 import kayu.task.Task;
-import kayu.task.TaskList;
 
 /**
  * Holds the base logic required for other Command classes to utilise.

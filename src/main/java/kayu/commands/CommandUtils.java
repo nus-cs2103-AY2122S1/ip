@@ -5,25 +5,29 @@ import static kayu.commands.CommandMessage.ERROR_EMPTY_PARAMS;
 import static kayu.commands.CommandMessage.ERROR_IMPROPER_DATE;
 import static kayu.commands.CommandMessage.ERROR_IMPROPER_FORMATTING;
 import static kayu.commands.CommandMessage.ERROR_IMPROPER_TIME;
+import static kayu.commands.CommandMessage.MESSAGE_ITEM_FORMAT;
+import static kayu.commands.CommandMessage.MESSAGE_LIST_CONTENTS;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import kayu.exception.KayuException;
 import kayu.parser.DateTimeFormat;
 
 /**
- * Holds shared methods that are used by {@link kayu.commands.Command}s that adds {@link kayu.task.Task}s
- * such as extracting the String description or {@link java.time.LocalDate} from String parameters.
+ * Holds shared methods that are used by {@link kayu.commands.Command}s such as extracting
+ * the String description or {@link java.time.LocalDate} from String parameters.
  */
 public class CommandUtils {
 
     private static final DateTimeFormat DATE_TIME_FORMAT = DateTimeFormat.generateInstance();
 
-    public static String[] splitUserParams(String userParams, String commandName, String splitKey)
+    protected static String[] splitUserParams(String userParams, String commandName, String splitKey)
             throws KayuException {
 
         try {
@@ -36,7 +40,7 @@ public class CommandUtils {
         }
     }
 
-    public static String extractDesc(String[] paramArray, String commandName) throws KayuException {
+    protected static String extractDesc(String[] paramArray, String commandName) throws KayuException {
         assert (paramArray.length >= 1) : ASSERT_FAIL_INCOMPLETE_PARAMS;
 
         String desc = paramArray[0].trim();
@@ -46,7 +50,7 @@ public class CommandUtils {
         return desc;
     }
 
-    public static LocalDate extractDate(String[] paramArray) throws KayuException {
+    protected static LocalDate extractDate(String[] paramArray) throws KayuException {
         assert (paramArray.length == 3) : ASSERT_FAIL_INCOMPLETE_PARAMS;
 
         String dateString = paramArray[1].trim();
@@ -62,7 +66,7 @@ public class CommandUtils {
         throw new KayuException(ERROR_IMPROPER_DATE);
     }
 
-    public static LocalTime extractTime(String[] paramArray) throws KayuException {
+    protected static LocalTime extractTime(String[] paramArray) throws KayuException {
         assert (paramArray.length == 3) : ASSERT_FAIL_INCOMPLETE_PARAMS;
 
         String timeString = paramArray[2].trim().toUpperCase();
@@ -76,5 +80,23 @@ public class CommandUtils {
             }
         }
         throw new KayuException(ERROR_IMPROPER_TIME);
+    }
+
+    // Wildcard generic used as we are using the toString method for both Task and Notes.
+    protected static String generateFormattedItemListResponse(List<?> list) {
+        StringBuilder tasksAsString = new StringBuilder(MESSAGE_LIST_CONTENTS);
+
+        String stringedTasks = IntStream.range(0, list.size())
+                .boxed()
+                .map(idx -> convertToItemString(idx, list))
+                .collect(Collectors.joining("\n"));
+
+        tasksAsString.append(stringedTasks);
+        return tasksAsString.toString();
+    }
+
+    protected static String convertToItemString(int idx, List<?> list) {
+        int number = idx + 1;
+        return String.format(MESSAGE_ITEM_FORMAT, number, list.get(idx));
     }
 }

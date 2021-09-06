@@ -7,7 +7,8 @@ public class CommandMessage {
 
     // Message formats.
     protected static final String MESSAGE_ITEM_FORMAT = "%d. %s"; // number, and item as string
-    protected static final String MESSAGE_EMPTY_LIST = "List is empty, try adding some tasks first.";
+    protected static final String MESSAGE_EMPTY_TASK_LIST = "List is empty, try adding some tasks first.";
+    protected static final String MESSAGE_EMPTY_NOTE_LIST = "List is empty, try adding some notes first.";
     protected static final String MESSAGE_TASK_DONE = "Nice! I've marked this task as done:\n  %s";
     protected static final String MESSAGE_LIST_CONTENTS = "Here are the task(s) in your list:\n";
     protected static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
@@ -17,6 +18,8 @@ public class CommandMessage {
             "There are no matching tasks to the expressions(s) in '%s'.";
     protected static final String MESSAGE_DELETED_TASK =
             "Noted. I've removed this task:\n  %s\nNow you have %d task(s) in the list.";
+    protected static final String MESSAGE_DELETED_NOTE =
+            "Noted. I've removed this note:\n  %s\nNow you have %d note(s) in the list.";
     protected static final String MESSAGE_CREATED_TODO =
             "Got it. I've added this TODO task:\n  %s\nNow you have %d task(s) in the list.";
     protected static final String MESSAGE_CREATED_EVENT =

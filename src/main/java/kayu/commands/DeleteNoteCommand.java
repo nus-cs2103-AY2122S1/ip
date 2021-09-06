@@ -1,31 +1,31 @@
 package kayu.commands;
 
 import static kayu.commands.CommandMessage.ERROR_NOT_AN_INT_PARAM;
-import static kayu.commands.CommandMessage.MESSAGE_TASK_DONE;
+import static kayu.commands.CommandMessage.MESSAGE_DELETED_NOTE;
 
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
+import kayu.note.Note;
 import kayu.service.NoteList;
 import kayu.service.TaskList;
 import kayu.storage.NoteStorage;
 import kayu.storage.TaskStorage;
-import kayu.task.Task;
 
 /**
- * Represents a {@link kayu.commands.Command} that marks a certain {@link kayu.task.Task}
- * to be marked as done in {@link TaskList}.
+ * Represents a {@link kayu.commands.Command} that deletes a certain {@link kayu.note.Note}
+ * in {@link NoteList}.
  */
-public class DoneCommand extends Command {
-
+public class DeleteNoteCommand extends Command {
+    
     /** Keyword for command. */
-    public static final String COMMAND_WORD = "done";
+    public static final String COMMAND_WORD = "delete-note";
 
     /**
-     * Initializes a Done- {@link kayu.commands.Command}.
+     * Initializes a Delete- {@link kayu.commands.Command}.
      *
      * @param commandParams String parameters fed into the command by user.
      */
-    public DoneCommand(String commandParams) {
+    public DeleteNoteCommand(String commandParams) {
         super(commandParams);
     }
 
@@ -38,12 +38,12 @@ public class DoneCommand extends Command {
                           NoteList noteList,
                           NoteStorage noteStorage)
             throws KayuException, StorageException {
-        
+
         try {
-            int taskNumber = Integer.parseInt(commandParams);
-            Task selectedTask = taskList.updateTaskAsDone(taskNumber);
-            super.updateTaskFileStorage(taskList, taskStorage);
-            return String.format(MESSAGE_TASK_DONE, selectedTask);
+            int noteId = Integer.parseInt(commandParams);
+            Note selectedNote = noteList.deleteNoteById(noteId);
+            super.updateNoteFileStorage(noteList, noteStorage);
+            return String.format(MESSAGE_DELETED_NOTE, selectedNote, noteList.getCurrentCapacity());
 
         } catch (NumberFormatException exception) {
             throw new KayuException(String.format(ERROR_NOT_AN_INT_PARAM, commandParams));

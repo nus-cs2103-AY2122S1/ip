@@ -6,10 +6,10 @@ import static kayu.commands.CommandMessage.MESSAGE_CREATED_NOTE;
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
 import kayu.note.Note;
-import kayu.note.NoteList;
+import kayu.service.NoteList;
+import kayu.service.TaskList;
 import kayu.storage.NoteStorage;
 import kayu.storage.TaskStorage;
-import kayu.task.TaskList;
 
 /**
  * Represents an {@link Command} that creates a {@link kayu.note.Note}

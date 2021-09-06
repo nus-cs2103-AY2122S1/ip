@@ -10,6 +10,9 @@ import kayu.task.Event;
 import kayu.task.Task;
 import kayu.task.Todo;
 
+/**
+ * Handles the reading and writing of {@link kayu.task.Task} into files.
+ */
 public class TaskStorage extends Storage<Task> {
 
     protected static final String ERROR_UNABLE_TO_PARSE_TASK = "'%s' is an invalid Task entry.";
@@ -20,16 +23,30 @@ public class TaskStorage extends Storage<Task> {
     private TaskStorage(String directoryPath, String filePath) {
         super(directoryPath, filePath);
     }
-        
+
+    /**
+     * Generates a {@link kayu.storage.TaskStorage} instance based on the default path.
+     *
+     * @return A {@link kayu.storage.TaskStorage} instance.
+     */
     public static TaskStorage generate() {
         return TaskStorage.generate(DEFAULT_FILE_PATH);
     }
-    
+
+    /**
+     * Generates a {@link kayu.storage.TaskStorage} instance based on a specified path.
+     *
+     * @param filePath File path string.
+     * @return A {@link kayu.storage.TaskStorage} instance.
+     */
     public static TaskStorage generate(String filePath) {
         String directoryPath = Storage.extractDirectoryPath(filePath);
         return new TaskStorage(directoryPath, filePath);
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Task decode(String encoded) throws StorageException {
         String[] taskAsArray = encoded.split(Task.SPLIT_TEMPLATE);
@@ -62,7 +79,10 @@ public class TaskStorage extends Storage<Task> {
             throw new StorageException(String.format(ERROR_UNABLE_TO_PARSE_TASK, encoded));
         }
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String encode(Task decoded) {
         return decoded.toEncodedString();

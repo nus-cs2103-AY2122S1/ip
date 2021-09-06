@@ -2,10 +2,10 @@ package kayu.commands;
 
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
-import kayu.note.NoteList;
+import kayu.service.NoteList;
+import kayu.service.TaskList;
 import kayu.storage.NoteStorage;
 import kayu.storage.TaskStorage;
-import kayu.task.TaskList;
 
 /**
  * Represents a {@link kayu.commands.Command} that lists the possible commands a user can key in for operations.
@@ -36,11 +36,13 @@ public class HelpCommand extends Command {
                 + "  - bye\n"
                 + "  - help \n"
                 + "  - list\n"
+                + "  - list-notes\n"
                 + "  - note [desc]\n"
                 + "  - todo [desc]\n"
                 + "  - event [desc] /at [date] [time]\n"
                 + "  - deadline [desc] /by [date] [time]\n"
                 + "  - delete [task-number]\n"
+                + "  - delete-note [note-number]\n"
                 + "  - done [task-number]\n"
                 + "  - find [keywords...]";
     }

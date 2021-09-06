@@ -6,13 +6,13 @@ import kayu.commands.Command;
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
 import kayu.note.Note;
-import kayu.note.NoteList;
 import kayu.parser.Parser;
 import kayu.service.Logger;
+import kayu.service.NoteList;
+import kayu.service.TaskList;
 import kayu.storage.NoteStorage;
 import kayu.storage.TaskStorage;
 import kayu.task.Task;
-import kayu.task.TaskList;
 
 /**
  * Holds the main logic for Kayu project (CS2103T's iP).

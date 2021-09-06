@@ -1,7 +1,6 @@
 package kayu.commands;
 
 import static kayu.commands.CommandMessage.MESSAGE_EMPTY_NOTE_LIST;
-import static kayu.commands.CommandMessage.MESSAGE_EMPTY_TASK_LIST;
 
 import java.util.List;
 
@@ -12,21 +11,20 @@ import kayu.service.NoteList;
 import kayu.service.TaskList;
 import kayu.storage.NoteStorage;
 import kayu.storage.TaskStorage;
-import kayu.task.Task;
 
 /**
- * Represents a {@link kayu.commands.Command} that provides the {@link kayu.task.Task}
- * that are present in {@link TaskList}.
+ * Represents a {@link kayu.commands.Command} that provides the {@link kayu.note.Note}
+ * that are present in {@link NoteList}.
  */
-public class ListCommand extends Command {
+public class ListNotesCommand extends Command {
     
     /** Keyword for command. */
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = "list-notes";
 
     /**
-     * Initializes a List- {@link kayu.commands.Command}.
+     * Initializes a List-notes- {@link kayu.commands.Command}.
      */
-    public ListCommand() {
+    public ListNotesCommand() {
         super();
     }
 
@@ -40,22 +38,14 @@ public class ListCommand extends Command {
                           NoteStorage noteStorage)
             throws KayuException, StorageException {
 
-        return listTasks(taskList);
+        return listNotes(noteList);
     }
-    
+
     private String listNotes(NoteList noteList) {
         List<Note> notes = noteList.getNotes();
         if (notes.isEmpty()) {
             return MESSAGE_EMPTY_NOTE_LIST;
         }
         return CommandUtils.generateFormattedItemListResponse(notes);
-    }
-    
-    private String listTasks(TaskList taskList) {
-        List<Task> tasks = taskList.getTasks();
-        if (tasks.isEmpty()) {
-            return MESSAGE_EMPTY_TASK_LIST;
-        }
-        return CommandUtils.generateFormattedItemListResponse(tasks);
     }
 }

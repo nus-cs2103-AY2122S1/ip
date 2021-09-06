@@ -17,12 +17,12 @@ import org.junit.jupiter.api.Test;
 
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
-import kayu.note.NoteList;
+import kayu.service.NoteList;
+import kayu.service.TaskList;
 import kayu.storage.NoteStorage;
 import kayu.storage.TaskStorage;
 import kayu.task.Event;
 import kayu.task.Task;
-import kayu.task.TaskList;
 
 public class EventCommandTest {
 

@@ -4,6 +4,7 @@ import kayu.commands.ByeCommand;
 import kayu.commands.Command;
 import kayu.commands.DeadlineCommand;
 import kayu.commands.DeleteCommand;
+import kayu.commands.DeleteNoteCommand;
 import kayu.commands.DoneCommand;
 import kayu.commands.EmptyCommand;
 import kayu.commands.EventCommand;
@@ -11,6 +12,7 @@ import kayu.commands.FindCommand;
 import kayu.commands.HelpCommand;
 import kayu.commands.InvalidCommand;
 import kayu.commands.ListCommand;
+import kayu.commands.ListNotesCommand;
 import kayu.commands.NoteCommand;
 import kayu.commands.TodoCommand;
 
@@ -37,7 +39,10 @@ public class Parser {
                 
             case ListCommand.COMMAND_WORD:
                 return new ListCommand();
-            
+
+            case ListNotesCommand.COMMAND_WORD:
+                return new ListNotesCommand();
+                
             case HelpCommand.COMMAND_WORD:
                 return new HelpCommand();
                 
@@ -49,9 +54,17 @@ public class Parser {
                 params = inputs[1];
                 return new DeleteCommand(params);
                 
+            case DeleteNoteCommand.COMMAND_WORD:
+                params = inputs[1];
+                return new DeleteNoteCommand(params);
+                
             case FindCommand.COMMAND_WORD:
                 params = inputs[1];
                 return new FindCommand(params);
+                
+            case NoteCommand.COMMAND_WORD:
+                params = inputs[1];
+                return new NoteCommand(params);
                 
             case TodoCommand.COMMAND_WORD:
                 params = inputs[1];
@@ -65,10 +78,6 @@ public class Parser {
                 params = inputs[1];
                 return new DeadlineCommand(params);
                 
-            case NoteCommand.COMMAND_WORD:
-                params = inputs[1];
-                return new NoteCommand(params);
-                                
             default:
                 return (userInput.isBlank()) ? new EmptyCommand() : new InvalidCommand();
             }

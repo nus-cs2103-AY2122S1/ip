@@ -1,4 +1,4 @@
-package kayu.task;
+package kayu.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +8,10 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import kayu.exception.KayuException;
+import kayu.task.Task;
 
 /**
- * Manages tasks held by the {@link kayu.Kayu}.
+ * Manages {@link kayu.task.Task}s held by the {@link kayu.Kayu}.
  */
 public class TaskList {
 
@@ -33,11 +34,11 @@ public class TaskList {
     /**
      * Initializes the {@link #tasks} list with the specified {@link kayu.task.Task} list.
      *
-     * @param taskList List of {@link kayu.task.Task} to initialise {@link #tasks} with.
+     * @param tasks List of {@link kayu.task.Task} to initialise {@link #tasks} with.
      */
-    public void initializeTasks(List<Task> taskList) {
+    public void initializeTasks(List<Task> tasks) {
         this.tasks.clear();
-        this.tasks.addAll(taskList);
+        this.tasks.addAll(tasks);
     }
 
     /**

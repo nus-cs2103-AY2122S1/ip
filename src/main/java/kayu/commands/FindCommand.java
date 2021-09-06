@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
-import kayu.note.NoteList;
+import kayu.service.NoteList;
+import kayu.service.TaskList;
 import kayu.storage.NoteStorage;
 import kayu.storage.TaskStorage;
 import kayu.task.Task;
-import kayu.task.TaskList;
 
 /**
  * Represents a {@link kayu.commands.Command} that finds the relevant {@link kayu.task.Task}s
