@@ -128,8 +128,8 @@ public class Ui {
      *
      * @return A simple greeting.
      */
-    public String greet() {
-        return "Hello! I'm Duke\nWhat can I do for you?";
+    public String greetNewUser() {
+        return "No previous data found.\nLet's start a new To-Do List!\n\nHello! I'm Duke\nWhat can I do for you?";
     }
 
     /**
@@ -137,7 +137,7 @@ public class Ui {
      *
      * @return A greeting for existing user.
      */
-    public String greetExistingUser() {
-        return "Welcome back! :-)\nWhat can I do for you?";
+    public String greetExistingUser(TaskList taskList) {
+        return "Welcome back! :-)\nAs far as I can recall...\n" + displayListUi(taskList);
     }
 }

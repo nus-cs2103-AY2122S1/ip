@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -81,26 +82,32 @@ public class TaskList {
 
         assert taskType < 3 && taskType >= 0 : "TaskType is invalid!";
 
-        switch (taskType) {
-        case 0:
-            String tDescription = input[0];
+        try {
+            switch (taskType) {
+            case 0:
+                String tDescription = input[0];
 
-            task = new Todo(false, tDescription);
-            break;
-        case 1:
-            String dDescription = input[0];
-            String by = input[1];
+                task = new Todo(false, tDescription);
+                break;
+            case 1:
+                String dDescription = input[0];
+                String by = input[1];
 
-            task = new Deadline(false, dDescription, by);
-            break;
-        case 2:
-            String eDescription = input[0];
-            String at = input[1];
+                task = new Deadline(false, dDescription, by);
+                break;
+            case 2:
+                String eDescription = input[0];
+                String at = input[1];
 
-            task = new Event(false, eDescription, at);
-            break;
-        default:
-            throw new DukeException("Not a valid Task!!");
+                task = new Event(false, eDescription, at);
+                break;
+            default:
+                throw new DukeException("Not a valid Task!!");
+
+            }
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please follow this format when entering date and time:\n"
+                    + "DD/MM/YYYY 24-Hour Time Format" + " e.g. (01/01/2020 2359)");
         }
 
         taskList.add(task);
@@ -115,14 +122,7 @@ public class TaskList {
      * @throws DukeException Throw DukeException.
      */
     public Task done(int i) throws DukeException {
-        if (taskList.isEmpty()) {
-            throw new DukeException("You do not have any task. Please add a task first!");
-        }
-
-        if (i > taskList.size() || i < 1) {
-            throw new DukeException(String.format("Please enter a valid task number between 1 and %d!",
-                    taskList.size()));
-        }
+        checkForIndex(i);
 
         if (!taskList.get(i - 1).markAsDone()) {
             return null;
@@ -139,6 +139,18 @@ public class TaskList {
      * @throws DukeException Throw DukeException.
      */
     public Task delete(int i) throws DukeException {
+        checkForIndex(i);
+
+        return taskList.remove(i - 1);
+    }
+
+    /**
+     * Throws a `DukeException` is the index is invalid.
+     *
+     * @param i Index of the task.
+     * @throws DukeException Throw a DukeException is index is invalid.
+     */
+    public void checkForIndex(int i) throws DukeException {
         if (taskList.isEmpty()) {
             throw new DukeException("You do not have any task. Please add a task first!");
         }
@@ -147,8 +159,6 @@ public class TaskList {
             throw new DukeException(String.format("Please enter a valid task number between 1 and %d!",
                     taskList.size()));
         }
-
-        return taskList.remove(i - 1);
     }
 
 
