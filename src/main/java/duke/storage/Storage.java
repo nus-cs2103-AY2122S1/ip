@@ -19,7 +19,6 @@ import duke.task.Todo;
  * with regard to reading and writing from a file.
  */
 public class Storage {
-
     private final String filePath;
 
     /**
