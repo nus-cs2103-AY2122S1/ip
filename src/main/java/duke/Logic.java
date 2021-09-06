@@ -14,45 +14,45 @@ public class Logic {
      * @param command refers to the parsed string. See presentation for parsing
      * @throws InvalidCommandException is throwed when there is an invalid command in the form of a string
      */
-    public static String checkIfSpecialComand(String command) throws InvalidCommandException {
+    public static String checkIfSpecialComand(String command) {
         //duke.Logic to check each individual commands, checks for special commands first, then checks for other input
         //Use duke.Parser to package command into a packaged command
-        Command packagedCommand = Parser.parse(command);
-        ArrayList<String> listOfCommandInputs = packagedCommand.getListOfCommandInputs();
-        String loggedCommand = packagedCommand.getLog();
-        if (command.equals("")) {
-            throw new EmptyCommandException();
-        } else if (command.equals("bye")) {
-            Duke.stop();
-            DataHandlerLayer.updateHistory();
-            DataHandlerLayer.stopWriting();
-            return "See ya";
-        } else if (listOfCommandInputs.size() == 1 && listOfCommandInputs.get(0).equals("list")) {
-            return DataHandlerLayer.getLogAsString();
-        } else if (listOfCommandInputs.contains("delete")) {
-            int position = Integer.parseInt(listOfCommandInputs.get(listOfCommandInputs.indexOf("delete") + 1));
-            try {
+        try {
+            Command packagedCommand = Parser.parse(command);
+            ArrayList<String> listOfCommandInputs = packagedCommand.getListOfCommandInputs();
+            String loggedCommand = packagedCommand.getLog();
+            if (command.equals("")) {
+                throw new EmptyCommandException();
+            } else if (command.equals("bye")) {
+                Duke.stop();
+                DataHandlerLayer.updateHistory();
+                DataHandlerLayer.stopWriting();
+                return "See ya";
+            } else if (listOfCommandInputs.size() == 1 && listOfCommandInputs.get(0).equals("list")) {
+                return DataHandlerLayer.getLogAsString();
+            } else if (listOfCommandInputs.contains("delete")) {
+                int position = Integer.parseInt(listOfCommandInputs.get(listOfCommandInputs.indexOf("delete") + 1));
                 DataHandlerLayer.delete(position);
-            } catch (IndexOutOfBoundsException exception) {
-                throw new InvalidCommandException();
+                DataHandlerLayer.updateHistory();
+                return "Cancel culture is real, even in this world";
+            } else if (listOfCommandInputs.contains("done")) {
+                int pos = Integer.parseInt(listOfCommandInputs.get(1));
+                if (pos > Task.getNumberOfTask()) {
+                    throw new InvalidCommandException();
+                }
+                Task currentTask = DataHandlerLayer.getTask(pos - 1);
+                currentTask.completeTask();
+                DataHandlerLayer.updateHistory();
+                return "Ohhhh myyyy. I have been waiting for this quest to complete for ages.";
+            } else if (listOfCommandInputs.contains("find")) {
+                String temp = listOfCommandInputs.get(listOfCommandInputs.indexOf("find") + 1);
+                return DataHandlerLayer.filterLog(temp);
+            } else {
+                processTask(packagedCommand, true);
+                return loggedCommand;
             }
-            DataHandlerLayer.updateHistory();
-            return "Cancel culture is real, even in this world";
-        } else if (listOfCommandInputs.contains("done")) {
-            int pos = Integer.parseInt(listOfCommandInputs.get(1));
-            if (pos > Task.getNumberOfTask()) {
-                throw new InvalidCommandException();
-            }
-            Task currentTask = DataHandlerLayer.getTask(pos - 1);
-            currentTask.completeTask();
-            DataHandlerLayer.updateHistory();
-            return "Ohhhh myyyy. I have been waiting for this quest to complete for ages.";
-        } else if (listOfCommandInputs.contains("find")) {
-            String temp = listOfCommandInputs.get(listOfCommandInputs.indexOf("find") + 1);
-            return DataHandlerLayer.filterLog(temp);
-        } else {
-            processTask(packagedCommand, true);
-            return loggedCommand;
+        } catch (InvalidCommandException e) {
+            return e.getMessage();
         }
     }
 
@@ -125,9 +125,7 @@ public class Logic {
             }
             break;
         case NOTAPPLICABLE:
-
-            //For echoing commands
-            break;
+            throw new InvalidCommandException();
         default:
             System.out.println("Should never reach here");
         }

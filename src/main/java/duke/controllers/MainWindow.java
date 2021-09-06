@@ -57,19 +57,15 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = null;
-        try {
-            String temp = Logic.checkIfSpecialComand(input);
-            if (temp == null) {
-                response = "There are no task my dear summoner <3";
-            } else {
-                response = temp;
-            }
-        } catch (InvalidCommandException e) {
-            e.printStackTrace();
+        String temp = Logic.checkIfSpecialComand(input);
+        if (temp == null) {
+            response = "There are no task my dear summoner <3";
+        } else {
+            response = temp;
         }
         System.out.println(response);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
+            DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
