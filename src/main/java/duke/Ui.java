@@ -23,35 +23,46 @@ public class Ui {
     }
 
     /**
-     * Initialize the user interface.
+     * Initializes the user interface.
      *
      * @return Response as string.
      */
-    protected String initialize() {
+    public String initialize() {
         parser = new Parser(tasks);
         return WELCOME_MSG;
     }
 
-    protected String respond(String message) {
+    /**
+     * Responds to a user input.
+     *
+     * @param message User input.
+     * @return A message formatted as a string.
+     */
+    public String respond(String message) {
         try {
-            assert !message.isEmpty() : "message should not be empty";
-            storage.cache(message);
+            storage.writeCommand(message);
             return formatResponse(parser.parseCommand(message));
         } catch (DukeException e) {
             return e.getMessage();
         }
     }
 
-    protected static String formatResponse(String... messages) {
-        String response = "";
+    /**
+     * Formats a response into a single string.
+     *
+     * @param messages Strings to be formatted.
+     * @return A single string combining all messages.
+     */
+    private static String formatResponse(String... messages) {
+        StringBuilder response = new StringBuilder();
         for (int i = 0; i < messages.length; i++) {
             assert !messages[i].isEmpty() : "message should not be empty";
-            response += messages[i];
+            response.append(messages[i]);
             if (i < messages.length - 1) {
-                response += "\n";
+                response.append("\n");
             }
         }
-        return response;
+        return response.toString();
     }
 
     /**

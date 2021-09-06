@@ -29,59 +29,89 @@ public class Storage {
      */
     public TaskList load() throws DukeException {
         TaskList tasks = new TaskList();
-
-        // Check if cache already exists.
         if (cache.exists()) {
-            // If cache exists, scan for any previously cached tasks.
-            try {
-                Scanner scanner = new Scanner(cache);
-                boolean exit = false;
-                Parser parser = new Parser(tasks);
-                while (!exit) {
-                    try {
-                        if (scanner.hasNextLine()) {
-                            String nextInput = scanner.nextLine();
-                            parser.parseCommand(nextInput);
-                        } else {
-                            exit = true;
-                        }
-                    } catch (DukeException e) {
-                        // Skip previous invalid commands, continue adding tasks.
-                    }
-                }
-                scanner.close();
-            } catch (FileNotFoundException e) {
-                throw new DukeException("Could not load from cache.");
-            }
+            scanCacheIntoTasks(cache, tasks);
         } else {
-            // Otherwise, create the directory for the cache file if necessary.
-            File dir = cache.getParentFile();
-            assert dir != null : "dir should not be null";
-            if (!dir.exists()) {
-                if (!dir.mkdirs()) {
-                    throw new DukeException("Failed to crete required directory.");
-                }
-            }
-
-            // Create the cache file.
-            try {
-                if (!cache.createNewFile()) {
-                    throw new DukeException("Failed to crete required cache.");
-                }
-            } catch (IOException e) {
-                throw new DukeException("Failed to crete required cache.");
-            }
+            createCacheDirectory(cache);
+            createCacheFile(cache);
         }
         return tasks;
     }
 
     /**
-     * Adds a command to the cache.
+     * Scans and parses commands to edit a TaskList.
+     *
+     * @param scanner Source of commands.
+     * @param tasks TaskList to be edited.
+     */
+    private void scanIntoTasks(Scanner scanner, TaskList tasks) {
+        Parser parser = new Parser(tasks);
+        while (scanner.hasNextLine()) {
+            try {
+                String nextInput = scanner.nextLine();
+                parser.parseCommand(nextInput);
+            } catch (DukeException e) {
+                // Skip invalid statements, continue adding tasks.
+                // Bad commands from previous caches are not relevant to the user.
+            }
+        }
+    }
+
+    /**
+     * Scan and parse commands from cache to edit a TaskList.
+     *
+     * @param cache File containing previous commands.
+     * @param tasks TaskList to be edited.
+     * @throws DukeException if scanner fails to load from cache.
+     */
+    private void scanCacheIntoTasks(File cache, TaskList tasks) throws DukeException {
+        try {
+            Scanner scanner = new Scanner(cache);
+            scanIntoTasks(scanner, tasks);
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            throw new DukeException("Could not load from cache.");
+        }
+    }
+
+    /**
+     * Creates a directory for the cache, if it doesn't yet exist.
+     *
+     * @param cache Path where cache will be stored.
+     * @throws DukeException if directory cannot be created.
+     */
+    private void createCacheDirectory(File cache) throws DukeException {
+        File dir = cache.getParentFile();
+        if (!dir.exists() && !dir.mkdirs()) {
+            throw new DukeException("Failed to create required directory.");
+        }
+        assert dir.exists() : "Directory for cache should exist after creation.";
+    }
+
+    /**
+     * Create the file for the cache.
+     *
+     * @param cache Path where cache will be stored.
+     * @throws DukeException if cache file cannot be created.
+     */
+    private void createCacheFile(File cache) throws DukeException {
+        try {
+            if (!cache.createNewFile()) {
+                throw new DukeException("Failed to create required cache.");
+            }
+        } catch (IOException e) {
+            throw new DukeException("Failed to create required cache.");
+        }
+        assert cache.exists() : "Cache file should exist after creation.";
+    }
+
+    /**
+     * Write a command to the cache.
      *
      * @param command String representation of a command.
-     * @throws DukeException Thrown if FileWriter fails to append to cache.
+     * @throws DukeException if FileWriter fails to append to cache.
      */
-    public void cache(String command) throws DukeException {
+    public void writeCommand(String command) throws DukeException {
         try {
             FileWriter fw = new FileWriter(cache, true);
             fw.write(command + "\n");

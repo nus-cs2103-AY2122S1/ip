@@ -5,8 +5,6 @@ package duke;
  */
 public class Duke {
     private final String filePath;
-    private Storage storage;
-    private TaskList tasks;
     private Ui ui;
 
     /**
@@ -25,12 +23,10 @@ public class Duke {
      */
     public String initialize() {
         try {
-            storage = new Storage(filePath);
-            tasks = storage.load();
+            Storage storage = new Storage(filePath);
+            TaskList tasks = storage.load();
             ui = new Ui(tasks, storage);
-            assert storage != null : "storage should not be null";
-            assert tasks != null : "tasks should not be null";
-            assert ui != null : "ui should not be null";
+            // Return the response from the ui initialization.
             return ui.initialize();
         } catch (DukeException e) {
             return e.getMessage();
@@ -47,6 +43,6 @@ public class Duke {
     public String getResponse(String message) {
         String response = ui.respond(message);
         assert !response.isEmpty() : "response should not be empty";
-        return ui.respond(message);
+        return response;
     }
 }
