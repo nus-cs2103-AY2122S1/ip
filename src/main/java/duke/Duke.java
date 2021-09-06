@@ -1,9 +1,9 @@
 package duke;
+import java.io.IOException;
 
 import duke.command.Command;
 import duke.task.TaskList;
 
-import java.io.IOException;
 
 /**
  * Main Duke class.

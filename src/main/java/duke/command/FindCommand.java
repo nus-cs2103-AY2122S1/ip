@@ -9,7 +9,7 @@ import duke.task.TaskList;
  * Command to signal the system to search for given keyword.
  */
 public class FindCommand extends Command {
-    String keyword;
+    private String keyword;
 
     /**
      * Constructor for FindCommand.

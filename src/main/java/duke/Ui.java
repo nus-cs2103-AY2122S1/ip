@@ -1,10 +1,10 @@
 package duke;
+import java.util.Scanner;
 
+import duke.task.Find;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.Find;
 
-import java.util.Scanner;
 
 /**
  * Class that encapsulates the Ui in Duke.

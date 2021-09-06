@@ -4,7 +4,7 @@ import duke.Ui;
 /**
  * Class that encapsulates Tasks.
  */
-abstract public class Task {
+public class Task {
     protected String description;
     protected boolean isDone;
     protected Ui ui = new Ui();

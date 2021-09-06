@@ -1,9 +1,10 @@
 package duke.command;
-import duke.Ui;
-import duke.Storage;
 import duke.DukeException;
-import duke.task.TaskList;
+import duke.Storage;
+import duke.Ui;
 import duke.task.Deadline;
+import duke.task.TaskList;
+
 
 /**
  * Command to create Deadline tasks.

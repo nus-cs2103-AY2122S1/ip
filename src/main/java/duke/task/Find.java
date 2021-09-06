@@ -6,11 +6,11 @@ import duke.Ui;
  * Class that encapsulates searches for keywords among current Tasks.
  */
 public class Find {
-    boolean isFound;
-    String word;
-    TaskList ls;
-    String result;
-    Ui ui = new Ui();
+    private boolean isFound;
+    private String word;
+    private TaskList ls;
+    private String result;
+    private Ui ui = new Ui();
 
     /**
      * Constructor for Find.

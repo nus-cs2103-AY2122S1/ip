@@ -1,9 +1,9 @@
 package duke.command;
-import duke.Ui;
-import duke.Storage;
 import duke.DukeException;
-import duke.task.TaskList;
+import duke.Storage;
+import duke.Ui;
 import duke.task.Event;
+import duke.task.TaskList;
 
 /**
  * Command to create Event tasks.
