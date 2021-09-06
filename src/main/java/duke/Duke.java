@@ -61,8 +61,9 @@ public class Duke {
             }
             break;
         default:
-            throw new DukeException("Invalid task. Please check that your input is correct");
+            throw new DukeException("Invalid command. Please check that your input is correct");
         }
+        assert newTask != null;
         this.taskList.addTask(newTask);
         this.storage.write(this.taskList);
         return this.ui.showAddMessage(newTask, this.taskList);
@@ -84,7 +85,7 @@ public class Duke {
      * @param itemNum Position of duke.Task in the list.
      */
     public String markDone(int itemNum) {
-        this.taskList.markDone(itemNum);
+        this.taskList.markDone(itemNum - 1);
         this.storage.write(this.taskList);
         return this.ui.showMarkDoneMessage(this.getTaskByIndex(itemNum - 1));
     }
@@ -101,6 +102,7 @@ public class Duke {
         } else {
             int itemNum = Integer.parseInt(items[1]);
             Task toBeDeleted = this.getTaskByIndex(itemNum - 1);
+            assert toBeDeleted != null;
             this.taskList.deleteTask(itemNum - 1);
             this.storage.write(this.taskList);
             return this.ui.showDeleteMessage(toBeDeleted, this.taskList);
