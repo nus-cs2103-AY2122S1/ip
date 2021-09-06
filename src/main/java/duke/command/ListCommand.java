@@ -19,7 +19,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskHandler taskHandler, Storage storage, Ui ui) {
-        return taskHandler.printTasks();
+        return taskHandler.generateList();
     }
 
     /**

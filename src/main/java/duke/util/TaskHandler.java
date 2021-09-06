@@ -30,7 +30,7 @@ public class TaskHandler {
     private final ArrayList<Task> taskList;
 
     /**
-     * Constructor for TaskHandler
+     * Constructor for TaskHandler.
      *
      * @param taskList List of tasks.
      */
@@ -47,15 +47,15 @@ public class TaskHandler {
      */
     public String addTask(Task task) {
         taskList.add(task);
-        return String.format(TASK_ADDED_MESSAGE, task.toString(), getTotalTasksCount());
+        return String.format(TASK_ADDED_MESSAGE, task.toString(), getNumUndone());
     }
 
     /**
-     * Gets the number of incomplete tasks.
+     * Gets the number of undone tasks.
      *
-     * @return The number of incomplete tasks.
+     * @return The number of undone tasks.
      */
-    private int getUndoneTasksCount() {
+    private int getNumUndone() {
         int count = 0;
         for (Task task : taskList) {
             if (!task.isComplete()) {
@@ -70,7 +70,7 @@ public class TaskHandler {
      *
      * @return The total number of tasks.
      */
-    private int getTotalTasksCount() {
+    private int getNumTotal() {
         return taskList.size();
     }
 
@@ -92,11 +92,11 @@ public class TaskHandler {
         Task t = taskList.get(index);
         t.markAsDone();
         updateData();
-        return String.format(TASK_DONE_MESSAGE, t, getUndoneTasksCount());
+        return String.format(TASK_DONE_MESSAGE, t, getNumUndone());
     }
 
     /**
-     * Deletes tasks at indexes specified by user.
+     * Deletes tasks at index specified by user.
      *
      * @param taskNumber The index of the task to be deleted.
      * @throws DukeIoException For invalid task indexes given by the user.
@@ -112,7 +112,7 @@ public class TaskHandler {
         int index = taskNumber - 1;
         Task t = taskList.remove(index);
         updateData();
-        return String.format(TASK_DELETED_MESSAGE, t, getTotalTasksCount());
+        return String.format(TASK_DELETED_MESSAGE, t, getNumTotal());
     }
 
     /**
@@ -123,11 +123,11 @@ public class TaskHandler {
     }
 
     /**
-     * Returns the entire task list.
+     * Generates the entire task list.
      *
      * @return String representation of the task list.
      */
-    public String printTasks() {
+    public String generateList() {
         StringBuilder allTasks = new StringBuilder(TASK_LIST);
         if (taskList.size() == 0) {
             return NO_TASKS_FOUND;
@@ -142,13 +142,12 @@ public class TaskHandler {
     }
 
     /**
-     * Filters task list with the keyword specified by user
-     * and returns it.
+     * Filters task list with specific keyword and generates it.
      *
-     * @param keyword Keyword to filter task list with.
+     * @param keyword Keyword specified by user.
      * @return String representation of filtered list.
      */
-    public String filterListByKeyword(String keyword) {
+    public String generateFilteredList(String keyword) {
         StringBuilder matchingTasks = new StringBuilder(MATCHING_TASK_LIST);
         if (taskList.size() == 0) {
             return NO_TASKS_FOUND;
