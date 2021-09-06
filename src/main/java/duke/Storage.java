@@ -48,7 +48,6 @@ public class Storage {
         try {
             FileWriter writer = new FileWriter(file);
             for (int i = 0; i < list.getSize(); i++) {
-                int num = i + 1;
                 writer.write(list.get(i).toString() + "\n");
             }
             writer.close();
