@@ -37,22 +37,20 @@ public class Storage {
      * @throws DukeException Exception thrown when taskList cannot be loaded.
      */
     public ArrayList<Task> loadTaskList() throws DukeException {
-        File f;
-        Scanner sc;
         try {
-            f = new File(filePath);
+            File f = new File(filePath);
             if (!f.getParentFile().exists()) {
-                f.getParentFile().mkdir();
+                boolean hasDir = f.getParentFile().mkdir();
+                assert hasDir == true : "hasDir should be true";
             }
             if (!f.exists()) {
                 f.createNewFile();
             }
-            sc = new Scanner(f);
 
+            Scanner sc = new Scanner(f);
             int n = sc.nextInt();
-            //        System.out.println("total number of tasks loaded from file = " + n);
-
             ArrayList<Task> result = new ArrayList<>();
+
             for (int i = 0; i < n; i++) {
                 int type = sc.nextInt();
                 int isDone = sc.nextInt();
@@ -61,8 +59,9 @@ public class Storage {
                 String taskDate = sc.nextLine();
                 String taskTime = sc.nextLine();
 
-                //            System.out.println(String.format("[%d %d [%s] [%s]]", type, isDone, taskName, taskDate));
-                Task newTask;
+                assert (type == 0 || type == 1 || type == 2) : "Variable type should be 0 or 1 or 2";
+
+                Task newTask = null;
                 if (type == 1) {
                     newTask = new Todo(taskName);
                 } else if (type == 2) {
@@ -72,7 +71,7 @@ public class Storage {
                         time = LocalTime.parse(taskTime, DateTimeFormatter.ofPattern("HHmm"));
                     }
                     newTask = new Deadline(taskName, date, time);
-                } else {
+                } else if (type == 3) {
                     LocalDate date = LocalDate.parse(taskDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
                     LocalTime time = null;
                     if (!taskTime.equals("null")) {
@@ -82,6 +81,7 @@ public class Storage {
                 }
 
                 if (isDone == 1) {
+                    assert (newTask instanceof Task) : "newTask should be initialized";
                     newTask.markAsDone();
                 }
 
