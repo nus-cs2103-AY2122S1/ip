@@ -205,8 +205,8 @@ public class Storage {
     }
 
     /**
-     *
-     * @param datetime
+     * Change the datetime of the task specified by taskIndex in the data file.
+     * @param datetime Date and time to change to
      */
     public void modifyDateTimeData(String datetime, int taskIndex) {
         File fileToBeModified = new File(filePath.concat(fileName));
@@ -241,10 +241,10 @@ public class Storage {
     }
 
     /**
-     *
-     * @param nextLine
-     * @param datetime
-     * @return
+     * Change the date and time of the String representation of a Task in the data file.
+     * @param nextLine String representation of Task
+     * @param datetime Date and time to change to
+     * @return String representation of Task with datetime modified
      */
     private String modifyTaskStringDateTime(String nextLine, String datetime) {
         String[] strArr = nextLine.split(",");
