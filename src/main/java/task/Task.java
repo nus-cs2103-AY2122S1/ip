@@ -44,7 +44,11 @@ public class Task {
      * @return A String enumerating this Task object.
      */
     public String getTaskState() {
-        return this.isDone ? "[X] " + this.task : "[ ] " + this.task;
+        if (this.isDone) {
+            return "[X] " + this.task;
+        } else {
+            return "[ ] " + this.task;
+        }
     }
 
     /**
@@ -54,6 +58,15 @@ public class Task {
      */
     public String getTask() {
         return this.task;
+    }
+
+    /**
+     * Returns the type of this Task object.
+     *
+     * @return A String corresponding to the type of this Task object.
+     */
+    public String getTaskType() {
+        return "task";
     }
 
     /**

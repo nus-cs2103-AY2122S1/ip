@@ -34,18 +34,20 @@ public class EventCommand extends Command {
     public String execute(TaskList list, UserInterface ui) throws DukeException {
 
         int position = input.indexOf("/at");
-        String newTask = input.substring(6, position - 1);
+        String newEvent = input.substring(6, position - 1);
         String newTime = input.substring(position + 4);
-        if (newTask.length() == 0) {
+
+        if (newEvent.length() == 0) {
             throw new DukeException("The description of an event cannot be empty. Please try again!");
         } else if (newTime.length() == 0) {
             throw new DukeException("The date of an event cannot be empty. Please try again!");
         } else {
             try {
                 LocalDateTime time = LocalDateTime.parse(newTime.trim(), inputFormatter);
-                list.addTask(new EventTask(newTask, time));
+                EventTask newTask = new EventTask(newEvent, time);
+                list.addTask(newTask);
                 Storage.save(list);
-                return ui.showTaskAdded(newTask, 3, list.getSize() - 1, newTime.trim());
+                return ui.showTaskAdded(newTask, list.getSize() - 1);
             } catch (DateTimeParseException e) {
                 throw new DukeException(
                         "Your time format is wrong. Please enter the time in the format DD/MM/YYYY HHMM and try again!");

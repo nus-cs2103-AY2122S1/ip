@@ -30,13 +30,15 @@ public class TodoCommand extends Command {
      */
     public String execute(TaskList list, UserInterface ui) throws DukeException {
 
-        String newTask = input.substring(5);
-        if (newTask.length() == 0) {
+        String newTodo = input.substring(5).trim();
+
+        if (newTodo.length() == 0) {
             throw new DukeException("The description of a todo cannot be empty. Please try again!");
         } else {
-            list.addTask(new TodoTask(newTask));
+            TodoTask newTask = new TodoTask(newTodo);
+            list.addTask(newTask);
             Storage.save(list);
-            return ui.showTaskAdded(newTask, 1, list.getSize() - 1, "");
+            return ui.showTaskAdded(newTask, list.getSize() - 1);
         }
     }
 }
