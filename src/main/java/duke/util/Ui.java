@@ -26,10 +26,7 @@ public class Ui {
         sc.close();
         bye();
     }
-
-//    public String showLine() {
-//        return "-----------------------------------------";
-//    }
+    
 
     public static String greet() {
         return "Hiiii~ I'm Duke! Just so you know I'm not a real human...\n" +

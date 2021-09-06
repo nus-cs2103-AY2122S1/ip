@@ -13,10 +13,6 @@ import java.util.List;
 public class TaskList {
     private List<Task> list;
 
-    public TaskList() {
-        this.list = new ArrayList<>();
-    }
-
     /**
      * Constructor method of TaskList.
      *
@@ -131,7 +127,6 @@ public class TaskList {
         }
         return outputs;
     }
-
 }
 
 
