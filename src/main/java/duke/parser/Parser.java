@@ -8,6 +8,7 @@ import duke.command.Command;
 import duke.command.EditCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.constant.EditType;
 import duke.constant.TaskType;
@@ -27,7 +28,7 @@ public class Parser {
     private static final String NO_COMMAND_ERROR_MESSAGE = "Please tell Duke what to do.";
 
     private static final String INVALID_COMMAND_ERROR_MESSAGE = "Invalid command. List of valid commands include:\n"
-            + "list | todo | deadline | event | done | delete | find | bye";
+            + "help | list | todo | deadline | event | done | delete | find | bye";
 
     /**
      * Parses a list of strings representing the contents of a save file and
@@ -87,6 +88,8 @@ public class Parser {
             return new EditCommand(EditType.DELETE, userInput);
         } else if (userInput.startsWith("find")) {
             return new FindCommand(userInput);
+        } else if (userInput.startsWith("help")) {
+            return new HelpCommand(userInput);
         } else {
             throw new DukeException(INVALID_COMMAND_ERROR_MESSAGE);
         }
