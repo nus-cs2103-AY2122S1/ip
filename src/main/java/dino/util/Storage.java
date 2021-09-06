@@ -98,7 +98,6 @@ public class Storage {
         } catch (FileNotFoundException | DinoException | DateTimeParseException e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("in load storage: " + taskList.size());
         return taskList;
     }
 

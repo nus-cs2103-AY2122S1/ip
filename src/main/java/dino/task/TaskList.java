@@ -89,28 +89,30 @@ public class TaskList {
     }
 
     /**
-     * Prints out the task(s) that contains the input keyword in description
+     * Prints out the task(s) that contains the input keyword(s) in description
      *
-     * @param keyword the keyword for searching tasks
-     * @return the list of task that contains the keyword
+     * @param keyword a list of keywords for searching tasks
+     * @return the list of task that contains the keyword(s)
      * @throws TaskNotFoundException if there's no task in the task list that
-     * matches the given keyword
+     * matches the given keyword(s)
      */
-    public String searchKeyword(String keyword) throws TaskNotFoundException {
+    public String searchKeyword(String ...keyword) throws TaskNotFoundException {
         List<Task> matchingTasks = new ArrayList<>();
         for (Task task: taskList) {
-            if (task.getDescription().contains(keyword)) {
-                matchingTasks.add(task);
+            for (int i = 0; i < keyword.length; i++) {
+                if (task.getDescription().contains(keyword[i])) {
+                    matchingTasks.add(task);
+                }
             }
         }
         if (matchingTasks.isEmpty()) {
-            throw new TaskNotFoundException(keyword);
+            throw new TaskNotFoundException();
         } else {
             String list = "";
             for (int i = 0; i < matchingTasks.size(); i++) {
-                list += (i + 1) + ". " + matchingTasks.get(i);
+                list += (i + 1) + ". " + matchingTasks.get(i) + "\n";
             }
-            return "Here are the matching tasks in your list:" + list;
+            return "Here are the matching tasks in your list:\n" + list;
         }
     }
 

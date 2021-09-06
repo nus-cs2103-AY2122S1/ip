@@ -24,7 +24,6 @@ public class Dino {
     public Dino() {
         this.storage = new Storage("data/dino.txt");
         this.taskList = new TaskList(this.storage.loadStorage());
-        System.out.println("dino " + taskList.getTaskList().size());
         this.ui = new Ui();
     }
 

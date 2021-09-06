@@ -38,13 +38,13 @@ public class FindCommand extends Command {
      * @return the keyword that is extracted from the find command
      * @throws InvalidInputException
      */
-    public String getKeyword() throws InvalidInputException {
+    public String[] getKeyword() throws InvalidInputException {
         if (this.cmdString.length() < 6) {
             throw new InvalidInputException();
         }
         if (this.cmdString.substring(5).trim().length() == 0) {
             throw new InvalidInputException();
         }
-        return this.cmdString.substring(5).trim();
+        return this.cmdString.substring(5).split(", ");
     }
 }
