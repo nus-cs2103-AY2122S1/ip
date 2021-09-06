@@ -1,28 +1,26 @@
 package duke;
 
+import java.io.File;
+import java.util.ArrayList;
+
 import duke.command.Command;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.ui.DialogBox;
 import duke.ui.Ui;
-
-
-import java.io.File;
-import java.util.ArrayList;
-
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
@@ -46,6 +44,9 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/elsa.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/olaf.png"));
 
+    /**
+     * constructor for Duke object.
+     */
     public Duke() {
         storage = new Storage(filePath);
         try {

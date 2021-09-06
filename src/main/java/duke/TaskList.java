@@ -1,8 +1,12 @@
 package duke;
 
-import duke.tasks.*;
-
 import java.util.ArrayList;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+import duke.tasks.taskType;
 
 /**
  * A TaskList class encapsulates the list of tasks.

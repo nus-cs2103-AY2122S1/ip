@@ -28,7 +28,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns the file's details in the format "T,<isDone>,<desc>"
+     * Returns the file's details in the format T,<isDone>,<desc>
      * to be stored in the hard disk.
      *
      * @return formatted string containing task details

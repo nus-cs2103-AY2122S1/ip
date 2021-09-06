@@ -7,14 +7,20 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Circle;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
+
 
 public class DialogBox extends HBox {
 
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * dialog box to display user input and Duke's responses
+     * @param l the duke response or user input
+     * @param iv avatar of user or duke
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
@@ -34,7 +40,9 @@ public class DialogBox extends HBox {
         this.setMargin(iv, new Insets(5));
         this.setMargin(l, new Insets(5));
         this.getChildren().addAll(text, displayPicture);
-        this.setStyle("-fx-background-radius: 20px, 20px, 20px, 20px;" + "-fx-background-color: #ffffff;" + "-fx-margin: 20px;");
+        this.setStyle("-fx-background-radius: 20px, 20px, 20px, 20px;"
+                + "-fx-background-color: #ffffff;"
+                + "-fx-margin: 20px;");
     }
 
     private void flip() {
@@ -44,7 +52,9 @@ public class DialogBox extends HBox {
 
         //styles
         this.setAlignment(Pos.CENTER_LEFT);
-        this.setStyle("-fx-background-radius: 20px, 20px, 20px, 20px;" + "-fx-background-color: #e6e6fa;" + "-fx-margin: 20px;");
+        this.setStyle("-fx-background-radius: 20px, 20px, 20px, 20px;"
+                + "-fx-background-color: #e6e6fa;"
+                + "-fx-margin: 20px;");
     }
 
     public static DialogBox getUserDialog(Label l, ImageView iv) {

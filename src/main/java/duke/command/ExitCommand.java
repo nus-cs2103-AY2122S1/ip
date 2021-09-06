@@ -20,7 +20,7 @@ public class ExitCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public String execute(TaskList taskList){
+    public String execute(TaskList taskList) {
         return Ui.showExitMessage();
     }
 

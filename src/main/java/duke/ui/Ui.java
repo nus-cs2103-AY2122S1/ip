@@ -1,10 +1,10 @@
 package duke.ui;
 
-import duke.DukeException;
-import duke.tasks.Task;
-import duke.TaskList;
-
 import java.util.ArrayList;
+
+import duke.DukeException;
+import duke.TaskList;
+import duke.tasks.Task;
 
 /**
  * Text UI of the application.

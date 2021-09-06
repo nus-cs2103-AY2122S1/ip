@@ -17,7 +17,8 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
-        /** task marked as incomplete by default. */
+
+        /* task marked as incomplete by default.*/
         this.isDone = false;
     }
 

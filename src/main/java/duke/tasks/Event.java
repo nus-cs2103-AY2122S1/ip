@@ -6,8 +6,8 @@ package duke.tasks;
  *
  * @author Lethicia
  */
-public class Event extends Task{
-    /** date/time of the event. */
+public class Event extends Task {
+    /* date/time of the event. */
     protected String at;
 
     /**

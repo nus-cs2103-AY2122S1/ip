@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.DukeException;
 import duke.TaskList;
-import duke.ui.Ui;
 import duke.tasks.taskType;
+import duke.ui.Ui;
 
 /**
  * A DeadlineCommand class encapsulates the instructions for Duke to add a Deadline Task

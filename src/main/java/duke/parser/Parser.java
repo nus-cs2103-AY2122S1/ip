@@ -1,10 +1,18 @@
 package duke.parser;
 
-import duke.DukeException;
-import duke.command.*;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import duke.DukeException;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.ToDoCommand;
 
 /**
  * Parses user input.

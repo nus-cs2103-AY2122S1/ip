@@ -9,8 +9,8 @@ import java.time.format.DateTimeParseException;
  *
  * @author Lethicia
  */
-public class Deadline extends Task{
-    /** date/time by which task must be done. */
+public class Deadline extends Task {
+    /* date/time by which task must be done. */
     protected LocalDate by;
 
     /**

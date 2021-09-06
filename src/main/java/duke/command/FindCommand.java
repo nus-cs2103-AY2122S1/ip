@@ -1,16 +1,19 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.DukeException;
 import duke.TaskList;
 import duke.tasks.Task;
-import duke.tasks.taskType;
 import duke.ui.Ui;
 
-import java.util.ArrayList;
-
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     private String keyword;
 
+    /**
+     * constructor for a FindCommand
+     * @param keyword keyword for the search
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
 
