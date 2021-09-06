@@ -3,8 +3,6 @@ package duke.command;
 import duke.task.Task;
 import duke.util.ToDoList;
 
-import java.util.ArrayList;
-
 /**
  * FindCommand is a Command that encapsulates the attributes and behavior of looking for a Task
  * in the ToDoList
