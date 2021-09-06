@@ -11,6 +11,9 @@ public class FindCommand extends Command {
     }
 
     public String execute(TaskList tasks, Storage storage) {
+
+        assert userArgument != null;
+
         TaskList searchedTasks = tasks.searchTasks(userArgument);
         if (searchedTasks.isEmpty()) {
             return "No matching tasks.";

@@ -13,6 +13,9 @@ public class DoneCommand extends Command {
     }
 
     public String execute(TaskList tasks, Storage storage) throws DukeException {
+
+        assert userArgument != null;
+
         int done = Utils.getInputNumber(userArgument);
 
         if (done >= tasks.numberOfTasks() || done < 0) {
