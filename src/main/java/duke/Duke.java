@@ -1,5 +1,9 @@
 package duke;
 
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.IntStream;

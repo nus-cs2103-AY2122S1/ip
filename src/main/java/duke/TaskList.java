@@ -1,5 +1,7 @@
 package duke;
 
+import duke.tasks.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
