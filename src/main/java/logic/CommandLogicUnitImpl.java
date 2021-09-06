@@ -25,6 +25,7 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
     
     /**
      * Constructor of CommandLogicUnitImpl that processes all the available commands.
+     * This will also starts the reminder tasks.
      *
      * @param taskDao TaskDao.
      */
@@ -51,7 +52,7 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
                     argument.getDescription(),
                     argument.getTiming()
             );
-        
+            
             processAdd(deadline);
             break;
         case EVENT:
@@ -59,7 +60,7 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
                     argument.getDescription(),
                     argument.getTiming()
             );
-        
+            
             processAdd(event);
             break;
         case TODOS:
@@ -69,13 +70,13 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
         case DONE:
             Integer doneIndex = argument.getIndex();
             assert doneIndex != null;
-        
+            
             processDone(doneIndex);
             break;
         case DELETE:
             Integer deleteIndex = argument.getIndex();
             assert deleteIndex != null;
-        
+            
             processDelete(deleteIndex);
             break;
         case FIND:
@@ -133,7 +134,7 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
      */
     private void processDelete(int index) {
         Task deletedTask = taskDao.deleteTask(index);
-    
+        
         ui.printSentence(" Noted. I've removed this task: \n"
                 + "\t" + deletedTask.toString() + "\n"
                 + " Now you have " + taskDao.getSize() + " tasks in the list.");

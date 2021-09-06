@@ -7,9 +7,9 @@
 <?import javafx.scene.text.Font?>
 <fx:root alignment="TOP_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="75" prefWidth="400.0" style="-fx-padding: 0 10 10 10;"
          type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
-    <Label fx:id="dialog" style="-fx-padding: 0 10 0 10;" text="Label" wrapText="true">
+    <Label fx:id="dialog" minHeight="-Infinity" style="-fx-padding: 0 10 0 10;" text="Label" wrapText="true">
         <font>
-            <Font name="System Bold" size="9.0"/>
+            <Font name="System Bold" size="12.5"/>
         </font>
     </Label>
     <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true"/>
