@@ -9,6 +9,10 @@ build/
 build/.gradle
 src/main/resources/docs/
 
+# Test files
+src/test/resource/taskList1.txt
+src/test/resource/taskList2.txt
+
 # Javafx library
 javafx/
 

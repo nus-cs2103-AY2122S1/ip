@@ -23,6 +23,10 @@ public class ExecutionUnit {
     private TaskList taskList = new TaskList();
     private final String storagePath;
 
+    /**
+     * Creations an <code>ExecutionUnit</code> responsible for logic flow of BobCat. All user queries should be
+     * directed to <code>ExecutionUnit</code>
+     */
     public ExecutionUnit(String storagePath) {
         this.storagePath = storagePath;
         assert !Objects.equals(storagePath, null) && !Objects.equals(storagePath, "");
