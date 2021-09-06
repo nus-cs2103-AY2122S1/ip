@@ -10,7 +10,6 @@ import duke.task.Task;
 import duke.task.Todo;
 
 
-
 /**
  * A parser to parse Duke commands.
  */
@@ -55,6 +54,7 @@ public class Parser {
         case "todo":
             String[] todoDetails = command.split(" ", 2);
             assert todoDetails.length == 2 : "Invalid todo format";
+
             String todoDescription;
             try {
                 todoDescription = todoDetails[1];
@@ -63,10 +63,12 @@ public class Parser {
                 String message = "☹ OOPS!!! The description of a todo cannot be empty.";
                 throw new DukeException(message);
             }
+
             return new Todo(todoDescription);
         case "event":
             String[] eventDetails = command.split(" /at ");
             assert eventDetails.length == 2 : "Invalid event format";
+
             LocalDate at;
             try {
                 at = this.stringToLocalDate(eventDetails[1]);
@@ -75,6 +77,7 @@ public class Parser {
                 String message = "☹ OOPS!!! The time of an event cannot be empty.";
                 throw new DukeException(message);
             }
+
             String eventDescription;
             try {
                 eventDescription = eventDetails[0].split("event ")[1];
@@ -83,10 +86,12 @@ public class Parser {
                 String message = "☹ OOPS!!! The description of an event cannot be empty.";
                 throw new DukeException(message);
             }
+
             return new Event(eventDescription, at);
         case "deadline":
             String[] deadlineDetails = command.split(" /by ");
             assert deadlineDetails.length == 2 : "Invalid deadline format";
+
             LocalDate by;
             try {
                 by = this.stringToLocalDate(deadlineDetails[1]);
@@ -95,6 +100,7 @@ public class Parser {
                 String message = "☹ OOPS!!! The time of a deadline cannot be empty.";
                 throw new DukeException(message);
             }
+
             String deadlineDescription;
             try {
                 deadlineDescription = deadlineDetails[0].split("deadline ")[1];
@@ -103,6 +109,7 @@ public class Parser {
                 String message = "☹ OOPS!!! The description of a deadline cannot be empty.";
                 throw new DukeException(message);
             }
+
             return new Deadline(deadlineDescription, by);
         default:
             throw new DukeException("Invalid action. Task cannot be parsed from the command.");

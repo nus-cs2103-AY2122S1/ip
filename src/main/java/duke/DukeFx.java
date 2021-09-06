@@ -170,27 +170,27 @@ public class DukeFx extends Application {
             } catch (DukeException e) {
                 return e.getMessage();
             }
-        } else {
-            switch (parser.getCommandAction(input)) {
-            case "list":
-                // view list
-                return tasks.toString();
-            case "done":
-                return done(input);
-            case "todo":
-                return todo(input);
-            case "event":
-                return event(input);
-            case "deadline":
-                return deadline(input);
-            case "delete":
-                return delete(input);
-            case "find":
-                return find(input);
-            default:
-                // Message for unrecognised task type
-                return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-            }
+        }
+
+        switch (parser.getCommandAction(input)) {
+        case "list":
+            // view list
+            return tasks.toString();
+        case "done":
+            return done(input);
+        case "todo":
+            return todo(input);
+        case "event":
+            return event(input);
+        case "deadline":
+            return deadline(input);
+        case "delete":
+            return delete(input);
+        case "find":
+            return find(input);
+        default:
+            // Message for unrecognised task type
+            return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
     }
 
@@ -254,20 +254,23 @@ public class DukeFx extends Application {
      */
     private String event(String input) {
         Task event;
+
         try {
             event = parser.commandToTask(input);
         } catch (DukeException e) {
             return e.getMessage();
         }
+
         tasks.add(event);
+
         try {
             storage.writeTasksToData(tasks);
         } catch (DukeException e) {
             return e.getMessage();
         }
+
         return "Got it. I've added this task:\n\t" + event
                 + "\nNow you have " + tasks.size() + " tasks in the list.";
-
     }
 
     /**
@@ -278,17 +281,21 @@ public class DukeFx extends Application {
      */
     private String deadline(String input) {
         Task deadline;
+
         try {
             deadline = parser.commandToTask(input);
         } catch (DukeException e) {
             return e.getMessage();
         }
+
         tasks.add(deadline);
+
         try {
             storage.writeTasksToData(tasks);
         } catch (DukeException e) {
             return e.getMessage();
         }
+
         return "Got it. I've added this task:\n\t" + deadline
                 + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
