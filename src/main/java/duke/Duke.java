@@ -151,7 +151,7 @@ public class Duke {
      * Designates the job to the appropriate handler based on the duke command and args
      * and returns a string of the return message from Duke for that particular input.
      *
-     * @param command the Duke command read by the parser.
+     * @param command     the Duke command read by the parser.
      * @param argsLiteral the arguments read by the parser.
      * @return a string of Duke's return message for that particular command.
      */
@@ -204,8 +204,8 @@ public class Duke {
     public String getIntroduction() {
         String introduction = "";
         if (taskList.isEmpty()) {
-            introduction += "Error while loading previous task list. A new task list will be created for this session" +
-                    ".\n";
+            introduction += "Error while loading previous task list. A new task list will be created for this session"
+                    + ".\n";
         }
 
         if (storage.isEmpty()) {
