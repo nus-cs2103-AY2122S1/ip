@@ -40,6 +40,6 @@ public class Event extends Task{
     public String toString() {
         String formatDate = dt.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         String formatTime = dt.format(DateTimeFormatter.ofPattern("hh:mm"));
-        return "[E]" + super.toString() + "(at: " + formatDate +  ", " + formatTime + ")";
+        return "[E]" + super.toString() + " (at: " + formatDate +  ", " + formatTime + ")";
     }
 }

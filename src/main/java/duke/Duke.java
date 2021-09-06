@@ -85,7 +85,7 @@ public class Duke {
         tasks.getTask(i - 1).markAsDone();
         TaskList.updateMemory(storage.getPath(), tasks);
         String res = tasks.getTask(i-1).toString();
-        String end = "\n" + "     " + res;
+        String end = "\n" + "  " + res;
         return start + end;
     }
 
@@ -114,7 +114,7 @@ public class Duke {
         ToDo td = new ToDo(t);
         tasks.addNewTask(td);
         TaskList.updateMemory(storage.getPath(), tasks);
-        return "\nGot it. I've added this task: \n " + td +
+        return "\nGot it. I've added this task: \n " + "  " + td +
                 "\n" + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 
@@ -128,7 +128,7 @@ public class Duke {
         Deadline dl = new Deadline(t);
         tasks.addNewTask(dl);
         TaskList.updateMemory(storage.getPath(), tasks);
-        return "\nGot it. I've added this task: \n " + dl
+        return "\nGot it. I've added this task: \n " + "  " + dl
                 + "\n" + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 
@@ -142,8 +142,8 @@ public class Duke {
         Event e = new Event(t);
         tasks.addNewTask(e);
         TaskList.updateMemory(storage.getPath(), tasks);
-        return "Got it. I've added this task: \n " + e
-                + "/n"  + "Now you have " + tasks.getSize()  + " tasks in the list.";
+        return "\n Got it. I've added this task: \n " + "  " + e
+                + "\n"  + "Now you have " + tasks.getSize()  + " tasks in the list.";
     }
 
     /**
@@ -152,12 +152,12 @@ public class Duke {
      * @throws DukeException throws an error
      */
     public static String deleteTask(int i) throws DukeException {
-        String start = "Noted. I've removed this task: ";
+        String start = "\n Noted. I've removed this task: \n";
         String deleted = tasks.getTask(i-1).toString();
         tasks.deleteGivenTask(i - 1);
         TaskList.updateMemory(storage.getPath(), tasks);
-        String mid = " " + deleted;
-        String end = "Now you have " + tasks.getSize() + " tasks in the list.";
+        String mid = "  " + deleted;
+        String end = "\n Now you have " + tasks.getSize() + " tasks in the list.";
         return start + mid + end;
     }
 
