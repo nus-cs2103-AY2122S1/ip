@@ -10,6 +10,7 @@ import duke.command.DeleteTaskCommand;
 import duke.command.FindTasksCommand;
 import duke.command.ListTasksCommand;
 import duke.command.MarkTaskDoneCommand;
+import duke.command.ReminderCommand;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidCommandException;
 
@@ -42,6 +43,8 @@ public class Parser {
             switch (userCommandType) {
             case LIST:
                 return new ListTasksCommand(userInputBody);
+            case REMINDER:
+                return new ReminderCommand(userInputBody);
             case TODO:
                 return new AddTodoCommand(userInputBody);
             case DEADLINE:

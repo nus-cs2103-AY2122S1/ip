@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @author kevin9foong
  */
 public enum CommandType {
-    LIST, TODO, DEADLINE, EVENT, DELETE, DONE, FIND, BYE;
+    LIST, TODO, DEADLINE, EVENT, DELETE, DONE, FIND, REMINDER, BYE;
 
     /**
      * Returns Command classification based on the given string.
@@ -20,7 +20,7 @@ public enum CommandType {
         return Arrays.stream(CommandType.values())
                 .reduce(null, (selectedCmd, currentCmd) ->
                         selectedCmd == null && commandText.toUpperCase().equals(currentCmd.toString())
-                        ? currentCmd
-                        : selectedCmd);
+                                ? currentCmd
+                                : selectedCmd);
     }
 }

@@ -11,6 +11,8 @@ public class MessageConstants {
     public static final String MESSAGE_TASK_ADD_HEADER = "Got it. I've added this task:\n\t";
     public static final String MESSAGE_TASK_DONE_HEADER = "Nice! I've marked this task as done:";
     public static final String MESSAGE_TASK_LIST_HEADER = "Here are the tasks in your list:";
+    public static final String MESSAGE_DEADLINE_REMINDER_HEADER = "Here's the list of "
+            + "incomplete tasks sorted by deadline";
     public static final String MESSAGE_FIND_TASK_LIST = "Here are the tasks with matching descriptions in your list:";
     public static final String MESSAGE_TASK_DELETE_HEADER = "Noted. I've removed this task:\n\t";
     public static final String MESSAGE_INVALID_COMMAND =

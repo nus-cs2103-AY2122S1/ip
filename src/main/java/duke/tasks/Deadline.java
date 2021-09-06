@@ -13,7 +13,7 @@ import duke.exceptions.InvalidDeadlineBodyException;
  * @author kevin9foong
  */
 public class Deadline extends Task {
-    private final LocalDate by;
+    private final LocalDate dueDate;
 
     /**
      * Instantiates a <code>Deadline</code> from its data String representation.
@@ -37,7 +37,7 @@ public class Deadline extends Task {
         }
         super.setDescription(deadlineData[0].trim());
         try {
-            this.by = LocalDate.parse(deadlineData[1].trim());
+            this.dueDate = LocalDate.parse(deadlineData[1].trim());
         } catch (DateTimeParseException dte) {
             throw new InvalidDateTimeFormatException();
         }
@@ -49,17 +49,21 @@ public class Deadline extends Task {
      *
      * @param description description of what the <code>Deadline</code> entails.
      * @param isDone      completion status of <code>Deadline</code>.
-     * @param by          deadline which <code>Deadline</code> must be completed.
+     * @param dueDate     deadline which <code>Deadline</code> must be completed.
      */
-    public Deadline(String description, boolean isDone, LocalDate by) {
+    public Deadline(String description, boolean isDone, LocalDate dueDate) {
         super.setDescription(description);
         super.setIsDone(isDone);
-        this.by = by;
+        this.dueDate = dueDate;
+    }
+
+    public LocalDate getDueDate() {
+        return this.dueDate;
     }
 
     @Override
     public String getTaskRepresentation() {
-        return TaskType.DEADLINE + " |;; " + super.getTaskRepresentation() + this.by + " |;; ";
+        return TaskType.DEADLINE + " |;; " + super.getTaskRepresentation() + this.dueDate + " |;; ";
     }
 
     /**
@@ -71,6 +75,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString()
-                + " (by: " + by.getMonth() + " " + by.getDayOfMonth() + " " + by.getYear() + ")";
+                + " (by: " + dueDate.getMonth() + " " + dueDate.getDayOfMonth() + " " + dueDate.getYear() + ")";
     }
 }

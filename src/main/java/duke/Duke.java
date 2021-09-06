@@ -18,7 +18,7 @@ public class Duke {
     /**
      * Constructs an instance of the <code>Duke</code> chat bot with the provided input and output handlers.
      *
-     * @throws TaskFileIoException thrown when unable to read the save task file.
+     * @throws TaskFileIoException      thrown when unable to read the save task file.
      * @throws InvalidTaskDataException thrown when task file data is corrupted.
      */
     public Duke() throws TaskFileIoException, InvalidTaskDataException {
@@ -28,6 +28,7 @@ public class Duke {
 
     /**
      * Responds to provided user input.
+     *
      * @param userInput user input text to respond to.
      * @return chat bot response to user input.
      * @throws DukeException thrown when unable to handle user input.
@@ -38,6 +39,7 @@ public class Duke {
 
     /**
      * Returns a <code>String</code> which greets the user upon chat bot start up.
+     *
      * @return greeting message.
      */
     public String greetUser() {
