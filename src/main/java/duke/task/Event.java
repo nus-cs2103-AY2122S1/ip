@@ -33,6 +33,7 @@ public class Event extends Task {
 
     /**
      * Returns a string that represents a serialized store format of the task that is specific to Duke.
+     *
      * @return a string of serialized format.
      */
     @Override
@@ -42,6 +43,7 @@ public class Event extends Task {
 
     /**
      * Returns a string that shows the details of the task in a standardized format.
+     *
      * @return a string of task details.
      */
     @Override
