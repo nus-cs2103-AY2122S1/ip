@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,7 +38,8 @@ public class TaskList {
      */
     public String getTaskCount() {
         int taskCount = this.tasks.size();
-        return String.format("You have %d %s in the list.%n", taskCount, taskCount > 1 ? "tasks" : "task");
+        String taskNameFormat = taskCount > 1 ? "tasks" : "task";
+        return String.format("You have %d %s in the list.%n", taskCount, taskNameFormat);
     }
 
     public List<Task> getTasks() {
@@ -106,7 +108,8 @@ public class TaskList {
      * @return List of tasks with description containing the keyword.
      */
     public List<Task> findTask(String keyword) {
-        List<Task> matches = tasks.stream().filter(task -> task.getDescription().contains(keyword))
+        List<Task> matches = tasks.stream()
+                .filter(task -> Arrays.asList(task.getDescription().toLowerCase().split(" ")).contains(keyword))
                 .collect(Collectors.toList());
         return matches;
     }
