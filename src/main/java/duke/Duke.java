@@ -17,13 +17,13 @@ import javafx.stage.Stage;
  * Main class of the project.
  */
 public class Duke extends Application {
-    static final double STAGE_WIDTH = 600.0;
-    static final double STAGE_HEIGHT = 400.0;
-    static final double SCROLL_WIDTH = 385.0;
-    static final double SCOLL_HEIGHT = 535.0;
-    static final double DEFAULT_PADDING = 10.0;
-    static final double INPUT_WIDTH = 325.0;
-    static final double BUTTON_WIDTH = 55.0;
+    private static final double STAGE_WIDTH = 600.0;
+    private static final double STAGE_HEIGHT = 400.0;
+    private static final double SCROLL_WIDTH = 385.0;
+    private static final double SCOLL_HEIGHT = 535.0;
+    private static final double DEFAULT_PADDING = 10.0;
+    private static final double INPUT_WIDTH = 325.0;
+    private static final double BUTTON_WIDTH = 55.0;
 
     private final Storage storage;
     private Ui ui;
@@ -166,9 +166,8 @@ public class Duke extends Application {
      * @param stringInput String supplied by user.
      */
     private void processInput(String stringInput) {
+        ui.printUserDialog(stringInput);
         assert stringInput != null : "processInput requires non empty input string";
-
-        ui.echoUser(stringInput);
         try {
             Command parsedCommand = Parser.parse(stringInput);
             parsedCommand.execute(tasks, ui, storage);

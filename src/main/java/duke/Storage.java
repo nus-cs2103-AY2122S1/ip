@@ -17,10 +17,9 @@ import duke.task.ToDo;
  * Reads and writes the task list on the disk.
  */
 public class Storage {
-    static final String DONE_FLAG = "1";
-    static final String STRING_SEPERATOR = "\\|";
-
-    private final String path;
+    private static final String DONE_FLAG = "1";
+    private static final String STRING_SEPERATOR = "\\|";
+    private String path;
 
     /**
      * Sole constructor for invocation by Duke.
@@ -42,7 +41,7 @@ public class Storage {
         TaskList tasks = new TaskList();
 
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(this.path));
             String line;
 
             while ((line = bufferedReader.readLine()) != null) {
@@ -81,7 +80,7 @@ public class Storage {
      */
     public void saveFile(TaskList tasks) {
         try {
-            FileWriter fileWriter = new FileWriter(path);
+            FileWriter fileWriter = new FileWriter(this.path);
             fileWriter.write(tasks.toString());
             fileWriter.close();
         } catch (IOException e) {
