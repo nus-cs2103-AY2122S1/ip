@@ -11,13 +11,34 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.File;
 
+
+/**
+ * Storage Class that is able to read .txt file to Tasklist and
+ * convert Tasklist to a .txt file
+ *
+ */
+
 public class Storage {
 
     private String filepath;
 
+    /**
+     * Create a storage class that stores the filepath and handles converting between
+     * file and Tasklist
+     *
+     * @param filepath filepath where tasklist is saved to
+     */
+
     Storage(String filepath){
         this.filepath = filepath;
     }
+
+    /**
+     * Writes tasklist to .txt file
+     *
+     * @param tasklist tasklist to be written to file
+     * @throws IOException If writer is not working as intended
+     */
     public void writeToFile(Tasklist tasklist) throws IOException {
         try {
             Task.saveTaskList(tasklist.getTasklist(), filepath);
@@ -27,6 +48,13 @@ public class Storage {
         }
     }
 
+
+    /**
+     * Create a storage class that stores the filepath and handles converting between
+     * file and Tasklist
+     *
+     * @throws DukeException If scanner is not working as intended or input is not the right format
+     */
     public Tasklist fileToTasklist() throws DukeException {
         try {
             File file = new File(System.getProperty("user.dir")+filepath);
