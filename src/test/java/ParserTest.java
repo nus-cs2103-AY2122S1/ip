@@ -13,6 +13,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.RescheduleCommand;
+import duke.command.UpdateCommand;
 import duke.task.TaskList;
 import duke.task.Todo;
 
@@ -159,6 +160,7 @@ public class ParserTest {
         assertTrue(test.checkOperation() instanceof RescheduleCommand);
     }
 
+
     /**
      * Reschedule command test with invalid index.
      *
@@ -168,6 +170,53 @@ public class ParserTest {
     public void checkOperation_noIdxRescheduleCommandString_dukeExceptionThrown() throws DukeException {
         TaskList testList = new TaskList();
         Parser test = new Parser("reschedule /to 2021-09-10", testList);
+        Exception exception = assertThrows(DukeException.class, test::checkOperation);
+
+        String expectedMessage = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        String actualMessage = exception.getMessage();
+
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    /**
+     * Update command test with proper inputs.
+     *
+     * @throws DukeException the duke exception.
+     */
+    @Test
+    public void checkOperation_updateCommandString_correctCommandReturned() throws DukeException {
+        TaskList testList = new TaskList();
+        Parser test = new Parser("update 1 /to hello there", testList);
+        assertTrue(test.checkOperation() instanceof UpdateCommand);
+    }
+
+    /**
+     * Update command with no new description.
+     *
+     * @throws DukeException the duke exception.
+     */
+    @Test
+    public void checkOperation_updateCommandEmptyInputString_correctCommandReturned() throws DukeException {
+        TaskList testList = new TaskList();
+        Parser test = new Parser("update 1 /to ", testList);
+        Exception exception = assertThrows(DukeException.class, test::checkOperation);
+
+        String expectedMessage = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        String actualMessage = exception.getMessage();
+
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+
+    /**
+     * Update command with no index given.
+     *
+     * @throws DukeException the duke exception.
+     */
+    @Test
+    public void checkOperation_updateCommandNoIdxString_correctCommandReturned() throws DukeException {
+        TaskList testList = new TaskList();
+        Parser test = new Parser("update /to test test test", testList);
         Exception exception = assertThrows(DukeException.class, test::checkOperation);
 
         String expectedMessage = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
