@@ -1,10 +1,14 @@
 package duke;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.FileWriter;
 
 public class Storage {
 
@@ -95,7 +99,7 @@ public class Storage {
         while (dataReader.hasNextLine()) {
             String line = dataReader.nextLine();
             if (lineNumber != index) {
-                buffer.append(line+System.lineSeparator());
+                buffer.append(line + System.lineSeparator());
             }
             lineNumber += 1;
         }
@@ -124,7 +128,7 @@ public class Storage {
         String newData = taskData.replaceFirst("0", "1");
         dataReader = new Scanner(data);
         while (dataReader.hasNextLine()) {
-            buffer.append(dataReader.nextLine()+System.lineSeparator());
+            buffer.append(dataReader.nextLine() + System.lineSeparator());
         }
         String fileContents = buffer.toString();
         fileContents = fileContents.replaceAll(taskData, newData);

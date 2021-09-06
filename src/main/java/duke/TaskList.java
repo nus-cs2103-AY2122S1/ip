@@ -74,6 +74,12 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    /**
+     * Search tasks based on keyword
+     *
+     * @param key
+     * @return list of tasks based on searched keyword
+     */
     public String find(String key) {
         String taskList = "";
         int count = 1;

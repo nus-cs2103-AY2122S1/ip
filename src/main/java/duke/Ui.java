@@ -89,6 +89,11 @@ public class Ui {
         System.out.println(message);
     }
 
+    /**
+     * Show list of searched tasks
+     *
+     * @param taskList
+     */
     public void showFindTask(String taskList) {
         System.out.println("Here are the matching tasks in your list:");
         System.out.println(taskList);
