@@ -74,6 +74,9 @@ public class Event extends Task {
      */
     @Override
     public boolean equals(Object o) {
+        //Test code should be passing the right argument into this method
+        assert o instanceof Event;
+
         @SuppressWarnings("unchecked")
         Event otherEvent = (Event) o;
         return this.isDone == otherEvent.isDone

@@ -25,19 +25,22 @@ public class CommandFind extends Command {
             throws YoyoException {
         checkCompleteCommand(inputTokens);
         int taskListLength = tasks.size();
+        if (taskListLength == 0) {
+            return dialogHandler.printTaskList(tasks);
+        }
+        assert taskListLength != 0;
+
         String searchString = inputTokens[1];
         TaskList matchingTasks = new TaskList();
+
         for (int i = 0; i < taskListLength; i++) {
             Task currentTask = tasks.get(i);
             if (tasks.get(i).containsString(searchString)) {
                 matchingTasks.add(currentTask);
             }
         }
-        if (taskListLength == 0) {
-            return dialogHandler.printTaskList(tasks);
-        } else {
-            return dialogHandler.printMatchingTaskList(matchingTasks);
-        }
+
+        return dialogHandler.printMatchingTaskList(matchingTasks);
 
     }
 

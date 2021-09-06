@@ -26,8 +26,4 @@ public class CommandBye extends Command {
         return dialogHandler.sayGoodbye();
     }
 
-    @Override
-    public boolean shouldContinueProgram() {
-        return false;
-    }
 }

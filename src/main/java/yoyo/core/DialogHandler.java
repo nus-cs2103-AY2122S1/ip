@@ -24,6 +24,7 @@ public class DialogHandler {
         if (currListLength == 0) {
             return "You have no task at the moment.";
         } else {
+            assert currListLength != 0;
             String res = "Here are the tasks you currently have:\n";
             for (int i = 0; i < currListLength; i++) {
                 String toAdd = i + 1 + "." + tasks.get(i).showStatus() + "\n";
@@ -60,6 +61,7 @@ public class DialogHandler {
      * @param taskIndex Index of the Task to be marked as done.
      */
     public String printMarkTaskMessage(TaskList tasks, int taskIndex) {
+        System.out.println(tasks.get(taskIndex).showStatus());
         String res = "Nice! I've marked this task as done:\n"
                 + tasks.get(taskIndex).showStatus() + "\n";
         return res;

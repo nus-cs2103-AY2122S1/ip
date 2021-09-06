@@ -74,6 +74,9 @@ public abstract class Task {
      */
     @Override
     public boolean equals(Object o) {
+        //Test code should be passing the right argument into this method
+        assert o instanceof Task;
+
         @SuppressWarnings("unchecked")
         Task otherTask = (Task) o;
         return this.isDone == otherTask.isDone

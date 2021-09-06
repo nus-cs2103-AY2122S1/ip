@@ -29,6 +29,7 @@ public class CommandEvent extends Command {
             throws YoyoException {
         checkCompleteCommand(inputTokens);
         String[] taskInfo = inputTokens[1].split(" /at ");
+
         if (taskInfo.length < 2) {
             throw new YoyoException.YoyoIncompleteCommandException("command has bad format or"
                     + " not enough information.");
@@ -38,5 +39,6 @@ public class CommandEvent extends Command {
             tasks.add(newTask);
             return dialogHandler.printAddMessage(newTask, tasks);
         }
+
     }
 }

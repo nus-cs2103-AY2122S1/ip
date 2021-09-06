@@ -21,6 +21,12 @@ public class Storage {
     private final String dataPath;
     private final File file;
 
+    private enum TaskType {
+        TODO,
+        EVENT,
+        DEADLINE
+    }
+
     /**
      * Constructor for Storage class.
      *
@@ -29,6 +35,7 @@ public class Storage {
     public Storage(String dataPath) {
         this.dataPath = dataPath;
         this.file = new File(dataPath);
+
         try {
             if (!this.file.exists()) {
                 this.file.createNewFile();
@@ -60,14 +67,14 @@ public class Storage {
         TaskList tasks = new TaskList();
         try {
             Scanner s = new Scanner(f);
-            String currLine;
-            boolean isCurrTaskComplete;
-            String[] currStrArr;
-            TaskType currType;
 
             while (s.hasNext()) {
-                currLine = s.nextLine();
-                isCurrTaskComplete = currLine.charAt(ISDONE_STR_INDEX) == 'X';
+                String currLine = s.nextLine();
+                String[] currStrArr;
+                TaskType currType;
+
+                boolean isCurrTaskComplete = currLine.charAt(ISDONE_STR_INDEX) == 'X';
+
                 char typeChar = currLine.charAt(TYPE_STR_INDEX);
                 currType = typeChar == 'T'
                         ? TaskType.TODO
@@ -75,6 +82,7 @@ public class Storage {
                         ? TaskType.DEADLINE
                         : TaskType.EVENT;
                 currStrArr = currLine.split(", ");
+
                 switch (currType) {
                 case TODO:
                     tasks.add(new Todo(currStrArr[1], isCurrTaskComplete));
@@ -86,6 +94,7 @@ public class Storage {
                     tasks.add(new Deadline(currStrArr[1], LocalDateTime.parse(currStrArr[2]), isCurrTaskComplete));
                     break;
                 default:
+                    assert false : "Something went wrong with save file format";
                 }
             }
             return tasks;
@@ -102,11 +111,13 @@ public class Storage {
     public void deposit(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(this.dataPath);
+
             String textOutput = "";
             for (int i = 0; i < tasks.size(); i++) {
                 textOutput += tasks.get(i).showStatusWrite();
                 textOutput += "\n";
             }
+
             fw.write(textOutput);
             fw.close();
         } catch (IOException e) {
@@ -115,10 +126,5 @@ public class Storage {
         }
     }
 
-    private enum TaskType {
-        TODO,
-        EVENT,
-        DEADLINE
-    }
 
 }

@@ -30,6 +30,7 @@ public class Parser {
         if (fullCommand.length() == 0) {
             throw new YoyoException.YoyoEmptyCommandException("You have not entered a command!");
         }
+
         String[] inputTokens = fullCommand.split(" ", 2);
         String commandKeyword = inputTokens[0];
         switch (commandKeyword) {
@@ -50,9 +51,26 @@ public class Parser {
         case "find":
             return new CommandFind(inputTokens);
         default:
+            assertCommandNotMissed(commandKeyword);
             throw new YoyoException.YoyoCommandNotFoundException("Yoyo doesn't understand "
                     + "what you mean :-(");
         }
+    }
+
+    /**
+     * Checks by using assertion that valid commands are not missed by the program.
+     *
+     * @param commandKeyword Command entered by user.
+     */
+    private static void assertCommandNotMissed(String commandKeyword) {
+        assert !commandKeyword.equals("bye") : "Did not catch valid command";
+        assert !commandKeyword.equals("list") : "Did not catch valid command";
+        assert !commandKeyword.equals("done") : "Did not catch valid command";
+        assert !commandKeyword.equals("delete") : "Did not catch valid command";
+        assert !commandKeyword.equals("todo") : "Did not catch valid command";
+        assert !commandKeyword.equals("deadline") : "Did not catch valid command";
+        assert !commandKeyword.equals("event") : "Did not catch valid command";
+        assert !commandKeyword.equals("find") : "Did not catch valid command";
     }
 
     /**
@@ -73,6 +91,7 @@ public class Parser {
             throw new YoyoException.YoyoInvalidFormatException("Invalid datetime format, "
                     + "use 'yyyy/MM/dd hhmm'");
         }
+
 
         String[] dateTimeArr = timeString.split(" ");
         Command.checkCompleteCommand(dateTimeArr);

@@ -29,10 +29,6 @@ public abstract class Command {
         }
     }
 
-    public boolean shouldContinueProgram() {
-        return true;
-    }
-
     /**
      * Executes actions depending on command type.
      *
