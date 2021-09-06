@@ -33,6 +33,7 @@ public class DeleteCommand implements Command {
             throw new InvalidArgumentException("Invalid Input! Please enter an integer...");
         }
         Task task = this.dukeList.deleteTask(i);
+        assert task != null;
         this.ui.showMessage("Noted. I've removed this task:\n" + task + "\n" + this.dukeList.currentSizeMessage());
     }
 

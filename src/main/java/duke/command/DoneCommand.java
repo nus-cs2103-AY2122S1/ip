@@ -34,6 +34,7 @@ public class DoneCommand implements Command {
             throw new InvalidArgumentException("Invalid Input! Please enter an integer...");
         }
         Task task = this.dukeList.markCompleted(i);
+        assert task != null;
         this.ui.showMessage("Nice! I've marked this task as done:\n" + task);
     }
 
