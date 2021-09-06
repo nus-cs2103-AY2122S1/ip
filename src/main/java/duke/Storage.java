@@ -40,6 +40,9 @@ public class Storage {
                     dataFile.createNewFile();
                 }
             }
+            // After above, both dataDir and dataFile should exist.
+            assert dataDir.exists() : "Data Dir not created!";
+            assert dataFile.exists() : "Data File not created";
 
             Scanner scanner = new Scanner(dataFile);
             while (scanner.hasNext()) {
