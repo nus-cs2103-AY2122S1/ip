@@ -3,9 +3,8 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
+public class Deadline extends SingleTimedTask {
 
-    protected LocalDate date;
 
     /**
      * The constructor for the Deadline object.
@@ -14,9 +13,8 @@ public class Deadline extends Task {
      * @param date The due date
      */
     public Deadline(String description, LocalDate date) {
-        super(description);
+        super(description, date);
         this.taskType = "D";
-        this.date = date;
     }
 
     @Override

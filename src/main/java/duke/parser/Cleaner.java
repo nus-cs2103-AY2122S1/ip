@@ -48,6 +48,8 @@ public class Cleaner {
             return byeCleaner(fullCommand);
         case "find":
             return findCleaner(fullCommand);
+        case "sort":
+            return sortCleaner(fullCommand);
         default:
             return invalidCommandErrorMessage;
         }
@@ -98,6 +100,22 @@ public class Cleaner {
             return errorMessage;
         } else {
             return byeString;
+        }
+    }
+
+    /**
+     * This method cleans the user input for the sort command and flags errors if found.
+     *
+     * @param fullCommand User input
+     * @return The cleaned sort command
+     */
+    private String sortCleaner(String fullCommand) {
+        final String errorMessage = "POLLUTED_SORT_COMMAND_EXCEPTION";
+        final String sortString = "sort";
+        if (fullCommand.strip().length() >= 5) {
+            return errorMessage;
+        } else {
+            return sortString;
         }
     }
 
