@@ -26,6 +26,12 @@ public class Storage {
     private final String dataPath;
     private final File file;
 
+    private enum TaskType {
+        TODO,
+        EVENT,
+        DEADLINE
+    }
+
     /**
      * Constructor for Storage class.
      *
@@ -34,6 +40,7 @@ public class Storage {
     public Storage(String dataPath) {
         this.dataPath = dataPath;
         this.file = new File(dataPath);
+
         try {
             if (!this.file.exists()) {
                 this.file.createNewFile();
@@ -134,11 +141,5 @@ public class Storage {
                     + NEWLINE_CHAR
                     + e.getMessage());
         }
-    }
-
-    private enum TaskType {
-        TODO,
-        EVENT,
-        DEADLINE
     }
 }

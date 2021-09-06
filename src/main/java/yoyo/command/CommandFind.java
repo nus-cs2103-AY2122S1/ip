@@ -28,9 +28,11 @@ public class CommandFind extends Command {
         if (taskListLength == 0) {
             return dialogHandler.printTaskList(tasks);
         }
+        assert taskListLength != 0;
 
         String searchString = inputTokens[1];
         TaskList matchingTasks = new TaskList();
+
         for (int i = 0; i < taskListLength; i++) {
             Task currentTask = tasks.get(i);
             if (tasks.get(i).containsString(searchString)) {

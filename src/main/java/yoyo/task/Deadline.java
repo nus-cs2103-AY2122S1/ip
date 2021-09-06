@@ -77,6 +77,9 @@ public class Deadline extends Task {
      */
     @Override
     public boolean equals(Object o) {
+        //Test code should be passing the right argument into this method
+        assert o instanceof Deadline;
+
         @SuppressWarnings("unchecked")
         Deadline otherDeadline = (Deadline) o;
         return this.isDone == otherDeadline.isDone

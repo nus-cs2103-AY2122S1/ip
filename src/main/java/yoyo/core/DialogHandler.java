@@ -27,6 +27,8 @@ public class DialogHandler {
         if (currListLength == 0) {
             return "You have no task at the moment.";
         } else {
+            assert currListLength != 0;
+
             String res = "Here are the tasks you currently have:" + NEWLINE_CHAR;
             for (int i = 0; i < currListLength; i++) {
                 String toAdd = i + 1 + "." + tasks.get(i).showStatus() + NEWLINE_CHAR;

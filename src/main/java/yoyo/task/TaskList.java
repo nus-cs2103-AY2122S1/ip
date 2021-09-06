@@ -53,6 +53,9 @@ public class TaskList {
 
     @Override
     public boolean equals(Object o) {
+        //Test code should be passing the right argument into this method
+        assert o instanceof TaskList;
+
         @SuppressWarnings("unchecked")
         TaskList otherTaskList = (TaskList) o;
         return this.tasks.equals(otherTaskList.tasks);
