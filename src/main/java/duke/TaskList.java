@@ -53,9 +53,7 @@ public class TaskList {
         int index = taskNo - 1;
         try {
             Task toDelete = TaskList.get(taskNo - 1);
-
             assert toDelete != null : "Task to delete should exist.";
-
             TaskList.remove(index);
             return toDelete;
         } catch (IndexOutOfBoundsException e) {
@@ -75,7 +73,6 @@ public class TaskList {
         int index = taskNo - 1;
         try {
             assert TaskList.get(index) != null : "Task to mark done should be valid.";
-
             TaskList.get(index).markDone();
             return TaskList.get(taskNo - 1);
         } catch (IndexOutOfBoundsException e) {
@@ -91,9 +88,7 @@ public class TaskList {
      */
     public Task getTask(int taskNo) {
         Task toPrint = TaskList.get(taskNo - 1);
-
         assert toPrint != null : "Task to be printed should be valid.";
-
         return toPrint;
     }
 

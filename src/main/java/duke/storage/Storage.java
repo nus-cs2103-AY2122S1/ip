@@ -41,18 +41,14 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         try {
             File f = new File(filePath);
-
             assert f.exists() : "File to read from should exist.";
-
             Scanner s = new Scanner(f);
             ArrayList<Task> tasks = new ArrayList<Task>();
             while (s.hasNext()) {
                 String item = s.nextLine();
                 String[] details = item.split(",");
                 boolean isDone = Boolean.parseBoolean(details[1]);
-
                 assert details.length >= 2 : "Task description fields should not be empty.";
-
                 switch (details[0]) {
                 case "T":
                     tasks.add(new ToDo(details[2], isDone));
