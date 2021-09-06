@@ -150,7 +150,7 @@ public class DataHandlerLayer {
         String acc = "";
         for (int i = 0; i < log.size(); i++) {
             Task currTask = log.get(i);
-            String index = String.format("%d. ",i + 1);
+            String index = String.format("%d. ", i + 1);
             acc += index + currTask.toString();
             acc += "\n";
         }

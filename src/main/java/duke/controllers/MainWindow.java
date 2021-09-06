@@ -12,6 +12,8 @@ import javafx.scene.layout.VBox;
  * Controller for duke.controllers.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static String startUpText = "Oh my..... Looks like u have an old scroll..";
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -25,8 +27,10 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Kobold.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Croc.png"));
-    private static String startUpText = "Oh my..... Looks like u have an old scroll..";
 
+    /**
+     * init the GUI for dukebot
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

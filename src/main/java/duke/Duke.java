@@ -1,9 +1,5 @@
 package duke;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
-;
-
 /**
  * Main file for the duke bot. The duke bot keeps track of all your task and allows you to mark as complete.
  * Call list to see the list of task. Each task can be completed. When a task is completed, it will still appear
