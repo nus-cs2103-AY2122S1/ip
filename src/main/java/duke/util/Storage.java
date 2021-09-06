@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import duke.exception.DukeException;
+import duke.exception.DukeFileNotFoundException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -97,7 +98,7 @@ public class Storage {
 	 * 
 	 * @param tasks ArrayList of tasks to be saved
 	 */
-	public void saveTasks(ArrayList<Task> tasks) throws DukeException {
+	public void saveTasks(ArrayList<Task> tasks) throws DukeFileNotFoundException {
 		try {
 			FileWriter fw = new FileWriter(filePath);
 
@@ -112,7 +113,7 @@ public class Storage {
 			}
 			fw.close();
 		} catch (IOException e) {
-			throw new DukeException("Note: results are not saved to disk)!\n");
+			throw new DukeFileNotFoundException();
 		}
 	}
 }
