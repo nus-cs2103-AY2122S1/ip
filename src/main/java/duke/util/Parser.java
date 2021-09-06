@@ -26,23 +26,25 @@ public class Parser {
      */
     public static Command parse(String command) {
         String[] inputValues = command.split(" ");
+        String firstWord = inputValues[0];
+        int commandLength = inputValues.length;
         if (command.equals("bye")) {
             return new ByeCommand();
         } else if (command.equals("list")) {
             return new ListCommand();
-        } else if (inputValues[0].equals("done") && inputValues.length == 2) {
+        } else if (firstWord.equals("done") && commandLength == 2) {
             //treat as unknown command if there is more than 1 number after "done".
             return new DoneCommand(command);
-        } else if (inputValues[0].equals("delete") && inputValues.length == 2) {
+        } else if (firstWord.equals("delete") && commandLength == 2) {
             //treat as unknown command if there is more than 1 number after "delete".
             return new DeleteCommand(command);
-        } else if (inputValues[0].equals("deadline")) {
+        } else if (firstWord.equals("deadline")) {
             return new DeadlineCommand(command);
-        } else if (inputValues[0].equals("event")) {
+        } else if (firstWord.equals("event")) {
             return new EventCommand(command);
-        } else if (inputValues[0].equals("todo")) {
+        } else if (firstWord.equals("todo")) {
             return new TodoCommand(command);
-        } else if (inputValues[0].equals("find")) {
+        } else if (firstWord.equals("find")) {
             return new FindCommand(command);
         } else {
             return new InvalidCommand();

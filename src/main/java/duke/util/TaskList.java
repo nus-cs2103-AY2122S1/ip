@@ -38,13 +38,10 @@ public class TaskList {
      * @param storage An instance of a the Storage class that saves and loads Duke's data.
      * @return A string representing the task that has been added.
      */
-    public String add(Task task, Storage storage) throws IOException {
+    public String add(Task task, Ui ui, Storage storage) throws IOException {
         this.taskList.add(task);
         storage.save(this);
-        return "Got it. I have added this task:\n"
-                + "  " + task.toString()
-                + "\n Now you have " + size()
-                + (size() == 1 ? " task" : " tasks") + " in the list.";
+        return ui.showAddTask(task, this);
     }
 
     /**
@@ -63,14 +60,14 @@ public class TaskList {
      * @param storage An instance of a the Storage class that saves and loads Duke's data.
      * @return A string representing the task that has been marked as completed.
      */
-    public String markAsDone(int index, Storage storage) throws IOException {
+    public String markAsDone(int index, Ui ui, Storage storage) throws IOException {
         Task taskToComplete = get(index - 1);
         if (taskToComplete.getIsDone()) {
-            return "I have already marked this task as completed!";
+            return ui.showAlreadyMarkedAsDone();
         } else {
             taskToComplete.setIsDone(true);
             storage.save(this);
-            return "Nice! I've marked this task as done:\n  " + taskToComplete.toString();
+            return ui.showMarkedAsDone(taskToComplete);
         }
     }
 
@@ -81,13 +78,10 @@ public class TaskList {
      * @param storage An instance of a the Storage class that saves and loads Duke's data.
      * @return A string representing the task that has been deleted.
      */
-    public String delete(int index, Storage storage) throws IOException {
+    public String delete(int index, Ui ui, Storage storage) throws IOException {
         Task taskToDelete = this.taskList.remove(index - 1);
         storage.save(this);
-        return "Noted. I've removed this task:\n"
-                + "  " + taskToDelete.toString()
-                + "\nNow you have " + taskList.size()
-                + (taskList.size() == 1 ? " task" : " tasks") + " in the list.";
+        return ui.showDelete(taskToDelete, this);
     }
 
     /**
@@ -96,7 +90,7 @@ public class TaskList {
      * @param keyword The keyword to search for.
      * @return A string representing all tasks that match the keyword.
      */
-    public String search(String keyword) {
+    public String search(String keyword, Ui ui) {
         ArrayList<Task> temp = new ArrayList<>();
         for (int i = 0; i < size(); i++) {
             if (get(i).getDescription().contains(keyword)) {
@@ -104,10 +98,10 @@ public class TaskList {
             }
         }
         if (temp.size() == 0) {
-            return "There are no matching tasks in your list!";
+            return ui.showFailedSearch();
         } else {
             StringBuilder sb = new StringBuilder();
-            sb.append("Here are the matching tasks in your list:\n");
+            sb.append(ui.showSearchHeader());
             for (int i = 0; i < temp.size(); i++) {
                 int currNum = i + 1;
                 Task currTask = temp.get(i);
@@ -133,12 +127,12 @@ public class TaskList {
      *
      * @return A string representing all tasks in the task list.
      */
-    public String getList() {
+    public String getList(Ui ui) {
         if (size() == 0) {
-            return "There are no tasks in your list currently!";
+            return ui.showEmptyList();
         } else {
             StringBuilder sb = new StringBuilder();
-            sb.append("Here are the tasks in your list:\n");
+            sb.append(ui.showListHeader());
             for (int i = 0; i < size(); i++) {
                 int currNum = i + 1;
                 Task currTask = get(i);

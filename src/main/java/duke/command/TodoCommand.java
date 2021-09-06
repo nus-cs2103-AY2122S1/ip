@@ -35,21 +35,22 @@ public class TodoCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        assert taskList != null;
+        assert storage != null;
         String command = super.getUserInput();
         String[] inputValues = command.split(" ");
         if (inputValues.length == 1) {
             //catch empty to-do
-            return ui.showError("Error! Description cannot be empty.");
-        } else {
-            try {
-                String description = command.substring(inputValues[0].length() + 1);
-                Task toDo = new ToDo(description);
-                return taskList.add(toDo, storage);
-            } catch (IOException exception) {
-                return ui.showSavingError();
-            } catch (DukeException exception) {
-                return ui.showError(exception.getMessage());
-            }
+            return ui.showEmptyFieldError(this);
+        }
+        try {
+            String description = command.substring(inputValues[0].length() + 1);
+            Task toDo = new ToDo(description);
+            return taskList.add(toDo, ui, storage);
+        } catch (IOException exception) {
+            return ui.showSavingError();
+        } catch (DukeException exception) {
+            return ui.showError(exception.getMessage());
         }
     }
 }

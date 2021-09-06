@@ -30,14 +30,15 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        assert taskList != null;
+        assert storage != null;
         String command = super.getUserInput();
         String[] inputValues = command.split(" ");
         if (inputValues.length == 1) {
             //first check for empty keyword
-            return ui.showError("Error! Please search for a keyword.");
-        } else {
-            String keyword = command.substring(inputValues[0].length() + 1).strip();
-            return taskList.search(keyword);
+            return ui.showEmptyFieldError(this);
         }
+        String keyword = command.substring(inputValues[0].length() + 1).strip();
+        return taskList.search(keyword, ui);
     }
 }
