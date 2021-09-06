@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * A To-do kind of Task.
  * @author Thomas Hogben

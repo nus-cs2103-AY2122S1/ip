@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * An encapsulation of a Task to be done, that can be marked as completed.
  * @author Thomas Hogben

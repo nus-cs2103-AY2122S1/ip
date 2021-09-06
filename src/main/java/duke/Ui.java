@@ -1,3 +1,8 @@
+package duke;
+
+import duke.task.Task;
+import duke.task.TaskList;
+
 public class Ui {
     public void display(String msg) {
         System.out.println(msg);

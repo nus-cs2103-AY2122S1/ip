@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.DukeException;
+
 /**
  * A Task with a date and time.
  * @author Thomas Hogben

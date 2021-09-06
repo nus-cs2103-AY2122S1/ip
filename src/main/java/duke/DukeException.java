@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * An exception thrown by the Duke program.
  * Exceptionally boring.
