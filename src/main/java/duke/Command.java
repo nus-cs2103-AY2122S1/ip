@@ -16,9 +16,9 @@ public class Command {
     public static String addTask(String task, Type type, LocalDateTime localDateTime, List<Task> tasks) {
         Task taskObj = TaskList.initialiseByType(task, type, false, localDateTime);
         tasks.add(taskObj);
-        String addTaskString = String.format("Got it. I've added this task:\n" +
-                        "%s" +
-                        "\nNow you have %d tasks in the list.",
+        String addTaskString = String.format("Got it. I've added this task:\n"
+                        + "%s"
+                        + "\nNow you have %d tasks in the list.",
                 taskObj.toString(), tasks.size());
         return addTaskString;
     }
