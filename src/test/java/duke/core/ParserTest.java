@@ -22,16 +22,6 @@ public class ParserTest {
     }
 
     @Test
-    public void identifyCommand_validDoneCommandWithoutArgument_exceptionThrown() {
-        try {
-            assertEquals(null, Parser.identifyCommand("done"));
-            fail();
-        } catch (Exception e) {
-            assertEquals("done should be in format: done [TASK NUMBER]", e.getMessage());
-        }
-    }
-
-    @Test
     public void identifyCommand_unrecognisedCommand_exceptionThrown() {
         try {
             Parser.identifyCommand("jksbfaskj bafjkb bjaskfb");
