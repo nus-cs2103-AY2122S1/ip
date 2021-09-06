@@ -5,7 +5,7 @@ import duke.core.TaskList;
 import duke.core.Ui;
 import duke.exception.DukeException;
 
-public class FindCommand implements Commandable {
+public class FindCommand implements Command {
     private String word;
 
     /**

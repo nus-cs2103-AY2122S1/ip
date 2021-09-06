@@ -3,7 +3,7 @@ package duke.core;
 import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
 import duke.command.AddTodoCommand;
-import duke.command.Commandable;
+import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
@@ -27,7 +27,7 @@ public class Parser {
      * @throws DukeException if there is an absence of user input or
      *     a valid command with missing arguments is entered
      */
-    public static Commandable identifyCommand(String input) throws DukeException {
+    public static Command identifyCommand(String input) throws DukeException {
         if (input.equals("")) {
             throw new DukeException("Go on, I'm all ears!");
         }

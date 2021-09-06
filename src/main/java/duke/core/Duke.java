@@ -2,7 +2,7 @@ package duke.core;
 
 import java.util.Scanner;
 
-import duke.command.Commandable;
+import duke.command.Command;
 import duke.exception.DukeException;
 
 /**
@@ -48,7 +48,7 @@ public class Duke {
         while (!isExit) {
             try {
                 String userInput = sc.nextLine();
-                Commandable c = Parser.identifyCommand(userInput);
+                Command c = Parser.identifyCommand(userInput);
                 ui.formatDisplay(c.execute(taskList, ui, storage));
                 isExit = c.isExit();
             } catch (DukeException e) {
@@ -72,7 +72,7 @@ public class Duke {
      */
     public String getResponse(String userInput) {
         try {
-            Commandable c = Parser.identifyCommand(userInput);
+            Command c = Parser.identifyCommand(userInput);
             return c.execute(taskList, ui, storage);
         } catch (DukeException e) {
             return e.getMessage();

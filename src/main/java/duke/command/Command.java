@@ -11,7 +11,7 @@ import duke.exception.DukeException;
  *
  * @author Clifford
  */
-public interface Commandable {
+public interface Command {
     /**
      * Executes the command and gives a String representation of the result of its execution.
      *
