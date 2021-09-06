@@ -56,15 +56,13 @@ public class Duke {
      * Parses and execute a command.
      *
      * @param command Command to be executed.
-     * @throws DukeException When the command is wrongly formatted.
      * @return Response from the program.
      */
     public String handleCommand (String command) {
         try {
             Command nextCommand = parser.parseCommand(command);
             String[] arguments = parser.parseArguments(nextCommand, command);
-            String response = execute(nextCommand, arguments);
-            return response;
+            return execute(nextCommand, arguments);
         } catch (DukeException err) {
             return ui.printDukeException(err);
         }
@@ -78,11 +76,10 @@ public class Duke {
      *
      * @param c Command to be executed
      * @param arguments Arguments of the Command
-     * @throws DukeException
      */
     private String execute(Command c, String[] arguments) {
         try {
-            String response = "";
+            String response;
             switch (c) {
             case TODO:
                 tasks.addTask(new ToDo(arguments[0]));
@@ -116,6 +113,8 @@ public class Duke {
                 response =  ui.printGoodbye();
                 ui.closeScanner();
                 break;
+            default :
+                throw new DukeException("Invalid Command");
             }
             return response;
         } catch (DukeException err) {

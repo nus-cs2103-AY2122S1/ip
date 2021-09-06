@@ -27,7 +27,6 @@ public class Storage {
             // Check for valid directory
             File f = new File(filePath);
             if (!f.getParentFile().exists()) {
-                //noinspection ResultOfMethodCallIgnored
                 f.getParentFile().mkdirs();
             }
 
@@ -71,6 +70,8 @@ public class Storage {
                 case "E":
                     tasks.addTask(new Event(nextItem[2].trim(), nextItem[1].trim().equals("1"), nextItem[3].trim()));
                     break;
+                default:
+                    throw new DukeException("Unrecognized save file content");
                 }
             }
             s.close();
