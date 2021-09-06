@@ -1,23 +1,21 @@
-package duke;
-
 /**
- * This file contains the main logic behind the Duke chatbot.
- * 
+ * This file runs the Duke chatbot that makes use
+ * of other files for logic processing.
+ *
  * @author: Rishabh Anand
  * @version: CS2103, AY21/22 Semester 1
- *
  */
 
-import java.io.FileNotFoundException;  // Import this class to handle errors
-import java.io.IOException;
+package duke;
 
+import java.io.FileNotFoundException;  // Import this class to handle errors
 import duke.datastore.DataStore;
 import duke.membuffer.MemoryBuffer;
 import duke.parser.Parser;
 import duke.ui.Ui;
 
 public class Duke {
-    private MemoryBuffer memBuff;
+    private final MemoryBuffer memBuff;
     public Ui userInt;
     public DataStore dataStore;
     final public Parser parser;
@@ -37,24 +35,6 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        String response = parser.execute(input, dataStore, userInt, memBuff);
-        return response;
+        return parser.execute(input, dataStore, memBuff);
     }
-
-//    public void run() {
-//        userInt.greet();
-//
-//        while (true) {
-//            try {
-//                String userInput = userInt.getUserInput();
-//                parser.execute(userInput, dataStore, userInt, memBuff);
-//            } catch (IOException e) {
-//                userInt.say(e.getMessage());
-//            }
-//        }
-//    }
-
-//    public static void main(String[] args) {
-//        new Duke().run();
-//    }
 }

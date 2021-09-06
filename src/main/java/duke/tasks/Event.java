@@ -8,8 +8,6 @@ package duke.tasks;
  * 
  */
 
-import java.time.LocalDateTime;
-
 public class Event extends Task {
     protected String timing;
 

@@ -16,11 +16,11 @@ public class DataStore {
     private ArrayList<Task> dataStore;
     
     public DataStore() {
-        dataStore = new ArrayList<Task>();
+        dataStore = new ArrayList<>();
     }
 
     /**
-     * Ingets and stores the data from the flat file in memory.
+     * Reads and stores the data from the flat file in memory.
      *
      * @param store the data store containing the per-line task records.
      * @param parser the Parser object that parses the commands from the file.

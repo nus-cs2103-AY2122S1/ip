@@ -35,15 +35,6 @@ abstract public class Task {
         return this.description;
     }
 
-    // compares the task with another
-    public Boolean equals(Task t) {
-        if (t.getDescription().equals(this.description)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     // returns the string representation of the Task
     @Override
     public String toString() {

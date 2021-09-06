@@ -23,7 +23,7 @@ import java.io.PrintWriter;
 import java.io.IOException;
 
 public class MemoryBuffer {
-    private String filePath;
+    private final String filePath;
 
     public MemoryBuffer(String fp) {
         filePath = fp;
@@ -34,10 +34,10 @@ public class MemoryBuffer {
      * Reads the flat file and its contents into an accessible format.
      *
      * @return an ArrayList of task records in string format.
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException thrown when the file cannot be found in the file system.
      */
     public ArrayList<String> readFile() throws FileNotFoundException {
-        ArrayList<String> store = new ArrayList<String>();
+        ArrayList<String> store = new ArrayList<>();
 
         File myObj = new File(filePath);
         Scanner myReader = new Scanner(myObj);
@@ -55,7 +55,7 @@ public class MemoryBuffer {
      * Writes the most recent task record logs into memory on a flat file.
      *
      * @param dataStore the data store containing the updated list of tasks.
-     * @throws IOException
+     * @throws IOException thrown when there is an error reading the file.
      */
     public void writeFile(DataStore dataStore) throws IOException {
         // BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));

@@ -14,7 +14,7 @@ import duke.ui.uiController.MainWindow;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private final Duke duke = new Duke();
 
     @Override
     public void start(Stage stage) {

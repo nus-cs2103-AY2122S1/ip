@@ -1,11 +1,3 @@
-/**
- * This class represents the main logic unit of the
- * JARVIS chatbot that performs the actual functions.
- *
- * @author Rishabh Anand
- * @versionCS2103 AY21/22 Semester 1
- */
-
 package duke.parser;
 
 import java.time.LocalDateTime;
@@ -18,10 +10,17 @@ import duke.tasks.Event;
 import duke.tasks.Deadline;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
-import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ *
+ * This class represents the main logic unit of the
+ * JARVIS chatbot that performs the actual functions.
+ *
+ * @author Rishabh Anand
+ * @version CS2103 AY21/22 Semester 1
+ */
 public class Brain {
     public Brain() {}
 
@@ -30,16 +29,16 @@ public class Brain {
      * Lists out the items in memory when requested by the user.
      *
      * @param dataStore the list containing the up-to-date task records.
-     * @param userInt the user interface object for logging.
      * @return the final result for the given query.
      */
-    public String listItems(DataStore dataStore, Ui userInt) {
+    public String listItems(DataStore dataStore) {
         StringBuilder builder = new StringBuilder();
         builder.append("Here are your tasks: \n");
         for (int i = 0; i < dataStore.length(); i++) {
             Task task = dataStore.get(i);
 
-            builder.append(i+1 + ". " + task.toString() + "\n");
+            String message = i+1 + ". " + task.toString() + "\n";
+            builder.append(message);
         }
         return builder.toString();
     }
@@ -68,20 +67,19 @@ public class Brain {
      *
      * @param input the user's input with the description.
      * @param dataStore the list containing the up-to-date task records.
-     * @param userInt the user interface object for logging.
      * @return the final result for the given query.
      */
-    public String createTodo(String input, DataStore dataStore, Ui userInt) {
+    public String createTodo(String input, DataStore dataStore) {
         String query = input.split(" ", 2)[1].strip();
         ToDo todo = new ToDo(query);
         int prevNumTasks = dataStore.length();
         dataStore.add(todo);
 
         StringBuilder builder = new StringBuilder();
-        builder.append("Got it. I've added this task: \n"
-                        + "\t" + todo.toString() + "\n"
-                        + "Now you have " + dataStore.length() + " tasks in the list.\n"
-        );
+        String message = "Got it. I've added this task: \n"
+                        + "\t" + todo + "\n"
+                        + "Now you have " + dataStore.length() + " tasks in the list.\n";
+        builder.append(message);
 
         int newNumTasks = dataStore.length();
 
@@ -96,10 +94,9 @@ public class Brain {
      *
      * @param input the user's input with the description and deadline.
      * @param dataStore the list containing the up-to-date task records.
-     * @param userInt the user interface object for logging.
      * @return the final result for the given query.
      */
-    public String createDeadline(String input, DataStore dataStore, Ui userInt) {
+    public String createDeadline(String input, DataStore dataStore) {
         input = input.split(" ", 2)[1].strip();
         String query = input.split("/by")[0];
         String limit = input.split("/by")[1];
@@ -110,10 +107,10 @@ public class Brain {
         dataStore.add(deadlineTask);
 
         StringBuilder builder = new StringBuilder();
-        builder.append("Got it. I've added this task: \n"
-                + "\t" + deadlineTask.toString() + "\n"
-                + "Now you have " + dataStore.length() + " tasks in the list.\n"
-        );
+        String message = "Got it. I've added this task: \n"
+                          + "\t" + deadlineTask + "\n"
+                          + "Now you have " + dataStore.length() + " tasks in the list.\n";
+        builder.append(message);
 
         int newNumTasks = dataStore.length();
 
@@ -128,10 +125,9 @@ public class Brain {
      *
      * @param input the user's input with the description and timing.
      * @param dataStore the list containing the up-to-date task records.
-     * @param userInt the user interface object for logging.
      * @return the final result for the given query.
      */
-    public String createEvent(String input, DataStore dataStore, Ui userInt) {
+    public String createEvent(String input, DataStore dataStore) {
         input = input.split(" ", 2)[1].strip();
         String query = input.split("/at")[0];
         String datetime = input.split("/at")[1];
@@ -142,10 +138,10 @@ public class Brain {
         dataStore.add(eventTask);
 
         StringBuilder builder = new StringBuilder();
-        builder.append("Got it. I've added this task: \n"
-                + "\t" + eventTask.toString() + "\n"
-                + "Now you have " + dataStore.length() + " tasks in the list.\n"
-        );
+        String message = "Got it. I've added this task: \n"
+                + "\t" + eventTask + "\n"
+                + "Now you have " + dataStore.length() + " tasks in the list.\n";
+        builder.append(message);
 
         int newNumTasks = dataStore.length();
 
@@ -160,12 +156,11 @@ public class Brain {
      *
      * @param input the user's input with the ID of the task in the list.
      * @param dataStore the list containing the up-to-date task records.
-     * @param userInt the user interface object for logging.
      * @param warning the exact warning to be thrown when valid index range is exceeded.
      * @return the final result for the given query.
-     * @throws BotException
+     * @throws BotException throws a bot-specific exception when an error is encountered.
      */
-    public String completeTask(String input, DataStore dataStore, Ui userInt, String warning) throws BotException {
+    public String completeTask(String input, DataStore dataStore, String warning) throws BotException {
         int idx = Integer.parseInt(input.split(" ")[1]);
 
         StringBuilder builder = new StringBuilder();
@@ -176,14 +171,13 @@ public class Brain {
         } else {
             Task task = dataStore.get(idx-1);
             task.setDone();
-            userInt.say("Nice! I've marked this task as done: ");
-            userInt.say("\t" + task.toString());
+            builder.append("Nice! I've marked this task as done: \n");
+            builder.append(String.format("\t %s \n", task));
 
             assert task.getStatus().equals(true) : "Task has not actually been set to true. Task still false;";
 
-            builder.append("Nice! I've marked this task as done: \n"
-                    + "\t" + task.toString() + "\n"
-            );
+            String message = "Nice! I've marked this task as done: \n" + "\t" + task + "\n";
+            builder.append(message);
         }
 
         return builder.toString();
@@ -193,12 +187,11 @@ public class Brain {
      *
      * Shuts down the bot and stops the program from running.
      *
-     * @param userInt the user interface object for logging.
      * @param dataStore the list containing the up-to-date task records.
      * @param memBuff the memory buffer for reading and writing files.
      * @return the final result for the given query.
      */
-    public String shutdownBot(Ui userInt, DataStore dataStore, MemoryBuffer memBuff) {
+    public String shutdownBot(DataStore dataStore, MemoryBuffer memBuff) {
         // save current task log
         StringBuilder builder = new StringBuilder();
 
@@ -220,25 +213,24 @@ public class Brain {
      *
      * @param input the user's input with the task ID to be deleted.
      * @param dataStore the list containing the up-to-date task records.
-     * @param userInt the user interface object for logging.
      * @return the final result for the given query.
      */
-    public String deleteTask(String input, DataStore dataStore, Ui userInt) {
+    public String deleteTask(String input, DataStore dataStore) {
         int idx = Integer.parseInt(input.split(" ")[1]);
         Task task = dataStore.get(idx-1);
         int prevNumTasks = dataStore.length();
 
         StringBuilder builder = new StringBuilder();
 
-        builder.append("Noted. I've removed this task: \n"
-                        + "\t" + task.toString() + "\n"
-        );
+        String message = "Noted. I've removed this task: \n" + "\t" + task.toString() + "\n";
+        builder.append(message);
+
         dataStore.remove(idx-1); // actual deletion
         int newNumTasks = dataStore.length();
 
         assert prevNumTasks - newNumTasks == 1 : "Data Store task count is not functioning as expected; Task increment not observed.";
 
-        builder.append("Now you have " + (dataStore.length()) + " tasks in the list.\n");
+        builder.append(String.format("Now you have %d tasks in the list.\n", dataStore.length()));
 
         return builder.toString();
     }
@@ -247,10 +239,9 @@ public class Brain {
      * Returns the closest matching results from list of tasks.
      * @param input the user query to be found.
      * @param dataStore the list containing the up-to-date task records.
-     * @param userInt the user interface object for logging.
      * @return the final result for the given query.
      */
-    public String find(String input, DataStore dataStore, Ui userInt) {
+    public String find(String input, DataStore dataStore) {
         String query = input.split(" ")[1];
 
         StringBuilder builder = new StringBuilder();
@@ -261,7 +252,8 @@ public class Brain {
             String message = record.toString();
 
             if (record.getDescription().contains(query)) {
-                builder.append((i+1) + ". " + message + "\n");
+                String text = (i+1) + ". " + message + "\n";
+                builder.append(text);
             }
         }
 
