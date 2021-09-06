@@ -1,11 +1,11 @@
 package duke.commands;
 
+import java.io.IOException;
+
 import duke.Storage;
 import duke.Tasklist;
 import duke.Ui;
 import duke.tasks.Task;
-
-import java.io.IOException;
 
 /**
  * Represents an Add Command which includes information about the Task

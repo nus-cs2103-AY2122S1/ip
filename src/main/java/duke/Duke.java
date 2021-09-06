@@ -1,12 +1,12 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.commands.Command;
 import duke.exceptions.DukeException;
 import duke.exceptions.NoSuchCommandException;
 import duke.exceptions.NoSuchTaskException;
 
-import java.io.IOException;
-import java.util.ArrayList;
 /**
  * Main Class that calls the other components to put the whole system together
  */
@@ -44,10 +44,11 @@ public class Duke {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
+                Command command = Parser.parse(fullCommand);
+                command.execute(tasks, ui, storage);
+                isExit = command.isExit();
             } catch (NoSuchCommandException | NoSuchTaskException | IOException ex) {
+                System.out.println("Something went wrong");
             } finally {
                 //ui.showLine();
             }

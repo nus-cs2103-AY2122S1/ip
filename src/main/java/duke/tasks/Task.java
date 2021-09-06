@@ -1,23 +1,21 @@
 package duke.tasks;
 
-import duke.exceptions.NoSuchCommandException;
-
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.File;
-import java.util.Arrays;
 
+import duke.exceptions.NoSuchCommandException;
 
 public class Task {
 
     private final String name;
     private boolean done;
 
-    Task(String name, boolean done){
+    Task(String name, boolean done) {
         this.name = name;
         this.done = done;
     }
@@ -26,9 +24,9 @@ public class Task {
         this.done = true;
     }
 
-    public boolean isMatch(String input){
+    public boolean isMatch(String input) {
         for (String word : name.split(" ")) {
-            if(word.matches(input)) {
+            if (word.matches(input)) {
                 return true;
             }
         }
@@ -41,18 +39,18 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", (this.done)? "X" : " ", this.name);
+        return String.format("[%s] %s", (this.done) ? "X" : " ", this.name);
     }
 
     public String toStringOutput() {
-        return String.format("[%s] %s", (this.done)? "X" : " ", this.name);
+        return String.format("[%s] %s", (this.done) ? "X" : " ", this.name);
     }
 
-    String getName(){
+    String getName() {
         return this.name;
     }
 
-    Boolean getDone(){
+    Boolean getDone() {
         return this.done;
     }
 
@@ -63,17 +61,17 @@ public class Task {
         }
     }
 
-    public static void saveTaskList(ArrayList<Task> aList, String filename) throws IOException{
-        BufferedWriter writer = new BufferedWriter(new FileWriter(System.getProperty("user.dir")+filename));
+    public static void saveTaskList(ArrayList<Task> aList, String filename) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(System.getProperty("user.dir") + filename));
 
         try {
-            File file = new File(System.getProperty("user.dir")+filename);
+            File file = new File(System.getProperty("user.dir") + filename);
 
             if (!file.exists()) {
                 file.createNewFile();
             }
 
-            for (int i = 1; i <= aList.size(); i++){
+            for (int i = 1; i <= aList.size(); i++) {
                 writer.write(aList.get(i - 1).toStringOutput());
                 writer.newLine();
             }
@@ -83,7 +81,7 @@ public class Task {
 
         try {
             writer.close();
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             System.out.println(ex);
         }
     }

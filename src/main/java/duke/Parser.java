@@ -1,6 +1,12 @@
 package duke;
 
-import duke.commands.*;
+import duke.commands.AddCommand;
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
 import duke.exceptions.NoSuchCommandException;
 import duke.tasks.DeadlinesTask;
 import duke.tasks.EventsTask;
@@ -24,6 +30,7 @@ public class Parser {
      * @throws NoSuchCommandException If the input is invalid
      */
 
+    @SuppressWarnings("checkstyle:WhitespaceAround")
     public static Command parse(String input) throws NoSuchCommandException {
         switch(input.split(" ")[0]) {
         case "list":
@@ -32,14 +39,14 @@ public class Parser {
             try {
                 Integer index = Integer.parseInt(input.split(" ")[1]);
                 return new DoneCommand(index);
-            } catch (NullPointerException ex){
+            } catch (NullPointerException ex) {
                 throw new NoSuchCommandException("Invalid Command");
             }
         case "delete":
             try {
                 Integer index = Integer.parseInt(input.split(" ")[1]);
                 return new DeleteCommand(index);
-            } catch (NullPointerException ex){
+            } catch (NullPointerException ex) {
                 throw new NoSuchCommandException("Invalid Command");
             }
 
@@ -54,7 +61,8 @@ public class Parser {
         case "deadline":
             try {
                 DeadlinesTask.isLegitInput(input);
-                return new AddCommand(new DeadlinesTask(DeadlinesTask.getNameInput(input), false, Task.parseDateTime(DeadlinesTask.getDeadlineInput(input))));
+                return new AddCommand(new DeadlinesTask(DeadlinesTask.getNameInput(input),
+                        false, Task.parseDateTime(DeadlinesTask.getDeadlineInput(input))));
             } catch (NoSuchCommandException ex) {
                 throw new NoSuchCommandException("Invalid Command");
             }
@@ -62,7 +70,8 @@ public class Parser {
         case "event":
             try {
                 EventsTask.isLegitInput(input);
-                return new AddCommand(new EventsTask(EventsTask.getNameInput(input), false, Task.parseDateTime(EventsTask.getDeadlineInput(input))));
+                return new AddCommand(new EventsTask(EventsTask.getNameInput(input),
+                        false, Task.parseDateTime(EventsTask.getDeadlineInput(input))));
             } catch (NoSuchCommandException ex) {
                 throw new NoSuchCommandException("Invalid Command");
             }
@@ -77,7 +86,7 @@ public class Parser {
             return new ByeCommand();
         default:
             throw new NoSuchCommandException("Invalid Command");
-    }
+        }
     }
 
 }

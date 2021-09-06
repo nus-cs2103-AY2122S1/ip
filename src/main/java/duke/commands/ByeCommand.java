@@ -4,8 +4,6 @@ import duke.Storage;
 import duke.Tasklist;
 import duke.Ui;
 
-import java.io.IOException;
-
 /**
  * Represents a Bye Command which includes information about
  * how it should be executed

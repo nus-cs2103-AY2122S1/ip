@@ -1,16 +1,13 @@
 package duke;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.NoSuchTaskException;
 import duke.tasks.Task;
-
-
-import java.io.IOException;
-import java.io.File;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.File;
-
 
 /**
  * Storage Class that is able to read .txt file to Tasklist and
@@ -29,7 +26,7 @@ public class Storage {
      * @param filepath filepath where tasklist is saved to
      */
 
-    Storage(String filepath){
+    Storage(String filepath) {
         this.filepath = filepath;
     }
 
@@ -43,7 +40,7 @@ public class Storage {
         try {
             Task.saveTaskList(tasklist.getTasklist(), filepath);
 
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             throw new IOException();
         }
     }
@@ -57,8 +54,8 @@ public class Storage {
      */
     public Tasklist fileToTasklist() throws DukeException {
         try {
-            File file = new File(System.getProperty("user.dir")+filepath);
-            System.out.println(System.getProperty("user.dir")+filepath);
+            File file = new File(System.getProperty("user.dir") + filepath);
+            System.out.println(System.getProperty("user.dir") + filepath);
             Tasklist tasklist = new Tasklist();
             if (!file.exists()) {
                 file.createNewFile();
@@ -69,7 +66,7 @@ public class Storage {
                 StringBuffer sb = new StringBuffer();
                 String line;
 
-                while((line=br.readLine())!=null){
+                while ((line = br.readLine()) != null) {
                     Task temp = Tasklist.parseInput(line);
                     tasklist.addTask(temp);
                 }

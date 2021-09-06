@@ -5,9 +5,6 @@ import duke.Tasklist;
 import duke.Ui;
 import duke.exceptions.NoSuchTaskException;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 /**
  * Represents a List Command which includes information about
  * how it should be executed
@@ -35,8 +32,8 @@ public class ListCommand extends Command {
     @Override
     public void execute(Tasklist tasklist, Ui ui, Storage storage) throws NoSuchTaskException {
         ui.showListMessage();
-        for (int i = 1; i <= tasklist.getTasklistSize(); i++){
-            System.out.println(String.valueOf(i) + ". " + tasklist.getTask(i-1));
+        for (int i = 1; i <= tasklist.getTasklistSize(); i++) {
+            System.out.println(String.valueOf(i) + ". " + tasklist.getTask(i - 1));
         }
     }
 }
