@@ -13,7 +13,7 @@ import tasks.*;
  */
 public class Ui {
 
-    private static final String SEP_LINE = "____________________________________________________________";
+    private static final String SEP_LINE = "_________________________________________________";
 
     private DukeParser parser;
 
