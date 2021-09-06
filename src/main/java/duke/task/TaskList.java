@@ -85,10 +85,11 @@ public class TaskList {
     public Task[] tasksOnDate(String date) throws DukeException {
         try {
             LocalDate search = LocalDate.parse(date.trim(), DateTimeFormatter.ofPattern("d/MM/yyyy"));
+            // use stream filter function to find results based on inputted date
             Task[] filtered = this.list.stream().filter(task -> task.compareDate(search)).toArray(Task[]::new);
             return filtered;
         } catch (DateTimeParseException e) {
-            throw new DukeException("☹ OOPS!!! Invalid date");
+            throw new DukeException("☹ OOPS!!! Invalid date format");
         }
     }
 
@@ -99,6 +100,7 @@ public class TaskList {
      * @return Array of tasks containing given keyword.
      */
     public Task[] findByKeyword(String search) {
+        // use stream filter function to find results based on keyword
         Task[] filtered = this.list.stream().filter(task -> task.compareKeyword(search)).toArray(Task[]::new);
         return filtered;
     }
