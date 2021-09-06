@@ -20,6 +20,7 @@ public class Duke {
     }
 
     private static String endBot() {
+        assert !done;
         done = true;
         return "Bye for now!";
     }
