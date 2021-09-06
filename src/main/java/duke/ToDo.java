@@ -2,6 +2,7 @@ package duke;
 
 /**
  * Represents a specific type of Task.
+ * @author Zhao Peiduo
  */
 public class ToDo extends Task {
 

@@ -15,16 +15,15 @@ public class ParserTaskListTest {
                 + "event meeting /at 2021-08-01\n"
                 + "done 1\n"
                 + "done 2\n"
-                + "done 3\n"
-                + "bye");
+                + "done 3\n");
         Storage storage = new Storage();
         Parser parser = new Parser(new TaskList(storage));
         while (testScanner.hasNextLine()) {
             parser.parse(testScanner.nextLine());
         }
-        assertEquals(storage.getUserInputRecords().get(0).toString(), "[T][X] sleep");
-        assertEquals(storage.getUserInputRecords().get(1).toString(), "[D][X] assignment (by: AUGUST 9 2021)");
-        assertEquals(storage.getUserInputRecords().get(2).toString(), "[E][X] meeting (at: AUGUST 1 2021)");
+        StubStorage stubStorage = new StubStorage();
+        stubStorage.setExpectedResults();
+        assertEquals(stubStorage.getUserInputRecords(), storage.getUserInputRecords());
     }
 
     @Test
@@ -33,8 +32,7 @@ public class ParserTaskListTest {
                 + "todo task 2\n"
                 + "todo task 3\n"
                 + "delete 3\n"
-                + "delete 2\n"
-                + "bye");
+                + "delete 2\n");
         Storage storage = new Storage();
         ArrayList<Task> expectedRecord = new ArrayList<>();
         expectedRecord.add(new ToDo("task 1"));
@@ -50,8 +48,7 @@ public class ParserTaskListTest {
         Scanner testScanner = new Scanner("todo task 1\n"
                 + "todo task 2\n"
                 + "todo task 3\n"
-                + "deleteAll\n"
-                + "bye");
+                + "deleteAll\n");
         Storage storage = new Storage();
         Parser parser = new Parser(new TaskList(storage));
         while (testScanner.hasNextLine()) {

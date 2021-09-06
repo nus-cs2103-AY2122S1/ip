@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 /**
  * Represents a specific type of Task with an additional date field.
+ * @author Zhao Peiduo
  */
 public class Event extends Task {
     private final LocalDate date;

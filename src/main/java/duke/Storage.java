@@ -14,6 +14,7 @@ import java.util.Scanner;
  * The storage class is in charge of recording the user's input and loading saved user record.
  * Saving and loading tasks are done automatically by default, but a user can save and load the tasks to a specified
  * directory by using the save/load command.
+ * @author Zhao Peiduo
  */
 public class Storage {
 

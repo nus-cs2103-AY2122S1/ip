@@ -12,8 +12,8 @@ public class StubStorage extends Storage {
 
     public void setExpectedResults() {
         ToDo todoTestcase = new ToDo("sleep");
-        Deadline deadlineTestcase = new Deadline("assignment", LocalDate.of(2021, 8, 9));
-        Event eventTestcase = new Event("meeting", LocalDate.of(2021, 8, 1));
+        Deadline deadlineTestcase = new Deadline("assignment ", LocalDate.of(2021, 8, 9));
+        Event eventTestcase = new Event("meeting ", LocalDate.of(2021, 8, 1));
         todoTestcase.setDone(true);
         deadlineTestcase.setDone(true);
         eventTestcase.setDone(true);
