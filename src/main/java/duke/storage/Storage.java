@@ -16,6 +16,8 @@ import duke.task.ToDo;
 
 public class Storage {
 
+    private static final String DIR_NAME = "data";
+    private static final String FILE_NAME = "duke.txt";
     /**
      * Constructor for Storage object.
      */
@@ -31,37 +33,17 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> listOfTasks = new ArrayList<>();
         try {
-            File directory = new File("data");
+            File directory = new File(DIR_NAME);
+            // If directory not found, create directory
             directory.mkdir();
-            File data = new File("data", "duke.txt");
+            File data = new File(DIR_NAME, FILE_NAME);
+            // If file not found, create file
             data.createNewFile();
             Scanner reader = new Scanner(data);
             while (reader.hasNextLine()) {
                 String task = reader.nextLine();
-                String[] vars = task.split("\\|");
-                Task t;
-                switch (vars[0].trim()) {
-                case "T": {
-                    t = new ToDo(vars[2].trim());
-                    break;
-                }
-                case "D": {
-                    t = new Deadline(vars[2].trim(), vars[3].trim());
-                    break;
-                }
-                case "E": {
-                    t = new Event(vars[2].trim(), vars[3].trim());
-                    break;
-                }
-                default: {
-                    t = new ToDo("");
-                    break;
-                }
-                }
-                if (Integer.parseInt(vars[1].trim()) == 1) {
-                    t.completeItem();
-                }
-                listOfTasks.add(t);
+                String[] taskDetails = task.split("\\|");
+                initialiseTask(taskDetails, listOfTasks);
             }
             reader.close();
         } catch (FileNotFoundException e) {
@@ -72,6 +54,32 @@ public class Storage {
         return listOfTasks;
     }
 
+    private void initialiseTask(String[] taskDetails, ArrayList<Task> listOfTasks) {
+        Task t;
+        switch (taskDetails[0].trim()) {
+        case "T": {
+            t = new ToDo(taskDetails[2].trim());
+            break;
+        }
+        case "D": {
+            t = new Deadline(taskDetails[2].trim(), taskDetails[3].trim());
+            break;
+        }
+        case "E": {
+            t = new Event(taskDetails[2].trim(), taskDetails[3].trim());
+            break;
+        }
+        default: {
+            t = new ToDo("");
+            break;
+        }
+        }
+        if (Integer.parseInt(taskDetails[1].trim()) == 1) {
+            t.completeItem();
+        }
+        listOfTasks.add(t);
+    }
+
     /**
      * Updates the txt file containing the list of tasks.
      *
@@ -79,7 +87,8 @@ public class Storage {
      */
     public static void updateFile(TaskList l) {
         try {
-            FileWriter writer = new FileWriter("data/duke.txt", false);
+            String fullPathName = DIR_NAME + "/" + FILE_NAME;
+            FileWriter writer = new FileWriter(fullPathName, false);
             writer.write(l.format());
             writer.close();
         } catch (IOException e) {
