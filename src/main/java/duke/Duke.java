@@ -13,8 +13,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.util.Scanner;
-
 import commands.Command;
 
 public class Duke extends Application {
@@ -37,40 +35,11 @@ public class Duke extends Application {
     private Ui ui;
     private TaskList taskList;
     private Storage storage;
-    private boolean isRunning;
 
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage("data/tasks.txt");
         this.taskList = new TaskList(this.storage.readFile());
-        this.isRunning = false;
-    }
-
-    /**
-     * Runs this instance of Duke, which starts a new Scanner object
-     * to accept user commands.
-     *
-     * This method is not used in the GUI version of Duke.
-     * Use the start method below instead for GUI.
-     */
-    private void run() {
-        this.isRunning = true;
-        this.taskList = new TaskList(this.storage.readFile());
-
-        Scanner sc = new Scanner(System.in);
-
-        this.ui.greet();
-
-        while (this.isRunning) {
-            String input = sc.nextLine();
-            Command command = this.ui.parseInput(input);
-            this.ui.printSepLine();
-            System.out.println(command.execute(this.ui, this.taskList, this.storage));
-            this.ui.printSepLine();
-            this.isRunning = !command.isQuit();
-        }
-
-        sc.close();
     }
 
     /**
@@ -187,11 +156,5 @@ public class Duke extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
-        // more code to be added here later
-    }
-
-    public static void main(String[] args) {
-        Duke d = new Duke();
-        d.run();
     }
 }

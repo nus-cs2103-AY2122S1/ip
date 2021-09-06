@@ -51,19 +51,19 @@ public class Storage {
      */
     private void processFileLine(String taskLine, ArrayList<Task> taskList) throws DukeException {
         String[] parsedLine = taskLine.split(" \\| ", 3);
-        String command = parsedLine[0];
+        String taskType = parsedLine[0];
         Boolean isDone = parsedLine[1].equals("1");
         String next = parsedLine[2];
-        if (command.equals("T")) {
+        if (taskType.equals("T")) {
             Todo todo = new Todo(next, isDone);
             taskList.add(todo);
-        } else if (command.equals("D")) {
+        } else if (taskType.equals("D")) {
             String[] details = next.split(" \\| ", 2);
             String desc = details[0];
             LocalDate dueDate = LocalDate.parse(details[1]);
             Deadline dl = new Deadline(desc, isDone, dueDate);
             taskList.add(dl);
-        } else if (command.equals("E")) {
+        } else if (taskType.equals("E")) {
             String[] details = next.split(" \\| ", 2);
             String desc = details[0];
             String time = details[1];
