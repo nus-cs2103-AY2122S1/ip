@@ -22,6 +22,14 @@ public class HelpCommand extends Command {
         this.userInput = userInput;
     }
 
+    /**
+     * Executes the instructions for a help operation.
+     *
+     * @param taskList The task list currently loaded on Duke.
+     * @param ui The object representing the UI of Duke.
+     * @param storage The object representing the storage of the Duke program.
+     * @return A string to be displayed to the user on the user interface.
+     */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String[] commandAndArgument = this.userInput.split(" ", 2);

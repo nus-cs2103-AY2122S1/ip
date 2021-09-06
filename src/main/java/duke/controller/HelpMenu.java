@@ -9,6 +9,11 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
+/**
+ * The HelpMenu class is a controller class that represents a small menu of buttons consisting of
+ * all commands supported by Duke. The user can click on each of these buttons to find out what
+ * each command does, and the proper syntax required to use each command.
+ */
 public class HelpMenu extends VBox {
     @FXML
     private Button byeButton;
@@ -31,6 +36,12 @@ public class HelpMenu extends VBox {
 
     private VBox dialogContainer;
 
+    /**
+     * Constructs a help menu GUI element.
+     *
+     * @param duke The object representing the Duke program.
+     * @param dialogContainer The container containing all messages between the user and Duke.
+     */
     public HelpMenu(Duke duke, VBox dialogContainer) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(HelpMenu.class.getResource("/view/HelpMenu.fxml"));
