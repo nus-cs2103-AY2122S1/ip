@@ -25,18 +25,20 @@ public class TaskList {
      * @param input
      */
 
-    public void action(String input) {
+    public String action(String input) {
+        String output;
         if (input.equals("list")) {
-            listTasks();
+            output = listTasks();
         } else if (input.startsWith("done")) {
-            markAsDone(input);
+            output = markAsDone(input);
         } else if (input.startsWith("delete")) {
-            deleteTask(input);
+            output = deleteTask(input);
         } else if (input.startsWith("find")) {
-            findTask(input);
+            output = findTask(input);
         } else {
-            addTask(input);
+            output = addTask(input);
         }
+        return output;
     }
 
     /**
@@ -52,14 +54,17 @@ public class TaskList {
         return output;
     }
 
-    private void listTasks() {
-        System.out.println("Here is your to-do list!");
+    private String listTasks() {
+        String output = "Here is your to-do list!\n";
         for (int i = 0; i < myList.size(); i++) {
-            System.out.println(i + 1 + ". " + myList.get(i).toString());
+            int index = i + 1;
+            output = output + index + ". " + myList.get(i).toString() + "\n";
         }
+        return output;
     }
 
-    private void addTask(String input) {
+    private String addTask(String input) {
+        String output = "";
         try {
             if (input.startsWith("todo")) {
                 String remaining = input.substring(5);
@@ -75,64 +80,66 @@ public class TaskList {
                 LocalDate myDate = LocalDate.parse(segments[1]);
                 myList.add(new Event(segments[0], myDate));
             } else {
-                System.out.println("Invalid task. Please specify the type of task.");
-                return;
+                output = "Invalid task. Please specify the type of task.";
+                return output;
             }
-            System.out.println("I've added this task:");
-            System.out.println(myList.get(myList.size() - 1));
-            System.out.println("Now you have " + myList.size() + " tasks.");
+            output = "I've added this task:\n";
+            output = output + myList.get(myList.size() - 1) + "\n";
+            output = output + "Now you have " + myList.size() + " tasks.\n";
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Invalid format. Please follow this format. <type of task> <description> /<date if necessary>");
+            output = "Invalid format. Please follow this format. <type of task> <description> /<date if necessary>";
         } catch (StringIndexOutOfBoundsException e) {
-            System.out.println("Invalid input. Please type something after specifying the type of task.");
+            output = "Invalid input. Please type something after specifying the type of task.";
         } catch (DateTimeParseException e) {
-            System.out.println("Wrong date format. Please provide your date in this format: yyyy-mm-dd");
+            output = "Wrong date format. Please provide your date in this format: yyyy-mm-dd";
         }
+        return output;
     }
 
-    private void deleteTask(String input) {
+    private String deleteTask(String input) {
         String[] segments = input.split(" ");
         try {
             int index = Integer.parseInt(segments[segments.length - 1]);
             Task myTask = myList.get(index - 1);
             myList.remove(index - 1);
-            System.out.println("I've deleted this task:\n[X] " + myTask.description);
+            return "I've deleted this task:\n[X] " + myTask.description + "\n";
         } catch (NumberFormatException e) {
-            System.out.println("Please input a number after the keyword: delete");
+            return "Please input a number after the keyword: delete";
         } catch (IndexOutOfBoundsException | NullPointerException e ) {
-            System.out.println("Please input a valid task index");
+            return "Please input a valid task index";
         }
     }
 
-    private void findTask(String input) {
+    private String findTask(String input) {
         String[] segments = input.split(" ");
         try {
-            System.out.println("Here are the matching tasks:");
+            String output = "Here are the matching tasks:\n";
             int count = 1;
             for (int i = 0; i < myList.size(); i++) {
                 String task = myList.get(i).toString();
                 if (task.contains(segments[1])) {
-                    System.out.println(count + ". " + task);
+                    output = output + count + ". " + task + "\n";
                     count++;
                 }
             }
+            return output;
         } catch (NumberFormatException e) {
-            System.out.println("Please input a word after the keyword: find");
+            return "Please input a word after the keyword: find";
         }
     }
 
 
-    private void markAsDone(String input) {
+    private String markAsDone(String input) {
         String[] segments = input.split(" ");
         try {
             int index = Integer.parseInt(segments[segments.length - 1]);
             Task myTask = myList.get(index - 1);
             myTask.markAsDone();
-            System.out.println("I've marked this task as done:\n[X] " + myTask.description);
+            return "I've marked this task as done:\n[X] " + myTask.description + "\n";
         } catch (NumberFormatException e) {
-            System.out.println("Please input a number after the keyword: done");
+            return "Please input a number after the keyword: done";
         } catch (IndexOutOfBoundsException | NullPointerException e ) {
-            System.out.println("Please input a valid task index");
+            return "Please input a valid task index";
         }
     }
 }

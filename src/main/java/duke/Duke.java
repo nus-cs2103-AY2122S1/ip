@@ -19,29 +19,28 @@ public class Duke {
         tasks = new TaskList(storage.loadTasks());
     }
 
-    private static void endBot() {
+    private static String endBot() {
         done = true;
-        System.out.println("Bye for now!");
+        return "Bye for now!";
     }
 
     /**
-     * runs the Duke program
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-
-    public void run() {
-        while (!done) {
-            String input = ui.getInput();
-            if (input.equals("bye")) {
-                endBot();
-            } else {
-                tasks.action(input);
-                storage.saveTasks(tasks.output());
-            }
+    public String getResponse(String input) {
+        String output;
+        if (input.equals("bye")) {
+            output = endBot();
+        } else {
+            output = tasks.action(input);
+            storage.saveTasks(tasks.output());
         }
+
+        return output;
     }
 
     public static void main(String[] args) {
-        System.out.println("Sup! I'm Luka, your personal assistant.\n");
-        new Duke("data/tasks.txt").run();
+
     }
 }
