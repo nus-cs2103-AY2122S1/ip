@@ -11,8 +11,6 @@ import duke.exceptions.DukeException;
 import duke.exceptions.DukeReadSaveException;
 import duke.tasks.Task;
 
-
-
 /**
  * Class to handle reading and writing the save file.
  */
@@ -35,10 +33,10 @@ public class Storage {
     }
 
     /**
-     * Loads store file as a duke.TaskArrayList.
+     * Loads store file as a TaskArrayList.
      *
      * @param path path to store file.
-     * @return duke.TaskArrayList of stored tasks.
+     * @return TaskArrayList of stored tasks.
      */
     public static TaskArrayList load(Path path) throws DukeException, IOException {
         createStore(path);
@@ -65,7 +63,6 @@ public class Storage {
         createStore(path);
         ArrayList<String> strings = new ArrayList<>();
         for (Task task : taskList) {
-            String toWrite = "";
             strings.add(task.serialize());
         }
         try {
