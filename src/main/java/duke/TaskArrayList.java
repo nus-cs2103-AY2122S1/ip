@@ -1,9 +1,9 @@
 package duke;
 
-import java.util.ArrayList;
-
 import duke.exceptions.DukeException;
 import duke.tasks.Task;
+
+import java.util.ArrayList;
 
 /**
  * Array List of Task objects.
@@ -29,6 +29,16 @@ public class TaskArrayList extends ArrayList<Task> {
     }
 
     /**
+     * Check if the provided task number exists in the list
+     *
+     * @param taskNo Task number to check
+     * @return true if there is a task with that task number in the list
+     */
+    private boolean isValidTaskNo(int taskNo) {
+        return taskNo <= this.size();
+    }
+
+    /**
      * Marks the given task as done.
      *
      * @param taskNo task number to mark as done.
@@ -36,12 +46,16 @@ public class TaskArrayList extends ArrayList<Task> {
      * @throws DukeException when invalid task number provided.
      */
     public String deleteTask(int taskNo) throws DukeException {
-        if (taskNo > this.size()) {
+        if (!isValidTaskNo(taskNo)) {
             throw new DukeException(String.format("task %d not found", taskNo));
         }
-        Task toDel = this.get(taskNo - 1);
-        this.remove(taskNo - 1);
-        return "removed : " + toDel.toString() + "\n" + this.announceNewLength();
+        int taskIndex = taskNo - 1;
+
+        String toDel = this.get(taskIndex).toString();
+        this.remove(taskIndex);
+
+        return "removed : " + toDel + "\n"
+                + this.announceNewLength();
     }
 
     /**
@@ -59,13 +73,13 @@ public class TaskArrayList extends ArrayList<Task> {
      * @return String[] of "X. taskname".
      */
     public String enumerate() {
-        String out = "";
-        int num = 0;
+        StringBuilder out = new StringBuilder();
+        int taskIndex = 0;
         for (Task task : this) {
-            out += String.format("%d. ", num + 1) + task.toString() + "\n";
-            num++;
+            out.append(String.format("%d. %s\n", taskIndex + 1, task.toString()));
+            taskIndex++;
         }
-        return out;
+        return out.toString();
     }
 
     /**
@@ -77,30 +91,32 @@ public class TaskArrayList extends ArrayList<Task> {
      * @return String[] of tasks of "X. taskname"
      */
     public String find(String searchTerm) {
-        String out = "";
-        int num = 0;
+        StringBuilder out = new StringBuilder();
+        int taskIndex = 0;
         for (Task task : this) {
             if (task.toString().contains(searchTerm)) {
-                out += String.format("%d. ", num + 1) + task.toString() + "\n";
+                out.append(String.format("%d. %s\n", taskIndex + 1, task.toString()));
             }
-            num++;
+            taskIndex++;
         }
-        return out;
+        return out.toString();
     }
 
     /**
      * Marks a task as done.
      *
-     * @param index task number to mark.
+     * @param taskNo task number to mark.
      * @return mark done message String.
      * @throws DukeException when invalid task number provided.
      */
-    public String markDone(int index) throws DukeException {
-        if (index > this.size()) {
-            throw new DukeException(String.format("task %d not found", index));
+    public String markDone(int taskNo) throws DukeException {
+        if (this.isValidTaskNo(taskNo)) {
+            throw new DukeException(String.format("task %d not found", taskNo));
         }
-        this.get(index - 1).markDone();
+        int taskIndex = taskNo - 1;
+
+        this.get(taskIndex).markDone();
         return "Nice! I've marked this task as done:\n"
-                + this.get(index - 1).toString();
+                + this.get(taskIndex).toString();
     }
 }
