@@ -203,6 +203,8 @@ public class DukeFx extends Application {
     private String done(String input) {
         try {
             int doneIndex = parser.getCommandActionIndex(input);
+            assert doneIndex <= tasks.size() : "Task index out of bound";
+
             try {
                 tasks.get(doneIndex - 1).markAsDone();
                 storage.writeTasksToData(tasks);
@@ -300,6 +302,8 @@ public class DukeFx extends Application {
     private String delete(String input) {
         try {
             int deleteIndex = parser.getCommandActionIndex(input);
+            assert deleteIndex <= tasks.size() : "Task index out of bound";
+
             try {
                 Task removed = tasks.remove(deleteIndex - 1);
                 storage.writeTasksToData(tasks);

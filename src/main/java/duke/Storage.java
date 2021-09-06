@@ -77,17 +77,21 @@ public class Storage {
      */
     private Task dataStringToTask(String data) {
         String[] taskInfo = data.split(" [|] ");
+        assert taskInfo.length >= 3 : "Invalid data read";
 
         String taskType = taskInfo[0];
         Task task;
         switch (taskType) {
         case "T":
             // task is todo
+            assert taskInfo.length == 3 : "Invalid todo format";
             task = new Todo(taskInfo[2]);
 
             break;
         case "D":
             // task is deadline
+            assert taskInfo.length == 4 : "Invalid todo format";
+
             LocalDate by;
             try {
                 by = parser.stringToLocalDate(taskInfo[3]);
@@ -98,6 +102,8 @@ public class Storage {
             break;
         case "E":
             // task is event
+            assert taskInfo.length == 4 : "Invalid todo format";
+
             LocalDate at;
             try {
                 at = parser.stringToLocalDate(taskInfo[3]);
@@ -110,9 +116,11 @@ public class Storage {
             // not of any task type
             throw new IllegalArgumentException("Task type not recognized: " + taskType);
         }
+
         if (Integer.parseInt(taskInfo[1]) == 1) {
             task.markAsDone();
         }
+
         return task;
     }
 
