@@ -5,7 +5,6 @@ import java.time.DateTimeException;
 
 import duke.exception.DukeException;
 import duke.task.Event;
-import duke.task.Task;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
@@ -36,6 +35,8 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        assert taskList != null;
+        assert storage != null;
         String command = super.getUserInput();
         String[] inputValues = command.split(" ");
         if (inputValues.length == 1) {
@@ -50,6 +51,8 @@ public class EventCommand extends Command {
         String dateTime = command.substring(dateTimeIndex + 3).strip();
         try {
             Task event = new Event(description, dateTime);
+            assert !event.getDescription().equals("") : "Description cannot be empty";
+            assert !event.getAt().equals("") : "At cannot be empty:";
             return taskList.add(event, ui, storage);
         } catch (DateTimeException exception) {
             return ui.showInvalidDateTimeError();

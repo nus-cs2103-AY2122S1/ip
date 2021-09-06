@@ -30,6 +30,8 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        assert taskList != null;
+        assert storage != null;
         String command = super.getUserInput();
         String[] inputValues = command.split(" ");
         if (inputValues.length == 1) {
