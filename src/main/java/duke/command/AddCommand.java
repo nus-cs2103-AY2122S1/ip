@@ -34,7 +34,7 @@ public class AddCommand extends Command {
      */
 
     public AddCommand(AddCommandType addType, String description, TaskList tasks, String... dateTimeArgs) {
-        assert description != null : "userInput cannot be null.";
+        assert description != null : "Task Description cannot be null.";
         assert tasks != null : "TaskList cannot be null.";
         assert addType != null : "Command type cannot be null.";
         this.addType = addType;
