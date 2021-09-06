@@ -5,7 +5,6 @@ import task.Task;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -13,44 +12,6 @@ import java.util.stream.IntStream;
  * Deals with user interactions, mostly printing messages to the console following user commands.
  */
 public class Ui {
-
-    /**
-     * Displays the Duke welcome message.
-     *
-     * @return The welcome message string.
-     */
-    public String showWelcome() {
-        return showLine() + "  Hello! I'm Duke.\n  What's up?\n" + showLine();
-    }
-
-    /**
-     * Displays a line to represent the top or bottom of the Duke message box.
-     *
-     * @return The line string.
-     */
-    public String showLine() {
-        return "____________________________________________\n";
-    }
-
-    /**
-     * Displays the user input prompt.
-     *
-     * @return The input prompt string.
-     */
-    public String showInputPrompt() {
-        return "> ";
-    }
-
-    /**
-     * Reads the given user input.
-     *
-     * @param input The Scanner used to take in user input.
-     * @return A string of the given user input.
-     */
-    public String readCommand(Scanner input) {
-        return input.nextLine().trim();
-    }
-
     /**
      * Displays the program closing message.
      *
@@ -148,32 +109,5 @@ public class Ui {
      */
     public String showException(DukeException e) {
         return e.getMessage();
-    }
-
-    /**
-     * Displays the Duke initialisation message.
-     *
-     * @return The initialisation message string.
-     */
-    public String showInitialise() {
-        return "Loading Duke...";
-    }
-
-    /**
-     * Displays a message to show that the hard disk's directory did not exist and has been created.
-     *
-     * @return String representing the creation of the data directory.
-     */
-    public String showNewDataDirectory() {
-        return "Data directory does not exist, it has been created!";
-    }
-
-    /**
-     * Displays a message to show that the hard disk did not exist and has been created.
-     *
-     * @return String representing the creation of the hard disk.
-     */
-    public String showNewHardDisk() {
-        return "Hard disk does not exist, a new one has been created!";
     }
 }

@@ -13,7 +13,7 @@ public class ByeCommand extends Command {
      * Constructor for a ByeCommand.
      */
     public ByeCommand() {
-        super(true);
+        super();
         ui = new Ui();
     }
 
