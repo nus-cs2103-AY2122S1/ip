@@ -96,7 +96,8 @@ public class ParserImpl implements IParser {
             break;
         default:
             logger.warning("Unknown command : " + parsedCommands.get(0) + "being parsed");
-            IllegalCallerException illegalCallerException = new IllegalCallerException("I'm sorry, but I don't know what that means :-(");
+            IllegalCallerException illegalCallerException =
+                    new IllegalCallerException("I'm sorry, but I don't know what that means :-(");
             processException(illegalCallerException);
             break;
         }
