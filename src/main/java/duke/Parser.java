@@ -72,6 +72,23 @@ public class Parser {
     }
 
     /**
+     * Finds tasks matching the given keywords.
+     *
+     * @param keywords A string containing one or more keywords.
+     * @return A string representation of the matching tasks.
+     * @throws DukeException A Duke-specific exception that may occur when finding tasks.
+     */
+    private String find(String keywords) throws DukeException {
+        this.toFind = true;
+        String[] splitKeywords = keywords.split(" ");
+        TaskList matchingTasks = new TaskList();
+        this.tasks.stream().filter(task -> Arrays.stream(splitKeywords)
+                        .anyMatch(keyword -> task.containsKeyword(keyword) && !matchingTasks.contains(task)))
+                .forEach(matchingTasks::add);
+        return list(matchingTasks);
+    }
+
+    /**
      * Getter for the rewrite status of the last parsed command.
      *
      * @return True if data in Storage needs to be rewritten.
@@ -115,7 +132,6 @@ public class Parser {
                     throw new DukeException("☹ OOPS!!! The index of '" + command + "' cannot be empty.");
                 }
                 assert !arguments.equals("") : "Argument required, cannot be empty.";
-                this.toRewriteData = true;
                 int counter = Integer.parseInt(arguments);
                 return done(counter);
             } else if (command.equals("deadline")) {
@@ -175,13 +191,7 @@ public class Parser {
                 }
                 assert !arguments.equals("") : "Argument required, cannot be empty.";
                 this.toRewriteData = false;
-                this.toFind = true;
-                String[] splitKeywords = arguments.split(" ");
-                TaskList matchingTasks = new TaskList();
-                this.tasks.stream().filter(task -> Arrays.stream(splitKeywords)
-                        .anyMatch(keyword -> task.containsKeyword(keyword) && !matchingTasks.contains(task)))
-                        .forEach(matchingTasks::add);
-                return list(matchingTasks);
+                return find(arguments);
             }
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
