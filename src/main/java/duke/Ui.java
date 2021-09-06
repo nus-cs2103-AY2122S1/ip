@@ -9,9 +9,9 @@ public class Ui {
     /**
      * Show welcome message
      */
-    public void showWelcome() {
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+    public String showWelcome() {
+        String message = "Hello! I'm Duke\n" + "What can I do for you?";
+        return message;
     }
 
     /**
@@ -26,8 +26,9 @@ public class Ui {
     /**
      * Show error loading task file
      */
-    public void showLoadingError() {
-        System.out.println("No task list file found! Creating a new file for you (:");
+    public String showLoadingError() {
+        String message = "No task list file found! Creating a new file for you (:";
+        return message;
     }
 
     /**
@@ -36,10 +37,9 @@ public class Ui {
      * @param task
      * @param size
      */
-    public void showAddTask(Task task, int size) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + size + " tasks in the list.");
+    public String showAddTask(Task task, int size) {
+        String message = "Got it. I've added this task:\n" + task + "\nNow you have " + size + " tasks in the list.";
+        return message;
     }
 
     /**
@@ -48,10 +48,9 @@ public class Ui {
      * @param task
      * @param size
      */
-    public void showDeleteTask(Task task, int size) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + size + " tasks in the list.");
+    public String showDeleteTask(Task task, int size) {
+        String message = "Noted. I've removed this task:\n" + task + "\nNow you have " + size + " tasks in the list.";
+        return message;
     }
 
     /**
@@ -59,9 +58,9 @@ public class Ui {
      *
      * @param task
      */
-    public void showDoneTask(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task);
+    public String showDoneTask(Task task) {
+        String message = "Nice! I've marked this task as done:\n" + task;
+        return message;
     }
 
     /**
@@ -69,15 +68,17 @@ public class Ui {
      *
      * @param tasks
      */
-    public void showTaskList(TaskList tasks) {
-        System.out.println(tasks);
+    public String showTaskList(TaskList tasks) {
+        String message = tasks.toString();
+        return message;
     }
 
     /**
      * Show goodbye message
      */
-    public void showBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String showBye() {
+        String message = "Bye. Hope to see you again soon!";
+        return message;
     }
 
     /**
@@ -85,8 +86,8 @@ public class Ui {
      *
      * @param message
      */
-    public void showError(String message) {
-        System.out.println(message);
+    public String showError(String message) {
+        return message;
     }
 
     /**
@@ -94,8 +95,8 @@ public class Ui {
      *
      * @param taskList
      */
-    public void showFindTask(String taskList) {
-        System.out.println("Here are the matching tasks in your list:");
-        System.out.println(taskList);
+    public String showFindTask(String taskList) {
+        String message = "Here are the matching tasks in your list:\n" + taskList;
+        return message;
     }
 }
