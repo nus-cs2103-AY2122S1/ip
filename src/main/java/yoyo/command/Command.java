@@ -1,11 +1,11 @@
 package yoyo.command;
 
-import java.util.Arrays;
-
 import yoyo.core.DialogHandler;
 import yoyo.core.Storage;
 import yoyo.exception.YoyoException;
 import yoyo.task.TaskList;
+
+import java.util.Arrays;
 
 
 public abstract class Command {
@@ -29,18 +29,14 @@ public abstract class Command {
         }
     }
 
-    public boolean shouldContinueProgram() {
-        return true;
-    }
-
     /**
      * Executes actions depending on command type.
      *
-     * @param tasks Tasks currently in the Yoyo program.
-     * @param storage Storage instance of the Yoyo program.
+     * @param tasks         Tasks currently in the Yoyo program.
+     * @param storage       Storage instance of the Yoyo program.
      * @param dialogHandler Ui instance of Yoyo program.
-     * @throws YoyoException When input lack necessary info for commands.
      * @return The result string to be shown to user.
+     * @throws YoyoException When input lack necessary info for commands.
      */
     public abstract String execute(TaskList tasks, Storage storage, DialogHandler dialogHandler)
             throws YoyoException;

@@ -1,8 +1,5 @@
 package yoyo.gui;
 
-import java.io.IOException;
-import java.util.Collections;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +11,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
+
+import java.io.IOException;
+import java.util.Collections;
 
 /**
  * An example of a custom control using FXML.
@@ -45,20 +45,10 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
-    private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
-    }
-
-    /**
      * Factory method for creating user's dialog box.
      *
      * @param text Text to be shown.
-     * @param img Image for user.
+     * @param img  Image for user.
      * @return A DialogBox instance.
      */
     public static DialogBox getUserDialog(String text, Image img) {
@@ -69,12 +59,22 @@ public class DialogBox extends HBox {
      * Factory method for creating Yoyo's dialog box.
      *
      * @param text Text to be shown.
-     * @param img Image for Yoyo.
+     * @param img  Image for Yoyo.
      * @return A DialogBox instance.
      */
     public static DialogBox getYoyoDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;
+    }
+
+    /**
+     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     */
+    private void flip() {
+        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        Collections.reverse(tmp);
+        getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_LEFT);
     }
 }

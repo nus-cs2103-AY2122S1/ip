@@ -11,7 +11,6 @@ import javafx.scene.layout.VBox;
 import yoyo.Yoyo;
 
 import java.io.IOException;
-import java.util.concurrent.CompletableFuture;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
