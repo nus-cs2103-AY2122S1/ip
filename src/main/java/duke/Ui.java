@@ -4,10 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
-import duke.task.Todo;
 
 /**
  * Deals with interactions with user.
@@ -99,8 +96,8 @@ public class Ui {
      * @param task to add.
      */
     public String add(TaskList taskList, Task task) {
-            return "Got it. I've added this task:\n  " + task + "\nNow you have " + taskList.getTasks().size()
-                    + " tasks in the list.";
+        return "Got it. I've added this task:\n  " + task + "\nNow you have " + taskList.getTasks().size()
+                + " tasks in the list.";
     }
 
     /**
