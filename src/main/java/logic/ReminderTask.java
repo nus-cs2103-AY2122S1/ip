@@ -7,13 +7,21 @@ import ui.IUi;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * A Task than runs infinitely to send reminder about task every new day.
+ */
 public class ReminderTask implements Runnable {
     private final TaskDao taskDao;
     private final IUi ui;
     
     private LocalDate currentDate = LocalDate.now();
-    ;
     
+    /**
+     * Create A Task that display reminders.
+     *
+     * @param taskDao TaskDao.
+     * @param ui IUi.
+     */
     public ReminderTask(TaskDao taskDao, IUi ui) {
         this.taskDao = taskDao;
         this.ui = ui;
@@ -32,6 +40,10 @@ public class ReminderTask implements Runnable {
         }
     }
     
+    /**
+     * {@inheritDoc}
+     * <p> Run the task as a runnable. </p>
+     */
     @Override
     @SuppressWarnings("InfiniteLoopStatement")
     public void run() {
