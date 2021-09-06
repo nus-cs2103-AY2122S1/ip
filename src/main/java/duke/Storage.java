@@ -47,9 +47,9 @@ public class Storage {
     void listFileContents(String filePath) throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        TaskList.lines = new ArrayList<String>();
+        TaskListInternal.lines = new ArrayList<String>();
         while (s.hasNext()) {
-            TaskList.lines.add(s.nextLine());
+            TaskListInternal.lines.add(s.nextLine());
 
         }
         s.close();
@@ -66,7 +66,7 @@ public class Storage {
         clearer.write(""); //clear the file
         clearer.close();
         FileWriter fw = new FileWriter(filePath, true);
-        for (String line : TaskList.lines) {
+        for (String line : TaskListInternal.lines) {
             fw.write(line + System.lineSeparator());
         }
         fw.close();

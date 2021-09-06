@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class Parser {
     private static Ui ui = new Ui();
     private static Storage storage = new Storage();
-    private static TaskList taskList = new TaskList();
+    private static TaskListInternal taskListInternal = new TaskListInternal();
 
     public Parser() {
 
@@ -26,7 +26,7 @@ public class Parser {
                 break;
             } else if (command.equals("list")) {
 
-                ui.showList(TaskList.lines);
+                ui.showList(TaskListInternal.lines);
 
             } else if (command.contains("done")) {
                 String numbers = command.substring(5);
@@ -38,8 +38,8 @@ public class Parser {
                     continue;
                 }
                 int taskNo = Integer.parseInt(numbers);
-                if (TaskList.lines.size() < taskNo) {
-                    ui.showOutOfBoundsMsg(TaskList.lines.size());
+                if (TaskListInternal.lines.size() < taskNo) {
+                    ui.showOutOfBoundsMsg(TaskListInternal.lines.size());
                     continue;
                 }
                 if (taskNo <= 0) {
@@ -47,7 +47,7 @@ public class Parser {
                     continue;
                 }
                 taskNo--;
-                taskList.makeDone(storage, taskNo);
+                taskListInternal.makeDone(storage, taskNo);
             } else if (command.contains("delete") || command.contains("remove")) {
                 String numbers = command.substring(7);
                 try {
@@ -58,8 +58,8 @@ public class Parser {
                     continue;
                 }
                 int taskNo = Integer.parseInt(numbers);
-                if (TaskList.lines.size() < taskNo) {
-                    ui.showOutOfBoundsMsg(TaskList.lines.size());
+                if (TaskListInternal.lines.size() < taskNo) {
+                    ui.showOutOfBoundsMsg(TaskListInternal.lines.size());
                     continue;
                 }
                 if (taskNo <= 0) {
@@ -67,7 +67,7 @@ public class Parser {
                     continue;
                 }
                 taskNo--;
-                taskList.delete(storage, taskNo);
+                taskListInternal.delete(storage, taskNo);
 
             } else if (command.contains("todo")) {
                 String task = command.substring(5);
@@ -78,7 +78,7 @@ public class Parser {
                 ToDo taskToAdd = new ToDo(task);
 
                 String toBeAdded = taskToAdd.toString();
-                taskList.add(storage, toBeAdded);
+                taskListInternal.add(storage, toBeAdded);
                 try {
                     storage.writeListToFile(Duke.file.getPath());
                 } catch (IOException e) {
@@ -108,7 +108,7 @@ public class Parser {
 
                 Deadline taskToAdd = new Deadline(task, date);
                 String toBeAdded = taskToAdd.toString();
-                taskList.add(storage, toBeAdded);
+                taskListInternal.add(storage, toBeAdded);
 
                 try {
                     storage.writeListToFile(Duke.file.getPath());
@@ -139,7 +139,7 @@ public class Parser {
 
                 Deadline taskToAdd = new Deadline(task, date);
                 String toBeAdded = taskToAdd.toString();
-                taskList.add(storage, toBeAdded);
+                taskListInternal.add(storage, toBeAdded);
 
                 try {
                     storage.writeListToFile(Duke.file.getPath());
@@ -149,12 +149,12 @@ public class Parser {
 
             } else if (command.contains("find")) {
                 String searchQuery=command.substring(5);
-                ui.showSearchResults(TaskList.lines,searchQuery);
+                ui.showSearchResults(TaskListInternal.lines,searchQuery);
 
             } else if (command.equals("WIPE")) {
                 System.out.println("ARE YOU SURE? SAY Y IF YOU ARE AND LITERALLY ANYTHING ELSE IF YOU AREN'T");
                 if (sc.nextLine().equals("Y")) {
-                    TaskList.lines.clear();
+                    TaskListInternal.lines.clear();
                     try {
                         storage.writeListToFile(Duke.file.getPath());
                     } catch (IOException e) {

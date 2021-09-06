@@ -9,11 +9,11 @@ import java.io.IOException;
 /**
  * Represents the list of strings Duke uses to make changes to the list file.
  */
-public class TaskList {
+public class TaskListInternal {
     public static List<String> lines;
     private Ui ui = new Ui();
 
-    public TaskList() {
+    public TaskListInternal() {
     }
 
     /**
@@ -64,14 +64,14 @@ public class TaskList {
      * @param taskNo  Index of the task that is being deleted in the list.
      */
     void delete(Storage storage, int taskNo) {
-        String toBeDeleted = TaskList.lines.get(taskNo);
-        TaskList.lines.remove(taskNo);
+        String toBeDeleted = TaskListInternal.lines.get(taskNo);
+        TaskListInternal.lines.remove(taskNo);
         try {
             storage.writeListToFile(Duke.file.getPath());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ui.showDeletionMsg(toBeDeleted, TaskList.lines.size());
+        ui.showDeletionMsg(toBeDeleted, TaskListInternal.lines.size());
     }
 
     /**
@@ -81,10 +81,10 @@ public class TaskList {
      * @param toBeAdded Task that is being added.
      */
     boolean add(Storage storage, String toBeAdded) {
-        if (!TaskList.lines.contains(toBeAdded)) {
-            TaskList.lines.add(toBeAdded);
+        if (!TaskListInternal.lines.contains(toBeAdded)) {
+            TaskListInternal.lines.add(toBeAdded);
             ui.showTaskAdded(toBeAdded);
-            ui.showListSize(TaskList.lines.size());
+            ui.showListSize(TaskListInternal.lines.size());
             return true;
         } else {
             ui.showAlreadyInList(toBeAdded);
