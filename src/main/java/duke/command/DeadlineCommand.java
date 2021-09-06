@@ -26,6 +26,11 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String parse(String input, TaskList taskList) throws DukeException {
+        assert input.substring(0, getCommandLength() - 1).equals(getCommandString())
+                : "Input should start with command";
+        assert taskList != null : "taskList should not be null";
+
+        // No space after the command
         if (input.length() <= getCommandLength()) {
             throw new DukeException("Please input the deadline's name and date.");
         }
