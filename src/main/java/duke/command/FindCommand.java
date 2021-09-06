@@ -34,9 +34,10 @@ public class FindCommand extends Command {
         StringBuilder stringBuilder = new StringBuilder(str);
         int index = 1;
         for (Task task : tasks.getAllTasks()) {
-            if (task.toString().contains(keyword)) {
-                stringBuilder.append("\n").append(index++).append(".").append(task);
+            if (!task.toString().contains(keyword)) {
+                continue;
             }
+            stringBuilder.append("\n").append(index++).append(".").append(task);
         }
         return stringBuilder.toString();
     }

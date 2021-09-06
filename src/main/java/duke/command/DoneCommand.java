@@ -30,15 +30,14 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
-        if (0 <= taskNum && taskNum < tasks.size()) {
-            Task taskToBeDone = tasks.get(taskNum);
-            assert taskToBeDone != null;
-            taskToBeDone.markAsDone();
-            storage.update(tasks);
-            return "Nice! I've marked this task as done:\n  "
-                    + tasks.get(taskNum).toString();
-        } else {
+        if (taskNum < 0 || tasks.size() >= taskNum) {
             throw new DukeException("OOPS!!! Please enter a valid task number");
         }
+        Task taskToBeDone = tasks.get(taskNum);
+        assert taskToBeDone != null;
+        taskToBeDone.markAsDone();
+        storage.update(tasks);
+        return "Nice! I've marked this task as done:\n  "
+                + tasks.get(taskNum).toString();
     }
 }

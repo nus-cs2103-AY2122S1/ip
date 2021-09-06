@@ -30,14 +30,13 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
-        if (0 <= taskNum && taskNum < tasks.size()) {
-            Task removedTask = tasks.remove(taskNum);
-            storage.update(tasks);
-            return "Got it. I've removed this task:\n  "
-                    + removedTask
-                    + "\nNow you have " + tasks.size() + " tasks in the list.";
-        } else {
+        if (taskNum < 0 || tasks.size() >= taskNum) {
             throw new DukeException("OOPS!!! Please enter a valid task number");
         }
+        Task removedTask = tasks.remove(taskNum);
+        storage.update(tasks);
+        return "Got it. I've removed this task:\n  "
+                + removedTask
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 }
