@@ -260,24 +260,30 @@ public class Duke extends Application {
 
         } else if (command.contains(EVENT_COMMAND)) {
             String taskNDate = command.substring(6);
+
+            //Exception handling for missing date
             if (!(taskNDate.contains("/at"))) {
                 return "HELP THERES NO DATE please enter in YYYY-MM-DD format. " +
                         "Thank you for your kind cooperation.";
             }
+
             int splitIndex = taskNDate.indexOf("/at");
             String task = taskNDate.substring(0, splitIndex - 1);
             String date = taskNDate.substring(splitIndex + 4);
+
+            //Exception handling for missing name
             if (task.equals("")) {
                 return "WHATS THE NAME OF THE THING";
             }
 
+            //Exception handling for invalid date
             try {
                 LocalDate test = LocalDate.parse(date);
             } catch (DateTimeException error) {
                 return "WHATS THE DATE WHAT HAPPENED";
             }
 
-            return deadlineTaskAddedString(task, date);
+            return eventTaskAddedString(task, date);
 
         } else if (command.contains(FIND_COMMAND)) {
             String searchQuery = command.substring(5);
@@ -290,6 +296,11 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * Wipes the list and returns a string to notify the user.
+     *
+     * @return String
+     */
     String listWipedString() {
         TaskListInternal.lines.clear();
         try {
@@ -301,6 +312,13 @@ public class Duke extends Application {
         return "BAM! The list has been wiped.";
     }
 
+    /**
+     * Searches the task list for a tasks containing a specific search query and
+     * returns a sublist with the search results.
+     *
+     * @param searchQuery The query the user is searching for.
+     * @return String form of a sublist with the search results.
+     */
     String searchResultsString(String searchQuery) {
         int c = 1;
         String output = "Here are the search results for \"" + searchQuery + "\":" + System.lineSeparator();
@@ -314,6 +332,15 @@ public class Duke extends Application {
         return output;
     }
 
+    /**
+     * Attempts to add a deadline to the task list and returns a string to notify
+     * the user.
+     *
+     * @param task Name of the deadline.
+     * @param date Date of the deadline.
+     * @return String informing user that the task has been added or that it is already
+     *         inside the list.
+     */
     String deadlineTaskAddedString(String task, String date) {
         Deadline taskToAdd = new Deadline(task, date);
         String toBeAdded = taskToAdd.toString();
@@ -330,6 +357,39 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * Attempts to add an event to the task list and returns a string to notify
+     * the user.
+     *
+     * @param task Name of the event.
+     * @param date Date of the event.
+     * @return String informing user that the task has been added or that it is already
+     *         inside the list.
+     */
+    String eventTaskAddedString(String task, String date) {
+        Event taskToAdd = new Event(task, date);
+        String toBeAdded = taskToAdd.toString();
+        boolean notAlreadyInside = taskListInternal.add(storage, toBeAdded);
+        try {
+            storage.writeListToFile(Duke.file.getPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (notAlreadyInside) {
+            return "Task " + toBeAdded + " has been added. SPARKTASTIC.";
+        } else {
+            return "It is already inside. WOWZA!";
+        }
+    }
+
+    /**
+     * Attempts to add a to-do task to the task list and returns a
+     * string to notify the user.
+     *
+     * @param task Name of the to-do task.
+     * @return String informing user that the task has been added or that it is already
+     *         inside the list.
+     */
     String todoTaskAddedString(String task) {
         ToDo taskToAdd = new ToDo(task);
         String toBeAdded = taskToAdd.toString();
@@ -346,15 +406,29 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * Deletes the task at the target index of the list and returns a string to
+     * notify the user.
+     *
+     * @param targetIndex Index of the task to be deleted.
+     * @return String informing the user of the task's deletion.
+     */
     String taskDeletedString(int targetIndex) {
         String toBeDeleted = TaskListInternal.lines.get(targetIndex);
         taskListInternal.delete(storage, targetIndex);
         return "Task" + toBeDeleted + " has been deleted. How sad.";
     }
 
-    private String markedAsDoneString(int index) {
-        String toBeDone = TaskListInternal.lines.get(index);
-        boolean notAlreadyDone = taskListInternal.makeDone(storage, index);
+    /**
+     * Marks a task at the target index of the list as done and returns a string
+     * to notify the user.
+     *
+     * @param targetIndex Index of the task to be marked as done.
+     * @return String informing the user that the task has been marked done.
+     */
+    private String markedAsDoneString(int targetIndex) {
+        String toBeDone = TaskListInternal.lines.get(targetIndex);
+        boolean notAlreadyDone = taskListInternal.makeDone(storage, targetIndex);
         if (notAlreadyDone) {
             return "Task " + toBeDone + " is now marked as done. Well done.";
         } else {
@@ -362,6 +436,11 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * Returns the task list in string form.
+     *
+     * @return String form of the task list or a message if the list is empty.
+     */
     private String listStringForm() {
         int c = 1;
         String output = "";
