@@ -27,8 +27,8 @@ public class Storage {
             ArrayList<Task> tasks = new ArrayList<>();
 
             while (savedTasks.hasNextLine()) {
-                String curr = savedTasks.nextLine();
-                parseStoredTask(curr, tasks);
+                String storedTask = savedTasks.nextLine();
+                parseStoredTask(storedTask, tasks);
             }
 
             return tasks;
