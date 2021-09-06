@@ -1,6 +1,4 @@
-import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,6 +10,7 @@ import java.util.Scanner;
  * @author Thomas Hogben
  */
 public class Duke {
+
     private static final String MSG_ERROR_DEFAULT = "im sorry I is no understand.";
     private static final String MSG_ERROR_BLANK_DESCRIPTION = "is no leave description blank;";
     private static final String MSG_ERROR_BLANK_DATEANDTIME = "is no leave date and time blank!";
@@ -28,12 +27,10 @@ public class Duke {
 
     /** Program loops until this is set to false */
     private static boolean isRunning = true;
-    private static boolean isSavable = true;
     private static Scanner sc;
     private static Path savePath;
     /** A list of tasks to be done */
     private static ArrayList<Task> tasks = new ArrayList<>();
-
     /**
      * Lists out all Tasks numbered and on individual lines.
      * Calls the toString() method of each Task to display them

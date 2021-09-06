@@ -6,6 +6,11 @@ public abstract class Task {
     private String description;
     private boolean isDone;
 
+    public Task() {
+        this.description = "";
+        this.isDone = false;
+    }
+
     /**
      * @param description The description of the Task.
      */
@@ -17,6 +22,10 @@ public abstract class Task {
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setDone() {

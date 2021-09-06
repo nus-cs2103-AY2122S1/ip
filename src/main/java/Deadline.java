@@ -3,29 +3,26 @@
  * @author Thomas Hogben
  */
 public class Deadline extends DateAndTimeTask {
-    private String deadline;
+    private static String splitterKey = " /by ";
 
     /**
-     * Deprecated.
-     * @param description The description of the Task.
+     * @param description The input string to create the Task.
+     *                    Format: "[description] /by yyyy-mm-dd hhmm" (24h time)
      */
-    public Deadline(String description) {
-        super(description);
+    public Deadline(String description) throws DukeException {
+        super(description, splitterKey);
     }
 
     /**
-     * @param description The description of the Task.
-     * @param details The deadline of the Task.
+     * @param description The input string to create the Task.
+     *                    Format: "[description] /by yyyy-mm-dd hhmm" (24h time)
+     * @param isDone Whether the task is done.
      */
-    public Deadline(String description, String details) throws DukeException {
-        super(description, details);
+    public Deadline(String description, String dateAndTime, boolean isDone) throws DukeException {
+        super(description, dateAndTime, isDone);
     }
 
-    public Deadline(String description, String details, boolean isDone) throws DukeException {
-        super(description, details, isDone);
-    }
-
-        @Override
+    @Override
     public String getSave() {
         return "D" + super.getSave();
     }

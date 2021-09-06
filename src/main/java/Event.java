@@ -3,25 +3,23 @@
  * @author Thomas Hogben
  */
 public class Event extends DateAndTimeTask {
+    private static String splitterKey = " /at ";
 
     /**
-     * Deprecated.
-     * @param description The description of the Event.
+     * @param description The input string to create the Event.
+     *                    Format: "[description] /at yyyy-mm-dd hhmm" (24h time)
      */
-    public Event(String description) {
-        super(description);
+    public Event(String description) throws DukeException {
+        super(description, splitterKey);
     }
 
     /**
-     * @param description The description of the Event.
-     * @param details The date and time of the Event.
+     * @param description The input string to create the Event.
+     *                    Format: "[description] /at yyyy-mm-dd hhmm" (24h time)
+     * @param isDone Whether the task is done.
      */
-    public Event(String description, String details) throws DukeException {
-        super(description, details);
-    }
-
-    public Event(String description, String details, boolean isDone) throws DukeException {
-        super(description, details, isDone);
+    public Event(String description, String dateAndTime, boolean isDone) throws DukeException {
+        super(description, dateAndTime, isDone);
     }
 
     @Override
