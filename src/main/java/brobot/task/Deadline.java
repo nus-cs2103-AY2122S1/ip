@@ -39,8 +39,7 @@ public class Deadline extends Task {
      * @return Deadline task in String(Storage format).
      */
     public String toStorageString() {
-        String s1 = super.toStorageString();
-        String s2 = String.format("D %s | %s", s1, by);
-        return s2;
+        String basicStorageFormat = super.toStorageString();
+        return String.format("D %s | %s", basicStorageFormat, by);
     }
 }

@@ -30,8 +30,7 @@ public class Todo extends Task {
      * @return Todo task in String(Storage format).
      */
     public String toStorageString() {
-        String s1 = super.toStorageString();
-        String s2 = String.format("T %s", s1);
-        return s2;
+        String basicStorageFormat = super.toStorageString();
+        return String.format("T %s", basicStorageFormat);
     }
 }

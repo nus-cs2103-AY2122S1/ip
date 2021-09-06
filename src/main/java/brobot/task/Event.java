@@ -40,8 +40,7 @@ public class Event extends Task {
      * @return Event task in String(Storage format).
      */
     public String toStorageString() {
-        String s1 = super.toStorageString();
-        String s2 = String.format("E %s | %s", s1, at);
-        return s2;
+        String basicStorageFormat = super.toStorageString();
+        return String.format("E %s | %s", basicStorageFormat, at);
     }
 }
