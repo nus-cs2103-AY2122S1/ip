@@ -42,6 +42,7 @@ public class TaskList {
             assert details.length == 2 : "details array for Event should contain 2 fields.";
             TaskList.add(new Event(details[0], details[1]));
             break;
+        default:
         }
 
     }
@@ -135,7 +136,6 @@ public class TaskList {
                 results.add(item);
             }
         }
-        assert results.size() > 0 : "Search results should not be empty.";
         return results;
     }
 

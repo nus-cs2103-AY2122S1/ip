@@ -65,12 +65,16 @@ public class Storage {
                 case "E":
                     tasks.add(new Event(details[2], details[3], isDone));
                     break;
+                default:
+                    throw new DukeException("Failed to load file data. File data is in a wrong format.");
                 }
             }
             s.close();
             return tasks;
         } catch (FileNotFoundException e) {
             throw new DukeException("File not found.");
+        } catch (DukeException e) {
+            throw e;
         }
 
     }
