@@ -1,10 +1,12 @@
 package main.java.duke.commands;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import main.java.duke.*;
 import main.java.duke.tasks.Task;
 
+/**
+ * A command that lists all tasks from the task list.
+ */
 public class ListCommand extends Command {
 
     /**
@@ -20,18 +22,16 @@ public class ListCommand extends Command {
      * @param tasks given list of tasks
      * @param gui given gui object
      * @param storage given storage object
-     * @throws IOException
-     * @throws DukeException
      */
     public String execute(TaskList tasks, MainWindow gui, Storage storage) {
         ArrayList<Task> taskList = tasks.getTaskList();
-        String message1 = ("Here are the tasks in your list: \n");
+        StringBuilder message1 = new StringBuilder(("Here are the tasks in your list: \n"));
         for (int i = 0; i < taskList.size(); i++) {
             Task t = taskList.get(i);
-            message1 += ((i + 1) + ".") + t.toString();
+            message1.append(i + 1).append(".").append(t.toString());
         }
-        return message1;
-    };
+        return message1.toString();
+    }
 
     public boolean isExit() {
         return false;

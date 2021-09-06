@@ -1,8 +1,6 @@
 package main.java.duke.commands;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import main.java.duke.*;
@@ -10,8 +8,11 @@ import main.java.duke.tasks.Deadline;
 import main.java.duke.tasks.Event;
 import main.java.duke.tasks.Task;
 
+/**
+ * A command that lists all tasks on the given date from the task list.
+ */
 public class OnDateCommand extends Command {
-    private String dateString;
+    private final String dateString;
 
     /**
      * Constructs a new find tasks on a date command with the given date.
@@ -28,20 +29,10 @@ public class OnDateCommand extends Command {
      * @param tasks given list of tasks
      * @param gui given gui object
      * @param storage given storage object
-     * @throws IOException
-     * @throws DukeException
      */
     public String execute(TaskList tasks, MainWindow gui, Storage storage) {
-        boolean isFormattedDate = true;
-        try {
-            LocalDate.parse(this.dateString, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-        } catch (DateTimeParseException e) {
-            isFormattedDate = false;
-        }
-        //if (isFormattedDate) {
             return identifyTasksByDate(dateString, tasks);
-        //}
-    };
+    }
 
     private String identifyTasksByDate(String dateString, TaskList tasks) {
         LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
@@ -65,11 +56,11 @@ public class OnDateCommand extends Command {
                 }
             }
         }
-        String message = ("On this day you have the following task(s):");
+        StringBuilder message = new StringBuilder(("On this day you have the following task(s):"));
         for (Task task : tasksOnDate) {
-            message += task.toString();
+            message.append(task.toString());
         }
-        return message;
+        return message.toString();
     }
 
     public boolean isExit() {

@@ -1,10 +1,11 @@
 package main.java.duke.tasks;
-// import java.sql.Date;
-// import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A deadline task with date specified.
+ */
 public class Deadline extends Task {
     protected String prefix;
     protected String date;
@@ -43,7 +44,7 @@ public class Deadline extends Task {
     /**
      * Converts a date string to local date format
      *
-     * @param dateString
+     * @param dateString a string of date
      * @return a local date of the string
      */
     public LocalDate fromStringToDate(String dateString) {

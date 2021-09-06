@@ -1,9 +1,11 @@
 package main.java.duke;
 
-import main.java.duke.commands.Command;
-
 import java.io.IOException;
 
+/**
+ * Represents a chat bot Duke that performs according to different
+ * user input.
+ */
 public class Duke {
     protected Storage storage;
     protected TaskList tasks;
@@ -24,26 +26,6 @@ public class Duke {
             tasks = new TaskList();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    /**
-     * Starts the duke programme flow.
-     */
-    public void run() {
-        gui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = gui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, gui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                gui.showError(e.getMessage());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 }

@@ -1,4 +1,8 @@
 package main.java.duke.tasks;
+
+/**
+ * A todo task.
+ */
 public class Todo extends Task {
     protected String prefix;
 

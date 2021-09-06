@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * A command that looks for tasks with keyword given from the task list.
+ */
 public class FindCommand extends Command {
     private final String keyword;
 
@@ -31,9 +34,5 @@ public class FindCommand extends Command {
             message.append(task.toString());
         }
         return message.toString();
-    }
-
-    public boolean isExit() {
-        return false;
     }
 }
