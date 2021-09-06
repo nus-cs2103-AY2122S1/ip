@@ -9,25 +9,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /**
- * A box consisting of a text message and the sender's display picture,
- * used to represent the view for a single message sent in the chatbot.
+ * A box consisting of a text message and the sender's display picture, used to represent the view
+ * for a single message sent in the chatbot.
  */
 public class DialogBox extends HBox {
-    private final Label text;
-    private final ImageView displayPicture;
-
     /**
-     * Constructor for a dialog box, representing a message
-     * in the chatbot.
+     * Constructor for a dialog box, representing a message in the chatbot.
      *
-     * @param text           The view containing the text content of the message.
+     * @param text The view containing the text content of the message.
      * @param displayPicture The view containing the display picture of the message sender.
      */
     public DialogBox(Label text, ImageView displayPicture) {
         super(10.0);
-        this.text = text;
-        this.displayPicture = displayPicture;
-
         text.setWrapText(true);
         text.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 

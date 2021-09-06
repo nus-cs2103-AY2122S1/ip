@@ -5,19 +5,19 @@ import bruh.tasklist.TaskList;
 import bruh.ui.Ui;
 
 /**
- * Encapsulates a command issued to the chatbot, which produces an effect on the task list,
- * and contains a description of said effect.
+ * Encapsulates a command issued to the chatbot, which produces an effect on the task list, and
+ * contains a description of said effect.
  */
 public abstract class Command {
-    private String description;
+    private String description = "Command not yet executed";
 
     /**
-     * Performs the operations associated with the command, then
-     * updates the command description accordingly.
+     * Performs the operations associated with the command, then updates the command description
+     * accordingly.
      *
      * @param taskList The task list to be affected by the operations.
-     * @param ui       The user interface to be affected by the operations.
-     * @param storage  The storage function to be affected by the operations.
+     * @param ui The user interface to be affected by the operations.
+     * @param storage The storage function to be affected by the operations.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         description = runAndGenerateDescription(taskList, ui, storage);
@@ -27,20 +27,11 @@ public abstract class Command {
      * Runs the operations and returns a description of the operations run.
      *
      * @param taskList The task list to be affected by the operations.
-     * @param ui       The user interface to be affected by the operations.
-     * @param storage  The storage function to be affected by the operations.
+     * @param ui The user interface to be affected by the operations.
+     * @param storage The storage function to be affected by the operations.
      * @return A description of the operations run.
      */
-    public abstract String runAndGenerateDescription(TaskList taskList, Ui ui, Storage storage);
-
-    /**
-     * Getter for the command description.
-     *
-     * @return The command description.
-     */
-    public String getDescription() {
-        return description;
-    }
+    protected abstract String runAndGenerateDescription(TaskList taskList, Ui ui, Storage storage);
 
     /**
      * Checks if the command is an exit command.
@@ -49,5 +40,14 @@ public abstract class Command {
      */
     public boolean isExit() {
         return false;
+    }
+
+    /**
+     * Getter for the command description.
+     *
+     * @return The command description.
+     */
+    public String getDescription() {
+        return description;
     }
 }
