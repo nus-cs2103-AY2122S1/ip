@@ -6,6 +6,7 @@ import java.util.List;
 import iris.task.Deadline;
 import iris.task.Event;
 import iris.task.Task;
+import iris.task.TaskPriority;
 import iris.task.ToDo;
 
 /**
@@ -38,8 +39,8 @@ public class TaskList {
      *
      * @param name name of the ToDo to be created
      */
-    public void addTodo(String name) {
-        tasks.add(new ToDo(name));
+    public void addTodo(String name, TaskPriority taskPriority) {
+        tasks.add(new ToDo(name, taskPriority));
     }
 
     /**
@@ -49,8 +50,8 @@ public class TaskList {
      * @param by   due date of the Deadline to be created
      * @throws IrisException for invalid Deadline
      */
-    public void addDeadline(String name, String by) throws IrisException {
-        tasks.add(new Deadline(name, by));
+    public void addDeadline(String name, String by, TaskPriority taskPriority) throws IrisException {
+        tasks.add(new Deadline(name, by, taskPriority));
     }
 
     /**
@@ -60,8 +61,8 @@ public class TaskList {
      * @param at   date of the Event to be created
      * @throws IrisException for invalid Event
      */
-    public void addEvent(String name, String at) throws IrisException {
-        tasks.add(new Event(name, at));
+    public void addEvent(String name, String at, TaskPriority taskPriority) throws IrisException {
+        tasks.add(new Event(name, at, taskPriority));
     }
 
     /**

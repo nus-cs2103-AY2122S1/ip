@@ -4,13 +4,12 @@ package iris.task;
  * Represents a ToDo
  */
 public class ToDo extends Task {
-    /**
-     * Creates a new ToDo object
-     *
-     * @param name name of the todo
-     */
     public ToDo(String name) {
         super(name);
+    }
+
+    public ToDo(String name, TaskPriority taskPriority) {
+        super(name, taskPriority);
     }
 
     /**
@@ -31,6 +30,6 @@ public class ToDo extends Task {
      */
     @Override
     public String toCommand(int index) {
-        return String.format("todo %s\n%s", this.name, super.toCommand(index));
+        return String.format("todo%s %s\n%s", this.getPriorityIcon(), this.name, super.toCommand(index));
     }
 }

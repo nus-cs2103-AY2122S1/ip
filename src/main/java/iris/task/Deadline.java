@@ -29,6 +29,22 @@ public class Deadline extends Task {
     }
 
     /**
+     * Creates a new Deadline object with given TaskPriority
+     * @param name          name of the deadline
+     * @param by            due date for this deadline e.g. "2021-08-23"
+     * @param taskPriority  priority level of this deadline
+     * @throws IrisException
+     */
+    public Deadline(String name, String by, TaskPriority taskPriority) throws IrisException {
+        super(name, taskPriority);
+        try {
+            this.by = LocalDate.parse(by);
+        } catch (DateTimeParseException exception) {
+            throw new IrisException("Invalid date provided.");
+        }
+    }
+
+    /**
      * Converts Deadline object to String
      *
      * @return String representation of Deadline object
@@ -51,7 +67,8 @@ public class Deadline extends Task {
     @Override
     public String toCommand(int index) {
         return String.format(
-                "deadline %s /by %s\n%s",
+                "deadline%s %s /by %s\n%s",
+                this.getPriorityIcon(),
                 this.name,
                 this.by,
                 super.toCommand(index)
