@@ -24,28 +24,33 @@ public class UI {
     }
 
     /**
-     * Prints the greeting message to the terminal.
+     * Print the inputted message out onto the terminal.
+     * @param message The desired message to print
      */
-    public static String printGreeting() {
-        System.out.println(greetingText);
+    public static void printToTerm(String message) {
+        System.out.println(message);
+    }
+
+    /**
+     * Returns greeting message
+     */
+    public static String getGreetingText() {
         return greetingText;
     }
 
     /**
-     * Prints the goodbye message to the terminal.
+     * Returns Goodbye message
      */
-    public static String printBye() {
-        System.out.println(byeText);
+    public static String getByeText() {
         return byeText;
     }
 
     /**
-     * Prints a task list to the terminal.
+     * Returns 'list' command message
      * @param list The TaskList to be printed.
      */
-    public static String printList(TaskList list) {
+    public static String getListText(TaskList list) {
         String s = "Alright here are the tasks in your list bro:" + list.toString();
-        System.out.println(formatWithSpace(s));
         return formatWithSpace(s);
     }
 
@@ -54,52 +59,40 @@ public class UI {
      * @param count The amount of tasks in the list.
      * @return The formatted string.
      */
-    public static String listTaskAmount(int count) {
+    public static String getTaskAmountText(int count) {
         return ("\nNow you have " + count + " task(s) in the list bro.");
     }
 
     /**
-     * Prints the "task added" message for a list.
+     * Returns message for newly added tasks
      * @param list The list with the new task added.
      */
-    public static String printTaskAdded(TaskList list) {
+    public static String getTaskAddedText(TaskList list) {
         int taskAmount = list.getTaskAmount();
-        System.out.println(
-                formatWithSpace("Alright bro. I've added this task:\n"
-                        + list.getTask(taskAmount)
-                        + listTaskAmount(taskAmount)
-                )
-        );
         return formatWithSpace("Alright bro. I've added this task:\n"
                 + list.getTask(taskAmount)
-                + listTaskAmount(taskAmount)
+                + getTaskAmountText(taskAmount)
         );
 
     }
 
     /**
-     * Prints the "task done" message for the specified task.
+     * Returns the "task done" message for the specified task.
      * @param task The specified task.
      */
-    public static String printTaskDone(Task task) {
-        System.out.println(formatWithSpace("Good job bro! I've marked this task as done:\n " + task));
+    public static String getTaskDoneText(Task task) {
         return formatWithSpace("Good job bro! I've marked this task as done:\n " + task);
     }
 
     /**
-     * Prints the "task deleted" message for a specific task in a tasklist and the amount of tasks left.
+     * Returns the "task deleted" message for a specific task in a tasklist and the amount of tasks left.
      * @param task The deleted task.
      * @param list The list from which the task was deleted.
      */
-    public static String printTaskDeleted(Task task, TaskList list) {
-        System.out.println(
-                formatWithSpace("Ok Bro, I removed the following task:\n "
-                    + task
-                    + listTaskAmount(list.getTaskAmount()))
-        );
+    public static String getTaskDeletedText(Task task, TaskList list) {
         return formatWithSpace("Ok Bro, I removed the following task:\n "
                 + task
-                + listTaskAmount(list.getTaskAmount()));
+                + getTaskAmountText(list.getTaskAmount()));
     }
 
     /**
@@ -111,21 +104,19 @@ public class UI {
     }
 
     /**
-     * Prints the error message to the terminal.
+     * Returns the error message from the error.
      * @param e The error.
      */
-    public static String printError(Exception e) {
-        System.out.println(formatWithSpace(e.getMessage()));
+    public static String getErrorText(Exception e) {
         return formatWithSpace(e.getMessage());
     }
 
     /**
-     * Prints the list of matching tasks to the terminal.
+     * Returns a list of the tasks in the provided list.
      * @param list The list to be printed.
      */
-    public static String printSearchList(TaskList list) {
+    public static String getSearchListText(TaskList list) {
         String s = "Here are the matching tasks in your list bro:" + list.toString();
-        System.out.println(formatWithSpace(s));
         return formatWithSpace(s);
     }
 }
