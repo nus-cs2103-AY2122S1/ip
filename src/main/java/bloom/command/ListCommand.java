@@ -8,13 +8,11 @@ import bloom.task.Task;
  * Represents a list command which
  * lists all current tasks in the database.
  */
-
 public class ListCommand extends Command {
 
     /**
      * Lists all current tasks.
      */
-
     @Override
     public void run() {
         System.out.println(Message.COMMAND_LIST.getMessage());

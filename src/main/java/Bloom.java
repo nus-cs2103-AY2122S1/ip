@@ -12,12 +12,10 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 /**
  * Represents the task manager-bot Bloom.
  */
-
 public class Bloom extends Application {
 
     /** The storage. */
@@ -120,7 +118,6 @@ public class Bloom extends Application {
      * @param text String containing text to add
      * @return     a label with the specified text that has word wrap enabled
      */
-
     private Label getDialogLabel(String text) {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
@@ -133,7 +130,6 @@ public class Bloom extends Application {
      * Bloom's reply and then appends them to the dialog container.
      * Clears the user input after processing.
      */
-
     private void handleUserInput() {
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
@@ -148,7 +144,6 @@ public class Bloom extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-
     protected String getResponse(String input) {
         return input;
     }

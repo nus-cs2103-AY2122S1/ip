@@ -11,7 +11,6 @@ import bloom.task.Deadline;
  * creates a deadline task with given description
  * with date and time.
  */
-
 public class DeadlineCommand extends Command {
 
     /** The description of the deadline. */
@@ -26,7 +25,6 @@ public class DeadlineCommand extends Command {
      * @param description the description of the deadline
      * @param by          the date and time of the deadline
      */
-
     public DeadlineCommand(String description, LocalDateTime by) {
         this.description = description;
         this.by = by;
@@ -35,7 +33,6 @@ public class DeadlineCommand extends Command {
     /**
      * Creates a deadline task.
      */
-
     @Override
     public void run() {
         Deadline deadline = new Deadline(this.description, this.by);

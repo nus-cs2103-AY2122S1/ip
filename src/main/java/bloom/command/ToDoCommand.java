@@ -8,7 +8,6 @@ import bloom.task.ToDo;
  * Represents a to-do command which
  * creates a to-do task with given description.
  */
-
 public class ToDoCommand extends Command {
 
     /** The description of the to-do. */
@@ -19,7 +18,6 @@ public class ToDoCommand extends Command {
      *
      * @param description the description of the to-do
      */
-
     public ToDoCommand(String description) {
         this.description = description;
     }
@@ -27,7 +25,6 @@ public class ToDoCommand extends Command {
     /**
      * Creates a to-do task.
      */
-
     @Override
     public void run() {
         ToDo todo = new ToDo(this.description);

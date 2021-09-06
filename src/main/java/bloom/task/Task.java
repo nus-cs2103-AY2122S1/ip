@@ -3,7 +3,6 @@ package bloom.task;
 /**
  * Represents a general task.
  */
-
 public class Task {
 
     /** The description of the task. */
@@ -17,7 +16,6 @@ public class Task {
      *
      * @param description the description of the task
      */
-
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -28,7 +26,6 @@ public class Task {
      *
      * @return a string representing the task
      */
-
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
@@ -39,7 +36,6 @@ public class Task {
      *
      * @return a string representing the task
      */
-
     public String toDb() {
         return (this.isDone ? 1 : 0) + " | " + this.description;
     }
@@ -53,7 +49,6 @@ public class Task {
      *
      * @return X if the task is done and a space otherwise
      */
-
     public String getStatusIcon() {
         return (this.isDone ? "X" : " ");
     }
@@ -61,7 +56,6 @@ public class Task {
     /**
      * Marks the task as done.
      */
-
     public void markAsDone() {
         this.isDone = true;
     }

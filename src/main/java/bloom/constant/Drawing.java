@@ -3,7 +3,6 @@ package bloom.constant;
 /**
  * Contains drawings used for decoration.
  */
-
 public enum Drawing {
 
     HORIZONTAL_LINE("* * * * * * * * * * * * * * * * * * * *"),
@@ -22,7 +21,6 @@ public enum Drawing {
      *
      * @param drawing the drawing
      */
-
     Drawing(String drawing) {
         this.drawing = drawing;
     }
@@ -32,7 +30,6 @@ public enum Drawing {
      *
      * @return a string representing the drawing
      */
-
     public String getDrawing() {
         return this.drawing;
     }

@@ -9,7 +9,6 @@ import bloom.exception.command.BloomUnknownCommandException;
  * Represents the user interface, controls basic action
  * such as start, run, stop of the bot.
  */
-
 public class Ui {
 
     /** The current state of the bot. */
@@ -18,7 +17,6 @@ public class Ui {
     /**
      * Starts the bot.
      */
-
     public void start() {
         Scanner scanner = new Scanner(System.in);
         run("greet");
@@ -34,7 +32,6 @@ public class Ui {
      *
      * @param userInput the user input
      */
-
     public void run(String userInput) {
         Parser parser = new Parser();
         System.out.println(Drawing.HORIZONTAL_LINE.getDrawing());
@@ -49,7 +46,6 @@ public class Ui {
     /**
      * Stops the bot.
      */
-
     public void stop() {
         Ui.isRunning = false;
     }

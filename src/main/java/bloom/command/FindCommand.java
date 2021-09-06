@@ -4,6 +4,9 @@ import bloom.app.TaskList;
 import bloom.constant.Message;
 import bloom.task.Task;
 
+/**
+ * Represents a find command which find tasks when being given a keyword.
+ */
 public class FindCommand extends Command {
 
     /** The input keyword. */
@@ -21,7 +24,6 @@ public class FindCommand extends Command {
     /**
      * Finds a task based on input keyword.
      */
-
     public void run() {
         System.out.println(Message.COMMAND_FIND.getMessage());
         for (int i = 0, j = 1; i < TaskList.size(); ++i) {

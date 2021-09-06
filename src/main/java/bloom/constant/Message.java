@@ -3,7 +3,6 @@ package bloom.constant;
 /**
  * Contains messages to communicate with users.
  */
-
 public enum Message {
 
     COMMAND_GREET("\t Hello! I'm Bloom\n\t What can I do for you?\n"),
@@ -25,7 +24,6 @@ public enum Message {
      *
      * @param message the message
      */
-
     Message(String message) {
         this.message = message;
     }
@@ -35,7 +33,6 @@ public enum Message {
      *
      * @return the message content
      */
-
     public String getMessage() {
         return this.message;
     }

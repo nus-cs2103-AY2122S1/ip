@@ -3,7 +3,6 @@ package bloom.exception;
 /**
  * Represents a general exception of the bot.
  */
-
 public class BloomException extends Exception {
 
     /**
@@ -11,7 +10,6 @@ public class BloomException extends Exception {
      *
      * @param errorMessage the error message
      */
-
     public BloomException(String errorMessage) {
         super(errorMessage);
     }

@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 /**
  * Represents an event task.
  */
-
 public class Event extends Task {
 
     /** The date and time of the event. */
@@ -17,7 +16,6 @@ public class Event extends Task {
      * @param description the description of the event
      * @param at          the date and time of the event
      */
-
     public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;
@@ -28,7 +26,6 @@ public class Event extends Task {
      *
      * @return a string representing the event
      */
-
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.at + ")";
@@ -39,7 +36,6 @@ public class Event extends Task {
      *
      * @return a string representing the event
      */
-
     @Override
     public String toDb() {
         return "E | " + super.toDb() + " | " + this.at;

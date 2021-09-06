@@ -18,7 +18,6 @@ import bloom.exception.command.BloomUnknownCommandException;
 /**
  * Takes in an input string and parse it into necessary format.
  */
-
 public class Parser {
 
     /**
@@ -28,7 +27,6 @@ public class Parser {
      * @return          the respective command based on the first word
      * @throws BloomUnknownCommandException when an unsupported command is inputted
      */
-
     public Command parse(String userInput) throws BloomUnknownCommandException {
         String[] parse = userInput.split(" ");
         String action = parse[0];
@@ -74,7 +72,6 @@ public class Parser {
      * @param dateInput the date input
      * @return          the respective object containing date and time as inputted
      */
-
     public LocalDateTime parseDate(String dateInput) {
         String[] parse = dateInput.split(" ");
         String date = parse[0];
