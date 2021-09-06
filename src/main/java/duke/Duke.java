@@ -79,6 +79,8 @@ public class Duke {
             Command command = Parser.parseCommandFromInput(input.trim());
             taskList = command.execute(taskList, ui, storage);
             isTerminated = command.isTerminated();
+            // Duke should always give a response to a command
+            assert(!taskList.getRecentMessage().equals(""));
             return taskList.getRecentMessage();
         } catch (IOException e) {
             return ui.showError("The data failed to save to the save file with error:"

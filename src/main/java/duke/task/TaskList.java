@@ -80,13 +80,16 @@ public class TaskList {
     public TaskList addTask(Ui ui, String ...inputs) throws DukeException {
         List<Task> newTasks = new ArrayList<>(tasks);
         String message = "";
+        String command = inputs[0].toUpperCase();
+        // If the code enters this function, the command must be one of the words below
+        assert(command.equals("TODO") || command.equals("DEADLINE") || command.equals("EVENT"));
         for (String input: inputs) {
             if (input.contains("|")) {
                 throw new DukeException("Input contains |, which is an invalid/reserved character.");
             }
         }
         Task task;
-        switch (inputs[0].toUpperCase()) {
+        switch (command) {
         case "TODO":
             // Add Todo task
             task = new Todo(Parser.parseTaskNameFromInput(inputs, 1, inputs.length));
