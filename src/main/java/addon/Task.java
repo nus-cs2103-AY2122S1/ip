@@ -99,14 +99,17 @@ public class Task {
 
         @Override
         public String toString() {
-            return "[D]" + super.toString() + " (by: " + Ui.printDate(date) + ")";
+            return super.toString() + " (DEADLINE due on: " + Ui.printDate(date) + ")";
         }
 
         @Override
         public boolean equals(Object o) {
             if (o instanceof Deadline) {
                 Deadline d = (Deadline) o;
-                return (d.taskName.equals(taskName) && d.date.equals(date));
+                boolean nameEquals = d.taskName.equals(taskName);
+                boolean donenessEquals = d.isDone == isDone;
+                boolean dateEquals = d.date.equals(date);
+                return (nameEquals && donenessEquals && dateEquals);
             } else {
                 return false;
             }
@@ -129,14 +132,16 @@ public class Task {
 
         @Override
         public String toString() {
-            return "[T]" + super.toString();
+            return super.toString() + " (TODO)";
         }
 
         @Override
         public boolean equals(Object o) {
             if (o instanceof Task) {
                 Task t = (Task) o;
-                return t.taskName.equals(taskName);
+                boolean nameEquals = t.taskName.equals(taskName);
+                boolean donenessEquals = t.isDone == isDone;
+                return (nameEquals && donenessEquals);
             } else {
                 return false;
             }
@@ -167,14 +172,17 @@ public class Task {
 
         @Override
         public String toString() {
-            return "[E]" + super.toString() + " (at: " + Ui.printDate(date) + ")";
+            return super.toString() + " (EVENT occurs on: " + Ui.printDate(date) + ")";
         }
 
         @Override
         public boolean equals(Object o) {
             if (o instanceof Event) {
                 Event e = (Event) o;
-                return (e.taskName.equals(taskName) && e.date.equals(date));
+                boolean nameEquals = e.taskName.equals(taskName);
+                boolean donenessEquals = e.isDone == isDone;
+                boolean dateEquals = e.date.equals(date);
+                return (nameEquals && donenessEquals && dateEquals);
             } else {
                 return false;
             }

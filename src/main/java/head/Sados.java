@@ -198,7 +198,6 @@ public class Sados extends Application {
      */
     private void addTask(Task task) {
 
-        boolean doesUserCareAboutDupes = true;
         boolean canAddTask = true;
 
         if (tasks.contains(task)) {
@@ -232,7 +231,9 @@ public class Sados extends Application {
             filterString = nameString;
         } else if (type == 2) { //date only
             for (Task i : tasks) {
-                if (i instanceof Event) {
+                if (i instanceof Todo) {
+                    break;
+                } else if (i instanceof Event) {
                     Event e = (Event) i;
                     if (e.queryIfDateEquals(date)) {
                         list.add(i.toString());
