@@ -1,4 +1,6 @@
-package duke;
+package duke.processor;
+
+import duke.task.Task;
 
 import java.util.ArrayList;
 import java.io.Serializable;
@@ -9,7 +11,7 @@ import java.io.Serializable;
  * @author Tianqi-Zhu
  */
 public class TaskList implements Serializable {
-    private ArrayList<Task> taskList; 
+    private ArrayList<Task> taskList;
 
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList; 

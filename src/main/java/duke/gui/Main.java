@@ -1,5 +1,7 @@
-package duke;
+package duke.gui;
 
+import duke.processor.Duke;
+import duke.processor.Storage;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -34,5 +36,4 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-
 }

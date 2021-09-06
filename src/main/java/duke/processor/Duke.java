@@ -1,9 +1,15 @@
-package duke;
+package duke.processor;
+
+import duke.exception.DukeExcpetion;
+import duke.processor.Parser;
+import duke.processor.Storage;
+import duke.processor.TaskList;
+import duke.processor.Ui;
 
 import java.util.Scanner;
 
 /**
- * Main class for the duke assistant bot.
+ * Main class for the duke assistant bot(cli).
  * 
  * @author Tianqi-Zhu
  */
@@ -15,7 +21,7 @@ public class Duke {
         this.taskList = taskList;
     }
 
-    protected TaskList getTaskList() {
+    public TaskList getTaskList() {
         return taskList;
     }
 
@@ -24,7 +30,7 @@ public class Duke {
      */
     private static void run() {
         Ui.greet();
-        TaskList taskList = Storage.load(); 
+        TaskList taskList = Storage.load();
         Scanner input = new Scanner(System.in);
         while (true) {
             String newInput = input.nextLine();

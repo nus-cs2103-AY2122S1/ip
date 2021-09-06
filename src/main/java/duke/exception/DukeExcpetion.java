@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * Exception when users type invalid input.
