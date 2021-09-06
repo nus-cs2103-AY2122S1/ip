@@ -36,6 +36,7 @@ public class Parser {
     public static Command parse(String fullCommand, TaskList taskList) throws DukeException {
         // Find case based on first word of command
         String[] parsedCommand = fullCommand.split("\\s+", 3);
+        assert parsedCommand.length < 4 : "initial split is not done properly.";
         switch (parsedCommand[0]) {
 
         // "bye" command given
@@ -128,8 +129,10 @@ public class Parser {
                     String[] details = taskDetails.split(" /by ");
 
                     if (details.length == 1) {
+                        assert !taskDetails.contains(" /by ") : "Failed to find present /by keyword";
                         throw new DukeException(DukeExceptionType.MISSING_DEADLINE_DATETIME);
                     } else {
+                        assert taskDetails.contains(" /by ") : "False identification of /by keyword";
                         String[] deadline = details[1].split(" ");
                         if (deadline.length == 1) {
                             newTask = new Deadline(details[0], LocalDate.parse(details[1]));
@@ -148,8 +151,10 @@ public class Parser {
                     String[] details = taskDetails.split(" /at ");
 
                     if (details.length == 1) {
+                        assert !taskDetails.contains(" /at ") : "Failed to find present /at keyword";
                         throw new DukeException(DukeExceptionType.MISSING_EVENT_PERIOD);
                     } else {
+                        assert taskDetails.contains(" /at ") : "False identification of /at keyword";
                         String[] periodRange = details[1].split(" ");
                         if (periodRange.length == 2) {
                             newTask = new Event(details[0], LocalDate.parse(periodRange[0]),

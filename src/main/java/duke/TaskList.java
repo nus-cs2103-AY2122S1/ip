@@ -63,8 +63,10 @@ public class TaskList {
      * @return String representing the task being deleted.
      */
     public String deleteTask(int index) {
+        int initialSize = list.size();
         Task deleted = list.remove(index);
         storage.deleteDbEntry(deleted.databaseEntry());
+        assert initialSize - 1 == list.size() : "deleteTask failed";
         return ui.showDelete(deleted, list.size());
     }
 
@@ -95,8 +97,10 @@ public class TaskList {
      * @return String representing the task being added to the list.
      */
     public String addTask(Task newTask) {
+        int initialSize = list.size();
         list.add(newTask);
         storage.addDbEntry(newTask.databaseEntry());
+        assert initialSize + 1 == list.size() : "addTask failed";
         return ui.showAdd(newTask, list.size());
     }
 }
