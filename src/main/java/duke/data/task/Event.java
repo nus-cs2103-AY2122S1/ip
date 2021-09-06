@@ -14,6 +14,9 @@ import java.time.format.DateTimeParseException;
 public class Event extends Task {
     /** Time of the event */
     protected LocalDateTime at;
+    
+    /** The identifier of this task */
+    protected static String IDENTIFIER = "E";
 
     /**
      * Constructor for Event
@@ -53,7 +56,7 @@ public class Event extends Task {
     
     @Override
     public String convertToData() {
-        return String.format("E/%s/%s/%s", this.isDone ? "1" : "0", this.description, this.at);
+        return String.format("%s/%s/%s/%s", IDENTIFIER, this.isDone ? "1" : "0", this.description, this.at);
     }
 
     /**
@@ -62,9 +65,19 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String IDENTIFIER = "[E]";
-        return IDENTIFIER + super.toString() + " (at: " 
-                + this.at.format(DateTimeFormatter.ofPattern(OUTPUT_DATE_TIME_FORMAT_PATTERN)) + ")";
+        return String.format("[%s]%s (at: %s)", 
+                IDENTIFIER, 
+                super.toString(),
+                this.at.format(DateTimeFormatter.ofPattern(OUTPUT_DATE_TIME_FORMAT_PATTERN)));
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Event) {
+            Event e = (Event) obj;
+            return e.description.equals(this.description) && e.at.isEqual(this.at);
+        }
+        return false;
     }
 
 }

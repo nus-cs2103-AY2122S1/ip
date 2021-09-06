@@ -6,6 +6,9 @@ import duke.data.exception.EmptyDescriptionException;
  * Encapsulates Todo 
  */
 public class Todo extends Task {
+    /** The identifier for this task */
+    protected static String IDENTIFIER = "T";
+    
     /**
      * Constructor for Todo
      * 
@@ -28,7 +31,7 @@ public class Todo extends Task {
 
     @Override
     public String convertToData() {
-        return String.format("T/%s/%s", this.isDone ? "1" : "0", this.description);
+        return String.format("%s/%s/%s", IDENTIFIER, this.isDone ? "1" : "0", this.description);
     }
 
     /**
@@ -38,8 +41,15 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        String IDENTIFIER = "[T]";
-        return IDENTIFIER + super.toString();
+        return String.format("[%s]%s", IDENTIFIER, super.toString());
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Todo) {
+            Todo t = (Todo) obj;
+            return t.description.equals(this.description);
+        }
+        return false;
+    }
 }
