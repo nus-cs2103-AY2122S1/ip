@@ -64,6 +64,7 @@ public class TaskList {
      * @return Message that the task has been successfully added.
      */
     public String addTask(Task task) {
+        assert task != null;
         userList.add(task);
         listSize++;
         String time = getTaskTime(task);
@@ -84,10 +85,12 @@ public class TaskList {
      * @return Message depending on the outcome of the action.
      */
     public String markComplete(int taskId) {
-        if (taskId - 1 < listSize) {
+        int taskIndex = taskId - 1;
+        boolean isInvalidIndex = taskIndex >= listSize || taskIndex < 0;
+        if (!isInvalidIndex) {
             if (userList.get(taskId - 1).completeTask()) {
                 return String.format(
-                        "You have completed duke.task %d. %s",
+                        "You have completed task %d. %s",
                         taskId,
                         userList.get(taskId - 1).getName()
                 );
@@ -107,12 +110,14 @@ public class TaskList {
      * @return Message depending on the outcome of the action.
      */
     public String deleteTask(int taskId) {
-        if (taskId - 1 < listSize) {
+        int taskIndex = taskId - 1;
+        boolean isInvalidIndex = taskIndex >= listSize || taskIndex < 0;
+        if (!isInvalidIndex) {
             Task t = userList.get(taskId - 1);
             userList.remove(taskId - 1);
             listSize--;
             return String.format(
-                    "Alright,\nduke.duke.Task.Task: %s [%s] [%s] (%s)\nHas been removed, you have %d tasks in the list",
+                    "Alright,\nTask: %s [%s] [%s] (%s)\nHas been removed, you have %d tasks in the list",
                     t.getName(),
                     t.getTaskType(),
                     t.hasCompleted() ? "X" : " ",
@@ -120,7 +125,7 @@ public class TaskList {
                     listSize
             );
         } else {
-            return String.format("Uh oh, seems like there is no duke.task number %d", taskId);
+            return String.format("Uh oh, seems like there is no task number %d", taskId);
         }
     }
 
@@ -131,6 +136,7 @@ public class TaskList {
      * @return String representing the Task.
      */
     public String getTaskSaveFormat(int taskIndex) {
+        assert taskIndex >= 0;
         if (taskIndex < listSize) {
             Task t = userList.get(taskIndex);
             return t.getSaveFormat();
@@ -182,6 +188,7 @@ public class TaskList {
     }
 
     private String getTaskTime(Task t) {
+        assert t != null;
         String time;
         switch (t.getTaskType()) {
         case "D":

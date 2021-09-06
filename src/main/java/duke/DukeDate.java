@@ -12,7 +12,6 @@ public class DukeDate {
     private static final String DATE_OUTPUT_FORMAT = "E, d MMM yyyy";
 
     public static LocalDate parseDateInput(String dateStr) throws DukeArgumentException {
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_INPUT_FORMAT);
         try {
             LocalDate date = LocalDate.parse(dateStr, formatter);
