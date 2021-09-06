@@ -12,9 +12,9 @@ public class Parser {
      * @return a Command object
      */
     public static Command parse(String userInput) {
-        if (userInput.equals("bye")) { // if user enters "bye"
+        if (userInput.equals("bye")) {
             return new ExitCommand();
-        } else if (userInput.equals("list")) { // if user enters "list"
+        } else if (userInput.equals("list")) {
             return new ListCommand();
         } else if (userInput.startsWith("done")) {
             return new DoneCommand(userInput);
