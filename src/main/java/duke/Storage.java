@@ -17,7 +17,7 @@ import duke.tasks.Todo;
  * Represents a storage which allows for reading and writing of tasks to a file.
  */
 public class Storage {
-    private static final Pattern STORE_FORMAT = Pattern.compile("\\[(?<type>\\S)] \\[(?<done> |X)] (?<arguments>.*)");
+    private static final Pattern STORE_FORMAT = Pattern.compile("\\[(?<type>\\S)] \\[(?<done>[ X])] (?<arguments>.*)");
     private final String fileName;
 
     public Storage(String fileName) {
@@ -71,11 +71,9 @@ public class Storage {
                 taskList.addTask(task);
                 break;
             default:
+                throw new DukeException("Task list corrupted, list will be deleted.");
             }
-
-
         }
-
         return taskList;
     }
 
@@ -92,7 +90,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 
@@ -102,7 +100,10 @@ public class Storage {
     public void createNewFile() {
         File file = new File(fileName);
         try {
-            file.createNewFile();
+            boolean fileCreated = file.createNewFile();
+            if (!fileCreated) {
+                System.out.println("Error: File already exists");
+            }
         } catch (IOException e) {
             System.out.println("Error: " + e);
         }

@@ -7,8 +7,8 @@ import java.time.format.DateTimeFormatter;
  * Represents a deadline entered by the user.
  */
 public class Deadline extends Task {
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
     protected final LocalDate by;
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
     /**
      * Constructor for the Deadline.
