@@ -18,6 +18,7 @@ public class Task {
      * @param task The task to be stored within this Task object.
      */
     public Task(String task) {
+        assert !task.trim().equals("");
         this.task = task;
         this.isDone = false;
     }
@@ -30,6 +31,7 @@ public class Task {
      * @param isDone The state of the Task object.
      */
     public Task(String task, boolean isDone) {
+        assert !task.trim().equals("");
         this.task = task;
         this.isDone = isDone;
     }
