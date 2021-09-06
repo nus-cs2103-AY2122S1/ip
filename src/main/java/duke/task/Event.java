@@ -21,6 +21,7 @@ public class Event extends Task {
      * @return The event date and time.
      */
     public String getAt() {
+        assert at != null : "at variable should not be null";
         return at;
     }
 
@@ -31,16 +32,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
+        assert at != null : "at variable should not be null";
         localDateTime = new Parser().parseLocalDateTime(at);
         return "[E]" + super.toString() + " (at: " + localDateTime.format(dateTimeFormatter) + ")";
-    }
-
-    /**
-     * Prints out event task.
-     */
-    @Override
-    public void displayTask() {
-        System.out.println("        " + toString());
-
     }
 }
