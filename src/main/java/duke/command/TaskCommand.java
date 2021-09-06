@@ -1,5 +1,7 @@
 package duke.command;
 
+import static duke.Utils.splitBetween;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
@@ -7,8 +9,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.util.StringJoiner;
 
 public class TaskCommand extends Command {
 
@@ -18,7 +18,7 @@ public class TaskCommand extends Command {
 
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         if (userArgument.equals("")) {
-            throw new DukeException("The description of a duke.task.Task cannot be empty.");
+            throw new DukeException("The description of a Task cannot be empty.");
         }
 
         if (userCommand.equals("todo")) {
@@ -39,37 +39,4 @@ public class TaskCommand extends Command {
         String numberOfTasks = String.format("Now you have %d tasks in your list.\n", tasks.numberOfTasks());
         return addedTask + numberOfTasks;
     }
-
-    private static String[] splitBetween(String str, String separator) throws DukeException {
-        StringJoiner start = new StringJoiner(" ");
-        StringJoiner end = new StringJoiner(" ");
-
-        int i = 0;
-        boolean after = false;
-
-        String[] strArray = str.split(" ");
-
-        while (i < strArray.length) {
-            String currentString = strArray[i];
-            if (after) {
-                end.add(currentString);
-            } else if (currentString.equals(separator)) {
-                after = true;
-            } else {
-                start.add(currentString);
-            }
-            i++;
-        }
-
-        if (!after) {
-            throw new DukeException("Incorrect format for command.");
-        }
-
-        if (String.valueOf(end).equals("")) {
-            throw new DukeException("Please specify a time for the task.");
-        }
-
-        return new String[]{String.valueOf(start), String.valueOf(end)};
-    }
-
 }
