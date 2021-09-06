@@ -1,36 +1,71 @@
 package duke;
 
-import duke.Task;
-
 import java.util.ArrayList;
 
+/**
+ * A class to handle a list of tasks.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructor for TaskList object if there is previously stored data.
+     *
+     * @param storage stored data
+     */
     public TaskList(ArrayList<Task> storage) {
         this.tasks = storage;
     }
 
+    /**
+     * Constructor for TaskList object if there is no previously stored data.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Adds a task to this TaskList.
+     *
+     * @param task the task to be added
+     */
     public void addTask(Task task) {
         this.tasks.add(task);
     }
 
+    /**
+     * Gets a task from this TaskList.
+     *
+     * @param i the task number
+     */
     public Task getTask(int i) {
         return tasks.get(i);
     }
 
+    /**
+     * Deletes a task from this TaskList.
+     *
+     * @param i the task number to be deleted
+     * @return the deleted task
+     */
     public Task removeTask(int i) {
         return this.tasks.remove(i);
     }
 
+    /**
+     * Returns the number of tasks in this TaskList.
+     *
+     * @return the number of tasks
+     */
     public int numOfTasks() {
         return tasks.size();
     }
 
+    /**
+     * Returns the list of tasks in this TaskList
+     *
+     * @return a list of existing tasks
+     */
     @Override
     public String toString() {
         String list = "";
