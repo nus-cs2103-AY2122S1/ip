@@ -29,11 +29,12 @@ public class Ui {
      * @throws BernException If input is invalid.
      */
     public String ifDeadline(String input, ArrayList<Task> arListTask) throws BernException {
-        if (input.length() == 8 || (input.length() == 9 && input.substring(8, 9).equals(" "))) {
+        int len = "deadline".length();
+        if (input.length() == len || (input.length() == len + 1 && input.substring(len, len + 1).equals(" "))) {
             throw new EmptyDescriptionException("deadline");
         }
         // TODO Haven't handled if there is no /by
-        String task = input.substring(9, input.indexOf('/') - 1);
+        String task = input.substring(len + 1, input.indexOf('/') - 1);
         String by = input.substring(input.indexOf('/') + 4);
         new TaskList().addTask(new Deadline(task, by), arListTask);
         assert input.length() > 8 : "deadline input is invalid";
@@ -52,11 +53,12 @@ public class Ui {
      * @throws BernException If input is invalid.
      */
     public String ifEvent(String input, ArrayList<Task> arListTask) throws BernException {
-        if (input.length() == 5 || (input.length() == 6 && input.substring(5, 6).equals(" "))) {
+        int len = "event".length();
+        if (input.length() == len || (input.length() == len + 1 && input.substring(len, len + 1).equals(" "))) {
             throw new EmptyDescriptionException("event");
         }
         // TODO Haven't handled if there is no /at
-        String task = input.substring(6, input.indexOf('/') - 1);
+        String task = input.substring(len + 1, input.indexOf('/') - 1);
         String at = input.substring(input.indexOf('/') + 4);
         new TaskList().addTask(new Event(task, at), arListTask);
         assert input.length() > 5 : "event input is invalid";
@@ -75,10 +77,11 @@ public class Ui {
      * @throws BernException If input is invalid.
      */
     public String ifToDo(String input, ArrayList<Task> arListTask) throws BernException {
-        if (input.length() == 4 || (input.length() == 5 && input.substring(4, 5).equals(" "))) {
+        int len = "todo".length();
+        if (input.length() == len || (input.length() == len + 1 && input.substring(len, len + 1).equals(" "))) {
             throw new EmptyDescriptionException("todo");
         }
-        new TaskList().addTask(new ToDo(input.substring(5)), arListTask);
+        new TaskList().addTask(new ToDo(input.substring(len + 1)), arListTask);
         assert input.length() > 4 : "todo input is invalid";
         return "Got it. I've added this task:\n"
                 + arListTask.get(arListTask.size() - 1).toString() + "\n"
@@ -131,14 +134,15 @@ public class Ui {
      * @throws BernException If input is invalid.
      */
     public String ifDelete(String input, ArrayList<Task> arListTask) throws BernException {
-        if (input.length() == 6 || (input.length() == 7 && input.substring(6, 7).equals(" "))) {
+        int len = "delete".length();
+        if (input.length() == len || (input.length() == len + 1 && input.substring(len, len + 1).equals(" "))) {
             throw new EmptyDescriptionException("done");
         } else if (!new Parser().isANumber(input.substring(7))) {
             throw new InvalidCommandException(input);
         } else if (Integer.parseInt(input.substring(7)) > arListTask.size()) {
             throw new IndexException(input);
         }
-        int index = Integer.parseInt(input.substring(7)) - 1;
+        int index = Integer.parseInt(input.substring(len + 1)) - 1;
         String temp = arListTask.get(index).toString();
         new TaskList().removeTask(index, arListTask);
         assert input.length() > 6 : "delete input is invalid";
@@ -191,10 +195,11 @@ public class Ui {
      * @throws BernException If input is invalid.
      */
     public String ifFind(String input, ArrayList<Task> arListTask) throws BernException {
-        if (input.length() == 4 || (input.length() == 5 && input.substring(4, 5).equals(" "))) {
+        int len = "find".length();
+        if (input.length() == len || (input.length() == len + 1 && input.substring(len, len + 1).equals(" "))) {
             throw new EmptyDescriptionException("find");
         }
-        String word = input.substring(5);
+        String word = input.substring(len + 1);
         ArrayList<Task> found = new ArrayList<>();
         for (Task t : arListTask) {
             if (t.canFindWord(word)) {
@@ -229,7 +234,8 @@ public class Ui {
      * @throws BernException If input is invalid.
      */
     public String ifDone(String input, ArrayList<Task> arListTask) throws BernException {
-        if (input.length() == 4 || (input.length() == 5 && input.substring(4, 5).equals(" "))) {
+        int len = "done".length();
+        if (input.length() == len || (input.length() == len + 1 && input.substring(len, len + 1).equals(" "))) {
             throw new EmptyDescriptionException("done");
         } else if (!new Parser().isANumber(input.substring(5))) {
             throw new InvalidCommandException(input);
