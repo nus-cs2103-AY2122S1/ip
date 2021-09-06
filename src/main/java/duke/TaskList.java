@@ -122,7 +122,6 @@ public class TaskList {
     public String markAsDone(Integer i) {
         Task task = arrayList.get(i);
         task.markAsDone();
-        assert (task.isDone);
         return "Nice! I've marked this task as done:\n" + task;
     }
 }
