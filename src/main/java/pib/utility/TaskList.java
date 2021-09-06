@@ -46,6 +46,7 @@ public class TaskList {
             }
             System.out.println(DIVIDER);
         }
+        assert !response.isBlank();
         return response;
     }
 
@@ -68,6 +69,9 @@ public class TaskList {
      * @return String containing response to be printed to user
      */
     public String add(TaskType t, String taskDetails) throws PibException {
+        assert t != null;
+        assert taskDetails != null;
+        assert !taskDetails.isBlank();
         Task newTask = null;
         String response = "";
         switch (t) {
@@ -83,12 +87,12 @@ public class TaskList {
         default:
             break;
         }
-        if (newTask != null) {
-            list.add(newTask);
-            Storage.saveData(this, Pib.DATA_FILE_PATH);
-            response = response.concat(Ui.printAddSuccess(newTask.getDescription()));
-            response = response.concat(Ui.printListSize(this));
-        }
+        assert newTask != null;
+        list.add(newTask);
+        Storage.saveData(this, Pib.DATA_FILE_PATH);
+        response = response.concat(Ui.printAddSuccess(newTask.getDescription()));
+        response = response.concat(Ui.printListSize(this));
+        assert !response.isBlank();
         return response;
     }
 
@@ -98,6 +102,7 @@ public class TaskList {
      * @param t Task to be added
      */
     public void addSavedData(Task t) {
+        assert t != null;
         list.add(t);
     }
 

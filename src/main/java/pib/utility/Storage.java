@@ -25,6 +25,8 @@ public class Storage {
      * @param filePath String to locate the stored data
      */
     public Storage(String filePath) throws PibException {
+        assert filePath != null;
+        assert !filePath.isBlank();
         this.filePath = filePath;
         this.file = new File(filePath);
         new File("./data").mkdirs();
@@ -42,6 +44,7 @@ public class Storage {
      * @throws PibException when FileNotFoundException is thrown by system when trying to locate the saved data file
      */
     public String loadData(TaskList list) throws PibException {
+        assert list != null;
         String response = "";
         try {
             Scanner sc = new Scanner(this.file);
@@ -72,6 +75,7 @@ public class Storage {
             } else {
                 response = response.concat(Ui.printNoSavedDataFound());
             }
+            assert !response.isBlank();
             return response;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -87,6 +91,9 @@ public class Storage {
      * @throws PibException when IOException is thrown by system
      */
     public static void saveData(TaskList list, String filePath) throws PibException {
+        assert list != null;
+        assert filePath != null;
+        assert !filePath.isBlank();
         try {
             FileWriter fw = new FileWriter(filePath);
             fw.write(list.convertListToSaveData());

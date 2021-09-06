@@ -30,6 +30,7 @@ public class Pib {
     }
 
     public String loadData() {
+        assert list != null;
         String response = "";
         try {
             storage = new Storage(DATA_FILE_PATH);
@@ -38,6 +39,8 @@ public class Pib {
             e.print();
         }
         this.parser = new Parser(this.list);
+        assert ui != null;
+        assert storage != null;
         return response;
     }
 

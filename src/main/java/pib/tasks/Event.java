@@ -38,12 +38,14 @@ public class Event extends Task {
      * @throws PibException when user inputs wrongly formatted date/time
      */
     public static Event createEvent(String details, boolean printMessage) throws PibException {
+        assert details != null;
         try {
             int atIndex = details.indexOf("/at ");
             String description = details.substring(0, atIndex).trim();
             if (description.isBlank()) {
                 throw new PibException("empty-task-description");
             }
+            assert !details.isBlank();
             String[] dateTime = details.substring(atIndex + 4).trim().split(" ");
             String date = LocalDate.parse(dateTime[0].trim()).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
             String time = LocalTime.parse(dateTime[1].trim(), DateTimeFormatter.ofPattern("HHmm")).format(DateTimeFormatter.ofPattern("hh:mm a"));
@@ -66,6 +68,12 @@ public class Event extends Task {
      * @return Event object with these 4 fields initialised
      */
     public static Event createEvent(String description, int isDone, String date, String time, boolean printMessage) {
+        assert description != null;
+        assert !description.isBlank();
+        assert date != null;
+        assert !date.isBlank();
+        assert time != null;
+        assert !time.isBlank();
         return new Event(description, isDone, date, time, printMessage);
     }
 
