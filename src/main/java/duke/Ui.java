@@ -49,12 +49,12 @@ public class Ui {
             System.out.println("     " + taskList.get(completedItem - 1));
             System.out.println(line);
             output += line + "\n     Nice! I've marked this task as done:\n" + "     " + taskList.get(completedItem - 1) + '\n' + line;
-//            continue;
+
         } catch (IndexOutOfBoundsException e) {
             System.out.println(line);
             System.out.println("     " + "OOPS You dont have this many items in the list :)");
             System.out.println(line);
-//            continue;
+
         }
         return output;
     }
@@ -69,13 +69,11 @@ public class Ui {
         item = item.replaceAll("\\D+", "");//Extracts number from input
         int removeItem = Integer.parseInt(item);
 
-//      toDo.get(completedItem-1).markAsDone();
         System.out.println(line);
         System.out.println("     " + "Noted. I've removed this task:");
         System.out.println("     " + taskList.get(removeItem - 1));
         System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
         System.out.println(line);
-//        continue;
         output += line + "\n     " + "Noted. I've removed this task:" + "     \n" +
                 taskList.get(removeItem - 1) + "\n     Now you have " + countTasks() + " task to be done on your list!\n"
                 + line;
