@@ -2,16 +2,10 @@ package duke.command;
 
 import duke.*;
 
-public class ClearCommand extends Command {
-
-    public ClearCommand() {
-    }
-
+public class ListArchiveCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage, Archive archive) throws DukeException {
-        storage.clear();
-        taskList.clear();
-        return ui.clear();
+        return ui.listArchives();
     }
 
     @Override

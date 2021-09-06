@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Archive;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -21,13 +22,13 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes a series of operations to delete the task.
-     *
-     * @param taskList
+     *  @param taskList
      * @param ui
      * @param storage
+     * @param archive
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage, Archive archive) {
         storage.delete(this.taskToDelete);
         String message = ui.delete(taskList, this.taskToDelete);
         taskList.deleteTask(this.taskToDelete);

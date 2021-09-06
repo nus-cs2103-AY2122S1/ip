@@ -170,4 +170,43 @@ public class Storage {
         }
     }
 
+    public void loadArchive(String archiveName, TaskList taskList) throws DukeException {
+        if (!taskList.getTasks().isEmpty()) {
+            throw new DukeException("List is not empty, cannot load Archive.");
+        }
+
+        File file = new File(this.filePath);
+        if (file.length() != 0) {
+            throw new DukeException("Hard disk is not empty, cannot load Archive.");
+        }
+
+        String archivePath = "src/archive/" + archiveName + ".txt";
+        File archiveFile = new File(archivePath);
+        if (!archiveFile.exists()) {
+            throw new DukeException("Archive to load from does not exist.");
+        }
+
+        try {
+            file.delete();
+            Files.copy(archiveFile.toPath(), file.toPath());
+
+            taskList.getTasks().clear();
+            ArrayList<Task> temp = new ArrayList<>();
+            int counter = 0;
+            Scanner archiveScanner = new Scanner(new File(archivePath));
+            while (archiveScanner.hasNext()) {
+                convertToTask(archiveScanner.nextLine(), temp, counter);
+                counter++;
+            }
+
+            for (Task t : temp) {
+                taskList.addTask(t);
+            }
+
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
+    }
+
 }

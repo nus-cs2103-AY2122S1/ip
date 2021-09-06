@@ -2,16 +2,17 @@ package duke.command;
 
 import duke.*;
 
-public class ClearCommand extends Command {
+public class NewArchiveCommand extends Command {
+    private String fileName;
 
-    public ClearCommand() {
+    public NewArchiveCommand(String fileName) {
+        this.fileName = fileName;
     }
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage, Archive archive) throws DukeException {
-        storage.clear();
-        taskList.clear();
-        return ui.clear();
+        archive.newArchive(this.fileName);
+        return ui.newArchive(this.fileName);
     }
 
     @Override

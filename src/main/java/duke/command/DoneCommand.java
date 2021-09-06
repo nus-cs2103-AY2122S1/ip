@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Archive;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -21,13 +22,13 @@ public class DoneCommand extends Command {
 
     /**
      * Executes a series of operations to mark the task as done.
-     *
-     * @param taskList
+     *  @param taskList
      * @param ui
      * @param storage
+     * @param archive
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage, Archive archive) {
         taskList.getTasks().get(markAsDone - 1).markAsDone();
         storage.markAsDone(taskList, markAsDone);
         return ui.done(taskList, markAsDone);

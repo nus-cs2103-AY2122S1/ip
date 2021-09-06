@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Archive;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -25,13 +26,13 @@ public class AddCommand extends Command {
 
     /**
      * Executes operations depending on the type of task.
-     *
-     * @param taskList current list of tasks.
+     *  @param taskList current list of tasks.
      * @param ui
      * @param storage
+     * @param archive
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage, Archive archive) {
         taskList.addTask(this.task);
 
         if (task instanceof Todo) {

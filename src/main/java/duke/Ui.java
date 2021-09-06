@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -134,15 +135,43 @@ public class Ui {
     public String find(TaskList taskList, String word) {
         ArrayList<Task> matchingDates = taskList.find(word);
 
-        String output = "Here are the matching tasks in your list: \n";
+        StringBuilder output = new StringBuilder();
+        output.append("Here are the matching tasks in your list: \n");
         for (int i = 1; i <= matchingDates.size(); i++) {
-            output = output + i + ". " + matchingDates.get(i - 1).toString() + "\n";
+            output = output.append(i + ". " + matchingDates.get(i - 1).toString() + "\n");
         }
-        return output;
+        return output.toString();
     }
 
     public String clear() {
         return "Noted, I have cleared your list and hard disk.";
+    }
+
+    public String listArchives() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Here are your archives: \n");
+
+        File[] file = new File("src/archive").listFiles();
+        int counter = 1;
+        for (File f : file) {
+            if (f.isFile()) {
+                stringBuilder.append(counter + ". " + f.getName() + "\n");
+            }
+        }
+
+        return stringBuilder.toString();
+    }
+
+    public String deleteArchive(String fileName) {
+        return "Noted, " + fileName + " Archive has been deleted.";
+    }
+
+    public String loadArchive(String fileName) {
+        return "You have loaded " + fileName + " Archive.";
+    }
+
+    public String newArchive(String fileName) {
+        return "Got it! A new " + fileName + " Archive has been created.";
     }
 
     public void printToConsole(String response) {

@@ -27,6 +27,7 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    private Archive archive;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -40,6 +41,7 @@ public class Duke extends Application {
      */
     public Duke(String filePath) {
         ui = new Ui();
+        this.archive = new Archive();
         try {
             storage = new Storage(filePath, this.ui);
             tasks = new TaskList(storage.load());
@@ -157,7 +159,7 @@ public class Duke extends Application {
     public String getResponse(String input) {
         try {
             duke.command.Command result = parser.parse(input);
-            return result.execute(this.tasks, this.ui, this.storage);
+            return result.execute(this.tasks, this.ui, this.storage, this.archive);
         } catch (DukeException dukeException) {
             return "Error Encountered: \n" + dukeException.toString();
         }
@@ -173,7 +175,7 @@ public class Duke extends Application {
             try {
                 String fullCommand = ui.readCommand();
                 duke.command.Command c = parser.parse(fullCommand);
-                String response = c.execute(tasks, ui, storage);
+                String response = c.execute(tasks, ui, storage, this.archive);
                 ui.printToConsole(response);
                 isExit = c.isExit();
             } catch (DukeException e) {

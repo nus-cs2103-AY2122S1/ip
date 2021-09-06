@@ -1,9 +1,6 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.*;
 
 /**
  * Type of Command that is called when user gives an invalid input.
@@ -23,10 +20,11 @@ public class InvalidCommand extends Command {
      * @param taskList
      * @param ui
      * @param storage
+     * @param archive
      * @throws DukeException
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage, Archive archive) throws DukeException {
         return ui.invalidUserInput();
     }
 

@@ -16,7 +16,7 @@ import duke.testinginterface.TaskListInterface;
  */
 public class Parser {
     private TaskListInterface taskList;
-    private enum Command { Exit, List, Done, Delete, Clear, Todo, Deadline, Event, CheckDate, Find, Invalid };
+    private enum Command { Exit, List, Done, Delete, Clear, Todo, Deadline, Event, CheckDate, Find, Archive, Invalid };
 
     /**
      * Constructor.
@@ -115,6 +115,27 @@ public class Parser {
             String word = input.substring(5);
             c = new FindCommand(word);
             break;
+
+        case Archive:
+            if (input.contains("/delete")) {
+                String fileName = input.split(" /delete ")[1];
+                c = new DeleteArchiveCommand(fileName);
+
+            } else if (input.contains("/load")) {
+                String fileName = input.split(" /load ")[1];
+                c = new LoadArchiveCommand(fileName);
+
+            } else if (input.contains("/saveAs")) {
+                String fileName = input.split(" /saveAs ")[1];
+                c = new NewArchiveCommand(fileName);
+
+            } else if (input.equals("archive /list")) {
+                c = new ListArchiveCommand();
+
+            } else {
+                throw new DukeException("invalid Archive command");
+            }
+            break;
         default:
         }
         return c;
@@ -147,7 +168,9 @@ public class Parser {
             return Command.CheckDate;
         } else if (input.startsWith("find")) {
             return Command.Find;
-        } else {
+        } else if (input.startsWith("archive")) {
+            return Command.Archive;
+        } else{
             return Command.Invalid;
         }
     }
