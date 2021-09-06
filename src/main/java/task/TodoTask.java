@@ -26,6 +26,16 @@ public class TodoTask extends Task {
     }
 
     /**
+     * Returns the type of this Task object.
+     *
+     * @return A String corresponding to the type of this Task object.
+     */
+    @Override
+    public String getTaskType() {
+        return super.getTaskType() + " (Todo)";
+    }
+
+    /**
      * Returns the String representation of the TodoTask object, showing the state and the task.
      *
      * Takes no parameters.

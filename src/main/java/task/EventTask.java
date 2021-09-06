@@ -35,6 +35,29 @@ public class EventTask extends Task {
     }
 
     /**
+     * Returns the String representation of the "At" time stored within this EventTask object.
+     *
+     * @return A String enumerating the "At" time of this Event.
+     */
+    public String getTime() {
+        if (storedTime.isEmpty()) {
+            return time.format(outputFormatter);
+        } else {
+            return storedTime;
+        }
+    }
+
+    /**
+     * Returns the type of this Task object.
+     *
+     * @return A String corresponding to the type of this Task object.
+     */
+    @Override
+    public String getTaskType() {
+        return super.getTaskType() + " (Event)";
+    }
+
+    /**
      * Returns the String representation of the EventTask object, showing the state and the task.
      *
      * Takes no parameters.
@@ -43,7 +66,7 @@ public class EventTask extends Task {
      */
     @Override
     public String getTaskState() {
-        return "[E]" + super.getTaskState() + " (At: " + (storedTime.isEmpty() ? time.format(outputFormatter) : storedTime) + ")";
+        return "[E]" + super.getTaskState() + " (At: " + this.getTime() + ")";
     }
 
     /**
@@ -59,6 +82,6 @@ public class EventTask extends Task {
                 + (isDone ? "1," : "0,")
                 + task
                 + ","
-                + (storedTime.isEmpty() ? time.format(outputFormatter) : storedTime);
+                + this.getTime();
     }
 }

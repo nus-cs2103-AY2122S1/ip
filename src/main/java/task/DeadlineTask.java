@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class DeadlineTask extends Task {
 
     protected LocalDateTime time;
-    protected String storedTime = "";
+    protected String storedTime;
 
     /**
      * Constructor for the DeadlineTask class.
@@ -35,6 +35,29 @@ public class DeadlineTask extends Task {
     }
 
     /**
+     * Returns the String representation of the "By" time stored within this DeadlineTask object.
+     *
+     * @return A String enumerating the "By" time of this Deadline.
+     */
+    public String getTime() {
+        if (storedTime.isEmpty()) {
+            return time.format(outputFormatter);
+        } else {
+            return storedTime;
+        }
+    }
+
+    /**
+     * Returns the type of this Task object.
+     *
+     * @return A String corresponding to the type of this Task object.
+     */
+    @Override
+    public String getTaskType() {
+        return super.getTaskType() + " (Deadline)";
+    }
+
+    /**
      * Returns the String representation of the DeadlineTask object, showing the state and the task.
      *
      * Takes no parameters.
@@ -43,7 +66,7 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String getTaskState() {
-        return "[D]" + super.getTaskState() + " (By: " + (storedTime.isEmpty() ? time.format(outputFormatter) : storedTime) + ")";
+        return "[D]" + super.getTaskState() + " (By: " + this.getTime() + ")";
     }
 
     /**
@@ -59,6 +82,6 @@ public class DeadlineTask extends Task {
                 + (isDone ? "1," : "0,")
                 + task
                 + ","
-                + (storedTime.isEmpty() ? time.format(outputFormatter) : storedTime);
+                + this.getTime();
     }
 }
