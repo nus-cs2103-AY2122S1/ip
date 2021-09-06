@@ -36,7 +36,7 @@ public class FindCommand implements Command {
         try {
             return taskList.findTask(message.substring(Keyword.TODOS.length() + 1));
         } catch (IndexOutOfBoundsException e) {
-            return ui.findIndexErrorMessage();
+            return ui.formatFindIndexErrorMessage();
         }
     }
 }

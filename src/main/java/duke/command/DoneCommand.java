@@ -36,9 +36,9 @@ public class DoneCommand implements Command {
         try {
             return taskList.markDone(Integer.parseInt(message.substring(Keyword.DONE.length() + 1)));
         } catch (NumberFormatException e) {
-            return ui.doneErrorMessage();
+            return ui.formatDoneErrorMessage();
         } catch (IndexOutOfBoundsException e) {
-            return ui.doneIndexErrorMessage();
+            return ui.formatDoneIndexErrorMessage();
         }
     }
 }
