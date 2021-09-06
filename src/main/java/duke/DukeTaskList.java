@@ -51,9 +51,10 @@ public class DukeTaskList {
                     LocalTime.parse(bodySplit[2]),
                     LocalTime.parse(bodySplit[3]));
             break;
+        default:
+            assert false : "Data file contains a task type not yet implemented!";
         }
 
-        assert currTask != null;
         if (state.equals("1")) {
             currTask.markAsDone();
         }
