@@ -1,5 +1,6 @@
 package retriever;
 
+import javafx.application.Platform;
 import retriever.exception.RetrieverException;
 import retriever.task.TaskList;
 
@@ -56,6 +57,7 @@ public class Retriever {
 
         if (parser.isExit()) {
             retrieverResponse = "Sad To See You Go!";
+            Platform.exit();
         }
 
         return retrieverResponse;
