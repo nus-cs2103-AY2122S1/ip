@@ -10,11 +10,7 @@ import model.ToDos;
 import ui.IUi;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -41,52 +37,49 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
      * {@inheritDoc}
      */
     @Override
-    public void processCommand(Command command, Map<String, String> arguments) {
+    public void processCommand(Command command, CommandArgument argument) {
         switch (command) {
         case BYE:
             processBye();
             break;
-        case LIST: {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            
-            Optional<String> date = Optional.ofNullable(arguments.getOrDefault("date", null));
-            Optional<LocalDate> localDateOptional =
-                    date.filter(dateStr -> !dateStr.equals(""))
-                            .map(dateStr -> LocalDate.parse(dateStr, formatter));
-            
-            processList(localDateOptional);
+        case LIST:
+            LocalDate localDate = argument.getTiming().toLocalDate();
+            processList(localDate);
             break;
-        }
-        case DEADLINE: {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-            
-            processAdd(new Deadline(
-                    arguments.getOrDefault("description", "default deadline desc"),
-                    LocalDateTime.parse(arguments.getOrDefault("timing", LocalDateTime.now().toString()), formatter)
-            ));
+        case DEADLINE:
+            Deadline deadline = new Deadline(
+                    argument.getDescription(),
+                    argument.getTiming()
+            );
+        
+            processAdd(deadline);
             break;
-        }
-        case EVENT: {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-            
-            processAdd(new Event(
-                    arguments.getOrDefault("description", "default event"),
-                    LocalDateTime.parse(arguments.getOrDefault("timing", LocalDateTime.now().toString()), formatter)
-            ));
+        case EVENT:
+            Event event = new Event(
+                    argument.getDescription(),
+                    argument.getTiming()
+            );
+        
+            processAdd(event);
             break;
-        }
         case TODOS:
-            processAdd(new ToDos(arguments.getOrDefault("description", "default todo")));
+            ToDos task = new ToDos(argument.getDescription());
+            processAdd(task);
             break;
         case DONE:
-            // convert 1-indexing to 0-indexing
-            processDone(Integer.parseInt(arguments.getOrDefault("index", "-1")) - 1);
+            Integer doneIndex = argument.getIndex();
+            assert doneIndex != null;
+        
+            processDone(doneIndex);
             break;
         case DELETE:
-            processDelete(Integer.parseInt(arguments.getOrDefault("index", "-1")) - 1);
+            Integer deleteIndex = argument.getIndex();
+            assert deleteIndex != null;
+        
+            processDelete(deleteIndex);
             break;
         case FIND:
-            processFind(Optional.ofNullable(arguments.getOrDefault("keyword", null)));
+            processFind(argument.getDescription());
             break;
         default:
             ui.printSentence("command not recognized by processor");
@@ -98,27 +91,27 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
         System.exit(0);
     }
     
-    /**
-     * Prints the entire list of tasks whether its done or not done.
-     */
-    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-    private void processList(Optional<LocalDate> localDateOptional) {
-        localDateOptional.ifPresentOrElse(
-                x -> ui.printIndexedList(taskDao.getAll()
-                        .stream()
-                        .filter(task -> task instanceof TimedItem)
-                        .filter(task -> ((TimedItem) task).getTime().toLocalDate().isEqual(x))
-                        .collect(Collectors.toList())),
-                () -> ui.printIndexedList(taskDao.getAll())
-        );
+    private void processList(LocalDate localDate) {
+        if (localDate == null) {
+            ui.printIndexedList(taskDao.getAll());
+            return;
+        }
+        
+        ui.printIndexedList(taskDao.getAll()
+                .stream()
+                .filter(task -> task instanceof TimedItem)
+                .filter(task -> ((TimedItem) task).getTime().toLocalDate().isEqual(localDate))
+                .collect(Collectors.toList()));
     }
     
     private void processAdd(Task task) {
         taskDao.addTask(task);
         
-        ui.printSentence(" Got it. I've added this task: \n"
+        String sentence = " Got it. I've added this task: \n"
                 + "\t" + task.toString() + "\n"
-                + " Now you have " + taskDao.getSize() + " tasks in the list.");
+                + " Now you have " + taskDao.getSize() + " tasks in the list.";
+        
+        ui.printSentence(sentence);
     }
     
     /**
@@ -140,18 +133,19 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
      */
     private void processDelete(int index) {
         Task deletedTask = taskDao.deleteTask(index);
-        
+    
         ui.printSentence(" Noted. I've removed this task: \n"
                 + "\t" + deletedTask.toString() + "\n"
                 + " Now you have " + taskDao.getSize() + " tasks in the list.");
     }
     
-    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-    private void processFind(Optional<String> keyword) {
-        keyword.ifPresentOrElse(s -> {
-                    List<Task> tasks = taskDao.getByKeyword(s);
-                    ui.printIndexedList(tasks);
-                },
-                () -> processList(Optional.empty()));
+    private void processFind(String keyword) {
+        if (keyword == null) {
+            processList(null);
+            return;
+        }
+        
+        List<Task> tasks = taskDao.getByKeyword(keyword);
+        ui.printIndexedList(tasks);
     }
 }

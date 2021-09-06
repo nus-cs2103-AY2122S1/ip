@@ -39,7 +39,6 @@ public class GuiUiImpl implements IUi {
             numbering++;
         }
         
-        // remove the last extra \n if there is at least an item in the list
         if (list.size() > 0) {
             string.deleteCharAt(string.length() - 1);
         }

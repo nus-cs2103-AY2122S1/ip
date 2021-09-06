@@ -1,13 +1,16 @@
 package parser;
 
 import dao.TaskDaoImpl;
+import logic.CommandArgument;
 import logic.ICommandLogicUnit;
 import model.Command;
 import ui.IUi;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Logger;
 
 /**
@@ -24,11 +27,11 @@ public class ParserImpl implements IParser {
     /** list of available commands and arguments that can be parsed */
     private final List<String> availableCommands = List.of(
             "bye",
-            "list (#date dd/MM/yyyy HHmm)",
+            "list (#date dd/MM/yyyy)",
             "done #index",
-            "deadline #desc /by #deadline-date(dd/MM/yyyy HHmm)",
+            "deadline #desc /by #deadline-date(dd/MM/yyyy)",
             "todo #desc",
-            "event #desc /at #timing-date(dd/MM/yyyy HHmm)",
+            "event #desc /at #timing-date(dd/MM/yyyy)",
             "delete #index"
     );
     
@@ -65,7 +68,7 @@ public class ParserImpl implements IParser {
     private void processInputHelper(List<String> parsedCommands) {
         switch (parsedCommands.get(0)) {
         case "bye":
-            commandLogicUnit.processCommand(Command.BYE, Map.of());
+            parseBye();
             break;
         case "list":
             parseList(parsedCommands);
@@ -89,41 +92,62 @@ public class ParserImpl implements IParser {
             parseFind(parsedCommands);
             break;
         case "man":
-            ui.printSentence("() -> optional parameter or format of date time\n"
-                    + "# -> the parameter of the commands");
-            ui.printIndexedList(availableCommands);
+            parseMan();
             break;
         default:
             logger.warning("Unknown command : " + parsedCommands.get(0) + "being parsed");
-            processException(new IllegalCallerException("I'm sorry, but I don't know what that means :-("));
+            IllegalCallerException illegalCallerException = new IllegalCallerException("I'm sorry, but I don't know what that means :-(");
+            processException(illegalCallerException);
             break;
         }
     }
     
-    private void parseList(List<String> parsedCommands) {
-        String date = "";
+    private void parseBye() {
+        CommandArgument arguments = new CommandArgument();
         
-        if (parsedCommands.size() >= 2) {
-            date = parsedCommands.get(1);
+        commandLogicUnit.processCommand(Command.BYE, arguments);
+    }
+    
+    private void parseList(List<String> parsedCommands) {
+        CommandArgument arguments = new CommandArgument();
+        
+        if (parsedCommands.size() > 1) {
+            String date = parsedCommands.get(1);
+            LocalDateTime localDateTime = parseStringToLocalDateTime(date);
+            
+            if (localDateTime == null) {
+                return;
+            }
+            
+            arguments.setTiming(localDateTime);
         }
         
-        commandLogicUnit.processCommand(Command.LIST, Map.of(
-                "date", date
-        ));
+        commandLogicUnit.processCommand(Command.LIST, arguments);
     }
     
     private void parseDone(List<String> parsedCommands) {
+        CommandArgument arguments = new CommandArgument();
+    
         try {
-            commandLogicUnit.processCommand(Command.DONE, Map.of(
-                    "index", parsedCommands.get(1)
-            ));
+            Integer index = parseIndexStringToInt(parsedCommands);
+            arguments.setIndex(index);
+            commandLogicUnit.processCommand(Command.DONE, arguments);
         } catch (IndexOutOfBoundsException e) {
             processException(e);
         }
     }
     
     private void parseDeadline(List<String> parsedCommands) {
-        int byIndex = parsedCommands.indexOf("/by");
+        String timingSeparator = "/by";
+        CommandArgument arguments = parseTimedTaskArguments(parsedCommands, timingSeparator);
+        
+        commandLogicUnit.processCommand(Command.DEADLINE, arguments);
+    }
+    
+    private CommandArgument parseTimedTaskArguments(List<String> parsedCommands, String timingSeparator) {
+        CommandArgument arguments = new CommandArgument();
+        
+        int byIndex = parsedCommands.indexOf(timingSeparator);
         if (byIndex == -1) {
             logger.warning("/by not supplied in deadline command");
             throw new IllegalArgumentException("/by command not found");
@@ -135,80 +159,95 @@ public class ParserImpl implements IParser {
             throw new IllegalArgumentException("deadline desc cannot be empty");
         }
         
+        arguments.setDescription(desc);
+        
         String timing = String.join(" ", parsedCommands.subList(byIndex + 1, parsedCommands.size()));
         if (timing.isBlank()) {
             logger.warning("Empty deadline timing supplied");
             throw new IllegalArgumentException("deadline timing cannot be empty");
         }
         
-        commandLogicUnit.processCommand(Command.DEADLINE, Map.of(
-                "description", desc,
-                "timing", timing
-        ));
+        LocalDateTime localDateTime = parseStringToLocalDateTime(timing);
+        arguments.setTiming(localDateTime);
+        
+        return arguments;
     }
     
     private void parseTodo(List<String> parsedCommands) {
+        CommandArgument arguments = new CommandArgument();
+    
         String desc = String.join(" ", parsedCommands.subList(1, parsedCommands.size()));
-        
+    
         if (desc.isBlank()) {
             logger.warning("Empty Todo desc being supplied");
             throw new IllegalArgumentException("todo desc cannot be empty");
         }
-        
-        commandLogicUnit.processCommand(Command.TODOS, Map.of(
-                "description", desc
-        ));
+    
+        arguments.setDescription(desc);
+    
+        commandLogicUnit.processCommand(Command.TODOS, arguments);
     }
     
     private void parseEvent(List<String> parsedCommands) {
-        int byIndex = parsedCommands.indexOf("/at");
-        if (byIndex == -1) {
-            logger.warning("/at not supplied in event command");
-            throw new IllegalArgumentException("/at command not found");
-        }
-        
-        String desc = String.join(" ", parsedCommands.subList(1, byIndex));
-        if (desc.isBlank()) {
-            logger.warning("Empty event desc supplied");
-            throw new IllegalArgumentException("event desc cannot be empty");
-        }
-        
-        String timing = String.join(" ", parsedCommands.subList(byIndex + 1, parsedCommands.size()));
-        if (timing.isBlank()) {
-            logger.warning("Empty todo timing supplied");
-            throw new IllegalArgumentException("event timing cannot be empty");
-        }
-        
-        commandLogicUnit.processCommand(Command.EVENT, Map.of(
-                "description", desc,
-                "timing", timing
-        ));
+        String timingSeparator = "/at";
+        CommandArgument arguments = parseTimedTaskArguments(parsedCommands, timingSeparator);
+    
+        commandLogicUnit.processCommand(Command.EVENT, arguments);
     }
     
     private void parseDelete(List<String> parsedCommands) {
+        CommandArgument arguments = new CommandArgument();
+    
         try {
-            commandLogicUnit.processCommand(Command.DELETE, Map.of(
-                    "index", parsedCommands.get(1)
-            ));
+            int index = parseIndexStringToInt(parsedCommands);
+            arguments.setIndex(index);
+        
+            commandLogicUnit.processCommand(Command.DELETE, arguments);
         } catch (IndexOutOfBoundsException e) {
             processException(e);
         }
     }
     
     private void parseFind(List<String> parsedCommands) {
+        CommandArgument arguments = new CommandArgument();
+    
         if (parsedCommands.size() < 2) {
-            processException(new IllegalArgumentException("keyword cannot be empty"));
+            IllegalArgumentException illegalArgumentException = new IllegalArgumentException("keyword cannot be empty");
+            processException(illegalArgumentException);
+            return;
         }
-        
+    
         String keyword = parsedCommands.get(1);
-        commandLogicUnit.processCommand(Command.FIND, Map.of(
-                "keyword", keyword
-        ));
+        arguments.setDescription(keyword);
+    
+        commandLogicUnit.processCommand(Command.FIND, arguments);
+    }
+    
+    private void parseMan() {
+        ui.printSentence("() -> optional parameter or format of date time\n"
+                + "# -> the parameter of the commands");
+        ui.printIndexedList(availableCommands);
     }
     
     private void processException(Exception e) {
         assert e.getMessage() != null;
-    
+        
         ui.printSentence("OOPS!!! " + e.getMessage());
+    }
+    
+    private LocalDateTime parseStringToLocalDateTime(String localDateTimeString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        
+        try {
+            return LocalDateTime.parse(localDateTimeString, formatter);
+        } catch (DateTimeParseException e) {
+            processException(new IllegalArgumentException("Invalid date time format, please follow dd/MM/yyyy"));
+        }
+        
+        return null;
+    }
+    
+    private int parseIndexStringToInt(List<String> parsedCommands) {
+        return Integer.parseInt(parsedCommands.get(1)) - 1;
     }
 }
