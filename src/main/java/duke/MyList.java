@@ -1,7 +1,6 @@
 package duke;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
@@ -20,7 +19,7 @@ public class MyList {
      * An ArrayList Object to store all the items in the list.
      */
     private ArrayList<Task> myList;
-    public enum taskType {
+    public enum TaskType {
         EVENT,
         TODO,
         DEADLINE
@@ -137,7 +136,7 @@ public class MyList {
 
         for (int i = 0; i < getListSize(); i++) {
             Task t = this.myList.get(i);
-            if (t.getTaskType().equals(taskType.DEADLINE.toString())) {
+            if (t.getTaskType().equals(TaskType.DEADLINE.toString())) {
                 // Safe typecast since it has already been verified that t is of type deadline
                 Deadline d = (Deadline) t;
                 LocalDate deadline = d.getDeadline();
