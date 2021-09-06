@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("data/jarvis.txt");
+    private Duke duke = new Duke("data/jarvis.txt", "data/notes.txt");
 
     @Override
     public void start(Stage stage) {
