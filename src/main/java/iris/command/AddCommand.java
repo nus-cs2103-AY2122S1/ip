@@ -6,6 +6,7 @@ import iris.TaskList;
 public abstract class AddCommand extends ModifyTaskListCommand {
     @Override
     public String run(TaskList tasks) throws IrisException {
+        assert tasks != null;
         int count = tasks.getCount();
 
         return String.format(

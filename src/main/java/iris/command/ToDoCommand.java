@@ -12,6 +12,7 @@ public class ToDoCommand extends AddCommand {
 
     @Override
     public String run(TaskList tasks) throws IrisException {
+        assert tasks != null;
         tasks.addTodo(this.name);
         return super.run(tasks);
     }

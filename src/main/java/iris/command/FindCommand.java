@@ -14,6 +14,7 @@ public class FindCommand extends Command {
 
     @Override
     public String run(TaskList tasks) {
+        assert tasks != null;
         List<Task> searchResults = tasks.find(this.searchTerm);
         StringBuilder response = new StringBuilder();
         for (int i = 0; i < searchResults.size(); i++) {

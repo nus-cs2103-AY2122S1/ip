@@ -20,6 +20,7 @@ public class DeadlineCommand extends AddCommand {
 
     @Override
     public String run(TaskList tasks) throws IrisException {
+        assert tasks != null;
         tasks.addDeadline(this.name, this.by);
         return super.run(tasks);
     }
