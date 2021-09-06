@@ -1,5 +1,7 @@
 package duke.util;
 
+import duke.command.*;
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -31,6 +33,8 @@ public class Parser {
         }
     }
 
+
+
     /**
      * Parses the input
      * @param input
@@ -38,46 +42,30 @@ public class Parser {
      * @param ui
      * @return
      */
-    static String parseInput(String input, TaskList taskList, Ui ui) {
+    static Command parseInput(String input, TaskList taskList, Ui ui) throws DukeException {
         String[] infos = input.split(" ", 2);
         assert infos.length > 0 : "Number of words in input should > 0";
         String type = infos[0];
         switch (type) {
         case "bye":
-            ui.showGoodbye();
-            System.exit(0);
-            //fallthrough
+            return new ByeCommand();
         case "list":
-            if (infos.length == 1) {
-                return ui.printList(taskList);
-            } else {
-                return "Wrong input format";
-            }
+            return new ListCommand(infos);
         case "schedule":
-            return getSchedule(input, taskList);
+            return new ScheduleCommand(infos);
         case "done":
-            if (infos.length == 2) {
-                String index = infos[1];
-                return doTask(index, taskList);
-            } else {
-                return "Wrong input format";
-            }
+            return new DoneCommand();
         case "find":
-            if (infos.length == 2) {
-                String content = infos[1];
-                return findContent(content, taskList);
-            } else {
-                return "Wrong input format";
-            }
         case "delete":
-            if (infos.length == 2) {
-                String index = infos[1];
-                return deleteTask(index, taskList);
-            } else {
-                return "Wrong input format";
-            }
+            return new DeleteCommand(infos);
+        case "deadline":
+            //fall through
+        case "todo":
+            //fall through
+        case "event":
+            return new AddCommand(infos);
         default:
-            return addList(input, taskList);
+            throw new DukeException("The input cannot be recognized.");
         }
     }
 
@@ -161,75 +149,7 @@ public class Parser {
         return s.toString();
     }
 
-    static String findContent(String content, TaskList taskList) {
-        ArrayList<Task> lst = taskList.getTasks();
-        String output = "";
-        for (Task t: lst) {
-            if (t.getContent().contains(content)) {
-                output += (t.toString() + "\n");
-            }
-        }
-        if (output.equals("")) {
-            return "No matching tasks";
-        } else {
-            return output;
-        }
-    }
 
-
-    /**
-     * Returns the information of all tasks in a certain date.
-     * @param info specify the date of tasks to be returned
-     * @param taskList the taskList that stores all the tasks
-     * @return a string containing information of all tasks in the date.
-     */
-    static String getSchedule(String info, TaskList taskList) {
-        ArrayList<Task> tasks = taskList.getTasks();
-        String output = "";
-        LocalDate date;
-        try {
-            date = LocalDate.parse(info.split(" ")[1]);
-        } catch (Exception e) {
-            return "Wrong format of date";
-        }
-
-        for (Task t : tasks) {
-            if (date.equals(t.getDate())) {
-                //System.out.println(t.toString());
-                output += (t.toString() + "\n");
-            }
-        }
-        return output;
-    }
-
-    /**
-     * Deletes target task from taskList and returns the message.
-     * @param index the index of task to be deleted
-     * @param taskList the taskList that stores all the tasks
-     * @return the information of the deleted task and if error, the error message.
-     */
-    static String deleteTask(String index, TaskList taskList) {
-        ArrayList<Task> tasks = taskList.getTasks();
-        int idx;
-        try {
-            idx = Integer.parseInt(index);
-            tasks.get(idx - 1);
-        } catch (NumberFormatException nfe) {
-            return "Please check the format of the index.";
-        } catch (IndexOutOfBoundsException e) {
-            return "The task does not exist in task list.";
-        }
-
-        Task currTask = tasks.get(idx - 1);
-        tasks.remove(currTask);
-
-        String output = "    ____________________________________________________________\n"
-                + "     Noted. I've removed this task: \n"
-                + "      " + currTask.toString() + "\n"
-                + "     Now you have " + tasks.size() + " tasks in the list. \n"
-                + "    ____________________________________________________________\n";
-        return output;
-    }
 }
 
 
