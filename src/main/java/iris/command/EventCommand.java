@@ -20,6 +20,7 @@ public class EventCommand extends AddCommand {
 
     @Override
     public String run(TaskList tasks) throws IrisException {
+        assert tasks != null;
         tasks.addEvent(this.name, this.at);
         return super.run(tasks);
     }

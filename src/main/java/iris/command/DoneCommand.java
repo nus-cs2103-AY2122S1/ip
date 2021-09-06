@@ -13,6 +13,7 @@ public class DoneCommand extends ModifyTaskListCommand {
 
     @Override
     public String run(TaskList tasks) throws IrisException {
+        assert tasks != null;
         Task task = tasks.done(this.index);
         return String.format("Good job! I've marked this task as done:\n%s", task);
     }

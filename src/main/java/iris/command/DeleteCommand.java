@@ -14,6 +14,7 @@ public class DeleteCommand extends ModifyTaskListCommand {
 
     @Override
     public String run(TaskList tasks) throws IrisException {
+        assert tasks != null;
         this.task = tasks.delete(this.index);
 
         int count = tasks.getCount();
