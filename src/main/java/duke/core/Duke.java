@@ -46,6 +46,7 @@ public class Duke {
     public String getResponse(String userInput) {
         try {
             Command c = Parser.identifyCommand(userInput);
+            assert(c != null);
             return c.execute(taskList, ui, storage);
         } catch (DukeException e) {
             return ui.showError(e);
