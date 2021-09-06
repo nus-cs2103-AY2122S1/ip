@@ -17,6 +17,7 @@ public class AddCommand extends Command {
     public AddCommand(Task task) {
         this.task = task;
     }
+
     /**
      * Executes the specific actions for this command.
      *

@@ -31,7 +31,7 @@ public class Parser {
      */
     public static Command parse(String userInput) throws DukeException {
         String[] parts = userInput.split(" ", 2);
-        String command = parts[0];
+        String command = parts[0].toLowerCase();
         int partsLength = parts.length;
 
         if (command.equals("bye")) {

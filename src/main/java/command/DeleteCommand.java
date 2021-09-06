@@ -21,7 +21,7 @@ public class DeleteCommand extends Command {
     /**
      * Executes the specific actions for this command.
      *
-     * @param tasks   Handles the list of tasks.
+     * @param tasks Handles the list of tasks.
      * @param storage Handles the saving and loading of tasks.
      */
     @Override
