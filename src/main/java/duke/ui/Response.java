@@ -14,8 +14,14 @@ public class Response {
         return cap <= 1 ? "" : "s";
     }
 
+    /**
+     * Returns the Welcome Message.
+     *
+     * @return Welcome Message String
+     */
     public static String showWelcome() {
-        return "Henlo, Duke here! How can I be of assistance?";
+        final String welcomeMessage = "Henlo, Duke here! How can I be of assistance?";
+        return welcomeMessage;
     }
 
     public String showError(DukeException e) {
@@ -31,8 +37,9 @@ public class Response {
      */
     public String showAddTaskMessage(Task task, TaskList taskList) {
         int size = taskList.getCapacity();
-        return String.format("Got it. I've added this task:\n    %s\n"
-                + "Now you have %d task%s in the list\n", task , size, pluralOrNo(size));
+        final String addTaskMessage = "Got it. I've added this task:\n    %s\n"
+                + "Now you have %d task%s in the list\n";
+        return String.format(addTaskMessage, task , size, pluralOrNo(size));
     }
 
     /**
@@ -43,18 +50,22 @@ public class Response {
      * @param taskList The Task List being edited
      */
     public String showEditTaskMessage(Task task, CommandType commandType, TaskList taskList) {
+        final String deleteMessage = "Noted. Ive removed this task:\n    %s\n"
+                    + "Now you have %d task%s in the list\n";
+        final String doneMessage = "Nice! I've marked this task as done:\n    %s\n";
+        final String undoMessage = "I've marked this task as undone:\n    %s\n";
+        final String blank = "";
         switch(commandType) {
         case DELETE:
             int size = taskList.getCapacity();
-            return String.format("Noted. Ive removed this task:\n    %s\n"
-                    + "Now you have %d task%s in the list\n", task, size, pluralOrNo(size));
+            return String.format(deleteMessage, task, size, pluralOrNo(size));
 
         case DONE:
-            return String.format("Nice! I've marked this task as done:\n    %s\n", task);
+            return String.format(doneMessage, task);
         case UNDO:
-            return String.format("I've marked this task as undone:\n    %s\n", task);
+            return String.format(undoMessage, task);
         default:
-            return "";
+            return blank;
         }
     }
 
@@ -65,6 +76,7 @@ public class Response {
      * @param taskList The Task List to be displayed
      */
     public String showTaskList(TaskList taskList) {
+        final String noTasksMessage = "You have no tasks!";
         ArrayList<Task> arrayList = taskList.getArrayList();
         int currentCapacity = arrayList.size();
         if (currentCapacity > 0) {
@@ -75,7 +87,7 @@ public class Response {
             }
             return toPrint;
         } else {
-            return "You have no tasks!";
+            return noTasksMessage;
         }
     }
 
@@ -86,20 +98,28 @@ public class Response {
      * @param tasks The ArrayList containing the Tasks to be displayed.
      */
     public String showSearchMessage(ArrayList<Task> tasks) {
+        final String noTasksFoundMessage = "Sorry, no tasks match your search query!";
+        final String searchStringFriend = "    %s. %s\n";
         int size = tasks.size();
         if (size < 1) {
-            return "Sorry, no tasks match your search query!";
+            return noTasksFoundMessage;
         } else {
             String searchString = "Here are the matching tasks in your list:\n";
             for (int i = 1; i <= size; i++) {
-                searchString += String.format("    " + i + ". " + tasks.get(i - 1) + "\n");
+                searchString += String.format(searchStringFriend, i, tasks.get(i - 1));
             }
             return searchString;
         }
     }
 
+    /**
+     * This method returns the Exit Message.
+     *
+     * @return Exit Message
+     */
     public String showExitMessage() {
-        return "Good bye!";
+        final String byeMessage = "Good bye!";
+        return byeMessage;
     }
 
     /**
