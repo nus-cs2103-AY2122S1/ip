@@ -1,7 +1,8 @@
 package duke;
 
 public class ToDo extends Task {
-
+    static final String DONE = "[T][X] ";
+    static final String NOT_DONE = "[T][ ] ";
     public ToDo(String task) {
         super(task);
     }
@@ -9,11 +10,11 @@ public class ToDo extends Task {
     @Override
     public String printTask() {
         String result = "";
-        if (this.complete) {
-            result = "[T][X] ";
+        if (complete) {
+            result = DONE;
         } else {
-            result = "[T][ ] ";
+            result = NOT_DONE;
         }
-        return result + this.task;
+        return result + task;
     }
 }

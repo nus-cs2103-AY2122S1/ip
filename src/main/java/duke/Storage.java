@@ -39,7 +39,7 @@ public class Storage {
      * @return ArrayList of tasks for the current program to use.
      */
     public ArrayList<Task> fileReader() {
-        ArrayList result = new ArrayList<Task>();
+        ArrayList<Task> result = new ArrayList<Task>();
         File tempFile = new File("saveFile");
 
         if (tempFile.exists()) {

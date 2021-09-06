@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TaskList implements Serializable {
+    static final int TODO_TASK = 5;
+    static final int DEADLINE_TASK = 9;
+    static final int EVENT_TASK = 6;
+    static final int EVENT_TIMING = 4;
     private ArrayList<Task> taskList;
     private Ui ui;
     private int currIndex = 1;
@@ -30,6 +34,11 @@ public class TaskList implements Serializable {
         return this.taskList.size();
     }
 
+    /**
+     * Prints the Task in the current index of the TaskList.
+     *
+     * @param task Task object to be printed.
+     */
     private void printItem(Task task) {
         if (stringList.equals("")) {
             stringList = currIndex + "." + task.printTask();
@@ -39,7 +48,12 @@ public class TaskList implements Serializable {
         currIndex++;
     }
 
-    String printList() {
+    /**
+     * Prints all the tasks in the TaskList in order of how they were added.
+     *
+     * @return String representation of the tasks inside the TaskList.
+     */
+    public String printList() {
         taskList.forEach((task) -> printItem(task));
         String response = stringList;
         currIndex = 1;
@@ -47,65 +61,82 @@ public class TaskList implements Serializable {
         return response;
     }
 
-    String doneItem(int index) throws InputError {
-        String response = "";
-        try {
-            if (index > taskList.size()) {
-                throw new InputError("Invalid Number");
-            }
-            Task currTask = taskList.get(index - 1);
-            currTask.setComplete();
-            response = "Good job for this thing done man: \n" + "   " + currTask.printTask();
-        } catch (InputError e) {
-            response = ui.errorMessage(e);
-        }
+    /**
+     * Marks a Task as done in the TaskList.
+     *
+     * @param index Numbered Task in the TaskList to be marked as done.
+     * @return String message indicating that Task has been marked as done.
+     */
+    public String doneTask(int index) {
+        String response;
+        Task currTask = taskList.get(index - 1);
+        currTask.setComplete();
+        response = "Good job for this thing done man: \n" + "   " + currTask.printTask();
         return response;
     }
 
-    String addTodo(String str) {
-        String response = "";
-        System.out.println("Alrighty! I have added this task:");
-        taskList.add(new ToDo(str.substring(5)));
+    /**
+     * Adds a To Do task to the TaskList.
+     *
+     * @param str to do instruction containing the to do task.
+     * @return String message indicating that to do task has been added to the TaskList.
+     */
+    public String addTodo(String str) {
+        String response;
+        ToDo todoTask = new ToDo(str.substring(TODO_TASK));
+        taskList.add(todoTask);
         response = "Alrighty! I have added this task:\n" + "   " + taskList.get(taskList.size() - 1).printTask() + "\n"
                 + "Now you have " + taskList.size() + " task(s) in total!";
         return response;
     }
 
-    String addDeadline(String str) {
+    /**
+     * Adds a DeadLine task to the TaskList.
+     *
+     * @param str DeadLine instruction containing the DeadLine Task.
+     * @return String message indicating that the DeadLine task has been added to the TaskList.
+     */
+    public String addDeadline(String str) {
         String response = "";
-        taskList.add(new DeadLine(str.substring(9, str.indexOf("/") - 1), str.substring(str.indexOf("/") + 4)));
+        int slashIndex = str.indexOf("/");
+        DeadLine deadlineTask = new DeadLine(str.substring(DEADLINE_TASK, slashIndex - 1),
+                str.substring(slashIndex + 4));
+        taskList.add(deadlineTask);
         response = "Alrighty! I have added this task:\n" + "   " + taskList.get(taskList.size() - 1).printTask()
                 + "\n" + "Now you have " + taskList.size() + " task(s) in total!";
         return response;
     }
 
-    String addEvent(String str) {
-        String response = "";
-        taskList.add(new Event(str.substring(6, str.indexOf("/") - 1), str.substring(str.indexOf("/") + 4)));
+    /**
+     * Adds an Event task to the TaskList.
+     *
+     * @param str Event instruction containing the Event Task.
+     * @return String message indicating that Event task has been added to the TaskList.
+     */
+    public String addEvent(String str) {
+        String response;
+        int slashIndex = str.indexOf("/");
+        String event = str.substring(EVENT_TASK, slashIndex - 1);
+        String timing = str.substring(slashIndex + EVENT_TIMING);
+        Event eventTask = new Event(event, timing);
+        taskList.add(eventTask);
         response = "Alrighty! I have added this task:\n" + "   " + taskList.get(taskList.size() - 1).printTask()
                 + "\n" + "Now you have " + taskList.size() + " task(s) in total!";
         return response;
     }
 
-    String deleteItem(int index) throws InputError {
+    /**
+     * Deletes a Task from the TaskList.
+     *
+     * @param index Numbered Task in the TaskList to be deleted.
+     * @return String message indicating that the desired Task has been deleted from the TaskList.
+     */
+    public String deleteTask(int index) {
         String response = "";
-        try {
-            if (index > taskList.size()) {
-                throw new InputError("Invalid Number");
-            }
-            Task removed = taskList.remove(index - 1);
-            response = "Alrighty! I have deleted this task:\n" + "   " + removed.printTask() + "\n"
-                    + "Now you have " + taskList.size() + " task(s) in total!";
-        } catch (InputError e) {
-            response = ui.errorMessage(e);
-        }
+        Task removed = taskList.remove(index - 1);
+        response = "Alrighty! I have deleted this task:\n" + "   " + removed.printTask() + "\n"
+                + "Now you have " + taskList.size() + " task(s) in total!";
         return response;
-    }
-
-    private void addTasks(Task task, ArrayList<Task> list, String word) {
-        if (task.getTask().equals(word)) {
-            list.add(task);
-        }
     }
 
     /**
@@ -116,11 +147,13 @@ public class TaskList implements Serializable {
      *
      */
     public TaskList findTasks(String str) {
-        ArrayList<Task> resultList = new ArrayList<Task>();
+        ArrayList<Task> foundArrayList;
+        TaskList foundTaskList;
         List<Task> foundArray = taskList.stream().filter(task -> task.printTask().contains(str))
                 .collect(Collectors.toList());
-        resultList = new ArrayList<Task>(foundArray);
+        foundArrayList = new ArrayList<Task>(foundArray);
+        foundTaskList = new TaskList(foundArrayList, ui);
 
-        return new TaskList(resultList, ui);
+        return foundTaskList;
     }
 }

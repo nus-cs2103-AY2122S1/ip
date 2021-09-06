@@ -5,7 +5,8 @@ package duke;
  * @author Nikki
  */
 public class Event extends Task {
-
+    static final String DONE = "[E][X] ";
+    static final String NOT_DONE = "[E][ ] ";
     private String timing;
 
     /**
@@ -27,11 +28,11 @@ public class Event extends Task {
     @Override
     String printTask() {
         String result = "";
-        if (super.complete) {
-            result = "[E][X] ";
+        if (complete) {
+            result = DONE;
         } else {
-            result = "[E][ ] ";
+            result = NOT_DONE;
         }
-        return result + super.task + " (at: " + this.timing + ")";
+        return result + task + " (at: " + this.timing + ")";
     }
 }

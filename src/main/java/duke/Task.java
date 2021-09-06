@@ -7,6 +7,8 @@ import java.io.Serializable;
  * @author Nikki
  */
 public class Task implements Serializable {
+    static final String DONE = "[X] ";
+    static final String NOT_DONE = "[ ] ";
     protected boolean complete;
     protected String task;
 
@@ -20,10 +22,6 @@ public class Task implements Serializable {
         this.complete = false;
     }
 
-    public String getTask() {
-        return this.task;
-    }
-
     /**
      * Return the String representation of a Task.
      *
@@ -32,14 +30,14 @@ public class Task implements Serializable {
     String printTask() {
         String result;
         if (complete) {
-            result = "[X] ";
+            result = DONE;
         } else {
-            result = "[ ] ";
+            result = NOT_DONE;
         }
-        return result + this.task;
+        return result + task;
     }
 
     void setComplete() {
-        this.complete = true;
+        complete = true;
     }
 }
