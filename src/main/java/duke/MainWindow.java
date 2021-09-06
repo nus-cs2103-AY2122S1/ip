@@ -55,6 +55,7 @@ public class MainWindow extends AnchorPane {
         String response;
         try {
             Command command = duke.getCommand(input);
+            assert command != null : "Why is command null?!";
             if (command.isExit()) {
                 CompletableFuture.delayedExecutor(3, TimeUnit.SECONDS).execute(Platform::exit);
             }

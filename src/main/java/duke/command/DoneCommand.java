@@ -17,6 +17,7 @@ public class DoneCommand extends Command {
      * @param taskNumber task to be marked as complete.
      */
     public DoneCommand(int taskNumber) {
+        assert taskNumber > 0 : "Task number should be greater than 0";
         this.taskNumber = taskNumber;
     }
 
