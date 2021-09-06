@@ -119,25 +119,6 @@ public class Ui {
     }
 
     /**
-     * Abstract the message to be printed when the commands recognised are to be printed.
-     *
-     * @param description The sentence to be printed before the commands list is printed.
-     * @return message to be used by either the graphic UI or command line UI.
-     */
-    private Message formatCommandsRecognisedMessage(String description) {
-        return new Message(description,
-                "bye - Ends the chat session.",
-                "todo <description> - Adds a new todo to the task list.",
-                "deadline <description> /by <date/time> - Adds a new deadline to the task list",
-                "event <description> /at <date/time> - Adds a new event to the task list",
-                "list - return a list of all the task",
-                "done <number> - Sets the task to be done",
-                "find <search field> - Find task containing search field",
-                "delete <number> - Delete the task");
-
-    }
-
-    /**
      * Prints out a message when the task cannot be imported.
      *
      * @param description Description of task to be imported.
@@ -153,8 +134,16 @@ public class Ui {
      *
      * @return message to be used by either the graphic UI or command line UI.
      */
-    public Message formatImportTaskErrorMessage() {
-        return formatCommandsRecognisedMessage("This are the commands that I recognised:");
+    public Message formatHelpMessage() {
+        return new Message("This are the commands that I recognised",
+                "bye - Ends the chat session.",
+                "todo <description> - Adds a new todo to the task list.",
+                "deadline <description> /by <date/time> - Adds a new deadline to the task list",
+                "event <description> /at <date/time> - Adds a new event to the task list",
+                "list - return a list of all the task",
+                "done <number> - Sets the task to be done",
+                "find <search field> - Find task containing search field",
+                "delete <number> - Delete the task");
     }
 
     /**
@@ -192,7 +181,8 @@ public class Ui {
      * @return message to be used by either the graphic UI or command line UI.
      */
     public Message formatChatErrorMessage() {
-        return formatCommandsRecognisedMessage("Ugh! Only the following commands are recognised.");
+        return new Message("Ugh! I don't recognize your message. Enter 'help' to "
+                + "see a list of commands that you can use.");
     }
 
     /**

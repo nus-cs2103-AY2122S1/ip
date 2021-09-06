@@ -48,7 +48,7 @@ public class Duke {
             taskList = new TaskList(storage.importTask(), ui, storage);
             return ui.formatLoadTaskSuccessMessage();
         } catch (FileNotFoundException e) {
-            return ui.formatImportTaskErrorMessage();
+            return ui.formatHelpMessage();
         }
     }
 
