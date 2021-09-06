@@ -59,20 +59,26 @@ public class Parser {
 
         switch (command) {
         case "list":
+        case "li":
             return new ListCommand();
         case "bye":
             return new ByeCommand();
         case "delete":
+        case "del":
             return new DeleteCommand(arguments);
         case "done":
             return new DoneCommand(arguments);
         case "event":
+        case "e":
             return new EventCommand(arguments);
         case "deadline":
+        case "d":
             return new DeadlineCommand(arguments);
         case "todo":
+        case "t":
             return new TodoCommand(arguments);
         case "find":
+        case "f":
             return new FindCommand(arguments);
         default:
             throw new DukeException("I'm sorry, but I don't know what \""
