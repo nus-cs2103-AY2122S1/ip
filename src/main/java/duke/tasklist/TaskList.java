@@ -51,10 +51,9 @@ public class TaskList {
     }
 
     /**
-     * Deletes the task with taskNo specified.
+     * Marks the task with taskNo specified.
      *
-     * @param taskNo the taskNo of the task to be deleted.
-     * @return the string representing the success message.
+     * @param taskNo the taskNo of the task to be marked as done.
      */
     public String markTaskAsDone(Ui ui, int taskNo) {
         Task task = this.tasks.get(taskNo - 1);

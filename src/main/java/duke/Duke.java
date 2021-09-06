@@ -8,6 +8,8 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+import java.io.File;
+
 public class Duke {
 
     private Ui ui;
@@ -22,6 +24,8 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        assert new File(filePath).exists();
+        File tempFile = new File("c:/temp/temp.txt");
         tasks = new TaskList(storage.loadFile());
     }
 
