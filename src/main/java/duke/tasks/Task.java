@@ -74,5 +74,14 @@ public abstract class Task {
      */
     public abstract String getDetailsWithDelimiter(String delimiter);
 
+    /**
+     * Returns the next task to do after this one
+     *
+     * @return null by default as most tasks are one-time.
+     */
+    public Task getNextTask() {
+        return null;
+    }
+
 
 }

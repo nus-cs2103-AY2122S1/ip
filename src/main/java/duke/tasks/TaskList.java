@@ -80,4 +80,23 @@ public class TaskList {
     public Task remove(int index) {
         return storedList.remove(index);
     }
+
+    /**
+     * Marks a task as done and adds the next task specified by the task
+     *
+     * @param index task to mark done
+     */
+    public void markDoneAndAddNextTask(int index) {
+        Task taskToMark = storedList.get(index);
+        if (taskToMark.isDone()) {
+            return;
+        }
+
+        taskToMark.markDone();
+        Task nextTask = taskToMark.getNextTask();
+        if (nextTask != null) {
+            storedList.add(nextTask);
+        }
+    }
+
 }
