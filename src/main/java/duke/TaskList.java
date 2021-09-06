@@ -11,13 +11,13 @@ public class TaskList {
     /**
      * ArrayList to store Tasks.
      */
-    private ArrayList<Task> al;
+    private ArrayList<Task> tasks;
 
     /**
      * Constructor for a duke.TaskList.
      */
     public TaskList() {
-        this.al = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -26,7 +26,7 @@ public class TaskList {
      * @param t Task to be added.
      */
     public void addTask(Task t) {
-        this.al.add(t);
+        this.tasks.add(t);
     }
 
     /**
@@ -35,7 +35,7 @@ public class TaskList {
      * @param itemNum The number in the TaskList of the duke.Task to be mark completed (1-indexed).
      */
     public void markDone(int itemNum) {
-        Task task = al.get(itemNum - 1);
+        Task task = tasks.get(itemNum - 1);
         task.markDone();
     }
 
@@ -46,7 +46,7 @@ public class TaskList {
      * @return duke.Task with the index in the duke.TaskList.
      */
     public Task getTaskByIndex(int index) {
-        return this.al.get(index);
+        return this.tasks.get(index);
     }
 
     /**
@@ -55,7 +55,7 @@ public class TaskList {
      * @return Length of the TaskList.
      */
     public int getLength() {
-        return this.al.size();
+        return this.tasks.size();
     }
 
     /**
@@ -64,7 +64,7 @@ public class TaskList {
      * @param itemNum The index of the Task in the TaskList(0-indexed).
      */
     public void deleteTask(int itemNum) {
-        this.al.remove(itemNum);
+        this.tasks.remove(itemNum);
     }
 
     /**
@@ -76,8 +76,8 @@ public class TaskList {
     public String find(String searchTerm) {
         String result = "";
         int k = 1;
-        for (int i = 0; i < this.al.size(); i++) {
-            Task current = this.al.get(i);
+        for (int i = 0; i < this.tasks.size(); i++) {
+            Task current = this.tasks.get(i);
             if (current.toString().contains(searchTerm)) {
                 result += k + ". " + current;
                 k++;
@@ -94,7 +94,7 @@ public class TaskList {
     @Override
     public String toString() {
         String result = "Here are the tasks in your list:\n";
-        Task[] taskArray = this.al.toArray(new Task[0]);
+        Task[] taskArray = this.tasks.toArray(new Task[0]);
         for (int i = 0; i < taskArray.length; i++) {
             result += String.format("%s. %s", i + 1, taskArray[i].toString());
         }

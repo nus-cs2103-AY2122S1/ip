@@ -15,6 +15,11 @@ public class Todo extends Task {
         super(desc[1], Boolean.valueOf(desc[3]));
     }
 
+    /**
+     * Converts the task into a form that writes into storage.
+     *
+     * @return String representation of task to write into storage.
+     */
     public String toWrite() {
         return "todo--" + Boolean.toString(this.isDone) + "--" + this.desc + "--0\n";
     }

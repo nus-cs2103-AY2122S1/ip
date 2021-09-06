@@ -21,16 +21,6 @@ public class Ui {
     }
 
     /**
-     * Shows exit message.
-     */
-    public void showExitMessage() {
-        String exitMessage = "-----------------------------------------\n"
-                + "Bye. Hope to see you again soon!\n"
-                + "-----------------------------------------\n";
-        System.out.println(exitMessage);
-    }
-
-    /**
      * Shows message for adding tasks.
      *
      * @param newTask Task to be added.

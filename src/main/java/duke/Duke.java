@@ -5,8 +5,6 @@ package duke;
  */
 public class Duke {
 
-
-
     private TaskList taskList;
     private Storage storage;
     private Ui ui;
@@ -25,9 +23,9 @@ public class Duke {
     /**
      * Exits the program.
      */
-    public void exit() {
-        this.ui.showExitMessage();
+    public String exit() {
         System.exit(0);
+        return "Exiting...";
     }
 
     /**
@@ -113,13 +111,13 @@ public class Duke {
     public void run() {
         this.storage.load();
         String userInput;
-        boolean isExit = false;
-        while (!isExit) {
+        boolean hasExited = false;
+        while (!hasExited) {
             userInput = this.ui.getUserInput();
             String[] items = this.parser.parse(userInput);
             executeInput(items);
             if (items[0] == "bye") {
-                isExit = true;
+                hasExited = true;
             }
         }
         this.exit();
@@ -134,7 +132,7 @@ public class Duke {
         try {
             switch (parsedInput[0]) {
             case "bye":
-                return "Exiting...";
+                return this.exit();
             case "list":
                 return this.ui.showTaskList(this.taskList);
             case "done":
@@ -158,6 +156,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Gets the response after executing given input.
+     *
+     * @param input String to respond to.
+     * @return String containing the response.
+     */
     public String getResponse(String input) {
         return executeInput(parser.parse(input));
     }
