@@ -17,7 +17,6 @@ public class Parser {
     private static String getMetadata(String command) throws IrisException {
         String[] splitted = command.split(" ", 2);
         if (splitted.length == 1 || splitted[1].equals("")) {
-            // TODO: make this error message more specific?
             throw new IrisException("The description cannot be empty");
         } else {
             return splitted[1];
