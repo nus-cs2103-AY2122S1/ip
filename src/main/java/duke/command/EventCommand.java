@@ -17,7 +17,7 @@ import duke.util.TaskList;
  * A command class encapsulating the logic that occurs when the user issues a 'event' command.
  */
 public class EventCommand extends Command {
-    private String action;
+    private final String action;
 
     /**
      * Constructor of the EventCommand
@@ -34,6 +34,7 @@ public class EventCommand extends Command {
      *
      * @param tasks List of existing tasks
      * @param storage Storage class handling the persistence of the tasks
+     * @return CommandResult of the encapsulating the effects of the command after it completes
      * @throws InvalidInputException if invalid datetime is provided
      * @throws NoTimeException if no event time is provided
      * @throws NoActionException if no event name is provided

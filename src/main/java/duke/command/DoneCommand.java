@@ -30,6 +30,7 @@ public class DoneCommand extends Command {
      *
      * @param tasks List of existing tasks
      * @param storage Storage class handling the persistence of the tasks
+     * @return CommandResult of the encapsulating the effects of the command after it completes
      * @throws TaskNotFoundException if index of task is out of bounds
      * @throws InvalidInputException if input cannot be parsed into an integer
      * @throws TaskCompletedException if task is already completed

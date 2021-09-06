@@ -9,7 +9,7 @@ import java.time.format.FormatStyle;
  */
 public class Deadline extends Task {
     /** The symbol that represents a deadline */
-    private static String symbol = "[D]";
+    private static final String symbol = "[D]";
     /** The deadline of the task */
     private final LocalDateTime deadline;
 
@@ -32,7 +32,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toSaveFormat() {
-        return String.format("%s||%s||%s||%s", symbol, super.isComplete(),
+        return String.format("%s||%s||%s||%s||%s", symbol, super.getTag(), super.isComplete(),
                 super.getAction(), this.deadline.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm")));
     }
 

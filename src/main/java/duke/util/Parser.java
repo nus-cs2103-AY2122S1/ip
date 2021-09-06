@@ -12,6 +12,7 @@ import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.TagCommand;
 import duke.command.TodoCommand;
 import duke.exception.InvalidInputException;
 import duke.task.Deadline;
@@ -55,6 +56,8 @@ public final class Parser {
             return new DeleteCommand(action);
         case "find":
             return new FindCommand(action);
+        case "tag":
+            return new TagCommand(action);
         default:
             throw new InvalidInputException("This is an unknown command.");
         }
@@ -102,27 +105,24 @@ public final class Parser {
         Task newTask;
         switch (currTaskSplit[0]) {
         case "[T]":
-            newTask = new Todo(currTaskSplit[2]);
-            if (currTaskSplit[1].equals("true")) {
-                newTask.complete();
-            }
+            newTask = new Todo(currTaskSplit[3]);
             break;
         case "[E]":
-            LocalDateTime eventTime = Parser.parseDate(currTaskSplit[3]);
-            newTask = new Event(currTaskSplit[2], eventTime);
-            if (currTaskSplit[1].equals("true")) {
-                newTask.complete();
-            }
+            LocalDateTime eventTime = Parser.parseDate(currTaskSplit[4]);
+            newTask = new Event(currTaskSplit[3], eventTime);
             break;
         case "[D]":
-            LocalDateTime deadline = Parser.parseDate(currTaskSplit[3]);
-            newTask = new Deadline(currTaskSplit[2], deadline);
-            if (currTaskSplit[1].equals("true")) {
-                newTask.complete();
-            }
+            LocalDateTime deadline = Parser.parseDate(currTaskSplit[4]);
+            newTask = new Deadline(currTaskSplit[3], deadline);
             break;
         default:
             throw new InvalidInputException("Unrecognised task type detected in save file.");
+        }
+        if (!currTaskSplit[1].equals("null")) {
+            newTask.setTag(currTaskSplit[1]);
+        }
+        if (currTaskSplit[2].equals("true")) {
+            newTask.complete();
         }
         return newTask;
     }

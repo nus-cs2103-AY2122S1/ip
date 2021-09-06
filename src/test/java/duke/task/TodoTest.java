@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class TodoTest {
     @Test
     public void toSaveFormat_methodCall_saveFormat() {
-        assertEquals((new Todo("Test Action")).toSaveFormat(), "[T]||false||Test Action");
+        assertEquals((new Todo("Test Action")).toSaveFormat(), "[T]||null||false||Test Action");
     }
 
     @Test

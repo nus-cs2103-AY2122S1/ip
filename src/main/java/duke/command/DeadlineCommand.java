@@ -17,7 +17,7 @@ import duke.util.TaskList;
  * A command class encapsulating the logic that occurs when the user issues a 'deadline' command.
  */
 public class DeadlineCommand extends Command {
-    private String action;
+    private final String action;
 
     /**
      * Constructor for the Deadline Command.
@@ -34,6 +34,7 @@ public class DeadlineCommand extends Command {
      *
      * @param tasks List of existing tasks
      * @param storage Storage class handling the persistence of the tasks
+     * @return CommandResult of the encapsulating the effects of the command after it completes
      * @throws InvalidInputException if input cannot be parsed into a date
      * @throws NoActionException if no todo list action given
      * @throws NoTimeException if no deadline is provided

@@ -2,6 +2,7 @@ package duke.ui;
 
 import duke.Duke;
 import duke.command.CommandResult;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -69,8 +70,11 @@ public class MainWindow extends AnchorPane {
         }
     }
 
-    //TODO add exit
+    /**
+     * Exits the program.
+     *
+     */
     private void handleExit() {
-        return;
+        Platform.exit();
     }
 }

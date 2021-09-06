@@ -107,4 +107,8 @@ public class Reply {
     public static String showBye() {
         return "Bye. Hope to see you again!";
     }
+
+    public static String showTag(Task task) {
+        return String.format("You added a tag:\n %s", task);
+    }
 }
