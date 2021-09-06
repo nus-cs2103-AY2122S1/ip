@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    /** Storage container to store tasks */
+    /** Storage container to store tasks. */
     private final ArrayList<Task> tasks = new ArrayList<>();
 
     /**
@@ -41,8 +41,9 @@ public class TaskList {
      * Marks a task as done.
      *
      * @param idx index of the task to be marked as done.
+     * @throws IllegalArgumentException for invalid index.
      */
-    public void markDone(int idx) {
+    public void markDone(int idx) throws IllegalArgumentException {
         if (idx < 0 || idx >= tasks.size()) {
             throw new IllegalArgumentException(
                     "☹ OOPS!!! Index entered is not valid. "
@@ -57,8 +58,9 @@ public class TaskList {
      *
      * @param idx index of the task to get from storage.
      * @return the task.
+     * @throws IllegalArgumentException for invalid index.
      */
-    public Task get(int idx) {
+    public Task get(int idx) throws IllegalArgumentException {
         if (idx < 0 || idx >= tasks.size()) {
             throw new IllegalArgumentException(
                 "☹ OOPS!!! Index entered is not valid. "
@@ -72,8 +74,9 @@ public class TaskList {
      * Deletes a task from storage.
      *
      * @param idx index of the task to delete from storage.
+     * @throws IllegalArgumentException for invalid index.
      */
-    public void delete(int idx) {
+    public void delete(int idx) throws IllegalArgumentException {
         if (idx < 0 || idx >= tasks.size()) {
             throw new IllegalArgumentException(
                 "☹ OOPS!!! Index entered is not valid. "
