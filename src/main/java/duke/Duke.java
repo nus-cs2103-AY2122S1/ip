@@ -10,7 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
-
+/**
+ * The Duke class.
+ */
 public class Duke {
     private static boolean active;
     private static TaskList taskList = new TaskList();
@@ -48,22 +50,15 @@ public class Duke {
      * awaken() awakens duke.Duke and allows one to input commands to duke.Duke.
      */
     public static void awaken() {
-
-        //load previous list data here maybe
-
         taskList = new TaskList(Storage.loadData());
-
         Duke.active = true;
-
         Ui.sendStartMessage();
-
         java.util.Scanner scanner = new java.util.Scanner(System.in);
         while (active) {
             String input = scanner.nextLine();
             boolean cont = Parser.interpretCommand(input);
             if (!cont) {
                 break;
-
             }
         }
     }
@@ -88,7 +83,6 @@ public class Duke {
         taskList.remove(taskNumber - 1);
         int taskListSize = taskList.size();
         return Ui.deletedTaskMessage(removedTask, taskListSize);
-
     }
 
 
@@ -99,6 +93,7 @@ public class Duke {
      */
     public static String markAsFinished(String taskItemNumber) throws DukeException {
         int taskNumber = Integer.parseInt(taskItemNumber);
+        assert taskNumber >= 0;
         if (taskList.get(taskNumber - 1) == null) {
             throw new DukeException(
                     "____________________________________________________________\n"
@@ -118,18 +113,12 @@ public class Duke {
     public static String addToList(TaskItem taskItem) {
         Duke.taskList.add(taskItem);
         Duke.listIndex = taskList.size();
+        assert Duke.listIndex >= 0;
         String body = "";
-        /*
-        System.out.println("____________________________________________________________");
-        System.out.println("Got it. I've added this task:");
-        System.out.println(taskItem.toString());
-        */
         if (listIndex == 1) {
-            /* System.out.println("Now you have " + 1 + " task in the list."); */
             body = "Now you have " + 1 + " task in the list.\n";
         }
         if (listIndex > 1) {
-            /* System.out.println("Now you have " + (Duke.listIndex) + " tasks in your list."); */
             body = "Now you have " + (Duke.listIndex) + " tasks in your list.\n";
         }
         return "____________________________________________________________\n"
@@ -146,10 +135,6 @@ public class Duke {
         int number = 1;
         String output = "____________________________________________________________\n"
                 + "Here are the tasks in your list:\n";
-        /*
-        System.out.println("____________________________________________________________");
-        System.out.println("Here are the tasks in your list:");
-        */
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i) != null) {
                 output += number + "." + taskList.get(i).toString() + "\n";

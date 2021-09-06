@@ -85,6 +85,7 @@ public class Storage {
      */
     public static void appendToFile(String content) {
         try {
+            assert appendMode;
             FileWriter fw = new FileWriter(filePath, appendMode);
 
             fw.write(content + "\n");
@@ -101,15 +102,12 @@ public class Storage {
     public static void rewriteFile(TaskList taskList) {
         File dukeData = new File("./data/dukeData.txt");
         dukeData.delete();
-
-
         try {
             File dukeData2 = new File("./data/dukeData.txt");
             FileWriter fw = new FileWriter(filePath, appendMode);
             for (int i = 0; i < taskList.size(); i++) {
                 fw.write(taskList.get(i).toFileString() + "\n");
             }
-
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();

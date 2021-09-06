@@ -61,7 +61,6 @@ public class TaskList {
      */
     public TaskList findTask(String keyword) {
         ArrayList<TaskItem> copyOfTaskList = new ArrayList<TaskItem>(arrayList);
-        //System.out.println(copyOfTaskList.toString());
         copyOfTaskList.removeIf(task -> {
             String taskDescription = task.describeTaskItem();
             String[] splicedTaskDescription = taskDescription.split(" ");

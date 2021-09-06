@@ -212,7 +212,6 @@ public class Parser {
                 Ui.customErrorMessage(e.getMessage());
             }
         } else if (input.split(" ")[0].equals("todo")) {
-            //input = input.replace(input.split(" ")[0], "");
             try {
                 String actualToDo = input.replace(input.split(" ")[0], "");
                 if (actualToDo.equals("")) {
@@ -258,7 +257,6 @@ public class Parser {
         } else if (input.split(" ")[0].equals("event")) {
             try {
                 input = input.replace(input.split(" ")[0], "");
-
                 if (input.split("/").length == 1) {
                     throw new DukeException(
                             "____________________________________________________________\n"
@@ -302,8 +300,6 @@ public class Parser {
                 }
                 String taskToBeDeleted = input.split(" ")[1];
                 response = Duke.deleteTask(taskToBeDeleted);
-
-                //rewrite whole txt file
                 Storage.rewriteFile(Duke.getTaskList());
             } catch (DukeException e) {
                 Ui.customErrorMessage(e.getMessage());
@@ -331,7 +327,6 @@ public class Parser {
                     response = "____________________________________________________________\n"
                             + "Here is what I found:\n";
                     for (int i = 0; i < matchingTasks.size(); i++) {
-                        //System.out.println(number + "." + matchingTasks.get(i).toString());
                         response += number + "." + matchingTasks.get(i).toString() + "\n";
                         number++;
                     }
