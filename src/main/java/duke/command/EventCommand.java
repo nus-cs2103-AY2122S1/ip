@@ -15,15 +15,15 @@ import duke.ui.Ui;
 public class EventCommand extends Command {
 
     /** The event command inputted by the user. */
-    private String fullCommand;
+    private String eventDescription;
 
     /**
      * Constructor to intialise an EventCommand.
      *
-     * @param fullCommand The event command inputted by the user.
+     * @param eventDescription The event command inputted by the user.
      */
-    public EventCommand(String fullCommand) {
-        this.fullCommand = fullCommand;
+    public EventCommand(String eventDescription) {
+        this.eventDescription = eventDescription;
     }
 
     /**
@@ -35,26 +35,17 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException, DukeException {
-        try {
-            if (fullCommand.equals("event")) {
-                throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
-            }
 
-            String eventDescription = fullCommand.split(" ", 2)[1];
-            int pos = eventDescription.indexOf("/");
-            String description = eventDescription.substring(0, pos - 1);
-            String eventTime = eventDescription.substring(pos + 4);
-            LocalDateTime atDateTime = LocalDateTime.parse(eventTime);
+        int pos = eventDescription.indexOf("/");
+        String taskDescription = eventDescription.substring(0, pos - 1);
+        String eventTime = eventDescription.substring(pos + 4);
+        LocalDateTime atDateTime = LocalDateTime.parse(eventTime);
 
-            Event event = new Event(description, atDateTime);
-            taskList.storeTask(event);
-            storage.saveFile(taskList.getAllTasks());
-            String output = ui.showTaskAdded(event, taskList);
-            return output;
+        Event event = new Event(taskDescription, atDateTime);
+        taskList.storeTask(event);
+        storage.saveFile(taskList.getAllTasks());
+        String output = ui.showTaskAdded(event, taskList);
+        return output;
 
-        } catch (DukeException e) {
-            String output = ui.showError(e.getMessage());
-            return output;
-        }
     }
 }

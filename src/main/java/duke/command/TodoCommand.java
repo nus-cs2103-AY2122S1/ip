@@ -2,7 +2,6 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Todo;
 import duke.tasklist.TaskList;
@@ -14,15 +13,15 @@ import duke.ui.Ui;
 public class TodoCommand extends Command {
 
     /** The todo command inputted by the user. */
-    private String fullCommand;
+    private String todoDescription;
 
     /**
      * Constructor to intialise a TodoCommand.
      *
-     * @param fullCommand The todo command inputted by the user.
+     * @param todoDescription The todo command inputted by the user.
      */
-    public TodoCommand(String fullCommand) {
-        this.fullCommand = fullCommand;
+    public TodoCommand(String todoDescription) {
+        this.todoDescription = todoDescription;
     }
 
     /**
@@ -33,22 +32,13 @@ public class TodoCommand extends Command {
      * @param ui The Ui Duke utilises to interact with the user.
      */
     @Override
-    public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException, DukeException {
-        try {
-            if (fullCommand.equals("todo")) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-            }
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException {
 
-            String todoDescription = fullCommand.split(" ", 2)[1];
-            Todo todo = new Todo(todoDescription);
-            taskList.storeTask(todo);
-            storage.saveFile(taskList.getAllTasks());
-            String output = ui.showTaskAdded(todo, taskList);
-            return output;
+        Todo todo = new Todo(todoDescription);
+        taskList.storeTask(todo);
+        storage.saveFile(taskList.getAllTasks());
+        String output = ui.showTaskAdded(todo, taskList);
+        return output;
 
-        } catch (DukeException e) {
-            String output = ui.showError(e.getMessage());
-            return output;
-        }
     }
 }

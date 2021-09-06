@@ -3,7 +3,6 @@ package duke.command;
 import java.io.IOException;
 import java.time.LocalDate;
 
-import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.tasklist.TaskList;
@@ -15,15 +14,15 @@ import duke.ui.Ui;
 public class DeadlineCommand extends Command {
 
     /** The deadline command inputted by the user. */
-    private String fullCommand;
+    private String deadlineDescription;
 
     /**
      * Constructor to intialise a DeadlineCommand.
      *
-     * @param fullCommand The deadline command inputted by the user.
+     * @param deadlineDescription The deadline command inputted by the user.
      */
-    public DeadlineCommand(String fullCommand) {
-        this.fullCommand = fullCommand;
+    public DeadlineCommand(String deadlineDescription) {
+        this.deadlineDescription = deadlineDescription;
     }
 
     /**
@@ -34,27 +33,18 @@ public class DeadlineCommand extends Command {
      * @param ui The Ui Duke utilises to interact with the user.
      */
     @Override
-    public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException, DukeException {
-        try {
-            if (fullCommand.equals("deadline")) {
-                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-            }
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException {
 
-            String deadlineDescription = fullCommand.split(" ", 2)[1];
-            int pos = deadlineDescription.indexOf("/");
-            String description = deadlineDescription.substring(0, pos - 1);
-            String dueDate = deadlineDescription.substring(pos + 4);
-            LocalDate byDate = LocalDate.parse(dueDate);
+        int pos = deadlineDescription.indexOf("/");
+        String taskDescription = deadlineDescription.substring(0, pos - 1);
+        String dueDate = deadlineDescription.substring(pos + 4);
+        LocalDate byDate = LocalDate.parse(dueDate);
 
-            Deadline deadline = new Deadline(description, byDate);
-            taskList.storeTask(deadline);
-            storage.saveFile(taskList.getAllTasks());
-            String output = ui.showTaskAdded(deadline, taskList);
-            return output;
+        Deadline deadline = new Deadline(taskDescription, byDate);
+        taskList.storeTask(deadline);
+        storage.saveFile(taskList.getAllTasks());
+        String output = ui.showTaskAdded(deadline, taskList);
+        return output;
 
-        } catch (DukeException e) {
-            String output = ui.showError(e.getMessage());
-            return output;
-        }
     }
 }
