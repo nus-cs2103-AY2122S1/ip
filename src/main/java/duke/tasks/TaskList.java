@@ -21,11 +21,7 @@ public class TaskList {
     }
 
     public void removeTask(Integer taskNumber) {
-        System.out.println("IM IN REMOVING");
-        System.out.println(taskNumber);
-        System.out.println(this.tasks);
         this.tasks.remove(taskNumber);
-        System.out.println(this.tasks);
     }
 
     public Task getTask(Integer taskNumber) {
