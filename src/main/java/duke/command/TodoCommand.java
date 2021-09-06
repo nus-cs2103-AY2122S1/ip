@@ -24,7 +24,6 @@ public class TodoCommand extends DukeCommand {
 
     private String stringifyMessage(int listSize) {
         return "Got it. I've added this task:\n"
-                + "  "
                 + task.toString() + "\n"
                 + "Now you have " + listSize + " tasks in the list";
     }

@@ -71,7 +71,7 @@ public class DukeList implements Iterable<Task> {
         int matches = 0;
         for (Task task : list) {
             if (task.getDescription().contains(keyWord)) {
-                matchesString.append("  ").append(matches++ + 1).append(".").append(task.toString()).append("\n");
+                matchesString.append(matches++ + 1).append(".").append(task.toString()).append("\n");
             }
         }
         if (matches == 0) {
@@ -92,7 +92,7 @@ public class DukeList implements Iterable<Task> {
         StringBuilder listString = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
-            String line = "  " + (i + 1) + "." + task.toString() + "\n";
+            String line = (i + 1) + "." + task.toString() + "\n";
             listString.append(line);
         }
         return listString.toString();

@@ -11,6 +11,7 @@ import duke.command.DukeCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
@@ -46,6 +47,8 @@ public class Parser {
                 return new ExitCommand();
             } else if (input.equals("list")) {
                 return new ListCommand();
+            } else if (input.equals("help")) {
+                return new HelpCommand();
             } else if (input.startsWith("done")) {
                 try {
                     // filter out doneXXXX

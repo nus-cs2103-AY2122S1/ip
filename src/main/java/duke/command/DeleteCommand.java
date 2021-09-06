@@ -30,7 +30,6 @@ public class DeleteCommand extends DukeCommand {
 
     private String stringifyMessage(String taskString, int listSize) {
         return "Noted. I've removed this task:\n"
-                + "  "
                 + taskString + "\n"
                 + "Now you have " + listSize + " tasks in the list";
     }

@@ -30,7 +30,6 @@ public class DoneCommand extends DukeCommand {
 
     private String stringifyMessage(String taskString) {
         return "Nice! I've marked this task as done:\n"
-                + "  "
                 + taskString;
     }
 }
