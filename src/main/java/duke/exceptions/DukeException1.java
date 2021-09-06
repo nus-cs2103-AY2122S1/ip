@@ -22,9 +22,4 @@ public class DukeException1 extends Exception {
     public String getMessage() {
         return "Error occurred!";
     }
-
-    /**@Override
-    public String toString() {
-        return "OOPS!!!";
-    }*/
 }

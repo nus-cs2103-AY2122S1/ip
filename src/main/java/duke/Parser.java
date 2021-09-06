@@ -31,10 +31,12 @@ public class Parser {
         } else if(command.split(" ", 2)[0].equals("find")) {
             String input = command.split(" ", 2)[1];
             return new FindCommand(input);
-        }
-        else {
+        } else if(command.split(" ")[0].equals("todo") || command.split(" ")[0].equals("event")
+                || command.split(" ")[0].equals("deadline")) {
             return new AddCommand(command);
+        } else {
+            assert false;
+            return null;
         }
     }
-
 }
