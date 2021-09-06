@@ -7,6 +7,7 @@ import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -47,7 +48,7 @@ public class TaskList {
             return saveTask(taskToAdd, dataPath);
 
         } catch(IllegalArgumentException | IOException | StringIndexOutOfBoundsException | DateTimeParseException  e) {
-            return("<taskType> <task> </by or /at> <yyyy-MM-dd HHmm>");
+            return("taskType task /by or /at yyyy-MM-dd HHmm");
         }
     }
 
@@ -90,20 +91,34 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task from the array of tasks.
+     * Deletes tasks from the array of tasks.
      *
      * @param userInput String of task to delete.
      */
     public String deleteTask(String userInput) {
-        int taskIndex = 7;
         try {
-            //Delete from ArrayList
-            int taskToDel = Integer.parseInt(userInput.substring(taskIndex)) - 1;
-            assert taskToDel >= 0;
-            Task task = this.tasks.get(taskToDel);
-            this.tasks.remove(taskToDel);
-            return(String.format("Noted. I've removed this task:\n%s\nNow you have %s tasks in list"
-                    , task, this.tasks.size()));
+            int commandLen = 7;
+            String taskIndexes = userInput.substring(commandLen);
+            String[] tasksString = taskIndexes.split(" ");
+            int len = tasksString.length;
+            List<Task> tasksToDel = new ArrayList<>(len);
+
+            String returnMessage = "Noted. I've removed these tasks:\n";
+
+            for(int i = 0; i < len; i++) {
+                int taskToDel = Integer.parseInt(tasksString[i]) - 1;
+                assert taskToDel >= 0;
+                Task task = this.tasks.get(taskToDel);
+                tasksToDel.add(task);
+            }
+
+            for(int i = 0; i < len; i++) {
+                returnMessage += tasksToDel.get(i).toString() + "\n";
+                this.tasks.remove(tasksToDel.get(i));
+            }
+
+
+            return String.format("%s\nYou now have %s tasks left", returnMessage, this.tasks.size());
         } catch (StringIndexOutOfBoundsException e) {
             return("OOPS!!! You cannot delete nothing!");
         } catch (NumberFormatException e) {
@@ -120,15 +135,22 @@ public class TaskList {
      */
     public String markTaskDone(String userInput) {
         try {
-            int taskIndex = Integer.parseInt(userInput.substring(5)) - 1;
-            assert taskIndex >= 0;
-            Task task = this.tasks.get(taskIndex);
-            if (task.checkStatus()) {
-                return("Youve already marked this task as done!");
-            } else {
+            int taskIndex = 5;
+            String tasksToMark = userInput.substring(taskIndex);
+            String[] arrayOfTasks = tasksToMark.split(" ");
+
+            String returnMessage = "Noted. I've marked these tasks:\n";
+
+            for(int i = 0; i < arrayOfTasks.length; i++) {
+                int taskToMark = Integer.parseInt(arrayOfTasks[i]) - 1;
+                assert taskToMark >= 0;
+                Task task = this.tasks.get(taskToMark);
                 task.setDone();
-                return("Nice! I've marked this task as done:\n" + task.toString());
+                returnMessage += task + "\n";
             }
+
+            return returnMessage;
+
         } catch (StringIndexOutOfBoundsException e) {
             return("OOPS!!! You cannot mark nothing as done!");
         } catch (NumberFormatException e) {

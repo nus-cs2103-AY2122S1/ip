@@ -1,13 +1,3 @@
-event,0,Sam Birthday,1999-02-02 1234
-deadline,1,homework,2014-02-03 1200
-event,1,scoibydoobydo,1909-04-03 1321
-deadline,1,ddd,1999-02-02 1200
-todo,1,dd
-todo,0,rjnf
-todo,0,44
-todo,1,shez
-deadline,0,jump,1999-02-02 1200
-deadline,0,ju,1999-02-02 1200
-event,0,re,1999-02-02 1342
-deadline,0,2,1999-02-03 1211
-deadline,0,this/that,1999-01-01 1111
+todo,0,jn
+todo,0,jump
+todo,0,ddd
