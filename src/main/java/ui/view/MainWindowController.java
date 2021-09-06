@@ -60,7 +60,6 @@ public class MainWindowController extends AnchorPane implements IWindowControlle
     private void handleUserInput() {
         try {
             String input = userInput.getText();
-            System.out.println();
             addUserDialog(input);
             if (chatbot != null) {
                 chatbot.processResponse(input);
@@ -79,8 +78,8 @@ public class MainWindowController extends AnchorPane implements IWindowControlle
     public void addBotDialog(String s) {
         assert s != null;
     
-        System.out.println(this.dialogContainer.toString());
-        dialogContainer.getChildren().addAll(DialogBox.getBotDialog(s, chatbotImage));
+        dialogContainer.getChildren()
+                .addAll(DialogBox.getBotDialog(s, chatbotImage));
     }
     
     /**
@@ -89,8 +88,8 @@ public class MainWindowController extends AnchorPane implements IWindowControlle
     @Override
     public void addUserDialog(String s) {
         assert s != null;
-        
-        System.out.println(this.dialogContainer.toString());
-        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(s, userImage));
+    
+        dialogContainer.getChildren()
+                .addAll(DialogBox.getUserDialog(s, userImage));
     }
 }
