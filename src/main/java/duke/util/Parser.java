@@ -71,6 +71,7 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         default:
+            assert !commandWord.matches("list|done|find|delete|todo|deadline|event|bye");
             throw new DukeNoSuchCommandException();
         }
     }

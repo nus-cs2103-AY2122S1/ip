@@ -84,6 +84,7 @@ public class Storage {
      * informs user of unsuccessful update if there is an error.
      */
     public static String updateData(ArrayList<Task> tasks) {
+        assert file.exists() : "The tasks.txt file does not exist.";
         try {
             FileWriter fw = new FileWriter(FILE_NAME);
             for (Task t: tasks) {
