@@ -17,10 +17,8 @@ import blue.handler.ToDoHandler;
  * Initializes the application and interacts with the user.
  */
 public class Blue {
-    private static final String CONFUSED_RESPONSE =
-            "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     private TaskList tasks;
-    private HashMap<String, CommandHandler> commandHandlers;
+    private HashMap<Command, CommandHandler> commandHandlers;
 
     /**
      * Constructs a Blue instance.
@@ -69,12 +67,9 @@ public class Blue {
      * @return Response from Blue.
      */
     public String getResponse(String input) {
-        String command = Parser.getCommand(input);
-        if (!commandHandlers.containsKey(command)) {
-            return CONFUSED_RESPONSE;
-        }
-        CommandHandler commandHandler = commandHandlers.get(command);
         try {
+            Command command = Parser.getCommand(input);
+            CommandHandler commandHandler = commandHandlers.get(command);
             return commandHandler.handle(input);
         } catch (BlueException e) {
             return e.getMessage();
