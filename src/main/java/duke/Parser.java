@@ -3,6 +3,7 @@ package duke;
 import java.nio.file.Path;
 import java.util.function.Supplier;
 
+import duke.commands.CommandHelp;
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeExitException;
 import duke.tasks.Deadline;
@@ -42,6 +43,10 @@ public class Parser {
 
         // switch case to split by command
         switch (cmdArgsArr[0]) {
+
+        case("help"):
+            return runHelp(cmdArgsArr);
+
         case ("bye"):
             return runBye(cmdArgsArr);
 
@@ -73,6 +78,17 @@ public class Parser {
 
     // Use Boolean Suppliers for test conditions that can cause crash if previous gate fails
     // eg will only test arr[1] validity if previous gate of arr.length == 2 passes
+
+    /**
+     * Command to request help
+     *
+     * @param cmdArgsArr
+     * @return
+     * @throws DukeException
+     */
+    private String runHelp(String[] cmdArgsArr) throws DukeException {
+        return CommandHelp.parse(cmdArgsArr);
+    }
 
     private String runBye(String[] cmdArgsArr) throws DukeException {
         boolean hasWrongArgumentCount = cmdArgsArr.length > 1;
