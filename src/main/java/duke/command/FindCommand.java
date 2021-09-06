@@ -22,6 +22,8 @@ public class FindCommand extends Command {
      * @param tasks     the list of tasks to search from.
      */
     public FindCommand(String substring, TaskList tasks) {
+        assert substring != null : "Index cannot be negative.";
+        assert tasks != null : "TaskList cannot be null.";
         this.substring = substring;
         this.tasks = tasks;
     }

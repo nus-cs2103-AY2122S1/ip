@@ -18,7 +18,9 @@ public class DoneCommand extends Command {
      * @param idx       index of task to be marked done.
      * @param tasks     list of tasks to mark a task done from.
      */
+
     public DoneCommand(int idx, TaskList tasks) {
+        assert tasks != null : "TaskList cannot be null.";
         this.idx = idx;
         this.tasks = tasks;
     }
