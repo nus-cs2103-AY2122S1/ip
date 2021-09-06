@@ -56,6 +56,9 @@ public class Storage {
         if (!file.exists()) {
             file.createNewFile();
         }
+
+        assert directory.exists() : "Directory does not exist";
+        assert file.exists() : "File does not exist";
     }
 
     /**
@@ -65,7 +68,7 @@ public class Storage {
      * @throws IOException if error reading file
      */
     public ArrayList<Task> readTasksFromFile(String filePath) throws IOException {
-        ArrayList<Task> tasks = new ArrayList();
+        ArrayList<Task> tasks = new ArrayList<>();
         checkIfFileFolderExists(filePath);
 
         Scanner read = new Scanner(new File(filePath));

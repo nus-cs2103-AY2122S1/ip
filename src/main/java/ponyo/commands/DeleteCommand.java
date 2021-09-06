@@ -17,6 +17,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public String[] execute(TaskList tasks, Storage storage) {
+        assert taskIdToDelete > 0 && taskIdToDelete <= tasks.size();
         Task task = tasks.retrieveTask(taskIdToDelete - 1);
         tasks.remove(taskIdToDelete - 1);
         storage.getFullContents(tasks);
