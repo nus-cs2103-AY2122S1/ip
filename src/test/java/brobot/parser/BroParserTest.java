@@ -1,13 +1,13 @@
 package brobot.parser;
 
-import brobot.task.TaskList;
-import brobot.Storage;
-import brobot.exception.BroException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+
+import brobot.Storage;
+import brobot.exception.BroException;
+import brobot.task.TaskList;
 
 public class BroParserTest {
 
@@ -19,7 +19,8 @@ public class BroParserTest {
             p.parse("hello");
             fail();
         } catch (BroException e) {
-            assertEquals("Oops, unfortunately i am not yet smart enough to understand what you are saying", e.getMessage());
+            assertEquals("Oops, unfortunately i am not yet smart enough to understand what you are saying",
+                    e.getMessage());
         }
     }
 
@@ -30,8 +31,6 @@ public class BroParserTest {
             p.parse("done hello");
         } catch (BroException e) {
             assertEquals("Oops, you have entered an invalid parameter for this command", e.getMessage());
-
         }
     }
-
 }
