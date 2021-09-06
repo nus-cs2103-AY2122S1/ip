@@ -7,7 +7,7 @@ import duke.exception.DukeException;
 import duke.task.Task;
 
 public class ExitCommand extends Command {
-    private boolean isExit = true;
+    private final boolean IS_EXIT = true;
 
     /**
      * Exits the bot.
@@ -26,7 +26,7 @@ public class ExitCommand extends Command {
     /**
      * Gets the task associated with the command.
      *
-     * @return null, as task is associated with an exit command.
+     * @return null, as no task is associated with an exit command.
      */
     @Override
     public Task getTask() {
@@ -38,7 +38,8 @@ public class ExitCommand extends Command {
      *
      * @return If the command exits the bot.
      */
+    @Override
     public boolean isExit() {
-        return this.isExit;
+        return this.IS_EXIT;
     }
 }

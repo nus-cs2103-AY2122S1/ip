@@ -175,6 +175,34 @@ public class Ui {
     }
 
     /**
+     * Prints the directory not found message to the user's terminal.
+     */
+    public static void notifyDirNotFound() {
+        System.out.println("'data' directory not found. Creating the directory...");
+    }
+
+    /**
+     * Prints the directory created message to the user's terminal.
+     */
+    public static void notifyCreatedDir() {
+        System.out.println("Directory created.");
+    }
+
+    /**
+     * Prints the file not found message to the user's terminal.
+     */
+    public static void notifyFileNotFound() {
+        System.out.println("Data file not found. Creating a new file...");
+    }
+
+    /**
+     * Prints the file created message to the user's terminal.
+     */
+    public static void notifyCreatedFile() {
+        System.out.println("File created.");
+    }
+
+    /**
      * Prints the exit message to the user's terminal.
      */
     public String exit() {

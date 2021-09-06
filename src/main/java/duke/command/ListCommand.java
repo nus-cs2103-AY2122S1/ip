@@ -12,7 +12,7 @@ import duke.task.Task;
  * ListCommand class which displays the current tasks in the list.
  */
 public class ListCommand extends Command {
-    private boolean isExit = false;
+    private final boolean IS_EXIT = false;
 
     /**
      * Gets the user interface to display all the current tasks in the active
@@ -33,7 +33,7 @@ public class ListCommand extends Command {
     /**
      * Gets the task associated with the command.
      *
-     * @return null, as no single task is associated with the list command.
+     * @return null, as no task is associated with the list command.
      */
     @Override
     public Task getTask() {
@@ -45,7 +45,8 @@ public class ListCommand extends Command {
      *
      * @return If the command exits the bot.
      */
+    @Override
     public boolean isExit() {
-        return this.isExit;
+        return this.IS_EXIT;
     }
 }

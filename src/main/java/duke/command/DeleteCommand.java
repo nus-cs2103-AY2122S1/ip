@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 
 public class DeleteCommand extends Command {
-    private boolean isExit = false;
+    private final boolean IS_EXIT = false;
     private int[] taskIds;
     private Task removedTask;
 
@@ -40,7 +40,7 @@ public class DeleteCommand extends Command {
             storage.save(tasks);
             return userInt.notifyDelete(removedTask);
         } else {
-            // To remove items with the biggest ids, such that it would not affect later deletes.
+            // To remove items with the biggest ids first, such that it would not affect later deletes.
             Arrays.sort(this.taskIds);
             ArrayList<Task> removedTasks = new ArrayList<>();
             for (int i = this.taskIds.length - 1; i >= 0; i--) {
@@ -54,6 +54,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Gets the task associated with the command.
+     * If multiple, gives the most recently deleted task.
      *
      * @return The task associated with the given command.
      */
@@ -67,7 +68,8 @@ public class DeleteCommand extends Command {
      *
      * @return If the command exits the bot.
      */
+    @Override
     public boolean isExit() {
-        return this.isExit;
+        return this.IS_EXIT;
     }
 }
