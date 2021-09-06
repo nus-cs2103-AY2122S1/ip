@@ -17,6 +17,13 @@ import javafx.stage.Stage;
  * Main class of the project.
  */
 public class Duke extends Application {
+    private static final double STAGE_WIDTH = 600.0;
+    private static final double STAGE_HEIGHT = 400.0;
+    private static final double SCROLL_WIDTH = 385.0;
+    private static final double SCOLL_HEIGHT = 535.0;
+    private static final double DEFAULT_PADDING = 10.0;
+    private static final double INPUT_WIDTH = 325.0;
+    private static final double BUTTON_WIDTH = 55.0;
 
     private final Storage storage;
     private Ui ui;
@@ -123,14 +130,6 @@ public class Duke extends Application {
                            VBox dialogContainer,
                            Button sendButton) {
 
-        final double STAGE_WIDTH = 600.0;
-        final double STAGE_HEIGHT = 400.0;
-        final double SCROLL_WIDTH = 385.0;
-        final double SCOLL_HEIGHT = 535.0;
-        final double DEFAULT_PADDING = 10.0;
-        final double INPUT_WIDTH = 325.0;
-        final double BUTTON_WIDTH = 55.0;
-
         // GUI window settings
         primaryStage.setTitle("Duk");
         primaryStage.setResizable(false);
@@ -164,7 +163,7 @@ public class Duke extends Application {
      * @param stringInput String supplied by user.
      */
     private void processInput(String stringInput) {
-        ui.echoUser(stringInput);
+        ui.printUserDialog(stringInput);
         try {
             Command parsedCommand = Parser.parse(stringInput);
             parsedCommand.execute(tasks, ui, storage);

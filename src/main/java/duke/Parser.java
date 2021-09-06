@@ -21,6 +21,9 @@ import duke.task.ToDo;
  * Parses string inputs from user.
  */
 public class Parser {
+    private static final int COMMAND_EVENT_LENGTH = 6;
+    private static final int COMMAND_DEADLINE_LENGTH = 9;
+    private static final int COMMAND_TODO_LENGTH = 5;
 
     /**
      * Parses string inputs from user into a Command.
@@ -31,7 +34,6 @@ public class Parser {
      */
     protected static Command parse(String input) throws DukeException {
         String[] inputArray = input.split(" ");
-        String[] params;
         int selectedTask;
 
         switch (inputArray[0]) {
@@ -48,31 +50,45 @@ public class Parser {
         case "find":
             return new FindCommand(input.substring(5));
         case "event":
-            params = input.split("/at");
-            params[0] = params[0].substring(6,
-                    params[0].length() - 1);
-            params[1] = params[1].substring(1);
-            return new AddCommand(new Event(params[0],
-                    LocalDate.parse(params[1])));
+            return parseEvent(input);
         case "deadline":
-            params = input.split("/by");
-            params[0] = params[0].substring(9,
-                    params[0].length() - 1);
-            params[1] = params[1].substring(1);
-            return new AddCommand(new Deadline(params[0],
-                    LocalDate.parse(params[1])));
+            return parseDeadline(input);
         case "todo":
-            try {
-                String name = input.substring(5);
-                if (name.equals("")) {
-                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-                }
-                return new AddCommand(new ToDo(name));
-            } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-            }
+            return parseTodo(input);
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
+    private static Command parseEvent(String input) {
+        String[] params;
+        params = input.split("/at");
+        params[0] = params[0].substring(COMMAND_EVENT_LENGTH,
+                params[0].length() - 1);
+        params[1] = params[1].substring(1);
+        return new AddCommand(new Event(params[0],
+                LocalDate.parse(params[1])));
+    }
+
+    private static Command parseDeadline(String input) {
+        String[] params;
+        params = input.split("/by");
+        params[0] = params[0].substring(COMMAND_DEADLINE_LENGTH,
+                params[0].length() - 1);
+        params[1] = params[1].substring(1);
+        return new AddCommand(new Deadline(params[0],
+                LocalDate.parse(params[1])));
+    }
+
+    private static Command parseTodo(String input) throws DukeException {
+        try {
+            String name = input.substring(COMMAND_TODO_LENGTH);
+            if (name.equals("")) {
+                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+            }
+            return new AddCommand(new ToDo(name));
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
     }
 }

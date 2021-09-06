@@ -52,7 +52,7 @@ public class Ui {
      *
      * @param text Message to be displayed.
      */
-    public void printDialog(String text) {
+    public void printDukeDialog(String text) {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
         DialogBox dialogBox = DialogBox.getDukeDialog(textToAdd, new ImageView(duke));
@@ -65,7 +65,7 @@ public class Ui {
      *
      * @param input User input.
      */
-    public void echoUser(String input) {
+    public void printUserDialog(String input) {
         Label textToAdd = new Label(input);
         textToAdd.setWrapText(true);
         DialogBox dialogBox = DialogBox.getUserDialog(textToAdd, new ImageView(user));
@@ -95,7 +95,7 @@ public class Ui {
     public void showMessage(String message) {
         System.out.println(message);
         if (dialogContainer != null) {
-            printDialog(message);
+            printDukeDialog(message);
         }
     }
 
@@ -107,7 +107,7 @@ public class Ui {
     public void showError(String message) {
         System.out.println(message);
         if (dialogContainer != null) {
-            printDialog(message);
+            printDukeDialog(message);
         }
     }
 
@@ -127,7 +127,7 @@ public class Ui {
         System.out.println(greeting);
 
         if (dialogContainer != null) {
-            printDialog(greeting);
+            printDukeDialog(greeting);
         }
     }
 }
