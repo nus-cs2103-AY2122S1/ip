@@ -24,9 +24,6 @@ public class Storage {
     public Storage(String filePath) throws InvalidPathException {
         this.path = Path.of(filePath);
         this.stringPath = filePath;
-//        if (!isValidPath(path)) {
-//            throw new InvalidPathException("Invalid file!! Should end with .txt");
-//        }
     }
 
     /**
