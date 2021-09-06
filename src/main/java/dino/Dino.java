@@ -28,7 +28,7 @@ public class Dino {
     }
 
     /**
-     * Gets the response from the chatbot based on input command
+     * Gets the response from the ChatBot based on input command
      * @param input the input command
      * @return the output message after processing command
      */

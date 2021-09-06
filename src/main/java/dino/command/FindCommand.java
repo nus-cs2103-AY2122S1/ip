@@ -8,7 +8,7 @@ import dino.util.Storage;
  * Represents the command for which the user wants to search for a keyword in the task list
  */
 public class FindCommand extends Command {
-    private String cmdString;
+    private final String cmdString;
 
     /**
      * Constructs a FindCommand object

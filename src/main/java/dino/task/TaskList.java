@@ -27,11 +27,10 @@ public class TaskList {
         assert(task != null); //the task to be added is not empty
         taskList.add(task);
         int size = taskList.size();
-        String message = "Got it. I've added this task: \n"
+        return "Got it. I've added this task: \n"
                 + "  " + taskList.get(size - 1) + "\n" +
                 "Now you have " + size +
                 (size > 1 ? " tasks" : " task") + " in the list.";
-        return message;
     }
 
     /**
@@ -44,9 +43,9 @@ public class TaskList {
         if (taskList.isEmpty()) {
             throw new EmptyListException();
         }
-        String list = "";
+        StringBuilder list = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {
-            list += (i + 1) + ". " + taskList.get(i) + "\n";
+            list.append(i + 1).append(". ").append(taskList.get(i)).append("\n");
         }
         return "Here are the tasks in your list: \n" + list;
     }
@@ -70,8 +69,7 @@ public class TaskList {
             }
             assert(!t.getStatus()); //the task to be marked as done is not done yet
             t.setDone();
-            String message = "Nice! I've marked this task as done: \n" + t;
-            return message;
+            return "Nice! I've marked this task as done: \n" + t;
         }
     }
 
@@ -89,10 +87,9 @@ public class TaskList {
             Task t = taskList.remove(index - 1);
             assert (t != null); //the task that we removed is not null
             int size = taskList.size();
-            String message = "Noted. I've removed this task: \n" + t + "\n"
+            return "Noted. I've removed this task: \n" + t + "\n"
                     + "Now you have " + size +
                     (size > 1 ? " tasks" : " task") + " in the list.";
-            return message;
         }
     }
 
@@ -107,8 +104,8 @@ public class TaskList {
     public String searchKeyword(String ...keyword) throws TaskNotFoundException {
         List<Task> matchingTasks = new ArrayList<>();
         for (Task task: taskList) {
-            for (int i = 0; i < keyword.length; i++) {
-                if (task.getDescription().contains(keyword[i])) {
+            for (String s : keyword) {
+                if (task.getDescription().contains(s)) {
                     matchingTasks.add(task);
                 }
             }
@@ -116,9 +113,9 @@ public class TaskList {
         if (matchingTasks.isEmpty()) {
             throw new TaskNotFoundException();
         } else {
-            String list = "";
+            StringBuilder list = new StringBuilder();
             for (int i = 0; i < matchingTasks.size(); i++) {
-                list += (i + 1) + ". " + matchingTasks.get(i) + "\n";
+                list.append(i + 1).append(". ").append(matchingTasks.get(i)).append("\n");
             }
             return "Here are the matching tasks in your list:\n" + list;
         }

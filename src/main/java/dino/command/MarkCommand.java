@@ -64,7 +64,6 @@ public class MarkCommand extends Command {
      * @throws IndexNotSpecifiedException if the index of the task is not specified
      * @throws InvalidInputException if the message entered after the "done" or "delete"
      * instruction is not a number but some other string
-     * @throws InvalidIndexException if the index specified is out of bounds
      */
     public static int getIndex(String s, Parser.CMDTYPE type)
             throws IndexNotSpecifiedException, InvalidInputException {
