@@ -36,7 +36,9 @@ public class Duke extends Application {
     /**
      * Placeholder constructor made to placate JavaFX.
      */
-    public Duke() {}
+    public Duke() {
+        this("tasks.txt");
+    }
 
     private Duke(String filePath) {
         ui = new Ui();
@@ -147,9 +149,21 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return(e.getMessage());
+        }
     }
 
+    /**
+     * Shows welcome message
+     * @return String representation of welcome message.
+     */
+    public String welcome() {
+        return ui.showWelcome();
+    }
 
     /**
      * Starts the Duke chatbot.

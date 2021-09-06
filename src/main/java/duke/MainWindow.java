@@ -26,8 +26,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = crop(new Image(this.getClass().getResourceAsStream("/images/User.png")), true);
-    private Image dukeImage = crop(new Image(this.getClass().getResourceAsStream("/images/Bot.png")), true);
+    private Image userImage = crop(new Image(this.getClass().getResourceAsStream("/images/User.png")), false);
+    private Image dukeImage = crop(new Image(this.getClass().getResourceAsStream("/images/Bot.png")), false);
 
     //@author swpalmer-reused
     //Reused from https://stackoverflow.com/questions/65530390/crop-javafx-image-to-square-or-circle

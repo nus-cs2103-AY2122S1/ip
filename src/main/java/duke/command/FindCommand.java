@@ -29,7 +29,7 @@ public class FindCommand extends Command {
      * @param storage Storage of Duke chatbot.
      * @throws DukeException If execution fails.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String response = "Here are the matching tasks in your list:";
         int listIndex = 1;
         for (int i = 0; i < tasks.size(); i++) {
@@ -40,7 +40,7 @@ public class FindCommand extends Command {
             }
             response += String.format("\n%d. %s", listIndex++, task);
         }
-        ui.showMessage(response);
+        return ui.showMessage(response);
     }
 
     /**

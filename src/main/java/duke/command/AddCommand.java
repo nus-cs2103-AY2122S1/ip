@@ -66,10 +66,10 @@ public class AddCommand extends Command {
      * @param storage Storage of Duke Chatbot.
      * @throws DukeException If execution fails.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showMessage(String.format("Task Added!\n %s", taskToAdd));
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.add(taskToAdd);
         storage.save(tasks);
+        return ui.showMessage(String.format("Task Added!\n %s", taskToAdd));
     }
 
     /**

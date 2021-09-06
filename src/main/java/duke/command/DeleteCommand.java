@@ -30,11 +30,11 @@ public class DeleteCommand extends Command {
      * @param storage Storage of Duke Chatbot.
      * @throws DukeException If execution fails.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task task = (Task) tasks.remove(taskIndex - 1);
-            ui.showMessage(String.format("Task deleted.\n %s", task));
             storage.save(tasks);
+            return ui.showMessage(String.format("Task deleted.\n %s", task));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Invalid Task Index");
         }

@@ -14,7 +14,7 @@ public abstract class Command {
      * @param storage Storage of Duke Chatbot.
      * @throws DukeException If execution fails.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Check if user is ending the chatbot.
