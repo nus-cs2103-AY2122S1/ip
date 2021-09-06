@@ -64,6 +64,7 @@ public class MainWindow extends AnchorPane {
                         Platform.exit();
                     }
                 }, 1000);
+                System.exit(0);
             }
         } catch (DukeException e) {
             dialogContainer.getChildren().addAll(
