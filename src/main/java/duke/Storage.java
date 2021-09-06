@@ -21,14 +21,14 @@ import duke.task.Task;
  * from the local file system.
  */
 public class Storage {
-    private static DateTimeFormatter DATETIMEFORMAT;
+    private static DateTimeFormatter dateTimeFormat;
     private File file;
 
     /**
      * Public constructor to initialise the storage for the Duii Bot.
      */
     public Storage() {
-        this.DATETIMEFORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
+        this.dateTimeFormat = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
     }
 
     /**
@@ -133,7 +133,7 @@ public class Storage {
      */
     public Deadline loadDeadline(String[] lineArr) {
         Deadline deadline = new Deadline(lineArr[2], LocalDateTime.parse(lineArr[3],
-                this.DATETIMEFORMAT));
+                this.dateTimeFormat));
         if (lineArr[1].equals("1")) {
             deadline.complete();
         }
@@ -150,7 +150,7 @@ public class Storage {
      * @return A event object in the previous iteration of the program.
      */
     public Event loadEvent(String[] lineArr) {
-        Event event = new Event(lineArr[2], LocalDateTime.parse(lineArr[3], this.DATETIMEFORMAT));
+        Event event = new Event(lineArr[2], LocalDateTime.parse(lineArr[3], this.dateTimeFormat));
         if (lineArr[1].equals("1")) {
             event.complete();
         }
