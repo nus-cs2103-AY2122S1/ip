@@ -184,4 +184,12 @@ public class Deadline implements Task {
                     + this.command;
         return data;
     }
+    /**
+     * Method to check if the task has been marked as completed.
+     * @return True if the task is completed and false otherwise.
+     */
+    @Override
+    public boolean isDone() {
+        return this.isDone;
+    }
 }

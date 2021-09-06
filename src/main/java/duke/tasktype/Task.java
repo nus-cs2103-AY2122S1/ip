@@ -19,4 +19,6 @@ public interface Task {
     String createData();
 
     String getTaskType();
+
+    boolean isDone();
 }

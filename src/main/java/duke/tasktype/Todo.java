@@ -120,4 +120,13 @@ public class Todo implements Task {
     public String getTaskType() {
         return this.taskType;
     }
+
+    /**
+     * Method to check if the task has been marked as completed.
+     * @return True if the task is completed and false otherwise.
+     */
+    @Override
+    public boolean isDone() {
+        return this.isDone;
+    }
 }
