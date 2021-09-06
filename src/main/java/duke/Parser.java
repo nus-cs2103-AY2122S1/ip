@@ -53,10 +53,11 @@ public class Parser {
     public Task commandToTask(String command) throws DukeException {
         switch (getCommandAction(command)) {
         case "todo":
-            String[] todoSplit = command.split(" ", 2);
+            String[] todoDetails = command.split(" ", 2);
+            assert todoDetails.length == 2 : "Invalid todo format";
             String todoDescription;
             try {
-                todoDescription = todoSplit[1];
+                todoDescription = todoDetails[1];
             } catch (ArrayIndexOutOfBoundsException e) {
                 // no description
                 String message = "☹ OOPS!!! The description of a todo cannot be empty.";
@@ -64,10 +65,11 @@ public class Parser {
             }
             return new Todo(todoDescription);
         case "event":
-            String[] eventSplit = command.split(" /at ");
+            String[] eventDetails = command.split(" /at ");
+            assert eventDetails.length == 2 : "Invalid event format";
             LocalDate at;
             try {
-                at = this.stringToLocalDate(eventSplit[1]);
+                at = this.stringToLocalDate(eventDetails[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 // no /at found in command
                 String message = "☹ OOPS!!! The time of an event cannot be empty.";
@@ -75,7 +77,7 @@ public class Parser {
             }
             String eventDescription;
             try {
-                eventDescription = eventSplit[0].split("event ")[1];
+                eventDescription = eventDetails[0].split("event ")[1];
             } catch (ArrayIndexOutOfBoundsException e) {
                 // no event description
                 String message = "☹ OOPS!!! The description of an event cannot be empty.";
@@ -83,24 +85,25 @@ public class Parser {
             }
             return new Event(eventDescription, at);
         case "deadline":
-            String[] ddlSplit = command.split(" /by ");
+            String[] deadlineDetails = command.split(" /by ");
+            assert deadlineDetails.length == 2 : "Invalid deadline format";
             LocalDate by;
             try {
-                by = this.stringToLocalDate(ddlSplit[1]);
+                by = this.stringToLocalDate(deadlineDetails[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 // no /by found in command
                 String message = "☹ OOPS!!! The time of a deadline cannot be empty.";
                 throw new DukeException(message);
             }
-            String ddlDescription;
+            String deadlineDescription;
             try {
-                ddlDescription = ddlSplit[0].split("deadline ")[1];
+                deadlineDescription = deadlineDetails[0].split("deadline ")[1];
             } catch (ArrayIndexOutOfBoundsException e) {
                 // no deadline description
                 String message = "☹ OOPS!!! The description of a deadline cannot be empty.";
                 throw new DukeException(message);
             }
-            return new Deadline(ddlDescription, by);
+            return new Deadline(deadlineDescription, by);
         default:
             throw new DukeException("Invalid action. Task cannot be parsed from the command.");
         }
