@@ -1,11 +1,14 @@
 package duke;
 
-import duke.exceptions.UserInputError;
-import duke.tasks.Event;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
+import duke.exceptions.UserInputError;
+import duke.tasks.Event;
+
+
 
 public class EventTest {
     @Test
@@ -17,7 +20,7 @@ public class EventTest {
     @Test
     public void testOutput2() throws UserInputError {
         Event event = new Event("merge branch", "2021-09-09", false);
-        assertEquals("[E][ ] merge branch (at: Sep 9 2021)", event.toString());
+        assertEquals("[E][  ] merge branch (at: Sep 9 2021)", event.toString());
     }
 
     @Test
@@ -29,7 +32,7 @@ public class EventTest {
     @Test
     public void testInvalidDate2() {
         assertThrows(UserInputError.class, () ->
-                new Event("merge branch", "tmr", false));
+                new Event("merge branch", "next", false));
     }
 
     @Test
