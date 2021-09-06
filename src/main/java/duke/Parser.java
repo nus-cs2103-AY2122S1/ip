@@ -37,107 +37,106 @@ public class Parser {
      * @throws DukeException if unable to run argument.
      */
     public String run(String userInput) throws DukeException {
-        String[] cmd_args = userInput.split(" ", 2);
-        Task toAdd;
+        String[] cmdArgsArr = userInput.split(" ", 2);
 
         // switch case to split by command
-        switch (cmd_args[0]) {
+        switch (cmdArgsArr[0]) {
         case ("bye"):
-            return runBye(cmd_args);
+            return runBye(cmdArgsArr);
 
         case ("list"):
-            return runList(cmd_args);
+            return runList(cmdArgsArr);
 
         case ("done"):
-            return runDone(cmd_args);
+            return runDone(cmdArgsArr);
 
         case ("delete"):
-            return runDelete(cmd_args);
+            return runDelete(cmdArgsArr);
 
         case ("find"):
-            return runFind(cmd_args);
+            return runFind(cmdArgsArr);
 
         case ("todo"):
-            return runTodo(cmd_args);
+            return runTodo(cmdArgsArr);
 
         case ("deadline"):
-            return runDeadline(cmd_args);
+            return runDeadline(cmdArgsArr);
 
         case ("event"):
-            return runEvent(cmd_args);
+            return runEvent(cmdArgsArr);
 
         default:
             throw new DukeException("Unrecognised command");
         }
     }
 
-    private String runBye(String[] cmd_args) throws DukeException {
-        if (cmd_args.length > 1) {
+    private String runBye(String[] cmdArgsArr) throws DukeException {
+        if (cmdArgsArr.length > 1) {
             throw new DukeException("command bye takes no arguments.");
         }
         throw new DukeExitException("BYE");
     }
 
-    private String runList(String[] cmd_args) throws DukeException {
-        if (cmd_args.length > 1) {
+    private String runList(String[] cmdArgsArr) throws DukeException {
+        if (cmdArgsArr.length > 1) {
             throw new DukeException("command list takes no arguments.");
         }
         return taskList.enumerate();
     }
 
-    private String runDone(String[] cmd_args) throws DukeException {
-        if (cmd_args.length != 2 || !cmd_args[1].matches("[0-9]+")) {
+    private String runDone(String[] cmdArgsArr) throws DukeException {
+        if (cmdArgsArr.length != 2 || !cmdArgsArr[1].matches("[0-9]+")) {
             throw new DukeException(TaskArrayList.DONE_USAGE_TEXT);
         }
-        return taskList.markDone(Integer.parseInt(cmd_args[1]));
+        return taskList.markDone(Integer.parseInt(cmdArgsArr[1]));
     }
 
-    private String runDelete(String[] cmd_args) throws DukeException {
-        if (cmd_args.length != 2) {
+    private String runDelete(String[] cmdArgsArr) throws DukeException {
+        if (cmdArgsArr.length != 2) {
             throw new DukeException(TaskArrayList.DELETE_USAGE_TEXT);
         }
-        if (!cmd_args[1].matches("[0-9]+")) {
+        if (!cmdArgsArr[1].matches("[0-9]+")) {
             throw new DukeException(TaskArrayList.DELETE_USAGE_TEXT);
         }
-        return taskList.deleteTask(Integer.parseInt(cmd_args[1]));
+        return taskList.deleteTask(Integer.parseInt(cmdArgsArr[1]));
     }
 
-    private String runFind(String[] cmd_args) throws DukeException {
-        if (cmd_args.length != 2) {
+    private String runFind(String[] cmdArgsArr) throws DukeException {
+        if (cmdArgsArr.length != 2) {
             throw new DukeException(TaskArrayList.FIND_USAGE_TEXT);
         }
-        return taskList.find(cmd_args[1]);
+        return taskList.find(cmdArgsArr[1]);
     }
 
-    private String runTodo(String[] cmd_args) throws DukeException {
-        if (cmd_args.length != 2) {
+    private String runTodo(String[] cmdArgsArr) throws DukeException {
+        if (cmdArgsArr.length != 2) {
             throw new DukeException(Todo.USAGE_TEXT);
         }
-        Task toAdd = new Todo(cmd_args[1]);
+        Task toAdd = new Todo(cmdArgsArr[1]);
         return taskList.addTask(toAdd);
     }
 
-    private String runDeadline(String[] cmd_args) throws DukeException {
-        if (cmd_args.length != 2) {
+    private String runDeadline(String[] cmdArgsArr) throws DukeException {
+        if (cmdArgsArr.length != 2) {
             throw new DukeException(Deadline.USAGE_TEXT);
         }
-        String[] name_by = cmd_args[1].split("/by", 2);
-        if (name_by.length != 2) {
+        String[] nameByPair = cmdArgsArr[1].split("/by", 2);
+        if (nameByPair.length != 2) {
             throw new DukeException(Deadline.USAGE_TEXT);
         }
-        Task toAdd = new Deadline(name_by[0], name_by[1]);
+        Task toAdd = new Deadline(nameByPair[0], nameByPair[1]);
         return taskList.addTask(toAdd);
     }
 
-    private String runEvent(String[] cmd_args) throws DukeException {
-        if (cmd_args.length != 2) {
+    private String runEvent(String[] cmdArgsArr) throws DukeException {
+        if (cmdArgsArr.length != 2) {
             throw new DukeException(Event.USAGE_TEXT);
         }
-        String[] name_at = cmd_args[1].split("/at", 2);
-        if (name_at.length != 2) {
+        String[] nameAtPair = cmdArgsArr[1].split("/at", 2);
+        if (nameAtPair.length != 2) {
             throw new DukeException(Event.USAGE_TEXT);
         }
-        Task toAdd = new Event(name_at[0], name_at[1]);
+        Task toAdd = new Event(nameAtPair[0], nameAtPair[1]);
         return taskList.addTask(toAdd);
     }
 

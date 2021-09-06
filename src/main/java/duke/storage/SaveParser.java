@@ -75,14 +75,14 @@ public class SaveParser {
             if (nl.equals("")) {
                 break;
             }
-            String[] key_value = nl.split(":", 2);
-            switch (key_value[0]) {
+            String[] keyValuePair = nl.split(":", 2);
+            switch (keyValuePair[0]) {
             case ("\tName"):
-                name = key_value[1];
+                name = keyValuePair[1];
                 argsFound[0] = true;
                 break;
             case ("\tDone"):
-                isDone = Boolean.parseBoolean(key_value[1]);
+                isDone = Boolean.parseBoolean(keyValuePair[1]);
                 argsFound[1] = true;
                 break;
             default:
@@ -111,18 +111,18 @@ public class SaveParser {
             if (nl.equals("")) {
                 break;
             }
-            String[] key_value = nl.split(":", 2);
-            switch (key_value[0]) {
+            String[] keyValuePair = nl.split(":", 2);
+            switch (keyValuePair[0]) {
             case ("\tName"):
-                name = key_value[1];
+                name = keyValuePair[1];
                 argsFound[0] = true;
                 break;
             case ("\tDone"):
-                isDone = Boolean.parseBoolean(key_value[1]);
+                isDone = Boolean.parseBoolean(keyValuePair[1]);
                 argsFound[1] = true;
                 break;
             case ("\tBy"):
-                by = key_value[1];
+                by = keyValuePair[1];
                 argsFound[2] = true;
                 break;
             default:
@@ -152,18 +152,18 @@ public class SaveParser {
                 //break if we hit an empty line
                 break;
             }
-            String[] key_value = nl.split(":", 2);
-            switch (key_value[0]) {
+            String[] keyValuePair = nl.split(":", 2);
+            switch (keyValuePair[0]) {
             case ("\tName"):
-                name = key_value[1];
+                name = keyValuePair[1];
                 argsFound[0] = true;
                 break;
             case ("\tDone"):
-                isDone = Boolean.parseBoolean(key_value[1]);
+                isDone = Boolean.parseBoolean(keyValuePair[1]);
                 argsFound[1] = true;
                 break;
             case ("\tAt"):
-                at = key_value[1];
+                at = keyValuePair[1];
                 argsFound[2] = true;
                 break;
             default:
