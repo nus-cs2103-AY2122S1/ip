@@ -1,26 +1,33 @@
 package duke;
 import java.io.IOException;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 /**
  * Class which operates Jarvis the chat-bot
  */
 public class Duke {
-    private Storage storage;
+    private Storage taskStorage;
+    private Storage notesStorage;
     private TaskList tasks;
+    private NoteList notes;
     private Ui ui;
 
     /**
      * Retrieves all the tasks stored by Jarvis in the hard disk upon running the main method.
-     * @param filePath The file in which the tasks are stored
+     * @param taskFilePath The file in which the tasks are stored
      */
-    public Duke(String filePath) {
+    public Duke(String taskFilePath, String noteFilePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
+
+        taskStorage = new Storage(taskFilePath); //To load user tasks
+        notesStorage = new Storage(noteFilePath); //To load user notes as well
+
         tasks = new TaskList();
+        notes = new NoteList();
+
         try {
-            storage.retrieveFileContents();
+            taskStorage.retrieveFileContents();
+            notesStorage.retrieveFileContents();
         } catch (FileNotFoundException e) {
             System.err.println(e);
         }
@@ -39,6 +46,12 @@ public class Duke {
                     } else {
                         return Parser.parseList();
                     }
+                } else if (Parser.parseCommand(input).equals("notes")) {
+                    if (NoteList.getCounter() == 0) {
+                        return "\tThere are currently no notes on your list!";
+                    } else {
+                        return Parser.parseNoteList();
+                    }
                 } else if (Parser.parseCommand(input).equals("done")) {
                     return Parser.parseDone(input);
                 } else if (Parser.parseCommand(input).equals("delete")) {
@@ -53,6 +66,10 @@ public class Duke {
                     return Parser.parseToday();
                 } else if (Parser.parseCommand(input).equals("find")) {
                     return Parser.parseFind(input);
+                } else if (Parser.parseCommand(input).equals("note")) {
+                    return Parser.parseNote(input);
+                } else if (Parser.parseCommand(input).equals("delete note")) {
+                    return Parser.parseDeleteNote(input);
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't " +
                             "know what that means :-(");
