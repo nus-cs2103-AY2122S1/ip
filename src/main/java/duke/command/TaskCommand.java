@@ -21,14 +21,20 @@ public class TaskCommand extends Command {
             throw new DukeException("The description of a Task cannot be empty.");
         }
 
-        if (userCommand.equals("todo")) {
+        switch (userCommand) {
+        case Command.TODO_COMMAND:
             tasks.addTask(new Todo(userArgument, false));
-        } else if (userCommand.equals("deadline")) {
+            break;
+        case Command.DEADLINE_COMMAND:
             String[] deadlineInfo = splitBetween(userArgument, "/by");
             tasks.addTask(new Deadline(deadlineInfo[0], deadlineInfo[1], false));
-        } else {
+            break;
+        case Command.EVENT_COMMAND:
             String[] eventInfo = splitBetween(userArgument, "/at");
             tasks.addTask(new Event(eventInfo[0], eventInfo[1], false));
+            break;
+        default:
+            throw new DukeException("Unknown command!");
         }
         return addTask(tasks.getTask(tasks.numberOfTasks() - 1), storage, tasks);
     }
