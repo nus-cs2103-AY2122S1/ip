@@ -1,9 +1,5 @@
 package duke;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-
 import java.util.Scanner;
 
 
@@ -33,47 +29,7 @@ public class GUI{
         return "Hello from\n" + "DUKE!" + "\nWhat can I do for you? :)";
     }
 
-    /**
-     * function to check for DukeException in user's input and acts accordingly
-     * @params String s
-     * @return 0 if there is no error, 1 if DukeError exists
-     */
-    public int checkCommand(String s) {
-        try{
-            assert s.length() >= 0: "String length should be 0 or more";
-            InputChecker ic = new InputChecker(s);
-            return 0;
-        } catch (DukeException e){
-            System.out.println(e.getMessage());
-            return 1;
-        }
-    }
 
-    /**
-     * function to set up the bot to take inputs and respond accordingly
-     *
-     */
-    public void listenForInputs(){
-        Scanner sc = new Scanner(System.in); //initialize scanner
-        while(isListening) {
-            String userInput = sc.nextLine(); //scanning user's first input
-            int errorCode = checkCommand(userInput); // check for Duke Exception
-            assert errorCode >= 0: "Errorcode should be 0 or 1";
-            assert errorCode <=1: "Errorcode should be 0 or 1";
-            if(errorCode == 1) continue; // if DukeError is caught, continue on with the loop
-            if(userInput.equals("bye")){
-                isListening = false;
-                break;
-            }
-            respond(userInput);
-        }
-    }
-
-    public String goodbye(){
-        return("Goodbye, I will miss you!");
-    }
-
-    /**
      * function to respond to a user input
      * @params String s
      */
@@ -103,10 +59,6 @@ public class GUI{
         }
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
     public String getResponse(String input) {
         try{
             InputChecker ic = new InputChecker(input);
