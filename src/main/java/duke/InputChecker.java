@@ -19,7 +19,7 @@ public class InputChecker {
         } else if(s.equals("deadline") || s.equals("event") || s.equals("todo")){
             throw new DukeException("The description of " + s + " cannot be empty!");
         } else if(s.length() > 4 && s.substring(0,4).equals("todo")){
-
+            
         } else if(s.length() > 8 && s.substring(0,8).equals("deadline")){
 
         } else if(s.length() > 5 && s.substring(0,5).equals("event")){

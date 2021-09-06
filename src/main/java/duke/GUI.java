@@ -40,6 +40,7 @@ public class GUI{
      */
     public int checkCommand(String s) {
         try{
+            assert s.length() >= 0: "String length should be 0 or more";
             InputChecker ic = new InputChecker(s);
             return 0;
         } catch (DukeException e){
@@ -57,7 +58,8 @@ public class GUI{
         while(isListening) {
             String userInput = sc.nextLine(); //scanning user's first input
             int errorCode = checkCommand(userInput); // check for Duke Exception
-
+            assert errorCode >= 0: "Errorcode should be 0 or 1";
+            assert errorCode <=1: "Errorcode should be 0 or 1";
             if(errorCode == 1) continue; // if DukeError is caught, continue on with the loop
             if(userInput.equals("bye")){
                 isListening = false;
@@ -78,6 +80,7 @@ public class GUI{
     public String respond(String s){
         if(s.contains("done")){
             int order = Integer.parseInt(s.substring(5)); //getting the order of the task
+            assert order > 0: "order should be more than 0";
             return lst.markDone(order);
         } else if(s.contains("list")){
             return lst.displayList();
@@ -89,6 +92,7 @@ public class GUI{
             return lst.addTodo(s);
         } else if(s.contains("delete")){
             int order = Integer.parseInt(s.substring(7)); //getting the order of the task
+            assert order > 0: "order should be more than 0";
             return lst.deleteTask(order);
         } else if (s.contains("find")){
             return lst.find(s.substring(5));
