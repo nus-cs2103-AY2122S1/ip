@@ -12,9 +12,9 @@ import bobcat.exception.UnknownCommandException;
  * sets of commands.
  */
 public class QueryParser {
-    private static final Set<String> taskCreation = Set.of("todo", "event", "deadline");
-    private static final Set<String> taskMarking = Set.of("done", "delete");
-    private static final Set<String> basicCommand = Set.of("list", "find", "bye");
+    private static final Set<String> TASK_CREATION = Set.of("todo", "event", "deadline");
+    private static final Set<String> TASK_MARKING = Set.of("done", "delete");
+    private static final Set<String> BASIC_COMMAND = Set.of("list", "find", "bye");
 
     private final BasicCommandParser basicCommandParser = new BasicCommandParser();
     private final CreationCommandParser taskCreationParser = new CreationCommandParser();
@@ -34,11 +34,11 @@ public class QueryParser {
     public String[] parse(String query) {
         String[] queryArr = query.split("\\s");
         String command = queryArr[0];
-        if (basicCommand.contains(command)) {
+        if (BASIC_COMMAND.contains(command)) {
             return basicCommandParser.parse(command, queryArr);
-        } else if (taskMarking.contains(command)) {
+        } else if (TASK_MARKING.contains(command)) {
             return taskMarkingParser.parse(command, queryArr);
-        } else if (taskCreation.contains(command)) {
+        } else if (TASK_CREATION.contains(command)) {
             return taskCreationParser.parse(command, queryArr);
         }
         throw new UnknownCommandException("I'm sorry, but I don't know what that means :-(");

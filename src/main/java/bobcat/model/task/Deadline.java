@@ -6,6 +6,9 @@ import java.time.format.DateTimeParseException;
 
 import bobcat.exception.LogicException;
 
+/**
+ * A Task which represents a task with a deadline
+ */
 public class Deadline extends Task {
     protected LocalDate dueDate;
 
