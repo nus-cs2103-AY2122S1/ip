@@ -35,8 +35,8 @@ public class Ui {
      * @return String response to added task.
      */
     public static String getAddTaskMessage(Task task, TaskList taskList) {
-        return "\t Got it. I've added this task:\n" +
-                "\t \t " + task + taskList.getTaskListSummary();
+        return "\t Got it. I've added this task:\n"
+                + "\t \t " + task + taskList.getTaskListSummary();
     }
 
     /**
@@ -56,8 +56,8 @@ public class Ui {
      * @return String response to removed task.
      */
     public static String getRemoveTaskMessage(Task task, TaskList taskList) {
-        return "\t Got it. I've removed this task:\n" +
-                "\t \t " + task + taskList.getTaskListSummary();
+        return "\t Got it. I've removed this task:\n"
+                + "\t \t " + task + taskList.getTaskListSummary();
     }
 
     /**
@@ -95,6 +95,7 @@ public class Ui {
      * @return String message.
      */
     public String getUnknownCommandMessage(String command) {
+        assert (!command.equals(""));
         return "\tI don't understand " + command + " (yet...)\n";
     }
 
@@ -125,7 +126,6 @@ public class Ui {
      * Greets an existing user.
      *
      * @param tasks User's existing tasks to be displayed with the greeting.
-     * @return String message.
      */
     public void greetWithFamiliarity(TaskList tasks) {
         String greeting = "\tNice to see you again.\n";
@@ -158,9 +158,7 @@ public class Ui {
      * @return String parting message.
      */
     public String exitWithGoodbye() {
-        new Thread(() -> {
-            uiCommands.get("exit").accept("");
-        }).start();
+        new Thread(() -> uiCommands.get("exit").accept("")).start();
         return "Hope to see you soon!!";
     }
 

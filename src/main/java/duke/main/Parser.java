@@ -30,16 +30,6 @@ public class Parser {
     }
 
     /**
-     * Checks if user has entered the terminating command.
-     *
-     * @param command String user input.
-     * @return true if input is terminating command else false.
-     */
-    public static boolean isTerminateCommand(String command) {
-        return command.equals("bye");
-    }
-
-    /**
      * Parses user inputs.
      *
      * @param input String from user.

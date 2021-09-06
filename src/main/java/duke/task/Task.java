@@ -70,7 +70,7 @@ abstract public class Task {
      *
      * @return String for storing the Task.
      */
-    abstract public String generateStorageString();
+    public abstract String generateStorageString();
 
     /**
      * Checks if the task contains any keyword.

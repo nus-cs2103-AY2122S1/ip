@@ -31,15 +31,15 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
     private Ui ui;
 
-    private Image userImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaUser" +
-            ".png")));
-    private Image dukeImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke" +
-            ".jpg")));
+    private Image userImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaUser"
+            + ".png")));
+    private Image dukeImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke"
+            + ".jpg")));
 
-    @FXML
     /**
      * Forces ScrollPane to automatically scroll down.
      */
+    @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
