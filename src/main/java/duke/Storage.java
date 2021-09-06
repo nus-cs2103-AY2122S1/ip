@@ -1,10 +1,16 @@
 package duke;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 import duke.tasks.Deadline;
@@ -32,37 +38,48 @@ public class Storage {
      * @return Arraylist containing all the tasks in the hard disk.
      */
     public ArrayList<Task> load() {
-        ArrayList<Task> list = new ArrayList<>();
+        ArrayList<Task> listOfTasks = new ArrayList<>();
         try {
-            String path = "data" + File.separator + "duke.txt";
             boolean hasDirectory = Files.exists(Paths.get("data"));
             boolean hasFile = Files.exists(Paths.get("data/duke.txt"));
-            if(hasDirectory) {
-                if(hasFile) {
-                    getContent("data/duke.txt", list);
-                    if(list.size() == 0) {
-                        System.out.println("There are no tasks");
-                    } else {
-                        //System.out.println("im here!!");
-                        printFile("data/duke.txt");
-                    }
-                } else {
-                    File file = new File(path);
-                }
-            } else {
-                File file = new File(path);
-                file.getParentFile().mkdirs();
-                file.createNewFile();
+            if (!hasDirectory) {
+                createDirectory();
+            } else if (!hasFile) {
+                createFile();
             }
-        } catch (FileNotFoundException e){
-            System.out.println("File not found");
+            getContent("data/duke.txt", listOfTasks);
+            checkEmptyTasksList(listOfTasks);
         } catch (IOException e) {
-            System.out.println("error!");
+            System.out.println("Could not get the contents of the file!");
         } finally {
-            return list;
+            return listOfTasks;
         }
     }
 
+    private void createFile() {
+        File file = new File(path);
+    }
+
+    private void createDirectory() {
+        try {
+            File file = new File(path);
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+        } catch(IOException e) {
+            System.out.println("Could not create a directory!");
+        }
+    }
+
+    private void checkEmptyTasksList(ArrayList<Task> listOfTasks) {
+        try {
+            if(listOfTasks.size() != 0) {
+                System.out.println("There are no tasks");
+            }
+            printFile("data/duke.txt");
+        } catch (FileNotFoundException e){
+            System.out.println("File not found");
+        }
+    }
     /**
      * Gets all the tasks in the hard disk
      *
@@ -71,35 +88,35 @@ public class Storage {
      * @throws FileNotFoundException If file is not found.
      * @throws DukeException1 If there is an error in creating a todo, event, deadline task.
      */
-    public void getContent(String filePath, ArrayList<Task> list) throws FileNotFoundException, DukeException1 {
+     private void getContent(String filePath, ArrayList<Task> list) throws FileNotFoundException, DukeException1 {
         File file = new File(filePath);
+        assert file.exists();
         Scanner scanner = new Scanner(file);
         while (scanner.hasNext()) {
             String s = scanner.nextLine();
-            /*System.out.println(s);
-            String[] st = s.split(" ");
-            for (int i = 0; i < st.length; i++) {
-                System.out.println(st[i]);
-            }*/
             try {
-                if(s.split("/")[0].equals("T")) {
-                    ToDo todo = new ToDo(s.split("/")[2]);
+                String typeOfTask = s.split("/")[0];
+                String indicationOfTaskCompletion = s.split("/")[1];
+                if(typeOfTask.equals("T")) {
+                    String todoTask = s.split("/")[2];
+                    ToDo todo = new ToDo(todoTask);
                     list.add(todo);
-                    if(s.split("/")[1].equals("1")) {
-                        todo.setDone();
-                    }
-                } else if(s.split("/")[0].equals("D")) {
-                    Deadline deadline = new Deadline(s.split("/", 4)[2], s.split("/", 4)[3]);
+                    todo.getTaskCompletionStatus(indicationOfTaskCompletion);
+                } else if(typeOfTask.equals("D")) {
+                    String deadlineTask = s.split("/", 4)[2];
+                    String completeBy = s.split("/", 4)[3];
+                    Deadline deadline = new Deadline(deadlineTask, completeBy);
                     list.add(deadline);
-                    if(s.split("/")[1].equals("1")) {
-                        deadline.setDone();
-                    }
-                } else {
-                    Event event = new Event(s.split("/", 4)[2], s.split("/", 4)[3]);
+                    deadline.getTaskCompletionStatus(indicationOfTaskCompletion);
+                } else if(typeOfTask.equals("E")) {
+                    String eventTask = s.split("/", 4)[2];
+                    String eventAt = s.split("/", 4)[3];
+                    Event event = new Event(eventTask, eventAt);
                     list.add(event);
-                    if(s.split("/")[1].equals("1")) {
-                        event.setDone();
-                    }
+                    event.getTaskCompletionStatus(indicationOfTaskCompletion);
+                } else {
+                    assert typeOfTask.equals("T") || typeOfTask.equals("E")
+                            || typeOfTask.equals("D");
                 }
             } catch (DukeException1 e) {
                 System.out.println(e.getMessage());
@@ -113,7 +130,7 @@ public class Storage {
      * @param path Path of the file containing all the tasks.
      * @throws FileNotFoundException If file is not found.
      */
-    public void printFile(String path) throws FileNotFoundException {
+    private void printFile(String path) throws FileNotFoundException {
         File file = new File(path);
         Scanner scanner = new Scanner(file);
         while(scanner.hasNext()) {
@@ -147,15 +164,11 @@ public class Storage {
             PrintWriter writer = new PrintWriter("data/duke.txt");
             for (int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
-                //if (i != number) {
                 writer.println(task.storeTask());
-                //writeToFile("data/duke.txt", task.getType() + " | " + task.getDone() + " | " + task.getInfo());
-                //}
             }
             writer.close();
         } catch (IOException e) {
             System.out.println("error occurred in rewriting entire file!");
         }
     }
-
 }

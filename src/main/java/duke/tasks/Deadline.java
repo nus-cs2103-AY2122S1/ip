@@ -51,23 +51,25 @@ public class Deadline extends Task {
     /**
      * Gets the date that the task must be completed by.
      *
-     * @return LocalDate object denoting the deadline of the task.
+     * @return String denoting the deadline of the task.
      */
-    public LocalDate getDate() {
+    public String getDate() {
         String date = by.split(" ")[0];
         this.date = LocalDate.parse(date.split("/")[2] + "-"+ date.split("/")[1] + "-" + date.split("/")[0]);
-        return this.date;
+        String formattedDate = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return formattedDate;
     }
 
     /**
      * Gets the time by which the task must be completed.
      *
-     * @return LocalTime object denoting the time by which task must be completed.
+     * @return String denoting the time by which task must be completed.
      */
-    public LocalTime getTime() {
+    public String getTime() {
         String time = by.split(" ")[1];
         this.time = LocalTime.parse(time);
-        return this.time;
+        String formattedTime = this.time.format(DateTimeFormatter.ofPattern("HH:mm"));
+        return formattedTime;
     }
 
     /**
@@ -87,7 +89,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + getDate().format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                + " " + getTime().format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
+        return "[D]" + super.toString() + "(by: " + getDate() + " " + getTime() + ")";
     }
 }

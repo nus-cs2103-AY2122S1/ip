@@ -37,7 +37,6 @@ public class Duke {
         while (!isExit) {
             String fullCommand = ui.readCommand();
             ui.showLine(); // show the divider line ("_______")
-            //Parser parser = new Parser();
             Command c = Parser.parse(fullCommand);
             c.execute(tasks, ui, storage);
             isExit = c.isExit();

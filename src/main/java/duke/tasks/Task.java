@@ -78,6 +78,12 @@ public abstract class Task {
      */
     public abstract String storeTask();
 
+    public void getTaskCompletionStatus(String status) {
+        if(status.equals("1")) {
+            setDone();
+        }
+    }
+
     /**
      * Returns the String representation of the task.
      *
