@@ -34,9 +34,9 @@ public class Duke {
      * A <code>Parser</code> object takes in user inputs and
      * interprets it to Duke to execute relevant tasks.
      */
+
     private class Parser {
-        private String[] listOfWords = new String[0];
-        private DateTimeManager manager = new DateTimeManager(
+        private final DateTimeManager manager = new DateTimeManager(
                 DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         private int taskIndex = -1;
         private LocalDate date = LocalDate.now();
@@ -44,28 +44,28 @@ public class Duke {
         private Command parseString(String userInput) throws DukeException {
             // Separate them with space
             String[] arrOfCommandWords = userInput.split(" ");
-            this.listOfWords = arrOfCommandWords;
             String commandWord = arrOfCommandWords[0];
+            Command.CommandType type = Command.CommandType.parseTypeFromCommandWord(commandWord);
 
             if (arrOfCommandWords.length <= 1) {
-                Command command = parseOneWordCommand(commandWord);
+                Command command = parseOneWordCommand(type);
                 assert command != null: "Command is valid.";
                 return command;
             }
 
-            switch (commandWord) {
-            case "todo": // Fallthrough
-            case "deadline": // Fallthrough
-            case "event":
-                return parseTaskType(commandWord, userInput);
-            case "delete": // Fallthrough
-            case "done":
+            switch (type) {
+            case TODO: // Fallthrough
+            case DEADLINE: // Fallthrough
+            case EVENT:
+                return parseTaskType(type, userInput);
+            case DELETE: // Fallthrough
+            case DONE:
                 // arrOfCommandWords = {"done", "taskNumber"}
-                return parseTaskModification(commandWord, arrOfCommandWords[1]);
-            case "find":
+                return parseTaskModification(type, arrOfCommandWords[1]);
+            case FIND:
                 // arrOfCommandWords = {"find", "taskNumber"}
                 return new FindCommand(ui, taskList, arrOfCommandWords[1]);
-            case "get":
+            case GET:
                 // arrOfCommandWords = {"get", "dateString"}
                 parseGetTasksOnDate(arrOfCommandWords[1]);
             default:
@@ -73,13 +73,13 @@ public class Duke {
             }
         }
 
-        private Command parseOneWordCommand(String commandWord) throws DukeException {
+        private Command parseOneWordCommand(Command.CommandType commandWord) throws DukeException {
             switch (commandWord) {
-            case "bye":
+            case BYE:
                 return new ExitCommand(ui, taskList);
-            case "list":
+            case LIST:
                 return new ListCommand(ui, taskList);
-            case "help":
+            case HELP:
                 return new HelpCommand(ui, taskList);
             default:
                 handleInvalidInputs(commandWord);
@@ -101,7 +101,7 @@ public class Duke {
         private String parseDescriptionWithDate(String userInput, String command) {
             String description = "";
 
-            assert command == "/by " || command == "/at "
+            assert command.equals("/by ") || command.equals("/at ")
                     : "Date indicated by /by or /at ";
 
             try {
@@ -114,28 +114,24 @@ public class Duke {
                     throw new DukeException("No date specified for task.");
                 }
 
-                LocalDate date = manager.parseDateTime(
+                this.date = manager.parseDateTime(
                         userInput.substring(indexOfDate + command.length())
                 );
-                this.date = date;
-
-                description = userInput.substring(startOfDescription, indexOfDate);
+                return description = userInput.substring(startOfDescription, indexOfDate);
             } catch (DateTimeParseException | DukeException e) {
                 System.out.println(e.getMessage());
-            } finally {
-                return description;
             }
+            return description;
         }
 
-        private Command parseTaskModification(String commandWord, String numberInput)
+        private Command parseTaskModification(Command.CommandType commandType, String numberInput)
                 throws DukeException {
             try {
-                int index = Integer.parseInt(numberInput) - 1;
-                this.taskIndex = index;
-                switch (commandWord) {
-                case "done":
+                taskIndex = Integer.parseInt(numberInput) - 1;
+                switch (commandType) {
+                case DONE:
                     return new DoneCommand(ui, taskList, taskIndex, storage);
-                case "delete":
+                case DELETE:
                     return new DeleteCommand(ui, taskList, taskIndex, storage);
                 default:
                     throw new DukeException("Unable to update task.");
@@ -145,14 +141,14 @@ public class Duke {
             }
         }
 
-        private Command parseTaskType(String type, String userInput) throws DukeException {
+        private Command parseTaskType(Command.CommandType type, String userInput) throws DukeException {
             switch (type) {
-            case "todo":
+            case TODO:
                 int startOfDescription = userInput.indexOf(" ") + 1;
                 String description = userInput.substring(startOfDescription);
                 return new ToDoCommand(ui, taskList,
                         description, storage);
-            case "deadline":
+            case DEADLINE:
                 description = parseDescriptionWithDate(userInput, "/by ");
 
                 assert !description.equals("") : "Description is not empty.";
@@ -160,7 +156,7 @@ public class Duke {
                 // listOfWords = {"commandType", "date"}
                 return new DeadlineCommand(ui, taskList, description,
                         date, storage);
-            case "event":
+            case EVENT:
                 description = parseDescriptionWithDate(userInput, "/at ");
 
                 assert !description.equals("") : "Description is not empty.";
@@ -178,11 +174,11 @@ public class Duke {
          *
          * @param input The user input to Duke.
          */
-        private void handleInvalidInputs(String input) throws DukeException {
+        private void handleInvalidInputs(Command.CommandType input) throws DukeException {
             switch (input) {
-            case "todo": // fallthrough
-            case "deadline": // fallthrough
-            case "event": {
+            case TODO: // fallthrough
+            case DEADLINE: // fallthrough
+            case EVENT: {
                 throw new DukeException(
                         String.format(
                                 "☹ OOPS!!! The description of a %s cannot be empty.",
@@ -190,12 +186,12 @@ public class Duke {
                         )
                 );
             }
-            case "done": // fallthrough
-            case "delete":
+            case DONE: // fallthrough
+            case DELETE:
                 throw new DukeException("Please enter the task index.");
-            case "get":
+            case GET:
                 throw new DukeException("Please enter a date in dd/MM/yyyy format.");
-            case "find":
+            case FIND:
                 throw new DukeException("Please enter keyword to search for.");
             default:
                 throw new DukeException(
@@ -233,22 +229,13 @@ public class Duke {
     /**
      * Storage to handle file manipulation.
      */
-    private Storage storage = new Storage("./data/duke.text");
-    private Ui ui = new Ui();
-    private Parser parser = new Parser();
+    private final Storage storage = new Storage("./data/duke.text");
+    private final Ui ui = new Ui();
+    private final Parser parser = new Parser();
     private HashMap<LocalDate, ArrayList<Task>> dateTasks = new HashMap<>();
 
     public Duke() {
         taskList = storage.loadData(dateTasks, taskList);
-    }
-
-    /**
-     * Public constructor for Duke
-     */
-    public Duke(TaskList taskList, Storage storage, Ui ui) {
-        this.storage = storage;
-        this.ui = ui;
-        this.taskList = storage.loadData(dateTasks, taskList);
     }
 
     /**
