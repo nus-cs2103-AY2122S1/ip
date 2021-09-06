@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * An event task with date and time specified.
+ */
 public class Event extends Task {
     protected String prefix;
     protected String time;

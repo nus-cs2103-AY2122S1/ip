@@ -7,8 +7,11 @@ import main.java.duke.tasks.Event;
 import main.java.duke.tasks.Task;
 import main.java.duke.tasks.Todo;
 
+/**
+ * A command that adds a task to task list.
+ */
 public class AddCommand extends Command {
-    private Task task;
+    private final Task task;
 
     /**
      * Constructs a new add task command with the given task.
@@ -25,8 +28,8 @@ public class AddCommand extends Command {
      * @param tasks given list of tasks
      * @param gui given gui object
      * @param storage given storage object
-     * @throws IOException
-     * @throws DukeException
+     * @throws IOException input and output exception
+     * @throws DukeException duke exception
      */
     public String execute(TaskList tasks, MainWindow gui, Storage storage) throws IOException, DukeException {
         if (this.task instanceof Todo) {
@@ -42,10 +45,10 @@ public class AddCommand extends Command {
             storage.saveTaskToFile(task.toString());
             return addTask(event, tasks);
         }
-    };
+    }
 
     /**
-     * Adds the task to the taskslist.
+     * Adds the task to the tasks list.
      *
      * @param task the task to be added
      */
@@ -54,17 +57,14 @@ public class AddCommand extends Command {
         String message2 = task.toString();
         tasks.getTaskList().add(task);
         assert tasks.getTaskList().contains(task) : "Task list should contain current task";
-        String taskform;
-        if (tasks.getTaskList().size() == 1) {
-            taskform = " task";
-        } else {
-            taskform = " tasks";
-        }
-        String message3 = ("Now you have " + (tasks.getTaskList().size()) + taskform + " in the list.");
-        return message1 + message2 + message3;
-    }
+        String taskForm;
 
-    public boolean isExit() {
-        return false;
+        if (tasks.getTaskList().size() == 1) {
+            taskForm = " task";
+        } else {
+            taskForm = " tasks";
+        }
+        String message3 = ("Now you have " + (tasks.getTaskList().size()) + taskForm + " in the list.");
+        return message1 + message2 + message3;
     }
 }
