@@ -47,6 +47,7 @@ public class Storage {
                 Scanner s = new Scanner(file);
                 while (s.hasNext()) {
                     String taskStr = s.nextLine();
+                    assert taskStr.length() > 0 : "task is empty";
                     taskStr = taskStr.substring(taskStr.indexOf("["));
                     Task temp = new Parser().taskFromString(taskStr);
                     new TaskList().addTask(temp, arListTask);

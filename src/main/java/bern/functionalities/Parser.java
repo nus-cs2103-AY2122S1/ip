@@ -18,6 +18,7 @@ public class Parser {
     public ToDo toDoFromString(String s) {
         boolean isDone = s.substring(4, 5).equals("X");
         String desc = s.substring(7);
+        assert desc.length() > 0 : "description is empty";
         ToDo ans = new ToDo(desc);
         if (isDone) {
             ans.markAsDone();
@@ -34,7 +35,9 @@ public class Parser {
     public Deadline deadlineFromString(String s) {
         boolean isDone = s.substring(4, 5).equals("X");
         String desc = s.substring(7, s.indexOf("(by: ") - 1);
+        assert desc.length() > 0 : "description is empty";
         String by = s.substring(s.indexOf("(by: ") + 5, s.length() - 1);
+        assert by.length() > 0 : "by is empty";
         Deadline ans = new Deadline(desc, by);
         if (isDone) {
             ans.markAsDone();
@@ -51,7 +54,9 @@ public class Parser {
     public Event eventFromString(String s) {
         boolean isDone = s.substring(4, 5).equals("X");
         String desc = s.substring(7, s.indexOf("(at: ") - 1);
+        assert desc.length() > 0 : "description is empty";
         String at = s.substring(s.indexOf("(at: ") + 5, s.length() - 1);
+        assert at.length() > 0 : "at is empty";
         Event ans = new Event(desc, at);
         if (isDone) {
             ans.markAsDone();
@@ -67,6 +72,7 @@ public class Parser {
      */
     public Task taskFromString(String s) {
         String cat = s.substring(1, 2);
+        assert cat.length() > 0 : "category is empty";
         return cat.equals("T")
                 ? toDoFromString(s)
                 : cat.equals("D")
