@@ -11,8 +11,8 @@ public class Parser {
      *
      * @param list The current todolist.
      * @param input The command given by the user.
+     * @return The response in String after the action is executed.
      * @throws DukeException If input do not meet the requirements.
-     * @returns The response in String after the action is executed.
      */
     public String process(String input, List list) throws DukeException {
         String[] split = input.split(" ", 2);

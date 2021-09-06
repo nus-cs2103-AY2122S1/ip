@@ -8,6 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * A class that handles the dialog box for the dialog.
+ */
 public class DialogBox extends HBox {
 
     private Label text;
@@ -41,10 +44,24 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * Generates a new dialog object based on the inputs.
+     *
+     * @param l Label to be displayed.
+     * @param iv ImageView to be displayed.
+     * @return A DialogBox object for the user.
+     */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         return new DialogBox(l, iv);
     }
 
+    /**
+     * Generates a new dialog object based on the inputs.
+     *
+     * @param l Label to be displayed.
+     * @param iv ImageView to be displayed.
+     * @return A DialogBox object for Duke.
+     */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();

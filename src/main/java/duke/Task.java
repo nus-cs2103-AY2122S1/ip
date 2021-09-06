@@ -7,7 +7,7 @@ package duke;
 public class Task {
     public static final String STORAGE_SEPARATOR = "|";
     private String name;
-    private boolean done;
+    private boolean isDone;
 
     /**
      * Constructor for Task Class.
@@ -17,7 +17,7 @@ public class Task {
      */
     public Task(String name) {
         this.name = name;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -29,7 +29,7 @@ public class Task {
      */
     public Task(String name, Boolean done) {
         this.name = name;
-        this.done = done;
+        this.isDone = done;
     }
 
     /**
@@ -42,10 +42,10 @@ public class Task {
     }
 
     /**
-     * Mark the Task as done.
+     * Marks the Task as done.
      */
     public void markAsDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
@@ -68,10 +68,10 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + (this.done ? "X" : " ") + "] " + this.name;
+        return "[" + (this.isDone ? "X" : " ") + "] " + this.name;
     }
 
     public String toDataString() {
-        return (this.done ? "T" : "F") + Task.STORAGE_SEPARATOR + this.name;
+        return (this.isDone ? "T" : "F") + Task.STORAGE_SEPARATOR + this.name;
     }
 }
