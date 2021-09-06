@@ -1,23 +1,35 @@
 package duke.storage;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import duke.exception.DukeException;
 import duke.formatter.Formatter;
 import duke.tasklist.TaskList;
 
-import java.io.BufferedWriter;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.Files;
-import java.nio.charset.StandardCharsets;
-
+/**
+ * A class to initialise storage of taskLists and loading of taskLists from stored
+ * .txt files
+ */
 public class Storage {
-    private BufferedReader reader;
-    private BufferedWriter writer;
-    private Formatter formatter;
+
+    /** The default file name **/
     public static final String DEFAULT_FILE_NAME = "duke.txt";
+
+    /** The default file directory **/
     public static final String DEFAULT_FILE_DIRECTORY = "data";
+
+    private BufferedReader reader;
+
+    private BufferedWriter writer;
+
+    private Formatter formatter;
+
     private Path targetDirectory;
 
     private Storage() {
@@ -67,15 +79,28 @@ public class Storage {
         }
     }
 
+    /**
+     * A factory method to return an instance of a Storage object.
+     * @return Storage which created the .txt file.
+     */
     public static Storage createStorage() {
         return new Storage();
     }
 
+    /**
+     * A factory method to return an instance of a Storage object with an input filePath.
+     * @return Storage which created the .txt file.
+     */
     public static Storage createStorage(String filePath) {
         return new Storage(filePath.split("/"));
     }
 
-
+    /**
+     * Loads a taskList with the tasks found in the stored .txt file.
+     * @param taskList A TaskList to be filled with the tasks from the .txt file.
+     * @return A complete TaskList with the tasks extracted from the .txt file.
+     * @throws DukeException which may be thrown.
+     */
     public TaskList load(TaskList taskList) throws DukeException {
         try {
             String line = this.reader.readLine();
@@ -94,8 +119,13 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves a taskList into the stored .txt file.
+     * @param taskList A TaskList to be filled with the tasks from the .txt file.
+     * @throws DukeException which may be thrown.
+     */
     public void save(TaskList taskList) throws DukeException {
-        try{
+        try {
             this.writer = Files.newBufferedWriter(this.targetDirectory, StandardCharsets.UTF_8);
         } catch (IOException e) {
             System.out.println("Exception occurred while initialising writer.");
@@ -118,5 +148,4 @@ public class Storage {
             e.printStackTrace();
         }
     }
-
 }

@@ -10,21 +10,21 @@ import javafx.fxml.FXML;
  * The driver class of Duke.
  */
 public class Duke {
-    TaskList list;
-    Storage storage;
+    private TaskList list;
+    private final Storage storage;
 
     /**
      * A constructor method that creates the driver, with the default storage file path used.
      */
     public Duke() {
-//        this.userInterface = new UserInterface();
         this.list = new TaskList();
         this.storage = Storage.createStorage();
         try {
             this.list = this.storage.load(this.list);
         } catch (DukeException e) {
             System.out.println("DB file is corrupted.\n" + e.getMessage());
-        }    }
+        }
+    }
 
     /**
      * A constructor method that creates the driver, with the input filepath used.
@@ -46,7 +46,7 @@ public class Duke {
      */
     @FXML
     public CommandResult getResponse(String input) throws DukeException {
-        return new Parser(this.list).parse(input);
+        return new Parser(this.list).parse(input).execute();
     }
 
     public void save() throws DukeException {

@@ -1,5 +1,8 @@
 package duke.components;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import duke.Duke;
 import duke.commandresult.CommandResult;
 import duke.exception.DukeException;
@@ -12,9 +15,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
+/**
+ * The main window where Duke interaction occurs.
+ */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -30,6 +33,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initializes the main window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -38,6 +44,11 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Sets the instance of duke to one provided.
+     *
+     * @param d The duke instance.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }

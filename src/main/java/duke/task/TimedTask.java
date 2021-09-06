@@ -1,11 +1,11 @@
 package duke.task;
 
-import duke.formatter.DateTimeFormatCreator;
-import duke.exception.DukeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
+import duke.formatter.DateTimeFormatCreator;
 
 public abstract class TimedTask extends Task {
 
@@ -44,7 +44,7 @@ public abstract class TimedTask extends Task {
 
     @Override
     public String getDetails() {
-        String checkbox = "[" + ( getCompleted() ? "X" : " ") + "]";
+        String checkbox = "[" + (getCompleted() ? "X" : " ") + "]";
         String details = getTaskTypeString() + checkbox + " " + this.getName();
         return details + getDateTimeString();
     }

@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.tasklist.TaskList;
 import duke.commandresult.CommandResult;
 import duke.task.Task;
 import duke.task.Todo;
+import duke.tasklist.TaskList;
 
 /**
  * A command that can add a Deadline task to a TaskList.

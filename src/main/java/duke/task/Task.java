@@ -1,10 +1,10 @@
 package duke.task;
 
 public abstract class Task {
+    public static final EmptyTask EMPTY_TASK = EmptyTask.empty();
     private final String name;
     private final boolean isCompleted;
     private final TaskType taskType;
-    public static final EmptyTask EMPTY_TASK = EmptyTask.empty();
 
     Task(String name, TaskType taskType, boolean isCompleted) {
         this.taskType = taskType;

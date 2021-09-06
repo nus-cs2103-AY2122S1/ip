@@ -8,13 +8,13 @@ import duke.tasklist.TaskList;
 /**
  * A command that can mark a task as completed from a taskList.
  */
-public class DoneCommand extends Command{
-
-    /** The id of the task to marked as completed from the list. */
-    private final int taskId;
+public class DoneCommand extends Command {
 
     /** Class level constant that signifies the command used to invoke this. */
     public static final String COMMAND_WORD = "done";
+
+    /** The id of the task to marked as completed from the list. */
+    private final int taskId;
 
     /**
      * Constructor that creates DeleteCommand.

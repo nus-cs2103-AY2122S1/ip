@@ -27,7 +27,7 @@ public class Event extends TimedTask {
     public Task updateName(String input) {
         try {
             return new Deadline(input, this.getDateTimeInternal(), this.getCompleted());
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             System.out.println(e.getMessage());
             return Task.emptyTask();
         }
@@ -37,7 +37,7 @@ public class Event extends TimedTask {
     public Task complete() {
         try {
             return new Deadline(this.getName(), this.getDateTimeInternal(), true);
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             System.out.println(e.getMessage());
             return Task.emptyTask();
         }

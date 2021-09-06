@@ -1,21 +1,21 @@
 package duke.command;
 
-import duke.tasklist.TaskList;
 import duke.commandresult.CommandResult;
 import duke.exception.DukeException;
 import duke.task.Event;
 import duke.task.Task;
+import duke.tasklist.TaskList;
 
 /**
  * A command that can add a Deadline task to a TaskList.
  */
 public class EventCommand extends Command implements TaskListAddable {
 
-    /** The rest of the command input by the user passed on by duke*/
-    private final String command;
-
     /** Class level constant that signifies the command used to invoke this. */
     public static final String COMMAND_WORD = "event";
+
+    /** The rest of the command input by the user passed on by duke*/
+    private final String command;
 
     /**
      * Constructor that creates EventCommand.
@@ -38,8 +38,9 @@ public class EventCommand extends Command implements TaskListAddable {
         TaskList taskList = super.getTaskList();
         String[] eventList = this.command.split(" /at ");
         if (eventList.length != 2) {
-            throw new DukeException("Incorrect command was given for event. " + "Try this: event name_here" +
-                    " /at date_here");
+            throw new DukeException("Incorrect command was given for event. "
+                    + "Try this: event name_here"
+                    + " /at date_here");
         }
         Task event = new Event(eventList[0], eventList[1], false);
         String feedback = addTaskToTaskList(taskList, event);

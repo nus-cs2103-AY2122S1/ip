@@ -6,7 +6,7 @@ import duke.tasklist.TaskList;
 /**
  * A command that can signify duke to render the TaskList items.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /** Class level constant that signifies the command used to invoke this. */
     public static final String COMMAND_WORD = "list";

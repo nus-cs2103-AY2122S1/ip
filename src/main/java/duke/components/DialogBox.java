@@ -1,5 +1,7 @@
 package duke.components;
 
+import java.io.IOException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,8 +14,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 
-import java.io.IOException;
-
+/**
+ * This control represents a dialog box. It comprises an ImageView to represent the speaker's face
+ * and a Label containing the speaker's text.
+ */
 public class DialogBox extends HBox {
 
     @FXML
@@ -21,7 +25,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    public DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -46,12 +50,26 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * Creates the user's dialog box.
+     *
+     * @param text The string representing the dialog.
+     * @param img The image of the person.
+     * @return the dialog box which contains the text and image.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
         db.setStyle("-fx-background-color: #ADD8E6;");
         return db;
     }
 
+    /**
+     * Creates the duke's dialog box.
+     *
+     * @param text The string representing the dialog.
+     * @param img The image of duke.
+     * @return the dialog box which contains the text and image.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
         db.flip();

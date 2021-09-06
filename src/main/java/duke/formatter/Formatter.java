@@ -1,11 +1,11 @@
 package duke.formatter;
 
 import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskType;
 import duke.task.Todo;
-import duke.task.Deadline;
-import duke.task.Event;
 
 /**
  * The class that will format a string to a task or a task to a string.

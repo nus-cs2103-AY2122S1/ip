@@ -1,20 +1,20 @@
 package duke.command;
 
-import duke.tasklist.TaskList;
 import duke.commandresult.CommandResult;
 import duke.exception.DukeException;
 import duke.task.Task;
+import duke.tasklist.TaskList;
 
 /**
  * A command that can delete a task from a taskList.
  */
 public class DeleteCommand extends Command implements ListNumberPrintable {
 
-    /** The id of the task to delete from the list. */
-    private final int taskId;
-
     /** Class level constant that signifies the command used to invoke this. */
     public static final String COMMAND_WORD = "delete";
+
+    /** The id of the task to delete from the list. */
+    private final int taskId;
 
     /**
      * Constructor that creates DeleteCommand.
