@@ -94,20 +94,18 @@ public class Parser {
     private static DeadlineCommand addDeadline(String[] input) throws DukeException {
         String formatErrorMsg = "OOPS!!! Please add the deadline with the right format:\n"
                 + "  deadline <description> /by <" + DATE_TIME_FORMAT + ">";
-        if (input.length > 1) {
-            String[] deadline = input[1].split("/", 2);
-            if (deadline.length > 1 && deadline[1].length() > 3) {
-                try {
-                    DateTimeFormatter format = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
-                    return new DeadlineCommand(
-                            new Deadline(deadline[0], LocalDateTime.parse(deadline[1].substring(3), format)));
-                } catch (DateTimeParseException e) {
-                    throw new DukeException(formatErrorMsg);
-                }
-            } else {
-                throw new DukeException(formatErrorMsg);
-            }
-        } else {
+        if (input.length < 2) {
+            throw new DukeException(formatErrorMsg);
+        }
+        String[] deadline = input[1].split("/", 2);
+        if (deadline.length < 2 || deadline[1].length() < 4) {
+            throw new DukeException(formatErrorMsg);
+        }
+        try {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
+            return new DeadlineCommand(
+                    new Deadline(deadline[0], LocalDateTime.parse(deadline[1].substring(3), format)));
+        } catch (DateTimeParseException e) {
             throw new DukeException(formatErrorMsg);
         }
     }
@@ -121,20 +119,18 @@ public class Parser {
     private static EventCommand addEvent(String[] input) throws DukeException {
         String formatErrorMsg = "OOPS!!! Please add the event with the right format:\n"
                 + "  event <description> /at <" + DATE_TIME_FORMAT + ">";
-        if (input.length > 1) {
-            String[] event = input[1].split("/", 2);
-            if (event.length > 1 && event[1].length() > 3) {
-                try {
-                    DateTimeFormatter format = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
-                    return new EventCommand(
-                            new Event(event[0], LocalDateTime.parse(event[1].substring(3), format)));
-                } catch (DateTimeParseException e) {
-                    throw new DukeException(formatErrorMsg);
-                }
-            } else {
-                throw new DukeException(formatErrorMsg);
-            }
-        } else {
+        if (input.length < 2) {
+            throw new DukeException(formatErrorMsg);
+        }
+        String[] event = input[1].split("/", 2);
+        if (event.length < 2 || event[1].length() < 4) {
+            throw new DukeException(formatErrorMsg);
+        }
+        try {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
+            return new EventCommand(
+                    new Event(event[0], LocalDateTime.parse(event[1].substring(3), format)));
+        } catch (DateTimeParseException e) {
             throw new DukeException(formatErrorMsg);
         }
     }

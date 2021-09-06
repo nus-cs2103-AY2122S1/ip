@@ -42,43 +42,51 @@ public class Storage {
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                switch (data.charAt(0)) {
-                case 'T':
-                    Task toDoTask = new ToDo(data.substring(4));
-                    if (data.charAt(2) == 'X') {
-                        toDoTask.markAsDone();
-                    }
-                    storageList.add(toDoTask);
-                    break;
-                case 'D':
-                    readDeadline(data);
-                    break;
-                case 'E':
-                    readEvent(data);
-                    break;
-                default:
-                    // Do nothing and continue to scan the next line.
-                }
+                tokenize(data);
             }
             myReader.close();
         } catch (FileNotFoundException e) {
             createFile();
         }
         return storageList;
+
     }
 
+    private void tokenize(String data) {
+        switch (data.charAt(0)) {
+        case 'T':
+            readToDo(data);
+            break;
+        case 'D':
+            readDeadline(data);
+            break;
+        case 'E':
+            readEvent(data);
+            break;
+        default:
+            // Do nothing.
+        }
+    }
+    private void readDoneStatus(Task task, String data) {
+        if (data.charAt(2) == 'X') {
+            task.markAsDone();
+        }
+        storageList.add(task);
+    }
+    private void readToDo(String data) {
+        Task toDoTask = new ToDo(data.substring(4));
+        readDoneStatus(toDoTask, data);
+    }
     private void readEvent(String data) {
         try {
             String[] splitEvent = data.split("\\|", 4);
-            if (splitEvent.length == 4) {
-                DateTimeFormatter format = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
-                LocalDateTime at = LocalDateTime.parse(splitEvent[3], format);
-                Task eventTask = new Event(splitEvent[2], at);
-                if (data.charAt(2) == 'X') {
-                    eventTask.markAsDone();
-                }
-                storageList.add(eventTask);
+            if (splitEvent.length != 4) {
+                return;
             }
+            DateTimeFormatter format = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
+            LocalDateTime at = LocalDateTime.parse(splitEvent[3], format);
+            Task eventTask = new Event(splitEvent[2], at);
+            readDoneStatus(eventTask, data);
         } catch (DateTimeParseException e) {
             // Invalid data, do nothing.
         }
@@ -90,10 +98,7 @@ public class Storage {
                 DateTimeFormatter format = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
                 LocalDateTime by = LocalDateTime.parse(splitDeadline[3], format);
                 Task deadlineTask = new Deadline(splitDeadline[2], by);
-                if (data.charAt(2) == 'X') {
-                    deadlineTask.markAsDone();
-                }
-                storageList.add(deadlineTask);
+                readDoneStatus(deadlineTask, data);
             }
         } catch (DateTimeParseException e) {
             // Invalid data, do nothing.

@@ -20,14 +20,4 @@ public class ExitCommand extends Command {
         System.exit(0);
         return "Bye! Hope to see you again soon!";
     }
-
-    /**
-     * Returns whether the Command is an ExitCommand.
-     *
-     * @return True if and only if the command is an ExitCommand.
-     */
-    @Override
-    public boolean isExit() {
-        return true;
-    }
 }
