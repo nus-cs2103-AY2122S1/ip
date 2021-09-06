@@ -107,6 +107,8 @@ public class Storage {
      * @throws IOException In case of Invalid directory.
      */
     public void writeToFile(List<Task> list) throws IOException {
+        assert list != null : "List has not been initialized";
+        
         FileWriter fw = new FileWriter(filePath);
         for (Task task : list) {
             fw.write(task.toFileString() + System.lineSeparator());

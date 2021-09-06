@@ -51,6 +51,8 @@ public class Duke {
      * @return A text that duke should reply with.
      */
     public BotOutput getBotOutput (String input) {
+        assert input != null : "User input should not be null";
+        
         List<String> botOutputs = new ArrayList<>();
         boolean isExit = false;
 
