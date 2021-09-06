@@ -24,7 +24,6 @@ import javafx.stage.Stage;
  */
 
 public class Duke extends Application {
-    private final String filePath = "data/tasks.txt";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -35,6 +34,14 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final String filePath = "data/tasks.txt";
+    private final double vValue = 1.0;
+    private final double stageMinHeight = 600.0;
+    private final double stageMinWidth = 400.0;
+    private final int scrollPaneWidth = 385;
+    private final int scollPaneHeight = 535;
+    private final double userWidth = 325.0;
+    private final double sendButtonWidth = 55.0;
 
     /**
      * Constructor for initialising duke.Duke.
@@ -54,24 +61,6 @@ public class Duke extends Application {
         return ui.showWelcome(tasks);
     }
 
-    /*/**
-     * Starts duke.Duke running.
-     */
-    /*public void run() {
-        ui.showWelcome(tasks);
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = new Parser().parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (Exception e) {
-                ui.showError(e.getMessage());
-            }
-        }
-    }*/
-
     /**
      * duke.Main function to initialise duke.Duke.
      * @param args None required
@@ -83,7 +72,6 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) {
         // step 1
-        //duke.Duke d = new duke.Duke();
         scrollPane = new ScrollPane();
         dialogContainer = new VBox(new Label(ui.showWelcome(tasks)));
         scrollPane.setContent(dialogContainer);
@@ -102,31 +90,31 @@ public class Duke extends Application {
         //Step 2. Formatting the window to look as expected
         stage.setTitle("duke.Duke");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(stageMinHeight);
+        stage.setMinWidth(stageMinWidth);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(stageMinWidth, stageMinHeight);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(scrollPaneWidth, scollPaneHeight);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
-        scrollPane.setVvalue(1.0);
+        scrollPane.setVvalue(vValue);
         scrollPane.setFitToWidth(true);
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(userWidth);
 
-        sendButton.setPrefWidth(55.0);
+        sendButton.setPrefWidth(sendButtonWidth);
 
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
+        AnchorPane.setTopAnchor(scrollPane, vValue);
 
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
+        AnchorPane.setBottomAnchor(sendButton, vValue);
+        AnchorPane.setRightAnchor(sendButton, vValue);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
+        AnchorPane.setLeftAnchor(userInput , vValue);
+        AnchorPane.setBottomAnchor(userInput, vValue);
 
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
@@ -138,7 +126,7 @@ public class Duke extends Application {
         });
 
         //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(vValue));
 
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();

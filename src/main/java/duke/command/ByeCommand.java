@@ -20,12 +20,4 @@ public class ByeCommand extends Command {
         return ui.showBye();
 
     }
-
-    /**
-     * Overrides the isExit function to tell duke.Duke to exit.
-     */
-    @Override
-    public boolean isExit() {
-        return true;
-    }
 }
