@@ -60,11 +60,15 @@ public class Storage {
 
         while (s.hasNext()) {
             String type = s.nextLine();
+            assert type.matches("[TED]") : "Save file (TYPE) corrupted.";
             String name = s.nextLine();
+            assert !name.isEmpty() : "Save file (NAME) corrupted.";
             if (type.equals("T")) {
                 returnList.add(new Task.Todo(name));
             } else {
                 String fullDate = s.nextLine();
+                assert(fullDate.matches("^[0-9]{4}([-])(((0[13578]|(10|12))\\1(0[1-9]|[1-2][0-9]|3[0-1]))|(02\\1(0[1-9]" +
+                        "|[1-2][0-9]))|((0[469]|11)\\1(0[1-9]|[1-2][0-9]|30)))$")) : "Save file (DATE) corrupted.";
                 String[] fullDateSplit = fullDate.split("-");
                 LocalDate parsedDate = LocalDate.of(Integer.parseInt(fullDateSplit[0]),
                         Integer.parseInt(fullDateSplit[1]), Integer.parseInt(fullDateSplit[2]));
@@ -75,6 +79,7 @@ public class Storage {
                 }
             }
             String taskDoneInt = s.nextLine();
+            assert taskDoneInt.matches("[01]") : "Save file (DONEVALUE) corrupted.";
             if (taskDoneInt.equals("1")) {
                 Task lastItemInList = returnList.get(returnList.size() - 1);
                 lastItemInList.markDone();
