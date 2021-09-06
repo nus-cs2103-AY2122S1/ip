@@ -34,8 +34,8 @@ public class AddCommand extends Command {
      * @param ui The ui of the bot involved with this command.
      */
     public String execute(Storage storage, Ui ui) {
+        int taskListLen = storage.taskListLen();
         if (this.taskType.equals(Todo.taskTag())) {
-            int taskListLen = storage.taskListLen();
             if (taskListLen < TaskList.MAX_TASKS) {
                 Todo newTodo = new Todo(this.taskName);
                 storage.addTask(newTodo);
@@ -46,7 +46,6 @@ public class AddCommand extends Command {
                 return ui.maxTaskReachedMessage();
             }
         } else if (this.taskType.equals(Deadline.taskTag())) {
-            int taskListLen = storage.taskListLen();
             if (taskListLen < TaskList.MAX_TASKS) {
                 Deadline newDeadline = new Deadline(taskName, this.datetime);
                 storage.addTask(newDeadline);
@@ -57,7 +56,6 @@ public class AddCommand extends Command {
                 return ui.maxTaskReachedMessage();
             }
         } else if (this.taskType.equals(Event.taskTag())) {
-            int taskListLen = storage.taskListLen();
             if (taskListLen < TaskList.MAX_TASKS) {
                 Event newEvent = new Event(this.taskName, this.datetime);
                 storage.addTask(newEvent);

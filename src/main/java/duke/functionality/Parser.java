@@ -52,7 +52,7 @@ public class Parser {
             if (checkInputLength(argsSplit)) {
                 throw new DukeException("OOPS!!! Please indicate when the deadline for the task is.");
             }
-            timeFormatChecker(argsSplit[1]);
+            checkTimeFormat(argsSplit[1]);
             return new AddCommand(Deadline.taskTag(), argsSplit[0], argsSplit[1]);
 
         } else if (command.equals(Event.taskTag())) {
@@ -64,7 +64,7 @@ public class Parser {
             if (checkInputLength(argsSplit)) {
                 throw new DukeException("OOPS!!! Please indicate the start and end time of the event.");
             }
-            timeFormatChecker(argsSplit[1]);
+            checkTimeFormat(argsSplit[1]);
             return new AddCommand(Event.taskTag(), argsSplit[0], argsSplit[1]);
 
         } else if (command.equals("done")) {
@@ -97,7 +97,7 @@ public class Parser {
         return inputSplit.length < 2;
     }
 
-    private static void timeFormatChecker(String inputString) throws DukeException {
+    private static void checkTimeFormat(String inputString) throws DukeException {
         if (!inputString.matches("\\d{4}-\\d{2}-\\d{2}")) {
             throw new DukeException("OOPS!!! Please enter a valid format for the date/time of your task.");
         }
