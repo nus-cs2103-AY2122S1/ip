@@ -106,6 +106,7 @@ public class SaveParser {
                 break;
             }
             String[] keyValuePair = this.getNextKeyValuePair();
+            assert keyValuePair.length == 2;
             switch (keyValuePair[0]) {
             case (NAME_KEY):
                 name = keyValuePair[1];
@@ -138,6 +139,7 @@ public class SaveParser {
                 break;
             }
             String[] keyValuePair = this.getNextKeyValuePair();
+            assert keyValuePair.length == 2;
             switch (keyValuePair[0]) {
             case (NAME_KEY):
                 name = keyValuePair[1];
@@ -174,6 +176,7 @@ public class SaveParser {
                 break;
             }
             String[] keyValuePair = this.getNextKeyValuePair();
+            assert keyValuePair.length == 2;
             switch (keyValuePair[0]) {
             case (NAME_KEY):
                 name = keyValuePair[1];
