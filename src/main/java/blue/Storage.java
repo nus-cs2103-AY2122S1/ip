@@ -69,6 +69,7 @@ class Storage {
             task = new Event(title, at);
         }
 
+        assert task != null : "Unable to build task from string, probably file altered wrongly";
         return task;
     }
 
