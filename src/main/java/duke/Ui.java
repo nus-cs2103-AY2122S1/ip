@@ -31,6 +31,7 @@ public class Ui {
      * @return A String listing all the tasks in the TaskList.
      */
     public String showTaskAdded(Task task, TaskList taskList) {
+        assert taskList.size() > 0 : "Size of TaskList should be more than 0";
         return "Got it. I have added this task:\n  " + task + "\n Now you have "
                 + taskList.size() + " tasks in the list.\n";
     }

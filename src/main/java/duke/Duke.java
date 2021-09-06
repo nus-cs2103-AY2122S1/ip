@@ -47,6 +47,7 @@ public class Duke extends Application {
             if (c.isExit()) {
                 System.exit(0);
             }
+            assert !response.isEmpty() : "Response should not be empty";
             return response;
         } catch (DukeException e) {
             return ui.showError(e.getMessage());

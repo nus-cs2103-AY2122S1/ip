@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -84,6 +86,7 @@ public class Storage {
      */
     public void write(TaskList taskList) {
         try {
+            assert Files.exists(Paths.get(fileName)) : "File should exist.";
             FileWriter fw = new FileWriter(fileName);
             for (int i = 0; i < taskList.size(); i++) {
                 fw.write(taskList.getTask(i) + "\n");
