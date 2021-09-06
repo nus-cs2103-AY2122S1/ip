@@ -46,6 +46,7 @@ public class Duke {
         String nextLine;
         Command nextCommand = Command.INVALID;
         do {
+            assert !parser.isBye(nextCommand) : "Program did not exit on Bye Command";
             nextLine = ui.nextLine();
             this.handleCommand(nextLine);
         } while (!parser.isBye(nextCommand));
