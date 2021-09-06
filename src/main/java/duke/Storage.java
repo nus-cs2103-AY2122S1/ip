@@ -57,21 +57,13 @@ public class Storage {
 
             switch (inputs[0]) {
             case "T":
-                tasks.add(new Todo(inputs[2]));
+                loadTodo(inputs);
                 break;
             case "D":
-                if (inputs.length == 4) {
-                    tasks.add(new Deadline(inputs[2], inputs[3]));
-                    break;
-                }
-                tasks.add(new Deadline(inputs[2], inputs[3], inputs[4]));
+                loadDeadline(inputs);
                 break;
             case "E":
-                if (inputs.length == 4) {
-                    tasks.add(new Event(inputs[2], inputs[3]));
-                    break;
-                }
-                tasks.add(new Event(inputs[2], inputs[3], inputs[4]));
+                loadEvent(inputs);
                 break;
             default:
                 break;
@@ -95,5 +87,40 @@ public class Storage {
             writer.write(tasks.get(i).toDatabaseString() + "\n");
         }
         writer.close();
+    }
+
+    /**
+     * Loads a new Todo task to the TaskList.
+     *
+     * @param inputs array of String split into each input.
+     */
+    private void loadTodo(String[] inputs) {
+        tasks.add(new Todo(inputs[2]));
+    }
+
+    /**
+     * Loads a new Todo task to the TaskList.
+     *
+     * @param inputs array of String split into each input.
+     */
+    private void loadDeadline(String[] inputs) {
+        if (inputs.length == 4) {
+            tasks.add(new Deadline(inputs[2], inputs[3]));
+            return;
+        }
+        tasks.add(new Deadline(inputs[2], inputs[3], inputs[4]));
+    }
+
+    /**
+     * Loads a new Todo task to the TaskList.
+     *
+     * @param inputs array of String split into each input.
+     */
+    private void loadEvent(String[] inputs) {
+        if (inputs.length == 4) {
+            tasks.add(new Event(inputs[2], inputs[3]));
+            return;
+        }
+        tasks.add(new Event(inputs[2], inputs[3], inputs[4]));
     }
 }

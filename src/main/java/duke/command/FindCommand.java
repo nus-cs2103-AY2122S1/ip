@@ -10,19 +10,19 @@ import duke.task.TaskList;
  */
 public class FindCommand extends Command {
 
-    /** Substring to search for in description of tasks */
+    /** Substring to search for in description of tasks. */
     private final String substring;
-    /** List of tasks to search from */
+    /** List of tasks to search from. */
     private final TaskList tasks;
 
     /**
      * Instantiates a new Find command.
      *
-     * @param userInput the user-inputted string.
+     * @param substring the user-inputted substring to find.
      * @param tasks     the list of tasks to search from.
      */
-    public FindCommand(String userInput, TaskList tasks) {
-        this.substring = userInput.split(" ", 2)[1];
+    public FindCommand(String substring, TaskList tasks) {
+        this.substring = substring;
         this.tasks = tasks;
     }
 

@@ -10,15 +10,15 @@ import java.time.format.DateTimeParseException;
  */
 public class Deadline extends Task {
 
-    /** Identifying tag 'D' for deadline task */
+    /** Identifying tag 'D' for deadline task..*/
     private final String identifier = "D";
-    /** Boolean flag to check if both Date and Time are specified by user */
+    /** Boolean flag to check if both Date and Time are specified by user. */
     private final boolean isDateAndTime;
-    /** Stores Date specified by user */
+    /** Stores Date specified by user. */
     private final LocalDate deadlineDate;
-    /** Stores Date and Time if both are specified by user */
+    /** Stores Date and Time if both are specified by user. */
     private LocalDateTime deadlineDateTime;
-    /** Stores Time specified by user */
+    /** Stores Time specified by user. */
     private LocalTime deadlineTime;
 
     /**
@@ -37,10 +37,10 @@ public class Deadline extends Task {
     /**
      * Instantiates a new Deadline.
      *
-     * @param description  the description for deadline task
-     * @param deadlineDate the deadline date
-     * @param deadlineTime the deadline time
-     * @throws DateTimeParseException exception that is thrown if the user inputs invalid date and/or time
+     * @param description  the description for deadline task.
+     * @param deadlineDate the deadline date.
+     * @param deadlineTime the deadline time.
+     * @throws DateTimeParseException exception that is thrown if the user inputs invalid date and/or time.
      */
     public Deadline(String description, String deadlineDate, String deadlineTime) throws DateTimeParseException {
         super(description);
@@ -51,7 +51,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Prints out Event task with an identifier, a done marker and the date/time specified.
+     * Prints out Deadline task with an identifier, a done marker and the date/time specified.
      *
      * @return String.
      */
