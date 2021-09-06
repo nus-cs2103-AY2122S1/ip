@@ -12,15 +12,22 @@ import java.nio.file.Paths;
 import bruh.tasklist.TaskList;
 
 /**
- * Represents the chatbot's storage function, by saving & loading the task list
- * to & from the disk appropriately.
+ * Represents the chatbot's storage function, by saving & loading the task list to & from the disk
+ * appropriately.
  */
 public class Storage {
+    private static final String CREATE_SAVE_ERROR_MSG = "Failed to create storage file: %s\n";
+    private static final String SAVE_NOT_FOUND_ERROR_MSG =
+            "Save file not found; Creating new task list\n";
+    private static final String FAILED_TO_LOAD_SAVE_ERROR_MSG =
+            "Failed to load from storage: %s\nCreating new task list\n";
+    private static final String FAILED_TO_SAVE_ERROR_MESSAGE = "Failed to save to disk: %s\n";
+
     private final Path storageFilePath;
 
     /**
-     * Constructor for the chatbot's storage function.
-     * Creates the save directory and file if it is not found.
+     * Constructor for the chatbot's storage function. Creates the save directory and file if it is
+     * not found.
      *
      * @param pathString The path to the save file.
      */
@@ -32,26 +39,25 @@ public class Storage {
                 Files.createFile(storageFilePath);
             }
         } catch (IOException e) {
-            System.out.printf("Failed to create storage file: %s\n", e.getMessage());
+            System.out.printf(CREATE_SAVE_ERROR_MSG, e.getMessage());
         }
     }
 
     /**
-     * Reads the task list from disk & returns it. If not found,
-     * generates the specified save directory & save file.
+     * Reads the task list from disk & returns it. If not found, generates the specified save
+     * directory & save file.
      *
      * @return The task list loaded from disk, an empty task list if not found.
      */
     public TaskList loadTaskList() {
         try (InputStream is = Files.newInputStream(storageFilePath);
-             ObjectInputStream ois = new ObjectInputStream(is)) {
-            // Only Task objects are written to / removed from the list
+                ObjectInputStream ois = new ObjectInputStream(is)) {
             return (TaskList) ois.readObject();
         } catch (IOException e) {
-            System.out.println("Save file not found; Creating new task list\n");
+            System.out.println(SAVE_NOT_FOUND_ERROR_MSG);
             return new TaskList();
         } catch (ClassNotFoundException e) {
-            System.out.printf("Failed to load from storage: %s\nCreating new task list\n", e.getMessage());
+            System.out.printf(FAILED_TO_LOAD_SAVE_ERROR_MSG, e.getMessage());
             return new TaskList();
         }
     }
@@ -63,10 +69,10 @@ public class Storage {
      */
     public void saveToDisk(TaskList taskList) {
         try (OutputStream os = Files.newOutputStream(storageFilePath);
-             ObjectOutputStream oos = new ObjectOutputStream(os)) {
+                ObjectOutputStream oos = new ObjectOutputStream(os)) {
             oos.writeObject(taskList);
         } catch (IOException e) {
-            System.out.printf("Failed to save to disk: %s\n", e.getMessage());
+            System.out.printf(FAILED_TO_SAVE_ERROR_MESSAGE, e.getMessage());
         }
     }
 }

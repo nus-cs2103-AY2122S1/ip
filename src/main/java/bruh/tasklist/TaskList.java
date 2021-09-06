@@ -12,28 +12,27 @@ import bruh.task.Task;
 /**
  * Encapsulates a list of tasks, as well as associated functions.
  */
-public class TaskList implements Serializable {
+public final class TaskList implements Serializable {
     private final List<Task> tasks;
-    private final boolean isFiltered;
-
-    /**
-     * Constructor for a pre-existing task list.
-     *
-     * @param tasks The pre-existing list of tasks.
-     */
-    private TaskList(List<Task> tasks) {
-        this.tasks = tasks;
-        this.isFiltered = true;
-    }
+    private final String filteredDesc;
 
     /**
      * Constructor for a new task list.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
-        this.isFiltered = false;
+        this.filteredDesc = "";
     }
 
+    /**
+     * Constructor for a filtered task list.
+     *
+     * @param tasks The filtered list of tasks.
+     */
+    private TaskList(List<Task> tasks) {
+        this.tasks = tasks;
+        this.filteredDesc = "matching ";
+    }
 
     /**
      * Returns a list of all the tasks in the list as a string.
@@ -42,10 +41,19 @@ public class TaskList implements Serializable {
      */
     public String listTasks() {
         if (tasks.isEmpty()) {
-            return getTaskCountDesc();
+            return getTaskListDesc();
         }
+        return generateTaskListString();
+    }
+
+    /**
+     * Generates a string of the tasks in the task list.
+     *
+     * @return A string containing the tasks in the task list.
+     */
+    private String generateTaskListString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Here are the ").append(isFiltered ? "matching " : "").append("tasks in your list:");
+        sb.append("Here are the ").append(filteredDesc).append("tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             sb.append(String.format("\n%d.%s", i + 1, tasks.get(i).toString()));
         }
@@ -57,10 +65,14 @@ public class TaskList implements Serializable {
      *
      * @return A description of the number of tasks in the list.
      */
-    public String getTaskCountDesc() {
-        return tasks.isEmpty() ? "There are no " + (isFiltered ? "matching " : "") + "tasks."
-                : String.format("Now you have %d%s task%s in the list.", tasks.size(), (isFiltered ? " matching" : ""),
-                tasks.size() == 1 ? "" : "s");
+    public String getTaskListDesc() {
+        String plurality = tasks.size() == 1 ? "" : "s";
+
+        if (tasks.isEmpty()) {
+            return "There are no " + filteredDesc + "tasks.";
+        }
+        return String.format("Now you have %d %stask%s in the list.", tasks.size(), filteredDesc,
+                plurality);
     }
 
     /**
@@ -89,21 +101,7 @@ public class TaskList implements Serializable {
      * @return The task marks as done.
      */
     public Task markAsDone(int indexToMarkDone) {
-        Task task = tasks.get(indexToMarkDone);
-        task.markAsDone();
-        return task;
-    }
-
-    /**
-     * Filters the task list by a specified predicate,
-     * returning a new task list.
-     *
-     * @param predicate The predicate to filter the task list by.
-     * @return A new task list containing the filtered items.
-     */
-    private TaskList filterByPredicate(Predicate<Task> predicate) {
-        List<Task> filtered = tasks.stream().filter(predicate).collect(Collectors.toList());
-        return new TaskList(filtered);
+        return tasks.get(indexToMarkDone).markAsDone();
     }
 
     /**
@@ -124,5 +122,16 @@ public class TaskList implements Serializable {
      */
     public TaskList filterBySearch(String searchTerm) {
         return filterByPredicate(task -> task.descriptionContains(searchTerm));
+    }
+
+    /**
+     * Filters the task list by a specified predicate, returning a new task list.
+     *
+     * @param predicate The predicate to filter the task list by.
+     * @return A new task list containing the filtered items.
+     */
+    private TaskList filterByPredicate(Predicate<Task> predicate) {
+        List<Task> filtered = tasks.stream().filter(predicate).collect(Collectors.toList());
+        return new TaskList(filtered);
     }
 }

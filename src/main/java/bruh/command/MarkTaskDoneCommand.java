@@ -8,6 +8,8 @@ import bruh.ui.Ui;
  * Represents a command to mark a task as done.
  */
 public class MarkTaskDoneCommand extends Command {
+    private static final String DESCRIPTION = "Nice! I've marked this task as done:\n  %s";
+
     private final int indexToMarkDone;
 
     /**
@@ -21,7 +23,6 @@ public class MarkTaskDoneCommand extends Command {
 
     @Override
     public String runAndGenerateDescription(TaskList taskList, Ui ui, Storage storage) {
-        return String.format("Nice! I've marked this task as done:\n  %s",
-                taskList.markAsDone(indexToMarkDone).toString());
+        return String.format(DESCRIPTION, taskList.markAsDone(indexToMarkDone).toString());
     }
 }
