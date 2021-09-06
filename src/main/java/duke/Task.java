@@ -2,6 +2,7 @@ package duke;
 
 /**
  * Represents a task with a description and a status.
+ * @author Zhao Peiduo
  */
 public class Task {
     private final String taskTitle;

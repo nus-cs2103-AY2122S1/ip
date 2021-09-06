@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 /**
  * The TaskList class is in charge of executing the users command on the saved record, as instructed by the parser.
+ * @author Zhao Peiduo
  */
 public class TaskList {
     private final Storage storage;
@@ -19,26 +20,15 @@ public class TaskList {
     }
 
     /**
-     * Adds the user's input to the saved record only if the user's input is of a specific form.
+     * Adds a ToDo task to the userInputRecords.
      *
      * @param userInput        input from the user.
      * @param userInputRecords the saved record.
-     * @return the response on whether a task is successfully added.
+     * @return the response on whether a ToDo is successfully added.
      */
-    public String add(String userInput, ArrayList<Task> userInputRecords) {
-        if (userInput.startsWith("todo ")) {
-            return addToDo(userInput, userInputRecords);
-        } else if (userInput.startsWith("deadline ")) {
-            return addDeadline(userInput, userInputRecords);
-        } else {
-            assert userInput.startsWith("event ");
-            return addEvent(userInput, userInputRecords);
-        }
-    }
-
-    private String addToDo(String userInput, ArrayList<Task> userInputRecords) {
-        int lengthOfToDoString = 5;
-        String description = userInput.substring(lengthOfToDoString);
+    public String addToDo(String userInput, ArrayList<Task> userInputRecords) {
+        int todoCommandLength = 5;
+        String description = userInput.substring(todoCommandLength);
         if (description.trim().isEmpty()) {
             return "OOPS!!! The description of a todo cannot be empty.\n";
         }
@@ -46,15 +36,25 @@ public class TaskList {
         return saveTask(userInputRecords, toDo);
     }
 
-    private String addDeadline(String userInput, ArrayList<Task> userInputRecords) {
+    /**
+     * Adds a Deadline task to the userInputRecords.
+     *
+     * @param userInput        input from the user.
+     * @param userInputRecords the saved record.
+     * @return the response on whether a Deadline is successfully added.
+     */
+    public String addDeadline(String userInput, ArrayList<Task> userInputRecords) {
         try {
-            int lengthOfDeadlineString = 9;
-            int byPosition = userInput.lastIndexOf("/by");
-            String description = userInput.substring(lengthOfDeadlineString, byPosition);
+            int deadlineCommandLength = 9;
+            int indexOfBy = userInput.lastIndexOf("/by");
+            if (indexOfBy == -1) {
+                return "Please indicate the deadline!";
+            }
+            String description = userInput.substring(deadlineCommandLength, indexOfBy);
             if (description.trim().isEmpty()) {
                 return "OOPS!!! The description of a deadline cannot be empty.\n";
             }
-            LocalDate deadlineDate = LocalDate.parse(userInput.substring(byPosition + 4));
+            LocalDate deadlineDate = LocalDate.parse(userInput.substring(indexOfBy + 4).trim());
             Deadline deadline = new Deadline(description, deadlineDate);
             return saveTask(userInputRecords, deadline);
         } catch (DateTimeParseException e) {
@@ -62,15 +62,25 @@ public class TaskList {
         }
     }
 
-    private String addEvent(String userInput, ArrayList<Task> userInputRecords) {
+    /**
+     * Adds an Event task to the userInputRecords.
+     *
+     * @param userInput        input from the user.
+     * @param userInputRecords the saved record.
+     * @return the response on whether an Event is successfully added.
+     */
+    public String addEvent(String userInput, ArrayList<Task> userInputRecords) {
         try {
-            int lengthOfEventString = 6;
-            int atPosition = userInput.lastIndexOf("/at");
-            String description = userInput.substring(lengthOfEventString, atPosition);
+            int eventCommandLength = 6;
+            int indexOfAt = userInput.lastIndexOf("/at ");
+            if (indexOfAt == -1) {
+                return "Please indicate the date!";
+            }
+            String description = userInput.substring(eventCommandLength, indexOfAt);
             if (description.trim().isEmpty()) {
                 return "OOPS!!! The description of an event cannot be empty.\n";
             }
-            LocalDate time = LocalDate.parse(userInput.substring(atPosition + 4));
+            LocalDate time = LocalDate.parse(userInput.substring(indexOfAt + 4).trim());
             Event event = new Event(description, time);
             return saveTask(userInputRecords, event);
         } catch (DateTimeParseException e) {
@@ -172,5 +182,97 @@ public class TaskList {
             }
             return builder.toString();
         }
+    }
+
+    /**
+     * Update a task to the task as indicated by the user.
+     *
+     * @param userInput        input from the user.
+     * @return the response on whether a task is successfully updated.
+     */
+    public String updateTask(String userInput) {
+        int indexOfTo = userInput.indexOf("/to ");
+        if (indexOfTo == -1) {
+            return "Please indicate the updated task!";
+        }
+        try {
+            int updateCommandLength = 7;
+            int indexToUpdate = Integer.parseInt(userInput.substring(updateCommandLength, indexOfTo).trim()) - 1;
+            String contentOfUpdate = userInput.substring(indexOfTo + 4);
+            if (contentOfUpdate.contains("/by")) {
+                return updateDeadline(contentOfUpdate, indexToUpdate);
+            } else if (contentOfUpdate.contains("/at")) {
+                return updateEvent(contentOfUpdate, indexToUpdate);
+            } else {
+                return updateToDo(contentOfUpdate, indexToUpdate);
+            }
+        } catch (NumberFormatException e) {
+            return "Please enter a valid ID!\n";
+        }
+    }
+
+    private String updateToDo(String contentOfUpdate, int indexToUpdate) {
+        try {
+            if (contentOfUpdate.trim().isEmpty()) {
+                return "OOPS!!! The description of an event cannot be empty.\n";
+            }
+            ToDo toDo = new ToDo(contentOfUpdate);
+            storage.getUserInputRecords().set(indexToUpdate, toDo);
+            return "Update successfully!\n" + printList();
+        } catch (IndexOutOfBoundsException e) {
+            return "Oops, the ID of the task does not exist!\n";
+        }
+    }
+
+    private String updateDeadline(String contentOfUpdate, int indexToUpdate) {
+        try {
+            int indexOfBy = contentOfUpdate.indexOf("/by ");
+            if (indexOfBy == -1) {
+                return "Please indicate the deadline!";
+            }
+            String description = contentOfUpdate.substring(0, indexOfBy);
+            if (description.trim().isEmpty()) {
+                return "OOPS!!! The description of an event cannot be empty.\n";
+            }
+            LocalDate date = LocalDate.parse(contentOfUpdate.substring((indexOfBy + 3)).trim());
+            Deadline deadline = new Deadline(description, date);
+            storage.getUserInputRecords().set(indexToUpdate, deadline);
+            return "Update successfully!\n" + printList();
+        } catch (IndexOutOfBoundsException e) {
+            return "Oops, the ID of the task does not exist!\n";
+        } catch (DateTimeParseException e) {
+            return "Please enter a valid date in the format:/at yyyy-mm-dd!\n";
+        }
+    }
+
+    private String updateEvent(String contentOfUpdate, int indexToUpdate) {
+        try {
+            int indexOfAt = contentOfUpdate.indexOf("/at ");
+            if (indexOfAt == -1) {
+                return "Please indicate the date!";
+            }
+            String description = contentOfUpdate.substring(0, indexOfAt);
+            if (description.trim().isEmpty()) {
+                return "OOPS!!! The description of an event cannot be empty.\n";
+            }
+            LocalDate date = LocalDate.parse(contentOfUpdate.substring((indexOfAt) + 3).trim());
+            Event event = new Event(description, date);
+            storage.getUserInputRecords().set(indexToUpdate, event);
+            return "Update successfully!\n" + printList();
+        } catch (IndexOutOfBoundsException e) {
+            return "Oops, the ID of the task does not exist!\n";
+        } catch (DateTimeParseException e) {
+            return "Please enter a valid date in the format:/at yyyy-mm-dd!\n";
+        }
+    }
+
+    private String printList() {
+        ArrayList<Task> userInputRecords = storage.getUserInputRecords();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Here are the tasks in your list:\n");
+        for (int i = 0; i < userInputRecords.size(); i++) {
+            stringBuilder.append("  " + (i + 1) + "." + userInputRecords.get(i) + "\n");
+        }
+        return stringBuilder.toString();
     }
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Parse user's input, identify whether it is a valid command and calls relevant method(s) to execute the command.
+ * @author Zhao Peiduo
  */
 
 public class Parser {
@@ -65,9 +66,14 @@ public class Parser {
             return tasks.search(userInput, tasks.getStorage().getUserInputRecords());
         } else if (userInput.equals("help")) {
             return printHelpMessage();
-        } else if (userInput.startsWith("todo ") || userInput.startsWith("deadline ")
-                || userInput.startsWith("event ")) {
-            return tasks.add(userInput, tasks.getStorage().getUserInputRecords());
+        } else if (userInput.startsWith("todo ")) {
+            return tasks.addToDo(userInput, tasks.getStorage().getUserInputRecords());
+        } else if (userInput.startsWith("deadline ") && userInput.contains("/by")) {
+            return tasks.addDeadline(userInput, tasks.getStorage().getUserInputRecords());
+        } else if (userInput.startsWith("event ") && userInput.contains("/at")) {
+            return tasks.addEvent(userInput, tasks.getStorage().getUserInputRecords());
+        } else if (userInput.startsWith("update ") && userInput.contains("/to")) {
+            return tasks.updateTask(userInput);
         } else {
             return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
         }
@@ -75,15 +81,11 @@ public class Parser {
 
     private String printHelpMessage() {
         StringBuilder builder = new StringBuilder();
-        builder.append("todo <description>\n");
-        builder.append("deadline <description>/by <time in format yyyy-mm-dd>\n");
-        builder.append("event <description>/at <time in format yyyy-mm-dd>\n");
-        builder.append("save <directory>\n");
-        builder.append("load <directory>\n");
-        builder.append("done <number>\n");
-        builder.append("delete <number>\n");
-        builder.append("deleteAll\n");
-        builder.append("find <keyword>\n");
+        builder.append("todo <description>\n").append("deadline <description>/by <time in format yyyy-mm-dd>\n")
+                .append("event <description>/at <time in format yyyy-mm-dd>\n").append("save <directory>\n")
+                .append("load <directory>\n").append("done <number>\n").append("delete <number>\n")
+                .append("deleteAll\n").append("find <keyword>\n")
+                .append("update <index> /to <Task in Todo/Deadline/Event format>");
         return builder.toString();
     }
 
