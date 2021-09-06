@@ -10,9 +10,9 @@
 
 <module name="Checker">
 
-  <module name="FileTabCharacter">
-    <!-- Checks that there are no tab characters in the file. -->
-  </module>
+<!--  <module name="FileTabCharacter">-->
+<!--    &lt;!&ndash; Checks that there are no tab characters in the file. &ndash;&gt;-->
+<!--  </module>-->
 
   <module name="NewlineAtEndOfFile">
     <!-- Accept LF, CR or CRLF to accomodate devs who prefer different line endings -->
@@ -84,10 +84,10 @@
     -->
 
     <!-- Validate abbreviations (consecutive capital letters) length in identifier name -->
-    <module name="AbbreviationAsWordInName">
-      <property name="ignoreFinal" value="false"/>
-      <property name="allowedAbbreviationLength" value="1"/>
-    </module>
+<!--    <module name="AbbreviationAsWordInName">-->
+<!--      <property name="ignoreFinal" value="false"/>-->
+<!--      <property name="allowedAbbreviationLength" value="1"/>-->
+<!--    </module>-->
 
     <module name="PackageName">
       <!-- Validates identifiers for package names against the supplied expression. -->
@@ -338,9 +338,9 @@
       <property name="option" value="eol"/>
     </module>
 
-    <module name="Indentation">
-      <property name="caseIndent" value="0" />
-    </module>
+<!--    <module name="Indentation">-->
+<!--      <property name="caseIndent" value="0" />-->
+<!--    </module>-->
 
     <module name="NoWhitespaceBefore">
       <!-- Checks that there is no whitespace before various unary operators. Linebreaks are allowed. -->
