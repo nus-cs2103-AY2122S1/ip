@@ -17,7 +17,7 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
@@ -26,14 +26,14 @@ public class Task {
      * @return The whether the task is done.
      */
     private String status() {
-        return this.isDone ? "X" : " ";
+        return isDone ? "X" : " ";
     }
 
     /**
      * Marks the task as done.
      */
     public void setDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
@@ -42,9 +42,9 @@ public class Task {
      * @return Task object save data.
      */
     public String saveData() {
-        String doneState = this.isDone ? "1" : "0";
+        String doneState = isDone ? "1" : "0";
 
-        return doneState + " " + this.description;
+        return doneState + " " + description;
     }
 
     /**

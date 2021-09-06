@@ -32,16 +32,6 @@ public class DukeList {
     }
 
     /**
-     * Adds a task to the list.
-     *
-     * @param text Description of the task to be added.
-     */
-    public void add(String text) {
-        tasks.add(new Task(text));
-        System.out.println("added: " + text);
-    }
-
-    /**
      * Loads task data obtained from the save file into the list.
      *
      * @param type Type of task to be loaded.
@@ -75,7 +65,7 @@ public class DukeList {
             assert state.equals("0") : "state can only be 0 or 1";
         }
 
-        this.tasks.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -108,7 +98,12 @@ public class DukeList {
     public String addDeadline(String text) throws DukeException {
         String[] strings = text.split(" /by ", 2);
 
-        String limit = strings[1];
+        int stringsLength = strings.length;
+
+        boolean hasLimit = stringsLength == 2;
+
+        String limit = hasLimit ? strings[1] : "";
+
         try {
             Deadline input = new Deadline(strings[0].trim(), limit);
 
@@ -116,7 +111,8 @@ public class DukeList {
 
             return displayTask(input);
         } catch (DateTimeParseException e) {
-            throw new DukeException("☹ OOPS!!! The deadline follows the format yyyy-MM-dd.");
+            throw new DukeException("☹ OOPS!!! The deadline follows the format"
+                    + " deadline BODY /at yyyy-MM-dd.");
         }
     }
 
@@ -176,6 +172,12 @@ public class DukeList {
      * @return The message associated to the task being deleted.
      */
     public String delete(int item) {
+        boolean isOutOfBounds = item < 1 || item > tasks.size();
+
+        if (isOutOfBounds) {
+            return "That task doesn't exist!";
+        }
+
         Task task = tasks.get(item - 1);
         tasks.remove(item - 1);
 
