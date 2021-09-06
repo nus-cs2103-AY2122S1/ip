@@ -56,10 +56,16 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a file if it does not already exist.
+     */
     private void createFile() {
         File file = new File(path);
     }
 
+    /**
+     * Creates a directory if it does not already exist.
+     */
     private void createDirectory() {
         try {
             File file = new File(path);
@@ -70,6 +76,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Checks if the task list is empty.
+     */
     private void checkEmptyTasksList(ArrayList<Task> listOfTasks) {
         try {
             if(listOfTasks.size() != 0) {
