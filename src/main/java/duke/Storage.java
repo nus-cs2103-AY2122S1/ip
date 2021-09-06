@@ -1,5 +1,10 @@
 package duke;
 
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Event;
+import duke.task.Deadline;
+
 import java.io.File;
 import java.io.FileWriter;
 
@@ -120,13 +125,4 @@ public class Storage {
         fw.write(req);
         fw.close();
     }
-
-//    /** Test */
-//    public static void run() {
-//        String filePath = "data/list.txt";
-//        File f = new File(filePath);
-//        System.out.println("full path:" + f.getAbsolutePath());
-//        System.out.println("file exists?:" + f.exists());
-//        System.out.println("is directory?:" + f.isDirectory());
-//    }
 }

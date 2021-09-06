@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.Task;
+
 import java.util.ArrayList;
 /**
  * Contains the task list e.g. it has operation to add/delete tasks in the list.

@@ -1,7 +1,14 @@
 package duke;
 
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Event;
+import duke.task.Deadline;
+
 import java.io.IOException;
+
 import java.util.ArrayList;
+
 /**
  * Deals with making sense of the user command.
  *
