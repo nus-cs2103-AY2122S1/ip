@@ -45,6 +45,7 @@ public class Duke extends Application {
         FIND,
         DONE,
         DELETE,
+        UPDATE,
         DEADLINE,
         EVENT,
         TODO,
@@ -105,6 +106,8 @@ public class Duke extends Application {
                     return makeDone(input);
                 case DELETE:
                     return deleteTask(input);
+                case UPDATE:
+                    return updateTask(input);
                 case DEADLINE:
                     return deadline(input);
                 case EVENT:
@@ -125,7 +128,7 @@ public class Duke extends Application {
      * @param actionType Type of action
      */
     public String echo(String userInput, String actionType) {
-        assert actionType.equals("removed") || actionType.equals("added") 
+        assert actionType.equals("removed") || actionType.equals("added")  || actionType.equals("updated")
                 : "Unknown action type found in echo";
         return gui.dukeResponse("Got it sir, I have " + actionType + " this task:\n "
                 + userInput + "\nNow you have " + tasks.getSize() + " tasks in the list.\n");
@@ -166,8 +169,33 @@ public class Duke extends Application {
         }
     }
     
-    private String deadline(String userInput) {
-        if (userInput.indexOf("/by")  < 11 ) {
+    private String updateTask(String userInput){
+        try{
+            int task = Integer.parseInt(userInput.substring(userInput.indexOf("/no") +  4));
+            if(task > 0 && task <= tasks.getSize()){
+                String newTask = userInput.substring(7, userInput.indexOf("/no") - 1);
+                
+                RequestType taskType = duke.Parser.parse(newTask);
+                
+                if (taskType == RequestType.DEADLINE) {
+                    return updateDeadline(newTask, task);
+                } else if (taskType == RequestType.TODO) {
+                    return updateTodo(newTask, task);
+                } else if(taskType == RequestType.EVENT){
+                    return updateEvent(newTask, task);
+                } 
+                return "Enter a valid task";
+            }
+        } catch (Exception e){
+            return "Error with input";
+        }
+        return "Error with input. Please try again";
+    }
+    
+    private String updateDeadline(String userInput, int index){
+        if(index > tasks.getSize() || index < 1){
+            return "Enter a valid task number";
+        } else if (userInput.indexOf("/by")  < 11 ) {
             return gui.dukeResponse("Enter a valid deadline activity description\n");
         } else if (userInput.length() <= userInput.indexOf("/by") +  4) {
             return gui.dukeResponse("Enter a valid deadline time\n");
@@ -178,18 +206,29 @@ public class Duke extends Application {
             try {
                 LocalDate time = LocalDate.parse(by);
                 Task t =  new Deadline(description, by);
-                tasks.addTask(t);
-                storage.addNewTask(t);
-                return echo(t.toString(), "added");
+                if(index == tasks.getSize() + 1){
+                    tasks.addTask(t);
+                    storage.addNewTask(t);
+                    return echo(t.toString(), "added");
+                } else {
+                    tasks.updateTask(t, index);
+                    storage.writeToFile(tasks);
+                    return echo(t.toString(), "updated");
+                }
+                
             } catch (Exception e) {
-                assert e.toString().startsWith("java.time.format.DateTimeParseException:") 
+                assert e.toString().startsWith("java.time.format.DateTimeParseException:")
                         : e.toString();
                 return gui.dukeResponse("Enter a valid date in the format yyyy-mm-dd\n");
             }
         }
     }
     
-    private String event(String userInput) {
+    private String deadline(String userInput) {
+        return updateDeadline(userInput, tasks.getSize() + 1);
+    }
+    
+    private String updateEvent(String userInput, int index){
         if (userInput.indexOf("/at")  < 8 ) {
             return gui.dukeResponse("Enter a valid event activity description\n");
         } else if (userInput.length() <= userInput.indexOf("/at") +  4) {
@@ -198,28 +237,48 @@ public class Duke extends Application {
             String description = userInput.substring(6, userInput.indexOf("/at") - 1);
             String at = userInput.substring(userInput.indexOf("/at") + 4);
             Task t =  new Event(description, at);
-            tasks.addTask(t);
-            storage.addNewTask(t);
-            return echo(t.toString(), "added");
-            
+            if (index == tasks.getSize() + 1) {
+                tasks.addTask(t);
+                storage.addNewTask(t);
+                return echo(t.toString(), "added");
+            } else {
+                tasks.updateTask(t, index);
+                storage.writeToFile(tasks);
+                return echo(t.toString(), "updated");
+            }
+
         }
     }
     
-    private String todo(String userInput) {
+    private String event(String userInput) {
+        return updateEvent(userInput, tasks.getSize() + 1);
+    }
+    
+    private String updateTodo(String userInput, int index){
         try {
             readActivity(userInput.substring(5));
             String description = userInput.substring(5);
             Task t = new ToDo(description);
-            tasks.addTask(t);
-            storage.addNewTask(t);
-            return echo(t.toString(), "added");
+            if (index == tasks.getSize() + 1) {
+                tasks.addTask(t);
+                storage.addNewTask(t);
+                return echo(t.toString(), "added");
+            } else {
+                tasks.updateTask(t, index);
+                storage.writeToFile(tasks);
+                return echo(t.toString(), "updated");
+            }
         } catch (DukeException e) {
             return gui.dukeResponse(e.getMessage());
         } catch (StringIndexOutOfBoundsException e) {
-            assert userInput.length() < 6 
+            assert userInput.length() < 6
                     : "todo request was supposed to be smaller than 6 characters";
             return gui.dukeResponse("Enter a valid todo activity\n");
         }
+    }
+    
+    private String todo(String userInput) {
+        return updateTodo(userInput, tasks.getSize() + 1);
     }
     
     private static void readActivity(String userTask) throws DukeException {

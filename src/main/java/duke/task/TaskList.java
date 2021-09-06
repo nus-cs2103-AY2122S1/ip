@@ -88,6 +88,16 @@ public class TaskList {
     }
 
     /**
+     * Update a specific task on the list.
+     * 
+     * @param task The task which is to be updated
+     * @param number the position which has to be updated
+     */
+    public void updateTask(Task task, int number){
+        items.set(number - 1, task);
+    }
+
+    /**
      * Returns user the tasks that he/she searched for.
      * 
      * @param substring the user search request
