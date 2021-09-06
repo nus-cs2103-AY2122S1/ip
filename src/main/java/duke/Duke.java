@@ -156,7 +156,7 @@ public class Duke {
 
     /**
      * main method.
-     * @param args input from the user to control duke.Duke.
+     * @param args input from the user to control Duke.
      */
     public static void main(String[] args) {
         Duke.awaken();
