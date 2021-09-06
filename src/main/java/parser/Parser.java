@@ -8,6 +8,7 @@ import duke.Duke;
 import storage.Storage;
 import task.Deadline;
 import task.Event;
+import task.Task;
 import task.TaskList;
 import task.Todo;
 import ui.Ui;
@@ -49,6 +50,8 @@ public class Parser {
             return parseRemoveCall(userInput);
         } else if (isFindCall(userInput)) {
             return parseFindCall(userInput);
+        } else if (isSnoozeCall(userInput)) {
+            return parseSnoozeCall(userInput);
         } else if (userInput.startsWith("todo ")) {
             return parseTodoCall(userInput, tasks);
         } else if (userInput.startsWith("deadline ")) {
@@ -65,7 +68,7 @@ public class Parser {
      * @param str String input from user.
      * @return True if input is a valid done call, false otherwise.
      */
-    public boolean isDoneCall (String str) {
+    private boolean isDoneCall (String str) {
         if (str == null) {
             return false;
         }
@@ -88,7 +91,7 @@ public class Parser {
      * @param str String input from user.
      * @return True if input is a valid remove call, false otherwise.
      */
-    public boolean isRemoveCall (String str) {
+    private boolean isRemoveCall (String str) {
         if (str == null) {
             return false;
         }
@@ -186,7 +189,7 @@ public class Parser {
      * @param str User input.
      * @return True if valid find call, false otherwise.
      */
-    public boolean isFindCall(String str) {
+    private boolean isFindCall(String str) {
         if (str == null) {
             return false;
         }
@@ -303,6 +306,81 @@ public class Parser {
                 result += ((i + 1) + "." + matchingTasks.getTask(i).toString() + "\n");
             }
             return result;
+        }
+    }
+
+    /**
+     * Check if user input is a command to snooze a task.
+     * @param str User input
+     * @return True if user input did request for a snooze call, false otherwise
+     */
+    private boolean isSnoozeCall(String str) {
+        if (str == null) {
+            return false;
+        }
+        if (str.length() < 6) {
+            return false;
+        }
+        try {
+            // Split userInput by spaces, split should be ['snooze', index, date, time]
+            String[] split = str.split(" ");
+            int d = Integer.parseInt(split[1]);
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
+        if (!str.startsWith("snooze ")) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Handles user input when a snooze command is requested.
+     * @param str User input
+     * @return Duke response to snooze call
+     */
+    private String parseSnoozeCall(String str) {
+        // Split userInput by spaces, split should be ['snooze', index, date, time]
+        String[] split = str.split(" ");
+        int index = Integer.parseInt(split[1]);
+        if (split.length != 4) {
+            return "Snooze command must be in the format 'snooze task-number YYYY-MM-DD HH:MM'";
+        }
+        if (index > tasks.size()) {
+            return "Sorry, there are only " + tasks.size() + " tasks currently.";
+        }
+        if (tasks.getTask(index - 1) instanceof Todo) {
+            return "Sorry, you cannot snooze a Todo Task.";
+        }
+        try {
+            Task toBeModified = tasks.getTask(index - 1);
+            if (toBeModified instanceof Event) {
+                // Need to cast to Event in order to utilise modifyDateTime method
+                Event eventToBeModified = (Event) toBeModified;
+                eventToBeModified.modifyDateTime(LocalDate.parse(split[2]),
+                        LocalTime.parse(split[3]));
+                // Date and time is concatenated into one string
+                String datetime = split[2] + " " + split[3];
+                storage.modifyDateTimeData(datetime, index - 1);
+                return "Successfully snoozed Task " + index + " to " + datetime;
+            } else if (toBeModified instanceof Deadline) {
+                // Need to cast to Deadline in order to utilise modifyDateTime method
+                Deadline deadlineToBeModified = (Deadline) toBeModified;
+                deadlineToBeModified.modifyDateTime(LocalDate.parse(split[2]),
+                        LocalTime.parse(split[3]));
+                // Date and time is concatenated into one string
+                String datetime = split[2] + " " + split[3];
+                storage.modifyDateTimeData(datetime, index - 1);
+                return "Successfully snoozed Task " + index + " to " + datetime;
+            } else {
+                // A Todo object should never reach this point, since it has already been checked
+                assert false;
+                return "Oops! There is an issue with your Task List, you cannot snooze this task right now.";
+            }
+        } catch (DateTimeParseException e) {
+            return " Date and Time must be specified by YYYY-MM-DD HH:MM";
+        } catch (ClassCastException e) {
+            return "Oops! There is an issue with your Task List, you cannot snooze this task right now.";
         }
     }
 }

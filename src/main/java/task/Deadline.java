@@ -30,4 +30,14 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
                 + time.format(DateTimeFormatter.ofPattern("h:mm a")) + ")";
     }
+
+    /**
+     * Changes the date and time of the current Deadline.
+     * @param date Date to be changed to
+     * @param time Time to be changed to
+     */
+    public void modifyDateTime(LocalDate date, LocalTime time) {
+        this.date = date;
+        this.time = time;
+    }
 }

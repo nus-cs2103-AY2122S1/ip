@@ -82,9 +82,9 @@ public class Storage {
 
     /**
      * Removes a Task from the data file based on the index of the Task.
-     * @param number Index of Task to be removed.
+     * @param taskIndex Index of Task to be removed.
      */
-    public void removeData(int number) {
+    public void removeData(int taskIndex) {
         File fileToBeModified = new File(filePath.concat(fileName));
         String newContent = "";
         try {
@@ -92,7 +92,7 @@ public class Storage {
             int current = 0;
             while (scanner.hasNextLine()) {
                 String nextLine = scanner.nextLine();
-                if (current != number) {
+                if (current != taskIndex) {
                     newContent = newContent + nextLine + "\n";
                 }
                 current++;
@@ -116,9 +116,9 @@ public class Storage {
 
     /**
      * Mark a Task as done in the data file.
-     * @param number Index of Task to be marked as done.
+     * @param taskIndex Index of Task to be marked as done.
      */
-    public void markAsDoneData(int number) {
+    public void markAsDoneData(int taskIndex) {
         File fileToBeModified = new File(filePath.concat(fileName));
         String newContent = "";
         try {
@@ -126,7 +126,7 @@ public class Storage {
             int current = 0;
             while (scanner.hasNextLine()) {
                 String nextLine = scanner.nextLine();
-                if (current == number) {
+                if (current == taskIndex) {
                     String[] strArr = nextLine.split(",");
                     newContent = newContent + markTaskStringAsDone(strArr);
                 } else {
@@ -173,21 +173,21 @@ public class Storage {
      * Add new Task to save into the data file.
      * @param taskName Name of task to be saved.
      * @param type Type of Task (Event, Deadline, or Todo).
-     * @param time Time of Task (if applicable).
+     * @param datetime Date and time of Task (if applicable).
      */
-    public void newTaskToData(String taskName, Duke.Type type, String time) {
+    public void newTaskToData(String taskName, Duke.Type type, String datetime) {
         try {
             FileWriter dataWriter = new FileWriter(filePath.concat(fileName), true);
             if (type == Duke.Type.TODO) {
                 dataWriter.write("T,0," + taskName + ", \n");
                 dataWriter.close();
             } else if (type == Duke.Type.DEADLINE) {
-                dataWriter.write("D,0," + taskName + "," + time + "\n");
+                dataWriter.write("D,0," + taskName + "," + datetime + "\n");
                 dataWriter.close();
             } else {
                 // Type at this point should be EVENT
                 assert type == Duke.Type.EVENT;
-                dataWriter.write("E,0," + taskName + "," + time + "\n");
+                dataWriter.write("E,0," + taskName + "," + datetime + "\n");
                 dataWriter.close();
             }
         } catch (IOException e) {
@@ -202,5 +202,52 @@ public class Storage {
      */
     private String markTaskStringAsDone(String[] taskStr) {
         return taskStr[0] + ",1," + taskStr[2] + "," + taskStr[3] + "\n";
+    }
+
+    /**
+     *
+     * @param datetime
+     */
+    public void modifyDateTimeData(String datetime, int taskIndex) {
+        File fileToBeModified = new File(filePath.concat(fileName));
+        String newContent = "";
+        try {
+            Scanner scanner = new Scanner(fileToBeModified);
+            int current = 0;
+            while (scanner.hasNextLine()) {
+                String nextLine = scanner.nextLine();
+                if (current != taskIndex) {
+                    newContent = newContent + nextLine + "\n";
+                } else {
+                    newContent = newContent + modifyTaskStringDateTime(nextLine, datetime);
+                }
+                current++;
+            }
+            FileWriter writer = new FileWriter(fileToBeModified);
+            writer.write(newContent);
+
+            try {
+                //Closing the resources
+                scanner.close();
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *
+     * @param nextLine
+     * @param datetime
+     * @return
+     */
+    private String modifyTaskStringDateTime(String nextLine, String datetime) {
+        String[] strArr = nextLine.split(",");
+        return strArr[0] + "," + strArr[1] + "," + strArr[2] + "," + datetime + "\n";
     }
 }

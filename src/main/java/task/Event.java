@@ -30,4 +30,14 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
                 + time.format(DateTimeFormatter.ofPattern("h:mm a")) + ")";
     }
+
+    /**
+     * Changes the date and time of the current Event.
+     * @param date Date to be changed to
+     * @param time Time to be changed to
+     */
+    public void modifyDateTime(LocalDate date, LocalTime time) {
+        this.date = date;
+        this.time = time;
+    }
 }
