@@ -17,7 +17,7 @@ public class Storage {
      */
     public static void updateLocalFile(TaskList taskList) throws IOException {
 
-        ArrayList<Task> tasks = taskList.arrayList;
+        ArrayList<Task> tasks = taskList.listOfTasks;
         FileWriter fileWriter = new FileWriter(SERIALIZATION_PATH);
         for (Task task : tasks) {
             StringBuilder sb = new StringBuilder();
