@@ -11,9 +11,8 @@ public class Ui {
      * Greets the user upon initialization of a Dino object
      */
     public static String greeting() {
-        String message = "Hello! I'm dino, your cute dinosaur bot.\n"
+        return "Hello! I'm dino, your cute dinosaur bot.\n"
                 + "Anything I can do for you?";
-        return message;
     }
 
     /**
@@ -25,9 +24,8 @@ public class Ui {
      */
     public String exit(Storage storage, TaskList taskList) {
         storage.saveToStorage(taskList.getTaskList());
-        String message = "Goodbye~ \n"
+        return "Goodbye~ \n"
                 + "Your cute Dino is always around you :D";
-        return message;
     }
 
 }

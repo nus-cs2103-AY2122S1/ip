@@ -1,13 +1,11 @@
 package dino.util;
 
-import dino.exception.*;
-
 /**
  * Deals with making sense of the user command
  */
 public class Parser {
 
-    public enum CMDTYPE {TODO, DEADLINE, EVENT, DONE, DELETE, LIST, FIND, BYE, INVALID};
+    public enum CMDTYPE {TODO, DEADLINE, EVENT, DONE, DELETE, LIST, FIND, BYE, INVALID}
 
     /**
      * Interprets the user input command and parses it into one of the messages in the

@@ -34,9 +34,6 @@ public class Storage {
     /**
      * Opens the local storage file and loads data from it
      * Creates a new empty file at the specified path if there is no file under that path
-     *
-     * @throws IOException if the file cannot be loaded from the path specified, or the file
-     * does not exist but also fails to created
      */
     public List<Task> loadStorage() {
         File file = new File(filePath);

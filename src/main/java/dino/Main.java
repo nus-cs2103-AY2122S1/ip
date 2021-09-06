@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Dino dino = new Dino();
+    private final Dino dino = new Dino();
 
     @Override
     public void start(Stage stage) {
