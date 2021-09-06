@@ -106,7 +106,6 @@ public class SaveParser {
                 break;
             }
             String[] keyValuePair = this.getNextKeyValuePair();
-            assert keyValuePair.length == 2;
             switch (keyValuePair[0]) {
             case (NAME_KEY):
                 name = keyValuePair[1];
@@ -118,6 +117,7 @@ public class SaveParser {
                 // invalid line
             }
             if (argsFound.containsKey(keyValuePair[0])) {
+                assert keyValuePair.length == 2;
                 argsFound.put(keyValuePair[0], true);
             }
         }
@@ -139,7 +139,6 @@ public class SaveParser {
                 break;
             }
             String[] keyValuePair = this.getNextKeyValuePair();
-            assert keyValuePair.length == 2;
             switch (keyValuePair[0]) {
             case (NAME_KEY):
                 name = keyValuePair[1];
@@ -154,6 +153,7 @@ public class SaveParser {
                 // invalid line
             }
             if (argsFound.containsKey(keyValuePair[0])) {
+                assert keyValuePair.length == 2;
                 argsFound.put(keyValuePair[0], true);
             }
         }
@@ -176,7 +176,6 @@ public class SaveParser {
                 break;
             }
             String[] keyValuePair = this.getNextKeyValuePair();
-            assert keyValuePair.length == 2;
             switch (keyValuePair[0]) {
             case (NAME_KEY):
                 name = keyValuePair[1];
@@ -191,6 +190,7 @@ public class SaveParser {
                 // invalid line
             }
             if (argsFound.containsKey(keyValuePair[0])) {
+                assert keyValuePair.length == 2;
                 argsFound.put(keyValuePair[0], true);
             }
         }
