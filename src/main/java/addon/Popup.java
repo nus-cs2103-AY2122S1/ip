@@ -59,7 +59,7 @@ public class Popup {
         window.setMinWidth(250);
 
         Label confirmationMessage = new Label();
-        confirmationMessage.setText("Are you sure you want to delete the following task:\n"+ message);
+        confirmationMessage.setText(message);
         HBox buttons = new HBox();
         buttons.setSpacing(10);
         buttons.setPadding(INSETS);

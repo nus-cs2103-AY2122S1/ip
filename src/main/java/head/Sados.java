@@ -73,7 +73,8 @@ public class Sados extends Application {
         Button delete = new Button("Delete");
         delete.setOnAction(e -> {
             Task selected = listView.getSelectionModel().getSelectedItem();
-            boolean isConfirm = Popup.confirmationPopup(selected.toString());
+            boolean isConfirm = Popup.confirmationPopup("Are you sure you want to delete the following task:\n"
+                    + selected.toString());
             if (isConfirm) {
                 tasks.remove(selected);
             }
@@ -120,7 +121,7 @@ public class Sados extends Application {
                     Popup.errorPopup("Name field is empty!");
                 } else {
                     Todo add = new Todo(nameInputString);
-                    tasks.add(add);
+                    addTask(add);
                 }
             } else if (option.equals("Search") && dateInputIsEmpty) {
                 if (nameInputIsEmpty) {
@@ -151,10 +152,10 @@ public class Sados extends Application {
                             } else {
                                 if (option.equals("Event")) {
                                     Event add = new Event(nameInputString, date);
-                                    tasks.add(add);
+                                    addTask(add);
                                 } else if (option.equals("Deadline")) {
                                     Deadline add = new Deadline(nameInputString, date);
-                                    tasks.add(add);
+                                    addTask(add);
                                 }
                             }
                         }
@@ -188,6 +189,24 @@ public class Sados extends Application {
         Scene home = new Scene(borders, 500, 250);
         stage.setScene(home);
         stage.show();
+    }
+
+    /**
+     * Checks for duplicates in the tasklist, and asks if duplicates should be added.
+     *
+     * @param task task to be added to the list.
+     */
+    private void addTask(Task task) {
+
+        boolean doesUserCareAboutDupes = true;
+        boolean canAddTask = true;
+
+        if (tasks.contains(task)) {
+            canAddTask = Popup.confirmationPopup("Duplicate task detected. Add anyway?");
+        }
+        if (canAddTask) {
+            tasks.add(task);
+        }
     }
 
     /**

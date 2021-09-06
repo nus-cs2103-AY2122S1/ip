@@ -13,10 +13,10 @@ public class Task {
     /**
      * Task constructor.
      *
-     * @param description Name of task.
+     * @param taskName Name of task.
      */
-    public Task(String description) {
-        this.taskName = description;
+    public Task(String taskName) {
+        this.taskName = taskName;
         this.isDone = false;
     }
 
@@ -25,7 +25,7 @@ public class Task {
     }
 
     /**
-     * Checks if the description contains the keyword provided.
+     * Checks if the taskName contains the keyword provided.
      *
      * @param query String to be queried.
      * @return true if found, false otherwise.
@@ -35,11 +35,11 @@ public class Task {
         int queryLength = querySplit.length;
 
         String[] nameSplit = taskName.split(" ");
-        int descriptionLength = nameSplit.length;
+        int taskNameLength = nameSplit.length;
 
-        if (descriptionLength < queryLength) {
+        if (taskNameLength < queryLength) {
             return false;
-        } else if (descriptionLength == queryLength) {
+        } else if (taskNameLength == queryLength) {
             return taskName.equalsIgnoreCase(query);
         } else {
             String[] updatedNameArray = concatNWords(nameSplit, queryLength);
@@ -85,12 +85,16 @@ public class Task {
         /**
          * Deadline constructor.
          *
-         * @param description Name of deadline.
+         * @param taskName Name of deadline.
          * @param by Deadline of task.
          */
-        public Deadline(String description, LocalDate by) {
-            super(description);
+        public Deadline(String taskName, LocalDate by) {
+            super(taskName);
             this.date = by;
+        }
+
+        public boolean queryIfDateEquals(LocalDate theirDate) {
+            return theirDate.equals(date);
         }
 
         @Override
@@ -98,8 +102,14 @@ public class Task {
             return "[D]" + super.toString() + " (by: " + Ui.printDate(date) + ")";
         }
 
-        public boolean queryIfDateEquals(LocalDate theirDate) {
-            return theirDate.equals(date);
+        @Override
+        public boolean equals(Object o) {
+            if (o instanceof Deadline) {
+                Deadline d = (Deadline) o;
+                return (d.taskName.equals(taskName) && d.date.equals(date));
+            } else {
+                return false;
+            }
         }
     }
 
@@ -111,10 +121,10 @@ public class Task {
         /**
          * Todo constructor.
          *
-         * @param description Name of task.
+         * @param taskName Name of task.
          */
-        public Todo(String description) {
-            super(description);
+        public Todo(String taskName) {
+            super(taskName);
         }
 
         @Override
@@ -122,6 +132,15 @@ public class Task {
             return "[T]" + super.toString();
         }
 
+        @Override
+        public boolean equals(Object o) {
+            if (o instanceof Task) {
+                Task t = (Task) o;
+                return t.taskName.equals(taskName);
+            } else {
+                return false;
+            }
+        }
     }
 
     /**
@@ -134,11 +153,11 @@ public class Task {
         /**
          * Event constructor.
          *
-         * @param description Name of event.
+         * @param taskName Name of event.
          * @param at Date of event.
          */
-        public Event(String description, LocalDate at) {
-            super(description);
+        public Event(String taskName, LocalDate at) {
+            super(taskName);
             this.date = at;
         }
 
@@ -149,6 +168,16 @@ public class Task {
         @Override
         public String toString() {
             return "[E]" + super.toString() + " (at: " + Ui.printDate(date) + ")";
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (o instanceof Event) {
+                Event e = (Event) o;
+                return (e.taskName.equals(taskName) && e.date.equals(date));
+            } else {
+                return false;
+            }
         }
     }
 }
