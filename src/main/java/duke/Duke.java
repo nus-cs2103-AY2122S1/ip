@@ -42,9 +42,9 @@ public class Duke {
     public Message loadTaskList() {
         try {
             taskList = new TaskList(storage.importTask(), ui, storage);
-            return ui.loadTaskSuccessMessage();
+            return ui.formatLoadTaskSuccessMessage();
         } catch (FileNotFoundException e) {
-            return ui.importTaskErrorMessage();
+            return ui.formatImportTaskErrorMessage();
         }
     }
 
@@ -52,7 +52,7 @@ public class Duke {
      * Starts the chatbot and get it to chat with the user.
      */
     private void chat() {
-        ui.greetMessage().printMessage();
+        ui.formatGreetMessage().printMessage();
         loadTaskList().printMessage();
         String message;
         Command command;
@@ -67,10 +67,10 @@ public class Duke {
                     command.execute(taskList, ui).printMessage();
                 }
             } catch (DukeException e) {
-                ui.chatErrorMessage().printMessage();
+                ui.formatChatErrorMessage().printMessage();
             }
         }
-        ui.exitMessage().printMessage();
+        ui.formatExitMessage().printMessage();
     }
 
     /**
@@ -84,12 +84,12 @@ public class Duke {
         try {
             Command command = Parser.parseChat(message);
             if (command == null) {
-                return ui.exitMessage().toString();
+                return ui.formatExitMessage().toString();
             } else {
                 return command.execute(taskList, ui).toString();
             }
         } catch (DukeException e) {
-            return ui.chatErrorMessage().toString();
+            return ui.formatChatErrorMessage().toString();
         }
     }
 

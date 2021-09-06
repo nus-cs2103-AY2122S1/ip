@@ -37,7 +37,7 @@ public class DeadlineCommand implements Command {
             String[] details = message.split(Keyword.DEADLINE.getSeparator());
             return taskList.addDeadline(details[0].substring(Keyword.DEADLINE.length() + 1), details[1]);
         } catch (IndexOutOfBoundsException e) {
-            return ui.deadlineErrorMessage();
+            return ui.formatDeadlineErrorMessage();
         }
     }
 }

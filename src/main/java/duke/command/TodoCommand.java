@@ -36,7 +36,7 @@ public class TodoCommand implements Command {
         try {
             return taskList.addTodo(message.substring(Keyword.TODOS.length() + 1));
         } catch (IndexOutOfBoundsException e) {
-            return ui.todoErrorMessage();
+            return ui.formatTodoErrorMessage();
         }
     }
 }

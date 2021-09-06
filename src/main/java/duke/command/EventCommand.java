@@ -36,7 +36,7 @@ public class EventCommand implements Command {
             String[] details = message.split(Keyword.EVENTS.getSeparator());
             return taskList.addEvent(details[0].substring(Keyword.EVENTS.length() + 1), details[1]);
         } catch (IndexOutOfBoundsException e) {
-            return ui.eventErrorMessage();
+            return ui.formatEventErrorMessage();
         }
     }
 }

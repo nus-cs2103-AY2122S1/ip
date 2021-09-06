@@ -56,12 +56,12 @@ public class Storage {
                             bufferedWriter.write(task.saveOutput());
                             bufferedWriter.newLine();
                         } catch (IOException e) {
-                            ui.exportTaskErrorMessage(task);
+                            ui.formatExportTaskErrorMessage(task);
                         }
                     });
             bufferedWriter.flush();
         } catch (IOException e) {
-            ui.exportTaskErrorMessage();
+            ui.formatExportTaskErrorMessage();
         }
     }
 
@@ -85,14 +85,14 @@ public class Storage {
                                 taskList.add(new Deadlines(taskData[1], taskData[3],
                                         taskData[2].equals("1") ? true : false));
                             } catch (ParseException e) {
-                                ui.importTaskErrorMessage(taskData[1]);
+                                ui.formatImportTaskErrorMessage(taskData[1]);
                             }
                         } else if (taskData[0].equals(Keyword.EVENTS.getSaveWord())) {
                             try {
                                 taskList.add(new Events(taskData[1], taskData[3],
                                         taskData[2].equals("1") ? true : false));
                             } catch (ParseException e) {
-                                ui.importTaskErrorMessage(taskData[1]);
+                                ui.formatImportTaskErrorMessage(taskData[1]);
                             }
                         } else if (taskData[0].equals(Keyword.TODOS.getSaveWord())) {
                             taskList.add(new ToDos(taskData[1],
