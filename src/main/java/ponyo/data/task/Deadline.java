@@ -1,5 +1,7 @@
 package ponyo.data.task;
 
+import ponyo.common.Prefixes;
+
 /**
  * A Deadline task object that has a description and a by-date.
  */
@@ -19,11 +21,11 @@ public class Deadline extends Task {
 
     @Override
     public String toStringInFile() {
-        return "D - " + super.toStringInFile() + " - " + by;
+        return Prefixes.PREFIX_DEADLINE + " - " + super.toStringInFile() + " - " + by;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[" + Prefixes.PREFIX_DEADLINE + "]" + super.toString() + " (by: " + by + ")";
     }
 }

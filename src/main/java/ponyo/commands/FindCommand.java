@@ -35,6 +35,12 @@ public class FindCommand extends Command {
         return getMatchingTasks(matchingTasks);
     }
 
+    /**
+     * Get all matching task to keyword
+     *
+     * @param matchingTasks a list of Task objects
+     * @return string representation of all matching tasks to print
+     */
     private String[] getMatchingTasks(ArrayList<Task> matchingTasks) {
         String[] args = new String[matchingTasks.size() + 1];
         args[0] = "Here are the matching tasks in your list: ";
