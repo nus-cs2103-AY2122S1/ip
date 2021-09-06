@@ -31,9 +31,14 @@ public class TaskList {
      * @param task task to be added to the list
      */
     public void add(Task task) {
-            listOfTasks.add(task);
+        listOfTasks.add(task);
     }
 
+    /**
+     * Checks whether a task is currently in the task list.
+     * @param task the task to be checked against the task list
+     * @return true if and only if the task is in the task list
+     */
     public boolean contains(Task task) {
         for (Task tsk : listOfTasks) {
             if (tsk.equals(task)) {

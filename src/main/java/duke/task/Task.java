@@ -55,10 +55,12 @@ public class Task {
         return base;
     }
 
-    public boolean equals(Task task) {
-        if (task.getClass() == this.getClass()
-                && task.description.equals(this.description)) {
-            return true;
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Task) {
+            Task task = (Task) object;
+            return task.getClass() == this.getClass()
+                    && task.description.equals(this.description);
         }
         return false;
     }
