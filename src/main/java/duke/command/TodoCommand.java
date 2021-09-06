@@ -9,8 +9,8 @@ import duke.util.Ui;
  * Handles the command for new todo.
  *
  * @author marcuspeh
- * @version A-JavaDoc
- * @since 23 Aug 2021
+ * @version A-Assertions
+ * @since 6 Sep 2021
  */
 public class TodoCommand implements Command {
     /** Stores the message entered by the user. */
@@ -33,7 +33,11 @@ public class TodoCommand implements Command {
      */
     @Override
     public Message execute(TaskList taskList, Ui ui) {
+        assert taskList != null : " Tasklist is required by command.";
+        assert ui != null : " Ui is required by command.";
+
         try {
+            assert message.length() > Keyword.TODOS.length() : "Find is in the following format 'find <parameter>'";
             return taskList.addTodo(message.substring(Keyword.TODOS.length() + 1));
         } catch (IndexOutOfBoundsException e) {
             return ui.formatTodoErrorMessage();

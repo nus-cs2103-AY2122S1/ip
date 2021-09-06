@@ -9,8 +9,8 @@ import duke.util.Ui;
  * Handles the command for done.
  *
  * @author marcuspeh
- * @version A-JavaDoc
- * @since 23 Aug 2021
+ * @version A-Assertions
+ * @since 6 Sep 2021
  */
 public class DoneCommand implements Command {
     /** Stores the message entered by the user. */
@@ -33,7 +33,11 @@ public class DoneCommand implements Command {
      */
     @Override
     public Message execute(TaskList taskList, Ui ui) {
+        assert taskList != null : " Tasklist is required by command.";
+        assert ui != null : " Ui is required by command.";
+
         try {
+            assert message.length() > Keyword.DONE.length() : "Done is in the following format 'done <number>'";
             return taskList.markDone(Integer.parseInt(message.substring(Keyword.DONE.length() + 1)));
         } catch (NumberFormatException e) {
             return ui.formatDoneErrorMessage();

@@ -13,8 +13,8 @@ import duke.util.Ui;
  * Handles the command for list.
  *
  * @author marcuspeh
- * @version A-JavaDoc
- * @since 23 Aug 2021
+ * @version A-Assertions
+ * @since 6 Sep 2021
  */
 public class ListCommand implements Command {
     /**
@@ -26,6 +26,9 @@ public class ListCommand implements Command {
      */
     @Override
     public Message execute(TaskList taskList, Ui ui) {
+        assert taskList != null : " Tasklist is required by command.";
+        assert ui != null : " Ui is required by command.";
+
         List<Task> allTask = taskList.getTaskList();
         String[] task = IntStream.range(0, allTask.size())
                 .mapToObj(x -> (x + 1) + ". " + allTask.get(x).toString())
