@@ -9,10 +9,12 @@ import duke.utils.*;
  * Represent an deletion action to be executed.
  */
 public class DeleteCommand extends Command{
-    String index;
+    Integer index;
 
     public DeleteCommand(String input){
-        index = input.replaceAll("[^0-9]", "");
+        Integer parsedIndex = Integer.parseInt(input.replaceAll("[^0-9]", ""));
+        index = parsedIndex-1;
+        assert(index>=0);
     }
 
     /**
@@ -26,7 +28,7 @@ public class DeleteCommand extends Command{
     public String execute(TaskList tasks, Ui ui, Storage storage){
         try {
             tasks.deleteTask(index);
-            Storage.removeLine(Integer.parseInt(index)-1);
+            Storage.removeLine(index);
             return "Deleted!";
         } catch (Exception e){
             System.out.println(e);

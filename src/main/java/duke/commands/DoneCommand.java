@@ -9,10 +9,12 @@ import duke.utils.*;
  * Represent an Done action to be executed.
  */
 public class DoneCommand extends Command {
-    String index;
+    Integer index;
 
-    public DoneCommand(String input){
-        index = input.replaceAll("[^0-9]", "");
+    public DoneCommand(String input) {
+        Integer parsedIndex = Integer.parseInt(input.replaceAll("[^0-9]", ""));
+        index = parsedIndex-1;
+        assert(index>=0);
     }
 
     /**
@@ -27,7 +29,7 @@ public class DoneCommand extends Command {
         try {
             Task task = tasks.getTask(index);
             task.markAsDone();
-            Storage.updateLine(Integer.parseInt(index)-1);
+            Storage.updateLine(index);
             return "Nice! I've marked this task as done: " + task;
         } catch (Exception e) {
             return e.getMessage();

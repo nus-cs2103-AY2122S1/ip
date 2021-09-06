@@ -32,10 +32,9 @@ public class TaskList {
      * @param input   the index of the task
      * @return Specific task of interest
      */
-    public Task getTask(String input) {
+    public Task getTask(Integer input) {
         try {
-            int taskIndex = Integer.parseInt(input);
-            return userInputs.get(taskIndex - 1);
+            return userInputs.get(input);
         } catch (Exception e) {
             System.out.println(e);
             return null;
@@ -53,7 +52,7 @@ public class TaskList {
 
     /**
      * Adds a specific task to memory and prints out confirmations
-     * @param input   the task of interest
+     * @param task   the task of interest
      * 
      */
     public void addTask(Task task) throws DukeException {
@@ -67,12 +66,11 @@ public class TaskList {
      * Removes a specific task to memory and prints out confirmations
      * @param input  the index of task of interest
      */
-    public void deleteTask(String input) {
+    public void deleteTask(Integer input) {
         try {
             System.out.println("Noted. I've removed this task: ");
-            int taskIndex = Integer.parseInt(input);
-            Task task = userInputs.get(taskIndex - 1);
-            userInputs.remove(taskIndex - 1);
+            Task task = userInputs.get(input);
+            userInputs.remove(input);
             System.out.println(" " + task);
             task = null;
             System.out.println("Now you have " + userInputs.size() + " tasks in the list.");
