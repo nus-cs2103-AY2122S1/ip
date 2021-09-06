@@ -286,7 +286,10 @@ public class Ui {
      * @return The String representation of deadline including the days between.
      */
     public static String withinDeadlineMessage(Deadline d, long daysWithin, int index) {
-        if (daysWithin == 1) {
+        if (daysWithin < 0) {
+            long overdue = Math.abs(daysWithin);
+            return index + ". " + d.toString() + " (overdue by " + overdue + " days)\n";
+        } else if (daysWithin == 1) {
             return index + ". " + d.toString() + " (" + daysWithin + " day)\n";
         } else {
             return index + ". " + d.toString() + " (" + daysWithin + " days)\n";
