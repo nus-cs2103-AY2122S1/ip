@@ -36,8 +36,8 @@ public class Parser {
     public static Command parse(String fullCommand, TaskList taskList) throws DukeException {
         // Find case based on first word of command
         String[] parsedCommand = fullCommand.split("\\s+", 3);
-        String commandName = parsedCommand[0];
-        switch (commandName) {
+        assert parsedCommand.length < 4 : "initial split is not done properly.";
+        switch (parsedCommand[0]) {
 
         // "bye" command given
         case "bye":
