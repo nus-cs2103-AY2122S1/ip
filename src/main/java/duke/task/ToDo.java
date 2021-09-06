@@ -29,4 +29,12 @@ public class ToDo extends Task {
         return "T | " + super.saveToFile();
     }
 
+    @Override
+    public int compareTo(Task task) {
+        if (task instanceof Deadline || task instanceof Event) {
+            return this.GREATER;
+        }
+
+        return this.EQUAL;
+    }
 }

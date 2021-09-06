@@ -165,5 +165,12 @@ public class Duke {
     public static String getGreeting() {
         return GUI.printOpeningMessage();
     }
+
+    /**
+     * Sorts tasks by their deadline or event occurring time.
+     */
+    public void sortTasks() {
+        this.listOfTasks.sortListOfTasks();
+    }
 }
 
