@@ -31,7 +31,7 @@ public class DoneCommand extends Command {
     public String execute(TaskList list, UserInterface ui) throws DukeException {
         try {
 
-            int index = Integer.parseInt(input.substring(5)) - 1;
+            int index = Integer.parseInt(input.substring(5));
             if (index > list.getSize() || index <= 0) {
                 throw new DukeException("That task doesn't exist. Please try again!");
             }
