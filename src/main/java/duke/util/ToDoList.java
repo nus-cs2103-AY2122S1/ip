@@ -154,6 +154,6 @@ public class ToDoList {
      * @return A String representation of the List of items that matched.
      */
     public Task[] find(String target) {
-        return this.record.stream().filter(x -> x.getName().contains(target)).parallel().toArray(Task[]::new);
+        return this.record.stream().filter(x -> x.toString().contains(target)).parallel().toArray(Task[]::new);
     }
 }
