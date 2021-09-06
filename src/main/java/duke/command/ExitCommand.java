@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Storage;
-import duke.Ui;
+import duke.gui.Ui;
 import duke.task.TaskList;
+import duke.util.Storage;
 
 /**
  * Command to exit the program.
@@ -15,9 +15,9 @@ public class ExitCommand extends Command {
      * @param ui The Ui object.
      * @param storage The Storage object.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showFarewell();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.saveFile(tasks.saveList());
+        return ui.showFarewell();
     }
 
     /**

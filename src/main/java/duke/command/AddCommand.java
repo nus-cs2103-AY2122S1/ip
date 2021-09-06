@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.Storage;
-import duke.Ui;
+import duke.gui.Ui;
 import duke.task.TaskList;
+import duke.util.Storage;
 
 /**
  * Command to add tasks.
@@ -26,8 +26,8 @@ public class AddCommand extends Command {
      * @param storage The storage object.
      * @throws DukeException If task description is invalid.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.addTask(input);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return tasks.addTask(input);
     }
 
     /**

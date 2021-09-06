@@ -1,4 +1,4 @@
-package duke;
+package duke.util;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.DukeException;
+import duke.gui.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -66,18 +68,13 @@ public class Storage {
         List<Task> tasks = new ArrayList<>();
         try {
             File file = new File(saveLocation);
-
-            if (file.createNewFile()) {
-                ui.showFileCreated(file.getName());
-            } else {
-                ui.showFileExists();
-                Scanner reader = new Scanner(file);
-                while (reader.hasNextLine()) {
-                    String data = reader.nextLine();
-                    tasks.add(parseTask(data));
-                }
-                reader.close();
+            Scanner reader = new Scanner(file);
+            while (reader.hasNextLine()) {
+                String data = reader.nextLine();
+                tasks.add(parseTask(data));
             }
+
+            reader.close();
         } catch (IOException e) {
             throw new DukeException("OOPS! File not found.");
         }

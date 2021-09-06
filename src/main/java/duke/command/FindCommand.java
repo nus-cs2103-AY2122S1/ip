@@ -3,10 +3,10 @@ package duke.command;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.Storage;
-import duke.Ui;
+import duke.gui.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.util.Storage;
 
 /**
  * Command that finds the tasks that matches a keyword.
@@ -28,7 +28,7 @@ public class FindCommand extends Command {
      * @param ui The Ui object.
      * @param storage The Storage object.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> matchingTasks = new ArrayList<>();
         for (Task task : tasks.getTasks()) {
             if (task.toString().contains(text)) {
@@ -36,7 +36,7 @@ public class FindCommand extends Command {
             }
         }
         TaskList mTasks = new TaskList(matchingTasks);
-        ui.showMatchingTasks(mTasks);
+        return ui.showMatchingTasks(mTasks);
     }
 
     /**

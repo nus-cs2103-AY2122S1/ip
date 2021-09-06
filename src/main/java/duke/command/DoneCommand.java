@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.Storage;
-import duke.Ui;
+import duke.gui.Ui;
 import duke.task.TaskList;
+import duke.util.Storage;
 
 /**
  * Command to mark a task as done.
@@ -30,8 +30,8 @@ public class DoneCommand extends Command {
      * @param ui The Ui object.
      * @param storage The Storage object.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.markTaskDone(taskNo);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return tasks.markTaskDone(taskNo);
     }
 
     /**

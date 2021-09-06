@@ -1,10 +1,13 @@
 package duke;
 
-import duke.command.Command;
+import duke.gui.Ui;
 import duke.task.TaskList;
+import duke.util.Parser;
+import duke.util.Storage;
+
 
 /**
- * Duke application, which is a Personal Assistant Chatbot.
+ * Duke application, which is a Personal Assistant Chat bot.
  */
 public class Duke {
     private final Storage storage;
@@ -21,36 +24,17 @@ public class Duke {
         try {
             tasks = new TaskList(Storage.load());
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
             tasks = new TaskList();
         }
     }
 
-    /**
-     * The main logic of the app.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String command) {
+        String response = "Timothy Q. Mouse:\n";
+        try {
+            response += Parser.parse(command).execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            response += e.getMessage();
         }
-    }
-
-    /**
-     * The main method of the app.
-     */
-    public static void main(String[] args) {
-        new Duke("dukeTasks.txt").run();
+        return response;
     }
 }

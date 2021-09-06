@@ -1,9 +1,10 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.Storage;
-import duke.Ui;
+import duke.gui.Ui;
 import duke.task.TaskList;
+import duke.util.Storage;
+
 
 /**
  * Command to get help on the available commands.
@@ -16,8 +17,8 @@ public class HelpCommand extends Command {
      * @param storage The Storage object.
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showHelp();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return ui.showHelp();
     }
 
     /**

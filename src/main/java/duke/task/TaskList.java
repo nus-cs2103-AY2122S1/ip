@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import duke.DukeException;
-import duke.Ui;
+import duke.gui.Ui;
 
 /**
  * Class that encapsulates a list of tasks.
@@ -66,20 +66,20 @@ public class TaskList {
      * Marks a specified task as done.
      * @param taskNo The number of the task to be marked as done.
      */
-    public void markTaskDone(int taskNo) {
+    public String markTaskDone(int taskNo) {
         Task task = getTask(taskNo);
         task.setDone();
-        ui.showTaskDone(task);
+        return ui.showTaskDone(task);
     }
 
     /**
      * Displays the add task message.
      * @param task The task to be added.
      */
-    public void addTaskSuffix(Task task) {
+    public String addTaskSuffix(Task task) {
         int taskNo = getSize();
         String t = taskNo == 1 ? " task " : " tasks ";
-        ui.showAddTask(task, taskNo, t);
+        return ui.showAddTask(task, taskNo, t);
     }
 
     /**
@@ -87,7 +87,7 @@ public class TaskList {
      * @param input The user input.
      * @throws DukeException If the input is invalid.
      */
-    public void addTask(String input) throws DukeException {
+    public String addTask(String input) throws DukeException {
         Task newTask;
 
         if (input.startsWith("todo ")) {
@@ -101,25 +101,25 @@ public class TaskList {
         }
 
         this.getTasks().add(newTask);
-        addTaskSuffix(newTask);
+        return addTaskSuffix(newTask);
     }
 
     /**
      * Deletes a task from the task list.
      * @param taskNo The number of the task to be deleted.
      */
-    public void deleteTask(int taskNo) {
+    public String deleteTask(int taskNo) {
         Task removedTask = getTasks().remove(taskNo - 1);
         int tasksLeft = getSize();
         String t = tasksLeft == 1 ? " task " : " tasks ";
-        ui.showDeleteTask(removedTask, tasksLeft, t);
+        return ui.showDeleteTask(removedTask, tasksLeft, t);
     }
 
     /**
      * Finds tasks occurring on a specified date.
      * @param date The specified date.
      */
-    public void findTasksOnDate(LocalDate date) {
+    public String findTasksOnDate(LocalDate date) {
         List<Task> foundTasks = new ArrayList<>();
         for (Task task : getTasks()) {
             if (task instanceof Deadline) {
@@ -136,6 +136,6 @@ public class TaskList {
         }
 
         int num = foundTasks.size();
-        ui.showTasksOnDate(date, num, foundTasks);
+        return ui.showTasksOnDate(date, num, foundTasks);
     }
 }
