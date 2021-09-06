@@ -9,6 +9,7 @@ import duke.command.HelpCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.command.UpdateCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidArgumentException;
 import duke.exception.InvalidCommandException;
@@ -119,6 +120,32 @@ public class Parser {
 
     }
 
+    private static String[] parseUpdateString(String updateDetails) throws MissingArgumentException,
+        InvalidArgumentException {
+
+        String[] commandTerms = updateDetails.split(" ", 3);
+        if (commandTerms.length < 3) {
+
+            throw new MissingArgumentException("commands", "update");
+
+        } else if (!isNumeric(commandTerms[0])) {
+
+            throw new InvalidArgumentException("integer", "update");
+
+        } else if (commandTerms[1].toLowerCase().equals("edt") || commandTerms[1].toLowerCase().equals("sdt")
+            || commandTerms[1].toLowerCase().equals("desc")) {
+
+            commandTerms[1] = commandTerms[1].toLowerCase();
+            return commandTerms;
+
+        } else {
+
+            throw new InvalidArgumentException("update field", "update");
+
+        }
+
+    }
+
     /**
      * Parses the inputted command and creates the corresponding command
      *
@@ -148,6 +175,10 @@ public class Parser {
         case "done":
             int doneTaskNumber = checkInteger(checkCommand, "marking of task");
             currentCommand = new MarkCommand(currentTaskList, doneTaskNumber);
+            break;
+        case "update":
+            String[] updateTerms = parseUpdateString(checkCommand[1]);
+            currentCommand = new UpdateCommand(currentTaskList, updateTerms);
             break;
         case "list":
             currentCommand = new ListCommand(currentTaskList);

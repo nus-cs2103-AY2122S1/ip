@@ -7,7 +7,6 @@ import duke.util.Tasklist;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- *
  * Description:
  * Class that encapsulates the mark task command inputted by the user
  *

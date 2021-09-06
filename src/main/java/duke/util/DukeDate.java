@@ -62,6 +62,26 @@ public class DukeDate {
     }
 
     /**
+     * Setter that sets the start date and time of the task
+     *
+     *
+     */
+    public void setStartTime(LocalDateTime newStartDateTime) {
+
+        this.startTime = newStartDateTime;
+    }
+
+    /**
+     * Setter that sets the end date and time of the task
+     *
+     */
+    public void setEndTime(LocalDateTime newEndDateTime) {
+
+        this.endTime = newEndDateTime;
+
+    }
+
+    /**
      * Getter that returns the end date and time of the task in a string format
      *
      * @return String returns the end date and time of the task in a string

@@ -69,6 +69,105 @@ public class TasklistTest {
     }
 
     @Test
+    public void testUpdateTask_updateInvalidTaskNumber_returnErrorMessage() {
+        Tasklist temp = new Tasklist();
+        String message = null;
+        try {
+            temp.addTask("test123 /at 24-07-2010 19:00 to 24-Dec-2010 00:00", "event");
+            temp.addTask("test1", "todo");
+            message = temp.updateDescription(3, "shagadoodles");
+        } catch (DukeException e) {
+            message = e.toString();
+        }
+        String deleteMessage = "Hi, 3 is not a valid index. List has currently 2 items.";
+        assertEquals(message, deleteMessage);
+
+    }
+
+    @Test
+    public void testUpdateTask_updateTaskDesc_returnSuccessMessage() {
+        Tasklist temp = new Tasklist();
+        String message = null;
+        try {
+            temp.addTask("test123 /at 24-07-2010 19:00 to 24-Dec-2010 00:00", "event");
+            temp.addTask("test1", "todo");
+            message = temp.updateDescription(1, "shagadoodles");
+        } catch (DukeException e) {
+            message = e.toString();
+        }
+        String deleteMessage = "Nice! I've changed the description of the task:\n"
+                + "  [E][ ] shagadoodles (at: 24-Jul-2010 19:00 to 24-Dec-2010 00:00)";
+        assertEquals(message, deleteMessage);
+
+    }
+
+    @Test
+    public void testUpdateTask_updateToDoDate_returnErrorMessage() {
+        Tasklist temp = new Tasklist();
+        String message = null;
+        try {
+            temp.addTask("test123 /at 24-07-2010 19:00 to 24-Dec-2010 00:00", "event");
+            temp.addTask("test1", "todo");
+            message = temp.updateStartDateTime(2, "2020-Jan-23 21:00");
+        } catch (DukeException e) {
+            message = e.toString();
+        }
+        String deleteMessage = "Hi, the times for the todo is invalid!";
+        assertEquals(message, deleteMessage);
+
+    }
+
+    @Test
+    public void testUpdateTask_updateDeadlineStartDate_returnErrorMessage() {
+        Tasklist temp = new Tasklist();
+        String message = null;
+        try {
+            temp.addTask("test123 /at 24-07-2010 19:00 to 24-Dec-2010 00:00", "event");
+            temp.addTask("test1 /by 2021-10-23", "deadline");
+            message = temp.updateStartDateTime(2, "2020-Jan-23 21:00");
+        } catch (DukeException e) {
+            message = e.toString();
+        }
+        String deleteMessage = "Hi, the times for the deadline is invalid!";
+        assertEquals(message, deleteMessage);
+
+    }
+
+    @Test
+    public void testUpdateTask_updateTaskStartDateTime_returnSuccessMessage() {
+        Tasklist temp = new Tasklist();
+        String message = null;
+        try {
+            temp.addTask("test123 /at 24-07-2010 19:00 to 24-Dec-2010 00:00", "event");
+            temp.addTask("test1", "todo");
+            message = temp.updateStartDateTime(1, "2021-Jul-25 08:00");
+        } catch (DukeException e) {
+            message = e.toString();
+        }
+        String deleteMessage = "Nice! I've changed the start time of the task:\n"
+                + "  [E][ ] test123 (at: 25-Jul-2021 08:00 to 24-Dec-2010 00:00)";
+        assertEquals(message, deleteMessage);
+
+    }
+
+    @Test
+    public void testUpdateTask_updateTaskEndDateTime_returnSuccessMessage() {
+        Tasklist temp = new Tasklist();
+        String message = null;
+        try {
+            temp.addTask("test123 /at 24-07-2010 19:00 to 24-Dec-2010 00:00", "event");
+            temp.addTask("test1", "todo");
+            message = temp.updateEndDateTime(1, "2021-Jul-25 08:00");
+        } catch (DukeException e) {
+            message = e.toString();
+        }
+        String deleteMessage = "Nice! I've changed the end time of the task:\n"
+                + "  [E][ ] test123 (at: 24-Jul-2010 19:00 to 25-Jul-2021 08:00)";
+        assertEquals(message, deleteMessage);
+
+    }
+
+    @Test
     public void testToString() {
         Tasklist temp = new Tasklist();
         try {
