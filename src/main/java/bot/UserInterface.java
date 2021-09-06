@@ -1,17 +1,13 @@
 package bot;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
+import task.Task;
 
 /**
  * A class that encapsulates all UI components of Duke.
  */
 public class UserInterface {
-
-    private static final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy kkmm");
-
-    private static final DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy - hh:mm a");
 
     private static final String divider = "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n";
 
@@ -119,49 +115,18 @@ public class UserInterface {
     /**
      * Shows the message for a task being added, according to the type of task given.
      *
-     * @param input  The task to be added to the list.
-     * @param type   The type id. Todo: 1, Deadline: 2, Event: 3.
+     * @param task  The task to be added to the list.
      * @param length The current length of the list.
-     * @param time   The information regarding the task (In the format of "(By: ...)" or "(At: ...)", or "" for Todos)
      * @return A String representation of the message.
      */
-    public String showTaskAdded(String input, int type, int length, String time) {
-
-        // Determine the string that displays the type of task
-        String taskType;
-        String prefix;
-
-        switch (type) {
-        case 1:
-            taskType = "task (Todo)";
-            prefix = "[T][ ]";
-            break;
-        case 2:
-            taskType = "task (Deadline)";
-            prefix = "[D][ ]";
-            break;
-        case 3:
-            taskType = "task (Event)";
-            prefix = "[E][ ]";
-            break;
-        default:
-            taskType = "";
-            prefix = "";
-        }
-
-        String taskDescription = "Alright. I've added the following " + taskType + ":\n--> " + prefix + " " + input;
-
-        String taskTime =
-            type == 2
-                ? " (By: " + LocalDateTime.parse(time, inputFormatter).format(outputFormatter) + ")"
-                : type == 3
-                    ? " (At: " + LocalDateTime.parse(time, inputFormatter).format(outputFormatter) + ")"
-                    : "";
-
-        // Return the message accordingly
-        return taskDescription
-                + taskTime
-                + "\n\n" + "You now have " + (length + 1) + (length == 0 ? " task" : " tasks")
+    public String showTaskAdded(Task task, int length) {
+        return "Alright. I've added the following "
+                + task.getTaskType()
+                + ":\n--> "
+                + task.getTaskState()
+                + "\n\nYou now have "
+                + (length + 1)
+                + (length == 0 ? " task" : " tasks")
                 + " in the list.\n";
     }
 }
