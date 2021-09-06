@@ -127,7 +127,7 @@ public class Duke extends Application {
             System.exit(0);
         }
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText(), dukeBot, parser, data));
+        Label dukeText = new Label(getResponse(userInput.getText(), dukeBot, parser));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
@@ -142,13 +142,12 @@ public class Duke extends Application {
      * @param input The input by user.
      * @param dukeBot The dukeBot used.
      * @param parser The parser used.
-     * @param data The data used.
      * @return The correct response based on input given.
      */
-    private String getResponse(String input, Duke dukeBot, Parser parser, Storage data) {
+    private String getResponse(String input, Duke dukeBot, Parser parser) {
         try {
             assert !input.equals("bye") : "The command should not be bye";
-            return dukeBot.todoList.addTask(input, parser, data);
+            return dukeBot.todoList.addTask(input, parser);
         } catch (IOException e) {
             return "ERROR!";
         }

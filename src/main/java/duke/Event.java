@@ -6,6 +6,9 @@ package duke;
  * Contains additional field of time of type String.
  */
 public class Event extends Task {
+    public static final String DESCRIPTION = "Adds a event to the list.";
+    public static final String FORMAT = "event + name + /at + location";
+    public static final String EXAMPLE = "event class /at school";
     public static final String IDENTIFIER = " /at ";
     private String time;
 

@@ -10,6 +10,7 @@ import java.util.ArrayList;
  */
 public class List {
     public static final String DISPLAY_LIST_COMMAND = "list";
+    public static final String HELP_COMMAND = "help";
     public static final String DONE_MESSAGE = "Nice! I've marked this task as done:\n";
     private ArrayList<Task> todos;
 
@@ -44,9 +45,11 @@ public class List {
      *
      * @returns The response in String after the action is executed.
      */
-    public String addTask(String input, Parser parser, Storage storage) throws IOException {
+    public String addTask(String input, Parser parser) throws IOException {
         if (input.equals(DISPLAY_LIST_COMMAND)) {
             return showList();
+        } if (input.equals(HELP_COMMAND)) {
+            return helpPage();
         } else {
             try {
                 return parser.process(input, this);
@@ -139,5 +142,48 @@ public class List {
             text += ("\n" + (i + 1) + ". " + result.get(i).toString());
         }
         return text;
+    }
+
+    /**
+     * Displays the help Page.
+     *
+     * @return Content of the help pgae.
+     */
+    public String helpPage() {
+        return "The available commands are:\n"
+                + "todo\n"
+                + "event\n"
+                + "deadline\n"
+                + "list\n"
+                + "find\n"
+                + "done\n"
+                + "delete";
+    }
+
+    /**
+     * Displays help for each command in more details.
+     *
+     * @param input the command that needs help.
+     * @return details about the command.
+     */
+    public String moreHelp(String input) {
+        if (input.equals("todo")) {
+            return Todo.DESCRIPTION + "\n\nFormat:\n" + Todo.FORMAT + "\n\nExample:\n" + Todo.EXAMPLE;
+        } else if (input.equals("event")) {
+            return Event.DESCRIPTION + "\n\nFormat:\n" + Event.FORMAT + "\n\nExample:\n" + Event.EXAMPLE;
+        } else if (input.equals("deadline")) {
+            return Deadline.DESCRIPTION + "\n\nFormat:\n" + Deadline.FORMAT + "\n\nExample:\n" + Deadline.EXAMPLE;
+        } else if (input.equals("list")) {
+            return "Returns a list of all items." + "\n\nFormat:\n" + "list";
+        } else if (input.equals("done")) {
+            return "Marks a certain item as done" + "\n\nFormat:\n" + "done + number" + "\n\nExample:\n" + "done 1";
+        } else if (input.equals("find")) {
+            return "Returns all items that contains the keyword"
+                    + "\n\nFormat:\n" + "find + keyword" + "\n\nExample:\n" + "find a";
+        } else if (input.equals("delete")) {
+            return "Delete an item" + "\n\nFormat:\n" + "delete + number" + "\n\nExample:\n" + "delete 1";
+        } else {
+            return "No such command... ";
+        }
     }
 }

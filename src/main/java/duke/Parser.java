@@ -19,6 +19,8 @@ public class Parser {
         assert split[0] != "list" : "The command should not be list";
         if (split[0].equals("done")) {
             return list.done(split);
+        } else if (split[0].equals("help")) {
+            return list.moreHelp(split[1]);
         } else if (split[0].equals("delete")) {
             return list.delete(split);
         } else if (split[0].equals("find")) {

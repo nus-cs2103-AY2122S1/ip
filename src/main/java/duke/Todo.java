@@ -5,6 +5,9 @@ package duke;
  * It is annotated by T in the list.
  */
 public class Todo extends Task {
+    public static final String DESCRIPTION = "Adds a todo item to the list.";
+    public static final String FORMAT = "todo + item";
+    public static final String EXAMPLE = "todo buy food";
 
     /**
      * Constructor for Todo class.

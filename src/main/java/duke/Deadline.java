@@ -10,6 +10,9 @@ import java.time.format.DateTimeFormatter;
  * Contains additional field of deadline of type LocalDate.
  */
 public class Deadline extends Task {
+    public static final String DESCRIPTION = "Adds a deadline to the list.";
+    public static final String FORMAT = "deadline + name + /by + when(yyyy-mm-dd)";
+    public static final String EXAMPLE = "deadline homework /by 2021-12-12";
     private LocalDate deadline;
 
     /**
