@@ -1,6 +1,10 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import duke.exception.OutOfRangeException;
 
@@ -107,5 +111,26 @@ public class TaskList {
                 .filter(currTask -> currTask.contains(content))
                 .forEach(currList::addElement);
         return currList;
+    }
+
+    public TaskList tasksWithinOneDay(String time) {
+        LocalDate dateNow = LocalDate.now();
+        String now = dateNow.format(DateTimeFormatter.ofPattern("MMM d yyyy", Locale.ENGLISH));
+        
+        TaskList currList = new TaskList();
+        for (int i = 0; i < count; i++) {
+            Task currTask = taskList.get(i);
+            if (!(currTask instanceof Todo) && currTask.compareTime(time)) {
+                currList.addElement(currTask);
+            }
+        }
+        return currList;
+    }
+
+    public int diffInDate(String time) {
+
+        for () {
+
+        }
     }
 }

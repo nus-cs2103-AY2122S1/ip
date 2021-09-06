@@ -18,7 +18,7 @@ public class ParserTest {
         };
 
         for (String negative : negatives) {
-            boolean flag = Parser.checkDigit(negative);
+            boolean flag = Parser.checkIsDigit(negative);
             assertTrue(flag);
         }
     }
