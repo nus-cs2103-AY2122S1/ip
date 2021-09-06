@@ -18,7 +18,8 @@ public class ToDo extends Task {
         super(description);
         if (description.equals("")) {
             //check for empty description or by
-            throw new EmptyFieldException("Error! Description or date and time is empty!");
+            String errorMessage = "Error! Description or date and time is empty!";
+            throw new EmptyFieldException(errorMessage);
         }
     }
 
