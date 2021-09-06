@@ -1,4 +1,4 @@
-package duke.parse;
+package duke.parser;
 
 import java.time.format.DateTimeParseException;
 
@@ -27,6 +27,7 @@ public class Parser {
     public static Command parse(String input) throws DukeException {
         input = input.strip();
         String[] inputs = input.split(" ");
+        assert !inputs[0].equals("") : "input should not be empty!";
         String command = inputs[0];
 
         switch (command.toLowerCase()) {

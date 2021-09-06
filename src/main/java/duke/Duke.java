@@ -2,7 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
-import duke.parse.Parser;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Gui;
@@ -13,9 +13,9 @@ import javafx.application.Application;
  * This is Duke, a program that serves as a ToDo-List.
  */
 public class Duke {
-    private Storage storage;
+    private final Storage storage;
     private TaskList taskList;
-    private Ui ui;
+    private final Ui ui;
 
     /**
      * Constructor for Duke.

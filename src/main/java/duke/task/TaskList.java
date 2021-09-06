@@ -10,7 +10,7 @@ import duke.exception.DukeException;
  */
 public class TaskList {
     /** A collection of the task */
-    private ArrayList<Task> taskList;
+    private final ArrayList<Task> taskList;
 
     /**
      * Constructor of TaskList.
@@ -30,6 +30,8 @@ public class TaskList {
         while (sc.hasNext()) {
             int taskType = Integer.parseInt(sc.nextLine());
             boolean isDone = Boolean.parseBoolean(sc.nextLine());
+
+            assert taskType < 3 && taskType >= 0 : "File is corrupted!";
 
             switch (taskType) {
             case 0:
@@ -53,8 +55,7 @@ public class TaskList {
                 taskList.add(eTask);
                 break;
             default:
-                System.out.println("File is invalid!");
-                break;
+                throw new DukeException("File is corrupted!");
             }
         }
     }
@@ -77,6 +78,8 @@ public class TaskList {
      */
     public Task add(int taskType, String... input) throws DukeException {
         Task task;
+
+        assert taskType < 3 && taskType >= 0 : "TaskType is invalid!";
 
         switch (taskType) {
         case 0:
@@ -151,7 +154,7 @@ public class TaskList {
 
     /**
      * Looks for keyword in TaskList.
-     * Adds Task object with keyword into a list.
+     * Adds `Task` object with keyword into a list.
      *
      * @param relatedList The list that tasks with keyword are added to.
      * @param keyword The keyword.
@@ -174,7 +177,7 @@ public class TaskList {
         String str = "";
 
         for (int i = 0; i < taskList.size(); i++) {
-            str += taskList.get(i).saveAsString();
+            str += taskList.get(i).saveAsData();
         }
 
         return str;

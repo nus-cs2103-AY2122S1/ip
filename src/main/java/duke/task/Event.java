@@ -26,7 +26,7 @@ class Event extends Task {
     }
 
     @Override
-    public String saveAsString() {
-        return 2 + "\n" + super.saveAsString() + "\n" + at.format(INPUT_FORMAT) + "\n";
+    public String saveAsData() {
+        return 2 + "\n" + super.saveAsData() + "\n" + at.format(INPUT_FORMAT) + "\n";
     }
 }

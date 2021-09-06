@@ -18,7 +18,7 @@ class Todo extends Task {
     }
 
     @Override
-    public String saveAsString() {
-        return 0 + "\n" + super.saveAsString() + "\n";
+    public String saveAsData() {
+        return 0 + "\n" + super.saveAsData() + "\n";
     }
 }

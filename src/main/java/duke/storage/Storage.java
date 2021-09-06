@@ -13,7 +13,7 @@ import duke.task.TaskList;
  */
 public class Storage {
     /** String representation of the path to the file */
-    private String filePath;
+    private final String filePath;
 
     /**
      * Constructor for Storage.
@@ -33,14 +33,14 @@ public class Storage {
     public String load() {
         String str = "";
 
-        File dukeData = new File(filePath);
+        File dukeDataFile = new File(filePath);
 
         try {
-            if (!dukeData.exists()) {
-                dukeData.getParentFile().mkdirs();
-                dukeData.createNewFile();
+            if (!dukeDataFile.exists()) {
+                dukeDataFile.getParentFile().mkdirs();
+                dukeDataFile.createNewFile();
             } else {
-                Scanner sc = new Scanner(dukeData);
+                Scanner sc = new Scanner(dukeDataFile);
 
                 while (sc.hasNext()) {
                     str += sc.nextLine() + "\n";
@@ -58,11 +58,11 @@ public class Storage {
      * @param list Contain the tasks that needs to be saved.
      */
     public void write(TaskList list) {
-        String savedData = list.checkOut();
+        String dataToBeSaved = list.checkOut();
 
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(filePath)));
-            writer.write(savedData);
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+            writer.write(dataToBeSaved);
 
             writer.close();
         } catch (IOException e) {
