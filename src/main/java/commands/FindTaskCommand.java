@@ -7,7 +7,7 @@ import tasks.Task;
 
 public class FindTaskCommand implements Command {
 
-    private String query;
+    private final String query;
 
     public FindTaskCommand(String query) {
         this.query = query;

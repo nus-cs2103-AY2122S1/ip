@@ -14,20 +14,21 @@ import tasks.Task;
 
 public class AddTaskCommand implements Command {
 
-    String desc;
-    boolean isDone;
+    private Task taskToAdd;
 
     public AddTaskCommand(String desc, boolean isDone) {
-        this.desc = desc;
-        this.isDone = isDone;
+        this.taskToAdd = new Task(desc, isDone);
+    }
+
+    public AddTaskCommand(Task task) {
+        this.taskToAdd = task;
     }
 
     public String execute(Ui ui, TaskList taskList, Storage storage) {
         try {
-            Task newTask = new Task(this.desc, this.isDone);
-            taskList.addTask(newTask);
+            taskList.addTask(taskToAdd);
             storage.writeTasksToFile(taskList, storage.getTaskFile());
-            return ui.getAddTaskResponse(newTask);
+            return ui.getAddTaskResponse(taskToAdd);
         } catch (IOException e) {
             return ui.getFileWriteFailResponse(storage.getTaskFile());
         }
