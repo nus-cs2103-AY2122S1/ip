@@ -10,7 +10,7 @@ import tasks.Task;
 
 public class DeleteTaskCommand implements Command {
 
-    int index;
+    private final int index;
 
     public DeleteTaskCommand(int index) {
         this.index = index;

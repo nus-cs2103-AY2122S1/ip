@@ -6,7 +6,7 @@ import duke.Ui;
 
 public class ErrorCommand implements Command {
 
-    String msg;
+    private final String msg;
 
     public ErrorCommand(String message) {
         this.msg = message;

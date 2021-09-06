@@ -14,7 +14,7 @@ import tasks.Task;
 public class MarkDoneCommand implements Command {
 
     // The index of the task to be marked as done
-    int index;
+    private final int index;
 
     public MarkDoneCommand(int index) {
         this.index = index;
