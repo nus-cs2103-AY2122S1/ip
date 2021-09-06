@@ -1,4 +1,9 @@
 package main.java.duke;
+
+/**
+ * Represents an exception that will throw will Duke encounters
+ * problematic inputs.
+ */
 public class DukeException extends Exception {
     protected String message;
 

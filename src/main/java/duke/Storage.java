@@ -10,6 +10,9 @@ import main.java.duke.tasks.Event;
 import main.java.duke.tasks.Task;
 import main.java.duke.tasks.Todo;
 
+/**
+ * A functionality class for methods that interacts with text file.
+ */
 public class Storage {
     protected String filePath;
 

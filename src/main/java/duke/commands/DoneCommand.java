@@ -7,8 +7,11 @@ import java.util.Scanner;
 import main.java.duke.*;
 import main.java.duke.tasks.Task;
 
+/**
+ * A command that marks a task as done in the task list.
+ */
 public class DoneCommand extends Command {
-    private int taskNum;
+    private final int taskNum;
 
     /**
      * Constructs a new mark task as done command with the given index.
@@ -25,8 +28,6 @@ public class DoneCommand extends Command {
      * @param tasks given list of tasks
      * @param gui given gui object
      * @param storage given storage object
-     * @throws IOException
-     * @throws DukeException
      */
     public String execute(TaskList tasks, MainWindow gui, Storage storage) throws IOException, DukeException {
         ArrayList<Task> taskList = tasks.getTaskList();
@@ -37,14 +38,14 @@ public class DoneCommand extends Command {
             storage.markAsDoneInFile(taskNum, newSc, tasks);
             return completeTask(taskList.get(taskNum - 1));
         }
-    };
+    }
 
     public boolean isExit() {
         return false;
     }
 
     /**
-     * Mark a task's statis as done and print out the result.
+     * Mark a task's status as done and print out the result.
      *
      * @param task the task to be marked as done
      */

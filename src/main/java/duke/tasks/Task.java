@@ -1,4 +1,8 @@
 package main.java.duke.tasks;
+
+/**
+ * A task.
+ */
 public class Task {
     protected String name;
     protected boolean hasDone;

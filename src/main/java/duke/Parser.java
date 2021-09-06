@@ -12,6 +12,9 @@ import main.java.duke.tasks.Deadline;
 import main.java.duke.tasks.Event;
 import main.java.duke.tasks.Todo;
 
+/**
+ * A parser that parses user input.
+ */
 public class Parser {
 
     /**
