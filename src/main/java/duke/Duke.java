@@ -51,6 +51,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         Command c = this.parser.parse(input, this.tdl, this, this.storage);
+        assert c != null : "How did you even get to this point?";
         String response = c.execute();
         return Duke.name + " heard: \n" + response;
     }
