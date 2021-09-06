@@ -17,11 +17,6 @@ public class CommandGeneric extends DukeCommand {
         return "Shuba Shuba Shuba!";
     }
 
-    /**
-     * As described in DukeCommand.
-     *
-     * @return False.
-     */
     @Override
     public boolean isExit() {
         return false;

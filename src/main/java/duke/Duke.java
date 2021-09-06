@@ -4,12 +4,10 @@ import duke.exception.DukeFileException;
 import duke.task.TaskList;
 import javafx.application.Application;
 
-
 public class Duke {
     private static TaskList tList = new TaskList();
 
-
-    public static TaskList gettList() {
+    public static TaskList getTList() {
         return tList;
     }
 

@@ -27,11 +27,6 @@ public class CommandDone extends DukeCommand {
         return tl.markComplete(taskId);
     }
 
-    /**
-     * As described in DukeCommand.
-     *
-     * @return False.
-     */
     @Override
     public boolean isExit() {
         return false;

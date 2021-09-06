@@ -16,18 +16,19 @@ import duke.task.TaskList;
 import duke.task.ToDo;
 
 public class DukeStorage {
-    private static String tasksFile = "data/tasks.txt";
-    private static String dataFolder = "data/";
-    private static String partialLoadMessage = "you may have a corrupted/edited save file. Tasks partially loaded";
-    private static String successLoadMessage = "Tasks successfully loaded!";
+    private static final String TASKS_FILE = "data/tasks.txt";
+    private static final String DATA_FOLDER = "data/";
+    private static final String PARTIAL_LOAD_MESSAGE = "you may have a corrupted/edited save file. "
+            + "Tasks partially loaded";
+    private static final String SUCCESS_LOAD_MESSAGE = "Tasks successfully loaded!";
 
     public static void saveTaskList(TaskList taskList) throws DukeFileException {
-        File dataPath = new File(dataFolder);
-        if (!Files.exists(Paths.get(dataFolder))) {
+        File dataPath = new File(DATA_FOLDER);
+        if (!Files.exists(Paths.get(DATA_FOLDER))) {
             dataPath.mkdir();
         }
 
-        File f = new File(tasksFile);
+        File f = new File(DATA_FOLDER);
         if (!f.exists()) {
             try {
                 f.createNewFile();
@@ -41,7 +42,7 @@ public class DukeStorage {
 
         FileWriter fw;
         try {
-            fw = new FileWriter(tasksFile);
+            fw = new FileWriter(TASKS_FILE);
             for (int i = 0; i < taskList.getListSize(); i++) {
                 fw.write(taskList.getTaskSaveFormat(i) + "\n");
             }
@@ -55,7 +56,7 @@ public class DukeStorage {
     }
 
     public static String loadTasks(TaskList taskList) {
-        File f = new File(tasksFile);
+        File f = new File(TASKS_FILE);
         String[] taskInfo;
         String nextTask;
 
@@ -82,7 +83,7 @@ public class DukeStorage {
                                 )
                         );
                     } catch (DukeArgumentException e) {
-                        return partialLoadMessage;
+                        return PARTIAL_LOAD_MESSAGE;
                     }
                     break;
                 case "E":
@@ -95,16 +96,16 @@ public class DukeStorage {
                                 )
                         );
                     } catch (DukeArgumentException e) {
-                        return partialLoadMessage;
+                        return PARTIAL_LOAD_MESSAGE;
                     }
                     break;
                 default:
-                    return partialLoadMessage;
+                    return PARTIAL_LOAD_MESSAGE;
                 }
             }
         } catch (FileNotFoundException e) {
             return "Save file not found";
         }
-        return successLoadMessage;
+        return SUCCESS_LOAD_MESSAGE;
     }
 }

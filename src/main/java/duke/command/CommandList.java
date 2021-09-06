@@ -16,11 +16,6 @@ public class CommandList extends DukeCommand {
         return tl.getTasks();
     }
 
-    /**
-     * As described in DukeCommand.
-     *
-     * @return False.
-     */
     @Override
     public boolean isExit() {
         return false;

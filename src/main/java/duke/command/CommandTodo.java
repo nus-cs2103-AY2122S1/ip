@@ -28,11 +28,6 @@ public class CommandTodo extends DukeCommand {
         return tl.addTask(task);
     }
 
-    /**
-     * As described in DukeCommand.
-     *
-     * @return False.
-     */
     @Override
     public boolean isExit() {
         return false;

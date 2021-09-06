@@ -11,7 +11,9 @@ import javafx.scene.layout.VBox;
  * Controller for duke.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
-    private static String selfIntro = "*Quack* *Quack*, I'm Duck\nWhat do you need?";
+    private static final String SELF_INTRO = "*Quack* *Quack*, I'm Duck\nWhat do you need?";
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
+    private Image duckImage = new Image(this.getClass().getResourceAsStream("/images/DaDuck.jpg"));
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -21,14 +23,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
-    private final Image duckImage = new Image(this.getClass().getResourceAsStream("/images/DaDuck.jpg"));
-
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        this.sendDuckMessage(selfIntro);
-        this.sendDuckMessage(DukeStorage.loadTasks(Duke.gettList()));
+        this.sendDuckMessage(SELF_INTRO);
+        this.sendDuckMessage(DukeStorage.loadTasks(Duke.getTList()));
     }
 
 

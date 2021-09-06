@@ -5,7 +5,6 @@ package duke.task;
  * Inherits from <code>Task</code>.
  */
 public class ToDo extends Task {
-
     /**
      * Creates a new ToDo object.
      *
@@ -24,5 +23,4 @@ public class ToDo extends Task {
     public ToDo(String name, boolean isComplete) {
         super(name, isComplete, "T");
     }
-
 }

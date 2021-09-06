@@ -30,11 +30,6 @@ public class CommandBye extends DukeCommand {
         return response;
     }
 
-    /**
-     * As described in DukeCommand.
-     *
-     * @return True if task list saved successfully, false otherwise.
-     */
     @Override
     public boolean isExit() {
         return isEnd;

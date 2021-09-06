@@ -27,11 +27,6 @@ public class CommandDelete extends DukeCommand {
         return tl.deleteTask(taskId);
     }
 
-    /**
-     * As described in DukeCommand.
-     *
-     * @return False.
-     */
     @Override
     public boolean isExit() {
         return false;

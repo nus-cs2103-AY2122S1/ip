@@ -27,11 +27,6 @@ public class CommandFind extends DukeCommand {
         return tl.searchKeyword(this.keyword);
     }
 
-    /**
-     * As described in DukeCommand.
-     *
-     * @return False.
-     */
     @Override
     public boolean isExit() {
         return false;

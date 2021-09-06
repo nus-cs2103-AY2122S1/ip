@@ -28,7 +28,7 @@ public class DukeUi extends Application {
         String response = "";
         try {
             DukeCommand command = DukeCommandParser.parseCommand(input);
-            response = command.execute(Duke.gettList());
+            response = command.execute(Duke.getTList());
             if (command.isExit()) {
                 Platform.exit();
             }
@@ -40,7 +40,6 @@ public class DukeUi extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(DukeUi.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
@@ -50,9 +49,5 @@ public class DukeUi extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
-
-
 }

@@ -7,6 +7,7 @@ import duke.DukeDate;
  * Represents the list of tasks the user has. Stores the tasks in the form of <code>Task</code> objects.
  */
 public class TaskList {
+    private static final int INITIAL_CAPACITY = 100;
     private ArrayList<Task> userList;
     private int listSize = 0;
 
@@ -14,7 +15,7 @@ public class TaskList {
      * Creates a new TaskList.
      */
     public TaskList() {
-        userList = new ArrayList<Task>(100);
+        userList = new ArrayList<Task>(INITIAL_CAPACITY);
     }
 
     /**
