@@ -22,6 +22,7 @@ import javafx.scene.layout.HBox;
  * @author Benjamin Lui
  */
 public class DialogBox extends HBox {
+    private String resourceName = "/view/DialogBox.fxml";
     @FXML
     private Label dialog;
     @FXML
@@ -29,7 +30,7 @@ public class DialogBox extends HBox {
 
     private DialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(resourceName));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();

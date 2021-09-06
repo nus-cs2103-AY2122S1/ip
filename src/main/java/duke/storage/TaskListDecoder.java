@@ -18,8 +18,13 @@ import duke.task.Todo;
  */
 
 public class TaskListDecoder {
+    private static final int eventTypeIndexStart = 1;
+    private static final int eventTypeIndexEnd = 2;
+    private static final int eventDoneIndexStart = 4;
+    private static final int eventDoneIndexEnd = 5;
+    private static final int taskDescriptionIndexStart = 7;
     /**
-     * Decodes the list of string into a TaskList object.
+     * * Decodes the list of string into a TaskList object.
      * @param encodedTaskList the tasks when read directly from the file
      * @return a TaskList object for further tasks operations
      */
@@ -38,10 +43,10 @@ public class TaskListDecoder {
      * @return the task that has been to decoded as a Task object
      */
     static Task decodeTaskFromString(String task) {
-        task.trim();
-        String type = task.substring(1, 2);
-        String done = task.substring(4, 5);
-        String taskDescription = task.substring(7, task.length()).trim();
+        String modifiedTask = task.trim();
+        String type = modifiedTask.substring(eventTypeIndexStart, eventTypeIndexEnd);
+        String done = modifiedTask.substring(eventDoneIndexStart, eventDoneIndexEnd);
+        String taskDescription = modifiedTask.substring(taskDescriptionIndexStart).trim();
         switch (type) {
         case "T" :
             return new Todo(taskDescription, done);

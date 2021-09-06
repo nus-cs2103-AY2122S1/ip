@@ -12,6 +12,9 @@ import duke.ui.Ui;
 public class EventCommand extends Command {
 
     private String task;
+    private final String errorMessage = "OOPS!!! The description of an event cannot be empty.\n";
+    // Add 3 to index to avoid "by "
+    private final int indexToAvoidBy = 3;
 
     public EventCommand(String task) {
         this.task = task;
@@ -20,7 +23,7 @@ public class EventCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         if (task.length() == 0) {
-            return ui.showError("OOPS!!! The description of an event cannot be empty.\n");
+            return ui.showError(errorMessage);
         }
         char[] data = task.toCharArray();
         String eventTask = "";
@@ -35,7 +38,7 @@ public class EventCommand extends Command {
             index++;
         }
         // Add 3 to index to avoid "by "
-        index += 3;
+        index += indexToAvoidBy;
         while (index < data.length) {
             by += data[index];
             index++;

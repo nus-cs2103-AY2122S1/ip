@@ -20,12 +20,4 @@ public abstract class Command {
      * @param storage the location to write the file back to (if necessary)
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage);
-
-    /**
-     * Returns a boolean to indicate whether the command allows duke.Duke to exit.
-     * @return a boolean indicating whether duke.Duke can exit
-     */
-    public boolean isExit() {
-        return false;
-    }
 }

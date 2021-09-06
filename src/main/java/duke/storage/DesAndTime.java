@@ -12,6 +12,8 @@ public class DesAndTime {
     private String taskDescription;
     private String timing;
     private String task;
+    // skips 'by: ' to obtain the time information
+    private final int skippedIndexToDate = 4;
 
     /**
      * Constructor of the class.
@@ -36,7 +38,7 @@ public class DesAndTime {
             description += arr[index];
             index++;
         }
-        index += 4;
+        index += skippedIndexToDate;
         while (index < arr.length) {
             if (arr[index] == ')') {
                 break;
@@ -52,7 +54,7 @@ public class DesAndTime {
     }
 
     /**
-     * Processes the task if its an event task.
+     * Processes the task if it's an event task.
      */
     void event() {
         char[] arr = task.toCharArray();
@@ -66,7 +68,7 @@ public class DesAndTime {
             description += arr[index];
             index++;
         }
-        index += 4;
+        index += skippedIndexToDate;
         while (index < arr.length) {
             if (arr[index] == ')') {
                 break;

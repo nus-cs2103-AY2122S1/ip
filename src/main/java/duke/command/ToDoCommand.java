@@ -13,6 +13,7 @@ import duke.ui.Ui;
 public class ToDoCommand extends Command {
 
     private String task;
+    private final String errorMessage = "OOPS!!! The description of a todo cannot be empty.\n";
 
     /**
      * Constructor for the to do command
@@ -28,7 +29,7 @@ public class ToDoCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         if (task.length() == 0) {
-            return ui.showError("OOPS!!! The description of a todo cannot be empty.\n");
+            return ui.showError(errorMessage);
         }
         Todo taskToDo = new Todo(task);
         taskList.add(taskToDo);
