@@ -46,7 +46,7 @@ public class TaskList {
      */
     private Message addTask(Task task) {
         taskList.add(task);
-        return ui.addMessage(task, taskList.size());
+        return ui.formatAddMessage(task, taskList.size());
     }
 
     /**
@@ -62,7 +62,7 @@ public class TaskList {
             saveTaskList();
             return message;
         } catch (ParseException e) {
-            return ui.dateTimeErrorMessage();
+            return ui.formatDateTimeErrorMessage();
         }
     }
 
@@ -79,7 +79,7 @@ public class TaskList {
             saveTaskList();
             return message;
         } catch (ParseException e) {
-            return ui.dateTimeErrorMessage();
+            return ui.formatDateTimeErrorMessage();
         }
     }
 
@@ -95,7 +95,7 @@ public class TaskList {
             saveTaskList();
             return message;
         } catch (IndexOutOfBoundsException e) {
-            return ui.todoErrorMessage();
+            return ui.formatTodoErrorMessage();
         }
     }
 
@@ -110,9 +110,9 @@ public class TaskList {
         boolean isSuccess = task.markDone();
         if (isSuccess) {
             saveTaskList();
-            return ui.doneSuccessMessage(task);
+            return ui.formatDoneSuccessMessage(task);
         } else {
-            return ui.doneFailedMessage(task);
+            return ui.formatDoneFailedMessage(task);
         }
     }
 
@@ -125,7 +125,7 @@ public class TaskList {
     public Message deleteTask(int n) {
         Task task = taskList.remove(n - 1);
         saveTaskList();
-        return ui.deleteMessage(task, taskList.size());
+        return ui.formatDeleteMessage(task, taskList.size());
     }
 
     /**
@@ -147,7 +147,7 @@ public class TaskList {
                 .filter(task -> task.getTask().contains(s))
                 .map(x -> x.toString())
                 .collect(Collectors.toList());
-        return ui.searchOutputMessage(taskFiltered);
+        return ui.formatSearchOutputMessage(taskFiltered);
     }
 
     public List<Task> getTaskList() {

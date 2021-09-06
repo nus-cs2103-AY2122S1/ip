@@ -18,7 +18,7 @@ import duke.util.Ui;
  */
 public class ListCommand implements Command {
     /**
-     * Adds a new task to the task list.
+     * Adds a new task to the task list. IntStream is used to format the output nicely.
      *
      * @param taskList duke.main.TaskList to execute the command.
      * @param ui       To interact with the user.

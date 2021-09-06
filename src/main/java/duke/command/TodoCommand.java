@@ -40,7 +40,7 @@ public class TodoCommand implements Command {
             assert message.length() > Keyword.TODOS.length() : "Find is in the following format 'find <parameter>'";
             return taskList.addTodo(message.substring(Keyword.TODOS.length() + 1));
         } catch (IndexOutOfBoundsException e) {
-            return ui.todoErrorMessage();
+            return ui.formatTodoErrorMessage();
         }
     }
 }

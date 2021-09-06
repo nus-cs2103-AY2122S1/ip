@@ -41,7 +41,7 @@ public class EventCommand implements Command {
             assert details[0].length() > Keyword.EVENTS.length() : "Event requires a description";
             return taskList.addEvent(details[0].substring(Keyword.EVENTS.length() + 1), details[1]);
         } catch (IndexOutOfBoundsException e) {
-            return ui.eventErrorMessage();
+            return ui.formatEventErrorMessage();
         }
     }
 }

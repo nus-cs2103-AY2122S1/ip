@@ -35,7 +35,7 @@ public class Ui {
      * @param totalTask Total number of task stored.
      * @return message to be used by either the graphic UI or command line UI.
      */
-    public Message addMessage(Task task, int totalTask) {
+    public Message formatAddMessage(Task task, int totalTask) {
         return new Message("Got it. I've added this task:",
                 task.toString(),
                 String.format("Now you have %o task(s).", totalTask));
@@ -47,7 +47,7 @@ public class Ui {
      * @param task duke.task.Task that is marked as done.
      * @return message to be used by either the graphic UI or command line UI.
      */
-    public Message doneSuccessMessage(Task task) {
+    public Message formatDoneSuccessMessage(Task task) {
         return new Message("Nice! I've did mark this task as done:", task.toString());
     }
 
@@ -58,7 +58,7 @@ public class Ui {
      * @param task duke.task.Task to be marked as done.
      * @return message to be used by either the graphic UI or command line UI.
      */
-    public Message doneFailedMessage(Task task) {
+    public Message formatDoneFailedMessage(Task task) {
         return new Message("Ugh! This task was already done:", task.toString());
     }
 
@@ -69,7 +69,7 @@ public class Ui {
      * @param totalTask Total number of task stored.
      * @return message to be used by either the graphic UI or command line UI.
      */
-    public Message deleteMessage(Task task, int totalTask) {
+    public Message formatDeleteMessage(Task task, int totalTask) {
         return new Message("Noted. I've removed this task:",
                 task.toString(),
                 String.format("Now you have %o task(s).", totalTask));
@@ -81,7 +81,7 @@ public class Ui {
      * @param tasks Tasks to be printed.
      * @return message to be used by either the graphic UI or command line UI.
      */
-    public Message searchOutputMessage(List<String> tasks) {
+    public Message formatSearchOutputMessage(List<String> tasks) {
         if (tasks.size() == 0) {
             tasks.add(0, "There are no matching tasks found.");
         } else {
@@ -96,7 +96,7 @@ public class Ui {
      * @param task duke.task.Task to be exported and saved.
      * @return message to be used by either the graphic UI or command line UI.
      */
-    public Message exportTaskErrorMessage(Task task) {
+    public Message formatExportTaskErrorMessage(Task task) {
         return new Message(String.format("Unable to save %s", task.toString()));
     }
 
@@ -105,7 +105,7 @@ public class Ui {
      *
      * @return message to be used by either the graphic UI or command line UI.
      */
-    public Message exportTaskErrorMessage() {
+    public Message formatExportTaskErrorMessage() {
         return new Message("Unable to save task.");
     }
 
@@ -114,7 +114,7 @@ public class Ui {
      *
      * @return message to be used by either the graphic UI or command line UI.
      */
-    public Message loadTaskSuccessMessage() {
+    public Message formatLoadTaskSuccessMessage() {
         return new Message("I have loaded in task(s) saved from our previous interactions.");
     }
 
@@ -124,7 +124,7 @@ public class Ui {
      * @param description The sentence to be printed before the commands list is printed.
      * @return message to be used by either the graphic UI or command line UI.
      */
-    private Message commandsRecognisedMessage(String description) {
+    private Message formatCommandsRecognisedMessage(String description) {
         return new Message(description,
                 "bye - Ends the chat session.",
                 "todo <description> - Adds a new todo to the task list.",
@@ -143,7 +143,7 @@ public class Ui {
      * @param description Description of task to be imported.
      * @return message to be used by either the graphic UI or command line UI.
      */
-    public Message importTaskErrorMessage(String description) {
+    public Message formatImportTaskErrorMessage(String description) {
         return new Message(String.format("Cant import %s", description));
     }
 
@@ -153,8 +153,8 @@ public class Ui {
      *
      * @return message to be used by either the graphic UI or command line UI.
      */
-    public Message importTaskErrorMessage() {
-        return commandsRecognisedMessage("This are the commands that I recognised:");
+    public Message formatImportTaskErrorMessage() {
+        return formatCommandsRecognisedMessage("This are the commands that I recognised:");
     }
 
     /**
@@ -162,7 +162,7 @@ public class Ui {
      *
      * @return message to be used by either the graphic UI or command line UI.
      */
-    public Message greetMessage() {
+    public Message formatGreetMessage() {
         return new Message("Good day there! I'm DUKE\n", "What can I do for you?");
     }
 
@@ -173,7 +173,7 @@ public class Ui {
      * @return message to be used by either the graphic UI or command line UI.
      * @Deprecated Level-2
      */
-    public Message echoMessage(String s) {
+    public Message formatEchoMessage(String s) {
         return new Message(s);
     }
 
@@ -182,7 +182,7 @@ public class Ui {
      *
      * @return message to be used by either the graphic UI or command line UI.
      */
-    public Message exitMessage() {
+    public Message formatExitMessage() {
         return new Message("Farewell! Hope to see you again.");
     }
 
@@ -191,8 +191,8 @@ public class Ui {
      *
      * @return message to be used by either the graphic UI or command line UI.
      */
-    public Message chatErrorMessage() {
-        return commandsRecognisedMessage("Ugh! Only the following commands are recognised.");
+    public Message formatChatErrorMessage() {
+        return formatCommandsRecognisedMessage("Ugh! Only the following commands are recognised.");
     }
 
     /**
@@ -200,7 +200,7 @@ public class Ui {
      *
      * @return message to be used by either the graphic UI or command line UI.
      */
-    public Message doneErrorMessage() {
+    public Message formatDoneErrorMessage() {
         return new Message("Ugh! The command should be in this format:",
                 "done <number>");
     }
@@ -210,7 +210,7 @@ public class Ui {
      *
      * @return message to be used by either the graphic UI or command line UI.
      */
-    public Message doneIndexErrorMessage() {
+    public Message formatDoneIndexErrorMessage() {
         return new Message("Ugh! The command should be in this format:",
                 "done <number>",
                 "Note: number is based on the number from command 'list'");
@@ -221,7 +221,7 @@ public class Ui {
      *
      * @return message to be used by either the graphic UI or command line UI.
      */
-    public Message todoErrorMessage() {
+    public Message formatTodoErrorMessage() {
         return new Message("Ugh! The command should be in this format:",
                 "todo <description>");
     }
@@ -231,7 +231,7 @@ public class Ui {
      *
      * @return message to be used by either the graphic UI or command line UI.
      */
-    public Message findIndexErrorMessage() {
+    public Message formatFindIndexErrorMessage() {
         return new Message("Ugh! The command should be in this format:",
                 "find <description>");
     }
@@ -242,7 +242,7 @@ public class Ui {
      *
      * @return message to be used by either the graphic UI or command line UI.
      */
-    public Message deadlineErrorMessage() {
+    public Message formatDeadlineErrorMessage() {
         return new Message("Ugh! The command should be in this format:",
                 "deadline <description> /by <date/time>");
     }
@@ -252,7 +252,7 @@ public class Ui {
      *
      * @return message to be used by either the graphic UI or command line UI.
      */
-    public Message deleteErrorMessage() {
+    public Message formatDeleteErrorMessage() {
         return new Message("Ugh! The command should be in this format:",
                 "delete <number>");
     }
@@ -262,7 +262,7 @@ public class Ui {
      *
      * @return message to be used by either the graphic UI or command line UI.
      */
-    public Message deleteIndexErrorMessage() {
+    public Message formatDeleteIndexErrorMessage() {
         return new Message("Ugh! The command should be in this format:",
                 "delete <number>",
                 "Note: number is based on the number from command 'list'");
@@ -273,7 +273,7 @@ public class Ui {
      *
      * @return message to be used by either the graphic UI or command line UI.
      */
-    public Message eventErrorMessage() {
+    public Message formatEventErrorMessage() {
         return new Message("Ugh! The command should be in this format:",
                 "event <description> /at <date/time>");
     }
@@ -283,7 +283,7 @@ public class Ui {
      *
      * @return message to be used by either the graphic UI or command line UI.
      */
-    public Message dateTimeErrorMessage() {
+    public Message formatDateTimeErrorMessage() {
         return new Message("Date/Time format is wrong. Ensure that it is in the this format:",
                 "dd/mm/yy hhmm (24hrs format)");
     }

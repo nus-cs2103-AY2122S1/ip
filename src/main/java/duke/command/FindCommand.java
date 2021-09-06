@@ -40,7 +40,7 @@ public class FindCommand implements Command {
             assert message.length() > Keyword.FIND.length() : "Find is in the following format 'find <parameter>'";
             return taskList.findTask(message.substring(Keyword.FIND.length() + 1));
         } catch (IndexOutOfBoundsException e) {
-            return ui.findIndexErrorMessage();
+            return ui.formatFindIndexErrorMessage();
         }
     }
 }

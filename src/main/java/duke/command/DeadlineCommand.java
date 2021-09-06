@@ -42,7 +42,7 @@ public class DeadlineCommand implements Command {
             assert details[0].length() > Keyword.DEADLINE.length() : "Deadline requires a description";
             return taskList.addDeadline(details[0].substring(Keyword.DEADLINE.length() + 1), details[1]);
         } catch (IndexOutOfBoundsException e) {
-            return ui.deadlineErrorMessage();
+            return ui.formatDeadlineErrorMessage();
         }
     }
 }

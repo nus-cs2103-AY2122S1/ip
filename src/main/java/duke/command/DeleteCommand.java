@@ -40,9 +40,9 @@ public class DeleteCommand implements Command {
             assert message.length() > Keyword.DELETE.length() : "Delete is in the following format 'delete <number>'";
             return taskList.deleteTask(Integer.parseInt(message.substring(Keyword.DELETE.length() + 1)));
         } catch (NumberFormatException e) {
-            return ui.deleteErrorMessage();
+            return ui.formatDeleteErrorMessage();
         } catch (IndexOutOfBoundsException e) {
-            return ui.deleteIndexErrorMessage();
+            return ui.formatDeleteIndexErrorMessage();
         }
     }
 }
