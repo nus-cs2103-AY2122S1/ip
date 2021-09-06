@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import duke.command.AddCommand;
 import duke.command.EditCommand;
 import duke.command.ExitCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.constant.EditType;
 import duke.constant.TaskType;
@@ -81,6 +82,16 @@ public class ParserTest {
     }
 
     @Test
+    public void parseUserInput_help() {
+        assertEquals(new HelpCommand("help"), Parser.parseUserInput("help"));
+    }
+
+    @Test
+    public void parseUserInput_helpDeadline() {
+        assertEquals(new HelpCommand("help deadline"), Parser.parseUserInput("help deadline"));
+    }
+
+    @Test
     public void parseUserInput_emptyInput_exceptionThrown() {
         Exception exception = assertThrows(DukeException.class, () ->
                 Parser.parseUserInput(""));
@@ -94,7 +105,7 @@ public class ParserTest {
         Exception exception = assertThrows(DukeException.class, () ->
             Parser.parseUserInput("blah"));
         String expectedMessage = "Invalid command. List of valid commands include:\n"
-                + "list | todo | deadline | event | done | delete | find | bye";
+                + "help | list | todo | deadline | event | done | delete | find | bye";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }
