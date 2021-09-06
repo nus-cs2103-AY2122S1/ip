@@ -7,32 +7,27 @@ import duke.task.TaskList;
  */
 public class DeleteCommand extends Command {
 
-    /** User inputted string */
-    private final String userInput;
-    /** List of tasks to run the command on */
+    /** User inputted task number to delete. */
+    private final int idx;
+    /** List of tasks to run the command on. */
     private final TaskList tasks;
 
     /**
      * Instantiates a new Delete command.
      *
-     * @param userInput user-inputted string
-     * @param tasks     list of tasks to delete the user-specified task from
+     * @param idx   the index of task to be deleted.
+     * @param tasks list of tasks to delete the user-specified task from.
      */
-    public DeleteCommand(String userInput, TaskList tasks) {
-        assert userInput != null : "userInput cannot be null.";
+    public DeleteCommand(int idx, TaskList tasks) {
         assert tasks != null : "TaskList cannot be null.";
-
-        this.userInput = userInput;
+        this.idx = idx;
         this.tasks = tasks;
     }
 
     @Override
     public String execute() {
-        String[] inputs = this.userInput.split(" ");
-        int ind = Integer.valueOf(inputs[1]) - 1;
-
-        String result = "Noted. I've removed this task:\n  " + tasks.get(ind).toString() + "\n";
-        tasks.delete(ind);
+        String result = "Noted. I've removed this task:\n  " + tasks.get(idx).toString() + "\n";
+        tasks.delete(idx);
         result += "Now you have " + tasks.size() + " tasks in the list.";
         return result;
     }

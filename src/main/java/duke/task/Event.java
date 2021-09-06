@@ -24,9 +24,9 @@ public class Event extends Task {
     /**
      * Instantiates a new Event.
      *
-     * @param description the description for event task.
-     * @param eventDate   the event date.
-     * @throws DateTimeParseException exception thrown if user inputs an invalid date.
+     * @param description the description for event task
+     * @param eventDate   the event date
+     * @throws DateTimeParseException exception thrown if user inputs an invalid date
      */
     public Event(String description, String eventDate) throws DateTimeParseException {
         super(description);
@@ -39,10 +39,10 @@ public class Event extends Task {
     /**
      * Instantiates a new Event.
      *
-     * @param description the description for event task.
-     * @param eventDate   the event date.
-     * @param eventTime   the event time.
-     * @throws DateTimeParseException exception thrown if user inputs an invalid date and/or time.
+     * @param description the description for event task
+     * @param eventDate   the event date
+     * @param eventTime   the event time
+     * @throws DateTimeParseException exception thrown if user inputs an invalid date and/or time
      */
     public Event(String description, String eventDate, String eventTime) throws DateTimeParseException {
         super(description);
@@ -59,7 +59,7 @@ public class Event extends Task {
     /**
      * Prints out Event task with an identifier, a done marker and the date/time specified.
      *
-     * @return String.
+     * @return String
      */
     @Override
     public String toString() {

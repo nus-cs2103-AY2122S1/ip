@@ -1,5 +1,8 @@
 package duke.command;
 
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import duke.task.TaskList;
 
 /**
@@ -7,36 +10,34 @@ import duke.task.TaskList;
  */
 public class FindCommand extends Command {
 
-    /** Substring to search for in description of tasks */
+    /** Substring to search for in description of tasks. */
     private final String substring;
-    /** List of tasks to search from */
+    /** List of tasks to search from. */
     private final TaskList tasks;
 
     /**
      * Instantiates a new Find command.
      *
-     * @param userInput the user-inputted string.
+     * @param substring the user-inputted substring to find.
      * @param tasks     the list of tasks to search from.
      */
-    public FindCommand(String userInput, TaskList tasks) {
-        assert userInput != null : "userInput cannot be null.";
+    public FindCommand(String substring, TaskList tasks) {
+        assert substring != null : "Index cannot be negative.";
         assert tasks != null : "TaskList cannot be null.";
-
-        String[] splitUserInput = userInput.split(" ", 2);
-        assert splitUserInput.length == 2 : "userInput is incorrect!";
-
-        this.substring = splitUserInput[1];
+        this.substring = substring;
         this.tasks = tasks;
     }
 
     @Override
     public String execute() {
         String result = "Here are the matching tasks in your list:";
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getDescription().contains(this.substring)) {
-                result += "\n" + i + "." + tasks.get(i).toString();
-            }
-        }
+
+        result += IntStream
+                .range(0, tasks.size())
+                .filter(idx -> tasks.get(idx).getDescription().contains(substring))
+                .mapToObj(idx -> "\n" + (idx + 1) + "." + tasks.get(idx).toString())
+                .collect(Collectors.joining());
+
         return result;
     }
 }

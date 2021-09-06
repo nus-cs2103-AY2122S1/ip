@@ -1,13 +1,15 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * TaskList is a list for tasks.
  */
 public class TaskList {
 
-    /** Storage container to store tasks */
+    /** Storage container to store tasks. */
     private final ArrayList<Task> tasks = new ArrayList<>();
 
     /**
@@ -43,6 +45,7 @@ public class TaskList {
      * Marks a task as done.
      *
      * @param idx index of the task to be marked as done.
+     * @throws IllegalArgumentException for invalid index.
      */
     public void markDone(int idx) throws IllegalArgumentException {
         if (idx < 0 || idx >= tasks.size()) {
@@ -59,6 +62,7 @@ public class TaskList {
      *
      * @param idx index of the task to get from storage.
      * @return the task.
+     * @throws IllegalArgumentException for invalid index.
      */
     public Task get(int idx) throws IllegalArgumentException {
         if (idx < 0 || idx >= tasks.size()) {
@@ -74,6 +78,7 @@ public class TaskList {
      * Deletes a task from storage.
      *
      * @param idx index of the task to delete from storage.
+     * @throws IllegalArgumentException for invalid index.
      */
     public void delete(int idx) throws IllegalArgumentException {
         if (idx < 0 || idx >= tasks.size()) {
@@ -87,10 +92,12 @@ public class TaskList {
 
     @Override
     public String toString() {
-        String result = "Here are the tasks in your list:";
-        for (int i = 0; i < tasks.size(); i++) {
-            result += ("\n" + (i + 1) + "." + tasks.get(i).toString());
-        }
+        String result = "Here are the tasks in your list:\n";
+
+        result += Stream.iterate(0, idx -> idx < tasks.size(), idx -> idx + 1)
+                .map(idx -> (idx + 1) + "." + tasks.get(idx).toString())
+                .collect(Collectors.joining("\n"));
+
         return result;
     }
 

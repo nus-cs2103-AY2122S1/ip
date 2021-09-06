@@ -18,9 +18,9 @@ import duke.task.TaskList;
  */
 public class Parser {
 
-    /** User-inputted string */
+    /** User-inputted string. */
     private final String userInput;
-    /** List of tasks to pass to the commands */
+    /** List of tasks to pass to the commands. */
     private final TaskList tasks;
 
     /**
@@ -41,27 +41,25 @@ public class Parser {
      * @throws DukeException the duke exception for unrecognised commands.
      */
     public final Command checkOperation() throws DukeException {
-        // if it is "bye", we return false to indicate operation stoppage
         if (isBye()) {
             return new ExitCommand();
         } else if (isList()) {
-            return new ListCommand(this.tasks);
+            return new ListCommand(tasks);
         } else if (isDone()) {
-            return new DoneCommand(userInput, tasks);
+            return createDoneCommand();
         } else if (isDelete()) {
-            return new DeleteCommand(userInput, tasks);
+            return createDeleteCommand();
         } else if (isFind()) {
-            return new FindCommand(userInput, tasks);
+            return createFindCommand();
         } else if (isTodo()) {
-            return new AddCommand(AddCommandType.todo, userInput, tasks);
+            return createTodoCommand();
         } else if (isEvent()) {
-            return new AddCommand(AddCommandType.event, userInput, tasks);
+            return createEventCommand();
         } else if (isDeadline()) {
-            return new AddCommand(AddCommandType.deadline, userInput, tasks);
+            return createDeadlineCommand();
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-
     }
 
     /**
@@ -94,6 +92,17 @@ public class Parser {
     }
 
     /**
+     * Creates and returns a new instance of DoneCommand to be executed.
+     *
+     * @return new instance of DoneCommand.
+     */
+    private Command createDoneCommand() {
+        String[] inputs = this.userInput.split(" ");
+        int idx = Integer.parseInt(inputs[1]) - 1;
+        return new DoneCommand(idx, tasks);
+    }
+
+    /**
      * Checks if the delete command is to be executed.
      *
      * @return boolean.
@@ -102,6 +111,17 @@ public class Parser {
         Pattern deletePattern = Pattern.compile("^delete\\h\\d+$");
         Matcher deleteMatcher = deletePattern.matcher(this.userInput);
         return deleteMatcher.find();
+    }
+
+    /**
+     * Creates and returns a new instance of DeleteCommand to be executed.
+     *
+     * @return new instance of DeleteCommand.
+     */
+    private Command createDeleteCommand() {
+        String[] inputs = this.userInput.split(" ");
+        int idx = Integer.parseInt(inputs[1]) - 1;
+        return new DeleteCommand(idx, tasks);
     }
 
     /**
@@ -116,6 +136,16 @@ public class Parser {
     }
 
     /**
+     * Creates and returns a new instance of AddCommand to be executed, for AddCommandType.todo.
+     *
+     * @return new AddCommand for creating a Todo.
+     */
+    private Command createTodoCommand() {
+        String[] inputs = this.userInput.split(" ", 2);
+        return new AddCommand(AddCommandType.todo, inputs[1], tasks);
+    }
+
+    /**
      * Checks if the add command is to be executed for an Event task.
      *
      * @return boolean.
@@ -124,6 +154,22 @@ public class Parser {
         Pattern eventPattern = Pattern.compile("^event\\h\\w.*/at\\h\\w.*");
         Matcher eventMatcher = eventPattern.matcher(this.userInput);
         return eventMatcher.find();
+    }
+
+    /**
+     * Creates and returns a new instance of AddCommand to be executed, for AddCommandType.event.
+     *
+     * @return new AddCommand for creating an Event.
+     */
+    private Command createEventCommand() {
+        String[] inputs = this.userInput.split(" ", 2);
+        String[] args = inputs[1].split(" /at ", 2);
+        String[] datetimeArgs = args[1].split(" ", 2);
+
+        if (datetimeArgs.length > 1) {
+            return new AddCommand(AddCommandType.event, args[0], tasks, datetimeArgs[0], datetimeArgs[1]);
+        }
+        return new AddCommand(AddCommandType.event, args[0], tasks, datetimeArgs[0]);
     }
 
     /**
@@ -138,6 +184,22 @@ public class Parser {
     }
 
     /**
+     * Creates and returns a new instance of AddCommand to be executed, for AddCommandType.deadline.
+     *
+     * @return new AddCommand for creating a Deadline.
+     */
+    private Command createDeadlineCommand() {
+        String[] inputs = this.userInput.split(" ", 2);
+        String[] args = inputs[1].split(" /by ", 2);
+        String[] datetimeArgs = args[1].split(" ", 2);
+
+        if (datetimeArgs.length > 1) {
+            return new AddCommand(AddCommandType.deadline, args[0], tasks, datetimeArgs[0], datetimeArgs[1]);
+        }
+        return new AddCommand(AddCommandType.deadline, args[0], tasks, datetimeArgs[0]);
+    }
+
+    /**
      * Checks if the find command is to be executed for finding tasks with matching substrings.
      *
      * @return boolean.
@@ -146,6 +208,16 @@ public class Parser {
         Pattern findPattern = Pattern.compile("^find\\h\\w.*");
         Matcher findMatcher = findPattern.matcher(this.userInput);
         return findMatcher.find();
+    }
+
+    /**
+     * Creates and returns a new instance of FindCommand to be executed.
+     *
+     * @return new instance of FindCommand.
+     */
+    private Command createFindCommand() {
+        String substring = userInput.split(" ", 2)[1];
+        return new FindCommand(substring, tasks);
     }
 
 }

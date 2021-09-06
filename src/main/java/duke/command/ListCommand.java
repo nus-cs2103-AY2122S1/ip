@@ -7,13 +7,13 @@ import duke.task.TaskList;
  */
 public class ListCommand extends Command {
 
-    /** List of tasks to run the command on */
+    /** List of tasks to run the command on. */
     private final TaskList tasks;
 
     /**
      * Instantiates a new List command.
      *
-     * @param tasks list of tasks to list tasks from
+     * @param tasks list of tasks to list tasks from.
      */
     public ListCommand(TaskList tasks) {
         assert tasks != null : "TaskList cannot be null.";

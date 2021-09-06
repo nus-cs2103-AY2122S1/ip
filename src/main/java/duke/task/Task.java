@@ -11,9 +11,9 @@ public abstract class Task {
     protected final DateTimeFormatter dateTimePattern = DateTimeFormatter.ofPattern("MMM d yyyy hh:mma");
     /** The formatting patterns for Tasks with date inputs. */
     protected final DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("MMM d yyyy");
-    /** Description String of the Task */
+    /** Description String of the Task. */
     private final String description;
-    /** Boolean that determines whether a task is done or not */
+    /** Boolean that determines whether a task is done or not. */
     private boolean isDone;
 
     /**
@@ -38,7 +38,7 @@ public abstract class Task {
     /**
      * Gets description of the task.
      *
-     * @return the description.
+     * @return the description of the task.
      */
     public String getDescription() {
         return this.description;
@@ -47,7 +47,7 @@ public abstract class Task {
     /**
      * Gets status of the task (whether it is done or not).
      *
-     * @return true if the task is marked done, false otherwise.
+     * @return Boolean.
      */
     protected boolean getStatus() {
         return this.isDone;

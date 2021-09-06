@@ -51,6 +51,12 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * Gets response from the user.
+     *
+     * @param input String input from the user.
+     * @return Duke's reply message to the user input.
+     */
     public String getResponse(String input) {
         String output = "";
         try {

@@ -7,32 +7,29 @@ import duke.task.TaskList;
  */
 public class DoneCommand extends Command {
 
-    /** User inputted string */
-    private final String userInput;
-    /** List of tasks to run command on */
+    /** User inputted task number to mark as done. */
+    private final int idx;
+    /** List of tasks to run command on. */
     private final TaskList tasks;
 
     /**
      * Instantiates a new Done command.
      *
-     * @param userInput user-inputted string.
+     * @param idx       index of task to be marked done.
      * @param tasks     list of tasks to mark a task done from.
      */
-    public DoneCommand(String userInput, TaskList tasks) {
-        assert userInput != null : "userInput cannot be null.";
-        assert tasks != null : "TaskList cannot be null.";
 
-        this.userInput = userInput;
+    public DoneCommand(int idx, TaskList tasks) {
+        assert tasks != null : "TaskList cannot be null.";
+        this.idx = idx;
         this.tasks = tasks;
     }
 
     @Override
     public String execute() {
-        String[] inputs = this.userInput.split(" ");
-        int ind = Integer.valueOf(inputs[1]) - 1;
-        tasks.markDone(ind);
+        tasks.markDone(idx);
         String result = "Nice! I've marked this task as done:\n  "
-                + tasks.get(ind).toString();
+                + tasks.get(idx).toString();
         return result;
     }
 }
