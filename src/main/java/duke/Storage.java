@@ -37,7 +37,7 @@ public class Storage {
      *
      * @return ArrayList of tasks in the file
      */
-    @SuppressWarnings("checkstyle:Regexp")
+
     public ArrayList<Task> load() {
         if (!this.taskFile.exists()) {
             try {
@@ -81,7 +81,9 @@ public class Storage {
                     break;
                 }
 
-                default: { }
+                default: {
+                    assert false;
+                }
                 }
                 if (current.charAt(4) == 'X') {
                     currentTask.markAsDone();

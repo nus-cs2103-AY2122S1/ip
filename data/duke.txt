@@ -1,5 +1,0 @@
-[T][ ] read book
-[D][ ] return book (by: Sun, 06 Jun 2021 2359)
-[T][ ] borrow book
-[T][ ] jon sports club
-[E][ ] project meeting (at: Fri, 06 Aug 2021 1400)

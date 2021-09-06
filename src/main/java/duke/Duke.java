@@ -35,6 +35,7 @@ public class Duke {
         Parser parser = new Parser();
         try {
             Command inputCommand = parser.parseCommand(input);
+            assert inputCommand != null;
             switch (inputCommand) {
 
             case LIST: {
@@ -96,6 +97,7 @@ public class Duke {
             }
 
             default: {
+                assert false;
                 return "An error has occurred!";
             }
 
