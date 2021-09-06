@@ -136,10 +136,10 @@ public class TaskList {
      * @return A filterd list of tasks.
      */
     public List<Task> filter(String keyword) {
-        String regex = ".*\\b" + keyword + "\\b.*";
+        // String regex = ".*\\b" + keyword + "\\b.*";
         return this.tasksList
                 .stream()
-                .filter(task -> task.getDescription().matches(regex))
+                .filter(task -> task.getDescription().contains(keyword))
                 .collect(Collectors.toList());
     }
 

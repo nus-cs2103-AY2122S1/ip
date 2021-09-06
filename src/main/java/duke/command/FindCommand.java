@@ -27,9 +27,9 @@ public class FindCommand extends Command {
         List<Task> filteredList = tasks.filter(this.searchQuery);
         String msg;
         if (filteredList.size() > 0) {
-            msg = "Here are the tasks in your list: \n";
+            msg = "About " + filteredList.size() + " results: \n";
             for (int i = 0; i < filteredList.size(); i++) {
-                String item = "    " + (i + 1) + "." + filteredList.get(i);
+                String item = "    " + (i + 1) + "." + filteredList.get(i) + "\n";
                 msg += item;
             }
         } else {
@@ -38,4 +38,5 @@ public class FindCommand extends Command {
         return msg;
 
     }
+
 }
