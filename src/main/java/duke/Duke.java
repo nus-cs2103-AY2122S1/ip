@@ -86,10 +86,8 @@ public class Duke extends Application {
         dialogContainer.setPadding(new Insets(10, 10, 10, 10));
         dialogContainer.setSpacing(10);
         scrollPane.setContent(dialogContainer);
-
         userInput = new TextField();
         sendButton = new Button("Send");
-
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
