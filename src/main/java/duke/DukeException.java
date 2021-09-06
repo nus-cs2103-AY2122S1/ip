@@ -12,5 +12,6 @@ public class DukeException extends Exception {
      */
     public DukeException(String errorMsg) {
         super("OOPS!!! " + errorMsg);
+        assert !errorMsg.isEmpty() : "errorMsg should not be empty";
     }
 }

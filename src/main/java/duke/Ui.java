@@ -34,6 +34,7 @@ public class Ui {
 
     protected String respond(String message) {
         try {
+            assert !message.isEmpty() : "message should not be empty";
             storage.cache(message);
             return formatResponse(parser.parseCommand(message));
         } catch (DukeException e) {
@@ -44,6 +45,7 @@ public class Ui {
     protected static String formatResponse(String... messages) {
         String response = "";
         for (int i = 0; i < messages.length; i++) {
+            assert !messages[i].isEmpty() : "message should not be empty";
             response += messages[i];
             if (i < messages.length - 1) {
                 response += "\n";

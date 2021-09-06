@@ -22,6 +22,7 @@ public class TaskList {
      */
     public String[] addTask(Task t) {
         taskArray.add(t);
+        assert !taskArray.isEmpty() : "taskArray should no longer be empty";
         return new String[] {
             "Got it. I've added this task:",
             t.toString(),
@@ -44,6 +45,7 @@ public class TaskList {
         }
         Task t = taskArray.get(index);
         t.setCompleted();
+        assert t.toString().contains("[X]") : "Task t should be marked as completed";
         return new String[] {
             "Nice! I've marked this task as done:",
             t.toString()

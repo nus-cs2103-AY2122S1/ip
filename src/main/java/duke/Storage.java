@@ -46,7 +46,7 @@ public class Storage {
                             exit = true;
                         }
                     } catch (DukeException e) {
-                        // Skip invalid statements, continue adding tasks.
+                        // Skip previous invalid commands, continue adding tasks.
                     }
                 }
                 scanner.close();
@@ -56,6 +56,7 @@ public class Storage {
         } else {
             // Otherwise, create the directory for the cache file if necessary.
             File dir = cache.getParentFile();
+            assert dir != null : "dir should not be null";
             if (!dir.exists()) {
                 if (!dir.mkdirs()) {
                     throw new DukeException("Failed to crete required directory.");
