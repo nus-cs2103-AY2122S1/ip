@@ -27,7 +27,7 @@ public class Deadline extends Task {
 
 	/**
 	 * Formats string when saving to file.
-	 * 
+	 *
 	 * @return String representation of task when saving to a file
 	 */
 	public String toSaveString() {
