@@ -19,15 +19,19 @@ public class TaskListTest {
     public class StubTaskList {
         TaskList taskList;
         public StubTaskList() {
-            Task[] taskArray = new Task[]{new Event("event attend concert at 03/09/2021"),
+            try {
+                Task[] taskArray = new Task[] {new Event("event attend concert at 03/09/2021"),
                     new Deadline("deadline submit report by 30/08/2021"),
                     new Event("event attend workshop at 03/09/2021"),
                     new Deadline("deadline sign up for course by 03/09/2021")};
-            ArrayList<Task> taskArrayList = new ArrayList<>();
-            for (Task t : taskArray) {
-                taskArrayList.add(t);
+                ArrayList<Task> taskArrayList = new ArrayList<>();
+                for (Task t : taskArray) {
+                    taskArrayList.add(t);
+                }
+                taskList = new TaskList(taskArrayList);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
-            taskList = new TaskList(taskArrayList);
         }
 
         /**
@@ -50,7 +54,7 @@ public class TaskListTest {
         /** 
          * Class constructor.
          */
-        public DateStub() {
+        public DateStub() throws DukeException {
             date = new Date("03/09/2021");    
         }
 
@@ -69,9 +73,8 @@ public class TaskListTest {
      */
     @Test
     public void findTasksMatchingDate_03SEP_ThreeTASKS() {
-        Date stubDate = new DateStub().getDate();
         StubTaskList stubTaskList = new StubTaskList();
-        TaskList matchingTasks = stubTaskList.getTaskListTest().findTasksMatchingDate(stubDate);
+        TaskList matchingTasks = stubTaskList.getTaskListTest().findMatchingTasks("Sep 30");
         assertEquals(matchingTasks.getNumTasks(), 3);
     }
 

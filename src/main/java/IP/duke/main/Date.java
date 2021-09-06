@@ -15,16 +15,22 @@ import java.time.format.DateTimeFormatter;
 public class Date {
     protected LocalDate localDate;
     private String[] date;
-    
+    private final int MAX_COMP = 3;
+    private final int MIN_COMP = 2;
     /**
      * Class constructor.
      * 
-     * @param dateString string specifying a date in the form DD/MM/YYYY.
+     * @param dateComponents components of the date
      * @throws DateTimeParseException exception caused by improper time format.
      */
-    public Date(String dateString) throws DateTimeParseException {
-        date = dateString.split("/");
-            localDate = LocalDate.parse(String.format("%s-%s-%s", "2021", date[1], date[0]));
+    public Date(String ... dateComponents) throws DukeException {
+        try {
+            localDate = LocalDate.parse(String.format("%s-%s-%s", "2021", dateComponents[1], dateComponents[0]));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException(e);
+        } catch (DateTimeParseException e) {
+            throw new DukeException(e);
+        }
     }
 
     /**
@@ -64,10 +70,14 @@ public class Date {
      * @return a date object corresponding to the date string.
      * @throws ParseException exception caused by parsing date in improper format.
      */
-    public static Date convertDateStringToDate(String dateString) throws ParseException {
-        SimpleDateFormat monthDayFormat = new SimpleDateFormat("MMM D");
-        java.util.Date monthDayDate = monthDayFormat.parse(dateString);
-        SimpleDateFormat dateFormatToDate = new SimpleDateFormat("DD/MM/YYYY");
-        return new Date(dateFormatToDate.format(monthDayDate));
+    public static Date convertDateStringToDate(String dateString) throws DukeException {
+        try {
+            SimpleDateFormat monthDayFormat = new SimpleDateFormat("MMM D");
+            java.util.Date monthDayDate = monthDayFormat.parse(dateString);
+            SimpleDateFormat dateFormatToDate = new SimpleDateFormat("DD/MM/YYYY");
+            return new Date(dateFormatToDate.format(monthDayDate));
+        } catch (ParseException e) {
+            throw new DukeException(e);
+        }
     }
 }

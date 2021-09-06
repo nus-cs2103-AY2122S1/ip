@@ -1,5 +1,6 @@
 package IP.duke.command;
 import IP.duke.main.Date;
+import IP.duke.main.DukeException;
 import IP.duke.main.Storage;
 import IP.duke.main.TaskList;
 import IP.duke.main.Ui;
@@ -21,8 +22,13 @@ public class FilterCommand extends Command {
      * 
      * @param dateString the date of interest.
      */
-    public FilterCommand(String dateString) {
-        this.date = new Date(dateString);
+    public FilterCommand(String dateString) throws DukeException {
+        String[] dateComponents = dateString.split("/");
+        try {
+            this.date = new Date(dateComponents);
+        } catch (Exception e) {
+            throw new DukeException(e);
+        }
         isExitCommand = false;
     }
     

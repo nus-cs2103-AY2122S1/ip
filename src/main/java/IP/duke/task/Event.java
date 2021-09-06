@@ -1,6 +1,7 @@
 package IP.duke.task;
 
 import IP.duke.main.Date;
+import IP.duke.main.DukeException;
 
 import java.text.ParseException;
 import java.time.format.DateTimeParseException;
@@ -14,8 +15,7 @@ import java.time.format.DateTimeParseException;
 public class Event extends Task {
     private final String TASK_MARKER = "E";
     private String taskDescription;
-    private String eventDate;
-    private Date dueDate;
+    private Date eventDate;
     private final String TASK_KEYWORD = "event ";
     private final String AT_KEYWORD = "at ";
     
@@ -24,13 +24,14 @@ public class Event extends Task {
      * 
      * @param description consisting of task description and timing.
      */
-    public Event(String description) throws DateTimeParseException {
+    public Event(String description) throws DukeException {
         super();
         int startingIndex = description.indexOf(TASK_KEYWORD) + TASK_KEYWORD.length();
         int startOfTimeIndex = description.indexOf(AT_KEYWORD);
         taskDescription = description.substring(startingIndex, startOfTimeIndex - 1);   
-        eventDate = description.substring(startOfTimeIndex + AT_KEYWORD.length());
-        this.dueDate = new Date(eventDate);
+        String descriptionDate = description.substring(startOfTimeIndex + AT_KEYWORD.length());
+        String[] dateComponent = descriptionDate.split("/");
+        this.eventDate = new Date(dateComponent);
     }
 
     /**
@@ -40,9 +41,9 @@ public class Event extends Task {
      * @param dateOfTask date of the event task.
      * @throws ParseException due to improper date format.
      */
-    public Event(String eventDescription, String dateOfTask) throws ParseException {
+    public Event(String eventDescription, String dateOfTask) throws DukeException {
         taskDescription = eventDescription;
-        dueDate = Date.convertDateStringToDate(dateOfTask);
+        eventDate = Date.convertDateStringToDate(dateOfTask);
     }
     
     /**
@@ -54,7 +55,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[%s]%s %s (at: %s)", TASK_MARKER, super.toString(), taskDescription,
-                dueDate.toString());
+            eventDate.toString());
     }
 
     /**
@@ -64,7 +65,7 @@ public class Event extends Task {
      */
     public String formatToStore() {
         return String.format("%s | %s | %s | %s", TASK_MARKER, getStatusIcon() == " " ? 1 : 0,
-                taskDescription, dueDate.toString());
+                taskDescription, eventDate.toString());
     }
 
     /**
@@ -84,6 +85,6 @@ public class Event extends Task {
      */
     @Override
     public boolean isSameDate(String dateString) {
-        return this.dueDate.isSameDate(dateString);
+        return this.eventDate.isSameDate(dateString);
     }
 }

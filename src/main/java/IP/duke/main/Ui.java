@@ -103,9 +103,9 @@ public class Ui {
      * Displays the task deleted.
      * 
      * @param task the deleted task.
-     * @param numTaskRemaining number of tasks after deleting the task.
+     * @param numTasksRemaining number of tasks after deleting the task.
      */
-    public void showTaskDeleted(Task task, int numTaskRemaining) {
+    public void showTaskDeleted(Task task, int numTasksRemaining) {
         String deletionMessage = "Alrighty, I've removed this task:";
         System.out.println(deletionMessage);
         String deletedTask = String.format("~~%s~~", task.toString());

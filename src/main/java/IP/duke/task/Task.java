@@ -1,8 +1,5 @@
 package IP.duke.task;
 
-import javax.xml.stream.FactoryConfigurationError;
-import java.time.LocalDate;
-
 /**
  * Represents a task which can be marked done.
  * 

@@ -1,6 +1,8 @@
 package IP.duke.task;
 
 import IP.duke.main.Date;
+import IP.duke.main.Duke;
+import IP.duke.main.DukeException;
 
 import java.text.ParseException;
 import java.time.format.DateTimeParseException;
@@ -14,7 +16,6 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     private final String TASK_MARKER = "D";
     private String taskDescription;
-    private String deadlineDate;
     private Date dueDate;
     private final String TASK_KEYWORD = "deadline ";
     private final String BY_KEYWORD = "by ";
@@ -24,13 +25,14 @@ public class Deadline extends Task {
      * 
      * @param description consisting of task description and deadline date.
      */
-    public Deadline(String description) throws DateTimeParseException {
+    public Deadline(String description) throws DukeException {
         super();
         int startingIndex = description.indexOf(TASK_KEYWORD) + TASK_KEYWORD.length();
         int startOfTimingIndex = description.indexOf(BY_KEYWORD);
         taskDescription = description.substring(startingIndex, startOfTimingIndex - 1);
-        deadlineDate = description.substring(startOfTimingIndex + BY_KEYWORD.length());
-        dueDate = new Date(deadlineDate);
+        String deadlineDate = description.substring(startOfTimingIndex + BY_KEYWORD.length());
+        String[] dateComponents = deadlineDate.split("/");
+        dueDate = new Date(dateComponents);
     }
 
     /**
@@ -40,7 +42,7 @@ public class Deadline extends Task {
      * @param dateOfTask date of the deadline task.
      * @throws ParseException due to improper date format.
      */
-    public Deadline(String deadlineDescription, String dateOfTask) throws ParseException {
+    public Deadline(String deadlineDescription, String dateOfTask) throws DukeException {
         taskDescription = deadlineDescription;
         dueDate = Date.convertDateStringToDate(dateOfTask);
     }
