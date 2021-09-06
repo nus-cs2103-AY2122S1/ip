@@ -90,8 +90,7 @@ public class MainWindow extends Stage {
     @FXML
     private void handleReminderClick() {
         String response = duke.getReminder();
-        Alert alert = new Alert(Alert.AlertType.NONE);
-        alert.setAlertType(Alert.AlertType.CONFIRMATION);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText(response);
         alert.show();
     }
