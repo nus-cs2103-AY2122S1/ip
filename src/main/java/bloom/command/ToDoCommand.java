@@ -26,10 +26,9 @@ public class ToDoCommand extends Command {
      * Creates a to-do task.
      */
     @Override
-    public void run() {
+    public String run() {
         ToDo todo = new ToDo(this.description);
         TaskList.add(todo);
-        System.out.println(Message.COMMAND_ADD.getMessage());
-        System.out.println("\t   " + todo + "\n");
+        return Message.COMMAND_ADD.getMessage() + "\t   " + todo + "\n";
     }
 }

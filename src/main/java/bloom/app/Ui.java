@@ -31,16 +31,15 @@ public class Ui {
      * Processes whatever inputted by users into the bot.
      *
      * @param userInput the user input
+     * @return          the string response
      */
-    public void run(String userInput) {
+    public String run(String userInput) {
         Parser parser = new Parser();
-        System.out.println(Drawing.HORIZONTAL_LINE.getDrawing());
         try {
-            parser.parse(userInput).run();
+            return parser.parse(userInput).run();
         } catch (BloomUnknownCommandException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
-        System.out.println(Drawing.HORIZONTAL_LINE.getDrawing());
     }
 
     /**

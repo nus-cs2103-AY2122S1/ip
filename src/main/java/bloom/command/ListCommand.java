@@ -14,12 +14,16 @@ public class ListCommand extends Command {
      * Lists all current tasks.
      */
     @Override
-    public void run() {
-        System.out.println(Message.COMMAND_LIST.getMessage());
+    public String run() {
+        StringBuilder response = new StringBuilder(
+                Message.COMMAND_LIST.getMessage());
         for (int i = 0; i < TaskList.size(); ++i) {
             int index = i + 1;
             Task task = TaskList.get(i);
-            System.out.println("\t " + index + ". " + task);
+            response.append("\t ")
+                    .append(index).append(". ")
+                    .append(task).append("\n");
         }
+        return response.toString();
     }
 }

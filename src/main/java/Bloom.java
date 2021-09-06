@@ -33,12 +33,10 @@ public class Bloom extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
-    private Image bloom = new Image(this.getClass().getResourceAsStream("/images/bloom.jpg"));
-
-    public static void main(String[] args) {
-        Application.launch(Bloom.class, args);
-    }
+    private Image user = new Image(
+            this.getClass().getResourceAsStream("/images/user.jpg"));
+    private Image bloom = new Image(
+            this.getClass().getResourceAsStream("/images/bloom.jpg"));
 
     @Override
     public void start(Stage stage) {
@@ -91,30 +89,30 @@ public class Bloom extends Application {
 
         // Add functionality to handle user input
         sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            dialogContainer.getChildren()
+                    .add(getDialogLabel(userInput.getText()));
             userInput.clear();
         });
 
         userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            dialogContainer.getChildren()
+                    .add(getDialogLabel(userInput.getText()));
             userInput.clear();
         });
 
-        // Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        // Scroll down to the end every time dialogContainer's height changes
+        dialogContainer.heightProperty().addListener(
+                (observable) -> scrollPane.setVvalue(1.0));
 
-        // Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
+        // Add functionality to handle user input
+        sendButton.setOnMouseClicked((event) -> handleUserInput());
 
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+        userInput.setOnAction((event) -> handleUserInput());
     }
 
     /**
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return     a label with the specified text that has word wrap enabled
      */
@@ -141,10 +139,12 @@ public class Bloom extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Outputs response according to user inputs.
+     *
+     * @param input the user input
+     * @return      the string response
      */
     protected String getResponse(String input) {
-        return input;
+        return new Ui().run(input);
     }
 }

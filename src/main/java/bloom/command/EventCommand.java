@@ -34,10 +34,9 @@ public class EventCommand extends Command {
      * Creates an event task.
      */
     @Override
-    public void run() {
+    public String run() {
         Event event = new Event(this.description, this.at);
         TaskList.add(event);
-        System.out.println(Message.COMMAND_ADD.getMessage());
-        System.out.println("\t   " + event + "\n");
+        return Message.COMMAND_ADD.getMessage() + "\t   " + event + "\n";
     }
 }

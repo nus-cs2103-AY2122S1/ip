@@ -13,8 +13,8 @@ public class ExitCommand extends Command {
      * Stops the bot and says goodbye to users.
      */
     @Override
-    public void run() {
+    public String run() {
         new Ui().stop();
-        System.out.println(Message.COMMAND_EXIT.getMessage());
+        return Message.COMMAND_EXIT.getMessage();
     }
 }

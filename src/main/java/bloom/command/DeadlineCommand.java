@@ -34,10 +34,9 @@ public class DeadlineCommand extends Command {
      * Creates a deadline task.
      */
     @Override
-    public void run() {
+    public String run() {
         Deadline deadline = new Deadline(this.description, this.by);
         TaskList.add(deadline);
-        System.out.println(Message.COMMAND_ADD.getMessage());
-        System.out.println("\t   " + deadline + "\n");
+        return Message.COMMAND_ADD.getMessage() + "\t   " + deadline + "\n";
     }
 }

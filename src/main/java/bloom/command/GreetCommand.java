@@ -13,8 +13,8 @@ public class GreetCommand extends Command {
      * Starts the bot and greets users.
      */
     @Override
-    public void run() {
-        System.out.println(Drawing.LOGO.getDrawing());
-        System.out.println(Message.COMMAND_GREET.getMessage());
+    public String run() {
+        return Drawing.LOGO.getDrawing() + "\n"
+                + Message.COMMAND_GREET.getMessage();
     }
 }
