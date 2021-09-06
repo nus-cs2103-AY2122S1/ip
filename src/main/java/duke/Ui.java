@@ -60,6 +60,7 @@ public class Ui {
      * Alerts the user that a task has been marked as done.
      */
     public String notifyDone(Task doneTask) {
+        assert(doneTask != null);
         return "You've finished the task? Good job!\n"
                 + "This task has been marked as done:\n"
                 + doneTask.displayInfo();
@@ -69,6 +70,7 @@ public class Ui {
      * Alerts the user that multiple tasks have been marked as done.
      */
     public String notifyMultiDone(ArrayList<Task> doneTasks) {
+        assert(doneTasks.size() > 1);
         String output =  "You've finished the task? Good job!\n"
                 + "This task has been marked as done:\n";
         for (int i = 0 ; i < doneTasks.size(); i++) {
@@ -81,6 +83,7 @@ public class Ui {
      * Alerts the user that a task has been deleted.
      */
     public String notifyDelete(Task removedTask) {
+        assert(removedTask != null);
         return "Okay! Removing the task:\n"
             + removedTask.displayInfo();
     }
@@ -89,6 +92,7 @@ public class Ui {
      * Alerts the user that multiple tasks have been deleted.
      */
     public String notifyMultiDelete(ArrayList<Task> removedTasks) {
+        assert(removedTasks.size() > 1);
         String output =  "Okay! Removing the task:\n";
         for (int i = 0; i < removedTasks.size(); i++) {
             output += removedTasks.get(i).displayInfo() + "\n";
@@ -100,6 +104,7 @@ public class Ui {
      * Displays the list of tasks in the current active session.
      */
     public String notifyList(ArrayList<Task> taskArrList) {
+        assert(taskArrList != null);
         String output = "Here's your current list:\n";
         int listLength = taskArrList.size();
         for (int i = 0; i < listLength; i++) {
@@ -136,6 +141,7 @@ public class Ui {
      */
     public String notifyAdd(ArrayList<Task> taskArrList) {
         int listLength = taskArrList.size();
+        assert(listLength > 0);
         Task newTask = taskArrList.get(listLength - 1);
         return "New Task? I've added it to the list:\n"
                 + newTask.displayInfo()
@@ -148,6 +154,7 @@ public class Ui {
      * If the user is a new user, nothing is printed to the terminal.
      */
     public String printPrevSession(TaskList tasks, User user) {
+        assert(user != null);
         if (!user.isNewUser()) {
             ArrayList<Task> taskArrList = tasks.getAllTasks();
             int listLength = taskArrList.size();

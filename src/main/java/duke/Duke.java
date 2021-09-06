@@ -19,6 +19,7 @@ public class Duke {
      * @param user User object which encapsulates the users' name and visit history
      */
     public Duke(User user) {
+        assert(user != null) : "User for Duii cannot be null!";
         this.user = user;
         this.storage = new Storage();
         this.userInt = new Ui();
