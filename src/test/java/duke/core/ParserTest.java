@@ -27,7 +27,7 @@ public class ParserTest {
             assertEquals(null, Parser.identifyCommand("done"));
             fail();
         } catch (Exception e) {
-            assertEquals("Don't be shy! I need more information to carry out done :(", e.getMessage());
+            assertEquals("done should be in format: done [TASK NUMBER]", e.getMessage());
         }
     }
 

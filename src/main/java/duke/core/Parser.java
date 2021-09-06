@@ -34,29 +34,25 @@ public class Parser {
         String[] fullCommand = input.trim().split(" ", 2);
         final String command = fullCommand[0].trim();
         final String description = fullCommand.length > 1 ? fullCommand[1].trim() : "";
-        try {
-            switch(command) {
-            case "bye":
-                return new ExitCommand();
-            case "list":
-                return new ListCommand();
-            case "done":
-                return new DoneCommand(description);
-            case "delete":
-                return new DeleteCommand(description);
-            case "todo":
-                return new AddTodoCommand(description);
-            case "deadline":
-                return new AddDeadlineCommand(description);
-            case "event":
-                return new AddEventCommand(description);
-            case "find":
-                return new FindCommand(description);
-            default:
-                throw new DukeException("Sorry, I don't understand what you are saying!");
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Don't be shy! I need more information to carry out " + command + " :(");
+        switch(command) {
+        case "bye":
+            return new ExitCommand();
+        case "list":
+            return new ListCommand();
+        case "done":
+            return new DoneCommand(description);
+        case "delete":
+            return new DeleteCommand(description);
+        case "todo":
+            return new AddTodoCommand(description);
+        case "deadline":
+            return new AddDeadlineCommand(description);
+        case "event":
+            return new AddEventCommand(description);
+        case "find":
+            return new FindCommand(description);
+        default:
+            throw new DukeException("Sorry, I don't understand what you are saying!");
         }
     }
 }
