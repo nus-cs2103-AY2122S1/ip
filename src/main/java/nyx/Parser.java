@@ -63,6 +63,7 @@ public class Parser {
             }
 
             String[] splitInfo = info.split(" /by ");
+            assert splitInfo.length == 2 : "Deadline info is split wrongly";
             Deadline deadline = new Deadline(splitInfo[0].strip(), splitInfo[1]);
 
             try {
@@ -79,6 +80,7 @@ public class Parser {
             }
 
             splitInfo = info.split(" /at ");
+            assert splitInfo.length == 2 : "Event info is split wrongly";
             Event event = new Event(splitInfo[0].strip(), splitInfo[1]);
 
             try {
