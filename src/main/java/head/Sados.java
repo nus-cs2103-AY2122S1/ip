@@ -110,7 +110,6 @@ public class Sados extends Application {
                     Popup.errorPopup("Name and Date fields are empty!");
                 } else {
                     String searchName = nameInput.getText();
-                    System.out.println("Finding " + searchName);
                     filter(1, searchName, LocalDate.of(1, 1, 1));
                 }
             } else {

@@ -31,17 +31,46 @@ public class Task {
      * @return true if found, false otherwise.
      */
     public boolean nameContains(String str) {
-        String[] split = description.split(" ");
-        boolean result = false;
-        for (String s : split) {
-            if (s.equals(str)) {
-                result = true;
-                break;
+
+        String[] querySplit = str.split(" ");
+        int queryLength = querySplit.length;
+        String[] descriptionSplit = description.split(" ");
+        int descriptionLength = descriptionSplit.length;
+        if (descriptionLength < queryLength) {
+            return false;
+        } else if (descriptionLength == queryLength) {
+            return description.equalsIgnoreCase(str);
+        } else {
+            String[] updatedDescriptionArray = concatNWords(descriptionSplit, queryLength);
+            boolean result = false;
+            for (String s : updatedDescriptionArray) {
+                if (s.equalsIgnoreCase(str)) {
+                    result = true;
+                    break;
+                }
             }
+            return result;
         }
-        return result;
     }
 
+    public String[] concatNWords(String[] sourceArray, int queryLength) {
+        int sourceArrayLength = sourceArray.length;
+        int resultArrayLength = sourceArrayLength - queryLength + 1;
+        String[] resultArray = new String[resultArrayLength];
+        for (int i = 0; i < resultArrayLength; i++) {
+            StringBuilder resultString = new StringBuilder();
+            resultString.append(sourceArray[i]);
+            for (int j = 1; j < queryLength; j++) {
+                resultString.append(" ").append(sourceArray[i + j]);
+            }
+            resultArray[i] = resultString.toString();
+        }
+        return resultArray;
+    }
+
+    /**
+     * Marks this task as done.
+     */
     public void markDone() {
         isDone = !isDone;
     }
@@ -85,18 +114,6 @@ public class Task {
          */
         public Todo(String description) {
             super(description);
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            boolean result = false;
-            if (o instanceof Todo) {
-                Todo e = (Todo) o;
-                if (this.isDone == e.isDone && this.description.equals(e.description)) {
-                    result = true;
-                }
-            }
-            return result;
         }
 
         @Override
