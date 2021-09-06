@@ -1,6 +1,9 @@
 package duke.tasks;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.regex.Pattern;
 
 import duke.exceptions.UserInputError;
@@ -36,6 +39,40 @@ public abstract class Task {
         this.description = description;
         this.type = type;
         this.isDone = done;
+    }
+
+    /**
+     * Parse date String to identify natural dates, if existent, and convert them to YYYY-MM-DD format.
+     * Otherwise, parse String and throw an error if date String is in an invalid format.
+     *
+     * @param date String containing the input task date either in natural date format or YYYY-MM-DD
+     * @return Formatted date String of the task
+     */
+    protected LocalDate getDateFromString(String date) {
+        LocalDate today = LocalDate.now();
+
+        switch(date) {
+        case "mon":
+            return today.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
+        case "tues":
+            return today.with(TemporalAdjusters.next(DayOfWeek.TUESDAY));
+        case "wed":
+            return today.with(TemporalAdjusters.next(DayOfWeek.WEDNESDAY));
+        case "thurs":
+            return today.with(TemporalAdjusters.next(DayOfWeek.THURSDAY));
+        case "fri":
+            return today.with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
+        case "sat":
+            return today.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
+        case "sun":
+            return today.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
+        case "tmr":
+            return today.plusDays(1);
+        case "today":
+            return today;
+        default:
+            return LocalDate.parse(date);
+        }
     }
 
     /**

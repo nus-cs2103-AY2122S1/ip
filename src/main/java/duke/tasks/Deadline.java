@@ -25,7 +25,7 @@ public class Deadline extends Task {
         super(description, Task.Type.DEADLINE, done);
         assert !description.trim().equals("");
         try {
-            this.when = LocalDate.parse(when.trim());
+            this.when = getDateFromString(when.trim().toLowerCase());
         } catch (DateTimeException e) {
             throw new UserInputError("Wrong datetime format");
         }
