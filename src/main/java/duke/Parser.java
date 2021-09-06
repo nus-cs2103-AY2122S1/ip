@@ -6,8 +6,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import java.util.Arrays;
-
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
