@@ -5,37 +5,6 @@ import java.util.Date;
 
 public class DukeDate {
 
-
- // OPTION 1
-// Why you don't use SimpleDateFormat instead of regex :
-//
-//            try{
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
-//        format.parse("55555");
-//        System.out.println("Correct date");
-//    }catch(ParseException e){
-//        System.out.println("Incorrect date");
-//    }
-
-
- // OPTION 2
-
-    // from stackoverflow
-    // https://stackoverflow.com/questions/43845215/java-regex-to-check-for-date-and-time
-//    String[] patterns = {"yyyy-MM-dd HH:mm", "yyyy-MM-dd HH"};
-//    String date = "2018-02-02 11:50";
-//    boolean check = Arrays.asList(patterns).stream()
-//            .anyMatch(pattern -> {
-//                try {
-//                    LocalDateTime.parse(date, DateTimeFormatter.ofPattern(pattern));
-//                    System.out.println("Correct");
-//                    return true;
-//                } catch (Exception e) {
-//                    System.out.println("Not Correct");
-//                    return false;
-//                }
-//            });
-//
     public static Date formatDate(String dateLiteral){
         if(dateLiteral.length()==14 || dateLiteral.length()==15){
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");

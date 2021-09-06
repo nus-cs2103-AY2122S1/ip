@@ -113,7 +113,7 @@ public class Storage {
         // E | 0 | project meeting | Aug 6th 2-4pm
 
         String[] lineSplit = line.split(DELIMITER);
-        System.out.println(lineSplit.length);
+        //System.out.println(lineSplit.length);
         Task.TaskType taskType = lineSplit[0].equals("T") ? Task.TaskType.TODO :
                 lineSplit[0].equals("D") ? Task.TaskType.DEADLINE : Task.TaskType.EVENT;
 
@@ -143,6 +143,12 @@ public class Storage {
         }
 
         return currTask;
+
+    }
+
+    public String convertSavedStringDateToDukeDate(String savedDate){
+
+        return "";
 
     }
 
