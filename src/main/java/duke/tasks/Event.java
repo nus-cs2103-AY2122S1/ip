@@ -3,7 +3,6 @@ package duke.tasks;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 import duke.exceptions.UserInputError;
 
@@ -17,8 +16,8 @@ public class Event extends Task {
     /**
      * Constructor to create an Event task.
      *
-     * @param description details of task
-     * @param when deadline of task
+     * @param description Details of task.
+     * @param when Deadline of task.
      * @param done Boolean value that indicates completeness of task.
      * @throws UserInputError Throws error with bad user input.
      */
