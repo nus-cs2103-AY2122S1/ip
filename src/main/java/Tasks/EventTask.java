@@ -17,7 +17,7 @@ public class EventTask extends Task {
     }
 
     public String getDate(){
-        return at;
+        return dateReadable;
     }
 
     @Override

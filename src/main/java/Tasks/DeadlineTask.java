@@ -17,7 +17,7 @@ public class DeadlineTask extends Task{
     }
 
     public String getDate(){
-        return by;
+        return dateReadable;
     }
 
     @Override
