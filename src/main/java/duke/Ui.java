@@ -187,7 +187,7 @@ public class Ui {
     public static String markCompleteEvent(Event e) {
         String s = "Completed:"
                 + e.getDescription()
-                + " (by:"
+                + " (at: "
                 + e.getTimeframe()
                 + ")\n"
                 + "WEW that's another task completed";
@@ -213,7 +213,7 @@ public class Ui {
     public static String markCompleteDeadline(Deadline d) {
         String s = "Completed: "
                 + d.getDescription()
-                + " (by:"
+                + " (by: "
                 + d.getDeadline().format(d.getCurrentFormat()) + ")\n"
                 + "You didn't overshoot the deadline right?";
         System.out.println(s);
