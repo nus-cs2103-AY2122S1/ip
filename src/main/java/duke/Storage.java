@@ -30,7 +30,7 @@ public class Storage {
     protected static void initialise(TaskList taskList) {
         if (!createFile()) {
             // Found previously saved task
-            Storage.readTaskFile(new File(fileName), taskList);
+            readTaskFile(new File(fileName), taskList);
         }
     }
 

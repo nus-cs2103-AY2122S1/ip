@@ -1,9 +1,6 @@
 package commands;
 
 import tasks.TaskList;
-import tasks.TaskListHistory;
-
-import java.util.ArrayList;
 
 /**
  * A command to marks a task in Duke's taskList as done.
@@ -11,7 +8,6 @@ import java.util.ArrayList;
 public class DoneCommand extends TaskListIndexCommand {
 
     private final TaskList taskList;
-    private final TaskListHistory taskListHistory;
 
     /**
      * Creates a DoneCommand to mark a task in the taskList as completed.
@@ -19,25 +15,18 @@ public class DoneCommand extends TaskListIndexCommand {
      * @param input The input by the user that triggers this command.
      * @param taskList The taskList that contains the task to be mark as done.
      */
-    public DoneCommand(String input, TaskList taskList, TaskListHistory history) {
+    public DoneCommand(String input, TaskList taskList) {
         super(input);
         this.taskList = taskList;
-        this.taskListHistory = history;
     }
 
     @Override
-    protected CommandReturnStatus executeOnTaskList(int... listOfIndex) {
+    protected String executeOnTaskList(int... listOfIndex) {
         StringBuilder message = new StringBuilder();
-        ArrayList<Integer> stateChanges = new ArrayList<>();
-
-        for (int index : listOfIndex) {
-            message.append(this.taskList.markTaskAsDone(index)).append("\n");
-            stateChanges.add(index);
+        for (int ofIndex : listOfIndex) {
+            message.append(this.taskList.markTaskAsDone(ofIndex)).append("\n");
         }
-
-        this.taskListHistory.addTaskStateChanges(stateChanges);
-        this.setExecutionMessage(message.append(this.taskList.getTaskListStatus()).toString());
-        return CommandReturnStatus.TASK_MARKED_AS_DONE;
+        return message.append(this.taskList.getTaskListStatus()).toString();
     }
 
     @Override

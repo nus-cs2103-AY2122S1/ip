@@ -24,7 +24,7 @@ public class AddDeadlineCommand extends AddCommand {
     }
 
     @Override
-    public CommandReturnStatus execute() {
+    public boolean execute() {
         String details = this.removeFirstWordFromInput();
         if (details != null && this.verifyAddCommand(details.trim())) {
             Task task;
@@ -32,12 +32,12 @@ public class AddDeadlineCommand extends AddCommand {
                 task = Deadline.newDeadlineTask(details);
             } catch (DukeInvalidDateException e) {
                 this.setExecutionMessage(e.getMessage() + "\n");
-                return CommandReturnStatus.UNSUCCESSFUL;
+                return false;
             }
             this.setExecutionMessage(this.taskList.addTask(task));
-            return CommandReturnStatus.CHANGED_TASK_LIST;
+            return true;
         }
-        return CommandReturnStatus.UNSUCCESSFUL;
+        return false;
     }
 
     /**

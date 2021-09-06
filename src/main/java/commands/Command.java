@@ -5,31 +5,15 @@ package commands;
  */
 public abstract class Command {
 
-    /**
-     * The status of a command after it has been executed.
-     * UNSUCCESSFUL: An error occurred while executing the task.
-     * CHANGED_TASK_LIST: A command that involves changing the taskList is successful.
-     * SUCCESSFUL: A command that does not involve changing the taskList is successful.
-     * TASK_MARKED_AS_DONE: The command that marks tasks as done is successful.
-     * UNDO_SUCCESSFUL: The command that undo previous changes is successful.
-     */
-    public enum CommandReturnStatus {
-        UNSUCCESSFUL,
-        SUCCESSFUL,
-        CHANGED_TASK_LIST,
-        TASK_MARKED_AS_DONE,
-        UNDO_SUCCESSFUL
-    }
-
     /** The text to display to the user after the execution of a command */
     private String executionMessage;
 
     /**
      * Execute the respective command.
      *
-     * @return A command return status based on the enum above.
+     * @return True if the command is executed successfully, else false.
      */
-    public abstract CommandReturnStatus execute();
+    public abstract boolean execute();
 
     /**
      * Returns true if the command is supposed to exit the chat.

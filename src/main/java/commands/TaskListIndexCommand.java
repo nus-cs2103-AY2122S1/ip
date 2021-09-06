@@ -16,20 +16,21 @@ public abstract class TaskListIndexCommand extends Command {
         this.input = input;
     }
 
-    protected abstract CommandReturnStatus executeOnTaskList(int... listOfIndex);
+    protected abstract String executeOnTaskList(int... listOfIndex);
 
     @Override
-    public CommandReturnStatus execute() {
+    public boolean execute() {
         try {
             // Checks if an argument is provided
             String arguments = this.input.split(" ", 2)[1].trim();
 
             int[] listOfIndexes = this.convertStringArrayToIntArray(this.getIndex(arguments));
             listOfIndexes = this.removeDuplicateIndex(listOfIndexes);
-            return this.executeOnTaskList(listOfIndexes);
+            this.setExecutionMessage(this.executeOnTaskList(listOfIndexes));
+            return true;
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             this.setExecutionMessage(this.getInvalidArgumentsMessage());
-            return CommandReturnStatus.UNSUCCESSFUL;
+            return false;
         }
     }
 

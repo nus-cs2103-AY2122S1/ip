@@ -25,18 +25,17 @@ public class AddTodoCommand extends AddCommand {
     /**
      * Adds a tasks.Todo event based on the user's input after verifying that the
      * user's input is valid.
-     * @return
      */
     @Override
-    public CommandReturnStatus execute() {
+    public boolean execute() {
         String details = this.removeFirstWordFromInput();
         if (details != null && this.verifyAddCommand(details.trim())) {
             Task task = Todo.newTodoTask(details);
             this.setExecutionMessage(this.taskList.addTask(task));
-            return CommandReturnStatus.CHANGED_TASK_LIST;
+            return true;
         }
         this.setExecutionMessage(this.getInvalidArgumentsMessage());
-        return CommandReturnStatus.UNSUCCESSFUL;
+        return false;
     }
 
     @Override
