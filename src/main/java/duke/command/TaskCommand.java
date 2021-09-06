@@ -17,6 +17,9 @@ public class TaskCommand extends Command {
     }
 
     public String execute(TaskList tasks, Storage storage) throws DukeException {
+
+        assert userArgument != null;
+
         if (userArgument.equals("")) {
             throw new DukeException("The description of a Task cannot be empty.");
         }

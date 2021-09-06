@@ -13,6 +13,9 @@ public class DeleteCommand extends Command {
     }
 
     public String execute(TaskList tasks, Storage storage) throws DukeException {
+
+        assert userArgument != null;
+
         int indexToDelete = Utils.getInputNumber(userArgument);
 
         if (indexToDelete >= tasks.numberOfTasks() || indexToDelete < 0) {

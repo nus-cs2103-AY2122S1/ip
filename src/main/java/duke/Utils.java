@@ -37,6 +37,9 @@ public class Utils {
     }
 
     public static int getInputNumber(String userInput) throws DukeException {
+
+        assert userInput != null;
+
         try {
             return Integer.parseInt(userInput) - 1;
         } catch (NumberFormatException exception) {
@@ -45,6 +48,9 @@ public class Utils {
     }
 
     public static String showTasks(TaskList tasks) {
+
+        assert tasks != null;
+
         StringBuilder res = new StringBuilder();
         for (int i = 0; i < tasks.numberOfTasks(); i++) {
             res.append(String.format("%d. %s%n\n", i + 1, tasks.getTask(i)));

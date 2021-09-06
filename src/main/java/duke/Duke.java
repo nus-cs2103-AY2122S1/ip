@@ -10,6 +10,9 @@ public class Duke {
     private TaskList tasks;
 
     public Duke(String filepath) {
+
+        assert filepath != null;
+
         try {
             storage = new Storage(filepath);
             tasks = new TaskList(storage.loadTasks());
