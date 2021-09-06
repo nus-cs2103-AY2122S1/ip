@@ -19,6 +19,7 @@ import duke.task.ToDo;
 public class Storage {
     private static final String DONE_FLAG = "1";
     private static final String STRING_SEPERATOR = "\\|";
+    private String path;
 
     /**
      * Sole constructor for invocation by Duke.
