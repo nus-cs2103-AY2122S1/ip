@@ -2,7 +2,7 @@ package yoyo.task;
 
 import java.time.LocalDateTime;
 
-import yoyo.utility.Separator;
+import yoyo.utility.Constant;
 
 
 /**
@@ -52,9 +52,10 @@ public class Deadline extends Task {
      */
     @Override
     public String showStatusWrite() {
-        return this.printType() + this.printCompletionStatus()
-                + Separator.SEPARATOR + this.name
-                + Separator.SEPARATOR + this.datetime;
+        return this.printType()
+                + this.printCompletionStatus()
+                + Constant.SEPARATOR + this.name
+                + Constant.SEPARATOR + this.datetime;
     }
 
     /**
