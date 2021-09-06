@@ -31,6 +31,7 @@ public class Duke {
         } catch (DukeException e) {
             return e.getMessage();
         }
+
     }
 
     /**
@@ -40,6 +41,8 @@ public class Duke {
      * @return A response to be displayed to the user.
      */
     public String getResponse(String message) {
-        return ui.respond(message);
+        String response = ui.respond(message);
+        assert !response.isEmpty() : "response should not be empty";
+        return response;
     }
 }

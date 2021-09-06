@@ -24,6 +24,8 @@ public class Event extends Task {
         } catch (DateTimeParseException e) {
             throw new DukeException("Could not parse time input.");
         }
+        assert description != null : "description should not be null";
+        assert atTime != null : "byTime should not be null";
     }
 
     /**

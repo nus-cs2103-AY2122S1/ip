@@ -56,6 +56,7 @@ public class Ui {
     private static String formatResponse(String... messages) {
         StringBuilder response = new StringBuilder();
         for (int i = 0; i < messages.length; i++) {
+            assert !messages[i].isEmpty() : "message should not be empty";
             response.append(messages[i]);
             if (i < messages.length - 1) {
                 response.append("\n");

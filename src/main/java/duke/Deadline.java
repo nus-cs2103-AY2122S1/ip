@@ -18,12 +18,14 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) throws DukeException {
         super(description);
-        this.category = TaskType.deadline;
+        category = TaskType.deadline;
         try {
-            this.byTime = LocalDate.parse(by);
+            byTime = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
             throw new DukeException("Could not parse time input.");
         }
+        assert description != null : "description should not be null";
+        assert byTime != null : "byTime should not be null";
     }
 
     /**
