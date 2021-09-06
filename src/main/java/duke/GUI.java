@@ -29,13 +29,14 @@ public class GUI{
         return "Hello from\n" + "DUKE!" + "\nWhat can I do for you? :)";
     }
 
-    /**
+
      * function to respond to a user input
      * @params String s
      */
     public String respond(String s){
         if(s.contains("done")){
             int order = Integer.parseInt(s.substring(5)); //getting the order of the task
+            assert order > 0: "order should be more than 0";
             return lst.markDone(order);
         } else if(s.contains("list")){
             return lst.displayList();
@@ -47,6 +48,7 @@ public class GUI{
             return lst.addTodo(s);
         } else if(s.contains("delete")){
             int order = Integer.parseInt(s.substring(7)); //getting the order of the task
+            assert order > 0: "order should be more than 0";
             return lst.deleteTask(order);
         } else if (s.contains("find")){
             return lst.find(s.substring(5));
@@ -57,10 +59,6 @@ public class GUI{
         }
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
     public String getResponse(String input) {
         try{
             InputChecker ic = new InputChecker(input);
