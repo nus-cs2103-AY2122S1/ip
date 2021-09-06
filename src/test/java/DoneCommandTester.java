@@ -17,6 +17,7 @@ public class DoneCommandTester {
         this.ui = new Ui();
         this.storage = new Storage("DoneCommandTest.txt");
         try {
+            storage.clear();
             taskList = storage.load();
         } catch (Exception e) {
             taskList = new TaskList();
@@ -31,13 +32,14 @@ public class DoneCommandTester {
     @Test
     void testDoneCommandWhenNothingInList() {
         executeCommand("done 1");
-        assertEquals(taskList.size(), 0);
+        assertEquals(0, taskList.size());
     }
 
     @Test
     void testDoneCommand() {
         executeCommand("todo read books");
         executeCommand("done 1");
-        assertEquals(taskList.getAllTasks().get(0).getStatusIcon(), "X");
+        assertEquals("X", taskList.getAllTasks().get(0).getStatusIcon());
+
     }
 }

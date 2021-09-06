@@ -42,4 +42,17 @@ public class Storage {
             System.out.println("Error writing to file");
         }
     }
+
+    /**
+     * Clears all the task in the current text file.
+     */
+    public void clear() {
+        try {
+            TaskList tskLst = this.load();
+            tskLst.clearTasks();
+            save(tskLst);
+        } catch (IOException ioe) {
+            return;
+        }
+    }
 }

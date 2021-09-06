@@ -74,4 +74,8 @@ public class TaskList {
     public ArrayList<Task> getAllTasks() {
         return listOfTasks;
     }
+
+    public void clearTasks() {
+        listOfTasks = new ArrayList<Task>();
+    }
 }

@@ -17,6 +17,7 @@ public class TaskListTester {
         this.ui = new Ui();
         this.storage = new Storage("TaskListtest.txt");
         try {
+            storage.clear();
             taskList = storage.load();
         } catch (Exception e) {
             taskList = new TaskList();
