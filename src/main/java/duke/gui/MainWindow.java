@@ -30,11 +30,11 @@ public class MainWindow extends AnchorPane {
 
     /** Duke dialog box image. */
     private final Image dukeImage = new Image(this.getClass()
-            .getResourceAsStream("/images/DukeIcon.png"));
+            .getResourceAsStream("/images/dukeBot.png"));
 
     /** User dialog box image. */
     private final Image userImage = new Image(this.getClass()
-            .getResourceAsStream("/images/UserIcon.png"));
+            .getResourceAsStream("/images/userIcon.png"));
 
     /**
      * Initialises the scroll pane and the dialogContainer.
