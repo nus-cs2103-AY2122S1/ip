@@ -1,4 +1,4 @@
-package bob.GUI;
+package bob.gui;
 
 import bob.TaskList;
 import bob.exception.NoSearchResultException;
@@ -23,8 +23,8 @@ public class Ui {
      * Bob.txt does not exist yet either.
      */
     public String getDirectoryLoadingErrorMessage() {
-        return "You don't have the data directory and Bob text file yet." +
-                " I'll make them for you now, you're welcome! :D\n";
+        return "You don't have the data directory and Bob text file yet."
+                + " I'll make them for you now, you're welcome! :D\n";
     }
 
     /**
@@ -157,7 +157,7 @@ public class Ui {
      * Returns message for when the user does not specify any keyword for their search.
      */
     public String getNoKeywordExceptionMessage() {
-        return"What are you even looking for >:(\n";
+        return "What are you even looking for >:(\n";
     }
 
     /**

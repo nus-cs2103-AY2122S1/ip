@@ -2,7 +2,6 @@ package bob;
 
 import bob.exception.DirectoryNotFoundException;
 import bob.exception.FileNotFoundException;
-
 import bob.exception.InvalidDateException;
 import bob.task.Deadline;
 import bob.task.Event;
@@ -176,7 +175,7 @@ public class Storage {
      *
      * @param taskList New list of tasks to be saved to the bob.txt file.
      */
-    public void updateBobFile(TaskList taskList){
+    public void updateBobFile(TaskList taskList) {
         try {
             FileWriter writer = new FileWriter(this.path + "/bob.txt");
             writer.write("");

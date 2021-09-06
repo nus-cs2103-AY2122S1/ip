@@ -28,7 +28,7 @@ public class Event extends Task {
         } catch (DateTimeParseException e) {
             throw new InvalidDateException();
         }
-     }
+    }
 
     /**
      * Overrides the printTask() method in Task to print specifically the String representation of the Event task.

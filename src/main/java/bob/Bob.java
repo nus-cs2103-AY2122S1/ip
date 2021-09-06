@@ -1,10 +1,10 @@
 package bob;
 
-import bob.GUI.DialogBox;
-import bob.GUI.HelpDialogBox;
-import bob.GUI.Ui;
 import bob.exception.DirectoryNotFoundException;
 import bob.exception.FileNotFoundException;
+import bob.gui.DialogBox;
+import bob.gui.HelpDialogBox;
+import bob.gui.Ui;
 
 
 import java.awt.Desktop;
@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Objects;
-
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -34,7 +33,7 @@ import javafx.util.Duration;
 /**
  * A chatbot that stores, displays and alters the user's task list based on the user input.
  */
-public class Bob extends Application{
+public class Bob extends Application {
     /** Storage object that deals with loading tasks from the file and saving tasks in the file */
     private Storage storage;
 
@@ -48,10 +47,10 @@ public class Bob extends Application{
     private Parser parser;
 
     /** Whether the data directory is already present in the user computer */
-    boolean isDirectoryPresent = true;
+    private boolean isDirectoryPresent = true;
 
     /** Whether the bob.txt file is already present within the data directory in the user computer */
-    boolean isBobFilePresent = true;
+    private boolean isBobFilePresent = true;
 
     /** UI element that allows users to scroll up and down the stage to view more content */
     private ScrollPane scrollPane;
@@ -205,7 +204,7 @@ public class Bob extends Application{
             // Leave a short pause of 2 seconds after the user inputs "bye" to display Bob's goodbye message
             // before automatically closing the window and terminating the program.
             PauseTransition delay = new PauseTransition(Duration.seconds(2));
-            delay.setOnFinished( event -> Platform.exit() );
+            delay.setOnFinished(event -> Platform.exit());
             delay.play();
         } else { // If the user types in any other command the GUI should show the corresponding response from Bob.
             String response = parser.getResponse(userInput.getText(), ui, tasks, storage);

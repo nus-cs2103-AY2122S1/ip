@@ -1,8 +1,14 @@
 package bob;
 
-import bob.GUI.Ui;
-import bob.exception.*;
-
+import bob.exception.InvalidDateException;
+import bob.exception.InvalidInputException;
+import bob.exception.NoDeadlineException;
+import bob.exception.NoEventTimingException;
+import bob.exception.NoKeywordException;
+import bob.exception.NoTaskAndDateException;
+import bob.exception.NoTaskException;
+import bob.exception.OutOfBoundsException;
+import bob.gui.Ui;
 import bob.task.Deadline;
 import bob.task.Event;
 import bob.task.Task;
@@ -113,7 +119,8 @@ public class Parser {
      * @throws OutOfBoundsException If the user tries to mark as completed or remove a task not inside the task list.
      */
     private void checkInput(String response, TaskList tasklist) throws InvalidInputException, NoTaskException,
-            NoDeadlineException, NoEventTimingException, OutOfBoundsException, NoKeywordException, NoTaskAndDateException {
+            NoDeadlineException, NoEventTimingException, OutOfBoundsException, NoKeywordException,
+            NoTaskAndDateException {
         boolean isListCommand = Objects.equals(response, "list");
         boolean isHelpCommand = Objects.equals(response, "help");
         boolean isDoneCommand = response.matches("done(.*)");
@@ -150,7 +157,7 @@ public class Parser {
                 throw new NoDeadlineException();
             } else if (hasNoTaskAndDate) {
                 throw new NoTaskAndDateException();
-            } else if (splitResponse[1].split(" ", 3).length == 2){
+            } else if (splitResponse[1].split(" ", 3).length == 2) {
                 throw new NoTaskException();
             }
         } else if (isEventCommand) {
