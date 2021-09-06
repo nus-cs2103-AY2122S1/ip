@@ -3,6 +3,7 @@ package duke.tasks;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 import duke.exceptions.UserInputError;
 
@@ -25,7 +26,7 @@ public class Event extends Task {
         super(description, Task.Type.EVENT, done);
         assert !description.trim().equals("");
         try {
-            this.when = LocalDate.parse(when.trim());
+            this.when = getDateFromString(when.trim().toLowerCase());
         } catch (DateTimeException e) {
             throw new UserInputError("Wrong datetime format");
         }

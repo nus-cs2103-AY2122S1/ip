@@ -1,6 +1,9 @@
 package duke.tasks;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.regex.Pattern;
 
 import duke.exceptions.UserInputError;
@@ -36,6 +39,33 @@ public abstract class Task {
         this.description = description;
         this.type = type;
         this.isDone = done;
+    }
+
+    protected LocalDate getDateFromString(String date) {
+        LocalDate today = LocalDate.now();
+
+        switch(date) {
+        case "mon":
+            return today.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
+        case "tues":
+            return today.with(TemporalAdjusters.next(DayOfWeek.TUESDAY));
+        case "wed":
+            return today.with(TemporalAdjusters.next(DayOfWeek.WEDNESDAY));
+        case "thurs":
+            return today.with(TemporalAdjusters.next(DayOfWeek.THURSDAY));
+        case "fri":
+            return today.with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
+        case "sat":
+            return today.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
+        case "sun":
+            return today.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
+        case "tmr":
+            return today.plusDays(1);
+        case "today":
+            return today;
+        default:
+            return LocalDate.parse(date);
+        }
     }
 
     /**
