@@ -133,15 +133,16 @@ public class Duke {
      */
     public static String printList() {
         int number = 1;
-        String output = "____________________________________________________________\n"
-                + "Here are the tasks in your list:\n";
+        StringBuilder output = new StringBuilder("____________________________________________________________\n"
+                + "Here are the tasks in your list:\n");
+
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i) != null) {
-                output += number + "." + taskList.get(i).toString() + "\n";
+                output.append(number).append(".").append(taskList.get(i).toString()).append("\n");
                 number++;
             }
         }
-        return output;
+        return output.toString();
     }
 
     /**

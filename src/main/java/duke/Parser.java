@@ -8,7 +8,7 @@ public class Parser {
 
     /**
      * interprets string input from the user and translates it into commands, and uses Duke to execute them.
-     * @param input string input from the user of Duke
+     * @param input string input from the user of Duke.
      * @return a boolean indicating whether Duke should continue or whether it should go to sleep based on the input.
      */
     public static boolean interpretCommand(String input) {
@@ -180,7 +180,11 @@ public class Parser {
         return cont;
     }
 
-
+    /**
+     * Interprets string input like the above interpretCommand method, but this method instead returns a String
+     * @param input string input from the user of Duke.
+     * @return a String containing the response from Duke.
+     */
     public static String getResponse(String input) {
 
         String response = "No response from Duke for some reason!";
