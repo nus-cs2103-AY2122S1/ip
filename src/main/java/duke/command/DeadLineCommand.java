@@ -12,6 +12,8 @@ import duke.ui.Ui;
  */
 public class DeadLineCommand extends Command {
     private String task;
+    // Add 3 to index to avoid "by "
+    private final int indexToAvoidBy = 3;
 
     /**
      * Constructor for the DeadLine Command.
@@ -43,8 +45,7 @@ public class DeadLineCommand extends Command {
             }
             index++;
         }
-        // Add 3 to index to avoid "by "
-        index += 3;
+        index += indexToAvoidBy;
         while (index < data.length) {
             by += data[index];
             index++;

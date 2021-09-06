@@ -10,11 +10,12 @@ import duke.ui.Ui;
  * @author Benjamin Lui
  */
 public class ErrorCommand extends Command {
+    private final String errorMessage = "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
     /**
      * Executes the error command if an invalid command is used.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        return ui.showError("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+        return ui.showError(errorMessage);
     }
 }

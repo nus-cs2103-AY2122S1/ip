@@ -11,6 +11,7 @@ import duke.ui.Ui;
  */
 public class DoneCommand extends Command {
     private int taskNum;
+    private final String outOfBoundsErrorMessage = "That task doesn't exist!";
     /**
      * Constructor for the done command.
      * @param taskNumber the task that is to be marked as done
@@ -29,7 +30,7 @@ public class DoneCommand extends Command {
         try {
             return ui.doneTask(taskList.getAllTasks().get(taskNum));
         } catch (IndexOutOfBoundsException ioobe) {
-            return "That task doesn't exist!";
+            return outOfBoundsErrorMessage;
         }
     }
 }
