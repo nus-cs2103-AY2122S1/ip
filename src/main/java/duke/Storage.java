@@ -28,38 +28,42 @@ public class Storage {
 
             while (savedTasks.hasNextLine()) {
                 String curr = savedTasks.nextLine();
-
-                if (curr.startsWith("[T]")) {
-                    Task currentTask = new ToDo(curr.substring(7));
-                    tasks.add(currentTask);
-                } else if (curr.startsWith("[E]")) {
-                    int at = curr.lastIndexOf(" (at: ");
-                    int end = curr.lastIndexOf(")");
-                    assert at != -1;
-                    assert end != -1;
-                    Task currentTask = new Event(
-                            curr.substring(7, at),
-                            LocalDateTime.parse(curr.substring(at + 6, end),
-                                    DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"))
-                    );
-                    tasks.add(currentTask);
-                } else if (curr.startsWith("[D]")) {
-                    int by = curr.lastIndexOf(" (by: ");
-                    int end = curr.lastIndexOf(")");
-                    assert by != -1;
-                    assert end != -1;
-                    Task currentTask = new Deadline(
-                            curr.substring(7, by),
-                            LocalDateTime.parse(curr.substring(by + 6, end),
-                                    DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"))
-                    );
-                    tasks.add(currentTask);
-                }
+                parseStoredTask(curr, tasks);
             }
 
             return tasks;
+
         } catch (IOException e) {
             throw new DukeException("There is a problem loading saved data.");
+        }
+    }
+
+    private void parseStoredTask(String storedTask, ArrayList<Task> tasks) {
+        if (storedTask.startsWith("[T]")) {
+            Task currentTask = new ToDo(storedTask.substring(7));
+            tasks.add(currentTask);
+        } else if (storedTask.startsWith("[E]")) {
+            int at = storedTask.lastIndexOf(" (at: ");
+            int end = storedTask.lastIndexOf(")");
+            assert at != -1;
+            assert end != -1;
+            Task currentTask = new Event(
+                    storedTask.substring(7, at),
+                    LocalDateTime.parse(storedTask.substring(at + 6, end),
+                            DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"))
+            );
+            tasks.add(currentTask);
+        } else if (storedTask.startsWith("[D]")) {
+            int by = storedTask.lastIndexOf(" (by: ");
+            int end = storedTask.lastIndexOf(")");
+            assert by != -1;
+            assert end != -1;
+            Task currentTask = new Deadline(
+                    storedTask.substring(7, by),
+                    LocalDateTime.parse(storedTask.substring(by + 6, end),
+                            DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"))
+            );
+            tasks.add(currentTask);
         }
     }
 

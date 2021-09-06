@@ -20,6 +20,7 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         storage = new Storage();
+
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
