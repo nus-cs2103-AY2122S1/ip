@@ -10,6 +10,7 @@ import seedu.duke.command.FindCommand;
 import seedu.duke.command.GetCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
+import seedu.duke.command.ReminderCommand;
 import seedu.duke.command.ToDoCommand;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
@@ -81,6 +82,8 @@ public class Duke {
                 return new ListCommand(ui, taskList);
             case HELP:
                 return new HelpCommand(ui, taskList);
+            case REMINDER:
+                return new ReminderCommand(ui, taskList, dateTasks);
             default:
                 handleInvalidInputs(commandWord);
                 // Will not reach here since handleInvalidInputs(commandWord)

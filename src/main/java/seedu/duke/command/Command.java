@@ -27,6 +27,7 @@ public abstract class Command {
         BYE("bye"),
         LIST("list"),
         HELP("help"),
+        REMINDER("remind"),
         INVALID("");
 
         private String type;
@@ -59,6 +60,8 @@ public abstract class Command {
                 return LIST;
             case "help":
                 return HELP;
+            case "reminder":
+                return REMINDER;
             default:
                 return INVALID;
             }
