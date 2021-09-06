@@ -1,6 +1,7 @@
 package bobcat.model;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import bobcat.exception.InvalidOpsException;
 import bobcat.model.task.Task;
@@ -23,6 +24,7 @@ public class TaskList {
      * @return task to be added
      */
     public Task push(Task t) {
+        assert !Objects.equals(t, null);
         storage.add(t);
         index += 1;
         return storage.get(index - 1);
@@ -43,7 +45,7 @@ public class TaskList {
     }
 
     public Task[] getAllTasks() {
-        return storage.toArray(new Task[0]);
+        return storage.toArray(Task[]::new);
     }
 
     /**
@@ -65,6 +67,7 @@ public class TaskList {
      * @return Array of <code>Task</code>
      */
     public Task[] findByName(String name) {
+        assert !Objects.equals(name, null);
         return storage.stream().filter(x -> x.toString().contains(name)).toArray(Task[]::new);
     }
 

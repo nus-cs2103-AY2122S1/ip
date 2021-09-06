@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
+import java.util.Objects;
 
 import bobcat.executor.parser.StorageParser;
 import bobcat.model.TaskList;
@@ -29,6 +30,8 @@ public class Storage {
      * @throws IOException May throw IOException if storagePath is not appropriate.
      */
     public void initStorage(String storagePath, TaskList taskList) throws IOException {
+        assert !Objects.equals(storagePath, null) && !Objects.equals(storagePath, "");
+
         StorageParser storeParser = new StorageParser();
         Path path = Paths.get(storagePath);
         List<String> read = Files.readAllLines(path);
