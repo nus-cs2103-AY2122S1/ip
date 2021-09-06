@@ -29,63 +29,70 @@ public class AddCommand extends Command {
         String response = "";
         switch (type) {
         case TO_DO: {
-            if (commands.length() > 0) {
-                ToDo td = new ToDo(commands);
-                tasks.addToList(td);
-                response = "Got it. I've added this task:\n" + td + "\nNow you have " + tasks.getLength() + " tasks in the list.";
-                storage.updateFile(tasks);
-            } else {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-            }
-            break;
+            return addToDo(storage, tasks);
         }
         case DEADLINE: {
-            if (commands.length() > 0) {
-                try {
-                    String[] details = commands.split("/by ");
-                    if (details.length == 1) {
-                        throw new DukeException("☹ OOPS!!! Add a '/by deadline'");
-                    } else {
-                        Deadline deadline = new Deadline(details[0], details[1]);
-                        tasks.addToList(deadline);
-                        response = "Got it. I've added this task:\n" + deadline + "\nNow you have " + tasks.getLength() + " tasks in the list.";
-                        storage.updateFile(tasks);
-                    }
-                } catch (DateTimeParseException e) {
-                    throw new DukeException("☹ OOPS!!! The date of the deadline is poorly formatted (d/MM/yyyy or d/MM/yyyy HHmm)");
-                }
-
-            } else {
-                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-            }
-            break;
+            return addDeadline(storage, tasks);
         }
         case EVENT: {
-            if (commands.length() > 0) {
-
-                try {
-                    String[] details = commands.split("/at ");
-                    if (details.length == 1) {
-                        throw new DukeException("☹ OOPS!!! Add a '/at time of event'");
-                    } else {
-                        Event event = new Event(details[0], details[1]);
-                        tasks.addToList(event);
-                        response = "Got it. I've added this task:\n" + event + "\nNow you have " + tasks.getLength() + " tasks in the list.";
-                        storage.updateFile(tasks);
-                    }
-                } catch (DateTimeParseException e) {
-                    throw new DukeException("☹ OOPS!!! The date of the event is poorly formatted (d/MM/yyyy)");
-                }
-
-            } else {
-                throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
-            }
-            break;
+            return addEvent(storage, tasks);
         }
         default: {
-            break;
+            return response;
         }
         }
-        return response;
+    }
+
+    private String addToDo(Storage storage, TaskList tasks) throws DukeException {
+        if (commands.length() > 0) {
+            ToDo td = new ToDo(commands);
+            tasks.addToList(td);
+            storage.updateFile(tasks);
+            return "Got it. I've added this task:\n" + td + "\nNow you have " + tasks.getLength() + " tasks in the list.";
+        } else {
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+    }
+
+    private String addDeadline(Storage storage, TaskList tasks) throws DukeException {
+        if (commands.length() > 0) {
+            try {
+                String[] details = commands.split("/by ");
+                if (details.length == 1) {
+                    throw new DukeException("☹ OOPS!!! Add a '/by deadline'");
+                } else {
+                    Deadline deadline = new Deadline(details[0], details[1]);
+                    tasks.addToList(deadline);
+                    storage.updateFile(tasks);
+                    return "Got it. I've added this task:\n" + deadline + "\nNow you have " + tasks.getLength() + " tasks in the list.";
+                }
+            } catch (DateTimeParseException e) {
+                throw new DukeException("☹ OOPS!!! The date of the deadline is poorly formatted (d/MM/yyyy or d/MM/yyyy HHmm)");
+            }
+
+        } else {
+            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        }
+    }
+
+    private String addEvent(Storage storage, TaskList tasks) throws DukeException {
+        if (commands.length() > 0) {
+            try {
+                String[] details = commands.split("/at ");
+                if (details.length == 1) {
+                    throw new DukeException("☹ OOPS!!! Add a '/at time of event'");
+                } else {
+                    Event event = new Event(details[0], details[1]);
+                    tasks.addToList(event);
+                    storage.updateFile(tasks);
+                    return "Got it. I've added this task:\n" + event + "\nNow you have " + tasks.getLength() + " tasks in the list.";
+                }
+            } catch (DateTimeParseException e) {
+                throw new DukeException("☹ OOPS!!! The date of the event is poorly formatted (d/MM/yyyy)");
+            }
+
+        } else {
+            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+        }
     }
 }
