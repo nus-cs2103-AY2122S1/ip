@@ -2,6 +2,10 @@ package duke.util;
 
 /**
  * Class to handle the message from duke.
+ *
+ * @author marcuspeh
+ * @version A-Assertions
+ * @since 6 Sep 2021
  */
 public class Message {
     /** Message to be printed. */
@@ -13,6 +17,7 @@ public class Message {
      * @param s Message returned by the command.
      */
     Message(String... s) {
+        assert s.length > 0 : "Message cannot be blank.";
         this.message = s;
     }
 

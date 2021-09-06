@@ -14,6 +14,10 @@ import duke.util.Ui;
 /**
  * Main logic class for duke.
  * Run this class to run Duke without GUI.
+ *
+ * @author marcuspeh
+ * @version A-Assertions
+ * @since 6 Sep 2021
  */
 public class Duke {
     /** For the chatboard to read the user input. */
@@ -64,7 +68,9 @@ public class Duke {
                 if (command == null) {
                     isRunning = false;
                 } else {
-                    command.execute(taskList, ui).printMessage();
+                    Message response = command.execute(taskList, ui);
+                    assert response != null : " Message from command missing";
+                    response.printMessage();
                 }
             } catch (DukeException e) {
                 ui.chatErrorMessage().printMessage();
@@ -86,7 +92,9 @@ public class Duke {
             if (command == null) {
                 return ui.exitMessage().toString();
             } else {
-                return command.execute(taskList, ui).toString();
+                Message response = command.execute(taskList, ui);
+                assert response != null : " Message from command missing";
+                return response.toString();
             }
         } catch (DukeException e) {
             return ui.chatErrorMessage().toString();

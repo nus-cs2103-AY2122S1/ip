@@ -9,8 +9,8 @@ import duke.util.Ui;
  * Handles the command for delete.
  *
  * @author marcuspeh
- * @version A-JavaDoc
- * @since 23 Aug 2021
+ * @version A-Assertions
+ * @since 6 Sep 2021
  */
 public class DeleteCommand implements Command {
     /** Stores the message entered by the . */
@@ -33,7 +33,11 @@ public class DeleteCommand implements Command {
      */
     @Override
     public Message execute(TaskList taskList, Ui ui) {
+        assert taskList != null : " Tasklist is required by command.";
+        assert ui != null : " Ui is required by command.";
+
         try {
+            assert message.length() > Keyword.DELETE.length() : "Delete is in the following format 'delete <number>'";
             return taskList.deleteTask(Integer.parseInt(message.substring(Keyword.DELETE.length() + 1)));
         } catch (NumberFormatException e) {
             return ui.deleteErrorMessage();

@@ -9,8 +9,8 @@ import duke.util.Ui;
  * Handles the command for new deadline.
  *
  * @author marcuspeh
- * @version A-JavaDoc
- * @since 23 Aug 2021
+ * @version A-Assertions
+ * @since 6 Sep 2021
  */
 public class DeadlineCommand implements Command {
     /** Stores the message entered by the user. */
@@ -33,8 +33,13 @@ public class DeadlineCommand implements Command {
      */
     @Override
     public Message execute(TaskList taskList, Ui ui) {
+        assert taskList != null : " Tasklist is required by command.";
+        assert ui != null : " Ui is required by command.";
+
         try {
             String[] details = message.split(Keyword.DEADLINE.getSeparator());
+            assert details.length == 2 : "Deadline task is in the following format 'deadline <task> /by <date time>'";
+            assert details[0].length() > Keyword.DEADLINE.length() : "Deadline requires a description";
             return taskList.addDeadline(details[0].substring(Keyword.DEADLINE.length() + 1), details[1]);
         } catch (IndexOutOfBoundsException e) {
             return ui.deadlineErrorMessage();
