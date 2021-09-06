@@ -134,8 +134,7 @@ public class Duke extends Application {
             handleUserInput();
         });
 
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(new Label(ui.welcomeMessage()),
-                new ImageView(duke)));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(ui.welcomeMessage(), duke));
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
@@ -146,11 +145,11 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        String userText = userInput.getText();
+        String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, user),
+                DialogBox.getDukeDialog(dukeText, duke)
         );
         userInput.clear();
     }
@@ -162,7 +161,7 @@ public class Duke extends Application {
      * @param input The user input that will be read and deciphered.
      * @return A string that shows the program's response.
      */
-    private String getResponse(String input) {
+    public String getResponse(String input) {
         String toPrint = "";
         try {
             Command c = Parser.parse(input);

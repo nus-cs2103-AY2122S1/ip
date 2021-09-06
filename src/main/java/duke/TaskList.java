@@ -117,13 +117,18 @@ public class TaskList {
      * @throws DukeException A message thrown as there are no items that currently are in the list.
      */
     public String printItems() throws DukeException {
-        String toPrint = "";
+        String toPrint = "You have " + xs.size() + " tasks in your current list.\n";
         if (xs.size() == 0) {
             throw new DukeException("There are no items in the list!");
         }
         for (int i = 0; i < xs.size(); i++) {
+            if (i == 0) {
+                toPrint += ((i + 1) + ": " + xs.get(i));
+                continue;
+            }
             toPrint += ("\n" + (i + 1) + ": " + xs.get(i));
         }
+        System.out.println(toPrint);
         return toPrint;
     }
 
