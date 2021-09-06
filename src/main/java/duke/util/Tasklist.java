@@ -74,7 +74,7 @@ public class Tasklist {
             throw new MissingArgumentException("time", event);
         } else {
 
-            assert strArr[1].trim().length() == 1 : "Invalid Time inputted";
+            assert strArr[1].trim().length() > 2 : "Invalid Time inputted";
             if (event.equals("deadline")) {
                 return new DukeDate(parseDateTime(strArr[1], event));
             } else {
@@ -193,6 +193,118 @@ public class Tasklist {
 
         }
 
+    }
+
+    /**
+     * Update the designated tasks description
+     *
+     * @param taskNumber task whose description is to be updated
+     * @param newDescription new description string for the task
+     * @return String message to be printed depending on if tasks is marked
+     * @throws IndexOutOfRangeException throws the exception if index given is out of
+     *              range of the current list
+     */
+    public String updateDescription(int taskNumber, String newDescription) throws IndexOutOfRangeException {
+
+        if (taskNumber > tasks.size()) {
+
+            throw new IndexOutOfRangeException(taskNumber, tasks.size());
+
+        } else {
+            tasks.get(taskNumber - 1).changeDescription(newDescription);
+            String updateDescriptionMessage = "Nice! I've changed the description of the task:\n"
+                    + "  " + tasks.get(taskNumber - 1).toString();
+            return updateDescriptionMessage;
+        }
+    }
+
+    /**
+     * Update the designated tasks start date time
+     *
+     * @param taskNumber task whose description is to be updated
+     * @param newDateTime new date time string for the start time of task
+     * @return String message to be printed depending on if tasks is marked
+     * @throws IndexOutOfRangeException throws the exception if index given is out of
+     *              range of the current list
+     * @throws InvalidArgumentException throws the exception if user tries to change
+     *                                  the start time of a non-event task
+     */
+    public String updateStartDateTime(int taskNumber, String newDateTime) throws IndexOutOfRangeException,
+        InvalidArgumentException {
+
+        if (taskNumber > tasks.size()) {
+
+            throw new IndexOutOfRangeException(taskNumber, tasks.size());
+
+        } else {
+
+            Task currentTask = tasks.get(taskNumber - 1);
+            boolean isEvent = currentTask instanceof Event;
+            if (isEvent) {
+                Event currentEvent = (Event) currentTask;
+                LocalDateTime officialNewStartDateTime = parseDateTime(newDateTime, "update");
+                currentEvent.changeStartDateTime(officialNewStartDateTime);
+                String updateStartDateTimeMessage = "Nice! I've changed the start time of the task:\n"
+                        + "  " + currentTask.toString();
+                return updateStartDateTimeMessage;
+            } else {
+
+                String taskName = currentTask instanceof ToDo ? "todo" : "deadline";
+                throw new InvalidArgumentException("times", taskName);
+
+            }
+
+
+        }
+    }
+
+    /**
+     * Update the designated tasks end date time
+     *
+     * @param taskNumber task whose description is to be updated
+     * @param newDateTime new date time string for the start time of task
+     * @return String message to be printed depending on if tasks is marked
+     * @throws IndexOutOfRangeException throws the exception if index given is out of
+     *              range of the current list
+     * @throws InvalidArgumentException throws the exception if user tries to change
+     *                                  the start time of a non-event task
+     */
+    public String updateEndDateTime(int taskNumber, String newDateTime) throws IndexOutOfRangeException,
+        InvalidArgumentException {
+
+        if (taskNumber > tasks.size()) {
+
+            throw new IndexOutOfRangeException(taskNumber, tasks.size());
+
+        } else {
+
+            Task currentTask = tasks.get(taskNumber - 1);
+            boolean isToDo = currentTask instanceof ToDo;
+            if (!isToDo) {
+                if (currentTask instanceof Event) {
+
+                    Event currentEvent = (Event) currentTask;
+                    LocalDateTime officialNewEndDateTime = parseDateTime(newDateTime, "update");
+                    currentEvent.changeEndDateTime(officialNewEndDateTime);
+                    String updateEndDateTimeMessage = "Nice! I've changed the end time of the task:\n"
+                            + "  " + currentTask.toString();
+                    return updateEndDateTimeMessage;
+
+                } else {
+                    Deadline currentEvent = (Deadline) currentTask;
+                    LocalDateTime officialNewEndDateTime = parseDateTime(newDateTime, "update");
+                    currentEvent.changeEndDateTime(officialNewEndDateTime);
+                    String updateEndDateTimeMessage = "Nice! I've changed the start time of the task:\n"
+                            + currentTask.toString();
+                    return updateEndDateTimeMessage;
+                }
+
+            } else {
+                throw new InvalidArgumentException("set time", "update todo");
+            }
+
+
+        }
     }
 
     /**

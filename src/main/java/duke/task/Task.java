@@ -64,6 +64,17 @@ public class Task {
     }
 
     /**
+     * Setter that sets the description of the task
+     *
+     * @return boolean Returns the true when description changed
+     */
+    public boolean changeDescription(String newDescription) {
+
+        this.description = newDescription;
+        return true;
+    }
+
+    /**
      * Getter that returns the description of the task
      *
      * @return boolean Returns true if search term exists in the description

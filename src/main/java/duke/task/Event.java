@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 import duke.util.DukeDate;
 
 /**
@@ -36,6 +38,26 @@ public class Event extends Task {
     public DukeDate getDuration() {
 
         return this.duration;
+
+    }
+
+    /**
+     * Setter that sets the start date time of the event
+     *
+     */
+    public void changeStartDateTime(LocalDateTime newStartDateTime) {
+
+        this.duration.setStartTime(newStartDateTime);
+
+    }
+
+    /**
+     * Setter that sets the end date time of the event
+     *
+     */
+    public void changeEndDateTime(LocalDateTime newEndDateTime) {
+
+        this.duration.setEndTime(newEndDateTime);
 
     }
 

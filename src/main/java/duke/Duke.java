@@ -11,7 +11,7 @@ import duke.util.Ui;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-CI. Set up continuous integration
+ * Current Progress: C-Update. Easily edit details of tasks
  *
  * Description:
  * On running the program, Duke greets the user and awaits for inputted text.

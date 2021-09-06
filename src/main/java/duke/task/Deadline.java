@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 import duke.util.DukeDate;
 
 /**
@@ -35,6 +37,16 @@ public class Deadline extends Task {
     public DukeDate getDeadline() {
 
         return this.dueDate;
+
+    }
+
+    /**
+     * Setter that sets the end date time of the event
+     *
+     */
+    public void changeEndDateTime(LocalDateTime newEndDateTime) {
+
+        this.dueDate.setEndTime(newEndDateTime);
 
     }
 
