@@ -7,8 +7,8 @@ import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
 /**
- * A class which stores a date as a LocalDateTime object if provided
- * with correctly formatted string input, else simply as a string.
+ * A class which stores a date as a LocalDateTime object if provided with
+ * correctly formatted string input, else simply as a string.
  */
 public class LocalDateTimeOrString implements Serializable {
     private static final DateTimeFormatter IN_FORMATTER = DateTimeFormatter
@@ -19,10 +19,11 @@ public class LocalDateTimeOrString implements Serializable {
     private String dateTimeString;
 
     /**
-     * Constructor for an object which stores a date as a LocalDateTime object if provided
-     * with correctly formatted string input, else simply as a string.
+     * Constructor for an object which stores a date as a LocalDateTime object if
+     * provided with correctly formatted string input, else simply as a string.
      *
-     * @param dateTimeInput The string input to be parsed as a date & time, if possible.
+     * @param dateTimeInput The string input to be parsed as a date & time, if
+     *                      possible.
      */
     public LocalDateTimeOrString(String dateTimeInput) {
         try {
@@ -34,6 +35,7 @@ public class LocalDateTimeOrString implements Serializable {
 
     @Override
     public String toString() {
+        assert (dateTime != null || dateTimeString != null) : "Cannot be both null";
         return (dateTime != null) ? OUT_FORMATTER.format(dateTime) : dateTimeString;
     }
 
@@ -47,6 +49,8 @@ public class LocalDateTimeOrString implements Serializable {
             return false;
         }
         LocalDateTimeOrString other = (LocalDateTimeOrString) o;
+        assert (dateTime != null || dateTimeString != null) : "Cannot be both null";
+        assert (other.dateTime != null || other.dateTimeString != null) : "Compared datetime - cannot be both null";
         return Objects.equals(dateTime, other.dateTime) && Objects.equals(dateTimeString, other.dateTimeString);
     }
 }

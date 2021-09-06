@@ -24,18 +24,14 @@ import javafx.util.Duration;
  */
 public class Ui {
     private static final String LOGO = "  /$$                           /$$      \n"
-                                       + " | $$                          | $$      \n"
-                                       + " | $$$$$$$   /$$$$$$  /$$   /$$| $$$$$$$ \n"
-                                       + " | $$__  $$ /$$__  $$| $$  | $$| $$__  $$\n"
-                                       + " | $$  \\ $$| $$  \\__/| $$  | $$| $$  \\ $$\n"
-                                       + " | $$  | $$| $$      | $$  | $$| $$  | $$\n"
-                                       + " | $$$$$$$/| $$      |  $$$$$$/| $$  | $$\n"
-                                       + " |_______/ |__/       \\______/ |__/  |__/\n";
+            + " | $$                          | $$      \n" + " | $$$$$$$   /$$$$$$  /$$   /$$| $$$$$$$ \n"
+            + " | $$__  $$ /$$__  $$| $$  | $$| $$__  $$\n" + " | $$  \\ $$| $$  \\__/| $$  | $$| $$  \\ $$\n"
+            + " | $$  | $$| $$      | $$  | $$| $$  | $$\n" + " | $$$$$$$/| $$      |  $$$$$$/| $$  | $$\n"
+            + " |_______/ |__/       \\______/ |__/  |__/\n";
 
-    // TODO: image null handling
-    private final Image bruhImage = new Image(this.getClass().getResourceAsStream("/images/bruh.jpg"));
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private final Image errorImage = new Image(this.getClass().getResourceAsStream("/images/error.png"));
+    private Image bruhImage;
+    private Image userImage;
+    private Image errorImage;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -82,6 +78,14 @@ public class Ui {
         AnchorPane mainLayout = new AnchorPane();
         scene = new Scene(mainLayout);
 
+        assert getClass().getResourceAsStream("/images/bruh.jpg") != null : "Bruh image cannot be null";
+        assert getClass().getResourceAsStream("/images/user.png") != null : "User image cannot be null";
+        assert getClass().getResourceAsStream("/images/error.png") != null : "Error image cannot be null";
+
+        bruhImage = new Image(this.getClass().getResourceAsStream("/images/bruh.jpg"));
+        userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+        errorImage = new Image(this.getClass().getResourceAsStream("/images/error.png"));
+
         stage.setTitle("Bruh");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -124,8 +128,8 @@ public class Ui {
     }
 
     /**
-     * Handles user input by parsing it into commands & redirecting
-     * said commands into the specified command runner.
+     * Handles user input by parsing it into commands & redirecting said commands
+     * into the specified command runner.
      *
      * @param commandRunner The command runner to be provided with commands.
      */
@@ -135,11 +139,10 @@ public class Ui {
         try {
             Command command = Parser.parseInputToCommand(userInput);
             commandRunner.runCommand(command);
+            assert command.getDescription() != null : "Description cannot be null";
             Label bruhText = new Label(command.getDescription());
-            dialogContainer.getChildren().addAll(
-                    new UserDialogBox(userText, new ImageView(userImage)),
-                    new BruhDialogBox(bruhText, new ImageView(bruhImage))
-            );
+            dialogContainer.getChildren().addAll(new UserDialogBox(userText, new ImageView(userImage)),
+                    new BruhDialogBox(bruhText, new ImageView(bruhImage)));
             if (command.isExit()) {
                 PauseTransition exit = new PauseTransition(Duration.seconds(2.0));
                 exit.setOnFinished(event -> Platform.exit());
@@ -161,9 +164,7 @@ public class Ui {
      * @param errorMessage The error message to be displayed.
      */
     private void handleException(Label userText, String errorMessage) {
-        dialogContainer.getChildren().addAll(
-                new UserDialogBox(userText, new ImageView(userImage)),
-                new BruhDialogBox(new Label(errorMessage), new ImageView(errorImage))
-        );
+        dialogContainer.getChildren().addAll(new UserDialogBox(userText, new ImageView(userImage)),
+                new BruhDialogBox(new Label(errorMessage), new ImageView(errorImage)));
     }
 }

@@ -28,27 +28,28 @@ public abstract class Task implements Serializable {
     /**
      * Returns the appropriate task, as specified by the keyword in the input.
      *
-     * @param inputs An array of the string input, divided into the first word and the rest of the input.
+     * @param inputs An array of the string input, divided into the first word and
+     *               the rest of the input.
      * @return The task as specified by the input.
      * @throws BruhException if an error occurs in creating the task.
      */
     public static Task createTask(String[] inputs) throws BruhException {
+        assert inputs.length == 2 : "2 elements in inputs array";
         String keyword = inputs[0];
 
         switch (keyword) {
-        case "todo":
-            return new Todo(inputs[1]);
-        case "deadline":
-        case "event":
-            return TimedTask.createTimedTask(inputs);
-        default:
-            throw new InvalidArgumentException();
+            case "todo":
+                return new Todo(inputs[1]);
+            case "deadline":
+            case "event":
+                return TimedTask.createTimedTask(inputs);
+            default:
+                throw new InvalidArgumentException();
         }
     }
 
     /**
-     * Checks if a task's date & time corresponds with the
-     * specified date & time.
+     * Checks if a task's date & time corresponds with the specified date & time.
      *
      * @param dateTimeOrString The specified date & time to be checked against.
      * @return True if the date & time match, false otherwise.
@@ -61,7 +62,8 @@ public abstract class Task implements Serializable {
      * Checks if a task's description contains a specified search term.
      *
      * @param searchTerm The search term to be checked against.
-     * @return True if the task description contains the search term, false otherwise.
+     * @return True if the task description contains the search term, false
+     *         otherwise.
      */
     public boolean descriptionContains(String searchTerm) {
         return description.contains(searchTerm);
