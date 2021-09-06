@@ -2,6 +2,9 @@ package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.junit.jupiter.api.Test;
 
 /**
@@ -10,27 +13,29 @@ import org.junit.jupiter.api.Test;
 public class EventTest {
 
     /**
-     * Checks if completed events are handled appropriately.
+     * Checks if completed deadlines are handled appropriately.
      */
     @Test
     public void completedEventTest() {
         try {
-            Event event = new Event("completed event", "2012-12-29");
+            Event event = new Event("completed event", LocalDate.now());
             event.setCompleted();
-            assertEquals("[E][X] completed event (at: Dec 29 2012)", event.toString());
+            String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            assertEquals("[E][X] completed event (at: " + currentDate + ")", event.toString());
         } catch (DukeException e) {
             System.out.println(e);
         }
     }
 
     /**
-     * Checks if incomplete events are handled appropriately.
+     * Checks if incomplete deadlines are handled appropriately.
      */
     @Test
     public void incompleteEventTest() {
         try {
-            Event event = new Event("incomplete event", "2015-03-12");
-            assertEquals("[E][ ] incomplete event (at: Mar 12 2015)", event.toString());
+            Event event = new Event("incomplete event", LocalDate.now());
+            String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            assertEquals("[E][ ] incomplete event (at: " + currentDate + ")", event.toString());
         } catch (DukeException e) {
             System.out.println(e);
         }
