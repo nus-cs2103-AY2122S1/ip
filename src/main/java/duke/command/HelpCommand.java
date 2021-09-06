@@ -39,4 +39,20 @@ public class HelpCommand extends Command {
             return ui.getHelpMessageForCommand(commandAndArgument[1]);
         }
     }
+
+    /**
+     * Checks whether another object is equal with this help command.
+     *
+     * @param other The object being compared to.
+     * @return true if both are help commands and share the same user input, false otherwise.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof HelpCommand) {
+            HelpCommand otherCommand = (HelpCommand) other;
+            return this.userInput.equals(otherCommand.userInput);
+        } else {
+            return false;
+        }
+    }
 }
