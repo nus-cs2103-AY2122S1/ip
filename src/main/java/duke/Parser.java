@@ -8,10 +8,21 @@ import duke.tasks.Task;
 import duke.tasks.ToDosTask;
 
 
+/**
+ * Parser that takes in the user input and decides what command to throw
+ */
+
 public class Parser {
     Parser(){
 
     }
+
+    /**
+     * Method that takes in user input and decides what command to return
+     *
+     * @param input User Input
+     * @throws NoSuchCommandException If the input is invalid
+     */
 
     public static Command parse(String input) throws NoSuchCommandException {
         switch(input.split(" ")[0]) {
@@ -55,6 +66,8 @@ public class Parser {
                 } catch (NoSuchCommandException ex) {
                     throw new NoSuchCommandException("Invalid Command");
                 }
+            case "bye":
+                return new ByeCommand();
             default:
                 throw new NoSuchCommandException("Invalid Command");
         }
