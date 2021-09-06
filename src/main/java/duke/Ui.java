@@ -85,11 +85,11 @@ public class Ui {
     public String checkDate(TaskList taskList, LocalDate localDate) {
         ArrayList<Task> matchingDates = taskList.checkDate(localDate);
 
-        String output = "";
+        StringBuilder output = new StringBuilder();
         for (int i = 1; i <= matchingDates.size(); i++) {
-            output = output + i + ". " + matchingDates.get(i - 1).toString() + "\n";
+            output = output.append(i + ". " + matchingDates.get(i - 1).toString() + "\n");
         }
-        return output;
+        return output.toString();
     }
 
     /**
@@ -99,8 +99,8 @@ public class Ui {
      * @param task to add.
      */
     public String add(TaskList taskList, Task task) {
-            return "Got it. I've added this task:\n  " + task + "\nNow you have " + taskList.getTasks().size()
-                    + " tasks in the list.";
+        return "Got it. I've added this task:\n  " + task + "\nNow you have " + taskList.getTasks().size()
+                + " tasks in the list.";
     }
 
     /**
