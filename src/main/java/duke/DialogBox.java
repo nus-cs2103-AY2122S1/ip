@@ -31,24 +31,27 @@ public class DialogBox extends HBox {
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
+        int pictureRadius = 50;
 
         // create circle clipper for image view
-        Circle clipper = new Circle(50);
-        clipper.setCenterX(50);
-        clipper.setCenterY(50);
+        Circle clipper = new Circle(pictureRadius);
+        clipper.setCenterX(pictureRadius);
+        clipper.setCenterY(pictureRadius);
         // clip imageview with circle
         iv.setClip(clipper);
 
         text.setWrapText(true);
         // add text label horizontal paddings
-        text.setPadding(new Insets(0, 10, 0, 10));
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        int textHorizontalPadding = 10;
+        text.setPadding(new Insets(0, textHorizontalPadding, 0, textHorizontalPadding));
+        displayPicture.setFitWidth(pictureRadius * 2);
+        displayPicture.setFitHeight(pictureRadius * 2);
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
         // add dialog paddings in all directions
-        this.setPadding(new Insets(20, 20, 20, 20));
+        int dialogPadding = 20;
+        this.setPadding(new Insets(dialogPadding));
     }
 
     /**
@@ -71,8 +74,9 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         var userDialog = new DialogBox(l, iv);
         // set user dialog background color
-        userDialog.setBackground(new Background(new BackgroundFill(Color.rgb(202, 225, 255),
-                new CornerRadii(20), new Insets(10))));
+        Color userDialogBoxColor = Color.rgb(202, 225, 255);
+        userDialog.setBackground(new Background(new BackgroundFill(
+                userDialogBoxColor, new CornerRadii(20), new Insets(10))));
         return userDialog;
     }
 
@@ -87,8 +91,9 @@ public class DialogBox extends HBox {
         var db = new DialogBox(l, iv);
         db.flip();
         // set duke dialog background color
-        db.setBackground(new Background(new BackgroundFill(Color.rgb(255, 231, 186),
-                new CornerRadii(20), new Insets(10))));
+        Color dukeDialogColor = Color.rgb(255, 231, 186);
+        db.setBackground(new Background(new BackgroundFill(
+                dukeDialogColor, new CornerRadii(20), new Insets(10))));
         return db;
     }
 }

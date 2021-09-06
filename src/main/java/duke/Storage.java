@@ -130,13 +130,16 @@ public class Storage {
      * @param tasks The list of tasks to be written.
      */
     public void writeTasksToData(TaskList tasks) throws DukeException {
+        Path dataFileFullPath = Path.of(this.filePath + this.fileName);
         try {
-            Files.write(Paths.get(this.filePath + this.fileName), tasks.toDataString());
+            ArrayList<String> tasksString = tasks.toDataString();
 
+            Files.write(dataFileFullPath, tasksString);
         } catch (IOException ioException) {
             try {
-                Files.createDirectories(Paths.get(this.filePath));
-                Path p = Files.createFile(Paths.get(this.filePath + this.fileName));
+                Path dataFileDirectory = Path.of(this.filePath);
+                Files.createDirectories(dataFileDirectory);
+                Files.createFile(dataFileFullPath);
             } catch (IOException ioExp) {
                 throw new DukeException("Failed to create Directories/File: " + ioExp.getMessage());
             }
