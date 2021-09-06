@@ -30,7 +30,7 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(task);
-        ui.showMessage(this.message(tasks));
+        ui.showMessage(this.getMessage(tasks));
     }
 
     /**
@@ -40,7 +40,7 @@ public class AddCommand extends Command {
      * @return Message to display to the user.
      */
     @Override
-    public String message(TaskList tasks) {
+    public String getMessage(TaskList tasks) {
         return "Got it. I've added this task:\n"
                 + task.toString()
                 + "\n";

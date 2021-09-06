@@ -20,14 +20,14 @@ public class Storage {
     private static final String DONE_FLAG = "1";
     private static final String STRING_SEPERATOR = "\\|";
 
-    private String path;
-
     /**
      * Sole constructor for invocation by Duke.
      *
      * @param path Path to the log file to read from or write to.
      */
     protected Storage(String path) {
+        assert path != null;
+
         this.path = path;
     }
 
@@ -37,7 +37,6 @@ public class Storage {
      * @return TaskList of the tasks stored in the file.
      */
     protected TaskList load() {
-
         TaskList tasks = new TaskList();
 
         try {

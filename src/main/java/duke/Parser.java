@@ -9,6 +9,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 // Duke Exceptions
 import duke.exception.DukeException;
@@ -33,10 +34,14 @@ public class Parser {
      * @throws DukeException Invalid inputs recieved.
      */
     protected static Command parse(String input) throws DukeException {
+        assert input != null;
+
         String[] inputArray = input.split(" ");
         int selectedTask;
 
         switch (inputArray[0]) {
+        case "help":
+            return new HelpCommand();
         case "bye":
             return new ExitCommand();
         case "list":

@@ -17,7 +17,7 @@ public class ExitCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         storage.saveFile(tasks);
-        ui.showMessage(this.message(tasks));
+        ui.showMessage(this.getMessage(tasks));
         ui.exit();
     }
 
@@ -28,7 +28,7 @@ public class ExitCommand extends Command {
      * @return Message to display to the user.
      */
     @Override
-    public String message(TaskList tasks) {
+    public String getMessage(TaskList tasks) {
         return "Bye. Don't come again!";
     }
 

@@ -14,28 +14,20 @@ import javafx.scene.layout.HBox;
 public class DialogBox extends HBox {
 
     /**
-     * Public constructor for dialog box.
+     * Private constructor for dialog box.
      * @param l label to display.
      * @param iv picture to display.
      */
-    public DialogBox(Label l, ImageView iv) {
+    private DialogBox(Label l, ImageView iv) {
+        assert l != null : "Label should not be null.";
+        assert iv != null : "Image should not be null.";
+
         l.setWrapText(true);
         iv.setFitWidth(100.0);
         iv.setFitHeight(100.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(l, iv);
-    }
-
-    /**
-     * Creates a user dialog box
-     *
-     * @param l label to display
-     * @param iv image to display
-     * @return dialog box for user inputs
-     */
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
     }
 
     /**
@@ -49,6 +41,19 @@ public class DialogBox extends HBox {
     }
 
     /**
+     * Creates a user dialog box
+     *
+     * @param l label to display
+     * @param iv image to display
+     * @return dialog box for user inputs
+     */
+    public static DialogBox getUserDialog(Label l, ImageView iv) {
+        var db = new DialogBox(l, iv);
+        db.flip();
+        return db;
+    }
+
+    /**
      * Creates a Duk dialog box
      *
      * @param l label to display
@@ -56,8 +61,6 @@ public class DialogBox extends HBox {
      * @return dialog box for Duk responses
      */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
-        db.flip();
-        return db;
+        return new DialogBox(l, iv);
     }
 }
