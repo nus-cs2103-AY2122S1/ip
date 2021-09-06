@@ -1,6 +1,5 @@
 package duke;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,7 +7,7 @@ import java.util.Scanner;
  * Class handling interactions with the users
  */
 public class Ui {
-    private Scanner s = new Scanner(System.in);
+    private final Scanner s = new Scanner(System.in);
 
     /**
      * Retrieve the next command from the user and executes it.

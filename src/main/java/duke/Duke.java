@@ -46,6 +46,7 @@ public class Duke {
         String nextLine;
         Command nextCommand = Command.INVALID;
         do {
+            assert !parser.isBye(nextCommand) : "Program did not exit on Bye Command";
             nextLine = ui.nextLine();
             this.handleCommand(nextLine);
         } while (!parser.isBye(nextCommand));
@@ -56,15 +57,13 @@ public class Duke {
      * Parses and execute a command.
      *
      * @param command Command to be executed.
-     * @throws DukeException When the command is wrongly formatted.
      * @return Response from the program.
      */
     public String handleCommand (String command) {
         try {
             Command nextCommand = parser.parseCommand(command);
             String[] arguments = parser.parseArguments(nextCommand, command);
-            String response = execute(nextCommand, arguments);
-            return response;
+            return execute(nextCommand, arguments);
         } catch (DukeException err) {
             return ui.printDukeException(err);
         }
@@ -78,7 +77,6 @@ public class Duke {
      *
      * @param c Command to be executed
      * @param arguments Arguments of the Command
-     * @throws DukeException
      */
     private String execute(Command c, String[] arguments) {
         try {
