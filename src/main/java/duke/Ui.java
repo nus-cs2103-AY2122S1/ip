@@ -44,6 +44,7 @@ public class Ui {
      * @return task list
      */
     public String showTaskList(TaskList taskList) {
+        assert taskList.size() != 0;
         StringBuilder list = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 1; i < taskList.size() + 1; i++) {
             String s = String.format("  %d.%s%n\n", i, taskList.get(i));
