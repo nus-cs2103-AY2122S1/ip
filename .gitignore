@@ -54,3 +54,6 @@ src/main/.idea/vcs.xml
 src/main/.idea/.gitignore
 
 src/main/java/META-INF/MANIFEST.MF
+src/main/java/ui/images/DaDuke.png
+src/main/java/ui/images/DaUser.png
+src/main/java/ui/images/DukeMascot.png

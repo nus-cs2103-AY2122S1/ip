@@ -48,7 +48,8 @@ public final class DeadlineCommand extends Command {
                         + "     Please input in the form: 'deadline <Name> /by <Date>'.";
             } else {
                 return "     " + e.getMessage() + "\n"
-                        + "     Hey, no deadline recorded does not mean no deadline >:(";
+                        + "     Hey, no deadline recorded does not mean no deadline >:(\n"
+                        + "     An estimation will be fine, I will remind you on that day.";
             }
         }
     }

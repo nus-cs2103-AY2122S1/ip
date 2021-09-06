@@ -34,6 +34,6 @@ public final class ByeCommand extends Command {
         assert list != null : "invalid TaskList object detected";
         assert ui != null : "invalid Ui object detected";
         assert storage != null : "invalid Storage object detected";
-        return "Bye. Hope to see you again soon!";
+        return "";
     }
 }

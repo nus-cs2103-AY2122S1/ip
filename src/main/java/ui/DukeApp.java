@@ -3,11 +3,13 @@ package ui;
 import commands.Command;
 import duke.DukeException;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -29,6 +31,8 @@ public final class DukeApp extends Application {
     private Ui ui;
     private Parser parser;
     private Storage storage;
+    private Stage stage;
+    private UserPrompts userPrompts;
 
     /**
      * Constructs a DukeApp object.
@@ -50,6 +54,8 @@ public final class DukeApp extends Application {
 
     @Override
     public void start(Stage stage) {
+        this.stage = stage;
+        this.userPrompts = new UserPrompts();
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -100,6 +106,11 @@ public final class DukeApp extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(Ui.getWelcomeMessage())));
     }
+    //@@author
+
+    private void terminateSession() {
+        stage.close();
+    }
 
     private void handleUserInput() {
         String inputText = userInput.getText();
@@ -113,7 +124,8 @@ public final class DukeApp extends Application {
                     DialogBox.getDukeDialog(dukeText)
             );
             if (c.isExit()) {
-                System.exit(0);
+                userPrompts.showExitMessage();
+                terminateSession();
             }
         } else {
             dialogContainer.getChildren().addAll(DialogBox.getUserDialog(new Label(inputText)),
@@ -123,9 +135,11 @@ public final class DukeApp extends Application {
     }
 
     private String getResponse(String input) {
+        if (input.equals("")) {
+            return input;
+        }
         return ui.getSeparator() + "\n"
                 + input + "\n"
                 + ui.getSeparator();
     }
 }
-//@@author

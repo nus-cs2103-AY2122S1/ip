@@ -1,12 +1,12 @@
 package duke;
 
 /**
- * The DukeException class inherits Exception and
+ * The duke.DukeException class inherits Exception and
  * is unique Duke instances.
  */
 public class DukeException extends Exception {
     /**
-     * Constructs the DukeException object.
+     * Constructs the duke.DukeException object.
      *
      * @param s the message associated with the exception
      */

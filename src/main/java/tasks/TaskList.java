@@ -1,10 +1,10 @@
 package tasks;
 
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+
+import duke.DukeException;
 
 /**
  * The TaskList class stores the list of tasks.
@@ -121,8 +121,8 @@ public final class TaskList {
      * @param task the task to be added
      */
     public String addTask(Task task) {
-        assert (task instanceof DeadLineTask) || (task instanceof EventTask) ||
-                (task instanceof ToDoTask) : "incorrect task created";
+        assert (task instanceof DeadLineTask) || (
+                task instanceof EventTask) || (task instanceof ToDoTask) : "incorrect task created";
         if (tasks == null) {
             tasks = new ArrayList<>();
         }
@@ -165,11 +165,11 @@ public final class TaskList {
      */
     public ArrayList<Task> findTasksDue(String userInput) {
         String[] date = userInput.split("/");
-        LocalDate localDate = LocalDate.parse(date[0] + "-" + date[1] + "-" + date[2]);
-        ArrayList<Task> excludeIrrelevantTasks = (ArrayList<Task>) tasks.stream().filter(task -> task.getLocalDate() != null)
-                .collect(Collectors.toList());
+        LocalDate localDate = LocalDate.parse(date[2] + "-" + date[1] + "-" + date[0]);
+        ArrayList<Task> excludeIrrelevantTasks = (ArrayList<Task>) tasks.stream()
+                .filter(task -> task.getLocalDate() != null).collect(Collectors.toList());
         return (ArrayList<Task>) excludeIrrelevantTasks.stream().filter(
-                task -> task.getLocalDate().equals(localDate)).collect(Collectors.toList());
+            task -> task.getLocalDate().equals(localDate)).collect(Collectors.toList());
     }
 
     /**
@@ -180,7 +180,6 @@ public final class TaskList {
      */
     public ArrayList<Task> findTask(String target) {
         return (ArrayList<Task>) tasks.stream().filter(
-                task -> task.getDescription().toLowerCase()
-                        .contains(target.toLowerCase())).collect(Collectors.toList());
+            task -> task.getDescription().toLowerCase().contains(target.toLowerCase())).collect(Collectors.toList());
     }
 }

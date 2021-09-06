@@ -59,6 +59,6 @@ public final class DoneCommand extends Command {
             return "     " + e.getMessage();
         }
         assert !result.equals("") : "message for executing done is null";
-        return  result;
+        return result;
     }
 }

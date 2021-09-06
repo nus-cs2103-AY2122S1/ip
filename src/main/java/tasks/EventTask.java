@@ -1,7 +1,11 @@
 package tasks;
 
+import duke.DukeException;
+
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,34 +32,37 @@ public final class EventTask extends Task {
      *
      * @param description the input string to describe the Event task
      * @param date the date of the event
+     * @throws DukeException thrown when date input format is not supported
      */
-    public EventTask(String description, String date) {
+    public EventTask(String description, String date) throws DukeException{
         super(description);
+        LocalDate day = getDate(date);
+        if (day == null) {
+            throw new DukeException("Invalid date format! Please input 'DD/MM/YYYY'.");
+        }
         this.date = date;
-        String day = checkForDate(date);
-        if (!day.equals("")) {
-            LocalDate ld = convertDate(day);
-            setLocalDate(ld);
-        }
+        setLocalDate(day);
     }
 
-    private String checkForDate(String userInput) {
-        String temp = "^[0-9]{1,2}[\\\\/][0-9]{1,2}[\\\\/][0-9]{4}\\s[0-9]{4}$";
+    private LocalDate getDate(String userInput) {
+        String str = userInput.replaceAll(" ", "");
+        String temp = "[0-9]{1,2}[\\\\/][0-9]{1,2}[\\\\/][0-9]{4}";
         Pattern p = Pattern.compile(temp);
-        Matcher m = p.matcher(userInput);
+        Matcher m = p.matcher(str);
+        String dateStr;
         if (m.find()) {
-            return m.group();
+            dateStr = m.group();
+            try {
+                String[] date = dateStr.split("/");
+                int day = Integer.parseInt(date[0]);
+                int month = Integer.parseInt(date[1]);
+                int year = Integer.parseInt(date[2]);
+                return LocalDate.of(year, month, day);
+            } catch (DateTimeException e) {
+                return null;
+            }
         }
-        return "";
-    }
-
-    private LocalDate convertDate(String input) {
-        assert input != null : "no date detected";
-        String[] date = input.substring(0, input.length() - 4).split("/");
-        int day = Integer.parseInt(date[0].replaceAll(" ", ""));
-        int month = Integer.parseInt(date[1].replaceAll(" ", ""));
-        int year = Integer.parseInt(date[2].replaceAll(" ", ""));
-        return LocalDate.of(year, month, day);
+        return null;
     }
 
     /**
@@ -70,7 +77,6 @@ public final class EventTask extends Task {
     private void setLocalDate(LocalDate localDate) {
         this.localDate = localDate;
     }
-
 
     /**
      * Retrieves the information on the date associated with task.
@@ -90,14 +96,9 @@ public final class EventTask extends Task {
      */
     @Override
     public String getDescription() {
-        if (this.localDate == null) {
-            return super.getDescription() + " " + "(at: " + this.date + ")";
-        } else {
-            return super.getDescription() + " " + "(at: " + this.localDate.getDayOfMonth() + " "
-                    + Month.of(this.localDate.getMonthValue()) + " " + this.localDate.getYear() + ")";
-        }
+        return super.getDescription() + " " + "(at: " + this.localDate.getDayOfMonth() + " "
+                + Month.of(this.localDate.getMonthValue()) + " " + this.localDate.getYear() + ")";
     }
-
 
     /**
      * Retrieves the simple description of the task.

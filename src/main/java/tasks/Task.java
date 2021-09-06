@@ -2,8 +2,6 @@ package tasks;
 
 import java.time.LocalDate;
 
-import ui.Ui;
-
 /**
  * The Task class implements the tasks to be tracked by the
  * Duke assistant.
@@ -40,7 +38,7 @@ public class Task {
         } else {
             result = "You have already completed this task before!";
         }
-       return "     " + result + "\n" + "     " + getType() + isDone + " " + getDescription();
+        return "     " + result + "\n" + "     " + getType() + isDone + " " + getDescription();
     }
 
     /**

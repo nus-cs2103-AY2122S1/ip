@@ -1,5 +1,8 @@
 package tasks;
 
+import duke.DukeException;
+
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.regex.Matcher;
@@ -28,34 +31,37 @@ public final class DeadLineTask extends Task {
      *
      * @param description the input string to describe the Deadline task
      * @param date the do-by-date
+     * @throws DukeException thrown when date input format is not supported
      */
-    public DeadLineTask(String description, String date) {
+    public DeadLineTask(String description, String date) throws DukeException {
         super(description);
+        LocalDate day = getDate(date);
+        if (day == null) {
+            throw new DukeException("Invalid date format! Please input 'DD/MM/YYYY'.");
+        }
         this.dueDate = date;
-        String day = checkForDate(date);
-        if (!day.equals("")) {
-            LocalDate ld = convertDate(day);
-            setLocalDate(ld);
-        }
+        setLocalDate(day);
     }
 
-    private String checkForDate(String userInput) {
-        String temp = "^[0-9]{1,2}[\\\\/][0-9]{1,2}[\\\\/][0-9]{4}\\s[0-9]{4}$";
+    private LocalDate getDate(String userInput) {
+        String str = userInput.replaceAll(" ", "");
+        String temp = "[0-9]{1,2}[\\\\/][0-9]{1,2}[\\\\/][0-9]{4}";
         Pattern p = Pattern.compile(temp);
-        Matcher m = p.matcher(userInput);
+        Matcher m = p.matcher(str);
+        String dateStr;
         if (m.find()) {
-            return m.group();
+            dateStr = m.group();
+            try {
+                String[] date = dateStr.split("/");
+                int day = Integer.parseInt(date[0]);
+                int month = Integer.parseInt(date[1]);
+                int year = Integer.parseInt(date[2]);
+                return LocalDate.of(year, month, day);
+            } catch (DateTimeException e) {
+                return null;
+            }
         }
-        return "";
-    }
-
-    private LocalDate convertDate(String input) {
-        assert input != null : "no date detected";
-        String[] date = input.substring(0, input.length() - 4).split("/");
-        int day = Integer.parseInt(date[0].replaceAll(" ", ""));
-        int month = Integer.parseInt(date[1].replaceAll(" ", ""));
-        int year = Integer.parseInt(date[2].replaceAll(" ", ""));
-        return LocalDate.of(year, month, day);
+        return null;
     }
 
     /**

@@ -21,7 +21,7 @@ import ui.Ui;
  */
 
 public final class Storage {
-    private static final String FILE_PATH = "./data/duke.txt";
+    private static final String DATA_PATH = "./data/duke.txt";
 
     /**
      * Checks if folder and text files for where the information
@@ -33,7 +33,7 @@ public final class Storage {
      */
     public void createFiles() throws DukeException {
         File folder = new File("./data");
-        File saves = new File(FILE_PATH);
+        File saves = new File(DATA_PATH);
         try {
             if (!folder.exists() || !folder.isDirectory()) {
                 folder.mkdir();
@@ -53,20 +53,23 @@ public final class Storage {
      * @param tasks the list of tasks to be saved
      */
     public void resetFile(ArrayList<Task> tasks) {
-        File file = new File(FILE_PATH);
-        if (!file.delete()) {
-            Ui.showInput("something went wrong");
-        }
-        try {
-            file.createNewFile();
-            FileWriter writer = new FileWriter(FILE_PATH, true);
-            for (Task t : tasks) {
-                writer.write(t.getSaveFormat() + "\n");
-                writer.flush();
+        File file = new File(DATA_PATH);
+        boolean deleted = file.delete();
+        System.out.println(deleted);
+        if (deleted) {
+            try {
+                file.createNewFile();
+                FileWriter writer = new FileWriter(DATA_PATH, true);
+                for (Task t : tasks) {
+                    writer.write(t.getSaveFormat() + "\n");
+                    writer.flush();
+                }
+                writer.close();
+            } catch (IOException e) {
+                Ui.showInput("Unable to write, something went wrong");
             }
-            writer.close();
-        } catch (IOException e) {
-            Ui.showInput("Unable to write, something went wrong");
+        } else {
+            Ui.showInput("Something went wrong... could not overwrite");
         }
     }
 
@@ -78,7 +81,7 @@ public final class Storage {
     public ArrayList<Task> loadSaves() {
         ArrayList<Task> tasksLoaded = new ArrayList<>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH));
+            BufferedReader reader = new BufferedReader(new FileReader(DATA_PATH));
             String line = reader.readLine();
             while (line != null) {
                 String[] words = line.split("\\|");
@@ -90,18 +93,26 @@ public final class Storage {
                     tasksLoaded.add(t);
                 }
                 if (words[0].equals("D")) {
-                    DeadLineTask d = new DeadLineTask(words[1], words[2]);
-                    if (words[words.length - 1].equals("1")) {
-                        d.markAsDone();
+                    try {
+                        DeadLineTask d = new DeadLineTask(words[1], words[2]);
+                        if (words[words.length - 1].equals("1")) {
+                            d.markAsDone();
+                        }
+                        tasksLoaded.add(d);
+                    } catch (DukeException e) {
+                        reader.readLine();
                     }
-                    tasksLoaded.add(d);
                 }
                 if (words[0].equals("E")) {
-                    EventTask e = new EventTask(words[1], words[2]);
-                    if (words[words.length - 1].equals("1")) {
-                        e.markAsDone();
+                    try {
+                        EventTask e = new EventTask(words[1], words[2]);
+                        if (words[words.length - 1].equals("1")) {
+                            e.markAsDone();
+                        }
+                        tasksLoaded.add(e);
+                    } catch (DukeException e) {
+                        reader.readLine();
                     }
-                    tasksLoaded.add(e);
                 }
                 line = reader.readLine();
             }

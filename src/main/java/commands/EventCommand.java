@@ -46,7 +46,8 @@ public final class EventCommand extends Command {
             if (e.getMessage().equals("event")) {
                 return "     Invalid input :(" + "\n" + "     Please input in the form: 'event <Name> /at <Date>'.";
             } else {
-                return "     " + e.getMessage() + "\n" + "     I can't add an event without a date!";
+                return "     " + e.getMessage() + "\n" + "     I can't add an event without a date!\n"
+                        + "     An estimation will be fine, I will remind you on that day.";
             }
         }
     }

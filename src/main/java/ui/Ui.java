@@ -35,7 +35,7 @@ public final class Ui {
             + "     If you wish to see the current tasks, please input 'list'.\n"
             + "     If you wish to mark a task as done, please input 'done <task index>.'\n"
             + "     If you wish to terminate the program, please input 'bye'.\n"
-            + "     If you wish to check items due on a particular day, please input 'due YYYY/MM/DD'.\n"
+            + "     If you wish to check items due on a particular day, please input 'DD/MM/YYYY'.\n"
             + "     If you wish to find items, please input in the form: 'find <keyword>'.\n" + SEPARATOR;
 
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
