@@ -44,10 +44,16 @@ public class MainWindow extends AnchorPane {
         );
     }
 
-    private void terminate() {
-        sendMessageFromDuke(Ui.CLOSING_STATEMENT);
-        //set timeout eqv?
-        Platform.exit();
+    private void terminateAfterXSeconds(int secondsBeforeTerminate) {
+        new java.util.Timer().schedule(
+            new java.util.TimerTask() {
+                @Override
+                public void run() {
+                    Platform.exit();
+                }
+            },
+            secondsBeforeTerminate * 1000
+        );
     }
 
     /**
@@ -59,15 +65,16 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
 
-        //handles termination command "bye"
-        if (input.equals("bye")) {
-            this.terminate();
-        }
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        //handles termination command "bye"
+        if (input.equals("bye")) {
+            this.terminateAfterXSeconds(2);
+        }
     }
 }

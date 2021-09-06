@@ -38,6 +38,9 @@ public class Parser {
                     "Here are the tasks in your list:\n%s",
                     TASKLIST.toString()
             );
+        } else if (userInput.equals("bye")) {
+            return Ui.CLOSING_STATEMENT;
+            // MainWindow handles termination logic
         } else if (userInput.matches(TaskList.FIND_COMMAND_REGEX)) {
             //eg. find <word>
             String keyword = userInput.split(" ", 2)[1];
