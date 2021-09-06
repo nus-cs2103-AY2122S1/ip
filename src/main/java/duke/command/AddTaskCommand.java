@@ -34,6 +34,7 @@ public class AddTaskCommand extends Command {
      */
     @Override
     public String execute(TaskHandler taskHandler, Storage storage, Ui ui) throws DukeException {
+        assert task != null : "Empty task.";
         storage.writeToFile(task);
         return taskHandler.addTask(task);
     }

@@ -28,6 +28,7 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskHandler taskHandler, Storage storage, Ui ui) throws DukeException {
+        assert taskId > 0 : "Invalid task index";
         return taskHandler.markTaskAsDone(taskId);
     }
 }
