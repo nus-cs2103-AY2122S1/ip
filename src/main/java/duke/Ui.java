@@ -92,9 +92,9 @@ public class Ui {
      * Method when the user keys in and unrecognisable command.
      * @return the message.
      */
-    public static String noSpecificCmdMessage() {
-        System.out.println("No specific command specified. Please try again");
-        return "No specific command specified. Please try again";
+    public static String getUnrecognisedCmdMessage() {
+        System.out.println("Unrecognised command. Please try again");
+        return "Unrecognised command. Please try again";
     }
 
     /**
@@ -267,5 +267,45 @@ public class Ui {
     public static String noKeywordSpecifiedMessage() {
         System.out.println("No keyword specified. Please try again");
         return "No keyword specified. Please try again";
+    }
+
+    /**
+     * Method to inform the user that the number of days specified for the 'remind'
+     * command is not accepted.
+     * @return The message.
+     */
+    public static String noDaySpecifiedMessage() {
+        System.out.println("No proper timeframe specified. Please try again");
+        return "No proper timeframe specified. Please try again";
+    }
+
+    /**
+     * Appends the number of days from today to the end of the deadline.
+     * @param d The deadline.
+     * @param daysWithin the number of days between today and the deadline.
+     * @return The String representation of deadline including the days between.
+     */
+    public static String withinDeadlineMessage(Deadline d, long daysWithin, int index) {
+        if (daysWithin == 1) {
+            return index + ". " + d.toString() + " (" + daysWithin + " day)\n";
+        } else {
+            return index + ". " + d.toString() + " (" + daysWithin + " days)\n";
+        }
+    }
+
+    /**
+     * Returns the header message for duke's response to the 'remind' command.
+     * @param noOfDeadlines The number of deadlines in the displayed list.
+     * @param days The number of days specified by the user.
+     * @return The header message.
+     */
+    public static String getRemindHeader(int noOfDeadlines, int days) {
+        if (noOfDeadlines == 0) {
+            //System.out.printf("You have no upcoming deadlines within %d days", days);
+            return "You have no upcoming deadlines within " + days + " days\n";
+        } else {
+            //System.out.printf("These are the deadlines within %d days", days);
+            return "These are the deadlines due within " + days + " days\n";
+        }
     }
 }
