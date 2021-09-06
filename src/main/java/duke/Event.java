@@ -3,14 +3,8 @@ package duke;
 import java.time.LocalDateTime;
 
 public class Event extends TaskItem {
-
-
-
     protected boolean readFromFile = false;
-
     protected LocalDateTime byDateAndTime;
-
-
     protected String dateAndTimeInString;
     /**
      * Constructor for creating an duke.Event object.
@@ -39,6 +33,11 @@ public class Event extends TaskItem {
         }
     }
 
+    /**
+     * returns the Event in a writable format to the data.txt file, such that it can be loaded
+     * in, in the event that Duke is restarted.
+     * @return a String representation of an Event.
+     */
     @Override
     public String toFileString() {
         return "[E]" + super.toString() + "--" + byDateAndTime.toString();
