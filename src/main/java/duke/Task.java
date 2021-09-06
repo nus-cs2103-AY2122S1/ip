@@ -39,7 +39,7 @@ public abstract class Task {
     /**
      * Getter for the isDone field of a Task.
      *
-     * @return
+     * @return A boolean indicating whther the Task is completed.
      */
     public boolean isDone() {
         return isDone;
