@@ -18,6 +18,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 
 public class DialogBox extends HBox {
@@ -36,10 +37,13 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
         dialog.setText(text);
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
         displayPicture.setImage(img);
         dialog.setBackground(new Background(new BackgroundFill(Color.web("#bb96d9"),
                 new CornerRadii(5), Insets.EMPTY)));
+        dialog.setPadding(new Insets(10));
     }
+
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */

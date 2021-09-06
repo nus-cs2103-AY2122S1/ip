@@ -28,7 +28,6 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskHandler taskHandler, Storage storage, Ui ui) {
-        ui.printExitMessage();
-        return "Bye!";
+        return Ui.getExitMessage();
     }
 }

@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.ArrayList;
-
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.util.Parser;
@@ -21,43 +19,22 @@ public class Duke {
     private final Ui ui;
     private final Parser parser;
 
-    /** Instantiates Duke **/
+    /**
+     * Instantiates Duke
+     */
     public Duke() {
         ui = new Ui();
-        try {
-            storage = new Storage();
-            taskHandler = new TaskHandler(storage.loadTasks());
-        } catch (DukeException e) {
-            ui.prettify(e.getMessage());
-            taskHandler = new TaskHandler(new ArrayList<>());
-        } finally {
-            parser = new Parser();
-        }
+        storage = new Storage();
+        taskHandler = new TaskHandler(storage.loadTasks());
+        parser = new Parser();
     }
 
-//    public static void main (String[] args) {
-//        Duke duke = new Duke();
-//        duke.start();
-//    }
-
-    /** Runs Duke **/
-//    public void start() {
-//        ui.printIntroMessage();
-//        Scanner sc = new Scanner(System.in);
-//        storage = new Storage();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            try {
-//                ui.prompt();
-//                String input = sc.nextLine();
-//                Command c = parser.parseRawInput(input);
-//                c.execute(taskHandler, storage, ui);
-//                isExit = c.isExit();
-//            } catch (DukeException e) {
-//                ui.prettify(e.getMessage());
-//            }
-//        }
-//    }
+    /**
+     * Gets the appropriate response from Duke to respond to user.
+     *
+     * @param input Raw user input.
+     * @return String representation of Duke's response.
+     */
     public String getResponse(String input) {
         try {
             Command c = parser.parseRawInput(input);

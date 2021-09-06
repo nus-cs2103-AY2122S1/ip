@@ -52,8 +52,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
 
-        // @@author CheyanneSim-modified
-        if (response.contains("Bye!")) {
+        // @author CheyanneSim-modified
+        if (response.contains("Goodbyeeee!")) {
             PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
             pause.setOnFinished(event -> {
                 System.exit(0);

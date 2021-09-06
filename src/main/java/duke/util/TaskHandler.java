@@ -39,10 +39,11 @@ public class TaskHandler {
     }
 
     /**
-     * Adds the given task to the task list.
-     * Prints out a message that informs the user that task is added successfully.
+     * Adds the given task to the task list and informs user that
+     * task is added successfully.
      *
      * @param task The task given to Duke.
+     * @return String message informing user that task is added successfully.
      */
     public String addTask(Task task) {
         taskList.add(task);
@@ -74,7 +75,7 @@ public class TaskHandler {
     }
 
     /**
-     * Marks tasks as done
+     * Marks tasks as done.
      *
      * @param taskNumber The index of the task to be mark as done
      * @throws DukeException For invalid task indexes given by the user.
@@ -98,15 +99,15 @@ public class TaskHandler {
      * Deletes tasks at indexes specified by user.
      *
      * @param taskNumber The index of the task to be deleted.
-     * @throws DukeException For invalid task indexes given by the user.
+     * @throws DukeIoException For invalid task indexes given by the user.
      */
-    public String deleteTask(int taskNumber) throws DukeException {
+    public String deleteTask(int taskNumber) throws DukeIoException {
         if (taskNumber < 1) {
-            throw new DukeInvalidIndexException();
+            return new DukeInvalidIndexException().getMessage();
         } else if (taskList.size() == 0) {
-            throw new DukeException(NO_TASKS_FOUND);
+            return new DukeException(NO_TASKS_FOUND).getMessage();
         } else if (taskNumber > taskList.size()) {
-            throw new DukeNoSuchTaskException();
+            return new DukeNoSuchTaskException().getMessage();
         }
         int index = taskNumber - 1;
         Task t = taskList.remove(index);
@@ -116,14 +117,16 @@ public class TaskHandler {
 
     /**
      * Updates the storage after changes to the list.
-     *
-     * @throws DukeIoException If unable to update task list.
      */
-    private void updateData() throws DukeIoException {
+    private void updateData() {
         Storage.updateData(taskList);
     }
 
-    /** Prints the task list in a pretty format **/
+    /**
+     * Returns the entire task list.
+     *
+     * @return String representation of the task list.
+     */
     public String printTasks() {
         StringBuilder allTasks = new StringBuilder(TASK_LIST);
         if (taskList.size() == 0) {
@@ -139,9 +142,11 @@ public class TaskHandler {
     }
 
     /**
-     * Filters and prints out all tasks with the keyword specified by user.
+     * Filters task list with the keyword specified by user
+     * and returns it.
      *
      * @param keyword Keyword to filter task list with.
+     * @return String representation of filtered list.
      */
     public String filterListByKeyword(String keyword) {
         StringBuilder matchingTasks = new StringBuilder(MATCHING_TASK_LIST);
