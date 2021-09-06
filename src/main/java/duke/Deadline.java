@@ -5,8 +5,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    private String Dtime;
-    private LocalDateTime localDtime;
+    private String dateTime;
+    private LocalDateTime localDateTime;
 
     /**
      * Constructor for Deadline object
@@ -15,8 +15,8 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String s) {
         super(description);
-        this.Dtime = s; // accept "yyyy-mm-dd kkm" format
-        this.localDtime = LocalDateTime.parse(s.substring(1), DateTimeFormatter.ofPattern("uuuu-MM-dd kkmm"));
+        this.dateTime = s; // accept "yyyy-mm-dd kkm" format
+        this.localDateTime = LocalDateTime.parse(s.substring(1), DateTimeFormatter.ofPattern("uuuu-MM-dd kkmm"));
 
     }
 
@@ -27,7 +27,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd kkmm");
-        String formatDateTime = this.localDtime.format(formatter);
+        String formatDateTime = this.localDateTime.format(formatter);
         return "[D]" + super.toString() + " (by:" + formatDateTime + ")";
     }
 
@@ -38,7 +38,7 @@ public class Deadline extends Task {
     @Override
     public String toStringConvert(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd kkmm");
-        String formatDateTime = this.localDtime.format(formatter);
+        String formatDateTime = this.localDateTime.format(formatter);
         if(this.isCompleted()) {
             return "D | 1 | " +  this.getString() + "| " + formatDateTime;
         } else {

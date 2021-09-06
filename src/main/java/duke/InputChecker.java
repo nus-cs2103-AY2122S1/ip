@@ -6,33 +6,33 @@ public class InputChecker {
 
     /**
      * Constructor for an input checker
-     * @param s, the command keyed in by the user
+     * @param input, the command keyed in by the user
      * @throws DukeException
      */
-    public InputChecker(String s) throws DukeException{
-        this.input = s;
+    public InputChecker(String input) throws DukeException{
+        this.input = input;
 
-        if(s.equals("bye") || s.equals("list")){ //does not throw error if input is bye or list
+        if(input.equals("bye") || input.equals("list")){ //does not throw error if input is bye or list
 
-        } else if(s.equals("done")){
+        } else if(input.equals("done")){
             throw new DukeException("Please specify what you are done with!");
-        } else if(s.equals("deadline") || s.equals("event") || s.equals("todo")){
-            throw new DukeException("The description of " + s + " cannot be empty!");
-        } else if(s.length() > 4 && s.substring(0,4).equals("todo")){
+        } else if(input.equals("deadline") || input.equals("event") || input.equals("todo")){
+            throw new DukeException("The description of " + input + " cannot be empty!");
+        } else if(input.length() > 4 && input.substring(0,4).equals("todo")){
 
-        } else if(s.length() > 8 && s.substring(0,8).equals("deadline")){
+        } else if(input.length() > 8 && input.substring(0,8).equals("deadline")){
 
-        } else if(s.length() > 5 && s.substring(0,5).equals("event")){
+        } else if(input.length() > 5 && input.substring(0,5).equals("event")){
 
-        } else if (s.contains("done") && s.length() > 4){
+        } else if (input.contains("done") && input.length() > 4){
 
-        } else if (s.equals("delete")) {
+        } else if (input.equals("delete")) {
             throw new DukeException("Please specify what you are deleting!");
-        } else if (s.contains("delete")) {
+        } else if (input.contains("delete")) {
 
-        } else if (s.contains("find") && s.length() > 4){
+        } else if (input.contains("find") && input.length() > 4){
 
-        } else if (s.equals("find")){
+        } else if (input.equals("find")){
             throw new DukeException("Please specify what tasks you are searching for!");
         } else {
             throw new DukeException("Sorry! I don't get what you're saying!");
