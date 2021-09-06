@@ -32,6 +32,9 @@ public class ToDoCommand extends Command {
             return ui.showError(errorMessage);
         }
         Todo taskToDo = new Todo(task);
+        if (taskList.contains(taskToDo)) {
+            return ui.showError("To do event, " + taskToDo.toString() + " already exists!");
+        }
         taskList.add(taskToDo);
         storage.save(taskList);
         return ui.addMessage() + ui.showTask(taskToDo) + ui.showListLength(taskList);

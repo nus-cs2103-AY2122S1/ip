@@ -1,4 +1,3 @@
 [T][ ] hello
-[T][ ] read book
-[T][ ] hello world
-[T][ ] hellooooo
+[E][ ] hello (at: 3)
+[D][ ] hello (by: Jan 22 2021)
