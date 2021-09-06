@@ -18,5 +18,6 @@ bin/
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
 
-#Test output files
-/src/out/
+#Build output files
+/src/out/test
+/src/out/production
