@@ -19,4 +19,8 @@ public class ToDo extends Task {
                 && this.description.equals(otherTodo.description)
                 && this.taskType.equals(otherTodo.taskType);
     }
+
+    public String getDataString() {
+        return super.getDataString();
+    }
 }

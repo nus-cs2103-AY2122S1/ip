@@ -56,21 +56,20 @@ public class Storage {
                 case DONE:
                     char[] doneArray = nextLine.toCharArray();
                     doneArray[4] = '1';
-                    newFileString += String.valueOf(doneArray) + "\n";
+                    newFileString += addParagraph(String.valueOf(doneArray));
                     break;
                 case UNDO:
                     char[] undoArray = nextLine.toCharArray();
                     undoArray[4] = '0';
-                    newFileString += String.valueOf(undoArray) + "\n";
+                    newFileString += addParagraph(String.valueOf(undoArray));
                     break;
                 case DELETE:
-                    newFileString += "";
-                    break;
+                    // Fallthrough
                 default:
                     newFileString += "";
                 }
             } else {
-                newFileString += nextLine + "\n";
+                newFileString += addParagraph(nextLine);
             }
             currentLine += 1;
         }
@@ -78,6 +77,10 @@ public class Storage {
             newFileString = newFileString.substring(0, newFileString.length() - 1);
         }
         return newFileString;
+    }
+
+    private String addParagraph(String str) {
+        return str + "\n";
     }
 
     private void writeToFile(String newFileString) {
