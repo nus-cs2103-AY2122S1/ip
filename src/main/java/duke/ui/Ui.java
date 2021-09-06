@@ -1,7 +1,6 @@
 package duke.ui;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import duke.exception.DukeException;
 import duke.task.Task;
@@ -11,15 +10,11 @@ import duke.task.TaskList;
  * Deals with interactions with the user.
  */
 public class Ui {
-    /** Scanner to scan in user input */
-    private Scanner sc;
 
     /**
      * Constructor for a UI.
      */
-    public Ui() {
-        sc = new Scanner(System.in);
-    };
+    public Ui() {}
 
     /**
      * Displays UI when a task has been added.
@@ -55,6 +50,8 @@ public class Ui {
      * @return String representation of deleteUi.
      */
     public String displayDeleteUi(TaskList taskList, Task task) {
+        assert task != null : "Task should not be null";
+
         return "Noted. I've removed this task:\n  " + task + "\nNow you have "
                 + taskList.size() + " tasks in the list.";
     }
@@ -69,7 +66,7 @@ public class Ui {
         if (taskList.isEmpty()) {
             return "You do not have any outstanding task. Yay!";
         } else {
-            return "Here are the tasks in your list:\n" + taskList.toString();
+            return "Here are the tasks in your list:\n" + taskList;
         }
     }
 
@@ -142,14 +139,5 @@ public class Ui {
      */
     public String greetExistingUser(TaskList taskList) {
         return "Welcome back! :-)\nAs far as I can recall...\n" + displayListUi(taskList);
-    }
-
-    /**
-     * Scans in the input given by user.
-     *
-     * @return String representation of user input.
-     */
-    public String readCommand() {
-        return sc.nextLine();
     }
 }
