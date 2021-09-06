@@ -128,7 +128,7 @@ public class Duke {
         Deadline dl = new Deadline(t);
         tasks.addNewTask(dl);
         TaskList.updateMemory(storage.getPath(), tasks);
-        return "Got it. I've added this task: \n " + dl
+        return "\nGot it. I've added this task: \n " + dl
                 + "\n" + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 

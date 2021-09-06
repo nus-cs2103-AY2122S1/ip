@@ -41,6 +41,6 @@ public class Deadline extends Task{
     public String toString() {
         String formatDate = dt.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         String formatTime = dt.format(DateTimeFormatter.ofPattern("hh:mm"));
-        return "[D]" + super.toString() + "(by: " + formatDate +  ", " + formatTime + ")";
+        return "[D]" + super.toString() + " (by: " + formatDate +  ", " + formatTime + ")";
     }
 }
