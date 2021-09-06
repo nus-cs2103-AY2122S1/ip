@@ -21,13 +21,14 @@ public class DeleteCommand extends TaskListIndexCommand {
     }
 
     @Override
-    protected String executeOnTaskList(int... listOfIndex) {
+    protected CommandReturnStatus executeOnTaskList(int... listOfIndex) {
         StringBuilder message = new StringBuilder();
         for (int i : listOfIndex) {
             message.append(this.taskList.removeTask(i)).append("\n");
             this.offsetIndex(listOfIndex, i);
         }
-        return message.append(this.taskList.getTaskListStatus()).toString();
+        this.setExecutionMessage(message.append(this.taskList.getTaskListStatus()).toString());
+        return CommandReturnStatus.CHANGED_TASK_LIST;
     }
 
     /**

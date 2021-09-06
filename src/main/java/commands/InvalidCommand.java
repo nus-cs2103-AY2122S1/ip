@@ -8,11 +8,13 @@ public class InvalidCommand extends Command {
 
     /**
      * Displays a message to the user that he has entered an invalid input to Duke.
+     *
+     * @return The command return status.
      */
     @Override
-    public boolean execute() {
+    public CommandReturnStatus execute() {
         this.setExecutionMessage("Invalid input. Please try again.\n");
-        return true;
+        return CommandReturnStatus.SUCCESSFUL;
     }
 
     @Override

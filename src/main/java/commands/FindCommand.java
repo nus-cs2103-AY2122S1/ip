@@ -28,16 +28,16 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public boolean execute() {
+    public CommandReturnStatus execute() {
         try {
             // Checks if a keyword is provided
             String keyword = input.split(" ", 2)[1].trim();
             this.displaySearchResults(this.taskList.findTask(keyword));
-            return true;
         } catch (ArrayIndexOutOfBoundsException e) {
             this.setExecutionMessage(this.getInvalidArgumentsMessage());
-            return false;
+            return CommandReturnStatus.UNSUCCESSFUL;
         }
+        return CommandReturnStatus.SUCCESSFUL;
     }
 
     @Override
@@ -54,6 +54,7 @@ public class FindCommand extends Command {
         StringBuilder message;
         if (searchResults.isEmpty()) {
             message = new StringBuilder("Sorry I could not find any matching tasks.\n");
+            this.setExecutionMessage(message.toString());
             return;
         }
         message = new StringBuilder(Ui.DASHES);

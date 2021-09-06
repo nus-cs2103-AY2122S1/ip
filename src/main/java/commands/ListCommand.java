@@ -19,10 +19,10 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public boolean execute() {
+    public CommandReturnStatus execute() {
         String message = this.taskList.getTaskListStatus() + this.taskList.listHistory();
         this.setExecutionMessage(message);
-        return true;
+        return CommandReturnStatus.SUCCESSFUL;
     }
 
     @Override

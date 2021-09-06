@@ -18,12 +18,11 @@ public abstract class Task {
     }
 
     /** Whether the task had been completed or not */
-    private boolean isDone = false;
+    private Boolean isDone = false;
     /** The name of a task as given by the user */
     private final String taskName;
     /** The type of the task */
     private final Type type;
-
 
     protected Task(String taskName, Type type) {
         this.taskName = taskName;
@@ -135,5 +134,9 @@ public abstract class Task {
 
     public boolean isDone() {
         return isDone;
+    }
+
+    protected void revertDone() {
+        this.isDone = !isDone;
     }
 }

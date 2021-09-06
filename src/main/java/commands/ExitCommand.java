@@ -7,11 +7,12 @@ public class ExitCommand extends Command {
 
     /**
      * Prints a command to say bye to the user and closed the Chat bot.
+     * @return
      */
     @Override
-    public boolean execute() {
+    public CommandReturnStatus execute() {
         this.setExecutionMessage("Bye!! Hope to see you again!!\n");
-        return true;
+        return CommandReturnStatus.SUCCESSFUL;
     }
 
     @Override

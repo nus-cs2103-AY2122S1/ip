@@ -12,13 +12,33 @@ import java.util.ArrayList;
 public class TaskList {
 
     /** An arraylist that contains the tasks set by the user. */
-    private final ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks;
 
     /** The number of uncompleted tasks in the task list */
     private int numOfUncompletedTasks = 0;
 
     /** The total number of tasks in the task list. */
     private int totalNumOfTasks = 0;
+
+    /**
+     * A default constructor to create a new taskList.
+     */
+    public TaskList() {
+        this.tasks = new ArrayList<>();
+    }
+
+    /**
+     * Constructor to create a shallow copy of taskList. This is used so that the program
+     * will be able to store previous versions of the taskList and can revert to them if
+     * the user wishes to.
+     *
+     * @param previousTaskList the previous taskList to make a shallow copy of.
+     */
+    private TaskList(TaskList previousTaskList) {
+        this.tasks = new ArrayList<>(previousTaskList.tasks);
+        this.numOfUncompletedTasks = previousTaskList.numOfUncompletedTasks;
+        this.totalNumOfTasks = previousTaskList.totalNumOfTasks;
+    }
 
     /**
      * Adds a task to the task list and return a message to tell the user that the task has been added.
@@ -148,9 +168,25 @@ public class TaskList {
     }
 
     /**
+     * Creates a shallow copy of a taskList into a new taskList.
+     *
+     * @param oldTaskList The taskList that is to be copied.
+     * @return The copied taskList.
+     */
+    public static TaskList shallowCopyTaskList(TaskList oldTaskList) {
+        return new TaskList(oldTaskList);
+    }
+
+    protected void changeTaskState(ArrayList<Integer> states) {
+        for (int i : states) {
+            this.tasks.get(i - 1).revertDone();
+        }
+    }
+
+    /**
      * Saves the current task list to local storage in a file called taskList.txt.
      */
-    private void saveTaskList() {
+    public void saveTaskList() {
         if (!Storage.saveTaskList(this.tasks)) {
             System.out.println("Oops!! An error occurred while trying to save your new task.");
         }

@@ -30,7 +30,7 @@ public class Ui {
     protected void startDuke() {
         System.out.println(getStartMessage());
         this.parser = new Parser();
-        Storage.initialise(this.parser.getTaskList());
+        Storage.initialise(this.parser.getCurrentTaskList());
     }
 
     /**
@@ -42,7 +42,12 @@ public class Ui {
      */
     public String readUserInput(String input) {
         Command command = this.parser.parseUserInput(input);
-        command.execute();
+        Command.CommandReturnStatus status = command.execute();
+        if (status.equals(Command.CommandReturnStatus.CHANGED_TASK_LIST)) {
+            this.parser.updateTaskListHistory(false);
+        } else if (status.equals(Command.CommandReturnStatus.TASK_MARKED_AS_DONE)) {
+            this.parser.updateTaskListHistory(true);
+        }
         if (command.isExit()) {
             this.isExit = true;
         }
