@@ -34,7 +34,7 @@ public class Ui {
                         "                      \\ \\   \\ \\\n" +
                         "                       \\ \\  /\\/\\\n" +
                         "                       /\\/\\\n";
-        String greeting = "I am Jo the Frog! RIBBIT! \n";
+        String greeting = "I am Jo the Frog! RIBBIT!\n";
         return frog + greeting + "How may I help you?\n" + LINE;
     }
 
