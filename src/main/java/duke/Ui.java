@@ -1,29 +1,11 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.task.Task;
 
 /**
  * Ui class to handle printing notices to the user, and reading of user input to pass to Parser.
  */
 public class Ui {
-    private final Scanner sc;
-
-    /**
-     * Initialise scanner to read user input.
-     */
-    public Ui() {
-        sc = new Scanner(System.in);
-    }
-
-    /**
-     * Method to read users input
-     * @return one line of user input as a String.
-     */
-    public String readCommand() {
-        return sc.nextLine();
-    }
 
     /**
      * Method called at beginning of application run. Prints welcome message.
@@ -100,26 +82,6 @@ public class Ui {
         return ("Sorry! I don't know what your request means. Please try again?");
     }
 
-    public String notifyLoadingError() {
-        return ("An error occurred while loading in the saved data...");
-    }
-
-    public String closing() {
-        return ("Have a Merry Christmas and a Happy New Year!");
-    }
-
-    public String notifyLoadingBegin() {
-        return ("It look like you have a previous session! Loading your data now...");
-    }
-
-    public String notifyLoadingComplete() {
-        return ("Loading complete!");
-    }
-
-    public String notifySavingBegin() {
-        return ("Just a moment, i'm saving your list!");
-    }
-
     public String notifySavingComplete() {
         return ("Your list has been saved!");
     }
@@ -142,10 +104,6 @@ public class Ui {
 
     public String notifyImproperDateTime() {
         return ("Sorry! I don't recognise the format for the date and time you've entered.");
-    }
-
-    public String printLine() {
-        return ("--------------------------------------------------");
     }
 
     public String notifyFolderFound() {
