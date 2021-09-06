@@ -5,7 +5,6 @@ import java.time.DateTimeException;
 
 import duke.exception.DukeException;
 import duke.task.Deadline;
-import duke.task.Task;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
@@ -36,6 +35,8 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        assert taskList != null;
+        assert storage != null;
         String command = super.getUserInput();
         String[] inputValues = command.split(" ");
         if (inputValues.length == 1) {
@@ -49,7 +50,9 @@ public class DeadlineCommand extends Command {
         String description = command.substring(inputValues[0].length() + 1, dateTimeIndex).strip();
         String dateTime = command.substring(dateTimeIndex + 3).strip();
         try {
-            Task deadline = new Deadline(description, dateTime);
+            Deadline deadline = new Deadline(description, dateTime);
+            assert !deadline.getDescription().equals("");
+            assert !deadline.getBy().equals("");
             return taskList.add(deadline, ui, storage);
         } catch (DateTimeException exception) {
             return ui.showInvalidDateTimeError();
