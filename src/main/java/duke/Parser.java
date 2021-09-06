@@ -30,6 +30,7 @@ public class Parser {
         Command cmd = Command.fromString(temp[0]);
         String remainder = temp.length > 1 ? temp[1] : "";
 
+        assert cmd != null : "Error with Parser occurred.";
         switch (cmd) {
         case LIST:
             //display tasklist
@@ -65,7 +66,9 @@ public class Parser {
         case BYE:
             //end program
             return "Bye. Hope to see you again soon!";
+        default:
+            //unreachable
+            return "I'm sorry, I don't understand. Please try again.";
         }
-        return "I'm sorry, I don't understand. Please try again.";
     }
 }

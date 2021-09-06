@@ -59,10 +59,6 @@ public class Duke extends Application {
         }
     }
 
-//    public static void main(String[] args) {
-//        new Duke(Paths.get("data", "test.txt")).run();
-//    }
-
     @Override
     public void start(Stage stage) {
         //The container for the content of the chat to scroll.
