@@ -66,6 +66,10 @@ public class Deadline extends Task {
         }
     }
 
+    public String getBy() {
+        return this.by;
+    }
+
     /**
      * Returns a string that is used to represent deadlines when saved to a file.
      *
