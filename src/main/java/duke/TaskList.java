@@ -48,6 +48,7 @@ public class TaskList extends ArrayList<Task> {
         if (counter <= 0 || counter > this.size()) {
             throw new DukeException("Sorry, no such task of index " + counter + ".");
         }
+        assert !this.isEmpty() : "Cannot delete Task from an empty TaskList.";
         Task taskToRemove = this.remove(counter - 1);
         return "Noted. I've removed this task:\n  " + taskToRemove
                 + "\nNow you have " + this.size() + " tasks in the list.";
