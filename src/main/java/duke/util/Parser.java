@@ -30,11 +30,21 @@ public class Parser {
             public String asLowerCase() {
                 return BYE.toString().toLowerCase();
             }
+
+            @Override
+            public int offsetValue() {
+                return 0;
+            }
         },
         LIST {
             @Override
             public String asLowerCase() {
                 return LIST.toString().toLowerCase();
+            }
+
+            @Override
+            public int offsetValue() {
+                return 0;
             }
         },
         DONE {
@@ -42,11 +52,21 @@ public class Parser {
             public String asLowerCase() {
                 return DONE.toString().toLowerCase();
             }
+
+            @Override
+            public int offsetValue() {
+                return 5;
+            }
         },
         TODO {
             @Override
             public String asLowerCase() {
                 return TODO.toString().toLowerCase();
+            }
+
+            @Override
+            public int offsetValue() {
+                return 5;
             }
         },
         EVENT {
@@ -54,11 +74,21 @@ public class Parser {
             public String asLowerCase() {
                 return EVENT.toString().toLowerCase();
             }
+
+            @Override
+            public int offsetValue() {
+                return 6;
+            }
         },
         DEADLINE {
             @Override
             public String asLowerCase() {
                 return DEADLINE.toString().toLowerCase();
+            }
+
+            @Override
+            public int offsetValue() {
+                return 9;
             }
         },
         DELETE {
@@ -66,15 +96,26 @@ public class Parser {
             public String asLowerCase() {
                 return DELETE.toString().toLowerCase();
             }
+
+            @Override
+            public int offsetValue() {
+                return 7;
+            }
         },
         FIND {
             @Override
             public String asLowerCase() {
                 return FIND.toString().toLowerCase();
             }
+
+            @Override
+            public int offsetValue() {
+                return 5;
+            }
         };
 
         public abstract String asLowerCase();
+        public abstract int offsetValue();
     }
 
     /**
@@ -102,7 +143,7 @@ public class Parser {
         } else if (command.startsWith(Commands.DONE.asLowerCase())) {
             try {
                 formatChecker(command);
-                String substring = command.substring(5);
+                String substring = command.substring(Commands.DONE.offsetValue());
                 int index = Integer.parseInt(substring);
                 return new DoneCommand(tdl, index);
             } catch (NumberFormatException e) {
@@ -114,7 +155,7 @@ public class Parser {
         } else if (command.startsWith(Commands.TODO.asLowerCase())) {
             try {
                 formatChecker(command);
-                String substring = command.substring(5);
+                String substring = command.substring(Commands.TODO.offsetValue());
                 return new ToDoCommand(tdl, substring);
             } catch (DukeException e) {
                 return new TipCommand(e.getMessage());
@@ -123,7 +164,7 @@ public class Parser {
         } else if (command.startsWith(Commands.EVENT.asLowerCase())) {
             try {
                 formatChecker(command);
-                String substring = command.substring(6);
+                String substring = command.substring(Commands.EVENT.offsetValue());
                 String item = substring.substring(0, substring.indexOf("/"));
                 String duration = substring.substring(substring.indexOf("/") + 1).substring(2);
                 return new EventCommand(tdl, item, duration);
@@ -137,7 +178,7 @@ public class Parser {
         } else if (command.startsWith(Commands.DEADLINE.asLowerCase())) {
             try {
                 formatChecker(command);
-                String substring = command.substring(9);
+                String substring = command.substring(Commands.DEADLINE.offsetValue());
                 String item = substring.substring(0, substring.indexOf("/"));
                 String deadline = substring.substring(substring.indexOf("/") + 1).substring(2);
                 if (deadline.startsWith(" ")) {
@@ -159,7 +200,7 @@ public class Parser {
         } else if (command.startsWith(Commands.DELETE.asLowerCase())) {
             try {
                 formatChecker(command);
-                String substring = command.substring(7);
+                String substring = command.substring(Commands.DELETE.offsetValue());
                 int index = Integer.parseInt(substring);
                 return new DeleteCommand(tdl, index);
             } catch (StringIndexOutOfBoundsException e) {
@@ -173,7 +214,7 @@ public class Parser {
         } else if (command.startsWith(Commands.FIND.asLowerCase())) {
             try {
                 formatChecker(command);
-                String substring = command.substring(5);
+                String substring = command.substring(Commands.FIND.offsetValue());
                 return new FindCommand(tdl, substring);
             } catch (DukeException e) {
                 return new TipCommand(e.getMessage());
@@ -185,22 +226,22 @@ public class Parser {
 
     private static void formatChecker(String command) throws DukeException {
         if (command.startsWith("done")) {
-            if (!command.substring(4).startsWith(" ")) {
+            if (!command.substring(Commands.DONE.offsetValue() - 1).startsWith(" ")) {
                 throw new DukeException("Hey hey hey, the format is done <index>");
             }
 
         } else if (command.startsWith("delete")) {
-            if (!command.substring(6).startsWith(" ")) {
+            if (!command.substring(Commands.DELETE.offsetValue() - 1).startsWith(" ")) {
                 throw new DukeException("Hey hey hey, the format is delete <index>");
             }
 
         } else if (command.startsWith("find")) {
-            if (!command.substring(4).startsWith(" ")) {
+            if (!command.substring(Commands.FIND.offsetValue() - 1).startsWith(" ")) {
                 throw new DukeException("Hey hey hey, the format is find <target>");
             }
 
         } else if (command.startsWith("todo")) {
-            if (command.substring(4).isBlank()) {
+            if (command.substring(Commands.TODO.offsetValue() - 1).isBlank()) {
                 throw new DukeException("C'mon.. you're gonna do nothing?");
             }
 

@@ -54,6 +54,9 @@ public class Storage {
      * Loads content from memory (if any) into the current instance of ToDoList.
      */
     public void reloadTask() {
+        int typeIndex = 3;
+        int statusIndex = 6;
+        int offset = 9;
         try {
             int counter = 0;
             File file = new File("./data/task-list.txt");
@@ -63,10 +66,10 @@ public class Storage {
                 if (str.isBlank()) {
                     break;
                 }
-                char type = str.charAt(3); //retrieves the logo to identify the type of Task
-                char status = str.charAt(6); //retrieves task status "X" (completed), " " (not done)
+                char type = str.charAt(typeIndex); //retrieves the logo to identify the type of Task
+                char status = str.charAt(statusIndex); //retrieves task status "X" (completed), " " (not done)
                 if (type == 'T') {
-                    String item = str.substring(9); //retrieves name of ToDo
+                    String item = str.substring(offset); //retrieves name of ToDo
                     this.tdl.addToDo(item);
                     if (status == 'X') {
                         this.tdl.getTask(counter).setCompleted();
@@ -75,7 +78,7 @@ public class Storage {
                 } else if (type == 'E') {
                     try {
                         //ignores content from the start of the entry up to the start of the name
-                        String filtered = str.substring(9);
+                        String filtered = str.substring(offset);
                         String item = filtered.substring(0, filtered.indexOf(" ")); //name
                         String temp = filtered.substring(filtered.indexOf("("));
                         String duration = temp.substring(5, temp.length() - 1);
@@ -90,7 +93,7 @@ public class Storage {
                 } else {
                     try {
                         //ignores content from the start of the entry up to the start of the name
-                        String filtered = str.substring(9);
+                        String filtered = str.substring(offset);
                         String item = filtered.substring(0, filtered.indexOf(" ")); //name
                         String temp = filtered.substring(filtered.indexOf("("));
                         String deadline = temp.substring(5, temp.length() - 1);
