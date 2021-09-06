@@ -62,8 +62,7 @@ public abstract class Task {
      * @return String but with first letter capitalized
      */
     private String capsFirstLetter(String str) {
-        str = str.substring(0, 1).toUpperCase() + str.substring(1);
-        return str;
+        return str.substring(0, 1).toUpperCase() + str.substring(1);
     }
 
     /**
@@ -76,7 +75,8 @@ public abstract class Task {
         if (keyword.equals("")) {
             return false;
         }
-        return description.toLowerCase().contains(keyword);
+        String keywordLowerCase = keyword.toLowerCase();
+        return description.toLowerCase().contains(keywordLowerCase);
     }
 
     /**

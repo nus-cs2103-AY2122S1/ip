@@ -23,8 +23,7 @@ public class ArchiveCommand implements Command {
     @Override
     public String execute(TaskList taskList, Storage storage) {
         try {
-            taskList.archiveTask(index);
-            return "The task was archived.";
+            return taskList.archiveTask(index);
         } catch (InvalidInputException e) {
             return e.getMessage();
         }

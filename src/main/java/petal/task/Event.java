@@ -27,8 +27,8 @@ public class Event extends Task implements Timeable {
      * @param isDone Boolean representing if the event is done or not
      */
     public Event(String description, String dateTime, boolean isDone) {
-        super(description = description.trim(), isDone);
-        this.description = description;
+        super(description.trim(), isDone);
+        this.description = description.trim();
         this.dateTime = (dateTime = dateTime.trim());
 
         String[] splitByWhiteSpace = dateTime.split(" ");

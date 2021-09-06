@@ -29,10 +29,11 @@ public class Parser {
      * @param message User input
      */
     public Command handleInput(String message) {
-        message += " "; //So blank inputs can be handled
+        //So blank inputs can be handled
+        message += " ";
         String command = message.substring(0, message.indexOf(" "));
         String formatted = message.substring(message.indexOf(' ') + 1).trim();
-        switch (command) { //Checks first word in string
+        switch (command) {
         case "list":
             return new ListCommand();
         case "bye":

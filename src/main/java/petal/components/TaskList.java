@@ -37,7 +37,7 @@ public class TaskList {
      * @param addTasks The arraylist of previously saved tasks
      */
     @SafeVarargs
-    public final void addTasks(ArrayList<Task>... addTasks) {
+    protected final void addTasks(ArrayList<Task>... addTasks) {
         currentTasks.addAll(addTasks[0]);
         archivedTasks.addAll(addTasks[1]);
     }
@@ -49,7 +49,7 @@ public class TaskList {
      */
     public String addTask(Task task) {
         currentTasks.add(task);
-        String plural = (currentTasks.size() + 1) > 0 ? " tasks!" : " task!";
+        String plural = (currentTasks.size()) > 1 ? " tasks!" : " task!";
         return "Okay. I've added this task:\n" + task + "\nYou now have " + currentTasks.size() + plural;
     }
 
@@ -68,8 +68,9 @@ public class TaskList {
             if (toBeDeleted.isTimeable()) {
                 calendar.updateCalendar(currentTasks);
             }
+            String plural = (currentTasks.size()) != 1 ? " tasks!" : " task!";
             return "Okay. I've deleted this task:\n" + toBeDeleted + "\nYou now have " + currentTasks.size()
-                    + " task(s)!";
+                    + plural;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidInputException(Responses.INVALID_TASK_NUMBER, e);
         }
@@ -129,12 +130,14 @@ public class TaskList {
      * @param index The index of the index
      * @throws InvalidInputException If index is invalid
      */
-    public void archiveTask(String index) throws InvalidInputException {
+    public String archiveTask(String index) throws InvalidInputException {
         try {
             int indexOfTask = Integer.parseInt(index) - 1;
             Task toArchive = currentTasks.get(indexOfTask);
             deleteTask(index);
             archivedTasks.add(toArchive);
+            String plural = (archivedTasks.size()) > 1 ? " tasks in your archives!" : " task in your archives!";
+            return "Okay. I've added this task:\n" + toArchive + "\nYou now have " + archivedTasks.size() + plural;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidInputException(Responses.INVALID_TASK_NO);
         }
@@ -149,7 +152,7 @@ public class TaskList {
      * @throws EmptyDescException Thrown if desc is empty
      * @throws InvalidInputException Thrown if other components are missing from format
      */
-    public void checkIfValidFormat(String type, String message, String[] deadlineEvent) throws EmptyDescException,
+    private void checkIfValidFormat(String type, String message, String[] deadlineEvent) throws EmptyDescException,
             InvalidInputException {
         if (message.isBlank() || deadlineEvent[0].isBlank()) {
             throw new EmptyDescException(Responses.EMPTY_DESCRIPTION);
@@ -242,21 +245,21 @@ public class TaskList {
     }
 
     /**
-     * Returns the string representation of the current tasks for saving
-     *
-     * @return Formatted string representation for saving
-     */
-    public String formatForArchivesSaving() {
-        return formatTasksForSaving(archivedTasks);
-    }
-
-    /**
      * Returns a formatted string representation of the archived tasks for saving
      *
      * @return Formatted string representation for saving
      */
     public String formatForCurrSaving() {
         return formatTasksForSaving(currentTasks);
+    }
+
+    /**
+     * Returns the string representation of the current tasks for saving
+     *
+     * @return Formatted string representation for saving
+     */
+    public String formatForArchivesSaving() {
+        return formatTasksForSaving(archivedTasks);
     }
 
     /**

@@ -50,6 +50,16 @@ public class TaskListStub extends TaskList {
     }
 
     @Override
+    public String archiveTask(String index) {
+        return "The task was archived.";
+    }
+
+    @Override
+    public String printArchive() {
+        return "No items in list yet!";
+    }
+
+    @Override
     public String findTaskWithKeyword(String keyword) {
         return "No tasks!";
     }

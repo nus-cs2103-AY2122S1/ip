@@ -10,7 +10,6 @@ import java.time.LocalTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import petal.Petal;
 import petal.command.Command;
 import stubs.StorageStub;
 import stubs.TaskListStub;
@@ -21,7 +20,6 @@ public class ParserTest {
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
     private final Parser parser = new Parser();
-    private final Petal petal = new Petal();
     private final TaskListStub taskListStub = new TaskListStub();
     private final StorageStub storageStub = new StorageStub(taskListStub);
 
@@ -40,6 +38,12 @@ public class ParserTest {
     public void parseInput_bye_byeCommand() {
         Command command = parser.handleInput("bye");
         assertEquals(Responses.GOODBYE.toString(), command.execute(taskListStub, storageStub));
+    }
+
+    @Test
+    public void parseInput_dossiers_dossiersCommand() {
+        Command command = parser.handleInput("dossiers");
+        assertEquals("No items in list yet!", command.execute(taskListStub, storageStub));
     }
 
     @Test
@@ -62,6 +66,12 @@ public class ParserTest {
     public void parseInput_find_findCommand() {
         Command command = parser.handleInput("find hi");
         assertEquals("No tasks!", command.execute(taskListStub, storageStub));
+    }
+
+    @Test
+    public void parseInput_archive_archiveCommand() {
+        Command command = parser.handleInput("archive 1");
+        assertEquals("The task was archived.", command.execute(taskListStub, storageStub));
     }
 
     @Test

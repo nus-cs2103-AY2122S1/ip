@@ -26,8 +26,8 @@ public class Deadline extends Task implements Timeable {
      * @param isDone The boolean isDone, representing if the Task is done
      */
     public Deadline(String description, String dateTime, boolean isDone) {
-        super(description = description.trim(), isDone);
-        this.description = description;
+        super(description.trim(), isDone);
+        this.description = description.trim();
         this.dateTime = (dateTime = dateTime.trim());
         String[] splitByWhiteSpace = dateTime.split(" ");
         this.date = Parser.parseDate(splitByWhiteSpace[0]);
