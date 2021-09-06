@@ -1,6 +1,5 @@
 package ui;
 
-import duke.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import java.util.Timer;
 import java.util.TimerTask;
+import duke.Duke;
 
 /**
  * Controller for ui.MainWindow. Provides the layout for the other controls.
