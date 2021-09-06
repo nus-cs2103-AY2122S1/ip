@@ -1,14 +1,10 @@
 package duke.command;
 
-import duke.exception.InvalidInputException;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
 public class ListCommand extends Command {
-
-    private final String tab = "      ";
-    private final String line = "------------------------------------------------------------";
 
     /**
      * Executes the specified command.
@@ -22,6 +18,8 @@ public class ListCommand extends Command {
         if (tasks.size() == 0) {
             ui.showEmptyList();
         } else {
+            String line = "------------------------------------------------------------";
+            String tab = "      ";
             System.out.println(tab + line);
             System.out.println(tab + "Here are the tasks in your list:");
             for (int j = 0; j < tasks.size(); j++) {

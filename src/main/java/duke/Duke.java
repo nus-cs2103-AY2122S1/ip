@@ -7,7 +7,7 @@ import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
 
-import java.io.*;
+import java.io.FileNotFoundException;
 
 public class Duke {
 
