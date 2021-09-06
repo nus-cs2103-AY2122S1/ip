@@ -52,7 +52,7 @@ public class DialogBox extends HBox {
     static DialogBox getUserDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
         db.setAlignment(Pos.CENTER_RIGHT);
-        db.setStyle("-fx-background-color: #AA8EFF");
+        db.setStyle("-fx-background-color: #fff648");
         return db;
     }
 
