@@ -44,6 +44,7 @@ public class Parser {
      */
     public duke.command.Command parse(String input) throws DukeException {
 
+        assert input != null : "input to parse is null";
         Command caseId = findCase(input);
         duke.command.Command c = new InvalidCommand();
 
