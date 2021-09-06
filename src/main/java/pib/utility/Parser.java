@@ -33,7 +33,7 @@ public class Parser {
 
                 if (nextLine.contains(" ")) {
                     taskCommand(nextLine);
-                } else {
+                } else { // Can't extract this to method since closeScanner has to break out of while loop
                     switch (nextLine.toLowerCase()) {
                     case "list":
                         Ui.printList(list);

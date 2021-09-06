@@ -16,7 +16,6 @@ import java.util.Scanner;
  * Class to handle loading the saved data and saving data to external file
  */
 public class Storage {
-    private String filePath;
     private File file;
 
     /**
@@ -25,7 +24,6 @@ public class Storage {
      * @param filePath String to locate the stored data
      */
     public Storage(String filePath) throws PibException {
-        this.filePath = filePath;
         this.file = new File(filePath);
         new File("./data").mkdirs();
         try {
@@ -42,41 +40,41 @@ public class Storage {
      * @throws PibException when FileNotFoundException is thrown by system when trying to locate the saved data file
      */
     public String loadData(TaskList list) throws PibException {
-        String response = "";
         try {
+            String response = "";
             Scanner sc = new Scanner(this.file);
-            if (sc.hasNext()) {
-                response = response.concat(Ui.printDataLoading());
-                while (sc.hasNext()) {
-                    String[] taskDetails = sc.nextLine().split(",");
-                    Task newTask = null;
-                    switch (taskDetails[0]) {
-                    case "T":
-                        newTask = Todo.createTodo(taskDetails[2], Integer.parseInt(taskDetails[1]), false);
-                        break;
-                    case "E":
-                        newTask = Event.createEvent(taskDetails[2], Integer.parseInt(taskDetails[1]), taskDetails[3], taskDetails[4], false);
-                        break;
-                    case "D":
-                        newTask = Deadline.createDeadline(taskDetails[2], Integer.parseInt(taskDetails[1]), taskDetails[3], taskDetails[4], false);
-                        break;
-                    default:
-                        break;
-                    }
-                    if (newTask != null) {
-                        list.addSavedData(newTask);
-                    }
-                }
-                response = response.concat(Ui.printDataLoadSuccess());
-                response = response.concat(Ui.printList(list));
-            } else {
-                response = response.concat(Ui.printNoSavedDataFound());
+            if (!sc.hasNext()) {
+                return response.concat(Ui.printNoSavedDataFound());
             }
-            return response;
+            response = response.concat(Ui.printDataLoading());
+            while (sc.hasNext()) {
+                Task newTask = addSavedDataToList(sc.nextLine());
+                list.addSavedData(newTask);
+            }
+            return response.concat(Ui.printDataLoadSuccess()).concat(Ui.printList(list));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             throw new PibException("fnf-exception");
         }
+    }
+
+    private Task addSavedDataToList(String rawData) {
+        String[] taskDetails = rawData.split(",");
+        Task newTask = null;
+        switch (taskDetails[0]) {
+        case "T":
+            newTask = Todo.createTodo(taskDetails[2], Integer.parseInt(taskDetails[1]), false);
+            break;
+        case "E":
+            newTask = Event.createEvent(taskDetails[2], Integer.parseInt(taskDetails[1]), taskDetails[3], taskDetails[4], false);
+            break;
+        case "D":
+            newTask = Deadline.createDeadline(taskDetails[2], Integer.parseInt(taskDetails[1]), taskDetails[3], taskDetails[4], false);
+            break;
+        default:
+            break;
+        }
+        return newTask;
     }
 
     /**
