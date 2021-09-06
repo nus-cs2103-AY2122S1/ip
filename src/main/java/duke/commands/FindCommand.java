@@ -1,14 +1,17 @@
 package main.java.duke.commands;
 
-import java.util.ArrayList;
-
 import main.java.duke.MainWindow;
 import main.java.duke.Storage;
 import main.java.duke.TaskList;
 import main.java.duke.tasks.Task;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public class FindCommand extends Command {
-    private String keyword;
+    private final String keyword;
 
     public FindCommand(String keyword) {
         this.keyword = keyword;
@@ -20,18 +23,14 @@ public class FindCommand extends Command {
 
     private String identifyTasksByKeyword(TaskList tasks) {
         ArrayList<Task> taskList = tasks.getTaskList();
-        ArrayList<Task> tasksWithKeyword = new ArrayList<>();
-        for (Task task : taskList) {
-            if (task.getName().contains(this.keyword)) {
-                tasksWithKeyword.add(task);
-            }
-        }
-        String message1 = ("Here are the matching tasks in your list: \n");
-        String message2 = "";
+        Stream<Task> taskStream = taskList.stream();
+        taskStream = taskStream.filter(task -> task.getName().contains(this.keyword));
+        List<Task> tasksWithKeyword = taskStream.collect(Collectors.toList());
+        StringBuilder message = new StringBuilder(("Here are the matching tasks in your list: \n"));
         for (Task task : tasksWithKeyword) {
-            message2 += task.toString();
+            message.append(task.toString());
         }
-        return message1 + message2;
+        return message.toString();
     }
 
     public boolean isExit() {
