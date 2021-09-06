@@ -60,9 +60,9 @@ public class Task {
      * @return Task in String(Storage format).
      */
     public String toStorageString() {
-        String done = isCompleted ? "1" : "0";
-        String s = String.format("| %s | %s", done, content);
-        return s;
+        String isDone = isCompleted ? "1" : "0";
+        String storageFormattedTask = String.format("| %s | %s", isDone, content);
+        return storageFormattedTask;
     }
 
 }

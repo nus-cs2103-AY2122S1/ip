@@ -34,7 +34,8 @@ public class TaskList {
      */
     public Task getTask(int taskNumber) {
         assert(taskNumber > 0);
-        return this.list.get(taskNumber - 1);
+        int taskIndex = taskNumber - 1;
+        return this.list.get(taskIndex);
     }
 
     /**
@@ -49,13 +50,12 @@ public class TaskList {
     /**
      * Marks the nth Task as done.
      *
-     * @param taskPos The task position in the list.
+     * @param taskIndex The task position in the list.
      * @throws NoSuchTaskException
      */
-    public void markDone(int taskPos) throws NoSuchTaskException {
-        assert(taskPos >= 0);
-        if (taskPos >= 0 && taskPos < list.size()) {
-            list.get(taskPos).markComplete();
+    public void markDone(int taskIndex) throws NoSuchTaskException {
+        if (taskIndex >= 0 && taskIndex < list.size()) {
+            list.get(taskIndex).markComplete();
         } else {
             throw new NoSuchTaskException();
         }
@@ -64,15 +64,15 @@ public class TaskList {
     /**
      * Deletes the nth task from the list.
      *
-     * @param taskPos The task position in the list.
+     * @param taskIndex The task position in the list.
      * @return The deleted task.
      * @throws NoSuchTaskException
      */
-    public Task deleteTask(int taskPos) throws NoSuchTaskException {
-        assert(taskPos >= 0);
-        if (taskPos >= 0 && taskPos < list.size()) {
-            Task temp = list.get(taskPos);
-            list.remove(taskPos);
+    public Task deleteTask(int taskIndex) throws NoSuchTaskException {
+        if (taskIndex >= 0 && taskIndex < list.size()) {
+            //Store the task getting deleted temporarily for printing
+            Task temp = list.get(taskIndex);
+            list.remove(taskIndex);
             return temp;
         } else {
             throw new NoSuchTaskException();
@@ -96,9 +96,9 @@ public class TaskList {
     }
 
     /**
-     * String representation of the tasklist.
+     * String representation of the task list.
      *
-     * @return String representation of the tasklist.
+     * @return String representation of the task list.
      */
     @Override
     public String toString() {
@@ -110,9 +110,9 @@ public class TaskList {
     }
 
     /**
-     * String representation of the tasklist for storage.
+     * String representation of the task list for storage.
      *
-     * @return String representation of the tasklist(storage format).
+     * @return String representation of the task list(storage format).
      */
     public String toStorageString() {
         StringBuilder s = new StringBuilder();

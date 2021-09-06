@@ -15,7 +15,7 @@ public class UI {
     protected static Scanner scanner = new Scanner(System.in);
 
     /**
-     * Formats a string with a line spacing above and below it and returns it.
+     * Formats a string with a line spacing above and below for easier reading.
      * @param text The string to format.
      * @return The formatted string.
      */
@@ -24,7 +24,7 @@ public class UI {
     }
 
     /**
-     * Print the inputted message out onto the terminal.
+     * Print the inputted message out onto the terminal
      * @param message The desired message to print
      */
     public static void printToTerm(String message) {
@@ -32,30 +32,30 @@ public class UI {
     }
 
     /**
-     * Returns greeting message
+     * Returns greeting text
      */
     public static String getGreetingText() {
         return greetingText;
     }
 
     /**
-     * Returns Goodbye message
+     * Returns Goodbye text
      */
     public static String getByeText() {
         return byeText;
     }
 
     /**
-     * Returns 'list' command message
-     * @param list The TaskList to be printed.
+     * Readable Text that shows the tasks in the specified task list
+     * @param list The specified TaskList
      */
     public static String getListText(TaskList list) {
-        String s = "Alright here are the tasks in your list bro:" + list.toString();
-        return formatWithSpace(s);
+        String listText = "Alright here are the tasks in your list bro:" + list.toString();
+        return formatWithSpace(listText);
     }
 
     /**
-     * Formats the amount of tasks in a list into a string.
+     * Readable Text that describes how many tasks are in a list.
      * @param count The amount of tasks in the list.
      * @return The formatted string.
      */
@@ -64,35 +64,34 @@ public class UI {
     }
 
     /**
-     * Returns message for newly added tasks
+     * Readable Text to let users know when a task is added and the amount of tasks left.
      * @param list The list with the new task added.
      */
     public static String getTaskAddedText(TaskList list) {
+        int lastTaskIndex = list.getTaskAmount();
         int taskAmount = list.getTaskAmount();
-        return formatWithSpace("Alright bro. I've added this task:\n"
-                + list.getTask(taskAmount)
-                + getTaskAmountText(taskAmount)
-        );
-
+        String taskAddedText = "Alright bro. I've added this task:\n" + list.getTask(lastTaskIndex);
+        return formatWithSpace(taskAddedText + getTaskAmountText(taskAmount));
     }
 
     /**
-     * Returns the "task done" message for the specified task.
-     * @param task The specified task.
+     * Readable text to let users know that a task has been marked as done.
+     * @param task The specified task that has been marked done.
      */
     public static String getTaskDoneText(Task task) {
         return formatWithSpace("Good job bro! I've marked this task as done:\n " + task);
     }
 
     /**
-     * Returns the "task deleted" message for a specific task in a tasklist and the amount of tasks left.
+     * Readable text to let users know that the specified task has been deleted and afterwards, the amount
+     * of tasks left in that task list.
      * @param task The deleted task.
      * @param list The list from which the task was deleted.
      */
     public static String getTaskDeletedText(Task task, TaskList list) {
-        return formatWithSpace("Ok Bro, I removed the following task:\n "
-                + task
-                + getTaskAmountText(list.getTaskAmount()));
+        int taskAmount = list.getTaskAmount();
+        String taskDeletedText = "Ok Bro, I removed the following task:\n " + task;
+        return formatWithSpace(taskDeletedText + getTaskAmountText(taskAmount));
     }
 
     /**
@@ -104,7 +103,7 @@ public class UI {
     }
 
     /**
-     * Returns the error message from the error.
+     * Readable text ot let the users know of the error message.
      * @param e The error.
      */
     public static String getErrorText(Exception e) {
@@ -112,11 +111,11 @@ public class UI {
     }
 
     /**
-     * Returns a list of the tasks in the provided list.
+     * Readable text that shows the list of tasks matching the user's search keyword
      * @param list The list to be printed.
      */
     public static String getSearchListText(TaskList list) {
-        String s = "Here are the matching tasks in your list bro:" + list.toString();
-        return formatWithSpace(s);
+        String searchListText = "Here are the matching tasks in your list bro:" + list.toString();
+        return formatWithSpace(searchListText);
     }
 }

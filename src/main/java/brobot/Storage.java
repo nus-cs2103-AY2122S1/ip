@@ -15,20 +15,22 @@ import brobot.task.Todo;
 
 
 /**
- * Represents and handles the storage of the Duke Program"
+ * Represents the storage of the Brobot Program. Provides methods to handle the storage.
  */
 public class Storage {
     private final String filePath;
     private final File file;
 
     /**
-     * Constructor.
+     * Constructor for the Storage Class.
      *
      * @param filePath The storage file location in the system.
      */
     public Storage(String filePath) {
+        //initialize the filePath and file object with the specified filePath
         this.filePath = filePath;
         this.file = new File(filePath);
+        //check whether the save file exists in the specified filePath and if not, create it.
         try {
             if (!file.exists()) {
                 file.getParentFile().mkdirs();
@@ -49,40 +51,54 @@ public class Storage {
         try {
             Scanner s = new Scanner(file);
             while (s.hasNext()) {
-                String[] arr = s.nextLine().split(" \\| ", 4);
-                String taskType = arr[0];
-                switch (taskType) {
-                case "T":
-                    Task t = new Todo(arr[2]);
-                    if (arr[1].equals("1")) {
-                        t.markComplete();
-                    }
-                    list.addTask(t);
-                    break;
-                case "D":
-                    Task d = new Deadline(arr[2], LocalDateTime.parse(arr[3],
-                            DateTimeFormatter.ISO_LOCAL_DATE_TIME));
-                    if (arr[1].equals("1")) {
-                        d.markComplete();
-                    }
-                    list.addTask(d);
-                    break;
-                case "E":
-                    Task e = new Event(arr[2], LocalDateTime.parse(arr[3],
-                            DateTimeFormatter.ISO_LOCAL_DATE_TIME));
-                    if (arr[1].equals("1")) {
-                        e.markComplete();
-                    }
-                    list.addTask(e);
-                    break;
-                default:
-                    break;
-                }
+                String[] singleTask = s.nextLine().split(" \\| ", 4);
+                processTaskInStorageFormat(singleTask, list);
+
             }
         } catch (IOException e) {
             UI.printToTerm(UI.getErrorText(e));
         }
         return list;
+    }
+
+    /**
+     * Parse a single task in storage format and adds it into the task list.
+     * @param singleTask The task to be parsed
+     * @param list The list to add the task into
+     */
+    private void processTaskInStorageFormat(String[] singleTask, TaskList list) {
+        String taskType = singleTask[0];
+        boolean isTaskDone = singleTask[1].equals("1");
+        String taskContent = singleTask[2];
+        switch (taskType) {
+        case "T":
+            Task t = new Todo(taskContent);
+            if (isTaskDone) {
+                t.markComplete();
+            }
+            list.addTask(t);
+            break;
+        case "D":
+            String deadlineDate = singleTask[3];
+            Task d = new Deadline(taskContent, LocalDateTime.parse(deadlineDate,
+                    DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+            if (isTaskDone) {
+                d.markComplete();
+            }
+            list.addTask(d);
+            break;
+        case "E":
+            String eventDate = singleTask[3];
+            Task e = new Event(taskContent, LocalDateTime.parse(eventDate,
+                    DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+            if (isTaskDone) {
+                e.markComplete();
+            }
+            list.addTask(e);
+            break;
+        default:
+            break;
+        }
     }
 
     /**

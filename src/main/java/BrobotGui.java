@@ -17,10 +17,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-/**
- * Represents the main Brobot Program, a task manager.
- */
-public class Brobot extends Application {
+public class BrobotGui extends Application {
     private final Storage storage = new Storage("./data/list1.txt");
     private final TaskList list = storage.readList();
     private final BroParser parser = new BroParser(list, storage);
@@ -122,29 +119,5 @@ public class Brobot extends Application {
         } catch (BroException e) {
             return UI.getErrorText(e);
         }
-    }
-    /**
-     * Main Brobot program for CLI interfacing. Ignore this if using GUI
-     * @param args Arguments for main program
-     */
-    public static void main(String[] args) {
-
-        Storage storage = new Storage("./data/list1.txt");
-        TaskList list = storage.readList();
-        BroParser parser = new BroParser(list, storage);
-
-        UI.printToTerm(UI.getGreetingText());
-        String input = UI.getUserInput();
-
-        while (!input.equals("bye")) {
-            try {
-                parser.parse(input);
-            } catch (BroException e) {
-                UI.printToTerm(UI.getErrorText(e));
-            } finally {
-                input = UI.getUserInput();
-            }
-        }
-        UI.printToTerm(UI.getByeText());
     }
 }
