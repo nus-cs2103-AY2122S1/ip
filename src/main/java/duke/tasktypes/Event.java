@@ -22,6 +22,16 @@ public class Event extends Task {
         this.date = eventDate;
     }
 
+
+    /**
+     * Getter method for returning date as a String.
+     *
+     * @return Returns date.
+     */
+    public String getDate() {
+        return this.date;
+    }
+
     /**
      * Modifies inputted date.
      *
@@ -36,6 +46,7 @@ public class Event extends Task {
         }
         return "";
     }
+
 
     /**
      * Returns in a format to save to file.

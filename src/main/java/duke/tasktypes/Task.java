@@ -60,7 +60,6 @@ public class Task {
         this.isDone = true;
     }
 
-
     /**
      * Returns if description contains user's input.
      *
@@ -70,6 +69,7 @@ public class Task {
     public boolean containsMatch(String input) {
         return this.description.contains(input);
     }
+
 
     /**
      * Returns in a format to save to file.
