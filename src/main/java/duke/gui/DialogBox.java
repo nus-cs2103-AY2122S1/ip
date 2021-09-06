@@ -13,6 +13,24 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /**
+     * A public constructor to initialize the DialogBox.
+     *
+     * @param l The given Label.
+     * @param iv The given ImageView.
+     */
+    public DialogBox(Label l, ImageView iv) {
+        this.text = l;
+        this.displayPicture = iv;
+
+        text.setWrapText(true);
+        displayPicture.setFitHeight(100.0);
+        displayPicture.setFitWidth(100.0);
+
+        this.setAlignment(Pos.TOP_RIGHT);
+        this.getChildren().addAll(text, displayPicture);
+    }
+
+    /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
@@ -44,23 +62,5 @@ public class DialogBox extends HBox {
         var db = new DialogBox(l, iv);
         db.flip();
         return db;
-    }
-
-    /**
-     * A public constructor to initialize the DialogBox.
-     *
-     * @param l The given Label.
-     * @param iv The given ImageView.
-     */
-    public DialogBox(Label l, ImageView iv) {
-        this.text = l;
-        this.displayPicture = iv;
-
-        text.setWrapText(true);
-        displayPicture.setFitHeight(100.0);
-        displayPicture.setFitWidth(100.0);
-
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
     }
 }

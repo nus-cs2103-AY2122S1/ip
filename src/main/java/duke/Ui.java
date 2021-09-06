@@ -38,6 +38,18 @@ public class Ui extends Application {
     public Ui(Duke duke) {
         this.sc = new Scanner(System.in);
         this.duke = duke;
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+
     }
 
     private void showDukeResponse(String dukeResponse) {
@@ -140,7 +152,7 @@ public class Ui extends Application {
      */
     public void greet() {
         printMessage(
-            "Hello! I'm duke.Duke",
+            "Hello! I'm Duke",
             "What can I do for you?");
     }
 

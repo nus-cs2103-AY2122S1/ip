@@ -28,6 +28,7 @@ public class Duke extends Application {
             taskList = new TaskList();
         }
     }
+
     /**
      * A public constructor to initialized Duke.
      *
