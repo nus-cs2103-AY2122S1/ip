@@ -1,6 +1,5 @@
 package duke;
 
-import java.io.InputStream;
 import java.util.Scanner;
 
 import javafx.scene.control.Label;
@@ -17,10 +16,8 @@ import javafx.scene.layout.VBox;
 public class Ui {
     private Scanner inputReader = null;
     private VBox dialogContainer = null;
-    private final InputStream dukImageStream = this.getClass().getResourceAsStream("/images/duk.jpg");
-    private final InputStream userImageStream = this.getClass().getResourceAsStream("/images/user.jpg");
-    private final Image duke = new Image(dukImageStream);
-    private final Image user = new Image(userImageStream);
+    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/duk.jpg"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
 
     /**
      * Sole constructor for invocation by Duke.
