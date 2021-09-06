@@ -31,6 +31,7 @@ public class Parser {
      * @return an int indicating next step to be taken.
      */
     public int parse(String next) {
+        assert next != null : "next should not be null";
         if (next.equals(KeyWord.END.getK())) {
             return 0;
         } else if (next.equals(KeyWord.LIST.getK())) {

@@ -39,6 +39,7 @@ public class Duke {
     public void processInput(String input) {
         int result = parser.parse(input);
         Command executeNext;
+        assert result > 0 : "Something is wrong with the parsing process";
         switch (result) {
         case 0:
             ExitCommand exitCommand = new ExitCommand();
