@@ -2,6 +2,7 @@ package iris;
 
 import iris.command.ByeCommand;
 import iris.command.Command;
+import iris.command.CommandWord;
 import iris.command.DeadlineCommand;
 import iris.command.DeleteCommand;
 import iris.command.DoneCommand;
@@ -17,7 +18,6 @@ public class Parser {
     private static String getMetadata(String command) throws IrisException {
         String[] splitted = command.split(" ", 2);
         if (splitted.length == 1 || splitted[1].equals("")) {
-            // TODO: make this error message more specific?
             throw new IrisException("The description cannot be empty");
         } else {
             return splitted[1];
@@ -35,39 +35,43 @@ public class Parser {
     /**
      * Parses a given command
      *
-     * @param command raw command string to parse
+     * @param fullCommand raw command string to parse
      * @return Command object representing the action to be taken
      * @throws IrisException if command is invalid
      */
-    public static Command parse(String command) throws IrisException {
-        if (command.equals("list")) {
+    public static Command parse(String fullCommand) throws IrisException {
+        CommandWord commandWord = CommandWord.getCommandWord(fullCommand);
+        String[] splitted;
+
+        switch (commandWord) {
+        case LIST:
             return new ListCommand();
-        } else if (command.startsWith("todo")) {
-            return new ToDoCommand(getMetadata(command));
-        } else if (command.startsWith("deadline")) {
-            String[] splitted = getMetadata(command).split(" /by ");
+        case TODO:
+            return new ToDoCommand(getMetadata(fullCommand));
+        case DEADLINE:
+            splitted = getMetadata(fullCommand).split(" /by ");
             if (splitted.length != 2) {
-                throw new IrisException("deadline should have 2 arguments: a name and a time");
+                throw new IrisException("Expected format: deadline [name] /by [date]");
             }
             return new DeadlineCommand(splitted[0], splitted[1]);
-        } else if (command.startsWith("event")) {
-            String[] splitted = getMetadata(command).split(" /at ");
+        case EVENT:
+            splitted = getMetadata(fullCommand).split(" /at ");
             if (splitted.length != 2) {
-                throw new IrisException("event should have 2 arguments: a name and a time");
+                throw new IrisException("Expected format: event [name] /at [date]");
             }
             return new EventCommand(splitted[0], splitted[1]);
-        } else if (command.startsWith("done")) {
-            int index = parseInt(getMetadata(command));
-            return new DoneCommand(index);
-        } else if (command.startsWith("delete")) {
-            int index = parseInt(getMetadata(command));
-            return new DeleteCommand(index);
-        } else if (command.startsWith("find")) {
-            String searchTerm = getMetadata(command);
-            return new FindCommand(searchTerm);
-        } else if (command.startsWith("bye")) {
+        case DONE:
+            return new DoneCommand(parseInt(getMetadata(fullCommand)));
+        case DELETE:
+            return new DeleteCommand(parseInt(getMetadata(fullCommand)));
+        case FIND:
+            return new FindCommand(getMetadata(fullCommand));
+        case BYE:
             return new ByeCommand();
-        } else {
+        case INVALID:
+            throw new IrisException("I'm sorry, but I don't know what that means.");
+        default:
+            assert false;
             throw new IrisException("I'm sorry, but I don't know what that means.");
         }
     }

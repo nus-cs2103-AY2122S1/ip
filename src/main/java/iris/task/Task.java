@@ -4,6 +4,7 @@ package iris.task;
  * Represents a Task
  */
 public class Task {
+    protected static final String DATE_FORMAT = "MMM d yyyy";
     protected boolean isDone;
     protected String name;
 
