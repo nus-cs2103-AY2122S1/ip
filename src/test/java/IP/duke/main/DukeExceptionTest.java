@@ -1,7 +1,5 @@
 package IP.duke.main;
 
-import IP.duke.main.DukeException;
-
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

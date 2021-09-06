@@ -45,7 +45,7 @@ test {
 }
 
 application {
-    mainClassName = "IP.duke.main.Duke"
+    mainClassName = "duke.main.Duke"
 }
 
 shadowJar {
