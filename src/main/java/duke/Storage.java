@@ -17,7 +17,7 @@ public class Storage {
     private String filePath;
     //path of folder containing data file
     private String directoryPath;
-    //FIle containing stored data
+    //File containing stored data
     private File dataFile;
     //instance of taskList used to store tasks
     private TaskList taskList;
@@ -47,6 +47,7 @@ public class Storage {
         if (!dataFile.canRead()) {
             try {
                 new File(directoryPath).mkdir();
+                dataFile.createNewFile();
             } catch (NullPointerException exception) {
                 System.out.println(Ui.getUnknownError());
                 return;

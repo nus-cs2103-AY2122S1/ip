@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 /**
  * A class encapsulating a chat bot.
  *
- * @author Toh Wang Bin
+ * @author Toh Wang Bin, with reference to SE-EDU
  */
 public class Duke extends Application {
 
@@ -42,8 +42,7 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     private static String run(String input) {
-        //initialise required classes
-        //check if initialised:
+        //initialise required classes on first run
         if (!isInitialised) {
             //activate storage
             try {
@@ -63,9 +62,9 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        //Step 1. Setting up required components
+        //Setting up required components
 
-        //The container for the content of the chat to scroll.
+        //The container for the content of the chat to scroll
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -81,7 +80,7 @@ public class Duke extends Application {
         stage.setScene(scene);
         stage.show();
 
-        //Step 2. Formatting the window to look as expected
+        //Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -96,7 +95,7 @@ public class Duke extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
+        // You will need to import `javafx.scene.layout.Region` for this
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
@@ -124,7 +123,7 @@ public class Duke extends Application {
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-        //Part 3. Add functionality to handle user input.
+        //Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
