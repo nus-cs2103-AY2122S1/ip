@@ -4,6 +4,7 @@ import duke.command.CommandManager;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
+import duke.command.DurationCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
@@ -49,7 +50,7 @@ public class Duke extends Application {
         this.commandManager.registerCommands(new ListCommand(this.list, this.ui), new DoneCommand(this.list, this.ui),
                 new ToDoCommand(this.list, this.ui), new EventCommand(this.list, this.ui),
                 new DeadlineCommand(this.list, this.ui), new DeleteCommand(this.list, this.ui),
-                new FindCommand(this.list, this.ui));
+                new FindCommand(this.list, this.ui), new DurationCommand(this.list, this.ui));
     }
 
     @Override

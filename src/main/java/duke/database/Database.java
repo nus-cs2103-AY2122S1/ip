@@ -13,6 +13,7 @@ import java.util.Optional;
 import duke.exception.DatabaseAccessException;
 import duke.exception.DatabaseFileException;
 import duke.task.DeadlineTask;
+import duke.task.DurationTask;
 import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.TaskType;
@@ -105,7 +106,7 @@ public abstract class Database {
      * @param date        date of the task, nullable
      * @return the recreated task
      */
-    protected Task createTask(TaskType type, String name, boolean isCompleted, String date) {
+    protected Task createTask(TaskType type, String name, boolean isCompleted, String date, int duration) {
         LocalDate localDate = Optional.ofNullable(date).filter(str -> !str.equals("null"))
                 .map(str -> LocalDate.parse(str)).orElse(null);
         switch (type) {
@@ -115,6 +116,8 @@ public abstract class Database {
             return new DeadlineTask(name, isCompleted, localDate);
         case EVENT:
             return new EventTask(name, isCompleted, localDate);
+        case DURATION:
+            return new DurationTask(name, duration, isCompleted);
         default:
             return null;
         }
