@@ -50,6 +50,7 @@ public class Storage {
 
     private static Task parseTaskRow(String taskRow) {
         var taskParts = taskRow.split(" \\| ", 3);
+        assert taskParts.length == 3;
         var taskType = TaskType.convertTaskIcon(taskParts[0]);
         var taskIsDone = Boolean.parseBoolean(taskParts[1]);
         var taskLine = taskParts[2];
