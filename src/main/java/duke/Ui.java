@@ -18,12 +18,14 @@ public class Ui {
     }
     
     public String showAddTask(Task task, int numOfTasks) {
+        assert numOfTasks >= 1;
         return "Got it. I've added this task:\n  "
                 + task.toString() + "\nNow you have " + numOfTasks
                 + " task(s) in the list.";
     }
 
     public String showDeleteTask(Task task, int numOfTasks) {
+        assert numOfTasks >= 0;
         return "Noted. I've removed this task:\n  "
                 + task.toString() + "\nNow you have " + numOfTasks
                 + " task(s) in the list.";

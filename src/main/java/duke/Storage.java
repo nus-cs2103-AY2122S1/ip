@@ -42,6 +42,8 @@ public class Storage {
                 } else if (curr.startsWith("[E]")) {
                     int at = curr.lastIndexOf(" (at: ");
                     int end = curr.lastIndexOf(")");
+                    assert at != -1;
+                    assert end != -1;
                     Task currentTask = new Event(
                             curr.substring(7, at),
                             LocalDateTime.parse(curr.substring(at + 6, end),
@@ -51,6 +53,8 @@ public class Storage {
                 } else if (curr.startsWith("[D]")) {
                     int by = curr.lastIndexOf(" (by: ");
                     int end = curr.lastIndexOf(")");
+                    assert by != -1;
+                    assert end != -1;
                     Task currentTask = new Deadline(
                             curr.substring(7, by),
                             LocalDateTime.parse(curr.substring(by + 6, end),
