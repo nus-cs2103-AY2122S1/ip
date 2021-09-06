@@ -8,6 +8,7 @@ import duke.ui.DialogBox;
 import duke.ui.Ui;
 
 
+import java.io.File;
 import java.util.ArrayList;
 
 import javafx.application.Application;
@@ -53,6 +54,9 @@ public class Duke extends Application {
             Ui.showErrorMessage(e);
             tasks = new TaskList(new ArrayList<Task>());
         }
+
+        File f = new File(filePath);
+        assert f.exists() : "filePath should have been initiated.";
     }
 
     @Override
@@ -128,6 +132,7 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
+        assert (userInput.getText().equals("")) : "userInput should be cleared.";
     }
 
     private String getResponse(String input) {
@@ -139,6 +144,9 @@ public class Duke extends Application {
             output = Ui.showErrorMessage(e);
         }
         this.storage.write(tasks);
+
+        assert !output.equals("") : "response output should not be empty.";
+
         return output;
     }
 }

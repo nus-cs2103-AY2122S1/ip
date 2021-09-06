@@ -19,7 +19,7 @@ public class Parser {
      * @throws DukeException if user input string is not a valid format
      */
     public static Command getCommand(String input) throws DukeException {
-        if (input.trim().equals("bye")){
+        if (input.trim().equals("bye")) {
             return new ExitCommand();
         } else if (input.trim().equals("list")) {
             return new ListCommand();
@@ -41,14 +41,13 @@ public class Parser {
                 String str = "Please use the format delete <task No.>";
                 throw new DukeException(str);
             }
-
         } else if (input.matches("todo(.*)")) {
             try {
                 int start = input.indexOf("todo ");
                 String validInput = input.substring(start);
                 String taskDesc = validInput.trim().substring(5);
                 return new ToDoCommand(taskDesc);
-            } catch(StringIndexOutOfBoundsException e) {
+            } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("The todo task description cannot be empty. "
                         + "Please use format todo <desc>");
             }
@@ -74,6 +73,7 @@ public class Parser {
                 String validInput = input.substring(start);
                 String taskDesc = validInput.substring(6);
                 String[] fields = taskDesc.split(" /at ", 2);
+
                 //make sure not empty
                 String time = fields[1];
                 return new EventCommand(fields);
@@ -91,7 +91,7 @@ public class Parser {
 
                 String keyword = validInput.trim().substring(5);
                 return new FindCommand(keyword);
-            } catch(StringIndexOutOfBoundsException e) {
+            } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("Please use the format find <keyword>");
             }
         } else {

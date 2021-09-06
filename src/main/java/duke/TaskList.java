@@ -27,12 +27,15 @@ public class TaskList {
     public void addTask(taskType type, String[] details) {
         switch (type) {
         case TODO:
+            assert details.length == 1 : "details array for Todo should contain 1 field.";
             TaskList.add(new ToDo(details[0]));
             break;
         case DEADLINE:
+            assert details.length == 2 : "details array for Deadline should contain 2 fields.";
             TaskList.add(new Deadline(details[0], details[1]));
             break;
         case EVENT:
+            assert details.length == 2 : "details array for Event should contain 2 fields.";
             TaskList.add(new Event(details[0], details[1]));
             break;
         }
@@ -50,6 +53,7 @@ public class TaskList {
         int index = taskNo - 1;
         try {
             Task toDelete = TaskList.get(taskNo - 1);
+            assert toDelete != null : "Task to delete should exist.";
             TaskList.remove(index);
             return toDelete;
         } catch (IndexOutOfBoundsException e) {
@@ -68,6 +72,7 @@ public class TaskList {
     public Task doneTask(int taskNo) throws DukeException {
         int index = taskNo - 1;
         try {
+            assert TaskList.get(index) != null : "Task to mark done should be valid.";
             TaskList.get(index).markDone();
             return TaskList.get(taskNo - 1);
         } catch (IndexOutOfBoundsException e) {
@@ -83,6 +88,7 @@ public class TaskList {
      */
     public Task getTask(int taskNo) {
         Task toPrint = TaskList.get(taskNo - 1);
+        assert toPrint != null : "Task to be printed should be valid.";
         return toPrint;
     }
 
@@ -107,6 +113,7 @@ public class TaskList {
             str = str + String.format("%s. %s\n", i, item);
             i += 1;
         }
+        assert !str.equals("") : "string returned should not be empty.";
         return str;
     }
 
@@ -124,6 +131,7 @@ public class TaskList {
                 results.add(item);
             }
         }
+        assert results.size() > 0 : "Search results should not be empty.";
         return results;
     }
 
