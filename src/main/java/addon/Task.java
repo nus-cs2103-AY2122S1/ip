@@ -12,6 +12,7 @@ public class Task {
 
     /**
      * Task constructor.
+     *
      * @param description Name of task.
      */
     public Task(String description) {
