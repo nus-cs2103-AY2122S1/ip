@@ -80,7 +80,7 @@ public class Duke {
      */
     private String execute(Command c, String[] arguments) {
         try {
-            String response = "";
+            String response;
             switch (c) {
             case TODO:
                 tasks.addTask(new ToDo(arguments[0]));
@@ -114,6 +114,8 @@ public class Duke {
                 response =  ui.printGoodbye();
                 ui.closeScanner();
                 break;
+            default :
+                throw new DukeException("Invalid Command");
             }
             return response;
         } catch (DukeException err) {
