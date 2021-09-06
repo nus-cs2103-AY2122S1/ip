@@ -38,6 +38,7 @@ public class DeleteCommand extends Command {
             ArrayList<Task> taskList = tasks.getTaskList();
             Task taskToDelete = taskList.get(taskNum - 1);
             taskList.remove(taskToDelete);
+            assert !(tasks.getTaskList().contains(taskToDelete)) : "Task list should not contain current task";
             String message1 = ("Noted. I've removed this task: \n");
             String message2 = taskToDelete.toString();
             String taskForm;

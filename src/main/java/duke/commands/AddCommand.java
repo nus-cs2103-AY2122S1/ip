@@ -56,7 +56,9 @@ public class AddCommand extends Command {
         String message1 = ("Got it. I've added this task: \n");
         String message2 = task.toString();
         tasks.getTaskList().add(task);
+        assert tasks.getTaskList().contains(task) : "Task list should contain current task";
         String taskForm;
+
         if (tasks.getTaskList().size() == 1) {
             taskForm = " task";
         } else {

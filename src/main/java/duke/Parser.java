@@ -74,6 +74,7 @@ public class Parser {
             } else if (!userInput.contains("/at")) {
                 throw new DukeException("Please input time for your event!");
             }
+            assert userInput.length() > 5 : "User length should be greater than 5";
             String name = userInput.substring(6).split("/at")[0];
             String time = userInput.substring(6).split("/at")[1];
             //System.out.println(time);

@@ -67,6 +67,7 @@ public class Storage {
             nekoData.getParentFile().mkdir();
             nekoData.createNewFile();
         } else {
+            assert nekoData != null : "File should be present already";
             Scanner scanner = new Scanner(nekoData);
             while (scanner.hasNextLine()) {
                 String s = scanner.nextLine();
