@@ -25,4 +25,14 @@ public class FindCommand implements ICommand{
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) return true;
+
+        if (o != null && o.getClass() == this.getClass()) {
+            return ((FindCommand) o).keyWord.equals(this.keyWord);
+        }
+        return false;
+    }
 }

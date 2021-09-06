@@ -59,9 +59,9 @@ public class Parser {
         } else {
             switch (strArr[0]) {
                 case WORD_DONE:
-                    return new DoneCommand(tryParse_DoneOrDelete(strArr[1], listSize) - 1);
+                    return new DoneCommand(tryParse_DoneOrDelete(strArr[1], listSize));
                 case WORD_DELETE:
-                    return new DeleteCommand(tryParse_DoneOrDelete(strArr[1], listSize) - 1);
+                    return new DeleteCommand(tryParse_DoneOrDelete(strArr[1], listSize));
                 case WORD_FIND:
                     return new FindCommand(strArr[1]);
                 case WORD_TODO:
@@ -78,7 +78,7 @@ public class Parser {
 
     private static int tryParse_DoneOrDelete(String s, int listSize) throws DukeException {
         try {
-            int taskIndex = Integer.parseInt(s);
+            int taskIndex = Integer.parseInt(s) - 1;
             if (taskIndex >= 0 && taskIndex < listSize) {
                 return taskIndex;
             } else {
@@ -95,6 +95,7 @@ public class Parser {
      * @return An string array of length 2, with the first element being description and the second being due time.
      */
     private static String[] tryParse_Deadline(String s) throws DukeException {
+        s = s.strip();
         List<String> strList = Arrays.asList(s.split(" "));
         if (strList.contains(WORD_DEADLINE_BY)) {
             int i = strList.indexOf(WORD_DEADLINE_BY);
@@ -102,8 +103,8 @@ public class Parser {
                 throw new DukeException(ExceptionType.MISSING_OPERAND);
             }
             return new String[]{"deadline",
-                    s.split(WORD_DEADLINE_BY, 2)[0].stripTrailing(),
-                    s.split(WORD_DEADLINE_BY, 2)[1].stripLeading(),
+                    s.split(WORD_DEADLINE_BY, 2)[0].strip(),
+                    s.split(WORD_DEADLINE_BY, 2)[1].strip(),
             };
         } else {
             throw new DukeException(ExceptionType.DDL_MISSING_KEYWORD);
@@ -113,18 +114,19 @@ public class Parser {
     /**
      * Parses event command to description and time period.
      * @param s event command
-     * @return An string array of length 2, with the first element being description and the second being time period.
+     * @return An string array of length 3, with the second element being description and the third being time period.
      */
     private static String[] tryParse_Event(String s) throws DukeException {
+        s = s.strip();
         List<String> strList = Arrays.asList(s.split(" "));
         if (strList.contains(WORD_EVENT_AT)) {
             int i = strList.indexOf(WORD_EVENT_AT);
             if (i == 0 || i == strList.size() - 1) {
                 throw new DukeException(ExceptionType.MISSING_OPERAND);
             }
-            return new String[]{"deadline",
-                    s.split(WORD_EVENT_AT, 2)[0].stripTrailing(),
-                    s.split(WORD_EVENT_AT, 2)[1].stripLeading(),
+            return new String[]{"event",
+                    s.split(WORD_EVENT_AT, 2)[0].strip(),
+                    s.split(WORD_EVENT_AT, 2)[1].strip(),
             };
         } else {
             throw new DukeException(ExceptionType.EVENT_MISSING_KEYWORD);

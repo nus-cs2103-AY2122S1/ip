@@ -38,4 +38,14 @@ public class AddCommand implements ICommand{
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) return true;
+
+        if (o != null && o.getClass() == this.getClass()) {
+            return ((AddCommand) o).task.equals(this.task);
+        }
+        return false;
+    }
 }

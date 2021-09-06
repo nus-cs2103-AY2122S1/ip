@@ -25,4 +25,14 @@ public class DoneCommand implements ICommand{
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) return true;
+
+        if (o != null && o.getClass() == this.getClass()) {
+            return ((DoneCommand) o).lineIndex == this.lineIndex;
+        }
+        return false;
+    }
 }

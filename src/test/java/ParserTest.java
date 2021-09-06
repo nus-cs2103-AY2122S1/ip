@@ -1,45 +1,45 @@
-//import duke.DukeAction;
-//import duke.DukeException;
-//import duke.Parser;
-//
-//import org.junit.jupiter.api.Test;
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.junit.jupiter.api.Assertions.assertThrows;
-//
-//public class ParserTest {
-//    @Test
-//    public void stringToDukeAction_validInputs_actionTypeReturned() throws Exception{
-//        assertEquals(Parser.stringToDukeAction(" bye", 1), DukeAction.EXIT);
-//        assertEquals(Parser.stringToDukeAction("list", 1), DukeAction.PRINT_LIST);
-//        assertEquals(Parser.stringToDukeAction("todo a", 1), DukeAction.TODO);
-//        assertEquals(Parser.stringToDukeAction("deadline a /by b", 1), DukeAction.DEADLINE);
-//        assertEquals(Parser.stringToDukeAction("event a /at b", 1), DukeAction.EVENT);
-//        assertEquals(Parser.stringToDukeAction("delete 10000", 10000), DukeAction.DELETE);
-//        assertEquals(Parser.stringToDukeAction("done 10000", 10000), DukeAction.MARK_DONE);
-//    }
-//
-//    @Test
-//    public void stringToDukeAction_invalidInputs_exceptionThrown() {
-//        assertThrows(DukeException.class, () -> {
-//            Parser.stringToDukeAction("bye s", 1);
-//        });
-//        assertThrows(DukeException.class, () -> {
-//            Parser.stringToDukeAction("list a", 1);
-//        });
-//        assertThrows(DukeException.class, () -> {
-//            Parser.stringToDukeAction("todo", 1);
-//        });
-//        assertThrows(DukeException.class, () -> {
-//            Parser.stringToDukeAction("deadline  /by s", 1);
-//        });
-//        assertThrows(DukeException.class, () -> {
-//            Parser.stringToDukeAction("event a /by b", 1);
-//        });
-//        assertThrows(DukeException.class, () -> {
-//            Parser.stringToDukeAction("delete -1", 0);
-//        });
-//        assertThrows(DukeException.class, () -> {
-//            Parser.stringToDukeAction("done 2", 1);
-//        });
-//    }
-//}
+import duke.Command.*;
+import duke.DukeException;
+import duke.Parser;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+public class ParserTest {
+    @Test
+    public void parse_validInputs_commandReturned() throws Exception{
+        assertEquals(Parser.parse(" bye  ", 1), new ExitCommand());
+        assertEquals(Parser.parse("list", 1), new ListCommand());
+        assertEquals(Parser.parse("todo a", 1), new AddCommand(new String[]{"todo", "a"}));
+        assertEquals(Parser.parse("deadline   a  /by    b", 1), new AddCommand(new String[]{"deadline", "a", "b"}));
+        assertEquals(Parser.parse("event a /at b", 1), new AddCommand(new String[]{"event", "a", "b"}));
+        assertEquals(Parser.parse("delete 10000", 10000), new DeleteCommand(9999));
+        assertEquals(Parser.parse("done 20000", 20000), new DoneCommand(19999));
+    }
+
+    @Test
+    public void parse_invalidInputs_exceptionThrown() {
+        assertThrows(DukeException.class, () -> {
+            Parser.parse("bye s", 1);
+        });
+        assertThrows(DukeException.class, () -> {
+            Parser.parse("list a", 1);
+        });
+        assertThrows(DukeException.class, () -> {
+            Parser.parse("todo", 1);
+        });
+        assertThrows(DukeException.class, () -> {
+            Parser.parse("deadline  /by s", 1);
+        });
+        assertThrows(DukeException.class, () -> {
+            Parser.parse("event a /by b", 1);
+        });
+        assertThrows(DukeException.class, () -> {
+            Parser.parse("delete -1", 0);
+        });
+        assertThrows(DukeException.class, () -> {
+            Parser.parse("done 2", 1);
+        });
+    }
+}

@@ -15,4 +15,9 @@ public class ListCommand implements ICommand{
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return o != null && o.getClass() == this.getClass();
+    }
 }
