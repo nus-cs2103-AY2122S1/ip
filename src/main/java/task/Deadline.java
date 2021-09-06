@@ -42,6 +42,7 @@ public class Deadline extends Task {
      *
      * @return A LocalDate, the date of the task.
      */
+    @Override
     public LocalDate getDate() {
         return this.date;
     }
@@ -52,7 +53,10 @@ public class Deadline extends Task {
      * @return A LocalTime, the time of the task.
      */
     public LocalTime getTime() {
-        return this.time;
+        if (this.time != null) {
+            return this.time;
+        }
+        return LocalTime.of(23, 59);
     }
 
     /**

@@ -1,8 +1,9 @@
 package task;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
     /** An Enum type of task. **/
     public enum TaskType {
         TODO, DEADLINE, EVENT
@@ -22,6 +23,14 @@ public abstract class Task {
     public Task (String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    @Override
+    public int compareTo(Task anotherTask) {
+        if (this.getDate() != anotherTask.getDate()) {
+            return this.getDate().compareTo(anotherTask.getDate());
+        }
+        return this.getTime().compareTo(anotherTask.getTime());
     }
 
     /**
@@ -89,4 +98,18 @@ public abstract class Task {
      * @return A String. The type icon of the task.
      */
     public abstract String getTypeIcon();
+
+    /**
+     * A public method to get the date of the task.
+     *
+     * @return A LocalDate, the date of the task.
+     */
+    public abstract LocalDate getDate();
+
+    /**
+     * A public method to get the time of the task.
+     *
+     * @return A LocalTime, the time of the task.
+     */
+    public abstract LocalTime getTime();
 }

@@ -13,6 +13,7 @@ import command.DoneCommand;
 import command.ExitCommand;
 import command.FindCommand;
 import command.ListCommand;
+import command.SortByTimeCommand;
 import duke.exception.DukeException;
 import task.Task;
 
@@ -30,6 +31,9 @@ public class Parser {
         }
         if (fullCommand.equals("list")) {
             return new ListCommand();
+        }
+        if (fullCommand.equals("sort by time")) {
+            return new SortByTimeCommand();
         }
         if (fullCommand.length() >= 6 && fullCommand.substring(0, 4).equals("done")) {
             String s2 = fullCommand.substring(5);
