@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
- * Represents the list of strings Duke uses to make changes to the list file.
+ * Represents the list of strings Duke uses internally to make changes to the list file.
  */
 public class TaskListInternal {
     public static List<String> lines;
@@ -34,7 +34,7 @@ public class TaskListInternal {
     }
 
     /**
-     * Marks a task as done in the list of strings and the task list file.
+     * Marks a task as done in the internal task list and the task list file.
      *
      * @param storage Storage object used by Duke to assist with file handling.
      * @taskNo Index of the task that is being marked as done in the list.
@@ -58,7 +58,7 @@ public class TaskListInternal {
     }
 
     /**
-     * Deletes a task from the list of strings and the task list file.
+     * Deletes a task from the internal task list and the task list file.
      *
      * @param storage Storage object used by Duke to assist with file handling.
      * @param taskNo  Index of the task that is being deleted in the list.
@@ -75,7 +75,7 @@ public class TaskListInternal {
     }
 
     /**
-     * Adds a task to the list of strings and the task list file.
+     * Adds a task to the internal task list and the task list file.
      *
      * @param storage   Storage object used by Duke to assist with file handling.
      * @param toBeAdded Task that is being added.
