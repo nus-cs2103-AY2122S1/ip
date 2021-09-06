@@ -1,10 +1,10 @@
 package duchess.task;
 
-import duchess.main.DuchessException;
-
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duchess.main.DuchessException;
 
 /**
  * This class implements an Event task.
@@ -15,12 +15,6 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
-    /** The date and time of the deadline task when it starts.*/
-    protected LocalDateTime dateTimeStart;
-
-    /** The date and time of the deadline task when it ends.*/
-    protected LocalDateTime dateTimeEnd;
-
     /** The DateTimeFormatter used when printing the Event.*/
     private static final DateTimeFormatter PRINT_DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
 
@@ -29,6 +23,12 @@ public class Event extends Task {
 
     /** The DateTimeFormatter when converting time with minutes from string.*/
     private static final DateTimeFormatter DATE_MINUTES_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy h:mma");
+
+    /** The date and time of the deadline task when it starts.*/
+    protected LocalDateTime dateTimeStart;
+
+    /** The date and time of the deadline task when it ends.*/
+    protected LocalDateTime dateTimeEnd;
 
 
     /**
@@ -52,7 +52,7 @@ public class Event extends Task {
      */
     public static LocalDateTime[] convertStringToDate (String date, String duration) throws DuchessException {
         try {
-            String replacement = duration.replace("am", "AM").replace("pm","PM");
+            String replacement = duration.replace("am", "AM").replace("pm", "PM");
             String[] timeParts = replacement.split("-");
             String startTime = timeParts[0];
             String endTime = timeParts[1];
@@ -67,7 +67,7 @@ public class Event extends Task {
         }
     }
 
-    public LocalDateTime getDateTime(){
+    public LocalDateTime getDateTime() {
         return this.dateTimeStart;
     }
 
@@ -86,7 +86,7 @@ public class Event extends Task {
      * @return The LocalDateTime representation.
      * @throws DuchessException Exception thrown when an incorrect format is used for Deadline.
      */
-    public static LocalDateTime convertTextToDate (String by)  {
+    public static LocalDateTime convertTextToDate (String by) {
         return LocalDateTime.parse(by, PRINT_DATE_FORMATTER);
     }
 
@@ -98,6 +98,6 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString()
                 + " (at: " + dateTimeStart.format(PRINT_DATE_FORMATTER) + " to "
-                    + dateTimeEnd.format(PRINT_DATE_FORMATTER) + ")";
+                + dateTimeEnd.format(PRINT_DATE_FORMATTER) + ")";
     }
 }

@@ -1,12 +1,13 @@
 package duchess.task;
 
-import duchess.main.DuchessException;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
+
+import duchess.main.DuchessException;
 
 public class EventTest {
     @Test
@@ -22,7 +23,7 @@ public class EventTest {
     @Test
     public void testConvertStringToDate_validDate_success() throws DuchessException {
         LocalDateTime[] eventConvertedDates = Event.convertStringToDate("25/12/2021", "12pm-4pm");
-        LocalDateTime[] dates =  { LocalDateTime.of(2021, 12, 25, 12, 00),
+        LocalDateTime[] dates = { LocalDateTime.of(2021, 12, 25, 12, 00),
                 LocalDateTime.of(2021, 12, 25, 16, 00)};
         assertEquals(dates[0], eventConvertedDates[0]);
         assertEquals(dates[1], eventConvertedDates[1]);
@@ -32,7 +33,7 @@ public class EventTest {
     public void testConvertStringToDate_invalidDate_exceptionThrown() {
         try {
             LocalDateTime[] eventConvertedDates = Event.convertStringToDate("25/13/2021", "12pm-4pm");
-            LocalDateTime[] dates =  { LocalDateTime.of(2021, 13, 25, 12, 00),
+            LocalDateTime[] dates = { LocalDateTime.of(2021, 13, 25, 12, 00),
                     LocalDateTime.of(2021, 13, 25, 16, 00)};
             assertEquals(dates[0], eventConvertedDates[0]);
             assertEquals(dates[1], eventConvertedDates[1]);

@@ -22,13 +22,15 @@ public class FindCommand extends Command {
         int counter = 0;
         for (int i = 0; i < duchess.getDuchessList().getSize(); i++) {
             Task t = duchess.getDuchessList().getTask(i + 1);
-            if (t.contains(keyword))
+            if (t.contains(keyword)) {
                 results += String.format("%d. %s\n", ++counter, t);
+            }
         }
-        if (results.isEmpty())
+        if (results.isEmpty()) {
             reply = invalidMessage;
-        else
+        } else {
             reply = results;
+        }
         return reply;
     }
 }

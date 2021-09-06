@@ -1,7 +1,6 @@
 package duchess.main;
 
 import java.util.Scanner;
-import duchess.command.Command;
 
 /**
  * This class implements a Duke Chatbot variant: Duchess
@@ -24,8 +23,7 @@ public class Duchess {
     /**
      * Constructs a Duchess object.
      */
-    public Duchess()
-    {
+    public Duchess() {
         this.ui = new Ui();
         this.sc = new Scanner(System.in);
         this.duchessList = DuchessFileHandler.load();

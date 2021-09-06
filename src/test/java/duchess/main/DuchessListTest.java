@@ -1,14 +1,15 @@
 package duchess.main;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.Test;
+
 import duchess.task.Deadline;
 import duchess.task.Event;
 import duchess.task.Task;
 import duchess.task.ToDo;
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DuchessListTest {
 
@@ -28,9 +29,9 @@ public class DuchessListTest {
         dl.add(new Event("meeting", LocalDateTime.MIN, LocalDateTime.MAX));
 
         assertEquals(dl.printList(),
-                "1. [T][ ] homework\n" +
-                        "2. [D][ ] assignment (by: Dec 31 +999999999 23:59)\n" +
-                        "3. [E][ ] meeting (at: Jan 1 +1000000000 00:00 to Dec 31 +999999999 23:59)");
+                "1. [T][ ] homework\n"
+                        + "2. [D][ ] assignment (by: Dec 31 +999999999 23:59)\n"
+                        + "3. [E][ ] meeting (at: Jan 1 +1000000000 00:00 to Dec 31 +999999999 23:59)");
     }
 
     @Test

@@ -1,16 +1,17 @@
 package duchess.command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import duchess.main.Duchess;
 import duchess.main.DuchessFileHandler;
 import duchess.task.ToDo;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TodoCommandTest {
     @Test
     public void testHandleLogic() {
-        DuchessFileHandler.clear();
+        DuchessFileHandler.clearData();
         Duchess d = new Duchess();
         ToDo t = new ToDo("homework");
         String expectedResponse = "Understood. I've added this task:\n    " + t

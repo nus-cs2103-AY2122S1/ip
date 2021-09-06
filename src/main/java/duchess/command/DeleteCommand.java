@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
      * @param duchess The Duchess to return the output to.
      * @return Whether to continue scanning for user input afterwards.
      */
-    public String handleLogic(Duchess duchess)  {
+    public String handleLogic(Duchess duchess) {
         String index = getName();
         String reply;
         // Parsing a non-numeric string will throw a NumberFormatException
@@ -42,12 +42,13 @@ public class DeleteCommand extends Command {
                 // "delete" followed by an integer outside of range of the list
                 throw new DuchessException("Apologies, that task does not exist and cannot be deleted.");
             }
-        } catch (NumberFormatException|DuchessException e) {
+        } catch (NumberFormatException | DuchessException e) {
             // "delete" followed by an invalid non-integer string input
-            if (e instanceof NumberFormatException)
+            if (e instanceof NumberFormatException) {
                 reply = "The command \"delete\" should be followed by an integer.";
-            else
+            } else {
                 reply = ((DuchessException) e).getMessage();
+            }
         }
         return reply;
     }
