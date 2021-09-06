@@ -43,7 +43,8 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
         dialog.setText(text);
-        dialog.setFont(new Font("Cambria", 32));
+        dialog.setFont(new Font("Cambria", 20));
+        dialog.setPadding(new Insets(10));
         displayPicture.setImage(img);
         displayPicture.setFitHeight(100.0);
         displayPicture.setFitWidth(100.0);
@@ -64,7 +65,7 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(10), Insets.EMPTY)));
+        db.dialog.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(10), Insets.EMPTY)));
         db.setSpacing(20.0);
         return db;
 
@@ -72,7 +73,7 @@ public class DialogBox extends HBox {
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setBackground(new Background(new BackgroundFill(Color.PALEGREEN, new CornerRadii(10), Insets.EMPTY)));
+        db.dialog.setBackground(new Background(new BackgroundFill(Color.PALEGREEN, new CornerRadii(10), Insets.EMPTY)));
         db.setSpacing(20.0);
         db.flip();
         return db;

@@ -9,6 +9,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -51,6 +56,10 @@ public class MainWindow extends Stage {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        BackgroundSize temp = new BackgroundSize(600, 400, true, true, true, false);
+        BackgroundImage myBI = new BackgroundImage(new Image(this.getClass().getResourceAsStream("/images/background.jpg")),
+                null,null,null, temp);
+        dialogContainer.setBackground(new Background(myBI));
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog("Hello! I'm Duke\n" + "What can I do for you?", dukeImage)
         );

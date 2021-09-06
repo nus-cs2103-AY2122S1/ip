@@ -30,7 +30,7 @@ Here are the tasks in your list:
 
 ### `done` - Marks a task as done
 
-It marks the task at the specified number to be done.
+It marks the task at the specified index to be done.
 
 Example of usage:
 
@@ -99,9 +99,32 @@ Got it. I've added this task:
   [D][ ] check3  (by: time2)
 Now you have 3 tasks in the list.
 ```
-### `bye` - Describe action
 
-Exits the Duke program.
+### `activity` - Creates a new activity task
+
+Creates a new deadline task adding to the back of the list with timing specified by /for. 
+Timing is to be specified in a yyyy-mm-dd format
+
+Example of usage:
+
+`activity check2 /for 2`
+
+Expected outcome:
+
+A new activity task is added to the back of the list with timing specified by /by.
+
+```
+Got it. I've added this task:
+  [A][ ] check2  (needs 2 hours)
+Now you have 3 tasks in the list.
+```
+
+```
+Bye. Hope to see you again soon!
+```
+### `bye` - Exits the program
+
+Exits the Duke program and save the current task list.
 
 Example of usage:
 
