@@ -1,7 +1,5 @@
 package duke.commands;
 
-import java.util.*;
-
 import duke.tasks.Task;
 import duke.utils.*;
 
@@ -9,17 +7,19 @@ import duke.utils.*;
  * Represent an Done action to be executed.
  */
 public class DoneCommand extends Command {
-    String index;
+    Integer index;
 
-    public DoneCommand(String input){
-        String inputString = input.replaceAll("[^0-9]", "");
-        assert (Integer.parseInt(inputString) > 0);
+
+    public DoneCommand(String input) {
+        Integer parsedIndex = Integer.parseInt(input.replaceAll("[^0-9]", ""));
+        index = parsedIndex-1;
+        assert(index>=0);
     }
 
     /**
      * Marks the task of interest as completed
      *
-     * @param tasks    the tasklist
+     * @param tasks    the taskList
      * @param ui    the user-interface
      * @param storage Persistent storage for data
      */
@@ -28,7 +28,7 @@ public class DoneCommand extends Command {
         try {
             Task task = tasks.getTask(index);
             task.markAsDone();
-            Storage.updateLine(Integer.parseInt(index)-1);
+            Storage.updateLine(index);
             return "Nice! I've marked this task as done: " + task;
         } catch (Exception e) {
             return e.getMessage();
