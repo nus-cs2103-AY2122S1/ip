@@ -52,9 +52,7 @@ public class Ui {
      * @param task the given task.
      */
     public String markTask(Task task) {
-        // this.printLine();
         return task.toString();
-        // this.printLine();
     }
 
     /**
@@ -63,7 +61,7 @@ public class Ui {
      * @param index index to show the position in the list.
      */
     public String printTask(Task task, int index) {
-        return index + ". " + task.toString()+ "\n";
+        return index + ". " + task.toString() + "\n";
     }
 
     /**
@@ -77,18 +75,14 @@ public class Ui {
      * Prints that the given command is not understood by the program.
      */
     public String printUnknownCommand() {
-//        this.printLine();
         return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
-//        this.printLine();
     }
 
     /**
      * Says good bye to the user.
      */
     public String sayGoodBye() {
-//        this.printLine();
         return "Bye. Hope to see you soon!\n";
-//        this.printLine();
     }
 
     /**
@@ -104,9 +98,7 @@ public class Ui {
      * @param task the given task to be printed.
      */
     public String printAddedTask(Task task) {
-//        this.printLine();
         return "Done! added the following task:\n" + task;
-//        this.printLine();
     }
 
     /**
@@ -114,9 +106,7 @@ public class Ui {
      * @param task the given task to be deleted.
      */
     public String printDeletedTask(Task task) {
-//        this.printLine();
         return "Done! deleted the following task:\n" + task;
-//        this.printLine();
     }
 
     /**
