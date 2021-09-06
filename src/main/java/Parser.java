@@ -9,14 +9,13 @@ public class Parser {
     public Parser(TaskList taskList, Storage storage, Ui ui) {
         this.taskList = taskList;
         this.storage = storage;
+        this.ui = ui;
         this.sc = new Scanner(System.in);
     }
 
     /**
      * Parses input continously and executes the commands provided.
      * Type 'bye' to exit the program.
-     *
-     * @param input The input to be parsed.
      */
     public void parse() {
         while (sc.hasNextLine()) {
@@ -29,7 +28,7 @@ public class Parser {
                 } else if (input.startsWith("done ")) {
                     taskList.completeTask(input.substring(5));
                 } else if (input.startsWith("todo ")) {
-                    taskList.addTask(new ToDo(input.substring(45)));
+                    taskList.addTask(new ToDo(input.substring(5)));
                 } else if (input.startsWith("deadline ")) {
                     taskList.addTask(new Deadline(input.substring(9)));
                 } else if (input.startsWith("event ")) {

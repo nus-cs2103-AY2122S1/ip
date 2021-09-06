@@ -4,7 +4,7 @@ public class Ui {
     }
 
     public void display(Exception e) {
-        this.display(e.getMessage());
+        display(e.getMessage());
     }
 
     public void addTask(Task task, TaskList taskList) {

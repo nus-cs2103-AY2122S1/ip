@@ -71,7 +71,7 @@ public class TaskList {
             if (input.length() < 1) {
                 throw new DukeException(DukeException.UNSPECIFIED_TASK);
             } else {
-                int i = Integer.parseInt(input.substring(1));
+                int i = Integer.parseInt(input/*.substring(1)*/);
                 if (i > tasks.size()) {
                     throw new DukeException(DukeException.NOT_ENOUGH_TASKS);
                 } else if (i <= 0) {

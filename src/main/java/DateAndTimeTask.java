@@ -12,16 +12,16 @@ public class DateAndTimeTask extends Task {
      * @throws DukeException Thrown if the any part of the input string is invalid.
      */
     public DateAndTimeTask(String input, String splitterKey) throws DukeException {
-        if (input.length() <= 1) {
+        if (input.length() == 0) {
             throw new DukeException(DukeException.BLANK_DESCRIPTION);
         } else {
             int i = input.indexOf(splitterKey);
             if (i < 0) {
                 throw new DukeException(DukeException.BLANK_DATE_AND_TIME);
-            } else if (i <= 1) {
+            } else if (i == 0) {
                 throw new DukeException(DukeException.BLANK_DESCRIPTION);
             }
-            this.setDescription(input.substring(1, i));
+            this.setDescription(input.substring(0, i));
             this.dateTime = parseDateAndTime(input.substring(i + splitterKey.length()));
         }
     }
