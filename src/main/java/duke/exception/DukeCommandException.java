@@ -14,6 +14,12 @@ public class DukeCommandException extends Exception {
      */
     public DukeCommandException(String command) {
         switch (command) {
+        case "bye":
+            msg = "Wrong usage of \"bye\".\nCorrect usage: \"bye\".";
+            break;
+        case "list":
+            msg = "Wrong usage of \"list\".\nCorrect usage: \"todo\".";
+            break;
         case "todo":
             msg = "Wrong usage of \"todo\".\nCorrect usage: \"todo TASK_NAME\".";
             break;
