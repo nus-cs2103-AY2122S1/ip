@@ -114,6 +114,7 @@ public class Parser {
                 if (commandArguments.length < 2) {
                     throw new DukeException("☹ OOPS!!! The index of '" + command + "' cannot be empty.");
                 }
+                assert !arguments.equals("") : "Argument required, cannot be empty.";
                 this.toRewriteData = true;
                 int counter = Integer.parseInt(arguments);
                 return done(counter);
@@ -121,6 +122,7 @@ public class Parser {
                 if (commandArguments.length < 2) {
                     throw new DukeException("☹ OOPS!!! The description of '" + command + "' cannot be empty.");
                 }
+                assert !arguments.equals("") : "Argument required, cannot be empty.";
                 this.toRewriteData = true;
                 String[] splitTask = arguments.split(" /by ");
                 if (splitTask.length < 2) {
@@ -138,6 +140,7 @@ public class Parser {
                 if (commandArguments.length < 2) {
                     throw new DukeException("☹ OOPS!!! The description of '" + command + "' cannot be empty.");
                 }
+                assert !arguments.equals("") : "Argument required, cannot be empty.";
                 this.toRewriteData = true;
                 String[] splitTask = arguments.split(" /at ");
                 if (splitTask.length < 2) {
@@ -155,12 +158,14 @@ public class Parser {
                 if (commandArguments.length < 2) {
                     throw new DukeException("☹ OOPS!!! The description of '" + command + "' cannot be empty.");
                 }
+                assert !arguments.equals("") : "Argument required, cannot be empty.";
                 this.toRewriteData = true;
                 return this.tasks.addTask(new Todo(arguments));
             } else if (command.equals("delete")) {
                 if (commandArguments.length < 2) {
                     throw new DukeException("☹ OOPS!!! The index of '" + command + "' cannot be empty.");
                 }
+                assert !arguments.equals("") : "Argument required, cannot be empty.";
                 this.toRewriteData = true;
                 int counter = Integer.parseInt(arguments);
                 return this.tasks.deleteTask(counter);
@@ -168,6 +173,7 @@ public class Parser {
                 if (commandArguments.length < 2) {
                     throw new DukeException("☹ OOPS!!! The keyword(s) of '" + command + "' cannot be empty.");
                 }
+                assert !arguments.equals("") : "Argument required, cannot be empty.";
                 this.toRewriteData = false;
                 this.toFind = true;
                 String[] splitKeywords = arguments.split(" ");
