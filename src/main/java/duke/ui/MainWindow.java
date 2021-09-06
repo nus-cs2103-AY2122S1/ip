@@ -46,7 +46,7 @@ public class MainWindow extends AnchorPane {
         String response = duke.getResponse(input);
 
         if (response == "EXIT_ROUTINE") {
-            assert(duke.getActiveStatus());
+            assert(!duke.getActiveStatus());
             System.exit(0);
         }
 

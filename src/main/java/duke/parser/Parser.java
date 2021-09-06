@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 import duke.DukeException;
 import duke.commands.AddCommand;
+import duke.commands.ArchiveCommand;
 import duke.commands.Command;
 import duke.commands.CompleteCommand;
 import duke.commands.DeleteCommand;
@@ -28,7 +29,8 @@ public class Parser {
         TODO("todo"),
         DEADLINE("deadline"),
         EVENT("event"),
-        FIND("find");
+        FIND("find"),
+        ARCHIVE("archive-all");
 
         public final String label;
 
@@ -73,6 +75,8 @@ public class Parser {
                 return new ExitCommand();
             case LIST:
                 return new ListCommand();
+            case ARCHIVE:
+                return new ArchiveCommand();
             case FIND:
                 return new FindCommand(remainder);
             case DELETE:

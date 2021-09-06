@@ -16,18 +16,19 @@ import duke.ui.Ui;
 public class Duke {
     // Fields for chatbot functionality
     public static final String FILEPATH = "data/tasks.txt";
+    public static final String ARCHIVE_FILEPATH = "data/archive.txt";
     private TaskList tasks;
     private Ui ui;
     private Storage storage;
-    private boolean isRunning;
+    private boolean isRunning = true;
 
     /**
      * @param filePath File path to read/write task list data to.
      * @throws IOException If there is an error reading/writing to the filepath.
      */
-    public Duke(String filePath) throws IOException {
+    public Duke(String filePath, String archiveFilePath) throws IOException {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(filePath, archiveFilePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -41,7 +42,7 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage(FILEPATH);
+        storage = new Storage(FILEPATH, ARCHIVE_FILEPATH);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {

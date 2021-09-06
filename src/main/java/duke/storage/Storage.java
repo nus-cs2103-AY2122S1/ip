@@ -1,6 +1,7 @@
 package duke.storage;
 
 import static duke.common.Formats.DT_DATA_FORMAT;
+import static duke.common.Formats.DT_NOW_FORMAT_STRING;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -9,8 +10,10 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import duke.tasks.Deadline;
@@ -23,9 +26,11 @@ import duke.tasks.Todo;
  */
 public class Storage {
     private String fileName;
+    private String archiveFileName;
 
-    public Storage(String fileName) {
+    public Storage(String fileName, String archiveFileName) {
         this.fileName = fileName;
+        this.archiveFileName = archiveFileName;
     }
 
     /**
@@ -97,6 +102,33 @@ public class Storage {
             for (int i = 0; i < tasks.size(); i++) {
                 outputWriter.write(tasks.get(i).getData());
                 outputWriter.newLine();
+            }
+            outputWriter.flush();
+            outputWriter.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong during writing!");
+            System.out.println(e.toString() + e.getMessage());
+        } finally {
+
+        }
+    }
+
+    /**
+     * Archives the task list data to the storage file.
+     *
+     * @throws IOException if there were errors reading and/or converting data from file.
+     */
+    public void archive(ArrayList<Task> tasks) {
+        BufferedWriter outputWriter = null;
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat(DT_NOW_FORMAT_STRING);
+        try {
+            outputWriter = new BufferedWriter(new FileWriter(archiveFileName, true));
+            outputWriter.write(String.format("== ARCHIVE FROM: %s ==\n", sdf.format(cal.getTime())));
+            for (int i = 0; i < tasks.size(); i++) {
+                outputWriter.write(tasks.get(i).getData());
+                outputWriter.newLine();
+                outputWriter.write("\n");
             }
             outputWriter.flush();
             outputWriter.close();
