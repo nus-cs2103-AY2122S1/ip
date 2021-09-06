@@ -2,6 +2,7 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 import duke.parser.Parser;
 
@@ -56,7 +57,7 @@ public class Task {
      */
     public static String getDate(String date) {
         LocalDate d = LocalDate.parse(date);
-        return d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return d.format(DateTimeFormatter.ofPattern("MMM d yyyy", Locale.ENGLISH));
     }
 
     /**
@@ -190,5 +191,17 @@ public class Task {
      */
     public boolean contains(String content) {
         return this.description.contains(content);
+    }
+
+    public boolean isWithinOneDay(String time) {
+        return true;
+    }
+
+    public boolean isWithinOneWeek() {
+        return true;
+    }
+
+    public boolean isWithinOneMonth() {
+        return true;
     }
 }

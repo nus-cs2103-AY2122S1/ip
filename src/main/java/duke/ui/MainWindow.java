@@ -74,4 +74,16 @@ public class MainWindow extends AnchorPane {
     private void showWelcome() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(GREETING, dukeImage));
     }
+
+
+    @FXML
+    private void showFarewell() {
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(FAREWELL, dukeImage));
+    }
+
+    @FXML
+    private void showReminders() {
+        //dialogContainer.getChildren().add(DialogBox.getDukeDialog(FAREWELL, dukeImage));
+    }
+
 }

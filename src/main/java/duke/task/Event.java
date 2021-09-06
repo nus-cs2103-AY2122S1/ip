@@ -37,4 +37,16 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
+    @Override
+    public boolean isWithinOneDay(String time) {
+        return true;
+    }
+    @Override
+    public boolean isWithinOneWeek() {
+        return true;
+    }
+    @Override
+    public boolean isWithinOneMonth() {
+        return true;
+    }
 }
