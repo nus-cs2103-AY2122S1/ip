@@ -48,6 +48,10 @@ public class WhoBot {
         }
     }
 
+    /***
+     * Gets whether this app is running in GUI mode
+     * @return isGUI status
+     */
     public static boolean isGui() {
         return isGui;
     }

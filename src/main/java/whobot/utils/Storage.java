@@ -32,6 +32,7 @@ public class Storage {
      * @throws WhoBotException if file could not be opened
      */
     public Storage(String filename) throws WhoBotException {
+        assert !filename.isBlank();
         this.filename = filename;
         taskFile = new File(this.filename);
         if (!taskFile.exists()) {

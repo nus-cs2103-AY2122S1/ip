@@ -19,6 +19,7 @@ public class Helper {
      */
     public Helper(UI ui) {
         this.ui = ui;
+        assert ui != null;
     }
 
     /***
