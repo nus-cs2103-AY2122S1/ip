@@ -43,7 +43,7 @@ public class Parser {
         } else if (command.equals("delete")) {
             return deleteCommand(partsLength, parts[1]);
         } else if (command.equals("find")) {
-            return findCommand(partsLength, parts[1]);
+            return findCommand(partsLength, parts[1].toLowerCase());
         } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
             return addTaskCommand(partsLength, parts);
         } else {

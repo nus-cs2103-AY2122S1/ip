@@ -49,7 +49,7 @@ public class Storage {
             while (sc.hasNext()) {
                 String[] taskParts = sc.nextLine().split(",");
                 String taskType = taskParts[0];
-                assert taskType.isBlank() : "Invalid data in storage";
+                assert !taskType.isBlank() : "Invalid data in storage";
                 boolean isDone = taskParts[1].equals("X");
                 String taskDescription = taskParts[2];
 
