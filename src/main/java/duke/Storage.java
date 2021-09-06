@@ -114,7 +114,9 @@ public class Storage {
      */
     public void writeTasksToFile(TaskList taskList, File taskFile) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(taskFile, false));
-        for (int i = 0; i < taskList.numberOfTasks(); i++) {
+        int numberOfTasks = taskList.numberOfTasks();
+        assert numberOfTasks >= 0;
+        for (int i = 0; i < numberOfTasks; i++) {
             String line = taskList.getTask(i).getSaveText();
             writer.write(line);
         }
