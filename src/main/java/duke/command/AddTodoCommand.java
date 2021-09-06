@@ -2,14 +2,13 @@ package duke.command;
 
 import duke.exceptions.EmptyTodoBodyException;
 import duke.exceptions.TaskFileIoException;
-import duke.io.UserOutputHandler;
 import duke.messages.TaskAddMessage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 
 /**
- * Represents user command to add a <code>ToDo</code> to persisted Tasks.
+ * Represents user command to add a <code>ToDo</code> to persisted tasks.
  *
  * @author kevin9foong
  */
@@ -29,18 +28,18 @@ public class AddTodoCommand extends Command {
     /**
      * Adds an <code>ToDo</code> to the <code>TaskList</code> and writes to user <code>ToDoAddMessage</code>.
      *
-     * @param userOutputHandler handles outputting messages to the output destination.
-     * @param taskList          handles task operations including adding, deleting, marking as done and retrieval.
+     * @param taskList handles task operations including adding, deleting, marking as done and retrieval.
+     * @return response message by chat bot for adding todo.
      * @throws TaskFileIoException    thrown when failure due to reading or writing to task save file occurs.
      * @throws EmptyTodoBodyException thrown when the data String representing the
      *                                <code>ToDo</code> is missing.
      */
     @Override
-    public void execute(UserOutputHandler userOutputHandler, TaskList taskList)
+    public String execute(TaskList taskList)
             throws TaskFileIoException, EmptyTodoBodyException {
         Task addedToDo = taskList.addTask(new ToDo(super.getUserInputBody()));
-        userOutputHandler.handleOutput(new TaskAddMessage(addedToDo.toString(),
-                taskList.getNumOfTasks()));
+        return new TaskAddMessage(addedToDo.toString(),
+                taskList.getNumOfTasks()).toString();
     }
 
     /**

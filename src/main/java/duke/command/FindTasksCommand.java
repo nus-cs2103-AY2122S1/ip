@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import duke.exceptions.EmptyFindBodyException;
-import duke.io.UserOutputHandler;
 import duke.messages.TaskFindListMessage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
@@ -31,11 +30,12 @@ public class FindTasksCommand extends Command {
     /**
      * Returns all Tasks which contain the text filter String in its description.
      *
-     * @param userOutputHandler handles outputting messages to the output destination
-     * @param taskList          handles task operations including adding, deleting, marking as done and retrieval
+     * @param taskList handles task operations including adding, deleting, marking as done and retrieval.
+     * @return response message by chat bot when trying to find tasks.
+     * @throws EmptyFindBodyException thrown when provided search query is empty.
      */
     @Override
-    public void execute(UserOutputHandler userOutputHandler, TaskList taskList) throws EmptyFindBodyException {
+    public String execute(TaskList taskList) throws EmptyFindBodyException {
         String textFilter = super.getUserInputBody();
         if (textFilter == null) {
             throw new EmptyFindBodyException();
@@ -43,7 +43,7 @@ public class FindTasksCommand extends Command {
         List<Task> matchedTasks = taskList.getAllTasks().stream().filter(task ->
                 task.getDescription().contains(textFilter)).collect(Collectors.toList());
 
-        userOutputHandler.handleOutput(new TaskFindListMessage(matchedTasks));
+        return new TaskFindListMessage(matchedTasks).toString();
     }
 
     /**

@@ -1,7 +1,11 @@
 package duke.gui;
 
+import java.io.IOException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -21,7 +25,9 @@ import javafx.scene.shape.Circle;
  * @author kevin9foong
  */
 public class DialogBox extends HBox {
+    @FXML
     private Label dialogLabel;
+    @FXML
     private ImageView avatarImageView;
 
     /**
@@ -29,24 +35,26 @@ public class DialogBox extends HBox {
      * message text and user avatar picture to be displayed.
      */
     private DialogBox(String dialogText, Image avatarImage) {
-        dialogLabel = new Label(dialogText);
-        dialogLabel.setWrapText(true);
+        try {
+            String dialogBoxFxmlFilePath = "/view/DialogBox.fxml";
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(dialogBoxFxmlFilePath));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+            avatarImageView.setClip(new Circle(40, 40, 40));
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
 
-        avatarImageView = new ImageView(avatarImage);
-        avatarImageView.setFitHeight(100.0);
-        avatarImageView.setFitWidth(100.0);
-        Circle avatarClip = new Circle(50, 50, 50);
-        avatarImageView.setClip(avatarClip);
-
-        this.setSpacing(20.0);
-        this.setAlignment(Pos.CENTER_RIGHT);
-        this.getChildren().addAll(dialogLabel, avatarImageView);
+        dialogLabel.setText(dialogText);
+        avatarImageView.setImage(avatarImage);
     }
 
     /**
      * Returns an instance of <code>DialogBox</code> which represents user's side of conversation.
+     *
      * @param dialogText text which represents user's input.
-     * @param avatar user's avatar image.
+     * @param avatar     user's avatar image.
      * @return <code>DialogBox</code> which represents user's side of conversation.
      */
     public static DialogBox generateUserDialogBox(String dialogText, Image avatar) {
@@ -59,8 +67,9 @@ public class DialogBox extends HBox {
 
     /**
      * Returns an instance of <code>DialogBox</code> which represents agent's side of conversation.
-     * @param dialogText text which represent's agent's response.
-     * @param avatar agent's avatar image.
+     *
+     * @param dialogText text which represents agent's response.
+     * @param avatar     agent's avatar image.
      * @return <code>DialogBox</code> which represents agent's side of conversation.
      */
     public static DialogBox generateAgentDialogBox(String dialogText, Image avatar) {

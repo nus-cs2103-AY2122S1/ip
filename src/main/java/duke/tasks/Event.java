@@ -24,7 +24,8 @@ public class Event extends Task {
             throw new EmptyEventBodyException();
         }
         String[] eventData = eventDataText.split("/at ", 2);
-        if (eventData.length != 2 || eventData[0].isEmpty() || eventData[1].isEmpty()) {
+        boolean isEventBodyInvalid = eventData.length != 2 || eventData[0].isEmpty() || eventData[1].isEmpty();
+        if (isEventBodyInvalid) {
             throw new InvalidEventBodyException();
         }
         super.setDescription(eventData[0].trim());

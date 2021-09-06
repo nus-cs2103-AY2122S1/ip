@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.exceptions.InvalidTaskNumberException;
 import duke.exceptions.TaskFileIoException;
-import duke.io.UserOutputHandler;
 import duke.messages.Message;
 import duke.messages.MessageConstants;
 import duke.messages.TaskDeleteMessage;
@@ -28,21 +27,21 @@ public class DeleteTaskCommand extends Command {
     /**
      * Deletes the <code>Task</code> with the given task number.
      *
-     * @param userOutputHandler handles outputting messages to the output destination.
-     * @param taskList          handles task operations including adding, deleting, marking as done and retrieval.
+     * @param taskList handles task operations including adding, deleting, marking as done and retrieval.
+     * @return response message by chat bot when trying to delete a task.
      * @throws TaskFileIoException        thrown when failure due to reading or writing to task save file occurs.
      * @throws InvalidTaskNumberException thrown when the task associated with the given number is not found.
      */
     @Override
-    public void execute(UserOutputHandler userOutputHandler, TaskList taskList) throws
+    public String execute(TaskList taskList) throws
             TaskFileIoException, InvalidTaskNumberException {
         try {
             // user input is 1 greater than index.
             int index = Integer.parseInt(super.getUserInputBody()) - 1;
             Task deletedTask = taskList.deleteTask(index);
-            userOutputHandler.handleOutput(new TaskDeleteMessage(deletedTask.toString(), taskList.getNumOfTasks()));
+            return new TaskDeleteMessage(deletedTask.toString(), taskList.getNumOfTasks()).toString();
         } catch (NumberFormatException nfe) {
-            userOutputHandler.handleOutput(new Message(MessageConstants.MESSAGE_INVALID_INTEGER));
+            return new Message(MessageConstants.MESSAGE_INVALID_INTEGER).toString();
         }
     }
 
