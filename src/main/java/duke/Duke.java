@@ -1,8 +1,8 @@
 package duke;
 
-import command.*;
-import task.*;
-import duke_exception.*;
+import command.Command;
+import task.TaskList;
+import duke_exception.DukeException;
 
 import javafx.application.Application;
 import javafx.scene.Scene;

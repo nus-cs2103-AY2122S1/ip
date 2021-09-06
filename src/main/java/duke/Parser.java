@@ -1,7 +1,22 @@
 package duke;
 
-import command.*;
-import duke_exception.*;
+import command.AddDeadlineCommand;
+import command.AddEventCommand;
+import command.AddTodoCommand;
+import command.Command;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.ExitCommand;
+import command.FindCommand;
+import command.ListCommand;
+import duke_exception.DukeDeadlineException;
+import duke_exception.DukeDeleteException;
+import duke_exception.DukeDoneException;
+import duke_exception.DukeEventException;
+import duke_exception.DukeException;
+import duke_exception.DukeFindException;
+import duke_exception.DukeTodoException;
+import duke_exception.DukeUnknownException;
 
 /**
  * Parser handles the interpretation of user input,

@@ -1,6 +1,7 @@
 package command;
-import duke.*;
-import task.*;
+import duke.Storage;
+import duke.Ui;
+import task.TaskList;
 
 /**
  * Command represents a command.

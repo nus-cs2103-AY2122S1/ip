@@ -1,6 +1,8 @@
 package command;
-import task.*;
-import duke.*;
+import duke.Storage;
+import duke.Ui;
+import task.Task;
+import task.TaskList;
 
 /**
  * DeleteCommand represents a delete command.

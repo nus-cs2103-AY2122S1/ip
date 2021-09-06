@@ -1,5 +1,5 @@
 package command;
-import task.*;
+import task.Task;
 
 /**
  * AddCommand represents a Command that adds a Task.

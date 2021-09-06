@@ -11,8 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import task.*;
-import duke_exception.*;
+import duke_exception.DukeException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.TaskList;
+import task.Todo;
 
 /**
  * Storage handles loading/saving of task list data from/to file.
