@@ -2,17 +2,22 @@ package commands;
 
 import duke.Ui;
 import tasks.Task;
+import tasks.TaskList;
+
+import java.util.ArrayList;
 
 /**
  * An abstract class that represents commands given by the
  * user that involves adding a task to the taskList.
  */
-public abstract class AddCommand extends Command {
+public abstract class AddCommand extends UndoableCommand {
 
     /** The type of task that should be added */
     private final Task.Type type;
     /** The user input */
     private final String userInput;
+    /** The taskList */
+    private final TaskList taskList;
 
     /**
      * Create a command to add a type of task to the taskList.
@@ -20,9 +25,16 @@ public abstract class AddCommand extends Command {
      * @param userInput The user input that triggers the command.
      * @param typeToAdd The type of task that should be added.
      */
-    public AddCommand(String userInput, Task.Type typeToAdd) {
+    public AddCommand(String userInput, Task.Type typeToAdd, TaskList taskList) {
         this.userInput = userInput;
         this.type = typeToAdd;
+        this.taskList = taskList;
+    }
+
+    @Override
+    protected void setUndo() {
+        int indexToRemove = this.taskList.getTotalNumOfTasks();
+        this.setUndoFunction(() -> this.taskList.removeTask(indexToRemove, new ArrayList<>()));
     }
 
     /**
