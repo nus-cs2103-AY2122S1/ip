@@ -6,6 +6,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import java.util.Arrays;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -121,8 +123,8 @@ public class Parser {
             throw new DukeException("Input in the format: todo *description*");
         }
 
-        String description = "";
-        for (int i = 1; i < inputArr.length; i++) {
+        String description = inputArr[1];
+        for (int i = 2; i < inputArr.length; i++) {
             if (inputArr[i].charAt(0) != '(') {
                 description += (" " + inputArr[i]);
             } else {
