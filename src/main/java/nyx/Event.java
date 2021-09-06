@@ -47,7 +47,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String dateFormat = at.format(DateTimeFormatter.ofPattern("EEE d MMM yyyy, K:ma"));
+        String dateFormat = at.format(DateTimeFormatter.ofPattern("EEE d MMM yyyy, h:ma"));
         return "[E]" + super.toString() + " (at: " + dateFormat + ")";
     }
 }
