@@ -37,24 +37,6 @@ public class UserInterface {
     }
 
     /**
-     * Shows the string representation of an object to the user.
-     *
-     * @param obj to be shown
-     */
-    public void showObject(Object obj) {
-        app.printResponse(new Response(obj.toString()).toString());
-    }
-
-    /**
-     * Shows the message of a thrown exception to the user.
-     *
-     * @param exception to be shown
-     */
-    public void showError(DukeException exception) {
-        app.printResponse(exception.getMessage().toString());
-    }
-
-    /**
      * Shows a given message to the user.
      *
      * @param message to be shown
@@ -72,6 +54,24 @@ public class UserInterface {
         String message = IntStream.range(0, list.size()).mapToObj(i -> (i + 1) + ". " + list.get(i))
                 .reduce((str1, str2) -> str1 + "\n" + str2).orElse("Wow, such emptiness!");
         app.printResponse(new Response(message).toString());
+    }
+
+    /**
+     * Shows the message of a thrown exception to the user.
+     *
+     * @param exception to be shown
+     */
+    public void showError(DukeException exception) {
+        app.printResponse(exception.getMessage().toString());
+    }
+
+    /**
+     * Shows the string representation of an object to the user.
+     *
+     * @param obj to be shown
+     */
+    public void showObject(Object obj) {
+        app.printResponse(new Response(obj.toString()).toString());
     }
 
     private class Response {

@@ -55,7 +55,7 @@ public abstract class Database {
     }
 
     /**
-     * Returns the list of tasks stored in the database
+     * Returns the list of tasks stored in the database.
      *
      * @return list of tasks stored
      */
@@ -103,7 +103,7 @@ public abstract class Database {
      * @param name        name of task
      * @param isCompleted {@code true} if the task has been completed
      * @param date        date of the task, nullable
-     * @return
+     * @return the recreated task
      */
     protected Task createTask(TaskType type, String name, boolean isCompleted, String date) {
         LocalDate localDate = Optional.ofNullable(date).filter(str -> !str.equals("null"))
