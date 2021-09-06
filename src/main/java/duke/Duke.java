@@ -7,20 +7,25 @@ import java.io.IOException;
  * user input.
  */
 public class Duke {
-    protected Storage storage;
+    protected Storage tasksStorage;
+    protected Storage contactsStorage;
     protected TaskList tasks;
+    protected TaskList contacts;
     protected MainWindow gui;
 
     /**
      * Constructs a new Duke object with the given file path.
      *
-     * @param filePath file path for creating the text file of interactions
+     * @param tasksPath file path for creating the text file for tasks list
+     * @param contactsPath file path for creating the text file for contacts list
      */
-    public Duke(String filePath) {
+    public Duke(String tasksPath, String contactsPath) {
         gui = new MainWindow();
-        storage = new Storage(filePath);
+        tasksStorage = new Storage(tasksPath);
+        contactsStorage = new Storage(contactsPath);
         try {
-            tasks = new TaskList(storage.load());
+            contacts = new TaskList(contactsStorage.load());
+            tasks = new TaskList(tasksStorage.load());
         } catch (DukeException e) {
             gui.showLoadingError();
             tasks = new TaskList();

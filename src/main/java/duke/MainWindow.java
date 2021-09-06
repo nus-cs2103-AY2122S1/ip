@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import main.java.duke.commands.Command;
+import main.java.duke.commands.ContactCommand;
 
 import java.io.IOException;
 
@@ -58,7 +59,11 @@ public class MainWindow extends AnchorPane {
             try {
                 String fullCommand = readCommand();
                 Command c = Parser.parse(fullCommand);
-                response = c.execute(duke.tasks, duke.gui, duke.storage);
+                if (c instanceof ContactCommand) {
+                    response = c.execute(duke.contacts, duke.gui, duke.contactsStorage);
+                } else {
+                    response = c.execute(duke.tasks, duke.gui, duke.tasksStorage);
+                }
             } catch (DukeException e) {
                 response = showError(e.getMessage());
             } catch (IOException e) {

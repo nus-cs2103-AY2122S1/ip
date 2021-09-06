@@ -60,7 +60,7 @@ public class Event extends Task {
     }
 
     /**
-     * print out the relevant info of the event
+     * Prints out the relevant info of the event
      */
     @Override
     public void showThisTask() {
@@ -72,7 +72,7 @@ public class Event extends Task {
     }
 
     /**
-     * mark an event as done and print out relevant information.
+     * Marks an event as done and print out relevant information.
      */
     @Override
     public void markAsDone() {

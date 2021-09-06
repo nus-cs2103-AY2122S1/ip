@@ -1,13 +1,6 @@
 package main.java.duke;
-import main.java.duke.commands.AddCommand;
-import main.java.duke.commands.Command;
-import main.java.duke.commands.DeleteCommand;
-import main.java.duke.commands.DoneCommand;
-import main.java.duke.commands.ExitCommand;
-import main.java.duke.commands.FindCommand;
-import main.java.duke.commands.ListCommand;
-import main.java.duke.commands.OnDateCommand;
-import main.java.duke.commands.UnknownCommand;
+import main.java.duke.commands.*;
+import main.java.duke.extensions.Contact;
 import main.java.duke.tasks.Deadline;
 import main.java.duke.tasks.Event;
 import main.java.duke.tasks.Todo;
@@ -77,9 +70,21 @@ public class Parser {
             assert userInput.length() > 5 : "User length should be greater than 5";
             String name = userInput.substring(6).split("/at")[0];
             String time = userInput.substring(6).split("/at")[1];
-            //System.out.println(time);
             Event event = new Event(name, time);
             return new AddCommand(event);
+        }
+        case "friend" : {
+            if (userInput.length() == 6) {
+                throw new DukeException("OOPS!!! The name of a contact cannot be empty.");
+            }
+            String friendName = userInput.substring(7).split(":")[0];
+            String contactNumber = userInput.substring(7).split(":")[1];
+            Contact contact = new Contact(friendName, Integer.parseInt(contactNumber));
+            return new AddContactCommand(contact);
+        }
+        case "deleteC" : {
+            int contactIndex = Integer.parseInt(userInput.substring(8));
+            return new DeleteContactCommand(contactIndex);
         }
         default : {
             return new UnknownCommand();
