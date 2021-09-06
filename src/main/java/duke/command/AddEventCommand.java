@@ -3,7 +3,6 @@ package duke.command;
 import duke.exceptions.EmptyEventBodyException;
 import duke.exceptions.InvalidEventBodyException;
 import duke.exceptions.TaskFileIoException;
-import duke.io.UserOutputHandler;
 import duke.messages.TaskAddMessage;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -29,8 +28,8 @@ public class AddEventCommand extends Command {
     /**
      * Adds an <code>Event</code> to the <code>TaskList</code> and writes to user <code>EventAddMessage</code>.
      *
-     * @param userOutputHandler handles outputting messages to the output destination.
-     * @param taskList          handles task operations including adding, deleting, marking as done and retrieval.
+     * @param taskList handles task operations including adding, deleting, marking as done and retrieval.
+     * @return response message by chat bot for adding event.
      * @throws TaskFileIoException       thrown when failure due to reading or writing to Task save file occurs.
      * @throws InvalidEventBodyException thrown when the data String representing the
      *                                   <code>Event</code> is invalid.
@@ -38,11 +37,11 @@ public class AddEventCommand extends Command {
      *                                   <code>Event</code> is missing.
      */
     @Override
-    public void execute(UserOutputHandler userOutputHandler, TaskList taskList)
+    public String execute(TaskList taskList)
             throws TaskFileIoException, EmptyEventBodyException, InvalidEventBodyException {
         Task addedTask = taskList.addTask(new Event(super.getUserInputBody()));
-        userOutputHandler.handleOutput(new TaskAddMessage(addedTask.toString(),
-                taskList.getNumOfTasks()));
+        return new TaskAddMessage(addedTask.toString(),
+                taskList.getNumOfTasks()).toString();
     }
 
     /**

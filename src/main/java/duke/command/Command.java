@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.exceptions.DukeException;
-import duke.io.UserOutputHandler;
 import duke.tasks.TaskList;
 
 /**
@@ -19,11 +18,11 @@ public abstract class Command {
     /**
      * Handles this command.
      *
-     * @param userOutputHandler handles outputting messages to the output destination.
-     * @param taskList          handles task operations including adding, deleting, marking as done and retrieval.
+     * @param taskList handles task operations including adding, deleting, marking as done and retrieval.
+     * @return response message by chat bot when trying to execute specific command.
      * @throws DukeException thrown when a failure occurs within the Duke chat bot.
      */
-    public abstract void execute(UserOutputHandler userOutputHandler, TaskList taskList) throws DukeException;
+    public abstract String execute(TaskList taskList) throws DukeException;
 
     /**
      * Checks if program should terminate after this command.

@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.io.UserOutputHandler;
 import duke.messages.ByeMessage;
 import duke.tasks.TaskList;
 
@@ -24,12 +23,12 @@ public class ByeCommand extends Command {
     /**
      * Writes to the user to say bye.
      *
-     * @param userOutputHandler handles outputting messages to the output destination.
-     * @param taskList          handles task operations including adding, deleting, marking as done and retrieval.
+     * @param taskList handles task operations including adding, deleting, marking as done and retrieval.
+     * @return response message by chat bot for bye command.
      */
     @Override
-    public void execute(UserOutputHandler userOutputHandler, TaskList taskList) {
-        userOutputHandler.handleOutput(new ByeMessage());
+    public String execute(TaskList taskList) {
+        return new ByeMessage().toString();
     }
 
     /**

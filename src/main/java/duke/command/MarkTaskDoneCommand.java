@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.exceptions.InvalidTaskNumberException;
 import duke.exceptions.TaskFileIoException;
-import duke.io.UserOutputHandler;
 import duke.messages.Message;
 import duke.messages.MessageConstants;
 import duke.messages.TaskDoneMessage;
@@ -30,21 +29,21 @@ public class MarkTaskDoneCommand extends Command {
      * Marks the specified <code>Task</code> as done and writes to user to indicate that <code>Task</code> has been
      * successfully marked as done.
      *
-     * @param userOutputHandler handles outputting messages to the output destination.
-     * @param taskList          handles task operations including adding, deleting, marking as done and retrieval.
+     * @param taskList handles task operations including adding, deleting, marking as done and retrieval.
+     * @return response message by chat bot when trying to mark a task as done.
      * @throws TaskFileIoException        thrown when failure due to reading or writing to task save file occurs.
      * @throws InvalidTaskNumberException thrown when the task associated with the given number is not found.
      */
     @Override
-    public void execute(UserOutputHandler userOutputHandler, TaskList taskList)
+    public String execute(TaskList taskList)
             throws InvalidTaskNumberException, TaskFileIoException {
         try {
             // user input is 1 greater than index.
             int index = Integer.parseInt(super.getUserInputBody()) - 1;
             Task doneTask = taskList.setDone(index);
-            userOutputHandler.handleOutput(new TaskDoneMessage(doneTask));
+            return new TaskDoneMessage(doneTask).toString();
         } catch (NumberFormatException nfe) {
-            userOutputHandler.handleOutput(new Message(MessageConstants.MESSAGE_INVALID_INTEGER));
+            return new Message(MessageConstants.MESSAGE_INVALID_INTEGER).toString();
         }
     }
 

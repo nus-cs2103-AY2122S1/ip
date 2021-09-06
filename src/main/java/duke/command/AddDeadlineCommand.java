@@ -4,7 +4,6 @@ import duke.exceptions.EmptyDeadlineBodyException;
 import duke.exceptions.InvalidDateTimeFormatException;
 import duke.exceptions.InvalidDeadlineBodyException;
 import duke.exceptions.TaskFileIoException;
-import duke.io.UserOutputHandler;
 import duke.messages.TaskAddMessage;
 import duke.tasks.Deadline;
 import duke.tasks.Task;
@@ -30,8 +29,8 @@ public class AddDeadlineCommand extends Command {
     /**
      * Adds a <code>Deadline</code> to the <code>TaskList</code> and writes to user <code>TaskAddMessage</code>.
      *
-     * @param userOutputHandler handles outputting messages to the output destination.
-     * @param taskList          handles task operations including adding, deleting, marking as done and retrieval.
+     * @param taskList handles task operations including adding, deleting, marking as done and retrieval.
+     * @return response message by chat bot for adding deadline.
      * @throws TaskFileIoException            thrown when failure due to reading or writing to Task save file occurs.
      * @throws InvalidDateTimeFormatException thrown when String representing <code>DateTime</code> is invalid.
      * @throws InvalidDeadlineBodyException   thrown when the data String representing the
@@ -40,12 +39,12 @@ public class AddDeadlineCommand extends Command {
      *                                        <code>Deadline</code> is missing.
      */
     @Override
-    public void execute(UserOutputHandler userOutputHandler, TaskList taskList)
+    public String execute(TaskList taskList)
             throws InvalidDateTimeFormatException,
             InvalidDeadlineBodyException, EmptyDeadlineBodyException, TaskFileIoException {
         Task addedDeadline = taskList.addTask(new Deadline(super.getUserInputBody()));
-        userOutputHandler.handleOutput(new TaskAddMessage(addedDeadline.toString(),
-                taskList.getNumOfTasks()));
+        return new TaskAddMessage(addedDeadline.toString(),
+                taskList.getNumOfTasks()).toString();
     }
 
     /**

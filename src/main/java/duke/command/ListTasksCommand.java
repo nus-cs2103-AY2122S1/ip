@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.io.UserOutputHandler;
 import duke.messages.TaskListMessage;
 import duke.tasks.TaskList;
 
@@ -25,12 +24,12 @@ public class ListTasksCommand extends Command {
      * Retrieves all tasks from the <code>TaskList</code> and writes message to user to
      * display all tasks in the <code>TaskList</code>.
      *
-     * @param userOutputHandler handles outputting messages to the output destination.
-     * @param taskList          handles task operations including adding, deleting, marking as done and retrieval.
+     * @param taskList handles task operations including adding, deleting, marking as done and retrieval.
+     * @return response message by chat bot when trying to list tasks stored.
      */
     @Override
-    public void execute(UserOutputHandler userOutputHandler, TaskList taskList) {
-        userOutputHandler.handleOutput(new TaskListMessage(taskList.getAllTasks()));
+    public String execute(TaskList taskList) {
+        return new TaskListMessage(taskList.getAllTasks()).toString();
     }
 
     /**
