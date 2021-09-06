@@ -18,7 +18,7 @@ public class AddTodoCommand extends AddCommand {
      * @param taskList The taskList for Duke.
      */
     public AddTodoCommand(String input, TaskList taskList) {
-        super(input, Task.Type.TODO);
+        super(input, Task.Type.TODO, taskList);
         this.taskList = taskList;
     }
 
@@ -32,6 +32,7 @@ public class AddTodoCommand extends AddCommand {
         if (details != null && this.verifyAddCommand(details.trim())) {
             Task task = Todo.newTodoTask(details);
             this.setExecutionMessage(this.taskList.addTask(task));
+            this.setUndo();
             return true;
         }
         this.setExecutionMessage(this.getInvalidArgumentsMessage());

@@ -19,7 +19,7 @@ public class AddEventCommand extends AddCommand {
      * @param taskList The taskList for Duke.
      */
     public AddEventCommand(String input, TaskList taskList) {
-        super(input, Task.Type.EVENT);
+        super(input, Task.Type.EVENT, taskList);
         this.taskList = taskList;
     }
 
@@ -35,6 +35,7 @@ public class AddEventCommand extends AddCommand {
                 return false;
             }
             this.setExecutionMessage(this.taskList.addTask(task));
+            this.setUndo();
             return true;
         }
         return false;

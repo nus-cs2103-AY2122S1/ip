@@ -1,6 +1,8 @@
 package duke;
 
 import commands.Command;
+import commands.CommandStack;
+import commands.UndoableCommand;
 import tasks.Task;
 
 
@@ -21,6 +23,7 @@ public class Ui {
 
     private Parser parser;
     private boolean isExit;
+    private CommandStack commandStack;
 
     /**
      * Starts up the chat bot. It prints a welcome message for the user and then waits
@@ -29,7 +32,8 @@ public class Ui {
      */
     protected void startDuke() {
         System.out.println(getStartMessage());
-        this.parser = new Parser();
+        this.commandStack = new CommandStack();
+        this.parser = new Parser(this.commandStack);
         Storage.initialise(this.parser.getTaskList());
     }
 
@@ -42,8 +46,10 @@ public class Ui {
      */
     public String readUserInput(String input) {
         Command command = this.parser.parseUserInput(input);
-        command.execute();
-        if (command.isExit()) {
+        boolean commandExecutedSuccessfully = command.execute();
+        if (commandExecutedSuccessfully && command instanceof UndoableCommand) {
+            commandStack.addCommand((UndoableCommand) command);
+        } else if (command.isExit()) {
             this.isExit = true;
         }
         return command.getExecutionMessage();

@@ -8,7 +8,7 @@ import java.util.Set;
  * A command that edits the taskList based on an index given. Such a command
  * can accept multiple indexes in one go.
  */
-public abstract class TaskListIndexCommand extends Command {
+public abstract class TaskListIndexCommand extends UndoableCommand {
 
     private final String input;
 

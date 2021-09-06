@@ -136,4 +136,8 @@ public abstract class Task {
     public boolean isDone() {
         return isDone;
     }
+
+    public void revertToUndone() {
+        this.isDone = false;
+    }
 }

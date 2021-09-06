@@ -57,16 +57,20 @@ public class TaskList {
      *
      * @param index The index of the task list. Note that the index provided starts from 1. So the
      *              index 1 represents the first task in the taskList ArrayList.
+     * @param removedTasks An arrayList containing the removed tasks. Needed so that the
+     *                     undo functionality can work well.
      * @return The message that should be shown to the user after removing a task.
      */
-    public String removeTask(int index) {
+    public String removeTask(int index, ArrayList<Task> removedTasks) {
         if (index > this.tasks.size() || index <= 0) {
+            removedTasks.add(null);
             return "A task could not be removed because it does not exist.\n";
         }
 
         Task task = this.tasks.get(index - 1);
         assert task != null : "Attempting to remove a null task";
         this.tasks.remove(index - 1);
+        removedTasks.add(task);
 
         if (!task.isDone()) {
             numOfUncompletedTasks--;
@@ -83,9 +87,11 @@ public class TaskList {
      *
      * @param index The index of the task list. Note that the index provided starts from 1.
      *              So the index 1 represents the first task in the taskList ArrayList.
+     * @param doneTasks A arrayList to store thr index of the task that was mark as done. Needed
+     *                  for command undo functionality.
      * @return The message that should be shown to the user after a task has been marked as done.
      */
-    public String markTaskAsDone(int index) {
+    public String markTaskAsDone(int index, ArrayList<Integer> doneTasks) {
         if (index > this.tasks.size() || index <= 0) {
             return "Index " + index + " does not exist.\n";
         }
@@ -96,6 +102,7 @@ public class TaskList {
         Task task = this.tasks.get(index - 1);
         assert task != null : "Attempting to edit a null task.";
         task.markAsDone();
+        doneTasks.add(index);
         this.numOfUncompletedTasks--;
 
         String message = "congratulations! This task has been completed:\n"
@@ -148,12 +155,38 @@ public class TaskList {
     }
 
     /**
+     * Adds a task to the tasks array list at the specified index.
+     *
+     * @param task The task to be added.
+     * @param index The index to add the task in the arrayList. The index is 1-based.
+     */
+    public void insertTaskAt(Task task, int index) {
+        this.tasks.add(index - 1, task);
+        if (task.isDone()) {
+            this.numOfUncompletedTasks++;
+        }
+        this.totalNumOfTasks++;
+    }
+
+    /**
      * Saves the current task list to local storage in a file called taskList.txt.
      */
     private void saveTaskList() {
         if (!Storage.saveTaskList(this.tasks)) {
             System.out.println("Oops!! An error occurred while trying to save your new task.");
         }
+    }
+
+    /**
+     * Reverts the task at the given index to undone. This is used in conjunction with the undo
+     * command.
+     *
+     * @param index The index of the task to be marked as undone in the taskList. The index is
+     *              1-based.
+     */
+    public void revertTaskToUndone(int index) {
+        this.tasks.get(index - 1).revertToUndone();
+        this.numOfUncompletedTasks--;
     }
 
     /**
@@ -167,4 +200,7 @@ public class TaskList {
                 + this.numOfUncompletedTasks + " uncompleted tasks remaining.\n";
     }
 
+    public int getTotalNumOfTasks() {
+        return this.totalNumOfTasks;
+    }
 }

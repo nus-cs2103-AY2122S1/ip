@@ -19,7 +19,7 @@ public class AddDeadlineCommand extends AddCommand {
      * @param taskList The taskList for Duke.
      */
     public AddDeadlineCommand(String input, TaskList taskList) {
-        super(input, Task.Type.DEADLINE);
+        super(input, Task.Type.DEADLINE, taskList);
         this.taskList = taskList;
     }
 
@@ -35,6 +35,7 @@ public class AddDeadlineCommand extends AddCommand {
                 return false;
             }
             this.setExecutionMessage(this.taskList.addTask(task));
+            this.setUndo();
             return true;
         }
         return false;

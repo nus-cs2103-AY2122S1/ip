@@ -1,15 +1,17 @@
 package duke;
 
 import commands.Command;
-import commands.ExitCommand;
-import commands.ListCommand;
-import commands.DoneCommand;
-import commands.AddTodoCommand;
+import commands.CommandStack;
 import commands.AddDeadlineCommand;
 import commands.AddEventCommand;
+import commands.AddTodoCommand;
+import commands.DoneCommand;
 import commands.DeleteCommand;
+import commands.ExitCommand;
 import commands.FindCommand;
 import commands.InvalidCommand;
+import commands.ListCommand;
+import commands.UndoCommand;
 
 import tasks.TaskList;
 
@@ -27,12 +29,15 @@ class Parser {
     private static final String KEYWORD_EVENT = "event";
     private static final String KEYWORD_DELETE = "delete";
     private static final String KEYWORD_FIND = "find";
+    private static final String KEYWORD_UNDO = "undo";
 
     /** A list of the tasks entered by the user */
     private final TaskList taskList;
+    private final CommandStack commandStack;
 
-    protected Parser() {
-        taskList = new TaskList();
+    protected Parser(CommandStack commandStack) {
+        this.taskList = new TaskList();
+        this.commandStack = commandStack;
     }
 
     /**
@@ -67,6 +72,8 @@ class Parser {
         } else if (input.toLowerCase().startsWith(KEYWORD_FIND)) {
             // Search for a task in the taskList
             return new FindCommand(input, this.taskList);
+        } else if (input.toLowerCase().startsWith(KEYWORD_UNDO)) {
+            return new UndoCommand(this.commandStack);
         }
         // Unrecognised input
         return new InvalidCommand();

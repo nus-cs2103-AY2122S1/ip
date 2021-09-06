@@ -1,6 +1,10 @@
 package commands;
 
+import tasks.Task;
 import tasks.TaskList;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * A command to delete a task from Duke's taskList.
@@ -8,6 +12,8 @@ import tasks.TaskList;
 public class DeleteCommand extends TaskListIndexCommand {
 
     private final TaskList taskList;
+    private int[] undoIndexes;
+    private final ArrayList<Task> undoTasks = new ArrayList<>();
 
     /**
      * Creates a DeleteCommand to delete a task from the taskList.
@@ -22,12 +28,27 @@ public class DeleteCommand extends TaskListIndexCommand {
 
     @Override
     protected String executeOnTaskList(int... listOfIndex) {
+        this.undoIndexes = Arrays.copyOf(listOfIndex, listOfIndex.length);
+
         StringBuilder message = new StringBuilder();
         for (int i : listOfIndex) {
-            message.append(this.taskList.removeTask(i)).append("\n");
+            message.append(this.taskList.removeTask(i, this.undoTasks)).append("\n");
             this.offsetIndex(listOfIndex, i);
         }
+        this.setUndo();
         return message.append(this.taskList.getTaskListStatus()).toString();
+    }
+
+    @Override
+    protected void setUndo() {
+        this.setUndoFunction(() -> {
+            for (int i = 0; i < this.undoIndexes.length; i++) {
+                if (this.undoTasks.get(i) == null) {
+                    continue;
+                }
+                this.taskList.insertTaskAt(this.undoTasks.get(i), this.undoIndexes[i]);
+            }
+        });
     }
 
     /**
