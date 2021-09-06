@@ -361,7 +361,11 @@ public class Parser {
                 || Integer.valueOf(separated[1]) > taskList.getSize()) {
             throw new DukeException("Please key in valid number to remove.");
         } else {
-            return new RemoveCommand(Integer.valueOf(separated[1]) - 1);
+            int index = Integer.valueOf(separated[1]) - 1;
+
+            assert index >= 0 && index < taskList.getSize();
+
+            return new RemoveCommand(index);
         }
     }
 
@@ -383,6 +387,9 @@ public class Parser {
             throw new DukeException("Please key in valid number to mark as done.");
         } else {
             int index = Integer.valueOf(separated[1]) - 1;
+
+            assert index >= 0 && index < taskList.getSize();
+
             return new DoneCommand(index);
         }
     }
