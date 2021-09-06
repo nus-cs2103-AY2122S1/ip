@@ -29,7 +29,7 @@ public class GUI{
         return "Hello from\n" + "DUKE!" + "\nWhat can I do for you? :)";
     }
 
-
+    /**
      * function to respond to a user input
      * @params String s
      */
@@ -59,6 +59,11 @@ public class GUI{
         }
     }
 
+    /**
+     * Checks for the validity of user's commands and responds to it
+     * @param input User's input
+     * @return
+     */
     public String getResponse(String input) {
         try{
             InputChecker ic = new InputChecker(input);
