@@ -1,7 +1,6 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import duke.command.Command;
 import duke.command.CommandKeyword;
@@ -104,7 +103,10 @@ public class Ui {
         if (len == 0) {
             this.formatMessage("No task is found!");
         } else {
-            String message = "Here are the matching tasks in your list:\n";
+            boolean isMoreThanOne = len > 1;
+            String isOrAre = isMoreThanOne ? "are" : "is";
+            String taskName = isMoreThanOne ? "tasks" : "task";
+            String message = String.format("Here %s the matching %s in your list:\n", isOrAre, taskName);
             for (int i = 0; i < len; i++) {
                 int num = i + 1;
                 Task task = tasks.get(i);

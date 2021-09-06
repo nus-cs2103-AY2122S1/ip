@@ -25,46 +25,29 @@ public class Parser {
      * @throws DukeException If the command execution is unsuccessful.
      */
     public static boolean parse(Command command, TaskList tl, Storage storage) throws DukeException {
-        boolean shouldContinue = true;
+        boolean shouldExit = false;
         CommandKeyword keyword = command.getKeyword();
         String restOfCommand = command.getRestOfCommand();
         switch (keyword) {
         case TODO:
         case DEADLINE:
         case EVENT:
-            ArrayList<Task> tasksAfterAdd = tl.addTask(restOfCommand, keyword);
-            if (tasksAfterAdd != null) {
-                storage.save(tasksAfterAdd);
-            }
+            tl.addTask(restOfCommand, keyword, storage);
             break;
         case LIST:
-            if (restOfCommand.equals("")) {
-                tl.display();
-                break;
-            } else {
-                throw new InvalidCommandException();
-            }
+            tl.display();
+            break;
         case DONE:
             int indexToMark = Parser.stringToInt(restOfCommand) - 1;
-            ArrayList<Task> tasksAfterDone = tl.markTask(indexToMark);
-            if (tasksAfterDone != null) {
-                storage.save(tasksAfterDone);
-            }
+            tl.markTask(indexToMark, storage);
             break;
         case DELETE:
             int indexToDelete = Parser.stringToInt(restOfCommand) - 1;
-            ArrayList<Task> tasksAfterDelete = tl.deleteTask(indexToDelete);
-            if (tasksAfterDelete != null) {
-                storage.save(tasksAfterDelete);
-            }
+            tl.deleteTask(indexToDelete, storage);
             break;
         case BYE:
-            if (restOfCommand.equals("")) {
-                shouldContinue = false;
-                break;
-            } else {
-                throw new InvalidCommandException();
-            }
+            shouldExit = true;
+            break;
         case FIND:
             tl.find(restOfCommand);
             break;
@@ -72,7 +55,7 @@ public class Parser {
             /* will never be executed because the error would have been caught in run() method
                if the user input a command that is invalid */
         }
-        return shouldContinue;
+        return shouldExit;
     }
 
     /**

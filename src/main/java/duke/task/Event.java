@@ -1,7 +1,11 @@
 package duke.task;
 
+import duke.exception.IncompleteTaskDescriptionException;
+
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Event is a specific type of task that contains the description of the task.
@@ -14,19 +18,6 @@ public class Event extends Task {
 
     /**
      * Constructs a event task.
-     *
-     * @param description The description of the task.
-     * @param date The date of the event.
-     * @param timeRange The start and end time of the event.
-     */
-    public Event(String description, LocalDate date, String timeRange) {
-        super(description);
-        this.date = date;
-        this.timeRange = timeRange;
-    }
-
-    /**
-     * Constructs a event task. It is used to instantiate an event that is already marked as done.
      * @param description The description of the task.
      * @param date The date of the event.
      * @param timeRange The start and end time of the event.
@@ -45,8 +36,9 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
+        String formattedDate = this.date.format(Task.DATE_TIME_FORMATTER);
         return String.format("[%c]%s (at: %s %s)", Event.TASK_LETTER,
-                super.toString(), this.date.format(Event.DATE_TIME_FORMATTER), this.timeRange);
+                super.toString(), formattedDate, this.timeRange);
     }
 
     /**
@@ -56,7 +48,28 @@ public class Event extends Task {
      */
     @Override
     public String stringToStore() {
-        return Event.TASK_LETTER + " | " + this.getStatusIcon() + " | " + this.description + " | "
-                + this.date.format(Event.DATE_TIME_FORMATTER) + " | " + this.timeRange + "\n";
+        String formattedDate = this.date.format(Task.DATE_TIME_FORMATTER);
+        return String.format("%c | %s | %s | %s | %s\n",
+                Event.TASK_LETTER, this.getStatusIcon(), this.description, formattedDate, this.timeRange);
+    }
+
+    public static Event create(String description, boolean isDone) throws IncompleteTaskDescriptionException {
+        if (description.matches("[^ ].* /at *[^ ].* [^ ].*")) {
+            String eventSeparator = "/at";
+            int separatorIndex = description.indexOf(eventSeparator);
+            String taskDetail = description.substring(0, separatorIndex).trim();
+            int len = eventSeparator.length();
+            String at = description.substring(separatorIndex + len).trim();
+            try {
+                int index = at.indexOf(' ');
+                LocalDate date = LocalDate.parse(at.substring(0, index));
+                String timeRange = at.substring(index + 1).trim();
+                return new Event(taskDetail, date, timeRange, isDone);
+            } catch (DateTimeParseException e) {
+                throw new IncompleteTaskDescriptionException("event");
+            }
+        } else {
+            throw new IncompleteTaskDescriptionException("event");
+        }
     }
 }

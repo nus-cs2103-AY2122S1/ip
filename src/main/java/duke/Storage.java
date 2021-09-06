@@ -12,7 +12,7 @@ import java.util.Scanner;
 import duke.task.Task;
 
 /**
- * Deals with laoding tasks from the file and saving tasks in the file.
+ * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
     private File file;
@@ -69,16 +69,20 @@ public class Storage {
      * @param tasks An arraylist of tasks to be saved.
      */
     public void save(ArrayList<Task> tasks) {
-        try {
-            FileWriter fw = new FileWriter(this.file);
-            for (int i = 0; i < tasks.size(); i++) {
-                String taskInfo = tasks.get(i).stringToStore();
-                fw.write(taskInfo);
+        if (tasks != null) {
+            try {
+                FileWriter fw = new FileWriter(this.file);
+                for (int i = 0; i < tasks.size(); i++) {
+                    String taskInfo = tasks.get(i).stringToStore();
+                    fw.write(taskInfo);
+                }
+                fw.flush();
+                fw.close();
+            } catch (IOException e) {
+                System.out.println("Failed to update storage.");
             }
-            fw.flush();
-            fw.close();
-        } catch (IOException e) {
-            System.out.println("Failed to update storage.");
+        } else {
+            // there is no task to save
         }
     }
 }

@@ -6,6 +6,7 @@ import duke.exception.InvalidCommandException;
 import duke.task.TaskList;
 import javafx.scene.layout.VBox;
 
+
 /**
  * The main program of the chatbot Duke. Consists of Tasklist, Ui and Storage instances.
  */
@@ -32,16 +33,20 @@ public class Duke {
         this.ui.showFarewell();
     }
 
-    public String getResponse(String input) {
+    public boolean getResponse(String input) {
+        boolean shouldExit = false;
         ui.showInput(input);
         try {
             Command command = this.ui.readCommand(input);
-            Parser.parse(command, this.tasks, this.storage);
+            shouldExit = Parser.parse(command, this.tasks, this.storage);
+            if (shouldExit) {
+                ui.showFarewell();
+            }
         } catch (IllegalArgumentException e) { // caused by user entering a command that is invalid
             this.ui.showError(new InvalidCommandException());
         } catch (DukeException e) {
             this.ui.showError(e);
         }
-        return "hi";
+        return shouldExit;
     }
 }
