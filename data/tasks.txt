@@ -1,3 +1,2 @@
-T|1|book
-D|0|return book|2010-01-01
-E|0|meeting|monday
+T|0|borrow
+D|0|return|2010-01-01
