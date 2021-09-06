@@ -18,11 +18,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
-import javafx.scene.text.Font;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+
+/**
+ * The Duke program implements an application that reads the user input
+ * and does the corresponding actions based on the user input.
+ *
+ * @author Ethan
+ */
 public class Duke extends Application {
 
     private ScrollPane scrollPane;
@@ -162,6 +168,7 @@ public class Duke extends Application {
             if (c == 1) {
                 return "The list is empty. How tragic.";
             }
+            assert c==TaskList.lines.size();
             return output;
 
         } else if (command.contains("done")) {
@@ -173,6 +180,7 @@ public class Duke extends Application {
                 return "HELLO SIR I REQUIRE A NUMBER";
             }
             int taskNo = Integer.parseInt(numbers);
+
             if (TaskList.lines.size() < taskNo) {
                 return "HELLO SIR THAT'S TOO MUCH";
             }
@@ -304,9 +312,17 @@ public class Duke extends Application {
                 }
                 c++;
             }
+            assert c==TaskList.lines.size();
             return output;
 
         } else if (command.equals("WIPE")) {
+            TaskList.lines.clear();
+            try {
+                storage.writeListToFile(Duke.file.getPath());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            assert TaskList.lines.isEmpty();
             return "BAM! The list has been wiped.";
         } else {
             return "(WHAT IS THIS PERSON TRYING TO SAY WHY IS HE TYPING GIBBERISH I'M JUST TRYING TO SURVIVE)";
