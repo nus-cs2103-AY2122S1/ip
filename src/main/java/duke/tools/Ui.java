@@ -52,8 +52,7 @@ public class Ui {
     }
 
     public String testReadCommand() {
-        String prompt_message = "Please input your command: ";
-        return prompt_message;
+        return "Please input your command: ";
     }
 
     public static void printMessage(String message) {
