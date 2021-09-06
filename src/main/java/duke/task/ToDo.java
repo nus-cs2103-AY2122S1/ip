@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * Subclass of Task without any date/time attached.
