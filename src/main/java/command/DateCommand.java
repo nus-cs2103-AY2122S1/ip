@@ -3,7 +3,9 @@ package command;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 import duke.Storage;
 import duke.TaskList;
@@ -36,20 +38,19 @@ public class DateCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ArrayList<Task> dateResult = new ArrayList<>();
-        for (int i = 0; i < taskList.amountOfTasks(); i++) {
-            if (taskList.getTask(i).isOnDate(date)) {
-                dateResult.add(taskList.getTask(i));
-            }
-        }
+        String result = taskList.getTaskList()
+                .stream()
+                .parallel()
+                .filter(x -> x.isOnDate(date))
+                .map(x -> x.toString())
+                .collect(Collectors.joining(
+                        "\n        ",
+                        "Your schedule on "
+                                + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy", Locale.US))
+                                + " is:\n        ",
+                        ""
+                        ));
 
-        String[] dateResultString = new String[dateResult.size() + 1];
-        dateResultString[0] = "Your schedule on "
-                + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy", Locale.US))
-                + " is:";
-        for (int i = 0; i < dateResult.size(); i++) {
-            dateResultString[i + 1] = "  " + (i + 1) + ". " + dateResult.get(i).toString();
-        }
-        ui.printMessage(dateResultString);
+        ui.printMessage(result);
     }
 }
