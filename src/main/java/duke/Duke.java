@@ -34,6 +34,38 @@ public class Duke {
     }
 
     /**
+     * Executes the duke chat-bot functions based on user's command.
+     */
+    public void run() {
+        ui.showWelcome();
+
+        boolean isExit = false;
+
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
+    }
+
+    /**
+     * Initiates the Duke chat-bot.
+     *
+     * @param args The argument attached to this method.
+     */
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
+    }
+
+    /**
      * Generates a response to user input.
      *
      * @param input The user input.
