@@ -16,7 +16,6 @@ public class Event extends Task {
     protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
     protected LocalDateTime dateTime;
 
-
     /**
      * Initialises the Event Task.
      *

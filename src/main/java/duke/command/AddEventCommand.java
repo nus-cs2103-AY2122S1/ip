@@ -20,7 +20,7 @@ public class AddEventCommand extends AddCommand {
             String[] descriptionDatePair = description.split("/at", 2);
             return tasks.recordEvent(descriptionDatePair[0].trim(), descriptionDatePair[1].trim());
         } catch (IndexOutOfBoundsException | DateTimeParseException e) {
-            throw new DukeException("event should be in format: [DESCRIPTION] /by [DATE]!\n"
+            throw new DukeException("event should be in format: [DESCRIPTION] /at [DATE]!\n"
                      + "Only accepted [DATE] format is: date/month/year HHMM (24h time)");
         }
     }
