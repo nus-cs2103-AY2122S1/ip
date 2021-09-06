@@ -8,14 +8,14 @@ import java.time.LocalDate;
 public class Ui {
 
     /**
-     * Presents date and time in a specific manner.
+     * Returns a string representation of the date in a specified manner.
      *
-     * @param raw LocalDateTime object to be represented.
+     * @param rawLocalDate LocalDate object to be represented.
      * @return String representation of LocalDateTime object, as specified by question.
      */
-    public static String printDate(LocalDate raw) {
-        String month = raw.getMonth().toString().substring(0, 3);
+    public static String printDate(LocalDate rawLocalDate) {
+        String month = rawLocalDate.getMonth().toString().substring(0, 3);
 
-        return (month + " " + raw.getDayOfMonth() + " " + raw.getYear());
+        return (month + " " + rawLocalDate.getDayOfMonth() + " " + rawLocalDate.getYear());
     }
 }

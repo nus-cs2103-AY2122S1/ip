@@ -7,7 +7,7 @@ import java.time.LocalDate;
  */
 public class Task {
 
-    protected String description;
+    protected String taskName;
     protected boolean isDone;
 
     /**
@@ -16,32 +16,62 @@ public class Task {
      * @param description Name of task.
      */
     public Task(String description) {
-        this.description = description;
+        this.taskName = description;
         this.isDone = false;
     }
 
     public String toString() {
-        return ((isDone ? "[X] " : "[ ] ") + this.description);
+        return ((isDone ? "[X] " : "[ ] ") + taskName);
     }
 
     /**
      * Checks if the description contains the keyword provided.
      *
-     * @param str String to be queried.
+     * @param query String to be queried.
      * @return true if found, false otherwise.
      */
-    public boolean nameContains(String str) {
-        String[] split = description.split(" ");
-        boolean result = false;
-        for (String s : split) {
-            if (s.equals(str)) {
-                result = true;
-                break;
+    public boolean queryIfNameContains(String query) {
+        String[] querySplit = query.split(" ");
+        int queryLength = querySplit.length;
+
+        String[] nameSplit = taskName.split(" ");
+        int descriptionLength = nameSplit.length;
+
+        if (descriptionLength < queryLength) {
+            return false;
+        } else if (descriptionLength == queryLength) {
+            return taskName.equalsIgnoreCase(query);
+        } else {
+            String[] updatedNameArray = concatNWords(nameSplit, queryLength);
+            boolean resultBoolean = false;
+            for (String s : updatedNameArray) {
+                if (s.equalsIgnoreCase(query)) {
+                    resultBoolean = true;
+                    break;
+                }
             }
+            return resultBoolean;
         }
-        return result;
     }
 
+    public String[] concatNWords(String[] sourceArray, int queryLength) {
+        int sourceArrayLength = sourceArray.length;
+        int resultArrayLength = sourceArrayLength - queryLength + 1;
+        String[] resultArray = new String[resultArrayLength];
+        for (int i = 0; i < resultArrayLength; i++) {
+            StringBuilder resultString = new StringBuilder();
+            resultString.append(sourceArray[i]);
+            for (int j = 1; j < queryLength; j++) {
+                resultString.append(" ").append(sourceArray[i + j]);
+            }
+            resultArray[i] = resultString.toString();
+        }
+        return resultArray;
+    }
+
+    /**
+     * Marks this task as done.
+     */
     public void markDone() {
         isDone = !isDone;
     }
@@ -68,7 +98,7 @@ public class Task {
             return "[D]" + super.toString() + " (by: " + Ui.printDate(date) + ")";
         }
 
-        public boolean dateEquals(LocalDate theirDate) {
+        public boolean queryIfDateEquals(LocalDate theirDate) {
             return theirDate.equals(date);
         }
     }
@@ -85,18 +115,6 @@ public class Task {
          */
         public Todo(String description) {
             super(description);
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            boolean result = false;
-            if (o instanceof Todo) {
-                Todo e = (Todo) o;
-                if (this.isDone == e.isDone && this.description.equals(e.description)) {
-                    result = true;
-                }
-            }
-            return result;
         }
 
         @Override
@@ -124,7 +142,7 @@ public class Task {
             this.date = at;
         }
 
-        public boolean dateEquals(LocalDate theirDate) {
+        public boolean queryIfDateEquals(LocalDate theirDate) {
             return theirDate.equals(date);
         }
 
