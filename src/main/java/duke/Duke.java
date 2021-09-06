@@ -20,16 +20,16 @@ public class Duke {
      */
     public Duke() {
         DukeList list = new DukeList();
-        this.storage = new Storage(System.getProperty("user.dir"), list);
-        this.ui = new Ui(list, this.storage);
-        this.parser = new Parser(list, this.storage);
+        storage = new Storage(System.getProperty("user.dir"), list);
+        parser = new Parser(list, storage);
+        ui = new Ui(parser);
     }
 
     /**
      * Runs Duke.
      */
     public void run() {
-        this.ui.run();
+        ui.run();
     }
 
     /**
@@ -39,7 +39,8 @@ public class Duke {
      * @return Duke's response.
      */
     public String getResponse(String input) {
-        return this.parser.parse(input);
+        String trimmedInput = input.trim();
+        return parser.parse(trimmedInput);
     }
 
     /**

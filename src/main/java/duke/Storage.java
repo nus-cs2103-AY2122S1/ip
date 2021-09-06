@@ -39,7 +39,7 @@ public class Storage {
      */
     public void save() throws DukeException {
         try {
-            FileWriter fileWriter = new FileWriter(this.path + "\\data\\data.txt");
+            FileWriter fileWriter = new FileWriter(path + "\\data\\data.txt");
             fileWriter.write(list.toString());
             fileWriter.close();
         } catch (IOException e) {
@@ -53,24 +53,11 @@ public class Storage {
      */
     public void load() throws DukeException {
         try {
-            Path folderPath = Paths.get(this.path + "\\data");
-            Path filePath = Paths.get(this.path + "\\data\\data.txt");
-            boolean hasDirectory = Files.exists(folderPath);
-            boolean hasSaveFile = Files.exists(filePath);
+            checkPath();
 
-            if (!hasDirectory) {
-                File folder = new File(this.path + "\\data");
-                File saveFile = new File(this.path + "\\data\\data.txt");
-
-                folder.mkdir();
-                saveFile.createNewFile();
-            } else if (!hasSaveFile) {
-                File saveFile = new File(this.path + "\\data\\data.txt");
-                saveFile.createNewFile();
-            }
-
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(this.path
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(path
                     + "\\data\\data.txt"));
+
             String data = bufferedReader.readLine();
             String type;
             String state;
@@ -85,13 +72,37 @@ public class Storage {
                 state = segregate[1];
                 body = segregate[2];
 
-                this.list.loadData(type, state, body);
+                list.loadData(type, state, body);
 
                 data = bufferedReader.readLine();
             }
         } catch (IOException e) {
             throw new DukeException("☹ OOPS!!! Duke does not have permission"
                     + " to save or load data");
+        }
+    }
+
+    private void checkPath() throws DukeException {
+        try {
+            Path folderPath = Paths.get(path + "\\data");
+            Path filePath = Paths.get(path + "\\data\\data.txt");
+
+            boolean hasDirectory = Files.exists(folderPath);
+            boolean hasSaveFile = Files.exists(filePath);
+
+            if (!hasDirectory) {
+                File folder = new File(path + "\\data");
+                File saveFile = new File(path + "\\data\\data.txt");
+
+                folder.mkdir();
+                saveFile.createNewFile();
+            } else if (!hasSaveFile) {
+                File saveFile = new File(path + "\\data\\data.txt");
+                saveFile.createNewFile();
+            }
+        } catch (IOException e) {
+            throw new DukeException("☹ OOPS!!! Duke does not have permission"
+                    + " to make files");
         }
     }
 }
