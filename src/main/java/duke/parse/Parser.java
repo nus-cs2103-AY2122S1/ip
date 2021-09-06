@@ -1,7 +1,5 @@
 package duke.parse;
 
-import java.time.format.DateTimeParseException;
-
 import duke.command.Command;
 import duke.command.CommandAdd;
 import duke.command.CommandDelete;
@@ -16,6 +14,15 @@ import duke.exception.DukeException;
  * Deals with the input given by the user and making sense of it.
  */
 public class Parser {
+    private final static String ADD_FORMAT = "Please enter the `%s` task in this format:\n"
+            + "%s <task_description> /%s <date_and_time>";
+    private final static String INSUFFICIENT_INPUT_ADD = "Insufficient input received!"
+            + " Please add in description of the `%s` task.";
+    private final static String INSUFFICIENT_INPUT_D = "Insufficient input received! "
+            + "Please indicate the task number of the %s";
+    private final static String  INVALID_INPUT_ADD = "Invalid input! Please add in %s";
+    private final static String INVALID_INPUT_D = "Invalid input! Please enter the task number after '%s'.";
+
     /**
      * Processes the input given by the user.
      * Returns the corresponding Command afterwards.
@@ -35,99 +42,125 @@ public class Parser {
         case "list":
             return new CommandList();
         case "done":
-            if (inputs.length == 1) {
-                throw new DukeException("Insufficient input received! "
-                        + "Please indicate the task number of the completed task.");
+            ParseError doneError = checkForError(input);
+            if (doneError == ParseError.INSUFFICIENT_INPUT) {
+                throw new DukeException(String.format(INSUFFICIENT_INPUT_D, "completed task."));
+            } else if (doneError == ParseError.INVALID_INPUT) {
+                throw new DukeException(String.format(INVALID_INPUT_D, "done"));
             } else {
-                try {
-                    int index = Integer.parseInt(inputs[1]);
+                int index = Integer.parseInt(inputs[1]);
 
-                    return new CommandDone(index);
-                } catch (NumberFormatException e) {
-                    throw new DukeException("Invalid input! Please enter the task number after 'done'.");
-                }
+                return new CommandDone(index);
             }
         case "delete":
-            if (inputs.length == 1) {
-                throw new DukeException("Insufficient input received! "
-                        + "Please indicate the task number of the task you wish to delete.");
-            }
-            try {
+            ParseError deleteError = checkForError(input);
+            if (deleteError == ParseError.INSUFFICIENT_INPUT) {
+                throw new DukeException(String.format(INSUFFICIENT_INPUT_D, "task you wish to delete."));
+            } else if (deleteError == ParseError.INVALID_INPUT) {
+                throw new DukeException(String.format(INVALID_INPUT_D, "delete"));
+            } else {
                 int index = Integer.parseInt(inputs[1]);
 
                 return new CommandDelete(index);
-            } catch (NumberFormatException e) {
-                throw new DukeException("Invalid input! Please enter the task number after 'delete'.");
             }
         case "find":
-            try {
+            ParseError findError = checkForError(input);
+            if (findError == ParseError.INSUFFICIENT_INPUT) {
+                throw new DukeException("Insufficient input received! Please add in keyword after 'find'.");
+            } else {
                 String keyword = input.substring(5);
                 return new CommandFind(keyword);
-            } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeException("Insufficient input received! Please add in keyword after 'find'.");
             }
         case "todo":
-            if (inputs.length == 1) {
-                throw new DukeException("Insufficient input received! "
-                        + "Please add in description of the `Todo` task.");
+            ParseError tError = checkForErrorAdd(input);
+            if (tError == ParseError.INSUFFICIENT_INPUT) {
+                throw new DukeException(String.format(INSUFFICIENT_INPUT_ADD, "Todo"));
+            } else {
+                int tFirst = input.indexOf(" ");
+                String tDescription = input.substring(tFirst + 1);
+
+                return new CommandAdd(0, tDescription);
             }
-
-            int tFirst = input.indexOf(" ");
-            String tDescription = input.substring(tFirst + 1);
-
-            return new CommandAdd(0, tDescription);
         case "deadline":
-            if (inputs.length == 1) {
-                throw new DukeException("Insufficient input received! "
-                        + "Please add in description of the `Deadline` task.");
-            }
+            ParseError dError = checkForErrorAdd(input);
+            if (dError == ParseError.INSUFFICIENT_INPUT) {
+                throw new DukeException(String.format(INSUFFICIENT_INPUT_ADD, "Deadline"));
+            } else if (dError == ParseError.INVALID_INPUT) {
+                throw new DukeException(String.format(INVALID_INPUT_ADD, "the deadline for the task."));
+            } else if (dError == ParseError.WRONG_FORMAT) {
+                throw new DukeException(String.format(ADD_FORMAT, "Deadline", "Deadline", "by"));
+            } else {
+                int dFirst = input.indexOf(" ");
+                int dSecond = input.indexOf("/");
 
-            if (!input.contains("/by")) {
-                throw new DukeException("Invalid input! Please add in the deadline for the task.");
-            }
-
-            int dFirst = input.indexOf(" ");
-            int dSecond = input.indexOf("/");
-
-            try {
                 String dDescription = input.substring(dFirst + 1, dSecond - 1);
                 String by = input.substring(dSecond + 4);
 
                 return new CommandAdd(1, dDescription, by);
-            } catch (DateTimeParseException e) {
-                throw new DukeException("Please follow this format when entering date and time:\n"
-                        + "DD/MM/YYYY 24-Hour Time Format" + " e.g. (01/01/2020 2359)");
-            } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeException("Please enter the Deadline task in this format:\n"
-                        + "Deadline <task_description> /by <date_and_time>");
             }
         case "event":
-            if (inputs.length == 1) {
-                throw new DukeException("Insufficient input received! "
-                        + "Please add in description of the `Event` task.");
-            }
+            ParseError eError = checkForErrorAdd(input);
+            if (eError == ParseError.INSUFFICIENT_INPUT) {
+                throw new DukeException(String.format(INSUFFICIENT_INPUT_ADD, "Event"));
+            } else if (eError == ParseError.INVALID_INPUT) {
+                throw new DukeException(String.format(INVALID_INPUT_ADD, "information about the event."));
+            } else if (eError == ParseError.WRONG_FORMAT) {
+                throw new DukeException(String.format(ADD_FORMAT, "Event", "Event", "at"));
+            } else {
+                int eFirst = input.indexOf(" ");
+                int eSecond = input.indexOf("/");
 
-            if (!input.contains("/at")) {
-                throw new DukeException("Invalid input! Please add in information about the event.");
-            }
-
-            int eFirst = input.indexOf(" ");
-            int eSecond = input.indexOf("/");
-
-            try {
                 String eDescription = input.substring(eFirst + 1, eSecond - 1);
                 String at = input.substring(eSecond + 4);
 
-                return new CommandAdd(2, eDescription, at);
-            } catch (DateTimeParseException e) {
-                throw new DukeException("Please follow this format when entering date and time:\n"
-                        + "DD/MM/YYYY 24-Hour Time Format" + " e.g. (01/01/2020 2359)");
-            } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeException("Please enter the Event task in this format:\n"
-                        + "Event <task_description> /by <date_and_time>");
+                return new CommandAdd(1, eDescription, at);
             }
         default:
             return new CommandUnknown();
+        }
+    }
+
+    enum ParseError {
+        INSUFFICIENT_INPUT,
+        INVALID_INPUT,
+        WRONG_FORMAT
+    }
+
+    private static ParseError checkForErrorAdd(String input) {
+        String[] inputs = input.split(" ");
+        if (inputs.length == 1) {
+            return ParseError.INSUFFICIENT_INPUT;
+        }
+
+        if (!input.contains("/by") && !input.contains("/at")) {
+            return ParseError.INVALID_INPUT;
+        }
+
+        try {
+            int first = input.indexOf(" ");
+            int second = input.indexOf("/");
+
+            String description = input.substring(first + 1, second - 1);
+            String additionalInfo = input.substring(second + 4);
+
+            return null;
+        } catch (StringIndexOutOfBoundsException e) {
+            return ParseError.WRONG_FORMAT;
+        }
+    }
+
+    private static ParseError checkForError(String input) {
+        String[] inputs = input.split(" ");
+        if (inputs.length == 1) {
+            return ParseError.INSUFFICIENT_INPUT;
+        }
+
+        try {
+            int index = Integer.parseInt(inputs[1]);
+
+            return null;
+        } catch (NumberFormatException e) {
+            return ParseError.INVALID_INPUT;
         }
     }
 }

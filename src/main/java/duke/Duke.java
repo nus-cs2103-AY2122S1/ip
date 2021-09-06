@@ -41,11 +41,9 @@ public class Duke {
      */
     public String startUp() {
         if (taskList.isEmpty()) {
-            return "No previous data found.\nLet's start a new To-Do List!";
+            return ui.greetNewUser();
         } else {
-            String str = ui.greetExistingUser();
-            str += ui.displayListUi(taskList);
-            return str;
+            return ui.greetExistingUser(taskList);
         }
     }
 
