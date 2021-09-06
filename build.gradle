@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "retriever.Retriever"
+    mainClassName = "retriever.Launcher"
 }
 
 shadowJar {
