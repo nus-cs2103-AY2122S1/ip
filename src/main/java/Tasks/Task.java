@@ -18,6 +18,15 @@ public class Task {
     public boolean isDone(){
         return isDone;
     }
+
+    public TaskType getType(){
+        return type;
+    }
+
+    public String getName(){
+        return name;
+    }
+
     public void makeDone(){
         isDone = true;
     }

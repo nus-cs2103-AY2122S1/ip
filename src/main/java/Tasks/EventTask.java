@@ -16,11 +16,16 @@ public class EventTask extends Task {
         this.dateReadable = DukeDate.parseDateToString(dateFormatted);
     }
 
+    public String getDate(){
+        return at;
+    }
+
     @Override
     public String toString(){
         String typeString = type == TaskType.TODO ? "T" : type == TaskType.EVENT? "E" : "D";
         String doneSymbol = isDone? "X" : " ";
         String result = "[" + typeString + "] " + "[" + doneSymbol + "] " + name + "(at: " + dateReadable + ")";
+
         return result;
     }
 }
