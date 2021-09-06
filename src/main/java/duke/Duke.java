@@ -27,7 +27,8 @@ public class Duke {
     /**
      * Gets a duke command based on user input message.
      * @param input user instructions for duke in form of string.
-     * @return command depending on user input
+     *
+     * @return a command depending on user input
      */
     Command getCommand(String input) throws DukeException {
         return Parser.parseInputs(input);
