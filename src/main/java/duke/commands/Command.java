@@ -39,7 +39,8 @@ public abstract class Command {
         ERROR,
         EXIT,
         LIST,
-        SEARCH
+        SEARCH,
+        SORT
     }
 
     /** Checks if the Command is terminating. */

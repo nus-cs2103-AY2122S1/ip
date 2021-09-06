@@ -51,5 +51,8 @@ public class Task {
         return String.format("%s_~_%s_~_%s", this.taskType, this.getStatusInt(), this.description);
     }
 
+    public String getTaskType() {
+        return this.taskType;
+    }
 
 }

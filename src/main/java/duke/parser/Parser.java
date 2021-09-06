@@ -10,6 +10,7 @@ import duke.commands.ErrorCommand;
 import duke.commands.ExitCommand;
 import duke.commands.ListCommand;
 import duke.commands.SearchCommand;
+import duke.commands.SortCommand;
 import duke.errors.EmptyDeadlineDateException;
 import duke.errors.EmptyDeadlineDescriptionException;
 import duke.errors.EmptyEventDateException;
@@ -24,6 +25,7 @@ import duke.errors.InvalidListNumberException;
 import duke.errors.ListFullException;
 import duke.errors.PollutedExitCommandException;
 import duke.errors.PollutedListCommandException;
+import duke.errors.PollutedSortCommandException;
 import duke.errors.SeparatorInStringException;
 import duke.errors.TooManyInputsException;
 import duke.task.Deadline;
@@ -72,6 +74,8 @@ public class Parser {
             return deleteParser(cleanCommand);
         case "find":
             return findParser(cleanCommand);
+        case "sort":
+            return new SortCommand();
         default:
             assert !firstWord.equals("error") : "Invalid fallthrough.";
             return errorParser(cleanCommand);
@@ -206,6 +210,8 @@ public class Parser {
             return new ErrorCommand(new PollutedExitCommandException());
         case "EMPTY_SEARCH_STRING_EXCEPTION":
             return new ErrorCommand(new EmptySearchStringException());
+        case "POLLUTED_SORT_COMMAND_EXCEPTION":
+            return new ErrorCommand(new PollutedSortCommandException());
         default:
             return null;
         }

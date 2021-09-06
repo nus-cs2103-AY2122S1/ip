@@ -12,12 +12,18 @@ import duke.parser.CustomDateFormatter;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.task.ToDo;
 
 public class Storage {
 
     private File storageFile;
 
+    /**
+     * Constructor for a Storage object.
+     *
+     * @param filePath
+     */
     public Storage(String filePath) {
         assert !filePath.isBlank() : "File Path is blank!";
         this.storageFile = new File(filePath);
@@ -93,6 +99,25 @@ public class Storage {
             System.out.println("IOException caught~");
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Writes the local file with the updated status of the
+     * TaskList.
+     *
+     * @param taskList
+     */
+    public void updateWithTaskList(TaskList taskList) {
+        ArrayList<Task> taskArrayList = taskList.getArrayList();
+        String newFileString = "";
+        for (Task task : taskArrayList) {
+            String str = "%s\n";
+            newFileString += String.format(str, task.getDataString());
+        }
+        if (newFileString.endsWith("\n")) {
+            newFileString = newFileString.substring(0, newFileString.length() - 1);
+        }
+        writeToFile(newFileString);
     }
 
     /**

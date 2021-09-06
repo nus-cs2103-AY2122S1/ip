@@ -3,9 +3,7 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task {
-
-    protected LocalDate date;
+public class Event extends SingleTimedTask {
 
     /**
      * The constructor for an Event object.
@@ -14,8 +12,7 @@ public class Event extends Task {
      * @param date The date of the Event.
      */
     public Event(String description, LocalDate date) {
-        super(description);
-        this.date = date;
+        super(description, date);
         this.taskType = "E";
     }
 
