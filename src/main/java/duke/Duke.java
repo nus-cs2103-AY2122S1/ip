@@ -28,10 +28,14 @@ public class Duke {
             storage = new Storage(filePath);
             tasks = storage.load();
             ui = new Ui(tasks, storage);
+            assert storage != null : "storage should not be null";
+            assert tasks != null : "tasks should not be null";
+            assert ui != null : "ui should not be null";
             return ui.initialize();
         } catch (DukeException e) {
             return e.getMessage();
         }
+
     }
 
     /**
@@ -41,6 +45,8 @@ public class Duke {
      * @return A response to be displayed to the user.
      */
     public String getResponse(String message) {
+        String response = ui.respond(message);
+        assert !response.isEmpty() : "response should not be empty";
         return ui.respond(message);
     }
 }

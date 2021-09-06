@@ -48,7 +48,9 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        assert !response.isEmpty() : "response should not be empty";
         if (Ui.isByeMsg(response)) {
+            assert input.equals("bye") : "input should be bye if exit is to occur";
             Platform.exit();
         }
         dialogContainer.getChildren().addAll(
