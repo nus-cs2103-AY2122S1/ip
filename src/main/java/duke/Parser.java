@@ -55,6 +55,13 @@ public class Parser {
                 } catch (NoSuchCommandException ex) {
                     throw new NoSuchCommandException("Invalid Command");
                 }
+            case "find":
+                try {
+                    Task.isLegitFindInput(input);
+                    return new FindCommand(input.split(" ")[1]);
+                } catch (NoSuchCommandException ex) {
+                    throw new NoSuchCommandException("Invalid Command");
+                }
             default:
                 throw new NoSuchCommandException("Invalid Command");
         }

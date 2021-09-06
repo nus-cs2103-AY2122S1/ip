@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.exceptions.NoSuchCommandException;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -7,6 +9,7 @@ import java.util.ArrayList;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.File;
+import java.util.Arrays;
 
 
 public class Task {
@@ -21,6 +24,15 @@ public class Task {
 
     public void markDone() {
         this.done = true;
+    }
+
+    public boolean isMatch(String input){
+        for (String word : name.split(" ")) {
+            if(word.matches(input)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void markUndone() {
@@ -42,6 +54,13 @@ public class Task {
 
     Boolean getDone(){
         return this.done;
+    }
+
+    public static void isLegitFindInput(String input) throws NoSuchCommandException {
+
+        if (input.split(" ").length > 2) {
+            throw new NoSuchCommandException("There should be something you're searching for");
+        }
     }
 
     public static void saveTaskList(ArrayList<Task> aList, String filename) throws IOException{
