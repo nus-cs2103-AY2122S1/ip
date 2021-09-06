@@ -28,6 +28,9 @@ public class AddCommand extends Command {
      * @param taskType Task type indicated by "T", "D" or "E".                   
      */
     public AddCommand(String fullCommand, String taskType) {
+        assert fullCommand != null : "Full command should not be null";
+        assert taskType != null : "Task type should not be null";
+        
         this.fullCommand = fullCommand;
         this.taskType = taskType;
     }
