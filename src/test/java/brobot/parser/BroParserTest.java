@@ -19,7 +19,7 @@ public class BroParserTest {
             p.parse("hello");
             fail();
         } catch (BroException e) {
-            assertEquals("Oops, unfortunately i am not yet smart enough to understand what you are saying",
+            assertEquals("Eh bro, I don't understand what you are saying lah",
                     e.getMessage());
         }
     }
@@ -30,7 +30,7 @@ public class BroParserTest {
             BroParser p = new BroParser(new TaskList(), new Storage("./data/list1.txt"));
             p.parse("done hello");
         } catch (BroException e) {
-            assertEquals("Oops, you have entered an invalid parameter for this command", e.getMessage());
+            assertEquals("Bro i think you put in the wrong parameters for this command", e.getMessage());
         }
     }
 }
