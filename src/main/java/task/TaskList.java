@@ -2,12 +2,11 @@ package task;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import duke.Storage;
-import duke.Ui;
+import duke.ui.Ui;
+import duke.util.Storage;
 
 /**
  * Implementation of task list, which is a list of tasks

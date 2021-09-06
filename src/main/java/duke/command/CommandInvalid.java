@@ -1,7 +1,5 @@
 package duke.command;
 
-import duke.Ui;
-
 /**
  * Invalid command
  */

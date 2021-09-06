@@ -2,6 +2,8 @@ package duke;
 
 import duke.command.Command;
 
+import duke.util.DukeParser;
+import duke.util.Storage;
 import task.TaskList;
 
 /**
@@ -12,7 +14,7 @@ public class Duke {
 
     /**
      * Constructor.
-     * Instantiates a (saved) {@link task.TaskList} and a {@link duke.DukeParser}.
+     * Instantiates a (saved) {@link task.TaskList} and a {@link DukeParser}.
      */
     protected Duke() {
         TaskList taskList = Storage.loadList();
@@ -24,7 +26,7 @@ public class Duke {
      *
      * @param input String input from user
      */
-    protected String getResponse(String input) {
+    public String getResponse(String input) {
         Command cmd = parser.parseInput(input);
         return cmd.execute();
     }
