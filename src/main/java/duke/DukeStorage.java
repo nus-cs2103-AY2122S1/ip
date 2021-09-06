@@ -40,6 +40,7 @@ public class DukeStorage {
             }
         }
 
+        assert taskList != null;
         FileWriter fw;
         try {
             fw = new FileWriter(TASKS_FILE);
@@ -56,6 +57,7 @@ public class DukeStorage {
     }
 
     public static String loadTasks(TaskList taskList) {
+        assert taskList != null;
         File f = new File(TASKS_FILE);
         String[] taskInfo;
         String nextTask;
