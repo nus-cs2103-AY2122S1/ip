@@ -1,7 +1,6 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import duke.command.Command;
 import duke.command.CommandKeyword;
