@@ -3,6 +3,7 @@ package bobcat.executor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -21,6 +22,7 @@ public class ExecutionUnit {
 
     public ExecutionUnit(String storagePath) {
         this.storagePath = storagePath;
+        assert !Objects.equals(storagePath, null) && !Objects.equals(storagePath, "");
     }
     public void initStorage() throws IOException {
         storeExecutor.initStorage(storagePath, taskList);
