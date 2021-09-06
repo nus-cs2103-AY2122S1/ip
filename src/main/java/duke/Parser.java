@@ -86,6 +86,13 @@ public class Parser {
             int contactIndex = Integer.parseInt(userInput.substring(8));
             return new DeleteContactCommand(contactIndex);
         }
+        case "searchC" : {
+            String keyword = userInput.substring(8);
+            return new FindContactCommand(keyword);
+        }
+        case "listC" : {
+            return new ListContactsCommand();
+        }
         default : {
             return new UnknownCommand();
         }
