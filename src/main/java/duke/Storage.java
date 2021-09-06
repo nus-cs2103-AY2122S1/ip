@@ -1,12 +1,5 @@
 package duke;
 
-import duke.error.DukeException;
-import duke.task.DeadlineTask;
-import duke.task.EventTask;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.TodoTask;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -17,6 +10,13 @@ import java.nio.file.Paths;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.error.DukeException;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.TodoTask;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the files.

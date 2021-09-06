@@ -1,8 +1,8 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Deals with interactions with the user.
@@ -14,7 +14,7 @@ public class UI {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    public static final String DIVIDER = "____________________________________________________________\n";
+    private static final String DIVIDER = "____________________________________________________________\n";
 
     private Scanner sc = new Scanner(System.in);
 
@@ -29,6 +29,19 @@ public class UI {
     }
 
     /**
+     * Returns the welcome message when the program starts.
+     *
+     * @return Welcome message.
+     */
+    public String welcomeResponse() {
+        System.out.println("Hello from\n" + LOGO);
+        showLine();
+        System.out.println("Hello I'm Duke\nWhat can I do for you?\n");
+        showLine();
+        return "Hello from\n" + LOGO + "\n\nHello I'm Duke\nWhat can I do for you?\n";
+    }
+
+    /**
      * Prints the divider line.
      */
     public void showLine() {
@@ -36,53 +49,64 @@ public class UI {
     }
 
     /**
-     * Prints the message after executing an exit command.
+     * Returns the message after executing an exit command.
+     *
+     * @return Exit command response.
      */
-    public void showExit() {
-        System.out.println("Bye. Hope to see you again soon!\n");
+    public String exitResponse() {
+        return "Bye. Hope to see you again soon!\n";
     }
 
     /**
-     * Prints the message after executing a done command.
+     * Returns the message after executing a done command.
      *
      * @param task The task that was marked as done.
+     * @return Done command response.
      */
-    public void showDone(Task task) {
-        System.out.printf("Nice! I've marked this task as done:\n%s\n", task);
+    public String doneResponse(Task task) {
+        return String.format("Nice! I've marked this task as done:\n%s\n", task);
     }
 
     /**
-     * Prints the message after executing a list command.
+     * Returns the message after executing a list command.
+     *
+     * @param list String of the list of tasks.
+     * @return List command response.
      */
-    public void showList() {
-        System.out.println("Here are the tasks in your list:");
+    public String listResponse(String list) {
+        return "Here are the tasks in your list:\n" + list;
     }
 
     /**
-     * Prints the message after executing a delete command.
+     * Returns the message after executing a delete command.
      *
      * @param task The task that was deleted.
      * @param size Updated size of the list.
+     * @return Delete command response.
      */
-    public void showDelete(Task task, int size) {
-        System.out.printf("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list\n", task, size);
+    public String deleteResponse(Task task, int size) {
+        return String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list\n", task, size);
     }
 
     /**
-     * Prints the message after executing a find command.
+     * Returns the message after executing a find command.
+     *
+     * @param list String of the list of tasks containing the keyword.
+     * @return Find command response.
      */
-    public void showFind() {
-        System.out.println("Here are the matching tasks in your list:");
+    public String findResponse(String list) {
+        return "Here are the matching tasks in your list:\n" + list;
     }
 
     /**
-     * Prints the message after executing an add command.
+     * Returns the message after executing an add command.
      *
      * @param task The task that was added.
      * @param size Updated size of the list.
+     * @return Add command response.
      */
-    public void showAdd(Task task, int size) {
-        System.out.printf("Got it. I've added this task:\n%s\nNow you have %d tasks in the list\n", task, size);
+    public String addResposne(Task task, int size) {
+        return String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list\n", task, size);
     }
 
     /**

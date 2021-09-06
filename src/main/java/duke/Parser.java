@@ -3,8 +3,8 @@ package duke;
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
-import duke.command.ExitCommand;
 import duke.command.DoneCommand;
+import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.error.DukeException;
@@ -73,7 +73,8 @@ public class Parser {
             }
             return new AddCommand(command, description);
         default:
-            throw new DukeException("OOPS!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("OOPS!! I'm sorry, but I don't know what that means :-(" +
+                    "\n Try one of the commands: todo, deadline, event, list, find, done, delete, bye.");
         }
     }
 }
