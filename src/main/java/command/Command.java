@@ -6,14 +6,8 @@ import duke.TaskList;
  * Represents a command to be executed on the task list.
  */
 public abstract class Command {
-    private boolean isBye;
 
     public Command() {
-        isBye = false;
-    }
-
-    public Command(boolean isBye) {
-        this.isBye = isBye;
     }
 
     /**
@@ -23,8 +17,4 @@ public abstract class Command {
      * @return String representing the task being executed.
      */
     public abstract String execute(TaskList taskList);
-
-    public boolean isBye() {
-        return isBye;
-    }
 }
