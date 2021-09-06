@@ -49,26 +49,22 @@ public class Logic {
             return "Ohhhh myyyy. I have been waiting for this quest to complete for ages.";
         } else if (listOfCommandInputs.contains("find")) {
             String temp = listOfCommandInputs.get(listOfCommandInputs.indexOf("find") + 1);
-            DataHandlerLayer.filterLog(temp);
+            return DataHandlerLayer.filterLog(temp);
         } else {
             processTask(packagedCommand, true);
             return loggedCommand;
         }
-        return "Acknowledged task";
     }
 
     /**
      * Loads in all the text history from previous times of running the bot
      */
     public static void preload() {
-        System.out.println("Preload called");
         try {
             ArrayList<Command> commandArrayList = DataHandlerLayer.loadPreset();
             for (Command command : commandArrayList) {
                 processTask(command, false);
             }
-            System.out.println("Preloadd");
-            System.out.println(DataHandlerLayer.getLogAsString());
         } catch (InvalidCommandException e) {
             e.printStackTrace();
         }

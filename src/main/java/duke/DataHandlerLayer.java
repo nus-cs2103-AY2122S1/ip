@@ -75,15 +75,18 @@ public class DataHandlerLayer {
      * and prints any task that contains it.
      * @param keyword keyword that is being searched
      */
-    public static void filterLog(String keyword) {
+    public static String filterLog(String keyword) {
+        assert keyword != "";
+        String acc = "";
         for (int i = 0; i < log.size(); i++) {
             Task temp = log.get(i);
             if (temp.toString().contains(keyword)) {
                 Task currentTask = log.get(i);
                 int taskNumber = i + 1;
-                System.out.println(taskNumber + ". " + currentTask.toString());
+                acc += taskNumber + ". " + currentTask.toString();
             }
         }
+        return acc;
     }
 
 
@@ -94,6 +97,7 @@ public class DataHandlerLayer {
      * this error is thrown
      */
     public static void delete(int position) throws IndexOutOfBoundsException {
+        assert position >= 0;
         if (position == 0) {
             throw new IndexOutOfBoundsException();
         }

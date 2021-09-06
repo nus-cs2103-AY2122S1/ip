@@ -36,6 +36,7 @@ public class Duke {
      * Stop the running of the bot
      */
     protected static void stop() {
+        assert isRunning;
         isRunning = false;
     }
 
