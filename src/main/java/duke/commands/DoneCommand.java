@@ -23,9 +23,9 @@ public class DoneCommand extends Command {
      * @param ui Ui that will display the messages to user when a Task is marked as done.
      * @param storage Storage where the TaskList should be saved.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.markTaskDone(taskIndex);
-        ui.showMarkDone(task);
+        return ui.showMarkDone(task);
     }
 
     /**

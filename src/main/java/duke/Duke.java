@@ -12,12 +12,10 @@ public class Duke {
 
     /**
      * Constructs a Duke object.
-     *
-     * @param filePath Path of file where list of tasks is stored.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -25,36 +23,17 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-
+    
     /**
-     * Starts the Duke application.
-     *
-     * @param args
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public static void main(String[] args) {
-        Duke duke = new Duke("./data/duke.txt");
-        duke.run();
-    }
-
-    /**
-     * Starts the Duke chatbot.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String fullUserCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullUserCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
         }
     }
 }

@@ -18,9 +18,9 @@ public class FindTasksCommand extends Command {
      * @param ui Ui that will display the tasks containing keyword.
      * @param storage Storage where the TaskList should be saved.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList tasksWithKeyword = tasks.findTasksWithKeyword(keyword);
-        tasksWithKeyword.printTaskList(true);
+        return tasksWithKeyword.printTaskList(true);
     }
 
     @Override

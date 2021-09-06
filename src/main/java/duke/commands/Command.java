@@ -17,7 +17,7 @@ public abstract class Command {
      * @param storage Storage where tasks should be stored.
      * @throws DukeException
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Represents if Duke program should be exited. Should be overridden by Command that exits program.

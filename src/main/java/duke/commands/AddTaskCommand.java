@@ -27,9 +27,9 @@ public class AddTaskCommand extends Command {
      * @param ui Ui that will display the messages to user when a Task is added.
      * @param storage Storage where the TaskList should be saved.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addNewTask(task);
-        ui.showAddTask(tasks, task);
+        return ui.showAddTask(tasks, task);
     }
 
     /**

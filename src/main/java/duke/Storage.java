@@ -17,19 +17,16 @@ import duke.tasks.Todo;
  * This class represents a Storage that is used to save and load Tasks from a file.
  */
 public class Storage {
-    private final String filePath;
+    private static final String FILEPATH = "./data/duke.txt";
 
     /**
-     * Constructs a Storage that saves and loads tasks from the file specified by filePath/
-     *
-     * @param filePath Path to file where tasks are saved and loaded.
+     * Constructs a Storage that saves and loads tasks from the file specified by FILEPATH/
      */
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage() {
     }
 
     private File getStoreFile() throws IOException {
-        File store = new File(this.filePath);
+        File store = new File(FILEPATH);
         String dirPath = store.getParent();
         File directory = new File(dirPath);
         // creates parent directories if they do not exist
@@ -40,9 +37,9 @@ public class Storage {
     }
 
     /**
-     * Loads tasks from file specified by filePath into an ArrayList of Tasks.
+     * Loads tasks from file specified by FILEPATH into an ArrayList of Tasks.
      *
-     * @return ArrayList of Tasks loaded from the filePath.
+     * @return ArrayList of Tasks loaded from the FILEPATH.
      * @throws DukeException
      */
     public ArrayList<Task> load() throws DukeException {
@@ -66,7 +63,7 @@ public class Storage {
     }
 
     /**
-     * Saves tasks in the file specified by filePath.
+     * Saves tasks in the file specified by FILEPATH.
      *
      * @param tasks TaskList containing Tasks that should be saved.
      */
