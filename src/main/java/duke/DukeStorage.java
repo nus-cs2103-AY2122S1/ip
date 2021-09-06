@@ -41,9 +41,8 @@ public class DukeStorage {
         }
 
         assert taskList != null;
-        FileWriter fw;
         try {
-            fw = new FileWriter(TASKS_FILE);
+            FileWriter fw = new FileWriter(TASKS_FILE);
             for (int i = 0; i < taskList.getListSize(); i++) {
                 fw.write(taskList.getTaskSaveFormat(i) + "\n");
             }
@@ -59,55 +58,44 @@ public class DukeStorage {
     public static String loadTasks(TaskList taskList) {
         assert taskList != null;
         File f = new File(TASKS_FILE);
-        String[] taskInfo;
-        String nextTask;
 
         try {
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
-                nextTask = s.nextLine();
+                String nextTask = s.nextLine();
                 if (nextTask.length() == 0) {
                     break;
                 }
 
-                taskInfo = nextTask.split("[|]", 4);
-                switch (taskInfo[0]) {
-                case "T":
-                    taskList.addTask(new ToDo(taskInfo[2], taskInfo[1] == "c"));
-                    break;
-                case "D":
-                    try {
-                        taskList.addTask(
-                                new Deadline(
-                                        taskInfo[2],
-                                        DukeDate.parseDateInput(taskInfo[3]),
-                                        taskInfo[1].equals("c")
-                                )
-                        );
-                    } catch (DukeArgumentException e) {
-                        return PARTIAL_LOAD_MESSAGE;
-                    }
-                    break;
-                case "E":
-                    try {
-                        taskList.addTask(
-                                new Event(
-                                        taskInfo[2],
-                                        DukeDate.parseDateInput(taskInfo[3]),
-                                        taskInfo[1].equals("c")
-                                )
-                        );
-                    } catch (DukeArgumentException e) {
-                        return PARTIAL_LOAD_MESSAGE;
-                    }
-                    break;
-                default:
-                    return PARTIAL_LOAD_MESSAGE;
-                }
+                String[] taskInfo = nextTask.split("[|]", 4);
+                parseTaskIntoTaskList(taskList, taskInfo);
             }
         } catch (FileNotFoundException e) {
             return "Save file not found";
+        } catch (DukeArgumentException e) {
+            return PARTIAL_LOAD_MESSAGE;
         }
+
         return SUCCESS_LOAD_MESSAGE;
+    }
+
+    private static void parseTaskIntoTaskList(TaskList taskList, String[] taskInfo) throws DukeArgumentException {
+        switch (taskInfo[0]) {
+        case "T":
+            taskList.addTask(new ToDo(taskInfo[2], taskInfo[1] == "c"));
+            break;
+        case "D":
+            taskList.addTask(
+                    new Deadline(taskInfo[2], DukeDate.parseDateInput(taskInfo[3]), taskInfo[1].equals("c"))
+            );
+            break;
+        case "E":
+            taskList.addTask(
+                    new Event(taskInfo[2], DukeDate.parseDateInput(taskInfo[3]), taskInfo[1].equals("c"))
+            );
+            break;
+        default:
+            throw new DukeArgumentException(PARTIAL_LOAD_MESSAGE);
+        }
     }
 }

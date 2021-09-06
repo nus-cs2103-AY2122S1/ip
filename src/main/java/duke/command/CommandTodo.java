@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.exception.DukeArgumentException;
+import duke.exception.DukeCommandException;
 import duke.task.TaskList;
 import duke.task.ToDo;
 
@@ -32,4 +34,27 @@ public class CommandTodo extends DukeCommand {
     public boolean isExit() {
         return false;
     };
+
+    /**
+     * Parses the user input into the right format for the command
+     *
+     * @param userArgs Arguments to the command as provided by the user.
+     */
+    public static DukeCommand parseCommand(String[] userArgs) throws DukeCommandException, DukeArgumentException {
+        assert userArgs != null;
+        assert userArgs.length != 0;
+        assert userArgs[0].equals("todo");
+        if (userArgs.length < 2) {
+            throw new DukeCommandException("todo");
+        }
+
+        assert userArgs.length == 2;
+
+        if (userArgs[1].equals("")) {
+            throw new DukeArgumentException("A todo task's name cannot be empty");
+        }
+
+        ToDo task = new ToDo(userArgs[1]);
+        return new CommandTodo(task);
+    }
 }

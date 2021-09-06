@@ -27,8 +27,8 @@ public class DukeUi extends Application {
     public static String getResponse(String input) {
         String response = "";
         try {
-            DukeCommand command = DukeCommandParser.parseCommand(input);
-            response = command.execute(Duke.getTList());
+            DukeCommand command = DukeCommandParser.parseInput(input);
+            response = command.execute(Duke.getTaskList());
             if (command.isExit()) {
                 Platform.exit();
             }
