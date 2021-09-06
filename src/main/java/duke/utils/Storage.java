@@ -1,8 +1,8 @@
-import tasks.*;
-import exceptions.*;
+package duke.utils;
+
+import duke.tasks.*;
 
 import java.io.*;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 

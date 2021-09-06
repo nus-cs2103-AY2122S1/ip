@@ -1,6 +1,6 @@
-package tasks;
-import utils.DukeDate;
-import java.time.LocalDateTime;
+package duke.tasks;
+import duke.utils.DukeDate;
+
 import java.util.Date;
 
 public class DeadlineTask extends Task{

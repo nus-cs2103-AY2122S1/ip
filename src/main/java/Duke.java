@@ -1,5 +1,7 @@
-import tasks.*;
-import exceptions.*;
+import duke.tasks.*;
+import duke.exceptions.*;
+import duke.utils.Storage;
+import duke.utils.TaskList;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ public class Duke {
 
 
 //    public Duke() throws FileNotFoundException {
-//        this.storage = new Storage();
+//        this.storage = new duke.utils.Storage();
 //        taskList = storage.loadTaskList();
 //
 //    }
@@ -56,10 +58,10 @@ public class Duke {
             } else if (input.length() > 4 && input.substring(0,4).equals("done")){
                 String taskDone = input.substring(5);
                 int taskDoneIndex = Integer.parseInt(taskDone)-1;
-                // tasks.get(taskDoneIndex).makeDone();
+                // duke.tasks.get(taskDoneIndex).makeDone();
                 taskList.getTask(taskDoneIndex).makeDone();
                 System.out.println("Nice! I've marked this task as done: ");
-                // System.out.println(tasks.get(taskDoneIndex).toString());
+                // System.out.println(duke.tasks.get(taskDoneIndex).toString());
                 System.out.println(taskList.getTask(taskDoneIndex).toString());
 
             }
@@ -69,7 +71,7 @@ public class Duke {
                 }
                 if(input.substring(0,4).equals("todo")){
                     TodoTask newTodo = new TodoTask(input.substring(5));
-                    //tasks.add(newTask);
+                    //duke.tasks.add(newTask);
                     taskList.addTask(newTodo);
                     //taskCounter++;
                     System.out.println("Got it. I've added this task: ");
@@ -90,7 +92,7 @@ public class Duke {
        
                     String at = input.split("/")[1].substring(3);
                     EventTask newEvent = new EventTask(input.substring(6).split("/")[0], date);
-                    //tasks.add(newEvent);
+                    //duke.tasks.add(newEvent);
                     taskList.addTask(newEvent);
                     //taskCounter++;
                     System.out.println("Got it. I've added this task: ");
@@ -104,7 +106,7 @@ public class Duke {
                     // reduce counter by 1
 
                     int indexToDel = Integer.parseInt(input.substring(7))-1;
-                    //Task tasktoDel = tasks.get(indexToDel);
+                    //Task tasktoDel = duke.tasks.get(indexToDel);
                     Task tasktoDel = taskList.getTask(indexToDel);
 
                     tasks.remove(indexToDel);
@@ -126,7 +128,7 @@ public class Duke {
                         }
                     }
                     DeadlineTask newDeadline = new DeadlineTask(input.substring(9).split("/")[0], date);
-                    //tasks.add(newDeadline);
+                    //duke.tasks.add(newDeadline);
                     taskList.addTask(newDeadline);
 
                     taskCounter++;
@@ -139,7 +141,7 @@ public class Duke {
                     throw new DukeException("Unacceptable input");
                 }
 
-                System.out.println("\nNow you have " +  (taskList.numberOfTasks()) + " tasks in the list.");
+                System.out.println("\nNow you have " +  (taskList.numberOfTasks()) + " duke.tasks in the list.");
             }
         }} catch (DukeException e){
             System.out.println("OOPS!!! You have enteted an invalid category");

@@ -1,5 +1,7 @@
+package duke.utils;
+
 import java.util.ArrayList;
-import tasks.*;
+import duke.tasks.*;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -29,7 +31,7 @@ public class TaskList {
         tasks.clear();
     }
 
-    // 5. checking number of tasks in tasklist
+    // 5. checking number of duke.tasks in tasklist
     public int numberOfTasks(){
         return tasks.size();
     }
