@@ -5,7 +5,21 @@ package duke;
  */
 public interface Command {
 
-    public abstract String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    /**
+     * Gets the task done and returns the response that the chat box will show to the user
+     *
+     * @param tasks the TaskList
+     * @param ui the Ui
+     * @param storage the Storage
+     * @return the corresponding response
+     * @throws DukeException if user input is invalid
+     */
+    String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
-    public abstract boolean isExit();
+    /**
+     * Checks if the Command is an Exit Command
+     *
+     * @return a boolean value, true if it is an Exit Command, false otherwise
+     */
+    boolean isExit();
 }

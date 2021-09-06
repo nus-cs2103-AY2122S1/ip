@@ -1,8 +1,16 @@
 package duke;
 
+/**
+ * A class that handles getting tasks done
+ */
 public class DoneCommand implements Command {
     private String userInput;
 
+    /**
+     * Constructor for DoneCommand object
+     *
+     * @param userInput input from user
+     */
     public DoneCommand(String userInput) {
         super();
         this.userInput = userInput;
@@ -14,7 +22,7 @@ public class DoneCommand implements Command {
             int taskNum = Integer.parseInt(userInput.substring(5));
             Task curr = tasks.getTask(taskNum - 1);
             curr.markAsDone();
-            return ui.showTaskDone(curr);
+            return ui.getTasksDone(curr);
         } catch (NumberFormatException nfe) {
             throw new DukeException("Please only enter an integer after command 'done'!");
         } catch (IndexOutOfBoundsException e) {

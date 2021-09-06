@@ -1,10 +1,16 @@
 package duke;
 
+/**
+ * A class to analyze user input and return the relevant Commands.
+ */
 public class Parser {
-    public Parser() {
 
-    }
-
+    /**
+     * A method that parses the user input and returns the corresponding Command.
+     *
+     * @param userInput the input the user keys in
+     * @return a Command object
+     */
     public static Command parse(String userInput) {
         if (userInput.equals("bye")) { // if user enters "bye"
             return new ExitCommand();

@@ -1,63 +1,86 @@
 package duke;
 
-
-import java.util.Scanner;
-
+/**
+ * A class that handles the responses given back to the user.
+ */
 public class Ui {
-    private Scanner myScanner = new Scanner(System.in);
 
-    public Ui() {
-    }
-
-    public String showExitMessage() {
+    /**
+     * Gets exit message.
+     *
+     * @return the exit message
+     */
+    public String getExitMessage() {
         return "Bye. Hope to see you again soon!";
     }
 
-    public String showLoadingError() {
+    /**
+     * Gets loading error message.
+     *
+     * @return the loading error message
+     */
+    public String getLoadingErrorMessage() {
         return "There is a problem loading saved data.";
     }
-    
-    public String showAddTask(Task task, int numOfTasks) {
+
+    /**
+     * Gets add task message.
+     *
+     * @return the add message
+     */
+    public String getAddTaskMessage(Task task, int numOfTasks) {
         assert numOfTasks >= 1;
         return "Got it. I've added this task:\n  "
                 + task.toString() + "\nNow you have " + numOfTasks
                 + " task(s) in the list.";
     }
 
-    public String showDeleteTask(Task task, int numOfTasks) {
+    /**
+     * Gets delete task message.
+     *
+     * @return the delete message
+     */
+    public String getDeleteTaskMessage(Task task, int numOfTasks) {
         assert numOfTasks >= 0;
         return "Noted. I've removed this task:\n  "
                 + task.toString() + "\nNow you have " + numOfTasks
                 + " task(s) in the list.";
     }
 
-    public String showTaskList(TaskList tasks) {
+    /**
+     * Gets list of tasks
+     *
+     * @return the list of tasks
+     */
+    public String getTaskList(TaskList tasks) {
         return "Here are the tasks in your list:" + tasks.toString();
     }
 
-    public String showFoundTasks(TaskList tasks) {
+    /**
+     * Gets tasks that match the input
+     *
+     * @return the matched tasks
+     */
+    public String getFoundTasks(TaskList tasks) {
         return "Here are the matching tasks in your list:" + tasks.toString();
     }
 
-    public String showTaskDone(Task task) {
+    /**
+     * Gets finished tasks
+     *
+     * @return the finished tasks
+     */
+    public String getTasksDone(Task task) {
         return "Nice! I've marked this task as done:\n  "
                 + task.toString();
     }
 
-    public String showError(String s) {
+    /**
+     * Gets error message
+     *
+     * @return the error message
+     */
+    public String getErrorMessage(String s) {
         return s;
-    }
-
-    public boolean hasUserInput() {
-        return myScanner.hasNextLine();
-    }
-
-    public String readCommand() {
-        String userInput = myScanner.nextLine();
-        return userInput;
-    }
-
-    public void closeUserInput() {
-        myScanner.close();
     }
 }

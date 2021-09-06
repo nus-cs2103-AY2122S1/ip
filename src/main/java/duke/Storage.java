@@ -1,36 +1,29 @@
 package duke;
 
-import duke.Deadline;
-import duke.Event;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    Path currentRelativePath = Paths.get("");
-    String s = currentRelativePath.toAbsolutePath().toString();
 
-    public Storage() {
-
-    }
-
+    /**
+     * A method to load tasks from storage and return the list of tasks.
+     *
+     * @return an ArrayList of Task
+     * @throws DukeException if file cannot be loaded
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
-            // System.out.println("Current absolute path is: " + s);
             File dataDirectory = new File("data");
             dataDirectory.mkdir();
             File storage = new File("data/duke.txt");
             storage.createNewFile();
-            // System.out.println(storage.getAbsolutePath());
             Scanner savedTasks = new Scanner(storage);
+
             ArrayList<Task> tasks = new ArrayList<>();
 
             while (savedTasks.hasNextLine()) {
@@ -61,8 +54,6 @@ public class Storage {
                                     DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"))
                     );
                     tasks.add(currentTask);
-                } else {
-                    // do nothing
                 }
             }
 
@@ -72,6 +63,11 @@ public class Storage {
         }
     }
 
+    /**
+     * A method to continuously save the current list of tasks.
+     *
+     * @param tasks a TaskList to be saved
+     */
     public void saveTasks(TaskList tasks) {
         String textToAdd = "";
 
