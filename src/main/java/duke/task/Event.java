@@ -45,6 +45,12 @@ public class Event extends Task {
         this.time = time;
     }
 
+    public void updateEvent(Event updatedEvent) {
+        this.description = updatedEvent.description;
+        this.date = updatedEvent.date;
+        this.time = updatedEvent.time;
+    }
+
     /**
      * Returns the string representation of event.
      *

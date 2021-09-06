@@ -3,6 +3,7 @@ package duke.parser;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 
 import duke.command.AddCommand;
 import duke.command.Command;
@@ -11,9 +12,11 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.UpdateCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.Todo;
 
 /**
@@ -109,6 +112,20 @@ public class Parser {
         return new Event(description, parseDateOfEvent(splitInput), parseTimeOfEvent(splitInput));
     }
 
+    private static Task createTask(String fullCommand) throws DukeException {
+        String[] splitInput = fullCommand.split(" ");
+        switch (splitInput[0]) {
+        case "todo":
+            return createTodo(fullCommand);
+        case "deadline":
+            return createDeadline(fullCommand);
+        case "event":
+            return createEvent(fullCommand);
+        default:
+            throw new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
     /**
      * Parses the string for command and returns the command.
      *
@@ -133,6 +150,10 @@ public class Parser {
             return new DeleteCommand(Integer.parseInt(splitInput[1]));
         case "find":
             return new FindCommand(fullCommand.substring(4).trim());
+        case "update":
+            System.out.println(String.join(" ", Arrays.copyOfRange(splitInput, 2, splitInput.length)));
+            return new UpdateCommand(Integer.parseInt(splitInput[1]),
+                    createTask(String.join(" ", Arrays.copyOfRange(splitInput, 2, splitInput.length))));
         case "bye":
             return new ExitCommand();
         default:

@@ -23,6 +23,10 @@ public class Todo extends Task {
         super(description, isCompleted);
     }
 
+    public void updateTodo(Todo updatedTodo) {
+        this.description = updatedTodo.description;
+    }
+
     /**
      * Returns the string representation of todo.
      *

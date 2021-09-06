@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.File;
+
 import duke.command.Command;
 import duke.command.ExitCommand;
 import duke.exception.DukeException;
@@ -8,7 +10,6 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-import java.io.File;
 
 public class Duke {
 

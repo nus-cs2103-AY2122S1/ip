@@ -45,6 +45,12 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    public void updateDeadline(Deadline updatedDeadline) {
+        this.description = updatedDeadline.description;
+        this.date = updatedDeadline.date;
+        this.time = updatedDeadline.time;
+    }
+
     /**
      * Returns the string representation of deadline.
      *
