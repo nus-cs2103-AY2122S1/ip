@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 /**
  * Encapsulates a TaskList. Stores an array of tasks.
@@ -22,7 +23,6 @@ public class TaskList {
      */
     public String[] addTask(Task t) {
         taskArray.add(t);
-        assert !taskArray.isEmpty() : "taskArray should no longer be empty";
         return new String[] {
             "Got it. I've added this task:",
             t.toString(),
@@ -88,6 +88,27 @@ public class TaskList {
         }
         String[] taskStrings = new String[matchingTasks.size() + 1];
         taskStrings[0] = "Here are the matching tasks in your list:";
+        for (int i = 0; i < matchingTasks.size(); i++) {
+            taskStrings[i + 1] = (i + 1) + "." + matchingTasks.get(i).toString();
+        }
+        return taskStrings;
+    }
+
+    /**
+     * Gets tasks for a given date.
+     *
+     * @param time Date to find tasks for.
+     * @return An array of strings with matching tasks.
+     */
+    public String[] getSchedule(LocalDate time) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task : taskArray) {
+            if (task.isScheduledFor(time)) {
+                matchingTasks.add(task);
+            }
+        }
+        String[] taskStrings = new String[matchingTasks.size() + 1];
+        taskStrings[0] = "Here are tasks scheduled for this date:";
         for (int i = 0; i < matchingTasks.size(); i++) {
             taskStrings[i + 1] = (i + 1) + "." + matchingTasks.get(i).toString();
         }

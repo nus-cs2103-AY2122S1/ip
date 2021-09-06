@@ -1,31 +1,22 @@
 package duke;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Class for event tasks.
  */
 public class Event extends Task {
-    private final LocalDate atTime;
     /**
      * Constructs an event task.
      *
      * @param description String describing the event task.
-     * @param at String describing the time of the event.
+     * @param time Time of the event.
      * @throws DukeException Thrown if time could not be parsed.
      */
-    public Event(String description, String at) throws DukeException {
-        super(description);
-        this.category = TaskType.event;
-        try {
-            this.atTime = LocalDate.parse(at);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Could not parse time input.");
-        }
+    public Event(String description, LocalDate time) throws DukeException {
+        super(description, time);
+        category = TaskType.event;
         assert description != null : "description should not be null";
-        assert atTime != null : "byTime should not be null";
     }
 
     /**
@@ -35,7 +26,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String timeString = atTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return "[E]" + super.toString() + " (at: " + timeString + ")";
+        return "[E]" + super.toString() + " (at: " + getTimeString() + ")";
     }
 }

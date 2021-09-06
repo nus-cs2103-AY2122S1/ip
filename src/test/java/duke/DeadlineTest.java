@@ -2,6 +2,9 @@ package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.junit.jupiter.api.Test;
 
 /**
@@ -15,9 +18,10 @@ public class DeadlineTest {
     @Test
     public void completedDeadlineTest() {
         try {
-            Deadline deadline = new Deadline("completed deadline", "2012-12-29");
+            Deadline deadline = new Deadline("completed deadline", LocalDate.now());
             deadline.setCompleted();
-            assertEquals("[D][X] completed deadline (by: Dec 29 2012)", deadline.toString());
+            String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            assertEquals("[D][X] completed deadline (by: " + currentDate + ")", deadline.toString());
         } catch (DukeException e) {
             System.out.println(e);
         }
@@ -29,8 +33,9 @@ public class DeadlineTest {
     @Test
     public void incompleteDeadlineTest() {
         try {
-            Deadline deadline = new Deadline("incomplete deadline", "2015-03-12");
-            assertEquals("[D][ ] incomplete deadline (by: Mar 12 2015)", deadline.toString());
+            Deadline deadline = new Deadline("incomplete deadline", LocalDate.now());
+            String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            assertEquals("[D][ ] incomplete deadline (by: " + currentDate + ")", deadline.toString());
         } catch (DukeException e) {
             System.out.println(e);
         }

@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 /**
  * Encapsulates a Parser class. Parses user input into commands.
  */
@@ -29,6 +32,8 @@ public class Parser {
             return parseListCommand();
         } else if (command.startsWith("find ")) {
             return parseFindCommand(command);
+        } else if (command.startsWith("schedule ")) {
+            return parseScheduleCommand(command);
         } else if (command.startsWith("done ")) {
             return parseDoneCommand(command);
         } else if (command.startsWith("delete ")) {
@@ -69,7 +74,20 @@ public class Parser {
      * @return String array of matching tasks.
      */
     private String[] parseFindCommand(String command) {
-        return tasks.findMatchingTasks(command.substring(5));
+        int cutOffIndex = "find ".length();
+        return tasks.findMatchingTasks(command.substring(cutOffIndex));
+    }
+
+    /**
+     * Parses a schedule command.
+     *
+     * @param command Input from user.
+     * @return String array of matching tasks.
+     * @throws DukeException if date cannot be parsed.
+     */
+    private String[] parseScheduleCommand(String command) throws DukeException {
+        int cutOffIndex = "schedule ".length();
+        return tasks.getSchedule(parseTimeString(command.substring(cutOffIndex)));
     }
 
     /**
@@ -130,7 +148,7 @@ public class Parser {
         int timeIndex = byIndex + " /by ".length();
         return tasks.addTask(new Deadline(
                 command.substring(cutOffIndex, byIndex),
-                command.substring(timeIndex)));
+                parseTimeString(command.substring(timeIndex))));
     }
 
     /**
@@ -151,7 +169,22 @@ public class Parser {
         int timeIndex = atIndex + " /at ".length();
         return tasks.addTask(new Event(
                 command.substring(cutOffIndex, atIndex),
-                command.substring(timeIndex)));
+                parseTimeString(command.substring(timeIndex))));
+    }
+
+    /**
+     * Parses a time string into LocalDate time.
+     *
+     * @param timeString String describing a date.
+     * @return LocalDate representation of time.
+     * @throws DukeException if time cannot be parsed.
+     */
+    private LocalDate parseTimeString(String timeString) throws DukeException {
+        try {
+            return LocalDate.parse(timeString);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Cannot parse time input. Try using YYYY-MM-DD!");
+        }
     }
 
     /**
