@@ -9,7 +9,6 @@ public class Todo extends Task {
     }
 
     /**
-     *
      * Turn todo into a string for saving to memory.
      *
      * @return concise string representation of todo.

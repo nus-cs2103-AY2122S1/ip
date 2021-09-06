@@ -7,10 +7,12 @@ import java.time.format.DateTimeFormatter;
  * Deadline is a task that should be completed by a specific time.
  */
 public class Deadline extends Task {
+    /** Datetime deadline of task. */
     private final LocalDateTime dateTime;
 
     /**
      * Constructs task with a deadline.
+     *
      * @param done task is completed.
      * @param name task name.
      * @param dateTime deadline due date.
@@ -21,8 +23,7 @@ public class Deadline extends Task {
     }
 
     /**
-     *
-     * Turn Deadline into a string for saving to memory.
+     * Turns Deadline into a string for saving to memory.
      *
      * @return concise string representation of Deadline.
      */
@@ -32,7 +33,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Turn task into a human readable string form.
+     * Turns task into a human readable string form.
      *
      * @return string representation of Deadline.
      */

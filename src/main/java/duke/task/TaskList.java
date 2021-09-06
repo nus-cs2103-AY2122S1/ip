@@ -12,6 +12,11 @@ import duke.util.DukeException;
  * Manipulates and stores tasks.
  */
 public class TaskList {
+    private static final int TASK_TYPE = 0;
+    private static final int TASK_DONE = 1;
+    private static final int TASK_NAME = 2;
+    private static final int TASK_DateTime = 3;
+
     private final LinkedList<Task> tasks = new LinkedList<>();
 
     /**
@@ -59,19 +64,18 @@ public class TaskList {
      */
     protected Task decodeTask(String taskCode) {
         String[] taskDetails = taskCode.split("\\|");
-        String taskType = taskDetails[0];
-        boolean done = taskDetails[1].equals("1");
+        String taskType = taskDetails[TASK_TYPE];
+        String dateTimeInfo;
+        boolean done = taskDetails[TASK_DONE].equals("1");
         switch (taskType) {
         case "T":
-            return new Todo(done, taskDetails[2]);
-        case "E": {
-            String info = taskDetails[3];
-            return new Event(done, taskDetails[2], LocalDateTime.parse(info));
-        }
-        case "D": {
-            String info = taskDetails[3];
-            return new Deadline(done, taskDetails[2], LocalDateTime.parse(info));
-        }
+            return new Todo(done, taskDetails[TASK_NAME]);
+        case "E":
+            dateTimeInfo = taskDetails[TASK_DateTime];
+            return new Event(done, taskDetails[TASK_NAME], LocalDateTime.parse(dateTimeInfo));
+        case "D":
+            dateTimeInfo = taskDetails[TASK_DateTime];
+            return new Deadline(done, taskDetails[TASK_NAME], LocalDateTime.parse(dateTimeInfo));
         default:
             return null;
         }
