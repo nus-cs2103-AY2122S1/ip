@@ -38,10 +38,15 @@ public class RemoveCommand extends Command {
      * @param storage Storage to save and load TaskList of Duke.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        Task toRemove = taskList.remove(this.indexToRemove);
-        String message = "Noted. I've removed this task:\n" + toRemove + "\nNow you have "
-                + taskList.getSize() + " tasks in the list";
-        ui.print(message);
+        if (this.indexToRemove == -1) {
+            String message = formatAndRemoveAll(taskList);
+
+            ui.print(message);
+        } else {
+            String message = formatAndRemoveIndexToRemove(taskList);
+
+            ui.print(message);
+        }
     }
 
     /**
@@ -54,6 +59,46 @@ public class RemoveCommand extends Command {
      */
     @Override
     public String getExecutedString(TaskList taskList, Ui ui, Storage storage) {
+        if (this.indexToRemove == -1) {
+            String message = formatAndRemoveAll(taskList);
+
+            return message;
+        } else {
+            String message = formatAndRemoveIndexToRemove(taskList);
+
+            return message;
+        }
+    }
+
+    /**
+     * Formats and removes all the items from taskList.
+     *
+     * @param taskList taskList to remove all the tasks from.
+     * @return Returns the formatted string to be printed to the user.
+     */
+    private String formatAndRemoveAll(TaskList taskList) {
+        String message = "Noted. I've removed these tasks:\n";
+
+        int counter = 0;
+        int size = taskList.getSize();
+
+        for (int i = 0; i < size; i++) {
+            Task toRemove = taskList.remove(0);
+            counter++;
+            message += counter + "." + toRemove + "\n";
+        }
+
+        message += "Now you have 0 tasks in the list";
+        return message;
+    }
+
+    /**
+     * Formats and removes task at indexToRemove from taskList.
+     *
+     * @param taskList taskList to remove task at indexToRemove.
+     * @return Returns the formatted string to be printed to the user.
+     */
+    private String formatAndRemoveIndexToRemove(TaskList taskList) {
         Task toRemove = taskList.remove(this.indexToRemove);
         return "Noted. I've removed this task:\n" + toRemove + "\nNow you have "
                 + taskList.getSize() + " tasks in the list";

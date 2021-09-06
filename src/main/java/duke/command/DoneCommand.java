@@ -38,10 +38,15 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.markAsDone(this.indexToMarkAsDone);
-        String message = "Nice! I've marked this task as done:\n" + "  "
-                + taskList.taskToString(this.indexToMarkAsDone);
-        ui.print(message);
+        if (this.indexToMarkAsDone == -1) {
+            String message = formatAndMarkAllAsDone(taskList);
+
+            ui.print(message);
+        } else {
+            String message = formatAndMarkDoneAtIndex(taskList);
+
+            ui.print(message);
+        }
     }
 
     /**
@@ -54,8 +59,47 @@ public class DoneCommand extends Command {
      */
     @Override
     public String getExecutedString(TaskList taskList, Ui ui, Storage storage) {
+        if (this.indexToMarkAsDone == -1) {
+            String message = formatAndMarkAllAsDone(taskList);
+
+            return message;
+        } else {
+            String message = formatAndMarkDoneAtIndex(taskList);
+
+            return message;
+        }
+    }
+
+    /**
+     * Formats and marks task at indexToMarkAsDone done in given taskList.
+     *
+     * @param taskList taskList to mark task at indexToMarkAsDone done.
+     * @return Returns formatted String to be printed to the user.
+     */
+    private String formatAndMarkDoneAtIndex(TaskList taskList) {
         taskList.markAsDone(this.indexToMarkAsDone);
+
         return "Nice! I've marked this task as done:\n" + "  "
                 + taskList.taskToString(this.indexToMarkAsDone);
+    }
+
+    /**
+     * Formats and marks all tasks as done in given taskList.
+     *
+     * @param taskList taskList to mark all tasks as done.
+     * @return Returns formatted String to be printed to the user.
+     */
+    private String formatAndMarkAllAsDone(TaskList taskList) {
+        String message = "Noted. I've marked these tasks as done:\n";
+
+        for (int i = 0; i < taskList.getSize(); i++) {
+            taskList.markAsDone(i);
+            if (i == taskList.getSize() - 1) {
+                message += i + 1 + "." + taskList.taskToString(i);
+            } else {
+                message += i + 1 + "." + taskList.taskToString(i) + "\n";
+            }
+        }
+        return message;
     }
 }

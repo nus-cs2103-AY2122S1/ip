@@ -357,12 +357,59 @@ public class Parser {
 
         String[] separated = userInput.split(" ");
 
-        if (separated.length < 2 || !separated[1].matches("\\d+")
-                || Integer.valueOf(separated[1]) > taskList.getSize()) {
+        boolean lengthLessThanTwo = separated.length < 2;
+
+        if (lengthLessThanTwo || !isIntegerOrAll(separated[1])
+                || isOutOfRange(taskList, separated[1])) {
             throw new DukeException("Please key in valid number to remove.");
-        } else {
+        } else if (isInteger(separated[1])) {
             return new RemoveCommand(Integer.valueOf(separated[1]) - 1);
+        } else if (isAll(separated[1])) {
+            return new RemoveCommand(-1);
+        } else {
+            throw new InvalidCommandException();
         }
+    }
+
+    /**
+     * Checks if String is an Integer or "all" word.
+     *
+     * @param s String to check.
+     * @return true if it is an Integer or "all" word, else false.
+     */
+    private static boolean isIntegerOrAll(String s) {
+        return isInteger(s) || isAll(s);
+    }
+
+    /**
+     * Checks if String is "all" word.
+     *
+     * @param s String to check.
+     * @return true if it is an "all" word.
+     */
+    private static boolean isAll(String s) {
+        return s.equals("all");
+    }
+
+    /**
+     * Checks if String is an Integer.
+     *
+     * @param s String to check.
+     * @return true if it is an Integer.
+     */
+    private static boolean isInteger(String s) {
+        return s.matches("\\d+");
+    }
+
+    /**
+     * Checks if string is within range of given taskList.
+     *
+     * @param taskList taskList to see if index s is within.
+     * @param s String to check if is within range of taskList.
+     * @return true if String is within the range of the taskList, else false.
+     */
+    private static boolean isOutOfRange(TaskList taskList, String s) {
+        return !isAll(s) && Integer.valueOf(s) > taskList.getSize();
     }
 
     /**
@@ -378,12 +425,20 @@ public class Parser {
 
         String[] separated = userInput.split(" ");
 
-        if (separated.length < 2 || !separated[1].matches("\\d+")
-                || Integer.valueOf(separated[1]) > taskList.getSize()) {
+        boolean lengthLessThanTwo = separated.length < 2;
+
+        if (lengthLessThanTwo || !isIntegerOrAll(separated[1])
+                || isOutOfRange(taskList, separated[1])) {
             throw new DukeException("Please key in valid number to mark as done.");
-        } else {
+        } else if (isInteger(separated[1])) {
             int index = Integer.valueOf(separated[1]) - 1;
             return new DoneCommand(index);
+        } else if (isAll(separated[1])) {
+            return new DoneCommand(-1);
+        } else {
+            throw new InvalidCommandException();
         }
     }
+
+
 }
