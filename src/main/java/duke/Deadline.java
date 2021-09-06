@@ -26,7 +26,7 @@ public class Deadline extends Task {
         return logo;
     }
 
-    private String dateFormat() {
+    private String formatDate() {
         return deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
@@ -36,6 +36,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.getStatusIcon() + " " + super.description + " (by: " + dateFormat() + " " + time + ")";
+        return "[D]" + super.getStatusIcon() + " " + super.description + " (by: " + formatDate() + " " + time + ")";
     }
 }
