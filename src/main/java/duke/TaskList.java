@@ -77,7 +77,7 @@ public class TaskList {
      * @return String representing the displayed list.
      */
     public String findTasksByDate(LocalDate desiredDate) {
-        return ui.showDateFind(list, list.size(), desiredDate);
+        return ui.showDateFind(list, desiredDate);
     }
 
     /**
@@ -87,7 +87,7 @@ public class TaskList {
      * @return String representing the displayed list.
      */
     public String findTasksByKeyword(String keyword) {
-        return ui.showKeywordFind(list, list.size(), keyword);
+        return ui.showKeywordFind(list, keyword);
     }
 
     /**
