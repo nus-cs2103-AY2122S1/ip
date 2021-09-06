@@ -1,6 +1,5 @@
 package duke;
 
-import java.io.InputStream;
 import java.util.Scanner;
 
 import javafx.scene.control.Label;
