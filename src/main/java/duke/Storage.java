@@ -58,7 +58,7 @@ public class Storage {
             Scanner fileScanner = new Scanner(this.taskFile);
             while (fileScanner.hasNextLine()) {
                 String current = fileScanner.nextLine();
-                Task currentTask = new Task("");
+                Task currentTask = null;
                 switch(current.charAt(1)) {
                 case 'T': {
                     currentTask = new Todo(current.substring(7));
@@ -120,26 +120,9 @@ public class Storage {
      * @param newContent new content of the task
      */
     public void editTask(String oldContent, String newContent) {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(this.taskFile));
-            String line = reader.readLine();
-            StringBuilder currentFileContent = new StringBuilder();
-            while (line != null) {
-                currentFileContent.append(line);
-                currentFileContent.append('\n');
-                line = reader.readLine();
-            }
-            reader.close();
-
-            String newFileContent = currentFileContent.toString().replace(oldContent, newContent);
-            FileWriter fileWriter = new FileWriter(this.taskFile);
-            fileWriter.write(newFileContent);
-            fileWriter.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("duke.txt not found!");
-        } catch (IOException e) {
-            System.out.println("Error has occurred when editing file!");
-        }
+        String currentFileContent = readFileContent();
+        String newFileContent = currentFileContent.replace(oldContent, newContent);
+        writeContentToFile(newFileContent);
     }
 
     /**
@@ -148,6 +131,58 @@ public class Storage {
      * @param taskContent the content of the task
      */
     public void deleteTask(String taskContent) {
+        String newFileContent = deleteFileContent(taskContent);
+        writeContentToFile(newFileContent);
+    }
+
+    /**
+     * Writes the given content to the file
+     *
+     * @param content the content
+     */
+    public void writeContentToFile(String content) {
+        try {
+            FileWriter fileWriter = new FileWriter(this.taskFile);
+            fileWriter.write(content);
+            fileWriter.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("duke.txt not found!");
+        } catch (IOException e) {
+            System.out.println("Error has occurred when writing to file!");
+        }
+    }
+
+    /**
+     * Reads the file to get the content
+     *
+     * @return the file content
+     */
+    public String readFileContent() {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(this.taskFile));
+            String line = reader.readLine();
+            StringBuilder currentFileContent = new StringBuilder();
+            while (line != null) {
+                currentFileContent.append(line).append(System.lineSeparator());
+                line = reader.readLine();
+            }
+            reader.close();
+            return currentFileContent.toString();
+        } catch (FileNotFoundException e) {
+            System.out.println("duke.txt not found!");
+        } catch (IOException e) {
+            System.out.println("Error has occurred when editing file!");
+        }
+        return null;
+    }
+
+    /**
+     * Gives the content with task deleted
+     *
+     * @param taskContent the content of task to be deleted
+     * @return the content with task deleted
+     */
+    public String deleteFileContent(String taskContent) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(this.taskFile));
             String line = reader.readLine();
@@ -158,14 +193,13 @@ public class Storage {
                 }
                 line = reader.readLine();
             }
-            FileWriter fileWriter = new FileWriter(this.taskFile);
-            fileWriter.write(newFileContent.toString());
             reader.close();
-            fileWriter.close();
+            return newFileContent.toString();
         } catch (FileNotFoundException e) {
             System.out.println("duke.txt not found!");
         } catch (IOException e) {
             System.out.println("Error has occurred when editing file!");
         }
+        return null;
     }
 }

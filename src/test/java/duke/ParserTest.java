@@ -1,21 +1,21 @@
 package duke;
 
-import exception.InvalidTaskException;
-import exception.NoDescriptionException;
-import exception.WrongDescriptionException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import exception.InvalidTaskException;
+import exception.NoDescriptionException;
 
 public class ParserTest {
     @Test
     public void testParseCommand1() {
         Parser parser = new Parser();
-        String invalidCommand = "Invalid command! Please enter the following commands only:\n" +
-                "list\ndone (task number)\n" +
-                "delete (task number)\ntodo (description)\n" +
-                "deadline (description) /by (time)\nevent (description) /at (time)";
+        String invalidCommand = "Invalid command! Please enter the following commands only:\n"
+                + "list\ndone (task number)\n"
+                + "delete (task number)\ntodo (description)\n"
+                + "deadline (description) /by (time)\nevent (description) /at (time)";
         try {
             assertEquals(Command.LIST, parser.parseCommand("blah"));
             fail();
@@ -44,18 +44,4 @@ public class ParserTest {
             assertEquals("Description of task cannot be empty!", e.getMessage());
         }
     }
-
-    @Test
-    public void testParseDescription2() {
-        Parser parser = new Parser();
-        String[] parsedContent = new String[] {"return book", "06/06/2021 2359"};
-        try {
-            String[] actual = parser.parseDescription("deadline return book /by 06/06/2021 2359", "by");
-            assertEquals(parsedContent[0], actual[0]);
-            assertEquals(parsedContent[1], actual[1]);
-        } catch (WrongDescriptionException | NoDescriptionException e) {
-            fail();
-        }
-    }
-
 }
