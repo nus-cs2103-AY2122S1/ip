@@ -54,6 +54,7 @@ public class Storage {
      * @throws DukeException if there is an error saving the local data.
      */
     public static void save(TaskList list) throws DukeException {
+        assert list != null : "The task list has not been initialised yet";
 
         // Set up the file
         String absolutePath = new File(FILE_PATH).getAbsolutePath();
