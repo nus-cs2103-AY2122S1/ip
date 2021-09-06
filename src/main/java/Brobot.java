@@ -120,7 +120,7 @@ public class Brobot extends Application {
         try {
             return parser.parse(input);
         } catch (BroException e) {
-            return UI.printError(e);
+            return UI.getErrorText(e);
         }
     }
     /**
@@ -133,18 +133,18 @@ public class Brobot extends Application {
         TaskList list = storage.readList();
         BroParser parser = new BroParser(list, storage);
 
-        UI.printGreeting();
+        UI.printToTerm(UI.getGreetingText());
         String input = UI.getUserInput();
 
         while (!input.equals("bye")) {
             try {
                 parser.parse(input);
             } catch (BroException e) {
-                UI.printError(e);
+                UI.printToTerm(UI.getErrorText(e));
             } finally {
                 input = UI.getUserInput();
             }
         }
-        UI.printBye();
+        UI.printToTerm(UI.getByeText());
     }
 }

@@ -89,7 +89,7 @@ public class BroParser {
         if (inputScanner.hasNext()) {
             throw new InvalidCommandParameterException();
         } else {
-            return UI.printList(list);
+            return UI.getListText(list);
         }
     }
 
@@ -108,7 +108,7 @@ public class BroParser {
             int taskPos = inputScanner.nextInt() - 1;
             list.markDone(taskPos);
             storage.writeList(list);
-            return UI.printTaskDone(list.getTask(taskPos + 1));
+            return UI.getTaskDoneText(list.getTask(taskPos + 1));
         } else {
             throw new InvalidCommandParameterException();
         }
@@ -129,7 +129,7 @@ public class BroParser {
             int taskPos = inputScanner.nextInt() - 1;
             Task temp = list.deleteTask(taskPos);
             storage.writeList(list);
-            return UI.printTaskDeleted(temp, list);
+            return UI.getTaskDeletedText(temp, list);
         } else {
             throw new InvalidCommandParameterException();
         }
@@ -148,7 +148,7 @@ public class BroParser {
             String secondWord = inputScanner.nextLine();
             list.addTask(new Todo(secondWord));
             storage.writeList(list);
-            return UI.printTaskAdded(list);
+            return UI.getTaskAddedText(list);
         } else {
             throw new InvalidCommandParameterException();
         }
@@ -169,7 +169,7 @@ public class BroParser {
             LocalDateTime date = LocalDateTime.parse(contentAndDate[1], formatter);
             list.addTask(new Deadline(content, date));
             storage.writeList(list);
-            return UI.printTaskAdded(list);
+            return UI.getTaskAddedText(list);
         } else {
             throw new InvalidCommandParameterException();
         }
@@ -190,7 +190,7 @@ public class BroParser {
             LocalDateTime date = LocalDateTime.parse(contentAndDate[1], formatter);
             list.addTask(new Event(content, date));
             storage.writeList(list);
-            return UI.printTaskAdded(list);
+            return UI.getTaskAddedText(list);
         } else {
             throw new InvalidCommandParameterException();
         }
@@ -208,7 +208,7 @@ public class BroParser {
         if (inputScanner.hasNextLine()) {
             String searchWord = inputScanner.nextLine();
             TaskList searchList = list.searchTask(searchWord);
-            return UI.printSearchList(searchList);
+            return UI.getSearchListText(searchList);
         } else {
             throw new InvalidCommandParameterException();
         }

@@ -35,7 +35,7 @@ public class Storage {
                 file.createNewFile();
             }
         } catch (IOException e) {
-            UI.printError(e);
+            UI.printToTerm(UI.getErrorText(e));
         }
     }
 
@@ -80,7 +80,7 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
-            UI.printError(e);
+            UI.printToTerm(UI.getErrorText(e));
         }
         return list;
     }
@@ -96,7 +96,7 @@ public class Storage {
             fw.write(list.toStorageString());
             fw.close();
         } catch (IOException e) {
-            UI.printError(e);
+            UI.printToTerm(UI.getErrorText(e));
         }
     }
 }
