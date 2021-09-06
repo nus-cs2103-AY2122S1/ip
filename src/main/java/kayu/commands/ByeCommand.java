@@ -16,6 +16,7 @@ public class ByeCommand extends Command {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isBye() {
         return true;
     }

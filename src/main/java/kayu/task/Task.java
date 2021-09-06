@@ -78,7 +78,7 @@ public abstract class Task {
      * @return String icon based on done status.
      */
     public String getStatusIcon() {
-        return (isDone ? "[X] " : "[ ] ");
+        return (isDone ? "[X]" : "[ ]");
     }
 
     /**
@@ -95,6 +95,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return getStatusIcon() + description;
+        return getStatusIcon() + ' ' + description;
     }
 }

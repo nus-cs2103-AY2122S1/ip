@@ -7,7 +7,6 @@ import java.time.LocalTime;
 
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
-import kayu.parser.DateTimeFormat;
 import kayu.service.TaskList;
 import kayu.storage.Storage;
 import kayu.task.Event;
@@ -26,10 +25,9 @@ public class EventCommand extends AddTaskCommand {
      * Initializes an Event- {@link kayu.commands.AddTaskCommand}.
      *
      * @param commandParams String parameters fed into the command by user.
-     * @param dateTimeFormat {@link kayu.parser.DateTimeFormat} used in parsing, if required.
      */
-    public EventCommand(String commandParams, DateTimeFormat dateTimeFormat) {
-        super(commandParams, dateTimeFormat);
+    public EventCommand(String commandParams) {
+        super(commandParams);
     }
 
     /**
@@ -37,14 +35,18 @@ public class EventCommand extends AddTaskCommand {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws KayuException, StorageException {
-        String[] paramArray = getParamArray();
-        Task event = createEvent(paramArray);
+        Task event = createTask();
         super.updateTasks(taskList, storage, event);
         
-        return String.format(MESSAGE_CREATED_EVENT, event, taskList.getCapacity());
+        return String.format(MESSAGE_CREATED_EVENT, event, taskList.getCurrentCapacity());
     }
-    
-    private Task createEvent(String[] paramArray) throws KayuException {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Task createTask() throws KayuException {
+        String[] paramArray = getParamArray();
         String desc = super.extractDesc(paramArray, COMMAND_WORD);
         LocalDate atDate = super.extractDate(paramArray);
         LocalTime atTime = super.extractTime(paramArray);

@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
             int taskNumber = Integer.parseInt(commandParams);
             Task selectedTask = taskList.deleteTask(taskNumber);
             super.updateFileStorage(taskList, storage);
-            return String.format(MESSAGE_DELETED_TASK, selectedTask, taskList.getCapacity());
+            return String.format(MESSAGE_DELETED_TASK, selectedTask, taskList.getCurrentCapacity());
             
         } catch (NumberFormatException exception) {
             throw new KayuException(String.format(ERROR_NOT_AN_INT_PARAM, commandParams));

@@ -1,5 +1,5 @@
 import javafx.application.Application;
-import kayu.Launcher;
+import kayu.KayuInterface;
 
 /**
  * Drives the whole program.
@@ -7,11 +7,11 @@ import kayu.Launcher;
 public class Main {
 
     /**
-     * Driver function for main logic using {@link kayu.Kayu} and JavaFX through {@link kayu.Launcher}.
+     * Driver function for main logic using {@link kayu.Kayu} and JavaFX through {@link KayuInterface}.
      *
      * @param args Command line arguments fed.
      */
     public static void main(String[] args) {
-        Application.launch(Launcher.class, args);
+        Application.launch(KayuInterface.class, args);
     }
 }

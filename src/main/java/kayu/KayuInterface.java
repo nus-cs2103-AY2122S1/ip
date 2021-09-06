@@ -13,13 +13,13 @@ import javafx.stage.Stage;
 /**
  * Represents and renders the GUI for Kayu using FXML.
  */
-public class Launcher extends Application {
+public class KayuInterface extends Application {
 
+    public static final String ASSERT_FAIL_ABSENT_IMAGE = "Image path '%s' not present/valid.";
+    
     // Resource paths (starting from /src/main/java/resources).
     private static final String ICON_PATH = "/images/icon.png";
     private static final String FXML_PATH = "/view/MainWindow.fxml";
-    
-    private static final String ASSERT_FAIL_ABSENT_IMAGE = "Image path not present/valid.";
     
     /**
      * Starts the Kayu UI window.
@@ -42,14 +42,14 @@ public class Launcher extends Application {
     
     private void setIconToStage(Stage stage) {
         InputStream iconImageStream = this.getClass().getResourceAsStream(ICON_PATH);
-        assert (iconImageStream != null) : ASSERT_FAIL_ABSENT_IMAGE;
+        assert (iconImageStream != null) : String.format(ASSERT_FAIL_ABSENT_IMAGE, ICON_PATH);
         
         Image icon = new Image(iconImageStream);
         stage.getIcons().add(icon);
     }
     
     private AnchorPane loadMainWindow() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource(FXML_PATH));
+        FXMLLoader fxmlLoader = new FXMLLoader(KayuInterface.class.getResource(FXML_PATH));
         return fxmlLoader.load();
     }
     

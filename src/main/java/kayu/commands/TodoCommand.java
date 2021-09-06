@@ -4,7 +4,6 @@ import static kayu.commands.CommandMessage.MESSAGE_CREATED_TODO;
 
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
-import kayu.parser.DateTimeFormat;
 import kayu.service.TaskList;
 import kayu.storage.Storage;
 import kayu.task.Task;
@@ -23,10 +22,9 @@ public class TodoCommand extends AddTaskCommand {
      * Initializes a Todo- {@link kayu.commands.AddTaskCommand}.
      *
      * @param commandParams String parameters fed into the command by user.
-     * @param dateTimeFormat {@link kayu.parser.DateTimeFormat} used in parsing, if required.
      */
-    public TodoCommand(String commandParams, DateTimeFormat dateTimeFormat) {
-        super(commandParams, dateTimeFormat);
+    public TodoCommand(String commandParams) {
+        super(commandParams);
     }
 
     /**
@@ -34,14 +32,23 @@ public class TodoCommand extends AddTaskCommand {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws KayuException, StorageException {
-        String desc = extractDesc();
-        Task todo = new Todo(desc);
+        Task todo = createTask();
         super.updateTasks(taskList, storage, todo);
         
-        return String.format(MESSAGE_CREATED_TODO, todo, taskList.getCapacity());
+        return String.format(MESSAGE_CREATED_TODO, todo, taskList.getCurrentCapacity());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Task createTask() throws KayuException {
+        String desc = extractDesc(commandParams);
+        return new Todo(desc);
     }
     
-    private String extractDesc() throws KayuException {
-        return super.extractDesc(new String[] {commandParams}, COMMAND_WORD);
+    // call on wrapper method in super class
+    protected String extractDesc(String params) throws KayuException {
+        return super.extractDesc(new String[] {params}, COMMAND_WORD);
     }
 }

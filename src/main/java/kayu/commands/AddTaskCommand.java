@@ -1,5 +1,7 @@
 package kayu.commands;
 
+import static kayu.commands.CommandMessage.ASSERT_FAIL_INCOMPLETE_PARAMS;
+import static kayu.commands.CommandMessage.ASSERT_FAIL_NULL_TASK;
 import static kayu.commands.CommandMessage.ERROR_EMPTY_PARAMS;
 import static kayu.commands.CommandMessage.ERROR_IMPROPER_DATE;
 import static kayu.commands.CommandMessage.ERROR_IMPROPER_FORMATTING;
@@ -24,40 +26,57 @@ import kayu.task.Task;
  */
 public abstract class AddTaskCommand extends Command {
 
-    private static final String ASSERT_FAIL_INCOMPLETE_PARAMS = "Parameters extracted are not complete.";
-    
-    private final DateTimeFormat dateTimeFormat;
+    private static final DateTimeFormat DATE_TIME_FORMAT = DateTimeFormat.generateInstance();
 
     /**
      * Initializes an AddTaskCommand instance.
      *
      * @param commandParams String parameters fed into the command by user.
-     * @param dateTimeFormat {@link kayu.parser.DateTimeFormat} used in parsing, if required.
      */
-    public AddTaskCommand(String commandParams, DateTimeFormat dateTimeFormat) {
+    public AddTaskCommand(String commandParams) {
         super(commandParams);
-        this.dateTimeFormat = dateTimeFormat;
     }
-    
+
+    /**
+     * Creates new {@link kayu.task.Task} instance based on the parameters fed
+     * to the {@link kayu.commands.Command} instance.
+     *
+     * @return New {@link kayu.task.Task} instance.
+     * @throws KayuException If creation of {@link kayu.task.Task} instance is unsuccessful.
+     */
+    public abstract Task createTask() throws KayuException;
+
+    /**
+     * Updates {@link kayu.service.TaskList} and saves new {@link kayu.task.Task} to file
+     * using {@link kayu.storage.Storage}.
+     *
+     * @param taskList {@link kayu.service.TaskList} to save {@link kayu.task.Task} instance to.
+     * @param storage {@link kayu.storage.Storage} to update to file.
+     * @param task {@link kayu.task.Task} instance to save.
+     * @throws StorageException If saving {@link kayu.storage.Storage} is unsuccessful.
+     */
+    public void updateTasks(TaskList taskList, Storage storage, Task task) throws StorageException {
+        assert (task != null) : ASSERT_FAIL_NULL_TASK;
+        taskList.addTask(task);
+        updateFileStorage(taskList, storage);
+    }
+
     protected String[] splitUserParams(String userParams, String commandName, String splitKey)
             throws KayuException {
-        
+
         try {
             String[] splitOnKey = userParams.split(" /" + splitKey + ' ', 2);
             String[] dateTime = splitOnKey[1].split(" ", 2);
             return new String[] {splitOnKey[0], dateTime[0], dateTime[1]};
-            
+
         } catch (ArrayIndexOutOfBoundsException exception) {
-            throw new KayuException(String.format(
-                    ERROR_IMPROPER_FORMATTING,
-                    commandName,
-                    splitKey));
+            throw new KayuException(String.format(ERROR_IMPROPER_FORMATTING, commandName, splitKey));
         }
     }
 
     protected String extractDesc(String[] paramArray, String commandName) throws KayuException {
         assert (paramArray.length >= 1) : ASSERT_FAIL_INCOMPLETE_PARAMS;
-        
+
         String desc = paramArray[0].trim();
         if (desc.isBlank()) {
             throw new KayuException(String.format(ERROR_EMPTY_PARAMS, commandName));
@@ -67,10 +86,10 @@ public abstract class AddTaskCommand extends Command {
 
     protected LocalDate extractDate(String[] paramArray) throws KayuException {
         assert (paramArray.length == 3) : ASSERT_FAIL_INCOMPLETE_PARAMS;
-        
+
         String dateString = paramArray[1].trim();
-        List<DateTimeFormatter> dateFormatterList = dateTimeFormat.getDateFormats();
-        
+        List<DateTimeFormatter> dateFormatterList = DATE_TIME_FORMAT.getDateFormats();
+
         for (DateTimeFormatter formatter: dateFormatterList) {
             try {
                 return LocalDate.parse(dateString, formatter);
@@ -83,10 +102,10 @@ public abstract class AddTaskCommand extends Command {
 
     protected LocalTime extractTime(String[] paramArray) throws KayuException {
         assert (paramArray.length == 3) : ASSERT_FAIL_INCOMPLETE_PARAMS;
-        
+
         String timeString = paramArray[2].trim().toUpperCase();
-        List<DateTimeFormatter> timeFormatterList = dateTimeFormat.getTimeFormats();
-        
+        List<DateTimeFormatter> timeFormatterList = DATE_TIME_FORMAT.getTimeFormats();
+
         for (DateTimeFormatter formatter: timeFormatterList) {
             try {
                 return LocalTime.parse(timeString, formatter);
@@ -95,10 +114,5 @@ public abstract class AddTaskCommand extends Command {
             }
         }
         throw new KayuException(ERROR_IMPROPER_TIME);
-    }
-
-    protected void updateTasks(TaskList taskList, Storage storage, Task task) throws KayuException, StorageException {
-        taskList.addTask(task);
-        super.updateFileStorage(taskList, storage);
     }
 }

@@ -1,5 +1,7 @@
 package kayu.ui;
 
+import static kayu.KayuInterface.ASSERT_FAIL_ABSENT_IMAGE;
+
 import java.io.InputStream;
 
 import javafx.fxml.FXML;
@@ -19,8 +21,6 @@ public class MainWindow extends AnchorPane {
     // Image paths (starting from /src/main/java/resources).
     private static final String KAYU_IMAGE_PATH = "/images/duke.png";
     private static final String USER_IMAGE_PATH = "/images/user.png";
-
-    private static final String ASSERT_FAIL_ABSENT_IMAGE = "Image path not present/valid.";
     
     @FXML
     private ScrollPane scrollPane;
@@ -56,8 +56,8 @@ public class MainWindow extends AnchorPane {
         InputStream kayuImageStream = this.getClass().getResourceAsStream(KAYU_IMAGE_PATH);
         InputStream userImageStream = this.getClass().getResourceAsStream(USER_IMAGE_PATH);
         
-        assert (kayuImageStream != null) : ASSERT_FAIL_ABSENT_IMAGE;
-        assert (userImageStream != null) : ASSERT_FAIL_ABSENT_IMAGE;
+        assert (kayuImageStream != null) : String.format(ASSERT_FAIL_ABSENT_IMAGE, KAYU_IMAGE_PATH);
+        assert (userImageStream != null) : String.format(ASSERT_FAIL_ABSENT_IMAGE, USER_IMAGE_PATH);
 
         kayuImage = new Image(kayuImageStream);
         userImage = new Image(userImageStream);

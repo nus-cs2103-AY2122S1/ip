@@ -8,7 +8,6 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import kayu.exception.KayuException;
-import kayu.exception.StorageException;
 import kayu.task.Task;
 
 /**
@@ -17,11 +16,10 @@ import kayu.task.Task;
 public class TaskList {
 
     // Error message formats.
-    protected static final String INVALID_TASK_ERROR_MESSAGE = "Task number '%d' is invalid.";
-    protected static final String FULL_CAPACITY_ERROR_MESSAGE = "Unable to execute as list is full.";
-    protected static final String EMPTY_LIST_ERROR_MESSAGE = "Unable to execute as list is empty.";
-
-    protected static final int MAX_STORAGE = 100;
+    protected static final String ERROR_INVALID_TASK = "Task number '%d' is invalid.";
+    protected static final String ERROR_EMPTY_LIST = "Unable to execute as list is empty.";
+    protected static final String ERROR_TASK_ALREADY_DONE = "Task number '%d' is already done.";
+    
     private final List<Task> tasks = new ArrayList<>();
 
     /**
@@ -37,12 +35,8 @@ public class TaskList {
      * Initializes the {@link #tasks} list with the specified {@link kayu.task.Task} list.
      *
      * @param taskList List of {@link kayu.task.Task} to initialise {@link #tasks} with.
-     * @throws StorageException If size of <code>#taskList</code> is larger than {@link #MAX_STORAGE}.
      */
-    public void initializeTasks(List<Task> taskList) throws StorageException {
-        if (taskList.size() > MAX_STORAGE) {
-            throw new StorageException(FULL_CAPACITY_ERROR_MESSAGE);
-        }
+    public void initializeTasks(List<Task> taskList) {
         this.tasks.clear();
         this.tasks.addAll(taskList);
     }
@@ -52,7 +46,7 @@ public class TaskList {
      *
      * @return Number of tasks stored currently.
      */
-    public int getCapacity() {
+    public int getCurrentCapacity() {
         return tasks.size();
     }
 
@@ -61,13 +55,8 @@ public class TaskList {
      * Returns saved {@link kayu.task.Task}.
      *
      * @param newTask {@link kayu.task.Task} to save.
-     * @throws KayuException If {@link kayu.task.Task} cannot be saved or
-     * due to full capacity of {@link #tasks} list.
      */
-    public void addTask(Task newTask) throws KayuException {
-        if (tasks.size() >= MAX_STORAGE) {
-            throw new KayuException(FULL_CAPACITY_ERROR_MESSAGE);
-        }
+    public void addTask(Task newTask) {
         tasks.add(newTask);
     }
 
@@ -81,6 +70,9 @@ public class TaskList {
      */
     public Task updateTaskAsDone(int taskNumber) throws KayuException {
         Task selectedTask = getTaskByNumber(taskNumber);
+        if (selectedTask.isDone()) {
+            throw new KayuException(String.format(ERROR_TASK_ALREADY_DONE, taskNumber));
+        }
         selectedTask.markAsDone();
         return selectedTask;
     }
@@ -109,10 +101,10 @@ public class TaskList {
      */
     private Task getTaskByNumber(int taskNumber) throws KayuException {
         if (tasks.isEmpty()) {
-            throw new KayuException(EMPTY_LIST_ERROR_MESSAGE);
+            throw new KayuException(ERROR_EMPTY_LIST);
         }
         if (taskNumber <= 0 || tasks.size() < taskNumber) {
-            throw new KayuException(String.format(INVALID_TASK_ERROR_MESSAGE, taskNumber));
+            throw new KayuException(String.format(ERROR_INVALID_TASK, taskNumber));
         }
         return tasks.get(taskNumber - 1); // shift to 0-indexing
     }

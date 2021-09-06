@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
-import kayu.parser.DateTimeFormat;
 import kayu.service.TaskList;
 import kayu.storage.Storage;
 import kayu.task.Event;
@@ -31,7 +30,6 @@ public class EventCommandTest {
     private static final String FILE_PATH = RESOURCE_PATH + "/storage_test_blank.txt";
     
     private TaskList taskList;
-    private DateTimeFormat dateTimeFormat;
     private Storage storage;
     
     @BeforeAll
@@ -58,7 +56,6 @@ public class EventCommandTest {
     @BeforeEach
     public void setUp() {
         taskList = new TaskList();
-        dateTimeFormat = DateTimeFormat.generateInstance();
         storage = new Storage();
         storage.setDirectoryAndFilePath(FILE_PATH);
     }
@@ -74,7 +71,7 @@ public class EventCommandTest {
         String time = TIME_LIST.get(0);
         String desc = "meeting with friends";
         String parameters = desc + " /at " + date + ' ' + time;
-        Command eventCommand = new EventCommand(parameters, dateTimeFormat);
+        Command eventCommand = new EventCommand(parameters);
         Task expectedTask = new Event(
                 "meeting with friends",
                 LocalDate.parse(DATE_LIST.get(0)),
@@ -104,7 +101,7 @@ public class EventCommandTest {
         for (int idx = 0; idx < DATE_LIST.size(); idx++) {
             try {
                 String parameters = String.format(paramFormat, DATE_LIST.get(idx));
-                Command eventCommand = new EventCommand(parameters, dateTimeFormat);
+                Command eventCommand = new EventCommand(parameters);
                 String feedback = eventCommand.execute(taskList, storage);
                 
                 String expectedFeedback = String.format(MESSAGE_CREATED_EVENT, expectedTask, idx + 1);
@@ -130,7 +127,7 @@ public class EventCommandTest {
         for (int idx = 0; idx < TIME_LIST.size(); idx++) {
             try {
                 String parameters = String.format(paramFormat, TIME_LIST.get(idx));
-                Command eventCommand = new EventCommand(parameters, dateTimeFormat);
+                Command eventCommand = new EventCommand(parameters);
                 String feedback = eventCommand.execute(taskList, storage);
 
                 String expectedFeedback = String.format(MESSAGE_CREATED_EVENT, expectedTask, idx + 1);
@@ -146,7 +143,7 @@ public class EventCommandTest {
     @Test
     public void execute_invalidDateFormat_throwsException() throws StorageException {
         String parameters = "meeting with friends /at 20.10.2021 13:45";
-        Command eventCommand = new EventCommand(parameters, dateTimeFormat);
+        Command eventCommand = new EventCommand(parameters);
 
         try {
             eventCommand.execute(taskList, storage);
@@ -160,7 +157,7 @@ public class EventCommandTest {
     @Test
     public void execute_invalidParamFormat_throwsException() throws StorageException {
         String parameters = "meeting with friends /at 13:45";
-        Command eventCommand = new EventCommand(parameters, dateTimeFormat);
+        Command eventCommand = new EventCommand(parameters);
 
         try {
             eventCommand.execute(taskList, storage);

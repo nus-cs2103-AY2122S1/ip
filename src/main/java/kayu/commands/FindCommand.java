@@ -3,6 +3,7 @@ package kayu.commands;
 import static kayu.commands.CommandMessage.ERROR_EMPTY_PARAMS;
 import static kayu.commands.CommandMessage.MESSAGE_MATCHING_CONTENTS;
 import static kayu.commands.CommandMessage.MESSAGE_NO_MATCHING_CONTENTS;
+import static kayu.commands.CommandMessage.MESSAGE_TASK_FORMAT;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -51,12 +52,24 @@ public class FindCommand extends Command {
         return keyword.split(" ");
     }
 
+    // generate parameter string '{}, {}, {} ...'
     private String generateFormattedParameters(String... keywords) {
         return String.join(", ", keywords);
     }
+
+    private String generateResponse(String params, Map<Integer, Task> taskMap) {
+        if (taskMap.isEmpty()) {
+            return String.format(MESSAGE_NO_MATCHING_CONTENTS, params);
+        }
+
+        String header = String.format(MESSAGE_MATCHING_CONTENTS, params);
+        String body = generateFormattedTaskListResponse(taskMap);
+        return header.concat(body);
+    }
     
     private String generateFormattedTaskListResponse(Map<Integer, Task> taskMap) {
-        return taskMap.entrySet().stream()
+        return taskMap.entrySet()
+                .stream()
                 .map(this::convertToTaskString)
                 .collect(Collectors.joining("\n"));
     }
@@ -64,16 +77,6 @@ public class FindCommand extends Command {
     private String convertToTaskString(Map.Entry<Integer, Task> entry) {
         int number = entry.getKey() + 1; // for 1-indexing
         String taskAsString = entry.getValue().toString();
-        return String.format("%d. %s", number, taskAsString);
-    }
-    
-    private String generateResponse(String params, Map<Integer, Task> taskMap) {
-        if (taskMap.isEmpty()) {
-            return String.format(MESSAGE_NO_MATCHING_CONTENTS, params);
-        }
-        
-        String header = String.format(MESSAGE_MATCHING_CONTENTS, params);
-        String body = generateFormattedTaskListResponse(taskMap);
-        return header.concat(body);
+        return String.format(MESSAGE_TASK_FORMAT, number, taskAsString);
     }
 }

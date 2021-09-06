@@ -2,6 +2,7 @@ package kayu.commands;
 
 import static kayu.commands.CommandMessage.MESSAGE_EMPTY_LIST;
 import static kayu.commands.CommandMessage.MESSAGE_LIST_CONTENTS;
+import static kayu.commands.CommandMessage.MESSAGE_TASK_FORMAT;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,10 +47,16 @@ public class ListCommand extends Command {
         
         String stringedTasks = IntStream.range(0, tasks.size())
                 .boxed()
-                .map(idx -> String.format("%d. %s", idx + 1, tasks.get(idx)))
+                .map(idx -> convertToTaskString(idx, tasks))
                 .collect(Collectors.joining("\n"));
         
         tasksAsString.append(stringedTasks);
         return tasksAsString.toString();
+    }
+
+    private String convertToTaskString(int idx, List<Task> tasks) {
+        Task task = tasks.get(idx);
+        int number = idx + 1;
+        return String.format(MESSAGE_TASK_FORMAT, number, task);
     }
 }

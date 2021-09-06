@@ -27,6 +27,6 @@ public class DeadlineTest {
 
     @Test
     public void testStringConversion() {
-        assertEquals("[D][ ] mock tests\n     (by: 2020-09-14 12:30)", deadline.toString());
+        assertEquals("[D][ ] mock tests\n   (by: 2020-09-14 12:30)", deadline.toString());
     }
 }

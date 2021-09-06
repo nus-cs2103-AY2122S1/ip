@@ -18,8 +18,6 @@ import kayu.commands.TodoCommand;
  */
 public class Parser {
 
-    private final DateTimeFormat dateTimeFormat = DateTimeFormat.generateInstance();
-
     /**
      * Parses user input into executable {@link kayu.commands.Command}s.
      *
@@ -56,15 +54,15 @@ public class Parser {
                 
             case TodoCommand.COMMAND_WORD:
                 params = inputs[1];
-                return new TodoCommand(params, dateTimeFormat);
+                return new TodoCommand(params);
                 
             case EventCommand.COMMAND_WORD:
                 params = inputs[1];
-                return new EventCommand(params, dateTimeFormat);
+                return new EventCommand(params);
                 
             case DeadlineCommand.COMMAND_WORD:
                 params = inputs[1];
-                return new DeadlineCommand(params, dateTimeFormat);
+                return new DeadlineCommand(params);
                                 
             default:
                 return (userInput.isBlank()) ? new EmptyCommand() : new InvalidCommand();

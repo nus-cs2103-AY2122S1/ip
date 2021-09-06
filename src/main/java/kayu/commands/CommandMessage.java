@@ -6,6 +6,7 @@ package kayu.commands;
 public class CommandMessage {
 
     // Message formats.
+    protected static final String MESSAGE_TASK_FORMAT = "%d. %s"; // number, and task as string
     protected static final String MESSAGE_EMPTY_LIST = "List is empty, try adding some tasks first.";
     protected static final String MESSAGE_TASK_DONE = "Nice! I've marked this task as done:\n  %s";
     protected static final String MESSAGE_LIST_CONTENTS = "Here are the task(s) in your list:\n";
@@ -34,4 +35,6 @@ public class CommandMessage {
     
     // Assertion format.
     protected static final String ASSERT_FAIL_NULL_PARAMS = "Parameter String should not be null.";
+    protected static final String ASSERT_FAIL_INCOMPLETE_PARAMS = "Parameters extracted are not complete.";
+    protected static final String ASSERT_FAIL_NULL_TASK = "Task to update should not be null.";
 }
