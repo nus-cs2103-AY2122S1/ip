@@ -18,7 +18,7 @@ public class TaskListTest {
             list.markDone(2);
             fail();
         } catch (BroException e) {
-            assertEquals("Hey, there is no such task!", e.getMessage());
+            assertEquals("Ey bro, no such task lah!", e.getMessage());
         }
     }
 }
