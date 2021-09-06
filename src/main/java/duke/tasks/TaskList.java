@@ -1,18 +1,18 @@
 package duke.tasks;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a list of tasks.
  */
 public final class TaskList {
-    private final static List<String> taskString = new ArrayList<>();
-    private final static List<Tasks> taskList = new ArrayList<>();
+    private static final List<String> taskString = new ArrayList<>();
+    private static final List<Tasks> taskList = new ArrayList<>();
     private static int taskNumber = 1;
-    private final static String LINE = "-----------------------------------------";
+    private static final String LINE = "-----------------------------------------";
 
     /**
      * Adds a task to the list and prints the addition.
@@ -32,7 +32,7 @@ public final class TaskList {
      * Adds a specific task according to the correct class
      * @param task task to be added
      */
-    public static void addSpecificTask(String task){
+    public static void addSpecificTask(String task) {
         if (task.startsWith("deadline")) {
             String[] input = task.split(" /by ", 2);
             LocalDateTime dueTime = LocalDateTime.parse(input[1], DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));

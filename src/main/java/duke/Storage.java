@@ -1,8 +1,11 @@
 package duke;
 
 import duke.tasks.TaskList;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Represents the file containing the list of tasks.
@@ -19,9 +22,9 @@ public class Storage {
     static void writeToFile(String task) throws IOException {
         try {
             Parser.parseTask(task);
-            if (task.startsWith("deadline") ||
-                    (task.startsWith("event") && task.contains("/at ")) ||
-                    (task.startsWith("todo"))) {
+            if (task.startsWith("deadline")
+                    || (task.startsWith("event") && task.contains("/at "))
+                    || (task.startsWith("todo"))) {
                 TaskList.addSpecificTask(task);
                 writer.write(TaskList.getLast().toString() + "\n");
             }
@@ -47,28 +50,28 @@ public class Storage {
             writer = new BufferedWriter(fWriter);
 
             //reading data
-            while((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 String[] curr = new String[4];
-                curr[0] = line.substring(1,2);
-                curr[1] = line.substring(4,5);
+                curr[0] = line.substring(1, 2);
+                curr[1] = line.substring(4, 5);
                 curr[2] = line.substring(7);
                 switch (curr[1]) {
-                    case "T":
-                        TaskList.addSpecificTask("todo " + curr[2]);
-                        if (curr[1].equals("X")) {
-                            TaskList.getLast().markAsDone();
-                        }
-                    case "E":
-                        TaskList.addSpecificTask("event " + curr[2]);
-                        if (curr[1].equals("X")) {
-                            TaskList.getLast().markAsDone();
-                        }
-                    case "D":
-                        TaskList.addSpecificTask("deadline " + curr[2]);
-                        if (curr[1].equals("X")) {
-                            TaskList.getLast().markAsDone();
-                        }
-                    default:
+                case "T":
+                    TaskList.addSpecificTask("todo " + curr[2]);
+                    if (curr[1].equals("X")) {
+                        TaskList.getLast().markAsDone();
+                    }
+                case "E":
+                    TaskList.addSpecificTask("event " + curr[2]);
+                    if (curr[1].equals("X")) {
+                        TaskList.getLast().markAsDone();
+                    }
+                case "D":
+                    TaskList.addSpecificTask("deadline " + curr[2]);
+                    if (curr[1].equals("X")) {
+                        TaskList.getLast().markAsDone();
+                    }
+                default: break;
                 }
                 reader.close();
             }

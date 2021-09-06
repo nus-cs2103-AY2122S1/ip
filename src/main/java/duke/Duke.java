@@ -2,15 +2,20 @@ package duke;
 
 import duke.tasks.TaskList;
 
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * This is a Duke application, which allows for user interaction.
  */
 public class Duke {
-    private final static String LINE = "-----------------------------------------";
+    private static final String LINE = "-----------------------------------------";
 
+    /**
+     * Main method of the application.
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
 
@@ -18,7 +23,7 @@ public class Duke {
         String task = sc.nextLine();
         Storage.readFromFile();
 
-        while(!task.equals("bye")) {
+        while (!task.equals("bye")) {
             try {
                 if (task.equals("list")) {
                     TaskList.printList();
@@ -28,7 +33,7 @@ public class Duke {
                 } else if (task.startsWith("find")) {
                     String[] input = task.split("find ", 2);
                     TaskList.find(input[1]);
-                }else if (task.startsWith("deadline") || task.startsWith("event") || task.startsWith("todo")) {
+                } else if (task.startsWith("deadline") || task.startsWith("event") || task.startsWith("todo")) {
                     Storage.writeToFile(task);
                 } else if (task.startsWith("delete")) {
                     String numString = task.replaceAll("[^0-9]", "");
@@ -38,7 +43,7 @@ public class Duke {
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-            } catch (DukeException e) {
+            } catch (DukeException | IOException e) {
                 System.out.println(e.getMessage());
             }
             task = sc.nextLine();
