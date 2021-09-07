@@ -8,6 +8,7 @@ public class Deadline extends Task {
     protected String by;
 
     /**
+     * Creates a Deadline object
      *
      * @param description takes in a String describing the task description
      * @param by takes in a String representing the deadline of the task

@@ -36,8 +36,8 @@ public class Command {
                 list += listNum + "." + tasks.get(i) + "\n";
                 listNum++;
             }
-            assert listNum == tasks.size():
-                    "listNum and tasks size should be the same";
+            assert listNum == tasks.size()
+                    : "listNum and tasks size should be the same";
             return ui.list(list);
         case "done":
             int doneNum = sc.nextInt() - 1;
@@ -45,8 +45,8 @@ public class Command {
                 tasks.get(doneNum).markAsDone();
                 return ui.done(tasks.get(doneNum));
             } catch (IndexOutOfBoundsException e) {
-                assert doneNum >= tasks.size() && doneNum <= -1 :
-                        "Task number should be out of range";
+                assert doneNum >= tasks.size() && doneNum <= -1
+                        : "Task number should be out of range";
                 return ui.showDoneError();
             }
         case "todo":
@@ -70,8 +70,8 @@ public class Command {
                 save.writeToFile(filePath, tasks);
                 return ui.delete(tasks, delete);
             } catch (IndexOutOfBoundsException e) {
-                assert delNum >= tasks.size() && delNum <= -1 :
-                        "Task number should be out of range";
+                assert delNum >= tasks.size() && delNum <= -1
+                        : "Task number should be out of range";
                 return ui.showDeleteError();
             }
         case "deadline":
@@ -117,6 +117,19 @@ public class Command {
                     }
                 }
                 return ui.find(findList);
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
+        case "doafter":
+            try {
+                String[] afterArr = sc.nextLine().split("/after");
+                if (afterArr[0].strip().isEmpty()) {
+                    throw new DukeException(ui.emptyDescriptionError());
+                }
+                Task doAfter = new DoAfter(afterArr[0].trim(), afterArr[1].trim());
+                tasks.add(doAfter);
+                save.writeToFile(filePath, tasks);
+                return ui.after(tasks, doAfter);
             } catch (DukeException e) {
                 return e.getMessage();
             }

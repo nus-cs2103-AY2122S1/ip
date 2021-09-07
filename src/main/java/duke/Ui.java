@@ -41,7 +41,7 @@ public class Ui {
      * @return a String representing the done task
      */
     public String done(Task t) {
-        return line + "Nice! I've marked this task as done:\n" + t +"\n" + line;
+        return line + "Nice! I've marked this task as done:\n" + t + "\n" + line;
     }
 
     /**
@@ -119,6 +119,18 @@ public class Ui {
      */
     public String event(TaskList tasks, Task event) {
         return line + "Got it. I've added this task:\n" + event
+                + "\nNow you have " + tasks.size() + " tasks in the list.\n" + line;
+    }
+
+    /**
+     * Shows a response when user uses the 'after' command
+     *
+     * @param tasks takes in a TaskList
+     * @param doAfter takes in a Task that user added as DoAfter
+     * @return a String representing the DoAfter task
+     */
+    public String after(TaskList tasks, Task doAfter) {
+        return line + "Got it. I've added this task:\n" + doAfter
                 + "\nNow you have " + tasks.size() + " tasks in the list.\n" + line;
     }
 
