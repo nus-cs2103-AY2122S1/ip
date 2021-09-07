@@ -54,7 +54,9 @@ public class Duke extends Application {
     }
 
     /**
-     * Starts the Duke application with the UI. Writes to the data file after being closed by the user.
+     * Executes the command received by the UI.
+     *
+     * @param cmd The string command entered by the user.
      */
     public void executeCommand(String cmd) {
         try {

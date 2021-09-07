@@ -32,12 +32,12 @@ public class TaskList {
     }
 
     /**
-     * Removes a task by its serial number from the list. Returns the task that was removed.
+     * Deletes a task by its serial number from the list. Returns the task that was removed.
      *
      * @param serialNo The serial number of the task to remove.
      * @return The task that was removed.
      */
-    public Task remove(int serialNo) throws DukeException {
+    public Task delete(int serialNo) throws DukeException {
         if (tasks.isEmpty()) {
             throw new DukeException("Sorry Boss, there is no task to remove.");
         } else if (serialNo < 1 || serialNo > tasks.size()) {
