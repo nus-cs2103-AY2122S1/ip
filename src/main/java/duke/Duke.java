@@ -76,7 +76,6 @@ public class Duke {
                 return "Not a valid command";
             }
         } catch (Exception e) {
-            System.out.println(e);
             return ui.showError(e.getMessage());
         }
     }
