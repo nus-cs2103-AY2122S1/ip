@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.notes.Note;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 import duke.tasks.Deadline;
@@ -39,6 +40,7 @@ public class Storage {
      */
     public ArrayList<Task> load() {
         ArrayList<Task> listOfTasks = new ArrayList<>();
+        ArrayList<Note> listOfNotes = new ArrayList<>();
         try {
             boolean hasDirectory = Files.exists(Paths.get("data"));
             boolean hasFile = Files.exists(Paths.get("data/duke.txt"));
@@ -47,12 +49,32 @@ public class Storage {
             } else if (!hasFile) {
                 createFile();
             }
-            getContent("data/duke.txt", listOfTasks);
+            getData("data/duke.txt", listOfTasks, listOfNotes);
             checkEmptyTasksList(listOfTasks);
         } catch (IOException e) {
             System.out.println("Could not get the contents of the file!");
         } finally {
             return listOfTasks;
+        }
+    }
+
+    public ArrayList<Note> loadNotes() {
+        ArrayList<Task> listOfTasks = new ArrayList<>();
+        ArrayList<Note> listOfNotes = new ArrayList<>();
+        try {
+            boolean hasDirectory = Files.exists(Paths.get("data"));
+            boolean hasFile = Files.exists(Paths.get("data/duke.txt"));
+            if (!hasDirectory) {
+                createDirectory();
+            } else if (!hasFile) {
+                createFile();
+            }
+            getData("data/duke.txt", listOfTasks, listOfNotes);
+            checkEmptyTasksList(listOfTasks);
+        } catch (IOException e) {
+            System.out.println("Could not get the contents of the file!");
+        } finally {
+            return listOfNotes;
         }
     }
 
@@ -97,35 +119,36 @@ public class Storage {
      * @throws FileNotFoundException If file is not found.
      * @throws DukeException1 If there is an error in creating a todo, event, deadline task.
      */
-     private void getContent(String filePath, ArrayList<Task> list) throws FileNotFoundException, DukeException1 {
+     private void getData(String filePath, ArrayList<Task> list, ArrayList<Note> notesList) throws FileNotFoundException, DukeException1 {
         File file = new File(filePath);
         assert file.exists();
         Scanner scanner = new Scanner(file);
         while (scanner.hasNext()) {
             String s = scanner.nextLine();
             try {
-                String typeOfTask = s.split("/")[0];
+                String typeOfData = s.split("/")[0];
                 String indicationOfTaskCompletion = s.split("/")[1];
-                if(typeOfTask.equals("T")) {
+                if(typeOfData.equals("T")) {
                     String todoTask = s.split("/")[2];
                     ToDo todo = new ToDo(todoTask);
                     list.add(todo);
                     todo.getTaskCompletionStatus(indicationOfTaskCompletion);
-                } else if(typeOfTask.equals("D")) {
+                } else if(typeOfData.equals("D")) {
                     String deadlineTask = s.split("/", 4)[2];
                     String completeBy = s.split("/", 4)[3];
                     Deadline deadline = new Deadline(deadlineTask, completeBy);
                     list.add(deadline);
                     deadline.getTaskCompletionStatus(indicationOfTaskCompletion);
-                } else if(typeOfTask.equals("E")) {
+                } else if(typeOfData.equals("E")) {
                     String eventTask = s.split("/", 4)[2];
                     String eventAt = s.split("/", 4)[3];
                     Event event = new Event(eventTask, eventAt);
                     list.add(event);
                     event.getTaskCompletionStatus(indicationOfTaskCompletion);
                 } else {
-                    assert typeOfTask.equals("T") || typeOfTask.equals("E")
-                            || typeOfTask.equals("D");
+                    String noteDescription = s.split("/")[1];
+                    Note note = new Note(noteDescription);
+                    notesList.add(note);
                 }
             } catch (DukeException1 e) {
                 System.out.println(e.getMessage());
@@ -160,6 +183,17 @@ public class Storage {
             write.close();
         }  catch(IOException e) {
             System.out.println("error occurred when appending task to file!");
+        }
+    }
+
+    public void appendToFile(Note note) {
+        try {
+            BufferedWriter write = new BufferedWriter(new FileWriter("data/duke.txt", true));
+            write.append(note.storeNote());
+            write.newLine();
+            write.close();
+        }  catch(IOException e) {
+            System.out.println("error occurred when appending note to file!");
         }
     }
 

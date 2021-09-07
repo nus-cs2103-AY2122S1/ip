@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.notes.NotesList;
 import duke.tasks.TaskList;
 
 /**
@@ -10,6 +11,7 @@ public class Duke {
 
     private Storage storage;
     private TaskList tasks;
+    private NotesList notes;
     private Ui ui;
 
     /**
@@ -21,11 +23,17 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
+        notes = new NotesList(storage.loadNotes());
     }
 
     public String getResponse(String inputFromUser) {
         Command c = Parser.parse(inputFromUser);
-        return c.execute(tasks, ui, storage);
+        if(c.isTaskRelatedCommand()) {
+            return c.execute(tasks, ui, storage);
+        } else {
+            return c.execute(notes, ui, storage);
+        }
+
     }
 
     /**
