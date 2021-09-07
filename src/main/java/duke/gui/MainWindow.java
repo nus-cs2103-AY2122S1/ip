@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -31,6 +33,13 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(Duke.command.welcomeToUser().toString(), dukeImage));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        try {
+            Duke.command.loadSavedTasks();
+        } catch (IOException ioException) {
+            String messageToUser = "Sorry, there is something wrong with the given file. I cannot load" +
+                    "current tasks.";
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(messageToUser, dukeImage));
+        }
     }
 
     /**

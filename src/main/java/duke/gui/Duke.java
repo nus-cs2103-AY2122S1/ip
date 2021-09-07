@@ -34,11 +34,10 @@ public class Duke extends Application {
         }
     }
 
-    private void initialize() {
+    private void initialize() throws IOException{
         TaskList taskList = new TaskList();
         Response response = new Response(taskList);
         Storage storage = new Storage("duke.txt", taskList);
-        command = new Command(taskList, response, storage);
-        command.loadSavedTasks();
+        Duke.command = new Command(taskList, response, storage);
     }
 }

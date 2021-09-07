@@ -22,41 +22,30 @@ public class Storage {
      *
      * @param filePath The path of the input file.
      * @param taskList The TaskList stored tasks' information.
+     * @throws IOException Throws IOException when the program cannot create a new File with given src.
      */
-    public Storage(String filePath, TaskList taskList) {
-        try {
-            this.src = new File(filePath);
-            this.taskList = taskList;
-            if (this.src.createNewFile()) {
-                System.out.println("I have created a new file for you :)");
-            }
-        } catch (IOException e) {
-            System.out.println("I cannot create a new file for you :(");
-        }
+    public Storage(String filePath, TaskList taskList) throws IOException {
+        this.src = new File(filePath);
+        this.taskList = taskList;
+        this.src.createNewFile();
     }
 
     /**
      * Deals with updating the tasks file when taskList is modified.
+     *
+     * @throws IOException Throws IOException when the fileWriter cannot be created with the given src.
      */
-    public void modifyTasks() {
-        try {
-            FileWriter fileWriter = new FileWriter(this.src);
-            fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            FileWriter fileWriter = new FileWriter(this.src, true);
-            for (int i = 0; i < taskList.size(); i++) {
-                fileWriter.write(taskList.get(i).toStoredString());
-                if (i != taskList.size() - 1) {
-                    fileWriter.write("\n");
-                }
+    public void modifyTasks() throws IOException {
+        FileWriter fileWriter = new FileWriter(this.src);
+        fileWriter.close();
+        fileWriter = new FileWriter(this.src, true);
+        for (int i = 0; i < taskList.size(); i++) {
+            fileWriter.write(taskList.getTask(i).toStoredString());
+            if (i != taskList.size() - 1) {
+                fileWriter.write("\n");
             }
-            fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+        fileWriter.close();
     }
 
     /**
@@ -75,54 +64,51 @@ public class Storage {
             char taskType = task.charAt(0);
             char taskDone = task.charAt(4);
             String taskValue = task.substring(8);
-            boolean finished = (taskDone == '1');
+            boolean isFinished = (taskDone == '1');
             Task curTask = new Task("");
             int separatorPosition;
 
             switch (taskType) {
             case 'T':
-                curTask = new Todo(taskValue, finished);
+                curTask = new Todo(taskValue, isFinished);
                 break;
             case 'E':
                 separatorPosition = taskValue.indexOf('|');
                 String eventName = taskValue.substring(0, separatorPosition - 1);
                 String eventTime = taskValue.substring(separatorPosition + 2);
-                curTask = new Event(eventName, finished, eventTime);
+                curTask = new Event(eventName, isFinished, eventTime);
                 break;
             case 'D':
                 separatorPosition = taskValue.indexOf('|');
                 String deadlineName = taskValue.substring(0, separatorPosition - 1);
                 String deadlineTime = taskValue.substring(separatorPosition + 2);
-                curTask = new Deadline(deadlineName, finished, deadlineTime);
+                curTask = new Deadline(deadlineName, isFinished, deadlineTime);
+                break;
             }
-            taskList.add(curTask);
+            taskList.addTask(curTask);
         }
     }
 
     /**
      * Adds new task to the file when it is added to the taskList.
+     *
      * @param task
+     * @throws IOException Throws IOException when FileWriter cannot be created with the given src.
      */
-    public void saveNewTask(Task task) {
-        try {
-            FileWriter fileWriter = new FileWriter(this.src, true);
-            fileWriter.write(task.toStoredString() + "\n");
-            fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void saveNewTask(Task task) throws IOException {
+        FileWriter fileWriter = new FileWriter(this.src, true);
+        fileWriter.write(task.toStoredString() + "\n");
+        fileWriter.close();
     }
 
     /**
      * Loads tasks saved on the src file.
+     *
+     * @throws IOException Throws IOException when Scanner cannot be created with the given src.
      */
-    public void loadSavedTasks() {
-        try {
-            Scanner sc = new Scanner(src);
-            readEvents(sc);
-            sc.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void loadSavedTasks() throws IOException {
+        Scanner sc = new Scanner(src);
+        readEvents(sc);
+        sc.close();
     }
 }

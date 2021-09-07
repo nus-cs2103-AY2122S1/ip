@@ -29,7 +29,7 @@ public class Parser {
      * @return Whether the user want to terminate program.
      */
     public static boolean isBye(String task) {
-        return task.equals(InputTypes.BYE.getValue());
+        return task.equals(InputType.BYE.getValue());
     }
 
     /**
@@ -38,26 +38,24 @@ public class Parser {
      * @param task The input of user.
      * @return the type of the operation that user wants.
      */
-    public static InputTypes judgeType(String task) {
-        InputTypes type;
-        if (task.contains(InputTypes.TODO.getValue())) {
-            type = InputTypes.TODO;
-        } else if (task.contains(InputTypes.DEADLINE.getValue())) {
-            type = InputTypes.DEADLINE;
-        } else if (task.contains(InputTypes.EVENT.getValue())) {
-            type = InputTypes.EVENT;
-        } else if (task.contains(InputTypes.DONE.getValue())) {
-            type = InputTypes.DONE;
-        } else if (task.equals(InputTypes.LIST.getValue())) {
-            type = InputTypes.LIST;
-        } else if (task.contains(InputTypes.DELETE.getValue())) {
-            type = InputTypes.DELETE;
-        } else if (task.contains(InputTypes.FIND.getValue())) {
-            type = InputTypes.FIND;
-        } else if (task.contains(InputTypes.BYE.getValue())) {
-            type = InputTypes.BYE;
-        } else {
-            type = InputTypes.UNKNOWN;
+    public static InputType judgeType(String task) {
+        InputType type = InputType.UNKNOWN;
+        if (task.contains(InputType.TODO.getValue())) {
+            type = InputType.TODO;
+        } else if (task.contains(InputType.DEADLINE.getValue())) {
+            type = InputType.DEADLINE;
+        } else if (task.contains(InputType.EVENT.getValue())) {
+            type = InputType.EVENT;
+        } else if (task.contains(InputType.DONE.getValue())) {
+            type = InputType.DONE;
+        } else if (task.equals(InputType.LIST.getValue())) {
+            type = InputType.LIST;
+        } else if (task.contains(InputType.DELETE.getValue())) {
+            type = InputType.DELETE;
+        } else if (task.contains(InputType.FIND.getValue())) {
+            type = InputType.FIND;
+        } else if (task.contains(InputType.BYE.getValue())) {
+            type = InputType.BYE;
         }
         return type;
     }

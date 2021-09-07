@@ -29,11 +29,11 @@ public class Deadline extends Task {
      * Constructor of Deadline. Including the information whether it's done or not.
      *
      * @param task The name of Deadline.
-     * @param done Whether the task is done or not.
+     * @param isDone Whether the task is done or not.
      * @param taskTime The time of Deadline.
      */
-    public Deadline(String task, boolean done, String taskTime) {
-        super(task, done);
+    public Deadline(String task, boolean isDone, String taskTime) {
+        super(task, isDone);
         String[] dateAndTime = taskTime.split(" ");
         this.deadlineDate = LocalDate.parse(dateAndTime[0]);
         this.deadlineTime = LocalTime.parse(dateAndTime[1]);

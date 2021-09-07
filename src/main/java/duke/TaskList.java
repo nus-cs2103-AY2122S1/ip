@@ -12,9 +12,10 @@ public class TaskList {
 
     /**
      * Adds new task to the task list.
+     *
      * @param task The new task user wants to add to the list.
      */
-    public void add(Task task) {
+    public void addTask(Task task) {
         this.tasks.add(task);
     }
 
@@ -33,7 +34,7 @@ public class TaskList {
      * @param i The number of item that user wants to get.
      * @return The task that user wants to get.
      */
-    public Task get(int i) {
+    public Task getTask(int i) {
         return this.tasks.get(i);
     }
 
@@ -43,7 +44,7 @@ public class TaskList {
      * @param i The number of the task which user wants to remove.
      * @return The removed task.
      */
-    public Task remove(int i) {
+    public Task removeTask(int i) {
         return this.tasks.remove(i);
     }
 }
