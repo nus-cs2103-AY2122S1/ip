@@ -44,6 +44,7 @@ public class CommandExecutor {
      * @throws IOException If there are errors processing the file.
      */
     public String execute(String userCommand) throws DukeExceptions, IOException {
+        assert userCommand != null : "The user command is empty or not passed through properly";
         Parser parser = new Parser(userCommand);
         String cmd = parser.getFirstWord(); // the first word of the command received from the user
 
