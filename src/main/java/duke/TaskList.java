@@ -27,11 +27,17 @@ public class TaskList implements Serializable {
     }
 
     public ArrayList<Task> currList() {
-        return this.taskList;
+        return taskList;
     }
 
+    /**
+     * Returns the number of tasks in the task list.
+     *
+     * @return Size of task list ArrayList.
+     */
     public int size() {
-        return this.taskList.size();
+        assert(taskList.size() >= 0);
+        return taskList.size();
     }
 
     /**
@@ -54,6 +60,8 @@ public class TaskList implements Serializable {
      * @return String representation of the tasks inside the TaskList.
      */
     public String printList() {
+    String printList() {
+        assert(taskList.size() >= 0);
         taskList.forEach((task) -> printItem(task));
         String response = stringList;
         currIndex = 1;

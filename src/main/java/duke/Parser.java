@@ -181,6 +181,7 @@ public class Parser extends Application {
         } catch (InputError e) {
             response = ui.errorMessage(e);
         }
+        assert (response.length() != 0);
         return response;
     }
 
@@ -198,6 +199,7 @@ public class Parser extends Application {
         } catch (InputError e) {
             response = ui.errorMessage(e);
         }
+        assert (response.length() != 0);
         return response;
     }
 
@@ -216,6 +218,7 @@ public class Parser extends Application {
         } catch (InputError e) {
             response = ui.errorMessage(e);
         }
+        assert (response.length() != 0);
         return response;
     }
 
@@ -229,6 +232,7 @@ public class Parser extends Application {
         } catch (InputError e) {
             response = ui.errorMessage(e);
         }
+        assert (response.length() != 0);
         return response;
     }
 
@@ -242,6 +246,7 @@ public class Parser extends Application {
         } catch (InputError e) {
             response = ui.errorMessage(e);
         }
+        assert (response.length() != 0);
         return response;
     }
 
@@ -255,6 +260,7 @@ public class Parser extends Application {
         } catch (InputError e) {
             response = ui.errorMessage(e);
         }
+        assert (response.length() != 0);
         return response;
     }
 
@@ -272,6 +278,7 @@ public class Parser extends Application {
         } catch (InputError e) {
             response = ui.errorMessage(e);
         }
+        assert (response.length() != 0);
         return response;
     }
 
@@ -319,6 +326,7 @@ public class Parser extends Application {
         default:
             response = ui.invalidInput();
         }
+        assert (response.length() != 0);
         return response;
     }
 
