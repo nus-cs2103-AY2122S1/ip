@@ -14,7 +14,7 @@ public class Todo extends Task {
     }
 
     /**
-     * String representation of an todo task.
+     * Gets the string representation of an todo task.
      *
      * @return String representation of a todo task.
      */
@@ -24,7 +24,7 @@ public class Todo extends Task {
     }
 
     /**
-     * String representation of a todo task that is to be saved to storage file.
+     * Gets the string representation of a todo task that is to be saved to storage file.
      *
      * @return String representation that is to be saved.
      */

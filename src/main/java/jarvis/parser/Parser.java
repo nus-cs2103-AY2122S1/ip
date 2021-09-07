@@ -43,10 +43,10 @@ public class Parser {
      * Returns the user input without the command prefix.
      *
      * @param input User input.
-     * @param commandTypeStringLength Length of the command type string.
      * @return A substring without the command prefix.
      */
-    public static String getInputWithoutCommandType(String input, int commandTypeStringLength) {
+    public static String getInputWithoutCommandType(String input) throws UnknownCommandException {
+        int commandTypeStringLength = Parser.getCommandTypeFromInput(input).getCommandTypeStringLength();
         return input.trim().substring(commandTypeStringLength);
     }
 
@@ -87,6 +87,7 @@ public class Parser {
      * @return The task index.
      */
     public static int getTaskIndex(String userInputWithoutCommandTrigger) {
+        // The list shown to user is one indexed
         return Integer.parseInt(userInputWithoutCommandTrigger.trim()) - 1;
     }
 }

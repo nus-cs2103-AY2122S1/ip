@@ -18,7 +18,7 @@ public class Event extends Task {
     }
 
     /**
-     * String representation of an event task.
+     * Gets the string representation of an event task.
      *
      * @return String representation of an event task.
      */
@@ -28,7 +28,7 @@ public class Event extends Task {
     }
 
     /**
-     * String representation of an event task that is to be saved to storage file.
+     * Gets the string representation of an event task that is to be saved to storage file.
      *
      * @return String representation that is to be saved.
      */

@@ -1,6 +1,7 @@
 package jarvis.command;
 
 import jarvis.exception.JarvisException;
+import jarvis.exception.UnknownCommandException;
 import jarvis.message.OutputMessage;
 import jarvis.parser.Parser;
 import jarvis.storage.Storage;
@@ -21,8 +22,7 @@ public abstract class Command {
      */
     public static Command createCommand(String userInput) throws JarvisException {
         CommandTypeEnum commandType = Parser.getCommandTypeFromInput(userInput);
-        String userInputWithoutCommandPrefix = Parser.getInputWithoutCommandType(userInput,
-                commandType.getCommandTypeStringLength());
+        String userInputWithoutCommandPrefix = Parser.getInputWithoutCommandType(userInput);
 
         switch (commandType) {
         case DEADLINE:
@@ -37,9 +37,10 @@ public abstract class Command {
             return new FindCommand(userInputWithoutCommandPrefix);
         case TODO:
             return new TodoCommand(userInputWithoutCommandPrefix);
-        default:
-            // When command does not match the other commands above, then it must be list command
+        case LIST:
             return new ListCommand();
+        default:
+            throw new UnknownCommandException();
         }
     }
 

@@ -12,6 +12,7 @@ public class OutputMessage {
      * @param message A custom message.
      */
     public OutputMessage(String message) {
+        assert !message.equals(""): "Output message is empty";
         this.message = message;
     }
 
@@ -31,13 +32,6 @@ public class OutputMessage {
      */
     public String getFormattedMessage() {
         return String.format("%s\n", this.getMessage());
-    }
-
-    /**
-     * Shows the message to user.
-     */
-    public void print() {
-        System.out.println(this.getFormattedMessage());
     }
 }
 
