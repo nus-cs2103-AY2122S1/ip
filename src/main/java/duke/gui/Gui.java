@@ -27,6 +27,7 @@ public class Gui {
     private static final float SCROLL_PANE_HEIGHT = 535;
     private static final float USER_INPUT_WIDTH = 325;
     private static final float BUTTON_WIDTH = 55;
+    private static final float EXIT_PAUSE = 2;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -56,7 +57,13 @@ public class Gui {
         return userInput.getText();
     }
 
-    public void setHandleUserInput(EventHandler<? super MouseEvent> mouseEventHandler,
+    /**
+     * Sets the input handlers to be the given EventHandlers.
+     *
+     * @param mouseEventHandler EventHandler to handle when send button is clicked.
+     * @param buttonEventHandler EventHandler to handle when user completes input.
+     */
+    public void setUserInputHandler(EventHandler<? super MouseEvent> mouseEventHandler,
                                    EventHandler<ActionEvent> buttonEventHandler) {
         sendButton.setOnMouseClicked(mouseEventHandler);
         userInput.setOnAction(buttonEventHandler);
@@ -79,15 +86,15 @@ public class Gui {
     }
 
     /**
-     * Closes the window after 1 second.
+     * Closes the window after defined duration.
      */
     public void exit() {
-        PauseTransition delay = new PauseTransition(Duration.seconds(1));
+        PauseTransition delay = new PauseTransition(Duration.seconds(EXIT_PAUSE));
         delay.setOnFinished(e -> Platform.exit());
         delay.play();
     }
 
-    private void formatWindow(Stage stage) {
+    private void formatStage(Stage stage) {
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(ANCHOR_HEIGHT);
@@ -115,7 +122,6 @@ public class Gui {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
         });
-
         userInput.setOnAction((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
@@ -132,9 +138,9 @@ public class Gui {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
-
         userInput = new TextField();
         sendButton = new Button("Send");
+
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
         Scene scene = new Scene(mainLayout);
@@ -142,7 +148,7 @@ public class Gui {
         stage.show();
         mainLayout.setPrefSize(ANCHOR_WIDTH, ANCHOR_HEIGHT);
 
-        formatWindow(stage);
+        formatStage(stage);
         setupFunctionality();
     }
 }
