@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 public class Ui {
 
     /**
@@ -13,18 +11,32 @@ public class Ui {
     }
 
     /**
-     * Initialises the user input.
+     * Displays bye message.
      *
-     * @return User input.
+     * @return String message for the bye sequence.
      */
-    public String startInput() {
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        return input;
-    }
-
     public String byeMessage() {
         return "See ya again later!";
+    }
+
+    /**
+     * Displays the help message for users.
+     *
+     * @return String message containing all the commands.
+     */
+    public String helpMessage() {
+        String helpIntro = "Here are the list of commands you can use!\n\n";
+        String todoHelp = "todo - 'todo <insert task name>'\n\n";
+        String deadlineHelp = "deadline - 'deadline <insert task name> /by <dd/mm/yyyy> <HHmm>'\n\n";
+        String eventHelp = "event - 'event <insert task name> /at <time of event>'\n\n";
+        String doneHelp = "done - 'done <insert task number>'\n\n";
+        String deleteHelp = "delete - 'delete <insert task number'\n\n";
+        String findHelp = "find - 'find <insert search word>'\n\n";
+        String listHelp = "list - Displays the tasks in your list\n\n";
+        String byeHelp = "bye - Exit the program\n\n";
+        String helpHelp = "help - Displays available commands\n\n";
+        return helpIntro + todoHelp + deadlineHelp + eventHelp + doneHelp + deleteHelp + findHelp + listHelp + byeHelp
+                + helpHelp;
     }
 
     /**

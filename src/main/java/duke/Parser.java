@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
+@SuppressWarnings("checkstyle:Regexp")
 public class Parser extends Application {
 
     static final int BYE_LENGTH = 3;
@@ -14,6 +15,7 @@ public class Parser extends Application {
     static final int EVENT_LENGTH = 5;
     static final int DELETE_LENGTH = 6;
     static final int FIND_LENGTH = 4;
+    static final int HELP_LENGTH = 4;
     static final int INVALID_INPUT = 0;
     static final int BYE_INPUT = 1;
     static final int LIST_INPUT = 2;
@@ -23,6 +25,7 @@ public class Parser extends Application {
     static final int EVENT_INPUT = 6;
     static final int DELETE_INPUT = 7;
     static final int FIND_INPUT = 8;
+    static final int HELP_INPUT = 9;
     private final Ui ui;
     private final Storage storage;
     /**
@@ -134,12 +137,32 @@ public class Parser extends Application {
         return isDelete;
     }
 
+    /**
+     * Checks whether user input is a delete command.
+     *
+     * @param str User input.
+     * @return True if delete command. False if not delete command.
+     */
     private boolean findChecker(String str) {
         boolean isFind = false;
         if (str.length() >= FIND_LENGTH) {
             isFind = str.startsWith("find");
         }
         return isFind;
+    }
+
+    /**
+     * Checks whether user input is a delete command.
+     *
+     * @param str User input.
+     * @return True if delete command. False if not delete command.
+     */
+    private boolean helpChecker(String str) {
+        boolean isHelp = false;
+        if (str.length() >= HELP_LENGTH) {
+            isHelp = str.startsWith("help");
+        }
+        return isHelp;
     }
 
     /**
@@ -167,6 +190,8 @@ public class Parser extends Application {
             caseNum = DELETE_INPUT;
         } else if (findChecker(input)) {
             caseNum = FIND_INPUT;
+        } else if (helpChecker(input)) {
+            caseNum = HELP_INPUT;
         }
         return caseNum;
     }
@@ -283,6 +308,17 @@ public class Parser extends Application {
     }
 
     /**
+     * Returns the commands available for user if they need help.
+     *
+     * @return String message including all the commands available.
+     */
+    private String helpInput() {
+        String response;
+        response = ui.helpMessage();
+        return response;
+    }
+
+    /**
      * Handles the logic for different command cases.
      *
      * @param caseNum Case Number of the command.
@@ -322,6 +358,9 @@ public class Parser extends Application {
             break;
         case FIND_INPUT:
             response = findInput(input, taskList);
+            break;
+        case HELP_INPUT:
+            response = helpInput();
             break;
         default:
             response = ui.invalidInput();
