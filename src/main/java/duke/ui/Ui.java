@@ -42,16 +42,6 @@ public class Ui {
     /**
      * Prints out a goodbye message when the bot is exited.
      */
-    public void cliExit() {
-        sc.close();
-        System.out.println("__________________________________");
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("__________________________________");
-    }
-
-    /**
-     * Prints out a goodbye message when the bot is exited.
-     */
     public String exit() {
         sc.close();
         return "Bye. Hope to see you again soon!";

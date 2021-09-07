@@ -20,7 +20,7 @@ import javafx.application.Platform;
 public class Duke {
 
     /** Path to data storage file. */
-    private static final String LOCATION_OF_FILE = "data.txt";
+    private static final String LOCATION_OF_FILE = "data/duke.txt";
 
     /** Handles loading and saving of Tasks. */
     private final Storage storage;
@@ -58,6 +58,7 @@ public class Duke {
     private void run() {
 
         ui.cliGreet();
+
         boolean isExit = false;
         /* user input trimmed to remove unwanted spaces at the front and back of user input
         allows for greater margin of error when typing in commands */
@@ -68,6 +69,7 @@ public class Duke {
             try {
                 Command cmd = parser.handleCommands(input);
                 String response = cmd.execute(tasks, ui, storage);
+                assert response != null : " Duke's response missing";
                 isExit = cmd.isExit();
                 ui.printMessage(response);
             } catch (DukeException e) {
@@ -76,7 +78,6 @@ public class Duke {
                 ui.printMessage(new DataFileChangedException().getMessage());
             }
         }
-        ui.cliExit();
     }
 
     /**
@@ -99,7 +100,9 @@ public class Duke {
             if (isExit) {
                 Platform.exit();
             }
-            return cmd.execute(tasks, ui, storage);
+            String response = cmd.execute(tasks, ui, storage);
+            assert response != null : " Duke's response missing";
+            return response;
         } catch (DukeException e) {
             return e.getMessage();
         } catch (IOException e) {
