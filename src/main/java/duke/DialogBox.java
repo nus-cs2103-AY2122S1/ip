@@ -16,7 +16,6 @@ import java.io.IOException;
 
 public class DialogBox extends HBox{
     private Label text;
-
     @FXML
     private Label dialog;
     @FXML

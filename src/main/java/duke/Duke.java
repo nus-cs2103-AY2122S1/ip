@@ -2,6 +2,7 @@ package duke;
 
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.ToDo;
 
 import java.io.FileNotFoundException;
@@ -22,6 +23,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Duke extends Application {
+
+    enum TaskType{
+        TODO,
+        EVENT,
+        DEADLINE,
+    }
 
     private StorageList SL;
     private static Ui ui;
@@ -155,45 +162,29 @@ public class Duke extends Application {
 
         try {
             if (parser.isDoneCmd(input)) {
-                marking(input);
-                storage.save(SL);
-                return ui.taskDoneConfirmation();
+                return marking(input);
 
             } else if (parser.isValidTodo(input)) {
                 if(input.length() == 4) {
                     throw new DukeException(ui.taskErrorMsg(TASK_TODO));
                 }
-                assert input.substring(6).length() > 0 : "There should be a description";
-
-                ToDo todo = new ToDo(parser.getTodoDescription(input));
-                SL.addTask(todo);
-                storage.save(SL);
-                return ui.taskAddedMsg(todo.toString(), SL.size());
+                return putTaskInList(TaskType.TODO, input);
 
 
             } else if (parser.isValidDeadline(input)) {
                 if (input.length() == 8) {
                     throw new DukeException(ui.taskErrorMsg(TASK_DEADLINE));
                 }
-                assert input.substring(10).length() > 0 : "There should be a description";
 
-                String by = parser.getDeadlineTime(input);
-                Deadline dl = new Deadline(parser.getDeadlineDescription(input), by);
-                SL.addTask(dl);
-                storage.save(SL);
-                return ui.taskAddedMsg(dl.toString(), SL.size());
+                return putTaskInList(TaskType.DEADLINE, input);
+
 
             } else if (parser.isValidEvent(input)) {
                 if (input.length() == 5) {
                     throw new DukeException(ui.taskErrorMsg(TASK_EVENT));
                 }
-                assert input.substring(7).length() > 0 : "There should be a description";
+                return putTaskInList(TaskType.EVENT, input);
 
-                String at = parser.getEventTime(input);
-                Event event = new Event(parser.getEventDescription(input), at);
-                SL.addTask(event);
-                storage.save(SL);
-                return ui.taskAddedMsg(event.toString(), SL.size());
 
             } else if (parser.isDeleteCmd(input)) {
                 if (input.length() == 6) {
@@ -238,29 +229,45 @@ public class Duke extends Application {
         }
     }
 
+    private String putTaskInList(TaskType taskType, String input) throws IOException {
+        Task task = null;
+        switch (taskType) {
+        case TODO:
+            task = new ToDo(parser.getTodoDescription(input));
+            break;
+        case EVENT:
+            String at = parser.getEventTime(input);
+            task = new Event(parser.getEventDescription(input), at);
+            break;
+        case DEADLINE:
+            String by = parser.getDeadlineTime(input);
+            task = new Deadline(parser.getDeadlineDescription(input), by);
+            break;
+        default:
+            // code should not come into here
+            break;
+        }
+        SL.addTask(task);
+        storage.save(SL);
+        return ui.taskAddedMsg(task.toString(), SL.size());
+    }
 
-    /**
-     * Marks tasks as done, and prints out relevant messages.
-     *
-     * @param input The user input to be processed.
-     * @throws DukeException If task index to be marked is not valid.
-     */
-    private void marking(String input) throws DukeException {
-        assert parser.isDoneCmd(input) : "done command not inputted";
-        if (input.length() >= 6) {
-            if (parser.isIntegerToBeMarked(input)) {
-                int taskNum = Integer.parseInt(input.substring(5)) - 1;
-                if (taskNum < SL.size() && taskNum >= 0) {
-                    SL.get(taskNum).markAsDone();
 
-                    assert SL.get(taskNum).isDone() : "this should be marked as done";
 
-                    return;
-                } else {
-                    throw new DukeException(ui.taskErrorMsg(ERROR_OUTOFBOUNDS));
-                }
+    private String marking(String input) throws DukeException, IOException {
+        if (input.length() >= 6 && input.substring(5).matches("[0-9]+")) {
+            int taskNum = parser.getDoneIdx(input);
+            if (parser.hasValidInteger(taskNum, SL.size())) {
+                SL.get(taskNum).markAsDone();
+                ui.taskDoneConfirmation();
+                storage.save(SL);
+                return ui.taskDoneConfirmation();
+            } else {
+                throw new DukeException(ui.taskErrorMsg(ERROR_OUTOFBOUNDS));
+
             }
         }
         throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
+
     }
 }
