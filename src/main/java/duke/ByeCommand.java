@@ -11,9 +11,4 @@ public class ByeCommand extends Command {
     public String run() throws DukeException {
         return "Babai! See you again soon! XD";
     }
-
-    @Override
-    public String undo() {
-        return "Nothing to undo :/";
-    }
 }

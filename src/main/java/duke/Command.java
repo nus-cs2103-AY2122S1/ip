@@ -16,5 +16,4 @@ public abstract class Command {
     }
 
     public abstract String run() throws DukeException;
-    public abstract String undo();
 }

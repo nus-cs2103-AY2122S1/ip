@@ -5,6 +5,7 @@ import duke.exception.InvalidCommandException;
 import javafx.fxml.FXML;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 /**
@@ -15,6 +16,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Command currentCommand;
+    private ArrayList<Command> commandHistory;
 
     /**
      * Constructor of Duke. UI object, storage and tasks are instantiated.
@@ -22,6 +24,7 @@ public class Duke {
      */
     public Duke() {
         storage = new Storage(".\\src\\main\\level-7.txt");
+        commandHistory = new ArrayList<>();
         try {
             tasks = new TaskList(storage.load());
             assert tasks != null: "tasks shouldn't be null here!";
@@ -58,11 +61,12 @@ public class Duke {
             } else if (input.startsWith("todo") || input.startsWith("event") || input.startsWith("deadline")) {
                 command = new AddTaskCommand(tasks, input);
             } else if (input.equals("undo")) {
-                command = new UndoCommand(tasks, currentCommand);
+                command = new UndoCommand(tasks, commandHistory);
             } else {
                 throw new InvalidCommandException();
             }
             currentCommand = command;
+            commandHistory.add(command);
             result += command.run();
             storage.updateFile(tasks);
         } catch (DukeException e) {

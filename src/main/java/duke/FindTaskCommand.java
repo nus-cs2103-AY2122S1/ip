@@ -2,7 +2,7 @@ package duke;
 
 import duke.exception.DukeException;
 
-public class FindTaskCommand extends Command {
+public class FindTaskCommand extends UndoableCommand {
 
     public FindTaskCommand(TaskList tasks, String input) {
         super(tasks, input);

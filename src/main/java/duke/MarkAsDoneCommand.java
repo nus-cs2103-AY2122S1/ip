@@ -3,7 +3,7 @@ package duke;
 import duke.exception.DukeException;
 import duke.exception.OutOfBoundException;
 
-public class MarkAsDoneCommand extends Command {
+public class MarkAsDoneCommand extends UndoableCommand {
     public MarkAsDoneCommand(TaskList tasks, String input) {
         super(tasks, input);
     }

@@ -5,7 +5,7 @@ import duke.exception.EmptyDescriptionException;
 import duke.exception.InvalidDeadlineException;
 import duke.exception.InvalidTaskException;
 
-public class AddTaskCommand extends Command {
+public class AddTaskCommand extends UndoableCommand {
     public AddTaskCommand(TaskList tasks, String input) {
         super(tasks, input);
     }

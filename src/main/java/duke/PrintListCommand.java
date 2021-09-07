@@ -11,9 +11,4 @@ public class PrintListCommand extends Command {
     public String run() {
         return tasks.printList();
     }
-
-    @Override
-    public String undo() {
-        return "Nothing to undo :/";
-    }
 }

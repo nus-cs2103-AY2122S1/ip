@@ -3,7 +3,7 @@ package duke;
 import duke.exception.DukeException;
 import duke.exception.OutOfBoundException;
 
-public class DeleteTaskCommand extends Command {
+public class DeleteTaskCommand extends UndoableCommand {
     private Task deletedTask;
     public DeleteTaskCommand(TaskList tasks, String input) {
         super(tasks, input);
