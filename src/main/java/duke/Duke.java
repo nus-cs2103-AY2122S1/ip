@@ -6,7 +6,6 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import javafx.scene.image.Image;
 
 
 /**
@@ -18,11 +17,8 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     /**
      * Initialises the program
-     *
      */
     public Duke() {
         this.ui = new Ui();
@@ -50,22 +46,4 @@ public class Duke {
         return this.ui;
     }
 
-
-    /**
-     * Runs the program.
-     */
-    public void run() {
-        ui.sayHello();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.printDukeException(e.getMessage());
-            }
-        }
-    }
 }
