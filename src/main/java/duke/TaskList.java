@@ -47,6 +47,7 @@ public class TaskList {
      * @param input The user input.
      * @param storage The Storage object.
      * @param ui The Ui object.
+     * @return A string representing the task completed.
      * @throws DukeException Thrown in the event the Task cannot be accessed.
      */
     public String handleDone(String input, Storage storage, Ui ui) throws DukeException {
@@ -76,6 +77,7 @@ public class TaskList {
      * @param input The user input.
      * @param storage The Storage object.
      * @param ui The Ui object.
+     * @return A string representing the Todo added.
      * @throws DukeException Thrown in the event the user input is wrong.
      */
     public String handleTodo(String input, Storage storage, Ui ui) throws DukeException {
@@ -87,12 +89,12 @@ public class TaskList {
         }
     }
 
-
     /**
      * Adds a Deadline object into the ArrayList.
      * @param input The user input.
      * @param storage The Storage object.
      * @param ui The Ui object.
+     * @return A string representing the Deadline added.
      * @throws DukeException Thrown in the event the user input is wrong.
      */
     public String handleDeadline(String input, Storage storage, Ui ui) throws DukeException {
@@ -105,12 +107,12 @@ public class TaskList {
         }
     }
 
-
     /**
      * Adds an Event object into the ArrayList.
      * @param input The user input.
      * @param storage The Storage object.
      * @param ui The Ui object.
+     * @return A string representing the Event added.
      * @throws DukeException Thrown in the event the user input is wrong.
      */
     public String handleEvent(String input, Storage storage, Ui ui) throws DukeException {
@@ -123,12 +125,12 @@ public class TaskList {
         }
     }
 
-
     /**
      * Deletes a Task object from the ArrayList.
      * @param input The user input.
      * @param storage The Storage object.
      * @param ui The Ui object.
+     * @return A string displaying the task deleted.
      * @throws DukeException Thrown in the event the Task cannot be accessed.
      */
     public String handleDelete(String input, Storage storage, Ui ui) throws DukeException {
@@ -151,6 +153,7 @@ public class TaskList {
      * Finds the Tasks that matches the input from the ArrayList.
      * @param input The user input.
      * @param ui The Ui object.
+     * @return A string displaying the matching list.
      */
     public String handleFind(String input, Ui ui) {
         String keyword = input.substring(5);

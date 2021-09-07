@@ -15,30 +15,29 @@ public class Parser {
     public static String parse(String input, Ui ui, Storage storage, TaskList tasks) {
         if (input.equals("bye")) {
             return ui.exit();
-        } else {
-            try {
-                if (input.equals("list")) {
-                    return ui.displayList(tasks);
-                } else if (input.contains("done")) {
-                    return tasks.handleDone(input, storage, ui);
-                } else if (input.contains("todo")) {
-                    return tasks.handleTodo(input, storage, ui);
-                } else if (input.contains("deadline")) {
-                    return tasks.handleDeadline(input, storage, ui);
-                } else if (input.contains("event")) {
-                    return tasks.handleEvent(input, storage, ui);
-                } else if (input.contains("delete")) {
-                    return tasks.handleDelete(input, storage, ui);
-                } else if (input.contains("find")) {
-                    return tasks.handleFind(input, ui);
-                } else {
-                    System.out.println("can type properly pls?");
-                    return "can type properly pls?";
-                }
-            } catch (DukeException err) {
-                ui.showLoadingError(err);
-            }
-            return "say again?";
         }
+        try {
+            if (input.equals("list")) {
+                return ui.displayList(tasks);
+            } else if (input.contains("done")) {
+                return tasks.handleDone(input, storage, ui);
+            } else if (input.contains("todo")) {
+                return tasks.handleTodo(input, storage, ui);
+            } else if (input.contains("deadline")) {
+                return tasks.handleDeadline(input, storage, ui);
+            } else if (input.contains("event")) {
+                return tasks.handleEvent(input, storage, ui);
+            } else if (input.contains("delete")) {
+                return tasks.handleDelete(input, storage, ui);
+            } else if (input.contains("find")) {
+                return tasks.handleFind(input, ui);
+            } else {
+                System.out.println("can type properly pls?");
+                return "can type properly pls?";
+            }
+        } catch (DukeException err) {
+            ui.showLoadingError(err);
+        }
+        return "say again?";
     }
 }

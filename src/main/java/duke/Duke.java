@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 import javafx.application.Application;
@@ -28,11 +29,11 @@ public class Duke extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/perry.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/doofenshmirtz.jpg"));
+    private final Image user = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/perry.png")));
+    private final Image duke = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/doofenshmirtz.jpg")));
 
     /**
      * Creates Duke ChatBot.
@@ -74,18 +75,26 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        //The container for the content of the chat to scroll.
+        double layoutHeight = 600.0;
+        double layoutWidth = 400.0;
+        double scrollPaneWidth = 385;
+        double scrollPaneHeight = 535;
+        double userInputWidth = 325.0;
+        double sendButtonWidth = 55.0;
+        double anchorValue = 1.0;
+        double scrollPaneVValue = 1.0;
+        double dialogPadding = 10;
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Send");
+        Button sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        scene = new Scene(mainLayout);
+        Scene scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.show();
@@ -93,43 +102,39 @@ public class Duke extends Application {
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(layoutHeight);
+        stage.setMinWidth(layoutWidth);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(layoutWidth, layoutHeight);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(scrollPaneWidth, scrollPaneHeight);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
-        scrollPane.setVvalue(1.0);
+        scrollPane.setVvalue(scrollPaneVValue);
         scrollPane.setFitToWidth(true);
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(userInputWidth);
 
-        sendButton.setPrefWidth(55.0);
+        sendButton.setPrefWidth(sendButtonWidth);
 
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
+        AnchorPane.setTopAnchor(scrollPane, anchorValue);
 
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
+        AnchorPane.setBottomAnchor(sendButton, anchorValue);
+        AnchorPane.setRightAnchor(sendButton, anchorValue);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
+        AnchorPane.setLeftAnchor(userInput , anchorValue);
+        AnchorPane.setBottomAnchor(userInput, anchorValue);
 
         //Step 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
+        sendButton.setOnMouseClicked((event) -> handleUserInput());
 
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+        userInput.setOnAction((event) -> handleUserInput());
 
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-        dialogContainer.setPadding(new Insets(10));
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(scrollPaneVValue));
+        dialogContainer.setPadding(new Insets(dialogPadding));
         Label welcomeMessage = new Label(ui.welcome());
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(welcomeMessage, new ImageView(duke)));
     }
