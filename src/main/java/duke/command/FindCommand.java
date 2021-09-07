@@ -30,7 +30,6 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder response = new StringBuilder("Here are the matching tasks in your list:\n");
         int index = 1;
-
         for (Task task : tasks.getTasks()) {
             String taskString = task.toString();
 

@@ -24,6 +24,7 @@ public class DoneCommand extends Command {
     // Returns a response telling the user that the task has been successfully marked as done.
     private String createResponse(Task task) {
         String prefix = "Nice! I've marked this task as done:\n ";
+
         return String.format("%s%s", prefix, task);
     }
 

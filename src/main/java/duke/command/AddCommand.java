@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.exception.IncompleteDescriptionException;
 import duke.exception.InvalidDateFormatException;
+import duke.exception.MissingArgumentException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -22,7 +23,7 @@ public class AddCommand extends Command{
         TODO, EVENT, DEADLINE
     }
 
-    private static final String errorMessage = "The task description is incomplete!";
+    private static final String errorMessage = "Task description is not found!";
 
     private final boolean hasTaskDate;
     private final TaskType taskType;
@@ -38,22 +39,50 @@ public class AddCommand extends Command{
      * @throws InvalidDateFormatException The exception for handling command with invalid date format.
      */
     public AddCommand(String taskType, String taskFullDetail) throws IncompleteDescriptionException,
-            InvalidDateFormatException {
-        this.taskType = TaskType.valueOf(taskType);
-        this.hasTaskDate = !taskType.equals("TODO");
+            InvalidDateFormatException, MissingArgumentException {
+        this.taskType = TaskType.valueOf(taskType.toUpperCase());
+        this.hasTaskDate = !taskType.equals("todo");
 
         String[] taskDetails = splitDetail(taskFullDetail);
-
         this.taskDescription = getTaskDescription(taskDetails);
         this.taskDate = getTaskDate(taskDetails);
     }
 
-    private String[] splitDetail(String fullDetail) throws IncompleteDescriptionException {
-        String[] details = fullDetail.split(" /by | /at ", 2);
+    // Returns the regex used to split the command.
+    private String getDelimiter() {
+        return taskType.equals(TaskType.EVENT)
+                ? " /at "
+                : taskType.equals(TaskType.DEADLINE)
+                ? " /by "
+                : "";
+    }
+
+    // Returns hint for the possibly missing argument in the command.
+    private static String getHint(TaskType taskType) {
+        switch (taskType) {
+        case TODO:
+            return "some description (eg. borrow book)";
+        case EVENT:
+            return " /at ";
+        case DEADLINE:
+            return " /by ";
+        default:
+            return "miss any argument";
+        }
+    }
+
+    // Returns an array consisting task details and throws exception if fullDetail cannot be split.
+    private String[] splitDetail(String fullDetail) throws MissingArgumentException {
+        String delimiter = getDelimiter();
+        // Splits the full detail into 2 if the task type is not a todo.
+        String[] details = fullDetail.split(delimiter, taskType.equals(TaskType.TODO) ? 1 : 2);
         boolean isShortDescription = details.length < 2;
         if (hasTaskDate && isShortDescription) {
-            throw new IncompleteDescriptionException(errorMessage);
+            String taskTypeString = taskType.toString().toLowerCase();
+            String hint = getHint(taskType);
+            throw new MissingArgumentException(taskTypeString, hint);
         }
+
         return details;
     }
 
@@ -61,7 +90,17 @@ public class AddCommand extends Command{
     private String getTaskDescription(String[] taskDetails) throws IncompleteDescriptionException {
         String description = taskDetails[0];
         identifyAllWhiteSpace(description);
+
         return description;
+    }
+
+    // Parses date string to LocalDate instance, then, returns it.
+    private LocalDate toLocalDate(String dateString) throws InvalidDateFormatException {
+        try {
+            return LocalDate.parse(dateString);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateFormatException(e.getMessage());
+        }
     }
 
     // Returns task date if it is not empty/invalid, else, throws exception.
@@ -72,7 +111,6 @@ public class AddCommand extends Command{
             String taskDateString =  taskDetails[1];
             identifyAllWhiteSpace(taskDateString);
             identifyInvalidDateFormat(taskDateString);
-
             date = toLocalDate(taskDateString);
         }
 
@@ -91,22 +129,12 @@ public class AddCommand extends Command{
     private void identifyInvalidDateFormat(String dateString) throws InvalidDateFormatException {
         boolean isInvalidDateFormat = !dateString.matches("\\d{4}-\\d{2}-\\d{2}");
         String invalidDateFormatMessage = "Please specify the date in yyyy-mm-dd format!";
-
         if (isInvalidDateFormat) {
             throw new InvalidDateFormatException(invalidDateFormatMessage);
         }
     }
 
-    // Parses date string to LocalDate instance, then, returns it.
-    private LocalDate toLocalDate(String dateString) throws InvalidDateFormatException {
-        try {
-            return LocalDate.parse(dateString);
-        } catch (DateTimeParseException e) {
-            throw new InvalidDateFormatException(e.getMessage());
-        }
-    }
-
-    // Returns a task instance according to the type with specified description and date, if any.
+    // Returns a task instance according to the type, description and date, if any.
     private Task createTask() {
         switch (taskType) {
         case TODO:
