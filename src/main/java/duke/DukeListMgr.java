@@ -32,48 +32,13 @@ public class DukeListMgr {
 
         switch (currTaskType) {
         case TODO:
-            String todoContents = "";
-            try {
-                todoContents = str.substring(5);
-            } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeExceptionBase("The description of your todo cannot be empty.");
-            }
-
-            createdTask = new ToDosTask(todoContents);
-
+            createdTask = processTodoTask(str);
             break;
         case EVENT:
-            indexOfSlash = str.indexOf("/at");
-            if (indexOfSlash == -1) {
-                throw new DukeExceptionBase("Your Event task needs a '/at' description.");
-            }
-
-            String eventTaskName = str.substring(6, indexOfSlash);
-            String eventAtWhere = "";
-            try {
-                eventAtWhere = str.substring(indexOfSlash + 4);
-            } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeExceptionBase("Adding a event description is required.");
-            }
-
-            createdTask = new EventTask(eventTaskName, eventAtWhere);
+            createdTask = processEventTask(str);
             break;
         case DEADLINE:
-            indexOfSlash = str.indexOf("/by");
-            if (indexOfSlash == -1) {
-                throw new DukeExceptionBase("Your Deadline task needs a '/by' description.");
-            }
-
-            String deadlineTaskName = str.substring(9, indexOfSlash);
-            String deadlineByWhen;
-
-            try {
-                deadlineByWhen = str.substring(indexOfSlash + 4);
-            } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeExceptionBase("Adding a deadline description is required.");
-            }
-
-            createdTask = new DeadlineTask(deadlineTaskName, deadlineByWhen);
+            createdTask = processDeadlineTask(str);
             break;
         default:
             throw new DukeExceptionBase("Wrong type of task input to tdlAdd.");
@@ -82,13 +47,64 @@ public class DukeListMgr {
         toDoList.add(createdTask);
         this.triggerSaveTasks();
 
-
         Duke.dukeSays("Ok, I have added this task: \n" + createdTask.getLineOfTaskInfo()
             + "\nCurrent total amount of tasks in list: " + toDoList.size());
 
-
     }
 
+    private static BaseTask processDeadlineTask(String str) throws DukeExceptionBase {
+        int indexOfSlash;
+        BaseTask createdTask;
+        indexOfSlash = str.indexOf("/by");
+        if (indexOfSlash == -1) {
+            throw new DukeExceptionBase("Your Deadline task needs a '/by' description.");
+        }
+
+        String deadlineTaskName = str.substring(9, indexOfSlash);
+        String deadlineByWhen;
+
+        try {
+            deadlineByWhen = str.substring(indexOfSlash + 4);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeExceptionBase("Adding a deadline description is required.");
+        }
+
+        createdTask = new DeadlineTask(deadlineTaskName, deadlineByWhen);
+        return createdTask;
+    }
+
+    private static BaseTask processEventTask(String str) throws DukeExceptionBase {
+        int indexOfSlash;
+        BaseTask createdTask;
+        indexOfSlash = str.indexOf("/at");
+        if (indexOfSlash == -1) {
+            throw new DukeExceptionBase("Your Event task needs a '/at' description.");
+        }
+
+        String eventTaskName = str.substring(6, indexOfSlash);
+        String eventAtWhere = "";
+        try {
+            eventAtWhere = str.substring(indexOfSlash + 4);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeExceptionBase("Adding a event description is required.");
+        }
+
+        createdTask = new EventTask(eventTaskName, eventAtWhere);
+        return createdTask;
+    }
+
+    private static BaseTask processTodoTask(String str) throws DukeExceptionBase {
+        BaseTask createdTask;
+        String todoContents = "";
+        try {
+            todoContents = str.substring(5);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeExceptionBase("The description of your todo cannot be empty.");
+        }
+
+        createdTask = new ToDosTask(todoContents);
+        return createdTask;
+    }
 
 
     /**
@@ -104,15 +120,15 @@ public class DukeListMgr {
         //the task's index in the list
         int taskIndex = taskNo - 1;
 
-        if (taskIndex >= 0 && taskIndex < toDoList.size()) {
-            BaseTask currTask = toDoList.get(taskIndex);
-            currTask.setAsDone();
-            this.triggerSaveTasks();
-
-            return "Nice! I've marked this task as done:\n" + currTask.getLineOfTaskInfo();
-        } else {
+        if (!(taskIndex >= 0 && taskIndex < toDoList.size())) {
             throw new DukeExceptionBase("Invalid Task Specified");
         }
+
+        BaseTask currTask = toDoList.get(taskIndex);
+        currTask.setAsDone();
+        this.triggerSaveTasks();
+
+        return "Nice! I've marked this task as done:\n" + currTask.getLineOfTaskInfo();
     }
 
     /**
@@ -126,16 +142,16 @@ public class DukeListMgr {
         assert (this.toDoList != null) : "Duke internal List is missing!";
         int taskIndex = taskNo - 1;
 
-        if (taskIndex >= 0 && taskIndex < toDoList.size()) {
-            BaseTask currTask = toDoList.get(taskIndex);
-
-            toDoList.remove(taskIndex);
-            this.triggerSaveTasks();
-            return "Ok, this task has been removed:\n" + currTask.getLineOfTaskInfo()
-                    + "\nCurrent total amount of tasks in list: " + toDoList.size();
-        } else {
+        if (!(taskIndex >= 0 && taskIndex < toDoList.size())) {
             throw new DukeExceptionBase("Invalid Task Specified");
         }
+
+        BaseTask currTask = toDoList.get(taskIndex);
+
+        toDoList.remove(taskIndex);
+        this.triggerSaveTasks();
+        return "Ok, this task has been removed:\n" + currTask.getLineOfTaskInfo()
+                + "\nCurrent total amount of tasks in list: " + toDoList.size();
     }
 
     /**
@@ -163,15 +179,13 @@ public class DukeListMgr {
 
         if (foundTaskList.size() == 0) {
             return "There were no matching tasks.";
-        } else {
-            // List out the matching tasks.
-            String printThis = this.getListFromTaskList(foundTaskList);
-
-            return "Here are the matching tasks found: \n" + printThis;
         }
 
-    }
+        // List out the matching tasks.
+        String printThis = this.getListFromTaskList(foundTaskList);
 
+        return "Here are the matching tasks found: \n" + printThis;
+    }
 
     /**
      * Used to print out contents of the list nicely.
