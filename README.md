@@ -33,7 +33,8 @@ What it can do:
 
 Here's a part of the program, maybe it can be of help in practising coding in Java, the `main` method:
 ```
+```ruby
 public static void main(String[] args) {
-        new Duke().run();
-    }
+    new Duke().run();
+}
 ```
