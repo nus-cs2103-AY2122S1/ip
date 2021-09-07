@@ -20,6 +20,7 @@ public class FindCommand extends Command {
         for (String keyword : keyWordsSplit) {
             this.keywords.add(keyword);
         }
+        assert (keywords.length > 0) : "keywords should contain at least 1 keyword.";
     }
 
     @Override
