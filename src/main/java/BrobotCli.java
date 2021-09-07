@@ -25,7 +25,8 @@ public class BrobotCli {
 
         while (!input.equals("bye")) {
             try {
-                parser.parse(input);
+                String message = parser.parse(input);
+                UI.printToTerm(message);
             } catch (BroException e) {
                 UI.printToTerm(UI.getErrorText(e));
             } finally {

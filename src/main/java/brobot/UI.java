@@ -118,4 +118,14 @@ public class UI {
         String searchListText = "Here are the matching tasks in your list bro:" + list.toString();
         return formatWithSpace(searchListText);
     }
+
+    /**
+     * Readable text that lets the user know where the data file is newly located
+     * @param newFileDirectory The new directory for the data file
+     */
+    public static String getStorageChangeText(String newFileDirectory) {
+        String storageChangeText =
+                "Alright bro, your list will now be saved in the following directory:\n" + newFileDirectory;
+        return formatWithSpace(storageChangeText);
+    }
 }
