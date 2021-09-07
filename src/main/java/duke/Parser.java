@@ -40,40 +40,61 @@ public class Parser {
      */
     public Task parseAddTask(String str) throws DukeException{
         if (str.startsWith("todo")) {
-            //checks if str follows the todo format: todo_description
-            if ((str.charAt(4) != ' ') || str.length() < 6) {
-                throw new DukeException("The description of todo cannot be empty");
-            }
-            assert(str.substring(5) != "");
-            return new ToDo(str.substring(5));
+            checkFormatOfToDoCommand(str);
+            int indexForToDoDescription = "todo ".length();
+            return new ToDo(str.substring(indexForToDoDescription));
         } else if (str.startsWith("event")) {
-            //checks if str follows the event format: event_description_/at_time
-            if (str.charAt(5) != ' ' || str.length() < 12) {
-                throw new DukeException("Wrong input for adding an event-task.");
-            }
-            int index = str.indexOf("/at ");
-            if (index == -1) {
-                throw new DukeException("You must specify the time for an event-task.");
-            }
-            String description = str.substring(6, index - 1);
-            String time = str.substring(index + 4);
+            checkFormatOfEventCommand(str);
+            int indexOfAt = str.indexOf("/at ");
+            int indexForEventDescription = "event ".length();
+            int indexOfTimeDescription = indexOfAt + "/at ".length();
+            String description = str.substring(indexForEventDescription, indexOfAt - 1);
+            String time = str.substring(indexOfTimeDescription);
             assert(description != "");
             assert(time != "");
             return new Event(description, time);
         } else {
-            //checks if str follows the deadline format: deadline_description_/by_time
-            if (str.charAt(8) != ' ' || str.length() < 15) {
-                throw new DukeException("Wrong input for adding a deadline-task.");
-            }
-            int index = str.indexOf("/by ");
-            if (index == -1) {
-                throw new DukeException("You must specify the deadline.");
-            }
-            String description = str.substring(9, index - 1);
-            String time = str.substring(index + 4);
+            checkFormatOfDeadlineCommand(str);
+            int indexOfBy = str.indexOf("/by ");
+            int indexForEventDescription = "deadline ".length();
+            int indexOfTimeDescription = indexOfBy + "/by ".length();
+            String description = str.substring(indexForEventDescription, indexOfBy - 1);
+            String time = str.substring(indexOfTimeDescription);
             assert(description != null);
             assert(time != null);
             return new Deadline(description, time);
+        }
+    }
+
+    private void checkFormatOfDeadlineCommand(String str) throws DukeException {
+        int minimumDeadlineCommandLength = "deadline _ /by _".length();
+        boolean deadlineCommandFormatIsWrong = str.indexOf(" ") == -1;
+        if (deadlineCommandFormatIsWrong || str.length() < minimumDeadlineCommandLength) {
+            throw new DukeException("Wrong input for adding a deadline-task.");
+        }
+        int indexOfBy = str.indexOf("/by ");
+        if (indexOfBy == -1) {
+            throw new DukeException("You must specify the deadline.");
+        }
+    }
+
+    private void checkFormatOfEventCommand(String str) throws DukeException {
+        int minimumEventCommandLength = "event _ /at _".length();
+        boolean eventCommandFormatIsWrong = str.indexOf(" ") == -1;
+        if (eventCommandFormatIsWrong || str.length() < minimumEventCommandLength) {
+            throw new DukeException("Wrong input for adding an event-task.");
+        }
+        int index = str.indexOf("/at ");
+        if (index == -1) {
+            throw new DukeException("You must specify the time for an event-task.");
+        }
+    }
+
+    private void checkFormatOfToDoCommand(String str) throws DukeException {
+        int minimumToDoCommandLength = "todo _".length();
+        boolean todoCommandFormatIsWrong = str.indexOf(" ") == -1;
+        if (todoCommandFormatIsWrong || str.length() < minimumToDoCommandLength) {
+            throw new DukeException("The description of todo cannot be empty");
         }
     }
 
@@ -87,12 +108,14 @@ public class Parser {
      */
     public int parseDoneCommand(String str) throws DukeException {
         try {
-            int index = str.indexOf(" ");
-            if (index == -1 || str.length() < 6) {
+            int minimumLengthOfDoneCommand = "done _".length();
+            boolean doneCommandFormatIsWrong = str.indexOf(" ") == -1;
+            if (doneCommandFormatIsWrong || str.length() < minimumLengthOfDoneCommand) {
                 //check if str follows the mark as done command format: done_taskNumber
                 throw new DukeException("Wrong input for marking task as done.");
             }
-            int taskNumber = Integer.parseInt(str.substring(index + 1));
+            int taskNumberIndex = str.indexOf(" ") + 1;
+            int taskNumber = Integer.parseInt(str.substring(taskNumberIndex));
             return taskNumber;
         } catch  (NumberFormatException ex) {
            throw new DukeException("Task must be an integer!");
@@ -109,8 +132,10 @@ public class Parser {
      */
     public int parseDeleteCommand(String str) throws DukeException {
         try {
+            int minimumLengthOfDeleteCommand = "delete _".length();
+            boolean deleteCommandFormatIsWrong = str.indexOf(" ") == -1;
             int index = str.indexOf(" ");
-            if (index == -1 || str.length() < 8) {
+            if (deleteCommandFormatIsWrong || str.length() < minimumLengthOfDeleteCommand) {
                 //check if str follows the delete command format: delete_taskNumber
                 throw new DukeException("Wrong input for deleting task.");
             }
@@ -129,11 +154,14 @@ public class Parser {
      * @throws DukeException If the format of the find command is incorrect.
      */
     public String parseFindCommand(String str) throws DukeException {
-        if (str.length() < 6 || str.indexOf(" ") == -1) {
+        int minimumLengthOfFindCommand = "find _".length();
+        boolean findCommandFormatIsWrong = str.indexOf(" ") == -1;
+        if (str.length() < minimumLengthOfFindCommand || findCommandFormatIsWrong) {
             //check if str follows the find command format: find_keyword
             throw new DukeException("Wrong input for finding task.");
         } else {
-            return str.substring(5);
+            int indexForStartOfKeyword = 5;
+            return str.substring(indexForStartOfKeyword);
         }
     }
 

@@ -15,7 +15,7 @@ public class Command {
     private Parser parser;
     private Storage storage;
     private TaskList taskList;
-    boolean canUseFilePath;
+    private boolean canUseFilePath;
 
     Command(String filePath) {
         this.ui = new Ui();
@@ -23,6 +23,10 @@ public class Command {
         this.storage = new Storage(filePath);
         boolean hasCreatedFile = this.storage.hasCreatedFile();
         this.canUseFilePath = true;
+        initializeTaskList(hasCreatedFile);
+    }
+
+    private void initializeTaskList(boolean hasCreatedFile) {
         if (!hasCreatedFile) {
             //file is read or an error has occurred when creating the file
             try {
@@ -98,7 +102,7 @@ public class Command {
                 this.taskList.addTask(task);
                 return this.ui.getAddedTaskMessage(task) + this.ui.getNumberOfTasksInList(this.taskList);
             } else if (typeOfCommand.equals("empty")) {
-                return "Please enter a new task or action.";
+                return this.ui.getMessageForEmptyLineInput();
             } else if (typeOfCommand.equals("find")) {
                 String str = this.parser.parseFindCommand(description);
                 ArrayList<Task> matchingTasks = this.taskList.findTask(str);

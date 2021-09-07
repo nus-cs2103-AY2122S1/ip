@@ -59,11 +59,14 @@ public class Storage {
 
     private void parseLineInFile(String string, ArrayList<Task> tasks) throws DukeException {
         //format of string should be typeOfTask||status||description||time
-        if (string.length() < 7) {
+        int minimumLengthOfLine = "t||s||d".length();
+        if (string.length() < minimumLengthOfLine) {
             throw new DukeException("Cannot read file.");
         }
-        char type = string.charAt(0);
-        char status = string.charAt(3);
+        int indexOfType = 0;
+        int indexOfStatus = 3;
+        char type = string.charAt(indexOfType);
+        char status = string.charAt(indexOfStatus);
         boolean isDone;
         if (status == ' ') {
             isDone = false;
@@ -72,12 +75,14 @@ public class Storage {
         } else {
             throw new DukeException("Cannot read file.");
         }
-        String description = string.substring(6);
+        int indexOfDescription = 6;
+        String description = string.substring(indexOfDescription);
         if (type == 'T') {
             tasks.add(new ToDo(description, isDone));
         } else if (type == 'E') {
             int index = description.indexOf("||");
-            String time = description.substring(index + 2);
+            int indexOfTime = index + 2;
+            String time = description.substring(indexOfTime);
             tasks.add(new Event(description.substring(0, index), isDone, time));
         } else if (type == 'D') {
             int index = description.indexOf("||");
