@@ -1,13 +1,13 @@
 package duke;
 /**
- * Deadlines is a task that have a deadline which is a string.
+ * Deadline is a task that have a deadline which is a string.
  * @author Dominic Siew Zhen Yu
  *
  */
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Deadlines extends Task{
+public class Deadline extends Task{
     private String deadline;
     String TASKINDICATOR = "[D]";
 
@@ -19,7 +19,7 @@ public class Deadlines extends Task{
      * @param deadline the time you have to complete the Deadlines
      */
 
-    public Deadlines(String userInput, String deadline, boolean newInput) {
+    public Deadline(String userInput, String deadline, boolean newInput) {
         super(userInput);
 
         if (newInput) {

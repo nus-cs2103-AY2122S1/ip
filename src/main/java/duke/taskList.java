@@ -210,7 +210,7 @@ public class taskList {
      * @param deadline the deadline of the deadline task
      */
     public String addDeadline(String name, String deadline, boolean isInput) {
-        Task task = new Deadlines(name, deadline, isInput);
+        Task task = new Deadline(name, deadline, isInput);
         taskList.add(task);
 
         if (isInput) {

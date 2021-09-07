@@ -1,6 +1,6 @@
 package duke;
+
 import java.io.File;
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -60,12 +60,13 @@ public class DukeMan {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("____________________________________________________________\nHello! I'm Duke\nWhat can I do for you?\n____________________________________________________________");
+        System.out.println("____________________________________________________________\nHello! I'm Duke\n"
+                + "What can I do for you?\n____________________________________________________________");
 
         boolean isEnded = false;
-        Scanner sc= new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
-        while(!isEnded) {
+        while (!isEnded) {
             String userInput = sc.nextLine();
             System.out.println("____________________________________________________________");
 
@@ -73,43 +74,45 @@ public class DukeMan {
             parser.parsing(userInput);
             String command = parser.getCommand();
 
+            assert isEnded = true;
+
             switch(command) {
-                case "todo":
-                    String todoName = parser.getTaskName();
-                    tasks.addTodo(todoName, true);
-                    break;
-                case "deadline":
-                    String deadlineName = parser.getTaskName();
-                    String deadline = parser.getTimeline();
-                    tasks.addDeadline(deadlineName, deadline, true);
-                    break;
-                case "event":
-                    String eventName = parser.getTaskName();
-                    String timeline = parser.getTimeline();
-                    tasks.addEvent(eventName, timeline, true);
-                    break;
-                case "bye":
-                    System.out.println("Bye. Hope to see you again soon!");
-                    isEnded = true;
-                    break;
-                case "list":
-                    tasks.printList();
-                    break;
-                case "done":
-                    int doneRank = Integer.parseInt(parser.getTaskName());
-                    tasks.updateTaskStatus(doneRank, true);
-                    break;
-                case "remove":
-                    int removeRank = Integer.parseInt(parser.getTaskName());
-                    tasks.removeTask(removeRank - 1 );
-                    break;
-                case "find":
-                    String keyWord = parser.getTaskName();
-                    tasks.findWord(keyWord);
-                    break;
-                default:
-                    System.out.println("Please give an appropriate response.");
-                    throw new DukeException("generic");
+            case "todo":
+                String todoName = parser.getTaskName();
+                tasks.addTodo(todoName, true);
+                break;
+            case "deadline":
+                String deadlineName = parser.getTaskName();
+                String deadline = parser.getTimeline();
+                tasks.addDeadline(deadlineName, deadline, true);
+                break;
+            case "event":
+                String eventName = parser.getTaskName();
+                String timeline = parser.getTimeline();
+                tasks.addEvent(eventName, timeline, true);
+                break;
+            case "bye":
+                System.out.println("Bye. Hope to see you again soon!");
+                isEnded = true;
+                break;
+            case "list":
+                tasks.printList();
+                break;
+            case "done":
+                int doneRank = Integer.parseInt(parser.getTaskName());
+                tasks.updateTaskStatus(doneRank, true);
+                break;
+            case "remove":
+                int removeRank = Integer.parseInt(parser.getTaskName());
+                tasks.removeTask(removeRank - 1 );
+                break;
+            case "find":
+                String keyWord = parser.getTaskName();
+                tasks.findWord(keyWord);
+                break;
+            default:
+                System.out.println("Please give an appropriate response.");
+                throw new DukeException("generic");
 
             }
 
@@ -117,10 +120,6 @@ public class DukeMan {
         }
 
     }
-
-//    public static void main(String[] args) {
-//        new DukeMan("data/memory.txt").run();
-//    }
 
     public String getResponse(String userInput) {
         Parser parser = new Parser();
@@ -153,7 +152,7 @@ public class DukeMan {
                     break;
                 case "done":
                     int doneRank = Integer.parseInt(parser.getTaskName());
-                    output = tasks.updateTaskStatus(doneRank,true);
+                    output = tasks.updateTaskStatus(doneRank, true);
                     break;
                 case "remove":
                     int removeRank = Integer.parseInt(parser.getTaskName());
