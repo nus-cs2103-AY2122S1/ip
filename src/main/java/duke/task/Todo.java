@@ -20,6 +20,11 @@ public class Todo extends Task {
     }
 
     @Override
+    public Task updateDateTime(String dateTime) {
+        return new Todo(this.getName(), this.getCompleted());
+    }
+
+    @Override
     public Task complete() {
         return new Todo(this.getName(), true);
     }

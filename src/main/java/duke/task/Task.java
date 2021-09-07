@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 public abstract class Task {
     public static final EmptyTask EMPTY_TASK = EmptyTask.empty();
     private final String name;
@@ -24,7 +26,9 @@ public abstract class Task {
         return this.isCompleted;
     }
 
-    public abstract Task updateName(String input);
+    public abstract Task updateName(String input) throws DukeException;
+
+    public abstract Task updateDateTime(String dateTime) throws DukeException;
 
     public abstract Task complete();
 
@@ -57,6 +61,11 @@ public abstract class Task {
 
         @Override
         public EmptyTask updateName(String input) {
+            return this;
+        }
+
+        @Override
+        public Task updateDateTime(String dateTime) {
             return this;
         }
 

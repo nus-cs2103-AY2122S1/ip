@@ -65,6 +65,17 @@ public class TaskList {
         }
     }
 
+    public Task updateTask(Task task, int taskId) throws DukeException {
+        Task taskRetrieved;
+        try {
+            taskRetrieved = tasks.get(taskId - 1);
+            tasks.set(taskId - 1, task);
+            return taskRetrieved;
+        } catch (java.lang.IndexOutOfBoundsException e) {
+            throw new DukeException("That task does not exist.");
+        }
+    }
+
     /**
      * Marks and returns a completed task.
      * @param taskId of the task that is to be completed.

@@ -9,6 +9,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
+import duke.command.UpdateCommand;
 import duke.exception.DukeException;
 import duke.tasklist.TaskList;
 
@@ -65,6 +66,9 @@ public class Parser {
                     throw new DukeException("You can only include 1 search word.");
                 }
                 return new FindCommand(taskList, words[1]);
+            case UpdateCommand.COMMAND_WORD:
+                rest = combine(words, words.length);
+                return new UpdateCommand(taskList, rest);
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand(taskList);
             default:
