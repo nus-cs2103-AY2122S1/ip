@@ -48,41 +48,56 @@ public class Event extends Task implements Recurring {
 
     /**
      * Converts contents to a storable String.
-     * TODO: manage storing of recurring Events
+     * 
      * @return a String that represents this Event in storage
      */
     @Override
     public String toStorage() {
-        return "E|" + super.toStorage() + "/at " + this.eventDate;
+        return "E|" + super.toStorage() + "/at " + this.eventDate + "/recur "
+                + Recurring.recurrenceToString(this.recurrence);
     }
 
+    /**
+     * Sets the task as complete. If it is a recurring task, also creates a new task at eventDate + 1 recurrence later.
+     *
+     * @param taskList the current TaskList
+     */
     @Override
-    public void doTask(TaskList taskList, Ui ui, Storage storage) {
+    public void doTask(TaskList taskList) {
+        if (this.recurrence != Recurrence.NEVER) {
+            this.incrementBy(1);
+            taskList.add(this.clone());
+            this.incrementBy(-1);
+        }
         super.doTask();
+    }
+
+    /**
+     * Increments the date of the Event by a number of days/weeks/months depending on the recurrence.
+     *
+     * @param noOfIncrements no of recurrences to add
+     */
+    public void incrementBy(int noOfIncrements) {
         switch (this.recurrence) {
         case DAILY:
-            try {
-                Parser.parse("event " + this.getMessage() + "/at " + this.eventDate.plusDays(1)
-                        + " /recur " + Recurring.recurrenceToString(this.recurrence)).execute(taskList, ui, storage);
-            } catch (DukeException | IOException e) {
-                e.printStackTrace();
-            }
-            break;
+            this.eventDate = this.eventDate.plusDays(noOfIncrements);
         case WEEKLY:
-            try {
-                Parser.parse("event " + this.getMessage() + "/at " + this.eventDate.plusWeeks(1)
-                        + " /recur " + Recurring.recurrenceToString(this.recurrence)).execute(taskList, ui, storage);
-            } catch (DukeException | IOException e) {
-                e.printStackTrace();
-            }
-            break;
+            this.eventDate = this.eventDate.plusWeeks(noOfIncrements);
         case MONTHLY:
-            try {
-                Parser.parse("event " + this.getMessage() + "/at " + this.eventDate.plusMonths(1)
-                        + " /recur " + Recurring.recurrenceToString(this.recurrence)).execute(taskList, ui, storage);
-            } catch (DukeException | IOException e) {
-                e.printStackTrace();
-            }
+            this.eventDate = this.eventDate.plusMonths(noOfIncrements);
+        default:
+            //do nothing
         }
+    }
+
+    /**
+     * Overrides clone method.
+     *
+     * @return another instance of the exact same Event
+     */
+    @Override
+    public Task clone() {
+        return new Event(this.getMessage(), this.eventDate + "/recur "
+                + Recurring.recurrenceToString(this.recurrence));
     }
 }

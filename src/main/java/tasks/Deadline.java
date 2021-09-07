@@ -40,4 +40,14 @@ public class Deadline extends Task {
     public String toStorage() {
         return "D|" + super.toStorage() + "/by " + this.endTime;
     }
+
+    /**
+     * Overrides clone method.
+     *
+     * @return another instance of the exact same Deadline
+     */
+    @Override
+    public Task clone() {
+        return new Deadline(this.getMessage(), this.endTime.toString());
+    }
 }

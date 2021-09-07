@@ -96,13 +96,18 @@ public abstract class Task {
     }
 
     /**
-     * Sets the Task to completed.
+     * Sets the Task as complete.
      */
     public void doTask() {
         this.completed = true;
     }
 
-    public void doTask(TaskList taskList, Ui ui, Storage storage) {
+    /**
+     * Sets the Task as complete.
+     *
+     * @param taskList the current TaskList
+     */
+    public void doTask(TaskList taskList) {
         this.completed = true;
     }
 
@@ -123,4 +128,10 @@ public abstract class Task {
     public String getMessage() {
         return this.message;
     }
+
+    /**
+     * Overrides clone method.
+     */
+    @Override
+    public abstract Task clone();
 }
