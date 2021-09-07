@@ -4,7 +4,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 import eightbit.EightBitException;
-import eightbit.command.*;
+import eightbit.command.ByeCommand;
+import eightbit.command.Command;
+import eightbit.command.CommandType;
+import eightbit.command.DeadlineCommand;
+import eightbit.command.DeleteCommand;
+import eightbit.command.DoneCommand;
+import eightbit.command.EventCommand;
+import eightbit.command.FindCommand;
+import eightbit.command.ListCommand;
+import eightbit.command.ToDoCommand;
 import eightbit.task.Deadline;
 import eightbit.task.Event;
 import eightbit.task.ToDo;
@@ -41,7 +50,7 @@ public class Parser {
         case FIND:
             return parseFindCommand(command);
         case BYE:
-            return parseByeCommand(command);
+            return parseByeCommand();
         default:
             throw new EightBitException("OOPS!!! I'm sorry, but I don't know what that means :(");
         }
@@ -95,8 +104,11 @@ public class Parser {
     }
 
     private static DeadlineCommand parseDeadlineCommand(String command) throws EightBitException {
-        if (command.split(" ").length == 1 // missing description and deadline
-                || command.substring(9).trim().split(" /by ").length < 2) { // missing either description or date/time
+        boolean isMissingAllArguments = command.split(" ").length == 1; // missing description and deadline
+        // missing either description or date/time
+        boolean isMissingDescOrDateTime = command.substring(9).trim().split(" /by ").length < 2;
+
+        if (isMissingAllArguments || isMissingDescOrDateTime) {
             throw new EightBitException("OOPS!!! Please enter your deadline in this format:\n"
                     + "deadline <description> /by yyyy-mm-dd hh:mm\n"
                     + "Ensure a valid date and time is entered.");
@@ -118,8 +130,11 @@ public class Parser {
     }
 
     private static EventCommand parseEventCommand(String command) throws EightBitException {
-        if (command.split(" ").length == 1 // missing description and date
-                || command.substring(6).trim().split(" /at ").length < 2) { // missing either description or date/time
+        boolean isMissingAllArguments = command.split(" ").length == 1; // missing description and deadline
+        // missing either description or date/time
+        boolean isMissingDescOrDateTime = command.substring(6).trim().split(" /at ").length < 2;
+
+        if (isMissingAllArguments || isMissingDescOrDateTime) {
             throw new EightBitException("OOPS!!! Please enter your event in this format:\n"
                     + "event <description> /at yyyy-mm-dd hh:mm\n"
                     + "Ensure a valid date and time is entered.");
@@ -144,6 +159,7 @@ public class Parser {
         if (command.split(" ").length != 2) { // not in the format "delete <integer>"
             throw new EightBitException("OOPS!!! Please enter in this format:\ndelete <integer>");
         }
+
         try {
             Integer.parseInt(command.split(" ")[1]);
         } catch (NumberFormatException e) { // not integer
@@ -167,7 +183,7 @@ public class Parser {
         return new FindCommand(keyword);
     }
 
-    private static ByeCommand parseByeCommand(String command) {
+    private static ByeCommand parseByeCommand() {
         return new ByeCommand();
     }
 }

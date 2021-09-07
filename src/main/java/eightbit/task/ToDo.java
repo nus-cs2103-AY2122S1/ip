@@ -18,13 +18,15 @@ public class ToDo extends Task {
      * Constructs a todo. Marks the todo as done or not.
      *
      * @param description Description of the todo.
-     * @param isDone Whether the todo is done.
+     * @param isDone      Whether the todo is done.
      */
     public ToDo(String description, boolean isDone) {
         super(description, isDone);
     }
 
     /**
+     * Returns the string representation of a ToDo.
+     *
      * @return String representation of a ToDo.
      */
     @Override
