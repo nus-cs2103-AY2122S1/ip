@@ -18,14 +18,16 @@ import duke.task.Todo;
 public class Parser {
     /** The TaskList that the Parser updates after command interpretation */
     private TaskList list;
+    private NoteList noteList;
 
     /**
      * Class constructor to initialize a Parser instance.
      *
      * @param list The TaskList that is to be updated.
      */
-    public Parser(TaskList list) {
+    public Parser(TaskList list, NoteList noteList) {
         this.list = list;
+        this.noteList = noteList;
     }
 
     /**
@@ -42,6 +44,8 @@ public class Parser {
             switch (firstParameter) {
             case ("list"):
                 return list.printTasks();
+            case ("notelist"):
+                return noteList.printNotes();
             case ("done"):
                 throw new DukeException("Please ensure that there is a number after the command 'done'. Try again.");
             case ("deadline"):
@@ -55,8 +59,17 @@ public class Parser {
                         + "Try again.");
             case ("delete"):
                 throw new DukeException("Please ensure that there is a number after the command 'delete'. Try again.");
+            case ("deletenote"):
+                throw new DukeException("Please ensure that there is a number after the command 'deletenote'. "
+                        + "Try again.");
             case ("find"):
                 throw new DukeException("Please ensure that there is a search term after the command 'find'. "
+                        + "Try again.");
+            case ("findnote"):
+                throw new DukeException("Please ensure that there is a search term after the command 'findnote'. "
+                        + "Try again.");
+            case ("note"):
+                throw new DukeException("Please ensure that there is a note description after the command 'note'. "
                         + "Try again.");
             default:
                 throw new DukeException("I didn't quite get what you meant. To add a task, begin with "
@@ -129,6 +142,10 @@ public class Parser {
                 String todoDescription = words[1];
                 Todo createdTodoTask = new Todo(todoDescription, false);
                 return list.addToList(createdTodoTask);
+            case ("note"):
+                String noteDescription = words[1];
+                Note createdNote = new Note(noteDescription, LocalDateTime.now());
+                return noteList.addToList(createdNote);
             case ("delete"):
                 String toDeleteIndexString = words[1];
                 try {
@@ -140,9 +157,23 @@ public class Parser {
                 } catch (StringIndexOutOfBoundsException e) {
                     throw new DukeException("Please add a number after the command 'delete'. Try again.");
                 }
+            case ("deletenote"):
+                String toDeleteNoteIndexString = words[1];
+                try {
+                    int toDeleteNoteIndex = Integer.parseInt(toDeleteNoteIndexString);
+                    return noteList.deleteNote(toDeleteNoteIndex);
+                } catch (NumberFormatException e) {
+                    throw new DukeException("Please make sure only a number follows the command 'deletenote'. "
+                            + "Try again.");
+                } catch (StringIndexOutOfBoundsException e) {
+                    throw new DukeException("Please add a number after the command 'deletenote'. Try again.");
+                }
             case ("find"):
                 String searchTerm = words[1];
                 return list.printFilteredTasks(searchTerm);
+            case ("findnote"):
+                String noteSearchTerm = words[1];
+                return noteList.printFilteredNotes(noteSearchTerm);
             default:
                 throw new DukeException("I didn't quite get what you meant. To add a task, begin with "
                         + "'deadline', 'event' or 'todo'.");

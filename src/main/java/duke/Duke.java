@@ -9,20 +9,24 @@ import javafx.application.Application;
  * @author Hanif Kamal
  */
 public class Duke {
-    private static final String FILEPATH = "./data/duke.txt";
+    private static final String FILEPATH = "./data/tasks.txt";
+    private static final String NOTE_FILEPATH = "./data/notes.txt";
     private final Storage storage;
     private final TaskList list;
+    private final NoteList noteList;
 
     /**
      * Class constructor to initialize a Duke instance.
      */
     public Duke() {
-        this.storage = new Storage(FILEPATH);
+        this.storage = new Storage(FILEPATH, NOTE_FILEPATH);
         this.list = new TaskList();
+        this.noteList = new NoteList();
         try {
             storage.readTasks(list);
+            storage.readNotes(noteList);
         } catch (Exception e) {
-            System.out.println("Could not read the data file: " + e.getMessage());
+            System.out.println("Could not read the following data file: " + e.getMessage());
         }
     }
 
@@ -36,10 +40,11 @@ public class Duke {
         if (input.equals("bye")) {
             System.exit(0);
         }
-        Parser parser = new Parser(list);
+        Parser parser = new Parser(list, noteList);
         try {
             String response = parser.parse(input);
             storage.writeTasks(list);
+            storage.writeNotes(noteList);
             return response;
         } catch (DukeException e) {
             return (e.getMessage());

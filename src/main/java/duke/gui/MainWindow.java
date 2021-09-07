@@ -35,8 +35,12 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
-    public String printWelcomeMessage() {
-        return ("Hello! I'm Duke\n" + "What can I do for you?");
+    /**
+     * Welcomes the user upon startup.
+     */
+    public void printWelcomeMessage() {
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog("Hello! I'm Duke\n" + "What can I do for you?",
+                dukeImage));
     }
 
     /**
