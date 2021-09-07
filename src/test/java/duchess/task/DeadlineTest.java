@@ -9,22 +9,39 @@ import org.junit.jupiter.api.Test;
 
 import duchess.main.DuchessException;
 
+/**
+ * This class implements a JUnit Test for the Deadline class' methods.
+ *
+ * @author Amos Tan
+ * @version CS2103T AY21/22 Semester 1
+ */
 public class DeadlineTest {
+    /**
+     * Tests the toFileFormat() method.
+     */
     @Test
-    public void testFileFormat() {
+    public void testToFileFormat() {
         Deadline d = new Deadline("homework",
                 LocalDateTime.of(2021, 12, 25, 12, 00));
         assertEquals(d.toFileFormat(), "Dhomework,Dec 25 2021 12:00,false");
-        d.setDone(true);
+        d.setDoneStatus(true);
         assertEquals(d.toFileFormat(), "Dhomework,Dec 25 2021 12:00,true");
     }
 
+    /**
+     * Tests the convertStringToDate() method with valid input.
+     * @throws DuchessException When an incorrect format is used for Deadline.
+     */
     @Test
     public void testConvertStringToDate_validDate_success() throws DuchessException {
         assertEquals(Deadline.convertStringToDate("25/12/2021 12pm"),
                 LocalDateTime.of(2021, 12, 25, 12, 00));
     }
 
+    /**
+     * Tests the convertStringToDate() method with invalid input.
+     * @throws DuchessException When an incorrect format is used for Deadline.
+     */
     @Test
     public void testConvertStringToDate_invalidDate_exceptionThrown() {
         try {
@@ -36,6 +53,9 @@ public class DeadlineTest {
         }
     }
 
+    /**
+     * Tests the convertTextToDate() method.
+     */
     @Test
     public void testConvertTextToDate() {
         assertEquals(Deadline.convertTextToDate("Dec 25 2021 12:00"),

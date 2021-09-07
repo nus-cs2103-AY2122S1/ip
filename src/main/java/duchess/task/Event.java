@@ -50,7 +50,7 @@ public class Event extends Task {
      * @return An array of LocalDateTime containing the start and end LocalDateTimes respectively.
      * @throws DuchessException When an incorrect format is used for Event.
      */
-    public static LocalDateTime[] convertStringToDate (String date, String duration) throws DuchessException {
+    public static LocalDateTime[] convertStringToDates(String date, String duration) throws DuchessException {
         try {
             String replacement = duration.replace("am", "AM").replace("pm", "PM");
             String[] timeParts = replacement.split("-");

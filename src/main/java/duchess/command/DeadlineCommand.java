@@ -1,8 +1,8 @@
 package duchess.command;
 
-import duchess.main.Duchess;
 import duchess.main.DuchessException;
 import duchess.main.DuchessFileHandler;
+import duchess.main.DuchessList;
 import duchess.task.Deadline;
 
 /**
@@ -14,6 +14,10 @@ import duchess.task.Deadline;
 
 public class DeadlineCommand extends Command {
 
+    /** The message on the usage of the deadline command. */
+    private static final String INVALID_MESSAGE = "The command \"deadline\" should be followed by "
+            + "a task and a date and time, e.g (read book /by 11/10/2019 4pm).";
+
     /**
      * Constructs a DeadlineCommand.
      * @param name The description of the deadline.
@@ -24,36 +28,43 @@ public class DeadlineCommand extends Command {
 
     /**
      * Handles the logic for checking and creating Deadline tasks.
-     * @param duchess The Duchess to return the output to.
-     * @return Whether to continue scanning for user input afterwards.
+     * @param duchessList The DuchessList to read or write tasks to.
+     * @return The reply from Duchess to the user.
      */
-    public String handleLogic(Duchess duchess) {
-        String invalidMessage = "The command \"deadline\" should be followed by "
-                + "a task and a date and time, e.g (read book /by 11/10/2019 4pm).";
-        String taskAndBy = getName();
+    public String handleLogic(DuchessList duchessList) {
+        String description = getDescription();
         String reply = "";
         try {
-            if (!taskAndBy.contains(" /by ")) {
-                throw new DuchessException(invalidMessage);
-            }
-            String[] taskParts = taskAndBy.split(" /by ", 2);
-            String checkTask = taskParts[0];
-            String checkBy = taskParts[1];
-            if (checkBy.equals("")) {
-                throw new DuchessException(invalidMessage);
-            }
-            // Valid input
-            Deadline deadline = new Deadline(checkTask, Deadline.convertStringToDate(checkBy));
-            duchess.getDuchessList().add(deadline);
-            int listSize = duchess.getDuchessList().getSize();
+            Deadline deadline = buildDeadline(description);
+            duchessList.add(deadline);
+            int listSize = duchessList.getSize();
             reply = "Understood. I've added this task:\n    " + deadline
                     + "\nYou now have " + listSize
                     + (listSize > 1 ? " tasks in the list." : " task in the list.");
-            DuchessFileHandler.writeToFile(duchess.getDuchessList());
+            DuchessFileHandler.writeToFile(duchessList);
         } catch (DuchessException e) {
             reply = e.getMessage();
         }
         return reply;
     }
 
+    /**
+     * Builds a Deadline if the description is a valid input.
+     * @param description The user given input following the deadline command.
+     * @return The generated Deadline.
+     * @throws DuchessException If the input does not follow the Deadline template.
+     */
+    public static Deadline buildDeadline(String description) throws DuchessException {
+        if (!description.contains(" /by ")) {
+            throw new DuchessException(INVALID_MESSAGE);
+        }
+        String[] taskParts = description.split(" /by ", 2);
+        String checkTask = taskParts[0];
+        String checkBy = taskParts[1];
+        if (checkBy.equals("")) {
+            throw new DuchessException(INVALID_MESSAGE);
+        }
+        // Valid input
+        return new Deadline(checkTask, Deadline.convertStringToDate(checkBy));
+    }
 }

@@ -19,7 +19,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-
 /**
  * This class implements a DialogBox.
  */
@@ -55,7 +54,6 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
         displayPicture.setClip(circleClip);
     }
-
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.

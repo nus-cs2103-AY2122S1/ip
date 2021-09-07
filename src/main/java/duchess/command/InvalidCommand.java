@@ -1,6 +1,6 @@
 package duchess.command;
 
-import duchess.main.Duchess;
+import duchess.main.DuchessList;
 
 /**
  * This class implements the logic to handle invalid commands.
@@ -18,10 +18,10 @@ public class InvalidCommand extends Command {
 
     /**
      * Handles the logic for creating an invalid command.
-     * @param duchess The Duchess to return the output to.
-     * @return Whether to continue scanning for user input afterwards.
+     * @param duchessList The DuchessList to read or write tasks to.
+     * @return The reply from Duchess to the user.
      */
-    public String handleLogic(Duchess duchess) {
+    public String handleLogic(DuchessList duchessList) {
         return "Apologies, I didn't catch that.";
     }
 
