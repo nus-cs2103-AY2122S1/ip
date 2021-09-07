@@ -44,6 +44,7 @@ public abstract class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+        assert this.isDone : "task should be marked done";
     }
 
     /**
