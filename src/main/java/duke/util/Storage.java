@@ -1,7 +1,5 @@
 package duke.util;
 
-import duke.task.Task;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -9,6 +7,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * Represents an object to load and store serializable into files.

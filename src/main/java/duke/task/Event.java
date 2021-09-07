@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
 
 /**
  * Represents a Task Event that happens at a date and time.
@@ -25,8 +25,8 @@ public class Event extends Task {
      */
     public Event(String description, String at) throws DukeException, DateTimeParseException {
         super(description);
-        String[] parts = at.split(" ");//split along the whitespace to get the integer
-        if (parts.length <= 1) {// checking for incomplete prompts, no time provided
+        String[] parts = at.split(" "); //split along the whitespace to get the integer
+        if (parts.length <= 1) { // checking for incomplete prompts, no time provided
             throw new DukeException();
         }
         String date = parts[0].replace("/", "-");
@@ -36,6 +36,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + atDate.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " " + atTime + ") \n";
+        return "[E]" + super.toString() + " (at: " + atDate.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
+                + " " + atTime + ") \n";
     }
 }

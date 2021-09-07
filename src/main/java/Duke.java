@@ -1,12 +1,9 @@
-import duke.util.TaskList;
 import duke.util.Parser;
+import duke.util.TaskList;
 import duke.util.Ui;
-
 import javafx.fxml.FXML;
 
-
-
-public class Duke{
+public class Duke {
 
     private Ui ui;
     private TaskList list;
@@ -19,6 +16,10 @@ public class Duke{
         this.ui = new Ui();
         this.list = new TaskList(fileName);
         this.parser = new Parser(this.list);
+    }
+
+    public static void main(String[] args) {
+        new Duke("list.ser").run();
     }
 
     /**
@@ -37,9 +38,5 @@ public class Duke{
      */
     public void run() {
         ui.welcome();
-    }
-
-    public static void main(String[] args) {
-        new Duke("list.ser").run();
     }
 }

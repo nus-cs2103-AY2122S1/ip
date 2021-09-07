@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
 
 /**
  * Represents a Task with a Deadline(Date and Time).
@@ -25,8 +25,8 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) throws DukeException, DateTimeParseException {
         super(description);
-        String[] parts = by.split(" ");//split along the whitespace to get the integer
-        if (parts.length <= 1) {// checking for incomplete prompts, no time provided
+        String[] parts = by.split(" "); //split along the whitespace to get the integer
+        if (parts.length <= 1) { // checking for incomplete prompts, no time provided
             throw new DukeException();
         }
         String date = parts[0].replace("/", "-");
@@ -37,6 +37,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + byDate.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " " + byTime + ") \n";
+        return "[D]" + super.toString() + " (by: " + byDate.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
+                + " " + byTime + ") \n";
     }
 }
