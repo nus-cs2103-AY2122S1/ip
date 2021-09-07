@@ -1,16 +1,16 @@
 package duke;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.dukeexception.NoListException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.io.FileWriter;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Represents a wrapper class that deals with loading and saving tasks in a file.
@@ -33,7 +33,7 @@ public class Storage {
     /**
      * Converts a string that contains info about a Task into a Task.
      *
-     * @param fullString The given string
+     * @param fullString The given string.
      * @return The Task with the appropriate information.
      */
     public static Task stringToTask(String fullString) {
@@ -66,9 +66,9 @@ public class Storage {
     }
 
     /**
-     * Returns an ArrayList<Task> that contains all the tasks in a give file.
+     * Returns an ArrayList of Task that contains all the tasks in a give file.
      *
-     * @return the arraylist of Task inside the fiven file.
+     * @return the arraylist of Task inside the given file.
      * @throws NoListException If there is no file to be loaded.
      */
     public ArrayList<Task> load() throws NoListException {
@@ -95,7 +95,7 @@ public class Storage {
     public void save(TaskList tasks) throws NoListException {
         try {
             FileWriter fw = new FileWriter(this.file);
-            String curr= "";
+            String curr = "";
             for (int i = 0; i < tasks.size(); i++) {
                 curr += Storage.taskToString(tasks.get(i)) + "\n";
             }

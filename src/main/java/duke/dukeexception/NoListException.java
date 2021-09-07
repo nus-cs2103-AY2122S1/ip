@@ -1,7 +1,5 @@
 package duke.dukeexception;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 /**
  * Represents an exception when file operations are performed when a file/directory does not exist.

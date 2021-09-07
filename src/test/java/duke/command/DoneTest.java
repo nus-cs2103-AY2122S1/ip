@@ -1,12 +1,15 @@
 package duke.command;
 
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.dukeexception.NoListException;
 import duke.task.Todo;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class DoneTest {

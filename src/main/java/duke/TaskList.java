@@ -1,8 +1,10 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.task.Task;
 
-import java.util.ArrayList;
+
 
 /**
  * Represents a wrapper class for an arraylist of Tasks.

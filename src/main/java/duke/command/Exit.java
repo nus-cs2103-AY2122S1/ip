@@ -3,7 +3,6 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.command.Command;
 
 /**
  * Represents a type of Command that exits the program.
