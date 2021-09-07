@@ -89,41 +89,15 @@ public class TaskHandler {
     }
 
     /**
-     * Adds a To Do task to the tasklist and returns a message to the user.
+     * Adds a task to the tasklist and returns a message to the user.
      *
-     * @param todo ToDo task to be added.
+     * @param task Task to be added.
      * @return Duke's response to the user.
      */
-    public String addToDo(ToDo todo) {
-        list.add(todo);
+    public String addTask(Task task) {
+        list.add(task);
         String toPrint = Ui.addTask();
-        toPrint = toPrint.concat(Ui.indentation() + Ui.indentation() + todo + "\n");
-        return toPrint;
-    }
-
-    /**
-     * Adds a deadline task to the tasklist and returns a message to the user.
-     *
-     * @param deadline Deadline task to be added.
-     * @return Duke's response to the user.
-     */
-    public String addDeadline(Deadline deadline) {
-        list.add(deadline);
-        String toPrint = Ui.addTask();
-        toPrint = toPrint.concat(Ui.indentation() + Ui.indentation() + deadline + "\n");
-        return toPrint;
-    }
-
-    /**
-     * Adds an event task to the tasklist and returns a message to the user.
-     *
-     * @param event Event task to be added.
-     * @return Duke's response to the user.
-     */
-    public String addEvent(Event event) {
-        list.add(event);
-        String toPrint = Ui.addTask();
-        toPrint = toPrint.concat(Ui.indentation() + Ui.indentation() + event + "\n");
+        toPrint = toPrint.concat(Ui.indentation() + Ui.indentation() + task + "\n");
         return toPrint;
     }
 

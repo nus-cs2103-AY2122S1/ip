@@ -33,19 +33,20 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(String cmd) throws DukeException {
-        if (cmd.length() >= 8) {
+        int minCommandLength = 8;
+        if (cmd.length() < minCommandLength) {
+            throw new DukeException("Please choose a task to delete!");
+        } else {
             Integer index = Integer.parseInt(cmd.substring(7));
             int size = taskHandler.getList().size();
-            if (index >= 1 && index <= size) {
+            if (index < 1 || index > size) {
+                throw new DukeException("Please enter a value from 1 to " + size);
+            } else {
                 String toPrint = taskHandler.deleteTask(index);
                 toPrint = toPrint.concat(taskHandler.printNoOfTasks());
                 storage.updateFile(taskHandler.formatTasksToSave());
                 return toPrint;
-            } else {
-                throw new DukeException("Please enter a value from 1 to " + size);
             }
-        } else {
-            throw new DukeException("Please choose a task to delete!");
         }
     }
 }

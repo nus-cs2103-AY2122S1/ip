@@ -1,10 +1,15 @@
 package duke.command;
 
+import java.time.format.DateTimeParseException;
+
+import duke.Duke;
 import duke.data.TaskHandler;
 import duke.data.exception.DukeException;
 import duke.data.task.Deadline;
 import duke.storage.Storage;
 import duke.ui.Ui;
+
+
 
 /**
  * Class that encapsulates the "Deadline" Command.
@@ -35,18 +40,23 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String execute(String cmd) throws DukeException {
-        if (cmd.length() < 10) {
+        int minCommandLength = 10;
+        if (cmd.length() < minCommandLength) {
             throw new DukeException(Ui.emptyDescription("deadline"));
         } else {
             String[] split = cmd.split("/by ");
-            if (split.length > 1) {
-                Deadline deadline = new Deadline(split[0].substring(9), split[1]);
-                String toPrint = taskHandler.addDeadline(deadline);
-                toPrint = toPrint.concat(taskHandler.printNoOfTasks());
-                storage.updateFile(taskHandler.formatTasksToSave());
-                return toPrint;
-            } else {
+            if (split.length <= 1) {
                 throw new DukeException(Ui.dateMissing());
+            } else {
+                Deadline deadline = new Deadline(split[0].substring(9), split[1]);
+                if (deadline.dateFormatter(split[1]) == "Format error") {
+                    throw new DukeException(Ui.dateFormatError());
+                } else {
+                    String toPrint = taskHandler.addTask(deadline);
+                    toPrint = toPrint.concat(taskHandler.printNoOfTasks());
+                    storage.updateFile(taskHandler.formatTasksToSave());
+                    return toPrint;
+                }
             }
         }
     }
