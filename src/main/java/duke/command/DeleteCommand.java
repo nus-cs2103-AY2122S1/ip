@@ -2,6 +2,7 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
+import duke.task.Task;
 import duke.task.TaskList;
 
 /**
@@ -36,12 +37,14 @@ public class DeleteCommand extends Command {
      * @throws DukeException If input is invalid.
      */
     @Override
-    public void execute(TaskList ls, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList ls, Ui ui, Storage storage) throws DukeException {
         if (taskNumber < 0 || taskNumber >= ls.getSize()) {
             throw new DukeException("Item does not exist in the list.");
         }
+        Task task = ls.getTask(taskNumber);
         ls.removeTask(taskNumber);
         storage.rewriteFile(ls);
+        return ui.removeTaskFromList(task, ls.getSize());
     }
 
     /**

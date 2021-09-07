@@ -18,8 +18,8 @@ public class ListCommand extends Command {
      * @throws DukeException If user input is invalid.
      */
     @Override
-    public void execute(TaskList ls, Ui ui, Storage storage) throws DukeException {
-        ui.printTaskList(ls);
+    public String execute(TaskList ls, Ui ui, Storage storage) throws DukeException {
+        return ui.printTaskList(ls);
     }
 
     /**

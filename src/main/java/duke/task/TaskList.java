@@ -24,7 +24,6 @@ public class TaskList {
      * @param task Task to be added to current TaskList.
      */
     public void addTask(Task task) {
-        ui.addTaskToList(task, tasklist.size() + 1);
         this.tasklist.add(task);
     }
 
@@ -34,7 +33,6 @@ public class TaskList {
      * @param index Index of the task to be removed from current TaskList.
      */
     public void removeTask(int index) {
-        ui.removeTaskFromList(tasklist.get(index), tasklist.size() - 1);
         this.tasklist.remove(index);
     }
 

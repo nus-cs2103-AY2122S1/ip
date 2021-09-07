@@ -27,15 +27,15 @@ public class Find {
     /**
      * Prints out the list of Tasks that include the keyword.
      */
-    public void findWord() {
+    public String findWord() {
         if (!this.isFound) {
-            this.result = ui.printListWithKeyword(ls, word, this);
+            return this.result = ui.printListWithKeyword(ls, word, this);
         }
 
         if (this.result.isEmpty()) {
-            ui.noResultsFound(word);
+            return ui.noResultsFound(word);
         } else {
-            System.out.println(this.result);
+            return this.result;
         }
     }
 

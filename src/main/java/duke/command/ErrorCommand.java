@@ -18,7 +18,7 @@ public class ErrorCommand extends Command {
      * @throws DukeException If user input is not a valid command.
      */
     @Override
-    public void execute(TaskList ls, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList ls, Ui ui, Storage storage) throws DukeException {
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 

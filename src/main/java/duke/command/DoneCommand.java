@@ -37,13 +37,14 @@ public class DoneCommand extends Command {
      * @throws DukeException If input is invalid.
      */
     @Override
-    public void execute(TaskList ls, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList ls, Ui ui, Storage storage) throws DukeException {
         if (taskNumber < 0 || taskNumber >= ls.getSize()) {
             throw new DukeException("Item does not exist in the list.");
         }
         Task task = ls.getTask(taskNumber);
         task.setDone();
         storage.rewriteFile(ls);
+        return ui.setTaskAsDone(task);
     }
 
     /**

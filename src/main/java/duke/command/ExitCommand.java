@@ -18,9 +18,9 @@ public class ExitCommand extends Command {
      * @throws DukeException If user input is invalid.
      */
     @Override
-    public void execute(TaskList ls, Ui ui, Storage storage) throws DukeException {
-        ui.goodbye();
+    public String execute(TaskList ls, Ui ui, Storage storage) throws DukeException {
         System.exit(0);
+        return ui.goodbye(); //doesn't get printed
     }
 
     /**

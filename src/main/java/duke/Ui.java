@@ -21,65 +21,83 @@ public class Ui {
     }
 
     /**
-     * Prints welcome statement,
+     * Returns welcome statement.
+     *
+     * @return Welcome statement.
      */
-    public void showWelcome() {
+    public String showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm duke.Duke\n" + "What can I do for you?");
+        return ("Hello from\n" + logo + "\n"
+                + "Hello! I'm duke.Duke\n" + "What can I do for you?");
     }
 
     /**
-     * Prints closing statement.
+     * Returns closing statement.
+     *
+     * @return Closing statement.
      */
-    public void goodbye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String goodbye() {
+        return ("Bye. Hope to see you again soon!");
     }
 
     /**
-     * Prints Ui for adding task to list.
+     * Returns Ui for adding task to list.
      *
      * @param task Task to be added.
      * @param size Updated number of items on the TaskList.
+     * @return Ui for adding task to list.
      */
-    public void addTaskToList(Task task, int size) {
+    public String addTaskToList(Task task, int size) {
         String taskToString = task.toString();
-        System.out.println("Got it. I've added this task: \n" + taskToString
+        return ("Got it. I've added this task: \n" + taskToString
                 + "\nNow you have " + size + " tasks in the list.");
     }
 
+    /**
+     * Prints Ui for setting task as done.
+     *
+     * @param task Done task.
+     */
+    public String setTaskAsDone(Task task) {
+        return "Nice! I've marked this task as done: \n" + task.toString();
+    }
+
+    //CHANGED
     /**
      * Prints Ui for removing task from the list.
      *
      * @param task Task to be removed.
      * @param size Updated number of items on the TaskList.
      */
-    public void removeTaskFromList(Task task, int size) {
+    public String removeTaskFromList(Task task, int size) {
         String taskToString = task.toString();
-        System.out.println("Noted. I've removed this task: \n" + taskToString
+        return ("Noted. I've removed this task: \n" + taskToString
                 + "\nNow you have " + size + " tasks in the list.");
     }
 
+    //CHANGED
     /**
      * Prints the current TaskList.
      *
      * @param taskList The current TaskList.
      */
-    public void printTaskList(TaskList taskList) {
+    public String printTaskList(TaskList taskList) {
         if (taskList.getSize() == 0) {
-            System.out.println("There are currently no tasks in your list.");
+            return "There are currently no tasks in your list.";
         } else {
-            System.out.println("Here are the tasks in your list:");
+            String ls = "Here are the tasks in your list:\n";
             for (int i = 0; i < taskList.getSize(); i++) {
-                System.out.println((i + 1) + "." + taskList.getTask(i).toString());
+                ls += (i + 1) + "." + taskList.getTask(i).toString() + "\n";
             }
+            return ls;
         }
     }
 
+    //CHANGED
     /**
      * Searches for the keyword among current Tasks.
      *
@@ -102,13 +120,14 @@ public class Ui {
         return result;
     }
 
+    //CHANGED
     /**
      * Prints a message when all current Tasks do not contain the keyword provided.
      *
      * @param word Keyword.
      */
-    public void noResultsFound(String word) {
-        System.out.println("There were no tasks that included your keyword: " + word + ".");
+    public String noResultsFound(String word) {
+        return ("There were no tasks that included your keyword: " + word + ".");
     }
 
     /**
@@ -120,20 +139,22 @@ public class Ui {
         return sc.nextLine();
     }
 
+    //CHANGED
     /**
      * Prints DukeException errors.
      *
      * @param e Error message.
      */
-    public void showError(String e) {
-        System.out.println(e);
+    public String showError(String e) {
+        return (e);
     }
 
+    //CHANGED
     /**
      * Prints line for formatting messages.
      */
-    public void showLine() {
-        System.out.println("___________________");
+    public String showLine() {
+        return ("___________________");
     }
 
     /**

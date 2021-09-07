@@ -1,5 +1,6 @@
 package duke;
 import java.io.IOException;
+import java.util.Scanner;
 
 import duke.command.Command;
 import duke.task.TaskList;
@@ -40,19 +41,18 @@ public class Duke {
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
+        Scanner scanner = new Scanner(System.in);
+
         while (!isExit) {
             try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
+                Command c = Parser.parse(scanner.nextLine().trim());
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
             }
         }
+        scanner.close();
     }
 
     /**
@@ -69,7 +69,13 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            //not OOP!
+            return e.getMessage();
+        }
     }
 
 }

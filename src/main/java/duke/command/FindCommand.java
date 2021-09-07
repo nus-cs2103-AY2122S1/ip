@@ -29,9 +29,9 @@ public class FindCommand extends Command {
      * @throws DukeException If user input is invalid
      */
     @Override
-    public void execute(TaskList ls, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList ls, Ui ui, Storage storage) throws DukeException {
         Find f = new Find(keyword, ls);
-        f.findWord();
+        return f.findWord();
     }
 
     /**

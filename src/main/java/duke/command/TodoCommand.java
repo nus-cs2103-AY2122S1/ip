@@ -29,10 +29,11 @@ public class TodoCommand extends Command {
      * @throws DukeException If the user input is invalid.
      */
     @Override
-    public void execute(TaskList ls, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList ls, Ui ui, Storage storage) throws DukeException {
         Todo tTask = new Todo(taskDesc);
         ls.addTask(tTask);
         storage.rewriteFile(ls);
+        return ui.addTaskToList(tTask, ls.getSize());
     }
 
     /**

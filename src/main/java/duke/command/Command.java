@@ -18,7 +18,7 @@ public abstract class Command {
      * @param storage Current version of the saved tasks in the hard disk.
      * @throws DukeException If input is invalid.
      */
-    public abstract void execute(TaskList ls, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList ls, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Signals to the system whether the command is an exit command.

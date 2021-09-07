@@ -35,10 +35,11 @@ public class EventCommand extends Command {
      * @throws DukeException If user input is invalid.
      */
     @Override
-    public void execute(TaskList ls, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList ls, Ui ui, Storage storage) throws DukeException {
         Event eTask = new Event(taskDesc, eventDate);
         ls.addTask(eTask);
         storage.rewriteFile(ls);
+        return ui.addTaskToList(eTask, ls.getSize());
     }
 
     /**
