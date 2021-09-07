@@ -35,6 +35,12 @@ public class Ui {
         return "Hello! I'm Duke\nWhat can I do for you?";
     }
 
+    public static String addTag(String taggedString) {
+        String output = "Got it, I've tagged the following item:\n";
+        output += taggedString;
+        return output;
+    }
+
     /**
      * Gives the program the next line which was input by the user.
      *

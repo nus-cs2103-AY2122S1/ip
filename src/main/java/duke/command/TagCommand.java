@@ -1,0 +1,27 @@
+package duke.command;
+
+import duke.Storage;
+import duke.Ui;
+import duke.task.TaskList;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class TagCommand extends Command {
+    private int index;
+    private ArrayList<String> tags;
+    public TagCommand(int index, String ...tags) {
+        this.index = index;
+        this.tags = new ArrayList<>(List.of(tags));
+        this.tags.remove(0);
+    }
+
+    @Override
+    public String execute(TaskList tasks, Storage storage, Ui ui) {
+        String output = tasks.addTags(index, tags);
+        String saveFileString = tasks.save();
+        storage.save(saveFileString);
+        return output;
+    }
+
+}

@@ -2,12 +2,16 @@ package duke.task;
 
 import duke.Ui;
 
+import java.util.ArrayList;
+
 /**
  * This class represents a task to be done in the TaskList.
  */
 public class Task {
     private String taskName;
     private boolean isDone;
+    private boolean isTagged;
+    private ArrayList<String> tags;
 
     /**
      * Constructor for a task, which takes in a task name.
@@ -17,6 +21,8 @@ public class Task {
     public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;
+        this.isTagged = false;
+        this.tags = new ArrayList<>();
     }
 
     /**
@@ -52,7 +58,14 @@ public class Task {
      * @return save information
      */
     public String getSaveInfo() {
-        return this.taskName;
+        String info = this.getType() + " | " + (isDone ? "1 | " : "0 | ")
+                + (isTagged ? "1 | " : "0 | ") + taskName + "| ";
+        if (isTagged) {
+            for (String tag: tags) {
+                info += "#" + tag;
+            }
+        }
+        return info;
     }
 
     /**
@@ -81,12 +94,33 @@ public class Task {
     }
 
     /**
+     * Adds to the list of tags for the task
+     *
+     * @param tag
+     */
+    public void tag(String tag) {
+        if (!isTagged) {
+            isTagged = true;
+        }
+        tags.add(tag);
+    }
+
+    /**
      * Overriden toString method.
      *
      * @return string representation of the task.
      */
     @Override
     public String toString() {
-        return (isDone ? "[X] " : "[ ] ") + this.taskName;
+        String str = (isDone ? "[X] " : "[ ] ") + this.taskName;
+        if (tags.size() == 0) {
+            return str;
+        }
+        str += " (tags:";
+        for (String tag: tags) {
+            str += " #" + tag;
+        }
+        str += ")";
+        return str;
     }
 }
