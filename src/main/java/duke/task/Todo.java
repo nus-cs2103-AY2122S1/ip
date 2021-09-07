@@ -3,7 +3,7 @@ package duke.task;
 import java.util.Arrays;
 import java.util.List;
 
-import duke.parser.Parser;
+import duke.parser.storage.StorageParser;
 import duke.storage.Storage;
 
 /**
@@ -38,7 +38,7 @@ public class Todo extends Task {
      */
     @Override
     public String toSavableFormat() {
-        String isDone = Parser.parseIsDoneToString(this.isDone());
+        String isDone = StorageParser.parseIsDoneToString(this.isDone());
         List<String> stringList = Arrays.asList(TASK_TYPE, isDone, this.getDescription());
         return String.join(Storage.DELIMITER, stringList);
     }
