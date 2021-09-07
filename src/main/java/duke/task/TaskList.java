@@ -96,7 +96,10 @@ public class TaskList {
         List<Task> newTasks = new ArrayList<>(tasks);
         Task newTask;
         String commandString = inputs[0].toUpperCase();
-
+        // If the code enters this function, the command must be one of the words below
+        assert(commandString.equals("TODO")
+                || commandString.equals("DEADLINE")
+                || commandString.equals("EVENT"));
         switch (commandString) {
         case "TODO":
             newTask = createTodo(inputs);
