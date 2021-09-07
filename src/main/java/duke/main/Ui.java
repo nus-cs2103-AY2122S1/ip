@@ -50,6 +50,8 @@ public class Ui {
      * @return String The successfully added message.
      */
     public String displayAddedMessage(Task t, TaskList tasks) {
+        assert t != null : "Task added should not be null";
+        assert tasks != null : "TaskList should have been initialized";
         String s = "I have added to the list: \n\t \t " + t.toString()
                 + "There are " + tasks.getSize() + " items in the list";
         return s;
