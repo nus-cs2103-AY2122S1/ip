@@ -59,7 +59,7 @@ public class TaskList {
         if (taskType.equals(TaskType.TODO)) {
             task = new ToDo(details);
         } else if (taskType.equals(TaskType.DEADLINE)) {
-            TaskParams params = getAdditionalDetail(details, "/by", "Please indicate the deadline eg \"/by Sunday\" ");
+            TaskParams params = getAdditionalDetail(details, "/by", "Please indicate the deadline eg \"/by 09-09-2021 23:00\" ");
             task = new Deadline(params.description, params.additional);
         } else if (taskType.equals(TaskType.EVENT)) {
             TaskParams params = getAdditionalDetail(details, "/at",
