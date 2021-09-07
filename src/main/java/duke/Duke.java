@@ -14,10 +14,9 @@ public class Duke {
     private TaskList tasks;
 
     private boolean hasExit;
-    
+
     /**
      * Constructs a Duke Chatbot with a data storage file.
-     *
      */
     public Duke() {
         try {
@@ -31,6 +30,7 @@ public class Duke {
 
     /**
      * Returns Duke's response to user input.
+     *
      * @param input User's input.
      * @return Duke's response.
      */
@@ -54,5 +54,5 @@ public class Duke {
     public boolean hasExit() {
         return hasExit;
     }
-    
+
 }

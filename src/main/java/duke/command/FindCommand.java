@@ -45,7 +45,8 @@ public class FindCommand extends Command {
             int num = i + 1;
             taskStrings.add(num + "." + task.toString());
         }
-        return formatOutput("I found these matching tasks in your list for '" + keyword + "':",formatOutput(taskStrings));
+        return formatOutput("I found these matching tasks in your list for '" + keyword + "':",
+            formatOutput(taskStrings));
     }
 
     /**

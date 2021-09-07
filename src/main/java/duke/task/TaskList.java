@@ -42,7 +42,7 @@ public class TaskList {
             int num = i + 1;
             taskStrings.add(num + "." + task.toString());
         }
-        
+
         return taskStrings;
     }
 

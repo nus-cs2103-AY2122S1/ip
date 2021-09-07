@@ -14,7 +14,7 @@ public class ParserTest {
             assertEquals(0, Parser.parse("show", new TaskList()));
             fail();
         } catch (DukeException e) {
-            assertEquals("∑(O_O;) Oh no!! Sorry, I don't know what that means.", e.toString());
+            assertEquals("(O_O;) Oh no!! Sorry, I don't know what that means.", e.toString());
         }
     }
 }
