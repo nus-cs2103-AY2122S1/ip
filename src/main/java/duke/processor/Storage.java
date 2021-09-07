@@ -25,7 +25,7 @@ public class Storage {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                assert 1 == 0: "IO ERROR " + e.toString();
+                assert 1 == 0 : "IO ERROR " + e.toString();
             }
         }
         try {
@@ -36,7 +36,6 @@ public class Storage {
             fileOut.close();
         } catch (IOException e) {
             assert 1 == 0 : "IO ERROR " + e.toString();
-
         }
     }
 
