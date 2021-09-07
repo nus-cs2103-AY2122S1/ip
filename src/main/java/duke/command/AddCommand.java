@@ -40,9 +40,11 @@ public class AddCommand extends Command{
      */
     @Override
     public void execute(TaskList taskList, Gui gui, Storage storage) throws DukeException {
+        assert taskList != null : "task list should not be null.";
+        assert gui != null : "gui should not be null.";
         String[] parameter;
         LocalDateTime ldt;
-        Task task;
+        Task task = null;
         switch (command) {
         case "todo":
             task = new ToDo(description);
@@ -74,7 +76,7 @@ public class AddCommand extends Command{
                     : new Event(parameter[0], ldt);
             break;
         default:
-            throw new DukeException("OOPS!!! Something went wrong.");
+            throw new DukeException("Invalid add command!");
         }
         taskList.addTask(task);
         storage.save(taskList);

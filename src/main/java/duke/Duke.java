@@ -23,13 +23,14 @@ public class Duke extends Application{
     private final Storage storage;
     private TaskList taskList;
     private final Gui gui;
+    private final String FILE_PATH = "./data/duke.txt";
 
     /**
      * A constructor to initialize a chatbot.
      */
     public Duke() {
         gui = new Gui();
-        storage = new Storage("./data/duke.txt");
+        storage = new Storage(FILE_PATH);
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -44,6 +45,7 @@ public class Duke extends Application{
      */
     @Override
     public void start(Stage stage) {
+
         gui.start(stage);
         Button sendButton = gui.getButton();
         TextField userTextField = gui.getUserTextField();

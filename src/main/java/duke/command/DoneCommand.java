@@ -26,15 +26,16 @@ public class DoneCommand extends Command{
 
     /**
      * Execute a done command.
-     * mark a task from the task list as done.
+     * Mark a task from the task list as done.
      * @param taskList The task list to execute the command on.
      * @param gui The user interface to display the reply.
      * @param storage The place to store the session.
      * @throws DukeException task does not exist.
      */
-
     @Override
     public void execute(TaskList taskList, Gui gui, Storage storage) throws DukeException {
+        assert taskList != null : "task list should not be null.";
+        assert gui != null : "gui should not be null.";
         boolean isValidNumber = parameter.matches("\\d+");
         if (!isValidNumber) {
             // Invalid parameter
