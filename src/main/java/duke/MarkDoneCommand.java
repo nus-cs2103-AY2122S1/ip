@@ -41,8 +41,11 @@ public class MarkDoneCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) throws DukeException {
+        int sizeBeforeMarking = list.size();
         boolean markedDone = list.markDoneAtIndex(index);
         if (markedDone) {
+            int sizeAfterMarking = list.size();
+            assert sizeBeforeMarking == sizeAfterMarking : "size should remain the same";
             String message =
                     "Nice! I've marked this task as done:\n"
                     + list.get(index);

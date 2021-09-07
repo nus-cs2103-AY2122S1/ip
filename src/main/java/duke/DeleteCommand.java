@@ -40,8 +40,11 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) throws DukeException {
+        int sizeBeforeDeleting = list.size();
         Task removed = list.deleteAtIndex(this.index);
         if (removed != null) {
+            int sizeAfterDeleting = list.size();
+            assert sizeBeforeDeleting - 1 == sizeAfterDeleting : "size should decrease by 1";
             String message =
                     "Noted.I've removed this task:\n"
                     + "  " + removed + "\n"

@@ -8,6 +8,12 @@ import javafx.application.Application;
  * @author Sherman Ng Wei Sheng
  */
 public class Launcher {
+
+    /**
+     * Launches the application.
+     *
+     * @param args CLI arguments.
+     */
     public static void main(String[] args) {
         Application.launch(Main.class, args);
     }
