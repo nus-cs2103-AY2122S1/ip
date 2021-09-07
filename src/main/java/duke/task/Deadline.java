@@ -13,13 +13,6 @@ import duke.Parser;
  */
 public class Deadline extends Task {
 
-    private static String errorMessage = "Wrong format Sir/Mdm. Dates and times must be given as only a date: DATE\n"
-        + "or as date and time: DATE TIME\n"
-        + "Accepted formats for DATE: YYYY-MM-DD, DD/MM/YYYY\n"
-        + "Accepted formats for TIME (24H format): TT:TT, TTTT\n"
-        + "Examples for DATE TIME: 13/2/2019 1800, 13/2/2019 18:00, 2019-02-13 1800,\n"
-        + "2019-02-13 18:00\n"
-        + "Examples for DATE: 13/2/2019, 2019-02-13";
     protected LocalDateTime date;
     protected String taskType = "[D]";
     protected boolean isDateOnly = false;
@@ -73,6 +66,15 @@ public class Deadline extends Task {
      */
     public static Deadline of(String description, String input) throws DukeException {
 
+        String exceptionMessage = "Wrong format Sir/Mdm. Dates and times must be given as only a date: "
+            + "DATE\n"
+            + "or as date and time: DATE TIME\n"
+            + "Accepted formats for DATE: YYYY-MM-DD, DD/MM/YYYY\n"
+            + "Accepted formats for TIME (24H format): TT:TT, TTTT\n"
+            + "Examples for DATE TIME: 13/2/2019 1800, 13/2/2019 18:00, 2019-02-13 1800,\n"
+            + "2019-02-13 18:00\n"
+            + "Examples for DATE: 13/2/2019, 2019-02-13";
+
         String[] dateAndOrTime = input.split(" ");
         LocalDateTime dateTime;
         boolean isDateOnly;
@@ -84,7 +86,7 @@ public class Deadline extends Task {
             dateTime = Parser.parseDateAndTime(dateAndOrTime[0], dateAndOrTime[1]);
             isDateOnly = false;
         } else {
-            throw new DukeException(errorMessage);
+            throw new DukeException(exceptionMessage);
         }
 
         return new Deadline(description, dateTime, isDateOnly);
@@ -111,7 +113,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return taskType + super.toString() + " (by: " + Parser.dateTimeToString(this.date, isDateOnly) + ")";
+        return taskType + super.toString() + " (by: " + Parser.getDateTimeString(this.date, isDateOnly) + ")";
     }
 
     @Override

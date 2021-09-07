@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
 
         Task task = tasks.get(index);
         tasks.remove(index);
-        storage.save(tasks);
+        storage.saveTasks(tasks);
         ui.delete(task, tasks);
     }
 
