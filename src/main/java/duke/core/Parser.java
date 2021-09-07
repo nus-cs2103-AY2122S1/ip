@@ -9,6 +9,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.SortCommand;
 import duke.exception.DukeException;
 
 /**
@@ -39,6 +40,8 @@ public class Parser {
             return new ExitCommand();
         case "list":
             return new ListCommand();
+        case "sort":
+            return new SortCommand();
         case "done":
             return new DoneCommand(description);
         case "delete":

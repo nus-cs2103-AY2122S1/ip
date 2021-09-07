@@ -55,4 +55,22 @@ public class TaskListTest {
             fail();
         }
     }
+
+    @Test
+    public void sortTasks_validInput_sortedTaskList() {
+        try {
+            TaskList t = new TaskList();
+            t.recordEvent("Hello 3", "27/08/2019 1800");
+            t.recordEvent("Hello 1", "25/08/2019 1900");
+            t.recordEvent("Hello 2", "27/08/2019 1700");
+            assertEquals("I have sorted your tasks chronologically!\n\n"
+                    + "--- Start of List ---\n"
+                    + "1. [E][ ] Hello 1 (at: 25 Aug 2019, 07:00 PM)\n"
+                    + "2. [E][ ] Hello 2 (at: 27 Aug 2019, 05:00 PM)\n"
+                    + "3. [E][ ] Hello 3 (at: 27 Aug 2019, 06:00 PM)\n"
+                    + "--- End of List ---", t.sortTasks());
+        } catch (DukeException e) {
+            fail();
+        }
+    }
 }

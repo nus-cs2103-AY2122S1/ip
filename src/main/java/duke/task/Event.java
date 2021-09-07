@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -12,9 +11,6 @@ import java.time.format.DateTimeParseException;
  */
 public class Event extends Task {
     protected static final String TASK_SYMBOL = "[E]";
-    protected static final DateTimeFormatter PARSE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
-    protected LocalDateTime dateTime;
 
     /**
      * Initialises the Event Task.
@@ -24,8 +20,7 @@ public class Event extends Task {
      * @throws DateTimeParseException
      */
     public Event(String description, String dateTime) throws DateTimeParseException {
-        super(description, TASK_SYMBOL);
-        this.dateTime = LocalDateTime.parse(dateTime.trim(), PARSE_FORMAT);
+        super(description, TASK_SYMBOL, LocalDateTime.parse(dateTime.trim(), PARSE_FORMAT));
     }
 
     /**
@@ -35,11 +30,11 @@ public class Event extends Task {
      */
     @Override
     public String convertToText() {
-        return super.convertToText() + super.getDivider() + dateTime.format(PARSE_FORMAT);
+        return super.convertToText() + super.getDivider() + super.getParseFormatDateTime();
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + dateTime.format(OUTPUT_FORMAT) + ")";
+        return "[E]" + super.toString() + " (at: " + super.getOutputFormatDateTime() + ")";
     }
 }

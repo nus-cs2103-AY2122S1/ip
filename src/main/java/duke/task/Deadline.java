@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -11,10 +10,7 @@ import java.time.format.DateTimeParseException;
  * @author Clifford
  */
 public class Deadline extends Task {
-    protected static final DateTimeFormatter PARSE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
     protected static final String TASK_SYMBOL = "[D]";
-    protected LocalDateTime dateTime;
 
     /**
      * Initialises a deadline tasks with the description of the task and expected
@@ -25,8 +21,7 @@ public class Deadline extends Task {
      * @throws DateTimeParseException
      */
     public Deadline(String description, String dateTime) throws DateTimeParseException {
-        super(description, TASK_SYMBOL);
-        this.dateTime = LocalDateTime.parse(dateTime.trim(), PARSE_FORMAT);
+        super(description, TASK_SYMBOL, LocalDateTime.parse(dateTime.trim(), PARSE_FORMAT));
     }
 
     /**
@@ -36,11 +31,11 @@ public class Deadline extends Task {
      */
     @Override
     public String convertToText() {
-        return super.convertToText() + super.getDivider() + dateTime.format(PARSE_FORMAT);
+        return super.convertToText() + super.getDivider() + super.getParseFormatDateTime();
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + dateTime.format(OUTPUT_FORMAT) + ")";
+        return "[D]" + super.toString() + " (by: " + super.getOutputFormatDateTime() + ")";
     }
 }

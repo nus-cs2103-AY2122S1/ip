@@ -3,12 +3,14 @@ package duke.core;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.TaskComparator;
 import duke.task.Todo;
 
 /**
@@ -249,4 +251,17 @@ public class TaskList {
         }
         return matchList.printTasks();
     }
+
+    /**
+     * Sorts taskList based on chronological order followed by description lexicographical order.
+     * Ranks Todo Task to the bottom of the list.
+     *
+     * @return a String showing that sorting is done and the sorted TaskList.
+     */
+    public String sortTasks() throws DukeException {
+        Collections.sort(tasks, new TaskComparator());
+        saveTasks();
+        return "I have sorted your tasks chronologically!\n\n" + printTasks();
+    }
 }
+

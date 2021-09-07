@@ -11,7 +11,7 @@ public class Todo extends Task {
     protected static final String TASK_SYMBOL = "[T]";
 
     public Todo(String description) {
-        super(description, TASK_SYMBOL);
+        super(description, TASK_SYMBOL, null);
     }
 
     /**
