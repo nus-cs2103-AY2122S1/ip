@@ -1,6 +1,7 @@
 package duke.io;
 
 import duke.command.Commands;
+import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
@@ -23,21 +24,14 @@ public class Parser {
     public String getResponse(String input) {
         String firstWord = input.split(" ")[0];
 
-        Commands[] commands = Commands.values();
-        int i = 0;
+        Command command = Commands.findCommand(firstWord);
 
-        // Find the first command that matches
-        while (i != commands.length && !commands[i].isCommand(firstWord)) {
-            i++;
-        }
-
-        // None of the commands match
-        if (i == commands.length) {
+        if (command == null) {
             return "Unsupported Operation!";
         }
 
         try {
-            return commands[i].getCommand().parse(input, taskList);
+            return command.parse(input, taskList);
         } catch (DukeException e) {
             return e.displayError();
         }

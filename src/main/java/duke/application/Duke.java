@@ -2,8 +2,9 @@ package duke.application;
 
 import java.io.IOException;
 
+import duke.io.AliasStorage;
 import duke.io.Parser;
-import duke.io.Storage;
+import duke.io.TaskStorage;
 import duke.task.TaskList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,8 +16,8 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Duke extends Application {
-    private final Storage storage = new Storage("save.csv");
-    private final TaskList taskList = new TaskList(storage);
+    private final TaskStorage taskStorage = new TaskStorage("save.csv");
+    private final TaskList taskList = new TaskList(taskStorage);
     private final Parser parser = new Parser(taskList);
 
     /**

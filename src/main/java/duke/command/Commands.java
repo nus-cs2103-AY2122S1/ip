@@ -1,5 +1,8 @@
 package duke.command;
 
+import duke.io.AliasStorage;
+import java.util.List;
+
 /**
  * Enum of commands to cycle through and return the right command that matches user input.
  */
@@ -11,7 +14,8 @@ public enum Commands {
     EVENT (new EventCommand()),
     DONE (new DoneCommand()),
     DELETE (new DeleteCommand()),
-    FIND (new FindCommand());
+    FIND (new FindCommand()),
+    ALIAS (new AliasCommand());
 
     private final Command command;
     Commands(Command command) {
@@ -19,21 +23,46 @@ public enum Commands {
     }
 
     /**
-     * Checks if the first word of the user input matches this command.
+     * Returns the command of this type.
      *
-     * @param firstWord First word of user input.
-     * @return True if the first word of the user input matches this command.
+     * @param firstWord The first word of the user input.
+     * @return The Command that uses the input as a command, or null if no Command matches it.
      */
-    public boolean isCommand(String firstWord) {
-        return firstWord.equals(command.getCommandString());
+    public static Command findCommand(String firstWord) {
+        for (Commands command : Commands.values()) {
+            Command commandObject = command.command;
+            if (commandObject.containsCommand(firstWord)) {
+                return commandObject;
+            }
+        }
+
+        // if no command matches, returns null
+        return null;
     }
 
     /**
-     * Returns the command of this type.
+     * Returns a string representing all aliases to save for persistence.
      *
-     * @return The Command.
+     * @return String representation of all aliases.
      */
-    public Command getCommand() {
-        return command;
+    public static String getAliasSaves() {
+        StringBuilder sb = new StringBuilder();
+        for (Commands commands : Commands.values()) {
+            sb.append(commands.command.getSaveFormat());
+            sb.append('\n');
+        }
+
+        // delete the last newline character
+        sb.deleteCharAt(sb.length() - 1);
+
+        return sb.toString();
+    }
+
+    public static void loadAliases() {
+        for (Commands commands : Commands.values()) {
+            Command command = commands.command;
+            List<String> aliases = AliasStorage.getLoadedAliases(command.getMainCommand());
+            command.setAliases(aliases);
+        }
     }
 }

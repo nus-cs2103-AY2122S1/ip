@@ -16,10 +16,10 @@ import duke.task.ToDo;
 /**
  * Storage class that manages the saving and loading of the task list.
  */
-public class Storage {
+public class TaskStorage {
     private final File saveFile;
 
-    public Storage(String filepath) {
+    public TaskStorage(String filepath) {
         this.saveFile = new File(filepath);
     }
 
@@ -61,7 +61,7 @@ public class Storage {
     }
 
     /**
-     * Saves the taskList into save.csv.
+     * Saves the taskList into the specified file.
      *
      * @param tasks The tasks to be saved.
      * @throws DukeException Any exception caught that has to do with the I/O.

@@ -3,23 +3,23 @@ package duke.task;
 import java.util.ArrayList;
 
 import duke.exception.DukeException;
-import duke.io.Storage;
+import duke.io.TaskStorage;
 
 /**
  * Class representing the list of tasks.
  */
 public class TaskList {
     private final ArrayList<Task> tasks;
-    private final Storage storage;
+    private final TaskStorage taskStorage;
 
     /**
      * Constructor of task list. Loads tasks from specified savefile.
      *
-     * @param storage The storage system that manages saving and loading.
+     * @param taskStorage The storage system that manages saving and loading.
      */
-    public TaskList(Storage storage) {
-        this.storage = storage;
-        this.tasks = storage.load();
+    public TaskList(TaskStorage taskStorage) {
+        this.taskStorage = taskStorage;
+        this.tasks = taskStorage.load();
     }
 
     /**
@@ -206,7 +206,7 @@ public class TaskList {
      * @throws DukeException I/O exception from saving.
      */
     private void save() throws DukeException {
-        storage.save(tasks);
+        taskStorage.save(tasks);
     }
 
     /**

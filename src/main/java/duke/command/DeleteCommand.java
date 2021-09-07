@@ -8,7 +8,7 @@ import duke.task.TaskList;
  */
 public class DeleteCommand extends Command {
     public DeleteCommand() {
-        setCommandString("delete");
+        setMainCommand("delete");
     }
 
     /**
@@ -22,21 +22,22 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String parse(String input, TaskList taskList) throws DukeException {
-        assert input.substring(0, getCommandLength() - 1).equals(getCommandString())
-                : "Input should start with command";
         assert taskList != null : "taskList should not be null";
 
-        if (input.length() <= getCommandLength()) {
+        int firstSpace = input.indexOf(' ');
+
+        // No space after the command
+        if (firstSpace == -1) {
             throw new DukeException("Please input a task number.");
         }
 
-        String data = input.substring(getCommandLength()).strip();
+        String data = input.substring(firstSpace).strip();
 
-        if (data.equals("done")) {
+        if (data.equalsIgnoreCase("done")) {
             return taskList.deleteDone();
         }
 
-        if (data.equals("expired")) {
+        if (data.equalsIgnoreCase("expired")) {
             return taskList.deleteExpired();
         }
 

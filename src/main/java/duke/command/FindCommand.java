@@ -8,7 +8,7 @@ import duke.task.TaskList;
  */
 public class FindCommand extends Command {
     public FindCommand() {
-        setCommandString("find");
+        setMainCommand("find");
     }
 
     /**
@@ -22,15 +22,16 @@ public class FindCommand extends Command {
      */
     @Override
     public String parse(String input, TaskList taskList) throws DukeException {
-        assert input.substring(0, getCommandLength() - 1).equals(getCommandString())
-                : "Input should start with command";
         assert taskList != null : "taskList should not be null";
 
-        if (input.length() <= getCommandLength()) {
+        int firstSpace = input.indexOf(' ');
+
+        // No space after the command
+        if (firstSpace == -1) {
             throw new DukeException("Please input a search string.");
         }
 
-        String data = input.substring(getCommandLength()).strip();
+        String data = input.substring(firstSpace).strip();
 
         if (data.equals("")) {
             throw new DukeException("Please input a search string.");
