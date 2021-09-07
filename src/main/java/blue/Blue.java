@@ -58,6 +58,7 @@ public class Blue {
             boolean shouldContinue = canHandle(input);
             storage.save(tasks);
             if (!shouldContinue) {
+                assert Parser.getCommand(input).equals(Command.EXIT) : "Command should be EXIT";
                 break;
             }
         }
@@ -114,6 +115,7 @@ public class Blue {
      * @return Response from Blue.
      */
     public String getResponse(String input) {
+        assert input != null : "Input should be String (possible empty)";
         String command = Parser.getCommand(input);
         if (commandHandlers.containsKey(command)) {
             CommandHandler commandHandler = commandHandlers.get(command);

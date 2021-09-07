@@ -47,6 +47,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getBlueDialog(response, blueImage)
         );
+        assert dialogContainer.getChildren().size() > 0 : "Dialog container should already contain dialogs";
         userInput.clear();
     }
 }

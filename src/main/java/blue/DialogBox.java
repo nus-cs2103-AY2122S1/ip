@@ -35,7 +35,9 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        assert dialog != null : "Dialog Label should have been assigned in FXML";
         dialog.setText(text);
+        assert displayPicture != null : "Display picture ImageView should have been assigned in FXML";
         displayPicture.setImage(img);
     }
 
@@ -44,6 +46,7 @@ public class DialogBox extends HBox {
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        assert tmp.size() > 0 : "Dialog box should contain children";
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
