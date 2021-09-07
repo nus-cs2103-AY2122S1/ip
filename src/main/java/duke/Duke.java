@@ -30,10 +30,8 @@ public class Duke extends Application {
     private VBox dialogContainer;
     private TextField userInput;
 
-    private final Image user = new Image(Objects.requireNonNull(
-            this.getClass().getResourceAsStream("/images/perry.png")));
-    private final Image duke = new Image(Objects.requireNonNull(
-            this.getClass().getResourceAsStream("/images/doofenshmirtz.jpg")));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/perry.png"));
+    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/doofenshmirtz.jpg"));
 
     /**
      * Creates Duke ChatBot.
