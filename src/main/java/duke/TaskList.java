@@ -193,7 +193,7 @@ public class TaskList {
             String[] tsData = ts.split(" \\| ");
             String taskType = tsData[0];
 
-            assert taskType == "T" || taskType == "D" || taskType == "E": "Invalid task type!";
+            assert taskType.equals("T")|| taskType.equals("D") || taskType.equals("E"): "Invalid task type!";
 
             switch (taskType) {
             case "T":
