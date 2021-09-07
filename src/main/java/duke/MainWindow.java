@@ -21,7 +21,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     private TextField userInput;
 
-
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/cactus.jpg"));

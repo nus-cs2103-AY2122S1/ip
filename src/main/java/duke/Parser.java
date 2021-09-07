@@ -50,6 +50,8 @@ public class Parser {
             int indexOfTimeDescription = indexOfAt + "/at ".length();
             String description = str.substring(indexForEventDescription, indexOfAt - 1);
             String time = str.substring(indexOfTimeDescription);
+            assert(description != "");
+            assert(time != "");
             return new Event(description, time);
         } else {
             checkFormatOfDeadlineCommand(str);
@@ -58,6 +60,8 @@ public class Parser {
             int indexOfTimeDescription = indexOfBy + "/by ".length();
             String description = str.substring(indexForEventDescription, indexOfBy - 1);
             String time = str.substring(indexOfTimeDescription);
+            assert(description != null);
+            assert(time != null);
             return new Deadline(description, time);
         }
     }

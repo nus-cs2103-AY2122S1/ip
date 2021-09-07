@@ -65,6 +65,7 @@ public class Command {
             String action = this.parser.parseCommand(command);
             String reply = getReplyFromDuke(action, command);
             System.out.println(reply);
+            assert(reply != null);
             if (reply.equals(this.ui.getEndMessage())) {
                 hasNextCommand = false;
             }
@@ -105,6 +106,7 @@ public class Command {
             } else if (typeOfCommand.equals("find")) {
                 String str = this.parser.parseFindCommand(description);
                 ArrayList<Task> matchingTasks = this.taskList.findTask(str);
+                assert(this.ui.getMatchingTaskList(matchingTasks) != null);
                 return this.ui.getMatchingTaskList(matchingTasks);
             } else {
                 throw new DukeException("Sorry I don't understand this command :(");

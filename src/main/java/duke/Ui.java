@@ -70,6 +70,7 @@ public class Ui {
      */
     public String getNumberOfTasksInList(TaskList taskList) {
         String str = "";
+        assert(taskList != null);
         if (taskList.getNumOfTask() > 1) {
             str = str + "You have " + taskList.getNumOfTask() + " tasks left in your list.\n";
         } else {

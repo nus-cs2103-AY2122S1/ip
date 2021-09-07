@@ -47,6 +47,7 @@ public class Storage {
      */
     public ArrayList<Task> readFile() throws FileNotFoundException, DukeException {
         ArrayList<Task> tasks = new ArrayList<Task>();
+        assert(filePath != null);
         File file = new File(filePath);
         Scanner fileScanner = new Scanner(file);
         while (fileScanner.hasNext()) {
