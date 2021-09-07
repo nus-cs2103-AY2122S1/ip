@@ -7,13 +7,19 @@ import duke.task.Task;
  * This class encapsulates Duke's methods for printing information to the user.
  */
 public class Ui {
-    private static final String WELCOME_MESSAGE = "Hello, I'm Duke\nWhat can I do for you?";
+    private static final String WELCOME_MESSAGE = "Hello, I'm Duke\nWhat can I do for you?\n"
+            + "Type \"help\" to see a list of commands.";
     private static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";
     private static final String LIST_MESSAGE = "Here are the tasks in your list:\n";
     private static final String ADD_MESSAGE = "Got it. I've added this task:\n%s\nNow you have %d %s in your list.";
     private static final String DONE_MESSAGE = "Nice! I've marked this task as done:\n";
     private static final String REMOVE_MESSAGE = "Noted. I've removed this task:\n%s\nNow you have %d %s in your list.";
     private static final String NO_TASKS_MESSAGE = "No tasks to display.";
+    private static final String HELP_MESSAGE = "Hi, I'm Duke!\nType \"todo [name]\" to ask me to remember a todo.\n"
+            + "Type \"event [name] /at [dd/mm/yyyy hhmm]\" or \"deadline [name] /by [dd/mm/yy hhmm]\" to ask me to "
+            + "remember an event or deadline.\nType \"list\" to see all your tasks.\nType \"done [number]\" or "
+            + "\"delete [number]\" to ask me to mark a task as done or delete a task respectively.\n"
+            + "Type \"find [search term]\" to search for a task.";
 
     /**
      * Gets Duke's welcome message.
@@ -74,5 +80,9 @@ public class Ui {
      */
     public static String doneMessage(Task task) {
         return DONE_MESSAGE + task;
+    }
+
+    public static String helpMessage() {
+        return HELP_MESSAGE;
     }
 }
