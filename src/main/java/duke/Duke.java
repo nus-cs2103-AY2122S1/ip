@@ -203,6 +203,8 @@ public class Duke {
             case "bye":
                 storage.save(listOfItems);
                 return "your data has been successfully saved!";
+            case "help":
+                return new ManPage().toString();
             default:
                 markAsInvalid(input);
                 break;
