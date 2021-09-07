@@ -1,6 +1,12 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Add;
+import duke.command.Command;
+import duke.command.Delete;
+import duke.command.Done;
+import duke.command.Exit;
+import duke.command.Find;
+import duke.command.List;
 import duke.dukeexception.EmptyDescriptionException;
 import duke.dukeexception.IllegalCommandException;
 
@@ -24,7 +30,7 @@ public class Parser {
         } else if (input.startsWith("done")) {
             int value = Character.getNumericValue(input.charAt(5));
             return new Done(value);
-        }  else if (input.startsWith("delete")) {
+        } else if (input.startsWith("delete")) {
             int value = Character.getNumericValue(input.charAt(7));
             return new Delete(value);
         } else if (input.startsWith("find")) {

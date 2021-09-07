@@ -22,7 +22,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(this.storage.load());
-        } catch (DukeException e){
+        } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -48,6 +48,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-            new Duke("./data/file.txt").run();
+        new Duke("./data/file.txt").run();
     }
 }

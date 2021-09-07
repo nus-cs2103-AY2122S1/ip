@@ -9,7 +9,8 @@ public class Ui {
 
     private Scanner scanner;
 
-    private final String LOGO = " ____        _\n"
+    @SuppressWarnings("CheckStyle")
+    private final String logo = " ____        _\n"
         + "|  _ \\ _   _| | _____\n"
         + "| | | | | | | |/ / _ \\\n"
         + "| |_| | |_| |   <  __/\n"
@@ -26,7 +27,7 @@ public class Ui {
      * Displays the welcome message.
      */
     public void showWelcome() {
-        System.out.println("Hello from\n" + LOGO);
+        System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?");
     }
 
@@ -52,7 +53,7 @@ public class Ui {
      * Displays loading error message.
      */
     public void showLoadingError() {
-        System.out.println("Oh no, looks like you don't have a existing list! " +
-                "Lets help you create a new one!");
+        System.out.println("Oh no, looks like you don't have a existing list! "
+                + "Lets help you create a new one!");
     }
 }

@@ -1,8 +1,10 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.task.Task;
 
-import java.util.ArrayList;
+
 
 /**
  * Represents a wrapper class for an arraylist of Tasks.
@@ -59,7 +61,7 @@ public class TaskList {
      */
     public void display() {
         for (int i = 0; i < this.list.size(); i++) {
-            System.out.println(String.format("%s. %s", i+1, this.list.get(i).toString()));
+            System.out.println(String.format("%s. %s", i + 1, this.list.get(i).toString()));
         }
     }
 

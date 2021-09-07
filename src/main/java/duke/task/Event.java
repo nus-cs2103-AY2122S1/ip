@@ -1,10 +1,15 @@
 package duke.task;
 
-import duke.task.Task;
 
 public class Event extends Task {
     protected String at;
 
+    /**
+     * Constructs a Event task.
+     *
+     * @param description
+     * @param at
+     */
     public Event(String description, String at) {
         super(description);
         this.at = at;
