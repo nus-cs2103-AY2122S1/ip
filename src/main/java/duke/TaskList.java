@@ -40,6 +40,9 @@ public class TaskList {
                 break;
             case("E"):
                 addTask(splitData[2], LocalDate.parse(splitData[3]), "event", Boolean.parseBoolean(splitData[1]));
+                break;
+            default:
+                break;
             }
         }
     }
@@ -60,6 +63,7 @@ public class TaskList {
      * @return The task added.
      */
     public Task addTask(String description) {
+        assert !description.equals("") : "Description cannot be blank";
         Task task = new ToDo(description);
         this.list.add(task);
         return task;
@@ -72,6 +76,7 @@ public class TaskList {
      * @param isDone Indicates if the task is done.
      */
     public void addTask(String description, boolean isDone) {
+        assert !description.equals("") : "Description cannot be blank";
         Task task = new ToDo(description, isDone);
         this.list.add(task);
     }
@@ -86,6 +91,8 @@ public class TaskList {
      * @return The task added.
      */
     public Task addTask(String description, LocalDate date, String type) {
+        assert !description.equals("") : "Description cannot be blank";
+        assert description.equals("deadline") || description.equals("event") : "Wrong type";
         Task task;
         if (type.equals("deadline")) {
             task = new Deadline(description, date);
@@ -106,6 +113,8 @@ public class TaskList {
      * @param isDone Indicates if the task is done.
      */
     public void addTask(String description, LocalDate dateTime, String type, boolean isDone) {
+        assert !description.equals("") : "Description cannot be blank";
+        assert description.equals("deadline") || description.equals("event") : "Wrong type";
         Task task;
         if (type.equals("deadline")) {
             task = new Deadline(description, dateTime, isDone);
@@ -149,6 +158,7 @@ public class TaskList {
     }
 
     public ArrayList<String> findTask(String keyword) {
+        assert !keyword.equals("") : "Keyword cannot be blank";
         ArrayList<String> resultArray = new ArrayList<>();
         keyword = keyword.toLowerCase();
         for (Task t : list) {
