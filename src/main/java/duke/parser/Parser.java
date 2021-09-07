@@ -75,7 +75,7 @@ public class Parser {
                 int endIndex = cmd.indexOf("/date");
                 endIndex = endIndex < 0 ? cmd.length() : endIndex;
                 return parseUpdateCommand(cmd.substring(endIndex), serialNo, cmd.substring(6, endIndex).trim(), date);
-            } else if (cmd.matches("^/date\\s+\\d{4}-\\d{2}-\\d{2}($|\\s.*$)")) {
+            } else if (cmd.matches("^/date\\s\\d{4}-\\d{2}-\\d{2}(\\s.*)?$")) {
                 int endIndex = cmd.indexOf("/desc");
                 endIndex = endIndex < 0 ? cmd.length() : endIndex;
                 return parseUpdateCommand(cmd.substring(endIndex), serialNo, description,
