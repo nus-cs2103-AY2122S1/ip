@@ -53,6 +53,16 @@ public class TaskList {
     }
 
     /**
+     * Checks if this TaskList contains a specific Task object.
+     *
+     * @param task the Task to be checked
+     * @return true if the Task object is inside this TaskList
+     */
+    public boolean containsTask(Task task) {
+        return this.tasks.contains(task);
+    }
+
+    /**
      * Returns the number of tasks in this TaskList.
      *
      * @return the number of tasks

@@ -17,6 +17,7 @@ public class ListCommand implements Command {
         return ui.getTaskList(tasks);
     }
 
+    @Override
     public boolean isExit() {
         return false;
     }

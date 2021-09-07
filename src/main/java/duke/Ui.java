@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * A class that handles the responses given back to the user.
  */
@@ -73,6 +76,61 @@ public class Ui {
     public String getTasksDone(Task task) {
         return "Nice! I've marked this task as done:\n  "
                 + task.toString();
+    }
+
+    /**
+     * Gets tasks to do after a specific referenced task.
+     *
+     * @param tasks the TaskList containing all existing tasks
+     * @param refTask the referenced task
+     * @return the tasks to do after the referenced task
+     */
+    public String getTasksAfterTask(TaskList tasks, Task refTask) {
+        return "After this task:\n  " + refTask.toString()
+                + "\nYou need to do the following tasks:\n"
+                + tasks.toString();
+    }
+
+    /**
+     * Gets tasks to do after a specific referenced date and time.
+     *
+     * @param tasks the TaskList containing all existing tasks
+     * @param refDateTime the referenced date and time
+     * @return the tasks to do after the referenced date and time
+     */
+    public String getTasksAfterDateTime(TaskList tasks, LocalDateTime refDateTime) {
+        return "After:\n  "
+                + refDateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"))
+                + "\nYou need to do the following tasks:"
+                + tasks.toString();
+    }
+
+    /**
+     * Gets the response when setting a task after a task.
+     *
+     * @param taskAfter the Task to do after
+     * @param taskBefore the task to do before
+     * @return the response
+     */
+    public String getSetAfterTaskMessage(Task taskAfter, Task taskBefore) {
+        return "Got it! I have set this task:\n  "
+                + taskAfter.toString()
+                + "\nAfter this task:\n  "
+                + taskBefore.toString();
+    }
+
+    /**
+     * Gets the response when setting a task after a date and time.
+     *
+     * @param task the Task to do after the date and time
+     * @param refDateTime the referenced date and time
+     * @return the response
+     */
+    public String getSetAfterDateTimeMessage(Task task, LocalDateTime refDateTime) {
+        return "Got it! I have set this task:\n  "
+                + task.toString()
+                + "\nAfter "
+                + refDateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
     }
 
     /**

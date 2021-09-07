@@ -3,12 +3,16 @@ package duke;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
+    private Path currentRelative = Paths.get("");
+    private String s = currentRelative.toAbsolutePath().toString();
 
     /**
      * A method to load tasks from storage and return the list of tasks.
@@ -18,6 +22,7 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException {
         try {
+            System.out.println(s);
             File dataDirectory = new File("data");
             dataDirectory.mkdir();
             File storage = new File("data/duke.txt");

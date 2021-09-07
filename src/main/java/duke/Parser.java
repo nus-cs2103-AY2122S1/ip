@@ -22,6 +22,10 @@ public class Parser {
             return new DeleteCommand(userInput);
         } else if (userInput.startsWith("find")) {
             return new FindCommand(userInput);
+        } else if (userInput.startsWith("after")) {
+            return new AfterCommand(userInput);
+        } else if (userInput.startsWith("do")) {
+            return new DoAfterCommand(userInput);
         } else {
             return new AddCommand(userInput);
         }
