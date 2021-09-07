@@ -97,6 +97,7 @@ public class Ui {
 
     }
 
+
     /**
      * Gives greetings to users as they log into Duke.
      */
@@ -164,9 +165,19 @@ public class Ui {
 
 
         displayDukeReply(message);
-
-
     }
+
+    /**
+     * Confirms that task list is sorted and shows the list to the user.
+     *
+     * @param tasks
+     */
+    public void showSortedList(TaskList tasks) {
+        String message = "Roger Sir/Mdm! Your tasks are now sorted:\n"
+            + list(tasks) + "\n";
+        displayDukeReply(message);
+    }
+
 
     /**
      * Produces a string enumerating the tasks of the given task list.

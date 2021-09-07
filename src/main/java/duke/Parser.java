@@ -16,6 +16,7 @@ import duke.command.FindByDateCommand;
 import duke.command.FindByDescriptionCommand;
 import duke.command.ListCommand;
 import duke.command.MarkDoneCommand;
+import duke.command.SortCommand;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TaskType;
@@ -61,6 +62,8 @@ public class Parser {
             return generateFindByDateCommand(input, ui, tasks);
         } else if (input.split(" ")[0].equals("find")) {
             return generateFindByDescriptionCommand(input, ui, tasks);
+        } else if (input.equals("sort")) {
+            return generateSortCommand(ui, tasks, storage);
         } else if (input.split(" ")[0].equals("todo") || input.split(" ")[0].equals("event")
             || input.split(" ")[0].equals("deadline")) {
             return generateAddCommand(input, ui, tasks, storage);
@@ -244,4 +247,9 @@ public class Parser {
             throw new DukeException("Pardon me Sir/Mdm, but I do not understand.");
         }
     }
+
+    private static Command generateSortCommand(Ui ui, TaskList tasks, Storage storage) {
+        return new SortCommand(tasks, ui, storage);
+    }
+
 }

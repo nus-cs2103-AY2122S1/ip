@@ -90,6 +90,13 @@ public class TaskList {
     }
 
     /**
+     * Sorts the current tasks by date.
+     */
+    public void sortByDate() {
+        this.tasks.sort(new TaskDateTimeComparator());
+    }
+
+    /**
      * Builds and returns the format string for storing current tasks.
      *
      * @return Storage String
