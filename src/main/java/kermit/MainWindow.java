@@ -31,9 +31,15 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/cookiemonster.png"));
     private Image kermitImage = new Image(this.getClass().getResourceAsStream("/images/kermit.png"));
 
+    private final String WELCOME_MESSAGE = "Hello I am Kermit ( *・∀・)ノ゛, eaten any flies today?\n" +
+            "What can I do for you?";
+
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getKermitDialog(WELCOME_MESSAGE, kermitImage)
+        );
     }
 
     public void setKermit(Kermit k) {
