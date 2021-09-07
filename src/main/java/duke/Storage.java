@@ -33,6 +33,7 @@ public class Storage {
      */
     public void write(TaskList list) {
         try {
+            assert taskList.canWrite() : "Error! File cannot be written!";
             FileWriter writer = new FileWriter(taskList);
 
             for (int i = 0; i < list.size(); i++) {
@@ -56,6 +57,7 @@ public class Storage {
      */
     public void read(TaskList list) {
         try {
+            assert taskList.canRead() : "Error! File cannot be read!";
             Scanner scanner = new Scanner(taskList);
 
             while (scanner.hasNextLine()) {
