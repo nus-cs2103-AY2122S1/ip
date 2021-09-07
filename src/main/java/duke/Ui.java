@@ -7,7 +7,6 @@ import java.util.ArrayList;
  */
 public class Ui {
 
-
     /**
      * Returns the welcoming message for the user and the current tasks in the user's todo list.
      *
@@ -112,12 +111,20 @@ public class Ui {
         String str = "Here are the tasks that matches your search:\n";
         for (int i = 0; i < taskList.size(); i++) {
             Task temp = taskList.get(i);
-           str = str +  (i + 1) + "." + temp +"\n";
+            str = str + (i + 1) + "." + temp + "\n";
         }
         str = str + "\n";
         return str;
     }
 
+    /**
+     * Returns Duke's message when the user presses send or enter without typing anything.
+     *
+     * @return A string of response message.
+     */
+    public String getMessageForEmptyLineInput() {
+        return "Please enter a new task or action.";
+    }
 
 
 }

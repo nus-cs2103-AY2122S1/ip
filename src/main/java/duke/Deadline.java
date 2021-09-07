@@ -9,19 +9,8 @@ import java.time.format.DateTimeParseException;
  */
 public class Deadline extends Task {
 
-    protected String deadline;
-    protected LocalDate deadlineTime;
-
-    Deadline(String description) {
-        super(description);
-        this.deadline = "";
-        this.deadlineTime = null;
-    }
-
-    Deadline(String description, boolean isDone) {
-        super(description, isDone);
-        this.deadline = "";
-    }
+    private String deadline;
+    private LocalDate deadlineTime;
 
     Deadline(String description, boolean isDone, String deadline) {
         super(description, isDone);
