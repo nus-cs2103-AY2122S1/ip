@@ -1,7 +1,9 @@
 package bobcat.model;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 
 import bobcat.exception.InvalidOpsException;
 import bobcat.model.task.Task;
@@ -9,6 +11,25 @@ import bobcat.model.task.Task;
 public class TaskList {
     private final ArrayList<Task> storage;
     private int index;
+
+    private static class OrderedTask implements Comparable<OrderedTask> {
+        private final Task t;
+        private final int ordering;
+
+        OrderedTask(Task t, int o) {
+            this.t = t;
+            this.ordering = o;
+        }
+
+        public Task getTask() {
+            return t;
+        }
+
+        @Override
+        public int compareTo(OrderedTask orderedTask) {
+            return this.ordering - orderedTask.ordering;
+        }
+    }
 
     /**
      * Constructor for a task list
@@ -62,17 +83,60 @@ public class TaskList {
     }
 
     /**
-     * Returns an array of <code>Task</code> whose descriptions contain the given <i>name</i>
+     * Returns an array of <code>Task</code> whose descriptions contain the given <i>name</i>, or whose descriptions
+     * are similar to the given <i>name</i>. The similarity approach will be executed only if no description contains
+     * the given <i>name</i>.
      * @param name String to be searched in the description of <code>Task</code> in <code>TaskList</code>
-     * @return Array of <code>Task</code>
      */
     public Task[] findByName(String name) {
         assert !Objects.equals(name, null);
-        return storage.stream().filter(x -> x.toString().contains(name)).toArray(Task[]::new);
+        CompletableFuture<Task[]> naive = CompletableFuture.supplyAsync(() -> findByNameNaive(name));
+        CompletableFuture<Task[]> advanced = CompletableFuture.supplyAsync(() -> findByNameAdvanced(name));
+
+        return naive.thenApply(taskArr -> taskArr.length == 0 ? advanced : naive).join().join();
     }
 
     public int numTasks() {
         return index;
+    }
+
+    private Task[] findByNameNaive(String name) {
+        return storage.stream().parallel().filter(x -> x.getDescription().toLowerCase().contains(name.toLowerCase()))
+                .toArray(Task[]::new);
+    }
+
+    private int getOrdering(String source, String reference) { // Measures how close source is to reference
+        int relevantLength = Math.min(source.length(), reference.length());
+        return naiveLevenshtein(reference, source.substring(0, relevantLength), 0, 0);
+    }
+
+    private Task[] findByNameAdvanced(String name) {
+        return storage.stream()
+                .parallel()
+                .map(x -> new OrderedTask(x,
+                        getOrdering(x.getDescription().toLowerCase(Locale.ROOT),
+                                name.toLowerCase(Locale.ROOT))))
+                .sorted()
+                .limit(5)
+                .map(OrderedTask::getTask)
+                .toArray(Task[]::new);
+    }
+
+    // Can be optimised by DP
+    private int naiveLevenshtein(String s1, String reference, int idx1, int idx2) {
+        if (s1.length() <= idx1) {
+            return reference.length();
+        } else if (reference.length() <= idx2) {
+            return s1.length();
+        } else if (s1.charAt(idx1) == reference.charAt(idx2)) {
+            return naiveLevenshtein(s1, reference, idx1 + 1, idx2 + 1);
+        } else {
+            return 1 + Math.min(naiveLevenshtein(s1, reference, idx1 + 1, idx2 + 1),
+                    Math.min(
+                        naiveLevenshtein(s1, reference, idx1 + 1, idx2),
+                        naiveLevenshtein(s1, reference, idx1, idx2 + 1)
+                    ));
+        }
     }
 
 }
