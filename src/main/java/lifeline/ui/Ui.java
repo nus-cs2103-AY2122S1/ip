@@ -139,7 +139,7 @@ public class Ui {
         return "alias - a, al\n"
                 + "bye - b, bb, goodbye\n"
                 + "deadline - d, dl\n"
-                + "delete - del\n"
+                + "delete - del, rm\n"
                 + "done - complete\n"
                 + "event - e\n"
                 + "find - f\n"

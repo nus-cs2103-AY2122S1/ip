@@ -13,7 +13,7 @@ public enum Command {
     ALIAS(CommandHandler::handleAlias, "alias", "a", "al"),
     BYE(CommandHandler::handleBye, "bye", "bb", "goodbye", "b"),
     DEADLINE(CommandHandler::handleDeadline, "deadline", "d", "dl"),
-    DELETE(CommandHandler::handleDelete, "delete", "del"),
+    DELETE(CommandHandler::handleDelete, "delete", "del", "rm"),
     DONE(CommandHandler::handleDone, "done", "complete"),
     EVENT(CommandHandler::handleEvent, "event", "e"),
     FIND(CommandHandler:: handleFind, "find", "f"),

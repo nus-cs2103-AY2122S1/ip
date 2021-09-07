@@ -250,6 +250,8 @@ public class CommandHandler {
             throw new LifelineException(ERROR_DONE_MISSING_INDEX);
         case "del":
             // Fallthrough
+        case "rm":
+            // Fallthrough
         case "delete":
             throw new LifelineException(ERROR_DELETE_MISSING_INDEX);
         case "t":
