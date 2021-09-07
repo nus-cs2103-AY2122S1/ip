@@ -34,12 +34,12 @@ public class Parser {
      *
      * @param input a full command
      */
-    public void parse(String input) {
+    public String parse(String input) {
         String lowerCase = input.toLowerCase();
         if (lowerCase.equals("bye")) {
-            return;
+            return "Bye! Hope to see you again!";
         } else if (lowerCase.equals("list")) {
-            listCommand();
+            return listCommand();
         } else if (lowerCase.startsWith("deadline")) {
             int indexOfTime = input.indexOf("/by");
             if (indexOfTime == -1) {
@@ -50,7 +50,7 @@ public class Parser {
             Task deadline = new Deadline(item, by);
             taskList.add(deadline);
             storage.add(deadline);
-            ui.showNewTask(deadline);
+            return ui.showNewTask(deadline);
         } else if (lowerCase.startsWith("event")) {
             int indexOfTime = input.indexOf("/at");
             if (indexOfTime == -1) {
@@ -61,14 +61,14 @@ public class Parser {
             Task event = new Event(item, at);
             taskList.add(event);
             storage.add(event);
-            ui.showNewTask(event);
+            return ui.showNewTask(event);
         } else if (lowerCase.startsWith("todo")) {
             try {
                 String item = input.substring(5);
                 Task todo = new Todo(item);
                 taskList.add(todo);
                 storage.add(todo);
-                ui.showNewTask(todo);
+                return ui.showNewTask(todo);
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("OOPS!!! The description of a event cannot be empty.");
             }
@@ -79,8 +79,7 @@ public class Parser {
                     int item = Integer.parseInt(input.substring(5, 6));
                     taskList.done(item - 1);
                     storage.done(item - 1);
-                    ui.showDone(taskList.get(item - 1));
-                    return;
+                    return ui.showDone(taskList.get(item - 1));
                 }
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("OOPS!!! The target of finished duke.task cannot be empty.");
@@ -93,8 +92,7 @@ public class Parser {
                     Task task = taskList.get(item - 1);
                     taskList.delete(item - 1);
                     storage.delete(item - 1);
-                    ui.showDelete(task, taskList.length());
-                    return;
+                    return ui.showDelete(task, taskList.length());
                 }
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("OOPS!!! The target of deleting duke.task cannot be empty.");
@@ -102,19 +100,20 @@ public class Parser {
         } else if (lowerCase.startsWith("find")) {
             try {
                 String keyword = lowerCase.substring(5).trim();
-                findKeyword(keyword);
+                return findKeyword(keyword);
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("OOPS!!! Keyword cannot be empty.");
             }
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+        return "OOPS!!! There is something wrong..";
     }
 
     /**
      * Fetches Task item from TaskList and print through Ui
      */
-    public void listCommand() {
+    public String listCommand() {
         String items = "";
         if (taskList.length() > 0) {
             items = items + "1. " + taskList.get(0).toString();
@@ -122,30 +121,30 @@ public class Parser {
         for (int i = 2; i <= taskList.length(); i++) {
             items = items + "\n    " + i + ". " + taskList.get(i - 1).toString();
         }
-        ui.showList(items);
+        return ui.showList(items);
     }
 
-    /**
-     * Determines if the command is to exit the program.
-     *
-     * @param command the input
-     * @return true or false
-     */
-    public boolean isExit(String command) {
-        return command.toLowerCase().equals("bye");
-    }
+//    /**
+//     * Determines if the command is to exit the program.
+//     *
+//     * @param command the input
+//     * @return true or false
+//     */
+//    public boolean isExit(String command) {
+//        return command.toLowerCase().equals("bye");
+//    }
 
     /**
      * Finds items with keyword given by user.
      * @param keyword
      */
-    public void findKeyword(String keyword) {
+    public String findKeyword(String keyword) {
         ArrayList<Task> results = new ArrayList<>();
         for (int i = 0; i < taskList.length(); i++) {
             if (taskList.get(i).getDescription().toLowerCase().contains(keyword)) {
                 results.add(taskList.get(i));
             }
         }
-        ui.showFind(results);
+        return ui.showFind(results);
     }
 }

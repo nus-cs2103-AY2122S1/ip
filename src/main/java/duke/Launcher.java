@@ -1,3 +1,6 @@
+package duke;
+
+import duke.Duke;
 import javafx.application.Application;
 
 /**
@@ -5,6 +8,6 @@ import javafx.application.Application;
  */
 public class Launcher {
     public static void main(String[] args) {
-        Application.launch(Duke.class, args);
+        Application.launch(Main.class, args);
     }
 }

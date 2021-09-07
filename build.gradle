@@ -47,7 +47,7 @@ test {
 
 
 application {
-    mainClassName = "java.Launcher"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
