@@ -34,6 +34,7 @@ public class TaskList {
      * commands
      */
     public TaskList(File storedTasks) throws IOException, NoTaskNameException, NoSuchCommandException {
+        assert(storedTasks.exists());
         FileReader fileReader = new FileReader(storedTasks);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String line = bufferedReader.readLine();
