@@ -25,28 +25,28 @@ public class Duke {
     /**
      * Starts an instance of Duke/Jo.
      */
-    public void run() {
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String input = ui.readCommand();
-                if (input.equals("bye")) {
-                    isExit = true;
-                } else {
-                    ui.showLine();
-                    String[] commands = Parser.parse(input);
-                    this.getResponse(commands);
-                }
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-        ui.goodbye();
-        storage.save();
-    }
+//    public void run() {
+//        boolean isExit = false;
+//
+//        while (!isExit) {
+//            try {
+//                String input = ui.readCommand();
+//                if (input.equals("bye")) {
+//                    isExit = true;
+//                } else {
+//                    ui.showLine();
+//                    String[] commands = Parser.parse(input);
+//                    this.getResponse(commands);
+//                }
+//            } catch (DukeException e) {
+//                ui.showError(e.getMessage());
+//            } finally {
+//                ui.showLine();
+//            }
+//        }
+//        ui.goodbye();
+//        storage.save();
+//    }
 
     public String getResponse(String[] args) {
         switch (args[0]) {
@@ -79,7 +79,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        new Duke().run();
-    }
+//    public static void main(String[] args) {
+//        new Duke().run();
+//    }
 }

@@ -1,41 +1,18 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Ui {
 
-    private static final String LINE = "----------------------------------------------";
-
-    private Scanner in;
-
     public Ui() {
-        this.in = new Scanner(System.in);
     }
 
     /**
      * Duke's greeting message seen by the user upon start-up.
      */
-    public String greeting() {
-        // Credits to http://allaboutfrogs.org/gallery/frogstuff/ascii.html
-        // for the frog ASCII text art!
-        String frog =
-                "    _____\n" +
-                        "   /     \\______\n" +
-                        "  | o     |     \\____\n" +
-                        "  /\\_____/           \\___\n" +
-                        " /                       \\\n" +
-                        "|_______/                 \\\n" +
-                        "  \\______   _       ___    \\\n" +
-                        "        /\\_//      /   \\    |\n" +
-                        "       // //______/    /___/\n" +
-                        "      /\\/\\/\\      \\   / \\ \\\n" +
-                        "                    \\ \\   \\ \\\n" +
-                        "                      \\ \\   \\ \\\n" +
-                        "                       \\ \\  /\\/\\\n" +
-                        "                       /\\/\\\n";
+    public static String greeting() {
         String greeting = "I am Jo the Frog! RIBBIT!\n";
-        return frog + greeting + "How may I help you?\n" + LINE;
+        return greeting + "How may I help you?\n";
     }
 
     /**
@@ -46,32 +23,10 @@ public class Ui {
     }
 
     /**
-     * Receiving user input from the Scanner.
-     * @return a valid string input
-     * @throws DukeException If input string is not valid
-     */
-    public String readCommand() throws DukeException {
-        String input = in.nextLine();
-        try {
-            DukeException.checkInput(input.trim());
-        } catch (DukeException e) {
-            return e.getMessage();
-        }
-        return input;
-    }
-
-    /**
      * Message to be seen by user if hard disk file does not exist.
      */
     public String showLoadingError() {
         return "File not detected, new file will be created!";
-    }
-
-    /**
-     * Divider line.
-     */
-    public String showLine() {
-        return LINE;
     }
 
     /**
@@ -140,4 +95,3 @@ public class Ui {
         return message.toString();
     }
 }
-
