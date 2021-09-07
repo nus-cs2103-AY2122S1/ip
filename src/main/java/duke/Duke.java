@@ -25,6 +25,24 @@ public class Duke {
     }
 
     /**
+     * Greets the user at the start.
+     *
+     * @return Greeting message.
+     */
+    public String greeting() {
+        return ui.greet();
+    }
+
+    /**
+     * Says bye to user.
+     *
+     * @return Message that ends the duke conversation.
+     */
+    public String bye() {
+        return ui.bye();
+    }
+
+    /**
      * Gets response from Duke.
      *
      * @param input Input string from user.
