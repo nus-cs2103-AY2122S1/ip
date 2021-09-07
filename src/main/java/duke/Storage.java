@@ -33,6 +33,7 @@ public class Storage {
      * @param tasks The place tasks are stored.
      */
     public void initialiseTasks(ArrayList<Task> tasks) {
+        assert saveFile != null : "No save file path found.";
         try {
             File sf = new File(String.valueOf(saveFile));
             if (Files.exists(saveFile)) {
@@ -70,6 +71,7 @@ public class Storage {
      * @param t The given task.
      */
     public void writeTask(Task t) {
+        assert saveFile != null : "No save file path found.";
         try {
             FileWriter taskWriter = new FileWriter(String.valueOf(saveFile), true);
             taskWriter.write(t.saveTask());
@@ -85,6 +87,7 @@ public class Storage {
      * @param task The given list of Tasks.
      */
     public void updateFile(ArrayList<Task> task) {
+        assert saveFile != null : "No save file path found.";
         try {
             new PrintWriter(String.valueOf(saveFile)).close();
             for (Task t : task) {

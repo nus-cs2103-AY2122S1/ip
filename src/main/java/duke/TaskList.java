@@ -40,14 +40,10 @@ public class TaskList {
         }
 
         out += "Here are the tasks in your list: \n";
-//        System.out.println(Ui.INDENT + Ui.LINE + "\n"
-//                + Ui.INDENT + "Here are the tasks in your list: ");
         for (int i = 0; i < tasks.size(); i++) {
-//            System.out.println(Ui.INDENT + Ui.INDENT + (i + 1) + "." + tasks.get(i).toString());
             out += Ui.INDENT + (i + 1) + "." + tasks.get(i).toString() + "\n";
         }
 
-//        System.out.println(Ui.INDENT + Ui.LINE);
         return out;
     }
 
@@ -62,13 +58,10 @@ public class TaskList {
             Task finishedTask = tasks.get(index);
             finishedTask.markAsDone();
             storage.updateFile(tasks);
-//            ui.toScreen("Nice! I've marked the following task as done: ",
-//                    "    " + finishedTask.toString());
             out += "Nice! I've marked the following task as done: \n"
                     + Ui.INDENT + finishedTask.toString();
             return out;
         } catch (IndexOutOfBoundsException e) {
-//            ui.toScreen("Duke.Task could not be marked as done.", "Please input valid task index.");
             return "Task could not be marked as done.\nPlease input valid task index.";
         }
     }
@@ -84,13 +77,10 @@ public class TaskList {
             Task deletedTask = tasks.get(index);
             tasks.remove(index);
             storage.updateFile(tasks);
-//            ui.toScreen("Ok, I've deleted the following task: ",
-//                    "    " + deletedTask.toString());
             out += "Ok, I've deleted the following task: \n"
                     + Ui.INDENT + deletedTask.toString();
             return out;
         } catch (IndexOutOfBoundsException e) {
-//            ui.toScreen("Task could not be deleted.", "Please input valid task index.");
             return "Task could not be deleted.\nPlease input valid task index.";
         }
     }
@@ -109,16 +99,11 @@ public class TaskList {
             Task temp = new Todo(desc);
             tasks.add(temp);
             storage.writeTask(temp);
-//            ui.toScreen("Ok! A new task has been added:",
-//                    "    " + temp.toString(),
-//                    "You now have " + tasks.size() + " task(s) in total.");
             out += "Ok! A new task has been added:\n"
                     + Ui.INDENT + temp.toString() + "\n"
                     + "You now have " + tasks.size() + " task(s) in total.";
             return out;
         } catch (DukeException de) {
-//            ui.toScreen("Sorry, the Duke.Todo task could not be added.",
-//                    "Please include the description for this task.");
             return "Sorry, the Duke.Todo task could not be added.\nPlease include the description for this task.";
         }
     }
@@ -139,17 +124,11 @@ public class TaskList {
             Task temp = new Deadline(desc, deadline);
             tasks.add(temp);
             storage.writeTask(temp);
-//            ui.toScreen("Ok! A new task has been added:",
-//                    "    " + temp.toString(),
-//                    "You now have " + tasks.size() + " task(s) in total.");
             out += "Ok! A new task has been added:\n"
                     + Ui.INDENT + temp.toString() + "\n"
                     + "You now have " + tasks.size() + " task(s) in total.";
             return out;
         } catch (DukeException de) {
-//            ui.toScreen("Sorry, the Duke.Deadline task could not be added.",
-//                    "Please include the description and deadline for this task with /by.",
-//                    "(Date and time format: dd/MM/yyyy HHmm)");
             return "Sorry, the Duke.Deadline task could not be added.\n"
                     + "Please include the description and deadline for this task with /by.\n" +
                     "(Date and time format: dd/MM/yyyy HHmm)";
@@ -172,16 +151,11 @@ public class TaskList {
             Task temp = new Event(desc, time);
             tasks.add(temp);
             storage.writeTask(temp);
-//            ui.toScreen("Ok! A new task has been added:",
-//                    "    " + temp.toString(),
-//                    "You now have " + tasks.size() + " task(s) in total.");
             out += "Ok! A new task has been added:\n"
                     + Ui.INDENT + temp.toString() + "\n"
                     + "You now have " + tasks.size() + " task(s) in total.";
             return out;
         } catch (DukeException de) {
-//            ui.toScreen("Sorry, the Duke.Event task could not be added.",
-//                    "Please include the description and time of this task with /at.");
             return "Sorry, the Duke.Event task could not be added.\n"
                     + "Please include the description and time of this task with /at.";
         }
@@ -195,7 +169,6 @@ public class TaskList {
     public String findTask(String key) {
         String out = "";
         if (key.isEmpty()) {
-//            ui.toScreen("Please include a search word.");
             return "Please include a search word.";
         }
 
@@ -207,20 +180,15 @@ public class TaskList {
         }
 
         if (temp.size() == 0) {
-//            ui.toScreen("No tasks match this search, please try again.");
             return "No tasks match this search, please try again.";
         }
 
         out += "Here are the tasks that match your search: \n";
-//        System.out.println(Ui.INDENT + Ui.LINE + "\n"
-//                + Ui.INDENT + "Here are the tasks that match your search: ");
         for (int i = 0; i < temp.size(); i++) {
-//            System.out.println(Ui.INDENT + Ui.INDENT + (i + 1) + "." + temp.get(i).toString());
             out += Ui.INDENT + (i + 1) + "." + temp.get(i).toString() + "\n";
         }
 
         return out;
-//        System.out.println(Ui.INDENT + Ui.LINE);
     }
 
     /**
