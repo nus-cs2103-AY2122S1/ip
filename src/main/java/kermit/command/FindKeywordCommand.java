@@ -5,10 +5,10 @@ import kermit.Storage;
 import kermit.TaskList;
 import kermit.Ui;
 
-public class FindCommand extends Command {
+public class FindKeywordCommand extends Command {
     private String filterText;
 
-    public FindCommand(String filterText) {
+    public FindKeywordCommand(String filterText) {
         this.filterText = filterText;
     }
     /**
