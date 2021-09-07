@@ -22,6 +22,7 @@ public class MarkDoneCommand extends Command {
      */
     public MarkDoneCommand(int taskNumber) {
         this.TASK_NUM = taskNumber;
+        assert TASK_NUM >= 0 : "Task number should be at least 0";
     }
 
     /**

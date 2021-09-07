@@ -14,20 +14,20 @@ import duke.main.Ui;
  */
 public class FilterCommand extends Command {
     private Date date;
-    private boolean isExitCommand;
     /**
      * Class constructor.
      *
      * @param dateString the date of interest.
      */
     public FilterCommand(String dateString) throws DukeException {
+        super();
         String[] dateComponents = dateString.split("/");
         try {
             this.date = new Date(dateComponents);
+            assert date != null : "date should not be null";
         } catch (Exception e) {
             throw new DukeException(e);
         }
-        isExitCommand = false;
     }
     /**
      * Executes a command to filter out tasks falling on the specified date.

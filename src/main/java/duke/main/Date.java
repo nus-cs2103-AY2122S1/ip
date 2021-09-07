@@ -14,7 +14,6 @@ import java.time.format.DateTimeParseException;
  */
 public class Date {
     protected LocalDate localDate;
-    private String[] date;
     /**
      * Class constructor.
      *

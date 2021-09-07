@@ -55,7 +55,7 @@ public class Event extends Task {
     /**
      * Print out the event task,
      *
-     * @return string format of the event task, 
+     * @return string format of the event task,
      * consisting of the task marker "E", task description and duration of the event.
      */
     @Override

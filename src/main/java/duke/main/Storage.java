@@ -55,6 +55,7 @@ public class Storage {
             }
             if (file.length() == 0) {
             }
+            assert file != null : "file should not be null";
             Scanner sc = new Scanner(file);
             String line;
             while (sc.hasNext()) {
@@ -97,7 +98,8 @@ public class Storage {
      * @param tasks an arraylist of tasks.
      * @throws IOException exception caused in creating new file.
      */
-    public void store(TaskList tasks) throws IOException{
+    public void store(TaskList tasks) throws IOException {
+        assert tasks != null : "tasks should not be null";
         fileWriter = new FileWriter(file, false);
         String data = "";
         for (int i = 0; i < tasks.getNumTasks(); i++) {
