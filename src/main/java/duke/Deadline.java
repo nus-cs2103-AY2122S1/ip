@@ -12,10 +12,10 @@ public class Deadline extends Task {
      *
      * @param description
      * @param by
-     * @param done
+     * @param isDone
      */
-    public Deadline(String description, LocalDate by, boolean done) {
-        super(description, done);
+    public Deadline(String description, LocalDate by, boolean isDone) {
+        super(description, isDone);
         this.by = by;
     }
 
