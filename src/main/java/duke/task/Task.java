@@ -16,11 +16,11 @@ public abstract class Task implements Comparable<Task> {
     protected static final String DIVIDER = ",";
     protected static final String DONE_STATUS = "[X]";
     protected static final String NOT_DONE_STATUS = "[ ]";
+    protected static final DateTimeFormatter PARSE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
     protected String description;
     protected boolean isDone;
     protected String taskSymbol;
-    protected static final DateTimeFormatter PARSE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
     protected LocalDateTime dateTime;
 
     /**
@@ -91,6 +91,24 @@ public abstract class Task implements Comparable<Task> {
 
     public boolean hasDateTime() {
         return this.dateTime != null;
+    }
+
+    /**
+     * Translates the dateTime to an output format for the user.
+     *
+     * @return a String that follows output format of dateTime
+     */
+    public String getOutputFormatDateTime() {
+        return dateTime.format(OUTPUT_FORMAT);
+    }
+
+    /**
+     * Translates the dateTime to a parse format to be saved in a file.
+     *
+     * @return a String that follows parse format of dateTime
+     */
+    public String getParseFormatDateTime() {
+        return dateTime.format(PARSE_FORMAT);
     }
 
     /**
