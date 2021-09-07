@@ -48,16 +48,23 @@ public class Storage {
             while (s.hasNext()) {
                 String next = s.nextLine();
                 String[] split = next.split("\\|", 4);
+                // checks if the line in the file read contains the tasks in correct format
+                assert split.length > 1;
                 Task t;
                 if (split[0].equals("T")) {
                     t = new Todo(split[2]);
                 } else if (split[0].equals("D")) {
                     t = new Deadline(split[2], split[3]);
                 } else {
+                    assert split[0].equals("E");
                     t = new Event(split[2], split[3]);
                 }
+
                 if (split[1].equals("X")) {
                     t.markAsDone();
+                } else {
+                    // the column for isDone must be empty if it is not 'X'
+                    assert split[1].equals(" ");
                 }
                 tasks.update(t);
             }
