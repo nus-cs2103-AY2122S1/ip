@@ -40,6 +40,11 @@ public class TaskList {
         assert tasks.get(i).isDone;
     }
 
+    public void unComplete(int i) {
+        i--;
+        tasks.get(i).markAsUndone();
+    }
+
     /**
      * Removes a task from the task list.
      *

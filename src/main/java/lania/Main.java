@@ -21,6 +21,7 @@ public class Main extends Application {
     private Storage storage = new Storage("data/lania.txt");
     private TaskList tasks;
     private Parser parser = new Parser();
+    private Log log = new Log();
 
     @Override
     public void start(Stage stage) {
@@ -30,7 +31,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             tasks = storage.load();
-            fxmlLoader.<MainWindow>getController().setLania(tasks, ui, storage, parser);
+            fxmlLoader.<MainWindow>getController().setLania(tasks, ui, storage, parser, log);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

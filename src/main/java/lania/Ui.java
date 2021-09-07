@@ -97,6 +97,18 @@ public class Ui {
         return message;
     }
 
+    public String showUnCompleteMessage(TaskList tasks, int i) {
+        // display to user
+        System.out.println("Lania has marked this task as undone:");
+        System.out.println(tasks.get(i));
+
+        // concatenate the messages displayed
+        String message = "Lania has marked this task as undone:";
+        message += "\n" + tasks.get(i).toString();
+
+        return message;
+    }
+
     /**
      * Message that shows after the user deletes a task.
      *

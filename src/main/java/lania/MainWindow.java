@@ -33,6 +33,7 @@ public class MainWindow extends AnchorPane {
     private Ui ui;
     private Storage storage;
     private Parser parser;
+    private Log log;
 
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
@@ -43,11 +44,12 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setLania(TaskList tasks, Ui ui, Storage storage, Parser parser) {
+    public void setLania(TaskList tasks, Ui ui, Storage storage, Parser parser, Log log) {
         this.tasks = tasks;
         this.ui = ui;
         this.storage = storage;
         this.parser = parser;
+        this.log = log;
     }
 
     /**
@@ -59,7 +61,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         try {
             Command c = parser.parse(userInput.getText());
-            String laniaText = c.execute(tasks, storage, ui);
+            String laniaText = c.execute(tasks, storage, ui, log);
             if (c instanceof ExitCommand) {
                 Platform.exit();
             }

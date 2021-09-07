@@ -37,6 +37,13 @@ public abstract class Task {
     }
 
     /**
+     * Completes a task and set its isDone to true.
+     */
+    public void markAsUndone() {
+        this.isDone = false;
+    }
+
+    /**
      * String representation of a task object
      * to be stored in the hard disk.
      *

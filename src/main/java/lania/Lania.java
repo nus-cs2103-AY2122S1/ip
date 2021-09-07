@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
-import javafx.application.Application;
 import lania.command.Command;
 import lania.exception.LaniaException;
 import lania.task.TaskList;
@@ -22,6 +21,8 @@ public class Lania {
     private Storage storage;
     /** Deals with making sense of the user command */
     private Parser parser;
+    /** Deals with keeping track of previous commands */
+    private Log log;
 
     public Lania() {
         ui = new Ui();
@@ -44,6 +45,7 @@ public class Lania {
         ui = new Ui();
         storage = new Storage(filePath);
         parser = new Parser();
+        log = new Log();
     }
 
     /**
@@ -73,7 +75,7 @@ public class Lania {
             try {
                 String input = s.nextLine();
                 Command c = parser.parse(input);
-                c.execute(tasks, storage, ui);
+                c.execute(tasks, storage, ui, log);
                 isExit = c.isExit();
             } catch (LaniaException e) {
                 ui.showLaniaException(e);
