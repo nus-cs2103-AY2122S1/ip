@@ -30,6 +30,7 @@ class TaskListTest {
     @Test
     void testAddTask() {
         assertEquals(4, taskList.size());
+        taskList.addTask(new TaskStub("", null));
         assertThrows(InvalidTaskNumberException.class,
             () -> taskList.addTask(TasksEnum.DEADLINE.getTask("get a gf /by 9/12/2023")),
             "Task list exceeded hard limit");
