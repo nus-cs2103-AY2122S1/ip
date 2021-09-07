@@ -2,7 +2,6 @@ package duke.ui;
 
 import java.io.IOException;
 
-import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,9 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.shape.Circle;
-import javafx.util.Duration;
-
 
 public class DialogBox extends HBox {
     @FXML
@@ -39,6 +37,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
         dialog.setText(text);
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
         displayPicture.setImage(image);
         Circle circle = new Circle(50, 50, 50);
         displayPicture.setClip(circle);
@@ -58,10 +57,8 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getDukeDialog(String text, Image image) {
-        PauseTransition pause = new PauseTransition(Duration.seconds(1));
         DialogBox db = new DialogBox(text, image);
         db.flip();
-        pause.play();
         return db;
     }
 }
