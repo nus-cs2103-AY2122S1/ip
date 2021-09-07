@@ -71,6 +71,7 @@ public class Duke {
         assert storage != null : "storage should not be null";
         assert history != null : "history should not be null";
         // Change stdout of UI
+        PrintStream oldStdout = System.out;
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
         try {
@@ -81,6 +82,7 @@ public class Duke {
         } catch (Exception e) {
             ui.showException(e);
         }
+        System.setOut(oldStdout);
         return output.toString();
     }
 
@@ -89,9 +91,12 @@ public class Duke {
      */
     public String getWelcomeMessage() {
         assert ui != null : "ui should not be null";
+        // Change stdout of UI
+        PrintStream oldStdout = System.out;
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
         ui.showWelcome();
+        System.setOut(oldStdout);
         return output.toString();
     }
 
