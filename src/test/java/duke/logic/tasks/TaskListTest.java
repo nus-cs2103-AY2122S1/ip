@@ -50,13 +50,13 @@ public class TaskListTest {
     }
 
     @Test
-    public void testFormatData() {
+    public void testSaveFormat() {
         String[] data = new String[4];
         for (int i = 1; i < 5; i++) {
             list.add(new TaskStub(i));
             data[i - 1] = String.format("S | 1 | Stub task %d", i);
         }
-        assertArrayEquals(data, list.toSaveFormat().toArray());
+        assertArrayEquals(data, list.getSaveFormat().toArray());
     }
 
     @Test

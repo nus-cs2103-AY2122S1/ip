@@ -43,6 +43,7 @@ public class TaskList {
      * @return The deleted task.
      */
     public Task delete(int taskNo) {
+        assert taskNo <= list.size() && taskNo > 0 : "Task number to be deleted out of bounds";
         return list.remove(--taskNo);
     }
 
@@ -62,6 +63,7 @@ public class TaskList {
      * @return The task at the index given.
      */
     public Task get(int taskNo) {
+        assert taskNo <= list.size() && taskNo > 0 : "Task number to be retrieved out of bounds";
         return list.get(--taskNo);
     }
 
@@ -83,6 +85,7 @@ public class TaskList {
      * @return A list of resulting tasks.
      */
     public List<Task> find(String[] keywords) {
+        assert keywords.length > 0;
         return list.stream()
                 .filter(task -> Arrays.stream(keywords).anyMatch(task::containsKeyword))
                 .collect(Collectors.toList());
@@ -95,8 +98,8 @@ public class TaskList {
      *
      * @return The string representation for file saving purposes.
      */
-    public List<String> toSaveFormat() {
-        return list.stream().map(Task::toSaveFormat).collect(Collectors.toList());
+    public List<String> getSaveFormat() {
+        return list.stream().map(Task::getSaveFormat).collect(Collectors.toList());
     }
 
     @Override
