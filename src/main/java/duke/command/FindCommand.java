@@ -24,8 +24,7 @@ public class FindCommand implements Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        String toPrint = taskList.findSimilarTasks(keyWords);
-        return toPrint;
+        return taskList.findSimilarTasks(keyWords);
     }
 
     /**

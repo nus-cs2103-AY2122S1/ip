@@ -10,6 +10,12 @@ public class Event extends Task {
 
     private String startTime;
 
+    /**
+     * Initialises an Event.
+     *
+     * @param str String that tells us the description.
+     * @param startTime The starting time of the event.
+     */
     public Event(String str, LocalDateTime startTime) {
         super(str, startTime);
         DateTimeFormatter dateOnly = DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm");

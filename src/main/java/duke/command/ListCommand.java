@@ -22,8 +22,7 @@ public class ListCommand implements Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        String toPrint = taskList.printItems();
-        return toPrint;
+        return taskList.printItems();
     }
 
     /**
@@ -41,9 +40,6 @@ public class ListCommand implements Command {
         if (obj == this) {
             return true;
         }
-        if (!(obj instanceof ListCommand)) {
-            return false;
-        }
-        return true;
+        return obj instanceof ListCommand;
     }
 }

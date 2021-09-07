@@ -102,9 +102,6 @@ public class Parser {
         if (obj == this) {
             return true;
         }
-        if (!(obj instanceof Parser)) {
-            return false;
-        }
-        return true;
+        return obj instanceof Parser;
     }
 }

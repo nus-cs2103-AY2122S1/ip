@@ -11,7 +11,6 @@ import duke.task.Task;
 import duke.task.Todo;
 
 class TaskListTest {
-
     @Test
     void dateFormatting() {
         TaskList taskList = new TaskList();

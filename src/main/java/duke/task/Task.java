@@ -16,6 +16,12 @@ public class Task {
         itemName = str;
     }
 
+    /**
+     * Initialises a Task.
+     *
+     * @param str String that tells us the task description.
+     * @param dateTime the Date that the task is happening.
+     */
     public Task(String str, LocalDateTime dateTime) {
         itemName = str;
         this.dateTime = dateTime;
@@ -42,10 +48,12 @@ public class Task {
     /**
      * Changes the completion status of the task.
      *
-     * @param bool Changes the completion status to the param bool.
+     * @param doneStatus Changes the completion status to true if doneStatus is 1.
      */
-    public void changeIsDone(boolean bool) {
-        isDone = bool;
+    public void changeIsDone(String doneStatus) {
+        if (doneStatus.equals("1")) {
+            isDone = true;
+        }
     }
 
     @Override

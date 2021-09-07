@@ -35,7 +35,7 @@ public class Storage {
      * @return The new file that has taken the place of the old file.
      * @throws IOException To handle the exception where file is not read.
      */
-    public File doneChanger(String description, String cl, File dukeData) throws IOException {
+    public File rewriteDone(String description, String cl, File dukeData) throws IOException {
         Scanner sc = new Scanner(dukeData);
         int count = 0;
         boolean changed = false;
@@ -48,17 +48,14 @@ public class Storage {
                 continue;
             }
             String[] parts = nextLine.split("\\|", 10);
+            if (!(count == 0)) {
+                bw.newLine();
+            }
             if (parts[2].equals(description) && parts[0].equals(cl) && !changed) {
-                if (!(count == 0)) {
-                    bw.newLine();
-                }
                 bw.write(parts[0] + "|1|" + parts[2] + "|" + parts[3]);
                 count++;
                 changed = true;
                 continue;
-            }
-            if (!(count == 0)) {
-                bw.newLine();
             }
             bw.write(nextLine);
             count++;
@@ -82,8 +79,6 @@ public class Storage {
      */
     public void changeDone(Task taskToChange) throws DukeException {
         try {
-            FileWriter fw = new FileWriter(file, true);
-            BufferedWriter bw = new BufferedWriter(fw);
             String description = taskToChange.getItemName();
             String cl = "X";
             if (taskToChange instanceof Todo) {
@@ -96,10 +91,8 @@ public class Storage {
                 cl = "E";
             }
             assert !cl.equals("X") : "Class not correct";
-            file = doneChanger(description, cl, file);
+            file = rewriteDone(description, cl, file);
             assert file.getPath().equals("data/duke.txt") : "File is in data/duke.txt";
-            fw = new FileWriter(file, true);
-            bw = new BufferedWriter(fw);
         } catch (IOException e) {
             throw new DukeException("Oh oh! Something went wrong!");
         }
@@ -123,18 +116,19 @@ public class Storage {
         BufferedWriter bw = new BufferedWriter(fw);
         while (sc.hasNextLine()) {
             String nextLine = sc.nextLine();
-            if (!nextLine.equals("")) {
-                String[] parts = nextLine.split("\\|", 10);
-                if (parts[2].equals(description) && parts[0].equals(cl) && !deleted) {
-                    deleted = true;
-                    continue;
-                }
-                if (!(count == 0)) {
-                    bw.newLine();
-                }
-                bw.write(nextLine);
-                count++;
+            if (nextLine.equals("")) {
+                continue;
             }
+            String[] parts = nextLine.split("\\|", 10);
+            if (parts[2].equals(description) && parts[0].equals(cl) && !deleted) {
+                deleted = true;
+                continue;
+            }
+            if (!(count == 0)) {
+                bw.newLine();
+            }
+            bw.write(nextLine);
+            count++;
         }
         bw.flush();
         bw.close();
@@ -154,8 +148,6 @@ public class Storage {
      */
     public void deleteFromFile(Task toDelete) throws DukeException {
         try {
-            FileWriter fw = new FileWriter(file, true);
-            BufferedWriter bw = new BufferedWriter(fw);
             String description = toDelete.getItemName();
             String cl = "X";
             if (toDelete instanceof Todo) {
@@ -169,8 +161,6 @@ public class Storage {
             }
             assert !cl.equals("X") : "Class given is wrong";
             file = deleteLine(description, cl, file);
-            fw = new FileWriter(file, true);
-            bw = new BufferedWriter(fw);
         } catch (IOException e) {
             throw new DukeException("Oh oh! Something went wrong!");
         }
