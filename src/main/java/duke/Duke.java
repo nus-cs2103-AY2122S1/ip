@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.format.*;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -35,7 +36,7 @@ public class Duke {
     /**
      * Runs Duke, to respond to commands. The functional
      * commands are: bye, done, deadline, todo, event
-     * delete, list. Other commands are ignored.
+     * delete, list, schedule. Other commands are ignored.
      */
     public void run() {
         String command;
@@ -100,6 +101,20 @@ public class Duke {
             ArrayList<Task> tasksWithKeyword = tasks.findTasksUsingKeyword(keyword);
             response = ui.showTasksWithKeyword(tasksWithKeyword);
             break;
+        case "schedule":
+            String date = parser.findDateInCommand();
+            ArrayList<Task> tasksWithDate;
+            if (!date.equals("")) {
+                try {
+                    tasksWithDate = tasks.findTasksUsingDate(LocalDate.parse(date));
+                } catch (DateTimeParseException e) {
+                    throw new DukeException("Wrong format for date! Use yyyy-mm-dd format!");
+                }
+            } else {
+                tasksWithDate = tasks.findTasksUsingDate();
+            }
+            response = ui.showSchedule(tasksWithDate, date);
+            break;
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -147,7 +162,7 @@ public class Duke {
             throw new DukeException("☹ OOPS!!! The date cannot be empty.");
         } else if (taskType == Task.TaskType.DEADLINE
                 || taskType == Task.TaskType.EVENT) {
-            if (DATE_PATTERN.matcher(date).matches()) {
+            if (isInDateFormat(date)) {
                 String[] dateSplit = date.split(" ");
                 String dateString = dateSplit[0];
                 String timeString = dateSplit[1];
@@ -218,6 +233,9 @@ public class Duke {
         }
     }
 
+    public boolean isInDateFormat(String date) {
+        return DATE_PATTERN.matcher(date).matches();
+    }
 
     /**
      * Main method for Duke.
