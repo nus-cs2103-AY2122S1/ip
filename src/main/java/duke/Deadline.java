@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Deadline class is a task. The input must be in such a format
  * "deadline <deadline name> /by <deadline date>".
+ *
  */
 public class Deadline extends Task {
     protected boolean isDone;
@@ -49,9 +50,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the string of the deadline
+     * Returns the string of the deadline.
      *
-     * @return String of event
+     * @return String of event.
      */
     @Override
     public String toString() {
