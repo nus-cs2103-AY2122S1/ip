@@ -52,6 +52,7 @@ public class Ui {
 
     /**
      * Prints the exit message.
+     * @return The exit message.
      */
     public String exit() {
         System.out.println("i zao first");
@@ -61,6 +62,7 @@ public class Ui {
     /**
      * Displays the current task list.
      * @param tasks The TaskList object.
+     * @return A string representation of the task list.
      */
     public String displayList(TaskList tasks) {
         String list = "";
@@ -76,6 +78,7 @@ public class Ui {
     /**
      * Prints the task completed message.
      * @param completedTask The completed Task.
+     * @return A string representation of the completed task.
      */
     public String done(Task completedTask) {
         System.out.println("noice this thing done:\n" + completedTask);
@@ -85,6 +88,7 @@ public class Ui {
     /**
      * Prints the error message.
      * @param e The DukeException object.
+     * @return A string representation of the error.
      */
     public String showLoadingError(DukeException e) {
         System.out.println(e.getMessage());
@@ -95,6 +99,7 @@ public class Ui {
      * Prints the task added message.
      * @param task The added Task.
      * @param length The number of Tasks in the TaskList.
+     * @return A string representation of the task added.
      */
     public String add(Task task, int length) {
         String taskAdded = "one more thing: " + task.toString() + "\nNow you got " + length + " thing(s). sian";
@@ -106,6 +111,7 @@ public class Ui {
      * Prints the task deleted message.
      * @param task The deleted Task.
      * @param length The number of Tasks in the TaskList.
+     * @return A string representation of the deleted task.
      */
     public String delete(Task task, int length) {
         String deleteMessage = "this one no more liao ah :\n" + task.toString()
@@ -117,6 +123,7 @@ public class Ui {
     /**
      * Prints the list of matching Tasks.
      * @param tasks The list of matching Tasks.
+     * @return A string representation of the matching list.
      */
     public String displayMatchingList(TaskList tasks) {
         System.out.println("all these similar one:");
