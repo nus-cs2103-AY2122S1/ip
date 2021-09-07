@@ -20,6 +20,11 @@ public class Task {
     /** Parser object. */
     private Parser parser;
 
+    /**
+     * Constructor for the Task class.
+     * @param description The description of the task.
+     * @param cat The category of the task.
+     */
     public Task(String description, Duke.Category cat) {
         this.description = description;
         this.cat = cat;
@@ -59,7 +64,7 @@ public class Task {
      * @return The status icon of the task
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : "");// mark done task with X
+        return (isDone ? "X" : ""); // mark done task with X
     }
 
     /**

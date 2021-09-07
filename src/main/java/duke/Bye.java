@@ -3,7 +3,7 @@ package duke;
 /**
  * Runs the bye command.
  */
-public class Bye extends Command{
+public class Bye extends Command {
 
     public Bye() {
 

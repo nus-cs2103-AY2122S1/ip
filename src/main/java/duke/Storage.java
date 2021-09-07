@@ -1,10 +1,11 @@
 package duke;
 
-import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
 public class Storage {
 
     /** Stores the path of the text file */
-    String file = "data/duke.txt";
+    private String file = "data/duke.txt";
 
     public Storage() {
 
@@ -44,7 +45,7 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         if (existsDirPath) {
             if (existsFilePath) {
-                loadHelper(path,tasks);
+                loadHelper(path, tasks);
             } else {
                 try {
                     Files.createFile(path);
@@ -80,7 +81,7 @@ public class Storage {
                     Task t = new Task(line, Duke.Category.TODO);
                     t.setPreExisting();
                     tasks.add(t);
-                    if (line.charAt(4) =='X') {
+                    if (line.charAt(4) == 'X') {
                         t.markAsDone(i);
                     }
                 } else if (line.charAt(1) == 'D') {
@@ -94,7 +95,7 @@ public class Storage {
                     Task t = new Task(line, Duke.Category.EVENT);
                     t.setPreExisting();
                     tasks.add(t);
-                    if (line.charAt(4) =='X') {
+                    if (line.charAt(4) == 'X') {
                         t.markAsDone(i);
                     }
                 }

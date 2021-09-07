@@ -15,10 +15,13 @@ public class Duke {
     private Ui ui;
     private TaskList tasks;
 
+    /**
+     * Constructor for the Duke class.
+     */
     public Duke() {
-        ui=new Ui();
+        ui = new Ui();
         storage = new Storage();
-        tasks=new TaskList(storage.load());
+        tasks = new TaskList(storage.load());
     }
 
     /**
@@ -29,6 +32,6 @@ public class Duke {
      */
     String getResponse(String input) {
         Command command = Parser.parseCommand(input);
-        return command.run(tasks,ui,storage);
+        return command.run(tasks, ui, storage);
     }
 }

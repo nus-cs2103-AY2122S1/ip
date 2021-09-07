@@ -27,7 +27,7 @@ public class Ui {
      * @return String to be displayed to the user.
      */
     public String showDelete(String task, TaskList tasks) {
-        return "    Got it. I've deleted this task:" + "\n" + task +  "\n"
+        return "    Got it. I've deleted this task:" + "\n" + task + "\n"
                 + "Now you have " + tasks.numberOfTasks()
                 + " tasks remaining in your list!";
     }

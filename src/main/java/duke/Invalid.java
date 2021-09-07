@@ -3,7 +3,7 @@ package duke;
 /**
  * Represents an invalid command.
  */
-public class Invalid extends Command{
+public class Invalid extends Command {
 
     public Invalid() {
 

@@ -5,7 +5,7 @@ import java.io.IOException;
 /**
  * Deletes task from the TaskList.
  */
-public class Delete extends Command{
+public class Delete extends Command {
 
     /** Index of the task to be deleted. */
     private int index;
@@ -30,10 +30,9 @@ public class Delete extends Command{
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
-        if(t.getPreExisting()) {
-            return ui.showDelete(t.getDescription(),tasks);
-        }
-        else {
+        if (t.getPreExisting()) {
+            return ui.showDelete(t.getDescription(), tasks);
+        } else {
             return ui.showDelete(t.toString(), tasks);
         }
     }

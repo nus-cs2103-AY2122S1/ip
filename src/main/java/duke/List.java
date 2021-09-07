@@ -3,7 +3,7 @@ package duke;
 /**
  * Represents the list command.
  */
-public class List extends Command{
+public class List extends Command {
 
     public List(){
 

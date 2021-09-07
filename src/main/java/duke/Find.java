@@ -3,7 +3,7 @@ package duke;
 /**
  * Finds task from TaskList.
  */
-public class Find extends Command{
+public class Find extends Command {
 
     /** The name of the input command by the user. */
     private String name;
@@ -22,26 +22,25 @@ public class Find extends Command{
      * @return String to be displayed.
      */
     public String run(TaskList tasks, Ui ui, Storage storage) {
-        String res="";
+        String res = "";
         boolean flag = true;
-        int i=1;
+        int i = 1;
         for (int j = 0; j < tasks.numberOfTasks(); j++) {
-            if(!tasks.getTaskFromList(j).getPreExisting()) {
-                if(tasks.getTaskFromList(j).toString().contains(name)){
+            if (!tasks.getTaskFromList(j).getPreExisting()) {
+                if (tasks.getTaskFromList(j).toString().contains(name)) {
                     flag = false;
                     res = res + "    " + (i++) + ". " + tasks.getTaskFromList(j).toString() + "\n";
                 }
             } else {
-                if(tasks.getTaskFromList(j).getDescription().contains(name)) {
+                if (tasks.getTaskFromList(j).getDescription().contains(name)) {
                     flag = false;
                     res = res + "    " + (i++) + ". " + tasks.getTaskFromList(j).getDescription() + "\n";
                 }
             }
         }
-        if(flag) {
+        if (flag) {
             return "oops! sorry you do not have any matching tasks";
-        }
-        else{
+        } else {
             return ui.showFind(res);
         }
     }

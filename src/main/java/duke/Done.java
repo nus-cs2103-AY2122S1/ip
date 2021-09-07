@@ -5,7 +5,7 @@ import java.io.IOException;
 /**
  * Marks task as done.
 */
-public class Done extends Command{
+public class Done extends Command {
 
     /** Index of the task to be marked. */
     private int index;
@@ -30,10 +30,9 @@ public class Done extends Command{
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
-        if(t.getPreExisting()){
+        if (t.getPreExisting()) {
             return ui.showDone(t.getDescription());
-        }
-        else {
+        } else {
             return ui.showDone(t.toString());
         }
 

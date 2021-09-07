@@ -13,7 +13,7 @@ public abstract class Command {
      * @param storage Storage to store tasks.
      * @return String to be displayed.
      */
-    public abstract String run(TaskList tasks,Ui ui,Storage storage);
+    public abstract String run(TaskList tasks, Ui ui, Storage storage);
 
 
 
