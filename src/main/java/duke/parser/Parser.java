@@ -1,7 +1,5 @@
 package duke.parser;
 
-import duke.IndexAction;
-import duke.TaskType;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
@@ -12,6 +10,8 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
+import duke.enums.IndexAction;
+import duke.enums.TaskType;
 import duke.exception.InvalidInputException;
 import duke.exception.MissingDescriptionException;
 import duke.exception.MissingIndexException;
@@ -24,7 +24,7 @@ public class Parser {
 
     /**
      * Produces the corresponding type of executable command from the user input.
-     * @param fullCommand The full input given by the user.
+     * @param fullCommand The full command inputted by the user.
      * @return The corresponding type of executable command from the user input.
      * @throws InvalidInputException If the given full input by the user is invalid.
      */

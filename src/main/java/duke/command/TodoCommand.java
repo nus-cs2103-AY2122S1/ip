@@ -8,17 +8,17 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /**
- * The DeadlineCommand class encapsulates the execution of the todo command from the user.
+ * The TodoCommand class encapsulates the execution of the todo command from the user.
  */
 public class TodoCommand extends Command {
 
-    /** The todo command inputted by the user. */
+    /** The todo command description inputted by the user. */
     private String todoDescription;
 
     /**
-     * Constructor to intialise a TodoCommand.
+     * Constructor to initialise a TodoCommand.
      *
-     * @param todoDescription The todo command inputted by the user.
+     * @param todoDescription The todo command description inputted by the user.
      */
     public TodoCommand(String todoDescription) {
         this.todoDescription = todoDescription;
@@ -26,10 +26,11 @@ public class TodoCommand extends Command {
 
     /**
      * Executes the response to the todo command from the user.
-     *
      * @param storage The storage Duke uses to save and load the tasklist from.
      * @param taskList The list of tasks Duke needs to execute on.
      * @param ui The Ui Duke utilises to interact with the user.
+     * @return The String to be printed in the Duke GUI.
+     * @throws IOException If there is an exception relating to the input and output.
      */
     @Override
     public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException {
@@ -37,8 +38,7 @@ public class TodoCommand extends Command {
         Todo todo = new Todo(todoDescription);
         taskList.storeTask(todo);
         storage.saveFile(taskList.getAllTasks());
-        String output = ui.showTaskAdded(todo, taskList);
-        return output;
+        return ui.showTaskAdded(todo, taskList);
 
     }
 }
