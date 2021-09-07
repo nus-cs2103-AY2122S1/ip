@@ -42,6 +42,7 @@ public class Event extends Task {
      */
     public static String getEventDescription(String input) throws MissingEventDetailsException {
         String[] strArr = input.split(" /at", MAX_SPLIT_LIMIT);
+        assert strArr.length == MAX_SPLIT_LIMIT: "Missing event description with format \"description /at..\"";
         if (strArr.length < MAX_SPLIT_LIMIT) {
             Ui.showMissingEventDetails();
             Response.showMissingEventDetails();
@@ -59,6 +60,7 @@ public class Event extends Task {
      */
     public static String getEventDetails(String input) {
         String[] strArr = input.split("/at", MAX_SPLIT_LIMIT);
+        assert strArr.length == 2: "Missing event details with format \"/at..\"";
         return strArr[1];
     }
 

@@ -50,6 +50,7 @@ public class Deadline extends Task {
      */
     public static String getDeadlineDescription(String input) throws MissingDueDateDescriptionException {
         String[] strArr = input.split(" /by", MAX_SPLIT_LIMIT);
+        assert strArr.length == MAX_SPLIT_LIMIT : "Missing due date with format \"/by yyyy-mm-dd time\"";
         if (strArr.length < MAX_SPLIT_LIMIT) {
             Ui.showMissingDeadline();
             Response.showMissingDeadline();
@@ -67,7 +68,9 @@ public class Deadline extends Task {
      */
     public static LocalDate getDate(String input) {
         String[] strArr = input.split("/by ", MAX_SPLIT_LIMIT); // {desc, yyyy-mm-dd time}
+        assert strArr.length == 2: "Missing date";
         String[] arr = strArr[1].split(" ", MAX_SPLIT_LIMIT); // {yyyy-mm-dd, time}
+        assert arr.length == 2: "Missing time";
         return LocalDate.parse(arr[0]);
     }
 
@@ -79,7 +82,9 @@ public class Deadline extends Task {
      */
     public static String getTime(String input) {
         String[] strArr = input.split("/by ", MAX_SPLIT_LIMIT); // {desc, yyyy-mm-dd time}
+        assert strArr.length == 2: "Missing date";
         String[] arr = strArr[1].split(" ", MAX_SPLIT_LIMIT); // {yyyy-mm-dd, time}
+        assert arr.length == 2: "Missing time";
         return arr[1];
     }
 
