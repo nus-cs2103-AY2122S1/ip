@@ -14,8 +14,8 @@ public class Deadline extends Task {
 
     /**
      * Represents a new Deadline Object.
-     * @param description
-     * @param by
+     * @param description for Deadline
+     * @param by time for Deadline
      */
     public Deadline(String description, String by) {
         super(description);
@@ -68,12 +68,12 @@ public class Deadline extends Task {
         return string;
     }
 
-    /**
-     * Tests Deadline class.
-     * @param args
-     */
-    public static void main(String[] args) {
-        Deadline d = new Deadline("return book", "2/12/2019 1800");
-        System.out.println(d);
-    }
+//    /**
+//     * Tests Deadline class.
+//     * @param args
+//     */
+//    public static void main(String[] args) {
+//        Deadline d = new Deadline("return book", "2/12/2019 1800");
+//        System.out.println(d);
+//    }
 }

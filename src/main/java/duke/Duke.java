@@ -1,22 +1,19 @@
 package duke;
 
-import java.io.IOException;
-
 import duke.util.*;
-
 
 /**
  * Represents the core of Duke.
  */
 public class Duke {
-    private Ui ui;
-    private Storage storage;
-    private TaskList taskList;
-    private Parser parser;
+    private final Ui ui;
+    private final Storage storage;
+    private final TaskList taskList;
+    private final Parser parser;
 
     /**
      * Represents a new Duke project.
-     * @param filePath
+     * @param filePath of the database
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -25,34 +22,36 @@ public class Duke {
         parser = new Parser(taskList, ui, storage);
     }
 
-//    /**
-//     * Starts the program
-//     */
-//    public void run() {
-//        ui.showWelcome();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            String fullCommand = ui.readCommand();
-//            ui.showLine();
-//            isExit = parser.isExit(fullCommand);
-//            if (!isExit) {
-//                parser.parse(fullCommand);
-//            }
-//        }
-//        ui.showGoodBye();
-//    }
 
+    /**
+     * Represents a new Duke project without parameter.
+     */
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage("./data/tasks.txt");
+        taskList = new TaskList(storage.load());
+        parser = new Parser(taskList, ui, storage);
+    }
+
+    /**
+     * Show welcome to the user.
+     * @return welcome content
+     */
+    public String welcome() {
+        return ui.showWelcome();
+    }
+
+    /**
+     * Gets corresponding response from Duke.
+     * @param input user input
+     * @return Result content
+     */
     public String getResponse(String input) {
         try {
-            return parser.parse(input.trim());
+            return parser.parse(input);
         } catch (DukeException e) {
             return e.getMessage();
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        Duke duke = new Duke("data/tasks.txt");
-        String result = duke.getResponse("list");
-        System.out.println(result);
-    }
 }

@@ -7,7 +7,6 @@ import duke.task.Task;
 import duke.task.Todo;
 
 
-
 /**
  * Represents a dealer to process a full command.
  */
@@ -33,11 +32,12 @@ public class Parser {
      * example of the input command should be like: deadline return book /by 2/12/2019 1800 .
      *
      * @param input a full command
+     * @return result content
      */
     public String parse(String input) {
         String lowerCase = input.toLowerCase();
         if (lowerCase.equals("bye")) {
-            return ui.showGoodBye();
+            return "Bye! Hope to see you again!";
         } else if (lowerCase.equals("list")) {
             return listCommand();
         } else if (lowerCase.startsWith("deadline")) {
@@ -107,11 +107,13 @@ public class Parser {
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-        return "OOPS!!! There is something wrong here!";
+        return "OOPS!!! There is something wrong..";
     }
 
     /**
      * Fetches Task item from TaskList and print through Ui
+     *
+     * @return result content
      */
     public String listCommand() {
         String items = "";
@@ -124,19 +126,20 @@ public class Parser {
         return ui.showList(items);
     }
 
-    /**
-     * Determines if the command is to exit the program.
-     *
-     * @param command the input
-     * @return true or false
-     */
-    public boolean isExit(String command) {
-        return command.toLowerCase().equals("bye");
-    }
+//    /**
+//     * Determines if the command is to exit the program.
+//     *
+//     * @param command the input
+//     * @return true or false
+//     */
+//    public boolean isExit(String command) {
+//        return command.toLowerCase().equals("bye");
+//    }
 
     /**
      * Finds items with keyword given by user.
      * @param keyword
+     * @return result content
      */
     public String findKeyword(String keyword) {
         ArrayList<Task> results = new ArrayList<>();
