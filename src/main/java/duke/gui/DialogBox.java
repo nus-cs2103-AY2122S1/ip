@@ -44,7 +44,7 @@ public class DialogBox extends HBox {
         if (person.equals("Duke")) {
             dialog.setStyle("-fx-background-color:#c4d4e2; -fx-background-radius: 15; -fx-label-padding: 5, 5, 5, 5");
         } else {
-            dialog.setStyle("-fx-background-color:#bca0dc; -fx-background-radius: 15;-fx-label-padding: 5, 5, 5, 5");
+            dialog.setStyle("-fx-background-color:#bca0dc; -fx-background-radius: 15; -fx-label-padding: 5, 5, 5, 5");
         }
         displayPicture.setImage(img);
         displayPicture.setClip(new Circle(40, 40, 40));
@@ -66,7 +66,7 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img,"Duke");
+        var db = new DialogBox(text, img, "Duke");
         db.flip();
         return db;
     }

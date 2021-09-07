@@ -58,12 +58,17 @@ public class TaskList {
      */
     public Task delete(int id) throws DukeException {
         if (id - 1 > this.listLength) {
-            throw new DukeException("The id you entered was invalid!");
+            throw new DukeException(String.format("Id %s does not exist in the current list!", id));
         } else {
-            Task removedTask = this.list.remove(id - 1);
-            this.listLength--;
-            assert(this.listLength >= 0) : "List length cannot be negative!";
-            return removedTask;
+            try {
+                Task removedTask = this.list.remove(id - 1);
+                this.listLength--;
+                assert(this.listLength >= 0) : "List length cannot be negative!";
+                return removedTask;
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException(String.format("Id %s does not exist in the current list!", id));
+            }
+
         }
     }
 
@@ -76,12 +81,16 @@ public class TaskList {
      */
     public Task markDone(int id) throws DukeException {
         if (id - 1 > this.listLength) {
-            throw new DukeException("The id you entered was invalid!");
+            throw new DukeException(String.format("Id %s does not exist in the current list!", id));
         } else {
-            Task doneTask = this.list.get(id - 1);
-            assert(doneTask != null) : "Completed task cannot be null!";
-            doneTask.complete();
-            return doneTask;
+            try {
+                Task doneTask = this.list.get(id - 1);
+                assert(doneTask != null) : "Completed task cannot be null!";
+                doneTask.complete();
+                return doneTask;
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException(String.format("Id %s does not exist in the current list!", id));
+            }
         }
     }
 
