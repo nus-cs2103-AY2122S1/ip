@@ -65,6 +65,8 @@ public class Storage {
                 }
             } else {
                 taskList.createNewFile();
+
+                assert taskList.exists() : "file at path " + this.filePath + " should exist";
                 return new TaskList(new ArrayList<>());
             }
 
