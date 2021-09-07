@@ -15,10 +15,12 @@ public class Storage { //Storage class used to handle the writing of the file af
     private static Path txtPath;
 
     /**
-     * Constructor for Storage Class
+     * Constructor for Storage Class.
+     *
      * @param path the filepath where the txt file will be/is created
      */
     public Storage(String path) {
+        assert path != null : "Pika Pi, this is not valid!";
         Path filePath = Paths.get(path);
         if (!Files.exists(filePath)) {
             new File(filePath.toString()).mkdirs();
@@ -27,7 +29,7 @@ public class Storage { //Storage class used to handle the writing of the file af
     }
 
     /**
-     * Function to read the existing txt file if a previous one was already made
+     * Reads the existing txt file if a previous one was already made.
      *
      * @return the BufferedReader to read the file
      * @throws FileNotFoundException Handles if the files was not there previously, meaning need make new file
@@ -37,7 +39,7 @@ public class Storage { //Storage class used to handle the writing of the file af
     }
 
     /**
-     * function to update the text each time after any new action is done
+     * Updates the text each time after any new action is done.
      *
      * @param listArray The list of tasks that the bot is using
      * @throws IOException handles if the filepath/file has issues
