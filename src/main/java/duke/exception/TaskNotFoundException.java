@@ -4,6 +4,7 @@ package duke.exception;
  * Thrown when user tries to delete or complete a task that does not exist
  */
 public class TaskNotFoundException extends DukeException{
+    private String error;
 
     /**
      * Constructs TaskNotFoundException object
@@ -12,6 +13,7 @@ public class TaskNotFoundException extends DukeException{
      */
     public TaskNotFoundException(String msg) {
         super(msg);
+        this.error = "OOPS!!! I cannot find this task! Please select an existing task number.";
     }
 
     /**
@@ -19,6 +21,11 @@ public class TaskNotFoundException extends DukeException{
      */
     @Override
     public void printError() {
-        System.out.println("( ⚆ _ ⚆ ) OOPS!!! I cannot find this task! Please select an existing task number.");
+        System.out.println(this.error);
+    }
+
+    @Override
+    public String getError() {
+        return this.error;
     }
 }

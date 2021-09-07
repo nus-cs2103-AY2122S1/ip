@@ -4,7 +4,7 @@ package duke.exception;
  * Thrown when name of task not provided for certain task descriptions
  */
 public class TaskNoNameException extends DukeException {
-    private String task;
+    private String error;
 
     /**
      * Constructs TaskNoNameException object
@@ -14,14 +14,20 @@ public class TaskNoNameException extends DukeException {
      */
     public TaskNoNameException(String msg, String task) {
         super(msg);
-        this.task = task;
+        this.error = String.format("OOPS!!! Please enter a name for your %s!\n", task);
     }
 
     /**
      * Prints error message
+     * @return
      */
     @Override
     public void printError() {
-        System.out.printf("( ⚆ _ ⚆ ) OOPS!!! Please enter a name for your %s!\n", task);
+        System.out.printf(this.error);
+    }
+
+    @Override
+    public String getError() {
+        return this.error;
     }
 }

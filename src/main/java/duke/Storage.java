@@ -48,7 +48,6 @@ public class Storage {
                 Scanner sc = new Scanner(file);
                 while(sc.hasNextLine()) {
                     String s = sc.nextLine();
-                    System.out.println(s);
                     String[] arr = s.split("/");
                     boolean done = (arr[1].equals("1"));
                     String name = arr[2];
