@@ -9,12 +9,12 @@ import duke.command.ListCommand;
 
 public class ParserTest {
     @Test
-    public void parseBye() throws DukeException {
+    public void parseByeTest() throws DukeException {
         assertTrue(Parser.parse("bye") instanceof ExitCommand);
     }
 
     @Test
-    public void parseList() throws DukeException {
+    public void parseListTest() throws DukeException {
         assertTrue(Parser.parse("list") instanceof ListCommand);
     }
 

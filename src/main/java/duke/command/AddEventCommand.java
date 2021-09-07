@@ -9,7 +9,7 @@ import duke.Ui;
  * Represents command to add Event.
  */
 public class AddEventCommand implements Command {
-    private final String desc;
+    private final String DESCRIPTION;
 
     /**
      * Constructor for AddEventCommand.
@@ -17,12 +17,12 @@ public class AddEventCommand implements Command {
      * @param desc Description for Command
      */
     public AddEventCommand(String desc) {
-        this.desc = desc;
+        this.DESCRIPTION = desc;
     }
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        return tasks.addEvent(desc);
+        return tasks.addEvent(DESCRIPTION);
     }
 
     @Override

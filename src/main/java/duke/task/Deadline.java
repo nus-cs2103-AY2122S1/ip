@@ -12,18 +12,18 @@ import java.util.regex.Pattern;
 public class Deadline extends Task {
     private static final String REGEX = "(\\d{2}\\/\\d{2}\\/\\d{4})";
 
-    private String dateDesc;
+    private String dateDescription;
     private LocalDate date;
 
     /**
      * Constructor for Deadline.
      *
      * @param desc     Description of Task
-     * @param dateDesc Deadline for Task
+     * @param dateDescription Deadline for Task
      */
-    public Deadline(String desc, String dateDesc) {
+    public Deadline(String desc, String dateDescription) {
         super(desc);
-        parseDate(dateDesc);
+        parseDate(dateDescription);
     }
 
     /**
@@ -31,37 +31,37 @@ public class Deadline extends Task {
      *
      * @param isDone   String representation of task being done
      * @param desc     Description of Task
-     * @param dateDesc Deadline for Task
+     * @param dateDescription Deadline for Task
      */
-    public Deadline(String isDone, String desc, String dateDesc) {
+    public Deadline(String isDone, String desc, String dateDescription) {
         super(isDone, desc);
-        parseDate(dateDesc);
+        parseDate(dateDescription);
     }
 
-    private void parseDate(String dateDesc) {
-        Matcher m = Pattern.compile(REGEX).matcher(dateDesc);
+    private void parseDate(String dateDescription) {
+        Matcher m = Pattern.compile(REGEX).matcher(dateDescription);
         if (m.find()) {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
                 this.date = LocalDate.parse(m.group(1), formatter);
-                this.dateDesc = dateDesc.replace(m.group(1), date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
+                this.dateDescription = dateDescription.replace(m.group(1), date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
             } catch (DateTimeParseException e) {
-                this.dateDesc = dateDesc;
+                this.dateDescription = dateDescription;
                 this.date = null;
             }
         } else {
-            this.dateDesc = dateDesc;
+            this.dateDescription = dateDescription;
             this.date = null;
         }
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + this.dateDesc + ")";
+        return "[D]" + super.toString() + "(by: " + this.dateDescription + ")";
     }
 
     @Override
     public String saveString() {
-        return "D|" + super.saveString() + "|" + this.dateDesc;
+        return "D|" + super.saveString() + "|" + this.dateDescription;
     }
 }

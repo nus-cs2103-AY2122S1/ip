@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Ui helper for display functions.
  */
 public class Ui {
-    private static final String divider = "__________________________________________\n";
+    private static final String DIVIDER = "__________________________________________\n";
 
     /**
      * Prints greeting message for Duke.
@@ -24,12 +24,12 @@ public class Ui {
     public static String dukePrint(String str) {
         StringBuilder builder = new StringBuilder();
         Scanner scanner = new Scanner(str);
-        builder.append(divider);
+        builder.append(DIVIDER);
         while (scanner.hasNextLine()) {
             builder.append(scanner.nextLine());
             builder.append("\n");
         }
-        builder.append(divider);
+        builder.append(DIVIDER);
         return builder.toString();
     }
 
