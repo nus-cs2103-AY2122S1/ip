@@ -16,7 +16,12 @@ import duke.task.Todo;
 public class Parser {
     private static final int MIN_DELETE_ITEM_LENGTH = 7;
     private static final int MIN_DONE_ITEM_LENGTH = 5;
-
+    private static final int DEADLINE_LENGTH = 8;
+    private static final int MIN_DEADLINE_SEPARATOR_POSITION = DEADLINE_LENGTH + 3;
+    private static final int EVENT_LENGTH = 5;
+    private static final int TODO_LENGTH = 4;
+    private static final int MIN_EVENT_SEPARATOR_POSITION = EVENT_LENGTH + 3;
+    private static final int MIN_TODO_LENGTH = 6;
     /**
      * Returns whether the user's input equals to "bye".
      *
@@ -65,10 +70,11 @@ public class Parser {
      * @throws InvalidTaskException if the task does not have the correct Todo format.
      */
     public static Task testTodoValidity(String task) throws InvalidTaskException {
-        if (!task.contains("todo") || task.length() <= 5) {
+        if (!task.startsWith("todo") || task.length() <= MIN_TODO_LENGTH) {
             throw new InvalidTaskException("Todo");
         }
-        String taskName = task.substring(5);
+        String taskName = task.substring(TODO_LENGTH + 1);
+        assert !taskName.equals("") : "taskName should not be null";
         return new Todo(taskName);
     }
 
@@ -81,12 +87,15 @@ public class Parser {
      * @throws InvalidTaskException if the task does not have the correct Deadline format.
      */
     public static Task testDeadlineValidity(String task) throws InvalidTaskException {
-        if (!task.contains("deadline") || !task.contains("/by")) {
+        if (!task.startsWith("deadline") || !task.contains("/by")) {
             throw new InvalidTaskException("Deadline");
         }
         int position = task.indexOf('/');
-        String taskName = task.substring(9, position - 1);
+        assert position >= MIN_DEADLINE_SEPARATOR_POSITION : "The position of / should be bigger than 8";
+        String taskName = task.substring(DEADLINE_LENGTH + 1, position - 1);
         String deadlineTime = task.substring(position + 4);
+        assert !taskName.equals("") : "taskName should not be null";
+        assert !deadlineTime.equals("") : "deadlineTime should not be null";
         return new Deadline(taskName, deadlineTime);
     }
 
@@ -99,12 +108,15 @@ public class Parser {
      * @throws InvalidTaskException if the task does not have the correct Event format.
      */
     public static Task testEventValidity(String task) throws InvalidTaskException {
-        if (!task.contains("event") || !task.contains("/at")) {
+        if (!task.startsWith("event") || !task.contains("/at")) {
             throw new InvalidTaskException("Event");
         }
         int position = task.indexOf('/');
-        String taskName = task.substring(6, position - 1);
+        assert position > MIN_EVENT_SEPARATOR_POSITION;
+        String taskName = task.substring(EVENT_LENGTH + 1, position - 1);
         String eventTime = task.substring(position + 4);
+        assert !taskName.equals("") : "taskName should not be null";
+        assert !eventTime.equals("") : "eventTime should not be null";
         return new Event(taskName, eventTime);
     }
 
