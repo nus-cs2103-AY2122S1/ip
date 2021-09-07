@@ -37,6 +37,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a string representation of Deadline.
+     *
      * @return A string representation of Deadline.
      */
     @Override
@@ -48,6 +49,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a string formatted for saving purposes.
+     *
      * @return A string representation of Deadline for saving.
      */
     @Override
