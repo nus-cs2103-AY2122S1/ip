@@ -4,7 +4,6 @@ import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents a command that will add Task into the TaskList when executed.
@@ -28,13 +27,12 @@ public class AddCommand extends Command {
      * Executes the AddCommand and add the Task into the TaskList.
      *
      * @param tasks The collection of tasks.
-     * @param ui The user interface that handles input and output.
      * @param storage The storage manager that deals with loading from and
      *               saving into a file.
      * @throws DukeException If the file that act as storage can not be found.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         int before = tasks.size();
         tasks.addTask(task);
         int after = tasks.size();

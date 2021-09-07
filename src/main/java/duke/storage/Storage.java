@@ -46,7 +46,7 @@ public class Storage {
         String[] pathArr = filePath.split("/");
         String[] dirArr = Arrays.copyOfRange(pathArr, 0, pathArr.length - 1);
         String dirPath = String.join("/", dirArr);
-        new File(dirPath).mkdirs();
+        boolean isCreated = new File(dirPath).mkdirs();
 
         try {
             File file = new File(filePath);
@@ -54,7 +54,7 @@ public class Storage {
             tasks.getTasks().forEach(task -> writer.write(task.format() + System.lineSeparator()));
             writer.close();
         } catch (FileNotFoundException e) {
-            throw new DukeException("File could not be found");
+            throw new DukeException("The save file does not denote an existing, writable regular file");
         }
         return true;
     }

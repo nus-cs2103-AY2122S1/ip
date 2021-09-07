@@ -4,7 +4,6 @@ import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents a command that will mark a Task as done when executed.
@@ -29,13 +28,12 @@ public class DoneCommand extends Command {
      * in the TaskList as done.
      *
      * @param tasks The collection of tasks.
-     * @param ui The user interface that handles input and output.
      * @param storage The storage manager that deals with loading from and
      *               saving into a file.
      * @throws DukeException If the file that act as storage can not be found.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         if (index <= 0 || index > tasks.size()) {
             throw new DukeException("Looks like there is no such task to be marked as done");
         }

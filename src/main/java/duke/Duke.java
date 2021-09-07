@@ -5,7 +5,6 @@ import duke.exceptions.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents Duke, a program that helps people to keep track of tasks.
@@ -15,7 +14,6 @@ import duke.ui.Ui;
 public class Duke {
     private final Storage storage;
     private TaskList tasks;
-    private final Ui ui;
     private final Parser parser;
 
     /**
@@ -24,36 +22,12 @@ public class Duke {
      * @param filePath The path to a text file for storage.
      */
     public Duke(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         parser = new Parser();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
-        }
-    }
-
-    /**
-     * Run Duke.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String input = ui.readInput();
-                ui.showLine();
-                Command c = parser.parse(input);
-                String message = c.execute(tasks, ui, storage);
-                ui.reply(message);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
         }
     }
 
@@ -67,19 +41,10 @@ public class Duke {
         String response;
         try {
             Command c = parser.parse(input);
-            response = c.execute(tasks, ui, storage);
+            response = c.execute(tasks, storage);
         } catch (DukeException e) {
             response = e.getMessage();
         }
         return response;
-    }
-
-    /**
-     * This is the entry point for the Duke program in CLI.
-     *
-     * @param args An array of String arguments to follow convention.
-     */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 }
