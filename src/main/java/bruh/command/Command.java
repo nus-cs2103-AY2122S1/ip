@@ -16,8 +16,8 @@ public abstract class Command {
      * accordingly.
      *
      * @param taskList The task list to be affected by the operations.
-     * @param ui The user interface to be affected by the operations.
-     * @param storage The storage function to be affected by the operations.
+     * @param ui       The user interface to be affected by the operations.
+     * @param storage  The storage function to be affected by the operations.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         description = runAndGenerateDescription(taskList, ui, storage);
@@ -26,10 +26,10 @@ public abstract class Command {
     /**
      * Runs the operations and returns a description of the operations run.
      *
-     * @param taskList The task list to be affected by the operations.
-     * @param ui The user interface to be affected by the operations.
-     * @param storage The storage function to be affected by the operations.
-     * @return A description of the operations run.
+     * @param  taskList The task list to be affected by the operations.
+     * @param  ui       The user interface to be affected by the operations.
+     * @param  storage  The storage function to be affected by the operations.
+     * @return          A description of the operations run.
      */
     protected abstract String runAndGenerateDescription(TaskList taskList, Ui ui, Storage storage);
 
