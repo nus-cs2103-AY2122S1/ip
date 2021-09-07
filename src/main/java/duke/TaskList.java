@@ -119,8 +119,9 @@ public class TaskList {
             try {
                 String[] splitLine = nextLine.split("/by ");
                 String date = splitLine[1];
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-                LocalDateTime parsedDate = LocalDateTime.parse(date, formatter);
+                LocalDateTime parsedDate = dateParser(date);
+//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+//                LocalDateTime parsedDate = LocalDateTime.parse(date, formatter);
                 String title = splitLine[0].split("deadline")[1];
                 Deadline nextTask = new Deadline(title, parsedDate);
                 myList.add(nextTask);
@@ -144,8 +145,7 @@ public class TaskList {
             try {
                 String[] splitLine = nextLine.split("/at ");
                 String date = splitLine[1];
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-                LocalDateTime parsedDate = LocalDateTime.parse(date, formatter);
+                LocalDateTime parsedDate = dateParser(date);
                 String title = splitLine[0].split("event")[1];
                 Event nextTask = new Event(title, parsedDate);
                 myList.add(nextTask);
@@ -156,6 +156,12 @@ public class TaskList {
             }
         }
     }
+    private LocalDateTime dateParser(String stringDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        LocalDateTime parsedDate = LocalDateTime.parse(stringDate, formatter);
+        return parsedDate;
+    }
+
 
 
     /**
