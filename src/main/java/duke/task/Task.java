@@ -18,6 +18,7 @@ public class Task {
     }
 
     public String getDescription() {
+        assert description != null : "description variable should not be null";
         return description;
     }
 
@@ -29,7 +30,4 @@ public class Task {
         return "[" + getStatusIcon() + "]" + " " + description;
     }
 
-    public void displayTask() {
-        System.out.println("        " + toString());
-    }
 }
