@@ -26,10 +26,16 @@ public class PersistentStorageHandler {
      *
      * @param fileName name that the storage handler will read and write to.
      */
-    public PersistentStorageHandler(String fileName) {
+    public PersistentStorageHandler(String dirName, String fileName) {
         //Name the file
+        File storedDir = new File(dirName);
+        if (!storedDir.exists()){
+            storedDir.mkdirs();
+        }
+
+
         this.fileName = fileName;
-        this.file = new File(fileName);
+        this.file = new File(storedDir, fileName);
 
         // Create the writer and buffered writer
         try {

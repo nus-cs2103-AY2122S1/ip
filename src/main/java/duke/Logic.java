@@ -87,14 +87,15 @@ public class Logic {
         //Use duke.Parser to package command into a packaged command
         ArrayList<String> listOfCommandInputs = packagedCommand.getListOfCommandInputs();
         String loggedCommand = packagedCommand.getLog();
+        Task tempTask = null;
 
         switch (packagedCommand.getTaskType()) {
         case TODO:
-            Todo tempTodo = new Todo(loggedCommand);
-            DataHandlerLayer.addToLog(tempTodo);
-            if (isWrittenToHistory) {
-                DataHandlerLayer.appendToHistory(tempTodo);
-            }
+            tempTask = new Todo(loggedCommand);
+//            DataHandlerLayer.addToLog(tempTask);
+//            if (isWrittenToHistory) {
+//                DataHandlerLayer.appendToHistory(tempTodo);
+//            }
             break;
         case DEADLINE:
             int indicatorDeadline = listOfCommandInputs.indexOf("/by");
@@ -105,6 +106,8 @@ public class Logic {
             for (int i = 0; i < indicatorDeadline; i++) {
                 tempDeadlineString = tempDeadlineString + listOfCommandInputs.get(i);
             }
+
+            System.out.println(deadlineDateTime);
             Deadline tempDeadLine = new Deadline(tempDeadlineString, Parser.convertToDateTime(deadlineDateTime));
             DataHandlerLayer.addToLog(tempDeadLine);
             if (isWrittenToHistory) {
@@ -121,16 +124,20 @@ public class Logic {
                 temp = temp + listOfCommandInputs.get(i);
             }
             Event tempEvent = new Event(temp, Parser.convertToDateTime(dateTime));
-            DataHandlerLayer.addToLog(tempEvent);
-            if (isWrittenToHistory) {
-                DataHandlerLayer.appendToHistory(tempEvent);
-            }
             break;
         case NOTAPPLICABLE:
             throw new InvalidCommandException();
         default:
             System.out.println("Should never reach here");
         }
+
+        if (tempTask != null) {
+            DataHandlerLayer.addToLog(tempTask);
+            if (isWrittenToHistory) {
+                DataHandlerLayer.appendToHistory(tempTask);
+            }
+        }
+
         DataHandlerLayer.updateHistory();
         DataHandlerLayer.printHistory();
     }

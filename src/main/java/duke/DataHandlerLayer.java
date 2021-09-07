@@ -1,5 +1,7 @@
 package duke;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.function.Function;
 
@@ -17,12 +19,13 @@ public class DataHandlerLayer {
     /**
      * History file that will be written to
      */
-    private static String fileName = "src/main/Text/History.txt";
+    private static String dirName = Paths.get(System.getProperty("user.dir"),"Text").toAbsolutePath().toString();
+    private static String fileName = Paths.get(System.getProperty("user.dir"),"Text", "History.txt").toAbsolutePath().toString();
 
     /**
      * Init data storage handler for history.
      */
-    private static PersistentStorageHandler history = new PersistentStorageHandler(fileName);
+    private static PersistentStorageHandler history = new PersistentStorageHandler(dirName, fileName);
 
 
     /**
@@ -50,7 +53,6 @@ public class DataHandlerLayer {
     public static String getFilteredLog(Function<Task, Boolean> function) {
         int taskNumber = 1;
         StringBuilder sb = new StringBuilder();
-        System.out.println("getFilteredLog caled");
         for (Task temp : log) {
             if (function.apply(temp)) {
                 sb.append(taskNumber + ". " + temp.toString() + "\n");

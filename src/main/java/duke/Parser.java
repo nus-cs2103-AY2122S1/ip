@@ -94,7 +94,6 @@ public class Parser {
                 break;
             }
             packagedHistory.remove(0);
-            System.out.println(eventType);
             Command command = new Command(eventType, packagedHistory, String.join(" ", packagedHistory));
             preloadedList.add(command);
         }
@@ -109,7 +108,6 @@ public class Parser {
      */
     public static LocalDateTime convertToDateTime(String datetimeString) throws InvalidCommandException {
         try {
-            System.out.println(datetimeString);
             String[] temp = datetimeString.split(" ");
             String[] date = temp[0].split("/");
             String[] time = temp[1].split(":");
