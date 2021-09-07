@@ -9,9 +9,9 @@ import duke.TaskList;
  * @author felix-ong
  */
 public class HelpCommand extends Command {
-    private static final String HELP_MESSAGE = "Please enter one of the following commands:\n todo DESCRIPTION"
-            + "\n deadline DESCRIPTION /by DATETIME(yyyy-MM-dd kkmm)"
-            + "\n event DESCRIPTION /at DATETIME(yyyy-MM-dd kkmm)"
+    private static final String HELP_MESSAGE = "Please enter one of the following commands:\n todo(or t) DESCRIPTION"
+            + "\n deadline(or d) DESCRIPTION /by DATETIME(yyyy-MM-dd kkmm)"
+            + "\n event(or e) DESCRIPTION /at DATETIME(yyyy-MM-dd kkmm)"
             + "\n list \n find KEYWORD \n done TASK_INDEX \n delete TASK_INDEX \n bye(to quit)";
 
     /**
