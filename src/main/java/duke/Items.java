@@ -35,8 +35,8 @@ public class Items {
     /**
      * Adds an item to the list.
      *
-     * @param task A task to represent the item added
-     * @return A status message to be displayed
+     * @param task A task to represent the item added.
+     * @return A status message to be displayed.
      */
     public String addItem(Task task) {
         tasks.add(task);
@@ -72,9 +72,9 @@ public class Items {
     /**
      * Deletes the item at the specified index.
      *
-     * @param index index at which item is to be deleted
-     * @return output message stating item has been deleted
-     * @throws DukeException thrown in case of a wrong input
+     * @param index index at which item is to be deleted.
+     * @return output message stating item has been deleted.
+     * @throws DukeException thrown in case of a wrong input.
      */
     public String deleteItem(int index) throws DukeException {
         if (index < 0) {
@@ -137,7 +137,7 @@ public class Items {
             }
         }
         if (ctr == 0) {
-            throw new DukeException("Sorry, seems like your keyword didn't match anything :/");
+            throw new DukeException("Sorry, your keyword didn't match anything :/");
         }
         return output.toString();
     }

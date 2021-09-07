@@ -5,19 +5,19 @@ package duke.task;
  */
 public abstract class Task {
     /**
-     * description of the task
+     * description of the task.
      */
     protected String description;
 
     /**
-     * The task status. True if it is done, else false
+     * The task status. True if it is done, else false.
      */
     protected boolean isDone;
 
     /**
-     * Creates a new Task object (Constructor)
+     * Creates a new Task object (Constructor).
      *
-     * @param description The new task description
+     * @param description The new task description.
      */
     public Task(String description) {
         this.description = description;
@@ -27,7 +27,7 @@ public abstract class Task {
     /**
      * Gets the task status icon.
      *
-     * @return "X" if the test is done, else " "
+     * @return "X" if the test is done, else " ".
      */
     public String getStatusIcon() {
         return (isDone ? "1" : "0"); // mark done task with X
@@ -38,14 +38,13 @@ public abstract class Task {
      */
     public String doneTask() {
         this.isDone = true;
-        String str = "Nice! I've marked this task as done: \n" + this.toString();
-        return str;
+        return "Nice! I've marked this task as done: \n" + this;
     }
 
     /**
      * Generates the task string representation.
      *
-     * @return The description of the task
+     * @return The description of the task.
      */
     public String toString() {
         return "| " + getStatusIcon() + " | " + description;
