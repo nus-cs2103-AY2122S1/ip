@@ -65,7 +65,6 @@ public class Ui {
     /**
      * Displays a formatted message. Called when a task is marked as done.
      *
-     * @param taskListSize The size of the TaskList object.
      * @param doneTask The task that has been marked as done.
      * @return A formatted string.
      */
