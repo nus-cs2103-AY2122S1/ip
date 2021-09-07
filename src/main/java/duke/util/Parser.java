@@ -45,7 +45,7 @@ public class Parser {
                 }
                 return list.findTask(desc);
             } else if(input.startsWith("edit ")){ //edit x /description replacement
-                String[] parts = input.split("/", 2);
+                String[] parts = input.split("/", 2); //splits input in 2 at /
                 int posEdit = extractInt(parts[0]);
                 return list.editTask(posEdit, parts[1]);
             } else if (input.startsWith("done ")) {

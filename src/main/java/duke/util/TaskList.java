@@ -2,7 +2,6 @@ package duke.util;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Locale;
 
 import duke.exception.DukeException;
 import duke.task.Deadline;
@@ -68,6 +67,7 @@ public class TaskList {
      *
      * @param text Description of Event Task.
      * @param at Date time of Event.
+     * @return Notify user that the command is done/not of standard format.
      */
     public String addEvent(String text, String at) {
         try {
@@ -86,7 +86,7 @@ public class TaskList {
      * Sets Task at list index to done .
      *
      * @param index Position of Task to be set to done.
-     * @return
+     * @return String message notifying user that the task is done/no task to be done.
      */
     public String setIndexDone(int index) { // starts from 1
         if (index > list.size() || index < 1) { //check for invalid index number
@@ -102,6 +102,7 @@ public class TaskList {
      * Deletes Task from list.
      *
      * @param index Index of task to be deleted in list.
+     * @return Notify user that the command is done/nothing to be done.
      */
     public String deleteTask(int index) { //starts from 1
         if (index > list.size() || index < 1) {
@@ -116,6 +117,14 @@ public class TaskList {
 
     }
 
+    /**
+     * Edits the task at index in TaskList.
+     *
+     * @param index Index of task to be edited.
+     * @param input Include variable to be edited and the replacement.
+     * @return Notify user that the command is done/nothing to be done
+     * @throws DukeException if variable type to be edited is not of standard format.
+     */
     public String editTask(int index, String input) throws DukeException {
         if (index > list.size() || index < 1) {
             return "There is no task " + index;
@@ -138,7 +147,7 @@ public class TaskList {
             throw new DukeException("Edit type unclear, please specify either /date, /time, /description");
         }
         store.writeToFile(list);
-        return  "Noted. I've edited this task: \n"
+        return "Noted. I've edited this task: \n"
                 + task.toString();
     }
 
@@ -170,6 +179,8 @@ public class TaskList {
 
     /**
      * Prints out the entire list using the Tasks toString method.
+     *
+     * @return Shows user the tasks in the TaskList.
      */
     public String show() {
         int length = list.size();
