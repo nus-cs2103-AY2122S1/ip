@@ -8,9 +8,9 @@ public class InvalidTimeException extends DukeException {
     /**
      * Basic Constructor
      *
-     * @param msg Explanation as to why error occured
+     * @param errorDetails Explanation as to why error occured
      */
-    public InvalidTimeException(String msg) {
-        super(msg);
+    public InvalidTimeException(String errorDetails) {
+        super(errorDetails);
     }
 }

@@ -8,9 +8,9 @@ public class InvalidFormatException extends DukeException {
     /**
      * Basic Constructor
      *
-     * @param msg Explanation as to why error occured
+     * @param errorDetails Explanation as to why error occured
      */
-    public InvalidFormatException(String msg){
-        super(msg);
+    public InvalidFormatException(String errorDetails){
+        super(errorDetails);
     }
 }

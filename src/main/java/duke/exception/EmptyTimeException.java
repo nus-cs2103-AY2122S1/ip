@@ -8,9 +8,9 @@ public class EmptyTimeException extends DukeException{
     /**
      * Basic Constructor
      *
-     * @param msg Explanation as to why error occured
+     * @param errorDetails Explanation as to why error occured
      */
-    public EmptyTimeException (String msg) {
-        super(msg);
+    public EmptyTimeException (String errorDetails) {
+        super(errorDetails);
     }
 }

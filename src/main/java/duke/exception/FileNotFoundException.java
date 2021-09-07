@@ -8,9 +8,9 @@ public class FileNotFoundException extends DukeException {
     /**
      * Basic Constructor
      *
-     * @param msg Explanation as to why error occured
+     * @param errorDetails Explanation as to why error occured
      */
-    public FileNotFoundException(String msg) {
-        super(msg);
+    public FileNotFoundException(String errorDetails) {
+        super(errorDetails);
     }
 }
