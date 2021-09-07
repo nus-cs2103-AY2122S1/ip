@@ -109,7 +109,7 @@ public class Task {
      * @return String representation of the task to be saved in database.
      */
     public String taskToString() {
-        String type;
+        String type = "";
         switch (this.type) {
         case EVENT:
             type = "E";
@@ -121,9 +121,7 @@ public class Task {
             type = "T";
             break;
         default:
-            throw new IllegalArgumentException(
-                "Task type enums inconsistently applied"
-            );
+            assert false : "Task type not Event, Deadline or Todo";
         }
         return String.format(
             "%b%s%s%s%s%s",

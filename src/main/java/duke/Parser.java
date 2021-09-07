@@ -124,7 +124,7 @@ public class Parser {
                 output += "Great! I've marked this task as done:\n    " + task;
                 break;
             default:
-                throw new IllegalArgumentException("Invalid action");
+                assert false : "Action not in enum Action";
             }
             return output;
         } catch (NumberFormatException err) {
