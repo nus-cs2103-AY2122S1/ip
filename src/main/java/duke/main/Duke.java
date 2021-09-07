@@ -1,10 +1,10 @@
-package IP.duke.main;
+package duke.main;
 
-import IP.duke.command.Command;
+import duke.command.Command;
 
 /**
  * Represents the duke chat bot, which has the ability to log and track and delete tasks.
- * 
+ *
  * @author Gordon Yit
  * @version CS2103T, Semester 2
  */
@@ -12,10 +12,10 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    
+
     /**
      * Class constructor.
-     * 
+     *
      * @param fileName name of the storage file.
      * @param filePath directory of the storage file.
      */
@@ -29,14 +29,23 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-    
+
+    /**
+     * Runs the Duke.Duke chat bot.
+     *
+     * @param args Unused.
+     */
+    public static void main(String[] args) {
+        new Duke("data", "duke.txt").run();
+    }
+
     /**
      * Executes the duke chat bot.
      */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
@@ -49,13 +58,5 @@ public class Duke {
                 ui.showLine();
             }
         }
-    }
-    
-    /**
-     * Runs the Duke.Duke chat bot.
-     * @param args Unused.
-     */
-    public static void main(String[] args) {
-        new Duke("data", "duke.txt").run();
     }
 }

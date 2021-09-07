@@ -1,23 +1,23 @@
-package IP.duke.task;
+package duke.task;
 
-import IP.duke.main.DukeException;
+import duke.main.DukeException;
 
 /**
- * Represents a todo task.
- * 
+ * Represents a todo duke.task.
+ *
  * @author Gordon Yit
  * @version C2103T, Semester 2
  */
 public class Todo extends Task {
-    
+
     private final String TASK_MARKER = "T";
-    private String taskDescription;
     private final String TASK_KEYWORD = "todo ";
-    
+    private String taskDescription;
+
     /**
      * Class constructor.
-     * 
-     * @param description the task description.
+     *
+     * @param description the duke.task description.
      * @throws DukeException cause by exception handled in DukeException class.
      */
     public Todo(String description) throws DukeException {
@@ -38,10 +38,20 @@ public class Todo extends Task {
     }
 
     /**
-     * Prints out the task.
-     * 
-     * @return string format of the todo task, 
-     * consisting of the task marker "T" and task description.
+     * Class constructor for loading tasks from storage file.
+     *
+     * @param todoDescription description of todo duke.task.
+     * @param dateOfTask      date of the todo duke.task (unused).
+     */
+    public Todo(String todoDescription, String dateOfTask) {
+        taskDescription = todoDescription;
+    }
+
+    /**
+     * Prints out the duke.task.
+     *
+     * @return string format of the todo duke.task,
+     * consisting of the duke.task marker "T" and duke.task description.
      */
     @Override
     public String toString() {
@@ -49,29 +59,19 @@ public class Todo extends Task {
     }
 
     /**
-     * Formats the task in to the storage format.
+     * Formats the duke.task in to the storage format.
      *
-     * @return storage format of the task.
+     * @return storage format of the duke.task.
      */
     public String formatToStore() {
         return String.format("%s | %s | %s", TASK_MARKER, getStatusIcon() == " " ? 1 : 0,
-                taskDescription);
+            taskDescription);
     }
 
     /**
-     * Class constructor for loading tasks from storage file.
+     * Returns duke.task marker.
      *
-     * @param todoDescription description of todo task.
-     * @param dateOfTask date of the todo task (unused).
-     */
-    public Todo(String todoDescription, String dateOfTask) {
-        taskDescription = todoDescription;
-    }
-    
-    /**
-     * Returns task marker. 
-     *
-     * @return a one character string that is a marker for this task.
+     * @return a one character string that is a marker for this duke.task.
      */
     public String getTaskMarker() {
         return TASK_MARKER;
