@@ -77,6 +77,10 @@ public class Ui {
         return "    Nice! I've marked this task as done";
     }
 
+    public String parsingFormatErrorMsg() {
+        return "Please check the formatting of your input!";
+    }
+
     /**
      * Returns various error messages for various error events.
      *
