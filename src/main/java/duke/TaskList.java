@@ -74,15 +74,6 @@ public class TaskList {
     }
 
     /**
-     * Getter to get the arraylist of tasks.
-     *
-     * @return Arraylist of tasks.
-     */
-    public ArrayList<Task> getTasks() {
-        return this.tasks;
-    }
-
-    /**
      * Getter to get individual tasks from arraylist.
      * @param id Index of task in array.
      * @return Individual tasks.

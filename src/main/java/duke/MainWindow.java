@@ -38,7 +38,6 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setDuke() throws IOException {
-//        duke = d;
         Files.createDirectories(Paths.get("data/"));
         File dukeFile = new File("data/duke.txt");
         duke = new Duke(dukeFile);

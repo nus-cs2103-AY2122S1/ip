@@ -8,6 +8,7 @@ import duke.exceptions.MissingEventDetailsException;
  * Class that extends from task and represents an event task.
  */
 public class Event extends Task {
+    protected static final int MAX_SPLIT_LIMIT = 2;
     protected String details;
     protected String taskType;
 
@@ -40,8 +41,8 @@ public class Event extends Task {
      * @throws MissingEventDetailsException
      */
     public static String getEventDescription(String input) throws MissingEventDetailsException {
-        String[] strArr = input.split(" /at", 2);
-        if (strArr.length < 2) {
+        String[] strArr = input.split(" /at", MAX_SPLIT_LIMIT);
+        if (strArr.length < MAX_SPLIT_LIMIT) {
             Ui.showMissingEventDetails();
             Response.showMissingEventDetails();
             throw new MissingEventDetailsException();
@@ -57,7 +58,7 @@ public class Event extends Task {
      * @return Date and/or time of event
      */
     public static String getEventDetails(String input) {
-        String[] strArr = input.split("/at", 2);
+        String[] strArr = input.split("/at", MAX_SPLIT_LIMIT);
         return strArr[1];
     }
 
