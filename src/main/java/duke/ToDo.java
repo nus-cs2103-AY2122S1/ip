@@ -9,6 +9,7 @@ public class ToDo extends Task{
      */
     public ToDo(String taskContent) {
         super(taskContent, "T");
+        assert this.getType().equals("T") : "Wrong type";
     }
 
     /**
