@@ -1,5 +1,8 @@
 package duke.tasks;
 
+/**
+ * General Task class containing Task-wide methods
+ */
 public class Task {
     protected enum Type {
         T,
@@ -13,6 +16,7 @@ public class Task {
 
     /**
      * Class Constructor
+     *
      * @param description String Description of the Task
      * @param type Type of the Task, ([T]oDo, [D]eadline, [E]vent)
      */
@@ -24,6 +28,7 @@ public class Task {
 
     /**
      * Class Constructor taking in if the task is done
+     *
      * @param description String Description of the Task
      * @param type Type of the Task, ([T]oDo, [D]eadline, [E]vent)
      * @param done boolean indicating if the task is done
@@ -48,6 +53,7 @@ public class Task {
 
     /**
      * Returns the task as a string format to be saved in the localList file
+     *
      * @return Task as a String in the appropriate format
      */
     public String toFileString() {
@@ -56,6 +62,7 @@ public class Task {
 
     /**
      * Returns the status of the task as a string
+     *
      * @return String of the task status
      */
     public String getStatusIcon() {
@@ -64,12 +71,19 @@ public class Task {
 
     /**
      * Returns X if the task is done and O if the task is undone
+     *
      * @return X or O
      */
     public String doneString() {
         return (isDone ? "X" : "O");
     }
 
+    /**
+     * Returns True if desc Contains str
+     *
+     * @param str String to search for in desc
+     * @return boolean indicating presence of str
+     */
     public boolean descContains(String str) {
         return description.contains(str);
     }

@@ -5,11 +5,15 @@ import java.util.stream.Collectors;
 
 import duke.tasks.Task;
 
+/**
+ * Lists of Tasks with Custom Functions
+ */
 public class TaskList {
     private final List<Task> taskList;
 
     /**
      * Class Constructor
+     *
      * @param taskList List of Tasks to be manipulated and saved in the object
      */
     public TaskList(List<Task> taskList) {
@@ -18,6 +22,7 @@ public class TaskList {
 
     /**
      * Returns the List of Tasks
+     *
      * @return Returns List of Tasks
      */
     public List<Task> getTaskList() {
@@ -26,6 +31,7 @@ public class TaskList {
 
     /**
      * Adds a Task to the List of Tasks
+     *
      * @param task Task to be added into the List
      */
     public void add(Task task) {
@@ -35,6 +41,7 @@ public class TaskList {
     /**
      * //Can be optimized / cleaned @usage
      * Removes a task at a specific index and returns it
+     *
      * @param index Index of the task to be removed
      * @return Returns the removed task
      */
@@ -44,6 +51,7 @@ public class TaskList {
 
     /**
      * Retrieves the task at a specific index and returns it. Does not modify the list
+     *
      * @param index Index of the task to be returned
      * @return Returns the task at the index
      */
@@ -53,6 +61,7 @@ public class TaskList {
 
     /**
      * Gets the size of the List
+     *
      * @return Returns the size of the List of Tasks
      */
     public int size() {
@@ -61,6 +70,7 @@ public class TaskList {
 
     /**
      * Gets the index of the last task in the list
+     *
      * @return Returns the index of the last task in the list
      */
     public int last() {
@@ -69,6 +79,7 @@ public class TaskList {
 
     /**
      * Checks if the list of tasks if empty
+     *
      * @return Returns boolean to indicate if the List isEmpty
      */
     public boolean isEmpty() {
@@ -77,6 +88,7 @@ public class TaskList {
 
     /**
      * Completes the task at the specified index
+     *
      * @param index Index of the task to complete
      */
     public void completeTask(int index) {
@@ -85,6 +97,7 @@ public class TaskList {
 
     /**
      * Filters taskList for tasks containing input filter in the description
+     *
      * @param filter String that contains the word(s) that the function filters by
      * @return Returns List of Tasks that contain tasks with the filter word(s) in their description
      */

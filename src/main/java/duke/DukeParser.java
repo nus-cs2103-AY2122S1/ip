@@ -15,6 +15,9 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 
+/**
+ * Parser class handling the logic of the program
+ */
 public class DukeParser {
     //List of enum keywords
     enum Keywords {
@@ -33,6 +36,7 @@ public class DukeParser {
 
     /**
      * Class Constructor
+     *
      * @param taskList The tasklist to be modified through user-input
      */
     public DukeParser(TaskList taskList) {
@@ -41,6 +45,7 @@ public class DukeParser {
 
     /**
      * Checks if String is an int
+     *
      * @param str Target string to check
      */
     static boolean checkForInt(String str) {
@@ -55,6 +60,7 @@ public class DukeParser {
     /**
      * Binary Function that processes String into separate Desc and Time.
      * The Desc and Time will be separated into 2 strings that will be returned in a list
+     *
      * @param divider The pivot string to divide the input (\by or \at)
      * @param input   Array of Strings containing individual words that was input
      * @return Returns a list of 2 Strings,
@@ -81,6 +87,7 @@ public class DukeParser {
     /**
      * Main Parser function. Contains the logic to read and resolve user input,
      * then directs Duke to the appropriate response in the backend and frontend
+     *
      * @param str Input entered by the user
      * @return Boolean to indicate the closing of the programme
      *         as a direct result of the "bye" command (True if hasQuit)
