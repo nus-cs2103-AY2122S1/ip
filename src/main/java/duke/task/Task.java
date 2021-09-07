@@ -1,5 +1,10 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Represents a task
  */
@@ -19,6 +24,19 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public static String[] splitDescriptionAndDate(String args, String separator) {
+        String regex = String.format("(?<desc>.*)\\s\\(%s: (?<date>.*)\\)", separator);
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(args);
+
+        String type = matcher.group("desc");
+        String desc = matcher.group("date");
+
+        String[] desc_date = {type, desc};
+
+        return desc_date;
     }
 
     /**

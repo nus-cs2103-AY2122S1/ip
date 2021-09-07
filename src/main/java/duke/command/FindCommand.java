@@ -36,10 +36,8 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        // List of search results
         TaskList results = TaskList.emptyTaskList();
 
-        // Search through given list of tasks
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.getTask(i);
             if (task.getDescription().contains(searchString)) {
@@ -47,7 +45,6 @@ public class FindCommand extends Command {
             }
         }
 
-        // Display results
         return ui.reply("These the tasks yer lookin for:\n" + results.toString());
     }
 }

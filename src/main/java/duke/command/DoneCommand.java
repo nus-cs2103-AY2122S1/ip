@@ -39,7 +39,6 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
-            // Mark task as done
             Task task = taskList.getTask(index);
             task.setIsDone(true);
             return ui.reply("Noice! Pepper Jack marked this task as done:\n\t" + task);

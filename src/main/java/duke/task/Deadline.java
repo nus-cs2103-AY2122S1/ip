@@ -25,15 +25,16 @@ public class Deadline extends Task {
     /**
      * Returns a Deadline from string input with description and date.
      *
-     * @param desc_date String input with description and date in
+     * @param args String input with description and date in
      *                  '[description] (by: [MMM d yyyy]' format.
      * @return Deadline from string input with description and date.
      */
-    public static Deadline build(String desc_date) {
-        desc_date = desc_date.replaceAll("\\(by: (.*)\\)", "/by $1");
-        String[] input = desc_date.split(" /by ",2);
-        LocalDate d = LocalDate.parse(input[1], DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return new Deadline(input[0], d);
+    public static Deadline build(String args) {
+        String[] desc_date = Task.splitDescriptionAndDate(args, "by");
+        String desc = desc_date[0];
+        String dateString = desc_date[1];
+        LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return new Deadline(desc, date);
     }
 
     @Override
