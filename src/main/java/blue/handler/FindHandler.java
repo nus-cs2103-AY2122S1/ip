@@ -22,12 +22,10 @@ public class FindHandler extends CommandHandler {
     public String handle(String input) throws BlueException {
         List<Task> foundTasks = new ArrayList<>();
         String keyword = Parser.getArguments(input)[0];
-        for (Task task : taskList.getAll()) {
-            if (task.getTitle().contains(keyword)) {
-                foundTasks.add(task);
-            }
-        }
-
+        taskList.getAll()
+                .stream()
+                .filter((task) -> task.getTitle().contains(keyword))
+                .forEach(foundTasks::add);
         StringBuilder response = new StringBuilder(RESULT_START);
         for (int i = 0; i < foundTasks.size(); i++) {
             String line = (i + 1) + "." + foundTasks.get(i) + "\n";
