@@ -55,7 +55,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Runs the programme.
+     * Runs the programme using the command line.
      */
     public void run() {
         TextUi.showWelcomeMessage();
@@ -98,6 +98,10 @@ public class Duke extends Application {
         new Duke("data/duke.txt").run();
     }
 
+    /**
+     * Starts the programme with GUI.
+     * @param stage Stage provided by JavaFX.
+     */
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components

@@ -16,7 +16,7 @@ public class Parser {
      * @return A Map containing the type, description and time (if applicable) of a Task.
      * @throws DukeException if the input is in invalid format.
      */
-    public static Map<String, String> parseTextFromInput(String input) throws DukeException {
+    public static Map<String, String> parseAddCommandFromInput(String input) throws DukeException {
         input = input.trim();
         String type = "";
         String description = "";
@@ -58,7 +58,7 @@ public class Parser {
      * @param input The text from the file containing the task list.
      * @return A Map containing the type, description and time (if applicable) of a Task.
      */
-    public static Map<String, String> parseTextFromFile(String input) {
+    public static Map<String, String> parseFromFile(String input) {
         String type = input.substring(1, 2);
         String status = input.substring(4, 5);
         String description = input.split("\\(")[0].substring(7).trim();

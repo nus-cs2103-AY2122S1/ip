@@ -20,7 +20,7 @@ public class TaskList {
     public TaskList() {}
 
     /**
-     * Gets the ArrayList.
+     * Retrieves the ArrayList.
      *
      * @return The ArrayList of a TaskList.
      */
@@ -41,7 +41,7 @@ public class TaskList {
      */
     public void addTask(String text) throws DukeException {
         try {
-            Map<String, String> m = Parser.parseTextFromInput(text);
+            Map<String, String> m = Parser.parseAddCommandFromInput(text);
             switch (m.get("type")) {
             case "T": tasks.add(new Todo(m.get("description")));
                 break;
@@ -145,7 +145,7 @@ public class TaskList {
         String s = "";
         int len = tasks.size();
         if (len == 0) {
-//            System.out.println("The list is empty!");
+            System.out.println("The list is empty!");
             s += "The list is empty!";
         }
         for (int i = 0; i < len; i++) {
