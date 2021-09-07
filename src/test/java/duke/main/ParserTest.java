@@ -12,7 +12,7 @@ public class ParserTest {
         tasks.addTask(new ToDo("test"));
         Storage storage = new Storage("test.txt");
         Parser parser = new Parser(storage, ui, tasks);
-        parser.parse("delete 1");
+        parser.parseAndExecute("delete 1");
         assert (tasks.isEmpty());
     }
 }

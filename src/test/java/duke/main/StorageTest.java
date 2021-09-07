@@ -43,7 +43,7 @@ public class StorageTest {
         setupStorage();
         TaskList newTasks = new TaskList();
         newTasks.addTask(new ToDo("different description"));
-        storage.write(newTasks);
+        storage.writeToStorage(newTasks);
         BufferedReader br = new BufferedReader(new FileReader(path));
         assert (br.readLine().equals("T | false | different description"));
     }

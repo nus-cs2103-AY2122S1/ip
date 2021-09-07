@@ -12,7 +12,7 @@ import java.util.Objects;
 /**
  * Encapsulates a task.
  */
-abstract public class Task {
+public abstract class Task {
     protected boolean completed;
     protected String description;
 
@@ -29,7 +29,7 @@ abstract public class Task {
     /**
      * Parse the given time.
      *
-     * @param time String to parse.
+     * @param time String to parseAndExecute.
      * @return LocalDate object corresponding to the given time.
      * @throws DateTimeParseException if the time is incorrectly formatted.
      */
@@ -70,7 +70,7 @@ abstract public class Task {
      *
      * @return String for storing the Task.
      */
-    abstract public String generateStorageString();
+    public abstract String generateStorageString();
 
     /**
      * Checks if the task contains any keyword.
