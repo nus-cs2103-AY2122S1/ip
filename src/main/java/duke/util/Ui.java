@@ -41,7 +41,7 @@ public class Ui {
     @SuppressWarnings("checkstyle:MissingJavadocMethod")
     public String removeOutput(Task task, int tasksRemaining) {
         String output = "Okay! I have removed this task for you: \n" + task
-        + "\n You now have " + tasksRemaining + " tasks in your list.";
+                + "\n You now have " + tasksRemaining + " tasks in your list.";
         return output;
     }
 }

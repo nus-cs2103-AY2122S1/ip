@@ -11,6 +11,7 @@ import duke.task.Task;
 
 public class TaskList {
     private Ui ui = new Ui();
+    private Storage storage = new Storage();
 
     /**
      * Lists all the tasks in the chatbot
@@ -21,9 +22,8 @@ public class TaskList {
         try {
             if (commands.size() == 0) {
                 throw new EmptyTaskListException();
-            } else {
-                response = ui.listTasksOutput(commands);
             }
+            response = ui.listTasksOutput(commands);
         } catch (DukeException e) {
             response = e.getMessage();
         }
@@ -38,22 +38,22 @@ public class TaskList {
     public String remove(int listNumber, ArrayList<Task> commands) {
         String response = "";
         try {
-            if (listNumber < commands.size()) {
-                response = ui.removeOutput(commands.get(listNumber), commands.size() - 1);
-                commands.remove(listNumber);
-            } else {
+            if (listNumber >= commands.size()) {
                 throw new InvalidTaskException();
             }
+            response = ui.removeOutput(commands.get(listNumber), commands.size() - 1);
+            commands.remove(listNumber);
         } catch (DukeException e) {
             response = e.getMessage();
         }
+        storage.saveCommands(commands);
         return response;
     }
 
     /**
      * Finds tasks related to a certain keyword
      *
-     * @param keyword  keyword to look for in tasks
+     * @param keywords  keyword to look for in tasks
      * @param commands all tasks in chatbot
      */
     public String find(ArrayList<Task> commands, String... keywords) {
@@ -63,7 +63,7 @@ public class TaskList {
             boolean matchFound = false;
             for (String s : keywords) {
                 for (Task command : commands) {
-                    String description = command.description.trim();
+                    String description = command.getDescription().trim();
                     String[] words = description.split(" ");
                     for (String word : words) {
                         if (word.equalsIgnoreCase(s)) {
@@ -73,13 +73,12 @@ public class TaskList {
                     }
                 }
             }
-            if (matchFound) {
-                response = "Here are " + (matchingTasks.size()) + " matching tasks in your list: \n";
-                for (int i = 0; i < matchingTasks.size(); i++) {
-                    response += (i + 1) + ". " + matchingTasks.get(i) + "\n";
-                }
-            } else {
+            if (!matchFound) {
                 throw new NoMatchFoundException();
+            }
+            response = "Here are " + (matchingTasks.size()) + " matching tasks in your list: \n";
+            for (int i = 0; i < matchingTasks.size(); i++) {
+                response += (i + 1) + ". " + matchingTasks.get(i) + "\n";
             }
         } catch (DukeException e) {
             response = e.getMessage();
