@@ -29,6 +29,8 @@ public class AddCommand extends Command {
     public AddCommand(String userInput, String taskType) {
         super(userInput);
         this.taskType = taskType;
+        assert taskType.equals("deadline") || taskType.equals("event") || taskType.equals(("todo"))
+                : "Task type should be either deadline, event or todo";
     }
 
     /**
@@ -70,6 +72,8 @@ public class AddCommand extends Command {
     }
 
     private String addDeadline(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        assert userInput.contains("deadline /by") : "User input should contain deadline /by";
+
         List<String> inputArray = Arrays.asList(userInput.split(" /by "));
         String by = inputArray.get(1);
         ArrayList<String> descriptionArray = new ArrayList<String>(Arrays.asList(inputArray.get(0).split(" ")));
@@ -83,6 +87,8 @@ public class AddCommand extends Command {
     }
 
     private String addEvent(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        assert userInput.contains("event /at") : "User input should contain event /at";
+
         List<String> inputArray = Arrays.asList(userInput.split(" /at "));
         String timeFrame = inputArray.get(1);
         ArrayList<String> descriptionArray = new ArrayList<String>(Arrays.asList(inputArray.get(0).split(" ")));
@@ -96,6 +102,8 @@ public class AddCommand extends Command {
     }
 
     private String addTodo(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        assert userInput.contains("todo") : "User input should contain todo";
+
         List<String> inputArray = Arrays.asList(userInput.split(" "));
 
         if (inputArray.size() <= 1) {
