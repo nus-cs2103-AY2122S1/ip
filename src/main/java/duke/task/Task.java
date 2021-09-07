@@ -27,6 +27,13 @@ public abstract class Task {
     }
 
     /**
+     * Sets the description of the task
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
      * Get the status icon of a task. "X" for done, and
      * space for not done.
      *

@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -121,6 +122,74 @@ public class DukeTaskList {
         taskList.remove(deleteTaskNo - 1);
         return "Noted. I've removed this task:\n" + deleteTask.toString() + "\n"
                 + String.format("Now you have %d tasks in the list.\n", taskList.size());
+    }
+
+    /**
+     * update a task from the list. Update command format must be:
+     * "update taskNo category content"
+     * category can be description, date, time (for deadline), start_time and end_time (for events)
+     *
+     * @param updateCommand update command line.
+     * @throws DukeException if command format incorrect, or task number entered out of range.
+     * @throws NumberFormatException if task number entered cannot be parsed.
+     * @throws DateTimeParseException if date/time entered cannot be parsed.
+     * @return update task response.
+     */
+    public String updateTask(String updateCommand) throws DukeException,
+            NumberFormatException, DateTimeParseException {
+        String[] updateSplit = updateCommand.split(" ", 3);
+        if (updateSplit.length < 3) {
+            throw new DukeException("Update command format incorrect!\n");
+        }
+        // Throws NumberFormatException if string cannot be parsed into valid int
+        int updateTaskNo = Integer.parseInt(updateSplit[0]);
+        if (updateTaskNo < 1 || updateTaskNo > taskList.size()) {
+            // Task No entered out of range
+            throw new DukeException("Task number entered out of range!\n");
+        }
+
+        Task updateTask = taskList.get(updateTaskNo - 1);
+
+        if (updateTask instanceof ToDos) {
+            if (updateSplit[1].equals("description")) {
+                updateTask.setDescription(updateSplit[2]);
+            } else {
+                throw new DukeException("You can only update description for Todo!");
+            }
+        } else if (updateTask instanceof Deadlines) {
+            Deadlines ddl = (Deadlines) updateTask;
+            if (updateSplit[1].equals("description")) {
+                ddl.setDescription(updateSplit[2]);
+            } else if (updateSplit[1].equals("date")) {
+                // Throws DateTimeParseException if date cannot be parsed
+                ddl.setDate(LocalDate.parse(updateSplit[2]));
+            } else if (updateSplit[1].equals("time")) {
+                // Throws DateTimeParseException if time cannot be parsed
+                ddl.setTime(LocalTime.parse(updateSplit[2]));
+            } else {
+                throw new DukeException("You can only update description, date or time for deadline!");
+            }
+        } else if (updateTask instanceof Events) {
+            Events event = (Events) updateTask;
+            if (updateSplit[1].equals("description")) {
+                event.setDescription(updateSplit[2]);
+            } else if (updateSplit[1].equals("date")) {
+                // Throws DateTimeParseException if date cannot be parsed
+                event.setDate(LocalDate.parse(updateSplit[2]));
+            } else if (updateSplit[1].equals("start_time")) {
+                // Throws DateTimeParseException if time cannot be parsed
+                event.setStartTime(LocalTime.parse(updateSplit[2]));
+            } else if (updateSplit[1].equals("end_time")) {
+                // Throws DateTimeParseException if time cannot be parsed
+                event.setStartTime(LocalTime.parse(updateSplit[2]));
+            } else {
+                throw new DukeException("You can only update description, date, start and end time for events!");
+            }
+        } else {
+            assert false : "Update command intakes a type of task not implemented yet!";
+        }
+
+        return "Nice! The task is updated as follows:\n" + updateTask.toString();
     }
 
     /**

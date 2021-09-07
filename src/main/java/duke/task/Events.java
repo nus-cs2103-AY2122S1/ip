@@ -9,26 +9,26 @@ import java.time.format.DateTimeFormatter;
  * Events have a description, date, start time and end time.
  */
 public class Events extends Task {
-    protected LocalDate localDate;
-    protected LocalTime localStartTime;
-    protected LocalTime localEndTime;
+    protected LocalDate date;
+    protected LocalTime startTime;
+    protected LocalTime endTime;
 
     /**
      * Constructor of the Events class.
      *
      * @param description description of an event in String.
-     * @param localDate date when the event happens.
+     * @param date date when the event happens.
      *                  Must be in the format yyyy-mm-dd.
-     * @param localStartTime time point when the event starts.
+     * @param startTime time point when the event starts.
      *                       Must be in the format hh:mm in 24-hours time.
-     * @param localEndTime time point when the event ends.
+     * @param endTime time point when the event ends.
      *                     Must be in the format hh:mm in 24-hours time.
      */
-    public Events(String description, LocalDate localDate, LocalTime localStartTime, LocalTime localEndTime) {
+    public Events(String description, LocalDate date, LocalTime startTime, LocalTime endTime) {
         super(description);
-        this.localDate = localDate;
-        this.localStartTime = localStartTime;
-        this.localEndTime = localEndTime;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     /**
@@ -41,9 +41,9 @@ public class Events extends Task {
     public String toString() {
         return String.format("[E] [%s] " + this.description + " (at: %s %s-%s)",
             this.getStatusIcon(),
-            this.localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
-            this.localStartTime,
-            this.localEndTime);
+            this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
+            this.startTime,
+            this.endTime);
     }
 
     /**
@@ -57,8 +57,29 @@ public class Events extends Task {
         return String.format("E|%s|%s|%s|%s|%s",
             this.isDone ? "1" : "0",
             this.description,
-            this.localDate,
-            this.localStartTime,
-            this.localEndTime);
+            this.date,
+            this.startTime,
+            this.endTime);
+    }
+
+    /**
+     * Sets the date of event.
+     */
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    /**
+     * Sets the start time of event.
+     */
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    /**
+     * Sets the start time of event.
+     */
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
     }
 }

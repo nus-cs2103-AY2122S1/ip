@@ -9,22 +9,22 @@ import java.time.format.DateTimeFormatter;
  * Deadlines have a description, date and time.
  */
 public class Deadlines extends Task {
-    protected LocalDate localDate;
-    protected LocalTime localTime;
+    protected LocalDate date;
+    protected LocalTime time;
 
     /**
      * Constructor of the Deadlines class.
      *
      * @param description description of a deadline in String.
-     * @param localDate date when deadline is due.
+     * @param date date when deadline is due.
      *                  Must be in the format yyyy-mm-dd.
-     * @param localTime time point when deadline is due.
+     * @param time time point when deadline is due.
      *                 Must be in the format hh:mm in 24-hours time.
      */
-    public Deadlines(String description, LocalDate localDate, LocalTime localTime) {
+    public Deadlines(String description, LocalDate date, LocalTime time) {
         super(description);
-        this.localDate = localDate;
-        this.localTime = localTime;
+        this.date = date;
+        this.time = time;
     }
 
     /**
@@ -37,8 +37,8 @@ public class Deadlines extends Task {
     public String toString() {
         return String.format("[D] [%s] " + this.description + " (by: %s %s)",
             this.getStatusIcon(),
-            this.localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
-            this.localTime);
+            this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
+            this.time);
     }
 
     /**
@@ -52,7 +52,21 @@ public class Deadlines extends Task {
         return String.format("D|%s|%s|%s|%s",
             this.isDone ? "1" : "0",
             this.description,
-            this.localDate,
-            this.localTime);
+            this.date,
+            this.time);
+    }
+
+    /**
+     * Sets the date of deadline.
+     */
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    /**
+     * Sets the time of deadline.
+     */
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
 }

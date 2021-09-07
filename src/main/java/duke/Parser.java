@@ -46,6 +46,14 @@ public class Parser {
 
                 response = dukeTaskList.deleteTask(deleteTaskNo);
                 storage.saveToDataFile();
+            } else if (spaceSplitInput[0].equals("update")) {
+                if (spaceSplitInput.length < 2) {
+                    // No task number entered
+                    throw new DukeException("Update task number is missing!\n");
+                }
+                String updateCommand = spaceSplitInput[1];
+                response = dukeTaskList.updateTask(updateCommand);
+                storage.saveToDataFile();
             } else if (spaceSplitInput[0].equals("find")) {
                 if (spaceSplitInput.length < 2) {
                     // No find keyword entered
@@ -56,7 +64,7 @@ public class Parser {
                 response = dukeTaskList.searchTask(keyword);
             } else if (spaceSplitInput[0].equals("todo")) {
                 if (spaceSplitInput.length < 2) {
-                    // Tudo has no description. If has, spaceSplitInput has length 2.
+                    // Todos has no description. If has, spaceSplitInput has length 2.
                     throw new DukeException("Todo description cannot be empty!\n");
                 }
                 String toDoText = spaceSplitInput[1].trim();
@@ -125,7 +133,7 @@ public class Parser {
         } catch (NumberFormatException e) {
             return "Please enter a valid integer for task number!\n";
         } catch (DateTimeParseException e) {
-            return "Please enter date in the valid format: yyyy-mm-dd hh:mm\n";
+            return "Please enter date-time in the valid format: yyyy-mm-dd hh:mm\n";
         }
     }
 }
