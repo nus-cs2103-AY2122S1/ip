@@ -17,10 +17,11 @@ public class ListCommand extends Command {
      * Constructor for ListCommand.
      *
      * @param th Task Handler that handles the operation.
-     * @param str Storage that holds the task information.
+     * @param str Storage that holds the tasklist.
+     * @param arc Archive that holds the task information.
      */
-    public ListCommand(TaskHandler th, Storage str) {
-        super(th, str);
+    public ListCommand(TaskHandler th, Storage str, Storage arc) {
+        super(th, str, arc);
     }
 
     /**
@@ -31,6 +32,6 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(String cmd) {
-        return taskHandler.printList();
+        return taskHandler.printList("storage");
     }
 }

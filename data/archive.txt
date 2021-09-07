@@ -1,0 +1,4 @@
+[T][ ] cs2101 lecture 
+[D][ ] 2103 ip  (by: 120312 1734)
+[T][X] cs2101 lecture 
+[E][ ] lvl88  (at: 120321 1234)

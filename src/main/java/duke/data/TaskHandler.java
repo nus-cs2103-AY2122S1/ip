@@ -2,10 +2,7 @@ package duke.data;
 
 import java.util.ArrayList;
 
-import duke.data.task.Deadline;
-import duke.data.task.Event;
 import duke.data.task.Task;
-import duke.data.task.ToDo;
 import duke.ui.Ui;
 
 /**
@@ -14,15 +11,18 @@ import duke.ui.Ui;
  * @author Won Ye Ji
  */
 public class TaskHandler {
-    private ArrayList<Task> list;
+    private ArrayList<Task> storageList;
+    private ArrayList<Task> archiveList;
 
     /**
      * Constructor for the TaskHandler class.
      *
-     * @param list Tasklist.
+     * @param storageList Tasklist.
+     * @param archiveList Archives.
      */
-    public TaskHandler(ArrayList<Task> list) {
-        this.list = list;
+    public TaskHandler(ArrayList<Task> storageList, ArrayList<Task> archiveList) {
+        this.storageList = storageList;
+        this.archiveList = archiveList;
     }
 
     /**
@@ -31,7 +31,7 @@ public class TaskHandler {
      * @return the tasklist.
      */
     public ArrayList<Task> getList() {
-        return list;
+        return storageList;
     }
 
     /**
@@ -39,9 +39,18 @@ public class TaskHandler {
      *
      * @return String representation of the tasklist.
      */
-    public String printList() {
+    public String printList(String s) {
+        ArrayList<Task> list;
+        String toPrint;
+        if (s == "storage") {
+            list = storageList;
+            toPrint = Ui.printList();
+        } else {
+            list = archiveList;
+            toPrint = Ui.printArchives();
+        }
+        assert list != null && toPrint != null : "No such lists";
         if (list.size() != 0) {
-            String toPrint = Ui.printList();
             for (int i = 0; i < list.size(); i++) {
                 toPrint = toPrint.concat(Ui.indentation() + (i + 1) + ". " + list.get(i).toString() + "\n");
             }
@@ -57,7 +66,7 @@ public class TaskHandler {
      * @return Number of tasks in the tasklist.
      */
     public String printNoOfTasks() {
-        return Ui.printNoOfTasks(list.size());
+        return Ui.printNoOfTasks(storageList.size());
     }
 
     /**
@@ -68,7 +77,7 @@ public class TaskHandler {
      */
     public String markTaskAsDone(int taskNo) {
         String toPrint = Ui.markAsDone();
-        Task task = list.get(taskNo - 1);
+        Task task = storageList.get(taskNo - 1);
         assert task.getStatusIcon() != "X" : "Completed task cannot be marked as done again.";
         task.markAsDone();
         toPrint = toPrint.concat(Ui.indentation() + task + "\n");
@@ -83,8 +92,8 @@ public class TaskHandler {
      */
     public String deleteTask(int taskNo) {
         String toPrint = Ui.deleteTask();
-        Task task = list.get(taskNo - 1);
-        list.remove(taskNo - 1);
+        Task task = storageList.get(taskNo - 1);
+        storageList.remove(taskNo - 1);
         toPrint = toPrint.concat(Ui.indentation() + task + "\n");
         return toPrint;
     }
@@ -96,7 +105,7 @@ public class TaskHandler {
      * @return Duke's response to the user.
      */
     public String addTask(Task task) {
-        list.add(task);
+        storageList.add(task);
         String toPrint = Ui.addTask();
         toPrint = toPrint.concat(Ui.indentation() + Ui.indentation() + task + "\n");
         return toPrint;
@@ -111,9 +120,9 @@ public class TaskHandler {
     public String findTasks(String keyword) {
         ArrayList<String> tasks = new ArrayList<>();
         int j = 1;
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).toString().contains(keyword)) {
-                tasks.add(Ui.indentation() + j + ". " + list.get(i).toString() + "\n");
+        for (int i = 0; i < storageList.size(); i++) {
+            if (storageList.get(i).toString().contains(keyword)) {
+                tasks.add(Ui.indentation() + j + ". " + storageList.get(i).toString() + "\n");
                 j++;
             }
         }
@@ -129,11 +138,32 @@ public class TaskHandler {
     }
 
     /**
+     * Archives selected task.
+     * @param taskNo Index of selected task.
+     * @return Duke's response to the user.
+     */
+    public String archiveTask(int taskNo) {
+        Task task = storageList.get(taskNo - 1);
+        storageList.remove(taskNo - 1);
+        archiveList.add(task);
+        String toPrint = Ui.archiveTask();
+        toPrint = toPrint.concat(Ui.indentation() + Ui.indentation() + task + "\n");
+        return toPrint;
+    }
+
+    /**
      * Formats the tasklist to be put into storage.
      *
      * @return A string of the formatted tasklist.
      */
-    public String formatTasksToSave() {
+    public String formatTasksToSave(String s) {
+        ArrayList<Task> list;
+        if (s == "storage") {
+            list = storageList;
+        } else {
+            list = archiveList;
+        }
+        assert list != null : "No such lists";
         assert list.size() != 0 : "There are no tasks to save!";
         String[] tasksToSave = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {

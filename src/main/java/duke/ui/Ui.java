@@ -82,6 +82,15 @@ public class Ui {
     }
 
     /**
+     * Informs the user that archives have been printed.
+     *
+     * @return Archives printed message.
+     */
+    public static String printArchives() {
+        return Messages.PRINT_ARCHIVES_MESSAGE;
+    }
+
+    /**
      * Informs the user the number of tasks on their list.
      *
      * @param i Number of tasks.
@@ -107,6 +116,15 @@ public class Ui {
      */
     public static String addTask() {
         return Messages.ADD_TASK;
+    }
+
+    /**
+     * Informs the user that the task has been archived.
+     *
+     * @return Task archived message.
+     */
+    public static String archiveTask() {
+        return Messages.ARCHIVE_TASK;
     }
 
     /**

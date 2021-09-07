@@ -21,10 +21,11 @@ public class EventCommand extends Command {
      * Constructor for EventCommand.
      *
      * @param th Task Handler that handles the operation.
-     * @param str Storage that holds the task information.
+     * @param str Storage that holds the tasklist.
+     * @param arc Archive that holds the task information.
      */
-    public EventCommand(TaskHandler th, Storage str) {
-        super(th, str);
+    public EventCommand(TaskHandler th, Storage str, Storage arc) {
+        super(th, str, arc);
     }
 
     /**
@@ -50,7 +51,7 @@ public class EventCommand extends Command {
                 } else {
                     String toPrint = taskHandler.addTask(event);
                     toPrint = toPrint.concat(taskHandler.printNoOfTasks());
-                    storage.updateFile(taskHandler.formatTasksToSave());
+                    storage.updateFile(taskHandler.formatTasksToSave("storage"));
                     return toPrint;
                 }
             }

@@ -19,10 +19,11 @@ public class FindCommand extends Command {
      * Constructor for FindCommand.
      *
      * @param th Task Handler that handles the operation.
-     * @param str Storage that holds the task information.
+     * @param str Storage that holds the tasklist.
+     * @param arc Archive that holds the task information.
      */
-    public FindCommand(TaskHandler th, Storage str) {
-        super(th, str);
+    public FindCommand(TaskHandler th, Storage str, Storage arc) {
+        super(th, str, arc);
     }
 
     /**

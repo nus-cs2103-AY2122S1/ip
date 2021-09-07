@@ -12,16 +12,19 @@ import duke.storage.Storage;
 public abstract class Command {
     protected TaskHandler taskHandler;
     protected Storage storage;
+    protected Storage archives;
 
     /**
      * Constructor for Command.
      *
      * @param th Task Handler that handles the operation.
-     * @param str Storage that holds the task information.
+     * @param str Storage that holds the tasklist.
+     * @param arc Archive that holds the task information.
      */
-    public Command(TaskHandler th, Storage str) {
+    public Command(TaskHandler th, Storage str, Storage arc) {
         this.taskHandler = th;
         this.storage = str;
+        this.archives = arc;
     }
 
     /**

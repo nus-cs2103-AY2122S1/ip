@@ -1,14 +1,16 @@
 package duke.data.messages;
 
-import duke.command.ListCommand;
+import duke.command.ArchiveCommand;
+import duke.command.ArchivesCommand;
 import duke.command.ByeCommand;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.HelpCommand;
-import duke.command.DeadlineCommand;
-import duke.command.DoneCommand;
+import duke.command.ListCommand;
 import duke.command.ToDoCommand;
-import duke.command.DeleteCommand;
-import duke.command.EventCommand;
 
 /**
  * Class that encapsulates all user-visible messages.
@@ -22,9 +24,11 @@ public class Messages {
     public static final String UNKNOWN_INPUT_MESSAGE = "I'm sorry, but I don't know what that means :-(";
     public static final String MISSING_DATE = "Missing the date!";
     public static final String PRINT_LIST_MESSAGE = "Here are the tasks in your list:\n";
+    public static final String PRINT_ARCHIVES_MESSAGE = "Here are the tasks in your archives:\n";
     public static final String NUMBER_OF_TASKS_MESSAGE = "Now you have %d tasks in the list.\n";
     public static final String MARK_TASK_AS_DONE_MESSAGE = "Nice! I've marked this task as done:\n";
     public static final String ADD_TASK = "Got it. I've added this task:\n";
+    public static final String ARCHIVE_TASK = "Got it. I've archived this task:\n";
     public static final String DELETE_TASK = "Noted. I've removed this task:\n";
     public static final String EMPTY_LIST = "You haven't added anything to your list!";
     public static final String MATCHING_TASK_FOUND = "Here are the matching tasks in your list:\n";
@@ -42,6 +46,8 @@ public class Messages {
             + "5. " + DeleteCommand.MESSAGE_USAGE + "\n"
             + "6. " + ListCommand.MESSAGE_USAGE + "\n"
             + "7. " + FindCommand.MESSAGE_USAGE + "\n"
-            + "8. " + ByeCommand.MESSAGE_USAGE + "\n"
-            + "9. " + HelpCommand.MESSAGE_USAGE;
+            + "8. " + ArchiveCommand.MESSAGE_USAGE + "\n"
+            + "9. " + ByeCommand.MESSAGE_USAGE + "\n"
+            + "10. " + ArchivesCommand.MESSAGE_USAGE + "\n"
+            + "11. " + HelpCommand.MESSAGE_USAGE;
 }

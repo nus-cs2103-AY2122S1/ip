@@ -20,10 +20,11 @@ public class ToDoCommand extends Command {
      * Constructor for ToDoCommand.
      *
      * @param th Task Handler that handles the operation.
-     * @param str Storage that holds the task information.
+     * @param str Storage that holds the tasklist.
+     * @param arc Archive that holds the task information.
      */
-    public ToDoCommand(TaskHandler th, Storage str) {
-        super(th, str);
+    public ToDoCommand(TaskHandler th, Storage str, Storage arc) {
+        super(th, str, arc);
     }
 
     /**
@@ -42,7 +43,7 @@ public class ToDoCommand extends Command {
             ToDo toDo = new ToDo(cmd.substring(5));
             String toPrint = taskHandler.addTask(toDo);
             toPrint = toPrint.concat(taskHandler.printNoOfTasks());
-            storage.updateFile(taskHandler.formatTasksToSave());
+            storage.updateFile(taskHandler.formatTasksToSave("storage"));
             return toPrint;
         }
     }

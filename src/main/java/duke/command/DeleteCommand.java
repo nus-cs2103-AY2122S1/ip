@@ -18,10 +18,11 @@ public class DeleteCommand extends Command {
      * Constructor for DeleteCommand.
      *
      * @param th Task Handler that handles the operation.
-     * @param str Storage that holds the task information.
+     * @param str Storage that holds the tasklist.
+     * @param arc Archive that holds the task information.
      */
-    public DeleteCommand(TaskHandler th, Storage str) {
-        super(th, str);
+    public DeleteCommand(TaskHandler th, Storage str, Storage arc) {
+        super(th, str, arc);
     }
 
     /**
@@ -44,7 +45,7 @@ public class DeleteCommand extends Command {
             } else {
                 String toPrint = taskHandler.deleteTask(index);
                 toPrint = toPrint.concat(taskHandler.printNoOfTasks());
-                storage.updateFile(taskHandler.formatTasksToSave());
+                storage.updateFile(taskHandler.formatTasksToSave("storage"));
                 return toPrint;
             }
         }

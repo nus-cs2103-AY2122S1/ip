@@ -19,10 +19,11 @@ public class ByeCommand extends Command {
      * Constructor for ByeCommand.
      *
      * @param th Task Handler that handles the operation.
-     * @param str Storage that holds the task information.
+     * @param str Storage that holds the tasklist.
+     * @param arc Archive that holds the task information.
      */
-    public ByeCommand(TaskHandler th, Storage str) {
-        super(th, str);
+    public ByeCommand(TaskHandler th, Storage str, Storage arc) {
+        super(th, str, arc);
     }
 
     /**
@@ -33,7 +34,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public String execute(String cmd) throws DukeException {
-        storage.updateFile(taskHandler.formatTasksToSave());
+        storage.updateFile(taskHandler.formatTasksToSave("storage"));
         return Ui.bye();
     }
 }
