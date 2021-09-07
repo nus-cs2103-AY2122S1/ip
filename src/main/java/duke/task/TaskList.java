@@ -89,6 +89,18 @@ public class TaskList {
     }
 
     /**
+     * A method to tag a task.
+     * @param taskNo The task to be tagged.
+     */
+    public void tagTask(int taskNo, String tagDescription) throws DukeException {
+        if (isValidTask(taskNo)) {
+            // Task does not exist
+            throw new DukeException(String.format("Task %d does not exist.\nUse \"list\" to see all tasks.", taskNo));
+        }
+        taskList.get(taskNo - 1).addTag(tagDescription);
+    }
+
+    /**
      * A method to check if task is valid.
      * @param taskNo The task to be marked.
      */
