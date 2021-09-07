@@ -1,4 +1,4 @@
-package utils;
+package duke.utils;
 
 public class StorageTest {
 }

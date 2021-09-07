@@ -1,9 +1,8 @@
-package commands;
+package duke.commands;
 
-import tasks.Task;
-import tasks.TaskList;
-import utils.Storage;
-import utils.Ui;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.utils.Storage;
 
 public class AddCommand extends Command {
 
@@ -15,12 +14,11 @@ public class AddCommand extends Command {
         this.task = task;
     }
 
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    @Override
+    public String execute(TaskList tasks, Storage storage) {
         tasks.add(this.task);
 
         String message = NEW_TASK_MSG + "\n" + this.task.toString() + "\n" + tasks.getTaskCountString();
-
-        ui.printResponse(message);
 
         return message;
     }

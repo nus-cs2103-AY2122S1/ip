@@ -1,13 +1,15 @@
 import java.io.IOException;
 
+import duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx_utils.MainWindow;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for duke.Duke using FXML.
  */
 public class Main extends Application {
 
@@ -23,7 +25,6 @@ public class Main extends Application {
             stage.setTitle("JeffWinger");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
         }

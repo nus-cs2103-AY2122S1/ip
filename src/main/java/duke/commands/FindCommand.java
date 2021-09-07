@@ -1,8 +1,7 @@
-package commands;
+package duke.commands;
 
-import tasks.TaskList;
-import utils.Storage;
-import utils.Ui;
+import duke.tasks.TaskList;
+import duke.utils.Storage;
 
 public class FindCommand extends Command {
 
@@ -15,10 +14,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         String message = FIND_MESSAGE + "\n" + tasks.find(this.keyword);
-
-        ui.printResponse(message);
 
         return message;
     }
