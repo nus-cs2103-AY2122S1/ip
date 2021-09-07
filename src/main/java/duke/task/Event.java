@@ -15,7 +15,7 @@ public class Event extends Task {
      * @param isDone      The completion status of the event.
      */
     public Event(String description, LocalDate date, boolean isDone) {
-        super("Event", description, date, isDone);
+        super(TaskType.EVENT, description, date, isDone);
     }
 
     @Override

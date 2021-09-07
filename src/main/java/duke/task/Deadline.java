@@ -15,7 +15,7 @@ public class Deadline extends Task {
      * @param isDone      The completion status of the task.
      */
     public Deadline(String description, LocalDate date, boolean isDone) {
-        super("Deadline", description, date, isDone);
+        super(TaskType.DEADLINE, description, date, isDone);
         this.date = date;
     }
 

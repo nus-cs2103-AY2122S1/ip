@@ -1,10 +1,12 @@
 package duke.storage;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import duke.exception.DukeException;
 import duke.task.Task;
+import duke.task.TaskType;
 
 /**
  * Represents a Task list that can be added to and removed from.
@@ -61,6 +63,31 @@ public class TaskList {
         Task task = tasks.get(serialNo - 1);
         task.markAsDone();
         return task;
+    }
+
+    /**
+     * Updates the task with the given serialNo with a new description and date.
+     *
+     * @param serialNo Serial number of the task to update
+     * @param description The new description to update to. If null, the description will not be updated.
+     * @param date The new date to update to. If null, the date will not be updated.
+     */
+    public void updateTask(int serialNo, String description, LocalDate date) throws DukeException {
+        if (tasks.isEmpty()) {
+            throw new DukeException("Sorry Boss, there is no task to update.");
+        } else if (serialNo < 1 || serialNo > tasks.size()) {
+            throw new DukeException("Sorry Boss, please provide the correct serial no.");
+        }
+        Task task = tasks.get(serialNo - 1);
+        if (description != null) {
+            task.setDescription(description);
+        }
+        if (date != null) {
+            if (task.getTaskType() == TaskType.TODO) {
+                throw new DukeException("Sorry Boss, date cannot be updated for ToDo");
+            }
+            task.setDate(date);
+        }
     }
 
     /**

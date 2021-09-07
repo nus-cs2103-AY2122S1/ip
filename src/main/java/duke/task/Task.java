@@ -14,14 +14,14 @@ public class Task {
     /* The date for the task */
     protected LocalDate date;
     /* The type of task */
-    private final String taskType;
+    private final TaskType taskType;
     /**
      * Creates a task class with the given description and the completion status.
      *
      * @param description Description of the task.
      * @param isDone      Completion status of the task.
      */
-    public Task(String taskType, String description, LocalDate date, boolean isDone) {
+    public Task(TaskType taskType, String description, LocalDate date, boolean isDone) {
         this.taskType = taskType;
         this.description = description;
         this.isDone = isDone;
@@ -63,10 +63,28 @@ public class Task {
     }
 
     /**
+     * Sets the date of the task.
+     *
+     * @param date The date of the task to set to.
+     */
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    /**
+     * Sets the description of the task.
+     *
+     * @param description The description of the task to set to.
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
      * Returns the type of this task as a String.
      * @return The type of this task.
      */
-    public String getTaskType() {
+    public TaskType getTaskType() {
         return taskType;
     }
 

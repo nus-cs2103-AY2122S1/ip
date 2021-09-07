@@ -24,7 +24,7 @@ public class TaskPane extends AnchorPane {
      */
     public TaskPane(int serialNo, Task task) {
         Label taskDescription = new Label(
-                String.format("%d. %s: %s", serialNo, task.getTaskType(), task.getDescription())
+                String.format("%d. %s: %s", serialNo, task.getTaskType().getLabel(), task.getDescription())
         );
         Label statusDescription = new Label();
         if (task.isDone()) {

@@ -10,6 +10,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.UpdateCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -47,7 +48,7 @@ public class Parser {
         }
     }
 
-    private Command parseTaskCommand(String cmd) throws DukeException {
+    private AddCommand parseTaskCommand(String cmd) throws DukeException {
         if (cmd.matches("^deadline\\s.*\\s/by\\s\\d{4}-\\d{2}-\\d{2}$")) {
             return new AddCommand(parseCommandToDeadline(cmd));
         } else if (cmd.matches("^event\\s.*\\s/at\\s\\d{4}-\\d{2}-\\d{2}$")) {
@@ -57,7 +58,33 @@ public class Parser {
         } else if (cmd.matches("^todo\\s.*$")) {
             return new AddCommand(parseCommandToToDo(cmd));
         } else {
-            throw new DukeException("I cannot understand the command");
+            throw new DukeException("Sorry Boss, I cannot understand the command");
+        }
+    }
+
+    private UpdateCommand parseUpdateCommand(String cmd, int serialNo, String description, LocalDate date) throws DukeException {
+        try {
+            if (cmd.isEmpty()) {
+                return new UpdateCommand(serialNo, description, date);
+            } else if (cmd.matches("^update\\s\\d+\\s.*$")) {
+                String s = cmd.substring(7);
+                int endIndex = s.indexOf(" ");
+                int sn = Integer.parseInt(s.substring(0, endIndex));
+                return parseUpdateCommand(s.substring(endIndex + 1).trim(), sn, description, date);
+            } else if (cmd.matches("^/desc\\s.*$")) {
+                int endIndex = cmd.indexOf("/date");
+                endIndex = endIndex < 0 ? cmd.length() : endIndex;
+                return parseUpdateCommand(cmd.substring(endIndex), serialNo, cmd.substring(6, endIndex).trim(), date);
+            } else if (cmd.matches("^/date\\s+\\d{4}-\\d{2}-\\d{2}($|\\s.*$)")) {
+                int endIndex = cmd.indexOf("/desc");
+                endIndex = endIndex < 0 ? cmd.length() : endIndex;
+                return parseUpdateCommand(cmd.substring(endIndex), serialNo, description,
+                        LocalDate.parse(cmd.substring(6, endIndex).trim()));
+            } else {
+                throw new DukeException("Sorry Boss, I cannot understand the command.");
+            }
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Sorry Boss, please enter your date in the YYYY-MM-DD format.");
         }
     }
 
@@ -67,8 +94,8 @@ public class Parser {
             int serialNo = Integer.parseInt(cmd.substring(5));
             return new DoneCommand(serialNo);
         } else if (cmd.matches("^delete\\s\\d+$")) {
-            int serialNum = Integer.parseInt(cmd.split(" ")[1]);
-            return new DeleteCommand(serialNum);
+            int serialNo = Integer.parseInt(cmd.split(" ")[1]);
+            return new DeleteCommand(serialNo);
         } else if (cmd.matches("^find\\s.*$")) {
             return new FindCommand(cmd.split(" ")[1]);
         } else {
@@ -88,6 +115,8 @@ public class Parser {
             return parseTaskCommand(cmd);
         } else if (cmd.startsWith("done") || cmd.startsWith("delete") || cmd.startsWith("find")) {
             return parseSpecialCommand(cmd);
+        } else if (cmd.startsWith("update")) {
+            return parseUpdateCommand(cmd, 0, null, null);
         } else if (cmd.equals("bye")) {
             return new ByeCommand();
         } else if (cmd.equals("list")) {
