@@ -22,7 +22,7 @@ public class Task {
     public void markAsDone() {
         this.isDone = true; }
 
-    public boolean doesDescriptionContainString(String query) {
+    public boolean doesDescriptionContain(String query) {
         return this.description.contains(query);
     }
 

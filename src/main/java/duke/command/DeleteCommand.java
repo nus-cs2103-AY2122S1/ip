@@ -31,6 +31,6 @@ public class DeleteCommand extends Command {
                 .format("Noted. I've removed this duke.task: \n%s\nNow you have %d tasks in the list.",
                         removedTask, taskList.size());
 
-        return ui.printMessage(deleteMessage);
+        return ui.getDukeMessage(deleteMessage);
     }
 }

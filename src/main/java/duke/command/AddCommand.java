@@ -56,7 +56,8 @@ public class AddCommand extends Command {
         if (taskType.equals(("todo"))) {
             return addTodo(this.getUserInput(), taskList, ui, storage);
         }
-            return "";
+
+        throw new DukeException("invalid tasktype");
     }
 
     @Override
@@ -64,46 +65,75 @@ public class AddCommand extends Command {
         return false;
     }
 
-    private String displayAddedTask(Task currentTask, TaskList taskList, Ui ui) {
+    private String getAddedTaskMessage(Task currentTask, TaskList taskList, Ui ui) {
         String displayTask = String
                 .format("Got it. I've added this duke.task: \n%s\nNow you have %d tasks in the list.",
                         currentTask, taskList.size());
-        return ui.printMessage(displayTask);
+        return ui.getDukeMessage(displayTask);
     }
 
     private String addDeadline(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        assert userInput.contains("deadline /by") : "User input should contain deadline /by";
 
-        List<String> inputArray = Arrays.asList(userInput.split(" /by "));
-        String by = inputArray.get(1);
-        ArrayList<String> descriptionArray = new ArrayList<String>(Arrays.asList(inputArray.get(0).split(" ")));
-        descriptionArray.remove(0);
-        String description = String.join(" ", descriptionArray);
+        String description = retrieveDeadlineDescription(userInput);
+        String by = retrieveDeadlineDueDate(userInput);
         Deadline newDeadline = new Deadline(description, by);
         taskList.addTask(newDeadline);
         storage.saveData(taskList);
-        return displayAddedTask(newDeadline, taskList, ui);
+        return getAddedTaskMessage(newDeadline, taskList, ui);
 
     }
 
     private String addEvent(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        assert userInput.contains("event /at") : "User input should contain event /at";
+        String description = retrieveEventDescription(userInput);
+        String timeFrame = retrieveEventTimeFrame(userInput);
+        Event newEvent = new Event(description, timeFrame);
+        taskList.addTask(newEvent);
+        storage.saveData(taskList);
+        return getAddedTaskMessage(newEvent, taskList, ui);
 
+    }
+
+    private String addTodo(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        String description = retrieveTodoDescription(userInput);
+        Todo newTodo = new Todo(description);
+        taskList.addTask(newTodo);
+        storage.saveData(taskList);
+        return getAddedTaskMessage(newTodo, taskList, ui);
+    }
+
+    private String retrieveDeadlineDescription(String userInput) {
+        assert userInput.contains("deadline /by") : "User input should contain deadline /by";
+        List<String> inputArray = Arrays.asList(userInput.split(" /by "));
+        ArrayList<String> descriptionArray = new ArrayList<String>(Arrays.asList(inputArray.get(0).split(" ")));
+        descriptionArray.remove(0);
+        String description = String.join(" ", descriptionArray);
+        return description;
+    }
+
+    private String retrieveDeadlineDueDate(String userInput) {
+        List<String> inputArray = Arrays.asList(userInput.split(" /by "));
+        String by = inputArray.get(1);
+        return by;
+    }
+
+    private String retrieveEventDescription(String userInput) {
+        assert userInput.contains("event /at") : "User input should contain event /at";
         List<String> inputArray = Arrays.asList(userInput.split(" /at "));
         String timeFrame = inputArray.get(1);
         ArrayList<String> descriptionArray = new ArrayList<String>(Arrays.asList(inputArray.get(0).split(" ")));
         descriptionArray.remove(0);
         String description = String.join(" ", descriptionArray);
-        Event newEvent = new Event(description, timeFrame);
-        taskList.addTask(newEvent);
-        storage.saveData(taskList);
-        return displayAddedTask(newEvent, taskList, ui);
-
+        return description;
     }
 
-    private String addTodo(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        assert userInput.contains("todo") : "User input should contain todo";
+    private String retrieveEventTimeFrame(String userInput) {
+        List<String> inputArray = Arrays.asList(userInput.split(" /at "));
+        String timeFrame = inputArray.get(1);
+        return timeFrame;
+    }
 
+    private String retrieveTodoDescription(String userInput) throws DukeException {
+        assert userInput.contains("todo") : "User input should contain todo";
         List<String> inputArray = Arrays.asList(userInput.split(" "));
 
         if (inputArray.size() <= 1) {
@@ -113,10 +143,6 @@ public class AddCommand extends Command {
         ArrayList<String> descriptionArray = new ArrayList<String>(inputArray);
         descriptionArray.remove(0);
         String description = String.join(" ", descriptionArray);
-        Todo newTodo = new Todo(description);
-        taskList.addTask(newTodo);
-        storage.saveData(taskList);
-        return displayAddedTask(newTodo, taskList, ui);
+        return description;
     }
-
 }

@@ -20,7 +20,7 @@ public class Duke {
         try {
             this.taskList = new TaskList(storage.loadData());
         } catch (DukeException e) {
-            ui.printError(e);
+            ui.getDukeError(e);
         }
         this.ui = new Ui();
     }
@@ -34,7 +34,7 @@ public class Duke {
             }
             response = c.execute(taskList, ui, storage);
         } catch (DukeException e) {
-            response = ui.printError(e);
+            response = ui.getDukeError(e);
         }
         return response;
     }
