@@ -58,6 +58,8 @@ public class Lania {
      */
     public void run() {
         try {
+            // tasks loaded from the storage should not be null
+            assert storage.load() != null;
             tasks = storage.load();
         } catch (IOException e) {
             ui.showError();
