@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 
 import java.util.ArrayList;
 
@@ -10,6 +10,40 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Searches the task list for tasks with matching keyword within description
+     *
+     * @param keyword keyword to be searched
+     * @return the list of tasks with the keyword
+     */
+    public String find(String keyword) {
+        StringBuilder taskString = new StringBuilder();
+        int len = tasks.size();
+        int count = 1;
+
+        for (int i = 0; i < len - 1; i++) {
+            Task task = tasks.get(i);
+
+            if (task.contains(keyword)) {
+                taskString.append(count + ". " + task.toString() + "\n");
+                count++;
+            }
+        }
+
+        Task task = tasks.get(len - 1);
+
+        if (task.contains(keyword)) {
+            taskString.append(count + ". " + task.toString());
+        }
+
+        return taskString.toString();
+    }
+
+    /**
+     * Returns the list of tasks as a String
+     *
+     * @return formatted list of task
+     */
     public String getFormattedData() {
         StringBuilder data = new StringBuilder();
 
@@ -24,6 +58,11 @@ public class TaskList {
         return data.toString();
     }
 
+    /**
+     * Returns the number of tasks as a String response
+     *
+     * @return formatted response
+     */
     public String getTaskCountString() {
         return String.format("You have %d tasks", this.tasks.size());
     }
@@ -40,6 +79,7 @@ public class TaskList {
         return this.tasks.remove(index);
     }
 
+    @Override
     public String toString() {
         StringBuilder taskString = new StringBuilder();
         int len = tasks.size();
@@ -53,27 +93,5 @@ public class TaskList {
         return taskString.toString();
     }
 
-    public String find(String keyword) {
-        StringBuilder taskString = new StringBuilder();
-        int len = tasks.size();
-        int count = 1;
 
-        for (int i = 0; i < len - 1; i++) {
-            Task task = tasks.get(i);
-
-            if (task.contains(keyword)) {
-                taskString.append(count + ". " + task.toString() + "\n");
-                count++;
-            }
-
-        }
-
-        Task task = tasks.get(len - 1);
-
-        if (task.contains(keyword)) {
-            taskString.append(count + ". " + task.toString());
-        }
-
-        return taskString.toString();
-    }
 }

@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 
 public class ToDo extends Task {
 
@@ -10,6 +10,7 @@ public class ToDo extends Task {
         super(description, "[T]", status);
     }
 
+    @Override
     public String getFormattedData() {
         String formattedStatus = super.isDone() ? "1|" : "0|";
         return "T|" + formattedStatus + super.getDescription();

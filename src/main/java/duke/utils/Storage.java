@@ -1,4 +1,4 @@
-package utils;
+package duke.utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,10 +8,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.ToDo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 public class Storage {
 
@@ -25,6 +25,8 @@ public class Storage {
 
     /**
      * Returns ArrayList of Tasks loaded from filePath location
+     *
+     * @return the ArrayList
      */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -35,19 +37,24 @@ public class Storage {
             while (dataReader.hasNextLine()) {
                 String[] data = dataReader.nextLine().split("\\|");
                 String type = data[0];
-                boolean isDone = data[1] == "1" ? true : false;
+                boolean isDone = data[1].equals("1");
                 String description = data[2];
 
-                if (type.equals("T")) {
+                switch (type) {
+                case "T":
                     tasks.add(new ToDo(description, isDone));
-                } else if (type.equals("D")) {
+                    break;
+                case "D":
                     LocalDate time = LocalDate.parse(data[3].trim());
                     tasks.add(new Deadline(description, time, isDone));
-                } else if (type.equals("E")) {
+                    break;
+                case "E":
                     LocalDate startTime = LocalDate.parse(data[3].trim());
                     LocalDate endTime = LocalDate.parse(data[3].trim());
                     tasks.add(new Event(description, startTime, endTime, isDone));
+                    break;
                 }
+
             }
 
             dataReader.close();
