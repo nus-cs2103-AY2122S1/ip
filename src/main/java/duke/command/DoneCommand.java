@@ -48,15 +48,4 @@ public class DoneCommand extends Command {
             return ui.showDoneTask(task);
         }
     }
-
-    /**
-     * Returns {@code false}. Program should not terminate after
-     * {@code DoneCommand}.
-     *
-     * @return {@code false}
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

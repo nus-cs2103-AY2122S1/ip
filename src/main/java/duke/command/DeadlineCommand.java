@@ -37,14 +37,4 @@ public class DeadlineCommand extends Command {
         storage.writeToFile(tasks);
         return ui.showNewTask(tasks.lastTask(), tasks.size());
     }
-
-    /**
-     * Returns {@code false}. Program should not terminate after {@code DeadlineCommand}.
-     *
-     * @return {@code false}
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

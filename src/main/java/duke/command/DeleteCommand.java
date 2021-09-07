@@ -39,14 +39,4 @@ public class DeleteCommand extends Command {
         storage.writeToFile(tasks);
         return ui.showDeletedTask(task, tasks.size());
     }
-
-    /**
-     * Returns {@code false}. Program should not terminate after {@code DeleteCommand}.
-     *
-     * @return {@code false}
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

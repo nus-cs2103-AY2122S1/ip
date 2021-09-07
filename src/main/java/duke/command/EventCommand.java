@@ -37,15 +37,4 @@ public class EventCommand extends Command {
         storage.writeToFile(tasks);
         return ui.showNewTask(tasks.lastTask(), tasks.size());
     }
-
-    /**
-     * Returns {@code false}. Program should not terminate after
-     * {@code EventCommand}.
-     *
-     * @return {@code false}
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

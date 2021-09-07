@@ -31,14 +31,4 @@ public class FindCommand extends Command {
         ArrayList<Task> filteredTasks = tasks.searchTasks(args[0]);
         return ui.showFilteredTasks(filteredTasks);
     }
-
-    /**
-     * Returns {@code false}. Program should not terminate after {@code FindCommand}.
-     *
-     * @return {@code false}
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }
