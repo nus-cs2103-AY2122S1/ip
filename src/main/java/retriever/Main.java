@@ -20,6 +20,7 @@ public class Main extends Application {
 
     /**
      * Starts the GUI interface.
+     *
      * @param stage The window shown.
      */
     @Override

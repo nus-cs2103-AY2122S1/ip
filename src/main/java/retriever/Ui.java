@@ -1,7 +1,6 @@
 package retriever;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import retriever.task.Task;
 
@@ -13,25 +12,15 @@ public class Ui {
     private static String retrieverResponse;
 
     // Predetermined strings.
-    private String dashedLine = "_______________________________________________";
-    private String welcomeMessage = "Hello, I am Retriever\nHow Can I Help You Today?";
-    private String goodByeMessage = "-> Sad To See You Go!";
     private String emptyListMessage = "My Memory Is Empty, Please Feed Items!";
     private String printListMessage = "-> Your Tasks, My Master:";
     private String goodBoyMessage = "Woof! Whose a Good Boy?";
     private String badBoyMessage = "Woof! Whose a Bad Boy?";
-    private String logo = "  __      ^\n"
-            + "o'')}____//\n"
-            + " `_'      )\n"
-            + "(_(_/-(_/\n";
-
-    private Scanner scanner;
 
     /**
      * Sets up the scanner to take in user input.
      */
     public Ui() {
-        scanner = new Scanner(System.in);
     }
 
     /**
@@ -41,20 +30,6 @@ public class Ui {
      */
     public void printMessage(String message) {
         retrieverResponse = message;
-    }
-
-    /**
-     * Prints the welcome message.
-     */
-    public void printWelcomeMessage() {
-        retrieverResponse = welcomeMessage;
-    }
-
-    /**
-     * Prints the goodbye message.
-     */
-    public void printGoodByeMessage() {
-        retrieverResponse = goodBoyMessage;
     }
 
     /**
@@ -108,7 +83,7 @@ public class Ui {
      */
     public void printTaskFoundByKeyword(ArrayList<Task> taskList) {
         if (taskList.size() == 0) {
-            retrieverResponse = "Sorry Master, I Couldn't Smell And Find WHat You Asked For!"
+            retrieverResponse = "Sorry Master, I Couldn't Smell And Find What You Asked For!"
                     + "\n (Task With the Given Keyword Does Not Exist)\n";
             return;
         }
@@ -130,9 +105,9 @@ public class Ui {
     public void printTaskList(ArrayList<Task> taskList) {
         // If the list is empty
         if (taskList.size() == 0) {
-            retrieverResponse = "My Memory Is Empty, Please Feed Items!";
+            retrieverResponse = emptyListMessage;
         } else {
-            retrieverResponse = "Your Tasks, My Master:\n";
+            retrieverResponse = printListMessage + "\n";
             for (int i = 0; i < taskList.size(); i++) {
                 retrieverResponse += ((i + 1) + ". " + taskList.get(i)) + "\n";
             }
