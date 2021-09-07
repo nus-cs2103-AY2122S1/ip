@@ -8,6 +8,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListArchiveCommand;
 import duke.command.ListCommand;
+import duke.command.RemoveArchiveCommand;
 import duke.command.RemoveCommand;
 import duke.exception.DukeException;
 import duke.exception.IncompleteArchiveException;
@@ -95,7 +96,7 @@ public class Parser {
     }
 
     /**
-     * Checks if input is a list command.
+     * Checks if input is a list or list archive command.
      *
      * @param input Input which is being checked.
      * @return true if input is a list command.
@@ -104,13 +105,24 @@ public class Parser {
         return isList(input) || isListArchive(input);
     }
 
+    /**
+     * Checks if userInput is a list command.
+     *
+     * @param userInput Input to be checked.
+     * @return true if it is a list command.
+     */
     private static boolean isList(String userInput) {
         String[] separated = userInput.split(" ");
 
         return separated.length == 1 && separated[0].equals("list");
     }
 
-
+    /**
+     * Checks if userInput is a list archive command.
+     *
+     * @param userInput Input to be checked.
+     * @return true if it is a list archive command.
+     */
     private static boolean isListArchive(String userInput) {
         String[] separated = userInput.split(" ");
 
@@ -150,6 +162,12 @@ public class Parser {
         return separated[0].equals("todo");
     }
 
+    /**
+     * Checks if input is an archive command.
+     *
+     * @param input Input which is being checked.
+     * @return true if input is an archive command.
+     */
     private static boolean isArchive(String input) {
         String[] separated = input.split(" ");
         return separated[0].equals("archive");
@@ -267,16 +285,18 @@ public class Parser {
      * @param userInput Input which needs to be parsed.
      * @param ui Ui object from Duke class.
      * @param taskList TaskList object from Duke class.
+     * @param archiveList ArchiveList object from Duke class.
      * @return Command to execute.
      * @throws DukeException If incorrect values are passed for remove or done commands.
      */
-    public static Command parse(String userInput, Ui ui, TaskList taskList) throws DukeException {
+    public static Command parse(
+            String userInput, Ui ui, TaskList taskList, ArchiveList archiveList) throws DukeException {
         if (Parser.isListOrListArchive(userInput)) {
             return parseListCommand(userInput);
         } else if (Parser.isDone(userInput)) {
             return parseDoneCommand(userInput, taskList);
         } else if (Parser.isRemove(userInput)) {
-            return parseRemoveCommand(userInput, taskList);
+            return parseRemoveCommand(userInput, taskList, archiveList);
         } else if (Parser.isBye(userInput)) {
             return new ExitCommand();
         } else if (Parser.isFind(userInput)) {
@@ -294,7 +314,14 @@ public class Parser {
         }
     }
 
-    private static Command parseListCommand(String userInput) throws InvalidCommandException {
+    /**
+     * Parses the command string into an ListCommand which lists tasks.
+     *
+     * @param userInput Command which user entered.
+     * @return An ListCommand which lists tasks.
+     * @throws InvalidCommandException If incorrect values are passed in.
+     */
+    private static ListCommand parseListCommand(String userInput) throws InvalidCommandException {
         if (isListArchive(userInput)) {
             return new ListArchiveCommand();
         } else if (isList(userInput)) {
@@ -304,6 +331,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the command string into an ArchiveCommand which archives a task.
+     *
+     * @param userInput Command which user entered.
+     * @param taskList list which Task would be archived.
+     * @return An ArchiveCommand which archives a task.
+     * @throws DukeException If insufficient or invalid values are passed in.
+     */
     private static ArchiveCommand parseArchiveCommand(String userInput, TaskList taskList) throws DukeException {
         String[] separated = userInput.split(" ");
 
@@ -397,15 +432,56 @@ public class Parser {
      * Parses the command string into a RemoveCommand.
      *
      * @param userInput Command which user entered.
-     * @param taskList taskList which RemoveCommand remove from.
+     * @param taskList taskList which stores tasks.
+     * @param archiveList archiveList which stores archived tasks.
      * @return A RemoveCommand with index to remove.
      * @throws DukeException If insufficient values are passed in.
      */
     private static RemoveCommand parseRemoveCommand(
-            String userInput, TaskList taskList) throws DukeException {
+            String userInput, TaskList taskList, ArchiveList archiveList) throws DukeException {
 
         String[] separated = userInput.split(" ");
 
+        boolean isRemoveArchive = separated.length > 2 && separated[1].equals("archive");
+
+        if (isRemoveArchive) {
+            return handleRemoveArchive(archiveList, separated);
+        } else {
+            return handleRemove(taskList, separated);
+        }
+    }
+
+    /**
+     * Handles the case where it is a RemoveArchiveCommand and parses it.
+     *
+     * @param archiveList archiveList to be removed from.
+     * @param separated separated form of the string, split by space.
+     * @return RemoveArchiveCommand to be executed.
+     * @throws DukeException if it has an invalid index to remove.
+     */
+    private static RemoveArchiveCommand handleRemoveArchive(
+            ArchiveList archiveList, String[] separated) throws DukeException {
+        if (!isIntegerOrAll(separated[2]) || isOutOfRange(archiveList, separated[2])) {
+            throw new DukeException("Please key in valid number to remove.");
+        } else if (isPositiveInteger(separated[2])) {
+            return new RemoveArchiveCommand(Integer.valueOf(separated[2]) - 1);
+        } else if (isAll(separated[2])) {
+            return new RemoveArchiveCommand(-1);
+        } else {
+            throw new InvalidCommandException();
+        }
+
+    }
+
+    /**
+     * Handles the case where it is a RemoveCommand and parses it.
+     *
+     * @param taskList taskList to be removed from.
+     * @param separated separated form of the string, split by space.
+     * @return RemoveCommand to be executed.
+     * @throws DukeException if it has an invalid index to remove.
+     */
+    private static RemoveCommand handleRemove(TaskList taskList, String[] separated) throws DukeException {
         boolean lengthLessThanTwo = separated.length < 2;
 
         if (lengthLessThanTwo || !isIntegerOrAll(separated[1])
@@ -481,21 +557,33 @@ public class Parser {
     /**
      * Checks if string is within range of given taskList.
      *
-     * @param taskList taskList to see if index s is within.
+     * @param dukeList taskList to see if index s is within.
      * @param s String to check if is within range of taskList.
      * @return true if String is within the range of the taskList, else false.
      */
-    private static boolean isOutOfRange(TaskList taskList, String s) {
-        return !isAll(s) && (isExceedLength(taskList, s) || isLessThanOne(s));
+    private static boolean isOutOfRange(DukeList dukeList, String s) {
+        return !isAll(s) && (isExceedLength(dukeList, s) || isLessThanOne(s));
     }
 
+    /**
+     * Checks if integer value of s is less than 1.
+     *
+     * @param s String which is to be converted intp integer value.
+     * @return true if integer value of s is less than 1, false otherwise.
+     */
     private static boolean isLessThanOne(String s) {
         return Integer.valueOf(s) < 1;
     }
 
-    private static boolean isExceedLength(TaskList taskList, String s) {
-        return Integer.valueOf(s) > taskList.getSize();
+    /**
+     * Checks if integer value of s exceeds the length of dukeList.
+     *
+     * @param dukeList DukeList to check if integer value of s exceeds.
+     * @param s String which is to be converted into integer value.
+     * @return true if integer value of s does not exceed length of dukeList,
+     * false otherwise.
+     */
+    private static boolean isExceedLength(DukeList dukeList, String s) {
+        return Integer.valueOf(s) > dukeList.getSize();
     }
-
-
 }

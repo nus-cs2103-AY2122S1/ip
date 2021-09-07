@@ -4,18 +4,22 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents ArchiveList for Duke.
+ */
 public class ArchiveList extends DukeList {
     /**
-     * Constructor for TaskList.
+     * Constructor for ArchiveList.
      */
     public ArchiveList() {
         super();
     }
 
     /**
-     * Constructor for TaskList, setting tasks to a given list.
+     * Constructor for ArchiveList, setting taskArrayList
+     * to a given list.
      *
-     * @param list List to be assigned to tasks.
+     * @param list List to be assigned to taskArrayList.
      */
     public ArchiveList(ArrayList<Task> list) {
         super(list);
@@ -24,12 +28,17 @@ public class ArchiveList extends DukeList {
     /**
      * Getter for archived tasks.
      *
-     * @return tasks.
+     * @return Archived tasks.
      */
     public ArrayList<Task> getArchivedTasks() {
         return super.getTaskArrayList();
     }
 
+    /**
+     * Gets the type of list.
+     *
+     * @return "archived list"
+     */
     @Override
     public String type() {
         return "archived list";

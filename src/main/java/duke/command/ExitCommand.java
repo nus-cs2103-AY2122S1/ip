@@ -24,6 +24,7 @@ public class ExitCommand extends Command {
      * Executes the Exit Command.
      *
      * @param taskList TaskList of Tasks.
+     * @param archiveList ArchiveList to store archived tasks.
      * @param ui Ui to print to users of Duke.
      * @param storage Storage to save and load TaskList of Duke.
      */
@@ -39,6 +40,7 @@ public class ExitCommand extends Command {
      * execute method as well as execute exiting of the gui.
      *
      * @param taskList TaskList of Tasks.
+     * @param archiveList ArchiveList to store archived tasks.
      * @param ui Ui to get String representation of the text printed.
      * @param storage Storage to save and load TaskList of Duke.
      */

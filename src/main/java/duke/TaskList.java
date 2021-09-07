@@ -16,16 +16,16 @@ public class TaskList extends DukeList {
     }
 
     /**
-     * Constructor for TaskList, setting tasks to a given list.
+     * Constructor for TaskList.
      *
-     * @param list List to be assigned to tasks.
+     * @param list List to be assigned to taskArrayList in DukeList.
      */
     public TaskList(ArrayList<Task> list) {
         super(list);
     }
 
     /**
-     * Getter for tasks.
+     * Getter for taskArrayList.
      *
      * @return tasks.
      */
@@ -34,7 +34,7 @@ public class TaskList extends DukeList {
     }
 
     /**
-     * Marks Task at given index in tasks as done.
+     * Marks Task at given index in taskArrayList as done.
      *
      * @param index Index of Task to mark as done.
      */
@@ -42,6 +42,9 @@ public class TaskList extends DukeList {
         super.get(index).markAsDone();
     }
 
+    /**
+     * Marks all the Tasks in taskArrayList as done.
+     */
     public void markAllAsDone() {
         for (int i = 0; i < this.getSize(); i++) {
             markAsDone(i);
@@ -49,7 +52,7 @@ public class TaskList extends DukeList {
     }
 
     /**
-     * Finds tasks with given keyword in tasks.
+     * Finds tasks with given keyword in taskArrayList.
      *
      * @param keyword Keyword of tasks we want to find.
      * @return TaskList of Tasks with given keyword.
@@ -66,6 +69,13 @@ public class TaskList extends DukeList {
         return new TaskList(tasksWithKeyword);
     }
 
+    /**
+     * Archives Task at given index of taskArrayList.
+     *
+     * @param index Index of Task to be archived.
+     * @param archiveList ArchiveList to add the Task to.
+     * @return Task which was archived.
+     */
     public Task archive(int index, ArchiveList archiveList) {
         Task toArchive = this.remove(index);
 
@@ -74,6 +84,11 @@ public class TaskList extends DukeList {
         return toArchive;
     }
 
+    /**
+     * Gets the type of list.
+     *
+     * @return "list".
+     */
     @Override
     public String type() {
         return "list";

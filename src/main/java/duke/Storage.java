@@ -65,6 +65,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Initialises the ArrayList for the archiveList of Duke.
+     *
+     * @return ArrayList of the archiveList.
+     */
     public ArrayList<Task> initialiseArchive() {
         //read from the data/history.text and return an ArrayList of Tasks
         File file = new File(ARCHIVELIST_FILE_PATH);
@@ -168,6 +173,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the archiveList given by Duke into user's computer.
+     *
+     * @param archiveList ArchiveList to be saved into user's computer.
+     */
     public void saveArchive(ArchiveList archiveList) {
         try {
             FileWriter fw = new FileWriter(ARCHIVELIST_FILE_PATH);
@@ -187,26 +197,11 @@ public class Storage {
         }
     }
 
-//
-//    private String convertArchiveListToSaveForm(ArchiveList archiveList) {
-//        String textToAdd = "";
-//
-//        for (int i = 0; i < archiveList.getSize(); i++) {
-//            if (i == 0) {
-//                textToAdd += archiveList.taskSaveToString(i);
-//            } else {
-//                textToAdd += "\n" + archiveList.taskSaveToString(i);
-//            }
-//        }
-//
-//        return textToAdd;
-//    }
-
     /**
      * Converts dukeList into a text form which can be saved.
      *
      * @param dukeList dukeList to be saved.
-     * @return Text form of taskList to be saved.
+     * @return Text form of dukeList to be saved.
      */
     private String convertTaskListToSaveForm(DukeList dukeList) {
         String textToAdd = "";

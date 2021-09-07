@@ -35,6 +35,7 @@ public class AddCommand extends Command {
      * Executes the AddCommand.
      *
      * @param taskList TaskList object to add toAdd to.
+     * @param archiveList ArchiveList to store archived tasks.
      * @param ui Ui Object to print to user.
      * @param storage Storage object which saves and loads the taskList.
      */
@@ -49,6 +50,7 @@ public class AddCommand extends Command {
      * execute method as well as execute the adding of the task.
      *
      * @param taskList TaskList object to add toAdd to.
+     * @param archiveList ArchiveList to store archived tasks.
      * @param ui Ui Object to get the String representation from.
      * @param storage Storage object which saves and loads the taskList.
      * @return String representation of the things printed in the execute method.

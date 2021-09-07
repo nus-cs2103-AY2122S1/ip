@@ -4,13 +4,25 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents Tasks for Duke.
+ */
 public abstract class DukeList {
     private final ArrayList<Task> taskArrayList;
 
+    /**
+     * Constructor for DukeList.
+     */
     public DukeList() {
         this.taskArrayList = new ArrayList<>();
     }
 
+    /**
+     * Constructor for DukeList, which assigns the taskArrayList to a
+     * specific ArrayList.
+     *
+     * @param taskArrayList ArrayList to be assigned to taskArrayList.
+     */
     public DukeList(ArrayList<Task> taskArrayList) {
         this.taskArrayList = taskArrayList;
     }

@@ -24,6 +24,7 @@ public class ListCommand extends Command {
      * Executes the ListCommand.
      *
      * @param taskList TaskList of Tasks to be listed.
+     * @param archiveList ArchiveList to store archived tasks.
      * @param ui Ui to print to users of Duke.
      * @param storage Storage to save and load TaskList of Duke.
      */
@@ -37,6 +38,7 @@ public class ListCommand extends Command {
      * execute method as well as execute list command.
      *
      * @param taskList TaskList of Tasks to be listed.
+     * @param archiveList ArchiveList to store archived tasks.
      * @param ui Ui to get the String representation of the text printed.
      * @param storage Storage to save and load TaskList of Duke.
      */

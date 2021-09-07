@@ -36,6 +36,7 @@ public class DoneCommand extends Command {
      * Executes the DoneCommand.
      *
      * @param taskList TaskList to mark Task at index indexToMarkAsDone as Done.
+     * @param archiveList ArchiveList to store archived tasks.
      * @param ui Ui to print to users of Duke.
      * @param storage Storage to save and load TaskList for Duke.
      */
@@ -58,6 +59,7 @@ public class DoneCommand extends Command {
      * execute method as well as execute the marking of the task as done.
      *
      * @param taskList TaskList to mark Task at index indexToMarkAsDone as Done.
+     * @param archiveList ArchiveList to store archived tasks.
      * @param ui Ui to get the String representation of the text printed.
      * @param storage Storage to save and load TaskList for Duke.
      */

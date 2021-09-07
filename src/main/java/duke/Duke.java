@@ -32,7 +32,7 @@ public class Duke {
         while (!isExit) {
             try {
                 String userInput = ui.readInput();
-                Command c = Parser.parse(userInput, ui, taskList);
+                Command c = Parser.parse(userInput, ui, taskList, archiveList);
                 c.execute(taskList, archiveList, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
@@ -50,7 +50,7 @@ public class Duke {
      */
     public String processInput(String input) {
         try {
-            Command c = Parser.parse(input, ui, taskList);
+            Command c = Parser.parse(input, ui, taskList, archiveList);
             return c.getExecutedString(taskList, archiveList, ui, storage);
         } catch (DukeException e) {
             return e.getMessage();

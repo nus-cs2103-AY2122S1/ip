@@ -35,6 +35,7 @@ public class FindCommand extends Command {
      * Executes the FindCommand.
      *
      * @param taskList TaskList object to find keyword from.
+     * @param archiveList ArchiveList to store archived tasks.
      * @param ui Ui Object to print to user.
      * @param storage Storage object which saves and loads the tasklist.
      */
@@ -49,6 +50,7 @@ public class FindCommand extends Command {
      * execute method as well as execute the finding of the keyword.
      *
      * @param taskList TaskList object to find keyword from.
+     * @param archiveList ArchiveList to store archived tasks.
      * @param ui Ui Object to get the String representation of the text printed.
      * @param storage Storage object which saves and loads the tasklist.
      */
