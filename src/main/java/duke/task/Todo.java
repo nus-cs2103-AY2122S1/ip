@@ -10,8 +10,8 @@ public class Todo extends Task {
      *
      * @param description The task description.
      */
-    public Todo(String description) {
-        super(description);
+    public Todo(String tag, String description) {
+        super(tag, description);
     }
 
     /**

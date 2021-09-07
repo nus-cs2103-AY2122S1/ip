@@ -18,7 +18,7 @@ import duke.exception.MissingArgumentException;
 public class Parser {
 
     private enum CommandType {
-        LIST, DONE, TODO, EVENT, DEADLINE, DELETE, FIND, BYE, UNKNOWN
+        LIST, DONE, TAG, TODO, EVENT, DEADLINE, DELETE, FIND, BYE, UNKNOWN
     }
 
     // Returns CommandType representation of the command.
@@ -73,6 +73,12 @@ public class Parser {
         return commandComponents;
     }
 
+    // Returns the tag by extracting it out from the command description.
+    private static String[] splitCommandDescriptionFromTag(String commandDescription) {
+        String descriptionWithoutTagSyntax = commandDescription.replaceFirst("t/", "");
+        return descriptionWithoutTagSyntax.split(" ", 2);
+    }
+
     // Returns command instance based on the command given by the user.
     private static Command createCommand(String fullCommand) throws DukeException {
         String[] commandComponents = splitCommand(fullCommand);
@@ -86,17 +92,23 @@ public class Parser {
         case BYE:
             return new ExitCommand();
         case DONE:
-            taskNum = Integer.parseInt(commandComponents[1]);
+            taskNum = Integer.parseInt(commandDescription);
             return new DoneCommand(taskNum);
         case DELETE:
-            taskNum = Integer.parseInt(commandComponents[1]);
+            taskNum = Integer.parseInt(commandDescription);
             return new DeleteCommand(taskNum);
         case TODO:
             // Fallthrough
         case EVENT:
             // Fallthrough
         case DEADLINE:
-            return new AddCommand(commandType, commandDescription);
+            boolean hasTag = commandDescription.contains("t/");
+            String[] descriptionWithTag = hasTag
+                    ? splitCommandDescriptionFromTag(commandDescription)
+                    : new String[]{};
+            String tag = hasTag ? descriptionWithTag[0] : "";
+            String descriptionWithoutTag = hasTag ? descriptionWithTag[1] : commandDescription;
+            return new AddCommand(commandType, tag, descriptionWithoutTag);
         case FIND:
             return new FindCommand(commandDescription);
         default:

@@ -45,16 +45,16 @@ public class TaskList {
         addLoad(storageLoad);
     }
 
-    private Task createTask(TaskType type, String description, String date) {
+    private Task createTask(TaskType type, String tag, String description, String date) {
         switch (type) {
         case TODO:
-            return new Todo(description);
+            return new Todo(tag, description);
         case EVENT:
             LocalDate at = LocalDate.parse(date);
-            return new Event(description, at);
+            return new Event(tag, description, at);
         case DEADLINE:
             LocalDate by = LocalDate.parse(date);
-            return new Deadline(description, by);
+            return new Deadline(tag, description, by);
         default:
             return null;
         }
@@ -63,12 +63,13 @@ public class TaskList {
     private void addLoad(List<String> storageLoad) {
         for (String taskString : storageLoad) {
             // Extract task details into three parts
-            String[] taskDetails = taskString.split(" \\| ", 4);
+            String[] taskDetails = taskString.split(" \\| ", 5);
 
             TaskType type = TaskType.valueOf(taskDetails[0]);
-            String description = taskDetails[2];
-            String date = type.equals(TaskType.TODO) ? null : taskDetails[3];
-            Task task = createTask(type, description, date);
+            String tag = taskDetails[2];
+            String description = taskDetails[3];
+            String date = type.equals(TaskType.TODO) ? null : taskDetails[4];
+            Task task = createTask(type, tag, description, date);
 
             boolean isTask = task != null;
             boolean isDone = taskDetails[1].equals("1");
