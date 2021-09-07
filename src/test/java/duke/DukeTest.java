@@ -87,4 +87,29 @@ public class DukeTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void Find_Test() {
+        Duke duke = new Duke("/Users/hungkhoaitay/Duke/data/dukeTest.txt");
+        Storage storage = duke.storage;
+        try {
+            storage.clear();
+            Duke.todoList = new ArrayList<>();
+
+            duke.getResponse("todo this");
+            duke.getResponse("todo that");
+            duke.getResponse("todo these");
+            duke.getResponse("todo hasagi");
+
+            String expected = "Here are the matching tasks in your list:\n" +
+                    "1. [T] [ ] this\n" +
+                    "2. [T] [ ] that\n" +
+                    "3. [T] [ ] these";
+
+            assertEquals(expected, duke.getResponse("find th").toString());
+            // assertTrue(expected.equals(duke.getResponse("find th")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public abstract class Command {
     protected static final String NULL_COMMAND = "nothing";
@@ -161,13 +162,7 @@ public abstract class Command {
         @Override
         protected Response execute() {
             ResponseMessage responseMessage = new ResponseMessage("Here are the matching tasks in your list:");
-            java.util.List<Task> matchingList = new ArrayList<>();
-            for (int i = 0; i < Duke.todoList.size(); i++) {
-                Task t = Duke.todoList.get(i);
-                if (t.getTaskName().contains(search)) {
-                    matchingList.add(t);
-                }
-            }
+            java.util.List<Task> matchingList = Duke.todoList.stream().filter(task -> task.getTaskName().contains(search)).collect(Collectors.toList());
             for (int i = 0; i < matchingList.size(); i++) {
                 responseMessage.appendMessage(i + 1 + ". " + matchingList.get(i).toString());
             }
