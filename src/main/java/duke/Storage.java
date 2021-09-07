@@ -1,5 +1,12 @@
 package duke;
 
+import duke_exception.DukeException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.TaskList;
+import task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -11,13 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import duke_exception.DukeException;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.TaskList;
-import task.Todo;
-
 /**
  * Storage handles loading/saving of task list data from/to file.
  *
@@ -28,6 +28,11 @@ public class Storage {
     private String filePath;
     private File file;
 
+    /**
+     * Constructs a new Storage object given filePath.
+     *
+     * @param filePath path to storage file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.file = new File(filePath);
@@ -60,27 +65,27 @@ public class Storage {
                 String currentEntry = s.nextLine();
                 String[] currentEntryArray = currentEntry.split(" \\| ");
                 switch(currentEntryArray[0]) {
-                    case "T":
-                        Todo newTodo = new Todo(currentEntryArray[2]);
-                        if (currentEntryArray[1].equals("1")) {
-                            newTodo.setDone();
-                        }
-                        strList.add(newTodo);
-                        break;
-                    case "D":
-                        Deadline newDeadline = new Deadline(currentEntryArray[2], LocalDate.parse(currentEntryArray[3]));
-                        if (currentEntryArray[1].equals("1")) {
-                            newDeadline.setDone();
-                        }
-                        strList.add(newDeadline);
-                        break;
-                    case "E":
-                        Event newEvent = new Event(currentEntryArray[2], LocalDate.parse(currentEntryArray[3]));
-                        if (currentEntryArray[1].equals("1")) {
-                            newEvent.setDone();
-                        }
-                        strList.add(newEvent);
-                        break;
+                case "T":
+                    Todo newTodo = new Todo(currentEntryArray[2]);
+                    if (currentEntryArray[1].equals("1")) {
+                        newTodo.setDone();
+                    }
+                    strList.add(newTodo);
+                    break;
+                case "D":
+                    Deadline newDeadline = new Deadline(currentEntryArray[2], LocalDate.parse(currentEntryArray[3]));
+                    if (currentEntryArray[1].equals("1")) {
+                        newDeadline.setDone();
+                    }
+                    strList.add(newDeadline);
+                    break;
+                case "E":
+                    Event newEvent = new Event(currentEntryArray[2], LocalDate.parse(currentEntryArray[3]));
+                    if (currentEntryArray[1].equals("1")) {
+                        newEvent.setDone();
+                    }
+                    strList.add(newEvent);
+                    break;
                 }
             }
         } catch (FileNotFoundException e) {

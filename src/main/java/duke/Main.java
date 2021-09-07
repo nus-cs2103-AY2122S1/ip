@@ -8,10 +8,18 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * A Main class to build the Duke program in Gradle and JavaFX.
+ */
 public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    /**
+     * Sets up the JavaFX components.
+     *
+     * @param stage JavaFX stage.
+     */
     @Override
     public void start(Stage stage) {
         try {

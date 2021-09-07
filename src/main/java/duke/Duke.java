@@ -44,6 +44,11 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Constructs a Duke object given filePath.
+     *
+     * @param filePath path to duke.txt file containing list of tasks.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
 
@@ -57,6 +62,9 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * Constructs a Duke object given no arguments.
+     */
     public Duke() {
         this.ui = new Ui();
 
@@ -99,7 +107,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Starts the Duke program.
+     * Runs the Duke program.
      *
      * @param args String arguments.
      */
@@ -107,6 +115,11 @@ public class Duke extends Application {
         new Duke("data/duke.txt").run();
     }
 
+    /**
+     * Sets up JavaFX components.
+     *
+     * @param stage JavaFX stage.
+     */
     @Override
     public void start(Stage stage) {
         scrollPane = new ScrollPane();
@@ -182,8 +195,13 @@ public class Duke extends Application {
         userInput.clear();
     }
 
+    /**
+     * Returns the response from Duke given user input.
+     *
+     * @param input user input.
+     * @return response from Duke.
+     */
     String getResponse(String input) {
-//        return "Duke heard: " + input;
         try {
             Command newCommand = Parser.parse(input);
             String result = newCommand.execute(tasks, ui, storage);

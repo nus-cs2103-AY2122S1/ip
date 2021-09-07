@@ -54,20 +54,11 @@ public class Parser {
             } else {
                 throw new DukeUnknownException();
             }
-        } catch (DukeUnknownException e) {
-            System.out.println(e.getMessage());
-        } catch (DukeDoneException e) {
-            System.out.println(e.getMessage());
-        } catch (DukeTodoException e) {
-            System.out.println(e.getMessage());
-        } catch (DukeDeadlineException e) {
-            System.out.println(e.getMessage());
-        } catch (DukeEventException e) {
-            System.out.println(e.getMessage());
-        } catch (DukeDeleteException e) {
+        } catch (DukeUnknownException | DukeDoneException | DukeTodoException |
+                DukeDeadlineException | DukeEventException | DukeDeleteException e) {
             System.out.println(e.getMessage());
         }
-        return null; // unreachable statement?
+        return null;
     }
 
     /**
@@ -154,6 +145,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a FindCommand.
+     *
+     * @param str User input of query term.
+     * @return FindCommand.
+     * @throws DukeFindException If there are syntax errors in user input.
+     */
     public static FindCommand detectFind(String str) throws DukeFindException {
         try {
             String query = str.replaceFirst("find ", "");
