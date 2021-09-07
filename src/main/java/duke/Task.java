@@ -37,7 +37,8 @@ public class Task {
      * @return Details of task
      */
     public String writeTask() {
-        return (done ? "1" : "0") + " | " + title;
+        String doneLabel = done ? "1" : "0";
+        return doneLabel + " | " + title;
     }
 
     public String getTitle() {

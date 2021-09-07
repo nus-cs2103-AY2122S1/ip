@@ -13,23 +13,23 @@ import java.util.ArrayList;
  *
  */
 public class TaskList {
-    private ArrayList<Task> list;
+    private ArrayList<Task> tasks;
 
     /**
      * Constructor to create a new TaskList.
      *
      */
     public TaskList() {
-        list = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
      * Constructor to create a new TaskList.
      *
-     * @param list An ArrayList of Task that contains Tasks to be put inside the TaskList.
+     * @param tasks An ArrayList of Task that contains Tasks to be put inside the TaskList.
      */
-    public TaskList(ArrayList<Task> list) {
-        this.list = list;
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -39,8 +39,8 @@ public class TaskList {
      */
     public String printList() {
         String str = "Here are the tasks on your list: \n";
-        for (int i = 1; i <= list.size(); i++) {
-            str = str + i + ". " + list.get(i-1) + "\n";
+        for (int i = 1; i <= tasks.size(); i++) {
+            str = str + i + ". " + tasks.get(i-1) + "\n";
         }
         return str;
     }
@@ -56,14 +56,14 @@ public class TaskList {
     public String markAsDone(String str) throws OutOfBoundException, NumberFormatException {
         String i = str.substring(str.length()-1);
         int index = Integer.parseInt(i);
-        if (index < 0 || index > list.size()) {
+
+        if (index < 0 || index > tasks.size()) {
             throw new OutOfBoundException();
-        } else {
-            Task task = list.get(index - 1);
-            task.markAsDone();
-            String result = "Nice! I have marked this task as done!\n" + task.toString() ;
-            return result;
         }
+        Task task = tasks.get(index - 1);
+        task.markAsDone();
+        String result = "Nice! I have marked this task as done!\n" + task.toString() ;
+        return result;
     }
 
     /**
@@ -78,79 +78,68 @@ public class TaskList {
 
     public String addTask(String str) throws EmptyDescriptionException
             , InvalidTaskException, InvalidDeadlineException {
-        //first check if the task only contain 1 word
+        //if the task only contain 1 word
         if (str.split(" ").length == 1) {
-            //check if task if valid
             if (str.startsWith("todo") || str.startsWith("deadline") || str.startsWith("event")) {
                 throw new EmptyDescriptionException(str);
-            } else { //check for invalid task
-                throw new InvalidTaskException();
             }
+            throw new InvalidTaskException();
         }
 
-        //task that contain more than 1 word.
-        //check for invalid task. otherwise, add the correct task to the list.
-        else {
-            if (!str.startsWith("todo") && !str.startsWith("deadline") && !str.startsWith("event")) {
+        //if task contains more than 1 word, but keyword is wrong
+        if (!str.startsWith("todo") && !str.startsWith("deadline") && !str.startsWith("event")) {
+            throw new InvalidTaskException();
+        }
+
+        Task task;
+        if (str.startsWith("todo")) {
+            task = new ToDos(str.substring(5));
+            tasks.add(task);
+        } else if (str.startsWith("deadline")) {
+            String[] message = str.split("/by ");
+            if (message.length == 1) {
                 throw new InvalidTaskException();
             }
-            else {
-                Task task;
-                if (str.startsWith("todo")) {
-                    task = new ToDos(str.substring(5));
-                    assert task != null: "Task must not be null here";
-                    list.add(task);
-                } else if (str.startsWith("deadline")) {
-                    String[] message = str.split("/by ");
-                    if (message.length == 1) {
-                        throw new InvalidTaskException();
-                    } else {
-                        task = new Deadline(message[0].substring(9), message[1]);
-                        assert task != null: "Task must not be null here";
-                        list.add(task);
-                    }
-                } else {
-                    String[] message = str.split("/at ");
-                    if (message.length == 1) {
-                        throw new InvalidTaskException();
-                    } else {
-                        task = new Events(message[0].substring(6), message[1]);
-                        assert task != null: "Task must not be null here";
-                        list.add(task);
-                    }
-                }
-
-                String result = "Got it. I've added this task.\n"
-                        + list.get(list.size() - 1).toString() + "\r\n"
-                        + "Now you have " + list.size()
-                        + (list.size() == 1 ? " task in the list" : " tasks in the list.");
-                return result;
+            task = new Deadline(message[0].substring(9), message[1]);
+            tasks.add(task);
+        } else {
+            String[] message = str.split("/at ");
+            if (message.length == 1) {
+                throw new InvalidTaskException();
             }
+            task = new Events(message[0].substring(6), message[1]);
+            tasks.add(task);
         }
+
+        String result = "Got it. I've added this task.\n"
+                + tasks.get(tasks.size() - 1).toString() + "\r\n"
+                + "Now you have " + tasks.size()
+                + (tasks.size() == 1 ? " task in the list" : " tasks in the list.");
+        return result;
     }
 
     /**
      * A method to delete a certain in a TaskList.
+     *
      * @param str User inputs which indicates detail of task to be deleted.
      * @return Task after it is deleted.
      * @throws OutOfBoundException Thrown when user gives a task number that is outside of the range of TaskList.
      */
     public String deleteTask(String str) throws OutOfBoundException {
-        String i = str.substring(str.length()-1);
+        String i = str.substring(str.length() - 1);
         int index = Integer.parseInt(i);
 
-        if (index < 0 || index > list.size()) {
+        if (index < 0 || index > tasks.size()) {
             throw new OutOfBoundException();
-        } else {
-            Task task = list.get(index - 1);
-            list.remove(index - 1);
-
-            String result = "Noted. I've removed this task: \n" + task.toString() + "\r\n"
-                    + "Now you have " + list.size()
-                    + (list.size() == 1 ? " task in the list" : " tasks in the list.");
-
-            return result;
         }
+        Task task = tasks.get(index - 1);
+        tasks.remove(index - 1);
+
+        String result = "Noted. I've removed this task: \n" + task.toString() + "\r\n"
+                + "Now you have " + tasks.size()
+                + (tasks.size() == 1 ? " task in the list" : " tasks in the list.");
+
+        return result;
     }
 
     /**
@@ -165,7 +154,7 @@ public class TaskList {
         String t = str.substring(5);
         ArrayList<Task> l = new ArrayList<>();
 
-        for (Task task: list) {
+        for (Task task: tasks) {
             if (task.getTitle().contains(t)) {
                 l.add(task);
             }
@@ -173,12 +162,11 @@ public class TaskList {
 
         if (l.isEmpty()) {
             throw new TaskDoesNotExistException();
-        } else {
-            String result = "Here are the matching tasks in your list: \n";
-            TaskList list = new TaskList(l);
-            result += list.printList() + "\r\n";
-            return result;
         }
+        String result = "Here are the matching tasks in your list: \n";
+        TaskList list = new TaskList(l);
+        result += list.printList() + "\r\n";
+        return result;
     }
 
     /**
@@ -187,6 +175,6 @@ public class TaskList {
      * @return ArrayList of the current tasks.
      */
     public ArrayList<Task> getList() {
-        return list;
+        return tasks;
     }
 }
