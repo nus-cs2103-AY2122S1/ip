@@ -51,4 +51,11 @@ public abstract class Task {
     public String getDescription() {
         return this.description;
     }
+
+    /**
+     * Increases the date of the task by a set number of days.
+     *
+     * @param days Number of days to increase by.
+     */
+    public abstract void increaseDateByDays(int days);
 }

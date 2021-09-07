@@ -50,4 +50,17 @@ public class Deadline extends Task {
                     formatOutputNoTime.format(this.date) + ")";
         }
     }
+
+    /**
+     * Increases the date of the task by a set number of days.
+     *
+     * @param days Number of days to increase by.
+     */
+    public void increaseDateByDays(int days) {
+        if (this.hasTime) {
+            this.dateTime = this.dateTime.plusDays(days);
+        } else {
+            this.date = this.date.plusDays(days);
+        }
+    }
 }

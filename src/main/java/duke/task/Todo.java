@@ -22,4 +22,16 @@ public class Todo extends Task {
     public String toString() {
         return "[T][" + this.getStatusIcon() + "] " + this.description;
     }
+
+    /**
+     * Todo does not have a date.
+     *
+     * @param days Number of days to increase by.
+     */
+    @Override
+    public void increaseDateByDays(int days) {
+
+    }
+
+
 }

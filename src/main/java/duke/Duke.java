@@ -3,6 +3,8 @@ package duke;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.Todo;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
@@ -59,7 +61,7 @@ public class Duke {
                 break;
             case "done": {
                 if (inputWords.length == 1) {
-                    throw new DukeException("☹ OOPS!!! Please provide a task ID that exists.");
+                    throw new DukeException("Please provide a task ID that exists.");
                 }
                 int taskId = Integer.parseInt(inputWords[1]);
                 assert output == "";
@@ -69,7 +71,7 @@ public class Duke {
             }
             case "todo":
                 if (inputWords.length == 1) {
-                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    throw new DukeException("The description of a todo cannot be empty.");
                 }
                 assert output == "";
                 output = tasks.addTodo(inputWords[1]);
@@ -77,7 +79,7 @@ public class Duke {
                 break;
             case "deadline":
                 if (inputWords.length == 1) {
-                    throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    throw new DukeException("The description of a deadline cannot be empty.");
                 }
                 assert output == "";
                 output = tasks.addDeadline(inputWords[1]);
@@ -85,30 +87,43 @@ public class Duke {
                 break;
             case "event":
                 if (inputWords.length == 1) {
-                    throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                    throw new DukeException("The description of a event cannot be empty.");
                 }
                 assert output == "";
                 output = tasks.addEvent(inputWords[1]);
                 storage.saveFile(tasks.getAllTasksString());
                 break;
-            case "delete":
+            case "delete": {
                 if (inputWords.length == 1) {
-                    throw new DukeException("☹ OOPS!!! Please provide a task ID that exists.");
+                    throw new DukeException("Please provide a task ID that exists.");
                 }
                 int taskId = Integer.parseInt(inputWords[1]);
                 assert output == "";
                 output = tasks.deleteTask(taskId);
                 storage.saveFile(tasks.getAllTasksString());
                 break;
+            }
             case "find":
                 if (inputWords.length != 2) {
-                    throw new DukeException("☹ OOPS!!! Please provide a only one keyword.");
+                    throw new DukeException("Please provide a only one keyword.");
                 }
                 assert output == "";
                 output = tasks.findTask(inputWords[1]);
                 break;
+            case "snooze":
+                String[] taskIdAndDays = inputWords[1].split(" ");
+                if (taskIdAndDays.length != 2) {
+                    throw new DukeException("Please provide the command in the correct format:" +
+                            " snooze {id} {number of days to snooze}.");
+                }
+                int taskId = Integer.parseInt(taskIdAndDays[0]);
+                int days = Integer.parseInt(taskIdAndDays[1]);
+                assert output == "";
+                output = tasks.increaseTaskDateByDays(taskId, days);
+                storage.saveFile(tasks.getAllTasksString());
+                break;
             default:
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
         } catch (DateTimeException e) {
             Ui.printError("Please provide date/time in the correct format: yyyy-mm-dd HH:mm, where" +

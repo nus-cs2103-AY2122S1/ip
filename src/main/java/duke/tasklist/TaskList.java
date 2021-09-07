@@ -18,6 +18,7 @@ public class TaskList {
     private static ArrayList<Task> tasks;
     private static final DateTimeFormatter FORMAT_TIME = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private static final DateTimeFormatter FORMAT_NO_TIME = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     private enum TaskType {
         Todo, Deadline, Event
     }
@@ -38,23 +39,53 @@ public class TaskList {
      */
     public String getAllTasksString() {
         String output = "";
-        for (int i = 0; i < tasks.size(); i++) {
-            output += (i + 1) + ": " + tasks.get(i) + "\n";
-            System.out.println((i + 1) + ": " + tasks.get(i));
+        if (tasks.size() == 0) {
+            return "List is empty.";
+        } else {
+            for (int i = 0; i < tasks.size(); i++) {
+                output += (i + 1) + ": " + tasks.get(i) + "\n";
+                System.out.println((i + 1) + ": " + tasks.get(i));
+            }
+            return output;
         }
-        return output;
     }
 
     /**
      * String of a task with the index specified.
      *
-     * @param index Index of the task to print.
+     * @param taskId Id of the task to print.
      * @return Task with the specified index.
      */
-    public String getTaskString(int index) {
-        String taskNumberPrefix = (index + 1) + ": ";
-        System.out.println(taskNumberPrefix + tasks.get(index));
-        return taskNumberPrefix + tasks.get(index);
+    public String getTaskString(int taskId) {
+        String taskNumberPrefix = (taskId + 1) + ": ";
+        System.out.println(taskNumberPrefix + tasks.get(taskId));
+        return taskNumberPrefix + tasks.get(taskId);
+    }
+
+    private Task getTask(int taskId) {
+        return tasks.get(taskId - 1);
+    }
+
+    private void setTask(int taskId, Task task) {
+        tasks.set(taskId - 1, task);
+    }
+
+    /**
+     * Increases the date of a task by a set number of days.
+     *
+     * @param taskId Id of the task to modify.
+     * @param days   Number of days to snooze by.
+     * @return Task snoozed and number of days.
+     * @throws DukeException If a Todo task id was passed in.
+     */
+    public String increaseTaskDateByDays(int taskId, int days) throws DukeException {
+        Task task = this.getTask(taskId);
+        if (task instanceof Todo) {
+            throw new DukeException("A Todo task does not have a date!");
+        }
+        task.increaseDateByDays(days);
+        this.setTask(taskId, task);
+        return "Task " + taskId + " has been snoozed by " + days + " days.";
     }
 
     /**
@@ -65,7 +96,7 @@ public class TaskList {
      */
     public String markTaskAsDone(int taskId) throws DukeException {
         if (taskId < 1 || taskId > tasks.size()) {
-            throw new DukeException("☹ OOPS!!! Please provide a task ID that exists.");
+            throw new DukeException("Please provide a task ID that exists.");
         }
         tasks.get(taskId - 1).setIsDone(true);
         System.out.println("Nice! I've marked this task as done.");
@@ -112,8 +143,8 @@ public class TaskList {
      * Adds a new Event or Deadline to tasks.
      *
      * @param fullDescription Description of the task.
-     * @param sepIndex Index of the separator.
-     * @param type Type of task.
+     * @param sepIndex        Index of the separator.
+     * @param type            Type of task.
      * @throws DukeException If formatting is wrong.
      */
     public void addTask(String fullDescription, int sepIndex, TaskType type) throws DukeException {
@@ -121,7 +152,7 @@ public class TaskList {
         boolean hasSeparator = sepIndex != -1;
         boolean hasSpaceAfter = fullDescription.charAt(sepIndex - 1) != ' ';
         if (!hasSeparator || hasSpaceBefore || hasSpaceAfter) {
-            throw new DukeException("☹ OOPS!!! Please input with the correct format e.g. event read books" +
+            throw new DukeException("Please input with the correct format e.g. event read books" +
                     " /at 2021-09-08 09:30 (yyyy-mm-dd hh:mm, where time is optional)");
         }
         String description = fullDescription.substring(0, sepIndex - 1);
@@ -167,7 +198,7 @@ public class TaskList {
      */
     public String deleteTask(int taskId) throws DukeException {
         if (taskId < 1 || taskId > tasks.size()) {
-            throw new DukeException("☹ OOPS!!! Please provide a task ID that exists.");
+            throw new DukeException("Please provide a task ID that exists.");
         }
         String output = "Noted. I have removed this task:\n";
         output += "   " + tasks.get((taskId - 1)) + "\n";
