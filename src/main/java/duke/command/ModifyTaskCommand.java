@@ -39,6 +39,7 @@ public class ModifyTaskCommand extends Command {
         int item = Integer.parseInt(this.commandBody);
         Task task = taskList.getTask(item);
 
+        assert task != null;
         switch (this.commandType) {
         case DONE: {
             taskList.completeTask(item);
@@ -51,7 +52,7 @@ public class ModifyTaskCommand extends Command {
             return Ui.removeTaskMessage(taskList, task);
         }
         default:
-            // Should not reach here
+            assert false;
             throw new DukeException("Something wrong happened when executing Duke!");
         }
     }
