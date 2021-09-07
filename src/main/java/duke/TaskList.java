@@ -60,7 +60,6 @@ public class TaskList implements Serializable {
      * @return String representation of the tasks inside the TaskList.
      */
     public String printList() {
-    String printList() {
         assert(taskList.size() >= 0);
         taskList.forEach((task) -> printItem(task));
         String response = stringList;

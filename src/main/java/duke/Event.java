@@ -28,7 +28,7 @@ public class Event extends Task {
     @Override
     String printTask() {
         String result = "";
-        if (complete) {
+        if (taskComplete) {
             result = DONE;
         } else {
             result = NOT_DONE;
