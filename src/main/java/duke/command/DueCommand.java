@@ -29,9 +29,9 @@ public class DueCommand extends Command {
      */
     @Override
     public TaskList execute(TaskList taskList, Ui ui, Storage storage) {
-        String message = "";
-        message += ui.showMessage("Here are the tasks occurring within this time period:");
-        message += ui.showMessage(taskList.getDueTasks(input).toString());
+        TaskList dueTaskList = taskList.getDueTasks(input);
+        String message = ui.showMessage("Here are the tasks occurring within this time period:")
+                + ui.showMessage(dueTaskList.toString());
         return new TaskList(taskList, message);
     }
 }
