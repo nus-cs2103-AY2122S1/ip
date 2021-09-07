@@ -12,7 +12,7 @@ class CommandHandler {
         undoableCommands = new Stack<>();
     }
 
-    CommandHandler getInstance() {
+    static CommandHandler getInstance() {
         if (instance == null) {
             instance = new CommandHandler();
         }
