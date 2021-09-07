@@ -39,17 +39,6 @@ public class Duke {
         }
     }
 
-    public Duke() {
-        ui = new Ui();
-        storage = new Storage("data/duke.txt");
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
-    }
-
     /**
      * Starts the Program.
      */
@@ -61,13 +50,24 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                String output = c.execute(tasks, ui, storage);
+                System.out.println(output);
                 isExit = c.isExit();
             } catch (Exception e) {
                 ui.showError(e.getMessage());
             } finally {
                 ui.showLine();
             }
+        }
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            String output = c.execute(tasks, ui, storage);
+            return output;
+        } catch (Exception e) {
+            return e.getMessage();
         }
     }
 
@@ -80,6 +80,6 @@ public class Duke {
      * @see IOException
      */
     public static void main(String[] args) throws FileNotFoundException, FolderNotFoundException, IOException {
-        new Duke("../../../data/tasks.txt").run();
+        new Duke("/data/tasks.txt").run();
     }
 }

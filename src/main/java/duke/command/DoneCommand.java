@@ -29,9 +29,10 @@ public class DoneCommand extends Command {
      * @param storage unused.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printDone(tasks, toComplete);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String output = ui.printDone(tasks, toComplete);
         tasks.get(toComplete).complete();
+        return output;
     }
 
 }

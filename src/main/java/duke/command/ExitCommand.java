@@ -22,9 +22,9 @@ public class ExitCommand extends Command {
      * @see IOException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         storage.write(tasks);
-        ui.printExit();
+        return ui.printExit();
     }
 
     /**

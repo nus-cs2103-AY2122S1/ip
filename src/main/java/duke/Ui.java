@@ -29,9 +29,12 @@ public class Ui {
      * Prints the greeting message the user sees when the Bot is started up.
      *
      */
-    public void showWelcome() {
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
+    public String showWelcome() {
+
+        return "Hello from\n"
+                + logo
+                + "\n"
+                + "What can I do for you?";
     }
 
     /**
@@ -50,44 +53,49 @@ public class Ui {
     }
 
     /**
-     * Prints the message when a Task is added to the TaskList.
+     * Returns the message when a Task is added to the TaskList.
      * @param task Task to be added to the TaskList
      * @param tasks TaskList the Task is to be added to.
+     * @return message to be printed;
      */
 
-    public void printAdd(Task task, TaskList tasks) {
-        System.out.println("Got it. I've added this task: ");
-        System.out.println(String.format("  %s", task.toString()));
-        System.out.println(String.format("Now you have %d tasks in the list", tasks.getSize()));
+    public String printAdd(Task task, TaskList tasks) {
+        return "Got it. I've added this task: \n"
+                + String.format("  %s", task.toString())
+                + "\n"
+                + String.format("Now you have %d tasks in the list", tasks.getSize());
     }
 
     /**
-     * Prints the message when a Task is completed in the TaskList.
+     * Returns the message when a Task is completed in the TaskList.
      * @param tasks TaskList containing the Task that was completed.
      * @param toComplete Index of the completed Task in the TaskList
+     * @return Message to be printed
      */
-    public void printDone(TaskList tasks, int toComplete) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(String.format("  %s", tasks.get(toComplete)));
+    public String printDone(TaskList tasks, int toComplete) {
+        return "Nice! I've marked this task as done:\n"
+                + String.format("  %s", tasks.get(toComplete));
     }
 
     /**
-     * Prints the message when a Task is deleted in the TaskList.
+     * Returns the message when a Task is deleted in the TaskList.
      * @param tasks TaskList containing the Task that was deleted.
      * @param toDelete Index of the deleted Task in the TaskList
+     * @return Message to be printed
      */
-    public void printDelete(TaskList tasks, int toDelete) {
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println(String.format("  %s", tasks.get(toDelete)));
-        System.out.println(String.format("Now you have %d tasks in the list", tasks.getSize() - 1));
+    public String printDelete(TaskList tasks, int toDelete) {
+        return "Noted. I've removed this task: \n"
+                + String.format("  %s", tasks.get(toDelete))
+                + "\n"
+                + String.format("Now you have %d tasks in the list", tasks.getSize() - 1);
     }
 
     /**
      * Prints the message when the Bot is Terminated.
      */
-    public void printExit() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String printExit() {
         sc.close();
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -101,11 +109,12 @@ public class Ui {
      * Prints out the list of Tasks stored in the TaskList.
      * @param tasks TaskList to be printed.
      */
-    public void printList(TaskList tasks) {
-        System.out.println("Here are the tasks in your list: ");
+    public String printList(TaskList tasks) {
+        String output = "Here are the tasks in your list: ";
         for (int i = 0; i < tasks.getSize(); i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i));
+            output += "\n" + (i + 1) + ". " + tasks.get(i);
         }
+        return output;
     }
 
     /**

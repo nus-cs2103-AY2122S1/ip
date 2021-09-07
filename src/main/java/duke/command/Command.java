@@ -19,7 +19,7 @@ public abstract class Command {
      * @throws IOException On Input error.
      * @see IOException
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws IOException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws IOException;
 
     /**
      * Indicates whether a Command is an ExitCommand or not.

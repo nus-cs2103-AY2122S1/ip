@@ -24,7 +24,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList filteredTasks = new TaskList();
         for (int i = 0; i < tasks.getSize(); i++) {
             Task toFilter = tasks.get(i);
@@ -32,6 +32,6 @@ public class FindCommand extends Command {
                 filteredTasks.add(toFilter);
             }
         }
-        ui.printList(filteredTasks);
+        return ui.printList(filteredTasks);
     }
 }
