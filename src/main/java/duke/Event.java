@@ -20,6 +20,10 @@ public class Event extends Task {
         this.localDateTime = LocalDateTime.parse(s.substring(1), DateTimeFormatter.ofPattern("uuuu-MM-dd kkmm"));
     }
 
+    public LocalDateTime getLocalDateTime(){
+        return localDateTime;
+    }
+
     /**
      * toString method which returns a string representation of an event to be printed
      * @return description of the event in a specific format

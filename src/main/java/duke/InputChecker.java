@@ -34,7 +34,13 @@ public class InputChecker {
 
         } else if (input.equals("find")){
             throw new DukeException("Please specify what tasks you are searching for!");
-        } else {
+        } else if (input.contains("sort by type")) {
+
+        } else if (input.contains("sort by date")) {
+
+        } else if (input.contains("sort by date reverse")) {
+
+        } else{
             throw new DukeException("Sorry! I don't get what you're saying!");
         }
     }

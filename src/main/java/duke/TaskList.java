@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.Comparator;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -172,9 +173,56 @@ public class TaskList {
         System.out.println("Here are the matching tasks in your list:");
         temp.forEach(x -> System.out.println((temp.indexOf(x) + 1) + ". " + x.toString()));
         String ans = "Here are the matching tasks in your list:";
-        for(int i = 0; i < lst.size(); i++){
-            ans += "\n" + (i + 1) + ". " + lst.get(i).toString();
+        for(int i = 0; i < temp.size(); i++){
+            ans += "\n" + (i + 1) + ". " + temp.get(i).toString();
         }
         return ans;
     }
+
+    /**
+     * Sorts the list by type, in the order of Deadline, Event, Todo. Tasks of same type are alphabetically ordered
+     * @return String representation of the ordered task list
+     */
+    public String sortByType(){
+        Comparator<Task> alphabetComparator = new Comparator<Task>() {
+            public int compare(Task task1, Task task2) {
+                return task1.toString().compareTo(task2.toString());
+            }
+        };
+        lst.sort(alphabetComparator);
+        return displayList();
+    }
+
+    public String sortByDate(){
+        Comparator<Task> dateComparator = new Comparator<Task>() {
+            public int compare(Task task1, Task task2) {
+                if(task1 instanceof Todo && !(task2 instanceof Todo)){
+                    return 1;
+                } else if (!(task1 instanceof Todo) && task2 instanceof Todo){
+                    return -1;
+                } else {
+                    return task1.getLocalDateTime().compareTo(task2.getLocalDateTime());
+                }
+            }
+        };
+        lst.sort(dateComparator);
+        return displayList();
+    }
+
+    public String sortByDateReversed(){
+        Comparator<Task> dateComparator = new Comparator<Task>() {
+            public int compare(Task task1, Task task2) {
+                if(task1 instanceof Todo && !(task2 instanceof Todo)){
+                    return 1;
+                } else if (!(task1 instanceof Todo) && task2 instanceof Todo){
+                    return -1;
+                } else {
+                    return -(task1.getLocalDateTime().compareTo(task2.getLocalDateTime()));
+                }
+            }
+        };
+        lst.sort(dateComparator);
+        return displayList();
+    }
+
 }

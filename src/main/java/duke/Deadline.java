@@ -20,6 +20,10 @@ public class Deadline extends Task {
 
     }
 
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
+    }
+
     /**
      * toString method which returns
      * @return description of the Deadline in a specific format
