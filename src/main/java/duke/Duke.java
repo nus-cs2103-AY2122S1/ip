@@ -20,7 +20,10 @@ import javafx.application.Platform;
 public class Duke {
 
     /** Path to data storage file. */
-    private static final String LOCATION_OF_FILE = "data/duke.txt";
+    private final String LOCATION_OF_FILE = "data/duke.txt";
+
+    /** Path to expenses data file */
+    private final String LOCATION_OF_EXPENSES = "data/expenses.txt";
 
     /** Handles loading and saving of Tasks. */
     private final Storage storage;
@@ -40,7 +43,7 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage(LOCATION_OF_FILE);
+        storage = new Storage(LOCATION_OF_FILE, LOCATION_OF_EXPENSES);
 
         try {
             tasks = new TaskList(storage.load());

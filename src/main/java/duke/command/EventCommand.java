@@ -13,6 +13,9 @@ import duke.ui.Ui;
  */
 public class EventCommand extends Command {
 
+    /** Represents the event command keyword. */
+    public static final String COMMAND = "event";
+
     /** Parsed information about the event to be added. */
     private ArrayList<String> event;
 

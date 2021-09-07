@@ -1,5 +1,6 @@
 package duke.tasks;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -198,6 +199,71 @@ public class TaskList {
         }
 
         return matchingTasks;
+    }
+
+    /**
+     * Adds an expense to the task.
+     *
+     * @param taskIndex index of task for expense to be added to.
+     * @param purpose purpose of expenditure.
+     * @param amount amount spent.
+     * @return appropriate message for adding an expense to a task.
+     * @throws EmptyListException if the task list is empty.
+     * @throws InvalidIndexException if the index of task given is out of bounds.
+     */
+    public String addExpense(int taskIndex, String purpose, float amount) throws EmptyListException,
+            InvalidIndexException {
+        int taskListSize = taskList.size();
+
+        if (taskListSize == 0) {
+            throw new EmptyListException();
+        } else if (taskIndex < 0 || taskIndex >= taskListSize) {
+            throw new InvalidIndexException(1, taskListSize, taskIndex + 1);
+        }
+        Task task = taskList.get(taskIndex);
+        DecimalFormat df = new DecimalFormat("0.00");
+        task.addExpenseToTask(purpose, amount);
+        return "I added " + purpose + ": $" + df.format(amount) + " to " + task + "!";
+    }
+
+    /**
+     * Shows the expenses of a single task.
+     *
+     * @param taskIndex index of task to show expenses of.
+     * @return all expenses associated with that task.
+     * @throws EmptyListException if the task list is empty.
+     * @throws InvalidIndexException if the index of task is out of bounds.
+     */
+    public String showExpense(int taskIndex) throws EmptyListException, InvalidIndexException {
+        int taskListSize = taskList.size();
+
+        if (taskListSize == 0) {
+            throw new EmptyListException();
+        } else if (taskIndex < 0 || taskIndex >= taskListSize) {
+            throw new InvalidIndexException(1, taskListSize, taskIndex + 1);
+        }
+        Task task = taskList.get(taskIndex);
+        return task.displayExpenses();
+    }
+
+    /**
+     * Displays expenses for every task.
+     *
+     * @return string that includes every expense for every task to be displayed.
+     * @throws EmptyListException if the task list is empty.
+     * @throws InvalidIndexException if the index given is out of bounds.
+     */
+    public String showAllExpenses() throws EmptyListException, InvalidIndexException {
+        int taskListSize = taskList.size();
+
+        if (taskListSize == 0) {
+            throw new EmptyListException();
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i <= taskList.size(); i++) {
+            sb.append(i + ". " + showExpense(i - 1));
+        }
+        return sb.toString();
     }
 
 }

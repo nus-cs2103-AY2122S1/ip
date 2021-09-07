@@ -11,6 +11,9 @@ import duke.ui.Ui;
  */
 public class ByeCommand extends Command {
 
+    /** Represents the bye command keyword. */
+    public static final String COMMAND = "bye";
+
     /**
      * Constructor for ByeCommand.
      */

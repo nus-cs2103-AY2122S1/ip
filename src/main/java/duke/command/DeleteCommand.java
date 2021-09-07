@@ -13,6 +13,9 @@ import duke.ui.Ui;
  */
 public class DeleteCommand extends Command {
 
+    /** Represents the delete command keyword. */
+    public static final String COMMAND = "delete";
+
     /** Index of task to delete. */
     private final int index;
 

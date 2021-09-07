@@ -13,6 +13,9 @@ import duke.ui.Ui;
  */
 public class DoneCommand extends Command {
 
+    /** Represents the done command keyword. */
+    public static final String COMMAND = "done";
+
     /** Index of task to be marked as done. */
     private final int task;
 
