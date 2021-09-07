@@ -36,7 +36,11 @@ public class Deadlines extends Task {
         if (super.isDone()) {
             prefix = "[D] [X] ";
         }
-        return prefix + super.getName() + " (at: " + deadline.format(formatter) + ")";
+        String returnString = prefix + super.getName() + " (at: " + deadline.format(formatter) + ")";
+        if (getPriorityLevel() != null) {
+            returnString += Priority.getPriorityString(getPriorityLevel());
+        }
+        return returnString;
     }
 
     /**
@@ -48,10 +52,14 @@ public class Deadlines extends Task {
     public String toDataString() {
         StringBuilder string = new StringBuilder();
         String prefix = "D|0|";
+        String priorityLevel = "none";
         if (super.isDone()) {
             prefix = "D|1|";
         }
-        string.append(prefix).append(super.getName()).append("|").append(deadline);
+        if (getPriorityLevel() != null) {
+            priorityLevel = Priority.toDataString(getPriorityLevel());
+        }
+        string.append(prefix).append(super.getName()).append("|").append(deadline).append("|").append(priorityLevel);
         return string.toString();
     }
 

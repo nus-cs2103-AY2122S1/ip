@@ -36,7 +36,11 @@ public class Events extends Task {
         if (super.isDone()) {
             prefix = "[E] [X] ";
         }
-        return (prefix + super.getName() + " (at: " + time.format(formatter) + ")");
+        String returnString = prefix + super.getName() + " (at: " + time.format(formatter) + ")";
+        if (getPriorityLevel() != null) {
+            returnString += Priority.getPriorityString(getPriorityLevel());
+        }
+        return returnString;
     }
 
     /**
@@ -48,10 +52,14 @@ public class Events extends Task {
     public String toDataString() {
         StringBuilder string = new StringBuilder();
         String prefix = "E|0|";
+        String priorityLevel = "none";
         if (super.isDone()) {
             prefix = "E|1|";
         }
-        string.append(prefix).append(super.getName()).append("|").append(time);
+        if (getPriorityLevel() != null) {
+            priorityLevel = Priority.toDataString(getPriorityLevel());
+        }
+        string.append(prefix).append(super.getName()).append("|").append(time).append("|").append(priorityLevel);
         return string.toString();
     }
 

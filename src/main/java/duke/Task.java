@@ -16,6 +16,8 @@ public abstract class Task {
     private String name;
     //A boolean signifying if the task has been completed
     private boolean isDone;
+    //Priority level of the task
+    private Priority.PriorityLevel priorityLevel;
 
     /**
      * Constructor for a Task instance.
@@ -43,6 +45,44 @@ public abstract class Task {
      */
     public boolean isDone() {
         return isDone;
+    }
+
+    /**
+     * Sets the priority level of the Task instance.
+     *
+     * @param str The priority level of the Task.
+     */
+    public void setPriorityLevel(String str) throws IllegalArgumentException {
+        switch (str) {
+        case "low":
+            priorityLevel = Priority.PriorityLevel.LOW;
+            break;
+        case "medium":
+            priorityLevel = Priority.PriorityLevel.MEDIUM;
+            break;
+        case "high":
+            priorityLevel = Priority.PriorityLevel.HIGH;
+            break;
+        case "asap":
+            priorityLevel = Priority.PriorityLevel.ASAP;
+            break;
+        //last case is none, or no priority assigned.
+        case "none":
+            //nothing
+            break;
+        default:
+            //invalid string entered, throw exception.
+            throw new IllegalArgumentException("Task.setPriorityLevel: Bad string entered.");
+        }
+    }
+
+    /**
+     * Getter for the priorityLevel field of a Task.
+     *
+     * @return The PriorityLevel as needed.
+     */
+    public Priority.PriorityLevel getPriorityLevel() {
+        return priorityLevel;
     }
 
     /**

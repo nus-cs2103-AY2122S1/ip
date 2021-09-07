@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 public class Duke extends Application {
 
     //path of file containing stored data
-    private static final String FILE_PATH = "data/test.txt";
+    private static final String FILE_PATH = "data/dukeSaveData.txt";
     //path of folder containing data file
     private static final String DIRECTORY_PATH = "data";
     //boolean to check if duke has already been initialised

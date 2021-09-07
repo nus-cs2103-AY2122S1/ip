@@ -13,7 +13,10 @@ import javafx.application.Platform;
  */
 public class Parser {
 
-    private static final int MINIMUM_LENGTH_OF_ARRAY = 2;
+    private static final int MIN_LENGTH_ARRAY = 2;
+    private static final int MIN_LENGTH_ARRAY_FOR_SETPR = 3;
+    private static final int ARRAY_INDEX_OF_TASK_INDEX = 1;
+    private static final int ARRAY_INDEX_OF_PRIORITY = 2;
 
     /**
      * Parses a string into a LocalDate object.
@@ -48,22 +51,24 @@ public class Parser {
             if (splitArray[1].equals("1")) {
                 event.setCompleted();
             }
+            event.setPriorityLevel(splitArray[4]);
             return event;
-            //no need for break, as function has terminated at the return statement
         //case if task stored is a Deadline
         case "D":
             Task deadline = new Deadlines(splitArray[2], Parser.parseDate(splitArray[3]));
             if (splitArray[1].equals("1")) {
                 deadline.setCompleted();
             }
+            deadline.setPriorityLevel(splitArray[4]);
             return deadline;
-        //no need for break, as function has terminated at the return statement
         //last case will always be "T", or a Todo
+        //no need for breaks in intermediate cases, as function has terminated at the return statements
         default:
             Task todo = new Todos(splitArray[2]);
             if (splitArray[1].equals("1")) {
                 todo.setCompleted();
             }
+            todo.setPriorityLevel(splitArray[3]);
             return todo;
         }
     }
@@ -111,16 +116,18 @@ public class Parser {
             return str.toString();
         }
 
-        //case if user wants to delete a task or mark a task as done
-        if (firstString.equals("done") || firstString.equals("delete")) {
+        //case if user wants to delete a task or mark a task as done or set priority
+        boolean isValidCommand = firstString.equals("done") || firstString.equals("delete")
+                                   || firstString.equals("setpr");
+        if (isValidCommand) {
             //case if no number is entered
-            if (inputArray.length < MINIMUM_LENGTH_OF_ARRAY) {
+            if (inputArray.length < MIN_LENGTH_ARRAY) {
                 return Ui.getNumberError();
             }
 
             try {
                 StringBuilder str = new StringBuilder();
-                int index = Integer.parseInt(inputArray[1]);
+                int index = Integer.parseInt(inputArray[ARRAY_INDEX_OF_TASK_INDEX]);
                 int arrayIndex = index - 1;
                 //case if entered index does not correspond to a task
                 boolean isInvalidIndex = index > taskList.getTotalTasks() || index < 1;
@@ -129,14 +136,26 @@ public class Parser {
                 }
                 //retrieve the task
                 Task currentTask = taskList.getTask(arrayIndex);
-                if (firstString.equals("done")) {
-                    //case to complete a task
+                switch (firstString) {
+                case "done":
                     currentTask.setCompleted();
-                    str.append(Ui.getTaskCompleted(currentTask)).append("\n");
-                } else {
-                    //remaining case is to delete the task.
+                    str.append(Ui.getTaskCompleted(currentTask));
+                    break;
+                case "delete":
                     taskList.deleteTask(currentTask);
-                    str.append(Ui.getTaskCompleted(currentTask)).append("\n");
+                    str.append(Ui.getTaskDeleted(currentTask));
+                    break;
+                default:
+                    //last case is to set priority
+                    if (inputArray.length < MIN_LENGTH_ARRAY_FOR_SETPR) {
+                        return Ui.getBadInputError();
+                    }
+                    try {
+                        currentTask.setPriorityLevel(inputArray[ARRAY_INDEX_OF_PRIORITY]);
+                    } catch (IllegalArgumentException e) {
+                        return Ui.getInvalidPriorityLevel();
+                    }
+                    str.append(Ui.getTaskPrioritised(currentTask));
                 }
                 str.append(Ui.getTaskNumberReminder(taskList.getTotalTasks()));
                 try {
@@ -166,7 +185,7 @@ public class Parser {
         }
 
         if (firstString.equals("find")) {
-            if (inputArray.length < MINIMUM_LENGTH_OF_ARRAY) {
+            if (inputArray.length < MIN_LENGTH_ARRAY) {
                 //case if no number is entered
                 return Ui.getNumberError();
             }

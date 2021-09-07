@@ -23,6 +23,10 @@ public class Ui {
 
     private static final String TASK_ERROR = "That task does not exist! Don't try to trick me!\n";
 
+    private static final String TASK_DELETED = "Ok, very nice. I have deleted the following task.\n";
+
+    private static final String TASK_PRIORITISED = "Ok, very nice. I have set a priority for the following task.\n";
+
     private static final String TASK_COMPLETED = "Ok, very nice. I have set the following task as completed.\n";
 
     private static final String BAD_INPUT_ERROR = "I could not understand your input. Please stop speaking gibberish"
@@ -44,10 +48,13 @@ public class Ui {
 
     private static final String YES_MATCHES = "Lucky for you, the following Tasks seem to match your search term.\n";
 
+    private static final String INVALID_PRIORITY_LEVEL = "Enter a legitimate priority level, you idiot! You can choose "
+            + "from low, medium, high, and asap!";
+
     private static final String HELP_MESSAGE = "Oh, you need my help? Here are some commands:\n"
-            + "todo <Task Name>\ndeadline <Task Name> <Date in YYYY-MM-DD format>\n"
-            + "event <Task Name> <Date in YYYY-MM-DD format>\nlist\ndelete <Task Index>\n"
-            + "done <Task Index>\nfind <Search Term>\nbye";
+            + "todo <Task Name>\ndeadline <Task Name> /by <Date in YYYY-MM-DD format>\n"
+            + "event <Task Name> /at <Date in YYYY-MM-DD format>\nlist\ndelete <Task Index>\n"
+            + "done <Task Index>\nfind <Search Term>\nsetpr <Task Index> <Priority Level>\nbye";
 
     /**
      * Returns a message about an error with a number.
@@ -91,7 +98,25 @@ public class Ui {
      * @return The specified string.
      */
     public static String getTaskCompleted(Task task) {
-        return TASK_COMPLETED + task.toString();
+        return TASK_COMPLETED + task.toString() + "\n";
+    }
+
+    /**
+     * Returns a message confirming that Task is deleted.
+     *
+     * @return The specified string.
+     */
+    public static String getTaskDeleted(Task task) {
+        return TASK_DELETED + task.toString() + "\n";
+    }
+
+    /**
+     * Returns a message confirming that Task has a priority.
+     *
+     * @return The specified string.
+     */
+    public static String getTaskPrioritised(Task task) {
+        return TASK_PRIORITISED + task.toString() + "\n";
     }
 
     /**
@@ -192,4 +217,14 @@ public class Ui {
     public static String getHelpMessage() {
         return HELP_MESSAGE;
     }
+
+    /**
+     * Returns a message about an error due to invalid priority level.
+     *
+     * @return The specified string.
+     */
+    public static String getInvalidPriorityLevel() {
+        return INVALID_PRIORITY_LEVEL;
+    }
+
 }

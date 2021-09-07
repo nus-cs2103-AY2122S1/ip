@@ -27,7 +27,11 @@ public class Todos extends Task {
         if (super.isDone()) {
             prefix = "[T] [X] ";
         }
-        return prefix + super.getName();
+        String returnString = prefix + super.getName();
+        if (getPriorityLevel() != null) {
+            returnString += Priority.getPriorityString(getPriorityLevel());
+        }
+        return returnString;
     }
 
     /**
@@ -39,10 +43,14 @@ public class Todos extends Task {
     public String toDataString() {
         StringBuilder string = new StringBuilder();
         String prefix = "T|0|";
+        String priorityLevel = "none";
         if (super.isDone()) {
             prefix = "T|1|";
         }
-        string.append(prefix).append(super.getName());
+        if (getPriorityLevel() != null) {
+            priorityLevel = Priority.toDataString(getPriorityLevel());
+        }
+        string.append(prefix).append(super.getName()).append("|").append(priorityLevel);
         return string.toString();
     }
 }
