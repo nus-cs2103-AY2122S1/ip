@@ -97,6 +97,8 @@ public class TaskList {
      * @throws DukeException
      */
     public Task markTaskDone(Integer taskNum) throws DukeException {
+        assert todoList.size() > 0;
+        
         Task task = todoList.get(taskNum - 1);
         task.markAsDone();
 
@@ -111,6 +113,8 @@ public class TaskList {
      * @throws DukeException
      */
     public Task deleteTask(Integer taskNum) throws DukeException {
+        assert todoList.size() > 0;
+
         Task task = todoList.remove(taskNum - 1);
 
         return task;
