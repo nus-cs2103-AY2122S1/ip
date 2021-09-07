@@ -9,6 +9,9 @@ import java.util.Scanner;
 
 public class Storage {
 
+    static final int TASK_INITIAL = 1;
+    static final int TASK_STATUS = 4;
+    static final int TASK_DETAILS = 7;
     private final String filepath;
     private final TaskList taskList;
     private int counter = 0;
@@ -38,22 +41,22 @@ public class Storage {
         while (s.hasNext()) {
             String toAdd = s.nextLine();
 
-            if (toAdd.charAt(1) == 'T') {
-                String task = toAdd.substring(7);
+            if (toAdd.charAt(TASK_INITIAL) == 'T') {
+                String task = toAdd.substring(TASK_DETAILS);
 
                 tasks.addTodo(task);
                 counter += 1;
 
-            } else if (toAdd.charAt(1) == 'E') {
-                String task = toAdd.substring(7);
+            } else if (toAdd.charAt(TASK_INITIAL) == 'E') {
+                String task = toAdd.substring(TASK_DETAILS);
                 String name = task.substring(0, task.indexOf("(") - 1);
                 String when = task.substring(task.indexOf(":") + 2, task.indexOf(")"));
 
                 tasks.addEvent(name + " /at " + when);
                 counter += 1;
 
-            } else if (toAdd.charAt(1) == 'D') {
-                String task = toAdd.substring(7);
+            } else if (toAdd.charAt(TASK_INITIAL) == 'D') {
+                String task = toAdd.substring(TASK_DETAILS);
                 String name = task.substring(0, task.indexOf("(") - 1);
                 String when = task.substring(task.indexOf(":") + 2, task.indexOf(")"));
 
@@ -61,7 +64,7 @@ public class Storage {
                 counter += 1;
             }
 
-            if (toAdd.charAt(4) == 'X') {
+            if (toAdd.charAt(TASK_STATUS) == 'X') {
                 tasks.addDone(counter);
             }
         }
