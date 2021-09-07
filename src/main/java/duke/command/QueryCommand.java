@@ -49,7 +49,7 @@ public class QueryCommand extends Command {
             return taskList.printList(this.commandBody);
         }
         default:
-            // Should not reach here
+            assert false;
             throw new DukeException("Something wrong happened when executing Duke!");
         }
     }
