@@ -48,7 +48,7 @@ public class Blue {
         FindHandler findHandler = new FindHandler(tasks);
         ExitHandler exitHandler = new ExitHandler(tasks);
 
-        // put the handlers into HashMap
+        // Put the handlers into HashMap
         commandHandlers = new HashMap<>();
         commandHandlers.put(Command.LIST, listHandler);
         commandHandlers.put(Command.TODO, toDoHandler);
