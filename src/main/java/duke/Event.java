@@ -22,7 +22,7 @@ public class Event extends Task {
     }
 
     /**
-     * Constructor to initialize a new Event.
+     * Constructor to initialize a new Event with status.
      *
      * @param description The description of the event.
      * @param dateTime The date of the event.

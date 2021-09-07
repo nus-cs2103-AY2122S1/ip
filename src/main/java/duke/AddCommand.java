@@ -25,7 +25,7 @@ public class AddCommand extends Command {
      * @return True if it is a terminating command and false otherwise.
      */
     @Override
-    public boolean isExit() {
+    public boolean isAExitCommand() {
         return this.isExit;
     }
 
@@ -35,13 +35,13 @@ public class AddCommand extends Command {
      * @param list TaskList before addition of the task.
      * @param ui Ui object to log the execution of the command.
      * @param storage Storage object that references the path to store the updated list of tasks.
-     * @return The String to be printed.
+     * @return The string to be printed.
      * @throws DukeException If problem encountered during saving.
      */
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) throws DukeException {
         list.add(this.task);
         storage.save(list.convertToStorageString());
-        return ui.printAddedTaskMessage(task, list);
+        return ui.printAndReturnAddedTaskMessage(task, list);
     }
 }

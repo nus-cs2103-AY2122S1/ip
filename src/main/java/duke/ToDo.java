@@ -16,7 +16,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Constructor to initialize a new ToDo.
+     * Constructor to initialize a new ToDo with a status.
      *
      * @param description The description of the task.
      * @param isDone The status of the task.

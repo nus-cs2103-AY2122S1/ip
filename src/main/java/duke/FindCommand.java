@@ -24,7 +24,7 @@ public class FindCommand extends Command {
      * @return True if it is a terminating command and false otherwise.
      */
     @Override
-    public boolean isExit() {
+    public boolean isAExitCommand() {
         return false;
     }
 
@@ -56,6 +56,6 @@ public class FindCommand extends Command {
             Task content = newList.get(i);
             message.append("\n").append(index).append(".").append(content);
         }
-        return ui.printMessage(message.toString());
+        return ui.printAndReturnMessage(message.toString());
     }
 }

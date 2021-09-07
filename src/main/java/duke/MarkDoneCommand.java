@@ -26,7 +26,7 @@ public class MarkDoneCommand extends Command {
      * @return True if it is a terminating command and false otherwise.
      */
     @Override
-    public boolean isExit() {
+    public boolean isAExitCommand() {
         return isExit;
     }
 
@@ -47,7 +47,7 @@ public class MarkDoneCommand extends Command {
                     "Nice! I've marked this task as done:\n"
                     + list.get(index);
             storage.save(list.convertToStorageString());
-            return ui.printMessage(message);
+            return ui.printAndReturnMessage(message);
         } else {
             throw new InvalidIndexException();
         }

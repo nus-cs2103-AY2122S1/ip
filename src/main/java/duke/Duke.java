@@ -21,7 +21,7 @@ public class Duke {
         try {
             this.list = new TaskList(storage.load());
         } catch (DukeException e) {
-            this.ui.printMessage(e.getMessage());
+            this.ui.printAndReturnMessage(e.getMessage());
             this.list = new TaskList();
         }
     }
@@ -29,16 +29,16 @@ public class Duke {
      * Starts the Chatbot, listens for user input and executes the command accordingly.
      */
     public void start() {
-        this.ui.printGreetings();
+        this.ui.printAndReturnGreetingsString();
         boolean isExit = false;
         while (!isExit) {
             try {
                 String input = this.ui.getInput();
                 Command c = Parser.parse(input);
                 c.execute(this.list, this.ui, this.storage);
-                isExit = c.isExit();
+                isExit = c.isAExitCommand();
             } catch (DukeException e) {
-                this.ui.printMessage(e.getMessage());
+                this.ui.printAndReturnMessage(e.getMessage());
             }
         }
     }
@@ -48,7 +48,7 @@ public class Duke {
             Command c = Parser.parse(input);
             return c.execute(this.list, this.ui, this.storage);
         } catch (DukeException e) {
-            this.ui.printMessage(e.getMessage());
+            this.ui.printAndReturnMessage(e.getMessage());
             return e.getMessage();
         }
     }
