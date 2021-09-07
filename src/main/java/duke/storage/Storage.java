@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 
 import duke.exception.DukeException;
 import duke.formatter.Formatter;
+import duke.task.Task;
 import duke.tasklist.TaskList;
 
 /**
@@ -27,6 +28,8 @@ public class Storage {
     /** The default file path **/
     public static final String DEFAULT_FILE_PATH = "data/duke.txt";
 
+    public static final String LOAD_ISSUE_MESSAGE = "DB file is corrupted.\n";
+
     private BufferedReader reader;
 
     private BufferedWriter writer;
@@ -37,19 +40,8 @@ public class Storage {
 
     private Storage() {
         try {
-            this.targetDirectory =
-                    Paths.get(".", DEFAULT_FILE_DIRECTORY, DEFAULT_FILE_NAME)
-                            .toAbsolutePath()
-                            .normalize();
-            if (!java.nio.file.Files.exists(this.targetDirectory)) {
-                try {
-                    Files.createDirectory(Paths.get(".", DEFAULT_FILE_DIRECTORY).toAbsolutePath().normalize());
-                } catch (java.nio.file.FileAlreadyExistsException e) {
-                    System.out.println("Directory exists but file does not. Creating file...");
-                }
-                Files.createFile(this.targetDirectory);
-            }
-            this.reader = Files.newBufferedReader(this.targetDirectory, StandardCharsets.UTF_8);
+            this.targetDirectory = checkIfDirectoryExistsAndCreate();
+            setBufferedReader(this.targetDirectory);
             this.formatter = new Formatter();
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,24 +50,8 @@ public class Storage {
 
     private Storage(String[] args) {
         try {
-            this.targetDirectory =
-                    Paths.get(".", args).toAbsolutePath().normalize();
-            if (!java.nio.file.Files.exists(this.targetDirectory)) {
-                int i = 0;
-                StringBuilder directory = new StringBuilder("./");
-                while (i < args.length - 1) {
-                    try {
-                        directory.append(args[i]);
-                        Files.createDirectory(Paths.get(directory.toString()).toAbsolutePath().normalize());
-                        directory.append("/");
-                    } catch (java.nio.file.FileAlreadyExistsException e) {
-                        System.out.println("Directory exists but file does not. Creating file...");
-                    }
-                    i++;
-                }
-                Files.createFile(this.targetDirectory);
-            }
-            this.reader = Files.newBufferedReader(this.targetDirectory, StandardCharsets.UTF_8);
+            this.targetDirectory = checkIfDirectoryExistsAndCreate(args);
+            setBufferedReader(this.targetDirectory);
             this.formatter = new Formatter();
         } catch (IOException e) {
             e.printStackTrace();
@@ -107,8 +83,8 @@ public class Storage {
     public TaskList load(TaskList taskList) throws DukeException {
         try {
             String line = this.reader.readLine();
-            if (line == null || line.isEmpty()) {
-                System.out.println("No previous record found.");
+            if (isNullOrEmpty(line)) {
+                printPreviousRecordLine();
                 return taskList;
             }
             while (line != null) {
@@ -116,8 +92,7 @@ public class Storage {
                 line = this.reader.readLine();
             }
         } catch (IOException e) {
-            System.out.println("Unable to load file.");
-            e.printStackTrace();
+            printLoadFileError(e);
         }
         return taskList;
     }
@@ -129,26 +104,108 @@ public class Storage {
      */
     public void save(TaskList taskList) throws DukeException {
         try {
-            this.writer = Files.newBufferedWriter(this.targetDirectory, StandardCharsets.UTF_8);
+            setBufferedWriter();
         } catch (IOException e) {
-            System.out.println("Exception occurred while initialising writer.");
-            e.printStackTrace();
+            printExceptionError(e, "Exception occurred while initialising writer.");
         }
-        System.out.println("Saving your list now!");
+        printMessage("Saving your list now!");
+        saveTasksInTaskList(taskList);
+        try {
+           this.writer.close();
+        } catch (IOException e) {
+            printExceptionError(e, "Exception occurred while closing writer.");
+        }
+    }
+
+    private void saveTasksInTaskList(TaskList taskList) throws DukeException {
         for (int i = 1; i <= taskList.size(); i++) {
             try {
-                this.writer.write(this.formatter.formatTaskToString(taskList.get(i)));
-                this.writer.newLine();
+                writeTaskToWriterDestination(taskList.get(i));
             } catch (IOException e) {
-                System.out.println("Exception occurred while writing");
-                e.printStackTrace();
+                printExceptionError(e, "Exception occurred while writing");
             }
         }
-        try {
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("Exception occurred while closing writer.");
-            e.printStackTrace();
+    }
+
+    private void writeTaskToWriterDestination(Task task) throws IOException {
+        this.writer.write(this.formatter.formatTaskToString(task));
+        this.writer.newLine();
+    }
+
+    private Path checkIfDirectoryExistsAndCreate() throws IOException {
+        Path targetDirectory =
+                Paths.get(".", DEFAULT_FILE_DIRECTORY, DEFAULT_FILE_NAME)
+                        .toAbsolutePath()
+                        .normalize();
+        if (!Files.exists(targetDirectory)) {
+            try {
+                Files.createDirectory(Paths.get(".", DEFAULT_FILE_DIRECTORY).toAbsolutePath().normalize());
+            } catch (java.nio.file.FileAlreadyExistsException e) {
+                printDirectoryExistsMessage();
+            }
+            Files.createFile(targetDirectory);
         }
+        return targetDirectory;
+    }
+
+    private Path checkIfDirectoryExistsAndCreate(String[] args) throws IOException {
+        Path targetDirectory = Paths.get(".", args).toAbsolutePath().normalize();
+        if (!java.nio.file.Files.exists(targetDirectory)) {
+            traverseDownDirectoryAndCreateSubDirectory(args);
+            Files.createFile(targetDirectory);
+        }
+        return targetDirectory;
+    }
+
+    private void traverseDownDirectoryAndCreateSubDirectory(String[] args) throws IOException {
+        int i = 0;
+        StringBuilder directory = new StringBuilder("./");
+        while (i < args.length - 1) {
+            try {
+                addSubdirectoryToPath(directory, args[i]);
+            } catch (java.nio.file.FileAlreadyExistsException e) {
+                printDirectoryExistsMessage();
+            }
+            i++;
+        }
+    }
+
+    private void addSubdirectoryToPath(StringBuilder directory, String arg) throws IOException {
+        directory.append(arg);
+        Files.createDirectory(Paths.get(directory.toString()).toAbsolutePath().normalize());
+        directory.append("/");
+    }
+
+    private void printDirectoryExistsMessage() {
+        printMessage("Directory exists but file does not. Creating file...");
+    }
+
+    private void setBufferedReader(Path path) throws IOException {
+        this.reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
+    }
+
+    private void setBufferedWriter() throws IOException {
+        this.writer = Files.newBufferedWriter(this.targetDirectory, StandardCharsets.UTF_8);
+    }
+
+    private void printLoadFileError(IOException e) {
+        printExceptionError(e, "Unable to load file.");
+    }
+
+    private void printPreviousRecordLine() {
+        printMessage("No previous record found.");
+    }
+
+    private boolean isNullOrEmpty(String line) {
+        return line == null || line.isEmpty();
+    }
+
+    private void printExceptionError(IOException e, String s) {
+        printMessage(s);
+        e.printStackTrace();
+    }
+
+    private void printMessage(String s) {
+        System.out.println(s);
     }
 }

@@ -3,6 +3,7 @@ package duke;
 import java.io.IOException;
 
 import duke.components.MainWindow;
+import duke.storage.Storage;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,19 +15,27 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private final Duke duke = new Duke("data/duke.txt");
+    private final Duke duke = new Duke(Storage.DEFAULT_FILE_PATH);
 
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = getFxmlLoader();
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            setDukeInstance(fxmlLoader);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setDukeInstance(FXMLLoader fxmlLoader) {
+        fxmlLoader.<MainWindow>getController().setDuke(duke);
+    }
+
+    private FXMLLoader getFxmlLoader() {
+        return new FXMLLoader(Main.class.getResource(MainWindow.FXML_STRING_PATH));
     }
 }

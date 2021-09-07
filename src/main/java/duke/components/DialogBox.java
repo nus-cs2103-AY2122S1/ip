@@ -20,6 +20,8 @@ import javafx.scene.shape.Circle;
  */
 public class DialogBox extends HBox {
 
+    public static final String FXML_STRING_PATH = "/view/DialogBox.fxml";
+
     @FXML
     private Label dialog;
     @FXML
@@ -27,17 +29,24 @@ public class DialogBox extends HBox {
 
     private DialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
-            fxmlLoader.setController(this);
-            fxmlLoader.setRoot(this);
-            fxmlLoader.load();
+            setUpFxmlLoader();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        setDialogTextAndImage(text, img);
+    }
 
+    private void setDialogTextAndImage(String text, Image img) {
         dialog.setText(text);
         displayPicture.setImage(img);
         displayPicture.setClip(new Circle(40, 40, 40));
+    }
+
+    private void setUpFxmlLoader() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(FXML_STRING_PATH));
+        fxmlLoader.setController(this);
+        fxmlLoader.setRoot(this);
+        fxmlLoader.load();
     }
 
     /**
