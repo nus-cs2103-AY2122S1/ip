@@ -1,4 +1,4 @@
-package ui;
+package nyx.ui;
 
 import java.io.IOException;
 import java.util.Collections;

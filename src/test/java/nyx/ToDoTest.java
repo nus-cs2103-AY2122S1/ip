@@ -2,6 +2,7 @@ package nyx;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import nyx.task.ToDo;
 import org.junit.jupiter.api.Test;
 
 public class ToDoTest {

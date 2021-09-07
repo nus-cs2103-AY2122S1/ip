@@ -1,4 +1,4 @@
-package nyx;
+package nyx.task;
 
 /**
  * Represents a task with no deadline or time of occurrence.
