@@ -31,8 +31,15 @@ public class Duke {
         }
     }
 
-    public String getResponse(String input) throws DukeException {
-        return Parser.parse(input, taskList, this);
+    /**
+     * Gets the response from the bot after parsing the user's input.
+     *
+     * @param userInput the user's input to be parsed.
+     * @return returns the response from the bot after parsing the input.
+     * @throws DukeException when there's an invalid input from the user.
+     */
+    public String getResponse(String userInput) throws DukeException {
+        return Parser.parse(userInput, taskList, this);
     }
 
     public void save(TaskList taskList) {
