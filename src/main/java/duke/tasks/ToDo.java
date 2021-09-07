@@ -6,7 +6,8 @@ package duke.tasks;
 public class ToDo extends Task {
 
     /**
-     * public constructor which initialises the description of a todo
+     * Initialises the description of a todo
+     *
      * @param description description of a task
      */
     public ToDo(String description) {
@@ -17,7 +18,6 @@ public class ToDo extends Task {
     public String getDescription() {
         return this.description;
     }
-
 
     @Override
     public String toString() {

@@ -9,17 +9,6 @@ import duke.ui.Ui;
 public class ByeCommand extends Command {
 
     /**
-     * Default constructor for ByeCommand
-     */
-    public ByeCommand() {
-    }
-
-    @Override
-    public boolean isExit() {
-        return true;
-    }
-
-    /**
      * Calls a ui method to display a goodbye message in the ui.
      *
      * @param taskList the list of tasks upon which the operations need to be performed

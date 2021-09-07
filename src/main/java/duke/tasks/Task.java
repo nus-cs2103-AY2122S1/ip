@@ -11,7 +11,8 @@ public class Task {
     protected LocalDateTime date;
 
     /**
-     * public constructor which initialises the description of a task
+     * Initialises the description of a task
+     *
      * @param description description of a task
      */
     public Task(String description) {

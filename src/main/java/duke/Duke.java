@@ -19,7 +19,7 @@ public class Duke {
     private final String FOLDER_PATH = "./data";
 
     /**
-     * Public constructor which initialises the ui, storage and tasklist before the chatbot runs
+     * Initialises the ui, storage and tasklist before the chatbot runs
      */
     public Duke() {
         ui = new Ui();
@@ -34,9 +34,12 @@ public class Duke {
     }
 
     /**
-     * Starts the reading of the commands and the execution of the instructions
+     * Executes the commands parsed by the input
+     *
+     * @param input user's input text
+     * @param ui Duke's ui
+     * @return a string representation of the chatbot's output message
      */
-
     public String getResponse(String input, Ui ui) {
        try {
            storage.saveTasks(taskList);

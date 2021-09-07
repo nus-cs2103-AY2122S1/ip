@@ -9,14 +9,13 @@ import java.time.format.ResolverStyle;
 import duke.exceptions.IncorrectFormatException;
 
 /**
- * The DateTimeParser class encapsulates the formatting of the date and/or time for an event or deadline
+ * Encapsulates the formatting of the date and/or time for an event or deadline
  */
 public class DateTimeParser extends Parser {
 
     /**
-     * A static method which parses the date of a deadline from String to LocalDate
-     * and throws an IncorrectFormatException in the case
-     * that the input date is formatted incorrectly
+     * Parses the date of a deadline from String to LocalDate
+     * and throws an IncorrectFormatException if the input date is formatted incorrectly
      *
      * @param date input date string
      * @return the parsed date as a LocalDate
@@ -51,7 +50,7 @@ public class DateTimeParser extends Parser {
 
 
     /**
-     * A static method which parses the date and Time of an event from String to LocalDateTime
+     * Parses the date and Time of an event from String to LocalDateTime
      * and throws an IncorrectFormatException in the case
      * that the input date and/or is formatted incorrectly
      *
@@ -85,5 +84,4 @@ public class DateTimeParser extends Parser {
             throw new IncorrectFormatException("The date and time have been stored in the wrong format");
         }
     }
-
 }

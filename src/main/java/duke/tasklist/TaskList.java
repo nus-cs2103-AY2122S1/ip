@@ -26,6 +26,8 @@ public class TaskList {
 
     /**
      * Prints the list of tasks
+     *
+     * @return list of tasks as a string
      */
     public String print() {
         boolean allTasksDone = true;

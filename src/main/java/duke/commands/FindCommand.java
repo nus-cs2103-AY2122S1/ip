@@ -9,20 +9,15 @@ import duke.ui.Ui;
  */
 public class FindCommand extends Command {
 
-    private String word;
+    private final String word;
 
     /**
-     * Public constructor which is used to initialise the input word
+     * Initialises the input word to be searched
      *
      * @param word input word which is checked against the list
      */
     public FindCommand(String word) {
         this.word = word;
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 
     /**

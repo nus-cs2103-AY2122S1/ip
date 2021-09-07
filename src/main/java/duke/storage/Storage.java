@@ -22,7 +22,8 @@ public class Storage {
     private final String folderPath;
 
     /**
-     * public constructor to initialise the filepath and folderpath of a storage object
+     * Initialises the filepath and folder path of a storage object
+     *
      * @param filePath filePath of the storage file
      * @param folderPath path of the folder in which the file is stored
      */

@@ -13,20 +13,15 @@ import duke.ui.Ui;
  */
 public class DoneCommand extends Command {
 
-    private int index;
+    private final int index;
 
     /**
-     * Public constructor which initialises the value of the index of the task to be marked done
+     * Initialises the value of the index of the task to be marked done
      *
      * @param index the index of task to be marked done
      */
     public DoneCommand(int index) {
         this.index = index;
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 
     /**
