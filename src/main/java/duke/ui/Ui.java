@@ -1,8 +1,7 @@
-package duke;
+package duke.ui;
 
+import duke.data.TaskList;
 import duke.task.Task;
-
-import java.io.File;
 
 /**
  * Deals with interactions with the user
