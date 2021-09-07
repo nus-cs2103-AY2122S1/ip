@@ -49,7 +49,7 @@ public class RemoveArchiveCommand extends RemoveCommand {
      * @param storage Storage to save and load TaskList of Duke.
      */
     @Override
-    public String getExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
+    public String formatExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
         String message;
 
         if (super.isRemoveAll()) {

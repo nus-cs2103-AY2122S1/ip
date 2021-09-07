@@ -67,7 +67,7 @@ public class RemoveCommand extends Command {
      * @param storage Storage to save and load TaskList of Duke.
      */
     @Override
-    public String getExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
+    public String formatExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
         String message;
 
         if (this.isRemoveAll) {

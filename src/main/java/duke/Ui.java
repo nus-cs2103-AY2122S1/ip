@@ -52,7 +52,7 @@ public class Ui {
      * @param dukeList DukeList to be printed.
      * @return String representation of what gets printed out of print method.
      */
-    public String getPrintString(DukeList dukeList) {
+    public String formatPrintString(DukeList dukeList) {
         String output = "Here are the tasks in your " + dukeList.type() + ":";
 
         for (int i = 0; i < dukeList.getSize(); i++) {
@@ -82,7 +82,7 @@ public class Ui {
      * @param size Size of TaskList.
      * @return String representation of what is printed from printAdd.
      */
-    public String getPrintAddString(Task toAdd, int size) {
+    public String formatPrintAddString(Task toAdd, int size) {
         return "Got it. I've added this task:\n" + "  " + toAdd
                 + "\nNow you have " + size + " tasks in the list.";
     }
@@ -146,7 +146,7 @@ public class Ui {
      * @param keyword Keyword which tasks in tasksWithKeyword contains.
      * @return String representation of what is printed out from printKeywordTasks.
      */
-    public String getPrintKeywordTasksString(TaskList tasksWithKeyword, String keyword) {
+    public String formatPrintKeywordTasksString(TaskList tasksWithKeyword, String keyword) {
         if (tasksWithKeyword.getSize() > 0) {
             String output = "Here are the matching tasks in your list:";
             for (int i = 0; i < tasksWithKeyword.getSize(); i++) {
@@ -172,7 +172,7 @@ public class Ui {
      *
      * @return String representation of what gets printed out when exit is called.
      */
-    public String getExitString() {
+    public String formatExitString() {
         return "Bye. Hope to see you again soon!";
     }
 

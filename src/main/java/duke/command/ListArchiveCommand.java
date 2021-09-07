@@ -30,7 +30,7 @@ public class ListArchiveCommand extends ListCommand {
      * @return
      */
     @Override
-    public String getExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
-        return ui.getPrintString(archiveList);
+    public String formatExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
+        return ui.formatPrintString(archiveList);
     }
 }
