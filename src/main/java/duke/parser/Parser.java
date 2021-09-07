@@ -21,12 +21,15 @@ import duke.task.ToDo;
 public class Parser {
 
     private ToDo parseCommandToToDo(String cmd) {
+        assert cmd.length() > 5;
         return new ToDo(cmd.substring(5).trim(), false);
     }
 
     private Deadline parseCommandToDeadline(String cmd) throws DukeException {
         try {
+            assert cmd.length() > 9;
             String[] splitText = cmd.substring(9).split(" /by ");
+            assert splitText.length == 2;
             return new Deadline(splitText[0].trim(), LocalDate.parse(splitText[1]), false);
         } catch (DateTimeParseException e) {
             throw new DukeException("Sorry Boss, please enter your date in the YYYY-MM-DD format.");
@@ -35,7 +38,9 @@ public class Parser {
 
     private Event parseCommandToEvent(String cmd) throws DukeException {
         try {
+            assert cmd.length() > 6;
             String[] splitText = cmd.substring(6).split(" /at ");
+            assert splitText.length == 2;
             return new Event(splitText[0].trim(), LocalDate.parse(splitText[1]), false);
         } catch (DateTimeParseException e) {
             throw new DukeException("Sorry Boss, please enter your date in the YYYY-MM-DD format.");
@@ -58,6 +63,7 @@ public class Parser {
 
     private Command parseSpecialCommand(String cmd) throws DukeException {
         if (cmd.matches("^done\\s\\d+$")) {
+            assert cmd.length() > 5;
             int serialNo = Integer.parseInt(cmd.substring(5));
             return new DoneCommand(serialNo);
         } else if (cmd.matches("^delete\\s\\d+$")) {
