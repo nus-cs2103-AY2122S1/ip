@@ -36,7 +36,7 @@ public class Ui {
 
     /**
      * Returns the input keyed in by the user.
-     * 
+     *
      * @return The string that is entered by the user.
      */
     public String getInput() {

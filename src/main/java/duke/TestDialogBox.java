@@ -12,6 +12,12 @@ public class TestDialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Constructor for a new JavaFX dialog box.
+     *
+     * @param l Label for the dialog box.
+     * @param iv The display picture for the JavaFX.
+     */
     public TestDialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;

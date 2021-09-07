@@ -48,10 +48,10 @@ public class Duke {
             Command c = Parser.parse(input);
             return c.execute(this.list, this.ui, this.storage);
         } catch (DukeException e) {
+            this.ui.printMessage(e.getMessage());
             return e.getMessage();
         }
     }
-    
     /**
      * Initializes a Duke object and runs the program.
      *
@@ -62,3 +62,4 @@ public class Duke {
         duke.start();
     }
 }
+
