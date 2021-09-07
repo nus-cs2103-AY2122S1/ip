@@ -1,7 +1,5 @@
 package duke.task;
 
-import java.util.Collection;
-
 public class Task {
     private String taskName;
     private boolean isDone;
@@ -13,6 +11,8 @@ public class Task {
      * @param isDone current status of task
      */
     Task(String taskName, boolean isDone) {
+        assert taskName != "" : "Task Name should not be empty";
+
         this.taskName = taskName;
         this.isDone = isDone;
     }
