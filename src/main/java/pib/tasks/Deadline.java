@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import pib.pibexception.PibException;
+import pib.utility.Ui;
 
 /**
  * Deadline task which contains the task description, and the date of the deadline
@@ -102,5 +103,30 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.date + ", " + this.time + ")";
+    }
+
+    /**
+     * Updates the task date or time to a new value
+     *
+     * @param s specifies whether to update the date or time
+     * @param newValue new value to update the date/time with
+     * @throws PibException when s is blank or when new date/time is wrongly formatted
+     */
+    public String editDateTime(String s, String newValue) throws PibException {
+        if (newValue.isBlank()) {
+            throw new PibException("empty-new-value");
+        }
+        try {
+            if (s.equals("date")) {
+                date = getDateString(newValue);
+            } else if (s.equals("time")) {
+                time = getTimeString(newValue);
+            } else {
+                assert false;
+            }
+            return Ui.printUpdateSuccessful();
+        } catch (DateTimeParseException e) {
+            throw new PibException("wrong-datetime-format");
+        }
     }
 }
