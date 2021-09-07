@@ -80,5 +80,40 @@ public class DukeUi {
         return returnThis;
     }
 
+    /**
+     * Add the help screen for Duke into the UI buffer.
+     */
+    public void showHelpScreen() {
+        addToDukeBuffer("Welcome to Duke Help!!!");
+        addToDukeBuffer("");
+        addToDukeBuffer("Command Summary:");
+        addToDukeBuffer("");
+        addToDukeBuffer("");
+        addToDukeBuffer("Adding Tasks:");
+        addToDukeBuffer("");
+        addToDukeBuffer("todo <taskName>  >> Adds a todo task.");
+        addToDukeBuffer("");
+        addToDukeBuffer("deadline <taskName> \\by <date> ");
+        addToDukeBuffer("    >> Adds a Deadline Task.");
+        addToDukeBuffer("    Date must be in format: 'D/M/YY', 'DD/MM/YYYY' or 'DD Month YYYY'.");
+        addToDukeBuffer("");
+        addToDukeBuffer("event <taskName> \\at <eventLocation>.");
+        addToDukeBuffer("");
+        addToDukeBuffer("");
+        addToDukeBuffer("Task Processing:");
+        addToDukeBuffer("list  >> Lists out current task list.");
+        addToDukeBuffer("");
+        addToDukeBuffer("done <taskNo>  >> Sets indicated task to 'Done'.");
+        addToDukeBuffer("");
+        addToDukeBuffer("delete <taskNo> >> Deletes the indicated task.");
+        addToDukeBuffer("");
+        addToDukeBuffer("find <thing> >> Searches task list for thing.");
+        addToDukeBuffer("");
+        addToDukeBuffer("");
+        addToDukeBuffer("bye    >> Closes Duke :(");
+        addToDukeBuffer("help OR help <anything>  >> Shows this help screen.");
+
+
+    }
 
 }

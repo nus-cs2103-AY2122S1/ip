@@ -145,7 +145,8 @@ public class Duke {
             this.addToTdl(lastInput, currTaskType);
         } else if (cmdType == DukeCommandParser.CommandType.FIND) {
             this.findTaskInTdl(lastInput);
-
+        } else if (cmdType == DukeCommandParser.CommandType.HELP) {
+            this.showHelpScreen();
         } else {
             unknownCommandEntered();
         }
@@ -196,6 +197,13 @@ public class Duke {
      */
     public String flushUiBuffer() {
         return this.currUiCtrl.dukeBufferRelease();
+    }
+
+    /**
+     * Shows the help screen for Duke.
+     */
+    private void showHelpScreen() {
+        this.currUiCtrl.showHelpScreen();
     }
 
     /**

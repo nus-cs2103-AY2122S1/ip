@@ -55,10 +55,8 @@ public class DeadlineTask extends BaseTask {
         // Check if year is in YY or YYYY form
         String last4Char = byWhen.substring(byWhen.length() - 4);
         boolean hasSlash = last4Char.contains("/");
-
         String first3Char = byWhen.substring(0, 3);
         boolean hasSpaceAtFront = first3Char.contains(" ");
-
         DateTimeFormatter formatterToUse = null;
 
         if (hasSlash) {
@@ -73,7 +71,6 @@ public class DeadlineTask extends BaseTask {
         try {
             LocalDate byDate = LocalDate.parse(byWhen, formatterToUse);
             this.byWhenDate = byDate;
-
         } catch (DateTimeParseException e) {
             throw new DukeExceptionBase("Deadline Date does not follow the format required. "
                     + "DeadlineTask must contain a Date in 'D/M/YY', 'DD/MM/YYYY' or 'DD Month YYYY' formats");
