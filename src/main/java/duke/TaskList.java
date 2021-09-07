@@ -97,7 +97,7 @@ public class TaskList {
     }
 
     /**
-     * Returns an ArrayList of Task objects matching the given search keyword.
+     * Returns an ArrayList of Task objects containing the given search keyword.
      * @param str Keyword used for searching.
      * @return ArrayList of Task objects matching the keyword.
      */
