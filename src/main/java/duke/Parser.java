@@ -10,13 +10,7 @@ import duke.command.ListArchiveCommand;
 import duke.command.ListCommand;
 import duke.command.RemoveArchiveCommand;
 import duke.command.RemoveCommand;
-import duke.exception.DukeException;
-import duke.exception.IncompleteArchiveException;
-import duke.exception.IncompleteDeadlineException;
-import duke.exception.IncompleteEventException;
-import duke.exception.IncompleteFindException;
-import duke.exception.IncompleteToDoException;
-import duke.exception.InvalidCommandException;
+import duke.exception.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
@@ -183,6 +177,69 @@ public class Parser {
      */
     private static boolean isBye(String input) {
         return input.equals("bye");
+    }
+
+    /**
+     * Checks if String is an Integer or "all" word.
+     *
+     * @param s String to check.
+     * @return true if it is an Integer or "all" word, else false.
+     */
+    private static boolean isIntegerOrAll(String s) {
+        return isPositiveInteger(s) || isAll(s);
+    }
+
+    /**
+     * Checks if String is "all" word.
+     *
+     * @param s String to check.
+     * @return true if it is an "all" word.
+     */
+    private static boolean isAll(String s) {
+        return s.equals("all");
+    }
+
+    /**
+     * Checks if String is an Integer.
+     *
+     * @param s String to check.
+     * @return true if it is an Integer.
+     */
+    private static boolean isPositiveInteger(String s) {
+        return s.matches("\\d+");
+    }
+
+    /**
+     * Checks if string is within range of given taskList.
+     *
+     * @param dukeList taskList to see if index s is within.
+     * @param s String to check if is within range of taskList.
+     * @return true if String is within the range of the taskList, else false.
+     */
+    private static boolean isOutOfRange(DukeList dukeList, String s) {
+        return !isAll(s) && (isExceedLength(dukeList, s) || isLessThanOne(s));
+    }
+
+    /**
+     * Checks if integer value of s is less than 1.
+     *
+     * @param s String which is to be converted intp integer value.
+     * @return true if integer value of s is less than 1, false otherwise.
+     */
+    private static boolean isLessThanOne(String s) {
+        return Integer.valueOf(s) < 1;
+    }
+
+    /**
+     * Checks if integer value of s exceeds the length of dukeList.
+     *
+     * @param dukeList DukeList to check if integer value of s exceeds.
+     * @param s String which is to be converted into integer value.
+     * @return true if integer value of s does not exceed length of dukeList,
+     * false otherwise.
+     */
+    private static boolean isExceedLength(DukeList dukeList, String s) {
+        return Integer.valueOf(s) > dukeList.getSize();
     }
 
     /**
@@ -459,6 +516,37 @@ public class Parser {
     }
 
     /**
+     * Parses the command string into a DoneCommand.
+     *
+     * @param userInput Command which user entered.
+     * @param taskList taskList which DoneCommand marks as done from.
+     * @return A DoneCommand with index to mark as done.
+     * @throws DukeException If insufficient values are passed in.
+     */
+    private static DoneCommand parseDoneCommand(
+            String userInput, TaskList taskList) throws DukeException {
+
+        String[] separated = userInput.split(SPACE);
+
+        boolean lengthLessThanTwo = separated.length < 2;
+
+        if (lengthLessThanTwo || !isIntegerOrAll(separated[1])
+                || isOutOfRange(taskList, separated[1])) {
+            throw new IncompleteDoneException();
+        } else if (isPositiveInteger(separated[1])) {
+            int index = Integer.valueOf(separated[1]) - 1;
+
+            assert index >= 0 && index < taskList.getSize();
+
+            return new DoneCommand(index);
+        } else if (isAll(separated[1])) {
+            return new DoneCommand(-1);
+        } else {
+            throw new InvalidCommandException();
+        }
+    }
+
+    /**
      * Handles the case where it is a RemoveArchiveCommand and parses it.
      *
      * @param archiveList archiveList to be removed from.
@@ -469,7 +557,7 @@ public class Parser {
     private static RemoveArchiveCommand handleRemoveArchive(
             ArchiveList archiveList, String[] separated) throws DukeException {
         if (!isIntegerOrAll(separated[2]) || isOutOfRange(archiveList, separated[2])) {
-            throw new DukeException("Please key in valid number to remove.");
+            throw new IncompleteRemoveException();
         } else if (isPositiveInteger(separated[2])) {
             return new RemoveArchiveCommand(Integer.valueOf(separated[2]) - 1);
         } else if (isAll(separated[2])) {
@@ -493,7 +581,7 @@ public class Parser {
 
         if (lengthLessThanTwo || !isIntegerOrAll(separated[1])
                 || isOutOfRange(taskList, separated[1])) {
-            throw new DukeException("Please key in valid number to remove.");
+            throw new IncompleteRemoveException();
         } else if (isPositiveInteger(separated[1])) {
             return new RemoveCommand(Integer.valueOf(separated[1]) - 1);
         } else if (isAll(separated[1])) {
@@ -501,99 +589,5 @@ public class Parser {
         } else {
             throw new InvalidCommandException();
         }
-    }
-
-    /**
-     * Parses the command string into a DoneCommand.
-     *
-     * @param userInput Command which user entered.
-     * @param taskList taskList which DoneCommand marks as done from.
-     * @return A DoneCommand with index to mark as done.
-     * @throws DukeException If insufficient values are passed in.
-     */
-    private static DoneCommand parseDoneCommand(
-            String userInput, TaskList taskList) throws DukeException {
-
-        String[] separated = userInput.split(SPACE);
-
-        boolean lengthLessThanTwo = separated.length < 2;
-
-        if (lengthLessThanTwo || !isIntegerOrAll(separated[1])
-                || isOutOfRange(taskList, separated[1])) {
-            throw new DukeException("Please key in valid number to mark as done.");
-        } else if (isPositiveInteger(separated[1])) {
-            int index = Integer.valueOf(separated[1]) - 1;
-
-            assert index >= 0 && index < taskList.getSize();
-
-            return new DoneCommand(index);
-        } else if (isAll(separated[1])) {
-            return new DoneCommand(-1);
-        } else {
-            throw new InvalidCommandException();
-        }
-    }
-
-    /**
-     * Checks if String is an Integer or "all" word.
-     *
-     * @param s String to check.
-     * @return true if it is an Integer or "all" word, else false.
-     */
-    private static boolean isIntegerOrAll(String s) {
-        return isPositiveInteger(s) || isAll(s);
-    }
-
-    /**
-     * Checks if String is "all" word.
-     *
-     * @param s String to check.
-     * @return true if it is an "all" word.
-     */
-    private static boolean isAll(String s) {
-        return s.equals("all");
-    }
-
-    /**
-     * Checks if String is an Integer.
-     *
-     * @param s String to check.
-     * @return true if it is an Integer.
-     */
-    private static boolean isPositiveInteger(String s) {
-        return s.matches("\\d+");
-    }
-
-    /**
-     * Checks if string is within range of given taskList.
-     *
-     * @param dukeList taskList to see if index s is within.
-     * @param s String to check if is within range of taskList.
-     * @return true if String is within the range of the taskList, else false.
-     */
-    private static boolean isOutOfRange(DukeList dukeList, String s) {
-        return !isAll(s) && (isExceedLength(dukeList, s) || isLessThanOne(s));
-    }
-
-    /**
-     * Checks if integer value of s is less than 1.
-     *
-     * @param s String which is to be converted intp integer value.
-     * @return true if integer value of s is less than 1, false otherwise.
-     */
-    private static boolean isLessThanOne(String s) {
-        return Integer.valueOf(s) < 1;
-    }
-
-    /**
-     * Checks if integer value of s exceeds the length of dukeList.
-     *
-     * @param dukeList DukeList to check if integer value of s exceeds.
-     * @param s String which is to be converted into integer value.
-     * @return true if integer value of s does not exceed length of dukeList,
-     * false otherwise.
-     */
-    private static boolean isExceedLength(DukeList dukeList, String s) {
-        return Integer.valueOf(s) > dukeList.getSize();
     }
 }
