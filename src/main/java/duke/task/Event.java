@@ -1,8 +1,9 @@
 package duke.task;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
-class Event extends Task {
+public class Event extends Task {
     /**
      * Date and time representation of event
      */
@@ -28,5 +29,33 @@ class Event extends Task {
     @Override
     public String saveAsData() {
         return 2 + "\n" + super.saveAsData() + "\n" + at.format(INPUT_FORMAT) + "\n";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (obj instanceof Event) {
+            Event o = (Event) obj;
+
+            return super.equals(obj) && this.at.equals(o.at);
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean checkIfAlreadyAdded(ArrayList<Task> list) {
+        boolean alreadyAdded = false;
+
+        for (Task task : list) {
+            if (this.equals(task)) {
+                alreadyAdded = true;
+                break;
+            }
+        }
+        return alreadyAdded;
     }
 }

@@ -14,14 +14,14 @@ import duke.exception.DukeException;
  * Deals with the input given by the user and making sense of it.
  */
 public class Parser {
-    private final static String ADD_FORMAT = "Please enter the `%s` task in this format:\n"
+    private static final String ADD_FORMAT = "Please enter the `%s` task in this format:\n"
             + "%s <task_description> /%s <date_and_time>";
-    private final static String INSUFFICIENT_INPUT_ADD = "Insufficient input received!"
+    private static final String INSUFFICIENT_INPUT_ADD = "Insufficient input received!"
             + " Please add in description of the `%s` task.";
-    private final static String INSUFFICIENT_INPUT_D = "Insufficient input received! "
+    private static final String INSUFFICIENT_INPUT_D = "Insufficient input received! "
             + "Please indicate the task number of the %s";
-    private final static String  INVALID_INPUT_ADD = "Invalid input! Please add in %s";
-    private final static String INVALID_INPUT_D = "Invalid input! Please enter the task number after '%s'.";
+    private static final String INVALID_INPUT_ADD = "Invalid input! Please add in %s";
+    private static final String INVALID_INPUT_D = "Invalid input! Please enter the task number after '%s'.";
 
     /**
      * Processes the input given by the user.
@@ -114,7 +114,7 @@ public class Parser {
                 String eDescription = input.substring(eFirst + 1, eSecond - 1);
                 String at = input.substring(eSecond + 4);
 
-                return new CommandAdd(1, eDescription, at);
+                return new CommandAdd(2, eDescription, at);
             }
         default:
             return new CommandUnknown();

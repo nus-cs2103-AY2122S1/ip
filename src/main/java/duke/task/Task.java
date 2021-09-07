@@ -1,11 +1,12 @@
 package duke.task;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 /**
  * Represents a task.
  */
-public class Task {
+public abstract class Task {
     public static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     public static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma");
 
@@ -70,5 +71,27 @@ public class Task {
     public String saveAsData() {
         return isDone + "\n" + description;
     }
-}
 
+    /**
+     * Checks if the current `Task` has already been added to the list.
+     *
+     * @param list List of `Task` objects.
+     * @return True if already added. False otherwise.
+     */
+    public abstract boolean checkIfAlreadyAdded(ArrayList<Task> list);
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (obj instanceof Task) {
+            Task o = (Task) obj;
+
+            return this.description.equals(o.description);
+        }
+
+        return false;
+    }
+}

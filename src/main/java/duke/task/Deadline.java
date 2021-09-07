@@ -1,8 +1,9 @@
 package duke.task;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
-class Deadline extends Task {
+public class Deadline extends Task {
     /**
      * Date and time representation of deadline
      */
@@ -28,5 +29,33 @@ class Deadline extends Task {
     @Override
     public String saveAsData() {
         return 1 + "\n" + super.saveAsData() + "\n" + by.format(INPUT_FORMAT) + "\n";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (obj instanceof Deadline) {
+            Deadline o = (Deadline) obj;
+
+            return super.equals(obj) && this.by.equals(o.by);
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean checkIfAlreadyAdded(ArrayList<Task> list) {
+        boolean alreadyAdded = false;
+
+        for (Task task : list) {
+            if (this.equals(task)) {
+                alreadyAdded = true;
+                break;
+            }
+        }
+        return alreadyAdded;
     }
 }
