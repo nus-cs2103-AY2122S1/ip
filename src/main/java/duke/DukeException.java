@@ -20,11 +20,17 @@ public class DukeException extends Exception {
         if (errorCommand.equals("invalid data")) {
             this.dukeError = "Database contains invalid entries!";
         }
+
         if (errorCommand.equals("failed database creation")) {
             this.dukeError = "Database cannot be created! Please check that duke.Duke has write and read permissions";
         }
+
         if (errorCommand.equals("failed data save")) {
             this.dukeError = "Failed to save data. Please check that duke.Duke has write permissions";
+        }
+
+        if (errorCommand.equals("invalid tasktype")) {
+            this.dukeError = "Invalid task type. Task type should be either deadline, event or todo";
         }
     }
 

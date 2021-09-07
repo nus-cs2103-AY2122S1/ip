@@ -27,12 +27,12 @@ public class FindCommand extends Command {
         for (int i = 0; i < taskList.size(); i++) {
             Task currentTask = taskList.get(i);
 
-            if (currentTask.doesDescriptionContainString(this.query)) {
+            if (currentTask.doesDescriptionContain(this.query)) {
                 outputList.append(String.format("%d.%s\n", counter, currentTask));
                 counter++;
             }
         }
-        return ui.printMessage(outputList.toString());
+        return ui.getDukeMessage(outputList.toString());
     }
 
     @Override

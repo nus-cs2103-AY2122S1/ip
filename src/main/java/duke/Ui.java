@@ -12,16 +12,16 @@ public class Ui {
         return userInput;
     }
 
-    public String printMessage(String message) {
+    public String getDukeMessage(String message) {
        return String.format("Duke says:\n%s", message);
     }
 
     public String sayBye() {
-        return printMessage(EXIT_MESSAGE);
+        return getDukeMessage(EXIT_MESSAGE);
     }
 
-    public String printError(DukeException e) {
-        return printMessage(e.toString());
+    public String getDukeError(DukeException e) {
+        return getDukeMessage(e.toString());
     }
 
 }

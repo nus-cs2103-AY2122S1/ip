@@ -31,6 +31,6 @@ public class PrintListCommand extends Command {
             outputList.append(String.format("%d.%s\n", i + 1, currentTask));
         }
 
-        return ui.printMessage(outputList.toString());
+        return ui.getDukeMessage(outputList.toString());
     }
 }
