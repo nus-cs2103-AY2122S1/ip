@@ -26,8 +26,8 @@ public class ParserTest {
         String input = "deadline return book /by 10/3/2020 1400";
 
         Parser parser = new Parser(input);
-        parser.parseTask();
-        parser.parseDate();
+        parser.getTaskName();
+        parser.getTaskDate();
         assertEquals(parser.getDate(), LocalDateTime.of(2020, 3, 10, 14, 0));
     }
 }

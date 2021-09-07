@@ -30,9 +30,7 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String run(Duke duke, Parser parser) throws DukeException {
-        parser.parseTask();
-        parser.parseDate();
-        Task task = new Deadline(parser.getTaskName(), parser.getDate());
+        Task task = new Deadline(parser.getTaskName(), parser.getTaskDate());
         duke.getList().add(task);
         return Ui.addTaskMessage(task, duke.getList().size());
     }

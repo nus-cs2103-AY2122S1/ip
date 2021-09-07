@@ -12,9 +12,7 @@ import java.time.LocalDateTime;
 public class Parser {
     private final String commandWord;
     private final String arguments;
-    private String taskName;
     private String dateString;
-    private LocalDateTime date;
 
     /**
      * Constructor for a parser.
@@ -23,8 +21,8 @@ public class Parser {
      */
     public Parser(String input) {
         String[] splitCommand = input.split(" ", 2);
-        this.commandWord = splitCommand[0];
-        this.arguments = splitCommand.length > 1 ? splitCommand[1] : null;
+        commandWord = splitCommand[0];
+        arguments = splitCommand.length > 1 ? splitCommand[1] : null;
     }
 
     /**
@@ -33,7 +31,7 @@ public class Parser {
      * @return Command word.
      */
     public String getCommandWord() {
-        return this.commandWord;
+        return commandWord;
     }
 
     /**
@@ -43,7 +41,7 @@ public class Parser {
      * @throws DukeException If no number is provided.
      */
     public int getNumber() throws DukeException {
-        if (this.arguments == null) {
+        if (arguments == null) {
             throw new DukeException("No number provided.");
         }
         // Retrieve value inputted by user and subtract 1 to get the index in the array.
@@ -57,7 +55,7 @@ public class Parser {
      * @throws DukeException If no search term provided.
      */
     public String getSearchTerm() throws DukeException {
-        if (this.arguments == null) {
+        if (arguments == null) {
             throw new DukeException("No search term provided.");
         }
         return arguments;
@@ -66,16 +64,17 @@ public class Parser {
     /**
      * Parse arguments if type is task.
      *
+     * @return Task name
      * @throws DukeException If name is not present.
      */
-    public void parseTask() throws DukeException {
-        if (this.arguments == null) {
+    public String getTaskName() throws DukeException {
+        if (arguments == null) {
             throw new DukeException("Task needs to have a name.");
         }
         // Split message from due date
-        String[] splitMessage = this.arguments.split("/", 2);
-        this.taskName = splitMessage[0];
-        this.dateString = splitMessage.length > 1 ? splitMessage[1] : null;
+        String[] splitMessage = arguments.split("/", 2);
+        dateString = splitMessage.length > 1 ? splitMessage[1] : null;
+        return splitMessage[0];
     }
 
     /**
@@ -83,7 +82,8 @@ public class Parser {
      *
      * @throws DukeException If date is invalid.
      */
-    public void parseDate() throws DukeException {
+    public LocalDateTime getTaskDate() throws DukeException {
+        LocalDateTime date;
         // Error handling: no time provided.
         if (dateString == null) {
             throw new DukeException("Date cannot be empty.");
@@ -103,23 +103,6 @@ public class Parser {
         } catch (DateTimeException e) {
             throw new DukeException("Invalid date.");
         }
-    }
-
-    /**
-     * Getter for the name of the task.
-     *
-     * @return Name of the task provided by user.
-     */
-    public String getTaskName() {
-        return this.taskName;
-    }
-
-    /**
-     * Getter for the date of the task.
-     *
-     * @return Date of the task inputted by user.
-     */
-    public LocalDateTime getDate() {
-        return this.date;
+        return date;
     }
 }

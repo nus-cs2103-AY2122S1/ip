@@ -30,7 +30,6 @@ public class TodoCommand extends Command {
      */
     @Override
     public String run(Duke duke, Parser parser) throws DukeException {
-        parser.parseTask();
         Task task = new Todo(parser.getTaskName());
         duke.getList().add(task);
         return Ui.addTaskMessage(task, duke.getList().size());

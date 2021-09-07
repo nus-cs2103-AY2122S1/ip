@@ -14,7 +14,7 @@ public abstract class Task {
      */
     public Task(String taskName) {
         this.taskName = taskName;
-        this.isComplete = false;
+        isComplete = false;
     }
 
     /**
@@ -23,14 +23,14 @@ public abstract class Task {
      * @return Name of the task.
      */
     public String getName() {
-        return this.taskName;
+        return taskName;
     }
 
     /**
      * Toggles the completion status of the task.
      */
     public void setDone() {
-        this.isComplete = !this.isComplete;
+        isComplete = !isComplete;
     }
 
     /**
@@ -57,6 +57,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.isComplete ? "X" : " ", taskName);
+        return String.format("[%s] %s", isComplete ? "X" : " ", taskName);
     }
 }

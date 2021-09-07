@@ -31,10 +31,10 @@ public class Storage {
      * @throws IOException If an I/O error occurs.
      */
     public Storage(String path) throws IOException {
-        this.file = new File(path);
-        if (!this.file.getParentFile().exists()) {
-            this.file.getParentFile().mkdir();
-            this.file.createNewFile();
+        file = new File(path);
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdir();
+            file.createNewFile();
         }
     }
 
@@ -45,7 +45,7 @@ public class Storage {
      * @throws IOException If an I/O error occurs.
      */
     public void save(List<Task> list) throws IOException {
-        FileWriter writer = new FileWriter(this.file);
+        FileWriter writer = new FileWriter(file);
         StringBuilder output = new StringBuilder();
         for (Task t : list) {
             output.append(formatTask(t));
@@ -64,7 +64,7 @@ public class Storage {
      */
     public List<Task> readFile() throws FileNotFoundException, DukeException {
         List<Task> output = new ArrayList<>();
-        Scanner sc = new Scanner(this.file);
+        Scanner sc = new Scanner(file);
         while (sc.hasNext()) {
             output.add(readTask(sc.nextLine()));
         }
