@@ -13,6 +13,8 @@ import java.time.format.DateTimeParseException;
  */
 public class Parser {
 
+    private static final int MINIMUM_LENGTH_OF_ARRAY = 2;
+
     /**
      * Parses a string into a LocalDate object.
      *
@@ -107,7 +109,7 @@ public class Parser {
         //case if user wants to delete a task or mark a task as done
         if (firstString.equals("done") || firstString.equals("delete")) {
             //case if no number is entered
-            if (inputArray.length < 2) {
+            if (inputArray.length < MINIMUM_LENGTH_OF_ARRAY) {
                 return Ui.getNumberError();
             }
 
@@ -116,7 +118,8 @@ public class Parser {
                 int index = Integer.parseInt(inputArray[1]);
                 int arrayIndex = index - 1;
                 //case if entered index does not correspond to a task
-                if (index > taskList.getTotalTasks() || index < 1) {
+                boolean isInvalidIndex = index > taskList.getTotalTasks() || index < 1;
+                if (isInvalidIndex) {
                     return Ui.getTaskError();
                 }
                 //retrieve the task
@@ -158,7 +161,7 @@ public class Parser {
         }
 
         if (firstString.equals("find")) {
-            if (inputArray.length < 2) {
+            if (inputArray.length < MINIMUM_LENGTH_OF_ARRAY) {
                 //case if no number is entered
                 return Ui.getNumberError();
             }

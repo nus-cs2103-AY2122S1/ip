@@ -28,7 +28,7 @@ public class Ui {
     private static final String BAD_INPUT_ERROR = "I could not understand your input. Please stop speaking gibberish"
             + " to me!\n";
 
-    private static final String END_MESSAGE = "kthxbye\nRemember to click on the `X` at the top right before leaving.";
+    private static final String END_MESSAGE = "kthxbye";
 
     private static final String BAD_DATE_FORMAT_ERROR = "Enter a valid date format! (yyyy-mm-dd)\n";
 
@@ -51,15 +51,6 @@ public class Ui {
      */
     public static String getNumberError() {
         return NUMBER_ERROR;
-    }
-
-    /**
-     * Returns a welcome message to the user.
-     *
-     * @return The specified string.
-     */
-    public static String getWelcomeMessage() {
-        return "Hello from\n" + LOGO + "\nWhat can I do for you today?";
     }
 
     /**
