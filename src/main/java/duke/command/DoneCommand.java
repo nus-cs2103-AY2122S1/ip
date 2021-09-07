@@ -28,7 +28,7 @@ public class DoneCommand extends Command {
      * @return string that represents details of completing this task.
      */
     public String execute() {
-        if (input.length() == 4) {
+        if (input.length() == 4 || input.length() == 5) {
             throw new DukeException(Ui.getEmptyDescriptionMsg("done"));
         }
         return taskList.markTaskAsDone(Integer.parseInt(input.substring(5)));

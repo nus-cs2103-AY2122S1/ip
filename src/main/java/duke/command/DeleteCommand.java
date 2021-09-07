@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
      * @return string that represents details of deleting this task.
      */
     public String execute() {
-        if (input.length() == 6) {
+        if (input.length() == 6 || input.length() == 7) {
             throw new DukeException(Ui.getEmptyDescriptionMsg("delete"));
         }
         return super.taskList.removeTask(Integer.parseInt(input.substring(7)));

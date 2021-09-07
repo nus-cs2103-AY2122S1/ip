@@ -64,6 +64,7 @@ public class Storage {
      * @throws DukeException if unexpected error is encountered.
      */
     public static void writeFile(Task task) throws DukeException {
+        assert file.exists() : "The tasks.txt file does not exist.";
         try {
             FileWriter fileWriter = new FileWriter(FILE_NAME, true);
             fileWriter.write(task.formatToWrite() + System.lineSeparator());
@@ -80,6 +81,7 @@ public class Storage {
      * @throws DukeException if unexpected error is encountered.
      */
     public static void updateFile(ArrayList<Task> tasks) throws DukeException {
+        assert file.exists() : "The tasks.txt file does not exist.";
         try {
             FileWriter fileWriter = new FileWriter(FILE_NAME);
             for (Task t: tasks) {
