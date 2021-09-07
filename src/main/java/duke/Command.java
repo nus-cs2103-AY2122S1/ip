@@ -195,7 +195,10 @@ public abstract class Command {
         protected Response execute() throws DukeException.DukeIndexOutOfBoundsException, DukeException.DukeParseCommandException {
             ResponseMessage responseMessage = new ResponseMessage();
             try {
-                Task t = Duke.todoList.get(Integer.parseInt(index) - 1);
+                int taskIndex = Integer.parseInt(index) - 1;
+                // assume that the `taskIndex` is larger than 0
+                assert(taskIndex > 0);
+                Task t = Duke.todoList.get(taskIndex);
                 if (t.isDone()) {
                     responseMessage.appendMessage("OOPS!!! Seems like you marked the task done already:\n    " + t);
                 } else {
@@ -227,7 +230,10 @@ public abstract class Command {
         protected Response execute() throws DukeException.DukeParseCommandException, DukeException.DukeIndexOutOfBoundsException {
             ResponseMessage responseMessage = new ResponseMessage();
             try {
-                Task t = Duke.todoList.remove(Integer.parseInt(index) - 1);
+                int taskIndex = Integer.parseInt(index) - 1;
+                // assume that the `taskIndex` is larger than 0
+                assert(taskIndex > 0);
+                Task t = Duke.todoList.remove(taskIndex);
                 responseMessage.appendMessage("Noted. I've removed this task:\n    " + t);
                 responseMessage.appendMessage("Now you have " + Duke.todoList.size() + " tasks in the list.");
             } catch (IndexOutOfBoundsException e) {
