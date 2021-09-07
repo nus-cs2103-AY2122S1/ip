@@ -42,15 +42,8 @@ public abstract class AddTaskCommand extends Command {
 
     @Override
     void parseCommand(String[] tokens) {
-        StringBuilder taskDescriptionSb = new StringBuilder();
-        for (int i = 1; i < tokens.length; i++) {
-            taskDescriptionSb.append(tokens[i]).append(" ");
-        }
-        String taskDescription = taskDescriptionSb.toString().strip();
-        if (taskDescription.length() == 0) {
-            throw new DukeInvalidCommandException(String.format("A description is required for \"%s\" commands.",
-                    getCommandType().getCommandDescription()));
-        }
+        String taskDescription = parseTaskDescription(tokens);
+        checkTaskDescriptionLength(taskDescription);
         setTaskDescription(taskDescription);
         setTask(createTask());
     }
@@ -65,5 +58,16 @@ public abstract class AddTaskCommand extends Command {
 
     String getTaskDescription() {
         return this.taskDescription;
+    }
+
+    private String parseTaskDescription(String[] tokens) {
+        return getTokenSequence(tokens, 1, tokens.length);
+    }
+
+    private void checkTaskDescriptionLength(String taskDescription) {
+        if (taskDescription.length() == 0) {
+            throw new DukeInvalidCommandException(String.format("A description is required for \"%s\" commands.",
+                    getCommandType().getCommandDescription()));
+        }
     }
 }

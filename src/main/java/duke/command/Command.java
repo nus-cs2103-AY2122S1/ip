@@ -58,4 +58,13 @@ public abstract class Command {
     public boolean mustExit() {
         return MUST_EXIT;
     }
+
+    String getTokenSequence(String[] tokens, int inclusiveStart, int exclusiveEnd) {
+        StringBuilder tokenSequenceSb = new StringBuilder();
+        for (int i = inclusiveStart; i < exclusiveEnd; i++) {
+            String token = tokens[i];
+            tokenSequenceSb.append(token).append(" ");
+        }
+        return tokenSequenceSb.toString().strip();
+    }
 }

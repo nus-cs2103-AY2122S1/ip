@@ -50,20 +50,24 @@ public class FindTasksCommand extends Command {
 
     @Override
     void parseCommand(String[] tokens) throws DukeInvalidCommandException {
-        StringBuilder queryTaskDescriptionSb = new StringBuilder();
-        for (int i = 1; i < tokens.length; i++) {
-            queryTaskDescriptionSb.append(tokens[i]).append(" ");
-        }
-        String queryTaskDescription = queryTaskDescriptionSb.toString().strip();
+        String queryTaskDescription = parseQueryTaskDescription(tokens);
+        checkQueryTaskDescriptionLength(queryTaskDescription);
+        this.queryTaskDescription = queryTaskDescription;
+    }
+
+    private void checkQueryTaskDescriptionLength(String queryTaskDescription) {
         if (queryTaskDescription.length() == 0) {
             throw new DukeInvalidCommandException(String.format("A query is required for \"%s\" commands.",
                     getCommandType().getCommandDescription()));
         }
-        this.queryTaskDescription = queryTaskDescription;
     }
 
     @Override
     CommandType getCommandType() {
         return COMMAND_TYPE;
+    }
+
+    private String parseQueryTaskDescription(String[] tokens) {
+        return getTokenSequence(tokens, 1, tokens.length);
     }
 }
