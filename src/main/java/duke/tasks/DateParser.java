@@ -24,7 +24,7 @@ public class DateParser {
      * @throws DateTimeParseException runtime exception when handling an invalid input.
      */
     public static LocalDateTime parseDateTimeInput(String dateTimeString)
-            throws DateTimeParseException {
+        throws DateTimeParseException {
         Matcher dateMatch = Pattern.compile(REGEX_DATE).matcher(dateTimeString);
         Matcher timeMatch = Pattern.compile(REGEX_TIME).matcher(dateTimeString);
 
@@ -42,10 +42,25 @@ public class DateParser {
         return LocalDateTime.parse(isoDateTime);
     }
 
+    /**
+     * Convert dates into a String form in readable, pretty standardised date format.
+     * Use replace to ensure consistency (Github containers seem to output AM while
+     * local dev computer outputs am).
+     *
+     * @param dateTime object representing date.
+     * @return dateString
+     */
     public static String toHumanReadable(LocalDateTime dateTime) {
-        return dateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a"));
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
+        return dateTime.format(dtf).replace("am", "AM").replace("pm", "PM");
     }
 
+    /**
+     * Convert dates into a String form in database ready standardised date format.
+     *
+     * @param dateTime object representing date.
+     * @return dateString
+     */
     public static String toDatabaseFormat(LocalDateTime dateTime) {
         return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }

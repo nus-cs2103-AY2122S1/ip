@@ -5,18 +5,10 @@ import java.util.regex.Pattern;
 /**
  * Task class that encapsulate task behaviour and data.
  */
-public class Task {
-
-    /**
-     * Category of task.
-     */
-    public enum Type {
-        TODO, // task without a date
-        EVENT, // task with a start date and end date
-        DEADLINE, // task with a single date associated with it.
-    }
+public abstract class Task {
 
     private static final String DELIMITER = "--|--";
+
     private final String title;
     private final Type type;
     private boolean isComplete = false;
@@ -28,6 +20,19 @@ public class Task {
         }
         this.title = title;
         this.type = type;
+    }
+
+    public static int chronologicalComparator(Task task, Task task1) {
+        return (int) (task.getUrgency() - task1.getUrgency());
+    }
+
+    /**
+     * Category of task.
+     */
+    public enum Type {
+        TODO, // task without a date
+        EVENT, // task with a start date and end date
+        DEADLINE, // task with a single date associated with it.
     }
 
     /**
@@ -132,6 +137,13 @@ public class Task {
             DELIMITER
         );
     }
+
+    /**
+     * Get a long number representing the urgency (date) of a task.
+     *
+     * @return numeric value to be used to compare tasks.
+     */
+    protected abstract long getUrgency();
 
     /**
      * Set a task to be completed.
