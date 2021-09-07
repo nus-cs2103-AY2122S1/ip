@@ -8,14 +8,14 @@ class Parser {
     TaskList tasklist;
     Scanner myScanner;
     boolean breakLoop = false;
-
+    String FILE_PATH = "Data/DukeData.txt";
 
     Parser(Scanner myScanner) {
-        this.storage = new Storage("Data/DukeData.txt");
+        this.storage = new Storage(FILE_PATH);
         this.myScanner = myScanner;
         this.tasklist = Storage.tasklist;
         try {
-            Storage.readFile("Data/DukeData.txt");
+            Storage.readFile(FILE_PATH);
         } catch (Exception e) {
             System.out.println(e);
         }

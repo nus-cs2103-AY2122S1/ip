@@ -10,6 +10,7 @@ class Storage {
 
     private String filePath;
     static TaskList tasklist;
+    String FILE_PATH = "Data/DukeData.txt";
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -24,8 +25,8 @@ class Storage {
      */
     void saveTasks(TaskList tasks) {
         try {
-            File data_file = new File("Data/DukeData.txt");
-            FileWriter writer = new FileWriter("Data/DukeData.txt");//Overwriting entire file
+            File data_file = new File(FILE_PATH);
+            FileWriter writer = new FileWriter(FILE_PATH);//Overwriting entire file
             for (int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
                 writer.write(task.toString());
@@ -47,29 +48,29 @@ class Storage {
      * @param filePath FilePath where data is stored
      */
     static void readFile(String filePath) throws FileNotFoundException {
-        File f = new File(filePath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        while (s.hasNext()) {
-            String currLine = s.nextLine();
+        File file = new File(filePath);
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNext()) {
+            String currLine = scanner.nextLine();
             char taskType = currLine.charAt(1);
             switch (taskType) {
-                case 'T':
-                    tasklist.addTask(new ToDo(currLine.substring(7)));
-                    System.out.println(new ToDo(currLine.substring(7)));
-                    break;
-                case 'D':
-                    int l = currLine.indexOf("(");
-                    int n = currLine.indexOf(")");
-                    assert l < n : "Issue with bracketing order!";
-                    tasklist.addTask(new Deadline(currLine.substring(7, l), currLine.substring(l + 1, n)));
-                    System.out.println(new Deadline(currLine.substring(7, l), currLine.substring(l + 1, n)));
-                    break;
-                case 'E':
-                    int i = currLine.indexOf("(");
-                    int k = currLine.indexOf(")");
-                    tasklist.addTask(new Event(currLine.substring(7, i), currLine.substring(i + 1, k)));
-                    System.out.println(new Event(currLine.substring(7, i), currLine.substring(i + 1, k)));
-                    break;
+            case 'T':
+                tasklist.addTask(new ToDo(currLine.substring(7)));
+                System.out.println(new ToDo(currLine.substring(7)));
+                break;
+            case 'D':
+                int l = currLine.indexOf("(");
+                int n = currLine.indexOf(")");
+                assert l < n : "Issue with bracketing order!";
+                tasklist.addTask(new Deadline(currLine.substring(7, l), currLine.substring(l + 1, n)));
+                System.out.println(new Deadline(currLine.substring(7, l), currLine.substring(l + 1, n)));
+                break;
+            case 'E':
+                int i = currLine.indexOf("(");
+                int k = currLine.indexOf(")");
+                tasklist.addTask(new Event(currLine.substring(7, i), currLine.substring(i + 1, k)));
+                System.out.println(new Event(currLine.substring(7, i), currLine.substring(i + 1, k)));
+                break;
             }
         }
     }
