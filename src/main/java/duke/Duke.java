@@ -11,7 +11,6 @@ import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
 
-
 /**
  * The driver class for the Duke chat bot.
  */
@@ -28,7 +27,7 @@ public class Duke {
      * Object to represent the user's task list (e.g. add/delete/mark as done)
      */
     private TaskList taskList;
-    private String initMessage;
+    private String initMessage = "";
     private boolean isTerminated = false;
 
     /**
@@ -39,9 +38,8 @@ public class Duke {
     public Duke(Path filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
-        initMessage = "";
         try {
-            taskList = new TaskList(storage.loadTasksFromFile());
+            taskList = storage.loadTasksFromFile();
         } catch (FileNotFoundException e) {
             initMessage = ui.showFileNotFoundError();
             taskList = new TaskList();
@@ -83,9 +81,6 @@ public class Duke {
         } catch (IOException e) {
             return ui.showError("The data failed to save to the save file with error:"
                     + e.getMessage());
-        } catch (IllegalArgumentException e) {
-            // When invalid command is given, it is unable to be parsed into the enum
-            return ui.showError("You have entered an invalid command.");
         } catch (Exception e) {
             return ui.showError(e.getMessage());
         }
@@ -96,7 +91,7 @@ public class Duke {
      *
      * @return True if a bye/terminating command has been inputted, false otherwise.
      */
-    public boolean getIsTerminated() {
+    public boolean isTerminated() {
         return isTerminated;
     }
 }

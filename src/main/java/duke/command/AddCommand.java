@@ -32,9 +32,11 @@ public class AddCommand extends Command {
      */
     @Override
     public TaskList execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-        String[] inputs = Parser.splitWith(input, 0, " ",
+        // This splits up the input into task attributes.
+        // (i.e. Task type, task name, if the task is done or not, date/time)
+        String[] splitInputs = Parser.splitWith(input, 0, " ",
                 "The description of a todo/deadline/event task cannot be empty.");
-        TaskList newTaskList = taskList.addTask(ui, inputs);
+        TaskList newTaskList = taskList.addTask(ui, splitInputs);
         storage.saveTasksToFile(newTaskList);
         return newTaskList;
     }
