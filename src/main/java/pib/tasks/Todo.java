@@ -24,9 +24,11 @@ public class Todo extends Task {
      * @throws PibException when user inputs blank task description
      */
     public static Todo createTodo(String details, boolean printMessage) throws PibException {
+        assert details != null;
         if (details.trim().isBlank()) {
             throw new PibException("empty-task-description");
         }
+        assert !details.isBlank();
         return new Todo(details.trim(), printMessage);
     }
 
@@ -39,6 +41,8 @@ public class Todo extends Task {
      * @return Todo object with both description and isDone initialised
      */
     public static Todo createTodo(String details, int isDone, boolean printMessage) {
+        assert details != null;
+        assert !details.isBlank();
         return new Todo(details.trim(), isDone, printMessage);
     }
 
