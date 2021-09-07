@@ -56,19 +56,7 @@ public class DukeChatbot extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            ui = fxmlLoader.getController();
-            ui.setDukeChatbot(this);
-            commandParser = new CommandParser();
-            storageHandler = StorageHandler.getInstance();
-            taskHandler = new TaskHandler(storageHandler.loadTasks());
-            taskHandler.addTasksListUpdateObserver(tasks -> {
-                try {
-                    storageHandler.saveTasks(tasks);
-                } catch (IOException e) {
-                    hasErrorOnSave = true;
-                }
-            });
-            hasErrorOnSave = false;
+            initialise(fxmlLoader);
             stage.show();
             ui.printGreeting();
         } catch (IOException e) {
@@ -78,5 +66,21 @@ public class DukeChatbot extends Application {
             }
             Platform.exit();
         }
+    }
+
+    private void initialise(FXMLLoader fxmlLoader) throws IOException {
+        ui = fxmlLoader.getController();
+        ui.setDukeChatbot(this);
+        commandParser = new CommandParser();
+        storageHandler = StorageHandler.getInstance();
+        taskHandler = new TaskHandler(storageHandler.loadTasks());
+        taskHandler.addTasksListUpdateObserver(tasks -> {
+            try {
+                storageHandler.saveTasks(tasks);
+            } catch (IOException e) {
+                hasErrorOnSave = true;
+            }
+        });
+        hasErrorOnSave = false;
     }
 }
