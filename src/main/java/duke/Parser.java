@@ -26,18 +26,19 @@ public class Parser {
      * @throws DukeException An error thrown due to user input error.
      */
     public static Command parse(String str) throws DukeException {
+        String[] splitBySpace = str.split("\\s+");
         if (str.equals("bye")) {
             return new ExitCommand();
-        } else if (str.equals("list")) {
+        } else if (str.equals("list") || str.equals("l")) {
             return new ListCommand();
-        } else if (str.split("\\s+")[0].equals("done")) {
-            if (str.split("\\s+").length == 1) {
+        } else if (splitBySpace[0].equals("done")) {
+            if (splitBySpace.length == 1) {
                 throw new DukeException("Sorry please indicate a task number to update!");
             }
-            assert str.split("\\s+").length > 1 : "No task indicated.";
+            assert splitBySpace.length > 1 : "No task indicated.";
             int doneNumber = Integer.parseInt(str.substring(5));
             return new DoneCommand(doneNumber);
-        } else if (str.split("\\s+")[0].equals("deadline")) {
+        } else if (splitBySpace[0].equals("deadline") || splitBySpace[0].equals("d")) {
             if (!str.contains("/")) {
                 throw new DukeException("Sorry please indicate your deadline time with a '/by' after your "
                         + "deadline title!");
@@ -53,7 +54,7 @@ public class Parser {
             }
             String endTime = str.substring(endDescription + 4);
             return new DeadlineAddCommand(description, endTime);
-        } else if (str.split("\\s+")[0].equals("event")) {
+        } else if (splitBySpace[0].equals("event") || splitBySpace[0].equals("e")) {
             if (!str.contains("/")) {
                 throw new DukeException("Sorry please indicate a time your event begins with a '/on' after"
                         + " your event title!");
@@ -68,27 +69,27 @@ public class Parser {
             }
             String startTime = str.substring(endDescription + 4);
             return new EventAddCommand(description, startTime);
-        } else if (str.split("\\s+")[0].equals("todo")) {
+        } else if (splitBySpace[0].equals("todo") || splitBySpace[0].equals("t")) {
             if (str.length() < 5) {
                 throw new DukeException("Oh no! ToDos cannot be empty! Please try again");
             }
-            assert str.split("\\s+").length > 1 : "No todo specified";
+            assert splitBySpace.length > 1 : "No todo specified";
             String description = str.substring(5);
             if (description.equals("") || description.equals(" ")) {
                 throw new DukeException("Oh no! ToDos cannot be empty! Please try again");
             }
             return new TodoAddCommand(description);
-        } else if (str.split("\\s+")[0].equals("delete")) {
-            if (str.split("\\s+").length == 1) {
+        } else if (splitBySpace[0].equals("delete") || splitBySpace[0].equals("del")) {
+            if (splitBySpace.length == 1) {
                 throw new DukeException("Sorry please indicate a task number to delete!");
             }
-            assert str.split("\\s+").length > 1 : "No task specified to delete";
+            assert splitBySpace.length > 1 : "No task specified to delete";
             int deleteNumber = Integer.parseInt(str.substring(7));
             return new DeleteCommand(deleteNumber);
-        } else if (str.split("\\s+")[0].equals("help")) {
+        } else if (splitBySpace[0].equals("help") || splitBySpace[0].equals("h")) {
             return new HelpCommand();
-        } else if (str.split("\\s+")[0].equals("find")) {
-            if (str.split("\\s+").length == 1) {
+        } else if (splitBySpace[0].equals("find") || splitBySpace[0].equals("f")) {
+            if (splitBySpace.length == 1) {
                 throw new DukeException("Sorry please indicate a keyword to find!");
             }
             assert str.split("\\s+", 2).length == 2 : "No task specified to find";
