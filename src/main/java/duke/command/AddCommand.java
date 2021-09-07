@@ -56,6 +56,9 @@ public class AddCommand extends Command {
             throw new EmptyValueException();
         }
         if (!category.equals("todo")) {
+            assert category.equals("deadline")
+                    ||category.equals("event")
+                    : "category should be one of the other two";
             if (info.length < 2) {
                 throw new NoTimeException();
             } else {
