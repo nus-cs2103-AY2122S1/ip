@@ -65,7 +65,7 @@ public class Ui {
      */
     public static String formatReply(String str) {
         String y_border = "------------------------------------------------------------\n";
-        return y_border + "[PEPPER JACK]\n" + str + "\n" + y_border;
+        return "[PEPPER JACK]\n" + str + "\n";
     }
 
     /**
