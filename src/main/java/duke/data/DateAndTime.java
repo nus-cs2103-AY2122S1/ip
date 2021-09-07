@@ -28,31 +28,32 @@ public class DateAndTime {
      * Returns a string representing the reformatted date and time provided by the user.
      *
      * @return reformatted date and time
-     * @throws InvalidDateAndTimeException
+     * @throws InvalidDateAndTimeException when date and time is not present in the command
      */
     public String getReformattedDateAndTime() throws InvalidDateAndTimeException {
-        if (isDateAndTimePresent()) {
-            if (isDatePresent && isTimePresent) {
-                String dateAndTime = getDate() + "T" + getTime();
-                LocalDateTime localDateTime = LocalDateTime.parse(dateAndTime);
-                return localDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm"));
-            } else if (isDatePresent) {
-                String date = getDate();
-                LocalDate localDate = LocalDate.parse(date);
-                return localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-            } else {
-                String time = getTime();
-                LocalTime localTime = LocalTime.parse(time);
-                return localTime.format(DateTimeFormatter.ofPattern("HH:mm"));
-            }
-        } else {
+        if (!isDateAndTimePresent()) {
             throw new InvalidDateAndTimeException(Message.MESSAGE_INVALID_DATE_AND_TIME);
+        }
+
+        if (isDatePresent && isTimePresent) {
+            String dateAndTime = getDate() + "T" + getTime();
+            LocalDateTime localDateTime = LocalDateTime.parse(dateAndTime);
+            return localDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm"));
+        } else if (isDatePresent) {
+            String date = getDate();
+            LocalDate localDate = LocalDate.parse(date);
+            return localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        } else {
+            String time = getTime();
+            LocalTime localTime = LocalTime.parse(time);
+            return localTime.format(DateTimeFormatter.ofPattern("HH:mm"));
         }
     }
 
     private String getDate() throws InvalidDateAndTimeException {
         int firstSlashIndex = dateAndTimeFromCommand.indexOf("/");
         int secondSlashIndex = dateAndTimeFromCommand.lastIndexOf("/");
+
         if (firstSlashIndex < 0 || secondSlashIndex < 0) {
             throw new InvalidDateAndTimeException(Message.MESSAGE_INVALID_DATE_AND_TIME);
         }
@@ -60,19 +61,20 @@ public class DateAndTime {
         int startingIndex = firstSlashIndex - 2;
         int endingIndex = secondSlashIndex + 4;
 
-        boolean isIndexesValid = startingIndex >= 0 || endingIndex <= dateAndTimeFromCommand.length() - 1;
+        boolean isIndexesValid = startingIndex > 0 || endingIndex <= dateAndTimeFromCommand.length() - 1;
         if (!isIndexesValid) {
             throw new InvalidDateAndTimeException(Message.MESSAGE_INVALID_DATE_AND_TIME);
         }
 
-        boolean isDateCharacterValid = isDateCharacterValid(startingIndex, endingIndex);
-        if (isDateCharacterValid) {
-            return isDateValid(startingIndex, endingIndex).toString();
+        boolean isDateCharactersValid = isDateCharactersValid(startingIndex, endingIndex);
+        if (!isDateCharactersValid) {
+            throw new InvalidDateAndTimeException(Message.MESSAGE_INVALID_DATE_AND_TIME);
         }
-        throw new InvalidDateAndTimeException(Message.MESSAGE_INVALID_DATE_AND_TIME);
+
+        return isDateValid(startingIndex, endingIndex).toString();
     }
 
-    private boolean isDateCharacterValid(int start, int end) throws InvalidDateAndTimeException {
+    private boolean isDateCharactersValid(int start, int end) throws InvalidDateAndTimeException {
         for (int i = start; i <= end; i++) {
             char currentChar = dateAndTimeFromCommand.charAt(i);
             if ((i == start + 2) || (i == end - 4)) { //slash positions
@@ -90,14 +92,15 @@ public class DateAndTime {
 
     private LocalDate isDateValid(int start, int end) throws InvalidDateAndTimeException {
         String dateInput = dateAndTimeFromCommand.substring(start, end + 1);
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
-        LocalDate date;
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+                .withResolverStyle(ResolverStyle.STRICT);
+
         try {
-            date = LocalDate.parse(dateInput, dateTimeFormatter);
+            LocalDate date = LocalDate.parse(dateInput, dateTimeFormatter);
+            return date;
         } catch (DateTimeParseException e) {
             throw new InvalidDateAndTimeException(e.getMessage()); //todo format error message?
         }
-        return date;
     }
 
     private boolean isDateAndTimePresent() {
@@ -105,8 +108,8 @@ public class DateAndTime {
         int firstSlashIndex = dateAndTimeFromCommand.indexOf("/");
         int secondSlashIndex = dateAndTimeFromCommand.lastIndexOf("/");
 
-        boolean isSlashPresent = firstSlashIndex >= 0 && secondSlashIndex >= 0;
-        boolean isDatePresent = isSlashPresent && firstSlashIndex != secondSlashIndex;
+        boolean isSlashesPresent = firstSlashIndex >= 0 && secondSlashIndex >= 0;
+        boolean isDatePresent = isSlashesPresent && (firstSlashIndex != secondSlashIndex);
         boolean isTimePresent = colonIndex > 0;
 
         if (!isDatePresent && !isTimePresent) {
@@ -123,25 +126,24 @@ public class DateAndTime {
         }
     }
 
-    private String getTime() throws InvalidDateAndTimeException { //format of hh:mm
+    private String getTime() throws InvalidDateAndTimeException {
         int colonIndex = dateAndTimeFromCommand.indexOf(":");
         int startingIndex = colonIndex - 2;
         int endingIndex = colonIndex + 2;
 
-        if (startingIndex < 0 || endingIndex > dateAndTimeFromCommand.length() - 1) {
+        if (startingIndex < 0 || (endingIndex > dateAndTimeFromCommand.length() - 1)) {
             throw new InvalidDateAndTimeException(Message.MESSAGE_INVALID_TIME);
         }
 
         boolean isTimeFormatValid = isTimeFormatValid(startingIndex, endingIndex);
-
-        if (isTimeFormatValid) {
-            return isTimeValid(startingIndex, endingIndex).toString();
-        } else {
+        if (!isTimeFormatValid) {
             throw new InvalidDateAndTimeException(Message.MESSAGE_INVALID_TIME);
         }
+
+        return isTimeValid(startingIndex, endingIndex).toString();
     }
 
-    private boolean isTimeFormatValid(int start, int end) throws InvalidDateAndTimeException {
+    private boolean isTimeFormatValid(int start, int end) {
         boolean isHourTensValid = Character.isDigit(dateAndTimeFromCommand.charAt(start));
         boolean isHourOnesValid = Character.isDigit(dateAndTimeFromCommand.charAt(start + 1));
         boolean isMinTensValid = Character.isDigit(dateAndTimeFromCommand.charAt(end - 1));
@@ -151,7 +153,7 @@ public class DateAndTime {
     }
 
     private boolean isTimeLengthValid(int start, int end) {
-        if (start == 0) {
+        if (start == 0) { //only time is provided in the command
             return end == dateAndTimeFromCommand.length() - 1;
         } else {
             return Character.isWhitespace(start - 1) && (end == dateAndTimeFromCommand.length() - 1);
@@ -160,13 +162,13 @@ public class DateAndTime {
 
     private LocalTime isTimeValid(int start, int end) throws InvalidDateAndTimeException {
         String timeInput = dateAndTimeFromCommand.substring(start, end + 1);
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm").withResolverStyle(ResolverStyle.STRICT);
-        LocalTime time;
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+                .withResolverStyle(ResolverStyle.STRICT);
         try {
-            time = LocalTime.parse(timeInput, dateTimeFormatter);
+            LocalTime time = LocalTime.parse(timeInput, dateTimeFormatter);
+            return time;
         } catch (DateTimeParseException e) {
             throw new InvalidDateAndTimeException(e.getMessage()); //todo format error message?
         }
-        return time;
     }
 }

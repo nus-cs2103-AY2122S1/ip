@@ -3,7 +3,7 @@ package duke.data.exceptions;
 /**
  * An abstract class DukeException that is a parent to all exceptions pertaining to Duke.
  */
-public abstract class DukeException extends Exception {
+public class DukeException extends Exception {
     /**
      * Initialises a DukeException object.
      *
