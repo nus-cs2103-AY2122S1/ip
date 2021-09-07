@@ -25,6 +25,10 @@ public abstract class Task {
         return isDone ? "X" : " ";
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public String toString() {
         return "[" + this.getStatus() + "] " + this.description;
     }
