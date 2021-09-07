@@ -51,11 +51,11 @@ public class DialogBox extends HBox {
 
     /**
      * Method that returns new DialogBox for the bot.
-     * 
+     *
      * @param text the text that is supposed to be shown
      * @param img the image of the bot
      * @return the user dialogue box back to the GUI interface
-     */ 
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
@@ -72,4 +72,5 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
+    
 }
