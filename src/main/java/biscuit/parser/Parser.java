@@ -31,11 +31,11 @@ public class Parser {
     public static Command parse(String userInput) throws BiscuitException {
         String[] processedInputs = userInput.trim().split("\\s+", 2);
         switch (processedInputs[0]) {
-        case "todo":
+        case "event":
             // Fallthrough
         case "deadline":
             // Fallthrough
-        case "event":
+        case "todo":
             return new AddCommand(processedInputs);
         case "done":
             return new DoneCommand(processedInputs);
@@ -48,7 +48,8 @@ public class Parser {
         case "bye":
             return new ExitCommand(processedInputs);
         default:
-            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! I'm sorry, but I don't know what that means...");
+            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! "
+                    + "I'm sorry, but I don't know what that means...");
         }
     }
 

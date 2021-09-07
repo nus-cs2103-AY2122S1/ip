@@ -31,18 +31,19 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException {
-        if (userInputs.length == 2) {
-            try {
-                Task current = taskList.getTask(Integer.parseInt(userInputs[1]) - 1);
-                current.setDone(true);
-                storage.save();
-                return "Nice! I've marked this task as done, woof!\n\t" + current;
-            } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! Please enter a valid number"
-                        + (taskList.size() == 1 ? " of 1" : " from 1 to " + taskList.size()) + ".");
-            }
-        } else {
-            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! The done task number cannot be empty.");
+        if (userInputs.length < 2) {
+            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! "
+                    + "The done task number cannot be empty.");
+        }
+
+        try {
+            Task current = taskList.getTask(Integer.parseInt(userInputs[1]) - 1);
+            current.setDone(true);
+            storage.save();
+            return "Nice! I've marked this task as done, woof!\n\t" + current;
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! Please enter a valid number"
+                    + (taskList.size() == 1 ? " of 1" : " from 1 to " + taskList.size()) + ".");
         }
     }
 }
