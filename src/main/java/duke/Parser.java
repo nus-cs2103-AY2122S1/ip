@@ -71,94 +71,94 @@ public class Parser {
         }
 
         switch (activity) {
-            case BYE: {
-                storage.setExit();
-                return ui.goodbyeMessageToString();
+        case BYE: {
+            storage.setExit();
+            return ui.goodbyeMessageToString();
+        }
+        case DONE: {
+            int index = Integer.parseInt(command.substring(5)) - 1;
+            Task currentTask = tasks.get(index);
+            currentTask.setDone();
+            storage.save(tasks);
+            return ui.doneMessageToString(currentTask);
+        }
+        case LIST: {
+            return ui.listMessageToString(tasks);
+        }
+        case TODO: {
+            String desc = command.substring(4);
+
+            if (desc.isEmpty()) {
+                throw new DukeException("todo", "'todo borrow book'");
             }
-            case DONE: {
-                int index = Integer.parseInt(command.substring(5)) - 1;
-                Task currentTask = tasks.get(index);
-                currentTask.setDone();
-                storage.save(tasks);
-                return ui.doneMessageToString(currentTask);
+            assert desc.substring(1).length() > 0 : "Description should be present";
+            ToDo toDo = new ToDo(command.substring(5));
+            tasks.add(toDo);
+            storage.save(tasks);
+            return ui.taskMessageToString(toDo, tasks);
+        }
+        case EVENT: {
+            String desc = command.substring(5);
+
+            if (desc.isEmpty()) {
+                throw new DukeException("event", "'event project meeting /at Aug 26 2021 19:15'");
             }
-            case LIST: {
-                return ui.listMessageToString(tasks);
+            assert desc.substring(1).length() > 0 : "Description should be present";
+            int escapeIndex = command.lastIndexOf("/");
+            String dateAndTime = command.substring(escapeIndex + 4);
+            Event event = new Event(command.substring(6, escapeIndex - 1), dateAndTime);
+            tasks.add(event);
+            storage.save(tasks);
+            return ui.taskMessageToString(event, tasks);
+        }
+        case DELETE: {
+            int index = Integer.parseInt(command.substring(7)) - 1;
+            assert index <= tasks.size() : "Index out of bounds";
+
+            if (index >= tasks.size()) {
+                throw new DeleteException();
             }
-            case TODO: {
-                String desc = command.substring(4);
+            Task currentTask = tasks.get(index);
+            tasks.remove(index);
+            storage.save(tasks);
+            return ui.deleteMessageToString(currentTask, tasks);
+        }
+        case DEADLINE: {
+            String desc = command.substring(8);
 
-                if (desc.isEmpty()) {
-                    throw new DukeException("todo", "'todo borrow book'");
-                }
-
-                ToDo toDo = new ToDo(command.substring(5));
-                tasks.add(toDo);
-                storage.save(tasks);
-                return ui.taskMessageToString(toDo, tasks);
+            if (desc.isEmpty()) {
+                throw new DukeException("deadline", "'deadline return book /by 2021-08-27 14:15'");
             }
-            case EVENT: {
-                String desc = command.substring(5);
+            assert desc.substring(1).length() > 0 : "Description should be present";
+            int escapeIndex = command.lastIndexOf("/");
+            String dateAndTime = command.substring(escapeIndex + 4);
+            Deadline deadline = new Deadline(command.substring(9, escapeIndex - 1), dateAndTime);
+            tasks.add(deadline);
+            storage.save(tasks);
+            return ui.taskMessageToString(deadline, tasks);
+        }
+        case FIND: {
+            TaskList matchingTasks = new TaskList();
 
-                if (desc.isEmpty()) {
-                    throw new DukeException("event", "'event project meeting /at Aug 26 2021 19:15'");
-                }
-
-                int escapeIndex = command.lastIndexOf("/");
-                String dateAndTime = command.substring(escapeIndex + 4);
-                Event event = new Event(command.substring(6, escapeIndex - 1), dateAndTime);
-                tasks.add(event);
-                storage.save(tasks);
-                return ui.taskMessageToString(event, tasks);
+            String desc = command.substring(4);
+            if (desc.isEmpty()) {
+                throw new FindException();
             }
-            case DELETE: {
-                int index = Integer.parseInt(command.substring(7)) - 1;
-
-                if (index >= tasks.size()) {
-                    throw new DeleteException();
-                }
-
-                Task currentTask = tasks.get(index);
-                tasks.remove(index);
-                storage.save(tasks);
-                return ui.deleteMessageToString(currentTask, tasks);
-            }
-            case DEADLINE: {
-                String desc = command.substring(8);
-
-                if (desc.isEmpty()) {
-                    throw new DukeException("deadline", "'deadline return book /by 2021-08-27 14:15'");
-                }
-
-                int escapeIndex = command.lastIndexOf("/");
-                String dateAndTime = command.substring(escapeIndex + 4);
-                Deadline deadline = new Deadline(command.substring(9, escapeIndex - 1), dateAndTime);
-                tasks.add(deadline);
-                storage.save(tasks);
-                return ui.taskMessageToString(deadline, tasks);
-            }
-            case FIND: {
-                TaskList matchingTasks = new TaskList();
-                String desc = command.substring(4);
-
-                if (desc.isEmpty()) {
-                    throw new FindException();
-                }
-
-                for (Task t : tasks) {
-                    if (t.toString().contains(desc)) {
-                        matchingTasks.add(t);
-                    }
-                }
-                if (matchingTasks.isEmpty()) {
-                    return ui.nothingFoundMessageToString();
-                } else {
-                    return ui.listMessageToString("matching", matchingTasks);
+            assert desc.substring(1).length() > 0 : "Description should be present";
+            for (Task t : tasks) {
+                if (t.toString().contains(desc)) {
+                    matchingTasks.add(t);
                 }
             }
-            default: {
-                return ui.unknownMessageToString();
+            if (matchingTasks.isEmpty()) {
+                return ui.nothingFoundMessageToString();
+            } else {
+                return ui.listMessageToString("matching", matchingTasks);
             }
+        }
+        default: {
+            return ui.unknownMessageToString();
+        }
         }
     }
 }

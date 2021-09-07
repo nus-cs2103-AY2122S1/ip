@@ -2,8 +2,8 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -29,6 +29,7 @@ public class Duke extends Application {
         } catch (FileNotFoundException e) {
             tasks = new TaskList();
         }
+        assert tasks != null : "Task should not be null";
     }
 
     /**
