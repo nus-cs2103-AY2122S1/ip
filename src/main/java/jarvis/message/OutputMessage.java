@@ -12,6 +12,7 @@ public class OutputMessage {
      * @param message A custom message.
      */
     public OutputMessage(String message) {
+        assert !message.equals(""): "Output message is empty";
         this.message = message;
     }
 

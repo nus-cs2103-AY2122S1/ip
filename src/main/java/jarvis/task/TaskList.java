@@ -65,6 +65,7 @@ public class TaskList {
      * @return The task that was marked as done
      */
     public Task markAsDone(int index) {
+        assert index >= 0 && index < taskList.size(): "Task index out of bounds";
         Task task = taskList.get(index);
         task.markAsDone();
         return task;
@@ -77,6 +78,7 @@ public class TaskList {
      * @return The task that was deleted
      */
     public Task deleteTask(int index) {
+        assert index >= 0 && index < taskList.size(): "Task index out of bounds";
         return taskList.remove(index);
     }
 
