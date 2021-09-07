@@ -27,7 +27,7 @@ public class DisplayBuffer {
      * @param texts Variable Number of strings to add to buffer
      */
     public static void addToBuffer(String... texts) {
-        for (String text: texts) {
+        Arrays.stream(texts).sequential().forEach(text -> {
             text = text.replaceAll("[\t]", " ");
             text = text.replace(UI.COLOR_BLUE, "");
             text = text.replace(UI.COLOR_PURPLE, "");
@@ -36,7 +36,7 @@ public class DisplayBuffer {
             text = text.replace(UI.COLOR_RED, "");
             charCount += text.length();
             buffer.addAll(Arrays.asList(text.split("\n")));
-        }
+        });
     }
 
     /***
