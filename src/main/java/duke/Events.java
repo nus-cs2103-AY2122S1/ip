@@ -32,11 +32,11 @@ public class Events extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+        String prefix = "[E] [ ] ";
         if (super.isDone()) {
-            return ("[E] [X] " + super.getName() + " (at: " + time.format(formatter) + ")");
-        } else {
-            return ("[E] [ ] " + super.getName() + " (at: " + time.format(formatter) + ")");
+            prefix = "[E] [X] ";
         }
+        return (prefix + super.getName() + " (at: " + time.format(formatter) + ")");
     }
 
     /**
@@ -47,12 +47,12 @@ public class Events extends Task {
      */
     public String toDataString() {
         StringBuilder string = new StringBuilder();
+        String prefix = "E|0|";
         if (super.isDone()) {
-            string.append("E|1|").append(super.getName()).append("|").append(time);
-            return string.toString();
-        } else {
-            string.append("E|0|").append(super.getName()).append("|").append(time);
-            return string.toString();
+            prefix = "E|1|";
         }
+        string.append(prefix).append(super.getName()).append("|").append(time);
+        return string.toString();
     }
+
 }

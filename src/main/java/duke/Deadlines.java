@@ -32,11 +32,11 @@ public class Deadlines extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+        String prefix = "[D] [ ] ";
         if (super.isDone()) {
-            return ("[D] [X] " + super.getName() + " (at: " + deadline.format(formatter) + ")");
-        } else {
-            return ("[D] [ ] " + super.getName() + " (at: " + deadline.format(formatter) + ")");
+            prefix = "[D] [X] ";
         }
+        return prefix + super.getName() + " (at: " + deadline.format(formatter) + ")";
     }
 
     /**
@@ -47,12 +47,12 @@ public class Deadlines extends Task {
      */
     public String toDataString() {
         StringBuilder string = new StringBuilder();
+        String prefix = "D|0|";
         if (super.isDone()) {
-            string.append("D|1|").append(super.getName()).append("|").append(deadline);
-            return string.toString();
-        } else {
-            string.append("D|0|").append(super.getName()).append("|").append(deadline);
-            return string.toString();
+            prefix = "D|1|";
         }
+        string.append(prefix).append(super.getName()).append("|").append(deadline);
+        return string.toString();
     }
+
 }
