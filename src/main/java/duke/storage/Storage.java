@@ -46,6 +46,7 @@ public class Storage {
      * @param filePath The specified file path of the txt file.
      */
     public Storage(String filePath) {
+        assert !filePath.isEmpty() : "file path should not be empty";
         this.path = Paths.get(filePath);
     }
 
@@ -60,6 +61,7 @@ public class Storage {
         if (!Files.exists(path)) {
             Files.createDirectories(path.getParent()); // create /data/ directory if it does not exist
             Files.createFile(path);
+            assert Files.exists(path) : "file should be created at the specified directory";
             return new TaskList();
         }
 
