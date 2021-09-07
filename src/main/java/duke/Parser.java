@@ -1,7 +1,5 @@
 package duke;
 
-// import duke.TaskList;
-
 public class Parser {
 
     public TaskList tasks;

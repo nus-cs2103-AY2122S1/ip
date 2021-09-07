@@ -7,10 +7,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//import duke.Storage;
-//import duke.Task;
-//import duke.TaskList;
-
 public class Storage {
 
     protected String filepath;
@@ -74,7 +70,11 @@ public class Storage {
             }
         }
 
-        String result = "Here are the tasks saved: \n";
+        if (counter == 0) {
+            return "Great job! You have no tasks saved!";
+        }
+
+        String result = "Here are the tasks previously saved: \n";
         for (int i = 0; i < counter; i++) {
 
             Task currTask = tasks.tasks.get(i);
