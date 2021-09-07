@@ -13,13 +13,63 @@ import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.Task;
 import duke.task.ToDo;
 
 /**
  * Represents the parser that is used to parse the user's commands.
  */
 public class Parser {
+
+    private ToDo parseCommandToToDo(String cmd) {
+        return new ToDo(cmd.substring(5).trim(), false);
+    }
+
+    private Deadline parseCommandToDeadline(String cmd) throws DukeException {
+        try {
+            String[] splitText = cmd.substring(9).split(" /by ");
+            return new Deadline(splitText[0].trim(), LocalDate.parse(splitText[1]), false);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Sorry Boss, please enter your date in the YYYY-MM-DD format.");
+        }
+    }
+
+    private Event parseCommandToEvent(String cmd) throws DukeException {
+        try {
+            String[] splitText = cmd.substring(6).split(" /at ");
+            return new Event(splitText[0].trim(), LocalDate.parse(splitText[1]), false);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Sorry Boss, please enter your date in the YYYY-MM-DD format.");
+        }
+    }
+
+    private Command parseTaskCommand(String cmd) throws DukeException {
+        if (cmd.matches("^deadline\\s.*\\s/by\\s\\d{4}-\\d{2}-\\d{2}$")) {
+            return new AddCommand(parseCommandToDeadline(cmd));
+        } else if (cmd.matches("^event\\s.*\\s/at\\s\\d{4}-\\d{2}-\\d{2}$")) {
+            return new AddCommand(parseCommandToEvent(cmd));
+        } else if (cmd.matches("^todo\\s*$")) {
+            throw new DukeException("Sorry Boss, todo must be followed with a description.");
+        } else if (cmd.matches("^todo\\s.*$")) {
+            return new AddCommand(parseCommandToToDo(cmd));
+        } else {
+            throw new DukeException("I cannot understand the command");
+        }
+    }
+
+    private Command parseSpecialCommand(String cmd) throws DukeException {
+        if (cmd.matches("^done\\s\\d+$")) {
+            int serialNo = Integer.parseInt(cmd.substring(5));
+            return new DoneCommand(serialNo);
+        } else if (cmd.matches("^delete\\s\\d+$")) {
+            int serialNum = Integer.parseInt(cmd.split(" ")[1]);
+            return new DeleteCommand(serialNum);
+        } else if (cmd.matches("^find\\s.*$")) {
+            return new FindCommand(cmd.split(" ")[1]);
+        } else {
+            throw new DukeException("Sorry Boss, I cannot understand the command.");
+        }
+    }
+
     /**
      * Returns a command after parsing the given command string.
      *
@@ -28,37 +78,16 @@ public class Parser {
      * @throws DukeException when the given command string cannot be parsed.
      */
     public Command parse(String cmd) throws DukeException {
-        try {
-            if (cmd.equals("bye")) {
-                return new ByeCommand();
-            } else if (cmd.equals("list")) {
-                return new ListCommand();
-            } else if (cmd.matches("^done\\s\\d+$")) {
-                int serialNo = Integer.parseInt(cmd.substring(5));
-                return new DoneCommand(serialNo);
-            } else if (cmd.matches("^deadline\\s.*\\s/by\\s\\d{4}-\\d{2}-\\d{2}$")) {
-                String[] splitText = cmd.substring(9).split(" /by ");
-                Task task = new Deadline(splitText[0].trim(), LocalDate.parse(splitText[1]), false);
-                return new AddCommand(task);
-            } else if (cmd.matches("^event\\s.*\\s/at\\s\\d{4}-\\d{2}-\\d{2}$")) {
-                String[] splitText = cmd.substring(6).split(" /at ");
-                Task task = new Event(splitText[0].trim(), LocalDate.parse(splitText[1]), false);
-                return new AddCommand(task);
-            } else if (cmd.matches("^todo\\s*$")) {
-                throw new DukeException("Sorry Boss, todo must be followed with a description.");
-            } else if (cmd.matches("^todo\\s.*$")) {
-                Task task = new ToDo(cmd.substring(5).trim(), false);
-                return new AddCommand(task);
-            } else if (cmd.matches("^delete\\s\\d+$")) {
-                int serialNum = Integer.parseInt(cmd.split(" ")[1]);
-                return new DeleteCommand(serialNum);
-            } else if (cmd.matches("^find\\s.*$")) {
-                return new FindCommand(cmd.split(" ")[1]);
-            } else {
-                throw new DukeException("Sorry Boss, I cannot understand the command.");
-            }
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Sorry Boss, please enter your date in the YYYY-MM-DD format.");
+        if (cmd.startsWith("todo") || cmd.startsWith("deadline") || cmd.startsWith("event")) {
+            return parseTaskCommand(cmd);
+        } else if (cmd.startsWith("done") || cmd.startsWith("delete") || cmd.startsWith("find")) {
+            return parseSpecialCommand(cmd);
+        } else if (cmd.equals("bye")) {
+            return new ByeCommand();
+        } else if (cmd.equals("list")) {
+            return new ListCommand();
+        } else {
+            throw new DukeException("Sorry Boss, I cannot understand the command.");
         }
     }
 }
