@@ -5,6 +5,7 @@ import java.util.ArrayList;
 /**
  * Implements a TaskList object that contains an ArrayList of all the tasks.
  */
+@SuppressWarnings("checkstyle:Regexp")
 public class TaskList {
     private final ArrayList<Task> tasks;
 
@@ -82,7 +83,10 @@ public class TaskList {
      */
     public String handleTodo(String input, Storage storage, Ui ui) throws DukeException {
         try {
-            Todo todo = new Todo(input.substring(5));
+            int tagIndex = locateTag(input);
+            Todo todo = tagIndex == -1
+                    ? new Todo(input.substring(5))
+                    : new Todo(input.substring(5, tagIndex - 1), input.substring(tagIndex));
             return add(todo, storage, ui);
         } catch (StringIndexOutOfBoundsException err) {
             throw new DukeException("u never say what to do?");
@@ -100,7 +104,11 @@ public class TaskList {
     public String handleDeadline(String input, Storage storage, Ui ui) throws DukeException {
         try {
             int split = input.indexOf("/");
-            Deadline deadline = new Deadline(input.substring(9, split - 1), input.substring(split + 4));
+            int tagIndex = locateTag(input);
+            Deadline deadline = tagIndex == -1
+                    ? new Deadline(input.substring(9, split - 1), input.substring(split + 4))
+                    : new Deadline(input.substring(9, split - 1), input.substring(split + 4, tagIndex - 1),
+                    input.substring(tagIndex));
             return add(deadline, storage, ui);
         } catch (StringIndexOutOfBoundsException err) {
             throw new DukeException("this one by when ah? can do it liddis or not: 'deadline task /by when'");
@@ -118,7 +126,11 @@ public class TaskList {
     public String handleEvent(String input, Storage storage, Ui ui) throws DukeException {
         try {
             int split = input.indexOf("/");
-            Event event = new Event(input.substring(6, split - 1), input.substring(split + 4));
+            int tagIndex = locateTag(input);
+            Event event = tagIndex == -1
+                    ? new Event(input.substring(6, split - 1), input.substring(split + 4))
+                    : new Event(input.substring(6, split - 1), input.substring(split + 4, tagIndex - 1),
+                    input.substring(tagIndex));
             return add(event, storage, ui);
         } catch (StringIndexOutOfBoundsException err) {
             throw new DukeException("this one when ah? can do it liddis or not: 'event task /at when'");
@@ -159,10 +171,14 @@ public class TaskList {
         String keyword = input.substring(5);
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task : tasks) {
-            if (task.getDescription().contains(keyword)) {
+            if (task.getDescription().contains(keyword) || task.getTag().contains(keyword)) {
                 matchingTasks.add(task);
             }
         }
         return ui.displayMatchingList(new TaskList(matchingTasks));
+    }
+
+    private int locateTag(String input) {
+        return input.indexOf('#');
     }
 }

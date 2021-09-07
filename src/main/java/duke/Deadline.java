@@ -19,6 +19,17 @@ public class Deadline extends Task {
         this.dateTime = convert(dateTime);
     }
 
+    /**
+     * Constructs a Deadline object.
+     * @param description Description of the deadline.
+     * @param dateTime Due date and time.
+     * @param tag Tag associated with the deadline.
+     */
+    public Deadline(String description, String dateTime, String tag) {
+        super(description, tag);
+        this.dateTime = convert(dateTime);
+    }
+
     private LocalDateTime convert(String dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
         return LocalDateTime.parse(dateTime, formatter);
@@ -30,7 +41,10 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D][" + this.getStatusIcon() + "] " + this.getDescription() + " (by: "
-                + this.dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yy HH:mm")) + ")";
+        return this.getTag().isEmpty()
+                ? "[D][" + this.getStatusIcon() + "] " + this.getDescription() + " (by: "
+                + this.dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yy HH:mm")) + ")"
+                : "[D][" + this.getStatusIcon() + "] " + this.getDescription() + " (by: "
+                + this.dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yy HH:mm")) + ") " + this.getTag();
     }
 }
