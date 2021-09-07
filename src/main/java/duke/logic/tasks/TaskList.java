@@ -44,6 +44,7 @@ public class TaskList {
      * @return The deleted task.
      */
     public Task delete(int taskNo) {
+        assert taskNo <= list.size() && taskNo > 0 : "Task number to be deleted out of bounds";
         return list.remove(--taskNo);
     }
 
@@ -63,6 +64,7 @@ public class TaskList {
      * @return The task at the index given.
      */
     public Task get(int taskNo) {
+        assert taskNo <= list.size() && taskNo > 0 : "Task number to be retrieved out of bounds";
         return list.get(--taskNo);
     }
 
@@ -84,6 +86,7 @@ public class TaskList {
      * @return A list of resulting tasks.
      */
     public List<Task> find(String[] keywords) {
+        assert keywords.length > 0;
         Stream<String> searchWords = Arrays.stream(keywords);
         return list.stream()
                 .filter(task -> searchWords.anyMatch(task::containsKeyword))

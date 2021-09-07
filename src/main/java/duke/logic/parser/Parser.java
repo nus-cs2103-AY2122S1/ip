@@ -69,6 +69,7 @@ public class Parser {
      * @return The prepared command.
      */
     private Command handleBye(String[] tokens) {
+        assert tokens.length > 0;
         if (tokens.length > 1) {
             return new InvalidCommand("Unknown command! Did you mean 'bye'?");
         }
@@ -82,6 +83,7 @@ public class Parser {
      * @return The prepared command.
      */
     private Command handleList(String[] tokens) {
+        assert tokens.length > 0;
         if (tokens.length > 1) {
             return new InvalidCommand("Unknown command! Did you mean 'list'?");
         }
@@ -95,6 +97,7 @@ public class Parser {
      * @return The prepared command.
      */
     private Command handleDone(String[] tokens) {
+        assert tokens.length > 0;
         if (tokens.length < 2) {
             return new InvalidCommand("Which task would you like to mark as done?");
         }
@@ -113,6 +116,7 @@ public class Parser {
      * @return The prepared command.
      */
     private Command handleDelete(String[] tokens) {
+        assert tokens.length > 0;
         if (tokens.length < 2) {
             return new InvalidCommand("Which task would you like to delete?");
         }
@@ -131,6 +135,7 @@ public class Parser {
      * @return The prepared command.
      */
     private Command handleToDo(String[] tokens) {
+        assert tokens.length > 0;
         if (tokens.length < 2) {
             return new InvalidCommand("The description of a todo cannot be empty.");
         }
@@ -144,6 +149,7 @@ public class Parser {
      * @return The prepared command.
      */
     private Command handleDeadline(String[] tokens) {
+        assert tokens.length > 0;
         if (tokens.length < 2) {
             return new InvalidCommand("The description of a deadline cannot be empty.");
         }
@@ -166,6 +172,7 @@ public class Parser {
      * @return The prepared command.
      */
     private Command handleEvent(String[] tokens) {
+        assert tokens.length > 0;
         if (tokens.length < 2) {
             return new InvalidCommand("The description of an event cannot be empty.");
         }
@@ -194,6 +201,7 @@ public class Parser {
      * @return The prepared command.
      */
     private Command handleFind(String[] tokens) {
+        assert tokens.length > 0;
         if (tokens.length < 2) {
             return new InvalidCommand("What would you like to find? Separate your keywords with a space.");
         }
