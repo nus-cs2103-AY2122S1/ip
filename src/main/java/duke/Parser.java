@@ -20,7 +20,9 @@ public class Parser {
      */
     public static String runCommand(TaskList tasks, Storage storage, String input) throws Exception {
         var parameters = input.split(" ");
+        assert parameters.length > 0;
         var command = parameters[0];
+
         if (command.equals("list") && parameters.length == 1) {
             return Duke.renderTaskList(tasks);
         } else if (command.equals("done") && parameters.length == 2) {
@@ -87,9 +89,11 @@ public class Parser {
             return new Todo(taskLine);
         case DEADLINE:
             String[] deadlineParts = taskLine.split("\\s+/by\\s+", 2);
+            assert deadlineParts.length == 2;
             return new Deadline(deadlineParts[0], LocalDate.parse(deadlineParts[1]));
         case EVENT:
             String[] eventParts = taskLine.split("\\s+/at\\s+", 2);
+            assert eventParts.length == 2;
             return new Event(eventParts[0], LocalDate.parse(eventParts[1]));
         default:
             throw new UnsupportedOperationException("task type is not a valid enum value");
