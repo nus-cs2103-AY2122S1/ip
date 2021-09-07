@@ -10,6 +10,14 @@ import duke.util.TaskList;
  * Command that contains details when user inputs Bye
  */
 public class HelpCommand extends Command{
+    private final String helpMessage = "Viewing help : help \n" + "Listing all task : list \n"
+            + "Adding a task: todo [task details] \n"
+            + "Completing a task: done [listNo]\n"
+            + "Search task by keyword: find [keyword] \n"
+            + "Deleting a person : delete  [listNo] \n"
+            + "Exiting the program : bye";
+
+
     /**
      * Basic Constructor
      *
@@ -22,14 +30,6 @@ public class HelpCommand extends Command{
 
     @Override
     public String exec() throws DukeException {
-
-        String help = "Viewing help : help \n" + "Listing all task : list \n"
-                + "Adding a task: todo [task details] \n"
-                + "Completing a task: done [listNo]\n"
-                + "Search task by keyword: find [keyword] \n"
-                + "Deleting a person : delete  [listNo] \n"
-                + "Exiting the program : bye";
-
-        return help;
+        return helpMessage;
     }
 }

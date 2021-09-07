@@ -9,6 +9,8 @@ import duke.util.TaskList;
  * Command that duke executes to end the the program
  */
 public class ByeCommand extends Command{
+    private final String exitMessage = "Bye. Hope to see you again soon!";
+
     /**
      * Basic Constructor
      *
@@ -21,6 +23,6 @@ public class ByeCommand extends Command{
 
     @Override
     public String exec() throws DukeException {
-        return "Bye. Hope to see you again soon!";
+        return exitMessage;
     }
 }

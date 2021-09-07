@@ -13,6 +13,7 @@ import duke.util.TaskList;
 public class DoneCommand extends Command {
 
     private final String taskChosen;
+    private final String successMessage = "Nice! I've marked this task as done:";
 
     /**
      * Basic Constructor
@@ -35,8 +36,8 @@ public class DoneCommand extends Command {
     @Override
     public String exec() throws DukeException {
         Task doneTask = taskList.done(taskChosen);
-        storage.saveUpdate(taskList);
-        return doneMsg(doneTask);
+        storage.saveUpdateTask(taskList);
+        return successfullyCompletedTask(doneTask);
     }
 
     /**
@@ -45,10 +46,9 @@ public class DoneCommand extends Command {
      * @param task
      * @return
      */
-    private String doneMsg(Task task) {
-        String msg = task.toString();
-        String dukeAdded = "Nice! I've marked this task as done:" + msg;
-        return dukeAdded;
+    private String successfullyCompletedTask(Task task) {
+        String taskDetails = task.toString();
+        return successMessage + taskDetails;
     }
 
 }

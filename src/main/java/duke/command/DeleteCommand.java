@@ -32,9 +32,9 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String exec() throws DukeException {
-        Task deleteSuccess = taskList.delete(taskNumber);
-        storage.saveUpdate(taskList);
-        return taskDeleted(deleteSuccess);
+        Task deletedTask = taskList.delete(taskNumber);
+        storage.saveUpdateTask(taskList);
+        return successfullyDeletedTask(deletedTask);
     }
 
     /**
@@ -43,12 +43,14 @@ public class DeleteCommand extends Command {
      * @param task
      * @return String successful delete message
      */
-    private String taskDeleted(Task task) {
-        String msg = task.toString();
+    private String successfullyDeletedTask(Task task) {
+        String taskDetails = task.toString();
         int taskLeft = taskList.taskLeft();
-        String dukeAddedTask = "Noted. I've removed this task:\n " + msg
-                + "\nNow you have " + taskLeft + " tasks " + "in the list.";
+        return successMessage(taskDetails, taskLeft);
+    }
 
-        return dukeAddedTask;
+    private String successMessage(String taskDetails, int taskLeft) {
+        return "Noted. I've removed this task:\n " + taskDetails
+                + "\nNow you have " + taskLeft + " tasks " + "in the list.";
     }
 }
