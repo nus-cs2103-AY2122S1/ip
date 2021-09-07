@@ -68,9 +68,9 @@ public class TaskList {
      * @return delete message for bot.
      */
     public String delete(int index) {
-        Task removed = records.remove(index);
+        Task removedTask = records.remove(index);
         return String.format("Noted! I've removed this Duke.Duke.task:\n\t %1$s\n\t" +
-                "Now you have %2$d tasks in the list.\n\t", removed.toString(), records.size());
+                "Now you have %2$d tasks in the list.\n\t", removedTask.toString(), records.size());
     }
 
     //list

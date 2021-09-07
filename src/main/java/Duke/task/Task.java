@@ -24,11 +24,11 @@ public abstract class Task {
      * @return "X" if isDone true.
      */
     public String getStatusIcon() {
-        return (isDone? "X" : " ");
+        return isDone? "X" : " ";
     }
 
     /**
-     * Mark Duke.Duke.task as done.
+     * Marks Duke.Duke.task as done.
      */
     public void markAsDone() {
         isDone = true;

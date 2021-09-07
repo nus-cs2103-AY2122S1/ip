@@ -131,7 +131,7 @@ public class Duke extends Application {
      * Starts the bot.
      */
     public void start() {
-        Ui.greeting();
+        Ui.greet();
 
         Scanner scanner = new Scanner(System.in);
         String input;

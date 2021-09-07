@@ -15,7 +15,7 @@ public class Ui {
     /**
      * Prints greeting message for bot.
      */
-    public static void greeting() {
+    public static void greet() {
         String greet = "Hihi! This is halp! \n\tHow can I help?\n\t";
         System.out.println(format(greet));
     }
