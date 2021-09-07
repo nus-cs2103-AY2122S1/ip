@@ -16,15 +16,17 @@ import java.util.Scanner;
  * Stores and retrieves information of the tasklist for Duke.
  */
 public class Storage {
-    private final String FILE_PATH;
+    private final String TASKLIST_FILE_PATH;
     private final String DIR_PATH;
+    private final String ARCHIVELIST_FILE_PATH;
 
     /**
      * Constructor for Storage.
      */
     public Storage() {
-        this.FILE_PATH = "data" + File.separator + "history.txt";
+        this.TASKLIST_FILE_PATH = "data" + File.separator + "history.txt";
         this.DIR_PATH = "data";
+        this.ARCHIVELIST_FILE_PATH = "data" + File.separator + "archive.txt";
     }
 
     /**
@@ -34,7 +36,43 @@ public class Storage {
      */
     public ArrayList<Task> initialise() {
         //read from the data/history.text and return an ArrayList of Tasks
-        File file = new File(FILE_PATH);
+        File file = new File(TASKLIST_FILE_PATH);
+
+        try {
+            Scanner s = new Scanner(file);
+            ArrayList<Task> output = new ArrayList<>();
+
+            while (s.hasNext()) {
+                String task = s.nextLine();
+                String[] splitTask = task.split("\\|");
+
+                if (splitTask[0].equals("T")) {
+                    // it is todotask
+                    initialiseToDo(output, splitTask);
+                } else if (splitTask[0].equals("E")) {
+                    // event
+                    initialiseEvent(output, splitTask);
+                } else if (splitTask[0].equals("D")) {
+                    // deadline
+                    initialiseDeadline(output, splitTask);
+                }
+
+            }
+
+            return output;
+        } catch (FileNotFoundException e) {
+            return new ArrayList<>();
+        }
+    }
+
+    /**
+     * Initialises the ArrayList for the archiveList of Duke.
+     *
+     * @return ArrayList of the archiveList.
+     */
+    public ArrayList<Task> initialiseArchive() {
+        //read from the data/history.text and return an ArrayList of Tasks
+        File file = new File(ARCHIVELIST_FILE_PATH);
 
         try {
             Scanner s = new Scanner(file);
@@ -118,7 +156,7 @@ public class Storage {
      */
     public void saveFile(TaskList taskList) {
         try {
-            FileWriter fw = new FileWriter(FILE_PATH);
+            FileWriter fw = new FileWriter(TASKLIST_FILE_PATH);
 
             String textToAdd = convertTaskListToSaveForm(taskList);
 
@@ -136,19 +174,43 @@ public class Storage {
     }
 
     /**
-     * Converts taskList into a text form which can be saved.
+     * Saves the archiveList given by Duke into user's computer.
      *
-     * @param taskList taskList to be saved.
-     * @return Text form of taskList to be saved.
+     * @param archiveList ArchiveList to be saved into user's computer.
      */
-    private String convertTaskListToSaveForm(TaskList taskList) {
+    public void saveArchive(ArchiveList archiveList) {
+        try {
+            FileWriter fw = new FileWriter(ARCHIVELIST_FILE_PATH);
+
+            String textToAdd = convertTaskListToSaveForm(archiveList);
+
+            fw.write(textToAdd);
+            fw.close();
+        } catch (IOException e) {
+            File file = new File(DIR_PATH);
+
+            if (file.mkdir()) {
+                saveArchive(archiveList);
+            } else {
+                System.out.println("Failed to create file");
+            }
+        }
+    }
+
+    /**
+     * Converts dukeList into a text form which can be saved.
+     *
+     * @param dukeList dukeList to be saved.
+     * @return Text form of dukeList to be saved.
+     */
+    private String convertTaskListToSaveForm(DukeList dukeList) {
         String textToAdd = "";
 
-        for (int i = 0; i < taskList.getSize(); i++) {
+        for (int i = 0; i < dukeList.getSize(); i++) {
             if (i == 0) {
-                textToAdd += taskList.taskSaveToString(i);
+                textToAdd += dukeList.taskSaveToString(i);
             } else {
-                textToAdd += "\n" + taskList.taskSaveToString(i);
+                textToAdd += "\n" + dukeList.taskSaveToString(i);
             }
         }
 
