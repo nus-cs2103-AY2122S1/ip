@@ -34,7 +34,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * String representation of a Deadline task for storage.
+     * String representation of a Deadline task for brobot.storage.
      *
      * @return Deadline task in String(Storage format).
      */

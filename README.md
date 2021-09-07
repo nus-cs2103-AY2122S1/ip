@@ -28,9 +28,9 @@ If you Java programmer, you can use it to practice Java too. Here's the `main` m
 public class Brobot {
     public static void main(String[] args) {
 
-            Storage storage = new Storage("./data/list1.txt");
-            TaskList list = storage.readList();
-            BroParser parser = new BroParser(list, storage);
+            Storage brobot.storage = new Storage("./data/list1.txt");
+            TaskList list = brobot.storage.readList();
+            BroParser parser = new BroParser(list, brobot.storage);
 
             UI.printGreeting();
             String input = UI.getUserInput();

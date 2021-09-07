@@ -1,4 +1,4 @@
-package brobot;
+package brobot.storage;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import brobot.*;
 import brobot.task.Deadline;
 import brobot.task.Event;
 import brobot.task.Task;
@@ -15,7 +16,7 @@ import brobot.task.Todo;
 
 
 /**
- * Represents the storage of the Brobot Program. Provides methods to handle the storage.
+ * Represents the brobot.storage of the Brobot Program. Provides methods to handle the brobot.storage.
  */
 public class Storage {
     private String defaultDataFilePath;
@@ -84,8 +85,8 @@ public class Storage {
     }
 
     /**
-     * Getter method for the current storage file for when storage change fails.
-     * @return the current storage file
+     * Getter method for the current brobot.storage file for when brobot.storage change fails.
+     * @return the current brobot.storage file
      */
     public File getCurrentFile() {
         return dataFile;
@@ -106,7 +107,7 @@ public class Storage {
         dataFile.renameTo(new File(defaultDataFilePath));
     }
     /**
-     * Reads the list from the storage file and translates it into a TaskList object.
+     * Reads the list from the brobot.storage file and translates it into a TaskList object.
      *
      * @return A TaskList.
      */
@@ -126,7 +127,7 @@ public class Storage {
     }
 
     /**
-     * Parse a single task in storage format and adds it into the task list.
+     * Parse a single task in brobot.storage format and adds it into the task list.
      * @param singleTask The task to be parsed
      * @param list The list to add the task into
      */
@@ -166,7 +167,7 @@ public class Storage {
     }
 
     /**
-     * Writes a TaskList object into the storage file.
+     * Writes a TaskList object into the brobot.storage file.
      *
      * @param list The TaskList to be written into the file.
      */

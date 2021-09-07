@@ -110,9 +110,9 @@ public class TaskList {
     }
 
     /**
-     * String representation of the task list for storage.
+     * String representation of the task list for brobot.storage.
      *
-     * @return String representation of the task list(storage format).
+     * @return String representation of the task list(brobot.storage format).
      */
     public String toStorageString() {
         StringBuilder s = new StringBuilder();

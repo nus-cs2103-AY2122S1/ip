@@ -55,7 +55,7 @@ public class Task {
     }
 
     /**
-     * String representation of a task for storage.
+     * String representation of a task for brobot.storage.
      *
      * @return Task in String(Storage format).
      */

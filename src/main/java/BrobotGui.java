@@ -1,4 +1,4 @@
-import brobot.Storage;
+import brobot.storage.Storage;
 import brobot.UI;
 import brobot.customcontrol.DialogBox;
 import brobot.exception.BroException;

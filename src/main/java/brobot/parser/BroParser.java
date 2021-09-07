@@ -6,8 +6,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Scanner;
 
-import brobot.DemoJFileChooser;
-import brobot.Storage;
+import brobot.storage.DemoJFileChooser;
+import brobot.storage.Storage;
 import brobot.UI;
 import brobot.exception.BroException;
 import brobot.exception.InvalidCommandException;
@@ -34,7 +34,7 @@ public class BroParser {
      * Constructor.
      *
      * @param list    The list to handle.
-     * @param storage The storage to handle.
+     * @param storage The brobot.storage to handle.
      */
     public BroParser(TaskList list, Storage storage) {
         this.list = list;
@@ -223,9 +223,9 @@ public class BroParser {
 
     /**
      * Handler for Storage Command.
-     * Changes the storage file directory to the one selected.
+     * Changes the brobot.storage file directory to the one selected.
      * @param inputScanner Command Parameters(if any).
-     * @return Message for storage command
+     * @return Message for brobot.storage command
      * @throws InvalidCommandParameterException Exception that represents an invalid parameter error for the
      * inputted command
      */
