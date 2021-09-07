@@ -33,9 +33,6 @@ public class Storage {
     /** Represents the todo keyword. */
     private final char TODO = 'T';
 
-    /** Path to data file. */
-    private final String filePath;
-
     /** Data file. */
     private final File file;
 

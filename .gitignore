@@ -18,3 +18,7 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 # Java class files
 *.class
+
+# Test outputs
+/data.txt
+/data/duke.txt
