@@ -11,7 +11,7 @@ import catobot.item.Todo;
 public class TodoCommand extends Command {
 
     /** Content of the command. */
-    private final String content;
+    private final String description;
 
     /**
      * Constructor for TodoCommand.
@@ -19,7 +19,7 @@ public class TodoCommand extends Command {
      * @param content The content of the command.
      */
     protected TodoCommand(String content) {
-        this.content = content;
+        this.description = Parser.parseSingleArgument(content, CommandType.TODO);
     }
 
     /**
@@ -32,8 +32,6 @@ public class TodoCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws BotException {
-        int startIndex = CommandType.TODO.getValue().length();
-        String description = content.substring(startIndex).trim();
         return tasks.add(Todo.of(description));
     }
 

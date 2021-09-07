@@ -1,13 +1,14 @@
 package catobot.command;
 
 import catobot.exception.BotException;
+import catobot.exception.EmptyCommandException;
 import catobot.exception.InvalidCommandException;
+import catobot.exception.InvalidDeadlineException;
 
 /**
  * Represents the processor of raw input content into commands.
  */
 public class Parser {
-
     /**
      * Parses the input into corresponding commands.
      *
@@ -17,7 +18,6 @@ public class Parser {
      */
     public static Command parse(String content) throws BotException {
         CommandType commandType = CommandType.find(content);
-
         switch (commandType) {
         case LIST:
             return new ListCommand();
@@ -39,5 +39,36 @@ public class Parser {
             throw new InvalidCommandException();
         }
     }
+
+    protected static String[] parseMultipleArgument(
+            String content, CommandType type, String indicator) throws BotException {
+        String name = type.getValue();
+        // If the command is empty
+        if (content.split(" ").length == 1) {
+            throw new EmptyCommandException(name);
+        }
+        String rawInputs = content.split(name)[1].trim();
+
+        // If the command does not have "/indicator"
+        if (!rawInputs.contains(indicator)) {
+            throw new InvalidDeadlineException();
+        }
+        String[] details = rawInputs.split(indicator);
+
+        // if there is no description or date
+        if (details.length < 2) {
+            throw new InvalidDeadlineException();
+        }
+        return details;
+    }
+
+    protected static String parseSingleArgument(String content, CommandType type) {
+        String name = type.getValue();
+        return content.substring(name.length()).trim();
+    }
+
+
+
+
 
 }
