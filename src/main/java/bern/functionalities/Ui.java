@@ -3,10 +3,7 @@ package bern.functionalities;
 import java.util.ArrayList;
 
 import bern.Command;
-import bern.exception.BernException;
-import bern.exception.EmptyDescriptionException;
-import bern.exception.IndexException;
-import bern.exception.InvalidCommandException;
+import bern.exception.*;
 import bern.model.Deadline;
 import bern.model.Event;
 import bern.model.Task;
@@ -36,7 +33,11 @@ public class Ui {
         // TODO Haven't handled if there is no /by
         String task = input.substring(len + 1, input.indexOf('/') - 1);
         String by = input.substring(input.indexOf('/') + 4);
-        new TaskList().addTask(new Deadline(task, by), arListTask);
+        Deadline addition = new Deadline(task, by);
+        if (arListTask.contains(addition)) {
+            throw new DuplicateException(input);
+        }
+        new TaskList().addTask(addition, arListTask);
         assert input.length() > 8 : "deadline input is invalid";
         return "Got it. I've added this task:\n"
                 + arListTask.get(arListTask.size() - 1).toString() + "\n"
@@ -60,7 +61,11 @@ public class Ui {
         // TODO Haven't handled if there is no /at
         String task = input.substring(len + 1, input.indexOf('/') - 1);
         String at = input.substring(input.indexOf('/') + 4);
-        new TaskList().addTask(new Event(task, at), arListTask);
+        Event addition = new Event(task, at);
+        if (arListTask.contains(addition)) {
+            throw new DuplicateException(input);
+        }
+        new TaskList().addTask(addition, arListTask);
         assert input.length() > 5 : "event input is invalid";
         return "Got it. I've added this task:\n"
                 + arListTask.get(arListTask.size() - 1).toString() + "\n"
@@ -81,7 +86,12 @@ public class Ui {
         if (input.length() == len || (input.length() == len + 1 && input.substring(len, len + 1).equals(" "))) {
             throw new EmptyDescriptionException("todo");
         }
-        new TaskList().addTask(new ToDo(input.substring(len + 1)), arListTask);
+        ToDo addition = new ToDo(input.substring(len + 1));
+        System.out.println(arListTask.contains(addition));
+        if (arListTask.contains(addition)) {
+            throw new DuplicateException(input);
+        }
+        new TaskList().addTask(addition, arListTask);
         assert input.length() > 4 : "todo input is invalid";
         return "Got it. I've added this task:\n"
                 + arListTask.get(arListTask.size() - 1).toString() + "\n"
@@ -222,7 +232,6 @@ public class Ui {
         assert input.length() > 4 : "find input is invalid";
 
         return result;
-
     }
 
     /**
