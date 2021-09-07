@@ -12,9 +12,6 @@ import java.time.format.DateTimeParseException;
  */
 public class Event extends Task {
     protected static final String TASK_SYMBOL = "[E]";
-    protected static final DateTimeFormatter PARSE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
-    protected LocalDateTime dateTime;
 
     /**
      * Initialises the Event Task.
@@ -24,8 +21,7 @@ public class Event extends Task {
      * @throws DateTimeParseException
      */
     public Event(String description, String dateTime) throws DateTimeParseException {
-        super(description, TASK_SYMBOL);
-        this.dateTime = LocalDateTime.parse(dateTime.trim(), PARSE_FORMAT);
+        super(description, TASK_SYMBOL, LocalDateTime.parse(dateTime.trim(), PARSE_FORMAT));
     }
 
     /**

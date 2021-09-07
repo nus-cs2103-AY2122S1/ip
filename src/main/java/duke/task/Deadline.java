@@ -11,10 +11,7 @@ import java.time.format.DateTimeParseException;
  * @author Clifford
  */
 public class Deadline extends Task {
-    protected static final DateTimeFormatter PARSE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
     protected static final String TASK_SYMBOL = "[D]";
-    protected LocalDateTime dateTime;
 
     /**
      * Initialises a deadline tasks with the description of the task and expected
@@ -25,8 +22,7 @@ public class Deadline extends Task {
      * @throws DateTimeParseException
      */
     public Deadline(String description, String dateTime) throws DateTimeParseException {
-        super(description, TASK_SYMBOL);
-        this.dateTime = LocalDateTime.parse(dateTime.trim(), PARSE_FORMAT);
+        super(description, TASK_SYMBOL, LocalDateTime.parse(dateTime.trim(), PARSE_FORMAT));
     }
 
     /**

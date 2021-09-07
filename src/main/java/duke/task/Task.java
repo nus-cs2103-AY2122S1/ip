@@ -1,5 +1,8 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import duke.exception.DukeException;
 
 /**
@@ -9,13 +12,16 @@ import duke.exception.DukeException;
  *
  * @author Clifford
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
     protected static final String DIVIDER = ",";
     protected static final String DONE_STATUS = "[X]";
     protected static final String NOT_DONE_STATUS = "[ ]";
     protected String description;
     protected boolean isDone;
     protected String taskSymbol;
+    protected static final DateTimeFormatter PARSE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
+    protected LocalDateTime dateTime;
 
     /**
      * Initialises the Task Object with a description
@@ -23,10 +29,11 @@ public abstract class Task {
      * @param description the task description
      * @param taskSymbol the unique symbol associated with the different types of task
      */
-    public Task(String description, String taskSymbol) {
+    public Task(String description, String taskSymbol, LocalDateTime dateTime) {
         this.description = description;
         this.isDone = false;
         this.taskSymbol = taskSymbol;
+        this.dateTime = dateTime;
     }
 
     /**
@@ -82,6 +89,10 @@ public abstract class Task {
         return DIVIDER;
     }
 
+    public boolean hasDateTime() {
+        return this.dateTime != null;
+    }
+
     /**
      * converts a Task object to a formatted text to be saved in storage.
      *
@@ -134,5 +145,24 @@ public abstract class Task {
         StringBuilder sb = new StringBuilder();
         sb.append(getStatusIcon()).append(" ").append(this.description);
         return sb.toString();
+    }
+
+    @Override
+    public int compareTo(Task task) {
+        final boolean hasDateTimeForCurrentTask = this.hasDateTime();
+        final boolean hasDateTimeForComparedTask = task.hasDateTime();
+        final boolean hasDateTimeForBothTasks = hasDateTimeForComparedTask && hasDateTimeForCurrentTask;
+        final boolean hasDateTimeForOnlyCurrentTask = hasDateTimeForCurrentTask && !hasDateTimeForComparedTask;
+        final boolean hasDateTimeForOnlyComparedTask = !hasDateTimeForCurrentTask && hasDateTimeForComparedTask;
+
+        if (hasDateTimeForBothTasks) {
+            return this.dateTime.compareTo(task.dateTime);
+        } else if (hasDateTimeForOnlyCurrentTask) {
+            return -1;
+        } else if (hasDateTimeForOnlyComparedTask) {
+            return 1;
+        } else {
+            return this.description.compareTo(task.description);
+        }
     }
 }
