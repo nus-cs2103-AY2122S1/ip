@@ -31,19 +31,20 @@ public class Storage {
 	 * Loads the data from the hard disk.
 	 * 
 	 * @return ArrayList of tasks
-	 * @throws DukeException File cannot be found
+	 * @throws DukeException if file cannot be found
 	 */
 	public ArrayList<Task> loadTasks() throws DukeException {
 		ArrayList<Task> tasks = new ArrayList<>(); // We will populate an ArrayList of tasks
+		String line;
+		Task task;
+		final int BOXES_LENGTH = 7;
 
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(filePath));
-			String line;
-			Task task;
 
 			// Read lines from file
 			while ((line = reader.readLine()) != null) {
-				String lineWithoutBoxes = line.substring(7);
+				String lineWithoutBoxes = line.substring(BOXES_LENGTH);
 
 				// If the line contains by -> add a new Deadline
 				if (line.contains("[D]")) {
@@ -68,7 +69,7 @@ public class Storage {
 			}
 			reader.close();
 		} catch (IOException e) {
-			throw new DukeException("where's my file");
+			throw new DukeException("Where's my file");
 		}
 		return tasks;
 	}
@@ -97,6 +98,7 @@ public class Storage {
 	 * Saves the tasks to the data file.
 	 * 
 	 * @param tasks ArrayList of tasks to be saved
+	 * @throws DukeFileNotFoundException if file not found
 	 */
 	public void saveTasks(ArrayList<Task> tasks) throws DukeFileNotFoundException {
 		try {

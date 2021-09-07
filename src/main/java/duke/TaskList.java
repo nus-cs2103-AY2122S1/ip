@@ -45,10 +45,12 @@ public class TaskList {
      * Marks a task as done.
      * 
      * @param taskNum the task number to mark as done
-     * @throws DukeException if file not found
+     * @throws DukeFileNotFoundException if file not found
      */
     private static String completeTask(int taskNum) throws DukeFileNotFoundException {
-        Task task = tasks.get(taskNum - 1);
+        int taskIdx = taskNum - 1;
+        assert taskIdx >= 0;
+        Task task = tasks.get(taskIdx);
         task.setDone(true);
         Duke.getStorage().saveTasks(getTasks());
         return ("Good job! I've marked this task as done:\n\n\t" + task + "\n");
@@ -58,9 +60,10 @@ public class TaskList {
      * Deletes a task from the ArrayList of tasks.
      * 
      * @param num the task number to delete
+     * @throws DukeFileNotFoundException if file not found
      */
-    private static String deleteTask(int num) throws DukeFileNotFoundException {
-        int taskIdx = num - 1;
+    private static String deleteTask(int taskNum) throws DukeFileNotFoundException {
+        int taskIdx = taskNum - 1;
         Task taskToDelete = getTasks().get(taskIdx);
         getTasks().remove(taskIdx);
         Duke.getStorage().saveTasks(getTasks());
@@ -73,7 +76,8 @@ public class TaskList {
      * 
      * @param command Command to extract task number from.
      * @return Task number.
-     * @throws DukeException Task number not valid
+     * @throws DukeInvalidTaskNumberFormatException if task number not an integer
+     * @throws DukeTaskNumberOutOfBoundsException   if task number not valid
      */
     private static int getTaskNum(String command)
             throws DukeInvalidTaskNumberFormatException, DukeTaskNumberOutOfBoundsException {
@@ -90,7 +94,7 @@ public class TaskList {
      * Handles task deletion.
      * 
      * @param command user input to parse
-     * @throws DukeTaskNotFoundException task not specified
+     * @throws DukeTaskNotFoundException if task not specified
      */
     public static String handleDelete(String command) throws DukeTaskNotFoundException,
             DukeInvalidTaskNumberFormatException, DukeTaskNumberOutOfBoundsException, DukeFileNotFoundException {
@@ -106,7 +110,10 @@ public class TaskList {
      * Handles task completion.
      * 
      * @param command user input to parse
-     * @throws DukeException task not specified
+     * @throws DukeTaskNotFoundException            if task not specified
+     * @throws DukeInvalidTaskNumberFormatException if task is not an integer
+     * @throws DukeTaskNumberOutOfBoundsException   if task number not valid
+     * @throws DukeFileNotFoundException            if file not found
      */
     public static String handleDone(String command) throws DukeTaskNotFoundException,
             DukeInvalidTaskNumberFormatException, DukeTaskNumberOutOfBoundsException, DukeFileNotFoundException {
