@@ -18,9 +18,14 @@ import java.util.Scanner;
 public class Storage {
     private static final DateTimeFormatter FORMAT_TIME_FILE = DateTimeFormatter.ofPattern("MMM d yyyy hh:m a");
     private static final DateTimeFormatter FORMAT_NO_TIME_FILE = DateTimeFormatter.ofPattern("MMM d yyyy");
+    ArrayList<Task> tasks = new ArrayList<>();
     File dir;
     File txtFile;
     String filePath;
+
+    private enum TaskType {
+        Todo, Deadline, Event
+    }
 
     /**
      * Constructor for the Storage class.
@@ -42,7 +47,6 @@ public class Storage {
      * @throws IOException If file is not found.
      */
     public ArrayList<Task> loadFile() throws IOException {
-        ArrayList<Task> arr = new ArrayList<>();
         if (!this.txtFile.createNewFile()) {
             Scanner s = new Scanner(this.txtFile);
             while (s.hasNext()) {
@@ -51,35 +55,50 @@ public class Storage {
                 assert line.charAt(3) == '[';
                 switch (line.charAt(4)) {
                 case 'T':
-                    arr.add(new Todo(line.substring(10), isDone));
+                    tasks.add(new Todo(line.substring(10), isDone));
                     break;
                 case 'D': {
                     int index = line.indexOf(" (by: ");
-                    String description = line.substring(10, index);
-                    String dateTime = line.substring(index + 6, line.length() - 1);
-                    String[] dateTimeArray = dateTime.split(" ");
-                    if (dateTimeArray.length > 3) {
-                        arr.add(new Deadline(description, dateTime, FORMAT_TIME_FILE, true, isDone));
-                    } else {
-                        arr.add(new Deadline(description, dateTime, FORMAT_NO_TIME_FILE, false, isDone));
-                    }
+                    addTaskToTasks(line, isDone, TaskType.Deadline, index);
                     break;
                 }
                 case 'E':
                     int index = line.indexOf(" (at: ");
-                    String description = line.substring(10, index);
-                    String dateTime = line.substring(index + 6, line.length() - 1);
-                    String[] dateTimeArray = dateTime.split(" ");
-                    if (dateTimeArray.length > 3) {
-                        arr.add(new Event(description, dateTime, FORMAT_TIME_FILE, true, isDone));
-                    } else {
-                        arr.add(new Event(description, dateTime, FORMAT_NO_TIME_FILE, false, isDone));
-                    }
+                    addTaskToTasks(line, isDone, TaskType.Event, index);
+                    break;
+                default:
                     break;
                 }
             }
         }
-        return arr;
+        return tasks;
+    }
+
+    /**
+     * Adds either an Event or Deadline to tasks.
+     *
+     * @param line Current line in the file.
+     * @param isDone Whether the task is marked as done.
+     * @param type Type of the task.
+     * @param index Index of separator between description and date.
+     */
+    public void addTaskToTasks(String line, boolean isDone, TaskType type, int index) {
+        String description = line.substring(10, index);
+        String dateTime = line.substring(index + 6, line.length() - 1);
+        String[] dateTimeArray = dateTime.split(" ");
+        if (type == TaskType.Event) {
+            if (dateTimeArray.length > 3) {
+                tasks.add(new Deadline(description, dateTime, FORMAT_TIME_FILE, true, isDone));
+            } else {
+                tasks.add(new Deadline(description, dateTime, FORMAT_NO_TIME_FILE, false, isDone));
+            }
+        } else if (type == TaskType.Deadline) {
+            if (dateTimeArray.length > 3) {
+                tasks.add(new Event(description, dateTime, FORMAT_TIME_FILE, true, isDone));
+            } else {
+                tasks.add(new Event(description, dateTime, FORMAT_NO_TIME_FILE, false, isDone));
+            }
+        }
     }
 
     /**

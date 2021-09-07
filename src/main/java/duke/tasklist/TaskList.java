@@ -18,6 +18,9 @@ public class TaskList {
     private static ArrayList<Task> tasks;
     private static final DateTimeFormatter FORMAT_TIME = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private static final DateTimeFormatter FORMAT_NO_TIME = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private enum TaskType {
+        Todo, Deadline, Event
+    }
 
     /**
      * Constructor for TaskList.
@@ -36,8 +39,8 @@ public class TaskList {
     public String getAllTasksString() {
         String output = "";
         for (int i = 0; i < tasks.size(); i++) {
-            output += i + 1 + ": " + tasks.get(i) + "\n";
-            System.out.println(i + 1 + ": " + tasks.get(i));
+            output += (i + 1) + ": " + tasks.get(i) + "\n";
+            System.out.println((i + 1) + ": " + tasks.get(i));
         }
         return output;
     }
@@ -48,9 +51,10 @@ public class TaskList {
      * @param index Index of the task to print.
      * @return Task with the specified index.
      */
-    public String getTaskString(int index) { // RENAME
-        System.out.println(index + 1 + ": " + tasks.get(index));
-        return index + 1 + ": " + tasks.get(index);
+    public String getTaskString(int index) {
+        String taskNumberPrefix = (index + 1) + ": ";
+        System.out.println(taskNumberPrefix + tasks.get(index));
+        return taskNumberPrefix + tasks.get(index);
     }
 
     /**
@@ -88,19 +92,7 @@ public class TaskList {
      */
     public String addDeadline(String fullDescription) throws DukeException {
         int sepIndex = fullDescription.indexOf("/by");
-        if (fullDescription.charAt(sepIndex + 3) != ' ' || sepIndex == -1 || sepIndex == 0 ||
-                fullDescription.charAt(sepIndex - 1) != ' ') {
-            throw new DukeException("☹ OOPS!!! Please input with the correct format e.g. deadline return books" +
-                    " /by 2023-04-05 18:40 (yyyy-mm-dd hh:mm, where time is optional)");
-        }
-        String description = fullDescription.substring(0, sepIndex - 1);
-        String dateTime = fullDescription.substring(sepIndex + 4);
-        String[] dateTaskArray = dateTime.split(" ");
-        if (dateTaskArray.length == 2) {
-            tasks.add(new Deadline(description, dateTime, FORMAT_TIME, true, false));
-        } else {
-            tasks.add(new Deadline(description, dateTime, FORMAT_NO_TIME, false, false));
-        }
+        addTask(fullDescription, sepIndex, TaskType.Deadline);
         return getLatestTaskString();
     }
 
@@ -112,21 +104,45 @@ public class TaskList {
      */
     public String addEvent(String fullDescription) throws DukeException {
         int sepIndex = fullDescription.indexOf("/at");
-        if (fullDescription.charAt(sepIndex + 3) != ' ' || sepIndex == -1 || sepIndex == 0 ||
-                fullDescription.charAt(sepIndex - 1) != ' ') {
+        addTask(fullDescription, sepIndex, TaskType.Event);
+        return getLatestTaskString();
+    }
+
+    /**
+     * Adds a new Event or Deadline to tasks.
+     *
+     * @param fullDescription Description of the task.
+     * @param sepIndex Index of the separator.
+     * @param type Type of task.
+     * @throws DukeException If formatting is wrong.
+     */
+    public void addTask(String fullDescription, int sepIndex, TaskType type) throws DukeException {
+        boolean hasSpaceBefore = fullDescription.charAt(sepIndex + 3) != ' ';
+        boolean hasSeparator = sepIndex != -1;
+        boolean hasSpaceAfter = fullDescription.charAt(sepIndex - 1) != ' ';
+        if (!hasSeparator || hasSpaceBefore || hasSpaceAfter) {
             throw new DukeException("☹ OOPS!!! Please input with the correct format e.g. event read books" +
                     " /at 2021-09-08 09:30 (yyyy-mm-dd hh:mm, where time is optional)");
         }
         String description = fullDescription.substring(0, sepIndex - 1);
         String dateTime = fullDescription.substring(sepIndex + 4);
         String[] dateTaskArray = dateTime.split(" ");
-        if (dateTaskArray.length == 2) {
-            tasks.add(new Event(description, dateTime, FORMAT_TIME, true, false));
-        } else {
-            tasks.add(new Event(description, dateTime, FORMAT_NO_TIME, false, false));
+        if (type == TaskType.Deadline) {
+            if (dateTaskArray.length == 2) {
+                System.out.println(dateTime);
+                tasks.add(new Deadline(description, dateTime, FORMAT_TIME, true, false));
+            } else {
+                tasks.add(new Deadline(description, dateTime, FORMAT_NO_TIME, false, false));
+            }
+        } else if (type == TaskType.Event) {
+            if (dateTaskArray.length == 2) {
+                tasks.add(new Event(description, dateTime, FORMAT_TIME, true, false));
+            } else {
+                tasks.add(new Event(description, dateTime, FORMAT_NO_TIME, false, false));
+            }
         }
-        return getLatestTaskString();
     }
+
 
     /**
      * Prints information about the latest task that was just added.
@@ -173,7 +189,8 @@ public class TaskList {
         String output = "";
         ArrayList<Integer> taskIndexes = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getDescription().toLowerCase(Locale.ROOT).contains(keyword.toLowerCase(Locale.ROOT))) {
+            String taskDescription = tasks.get(i).getDescription().toLowerCase(Locale.ROOT);
+            if (taskDescription.contains(keyword.toLowerCase(Locale.ROOT))) {
                 taskIndexes.add(i);
             }
         }
