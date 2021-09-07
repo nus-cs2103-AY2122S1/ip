@@ -38,6 +38,7 @@ public class TaskList {
     public TaskList(Task ...tasks) {
         this.taskList = new ArrayList<>();
         taskList.addAll(Arrays.asList(tasks));
+        assert taskList.size() != 0 : "taskList cannot be empty";
     }
 
     /**

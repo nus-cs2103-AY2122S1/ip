@@ -74,7 +74,10 @@ public class Storage {
         String type = input[0];
 
         int isDone = Integer.parseInt(input[1]);
+        assert (isDone == 0 || isDone == 1) : "isDone should be either 0 or 1";
+
         String description = input[2];
+        assert !description.equals("") : "description cannot be empty";
         DateTimeFormatter formatter = Task.DATE_FORMAT_DOC;
 
         switch (type) {
