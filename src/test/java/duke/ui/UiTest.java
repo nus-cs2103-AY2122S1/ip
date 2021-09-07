@@ -1,12 +1,15 @@
 package duke.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import duke.constant.EditType;
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
@@ -59,5 +62,23 @@ public class UiTest {
                 + "[D][ ] Final submission (by: 13 December 2021)\n"
                 + "Now you have 5 tasks in the list.",
                 ui.formatAddedTask(new Deadline("Final submission", "2021-12-13"), 5));
+    }
+
+    @Test
+    public void getHelpMessageForCommand_event() {
+        assertEquals("The event command lets you add an event to your task list.\n"
+                + "Tasks in the 'event' category will be marked with a 'E'\n"
+                + "Usage: event <task description> /at <date in YYYY-MM-DD format>\n"
+                + "Example: event Meeting /at 2021-05-22", ui.getHelpMessageForCommand("event"));
+    }
+
+    @Test
+    public void getHelpMessageForCommand_unknownCommand_exceptionThrown() {
+        Exception exception = assertThrows(DukeException.class, () ->
+                ui.getHelpMessageForCommand("blah"));
+        String expectedMessage = "Invalid command. List of valid commands include:\n"
+                + "list | todo | deadline | event | done | delete | find | bye";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 }
