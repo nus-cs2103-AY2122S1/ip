@@ -20,6 +20,23 @@ public abstract class ApplyOnTaskNumberCommand extends Command {
 
     @Override
     void parseCommand(String[] tokens) {
+        String taskNumberString = parseTaskNumberString(tokens);
+        checkTaskNumberStringLength(taskNumberString);
+        parseTaskIndex(taskNumberString);
+    }
+
+    private void checkTaskNumberStringLength(String taskNumberString) {
+        if (taskNumberString.length() == 0) {
+            throw new DukeInvalidCommandException(String.format("A task number is required for \"%s\" commands.",
+                    getCommandType().getCommandDescription()));
+        }
+    }
+
+    int getTaskIndex() {
+        return taskIndex;
+    }
+
+    private String parseTaskNumberString(String[] tokens) {
         StringBuilder taskNumberSb = new StringBuilder();
         for (int i = 1; i < tokens.length; i++) {
             taskNumberSb.append(tokens[i]);
@@ -27,18 +44,14 @@ public abstract class ApplyOnTaskNumberCommand extends Command {
                 break;
             }
         }
-        if (taskNumberSb.length() == 0) {
-            throw new DukeInvalidCommandException(String.format("A task number is required for \"%s\" commands.",
-                    getCommandType().getCommandDescription()));
-        }
+        return taskNumberSb.toString().strip();
+    }
+
+    private void parseTaskIndex(String taskNumberString) throws DukeInvalidCommandException {
         try {
-            taskIndex = Integer.parseInt(taskNumberSb.toString()) - 1;
+            taskIndex = Integer.parseInt(taskNumberString) - 1;
         } catch (NumberFormatException e) {
             throw new DukeInvalidCommandException("The task number is not a number.");
         }
-    }
-
-    int getTaskIndex() {
-        return taskIndex;
     }
 }

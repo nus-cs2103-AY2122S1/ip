@@ -3,14 +3,13 @@ package duke;
 import javafx.application.Application;
 
 /**
- * Main class of Duke
+ * Main class of Duke.
  *
  * @author Jay Aljelo Saez Ting
  */
 public class Duke {
     /**
-     * Initialises and runs the Duke chatbot.
-     * Command line arguments are ignored.
+     * Runs the Duke chatbot.
      *
      * @param args The command line arguments.
      */

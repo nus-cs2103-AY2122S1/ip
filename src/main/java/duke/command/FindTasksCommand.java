@@ -32,39 +32,47 @@ public class FindTasksCommand extends Command {
         assert queryTaskDescription != null : "Query cannot be null.";
         List<Map.Entry<Integer, Task>> queryResults = taskHandler.findTasksDescribedBy(queryTaskDescription);
         int n = queryResults.size();
-        if (n == 0) {
+        switch (n) {
+        case 0:
             ui.startMessage()
                     .addLine("No matching tasks were found.")
                     .printFormatted();
-        } else if (n == 1) {
+            break;
+        case 1:
             ui.startMessage()
                     .addLine("Here is the 1 matching task in your list:")
                     .addFindTasksResultsList(queryResults)
                     .printFormatted();
-        } else {
+            break;
+        default:
             ui.startMessage()
                     .addLine(String.format("Here are the %d matching tasks in your list:", n))
                     .addFindTasksResultsList(queryResults)
                     .printFormatted();
+            break;
         }
     }
 
     @Override
     void parseCommand(String[] tokens) throws DukeInvalidCommandException {
-        StringBuilder queryTaskDescriptionSb = new StringBuilder();
-        for (int i = 1; i < tokens.length; i++) {
-            queryTaskDescriptionSb.append(tokens[i]).append(" ");
-        }
-        String queryTaskDescription = queryTaskDescriptionSb.toString().strip();
+        String queryTaskDescription = parseQueryTaskDescription(tokens);
+        checkQueryTaskDescriptionLength(queryTaskDescription);
+        this.queryTaskDescription = queryTaskDescription;
+    }
+
+    private void checkQueryTaskDescriptionLength(String queryTaskDescription) {
         if (queryTaskDescription.length() == 0) {
             throw new DukeInvalidCommandException(String.format("A query is required for \"%s\" commands.",
                     getCommandType().getCommandDescription()));
         }
-        this.queryTaskDescription = queryTaskDescription;
     }
 
     @Override
     CommandType getCommandType() {
         return COMMAND_TYPE;
+    }
+
+    private String parseQueryTaskDescription(String[] tokens) {
+        return getTokenSequence(tokens, 1, tokens.length);
     }
 }
