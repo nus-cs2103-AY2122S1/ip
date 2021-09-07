@@ -15,7 +15,6 @@ import duke.task.Task;
 public class MarkDoneCommand extends Command {
     @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     private final int TASK_NUM;
-
     /**
      * Class constructor.
      *
