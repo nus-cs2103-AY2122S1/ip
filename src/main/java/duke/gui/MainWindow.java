@@ -45,7 +45,8 @@ public class MainWindow extends AnchorPane {
      * Set the auto scroll functionality
      */
     public void setScrollPane () {
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        dialogContainer.heightProperty()
+                .addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
     /**
@@ -66,20 +67,38 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() throws InterruptedException {
-        String input = this.userInput.getText();
-        String response = duke.guiProcess(input);
-        this.dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
-        Thread.sleep(200); // feels more natural
-        this.dialogContainer.getChildren().add(DialogBox.getDukeDialog(response, dukeImage));
-        this.userInput.clear();
+        String userStringInput = this.userInput.getText();
+        String dukeStringResponse = duke.guiProcess(userStringInput);
+        addUserDukeResponseIntoContainer(userStringInput, dukeStringResponse);
+        checkExit();
+    }
 
+    /**
+     * Add user and duke response into dialog container
+     *
+     * @param userStringInput user input
+     * @param dukeStringInput  duke response to user input
+     * @throws InterruptedException exception when error with delay
+     */
+    private void addUserDukeResponseIntoContainer(String userStringInput, String dukeStringInput) throws InterruptedException {
+        this.dialogContainer.getChildren().add(DialogBox.getUserDialog(userStringInput, userImage));
+        Thread.sleep(200);
+        this.dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeStringInput, dukeImage));
+        this.userInput.clear();
+    }
+
+    /**
+     * Check whether to continue duke operations
+     */
+    private void checkExit() {
         if (duke.checkIsBye()) {
             CompletableFuture.delayedExecutor(1, TimeUnit.SECONDS).execute(Platform::exit);
         }
     }
 
+
     /**
-     * Handles when tasklist optioj
+     * Handles when tasklist button pressed
      */
     @FXML
     private void handleGetList()  {
@@ -88,13 +107,15 @@ public class MainWindow extends AnchorPane {
         this.dialogContainer.getChildren().add(DialogBox.getDukeDialog(response, dukeImage));
     }
 
+    /**
+     * Handles when help button pressed
+     */
     @FXML
     private void handleGetHelp() {
         String getList = "help";
         String response = duke.guiProcess(getList);
         this.dialogContainer.getChildren().add(DialogBox.getDukeDialog(response, dukeImage));
     }
-
 
 
 }
