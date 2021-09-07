@@ -27,13 +27,13 @@ public class TaskList {
     }
 
     /**
-     * Marks a specified task as completed
-     * and returns an updated array list of tasks.
+     * Marks a specified task as completed and
+     * updates the array list of tasks. Returns response from Duke.
      * @param index The index of the task.
-     * @return An updated array list of tasks.
+     * @return Response of Duke after successful marking of completed Task.
      */
     public String markDone(int index) {
-        assert  tasks != null : "TaskList cannot be found!";
+        assert tasks != null : "TaskList cannot be found!";
         tasks.get(index).markAsDone();
 
         String temp = tasks.get(index).toString();
@@ -42,14 +42,14 @@ public class TaskList {
 
     /**
      * Adds a Todo to the TaskList and
-     * returns an updated array list of tasks.
+     * updates the array list of tasks. Returns response from Duke.
      * @param details The description of the Todo.
-     * @return The updated array list of tasks.
+     * @return Response of Duke after successful addition of Todo.
      */
     public String addTodo(String details) {
         Todo task = new Todo(details);
 
-        assert  tasks != null : "TaskList cannot be found!";
+        assert tasks != null : "TaskList cannot be found!";
         tasks.add(task);
 
         return "Got it. I've added this task: \n" + task + "\n" +
@@ -59,15 +59,15 @@ public class TaskList {
 
     /**
      * Adds a Deadline to the TaskList and
-     * returns an updated array list of tasks.
+     * updates the array list of tasks. Returns response from Duke.
      * @param details The description of the Deadline.
      * @param date The date of the Deadline.
-     * @return The updated array list of tasks.
+     * @return Response of Duke after successful addition of Deadline.
      */
     public String addDeadline(String details, LocalDate date) {
         Deadline task = new Deadline(details, date);
 
-        assert  tasks != null : "TaskList cannot be found!";
+        assert tasks != null : "TaskList cannot be found!";
         tasks.add(task);
 
         return "Got it. I've added this task: \n" + task + "\n" +
@@ -77,15 +77,15 @@ public class TaskList {
 
     /**
      * Adds an Event to the TaskList and
-     * returns an updated array list of tasks.
+     * updates the array list of tasks. Returns response from Duke.
      * @param details The description of the event.
      * @param at The details of the event.
-     * @return The updated array list of tasks.
+     * @return Response of Duke after successful addition of Event.
      */
     public String addEvent(String details, String at) {
         Event task = new Event(details, at);
 
-        assert  tasks != null : "TaskList cannot be found!";
+        assert tasks != null : "TaskList cannot be found!";
         tasks.add(task);
 
         return "Got it. I've added this task: \n" + task + "\n" +
@@ -94,14 +94,14 @@ public class TaskList {
 
     /**
      * Deletes a specified task from the Task List and
-     * returns an updated array list of tasks.
+     * updates the array list of tasks. Returns response from Duke.
      * @param index The task index.
-     * @return An updated array list of tasks.
+     * @return Response of Duke after successful delete.
      */
     public String deleteTask(int index) {
         String temp = tasks.get(index).toString();
 
-        assert  tasks != null : "TaskList cannot be found!";
+        assert tasks != null : "TaskList cannot be found!";
         tasks.remove(index);
 
         return "Got it. I've removed this task: \n" + temp + "\n" +
@@ -110,21 +110,21 @@ public class TaskList {
 
     /**
      * Lists out all tasks in the Task List.
+     * @return The string representation of the full Task List.
      */
     public String listTasks() {
-        assert  tasks != null : "TaskList cannot be found!";
+        assert tasks != null : "TaskList cannot be found!";
 
         if (tasks.size() == 0) {
             return "There is no task for now :)";
-        } else {
-            String res = "Here are the tasks in your list: \n";
-
-            for (int i = 1; i < tasks.size() + 1; i++) {
-                String task = i + "." + tasks.get(i - 1).toString() + "\n";
-                res = res + task;
-            }
-            return res;
         }
+
+        String response = "Here are the tasks in your list: \n";
+        for (int i = 1; i < tasks.size() + 1; i++) {
+            String task = i + "." + tasks.get(i - 1).toString() + "\n";
+            response = response + task;
+        }
+        return response;
     }
 
     /**
