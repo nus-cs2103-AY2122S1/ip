@@ -25,12 +25,15 @@ public class FindCommand extends Command {
      * @param storage the local storage file
      * @param taskList the current task list
      * @return the output message after execution
-     * @throws InvalidInputException if the user input command does not specify the keyword to search for
-     * @throws TaskNotFoundException if there is no matching result for the current keyword
      */
     @Override
-    public String execute(Storage storage, TaskList taskList) throws InvalidInputException, TaskNotFoundException {
-        return taskList.searchTaskFromKeyword(this.getKeyword());
+    public String execute(Storage storage, TaskList taskList) {
+        try {
+            String[] keywords = this.getKeyword();
+            return taskList.searchTaskFromKeyword(keywords);
+        } catch (InvalidInputException e) {
+            return e.getMessage();
+        }
     }
 
     /**

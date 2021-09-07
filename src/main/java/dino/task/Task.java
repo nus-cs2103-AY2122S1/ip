@@ -1,11 +1,13 @@
 package dino.task;
 
+import java.time.LocalDate;
+
 /**
  * Represents a piece of work to be done or undertaken
  */
 public class Task {
 
-    private final String description;
+    private String description;
     private boolean isDone;
 
     /**
@@ -23,6 +25,12 @@ public class Task {
     public void setDone() {
         isDone = true;
     }
+
+    public void editDescription(String newDescription) {
+        this.description = newDescription;
+    }
+
+    public void editTime(LocalDate newTime) {}
 
     public boolean getStatus() {
         return isDone;

@@ -57,8 +57,9 @@ public class Dino {
             return cmd.execute(storage, taskList);
         }
         case DONE:
-        case DELETE: {
-            Command cmd = new MarkCommand(command, cmdType);
+        case DELETE:
+        case EDIT: {
+            Command cmd = new UpdateCommand(command, cmdType);
             return cmd.execute(storage, taskList);
         }
         case LIST: {
