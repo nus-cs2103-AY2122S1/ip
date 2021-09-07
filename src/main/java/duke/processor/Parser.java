@@ -6,6 +6,7 @@ import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.task.Deadline;
+import duke.task.Doafter;
 import duke.task.Event;
 import duke.task.ToDo;
 
@@ -45,6 +46,8 @@ public class Parser {
             return parseEvent(newInput);
         } else if (newInput.length() > 9 && newInput.subSequence(0, 9).equals("deadline ")) {
             return parseDeadline(newInput);
+        } else if (newInput.length() > 8 && newInput.subSequence(0, 8).equals("doafter ")) {
+            return parseDoAfter(newInput);
         } else if (newInput.length() > 5 && newInput.substring(0, 5).equals("find ")) {
             return new FindCommand(newInput.substring(5));
         } else {
@@ -78,26 +81,58 @@ public class Parser {
         }
     }
 
-    private static Executable parseEvent(String newInput) throws DukeExcpetion{
+    private static Executable parseEvent(String newInput) throws DukeExcpetion {
         int timeIndex = newInput.indexOf("/at", 6);
+        int endTimeIndex = newInput.indexOf("/to", 6);
         if (timeIndex == -1) {
             throw new DukeExcpetion("Not a valid event. Please add a time with /at or mark it as a todo.");
-        } else if (timeIndex < 7) {
+        } else if (timeIndex < 7 && endTimeIndex == -1) {
             throw new DukeExcpetion("Not a valid event. Please enter a valid name of the event.");
-        } else if (newInput.length() > timeIndex + 16) {
-            try {
-                return new Event(newInput.substring(6, timeIndex - 1),
-                        LocalDate.parse(newInput.substring(timeIndex + 4, timeIndex + 14)),
-                        parseTime(newInput.substring(timeIndex + 15)));
-            } catch (DukeExcpetion e) {
-                return new Event(newInput.substring(6, timeIndex - 1), newInput.substring(timeIndex + 4));
-            }
         } else {
+            String name = newInput.substring(6, timeIndex - 1);
             try {
-                return new Event(newInput.substring(6, timeIndex - 1),
-                        LocalDate.parse(newInput.substring(timeIndex + 4)));
-            } catch (DateTimeParseException e) {
-                return new Event(newInput.substring(6, timeIndex - 1), newInput.substring(timeIndex + 4));
+                LocalDate startDate = LocalDate.parse(newInput.substring(timeIndex + 4, timeIndex + 14));
+                if (newInput.length() > timeIndex + 16) {
+                    LocalTime startTime = parseTime(newInput.substring(timeIndex + 15));
+                    Event out = new Event(name, startDate, startTime);
+                    if (endTimeIndex != -1) {
+                        LocalDate endDate = LocalDate.parse(newInput.substring(endTimeIndex + 4, endTimeIndex + 14));
+                        LocalTime endTime = parseTime(newInput.substring(endTimeIndex + 15));
+                        out.addEndDateTime(endDate, endTime);
+                    }
+                    return out;
+                } else {
+                    Event out = new Event(name, startDate);
+                    if (endTimeIndex != -1) {
+                        LocalDate endDate = LocalDate.parse(newInput.substring(endTimeIndex + 4, endTimeIndex + 14));
+                        out.addEndDate(endDate);
+                    }
+                    return out;
+                }
+            } catch (DukeExcpetion | DateTimeParseException e) {
+                return new Event(name, newInput.substring(timeIndex + 4));
+            }
+        }
+    }
+
+    private static Executable parseDoAfter(String newInput) throws DukeExcpetion {
+        int timeIndex = newInput.indexOf("/after", 8);
+        if (timeIndex == -1) {
+            throw new DukeExcpetion("Not a valid doafter. Please add a time with /after or mark it as a todo.");
+        } else if (timeIndex < 9) {
+            throw new DukeExcpetion("Not a valid doafter. Please enter a valid name of the doafter.");
+        } else {
+            String name = newInput.substring(8, timeIndex - 1);
+            try {
+                LocalDate startDate = LocalDate.parse(newInput.substring(timeIndex + 7, timeIndex + 17));
+                if (newInput.length() > timeIndex + 19) {
+                    LocalTime startTime = parseTime(newInput.substring(timeIndex + 18));
+                    return new Doafter(name, startDate, startTime);
+                } else {
+                    return new Doafter(name, startDate);
+                }
+            } catch (DukeExcpetion e) {
+                return new Doafter(name, newInput.substring(timeIndex + 7));
             }
         }
     }
@@ -108,20 +143,18 @@ public class Parser {
             throw new DukeExcpetion("Not a valid deadline. Please add a time with /by or mark it as a todo.");
         } else if (timeIndex < 10) {
             throw new DukeExcpetion("Not a valid deadline. Please enter a name of the deadline.");
-        } else if (newInput.length() > timeIndex + 16) {
-            try {
-                return new Deadline(newInput.substring(9, timeIndex - 1),
-                        LocalDate.parse(newInput.substring(timeIndex + 4, timeIndex + 14)),
-                        parseTime(newInput.substring(timeIndex + 15)));
-            } catch (DukeExcpetion e) {
-                return new Deadline(newInput.substring(9, timeIndex - 1), newInput.substring(timeIndex + 4));
-            }
         } else {
+            String name = newInput.substring(9, timeIndex - 1);
             try {
-                return new Deadline(newInput.substring(9, timeIndex - 1),
-                        LocalDate.parse(newInput.substring(timeIndex + 4)));
-            } catch (DateTimeParseException e) {
-                return new Deadline(newInput.substring(9, timeIndex - 1), newInput.substring(timeIndex + 4));
+                LocalDate endDate = LocalDate.parse(newInput.substring(timeIndex + 4, timeIndex + 14));
+                if (newInput.length() > timeIndex + 16) {
+                    LocalTime endTime = parseTime(newInput.substring(timeIndex + 15));
+                    return new Deadline(name, endDate, endTime);
+                } else {
+                    return new Deadline(name, endDate);
+                }
+            } catch (DukeExcpetion e) {
+                return new Deadline(name, newInput.substring(timeIndex + 4));
             }
         }
     }

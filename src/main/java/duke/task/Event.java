@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * Tasks that start at a specific time and ends at a specific time.
+ * Tasks that start at a specific time and ends at a specific time
  * 
  * @author Tianqi-Zhu
  */
@@ -15,6 +15,8 @@ public class Event extends Task {
     private String timeString;
     private LocalDate startDate; 
     private LocalTime startTime;
+    private LocalDate endDate;
+    private LocalTime endTime;
 
     public Event(String name, String time) {
         super(name);
@@ -35,13 +37,27 @@ public class Event extends Task {
         this.isTimeString = false; 
     }
 
+    public void addEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public void addEndDateTime(LocalDate endDate, LocalTime endTime) {
+        this.endDate = endDate;
+        this.endTime = endTime;
+    }
+
     private String getTime() {
         if (isTimeString) {
             return timeString; 
-        } else if (startTime == null) {
+        } else if (startTime == null && endDate == null) {
             return Ui.OUT_DATE_FORMATTER.format(startDate);
-        } else {
+        } else if (startTime == null) {
+            return Ui.OUT_DATE_FORMATTER.format(startDate) + "to " + Ui.OUT_DATE_FORMATTER.format(endDate);
+        } else if (endDate == null) {
             return Ui.OUT_DATE_FORMATTER.format(startDate) + " " + Ui.OUT_TIME_FORMATTER.format(startTime);
+        } else {
+            return Ui.OUT_DATE_FORMATTER.format(startDate) + " " + Ui.OUT_TIME_FORMATTER.format(startTime) + "to "
+                    + Ui.OUT_DATE_FORMATTER.format(endDate) + Ui.OUT_TIME_FORMATTER.format(endTime);
         }
     }
 
