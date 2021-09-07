@@ -15,10 +15,10 @@ public class Event extends Task {
      */
     public Event(String description, String at) {
         super(description);
-        String[] fromTo = at.split("--");
+        String[] startingEndingTime = at.split("--");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
-        String from = fromTo[0];
-        String to = fromTo[1];
+        String from = startingEndingTime[0];
+        String to = startingEndingTime[1];
         this.from = LocalDateTime.parse(from, formatter);
         this.to = LocalDateTime.parse(to, formatter);
     }

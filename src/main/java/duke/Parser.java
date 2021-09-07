@@ -45,10 +45,10 @@ public class Parser {
             return new AddCommand(task);
         } else if (commands[0].equals("deadline")) {
             Task task = parseDeadline(input);
-           return new AddCommand(task);
+            return new AddCommand(task);
         } else if (commands[0].equals("event")) {
             Task task = parseEvent(input);
-           return new AddCommand(task);
+            return new AddCommand(task);
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }

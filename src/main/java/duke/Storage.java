@@ -19,12 +19,12 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.filePath = filePath;
-        File dukeFile = new File(filePath);
-        File directory = dukeFile.getParentFile();
-        if (!directory.exists()) {
-            directory.mkdir();
-        }
         try {
+            File dukeFile = new File(filePath);
+            File directory = dukeFile.getParentFile();
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
             if (!dukeFile.exists()) {
                 dukeFile.createNewFile();
             }
@@ -57,15 +57,15 @@ public class Storage {
      * @throws DukeException Exception that duke bot can throw.
      */
     public static Task convertTaskStringToTask(String taskString) throws Exception {
-        int pointer = 0;
-        String[] newTask = taskString.split("&&");
-        String taskType = newTask[0];
-        pointer += taskType.length() + 2;
-        String status = newTask[1];
-        pointer += status.length() + 2;
-        String taskDescription = newTask[2];
-        pointer += taskDescription.length() + 2;
-        String taskTime = taskString.substring(pointer);
+        String splitSign = "&&";
+        String[] newTaskCommands = taskString.split(splitSign);
+        String taskType = newTaskCommands[0];
+        String status = newTaskCommands[1];
+        String taskDescription = newTaskCommands[2];
+        int taskTimeStartIndex = taskType.length() + splitSign.length()
+                + status.length() + splitSign.length()
+                + taskDescription.length() + splitSign.length();
+        String taskTime = taskString.substring(taskTimeStartIndex);
         Task task;
         switch(taskType) {
         case "T":
