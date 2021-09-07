@@ -28,13 +28,13 @@ public class TextUi {
     }
 
     /** Displays the welcome message. */
-    public void showWelcome() {
+    public void showWelcomeMessage() {
         out.println(LOGO);
         out.println(GREETINGS);
     }
 
     /** Displays the exit message. */
-    public void showGoodbye() {
+    public void showGoodbyeMessage() {
         out.println(GOODBYE);
     }
 
