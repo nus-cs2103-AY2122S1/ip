@@ -1,15 +1,15 @@
 package duke.command;
 
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
 
 /**
  * Represents a Command that marks a task as completed in a TaskList
  * A DoneCommand contains an index representing the index of the task in the TaskList that was completed.
  */
 public class DoneCommand extends Command {
-    
+
     private int toComplete;
 
     /**

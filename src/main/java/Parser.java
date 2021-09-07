@@ -4,18 +4,18 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.task.ToDo;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.command.Command;
 import duke.command.AddCommand;
+import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
-import duke.command.ListCommand;
 import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.exception.IllegalCommandException;
 import duke.exception.IllegalTaskException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
 
 /**
  * Represents a Parser that parses in the input received by the UI

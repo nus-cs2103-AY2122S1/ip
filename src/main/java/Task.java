@@ -11,7 +11,7 @@ public abstract class Task {
         this(false, toDo);
     }
 
-    Task(boolean isDone, String toDo){
+    Task(boolean isDone, String toDo) {
         this.isDone = isDone;
         this.toDo = toDo;
     }
@@ -19,7 +19,7 @@ public abstract class Task {
     /**
      * Changes the done variable stored in Task to 1, representing a completed task.
      */
-    public void complete(){
+    public void complete() {
         this.isDone = true;
     }
 
@@ -40,13 +40,13 @@ public abstract class Task {
      * @return a String in the format "Completion Status | Task"
      */
     public String getToWrite() {
-        return  this.getDone() + " | "  + this.getToDo();
+        return this.getDone() + " | " + this.getToDo();
     }
 
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Task)){
+        if (!(o instanceof Task)) {
             return false;
         } else {
             Task oTask = (Task) o;
@@ -55,8 +55,8 @@ public abstract class Task {
     }
 
     @Override
-    public String toString(){
-        if(isDone){
+    public String toString() {
+        if (isDone) {
             return String.format("[X] %s", toDo);
         } else {
             return String.format("[ ] %s", toDo);

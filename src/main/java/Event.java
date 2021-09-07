@@ -20,7 +20,7 @@ public class Event extends Task {
      * @param date date of the event.
      * @param time time of the event.
      */
-    public Event(String toDo, LocalDate date, LocalTime time){
+    public Event(String toDo, LocalDate date, LocalTime time) {
         super(toDo);
         this.date = date;
         this.time = time;
@@ -31,8 +31,10 @@ public class Event extends Task {
     }
 
     String getDateString() {
-        return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))  + ", " + 
-        time.format(DateTimeFormatter.ofPattern("hh:mm a"));
+        return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                + ", "
+                + time.format(DateTimeFormatter.ofPattern("hh:mm a")
+        );
     }
 
     /**
@@ -48,7 +50,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return("[E]" + super.toString() + "(at: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " "
-                + time.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")");
+        return "[E]" + super.toString() + "(at: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                + " "
+                + time.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";
     }
 }

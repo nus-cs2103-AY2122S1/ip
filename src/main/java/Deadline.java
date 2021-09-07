@@ -20,7 +20,7 @@ public class Deadline extends Task {
      * @param date deadline date of the task
      * @param time deadline time of the task
      */
-    public Deadline(String toDo, LocalDate date, LocalTime time){
+    public Deadline(String toDo, LocalDate date, LocalTime time) {
         super(toDo);
         this.date = date;
         this.time = time;
@@ -29,10 +29,10 @@ public class Deadline extends Task {
     String getType() {
         return "D";
     }
-    
+
     String getDateString() {
-        return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))  + ", " + 
-                time.format(DateTimeFormatter.ofPattern("hh:mm a"));
+        return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", "
+                + time.format(DateTimeFormatter.ofPattern("hh:mm a"));
     }
 
     /**
@@ -55,7 +55,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return("[D]" + super.toString() + "(by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " 
-                + time.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")");
+        return "[D]" + super.toString() + "(by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + " "
+                + time.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";
     }
 }

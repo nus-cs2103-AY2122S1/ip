@@ -1,8 +1,9 @@
 package duke.command;
 
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
+
 
 /**
  * Represents a Command that deletes a task from the TaskList.
@@ -29,9 +30,8 @@ public class DeleteCommand extends Command {
      * @param storage unused.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.printDelete(tasks, index);
         tasks.delete(index);
     }
-    
 }

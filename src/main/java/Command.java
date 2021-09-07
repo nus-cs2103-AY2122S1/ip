@@ -1,9 +1,10 @@
 package duke.command;
 
 import java.io.IOException;
+
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
 
 /**
  * Command is the abstract base class for all Commands.
@@ -28,5 +29,4 @@ public abstract class Command {
     public boolean isExit() {
         return false;
     }
-    
 }

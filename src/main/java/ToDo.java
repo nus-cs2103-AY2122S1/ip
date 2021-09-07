@@ -11,7 +11,7 @@ public class ToDo extends Task {
      * Creates a ToDo Object containing the task to be done.
      * @param toDo task to be done.
      */
-    public ToDo(String toDo){
+    public ToDo(String toDo) {
         super(toDo);
     }
 
@@ -30,6 +30,6 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        return("[T]" + super.toString());
+        return "[T]" + super.toString();
     }
 }

@@ -1,8 +1,8 @@
 package duke;
 
 import java.util.Scanner;
+
 import duke.task.Task;
-import java.util.ArrayList;
 
 /**
  * Represents the UI of the chatbot.
@@ -12,6 +12,11 @@ import java.util.ArrayList;
 public class Ui {
 
     private Scanner sc;
+    private final String logo = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
 
     /**
      * Creates a UI Object containing a Scanner that reads the inputs.
@@ -19,13 +24,6 @@ public class Ui {
     public Ui() {
         sc = new Scanner(System.in);
     }
-
-    private String logo = " ____        _        \n"
-    + "|  _ \\ _   _| | _____ \n"
-    + "| | | | | | | |/ / _ \\\n"
-    + "| |_| | |_| |   <  __/\n"
-    + "|____/ \\__,_|_|\\_\\___|\n";
-
 
     /**
      * Prints the greeting message the user sees when the Bot is started up.
@@ -78,7 +76,7 @@ public class Ui {
      * @param tasks TaskList containing the Task that was deleted.
      * @param toDelete Index of the deleted Task in the TaskList
      */
-    public void printDelete(TaskList tasks, int toDelete){
+    public void printDelete(TaskList tasks, int toDelete) {
         System.out.println("Noted. I've removed this task: ");
         System.out.println(String.format("  %s", tasks.get(toDelete)));
         System.out.println(String.format("Now you have %d tasks in the list", tasks.getSize() - 1));
@@ -105,7 +103,7 @@ public class Ui {
      */
     public void printList(TaskList tasks) {
         System.out.println("Here are the tasks in your list: ");
-        for(int i = 0; i < tasks.getSize(); i++){
+        for (int i = 0; i < tasks.getSize(); i++) {
             System.out.println((i + 1) + ". " + tasks.get(i));
         }
     }
