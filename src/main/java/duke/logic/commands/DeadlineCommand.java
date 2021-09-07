@@ -8,6 +8,8 @@ import duke.logic.tasks.Deadline;
  * Adds a new deadline task to the task list.
  */
 public class DeadlineCommand extends Command {
+    private static final String DEADLINE_TASK_ADDED_MSG = "I've added:\n  ";
+
     private final Deadline deadline;
 
     /**
@@ -28,6 +30,6 @@ public class DeadlineCommand extends Command {
     @Override
     public CommandResult execute() {
         getTaskList().add(deadline);
-        return new CommandResult("I've added:\n  " + deadline);
+        return new CommandResult(DEADLINE_TASK_ADDED_MSG + deadline);
     }
 }

@@ -4,6 +4,7 @@ package duke.logic.commands;
  * Exits the program.
  */
 public class ExitCommand extends Command {
+    private static final String EXIT_MSG = "Closing...";
 
     /**
      * Exits the program.
@@ -12,7 +13,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public CommandResult execute() {
-        return new CommandResult("Closing...");
+        return new CommandResult(EXIT_MSG);
     }
 
     /**
@@ -22,7 +23,11 @@ public class ExitCommand extends Command {
      * @return true if the input matches the exit command, false otherwise.
      */
     public static boolean isExit(String userInput) {
-        return "bye".equals(userInput);
+        CommandCode cc = CommandCode.getCommandCode(userInput);
+        if (cc == null) {
+            return false;
+        } else {
+            return cc.equals(CommandCode.BYE);
+        }
     }
-
 }

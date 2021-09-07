@@ -6,7 +6,13 @@ import duke.logic.tasks.TaskList;
  * Marks a task as done.
  */
 public class DoneCommand extends Command {
-    /** The index of the task to mark as done, 1-based not zero-based. */
+    /** Strings for command result messages */
+    private static final String EMPTY_TASK_LIST_MSG = "You don't have any tasks!";
+    private static final String TASK_NUMBER_OUT_OF_BOUNDS_MSG = "Invalid task number! Must be between 1 and ";
+    private static final String TASK_MARKED_AS_DONE_MSG = "I've marked this task as done:\n  ";
+    private static final String TASK_ALREADY_DONE_MSG = "Task already done.";
+
+   /** The index of the task to mark as done, 1-based not zero-based. */
     private final int taskNo;
 
     /**
@@ -30,13 +36,13 @@ public class DoneCommand extends Command {
     public CommandResult execute() {
         TaskList taskList = getTaskList();
         if (taskNo > taskList.size() || taskNo <= 0) {
-            String msg = taskList.size() == 0
-                    ? "You don't have any tasks!"
-                    : "Invalid task number! Must be between 1 and " + taskList.size();
+            String msg = (taskList.size() == 0)
+                    ? EMPTY_TASK_LIST_MSG
+                    : TASK_NUMBER_OUT_OF_BOUNDS_MSG + taskList.size();
             return new CommandResult(msg);
         }
         return (taskList.markAsDone(taskNo))
-                ? new CommandResult("I've marked this task as done:\n  " + taskList.get(taskNo))
-                : new CommandResult("Task already done.");
+                ? new CommandResult(TASK_MARKED_AS_DONE_MSG + taskList.get(taskNo))
+                : new CommandResult(TASK_ALREADY_DONE_MSG);
     }
 }
