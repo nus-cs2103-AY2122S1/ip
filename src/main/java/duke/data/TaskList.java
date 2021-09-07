@@ -54,7 +54,7 @@ public class TaskList {
         } else if (taskNum > list.size()) {
             throw new DukeException("no such task");
         }
-
+        assert taskNum > 0 : "task number is empty";
         Task item = list.remove(taskNum - 1);
         this.updateFile();
         return Ui.getRemoveMsg(item.toString(), getTotalTasks());
@@ -74,7 +74,7 @@ public class TaskList {
         } else if (taskNum > list.size()) {
             throw new DukeException("no such task");
         }
-
+        assert taskNum > 0 : "task number is empty";
         Task item = list.get(taskNum - 1);
         item.markAsDone();
         this.updateFile();
