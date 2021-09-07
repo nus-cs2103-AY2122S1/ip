@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * DukeException is a runtime exception for exceptions generated due to invalid inputs or problems adding tasks.

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import duke.Duke;
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.logic.CommandParser;
 import duke.logic.CommandsEnum;
 import duke.logic.Storage;

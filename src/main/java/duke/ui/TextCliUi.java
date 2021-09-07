@@ -2,7 +2,7 @@ package duke.ui;
 
 import java.util.Scanner;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.logic.CommandParser;
 import duke.logic.Storage;
 import duke.task.TaskList;

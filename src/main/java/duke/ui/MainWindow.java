@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 import duke.Duke;
-import duke.DukeException;
+import duke.exception.DukeException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

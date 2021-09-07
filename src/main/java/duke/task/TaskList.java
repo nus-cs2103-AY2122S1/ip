@@ -11,7 +11,7 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import duke.DukeException;
+import duke.exception.InvalidTaskNumberException;
 
 /**
  * Encapsulates a list of tasks that the user wants to keep track of.
@@ -41,14 +41,13 @@ public class TaskList {
      * Adds the task into the list.
      *
      * @param task The task to be added
-     * @return true if the task is successfully added, or false if the task is not added as the list is full.
+     * @throws InvalidTaskNumberException when the task number given is invalid.
      */
-    public boolean addTask(Task task) {
+    public void addTask(Task task) {
         if (tasks.size() >= limit) {
-            return false;
+            throw new InvalidTaskNumberException(size());
         }
         tasks.add(task);
-        return true;
     }
 
     private boolean validTaskNumber(int taskNumber) {
@@ -66,7 +65,7 @@ public class TaskList {
         if (validTaskNumber(taskNumber)) {
             return tasks.remove(taskNumber - 1);
         }
-        throw new InvalidTaskNumberException();
+        throw new InvalidTaskNumberException(size());
     }
 
     /**
@@ -78,7 +77,7 @@ public class TaskList {
      */
     public Task getTask(int taskNumber) {
         if (!validTaskNumber(taskNumber)) {
-            throw new InvalidTaskNumberException();
+            throw new InvalidTaskNumberException(size());
         }
         return tasks.get(taskNumber - 1);
     }
@@ -167,13 +166,4 @@ public class TaskList {
         return tasks.size();
     }
 
-    private class InvalidTaskNumberException extends DukeException {
-        public InvalidTaskNumberException() {
-            super(tasks.size() > 1
-                ? "Please input a value between 1 and " + tasks.size()
-                : tasks.size() == 1
-                ? "You can only input the value 1"
-                : "There are no tasks so far");
-        }
-    }
 }

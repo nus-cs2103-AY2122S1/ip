@@ -2,7 +2,8 @@ package duke.logic;
 
 import java.io.IOException;
 
-import duke.DukeException;
+import duke.exception.DukeException;
+import duke.exception.InvalidCommandException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TasksEnum;
@@ -32,7 +33,7 @@ public class CommandParser {
      */
     public CommandParser(String input, TaskList taskList, Storage storage, Ui ui) {
         if (input == null || input.equals("")) {
-            throw new DukeException(EMPTY_INPUT_MESSAGE);
+            throw new InvalidCommandException(EMPTY_INPUT_MESSAGE);
         }
         String[] inputArr = input.split(" ", 2);
         CommandsEnum commandEnum;
@@ -57,12 +58,12 @@ public class CommandParser {
                 return;
             default:
                 if (inputArr.length < 2) {
-                    throw new DukeException(TOO_LITTLE_ARGUMENTS_MESSAGE);
+                    throw new InvalidCommandException(TOO_LITTLE_ARGUMENTS_MESSAGE);
                 }
                 output = parseMultiword(inputArr[1], commandEnum, taskList, ui);
             }
         } catch (IllegalArgumentException e) {
-            throw new DukeException(INVALID_COMMAND);
+            throw new InvalidCommandException(INVALID_COMMAND);
         }
         try {
             storage.updateDukeTextFile();
@@ -94,7 +95,7 @@ public class CommandParser {
             try {
                 taskNumber = Integer.parseInt(inputWords);
             } catch (NumberFormatException e) {
-                throw new DukeException(INVALID_NUMBER_MESSAGE);
+                throw new InvalidCommandException(INVALID_NUMBER_MESSAGE);
             }
             switch (commandsEnum) {
             case DONE:
@@ -106,7 +107,7 @@ public class CommandParser {
             case DELETE:
                 return ui.removeTaskMessage(taskList.removeTask(taskNumber), taskList.size());
             default:
-                throw new DukeException(INVALID_COMMAND);
+                throw new InvalidCommandException(INVALID_COMMAND);
             }
         }
     }
@@ -125,9 +126,7 @@ public class CommandParser {
         assert taskList != null : "task list cannot be null";
         TasksEnum tasksEnum = TasksEnum.valueOf(action);
         Task result = tasksEnum.getTask(otherInput);
-        if (!taskList.addTask(result)) { // if adding task is unsuccessful
-            throw new DukeException(FULL_TASKLIST_MESSAGE);
-        }
+        taskList.addTask(result);
         return result;
     }
 
