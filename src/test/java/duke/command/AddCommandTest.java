@@ -1,9 +1,11 @@
 package duke.command;
-import duke.exception.IncompleteDescriptionException;
-import duke.exception.InvalidDateFormatException;
-import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
+import duke.exception.IncompleteDescriptionException;
+import duke.exception.InvalidDateFormatException;
 
 /**
  * A test class which tests if addCommand's methods work as intended.
@@ -31,8 +33,8 @@ public class AddCommandTest {
      */
     @Test
     public void addCommand_invalidEventDate_exceptionThrown() {
-        assertThrows(InvalidDateFormatException.class,
-                () -> new AddCommand("EVENT", "sample event /at tomorrow"));
+        assertThrows(InvalidDateFormatException.class, () ->
+                new AddCommand("EVENT", "sample event /at tomorrow"));
     }
 
     /**
@@ -40,7 +42,7 @@ public class AddCommandTest {
      */
     @Test
     public void addCommand_invalidDeadlineDate_exceptionThrown() {
-        assertThrows(InvalidDateFormatException.class,
-                () -> new AddCommand("DEADLINE", "sample deadline /by tomorrow"));
+        assertThrows(InvalidDateFormatException.class, () ->
+                new AddCommand("DEADLINE", "sample deadline /by tomorrow"));
     }
 }

@@ -28,7 +28,7 @@ public class ListCommand extends Command {
                         .append(".")
                         .append(task);
             }
-            currentIndex ++;
+            currentIndex++;
         }
 
         return response.toString();

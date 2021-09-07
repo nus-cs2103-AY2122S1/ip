@@ -1,11 +1,11 @@
 package util;
 
-import duke.exception.MissingArgumentException;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import duke.util.Parser;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import duke.exception.MissingArgumentException;
+import duke.util.Parser;
 
 /**
  * A test class which tests if Parser's methods work as intended.

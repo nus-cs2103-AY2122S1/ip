@@ -5,7 +5,7 @@ package duke.util;
  */
 public class Ui {
 
-    protected static final String logo = "\t\t          __      __      ___        \n"
+    protected static final String LOGO = "\t\t          __      __      ___        \n"
             + "\t\t         |  _ \\   |   |  /   _   \\\n"
             + "\t\t         | | |  |  |   |  |  /  \\  |\n"
             + "\t\t         | |_|  |  |   |  |  \\_/  |\n"
@@ -21,7 +21,7 @@ public class Ui {
      * Returns welcome message to greet the user.
      */
     public String showWelcome() {
-        return logo;
+        return LOGO;
     }
 
     /**

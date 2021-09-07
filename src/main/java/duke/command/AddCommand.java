@@ -1,5 +1,8 @@
 package duke.command;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import duke.exception.IncompleteDescriptionException;
 import duke.exception.InvalidDateFormatException;
 import duke.exception.MissingArgumentException;
@@ -11,13 +14,10 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
 /**
  * A class that handles task-addition command.
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
 
     private enum TaskType {
         TODO, EVENT, DEADLINE
@@ -108,7 +108,7 @@ public class AddCommand extends Command{
             InvalidDateFormatException {
         LocalDate date = null;
         if (hasTaskDate) {
-            String taskDateString =  taskDetails[1];
+            String taskDateString = taskDetails[1];
             identifyAllWhiteSpace(taskDateString);
             identifyInvalidDateFormat(taskDateString);
             date = toLocalDate(taskDateString);

@@ -1,14 +1,14 @@
 package duke.util;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A class that contains the task list and deals with add/delete operation on the list.
@@ -56,7 +56,7 @@ public class TaskList {
             LocalDate by = LocalDate.parse(date);
             return new Deadline(description, by);
         default:
-          return null;
+            return null;
         }
     }
 
@@ -70,7 +70,7 @@ public class TaskList {
             String date = type.equals(TaskType.TODO) ? null : taskDetails[3];
             Task task = createTask(type, description, date);
 
-            boolean isTask =  task != null;
+            boolean isTask = task != null;
             boolean isDone = taskDetails[1].equals("1");
             if (isTask && isDone) {
                 task.markAsDone();
