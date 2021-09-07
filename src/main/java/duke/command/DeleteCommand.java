@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
         if (next.length() > 7) {
             myTasks.getDelete(next);
         } else {
-            Ui.myPrint("☹ OOPS!!! Please enter a valid number, such as delete 3");
+            Ui.printDuke("☹ OOPS!!! Please enter a valid number, such as delete 3");
         }
     }
 }

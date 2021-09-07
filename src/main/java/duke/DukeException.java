@@ -7,11 +7,11 @@ package duke;
  * @version CS2103T AY21/22 Semester 1
  */
 public class DukeException extends Exception {
-    private static String ind = "    ";
+    private static final String IND = "    ";
     //for sentences
-    private static String ind2 = "     ";
-    private static String div = ind + "";
-    private String message;
+    private static final String IND_2 = "     ";
+    private static final String DIV = IND + "";
+    private final String message;
 
     /**
      * The construction method of an exception
@@ -29,6 +29,6 @@ public class DukeException extends Exception {
      */
     @Override
     public String toString() {
-        return div + "\n" + ind2 + message + "\n" + div;
+        return DIV + "\n" + IND_2 + message + "\n" + DIV;
     }
 }

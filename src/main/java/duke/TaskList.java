@@ -63,43 +63,40 @@ public class TaskList {
         case ("deadline"):
             int j = findTime("/by", ss);
             String[] info = getInfo(j, ss);
-            if (info[0] != "" && info[1] != "") {
-                Deadline ddl;
-                if (info[1].length() == 10) {
-                    LocalDate date = getDate(info[1]);
-                    ddl = new Deadline(info[0], date);
-                } else if (info[1].length() == 16) {
-                    LocalDateTime time = getTime(info[1]);
-                    ddl = new Deadline(info[0], time);
-                } else {
-                    throw new DukeException("Please enter time in the form of dd/MM/yyyy HH:mm or dd/MM/yyyy.");
-                }
-                this.taskList.add(ddl);
-                noteAdded(ddl);
-            } else {
+            if (!(info[0] != "" && info[1] != "")) {
                 throw new DukeException("☹ OOPS!!! The description and time of a deadline cannot be empty.");
             }
+            Deadline ddl;
+            if (info[1].length() == 10) {
+                LocalDate date = getDate(info[1]);
+                ddl = new Deadline(info[0], date);
+            } else if (info[1].length() == 16) {
+                LocalDateTime time = getTime(info[1]);
+                ddl = new Deadline(info[0], time);
+            } else {
+                throw new DukeException("Please enter time in the form of dd/MM/yyyy HH:mm or dd/MM/yyyy.");
+            }
+            this.taskList.add(ddl);
+            noteAdded(ddl);
             break;
         case ("event"):
             int k = findTime("/at", ss);
             String[] info2 = getInfo(k, ss);
-            if (info2[0] != "" && info2[1] != "") {
-                Event e;
-                if (info2[1].length() >= 10) {
-                    LocalDate date = getDate(info2[1].substring(0, 10));
-                    String time = "";
-                    if (info2[1].length() >= 11) {
-                        time = info2[1].substring(11);
-                    }
-                    e = new Event(info2[0], date, time);
-                } else {
-                    throw new DukeException("Please enter time in the form of dd/MM/yyyy time.");
-                }
-                this.taskList.add(e);
-                noteAdded(e);
-            } else {
+            if (!(info2[0] != "" && info2[1] != "")) {
                 throw new DukeException("☹ OOPS!!! The description and time of an event cannot be empty.");
             }
+            Event e;
+            if (info2[1].length() < 10) {
+                throw new DukeException("Please enter time in the form of dd/MM/yyyy time.");
+            }
+            LocalDate date = getDate(info2[1].substring(0, 10));
+            String time = "";
+            if (info2[1].length() >= 11) {
+                time = info2[1].substring(11);
+            }
+            e = new Event(info2[0], date, time);
+            this.taskList.add(e);
+            noteAdded(e);
             break;
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -136,13 +133,12 @@ public class TaskList {
      * @throws DukeException if the position is invalid throws exceptions
      */
     public void complete(int pos) throws DukeException {
-        if (this.taskList.size() > pos - 1 && pos > 0) {
-            String p = this.taskList.get(pos - 1).finished();
-            Duke.saveFile();
-            Ui.sayDone(p);
-        } else {
+        if (!(this.taskList.size() > pos - 1 && pos > 0)) {
             throw new DukeException("☹ OOPS!!! There isn't a task with index " + pos + " in your list.");
         }
+        String p = this.taskList.get(pos - 1).finished();
+        Duke.saveFile();
+        Ui.sayDone(p);
     }
 
     /**
@@ -152,21 +148,20 @@ public class TaskList {
      * @throws DukeException if the position is invalid throws exceptions
      */
     public void delete(int pos) throws DukeException {
-        if (this.taskList.size() > pos - 1 && pos > 0) {
-            Task deleted = this.taskList.get(pos - 1);
-            this.taskList.remove(deleted);
-            int total = taskList.size();
-            String sOrNot = "";
-            if (total <= 1) {
-                sOrNot = "task";
-            } else {
-                sOrNot = "tasks";
-            }
-            Duke.saveFile();
-            Ui.sayDelete(deleted, total, sOrNot);
-        } else {
+        if (!(this.taskList.size() > pos - 1 && pos > 0)) {
             throw new DukeException("☹ OOPS!!! There isn't a task with index " + pos + " in your list.");
         }
+        Task deleted = this.taskList.get(pos - 1);
+        this.taskList.remove(deleted);
+        int total = taskList.size();
+        String sOrNot = "";
+        if (total <= 1) {
+            sOrNot = "task";
+        } else {
+            sOrNot = "tasks";
+        }
+        Duke.saveFile();
+        Ui.sayDelete(deleted, total, sOrNot);
     }
 
     private static int findTime(String s, String[] arr) {
@@ -324,20 +319,19 @@ public class TaskList {
      */
     public void getDone(String next) {
         String emp = next.substring(4, 5);
-        if (emp.equals(" ")) {
-            String index = next.substring(5);
+        if (!emp.equals(" ")) {
+            Ui.printDuke("☹ OOPS!!! Please enter a valid number, such as done 3");
+        }
+        String index = next.substring(5);
+        try {
+            int position = Integer.parseInt(index);
             try {
-                int position = Integer.parseInt(index);
-                try {
-                    this.complete(position);
-                } catch (DukeException dukeException) {
-                    Ui.showError(dukeException);
-                }
-            } catch (NumberFormatException numberFormatException) {
-                Ui.myPrint("☹ OOPS!!! Please enter a valid number, such as done 3");
+                this.complete(position);
+            } catch (DukeException dukeException) {
+                Ui.showError(dukeException);
             }
-        } else {
-            Ui.myPrint("☹ OOPS!!! Please enter a valid number, such as done 3");
+        } catch (NumberFormatException numberFormatException) {
+            Ui.printDuke("☹ OOPS!!! Please enter a valid number, such as done 3");
         }
     }
 
@@ -348,20 +342,19 @@ public class TaskList {
      */
     public void getDelete(String next) {
         String emp = next.substring(6, 7);
-        if (emp.equals(" ")) {
-            String index = next.substring(7);
+        if (!emp.equals(" ")) {
+            Ui.printDuke("☹ OOPS!!! Please enter a valid number, such as delete 3");
+        }
+        String index = next.substring(7);
+        try {
+            int position = Integer.parseInt(index);
             try {
-                int position = Integer.parseInt(index);
-                try {
-                    this.delete(position);
-                } catch (DukeException dukeException) {
-                    Ui.showError(dukeException);
-                }
-            } catch (NumberFormatException numberFormatException) {
-                Ui.myPrint("☹ OOPS!!! Please enter a valid number, such as delete 3");
+                this.delete(position);
+            } catch (DukeException dukeException) {
+                Ui.showError(dukeException);
             }
-        } else {
-            Ui.myPrint("☹ OOPS!!! Please enter a valid number, such as delete 3");
+        } catch (NumberFormatException numberFormatException) {
+            Ui.printDuke("☹ OOPS!!! Please enter a valid number, such as delete 3");
         }
     }
 

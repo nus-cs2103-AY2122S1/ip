@@ -13,12 +13,10 @@ import duke.command.SearchCommand;
  * This class is the Duke class to start the whole program
  */
 public class Duke {
-    private static String ind2 = "     ";
-
-    private Storage storage;
-    private Ui ui;
-    private TaskList myTasks;
-    private Parser parser;
+    private final Storage storage;
+    private final Ui ui;
+    private final TaskList myTasks;
+    private final Parser parser;
     private MainWindow mainWindow;
 
     /**
@@ -36,35 +34,40 @@ public class Duke {
         storage.loadFile();
     }
 
+    /**
+     * Decides which instruction is given from user.
+     *
+     * @param input input from user
+     */
     public void processInput(String input) {
-        int result = parser.parse(input);
+        Parser.KeyWord result = parser.parse(input);
         Command executeNext;
         switch (result) {
-        case 0:
+        case END:
             ExitCommand exitCommand = new ExitCommand();
             exitCommand.execute();
             break;
-        case 1:
+        case LIST:
             executeNext = new ListCommand(myTasks);
             executeNext.execute();
             break;
-        case 2:
+        case DONE:
             executeNext = new DoneCommand(myTasks, input);
             executeNext.execute();
             break;
-        case 3:
+        case DELETE:
             executeNext = new DeleteCommand(myTasks, input);
             executeNext.execute();
             break;
-        case 4:
+        case GET:
             executeNext = new GetDayCommand(input);
             executeNext.execute();
             break;
-        case 6:
+        case SEARCH:
             executeNext = new SearchCommand(myTasks, input);
             executeNext.execute();
             break;
-        case 5:
+        case ADD:
             executeNext = new AddCommand(myTasks, input);
             executeNext.execute();
             break;

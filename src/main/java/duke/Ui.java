@@ -10,12 +10,12 @@ import duke.task.Task;
  */
 public class Ui {
     //for division
-    private static String ind = "    ";
+    private static final String IND = "    ";
     //for sentences
-    private static String ind2 = "     ";
-    private static String div = "";
+    private static final String IND_2 = "     ";
+    private static final String DIV = "";
     private static MainWindow mainWindow = null;
-    private Scanner sc = new Scanner(System.in);
+    private final Scanner sc = new Scanner(System.in);
 
     /**
      * Checks whether sc still has next line of input
@@ -40,9 +40,9 @@ public class Ui {
      *
      * @param s takes in the content
      */
-    public static void myPrint(String s) {
+    public static void printDuke(String s) {
         if (mainWindow != null) {
-            mainWindow.sendDukeResponse(div + "\n" + ind2 + s + "\n" + div + "\n");
+            mainWindow.sendDukeResponse(DIV + "\n" + IND_2 + s + "\n" + DIV + "\n");
         }
     }
 
@@ -66,7 +66,7 @@ public class Ui {
         String tasks = "";
         int i = 1;
         for (Task task : taskList) {
-            tasks += ind2 + i + ". " + task + "\n";
+            tasks += IND_2 + i + ". " + task + "\n";
             i++;
         }
         if (mainWindow != null) {
@@ -82,10 +82,10 @@ public class Ui {
      * @param sOrNot  check use "task" or "tasks" in the sentence.
      */
     public static void sayDelete(Task deleted, int total, String sOrNot) {
-        String s = div + "\n" + ind2 + "Noted. I've removed this task: " + "\n"
-                + ind2 + " " + deleted + "\n"
-                + ind2 + "Now you have " + total + " " + sOrNot + " in the list." + "\n"
-                + div + "\n";
+        String s = DIV + "\n" + IND_2 + "Noted. I've removed this task: " + "\n"
+                + IND_2 + " " + deleted + "\n"
+                + IND_2 + "Now you have " + total + " " + sOrNot + " in the list." + "\n"
+                + DIV + "\n";
         if (mainWindow != null) {
             mainWindow.sendDukeResponse(s);
         }
@@ -99,10 +99,10 @@ public class Ui {
      * @param sOrNot check use "task" or "tasks" in the sentence.
      */
     public static void sayAdd(Task t, int total, String sOrNot) {
-        String s = div + "\n" + ind2 + "Got it. I've added this task: " + "\n"
-                + ind2 + " " + t + "\n"
-                + ind2 + "Now you have " + total + " " + sOrNot + " in the list." + "\n"
-                + div + "\n";
+        String s = DIV + "\n" + IND_2 + "Got it. I've added this task: " + "\n"
+                + IND_2 + " " + t + "\n"
+                + IND_2 + "Now you have " + total + " " + sOrNot + " in the list." + "\n"
+                + DIV + "\n";
 
         if (mainWindow != null) {
             mainWindow.sendDukeResponse(s);
@@ -115,8 +115,8 @@ public class Ui {
      * @param p takes in the String of the task
      */
     public static void sayDone(String p) {
-        String s = div + "\n" + ind2 + "Nice! I've marked this task as done: " + "\n"
-                + ind2 + ind2 + p + "\n" + div + "\n";
+        String s = DIV + "\n" + IND_2 + "Nice! I've marked this task as done: " + "\n"
+                + IND_2 + IND_2 + p + "\n" + DIV + "\n";
 
         if (mainWindow != null) {
             mainWindow.sendDukeResponse(s);
@@ -131,11 +131,14 @@ public class Ui {
     private static void greeting() {
         String g = "Hello! I'm Duke";
         String g2 = "What can I do for you?";
-        Ui.myPrint(g + "\n" + ind2 + g2);
+        Ui.printDuke(g + "\n" + IND_2 + g2);
     }
 
+    /**
+     * Prints the goodbye message.
+     */
     public static void sayBye() {
-        Ui.myPrint("Bye. Hope to see you again soon!");
+        Ui.printDuke("Bye. Hope to see you again soon!");
         System.exit(0);
     }
 }

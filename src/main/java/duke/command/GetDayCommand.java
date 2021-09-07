@@ -24,14 +24,13 @@ public class GetDayCommand extends Command {
      */
     @Override
     public void execute() {
-        if (next.length() == 14) {
-            try {
-                TaskList.getOnADay(next.substring(4));
-            } catch (DukeException e) {
-                Ui.showError(e);
-            }
-        } else {
-            Ui.myPrint("☹ OOPS!!! Please enter a valid date, such as get dd/MM/yyyy");
+        if (next.length() != 14) {
+            Ui.printDuke("☹ OOPS!!! Please enter a valid date, such as get dd/MM/yyyy");
+        }
+        try {
+            TaskList.getOnADay(next.substring(4));
+        } catch (DukeException e) {
+            Ui.showError(e);
         }
     }
 }

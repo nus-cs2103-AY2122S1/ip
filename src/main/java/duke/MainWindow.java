@@ -1,7 +1,6 @@
 package duke;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -17,12 +16,9 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Main main;
     private Duke duke;
-
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpeg"));
 
@@ -33,8 +29,8 @@ public class MainWindow extends AnchorPane {
 
     public void setMain(Main d, Duke duke) {
         main = d;
-        duke = duke;
-        duke.setMainWindow(this);
+        this.duke = duke;
+        this.duke.setMainWindow(this);
     }
 
     /**
@@ -51,8 +47,13 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Gives response to user input.
+     *
+     * @param s input from the user
+     */
     public void sendDukeResponse(String s) {
-        if (s != "") {
+        if (!s.equals("")) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getDukeDialog(s, dukeImage)
             );
