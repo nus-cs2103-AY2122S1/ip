@@ -20,5 +20,4 @@ text-ui-test/EXPECTED-UNIX.TXT
 *.class
 
 # Test outputs
-/data.txt
 /data/duke.txt
