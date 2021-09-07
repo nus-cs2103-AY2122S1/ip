@@ -59,7 +59,7 @@ public class Parser {
             final Task task = toggleTask(tasks, storage, i, true);
             return String.join(
                     "\n",
-                    "Nice! I've marked this task as done:\n",
+                    "Nice! I've marked this task as done:",
                             "  " + Duke.renderTask(task)
             );
         } else if (command.equals("delete")) {
@@ -67,8 +67,8 @@ public class Parser {
             final Task task = popTask(tasks, storage, i);
             return String.join(
                     "\n",
-                    "Noted. I've removed this task:\n",
-                    "  " + Duke.renderTask(task) + "\n",
+                    "Noted. I've removed this task:",
+                    "  " + Duke.renderTask(task),
                     String.format("Now you have %d tasks in the list.", tasks.size())
             );
         } else if (command.equals("todo")) {
