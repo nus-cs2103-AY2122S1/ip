@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.exception.DukeException;
+import duke.ui.Gui;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Gui;
+import duke.exception.DukeException;
 
 /**
  * A FindCommand class that extends from the Command class.

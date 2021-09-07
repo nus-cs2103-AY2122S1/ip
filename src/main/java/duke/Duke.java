@@ -1,15 +1,17 @@
 package duke;
 
 import duke.command.Command;
-import duke.exception.DukeException;
-import duke.parser.Parser;
+
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.parser.Parser;
 import duke.ui.Gui;
+import duke.exception.DukeException;
+
 import javafx.application.Application;
+import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 /**
  * A chatbot based on Project Duke

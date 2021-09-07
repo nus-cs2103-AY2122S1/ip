@@ -1,15 +1,14 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.ui.Gui;
-import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
+import duke.task.Deadline;
 import duke.task.Event;
 import duke.utility.Utility;
-
+import duke.exception.DukeException;
 import java.time.LocalDateTime;
 
 /**
