@@ -27,7 +27,7 @@ public class Parser {
      */
     public String parse(String fullCommand) {
         String[] temp = fullCommand.split("\\s+", 2);
-        Command cmd = Command.fromString(temp[0]);
+        Command cmd = Command.cmdFromString(temp[0]);
         String remainder = temp.length > 1 ? temp[1] : "";
 
         assert cmd != null : "Error with Parser occurred.";
@@ -41,7 +41,7 @@ public class Parser {
         case DONE:
             //mark task as done
             int finishedTaskIndex = Integer.parseInt(remainder);
-            return tasks.doneTask(finishedTaskIndex - 1);
+            return tasks.markTaskDone(finishedTaskIndex - 1);
         case DELETE:
             //delete task
             int deletedTaskIndex = Integer.parseInt(remainder);
