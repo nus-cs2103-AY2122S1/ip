@@ -19,7 +19,7 @@ public class Parser {
      */
     protected static String parse(String userInput, TaskList taskList, Ui ui, Storage storage)
             throws UhtredRagnarsonException, IOException {
-        String result = "";
+        String result;
         String commandType = userInput.split(" ")[0];
         try {
             switch (commandType) {
