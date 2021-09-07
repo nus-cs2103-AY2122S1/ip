@@ -42,35 +42,17 @@ public class Storage {
         File f = new File(filePath);
         if (f.createNewFile()) {
             return new TaskList();
-        } else {
-            TaskList tasks = new TaskList();
-            Scanner s = new Scanner(f);
-            while (s.hasNext()) {
-                String next = s.nextLine();
-                String[] split = next.split("\\|", 4);
-                // checks if the line in the file read contains the tasks in correct format
-                assert split.length > 1;
-                Task t;
-                if (split[0].equals("T")) {
-                    t = new Todo(split[2]);
-                } else if (split[0].equals("D")) {
-                    t = new Deadline(split[2], split[3]);
-                } else {
-                    assert split[0].equals("E");
-                    t = new Event(split[2], split[3]);
-                }
-
-                if (split[1].equals("X")) {
-                    t.markAsDone();
-                } else {
-                    // the column for isDone must be empty if it is not 'X'
-                    assert split[1].equals(" ");
-                }
-                tasks.update(t);
-            }
-            s.close();
-            return tasks;
         }
+
+        TaskList tasks = new TaskList();
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            String next = s.nextLine();
+            Task task = parse(next);
+            tasks.update(task);
+        }
+        s.close();
+        return tasks;
     }
 
     /**
@@ -100,5 +82,33 @@ public class Storage {
         FileWriter fw = new FileWriter(filePath, i != 0);
         fw.write(textToAppend);
         fw.close();
+    }
+
+    /**
+     * Helper method to get the task based on the
+     * description from the hard disk.
+     *
+     * @param description The string representation of the task in the hard disk.
+     * @return The task based on the string representation given
+     */
+    private Task parse(String description) {
+        Task task;
+        String[] split = description.split("\\|", 4);
+
+        // check type of task
+        if (split[0].equals("T")) {
+            task = new Todo(split[2]);
+        } else if (split[0].equals("D")) {
+            task = new Deadline(split[2], split[3]);
+        } else {
+            task = new Event(split[2], split[3]);
+        }
+
+        // check if task is done
+        if (split[1].equals("X")) {
+            task.markAsDone();
+        }
+
+        return task;
     }
 }

@@ -27,30 +27,31 @@ public class Parser {
      */
     public Command parse(String fullCommand) throws LaniaException {
         String firstCommand = parseCommand(fullCommand);
-        if (firstCommand.equals("bye")) {
+        String taskDescription;
+        String[] task;
+        switch (firstCommand) {
+        case "bye":
             return new ExitCommand();
-        } else if (firstCommand.equals("list")) {
+        case "list":
             return new ListCommand();
-        } else if (firstCommand.equals("find")) {
+        case "find":
             return new FindCommand(parseTaskDescription(fullCommand));
-        } else if (firstCommand.equals("done")) {
+        case "done":
             return new CompleteCommand(getIndex(fullCommand));
-        } else if (firstCommand.equals("delete")) {
+        case "delete":
             return new DeleteCommand(getIndex(fullCommand));
-        } else {
-            if (firstCommand.equals("todo")) {
-                return new AddCommand(new Todo(parseTaskDescription(fullCommand)));
-            } else if (firstCommand.equals("deadline")) {
-                String taskDescription = parseTaskDescription(fullCommand);
-                String[] task = parseDeadline(taskDescription);
-                return new AddCommand(new Deadline(task[0], task[1]));
-            } else if (firstCommand.equals("event")) {
-                String taskDescription = parseTaskDescription(fullCommand);
-                String[] task = parseEvent(taskDescription);
-                return new AddCommand(new Event(task[0], task[1]));
-            } else {
-                throw new LaniaException("Sorry, but Lania does not know what that means.");
-            }
+        case "todo":
+            return new AddCommand(new Todo(parseTaskDescription(fullCommand)));
+        case "deadline":
+            taskDescription = parseTaskDescription(fullCommand);
+            task = parseDeadlineDescription(taskDescription);
+            return new AddCommand(new Deadline(task[0], task[1]));
+        case "event":
+            taskDescription = parseTaskDescription(fullCommand);
+            task = parseEventDescription(taskDescription);
+            return new AddCommand(new Event(task[0], task[1]));
+        default:
+            throw new LaniaException("Sorry, but Lania does not know what that means.");
         }
     }
 
@@ -77,9 +78,9 @@ public class Parser {
         String[] split = command.split(" ", 2);
         if (split.length == 1) {
             throw new LaniaEmptyDescriptionException(split[0]);
-        } else {
-            return split[1];
         }
+
+        return split[1];
     }
 
     /**
@@ -89,13 +90,13 @@ public class Parser {
      * @return An array of strings containing the task description and its date and time.
      * @throws LaniaEmptyDescriptionException If the date and time is not provided.
      */
-    public String[] parseDeadline(String command) throws LaniaEmptyDescriptionException {
+    public String[] parseDeadlineDescription(String command) throws LaniaEmptyDescriptionException {
         String[] split = command.split(" /by ");
         if (split.length == 1) {
             throw new LaniaEmptyDescriptionException("date/time");
-        } else {
-            return split;
         }
+
+        return split;
     }
 
     /**
@@ -105,13 +106,13 @@ public class Parser {
      * @return An array of strings containing the task description and its date and time.
      * @throws LaniaEmptyDescriptionException If the date and time is not provided.
      */
-    public String[] parseEvent(String command) throws LaniaEmptyDescriptionException {
+    public String[] parseEventDescription(String command) throws LaniaEmptyDescriptionException {
         String[] split = command.split(" /at ");
         if (split.length == 1) {
             throw new LaniaEmptyDescriptionException("date/time");
-        } else {
-            return split;
         }
+
+        return split;
     }
 
     /**

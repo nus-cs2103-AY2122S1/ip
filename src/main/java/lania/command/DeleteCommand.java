@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import lania.Storage;
 import lania.Ui;
+import lania.task.Task;
 import lania.task.TaskList;
 
 /**
@@ -29,7 +30,8 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage, Ui ui) {
-        String message = ui.showRemoveMessage(tasks, tasks.remove(index));
+        Task deletedTask = tasks.remove(index);
+        String message = ui.showRemoveMessage(tasks, deletedTask);
         try {
             storage.save(tasks);
         } catch (IOException e) {

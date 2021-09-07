@@ -37,7 +37,7 @@ public abstract class Task {
     }
 
     /**
-     * Converts the task object to a string representation
+     * String representation of a task object
      * to be stored in the hard disk.
      *
      * @return A string representation of the task object.
@@ -45,10 +45,10 @@ public abstract class Task {
     public abstract String getStringFormat();
 
     /**
-     * Another string representation of the task object
-     * which is displayed to the users.
+     * String representation of the task object
+     * to be displayed to the user.
      *
-     * @return A string representation of the task object.
+     * @return Another string representation of the task object.
      */
     @Override
     public String toString() {
