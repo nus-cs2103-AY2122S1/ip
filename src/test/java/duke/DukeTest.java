@@ -1,12 +1,12 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+
+import org.junit.jupiter.api.Test;
 
 public class DukeTest {
     private final String divider = "________________________________";
@@ -35,7 +35,7 @@ public class DukeTest {
         System.setIn(in);
 
         String expected = divider + "\r\nHello i is Duke\nWhat u want?\r\n" + divider + "\r\n"
-                + divider + "\r\ncan type properly pls\r\n" + divider + "\r\n"
+                + divider + "\r\ncan type properly pls?\r\n" + divider + "\r\n"
                 + divider + "\r\ni zao first\r\n" + divider;
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(out);
