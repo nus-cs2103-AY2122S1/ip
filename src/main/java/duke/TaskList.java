@@ -37,6 +37,7 @@ public class TaskList {
      * @return The Task at the index.
      */
     public Task get(int index) {
+        assert !tasks.isEmpty();
         return tasks.get(index);
     }
 
