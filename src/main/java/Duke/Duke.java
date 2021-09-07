@@ -7,7 +7,7 @@ import Duke.task.TaskList;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Duke extends Application {
+public class Duke {
     private Command commands = new Command();
     private Storage storage;
     private TaskList tasks;
@@ -122,6 +122,11 @@ public class Duke extends Application {
                 response = "I don't understand that command!";
             }
 
+        try {
+            storage.writeToFile(tasks);
+        } catch (IOException e){
+            System.out.println("Error in saving data to storage");
+        }
         return response;
     }
 
@@ -211,12 +216,6 @@ public class Duke extends Application {
 
         scanner.close();
         Ui.end();
-    }
-
-    @Override
-    public void start(Stage stage) {
-        Duke duke = new Duke();
-        GraphicalUserInterface gui = new GraphicalUserInterface(stage, duke.tasks, duke.storage);
     }
 
     public static void main(String[] args) {

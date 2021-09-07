@@ -134,4 +134,12 @@ public class Command {
         }
         return tasks.find(keyword);
     }
+
+    /**
+     * Prints greeting message for bot.
+     */
+    public static String greet() {
+        String greet = "Hihi! This is halp! \n\tHow can I help?\n\t";
+        return greet;
+    }
 }
