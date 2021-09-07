@@ -1,8 +1,6 @@
 package duke;
 
 import duke.task.Task;
-import javafx.scene.text.Text;
-
 
 public class Ui {
 
@@ -16,20 +14,6 @@ public class Ui {
     public String bye() {
         return "    Bye. Hope to see you again soon!";
     }
-
-//    /**
-//     * Returns a greeting message.
-//     *
-//     * @return Greeting message
-//     */
-//    public String greeting() {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        return "Hello I am\n" + logo;
-//    }
 
     /**
      * Returns a confirmation message.

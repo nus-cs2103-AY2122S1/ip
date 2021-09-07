@@ -45,7 +45,7 @@ public class Storage {
                     taskType = "D ";
                     taskTime = ((Deadline) task).getBy();
                 } else {
-                    assert task instanceof Event : "Invalid task type";
+
                     taskType = "E ";
                     taskTime = ((Event) task).getAt();
                 }
