@@ -9,6 +9,8 @@ import duke.logic.tasks.Task;
  * Finds the tasks whose descriptions contain the keyword.
  */
 public class FindCommand extends Command {
+    private static final String SEARCH_RESULT_MSG = "Here are the matching tasks in your list:";
+
     private String[] keywords;
 
     /**
@@ -29,7 +31,7 @@ public class FindCommand extends Command {
     public CommandResult execute() {
         List<Task> matches = getTaskList().find(keywords);
         List<String> results = new ArrayList<>();
-        results.add("Here are the matching tasks in your list:");
+        results.add(SEARCH_RESULT_MSG);
         for (int i = 0; i < matches.size(); i++) {
             results.add(i + 1 + "." + matches.get(i).toString());
         }
