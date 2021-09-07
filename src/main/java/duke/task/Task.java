@@ -2,6 +2,8 @@ package duke.task;
 
 import duke.Ui;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -116,6 +118,20 @@ public class Task {
         if (tags.size() == 0) {
             return str;
         }
+        str += " (tags:";
+        for (String tag: tags) {
+            str += " #" + tag;
+        }
+        str += ")";
+        return str;
+    }
+
+    public String toString(LocalDateTime date, String type) {
+        String str = (isDone ? "[X] " : "[ ] ") + this.taskName;
+        if (tags.size() == 0) {
+            return str;
+        }
+        str += "(" + type + date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ")";
         str += " (tags:";
         for (String tag: tags) {
             str += " #" + tag;
