@@ -1,4 +1,7 @@
 T | 1 | borrow book
-D | 1 | return book | 2/12/2019 1800
+D | 0 | return book | I don't know the time
 E | 1 | project meeting | I don't know the time
 D | 1 | return book | 23/9/2020 1525
+D | 0 | finish task | I don't know the time
+E | 0 | do something | 19/11/2021 1025
+E | 0 | Work | 30/10/2021 0000

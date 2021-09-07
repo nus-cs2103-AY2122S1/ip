@@ -1,14 +1,7 @@
-/**
- * @@author Hang Zelin
- *
- * Programme that allows Duke to save any changes after execution and read data when it is initially invoked.
- * In other words, programme allows Duke to save and read data from a file.
- */
-
 package duke.saveloadmanager;
 
 import duke.command.Parser;
-import duke.excpetions.DukeException;
+import duke.exceptions.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -20,15 +13,21 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * @@author Hang Zelin
+ *
+ * Programme that allows Duke to save any changes after execution and read data when it is initially invoked.
+ * In other words, programme allows Duke to save and read data from a file.
+ */
 public class Storage {
     private String filePath;
 
-    private ArrayList<Task> list;
+    private final ArrayList<Task> list;
 
     /**
      * Initialize filePath and the TaskList for Storage to read data.
      *
-     * @param filePath
+     * @param filePath FilePath of the duke data storage.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -105,9 +104,9 @@ public class Storage {
         LocalDateTime parsedTime = p.parseTime(time);
         TaskList.OperationType[] taskTypes = TaskList.OperationType.values();
         for (TaskList.OperationType t : taskTypes) {
-            if (t.toString().toUpperCase().charAt(0) == taskType
-                    && (t.toString().equals("todo") || t.toString().equals("deadline")
-                            || t.toString().equals("event"))) {
+            if (t.toString().charAt(0) == taskType
+                    && (t.toString().equals("TODO") || t.toString().equals("DEADLINE")
+                            || t.toString().equals("EVENT"))) {
                 Task newTask = t.assignTaskType(t, task, parsedTime);
                 this.list.add(newTask);
                 break;

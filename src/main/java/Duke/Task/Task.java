@@ -1,10 +1,10 @@
+package duke.task;
+
 /**
  * @@author Hang Zelin
  *
  * An abstract class that encapsulates the info basic for a task
  */
-package duke.task;
-
 public abstract class Task {
 
     /**
@@ -12,7 +12,7 @@ public abstract class Task {
      *
      * @return Task info parsed in the format duke executes.
      */
-    public abstract String getTaskInfo();
+    public abstract String getTaskStatus();
 
     /**
      * Returns the Parsed time info in the format of "MMM dd yyyy HH:mm"
@@ -28,7 +28,7 @@ public abstract class Task {
      *
      * @return Time in the format of "dd/mm/yy hhmm" which duke can understand.
      */
-    public abstract String getTime();
+    public abstract String getTimeForSaveData();
 
     /**
      * Returns the task info in the format of save data requirement,

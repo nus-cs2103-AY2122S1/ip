@@ -1,20 +1,19 @@
+package duke.junittests;
+
+import duke.exceptions.DukeException;
+import duke.saveloadmanager.Storage;
+import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 /**
  * @author Hang Zelin
  *
  * A JUnit class that tests some methods in Storage.
  */
-package duke.junittests;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.util.ArrayList;
-
-import org.testng.annotations.Test;
-
-import duke.excpetions.DukeException;
-import duke.saveloadmanager.Storage;
-
 public class StorageTest {
 
     @Test
@@ -37,15 +36,15 @@ public class StorageTest {
     public void load_correctFilePath_success() {
         try {
             assertEquals("[T][ ] borrow book",
-                    new Storage("data/tasks.txt").load().get(0).getTaskInfo());
+                    new Storage("data/tasks.txt").load().get(0).getTaskStatus());
             assertEquals("[D][ ] return book (by: Dec 02 2019 18:00)",
-                    new Storage("data/tasks.txt").load().get(1).getTaskInfo());
+                    new Storage("data/tasks.txt").load().get(1).getTaskStatus());
             assertEquals("[E][X] project meeting (at: I don't know the time.)",
-                    new Storage("data/tasks.txt").load().get(2).getTaskInfo());
+                    new Storage("data/tasks.txt").load().get(2).getTaskStatus());
             assertEquals("[D][ ] return book (by: Sep 23 2020 15:25)",
-                    new Storage("data/tasks.txt").load().get(3).getTaskInfo());
+                    new Storage("data/tasks.txt").load().get(3).getTaskStatus());
             assertEquals("[E][X] project splashdown (at: Oct 15 2019 00:00)",
-                    new Storage("data/tasks.txt").load().get(4).getTaskInfo());
+                    new Storage("data/tasks.txt").load().get(4).getTaskStatus());
         } catch (DukeException e) {
             //Should not reach this.
             fail();

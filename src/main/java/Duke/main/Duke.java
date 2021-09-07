@@ -1,3 +1,13 @@
+package duke.main;
+
+import duke.exceptions.DukeException;
+import duke.saveloadmanager.Storage;
+import duke.task.TaskList;
+import duke.uimanager.Ui;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
 /**
  * @@author Hang Zelin
  * Main Programme to execute the Duke Project
@@ -6,22 +16,12 @@
  * delete the task if the task is finished.
  * You can also search a specific task by its date, keyword.
  */
-package duke.main;
-
-import duke.excpetions.DukeException;
-import duke.saveloadmanager.Storage;
-import duke.task.TaskList;
-import duke.uimanager.Ui;
-
-import java.io.IOException;
-import java.util.ArrayList;
-
 public class Duke {
 
-    private final String FILEPATH = "data/tasks.txt";
-    private Storage storage;
+    private final static String FILEPATH = "data/tasks.txt";
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
     /**
      * initialize Ui, storage and load TaskLists from specific filePath for Duke
@@ -53,53 +53,46 @@ public class Duke {
         String time = Command[2];
 
         switch (operationType) {
-        case "bye": {
+        case "bye":
             text = ui.goodbyeMessage();
             break;
-        }
         case "list":
-            text = ui.printList(tasks);
+            text = ui.printListUi(tasks);
             break;
-        case "done": {
+        case "done":
             try {
                 tasks.detectIndex(index);
                 tasks.markDone(index);
-                text = ui.markDone(tasks.get(index).getTaskInfo());
+                text = ui.markDoneUi(tasks.get(index).getTaskStatus());
             } catch (DukeException e) {
                 text = e.getMessage();
             }
             break;
-        }
-        case "delete": {
+        case "delete":
             try {
                 tasks.detectIndex(index);
-                text = ui.delete(tasks.get(index).getTaskInfo(), tasks.size() - 1);
+                text = ui.deleteUi(tasks.get(index).getTaskStatus(), tasks.size() - 1);
                 tasks.delete(index);
             } catch (DukeException e) {
                 text = e.getMessage();
             }
             break;
-        }
-        case "tell": {
-            text = ui.getSpecificDateEvent() + tasks.getSpecificDateEvent(time);
+        case "tell":
+            text = ui.getSpecificDateEventUi() + tasks.getSpecificDateEvent(time);
             break;
-        }
-        case "find": {
-            text = ui.findTasks() + tasks.findTasks(task);
+        case "find":
+            text = ui.findTasksUi() + tasks.findTasks(task);
             break;
-        }
-        default: {
+        default:
             try {
                 tasks.add(operationType, task, time);
-                text =ui.add(tasks.get(tasks.size() - 1).getTaskInfo(), tasks.size());
+                text =ui.addUi(tasks.get(tasks.size() - 1).getTaskStatus(), tasks.size());
             } catch (DukeException e) {
                 text = e.getMessage();
             }
             break;
         }
-        }
-
-        assert text != "" : "OOPS, Duke stops thinking!";
+        assert text.equals("") : "OOPS, Duke stops responding!";
         return text;
     }
 
@@ -132,7 +125,7 @@ public class Duke {
         int index;
 
         try {
-            messages = ui.getInputForARound(input);
+            messages = ui.returnSplitComponent(input);
         } catch (DukeException e) {
             return e.getMessage();
         }

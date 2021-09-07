@@ -1,8 +1,3 @@
-/**
- * @@author Hang Zelin
- *
- * Controller for MainWindow. Provides the layout for the other controls.
- */
 package duke.uimanager;
 
 import duke.main.Duke;
@@ -14,6 +9,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * @@author Hang Zelin
+ *
+ * Controller for MainWindow. Provides the layout for the other controls.
+ */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;

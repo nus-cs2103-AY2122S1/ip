@@ -1,15 +1,15 @@
+package duke.task;
+
 /**
  * @@author Hang Zelin
  *
  * ToDos class that extends Task class. It is one of the types in 3 tasks.
  */
-package duke.task;
-
 public class ToDos extends Task {
 
     private boolean isDone;
     private String task;
-    private String taskType = "T";
+    private static final String TASKTYPE = "T";
 
     /**
      * Constructor for ToDos containing boolean value if the task is done, the
@@ -29,20 +29,20 @@ public class ToDos extends Task {
      * @return Task info parsed in the format duke executes.
      */
     @Override
-    public String getTaskInfo() {
-        String doneStr = "";
+    public String getTaskStatus() {
+        String doneStatus;
         if (!this.isDone) {
-            doneStr = " ";
+            doneStatus = " ";
         } else {
-            doneStr = "X";
+            doneStatus = "X";
         }
 
-        return "[" + taskType + "]" + "[" + doneStr + "] " + task;
+        return "[" + TASKTYPE + "]" + "[" + doneStatus + "] " + task;
     }
 
     /**
      * Returns the Parsed time info in the format of "MMM dd yyyy HH:mm"
-     * Noted: This method is only applicable for "event" and "deadline" type task.
+     * Note: This method is only applicable for "event" and "deadline" type task.
      *
      * @return Return the parsed time in the format duke can understand.
      */
@@ -53,12 +53,12 @@ public class ToDos extends Task {
 
     /**
      * Returns the Parsed time info in the format of "dd/mm/yy hhmm".
-     * Noted: This method is only applicable for "event" and "deadline" type task,
+     * Note: This method is only applicable for "event" and "deadline" type task,
      *
      * @return Time in the format of "dd/mm/yy hhmm" which duke can understand.
      */
     @Override
-    public String getTime() {
+    public String getTimeForSaveData() {
         return null;
     }
 
@@ -70,7 +70,7 @@ public class ToDos extends Task {
      */
     @Override
     public String getSaveDataInfo() {
-        return this.taskType + " | " + (this.isDone ? 1 : 0) + " | " + task;
+        return this.TASKTYPE + " | " + (this.isDone ? 1 : 0) + " | " + task;
     }
 
     /**

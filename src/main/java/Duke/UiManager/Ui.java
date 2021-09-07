@@ -1,3 +1,11 @@
+package duke.uimanager;
+
+import duke.command.Parser;
+import duke.exceptions.DukeException;
+import duke.task.TaskList;
+
+import java.util.ArrayList;
+
 /**
  * @@author Hang Zelin
  *
@@ -5,14 +13,6 @@
  * It will print out the information for each type of operation execution. And it will also accept users'
  * input for each round of task execution.
  */
-package duke.uimanager;
-
-import duke.command.Parser;
-import duke.excpetions.DukeException;
-import duke.task.TaskList;
-
-import java.util.ArrayList;
-
 public class Ui {
 
     /**
@@ -21,10 +21,10 @@ public class Ui {
      * @return Default helloMessage.
      */
     public String helloMessage() {
-        String helloMessage = "Hello! I'm Duke\n"
-                + "What can I do for you?\n";
-
-        return helloMessage;
+        return """
+                Hello! I'm Duke
+                What can I do for you?
+                """;
     }
 
     /**
@@ -33,9 +33,7 @@ public class Ui {
      * @return Default goodbyeMessage.
      */
     public String goodbyeMessage() {
-        String goodbyeMessage = "Bye. Hope to see you again soon!";
-
-        return goodbyeMessage;
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -44,11 +42,11 @@ public class Ui {
      * @param tasks TaskList contains all the tasks to be printed.
      * @return A list of tasks info.
      */
-    public String printList(TaskList tasks) {
+    public String printListUi(TaskList tasks) {
         String text = "";
         text += "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
-            text += i + 1 + "." + tasks.get(i).getTaskInfo() + "\n";
+            text += i + 1 + "." + tasks.get(i).getTaskStatus() + "\n";
         }
         return text;
     }
@@ -59,7 +57,7 @@ public class Ui {
      * @param parsedTask Detailed info for a task that is parsed into a specific format.
      * @return Ui message when markDone is invoked.
      */
-    public String markDone(String parsedTask) {
+    public String markDoneUi(String parsedTask) {
         String text = "";
         text += "Nice! I've marked this task as done:\n" + " " + parsedTask +"\n";
 
@@ -73,7 +71,7 @@ public class Ui {
      * @param size Size of the TaskList.
      * @return Ui message when delete is invoked.
      */
-    public String delete(String parsedTask, int size) {
+    public String deleteUi(String parsedTask, int size) {
         String text = "";
         text += "Noted. I've removed this task:\n" + " " + parsedTask + "\nNow you have " + size + " tasks in the list.\n";
 
@@ -87,7 +85,7 @@ public class Ui {
      * @param size Size of the TaskList.
      * @return Ui message when add is invoked.
      */
-    public String add(String parsedTask, int size) {
+    public String addUi(String parsedTask, int size) {
         String text = "";
         text += "Got it. I've added this task: \n" + "\n " + parsedTask
                 + "\nNow you have " + size + ""
@@ -101,7 +99,7 @@ public class Ui {
      *
      * @return Ui message when getSpecificDateEvent is invoked.
      */
-    public String getSpecificDateEvent() {
+    public String getSpecificDateEventUi() {
         return "Here are all the tasks taking place on the date you give me:";
     }
 
@@ -110,7 +108,7 @@ public class Ui {
      *
      * @return Ui message when findTask is invoked.
      */
-    public String findTasks() {
+    public String findTasksUi() {
         return "Here are the matching tasks in your list:\n";
     }
 
@@ -121,7 +119,7 @@ public class Ui {
      * @return Size of 4 ArrayList contains Message of operationType, task, time and index.
      * @throws DukeException Throws when the input cannot be parsed.
      */
-    public ArrayList<String> getInputForARound(String input) throws DukeException {
+    public ArrayList<String> returnSplitComponent(String input) throws DukeException {
         Parser parser;
         ArrayList<String> parsedMessageList = new ArrayList<>();
 
