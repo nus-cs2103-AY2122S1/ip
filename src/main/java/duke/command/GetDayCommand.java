@@ -1,8 +1,12 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.DukeException;
 import duke.TaskList;
 import duke.Ui;
+import duke.task.Task;
+
 
 /**
  * This class deals with the show task on a specific day command.
@@ -24,11 +28,14 @@ public class GetDayCommand extends Command {
      */
     @Override
     public void execute() {
-        if (next.length() != 14) {
-            Ui.printDuke("☹ OOPS!!! Please enter a valid date, such as get dd/MM/yyyy");
+        //14 for general date, 9 for "get today"
+        boolean checkLength = next.length() == 14 || next.length() == 9;
+        if (!checkLength) {
+            Ui.printDuke("☹ OOPS!!! Please enter a valid date, such as get dd/MM/yyyy or 'get today'");
         }
         try {
-            TaskList.getOnADay(next.substring(4));
+            ArrayList<Task> tasks = TaskList.getOnADay(next.substring(4));
+            Ui.printTasks(tasks);
         } catch (DukeException e) {
             Ui.showError(e);
         }

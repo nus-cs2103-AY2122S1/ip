@@ -295,7 +295,11 @@ public class TaskList {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate target;
         try {
-            target = LocalDate.parse(s, formatter);
+            if (s.equals("today")) {
+                target = LocalDate.now();
+            } else {
+                target = LocalDate.parse(s, formatter);
+            }
         } catch (DateTimeParseException d) {
             throw new DukeException("Please enter date in the form of dd/MM/yyyy.");
         }
@@ -305,10 +309,6 @@ public class TaskList {
                 result.add(t);
             }
         }
-        System.out.println(div);
-        System.out.println(ind2 + "Here are the tasks on " + target + ": ");
-        Ui.printTasks(result);
-        System.out.println(div);
         return result;
     }
 

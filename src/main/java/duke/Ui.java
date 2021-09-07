@@ -67,7 +67,7 @@ public class Ui {
      */
     public static void printTasks(ArrayList<Task> taskList) {
         Stream<String> taskString = taskList.stream().map(task -> {
-            int position = taskList.indexOf(task);
+            int position = taskList.indexOf(task) + 1;
             return IND_2 + position + ". " + task + "\n";
         });
         String tasks = "";
@@ -136,8 +136,21 @@ public class Ui {
 
     private static void greeting() {
         String g = "Hello! I'm Duke";
-        String g2 = "What can I do for you?";
-        Ui.printDuke(g + "\n" + IND_2 + g2);
+        String g2 = "Here are the tasks to be finished today: ";
+        if (mainWindow == null) {
+            Ui.printDuke(g + "\n" + IND_2 + g2);
+            return;
+        }
+        try {
+            ArrayList<Task> tasks = TaskList.getOnADay("today");
+            String taskString = "";
+            for (Task t: tasks) {
+                taskString += t + "\n";
+            }
+            Ui.printDuke(g + "\n" + IND_2 + g2 + "\n" + taskString);
+        } catch (DukeException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

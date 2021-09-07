@@ -109,4 +109,8 @@ public class Task {
     protected static String toTimeFormat(LocalDateTime time) {
         return time.getMonth() + " " + time.getDayOfMonth() + " " + time.getYear() + " " + time.toLocalTime();
     }
+
+    public boolean isDone() {
+        return isDone;
+    }
 }
