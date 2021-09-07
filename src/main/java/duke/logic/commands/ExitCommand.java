@@ -4,6 +4,7 @@ package duke.logic.commands;
  * Exits the program.
  */
 public class ExitCommand extends Command {
+    private static final String EXIT_MSG = "Closing...";
 
     /**
      * Exits the program.
@@ -12,7 +13,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public CommandResult execute() {
-        return new CommandResult("Closing...");
+        return new CommandResult(EXIT_MSG);
     }
 
     /**

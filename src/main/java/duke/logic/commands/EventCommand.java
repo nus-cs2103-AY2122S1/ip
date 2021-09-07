@@ -8,6 +8,8 @@ import duke.logic.tasks.Event;
  * Adds a new event task to the task list.
  */
 public class EventCommand extends Command {
+    private static final String EVENT_TASK_ADDED_MSG = "I've added:\n  ";
+
     private final Event event;
 
     /**
@@ -29,6 +31,6 @@ public class EventCommand extends Command {
     @Override
     public CommandResult execute() {
         getTaskList().add(event);
-        return new CommandResult("I've added:\n  " + event);
+        return new CommandResult(EVENT_TASK_ADDED_MSG + event);
     }
 }

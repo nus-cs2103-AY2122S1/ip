@@ -14,9 +14,11 @@ public class TextUi {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-
+    private static final String HORIZONTAL_LINE = "-------------------------------------------------------------";
     private static final String GREETINGS = "Hello! What can I do for you?\n";
     private static final String GOODBYE = "See you later.";
+    private static final String LOAD_TASK_ERR_MSG = "\n  ==> Could not load your saved tasks. Creating a new task list...";
+    private static final String SAVE_TASK_ERR_MSG = "Error while saving tasks: \n";
 
     private Scanner in;
     private PrintStream out;
@@ -44,7 +46,7 @@ public class TextUi {
      * @param msg The message of the error thrown.
      */
     public void showLoadingError(String msg) {
-        out.println(msg + "\n  ==> Could not load your saved tasks. Creating a new task list...");
+        out.println(msg + LOAD_TASK_ERR_MSG);
     }
 
     /**
@@ -53,12 +55,12 @@ public class TextUi {
      * @param msg The message of the error thrown.
      */
     public void showSavingError(String msg) {
-        out.println("Error while saving tasks: \n" + msg);
+        out.println(SAVE_TASK_ERR_MSG + msg);
     }
 
     /** Displays the horizontal separator. */
     public void showHorizontalLine() {
-        out.println("-------------------------------------------------------------");
+        out.println(HORIZONTAL_LINE);
     }
 
     /** Displays a blank line. */

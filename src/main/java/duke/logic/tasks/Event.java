@@ -7,6 +7,9 @@ import java.time.format.DateTimeFormatter;
  * Represents an event task.
  */
 public class Event extends Task {
+    private static final String START_DATE_FORMAT = "dd MMM yyyy h.mma";
+    private static final String END_DATE_FORMAT = "dd MMM yyyy h.mma";
+
     private LocalDateTime at;
     private LocalDateTime end;
 
@@ -44,10 +47,10 @@ public class Event extends Task {
     public String toString() {
         String s = "[E]" + super.toString();
         if (end == null) {
-            s += " (at: " + at.format(DateTimeFormatter.ofPattern("dd MMM yyyy h.mma")) + ")";
+            s += " (at: " + at.format(DateTimeFormatter.ofPattern(START_DATE_FORMAT)) + ")";
         } else {
-            s += " (from: " + at.format(DateTimeFormatter.ofPattern("dd MMM yyyy h.mma — "))
-                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyyy h.mma")) + ")";
+            s += " (from: " + at.format(DateTimeFormatter.ofPattern(START_DATE_FORMAT))
+                    + " — " + end.format(DateTimeFormatter.ofPattern(END_DATE_FORMAT)) + ")";
         }
         return s;
     }
