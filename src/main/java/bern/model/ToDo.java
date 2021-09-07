@@ -22,4 +22,22 @@ public class ToDo extends Task{
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof ToDo)) {
+            return false;
+        } else {
+            ToDo compared = (ToDo) obj;
+            System.out.println("cut cut");
+            System.out.println(compared.description);
+            System.out.println(this.description);
+            if (compared.description.equals(this.description)) {
+                System.out.println("yo guys im in");
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
 }
