@@ -18,7 +18,7 @@ public class ListCommand extends Command {
      * @return the output message after execution
      */
     @Override
-    public String execute(Storage storage, TaskList taskList) throws EmptyListException {
+    public String execute(Storage storage, TaskList taskList) {
         return taskList.printTaskList();
     }
 }

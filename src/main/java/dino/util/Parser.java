@@ -1,11 +1,13 @@
 package dino.util;
 
+import dino.exception.InvalidInputException;
+
 /**
  * Deals with making sense of the user command
  */
 public class Parser {
 
-    public enum CMDTYPE {TODO, DEADLINE, EVENT, DONE, DELETE, LIST, FIND, BYE, INVALID}
+    public enum CMDTYPE {TODO, DEADLINE, EVENT, DONE, DELETE, LIST, FIND, EDIT, BYE, INVALID}
 
     /**
      * Interprets the user input command and parses it into one of the messages in the
@@ -32,11 +34,16 @@ public class Parser {
      */
     public static String getFirstWord(String s) {
         String firstWord;
-        if (s.contains(" ")) {
-            firstWord = s.substring(0, s.indexOf(" "));
-            return firstWord;
+        try {
+            if (s.contains(" ")) {
+                firstWord = s.substring(0, s.indexOf(" "));
+                return firstWord;
+            } else {
+                throw new InvalidInputException();
+            }
+        } catch (InvalidInputException e) {
+            return e.getMessage();
         }
-        return s;
     }
 
 }

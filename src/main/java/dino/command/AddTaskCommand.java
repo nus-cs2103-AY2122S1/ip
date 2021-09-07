@@ -39,38 +39,36 @@ public class AddTaskCommand extends Command {
      * @param storage the local storage file
      * @param taskList the current task list to which the new task will be added
      * @return the output message after execution
-     * @throws TimeNotSpecifiedException if the task is of type Deadline or Event
-     * but the time is not specified
-     * @throws EmptyTaskDescriptionException if the description of the task is empty
-     * @throws InvalidFormatException if the task is of type Deadline or Event
-     * but the time is not entered in the format of "yyyy-mm-dd"
      */
     @Override
-    public String execute(Storage storage, TaskList taskList) throws
-            TimeNotSpecifiedException, EmptyTaskDescriptionException, InvalidFormatException {
+    public String execute(Storage storage, TaskList taskList) {
         String description = getTaskDescription(this.taskString, this.taskType);
         Task task = null;
-        switch (taskType) {
-        case TODO: {
-            task = new ToDo(description);
-            break;
+        try {
+            switch (taskType) {
+            case TODO: {
+                task = new ToDo(description);
+                break;
+            }
+            case DEADLINE: {
+                LocalDate time = getTaskTime(this.taskString);
+                task = new Deadline(description, time);
+                break;
+            }
+            case EVENT: {
+                LocalDate time = getTaskTime(this.taskString);
+                task = new Event(description, time);
+                break;
+            }
+            default: {
+                break;
+            }
+            }
+            assert(task != null); //the task to be added is not null
+            return taskList.addTask(task);
+        } catch (InvalidFormatException e) {
+            return e.getMessage();
         }
-        case DEADLINE: {
-            LocalDate time = getTaskTime(this.taskString);
-            task = new Deadline(description, time);
-            break;
-        }
-        case EVENT : {
-            LocalDate time = getTaskTime(this.taskString);
-            task = new Event(description, time);
-            break;
-        }
-        default: {
-            break;
-        }
-        }
-        assert(task != null); //the task to be added is not null
-        return taskList.addTask(task);
     }
 
     /**
@@ -79,30 +77,33 @@ public class AddTaskCommand extends Command {
      * @param s the user input command
      * @param type the type of the task
      * @return the description of the task that is extracted from the user input command
-     * @throws EmptyTaskDescriptionException if the description of the task is empty
-     * @throws TimeNotSpecifiedException if the task is of type Deadline or Event but the time is not specified
      */
-    public static String getTaskDescription(String s, Parser.CMDTYPE type) throws EmptyTaskDescriptionException, TimeNotSpecifiedException {
-        if (s.length() < type.toString().length() + 2) {
-            throw new EmptyTaskDescriptionException();
-        }
-        switch (type) {
-        case TODO: {
-            return s.substring(5).trim();
-        }
-        case DEADLINE:
-        case EVENT: {
-            if (s.contains("/by ") || s.contains("/at ")) {
-                return s.substring(type.toString().length() + 1, s.indexOf("/")).trim();
-            } else {
-                throw new TimeNotSpecifiedException(type.toString());
+    public static String getTaskDescription(String s, Parser.CMDTYPE type) {
+        try {
+            if (s.trim().length() < type.toString().length() + 2) {
+                throw new EmptyTaskDescriptionException();
             }
+            switch (type) {
+            case TODO: {
+                return s.substring(5).trim();
+            }
+            case DEADLINE:
+            case EVENT: {
+                if (s.contains("/by ") || s.contains("/at ")) {
+                    return s.substring(type.toString().length() + 1, s.indexOf("/")).trim();
+                } else {
+                    throw new TimeNotSpecifiedException(type.toString());
+                }
+            }
+            default: {
+                break;
+            }
+            }
+            return s;
+        } catch (TimeNotSpecifiedException | EmptyTaskDescriptionException e) {
+            return e.getMessage();
         }
-        default: {
-            break;
-        }
-        }
-        return s;
+
     }
 
     /**

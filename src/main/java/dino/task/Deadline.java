@@ -24,6 +24,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    @Override
+    public void editTime(LocalDate newTime) {
+        this.by = newTime;
+    }
+
     /**
      * Displays the deadline task in the format of "D | Status | Description | Time",
      * The time is displayed in the format of "MMM dd yyyy"

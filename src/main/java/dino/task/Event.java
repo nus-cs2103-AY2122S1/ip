@@ -24,6 +24,11 @@ public class Event extends Task{
         this.at = at;
     }
 
+    @Override
+    public void editTime(LocalDate newTime) {
+        this.at = newTime;
+    }
+
     /**
      * Displays the event task in the format of "E | Status | Description | Time"
      * The time is displayed in the format of "MMM dd yyyy"
