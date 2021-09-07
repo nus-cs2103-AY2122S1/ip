@@ -9,6 +9,7 @@ import command.DeleteCommand;
 import command.DoneCommand;
 import command.ExitCommand;
 import command.FindCommand;
+import command.HelpCommand;
 import command.ListCommand;
 import task.Deadline;
 import task.Event;
@@ -44,32 +45,39 @@ public class Parser {
             return deleteCommand(partsLength, parts[1]);
         } else if (command.equals("find")) {
             return findCommand(partsLength, parts[1].toLowerCase());
-        } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
-            return addTaskCommand(partsLength, parts);
+        } else if (command.equals("help")) {
+            return helpCommand();
         } else {
-            throw new DukeException("I'm sorry, but I don't know what that means (X_X)");
+            return addTaskCommand(partsLength, parts);
         }
     }
 
     private static Command addTaskCommand(int partsLength, String[] parts) throws DukeException {
-        if (partsLength < 2) {
-            throw new DukeException("The description of a task cannot be empty.");
-        }
-
-        String descriptionDateTime = parts[1];
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm");
 
         switch (parts[0]) {
+        case "t":
         case "todo":
+            if (partsLength < 2) {
+                throw new DukeException("The description of a todo cannot be empty!");
+            }
             Todo todo = new Todo(parts[1]);
             return new AddCommand(todo);
+        case "d":
         case "deadline":
-            String[] deadlineParts = descriptionDateTime.split(" /by ");
+            if (partsLength < 2) {
+                throw new DukeException("The description of a deadline cannot be empty!");
+            }
+            String[] deadlineParts = parts[1].split(" /by ");
             LocalDateTime deadlineDateTime = LocalDateTime.parse(deadlineParts[1], formatter);
             Deadline deadline = new Deadline(deadlineParts[0], deadlineDateTime);
             return new AddCommand(deadline);
+        case "e":
         case "event":
-            String[] eventParts = descriptionDateTime.split(" /at ");
+            if (partsLength < 2) {
+                throw new DukeException("The description of an event cannot be empty!");
+            }
+            String[] eventParts = parts[1].split(" /at ");
             LocalDateTime eventDateTime = LocalDateTime.parse(eventParts[1], formatter);
             Event event = new Event(eventParts[0], eventDateTime);
             return new AddCommand(event);
@@ -105,5 +113,9 @@ public class Parser {
             throw new DukeException("You must provide the index of the task to delete.");
         }
         return new DeleteCommand(index);
+    }
+
+    private static Command helpCommand() {
+        return new HelpCommand();
     }
 }
