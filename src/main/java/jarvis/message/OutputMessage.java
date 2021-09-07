@@ -32,12 +32,5 @@ public class OutputMessage {
     public String getFormattedMessage() {
         return String.format("%s\n", this.getMessage());
     }
-
-    /**
-     * Shows the message to user.
-     */
-    public void print() {
-        System.out.println(this.getFormattedMessage());
-    }
 }
 

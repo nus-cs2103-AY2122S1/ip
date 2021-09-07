@@ -21,7 +21,7 @@ public class Ui {
      * @param message The message to be shown.
      */
     public static void showOutputMessage(OutputMessage message) {
-        message.print();
+        System.out.println(message.getMessage());
     }
 
     /**
@@ -30,7 +30,7 @@ public class Ui {
      * @param message The message to be shown.
      */
     public static void showFormattedOutputMessage(OutputMessage message) {
-        message.print();
+        System.out.println(message.getFormattedMessage());
     }
 
     /**

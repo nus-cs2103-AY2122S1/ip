@@ -15,7 +15,7 @@ import javafx.application.Platform;
 public class Jarvis {
     private TaskList taskList;
     private Storage storage;
-    private Ui ui;
+    private Ui ui = new Ui();
 
     /**
      * Constructor for Jarvis.
@@ -23,7 +23,6 @@ public class Jarvis {
      * @param storageFilePath Storage file path name.
      */
     public Jarvis(String storageFilePath) {
-        this.ui = new Ui();
         try {
             this.storage = new Storage(storageFilePath);
             this.taskList = new TaskList(storage.loadTasksFromFile());
@@ -43,6 +42,7 @@ public class Jarvis {
             if (Parser.shouldExit(userInput)) {
                 Platform.exit();
             }
+
             Command command = Command.createCommand(userInput);
             return command.execute(taskList, storage, ui).getFormattedMessage();
         } catch (JarvisException e) {
@@ -70,6 +70,7 @@ public class Jarvis {
     private void processCliInput() {
         String userInput = ui.readInput();
 
+        // Run the CLI application until user types exit command
         while (true) {
             try {
                 if (Parser.isUserInputEmpty(userInput)) {
@@ -79,6 +80,7 @@ public class Jarvis {
                 if (Parser.shouldExit(userInput)) {
                     break;
                 }
+
                 Command command = Command.createCommand(userInput);
                 OutputMessage message = command.execute(taskList, storage, ui);
                 Ui.showFormattedOutputMessage(message);
