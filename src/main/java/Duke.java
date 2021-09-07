@@ -34,17 +34,12 @@ public class Duke {
                 storage.writeToFile(taskList.getTasks());
                 return "Bye! Hope to see you again! :D";
             } catch (IOException e) {
-                System.out.println("No tasks saved.");
+                return "No tasks saved. Start by creating a new task.";
             }
         } else {
             String result = parser.parseCommand(input);
             return result;
         }
-
-        if (input.matches("bye")) {
-            return "Thanks for using this! :)";
-        }
-        return "Duke heard: " + input;
     }
 
     /**

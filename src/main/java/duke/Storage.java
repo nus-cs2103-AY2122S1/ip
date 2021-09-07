@@ -43,7 +43,6 @@ public class Storage {
 
                 tasks.addTodo(task);
                 counter += 1;
-                System.out.println(counter);
 
             } else if (toAdd.charAt(1) == 'E') {
                 String task = toAdd.substring(7);
@@ -52,7 +51,6 @@ public class Storage {
 
                 tasks.addEvent(name + " /at " + when);
                 counter += 1;
-                System.out.println(counter);
 
             } else if (toAdd.charAt(1) == 'D') {
                 String task = toAdd.substring(7);
@@ -61,12 +59,10 @@ public class Storage {
 
                 tasks.addDeadline(name + " /by " + when);
                 counter += 1;
-                System.out.println(counter);
             }
 
             if (toAdd.charAt(4) == 'X') {
                 tasks.addDone(counter);
-                System.out.println(counter);
             }
         }
 
@@ -79,7 +75,6 @@ public class Storage {
 
             Task currTask = tasks.getTasks().get(i);
             result += String.format("%d. %s", i + 1, currTask.toString());
-            System.out.println(currTask.toString());
             result += "\n";
         }
         return result;

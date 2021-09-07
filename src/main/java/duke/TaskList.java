@@ -31,13 +31,10 @@ public class TaskList {
 
         String result = "Here are the tasks in your list: \n";
 
-        System.out.println("Here are the tasks in your list:");
-        System.out.println(counter);
         for (int i = 0; i < tasks.size(); i++) {
             Task currTask = tasks.get(i);
             result += String.format("%d. %s", i + 1, currTask.toString());
             result += "\n";
-            System.out.println(i + 1 + "." + currTask.toString());
         }
         return result;
     }
@@ -60,8 +57,6 @@ public class TaskList {
 
             String result = "Nice! I've marked this task as done: \n";
             result += currTask.toString();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(currTask.toString());
             return result;
         }
     }
