@@ -138,9 +138,9 @@ public class Ui {
      */
     public String helpMessage() {
         return ("The following commands are compatible with our task-planning chatbot!\n"
-                + "list:" + "\nprovides a list of items in your task list.\n"
+                + "list(or l for short):" + "\nprovides a list of items in your task list.\n"
                 + "done {number}:" + "\nticks the task with that number as done!\n"
-                + "delete {number}:\n" + "deletes the task with that number off the list.\n"
+                + "delete(or del for short) {number}:\n" + "deletes the task with that number off the list.\n"
                 + "bye:\n" + "ends the program.");
     }
 

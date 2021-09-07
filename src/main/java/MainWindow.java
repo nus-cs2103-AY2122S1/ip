@@ -29,11 +29,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         String toWelcome = ("Hello I'm your friendly task-planning chatbot Duke!\n"
-                + "To enter a deadline, please type in this format: 'deadline {title of item} "
+                + "To enter a deadline, please type in this format:\n'deadline(or d) {title of item} "
                 + "/by d/mm/yyyy hh:mm'\n"
-                + "To enter an event, please type in this format: 'event {title of item} /on d/mm/yyyy hh:mm'\n"
-                + "To enter a todo, please type in this format: 'todo {title of item}'\n"
-                + "type help to know more commands available in this bot!");
+                + "To enter an event, please type in this format: \n'event(or e) {title of item} /on d/mm/yyyy hh:mm'\n"
+                + "To enter a todo, please type in this format: \n'todo(or t) {title of item}'\n"
+                + "type help(or h) to know more commands available in this bot!");
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(toWelcome, dukeImage));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
