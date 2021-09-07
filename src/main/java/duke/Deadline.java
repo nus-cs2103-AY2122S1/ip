@@ -29,7 +29,7 @@ class Deadline extends Task {
      *
      * @return the array of Strings representing the task
      */
-    public String[] saveStrings() {
+    public String[] getAsSaveStrings() {
         String isDone = this.getIsDone() ? "1" : "0";
         return new String[]{"D", isDone, this.getDescription(), time.format(DateTimeFormatter.ISO_LOCAL_DATE)};
     }

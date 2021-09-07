@@ -14,9 +14,11 @@ public class Parser {
     public static Command parse(String input) throws DukeException {
         Action action = getAction(input);
         String argument = getArgument(input);
+
         String[] descriptionTime;
         LocalDate time;
         Command command;
+
         switch (action) {
         case SAVE:
             command = new SaveCommand();

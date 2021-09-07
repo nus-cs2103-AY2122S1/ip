@@ -18,7 +18,7 @@ abstract class Command {
     }
 
     /**
-     * abstract method that executes the respective command.
+     * The abstract method that executes the respective command.
      *
      * @param tasks   the TaskList object that is used to interact with the tasks.
      * @param ui      the ui object used to interact with the user
@@ -28,7 +28,7 @@ abstract class Command {
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
-     * getter for the Action.
+     * Getter for the Action.
      *
      * @return the String representing action
      */
@@ -37,7 +37,7 @@ abstract class Command {
     }
 
     /**
-     * getter for the Argument.
+     * Getter for the Argument.
      *
      * @return the String representing the argument
      */
@@ -46,9 +46,9 @@ abstract class Command {
     }
 
     /**
-     * unused at the moment.
+     * This is unused at the moment.
      *
-     * @return the true if the action is BYE;
+     * @return True if the action is BYE;
      */
     public boolean isExit() {
         return action.equals(Action.SAVE);

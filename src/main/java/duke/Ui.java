@@ -15,8 +15,10 @@ public class Ui {
 
     /**
      * This method is called at the start of the program to greet the user.
+     *
+     * @return the String used for greeting.
      */
-    public static void showGreeting() {
+    public static String getGreeting() {
         String logo =
                 " _   _ _ _\n"
                         + "| | | (_) | _____\n"
@@ -24,7 +26,7 @@ public class Ui {
                         + "|  _  | |   < (_) |\n"
                         + "|_| |_|_|_|\\_\\___/\n";
 
-        showMessage("Hello from\n" + logo + "What can I do for you?\n");
+        return "Hello from\n" + logo + "What can I do for you?\n";
     }
 
     public static void showMessage(String str) {

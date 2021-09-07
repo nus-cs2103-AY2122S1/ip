@@ -65,5 +65,5 @@ abstract class Task {
      *
      * @return the array of Strings representing the task
      */
-    public abstract String[] saveStrings();
+    public abstract String[] getAsSaveStrings();
 }
