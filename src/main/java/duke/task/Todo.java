@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * Class for Todo type Task objects.
  */
@@ -29,6 +31,12 @@ public class Todo extends Task {
 
     @Override
     public String getDate() {
+        assert false;
         return "";
+    }
+
+    @Override
+    public void setDate(LocalDate date) {
+        assert false;
     }
 }

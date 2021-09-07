@@ -17,6 +17,9 @@ import duke.command.UpdateCommand;
 /**
  * Class responsible for parsing and understanding user input.
  */
+//TODO: indexoutofbounds is sometimes caused by invalid commands; this is incorrectly
+//reported to the user. e.g. the command "update date 3" fails because it doesn't include
+//a date to change, but will report "invalid index choice to user".
 public abstract class Parser {
     private static void checkDescription(String[] in) throws DukeException {
         if (in.length == 1) {
@@ -48,6 +51,17 @@ public abstract class Parser {
         String date = prefixAndDate[1];
 
         return new String[]{label, date};
+    }
+
+    //valid command will have the form:
+    //update [index] [new description] (new description can be omitted, in which case "" is used) OR
+    //update date [index] [new date]
+    private static UpdateCommand parseUpdateCommand(String[] words) {
+        if (words[1].equals("date")) {
+            return new UpdateCommand(Integer.parseInt(words[2]) - 1, LocalDate.parse(words[3]));
+        } else {
+            return new UpdateCommand(Integer.parseInt(words[1]) - 1, generateLabelFrom(words, 2));
+        }
     }
 
     /**
@@ -93,7 +107,7 @@ public abstract class Parser {
             return new AddCommand("todo", generateLabelFrom(words, 1));
 
         case "update":
-            return new UpdateCommand(Integer.parseInt(words[1]) - 1, generateLabelFrom(words, 2));
+            return parseUpdateCommand(words);
 
         case "deadline":
             String[] deadlineLabelAndDate = processLabelAndDate(words);

@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class Deadline extends Task {
-    private final LocalDate date;
 
     /**
      * Basic constructor for Deadline Task objects.
@@ -37,5 +36,10 @@ public class Deadline extends Task {
     @Override
     public String getDate() {
         return date.toString();
+    }
+
+    @Override
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class Event extends Task {
-    private final LocalDate date;
 
     /**
      * Basic constructor for Event Task objects.
@@ -37,5 +36,10 @@ public class Event extends Task {
     @Override
     public String getDate() {
         return date.toString();
+    }
+
+    @Override
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

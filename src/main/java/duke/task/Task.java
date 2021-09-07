@@ -1,11 +1,14 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * Abstract parent of all Task objects in the application.
  */
 
 public abstract class Task {
     protected String label;
+    protected LocalDate date;
     private boolean flag;
 
     /**
@@ -60,6 +63,11 @@ public abstract class Task {
      * @return A String representing the date associated with the Task.
      */
     public abstract String getDate();
+
+    /**
+     * Setter for date. Not applicable for Todo tasks.
+     */
+    public abstract void setDate(LocalDate date);
 
     /**
      * Override of toString to provide a user friendly String representation of Task objects.
