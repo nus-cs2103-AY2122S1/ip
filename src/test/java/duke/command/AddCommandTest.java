@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import duke.exception.IncompleteDescriptionException;
 import duke.exception.InvalidDateFormatException;
+import duke.exception.MissingArgumentException;
 
 /**
  * A test class which tests if addCommand's methods work as intended.
@@ -17,7 +17,7 @@ public class AddCommandTest {
      */
     @Test
     public void addCommand_emptyEvent_exceptionThrown() {
-        assertThrows(IncompleteDescriptionException.class, () -> new AddCommand("EVENT", ""));
+        assertThrows(MissingArgumentException.class, () -> new AddCommand("EVENT", ""));
     }
 
     /**
@@ -25,7 +25,7 @@ public class AddCommandTest {
      */
     @Test
     public void addCommand_emptyDeadline_exceptionThrown() {
-        assertThrows(IncompleteDescriptionException.class, () -> new AddCommand("DEADLINE", ""));
+        assertThrows(MissingArgumentException.class, () -> new AddCommand("DEADLINE", ""));
     }
 
     /**

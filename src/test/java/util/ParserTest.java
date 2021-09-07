@@ -4,7 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import duke.exception.MissingArgumentException;
+import duke.exception.EmptyCommandException;
+import duke.exception.IncompleteDescriptionException;
 import duke.util.Parser;
 
 /**
@@ -17,7 +18,7 @@ public class ParserTest {
      */
     @Test
     public void emptyCommandTest() {
-        assertThrows(MissingArgumentException.class, () -> Parser.parse(""));
+        assertThrows(EmptyCommandException.class, () -> Parser.parse(""));
     }
 
     /**
@@ -25,7 +26,7 @@ public class ParserTest {
      */
     @Test
     public void incompleteCommandTest() {
-        assertThrows(MissingArgumentException.class, () -> Parser.parse("todo "));
+        assertThrows(IncompleteDescriptionException.class, () -> Parser.parse("todo "));
     }
 
     /**
@@ -33,6 +34,6 @@ public class ParserTest {
      */
     @Test
     public void allSpaceCommandTest() {
-        assertThrows(MissingArgumentException.class, () -> Parser.parse("      "));
+        assertThrows(EmptyCommandException.class, () -> Parser.parse("      "));
     }
 }
