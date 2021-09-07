@@ -32,6 +32,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog("Hello! I'm Mr House", dukeImage));
     }
 
     public void setDuke(Duke d) {
@@ -39,7 +40,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container.
      * Exits application if "bye" command given
      * Clears the user input after processing.

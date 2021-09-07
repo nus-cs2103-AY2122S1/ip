@@ -43,6 +43,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
+        assert isDone ? statusSymbol.equals("[X]") : statusSymbol.equals("[ ]");
         return this.type + this.statusSymbol + " " + this.description;
     }
 

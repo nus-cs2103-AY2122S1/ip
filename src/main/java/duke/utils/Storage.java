@@ -30,6 +30,7 @@ public class Storage {
      */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
+        assert !filePath.isEmpty();
 
         try {
             Scanner dataReader = new Scanner(this.file);
@@ -72,6 +73,7 @@ public class Storage {
      * Writes formatted data into filePath location
      */
     public void save(String formattedTaskList) {
+        assert !filePath.isEmpty();
         try {
             FileWriter writer = new FileWriter(filePath);
             writer.write(formattedTaskList);
