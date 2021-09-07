@@ -102,4 +102,24 @@ public class Ui {
             return searchResults.toString();
         }
     }
+
+    /**
+     * Generates and prints the help message.
+     * @return list of commands to use
+     */
+    public static String showHelpMessage() {
+        return "Hi, I'm Duke! To get started, enter your commands.\n\n"
+                + "1. To view your task list enter 'list'\n\n"
+                + "2. To add a task use the following format: \n"
+                + "    'todo <description>'\n"
+                + "    'deadline <description> /by <YYYY-MM-DD>'\n"
+                + "    'event <description> /at <date or time>'\n\n"
+                + "3. To mark a task as done enter\n"
+                + "    'done <task no>'\n\n"
+                + "4. To delete a task enter\n"
+                + "    'delete <task no>'\n\n"
+                + "5. To search the task list enter\n"
+                + "    'find <keyword>'\n\n"
+                + "6. To close the program enter 'bye'\n";
+    }
 }

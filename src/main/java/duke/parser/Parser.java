@@ -11,8 +11,11 @@ import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
+
+
 
 /**
  * Parses user input.
@@ -39,6 +42,8 @@ public class Parser {
             return new ExitCommand();
         } else if (input.trim().equals("list")) {
             return new ListCommand();
+        } else if (input.trim().equals("help")) {
+            return new HelpCommand();
         } else if (input.matches("done (.*)")) {
             return parseDoneCommand(input);
         } else if (input.matches("delete (.*)")) {
@@ -52,7 +57,8 @@ public class Parser {
         } else if (input.matches("find(.*)")) {
             return parseFindCommand(input);
         } else {
-            throw new DukeException("I'm sorry, but I don't understand what that means :(");
+            throw new DukeException("I'm sorry, but I don't understand what that means :(\n"
+                    + "To get started enter 'help'");
         }
 
     }
