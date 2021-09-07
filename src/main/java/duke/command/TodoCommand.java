@@ -28,11 +28,13 @@ public class TodoCommand extends Command {
      * Executes the "Todo" Command.
      * @return string that represents details of adding this Todo task.
      */
+    @Override
     public String execute() {
-        if (input.length() == 4) {
+        int minCommandLength = 4;
+        if (input.length() == minCommandLength) {
             throw new DukeException(Ui.getEmptyDescriptionMsg("todo"));
         }
-        Todo t = new Todo(input.substring(5));
+        Todo t = new Todo(input.substring(minCommandLength + 1));
         return taskList.addTask(t);
     }
 

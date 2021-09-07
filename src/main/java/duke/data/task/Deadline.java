@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+import duke.data.exception.DukeException;
+
 /**
  * Class that represents a Deadline task.
  *
@@ -50,7 +52,7 @@ public class Deadline extends Task {
      * @param dateTime Input date format.
      * @return A string representing the date in the desirable format.
      */
-    public String parseStringToDate(String dateTime) {
+    public String parseStringToDate(String dateTime) throws DukeException {
         DateTimeFormatter sourceFormat;
         DateTimeFormatter targetFormat;
         String convertedTime;
@@ -67,9 +69,7 @@ public class Deadline extends Task {
                         .format(targetFormat);
             }
         } catch (Exception e) {
-            // return error msg?
-            return "error toh toh";
-            // return dateTime;
+            throw new DukeException("Sorry there seems to be an error with your input.");
         }
         return convertedTime;
 

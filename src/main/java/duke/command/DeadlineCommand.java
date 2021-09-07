@@ -29,12 +29,14 @@ public class DeadlineCommand extends Command {
      * Executes the "Deadline" Command.
      * @return string that represents details of adding this deadline task.
      */
-    public String execute() {
-        if (input.length() == 8) {
+    @Override
+    public String execute() throws DukeException {
+        int minCommandLength = 8;
+        if (input.length() == minCommandLength) {
             throw new DukeException(Ui.getEmptyDescriptionMsg("deadline"));
         }
         try {
-            String[] infoArray = input.substring(9).split("/by ", 2);
+            String[] infoArray = input.substring(minCommandLength + 1).split("/by ", 2);
             Deadline d = new Deadline(infoArray[0], infoArray[1]);
             return super.taskList.addTask(d);
         } catch (Exception e) {
