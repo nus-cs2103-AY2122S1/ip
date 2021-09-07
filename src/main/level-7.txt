@@ -1,3 +1,2 @@
-T | 0 | homework
-E | 1 | party  | noon
-D | 1 | hello  | Oct 11 2021
+T | 0 | hello
+E | 0 | event 1  | 2012-12-01 04:55-08:00

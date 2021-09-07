@@ -1,6 +1,6 @@
 package duke.test;
 
-import duke.Events;
+import duke.Event;
 import duke.Task;
 import duke.TaskList;
 import duke.ToDos;
@@ -23,13 +23,13 @@ public class TaskListTest {
     @Test
     public void printListTest() {
         ToDos task1 = new ToDos("shower");
-        Events task2 = new Events("assignment", "2359hrs");
+        ToDos task2 = new ToDos("assignment");
         ArrayList<Task> l = new ArrayList<>();
         l.add(task1);
         l.add(task2);
         TaskList list = new TaskList(l);
         assertEquals("1. [T][ ]shower\n"
-                        + "2. [E][ ]assignment(at:2359hrs)\n", list.printList());
+                        + "2. [T][ ]assignment\n", list.printList());
     }
 
     /**

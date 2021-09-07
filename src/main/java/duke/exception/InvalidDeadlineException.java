@@ -9,6 +9,6 @@ public class InvalidDeadlineException extends DukeException {
      * Constructor for the exception.
      */
     public InvalidDeadlineException() {
-        super("Please enter deadline in the format yyyy-mm-dd");
+        super("Please enter deadline in the format [Task name] /by yyyy-mm-dd HH:mm");
     }
 }

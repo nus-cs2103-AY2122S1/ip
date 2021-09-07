@@ -76,8 +76,7 @@ public class TaskList {
      * @throws InvalidDeadlineException Thrown when users give an incorrect deadline.
      */
 
-    public String addTask(String str) throws EmptyDescriptionException
-            , InvalidTaskException, InvalidDeadlineException {
+    public String addTask(String str) throws DukeException {
         //if the task only contain 1 word
         if (str.split(" ").length == 1) {
             if (str.startsWith("todo") || str.startsWith("deadline") || str.startsWith("event")) {
@@ -97,17 +96,17 @@ public class TaskList {
             tasks.add(task);
         } else if (str.startsWith("deadline")) {
             String[] message = str.split("/by ");
-            if (message.length == 1) {
+            if (message.length != 2) {
                 throw new InvalidTaskException();
             }
             task = new Deadline(message[0].substring(9), message[1]);
             tasks.add(task);
         } else {
             String[] message = str.split("/at ");
-            if (message.length == 1) {
+            if (message.length != 2) {
                 throw new InvalidTaskException();
             }
-            task = new Events(message[0].substring(6), message[1]);
+            task = new Event(message[0].substring(6), message[1]);
             tasks.add(task);
         }
 

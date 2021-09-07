@@ -1,6 +1,8 @@
 package duke;
 
+import duke.exception.DukeException;
 import duke.exception.InvalidDeadlineException;
+import duke.exception.InvalidEventException;
 import duke.exception.InvalidTaskException;
 
 import java.io.File;
@@ -34,8 +36,7 @@ public class Storage {
      * @throws InvalidDeadlineException thrown when users give invalid deadlines.
      */
 
-    public ArrayList<Task> load() throws IOException,
-            InvalidTaskException, InvalidDeadlineException {
+    public ArrayList<Task> load() throws IOException, DukeException {
         ArrayList<Task> list = new ArrayList<>();
         File file = new File(filePath);
 
@@ -54,7 +55,7 @@ public class Storage {
                     task = new Deadline(stuff[2], stuff[3]);
                     break;
                 case "E":
-                    task = new Events(stuff[2], stuff[3]);
+                    task = new Event(stuff[2], stuff[3]);
                     break;
                 default:
                     throw new InvalidTaskException();
