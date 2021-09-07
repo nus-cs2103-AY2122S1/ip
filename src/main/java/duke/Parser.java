@@ -65,6 +65,7 @@ public class Parser {
      */
     public static Command prepareDone(String args) throws DukeException {
         // Make sure there is argument to determine task to mark as done
+        assert (args != null);
         if (args.equals("")) {
             throw new DukeException("Done what brah??\n\t" + DoneCommand.USAGE_TEXT);
         }
@@ -87,6 +88,7 @@ public class Parser {
      */
     public static Command prepareDelete(String args) throws DukeException {
         // Make sure there is argument to determine task to mark as done
+        assert (args != null);
         if (args.equals("")) {
             throw new DukeException("Delete what brah??\n\t" + DeleteCommand.USAGE_TEXT);
         }
@@ -109,6 +111,7 @@ public class Parser {
      */
     public static Command prepareTodo(String args) throws DukeException {
         // Make sure there is argument to record as task
+        assert (args != null);
         if (args.equals("")) {
             throw new DukeException("Todo what brah??\n\t" + TodoCommand.USAGE_TEXT);
         }
@@ -124,6 +127,7 @@ public class Parser {
      */
     public static Command prepareDeadline(String args) throws DukeException {
         // Make sure there is argument to record as task
+        assert (args != null);
         if (args.equals("")) {
             throw new DukeException("Deadline for what brah??\n\t" + DeadlineCommand.USAGE_TEXT);
         }
@@ -153,6 +157,7 @@ public class Parser {
      */
     public static Command prepareEvent(String args) throws DukeException {
         // Make sure there is argument to record as task
+        assert (args != null);
         if (args.equals("")) {
             throw new DukeException("Event for what brah??\n\t" + EventCommand.USAGE_TEXT);
         }
