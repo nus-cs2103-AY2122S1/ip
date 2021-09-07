@@ -33,7 +33,7 @@ public class TaskList {
      * @return An updated array list of tasks.
      */
     public String markDone(int index) {
-
+        assert  tasks != null : "TaskList cannot be found!";
         tasks.get(index).markAsDone();
 
         String temp = tasks.get(index).toString();
@@ -49,7 +49,9 @@ public class TaskList {
     public String addTodo(String details) {
         Todo task = new Todo(details);
 
+        assert  tasks != null : "TaskList cannot be found!";
         tasks.add(task);
+
         return "Got it. I've added this task: \n" + task + "\n" +
                 "Now you have " + tasks.size() + " task(s) in the list.";
 
@@ -65,7 +67,9 @@ public class TaskList {
     public String addDeadline(String details, LocalDate date) {
         Deadline task = new Deadline(details, date);
 
+        assert  tasks != null : "TaskList cannot be found!";
         tasks.add(task);
+
         return "Got it. I've added this task: \n" + task + "\n" +
                 "Now you have " + tasks.size() + " task(s) in the list.";
 
@@ -80,8 +84,9 @@ public class TaskList {
      */
     public String addEvent(String details, String at) {
         Event task = new Event(details, at);
-        tasks.add(task);
 
+        assert  tasks != null : "TaskList cannot be found!";
+        tasks.add(task);
 
         return "Got it. I've added this task: \n" + task + "\n" +
                 "Now you have " + tasks.size() + " task(s) in the list.";
@@ -96,6 +101,7 @@ public class TaskList {
     public String deleteTask(int index) {
         String temp = tasks.get(index).toString();
 
+        assert  tasks != null : "TaskList cannot be found!";
         tasks.remove(index);
 
         return "Got it. I've removed this task: \n" + temp + "\n" +
@@ -106,6 +112,8 @@ public class TaskList {
      * Lists out all tasks in the Task List.
      */
     public String listTasks() {
+        assert  tasks != null : "TaskList cannot be found!";
+
         if (tasks.size() == 0) {
             return "There is no task for now :)";
         } else {

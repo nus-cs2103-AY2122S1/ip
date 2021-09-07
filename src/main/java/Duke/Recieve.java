@@ -39,6 +39,8 @@ public class Recieve {
                     return parser.delete(input);
                 } else if (input.startsWith("find ") || input.startsWith("find")) {
                     return parser.find(input);
+                } else if (input.equals("help")){
+                    return parser.welcomeMessage();
                 } else {
                     return parser.add(input);
                 }
