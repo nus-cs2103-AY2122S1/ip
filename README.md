@@ -15,6 +15,8 @@ Duke is:
 2. Run it
 3. Add your tasks
    - Don't worry, Duke will assist you with inputs!
+      - an example: 
+      - Please input in the form: 'delete <index>'.
    ```
    Hello from
     ____        _        
@@ -37,5 +39,3 @@ public static void main(String[] args) {
     new Duke().run();
 }
 ```
-I think you should use an
-`<addr>` element here instead.
