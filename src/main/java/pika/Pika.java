@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 import pika.command.Command;
 import pika.exception.PikaException;
 import pika.ui.DialogBox;
@@ -26,12 +27,11 @@ import pika.ui.Ui;
 
 
 /**
- * Main Class to run the Duke ChatBot
+ * Main Class to run the Duke ChatBot.
  */
 public class Pika extends Application {
-    private final Storage storage;
+    private Storage storage;
     private TaskList taskLists;
-    private final Ui ui;
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -41,60 +41,31 @@ public class Pika extends Application {
     private Image duke = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/pika.png")));
 
     /**
-     * Constructor for the duke class
+     * Constructor for the duke class.
+     *
      * @param filePath The path where the txt file is located/to be created
      */
     public Pika(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         try {
             this.taskLists = new TaskList(storage.load());
         } catch (PikaException | IOException e) {
-            Ui.showLoadingError(); //Inform user that the existing file is of the wrong format
+            Ui.loadingErrorMessage(); //Inform user that the existing file is of the wrong format
             this.taskLists = new TaskList(); //Creates a new empty list
         }
     }
 
     /**
-     * Constructor for the duke class
+     * Constructor for the duke class.
      */
     public Pika() {
-        ui = new Ui();
         storage = new Storage("data");
         try {
             this.taskLists = new TaskList(storage.load());
         } catch (PikaException | IOException e) {
-            Ui.showLoadingError(); //Inform user that the existing file is of the wrong format
+            Ui.loadingErrorMessage(); //Inform user that the existing file is of the wrong format
             this.taskLists = new TaskList(); //Creates a new empty list
         }
-    }
-
-    /**
-     * Starts the bot
-     */
-    public void run() {
-        boolean isRunning = true; //Bot is running on start up
-        do {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand); //Converts the input to the proper commands
-                c.execute(taskLists, ui, storage); //Run the given command
-                isRunning = c.isRunning(); //Updates the status of the bot
-            } catch (PikaException e) {
-                System.out.println(e.getMessage());
-            } catch (IOException e2) {
-                System.out.println("Pika pi!!! It seems like your file is corrupted!");
-            } catch (DateTimeParseException e3) {
-                System.out.println("Pika pi!! It seems like your date/time input is wrong!");
-            }
-        } while (isRunning);
-    }
-
-    /**
-     * main function
-     */
-    public static void main(String[] args) {
-        new Pika().run(); //To run the bot
     }
 
     @Override
@@ -192,7 +163,8 @@ public class Pika extends Application {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            String output = c.execute(taskLists, ui, storage);
+            String output;
+            output = c.execute(taskLists, storage);
             return output;
         } catch (PikaException e) {
             return e.getMessage();

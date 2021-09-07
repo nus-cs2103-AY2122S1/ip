@@ -26,8 +26,8 @@ public class MainWindow extends AnchorPane {
 
     private Pika pika;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/ash.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/pika.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/ash.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/pika.png"));
 
     /**
      * Initializes the mainWindow

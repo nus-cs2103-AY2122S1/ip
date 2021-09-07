@@ -34,6 +34,7 @@ public class Storage { //Storage class used to handle the writing of the file af
      * @return the BufferedReader to read the file
      * @throws FileNotFoundException Handles if the files was not there previously, meaning need make new file
      */
+
     public BufferedReader load() throws FileNotFoundException {
         return new BufferedReader(new FileReader(txtPath.toString()));
     }

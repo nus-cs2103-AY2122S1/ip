@@ -142,7 +142,7 @@ public class TaskList { //TaskList class used to store the tasks and will be upd
     }
 
     /**
-     * Returns the list of task for the user
+     * Returns the list of task for the user.
      *
      * @return The list of task
      */

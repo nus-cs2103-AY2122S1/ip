@@ -14,7 +14,7 @@ import pika.ui.MainWindow;
  */
 public class Main extends Application {
 
-    private Pika pika = new Pika();
+    private final Pika pika = new Pika();
 
     @Override
     public void start(Stage stage) {
