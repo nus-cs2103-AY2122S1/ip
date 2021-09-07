@@ -65,17 +65,13 @@ public abstract class Command {
     public static UserInput analyze(String command) {
         String[] parts = command.split(" ", 2);
 
-        UserInput userInput = new UserInput();
-
+        // The case there is no body_command.
         if (parts.length == 1) {
-            userInput.pre_command = parts[0].equals("") ? NULL_COMMAND : parts[0];
-            userInput.body_command = NULL_COMMAND;
-        } else {
-            userInput.pre_command = parts[0];
-            userInput.body_command = parts[1];
+            String pre_command = parts[0].equals("") ? NULL_COMMAND : parts[0];
+            return new UserInput(pre_command, NULL_COMMAND);
         }
 
-        return userInput;
+        return new UserInput(parts[0], parts[1]);
     }
 
     private static class Nothing extends Command {
@@ -198,13 +194,13 @@ public abstract class Command {
                 int taskIndex = Integer.parseInt(index) - 1;
                 // assume that the `taskIndex` is larger than 0
                 assert(taskIndex > 0);
-                Task t = Duke.todoList.get(taskIndex);
-                if (t.isDone()) {
-                    responseMessage.appendMessage("OOPS!!! Seems like you marked the task done already:\n    " + t);
-                } else {
-                    t.done();
-                    responseMessage.appendMessage("Nice! I've marked this task as done:\n    " + t);
+                Task task = Duke.todoList.get(taskIndex);
+                if (task.isDone()) {
+                    responseMessage.appendMessage("OOPS!!! Seems like you marked the task done already:\n    " + task);
                 }
+                // Make the task done
+                task.done();
+                responseMessage.appendMessage("Nice! I've marked this task as done:\n    " + task);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException.DukeIndexOutOfBoundsException();
             } catch (NumberFormatException e) {

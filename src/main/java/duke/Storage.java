@@ -54,7 +54,7 @@ public class Storage {
      *
      * @throws IOException
      */
-    public void download() throws IOException {
+    public void downloadDataToTodoList() throws IOException {
         List<String> lines = Files.readAllLines(filePath, StandardCharsets.UTF_8);
         for (String hardCode : lines) {
             Duke.todoList.add(Task.decode(hardCode));
@@ -71,6 +71,5 @@ public class Storage {
             Files.createDirectories(filePath.getParent());
             Files.createFile(filePath);
         }
-        ;
     }
 }

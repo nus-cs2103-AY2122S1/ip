@@ -60,22 +60,22 @@ public abstract class Task {
      * @throws DukeException.DukeEmptyNote
      */
     protected static Task deadline(String bodyCommand) throws DukeException.DukeEmptyTask, DukeException.DukeEmptyNote, DukeException.DukeParseTaskException {
-        if (bodyCommand != Command.NULL_COMMAND) {
-            String[] parts = bodyCommand.split("/by ", 2);
-            String taskName = parts[0];
-            if (parts.length > 1) {
-                try {
-                    String date = parts[1];
-                    LocalDate localDate = LocalDate.parse(date, dtf);
-                    return new Deadline(taskName, localDate, false);
-                } catch (DateTimeParseException e) {
-                    throw new DukeException.DukeParseTaskException(TaskKind.DEADLINE);
-                }
-            } else {
-                throw new DukeException.DukeEmptyNote(TaskKind.DEADLINE);
-            }
-        } else {
+        if (bodyCommand == Command.NULL_COMMAND) {
             throw new DukeException.DukeEmptyTask(TaskKind.DEADLINE);
+        }
+
+        String[] parts = bodyCommand.split("/by ", 2);
+        String taskName = parts[0];
+        if (parts.length < 2) {
+            throw new DukeException.DukeEmptyNote(TaskKind.DEADLINE);
+        }
+
+        try {
+            String date = parts[1];
+            LocalDate localDate = LocalDate.parse(date, dtf);
+            return new Deadline(taskName, localDate, false);
+        } catch (DateTimeParseException e) {
+            throw new DukeException.DukeParseTaskException(TaskKind.DEADLINE);
         }
     }
 
@@ -88,22 +88,22 @@ public abstract class Task {
      * @throws DukeException.DukeEmptyNote
      */
     protected static Task event(String bodyCommand) throws DukeException.DukeEmptyTask, DukeException.DukeEmptyNote, DukeException.DukeParseTaskException {
-        if (bodyCommand != Command.NULL_COMMAND) {
-            String[] parts = bodyCommand.split("/at ", 2);
-            String taskName = parts[0];
-            if (parts.length > 1) {
-                try{
-                String date = parts[1];
-                LocalDate localDate = LocalDate.parse(date, dtf);
-                return new Event(taskName, localDate, false);
-                } catch (DateTimeParseException e) {
-                    throw new DukeException.DukeParseTaskException(TaskKind.DEADLINE);
-                }
-            } else {
-                throw new DukeException.DukeEmptyNote(TaskKind.EVENT);
-            }
-        } else {
+        if (bodyCommand == Command.NULL_COMMAND) {
             throw new DukeException.DukeEmptyTask(TaskKind.EVENT);
+        }
+
+        String[] parts = bodyCommand.split("/at ", 2);
+        String taskName = parts[0];
+        if (parts.length < 2) {
+            throw new DukeException.DukeEmptyNote(TaskKind.EVENT);
+        }
+
+        try{
+            String date = parts[1];
+            LocalDate localDate = LocalDate.parse(date, dtf);
+            return new Event(taskName, localDate, false);
+        } catch (DateTimeParseException e) {
+            throw new DukeException.DukeParseTaskException(TaskKind.DEADLINE);
         }
     }
 

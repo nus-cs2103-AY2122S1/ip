@@ -7,44 +7,53 @@ import java.util.List;
 public class Duke {
     protected static List<Task> todoList;
     protected Storage storage;
+    private Ui ui;
     /**
      * Generate new Duke
      *
      * @param filePath path to store data
      */
     public Duke(String filePath) {
-        this.storage = new Storage(filePath);
-        this.todoList = new ArrayList<>();
-
         try {
-            storage.createFile();
-            storage.download();
+            this.ui = new Ui();
+            this.storage = new Storage(filePath);
+            Duke.todoList = new ArrayList<>();
+            loadDataToTodoList();
         } catch (IOException e) {
             e.printStackTrace();
-            todoList = new ArrayList<>();
+            Duke.todoList = new ArrayList<>();
         }
+    }
+
+    private void loadDataToTodoList() throws IOException {
+        storage.createFile();
+        storage.downloadDataToTodoList();
     }
 
     public static void main(String[] args) {
         Duke duke = new Duke("/Users/hungkhoaitay/Duke.Duke/data/duke.txt");
-        Ui ui = new Ui();
-        duke.run(ui);
+        duke.run();
         duke.finish();
     }
 
-    private void run(Ui ui) {
-        System.out.println(ui.printWelcome());
-        process(ui, true);
+    private void run() {
+        System.out.println(this.ui.printWelcome());
+        process(true);
     }
 
-    private void process(Ui ui, boolean isContinue) {
+    /**
+     * Take the user's input and process it
+     *
+     * @param isContinue determine if the method should continue
+     */
+    private void process(boolean isContinue) {
         if (!isContinue) {
             return;
         }
-        String userInput = ui.getUserInput();
+        String userInput = this.ui.getUserInput();
         Response response = this.getResponse(userInput);
-        ui.printResponse(response);
-        process(ui, response.isContinue());
+        this.ui.printResponse(response);
+        process(response.isContinue());
     }
 
     /**
