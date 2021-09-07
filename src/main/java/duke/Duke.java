@@ -5,6 +5,7 @@ import duke.exceptions.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
+import javafx.application.Platform;
 
 /**
  * Represents Duke, a program that helps people to keep track of tasks.
@@ -42,6 +43,9 @@ public class Duke {
         try {
             Command c = parser.parse(input);
             response = c.execute(tasks, storage);
+            if (c.isExit()) {
+                Platform.exit();
+            }
         } catch (DukeException e) {
             response = e.getMessage();
         }

@@ -46,7 +46,7 @@ public class Storage {
         String[] pathArr = filePath.split("/");
         String[] dirArr = Arrays.copyOfRange(pathArr, 0, pathArr.length - 1);
         String dirPath = String.join("/", dirArr);
-        boolean isCreated = new File(dirPath).mkdirs();
+        new File(dirPath).mkdirs();
 
         try {
             File file = new File(filePath);
