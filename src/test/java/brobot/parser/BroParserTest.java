@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import brobot.Storage;
 import brobot.exception.BroException;
+import brobot.storage.Storage;
 import brobot.task.TaskList;
 
 public class BroParserTest {

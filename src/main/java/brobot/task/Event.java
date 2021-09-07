@@ -35,7 +35,7 @@ public class Event extends Task {
     }
 
     /**
-     * String representation of an Event task for storage.
+     * String representation of an Event task for brobot.storage.
      *
      * @return Event task in String(Storage format).
      */

@@ -19,5 +19,6 @@ text-ui-test/EXPECTED-UNIX.TXT
 # Saved list data files
 /data
 /text-ui-test/data
+/saveFilePath.txt
 
 

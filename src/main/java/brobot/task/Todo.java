@@ -25,7 +25,7 @@ public class Todo extends Task {
     }
 
     /**
-     * String representation of a Todo for storage.
+     * String representation of a Todo for brobot.storage.
      *
      * @return Todo task in String(Storage format).
      */

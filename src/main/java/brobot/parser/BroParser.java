@@ -1,21 +1,24 @@
 package brobot.parser;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Scanner;
 
-import brobot.Storage;
 import brobot.UI;
 import brobot.exception.BroException;
 import brobot.exception.InvalidCommandException;
 import brobot.exception.InvalidCommandParameterException;
 import brobot.exception.NoSuchTaskException;
+import brobot.storage.DemoJFileChooser;
+import brobot.storage.Storage;
 import brobot.task.Deadline;
 import brobot.task.Event;
 import brobot.task.Task;
 import brobot.task.TaskList;
 import brobot.task.Todo;
+
 
 
 /**
@@ -31,7 +34,7 @@ public class BroParser {
      * Constructor.
      *
      * @param list    The list to handle.
-     * @param storage The storage to handle.
+     * @param storage The brobot.storage to handle.
      */
     public BroParser(TaskList list, Storage storage) {
         this.list = list;
@@ -70,6 +73,9 @@ public class BroParser {
             break;
         case "find":
             output = handleFind(inputScanner);
+            break;
+        case "storage":
+            output = handleStorage(inputScanner);
             break;
         default:
             throw new InvalidCommandException();
@@ -212,6 +218,25 @@ public class BroParser {
             return UI.getSearchListText(searchList);
         } else {
             throw new InvalidCommandParameterException();
+        }
+    }
+
+    /**
+     * Handler for Storage Command.
+     * Changes the brobot.storage file directory to the one selected.
+     * @param inputScanner Command Parameters(if any).
+     * @return Message for brobot.storage command
+     * @throws InvalidCommandParameterException Exception that represents an invalid parameter error for the
+     * inputted command
+     */
+    public String handleStorage(Scanner inputScanner) throws InvalidCommandParameterException {
+        if (inputScanner.hasNext()) {
+            throw new InvalidCommandParameterException();
+        } else {
+            DemoJFileChooser fileChooser = new DemoJFileChooser(storage);
+            File selectedFile = fileChooser.selectFile();
+            storage.changeFilePath(selectedFile);
+            return UI.getStorageChangeText(selectedFile.getAbsolutePath());
         }
     }
 
