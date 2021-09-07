@@ -101,8 +101,10 @@ public class Parser {
      * is a todo, event, deadline or otherwise
      */
     private boolean isNormalCommandType(String commandName) {
-        return (!commandName.equals(TODO_COMMAND))
-                && (!commandName.equals(DEADLINE_COMMAND))
-                && (!commandName.equals(EVENT_COMMAND));
+        boolean isToDo = !commandName.equals(TODO_COMMAND);
+        boolean isDeadLine = !commandName.equals(DEADLINE_COMMAND);
+        boolean isEvent = !commandName.equals(EVENT_COMMAND);
+        return isToDo && isDeadLine && isEvent;
     }
+    
 }

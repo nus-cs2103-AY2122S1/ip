@@ -7,6 +7,10 @@ import javafx.application.Application;
  */
 public class Launcher {
 
+    /**
+     * Launches the entire app.
+     * @param args String[] of inputs to start running the application.
+     */
     public static void main(String[] args) {
         Application.launch(LaunchDuke.class, args);
     }

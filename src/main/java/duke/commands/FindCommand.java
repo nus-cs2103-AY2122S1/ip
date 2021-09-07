@@ -6,6 +6,7 @@ import duke.Ui;
 import duke.exceptions.NoTaskMatchException;
 import duke.exceptions.WrongFindFormatException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class FindCommand extends Command {
     
@@ -24,11 +25,14 @@ public class FindCommand extends Command {
         Storage storage) throws WrongFindFormatException,
         NoTaskMatchException {
         String[] instructions = this.commandDescription.split(" ");
-        if (instructions.length != 2) {
+        if (instructions.length <= 1) {
             throw new WrongFindFormatException();
         }
-
-        String toFind = instructions[1];
+        
+        String toFind = String.join(" ",
+                Arrays.copyOfRange(instructions,
+                        1,
+                        instructions.length));
         String displayString = this.convertMatchingTaskToStringDisplay(
             toFind, tasks);
         if (displayString.length() == 0) {

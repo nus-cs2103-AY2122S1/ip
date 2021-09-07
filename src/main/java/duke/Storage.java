@@ -91,39 +91,47 @@ public class Storage {
                             1,
                             instructionsArray.length));
             String identity = instructionsArray[0];
-            if (identity.equals(TODO_FULL_IDEN)) {
-                Task toDoTask;
-                if (entry.getValue()) {
-                    toDoTask = new ToDo(crucialInstructions).
-                            updateStatus(Status.COMPLETED.getStatus());
-                } else {
-                    toDoTask = new ToDo(crucialInstructions);
-                }
-                finalOutputTasks.add(toDoTask);
-            } else if (identity.equals(EVENT_FULL_IDEN)) {
-                Task eventTask;
-                if (entry.getValue()) {
-                    eventTask = new Event(crucialInstructions).
-                            updateStatus(Status.COMPLETED.getStatus());
-                } else {
-                    eventTask = new Event(crucialInstructions);
-                }
-                finalOutputTasks.add(eventTask);
-            } else if (identity.equals(DEADLINE_FULL_IDEN)) {
-                Task deadlineTask;
-                if (entry.getValue()) {
-                    deadlineTask = new Deadline(crucialInstructions).
-                            updateStatus(Status.COMPLETED.getStatus());
-                } else {
-                    deadlineTask = new Deadline(crucialInstructions);
-                }
-                finalOutputTasks.add(deadlineTask);
-            } else {
-                String errorMsg = "No such task!";
-                throw new DukeException(errorMsg);
-            }
+            this.addToOutputTaskList(
+                    identity,
+                    entry.getValue(),
+                    crucialInstructions,
+                    finalOutputTasks);
         }
         return finalOutputTasks;
+    }
+
+    private void addToOutputTaskList(
+            String identifier,
+            boolean isCompleted,
+            String instructions,
+            ArrayList<Task> taskList) throws DukeException {
+        Task outputTask;
+        if (identifier.equals(TODO_FULL_IDEN)
+                && isCompleted) {
+            outputTask = new ToDo(instructions).
+                    updateStatus(Status.COMPLETED.getStatus());
+        } else if (identifier.equals(TODO_FULL_IDEN)
+                && !isCompleted) {
+            outputTask = new ToDo(instructions);
+        } else if (identifier.equals(DEADLINE_FULL_IDEN)
+                && isCompleted) {
+            outputTask = new Deadline(instructions).
+                    updateStatus(Status.COMPLETED.getStatus());
+        } else if (identifier.equals(DEADLINE_FULL_IDEN)
+                && !isCompleted) {
+            outputTask = new Deadline(instructions);
+        } else if (identifier.equals(EVENT_FULL_IDEN)
+                && isCompleted) {
+            outputTask = new Event(instructions).
+                    updateStatus(Status.COMPLETED.getStatus());
+        } else if (identifier.equals(EVENT_FULL_IDEN)
+                && !isCompleted) {
+            outputTask = new Event(instructions);
+        } else {
+            String errorMsg = "No such task!";
+            throw new DukeException(errorMsg);
+        }
+        taskList.add(outputTask);
     }
 
     /**
@@ -164,42 +172,49 @@ public class Storage {
         if (indicator.contains(TODO_IDENTIFIER)) {
             String details = String.join(" ",
                     Arrays.copyOfRange(instr, 1, instr.length));
-            if (indicator.contains("X")) {
-                details = TODO_IDENTIFIER
-                        + " | 1 | "
-                        + details;
-            } else {
-                details = TODO_IDENTIFIER
-                        + " | 0 | "
-                        + details;
-            }
-            sb.append(details + extra);
+            this.addToStringBuilder(
+                    sb,
+                    indicator.contains("X"),
+                    TODO_IDENTIFIER,
+                    details,
+                    extra);
         } else if (indicator.contains(DEADLINE_IDENTIFIER)) {
             String details = this.getImptContentsOfDescription(fullInstr);
-            if (indicator.contains("X")) {
-                details = DEADLINE_IDENTIFIER
-                        + " | 1 | "
-                        + details;
-            } else {
-                details = DEADLINE_IDENTIFIER
-                        + " | 0 | "
-                        + details;
-            }
-            sb.append(details + extra);
+            this.addToStringBuilder(
+                    sb,
+                    indicator.contains("X"),
+                    DEADLINE_IDENTIFIER,
+                    details,
+                    extra);
         } else {
             String details = this.getImptContentsOfDescription(fullInstr);
-            if (indicator.contains("X")) {
-                details = EVENT_IDENTIFIER
-                        + " | 1 | "
-                        + details;
-            } else {
-                details = EVENT_IDENTIFIER
-                        + " | 0 | "
-                        + details;
-            }
-            sb.append(details + extra);
+            this.addToStringBuilder(
+                    sb,
+                    indicator.contains("X"),
+                    EVENT_IDENTIFIER,
+                    details,
+                    extra);
         }
 
+    }
+
+    private void addToStringBuilder(
+        StringBuilder sb,
+        boolean containsX,
+        String taskIdentifier,
+        String toModify,
+        String extra) {
+        String output;
+        if (containsX) {
+            output = taskIdentifier
+            + " | 1 | "
+            + toModify;
+        } else { 
+            output = taskIdentifier
+            + " | 0 | "
+            + toModify;
+        }
+        sb.append(output +  extra);
     }
 
     private String getImptContentsOfDescription(String input) {
@@ -236,6 +251,7 @@ public class Storage {
     private String[] updateToCommandConverterReadableFormat(
             String identifier,
             String[] finalFormatted) {
+        int INDEX_TO_MODIFY = 3;
         if (identifier.equals(TODO_IDENTIFIER)) {
             finalFormatted[0] = "todo";
             return finalFormatted;
@@ -243,13 +259,13 @@ public class Storage {
             finalFormatted[0] = "event";
             return this.addIndicator(
                     finalFormatted,
-                    3,
+                    INDEX_TO_MODIFY,
                     INDICATOR_EVENT);
         } else {
             finalFormatted[0] = "deadline";
             return this.addIndicator(
                     finalFormatted,
-                    3,
+                    INDEX_TO_MODIFY,
                     INDICATOR_DEADLINE);
         }
     }

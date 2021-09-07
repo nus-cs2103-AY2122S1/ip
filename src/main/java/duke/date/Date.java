@@ -103,32 +103,33 @@ public class Date {
         int timeInHours = this.globalTime.getHour();
         int timeInMins = this.globalTime.getMinute();
         if (timeInHours == NOON) {
-            if (timeInMins > 0) {
-                return String.valueOf(timeInHours)
-                        + "."
-                        + timeInMins
-                        + EVENING_INDICATOR;
-            }
-            return String.valueOf(timeInHours)
-                    + EVENING_INDICATOR;
+            return this.getStringHelper(
+                (timeInMins > 0),
+                timeInMins,
+                String.valueOf(timeInHours),
+                EVENING_INDICATOR);
         } else if (timeInHours > NOON) {
-            if (timeInMins > 0) {
-                return String.valueOf(timeInHours - NOON)
-                        + "."
-                        + timeInMins
-                        + EVENING_INDICATOR;
-            }
-            return String.valueOf(timeInHours - NOON)
-                    + EVENING_INDICATOR;
-        } else {
-            if (timeInMins > 0) {
-                return String.valueOf(timeInHours)
-                        + "."
-                        + timeInMins
-                        + MORNING_INDICATOR;
-            }
-            return String.valueOf(timeInHours)
-                    + MORNING_INDICATOR;
+            return this.getStringHelper(
+                (timeInMins > 0),
+                timeInMins,
+                String.valueOf(timeInHours - NOON),
+                EVENING_INDICATOR);
         }
+        return this.getStringHelper(
+            (timeInMins > 0),
+            timeInMins,
+            String.valueOf(timeInHours),
+            MORNING_INDICATOR);
+    }
+
+    private String getStringHelper(
+            boolean hasMins,
+            int timeInMins,
+            String timeString,
+            String indicator) {
+        if (hasMins) {
+            return timeString + "." + timeInMins + indicator;
+        }
+        return timeString + indicator;
     }
 }
