@@ -1,24 +1,24 @@
-package duke.Command;
+package duke.command;
 
 import java.util.ArrayList;
 
-import duke.Exceptions.DukeException;
-import duke.Exceptions.IndexNotInListException;
-import duke.Exceptions.NoDescriptionException;
-import duke.Exceptions.WrongInputException;
-import duke.Storage.Storage;
-import duke.Tasks.Deadline;
-import duke.Tasks.Event;
-import duke.Tasks.Task;
-import duke.Tasks.TaskList;
-import duke.Tasks.Todo;
-import duke.Ui.Ui;
+import duke.exceptions.DukeException;
+import duke.exceptions.IndexNotInListException;
+import duke.exceptions.NoDescriptionException;
+import duke.exceptions.WrongInputException;
+import duke.storage.Storage;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
+import duke.ui.Ui;
 
 /**
  * The Command class is responsible for directing the user's interaction with Duke.
  */
 public abstract class Command {
-    private static boolean exit;
+    private static boolean isExit;
 
     /**
      * Executes the specified action that is expected of the command.
@@ -166,11 +166,10 @@ public abstract class Command {
                     String name = description.split("/by", 2)[0];
                     String date = description.split("/by", 2)[1];
                     deadline = Deadline.createDeadline(name, date);
-                    deadline.setType('D');
                 } else {
                     deadline = Deadline.createDeadline(description, "");
-                    deadline.setType('D');
                 }
+                deadline.setType('D');
                 tasklist.insert(deadline);
                 storage.updateTxtFile(tasklist);
                 ui.showTaskAdded(deadline, tasklist);
@@ -281,7 +280,7 @@ public abstract class Command {
         @Override
         public void execute(TaskList tasklist, Ui ui, Storage storage) {
             ui.showExitMessage();
-            exit = true;
+            isExit = true;
         }
     }
 
@@ -291,6 +290,6 @@ public abstract class Command {
      * @return the boolean variable
      */
     public boolean isExit() {
-        return exit;
+        return isExit;
     }
 }

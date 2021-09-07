@@ -1,8 +1,9 @@
-package duke.Tasks;
-
-import duke.Exceptions.IndexNotInListException;
+package duke.tasks;
 
 import java.util.ArrayList;
+
+import duke.exceptions.IndexNotInListException;
+
 
 public class TaskList {
     private static final ArrayList<Task> taskList = new ArrayList<>();

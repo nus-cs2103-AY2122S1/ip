@@ -1,4 +1,4 @@
-package duke.Exceptions;
+package duke.exceptions;
 
 public class NonsenseException extends DukeException {
     public NonsenseException(String message) {

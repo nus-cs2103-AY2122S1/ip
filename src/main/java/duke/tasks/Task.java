@@ -1,6 +1,6 @@
-package duke.Tasks;
+package duke.tasks;
 
-public class Task {
+public abstract class Task {
     protected Boolean done;
     protected String name;
     protected char type;
