@@ -3,6 +3,7 @@ package duke.task;
 import duke.main.DukeException;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -37,8 +38,9 @@ public class Event extends Task {
      * @param desc        Description of Event.
      * @param at          Time for Event.
      * @param isCompleted indicates whether event is completed.
+     * @param tags        List of tags associated with the Event.
      */
-    public Event(String desc, String at, boolean isCompleted) {
+    public Event(String desc, String at, boolean isCompleted, List<String> tags) {
         this(desc, at);
         super.completed = isCompleted;
     }
@@ -70,7 +72,7 @@ public class Event extends Task {
      */
     @Override
     public String generateStorageString() {
-        return "E | " + super.completed + " | " + super.description + " | " + this.at;
+        return "E | " + super.completed + " | " + super.description + " | " + super.formatTags() + " | " + this.at;
     }
 
     @Override

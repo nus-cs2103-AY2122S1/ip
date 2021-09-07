@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -59,9 +61,11 @@ public class Storage {
         String taskType = fragments[0];
         boolean isComplete = Boolean.parseBoolean(fragments[1]);
         String description = fragments[2];
-        String time = fragments.length == 4 ? fragments[3] : null;
+        String tags = fragments[3];
+        List<String> tagList = new ArrayList<>(Arrays.asList(tags.split("#")));
+        String time = fragments[4];
 
-        return generateTask(taskType, isComplete, description, time);
+        return generateTask(taskType, isComplete, description, time, tagList);
     }
 
     /**
@@ -71,23 +75,29 @@ public class Storage {
      * @param isCompletedTask boolean true if task is completed, else false.
      * @param taskDescription String description of the task.
      * @param time            String time associated with the task.
-     * @return
+     * @param tags            list of Tags for the task.
+     * @return Task generated.
      */
-    private Task generateTask(String taskType, boolean isCompletedTask, String taskDescription, String time) {
+    private Task generateTask(String taskType, boolean isCompletedTask, String taskDescription, String time,
+                              List<String> tags) {
         Task foundTask;
+
+        //@formatter:off
         switch (taskType) {
-            case "T":
-                foundTask = new ToDo(taskDescription, isCompletedTask);
-                break;
-            case "D":
-                foundTask = new Deadline(taskDescription, time, isCompletedTask);
-                break;
-            case "E":
-                foundTask = new Event(taskDescription, time, isCompletedTask);
-                break;
-            default:
-                throw new DukeException("\t OOPS!!! I can't find your tasks.\n");
+        case "T":
+            foundTask = new ToDo(taskDescription, isCompletedTask, tags);
+            break;
+        case "D":
+            foundTask = new Deadline(taskDescription, time, isCompletedTask, tags);
+            break;
+        case "E":
+            foundTask = new Event(taskDescription, time, isCompletedTask, tags);
+            break;
+        default:
+            throw new DukeException("\t OOPS!!! I can't find your tasks.\n");
         }
+        //@formatter:on
+
         return foundTask;
     }
 
