@@ -37,6 +37,7 @@ public class Duke extends Application {
      * Constructor for class Duke
      */
     public Duke() {
+        assert !user.isError() : "image failed to load, maybe it has been moved or is not there";
         ui = new Ui();
         storage = new Storage(LOCAL_STORAGE_LOCATION);
         try {
@@ -151,6 +152,7 @@ public class Duke extends Application {
      * @return location of local storage
      */
     public static String getLocalStorageLocation() {
+        assert !LOCAL_STORAGE_LOCATION.equals(""): "Local storage should be defined";
         return LOCAL_STORAGE_LOCATION;
     }
 }
