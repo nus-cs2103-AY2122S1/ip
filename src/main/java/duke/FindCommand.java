@@ -18,14 +18,14 @@ public class FindCommand extends Command {
             Task taskInstance = tasks.get(i);
             String taskDescription = taskInstance.getDescription();
             if (taskDescription.contains(keyword)) {
-                returnMessage = returnMessage + taskInstance.toString() + "\n";
+                returnMessage = returnMessage + taskInstance + "\n";
             }
         }
         if (returnMessage.equals("")) {
             return ui.printNoKeyword(keyword);
-        } else {
-            return ui.printFoundKeyword(returnMessage);
         }
+        return ui.printFoundKeyword(returnMessage);
+        
     }
 
     @Override
