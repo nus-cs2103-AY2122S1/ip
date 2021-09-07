@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import duke.Exceptions.WrongInputException;
-import duke.Tasks.Deadline;
+import duke.exceptions.WrongInputException;
+import duke.tasks.Deadline;
 
 
 public class DeadlineTest {

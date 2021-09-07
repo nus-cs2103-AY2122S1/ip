@@ -1,7 +1,7 @@
 package duke;
 
-import duke.Exceptions.WrongInputException;
-import duke.Tasks.Event;
+import duke.exceptions.WrongInputException;
+import duke.tasks.Event;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

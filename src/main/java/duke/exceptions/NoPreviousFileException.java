@@ -1,4 +1,4 @@
-package duke.Exceptions;
+package duke.exceptions;
 
 public class NoPreviousFileException extends DukeException {
     public NoPreviousFileException(String message) {

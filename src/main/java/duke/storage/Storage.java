@@ -1,4 +1,4 @@
-package duke.Storage;
+package duke.storage;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -8,13 +8,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import duke.Exceptions.DukeException;
-import duke.Exceptions.NoPreviousFileException;
-import duke.Tasks.Deadline;
-import duke.Tasks.Event;
-import duke.Tasks.Task;
-import duke.Tasks.TaskList;
-import duke.Tasks.Todo;
+import duke.exceptions.DukeException;
+import duke.exceptions.NoPreviousFileException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
 
 
 /**
@@ -37,10 +37,10 @@ public class Storage {
         ArrayList<Task> list = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (!line.equals("Tasks:")) {
-                    Task task = convertToTask(line);
+            String currentLine;
+            while ((currentLine = br.readLine()) != null) {
+                if (!currentLine.equals("Tasks:")) {
+                    Task task = convertToTask(currentLine);
                     list.add(task);
                 }
             }

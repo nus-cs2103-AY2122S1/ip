@@ -1,11 +1,12 @@
-package duke.Tasks;
-
-import duke.Exceptions.WrongInputException;
+package duke.tasks;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exceptions.WrongInputException;
+
 
 public class Deadline extends Task {
     protected String by;
@@ -36,13 +37,13 @@ public class Deadline extends Task {
         String time = list[1];
 
         try {
-            DateTimeFormatter dateF = DateTimeFormatter.ofPattern("d/M/yyyy");
-            DateTimeFormatter timeF = DateTimeFormatter.ofPattern("HHmm");
-            DateTimeFormatter resultDF = DateTimeFormatter.ofPattern("dd MMM yyyy");
-            DateTimeFormatter resultTF = DateTimeFormatter.ofPattern("HH.mm a");
+            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d/M/yyyy");
+            DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HHmm");
+            DateTimeFormatter resultDateFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
+            DateTimeFormatter resultTimeFormat = DateTimeFormatter.ofPattern("HH.mm a");
 
-            output = " " + LocalDate.parse(date, dateF).format(resultDF).toString() + ", "
-                    + LocalTime.parse(time, timeF).format(resultTF).toString();
+            output = " " + LocalDate.parse(date, dateFormat).format(resultDateFormat).toString() + ", "
+                    + LocalTime.parse(time, timeFormat).format(resultTimeFormat).toString();
             return output;
         } catch (DateTimeParseException e) {
             throw new WrongInputException("You must enter Date and Time in this format: dd/MM/yyyy HHmm");

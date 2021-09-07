@@ -1,5 +1,5 @@
 
-package duke.Gui;
+package duke.gui;
 
 import java.io.IOException;
 
