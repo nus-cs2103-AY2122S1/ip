@@ -91,7 +91,7 @@ public class Parser {
             if (desc.isEmpty()) {
                 throw new DukeException("todo", "'todo borrow book'");
             }
-
+            assert desc.substring(1).length() > 0 : "Description should be present";
             ToDo toDo = new ToDo(command.substring(5));
             tasks.add(toDo);
             storage.save(tasks);
@@ -103,7 +103,7 @@ public class Parser {
             if (desc.isEmpty()) {
                 throw new DukeException("event", "'event project meeting /at Aug 26 2021 19:15'");
             }
-
+            assert desc.substring(1).length() > 0 : "Description should be present";
             int escapeIndex = command.lastIndexOf("/");
             String dateAndTime = command.substring(escapeIndex + 4);
             Event event = new Event(command.substring(6, escapeIndex - 1), dateAndTime);
@@ -113,11 +113,11 @@ public class Parser {
         }
         case DELETE: {
             int index = Integer.parseInt(command.substring(7)) - 1;
+            assert index <= tasks.size() : "Index out of bounds";
 
             if (index >= tasks.size()) {
                 throw new DeleteException();
             }
-
             Task currentTask = tasks.get(index);
             tasks.remove(index);
             storage.save(tasks);
@@ -129,7 +129,7 @@ public class Parser {
             if (desc.isEmpty()) {
                 throw new DukeException("deadline", "'deadline return book /by 2021-08-27 14:15'");
             }
-
+            assert desc.substring(1).length() > 0 : "Description should be present";
             int escapeIndex = command.lastIndexOf("/");
             String dateAndTime = command.substring(escapeIndex + 4);
             Deadline deadline = new Deadline(command.substring(9, escapeIndex - 1), dateAndTime);
@@ -139,11 +139,12 @@ public class Parser {
         }
         case FIND: {
             TaskList matchingTasks = new TaskList();
-            String desc = command.substring(4);
 
+            String desc = command.substring(4);
             if (desc.isEmpty()) {
                 throw new FindException();
             }
+            assert desc.substring(1).length() > 0 : "Description should be present";
 
             for (Task t : tasks) {
                 if (t.toString().contains(desc)) {

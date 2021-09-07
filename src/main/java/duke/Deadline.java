@@ -56,8 +56,10 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         formatLocalDateTime();
-        return DEADLINE + this.getStatusIcon() + " " + this.getDescription()
-                + " (by: " + localDateTime.format(dtf) + ")";
+
+        assert localDateTime != null : "Date should not be null";
+        return DEADLINE + this.getStatusIcon() + " " + this.getDescription() + " (by: "
+                + localDateTime.format(dtf) + ")";
     }
 
     /**

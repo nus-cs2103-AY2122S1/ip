@@ -56,6 +56,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         formatLocalDateTime();
+        assert localDateTime != null : "Date should not be null";
         return EVENT + this.getStatusIcon() + " " + this.getDescription() + " (at: " + localDateTime.format(dtf) + ")";
     }
 

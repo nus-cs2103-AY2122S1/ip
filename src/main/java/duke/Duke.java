@@ -29,6 +29,7 @@ public class Duke extends Application {
         } catch (FileNotFoundException e) {
             tasks = new TaskList();
         }
+        assert tasks != null : "Task should not be null";
     }
 
     /**
