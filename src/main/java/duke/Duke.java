@@ -24,6 +24,7 @@ public class Duke {
             tasks = new TaskList(getStorage().loadTasks());
         } catch (DukeException e) {
             tasks = new TaskList();
+            assert (tasks.getNumTasks() == 0);
         }
     }
 
@@ -57,20 +58,22 @@ public class Duke {
         Ui ui = new Ui();
         ui.greetUser();
         Scanner sc = new Scanner(System.in);
+        boolean isExit = false;
 
-        while (true) {
+        while (!isExit) {
             try {
                 System.out.println("What's your next command?\n");
                 String command = sc.nextLine();
                 String response = Parser.parse(command);
                 Ui.printFormattedMessage(response);
                 if (response.contains("Bye")) {
-                    break;
+                    isExit = true;
                 }
             } catch (DukeException e) {
                 Ui.printFormattedMessage(e.getMessage());
             }
         }
+        assert (isExit);
         sc.close();
     }
 
