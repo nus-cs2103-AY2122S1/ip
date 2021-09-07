@@ -85,7 +85,7 @@ public class Ui {
             sb.append("Here are the matching tasks in your list:\n");
 
             IntStream.range(0, matchingTaskList.size())
-                    .forEach(i -> sb.append(String.format("%d.%s%n", i, matchingTaskList.get(i))));
+                    .forEach(i -> sb.append(String.format("%d.%s%n", i+1, matchingTaskList.get(i))));
 
             return sb.toString();
         }
@@ -105,7 +105,7 @@ public class Ui {
             sb.append("Here are tasks in your list:\n");
 
             IntStream.range(0, taskList.size())
-                    .forEach(i -> sb.append(String.format("%d.%s%n", i, taskList.get(i))));
+                    .forEach(i -> sb.append(String.format("%d.%s%n", i+1, taskList.get(i))));
 
             return sb.toString();
         }
