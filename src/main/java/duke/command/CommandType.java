@@ -14,7 +14,8 @@ public enum CommandType {
     ADD_DEADLINE_TASK("deadline", "Add Deadline Task"),
     ADD_EVENT_TASK("event", "Add Event Task"),
     DELETE_TASK("delete", "Delete Task"),
-    FIND_TASKS("find", "Find Task");
+    FIND_TASKS("find", "Find Task"),
+    UNDO("undo", "Undo");
 
     private final String commandName;
     private final String commandDescription;

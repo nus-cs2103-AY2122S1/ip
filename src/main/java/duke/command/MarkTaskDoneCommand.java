@@ -34,10 +34,17 @@ public class MarkTaskDoneCommand extends ApplyOnTaskNumberCommand {
                 .addLine("Nice! I've marked this task as done:")
                 .addTask(task)
                 .printFormatted();
+        CommandHandler commandHandler = CommandHandler.getInstance();
+        commandHandler.addToUndoableCommands(this);
     }
 
     @Override
     CommandType getCommandType() {
         return COMMAND_TYPE;
+    }
+
+    @Override
+    public void undo(TaskHandler taskHandler) {
+        taskHandler.unmarkTaskDone(getTaskIndex());
     }
 }

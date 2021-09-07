@@ -12,12 +12,15 @@ public abstract class Command {
 
     private static final boolean MUST_EXIT = false;
 
+    private String command;
+
     /**
      * Creates a Command instance.
      *
      * @param command The command represented by the instance.
      */
     public Command(String command) throws DukeInvalidCommandException {
+        this.command = command;
         String[] tokens = command.strip().split(" ");
         assert tokens.length != 0 && tokens[0].length() != 0 : "The String command cannot be empty";
         String commandName = tokens[0];
@@ -62,5 +65,10 @@ public abstract class Command {
             tokenSequenceSb.append(token).append(" ");
         }
         return tokenSequenceSb.toString().strip();
+    }
+
+    @Override
+    public String toString() {
+        return command;
     }
 }

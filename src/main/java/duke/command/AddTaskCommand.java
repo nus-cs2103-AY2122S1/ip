@@ -9,10 +9,11 @@ import duke.ui.Ui;
  *
  * @author Jay Aljelo Saez Ting
  */
-public abstract class AddTaskCommand extends Command {
+public abstract class AddTaskCommand extends Command implements UndoableCommand {
 
     private Task task;
     private String taskDescription;
+    private int taskIndex;
 
     /**
      * Creates an AddTaskCommand instance.
@@ -34,11 +35,15 @@ public abstract class AddTaskCommand extends Command {
     public void execute(TaskHandler taskHandler, Ui ui) {
         assert task != null : "Task to be added must be created; it cannot be null.";
         taskHandler.addTask(task);
+        int numberOfTasks = taskHandler.getNumberOfTasks();
         ui.startMessage()
                 .addLine("Got it. I've added this task:")
                 .addTask(task)
-                .addTasksListLength(taskHandler.getNumberOfTasks())
+                .addTasksListLength(numberOfTasks)
                 .printFormatted();
+        taskIndex = numberOfTasks - 1;
+        CommandHandler commandHandler = CommandHandler.getInstance();
+        commandHandler.addToUndoableCommands(this);
     }
 
     @Override
@@ -47,6 +52,11 @@ public abstract class AddTaskCommand extends Command {
         checkTaskDescriptionLength(taskDescription);
         setTaskDescription(taskDescription);
         setTask(createTask());
+    }
+
+    @Override
+    public void undo(TaskHandler taskHandler) {
+        taskHandler.deleteTask(taskIndex);
     }
 
     void setTask(Task task) {

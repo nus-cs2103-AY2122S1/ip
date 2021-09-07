@@ -38,6 +38,10 @@ public abstract class Task {
         isDone = true;
     }
 
+    void unmarkDone() {
+        isDone = false;
+    }
+
     private String getDoneIndicator() {
         if (isDone) {
             return String.format("[%s]", DONE_MARK);
