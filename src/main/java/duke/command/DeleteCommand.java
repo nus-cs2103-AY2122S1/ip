@@ -36,6 +36,7 @@ public class DeleteCommand extends Command {
             throw new DukeException("Invalid number.");
         }
         Task task = duke.getList().remove(index);
+        assert task != null : "Cannot delete empty task.";
         return Ui.deleteMessage(task, duke.getList().size());
     }
 }

@@ -34,6 +34,7 @@ public class DoneCommand extends Command {
             throw new DukeException("Invalid number.");
         }
         Task task = duke.getList().setDone(index);
+        assert task != null : "Cannot mark empty task as done.";
         return Ui.doneMessage(task);
     }
 }
