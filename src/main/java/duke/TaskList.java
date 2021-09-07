@@ -16,6 +16,7 @@ public class TaskList {
      * @param fileContents Content of the file used to save data.
      */
     public TaskList(ArrayList<Task> fileContents) {
+        assert fileContents != null : "Tasks are not null but in an arraylist.";
         contents = fileContents;
     }
 
@@ -44,6 +45,7 @@ public class TaskList {
                 newTask = new ToDo(userInput);
             }
             contents.add(newTask);
+            assert contents.contains(newTask) : "Task List should contain newly added Task";
             return Ui.addTaskMessage(newTask, contents.size()) + Storage.writeFile();
         } else {
             return Ui.invalidTaskMessage();
@@ -102,6 +104,7 @@ public class TaskList {
             int x = Integer.parseInt(index);
             Task temp = contents.get(x - 1);
             contents.remove(temp);
+            assert !contents.contains(temp) : "Task List should not contain current Task";
             return Ui.removeTaskMessage(temp);
         } catch (StringIndexOutOfBoundsException e) {
             return Ui.invalidDeleteInput();
