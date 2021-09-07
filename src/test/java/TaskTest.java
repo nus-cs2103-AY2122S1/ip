@@ -34,7 +34,7 @@ public class TaskTest {
             DateParser.toDatabaseFormat(x)
         );
         Assertions.assertEquals(
-            "01 Apr 2020, 05:00 AM",
+            "01 Apr 2020, 05:00 am",
             DateParser.toHumanReadable(x)
         );
     }

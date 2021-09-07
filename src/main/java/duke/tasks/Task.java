@@ -5,7 +5,22 @@ import java.util.regex.Pattern;
 /**
  * Task class that encapsulate task behaviour and data.
  */
-abstract public class Task {
+public abstract class Task {
+
+    private static final String DELIMITER = "--|--";
+
+    private final String title;
+    private final Type type;
+    private boolean isComplete = false;
+
+    protected Task(String title, Type type) {
+        title = title.trim();
+        if (title.length() == 0) {
+            throw new InvalidTaskException("Task description cannot be empty");
+        }
+        this.title = title;
+        this.type = type;
+    }
 
     public static int chronologicalComparator(Task task, Task task1) {
         return (int) (task.getUrgency() - task1.getUrgency());
@@ -18,20 +33,6 @@ abstract public class Task {
         TODO, // task without a date
         EVENT, // task with a start date and end date
         DEADLINE, // task with a single date associated with it.
-    }
-
-    private static final String DELIMITER = "--|--";
-    private final String title;
-    private final Type type;
-    private boolean isComplete = false;
-
-    protected Task(String title, Type type) {
-        title = title.trim();
-        if (title.length() == 0) {
-            throw new InvalidTaskException("Task description cannot be empty");
-        }
-        this.title = title;
-        this.type = type;
     }
 
     /**
@@ -142,7 +143,7 @@ abstract public class Task {
      *
      * @return numeric value to be used to compare tasks.
      */
-    abstract protected long getUrgency();
+    protected abstract long getUrgency();
 
     /**
      * Set a task to be completed.
