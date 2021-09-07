@@ -19,8 +19,8 @@ public class Messages {
     public static final String INDENTATION = "    ";
     public static final String WELCOME_MESSAGE = "Hi! I'm Jacky, your personal task manager.";
     public static final String BYE_MESSAGE = "Bye! Hope to see you again soon :-)";
-    public static final String UNKNOWN_INPUT_MESSAGE = "OOPS!!! I'm sorry, but I don't know what that means :-(";
-    public static final String MISSING_DATE = "OOPS!!! Please add a valid date in the format dd/MM/yy HHmm.";
+    public static final String UNKNOWN_INPUT_MESSAGE = "I'm sorry, but I don't know what that means :-(";
+    public static final String MISSING_DATE = "Missing the date!";
     public static final String PRINT_LIST_MESSAGE = "Here are the tasks in your list:\n";
     public static final String NUMBER_OF_TASKS_MESSAGE = "Now you have %d tasks in the list.\n";
     public static final String MARK_TASK_AS_DONE_MESSAGE = "Nice! I've marked this task as done:\n";
@@ -28,11 +28,12 @@ public class Messages {
     public static final String DELETE_TASK = "Noted. I've removed this task:\n";
     public static final String EMPTY_LIST = "You haven't added anything to your list!";
     public static final String MATCHING_TASK_FOUND = "Here are the matching tasks in your list:\n";
-    public static final String NO_MATCHING_TASK_FOUND = "OOPS!!! There are no tasks with that keyword! :-(";
-    public static final String EMPTY_TODO_DESC = "OOPS!!! The description of a todo cannot be empty.";
-    public static final String EMPTY_DEADLINE_DESC = "OOPS!!! The description of a deadline cannot be empty.";
-    public static final String EMPTY_EVENT_DESC = "OOPS!!! The description of an event cannot be empty.";
-    public static final String EMPTY_FIND_CMD = "OOPS!!! The description of a find command cannot be empty.";
+    public static final String NO_MATCHING_TASK_FOUND = "There are no tasks with that keyword! :-(";
+    public static final String EMPTY_TODO_DESC = "The description of a todo cannot be empty!";
+    public static final String EMPTY_DEADLINE_DESC = "The description of a deadline cannot be empty!";
+    public static final String EMPTY_EVENT_DESC = "The description of an event cannot be empty!";
+    public static final String EMPTY_FIND_CMD = "The description of a find command cannot be empty!";
+    public static final String DATE_FORMAT_ERROR = "Please add a valid date in the format ddMMyy HHmm!";
     public static final String HELP = "Here is a quick guide on how to use me!\n"
             + "1. " + ToDoCommand.MESSAGE_USAGE + "\n"
             + "2. " + EventCommand.MESSAGE_USAGE + "\n"

@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.data.exception.DukeException;
+import duke.ui.Ui;
+
 /**
  * Class that represents a Deadline task.
  *
@@ -12,7 +15,7 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
 
     protected String by;
-    private final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
+    private final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("ddMMyy HHmm");
     private final DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd h:mm a");
 
     /**
@@ -37,7 +40,7 @@ public class Deadline extends Task {
             LocalDateTime date = LocalDateTime.parse(by, inputFormatter);
             return date.format(outputFormatter);
         } catch (DateTimeParseException e) {
-            return e.getMessage();
+            return "Format error";
         }
     }
 

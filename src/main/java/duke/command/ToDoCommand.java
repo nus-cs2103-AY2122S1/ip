@@ -35,11 +35,12 @@ public class ToDoCommand extends Command {
      */
     @Override
     public String execute(String cmd) throws DukeException {
-        if (cmd.length() < 6) {
+        int minCommandLength = 6;
+        if (cmd.length() < minCommandLength) {
             throw new DukeException(Ui.emptyDescription("todo"));
         } else {
             ToDo toDo = new ToDo(cmd.substring(5));
-            String toPrint = taskHandler.addToDo(toDo);
+            String toPrint = taskHandler.addTask(toDo);
             toPrint = toPrint.concat(taskHandler.printNoOfTasks());
             storage.updateFile(taskHandler.formatTasksToSave());
             return toPrint;
