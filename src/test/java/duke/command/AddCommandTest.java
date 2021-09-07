@@ -17,7 +17,7 @@ public class AddCommandTest {
      */
     @Test
     public void addCommand_emptyEvent_exceptionThrown() {
-        assertThrows(MissingArgumentException.class, () -> new AddCommand("EVENT", ""));
+        assertThrows(MissingArgumentException.class, () -> new AddCommand("EVENT", "", ""));
     }
 
     /**
@@ -25,7 +25,7 @@ public class AddCommandTest {
      */
     @Test
     public void addCommand_emptyDeadline_exceptionThrown() {
-        assertThrows(MissingArgumentException.class, () -> new AddCommand("DEADLINE", ""));
+        assertThrows(MissingArgumentException.class, () -> new AddCommand("DEADLINE", "", ""));
     }
 
     /**
@@ -34,7 +34,7 @@ public class AddCommandTest {
     @Test
     public void addCommand_invalidEventDate_exceptionThrown() {
         assertThrows(InvalidDateFormatException.class, () ->
-                new AddCommand("EVENT", "sample event /at tomorrow"));
+                new AddCommand("EVENT", "", "sample event /at tomorrow"));
     }
 
     /**
@@ -43,6 +43,6 @@ public class AddCommandTest {
     @Test
     public void addCommand_invalidDeadlineDate_exceptionThrown() {
         assertThrows(InvalidDateFormatException.class, () ->
-                new AddCommand("DEADLINE", "sample deadline /by tomorrow"));
+                new AddCommand("DEADLINE", "", "sample deadline /by tomorrow"));
     }
 }

@@ -6,6 +6,7 @@ package duke.task;
 public class Task {
 
     protected String description;
+    protected String tag;
     protected boolean isDone;
 
     /**
@@ -13,7 +14,8 @@ public class Task {
      *
      * @param description The task description.
      */
-    public Task(String description) {
+    public Task(String tag, String description) {
+        this.tag = tag;
         this.description = description;
         this.isDone = false;
     }
@@ -24,7 +26,7 @@ public class Task {
      * @return The status icon of the task.
      */
     public String getStatusIcon() {
-        return (isDone ? "[X]" : "[ ]"); // mark done task with X
+        return isDone ? "[X]" : "[ ]";
     }
 
     /**
@@ -40,7 +42,7 @@ public class Task {
      * @return The string representation in the format to be written in tasks.txt file.
      */
     public String toDataString() {
-        return String.format("| %d | %s", isDone ? 1 : 0, description);
+        return String.format("| %d | %s | %s", isDone ? 1 : 0, tag, description);
     }
 
     /**
@@ -49,6 +51,6 @@ public class Task {
      * @return The string representation of this task.
      */
     public String toString() {
-        return String.format("%s %s", getStatusIcon(), description);
+        return String.format("%s%s%s %s", getStatusIcon(), tag.isBlank() ? "" : " #" , tag, description);
     }
 }

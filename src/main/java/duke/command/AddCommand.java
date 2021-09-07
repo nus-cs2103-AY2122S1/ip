@@ -27,6 +27,7 @@ public class AddCommand extends Command {
 
     private final boolean hasTaskDate;
     private final TaskType taskType;
+    private final String taskTag;
     private final String taskDescription;
     private final LocalDate taskDate;
 
@@ -38,9 +39,10 @@ public class AddCommand extends Command {
      * @throws IncompleteDescriptionException The exception for handling command with incomplete description.
      * @throws InvalidDateFormatException The exception for handling command with invalid date format.
      */
-    public AddCommand(String taskType, String taskFullDetail) throws IncompleteDescriptionException,
+    public AddCommand(String taskType, String taskTag, String taskFullDetail) throws IncompleteDescriptionException,
             InvalidDateFormatException, MissingArgumentException {
         this.taskType = TaskType.valueOf(taskType.toUpperCase());
+        this.taskTag = taskTag;
         this.hasTaskDate = !taskType.equals("todo");
 
         String[] taskDetails = splitDetail(taskFullDetail);
@@ -138,11 +140,11 @@ public class AddCommand extends Command {
     private Task createTask() {
         switch (taskType) {
         case TODO:
-            return new Todo(taskDescription);
+            return new Todo(taskTag, taskDescription);
         case EVENT:
-            return new Event(taskDescription, taskDate);
+            return new Event(taskTag, taskDescription, taskDate);
         case DEADLINE:
-            return new Deadline(taskDescription, taskDate);
+            return new Deadline(taskTag, taskDescription, taskDate);
         default:
             return null;
         }
