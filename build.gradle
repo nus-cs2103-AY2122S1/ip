@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "kermit.Kermit"
+    mainClassName = "kermit.Launcher"
 }
 
 shadowJar {
