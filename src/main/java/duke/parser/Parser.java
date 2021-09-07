@@ -72,9 +72,9 @@ public class Parser {
 
     /**
      * Parses the command based on the user's input to execute the corresponding action.
-     * Returns false when the user inputs 'bye', proceeds to break out of the program.
+     * Returns a String which is Duke's reply to the user's input.
      *
-     * @return a boolean on whether to exit the program.
+     * @return a String that corresponds to the user's input.
      */
     public String parseCommand(String input) {
 
