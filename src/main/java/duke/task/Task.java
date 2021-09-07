@@ -28,6 +28,10 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+    
+    public void updateDescription(String updatedDescription) {
+        this.description = updatedDescription;
+    }
 
     @Override
     public String toString() {

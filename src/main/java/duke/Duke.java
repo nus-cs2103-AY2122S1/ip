@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import duke.exceptions.DukeException;
+import duke.exceptions.EmptyKeywordException;
 import duke.exceptions.EmptyTaskDescriptionException;
 import duke.exceptions.EmptyTaskNumberException;
 import duke.exceptions.InvalidTaskException;
@@ -49,7 +50,7 @@ public class Duke {
             case TODO:
                 if (input.equals("")) {
                     throw new EmptyTaskDescriptionException();
-                }
+                } 
                 commands.add(new ToDo(input));
                 if (isDone == 1) {
                     doneTasks++;
@@ -61,7 +62,7 @@ public class Duke {
             case DEADLINE:
                 if (input.equals("")) {
                     throw new EmptyTaskDescriptionException();
-                }
+                } 
                 String[] deadline = input.split("/by");
                 if (deadline.length < 2) {
                     throw new NoTimeException();
@@ -91,11 +92,12 @@ public class Duke {
                     }
                     storage.saveCommands(commands);
                     taskToAdd = true;
+                    storage.saveCommands(commands);
                 }
                 break;
             case FIND:
                 if (input.equals("")) {
-                    throw new MultipleKeywordException();
+                    throw new EmptyKeywordException();
                 }
                 String[] keyword = input.trim().split(" ");
                 if (keyword.length == 1) {
@@ -122,6 +124,18 @@ public class Duke {
                 }
                 taskIndex = Integer.parseInt(input.trim());
                 response = taskList.remove(taskIndex - 1, commands);
+                break;
+            case UPDATE:
+                if (input.equals("")) {
+                    throw new EmptyTaskDescriptionException();
+                }
+                String [] update = input.split(":", 2);
+                String description = update[0];
+                if (update.length < 2) {
+                    throw new EmptyTaskNumberException();
+                }
+                int taskNumber = Integer.parseInt(update[1].trim());
+                response = taskList.updateDescription(commands, description, taskNumber - 1);
                 break;
             default:
                 throw new UnknownInputException();
@@ -152,6 +166,7 @@ public class Duke {
         } catch (DukeException e) {
             response = e.getMessage();
         }
+        storage.saveCommands(commands);
         return response;
     }
 

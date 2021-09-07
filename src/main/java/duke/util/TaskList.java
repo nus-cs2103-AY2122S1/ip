@@ -18,7 +18,7 @@ public class TaskList {
      * @param commands tasks in chatbot
      */
     public String list(ArrayList<Task> commands) {
-        String response = "";
+        String response;
         try {
             if (commands.size() == 0) {
                 throw new EmptyTaskListException();
@@ -36,7 +36,8 @@ public class TaskList {
      * @param commands tasks in chatbot
      */
     public String remove(int listNumber, ArrayList<Task> commands) {
-        String response = "";
+        String response;
+        assert (listNumber <= commands.size());
         try {
             if (listNumber >= commands.size()) {
                 throw new InvalidTaskException();
@@ -58,6 +59,7 @@ public class TaskList {
      */
     public String find(ArrayList<Task> commands, String... keywords) {
         String response;
+        assert(keywords != null);
         try {
             ArrayList<Task> matchingTasks = new ArrayList<>();
             boolean matchFound = false;
@@ -80,6 +82,28 @@ public class TaskList {
             for (int i = 0; i < matchingTasks.size(); i++) {
                 response += (i + 1) + ". " + matchingTasks.get(i) + "\n";
             }
+        } catch (DukeException e) {
+            response = e.getMessage();
+        }
+        storage.saveCommands(commands);
+        return response;
+    }
+
+    /**
+     * Updates the description of a given task
+     * @param commands
+     * @param updatedDescription
+     * @param listNumber
+     * @return
+     */
+    public String updateDescription(ArrayList<Task> commands, String updatedDescription, int listNumber) {
+        String response;
+        try {
+            if (listNumber >= commands.size()) {
+                throw new InvalidTaskException();
+            } 
+            commands.get(listNumber).updateDescription(updatedDescription);
+            response = "I have updated the task description for you!";
         } catch (DukeException e) {
             response = e.getMessage();
         }
