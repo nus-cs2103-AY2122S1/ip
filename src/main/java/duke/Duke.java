@@ -32,14 +32,15 @@ import javafx.stage.Stage;
 public class Duke extends Application {
 
     public static final String WIPE_COMMAND = "WIPE";
-    public static final String FIND_COMMAND = "find";
-    public static final String EVENT_COMMAND = "event";
-    public static final String DEADLINE_COMMAND = "deadline";
-    public static final String TODO_COMMAND = "todo";
-    public static final String DELETE_COMMAND = "delete";
-    public static final String DELETE_COMMAND_ALTERNATE = "remove";
-    public static final String DONE_COMMAND = "done";
-    public static final String LIST_COMMAND = "list";
+    public static final String FIND_COMMAND = "f ";
+    public static final String FIND_COMMAND_ALTERNATE = "s ";
+    public static final String EVENT_COMMAND = "e ";
+    public static final String DEADLINE_COMMAND = "d ";
+    public static final String TODO_COMMAND = "t ";
+    public static final String DELETE_COMMAND = "del ";
+    public static final String DELETE_COMMAND_ALTERNATE = "rem ";
+    public static final String DONE_COMMAND = "do ";
+    public static final String LIST_COMMAND = "l";
     public static final String BYE_COMMAND = "bye";
 
     private ScrollPane scrollPane;
@@ -172,8 +173,8 @@ public class Duke extends Application {
 
             return listStringForm();
 
-        } else if (command.contains(DONE_COMMAND)) {
-            String numbers = command.substring(5);
+        } else if (command.startsWith(DONE_COMMAND) && command.length()>DONE_COMMAND.length()) {
+            String numbers = command.substring(DONE_COMMAND.length());
 
             //Exception handling for invalid number inputs
             try {
@@ -196,8 +197,9 @@ public class Duke extends Application {
             int targetIndex = taskNo-1;
             return markedAsDoneString(targetIndex);
 
-        } else if (command.contains(DELETE_COMMAND) || command.contains(DELETE_COMMAND_ALTERNATE)) {
-            String numbers = command.substring(7);
+        } else if ((command.startsWith(DELETE_COMMAND) || command.startsWith(DELETE_COMMAND_ALTERNATE))
+                && command.length()>DELETE_COMMAND.length()) {
+            String numbers = command.substring(DELETE_COMMAND.length());
 
             //Exception handling for invalid number inputs
             try {
@@ -220,8 +222,8 @@ public class Duke extends Application {
             int targetIndex = taskNo-1;
             return taskDeletedString(targetIndex);
 
-        } else if (command.contains(TODO_COMMAND)) {
-            String task = command.substring(5);
+        } else if (command.startsWith(TODO_COMMAND) && command.length()>TODO_COMMAND.length()) {
+            String task = command.substring(TODO_COMMAND.length());
 
             //Exception handling for missing name
             if (task.equals("")) {
@@ -231,12 +233,21 @@ public class Duke extends Application {
             return todoTaskAddedString(task);
 
 
-        } else if (command.contains(DEADLINE_COMMAND)) {
-            String taskNDate = command.substring(9);
+        } else if (command.startsWith(DEADLINE_COMMAND) && command.length()>DEADLINE_COMMAND.length()) {
+            String taskNDate = command.substring(DEADLINE_COMMAND.length());
 
             //Exception handling for missing date
             if (!(taskNDate.contains("/by"))) {
                 return "BY WHEN? I DONT KNOW AHHHHHHHHHHH";
+            }
+
+            //Exception handling for missing name or date
+            try {
+                int splitIndex = taskNDate.indexOf("/by");
+                String task = taskNDate.substring(0, splitIndex - 1);
+                String date = taskNDate.substring(splitIndex + 4);
+            }catch(StringIndexOutOfBoundsException error){
+                return "THERES NO NAME or DATE OF the TASK!!!! Oh no.";
             }
 
             int splitIndex = taskNDate.indexOf("/by");
@@ -258,8 +269,8 @@ public class Duke extends Application {
 
             return deadlineTaskAddedString(task, date);
 
-        } else if (command.contains(EVENT_COMMAND)) {
-            String taskNDate = command.substring(6);
+        } else if (command.startsWith(EVENT_COMMAND) && command.length()>EVENT_COMMAND.length()) {
+            String taskNDate = command.substring(EVENT_COMMAND.length());
 
             //Exception handling for missing date
             if (!(taskNDate.contains("/at"))) {
@@ -267,7 +278,16 @@ public class Duke extends Application {
                         "Thank you for your kind cooperation.";
             }
 
-            int splitIndex = taskNDate.indexOf("/at");
+            //Exception handling for missing name or date
+            try {
+                int splitIndex = taskNDate.indexOf("/at");
+                String task = taskNDate.substring(0, splitIndex - 1);
+                String date = taskNDate.substring(splitIndex + 4);
+            }catch(StringIndexOutOfBoundsException error){
+                return "THERES NO NAME or DATE OF the TASK!!!! Oh no.";
+            }
+
+            int splitIndex = taskNDate.indexOf("/by");
             String task = taskNDate.substring(0, splitIndex - 1);
             String date = taskNDate.substring(splitIndex + 4);
 
@@ -285,8 +305,9 @@ public class Duke extends Application {
 
             return eventTaskAddedString(task, date);
 
-        } else if (command.contains(FIND_COMMAND)) {
-            String searchQuery = command.substring(5);
+        } else if ((command.startsWith(FIND_COMMAND) || command.startsWith(FIND_COMMAND_ALTERNATE))
+                && command.length()>FIND_COMMAND.length()) {
+            String searchQuery = command.substring(FIND_COMMAND.length());
             return searchResultsString(searchQuery);
 
         } else if (command.equals(WIPE_COMMAND)) {
