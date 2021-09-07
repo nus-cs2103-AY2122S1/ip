@@ -32,8 +32,8 @@ public final class Parser {
     /**
      * Parses string input and returns the appropriate command to be run by the chatbot.
      *
-     * @param input The input entered by the user.
-     * @return The parsed command, to be run by the chatbot.
+     * @param  input         The input entered by the user.
+     * @return               The parsed command, to be run by the chatbot.
      * @throws BruhException If an invalid input cannot be parsed to a command.
      */
     public static Command parseInputToCommand(String input) throws BruhException {
@@ -50,8 +50,8 @@ public final class Parser {
     /**
      * Parses complex commands containing more than one argument.
      *
-     * @param input The multi-word input, to be parsed to a command.
-     * @return The parsed command, to be run by the chatbot.
+     * @param  input         The multi-word input, to be parsed to a command.
+     * @return               The parsed command, to be run by the chatbot.
      * @throws BruhException If an invalid input cannot be parsed to a command.
      */
     private static Command parseMultiWordCommand(String input) throws BruhException {
@@ -63,6 +63,7 @@ public final class Parser {
         case "todo":
         case "deadline":
         case "event":
+        case "doafter":
             checkMissingArguments(inputs, String.format(EVENT_MISSING_ARG_ERROR_MSG, keyword));
             Task newTask = Task.createTask(inputs);
             return new AddTaskCommand(newTask);
@@ -88,9 +89,10 @@ public final class Parser {
     /**
      * Checks for missing arguments & throws an exception, if found.
      *
-     * @param sections An array consisting of the input, split into the first word and the rest of
-     *        the input
-     * @param errorMessage The error message to be displayed, if an exception is thrown.
+     * @param  sections                 An array consisting of the input, split into the first word
+     *                                  and the rest of the input
+     * @param  errorMessage             The error message to be displayed, if an exception is
+     *                                  thrown.
      * @throws MissingArgumentException if a missing argument is found.
      */
     public static void checkMissingArguments(String[] sections, String errorMessage)

@@ -17,7 +17,7 @@ public abstract class Task implements Serializable {
      * Constructor for a task that can be mark as done.
      *
      * @param description The description of the task.
-     * @param symbol The symbol representing the task type.
+     * @param symbol      The symbol representing the task type.
      */
     public Task(String description, char symbol) {
         this.description = description;
@@ -28,9 +28,9 @@ public abstract class Task implements Serializable {
     /**
      * Returns the appropriate task, as specified by the keyword in the input.
      *
-     * @param inputs An array of the string input, divided into the first word and the rest of the
-     *        input.
-     * @return The task as specified by the input.
+     * @param  inputs        An array of the string input, divided into the first word and the rest
+     *                       of the input.
+     * @return               The task as specified by the input.
      * @throws BruhException if an error occurs in creating the task.
      */
     public static Task createTask(String[] inputs) throws BruhException {
@@ -39,9 +39,10 @@ public abstract class Task implements Serializable {
 
         switch (keyword) {
         case "todo":
-            return new Todo(inputs[1]);
+            return new TodoTask(inputs[1]);
         case "deadline":
         case "event":
+        case "doafter":
             return TimedTask.createTimedTask(inputs);
         default:
             throw new InvalidArgumentException();
@@ -51,8 +52,8 @@ public abstract class Task implements Serializable {
     /**
      * Checks if a task's date & time corresponds with the specified date & time.
      *
-     * @param dateTimeOrString The specified date & time to be checked against.
-     * @return True if the date & time match, false otherwise.
+     * @param  dateTimeOrString The specified date & time to be checked against.
+     * @return                  True if the date & time match, false otherwise.
      */
     public boolean isAtDateTime(LocalDateTimeOrString dateTimeOrString) {
         return false;
@@ -61,8 +62,8 @@ public abstract class Task implements Serializable {
     /**
      * Checks if a task's description contains a specified search term.
      *
-     * @param searchTerm The search term to be checked against.
-     * @return True if the task description contains the search term, false otherwise.
+     * @param  searchTerm The search term to be checked against.
+     * @return            True if the task description contains the search term, false otherwise.
      */
     public boolean descriptionContains(String searchTerm) {
         return description.contains(searchTerm);
