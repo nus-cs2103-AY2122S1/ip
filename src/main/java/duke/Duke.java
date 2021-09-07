@@ -1,7 +1,6 @@
 package duke;
 
 import duke.command.Command;
-import java.io.IOException;
 
 /**
  * The main logic flow of the Duke program.
@@ -28,19 +27,13 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         storage = new Storage(FILE_PATH);
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showError(e.getMessage());
-            tasks = new TaskList();
-        }
+        tasks = new TaskList(storage.load());
     }
 
-
-
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Method to execute the user command, and return a response to user
+     *
+     * @param input The user command input
      */
     public String getResponse(String input) {
         String output = "";
@@ -56,5 +49,9 @@ public class Duke {
 
     public boolean isExit() {
         return this.isExit;
+    }
+
+    public TaskList getTaskList() {
+        return this.tasks;
     }
 }

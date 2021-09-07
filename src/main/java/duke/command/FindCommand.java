@@ -3,6 +3,9 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.task.Task;
+
+import java.util.ArrayList;
 
 /**
  * The class to represent a command to find certain tasks.
@@ -36,7 +39,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        TaskList matchingTasks = tasks.findMatchingTasks(this.keyword);
+        ArrayList<Task> matchingTasks = tasks.findMatchingTasks(this.keyword);
         return tasks.showMatchingTasks(matchingTasks);
     }
 

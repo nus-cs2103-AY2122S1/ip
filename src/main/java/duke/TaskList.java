@@ -38,29 +38,28 @@ public class TaskList {
 
     /**
      * The method to print all tasks to console
-     * @param tasks
      */
-    public String showAllTasks(TaskList tasks) {
+    public String showAllTasks() {
         if (listOfTasks.isEmpty()) {
             return "You currently have no tasks! Add one now ☻";
         } else {
-            return "Here are the tasks in your list:\n" + showTasks(tasks);
+            return "Here are the tasks in your list:\n" + showTasks(listOfTasks);
         }
     }
 
-    public String showMatchingTasks(TaskList listOfTasks) {
-        if (listOfTasks.isEmpty()) {
+    public String showMatchingTasks(ArrayList<Task> matchingTasks) {
+        if (matchingTasks.isEmpty()) {
             return "No matching tasks found! ☹";
         } else {
-            return "Here are the tasks that match this keyword:\n" + showTasks(listOfTasks);
+            return "Here are the tasks that match this keyword:\n" + showTasks(matchingTasks);
         }
     }
 
-    public String showTasks(TaskList listOfTasks) {
+    public String showTasks(ArrayList<Task> tasks) {
         String output = "";
-        int size = listOfTasks.size();
+        int size = tasks.size();
         for (int i = 0; i < size; i++) {
-            Task t = listOfTasks.get(i);
+            Task t = tasks.get(i);
             output = output + (i + 1) + "." + t.toString() + "\n";
         }
         return output;
@@ -148,7 +147,7 @@ public class TaskList {
      * @param keyword keyword to filter out matching tasks
      * @return the list of tasks matching the given keyword
      */
-    public TaskList findMatchingTasks(String keyword) {
+    public ArrayList<Task> findMatchingTasks(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task t : this.listOfTasks) {
             String name = t.getName();
@@ -156,6 +155,6 @@ public class TaskList {
                 matchingTasks.add(t);
             }
         }
-        return new TaskList(matchingTasks);
+        return matchingTasks;
     }
 }
