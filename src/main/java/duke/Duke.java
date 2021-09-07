@@ -169,6 +169,7 @@ public class Duke extends Application { //extends Application
             return ui.listTasks();
                 } else if (input.startsWith("done")) {
                     taskNumber = Integer.parseInt(input.substring(input.indexOf(" ") + 1)) - 1;
+                    assert taskNumber >= 0 : "Task number should be positive";
                     return ui.markDone(taskNumber);
                 } else if (input.startsWith("todo")) {
                     Todo todo = new Todo(input.substring(input.indexOf(" ") + 1));
@@ -183,10 +184,12 @@ public class Duke extends Application { //extends Application
                     return ui.add(event);
                 } else if (input.startsWith("delete")) {
                     taskNumber = Integer.parseInt(input.substring(input.indexOf(" ") + 1)) - 1;
+                    assert taskNumber >= 0 : "Task number should be positive";
                     return ui.delete(taskNumber);
 
                 } else if (input.startsWith("find")) {
-                    System.out.println(ui.findTasks(input.substring(input.indexOf(" ") + 1)));
+                    int thingToFind = input.indexOf(" ") + 1;
+                    return ui.findTasks(input.substring(thingToFind));
                 }
         return "Duke heard: " + input;
     }
