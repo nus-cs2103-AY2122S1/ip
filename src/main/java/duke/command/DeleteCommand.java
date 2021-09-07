@@ -31,6 +31,7 @@ public class DeleteCommand extends Command {
     public String execute() {
         int minCommandLength = 6;
         if (input.length() == minCommandLength) {
+
             throw new DukeException(Ui.getEmptyDescriptionMsg("delete"));
         }
         return super.taskList.removeTask(Integer.parseInt(input.substring(minCommandLength + 1)));
