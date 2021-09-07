@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Parser {
     /**
-     * Combines an array of strings into a space seperated sentence.
+     * Combines an array of strings into a space separated sentence.
      *
      * @param input the string array.
      * @return the sentence.
@@ -35,7 +35,10 @@ public class Parser {
     public String[] compileInput(String... input) throws DukeException {
         StringBuilder result = combineInputArray(input);
         String date;
-        switch (input[0]) {
+        String commandEntered = input[0];
+        assert commandEntered != null : "Command is NULL";
+
+        switch (commandEntered) {
         case "deadline":
             String[] output = result.toString().split(" /by ");
             if (output.length < 2) {

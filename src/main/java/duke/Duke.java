@@ -1,12 +1,9 @@
 package duke;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Scanner;
 
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.Task;
 import duke.task.Todo;
 
 
@@ -57,19 +54,21 @@ public class Duke {
     }
 
     /**
-     * Interacts with the user
-     *
-     * @throws DukeException if input is wrong.
-     * @throws IOException thrown if file handling fails.
+     * Interacts with the user.
      */
     public String getResponse(String input) {
         String[] inputWords;
-
-        Scanner sc = new Scanner(System.in);
         String output = "";
+        String fileTask;
         inputWords = input.split("\\s+");
+
+        if (inputWords.length == 0) {
+            output = "Sorry, I don't understand empty statements.";
+            return output;
+        }
         String command = inputWords[0];
-        String str;
+
+        assert command != null : "Command cannot be NULL";
         try {
             String[] task = parser.compileInput(inputWords);
             switch (command) {
@@ -79,27 +78,28 @@ public class Duke {
             case "done":
                 int idx = Integer.parseInt(inputWords[1]);
                 output = items.markDone(idx);
-                str = storage.getFileLine(idx);
-                str = str.substring(0, 4) + "1" + str.substring(5);
-                storage.updateListTask(idx, str);
+                fileTask = storage.getFileLine(idx);
+                fileTask = fileTask.substring(0, 4) + "1" + fileTask.substring(5);
+                storage.updateListTask(idx, fileTask);
                 break;
             case "bye":
                 isRunning = false;
+                output = "Going so soon? I'll be waiting for you.";
                 break;
             case "todo":
                 output = items.addItem(new Todo(task[0]));
-                str = "T | 0 | " + task[0];
-                storage.addToFile(str);
+                fileTask = "T | 0 | " + task[0];
+                storage.addToFile(fileTask);
                 break;
             case "event":
                 output = items.addItem(new Event(task[0], task[1]));
-                str = "E | 0 | " + task[0] + " | " + task[1];
-                storage.addToFile(str);
+                fileTask = "E | 0 | " + task[0] + " | " + task[1];
+                storage.addToFile(fileTask);
                 break;
             case "deadline":
                 output = items.addItem(new Deadline(task[0], task[1]));
-                str = "D | 0 | " + task[0] + " | " + task[1];
-                storage.addToFile(str);
+                fileTask = "D | 0 | " + task[0] + " | " + task[1];
+                storage.addToFile(fileTask);
                 break;
             case "delete":
                 int id = Integer.parseInt(inputWords[1]);
@@ -114,6 +114,7 @@ public class Duke {
                         + "Try 'list', 'todo', 'event', 'deadline', 'done', 'find' or 'bye'";
                 break;
             }
+            assert !output.equals(""): "Unable to generate response. Please try again.";
             return output;
         } catch (Exception dukeException) {
             return dukeException.getMessage();
