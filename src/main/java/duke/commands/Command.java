@@ -8,11 +8,11 @@ abstract class Command {
     public static String HELP_USAGE;
 
 
-    public String getHelpDescription(){
+    public String getHelpDescription() {
         return HELP_DESCRIPTION;
     }
 
-    public String getHelpUsage(){
+    public String getHelpUsage() {
         return HELP_USAGE;
     }
 }

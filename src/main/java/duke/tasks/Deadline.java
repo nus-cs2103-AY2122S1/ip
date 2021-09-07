@@ -31,7 +31,7 @@ public class Deadline extends Task {
      * @param by   deadline for deadline task.
      */
     public Deadline(String name, boolean done, String by) {
-        super(name);
+        super(name, done);
         this.by = by;
         try {
             this.byDate = LocalDate.parse(by.strip());

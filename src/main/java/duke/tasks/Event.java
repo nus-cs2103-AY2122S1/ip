@@ -25,7 +25,7 @@ public class Event extends Task {
      * @param at time of event.
      */
     public Event(String name, boolean done, String at) {
-        super(name);
+        super(name, done);
         this.at = at;
     }
 
@@ -41,6 +41,6 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + (this.isTaskDone ? "[X] " : "[ ] ")
                 + this.name
-                + String.format("(at:%s)", this.at);
+                + String.format("(at: %s)", this.at);
     }
 }

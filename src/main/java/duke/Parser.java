@@ -83,7 +83,7 @@ public class Parser {
      * Command to request help
      *
      * @param cmdArgsArr
-     * @return
+     * @return String representation of the help information
      * @throws DukeException
      */
     private String runHelp(String[] cmdArgsArr) throws DukeException {

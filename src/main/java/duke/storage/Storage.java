@@ -84,10 +84,10 @@ public class Storage {
      */
     public static void writeTutorial(Path path) {
         assert Files.exists(path); // path file must exist
-        TaskArrayList tl =  new TaskArrayList();
+        TaskArrayList tl = new TaskArrayList();
         tl.addTask(new Todo("Check out the help file by typing help"));
-        tl.addTask(new Deadline("Delete these tutorial tasks","before you start using Duke"));
-        dump(tl,path);
+        tl.addTask(new Deadline("Delete these tutorial tasks", "before you start using Duke"));
+        dump(tl, path);
     }
 
 

@@ -48,8 +48,12 @@ abstract public class Task {
      *
      * @return task name.
      */
-    public String getName() {
+    public String getTaskName() {
         return this.name;
+    }
+
+    public boolean isTaskDone() {
+        return isTaskDone;
     }
 
     /**
@@ -65,5 +69,7 @@ abstract public class Task {
         return (this.isTaskDone ? "[X] " : "[ ] ")
                 + this.name;
     }
+
+
 }
 

@@ -1,12 +1,14 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.commands.CommandDelete;
 import duke.commands.CommandDone;
 import duke.commands.CommandFind;
 import duke.exceptions.DukeException;
 import duke.tasks.Task;
 
-import java.util.ArrayList;
+
 
 /**
  * Array List of Task objects.
