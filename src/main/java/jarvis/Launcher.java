@@ -11,22 +11,21 @@ public class Launcher {
      * @param args Command line arguments.
      */
     public static void main(String ...args) {
-        if (args.length > 0) {
-            switch (args[0].toLowerCase()) {
-            case "-c":
-            case "--console":
-                Launcher.launchCli();
-                break;
-            case "-g":
-            case "--gui":
-                Launcher.launchGui();
-                break;
-            default:
-                System.out.println("Invalid CLI argument!");
-            }
-        }
         if (args.length == 0) {
             Launcher.launchGui();
+        }
+
+        switch (args[0].toLowerCase()) {
+        case "-c":
+        case "--console":
+            Launcher.launchCli();
+            break;
+        case "-g":
+        case "--gui":
+            Launcher.launchGui();
+            break;
+        default:
+            System.out.println("Invalid CLI argument!");
         }
     }
 

@@ -90,11 +90,11 @@ public class TaskList {
     }
 
     /**
-     * A summary of the task list
+     * Gets the summary string representation of the task list
      *
      * @return A string that is a summary of the task list
      */
-    public String taskListSummary() {
+    public String getTaskListSummary() {
         return String.format("Now you have %s task(s) in the list.", taskList.size());
     }
 
@@ -115,7 +115,7 @@ public class TaskList {
     }
 
     /**
-     * The string representation of the task list
+     * Gets the string representation of the task list
      *
      * @return The string representation of the task list
      */
@@ -141,7 +141,7 @@ public class TaskList {
     }
 
     /**
-     * The string representation of the task list that is to be saved to storage file
+     * Gets the string representation of the task list that is to be saved to storage file
      *
      * @return The string representation that is to be saved
      */

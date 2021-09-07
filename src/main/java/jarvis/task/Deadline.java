@@ -32,7 +32,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * String representation of a deadline task.
+     * Gets the string representation of a deadline task.
      *
      * @return String representation of a deadline task.
      */
@@ -44,7 +44,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * String representation of a deadline task that is to be saved to storage file.
+     * Gets the string representation of a deadline task that is to be saved to storage file.
      *
      * @return String representation that is to be saved.
      */

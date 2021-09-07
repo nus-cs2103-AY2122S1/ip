@@ -14,7 +14,7 @@ public class GreetingMessage extends OutputMessage {
     );
 
     /**
-     * Default constructor for GreetingMessage that contains DEFAULT_GREETING_MESSAGE.
+     * Constructor for GreetingMessage that contains DEFAULT_GREETING_MESSAGE.
      */
     public GreetingMessage() {
         super(GreetingMessage.DEFAULT_GREETING_MESSAGE);
