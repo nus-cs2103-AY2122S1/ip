@@ -94,4 +94,16 @@ public class Task {
     public LocalDate getLocalDate() {
         return null;
     }
+
+    /**
+     * Sets the date as a valid date.
+     * @param localDate the specific valid date to store
+     */
+    public void setLocalDate(LocalDate localDate) {}
+
+    /**
+     * Changes stored date to a new date.
+     * @param newDate date to be changed to
+     */
+    public void updateDate(String newDate) {}
 }

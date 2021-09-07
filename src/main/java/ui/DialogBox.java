@@ -34,10 +34,20 @@ public final class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * Gets a dialog box representing the user in the conversation.
+     * @param l message to be shown as user's query
+     * @return a dialog box representing the user
+     */
     public static DialogBox getUserDialog(Label l) {
         return new DialogBox(l);
     }
 
+    /**
+     * Gets a dialog box representing the Duke in the conversation.
+     * @param l message to be shown as Duke's answer
+     * @return a dialog box representing Duke
+     */
     public static DialogBox getDukeDialog(Label l) {
         var db = new DialogBox(l);
         db.flip();

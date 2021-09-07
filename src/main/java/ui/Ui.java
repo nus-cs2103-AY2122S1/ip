@@ -36,7 +36,10 @@ public final class Ui {
             + "     If you wish to mark a task as done, please input 'done <task index>.'\n"
             + "     If you wish to terminate the program, please input 'bye'.\n"
             + "     If you wish to check items due on a particular day, please input 'DD/MM/YYYY'.\n"
-            + "     If you wish to find items, please input in the form: 'find <keyword>'.\n" + SEPARATOR;
+            + "     If you wish to find items, please input in the form: 'find <keyword>'.\n"
+            + "     If you wish to reschedule a task, please input 'reschedule <index> <new date> \n"
+            + "     Please kindly avoid unnecessary spaces and note that date is best in 'DD/MM/YYYY' form.\n"
+            + SEPARATOR;
 
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
@@ -48,29 +51,17 @@ public final class Ui {
     }
 
     /**
-     * Displays the message when program is first started.
+     * Returns the welcome message upon start of application.
+     * @return the welcome message to be shown to user
      */
-    public static void welcomeMessage() {
-        System.out.println(WELCOME_MESSAGE);
-    }
-
     public static String getWelcomeMessage() {
         return WELCOME_MESSAGE;
     }
 
     /**
-     * Detects the next line of input by user.
-     *
-     * @return the detected line of input
+     * Returns the standard line separator in Duke.
+     * @return the line separator
      */
-    public String readLine() {
-        String s = " ";
-        if (sc.hasNext()) {
-            s = sc.nextLine();
-        }
-        return s;
-    }
-
     public String getSeparator() {
         return SEPARATOR;
     }
@@ -91,34 +82,25 @@ public final class Ui {
 
 
     /**
-     * Displays the user's input as confirmation that
-     * the input was indeed detected.
-     *
-     * @param s the words to be displayed.
-     */
-    public static void showAsUserInput(String s) {
-        System.out.println(s);
-    }
-
-    /**
-     * Displays the message upon termination of program.
-     */
-    public static void showExitMessage() {
-        showInput(EXIT_MESSAGE);
-    }
-
-    public static String getExitMessage() {
-        return EXIT_MESSAGE;
-    }
-
-    /**
      * Displays commands to help user with input as much as possible
      */
     public static void helperMessage() {
         System.out.println(HELPER_MESSAGE);
     }
 
+    /**
+     * Returns the helper message to be shown to the user.
+     * @return message consisting of commands that can be used
+     */
     public static String getHelperMessage() {
         return HELPER_MESSAGE;
+    }
+
+    /**
+     * Returns the exit message upon termination of application.
+     * @return the exit message to be shown to user
+     */
+    public static String getExitMessage() {
+        return EXIT_MESSAGE;
     }
 }

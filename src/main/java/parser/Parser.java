@@ -11,6 +11,7 @@ import commands.DueCommand;
 import commands.EventCommand;
 import commands.FindCommand;
 import commands.ListCommand;
+import commands.RescheduleCommand;
 import commands.ToDoCommand;
 import duke.DukeException;
 import ui.Ui;
@@ -72,6 +73,8 @@ public final class Parser {
             return new DueCommand(s);
         } else if (s.get(0).equalsIgnoreCase("find")) {
             return new FindCommand(s);
+        } else if (s.get(0).equalsIgnoreCase("reschedule")) {
+            return new RescheduleCommand(s);
         } else {
             throw new DukeException("Not a valid command!");
         }

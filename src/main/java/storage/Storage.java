@@ -55,7 +55,6 @@ public final class Storage {
     public void resetFile(ArrayList<Task> tasks) {
         File file = new File(DATA_PATH);
         boolean deleted = file.delete();
-        System.out.println(deleted);
         if (deleted) {
             try {
                 file.createNewFile();
@@ -93,26 +92,18 @@ public final class Storage {
                     tasksLoaded.add(t);
                 }
                 if (words[0].equals("D")) {
-                    try {
-                        DeadLineTask d = new DeadLineTask(words[1], words[2]);
-                        if (words[words.length - 1].equals("1")) {
-                            d.markAsDone();
-                        }
-                        tasksLoaded.add(d);
-                    } catch (DukeException e) {
-                        reader.readLine();
+                    DeadLineTask d = new DeadLineTask(words[1], words[2]);
+                    if (words[words.length - 1].equals("1")) {
+                        d.markAsDone();
                     }
+                    tasksLoaded.add(d);
                 }
                 if (words[0].equals("E")) {
-                    try {
-                        EventTask e = new EventTask(words[1], words[2]);
-                        if (words[words.length - 1].equals("1")) {
-                            e.markAsDone();
-                        }
-                        tasksLoaded.add(e);
-                    } catch (DukeException e) {
-                        reader.readLine();
+                    EventTask e = new EventTask(words[1], words[2]);
+                    if (words[words.length - 1].equals("1")) {
+                        e.markAsDone();
                     }
+                    tasksLoaded.add(e);
                 }
                 line = reader.readLine();
             }

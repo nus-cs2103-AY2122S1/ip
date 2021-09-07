@@ -1,13 +1,12 @@
 package tasks;
 
-import duke.DukeException;
-
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import duke.DukeException;
 
 /**
  * The EventTask Class inherits Task Class
@@ -20,7 +19,7 @@ public final class EventTask extends Task {
     private final String taskType = "[E]";
 
     /** Stores the date information of an Event task */
-    private final String date;
+    private String date;
 
     /** Stores the date information as a LocalDate */
     private LocalDate localDate;
@@ -34,12 +33,9 @@ public final class EventTask extends Task {
      * @param date the date of the event
      * @throws DukeException thrown when date input format is not supported
      */
-    public EventTask(String description, String date) throws DukeException{
+    public EventTask(String description, String date) {
         super(description);
         LocalDate day = getDate(date);
-        if (day == null) {
-            throw new DukeException("Invalid date format! Please input 'DD/MM/YYYY'.");
-        }
         this.date = date;
         setLocalDate(day);
     }
@@ -74,8 +70,20 @@ public final class EventTask extends Task {
         return this.taskType;
     }
 
-    private void setLocalDate(LocalDate localDate) {
+    /**
+     * Sets the date as a valid date.
+     * @param localDate the specific valid date to store
+     */
+    public void setLocalDate(LocalDate localDate) {
         this.localDate = localDate;
+    }
+
+    /**
+     * Changes stored date to a new date.
+     * @param newDate date to be changed to
+     */
+    public void updateDate(String newDate) {
+        this.date = newDate;
     }
 
     /**
@@ -96,8 +104,12 @@ public final class EventTask extends Task {
      */
     @Override
     public String getDescription() {
-        return super.getDescription() + " " + "(at: " + this.localDate.getDayOfMonth() + " "
-                + Month.of(this.localDate.getMonthValue()) + " " + this.localDate.getYear() + ")";
+        if (this.localDate == null) {
+            return super.getDescription() + " " + "(at: " + this.date + ")";
+        } else {
+            return super.getDescription() + " " + "(at: " + this.localDate.getDayOfMonth() + " "
+                    + Month.of(this.localDate.getMonthValue()) + " " + this.localDate.getYear() + ")";
+        }
     }
 
     /**

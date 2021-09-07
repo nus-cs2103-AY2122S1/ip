@@ -182,4 +182,28 @@ public final class TaskList {
         return (ArrayList<Task>) tasks.stream().filter(
             task -> task.getDescription().toLowerCase().contains(target.toLowerCase())).collect(Collectors.toList());
     }
+
+    /**
+     * Changes the date of a task to another, specific date.
+     * @param localDate date to change to
+     * @param index index of task in stored list
+     * @param date string representation of localDate
+     * @return result of reschedule attempt, successful or otherwise
+     */
+    public String reschedule(LocalDate localDate, int index, String date) {
+        if (index < 0 || index >= tasks.size()) {
+            return " Please use a valid index!";
+        }
+        if (tasks.get(index) instanceof ToDoTask) {
+            return "     I cannot reschedule a todo Task!";
+        }
+        String previous = tasks.get(index).getType() + tasks.get(index).getStatus() + " "
+                + tasks.get(index).getDescription();
+        tasks.get(index).setLocalDate(localDate);
+        tasks.get(index).updateDate(date);
+        return "     Noted, the following task have been rescheduled:\n"
+                + "     From " + previous + "\n"
+                + "     To " + tasks.get(index).getType() + tasks.get(index).getStatus() + " "
+                + tasks.get(index).getDescription();
+    }
 }
