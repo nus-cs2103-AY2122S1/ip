@@ -14,7 +14,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.time.format.DateTimeFormatter;
-import java.util.concurrent.TimeUnit;
 
 public class Duke extends Application {
 
@@ -166,15 +165,6 @@ public class Duke extends Application {
             }
         }
     }
-
-//    /**
-//     * javafx.Main function to start Duke
-//     *
-//     * @param args
-//     */
-//    public static void main(String[] args) {
-//        new Duke(LOCAL_STORAGE_LOCATION).run();
-//    }
 
     /**
      * Returns location of local storage

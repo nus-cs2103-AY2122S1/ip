@@ -20,7 +20,6 @@ public class Ui {
      */
     public void reply(String dukeReply) {
         currentResponse = dukeReply;
-        //System.out.println(dukeReply);
     }
 
     public String getCurrentResponse() {
