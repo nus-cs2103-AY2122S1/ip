@@ -55,24 +55,4 @@ public class Ui {
     public void showMessage(String message) {
         System.out.println(getDashes() + message + getDashes());
     }
-
-//    /**
-//     *
-//     * @param taskList the taskList to manipulate
-//     */
-//    public String readInput(TaskList taskList, String input) {
-////        Scanner sc = new Scanner(System.in);
-////        while (sc.hasNext()) {
-////            String input = sc.nextLine();
-//        input = input.trim();
-////        if (input.equals("")) {
-////            continue;
-////        }
-//        String output = Parser.parseInput(input, taskList, this);
-//        if (output != null) {
-//            return output;
-//        } else {
-//            return "Please give a meaningful input";
-//        }
-//    }
 }
