@@ -34,8 +34,8 @@ public class FileParser {
                     task = new Todo(taskDescription);
                     break;
                 default:
-                    throw new DukeException("a line could not be read from the savefile or was read incorrectly. " +
-                            "An empty list will be used instead.");
+                    throw new DukeException("a line could not be read from the savefile or was read incorrectly. "
+                            + "An empty list will be used instead.");
             }
 
             if (isCompleted) {

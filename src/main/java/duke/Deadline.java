@@ -14,11 +14,19 @@ public class Deadline extends Task {
     public Deadline(String description, String date) {
         super(description);
         try {
-            int[] dateArgs = Arrays.stream(date.split("-")).mapToInt(Integer::parseInt).toArray();
-            this.date = LocalDate.of(dateArgs[0], dateArgs[1], dateArgs[2]);
+            parseDate(date);
         } catch (NumberFormatException | DateTimeException | ArrayIndexOutOfBoundsException e) {
             throw new DukeException("the event date has to be in format yyyy-mm-dd");
         }
+    }
+
+    /**
+     * Saves the string input of the date into LocalDate format.
+     * @param date String input by user.
+     */
+    private void parseDate(String date) {
+        int[] dateArgs = Arrays.stream(date.split("-")).mapToInt(Integer::parseInt).toArray();
+        this.date = LocalDate.of(dateArgs[0], dateArgs[1], dateArgs[2]);
     }
 
     @Override
