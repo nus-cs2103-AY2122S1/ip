@@ -166,6 +166,7 @@ public class Ui {
         for (File f : file) {
             if (f.isFile()) {
                 stringBuilder.append(" " + counter + ". " + f.getName() + "\n");
+                counter++;
             }
         }
 

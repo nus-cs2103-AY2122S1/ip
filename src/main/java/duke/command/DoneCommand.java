@@ -9,7 +9,7 @@ import duke.Ui;
  * Type of Command that marks tasks as done in the task list.
  */
 public class DoneCommand extends Command {
-    private int markAsDone;
+    private int taskToMarkAsDone;
 
     /**
      * Constructor.
@@ -17,7 +17,7 @@ public class DoneCommand extends Command {
      * @param markAsDone position of task to mark as done in the task list.
      */
     public DoneCommand(int markAsDone) {
-        this.markAsDone = markAsDone;
+        this.taskToMarkAsDone = markAsDone;
     }
 
     /**
@@ -29,9 +29,9 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage, Archive archive) {
-        taskList.getTasks().get(markAsDone - 1).markAsDone();
-        storage.markAsDone(taskList, markAsDone);
-        return ui.done(taskList, markAsDone);
+        taskList.getTasks().get(taskToMarkAsDone - 1).markAsDone();
+        storage.markAsDone(taskList, taskToMarkAsDone);
+        return ui.done(taskList, taskToMarkAsDone);
     }
 
     /**
