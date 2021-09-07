@@ -12,8 +12,7 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
-    // Marks a private or protected member and maes it accessible to FXML despite
-    // its modifier
+    // Marks a private or protected member to make it accessible to FXML
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -26,7 +25,7 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/da_user.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/da_duke.png"));
-
+    
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
