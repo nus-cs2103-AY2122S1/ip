@@ -24,9 +24,11 @@ public class Event extends Task {
 
     /**
      * Saves the string input of the date into LocalDate format.
+     *
      * @param date String input by user.
      */
     private void parseDate(String date) {
+        assert(date != null);
         int[] dateArgs = Arrays.stream(date.split("-")).mapToInt(Integer::parseInt).toArray();
         this.date = LocalDate.of(dateArgs[0], dateArgs[1], dateArgs[2]);
     }
