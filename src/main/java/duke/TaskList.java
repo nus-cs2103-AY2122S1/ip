@@ -56,7 +56,7 @@ public class TaskList {
      *
      * @param index Index of task.
      */
-    public String doneTask(int index) {
+    public String markTaskDone(int index) {
         String out = "";
         try {
             Task finishedTask = tasks.get(index);

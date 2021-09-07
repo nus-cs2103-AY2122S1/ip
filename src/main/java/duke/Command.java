@@ -27,7 +27,7 @@ public enum Command {
      * @param text The String to be converted.
      * @return The corresponding Command.
      */
-    public static Command fromString(String text) {
+    public static Command cmdFromString(String text) {
         for (Command cmd : Command.values()) {
             if (cmd.c.equalsIgnoreCase(text)) {
                 return cmd;
