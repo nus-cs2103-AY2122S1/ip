@@ -63,6 +63,7 @@ public class TaskList {
      * updates the array list of tasks. Returns response from Duke.
      * @param details The description of the Deadline.
      * @param date The date of the Deadline.
+     *
      * @return Response of Duke after successful addition of Deadline.
      */
     public String addDeadline(String details, LocalDate date, LocalTime time) {
@@ -80,7 +81,10 @@ public class TaskList {
      * Adds an Event to the TaskList and
      * updates the array list of tasks. Returns response from Duke.
      * @param details The description of the event.
-     * @param at The details of the event.
+     * @param startDate The start date of the event.
+     * @param startTime The start time of the event.
+     * @param endDate The end date of the event.
+     * @param endTime The end time of the event.
      * @return Response of Duke after successful addition of Event.
      */
     public String addEvent(String details, LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime) {
@@ -142,6 +146,53 @@ public class TaskList {
      */
     public ArrayList<Task> inArrayList() {
         return tasks;
+    }
+
+    public String sortByDate() {
+        if (tasks.size() == 0) {
+            return "There is no task for now :)";
+        } else {
+            ArrayList<Task> sorted = sortHelper(tasks);
+
+            String response = "We have sorted the list by Date for you!: \n";
+            for (int i = 1; i < sorted.size() + 1; i++) {
+                String task = i + "." + sorted.get(i - 1).toString() + "\n";
+
+                response = response + task;
+            }
+            return response;
+        }
+
+    }
+
+    private ArrayList<Task> sortHelper(ArrayList<Task> unsorted) {
+        if (unsorted.size() <= 0) {
+            return unsorted;
+        }
+        ArrayList<Task> smaller = new ArrayList<>();
+        ArrayList<Task> greater = new ArrayList<>();
+
+        Task pivot = unsorted.get(0);  // used as pivot
+
+        for (int index = 1; index < unsorted.size(); index++) {
+            Task current = unsorted.get(index);
+
+            if (current.compareTo(pivot) <= 0) {
+                smaller.add(current);
+            } else {
+                greater.add(current);
+            }
+        }
+
+        smaller = sortHelper(smaller);
+        greater = sortHelper(greater);
+
+        ArrayList<Task> sorted = new ArrayList<>(smaller);
+
+        sorted.add(pivot);
+        sorted.addAll(greater);
+
+        return sorted;
     }
 
 

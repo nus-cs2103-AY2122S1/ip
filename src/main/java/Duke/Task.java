@@ -1,10 +1,19 @@
 package Duke;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /**
  * A Parent class for the different types of input to the Task List.
  */
-public class Task {
+public class Task implements Comparable<Task> {
     protected String description;
+
+    protected LocalDate startDate;
+    protected LocalDate endDate;
+    protected LocalTime startTime;
+    protected LocalTime endTime;
+
     protected boolean isDone;
 
     /**
@@ -14,6 +23,23 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+
+    public Task(String description, LocalDate byDate, LocalTime byTime) {
+        this.description = description;
+        this.isDone = false;
+        this.startDate = byDate;
+        this.startTime = byTime;
+    }
+
+    public Task(String description, LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime) {
+        this.description = description;
+        this.isDone = false;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     /**
@@ -49,4 +75,46 @@ public class Task {
     public String toStore() {
         return this.getStatusIcon() + this.description;
     }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public LocalDate getStartDate() {
+        return this.startDate;
+    }
+
+    public LocalTime getStartTime() {
+        return this.startTime;
+    }
+
+    public LocalDate getEndDate() {
+        return this.endDate;
+    }
+
+    public LocalTime getEndTime() {
+        return this.endTime;
+    }
+
+    @Override
+    public int compareTo(Task other) {
+        if (this.startDate == null) {
+            return 1;
+        }
+        if (other.startDate == null) {
+            return -1;
+        }
+        if (this.startDate.isBefore(other.getStartDate())) {
+            return -1;
+        } else if (this.startDate.isEqual(other.getStartDate())) {
+            if (this.startTime.isBefore(other.getStartTime())) {
+                return -1;
+            } else {
+                return 1;
+            }
+        } else {
+            return this.description.compareTo(other.getDescription());
+        }
+    }
+
 }

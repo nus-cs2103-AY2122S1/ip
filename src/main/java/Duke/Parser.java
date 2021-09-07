@@ -261,4 +261,8 @@ public class Parser {
     public String list() {
         return tasks.listTasks();
     }
+
+    public String sort() {
+        return tasks.sortByDate();
+    }
 }

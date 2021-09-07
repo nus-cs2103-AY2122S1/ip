@@ -11,8 +11,6 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    protected LocalDate byDate;
-    protected LocalTime byTime;
 
     /**
      * A public constructor to create a Deadline Task.
@@ -21,10 +19,9 @@ public class Deadline extends Task {
      * @param byTime The time of the Deadline.
      */
     public Deadline(String description, LocalDate byDate, LocalTime byTime) {
-        super(description);
-        this.byDate = byDate;
-        this.byTime = byTime;
+        super(description, byDate, byTime);
     }
+
 
     /**
      * Returns the string representation of the deadline.
@@ -34,9 +31,9 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString()
                 + "(By: "
-                + byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + this.getStartDate().format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + " "
-                + byTime.format(DateTimeFormatter.ofPattern("HH:mm"))
+                + this.getStartTime().format(DateTimeFormatter.ofPattern("HH:mm"))
                 + ")";
     }
 
@@ -51,8 +48,9 @@ public class Deadline extends Task {
     public String toStore() {
         return "[D]" + super.toString()
                 + "/by "
-                + byDate
+                + this.getStartDate()
                 + " "
-                + byTime;
+                + this.getStartTime();
     }
+
 }
