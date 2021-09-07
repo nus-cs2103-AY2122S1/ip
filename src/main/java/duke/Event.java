@@ -9,21 +9,8 @@ import java.time.format.DateTimeParseException;
  */
 public class Event extends Task {
 
-    protected String time;
-    protected LocalDate eventTime;
-
-
-    Event(String description) {
-        super(description);
-        this.time = "";
-        this.eventTime = null;
-    }
-
-    Event(String description, boolean isDone) {
-        super(description, isDone);
-        this.time = "";
-        this.eventTime = null;
-    }
+    private String time;
+    private LocalDate eventTime;
 
     Event(String description, String time) {
         super(description);

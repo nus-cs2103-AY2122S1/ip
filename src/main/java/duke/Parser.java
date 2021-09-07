@@ -44,6 +44,7 @@ public class Parser {
             if ((str.charAt(4) != ' ') || str.length() < 6) {
                 throw new DukeException("The description of todo cannot be empty");
             }
+            assert(str.substring(5) != "");
             return new ToDo(str.substring(5));
         } else if (str.startsWith("event")) {
             //checks if str follows the event format: event_description_/at_time
@@ -56,6 +57,8 @@ public class Parser {
             }
             String description = str.substring(6, index - 1);
             String time = str.substring(index + 4);
+            assert(description != "");
+            assert(time != "");
             return new Event(description, time);
         } else {
             //checks if str follows the deadline format: deadline_description_/by_time
@@ -68,6 +71,8 @@ public class Parser {
             }
             String description = str.substring(9, index - 1);
             String time = str.substring(index + 4);
+            assert(description != null);
+            assert(time != null);
             return new Deadline(description, time);
         }
     }
