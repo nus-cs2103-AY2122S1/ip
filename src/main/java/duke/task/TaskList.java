@@ -48,7 +48,7 @@ public class TaskList {
             Task task = this.tasks.get(index);
             task.markAsDone();
             this.ui.showMarkedTask(task);
-            storage.save(this.tasks);
+            storage.saveTasks(this.tasks);
             assert index >= 0;
         } catch (IndexOutOfBoundsException e) {
             this.ui.showMarkedTask(null);
@@ -82,7 +82,7 @@ public class TaskList {
         assert task != null : "Task not added successfully but error is not caught";
         tasks.add(task);
         this.ui.showAddTask(task, this.tasks.size());
-        storage.save(this.tasks);
+        storage.saveTasks(this.tasks);
     }
 
     /**
@@ -96,7 +96,7 @@ public class TaskList {
             Task task = this.tasks.get(index);
             this.tasks.remove(index);
             this.ui.showDeletedTask(task, this.tasks.size());
-            storage.save(this.tasks);
+            storage.saveTasks(this.tasks);
             assert index >= 0;
         } catch (IndexOutOfBoundsException e) {
             this.ui.showDeletedTask(null, -1);

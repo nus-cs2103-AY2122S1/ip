@@ -1,10 +1,14 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.CommandKeyword;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.task.TaskList;
 import javafx.scene.layout.VBox;
+
+import java.io.IOException;
+import java.util.HashMap;
 
 
 /**
@@ -21,16 +25,14 @@ public class Duke {
     public Duke(VBox dialogContainer) {
         this.ui = new Ui(dialogContainer);
         ui.greetUser();
-        this.storage = new Storage(this.ui);
-        this.tasks = new TaskList(this.storage.load(), this.ui);
-    }
-
-    /**
-     * Starts Duke with the loaded tasks list.
-     */
-    public void run() {
-        this.ui.greetUser();
-        this.ui.showFarewell();
+        this.storage = new Storage();
+        try {
+            HashMap<String, CommandKeyword> listOfCommands = this.storage.loadCommands();
+            this.ui.setListOfCommands(listOfCommands);
+            this.tasks = new TaskList(this.storage.loadTasks(), this.ui);
+        } catch (IOException e) {
+            this.ui.showLoadingError();
+        }
     }
 
     public boolean getResponse(String input) {
@@ -42,8 +44,6 @@ public class Duke {
             if (shouldExit) {
                 ui.showFarewell();
             }
-        } catch (IllegalArgumentException e) { // caused by user entering a command that is invalid
-            this.ui.showError(new InvalidCommandException());
         } catch (DukeException e) {
             this.ui.showError(e);
         }

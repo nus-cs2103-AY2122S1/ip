@@ -1,10 +1,12 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import duke.command.Command;
 import duke.command.CommandKeyword;
 import duke.exception.DukeException;
+import duke.exception.InvalidCommandException;
 import duke.task.Task;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
@@ -18,6 +20,7 @@ public class Ui {
     private VBox dialogContainer;
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/mrbean.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/saitama.png"));
+    private HashMap<String, CommandKeyword> listOfCommands;
 
     public Ui(VBox dialogContainer) {
         this.dialogContainer = dialogContainer;
@@ -64,7 +67,7 @@ public class Ui {
      * A message that will display to user if there is an error loading tasks from the file.
      */
     public void showLoadingError() {
-        this.formatMessage("There is an error while loading tasks.");
+        this.formatMessage("There is an error while loading tasks or commands.");
     }
 
     /**
@@ -73,10 +76,13 @@ public class Ui {
      * @return A command object that consists of keyword and rest of the command.
      * @throws IllegalArgumentException If the command keyword is invalid.
      */
-    public Command readCommand(String input) throws IllegalArgumentException {
+    public Command readCommand(String input) throws InvalidCommandException {
         String[] stringArr = input.split(" ", 2);
-        String commandName = stringArr[0];
-        CommandKeyword keyword = CommandKeyword.valueOf(commandName.toUpperCase());
+        String commandName = stringArr[0].toUpperCase();
+        CommandKeyword keyword = this.listOfCommands.get(commandName);
+        if (keyword == null) {
+            throw new InvalidCommandException();
+        }
         String restOfCommand = stringArr.length > 1 ? stringArr[1] : "";
         return new Command(keyword, restOfCommand);
     }
@@ -160,5 +166,9 @@ public class Ui {
      */
     public void showFilteredTasks(ArrayList<Task> tasks) {
         this.showTasks(tasks);
+    }
+
+    public void setListOfCommands(HashMap<String, CommandKeyword> listOfCommands) {
+        this.listOfCommands = listOfCommands;
     }
 }
