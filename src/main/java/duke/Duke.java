@@ -184,31 +184,30 @@ public class Duke {
         String command = parser.getCommand(input);
         try {
             switch(command) {
-                case "items":
-                    return ui.listToPrintableString(listOfItems);
-                case "completed":
-                    return markAsDone(input);
-                case "todo":
-                    return addAsTodo(input);
-                case "event":
-                    return addAsEvent(input);
-                case "deadline":
-                    return addAsDeadline(input);
-                case "delete":
-                    return deleteItem(input);
-                case "find":
-                    return findItems(input);
-                case "bye":
-                    try {
-                        storage.save(listOfItems);
-                        return "your data has been successfully saved!";
-                    } catch (IOException e) {
-                        throw new DukeException("your data could not be saved.");
-                    }
-
-                default:
-                    markAsInvalid(input);
-                    break;
+            case "items":
+                return ui.listToPrintableString(listOfItems);
+            case "completed":
+                return markAsDone(input);
+            case "todo":
+                return addAsTodo(input);
+            case "event":
+                return addAsEvent(input);
+            case "deadline":
+                return addAsDeadline(input);
+            case "delete":
+                return deleteItem(input);
+            case "find":
+                return findItems(input);
+            case "bye":
+                try {
+                    storage.save(listOfItems);
+                    return "your data has been successfully saved!";
+                } catch (IOException e) {
+                    throw new DukeException("your data could not be saved.");
+                }
+            default:
+                markAsInvalid(input);
+                break;
             }
         } catch (DukeException e) {
             return e.getMessage();

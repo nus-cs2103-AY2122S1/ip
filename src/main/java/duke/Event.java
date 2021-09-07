@@ -14,13 +14,21 @@ public class Event extends Task {
     public Event(String description, String date) {
         super(description);
         try {
-            int[] dateArr = Arrays.stream(date.split("-")).mapToInt(Integer::parseInt).toArray();
-            this.date = LocalDate.of(dateArr[0], dateArr[1], dateArr[2]);
+            parseDate(date);
         } catch (NumberFormatException | DateTimeException | ArrayIndexOutOfBoundsException e) {
             throw new DukeException("the event date has to be in format yyyy-mm-dd.");
         } catch (NullPointerException e) {
             throw new DukeException("the dates are invalid.");
         }
+    }
+
+    /**
+     * Saves the string input of the date into LocalDate format.
+     * @param date String input by user.
+     */
+    private void parseDate(String date) {
+        int[] dateArgs = Arrays.stream(date.split("-")).mapToInt(Integer::parseInt).toArray();
+        this.date = LocalDate.of(dateArgs[0], dateArgs[1], dateArgs[2]);
     }
 
     @Override
