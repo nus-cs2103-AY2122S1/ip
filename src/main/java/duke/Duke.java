@@ -5,6 +5,7 @@ import duke.command.Command;
 /**
  * A chatbot that helps manages your tasks.
  */
+@SuppressWarnings("checkstyle:Regexp")
 public class Duke {
     private Storage storage;
     private TaskList taskList;
@@ -34,33 +35,12 @@ public class Duke {
     }
 
     /**
-     * To run the program.
-     */
-    public void run() {
-        ui.showStartup();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parseInput(fullCommand);
-                c.runCommand(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-
-    }
-
-    /**
      * This is the main method.
      *
      * @param args Unused.
      */
     public static void main(String[] args) {
-        new Duke("src/main/data/duke.txt").run();
+        new Duke("src/main/data/duke.txt");
     }
 
     /**
