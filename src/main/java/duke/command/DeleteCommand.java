@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.Storage;
@@ -15,12 +16,11 @@ public class DeleteCommand implements Command {
     }
 
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        if (infos.length == 2) {
-            String index = infos[1];
-            return deleteTask(index, taskList);
-        } else {
+        if (inputs.length != 2) {
             return "Wrong input format";
         }
+        String index = inputs[1];
+        return deleteTask(index, taskList, storage);
     }
 
     /**
@@ -29,7 +29,7 @@ public class DeleteCommand implements Command {
      * @param taskList the taskList that stores all the tasks
      * @return the information of the deleted task and if error, the error message.
      */
-    String deleteTask(String index, TaskList taskList) {
+    String deleteTask(String index, TaskList taskList, Storage storage) {
         ArrayList<Task> tasks = taskList.getTasks();
         int idx;
         try {
@@ -44,11 +44,15 @@ public class DeleteCommand implements Command {
         Task currTask = tasks.get(idx - 1);
         tasks.remove(currTask);
 
-        String output = "    ____________________________________________________________\n"
-                + "     Noted. I've removed this task: \n"
+        try {
+            storage.saveData(taskList);
+        } catch (DukeException e) {
+            return e.toString();
+        }
+
+        String output = "     Noted. I've removed this task: \n"
                 + "      " + currTask.toString() + "\n"
-                + "     Now you have " + tasks.size() + " tasks in the list. \n"
-                + "    ____________________________________________________________\n";
+                + "     Now you have " + tasks.size() + " tasks in the list. \n";
         return output;
     }
 }

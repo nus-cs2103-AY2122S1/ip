@@ -15,28 +15,23 @@ public class ScheduleCommand implements Command {
     }
 
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-
+        return getSchedule(taskList);
     }
 
     /**
      * Returns the information of all tasks in a certain date.
-     * @param info specify the date of tasks to be returned
      * @param taskList the taskList that stores all the tasks
      * @return a string containing information of all tasks in the date.
      */
-    String getSchedule(String info, TaskList taskList) {
+    String getSchedule(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTasks();
         String output = "";
         LocalDate date;
-        try {
-            date = LocalDate.parse(info.split(" ")[1]);
-        } catch (Exception e) {
-            return "Wrong format of date";
-        }
 
+        assert inputs.length >= 2 : "Wrong length of inputs.";
+        date = LocalDate.parse(inputs[1]);
         for (Task t : tasks) {
             if (date.equals(t.getDate())) {
-                //System.out.println(t.toString());
                 output += (t.toString() + "\n");
             }
         }

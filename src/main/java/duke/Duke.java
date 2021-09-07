@@ -41,8 +41,17 @@ public class Duke {
     }
 
     public String process(String input) {
-        Command command = Parser.parseInput(taskList, input);
-        return command.process();
+        Command command;
+        try {
+            command = Parser.parseInput(input);
+        } catch (DukeException e){
+            return e.toString();
+        }
+        String output = command.execute(taskList, ui, storage);
+        if (output.equals("bye")) {
+            System.exit(0);
+        }
+        return output;
     }
 
     /**
@@ -50,26 +59,17 @@ public class Duke {
      */
     public void run() {
         ui.showGreeting();
-
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            ui.readInput(taskList, input);
+            String output = process(input);
+            ui.showMessage(output);
         }
-
-        try {
-            storage.saveData(taskList);
-        } catch (DukeException e) {
-            System.out.println(e.toString());
-        }
-
     }
 
-
-
-//    public static void main(String[] args) {
-//        new duke.Duke("data/duke.txt").run();
-//    }
+    public static void main(String[] args) {
+        new duke.Duke().run();
+    }
 
 
     Ui getUi() {

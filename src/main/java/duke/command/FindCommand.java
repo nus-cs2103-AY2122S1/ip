@@ -15,12 +15,13 @@ public class FindCommand implements Command {
     }
 
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        if (inputs.length == 2) {
-            String content = inputs[1];
-            return findContent(content, taskList);
-        } else {
+        if (inputs.length != 2) {
             return "Wrong input format";
         }
+
+        String content = inputs[1];
+        return findContent(content, taskList);
+
     }
 
     String findContent(String content, TaskList taskList) {
@@ -33,9 +34,8 @@ public class FindCommand implements Command {
         }
         if (output.equals("")) {
             return "No matching tasks";
-        } else {
-            return output;
         }
-    }
 
+        return output;
+    }
 }

@@ -30,7 +30,7 @@ public class Ui {
      * Displays all the tasks in the taskList.
      * @param taskList the TaskList to be printed
      */
-    public String printList(TaskList taskList) {
+    public String printTasks(TaskList taskList) {
         ArrayList<Task> lst = taskList.getTasks();
         StringBuilder s = new StringBuilder();
         s.append(getDashes());
@@ -49,6 +49,11 @@ public class Ui {
                 + "     Bye. Hope to see you again soon!\n"
                 + getDashes();
         System.out.println(output);
+    }
+
+    /** Shows messages */
+    public void showMessage(String message) {
+        System.out.println(getDashes() + message + getDashes());
     }
 
 //    /**
