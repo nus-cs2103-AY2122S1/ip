@@ -25,8 +25,8 @@ public class Storage {
         File file = new File("src/main/data/duke.txt");
         if (!(file.exists())) {
             file.createNewFile();
-
         }
+
     }
 
     private void writeToFile(String filePath, String textToAdd) throws IOException {
@@ -38,7 +38,7 @@ public class Storage {
     /**
      * Takes in arraylist of tasks and write the contents to duke.txt
      *
-     * @param listOfText2
+     * @param listOfText2 the arraylist of current tasks
      */
     public void save(List<Task> listOfText2) {
         String temp = "";
