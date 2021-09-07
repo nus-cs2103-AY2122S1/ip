@@ -64,10 +64,10 @@ public class Storage {
                 text.append("todo ").append(command.description);
 
             } else if (command instanceof Deadline) {
-                String deadline = ((Deadline) command).deadline.format(DateTimeFormatter.ofPattern("d-MM-yyyy"));
+                String deadline = ((Deadline) command).getDeadline().format(DateTimeFormatter.ofPattern("d-MM-yyyy"));
                 text.append("deadline ").append(command.description).append("/by ").append(deadline);
             } else if (command instanceof Event) {
-                String time = ((Event) command).time.format(DateTimeFormatter.ofPattern("d-MM-yyyy HHmm"));
+                String time = ((Event) command).getTime().format(DateTimeFormatter.ofPattern("d-MM-yyyy HHmm"));
                 text.append("event ").append(command.description).append("/at ").append(time);
             }
 

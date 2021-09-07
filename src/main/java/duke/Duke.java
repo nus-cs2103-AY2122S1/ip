@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import duke.exceptions.DukeException;
+import duke.exceptions.EmptyKeywordException;
 import duke.exceptions.EmptyTaskDescriptionException;
 import duke.exceptions.EmptyTaskNumberException;
 import duke.exceptions.InvalidTaskException;
@@ -56,6 +57,7 @@ public class Duke {
                         commands.get(commands.size() - 1).markAsDone();
                     }
                     taskToAdd = true;
+                    storage.saveCommands(commands);
                 }
                 break;
             case DEADLINE:
@@ -73,6 +75,7 @@ public class Duke {
                         commands.get(commands.size() - 1).markAsDone();
                     }
                     taskToAdd = true;
+                    storage.saveCommands(commands);
                 }
                 break;
             case EVENT:
@@ -90,11 +93,12 @@ public class Duke {
                         commands.get(commands.size() - 1).markAsDone();
                     }
                     taskToAdd = true;
+                    storage.saveCommands(commands);
                 }
                 break;
             case FIND:
                 if (input.equals("")) {
-                    throw new MultipleKeywordException();
+                    throw new EmptyKeywordException();
                 }
                 String[] keyword = input.trim().split(" ");
                 if (keyword.length == 1) {
@@ -154,6 +158,7 @@ public class Duke {
         } catch (DukeException e) {
             response = e.getMessage();
         }
+        storage.saveCommands(commands);
         return response;
     }
 

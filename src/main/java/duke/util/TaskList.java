@@ -11,13 +11,14 @@ import duke.task.Task;
 
 public class TaskList {
     private Ui ui = new Ui();
+    private Storage storage = new Storage();
 
     /**
      * Lists all the tasks in the chatbot
      * @param commands tasks in chatbot
      */
     public String list(ArrayList<Task> commands) {
-        String response = "";
+        String response;
         try {
             if (commands.size() == 0) {
                 throw new EmptyTaskListException();
@@ -36,7 +37,8 @@ public class TaskList {
      * @param commands tasks in chatbot
      */
     public String remove(int listNumber, ArrayList<Task> commands) {
-        String response = "";
+        String response;
+        assert (listNumber <= commands.size());
         try {
             if (listNumber < commands.size()) {
                 response = ui.removeOutput(commands.get(listNumber), commands.size() - 1);
@@ -47,17 +49,19 @@ public class TaskList {
         } catch (DukeException e) {
             response = e.getMessage();
         }
+        storage.saveCommands(commands);
         return response;
     }
 
     /**
      * Finds tasks related to a certain keyword
      *
-     * @param keyword  keyword to look for in tasks
+     * @param keywords  keywords to look for in tasks
      * @param commands all tasks in chatbot
      */
     public String find(ArrayList<Task> commands, String... keywords) {
         String response;
+        assert(keywords != null);
         try {
             ArrayList<Task> matchingTasks = new ArrayList<>();
             boolean matchFound = false;
@@ -84,6 +88,7 @@ public class TaskList {
         } catch (DukeException e) {
             response = e.getMessage();
         }
+        storage.saveCommands(commands);
         return response;
     }
 
