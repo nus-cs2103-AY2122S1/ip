@@ -2,6 +2,7 @@ package lania.command;
 
 import java.io.IOException;
 
+import lania.Log;
 import lania.Storage;
 import lania.Ui;
 import lania.task.TaskList;
@@ -19,17 +20,20 @@ public class CompleteCommand extends Command {
     }
 
     /**
-     * Marks the task at the given index as done, saves the resulting
-     * list of tasks into hard drive and displays corresponding message.
+     * Marks the task at the given index as done, updates the logs and
+     * saves the resulting list of tasks into hard drive
+     * and displays corresponding message.
      *
      * @param tasks The user's list of tasks.
      * @param storage The object dealing with loading and storing of tasks.
      * @param ui The object dealing with user interactions.
+     * @param log The object dealing with user's command logs.
      * @return The message displayed by executing the done command.
      */
     @Override
-    public String execute (TaskList tasks, Storage storage, Ui ui) {
+    public String execute (TaskList tasks, Storage storage, Ui ui, Log log) {
         tasks.complete(index);
+        log.addLog("done", (Integer) index);
         try {
             storage.save(tasks);
         } catch (IOException e) {

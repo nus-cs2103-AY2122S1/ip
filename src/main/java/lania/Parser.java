@@ -1,12 +1,6 @@
 package lania;
 
-import lania.command.AddCommand;
-import lania.command.Command;
-import lania.command.CompleteCommand;
-import lania.command.DeleteCommand;
-import lania.command.ExitCommand;
-import lania.command.FindCommand;
-import lania.command.ListCommand;
+import lania.command.*;
 import lania.exception.LaniaEmptyDescriptionException;
 import lania.exception.LaniaException;
 import lania.task.Deadline;
@@ -24,6 +18,7 @@ public class Parser {
      *
      * @param fullCommand The input given by user.
      * @return The type of command to be executed.
+     * @throws LaniaException If the command given matches none of the expected commands.
      */
     public Command parse(String fullCommand) throws LaniaException {
         String firstCommand = parseCommand(fullCommand);
@@ -34,6 +29,8 @@ public class Parser {
             return new ExitCommand();
         case "list":
             return new ListCommand();
+        case "undo":
+            return new UndoCommand();
         case "find":
             return new FindCommand(parseTaskDescription(fullCommand));
         case "done":
