@@ -61,7 +61,9 @@ public class Storage {
         int index = 1;
         while (s.hasNext()) {
             String data = s.nextLine();
-            char done = handleTaskText(data);
+            char done;
+            createATask(data);
+            done = returnIsDone(data);
             if (done == '1') {
                 this.list.get(index - 1).markDone();
             }
@@ -83,20 +85,11 @@ public class Storage {
         fw.close();
     }
 
-    /**
-     * Returns char for "0" or "1". The value indicates whether the task is done or not.
-     * It also deals with the local file data and convert them into task and store into TaskList.
-     *
-     * @param data A line of command in the save file to be parsed.
-     * @return a Char indicates if the task is done or not.
-     */
-    public char handleTaskText(String data) {
+    private void createATask(String data) {
         Parser p = new Parser(data);
-        char done = data.charAt(4);
         char taskType = data.charAt(0);
         String task;
         String time;
-
 
         task = p.getSaveTask();
         time = p.getSaveTime();
@@ -104,15 +97,29 @@ public class Storage {
         LocalDateTime parsedTime = p.parseTime(time);
         TaskList.OperationType[] taskTypes = TaskList.OperationType.values();
         for (TaskList.OperationType t : taskTypes) {
-            if (t.toString().charAt(0) == taskType
-                    && (t.toString().equals("TODO") || t.toString().equals("DEADLINE")
-                            || t.toString().equals("EVENT"))) {
+            boolean isCorrectType = t.toString().charAt(0) == taskType;
+            boolean isTaskType = t.toString().equals("TODO") || t.toString().equals("DEADLINE")
+                    || t.toString().equals("EVENT");
+
+            if (isCorrectType && isTaskType) {
                 Task newTask = t.assignTaskType(t, task, parsedTime);
                 this.list.add(newTask);
-                break;
             }
         }
 
+
+
+    }
+
+    /**
+     * Returns char for "0" or "1". The value indicates whether the task is done or not.
+     * It also deals with the local file data and convert them into task and store into TaskList.
+     *
+     * @param data A line of command in the save file to be parsed.
+     * @return a Char indicates if the task is done or not.
+     */
+    private char returnIsDone(String data) {
+        char done = data.charAt(4);
         return done;
     }
 }

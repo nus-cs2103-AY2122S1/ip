@@ -39,13 +39,15 @@ public class Events extends Task {
     @Override
     public String getTaskStatus() {
         String doneStatus;
+        String taskStatus;
         if (!this.isDone) {
             doneStatus = " ";
         } else {
             doneStatus = "X";
         }
 
-        return "[" + TASKTYPE + "]" + "[" + doneStatus + "] " + task + " (at: " + parsedTime() + ")";
+        taskStatus = "[" + TASKTYPE + "]" + "[" + doneStatus + "] " + task + " (at: " + parsedTime() + ")";
+        return taskStatus;
     }
 
     /**
@@ -74,14 +76,28 @@ public class Events extends Task {
      */
     @Override
     public String getTimeForSaveData() {
+        String saveDataTime = "";
+        String specificDate;
+        String specificTime;
         if (this.time == null) {
             return "I don't know the time";
         }
-        return this.time.getDayOfMonth() + "/" + this.time.getMonthValue() + "/" + this.time.getYear() + " "
-                + ((this.time.getHour() < 10) ? "0" + this.time.getHour()
-                        : this.time.getHour())
-                + ((this.time.getMinute() < 10) ? "0" + this.time.getMinute()
-                : this.time.getMinute());
+
+        specificDate = this.time.getDayOfMonth() + "/" + this.time.getMonthValue() + "/" + this.time.getYear() + " ";
+        if (this.time.getHour() < 10) {
+            specificTime = "0" + this.time.getHour();
+        } else {
+            specificTime = "" + this.time.getHour();
+        }
+
+        if (this.time.getMinute() < 10) {
+            specificTime += "0" + this.time.getMinute();
+        } else {
+            specificTime += this.time.getMinute();
+        }
+
+        saveDataTime += specificDate + specificTime;
+        return saveDataTime;
     }
 
 
@@ -93,7 +109,15 @@ public class Events extends Task {
      */
     @Override
     public String getSaveDataInfo() {
-        return TASKTYPE + " | " + (this.isDone ? 1 : 0) + " | " + task + " | " + getTimeForSaveData();
+        String dataInfo;
+        int value = 0;
+        if (this.isDone) {
+            value = 1;
+        } else {
+            value = 0;
+        }
+        dataInfo =  this.TASKTYPE + " | " + value + " | " + task + " | " + getTimeForSaveData();
+        return dataInfo;
     }
 
     /**

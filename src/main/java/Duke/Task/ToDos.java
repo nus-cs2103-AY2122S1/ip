@@ -31,13 +31,15 @@ public class ToDos extends Task {
     @Override
     public String getTaskStatus() {
         String doneStatus;
+        String taskStatus;
         if (!this.isDone) {
             doneStatus = " ";
         } else {
             doneStatus = "X";
         }
 
-        return "[" + TASKTYPE + "]" + "[" + doneStatus + "] " + task;
+        taskStatus = "[" + TASKTYPE + "]" + "[" + doneStatus + "] " + task;
+        return taskStatus;
     }
 
     /**
@@ -70,7 +72,15 @@ public class ToDos extends Task {
      */
     @Override
     public String getSaveDataInfo() {
-        return this.TASKTYPE + " | " + (this.isDone ? 1 : 0) + " | " + task;
+        String dataInfo;
+        int value = 0;
+        if (this.isDone) {
+            value = 1;
+        } else {
+            value = 0;
+        }
+        dataInfo =  this.TASKTYPE + " | " + value + " | " + task;
+        return dataInfo;
     }
 
     /**

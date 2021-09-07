@@ -38,58 +38,90 @@ public class Duke {
         }
     }
 
+    private String goodbye() {
+        return ui.goodbyeMessage();
+    }
+
+    private String printList() {
+        return ui.printListUi(tasks);
+    }
+
+    private String markDone(int index) {
+        String text;
+        try {
+            tasks.detectIndex(index);
+            text = ui.markDoneUi(tasks.get(index).getTaskStatus());
+            tasks.markDone(index);
+        } catch (DukeException e) {
+            text = e.getMessage();
+        }
+        return text;
+    }
+
+    private String delete(int index) {
+        String text;
+        try {
+            tasks.detectIndex(index);
+            text = ui.deleteUi(tasks.get(index).getTaskStatus(), tasks.size() - 1);
+            tasks.delete(index);
+        } catch (DukeException e) {
+            text = e.getMessage();
+        }
+        return text;
+    }
+
+    private String tell(String time) {
+        return ui.getSpecificDateEventUi() + tasks.getSpecificDateEvent(time);
+    }
+
+    private String find(String task) {
+        return ui.findTasksUi() + tasks.findTasks(task);
+    }
+
+    private String add(String ... commands) {
+        String text;
+        try {
+            tasks.add(commands[0], commands[1], commands[2]);
+            text = ui.addUi(tasks.get(tasks.size() - 1).getTaskStatus(), tasks.size());
+        } catch (DukeException e) {
+            text = e.getMessage();
+        }
+        return text;
+    }
+
     /**
      * Chooses a specific task to execute via tasks type and add to the tasklists.
      * Every time an execution is done, the task will be stored to the local file called tasks.txt
      * via Storage.
      *
      * @param index Index of the task users input.
-     * @param Command JavaVarargs Commands users input.
+     * @param commands JavaVarargs Commands users input.
      */
-    public String operationForDuke(int index, String... Command) {
+    public String operationForDuke(int index, String... commands) {
         String text;
-        String operationType = Command[0];
-        String task = Command[1];
-        String time = Command[2];
+        String operationType = commands[0], task = commands[1], time = commands[2];
 
         switch (operationType) {
         case "bye":
-            text = ui.goodbyeMessage();
+            text = goodbye();
             break;
         case "list":
-            text = ui.printListUi(tasks);
+            text = printList();
             break;
         case "done":
-            try {
-                tasks.detectIndex(index);
-                tasks.markDone(index);
-                text = ui.markDoneUi(tasks.get(index).getTaskStatus());
-            } catch (DukeException e) {
-                text = e.getMessage();
-            }
+            text = markDone(index);
             break;
         case "delete":
-            try {
-                tasks.detectIndex(index);
-                text = ui.deleteUi(tasks.get(index).getTaskStatus(), tasks.size() - 1);
-                tasks.delete(index);
-            } catch (DukeException e) {
-                text = e.getMessage();
-            }
+            text = delete(index);
             break;
         case "tell":
-            text = ui.getSpecificDateEventUi() + tasks.getSpecificDateEvent(time);
+            text = tell(time);
             break;
         case "find":
-            text = ui.findTasksUi() + tasks.findTasks(task);
+            text = find(task);
             break;
         default:
-            try {
-                tasks.add(operationType, task, time);
-                text =ui.addUi(tasks.get(tasks.size() - 1).getTaskStatus(), tasks.size());
-            } catch (DukeException e) {
-                text = e.getMessage();
-            }
+            text = add(operationType, task, time);
             break;
         }
         assert text.equals("") : "OOPS, Duke stops responding!";
@@ -107,20 +139,9 @@ public class Duke {
         }
     }
 
-    /**
-     * Runs the programme of Duke. It will firstly say Hello to users. Then it will repeatedly accept input from
-     * users and filter out key commands, then call OperationForDuke to execute a task by commands.
-     * The process will not stop until users enter "goodbye".
-     * Noted: Every time an execution is done, the savedata will be updated.
-     *
-     * @param input Input user take in.
-     * @return Response Duke gives.
-     */
-    public String getResponse(String input) {
+    private String dealWithInput(String input) {
         ArrayList<String> messages;
-        String operationType;
-        String task;
-        String time;
+        String operationType, task, time;
         String dukeResponse;
         int index;
 
@@ -136,8 +157,21 @@ public class Duke {
         task = messages.get(1);
         time = messages.get(2);
         index = Integer.parseInt(messages.get(3));
-
         dukeResponse = operationForDuke(index, operationType, task, time);
+        return dukeResponse;
+    }
+
+    /**
+     * Runs the programme of Duke. It will firstly say Hello to users. Then it will repeatedly accept input from
+     * users and filter out key commands, then call OperationForDuke to execute a task by commands.
+     * The process will not stop until users enter "goodbye".
+     * Noted: Every time an execution is done, the savedata will be updated.
+     *
+     * @param input Input user take in.
+     * @return Response Duke gives.
+     */
+    public String getResponse(String input) {
+        String dukeResponse = dealWithInput(input);
 
         updateSaveData(); //Update the SaveData every time a round of operation is done.
 

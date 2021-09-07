@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.exceptions.DukeException;
-import duke.task.TaskList;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,14 +17,14 @@ import java.time.format.DateTimeParseException;
  */
 public class Parser {
     private String message;
-    private CommandExceptionDetector commandExceptionDetector;
+    private ParserExceptionDetector parserExceptionDetector;
 
     /**
      * @param message Message users take in to be parsed.
      */
     public Parser(String message) {
         this.message = message;
-        this.commandExceptionDetector = new CommandExceptionDetector(message);
+        this.parserExceptionDetector = new ParserExceptionDetector(message);
     }
 
     private static boolean isValidDate(int day, int month, int year, int hour, int minute) {
@@ -40,35 +39,42 @@ public class Parser {
         boolean isValidHour = hour <= 24 && hour >= 0;
         boolean isValidMinute = minute <= 60 && minute >= 0;
 
-        if (isLeapYear && !isValidLeapYearFeb) {
+        if ((isLeapYear && !isValidLeapYearFeb) || (month == 2 && !isValidFeb)) {
             return false;
         }
 
-        if (month == 2 && !isValidFeb) {
-            return false;
-        }
-
-        if (!isValidMonth) {
-            return false;
-        }
-
-        if (!isValidDay) {
-            return false;
-        }
-
-        if (!isValidDay2) {
-            return false;
-        }
-
-        if (!isValidHour) {
-            return false;
-        }
-
-        if (!isValidMinute) {
+        if (!isValidMonth || !isValidDay || !isValidDay2 || !isValidHour || !isValidMinute) {
             return false;
         }
 
         return true;
+    }
+
+    private LocalDateTime parseTimeInFormat1(String time) {
+        int day, month, year, hour, minute;
+        int endIndex1 = time.indexOf("/");
+        int endIndex2 = time.lastIndexOf(" ");
+        day = Integer.parseInt(time.substring(0, endIndex1));
+        Integer dayInteger = day;
+        int endIndex3 = time.indexOf("/", dayInteger.toString().length() + 1);
+
+        month = Integer.parseInt(time.substring(endIndex1 + 1, endIndex3));
+        year = Integer.parseInt(time.substring(endIndex3 + 1, endIndex2));
+        hour = Integer.parseInt(time.substring(endIndex2 + 1).substring(0, 2));
+        minute = Integer.parseInt(time.substring(endIndex2 + 1).substring(2));
+        if (!isValidDate(day, month, year, hour, minute)) {
+            return null;
+        } else {
+            return LocalDate.of(year, month, day).atTime(hour, minute);
+        }
+    }
+
+    private LocalDateTime parseTimeInFormat2(String time) {
+        try {
+            return LocalDate.parse(time).atTime(0, 0);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
     }
 
     /**
@@ -82,38 +88,16 @@ public class Parser {
      */
     public LocalDateTime parseTime(String time) {
         LocalDateTime parsedTime;
-        int day;
-        int month;
-        int year;
-        int hour;
-        int minute;
+        boolean isFormat1 = time.contains("/") && time.indexOf("/", 3) != -1
+                && time.contains(" ") && !time.contains("-");
+        boolean isFormat2 = time.contains("-");
 
-        if (time.contains("/") && time.indexOf("/", 3) != -1 && time.contains(" ") && !time.contains("-")) {
-            int endIndex1 = time.indexOf("/");
-            int endIndex2 = time.lastIndexOf(" ");
-            day = Integer.parseInt(time.substring(0, endIndex1));
-            Integer dayInteger = day;
-            int endIndex3 = time.indexOf("/", dayInteger.toString().length() + 1);
-
-            month = Integer.parseInt(time.substring(endIndex1 + 1, endIndex3));
-            year = Integer.parseInt(time.substring(endIndex3 + 1, endIndex2));
-            hour = Integer.parseInt(time.substring(endIndex2 + 1).substring(0, 2));
-            minute = Integer.parseInt(time.substring(endIndex2 + 1).substring(2));
-        } else if (time.contains("-")) {
-            try {
-                parsedTime = LocalDate.parse(time).atTime(0, 0);
-                return parsedTime;
-            } catch (DateTimeParseException e) {
-                return null;
-            }
+        if (isFormat1) {
+            parsedTime = parseTimeInFormat1(time);
+        } else if (isFormat2) {
+            parsedTime = parseTimeInFormat2(time);
         } else {
-            return null;
-        }
-        //Some Other cases
-        if (!isValidDate(day, month, year, hour, minute)) {
-            return null;
-        } else {
-            parsedTime = LocalDate.of(year, month, day).atTime(hour, minute);
+            parsedTime = null;
         }
         return parsedTime;
     }
@@ -172,14 +156,9 @@ public class Parser {
             operationType = message;
         }
 
-        //If the task type does not belong to the three types, throw an error.
-        TaskList.OperationType[] operationTypes = TaskList.OperationType.values();
-        for (TaskList.OperationType o : operationTypes) {
-            if (message.toUpperCase().startsWith(o.toString())) {
-                return operationType;
-            }
-        }
-        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        parserExceptionDetector.detectOperationTypeException();
+
+        return operationType;
     }
 
     /**
@@ -191,7 +170,7 @@ public class Parser {
     public String getTask() throws DukeException{
         String task = "";
 
-        commandExceptionDetector.detectGetTaskException();
+        parserExceptionDetector.detectGetTaskException();
 
         if (message.contains("/")) {
             task = message.substring(message.indexOf(" ") + 1, message.indexOf("/") - 1);
@@ -211,7 +190,7 @@ public class Parser {
     public String getTime() throws DukeException {
         String time = "";
 
-        commandExceptionDetector.detectGetTimeException();
+        parserExceptionDetector.detectGetTimeException();
 
         if (message.startsWith("deadline")) {
             time = message.substring(message.indexOf("/by") + 4);
@@ -232,9 +211,12 @@ public class Parser {
      * @return Index parsed from users' one line of command if it contains an index.
      */
     public Integer getIndex() {
-        int index = (message.contains(" ") && (message.startsWith("done") || message.startsWith("delete")))
-                ? Integer.parseInt(message.substring(message.indexOf(" ") + 1)) - 1
-                : -1;
+        int index;
+        if (!parserExceptionDetector.detectIndexException()) {
+            return -1;
+        }
+
+        index = Integer.parseInt(message.substring(message.indexOf(" ") + 1)) - 1;
 
         return index;
     }

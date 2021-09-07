@@ -34,6 +34,25 @@ public class TaskList {
         this.tasks = new ArrayList<Task>();
     }
 
+    private boolean returnIsFound(String time, String task, int index) {
+        Parser parser = new Parser("");
+        String unparsedInfo = tasks.get(index).getTimeForSaveData();
+        String timeInFormat = (parser.parseTime(time) != null)
+                ? parser.parseTime(time).format(DateTimeFormatter.
+                ofPattern("MMM dd yyyy HH:mm", Locale.ENGLISH))
+                : "Nope";
+        boolean isMessageContains = task.contains(time)
+                || task.contains(timeInFormat);
+        boolean isUnparsedInfoContains =  unparsedInfo != null && (unparsedInfo.contains(time)
+                || unparsedInfo.contains(timeInFormat));
+
+        if (isMessageContains || isUnparsedInfoContains) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Returns all the tasks that match the time users take in.
      *
@@ -41,19 +60,12 @@ public class TaskList {
      * @return All the tasks that match the time users take in.
      */
     public String getSpecificDateEvent(String time) {
-        Parser parser = new Parser("");
         String text = "";
         int count = 0; //count the number of the events happen on the time.
 
         for (int i = 0; i < tasks.size(); i++) {
             String message = tasks.get(i).getTaskStatus();
-            String unparsedInfo = tasks.get(i).getTimeForSaveData();
-            String timeInFormat = (parser.parseTime(time) != null)
-                    ? parser.parseTime(time).format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm", Locale.ENGLISH))
-                    : "Nope";
-
-            if ((unparsedInfo != null && (unparsedInfo.contains(time) || unparsedInfo.contains(timeInFormat)))
-                    || message.contains(time) || message.contains(timeInFormat)) {
+            if (returnIsFound(time, message, i)) {
                 count++;
                 text += count + "." + message + "\n";
             }
@@ -61,7 +73,6 @@ public class TaskList {
         if (count == 0) {
             return "Sorry. There is no tasks occurred on the time you give me!! :(\n";
         }
-
         return text;
     }
 
@@ -108,6 +119,18 @@ public class TaskList {
         this.tasks.remove(index);
     }
 
+    private void createNewTask(String taskType, String task, LocalDateTime parsedTime) {
+        OperationType[] taskTypes = OperationType.values();
+        for (OperationType t : taskTypes) {
+            boolean isMatch = t.toString().equals(taskType.toUpperCase());
+            if (isMatch) {
+                Task newTask = t.assignTaskType(t, task, parsedTime);
+                tasks.add(newTask);
+                break;
+            }
+        }
+    }
+
     /**
      * Adds a task to the TaskLists. This method will automatically decide which type of the
      * task is added to the list.
@@ -119,17 +142,8 @@ public class TaskList {
      */
     public void add(String taskType, String task, String time) throws DukeException {
         Parser parser = new Parser("");
-
         LocalDateTime parsedTime = parser.parseTime(time);
-        OperationType[] taskTypes = OperationType.values();
-        for (OperationType t : taskTypes) {
-            if (t.toString().equals(taskType.toUpperCase())) {
-                Task newTask = t.assignTaskType(t, task, parsedTime);
-                tasks.add(newTask);
-                break;
-            }
-        }
-
+        createNewTask(taskType, task, parsedTime);
     }
 
     /**

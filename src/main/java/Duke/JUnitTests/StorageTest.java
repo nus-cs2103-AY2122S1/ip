@@ -17,22 +17,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class StorageTest {
 
     @Test
-    public void handleTaskTest() {
-        assertEquals('0', new Storage("data/tasks.txt")
-                .handleTaskText("T | 0 | borrow book"));
-        assertEquals('1', new Storage("data/tasks.txt")
-                .handleTaskText("D | 1 | return book | 2/12/2019 1800"));
-        assertEquals('1', new Storage("data/tasks.txt")
-                .handleTaskText("E | 1 | project meeting | I don't know the time"));
-        assertEquals('0', new Storage("data/tasks.txt")
-                .handleTaskText("D | 0 | return book | 23/9/2020 1525"));
-        assertEquals('0', new Storage("data/tasks.txt")
-                .handleTaskText("E | 0 | project splashdown | 15/10/2019 0000"));
-        assertEquals('1', new Storage("data/tasks.txt")
-                .handleTaskText("T | 1 | join sports club"));
-    }
-
-    @Test
     public void load_correctFilePath_success() {
         try {
             assertEquals("[T][ ] borrow book",

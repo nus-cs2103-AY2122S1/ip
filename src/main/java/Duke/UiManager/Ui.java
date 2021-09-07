@@ -21,10 +21,11 @@ public class Ui {
      * @return Default helloMessage.
      */
     public String helloMessage() {
-        return """
+        String text = """
                 Hello! I'm Duke
                 What can I do for you?
                 """;
+        return text;
     }
 
     /**
@@ -33,7 +34,8 @@ public class Ui {
      * @return Default goodbyeMessage.
      */
     public String goodbyeMessage() {
-        return "Bye. Hope to see you again soon!";
+        String text = "Bye. Hope to see you again soon!";
+        return text;
     }
 
     /**
@@ -59,7 +61,8 @@ public class Ui {
      */
     public String markDoneUi(String parsedTask) {
         String text = "";
-        text += "Nice! I've marked this task as done:\n" + " " + parsedTask +"\n";
+        text += "Nice! I've marked this task as done:\n"
+                + " " + parsedTask +"\n";
 
         return text;
     }
@@ -73,7 +76,8 @@ public class Ui {
      */
     public String deleteUi(String parsedTask, int size) {
         String text = "";
-        text += "Noted. I've removed this task:\n" + " " + parsedTask + "\nNow you have " + size + " tasks in the list.\n";
+        text += "Noted. I've removed this task:\n" + " " + parsedTask
+                + "\nNow you have " + size + " tasks in the list.\n";
 
         return text;
     }
@@ -100,7 +104,8 @@ public class Ui {
      * @return Ui message when getSpecificDateEvent is invoked.
      */
     public String getSpecificDateEventUi() {
-        return "Here are all the tasks taking place on the date you give me:";
+        String text = "Here are all the tasks taking place on the date you give me:";
+        return text;
     }
 
     /**
@@ -109,7 +114,8 @@ public class Ui {
      * @return Ui message when findTask is invoked.
      */
     public String findTasksUi() {
-        return "Here are the matching tasks in your list:\n";
+        String text = "Here are the matching tasks in your list:\n";
+        return text;
     }
 
     /**
@@ -139,7 +145,8 @@ public class Ui {
      * @return Error Message in loading.
      */
     public String showLoadingError() {
-        return "Cannot Load From Data.\n";
+        String text = "Cannot Load From Data.\n";
+        return text;
     }
 
     /**
@@ -148,6 +155,7 @@ public class Ui {
      * @return Error Message in saving.
      */
     public String showSavingError() {
-        return "Cannot Save the Data.\n";
+        String text = "Cannot Save the Data.\n";
+        return text;
     }
 }
