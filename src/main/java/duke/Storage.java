@@ -9,8 +9,11 @@ import java.util.Scanner;
 
 public class Storage {
 
-    protected String filepath;
-    public TaskList taskList;
+    static final int TASK_INITIAL = 1;
+    static final int TASK_STATUS = 4;
+    static final int TASK_DETAILS = 7;
+    private final String filepath;
+    private final TaskList taskList;
     private int counter = 0;
 
     /**
@@ -38,35 +41,31 @@ public class Storage {
         while (s.hasNext()) {
             String toAdd = s.nextLine();
 
-            if (toAdd.charAt(1) == 'T') {
-                String task = toAdd.substring(7);
+            if (toAdd.charAt(TASK_INITIAL) == 'T') {
+                String task = toAdd.substring(TASK_DETAILS);
 
                 tasks.addTodo(task);
                 counter += 1;
-                System.out.println(counter);
 
-            } else if (toAdd.charAt(1) == 'E') {
-                String task = toAdd.substring(7);
+            } else if (toAdd.charAt(TASK_INITIAL) == 'E') {
+                String task = toAdd.substring(TASK_DETAILS);
                 String name = task.substring(0, task.indexOf("(") - 1);
                 String when = task.substring(task.indexOf(":") + 2, task.indexOf(")"));
 
                 tasks.addEvent(name + " /at " + when);
                 counter += 1;
-                System.out.println(counter);
 
-            } else if (toAdd.charAt(1) == 'D') {
-                String task = toAdd.substring(7);
+            } else if (toAdd.charAt(TASK_INITIAL) == 'D') {
+                String task = toAdd.substring(TASK_DETAILS);
                 String name = task.substring(0, task.indexOf("(") - 1);
                 String when = task.substring(task.indexOf(":") + 2, task.indexOf(")"));
 
                 tasks.addDeadline(name + " /by " + when);
                 counter += 1;
-                System.out.println(counter);
             }
 
-            if (toAdd.charAt(4) == 'X') {
+            if (toAdd.charAt(TASK_STATUS) == 'X') {
                 tasks.addDone(counter);
-                System.out.println(counter);
             }
         }
 
@@ -77,9 +76,8 @@ public class Storage {
         String result = "Here are the tasks previously saved: \n";
         for (int i = 0; i < counter; i++) {
 
-            Task currTask = tasks.tasks.get(i);
+            Task currTask = tasks.getTasks().get(i);
             result += String.format("%d. %s", i + 1, currTask.toString());
-            System.out.println(currTask.toString());
             result += "\n";
         }
         assert counter > 0 : "Counter should be larger than 0";
@@ -101,8 +99,8 @@ public class Storage {
         }
         PrintWriter out = new PrintWriter("data/tasks.txt");
 
-        for (int i = 0; i < taskList.tasks.size(); i++) {
-            out.println(taskList.tasks.get(i).toString());
+        for (int i = 0; i < taskList.getTasks().size(); i++) {
+            out.println(taskList.getTasks().get(i).toString());
         }
         out.close();
     }

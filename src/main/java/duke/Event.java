@@ -2,7 +2,7 @@ package duke;
 
 public class Event extends Task {
 
-    protected String at;
+    private final String at;
 
     /**
      * Creates an Event object to store Task details.

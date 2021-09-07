@@ -3,38 +3,51 @@ package duke;
 import java.util.ArrayList;
 
 public class TaskList {
-
-    public ArrayList<Task> tasks;
-    public int counter = 0;
+    static final int DEADLINE_LENGTH = 8;
+    static final int DELETE_LENGTH = 6;
+    static final int DONE_LENGTH = 4;
+    static final int EMPTY = 0;
+    static final int EVENT_LENGTH = 5;
+    static final int FIND_LENGTH = 4;
+    static final int TODO_LENGTH = 4;
+    static final int WHEN = 3;
+    private final ArrayList<Task> tasks;
+    private int counter = 0;
 
     /**
      * Creates a TaskList object that stores a list of tasks in an ArrayList.
      */
     public TaskList() {
-        this.tasks = new ArrayList<Task>();
+        this.tasks = new ArrayList<>();
+    }
+
+    /**
+     * Returns an ArrayList of tasks.
+     *
+     * @return ArrayList of tasks.
+     */
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 
     /**
      * Prints the user's existing list of tasks.
      *
-     * @return List of tasks.
+     * @return List of tasks in String form.
      */
     public String list() {
 
-        if (counter == 0) {
+        if (counter == EMPTY) {
             return "You have no tasks in your list!";
         }
 
         String result = "Here are the tasks in your list: \n";
 
-        System.out.println("Here are the tasks in your list:");
-        System.out.println(counter);
+
         assert counter > 0 : "Counter should be larger than 0";
         for (int i = 0; i < tasks.size(); i++) {
             Task currTask = tasks.get(i);
-            result += String.format("%d. %s", i + 1, currTask.toString());
-            result += "\n";
-            System.out.println(i + 1 + "." + currTask.toString());
+            result += String.format("%d. %s \n", i + 1, currTask.toString());
         }
         return result;
     }
@@ -46,19 +59,17 @@ public class TaskList {
      * @return String output of completed task.
      */
     public String markDone(String userInput) {
-        if (userInput.substring(4).length() == 0) {
+        if (userInput.substring(DONE_LENGTH).length() == EMPTY) {
             // throw new DukeException("User has not indicated task to mark as complete.");
             return "Sorry, which task do you wish to mark as completed?";
 
         } else {
-            Integer index = Integer.parseInt(userInput.substring(5));
+            int index = Integer.parseInt(userInput.substring(DONE_LENGTH + 1));
             Task currTask = tasks.get(index - 1);
             currTask.completeTask();
 
             String result = "Nice! I've marked this task as done: \n";
             result += currTask.toString();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(currTask.toString());
             return result;
         }
     }
@@ -81,20 +92,19 @@ public class TaskList {
      * @return String output of deleted task.
      */
     public String delete(String userInput) {
-        if (userInput.substring(6).length() == 0) {
+        if (userInput.substring(DELETE_LENGTH).length() == EMPTY) {
             // throw new DukeException("User has not indicated task to delete.");
             return "Sorry, which task do you wish to delete?";
 
         } else {
-            Integer index = Integer.parseInt(userInput.substring(7));
+            int index = Integer.parseInt(userInput.substring(DELETE_LENGTH + 1));
             Task currTask = tasks.get(index - 1);
             tasks.remove(currTask);
             String result = "Noted. I've removed this task: \n";
             result += currTask.toString();
 
             counter -= 1;
-            result += "\n";
-            result += String.format("You now have %d task(s) in your list!", counter);
+            result += String.format("\nYou now have %d task(s) in your list!", counter);
             return result;
         }
     }
@@ -106,18 +116,11 @@ public class TaskList {
      * @return String output of ToDo task.
      */
     public String makeTodo(String userInput) {
-        if (userInput.substring(4).length() == 0) {
+        if (userInput.substring(TODO_LENGTH).length() == EMPTY) {
             // throw new DukeException("YIKES!! The description of a todo cannot be empty!");
             return "YIKES!! The description of a todo cannot be empty!";
         } else {
-            tasks.add(new ToDo(userInput.substring(5)));
-            String result = "Got it. I've added this task: \n";
-            result += tasks.get(counter).toString();
-            result += "\n";
-            counter += 1;
-
-            result += String.format("You now have %d task(s) in your list.", counter);
-            return result;
+            return makeTask(new ToDo(userInput.substring(TODO_LENGTH + 1)));
         }
     }
 
@@ -139,20 +142,13 @@ public class TaskList {
      * @return String output of Event task.
      */
     public String makeEvent(String userInput) {
-        if (userInput.substring(5).length() == 0) {
+        if (userInput.substring(EVENT_LENGTH).length() == EMPTY) {
             // throw new DukeException("YIKES!! The description of an Event cannot be empty!");
             return "YIKES!! The description of an Event cannot be empty!";
         } else {
-            String output = userInput.substring(6);
+            String output = userInput.substring(EVENT_LENGTH + 1);
             String[] info = output.split("/");
-            tasks.add(new Event(info[0], info[1].substring(3)));
-            String result = "Got it. I've added this task: \n";
-            result += tasks.get(counter).toString();
-            result += "\n";
-            counter += 1;
-
-            result += String.format("You now have %d task(s) in your list.", counter);
-            return result;
+            return makeTask(new Event(info[0], info[1].substring(WHEN)));
         }
     }
 
@@ -164,7 +160,7 @@ public class TaskList {
      */
     public void addEvent(String userInput) {
         String[] info = userInput.split("/");
-        tasks.add(new Event(info[0], info[1].substring(3)));
+        tasks.add(new Event(info[0], info[1].substring(WHEN)));
         counter += 1;
     }
 
@@ -175,20 +171,13 @@ public class TaskList {
      * @return String output of Deadline task.
      */
     public String makeDeadline(String userInput) {
-        if (userInput.substring(8).length() == 0) {
+        if (userInput.substring(DEADLINE_LENGTH).length() == EMPTY) {
             // throw new DukeException("YIKES!! The description of a Deadline cannot be empty!");
             return "YIKES!! The description of a Deadline cannot be empty!";
         } else {
-            String output = userInput.substring(9);
+            String output = userInput.substring(DEADLINE_LENGTH + 1);
             String[] info = output.split("/");
-            tasks.add(new Deadline(info[0], info[1].substring(3)));
-            String result = "Got it. I've added this task: \n";
-            result += tasks.get(counter).toString();
-            result += "\n";
-            counter += 1;
-
-            result += String.format("You now have %d task(s) in your list.", counter);
-            return result;
+            return makeTask(new Deadline(info[0], info[1].substring(WHEN)));
         }
     }
 
@@ -200,7 +189,7 @@ public class TaskList {
      */
     public void addDeadline(String userInput) {
         String[] info = userInput.split("/");
-        tasks.add(new Deadline(info[0], info[1].substring(3)));
+        tasks.add(new Deadline(info[0], info[1].substring(WHEN)));
         counter += 1;
     }
 
@@ -212,16 +201,16 @@ public class TaskList {
      * @return List of tasks that fit user's criteria.
      */
     public String find(String userInput) {
-        if (userInput.substring(4).length() == 0) {
+        if (userInput.substring(FIND_LENGTH).length() == EMPTY) {
             return "Uh Oh!! Please specify the keyword of a task!";
 
         } else {
-            String keyword = userInput.substring(5);
-            ArrayList<Task> matchedTasks = new ArrayList<Task>();
+            String keyword = userInput.substring(FIND_LENGTH + 1);
+            ArrayList<Task> matchedTasks = new ArrayList<>();
 
-            for (int i = 0; i < tasks.size(); i++) {
-                if (tasks.get(i).getDescription().contains(keyword)) {
-                    matchedTasks.add(tasks.get(i));
+            for (Task task : tasks) {
+                if (task.getDescription().contains(keyword)) {
+                    matchedTasks.add(task);
                 }
             }
 
@@ -234,9 +223,25 @@ public class TaskList {
     }
 
     /**
+     * Auxiliary method that adds specified task to TaskList and returns success message.
+     *
+     * @param task Task input provided by method.
+     * @return Success message upon addition of Task.
+     */
+    private String makeTask(Task task) {
+        tasks.add(task);
+        String result = "Got it. I've added this task: \n";
+        result += tasks.get(counter).toString();
+        counter += 1;
+
+        result += String.format("\nYou now have %d task(s) in your list.", counter);
+        return result;
+    }
+
+    /**
      * Alerts user to an invalid command.
      */
-    public String error() {
+    public String displayError() {
         return "OOPS!! I don't know how to respond to this command! :-(";
     }
 
