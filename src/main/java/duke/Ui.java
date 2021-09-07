@@ -19,6 +19,28 @@ public class Ui {
     }
 
     /**
+     * Returns help message showing all the possible commands user can use and how.
+     *
+     * @return help message
+     */
+    public String showHelpMessage() {
+
+        String helpMessage = String.join("\n"
+                , "The available commands are list, bye, find, delete, done, todo, event, deadline."
+                , "Enter list to get a list of all the tasks you have."
+                , "Enter bye to exit the program."
+                , "Enter find in the format: find  <search term> to get a list of all tasks that contain that term."
+                , "Enter delete in the format: delete  <task number> to delete the task from the list."
+                , "Enter done in the format: done  <task number> to mark the task done in the list."
+                , "Enter todo in the format: todo  <description> to enter a Todo task."
+                , "Enter event in the format: event  <description>  <date and time> to enter an Event task."
+                , "Enter deadline in the format: deadline  <deadline>  <date and time> to enter a Deadline task."
+        );
+
+        return helpMessage;
+    }
+
+    /**
      * Returns message showing the task marked as done.
      *
      * @param doneTask the task marked as done

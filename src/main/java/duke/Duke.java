@@ -55,6 +55,8 @@ public class Duke {
                 return ui.showTasks(tasks.getTaskList());
             case BYE:
                 return ui.showGoodbye();
+            case HELP:
+                return ui.showHelpMessage();
             case FIND:
                 return tasks.find(fullCommand.substring(FIND_INPUT_START_INDEX), ui);
             case DELETE:

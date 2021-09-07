@@ -19,6 +19,8 @@ public class Parser {
             return CommandType.LIST;
         } else if (command.equals("bye")) {
             return CommandType.BYE;
+        } else if (command.equals("help")) {
+            return CommandType.HELP;
         } else if (command.startsWith("find")) {
             return handleFindInput(command);
         } else if (command.startsWith("delete")) {
