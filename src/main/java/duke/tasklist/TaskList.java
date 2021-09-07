@@ -30,6 +30,7 @@ public class TaskList {
      * Loads task request from text file into list.
      *
      * @param taskFile scanner object of text file.
+     * @throws DukeException if unable to add task.
      */
     public TaskList(Scanner taskFile) throws DukeException {
         this.library = new ArrayList<>(100);
@@ -49,7 +50,7 @@ public class TaskList {
      * @param input task request line.
      * @param start substring after target word.
      * @return substring-ed title.
-     * @throws DukeException If start word doesn't exist.
+     * @throws DukeException if start word doesn't exist.
      */
     private String cut(String input, String start) throws DukeException {
         String result;
@@ -88,6 +89,7 @@ public class TaskList {
      *
      * @param time date time string.
      * @return datetime of date time string.
+     * @throws DukeException if failed datetime parsing
      */
     private LocalDateTime dateTime(String time) throws DukeException {
         DateTimeFormatter fmt = new DateTimeFormatterBuilder()
@@ -111,10 +113,10 @@ public class TaskList {
      *
      * @param input task to be inserted.
      * @return added task description.
+     * @throws DukeException if unable to add task
      */
     public String add(String input) throws DukeException {
         Task tsk;
-
 
         if (input.contains("todo")) {
             String name = cut(input, "todo");
