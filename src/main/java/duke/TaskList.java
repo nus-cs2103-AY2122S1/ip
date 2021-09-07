@@ -107,6 +107,7 @@ public class TaskList {
     private void noteAdded(Task t) {
         int total = taskList.size();
         String sOrNot = "";
+        assert total >= 0 : "Should not have negative number of tasks in the taskList";
         if (total <= 1) {
             sOrNot = "task";
         } else {
