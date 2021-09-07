@@ -33,6 +33,7 @@ public class Kermit {
     public String getResponse(String input) {
         try {
             Command command = Parser.parse(input);
+            assert command != null : "Parser returned a null command";
             return command.execute(taskList, ui, storage);
         } catch (KermitException e) {
             return ui.getErrorMessage(e.getMessage());

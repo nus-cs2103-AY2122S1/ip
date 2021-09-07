@@ -23,13 +23,12 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws KermitException {
         String command = "";
-        String flag;
         String word;
 
         StringBuilder argumentBuilder = new StringBuilder();
         StringBuilder flagBuilder = new StringBuilder();
 
-        // kermit.command.Task description and flag should be separated by some /kermit.command
+        // Task description and flag should be separated by some /command
         String[] userInput = fullCommand.split("/");
         String commandString = userInput[0];
         String flagString = userInput.length > 1 ? userInput[1] : "";
@@ -37,9 +36,7 @@ public class Parser {
         String[] commandArr = commandString.split(" ");
         String[] flagArr = flagString.split(" ");
 
-        // first item is kermit.command
         command = commandArr[0];
-        flag = flagArr[0];
 
         String argument = "";
         String dateString = "";
