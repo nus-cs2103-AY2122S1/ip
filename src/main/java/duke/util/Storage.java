@@ -43,10 +43,12 @@ public class Storage {
             if (!Files.exists(directoryPath)) {
                 Files.createDirectory(directoryPath);
             }
+            assert Files.exists(directoryPath) : "Directory should be created";
 
             if (!Files.exists(filePath)) {
                 Files.createFile(filePath);
             }
+            assert Files.exists(filePath) : "File should be created";
 
             taskList = Files.readAllLines(filePath);
         } catch (IOException | UnsupportedOperationException | SecurityException e) {

@@ -10,6 +10,7 @@ import duke.util.Ui;
  */
 public class DoneCommand extends Command {
 
+    private static final String errorMessage = "The number of the task must be at least 1.";
     private final int taskNum;
 
     /**
@@ -18,6 +19,7 @@ public class DoneCommand extends Command {
      * @param taskNum The number of the to-be-marked-as-done task.
      */
     public DoneCommand(int taskNum) {
+        assert taskNum > 0 : "Task number should be at least 1.";
         this.taskNum = taskNum;
     }
 
