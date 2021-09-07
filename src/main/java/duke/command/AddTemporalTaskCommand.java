@@ -58,7 +58,7 @@ public abstract class AddTemporalTaskCommand extends AddTaskCommand {
             time = LocalDateTime.parse(timeStr, DATE_TIME_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new DukeInvalidCommandException(String
-                    .format("The date and time should be in the %s format.", DATE_TIME_FORMAT_PATTERN));
+                    .format("The date and time should be in the \"%s\" format.", DATE_TIME_FORMAT_PATTERN));
         }
         setTaskDescription(taskDescription);
         this.time = time;

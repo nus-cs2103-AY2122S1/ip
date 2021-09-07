@@ -34,8 +34,8 @@ public class DukeChatbot extends Application {
      * @param input The input text.
      */
     public void readInput(String input) {
-        Command command = commandParser.getCommandInstance(input);
         try {
+            Command command = commandParser.getCommandInstance(input);
             command.execute(taskHandler, ui);
             if (hasErrorOnSave) {
                 ui.printUnexpectedErrorMessage();

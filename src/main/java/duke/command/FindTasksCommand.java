@@ -29,6 +29,7 @@ public class FindTasksCommand extends Command {
 
     @Override
     public void execute(TaskHandler taskHandler, Ui ui) throws DukeInvalidCommandException {
+        assert queryTaskDescription != null : "Query cannot be null.";
         List<Map.Entry<Integer, Task>> queryResults = taskHandler.findTasksDescribedBy(queryTaskDescription);
         int n = queryResults.size();
         if (n == 0) {
