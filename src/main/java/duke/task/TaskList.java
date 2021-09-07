@@ -70,7 +70,8 @@ public class TaskList {
      * @param task Task to remove.
      */
     public String deleteTask(Task task) {
-        this.taskList.remove(task);
+        taskList.remove(task);
+        assert !taskList.contains(task);
         return Ui.getRemoveTaskMessage(task, this);
     }
 
@@ -134,9 +135,8 @@ public class TaskList {
     public Task getTask(int taskNum) {
         if (taskNum > this.taskList.size() || taskNum < 1) {
             return null;
-        } else {
-            return this.taskList.get(taskNum - 1);
         }
+        return taskList.get(taskNum - 1);
     }
 
     @Override

@@ -95,6 +95,7 @@ public class Ui {
      * @return String message.
      */
     public String getUnknownCommandMessage(String command) {
+        assert (!command.equals(""));
         return "\tI don't understand " + command + " (yet...)\n";
     }
 
@@ -157,9 +158,7 @@ public class Ui {
      * @return String parting message.
      */
     public String exitWithGoodbye() {
-        new Thread(() -> {
-            uiCommands.get("exit").accept("");
-        }).start();
+        new Thread(() -> uiCommands.get("exit").accept("")).start();
         return "Hope to see you soon!!";
     }
 
