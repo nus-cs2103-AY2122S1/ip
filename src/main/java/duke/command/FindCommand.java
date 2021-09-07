@@ -8,7 +8,6 @@ import duke.exception.DukeException;
 
 /**
  * A FindCommand class that extends from the Command class.
- *
  * @author KelvinSoo
  * @version Level-9
  */

@@ -7,7 +7,6 @@ import duke.task.TaskList;
 
 /**
  * An ExitCommand class that extends from the Command class.
- *
  * @author KelvinSoo
  * @version A-MoreOOP
  */
@@ -25,7 +24,6 @@ public class ExitCommand extends Command{
      * @param gui The user interface to display the reply.
      * @param storage The place to store the session.
      */
-
     @Override
     public void execute(TaskList taskList, Gui gui, Storage storage) {
         gui.exit();

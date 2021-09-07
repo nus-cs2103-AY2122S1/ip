@@ -12,7 +12,6 @@ import duke.exception.DukeException;
 
 /**
  * A Parser class that handles the input.
- *
  * @author KelvinSoo
  * @version A-MoreOOP
  */

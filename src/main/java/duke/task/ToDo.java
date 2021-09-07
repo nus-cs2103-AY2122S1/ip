@@ -3,10 +3,8 @@ package duke.task;
 /**
  * ToDo class.
  * Used to represent a todo task.
- *
  * @author KelvinSoo
  * @version Level-8
- *
  */
 public class ToDo extends Task {
     /**
@@ -19,8 +17,8 @@ public class ToDo extends Task {
     /**
      * A constructor to create a new deadline task.
      */
-    public ToDo(String descripton, Boolean isDone) {
-        super(descripton);
+    public ToDo(String description, Boolean isDone) {
+        super(description);
         if (isDone) {
             super.markAsDone();
         }

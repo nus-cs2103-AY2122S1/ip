@@ -26,7 +26,6 @@ public class ListCommand extends Command{
      * @param storage The place to store the session.
      * @throws DukeException task list is empty.
      */
-
     @Override
     public void execute(TaskList taskList, Gui gui, Storage storage) throws DukeException {
         if (taskList.size() == 0) {

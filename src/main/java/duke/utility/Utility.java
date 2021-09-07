@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 
 /**
  * A Utility class to handle useful functions
- *
  * @author KelvinSoo
  * @version A-MoreOOP
  */

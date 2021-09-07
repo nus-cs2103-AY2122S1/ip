@@ -5,10 +5,8 @@ import java.time.LocalDateTime;
 /**
  * Deadline class.
  * Used to represent a deadline task.
- *
  * @author KelvinSoo
  * @version Level-8
- *
  */
 public class Deadline extends Task {
     private String dateLine;
@@ -70,7 +68,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getDescription() {
-        return String.format("%s (by: %s)", super.getDescription(), this.dateLine);
+        return String.format("%s (by: %s)", super.getDescription(), dateLine);
     }
 
     /**

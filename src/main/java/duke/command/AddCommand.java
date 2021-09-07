@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 
 /**
  * An AddCommand class that extends from the Command class.
- *
  * @author KelvinSoo
  * @version A-MoreOOP
  */
@@ -39,7 +38,6 @@ public class AddCommand extends Command{
      * @param storage The place to store the session.
      * @throws DukeException error when adding a task.
      */
-
     @Override
     public void execute(TaskList taskList, Gui gui, Storage storage) throws DukeException {
         String[] parameter;

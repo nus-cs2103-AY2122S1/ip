@@ -5,13 +5,12 @@ import java.time.LocalDateTime;
 /**
  * Event class.
  * Used to represent a event task.
- *
  * @author KelvinSoo
  * @version Level-8
- *
  */
 public class Event extends Task {
     private String eventTime;
+    private final int HALF_DAY_HOURS = 12;
 
     /**
      * A constructor to create a new event task.
@@ -41,8 +40,12 @@ public class Event extends Task {
                 localDateTime.getDayOfMonth(),
                 localDateTime.getMonth().toString(),
                 localDateTime.getYear(),
-                localDateTime.getHour() < 12 ? localDateTime.getHour() : localDateTime.getHour() - 12,
-                localDateTime.getHour() < 12 ? "am" : "pm");
+                localDateTime.getHour() < HALF_DAY_HOURS
+                        ? localDateTime.getHour()
+                        : localDateTime.getHour() - HALF_DAY_HOURS,
+                localDateTime.getHour() < HALF_DAY_HOURS
+                        ? "am"
+                        : "pm");
     }
 
     /**
@@ -69,7 +72,7 @@ public class Event extends Task {
      */
     @Override
     public String getDescription() {
-        return String.format("%s (at: %s)", super.getDescription(), this.eventTime);
+        return String.format("%s (at: %s)", super.getDescription(), eventTime);
     }
 
     /**

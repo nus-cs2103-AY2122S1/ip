@@ -7,7 +7,6 @@ import java.util.List;
 
 /**
  * A TaskList class to store tasks
- *
  * @author KelvinSoo
  * @version A-MoreOOP
  */

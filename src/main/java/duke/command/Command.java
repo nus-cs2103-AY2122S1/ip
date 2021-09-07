@@ -7,7 +7,6 @@ import duke.exception.DukeException;
 
 /**
  * An abstract class representing a command
- *
  * @author KelvinSoo
  * @version A-MoreOOP
  */

@@ -15,7 +15,6 @@ import javafx.scene.control.TextField;
 
 /**
  * A chatbot based on Project Duke
- *
  * @author KelvinSoo
  * @version Level-10
  */
@@ -58,6 +57,9 @@ public class Duke extends Application{
         });
     }
 
+    /**
+     * Handle the event where user press return or clicks on enter button.
+     */
     private void handleOnClickEvent() {
         try {
             String fullCommand = gui.getCommand();

@@ -2,7 +2,6 @@ package duke.task;
 
 /**
  * A Task with ability to mark as done.
- *
  * @author KelvinSoo
  */
 public abstract class Task {
