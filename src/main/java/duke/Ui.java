@@ -120,22 +120,23 @@ public class Ui {
     }
 
     /**
-     * Prints search result.
+     * Prints tasks based on the indexes provided.
      *
      * @param indexes Indexes of the results.
      * @param tasks List of tasks.
      * @return Output String.
      * @throws DukeException Any index does not exist in the TaskList.
      */
-    public String printSearchResult(ArrayList<Integer> indexes, TaskList tasks) throws DukeException{
-        System.out.println("---------");
+    public String printIndexes(ArrayList<Integer> indexes, TaskList tasks) throws DukeException{
+        String response = "---------\n";
         int i = 1;
         for (int index : indexes) {
-            System.out.println(i+"."+ tasks.get(index));
+            response += i+"."+ tasks.get(index) + '\n';
             i++;
         }
-        System.out.println("---------");
-        return "";
+        response += "---------";
+        System.out.println(response);
+        return response;
     }
 
     /**

@@ -84,6 +84,28 @@ public class TaskList {
     }
 
     /**
+     * Finds all Task that have a deadline in number of days.
+     * @param days Max number of days the deadline is due.
+     * @return Indexes of tasks.
+     */
+    public ArrayList<Integer> findDeadlines(int days) {
+        ArrayList<Integer> indexes = new ArrayList<>();
+
+        int i = 0;
+        for (Task t : tasks) {
+            // Probably should make all task with structured dates a interface
+            if (t instanceof Deadline) {
+                Deadline d = (Deadline) t;
+                if (d.isDueIn(days)) {
+                    indexes.add(i);
+                }
+            }
+            i++;
+        }
+        return indexes;
+    }
+
+    /**
      * Returns string representation of the TaskList.
      *
      * @return String representation of the TaskList.

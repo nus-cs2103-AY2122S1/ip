@@ -25,7 +25,10 @@ public class Parser {
             return Command.DELETE;
         case("find"):
             return Command.FIND;
+        case("remind"):
+            return Command.REMIND;
         default:
+            System.out.println("Checkpoint 1");
             throw new DukeException("Sorry I don't know what that means");
         }
     }
@@ -70,6 +73,8 @@ public class Parser {
             return new String[] {input.split(" ")[1].trim()};
         case FIND:
             return new String[] {input.replace("find ", "").trim()};
+        case REMIND:
+            return new String[] {input.replace("remind ", "").trim()};
         default :
             return new String[] {};
         }

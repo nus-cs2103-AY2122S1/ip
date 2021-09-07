@@ -61,4 +61,13 @@ public class Deadline extends Task {
         return "D|" + (this.getStatus() ? "1" : "0") +
                 "|" + this.getDescription() + "|" + this.getBy();
     }
+
+    /**
+     * Is the deadline due in the given number of days.
+     * @param days Number of days.
+     * @return If the deadline is due within the given number of days/
+     */
+    public Boolean isDueIn(int days) {
+        return !this.getStatus() && LocalDate.now().plusDays(days).compareTo(by) >= 0;
+    }
 }

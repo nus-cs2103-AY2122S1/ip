@@ -11,6 +11,7 @@ public class Duke {
     public static Storage storage;
     public static Ui ui;
     public static Parser parser;
+    private Command nextCommand = Command.INVALID;
 
     /**
      * Constructor.
@@ -44,13 +45,12 @@ public class Duke {
 
         // Take user input
         String nextLine;
-        Command nextCommand = Command.INVALID;
         do {
             assert !parser.isBye(nextCommand) : "Program did not exit on Bye Command";
             nextLine = ui.nextLine();
-            this.handleCommand(nextLine);
-        } while (!parser.isBye(nextCommand));
+            handleCommand(nextLine);
 
+        } while (!parser.isBye(nextCommand));
     }
 
     /**
@@ -61,15 +61,13 @@ public class Duke {
      */
     public String handleCommand (String command) {
         try {
-            Command nextCommand = parser.parseCommand(command);
+            nextCommand = parser.parseCommand(command);
             String[] arguments = parser.parseArguments(nextCommand, command);
             return execute(nextCommand, arguments);
+
         } catch (DukeException err) {
             return ui.printDukeException(err);
         }
-
-
-
     }
     /**
      * Execute the given Command with the arguments.
@@ -108,15 +106,20 @@ public class Duke {
                 break;
             case FIND:
                 ArrayList<Integer> indexes = tasks.find(arguments[0]);
-                response =  ui.printSearchResult(indexes, tasks);
+                response =  ui.printIndexes(indexes, tasks);
                 break;
             case BYE:
                 response =  ui.printGoodbye();
                 ui.closeScanner();
                 break;
+            case REMIND:
+                ArrayList<Integer> deadlines = tasks.findDeadlines(parser.parseInt(arguments[0]));
+                response = ui.printIndexes(deadlines, tasks);
+                break;
             default :
                 throw new DukeException("Invalid Command");
             }
+            storage.save(tasks);
             return response;
         } catch (DukeException err) {
             return ui.printDukeException(err);
