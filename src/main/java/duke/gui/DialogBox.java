@@ -49,10 +49,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * generate a new userdialog box with user message and avatar
+     *
+     * @param text the user message to be displayed in the dialog box
+     * @param img user avatar
+     * @return new dialog box generated
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * generate a new duke dialog box with message wne avatar. Orientation is left-right flip of user dialog box.
+     *
+     * @param text the duke message to be displayed in the dialog box
+     * @param img duke avatar
+     * @return new dialog box generated
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
