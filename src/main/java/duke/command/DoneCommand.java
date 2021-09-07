@@ -44,7 +44,9 @@ public class DoneCommand extends Command {
             } else if (taskHandler.getList().get(index - 1).getStatusIcon() == "X") {
                 throw new DukeException("Task has already been marked as completed!");
             } else {
-                return taskHandler.markTaskAsDone(index);
+                String toPrint = taskHandler.markTaskAsDone(index);
+                storage.updateFile(taskHandler.formatTasksToSave());
+                return toPrint;
             }
         }
     }
