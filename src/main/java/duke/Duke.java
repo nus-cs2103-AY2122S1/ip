@@ -24,6 +24,7 @@ public class Duke {
         storage = new Storage("./storage/save.txt");
         try {
             taskList = new TaskList(storage.retrieve());
+
         } catch (DukeException e) {
             ui.showError(e.getMessage());
             ui.showList(taskList);
@@ -64,7 +65,7 @@ public class Duke {
         try {
             Command c = Parser.parse(input);
             return c.execute(taskList, ui, storage);
-        } catch (DukeException e) {
+        } catch (DukeException | IOException e) {
             e.printStackTrace();
             return "bruh";
         }

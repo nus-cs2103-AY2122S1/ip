@@ -6,6 +6,8 @@ import duke.Ui;
 import exceptions.DukeException;
 import exceptions.NoSuchCommandException;
 
+import java.io.IOException;
+
 /**
  * Abstract class for all Commands to extend from.
  *
@@ -61,10 +63,9 @@ public abstract class Command {
         return this.extraInput;
     }
 
-    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException;
 
     public boolean isExit() {
         return false;
     }
-
 }
