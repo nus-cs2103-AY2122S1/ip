@@ -32,6 +32,7 @@ public abstract class AddTaskCommand extends Command {
 
     @Override
     public void execute(TaskHandler taskHandler, Ui ui) {
+        assert task != null : "Task to be added must be created; it cannot be null.";
         taskHandler.addTask(task);
         ui.startMessage()
                 .addLine("Got it. I've added this task:")
