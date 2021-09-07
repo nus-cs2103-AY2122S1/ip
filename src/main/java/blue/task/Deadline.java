@@ -11,6 +11,7 @@ import blue.BlueException;
  * Tasks that need to be done before a specific date/time.
  */
 public class Deadline extends Task {
+    public static final String REPRESENTATION = "D";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
     private final LocalDateTime by;
 
@@ -32,15 +33,6 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a String that represents this class.
-     *
-     * @return String that represents this class.
-     */
-    public static String getClassRepr() {
-        return "D";
-    }
-
-    /**
      * Returns the deadline.
      *
      * @return Deadline in String format.
@@ -57,6 +49,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String byRepr = by.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
-        return "[D]" + super.toString() + " (by: " + byRepr + ")";
+        return "[" + REPRESENTATION + "]" + super.toString() + " (by: " + byRepr + ")";
     }
 }
