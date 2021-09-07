@@ -7,6 +7,7 @@ import javafx.application.Application;
  */
 public class Launcher {
     public static void main(String[] args) {
+        assert Duke.class != null : "There should be a Duke class inside the project folder";
         Application.launch(Duke.class, args);
     }
 }
