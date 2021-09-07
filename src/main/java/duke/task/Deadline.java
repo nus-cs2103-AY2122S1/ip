@@ -31,8 +31,8 @@ public class Deadline extends Task {
         }
         String date = parts[0].replace("/", "-");
         this.byDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("d-M-yyyy"));
+        assert parts[1] != null;
         this.byTime = parts[1];
-
     }
 
     @Override

@@ -31,6 +31,7 @@ public class Event extends Task {
         }
         String date = parts[0].replace("/", "-");
         this.atDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("d-M-yyyy"));
+        assert parts[1] != null;
         this.atTime = parts[1];
     }
 
