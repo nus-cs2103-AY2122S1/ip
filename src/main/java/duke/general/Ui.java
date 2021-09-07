@@ -39,6 +39,7 @@ public class Ui {
      * Shows response to the user for when a task is added
      * @param t Task that is being added
      * @param size Size of the tasklist
+     * @return Add response message
      */
     public String addResponse(Task t, int size) {
         assert(t != null) : "Unable to print response for null task";
@@ -48,6 +49,7 @@ public class Ui {
     /**
      * Shows response for done command
      * @param t Task to be marked as done
+     * @return Done response message
      */
     public String doneResponse(Task t) {
         assert(t != null);
@@ -61,6 +63,7 @@ public class Ui {
      * Shows response for delete command
      * @param t Task to be deleted
      * @param list Tasklist to delete the task from
+     * @return Delete response message
      */
     public String deleteResponse(Task t, Tasklist list) {
         System.out.println("Noted. I've removed this task:");
@@ -72,6 +75,7 @@ public class Ui {
 
     /**
      * Shows the response for bye command
+     * @return Bye response message
      */
     public String byeResponse() {
         System.out.println("Bye bye. Duke going to sleep now.");
@@ -83,6 +87,7 @@ public class Ui {
      * If there are no tasks in the list, informs the users of not finding any matches
      *
      * @param list List of tasks that have matches
+     * @return Find response message - a list of tasks that match the keyword
      */
     public String findResponse(ArrayList<Task> list) {
         if (list.size() > 0) {
@@ -104,6 +109,7 @@ public class Ui {
     /**
      * Displays the task list
      * @param t Tasklist
+     * @return Message containing all tasks in the list
      */
     public String showList(Tasklist t) throws DukeException {
         if (t.size() == 0) {

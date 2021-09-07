@@ -41,19 +41,15 @@ public class Tasklist {
             break;
         case DEADLINE:
             if (input.split(" /by ", 2).length < 2) {
-                throw new DukeException("duke.task.Deadline not specified!");
+                throw new DukeException("Deadline not specified!");
             }
-            String desc = input.split(" /by ", 2)[0];
-            String dead = input.split(" /by ", 2)[1];
-            temp = new Deadline(desc, dead);
+            temp = new Deadline(input.split(" /by ", 2)[0], input.split(" /by ", 2)[1]);
             break;
         case EVENT:
             if (input.split(" /at ", 2).length < 2) {
                 throw new DukeException("Date of event not specified!");
             }
-            String name = input.split(" /at ", 2)[0];
-            String at = input.split(" /at ", 2)[1];
-            temp = new Event(name, at);
+            temp = new Event(input.split(" /at ", 2)[0], input.split(" /at ", 2)[1]);
             break;
         default:
             throw new IllegalStateException("Unexpected value: " + t);
@@ -61,6 +57,8 @@ public class Tasklist {
         list.add(temp);
         return temp;
     }
+
+
 
     /**
      * Marks a task as done from the Tasklist based on input given
@@ -92,7 +90,7 @@ public class Tasklist {
      * @return Task that is being deleted
      */
     public Task deleteTask(String[] inputSplit) throws DukeException {
-        Task t = null;
+        Task t;
         try {
             int i = Integer.parseInt(inputSplit[1]);
             t = list.get(i - 1);
@@ -110,13 +108,13 @@ public class Tasklist {
      * @return ArrayList of tasks that are related to the keyword
      */
     public ArrayList<Task> findTasks(String keyword) {
-        ArrayList<Task> found = new ArrayList<>();
+        ArrayList<Task> foundTasks = new ArrayList<>();
         for (Task t : this.list) {
             if (t.getName().contains(keyword)) {
-                found.add(t);
+                foundTasks.add(t);
             }
         }
-        return found;
+        return foundTasks;
     }
 
     public int size() {

@@ -24,6 +24,6 @@ public class DoneCommand extends Command {
             storage.modifySave(tasks.getList());
             return ui.doneResponse(t);
         }
-        return "What do i done again???";
+        return "";
     }
 }
