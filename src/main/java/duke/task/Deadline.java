@@ -10,6 +10,12 @@ public class Deadline extends Task {
 
     private String endTime;
 
+    /**
+     * Initialises a deadline
+     *
+     * @param str The description of the deadline.
+     * @param endTime The ending time of the deadline.
+     */
     public Deadline(String str, LocalDateTime endTime) {
         super(str, endTime);
         DateTimeFormatter dateOnly = DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm");

@@ -37,9 +37,6 @@ public class HelpCommand implements Command {
         if (obj == this) {
             return true;
         }
-        if (!(obj instanceof HelpCommand)) {
-            return false;
-        }
-        return true;
+        return obj instanceof HelpCommand;
     }
 }

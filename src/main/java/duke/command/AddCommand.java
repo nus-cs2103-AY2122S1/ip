@@ -21,9 +21,6 @@ abstract class AddCommand implements Command {
         if (obj == this) {
             return true;
         }
-        if (!(obj instanceof AddCommand)) {
-            return false;
-        }
-        return true;
+        return obj instanceof AddCommand;
     }
 }

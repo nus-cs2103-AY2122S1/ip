@@ -90,21 +90,15 @@ public class TaskList {
             String[] parts = s.split("\\|", 5);
             if (parts[0].equals("D")) {
                 Deadline dl = new Deadline(parts[2], dateFormatting(parts[3]));
-                if (parts[1].equals("1")) {
-                    dl.changeIsDone(true);
-                }
+                dl.changeIsDone(parts[1]);
                 xs.add(dl);
             } else if (parts[0].equals("T")) {
                 Todo td = new Todo(parts[2]);
-                if (parts[1].equals("1")) {
-                    td.changeIsDone(true);
-                }
+                td.changeIsDone(parts[1]);
                 xs.add(td);
             } else if (parts[0].equals("E")) {
                 Event e = new Event(parts[2], dateFormatting(parts[3]));
-                if (parts[1].equals("1")) {
-                    e.changeIsDone(true);
-                }
+                e.changeIsDone(parts[1]);
                 xs.add(e);
             }
         }
@@ -118,18 +112,14 @@ public class TaskList {
      * @throws DukeException A message thrown as there are no items that currently are in the list.
      */
     public String printItems() throws DukeException {
-        String toPrint = "You have " + xs.size() + " tasks in your current list.\n";
+        StringBuilder toPrint = new StringBuilder("You have " + xs.size() + " tasks in your current list.");
         if (xs.size() == 0) {
             throw new DukeException("There are no items in the list!");
         }
         for (int i = 0; i < xs.size(); i++) {
-            if (i == 0) {
-                toPrint += ((i + 1) + ": " + xs.get(i));
-                continue;
-            }
-            toPrint += ("\n" + (i + 1) + ": " + xs.get(i));
+            toPrint.append("\n").append(i + 1).append(": ").append(xs.get(i));
         }
-        return toPrint;
+        return toPrint.toString();
     }
 
     /**
@@ -145,7 +135,7 @@ public class TaskList {
             throw new DukeException("Uh oh! Item " + startOfString + " does not seem to exist!");
         }
         Task taskToChange = xs.get(startOfString - 1);
-        taskToChange.changeIsDone(true);
+        taskToChange.changeIsDone("1");
         return taskToChange;
     }
 
@@ -206,19 +196,20 @@ public class TaskList {
      * @return The String to print with regards to all the similar tasks.
      */
     public String findSimilarTasks(String keyWords) {
-        String toPrint;
-        toPrint = ("Here are the matching tasks in your list:");
+        StringBuilder toPrint;
+        toPrint = new StringBuilder(("Here are the matching tasks in your list:"));
         int count = 0;
         for (Task task : xs) {
-            if (task.getItemName().contains(keyWords)) {
-                toPrint += ("\n" + task);
-                count++;
+            if (!task.getItemName().contains(keyWords)) {
+                continue;
             }
+            toPrint.append("\n").append(task);
+            count++;
         }
         if (count == 0) {
-            toPrint += ("\nSorry! There does not seem to be any matching tasks!");
+            toPrint.append("\nSorry! There does not seem to be any matching tasks!");
         }
-        return toPrint;
+        return toPrint.toString();
     }
 
     @Override

@@ -36,11 +36,9 @@ public class EventAddCommand extends AddCommand {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        String toPrint;
         int totalTasks = taskList.addToList("E", description, time);
         storage.addToText("E", description, time);
-        toPrint = ui.addingTask(totalTasks, description, time, "E");
-        return toPrint;
+        return ui.addingTask(totalTasks, description, time, "E");
     }
 
     @Override

@@ -34,9 +34,9 @@ public class ExitCommand implements Command {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof ExitCommand)) {
-            return false;
+        if (obj == this) {
+            return true;
         }
-        return true;
+        return obj instanceof ExitCommand;
     }
 }
