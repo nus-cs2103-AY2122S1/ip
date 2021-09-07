@@ -1,5 +1,10 @@
 package biscuit.commands;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
 import biscuit.exceptions.BiscuitException;
 import biscuit.storage.Storage;
 import biscuit.task.Task;
@@ -37,12 +42,26 @@ public class DoneCommand extends Command {
         }
 
         try {
-            Task current = taskList.getTask(Integer.parseInt(userInputs[1]) - 1);
-            current.setDone(true);
+            String[] tasksDone = userInputs[1].split(" ");
+            List<Task> doneTasks = new ArrayList<>();
+            // Parse the tasks to mark as done, sort them in reverse before marking them
+            Arrays.stream(tasksDone).map(indexString -> Integer.parseInt(indexString) - 1)
+                    .sorted(Comparator.reverseOrder())
+                    .forEach(index -> {
+                        Task current = taskList.getTask(index);
+                        doneTasks.add(0, current);
+                        current.setDone(true);
+                    });
             storage.save();
-            return "Nice! I've marked this task as done, woof!\n\t" + current;
+
+            //Generate message to display to user
+            StringBuilder message = new StringBuilder("Nice! I've marked this task as done, woof!");
+            for (Task task: doneTasks) {
+                message.append("\n\t").append(task);
+            }
+            return message.toString();
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! Please enter a valid number"
+            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! Please enter valid numbers"
                     + (taskList.size() == 1 ? " of 1" : " from 1 to " + taskList.size()) + ".");
         }
     }

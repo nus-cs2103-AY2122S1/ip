@@ -1,5 +1,10 @@
 package biscuit.commands;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
 import biscuit.exceptions.BiscuitException;
 import biscuit.storage.Storage;
 import biscuit.task.Task;
@@ -37,14 +42,25 @@ public class DeleteCommand extends Command {
         }
 
         try {
-            int index = Integer.parseInt(userInputs[1]) - 1;
-            Task toDelete = taskList.getTask(index);
-            taskList.removeTask(index);
+            String[] tasksToDelete = userInputs[1].split(" ");
+            List<Task> deletedTasks = new ArrayList<>();
+            // Parse the tasks to delete, sort them in reverse before deleting them
+            Arrays.stream(tasksToDelete).map(indexString -> Integer.parseInt(indexString) - 1)
+                    .sorted(Comparator.reverseOrder())
+                    .forEach(index -> {
+                        deletedTasks.add(0, taskList.getTask(index));
+                        taskList.removeTask(index);
+                    });
             storage.save();
-            return "Noted. I've removed the following task:\n\t" + toDelete
-                    + "\nNow you have " + taskList.size() + " tasks in the list.";
+
+            // Generate message to display to user
+            StringBuilder message = new StringBuilder("Noted. I've removed the following task:");
+            for (Task task: deletedTasks) {
+                message.append("\n\t").append(task);
+            }
+            return message.append("\nNow you have ").append(taskList.size()).append(" tasks in the list.").toString();
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! Please enter a valid number"
+            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! Please enter valid numbers"
                     + (taskList.size() == 1 ? " of 1" : " from 1 to " + taskList.size()) + ".");
         }
     }
