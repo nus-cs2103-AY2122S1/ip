@@ -11,6 +11,7 @@ import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.SortCommand;
 import duke.command.TodoCommand;
 import duke.exception.DukeException;
 import duke.exception.EmptyDescriptionException;
@@ -27,6 +28,7 @@ public class Parser {
     private static final String DONE_COMMAND = "done";
     private static final String DELETE_COMMAND = "delete";
     private static final String FIND_COMMAND = "find";
+    private static final String SORT_COMMAND = "sort";
     private static final String TODO_COMMAND = "todo";
     private static final String EVENT_COMMAND = "event";
     private static final String DEADLINE_COMMAND = "deadline";
@@ -165,6 +167,9 @@ public class Parser {
 
         case Parser.LIST_COMMAND:
             return new ListCommand();
+
+        case Parser.SORT_COMMAND:
+            return new SortCommand();
 
         case Parser.EXIT_COMMAND:
             return new ExitCommand();
