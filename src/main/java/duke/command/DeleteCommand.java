@@ -24,6 +24,7 @@ public class DeleteCommand extends Command {
 
     private String deleteTask(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String[] inputArray = userInput.split(" ");
+        assert inputArray.length >= 2 : "Delete command should be in the form delete (index)";
         Task removedTask = taskList.deleteTask(Integer.parseInt(inputArray[1]) - 1);
         storage.saveData(taskList);
         String deleteMessage = String

@@ -16,6 +16,8 @@ public class FindCommand extends Command {
      */
     public FindCommand(String userInput) {
         super(userInput);
+        assert userInput.split(" ", 2).length == 2
+                : "User input should be in the format find (query)";
         this.query = userInput.split(" ", 2)[1];
     }
 
