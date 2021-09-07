@@ -20,7 +20,6 @@ public class CommandExecutor {
 
     private final Command command;
     private final Ui ui;
-    private final Storage storage;
     private final TaskList taskList;
 
     /**
@@ -33,7 +32,6 @@ public class CommandExecutor {
     public CommandExecutor(Storage storage, Ui ui, TaskList taskList) {
         this.command = new Command(storage, ui);
         this.ui = ui;
-        this.storage = storage;
         this.taskList = taskList;
     }
 
@@ -46,7 +44,6 @@ public class CommandExecutor {
      * @throws IOException If there are errors processing the file.
      */
     public String execute(String userCommand) throws DukeExceptions, IOException {
-        ui.showWelcome(); // TODO print the welcome messages before the user starts
         Parser parser = new Parser(userCommand);
         String cmd = parser.getFirstWord(); // the first word of the command received from the user
 

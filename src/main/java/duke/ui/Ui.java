@@ -15,23 +15,39 @@ public class Ui {
     /**
      * Constructs an Ui object, and prints a message when it does.
      */
-    public Ui() {
-        ///// Introduction of the robot every time Duke is initialised
-        System.out.println("\nHaro, I'm Taro! Taro is short for Notaro because I'm Not-a-ro-bot!!");
+    public Ui() {}
+
+    /**
+     * Prints out a welcome message when a user starts using the chatbot, and prints the possible order
+     *
+     * @return The welcome message.
+     */
+    public String showWelcome1() {
+        return "Haro, I'm Taro! Taro is short for Notaro because I'm Not-a-ro-bot!!\n"
+                + "There are three special tasks you can add:\nDeadline, Event and Todo\n"
+                + "Here are some special keywords! :";
     }
 
     /**
      * Prints out a welcome message when a user starts using the chatbot, and prints the possible order
+     *
+     * @return The welcome message.
      */
-    public void showWelcome() {
-        System.out.println("There are three special tasks you can add: Deadline, Event and Todo");
-        System.out.println("Here are some special keywords! :");
-        System.out.println("bye : End our conversation :(");
-        System.out.println("list : Adds stuff into your todo list :(");
-        System.out.println("done [number] : Marks the item corresponding the number in the todo list as complete!");
-        System.out.println("find [word] : Searches the todo list for the word inputted and shows all matches");
-        System.out.println("delete [number] : Deletes the item corresponding the number in the todo list");
-        System.out.println("\nWhat can I do for you today? :>");
+    public String showWelcome2() {
+        return "bye : End our conversation :(\n"
+                + "list : Adds stuff into your todo list :(\n"
+                + "done [number] : Marks the item corresponding the number in the todo list as complete!\n"
+                + "find [word] : Searches the todo list for the word inputted and shows all matches\n"
+                + "delete [number] : Deletes the item corresponding the number in the todo list";
+    }
+
+    /**
+     * Prints out a welcome message when a user starts using the chatbot, and prints the possible order
+     *
+     * @return The welcome message.
+     */
+    public String showWelcome3() {
+        return "What can I do for you today? :>";
     }
 
     /**
@@ -79,7 +95,7 @@ public class Ui {
         } else {
             StringBuilder tasksString = new StringBuilder();
             for (int count = 0; count < tasks.size(); count++) {
-                tasksString.append((count + 1) + ". " + tasks.get(count).toString());
+                tasksString.append((count + 1) + ". " + tasks.get(count).toString() + "\n");
             }
             return tasksString.toString();
         }

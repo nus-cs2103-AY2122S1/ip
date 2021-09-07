@@ -8,6 +8,9 @@
 package duke;
 
 import java.io.IOException;
+
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.scene.layout.AnchorPane;
 
 import duke.command.CommandExecutor;
@@ -34,13 +37,16 @@ public class Duke extends AnchorPane {
 
     /**
      * Generates output and performs actions based on the input provided by the user.
+     *
      * @param input The user input received.
      * @return Output corresponding to the input received.
-     * @throws IOException If there are errors processing the file.
-     * @throws DukeExceptions If there are errors with processing the user input.
      */
-    public String getResponse(String input) throws IOException, DukeExceptions {
+    public String getResponse(String input) {
         try {
+            if (input.equals("bye")) {
+                commandExecutor.execute(input);
+                Platform.exit();
+            }
             return commandExecutor.execute(input);
         } catch (DukeExceptions | IOException exception) {
             return "Ohno! You were so exceptional, an error has occurred!\n" + exception.getMessage();
