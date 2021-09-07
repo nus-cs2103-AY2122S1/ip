@@ -29,7 +29,7 @@ public class Storage {
 
 	/**
 	 * Loads the data from the hard disk.
-	 * 
+	 *
 	 * @return ArrayList of tasks
 	 * @throws DukeException if file cannot be found
 	 */
@@ -77,7 +77,7 @@ public class Storage {
 
 	/**
 	 * Extract the task name from the task part of the command.
-	 * 
+	 *
 	 * @param taskDetails the task part of the command
 	 * @return the task name
 	 */
@@ -87,7 +87,7 @@ public class Storage {
 
 	/**
 	 * Extract the String datetime from the datetime part of the command.
-	 * 
+	 *
 	 * @param dateTimeDetails the datetime part of the command
 	 * @return the datetime
 	 */
@@ -97,7 +97,7 @@ public class Storage {
 
 	/**
 	 * Saves the tasks to the data file.
-	 * 
+	 *
 	 * @param tasks ArrayList of tasks to be saved
 	 * @throws DukeFileNotFoundException if file not found
 	 */

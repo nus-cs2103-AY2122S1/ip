@@ -117,12 +117,12 @@
       <property name="severity" value="warning"/>
     </module>
 
-    <module name="MemberName">
-      <!-- Validates non-static members against the supplied expression. -->
-      <metadata name="altname" value="MemberName"/>
-      <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
-      <property name="severity" value="warning"/>
-    </module>
+<!--    <module name="MemberName">-->
+<!--      &lt;!&ndash; Validates non-static members against the supplied expression. &ndash;&gt;-->
+<!--      <metadata name="altname" value="MemberName"/>-->
+<!--      <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>-->
+<!--      <property name="severity" value="warning"/>-->
+<!--    </module>-->
 
     <module name="MethodName">
       <!-- Validates identifiers for method names against the supplied expression. -->
@@ -135,15 +135,15 @@
       <property name="severity" value="warning"/>
     </module>
 
-    <module name="LocalFinalVariableName">
-      <!-- Validates identifiers for local final variables against the expression "^[a-z][a-zA-Z0-9]*$". -->
-      <property name="severity" value="warning"/>
-    </module>
+<!--    <module name="LocalFinalVariableName">-->
+<!--      &lt;!&ndash; Validates identifiers for local final variables against the expression "^[a-z][a-zA-Z0-9]*$". &ndash;&gt;-->
+<!--      <property name="severity" value="warning"/>-->
+<!--    </module>-->
 
-    <module name="LocalVariableName">
-      <!-- Validates identifiers for local variables against the expression "^[a-z][a-zA-Z0-9]*$". -->
-      <property name="severity" value="warning"/>
-    </module>
+<!--    <module name="LocalVariableName">-->
+<!--      &lt;!&ndash; Validates identifiers for local variables against the expression "^[a-z][a-zA-Z0-9]*$". &ndash;&gt;-->
+<!--      <property name="severity" value="warning"/>-->
+<!--    </module>-->
 
 
     <!--
@@ -298,12 +298,21 @@
       <property name="allowLineBreaks" value="true"/>
     </module>
 
-    <!-- No trailing whitespace -->
-    <module name="Regexp">
-      <property name="format" value="[ \t]+$"/>
-      <property name="illegalPattern" value="true"/>
-      <property name="message" value="Trailing whitespace"/>
+    <module name = "ConstantName">
+      <!-- Validates non-private, static, final fields against the expression "^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$". -->
+      <metadata name = "altname" value = "ConstantName"/>
+      <property name = "applyToPrivate" value = "false"/>
+      <message key = "name.invalidPattern"
+               value = "Variable ''{0}'' should be in ALL_CAPS (if it is a constant) or be private (otherwise)."/>
+      <property name = "severity" value = "warning"/>
     </module>
+
+    <!-- No trailing whitespace -->
+<!--    <module name="Regexp">-->
+<!--      <property name="format" value="[ \t]+$"/>-->
+<!--      <property name="illegalPattern" value="true"/>-->
+<!--      <property name="message" value="Trailing whitespace"/>-->
+<!--    </module>-->
 
     <module name="OperatorWrap">
       <!-- Checks that the non-assignment type operator is at the next line in a line wrap.

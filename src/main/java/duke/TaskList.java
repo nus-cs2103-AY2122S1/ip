@@ -30,7 +30,7 @@ public class TaskList {
 
     /**
      * Constructor for TaskList with initial tasks.
-     * 
+     *
      * @param tasks Initial tasks.
      */
     public TaskList(ArrayList<Task> tasks) {

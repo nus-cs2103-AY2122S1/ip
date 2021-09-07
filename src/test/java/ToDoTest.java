@@ -1,5 +1,6 @@
-import duke.task.ToDo;
 import org.junit.jupiter.api.Test;
+
+import duke.task.ToDo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -12,10 +13,10 @@ class ToDoTest {
         assertEquals(todoTask.toString(), "[T][ ] work");
     }
 
-	@Test
-	public void testTodoTaskIsCompleted(){
-		ToDo todoTask = new ToDo("work");
-		todoTask.setDone(true);
-		assertTrue(todoTask.isDone());
-	}
+    @Test
+    public void testTodoTaskIsCompleted(){
+        ToDo todoTask = new ToDo("work");
+        todoTask.setDone(true);
+        assertTrue(todoTask.isDone());
+    }
 }

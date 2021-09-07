@@ -8,5 +8,6 @@
   <suppress checks="JavadocType" files=".*Test\.java"/>
   <suppress checks="MissingJavadocMethodCheck" files=".*Test\.java"/>
   <suppress checks="AbbreviationAsWordInName" files=".*Test\.java"/>
-
+  <suppress checks = "Indentation" files = ".*Test\.java"/>
+  <suppress checks = "LocalFinalVariableName" files = ".*Test\.java"/>
 </suppressions>
