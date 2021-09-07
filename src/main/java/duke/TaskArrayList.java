@@ -1,5 +1,8 @@
 package duke;
 
+import duke.commands.CommandDelete;
+import duke.commands.CommandDone;
+import duke.commands.CommandFind;
 import duke.exceptions.DukeException;
 import duke.tasks.Task;
 
@@ -9,9 +12,9 @@ import java.util.ArrayList;
  * Array List of Task objects.
  */
 public class TaskArrayList extends ArrayList<Task> {
-    public static final String DELETE_USAGE_TEXT = "Usage: delete <integer task number>";
-    public static final String DONE_USAGE_TEXT = "Usage: done <integer task number>";
-    public static final String FIND_USAGE_TEXT = "Usage: find <search String>";
+    public static final String DELETE_USAGE_TEXT = CommandDelete.HELP_USAGE;
+    public static final String DONE_USAGE_TEXT = CommandDone.HELP_USAGE;
+    public static final String FIND_USAGE_TEXT = CommandFind.HELP_USAGE;
 
     public TaskArrayList() {
         super();
@@ -110,7 +113,7 @@ public class TaskArrayList extends ArrayList<Task> {
      * @throws DukeException when invalid task number provided.
      */
     public String markDone(int taskNo) throws DukeException {
-        if (this.isValidTaskNo(taskNo)) {
+        if (!this.isValidTaskNo(taskNo)) {
             throw new DukeException(String.format("task %d not found", taskNo));
         }
 
