@@ -63,6 +63,7 @@ public class Ui {
      * @return String The successfully completed message.
      */
     public String displayCompletedMessage(Task taskDone) {
+        assert taskDone != null : "Task to be marked as done should not be null";
         String s = "Good job! This task has been completed: \n" + "\t \t" + taskDone.toString();
         return s;
     }
