@@ -53,9 +53,7 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     private void initialDialog() {
-        if (hasShownMenu) {
-            //do nothing
-        } else {
+        if (!hasShownMenu) {
             String response = ui.showWelcome();
             dialogContainer.getChildren().addAll(
                     DialogBox.getDukeDialog(response, dukeImage)
@@ -74,7 +72,8 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        if(response.equals("Bye! Hope to see you again soon!")) {
+        String byeMessage = "Bye! Hope to see you again soon!";
+        if(response.equals(byeMessage)) {
             PauseTransition transition = new PauseTransition(Duration.seconds(1));
             transition.setOnFinished(e -> stage.close());
             transition.play();

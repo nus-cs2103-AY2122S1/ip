@@ -28,35 +28,19 @@ public class Storage {
 
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
+
         try {
             File file = new File(filePath);
             if (!file.exists()) {
                 return tasks;
             }
+
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             String line = br.readLine();
             while (line != null) {
-                assert line.contains("|"): "each line in saved data should contain details separate by |";
                 String[] input = line.split("\\|");
-                assert input.length == 3 || input.length == 4 : "loaded input should have at least 3 details";
-                String taskType = input[0];
-                String description = input[2];
-                boolean isTaskDone = input[1].equals("1");
-                switch (taskType) {
-                case "T":
-                    loadTodoToList(tasks, description, isTaskDone);
-                    break;
-                case "E":
-                    LocalDate at = LocalDate.parse(input[3]);
-                    loadEventToList(tasks, description, at, isTaskDone);
-                    break;
-                case "D":
-                    LocalDate by = LocalDate.parse(input[3]);
-                    loadDeadlineToList(tasks, description, by, isTaskDone);
-                    break;
-                default:
-                    assert false : taskType;
-                }
+                assert input.length >= 3 : "loaded input should have at least 3 details";
+                loadTasks(input, tasks);
                 line = br.readLine();
             }
         } catch (IOException e) {
@@ -65,30 +49,36 @@ public class Storage {
         return tasks;
     }
 
-    public void loadTodoToList(ArrayList<Task> tasks, String description, boolean isTaskDone) {
-        Todo todo = new Todo(description);
-        if (isTaskDone) {
-            todo.setDone();
+    private void loadTasks(String[] input, ArrayList<Task> tasks) {
+        String taskType = input[0];
+        String description = input[2];
+        boolean isTaskDone = input[1].equals("1");
+
+        switch (taskType) {
+        case "T":
+            Todo todo = new Todo(description);
+            setDoneAndAddToList(tasks, todo, isTaskDone);
+            break;
+        case "E":
+            LocalDate at = LocalDate.parse(input[3]);
+            Event event = new Event(description, at);
+            setDoneAndAddToList(tasks, event, isTaskDone);
+            break;
+        case "D":
+            LocalDate by = LocalDate.parse(input[3]);
+            Deadline deadline = new Deadline(description, by);
+            setDoneAndAddToList(tasks, deadline, isTaskDone);
+            break;
+        default:
+            assert false : taskType;
         }
-        tasks.add(todo);
     }
 
-    public void loadEventToList(ArrayList<Task> taskList, String description, LocalDate at,
-                                boolean isTaskDone) {
-        Event event = new Event(description, at);
+    private void setDoneAndAddToList(ArrayList<Task> tasks, Task task, boolean isTaskDone) {
         if (isTaskDone) {
-            event.setDone();
+            task.setDone();
         }
-        taskList.add(event);
-    }
-
-    public void loadDeadlineToList(ArrayList<Task> taskList, String description, LocalDate by,
-                                   boolean isTaskDone) {
-        Deadline deadline = new Deadline(description, by);
-        if (isTaskDone) {
-            deadline.setDone();
-        }
-        taskList.add(deadline);
+        tasks.add(task);
     }
 
     public void save(TaskList taskList) throws DukeException {
