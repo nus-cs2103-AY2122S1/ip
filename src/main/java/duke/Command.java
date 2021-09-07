@@ -116,13 +116,13 @@ public abstract class Command {
         @Override
         protected Response execute() throws DukeException.DukeEmptyNote {
             ResponseMessage responseMessage = new ResponseMessage();
-            if (t.getTaskName() != NULL_COMMAND) {
-                t.add();
-                responseMessage.appendMessage("Got it. I've added this task:\n    " + t);
-                responseMessage.appendMessage("Now you have " + Duke.todoList.size() + " tasks in the list.");
-            } else {
+            if (t.getTaskName() == NULL_COMMAND) {
                 throw new DukeException.DukeEmptyNote(t.taskKind());
             }
+
+            t.add();
+            responseMessage.appendMessage("Got it. I've added this task:\n    " + t);
+            responseMessage.appendMessage("Now you have " + Duke.todoList.size() + " tasks in the list.");
             return new Response(true, responseMessage);
         }
 
