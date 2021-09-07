@@ -49,6 +49,9 @@ public class Task {
         } else {
             try {
                 String[] timeFormat = input.trim().split(" ");
+
+                assert timeFormat.length == 2;
+
                 this.date = LocalDate.parse(timeFormat[0]);
                 int hoursMins = Integer.parseInt(timeFormat[1]);
                 if (hoursMins <2400 && hoursMins > 0 && hoursMins%100 <60) {

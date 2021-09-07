@@ -39,6 +39,9 @@ public class TaskList {
 
         while (look.hasNext()){
             String[] formattedTask = look.next().split(" ", 3);
+
+            assert formattedTask.length == 3;
+
             boolean isDone = (formattedTask[1].equals("T"));
             Task pastTask = Task.empty();
             switch (formattedTask[0]) {

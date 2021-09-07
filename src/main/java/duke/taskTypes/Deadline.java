@@ -31,6 +31,8 @@ public class Deadline extends Task{
             throw new EmptyTimeException("\nInvalid timestamp format");
         }
 
+        assert (results.size() > 1);
+
         key = results.get(0);
         if (key.equals("")){
             throw new EmptyDescriptionException("\nMissing description");

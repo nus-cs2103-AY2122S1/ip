@@ -29,6 +29,7 @@ public class Event extends Task{
         } else if (results.size() == 1) {
             throw new EmptyTimeException("\nInvalid timestamp format");
         }
+        assert (results.size() > 1);
         String key = results.get(0);
         if (key.equals("")) {
             throw new EmptyDescriptionException("\nMissing description");
