@@ -82,6 +82,7 @@ public class Storage {
             System.out.println(currTask.toString());
             result += "\n";
         }
+        assert counter > 0 : "Counter should be larger than 0";
         return result;
 
     }

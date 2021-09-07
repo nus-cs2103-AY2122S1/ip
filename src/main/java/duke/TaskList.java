@@ -29,6 +29,7 @@ public class TaskList {
 
         System.out.println("Here are the tasks in your list:");
         System.out.println(counter);
+        assert counter > 0 : "Counter should be larger than 0";
         for (int i = 0; i < tasks.size(); i++) {
             Task currTask = tasks.get(i);
             result += String.format("%d. %s", i + 1, currTask.toString());
