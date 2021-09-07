@@ -19,6 +19,8 @@ public abstract class Task {
         return this;
     }
 
+    public abstract Task snoozeTask();
+
     public void setType(char type) {
         this.type = type;
     }

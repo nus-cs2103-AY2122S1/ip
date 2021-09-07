@@ -19,6 +19,8 @@ public class Parser {
         switch (keyword) {
         case "list":
             return new Command.ListCommand();
+        case "snooze":
+            return new Command.SnoozeCommand(stringCommand);
         case "clear":
             return new Command.ClearCommand();
         case "find":

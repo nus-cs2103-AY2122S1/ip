@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 
 import duke.exceptions.WrongInputException;
 
@@ -12,6 +13,7 @@ import duke.exceptions.WrongInputException;
 
 public class Event extends Task {
     protected String at;
+    protected String oldAt;
 
     /**
      * Constructor for Event
@@ -21,6 +23,7 @@ public class Event extends Task {
     public Event(String name, String at) {
         super(name.trim());
         this.at = at;
+        this.oldAt = at;
     }
 
     /**
@@ -56,13 +59,26 @@ public class Event extends Task {
             DateTimeFormatter resultDateFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
             DateTimeFormatter resultTimeFormat = DateTimeFormatter.ofPattern("HH.mm a");
 
-            output = " " + LocalDate.parse(date, dateFormat).format(resultDateFormat).toString()
-                    + ", " + LocalTime.parse(time, timeFormat).format(resultTimeFormat).toString();
+            output = " " + LocalDate.parse(date, dateFormat).format(resultDateFormat).toString() + ", "
+                    + LocalTime.parse(time, timeFormat).format(resultTimeFormat).toString();
+
             return output;
         } catch (DateTimeParseException e) {
             throw new WrongInputException("You must enter Date and Time in this format: dd/MM/yyyy HHmm");
         }
     }
+
+    @Override
+    public Task snoozeTask() {
+        String[] list = this.at.split(", ");
+        String date = list[0].trim();
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        LocalDate newDate = LocalDate.parse(date, dateFormat).plus(1, ChronoUnit.WEEKS);
+        this.at = " " + newDate.toString() + ", " + list[1];
+
+        return this;
+    }
+
 
     @Override
     public String toString() {

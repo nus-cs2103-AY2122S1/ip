@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.exceptions.WrongInputException;
+
 public class Todo extends Task {
     public Todo(String input) {
         super(input.trim());
@@ -12,5 +14,10 @@ public class Todo extends Task {
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    @Override
+    public Task snoozeTask() {
+        return this;
     }
 }

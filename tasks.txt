@@ -1,8 +1,1 @@
-[E][X] Cycling (at: 02 Aug 2021, 18.00 pm)
-[E][ ] Cycling (at: 02 Aug 2021, 18.00 pm)
-[E][ ] homework (at:) (at:)
-[E][X] dance (at: 02 Aug 2012, 14.00 pm)
-[D][ ] homework (by:) (by:)
-[D][ ] project (by: 03 Sep 1940, 12.00 pm)
-[T][ ] chicken
-[T][ ] duck
+[D][ ] homework (by: 13 Mar 2019, 18.00 PM)

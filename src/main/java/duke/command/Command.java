@@ -30,6 +30,38 @@ public abstract class Command {
      */
     public abstract void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException;
 
+    public static class SnoozeCommand extends Command {
+        private final String input;
+
+        public SnoozeCommand(String input) {
+            this.input = input;
+        }
+        /**
+         * Postpone the task by 1 week.
+         *
+         * @param tasklist Takes in a tasklist to update the list of tasks
+         * @param ui Takes in an instance of the ui class to show details to the user
+         * @param storage Takes in an instance of the storage to update and renew the txt files.
+         */
+        @Override
+        public void execute(TaskList tasklist, Ui ui, Storage storage)
+                throws NoDescriptionException, WrongInputException, IndexNotInListException {
+            if (input.trim().toLowerCase().equals("done")) {
+                String message = "You say snooze but neh tell me snooze which one?!";
+                throw new NoDescriptionException(message);
+            } else {
+                try {
+                    int index = Integer.parseInt(input.split(" ")[1].trim());
+                    Task task = tasklist.snooze(index - 1);
+                    ui.showTaskSnoozed(task);
+                    storage.updateTxtFile(tasklist);
+                } catch (NumberFormatException e) {
+                    throw new WrongInputException("Not a valid number leh!");
+                }
+            }
+        }
+    }
+
     public static class ListCommand extends Command {
 
         @Override

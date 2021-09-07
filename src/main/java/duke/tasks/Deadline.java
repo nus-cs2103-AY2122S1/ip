@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 
 import duke.exceptions.WrongInputException;
 
@@ -44,11 +45,24 @@ public class Deadline extends Task {
 
             output = " " + LocalDate.parse(date, dateFormat).format(resultDateFormat).toString() + ", "
                     + LocalTime.parse(time, timeFormat).format(resultTimeFormat).toString();
+
             return output;
         } catch (DateTimeParseException e) {
             throw new WrongInputException("You must enter Date and Time in this format: dd/MM/yyyy HHmm");
         }
     }
+
+    @Override
+    public Task snoozeTask() {
+        String[] list = this.by.split(", ");
+        String date = list[0].trim();
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        String newDate = LocalDate.parse(date, dateFormat).plus(1, ChronoUnit.WEEKS).format(dateFormat);
+        this.by = " " + newDate + ", " + list[1];
+
+        return this;
+    }
+
 
     @Override
     public String toString() {

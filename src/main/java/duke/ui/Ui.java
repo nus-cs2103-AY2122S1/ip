@@ -82,6 +82,11 @@ public class Ui {
         formatMessages(msg);
     }
 
+    public void showTaskSnoozed(Task task) {
+        String msg = "Uncle help you extend one week liao. Don't forget to do it ah!\n" + "      " + task.toString();
+        formatMessages(msg);
+    }
+
     public void showSearches(ArrayList<Task> searches) {
 
         StringBuilder output = new StringBuilder("Ah boy, here is the list you wanted.\n      ");

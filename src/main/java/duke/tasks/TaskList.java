@@ -95,4 +95,17 @@ public class TaskList {
     public int getSize() {
         return taskList.size();
     }
+
+    /**
+     * Snooze the task by 1 week.
+     * @param index the index of the task the user is referring to.
+     * @return the task that has been in snoozed
+     * @throws IndexNotInListException when the index passed in is less than 0 or greater than size of list.
+     */
+    public Task snooze(int index) throws IndexNotInListException {
+        if (index < 0 || index >= taskList.size()) {
+            throw new IndexNotInListException("Haiyo, you sure there is a task " + index + " anot...");
+        }
+        return taskList.get(index).snoozeTask();
+    }
 }
