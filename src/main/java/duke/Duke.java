@@ -14,7 +14,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class Duke extends Application {
-    // TODO -> refactor out gui related stuff
     private static final String DATA_FILE_PATH = "./data/duke.txt";
     private Storage storage;
     private TaskList taskList;
@@ -70,7 +69,6 @@ public class Duke extends Application {
         }
         while (!isExited);
 
-
     }
 
     /**
@@ -88,18 +86,15 @@ public class Duke extends Application {
             System.out.println(e.toString());
             response = e.getMessage();
         }
-
         return response;
     }
 
     @Override
     public void start(Stage stage) {
-
         Gui gui = new Gui();
         gui.setup(stage);
         EventHandler<? super MouseEvent> mouseEventHandler;
         EventHandler<ActionEvent> buttonEventHandler;
-
         mouseEventHandler = e -> {
             String input = gui.getUserInput();
             gui.generateDialogBoxes(getResponse(input));
@@ -114,8 +109,7 @@ public class Duke extends Application {
                 gui.exit();
             }
         };
-
-        gui.setHandleUserInput(mouseEventHandler, buttonEventHandler);
+        gui.setUserInputHandler(mouseEventHandler, buttonEventHandler);
     }
 
     /**

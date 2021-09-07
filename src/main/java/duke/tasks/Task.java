@@ -1,5 +1,6 @@
 package duke.tasks;
 
+import java.util.Arrays;
 import java.util.HashSet;
 
 /** Abstract class representing a task */
@@ -8,6 +9,11 @@ public abstract class Task {
     private boolean done = false;
     private String taskDetails;
 
+    /**
+     * Task constructor.
+     *
+     * @param taskDetails String describing the task.
+     */
     public Task(String taskDetails) {
         this.taskDetails = taskDetails;
     }
@@ -27,20 +33,21 @@ public abstract class Task {
     }
 
     /**
-     * Returns a string representation of data stored in this task.
+     * Returns true if the task matches all keywords, and false otherwise.
      *
-     * @return String containing the task's data, which will be used for saving to disk.
+     * @return boolean indicating whether the task contains all the keywords.
      */
     public boolean containsKeywords(HashSet<String> keywords) {
-        String[] words = this.taskDetails.split(" ");
-        for (String word : words) {
-            if (keywords.contains(word)) {
-                return true;
-            }
-        }
-        return false;
+        HashSet<String> words = new HashSet<>(Arrays.asList(this.taskDetails.split(" ")));
+        words.retainAll(keywords);
+        return words.equals(keywords);
     }
 
+    /**
+     * Returns a String which is used to save data to disk.
+     *
+     * @return String representation of how data will be saved to disk.
+     */
     public String toDataString() {
         return String.format("%d | %s", done ? 1 : 0, taskDetails);
     }
