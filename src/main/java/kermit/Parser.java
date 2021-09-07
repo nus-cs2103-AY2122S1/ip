@@ -1,11 +1,13 @@
 package kermit;
 
+import java.util.Arrays;
+
 import kermit.command.AddTaskCommand;
 import kermit.command.Command;
 import kermit.command.CompleteTaskCommand;
 import kermit.command.DeleteTaskCommand;
 import kermit.command.ExitCommand;
-import kermit.command.FindCommand;
+import kermit.command.FindKeywordCommand;
 import kermit.command.ListTasksCommand;
 
 /**
@@ -15,59 +17,33 @@ public class Parser {
     private static final String invalidCommandText = "I'm sorry, but I don't know what that means :-(";
 
     /**
-     * Parses user commands for Kermit and determine next action.
+     * Constructs a sentence after omitting the first word.
+     * The first word is usually the command or the flag
      *
-     * @param fullCommand user input to be parsed.
-     * @return Command that is executable based on user input.
-     * @throws KermitException if invalid command is provided.
+     * @param wordArr Words used to construct sentence
+     * @return Sentence after omitting first word
      */
-    public static Command parse(String fullCommand) throws KermitException {
-        String command = "";
-        String flag;
-        String word;
-
-        StringBuilder argumentBuilder = new StringBuilder();
-        StringBuilder flagBuilder = new StringBuilder();
-
-        // kermit.command.Task description and flag should be separated by some /kermit.command
-        String[] userInput = fullCommand.split("/");
-        String commandString = userInput[0];
-        String flagString = userInput.length > 1 ? userInput[1] : "";
-
-        String[] commandArr = commandString.split(" ");
-        String[] flagArr = flagString.split(" ");
-
-        // first item is kermit.command
-        command = commandArr[0];
-        flag = flagArr[0];
-
-        String argument = "";
-        String dateString = "";
-
-        // Clear contents of string builders
-        argumentBuilder.setLength(0);
-        flagBuilder.setLength(0);
-
-        // Get description of task and error check
-        for (int i = 1; i < commandArr.length; i++) {
-            word = commandArr[i];
-            if (i != 1) {
-                argumentBuilder.append(" ");
-            }
-            argumentBuilder.append(word);
+    private static String constructCommandArguments(String[] wordArr) {
+        // Handle empty commands or
+        // skip over command/ flag
+        if (wordArr.length < 2) {
+            return "";
         }
-        argument = argumentBuilder.toString();
+        String[] wordArrWithoutCommand = Arrays.copyOfRange(wordArr, 1, wordArr.length);
+        return String.join(" ", wordArrWithoutCommand);
+    }
 
-        // Get the flags provided for task and error check
-        for (int i = 1; i < flagArr.length; i++) {
-            word = flagArr[i];
-            if (i != 1) {
-                flagBuilder.append(" ");
-            }
-            flagBuilder.append(word);
-        }
-        dateString = flagBuilder.toString();
-
+    /**
+     * Creates kermit command using command word provided by the user.
+     * Command is created using the argument and dateString provided.
+     *
+     * @param command Type of command invoked
+     * @param argument argument for command
+     * @param dateString date for the command
+     * @return Command that can be executed
+     * @throws KermitException if invalid arguments are provided to the command or invalid command provided
+     */
+    private static Command createCommand(String command, String argument, String dateString) throws KermitException {
         switch (command) {
         case "bye":
             return new ExitCommand();
@@ -78,16 +54,45 @@ public class Parser {
         case "delete":
             return new DeleteTaskCommand(argument);
         case "todo":
-            AddTaskCommand todo = new AddTaskCommand("todo", argument, dateString);
-            return todo;
+            return new AddTaskCommand("todo", argument, dateString);
         case "event":
             return new AddTaskCommand("event", argument, dateString);
         case "deadline":
             return new AddTaskCommand("deadline", argument, dateString);
         case "find":
-            return new FindCommand(argument);
+            return new FindKeywordCommand(argument);
         default:
             throw new KermitException(invalidCommandText);
         }
+    }
+    /**
+     * Parses user commands for Kermit and determine next action.
+     *
+     * @param fullCommand user input to be parsed.
+     * @return Command that is executable based on user input.
+     * @throws KermitException if invalid command is provided.
+     */
+    public static Command parse(String fullCommand) throws KermitException {
+        String command;
+
+        // Task description and flag should be separated by some /flag
+        // flags are in the form /flag, they are used to specify the deadline
+        // of tasks or when events will happen i.e /by or /at
+        String[] userInput = fullCommand.split("/");
+
+        // Get description of task
+        String commandString = userInput[0];
+        String[] commandArr = commandString.split(" ");
+        command = commandArr[0];
+        String argument = constructCommandArguments(commandArr);
+
+        // Get flag for task
+        // Flag denoted by a / is not found in the string, set flagString to blank
+        // to let command class error handle
+        String flagString = userInput.length > 1 ? userInput[1] : "";
+        String[] flagArr = flagString.split(" ");
+        String dateString = constructCommandArguments(flagArr);
+
+        return createCommand(command, argument, dateString);
     }
 }
