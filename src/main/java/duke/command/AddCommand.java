@@ -25,6 +25,7 @@ public class AddCommand extends Command {
     public AddCommand(TaskList dukeList, Data data, String taskCategory) {
         this.dukeList = dukeList;
         this.data = data;
+        assert taskCategory.matches("todo|event|deadline");
         this.taskCategory = taskCategory;
     }
 
