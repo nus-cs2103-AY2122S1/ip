@@ -142,6 +142,29 @@ public class TaskList {
         return result;
     }
 
+    public Task updateDate(int taskNo, String date) throws DukeException {
+        try {
+            Task task = tasks.get(taskNo);
+            return task.setDate(date);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(String.format("Enter a valid number between 1 - %d", tasks.size()));
+        }
+    }
+
+    public Task updateTitle(int taskNo, String title) throws DukeException {
+        try {
+            Task task = tasks.get(taskNo);
+            return task.setTitle(title);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(String.format("Enter a valid number between 1 - %d", tasks.size()));
+        }
+    }
+
+    public Task updateDateTitle(int taskNo, String title, String date) {
+        Task updatedDateTask = updateDate(taskNo, date);
+        return updatedDateTask.setTitle(title);
+    }
+
     /**
      * {@inheritDoc}
      */
