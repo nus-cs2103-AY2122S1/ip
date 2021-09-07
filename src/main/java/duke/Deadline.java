@@ -21,7 +21,7 @@ public class Deadline extends Task {
      */
     public Deadline(String[] desc) {
 
-        super(desc[1], Boolean.parseBoolean(desc[3]));
+        super(desc[1], Boolean.parseBoolean(desc[3]), new Place(desc[4]));
         this.date = LocalDate.parse(desc[2]);
 
     }
@@ -33,7 +33,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toWrite() {
-        return "deadline--" + this.isDone + "--" + this.desc + "--" + this.date.toString() + "\n";
+        return "deadline--" + this.isDone + "--" + this.desc + "--"
+                + this.date.toString() + "--" + this.location.toWrite();
     }
 
     /**
@@ -44,6 +45,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String dateString = this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
-        return "[D]" + super.toString() + " (by: " + dateString + ")\n";
+        String location = this.location.toString() == "" ? "" : " at " + this.location.toString();
+        return "[D]" + super.toString() + " (by: " + dateString + location + ")\n";
     }
 }

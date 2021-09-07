@@ -21,7 +21,7 @@ public class Event extends Task {
      */
     public Event(String[] desc) {
 
-        super(desc[1], Boolean.parseBoolean(desc[3]));
+        super(desc[1], Boolean.parseBoolean(desc[3]), new Place(desc[4]));
         this.date = LocalDate.parse(desc[2]);
 
     }
@@ -33,7 +33,8 @@ public class Event extends Task {
      */
     @Override
     public String toWrite() {
-        return "event--" + this.isDone + "--" + this.desc + "--" + this.date.toString() + "\n";
+        return "event--" + this.isDone + "--" + this.desc + "--"
+                + this.date.toString() + "--" + this.location.toWrite();
     }
 
     /**
@@ -44,6 +45,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         String dateString = this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
-        return "[E]" + super.toString() + " (at: " + dateString + ")\n";
+        String location = this.location.toString() == "" ? "" : " " + this.location.toString();
+        return "[E]" + super.toString() + " (at: " + dateString + location + ")\n";
     }
 }
