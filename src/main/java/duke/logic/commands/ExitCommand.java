@@ -23,7 +23,11 @@ public class ExitCommand extends Command {
      * @return true if the input matches the exit command, false otherwise.
      */
     public static boolean isExit(String userInput) {
-        return "bye".equals(userInput);
+        CommandCode cc = CommandCode.getCommandCode(userInput);
+        if (cc == null) {
+            return false;
+        } else {
+            return cc.equals(CommandCode.BYE);
+        }
     }
-
 }

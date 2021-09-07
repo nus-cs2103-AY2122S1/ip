@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import duke.logic.commands.Command;
+import duke.logic.commands.CommandCode;
 import duke.logic.commands.DeadlineCommand;
 import duke.logic.commands.DeleteCommand;
 import duke.logic.commands.DoneCommand;
@@ -57,25 +58,29 @@ public class Parser {
      * @return The command based on the user input.
      */
     private Command parseTokens(String[] tokens) {
-        switch (tokens[0]) {
-        case "bye":
+        CommandCode commandCode = CommandCode.getCommandCode(tokens[0]);
+        if (commandCode == null) {
+            return new InvalidCommand(GENERAL_ERR_MSG);
+        }
+        switch (commandCode) {
+        case BYE:
             return handleBye(tokens);
-        case "list":
+        case LIST:
             return handleList(tokens);
-        case "done":
+        case DONE:
             return handleDone(tokens);
-        case "delete":
+        case DELETE:
             return handleDelete(tokens);
-        case "todo":
+        case TODO:
             return handleToDo(tokens);
-        case "deadline":
+        case DEADLINE:
             return handleDeadline(tokens);
-        case "event":
+        case EVENT:
             return handleEvent(tokens);
-        case "find":
+        case FIND:
             return handleFind(tokens);
         default:
-            return new InvalidCommand("Unknown command!");
+            throw new AssertionError();
         }
     }
 
