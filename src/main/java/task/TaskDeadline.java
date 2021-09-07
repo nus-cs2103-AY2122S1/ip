@@ -4,14 +4,14 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 /**
- * Deadline task event
+ * Deadline task event.
  */
 public class TaskDeadline extends Task {
     private final LocalDate by;
     private final String time;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param description Description of task
      * @param date Date of task
@@ -26,9 +26,9 @@ public class TaskDeadline extends Task {
                 .orElse("");
     }
     /**
-     * String representation of Deadline
+     * String representation of Deadline.
      *
-     * @return deadline display
+     * @return Deadline display
      */
     @Override
     public String toString() {
@@ -41,7 +41,7 @@ public class TaskDeadline extends Task {
     }
 
     /**
-     * The string representation of Task to be used for saving
+     * The string representation of Task to be used for saving.
      *
      * @return Save string
      */
@@ -55,7 +55,7 @@ public class TaskDeadline extends Task {
     }
 
     /**
-     * Checks if the task falls on a given date (if applicable)
+     * Checks if the task falls on a given date (if applicable).
      *
      * @param date Date to check
      * @return Whether task is tagged to the passed date

@@ -2,15 +2,17 @@ package task;
 
 import java.time.LocalDate;
 
+import duke.ui.Ui;
+
 /**
- * Task abstract class
+ * Task abstract class.
  */
 public abstract class Task {
     protected final String description;
     protected boolean isDone;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param input Description of task
      * @param isDone Whether the task is complete
@@ -21,17 +23,20 @@ public abstract class Task {
     }
 
     /**
-     * Toggles completion of Task
+     * Toggles completion of Task.
      *
      * @return New status of Task
      */
-    public boolean toggleDone() {
+    public String toggleDone() {
         isDone = !isDone;
-        return isDone;
+        return (isDone
+                ? "sugoi! Duke-san marked this task as done!"
+                : "Duke-san marked this task as not done!")
+                + '\n' + Ui.OUTPUT_SPACES + this;
     }
 
     /**
-     * Obtain the description of the task
+     * Obtain the description of the task.
      *
      * @return Task Description
      */
@@ -40,7 +45,7 @@ public abstract class Task {
     }
 
     /**
-     * String representation of Task
+     * String representation of Task.
      *
      * @return Task display
      */
@@ -53,14 +58,14 @@ public abstract class Task {
     }
 
     /**
-     * The string representation of Task to be used for saving
+     * The string representation of Task to be used for saving.
      *
      * @return Save string
      */
     public abstract String saveString();
 
     /**
-     * Checks if the task falls on a given date (if applicable)
+     * Checks if the task falls on a given date (if applicable).
      *
      * @param date Date to check
      * @return Whether task is tagged to the passed date

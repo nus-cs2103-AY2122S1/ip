@@ -3,16 +3,16 @@ package duke.command;
 import task.TaskList;
 
 /**
- * Command to delete a task
+ * Command to delete a task.
  */
 public class CommandDelete extends Command {
     private final TaskList taskList;
     private final int index;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param taskList Task list
+     * @param taskList Task list to delete from
      * @param index Index to delete
      */
     public CommandDelete(TaskList taskList, int index) {
@@ -27,7 +27,7 @@ public class CommandDelete extends Command {
     }
 
     /**
-     * Deletes the task at the index in the task list
+     * Deletes the task at the index in the task list.
      */
     @Override
     public String execute() {

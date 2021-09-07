@@ -4,14 +4,14 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 /**
- * Event task event
+ * Event task event.
  */
 public class TaskEvent extends Task {
     private final LocalDate at;
     private final String time;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param description Description of task
      * @param date Date of Event
@@ -27,9 +27,9 @@ public class TaskEvent extends Task {
     }
 
     /**
-     * String representation of Event
+     * String representation of Event.
      *
-     * @return event display
+     * @return Event display
      */
     @Override
     public String toString() {
@@ -42,7 +42,7 @@ public class TaskEvent extends Task {
     }
 
     /**
-     * The string representation of Task to be used for saving
+     * The string representation of Task to be used for saving.
      *
      * @return Save string
      */
@@ -56,7 +56,7 @@ public class TaskEvent extends Task {
     }
 
     /**
-     * Checks if the task falls on a given date (if applicable)
+     * Checks if the task falls on a given date (if applicable).
      *
      * @param date Date to check
      * @return Whether task is tagged to the passed date

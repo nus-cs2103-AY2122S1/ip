@@ -1,14 +1,14 @@
 package duke.command;
 
 /**
- * Invalid command
+ * Invalid command.
  */
 public class CommandInvalid extends Command {
 
     private final String input;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param input Input that caused the error to occur
      */
@@ -20,7 +20,7 @@ public class CommandInvalid extends Command {
     }
 
     /**
-     * Displays error message
+     * Displays error message.
      */
     @Override
     public String execute() {
