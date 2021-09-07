@@ -49,6 +49,7 @@ public class TaskList {
                 directory.mkdir();
             }
             if (!data.exists()) {
+                assert directory.exists() : "Directory does not exist";
                 data.createNewFile();
             }
         } catch (IOException e) {
@@ -128,7 +129,6 @@ public class TaskList {
             }
             toPrint += ("\n" + (i + 1) + ": " + xs.get(i));
         }
-        System.out.println(toPrint);
         return toPrint;
     }
 

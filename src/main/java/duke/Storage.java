@@ -44,23 +44,24 @@ public class Storage {
         BufferedWriter bw = new BufferedWriter(fw);
         while (sc.hasNextLine()) {
             String nextLine = sc.nextLine();
-            if (!nextLine.equals("")) {
-                String[] parts = nextLine.split("\\|", 10);
-                if (parts[2].equals(description) && parts[0].equals(cl) && !changed) {
-                    if (!(count == 0)) {
-                        bw.newLine();
-                    }
-                    bw.write(parts[0] + "|1|" + parts[2] + "|" + parts[3]);
-                    count++;
-                    changed = true;
-                    continue;
-                }
+            if (nextLine.equals("")) {
+                continue;
+            }
+            String[] parts = nextLine.split("\\|", 10);
+            if (parts[2].equals(description) && parts[0].equals(cl) && !changed) {
                 if (!(count == 0)) {
                     bw.newLine();
                 }
-                bw.write(nextLine);
+                bw.write(parts[0] + "|1|" + parts[2] + "|" + parts[3]);
                 count++;
+                changed = true;
+                continue;
             }
+            if (!(count == 0)) {
+                bw.newLine();
+            }
+            bw.write(nextLine);
+            count++;
         }
         bw.flush();
         bw.close();
@@ -93,7 +94,9 @@ public class Storage {
             if (taskToChange instanceof Event) {
                 cl = "E";
             }
+            assert !cl.equals("X") : "Class not correct";
             file = doneChanger(description, cl, file);
+            assert file.getPath().equals("data/duke.txt") : "File is in data/duke.txt";
             fw = new FileWriter(file, true);
             bw = new BufferedWriter(fw);
         } catch (IOException e) {
@@ -163,6 +166,7 @@ public class Storage {
             if (toDelete instanceof Event) {
                 cl = "E";
             }
+            assert !cl.equals("X") : "Class given is wrong";
             file = deleteLine(description, cl, file);
             fw = new FileWriter(file, true);
             bw = new BufferedWriter(fw);
