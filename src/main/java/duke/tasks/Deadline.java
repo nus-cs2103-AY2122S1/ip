@@ -32,16 +32,6 @@ public class Deadline extends Task {
     }
 
     /**
-     * Gets the task type of an instance.
-     *
-     * @return D meaning Deadline.
-     */
-    @Override
-    public String getTaskType() {
-        return this.taskType;
-    }
-
-    /**
      * Marks Deadline as done, overrides the method in Task class.
      */
     @Override

@@ -24,16 +24,6 @@ public class Event extends Task {
     }
 
     /**
-     * Gets the task type of an event instance.
-     *
-     * @return E meaning event.
-     */
-    @Override
-    public String getTaskType() {
-        return this.taskType;
-    }
-
-    /**
      * Marks the event as done.
      */
     @Override
