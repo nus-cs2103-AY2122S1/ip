@@ -4,7 +4,7 @@ package duke;
 /**
  * A subclass of Task that can be stored inside the tasklist
  */
-public class DeadlineTask extends Task{
+public class DeadlineTask extends Task {
     protected String description;
     protected boolean isDone;
     protected String type;

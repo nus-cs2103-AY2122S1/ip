@@ -102,7 +102,7 @@ public class TaskList {
 
     /**
      * Delets a task from the tasklist
-     * @param i
+     * @param i number of task to delete
      */
     public String deleteTask(int i) {
         if (tasks.isEmpty()) {

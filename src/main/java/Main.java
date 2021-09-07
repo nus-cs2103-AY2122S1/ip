@@ -119,11 +119,11 @@ public class Main extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         sendButton.setOnMouseClicked((event) -> {
-                handleUserInput();
+            handleUserInput();
         });
 
         userInput.setOnAction((event) -> {
-                handleUserInput();
+            handleUserInput();
         });
     }
 }

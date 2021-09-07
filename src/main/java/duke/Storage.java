@@ -12,7 +12,7 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    public Storage (String filePath) {
+    public Storage(String filePath) {
     }
 
     /**
@@ -54,7 +54,6 @@ public class Storage {
             System.out.println("Tasklist not found. Creating new tasklist");
         }
         return storedList;
-
     }
 
     /**
@@ -75,7 +74,7 @@ public class Storage {
         try {
             FileWriter listEditor = new FileWriter("./data/duke.txt");
             for (Task item: taskList.tasks) {
-                if(item != null) {
+                if (item != null) {
                     listEditor.write(item.toString());
                     listEditor.write("\n");
                 }

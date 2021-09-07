@@ -3,7 +3,7 @@ package duke;
 /**
  * A subclass of Task that can be stored inside the tasklist
  */
-public class EventTask extends Task{
+public class EventTask extends Task {
     protected String description;
     protected boolean isDone;
     protected String type;

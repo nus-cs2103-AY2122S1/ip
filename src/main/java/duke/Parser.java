@@ -47,7 +47,7 @@ public class Parser {
                 return Parser.eventOutput(in, tasklist);
             } else if (in.substring(0, 8).equals("deadline")) {
                 return Parser.deadlineOutput(in, tasklist);
-            } else if (in.substring(0,4).equals("find")) {
+            } else if (in.substring(0, 4).equals("find")) {
                 return Parser.findOutput(in, tasklist);
             } else {
                 return Parser.invalidInputResponse();
