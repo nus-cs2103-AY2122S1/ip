@@ -29,6 +29,9 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+
+            scene.getRoot().setStyle("-fx-font-family: 'Courier New'");
+
             fxmlLoader.<MainWindow>getController().setDuke(currDuke);
             stage.show();
             Duke.dukeStarter(currDuke);
