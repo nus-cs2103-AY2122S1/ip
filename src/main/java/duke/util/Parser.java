@@ -34,12 +34,12 @@ public class Parser {
      *
      * @param input a full command
      */
-    public String parse(String input) {
+    public void parse(String input) {
         String lowerCase = input.toLowerCase();
         if (lowerCase.equals("bye")) {
-            return ui.showGoodBye();
+            return;
         } else if (lowerCase.equals("list")) {
-            return listCommand();
+            listCommand();
         } else if (lowerCase.startsWith("deadline")) {
             int indexOfTime = input.indexOf("/by");
             if (indexOfTime == -1) {
@@ -50,7 +50,7 @@ public class Parser {
             Task deadline = new Deadline(item, by);
             taskList.add(deadline);
             storage.add(deadline);
-            return ui.showNewTask(deadline);
+            ui.showNewTask(deadline);
         } else if (lowerCase.startsWith("event")) {
             int indexOfTime = input.indexOf("/at");
             if (indexOfTime == -1) {
@@ -61,14 +61,14 @@ public class Parser {
             Task event = new Event(item, at);
             taskList.add(event);
             storage.add(event);
-            return ui.showNewTask(event);
+            ui.showNewTask(event);
         } else if (lowerCase.startsWith("todo")) {
             try {
                 String item = input.substring(5);
                 Task todo = new Todo(item);
                 taskList.add(todo);
                 storage.add(todo);
-                return ui.showNewTask(todo);
+                ui.showNewTask(todo);
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("OOPS!!! The description of a event cannot be empty.");
             }
@@ -79,7 +79,8 @@ public class Parser {
                     int item = Integer.parseInt(input.substring(5, 6));
                     taskList.done(item - 1);
                     storage.done(item - 1);
-                    return ui.showDone(taskList.get(item - 1));
+                    ui.showDone(taskList.get(item - 1));
+                    return;
                 }
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("OOPS!!! The target of finished duke.task cannot be empty.");
@@ -92,7 +93,8 @@ public class Parser {
                     Task task = taskList.get(item - 1);
                     taskList.delete(item - 1);
                     storage.delete(item - 1);
-                    return ui.showDelete(task, taskList.length());
+                    ui.showDelete(task, taskList.length());
+                    return;
                 }
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("OOPS!!! The target of deleting duke.task cannot be empty.");
@@ -100,28 +102,27 @@ public class Parser {
         } else if (lowerCase.startsWith("find")) {
             try {
                 String keyword = lowerCase.substring(5).trim();
-                return findKeyword(keyword);
+                findKeyword(keyword);
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("OOPS!!! Keyword cannot be empty.");
             }
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-        return "OOPS!!! There is something wrong here!";
     }
 
     /**
      * Fetches Task item from TaskList and print through Ui
      */
-    public String listCommand() {
+    public void listCommand() {
         String items = "";
         if (taskList.length() > 0) {
-            items = items + "    1. " + taskList.get(0).toString();
+            items = items + "1. " + taskList.get(0).toString();
         }
         for (int i = 2; i <= taskList.length(); i++) {
             items = items + "\n    " + i + ". " + taskList.get(i - 1).toString();
         }
-        return ui.showList(items);
+        ui.showList(items);
     }
 
     /**
@@ -138,13 +139,13 @@ public class Parser {
      * Finds items with keyword given by user.
      * @param keyword
      */
-    public String findKeyword(String keyword) {
+    public void findKeyword(String keyword) {
         ArrayList<Task> results = new ArrayList<>();
         for (int i = 0; i < taskList.length(); i++) {
             if (taskList.get(i).getDescription().toLowerCase().contains(keyword)) {
                 results.add(taskList.get(i));
             }
         }
-        return ui.showFind(results);
+        ui.showFind(results);
     }
 }
