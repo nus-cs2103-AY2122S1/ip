@@ -59,7 +59,7 @@ public class Duke {
             Command c = p.parse(input);
             response = c.execute(taskList, ui, storage);
         } catch (DukeException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             response = ui.showErrorMessage(e.getMessage());
         }
         return response;

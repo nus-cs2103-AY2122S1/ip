@@ -2,33 +2,26 @@ package duke.task;
 
 public class Event extends Task {
     private String taskType = "[E]";
-    private String taskName;
-    private String eventTime;
-    private boolean isDone;
 
     public Event(String taskName, String eventTime) {
-        super(taskName);
-        this.taskName = taskName;
-        this.eventTime = eventTime;
+        super(taskName, eventTime);
     }
 
     public Event(String taskName, String eventTime, boolean isDone) {
-        super(taskName);
-        this.taskName = taskName;
-        this.eventTime = eventTime;
+        super(taskName, eventTime);
         if (isDone) {
             this.markAsDone();
         }
     }
 
     public String getEventTime() {
-        return String.format("(at: %s)", eventTime);
+        return String.format("(at: %s)", this.getDateAndTime());
     }
 
     @Override
     public String toString() {
         String result = taskType + this.getCheckBox()
-                + " " + this.taskName + " "
+                + " " + this.getTaskName() + " "
                 + getEventTime();
         return result;
     }

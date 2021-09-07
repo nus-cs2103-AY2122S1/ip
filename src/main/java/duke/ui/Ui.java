@@ -142,5 +142,11 @@ public class Ui {
     }
 
 
-
+    public String showEditTaskMessage(Task updatedTask) {
+        String successMessage = "Got it. I've updated this task:";
+        String taskString = updatedTask.toString();
+        String result = successMessage + "\n"
+                + "  " + taskString;
+        return result;
+    }
 }

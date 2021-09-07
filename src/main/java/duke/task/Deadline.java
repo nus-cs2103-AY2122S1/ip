@@ -2,33 +2,26 @@ package duke.task;
 
 public class Deadline extends Task {
     private String taskType = "[D]";
-    private String taskName;
-    private String deadline;
-    private boolean isDone;
 
     public Deadline(String taskName, String deadline) {
-        super(taskName);
-        this.taskName = taskName;
-        this.deadline = deadline;
+        super(taskName, deadline);
     }
 
     public Deadline(String taskName, String deadline, boolean isDone) {
-        super(taskName);
-        this.taskName = taskName;
-        this.deadline = deadline;
+        super(taskName, deadline);
         if (isDone) {
             this.markAsDone();
         }
     }
 
     public String getDeadline() {
-        return String.format("(by: %s)", deadline);
+        return String.format("(by: %s)", this.getDateAndTime());
     }
 
     @Override
     public String toString() {
         String result = taskType + this.getCheckBox()
-                + " " + this.taskName + " "
+                + " " + this.getTaskName() + " "
                 + getDeadline();
         return result;
     }

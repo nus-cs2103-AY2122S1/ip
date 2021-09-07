@@ -5,6 +5,8 @@ public class Message {
     public static final String MESSAGE_INVALID_COMMAND = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     public static final String MESSAGE_INVALID_TASK_NUMBER = "☹ OOPS!!! Please key in a valid task number within the task list.";
     public static final String MESSAGE_INVALID_FIND = "☹ OOPS!!! Please key in a search term.";
+    public static final String MESSAGE_INVALID_EDIT_TYPE = "☹ OOPS!!! Please update only the task name or task date,"
+            + " with n/[updated task name] or d/[updated date and/or time]";
 
     public static final String MESSAGE_MISSING_DEADLINE = "☹ OOPS!!! Please key in a deadline with by/[date and/or time]"
             + " in the format dd/mm/yyyy hh:mm,"
@@ -32,5 +34,9 @@ public class Message {
             + "in the format deadline n/[task name] by/[date and/or time].";
     public static final String MESSAGE_EMPTY_EVENT = "☹ OOPS!!! Please key in the relevant details for a event task,"
             + "in the format event n/[task name] at/[date and/or time].";
+    public static final String MESSAGE_EMPTY_EDIT = "☹ OOPS!!! Please choose the task to be updated,"
+            + " specifying the updated field"
+            + " in the format edit [task number] n/[new task name] OR d/[new date and/or time]."; //todo
+
 }
 
