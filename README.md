@@ -15,8 +15,7 @@ Duke is:
 2. Run it
 3. Add your tasks
    - Don't worry, Duke will assist you with inputs!
-      - an example: 
-      - Please input in the form: 'delete <index>'.
+   - e.g. Please input in the form: 'delete <index>'.
    ```
    Hello from
     ____        _        
