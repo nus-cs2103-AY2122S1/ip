@@ -45,9 +45,9 @@ public class ExitCommand extends Command {
      * @param storage Storage to save and load TaskList of Duke.
      */
     @Override
-    public String getExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
+    public String formatExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
         storage.saveFile(taskList);
         storage.saveArchive(archiveList);
-        return ui.getExitString();
+        return ui.formatExitString();
     }
 }

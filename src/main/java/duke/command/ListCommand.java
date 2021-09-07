@@ -43,7 +43,7 @@ public class ListCommand extends Command {
      * @param storage Storage to save and load TaskList of Duke.
      */
     @Override
-    public String getExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
-        return ui.getPrintString(taskList);
+    public String formatExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
+        return ui.formatPrintString(taskList);
     }
 }

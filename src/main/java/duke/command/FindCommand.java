@@ -55,8 +55,8 @@ public class FindCommand extends Command {
      * @param storage Storage object which saves and loads the tasklist.
      */
     @Override
-    public String getExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
+    public String formatExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
         TaskList keywordTasks = taskList.findTasksWithKeyword(this.keyword);
-        return ui.getPrintKeywordTasksString(keywordTasks, this.keyword);
+        return ui.formatPrintKeywordTasksString(keywordTasks, this.keyword);
     }
 }
