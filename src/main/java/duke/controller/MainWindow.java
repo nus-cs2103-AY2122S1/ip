@@ -55,14 +55,15 @@ public class MainWindow extends Stage {
     private void handleUserInput() {
         String input = userInput.getText().trim();
         String response = duke.getResponse(input);
+        // If a terminating command has been executed (e.g. ByeCommand)
+        if (duke.isTerminated()) {
+            Platform.exit();
+            System.exit(0);
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-        if (duke.getIsTerminated()) {
-            Platform.exit();
-            System.exit(0);
-        }
     }
 }

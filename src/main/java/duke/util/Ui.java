@@ -1,8 +1,9 @@
 package duke.util;
 
+import duke.task.Task;
+
 /**
- * A class that handles all UI related functionality, such as formatting and printing outputs,
- * as well as reading inputs.
+ * A class that handles the formatting and printing of messages in response to user inputs.
  */
 public class Ui {
     private static final String FORMAT = "%s\n";
@@ -30,6 +31,49 @@ public class Ui {
     public String showMessage(String message) {
         return String.format(FORMAT, message);
     }
+
+    /**
+     * Displays a formatted message. Called when a new task is added.
+     *
+     * @param taskListSize The size of the TaskList object containing the new task.
+     * @param newTask The new task that has been added.
+     * @return A formatted string.
+     */
+    public String showAddTaskMessage(int taskListSize, Task newTask) {
+        String numOfTasksString = String.format("Now you have %d task%s in the list.",
+                taskListSize, taskListSize == 1 ? "" : "s");
+        return showMessage("Got it. The following task has been added: ")
+                + showMessage(newTask.toString())
+                + showMessage(numOfTasksString);
+    }
+
+    /**
+     * Displays a formatted message. Called when a task is deleted.
+     *
+     * @param taskListSize The size of the TaskList object containing the new task.
+     * @param removedTask The task that has been deleted.
+     * @return A formatted string.
+     */
+    public String showDeleteTaskMessage(int taskListSize, Task removedTask) {
+        String numOfTasksString = String.format("Now you have %d task%s in the list.",
+                taskListSize, taskListSize == 1 ? "" : "s");
+        return showMessage("Got it. The following task has been removed:")
+                + showMessage(removedTask.toString())
+                + showMessage(numOfTasksString);
+    }
+
+    /**
+     * Displays a formatted message. Called when a task is marked as done.
+     *
+     * @param taskListSize The size of the TaskList object.
+     * @param doneTask The task that has been marked as done.
+     * @return A formatted string.
+     */
+    public String showDoneTaskMessage(Task doneTask) {
+        return showMessage("Good work! This task is now marked as done:")
+                + showMessage(doneTask.toString());
+    }
+
     /**
      * Returns a formatted error string.
      *

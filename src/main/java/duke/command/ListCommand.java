@@ -19,9 +19,8 @@ public class ListCommand extends Command {
      */
     @Override
     public TaskList execute(TaskList taskList, Ui ui, Storage storage) {
-        String message = "";
-        message += ui.showMessage("Here is your task list:");
-        message += ui.showMessage(taskList.toString());
+        String message = ui.showMessage("Here is your task list:")
+                + ui.showMessage(taskList.toString());
         return new TaskList(taskList, message);
     }
 }

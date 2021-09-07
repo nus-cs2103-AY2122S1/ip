@@ -112,7 +112,8 @@ public class Parser {
     public static String parseTaskNameFromInput(String[] inputs, int startIndex, int endIndex) {
         StringBuilder taskName = new StringBuilder();
         for (int i = startIndex; i < endIndex; i++) {
-            taskName.append(inputs[i]).append(" ");
+            taskName.append(inputs[i])
+                    .append(" ");
         }
         return taskName.toString().trim();
     }

@@ -28,9 +28,9 @@ public class OnDateCommand extends Command {
      */
     @Override
     public TaskList execute(TaskList taskList, Ui ui, Storage storage) {
-        String message = "";
-        message += ui.showMessage("Here are the tasks occurring on this date:");
-        message += ui.showMessage(taskList.getOnDateTasks(input).toString());
+        TaskList onDateTaskList = taskList.getOnDateTasks(input);
+        String message = ui.showMessage("Here are the tasks occurring on this date:")
+                + ui.showMessage(onDateTaskList.toString());
         return new TaskList(taskList, message);
     }
 }

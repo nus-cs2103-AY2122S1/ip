@@ -28,9 +28,9 @@ public class FindCommand extends Command {
      */
     @Override
     public TaskList execute(TaskList taskList, Ui ui, Storage storage) {
-        String message = "";
-        message += ui.showMessage("Here are the matching tasks in your list:");
-        message += ui.showMessage(taskList.findTasks(input).toString());
+        TaskList matchingTaskList = taskList.findTasks(input);
+        String message = ui.showMessage("Here are the matching tasks in your list:")
+                + ui.showMessage(matchingTaskList.toString());
         return new TaskList(taskList, message);
     }
 }
