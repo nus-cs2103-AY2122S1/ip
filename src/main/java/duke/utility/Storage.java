@@ -70,6 +70,7 @@ public class Storage {
                         DateTimeFormatter.ISO_LOCAL_DATE_TIME)));
                 break;
             default: // "D"
+                assert tokens[0].equals("D"): "invalid task type in tasklog";
                 prevTasks.add(Deadline.createTask(taskName, isCompleted, LocalDateTime.parse(tokens[3].trim(),
                         DateTimeFormatter.ISO_LOCAL_DATE_TIME)));
                 break;
@@ -83,6 +84,7 @@ public class Storage {
     }
 
     void append(String type, String isCompleted, String detail) throws IOException {
+        assert isCompleted.equals("T") || isCompleted.equals("F") : "Invalid task completion status";
         FileWriter fw = new FileWriter(this.filePath, true); // append flag true -> append, not overwrite
         fw.write(type + ";" + isCompleted + ";" + detail + "\n");
         fw.close();
