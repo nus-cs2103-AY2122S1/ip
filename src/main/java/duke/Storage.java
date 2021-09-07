@@ -41,6 +41,7 @@ public class Storage {
     public void addTaskToFile(Task task) {
         try {
             FileWriter fileWriter = new FileWriter(filePath, true);
+            assert (!task.getDescription().contains("&&"));
             fileWriter.write(task.getIcon() + "&&" + task.getStatus() + "&&" + task.getDescription()
                     + "&&" + task.getTaskTime() + "\n");
             fileWriter.close();
