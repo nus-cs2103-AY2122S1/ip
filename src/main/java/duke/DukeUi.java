@@ -4,7 +4,7 @@ import java.util.ArrayList;
 /**
  * Represents the DukeUI to interact with the user.
  */
-public class DukeUI {
+public class DukeUi {
 
     public void respondToUser(String response) {
         System.out.println(response);
@@ -17,7 +17,7 @@ public class DukeUI {
     /**
      * Greets user on startup.
      */
-    public String greetUser() {
+    public void greetUser() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -25,7 +25,7 @@ public class DukeUI {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         String firstLine = "Hello from \n" + logo + "\n";
         String secondLine = "What can I do for you?";
-        return firstLine + secondLine;
+        System.out.println(firstLine + secondLine);
     }
 
     /**
