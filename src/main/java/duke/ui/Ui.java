@@ -1,9 +1,9 @@
 package duke.ui;
 
+import java.util.ArrayList;
+
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.ArrayList;
 
 /**
  * Ui class handles all user interactions of Duke.
@@ -78,7 +78,7 @@ public class Ui {
     public void listTaskMessage(TaskList taskList) {
         String msg = "Here are the tasks in your list:\n";
         for (int i = 1; i <= taskList.size(); i++) {
-            msg += INDENTATION + + i + "." + taskList.getTask(i).getStatus() + "\n";
+            msg += INDENTATION + i + "." + taskList.getTask(i).getStatus() + "\n";
         }
         printWithFormat(msg);
     }

@@ -1,14 +1,29 @@
 package duke.parser;
 
-import duke.command.*;
-import duke.exception.*;
-import duke.storage.Storage;
-import duke.task.*;
-import duke.ui.Ui;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.exception.DukeException;
+import duke.exception.InvalidDateTimeException;
+import duke.exception.NoDateTimeException;
+import duke.exception.NoSuchCommandException;
+import duke.exception.NoTaskDescriptionException;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.TaskType;
+import duke.task.ToDo;
+import duke.ui.Ui;
 
 /**
  * Parser takes in all the user input and
@@ -48,8 +63,8 @@ public class Parser {
         String[] splitUserInput = userInput.split(" ");
         String commandType = splitUserInput[0];
         String commandDetails = userInput.substring(userInput.indexOf(" ") + 1);
-        if (!(commandType.equals("list") || commandType.equals("bye")) &&
-                (commandDetails.isBlank() || userInput.indexOf(" ") == -1)) {
+        if (!(commandType.equals("list") || commandType.equals("bye"))
+                && (commandDetails.isBlank() || userInput.indexOf(" ") == -1)) {
             throw new NoTaskDescriptionException(ui);
         }
 
@@ -100,7 +115,7 @@ public class Parser {
         switch (taskType) {
         case DEADLINE:
             try {
-                int byIndex = commandDetails.indexOf("/by") - 1 ;
+                int byIndex = commandDetails.indexOf("/by") - 1;
                 if (byIndex <= 0) {
                     throw new NoDateTimeException(ui);
                 }
@@ -122,7 +137,7 @@ public class Parser {
 
         case EVENT:
             try {
-                int atIndex = commandDetails.indexOf("/at") - 1 ;
+                int atIndex = commandDetails.indexOf("/at") - 1;
                 if (atIndex <= 0) {
                     throw new NoDateTimeException(ui);
                 }
@@ -145,4 +160,4 @@ public class Parser {
             return new ToDo(commandDetails, false);
         }
     }
- }
+}

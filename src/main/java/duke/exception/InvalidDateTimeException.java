@@ -29,7 +29,7 @@ public class InvalidDateTimeException extends DukeException {
      */
     @Override
     public String getMessage() {
-        return super.errorMessage("The format of Data/Time entered is invalid.\n " +
-                "    Do enter the Date/Time in yyyy-MM-dd HH:mm.");
+        return super.errorMessage("The format of Data/Time entered is invalid.\n "
+                + "    Do enter the Date/Time in yyyy-MM-dd HH:mm.");
     }
 }

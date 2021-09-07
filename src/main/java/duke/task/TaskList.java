@@ -1,10 +1,10 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 import duke.exception.NoSuchTaskException;
 import duke.ui.Ui;
-
-import java.util.ArrayList;
-import java.time.LocalDateTime;
 
 /**
  * Encapsulates the representation of a list of task.
@@ -17,6 +17,12 @@ public class TaskList {
 
     private ArrayList<Task> list;
 
+    /**
+     * Constructor for TaskList.
+     */
+    public TaskList() {
+        list = new ArrayList<>();
+    }
     /**
      * Static method converting a task
      * from string form to Task form
@@ -41,13 +47,6 @@ public class TaskList {
         default:
             return new ToDo(taskStr[2], isDone);
         }
-    }
-
-    /**
-     * Constructor for TaskList.
-     */
-    public TaskList() {
-        list = new ArrayList<>();
     }
 
     /**

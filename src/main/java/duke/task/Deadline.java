@@ -45,7 +45,7 @@ public class Deadline extends Task {
      * @return String representation of status of task.
      */
     @Override
-    public String getStatus(){
+    public String getStatus() {
         return "[D]" + super.getStatus() + " " + getDeadlineTime();
     }
 

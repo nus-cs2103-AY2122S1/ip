@@ -1,14 +1,15 @@
-import duke.task.ToDo;
-import duke.task.Event;
-import duke.task.Deadline;
-import duke.task.TaskList;
-import duke.exception.DukeException;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 public class TaskListTest {
 

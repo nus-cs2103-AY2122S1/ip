@@ -10,9 +10,9 @@ package duke.task;
  * @version Duke A-JavaDoc
  */
 public abstract class Task {
+    public final TaskType taskType;
     protected final String description;
     protected boolean isDone;
-    public final TaskType taskType;
 
     /**
      * Constructor for a task.
