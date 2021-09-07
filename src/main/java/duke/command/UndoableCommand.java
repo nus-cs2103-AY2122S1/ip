@@ -1,5 +1,5 @@
 package duke.command;
 
-public interface UndoableCommand {
+interface UndoableCommand {
     void undo();
 }
