@@ -142,9 +142,9 @@ public class Parser {
     private String getName(String s) throws EmptyDescriptionException  {
         if (s.contains(" ")) {
             String[] parts = s.split(" ", 2);
-            assert (parts[0].equals("todo") || parts[0].equals("deadline")
-                    || parts[0].equals("event") || parts[0].equals("find"))
-                    : "Invalid Keyword!";
+            boolean isKeyword = (parts[0].equals("todo") || parts[0].equals("deadline")
+                    || parts[0].equals("event") || parts[0].equals("find"));
+            assert isKeyword : "Invalid Keyword!";
                 if (!parts[1].equals("")) {
                     return parts[1];
                 }
