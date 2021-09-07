@@ -56,7 +56,7 @@ public class Duke {
      */
     public void run() {
         Ui ui = new Ui();
-        ui.greetUser();
+        ui.printUserGreeting();
         Scanner sc = new Scanner(System.in);
         boolean isExit = false;
 
@@ -65,12 +65,12 @@ public class Duke {
                 System.out.println("What's your next command?\n");
                 String command = sc.nextLine();
                 String response = Parser.parse(command);
-                Ui.printFormattedMessage(response);
+                ui.printFormattedMessage(response);
                 if (response.contains("Bye")) {
                     isExit = true;
                 }
             } catch (DukeException e) {
-                Ui.printFormattedMessage(e.getMessage());
+                ui.printFormattedMessage(e.getMessage());
             }
         }
         assert (isExit);

@@ -12,7 +12,7 @@ public class Parser {
 	 *
 	 * @param command the user input
 	 * @return true if Parser should continue parsing, false otherwise
-	 * @throws DukeException if the user input is invalid
+	 * @throws DukeException if the user input is not a valid command
 	 */
 	public static String parse(String command) throws DukeException {
 		if (command.startsWith("bye")) {
