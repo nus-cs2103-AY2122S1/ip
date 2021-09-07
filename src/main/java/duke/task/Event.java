@@ -25,19 +25,16 @@ public class Event extends Task {
     /**
      * Returns a Event from string input with description and date.
      *
-     * @param desc_date String input with description and date in
-     *                  '[description] (by: [MMM d yyyy]' format.
+     * @param args String input with description and date in
+     *                  '[description] (by: [MMM d yyyy])' format.
      * @return Event from string input with description and date.
      */
-    public static Event build(String desc_date) {
-        desc_date = desc_date.replaceAll("\\(at: (.*)\\)", "/at $1");
-        String[] input = desc_date.split(" /at ",2);
-        try {
-            return new Event(input[0], LocalDate.parse(input[1]));
-        } catch (DateTimeParseException e) {
-            LocalDate d = LocalDate.parse(input[1], DateTimeFormatter.ofPattern("MMM d yyyy"));
-            return new Event(input[0], d);
-        }
+    public static Event build(String args) {
+        String[] desc_date = Task.splitDescriptionAndDate(args, "by");
+        String desc = desc_date[0];
+        String dateString = desc_date[1];
+        LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return new Event(desc, date);
     }
 
     @Override

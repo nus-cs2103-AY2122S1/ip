@@ -169,8 +169,8 @@ public class Parser {
         }
 
         // Make sure date format is correct
+        String desc = desc_date[0];
         try {
-            String desc = desc_date[0];
             LocalDate date = LocalDate.parse(desc_date[1]);
             return new EventCommand(desc, date);
         } catch (DateTimeParseException e) {

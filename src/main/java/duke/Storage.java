@@ -43,37 +43,40 @@ public class Storage {
         File tasks = new File(filePath);
         TaskList taskList = TaskList.emptyTaskList();
 
-        if (tasks.exists()) {
-            // Read tasks from text file
-            try {
-                Scanner sc = new Scanner(tasks);
-                while (sc.hasNext()) {
-                    // Parse string to get task type, status, and description
-                    String regex = "\\[(?<type>[A-Z])\\]\\[(?<status>[X\\s])\\]\\s(?<desc>.*)";
-                    Pattern pattern = Pattern.compile(regex);
-                    Matcher matcher = pattern.matcher(sc.nextLine());
+        // If task file does not exist, return empty TaskList
+        if (!tasks.exists()) {
+            return taskList;
+        }
 
-                    // Check task type, status, description
-                    String type = matcher.group("type");
-                    String desc = matcher.group("desc");
+        try {
+            Scanner sc = new Scanner(tasks);
+            while (sc.hasNext()) {
+                // Parse string to get task type, status, and description
+                String regex = "\\[(?<type>[A-Z])\\]\\[(?<status>[X\\s])\\]\\s(?<desc>.*)";
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(sc.nextLine());
 
-                    Task toAdd;
-                    if (type.equals("T")) {
-                        toAdd = new Todo(desc);
-                    } else if (type.equals("D")) {
-                        toAdd = Deadline.build(desc);
-                    } else {
-                        toAdd = Event.build(desc);
-                    }
+                String type = matcher.group("type");
+                String desc = matcher.group("desc");
 
-                    if (matcher.group("status").equals(Task.DONE_MARKER)) {
-                        toAdd.setIsDone(true);
-                    }
-                    taskList.addTask(toAdd);
+                Task toAdd;
+                if (type.equals("T")) {
+                    toAdd = new Todo(desc);
+                } else if (type.equals("D")) {
+                    toAdd = Deadline.build(desc);
+                } else if (type.equals("E")) {
+                    toAdd = Event.build(desc);
+                } else {
+                    throw new DukeException(String.format("[%s] is not a recognised task type!", type));
                 }
-            } catch (FileNotFoundException e) {
-                throw new DukeException("File not found!");
+
+                if (matcher.group("status").equals(Task.DONE_MARKER)) {
+                    toAdd.setIsDone(true);
+                }
+                taskList.addTask(toAdd);
             }
+        } catch (FileNotFoundException e) {
+            throw new DukeException("File not found!");
         }
         return taskList;
     }
@@ -85,26 +88,26 @@ public class Storage {
      * @throws DukeException If IOException is caught.
      */
     public void save(TaskList taskList) throws DukeException {
-        // Check if there are tasks to save
-        if (taskList.size() != 0) {
+        //  Does not need to save anything if there are no tasks to be saved
+        if (taskList.size() == 0)
+
+        try {
             File file = new File(filePath);
-            try {
-                // Create directory if not already existing
-                new File(file.getParent()).mkdirs();
 
-                // Create file if not already existing
-                file.createNewFile();
-                FileWriter fw = new FileWriter(filePath);
+            // Create directory if not already existing
+            new File(file.getParent()).mkdirs();
 
-                // Write current task list into file
-                for (int i = 0; i < taskList.size(); i++) {
-                    fw.write(taskList.getTask(i).toString());
-                    fw.write(System.lineSeparator());
-                }
-                fw.close();
-            } catch (IOException e) {
-                throw new DukeException("There was an error saving your tasks!");
+            // Create file if not already existing
+            file.createNewFile();
+
+            FileWriter fw = new FileWriter(filePath);
+            for (int i = 0; i < taskList.size(); i++) {
+                fw.write(taskList.getTask(i).toString());
+                fw.write(System.lineSeparator());
             }
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeException("There was an error saving your tasks!");
         }
     }
 }

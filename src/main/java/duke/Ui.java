@@ -53,7 +53,6 @@ public class Ui {
      * @return User input in string.
      */
     public String readCommand() {
-        System.out.print("[YOU] ");
         return sc.nextLine();
     }
 
@@ -64,7 +63,6 @@ public class Ui {
      * @return Formatted reply to display to user.
      */
     public static String formatReply(String str) {
-        String y_border = "------------------------------------------------------------\n";
         return "[PEPPER JACK]\n" + str + "\n";
     }
 
@@ -75,7 +73,6 @@ public class Ui {
      */
     public String reply(String str) {
         String reply = formatReply(str);
-        System.out.print(formatReply(str));
         return reply;
     }
 
@@ -89,27 +86,20 @@ public class Ui {
     public String showTasksReply(boolean isAdd, String task, int numOfTasks) {
         String end = "\nYou have " + numOfTasks +" task(s) now so get off that crack rock!";
 
-        // If adding new task reply with add task message
         if (isAdd) {
-            System.out.print(formatReply("Pepper Jack added this task:\n\t" + task + end));
             return formatReply("Pepper Jack added this task:\n\t" + task + end);
         } else {
-            // Else reply with custom message
-            System.out.print(formatReply(task + end));
             return formatReply(task + end);
         }
     }
 
     /** Display welcome message */
     public String showWelcome() {
-        System.out.println("The name is\n" + LOGO);
-        System.out.print(formatReply("This Pepper Jack, wassup!"));
         return "The name is\n" + LOGO + "\n" + formatReply("This Pepper Jack, wassup!");
     }
 
     /** Display error message */
     public String showLoadingError(String errorMessage) {
-        System.out.print(formatReply(errorMessage));
         return formatReply(errorMessage);
     }
 
@@ -120,15 +110,12 @@ public class Ui {
             all_help_text = all_help_text + "\t" + help_text + "\n";
         }
 
-        System.out.print(formatReply("What you sayin brah! You better start makin sense or else...\n"
-                + "*Speak in words Pepper Jack can understand*\n" + all_help_text));
         return formatReply("What you sayin brah! You better start makin sense or else...\n"
                 + "*Speak in words Pepper Jack can understand*\n" + all_help_text);
     }
 
     /** Display final message */
     public String showBye() {
-        reply(END_TEXT);
         return reply(END_TEXT);
     }
 }
