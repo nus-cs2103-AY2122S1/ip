@@ -1,8 +1,19 @@
 plugins {
     id 'java'
     id 'application'
-    id 'checkstyle'
+//    id '' +
+//            '' +
+//            '' +
+//            '' +
+//            '' +
+//            'checkstyle'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
+}
+
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.controls' ]
 }
 
 repositories {
@@ -44,7 +55,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.gui.Launcher"
 }
 
 shadowJar {
@@ -52,9 +63,9 @@ shadowJar {
     archiveClassifier = null
 }
 
-checkstyle {
-    toolVersion = '8.29'
-}
+//checkstyle {
+//    toolVersion = '8.29'
+//}
 
 run{
     standardInput = System.in
