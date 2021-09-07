@@ -8,10 +8,10 @@ import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
-import duke.command.EmptyCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.TagCommand;
 import duke.command.ToDoCommand;
 import duke.command.UnexpectedCommand;
 import duke.command.WelcomeCommand;
@@ -106,6 +106,16 @@ public class Parser {
                 break;
             } catch (ArrayIndexOutOfBoundsException e) {
                 output = new UnexpectedCommand("array out of bounds exception, find");
+                break;
+            }
+        case "tag":
+            try {
+                String[] furtherSplitTag = splitText[1].trim().split("#");
+                int index = Integer.parseInt(furtherSplitTag[0].substring(0, 1));
+                output = new TagCommand(index, furtherSplitTag);
+                break;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                output = new UnexpectedCommand("array out of bounds exception, tag");
                 break;
             }
         case "bye":

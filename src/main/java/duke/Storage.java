@@ -2,6 +2,7 @@ package duke;
 
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
 
@@ -74,31 +75,51 @@ public class Storage {
             if (Objects.equals(fullLine, "")) {
                 break;
             }
-            String[] data = fullLine.split("\\|", 4);
-            String task = data[0].substring(0, 1);
-            String state = data[1].substring(1, 2);
-            String taskName = data[2].substring(1);
-            switch (task) {
+            String[] data = fullLine.split("\\|", 7);
+            String type = data[0].substring(0, 1);
+            String isDone = data[1].substring(1, 2);
+            String isTagged = data[2].substring(1, 2);
+            String taskName = data[3].substring(1);
+
+            switch (type) {
             case "T":
-                ToDo eventTodo = new ToDo(taskName);
-                if (state.contains("1")) {
+                Task eventTodo = new ToDo(taskName);
+                if (isDone.contains("1")) {
                     eventTodo.doneTask(false);
+                }
+                if (isTagged.contains("1")) {
+                    String[] tags = data[4].split("#");
+                    for (int i = 1; i < tags.length; i++) {
+                        eventTodo.tag(tags[i]);
+                    }
                 }
                 lst.add(eventTodo, false);
                 break;
             case "D":
-                String deadline = data[3].substring(1);
+                String deadline = data[5].substring(1);
                 Deadline eventDeadline = new Deadline(taskName, LocalDateTime.parse(deadline, formatter));
-                if (state.contains("1")) {
+                if (isDone.contains("1")) {
                     eventDeadline.doneTask(false);
+                }
+                if (isTagged.contains("1")) {
+                    String[] tags = data[4].split("#");
+                    for (int i = 1; i < tags.length; i++) {
+                        eventDeadline.tag(tags[i]);
+                    }
                 }
                 lst.add(eventDeadline, false);
                 break;
             case "E":
-                String time = data[3].substring(1);
+                String time = data[5].substring(1);
                 Event eventEvent = new Event(taskName, LocalDateTime.parse(time, formatter));
-                if (state.contains("1")) {
+                if (isDone.contains("1")) {
                     eventEvent.doneTask(false);
+                }
+                if (isTagged.contains("1")) {
+                    String[] tags = data[4].split("#");
+                    for (int i = 1; i < tags.length; i++) {
+                        eventEvent.tag(tags[i]);
+                    }
                 }
                 lst.add(eventEvent, false);
                 break;

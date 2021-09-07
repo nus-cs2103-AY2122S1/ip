@@ -2,6 +2,7 @@ package duke.task;
 
 import duke.Ui;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -61,7 +62,7 @@ public class TaskList {
     public String save() {
         String output = "";
         for (Task task: tasks) {
-            output += task.getType() + " | " + (task.getDone() ? "1 | " : "0 | ") + task.getSaveInfo() + "\n";
+            output += task.getSaveInfo() + "\n";
         }
         return output;
     }
@@ -100,5 +101,20 @@ public class TaskList {
      */
     private int numTasks() {
         return tasks.size();
+    }
+
+    /**
+     * Adds tags to the specified task through the index.
+     *
+     * @param index index of the task on the list
+     * @param tags array list of tags to be added to the task
+     */
+    public String addTags(int index, ArrayList<String> tags) {
+        Task taskToBeTagged = tasks.get(index - 1);
+        for (String tag: tags) {
+            taskToBeTagged.tag(tag);
+        }
+        String output = Ui.addTag(taskToBeTagged.toString());
+        return output;
     }
 }
