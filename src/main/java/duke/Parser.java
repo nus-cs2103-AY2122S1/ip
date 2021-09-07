@@ -1,14 +1,6 @@
 package duke;
 
-import command.AddDeadlineCommand;
-import command.AddEventCommand;
-import command.AddTodoCommand;
-import command.Command;
-import command.DeleteCommand;
-import command.DoneCommand;
-import command.ExitCommand;
-import command.FindCommand;
-import command.ListCommand;
+import command.*;
 import duke_exception.DukeDeadlineException;
 import duke_exception.DukeDeleteException;
 import duke_exception.DukeDoneException;
@@ -51,6 +43,8 @@ public class Parser {
                 return detectDelete(fullCommand);
             } else if (fullCommand.startsWith("find")){
                 return detectFind(fullCommand);
+            } else if (fullCommand.equals("undo")) {
+                return new UndoCommand();
             } else {
                 throw new DukeUnknownException();
             }
