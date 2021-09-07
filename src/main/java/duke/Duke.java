@@ -41,12 +41,13 @@ public class Duke {
      * @return a string representation of the chatbot's output message
      */
     public String getResponse(String input, Ui ui) {
-       try {
-           storage.saveTasks(taskList);
-           Command c = Parser.parse(input, taskList);
-           return c.execute(taskList, ui);
-       } catch (DukeException ex) {
-           return ui.displayError(ex.getMessage());
-       }
+        try {
+            storage.saveTasks(taskList);
+            Command c = Parser.parse(input, taskList);
+            assert !c.execute(taskList, ui).isEmpty();
+            return c.execute(taskList, ui);
+        } catch (DukeException ex) {
+            return ui.displayError(ex.getMessage());
+        }
     }
 }
