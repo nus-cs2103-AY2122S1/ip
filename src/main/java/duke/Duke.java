@@ -31,7 +31,7 @@ public class Duke {
      * Replace this stub with your completed method.
      * @return
      */
-    public String getResponse(String input) throws DukeException {
+    public String getResponse(String input) {
         try {
             String[] command = Parser.parse(input);
             if (command[0].equals("end")) {
@@ -40,11 +40,13 @@ public class Duke {
                 return ui.showTaskList(tasks);
             } else if (command[0].equals("done")) {
                 int index = Integer.parseInt(command[1]);
+                assert(index <= tasks.size());
                 Task doneTask = tasks.doneTask(index - 1);
                 storage.updateDone(index);
                 return ui.showDoneTask(doneTask);
             } else if (command[0].equals("delete")) {
                 int index = Integer.parseInt(command[1]);
+                assert(index <= tasks.size());
                 Task deleteTask = tasks.deleteTask(index - 1);
                 storage.deleteData(index);
                 return ui.showDeleteTask(deleteTask, tasks.size());
@@ -73,7 +75,8 @@ public class Duke {
             } else {
                 return "Not a valid command";
             }
-        } catch (IOException | DukeException e) {
+        } catch (Exception e) {
+            System.out.println(e);
             return ui.showError(e.getMessage());
         }
     }

@@ -31,28 +31,27 @@ public class Storage {
             Scanner dataReader = new Scanner(data);
             while (dataReader.hasNextLine()) {
                 String task = dataReader.nextLine();
-                System.out.println(task);
                 String[] split = task.split(" , ");
                 String type = split[0];
-                boolean done;
+                boolean isDone;
                 if (split[1].equals("1")) {
-                    done = true;
+                    isDone = true;
                 } else {
-                    done = false;
+                    isDone = false;
                 }
                 String description = split[2];
                 if (type.equals("D")) {
                     String time = split[3];
                     LocalDate date = LocalDate.parse(time);
-                    Task deadline = new Deadline(description, date, done);
+                    Task deadline = new Deadline(description, date, isDone);
                     tasks.add(deadline);
                 } else if (type.equals("E")) {
                     String time = split[3];
                     LocalDate date = LocalDate.parse(time);
-                    Task event = new Event(description, date, done);
+                    Task event = new Event(description, date, isDone);
                     tasks.add(event);
                 } else {
-                    Task todo = new Todo(description, done);
+                    Task todo = new Todo(description, isDone);
                     tasks.add(todo);
                 }
             }

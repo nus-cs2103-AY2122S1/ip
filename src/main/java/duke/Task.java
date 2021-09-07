@@ -8,11 +8,11 @@ public class Task {
      * Constructor for Task
      *
      * @param description
-     * @param done
+     * @param isDone
      */
-    public Task(String description, boolean done) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = done;
+        this.isDone = isDone;
     }
 
     /**
