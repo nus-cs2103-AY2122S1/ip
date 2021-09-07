@@ -32,6 +32,8 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
+        assert keyword != null : "Keyword should be initialized";
+
         // Get tasks containing the keyword
         ArrayList<Task> results = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {

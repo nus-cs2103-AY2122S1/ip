@@ -26,6 +26,7 @@ public class TaskList {
      * @return Number of tasks.
      */
     public int size() {
+        assert tasks != null : "Tasks should be initialized";
         return tasks.size();
     }
 
@@ -36,6 +37,7 @@ public class TaskList {
      * @return Task at given index.
      */
     public Task get(int index) {
+        assert tasks != null : "Tasks should be initialized";
         return tasks.get(index);
     }
 
@@ -45,6 +47,7 @@ public class TaskList {
      * @param task Task to be added.
      */
     public void add(Task task) {
+        assert tasks != null : "Tasks should be initialized";
         tasks.add(task);
     }
 
@@ -55,6 +58,7 @@ public class TaskList {
      * @return The removed task.
      */
     public Task remove(int index) {
+        assert tasks != null : "Tasks should be initialized";
         return tasks.remove(index);
     }
 }
