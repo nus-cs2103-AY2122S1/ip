@@ -1,10 +1,13 @@
 package duke;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import duke.tasks.Event;
 import duke.tasks.Task;
 
 /**
@@ -59,5 +62,19 @@ public class TaskList {
                     .filter((task) -> task.getDescription().contains(query))
                     .collect(Collectors.toList())
         );
+    }
+
+    /**
+     * Retrieves an event which occurs on the input date.
+     * @param date Input date.
+     * @return An Optional container which holds the event occurring on the input date.
+     * If no such event can be found, Empty is returned.
+     */
+    public Optional<Event> findEvent(LocalDate date) {
+        return this.stream()
+                .filter((task) -> TaskType.identifyTask(task) == TaskType.EVENT)
+                .map((task) -> (Event) task)
+                .filter((event) -> event.getTime().equals(date))
+                .findAny();
     }
 }
