@@ -1,6 +1,5 @@
 package duke.parser.cli;
 
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -216,5 +215,4 @@ public class CliParser {
 
         return i;
     }
-
 }
