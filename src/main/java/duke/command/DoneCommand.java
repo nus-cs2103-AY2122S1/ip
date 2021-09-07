@@ -35,7 +35,9 @@ public class DoneCommand extends Command {
     @Override
     public CommandResult execute() throws DukeException {
         TaskList taskList = super.getTaskList();
+        int numOfTasks = taskList.size();
         Task completedTask = taskList.markAsCompleted(this.taskId);
+        assert numOfTasks == taskList.size();
         return new CommandResult("Nice! I've marked this task as done:\n "
                 + completedTask.getDetails(), false);
     }

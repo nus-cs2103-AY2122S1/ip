@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.File;
+
 import duke.commandresult.CommandResult;
 import duke.exception.DukeException;
 import duke.parser.Parser;
@@ -19,6 +21,7 @@ public class Duke {
     public Duke() {
         this.list = new TaskList();
         this.storage = Storage.createStorage();
+        assert new File(Storage.DEFAULT_FILE_PATH).exists();
         try {
             this.list = this.storage.load(this.list);
         } catch (DukeException e) {
@@ -33,6 +36,7 @@ public class Duke {
     public Duke(String filePath) {
         this.list = new TaskList();
         this.storage = Storage.createStorage(filePath);
+        assert new File(filePath).exists();
         try {
             this.list = this.storage.load(this.list);
         } catch (DukeException e) {

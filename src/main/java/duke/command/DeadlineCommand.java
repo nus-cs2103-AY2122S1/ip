@@ -36,6 +36,7 @@ public class DeadlineCommand extends Command implements TaskListAddable {
     @Override
     public CommandResult execute() throws DukeException {
         TaskList taskList = super.getTaskList();
+        int numOfTasks = taskList.size();
         String[] eventList = this.command.split(" /by ");
         if (eventList.length != 2) {
             throw new DukeException("Incorrect command was given for deadline. "
@@ -44,6 +45,7 @@ public class DeadlineCommand extends Command implements TaskListAddable {
         }
         Task event = new Deadline(eventList[0], eventList[1], false);
         String feedback = addTaskToTaskList(taskList, event);
+        assert numOfTasks + 1 == taskList.size();
         return new CommandResult(feedback, false);
     }
 
