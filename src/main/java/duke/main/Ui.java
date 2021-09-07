@@ -74,6 +74,7 @@ public class Ui {
      * @return String The String representation of the list of Task.
      */
     public String displayListOfTasks(TaskList tasks) {
+        assert tasks != null : "TaskList should have been initialized";
         return tasks.toString();
     }
 
