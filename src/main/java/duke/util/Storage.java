@@ -116,7 +116,7 @@ public class Storage {
 			}
 			fw.close();
 		} catch (IOException e) {
-			throw new DukeFileNotFoundException();
+			 throw new DukeFileNotFoundException();
 		}
 	}
 }

@@ -1,5 +1,6 @@
 package duke.util;
 
+import duke.Duke;
 import duke.TaskList;
 import duke.exception.DukeException;
 
@@ -15,24 +16,30 @@ public class Parser {
 	 * @throws DukeException if the user input is not a valid command
 	 */
 	public static String parse(String command) throws DukeException {
+		String response;
 		if (command.startsWith("bye")) {
-			return "Bye. Hope to see you again soon!\n";
+			response = "Bye. Hope to see you again soon!\n";
+			return response;
 		} else if (command.startsWith("list")) {
-			return TaskList.printTasks("");
+			response = TaskList.printTasks("");
+			return response;
 		} else if (command.startsWith("find")) {
-			return TaskList.findTasks(command);
+			response = TaskList.findTasks(command);
 		} else if (command.startsWith("done")) {
-			return TaskList.handleDone(command);
+			response = TaskList.handleDone(command);
 		} else if (command.startsWith("delete")) {
-			return TaskList.handleDelete(command);
+			response = TaskList.handleDelete(command);
 		} else if (command.startsWith("todo")) {
-			return TaskList.addToDo(command);
+			response = TaskList.addToDo(command);
 		} else if (command.startsWith("deadline")) {
-			return TaskList.addDeadline(command);
+			response = TaskList.addDeadline(command);
 		} else if (command.startsWith("event")) {
-			return TaskList.addEvent(command);
+			response = TaskList.addEvent(command);
 		} else {
 			throw new DukeException("I don't understand that command!\n");
 		}
+
+		Duke.getStorage().saveTasks(TaskList.getTasks());
+		return response;
 	}
 }

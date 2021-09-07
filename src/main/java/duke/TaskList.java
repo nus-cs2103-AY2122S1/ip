@@ -57,7 +57,6 @@ public class TaskList {
         assert taskIdx >= 0;
         Task task = tasks.get(taskIdx);
         task.setDone(true);
-        Duke.getStorage().saveTasks(getTasks());
         return ("Good job! I've marked this task as done:\n\n\t" + task + "\n");
     }
 
@@ -72,7 +71,6 @@ public class TaskList {
         assert taskIdx >= 0;
         Task taskToDelete = getTasks().get(taskIdx);
         getTasks().remove(taskIdx);
-        Duke.getStorage().saveTasks(getTasks());
         return ("Noted. I've removed this task:\n\t" + taskToDelete + "\n\tNow you have " + tasks.size()
                 + " tasks in the list.\n");
     }
@@ -166,7 +164,6 @@ public class TaskList {
      */
     private static String addTask(Task t) throws DukeFileNotFoundException {
         TaskList.getTasks().add(t);
-        Duke.getStorage().saveTasks(TaskList.getTasks());
         return ("Got it. I've added this task:\n\t" + t + "\n\tNow you have " + tasks.size() + " tasks in the list.\n");
     }
 

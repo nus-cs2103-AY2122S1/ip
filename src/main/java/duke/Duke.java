@@ -28,7 +28,7 @@ public class Duke {
         }
     }
 
-    static Storage getStorage() {
+    public static Storage getStorage() {
         return Duke.storage;
     }
 
