@@ -1,21 +1,21 @@
-/**
- * @@author Hang Zelin
- *
- * Events class that extends Task class. It is one of the types in 3 tasks.
- * Will contain a time in the form of "/by"
- */
 package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+/**
+ * @@author Hang Zelin
+ *
+ * Events class that extends Task class. It is one of the types in 3 tasks.
+ * Will contain a time in the form of "/by"
+ */
 public class Events extends Task {
 
     private boolean isDone;
     private String task;
     private LocalDateTime time;
-    private String taskType = "E";
+    private static final String TASKTYPE = "E";
 
     /**
      * Constructor for Events containing boolean value if the task is done, the
@@ -37,26 +37,28 @@ public class Events extends Task {
      * @return Task info parsed in the format duke executes.
      */
     @Override
-    public String getTaskInfo() {
-        String doneStr = "";
+    public String getTaskStatus() {
+        String doneStatus;
+        String taskStatus;
         if (!this.isDone) {
-            doneStr = " ";
+            doneStatus = " ";
         } else {
-            doneStr = "X";
+            doneStatus = "X";
         }
 
-        return "[" + taskType + "]" + "[" + doneStr + "] " + task + " (at: " + parsedTime() + ")";
+        taskStatus = "[" + TASKTYPE + "]" + "[" + doneStatus + "] " + task + " (at: " + parsedTime() + ")";
+        return taskStatus;
     }
 
     /**
      * Returns the Parsed time info in the format of "MMM dd yyyy HH:mm"
-     * Noted: This method is only applicable for "event" and "deadline" type task.
+     * Note: This method is only applicable for "event" and "deadline" type task.
      *
      * @return Return the parsed time in the format duke can understand.
      */
     @Override
     public String parsedTime() {
-        String parsedTime = "";
+        String parsedTime;
         if (this.time != null) {
             parsedTime = this.time.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm", Locale.ENGLISH));
         } else {
@@ -68,20 +70,34 @@ public class Events extends Task {
 
     /**
      * Returns the Parsed time info in the format of "dd/mm/yy hhmm".
-     * Noted: This method is only applicable for "event" and "deadline" type task,
+     * Note: This method is only applicable for "event" and "deadline" type task,
      *
      * @return Time in the format of "dd/mm/yy hhmm" which duke can understand.
      */
     @Override
-    public String getTime() {
+    public String getTimeForSaveData() {
+        String saveDataTime = "";
+        String specificDate;
+        String specificTime;
         if (this.time == null) {
             return "I don't know the time";
         }
-        return this.time.getDayOfMonth() + "/" + this.time.getMonthValue() + "/" + this.time.getYear() + " "
-                + ((this.time.getHour() < 10) ? "0" + this.time.getHour()
-                        : this.time.getHour())
-                + ((this.time.getMinute() < 10) ? "0" + this.time.getMinute()
-                : this.time.getMinute());
+
+        specificDate = this.time.getDayOfMonth() + "/" + this.time.getMonthValue() + "/" + this.time.getYear() + " ";
+        if (this.time.getHour() < 10) {
+            specificTime = "0" + this.time.getHour();
+        } else {
+            specificTime = "" + this.time.getHour();
+        }
+
+        if (this.time.getMinute() < 10) {
+            specificTime += "0" + this.time.getMinute();
+        } else {
+            specificTime += this.time.getMinute();
+        }
+
+        saveDataTime += specificDate + specificTime;
+        return saveDataTime;
     }
 
 
@@ -93,7 +109,15 @@ public class Events extends Task {
      */
     @Override
     public String getSaveDataInfo() {
-        return this.taskType + " | " + (this.isDone ? 1 : 0) + " | " + task + " | " + getTime();
+        String dataInfo;
+        int value = 0;
+        if (this.isDone) {
+            value = 1;
+        } else {
+            value = 0;
+        }
+        dataInfo =  this.TASKTYPE + " | " + value + " | " + task + " | " + getTimeForSaveData();
+        return dataInfo;
     }
 
     /**

@@ -1,9 +1,3 @@
-/**
- * @@author Hang Zelin
- *
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
- */
 package duke.uimanager;
 
 import javafx.collections.FXCollections;
@@ -20,6 +14,12 @@ import javafx.scene.layout.HBox;
 import java.io.IOException;
 import java.util.Collections;
 
+/**
+ * @@author Hang Zelin
+ *
+ * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
+ * containing text from the speaker.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;

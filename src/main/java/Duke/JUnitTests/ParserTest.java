@@ -1,21 +1,18 @@
+package duke.junittests;
+
+import duke.command.Parser;
+import duke.exceptions.DukeException;
+import org.testng.annotations.Test;
+
+import java.time.LocalDate;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * @author Hang Zelin
  *
  * A JUnit class that tests some methods in Parser.
  */
-package duke.junittests;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.time.LocalDate;
-
-import org.testng.annotations.Test;
-
-import duke.command.Parser;
-import duke.excpetions.DukeException;
-
-
 public class ParserTest {
 
     @Test
@@ -23,7 +20,7 @@ public class ParserTest {
         assertEquals(LocalDate.of(2019, 12, 2).atTime(18, 0), new Parser("").parseTime("2/12/2019 1800"));
         assertEquals(LocalDate.of(2020, 9, 23).atTime(15, 25), new Parser("").parseTime("23/9/2020 1525"));
         assertEquals(LocalDate.of(2019, 10, 15).atTime(0, 0), new Parser("").parseTime("2019-10-15"));
-        assertEquals(null, new Parser("").parseTime("ukpkmkk"));
+        assertNull(new Parser("").parseTime("ukpkmkk"));
     }
 
     @Test

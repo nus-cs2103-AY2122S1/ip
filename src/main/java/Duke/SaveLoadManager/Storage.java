@@ -1,14 +1,7 @@
-/**
- * @@author Hang Zelin
- *
- * Programme that allows Duke to save any changes after execution and read data when it is initially invoked.
- * In other words, programme allows Duke to save and read data from a file.
- */
-
 package duke.saveloadmanager;
 
 import duke.command.Parser;
-import duke.excpetions.DukeException;
+import duke.exceptions.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -20,15 +13,21 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * @@author Hang Zelin
+ *
+ * Programme that allows Duke to save any changes after execution and read data when it is initially invoked.
+ * In other words, programme allows Duke to save and read data from a file.
+ */
 public class Storage {
     private String filePath;
 
-    private ArrayList<Task> list;
+    private final ArrayList<Task> list;
 
     /**
      * Initialize filePath and the TaskList for Storage to read data.
      *
-     * @param filePath
+     * @param filePath FilePath of the duke data storage.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -62,7 +61,9 @@ public class Storage {
         int index = 1;
         while (s.hasNext()) {
             String data = s.nextLine();
-            char done = handleTaskText(data);
+            char done;
+            createATask(data);
+            done = returnIsDone(data);
             if (done == '1') {
                 this.list.get(index - 1).markDone();
             }
@@ -84,20 +85,11 @@ public class Storage {
         fw.close();
     }
 
-    /**
-     * Returns char for "0" or "1". The value indicates whether the task is done or not.
-     * It also deals with the local file data and convert them into task and store into TaskList.
-     *
-     * @param data A line of command in the save file to be parsed.
-     * @return a Char indicates if the task is done or not.
-     */
-    public char handleTaskText(String data) {
+    private void createATask(String data) {
         Parser p = new Parser(data);
-        char done = data.charAt(4);
         char taskType = data.charAt(0);
         String task;
         String time;
-
 
         task = p.getSaveTask();
         time = p.getSaveTime();
@@ -105,15 +97,29 @@ public class Storage {
         LocalDateTime parsedTime = p.parseTime(time);
         TaskList.OperationType[] taskTypes = TaskList.OperationType.values();
         for (TaskList.OperationType t : taskTypes) {
-            if (t.toString().toUpperCase().charAt(0) == taskType
-                    && (t.toString().equals("todo") || t.toString().equals("deadline")
-                            || t.toString().equals("event"))) {
+            boolean isCorrectType = t.toString().charAt(0) == taskType;
+            boolean isTaskType = t.toString().equals("TODO") || t.toString().equals("DEADLINE")
+                    || t.toString().equals("EVENT");
+
+            if (isCorrectType && isTaskType) {
                 Task newTask = t.assignTaskType(t, task, parsedTime);
                 this.list.add(newTask);
-                break;
             }
         }
 
+
+
+    }
+
+    /**
+     * Returns char for "0" or "1". The value indicates whether the task is done or not.
+     * It also deals with the local file data and convert them into task and store into TaskList.
+     *
+     * @param data A line of command in the save file to be parsed.
+     * @return a Char indicates if the task is done or not.
+     */
+    private char returnIsDone(String data) {
+        char done = data.charAt(4);
         return done;
     }
 }
