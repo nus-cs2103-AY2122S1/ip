@@ -66,6 +66,9 @@ public class Parser {
             case "find":
                 message = findInTaskList(inputArr);
                 break;
+            case "tag":
+                message = tagItem(inputArr);
+                break;
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
@@ -96,7 +99,7 @@ public class Parser {
         }
         String[] messageArr = inputArr[1].split(" /by ", 2);
         if (messageArr.length < 2) {
-            throw new DukeException("duke.Deadline needs a /by clause after the description.");
+            throw new DukeException("Deadline needs a /by clause after the description.");
         }
         return addTask(new Deadline(messageArr[0], messageArr[1]));
     }
@@ -117,9 +120,9 @@ public class Parser {
         if (list.get(number - 1) == null) {
             throw new DukeException("This task doesn't exist");
         }
-        String message = "    Nice! I've marked this task as done: \n";
+        String message = " Nice! I've marked this task as done: \n";
         list.get(number - 1).markedAsDone();
-        message += "      " + list.get(number - 1).toString();
+        message += list.get(number - 1).toString();
         return message;
     }
 
@@ -131,10 +134,10 @@ public class Parser {
         if (list.get(removeIndex - 1) == null) {
             throw new DukeException("This task doesn't exist");
         }
-        String message = "    Noted. I've removed this task: \n";
-        message += "      " + list.get(removeIndex - 1).toString() + "\n";
+        String message = "Noted. I've removed this task: \n";
+        message += list.get(removeIndex - 1).toString() + "\n";
         list.remove(removeIndex - 1);
-        message += "     Now you have " + list.getSize() + " tasks in the list.";
+        message += "Now you have " + list.getSize() + " tasks in the list.";
         return message;
     }
 
@@ -143,5 +146,18 @@ public class Parser {
             throw new DukeException("The description of a find cannot be empty.");
         }
         return list.find(inputArr[1]);
+    }
+
+    private String tagItem(String[] inputArr) throws DukeException {
+        if (inputArr.length < 2) {
+            throw new DukeException("Please specify which task to tag.");
+        }
+        String[] messageArr = inputArr[1].split(" /tag ", 2);
+        if (messageArr.length < 2) {
+            throw new DukeException("Please specify the tag with /tag.");
+        }
+        int tagIndex = Integer.parseInt(messageArr[0]) - 1;
+        list.get(tagIndex).setTag(messageArr[1]);
+        return "Successfully task " + tagIndex + " set tag to " + messageArr[1];
     }
 }

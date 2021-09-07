@@ -6,6 +6,7 @@ package duke;
 public class Task {
 
     protected String description;
+    protected String tag;
     protected boolean isDone;
 
     /**
@@ -42,8 +43,16 @@ public class Task {
      * @return Formatted string with the icon and description.
      */
     public String toString() {
-        String s = "[" + getStatusIcon() + "] " + getDescription();
-        return s;
+        return "[" + getStatusIcon() + "] " + getDescription();
+    }
+
+    /**
+     * Tags the task with a tag
+     *
+     * @param tag
+     */
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     /**
@@ -52,4 +61,12 @@ public class Task {
     public void markedAsDone() {
         isDone = true;
     }
+
+    /**
+     * Return string to save with
+     */
+    public String getSaveString() {
+        return "";
+    }
+
 }

@@ -48,7 +48,7 @@ public class Storage {
         try {
             FileWriter writer = new FileWriter(file);
             for (int i = 0; i < list.getSize(); i++) {
-                writer.write(list.get(i).toString() + "\n");
+                writer.write(list.get(i).getSaveString() + "\n");
             }
             writer.close();
             return "File saved to /data/duke.txt";
