@@ -5,9 +5,13 @@ import java.util.List;
 import duke.classes.TaskList;
 import duke.tasks.Task;
 
+/**
+ * Duke class in-charge of generating user input to be returned by the GUI
+ */
 public class DukeUI {
     /**
      * Unary Function that prints list of task
+     *
      * @param taskList List of Duke.tasks to print
      * @return String to be output by Duke
      */
@@ -28,6 +32,7 @@ public class DukeUI {
 
     /**
      * Unary Function that marks task as Done and prints a confirmation message
+     *
      * @param task Task that is marked as complete
      * @return String to be output by Duke
      */
@@ -37,6 +42,7 @@ public class DukeUI {
 
     /**
      * Binary Function that deletes a task and prints a confirmation message
+     *
      * @param task Task that was removed
      * @param size Remaining size of the list
      * @return String to be output by Duke
@@ -48,6 +54,7 @@ public class DukeUI {
 
     /**
      * Unary Function that prints the most recently added Task
+     *
      * @param lst List of Task that was added to
      * @return String to be output by Duke
      */
@@ -59,6 +66,7 @@ public class DukeUI {
 
     /**
      * Unary function printing the post-filtered list of tasks
+     *
      * @param tasks list of tasks post-filter
      * @return String to be output by Duke
      */

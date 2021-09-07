@@ -13,6 +13,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
+/**
+ * Main GUI class handling the user display
+ */
 public class DukeGui {
     //Duke Assets
     private DukeStorage storage;
@@ -52,8 +55,9 @@ public class DukeGui {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Tests the Response of the user to generate an appropriate response
+     *
+     * @param input Input String from the user
      */
     protected String newResponse(String input) {
         String output;

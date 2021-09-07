@@ -3,12 +3,16 @@ package duke.tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline task
+ */
 public class Deadline extends Task {
     protected LocalDate deadline;
     private DateTimeFormatter printOut = DateTimeFormatter.ofPattern("MMM dd, E, yyyy");
 
     /**
      * Class Constructor
+     *
      * @param description Description of the Event
      * @param deadline Time of the event
      */
@@ -19,6 +23,7 @@ public class Deadline extends Task {
 
     /**
      * Class Constructor when Event is read from localList.txt
+     *
      * @param description Description of the Event
      * @param deadline Time of the event
      * @param isDone Checks if the event is done
@@ -33,6 +38,11 @@ public class Deadline extends Task {
         return super.toString() + " (by: " + printOut.format(deadline) + ")";
     }
 
+    /**
+     * Method Returns class as a string in accordance to DukeStorage Format
+     *
+     * @return String in accordance to DukeStorage Format
+     */
     public String toFileString() {
         return super.toFileString() + " " + deadline.toString();
     }

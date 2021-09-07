@@ -15,6 +15,9 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 
+/**
+ * Duke class handling the storage and loading of the user's list
+ */
 public class DukeStorage {
     /**
      * Class Constructor
@@ -24,6 +27,7 @@ public class DukeStorage {
 
     /**
      * Retrieves file indicated in the String and writes it into a List of Tasks.
+     *
      * @param pathname String indicating the filename
      * @return List of Tasks containing the Tasks in the file, else returns an empty ArrayList
      * @throws DukeException Thrown if file is not in the right format to be read
@@ -68,6 +72,7 @@ public class DukeStorage {
 
     /**
      * Saves the list to a local file. If the file is not present, function creates the file as well
+     *
      * @param taskList List to save to the file
      * @throws IOException Thrown if there is an issue creating, retrieving or writing the file
      */
