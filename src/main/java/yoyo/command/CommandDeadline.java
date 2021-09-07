@@ -27,7 +27,7 @@ public class CommandDeadline extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage, DialogHandler dialogHandler)
             throws YoyoException {
-        checkCompleteCommand(inputTokens);
+        checkTwoTokenCommand(inputTokens);
         String[] taskInfo = inputTokens[1].split(" /by ");
         if (taskInfo.length < 2) {
             throw new YoyoException.YoyoIncompleteCommandException("command has bad format or"

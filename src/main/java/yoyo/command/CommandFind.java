@@ -23,7 +23,7 @@ public class CommandFind extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage, DialogHandler dialogHandler)
             throws YoyoException {
-        checkCompleteCommand(inputTokens);
+        checkTwoTokenCommand(inputTokens);
         int taskListLength = tasks.size();
         if (taskListLength == 0) {
             return dialogHandler.printTaskList(tasks);

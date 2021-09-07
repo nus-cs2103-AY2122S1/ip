@@ -3,6 +3,7 @@ package yoyo.command;
 import yoyo.core.DialogHandler;
 import yoyo.core.Storage;
 import yoyo.exception.YoyoException;
+import yoyo.task.Task;
 import yoyo.task.TaskList;
 
 public class CommandDone extends Command {
@@ -22,11 +23,12 @@ public class CommandDone extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage, DialogHandler dialogHandler)
             throws YoyoException {
-        checkCompleteCommand(this.inputTokens);
+        checkTwoTokenCommand(this.inputTokens);
         try {
             int taskIndex = Integer.parseInt(inputTokens[1]) - 1;
-            tasks.get(taskIndex).toggleDone();
-            return dialogHandler.printMarkTaskMessage(tasks, taskIndex);
+            Task taskToMarkDone = tasks.get(taskIndex);
+            taskToMarkDone.toggleDone();
+            return dialogHandler.printMarkTaskMessage(taskToMarkDone);
         } catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
             throw new YoyoException.YoyoTaskIndexException("Please enter A valid task index!");
         }

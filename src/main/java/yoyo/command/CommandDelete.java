@@ -23,7 +23,7 @@ public class CommandDelete extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage, DialogHandler dialogHandler)
             throws YoyoException {
-        checkCompleteCommand(this.inputTokens);
+        checkTwoTokenCommand(this.inputTokens);
         try {
             int taskIndex = Integer.parseInt(inputTokens[1]) - 1;
             Task toRemove = tasks.get(taskIndex);

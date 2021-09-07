@@ -27,7 +27,7 @@ public class CommandEvent extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage, DialogHandler dialogHandler)
             throws YoyoException {
-        checkCompleteCommand(inputTokens);
+        checkTwoTokenCommand(inputTokens);
         String[] taskInfo = inputTokens[1].split(" /at ");
 
         if (taskInfo.length < 2) {

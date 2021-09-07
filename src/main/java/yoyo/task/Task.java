@@ -2,20 +2,73 @@ package yoyo.task;
 
 import yoyo.utility.Constant;
 
+import java.util.ArrayList;
+
+import static yoyo.utility.Constant.COMMA_SEPARATOR;
+import static yoyo.utility.Constant.WHITESPACE;
+
 public abstract class Task {
     protected boolean isDone = false;
     protected String name;
+    protected ArrayList<String> tags = new ArrayList<>();
 
-    Task(String name) {
+    public Task(String name) {
         this.name = name;
+        tags.add("test1");
+        tags.add("test2");
     }
 
-    Task(String name, boolean isDone) {
+    public Task(String name, boolean isDone) {
         this.name = name;
         this.isDone = isDone;
     }
 
+    public Task(String name, boolean isDone, String[] tags) {
+        this.name = name;
+        this.isDone = isDone;
+        for (int i = 0; i < tags.length; i++) {
+            this.addTag(tags[i]);
+        }
+    }
 
+    /**
+     * Adds a new tag to this task.
+     *
+     * @param tagName Name of tag to be added.
+     */
+    public void addTag(String tagName) {
+        if (tagName.trim().length() == 0) {
+            return;
+        }
+        tags.add(tagName);
+    }
+
+    /**
+     * Returns string displaying all tags belonging to this task
+     *
+     * @return String about tags in #tag1 #tag2 ...) format.
+     */
+    public String showTags() {
+        String result = "";
+        if (tags.size() != 0) {
+            int length = tags.size();
+            for (int i = 0; i < length - 1; i++) {
+                String toAdd = "#" + tags.get(i) + " ";
+                result += toAdd;
+            }
+            result += "#" + tags.get(length - 1);
+        }
+        System.out.println(result);
+        return result;
+    }
+
+
+    /**
+     * Checks if name contains input string.
+     *
+     * @param str Input string.
+     * @return True if name contains input string, false otherwise.
+     */
     public boolean containsString(String str) {
         return this.name.contains(str);
     }
@@ -47,13 +100,26 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public String showTimeInfo() {
+        return "";
+    }
+
+
     /**
      * Produces a string containing task's status.
      *
      * @return a string containing task's status.
      */
     public String showStatus() {
-        return this.printType() + this.printCompletionStatus() + " " + this.name;
+        return printType()
+                + printCompletionStatus()
+                + WHITESPACE
+                + name
+                + WHITESPACE
+                + showTimeInfo()
+                + WHITESPACE
+                + this.showTags();
+
     }
 
     /**
@@ -62,8 +128,10 @@ public abstract class Task {
      * @return a string containing task's status in write format.
      */
     public String showStatusWrite() {
-        return this.printType() + this.printCompletionStatus()
-                + Constant.SEPARATOR + this.name;
+        return this.printType()
+                + this.printCompletionStatus()
+                + COMMA_SEPARATOR + this.name;
+
     }
 
     /**

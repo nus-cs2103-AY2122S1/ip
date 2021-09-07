@@ -14,11 +14,17 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 import static yoyo.utility.Constant.NEWLINE_CHAR;
-import static yoyo.utility.Constant.SEPARATOR;
+import static yoyo.utility.Constant.COMMA_SEPARATOR;
 
 public class Storage {
-    private static final int TYPE_STR_INDEX = 1;
-    private static final int ISDONE_STR_INDEX = 4;
+    /**Index of where type info is stored in the line string being read*/
+    private static final int STR_INDEX_TYPE = 1;
+    /**Index of where isDone info is stored in the line string being read*/
+    private static final int STR_INDEX_ISDONE = 4;
+    /**Index of where name is stored in the token array being read*/
+    private static final int ARRAY_INDEX_NAME = 1;
+    /**Index of where date time info is stored in the token array being read*/
+    private static final int ARRAY_INDEX_DATETIME = 2;
     private static final Character CHAR_CROSS = 'X';
     private static final Character CHAR_TODO = 'T';
     private static final Character CHAR_DEADLINE = 'D';
@@ -91,32 +97,50 @@ public class Storage {
      * @param currLine The line to be parsed.
      */
     private void addTaskFromLine(TaskList tasks, String currLine) {
-        String[] currStrArr;
-        TaskType currType;
+        boolean isTaskComplete = currLine.charAt(STR_INDEX_ISDONE) == CHAR_CROSS;
 
-        boolean isCurrTaskComplete = currLine.charAt(ISDONE_STR_INDEX) == CHAR_CROSS;
+        char typeChar = currLine.charAt(STR_INDEX_TYPE);
+        TaskType currType = getTaskType(typeChar);
 
-        char typeChar = currLine.charAt(TYPE_STR_INDEX);
-        currType = typeChar == CHAR_TODO
-                ? TaskType.TODO
-                : typeChar == CHAR_DEADLINE
-                ? TaskType.DEADLINE
-                : TaskType.EVENT;
+        String[] currTokenArr = currLine.split(COMMA_SEPARATOR);
 
-        currStrArr = currLine.split(SEPARATOR);
+        String[] tagsArray;
+        if (currType.equals(TaskType.TODO)) {
+                tagsArray = subArray(3, currTokenArr);
+        } else {
+            tagsArray = subArray(4, currTokenArr);
+        }
+
         switch (currType) {
         case TODO:
-            tasks.add(new Todo(currStrArr[1], isCurrTaskComplete));
+            tasks.add(new Todo(currTokenArr[ARRAY_INDEX_NAME], isTaskComplete, tagsArray));
             break;
         case EVENT:
-            tasks.add(new Event(currStrArr[1], LocalDateTime.parse(currStrArr[2]), isCurrTaskComplete));
+            tasks.add(new Event(currTokenArr[ARRAY_INDEX_NAME],
+                    LocalDateTime.parse(currTokenArr[ARRAY_INDEX_DATETIME]),
+                    isTaskComplete, tagsArray));
             break;
         case DEADLINE:
-            tasks.add(new Deadline(currStrArr[1], LocalDateTime.parse(currStrArr[2]), isCurrTaskComplete));
+            tasks.add(new Deadline(currTokenArr[ARRAY_INDEX_NAME],
+                    LocalDateTime.parse(currTokenArr[ARRAY_INDEX_DATETIME]),
+                    isTaskComplete, tagsArray));
             break;
         default:
             assert false : "Something went wrong with save file format";
         }
+    }
+
+    private String[] subArray(int i, String[] currTokenArr) {
+//        intStream.range()
+    }
+
+    private TaskType getTaskType(char typeChar) {
+        TaskType currType = typeChar == CHAR_TODO
+                ? TaskType.TODO
+                : typeChar == CHAR_DEADLINE
+                ? TaskType.DEADLINE
+                : TaskType.EVENT;
+        return currType;
     }
 
     /**

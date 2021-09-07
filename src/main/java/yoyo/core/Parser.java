@@ -8,6 +8,7 @@ import yoyo.command.CommandDone;
 import yoyo.command.CommandEvent;
 import yoyo.command.CommandFind;
 import yoyo.command.CommandList;
+import yoyo.command.CommandTag;
 import yoyo.command.CommandTodo;
 import yoyo.exception.YoyoException;
 
@@ -25,6 +26,7 @@ public class Parser {
     private static final String COMMAND_DEADLINE = "deadline";
     private static final String COMMAND_EVENT = "event";
     private static final String COMMAND_FIND = "find";
+    private static final String COMMAND_TAG = "tag";
 
     /**
      * Reads an input string and returns the appropriate Command.
@@ -58,6 +60,8 @@ public class Parser {
             return new CommandEvent(inputTokens);
         case COMMAND_FIND:
             return new CommandFind(inputTokens);
+        case COMMAND_TAG:
+            return new CommandTag(inputTokens);
         default:
             assertCommandNotMissed(commandKeyword);
             throw new YoyoException.YoyoCommandNotFoundException("Yoyo doesn't understand "
@@ -79,6 +83,7 @@ public class Parser {
         assert !commandKeyword.equals("deadline") : "Did not catch valid command";
         assert !commandKeyword.equals("event") : "Did not catch valid command";
         assert !commandKeyword.equals("find") : "Did not catch valid command";
+        assert !commandKeyword.equals("tag") : "Did not catch valid command";
     }
 
     /**
@@ -94,7 +99,7 @@ public class Parser {
 
 
         String[] dateTimeArr = timeString.split(" ");
-        Command.checkCompleteCommand(dateTimeArr);
+        Command.checkTwoTokenCommand(dateTimeArr);
         String[] dateArr = dateTimeArr[0].split(String.valueOf(separator));
         String hourMinuteString = dateTimeArr[1];
 

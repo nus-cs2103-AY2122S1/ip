@@ -25,7 +25,7 @@ public class CommandTodo extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage, DialogHandler dialogHandler)
             throws YoyoException {
-        checkCompleteCommand(inputTokens);
+        checkTwoTokenCommand(inputTokens);
         Task newTask = new Todo(inputTokens[1]);
         tasks.add(newTask);
         return dialogHandler.printAddMessage(newTask, tasks);

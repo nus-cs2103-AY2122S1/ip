@@ -27,6 +27,7 @@ public class Deadline extends Task {
      *
      * @param name Name of Deadline.
      * @param datetime Datetime of Deadline.
+     * @param isDone Completion status of task.
      */
     public Deadline(String name, LocalDateTime datetime, boolean isDone) {
         super(name, isDone);
@@ -34,16 +35,27 @@ public class Deadline extends Task {
     }
 
     /**
-     * Produces a string containing task's status.
+     * Constructor for the Deadline class with name, datetime, isDone and tags parameters.
      *
-     * @return a string containing task's status.
+     * @param name Name of Deadline.
+     * @param datetime Datetime of Deadline.
+     * @param isDone Completion status of task.
+     * @param tags Tags of the task.
      */
-    @Override
-    public String showStatus() {
-        String status = super.showStatus();
-        return status + " (by: " + datetime.toString().replace('T', ' ') + ")";
-
+    public Deadline(String name, LocalDateTime datetime, boolean isDone, String[] tags) {
+        super(name, isDone, tags);
+        this.datetime = datetime;
     }
+
+
+
+
+    @Override
+    public String showTimeInfo() {
+        return "(by: " + datetime.toString().replace('T', ' ') + ")";
+    }
+
+
 
     /**
      * Produces a string containing task's status in write format.
@@ -54,8 +66,8 @@ public class Deadline extends Task {
     public String showStatusWrite() {
         return this.printType()
                 + this.printCompletionStatus()
-                + Constant.SEPARATOR + this.name
-                + Constant.SEPARATOR + this.datetime;
+                + Constant.COMMA_SEPARATOR + this.name
+                + Constant.COMMA_SEPARATOR + this.datetime;
     }
 
     /**

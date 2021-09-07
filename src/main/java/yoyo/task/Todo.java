@@ -18,9 +18,19 @@ public class Todo extends Task {
      * Constructor for the Todo class with name and isDone parameter.
      *
      * @param name Name of Todo.
+     * @param isDone Completion status of task.
      */
     public Todo(String name, boolean isDone) {
         super(name, isDone);
+    }
+
+    /**
+     * Constructor for the Todo class with name, isDone and tags parameter.
+     *
+     * @param name Name of Todo.
+     */
+    public Todo(String name, boolean isDone, String[] tags) {
+        super(name, isDone, tags);
     }
 
     /**

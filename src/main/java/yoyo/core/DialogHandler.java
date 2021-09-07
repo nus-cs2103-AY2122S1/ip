@@ -61,13 +61,24 @@ public class DialogHandler {
     /**
      * Prints a message indicating selected task has been marked as done.
      *
-     * @param tasks     TaskList of the program.
-     * @param taskIndex Index of the Task to be marked as done.
+     * @param task Task marked done.
      */
-    public String printMarkTaskMessage(TaskList tasks, int taskIndex) {
+    public String printMarkTaskMessage(Task task) {
         String res = "Nice! I've marked this task as done:"
                 + NEWLINE_CHAR
-                + tasks.get(taskIndex).showStatus() + NEWLINE_CHAR;
+                + task.showStatus() + NEWLINE_CHAR;
+        return res;
+    }
+
+    /**
+     * Prints a message indicating new tags have been added to selected task.
+     *
+     * @param task Task tagged.
+     */
+    public String showAddTagMessage(Task task) {
+        String res = "Nice! I've added the new tags to this task:"
+                + NEWLINE_CHAR
+                + task.showStatus() + NEWLINE_CHAR;
         return res;
     }
 

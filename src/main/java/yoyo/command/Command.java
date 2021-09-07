@@ -21,7 +21,7 @@ public abstract class Command {
      * @param inputTokens String array from user input.
      * @throws YoyoException.YoyoIncompleteCommandException Thrown if command is incomplete.
      */
-    public static void checkCompleteCommand(String[] inputTokens)
+    public static void checkTwoTokenCommand(String[] inputTokens)
             throws YoyoException.YoyoIncompleteCommandException {
         if (inputTokens.length < 2 || inputTokens[1].trim().length() == 0) {
             throw new YoyoException.YoyoIncompleteCommandException(
