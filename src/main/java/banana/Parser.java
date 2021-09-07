@@ -1,7 +1,6 @@
 package banana;
 
 import java.util.ArrayList;
-import java.time.LocalDate;
 
 /**
  * The Parser class makes sense
@@ -27,25 +26,6 @@ public class Parser {
 
     public static void setPrevInput(String prevInput) {
         Parser.prevInput = prevInput;
-    }
-
-    /**
-     * Gets the user input.
-     *
-     * @return the user input.
-     */
-    public String getInput() {
-        return input;
-    }
-
-    /**
-     * Prints the information.
-     *
-     * @param information display information.
-     * @return the label
-     */
-    public static String displayLabel(String information) {
-        return information;
     }
 
     /**
@@ -119,7 +99,7 @@ public class Parser {
      * @return the label.
      */
     public String listCommand(TaskList tasks) {
-        String itemCollection = getItems(tasks);
+        String itemCollection = ParserFunctions.getItems(tasks);
         String listText = "Here are the tasks in your list: \n"
                 + "     ";
         return listText + itemCollection;
@@ -175,11 +155,13 @@ public class Parser {
         if (input.contains("deadline")) {
             assert input.contains("/by");
             String[] info = input.substring(9).split(" /by ");
-            tasks.addTask(getDateAndTime(info, "deadline"));
+            tasks.addTask(ParserFunctions.getDateAndTime(
+                    info, "deadline"));
         } else {
             assert input.contains("/at");
             String[] info = input.substring(6).split(" /at ");
-            tasks.addTask(getDateAndTime(info, "event"));
+            tasks.addTask(ParserFunctions.getDateAndTime(
+                    info, "event"));
         }
         String addTaskText = "Got it. I've added this task:  \n"
                 + "       ";
@@ -249,101 +231,11 @@ public class Parser {
             }
             outputText = "Here are the matching tasks "
                     + "in your list: \n" + "     ";
-            return outputText + getItems(newTasks);
+            return outputText + ParserFunctions.getItems(newTasks);
         }
         return outputText;
     }
 
-    /**
-     * Gets the list of tasks.
-     *
-     * @param tasks the list of tasks.
-     * @return the tasks in string format.
-     */
-    public String getItems(TaskList tasks) {
-        String collection = "";
-        for (int index = 0; index < tasks.getSize(); index++) {
-            if (index != 0) {
-                collection += "     ";
-            }
-            String info = tasks.getTask(index).toString();
-            collection += Integer.toString(index + 1) + "." + info;
-            if (index != tasks.getSize() - 1) {
-                collection += "\n";
-            }
-        }
-        return collection;
-    }
 
-    /**
-     * Gets the date and time in correct
-     * notation/format if necessary.
-     *
-     * @param info the task information.
-     * @param type the Task type.
-     * @return the new Task.
-     */
-    public Task getDateAndTime(String[] info, String type) {
-        String[] potentialDate = info[1].split(" ");
-        LocalDate date = null;
-        if (!getTime(potentialDate[0]).equals("")) {
-            info[1] = getTime(potentialDate[0]);
-        } else if (potentialDate.length > 1 &&
-                !getTime(potentialDate[1]).equals("")) {
-            potentialDate[1] = getTime(potentialDate[1]);
-            info[1] = potentialDate[0] + " " + potentialDate[1];
-        }
-        if (potentialDate.length > 1 && potentialDate[0].contains("/")) {
-            date = LocalDate.parse(parseDates(potentialDate[0]));
-        }
-        if (type.equals("deadline")) {
-            if (date != null) {
-                return new Deadline(info[0], date, potentialDate[1]);
-            } else {
-                return new Deadline(info[0], info[1]);
-            }
-        } else {
-            if (date != null) {
-                return new Event(info[0], date, potentialDate[1]);
-            } else {
-                return new Event(info[0], info[1]);
-            }
-        }
-    }
-
-    /**
-     * Changes the date format to be
-     * parsed by LocalDate.
-     *
-     * @param date the old-format date.
-     * @return the date.
-     */
-    public String parseDates(String date) {
-        String[] sepIntoYearMonthDate = date.split("/");
-        assert sepIntoYearMonthDate.length == 3;
-        if (Integer.parseInt(sepIntoYearMonthDate[0]) < 10) {
-            sepIntoYearMonthDate[0] = "0" + sepIntoYearMonthDate[0];
-        }
-        return sepIntoYearMonthDate[2] + "-" +
-                sepIntoYearMonthDate[1] + "-" + sepIntoYearMonthDate[0];
-    }
-
-    /**
-     * Changes the time format.
-     *
-     * @param time the old-format time.
-     * @return the new-format time.
-     */
-    public String getTime(String time) {
-        try {
-            int timeVal = Integer.parseInt(time) / 100;
-            if (timeVal > 12) {
-                timeVal -= 12;
-            }
-            return Integer.toString(timeVal) + "pm";
-        } catch (NumberFormatException e) {
-            return "";
-        }
-    }
 
 }
