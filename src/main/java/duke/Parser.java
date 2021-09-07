@@ -11,6 +11,17 @@ public class Parser {
      */
     public static String[] parse(String input) {
         String[] str = input.split(" ", 2);
+        switch (str[0]) {
+            case "t":
+                str[0] = "todo";
+                break;
+            case "d":
+                str[0] = "deadline";
+                break;
+            case "e":
+                str[0] = "event";
+                break;
+        }
         String arg = str[0];
 
         switch (arg) {
