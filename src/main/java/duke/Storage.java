@@ -81,7 +81,6 @@ public class Storage {
             }
             listEditor.close();
             System.out.println("Saving list..");
-
         } catch (IOException e) {
             System.out.println("File does not exist");
         }

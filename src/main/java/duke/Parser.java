@@ -84,16 +84,17 @@ public class Parser {
      * @param in task to be marked as done
      * @param taskList
      */
-    public static String doneOutput(String in, TaskList taskList) {
-        if (in.length() < 6) {
-            return "Invalid Input for done command";
-        } else {
+    public static String doneOutput(String in, TaskList taskList) throws NumberFormatException {
+        assert in.length() > 5 : "Invalid Input for done command";
+        try {
             int taskDone = parseInt(in.substring(5));
             if (taskDone > 100) {
-                return "Invalid Input for done command";
+                return "Invalid Input for done command. Task too big";
             } else {
                 return taskList.doTask(taskDone);
             }
+        } catch (NumberFormatException e) {
+            return "No task number detected";
         }
     }
 
@@ -103,15 +104,12 @@ public class Parser {
      * @param taskList
      */
     public static String deleteOutput(String in, TaskList taskList) {
-        if (in.length() < 8) {
+        assert in.length() > 7 : "Invalid Input for delete command";
+        try {
+            int taskDeleted = parseInt(in.substring(7));
+            return taskList.deleteTask(taskDeleted);
+        } catch (NumberFormatException e) {
             return "Invalid Input for delete command";
-        } else {
-            try {
-                int taskDeleted = parseInt(in.substring(7));
-                return taskList.deleteTask(taskDeleted);
-            } catch (NumberFormatException e) {
-                return "Invalid Input for delete command";
-            }
         }
     }
 
@@ -121,12 +119,9 @@ public class Parser {
      * @param taskList
      */
     public static String toDoOutput(String in, TaskList taskList) {
-        if (in.length() == 4) {
-            return "OOPS!!! The description of a todo cannot be empty.";
-        } else {
-            return taskList.addToDoTask(in);
+        assert in.length() != 4 : "OOPS!!! The description of a todo cannot be empty.";
+        return taskList.addToDoTask(in);
         }
-    }
 
     /**
      * Adds the given input as a event task to the list
@@ -135,16 +130,13 @@ public class Parser {
      */
     public static String eventOutput(String in, TaskList taskList) {
         int i = in.indexOf("/");
-        if (i < 0) {
-            return "Time not detected. Please try again";
-        } else {
-            try {
-                if (isValid(in.substring(i + 1, i + 11))) {
-                    return taskList.addEventTask(in, i);
-                }
-            } catch (StringIndexOutOfBoundsException e) {
-                return "Invalid date and time. Use yyyy-mm-dd format for date";
+        assert i >= 0 : "Time not detected. Please try again";
+        try {
+            if (isValid(in.substring(i + 1, i + 11))) {
+                return taskList.addEventTask(in, i);
             }
+        } catch (StringIndexOutOfBoundsException e) {
+            return "Invalid date and time. Use yyyy-mm-dd format for date";
         }
         return "Invalid date and time";
     }
@@ -156,9 +148,7 @@ public class Parser {
      */
     public static String deadlineOutput(String in, TaskList taskList) {
         int i = in.indexOf("/");
-        if (i < 0) {
-            return "Time not detected. Please try again";
-        } else {
+        assert i >= 0 : "Time not detected. Please try again";
             try {
                 if (isValid(in.substring(i + 1, i + 11))) {
                     return taskList.addDeadlineTask(in, i);
@@ -166,7 +156,6 @@ public class Parser {
             } catch (StringIndexOutOfBoundsException e) {
                 return "Invalid date and time";
             }
-        }
         return "Invalid date and time";
     }
 
