@@ -52,8 +52,10 @@ public class AddCommand extends Command {
             tasklist.add(new Todo(label));
         } else if (type.equals("deadline")) {
             tasklist.add(new Deadline(label, date));
-        } else {
+        } else if (type.equals("event")) {
             tasklist.add(new Event(label, date));
+        } else {
+            assert false; //Execution should never reach this point
         }
         return ui.notifySuccessfulAdd(tasklist);
     }
