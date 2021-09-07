@@ -78,12 +78,15 @@ public class Parser {
      */
     private ArrayList<String> parseAddDeadline(String deadline) throws MessageEmptyException,
             IncorrectFormatException {
+
         ArrayList<String> parsedDeadline = new ArrayList<>();
+
         try {
             deadline = deadline.substring(9).trim();
         } catch (StringIndexOutOfBoundsException e) {
             throw new MessageEmptyException();
         }
+
         String[] result = deadline.split("/by");
 
         if (result.length == 0) {
@@ -95,8 +98,11 @@ public class Parser {
             throw new MessageEmptyException();
         }
 
+        assert result.length >= 2 : " Information missing in command";
+
         String description = result[0].trim();
         String by = result[1].trim();
+
         parsedDeadline.add(description);
         parsedDeadline.add(by);
         return parsedDeadline;
@@ -113,13 +119,17 @@ public class Parser {
      */
     private ArrayList<String> parseAddEvent(String event) throws MessageEmptyException, IncorrectFormatException,
             InvalidDurationException {
+
         ArrayList<String> parsedEvent = new ArrayList<>();
+
         try {
             event = event.substring(6).trim();
         } catch (StringIndexOutOfBoundsException e) {
             throw new MessageEmptyException();
         }
+
         String[] result = event.split("/at");
+
         if (result.length == 0) {
             throw new MessageEmptyException();
         } else if (result.length == 1) {
@@ -128,8 +138,11 @@ public class Parser {
         } else if (result[0].trim().equals("")) {
             throw new MessageEmptyException();
         }
-        String description = result[0].trim(); // trims the additional spaces to the left and right of "at"
-        String at = result[1].trim(); // trims the additional spaces to the left and right of "at"
+
+        assert result.length >= 2 : " Information missing in command";
+
+        String description = result[0].trim();
+        String at = result[1].trim();
 
         // throws error if it doesn't even contain sufficient number of characters for correct format
         if (at.replaceAll("\\s", "").length() < 19) { // YYYY/MM/DD HHMM - HHMM
@@ -144,6 +157,7 @@ public class Parser {
         if (eventTimes.length != 2) {
             throw new InvalidDurationException();
         }
+
         parsedEvent.add(description);
         parsedEvent.add(date);
         parsedEvent.add(eventTimes[0]);
@@ -176,7 +190,7 @@ public class Parser {
      * @throws DukeException if any violations of commands in user input occurs.
      */
     public Command handleCommands(String input) throws DukeException {
-        // isolates the command word
+
         String[] words = parseInput(input);
         String command = getCommand(words);
 
