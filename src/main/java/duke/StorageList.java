@@ -111,7 +111,7 @@ public class StorageList {
         return output;
     }
 
-    public String viewSchedule(String dateQuery) throws DukeException{
+    public String viewSchedule(String dateQuery) {
         Ui ui = new Ui();
         try {
             DateTimeFormatter stringFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
