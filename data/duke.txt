@@ -1,4 +1,6 @@
-[D][ ] return book    by: 2019-12-02
-[E][ ] test code    at: 2018-11-03
-[E][ ] meeting    at: 2015-10-15
-[E][X] project meeting   at: 2015-10-15
+[E][ ]                 at: 2015-10-15
+[E][ ]          at: 2015-10-15
+[E][ ] project chicken         at: 2015-10-15
+[E][X] project weed        at: 2015-10-15
+[E][ ] project double weed       at: 2015-10-15
+[D][ ] project meeting      by: 2015-10-15

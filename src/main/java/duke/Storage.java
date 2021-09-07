@@ -30,6 +30,7 @@ public class Storage {
             FileWriter w = new FileWriter(fileStorage);
             String str = "";
             for (Task t : listOfTasks.getTaskList()) {
+                //System.out.println(t.toString());
                 str += t.toString() + "\n";
             }
             w.write(str);

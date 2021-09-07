@@ -1,3 +1,5 @@
+package duke;
+
 import duke.TaskList;
 import duke.Task;
 import org.junit.Test;

@@ -13,37 +13,52 @@ public class Parser {
      * @param input The string that contains the user input
      * @param t The TaskList that contains the tasks to be added
      * @param s The Storage that handles the reading and writing to a text file
-     * @param file The file that gets written to and read from
      *
      * @return void
      */
-    public static void parse(String input, TaskList t, Storage s, File file) {
+    public static String parse(String input, TaskList t, Storage s) {
         if (input.equals("list")) {
+            String returnString = "";
             for (int i = 0; i < t.size(); i++) {
                 System.out.println(i + 1 + "." + t.get(i).toString());
+                returnString = returnString + String.valueOf(i + 1) + "." + t.get(i).toString() + "\n";
             }
+            return returnString;
         } else if (input.startsWith("done") && Character.isDigit(input.charAt(input.length() - 1))
                 && input.length() <= 8 && !Character.isAlphabetic(input.charAt(input.length() - 2))
                 && Character.isDigit(input.charAt(5))) {
+            String returnString = "";
             int value = Integer.parseInt(input.replaceAll("[^0-9]", ""));
             t.get(value - 1).markAsDone();
-            System.out.println("Nice! I've marked this task as done: ");
-            System.out.println("[X] " + t.get(value-1).description);
+            System.out.println(t.get(value - 1).toString());
             s.appendListToFile(t);
+            returnString = returnString + "Nice! I've marked this task as done: " + "\n";
+            returnString = returnString + "[X] " + t.get(value - 1).description + "\n";
+            System.out.println("Nice! I've marked this task as done: ");
+            System.out.println("[X] " + t.get(value - 1).description);
+            return returnString;
         } else if (input.startsWith("todo")) {
+            String returnString = "";
             if (input.length() < 6) {
                 System.out.println(new NullTaskError().getMsg("todo"));
+                return new NullTaskError().getMsg("todo");
             } else {
                 String firstTodo = input.substring(5);
                 t.addTodo(firstTodo);
+                s.appendListToFile(t);
                 System.out.println("Got it. I've added this task: ");
                 System.out.println(new Todo(firstTodo));
                 System.out.println("Now you have " + t.size() + " tasks in the list");
-                s.appendListToFile(t);
+                returnString = returnString + "Got it. I've added this task: " + "\n";
+                returnString = returnString + new Todo(firstTodo).toString() + "\n";
+                returnString = returnString + "Now you have " + t.size() + " tasks in the list" + "\n";
+                return returnString;
             }
         } else if (input.startsWith("deadline")) {
+            String returnString = "";
             if (input.length() < 10) {
                 System.out.println(new NullTaskError().getMsg("deadline"));
+                return "no chicken";
             } else {
                 String[] temp = input.split("/by");
                 String firstDeadline = temp[0].substring(9);
@@ -61,14 +76,20 @@ public class Parser {
                 LocalDate date1 = LocalDate.parse(finalDateFormat);
                 String dateForObject = date1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
                 t.addDeadline(firstDeadline, date1);
+                s.appendListToFile(t);
+                returnString = returnString + "Got it. I've added this task: " + "\n";
+                returnString = returnString + new Deadline(firstDeadline, date1).toString() + "\n";
+                returnString = returnString + "Now you have " + t.size() + " tasks in the list" + "\n";
                 System.out.println("Got it. I've added this task: ");
                 System.out.println(new Deadline(firstDeadline, date1));
                 System.out.println("Now you have " + t.size() + " tasks in the list");
-                s.appendListToFile(t);
+                return returnString;
             }
         } else if (input.startsWith("event")) {
+            String returnString = "";
             if (input.length() < 7) {
                 System.out.println(new NullTaskError().getMsg("event"));
+                return "no chicken";
             } else {
                 String[] tempEvent = input.split("/at");
                 String firstEvent = tempEvent[0].substring(6);
@@ -90,36 +111,51 @@ public class Parser {
                 System.out.println("Got it. I've added this task: ");
                 System.out.println(new Event(firstEvent, date1));
                 System.out.println("Now you have " + t.size() + " tasks in the list");
+                returnString = returnString + "Got it. I've added this task: " + "\n";
+                returnString = returnString + new Event(firstEvent, date1).toString() + "\n";
+                returnString = returnString + "Now you have " + t.size() + " tasks in the list" + "\n";
                 s.appendListToFile(t);
+                return returnString;
             }
         } else if (input.startsWith("delete") && input.length() < 11) {
+            String returnString = "";
             int value = Integer.parseInt(input.replaceAll("[^0-9]", ""));
             Task removedTask = t.get(value - 1);
             t.delete(value - 1);
             System.out.println("Noted. I've removed this task:");
             System.out.println(removedTask.toString());
             System.out.println("Now you have " + t.size() + " tasks in the list.");
+            returnString = returnString + "Noted. I've removed this task: " + "\n";
+            returnString = returnString + removedTask.toString() + "\n";
+            returnString = returnString + "Now you have " + t.size() + " tasks in the list" + "\n";
             s.appendListToFile(t);
+            return returnString;
         } else if (input.startsWith("find")) {
             String keyword = input.substring(5);
+            String returnString = "";
             ArrayList<Task> output = new ArrayList<>();
             int count = 0;
-            for (Task task: t.getTaskList()) {
-                String desc = task.description.substring(0,task.description.length()-4);
+            for (Task task : t.getTaskList()) {
+                String desc = task.description.substring(0, task.description.length() - 4);
                 String[] splitDesc = desc.split(" ");
-                for (String str: splitDesc) {
+                for (String str : splitDesc) {
                     if (str.equals(keyword)) {
                         System.out.println(task.toString());
+                        returnString = returnString + task.toString() + "\n";
                         count = count + 1;
                     }
                 }
             }
             if (count == 0) {
                 System.out.println("OOPS! The task does not exist");
+                return returnString + "\n" + "OOPS! The task does not exist";
+            } else {
+                return returnString;
             }
         } else {
             DukeException e = new NonExistentKeyword();
             System.out.println(e.getMsg());
+            return e.getMsg();
         }
     }
 }
