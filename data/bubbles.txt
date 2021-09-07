@@ -2,3 +2,4 @@ D | 1 | finish a-moreclasses | by 2021-08-26
 E | 1 | complete 2105 tutorial | at 2021-08-26
 T | 1 | complete A-gradle
 T | 0 | participate in tutorial
+T | 0 | go for lunch in utown
