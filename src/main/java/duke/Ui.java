@@ -56,6 +56,7 @@ public class Ui {
      * @param e Erorr thrown by Java.
      */
     public void showException(Exception e) {
-        e.printStackTrace();
+        System.out.printf("HuAI Liddat!!! %s\n", e);
+        // e.printStackTrace();
     }
 }
