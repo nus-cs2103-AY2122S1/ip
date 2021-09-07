@@ -10,7 +10,10 @@ import duke.Ui;
  * Representation of remove command of Duke.
  */
 public class RemoveCommand extends Command {
+
     private final int indexToRemove;
+
+    private final boolean isRemoveAll;
 
     /**
      * Constructor for RemoveCommand.
@@ -19,6 +22,7 @@ public class RemoveCommand extends Command {
      */
     public RemoveCommand(int indexToRemove) {
         this.indexToRemove = indexToRemove;
+        this.isRemoveAll = indexToRemove == -1;
     }
 
     /**
@@ -39,15 +43,16 @@ public class RemoveCommand extends Command {
      * @param storage Storage to save and load TaskList of Duke.
      */
     public void execute(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
-        if (this.indexToRemove == -1) {
-            String message = formatAndRemoveAll(taskList);
+        String message;
 
-            ui.print(message);
+        if (this.isRemoveAll) {
+            message = formatAndRemoveAll(taskList);
+
         } else {
-            String message = formatAndRemoveIndexToRemove(taskList);
+            message = formatAndRemoveIndexToRemove(taskList);
 
-            ui.print(message);
         }
+        ui.print(message);
     }
 
     /**
@@ -60,15 +65,16 @@ public class RemoveCommand extends Command {
      */
     @Override
     public String getExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
-        if (this.indexToRemove == -1) {
-            String message = formatAndRemoveAll(taskList);
+        String message;
 
-            return message;
+        if (this.isRemoveAll) {
+            message = formatAndRemoveAll(taskList);
+
         } else {
-            String message = formatAndRemoveIndexToRemove(taskList);
+            message = formatAndRemoveIndexToRemove(taskList);
 
-            return message;
         }
+        return message;
     }
 
     /**
@@ -101,6 +107,7 @@ public class RemoveCommand extends Command {
      */
     private String formatAndRemoveIndexToRemove(TaskList taskList) {
         Task toRemove = taskList.remove(this.indexToRemove);
+
         return "Noted. I've removed this task:\n" + toRemove + "\nNow you have "
                 + taskList.getSize() + " tasks in the list";
     }

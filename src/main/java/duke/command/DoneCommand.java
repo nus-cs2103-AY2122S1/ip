@@ -10,6 +10,7 @@ import duke.Ui;
  */
 public class DoneCommand extends Command {
     private final int indexToMarkAsDone;
+    private final boolean isMarkAll;
 
     /**
      * Constructor for DoneCommand.
@@ -18,6 +19,7 @@ public class DoneCommand extends Command {
      */
     public DoneCommand(int indexToMarkAsDone) {
         this.indexToMarkAsDone = indexToMarkAsDone;
+        this.isMarkAll = indexToMarkAsDone == -1;
     }
 
     /**
@@ -39,15 +41,16 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
-        if (this.indexToMarkAsDone == -1) {
-            String message = formatAndMarkAllAsDone(taskList);
+        String message;
 
-            ui.print(message);
+        if (this.isMarkAll) {
+            message = formatAndMarkAllAsDone(taskList);
+
         } else {
-            String message = formatAndMarkDoneAtIndex(taskList);
+            message = formatAndMarkDoneAtIndex(taskList);
 
-            ui.print(message);
         }
+        ui.print(message);
     }
 
     /**
@@ -60,15 +63,15 @@ public class DoneCommand extends Command {
      */
     @Override
     public String getExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
-        if (this.indexToMarkAsDone == -1) {
-            String message = formatAndMarkAllAsDone(taskList);
+        String message;
+        if (this.isMarkAll) {
+            message = formatAndMarkAllAsDone(taskList);
 
-            return message;
         } else {
-            String message = formatAndMarkDoneAtIndex(taskList);
+            message = formatAndMarkDoneAtIndex(taskList);
 
-            return message;
         }
+        return message;
     }
 
     /**
@@ -93,8 +96,9 @@ public class DoneCommand extends Command {
     private String formatAndMarkAllAsDone(TaskList taskList) {
         String message = "Noted. I've marked these tasks as done:\n";
 
+        taskList.markAllAsDone();
+
         for (int i = 0; i < taskList.getSize(); i++) {
-            taskList.markAsDone(i);
             if (i == taskList.getSize() - 1) {
                 message += i + 1 + "." + taskList.taskToString(i);
             } else {

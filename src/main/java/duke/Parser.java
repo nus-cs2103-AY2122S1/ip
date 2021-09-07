@@ -486,12 +486,16 @@ public class Parser {
      * @return true if String is within the range of the taskList, else false.
      */
     private static boolean isOutOfRange(TaskList taskList, String s) {
-        boolean isExceedLength = Integer.valueOf(s) > taskList.getSize();
-        boolean isLessThanOne = Integer.valueOf(s) < 1;
-
-        return !isAll(s) && (isExceedLength || isLessThanOne);
+        return !isAll(s) && (isExceedLength(taskList, s) || isLessThanOne(s));
     }
 
+    private static boolean isLessThanOne(String s) {
+        return Integer.valueOf(s) < 1;
+    }
+
+    private static boolean isExceedLength(TaskList taskList, String s) {
+        return Integer.valueOf(s) > taskList.getSize();
+    }
 
 
 }

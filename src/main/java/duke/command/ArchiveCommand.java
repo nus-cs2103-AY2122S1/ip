@@ -8,9 +8,11 @@ import duke.task.Task;
 
 public class ArchiveCommand extends Command {
     private final int indexToArchive;
+    private final boolean isArchiveAll;
 
     public ArchiveCommand(int indexToRemove) {
         this.indexToArchive = indexToRemove;
+        this.isArchiveAll = indexToArchive == -1;
     }
 
     @Override
@@ -20,33 +22,52 @@ public class ArchiveCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
-        if (indexToArchive == -1) {
+        String message;
+
+        if (this.isArchiveAll) {
+            message = formatAndArchiveAll(taskList, archiveList);
 
         } else {
-            Task toArchive = taskList.remove(indexToArchive);
+            message = formatAndArchiveIndex(taskList, archiveList);
 
-            archiveList.add(toArchive);
-
-            String message = "Noted. I've archived this task:\n" + toArchive + "\nNow you have "
-                    + taskList.getSize() + " tasks in the list";
-
-            ui.print(message);
         }
+        ui.print(message);
     }
 
     @Override
     public String getExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
-        if (indexToArchive == -1) {
-            return "archive all";
+        String message;
+
+        if (this.isArchiveAll) {
+            message = formatAndArchiveAll(taskList, archiveList);
+
         } else {
-            Task toArchive = taskList.remove(indexToArchive);
+            message = formatAndArchiveIndex(taskList, archiveList);
 
-            archiveList.add(toArchive);
-
-            String message = "Noted. I've archived this task:\n" + toArchive + "\nNow you have "
-                    + taskList.getSize() + " tasks in the list";
-
-            return message;
         }
+        return message;
+    }
+
+    private String formatAndArchiveIndex(TaskList taskList, ArchiveList archiveList) {
+        Task toArchive = taskList.archive(indexToArchive, archiveList);
+
+        return "Noted. I've archived this task:\n" + toArchive + "\nNow you have "
+                + taskList.getSize() + " tasks in the list";
+    }
+
+    private String formatAndArchiveAll(TaskList taskList, ArchiveList archiveList) {
+        String message = "Noted. I've archived these tasks:\n";
+
+        int counter = 0;
+        int size = taskList.getSize();
+
+        for (int i = 0; i < size; i++) {
+            Task toArchive = taskList.archive(0, archiveList);
+            counter++;
+            message += counter + "." + toArchive + "\n";
+        }
+
+        message += "Now you have 0 tasks in the list";
+        return message;
     }
 }
