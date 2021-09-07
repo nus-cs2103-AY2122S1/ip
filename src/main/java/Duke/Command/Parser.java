@@ -1,5 +1,5 @@
 /**
- * @author Hang Zelin
+ * @@author Hang Zelin
  *
  * Parser will take in a full input Message and take out the operation type, task, time, index from the
  * one line command input by users.

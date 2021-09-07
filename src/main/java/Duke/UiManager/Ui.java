@@ -1,5 +1,5 @@
 /**
- * @author Hang Zelin
+ * @@author Hang Zelin
  *
  * Ui Part of Duke Programme. This programme mainly deals with all the user interactions.
  * It will print out the information for each type of operation execution. And it will also accept users'

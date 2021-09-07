@@ -1,5 +1,5 @@
 /**
- * @author Hang Zelin
+ * @@author Hang Zelin
  *
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.

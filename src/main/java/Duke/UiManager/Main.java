@@ -1,5 +1,5 @@
 /**
- * @Author Hang Zelin
+ * @@Author Hang Zelin
  *
  * A GUI for Duke using FXML.
  */

@@ -1,5 +1,5 @@
 /**
- * @author Hang Zelin
+ * @@author Hang Zelin
  *
  * An abstract class that encapsulates the info basic for a task
  */

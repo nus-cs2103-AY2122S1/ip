@@ -1,6 +1,7 @@
 /**
- * @author Hang Zelin
- * @description ToDos class that extends Task class. It is one of the types in 3 tasks.
+ * @@author Hang Zelin
+ *
+ * ToDos class that extends Task class. It is one of the types in 3 tasks.
  */
 package duke.task;
 

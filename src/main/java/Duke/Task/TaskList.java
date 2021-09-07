@@ -1,5 +1,5 @@
 /**
- * @author Hang Zelin
+ * @@author Hang Zelin
  *
  * Stores all the tasks for the Duke. Duke can refer to this tasklist to see a specific task
  * or make use of the methods in it to execute an operation.

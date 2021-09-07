@@ -1,5 +1,5 @@
 /**
- * @author Hang Zelin
+ * @@author Hang Zelin
  *
  * Deadlines class that extends Task class. It is one of the types in 3 tasks.
  * Will contain a time in the form of "/by"

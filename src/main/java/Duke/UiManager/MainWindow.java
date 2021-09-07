@@ -1,5 +1,5 @@
 /**
- * @author Hang Zelin
+ * @@author Hang Zelin
  *
  * Controller for MainWindow. Provides the layout for the other controls.
  */
