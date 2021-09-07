@@ -56,7 +56,7 @@ public class Todo extends Task {
      */
     @Override
     public boolean equals(Object comparedObject) {
-        if (!(comparedObject instanceof Task)) {
+        if (!(comparedObject instanceof Todo)) {
             return false;
         }
         Todo comparedTodoTask = (Todo) comparedObject;
