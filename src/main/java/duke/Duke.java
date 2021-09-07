@@ -17,6 +17,7 @@ public class Duke {
 
     private duke.Storage storage;
     private duke.TaskList taskList;
+    private PrintWriter writer;
 
     /**
      * Public constructor for Duke class. Creates instance of Duke class.
@@ -28,7 +29,8 @@ public class Duke {
         this.storage = new duke.Storage(file);
         try {
             this.taskList = new duke.TaskList();
-        } catch (Exception e) {
+            this.writer = this.storage.load();
+        } catch (IOException e) {
 
         }
     }
@@ -41,16 +43,11 @@ public class Duke {
      * @throws DukeException
      */
     public void run() throws DukeException {
-        try {
-            File dukeFile = new File("data/duke.txt");
-            PrintWriter writer  = this.storage.load();
+        File dukeFile = new File("data/duke.txt");
 
-            Ui.showWelcomeMessage();
+        Ui.showWelcomeMessage();
 
-            Parser.parseCommand(taskList, dukeFile, writer);
-        } catch (IOException e) {
-            System.out.println(e.toString());
-        }
+        Parser.parseCommand(taskList, dukeFile, writer);
     }
 
     /**
@@ -59,10 +56,9 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            File dukeFile = new File("data/duke.txt");
-            PrintWriter writer = this.storage.load();
+            File dukeFile = this.storage.getFile();
             return Parser.getCommandResponse(this.taskList, dukeFile, writer, input);
-        } catch (IOException | DukeException e) {
+        } catch (DukeException e) {
             return "ERROR! Please provide the correct input!";
         }
     }

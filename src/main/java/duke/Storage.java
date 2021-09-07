@@ -28,6 +28,15 @@ public class Storage {
     }
 
     /**
+     * Getter to get the file.
+     *
+     * @return The file.
+     */
+    public File getFile() {
+        return this.file;
+    }
+
+    /**
      * Method that loads the file, by creating it if it does not exist and adds the format
      * of the file to the top and clears all previous data before starting.
      *
