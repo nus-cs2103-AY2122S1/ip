@@ -66,6 +66,7 @@ public class Storage {
      * @throws DukeException if unexpected error is encountered.
      */
     public void updateFile(String tasks) throws DukeException {
+        assert file.exists() : "The file does not exist!";
         try {
             FileWriter fw = new FileWriter(filePath);
             fw.write(tasks);
@@ -82,7 +83,7 @@ public class Storage {
      * @return A task that corresponds with the string description of the task.
      * @throws DukeException if task cannot be identified.
      */
-    public Task taskFormatter(String task) throws DukeException {
+    public Task taskFormatter(String task) throws AssertionError {
         String type = task.substring(1, 2);
         String doneStatus = task.substring(4, 5);
         Task t;
@@ -104,7 +105,7 @@ public class Storage {
             t = new ToDo(descT);
             break;
         default:
-            throw new DukeException("Unknown task");
+            throw new AssertionError("Unknown task");
         }
         if (doneStatus.equals("X")) {
             t.markAsDone();

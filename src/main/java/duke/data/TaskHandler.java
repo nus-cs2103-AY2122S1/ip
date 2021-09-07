@@ -69,6 +69,7 @@ public class TaskHandler {
     public String markTaskAsDone(int taskNo) {
         String toPrint = Ui.markAsDone();
         Task task = list.get(taskNo - 1);
+        assert task.getStatusIcon() != "X" : "Completed task cannot be marked as done again.";
         task.markAsDone();
         toPrint = toPrint.concat(Ui.indentation() + task + "\n");
         return toPrint;
@@ -133,6 +134,7 @@ public class TaskHandler {
      * @return A string of the formatted tasklist.
      */
     public String formatTasksToSave() {
+        assert list.size() != 0 : "There are no tasks to save!";
         String[] tasksToSave = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
             tasksToSave[i] = list.get(i).toSave();
