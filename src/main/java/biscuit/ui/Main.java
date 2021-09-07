@@ -25,6 +25,8 @@ public class Main extends Application {
             if (params.size() == 1) {
                 defaultPath = params.get(0);
             }
+            assert !defaultPath.trim().isEmpty() : "File path cannot be empty";
+            assert defaultPath.endsWith(".csv") : "File type must be .csv";
             Biscuit biscuit = new Biscuit(defaultPath);
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();

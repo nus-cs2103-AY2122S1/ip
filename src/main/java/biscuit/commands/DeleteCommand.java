@@ -31,20 +31,21 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException {
-        if (userInputs.length == 2) {
-            try {
-                int index = Integer.parseInt(userInputs[1]) - 1;
-                Task toDelete = taskList.getTask(index);
-                taskList.removeTask(index);
-                storage.save();
-                return "Noted. I've removed the following task:\n\t" + toDelete
+        if (userInputs.length < 2) {
+            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D "
+                    + "OOPS!!! The delete task number cannot be empty.");
+        }
+
+        try {
+            int index = Integer.parseInt(userInputs[1]) - 1;
+            Task toDelete = taskList.getTask(index);
+            taskList.removeTask(index);
+            storage.save();
+            return "Noted. I've removed the following task:\n\t" + toDelete
                     + "\nNow you have " + taskList.size() + " tasks in the list.";
-            } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! Please enter a valid number"
-                        + (taskList.size() == 1 ? " of 1" : " from 1 to " + taskList.size()) + ".");
-            }
-        } else {
-            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! The delete task number cannot be empty.");
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! Please enter a valid number"
+                    + (taskList.size() == 1 ? " of 1" : " from 1 to " + taskList.size()) + ".");
         }
     }
 }
