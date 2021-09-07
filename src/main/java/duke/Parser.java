@@ -1,14 +1,13 @@
 package duke;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
     private LocalDate date;
     /**
-     * combine an array of strings into a space seperated sentence.
+     * combines an array of strings into a space seperated sentence.
      * @param input the string array.
      * @return the sentence.
      */
@@ -25,7 +24,7 @@ public class Parser {
     }
 
     /**
-     * Convert the user input string into meaningful commands.
+     * Converts the user input string into meaningful commands.
      * @param input the user input string.
      * @return the meaningful commands.
      */
@@ -101,9 +100,9 @@ public class Parser {
 
     /**
      * Parses a raw date string as input into a valid date and time string.
-     * @param input The raw date string
-     * @return A string valid as a date
-     * @throws DukeException Thrown if the input is an invalid date
+     * @param input The raw date string.
+     * @return A string valid as a date.
+     * @throws DukeException Thrown if the input is an invalid date.
      */
     private String parseDate(String input) throws DukeException {
         try {
