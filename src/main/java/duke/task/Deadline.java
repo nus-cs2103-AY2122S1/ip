@@ -1,5 +1,8 @@
 package duke.task;
 
+import duke.exception.InvalidTaskException;
+
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -15,14 +18,21 @@ public class Deadline extends Task {
      *
      * @param task The name of Deadline.
      * @param taskTime The time of Deadline.
+     * @throws InvalidTaskException Throws exception if input is not valid.
      */
-    public Deadline(String task, String taskTime) {
+    public Deadline(String task, String taskTime) throws InvalidTaskException {
         super(task);
         String[] dateAndTime = taskTime.split(" ");
-        System.out.println(dateAndTime[0]);
-        System.out.println(dateAndTime[1]);
-        this.deadlineDate = LocalDate.parse(dateAndTime[0]);
-        this.deadlineTime = LocalTime.parse(dateAndTime[1]);
+        if (dateAndTime.length == 2) {
+            try {
+                this.deadlineDate = LocalDate.parse(dateAndTime[0]);
+                this.deadlineTime = LocalTime.parse(dateAndTime[1]);
+            } catch (DateTimeException dateTimeException) {
+                throw new InvalidTaskException("Deadline");
+            }
+        } else {
+            throw new InvalidTaskException("Deadline");
+        }
     }
 
     /**
@@ -31,12 +41,21 @@ public class Deadline extends Task {
      * @param task The name of Deadline.
      * @param isDone Whether the task is done or not.
      * @param taskTime The time of Deadline.
+     * @throws InvalidTaskException Throws exception if input is not valid.
      */
-    public Deadline(String task, boolean isDone, String taskTime) {
+    public Deadline(String task, boolean isDone, String taskTime) throws InvalidTaskException {
         super(task, isDone);
         String[] dateAndTime = taskTime.split(" ");
-        this.deadlineDate = LocalDate.parse(dateAndTime[0]);
-        this.deadlineTime = LocalTime.parse(dateAndTime[1]);
+        if (dateAndTime.length == 2) {
+            try {
+                this.deadlineDate = LocalDate.parse(dateAndTime[0]);
+                this.deadlineTime = LocalTime.parse(dateAndTime[1]);
+            } catch (DateTimeException dateTimeException) {
+                throw new InvalidTaskException("Deadline");
+            }
+        } else {
+            throw new InvalidTaskException("Deadline");
+        }
     }
 
     /**
@@ -63,6 +82,21 @@ public class Deadline extends Task {
     public String toStoredString() {
         int finished = this.isDone() ? 1 : 0;
         return "D | " + finished + " | " + this.getTaskName() + " | " + deadlineDate + " " + deadlineTime;
+    }
+
+    /**
+     * Compares this object with a given object.
+     *
+     * @param comparedObject The object compared with this object.
+     * @return Returns true if they are equal, false otherwise.
+     */
+    @Override
+    public boolean equals(Object comparedObject) {
+        if (!(comparedObject instanceof Deadline)) {
+            return false;
+        }
+        Deadline comparedDeadlineTask = (Deadline) comparedObject;
+        return comparedDeadlineTask.toString().equals(this.toString());
     }
 
     private String outputTaskTime() {

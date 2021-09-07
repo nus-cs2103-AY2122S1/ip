@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.exception.DuplicateException;
 import duke.exception.IndexOutOfBoundException;
 import duke.exception.InvalidTaskException;
 import duke.task.Task;
@@ -34,7 +35,7 @@ public class Command {
     /**
      * Ask storage to load tasks in the txt file.
      */
-    public void loadSavedTasks() throws IOException {
+    public void loadSavedTasks() throws DuplicateException, InvalidTaskException, IOException {
         storage.loadSavedTasks();
     }
 
@@ -90,21 +91,21 @@ public class Command {
         return new StringBuilder("Sorry, I don't understand what do you want me to do.");
     }
 
-    private StringBuilder addNewTodoTask(String task) throws InvalidTaskException, IOException {
+    private StringBuilder addNewTodoTask(String task) throws DuplicateException, InvalidTaskException, IOException {
         Task todoTask = Parser.testTodoValidity(task);
         taskList.addTask(todoTask);
         storage.saveNewTask(todoTask);
         return response.getAddNewTaskMessage();
     }
 
-    private StringBuilder addNewDeadlineTask(String task) throws InvalidTaskException, IOException {
+    private StringBuilder addNewDeadlineTask(String task) throws DuplicateException, InvalidTaskException, IOException {
         Task deadlineTask = Parser.testDeadlineValidity(task);
         taskList.addTask(deadlineTask);
         storage.saveNewTask(deadlineTask);
         return response.getAddNewTaskMessage();
     }
 
-    private StringBuilder addNewEventTask(String task) throws InvalidTaskException, IOException {
+    private StringBuilder addNewEventTask(String task) throws DuplicateException, InvalidTaskException, IOException {
         Task eventTask = Parser.testEventValidity(task);
         taskList.addTask(eventTask);
         storage.saveNewTask(eventTask);

@@ -1,5 +1,6 @@
 package duke.gui;
 
+import duke.exception.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -39,6 +40,8 @@ public class MainWindow extends AnchorPane {
             String messageToUser = "Sorry, there is something wrong with the given file. I cannot load" +
                     "current tasks.";
             dialogContainer.getChildren().add(DialogBox.getDukeDialog(messageToUser, dukeImage));
+        } catch (DukeException dukeException) {
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeException.getMessage(), dukeImage));
         }
     }
 

@@ -75,4 +75,19 @@ public class Task {
     public String toStoredString() {
         return taskName;
     }
+
+    /**
+     * Compares this object with a given object.
+     *
+     * @param comparedObject The object compared with this object.
+     * @return Returns true if they are equal, false otherwise.
+     */
+    @Override
+    public boolean equals(Object comparedObject) {
+        if (!(comparedObject instanceof Task)) {
+            return false;
+        }
+        Task comparedTask = (Task) comparedObject;
+        return comparedTask.toString().equals(this.toString());
+    }
 }

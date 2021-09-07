@@ -53,4 +53,19 @@ public class Event extends Task {
         int finished = this.isDone() ? 1 : 0;
         return "E | " + finished + " | " + this.getTaskName() + " | " + eventTime;
     }
+
+    /**
+     * Compares this object with a given object.
+     *
+     * @param comparedObject The object compared with this object.
+     * @return Returns true if they are equal, false otherwise.
+     */
+    @Override
+    public boolean equals(Object comparedObject) {
+        if (!(comparedObject instanceof Event)) {
+            return false;
+        }
+        Event comparedEventTask = (Event) comparedObject;
+        return comparedEventTask.toString().equals(this.toString());
+    }
 }

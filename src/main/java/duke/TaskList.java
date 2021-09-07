@@ -1,5 +1,6 @@
 package duke;
 
+import duke.exception.DuplicateException;
 import duke.task.Task;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,15 +9,18 @@ import java.util.List;
  * Wraps out a list containing the tasks of the user.
  */
 public class TaskList {
-    private List<Task> tasks = new ArrayList<>();
+    private List<Task> taskList = new ArrayList<>();
 
     /**
      * Adds new task to the task list.
      *
      * @param task The new task user wants to add to the list.
      */
-    public void addTask(Task task) {
-        this.tasks.add(task);
+    public void addTask(Task task) throws DuplicateException {
+        if (taskList.contains(task)) {
+            throw new DuplicateException();
+        }
+        taskList.add(task);
     }
 
     /**
@@ -25,7 +29,7 @@ public class TaskList {
      * @return The current number of elements in the list.
      */
     public int size() {
-        return this.tasks.size();
+        return taskList.size();
     }
 
     /**
@@ -35,7 +39,7 @@ public class TaskList {
      * @return The task that user wants to get.
      */
     public Task getTask(int i) {
-        return this.tasks.get(i);
+        return taskList.get(i);
     }
 
     /**
@@ -45,6 +49,6 @@ public class TaskList {
      * @return The removed task.
      */
     public Task removeTask(int i) {
-        return this.tasks.remove(i);
+        return taskList.remove(i);
     }
 }

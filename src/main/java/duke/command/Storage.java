@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.exception.DuplicateException;
+import duke.exception.InvalidTaskException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -53,7 +55,7 @@ public class Storage {
      *
      * @param sc The scanner for the src file.
      */
-    public void readEvents(Scanner sc) {
+    public void readEvents(Scanner sc) throws DuplicateException, InvalidTaskException {
         while (sc.hasNextLine()) {
             String task = sc.nextLine();
 
@@ -106,7 +108,7 @@ public class Storage {
      *
      * @throws IOException Throws IOException when Scanner cannot be created with the given src.
      */
-    public void loadSavedTasks() throws IOException {
+    public void loadSavedTasks() throws DuplicateException, IOException, InvalidTaskException {
         Scanner sc = new Scanner(src);
         readEvents(sc);
         sc.close();

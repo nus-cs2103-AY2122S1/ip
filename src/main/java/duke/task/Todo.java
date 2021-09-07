@@ -47,4 +47,19 @@ public class Todo extends Task {
         int finished = isDone() ? 1 : 0;
         return "T | " + finished + " | " + this.getTaskName();
     }
+
+    /**
+     * Compares this object with a given object.
+     *
+     * @param comparedObject The object compared with this object.
+     * @return Returns true if they are equal, false otherwise.
+     */
+    @Override
+    public boolean equals(Object comparedObject) {
+        if (!(comparedObject instanceof Task)) {
+            return false;
+        }
+        Todo comparedTodoTask = (Todo) comparedObject;
+        return comparedTodoTask.toString().equals(this.toString());
+    }
 }
