@@ -13,10 +13,12 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class Storage {
 
     private File localStorageFile;
+    private String localStorageFilePath;
 
     /**
      * Constructor for class Storage
@@ -31,6 +33,7 @@ public class Storage {
             throw new DukeException("No local storage found");
         } finally {
             this.localStorageFile = localStorageFile;
+            this.localStorageFilePath = filePath;
         }
     }
 
@@ -48,38 +51,42 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw new DukeException("You don't have a local file, so I will create a new one just for you!");
         }
-        while (scanner.hasNext()) {
-            String lineFromLocalStorage = scanner.nextLine();
-            if (lineFromLocalStorage.contains("[") && lineFromLocalStorage.contains("]") ) {
-                char taskType = lineFromLocalStorage.charAt(1);
-                char completed = lineFromLocalStorage.charAt(4);
-                String restOfTheTask = lineFromLocalStorage.substring(7);
-                if (taskType == 'T') {
-                    Task newTask = new ToDo(restOfTheTask);
-                    if (String.valueOf(completed).equals("✅")) {
-                        newTask.markAsCompleted();
+        try (Stream<String> localStorageStream = Files.lines(Paths.get(localStorageFilePath))) {
+            localStorageStream.parallel().forEach(lineFromLocalStorage -> {
+                if (lineFromLocalStorage.contains("[") && lineFromLocalStorage.contains("]") ) {
+                    char taskType = lineFromLocalStorage.charAt(1);
+                    char completed = lineFromLocalStorage.charAt(4);
+                    String restOfTheTask = lineFromLocalStorage.substring(7);
+                    if (taskType == 'T') {
+                        Task newTask = new ToDo(restOfTheTask);
+                        if (String.valueOf(completed).equals("✅")) {
+                            newTask.markAsCompleted();
+                        }
+                        toDoList.add(newTask);
+                    } else if (taskType == 'E') {
+                        String[] parsedEventInput = restOfTheTask.split("\\(at: ", 2);
+                        String eventTime = parsedEventInput[1].split("\\)", 2)[0];
+                        LocalDate localDate = LocalDate.parse(eventTime, Duke.getFormatter());
+                        Task newTask = new Event(parsedEventInput[0], localDate);
+                        if (String.valueOf(completed).equals("✅")) {
+                            newTask.markAsCompleted();
+                        }
+                        toDoList.add(newTask);
+                    } else if (taskType == 'D') {
+                        String[] parsedDeadlineInput = restOfTheTask.split("\\(by: ", 2);
+                        String deadlineTime = parsedDeadlineInput[1].split("\\)", 2)[0];
+                        LocalDate localDate = LocalDate.parse(deadlineTime, Duke.getFormatter());
+                        Task newTask = new Event(parsedDeadlineInput[0], localDate);
+                        if (String.valueOf(completed).equals("✅")) {
+                            newTask.markAsCompleted();
+                        }
+                        toDoList.add(newTask);
                     }
-                    toDoList.add(newTask);
-                } else if (taskType == 'E') {
-                    String[] parsedEventInput = restOfTheTask.split("\\(at: ", 2);
-                    String eventTime = parsedEventInput[1].split("\\)", 2)[0];
-                    LocalDate localDate = LocalDate.parse(eventTime, Duke.getFormatter());
-                    Task newTask = new Event(parsedEventInput[0], localDate);
-                    if (String.valueOf(completed).equals("✅")) {
-                        newTask.markAsCompleted();
-                    }
-                    toDoList.add(newTask);
-                } else if (taskType == 'D') {
-                    String[] parsedDeadlineInput = restOfTheTask.split("\\(by: ", 2);
-                    String deadlineTime = parsedDeadlineInput[1].split("\\)", 2)[0];
-                    LocalDate localDate = LocalDate.parse(deadlineTime, Duke.getFormatter());
-                    Task newTask = new Event(parsedDeadlineInput[0], localDate);
-                    if (String.valueOf(completed).equals("✅")) {
-                        newTask.markAsCompleted();
-                    }
-                    toDoList.add(newTask);
                 }
-            }
+            });
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         scanner.close();
         return toDoList;

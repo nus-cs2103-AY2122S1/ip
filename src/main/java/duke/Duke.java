@@ -147,36 +147,6 @@ public class Duke extends Application {
     }
 
     /**
-     * Runs Duke until bye is input by user
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.printReplyOpening(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.reply(e.getMessage());
-            } finally {
-                ui.printReplyClosing();
-            }
-        }
-    }
-
-//    /**
-//     * javafx.Main function to start Duke
-//     *
-//     * @param args
-//     */
-//    public static void main(String[] args) {
-//        new Duke(LOCAL_STORAGE_LOCATION).run();
-//    }
-
-    /**
      * Returns location of local storage
      *
      * @return location of local storage
