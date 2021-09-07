@@ -23,6 +23,33 @@ import duke.exception.MessageEmptyException;
  */
 public class Parser {
 
+    /** Represents the bye command word to call. */
+    public final String BYE_COMMAND = "bye";
+
+    /** Represents the deadline command word to call. */
+    public final String DEADLINE_COMMAND = "deadline";
+
+    /** Represents the delete command word to call. */
+    public static final String DELETE_COMMAND = "delete";
+
+    /** Represents the done command word to call. */
+    public final String DONE_COMMAND = "done";
+
+    /** Represents the event command word to call. */
+    public final String EVENT_COMMAND = "event";
+
+    /** Represents the find command word to call. */
+    public final String FIND_COMMAND = "find";
+
+    /** Represents the list command word to call. */
+    public final String LIST_COMMAND = "list";
+
+    /** Represents the todo command word to call. */
+    public final String TODO_COMMAND = "todo";
+
+    /** Represents an empty command word to call. */
+    public static final String EMPTY_COMMAND = "";
+
     /**
      * Parses a string task list index to an integer.
      *
@@ -68,8 +95,8 @@ public class Parser {
             throw new MessageEmptyException();
         }
 
-        String description = result[0].trim(); // trims the additional spaces to the left and right of "by"
-        String by = result[1].trim(); // trims the additional spaces to the left and right of "by"
+        String description = result[0].trim();
+        String by = result[1].trim();
         parsedDeadline.add(description);
         parsedDeadline.add(by);
         return parsedDeadline;
@@ -150,31 +177,51 @@ public class Parser {
      */
     public Command handleCommands(String input) throws DukeException {
         // isolates the command word
-        input = input.trim();
-        String[] words = input.split(" ");
-        String command = words[0];
+        String[] words = parseInput(input);
+        String command = getCommand(words);
 
         switch (command) {
-        case "bye": // only applicable to GUI Duke
+        case BYE_COMMAND: // only applicable to GUI Duke
             return new ByeCommand();
-        case "list":
-            return new ListCommand();
-        case "done":
-            return new DoneCommand(parseIndex(words));
-        case "deadline":
+        case DEADLINE_COMMAND:
             return new DeadlineCommand(parseAddDeadline(input));
-        case "todo":
-            return new TodoCommand(parseTodo(input));
-        case "event":
-            return new EventCommand(parseAddEvent(input));
-        case "delete":
+        case DELETE_COMMAND:
             return new DeleteCommand(parseIndex(words));
-        case "find":
+        case DONE_COMMAND:
+            return new DoneCommand(parseIndex(words));
+        case EVENT_COMMAND:
+            return new EventCommand(parseAddEvent(input));
+        case FIND_COMMAND:
             return new FindCommand(words);
-        case "": // empty user input
+        case LIST_COMMAND:
+            return new ListCommand();
+        case TODO_COMMAND:
+            return new TodoCommand(parseTodo(input));
+        case EMPTY_COMMAND:
             throw new EmptyCommandException();
         default: // all other inputs that are not supported
             throw new InvalidCommandException();
         }
+    }
+
+    /**
+     * Trims the user input and splits it by white spaces.
+     *
+     * @param input entire user input.
+     * @return an array of Strings of the user input split by white spaces.
+     */
+    private String[] parseInput(String input) {
+        String trimmedInput = input.trim();
+        return trimmedInput.split(" ");
+    }
+
+    /**
+     * Isolates the command word.
+     *
+     * @param parsedInput parsed user input.
+     * @return command word for the relevant task.
+     */
+    private String getCommand(String[] parsedInput) {
+        return parsedInput[0].toLowerCase();
     }
 }

@@ -192,7 +192,6 @@ public class TaskList {
 
         for (Task task : taskList) {
             String taskString = task.toString();
-
             if (taskString.matches(regex)) {
                 matchingTasks.add(task);
             }

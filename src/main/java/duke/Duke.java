@@ -35,7 +35,7 @@ public class Duke {
     private final Parser parser;
 
     /**
-     * Constructor for the Duke chatbot.
+     * Constructor for the Duke chat bot.
      * Loads any pre-existing data from the provided filePath.
      */
     public Duke() {
@@ -80,7 +80,7 @@ public class Duke {
     }
 
     /**
-     * Runs the Duke chatbot.
+     * Runs the Duke chat bot.
      *
      * @param args command line arguments.
      */
