@@ -11,7 +11,9 @@ import task.Task;
 
 public class SortByTimeCommand extends Command {
     /**
-     * A method to sort the current taskList by date.
+     * A method to sort the current taskList by time.
+     * When this method is executed, all the tasks in the given
+     * TaskList will be sorted by their time.
      *
      * @param taskList The given Duke TaskList.
      * @param ui The given Duke Ui.
