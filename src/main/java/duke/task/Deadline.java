@@ -24,13 +24,13 @@ public class Deadline extends TimedTask {
     }
 
     @Override
-    public Task updateName(String input) {
-        try {
-            return new Deadline(input, this.getDateTimeInternal(), this.getCompleted());
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-            return Task.emptyTask();
-        }
+    public Task updateDateTime(String dateTime) throws DukeException{
+        return new Deadline(this.getName(), dateTime, this.getCompleted());
+    }
+
+    @Override
+    public Task updateName(String input) throws DukeException {
+        return new Deadline(input, this.getDateTimeInternal(), this.getCompleted());
     }
 
     @Override

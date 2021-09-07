@@ -41,7 +41,7 @@ public class DeadlineCommand extends Command implements TaskListAddable {
         if (eventList.length != 2) {
             throw new DukeException("Incorrect command was given for deadline. "
                     + "Try this: deadline name_here"
-                    + " /at date_here");
+                    + " /by date_here");
         }
         Task event = new Deadline(eventList[0], eventList[1], false);
         String feedback = addTaskToTaskList(taskList, event);
