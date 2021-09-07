@@ -25,19 +25,24 @@ public class Deadline extends Task {
         if (temp.endsWith(")")) {
             return temp;
         }
+
         temp = temp.replace("deadline ", "");
 
+        // Obtain the time and date of the deadline
         String oldDate = temp.substring(temp.lastIndexOf("by") + 3);
         DateTimeConverter converter = new DateTimeConverter();
         String newDate = converter.convertDateAndTime(oldDate);
         temp = temp.replace(oldDate, newDate);
 
         int intBeforeBy = temp.lastIndexOf("by") - 1;
+
+        // Reformat if user types a character before "by" like /by
         if (temp.charAt(intBeforeBy) != ' ') {
             char tempChar = temp.charAt(intBeforeBy);
             temp = temp.replace(String.valueOf(tempChar), "(");
             return temp + ")";
         }
+
         String afterDescription = temp.substring(temp.indexOf("by"));
         String description = temp.substring(0, temp.indexOf("by"));
         return description + "(" + afterDescription + ")";

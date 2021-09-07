@@ -28,17 +28,20 @@ public class Event extends Task {
         }
         temp = temp.replace("event ", "");
 
+        // Obtain the time and date of the Event
         String oldDate = temp.substring(temp.lastIndexOf("at") + 3);
         DateTimeConverter converter = new DateTimeConverter();
         String newDate = converter.convertDateAndTime(oldDate);
         temp = temp.replace(oldDate, newDate);
 
+        // Reformat if user types a character before "at" like /at
         int intBeforeBy = temp.lastIndexOf("at") - 1;
         if (temp.charAt(intBeforeBy) != ' ') {
             char tempChar = temp.charAt(intBeforeBy);
             temp = temp.replace(String.valueOf(tempChar), "(");
             return temp + ")";
         }
+
         String afterDescription = temp.substring(temp.indexOf("at"));
         String description = temp.substring(0, temp.indexOf("at"));
         return description + "(" + afterDescription + ")";

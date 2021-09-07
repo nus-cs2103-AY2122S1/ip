@@ -75,18 +75,25 @@ public class Storage {
             // read file line by line and decipher into arraylist
             String nextLine = readFile.nextLine();
             char typeOfTask = nextLine.charAt(1);
-            char isTaskDone = nextLine.charAt(4);
+            char taskStatus = nextLine.charAt(4);
             String description = nextLine.substring(6);
-            Task temp = null;
-            if (typeOfTask == 'D') {
+            Task temp;
+
+            boolean isDeadLine = typeOfTask == 'D';
+            boolean isEvent = typeOfTask == 'E';
+            boolean isTaskDone = taskStatus == 'X';
+
+            if (isDeadLine) {
                 temp = new Deadline(description);
-            } else if (typeOfTask == 'E') {
+            } else if (isEvent) {
                 temp = new Event(description);
-            } else if (typeOfTask == 'T') {
+            } else {
                 temp = new Task(description);
             }
-            if (isTaskDone == 'X') {
-                assert temp != null;
+
+            assert temp != null: "Temp will be a Deadline, Event or Task";
+
+            if (isTaskDone) {
                 temp.markSaved();
             }
             newList.add(temp);

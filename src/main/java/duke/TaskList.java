@@ -29,12 +29,17 @@ public class TaskList {
      * @param userInput Line of user input which contains the task.
      */
     public static String addTask(String userInput) {
-        if (userInput.startsWith("deadline") || userInput.startsWith("event") ||
-                userInput.startsWith("todo")) {
+        boolean isDeadLine = userInput.startsWith("deadline");
+        boolean isEvent = userInput.startsWith("event");
+        boolean isToDo = userInput.startsWith("todo");
+        boolean isCorrectDeadlineFormat = userInput.contains("by");
+        boolean isCorrectEventFormat = userInput.contains("at");
+
+        if (isDeadLine || isEvent || isToDo) {
             Task newTask;
-            if (userInput.startsWith("deadline") && userInput.contains("by")) {
+            if (isDeadLine && isCorrectDeadlineFormat) {
                 newTask = new Deadline(userInput);
-            } else if (userInput.startsWith("event") && userInput.contains("at")) {
+            } else if (isEvent && isCorrectEventFormat) {
                 newTask = new Event(userInput);
             } else {
                 newTask = new ToDo(userInput);
@@ -75,11 +80,17 @@ public class TaskList {
      * @param userInput UserInput which indicates which task is done.
      */
     public static String markTaskDone(String userInput) {
-        String index = userInput.substring(5);
-        int x = Integer.parseInt(index);
-        Task temp = contents.get(x - 1);
-        temp.markDone();
-        return Ui.markTaskMessage(temp);
+        try {
+            String index = userInput.substring(5);
+            int x = Integer.parseInt(index);
+            Task temp = contents.get(x - 1);
+            temp.markDone();
+            return Ui.markTaskMessage(temp);
+        } catch (StringIndexOutOfBoundsException e) {
+            return Ui.invalidDoneInput();
+        } catch (ArrayIndexOutOfBoundsException f) {
+            return Ui.numberOutsideOfArrayBounds();
+        }
     }
 
     /**
@@ -88,12 +99,18 @@ public class TaskList {
      * @param userInput UserInput which indicates which task is to be removed.
      */
     public static String removeTask(String userInput) {
-        String index = userInput.substring(7);
-        int x = Integer.parseInt(index);
-        Task temp = contents.get(x - 1);
-        contents.remove(temp);
-        assert !contents.contains(temp) : "Task List should not contain current Task";
-        return Ui.removeTaskMessage(temp);
+        try {
+            String index = userInput.substring(7);
+            int x = Integer.parseInt(index);
+            Task temp = contents.get(x - 1);
+            contents.remove(temp);
+            assert !contents.contains(temp) : "Task List should not contain current Task";
+            return Ui.removeTaskMessage(temp);
+        } catch (StringIndexOutOfBoundsException e) {
+            return Ui.invalidDeleteInput();
+        } catch (ArrayIndexOutOfBoundsException f) {
+            return Ui.numberOutsideOfArrayBounds();
+        }
     }
 
     /**
@@ -111,19 +128,25 @@ public class TaskList {
      * @param userInput Search request by the user.
      */
     public static String findTask(String userInput) {
-        String keyword = userInput.substring(5);
-        ArrayList<Task> matchingList = new ArrayList<>();
-        int counter = 0;
-        for (Task x : contents) {
-            if (x.getDescription().contains(keyword)) {
-                matchingList.add(x);
-                counter++;
+        try {
+            String keyword = userInput.substring(5);
+            ArrayList<Task> matchingList = new ArrayList<>();
+            int counter = 0;
+            for (Task x : contents) {
+                if (x.getDescription().contains(keyword)) {
+                    matchingList.add(x);
+                    counter++;
+                }
             }
-        }
-        if (counter == 0) {
-            return Ui.searchFoundNothing();
-        } else {
-            return Ui.searchList(matchingList);
+            if (counter == 0) {
+                return Ui.searchFoundNothing();
+            } else {
+                return Ui.searchList(matchingList);
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            return Ui.invalidFindInput();
+        } catch (ArrayIndexOutOfBoundsException f) {
+            return Ui.numberOutsideOfArrayBounds();
         }
     }
 }
