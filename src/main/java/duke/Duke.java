@@ -15,23 +15,26 @@ public class Duke {
     private final Ui ui;
     private final InputParser parser;
 
+    /**
+     * Creates a new Duke object and instantiates Storage, Ui and an input parser.
+     */
     public Duke() {
         String filepath = "data/Duke.txt";
         ui = new Ui();
         listOfItems = new Tasklist();
         parser = new InputParser();
 
-        Path FILE_PATH = Paths.get(System.getProperty("user.dir"), filepath);
+        Path path = Paths.get(System.getProperty("user.dir"), filepath);
         try {
-            if (Files.notExists(FILE_PATH)) {
-                File f = new File(FILE_PATH.toString());
+            if (Files.notExists(path)) {
+                File f = new File(path.toString());
                 f.getParentFile().mkdirs();
                 f.createNewFile();
             }
         } catch (IOException e) {
             getResponse("An error occurred when opening the file. Try rerunning Duke again.");
         }
-        storage = new Storage(FILE_PATH);
+        storage = new Storage(path);
         listOfItems = storage.load();
     }
 
@@ -41,7 +44,7 @@ public class Duke {
      * @param input Gui input from the user.
      * @return String confirmation of task being successfully completed.
      */
-    private String markAsDone(String input){
+    private String markAsDone(String input) {
         try {
             String[] keywords = input.split(" ");
             Integer idx = keywords.length > 1 ? Integer.parseInt(keywords[1]) : -1;
@@ -153,7 +156,7 @@ public class Duke {
             String keyword = parser.getDescription(input);
             Tasklist validItems = listOfItems.findAllBy(keyword);
             return ui.listToPrintableString(validItems);
-        }catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("please input a keyword in the format: [find] (keyword)");
         } catch (NullPointerException e) {
             throw new DukeException("no tasks match your given keyword!");

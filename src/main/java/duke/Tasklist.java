@@ -14,6 +14,11 @@ public class Tasklist {
 
     }
 
+    /**
+     * Creates a new Tasklist object instantiated with Task objects stored.
+     *
+     * @param tasks Task objects to be stored into the new object.
+     */
     public Tasklist(List<Task> tasks) {
         for (Task t: tasks) {
             this.tasks.add(t);

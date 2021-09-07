@@ -1,14 +1,18 @@
 package duke;
 
 import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.util.Arrays;
+
 
 /**
  * This class extends the Task class, and contains information about events.
  */
 public class Event extends Task {
-
+    /**
+     * Creates an Event object.
+     *
+     * @param description User input for event to be added.
+     * @param date User input for date to be associated with task.
+     */
     public Event(String description, String date) {
         super(description);
         try {

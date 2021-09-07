@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
-
 import java.util.Scanner;
 
 /**
@@ -16,6 +15,11 @@ public class Storage {
     private final FileParser parser;
     private final Path filePath;
 
+    /**
+     * Creates a Storage object.
+     *
+     * @param filePath File path to read saved data from.
+     */
     public Storage(Path filePath) {
         this.filePath = filePath;
         saveFile = new File(filePath.toString());

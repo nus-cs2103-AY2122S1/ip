@@ -13,6 +13,11 @@ public class Task {
     protected String hasNoCross = "[]";
     protected LocalDate date;
 
+    /**
+     * Creates a new Task object and instantiates its associated attributes.
+     *
+     * @param input User input read from the GUI.
+     */
     public Task(String input) {
         isDone = false;
         item = input;

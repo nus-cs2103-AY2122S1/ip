@@ -24,18 +24,18 @@ public class FileParser {
             String datetime = args.length > 3 ? args[3] : "";
             Task task;
             switch(taskType) {
-                case "[E]":
-                    task = new Event(taskDescription, datetime);
-                    break;
-                case "[D]":
-                    task = new Deadline(taskDescription, datetime);
-                    break;
-                case "[T]":
-                    task = new Todo(taskDescription);
-                    break;
-                default:
-                    throw new DukeException("a line could not be read from the savefile or was read incorrectly. "
-                            + "An empty list will be used instead.");
+            case "[E]":
+                task = new Event(taskDescription, datetime);
+                break;
+            case "[D]":
+                task = new Deadline(taskDescription, datetime);
+                break;
+            case "[T]":
+                task = new Todo(taskDescription);
+                break;
+            default:
+                throw new DukeException("a line could not be read from the savefile or was read incorrectly. "
+                        + "An empty list will be used instead.");
             }
 
             if (isCompleted) {

@@ -1,14 +1,18 @@
 package duke;
 
 import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.util.Arrays;
+
 
 /**
  * A class that extends the Task class, containing information about deadlines.
  */
 public class Deadline extends Task {
-
+    /**
+     * Creates a Deadline object.
+     *
+     * @param description User input of deadline to be added.
+     * @param date User input of date of deadline.
+     */
     public Deadline(String description, String date) {
         super(description);
         try {
