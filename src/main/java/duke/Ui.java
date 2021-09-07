@@ -18,12 +18,22 @@ public class Ui {
 
     private static final String HELP_MESSAGE = "Add tasks by commands: todo, deadline, event\n"
             + "E.g. todo run, deadline hw /by yyyy-mm-dd {time}, event meeting /at {date and/or time}\n"
+            + "\n"
             + "To view list, type 'list'\n"
+            + "\n"
             + "To delete or mark task as done, type 'delete {task number}' or 'done {task number}'\n"
+            + "\n"
+            + "To find tasks by keyword, type 'find' followed by keywords.\n"
+            + "E.g. If your keywoord is run, type 'find run'.\n"
+            + "\n"
             + "To exit, type 'bye'";
 
 
     public Ui() {}
+
+    public static String getHelpMessage() {
+        return HELP_MESSAGE;
+    }
 
     /**
      * Gets the welcome message string.
