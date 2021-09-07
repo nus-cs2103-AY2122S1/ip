@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.ArchiveList;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -27,7 +28,7 @@ public class ListCommand extends Command {
      * @param storage Storage to save and load TaskList of Duke.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
         ui.print(taskList);
     }
 
@@ -40,7 +41,7 @@ public class ListCommand extends Command {
      * @param storage Storage to save and load TaskList of Duke.
      */
     @Override
-    public String getExecutedString(TaskList taskList, Ui ui, Storage storage) {
+    public String getExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
         return ui.getPrintString(taskList);
     }
 }

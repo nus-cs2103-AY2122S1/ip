@@ -1,13 +1,16 @@
 package duke;
 
 import duke.command.AddCommand;
+import duke.command.ArchiveCommand;
 import duke.command.Command;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.ListArchiveCommand;
 import duke.command.ListCommand;
 import duke.command.RemoveCommand;
 import duke.exception.DukeException;
+import duke.exception.IncompleteArchiveException;
 import duke.exception.IncompleteDeadlineException;
 import duke.exception.IncompleteEventException;
 import duke.exception.IncompleteFindException;
@@ -97,8 +100,21 @@ public class Parser {
      * @param input Input which is being checked.
      * @return true if input is a list command.
      */
-    private static boolean isList(String input) {
-        return input.equals("list");
+    private static boolean isListOrListArchive(String input) {
+        return isList(input) || isListArchive(input);
+    }
+
+    private static boolean isList(String userInput) {
+        String[] separated = userInput.split(" ");
+
+        return separated.length == 1 && separated[0].equals("list");
+    }
+
+
+    private static boolean isListArchive(String userInput) {
+        String[] separated = userInput.split(" ");
+
+        return separated.length == 2 && separated[1].equals("archive") && isList(separated[0]);
     }
 
     /**
@@ -132,6 +148,11 @@ public class Parser {
     private static boolean isTodo(String input) {
         String[] separated = input.split(" ");
         return separated[0].equals("todo");
+    }
+
+    private static boolean isArchive(String input) {
+        String[] separated = input.split(" ");
+        return separated[0].equals("archive");
     }
 
     /**
@@ -250,8 +271,8 @@ public class Parser {
      * @throws DukeException If incorrect values are passed for remove or done commands.
      */
     public static Command parse(String userInput, Ui ui, TaskList taskList) throws DukeException {
-        if (Parser.isList(userInput)) {
-            return new ListCommand();
+        if (Parser.isListOrListArchive(userInput)) {
+            return parseListCommand(userInput);
         } else if (Parser.isDone(userInput)) {
             return parseDoneCommand(userInput, taskList);
         } else if (Parser.isRemove(userInput)) {
@@ -266,8 +287,36 @@ public class Parser {
             return parseDeadlineCommand(userInput);
         } else if (Parser.isEvent(userInput)) {
             return parseEventCommand(userInput);
+        } else if (Parser.isArchive(userInput)) {
+            return parseArchiveCommand(userInput, taskList);
         } else {
             throw new InvalidCommandException();
+        }
+    }
+
+    private static Command parseListCommand(String userInput) throws InvalidCommandException {
+        if (isListArchive(userInput)) {
+            return new ListArchiveCommand();
+        } else if (isList(userInput)) {
+            return new ListCommand();
+        } else {
+            throw new InvalidCommandException();
+        }
+    }
+
+    private static ArchiveCommand parseArchiveCommand(String userInput, TaskList taskList) throws DukeException {
+        String[] separated = userInput.split(" ");
+
+        if (separated.length == 1) {
+            throw new IncompleteArchiveException();
+        }
+
+        if (isPositiveInteger(separated[1]) && !isOutOfRange(taskList, separated[1])) {
+            return new ArchiveCommand(Integer.valueOf(separated[1]) - 1);
+        } else if (isAll(separated[1])) {
+            return new ArchiveCommand(-1);
+        } else {
+            throw new IncompleteArchiveException();
         }
     }
 
@@ -362,54 +411,13 @@ public class Parser {
         if (lengthLessThanTwo || !isIntegerOrAll(separated[1])
                 || isOutOfRange(taskList, separated[1])) {
             throw new DukeException("Please key in valid number to remove.");
-        } else if (isInteger(separated[1])) {
+        } else if (isPositiveInteger(separated[1])) {
             return new RemoveCommand(Integer.valueOf(separated[1]) - 1);
         } else if (isAll(separated[1])) {
             return new RemoveCommand(-1);
         } else {
             throw new InvalidCommandException();
         }
-    }
-
-    /**
-     * Checks if String is an Integer or "all" word.
-     *
-     * @param s String to check.
-     * @return true if it is an Integer or "all" word, else false.
-     */
-    private static boolean isIntegerOrAll(String s) {
-        return isInteger(s) || isAll(s);
-    }
-
-    /**
-     * Checks if String is "all" word.
-     *
-     * @param s String to check.
-     * @return true if it is an "all" word.
-     */
-    private static boolean isAll(String s) {
-        return s.equals("all");
-    }
-
-    /**
-     * Checks if String is an Integer.
-     *
-     * @param s String to check.
-     * @return true if it is an Integer.
-     */
-    private static boolean isInteger(String s) {
-        return s.matches("\\d+");
-    }
-
-    /**
-     * Checks if string is within range of given taskList.
-     *
-     * @param taskList taskList to see if index s is within.
-     * @param s String to check if is within range of taskList.
-     * @return true if String is within the range of the taskList, else false.
-     */
-    private static boolean isOutOfRange(TaskList taskList, String s) {
-        return !isAll(s) && Integer.valueOf(s) > taskList.getSize();
     }
 
     /**
@@ -430,7 +438,7 @@ public class Parser {
         if (lengthLessThanTwo || !isIntegerOrAll(separated[1])
                 || isOutOfRange(taskList, separated[1])) {
             throw new DukeException("Please key in valid number to mark as done.");
-        } else if (isInteger(separated[1])) {
+        } else if (isPositiveInteger(separated[1])) {
             int index = Integer.valueOf(separated[1]) - 1;
             return new DoneCommand(index);
         } else if (isAll(separated[1])) {
@@ -439,6 +447,51 @@ public class Parser {
             throw new InvalidCommandException();
         }
     }
+
+    /**
+     * Checks if String is an Integer or "all" word.
+     *
+     * @param s String to check.
+     * @return true if it is an Integer or "all" word, else false.
+     */
+    private static boolean isIntegerOrAll(String s) {
+        return isPositiveInteger(s) || isAll(s);
+    }
+
+    /**
+     * Checks if String is "all" word.
+     *
+     * @param s String to check.
+     * @return true if it is an "all" word.
+     */
+    private static boolean isAll(String s) {
+        return s.equals("all");
+    }
+
+    /**
+     * Checks if String is an Integer.
+     *
+     * @param s String to check.
+     * @return true if it is an Integer.
+     */
+    private static boolean isPositiveInteger(String s) {
+        return s.matches("\\d+");
+    }
+
+    /**
+     * Checks if string is within range of given taskList.
+     *
+     * @param taskList taskList to see if index s is within.
+     * @param s String to check if is within range of taskList.
+     * @return true if String is within the range of the taskList, else false.
+     */
+    private static boolean isOutOfRange(TaskList taskList, String s) {
+        boolean isExceedLength = Integer.valueOf(s) > taskList.getSize();
+        boolean isLessThanOne = Integer.valueOf(s) < 1;
+
+        return !isAll(s) && (isExceedLength || isLessThanOne);
+    }
+
 
 
 }

@@ -11,6 +11,7 @@ public class Duke {
     private final Ui ui;
     private final Storage storage;
     private final TaskList taskList;
+    private final ArchiveList archiveList;
 
     /**
      * Constructor for Duke. Initialises Ui, Storage and TaskList objects.
@@ -19,6 +20,7 @@ public class Duke {
         this.ui = new Ui();
         this.storage = new Storage();
         this.taskList = new TaskList(storage.initialise());
+        this.archiveList = new ArchiveList(storage.initialiseArchive());
     }
 
     /**
@@ -31,7 +33,7 @@ public class Duke {
             try {
                 String userInput = ui.readInput();
                 Command c = Parser.parse(userInput, ui, taskList);
-                c.execute(taskList, ui, storage);
+                c.execute(taskList, archiveList, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
@@ -49,7 +51,7 @@ public class Duke {
     public String processInput(String input) {
         try {
             Command c = Parser.parse(input, ui, taskList);
-            return c.getExecutedString(taskList, ui, storage);
+            return c.getExecutedString(taskList, archiveList, ui, storage);
         } catch (DukeException e) {
             return e.getMessage();
         }

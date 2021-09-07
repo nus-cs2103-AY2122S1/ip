@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.ArchiveList;
 import duke.Storage;
 import duke.task.Task;
 import duke.TaskList;
@@ -37,7 +38,7 @@ public class RemoveCommand extends Command {
      * @param ui Ui to print to users of Duke.
      * @param storage Storage to save and load TaskList of Duke.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
         if (this.indexToRemove == -1) {
             String message = formatAndRemoveAll(taskList);
 
@@ -58,7 +59,7 @@ public class RemoveCommand extends Command {
      * @param storage Storage to save and load TaskList of Duke.
      */
     @Override
-    public String getExecutedString(TaskList taskList, Ui ui, Storage storage) {
+    public String getExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
         if (this.indexToRemove == -1) {
             String message = formatAndRemoveAll(taskList);
 

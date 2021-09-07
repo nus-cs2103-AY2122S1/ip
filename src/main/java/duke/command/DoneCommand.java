@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.ArchiveList;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -37,7 +38,7 @@ public class DoneCommand extends Command {
      * @param storage Storage to save and load TaskList for Duke.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
         if (this.indexToMarkAsDone == -1) {
             String message = formatAndMarkAllAsDone(taskList);
 
@@ -58,7 +59,7 @@ public class DoneCommand extends Command {
      * @param storage Storage to save and load TaskList for Duke.
      */
     @Override
-    public String getExecutedString(TaskList taskList, Ui ui, Storage storage) {
+    public String getExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
         if (this.indexToMarkAsDone == -1) {
             String message = formatAndMarkAllAsDone(taskList);
 

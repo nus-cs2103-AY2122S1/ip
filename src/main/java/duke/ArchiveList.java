@@ -4,14 +4,11 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
-/**
- * Represents the list of Tasks for Duke.
- */
-public class TaskList extends DukeList {
+public class ArchiveList extends DukeList {
     /**
      * Constructor for TaskList.
      */
-    public TaskList() {
+    public ArchiveList() {
         super();
     }
 
@@ -20,7 +17,7 @@ public class TaskList extends DukeList {
      *
      * @param list List to be assigned to tasks.
      */
-    public TaskList(ArrayList<Task> list) {
+    public ArchiveList(ArrayList<Task> list) {
         super(list);
     }
 
@@ -29,27 +26,30 @@ public class TaskList extends DukeList {
 //     *
 //     * @param toAdd Task to add to tasks.
 //     */
-//    @Override
 //    public void add(Task toAdd) {
 //        super.add(toAdd);
 //    }
 
     /**
-     * Getter for tasks.
+     * Getter for archived tasks.
      *
      * @return tasks.
      */
-    public ArrayList<Task> getTasks() {
+    public ArrayList<Task> getArchivedTasks() {
         return super.getTaskArrayList();
     }
 
-//    /**
+    @Override
+    public String type() {
+        return "archived list";
+    }
+
+    //    /**
 //     * Removes Task from given index from tasks.
 //     *
 //     * @param index Index of Task to remove from tasks.
 //     * @return The removed Task.
 //     */
-//    @Override
 //    public Task remove(int index) {
 //        return super.remove(index);
 //    }
@@ -59,9 +59,8 @@ public class TaskList extends DukeList {
 //     *
 //     * @return Size of tasks.
 //     */
-//    @Override
 //    public int getSize() {
-//        return super.getSize();
+//        return super.size();
 //    }
 
 //    /**
@@ -70,55 +69,21 @@ public class TaskList extends DukeList {
 //     * @param index Index of Task to get the String representation.
 //     * @return String representation of Task in tasks with given index.
 //     */
-//    @Override
 //    public String taskToString(int index) {
-//        return super.taskToString(index);
+//        return super.get(index).toString();
 //    }
-//
+
 //    /**
 //     * Converts Task of a given index in tasks to its String representation to save.
 //     *
 //     * @param index Index of Task to get the String representation to save.
 //     * @return String representation of Task in tasks with given index.
 //     */
-//    @Override
 //    public String taskSaveToString(int index) {
-//        return super.taskSaveToString(index);
+//        return super.get(index).convertToString();
 //    }
 
-    /**
-     * Marks Task at given index in tasks as done.
-     *
-     * @param index Index of Task to mark as done.
-     */
-    public void markAsDone(int index) {
-        super.get(index).markAsDone();
-    }
-
-    /**
-     * Finds tasks with given keyword in tasks.
-     *
-     * @param keyword Keyword of tasks we want to find.
-     * @return TaskList of Tasks with given keyword.
-     */
-    public TaskList findTasksWithKeyword(String keyword) {
-        ArrayList<Task> tasksWithKeyword = new ArrayList<>();
-
-        for (int i = 0; i < super.getSize(); i++) {
-            if (super.get(i).hasKeyword(keyword)) {
-                tasksWithKeyword.add(super.get(i));
-            }
-        }
-
-        return new TaskList(tasksWithKeyword);
-    }
-
-    @Override
-    public String type() {
-        return "list";
-    }
-
-    //    /**
+//    /**
 //     * Converts TaskList object into its String representation.
 //     *
 //     * @return String representation of TaskList object.
