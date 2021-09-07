@@ -3,6 +3,7 @@ package duke.parser;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import duke.commands.AddCommand;
@@ -185,12 +186,14 @@ public class Parser {
     }
 
     private Command handleDone(String details) throws DukeException {
+        String[] argArr = details.split(" ");
+        Set<Integer> indices;
         try {
-            int index = Integer.parseInt(details);
-            return new DoneCommand(index);
+            indices = Arrays.stream(argArr).map(Integer::parseInt).collect(Collectors.toSet());
         } catch (NumberFormatException e) {
-            throw new DukeException("You need to provide the index number of the task to be mark as done");
+            throw new DukeException("Must be in the format: done {index 1} {index 2} ...");
         }
+        return new DoneCommand(indices);
     }
 
     private Command handleDelete(String details) throws DukeException {
