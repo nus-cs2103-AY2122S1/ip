@@ -33,7 +33,7 @@ public class Duke {
      * @return response to GUI
      * @throws DukeException
      */
-    public String getResponse(String input) throws DukeException {
+    public String getResponse(String input) {
         try {
             String[] command = Parser.parse(input);
             if (command[0].equals("end")) {
@@ -42,11 +42,13 @@ public class Duke {
                 return ui.showTaskList(tasks);
             } else if (command[0].equals("done")) {
                 int index = Integer.parseInt(command[1]);
+                assert(index <= tasks.getSize());
                 Task completedTask = tasks.completeTask(index - 1);
                 storage.updateDone(index);
                 return ui.showCompletedTask(completedTask);
             } else if (command[0].equals("delete")) {
                 int index = Integer.parseInt(command[1]);
+                assert(index <= tasks.getSize());
                 Task deletedTask = tasks.deleteTask(index - 1);
                 storage.deleteData(index);
                 return ui.showDeletedTask(deletedTask, tasks.getSize());
@@ -75,7 +77,7 @@ public class Duke {
             } else {
                 return "Not a valid command";
             }
-        } catch (IOException | DukeException e) {
+        } catch (Exception e) {
             return ui.showError(e.getMessage());
         }
     }
