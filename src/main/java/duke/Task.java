@@ -6,6 +6,7 @@ package duke;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String tag;
 
     /**
      * Constructs a Task object.
@@ -14,6 +15,18 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.tag = "";
+    }
+
+    /**
+     * Constructs a Task object.
+     * @param description Description of the task.
+     * @param tag Tag associated to the task.
+     */
+    public Task(String description, String tag) {
+        this.description = description;
+        this.isDone = false;
+        this.tag = tag;
     }
 
     /**
@@ -37,6 +50,14 @@ public class Task {
      */
     public void markAsDone() {
         isDone = true;
+    }
+
+    /**
+     * Gets the task's tag.
+     * @return A string representation of the tag.
+     */
+    public String getTag() {
+        return tag;
     }
 
     /**
