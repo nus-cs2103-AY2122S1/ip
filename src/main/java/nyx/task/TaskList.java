@@ -1,4 +1,4 @@
-package nyx;
+package nyx.task;
 
 import java.util.ArrayList;
 

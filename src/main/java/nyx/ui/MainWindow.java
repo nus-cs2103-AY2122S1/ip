@@ -1,8 +1,7 @@
-package ui;
+package nyx.ui;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -12,7 +11,7 @@ import nyx.Nyx;
 import nyx.NyxException;
 
 /**
- * Controller for ui.MainWindow. Provides the layout for the other controls.
+ * Controller for nyx.ui.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     private static final String START_MESSAGE = "Hello, this is Nyx! What can I do for you?";
@@ -23,7 +22,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     private TextField userInput;
     @FXML
-    private Button sendButton;
 
     private Nyx nyx;
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
@@ -56,16 +54,18 @@ public class MainWindow extends AnchorPane {
             Platform.exit();
         }
 
+        DialogBox userBox = DialogBox.getUserDialog(input, userImage);
+
         try {
             String response = nyx.getResponse(input);
 
             dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
+                    userBox,
                     DialogBox.getNyxDialog(response, nyxImage)
             );
         } catch (NyxException e) {
             dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
+                    userBox,
                     DialogBox.getErrorDialog(e.getMessage(), nyxImage)
             );
         } finally {
