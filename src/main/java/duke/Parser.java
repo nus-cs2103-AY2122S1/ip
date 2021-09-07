@@ -45,6 +45,7 @@ public class Parser {
      */
     public static String runCommand(TaskList tasks, Storage storage, String input) throws Exception {
         final var parameters = input.split(" ");
+        assert parameters.length > 0;
         final var command = parameters[0];
         final var remaining = input.replace(command, "").strip();
 
@@ -107,9 +108,11 @@ public class Parser {
             return new Todo(taskLine);
         case DEADLINE:
             String[] deadlineParts = taskLine.split("\\s+/by\\s+", 2);
+            assert deadlineParts.length == 2;
             return new Deadline(deadlineParts[0], LocalDate.parse(deadlineParts[1]));
         case EVENT:
             String[] eventParts = taskLine.split("\\s+/at\\s+", 2);
+            assert eventParts.length == 2;
             return new Event(eventParts[0], LocalDate.parse(eventParts[1]));
         default:
             throw new UnsupportedOperationException("task type is not a valid enum value");
