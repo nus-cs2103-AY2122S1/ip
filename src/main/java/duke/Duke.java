@@ -13,13 +13,11 @@ public class Duke {
     private static final String STORAGE_FILE_PATH = "./data/duke.txt";
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     /**
      * Class constructor.
      */
     public Duke() {
-        this.ui = new Ui();
         this.storage = new Storage(STORAGE_FILE_PATH);
         try {
             this.tasks = new TaskList(storage.load());
