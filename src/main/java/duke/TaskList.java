@@ -12,7 +12,7 @@ public class TaskList extends ArrayList<Task> {
      * Initialises an empty Tasklist.
      */
     public TaskList() {
-        list = new ArrayList<Task>();
+        list = new ArrayList<>();
     }
 
     /**

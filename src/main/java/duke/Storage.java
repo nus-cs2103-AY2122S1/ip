@@ -33,25 +33,25 @@ public class Storage {
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             String status = task.isDone ? "1" : "0";
-            String date = "";
-            String activity = "";
-            String information = "";
+            String date;
+            String activity;
+            String information;
             if (task instanceof Event) {
                 activity = "E";
                 information = task.getDescription();
                 date = ((Event) task).getDate();
-                String desc = String.format("%s | %s | %s | %s\n",activity, status, information,date);
+                String desc = String.format("%s | %s | %s | %s\n", activity, status, information, date);
                 fw.write(desc);
             } else if (task instanceof Deadline) {
                 activity = "D";
                 information = task.getDescription();
                 date = ((Deadline) task).getDate();
-                String desc = String.format("%s | %s | %s | %s\n",activity, status, information, date);
+                String desc = String.format("%s | %s | %s | %s\n", activity, status, information, date);
                 fw.write(desc);
             } else if (task instanceof ToDo) {
                 activity = "T";
                 information = task.getDescription();
-                String desc = String.format("%s | %s | %s\n",activity, status, information);
+                String desc = String.format("%s | %s | %s\n", activity, status, information);
                 fw.write(desc);
             }
         }
@@ -64,14 +64,15 @@ public class Storage {
      * @return The list of tasks.
      * @throws FileNotFoundException If file cannot be located.
      */
-     public TaskList load() throws FileNotFoundException {
+    public TaskList load() throws FileNotFoundException {
         Scanner s = new Scanner(new File(filePath));
         TaskList tasks = new TaskList();
         while (s.hasNext()) {
             String text = s.nextLine();
             String activity = text.substring(0, 1);
             String status = text.substring(4, 5);
-            String desc, date;
+            String desc;
+            String date;
 
             if (activity.equals("T")) {
                 desc = text.substring(8);
@@ -113,7 +114,7 @@ public class Storage {
     }
 
     /**
-     * Sets the boolean deciding whether a program should end.
+     * Sets boolean deciding whether a program should end.
      */
     public void setExit() {
         shouldExit = true;

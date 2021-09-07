@@ -87,6 +87,17 @@ public class DialogBox extends HBox {
     /**
      * Returns the formatted DialogBox.
      *
+     * @param l Label used.
+     * @param iv ImageView used.
+     * @return DialogBox returned.
+     */
+    public static DialogBox getUserDialog(Label l, ImageView iv) {
+        return new DialogBox(l, iv);
+    }
+
+    /**
+     * Returns the formatted DialogBox.
+     *
      * @param text Text used.
      * @param img Image used.
      * @return DialogBox returned.
@@ -95,17 +106,6 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         db.flip();
         return db;
-    }
-
-    /**
-     * Returns the formatted DialogBox.
-     *
-     * @param l Label used.
-     * @param iv ImageView used.
-     * @return DialogBox returned.
-     */
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
     }
 
     /**

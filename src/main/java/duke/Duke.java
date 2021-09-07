@@ -2,8 +2,8 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -38,11 +38,12 @@ public class Duke extends Application {
      * @return String to confirm the user's input.
      */
     public String run(String input) {
-        while (!storage.isExit()) {
+        if (!storage.isExit()) {
             try {
                 Parser p = new Parser(input, ui, storage, tasks);
                 return p.parseCommand();
-            } catch (DeleteException | DukeException | IOException | StringIndexOutOfBoundsException | duke.FindException e) {
+            } catch (DeleteException | DukeException | IOException | StringIndexOutOfBoundsException
+                    | duke.FindException e) {
                 return e.getMessage();
             }
         }
