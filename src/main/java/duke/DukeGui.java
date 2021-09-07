@@ -59,7 +59,7 @@ public class DukeGui {
      *
      * @param input Input String from the user
      */
-    protected String testResponse(String input) {
+    protected String newResponse(String input) {
         String output;
         try {
             output = parser.parse(input);

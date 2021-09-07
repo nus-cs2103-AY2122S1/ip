@@ -95,6 +95,7 @@ public class DukeParser {
      */
     public String parse(String str) throws DukeException {
         String[] words = str.split(" ");
+        assert str != null : "empty string";
         String desc = str;
 
         //DateTime variables
@@ -165,6 +166,8 @@ public class DukeParser {
                 throw new DukeException("!!! The description cannot be empty. !!!");
             }
         }
+
+        assert key != Keywords.error : "Invalid Key";
 
         switch (key) {
         case list:
