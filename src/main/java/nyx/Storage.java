@@ -30,20 +30,22 @@ public class Storage {
 
     private Task lineToTask(String line) throws NyxException {
         String[] splitLine = line.split(", ");
-
-        boolean isDone = splitLine[1].equals("1");
+        String taskSymbol = splitLine[0];
+        String doneStatus = splitLine[1];
+        String taskDescription = splitLine[2];
+        boolean isDone = doneStatus.equals("1");
 
         Task task;
 
-        switch(splitLine[0]) {
+        switch(taskSymbol) {
         case "T":
-            task = new ToDo(splitLine[2], isDone);
+            task = new ToDo(taskDescription, isDone);
             break;
         case "D":
-            task = new Deadline(splitLine[2], splitLine[3], isDone);
+            task = new Deadline(taskDescription, splitLine[3], isDone);
             break;
         case "E":
-            task = new Event(splitLine[2], splitLine[3], isDone);
+            task = new Event(taskDescription, splitLine[3], isDone);
             break;
         default:
             throw new NyxException("Invalid task symbol found. Unable to load data!");
@@ -58,10 +60,10 @@ public class Storage {
      * @throws NyxException If the tasks are loaded from the hard disk unsuccessfully.
      */
     public ArrayList<Task> loadData() throws NyxException {
-        ArrayList<Task> taskList = new ArrayList<Task>();
+        ArrayList<Task> taskList = new ArrayList<>();
         try {
             if (data.exists()) {
-                ArrayList<String> lines = new ArrayList<String>();
+                ArrayList<String> lines = new ArrayList<>();
                 Files.lines(data.toPath()).forEach(lines::add);
                 for (String line : lines) {
                     taskList.add(lineToTask((line)));
