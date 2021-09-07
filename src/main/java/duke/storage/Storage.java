@@ -9,7 +9,9 @@ import java.util.Scanner;
 import duke.TaskArrayList;
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeReadSaveException;
+import duke.tasks.Deadline;
 import duke.tasks.Task;
+import duke.tasks.Todo;
 
 /**
  * Class to handle reading and writing the save file.
@@ -27,6 +29,7 @@ public class Storage {
         try {
             Files.createDirectories(path.getParent());
             Files.createFile(path);
+            writeTutorial(path);
         } catch (Exception e) {
             System.out.println("failed to make store : " + e.toString());
         }
@@ -73,4 +76,22 @@ public class Storage {
             System.out.println("error writing data");
         }
     }
+
+    /**
+     * Dump a preset tutorial set of tasks to the savefile.
+     *
+     * @param path path to the savefile
+     */
+    public static void writeTutorial(Path path) {
+        assert Files.exists(path); // path file must exist
+        TaskArrayList tl =  new TaskArrayList();
+        tl.addTask(new Todo("Check out the help file by typing help"));
+        tl.addTask(new Deadline("Delete these tutorial tasks","before you start using Duke"));
+        dump(tl,path);
+    }
+
+
+
+
+
 }
