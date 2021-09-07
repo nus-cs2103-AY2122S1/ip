@@ -43,7 +43,7 @@ public class Storage {
     /**
      * Reads file. If file does not exist, creates a file.
      *
-     * @return List containing all tasks in file originally
+     * @return List containing all tasks in file originally.
      */
     public ArrayList<Task> loadData() throws DukeException {
         // Make directory and/or file if they don't exist

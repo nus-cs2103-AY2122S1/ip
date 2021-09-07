@@ -1,13 +1,9 @@
 package duke;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
 
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.Task;
 import duke.task.Todo;
 
 

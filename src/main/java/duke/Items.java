@@ -26,7 +26,7 @@ public class Items {
     /**
      * Constructor for Items.
      *
-     * @param tasks An ArrayList of Tasks
+     * @param tasks An ArrayList of Tasks.
      */
     public Items(ArrayList<Task> tasks) {
         this.tasks = tasks;
