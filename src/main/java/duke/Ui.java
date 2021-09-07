@@ -33,6 +33,11 @@ public class Ui {
         System.out.println("Hello from\n" + logo);
     }
 
+    public String statisticReponse(String item) {
+        String output = "";
+        return output;
+    }
+
     /**
      * Marks item as done on the list
      *
