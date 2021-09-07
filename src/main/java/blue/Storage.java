@@ -16,6 +16,7 @@ import blue.task.ToDo;
  * Reads tasks from file and writes tasks to file.
  */
 class Storage {
+    private static final String CANNOT_CREATE_TASK_MESSAGE = "No task can be created from the representation!";
     private static final String DIVIDER = "\n\n";
     private static final String DELIMITER = "\n";
     private final String filePath;
@@ -54,22 +55,22 @@ class Storage {
      * @throws BlueException If no tasks can be created from the taskRepresentation.
      */
     private Task makeTask(String taskRepresentation) throws BlueException {
-        Task task = null;
         String[] lines = taskRepresentation.split(DELIMITER);
         String classRepr = lines[0];
         String title = lines[1];
 
-        if (classRepr.equals(ToDo.getClassRepr())) {
-            task = new ToDo(title);
-        } else if (classRepr.equals(Deadline.getClassRepr())) {
+        switch (classRepr) {
+        case ToDo.REPRESENTATION:
+            return new ToDo(title);
+        case Deadline.REPRESENTATION:
             String by = lines[2];
-            task = new Deadline(title, by);
-        } else if (classRepr.equals(Event.getClassRepr())) {
+            return new Deadline(title, by);
+        case Event.REPRESENTATION:
             String at = lines[2];
-            task = new Event(title, at);
+            return new Event(title, at);
+        default:
+            throw new BlueException(CANNOT_CREATE_TASK_MESSAGE);
         }
-
-        return task;
     }
 
     void save(TaskList tasks) {
@@ -103,11 +104,11 @@ class Storage {
     private String makeString(Task task) {
         List<String> lines = new ArrayList<>();
         if (task instanceof ToDo) {
-            lines.add(ToDo.getClassRepr());
+            lines.add(ToDo.REPRESENTATION);
         } else if (task instanceof Deadline) {
-            lines.add(Deadline.getClassRepr());
+            lines.add(Deadline.REPRESENTATION);
         } else if (task instanceof Event) {
-            lines.add(Event.getClassRepr());
+            lines.add(Event.REPRESENTATION);
         }
         lines.add(task.getTitle());
         if (task instanceof Deadline) {

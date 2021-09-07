@@ -17,6 +17,7 @@ import blue.handler.ToDoHandler;
  * Initializes the application and interacts with the user.
  */
 public class Blue {
+    private final Storage storage;
     private TaskList tasks;
     private HashMap<Command, CommandHandler> commandHandlers;
 
@@ -26,12 +27,10 @@ public class Blue {
      * @param filePath Path to save tasks.
      */
     public Blue(String filePath) {
-        Ui ui = new Ui();
-        Storage storage = new Storage(filePath);
+        storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (BlueException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
         initCommandHandlers();
@@ -74,5 +73,9 @@ public class Blue {
         } catch (BlueException e) {
             return e.getMessage();
         }
+    }
+
+    void save() {
+        storage.save(tasks);
     }
 }

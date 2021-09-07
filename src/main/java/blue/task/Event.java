@@ -11,6 +11,7 @@ import blue.BlueException;
  * Tasks that start at a specific time and ends at a specific time.
  */
 public class Event extends Task {
+    public static final String REPRESENTATION = "E";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
     private final LocalDateTime at;
 
@@ -32,15 +33,6 @@ public class Event extends Task {
     }
 
     /**
-     * Returns a String that represents this class.
-     *
-     * @return String that represents this class.
-     */
-    public static String getClassRepr() {
-        return "E";
-    }
-
-    /**
      * Returns the time of the event.
      *
      * @return Time of the event, in String format.
@@ -57,6 +49,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         String atRepr = at.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
-        return "[E]" + super.toString() + " (at: " + atRepr + ")";
+        return "[" + REPRESENTATION + "]" + super.toString() + " (at:" + atRepr + ")";
     }
 }

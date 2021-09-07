@@ -1,5 +1,7 @@
 package blue;
 
+import java.util.Objects;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -23,8 +26,10 @@ public class MainWindow extends AnchorPane {
 
     private Blue blue;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image blueImage = new Image(this.getClass().getResourceAsStream("/images/DaBlue.png"));
+    private final Image userImage =
+            new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaUser.png")));
+    private final Image blueImage =
+            new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaBlue.png")));
 
     @FXML
     public void initialize() {
@@ -47,6 +52,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getBlueDialog(response, blueImage)
         );
+        blue.save();
         userInput.clear();
     }
 }
