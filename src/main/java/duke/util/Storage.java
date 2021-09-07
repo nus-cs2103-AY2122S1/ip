@@ -36,7 +36,9 @@ public class Storage {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             String line = br.readLine();
             while (line != null) {
+                assert line.contains("|"): "each line in saved data should contain details separate by |";
                 String[] input = line.split("\\|");
+                assert input.length == 3 || input.length == 4 : "loaded input should have at least 3 details";
                 String taskType = input[0];
                 String description = input[2];
                 boolean isTaskDone = input[1].equals("1");
@@ -52,6 +54,8 @@ public class Storage {
                     LocalDate by = LocalDate.parse(input[3]);
                     loadDeadlineToList(tasks, description, by, isTaskDone);
                     break;
+                default:
+                    assert false : taskType;
                 }
                 line = br.readLine();
             }
