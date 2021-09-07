@@ -121,6 +121,14 @@ public abstract class Command {
                 throw new DukeException.DukeEmptyNote(t.taskKind());
             }
 
+            java.util.List<Task> matchingList = Duke.todoList.stream().filter(task -> task.getTaskName().equals(this.t.getTaskName())).collect(Collectors.toList());
+            if (!matchingList.isEmpty()) {
+                responseMessage.appendMessage("Seem like you have already had the task with the same name:\n    "
+                        + matchingList.get(0) + "\n"
+                        + "Please try another task's name");
+                return new Response(true, responseMessage);
+            }
+
             t.add();
             responseMessage.appendMessage("Got it. I've added this task:\n    " + t);
             responseMessage.appendMessage("Now you have " + Duke.todoList.size() + " tasks in the list.");

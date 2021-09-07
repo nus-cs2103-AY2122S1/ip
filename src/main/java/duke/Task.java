@@ -64,7 +64,7 @@ public abstract class Task {
             throw new DukeException.DukeEmptyTask(TaskKind.DEADLINE);
         }
 
-        String[] parts = bodyCommand.split("/by ", 2);
+        String[] parts = bodyCommand.split(" /by ", 2);
         String taskName = parts[0];
         if (parts.length < 2) {
             throw new DukeException.DukeEmptyNote(TaskKind.DEADLINE);
