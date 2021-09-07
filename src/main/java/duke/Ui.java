@@ -1,17 +1,10 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import duke.task.Task;
 
 public class Ui {
-
-    /** Line divider for beautification of command line interface */
-    private static final String H_LINE = "------------------------------\n";
-
-    /** Scanner to be used for taking in the user's commands */
-    private Scanner commandInput;
 
     /**
      * Constructs a Ui object.
@@ -21,116 +14,103 @@ public class Ui {
     }
 
     /**
-     * Prints a welcome message.
+     * Returns a human-readable string that conveys a welcome message from the bot to the user.
+     *
+     * @return String welcome message.
      */
-    public void showWelcome() {
+    public String getWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String helloMsg = H_LINE
-                + "Hello! I'm Duke\n"
-                + "What can I do for you?\n"
-                + H_LINE;
-        System.out.print(logo + helloMsg);
+        String helloMsg = "Hello! I'm Duke\n"
+                + "What can I do for you?";
+        return logo + helloMsg;
     }
 
     /**
-     * Begins listening to the user input from the command line.
-     */
-    public void beginListen() {
-        commandInput = new Scanner(System.in);
-    }
-
-    /**
-     * Returns the next line of user input from the command line interface.
+     * Returns a human-readable string representation of a list.
      *
-     * @return Next command.
+     * @param tasks List of tasks to be converted to string.
+     * @return String list representation.
      */
-    public String readCommand() {
-        return commandInput.nextLine();
-    }
-
-    /**
-     * Prints out the string representation of the list of tasks.
-     *
-     * @param tasks ArrayList containing all the tasks.
-     */
-    public void showList(ArrayList<Task> tasks) {
-        System.out.print(H_LINE);
+    public String getListMessage(ArrayList<Task> tasks) {
+        StringBuilder message = new StringBuilder();
         if (tasks.size() > 0) {
-            System.out.println("Here are the tasks in your list:");
+            message.append("Here are the tasks in your list:\n");
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println("  " + (i + 1) + ". " + tasks.get(i));
+                message.append("  " + (i + 1) + ". " + tasks.get(i) + "\n");
             }
         } else {
-            System.out.println("There are no tasks in your list.");
+            message.append("There are no tasks in your list.");
         }
-        System.out.print(H_LINE);
+        return message.toString();
     }
 
     /**
-     * Prints out the string representation of the list of tasks that are a result from the findTasks operation.
+     * Returns a human-readable string representation of a list resulting from a find operation.
      *
-     * @param tasks ArrayList containing all the tasks.
+     * @param tasks List of tasks to be converted to string.
+     * @return String list representation with added "find" message.
      */
-    public void showFindList(ArrayList<Task> tasks) {
-        System.out.print(H_LINE);
+    public String showFindList(ArrayList<Task> tasks) {
+        StringBuilder message = new StringBuilder();
         if (tasks.size() > 0) {
-            System.out.println("Here are the matching tasks in your list:");
+            message.append("Here are the matching tasks in your list:\n");
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println("  " + (i + 1) + ". " + tasks.get(i));
+                message.append("  " + (i + 1) + ". " + tasks.get(i) + "\n");
             }
         } else {
-            System.out.println("There are no matching tasks in your list.");
+            message.append("There are no matching tasks in your list.");
         }
-        System.out.print(H_LINE);
+        return message.toString();
     }
 
     /**
-     * Prints a message indicating that a user command has failed to be understood by the bot.
-     */
-    public void showCommandFail() {
-        System.out.print(H_LINE + "I didn't get that. Please try again.\n" + H_LINE);
-    }
-
-    /**
-     * Prints a message indicating an error in Duke's operations.
+     * Returns a human-readable string that conveys that an unknown/non-existent command has been encountered.
      *
-     * @param message Error message to be printed.
+     * @return String error message.
      */
-    public void showError(String message) {
-        System.out.print(H_LINE + "Oops... Something's wrong.\n" + message + "\n" + H_LINE);
+    public String showCommandFail() {
+        return "I didn't get that. Please try again.";
     }
 
     /**
-     * Prints a custom general message resulting from Duke's operations.
+     * Returns a human-readable string that conveys that the given error message.
      *
-     * @param message Message to be printed.
+     * @param message Error message to be shown.
+     * @return String error message.
      */
-    public void showMessage(String message) {
-        System.out.print(H_LINE + message + "\n" + H_LINE);
+    public String showError(String message) {
+        return "Oops... Something's wrong.\n" + message;
     }
 
     /**
-     * Prints a message indicating an error related to storage operations.
+     * Returns a string that conveys the given message.
+     *
+     * @param message Message to be shown.
+     * @return String message.
      */
-    public void showStorageError() {
-        showError("File for storage of tasks could not be accessed or written.");
+    public String showMessage(String message) {
+        return message;
     }
 
     /**
-     * Stops listening to the user input from the command line.
+     * Returns a string that conveys that a storage error has been encountered.
+     *
+     * @return String error message.
      */
-    public void stopListen() {
-        commandInput.close();
+    public String showStorageError() {
+        return showError("File for storage of tasks could not be accessed or written.");
     }
 
     /**
-     * Prints a goodbye message from Duke.
+     * Returns a string that conveys a goodbye message from the bot to the user.
+     *
+     * @return String goodbye message.
      */
-    public void showGoodbye() {
-        System.out.print(H_LINE + "Bye. Hope to see you again soon!\n" + H_LINE);
+    public String showGoodbye() {
+        return "Bye. Hope to see you again soon!";
     }
 }

@@ -64,6 +64,16 @@ public class Parser {
         return Integer.parseInt(intString.trim());
     }
 
+    /**
+     * Returns true if the given user string input is a valid "bye" command by pattern matching.
+     *
+     * @param newCommand String user input.
+     * @return Boolean validation result.
+     */
+    public static boolean isParsedBye(String newCommand) {
+        return Pattern.compile("(?i)bye\\s*").matcher(newCommand).matches();
+    }
+
     private static String[] parseTodo(String newCommand) {
         String[] strArr = Pattern.compile("(?i)todo\\s+").split(newCommand, 2);
 

@@ -8,6 +8,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+
 public class Duke {
 
     /** Storage object that reads from and writes onto the hard disk  */
@@ -35,52 +36,59 @@ public class Duke {
     }
 
     /**
-     * Runs the bot and actively listens and executes the user commands until closed by the user.
+     * Returns a string representation of a welcome message as prepared by Ui class.
+     *
+     * @return String welcome message.
      */
-    public void run() {
-        ui.showWelcome();
-        ui.beginListen();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String newCommand = ui.readCommand();
-                String[] parsedCommand = Parser.parse(newCommand);
-                switch (parsedCommand[0]) {
-                case "bye":
-                    ui.showGoodbye();
-                    isExit = true;
-                    break;
-                case "list":
-                    ui.showList(taskList.getList());
-                    break;
-                case "add":
-                    addTask(parsedCommand);
-                    break;
-                case "done":
-                    markTaskDone(parsedCommand);
-                    break;
-                case "delete":
-                    deleteTask(parsedCommand);
-                    break;
-                case "find":
-                    ui.showFindList(taskList.findTasks(parsedCommand[1]));
-                    break;
-                case "fail":
-                    ui.showCommandFail();
-                    break;
-                default:
-                    break;
-                }
-            } catch (DukeException | IOException ex) {
-                ui.showError(ex.getMessage());
-            }
-        }
-
-        ui.stopListen();
+    public String runWelcome() {
+        return ui.getWelcomeMessage();
     }
 
-    private void addTask(String[] parsedCommand) throws IOException {
+    /**
+     * Returns a string representation of the bot's response to the given new user command.
+     *
+     * @param newCommand String version of the user input.
+     * @return String response.
+     */
+    public String run(String newCommand) {
+        String errorMessage = "";
+        try {
+            String[] parsedCommand = Parser.parse(newCommand);
+            switch (parsedCommand[0]) {
+            case "bye":
+                return ui.showGoodbye();
+            case "list":
+                return ui.getListMessage(taskList.getList());
+            case "add":
+                return addTask(parsedCommand);
+            case "done":
+                return markTaskDone(parsedCommand);
+            case "delete":
+                return deleteTask(parsedCommand);
+            case "find":
+                return ui.showFindList(taskList.findTasks(parsedCommand[1]));
+            case "fail":
+                return ui.showCommandFail();
+            default:
+                break;
+            }
+        } catch (DukeException | IOException ex) {
+            errorMessage = ui.showError(ex.getMessage());
+        }
+        return errorMessage;
+    }
+
+    /**
+     * Returns true is the given user input is a "bye" command.
+     *
+     * @param newCommand String version of the user input.
+     * @return Boolean validation result.
+     */
+    public boolean isBye(String newCommand) {
+        return Parser.isParsedBye(newCommand);
+    }
+
+    private String addTask(String[] parsedCommand) throws IOException {
         Task newTask = null;
         switch (parsedCommand[1]) {
         case "todo":
@@ -101,34 +109,31 @@ public class Duke {
         if (newTask != null) {
             storage.storeAdd(newTask.toStorage());
             String message = taskList.addTask(newTask);
-            ui.showMessage(message);
+            return ui.showMessage(message);
         }
+        return ui.showCommandFail();
     }
 
-    private void markTaskDone(String[] parsedCommand) throws IOException {
+    private String markTaskDone(String[] parsedCommand) throws IOException {
         int taskIndex = Parser.parseIndex(parsedCommand[1]);
         if (taskList.isIndexValid(taskIndex)) {
             String message = taskList.markTaskDone(taskIndex);
-            ui.showMessage(message);
             String taskStorage = taskList.getTaskStorage(taskIndex);
             storage.storeDone(taskIndex, taskStorage);
+            return ui.showMessage(message);
         } else {
-            ui.showError("That task doesn't exist.\nPlease Try again.");
+            return ui.showError("That task doesn't exist.\nPlease Try again.");
         }
     }
 
-    private void deleteTask(String[] parsedCommand) throws IOException {
+    private String deleteTask(String[] parsedCommand) throws IOException {
         int taskIndex = Parser.parseIndex(parsedCommand[1]);
         if (taskList.isIndexValid(taskIndex)) {
             String message = taskList.deleteTask(taskIndex);
-            ui.showMessage(message);
             storage.storeDelete(taskIndex);
+            return ui.showMessage(message);
         } else {
-            ui.showError("That task doesn't exist.\nPlease Try again.");
+            return ui.showError("That task doesn't exist.\nPlease Try again.");
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke().run();
     }
 }
