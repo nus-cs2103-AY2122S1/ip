@@ -36,16 +36,16 @@ public class TaskList {
      * @return String representation of the list
      */
     public String viewList() throws PibException {
-        String response = "";
         if (list.size() == 0) {
             throw new PibException("empty-list");
-        } else {
-            for (int i = 0; i < list.size(); i++) {
-                System.out.println((i + 1) + "." + list.get(i).toString());
-                response = response.concat((i + 1) + "." + list.get(i).toString() + "\n");
-            }
-            System.out.println(DIVIDER);
         }
+
+        String response = "";
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println((i + 1) + "." + list.get(i).toString());
+            response = response.concat((i + 1) + "." + list.get(i).toString() + "\n");
+        }
+        System.out.println(DIVIDER);
         assert !response.isBlank();
         return response;
     }
@@ -170,12 +170,9 @@ public class TaskList {
                 filtered.add(t);
             }
         }
-        if (filtered.size() > 0) {
-            String response = Ui.printQueryFound(query).concat("\n") ;
-            response = response.concat(new TaskList(filtered).viewList());
-            return response;
-        } else {
+        if (filtered.size() == 0) {
             return Ui.printQueryNotFound(query);
         }
+        return Ui.printQueryFound(query).concat("\n").concat(new TaskList(filtered).viewList());
     }
 }

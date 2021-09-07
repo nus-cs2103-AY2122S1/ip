@@ -25,8 +25,8 @@ public class Pib {
      * Public constructor to instantiate an instance of pib
      */
     public Pib() {
-        this.ui = new Ui();
-        this.list = new TaskList();
+        ui = new Ui();
+        list = new TaskList();
     }
 
     public String loadData() {
@@ -34,11 +34,11 @@ public class Pib {
         String response = "";
         try {
             storage = new Storage(DATA_FILE_PATH);
-            response = storage.loadData(this.list);
+            response = storage.loadData(list);
         } catch (PibException e) {
             e.print();
         }
-        this.parser = new Parser(this.list);
+        parser = new Parser(list);
         assert ui != null;
         assert storage != null;
         return response;

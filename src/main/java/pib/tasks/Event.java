@@ -40,21 +40,41 @@ public class Event extends Task {
     public static Event createEvent(String details, boolean printMessage) throws PibException {
         assert details != null;
         try {
-            int atIndex = details.indexOf("/at ");
-            String description = details.substring(0, atIndex).trim();
+            int atIndex = getAtIndex(details);
+            String description = getDescriptionPortion(details, atIndex);
             if (description.isBlank()) {
                 throw new PibException("empty-task-description");
             }
             assert !details.isBlank();
-            String[] dateTime = details.substring(atIndex + 4).trim().split(" ");
-            String date = LocalDate.parse(dateTime[0].trim()).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
-            String time = LocalTime.parse(dateTime[1].trim(), DateTimeFormatter.ofPattern("HHmm")).format(DateTimeFormatter.ofPattern("hh:mm a"));
+            String[] dateTime = getDateTimePortion(details, atIndex);
+            String date = getDateString(dateTime[0]);
+            String time = getTimeString(dateTime[1]);
             return new Event(description, date, time, printMessage);
         } catch (IndexOutOfBoundsException e) {
             throw new PibException("e-wrong-format");
         } catch (DateTimeParseException e) {
             throw new PibException("wrong-datetime-format");
         }
+    }
+
+    private static String[] getDateTimePortion(String details, int atIndex) {
+        return details.substring(atIndex + 4).trim().split(" ");
+    }
+
+    private static String getDescriptionPortion(String details, int atIndex) {
+        return details.substring(0, atIndex).trim();
+    }
+
+    private static int getAtIndex(String details) {
+        return details.indexOf("/at ");
+    }
+
+    private static String getTimeString(String s) {
+        return LocalTime.parse(s.trim(), DateTimeFormatter.ofPattern("HHmm")).format(DateTimeFormatter.ofPattern("hh:mm a"));
+    }
+
+    private static String getDateString(String s) {
+        return LocalDate.parse(s.trim()).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
 
     /**

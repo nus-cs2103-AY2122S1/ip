@@ -58,12 +58,11 @@ public abstract class Task {
      * @return String containing response to be printed to user
      */
     public String markAsDone() throws PibException {
-        if (this.isDone == 1) {
+        if (isDone == 1) {
             throw new PibException("already-markedasdone");
-        } else {
-            this.isDone = 1;
-            return Ui.printMarkAsDoneSuccess(description);
         }
+        isDone = 1;
+        return Ui.printMarkAsDoneSuccess(description);
     }
 
     /**
@@ -72,7 +71,7 @@ public abstract class Task {
      * @return description of task
      */
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     /**

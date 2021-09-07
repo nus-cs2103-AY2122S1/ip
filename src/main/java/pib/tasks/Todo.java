@@ -27,10 +27,9 @@ public class Todo extends Task {
         assert details != null;
         if (details.trim().isBlank()) {
             throw new PibException("empty-task-description");
-        } else {
-            assert !details.isBlank();
-            return new Todo(details.trim(), printMessage);
         }
+        assert !details.isBlank();
+        return new Todo(details.trim(), printMessage);
     }
 
     /**

@@ -47,14 +47,22 @@ public class Deadline extends Task {
             }
             assert !details.isBlank();
             String[] dateTime = details.substring(byIndex + 4).trim().split(" ");
-            String date = LocalDate.parse(dateTime[0].trim()).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
-            String time = LocalTime.parse(dateTime[1].trim(), DateTimeFormatter.ofPattern("HHmm")).format(DateTimeFormatter.ofPattern("hh:mm a"));
+            String date = getDateString(dateTime[0]);
+            String time = getTimeString(dateTime[1]);
             return new Deadline(description, date, time, printMessage);
         } catch (IndexOutOfBoundsException e) {
             throw new PibException("d-wrong-format");
         } catch (DateTimeParseException e) {
             throw new PibException("wrong-datetime-format");
         }
+    }
+
+    private static String getTimeString(String s) {
+        return LocalTime.parse(s.trim(), DateTimeFormatter.ofPattern("HHmm")).format(DateTimeFormatter.ofPattern("hh:mm a"));
+    }
+
+    private static String getDateString(String s) {
+        return LocalDate.parse(s.trim()).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
 
     /**
