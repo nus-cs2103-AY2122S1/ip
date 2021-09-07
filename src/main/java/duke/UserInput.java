@@ -1,8 +1,13 @@
 package duke;
 
 public class UserInput {
-    protected static String pre_command;
-    protected static String body_command;
+    protected String pre_command;
+    protected String body_command;
+
+    UserInput(String pre_command, String body_command) {
+        this.pre_command = pre_command;
+        this.body_command = body_command;
+    }
 
     @Override
     public String toString() {
