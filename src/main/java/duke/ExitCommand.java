@@ -6,6 +6,7 @@ package duke;
  * @author Sherman Ng Wei Sheng
  */
 public class ExitCommand extends Command {
+    private static String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
     private final boolean isExit;
 
     /**
@@ -21,7 +22,7 @@ public class ExitCommand extends Command {
      * @return True.
      */
     @Override
-    public boolean isExit() {
+    public boolean isAExitCommand() {
         return this.isExit;
     }
 
@@ -31,14 +32,13 @@ public class ExitCommand extends Command {
      * @param list TaskList before execution of the command.
      * @param ui Ui object to log the execution of the command.
      * @param storage Storage object that references the path to store the updated list of tasks.
-     * @return The String to be printed.
+     * @return The string to be printed.
      * @throws StorageSavingException If exception encountered when storing the list.
      */
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) throws StorageSavingException {
-        String message = "Bye. Hope to see you again soon!";
         ui.closeScanner();
         storage.save(list.convertToStorageString());
-        return ui.printMessage(message);
+        return ui.printAndReturnMessage(MESSAGE_EXIT);
     }
 }

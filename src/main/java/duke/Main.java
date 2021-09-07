@@ -10,11 +10,18 @@ import javafx.stage.Stage;
 
 /**
  * A GUI for Duke using FXML.
+ *
+ * @author Sherman Ng Wei Sheng
  */
 public class Main extends Application {
 
     private Duke duke = new Duke("data/duke.txt");
 
+    /**
+     * Starts the GUI for Duke.
+     *
+     * @param stage JavaFX stage object.
+     */
     @Override
     public void start(Stage stage) {
         try {

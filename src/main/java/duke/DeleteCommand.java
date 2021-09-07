@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
      * @return True if it is a terminating command and false otherwise.
      */
     @Override
-    public boolean isExit() {
+    public boolean isAExitCommand() {
         return isExit;
     }
 
@@ -35,7 +35,7 @@ public class DeleteCommand extends Command {
      * @param list TaskList before deletion of task.
      * @param ui Ui object to log the execution of the command.
      * @param storage Storage object that references the path to store the updated list of tasks.
-     * @reurn The string to be printed.
+     * @return The string to be printed.
      * @throws DukeException If index provided is invalid.
      */
     @Override
@@ -50,7 +50,7 @@ public class DeleteCommand extends Command {
                     + "  " + removed + "\n"
                     + String.format("Now you have %d tasks in the list.", list.size());
             storage.save(list.convertToStorageString());
-            return ui.printMessage(message);
+            return ui.printAndReturnMessage(message);
         } else {
             throw new InvalidIndexException();
         }

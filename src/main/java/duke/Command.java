@@ -12,7 +12,7 @@ public abstract class Command {
      *
      * @return True if it is a terminating command and false otherwise.
      */
-    public abstract boolean isExit();
+    public abstract boolean isAExitCommand();
 
     /**
      * Executes the given command.

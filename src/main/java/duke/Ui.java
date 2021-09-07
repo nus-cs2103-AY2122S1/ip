@@ -8,6 +8,9 @@ import java.util.Scanner;
  * @author Sherman Ng Wei Sheng
  */
 public class Ui {
+    private static final String MESSAGE_GREETING = "Hello! I'm Duke\nWhat can I do for you?";
+    private static final String HORIZONTAL_LINE_WITH_BREAK =
+            "        ____________________________________________________________\n";
     private Scanner sc;
 
     /**
@@ -29,9 +32,8 @@ public class Ui {
      *
      * @return The formatted string of the message.
      */
-    public String printGreetings() {
-        String message = "Hello! I'm Duke\nWhat can I do for you?";
-        return printMessage(message);
+    public String printAndReturnGreetingsString() {
+        return printAndReturnMessage(MESSAGE_GREETING);
     }
 
     /**
@@ -47,9 +49,9 @@ public class Ui {
      *
      * @return The formatted string of the message.
      */
-    public String printList(TaskList list) {
+    public String printAndReturnListString(TaskList list) {
         String message = list.generateMessage();
-        return printMessage(message);
+        return printAndReturnMessage(message);
     }
 
     /**
@@ -59,12 +61,12 @@ public class Ui {
      * @param list The task list object that the task is being added to.
      * @return The formatted string of the message.
      */
-    public String printAddedTaskMessage(Task task, TaskList list) {
+    public String printAndReturnAddedTaskMessage(Task task, TaskList list) {
         String message =
                 "Got it. I've added this task:\n"
                 + "  " + task + "\n"
                 + String.format("Now you have %d tasks in the list.", list.size());
-        return printMessage(message);
+        return printAndReturnMessage(message);
     }
 
     /**
@@ -73,11 +75,11 @@ public class Ui {
      * @param content The content to be printed, wrapped between horizontal lines.
      * @return The printed message.
      */
-    public String printMessage(String content) {
+    public String printAndReturnMessage(String content) {
         String format =
-                "        ____________________________________________________________\n"
+                HORIZONTAL_LINE_WITH_BREAK
                 + "        %s\n"
-                + "        ____________________________________________________________\n";
+                + HORIZONTAL_LINE_WITH_BREAK;
         System.out.printf(format, content.replaceAll("\n", "\n        "));
         return format.format(content.replaceAll("\n", "\n        "));
     }
