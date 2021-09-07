@@ -235,20 +235,20 @@ public class Ui {
 
         switch (messageType) {
         case USER:
-        UserDialogBox userMessage = new UserDialogBox(messageText, new ImageView(userImage));
-        dialogContainer.getChildren().add(userMessage);
+            UserDialogBox userMessage = new UserDialogBox(messageText, new ImageView(userImage));
+            dialogContainer.getChildren().add(userMessage);
             break;
         case BOT:
-        ReceiverDialogBox bruhMessage =
-                new ReceiverDialogBox(messageText, new ImageView(bruhImage));
-        dialogContainer.getChildren().add(bruhMessage);
+            ReceiverDialogBox bruhMessage =
+                    new ReceiverDialogBox(messageText, new ImageView(bruhImage));
+            dialogContainer.getChildren().add(bruhMessage);
             break;
         // Fallthrough
         case ERROR:
         default:
-        ReceiverDialogBox errorMessage =
-                new ReceiverDialogBox(messageText, new ImageView(errorImage));
-        dialogContainer.getChildren().add(errorMessage);
+            ReceiverDialogBox errorMessage =
+                    new ReceiverDialogBox(messageText, new ImageView(errorImage));
+            dialogContainer.getChildren().add(errorMessage);
             break;
         }
     }
