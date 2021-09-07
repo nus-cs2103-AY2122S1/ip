@@ -22,14 +22,4 @@ public class EmptyCommand extends Command {
         // Do nothing
         return null;
     }
-
-    /**
-     * Should not terminate.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

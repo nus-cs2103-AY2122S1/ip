@@ -71,9 +71,9 @@ public class Ui {
      * @return String of the message
      */
     public static String finishTask(Task task) {
-        String str = "Nice! I've marked this task as done:\n";
-        str = str + task;
-        return str;
+        String output = "Nice! I've marked this task as done:\n";
+        output = output + task;
+        return output;
     }
 
     /**
@@ -93,9 +93,9 @@ public class Ui {
      * @return message when task is deleted.
      */
     public static String deleteTask(Task task) {
-        String out = "Noted. I've removed this task:\n";
-        out += task;
-        return out;
+        String output = "Noted. I've removed this task:\n";
+        output += task;
+        return output;
     }
 
     /**
@@ -211,13 +211,6 @@ public class Ui {
      */
     public static String defaultMessage() {
         return "OOPS I did not quite understand that :(";
-    }
-
-    /**
-     * Displays a straight line used for dividing commands and inputs.
-     */
-    public static void showLine() {
-        System.out.println("    ____________________________________________________________");
     }
 
     /**

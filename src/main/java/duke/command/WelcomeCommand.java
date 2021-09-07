@@ -20,14 +20,4 @@ public class WelcomeCommand extends Command {
     public String execute(TaskList tasks, Storage storage, Ui ui) {
         return Ui.showWelcome();
     }
-
-    /**
-     * Returns false as the program should not exit.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

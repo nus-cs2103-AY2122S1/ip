@@ -31,7 +31,6 @@ public class Parser {
         String[] splitText = input.trim().split("\\s+", 2);
         String command = splitText[0];
         Command output;
-        output = new EmptyCommand();
         switch (command) {
         case "welcome":
             output = new WelcomeCommand();
