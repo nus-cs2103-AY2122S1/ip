@@ -1,4 +1,4 @@
-package duke;
+package duke.tasks;
 
 import java.time.LocalDate;
 
@@ -6,7 +6,7 @@ import java.time.LocalDate;
  * Class for Deadline tasks.
  */
 public class Deadline extends Task {
-    private LocalDate deadline;
+    private final LocalDate deadline;
 
     /**
      * Constructor for Deadline object.

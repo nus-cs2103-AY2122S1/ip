@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import duke.tasks.Task;
+
 /**
  * Wrapper class around List object, representing a list of tasks.
  */
 public class TaskList {
-    private List<Task> tasks;
+    private final List<Task> tasks;
 
     /**
      * Constructor for TaskList object.

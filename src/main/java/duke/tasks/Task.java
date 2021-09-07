@@ -1,10 +1,10 @@
-package duke;
+package duke.tasks;
 
 /**
  * Abstract class representing a task.
  */
 public abstract class Task {
-    private String description;
+    private final String description;
     private boolean isDone;
 
     /**
