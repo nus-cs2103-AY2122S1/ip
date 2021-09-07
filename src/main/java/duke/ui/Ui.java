@@ -46,26 +46,7 @@ public class Ui {
         return "   " + message;
     }
 
-    /**
-     * Shows all strings stored with indexing.
-     *
-     * @param tasks The list of tasks.
-     * @param count The number of tasks.
-     */
-    public String showList(TaskList tasks, int count) {
-        StringBuilder sb = new StringBuilder();
-        String end = "\n   ";
-        String begin = "   Here are the tasks in your list:\n   ";
-        sb.append(begin);
-        for (int i = 0; i < count; i++) {
-            if (i == count - 1) {
-                end = "";
-            }
-            String out = ((i + 1)) + "." + tasks.elementToString(i) + end;
-            sb.append(out);
-        }
-        return sb.toString();
-    }
+
 
     /**
      * Shows the deleted task.
@@ -81,12 +62,12 @@ public class Ui {
     }
 
     /**
-     * Shows the tasks in the list.
+     * Shows adding the task to the list.
      *
      * @param task The task want to be shown.
      * @param count The number of tasks in task list.
      */
-    public String showTasks(String task, int count) {
+    public String showAdding(String task, int count) {
         return getOutputFrame(task, count);
     }
 
@@ -111,5 +92,13 @@ public class Ui {
 
     public String showBye() {
         return "   " + "Bye, see you soon. ^-^";
+    }
+
+    public String showComings(TaskList taskListMonth, TaskList taskListDay) {
+        String titleMonth = "   <<Coming tasks within same month>> \n";
+        String listInMonth = taskListMonth.toString() + "\n";
+        String titleDay = "   <<Coming tasks within the same day>> \n";
+        String listInDay = taskListDay.toString() + "\n";
+        return titleMonth + listInMonth + titleDay + listInDay;
     }
 }

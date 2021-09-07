@@ -60,7 +60,7 @@ public class AddCommand extends Command {
         tasks.addElement(task);
         String taskString = task.toString();
         storage.store(taskString);
-        return ui.showTasks(taskString, tasks.getSize());
+        return ui.showAdding(taskString, tasks.getSize());
     }
 
     @Override

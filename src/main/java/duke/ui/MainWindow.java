@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import duke.storage.Storage;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -30,7 +31,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private static Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
@@ -39,9 +40,10 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         showWelcome();
+        showReminders();
     }
 
-    public void setDuke(Duke d) {
+    public static void setDuke(Duke d) {
         duke = d;
     }
 
@@ -75,15 +77,8 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(GREETING, dukeImage));
     }
 
-
-    @FXML
-    private void showFarewell() {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(FAREWELL, dukeImage));
-    }
-
     @FXML
     private void showReminders() {
-        //dialogContainer.getChildren().add(DialogBox.getDukeDialog(FAREWELL, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Duke.showComings(), dukeImage));
     }
-
 }

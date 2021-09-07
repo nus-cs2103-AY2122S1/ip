@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
@@ -22,6 +23,7 @@ public class Task {
      */
     protected boolean isDone;
 
+    protected String atOrBy;
     /**
      * Sets up the task.
      *
@@ -30,6 +32,12 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public Task(String description, String atOrBy) {
+        this.description = description;
+        this.isDone = false;
+        this.atOrBy = atOrBy;
     }
 
     public String getStatusIcon() {
@@ -59,6 +67,7 @@ public class Task {
         LocalDate d = LocalDate.parse(date);
         return d.format(DateTimeFormatter.ofPattern("MMM d yyyy", Locale.ENGLISH));
     }
+
 
     /**
      * Returns the date representation from the user input.
@@ -111,12 +120,12 @@ public class Task {
      * @param input The user input of date.
      * @return True or not.
      */
-    public static boolean isDateInputFormat(String input) {
+    public static int isDateInputFormat(String input) {
         int lens = input.length();
         if (lens > 10) {
-            return checkDateTime(input);
+            return checkDateTime(input) ? 2 : 0;
         } else {
-           return checkOnlyDate(input, lens);
+           return checkOnlyDate(input, lens) ? 1 : 0;
         }
     }
 
@@ -131,7 +140,7 @@ public class Task {
         String date = parts[0];
         String time = parts[1];
         boolean isLengthInValid = date.length() > 10 || time.length() != 4;
-        boolean isContentInValid = !Parser.checkDigit(time) || !date.contains("/");
+        boolean isContentInValid = !Parser.checkIsDigit(time) || !date.contains("/");
         if (isLengthInValid || isContentInValid) {
             return false;
         }
@@ -175,9 +184,9 @@ public class Task {
      */
     public static String formatOutputDateAndTime(String preTime) {
         int lens = preTime.length();
-        if (isDateInputFormat(preTime) && lens <= 10) {
+        if (isDateInputFormat(preTime) == 1) {
             return getDate(transferToDateFormat(preTime));
-        } else if (isDateInputFormat(preTime)) {
+        } else if (isDateInputFormat(preTime) == 2) {
             return getDate(transferToDateFormat(preTime)) + " "
                     + getTime(preTime.substring(lens - 4, lens));
         } else {
@@ -199,15 +208,22 @@ public class Task {
         return this.description.contains(content);
     }
 
-    public boolean isWithinOneDay(String time) {
-        return true;
-    }
+    public int isWithinMonthOrDay(String date) {
+            String[] partsEventDate = atOrBy.split(" ");
+            String monthEvent = partsEventDate[0];
+            String yearEvent = partsEventDate[2];
+            String dayEvent = partsEventDate[1];
+            String[] partsDate = date.split(" ");
+            String monthDate = partsDate[0];
+            String yearDate = partsDate[2];
+            String dayDate = partsDate[1];
+            boolean isYearAfter = Integer.parseInt(yearDate) == Integer.parseInt(yearEvent);
+            boolean isMonthSame = monthDate.equals(monthEvent);
+            boolean isDaySame = dayDate.equals(dayEvent);
+            boolean isDayAfter = Integer.parseInt(dayDate) <= Integer.parseInt(dayEvent);
+            boolean isWithinDay = isMonthSame && isYearAfter && isDaySame;
+            boolean isWithinMonth = isMonthSame && isYearAfter && isDayAfter;
+            return isWithinDay ? 1 : isWithinMonth ? 2 : 0;
 
-    public boolean isWithinOneWeek() {
-        return true;
-    }
-
-    public boolean isWithinOneMonth() {
-        return true;
     }
 }

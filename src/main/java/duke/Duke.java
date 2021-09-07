@@ -16,8 +16,8 @@ import java.io.IOException;
  */
 public class Duke {
     private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    private static TaskList tasks;
+    private static Ui ui;
 
     /**
      * Sets up duke instance dealing with file path.
@@ -51,5 +51,18 @@ public class Duke {
         } catch (DukeException e) {
             return ui.showError(e.getMessage());
         }
+    }
+
+    public static String showComings() {
+            TaskList taskListMonth = tasks.tasksWithinMonthOrDay(2);
+            assert taskListMonth != null;
+            TaskList taskListDay = tasks.tasksWithinMonthOrDay(1);
+            assert taskListDay != null;
+            return ui.showComings(taskListMonth, taskListDay);
+
+    }
+
+    public static String showList() {
+        return tasks.toString();
     }
 }

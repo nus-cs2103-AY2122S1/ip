@@ -13,6 +13,8 @@ import duke.exception.EmptyInputException;
 import duke.exception.NotRecognizeException;
 import duke.task.Task;
 
+import java.util.function.Predicate;
+
 public class Parser {
     /**
      * Returns boolean value which checks whether
@@ -87,10 +89,11 @@ public class Parser {
         boolean isEmpty = response.equals("delete") || response.equals("todo") || response.equals("deadline")
                 || response.equals("event") || response.equals("done") || response.equals("date")
                 || response.equals("find");
+        Predicate<String> isDateFormat = input -> Task.isDateInputFormat(input) != 0;
         if (response.startsWith("find ") && len > 5) {
             return Operation.FIND;
         } else if (response.startsWith("date ")
-                && Task.isDateInputFormat(response.substring(5))) {
+                && isDateFormat.test(response.substring(5))) {
             return Operation.DATE;
         } else if (response.startsWith("done ")
                 && checkIsDigit(response.substring(5))) {
@@ -98,10 +101,10 @@ public class Parser {
         } else if (response.startsWith("todo ") && len > 5) {
             return Operation.TODO;
         } else if (response.startsWith("deadline ")
-                && response.substring(9).contains(" /by ")) {
+                && response.substring(9).contains(" /by ") && isDateFormat.test(response.split(" /by ")[1])) {
             return Operation.DEADLINE;
         } else if (response.startsWith("event ")
-                && response.substring(6).contains(" /at ")) {
+                && response.substring(6).contains(" /at ") && isDateFormat.test(response.split(" /at ")[1])) {
             return Operation.EVENT;
         } else if (response.startsWith("delete ")
                 && checkIsDigit(response.substring(7))) {

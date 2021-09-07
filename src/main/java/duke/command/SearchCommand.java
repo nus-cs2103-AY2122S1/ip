@@ -39,7 +39,7 @@ public class SearchCommand extends Command {
         case DATE:
             String preTime = response.substring(5);
             String actualTime = Task.formatOutputDateAndTime(preTime);         
-            resultList = tasks.tasksWithDate(actualTime);
+            resultList = tasks.tasksWithDateSame(actualTime);
             break;
         case FIND:
             String content = response.substring(5);
@@ -48,7 +48,7 @@ public class SearchCommand extends Command {
         default:
             break;
         }
-        return ui.showList(resultList, resultList.getSize());
+        return resultList.toString();
     }
 
     @Override

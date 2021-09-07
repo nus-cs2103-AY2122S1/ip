@@ -16,7 +16,7 @@ public class Deadline extends Task {
      * @param by The deadline.
      */
     public Deadline(String description, String by) {
-        super(description);
+        super(description, formatOutputDateAndTime(by));
         this.by = formatOutputDateAndTime(by);
     }
 
@@ -29,26 +29,11 @@ public class Deadline extends Task {
 
     @Override
     public boolean isTimeSame(String time) {
-
-
         return by.equals(time);
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
-    }
-
-    @Override
-    public boolean isWithinOneDay(String time) {
-      return true;
-    }
-    @Override
-    public boolean isWithinOneWeek() {
-        return true;
-    }
-    @Override
-    public boolean isWithinOneMonth() {
-        return true;
     }
 }

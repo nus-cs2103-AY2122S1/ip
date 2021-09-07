@@ -18,7 +18,7 @@ public class Event extends Task {
      * @param at The time when the task should be done.
      */
     public Event(String description, String at) {
-        super(description);
+        super(description, formatOutputDateAndTime(at));
         this.at = formatOutputDateAndTime(at);
     }
 
@@ -36,17 +36,5 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
-    }
-    @Override
-    public boolean isWithinOneDay(String time) {
-        return true;
-    }
-    @Override
-    public boolean isWithinOneWeek() {
-        return true;
-    }
-    @Override
-    public boolean isWithinOneMonth() {
-        return true;
     }
 }

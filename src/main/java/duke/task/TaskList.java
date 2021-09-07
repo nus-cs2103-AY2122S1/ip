@@ -3,7 +3,6 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
 
 import duke.exception.OutOfRangeException;
@@ -11,7 +10,6 @@ import duke.exception.OutOfRangeException;
 public class TaskList {
     /** The data structure used to store the tasks. */
     private ArrayList<Task> taskList;
-
     /** Number of tasks stored. */
     private int count;
 
@@ -72,7 +70,7 @@ public class TaskList {
      * @param time The user input time.
      * @return The task list held at that time.
      */
-    public TaskList tasksWithDate(String time) {
+    public TaskList tasksWithDateSame(String time) {
         TaskList currList = new TaskList();
         taskList.stream()
                 .filter(currTask -> !(currTask instanceof Todo))
@@ -113,24 +111,35 @@ public class TaskList {
         return currList;
     }
 
-    public TaskList tasksWithinOneDay(String time) {
+    public TaskList tasksWithinMonthOrDay(int type) {
+        TaskList currList = new TaskList();
         LocalDate dateNow = LocalDate.now();
         String now = dateNow.format(DateTimeFormatter.ofPattern("MMM d yyyy", Locale.ENGLISH));
-        
-        TaskList currList = new TaskList();
-        for (int i = 0; i < count; i++) {
-            Task currTask = taskList.get(i);
-            if (!(currTask instanceof Todo) && currTask.compareTime(time)) {
-                currList.addElement(currTask);
-            }
-        }
+
+        taskList.stream()
+                .filter(currTask -> !(currTask instanceof Todo))
+                .filter(currTask -> currTask.isWithinMonthOrDay(now) == type)
+                .forEach(currList::addElement);
         return currList;
     }
 
-    public int diffInDate(String time) {
-
-        for () {
-
+    /**
+     * Shows all strings stored with indexing.
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        String end = "\n   ";
+        String begin = "   Here are the tasks in your list:\n   ";
+        sb.append(begin);
+        for (int i = 0; i < count; i++) {
+            if (i == count - 1) {
+                end = "";
+            }
+            String out = ((i + 1)) + "." + this.elementToString(i) + end;
+            sb.append(out);
         }
+        return sb.toString();
     }
 }
+
