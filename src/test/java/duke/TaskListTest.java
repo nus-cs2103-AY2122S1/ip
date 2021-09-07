@@ -45,7 +45,7 @@ public class TaskListTest {
         taskLists.remove(2);
         String expected = "Here are the tasks in your list:\n"
                 + "1. [T][ ] description\n"
-                + "2. [E][ ] event(at: 08 09 2021)\n";
+                + "2. [D][ ] deadline(by: 08 09 2021)\n";
         assertEquals(expected, taskLists.toString());
     }
 
