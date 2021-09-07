@@ -12,7 +12,7 @@ public class Utility {
 
     /**
      * Convert a string in the supported format into a LocalDateTime.
-     * @param string The string to convert
+     * @param string The string to convert.
      */
     public static LocalDateTime stringToDate(String string) {
         String[] details = string.split(" ", 2);
@@ -20,7 +20,8 @@ public class Utility {
         LocalDateTime localDateTime = null;
         String date = details[0];
         String time = details.length == 2 ? details[1] : null;
-        if (date.matches("\\d{1,2}/\\d{1,2}/\\d{4}")) {
+        boolean isDateInFormat = date.matches("\\d{1,2}/\\d{1,2}/\\d{4}");
+        if (isDateInFormat) {
             String[] dateDetails = date.split("/");
             localDate = LocalDate.of(
                     Integer.parseInt(dateDetails[2]),

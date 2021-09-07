@@ -36,16 +36,13 @@ public class Event extends Task {
      */
     public Event(String description, LocalDateTime localDateTime) {
         super(description);
+        boolean isDayTime = localDateTime.getHour() < HALF_DAY_HOURS;
         this.eventTime = String.format("%s of %s %s, %s%s",
                 localDateTime.getDayOfMonth(),
                 localDateTime.getMonth().toString(),
                 localDateTime.getYear(),
-                localDateTime.getHour() < HALF_DAY_HOURS
-                        ? localDateTime.getHour()
-                        : localDateTime.getHour() - HALF_DAY_HOURS,
-                localDateTime.getHour() < HALF_DAY_HOURS
-                        ? "am"
-                        : "pm");
+                isDayTime ? localDateTime.getHour() : localDateTime.getHour() - HALF_DAY_HOURS,
+                isDayTime ? "am" : "pm");
     }
 
     /**

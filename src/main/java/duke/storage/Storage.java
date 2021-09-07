@@ -39,38 +39,41 @@ public class Storage {
         String[] folders = filePath.split("/");
         for (String s:folders) {
             File f = new File(s);
-            if (!s.contains(".") && !f.isDirectory()) {
+            boolean isValidFolder = !s.contains(".") && !f.isDirectory();
+            if (isValidFolder) {
                 throw new DukeException(String.format("OOPS!!! \"%s\" folder does not exist.", s));
             }
         }
 
         File file = new File(filePath);
         List<Task> list = new ArrayList<>();
+        Scanner sc;
 
         // Load all tasks from the file
         try {
-            Scanner sc = new Scanner(file);
-            while (sc.hasNext()) {
-                String taskMeta = sc.nextLine();
-                String[] taskParameter = taskMeta.split("\\|");
-                switch (taskParameter[0]) {
-                case "T":
-                    list.add(new ToDo(taskParameter[2], taskParameter[1].equals("X")));
-                    break;
-                case "D":
-                    list.add(new Deadline(taskParameter[2], taskParameter[3], taskParameter[1].equals("X")));
-                    break;
-                case "E":
-                    list.add(new Event(taskParameter[2], taskParameter[3], taskParameter[1].equals("X")));
-                    break;
-                default:
-                    throw new DukeException("OOPS!!! File appears to be corrupted.");
-                }
-            }
-            return list;
+            sc = new Scanner(file);
         } catch (FileNotFoundException e) {
             throw new DukeException("OOPS!!! File not found.");
         }
+
+        while (sc.hasNext()) {
+            String taskMeta = sc.nextLine();
+            String[] taskParameter = taskMeta.split("\\|");
+            switch (taskParameter[0]) {
+            case "T":
+                list.add(new ToDo(taskParameter[2], taskParameter[1].equals("X")));
+                break;
+            case "D":
+                list.add(new Deadline(taskParameter[2], taskParameter[3], taskParameter[1].equals("X")));
+                break;
+            case "E":
+                list.add(new Event(taskParameter[2], taskParameter[3], taskParameter[1].equals("X")));
+                break;
+            default:
+                throw new DukeException("OOPS!!! File appears to be corrupted.");
+            }
+        }
+        return list;
     }
 
     /**
@@ -80,7 +83,6 @@ public class Storage {
      * @throws DukeException invalid location to save.
      */
     public void save(TaskList taskList) throws DukeException {
-
         File file = new File(filePath);
         if (file.isDirectory()) {
             throw new DukeException(String.format("OOPS!!! \"%s\" is not a file but a folder.", filePath));

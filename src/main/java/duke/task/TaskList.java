@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A TaskList class to store tasks
+ * A TaskList class to store tasks.
  * @author KelvinSoo
  * @version A-MoreOOP
  */
@@ -30,7 +30,7 @@ public class TaskList {
 
     /**
      * A method to get the task list.
-     * @return The task list
+     * @return The task list.
      */
     public List<Task> getTaskList() {
         return taskList;
@@ -38,7 +38,7 @@ public class TaskList {
 
     /**
      * A method to add a task to the list.
-     * @param task The task to be added
+     * @param task The task to be added.
      */
     public void addTask(Task task) {
         taskList.add(task);
@@ -46,10 +46,10 @@ public class TaskList {
 
     /**
      * A method to delete a task from the list.
-     * @param taskNo The task number to be removed
+     * @param taskNo The task number to be removed.
      */
     public void deleteTask(int taskNo) throws DukeException {
-        if (taskNo - 1 > taskList.size()) {
+        if (isValidTask(taskNo)) {
             // Task does not exist
             throw new DukeException(String.format("Task %d does not exist.\nUse \"list\" to see all tasks.", taskNo));
         }
@@ -58,7 +58,7 @@ public class TaskList {
 
     /**
      * A method to get the size of the task list.
-     * @return int The size of the list
+     * @return int The size of the list.
      */
     public int size() {
         return taskList.size();
@@ -66,7 +66,7 @@ public class TaskList {
 
     /**
      * A method to get a task from the task list.
-     * @return Task The task to get
+     * @return Task The task to get.
      */
     public Task getTask(int i) throws DukeException {
         try {
@@ -78,10 +78,10 @@ public class TaskList {
 
     /**
      * A method to mark a task as done.
-     * @param taskNo The task to be marked
+     * @param taskNo The task to be marked.
      */
     public void markAsDone(int taskNo) throws DukeException {
-        if (taskNo - 1 > taskList.size()) {
+        if (isValidTask(taskNo)) {
             // Task does not exist
             throw new DukeException(String.format("Task %d does not exist.\nUse \"list\" to see all tasks.", taskNo));
         }
@@ -89,8 +89,16 @@ public class TaskList {
     }
 
     /**
+     * A method to check if task is valid.
+     * @param taskNo The task to be marked.
+     */
+    public boolean isValidTask(int taskNo) {
+        return taskNo > 0 && taskNo - 1 <= taskList.size();
+    }
+
+    /**
      * A method to output all tasks as a string.
-     * @return  String All the task as a string
+     * @return  String All the task as a string.
      */
     public String toString() {
         StringBuilder sb = new StringBuilder();

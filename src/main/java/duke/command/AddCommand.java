@@ -48,24 +48,26 @@ public class AddCommand extends Command{
             task = new ToDo(description);
             break;
         case "deadline":
-            if (description.split(" /by ").length != 2) {
+            parameter = description.split(" /by ");
+            boolean isValidDeadlineParameter = parameter.length != 2;
+            if (isValidDeadlineParameter) {
                 throw new DukeException("OOPS!!! Parameter /by is missing.\n"
                         + "eg. deadline Read Book /by 31/12/2021 1800\n"
                         + "    deadline Read Book /by Friday");
             }
-            parameter = description.split(" /by ");
             ldt = Utility.stringToDate(parameter[1]);
             task = (ldt == null)
                     ? new Deadline(parameter[0], parameter[1])
                     : new Deadline(parameter[0], ldt);
             break;
         case "event":
-            if (description.split(" /at ").length != 2) {
+            parameter = description.split(" /at ");
+            boolean isValidEventParameter = parameter.length != 2;
+            if (isValidEventParameter) {
                 throw new DukeException("OOPS!!! Parameter /at is missing.\n"
                         + "eg. event Meeting /at 31/12/2021 1800\n"
                         + "    event Meeting /at Friday");
             }
-            parameter = description.split(" /at ");
             ldt = Utility.stringToDate(parameter[1]);
             task = (ldt == null)
                     ? new Event(parameter[0], parameter[1])

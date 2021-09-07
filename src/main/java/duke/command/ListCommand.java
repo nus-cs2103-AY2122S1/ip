@@ -28,7 +28,8 @@ public class ListCommand extends Command{
      */
     @Override
     public void execute(TaskList taskList, Gui gui, Storage storage) throws DukeException {
-        if (taskList.size() == 0) {
+        boolean isEmptyList = taskList.size() == 0;
+        if (isEmptyList) {
             throw new DukeException("It seems that your task list is empty.\n"
                     + "Try adding some task using \"todo\", \"deadline\" or \"event\"");
         }

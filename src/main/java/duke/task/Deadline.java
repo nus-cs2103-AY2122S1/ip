@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
  */
 public class Deadline extends Task {
     private String dateLine;
+    private final int HALF_DAY_HOURS = 12;
 
     /**
      * A constructor to create a new deadline task.
@@ -35,13 +36,13 @@ public class Deadline extends Task {
      */
     public Deadline(String description, LocalDateTime localDateTime) {
         super(description);
+        boolean isDayTime = localDateTime.getHour() < HALF_DAY_HOURS;
         this.dateLine = String.format("%s of %s %s, %s%s",
                 localDateTime.getDayOfMonth(),
                 localDateTime.getMonth().toString(),
                 localDateTime.getYear(),
-                localDateTime.getHour() < 12 ? localDateTime.getHour() : localDateTime.getHour() - 12,
-                localDateTime.getHour() < 12 ? "am" : "pm");
-
+                isDayTime ? localDateTime.getHour() : localDateTime.getHour() - HALF_DAY_HOURS,
+                isDayTime ? "am" : "pm");
     }
 
     /**

@@ -31,17 +31,19 @@ public class FindCommand extends Command{
      * @param storage The place to store the session.
      * @throws DukeException no matching task found.
      */
-
     @Override
     public void execute(TaskList taskList, Gui gui, Storage storage) throws DukeException {
         TaskList searchList = new TaskList();
+
         for (Task t:taskList.getTaskList()) {
-            if (t.getDescription().contains(parameter)) {
+            boolean isInList = t.getDescription().contains(parameter);
+            if (isInList) {
                 searchList.addTask(t);
             }
         }
 
-        if (searchList.size() == 0) {
+        boolean isEmptySearchList = searchList.size() == 0;
+        if (isEmptySearchList) {
             throw new DukeException("No matching tasks found.");
         }
 
@@ -49,7 +51,6 @@ public class FindCommand extends Command{
         sb.append("Here are the matching tasks in your list:\n");
         sb.append(searchList.toString());
         gui.showResponse(sb.toString());
-
     }
 
     /**
