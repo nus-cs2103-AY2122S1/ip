@@ -1,8 +1,8 @@
 package catobot.item;
 
-import catobot.exception.EmptyCommandException;
-
 import java.time.format.DateTimeFormatter;
+
+import catobot.exception.EmptyCommandException;
 
 /**
  * Represents items which can be done.
