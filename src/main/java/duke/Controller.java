@@ -9,6 +9,8 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static duke.Parser.taskParse;
+
 
 public class Controller {
 
@@ -57,6 +59,11 @@ public class Controller {
     @FXML
     private DatePicker updateDate;
 
+    /**
+     * Loads the tasklist when the load button is pressed
+     *
+     * @param a action of pressing load button
+     */
     public void load(ActionEvent a) {
         {
             try {
@@ -72,6 +79,9 @@ public class Controller {
         }
     }
 
+    /**
+     * Loads updated tasklist when other buttons are pressed
+     */
     public void load() {
         String listContent = "";
         for (int i = 0; i < tasks.size(); i++) {
@@ -89,18 +99,11 @@ public class Controller {
         updateError.setText("");
     }
 
-    public Task taskParse(String type, String description, String dateTime){
-        if (type.equalsIgnoreCase("T")) {
-            return new Todo(description);
-        } else if (type.equalsIgnoreCase("D")) {
-            return new Deadline(description,dateTime);
-        } else if (type.equalsIgnoreCase("E")) {
-            return new Event(description,dateTime);
-        } else {
-            return null;
-        }
-    }
-
+    /**
+     * Adds a task to the list when add button is pressed
+     *
+     * @param a action of pressing add button
+     */
     public void add(ActionEvent a) {
         if (taskType.getText().equalsIgnoreCase("T")) {
             tasks.addTask(taskParse(taskType.getText(), taskDescription.getText(), ""));
@@ -117,6 +120,11 @@ public class Controller {
 
     }
 
+    /**
+     * Mark a task as done on the list when done button is pressed
+     *
+     * @param a action of press add button
+     */
     public void done(ActionEvent a) {
         try {
             int doneIndex = Integer.parseInt(doneText.getText()) - 1;
@@ -132,6 +140,11 @@ public class Controller {
         }
     }
 
+    /**
+     * Deletes a task to the list when delete button is pressed
+     *
+     * @param a action of press delete button
+     */
     public void delete(ActionEvent a){
         try {
             int deleteIndex = Integer.parseInt(deleteText.getText()) - 1;
@@ -147,6 +160,12 @@ public class Controller {
         }
     }
 
+
+    /**
+     * Updates task in tasklist given user input
+     *
+     * @param a action of press update button
+     */
     public void update(ActionEvent a) {
         try {
             int index = Integer.parseInt(updateIndex.getText()) - 1;
@@ -162,22 +181,13 @@ public class Controller {
         }
     }
 
-    public void find(ActionEvent a) {
-        ArrayList<Task> result = new ArrayList<>();
-        String listContent = "";
 
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.getTask(i).description.contains(findText.getText())) {
-                result.add(tasks.getTask(i));
-            }
-        }
-        if (result.size() == 0) {
-            listLabel.setText("There are no matching task in your list!\nPress load to go back!");
-        } else {
-            for (int i = 0; i < result.size(); i++) {
-                listContent += (i + 1) + ". " + result.get(i).toString() + "\n";
-            }
-            listLabel.setText("Here are the matching tasks in your list:\n" + listContent + "Press load to go back!");
-        }
+    /**
+     * Displays a filtered tasklist given a string to find
+     *
+     * @param a action of press find button
+     */
+    public void find(ActionEvent a) {
+        listLabel.setText(tasks.findTask(findText.getText()) + "Press load to go back!");
     }
 }
