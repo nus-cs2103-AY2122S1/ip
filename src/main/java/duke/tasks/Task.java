@@ -1,6 +1,7 @@
 package duke.tasks;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -15,7 +16,7 @@ public class Task {
     private boolean isDone;
 
     /** List of expenses for current task. */
-    private HashMap<String, Float> expenses;
+    private HashMap<String, ArrayList<Float>> expenses;
 
     private DecimalFormat df = new DecimalFormat("0.00");
 
@@ -55,7 +56,12 @@ public class Task {
      * @param amount amount spent.
      */
     public void addExpenseToTask(String purpose, float amount) {
-        expenses.put(purpose, amount);
+        ArrayList<Float> spending = expenses.get(purpose);
+        if (spending == null) {
+            spending = new ArrayList<>();
+        }
+        spending.add(amount);
+        expenses.put(purpose, spending);
     }
 
     /**
@@ -69,8 +75,11 @@ public class Task {
         sb.append(this + ": \n");
         for (String purpose : expenses.keySet()) {
             sb.append("\t" + count + ". ");
-            sb.append(purpose + ": $");
-            sb.append(df.format(expenses.get(purpose)));
+            sb.append(purpose + ": ");
+            ArrayList<Float> spending = expenses.get(purpose);
+            for (Float f : spending) {
+                sb.append("$" + df.format(f) + "|");
+            }
             sb.append("\n");
             count++;
         }
@@ -85,8 +94,10 @@ public class Task {
     public String formatExpensesToSave() {
         StringBuilder sb = new StringBuilder();
         for (String purpose : expenses.keySet()) {
-            sb.append(purpose + "|");
-            sb.append(df.format(expenses.get(purpose)) + "|");
+            for (Float f : expenses.get(purpose)) {
+                sb.append(purpose + "|");
+                sb.append(df.format(f) + "|");
+            }
         }
         return sb.toString();
     }

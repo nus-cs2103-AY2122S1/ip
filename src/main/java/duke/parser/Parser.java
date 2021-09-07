@@ -156,8 +156,17 @@ public class Parser {
         }
     }
 
+    /**
+     * Chooses and return the appropriate expense command from the user input.
+     *
+     * @param expense the user input.
+     * @return appropriate expense command given the user input.
+     * @throws MessageEmptyException if the message is missing from the user input.
+     * @throws InvalidExpenseFormatException if the format of entering an expense command is invalid.
+     * @throws TaskNotFoundException if the task cannot be found.
+     */
     private Command chooseCorrectExpenseCommand(String expense) throws MessageEmptyException,
-            InvalidExpenseFormatException {
+            InvalidExpenseFormatException, TaskNotFoundException {
 
         try {
             expense = expense.trim().substring(8).trim();
@@ -168,16 +177,24 @@ public class Parser {
         if (isAllPresent) {
             return new ExpenseCommand(-1, "", 0);
         }
-        String indexAsString = String.valueOf(expense.charAt(0));
+        String[] parsedExpense = expense.split(" ");
+        String indexAsString = parsedExpense[0];
         try {
             int index = Integer.parseInt(indexAsString) - 1;
-            ArrayList<String> parsedInfo = separatePurposeAndAmount(expense.substring(1));
+            if (index < 0) {
+                throw new TaskNotFoundException();
+            }
+            int endingIndexOfNumber = expense.indexOf(indexAsString) + indexAsString.length();
+            ArrayList<String> parsedInfo = separatePurposeAndAmount(expense.substring(endingIndexOfNumber));
             String purpose = parsedInfo.get(0);
             float amount = Float.parseFloat(parsedInfo.get(1));
             return new ExpenseCommand(index, purpose, amount);
         } catch (IndexOutOfBoundsException e) {
             // listing out expenses of 1 task
             int index = Integer.parseInt(indexAsString) - 1;
+            if (index < 0) {
+                throw new TaskNotFoundException();
+            }
             return new ExpenseCommand(index, "", 0);
         } catch (NumberFormatException e) {
             // happens when the values entered cannot be converted from String properly
@@ -185,6 +202,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Separates the purpose and amount field from the user input for expense.
+     *
+     * @param input user input without expense keyword.
+     * @return an arraylist with the purpose and amount spent separated.
+     * @throws InvalidExpenseFormatException if the format of entering an expense command is invalid.
+     */
     private ArrayList<String> separatePurposeAndAmount(String input) throws InvalidExpenseFormatException {
         input = input.trim();
         String[] parsedInfo = input.split("\\$");

@@ -53,7 +53,7 @@ public class ExpenseCommand extends Command {
      * @return boolean that represents if index given is positive.
      */
     private boolean isIndexValid() {
-        return taskIndex > 0;
+        return taskIndex >= 0;
     }
 
     /**
