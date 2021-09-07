@@ -26,6 +26,7 @@ public class FindCommand extends Command {
      * @param tasks The list of tasks in the current programme.
      * @param ui The user interface.
      * @param storage Handles interaction with the file.
+     * @return A list of filtered tasks.
      * @throws DukeException All exceptions related to Duke.
      */
     @Override

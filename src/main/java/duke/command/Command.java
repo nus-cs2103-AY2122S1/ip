@@ -23,6 +23,7 @@ public class Command {
      * @param tasks The list of tasks in the current programme.
      * @param ui The user interface.
      * @param storage Handles interaction with the file.
+     * @return Response message of that command.
      * @throws DukeException All exceptions related to Duke.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

@@ -29,13 +29,13 @@ public class DeleteCommand extends Command {
      * @param taskList The list of tasks in the current programme.
      * @param ui The user interface.
      * @param storage Handles interaction with the file.
+     * @return Response message of deleting a task.
      * @throws DukeException All exceptions related to Duke.
-     * @return
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         int id;
-        String result = "";
+        String result;
         try {
             id = Integer.parseInt(cmd.strip());
         } catch (NumberFormatException e) {

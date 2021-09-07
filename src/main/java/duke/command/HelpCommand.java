@@ -25,8 +25,8 @@ public class HelpCommand extends Command {
      * @param taskList The list of tasks in the current programme.
      * @param ui The user interface.
      * @param storage Handles interaction with the file.
-     * @throws DukeException All exceptions related to Duke.
      * @return Help text.
+     * @throws DukeException All exceptions related to Duke.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
