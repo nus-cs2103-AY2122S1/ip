@@ -10,6 +10,12 @@ import duke.exception.DukeException;
  * Contains the task list.
  */
 public class TaskList {
+    private static final String ALREADY_EXIST = "This task has already been added! Please add another task.";
+    private static final String DATE_TIME_FORMAT = "Please follow this format when entering date and time:\n"
+            + "DD/MM/YYYY 24-Hour Time Format" + " e.g. (01/01/2020 2359)";
+    private static final String EMPTY_TASKLIST = "You do not have any task. Please add a task first!";
+    private static final String INVALID_INDEX = "Please enter a valid task number between 1 and %d!";
+
     /** A collection of the task */
     private final ArrayList<Task> taskList;
 
@@ -87,29 +93,45 @@ public class TaskList {
             case 0:
                 String tDescription = input[0];
 
-                task = new Todo(false, tDescription);
+                Todo todo = new Todo(false, tDescription);
+
+                if (todo.checkIfAlreadyAdded(taskList)) {
+                    throw new DukeException(ALREADY_EXIST + "todo");
+                } else {
+                    task = todo;
+                }
                 break;
             case 1:
                 String dDescription = input[0];
                 String by = input[1];
 
-                task = new Deadline(false, dDescription, by);
+                Deadline deadline = new Deadline(false, dDescription, by);
+
+                if (deadline.checkIfAlreadyAdded(taskList)) {
+                    throw new DukeException(ALREADY_EXIST + "deadline");
+                } else {
+                    task = deadline;
+                }
                 break;
             case 2:
                 String eDescription = input[0];
                 String at = input[1];
 
-                task = new Event(false, eDescription, at);
+                Event event = new Event(false, eDescription, at);
+
+                if (event.checkIfAlreadyAdded(taskList)) {
+                    throw new DukeException(ALREADY_EXIST + "event");
+                } else {
+                    task = event;
+                }
                 break;
             default:
                 throw new DukeException("Not a valid Task!!");
 
             }
         } catch (DateTimeParseException e) {
-            throw new DukeException("Please follow this format when entering date and time:\n"
-                    + "DD/MM/YYYY 24-Hour Time Format" + " e.g. (01/01/2020 2359)");
+            throw new DukeException(DATE_TIME_FORMAT);
         }
-
         taskList.add(task);
         return task;
     }
@@ -152,11 +174,11 @@ public class TaskList {
      */
     public void checkForIndex(int i) throws DukeException {
         if (taskList.isEmpty()) {
-            throw new DukeException("You do not have any task. Please add a task first!");
+            throw new DukeException(EMPTY_TASKLIST);
         }
 
         if (i > taskList.size() || i < 1) {
-            throw new DukeException(String.format("Please enter a valid task number between 1 and %d!",
+            throw new DukeException(String.format(INVALID_INDEX,
                     taskList.size()));
         }
     }

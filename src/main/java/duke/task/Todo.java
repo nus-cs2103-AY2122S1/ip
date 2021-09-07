@@ -1,6 +1,8 @@
 package duke.task;
 
-class Todo extends Task {
+import java.util.ArrayList;
+
+public class Todo extends Task {
     /**
      * Constructor for a `Todo` task.
      *
@@ -11,7 +13,6 @@ class Todo extends Task {
         super(isDone, description);
     }
 
-
     @Override
     public String toString() {
         return "[T]" + super.toString();
@@ -20,5 +21,18 @@ class Todo extends Task {
     @Override
     public String saveAsData() {
         return 0 + "\n" + super.saveAsData() + "\n";
+    }
+
+    @Override
+    public boolean checkIfAlreadyAdded(ArrayList<Task> list) {
+        boolean alreadyAdded = false;
+
+        for (Task task : list) {
+            if (this.equals(task)) {
+                alreadyAdded = true;
+                break;
+            }
+        }
+        return alreadyAdded;
     }
 }
