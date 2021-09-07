@@ -2,6 +2,7 @@ package nyx;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import nyx.task.Event;
 import org.junit.jupiter.api.Test;
 
 public class EventTest {
