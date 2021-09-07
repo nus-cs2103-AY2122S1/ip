@@ -55,6 +55,22 @@ public class DukeException extends Exception {
     /**
      * Class handles if the task Deadline or Event doesn't specify the date
      */
+    public static class DukeParseCommandException extends DukeException {
+        private Command command;
+
+        protected DukeParseCommandException(Command command) {
+            this.command = command;
+        }
+
+        @Override
+        public String toString() {
+            return "OOPS!!! Something went wrong with command " + "\"" + command.getCommandName() +"\"" + " that I cannot understand";
+        }
+    }
+
+    /**
+     * Class handles if the task Deadline or Event doesn't specify the date
+     */
     public static class DukeIllegalArgumentException extends DukeException {
         UserInput input;
 
@@ -67,4 +83,20 @@ public class DukeException extends Exception {
             return "OOPS!!! I don't understand: " + input.pre_command;
         }
     }
+
+    /**
+     * Class handles if the task Deadline or Event doesn't specify the date
+     */
+    public static class DukeIndexOutOfBoundsException extends DukeException {
+        protected DukeIndexOutOfBoundsException() {
+        }
+
+        @Override
+        public String toString() {
+            return "OOPS!!! Seem like you only have " + Duke.todoList.size() + " task(s) :)\n" +
+                    "Try with number from 1 to " +  Duke.todoList.size();
+        }
+    }
+
+
 }
