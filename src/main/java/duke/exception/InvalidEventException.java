@@ -11,4 +11,9 @@ public class InvalidEventException extends DukeException {
     public InvalidEventException() {
         super("Please enter event in the format [Task name] /at yyyy-mm-dd HH:mm-HH:mm");
     }
+
+    public InvalidEventException(String str) {
+        super(str);
+    }
+
 }

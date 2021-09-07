@@ -38,11 +38,14 @@ public class Event extends Task {
             if (dateTime.length == 1) {
                 eventStartTime = LocalTime.parse("23:59");
                 eventEndTime = LocalTime.parse("23:59");
-            } else {
-                String time = dateTime[1];
-                eventStartTime = LocalTime.parse(time.split("-")[0]);
-                eventEndTime = LocalTime.parse(time.split("-")[1]);
             }
+            String time = dateTime[1];
+            eventStartTime = LocalTime.parse(time.split("-")[0]);
+            eventEndTime = LocalTime.parse(time.split("-")[1]);
+            if (eventStartTime.isAfter(eventEndTime)) {
+                throw new InvalidEventException("EventStartTime cannot be later than EventEndTime!");
+            }
+
         } catch (DateTimeParseException e) {
             throw new InvalidEventException();
         }

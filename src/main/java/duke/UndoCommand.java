@@ -19,6 +19,7 @@ public class UndoCommand extends Command {
         if (commandHistory == null) {
             throw new InvalidCommandException();
         }
+
         ArrayList<Command> updatedCommandHistory = commandHistory;
         for (int i = commandHistory.size() - 1; i > 0; i--) {
             Command command = commandHistory.get(i);
@@ -31,7 +32,8 @@ public class UndoCommand extends Command {
         if (currentCommand == null) {
             return "Nothing to undo!";
         } else {
-            UndoableCommand cur = (UndoableCommand) currentCommand; //safe to typecast
+            UndoableCommand cur = (UndoableCommand) currentCommand;
+            //safe to typecast since currentCommand is only instantiated if it is undoable
             commandHistory = updatedCommandHistory;
             return cur.undo();
         }

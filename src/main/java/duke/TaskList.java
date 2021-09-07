@@ -127,9 +127,6 @@ public class TaskList {
         return result;
     }
 
-    public String undoTask() {
-        return "";
-    }
     /**
      * Getter to get ArrayList
      *
