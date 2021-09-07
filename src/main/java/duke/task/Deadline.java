@@ -29,6 +29,7 @@ public class Deadline extends Task {
     public String getDate() {
         DateTimeFormatter dateFormatObj = DateTimeFormatter.ofPattern("MMM-dd-yyyy");
         String formattedDate = by.format(dateFormatObj);
+        assert (formattedDate.length() > 0);
         return formattedDate;
     }
 
