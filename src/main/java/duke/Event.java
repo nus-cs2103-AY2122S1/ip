@@ -35,7 +35,7 @@ public class Event extends Task {
      */
     public Event(String num, String description, String at) {
         this(description, at);
-        this.isDone = !num.equals("0");
+        this.isDone = !num.equals(NOT_DONE_STRING);
         this.dateTimeAt = LocalDateTime.parse(at, formatter);
     }
 
@@ -44,7 +44,7 @@ public class Event extends Task {
      *
      * @return date and time following the format: MMM dd yyyy h:mm a.
      */
-    public String getFormattedAt() {
+    public String getFormattedDateTime() {
         return this.dateTimeAt.format(DateTimeFormatter.ofPattern("MMM dd yyyy h:mm a"));
     }
 
@@ -55,7 +55,7 @@ public class Event extends Task {
      */
     @Override
     public String getFileString() {
-        return String.format("E | %d | %s | %s", this.isDone ? 1 : 0, this.description, this.at);
+        return String.format("E | %d | %s | %s", this.isDone ? DONE : NOT_DONE, this.description, this.at);
     }
 
     /**
@@ -65,7 +65,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + getFormattedAt() + ")";
+        return "[E]" + super.toString() + " (at: " + getFormattedDateTime() + ")";
     }
 }
 

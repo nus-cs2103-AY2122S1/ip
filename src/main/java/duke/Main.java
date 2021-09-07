@@ -15,7 +15,6 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
-
     /**
      * Loads MainWindow onto stage.
      * @param stage represents main window in program
@@ -24,8 +23,8 @@ public class Main extends Application {
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
-            AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
+            AnchorPane anchorPane = fxmlLoader.load();
+            Scene scene = new Scene(anchorPane);
             stage.setScene(scene);
             stage.setTitle("DukeBot");
             fxmlLoader.<MainWindow>getController().setDuke(duke);

@@ -20,40 +20,66 @@ public class Parser {
         } else if (command.equals("bye")) {
             return CommandType.BYE;
         } else if (command.startsWith("find")) {
-            if (command.equals("find")) {
-                throw new DukeException("☹ OOPS!!! The find command needs a search term after it "
-                        + "in the following format: find searchterm");
-            }
-            return CommandType.FIND;
+            return handleFindInput(command);
         } else if (command.startsWith("delete")) {
-            if (command.equals("delete")) {
-                throw new DukeException("☹ OOPS!!! The delete command needs a number after it in the following format:"
-                        + " delete number");
-            }
-            return CommandType.DELETE;
+            return handleDeleteInput(command);
         } else if (command.startsWith("done")) {
-            if (command.equals("done")) {
-                throw new DukeException("☹ OOPS!!! The done command needs a number after it in the following format:"
-                        + " done number");
-            }
-            return CommandType.DONE;
+            return handleDoneInput(command);
         } else if (command.startsWith("todo")) {
-            if (command.equals("todo")) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-            }
-            return CommandType.TODO;
+            return handleToDoInput(command);
         } else if (command.startsWith("deadline")) {
-            if (command.equals("deadline")) {
-                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-            }
-            return CommandType.DEADLINE;
+            return handleDeadlineInput(command);
         } else if (command.startsWith("event")) {
-            if (command.equals("event")) {
-                throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
-            }
-            return CommandType.EVENT;
+            return handleEventInput(command);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
+
+    private static CommandType handleFindInput(String command) throws DukeException {
+        if (command.equals("find")) {
+            throw new DukeException("☹ OOPS!!! The find command needs a search term after it "
+                    + "in the following format: find searchterm");
+        }
+        return CommandType.FIND;
+    }
+
+    private static CommandType handleDeleteInput(String command) throws DukeException {
+        if (command.equals("delete")) {
+            throw new DukeException("☹ OOPS!!! The delete command needs a number after it in the following format:"
+                    + " delete number");
+        }
+        return CommandType.DELETE;
+    }
+
+    private static CommandType handleDoneInput(String command) throws DukeException {
+        if (command.equals("done")) {
+            throw new DukeException("☹ OOPS!!! The done command needs a number after it in the following format:"
+                    + " done number");
+        }
+        return CommandType.DONE;
+    }
+
+    private static CommandType handleToDoInput(String command) throws DukeException {
+        if (command.equals("todo")) {
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+        return CommandType.TODO;
+    }
+
+    private static CommandType handleDeadlineInput(String command) throws DukeException {
+        if (command.equals("deadline")) {
+            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        }
+        return CommandType.DEADLINE;
+    }
+
+    private static CommandType handleEventInput(String command) throws DukeException {
+        if (command.equals("event")) {
+            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+        }
+        return CommandType.EVENT;
+    }
+
+
 }

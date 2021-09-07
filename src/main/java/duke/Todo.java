@@ -22,7 +22,7 @@ public class Todo extends Task {
      */
     public Todo(String num, String description) {
         super(description);
-        this.isDone = !num.equals("0");
+        this.isDone = !num.equals(NOT_DONE_STRING);
     }
 
     /**
@@ -32,7 +32,7 @@ public class Todo extends Task {
      */
     @Override
     public String getFileString() {
-        return String.format("T | %d | %s", this.isDone ? 1 : 0, this.description);
+        return String.format("T | %d | %s", this.isDone ? DONE : NOT_DONE, this.description);
     }
 
     /**

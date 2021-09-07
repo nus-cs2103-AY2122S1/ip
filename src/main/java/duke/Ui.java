@@ -18,15 +18,6 @@ public class Ui {
     }
 
     /**
-     * Returns greeting when program first begins.
-     *
-     * @return greeting message
-     */
-    public String showGreeting() {
-        return "Hello! I'm Duke\nWhat can I do for you?";
-    }
-
-    /**
      * Returns message showing the task marked as done.
      *
      * @param doneTask the task marked as done
