@@ -13,7 +13,7 @@ import jarvis.task.TaskList;
  * Encapsulates the object that interacts with the user.
  */
 public class Ui {
-    private Scanner sc = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
     /**
      * Shows the unformatted message to the user.
@@ -21,7 +21,7 @@ public class Ui {
      * @param message The message to be shown.
      */
     public static void showOutputMessage(OutputMessage message) {
-        message.print();
+        System.out.println(message.getMessage());
     }
 
     /**
@@ -30,7 +30,7 @@ public class Ui {
      * @param message The message to be shown.
      */
     public static void showFormattedOutputMessage(OutputMessage message) {
-        message.print();
+        System.out.println(message.getFormattedMessage());
     }
 
     /**
@@ -100,7 +100,7 @@ public class Ui {
         return new OutputMessage(String.format(
                 "Alright! I have added this to the Stark Industries Database:\n\t%s\n%s",
                 task.toString(),
-                taskList.taskListSummary()
+                taskList.getTaskListSummary()
         ));
     }
 
@@ -128,7 +128,7 @@ public class Ui {
         return new OutputMessage(String.format(
                 "Initiated Delete protocol. Delete confirmed for:\n\t%s\n%s",
                 task.toString(),
-                taskList.taskListSummary()
+                taskList.getTaskListSummary()
         ));
     }
 
@@ -138,13 +138,13 @@ public class Ui {
      * @return String that is read.
      */
     public String readInput() {
-        return this.sc.nextLine();
+        return this.scanner.nextLine();
     }
 
     /**
      * Closes the active scanner.
      */
     public void closeScanner() {
-        this.sc.close();
+        this.scanner.close();
     }
 }

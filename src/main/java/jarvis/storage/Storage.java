@@ -65,9 +65,11 @@ public class Storage {
             if (readLine.length < 3) {
                 throw new StorageFileException("Storage file has improper format!");
             }
+
             String taskType = readLine[0];
             boolean isDone = readLine[1].equals("1");
             Task task;
+
             switch (taskType) {
             case "T":
                 task = new Todo(readLine[2]);
@@ -81,6 +83,7 @@ public class Storage {
             default:
                 throw new InvalidStorageTaskException();
             }
+
             if (isDone) {
                 task.markAsDone();
             }
