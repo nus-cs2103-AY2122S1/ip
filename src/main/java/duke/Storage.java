@@ -34,8 +34,9 @@ public class Storage {
      * Reads file from the file path and returns a list of {@code Task} in the file.
      *
      * @return An ArrayList of {@code Task}
+     * @throws DukeException unknown input when parsing file
      */
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner scanner = null;
         try {
@@ -84,7 +85,6 @@ public class Storage {
      * Writes to file at the specified file path with the given tasks.
      *
      * @param tasks Tasks to be written to be file.
-     *
      * @throws DukeException IOException occured when writing to file.
      */
     public void writeToFile(TaskList tasks) throws DukeException {
@@ -116,7 +116,6 @@ public class Storage {
     }
 
     private void createNewFile() throws DukeException {
-
         try {
             File dir = new File("./data");
             dir.mkdirs();

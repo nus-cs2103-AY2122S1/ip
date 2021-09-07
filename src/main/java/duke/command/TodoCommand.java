@@ -34,13 +34,4 @@ public class TodoCommand extends Command {
         storage.writeToFile(tasks);
         return ui.showNewTask(tasks.lastTask(), tasks.size());
     }
-
-    /**
-     * Returns {@code false}. Program should not terminate after {@code ListCommand}.
-     *
-     * @return {@code false}
-     */
-    public boolean isExit() {
-        return false;
-    }
 }

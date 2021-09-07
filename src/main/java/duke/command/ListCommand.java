@@ -32,16 +32,6 @@ public class ListCommand extends Command {
         return ui.showTasks(tasks.getTasks());
     }
 
-    /**
-     * Returns {@code false}. Program should not terminate after {@code ListCommand}.
-     *
-     * @return {@code false}
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
     @Override
     public boolean equals(Object other) {
         return other instanceof ListCommand;

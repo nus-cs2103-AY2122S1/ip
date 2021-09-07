@@ -48,7 +48,9 @@ public abstract class Command {
      *
      * @return {@code true} if the program should exit, {@code false} otherwise.
      */
-    public abstract boolean isExit();
+    public boolean isExit() {
+        return false;
+    };
 
     @Override
     public boolean equals(Object other) {

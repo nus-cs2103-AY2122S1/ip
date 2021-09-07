@@ -89,14 +89,15 @@ public class TaskList {
      *                       of valid range.
      */
     public Task deleteTask(int taskNo) throws DukeException {
+        if (tasks.isEmpty()) {
+            throw new DukeException("Nothing in the list to delete!");
+        }
+
         try {
             Task task = tasks.get(taskNo);
             tasks.remove(task);
             return task;
         } catch (IndexOutOfBoundsException e) {
-            if (tasks.isEmpty()) {
-                throw new DukeException("Nothing in the list to delete!");
-            }
             throw new DukeException(String.format("Enter a valid number between 1 - %d", tasks.size()));
         }
     }
@@ -112,13 +113,14 @@ public class TaskList {
      *                       of valid range.
      */
     public Pair<Boolean, Task> markTaskDone(int taskNo) throws DukeException {
+        if (tasks.isEmpty()) {
+            throw new DukeException("Nothing in the list!");
+        }
+
         try {
             Task task = tasks.get(taskNo);
             return new Pair<Boolean, Task>(!task.markAsDone(), task);
         } catch (IndexOutOfBoundsException e) {
-            if (tasks.isEmpty()) {
-                throw new DukeException("Nothing in the list!");
-            }
             throw new DukeException(String.format("Enter a valid number between 1 - %d", tasks.size()));
         }
     }
