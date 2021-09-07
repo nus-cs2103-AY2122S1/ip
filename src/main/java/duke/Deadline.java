@@ -9,8 +9,6 @@ import java.util.Arrays;
  */
 public class Deadline extends Task {
 
-    private LocalDate date;
-
     public Deadline(String description, String date) {
         super(description);
         try {
@@ -20,23 +18,14 @@ public class Deadline extends Task {
         }
     }
 
-    /**
-     * Saves the string input of the date into LocalDate format.
-     * @param date String input by user.
-     */
-    private void parseDate(String date) {
-        int[] dateArgs = Arrays.stream(date.split("-")).mapToInt(Integer::parseInt).toArray();
-        this.date = LocalDate.of(dateArgs[0], dateArgs[1], dateArgs[2]);
-    }
-
     @Override
     public String toString() {
         String deadlineMarker = "[D]";
 
         if (isDone) {
-            return deadlineMarker + "|" + hasCross + "|" + item + "|" + date.toString();
+            return deadlineMarker + "|" + hasCross + "|" + item + "|" + date;
         } else {
-            return deadlineMarker + "|" + hasNoCross + "|" + item + "|" + date.toString();
+            return deadlineMarker + "|" + hasNoCross + "|" + item + "|" + date;
         }
     }
 }
