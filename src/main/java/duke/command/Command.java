@@ -17,7 +17,7 @@ public abstract class Command {
      * @param storage The storage.
      * @throws NoListException If there is no list to be loaded.
      */
-    public abstract void exec(TaskList tasks, Ui ui, Storage storage) throws NoListException;
+    public abstract String exec(TaskList tasks, Ui ui, Storage storage) throws NoListException;
 
     /**
      * Returns a boolean that indicates if this is an Exit.

@@ -12,8 +12,6 @@ import duke.dukeexception.NoListException;
 import duke.task.Todo;
 
 
-
-
 public class DoneTest {
     @Test
     public void execute_normalInput_markedAsDone() {

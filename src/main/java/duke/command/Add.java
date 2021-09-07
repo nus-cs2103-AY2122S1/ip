@@ -52,13 +52,13 @@ public class Add extends Command {
      * @param storage The storage.
      * @throws NoListException If there is no list to be loaded.
      */
-    public void exec(TaskList tasks, Ui ui, Storage storage) throws NoListException {
+    public String exec(TaskList tasks, Ui ui, Storage storage) throws NoListException {
         tasks.add(this.task);
         try {
             storage.save(tasks);
-            System.out.println("Got it. I've added this task:\n"
+            return "Got it. I've added this task:\n"
                     + this.task.toString() + "\n"
-                    + "Now you have " + tasks.size() + " tasks in the list.");
+                    + "Now you have " + tasks.size() + " tasks in the list.";
         } catch (NoListException e) {
             throw e;
         }

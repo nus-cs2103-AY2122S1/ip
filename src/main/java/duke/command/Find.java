@@ -24,14 +24,14 @@ public class Find extends Command {
      * @param ui The ui.
      * @param storage The storage.
      */
-    public void exec(TaskList tasks, Ui ui, Storage storage) {
+    public String exec(TaskList tasks, Ui ui, Storage storage) {
         TaskList temp = new TaskList();
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).toString().toLowerCase().contains(this.searchTerm.toLowerCase())) {
                 temp.add(tasks.get(i));
             }
         }
-        System.out.println("Here are the matching tasks in your list:");
-        new List().exec(temp, ui, storage);
+        return "Here are the matching tasks in your list:\n" +
+                new List().exec(temp, ui, storage);
     }
 }
