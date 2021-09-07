@@ -63,6 +63,7 @@ public class Storage {
             bw.write(nextLine);
             count++;
         }
+        assert count != 0 : "Nothing has been changed";
         bw.flush();
         bw.close();
         dukeData.delete();
