@@ -97,8 +97,8 @@ public class TaskList {
      *
      * @return The string representation for file saving purposes.
      */
-    public List<String> toSaveFormat() {
-        return list.stream().map(Task::toSaveFormat).collect(Collectors.toList());
+    public List<String> getSaveFormat() {
+        return list.stream().map(Task::getSaveFormat).collect(Collectors.toList());
     }
 
     @Override

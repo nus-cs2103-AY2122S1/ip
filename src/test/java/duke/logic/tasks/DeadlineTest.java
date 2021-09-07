@@ -10,8 +10,8 @@ public class DeadlineTest {
     private Deadline dl = new Deadline("JUnit test iP", LocalDateTime.of(2021, 8, 26, 22, 30));
 
     @Test
-    public void testFormatForSave() {
-        assertEquals("D | 0 | JUnit test iP | 2021-08-26T22:30", dl.toSaveFormat());
+    public void testSaveFormat() {
+        assertEquals("D | 0 | JUnit test iP | 2021-08-26T22:30", dl.getSaveFormat());
     }
 
     @Test

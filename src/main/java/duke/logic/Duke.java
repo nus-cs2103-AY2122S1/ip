@@ -53,6 +53,6 @@ public class Duke {
      * @throws IOException If an exception occurred when writing the data.
      */
     public void end() throws IOException {
-        Storage.save(taskList.toSaveFormat());
+        Storage.save(taskList.getSaveFormat());
     }
 }
