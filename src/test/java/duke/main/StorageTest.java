@@ -14,7 +14,7 @@ import java.io.UnsupportedEncodingException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StorageTest {
-    private String path = "tasks.txt";
+    private String path = "test.txt";
     private Storage storage = new Storage(path);
 
     private void setupStorage() {
@@ -25,7 +25,7 @@ public class StorageTest {
             e.printStackTrace();
         }
         assert writer != null;
-        writer.println("T | false | abcd");
+        writer.println("T | false | abcd | #testStorage |  ");
         writer.close();
     }
 
@@ -45,7 +45,7 @@ public class StorageTest {
         newTasks.addTask(new ToDo("different description"));
         storage.writeToStorage(newTasks);
         BufferedReader br = new BufferedReader(new FileReader(path));
-        assert (br.readLine().equals("T | false | different description"));
+        assert (br.readLine().equals("T | false | different description |   |  "));
     }
 
 }

@@ -44,6 +44,7 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeException("\t OOPS!!! I can't find your tasks.\n");
         } catch (ArrayIndexOutOfBoundsException e) {
+            resetTasks();
             throw new DukeException("\t OOPS!!! Your tasks might be corrupted.");
         }
     }
@@ -108,7 +109,8 @@ public class Storage {
      */
     public void writeToStorage(TaskList tasklist) {
         try {
-            Files.write(filePath, tasklist.formatForStorage(), StandardCharsets.UTF_8);
+            List<String> formattedTaskList = tasklist.formatForStorage();
+            Files.write(filePath, formattedTaskList, StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new DukeException("\t OOPS!!! I can't store any changes you make. \n");
         }

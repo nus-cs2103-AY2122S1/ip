@@ -39,7 +39,6 @@ public class Duke {
             if (taskList != null) {
                 taskList.clearTasks();
             }
-            storage.resetTasks();
         } finally {
             parser = new Parser(storage, ui, taskList);
         }
