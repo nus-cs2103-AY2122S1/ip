@@ -50,44 +50,37 @@ public class ParserTest {
         String inputEvent = "event party /at 2021-11-23 to 2021-11-24";
         String inputExit = "bye";
 
-        Assertions.assertEquals(true, Parser.parse(inputList, null, makeTasks(), null)
-            instanceof ListCommand, "Wrongly parses list command");
-
-        Assertions.assertEquals(true, Parser.parse(inputDone, null, makeTasks(), null)
-            instanceof MarkDoneCommand, "Wrongly parses mark done command");
-
-        Assertions.assertEquals(true, Parser.parse(inputFind, null, makeTasks(), null)
-            instanceof FindByDateCommand, "Wrongly parses find command");
-
-        Assertions.assertEquals(true, Parser.parse(inputDelete, null, makeTasks(), null)
-            instanceof DeleteCommand, "Wrongly parses delete command");
-
-        Assertions.assertEquals(true, Parser.parse(inputExit, null, makeTasks(), null)
-            instanceof ExitCommand, "Wrongly parses exit command");
-
         try {
+            Assertions.assertEquals(true, Parser.parse(inputList, null, makeTasks(), null)
+                instanceof ListCommand, "Wrongly parses list command");
+
+            Assertions.assertEquals(true, Parser.parse(inputDone, null, makeTasks(), null)
+                instanceof MarkDoneCommand, "Wrongly parses mark done command");
+
+            Assertions.assertEquals(true, Parser.parse(inputFind, null, makeTasks(), null)
+                instanceof FindByDateCommand, "Wrongly parses find command");
+
+            Assertions.assertEquals(true, Parser.parse(inputDelete, null, makeTasks(), null)
+                instanceof DeleteCommand, "Wrongly parses delete command");
+
+            Assertions.assertEquals(true, Parser.parse(inputExit, null, makeTasks(), null)
+                instanceof ExitCommand, "Wrongly parses exit command");
+
             AddCommand todo = (AddCommand) Parser.parse(inputTodo, null, makeTasks(), null);
             Assertions.assertEquals(true, todo.getTaskType() == TaskType.TODO,
                 "Wrongly parses add todo command");
-        } catch (ClassCastException e) {
-            Assertions.fail();
-        }
 
-        try {
             AddCommand event = (AddCommand) Parser.parse(inputEvent, null, makeTasks(), null);
             Assertions.assertEquals(true, event.getTaskType() == TaskType.EVENT,
                 "Wrongly parses add todo command");
-        } catch (ClassCastException e) {
-            Assertions.fail();
-        }
 
-        try {
             AddCommand deadline = (AddCommand) Parser.parse(inputDeadline, null, makeTasks(), null);
             Assertions.assertEquals(true, deadline.getTaskType() == TaskType.DEADLINE,
                 "Wrongly parses add todo command");
-        } catch (ClassCastException e) {
-            Assertions.fail("Wrongly parses add todo command");
+        } catch (Exception e) {
+            Assertions.fail();
         }
+
 
         String expectedUiList = "1. [E][ ] Give tuition (at: 23 November 2021 to 23 November 2021)\n"
             + "2. [T][X] Feed Momo\n"
@@ -182,16 +175,18 @@ public class ParserTest {
 
         LocalDateTime expectedDateTime = LocalDateTime.parse("2021-11-23T00:00");
 
-
-        Assertions.assertEquals(true, Parser.parseDateAndTime(dateOne, timeOne).equals(expectedDateTime),
-            "parseDateTime failed");
-        Assertions.assertEquals(true, Parser.parseDateAndTime(dateOne, timeTwo).equals(expectedDateTime),
-            "parseDateTime failed");
-        Assertions.assertEquals(true, Parser.parseDateAndTime(dateTwo, timeOne).equals(expectedDateTime),
-            "parseDateTime failed");
-        Assertions.assertEquals(true, Parser.parseDateAndTime(dateTwo, timeTwo).equals(expectedDateTime),
-            "parseDateTime failed");
-
+        try {
+            Assertions.assertEquals(true, Parser.parseDateAndTime(dateOne, timeOne).equals(expectedDateTime),
+                "parseDateTime failed");
+            Assertions.assertEquals(true, Parser.parseDateAndTime(dateOne, timeTwo).equals(expectedDateTime),
+                "parseDateTime failed");
+            Assertions.assertEquals(true, Parser.parseDateAndTime(dateTwo, timeOne).equals(expectedDateTime),
+                "parseDateTime failed");
+            Assertions.assertEquals(true, Parser.parseDateAndTime(dateTwo, timeTwo).equals(expectedDateTime),
+                "parseDateTime failed");
+        } catch (Exception e) {
+            Assertions.fail();
+        }
 
         String expectedMessage = "Wrong format Sir/Mdm. Dates and times must be given as only a date: DATE\n"
             + "or as date and time: DATE TIME\n"

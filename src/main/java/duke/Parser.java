@@ -147,7 +147,8 @@ public class Parser {
         return time;
     }
 
-    private static Command generateMarkTaskCommand(String input, Ui ui, TaskList tasks, Storage storage) {
+    private static Command generateMarkTaskCommand(String input, Ui ui, TaskList tasks, Storage storage)
+        throws DukeException {
         String[] parsedInput = input.split(" ");
         int taskToMark;
 
@@ -175,7 +176,8 @@ public class Parser {
         return new MarkDoneCommand(tasks.get(taskToMark), tasks, ui, storage);
     }
 
-    private static Command generateDeleteTaskCommand(String input, Ui ui, TaskList tasks, Storage storage) {
+    private static Command generateDeleteTaskCommand(String input, Ui ui, TaskList tasks, Storage storage)
+        throws DukeException {
         String[] parsedInput = input.split(" ");
         int taskToDelete;
         //No task given to delete
@@ -201,7 +203,7 @@ public class Parser {
         return new DeleteCommand(taskToDelete, tasks, ui, storage);
     }
 
-    private static Command generateFindByDateCommand(String input, Ui ui, TaskList tasks) {
+    private static Command generateFindByDateCommand(String input, Ui ui, TaskList tasks) throws DukeException {
         String[] values = input.split(" ");
         // No date given
         if (values.length != 2) {
@@ -223,7 +225,8 @@ public class Parser {
         return new FindByDescriptionCommand(searchPhrase, tasks, ui);
     }
 
-    private static Command generateAddCommand(String input, Ui ui, TaskList tasks, Storage storage) {
+    private static Command generateAddCommand(String input, Ui ui, TaskList tasks, Storage storage)
+        throws DukeException {
         Pattern todoPattern = Pattern.compile("(^(todo ))");
         Pattern deadlinePattern = Pattern.compile("(^(deadline ))");
         Pattern eventPattern = Pattern.compile("(^(event ))");

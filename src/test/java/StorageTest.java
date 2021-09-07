@@ -9,6 +9,7 @@ import java.util.Scanner;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -55,7 +56,7 @@ public class StorageTest {
 
 
     @Test
-    public void testLoad() {
+    public void testLoad() throws DukeException {
 
         TaskList expectedTaskList = makeTasks();
         String filePath = "testData/testTaskList.txt";

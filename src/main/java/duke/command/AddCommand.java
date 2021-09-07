@@ -22,9 +22,9 @@ public class AddCommand extends Command {
     /**
      * Instantiates a command to add tasks. Tasks can be Todo, Event or Deadline.
      *
-     * @param task The task to add.
-     * @param tasks The list of tasks to add to.
-     * @param ui Ui to handle interactions.
+     * @param task    The task to add.
+     * @param tasks   The list of tasks to add to.
+     * @param ui      Ui to handle interactions.
      * @param storage Storage for tasks.
      */
     public AddCommand(Task task, TaskList tasks, Ui ui, Storage storage) {
@@ -40,7 +40,7 @@ public class AddCommand extends Command {
      *
      * @return Type of added task.
      */
-    public TaskType getTaskType() {
+    public TaskType getTaskType() throws DukeException {
         if (task instanceof Event) {
             return TaskType.EVENT;
         } else if (task instanceof Todo) {
