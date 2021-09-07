@@ -20,10 +20,16 @@ public class Gui {
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
-    private Scene scene;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/Barry.jpg"));
+
+    private final double BOX_HEIGHT =  600;
+    private final double BOX_WIDTH =  400;
+    private final double SCROLL_HEIGHT =  535;
+    private final double SCROLL_WIDTH =  385;
+    private final double INPUT_BOX_WIDTH =  325;
+    private final double BUTTON_WIDTH =  55;
 
     public Gui() {
 
@@ -46,19 +52,19 @@ public class Gui {
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        scene = new Scene(mainLayout);
+        Scene scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.show();
 
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(BOX_HEIGHT);
+        stage.setMinWidth(BOX_WIDTH);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(BOX_WIDTH, BOX_HEIGHT);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(SCROLL_WIDTH, SCROLL_HEIGHT);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -67,9 +73,9 @@ public class Gui {
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(INPUT_BOX_WIDTH);
 
-        sendButton.setPrefWidth(55.0);
+        sendButton.setPrefWidth(BUTTON_WIDTH);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 
@@ -110,8 +116,6 @@ public class Gui {
      * @param response the response to show.
      */
     public void showResponse(String response) {
-        // String[] textLine = response.split("\n");
-        // int maxLength = Arrays.stream(textLine).map(String::length).max(Integer::compareTo).orElse(-1);
         Label dukeReply = new Label(response);
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(dukeReply, new ImageView(duke))
