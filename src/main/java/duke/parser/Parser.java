@@ -22,7 +22,7 @@ public class Parser {
     private static final String FIND_MESSAGE = "Here are the matching tasks in your list:\n";
 
     /**
-     * Interprets the user's input and handles the logic of the command.
+     * Turns the user's input into a command.
      *
      * @param userInput the user's input given as a string.
      * @param taskList  the list containing the tasks.
@@ -71,6 +71,7 @@ public class Parser {
             }
             break;
         case "deadline":
+            assert param != null;
             taskItems = param.split(" /by ", 2);
             taskName = taskItems[0].strip();
 
@@ -84,6 +85,7 @@ public class Parser {
             output.append(String.format("Now you have %d tasks in the list.\n", taskList.getSize()));
             break;
         case "event":
+            assert param != null;
             taskItems = param.split(" /at ", 2);
             taskName = taskItems[0].strip();
 
@@ -97,6 +99,7 @@ public class Parser {
             output.append(String.format("Now you have %d tasks in the list.\n", taskList.getSize()));
             break;
         case "done":
+            assert param != null;
             int intParam = Integer.parseInt(param) - 1;
             taskList.get(intParam).markAsDone();
 
@@ -104,7 +107,9 @@ public class Parser {
             output.append(taskList.get(intParam));
             break;
         case "delete":
+            assert param != null;
             intParam = Integer.parseInt(param) - 1;
+
             output.append(DELETE_MESSAGE);
             output.append(taskList.get(intParam)).append(System.lineSeparator());
             taskList.remove(intParam);
