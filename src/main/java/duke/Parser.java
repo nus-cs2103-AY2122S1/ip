@@ -39,7 +39,7 @@ public class Parser {
                 return new FindCommand(keyword);
             }
         } else {
-            boolean wrongArrayLength = commandArr.length <= 1;
+            boolean wrongArrayLength = commandArrLength <= 1;
             switch (commandArr[0]) {
             case "todo":
                 if (wrongArrayLength) {
@@ -47,6 +47,8 @@ public class Parser {
                 } else {
                     int spaceIndex = command.indexOf(" ");
                     String description = command.substring(spaceIndex + 1);
+                    int descriptionLength = description.length();
+                    assert descriptionLength > 0: "Todo Description shouldn't be empty";
                     Task task = new Todo(description);
                     return new TodoCommand(task);
                 }
@@ -59,9 +61,12 @@ public class Parser {
                             + "[deadline] [task] /by [date]\"");
                 } else {
                     int spaceIndex = command.indexOf(" ");
-                    int slashIndex = command.indexOf("/by ");
-                    String description = command.substring(spaceIndex + 1, slashIndex - 1);
-                    String date = command.substring(slashIndex + DATE_PARSE_INDEX);
+                    int byIndex = command.indexOf("/by ");
+                    String description = command.substring(spaceIndex + 1, byIndex - 1);
+                    int descriptionLength = description.length();
+                    assert descriptionLength > 0: "Deadline Description shouldn't be empty";
+                    assert DATE_PARSE_INDEX == 4: "DATE_PARSE_INDEX should be 4";
+                    String date = command.substring(byIndex + DATE_PARSE_INDEX);
                     Task task = new Deadline(description, date);
                     return new DeadlineCommand(task);
                 }
@@ -74,9 +79,12 @@ public class Parser {
                             + "[event] [task] /at [date]\"");
                 } else {
                     int spaceIndex = command.indexOf(" ");
-                    int slashIndex = command.indexOf("/at ");
-                    String description = command.substring(spaceIndex + 1, slashIndex - 1);
-                    String date = command.substring(slashIndex + DATE_PARSE_INDEX);
+                    int atIndex = command.indexOf("/at ");
+                    String description = command.substring(spaceIndex + 1, atIndex - 1);
+                    int descriptionLength = description.length();
+                    assert descriptionLength > 0: "Event Description shouldn't be empty";
+                    assert DATE_PARSE_INDEX == 4: "DATE_PARSE_INDEX should be 4";
+                    String date = command.substring(atIndex + DATE_PARSE_INDEX);
                     Task task = new Event(description, date);
                     return new EventCommand(task);
                 }

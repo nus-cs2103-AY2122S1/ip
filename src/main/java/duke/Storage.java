@@ -74,6 +74,8 @@ public class Storage {
         String[] bracketSplit = line.split("\\|");
         String taskType = bracketSplit[0].trim();
         String description = bracketSplit[2].trim();
+        assert taskType.length() > 0: "Empty Task";
+        assert description.length() > 0: "Empty Description";
         if (bracketSplit[1].equals("X")) {
             isDone = true;
         }
