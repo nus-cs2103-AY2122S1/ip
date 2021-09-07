@@ -1,5 +1,0 @@
-D | 1 | return book  | Dec 02 2019, 06:00 PM
-T | 0 | eat
-T | 0 | read book
-E | 0 | meeting  | Apr 02 2021, 06:00 PM
-T | 1 | eat
