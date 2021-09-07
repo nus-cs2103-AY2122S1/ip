@@ -41,7 +41,8 @@ public class Ui {
         } else {
             int uncompletedTask = 0;
             stringBuilder.append("Here " + (taskList.getSize() > 1 ? "are" : "is")
-                    + " your " + (taskList.getSize() > 1 ? "tasks:" : "task:") + "\n");
+                    + " your " + (taskList.getSize() == 1 ? "task:" : "tasks:") + "\n");
+
             for (int i = 0; i < taskList.getSize(); i++) {
                 Task currTask = taskList.getTask(i);
                 stringBuilder.append((i + 1) + ". " + currTask + "\n");
@@ -49,8 +50,9 @@ public class Ui {
                     uncompletedTask++;
                 }
             }
+
             stringBuilder.append("You have " + uncompletedTask + " uncompleted "
-                    + (uncompletedTask > 1 ? "tasks" : "task") + ".\n");
+                    + (uncompletedTask == 1 ? "task" : "tasks") + ".\n");
         }
         return stringBuilder.toString();
     }
@@ -79,7 +81,8 @@ public class Ui {
      */
     public String showDeletedTaskMessage(TaskList taskList) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("I have deleted the tasks. You have " + taskList.getSize() + " tasks left");
+        int numberOfTasks = taskList.getSize();
+        stringBuilder.append("You have " + numberOfTasks + (numberOfTasks == 1 ? " task" : " tasks") + "remaining");
         return stringBuilder.toString();
     }
 
@@ -91,8 +94,9 @@ public class Ui {
      */
     public String showCompletedTaskMessage(TaskList taskList) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("I have completed the tasks. You have " + taskList.getNumberOfUncompletedTasks()
-                + " uncompleted tasks");
+        int uncompletedTasks = taskList.getNumberOfUncompletedTasks();
+        stringBuilder.append("You have " + uncompletedTasks + " uncompleted "
+                + (uncompletedTasks == 1 ? "task" : "tasks"));
         return stringBuilder.toString();
     }
 
