@@ -24,7 +24,7 @@ public class Storage {
     /**
      * The file that will be used to store the tasks.
      */
-    private File tasks;
+    private final File tasks;
 
     /**
      * Constructs a {@code Storage} object that stores tasks in a specific file name. It will create the file or the
@@ -44,6 +44,7 @@ public class Storage {
             } else {
                 this.tasks = taskPath.toFile();
             }
+            assert taskPath.toFile().isFile() : "Unable to find or create a file when calling Storage()!";
         } catch (IOException e) {
             throw new DukeException("OOPS!!! Unable to find or create a file!");
         }

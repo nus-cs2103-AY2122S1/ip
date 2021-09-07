@@ -18,18 +18,14 @@ public class Duke {
     /**
      * A task list that store the tasks.
      */
-    private TaskList tasks;
+    private final TaskList tasks;
 
     /**
      * Constructs a Duke bot that save its tasks in the {@code tasks.txt} file.
      */
     public Duke() {
         this.storage = new Storage("tasks.txt");
-        try {
-            this.tasks = this.storage.parseToTaskList();
-        } catch (DukeException e) {
-            this.getResponse(e.getMessage());
-        }
+        this.tasks = this.storage.parseToTaskList();
     }
 
     public static void main(String[] args) {

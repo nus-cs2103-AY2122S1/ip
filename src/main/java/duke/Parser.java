@@ -71,6 +71,7 @@ public class Parser {
                 throw new DukeException("Please use the YYYY-MM-DD format for the time!");
             }
         default:
+            assert false;
             throw new InvalidCommandException();
         }
     }
@@ -133,6 +134,7 @@ public class Parser {
             break;
         }
         default:
+            assert false;
             throw new InvalidCommandException();
         }
         return task;
@@ -187,6 +189,7 @@ public class Parser {
                 return new QueryCommand(QueryCommand.CommandType.FIND, description);
             }
             default: {
+                assert false;
                 throw new InvalidCommandException();
             }
             }
@@ -198,6 +201,7 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         default:
+            assert false;
             throw new InvalidCommandException();
         }
     }

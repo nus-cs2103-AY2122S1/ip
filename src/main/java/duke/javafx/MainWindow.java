@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import duke.Duke;
 import duke.Ui;
-import javafx.application.Platform;
+import duke.exception.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -45,8 +45,22 @@ public class MainWindow extends AnchorPane {
         );
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    /**
+     * Creates a dialog box with the exception message.
+     */
+    @FXML
+    public void showException(Exception e) {
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(e.getMessage(), dukeImage)
+        );
+    }
+
+    public void setDuke() {
+        try {
+            duke = new Duke();
+        } catch (DukeException e) {
+            showException(e);
+        }
     }
 
     /**

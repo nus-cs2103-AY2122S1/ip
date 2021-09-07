@@ -67,7 +67,7 @@ public class TaskList {
      * @throws DukeException If the index is invalid.
      */
     public void removeTask(int index) throws DukeException {
-        if (index == 0) {
+        if (index <= 0) {
             throw new IndexMismatchException();
         }
         if (index > this.size()) {
@@ -83,7 +83,7 @@ public class TaskList {
      * @throws DukeException If the task is already done or the index is invalid.
      */
     public void completeTask(int item) throws DukeException {
-        if (item == 0) {
+        if (item <= 0) {
             throw new IndexMismatchException();
         }
         if (item > this.taskList.size()) {
@@ -108,7 +108,6 @@ public class TaskList {
             builder.append(emptyMessage);
             return;
         }
-
         int listSize = this.taskList.size();
         for (int i = 0; i < listSize; i++) {
             builder.append("    ").append(i + 1).append(". ").append(this.taskList.get(i));
