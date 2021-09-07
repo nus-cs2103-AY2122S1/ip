@@ -8,8 +8,8 @@ public class Ui {
     /**
      * Says welcome to the user when they open duke bot.
      */
-    public void greet() {
-        System.out.println("Hello! I'm duke! What can I do for you?");
+    public String greet() {
+        return "Hello! I'm duke! What can I do for you?";
     }
 
     /**
