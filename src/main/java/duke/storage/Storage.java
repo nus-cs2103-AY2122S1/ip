@@ -24,6 +24,9 @@ public class Storage {
     /** The default file directory **/
     public static final String DEFAULT_FILE_DIRECTORY = "data";
 
+    /** The default file path **/
+    public static final String DEFAULT_FILE_PATH = "data/duke.txt";
+
     private BufferedReader reader;
 
     private BufferedWriter writer;

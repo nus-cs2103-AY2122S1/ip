@@ -34,8 +34,10 @@ public class TodoCommand extends Command implements TaskListAddable {
     @Override
     public CommandResult execute() {
         TaskList taskList = super.getTaskList();
+        int numOfTasks = taskList.size();
         Task todo = new Todo(this.command, false);
         String feedback = addTaskToTaskList(taskList, todo);
+        assert numOfTasks + 1 == taskList.size();
         return new CommandResult(feedback, false);
     }
 

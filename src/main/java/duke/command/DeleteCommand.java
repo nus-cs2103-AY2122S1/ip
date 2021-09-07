@@ -35,7 +35,9 @@ public class DeleteCommand extends Command implements ListNumberPrintable {
     @Override
     public CommandResult execute() throws DukeException {
         TaskList taskList = super.getTaskList();
+        int numOfTasks = taskList.size();
         Task deletedTask = taskList.deleteTask(this.taskId);
+        assert numOfTasks - 1 == taskList.size();
         return new CommandResult("Noted. I've removed this task:\n "
                 + deletedTask.getDetails()
                 + "\n"
