@@ -2,6 +2,8 @@ package duke.task;
 
 import duke.main.DukeException;
 
+import java.util.List;
+
 /**
  * Encapsulates a task to be done.
  */
@@ -10,7 +12,7 @@ public class ToDo extends Task {
     /**
      * Constructor for a ToDo
      *
-     * @param description
+     * @param description String for the Todo.
      */
     public ToDo(String description) {
         super(getDescription(description));
@@ -19,12 +21,14 @@ public class ToDo extends Task {
     /**
      * Overloaded constructor for ToDo
      *
-     * @param description
-     * @param completed
+     * @param description String for the ToDo.
+     * @param completed   boolean true if ToDo is completed; else false.
+     * @param tags        List of tags associated with the ToDo.
      */
-    public ToDo(String description, boolean completed) {
+    public ToDo(String description, boolean completed, List<String> tags) {
         this(description);
         super.completed = completed;
+        super.tags = tags;
     }
 
     private static String getDescription(String description) throws DukeException {
@@ -46,7 +50,7 @@ public class ToDo extends Task {
      */
     @Override
     public String generateStorageString() {
-        return "T | " + super.completed + " | " + super.description;
+        return "T | " + super.completed + " | " + super.description + " | " + super.formatTags() + " | " + " ";
     }
 
 }

@@ -3,6 +3,7 @@ package duke.task;
 import duke.main.DukeException;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -39,10 +40,12 @@ public class Deadline extends Task {
      * @param desc        Description for Deadline.
      * @param before      Time for Deadline.
      * @param isCompleted indicates whether deadline is completed.
+     * @param tags        List of tags associated with the Deadline.
      */
-    public Deadline(String desc, String before, boolean isCompleted) {
+    public Deadline(String desc, String before, boolean isCompleted, List<String> tags) {
         this(desc, before);
         super.completed = isCompleted;
+        super.tags = tags;
     }
 
     private static String extractDesc(String descAndTime) throws DukeException {
@@ -72,7 +75,7 @@ public class Deadline extends Task {
      */
     @Override
     public String generateStorageString() {
-        return "D | " + super.completed + " | " + super.description + " | " + this.by;
+        return "D | " + super.completed + " | " + super.description + " | " + super.formatTags() + " | " + this.by;
     }
 
     @Override

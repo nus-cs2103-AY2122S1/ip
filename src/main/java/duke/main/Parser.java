@@ -84,46 +84,62 @@ public class Parser {
      */
     private String executeCommand(String command, String description) {
         String response;
+
+        //@formatter:off
         switch (command) {
-            case "bye":
-                response = ui.exitWithGoodbye();
-                break;
-            case "find":
-                List<Task> matches = taskList.findTasks(description);
-                response = ui.getMatchingTasksSummary(matches);
-                break;
-            case "clear":
-                String resetTaskMessage = storage.resetTasks();
-                String clearTaskMessage = taskList.clearTasks();
-                response = resetTaskMessage + clearTaskMessage;
-                break;
-            case "list":
-                response = ui.getTaskListSummary(taskList);
-                break;
-            case "deadline":
-                response = taskList.addTask(new Deadline(description));
-                break;
-            case "event":
-                response = taskList.addTask(new Event(description));
-                break;
-            case "todo":
-                response = taskList.addTask(new ToDo(description));
-                break;
-            case "done":
-                Task selectedTask = selectTask(description);
-                response = selectedTask.markAsDone();
-                break;
-            case "delete":
-                Task toDelete = selectTask(description);
-                response = taskList.deleteTask(toDelete);
-                break;
-            default:
-                if (command.equals("")) {
-                    response = ui.getEmptyInputMessage();
-                } else {
-                    response = ui.getUnknownCommandMessage(command);
-                }
+        case "bye":
+            response = ui.exitWithGoodbye();
+            break;
+        case "find":
+            List<Task> matches = taskList.findTasks(description);
+            response = ui.getMatchingTasksSummary(matches);
+            break;
+        case "tag":
+            String[] taskNumAndTag = description.split(" ", 2);
+            String taskNum = taskNumAndTag[0];
+
+            if (taskNumAndTag.length < 2) {
+                throw new DukeException("\tPlease enter a tag");
+            }
+
+            String tag = taskNumAndTag[1];
+            Task toTag = selectTask(taskNum);
+            response = toTag.addTag(tag);
+            break;
+        case "clear":
+            String resetTaskMessage = storage.resetTasks();
+            String clearTaskMessage = taskList.clearTasks();
+            response = resetTaskMessage + clearTaskMessage;
+            break;
+        case "list":
+            response = ui.getTaskListSummary(taskList);
+            break;
+        case "deadline":
+            response = taskList.addTask(new Deadline(description));
+            break;
+        case "event":
+            response = taskList.addTask(new Event(description));
+            break;
+        case "todo":
+            response = taskList.addTask(new ToDo(description));
+            break;
+        case "done":
+            Task selectedTask = selectTask(description);
+            response = selectedTask.markAsDone();
+            break;
+        case "delete":
+            Task toDelete = selectTask(description);
+            response = taskList.deleteTask(toDelete);
+            break;
+        default:
+            if (command.equals("")) {
+                response = ui.getEmptyInputMessage();
+            } else {
+                response = ui.getUnknownCommandMessage(command);
+            }
         }
+        //@formatter:on
+
         updateStorage();
         return response;
     }

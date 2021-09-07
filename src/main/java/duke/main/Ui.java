@@ -40,6 +40,16 @@ public class Ui {
     }
 
     /**
+     * Returns a response when a tag is added to a task.
+     *
+     * @param task Task that the tag has been added to.
+     * @return String response to tagged task.
+     */
+    public static String getTagAddedMessage(Task task) {
+        return "\t Nice! I've added the tag. Here's your task:\n" + "\t\t " + task + "\n";
+    }
+
+    /**
      * Returns a response to the clear command.
      *
      * @return String tasks cleared message.

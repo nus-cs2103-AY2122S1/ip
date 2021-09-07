@@ -6,7 +6,9 @@ import duke.main.Ui;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -14,6 +16,7 @@ import java.util.Objects;
  */
 public abstract class Task {
     protected boolean completed;
+    protected List<String> tags;
     protected String description;
 
     /**
@@ -24,6 +27,7 @@ public abstract class Task {
     protected Task(String description) {
         this.description = description;
         this.completed = false;
+        this.tags = new ArrayList<>();
     }
 
     /**
@@ -51,10 +55,33 @@ public abstract class Task {
         return time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    /**
+     * Add a tag to the task.
+     *
+     * @param tag String to be added.
+     */
+    public String addTag(String tag) {
+        tags.add(tag);
+        return Ui.getTagAddedMessage(this);
+    }
+
+    /**
+     * Format the tags into a String.
+     *
+     * @return String representation of tags.
+     */
+    public String formatTags() {
+        String toPrint = " ";
+        for (String tag : tags) {
+            toPrint += ("#" + tag);
+        }
+        return toPrint;
+    }
+
     @Override
     public String toString() {
         String check = this.completed ? "[X] " : "[ ] ";
-        return check + description;
+        return check + description + formatTags();
     }
 
     /**
