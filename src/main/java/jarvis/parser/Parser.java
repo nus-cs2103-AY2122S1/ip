@@ -90,4 +90,14 @@ public class Parser {
         // The list shown to user is one indexed
         return Integer.parseInt(userInputWithoutCommandTrigger.trim()) - 1;
     }
+
+    /**
+     * Gets number of undos from user input.
+     *
+     * @param userInputWithoutCommandTrigger User input without command trigger.
+     * @return The number of undos.
+     */
+    public static int getNumberOfUndos(String userInputWithoutCommandTrigger) {
+        return Integer.parseInt(userInputWithoutCommandTrigger.trim());
+    }
 }

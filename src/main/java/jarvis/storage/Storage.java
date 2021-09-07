@@ -124,4 +124,20 @@ public class Storage {
             throw new StorageFileException("Error when rewriting task(s) to storage file!");
         }
     }
+
+    /**
+     * Rewrites the storage file using string provided.
+     *
+     * @param storageFileContent The string that is the new content of the storage file.
+     * @throws StorageFileException If there is an error when rewriting the storage file.
+     */
+    public void rewriteStorageFile(String storageFileContent) throws StorageFileException {
+        try {
+            FileWriter writer = new FileWriter(this.file);
+            writer.write(storageFileContent);
+            writer.close();
+        } catch (IOException e) {
+            throw new StorageFileException("Error when rewriting string to storage file!");
+        }
+    }
 }

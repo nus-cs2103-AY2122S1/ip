@@ -35,10 +35,12 @@ public abstract class Command {
             return new EventCommand(userInputWithoutCommandPrefix);
         case FIND:
             return new FindCommand(userInputWithoutCommandPrefix);
-        case TODO:
-            return new TodoCommand(userInputWithoutCommandPrefix);
         case LIST:
             return new ListCommand();
+        case TODO:
+            return new TodoCommand(userInputWithoutCommandPrefix);
+        case UNDO:
+            return new UndoCommand(userInputWithoutCommandPrefix);
         default:
             throw new UnknownCommandException();
         }

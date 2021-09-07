@@ -133,6 +133,19 @@ public class Ui {
     }
 
     /**
+     * Gets the undo message that is to be shown to user.
+     *
+     * @param numberOfUndos The number of undos performed.
+     * @return A OutputMessage containing the undo message.
+     */
+    public OutputMessage getUndoMessage(int numberOfUndos) {
+        return new OutputMessage(String.format(
+                "Undo protocol complete! %s command(s) reverted!",
+                numberOfUndos
+        ));
+    }
+
+    /**
      * Reads user input from CLI.
      *
      * @return String that is read.

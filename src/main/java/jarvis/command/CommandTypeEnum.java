@@ -14,7 +14,8 @@ public enum CommandTypeEnum {
     EXIT("bye"),
     FIND("find"),
     LIST("list"),
-    TODO("todo");
+    TODO("todo"),
+    UNDO("undo");
 
     private String commandTrigger;
 

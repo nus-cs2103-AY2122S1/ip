@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.stream.IntStream;
 
 import jarvis.exception.InvalidDateTimeInputException;
+import jarvis.exception.JarvisException;
+import jarvis.storage.Storage;
 
 /**
  * Encapsulates the list of tasks
  */
 public class TaskList {
     private ArrayList<Task> taskList;
+    private ArrayList<String> versionHistory = new ArrayList<>();
 
     /**
      * Constructor for TaskList
@@ -27,6 +30,7 @@ public class TaskList {
      * @return The new Todo object
      */
     public Todo addTodo(String todoDescription) {
+        addToVersionHistory();
         Todo todo = new Todo(todoDescription);
         taskList.add(todo);
         return todo;
@@ -41,6 +45,7 @@ public class TaskList {
      * @throws InvalidDateTimeInputException If the deadline is of the wrong format
      */
     public Deadline addTaskWithDeadline(String taskDescription, String deadline) throws InvalidDateTimeInputException {
+        addToVersionHistory();
         Deadline taskWithDeadline = new Deadline(taskDescription, deadline);
         taskList.add(taskWithDeadline);
         return taskWithDeadline;
@@ -54,6 +59,7 @@ public class TaskList {
      * @return The new Event object
      */
     public Event addEvent(String eventDescription, String eventTime) {
+        addToVersionHistory();
         Event event = new Event(eventDescription, eventTime);
         taskList.add(event);
         return event;
@@ -67,6 +73,7 @@ public class TaskList {
      */
     public Task markAsDone(int index) {
         assert index >= 0 && index < taskList.size() : "Task index out of bounds";
+        addToVersionHistory();
         Task task = taskList.get(index);
         task.markAsDone();
         return task;
@@ -80,6 +87,7 @@ public class TaskList {
      */
     public Task deleteTask(int index) {
         assert index >= 0 && index < taskList.size() : "Task index out of bounds";
+        addToVersionHistory();
         return taskList.remove(index);
     }
 
@@ -115,6 +123,29 @@ public class TaskList {
             }
         }
         return new TaskList(taskArrayList);
+    }
+
+    /**
+     * Reverts the version history by the amount specified, rewrites the storage file and changes the taskList.
+     *
+     * @param amount The amount the revert.
+     * @param storage Storage to save or load tasks to hard-disk.
+     * @throws JarvisException If there is an error.
+     */
+    public void revertHistory(int amount, Storage storage) throws JarvisException {
+        String previousHistory = versionHistory.get(versionHistory.size() - amount);
+        storage.rewriteStorageFile(previousHistory);
+        versionHistory.subList(versionHistory.size() - amount, versionHistory.size()).clear();
+        this.taskList = storage.loadTasksFromFile();
+    }
+
+    /**
+     * Gets the total size of the version history list
+     *
+     * @return The size of version history list
+     */
+    public int getVersionHistorySize() {
+        return versionHistory.size();
     }
 
     /**
@@ -156,5 +187,9 @@ public class TaskList {
                 });
 
         return stringBuilder.toString();
+    }
+
+    private void addToVersionHistory() {
+        versionHistory.add(this.toStorageFormatString());
     }
 }
