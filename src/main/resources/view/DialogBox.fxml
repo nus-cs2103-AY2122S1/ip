@@ -11,7 +11,7 @@
          prefWidth="400.0" style="-fx-background-color: #00FFFF#00FFFF; -fx-background-radius: 23; -fx-padding: 18;"
          type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true">
+        <Label fx:id="dialog" text="Label" wrapText="true" minHeight="-Infinity">
             <font>
                 <Font name="Arial" size="13.0" />
             </font>
