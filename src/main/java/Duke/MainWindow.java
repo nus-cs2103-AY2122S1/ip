@@ -1,7 +1,6 @@
 package Duke;
 
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -41,6 +40,9 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void handleUserInput() {
+        assert userImage != null : "The User Image cannot be loaded!";
+        assert dukeImage != null : "The Duke Image cannot be loaded!";
+
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(

@@ -25,15 +25,6 @@ public class Storage {
     }
 
 
-//    public void createNew() throws IOException {
-//
-//        File f = new File(this.filePath);
-//        if (!f.exists()) {
-//            System.out.println("Creating new file... Please try again");
-//            f.createNewFile();
-//        }
-//    }
-
     /**
      * Loads and reads the content of the file to
      * return an Array List of tasks saved in the file.

@@ -26,6 +26,8 @@ public class Duke {
     public Duke() throws IOException {
         String dukeFile = "duke.txt";
         storage = new Storage(dukeFile);
+        assert storage.load() != null : "Storage file cannot be loaded!";
+
         try {
             tasks = new TaskList(storage.load());
             parser = new Parser(tasks, storage);
@@ -35,17 +37,6 @@ public class Duke {
             tasks = new TaskList();
             System.out.println("Creating new file... Please try again!");
         }
-    }
-
-    String welcomeMessage() {
-        return "Hello! I'm Duke\n" +
-                "To add a Todo, type -> todo <Description> \n" +
-                "To add a Deadline, type -> deadline <Description> /by <deadline>\n" +
-                "To add an Event, type -> event <Description> /at <details>\n" +
-                "To mark as done, type -> done <task list index>\n" +
-                "To see all of your tasks, type -> list\n" +
-                "To end session, type -> bye\n" +
-                "What can I do for you today?";
     }
 
     /**
