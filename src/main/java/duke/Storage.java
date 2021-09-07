@@ -19,21 +19,24 @@ public class Storage {
      * @param task Task ot be added.
      * @throws IOException if an error while reading has occurred.
      */
-    static void writeToFile(String task) throws IOException {
+    static String writeToFile(String task) throws IOException {
+        String str = "";
         try {
-            Parser.parseTask(task);
             if (task.startsWith("deadline")
                     || (task.startsWith("event") && task.contains("/at "))
                     || (task.startsWith("todo"))) {
-                TaskList.addSpecificTask(task);
-                writer.write(TaskList.getLast().toString() + "\n");
+                str += TaskList.addSpecificTask(task);
+                System.out.println(TaskList.getLast().toString());
+//                writer.write(TaskList.getLast().toString() + "\n");
             }
             writer.close();
             FileWriter fWriter = new FileWriter(text, true);
             writer = new BufferedWriter(fWriter);
-        } catch (IOException | DukeException e) {
+            return str;
+        } catch (IOException e) {
             System.out.println("Something went wrong");
         }
+        return str;
     }
 
     /**

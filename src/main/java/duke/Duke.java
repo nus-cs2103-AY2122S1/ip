@@ -1,6 +1,20 @@
 package duke;
 
 import duke.tasks.TaskList;
+import duke.ui.DialogBox;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -9,6 +23,15 @@ import java.util.Scanner;
  * This is a Duke application, which allows for user interaction.
  */
 public class Duke {
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/cat2.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/cat1.png"));
+
     private static final String LINE = "-----------------------------------------";
 
     /**
@@ -25,25 +48,8 @@ public class Duke {
 
         while (!task.equals("bye")) {
             try {
-                if (task.equals("list")) {
-                    TaskList.printList();
-                } else if (task.startsWith("done")) {
-                    TaskList.complete(task);
-                    Storage.overwrite();
-                } else if (task.startsWith("find")) {
-                    String[] input = task.split("find ", 2);
-                    TaskList.find(input[1]);
-                } else if (task.startsWith("deadline") || task.startsWith("event") || task.startsWith("todo")) {
-                    Storage.writeToFile(task);
-                } else if (task.startsWith("delete")) {
-                    String numString = task.replaceAll("[^0-9]", "");
-                    int num = Integer.parseInt(numString);
-                    TaskList.deleteTask(num);
-                    Storage.overwrite();
-                } else {
-                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                }
-            } catch (DukeException | IOException e) {
+                System.out.println(Parser.parseTask(task));
+            } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
             task = sc.nextLine();
@@ -52,5 +58,45 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(LINE);
         sc.close();
+    }
+
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() throws DukeException, IOException {
+        String userText = userInput.getText();
+        String dukeText = getResponse(userInput.getText());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, user),
+                DialogBox.getDukeDialog(dukeText, duke)
+        );
+        userInput.clear();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) throws DukeException, IOException {
+        try {
+            return Parser.parseTask(input);
+        } catch (DukeException | IOException e) {
+            return e.getMessage();
+        }
     }
 }

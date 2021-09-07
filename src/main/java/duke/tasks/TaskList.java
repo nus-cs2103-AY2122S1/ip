@@ -12,82 +12,81 @@ public final class TaskList {
     private static final List<String> taskString = new ArrayList<>();
     private static final List<Tasks> taskList = new ArrayList<>();
     private static int taskNumber = 1;
-    private static final String LINE = "-----------------------------------------";
 
     /**
-     * Adds a task to the list and prints the addition.
+     * Adds a task to the list and returns the addition.
      * @param task Task to be added
      */
-    public static void add(Tasks task) {
+    public static String add(Tasks task) {
         taskString.add(taskNumber + ". ");
         taskList.add(task);
         taskNumber++;
-        System.out.println(LINE);
-        System.out.println("Got it. I've added this task: \n" + task);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
-        System.out.println(LINE);
+        return "Got it. I've added this task: \n" + task
+                + "\nNow you have " + taskList.size() + " tasks in the list.\n";
     }
 
     /**
      * Adds a specific task according to the correct class
      * @param task task to be added
      */
-    public static void addSpecificTask(String task) {
+    public static String addSpecificTask(String task) {
+        String str = "";
         if (task.startsWith("deadline")) {
             String[] input = task.split(" /by ", 2);
             LocalDateTime dueTime = LocalDateTime.parse(input[1], DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
-            TaskList.add(new Deadline(task, dueTime));
+            str += TaskList.add(new Deadline(task, dueTime));
         } else if (task.startsWith("event") && task.contains("/at ")) {
             String[] input = task.split(" /at ", 2);
             LocalDateTime startTime = LocalDateTime.parse(input[1], DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
-            TaskList.add(new Event(task, startTime));
+            str += TaskList.add(new Event(task, startTime));
         } else if (task.startsWith("todo")) {
             String[] input = task.split("todo ", 2);
-            TaskList.add(new Todo(input[1]));
+            str += TaskList.add(new Todo(input[1]));
         }
+        return str;
     }
 
     /**
      * Marks a task as completed and prints this change.
      * @param task Task to complete
      */
-    public static void complete(String task) {
-        System.out.println(LINE);
-        System.out.println("Nice! I've marked this task as done:");
+    public static String complete(String task) {
+        String str = "Nice! I've marked this task as done: \n";
         String numString = task.replaceAll("[^0-9]", "");
         int num = Integer.parseInt(numString);
         for (int counter = 0; counter < taskString.size(); counter++) {
             if (counter == num - 1) {
                 taskList.get(num - 1).markAsDone();
+                int index = counter + 1;
+                str += index + ". " + taskList.get(num - 1).toString();
             }
         }
-        System.out.println(LINE);
+        return str;
     }
 
     /**
      * Prints the current task list.
      */
-    public static void printList() {
-        System.out.println(LINE);
-        System.out.println("Here are the tasks in your list:");
+    public static String printList() {
+        String list = "Here are the tasks in your list:";
         int counter = 0;
         for (String str : taskString) {
-            System.out.println(str + taskList.get(counter).toString());
+            list += "\n" + str + taskList.get(counter).toString();
             counter++;
         }
-        System.out.println(LINE);
+        return list;
     }
 
     /**
      * Deletes an item from the taskList and taskString.
      * @param i Index of task to be deleted
      */
-    public static void deleteTask(int i) {
+    public static String deleteTask(int i) {
         Tasks deletedTasks = taskList.get(i - 1);
         taskList.remove(i - 1);
         taskString.remove(i - 1);
-        System.out.println("Noted. I've removed this task: \n" + deletedTasks + "\nNow you have "
-                + taskString.size() + " tasks in the list.");
+        return "Noted. I've removed this task: \n" + deletedTasks
+                + "\nNow you have " + taskString.size() + " tasks in the list.";
     }
 
     /**
@@ -115,16 +114,15 @@ public final class TaskList {
      * Prints the tasks containing a keyword that the user has searched.
      * @param key keyword being searched.
      */
-    public static void find(String key) {
-        System.out.println(LINE);
-        System.out.println("Here are the matching tasks in your list:");
+    public static String find(String key) {
+        String str = "Here are the matching tasks in your list:";
         int count = 1;
         for (Tasks task : taskList) {
             if (task.toString().contains(key)) {
-                System.out.println(count + ". " + task.toString());
+                str += "\n" + count + ". " + task.toString();
                 count++;
             }
         }
-        System.out.println(LINE);
+        return str;
     }
 }
