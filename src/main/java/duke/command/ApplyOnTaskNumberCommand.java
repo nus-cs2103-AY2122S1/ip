@@ -5,7 +5,7 @@ package duke.command;
  *
  * @author Jay Aljelo Saez Ting
  */
-public abstract class ApplyOnTaskNumberCommand extends Command {
+public abstract class ApplyOnTaskNumberCommand extends Command implements UndoableCommand {
 
     private int taskIndex;
 

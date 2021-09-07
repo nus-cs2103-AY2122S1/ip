@@ -3,6 +3,7 @@ package duke.ui;
 import java.util.List;
 import java.util.Map;
 
+import duke.command.Command;
 import duke.task.Task;
 
 /**
@@ -77,6 +78,10 @@ public class MessageFormatter {
             sb.append(String.format("%d.%s\n", findResult.getKey() + 1, findResult.getValue()));
         }
         return sb.toString().stripTrailing();
+    }
+
+    String formatCommand(Command command) {
+        return indent(command.toString(), 2);
     }
 
     private String indent(String string, int count) {

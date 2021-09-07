@@ -50,12 +50,23 @@ public class TaskHandler {
     }
 
     /**
-     * Adds a task into the tasks list.
+     * Appends a task to the end of the tasks list.
      *
      * @param task The task to be added.
      */
     public void addTask(Task task) {
         tasks.add(task);
+        notifyObservers();
+    }
+
+    /**
+     * Inserts a task into the tasks list at the passed index.
+     *
+     * @param index The index in the tasks list at which the task is to be inserted.
+     * @param task The task to be added.
+     */
+    public void insertTask(int index, Task task) {
+        tasks.add(index, task);
         notifyObservers();
     }
 
@@ -77,6 +88,19 @@ public class TaskHandler {
     public Task markTaskDone(int taskIndex) {
         Task task = tasks.get(taskIndex);
         task.markDone();
+        notifyObservers();
+        return task;
+    }
+
+    /**
+     * Un-marks the task at the given tasks list index as done.
+     *
+     * @param taskIndex The tasks list index of the task.
+     * @return The task that was un-marked done.
+     */
+    public Task unmarkTaskDone(int taskIndex) {
+        Task task = tasks.get(taskIndex);
+        task.unmarkDone();
         notifyObservers();
         return task;
     }

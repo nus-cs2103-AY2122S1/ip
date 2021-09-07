@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import duke.DukeChatbot;
+import duke.command.Command;
 import duke.task.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -85,6 +86,17 @@ public class Ui extends AnchorPane {
          */
         public MessageBuilder addFindTasksResultsList(List<Map.Entry<Integer, Task>> queryResults) {
             messageSb.append(messageFormatter.formatFindTasksResultsList(queryResults)).append("\n");
+            return this;
+        }
+
+        /**
+         * Adds a text representation of a command.
+         *
+         * @param command The command.
+         * @return This MessageBuilder instance.
+         */
+        public MessageBuilder addCommand(Command command) {
+            messageSb.append(messageFormatter.formatCommand(command)).append("\n");
             return this;
         }
 
