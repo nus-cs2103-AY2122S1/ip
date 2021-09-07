@@ -16,20 +16,17 @@ public class Parser {
     private Ui ui;
     private TaskList taskList;
 
+    /**
+     * Constructor for Parser.
+     *
+     * @param storage  Storage from Duke.
+     * @param ui       Ui from Duke.
+     * @param taskList TaskList from Duke.
+     */
     public Parser(Storage storage, Ui ui, TaskList taskList) {
         this.storage = storage;
         this.ui = ui;
         this.taskList = taskList;
-    }
-
-    /**
-     * Checks if user has entered the terminating command.
-     *
-     * @param command String user input.
-     * @return true if input is terminating command else false.
-     */
-    public static boolean isTerminateCommand(String command) {
-        return command.equals("bye");
     }
 
     /**
