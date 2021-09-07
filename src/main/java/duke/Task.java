@@ -4,6 +4,7 @@ package duke;
  * Tasks that can be stored inside the tasklist
  */
 public class Task {
+
     protected String description;
     protected boolean isDone;
 

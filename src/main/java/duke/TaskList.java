@@ -22,9 +22,8 @@ public class TaskList {
      * @param i Takes in an integer to find the correct string placement
      */
     public String doTask(int i) {
-        if (i > tasks.size()) {
-            return "Invalid Input for done command";
-        } else if (!tasks.get(i - 1).isDone) {
+        assert i < tasks.size() : "Invalid Input for done command";
+        if (!tasks.get(i - 1).isDone) {
             String output = "Nice! I've marked this task as done:\n";
             tasks.get(i - 1).markAsDone();
             output += tasks.get(i - 1);
