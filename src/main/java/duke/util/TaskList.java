@@ -105,17 +105,16 @@ public class TaskList {
         }
         if (temp.size() == 0) {
             return ui.showFailedSearch();
-        } else {
-            StringBuilder sb = new StringBuilder();
-            sb.append(ui.showSearchHeader());
-            for (int i = 0; i < temp.size(); i++) {
-                int currNum = i + 1;
-                Task currTask = temp.get(i);
-                String taskString = "  " + currNum + ". " + currTask.toString() + "\n";
-                sb.append(taskString);
-            }
-            return sb.toString();
         }
+        StringBuilder sb = new StringBuilder();
+        sb.append(ui.showSearchHeader());
+        for (int i = 0; i < temp.size(); i++) {
+            int currNum = i + 1;
+            Task currTask = temp.get(i);
+            String taskString = generateTaskString(currTask, currNum);
+            sb.append(taskString);
+        }
+        return sb.toString();
     }
 
     /**
@@ -142,7 +141,7 @@ public class TaskList {
             for (int i = 0; i < size(); i++) {
                 int currNum = i + 1;
                 Task currTask = get(i);
-                String taskString = "  " + currNum + ". " + currTask.toString() + "\n";
+                String taskString = generateTaskString(currTask, currNum);
                 sb.append(taskString);
             }
             return sb.toString();
@@ -161,10 +160,21 @@ public class TaskList {
             Task currTask = get(i);
             int currNum = i + 1;
             if (currTask.equals(taskToAdd)) {
-                result = "  " + currNum + ". " + currTask.toString();
+                result = generateTaskString(currTask, currNum);
                 break;
             }
         }
         return result;
+    }
+
+    /**
+     * Returns a string containing an index and a task.
+     *
+     * @param task The task to be returned.
+     * @param index The number of the task.
+     * @return A string containing an index and a task.
+     */
+    private String generateTaskString(Task task, int index) {
+        return "  " + index + ". " + task.toString() + "\n";
     }
 }
