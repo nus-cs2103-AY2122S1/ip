@@ -23,9 +23,9 @@ public abstract class Task {
      */
     public String addResponse(int size) {
         System.out.println("Got it. I've added this task:");
-        System.out.println(this.toString());
+        System.out.println(this);
         System.out.println("Now you have " + size + " tasks in your list.");
-        return "Got it. I've added this task: \n" + this.toString() + "\n"
+        return "Got it. I've added this task: \n" + this + "\n"
                 + "Now you have " + size + " tasks in your list.";
     }
 
