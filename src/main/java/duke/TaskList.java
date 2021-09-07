@@ -106,13 +106,14 @@ public class TaskList {
     private void buildList(StringBuilder builder, String emptyMessage) {
         if (this.taskList.isEmpty()) {
             builder.append(emptyMessage);
-        } else {
-            int listSize = this.taskList.size();
-            for (int i = 0; i < listSize; i++) {
-                builder.append("    ").append(i + 1).append(". ").append(this.taskList.get(i));
-                if (i < listSize - 1) {
-                    builder.append("\n");
-                }
+            return;
+        }
+
+        int listSize = this.taskList.size();
+        for (int i = 0; i < listSize; i++) {
+            builder.append("    ").append(i + 1).append(". ").append(this.taskList.get(i));
+            if (i < listSize - 1) {
+                builder.append("\n");
             }
         }
     }
@@ -136,7 +137,6 @@ public class TaskList {
      * @return A string of task description.
      */
     public String printList(LocalDate date) {
-
         ArrayList<Task> targetTasks = this.taskList.stream()
                 .filter(x -> x.getDate() != null && x.getDate().equals(date))
                 .collect(Collectors.toCollection(ArrayList::new));
