@@ -36,18 +36,23 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(String cmd) throws DukeException {
-        if (cmd.length() < 7) {
+        int minCommandLength = 7;
+        if (cmd.length() < minCommandLength) {
             throw new DukeException(Ui.emptyDescription("event"));
         } else {
             String[] split = cmd.split("/at ");
-            if (split.length > 1) {
-                Event event = new Event(split[0].substring(6), split[1]);
-                String toPrint = taskHandler.addEvent(event);
-                toPrint = toPrint.concat(taskHandler.printNoOfTasks());
-                storage.updateFile(taskHandler.formatTasksToSave());
-                return toPrint;
-            } else {
+            if (split.length <= 1) {
                 throw new DukeException(Ui.dateMissing());
+            } else {
+                Event event = new Event(split[0].substring(6), split[1]);
+                if (event.dateFormatter(split[1]) == "Format error") {
+                    throw new DukeException(Ui.dateFormatError());
+                } else {
+                    String toPrint = taskHandler.addTask(event);
+                    toPrint = toPrint.concat(taskHandler.printNoOfTasks());
+                    storage.updateFile(taskHandler.formatTasksToSave());
+                    return toPrint;
+                }
             }
         }
     }

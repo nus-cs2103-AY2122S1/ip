@@ -1,6 +1,9 @@
 package duke.data.task;
+import duke.ui.Ui;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Class that represents an Event task.
@@ -10,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     protected String at;
-    private final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
+    private final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("ddMMyy HHmm");
     private final DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd h:mm a");
 
     /**
@@ -30,9 +33,13 @@ public class Event extends Task {
      * @param at Input date format.
      * @return A string representing the date in the desirable format.
      */
-    public String dateFormatter(String at) {
-        LocalDateTime date = LocalDateTime.parse(at, inputFormatter);
-        return date.format(outputFormatter);
+    public String dateFormatter(String at) throws DateTimeParseException {
+        try {
+            LocalDateTime date = LocalDateTime.parse(at, inputFormatter);
+            return date.format(outputFormatter);
+        } catch (DateTimeParseException e) {
+            return "Format error";
+        }
     }
 
     /**

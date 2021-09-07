@@ -1,5 +1,6 @@
-[T][ ] ejk
 [T][ ] wash dishes
 [D][ ] hjs  (by: 12/02/21 1222)
 [T][ ] eat
 [T][ ] sleep
+[T][ ] ejd
+[D][ ] js  (by: 120321 1234)

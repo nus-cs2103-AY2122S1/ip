@@ -137,7 +137,7 @@ public class Ui {
     }
 
     /**
-     * Prints no tasks found message.
+     * Returns no tasks found message.
      *
      * @return No such tasks found message.
      */
@@ -152,6 +152,15 @@ public class Ui {
      */
     public static String userGuide() {
         return Messages.HELP;
+    }
+
+    /**
+     * Returns an error message indicating date format error.
+     *
+     * @return an error message indicating date format error.
+     */
+    public static String dateFormatError() {
+        return Messages.DATE_FORMAT_ERROR;
     }
 
     /**
