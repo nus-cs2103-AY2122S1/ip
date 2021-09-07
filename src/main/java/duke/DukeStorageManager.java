@@ -46,9 +46,7 @@ public class DukeStorageManager {
     public DukeStorageManager(Path savePath) throws DukeExceptionBase {
         try {
             this.saveFile = savePath.toFile();
-
             System.out.println("The save file: " + this.saveFile);
-
             if (!this.saveFile.exists()) {
                 createBlankSaveFile();
                 this.xmlSaveFileDoc = null;
@@ -58,19 +56,7 @@ public class DukeStorageManager {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 
-            // Setting the error handler for the xml parser makes it such that when there is an
-            // error in the XML file, instead of a line saying "Fatal Error" forcibly printed in the console
-            // along with the SAXParseException being thrown, only the Exception is thrown.
-
-            // According to this website:
-            // https://stackoverflow.com/questions/1575925/
-            // the fatal error is automatically logged into the console even if the exception is caught.
-            // It also says that the next line below is the only way to stop the unwanted line from being printed.
-            // documentBuilder.setErrorHandler(null);
-            // We no longer have to set the redundant error message to not print because we are using a GUI.
-
             this.xmlSaveFileDoc = documentBuilder.parse(this.saveFile);
-
 
         } catch (ParserConfigurationException parserE) {
             this.failedToLoadSaveFile();
@@ -78,12 +64,10 @@ public class DukeStorageManager {
             this.failedToLoadSaveFile();
         } catch (IOException ioException) {
             this.failedToLoadSaveFile();
-        } finally {
-            if (this.xmlSaveFileDoc == null) {
-                throw new DukeExceptionBase("Failed to load saved XML File.");
-            } else {
-                return;
-            }
+        }
+
+        if (this.xmlSaveFileDoc == null) {
+            throw new DukeExceptionBase("Failed to load saved XML File.");
         }
     }
 
@@ -122,9 +106,6 @@ public class DukeStorageManager {
                 System.out.println("UNABLE TO CREATE NEW SAVE FILE!! (IOException)");
             }
         }
-
-
-
     }
 
     /**
@@ -142,7 +123,8 @@ public class DukeStorageManager {
 
         // There should be only 1 taskList node
         if (taskList.getLength() > 1) {
-            Duke.dukeLaterSay("Loaded XML file contains more than 1 task list. Only first one will be loaded.");
+            Duke.dukeLaterSay("Loaded XML file contains more than 1 task list."
+                    + " Only first one will be loaded.");
         }
 
         Node firstTaskList = taskList.item(0);
@@ -167,56 +149,7 @@ public class DukeStorageManager {
         if (currTaskAsset.getNodeName().equals("taskAsset")) {
             // Confirms that this taskAsset has contents
             if (currTaskAsset.getNodeType() == Node.ELEMENT_NODE) {
-                // Convert to DOM Element so that we can get elements by Tag Name
-                Element currTaskAssetElement = (Element) currTaskAsset;
-
-                // Gets various contents common to all task types
-                Node taskTypeNode = getFirstNodeByTagName(currTaskAssetElement, "taskType");
-                Node taskDataNode = getFirstNodeByTagName(currTaskAssetElement, "taskData");
-                Node taskCompletedNode = getFirstNodeByTagName(currTaskAssetElement, "taskCompleted");
-
-                boolean isCurrTaskCompleted = taskCompletedNode.getTextContent().equals("true");
-
-                // Initialise Variables or Switch Statement
-                BaseTask createdTask = null;
-                Node taskExtraInfoNode;
-
-                // Get extra info for task if needed and create task
-                BaseTask.TaskType currTaskType = BaseTask.convertTaskLetterToEnum(taskTypeNode.getTextContent());
-                switch (currTaskType) {
-                case TODO:
-                    createdTask = new ToDosTask(taskDataNode.getTextContent(), isCurrTaskCompleted);
-                    break;
-                case DEADLINE:
-                    taskExtraInfoNode = getFirstNodeByTagName(currTaskAssetElement, "taskExtraInfo");
-
-                    try {
-                        createdTask = new DeadlineTask(taskDataNode.getTextContent(),
-                                taskExtraInfoNode.getTextContent(), isCurrTaskCompleted);
-                    } catch (DukeExceptionBase e) {
-                        // If date format of this Deadline Task is wrong, then don't load it.
-                        createdTask = null;
-                    }
-                    break;
-                case EVENT:
-                    taskExtraInfoNode = getFirstNodeByTagName(currTaskAssetElement, "taskExtraInfo");
-
-                    createdTask = new EventTask(taskDataNode.getTextContent(),
-                            taskExtraInfoNode.getTextContent(), isCurrTaskCompleted);
-                    break;
-                case NONE:
-                default:
-                    System.out.println("Unknown Task Type Loaded: "
-                            + currTaskType + " with data: " + taskDataNode.getTextContent());
-                    createdTask = null;
-                    break;
-                }
-
-                // In case of error while creating task - Don't add it to the list
-                if (createdTask != null) {
-                    this.loadedTasks.add(createdTask);
-                }
-
+                loadTaskAssetFromNode((Element) currTaskAsset);
 
             } else {
                 System.out.println("Current loaded Task Asset is empty.");
@@ -225,6 +158,85 @@ public class DukeStorageManager {
             System.out.println("Non-TaskAsset found in taskList: " + currTaskAsset.getNodeName());
         }
 
+    }
+
+    private void loadTaskAssetFromNode(Element currTaskAsset) {
+        // Convert to DOM Element so that we can get elements by Tag Name
+        Element currTaskAssetElement = currTaskAsset;
+
+        // Gets various contents common to all task types
+        Node taskTypeNode = getFirstNodeByTagName(currTaskAssetElement, "taskType");
+        Node taskDataNode = getFirstNodeByTagName(currTaskAssetElement, "taskData");
+        Node taskCompletedNode = getFirstNodeByTagName(currTaskAssetElement, "taskCompleted");
+
+        boolean isCurrTaskCompleted = taskCompletedNode.getTextContent().equals("true");
+
+        processCurrLoadedTaskNode(currTaskAssetElement, taskTypeNode, taskDataNode, isCurrTaskCompleted);
+    }
+
+    private void processCurrLoadedTaskNode(Element currTaskAssetElement, Node taskTypeNode, Node taskDataNode,
+                                           boolean isCurrTaskCompleted) {
+        // Initialise Variables for Switch Statement
+        BaseTask createdTask = null;
+
+        // Get extra info for task if needed and create task
+        BaseTask.TaskType currTaskType = BaseTask.convertTaskLetterToEnum(taskTypeNode.getTextContent());
+        switch (currTaskType) {
+        case TODO:
+            createdTask = processCurrLoadedTodoTaskNode(taskDataNode, isCurrTaskCompleted);
+            break;
+        case DEADLINE:
+            createdTask = processCurrLoadedDeadlineTaskNode(currTaskAssetElement, taskDataNode, isCurrTaskCompleted);
+            break;
+        case EVENT:
+            createdTask = processCurrLoadedEventTaskNode(currTaskAssetElement, taskDataNode, isCurrTaskCompleted);
+            break;
+        case NONE:
+            // Fallthrough
+        default:
+            System.out.println("Unknown Task Type Loaded: "
+                    + currTaskType + " with data: " + taskDataNode.getTextContent());
+            createdTask = null;
+            break;
+        }
+
+        // In case of error while creating task - Don't add it to the list
+        if (createdTask != null) {
+            this.loadedTasks.add(createdTask);
+        }
+    }
+
+    private BaseTask processCurrLoadedEventTaskNode(Element currTaskAssetElement, Node taskDataNode,
+                                                    boolean isCurrTaskCompleted) {
+        Node taskExtraInfoNode;
+        BaseTask createdTask;
+        taskExtraInfoNode = getFirstNodeByTagName(currTaskAssetElement, "taskExtraInfo");
+
+        createdTask = new EventTask(taskDataNode.getTextContent(),
+                taskExtraInfoNode.getTextContent(), isCurrTaskCompleted);
+        return createdTask;
+    }
+
+    private BaseTask processCurrLoadedTodoTaskNode(Node taskDataNode, boolean isCurrTaskCompleted) {
+        BaseTask createdTask;
+        createdTask = new ToDosTask(taskDataNode.getTextContent(), isCurrTaskCompleted);
+        return createdTask;
+    }
+
+    private BaseTask processCurrLoadedDeadlineTaskNode(Element currTaskAssetElement, Node taskDataNode,
+                                                       boolean isCurrTaskCompleted) {
+        Node taskExtraInfoNode;
+        BaseTask createdTask;
+        taskExtraInfoNode = getFirstNodeByTagName(currTaskAssetElement, "taskExtraInfo");
+
+        try {
+            createdTask = new DeadlineTask(taskDataNode.getTextContent(),
+                    taskExtraInfoNode.getTextContent(), isCurrTaskCompleted);
+        } catch (DukeExceptionBase e) {
+            // If date format of this Deadline Task is wrong, then don't load it.
+            createdTask = null;
+        }
+        return createdTask;
     }
 
     /**
@@ -258,14 +270,11 @@ public class DukeStorageManager {
 
             // Create new XML File
             Document newXmlDoc = documentBuilder.newDocument();
-
             // Overwrite the current XML Save file in the Storage Manager
             this.xmlSaveFileDoc = newXmlDoc;
-
             // Create saveFile root tag
             Element saveFileRoot = newXmlDoc.createElement("saveFile");
             newXmlDoc.appendChild(saveFileRoot);
-
             // Create taskList container
             Element taskListElement = newXmlDoc.createElement("taskList");
             saveFileRoot.appendChild(taskListElement);
@@ -274,21 +283,15 @@ public class DukeStorageManager {
             for (BaseTask currTask : listOfTasks) {
                 Element convertedTaskAsset = this.createTaskAssetElement(currTask);
                 convertedTaskAsset.setAttribute("id", Integer.toString(counter));
-
                 taskListElement.appendChild(convertedTaskAsset);
 
                 counter++;
             }
-
-
             // Now write the file to local storage
             this.writeCurrXmlDocToDisk();
-
-
         } catch (ParserConfigurationException e) {
             Duke.dukeLaterSay("Document builder cannot be created. (List not saved)");
         }
-
     }
 
     /**
@@ -321,12 +324,19 @@ public class DukeStorageManager {
         createdTaskElement.appendChild(taskDataElement);
         createdTaskElement.appendChild(taskCompletedElement);
 
+        createdTaskElement = createTaskXmlElement(currTask, currTaskType, createdTaskElement);
 
+        return createdTaskElement;
+    }
+
+    private Element createTaskXmlElement(BaseTask currTask, BaseTask.TaskType currTaskType,
+                                         Element createdTaskElement) {
         switch (currTaskType) {
         case TODO:
             // Do nothing extra
             break;
         case DEADLINE:
+            // Fallthrough
         case EVENT:
             // Extra Task Data Processing
             Element taskExtraInfoElement = this.xmlSaveFileDoc.createElement("taskExtraInfo");
@@ -335,11 +345,12 @@ public class DukeStorageManager {
             createdTaskElement.appendChild(taskExtraInfoElement);
             break;
         case NONE:
+            // Fallthrough
         default:
-            Duke.dukeLaterSay("Unidentified task type expected, cannot save this task: " + currTask.toString());
+            Duke.dukeLaterSay("Unidentified task type expected,"
+                    + " cannot save this task: " + currTask.toString());
             createdTaskElement = null;
         }
-
         return createdTaskElement;
     }
 
@@ -372,8 +383,6 @@ public class DukeStorageManager {
         } catch (TransformerException e) {
             System.out.println("Error while using transformer.transform");
         }
-
-
     }
 
 }

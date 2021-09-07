@@ -105,30 +105,7 @@ public class Duke {
         // currDuke.runInputLoopMain();
     }
 
-    /**
-     * The main loop used when detecting keyboard input.
-     * Stops when "bye" is detected.
-     */
-    private void runInputLoopMain() {
-        /* Create scanner for detecting input. */
-        Scanner currScanner = new Scanner(System.in);
 
-        /* Stores last input by user. */
-        String lastInput = null;
-
-        while (!this.isExited) {
-            System.out.println("");
-            lastInput = currScanner.nextLine();
-
-            try {
-                this.processCmdInput(lastInput);
-            } catch (DukeExceptionBase dukeE) {
-                dukeE.dukeSayErrorMsg();
-            }
-        }
-
-
-    }
 
     /**
      * Use when the user enters something new in the GUI, in order to process the command.
