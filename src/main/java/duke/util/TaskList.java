@@ -14,9 +14,9 @@ import duke.task.ToDo;
  */
 public class TaskList {
     //List that holds all the Tasks.
-    private final ArrayList<Task> list;
+    private ArrayList<Task> list;
     //Storage to load the list and write to list.
-    private final Storage store;
+    private Storage store;
 
     /**
      * Constructs List that contains Tasks.
@@ -37,7 +37,7 @@ public class TaskList {
         Task newToDo = new ToDo(text);
         list.add(newToDo);
         store.writeToFile(list);
-        return "Got it. I've added this duke.task: \n"
+        return "Got it. I've added this task: \n"
                 + newToDo
                 + "Now you have " + list.size() + " tasks in the list. \n";
     }
@@ -53,7 +53,7 @@ public class TaskList {
             Task newDl = new Deadline(text, by);
             list.add(newDl);
             store.writeToFile(list);
-            return "Got it. I've added this duke.task: \n"
+            return "Got it. I've added this task: \n"
                     + newDl
                     + "Now you have " + list.size() + " tasks in the list. \n";
         } catch (DukeException | DateTimeParseException e) {
@@ -67,13 +67,14 @@ public class TaskList {
      *
      * @param text Description of Event Task.
      * @param at Date time of Event.
+     * @return Notify user that the command is done/not of standard format.
      */
     public String addEvent(String text, String at) {
         try {
             Task newEvent = new Event(text, at);
             list.add(newEvent);
             store.writeToFile(list);
-            return "Got it. I've added this duke.task: \n"
+            return "Got it. I've added this task: \n"
                     + newEvent
                     + "Now you have " + list.size() + " tasks in the list. \n";
         } catch (DukeException | DateTimeParseException e) {
@@ -85,15 +86,15 @@ public class TaskList {
      * Sets Task at list index to done .
      *
      * @param index Position of Task to be set to done.
-     * @return
+     * @return String message notifying user that the task is done/no task to be done.
      */
     public String setIndexDone(int index) { // starts from 1
         if (index > list.size() || index < 1) { //check for invalid index number
-            return "There is no duke.task " + index;
+            return "There is no task " + index;
         }
         list.get(index - 1).setDone();
         store.writeToFile(list);
-        return "Nice! I've marked this duke.task as done: \n"
+        return "Nice! I've marked this task as done: \n"
                 + list.get(index - 1).toString();
     }
 
@@ -101,18 +102,53 @@ public class TaskList {
      * Deletes Task from list.
      *
      * @param index Index of task to be deleted in list.
+     * @return Notify user that the command is done/nothing to be done.
      */
     public String deleteTask(int index) { //starts from 1
         if (index > list.size() || index < 1) {
-            return "There is no duke.task " + index;
+            return "There is no task " + index;
         }
         String taskDesc = list.get(index - 1).toString();
         list.remove(index - 1);
         store.writeToFile(list);
-        return "Noted. I've removed this duke.task: \n"
+        return "Noted. I've removed this task: \n"
                 + taskDesc
                 + "Now you have " + list.size() + " tasks in the list. \n";
 
+    }
+
+    /**
+     * Edits the task at index in TaskList.
+     *
+     * @param index Index of task to be edited.
+     * @param input Include variable to be edited and the replacement.
+     * @return Notify user that the command is done/nothing to be done
+     * @throws DukeException if variable type to be edited is not of standard format.
+     */
+    public String editTask(int index, String input) throws DukeException {
+        if (index > list.size() || index < 1) {
+            return "There is no task " + index;
+        }
+        Task task = list.get(index - 1);
+        String[] parts = input.split(" ", 2);
+        String taskType = parts[0];
+        String replacement = parts[1];
+        switch (taskType.toLowerCase()) {
+        case "date":
+            task.setDate(replacement);
+            break;
+        case "time":
+            task.setTime(replacement);
+            break;
+        case "description":
+            task.setDescription(replacement);
+            break;
+        default:
+            throw new DukeException("Edit type unclear, please specify either /date, /time, /description");
+        }
+        store.writeToFile(list);
+        return "Noted. I've edited this task: \n"
+                + task.toString();
     }
 
     /**
@@ -143,6 +179,8 @@ public class TaskList {
 
     /**
      * Prints out the entire list using the Tasks toString method.
+     *
+     * @return Shows user the tasks in the TaskList.
      */
     public String show() {
         int length = list.size();

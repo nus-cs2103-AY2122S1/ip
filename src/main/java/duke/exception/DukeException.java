@@ -9,7 +9,7 @@ public class DukeException extends Exception {
      * Constructs a DukeException.
      */
     public DukeException() {
-        super(" OOPS!!! I'm sorry, you need to specify which duke.task is done :)");
+        super(" OOPS!!! I'm sorry, I don't quite understand what you mean :)");
     }
 
     /**

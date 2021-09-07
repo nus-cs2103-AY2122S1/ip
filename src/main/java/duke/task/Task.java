@@ -1,6 +1,8 @@
 package duke.task;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a Task to be done.
@@ -10,6 +12,10 @@ public class Task implements Serializable {
     protected String description;
     //Flag for whether a task is done, default false
     protected boolean isDone;
+    //date of event in format LocalDate
+    protected LocalDate Date;
+    //time of event in format String
+    protected String Time;
 
     /**
      * Constructs a Task with a String description.
@@ -31,6 +37,19 @@ public class Task implements Serializable {
 
     public void setDone() {
         this.isDone = true;
+    }
+
+    public void setDescription(String newDescription) {
+        this.description = newDescription;
+    }
+
+    public void setDate(String Date) {
+        String date = Date.replace("/", "-");
+        this.Date = LocalDate.parse(date, DateTimeFormatter.ofPattern("d-M-yyyy"));
+    }
+
+    public void setTime(String Time) {
+        this.Time = Time;
     }
 
     /**
