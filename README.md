@@ -29,8 +29,9 @@ What it can do:
 - [x] store a **List** of tasks to be done
 - [x] add, **Delete** and mark tasks as **Done**
 - [x] **Find** tasks by **Due** dates or keywords
+- [ ] **Reschedule** tasks to new dates (coming soon)
 
-Here's a part of the program, maybe it can be of help in practising coding in Java:
+Here's a part of the program, maybe it can be of help in practising coding in Java, the `main` method:
 ```
 public static void main(String[] args) {
         new Duke().run();
