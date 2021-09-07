@@ -34,8 +34,8 @@ public class TagCommand extends Command{
     @Override
     public void execute(TaskList taskList, Gui gui, Storage storage) throws DukeException {
         String[] parameter = description.split(" ");
-        boolean isValidTagParameter = parameter.length != 2;
-        if (isValidTagParameter) {
+        boolean isValidTagParameter = parameter.length == 2;
+        if (!isValidTagParameter) {
             throw new DukeException("OOPS!!! Tag parameter is missing.\n"
                     + "eg. tag 2 Important");
         }
