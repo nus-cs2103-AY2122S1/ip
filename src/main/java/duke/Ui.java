@@ -168,6 +168,8 @@ public class Ui {
      * @param stage Stage by which the UI is set up.
      */
     public void setUpUi(Stage stage) {
+        assert userImage != null : "userImage cannot be null";
+        assert dukeImage != null : "userImage cannot be null";
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         userInputField = new TextField();
