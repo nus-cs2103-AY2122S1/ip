@@ -32,7 +32,6 @@ public class Parser {
      * @param taskList the list storing all the tasks.
      */
     public Parser(Ui ui, TaskList taskList) {
-
         this.ui = ui;
         this.taskList = taskList;
     }
@@ -48,6 +47,7 @@ public class Parser {
     public Command parse(String command) throws DukeException {
         String[] splitInput = command.trim().split(" +");
         switch (splitInput[0]) {
+
         //fall through
         case "bye":
             return new ExitCommand(command);
@@ -78,7 +78,6 @@ public class Parser {
         default:
             throw new DukeException(ui.commandError());
 
-
         }
     }
 
@@ -97,7 +96,6 @@ public class Parser {
     public Command checkInput(String input, String taskType) throws DukeException {
         String[] splitInput2 = input.trim().split(" +", 2);
         if (splitInput2.length == 2) {
-            String[] splitTask2 = splitInput2[1].split(" +");
             String[] splitTask = taskType.equals("deadline")
                     ? splitInput2[1].split("/by")
                     : splitInput2[1].split("/at");
@@ -122,7 +120,7 @@ public class Parser {
                     }
                     break;
                 default:
-                    break;
+                    assert false : "invalid task command";
                 }
             } else {
                 if (taskType.equals("deadline") && !splitInput2[1].contains("/by")

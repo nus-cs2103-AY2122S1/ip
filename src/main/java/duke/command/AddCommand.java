@@ -68,6 +68,7 @@ public class AddCommand extends Command {
                 throw new DukeException(ui.dateError());
             }
         } else {
+            assert taskType.equals("event");
             try {
                 String[] addTask = command.split("/at", 2);
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

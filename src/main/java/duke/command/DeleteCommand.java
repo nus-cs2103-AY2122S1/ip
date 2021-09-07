@@ -36,9 +36,8 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-
-        ui.removeTask(tasks.get(Integer.valueOf(command.split(" +")[1]) - 1));
-        tasks.delete(Integer.valueOf(command.split(" +")[1]));
+        ui.removeTask(tasks.get(Integer.parseInt(command.split(" +")[1]) - 1));
+        tasks.delete(Integer.parseInt(command.split(" +")[1]));
         storage.editFileAll(tasks);
         return ui.numberOfTasks(tasks);
     }

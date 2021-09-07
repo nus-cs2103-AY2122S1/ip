@@ -28,6 +28,7 @@ public class FindCommand extends Command {
      * @param storage The storage which saves and edits file content.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert command.contains("find"): "find is not included";
         String keyWord = command.split(" +", 2)[1].trim();
         int count = 0;
         String matchingTasks = "";
