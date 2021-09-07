@@ -1,5 +1,11 @@
 package task;
 
+import model.Tag;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Task is the superclass of classes to be stored in the database.
  * Subclasses require a description field and have an isDone field that indicates completion status.
@@ -8,6 +14,7 @@ public class Task {
 
     protected String description;
     protected boolean isDone;
+    protected List<Tag> tags;
 
     /**
      * Constructor of superclass Task.
@@ -17,6 +24,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.tags = new ArrayList<Tag>();
     }
 
     /**
@@ -53,6 +61,11 @@ public class Task {
         return this.isDone;
     }
 
+
+    public void addTag(Tag tag) {
+        this.tags.add(tag);
+    }
+
     /**
      * Retrieves the description of this object's status.
      *
@@ -60,6 +73,22 @@ public class Task {
      */
     @Override
     public String toString() {
+        String taskTags = "tags: ";
+
+        if (!this.tags.isEmpty()) {
+            String tags = this.tags.stream()
+                    .map(tag -> {
+                        return tag.toString() + " ";
+                    }).collect(Collectors.joining());
+
+            taskTags += tags;
+        } else {
+            taskTags += "None";
+        }
+
+        String message = String.format("[%s] %s.\n%s",
+                this.getStatusIcon(), this.description, taskTags);
+
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }
