@@ -60,6 +60,8 @@ public class Retriever {
             Platform.exit();
         }
 
+        assert !retrieverResponse.equals("") : "Response Could Not Be Formed!";
+
         return retrieverResponse;
     }
 }
