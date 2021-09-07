@@ -42,6 +42,14 @@ public abstract class Task {
     }
 
     /**
+     * Setter for label.
+     * @param label the new label of the task.
+     */
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    /**
      * Getter for type. Implementation left to subclasses.
      * @return a capital letter in a string e.g. "D" for a Deadline Task.
      */

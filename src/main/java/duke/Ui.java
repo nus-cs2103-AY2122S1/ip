@@ -113,4 +113,8 @@ public class Ui {
     public String notifyFolderCreated() {
         return ("I couldn't find a data folder. I've initialised one for your data.");
     }
+
+    public String notifyUpdateComplete(Task after) {
+        return ("I've updated your selected task to: " + after);
+    }
 }

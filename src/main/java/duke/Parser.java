@@ -12,7 +12,7 @@ import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.MarkDoneCommand;
 import duke.command.SaveCommand;
-
+import duke.command.UpdateCommand;
 
 /**
  * Class responsible for parsing and understanding user input.
@@ -25,8 +25,9 @@ public abstract class Parser {
     }
 
     //needed to rebuild label in case it contained spaces and was split
-    private static String generateLabel(String[] words) {
-        String[] secondOnwards = Arrays.copyOfRange(words, 1, words.length);
+    //takes in array and index, re-combines all strings from index onwards into a single string
+    private static String generateLabelFrom(String[] words, int index) {
+        String[] secondOnwards = Arrays.copyOfRange(words, index, words.length);
         return String.join(" ", secondOnwards);
     }
 
@@ -43,7 +44,7 @@ public abstract class Parser {
         checkDescription(typeAndLabel);
         checkDescription(prefixAndDate);
 
-        String label = generateLabel(typeAndLabel);
+        String label = generateLabelFrom(typeAndLabel, 1);
         String date = prefixAndDate[1];
 
         return new String[]{label, date};
@@ -83,13 +84,16 @@ public abstract class Parser {
         checkDescription(words);
         switch(words[0]) {
         case "find":
-            return new FindCommand(generateLabel(words));
+            return new FindCommand(generateLabelFrom(words, 1));
 
         case "delete":
             return new DeleteCommand(Integer.parseInt(words[1]) - 1);
 
         case "todo":
-            return new AddCommand("todo", generateLabel(words));
+            return new AddCommand("todo", generateLabelFrom(words, 1));
+
+        case "update":
+            return new UpdateCommand(Integer.parseInt(words[1]) - 1, generateLabelFrom(words, 2));
 
         case "deadline":
             String[] deadlineLabelAndDate = processLabelAndDate(words);
