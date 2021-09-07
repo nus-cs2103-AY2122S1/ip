@@ -1,5 +1,6 @@
-package duke;
+package duke.storage;
 
+import duke.data.TaskList;
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.task.Event;
