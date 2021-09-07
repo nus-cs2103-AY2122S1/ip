@@ -11,15 +11,16 @@ import catobot.item.TaskList;
 public class DeleteCommand extends Command {
 
     /** Content of the command. */
-    private final String content;
+    private final int index;
 
     /**
      * Constructor for DeleteCommand.
      *
-     * @param content The content of the command.
+     * @param content The content of DeleteCommand.
      */
     protected DeleteCommand(String content) {
-        this.content = content;
+        String description = Parser.parseSingleArgument(content, CommandType.DELETE);
+        this.index = Integer.parseInt(description);
     }
 
     /**
@@ -33,7 +34,6 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) throws BotException {
         try {
-            int index = Integer.parseInt(content.substring("delete".length()).trim());
             return tasks.deleteTask(index);
         } catch (NumberFormatException e) {
             throw new InvalidCommandException();

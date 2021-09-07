@@ -38,7 +38,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return String.format("[E]%s", super.toString());
     }
 
     /**
@@ -48,8 +48,6 @@ public class Todo extends Task {
      */
     @Override
     public String toStringInDoc() {
-        String s = super.toStringInDoc();
-        String s1 = String.format("T | %s", s);
-        return s1;
+        return String.format("T | %s", super.toStringInDoc());
     }
 }

@@ -113,10 +113,9 @@ public class TaskList {
             return "Meow! No tasks found!";
         }
 
-        String s = String.format(
+        return String.format(
                 "Here are the matching tasks in your list:%s",
                 filtered);
-        return s;
     }
 
     private void checkRange(int index) throws OutOfBoundException, EmptyTaskListException {

@@ -1,14 +1,11 @@
 package catobot.command;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import catobot.Storage;
 import catobot.exception.BotException;
-import catobot.exception.EmptyCommandException;
 import catobot.exception.InvalidDateTimeException;
-import catobot.exception.InvalidDeadlineException;
 import catobot.item.Deadline;
 import catobot.item.TaskList;
 
@@ -16,16 +13,25 @@ import catobot.item.TaskList;
  * Represents the commands to add a deadline.
  */
 public class DeadlineCommand extends Command {
+    private static final String DEADLINE_INDICATOR = "/by";
+
     /** Content of the command. */
-    private final String content;
+    private final String description;
+    private final String rawDate;
 
     /**
-     * Constructor for a deadline command.
+     * Constructor for DeadlineCommand.
      *
-     * @param content The content of the command.
+     * @param description The description of the command.
+     * @param rawDate The raw format of date.
      */
-    protected DeadlineCommand(String content) {
-        this.content = content;
+    protected DeadlineCommand(String content) throws BotException {
+        String[] details = Parser.parseMultipleArgument(
+                content, CommandType.DEADLINE, DEADLINE_INDICATOR);
+        String description = details[0].trim();
+        String rawDate = details[1].trim();
+        this.description = description;
+        this.rawDate = rawDate;
     }
 
     /**
@@ -38,33 +44,11 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws BotException {
-        // If the command is empty
-        if (content.split(" ").length == 1) {
-            throw new EmptyCommandException("deadline");
-        }
-        String rawInputs = content.split("deadline")[1].trim();
-
-        // If the command does not have "/by"
-        if (!rawInputs.contains("/by")) {
-            throw new InvalidDeadlineException();
-        }
-        String[] details = rawInputs.split("/by");
-
-        // if there is no description or date
-        if (details.length < 2) {
-            throw new InvalidDeadlineException();
-        }
-
-        String description = details[0].trim();
-        String rawDate = details[1].trim();
-
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-            LocalDateTime date = LocalDateTime.parse(rawDate, formatter);
+            LocalDateTime date = LocalDateTime.parse(rawDate, Command.DATE_FORMAT);
             return tasks.add(Deadline.of(description, date));
         } catch (DateTimeParseException e) {
             throw new InvalidDateTimeException();
         }
     }
-
 }

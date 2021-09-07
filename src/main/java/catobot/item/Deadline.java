@@ -47,11 +47,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]"
-                + super.toString()
-                + " (by: "
-                + by.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a"))
-                + ")";
+        return String.format("[D]%s (by: %s)", super.toString(), by.format(DATE_FORMAT_DISPLAY));
     }
 
     /**
@@ -62,7 +58,6 @@ public class Deadline extends Task {
     @Override
     public String toStringInDoc() {
         String s = super.toStringInDoc();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        return String.format("D | %s | %s", s, this.by.format(formatter));
+        return String.format("D | %s | %s", s, this.by.format(DATE_FORMAT_DOC));
     }
 }

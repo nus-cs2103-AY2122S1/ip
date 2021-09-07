@@ -2,10 +2,16 @@ package catobot.item;
 
 import catobot.exception.EmptyCommandException;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents items which can be done.
  */
 public class Task {
+    public static final DateTimeFormatter DATE_FORMAT_DOC =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    public static final DateTimeFormatter DATE_FORMAT_DISPLAY =
+            DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
     /** Details of the task. */
     private final String description;
     /** Status of whether the task is done. */
@@ -53,8 +59,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        String s = String.format("[%s] %s", this.getStatusIcon(), this.description);
-        return s;
+        return String.format("[%s] %s", this.getStatusIcon(), this.description);
     }
 
     /**
@@ -63,7 +68,6 @@ public class Task {
      * @return The string representation of task in storage.
      */
     protected String toStringInDoc() {
-        String s = String.format("%s | %s", this.isDone ? 1 : 0, this.description);
-        return s;
+        return String.format("%s | %s", this.isDone ? 1 : 0, this.description);
     }
 }
