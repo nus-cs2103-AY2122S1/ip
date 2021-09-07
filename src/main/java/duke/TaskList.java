@@ -54,7 +54,7 @@ public class TaskList {
      */
     public String printTasks() throws DukeException {
         if (this.list.size() < 1) {
-            throw new DukeException("You haven't added anything to the list yet! Try adding something.");
+            throw new DukeException("You haven't added any tasks to the list yet! Try adding something.");
         } else {
             assert !list.isEmpty() : "List should not be empty, tried to print!";
             String taskQuantifier;
@@ -80,7 +80,7 @@ public class TaskList {
      */
     public String deleteTask(int index) throws DukeException {
         if (this.list.size() < 1) {
-            throw new DukeException("You haven't added anything to the list yet! Try adding something before "
+            throw new DukeException("You haven't added any tasks to the list yet! Try adding something before "
                     + "deleting.");
         } else if (index <= this.list.size() && index >= 1) {
             assert !list.isEmpty() : "List should not be empty, tried to delete!";
