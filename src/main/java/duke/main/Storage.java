@@ -76,11 +76,7 @@ public class Storage {
     }
 
     private boolean checkIfDone(String component) {
-        if (Integer.parseInt(component.substring(1, 2)) == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return (Integer.parseInt(component.substring(1, 2)) == 1);
     }
 
     /**
