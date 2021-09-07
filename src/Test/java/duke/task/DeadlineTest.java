@@ -21,7 +21,7 @@ class DeadlineTest {
         assertEquals("D | 1 | read book | 2021-09-18 18:00", deadlineWithDateTime.toFileStringFormat());
 
         Deadline deadlineWithDate = new Deadline("read book", "2021-09-18");
-        assertEquals("D | 0 | read book | 2021-09-18", deadlineWithDate.toFileStringFormat());
+        assertEquals("D | 0 | read book | 2021-09-18 23:59", deadlineWithDate.toFileStringFormat());
     }
 
     @Test

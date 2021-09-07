@@ -218,5 +218,15 @@ public class Ui {
     public String showInvalidCommandMessage() {
         return "I'm sorry, but I don't know what that means!";
     }
+
+    /**
+     * Returns a message to notify the user of an a duplicated task.
+     *
+     * @param taskString A string format of the duplicated task.
+     * @return A string representing a duplicated task error.
+     */
+    public String showDuplicateTaskError(String taskString) {
+        return "Oh no! There seems to be a duplicate task in your list\n" + taskString;
+    }
 }
 

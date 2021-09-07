@@ -42,4 +42,19 @@ public class ToDo extends Task {
     public String toFileStringFormat() {
         return "T " + super.toFileStringFormat();
     }
+
+    /**
+     * Returns if two ToDo objects are equal based on their description.
+     *
+     * @param obj The other object to compare to.
+     * @return A boolean if the two ToDo objects are equal and false otherwise.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof ToDo) {
+            ToDo todo = (ToDo) obj;
+            return todo.description.equals(this.description);
+        }
+        return false;
+    }
 }
