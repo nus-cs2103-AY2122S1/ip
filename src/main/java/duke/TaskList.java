@@ -20,6 +20,11 @@ public class TaskList {
      * @return List of tasks.
      */
     public String list() {
+
+        if (counter == 0) {
+            return "You have no tasks in your list!";
+        }
+
         String result = "Here are the tasks in your list: \n";
 
         System.out.println("Here are the tasks in your list:");
