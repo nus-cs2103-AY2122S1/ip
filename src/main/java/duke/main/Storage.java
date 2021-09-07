@@ -44,35 +44,48 @@ public class Storage {
             char prefix = entry.charAt(0);
             switch (prefix) {
             case 'T':
-                String description = components[2].substring(1);
-                ToDo t = new ToDo(description);
-                if (checkIfDone(components[1])) {
-                    t.markAsDone();
-                }
-                savedTasks.add(t);
+                savedTasks.add(readTodo(components));
                 break;
             case 'D':
-                description = components[2].substring(1);
-                String time = components[3].substring(1);
-                Deadline d = new Deadline(description, time);
-                if (checkIfDone(components[1])) {
-                    d.markAsDone();
-                }
-                savedTasks.add(d);
+                savedTasks.add(readDeadline(components));
                 break;
             case 'E':
-                description = components[2].substring(1);
-                time = components[3].substring(1);
-                Event e = new Event(description, time);
-                if (checkIfDone(components[1])) {
-                    e.markAsDone();
-                }
-                savedTasks.add(e);
+                savedTasks.add(readEvent(components));
                 break;
             default:
             }
         }
         return savedTasks;
+    }
+
+    private Task readTodo(String[] components) {
+        String description = components[2].substring(1);
+        ToDo t = new ToDo(description);
+        if (checkIfDone(components[1])) {
+            t.markAsDone();
+        }
+        return t;
+    }
+
+    private Task readDeadline(String[] components) {
+        String description = components[2].substring(1);
+        String time = components[3].substring(1);
+        Deadline d = new Deadline(description, time);
+        if (checkIfDone(components[1])) {
+            d.markAsDone();
+        }
+
+        return d;
+    }
+
+    private Task readEvent(String[] components) {
+        String description = components[2].substring(1);
+        String time = components[3].substring(1);
+        Event e = new Event(description, time);
+        if (checkIfDone(components[1])) {
+            e.markAsDone();
+        }
+        return e;
     }
 
     private boolean checkIfDone(String component) {
