@@ -96,11 +96,9 @@ public class Ui {
 
     /**
      * Method that displays message informing user that the task indicated has been removed.
-     * @param taskList The list of Task.
-     * @param index The index of the Task deleted.
      * @return String The successfully deleted message.
      */
-    public String displayDeleteMessage(TaskList taskList, int index) {
+    public String displayDeleteMessage() {
         return " Noted. The task has been removed!";
     }
 
