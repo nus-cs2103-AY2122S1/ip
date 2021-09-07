@@ -47,6 +47,9 @@ public class TaskInputWindow extends AnchorPane {
     @FXML
     private Text eventErrorMessage;
 
+    /**
+     * Initialize a task input window.
+     */
     @FXML
     public void initialize() {
         deadlineErrorMessage.setWrappingWidth(ERROR_WRAPPING_WIDTH);
