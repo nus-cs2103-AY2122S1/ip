@@ -47,7 +47,7 @@ public class Duke {
      * @param Command JavaVarargs Commands users input.
      */
     public String operationForDuke(int index, String... Command) {
-        String text = "";
+        String text;
         String operationType = Command[0];
         String task = Command[1];
         String time = Command[2];
@@ -99,6 +99,7 @@ public class Duke {
         }
         }
 
+        assert text != "" : "OOPS, Duke stops thinking!";
         return text;
     }
 
@@ -135,6 +136,8 @@ public class Duke {
         } catch (DukeException e) {
             return e.getMessage();
         }
+
+        assert messages.size() == 4 : "Error in Parser, should produce 4 key value for duke to execute!!";
 
         operationType = messages.get(0);
         task = messages.get(1);

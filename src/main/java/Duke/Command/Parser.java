@@ -162,6 +162,7 @@ public class Parser {
      */
     public String getOperationType() throws DukeException {
         String operationType;
+
         if (message.contains(" ")) {
             operationType = message.substring(0, message.indexOf(" "));
         } else {
@@ -176,7 +177,6 @@ public class Parser {
             }
         }
         throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-
     }
 
     /**

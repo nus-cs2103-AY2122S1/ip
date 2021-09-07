@@ -122,7 +122,6 @@ public class Ui {
      * @throws DukeException Throws when the input cannot be parsed.
      */
     public ArrayList<String> getInputForARound(String input) throws DukeException {
-        System.out.println();
         Parser parser;
         ArrayList<String> parsedMessageList = new ArrayList<>();
 

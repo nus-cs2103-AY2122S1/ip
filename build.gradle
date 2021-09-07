@@ -45,6 +45,10 @@ test {
     useJUnitPlatform()
 }
 
+run {
+    enableAssertions = true
+}
+
 checkstyle {
     toolVersion = '8.29'
 }
