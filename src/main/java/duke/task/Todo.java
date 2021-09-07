@@ -48,4 +48,13 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public int compareTo(Task o) {
+        if (o instanceof Deadline || o instanceof Event) {
+            return -1;
+        } else {
+            return this.description.compareTo(o.description);
+        }
+    }
 }
