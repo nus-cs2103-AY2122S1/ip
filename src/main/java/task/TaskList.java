@@ -28,6 +28,7 @@ public class TaskList {
      * @param tasks Existing task list to use
      */
     public TaskList(ArrayList<Task> tasks) {
+        assert tasks != null: "Tasks must be an arraylist, not null";
         this.tasks = tasks;
     }
 
@@ -49,6 +50,7 @@ public class TaskList {
         }
 
         tasks.add(task);
+        assert tasks.contains(task): "Task list should contain added task";
         Storage.saveList(tasks);
         return Ui.messageAddTask(task, getSize());
 
@@ -80,6 +82,8 @@ public class TaskList {
     public String delete(int index) {
         try {
             Task removedTask = tasks.remove(index - 1);
+            assert !tasks.contains(removedTask): "Task list should not contain removed task";
+
             Storage.saveList(tasks);
             return Ui.messageRemoveTask(removedTask, getSize());
         } catch (IndexOutOfBoundsException e) {
