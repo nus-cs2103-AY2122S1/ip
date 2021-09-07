@@ -29,6 +29,20 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Marks task as not done
+     */
+    public void markUndone() { this.isDone = false; }
+
+    /**
+     * Changes description of task
+     *
+     * @param description to change into
+     */
+    public void changeDescription(String description) {
+        this.description = description;
+    }
+    
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
