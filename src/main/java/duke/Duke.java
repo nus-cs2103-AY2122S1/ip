@@ -62,6 +62,7 @@ public class Duke {
                     throw new DukeException("☹ OOPS!!! Please provide a task ID that exists.");
                 }
                 int taskId = Integer.parseInt(inputWords[1]);
+                assert output == "";
                 output = tasks.markTaskAsDone(taskId);
                 storage.saveFile(tasks.getAllTasksString());
                 break;
@@ -70,6 +71,7 @@ public class Duke {
                 if (inputWords.length == 1) {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
+                assert output == "";
                 output = tasks.addTodo(inputWords[1]);
                 storage.saveFile(tasks.getAllTasksString());
                 break;
@@ -77,6 +79,7 @@ public class Duke {
                 if (inputWords.length == 1) {
                     throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                 }
+                assert output == "";
                 output = tasks.addDeadline(inputWords[1]);
                 storage.saveFile(tasks.getAllTasksString());
                 break;
@@ -84,6 +87,7 @@ public class Duke {
                 if (inputWords.length == 1) {
                     throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
                 }
+                assert output == "";
                 output = tasks.addEvent(inputWords[1]);
                 storage.saveFile(tasks.getAllTasksString());
                 break;
@@ -92,6 +96,7 @@ public class Duke {
                     throw new DukeException("☹ OOPS!!! Please provide a task ID that exists.");
                 }
                 int taskId = Integer.parseInt(inputWords[1]);
+                assert output == "";
                 output = tasks.deleteTask(taskId);
                 storage.saveFile(tasks.getAllTasksString());
                 break;
@@ -99,6 +104,7 @@ public class Duke {
                 if (inputWords.length != 2) {
                     throw new DukeException("☹ OOPS!!! Please provide a only one keyword.");
                 }
+                assert output == "";
                 output = tasks.findTask(inputWords[1]);
                 break;
             default:
