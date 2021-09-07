@@ -34,6 +34,24 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + new SimpleDateFormat("dd/MM/yyyy").format(date) + ")";
+        String s =  "[D]" + super.toString() + " (by: " + new SimpleDateFormat("dd/MM/yyyy").format(date) + ")";
+        if (this.tag != null) {
+            s += " #" + this.tag;
+        }
+        return s;
+    }
+
+    /**
+     * Returns save string for deadlines
+     *
+     * @return save string format
+     */
+    @Override
+    public String getSaveString() {
+        String s = "D" + this.getStatusIcon() + "_" + description + "_" + new SimpleDateFormat("dd/MM/yyyy").format(date);
+        if (this.tag != null) {
+            s += "_" + tag;
+        }
+        return s;
     }
 }

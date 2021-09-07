@@ -34,6 +34,24 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (by: " + date.toString() + ")";
+        String s = "[E]" + super.toString() + " (by: " + date.toString() + ")";
+        if (this.tag != null) {
+            s += " #" + tag;
+        }
+        return s;
+    }
+
+    /**
+     * Returns save string for Events
+     *
+     * @return save string format
+     */
+    @Override
+    public String getSaveString() {
+        String s = "E" + this.getStatusIcon() + "_" + description + "_" + new SimpleDateFormat("dd/MM/yyyy").format(date);
+        if (this.tag != null) {
+            s += "_" + tag;
+        }
+        return s;
     }
 }

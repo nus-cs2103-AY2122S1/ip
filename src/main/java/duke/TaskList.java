@@ -24,27 +24,31 @@ public class TaskList {
         tasks = new ArrayList<>();
         for (int i = 0; i < stringList.size(); i++) {
             String s = stringList.get(i);
+            String[] stringArr = s.split("_");
             Task t = null;
-            switch (s.charAt(1)) {
+            switch (stringArr[0].charAt(0)) {
             case 'T':
-                t = new Todo(s.substring(7));
+                t = new Todo(stringArr[1]);
+                if (stringArr.length > 2) {
+                    t.setTag(stringArr[2]);
+                }
                 break;
             case 'D':
-                s = s.substring(7);
-                String[] parsedDeadline = s.split("by: ");
-                t = new Deadline(parsedDeadline[0].substring(0, parsedDeadline[0].length() - 2),
-                            parsedDeadline[1].substring(0, parsedDeadline[1].length() - 1));
+                t = new Deadline(stringArr[1], stringArr[2]);
+                if (stringArr.length > 3) {
+                    t.setTag(stringArr[3]);
+                }
                 break;
             case 'E':
-                s = s.substring(7);
-                String[] parsedEvent = s.split("at: ");
-                t = new Event(parsedEvent[0].substring(0, parsedEvent[0].length() - 2),
-                            parsedEvent[1].substring(0, parsedEvent[1].length() - 1));
+                t = new Event(stringArr[1], stringArr[2]);
+                if (stringArr.length > 3) {
+                    t.setTag(stringArr[3]);
+                }
                 break;
             default:
                 throw new DukeException("File not in the correct format");
             }
-            if (s.charAt(4) == 'X') {
+            if (stringArr[0].charAt(1) == 'X') {
                 t.markedAsDone();
             }
             tasks.add(t);
