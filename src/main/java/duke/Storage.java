@@ -31,6 +31,7 @@ public class Storage {
      */
     public Tasklist load() throws DukeException {
         Tasklist taskList = new Tasklist();
+        assert(saveFile != null);
         try {
             Scanner s = new Scanner(saveFile);
             while (s.hasNext()) {
@@ -49,6 +50,7 @@ public class Storage {
      * @throws DukeException Throws an exception if an error occurs while writing to file.
      */
     public void save(Tasklist taskList) throws DukeException {
+        assert(filePath != null);
         try {
             String writableData = taskList.toWritable();
             FileWriter fileWriter = new FileWriter(this.filePath.toString());
