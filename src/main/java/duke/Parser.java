@@ -34,6 +34,7 @@ public class Parser {
         int deletedTaskNumber;
         try {
             deletedTaskNumber = Integer.parseInt(input.substring(7)) - 1;
+            assert deletedTaskNumber >= 0;
         } catch (NumberFormatException e) {
             throw new DukeException("Invalid task number provided.");
         }
@@ -45,6 +46,7 @@ public class Parser {
         int completedTaskNumber;
         try {
             completedTaskNumber = Integer.parseInt(input.substring(5)) - 1;
+            assert completedTaskNumber >= 0;
         } catch (NumberFormatException e) {
             throw new DukeException("Invalid task number provided.");
         }
@@ -61,12 +63,14 @@ public class Parser {
             if (location < 0) {
                 throw new DukeException("Please provide a deadline.");
             }
+            assert location > 9;
             newTask = new Deadline(input.substring(9, location - 1), input.substring(location + 4));
         } else if (input.startsWith("event ")) {
             int location = input.indexOf("/at ");
             if (location < 0) {
                 throw new DukeException("Please provide an event time.");
             }
+            assert location > 6;
             newTask = new Event(input.substring(6, location - 1), input.substring(location + 4));
         } else {
             throw new DukeException("Please specify a type of task!");
