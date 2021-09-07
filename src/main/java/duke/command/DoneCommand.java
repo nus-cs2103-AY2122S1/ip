@@ -29,6 +29,7 @@ public class DoneCommand extends Command {
      * @param tasks The list of tasks in the current programme.
      * @param ui The user interface.
      * @param storage Handles interaction with the file.
+     * @return Response on marking a task as done.
      * @throws DukeException All exceptions related to Duke.
      */
     @Override

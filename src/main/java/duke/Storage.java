@@ -47,7 +47,7 @@ public class Storage {
             assert storage.exists() : "filepath should be validated";
             this.storage = storage;
         } catch (IOException e) {
-            Ui.showError(e.getMessage());
+            System.out.println(Ui.showError(e.getMessage()));
         }
     }
 
@@ -68,7 +68,7 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException | DukeException e) {
-            Ui.showError(e.getMessage());
+            System.out.println(Ui.showError(e.getMessage()));
         }
         return tasks;
     }
@@ -126,7 +126,7 @@ public class Storage {
             }
             myWriter.close();
         } catch (IOException e) {
-            Ui.showError(e.getMessage());
+            System.out.println(Ui.showError(e.getMessage()));
         }
     }
 

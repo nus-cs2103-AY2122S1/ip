@@ -63,12 +63,12 @@ public class TaskList {
      * Display all the tasks in the list.
      */
     public String display() {
-        String result = "";
-        result += "Here are your tasks ~ OwO\n";
+        StringBuilder result = new StringBuilder();
+        result.append("Here are your tasks ~ OwO\n");
         for (int i = 0; i < tasks.size(); i++) {
-            result += ((i + 1) + ". " + tasks.get(i).toString() + "\n");
+            result.append(i + 1).append(". ").append(tasks.get(i).toString()).append("\n");
         }
-        return result;
+        return result.toString();
     }
 
     /**

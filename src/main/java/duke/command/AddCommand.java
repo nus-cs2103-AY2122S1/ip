@@ -43,8 +43,8 @@ public class AddCommand extends Command {
      * @param tasks The list of tasks in the current programme.
      * @param ui The user interface.
      * @param storage Handles interaction with the file.
+     * @return Response message of adding a task.
      * @throws DukeException All exceptions related to Duke.
-     * @return
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
@@ -67,14 +67,20 @@ public class AddCommand extends Command {
         }
 
         try {
-            if ("todo".equals(category)) {
+            switch (category) {
+            case "todo":
                 result = tasks.add(new Todo(description));
-            } else if ("deadline".equals(category)) {
+                break;
+            case "deadline": {
                 LocalDate ld = LocalDate.parse(time);
                 result = tasks.add(new Deadline(description, ld));
-            } else if ("event".equals(category)) {
+                break;
+            }
+            case "event": {
                 LocalDate ld = LocalDate.parse(time);
                 result = tasks.add(new Event(description, ld));
+                break;
+            }
             }
         } catch (DateTimeParseException e) {
             throw new DukeException("Wrong date time format! Please use yyyy-MM-dd.");
