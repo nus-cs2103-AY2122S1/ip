@@ -6,8 +6,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.io.FileNotFoundException;
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */

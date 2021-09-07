@@ -1,8 +1,8 @@
 package duke;
 
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private final String description;
+    private boolean isDone;
 
     /**
      * Creates a Task object to store details of a task and its status of completion.

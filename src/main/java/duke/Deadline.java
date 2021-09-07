@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    protected LocalDate by;
+    private final LocalDate by;
 
     /**
      * Creates Deadline object to store task details.

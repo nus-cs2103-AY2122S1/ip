@@ -4,14 +4,18 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    public ArrayList<Task> tasks;
-    public int counter = 0;
+    private final ArrayList<Task> tasks;
+    private int counter = 0;
 
     /**
      * Creates a TaskList object that stores a list of tasks in an ArrayList.
      */
     public TaskList() {
-        this.tasks = new ArrayList<Task>();
+        this.tasks = new ArrayList<>();
+    }
+
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 
     /**
@@ -50,7 +54,7 @@ public class TaskList {
             return "Sorry, which task do you wish to mark as completed?";
 
         } else {
-            Integer index = Integer.parseInt(userInput.substring(5));
+            int index = Integer.parseInt(userInput.substring(5));
             Task currTask = tasks.get(index - 1);
             currTask.completeTask();
 
@@ -85,7 +89,7 @@ public class TaskList {
             return "Sorry, which task do you wish to delete?";
 
         } else {
-            Integer index = Integer.parseInt(userInput.substring(7));
+            int index = Integer.parseInt(userInput.substring(7));
             Task currTask = tasks.get(index - 1);
             tasks.remove(currTask);
             String result = "Noted. I've removed this task: \n";
@@ -216,11 +220,11 @@ public class TaskList {
 
         } else {
             String keyword = userInput.substring(5);
-            ArrayList<Task> matchedTasks = new ArrayList<Task>();
+            ArrayList<Task> matchedTasks = new ArrayList<>();
 
-            for (int i = 0; i < tasks.size(); i++) {
-                if (tasks.get(i).getDescription().contains(keyword)) {
-                    matchedTasks.add(tasks.get(i));
+            for (Task task : tasks) {
+                if (task.getDescription().contains(keyword)) {
+                    matchedTasks.add(task);
                 }
             }
 
@@ -235,7 +239,7 @@ public class TaskList {
     /**
      * Alerts user to an invalid command.
      */
-    public String error() {
+    public String displayError() {
         return "OOPS!! I don't know how to respond to this command! :-(";
     }
 

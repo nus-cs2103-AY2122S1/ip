@@ -7,9 +7,9 @@ import duke.TaskList;
 
 public class Duke {
 
-    private Storage storage;
-    private TaskList taskList;
-    private Parser parser;
+    private final Storage storage;
+    private final TaskList taskList;
+    private final Parser parser;
 
     /**
      * Initialises Duke program.
@@ -31,7 +31,7 @@ public class Duke {
 
         if (input.matches("bye")) {
             try {
-                storage.writeToFile(taskList.tasks);
+                storage.writeToFile(taskList.getTasks());
                 return "Bye! Hope to see you again! :D";
             } catch (IOException e) {
                 System.out.println("No tasks saved.");

@@ -2,7 +2,7 @@ package duke;
 
 public class Parser {
 
-    public TaskList tasks;
+    private final TaskList tasks;
 
     public Parser(TaskList tasks) {
         this.tasks = tasks;
@@ -45,7 +45,7 @@ public class Parser {
 
         } else {
 
-            return tasks.error();
+            return tasks.displayError();
 
         }
 
