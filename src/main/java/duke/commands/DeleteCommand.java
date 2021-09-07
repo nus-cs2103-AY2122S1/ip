@@ -1,9 +1,8 @@
-package commands;
+package duke.commands;
 
-import tasks.Task;
-import tasks.TaskList;
-import utils.Storage;
-import utils.Ui;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.utils.Storage;
 
 public class DeleteCommand extends Command {
 
@@ -15,12 +14,11 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
 
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    @Override
+    public String execute(TaskList tasks, Storage storage) {
         Task task = tasks.delete(this.index);
 
         String message = DELETE_MSG + "\n" + task.toString() + "\n" + tasks.getTaskCountString();
-
-        ui.printResponse(message);
 
         return message;
     }

@@ -1,9 +1,8 @@
-package commands;
+package duke.commands;
 
-import tasks.Task;
-import tasks.TaskList;
-import utils.Storage;
-import utils.Ui;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.utils.Storage;
 
 public class DoneCommand extends Command {
 
@@ -15,14 +14,13 @@ public class DoneCommand extends Command {
         this.index = index;
     }
 
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    @Override
+    public String execute(TaskList tasks, Storage storage) {
         Task task = tasks.get(this.index);
 
         task.markAsDone();
 
         String message = DONE_MSG + "\n" + task.toString() + "\n" + tasks.getTaskCountString();
-
-        ui.printResponse(message);
 
         return message;
     }

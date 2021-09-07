@@ -21,7 +21,7 @@
 	____________________________
 
 	____________________________
-	 Here are your tasks:
+	 Here are your duke.tasks:
 	 1. [T][ ]  borrow book
 	 2. [D][ ] return book (by: Sunday)
 	 3. [E][ ] project meeting (at: Mon 2-4pm)

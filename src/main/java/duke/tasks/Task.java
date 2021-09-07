@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 
 public abstract class Task {
 
@@ -28,6 +28,8 @@ public abstract class Task {
 
     /**
      * Returns the data of the event separated be "|"
+     *
+     * @return formatted data
      */
     public abstract String getFormattedData();
 

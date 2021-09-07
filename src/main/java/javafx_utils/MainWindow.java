@@ -1,3 +1,7 @@
+package javafx_utils;
+
+import duke.Duke;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -5,8 +9,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx_utils.DialogBox;
+
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Controller for javafx_utils.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -35,7 +41,9 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * the dialog container.
+     * Exits application if "bye" command given
+     * Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
@@ -45,6 +53,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        if (input.equals("bye")) {
+            Platform.exit();
+        }
         userInput.clear();
     }
 }
