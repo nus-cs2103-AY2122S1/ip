@@ -14,8 +14,8 @@ public class Event extends Task {
 
     /**
      * Represents a new Event object.
-     * @param description
-     * @param at
+     * @param description for Event
+     * @param at time for Event
      */
     public Event(String description, String at) {
         super(description);
@@ -38,7 +38,6 @@ public class Event extends Task {
      * @return transformed time of type LocalDateTime
      */
     public LocalDateTime parseTime(String time) {
-        String newDate;
         String[] str = time.split(" ");
         String[] oldDate = str[0].split("/");
         LocalDateTime localTime;
@@ -69,13 +68,13 @@ public class Event extends Task {
         return string;
     }
 
-    /**
-     * Tests Event class.
-     * @param args
-     */
-    public static void main(String[] args) {
-        Event e = new Event("return book", "2/12/2019 1800");
-        System.out.println(e);
-    }
+//    /**
+//     * Tests Event class.
+//     * @param args
+//     */
+//    public static void main(String[] args) {
+//        Event e = new Event("return book", "2/12/2019 1800");
+//        System.out.println(e);
+//    }
 }
 

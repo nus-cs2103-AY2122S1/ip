@@ -33,6 +33,7 @@ public class Parser {
      * example of the input command should be like: deadline return book /by 2/12/2019 1800 .
      *
      * @param input a full command
+     * @return result content
      */
     public String parse(String input) {
         String lowerCase = input.toLowerCase();
@@ -112,11 +113,13 @@ public class Parser {
 
     /**
      * Fetches Task item from TaskList and print through Ui
+     *
+     * @return result content
      */
     public String listCommand() {
         String items = "";
         if (taskList.length() > 0) {
-            items = items + "1. " + taskList.get(0).toString();
+            items = items + "    1. " + taskList.get(0).toString();
         }
         for (int i = 2; i <= taskList.length(); i++) {
             items = items + "\n    " + i + ". " + taskList.get(i - 1).toString();
@@ -137,6 +140,7 @@ public class Parser {
     /**
      * Finds items with keyword given by user.
      * @param keyword
+     * @return result content
      */
     public String findKeyword(String keyword) {
         ArrayList<Task> results = new ArrayList<>();

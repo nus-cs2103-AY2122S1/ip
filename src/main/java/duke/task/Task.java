@@ -9,7 +9,7 @@ public abstract class Task {
 
     /**
      * Represents a general Task concept.
-     * @param description
+     * @param description for general Task
      */
     public Task(String description) {
         this.description = description;

@@ -19,7 +19,7 @@ public class Database {
 
     /**
      * Represents a database for Duke.
-     * @param filePath
+     * @param filePath for database
      */
     public Database(String filePath) {
         try {
@@ -213,20 +213,20 @@ public class Database {
         return task;
     }
 
-    /**
-     * Tests Task class.
-     * @param args
-     * @throws IOException
-     */
-    public static void main(String[] args) throws IOException {
-        Database data = new Database("data/tasks.txt");
-
-        data.addData(new Todo("hahaha"));
-        ArrayList<Task> lst = data.readData();
-        for (int i = 0; i < lst.size(); i++) {
-            System.out.println(lst.get(i));
-        }
-        data.deleteData(1);
-        data.doneData(0);
-    }
+//    /**
+//     * Tests Task class.
+//     * @param args
+//     * @throws IOException
+//     */
+//    public static void main(String[] args) throws IOException {
+//        Database data = new Database("data/tasks.txt");
+//
+//        data.addData(new Todo("hahaha"));
+//        ArrayList<Task> lst = data.readData();
+//        for (int i = 0; i < lst.size(); i++) {
+//            System.out.println(lst.get(i));
+//        }
+//        data.deleteData(1);
+//        data.doneData(0);
+//    }
 }
