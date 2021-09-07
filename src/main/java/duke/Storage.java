@@ -19,8 +19,8 @@ import duke.task.ToDo;
  */
 public class Storage {
 
-    private final String filepath;
-    private final ArrayList<Task> list = new ArrayList<>();
+    private final String FILEPATH;
+    private final ArrayList<Task> LIST = new ArrayList<>();
 
 
     /**
@@ -29,7 +29,7 @@ public class Storage {
      * @param filepath path for saving and loading
      */
     public Storage(String filepath) {
-        this.filepath = filepath;
+        this.FILEPATH = filepath;
     }
 
     /**
@@ -39,21 +39,21 @@ public class Storage {
      * @throws DukeException Exceptions for file not found
      */
     public ArrayList<Task> load() throws DukeException {
-        File file = new File(filepath);
+        File file = new File(FILEPATH);
         try {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String data = scanner.nextLine();
                 Task t = processData(data);
                 if (t != null) {
-                    list.add(t);
+                    LIST.add(t);
                 }
             }
             scanner.close();
         } catch (FileNotFoundException e) {
             throw new DukeException("File is not found");
         }
-        return list;
+        return LIST;
     }
 
     private Task processData(String str) throws DukeException {
@@ -76,10 +76,10 @@ public class Storage {
         }
     }
 
-    void saveFile(ArrayList<Task> list) throws DukeException {
+    protected void saveFile(ArrayList<Task> list) throws DukeException {
         try {
 
-            File file = new File(filepath);
+            File file = new File(FILEPATH);
             file.getParentFile().mkdir();
             file.createNewFile();
             FileWriter writer = new FileWriter(file);

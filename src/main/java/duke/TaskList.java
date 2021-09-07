@@ -15,8 +15,8 @@ import duke.task.ToDo;
  */
 public class TaskList {
 
-    private final ArrayList<Task> list;
-    private final Storage storage;
+    private final ArrayList<Task> LIST;
+    private final Storage STORAGE;
 
     /**
      * Constructor for TaskList.
@@ -25,8 +25,8 @@ public class TaskList {
      * @param storage Storage object of Duke
      */
     public TaskList(ArrayList<Task> list, Storage storage) {
-        this.list = list;
-        this.storage = storage;
+        this.LIST = list;
+        this.STORAGE = storage;
     }
 
     /**
@@ -35,8 +35,8 @@ public class TaskList {
      * @param storage Storage object of Duke
      */
     public TaskList(Storage storage) {
-        this.list = new ArrayList<>();
-        this.storage = storage;
+        this.LIST = new ArrayList<>();
+        this.STORAGE = storage;
     }
 
 
@@ -50,11 +50,11 @@ public class TaskList {
         try {
             int i = Integer.parseInt(str);
 
-            if (i > 0 && i <= list.size()) {
-                Task t = list.remove(i - 1);
-                storage.saveFile(list);
+            if (i > 0 && i <= LIST.size()) {
+                Task t = LIST.remove(i - 1);
+                STORAGE.saveFile(LIST);
                 return dukePrint("Got it. I've removed this task:\n" + t + "\n" + "Now you have "
-                        + list.size() + " task" + (list.size() < 2 ? " " : "s ") + "in the list.");
+                        + LIST.size() + " task" + (LIST.size() < 2 ? " " : "s ") + "in the list.");
             } else {
                 throw new DukeException("No such task found in list.");
             }
@@ -73,10 +73,10 @@ public class TaskList {
         try {
             int i = Integer.parseInt(str);
 
-            if (i > 0 && i <= list.size()) {
-                Task t = list.get(i - 1);
+            if (i > 0 && i <= LIST.size()) {
+                Task t = LIST.get(i - 1);
                 t.markDone();
-                storage.saveFile(list);
+                STORAGE.saveFile(LIST);
                 return dukePrint("Nice! I've marked this task as done:\n" + t);
             } else {
                 throw new DukeException("No such task found in list.");
@@ -130,21 +130,21 @@ public class TaskList {
     }
 
     private String addTask(Task t) throws DukeException {
-        list.add(t);
-        storage.saveFile(list);
+        LIST.add(t);
+        STORAGE.saveFile(LIST);
         return dukePrint("Got it. I've added this task:\n" + t + "\n" + "Now you have "
-                + list.size() + " task" + (list.size() < 2 ? " " : "s ") + "in the list.");
+                + LIST.size() + " task" + (LIST.size() < 2 ? " " : "s ") + "in the list.");
     }
 
     /**
      * Displays full list of task in TaskList.
      */
     public String displayList() {
-        if (list.size() == 0) {
+        if (LIST.size() == 0) {
             return dukePrint("list empty");
         }
         return dukePrint("Here are the tasks in your list:\n"
-                + IntStream.range(0, list.size()).mapToObj((i) -> (i + 1) + ". " + list.get(i).toString())
+                + IntStream.range(0, LIST.size()).mapToObj((i) -> (i + 1) + ". " + LIST.get(i).toString())
                 .reduce("", (str1, str2) -> str1 + str2 + "\n"));
     }
 
@@ -156,10 +156,10 @@ public class TaskList {
     public String findTask(String desc) {
         StringBuilder builder = new StringBuilder("Here are the matching tasks in your list:\n");
         int count = 0;
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).toString().contains(desc)) {
+        for (int i = 0; i < LIST.size(); i++) {
+            if (LIST.get(i).toString().contains(desc)) {
                 count++;
-                builder.append(count + ". " + list.get(i).toString() + "\n");
+                builder.append(count + ". " + LIST.get(i).toString() + "\n");
             }
         }
         if (count == 0) {

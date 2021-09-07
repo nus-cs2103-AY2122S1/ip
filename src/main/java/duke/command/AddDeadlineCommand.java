@@ -9,7 +9,7 @@ import duke.Ui;
  * Represents command to add Deadline.
  */
 public class AddDeadlineCommand implements Command {
-    private final String desc;
+    private final String DESCRIPTION;
 
     /**
      * Constructor for AddDeadlineCommand.
@@ -17,12 +17,12 @@ public class AddDeadlineCommand implements Command {
      * @param desc Description for Command
      */
     public AddDeadlineCommand(String desc) {
-        this.desc = desc;
+        this.DESCRIPTION = desc;
     }
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        return tasks.addDeadline(desc);
+        return tasks.addDeadline(DESCRIPTION);
     }
 
     @Override

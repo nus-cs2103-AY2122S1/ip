@@ -9,7 +9,7 @@ import duke.Ui;
  * Represents command to mark task as done.
  */
 public class DoneCommand implements Command {
-    private final String desc;
+    private final String DESCRIPTION;
 
     /**
      * Constructor for DoneCommand.
@@ -17,12 +17,12 @@ public class DoneCommand implements Command {
      * @param desc Description for Command
      */
     public DoneCommand(String desc) {
-        this.desc = desc;
+        this.DESCRIPTION = desc;
     }
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        return tasks.markDone(desc);
+        return tasks.markDone(DESCRIPTION);
     }
 
     @Override

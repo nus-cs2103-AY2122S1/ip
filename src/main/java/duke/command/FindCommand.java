@@ -9,7 +9,7 @@ import duke.Ui;
  * Represents command to find task from list.
  */
 public class FindCommand implements Command {
-    private final String desc;
+    private final String DESCRIPTION;
 
     /**
      * Constructor for FindCommand.
@@ -17,12 +17,12 @@ public class FindCommand implements Command {
      * @param desc Description for Command
      */
     public FindCommand(String desc) {
-        this.desc = desc;
+        this.DESCRIPTION = desc;
     }
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        return tasks.findTask(desc);
+        return tasks.findTask(DESCRIPTION);
     }
 
     @Override
