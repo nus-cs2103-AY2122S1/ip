@@ -35,15 +35,6 @@ public class Ui {
     }
 
     /**
-     * Gets the welcome message string.
-     *
-     * @return Welcome message string.
-     */
-    public static String getHelpMessage() {
-        return HELP_MESSAGE;
-    }
-
-    /**
      * Method to show welcome message to user.
      */
     public static void showWelcomeMessage() {

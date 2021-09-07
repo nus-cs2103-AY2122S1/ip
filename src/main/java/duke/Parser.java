@@ -117,6 +117,7 @@ public class Parser {
     }
 
     /**
+     * This method is for CLI application for duke.
      * Parses the string input of the user to get the command keyword in order to
      * carry out the action such as add, delete, complete and exit.
      *
@@ -130,30 +131,32 @@ public class Parser {
 
         while (true) {
             String action = input.nextLine();
+            String command = Parser.getCommand(action);
 
-            if (Parser.getCommand(action).equals("done")) { //mark task as done
+            switch (command) {
+            case "done": // mark task as done
                 int taskNum = Parser.taskNumber(action);
                 String oldDescription = taskList.getIndividualTask(taskNum - 1).toString();
-                taskList.completeTask(taskNum); //todo
-                Storage.saveAsCompleted(file, taskList.getIndividualTask(taskNum - 1), oldDescription); //todo
-            } else if (Parser.getCommand(action).equals("todo")
-                    || Parser.getCommand(action).equals("deadline")
-                    || Parser.getCommand(action).equals("event")) { // add task to to-do list
-                taskList.addTask(identifyType(action)); //todo
+                taskList.completeTask(taskNum);
+                Storage.saveAsCompleted(file, taskList.getIndividualTask(taskNum - 1), oldDescription);
+            case "todo": // add todo
+            case "deadline": // add deadline
+            case "event": // add event
+                taskList.addTask(identifyType(action));
                 Storage.addData(writer, identifyType(action));
-            } else if (action.equals("list")) { // list all items
-                taskList.listItems(); //todo
-            } else if (action.equals("bye")) { // exit
+            case "list": // list all items
+                taskList.listItems();
+            case "bye": // exit
                 Ui.showGoodbyeMessage();
                 break;
-            } else if (Parser.getCommand(action).equals("delete")) { // delete task
-                int taskNum = Parser.taskNumber(action);
-                Storage.markAsDeleted(file, taskList.getIndividualTask(taskNum - 1)); //todo
-                taskList.deleteTask(taskNum); //todo
-            } else if (Parser.getCommand(action).equals("find")) { // find tasks
+            case "delete": // delete task
+                int num = Parser.taskNumber(action);
+                Storage.markAsDeleted(file, taskList.getIndividualTask(num - 1));
+                taskList.deleteTask(num);
+            case "find": // find tasks
                 String keyword = getKeyword(action);
                 taskList.findTasks(keyword);
-            } else { // if there is an invalid input
+            default: // if there is an invalid input
                 Ui.showInvalidInputMessage();
                 throw new IllegalArgumentException();
             }

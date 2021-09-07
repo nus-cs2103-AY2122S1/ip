@@ -44,9 +44,7 @@ public class Duke {
      */
     public void run() throws DukeException {
         File dukeFile = new File("data/duke.txt");
-
         Ui.showWelcomeMessage();
-
         Parser.parseCommand(taskList, dukeFile, writer);
     }
 

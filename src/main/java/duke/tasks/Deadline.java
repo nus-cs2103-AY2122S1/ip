@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
  * toCompleteBy which is the due date, the task type and time it is due by.
  */
 public class Deadline extends Task {
+    protected static final int MAX_SPLIT_LIMIT = 2;
     protected LocalDate toCompleteBy;
     protected String taskType;
     protected String time;
@@ -48,9 +49,9 @@ public class Deadline extends Task {
      * @throws MissingDueDateDescriptionException
      */
     public static String getDeadlineDescription(String input) throws MissingDueDateDescriptionException {
-        String[] strArr = input.split(" /by", 2);
-        assert strArr.length == 2 : "Missing due date with format \"/by yyyy-mm-dd time\"";
-        if (strArr.length < 2) {
+        String[] strArr = input.split(" /by", MAX_SPLIT_LIMIT);
+        assert strArr.length == MAX_SPLIT_LIMIT : "Missing due date with format \"/by yyyy-mm-dd time\"";
+        if (strArr.length < MAX_SPLIT_LIMIT) {
             Ui.showMissingDeadline();
             Response.showMissingDeadline();
             throw new MissingDueDateDescriptionException();
@@ -60,26 +61,15 @@ public class Deadline extends Task {
     }
 
     /**
-     * Gets the due date and time from the users input.
-     *
-     * @param input The string input provided by the user.
-     * @return Due date and time from the users input
-     */
-    public static LocalDate getDueDate(String input) {
-        String[] strArr = input.split("/by ", 2);
-        return LocalDate.parse(strArr[1]);
-    }
-
-    /**
      * Gets the date the deadline is due by.
      *
      * @param input The string input provided by the user.
      * @return Date the deadline is due by.
      */
     public static LocalDate getDate(String input) {
-        String[] strArr = input.split("/by ", 2); // {desc, yyyy-mm-dd time}
+        String[] strArr = input.split("/by ", MAX_SPLIT_LIMIT); // {desc, yyyy-mm-dd time}
         assert strArr.length == 2: "Missing date";
-        String[] arr = strArr[1].split(" ", 2); // {yyyy-mm-dd, time}
+        String[] arr = strArr[1].split(" ", MAX_SPLIT_LIMIT); // {yyyy-mm-dd, time}
         assert arr.length == 2: "Missing time";
         return LocalDate.parse(arr[0]);
     }
@@ -91,9 +81,9 @@ public class Deadline extends Task {
      * @return Time the deadline is due by.
      */
     public static String getTime(String input) {
-        String[] strArr = input.split("/by ", 2); // {desc, yyyy-mm-dd time}
+        String[] strArr = input.split("/by ", MAX_SPLIT_LIMIT); // {desc, yyyy-mm-dd time}
         assert strArr.length == 2: "Missing date";
-        String[] arr = strArr[1].split(" ", 2); // {yyyy-mm-dd, time}
+        String[] arr = strArr[1].split(" ", MAX_SPLIT_LIMIT); // {yyyy-mm-dd, time}
         assert arr.length == 2: "Missing time";
         return arr[1];
     }
