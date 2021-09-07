@@ -4,7 +4,7 @@ import java.util.ArrayList;
 /**
  * Represents the DukeUI to interact with the user.
  */
-public class DukeUI {
+public class DukeUi {
 
     public void respondToUser(String response) {
         System.out.println(response);
