@@ -32,6 +32,7 @@ public class FindCommand extends Command {
      */
     @Override
     public void executeAndShow(TaskList taskList, Storage storage) {
+        assert super.getAction() == Action.FIND : "Find command action type error";
         ArrayList<Task> matchTasks = taskList.findTask(query);
         Ui.showFindTasks(matchTasks);
     }
@@ -45,6 +46,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
+        assert super.getAction() == Action.FIND : "Find command action type error";
         ArrayList<Task> matchTasks = taskList.findTask(query);
         return StringUtils.getSearchMessage(matchTasks);
     }

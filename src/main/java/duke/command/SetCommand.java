@@ -40,6 +40,7 @@ public class SetCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
+        assert super.getAction() == Action.DONE : "Set command action type error";
         return taskList.markTaskAsDone(index);
     }
 }

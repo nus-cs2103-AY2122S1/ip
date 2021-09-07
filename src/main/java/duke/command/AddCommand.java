@@ -45,6 +45,8 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
+        assert super.getAction() == Action.TODO || super.getAction() == Action.DEADLINE
+                || super.getAction() == Action.EVENT: "Add command action type error";
         switch (super.getAction()) {
         case TODO: {
             Todo temp = new Todo(info);

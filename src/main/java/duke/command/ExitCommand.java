@@ -23,6 +23,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public void executeAndShow(TaskList taskList, Storage storage) {
+        assert super.getAction() == Action.BYE : "Exit command action type error";
         Ui.bye();
         storage.writeToTaskTxt(taskList.getTasks());
     }
@@ -36,6 +37,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
+        assert super.getAction() == Action.BYE : "Exit command action type error";
         storage.writeToTaskTxt(taskList.getTasks());
         return "Bye. Hope to see you again soon!\n";
     }
