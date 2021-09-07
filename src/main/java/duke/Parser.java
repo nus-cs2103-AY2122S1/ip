@@ -69,7 +69,7 @@ public class Parser {
             }
             newTask = new Event(input.substring(6, location - 1), input.substring(location + 4));
         } else {
-            throw new DukeException("Please specify a type of task!");
+            throw new DukeException("Please specify a type of task.");
         }
 
         return new AddCommand(newTask);
