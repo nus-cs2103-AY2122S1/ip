@@ -3,7 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 /**
- * Encapsulates a list of Notes that the user created, with relevant processing methods.
+ * Encapsulates a list of Notes that the user n, with relevant processing methods.
  *
  * @author Hanif Kamal
  */
@@ -96,9 +96,9 @@ public class NoteList {
      */
     public String printFilteredNotes(String searchTerm) throws DukeException {
         ArrayList<Note> filteredList = new ArrayList<>();
-        for (Note Note : list) {
-            if (Note.getNoteDescription().contains(searchTerm)) {
-                filteredList.add(Note);
+        for (Note note : list) {
+            if (note.getNoteDescription().contains(searchTerm)) {
+                filteredList.add(note);
             }
         }
         if (filteredList.size() < 1) {
