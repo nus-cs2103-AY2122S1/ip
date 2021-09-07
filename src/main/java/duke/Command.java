@@ -4,21 +4,23 @@ package duke;
  * An enum of all available commands + invalid command.
  */
 public enum Command {
-    LIST("list"),
-    FIND("find"),
-    DONE("done"),
-    DELETE("delete"),
-    CLEAR("clear"),
-    TODO("todo"),
-    DEADLINE("deadline"),
-    EVENT("event"),
-    BYE("bye"),
-    INVALID("invalid");
+    LIST("list", "ls"),
+    FIND("find", "f"),
+    DONE("done", "d"),
+    DELETE("delete", "rm"),
+    CLEAR("clear", "cl"),
+    TODO("todo", "td"),
+    DEADLINE("deadline", "dl"),
+    EVENT("event", "ev"),
+    BYE("bye", "bye"),
+    INVALID("invalid", "invalid");
 
     private String c;
+    private String abbr;
 
-    Command(String c) {
+    Command(String c, String abbr) {
         this.c = c;
+        this.abbr = abbr;
     }
 
     /**
@@ -29,7 +31,7 @@ public enum Command {
      */
     public static Command cmdFromString(String text) {
         for (Command cmd : Command.values()) {
-            if (cmd.c.equalsIgnoreCase(text)) {
+            if (cmd.c.equalsIgnoreCase(text) || cmd.abbr.equalsIgnoreCase(text)) {
                 return cmd;
             }
         }

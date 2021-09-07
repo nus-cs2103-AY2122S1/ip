@@ -138,7 +138,7 @@ public class TaskList {
     /**
      * Adds Event to list of tasks.
      *
-     * @param req Array of Strings containing the description and the time fram.
+     * @param req Array of Strings containing the description and the time frame.
      */
     public String addEvent(String[] req) {
         String out = "";
