@@ -92,5 +92,26 @@ public class TaskList {
         return response;
     }
 
+    /**
+     * Updates the description of a given task
+     * @param commands
+     * @param updatedDescription
+     * @param listNumber
+     * @return
+     */
+    public String updateDescription(ArrayList<Task> commands, String updatedDescription, int listNumber) {
+        String response;
+        try {
+            if (listNumber >= commands.size()) {
+                throw new InvalidTaskException();
+            } 
+            commands.get(listNumber).updateDescription(updatedDescription);
+            response = "I have updated the task description for you!";
+        } catch (DukeException e) {
+            response = e.getMessage();
+        }
+        return response;
+    }
+
 
 }

@@ -7,10 +7,6 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     private LocalDateTime time;
-    
-    public LocalDateTime getTime() {
-        return this.time;
-    }
 
     /**
      * Public constructor for the Event class
@@ -20,6 +16,10 @@ public class Event extends Task {
     public Event(String description, LocalDateTime time) {
         super(description);
         this.time = time;
+    }
+    
+    public LocalDateTime getTime() {
+        return this.time;
     }
 
     @Override
