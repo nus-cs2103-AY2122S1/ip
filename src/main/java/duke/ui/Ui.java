@@ -149,4 +149,17 @@ public class Ui {
         this.print(sb.toString());
     }
 
+    /**
+     * Prints the old task and the updated task.
+     *
+     * @param oldTask The old task.
+     * @param updatedTask The updated task.
+     */
+    public void printTaskUpdated(Task oldTask, Task updatedTask) {
+        String toPrint = "Your task has been updated from:\n"
+                + "\t" + oldTask
+                + "\nto:\n"
+                + "\t" + updatedTask;
+        this.print(toPrint);
+    }
 }

@@ -11,7 +11,7 @@ import duke.ui.Ui;
  * This class encapsulates the find command.
  */
 public class FindCommand extends Command {
-    private String query;
+    private final String query;
 
     /**
      * Constructor of the FindCommand class.

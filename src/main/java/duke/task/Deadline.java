@@ -14,7 +14,7 @@ import duke.storage.Storage;
 public class Deadline extends Task {
     private static final String TASK_TYPE = "D";
     private static final String DATE_FORMAT = "MMM d yyyy";
-    private LocalDate by;
+    private final LocalDate by;
 
     /**
      * Constructor of the duke.task.Deadline class
@@ -53,5 +53,9 @@ public class Deadline extends Task {
     @Override
     protected String getTaskType() {
         return TASK_TYPE;
+    }
+
+    public LocalDate getBy() {
+        return by;
     }
 }
