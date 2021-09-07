@@ -9,6 +9,7 @@ import command.DeleteCommand;
 import command.DoneCommand;
 import command.ExitCommand;
 import command.FindCommand;
+import command.HelpCommand;
 import command.ListCommand;
 import task.Deadline;
 import task.Event;
@@ -44,10 +45,12 @@ public class Parser {
             return deleteCommand(partsLength, parts[1]);
         } else if (command.equals("find")) {
             return findCommand(partsLength, parts[1].toLowerCase());
+        } else if (command.equals("help")) {
+            return helpCommand();
         } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
             return addTaskCommand(partsLength, parts);
         } else {
-            throw new DukeException("I'm sorry, but I don't know what that means (X_X)");
+            throw new DukeException("I'm sorry, but I don't know what that means (X_X) Enter 'help' to get help!");
         }
     }
 
@@ -105,5 +108,9 @@ public class Parser {
             throw new DukeException("You must provide the index of the task to delete.");
         }
         return new DeleteCommand(index);
+    }
+
+    private static Command helpCommand() {
+        return new HelpCommand();
     }
 }
