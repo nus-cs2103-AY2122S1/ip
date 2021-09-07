@@ -35,6 +35,7 @@ public class Duke {
      * @throws DukeException If input is invalid.
      */
     public String listen(String input) throws DukeException {
+        assert list != null : "Duke's task list must be initialised before accepting commands.";
         Parser parser = new Parser(input);
         Command command = Command.identifyCommand(parser.getCommandWord());
         return command.run(this, parser);

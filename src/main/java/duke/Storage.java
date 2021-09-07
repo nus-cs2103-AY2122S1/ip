@@ -31,6 +31,7 @@ public class Storage {
      * @throws IOException If an I/O error occurs.
      */
     public Storage(String path) throws IOException {
+        assert path != null : "Path for file storage cannot be null.";
         file = new File(path);
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdir();
