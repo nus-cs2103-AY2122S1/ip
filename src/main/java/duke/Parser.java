@@ -24,8 +24,6 @@ public class Parser {
     enum Actions {
         DELETE,
         MARK_COMPLETE,
-        //  EDIT
-        //  MARK_INCOMPLETE,
     }
 
     /**

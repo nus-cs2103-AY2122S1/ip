@@ -70,7 +70,7 @@ public class Storage {
 
         taskList
             .stream()
-            .forEach(x -> save.append(x.taskToString()).append(System.lineSeparator()));
+            .forEach(x -> save.append(x.convertToDatabaseFormat()).append(System.lineSeparator()));
         byte[] saveResult = save.toString().getBytes();
 
         System.out.println("Saving tasks  - " + filePath);
@@ -93,7 +93,7 @@ public class Storage {
     private static Consumer<String> convertToTaskAndAppendTo(ArrayList<Task> taskArr, ArrayList<String> failedParses) {
         return taskString -> {
             try {
-                Task task = Task.stringToTask(taskString);
+                Task task = Task.parseTaskFromDatabase(taskString);
                 taskArr.add(task);
             } catch (IllegalArgumentException e) {
                 failedParses.add(taskString);
