@@ -32,7 +32,8 @@ public class UndoCommand extends Command {
         // checks the type of command of the most recent command
         // and does the corresponding actions
         if (command.equals("add")) {
-            Task deletedTask = tasks.remove(tasks.size() - 1);
+            System.out.println(tasks.size());
+            Task deletedTask = tasks.remove(tasks.size());
             message = ui.showRemoveMessage(tasks, deletedTask);
         } else if (command.equals("delete")) {
             Task removedTask = log.getDeletedTask();
