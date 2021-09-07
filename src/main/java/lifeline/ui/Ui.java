@@ -82,7 +82,7 @@ public class Ui {
     public String showDeletedTaskMessage(TaskList taskList) {
         StringBuilder stringBuilder = new StringBuilder();
         int numberOfTasks = taskList.getSize();
-        stringBuilder.append("You have " + numberOfTasks + (numberOfTasks == 1 ? " task" : " tasks") + "remaining");
+        stringBuilder.append("You have " + numberOfTasks + (numberOfTasks == 1 ? " task" : " tasks") + " remaining");
         return stringBuilder.toString();
     }
 
