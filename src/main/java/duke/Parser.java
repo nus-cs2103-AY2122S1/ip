@@ -237,7 +237,8 @@ public class Parser {
 
         for (int i = 1; i < strings.length; i++) {
 
-            if (i == 1 && (strings[i].equals("by") || strings[i].equals("at"))) {
+            if (i == 1 && (strings[i].equals("by") || strings[i].equals("at")) &&
+                    !(strings[0].equals("by") || strings[0].equals("at"))) {
                 // handle the case where user formatted command wrongly (include a space after "/")
                 continue;
             }
@@ -255,6 +256,10 @@ public class Parser {
             if (i != strings.length - 1) {
                 deadline += " ";
             }
+        }
+
+        if (deadline.equals("")) {
+            deadline += " ";
         }
 
         return deadline;
