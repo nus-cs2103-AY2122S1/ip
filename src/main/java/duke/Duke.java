@@ -64,15 +64,19 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns a response after receiving input from user.
+     *
+     * @param input The user input.
+     * @return The response string.
      */
     public String getResponse(String input) {
+        String result;
         try {
             Command c = Parser.parseInput(input);
-            return c.runCommand(taskList, ui, storage);
+            result = c.runCommand(taskList, ui, storage);
         } catch (DukeException e) {
-            return e.getMessage();
+            result = e.getMessage();
         }
+        return result;
     }
 }

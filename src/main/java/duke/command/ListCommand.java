@@ -24,6 +24,7 @@ public class ListCommand extends Command {
 
     /**
      * Indicates if the command ends the program after executing.
+     *
      * @return false
      */
     @Override

@@ -20,7 +20,7 @@ public class Todo extends Task {
      * @return String to write to duke.txt
      */
     @Override
-    public String toWrite() {
+    public String toWriteFormat() {
         String done = this.isDone ? "1" : "0";
         return String.format("T | %s | %s", done, this.getDescription());
     }

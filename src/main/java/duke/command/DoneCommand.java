@@ -35,11 +35,12 @@ public class DoneCommand extends Command {
     @Override
     public String runCommand(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.markTask(index - 1);
-        return ui.taskMarked(taskList.getTask(index - 1));
+        return ui.showTaskMarked(taskList.getTask(index - 1));
     }
 
     /**
      * Indicates if the command ends the program after executing.
+     *
      * @return false
      */
     @Override

@@ -123,7 +123,7 @@ public class TaskList {
     public String toSave() {
         String saveTasks = "";
         for (int i = 0; i < tasks.size(); i++) {
-            String taskToWrite = tasks.get(i).toWrite();
+            String taskToWrite = tasks.get(i).toWriteFormat();
             saveTasks = saveTasks.concat(taskToWrite + "\n");
         }
         return saveTasks;

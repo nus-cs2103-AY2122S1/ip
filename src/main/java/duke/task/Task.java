@@ -49,7 +49,7 @@ public class Task {
      *
      * @return String to write to duke.txt
      */
-    public String toWrite() {
+    public String toWriteFormat() {
         return String.format("[ ] | %s", this.getDescription());
     }
 

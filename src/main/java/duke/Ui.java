@@ -51,21 +51,21 @@ public class Ui {
     }
 
     /**
-     * Prints a line.
+     * Returns a line.
      */
     public String showLine() {
         return "_______________________________________________________\n";
     }
 
     /**
-     * Prints the loading error message.
+     * Returns the loading error message.
      */
     public String showLoadingError() {
         return "I can't locate the file!\n";
     }
 
     /**
-     * Prints the error message.
+     * Returns the error message.
      *
      * @param errorMsg The error message.
      */
@@ -74,7 +74,8 @@ public class Ui {
     }
 
     /**
-     * Prints all the current tasks in the TaskList.
+     * Returns all the current tasks in the TaskList.
+     *
      * @param taskList The TaskList object containing all tasks.
      */
     public String printTasks(TaskList taskList) {
@@ -86,7 +87,7 @@ public class Ui {
     }
 
     /**
-     * Print the tasks that match the filter.
+     * Returns the tasks that match the filter.
      *
      * @param filter The string to search for.
      * @param taskList The taskList to search in.
@@ -102,16 +103,16 @@ public class Ui {
     }
 
     /**
-     * Prints the task that was successfully added.
+     * Returns the task that was successfully added.
      *
      * @param task The task object that was added.
      */
-    public String taskAdded(Task task) {
+    public String showTaskAdded(Task task) {
         return ("Okay! I've added this task:\n    " + task.toString()) + "\n";
     }
 
     /**
-     * Prints the current number of tasks in the TaskList.
+     * Returns the current number of tasks in the TaskList.
      *
      * @param taskList The TaskList object containing all tasks.
      */
@@ -120,25 +121,25 @@ public class Ui {
     }
 
     /**
-     * Prints the task that was successfully deleted.
+     * Returns the task that was successfully deleted.
      *
      * @param task The task object that was deleted.
      */
-    public String taskDeleted(Task task) {
+    public String showTaskDeleted(Task task) {
         return ("Okay! I've removed this task:\n    " + task.toString());
     }
 
     /**
-     * Prints the task that was marked as done.
+     * Returns the task that was marked as done.
      *
      * @param task The task object that was marked done.
      */
-    public String taskMarked(Task task) {
+    public String showTaskMarked(Task task) {
         return ("Okay! This task has been marked done:\n  " + task.toString() + "\n");
     }
 
     /**
-     * Prints the goodbye message.
+     * Returns the goodbye message.
      */
     public String showGoodbye() {
         scanner.close();

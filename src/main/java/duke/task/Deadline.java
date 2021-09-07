@@ -38,7 +38,7 @@ public class Deadline extends Task {
      * @return String to write to duke.txt
      */
     @Override
-    public String toWrite() {
+    public String toWriteFormat() {
         String done = this.isDone ? "1" : "0";
         return String.format("D | %s | %s | %s", done, this.getDescription(), this.by);
     }

@@ -69,7 +69,7 @@ public class AddCommand extends Command {
     @Override
     public String runCommand(TaskList taskList, Ui ui, Storage storage) {
         String s = "";
-        s += ui.taskAdded(task);
+        s += ui.showTaskAdded(task);
         taskList.addTask(task);
         s += ui.showTaskListSize(taskList);
         return s;
@@ -77,6 +77,7 @@ public class AddCommand extends Command {
 
     /**
      * Indicates if the command ends the program after executing.
+     *
      * @return false
      */
     @Override

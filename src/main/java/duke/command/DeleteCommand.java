@@ -35,7 +35,7 @@ public class DeleteCommand extends Command {
     @Override
     public String runCommand(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String s = "";
-        s += ui.taskDeleted(taskList.getTask(index - 1));
+        s += ui.showTaskDeleted(taskList.getTask(index - 1));
         taskList.deleteTask(index - 1);
         s += ui.showTaskListSize(taskList);
         return s;
@@ -43,6 +43,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Indicates if the command ends the program after executing.
+     *
      * @return false
      */
     @Override
