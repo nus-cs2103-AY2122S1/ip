@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -31,11 +30,11 @@ public class Event extends Task {
      */
     @Override
     public String convertToText() {
-        return super.convertToText() + super.getDivider() + dateTime.format(PARSE_FORMAT);
+        return super.convertToText() + super.getDivider() + super.getParseFormatDateTime();
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + dateTime.format(OUTPUT_FORMAT) + ")";
+        return "[E]" + super.toString() + " (at: " + super.getOutputFormatDateTime() + ")";
     }
 }
