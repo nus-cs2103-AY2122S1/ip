@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -22,11 +21,10 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private Button helpButton;
 
     private Duke duke;
-
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Initializes the controller.
@@ -37,9 +35,9 @@ public class MainWindow extends AnchorPane {
             scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
             duke = new Duke();
         } catch (DukeException e) {
-            dialogContainer.getChildren().add(DialogBox.getDukeDialog(e.toString(), dukeImage));
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(e.toString()));
         } finally {
-            dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.getStartMessage(), dukeImage));
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.getStartMessage()));
         }
     }
 
@@ -50,13 +48,21 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(input));
         String response = duke.getResponse(input);
         userInput.clear();
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(response, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(response));
         if (input.equals("bye")) {
             userInput.setEditable(false);
             sendButton.setDisable(true);
+            helpButton.setDisable(true);
+        } else if (input.equals("help")) {
+            dialogContainer.getChildren().add(new HelpMenu(duke, dialogContainer));
         }
+    }
+
+    @FXML
+    private void handleHelpButtonPress() {
+        dialogContainer.getChildren().add(new HelpMenu(duke, dialogContainer));
     }
 }
