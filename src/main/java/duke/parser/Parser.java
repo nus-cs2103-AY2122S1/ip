@@ -46,29 +46,31 @@ public class Parser {
                 throw DukeException.emptyDescription();
             }
 
-            output.append(TODO_MESSAGE);
             task = new Todo(param);
             taskList.add(task);
+
+            output.append(TODO_MESSAGE);
             output.append(taskList.get(taskList.getSize() - 1)).append(System.lineSeparator());
             output.append(String.format("Now you have %d tasks in the list.\n", taskList.getSize()));
             break;
         case "list":
-            output.append(LIST_MESSAGE);
             List<String> enumerate = taskList.enumerate();
+
             for (String currentTaskName : enumerate) {
                 output.append(currentTaskName).append(System.lineSeparator());
             }
+            output.append(LIST_MESSAGE);
             output.append("There are currently ").append(taskList.getSize()).append(" tasks in your list.");
             break;
         case "find":
-            output.append(FIND_MESSAGE);
             enumerate = taskList.filter(param).enumerate();
+
+            output.append(FIND_MESSAGE);
             for (String currentTaskName : enumerate) {
                 output.append(currentTaskName).append(System.lineSeparator());
             }
             break;
         case "deadline":
-            output.append(TODO_MESSAGE);
             assert param != null;
             taskItems = param.split(" /by ", 2);
             taskName = taskItems[0].strip();
@@ -78,10 +80,11 @@ public class Parser {
             } else {
                 taskList.add(new Deadline(taskName, taskItems[1].strip()));
             }
+
+            output.append(TODO_MESSAGE);
             output.append(String.format("Now you have %d tasks in the list.\n", taskList.getSize()));
             break;
         case "event":
-            output.append(TODO_MESSAGE);
             assert param != null;
             taskItems = param.split(" /at ", 2);
             taskName = taskItems[0].strip();
@@ -91,19 +94,23 @@ public class Parser {
             } else {
                 taskList.add(new Event(taskName, taskItems[1].strip()));
             }
+
+            output.append(TODO_MESSAGE);
             output.append(String.format("Now you have %d tasks in the list.\n", taskList.getSize()));
             break;
         case "done":
-            output.append(DONE_MESSAGE);
             assert param != null;
             int intParam = Integer.parseInt(param) - 1;
             taskList.get(intParam).markAsDone();
+
+            output.append(DONE_MESSAGE);
             output.append(taskList.get(intParam));
             break;
         case "delete":
-            output.append(DELETE_MESSAGE);
             assert param != null;
             intParam = Integer.parseInt(param) - 1;
+
+            output.append(DELETE_MESSAGE);
             output.append(taskList.get(intParam)).append(System.lineSeparator());
             taskList.remove(intParam);
             output.append(String.format("Now you have %d tasks in the list.\n", taskList.getSize()));
