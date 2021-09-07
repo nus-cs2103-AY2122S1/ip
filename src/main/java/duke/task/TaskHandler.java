@@ -35,6 +35,7 @@ public class TaskHandler {
      * @param tasks The list of tasks to be managed by the instance.
      */
     public TaskHandler(List<Task> tasks) {
+        assert tasks != null : "Tasks list cannot be null.";
         this.tasks = tasks;
         this.tasksListUpdateObservers = new ArrayList<>();
     }
