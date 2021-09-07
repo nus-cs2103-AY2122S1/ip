@@ -3,4 +3,5 @@
 [D][X] sleep (by: 2011-09-02)
 [E][ ] meeting (at: sunday 10pm)
 [D][ ] ip (by: 2021-02-02)
-[T][ ] work
+[T][X] work
+[T][ ] more work
