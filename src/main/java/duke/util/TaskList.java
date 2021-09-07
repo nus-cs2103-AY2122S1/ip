@@ -2,6 +2,7 @@ package duke.util;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import duke.exception.DukeException;
 import duke.task.Deadline;
@@ -14,9 +15,9 @@ import duke.task.ToDo;
  */
 public class TaskList {
     //List that holds all the Tasks.
-    private final ArrayList<Task> list;
+    private ArrayList<Task> list;
     //Storage to load the list and write to list.
-    private final Storage store;
+    private Storage store;
 
     /**
      * Constructs List that contains Tasks.
@@ -37,7 +38,7 @@ public class TaskList {
         Task newToDo = new ToDo(text);
         list.add(newToDo);
         store.writeToFile(list);
-        return "Got it. I've added this duke.task: \n"
+        return "Got it. I've added this task: \n"
                 + newToDo
                 + "Now you have " + list.size() + " tasks in the list. \n";
     }
@@ -53,7 +54,7 @@ public class TaskList {
             Task newDl = new Deadline(text, by);
             list.add(newDl);
             store.writeToFile(list);
-            return "Got it. I've added this duke.task: \n"
+            return "Got it. I've added this task: \n"
                     + newDl
                     + "Now you have " + list.size() + " tasks in the list. \n";
         } catch (DukeException | DateTimeParseException e) {
@@ -73,7 +74,7 @@ public class TaskList {
             Task newEvent = new Event(text, at);
             list.add(newEvent);
             store.writeToFile(list);
-            return "Got it. I've added this duke.task: \n"
+            return "Got it. I've added this task: \n"
                     + newEvent
                     + "Now you have " + list.size() + " tasks in the list. \n";
         } catch (DukeException | DateTimeParseException e) {
@@ -89,11 +90,11 @@ public class TaskList {
      */
     public String setIndexDone(int index) { // starts from 1
         if (index > list.size() || index < 1) { //check for invalid index number
-            return "There is no duke.task " + index;
+            return "There is no task " + index;
         }
         list.get(index - 1).setDone();
         store.writeToFile(list);
-        return "Nice! I've marked this duke.task as done: \n"
+        return "Nice! I've marked this task as done: \n"
                 + list.get(index - 1).toString();
     }
 
@@ -104,15 +105,41 @@ public class TaskList {
      */
     public String deleteTask(int index) { //starts from 1
         if (index > list.size() || index < 1) {
-            return "There is no duke.task " + index;
+            return "There is no task " + index;
         }
         String taskDesc = list.get(index - 1).toString();
         list.remove(index - 1);
         store.writeToFile(list);
-        return "Noted. I've removed this duke.task: \n"
+        return "Noted. I've removed this task: \n"
                 + taskDesc
                 + "Now you have " + list.size() + " tasks in the list. \n";
 
+    }
+
+    public String editTask(int index, String input) throws DukeException {
+        if (index > list.size() || index < 1) {
+            return "There is no task " + index;
+        }
+        Task task = list.get(index - 1);
+        String[] parts = input.split(" ");
+        String taskType = parts[0];
+        String replacement = parts[1];
+        switch (taskType.toLowerCase()) {
+        case "date":
+            task.setDate(replacement);
+            break;
+        case "time":
+            task.setTime(replacement);
+            break;
+        case "description":
+            task.setDescription(replacement);
+            break;
+        default:
+            throw new DukeException("Edit type unclear, please specify either /date, /time, /description");
+        }
+        store.writeToFile(list);
+        return  "Noted. I've edited this C-task: \n"
+                + task.toString();
     }
 
     /**

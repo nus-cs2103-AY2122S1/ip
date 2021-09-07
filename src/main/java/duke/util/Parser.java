@@ -1,5 +1,7 @@
 package duke.util;
 
+import java.util.Locale;
+
 import duke.exception.DukeException;
 
 /**
@@ -42,6 +44,10 @@ public class Parser {
                     throw new DukeException();
                 }
                 return list.findTask(desc);
+            } else if(input.startsWith("edit ")){ //edit x /description replacement
+                String[] parts = input.split("/", 2);
+                int posEdit = extractInt(parts[0]);
+                return list.editTask(posEdit, parts[1]);
             } else if (input.startsWith("done ")) {
                 int numInt = extractInt(input);
                 return list.setIndexDone(numInt);

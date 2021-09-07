@@ -10,10 +10,7 @@ import duke.exception.DukeException;
  * Represents a Task with a Deadline(Date and Time).
  */
 public class Deadline extends Task {
-    //date of deadline in format LocalDate
-    protected LocalDate byDate;
-    //time of deadline in format String
-    protected String byTime;
+
 
     /**
      * Constructs a Task with a Deadline .
@@ -30,14 +27,14 @@ public class Deadline extends Task {
             throw new DukeException();
         }
         String date = parts[0].replace("/", "-");
-        this.byDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("d-M-yyyy"));
+        this.Date = LocalDate.parse(date, DateTimeFormatter.ofPattern("d-M-yyyy"));
         assert parts[1] != null;
-        this.byTime = parts[1];
+        this.Time = parts[1];
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + byDate.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
-                + " " + byTime + ") \n";
+        return "[D]" + super.toString() + " (by: " + Date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
+                + " " + Time + ")";
     }
 }

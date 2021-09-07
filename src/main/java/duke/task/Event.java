@@ -10,10 +10,10 @@ import duke.exception.DukeException;
  * Represents a Task Event that happens at a date and time.
  */
 public class Event extends Task {
-    //date of event in format LocalDate
-    protected LocalDate atDate;
-    //time of event in format String
-    protected String atTime;
+//    //date of event in format LocalDate
+//    protected LocalDate atDate;
+//    //time of event in format String
+//    protected String atTime;
 
     /**
      * Constructs a Event Task with date and time of when it is happening.
@@ -30,14 +30,14 @@ public class Event extends Task {
             throw new DukeException();
         }
         String date = parts[0].replace("/", "-");
-        this.atDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("d-M-yyyy"));
+        this.Date = LocalDate.parse(date, DateTimeFormatter.ofPattern("d-M-yyyy"));
         assert parts[1] != null;
-        this.atTime = parts[1];
+        this.Time = parts[1];
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + atDate.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
-                + " " + atTime + ") \n";
+        return "[E]" + super.toString() + " (at: " + Date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
+                + " " + Time + ")";
     }
 }
