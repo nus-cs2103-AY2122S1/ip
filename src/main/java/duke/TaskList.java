@@ -7,93 +7,52 @@ import java.util.ArrayList;
 /**
  * Represents the list of Tasks for Duke.
  */
-public class TaskList {
-    private ArrayList<Task> tasks;
-
+public class TaskList extends DukeList {
     /**
      * Constructor for TaskList.
      */
     public TaskList() {
-        this.tasks = new ArrayList<>();
+        super();
     }
 
     /**
-     * Constructor for TaskList, setting tasks to a given list.
+     * Constructor for TaskList.
      *
-     * @param list List to be assigned to tasks.
+     * @param list List to be assigned to taskArrayList in DukeList.
      */
     public TaskList(ArrayList<Task> list) {
-        this.tasks = list;
+        super(list);
     }
 
     /**
-     * Adds a new Task to tasks.
-     *
-     * @param toAdd Task to add to tasks.
-     */
-    public void add(Task toAdd) {
-        this.tasks.add(toAdd);
-    }
-
-    /**
-     * Getter for tasks.
+     * Getter for taskArrayList.
      *
      * @return tasks.
      */
     public ArrayList<Task> getTasks() {
-        return this.tasks;
+        return super.getTaskArrayList();
     }
 
     /**
-     * Removes Task from given index from tasks.
-     *
-     * @param index Index of Task to remove from tasks.
-     * @return The removed Task.
-     */
-    public Task remove(int index) {
-        return this.tasks.remove(index);
-    }
-
-    /**
-     * Gets the size of tasks.
-     *
-     * @return Size of tasks.
-     */
-    public int getSize() {
-        return this.tasks.size();
-    }
-
-    /**
-     * Converts Task of a given index in tasks into its String representation.
-     *
-     * @param index Index of Task to get the String representation.
-     * @return String representation of Task in tasks with given index.
-     */
-    public String taskToString(int index) {
-        return this.tasks.get(index).toString();
-    }
-
-    /**
-     * Converts Task of a given index in tasks to its String representation to save.
-     *
-     * @param index Index of Task to get the String representation to save.
-     * @return String representation of Task in tasks with given index.
-     */
-    public String taskSaveToString(int index) {
-        return this.tasks.get(index).convertToString();
-    }
-
-    /**
-     * Marks Task at given index in tasks as done.
+     * Marks Task at given index in taskArrayList as done.
      *
      * @param index Index of Task to mark as done.
      */
     public void markAsDone(int index) {
-        this.tasks.get(index).markAsDone();
+        super.get(index).markAsDone();
     }
 
     /**
-     * Finds tasks with given keyword in tasks.
+     * Marks all the Tasks in taskArrayList as done.
+     */
+    public void markAllAsDone() {
+        for (int i = 0; i < this.getSize(); i++) {
+            markAsDone(i);
+        }
+    }
+
+    /**
+     * Finds tasks with given keyword in taskArrayList.
      *
      * @param keyword Keyword of tasks we want to find.
      * @return TaskList of Tasks with given keyword.
@@ -101,9 +60,9 @@ public class TaskList {
     public TaskList findTasksWithKeyword(String keyword) {
         ArrayList<Task> tasksWithKeyword = new ArrayList<>();
 
-        for (int i = 0; i < this.tasks.size(); i++) {
-            if (this.tasks.get(i).hasKeyword(keyword)) {
-                tasksWithKeyword.add(this.tasks.get(i));
+        for (int i = 0; i < super.getSize(); i++) {
+            if (super.get(i).hasKeyword(keyword)) {
+                tasksWithKeyword.add(super.get(i));
             }
         }
 
@@ -111,12 +70,27 @@ public class TaskList {
     }
 
     /**
-     * Converts TaskList object into its String representation.
+     * Archives Task at given index of taskArrayList.
      *
-     * @return String representation of TaskList object.
+     * @param index Index of Task to be archived.
+     * @param archiveList ArchiveList to add the Task to.
+     * @return Task which was archived.
+     */
+    public Task archive(int index, ArchiveList archiveList) {
+        Task toArchive = this.remove(index);
+
+        archiveList.add(toArchive);
+
+        return toArchive;
+    }
+
+    /**
+     * Gets the type of list.
+     *
+     * @return "list".
      */
     @Override
-    public String toString() {
-        return tasks.toString();
+    public String type() {
+        return "list";
     }
 }

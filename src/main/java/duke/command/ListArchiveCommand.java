@@ -5,45 +5,32 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-/**
- * Representation of the list command of Duke.
- */
-public class ListCommand extends Command {
-
+public class ListArchiveCommand extends ListCommand {
     /**
-     * Checks if this is an exit command.
+     * Executes the ListArchiveCommand.
      *
-     * @return false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
-     * Executes the ListCommand.
-     *
-     * @param taskList TaskList of Tasks to be listed.
-     * @param archiveList ArchiveList to store archived tasks.
+     * @param taskList TaskList of Tasks which are unarchived.
+     * @param archiveList ArchiveList of Tasks to be listed.
      * @param ui Ui to print to users of Duke.
      * @param storage Storage to save and load TaskList of Duke.
      */
     @Override
     public void execute(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
-        ui.print(taskList);
+        ui.print(archiveList);
     }
 
     /**
      * Gets the String representation of the things printed in the
-     * execute method as well as execute list command.
+     * execute method as well as execute list archive command.
      *
-     * @param taskList TaskList of Tasks to be listed.
-     * @param archiveList ArchiveList to store archived tasks.
+     * @param taskList TaskList of Tasks which are unarchived.
+     * @param archiveList ArchiveList of Tasks to be listed.
      * @param ui Ui to get the String representation of the text printed.
      * @param storage Storage to save and load TaskList of Duke.
+     * @return
      */
     @Override
     public String getExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
-        return ui.getPrintString(taskList);
+        return ui.getPrintString(archiveList);
     }
 }

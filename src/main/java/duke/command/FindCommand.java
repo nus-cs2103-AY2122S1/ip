@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.ArchiveList;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -34,11 +35,12 @@ public class FindCommand extends Command {
      * Executes the FindCommand.
      *
      * @param taskList TaskList object to find keyword from.
+     * @param archiveList ArchiveList to store archived tasks.
      * @param ui Ui Object to print to user.
      * @param storage Storage object which saves and loads the tasklist.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
         TaskList keywordTasks = taskList.findTasksWithKeyword(this.keyword);
         ui.printKeywordTasks(keywordTasks, this.keyword);
     }
@@ -48,11 +50,12 @@ public class FindCommand extends Command {
      * execute method as well as execute the finding of the keyword.
      *
      * @param taskList TaskList object to find keyword from.
+     * @param archiveList ArchiveList to store archived tasks.
      * @param ui Ui Object to get the String representation of the text printed.
      * @param storage Storage object which saves and loads the tasklist.
      */
     @Override
-    public String getExecutedString(TaskList taskList, Ui ui, Storage storage) {
+    public String getExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
         TaskList keywordTasks = taskList.findTasksWithKeyword(this.keyword);
         return ui.getPrintKeywordTasksString(keywordTasks, this.keyword);
     }
