@@ -11,6 +11,9 @@ import java.util.Scanner;
  * information when user input is processed.
  */
 public class Ui {
+    private static final String MESSAGE_START = "\n    ***\n";
+    private static final String MESSAGE_END = "    ***\n";
+
     /**
      * Empty constructor for Ui.
      */
@@ -20,13 +23,14 @@ public class Ui {
      * Prints out the welcome message upon starting Duke.
      */
     public static String welcomeMessage() {
+        final String startOfWelcomeMessage = "Welcome to Ben's. How may I help you?\n";
         String filePath = "data/duke.txt";
         Path storagePath = Paths.get(".", filePath);
         if (!Files.exists(storagePath)) {
-            return "Welcome to Ben's. How may I help you?\n" + firstTimeMessage()
+            return startOfWelcomeMessage + firstTimeMessage()
                     + importantMessage();
         } else {
-            return "Welcome to Ben's. How may I help you?\n" + Storage.printStartingFileContents()
+            return startOfWelcomeMessage + Storage.printStartingFileContents()
                     + importantMessage();
         }
     }
@@ -72,8 +76,8 @@ public class Ui {
      * Display message for an empty list.
      */
     public static String emptyListMessage() {
-       return ("\n    ***\n" + "    There is currently nothing in the list. \n" +
-                "    ***\n");
+       return (MESSAGE_START + "    There is currently nothing in the list. \n" +
+                MESSAGE_END);
     }
 
     /**
@@ -83,7 +87,7 @@ public class Ui {
      */
     public static String getCurrentTasks(ArrayList<Task> contents) {
         int counter = 1;
-        String output = "\n    ***\n" + "    These are your tasks in the list:\n";
+        String output = MESSAGE_START + "    These are your tasks in the list:\n";
         for (Task x: contents) {
             if (x.wasSaved) {
                 output += "      " + counter + ". " + x + "\n";
@@ -92,7 +96,7 @@ public class Ui {
                 counter++;
             }
         }
-        output += "    ***\n";
+        output += MESSAGE_END;
         return output;
     }
 
@@ -102,8 +106,8 @@ public class Ui {
      * @param task Task that was completed by the user.
      */
     public static String markTaskMessage(Task task) {
-        return "\n    ***\n" + "    You have successfully done this task:\n" +
-                "      " + task.getStatusIcon() + " " + task.getDescription() + "\n    ***\n";
+        return MESSAGE_START + "    You have successfully done this task:\n" +
+                "      " + task.getStatusIcon() + " " + task.getDescription() + MESSAGE_END;
     }
 
     /**
@@ -115,13 +119,13 @@ public class Ui {
      */
     public static String addTaskMessage(Task task, int count) {
         if (count == 1) {
-            return "\n    ***\n" + "    Understood. Added the task:\n" + "      " +
+            return MESSAGE_START + "    Understood. Added the task:\n" + "      " +
                     task.printTask() + "\n    You now have " + count + " task in the list.\n" +
-                    "    ***\n";
+                    MESSAGE_END;
         } else {
-            return "\n    ***\n" + "    Understood. Added the task:\n" + "      " +
+            return MESSAGE_START + "    Understood. Added the task:\n" + "      " +
                     task.printTask() + "\n    You now have " + count + " tasks in the list.\n" +
-                    "    ***\n";
+                    MESSAGE_END;
         }
     }
 
@@ -131,8 +135,8 @@ public class Ui {
      * @param task Task removed by the user.
      */
     public static String removeTaskMessage(Task task) {
-        return "\n    ***\n" + "    You have successfully removed this task:\n" +
-                "      " + task.getStatusIcon() + " " + task.getDescription() + "\n    ***\n";
+        return MESSAGE_START + "    You have successfully removed this task:\n" +
+                "      " + task.getStatusIcon() + " " + task.getDescription() + MESSAGE_END;
     }
 
     /**
@@ -153,11 +157,11 @@ public class Ui {
      */
     public static String searchList(ArrayList<Task> matchingContents) {
         int counter = 1;
-        String output = "\n    ***\n" + "    Here are the matching tasks in your list:\n";
+        String output = MESSAGE_START + "    Here are the matching tasks in your list:\n";
         for (Task x: matchingContents) {
             output += "      " + counter + ". " + x.printTask() + "\n";
         }
-        output += "    ***\n";
+        output += MESSAGE_END;
         return output;
     }
 
@@ -191,5 +195,33 @@ public class Ui {
      */
     public static String goodbyeMessage() {
         return "\nGoodbye! Have a nice day. :)";
+    }
+
+    /**
+     * Displays an error message when user inputs a number larger than the list.
+     */
+    public static String numberOutsideOfArrayBounds() {
+        return "Invalid number - Number is not within list count.";
+    }
+
+    /**
+     * Displays a error message when user has invalid input for done.
+     */
+    public static String invalidDoneInput() {
+        return "Invalid input. Requires a number after done (e.g. done 1).";
+    }
+
+    /**
+     * Displays a error message when user has invalid input for delete.
+     */
+    public static String invalidDeleteInput() {
+        return "Invalid input. Requires a number after delete (e.g. delete 1).";
+    }
+
+    /**
+     * Displays a error message when user has invalid input for find.
+     */
+    public static String invalidFindInput() {
+        return "Invalid input. Requires a number after find (e.g. find 1).";
     }
 }

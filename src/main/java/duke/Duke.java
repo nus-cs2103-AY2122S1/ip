@@ -27,6 +27,7 @@ import javafx.stage.Stage;
  */
 public class Duke extends Application {
 
+    /** Fields for GUI **/
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -40,7 +41,7 @@ public class Duke extends Application {
     private static Storage storage;
 
     /** The list of tasks given to Duke (if any). **/
-    private TaskList TASKS;
+    private static TaskList TASKS;
 
     /**
      * Constructor for Duke.
@@ -51,14 +52,18 @@ public class Duke extends Application {
         storage = new Storage(filePath);
         try {
             Path storagePath = Paths.get(".", filePath);
+
+            // Creating new parent directory if does not exist
             File dukeFile = new File(filePath);
             File parentDir = dukeFile.getParentFile();
             if (!parentDir.exists()) {
                 parentDir.mkdirs();
             }
+
             if (!Files.exists(storagePath)) {
                 Files.createFile(storagePath);
             }
+
             TASKS = new TaskList(storage.load());
         } catch (IOException e) {
             System.out.println("Failed to create storage file: " +
@@ -85,6 +90,11 @@ public class Duke extends Application {
         return "Baba the Duke says: \n" + Parser.evaluateUserInput(input);
     }
 
+    /**
+     * Sets up the 'stage' for the GUI of Duke.
+     *
+     * @param stage the stage used to setup the GUI.
+     */
     @Override
     public void start(Stage stage) {
         // Setting up required components

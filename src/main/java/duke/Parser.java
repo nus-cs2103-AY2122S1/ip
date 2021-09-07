@@ -21,28 +21,33 @@ public class Parser {
      * @param userInput what the user inputted into Duke.
      */
     public static String evaluateUserInput(String userInput) {
-        if (!userInput.equals("bye")) {
-            if (userInput.equals("list")) {
-                return TaskList.printList();
-            } else if (userInput.startsWith("done") || userInput.startsWith("delete")) {
-                try {
-                    if (userInput.startsWith("done")) {
-                        return TaskList.markTaskDone(userInput);
-                    } else {
-                        return TaskList.removeTask(userInput);
-                    }
-                } catch (StringIndexOutOfBoundsException e) {
-                    return "Invalid input. Requires a number after done (e.g. done 1).";
-                } catch (ArrayIndexOutOfBoundsException f) {
-                    return "Invalid number - Number is larger than list count.";
-                }
-            } else if (userInput.startsWith("find")) {
-                return TaskList.findTask(userInput);
-            } else {
-                return TaskList.addTask(userInput);
-            }
+        boolean isQuitDuke = userInput.equals("bye");
+        boolean isListRequest = userInput.equals("list");
+        boolean isTaskCompleted = userInput.startsWith("done");
+        boolean isRemoveTask = userInput.startsWith("delete");
+        boolean isFindTask = userInput.startsWith("find");
+
+        if (isQuitDuke) {
+            TaskList.markTasksSaved();
+            return Ui.goodbyeMessage();
         }
-        TaskList.markTasksSaved();
-        return Ui.goodbyeMessage();
+
+        if (isListRequest) {
+            return TaskList.printList();
+        }
+
+        if (isTaskCompleted) {
+            return TaskList.markTaskDone(userInput);
+        }
+
+        if (isRemoveTask) {
+            return TaskList.removeTask(userInput);
+        }
+
+        if (isFindTask) {
+            return TaskList.findTask(userInput);
+        }
+
+        return TaskList.addTask(userInput);
     }
 }
