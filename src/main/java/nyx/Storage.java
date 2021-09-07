@@ -7,6 +7,12 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+import nyx.task.Deadline;
+import nyx.task.Event;
+import nyx.task.Task;
+import nyx.task.TaskList;
+import nyx.task.ToDo;
+
 /**
  * Deals with loading tasks from and saving tasks into the hard disk.
  */

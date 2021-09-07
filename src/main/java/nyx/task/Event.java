@@ -1,4 +1,4 @@
-package nyx;
+package nyx.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

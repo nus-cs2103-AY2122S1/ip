@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
+import nyx.task.*;
 import org.junit.jupiter.api.Test;
 
 public class TaskListTest {

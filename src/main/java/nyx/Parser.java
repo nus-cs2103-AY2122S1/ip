@@ -3,6 +3,12 @@ package nyx;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import nyx.task.Deadline;
+import nyx.task.Event;
+import nyx.task.Task;
+import nyx.task.TaskList;
+import nyx.task.ToDo;
+
 /**
  * Deals with making sense of the user input.
  */

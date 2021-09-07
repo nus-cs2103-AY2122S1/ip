@@ -1,5 +1,7 @@
 package nyx;
 
+import nyx.task.TaskList;
+
 /**
  * Entry point of the Nyx chatbot application.
  */
