@@ -142,6 +142,15 @@ public class TaskList {
         return result;
     }
 
+    /**
+     * Updates the date of a {@code Task} in the tasklist.
+     *
+     * @param taskNo Index of {@code Task} to be updated.
+     * @param date   New date of the {@code Task}
+     *
+     * @return Updated Task
+     * @throws DukeException Invalid taskNo
+     */
     public Task updateDate(int taskNo, String date) throws DukeException {
         try {
             Task task = tasks.get(taskNo);
@@ -151,6 +160,15 @@ public class TaskList {
         }
     }
 
+    /**
+     * Updates the title of a {@code Task} in the tasklist.
+     *
+     * @param taskNo Index of {@code Task} to be updated.
+     * @param title  New title of the {@code Task}
+     *
+     * @return Updated Task
+     * @throws DukeException Invalid taskNo
+     */
     public Task updateTitle(int taskNo, String title) throws DukeException {
         try {
             Task task = tasks.get(taskNo);
@@ -160,6 +178,15 @@ public class TaskList {
         }
     }
 
+    /**
+     * Updates the title and date of a {@code Task} in the tasklist.
+     *
+     * @param taskNo Index of {@code Task} to be updated.
+     * @param title  New title of the {@code Task}
+     * @param date   New date of the {@code Task}
+     * @return Updated Task
+     * @throws DukeException Invalid taskNo
+     */
     public Task updateDateTitle(int taskNo, String title, String date) {
         Task updatedDateTask = updateDate(taskNo, date);
         return updatedDateTask.setTitle(title);

@@ -105,9 +105,9 @@ public class Ui {
         if (tasks.isEmpty()) {
             message.add("Nothing in the list!");
         } else {
-            message = IntStream.range(0, tasks.size()).
-                    mapToObj(i -> String.format("%d. %s", i + 1, tasks.get(i).toString())).
-                    collect(Collectors.toCollection(ArrayList::new));
+            message = IntStream.range(0, tasks.size())
+                    .mapToObj(i -> String.format("%d. %s", i + 1, tasks.get(i).toString()))
+                    .collect(Collectors.toCollection(ArrayList::new));
         }
         return printMessage(message);
     }

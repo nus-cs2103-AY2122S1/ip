@@ -6,16 +6,37 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
+/**
+ * This class represents a {@code UpdateCommand}. User input for a
+ * {@code UpdateCommand} starts with "update".
+ *
+ * @author Elizabeth Chow
+ */
 public class UpdateCommand extends Command {
-    public enum UpdateType {TITLE, DATE, DATE_TITLE}
+    public enum UpdateType { TITLE, DATE, DATE_TITLE }
 
-    UpdateType updateType;
+    private UpdateType updateType;
 
+    /**
+     * Constructor for a {@code UpdateCommand}
+     *
+     * @param type        Type of update
+     * @param taskNo      String representation of the task number.
+     * @param description Either a new date or description of a {@code Task}
+     */
     public UpdateCommand(UpdateType type, String taskNo, String description) {
         super(taskNo, description);
         this.updateType = type;
     }
 
+    /**
+     * Constructor for a {@code UpdateCommand}
+     *
+     * @param type        Type of update
+     * @param taskNo      String representation of the task number.
+     * @param description New description of a {@code Task}
+     * @param deadline    New date of a {@code Task}
+     */
     public UpdateCommand(UpdateType type, String taskNo, String description, String deadline) {
         super(taskNo, description, deadline);
         this.updateType = type;
