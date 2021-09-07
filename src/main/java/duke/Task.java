@@ -30,7 +30,8 @@ public class Task {
      * @param date String input by user.
      */
     protected void parseDate(String date) {
-        int[] dateArgs = Arrays.stream(date.split("-")).mapToInt(Integer::parseInt).toArray();
+        String[] dateStrings = date.split("-");
+        int[] dateArgs = Arrays.stream(dateStrings).mapToInt(Integer::parseInt).toArray();
         this.date = LocalDate.of(dateArgs[0], dateArgs[1], dateArgs[2]);
     }
 
