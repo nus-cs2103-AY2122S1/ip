@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * This class deals with making sense of the user input/command
  * when using Duke.
