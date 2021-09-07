@@ -2,13 +2,14 @@ package duke;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
+    private StackPane stackPane;
     private Duke duke = new Duke("data/duke.txt");
 
     public static void main(String[] args) {
@@ -17,7 +18,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        MainWindow mw = new MainWindow();
+        MainWindow mw = new MainWindow(stage);
         Scene scene = new Scene(mw);
         stage.setScene(scene);
         stage.setTitle("Duke");
