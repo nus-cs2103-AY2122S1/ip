@@ -19,6 +19,9 @@ import javafx.scene.layout.VBox;
  * The main window where Duke interaction occurs.
  */
 public class MainWindow extends AnchorPane {
+
+    public static final String FXML_STRING_PATH = "/view/MainWindow.fxml";
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -60,32 +63,49 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        CommandResult response;
+        CommandResult dukeResponse;
         try {
-            response = duke.getResponse(input);
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response.getFeedbackResult(), dukeImage)
-            );
-            if (response.isExit()) {
-                duke.save();
-                dialogContainer.getChildren().addAll(
-                        DialogBox.getUserDialog(input, userImage),
-                        DialogBox.getDukeDialog("Bye. Hope to see you again soon!", dukeImage)
-                );
-                new Timer().schedule(new TimerTask() {
-                    public void run () {
-                        Platform.exit();
-                    }
-                }, 1000);
-                System.exit(0);
+            dukeResponse = duke.getResponse(input);
+            runDialogContainer(input, dukeResponse);
+            if (dukeResponse.isExit()) {
+                runExitDialogContainer();
             }
         } catch (DukeException e) {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(e.getMessage(), dukeImage)
-            );
+            runDialogContainer(input, e.getMessage());
         }
         userInput.clear();
+    }
+
+    private void runDialogContainer(String input, CommandResult commandResult) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(commandResult.getFeedbackResult(), dukeImage)
+        );
+    }
+
+    private void runDialogContainer(String input, String dukeInput) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(dukeInput, dukeImage)
+        );
+    }
+
+    private void runExitDialogContainer() throws DukeException {
+        duke.save();
+        runDialogContainer("", "Bye. Hope to see you again soon!");
+        schedulePlatformExitTimer();
+        exitSystem();
+    }
+
+    private void schedulePlatformExitTimer() {
+        new Timer().schedule(new TimerTask() {
+            public void run () {
+                Platform.exit();
+            }
+        }, 1000);
+    }
+
+    private void exitSystem() {
+        System.exit(0);
     }
 }

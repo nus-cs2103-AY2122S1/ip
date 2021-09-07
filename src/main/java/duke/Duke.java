@@ -19,13 +19,13 @@ public class Duke {
      * A constructor method that creates the driver, with the default storage file path used.
      */
     public Duke() {
-        this.list = new TaskList();
+        setTaskList(new TaskList());
         this.storage = Storage.createStorage();
         assert new File(Storage.DEFAULT_FILE_PATH).exists();
         try {
-            this.list = this.storage.load(this.list);
+            loadTaskListFromStorage();
         } catch (DukeException e) {
-            System.out.println("DB file is corrupted.\n" + e.getMessage());
+            printLoadIssueMessage(e);
         }
     }
 
@@ -34,13 +34,13 @@ public class Duke {
      * @param filePath the filepath of the file.
      */
     public Duke(String filePath) {
-        this.list = new TaskList();
+        setTaskList(new TaskList());
         this.storage = Storage.createStorage(filePath);
         assert new File(filePath).exists();
         try {
-            this.list = this.storage.load(this.list);
+            loadTaskListFromStorage();
         } catch (DukeException e) {
-            System.out.println("DB file is corrupted.\n" + e.getMessage());
+            printLoadIssueMessage(e);
         }
     }
 
@@ -55,5 +55,17 @@ public class Duke {
 
     public void save() throws DukeException {
         this.storage.save(this.list);
+    }
+
+    private void setTaskList(TaskList taskList) {
+        this.list = taskList;
+    }
+
+    private void loadTaskListFromStorage() throws DukeException {
+        setTaskList(this.storage.load(this.list));
+    }
+
+    private void printLoadIssueMessage(DukeException e) {
+        System.out.println(Storage.LOAD_ISSUE_MESSAGE + e.getMessage());
     }
 }
