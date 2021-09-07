@@ -73,7 +73,7 @@ public class Storage {
         }
         try {
             FileWriter listEditor = new FileWriter("./data/duke.txt");
-            for (Task item: taskList.tasks) {
+            for (Task item: taskList.getTasks()) {
                 if (item != null) {
                     listEditor.write(item.toString());
                     listEditor.write("\n");

@@ -5,16 +5,27 @@ import java.util.ArrayList;
  * Stores the list of tasks in an array list. This list can then be altered based on the user's inputs
  */
 public class TaskList {
-    public ArrayList<Task> tasks;
-    public int count;
+    private ArrayList<Task> tasks;
+    private int count;
 
+    /**
+     * Constructor for an empty tasklist, used when the user first launches the program
+     */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
         this.count = 0;
     }
+
+    /**
+     * Constructor for a tasklist with items
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
         this.count = tasks.size();
+    }
+
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
     }
 
     /**
@@ -59,7 +70,7 @@ public class TaskList {
     public String addDeadlineTask(String in, int i) {
         String output = "Got it. I've added this task: \n";
         tasks.add(new DeadlineTask(in.substring(9, i), in.substring(i + 1)));
-        output += tasks.get(tasks.size()-1) + "\n";
+        output += tasks.get(tasks.size() - 1) + "\n";
         if (tasks.size() == 1) {
             output += "Now you have " + tasks.size() + " task in the list.";
         } else {
@@ -75,7 +86,7 @@ public class TaskList {
     public String addToDoTask(String in) {
         String output = "Got it. I've added this task: \n";
         tasks.add(new ToDoTask(in.substring(5)));
-        output += tasks.get(tasks.size()-1) + "\n";
+        output += tasks.get(tasks.size() - 1) + "\n";
         if (tasks.size() == 1) {
             output += "Now you have " + tasks.size() + " task in the list.";
         } else {
