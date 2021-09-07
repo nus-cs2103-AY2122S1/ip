@@ -73,7 +73,8 @@ public class Storage {
                 String completionStatus = tokens[1];
                 String taskDescription = tokens[2];
 
-                assert (taskType.contains("D") || taskType.contains("E") || taskType.contains("T")) : "Data Corrupt in File";
+                assert (taskType.contains("D") || taskType.contains("E") || taskType.contains("T"))
+                        : "Data Corrupt in File";
 
                 // Checking the type of task.
                 if (taskType.contains("D")) {

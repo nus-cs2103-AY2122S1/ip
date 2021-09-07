@@ -51,7 +51,6 @@ public class Parser {
         // Parsing the user input.
         String[] userInput = userCommand.split(" ");
         String commandEntered = userInput[0].toLowerCase();
-        
         assert commandEntered != null : "Command is Null";
 
         switch (commandEntered) {
