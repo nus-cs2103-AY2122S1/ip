@@ -25,7 +25,7 @@ public class Storage {
      */
     public TaskList readFromDatabase() {
         String dukeLocation = System.getProperty("user.dir");
-        Path filePath = Paths.get(dukeLocation, "data", "tasks");
+        Path filePath = Paths.get(dukeLocation, "data", "tasks.txt");
 
         if (!Files.isRegularFile(filePath)) {
             return new TaskList(new ArrayList<>());
@@ -64,13 +64,13 @@ public class Storage {
     public void writeToDatabase(TaskList taskList) {
         String dukeLocation = System.getProperty("user.dir");
         Path folderPath = Paths.get(dukeLocation, "data");
-        Path filePath = Paths.get(dukeLocation, "data", "tasks");
+        Path filePath = Paths.get(dukeLocation, "data", "tasks.txt");
 
         StringBuilder save = new StringBuilder();
 
         taskList
             .stream()
-            .forEach(x -> save.append(x.taskToString()).append(System.lineSeparator()));
+            .forEach(x -> save.append(x.convertToDatabaseFormat()).append(System.lineSeparator()));
         byte[] saveResult = save.toString().getBytes();
 
         System.out.println("Saving tasks  - " + filePath);
@@ -93,7 +93,7 @@ public class Storage {
     private static Consumer<String> convertToTaskAndAppendTo(ArrayList<Task> taskArr, ArrayList<String> failedParses) {
         return taskString -> {
             try {
-                Task task = Task.stringToTask(taskString);
+                Task task = Task.parseTaskFromDatabase(taskString);
                 taskArr.add(task);
             } catch (IllegalArgumentException e) {
                 failedParses.add(taskString);
