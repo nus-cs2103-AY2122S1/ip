@@ -1,4 +1,11 @@
+<<<<<<< HEAD:src/main/java/duke/task/Event.java
 package duke.task;
+=======
+package IP.duke.task;
+
+import IP.duke.main.Date;
+import IP.duke.main.DukeException;
+>>>>>>> Branch-A-Varags:src/main/java/IP/duke/task/Event.java
 
 import java.text.ParseException;
 import java.time.format.DateTimeParseException;
@@ -16,21 +23,35 @@ public class Event extends Task {
     private final String TASK_KEYWORD = "event ";
     private final String AT_KEYWORD = "at ";
     private String taskDescription;
+<<<<<<< HEAD:src/main/java/duke/task/Event.java
     private String eventDate;
     private Date dueDate;
 
+=======
+    private Date eventDate;
+    private final String TASK_KEYWORD = "event ";
+    private final String AT_KEYWORD = "at ";
+    
+>>>>>>> Branch-A-Varags:src/main/java/IP/duke/task/Event.java
     /**
      * Class constructor.
      *
      * @param description consisting of duke.task description and timing.
      */
-    public Event(String description) throws DateTimeParseException {
+    public Event(String description) throws DukeException {
         super();
         int startingIndex = description.indexOf(TASK_KEYWORD) + TASK_KEYWORD.length();
         int startOfTimeIndex = description.indexOf(AT_KEYWORD);
+<<<<<<< HEAD:src/main/java/duke/task/Event.java
         taskDescription = description.substring(startingIndex, startOfTimeIndex - 1);
         eventDate = description.substring(startOfTimeIndex + AT_KEYWORD.length());
         this.dueDate = new Date(eventDate);
+=======
+        taskDescription = description.substring(startingIndex, startOfTimeIndex - 1);   
+        String descriptionDate = description.substring(startOfTimeIndex + AT_KEYWORD.length());
+        String[] dateComponent = descriptionDate.split("/");
+        this.eventDate = new Date(dateComponent);
+>>>>>>> Branch-A-Varags:src/main/java/IP/duke/task/Event.java
     }
 
     /**
@@ -40,9 +61,9 @@ public class Event extends Task {
      * @param dateOfTask       date of the event duke.task.
      * @throws ParseException due to improper date format.
      */
-    public Event(String eventDescription, String dateOfTask) throws ParseException {
+    public Event(String eventDescription, String dateOfTask) throws DukeException {
         taskDescription = eventDescription;
-        dueDate = Date.convertDateStringToDate(dateOfTask);
+        eventDate = Date.convertDateStringToDate(dateOfTask);
     }
 
     /**
@@ -54,7 +75,11 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[%s]%s %s (at: %s)", TASK_MARKER, super.toString(), taskDescription,
+<<<<<<< HEAD:src/main/java/duke/task/Event.java
             dueDate.toString());
+=======
+            eventDate.toString());
+>>>>>>> Branch-A-Varags:src/main/java/IP/duke/task/Event.java
     }
 
     /**
@@ -64,7 +89,11 @@ public class Event extends Task {
      */
     public String formatToStore() {
         return String.format("%s | %s | %s | %s", TASK_MARKER, getStatusIcon() == " " ? 1 : 0,
+<<<<<<< HEAD:src/main/java/duke/task/Event.java
             taskDescription, dueDate.toString());
+=======
+                taskDescription, eventDate.toString());
+>>>>>>> Branch-A-Varags:src/main/java/IP/duke/task/Event.java
     }
 
     /**
@@ -84,6 +113,6 @@ public class Event extends Task {
      */
     @Override
     public boolean isSameDate(String dateString) {
-        return this.dueDate.isSameDate(dateString);
+        return this.eventDate.isSameDate(dateString);
     }
 }

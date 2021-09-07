@@ -2,6 +2,7 @@ package duke.task;
 
 import duke.main.DukeException;
 
+
 /**
  * Represents a todo duke.task.
  *
@@ -21,6 +22,7 @@ public class Todo extends Task {
      * @throws DukeException cause by exception handled in DukeException class.
      */
     public Todo(String description) throws DukeException {
+        super();
         try {
             if (!description.contains("todo")) {
                 throw new IllegalArgumentException();

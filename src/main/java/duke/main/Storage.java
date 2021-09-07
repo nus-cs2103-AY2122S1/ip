@@ -75,7 +75,7 @@ public class Storage {
                         t = new Event(task, time);
                     } else {
                         String taskDescription = line.substring(startingIndex);
-                        t = new Todo(taskDescription, "");
+                        t = new Todo(taskDescription);
                     }
                     if (line.contains("| 0 |")) {
                         t.markAsDone();
@@ -87,8 +87,6 @@ public class Storage {
             }
         } catch (IOException e) {
             file = new File(filePath);
-            throw new DukeException(e);
-        } catch (ParseException e) {
             throw new DukeException(e);
         }
         return tasks;

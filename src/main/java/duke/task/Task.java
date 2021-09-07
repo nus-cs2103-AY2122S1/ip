@@ -1,4 +1,8 @@
+<<<<<<< HEAD:src/main/java/duke/task/Task.java
 package duke.task;
+=======
+package IP.duke.task;
+>>>>>>> Branch-A-Varags:src/main/java/IP/duke/task/Task.java
 
 /**
  * Represents a duke.task which can be marked done.

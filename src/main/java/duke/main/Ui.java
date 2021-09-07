@@ -100,6 +100,7 @@ public class Ui {
     }
 
     /**
+<<<<<<< HEAD:src/main/java/duke/main/Ui.java
      * Displays the duke.task deleted.
      *
      * @param task              the deleted duke.task.
@@ -107,6 +108,15 @@ public class Ui {
      */
     public void showTaskDeleted(Task task, int numTasksRemaining) {
         String deletionMessage = "Alrightty, I've removed this duke.task:";
+=======
+     * Displays the task deleted.
+     * 
+     * @param task the deleted task.
+     * @param numTasksRemaining number of tasks after deleting the task.
+     */
+    public void showTaskDeleted(Task task, int numTasksRemaining) {
+        String deletionMessage = "Alrighty, I've removed this task:";
+>>>>>>> Branch-A-Varags:src/main/java/IP/duke/main/Ui.java
         System.out.println(deletionMessage);
         String deletedTask = String.format("~~%s~~", task.toString());
         System.out.println(deletedTask);
