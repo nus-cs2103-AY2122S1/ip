@@ -79,7 +79,7 @@ public class Parser {
                 }
             }
         } catch (DukeException e) {
-            return "OOPS!!! I'm sorry, but I don't know what that means :-(";
+            return e.getMessage();
         }
     }
 }
