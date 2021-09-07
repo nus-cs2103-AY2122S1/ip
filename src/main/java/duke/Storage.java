@@ -29,7 +29,7 @@ public class Storage {
      */
     public void loadTasksFromFile(TaskList tasks) {
         if (tasks.getTasksLength() == 0) {
-            File f = new File(this.filePath);
+            File f = new File(filePath);
             Scanner s = null;
             try {
                 s = new Scanner(f);
