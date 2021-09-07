@@ -37,10 +37,6 @@ public abstract class Parser {
         String originalInput = String.join(" ", words);
         String[] temp = originalInput.split("/", 2);
 
-        for(int i = 0; i < temp.length; i++) {
-            System.out.println(temp[i]);
-        }
-
         String[] typeAndLabel = temp[0].split(" ");
         String[] prefixAndDate = temp[1].split(" ");
 
@@ -84,10 +80,7 @@ public abstract class Parser {
 
         //control block for multi word commands
         //function call is a guard block. Command should have more than one word to reach this point.
-        checkDescription(words); //I found the problem! checkDescription throws an error but the error
-        //is not being printed to the user. So invalid commands like "asdfasd" wasnt caught, but
-        //invalid commands like "asdfas asdfasfds" was caught.
-        System.out.println("stack trace 1");
+        checkDescription(words);
         switch(words[0]) {
         case "find":
             return new FindCommand(generateLabel(words));
