@@ -17,8 +17,9 @@ public class Ui {
     private static final String ADD_FORMAT = "Got it. I've  added this task:\n  %s";
     private static final String ERROR_FORMAT = "☹ OOPS!!! %s";
     private static final String TASK_COUNT_FORMAT = "Now you have %d %s in the list.";
-    private static final String DONE_FORMAT = "Nice! I've marked this task as done:\n %s";
+    private static final String DONE_FORMAT = "Nice! I've marked this task as done:\n  %s";
     private static final String DELETE_FORMAT = "Noted. I've removed this task:\n  %s";
+    private static final String UPDATE_FORMAT = "Nice! I've updated this task:\n  %s";
 
     /**
      * Displays the welcome message when the app starts running.
@@ -79,6 +80,10 @@ public class Ui {
      */
     public String showDoneTask(Task task) {
         return printMessage(String.format(DONE_FORMAT, task));
+    }
+
+    public String showUpdatedTask(Task task) {
+        return printMessage(String.format(UPDATE_FORMAT, task));
     }
 
     /**

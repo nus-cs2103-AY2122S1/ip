@@ -15,7 +15,7 @@ public class Deadline extends Task {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d-M-yyyy H:mm");
     private static final DateTimeFormatter PRINT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy h:mma");
     // End date of the Deadline object
-    private final LocalDateTime endDate;
+    private LocalDateTime endDate;
 
     /**
      * Constructs a {@code Deadline} object with the given title and end date.
@@ -39,6 +39,11 @@ public class Deadline extends Task {
     public Deadline(String title, String endDate, boolean isDone) {
         super(title, isDone);
         this.endDate = parseDateTime(endDate.trim());
+    }
+
+    public Deadline setDate(String endDate) {
+        this.endDate = parseDateTime(endDate);
+        return this;
     }
 
     private LocalDateTime parseDateTime(String date) throws DukeException {

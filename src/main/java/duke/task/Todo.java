@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.DukeException;
+
 /**
  * This class represents a {@code Todo} task.
  *
@@ -25,6 +27,9 @@ public class Todo extends Task {
         super(title, isDone);
     }
 
+    public Todo setDate(String deadline) {
+        throw new DukeException("Cannot update deadline for TODO task.");
+    }
     /**
      * {@inheritDoc} Adds "T |" infront to indicate that it is a {@code Todo} task.
      */

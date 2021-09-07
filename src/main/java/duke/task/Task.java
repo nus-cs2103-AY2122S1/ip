@@ -5,8 +5,8 @@ package duke.task;
  *
  * @author Eizabeth Chow
  */
-public class Task {
-    private final String title;
+public abstract class Task {
+    private String title;
     private boolean isDone = false;
 
     /**
@@ -80,6 +80,13 @@ public class Task {
     public boolean contains(String query) {
         return title.contains(query);
     }
+
+    public Task setTitle(String title) {
+        this.title = title;
+        return this;
+    }
+
+    public abstract Task setDate(String date);
 
     /**
      * Returns a {@code String} containing the description of the {@code Task} to be

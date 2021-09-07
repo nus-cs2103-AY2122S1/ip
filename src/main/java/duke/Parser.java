@@ -1,14 +1,9 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.EventCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.TodoCommand;
+import duke.command.*;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 /**
  * This class represents a {@code Parser}. It parses user inputs.
@@ -45,6 +40,8 @@ public class Parser {
             return parseListInput();
         case "todo":
             return parseTodoInput(parsedMessage);
+        case "update":
+            return parseUpdateInput(parsedMessage);
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
@@ -108,6 +105,35 @@ public class Parser {
     private static Command parseTodoInput(String input) {
         validateDescription(input, "todo");
         return new TodoCommand(input);
+    }
+
+    private static Command parseUpdateInput(String input) {
+        try {
+            validateDescription(input, "update");
+            String[] splitInputs = input.split(" ", 2);
+            String[] splitTaskTitleDate = splitInputs[1].split("/date", 2);
+
+            int taskNo = Integer.parseInt(splitInputs[0]) - 1;
+
+            if (splitTaskTitleDate.length == 1) {
+                return new UpdateCommand(UpdateCommand.UpdateType.TITLE, String.valueOf(taskNo),
+                        splitTaskTitleDate[0].trim());
+            } else if (splitTaskTitleDate.length == 2 && splitTaskTitleDate[0].equals("")) {
+                return new UpdateCommand(UpdateCommand.UpdateType.DATE, String.valueOf(taskNo),
+                        splitTaskTitleDate[1].trim());
+            } else {
+                return new UpdateCommand(UpdateCommand.UpdateType.DATE_TITLE, String.valueOf(taskNo),
+                        splitTaskTitleDate[0].trim(), splitTaskTitleDate[1].trim());
+            }
+        } catch (NumberFormatException e) {
+            throw new DukeException("Enter a number for a update action!");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Invalid format for update command.\n" +
+                    "Only the following formats are accepted:\n" +
+                    "1. update [taskNo] [task title] /date [date]\n" +
+                    "2. update [taskNo] [task title]\n" +
+                    "3. update [taskNo] /date [date]");
+        }
     }
 
     private static void validateDescription(String input, String type) throws DukeException {

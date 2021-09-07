@@ -7,7 +7,7 @@ package duke.task;
  */
 public class Event extends Task {
     // deadline of the Event task
-    private final String deadline;
+    private String deadline;
 
     /**
      * Constructs a {@code Event} object with the given title and deadline.
@@ -30,6 +30,11 @@ public class Event extends Task {
     public Event(String title, String deadline, boolean isDone) {
         super(title, isDone);
         this.deadline = deadline.trim();
+    }
+
+    public Event setDate(String deadline) {
+        this.deadline = deadline;
+        return this;
     }
 
     /**
