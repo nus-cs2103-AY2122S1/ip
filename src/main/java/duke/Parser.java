@@ -82,15 +82,15 @@ public class Parser {
      * @return The description of the task.
      */
     public String findTaskDescription() {
-        StringBuilder taskDesc = new StringBuilder();
+        StringBuilder taskDescription = new StringBuilder();
         for (int i = 1; i < this.currentLine.length; i++) {
             if (this.currentLine[i].equals("/by") || this.currentLine[i].equals("/at")) {
                 break;
             } else {
-                taskDesc.append(this.currentLine[i]).append(" ");
+                taskDescription.append(this.currentLine[i]).append(" ");
             }
         }
-        return taskDesc.toString();
+        return taskDescription.toString();
     }
 }
 

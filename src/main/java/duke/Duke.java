@@ -15,7 +15,7 @@ public class Duke {
     private static final Pattern DATE_PATTERN = Pattern.compile("^((19|2[0-9])[0-9]{2})-(0[1-9]|1[012])-"
             + "(0[1-9]|[12][0-9]|3[01]) ([01]?[0-9]|2[0-3])[0-5][0-9]$");
     private final TaskList tasks;
-    private final DukeUI ui;
+    private final DukeUi ui;
     private final Storage storage;
     private final Parser parser;
     private boolean isRunning;
@@ -24,7 +24,7 @@ public class Duke {
      * Returns a <code>Duke</code> object that can reply to command.
      */
     public Duke() {
-        ui = new DukeUI();
+        ui = new DukeUi();
         storage = new Storage(DATABASE_PATH);
         parser = new Parser();
         isRunning = false;
@@ -134,28 +134,29 @@ public class Duke {
     public String addTask() throws DukeException {
         String firstCommand = this.parser.getFirstCommand();
         String date = this.parser.findDateInCommand();
-        String taskDesc = this.parser.findTaskDescription();
+        Task.TaskType taskType = convertToTaskType(firstCommand);
+        String taskDescription = this.parser.findTaskDescription();
         String aOrAn = firstCommand.equals("event") ? "an" : "a";
-        if (taskDesc.equals("")) {
+        if (taskDescription.equals("")) {
             throw new DukeException("☹ OOPS!!! The description of " + aOrAn + " " + firstCommand + " cannot be empty.");
-        } else if (date.equals("") && convertToTaskType(firstCommand) != Task.TaskType.TODO) {
+        } else if (date.equals("") && taskType != Task.TaskType.TODO) {
             throw new DukeException("☹ OOPS!!! The date of " + aOrAn + " " + firstCommand + " cannot be empty.");
-        } else if (convertToTaskType(firstCommand) == Task.TaskType.DEADLINE
-                || convertToTaskType(firstCommand) == Task.TaskType.EVENT) {
+        } else if (taskType == Task.TaskType.DEADLINE
+                || taskType == Task.TaskType.EVENT) {
             if (DATE_PATTERN.matcher(date).matches()) {
 
                 String[] dateSplit = date.split(" ");
                 String dateString = dateSplit[0];
                 String timeString = dateSplit[1];
                 LocalDate ld = LocalDate.parse(dateString);
-                this.tasks.addTask(taskDesc, convertToTaskType(firstCommand), ld, timeString);
+                this.tasks.addTask(taskDescription, taskType, ld, timeString);
                 this.writeDataToDuke();
                 return this.confirmAdditionOfTask();
             } else {
                 throw new DukeException("You need to put the date in yyyy-mm-dd hhmm format!");
             }
         } else {
-            this.tasks.addTask(taskDesc);
+            this.tasks.addTask(taskDescription);
             this.writeDataToDuke();
             return this.confirmAdditionOfTask();
         }
@@ -198,14 +199,18 @@ public class Duke {
      * @return The TaskType enum of the task.
      */
     public static Task.TaskType convertToTaskType(String command) {
-        if (command.equals("todo")) {
+        switch (command) {
+        case "todo":
             return Task.TaskType.TODO;
-        } else if (command.equals("event")) {
+        case "event":
             return Task.TaskType.EVENT;
-        } else {
+        case "deadline":
             return Task.TaskType.DEADLINE;
+        default:
+            return Task.TaskType.NULL;
         }
     }
+
 
     /**
      * Main method for Duke.
