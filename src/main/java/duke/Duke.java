@@ -39,6 +39,7 @@ public class Duke {
      * @param rawInput The raw input that the user entered into Duke.
      */
     public void handleInput(String rawInput) {
+        assert rawInput != null : "input string should not be null";
         try {
             Command c = CliParser.parseCommand(rawInput.trim());
             c.execute(tasks, ui, storage);
