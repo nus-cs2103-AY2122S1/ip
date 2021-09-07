@@ -24,6 +24,9 @@ public class Lania {
     /** Deals with keeping track of previous commands */
     private Log log;
 
+    /**
+     * Constructor for the chat bot that is invoked by the GUI.
+     */
     public Lania() {
         ui = new Ui();
         storage = new Storage("data/lania.txt");

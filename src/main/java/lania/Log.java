@@ -1,8 +1,8 @@
 package lania;
 
-import lania.task.Task;
-
 import java.util.ArrayList;
+
+import lania.task.Task;
 
 /**
  * The class that deals with storing the history of user commands
@@ -12,12 +12,15 @@ import java.util.ArrayList;
  */
 public class Log {
     /** List of past user commands */
-    ArrayList<String> commandLog;
+    private ArrayList<String> commandLog;
     /** List of past removed tasks */
-    ArrayList<Task> removedTasks;
+    private ArrayList<Task> removedTasks;
     /** List of tasks marked as complete */
-    ArrayList<Integer> doneTasks;
+    private ArrayList<Integer> doneTasks;
 
+    /**
+     * Constructor for Log. Initialises the empty fields.
+     */
     public Log () {
         commandLog = new ArrayList<>();
         removedTasks = new ArrayList<>();

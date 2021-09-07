@@ -40,6 +40,12 @@ public class TaskList {
         assert tasks.get(i).isDone;
     }
 
+    /**
+     * Marks a task in the task list as undone
+     * with the given index.
+     *
+     * @param i The index of the task to be undone.
+     */
     public void unComplete(int i) {
         i--;
         tasks.get(i).markAsUndone();

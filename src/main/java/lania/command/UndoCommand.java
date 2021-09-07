@@ -1,12 +1,12 @@
 package lania.command;
 
+import java.io.IOException;
+
 import lania.Log;
 import lania.Storage;
 import lania.Ui;
 import lania.task.Task;
 import lania.task.TaskList;
-
-import java.io.IOException;
 
 /**
  * The command representing the scenario where the user

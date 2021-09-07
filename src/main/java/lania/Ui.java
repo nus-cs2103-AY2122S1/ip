@@ -97,6 +97,13 @@ public class Ui {
         return message;
     }
 
+    /**
+     * Message that shows after the user undo-es a complete command.
+     *
+     * @param tasks The user's list of tasks.
+     * @param i The index of the task the user has completed.
+     * @return The message displayed to user concatenated as a string.
+     */
     public String showUnCompleteMessage(TaskList tasks, int i) {
         // display to user
         System.out.println("Lania has marked this task as undone:");

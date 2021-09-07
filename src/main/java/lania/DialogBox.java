@@ -1,5 +1,7 @@
 package lania;
 
+import java.io.IOException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,7 +15,6 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
-import java.io.IOException;
 
 //@@author nguyiyang-reused
 //Reused from https://se-education.org/guides/tutorials/javaFx.html

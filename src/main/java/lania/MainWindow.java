@@ -1,5 +1,7 @@
 package lania;
 
+import java.time.format.DateTimeParseException;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
@@ -11,8 +13,6 @@ import lania.command.Command;
 import lania.command.ExitCommand;
 import lania.exception.LaniaException;
 import lania.task.TaskList;
-
-import java.time.format.DateTimeParseException;
 
 //@@author nguyiyang-reused
 //Reused from https://se-education.org/guides/tutorials/javaFx.html
