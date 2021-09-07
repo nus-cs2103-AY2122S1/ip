@@ -96,6 +96,7 @@ public class TaskList {
      * @return String representation of task deleted
      */
     public String deleteFromList(int deleteNumber) {
+        assert deleteNumber >= 0 && deleteNumber < tasks.size();
         Task task = tasks.get(deleteNumber);
         tasks.remove(deleteNumber);
         return ui.showTaskDeleted(task, tasks.size());
@@ -109,6 +110,7 @@ public class TaskList {
      * @return String representation of task set as done
      */
     public String setTaskAsDone(int doneNumber) {
+        assert doneNumber >= 0 && doneNumber < tasks.size();
         Task task = tasks.get(doneNumber);
         task.setDone();
         return ui.showTaskDone(task);

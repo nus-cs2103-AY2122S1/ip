@@ -79,6 +79,8 @@ public class Parser {
             throw new NoTimeException(taskType);
         }
 
+        assert next.length == 2;
+
         return next;
     }
 
@@ -137,6 +139,9 @@ public class Parser {
         }
 
         String[] eventDetail = parseDescriptionAndTime(details, "/at", "event");
+
+        assert eventDetail.length == 2 : "eventDetail should have length of 2";
+
         return taskList.addEventToList(eventDetail[0].trim(), eventDetail[1].trim());
     }
 
@@ -154,6 +159,9 @@ public class Parser {
         }
 
         String[] eventDetail = parseDescriptionAndTime(details, "/by", "deadline");
+
+        assert eventDetail.length == 2 : "deadlineDetail should be length of 2";
+
         return taskList.addDeadlineToList(eventDetail[0].trim(), eventDetail[1].trim());
     }
 
@@ -184,6 +192,8 @@ public class Parser {
             throw new DukeException("No task number entered!");
         }
 
+        assert userInput.length == 2;
+
         int deleteNumber = Integer.parseInt(userInput[1].trim()) - 1;
         boolean isBelowValidIndex = deleteNumber < 0;
         boolean isAboveValidIndex = deleteNumber > taskList.getListLength()-1;
@@ -207,6 +217,8 @@ public class Parser {
         if (userInput.length == 1) {
             throw new DukeException("No task number entered!");
         }
+
+        assert userInput.length == 2;
 
         int doneNumber = Integer.parseInt(userInput[1].trim()) - 1;
         boolean isBelowValidIndex = doneNumber < 0;
@@ -232,8 +244,9 @@ public class Parser {
             throw new NoDescriptionException("todo");
         }
 
-        return taskList.addTodoToList(userInput[1].trim());
+        assert userInput.length == 2;
 
+        return taskList.addTodoToList(userInput[1].trim());
     }
 
 }
