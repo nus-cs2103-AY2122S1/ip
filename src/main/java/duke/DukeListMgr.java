@@ -24,6 +24,8 @@ public class DukeListMgr {
      * @throws DukeExceptionBase when an invalid input is entered.
      */
     public void tdlAdd(String str, BaseTask.TaskType currTaskType) throws DukeExceptionBase {
+        assert (this.toDoList != null) : "Duke internal List is missing!";
+
         BaseTask createdTask;
 
         int indexOfSlash = -1;
@@ -97,6 +99,7 @@ public class DukeListMgr {
      * @throws DukeExceptionBase when an invalid task is specified or if task is already done.
      */
     public String markTaskAsDone(int taskNo) throws DukeExceptionBase {
+        assert (this.toDoList != null) : "Duke internal List is missing!";
         //Task list starts from 1 instead of 0 so input in command is 1 more than
         //the task's index in the list
         int taskIndex = taskNo - 1;
@@ -120,6 +123,7 @@ public class DukeListMgr {
      * @throws DukeExceptionBase when an invalid task is specified.
      */
     public String deleteTask(int taskNo) throws DukeExceptionBase {
+        assert (this.toDoList != null) : "Duke internal List is missing!";
         int taskIndex = taskNo - 1;
 
         if (taskIndex >= 0 && taskIndex < toDoList.size()) {
@@ -142,6 +146,7 @@ public class DukeListMgr {
      * @throws DukeExceptionBase when there is invalid input.
      */
     public String findMatchingTaskInList(String keyword) throws DukeExceptionBase {
+        assert (this.toDoList != null) : "Duke internal List is missing!";
         if (keyword.contains(" ")) {
             throw new DukeExceptionBase("find only works with keywords. (A keyword cannot contain spaces)");
         }

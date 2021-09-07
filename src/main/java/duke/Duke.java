@@ -92,7 +92,7 @@ public class Duke {
      * @param currDuke The instance of Duke to start.
      */
     public static void dukeStarter(Duke currDuke) {
-
+        assert (currDuke.currStorageMgr != null) : "Duke Storage not initialised";
         // Load Save File only after Duke is created.
         currDuke.getCurrStorageMgr().reloadSaveFromXmlDoc();
 
@@ -190,6 +190,8 @@ public class Duke {
     public static void dukeSays(String printThis) {
         Duke currDuke = Duke.getCurrDuke();
 
+        assert (currDuke.currUiCtrl != null) : "Duke UI not initialised!";
+
         // Updated to work with new UI Controller which contains a buffer
         currDuke.currUiCtrl.addToDukeBuffer(printThis);
 
@@ -204,6 +206,8 @@ public class Duke {
      */
     public static void dukeLaterSay(String printLater) {
         Duke currDuke = Duke.getCurrDuke();
+
+        assert (currDuke.currUiCtrl != null) : "Duke UI not initialised!";
 
         currDuke.currUiCtrl.addToDukeBuffer(printLater);
     }
@@ -231,15 +235,21 @@ public class Duke {
     }
 
     private void addToTdl(String str, BaseTask.TaskType currTaskType) throws DukeExceptionBase {
+        assert (this.currDukeList != null) : "Duke List not initialised!";
+
         this.currDukeList.tdlAdd(str, currTaskType);
     }
 
 
     private void listOutTdl() {
+        assert (this.currDukeList != null) : "Duke List not initialised!";
+
         this.currDukeList.printOutWholeList();
     }
 
     private void markItemDoneInTdl(String command) throws DukeExceptionBase {
+        assert (this.currDukeList != null) : "Duke List not initialised!";
+
         if (command.length() < 6) {
             throw new DukeExceptionBase("You need to specify a task to set as done.");
         }
@@ -257,6 +267,8 @@ public class Duke {
     }
 
     private void deleteTaskInTdl(String command) throws DukeExceptionBase {
+        assert (this.currDukeList != null) : "Duke List not initialised!";
+
         if (command.length() < 8) {
             throw new DukeExceptionBase("You need to specify a task to delete.");
         }
@@ -274,6 +286,8 @@ public class Duke {
     }
 
     private void findTaskInTdl(String command) throws DukeExceptionBase {
+        assert (this.currDukeList != null) : "Duke List not initialised!";
+
         if (command.length() < 6) {
             throw new DukeExceptionBase("You need to specify a keyword to find.");
         }
