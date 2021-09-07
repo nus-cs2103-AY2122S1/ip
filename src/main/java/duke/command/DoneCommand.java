@@ -36,6 +36,8 @@ public class DoneCommand extends Command{
 
     @Override
     public void execute(TaskList taskList, Gui gui, Storage storage) throws DukeException {
+        assert taskList != null : "task list should not be null.";
+        assert gui != null : "gui should not be null.";
         if (!parameter.matches("\\d+")) {
             // Invalid parameter
             throw new DukeException("OOPS!!! Invalid task number.");
