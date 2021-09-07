@@ -25,6 +25,7 @@ public class DoneTaskCommand extends Command {
 
     private String doneTask(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String[] inputArray = userInput.split(" ");
+        assert inputArray.length >= 2 : "Done command should be in the form done (index)";
         Task completedTask = taskList.get(Integer.parseInt(inputArray[1]) - 1);
         completedTask.markAsDone();
         storage.saveData(taskList);
