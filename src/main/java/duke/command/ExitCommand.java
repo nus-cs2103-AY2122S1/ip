@@ -20,7 +20,6 @@ public class ExitCommand extends Command {
      */
     @Override
     public String runCommand(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-
         storage.save(taskList);
         return ui.showGoodbye();
     }

@@ -34,7 +34,7 @@ public class Duke {
     }
 
     /**
-     * To run the program.
+     * To run the CLI program.
      */
     public void run() {
         ui.showStartup();

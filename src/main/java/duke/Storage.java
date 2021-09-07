@@ -89,7 +89,7 @@ public class Storage {
     public void save(TaskList taskList) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);
-            fw.write(taskList.toSave());
+            fw.write(taskList.toSaveFormat());
             fw.close();
         } catch (IOException e) {
             throw new DukeException("Uh oh something went wrong with the file!");

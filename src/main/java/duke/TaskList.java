@@ -93,6 +93,7 @@ public class TaskList {
         try {
             Task task = tasks.get(index);
             task.markDone();
+            assert(task.getStatusIcon().equals("X"));
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeException("Invalid Task. Please try again.\n");
         }
@@ -110,6 +111,7 @@ public class TaskList {
             Task task = tasks.get(i);
             if (task.getDescription().contains(filter)) {
                 searchResult.add(task);
+                assert(!searchResult.isEmpty());
             }
         }
         return new TaskList(searchResult);
@@ -120,7 +122,7 @@ public class TaskList {
      *
      * @return String to write to the file.
      */
-    public String toSave() {
+    public String toSaveFormat() {
         String saveTasks = "";
         for (int i = 0; i < tasks.size(); i++) {
             String taskToWrite = tasks.get(i).toWriteFormat();
@@ -140,6 +142,7 @@ public class TaskList {
             String task = tasks.get(i).toString();
             list = list.concat(String.format("%d.%s%n", i + 1, task));
         }
+        assert (list.length() > 0);
         return list;
     }
 }

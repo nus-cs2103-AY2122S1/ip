@@ -19,6 +19,7 @@ public class FindCommand extends Command {
     public FindCommand(String input) throws DukeException {
         try {
             this.filter = input.substring(5);
+            assert(this.filter.length() > 0);
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("The description cannot be empty!");
         }
