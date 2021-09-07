@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-
     private LocalDateTime time;
 
     /**
@@ -17,13 +16,14 @@ public class Event extends Task {
         super(description);
         this.time = time;
     }
-    
+
     public LocalDateTime getTime() {
         return this.time;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy h:mma")) + ")";
+        return "[E]" + super.toString() + " (at: "
+                + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy h:mma")) + ")";
     }
 }

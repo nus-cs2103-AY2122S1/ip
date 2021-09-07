@@ -61,17 +61,17 @@ public class Storage {
         StringBuilder text = new StringBuilder();
         for (Task command : commands) {
             if (command instanceof ToDo) {
-                text.append("todo ").append(command.description);
+                text.append("todo ").append(command.getDescription());
 
             } else if (command instanceof Deadline) {
                 String deadline = ((Deadline) command).getDeadline().format(DateTimeFormatter.ofPattern("d-MM-yyyy"));
-                text.append("deadline ").append(command.description).append("/by ").append(deadline);
+                text.append("deadline ").append(command.getDescription()).append("/by ").append(deadline);
             } else if (command instanceof Event) {
                 String time = ((Event) command).getTime().format(DateTimeFormatter.ofPattern("d-MM-yyyy HHmm"));
-                text.append("event ").append(command.description).append("/at ").append(time);
+                text.append("event ").append(command.getDescription()).append("/at ").append(time);
             }
 
-            if (command.isDone) {
+            if (command.getIsDone()) {
                 text.append("+1\n");
             } else {
                 text.append("+0\n");

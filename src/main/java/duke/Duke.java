@@ -50,33 +50,31 @@ public class Duke {
             case TODO:
                 if (input.equals("")) {
                     throw new EmptyTaskDescriptionException();
-                } else {
-                    commands.add(new ToDo(input));
-                    if (isDone == 1) {
-                        doneTasks++;
-                        commands.get(commands.size() - 1).markAsDone();
-                    }
-                    taskToAdd = true;
-                    storage.saveCommands(commands);
+                } 
+                commands.add(new ToDo(input));
+                if (isDone == 1) {
+                    doneTasks++;
+                    commands.get(commands.size() - 1).markAsDone();
                 }
+                storage.saveCommands(commands);
+                taskToAdd = true;
                 break;
             case DEADLINE:
                 if (input.equals("")) {
                     throw new EmptyTaskDescriptionException();
-                } else {
-                    String[] deadline = input.split("/by");
-                    if (deadline.length < 2) {
-                        throw new NoTimeException();
-                    }
-                    LocalDate date = LocalDate.parse(deadline[1].trim(), formatter1);
-                    commands.add(new Deadline(deadline[0], date));
-                    if (isDone == 1) {
-                        doneTasks++;
-                        commands.get(commands.size() - 1).markAsDone();
-                    }
-                    taskToAdd = true;
-                    storage.saveCommands(commands);
+                } 
+                String[] deadline = input.split("/by");
+                if (deadline.length < 2) {
+                    throw new NoTimeException();
                 }
+                LocalDate date = LocalDate.parse(deadline[1].trim(), formatter1);
+                commands.add(new Deadline(deadline[0], date));
+                if (isDone == 1) {
+                    doneTasks++;
+                    commands.get(commands.size() - 1).markAsDone();
+                }
+                storage.saveCommands(commands);
+                taskToAdd = true;
                 break;
             case EVENT:
                 if (input.equals("")) {
@@ -92,6 +90,7 @@ public class Duke {
                         doneTasks++;
                         commands.get(commands.size() - 1).markAsDone();
                     }
+                    storage.saveCommands(commands);
                     taskToAdd = true;
                     storage.saveCommands(commands);
                 }
@@ -115,18 +114,16 @@ public class Duke {
             case DONE:
                 if (input.equals("")) {
                     throw new EmptyTaskNumberException();
-                } else {
-                    taskIndex = Integer.parseInt(input.trim());
-                    response = done(taskIndex - 1);
                 }
+                taskIndex = Integer.parseInt(input.trim());
+                response = done(taskIndex - 1);
                 break;
             case DELETE:
                 if (input.equals("")) {
                     throw new EmptyTaskNumberException();
-                } else {
-                    taskIndex = Integer.parseInt(input.trim());
-                    response = taskList.remove(taskIndex - 1, commands);
                 }
+                taskIndex = Integer.parseInt(input.trim());
+                response = taskList.remove(taskIndex - 1, commands);
                 break;
             case UPDATE:
                 if (input.equals("")) {
@@ -154,19 +151,18 @@ public class Duke {
     }
 
     String done(int listNumber) {
-        String response = "";
+        String response;
         try {
-            if (listNumber < commands.size()) {
-                if (!commands.get(listNumber).isDone) {
-                    commands.get(listNumber).markAsDone();
-                } else {
-                    throw new TaskDoneAlreadyException();
-                }
-                doneTasks++;
-                response = ui.doneOutput(commands.get(listNumber), (commands.size() - doneTasks));
-            } else {
+            if (listNumber >= commands.size()) {
                 throw new InvalidTaskException();
             }
+            if (commands.get(listNumber).getIsDone()) {
+                throw new TaskDoneAlreadyException();
+            }
+            commands.get(listNumber).markAsDone();
+            doneTasks++;
+            storage.saveCommands(commands);
+            response = ui.doneOutput(commands.get(listNumber), (commands.size() - doneTasks));
         } catch (DukeException e) {
             response = e.getMessage();
         }
