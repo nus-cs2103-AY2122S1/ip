@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import brobot.*;
+import brobot.UI;
 import brobot.task.Deadline;
 import brobot.task.Event;
 import brobot.task.Task;

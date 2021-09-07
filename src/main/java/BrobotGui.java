@@ -1,8 +1,8 @@
-import brobot.storage.Storage;
 import brobot.UI;
 import brobot.customcontrol.DialogBox;
 import brobot.exception.BroException;
 import brobot.parser.BroParser;
+import brobot.storage.Storage;
 import brobot.task.TaskList;
 import javafx.application.Application;
 import javafx.scene.Scene;
