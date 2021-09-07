@@ -102,7 +102,7 @@ public class AddCommand extends Command {
     }
 
     private String retrieveDeadlineDescription(String userInput) {
-        assert userInput.contains("deadline /by") : "User input should contain deadline /by";
+        assert userInput.contains("deadline") && userInput.contains("/by") : "User input should contain deadline /by";
         List<String> inputArray = Arrays.asList(userInput.split(" /by "));
         ArrayList<String> descriptionArray = new ArrayList<String>(Arrays.asList(inputArray.get(0).split(" ")));
         descriptionArray.remove(0);
@@ -117,7 +117,7 @@ public class AddCommand extends Command {
     }
 
     private String retrieveEventDescription(String userInput) {
-        assert userInput.contains("event /at") : "User input should contain event /at";
+        assert userInput.contains("event") && userInput.contains("/at") : "User input should contain event /at";
         List<String> inputArray = Arrays.asList(userInput.split(" /at "));
         String timeFrame = inputArray.get(1);
         ArrayList<String> descriptionArray = new ArrayList<String>(Arrays.asList(inputArray.get(0).split(" ")));
