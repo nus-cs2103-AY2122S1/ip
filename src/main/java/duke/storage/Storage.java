@@ -23,6 +23,7 @@ import duke.tasks.Todo;
  */
 public class Storage {
 
+
     /** Represents the deadline keyword. */
     private final char DEADLINE = 'D';
 
@@ -35,13 +36,16 @@ public class Storage {
     /** Path to data file. */
     private final String filePath;
 
+    /** Data file. */
+    private final File file;
+
     /**
      * Constructor for Storage class.
      *
      * @param filePath path to data file.
      */
     public Storage(String filePath) {
-        this.filePath = filePath;
+        file = new File(filePath);
     }
 
     /**
@@ -56,7 +60,7 @@ public class Storage {
 
     public void save(TaskList tasks) throws IOException {
         ArrayList<Task> taskList = tasks.getTaskList();
-        FileWriter fw = new FileWriter(filePath);
+        FileWriter fw = new FileWriter(file.getAbsoluteFile());
 
         for (Task task : taskList) {
             fw.write(task.toString() + System.lineSeparator());
@@ -75,7 +79,7 @@ public class Storage {
      * @throws DataFileChangedException if the data file was changed and any entry contains a wrong format.
      */
     public ArrayList<Task> load() throws IOException, DataFileChangedException {
-        File file = new File(filePath);
+        file.getParentFile().mkdirs();
 
         ArrayList<Task> taskList = new ArrayList<>();
 
