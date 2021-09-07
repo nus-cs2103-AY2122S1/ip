@@ -82,6 +82,10 @@ public class Duke extends Application {
      * Runs the Duke program.
      */
     public void run() {
+        assert this.storage != null;
+        assert this.tasks != null;
+        assert this.ui != null;
+
         ui.showWelcome();
 
         boolean isExit = false;
