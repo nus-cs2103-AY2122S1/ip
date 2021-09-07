@@ -5,14 +5,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import duke.parser.Parser;
 import duke.parser.UnableToParseException;
+import duke.parser.storage.StorageParser;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -64,69 +62,25 @@ public class Storage {
             assert Files.exists(path) : "file should be created at the specified directory";
             return new TaskList();
         }
-
         List<String> lines = Files.readAllLines(this.path);
         ArrayList<Task> tasks = new ArrayList<>();
         for (String line : lines) {
             String[] split = line.split(Pattern.quote(Storage.DELIMITER));
-            if (split.length == 0) {
-                throw new UnableToParseException(this.path.toString());
-            }
-
-            String description;
-            boolean isDone;
-            UnableToParseException e = new UnableToParseException("\"" + line + "\" at " + this.path);
-
             switch (split[0]) {
             case "T":
-                if (split.length != 3) {
-                    throw e;
-                }
-
-                isDone = Parser.parseStringToIsDone(split[1]);
-                description = split[2];
-                Todo todo = new Todo(description);
-                if (isDone) {
-                    todo.markAsDone();
-                }
+                Todo todo = StorageParser.parseTodo(split);
                 tasks.add(todo);
                 break;
             case "D":
-                if (split.length != 4) {
-                    throw e;
-                }
-
-                isDone = Parser.parseStringToIsDone(split[1]);
-                description = split[2];
-                LocalDate by;
-                try {
-                    by = LocalDate.parse(split[3]);
-                } catch (DateTimeParseException exception) {
-                    throw e;
-                }
-
-                Deadline deadline = new Deadline(description, by);
-                if (isDone) {
-                    deadline.markAsDone();
-                }
+                Deadline deadline = StorageParser.parseDeadline(split);
                 tasks.add(deadline);
                 break;
             case "E":
-                if (split.length != 4) {
-                    throw e;
-                }
-
-                isDone = Parser.parseStringToIsDone(split[1]);
-                description = split[2];
-                String at = split[3];
-                Event event = new Event(description, at);
-                if (isDone) {
-                    event.markAsDone();
-                }
+                Event event = StorageParser.parseEvent(split);
                 tasks.add(event);
                 break;
             default:
-                throw e;
+                throw new UnableToParseException("\"" + line + "\" at " + this.path);
             }
         }
         return new TaskList(tasks);
@@ -134,6 +88,7 @@ public class Storage {
 
     /**
      * Solution adapted from https://stackoverflow.com/a/37624091 with modifications.
+     * Updates the corresponding task's data.
      *
      * @param index the line number to overwrite
      * @param task the new task

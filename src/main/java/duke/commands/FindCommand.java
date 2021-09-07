@@ -7,7 +7,6 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-
 /**
  * This class encapsulates the find command.
  */

@@ -3,11 +3,12 @@ package duke;
 import java.io.IOException;
 
 import duke.commands.Command;
-import duke.parser.Parser;
 import duke.parser.UnableToParseException;
+import duke.parser.cli.CliParser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 
 /**
@@ -26,7 +27,7 @@ public class Duke {
             this.tasks = this.storage.load();
         } catch (IOException | UnableToParseException e) {
             e.printStackTrace();
-            System.exit(1);
+            Platform.exit();
         }
         ui.printAllTasks(this.tasks);
         ui.printGreeting();
@@ -40,16 +41,16 @@ public class Duke {
     public void handleInput(String rawInput) {
         assert rawInput != null : "input string should not be null";
         try {
-            Command c = Parser.parseCommand(rawInput.trim());
+            Command c = CliParser.parseCommand(rawInput.trim());
             c.execute(tasks, ui, storage);
             if (c.isExit()) {
-                System.exit(0);
+                Platform.exit();
             }
         } catch (DukeException e) {
             ui.printErr(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
-            System.exit(1);
+            Platform.exit();
         }
     }
 }

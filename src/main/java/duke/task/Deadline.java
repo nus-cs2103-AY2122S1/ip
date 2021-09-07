@@ -5,15 +5,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
-import duke.parser.Parser;
+import duke.parser.storage.StorageParser;
 import duke.storage.Storage;
-
 
 /**
  * This class encapsulates a Deadline task.
  */
 public class Deadline extends Task {
     private static final String TASK_TYPE = "D";
+    private static final String DATE_FORMAT = "MMM d yyyy";
     private LocalDate by;
 
     /**
@@ -34,7 +34,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String formattedDate = this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String formattedDate = this.by.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
         return super.toString() + " (by: " + formattedDate + ")";
     }
 
@@ -45,7 +45,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toSavableFormat() {
-        String isDone = Parser.parseIsDoneToString(this.isDone());
+        String isDone = StorageParser.parseIsDoneToString(this.isDone());
         List<String> stringList = Arrays.asList(TASK_TYPE, isDone, this.getDescription(), this.by.toString());
         return String.join(Storage.DELIMITER, stringList);
     }

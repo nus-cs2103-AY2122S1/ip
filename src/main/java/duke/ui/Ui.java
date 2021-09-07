@@ -12,6 +12,7 @@ import javafx.stage.Stage;
  * This class encapsulates the UI of the Duke app.
  */
 public class Ui {
+    private static final String MAIN_WINDOW_FXML_PATH = "/view/MainWindow.fxml";
     private final MainWindow mainWindowController;
 
     /**
@@ -23,7 +24,7 @@ public class Ui {
      */
     public Ui(Stage stage, Duke duke) throws IOException {
         javafx.fxml.FXMLLoader fxmlLoader =
-                new javafx.fxml.FXMLLoader(duke.Main.class.getResource("/view/MainWindow.fxml"));
+                new javafx.fxml.FXMLLoader(duke.Main.class.getResource(MAIN_WINDOW_FXML_PATH));
         javafx.scene.layout.AnchorPane ap = fxmlLoader.load();
         javafx.scene.Scene scene = new javafx.scene.Scene(ap);
         stage.setScene(scene);
