@@ -56,7 +56,7 @@ class Parser {
         } else if (input.contains("event")) {
             output += ui.eventResponse(input);
         } else if (input.contains("stats")) {
-            output += ui.statisticReponse(input);
+            output += ui.statsReponse(input);
         } else {
             output += ui.invalidInput();
         }

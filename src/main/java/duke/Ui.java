@@ -2,6 +2,7 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Ui {
@@ -33,8 +34,12 @@ public class Ui {
         System.out.println("Hello from\n" + logo);
     }
 
-    public String statisticReponse(String item) {
+    public String statsReponse(String item) {
         String output = "";
+        List<Integer> distribution = taskList.taskDistribution();
+        output += distribution.get(0).toString() + " ToDos\n";
+        output += distribution.get(1).toString() + " Deadlines\n";
+        output += distribution.get(2).toString() + " Events\n";
         return output;
     }
 
