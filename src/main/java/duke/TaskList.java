@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Encapsulates the TodoList which is the overall list of all Tasks in Duke.
@@ -9,6 +10,7 @@ public class TaskList {
 
     private static ArrayList<Task> dukeList;
     private static Data data;
+    private static HashMap<String, Boolean> taskHashMap;
 
     /**
      * Constructor for TaskList
@@ -17,8 +19,10 @@ public class TaskList {
      * @param data     Data object.
      */
     public TaskList(ArrayList<Task> dukeList, Data data) {
-        TaskList.dukeList = dukeList;
-        TaskList.data = data;
+        this.dukeList = dukeList;
+        this.data = data;
+        this.taskHashMap = new HashMap<>();
+
     }
 
     public static void add(Task task) {
@@ -113,5 +117,14 @@ public class TaskList {
      */
     public static void update() throws DukeException{
         Data.updateData(dukeList);
+    }
+
+    public static boolean contains(Task task) {
+        for (Task t : dukeList) {
+            if (t.toString().equals(task.toString())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -71,7 +71,11 @@ public class AddCommand extends Command {
         } catch (DukeException e) {
             return e.getMessage();
         }
-        dukeList.add(newDL);
+        if (dukeList.contains(newDL)) {
+            return "Oops, this task already exists";
+        } else {
+            dukeList.add(newDL);
+        }
         return (UI.getAddedText()
                 + newDL.toString()
                 + "\nNow you have "
@@ -99,12 +103,12 @@ public class AddCommand extends Command {
             return "Oops! Looks like you are missing the event location! Try again :-)";
         }
         Event newEV = new Event(description[0], description[1]);
-        try {
-            Data.writeToFile(newEV);
-        } catch (DukeException e) {
-            return e.getMessage();
+        if (dukeList.contains(newEV)) {
+            return "Oops, this task already exists";
+        } else {
+            dukeList.add(newEV);
         }
-        dukeList.add(newEV);
+
         return (UI.getAddedText()
                 + newEV.toString()
                 + "\nNow you have "
@@ -130,7 +134,11 @@ public class AddCommand extends Command {
         } catch (DukeException e) {
             return e.getMessage();
         }
-        dukeList.add(newTD);
+        if (dukeList.contains(newTD)) {
+            return "Oops, this task already exists";
+        } else {
+            dukeList.add(newTD);
+        }
         return (UI.getAddedText()
                 + newTD.toString()
                 + "\nNow you have "
