@@ -33,8 +33,12 @@ public class Duke {
         if (input.equals("bye")) {
             output = endBot();
         } else {
-            output = tasks.action(input);
-            storage.saveTasks(tasks.output());
+            try {
+                output = tasks.action(input);
+                storage.saveTasks(tasks.output());
+            } catch (DukeException e) {
+                output = e.toString();
+            }
         }
 
         return output;

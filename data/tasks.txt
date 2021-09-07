@@ -1,3 +1,5 @@
 [T][ ] run
-[T][ ] run
 [T][X] sleep
+[T][X] chiro
+[T][ ] 
+[T][ ] 
