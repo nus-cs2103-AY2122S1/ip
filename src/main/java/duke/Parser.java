@@ -42,6 +42,8 @@ public class Parser {
             return new FindCommand(msg);
         case(HelpCommand.COMMAND_WORD):
             return new HelpCommand();
+        case(SnoozeCommand.COMMAND_WORD):
+            return new SnoozeCommand(msg);
         default:
             return new IncorrectCommand();
         }

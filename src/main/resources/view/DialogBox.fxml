@@ -8,21 +8,21 @@
 <?import javafx.scene.paint.Color?>
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <Label fx:id="dialog" text="Label" wrapText="true">
-         <HBox.margin>
-            <Insets left="20.0" right="20.0" />
-         </HBox.margin></Label>
-        <ImageView fx:id="displayPicture" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-         <effect>
+<children>
+    <Label fx:id="dialog" text="Label" wrapText="true">
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding></Label>
+    <ImageView fx:id="displayPicture" fitHeight="69.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
+        <effect>
             <DropShadow spread="0.59">
-               <color>
-                  <Color red="0.7894737124443054" green="0.4532163739204407" blue="0.4532163739204407" />
-               </color>
+                <color>
+                    <Color red="0.7894737124443054" green="0.4532163739204407" blue="0.4532163739204407" />
+                </color>
             </DropShadow>
-         </effect></ImageView>
-    </children>
-    <padding>
-        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
-    </padding>
+        </effect></ImageView>
+</children>
+<padding>
+    <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+</padding>
 </fx:root>
