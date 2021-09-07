@@ -32,6 +32,12 @@ public class Jarvis {
         }
     }
 
+    /**
+     * Gets Jarvis' response for a given user input. To be used only in GUI mode.
+     *
+     * @param userInput The user input
+     * @return Jarvis response
+     */
     public String getResponse(String userInput) {
         try {
             if (Parser.shouldExit(userInput)) {

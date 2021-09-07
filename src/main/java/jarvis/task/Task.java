@@ -24,7 +24,7 @@ public class Task {
     }
 
     /**
-     * String representation of a task.
+     * Gets the string representation of a task.
      *
      * @return String representation of a task.
      */
@@ -34,7 +34,7 @@ public class Task {
     }
 
     /**
-     * String representation of a task that is to be saved to storage file.
+     * Gets the string representation of a task that is to be saved to storage file.
      *
      * @return String representation that is to be saved.
      */
