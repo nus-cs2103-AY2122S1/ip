@@ -35,11 +35,12 @@ public class Storage {
         if (!Files.exists(this.path)) {
             Files.createFile(this.path);
         }
-        return new TaskList(
-                Files.lines(this.path)
-                        .map((taskRow) -> parseTaskRow(taskRow))
-                        .collect(Collectors.toList())
-        );
+        TaskList tasks = new TaskList();
+        Files.lines(this.path).forEach(taskRow -> {
+            Task task = parseTaskRow(tasks, taskRow);
+            tasks.add(task);
+        });
+        return tasks;
     }
 
     /**
@@ -53,14 +54,14 @@ public class Storage {
         Files.write(this.path, (Iterable<String>) linesStream::iterator);
     }
 
-    private static Task parseTaskRow(String taskRow) {
+    private static Task parseTaskRow(TaskList tasks, String taskRow) {
         final var taskParts = taskRow.split(" \\| ", 3);
         assert taskParts.length == 3;
         final var taskType = TaskType.convertTaskIcon(taskParts[0]);
         final var taskIsDone = Boolean.parseBoolean(taskParts[1]);
         final var taskLine = taskParts[2];
 
-        final Task task = Parser.parseTaskLine(taskLine, taskType);
+        final Task task = Parser.parseTaskLine(tasks, taskLine, taskType);
         task.toggle(taskIsDone);
         return task;
     }

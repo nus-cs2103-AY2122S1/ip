@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Optional;
 
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -19,14 +20,14 @@ public class Parser {
     }
 
     private static Task popTask(TaskList tasks, Storage storage, int i) throws IOException {
-        Task task = tasks.get(i);
+        final Task task = tasks.get(i);
         tasks.remove(i);
         storage.writeTaskList(tasks);
         return task;
     }
 
     private static Task toggleTask(TaskList tasks, Storage storage, int i, boolean isDone) throws IOException {
-        Task task = tasks.get(i);
+        final Task task = tasks.get(i);
         task.toggle(isDone);
         storage.writeTaskList(tasks);
         return task;
@@ -75,15 +76,15 @@ public class Parser {
             if (remaining.equals("")) {
                 throw new Exception("The description of a todo cannot be empty.");
             }
-            final Task task = Parser.parseTaskLine(remaining, TaskType.TODO);
+            final Task task = Parser.parseTaskLine(tasks, remaining, TaskType.TODO);
             addTask(tasks, storage, task);
             return Duke.renderTaskAdded(tasks, task);
         } else if (command.equals("deadline") && remaining.contains("/by")) {
-            final Task task = Parser.parseTaskLine(remaining, TaskType.DEADLINE);
+            final Task task = Parser.parseTaskLine(tasks, remaining, TaskType.DEADLINE);
             addTask(tasks, storage, task);
             return Duke.renderTaskAdded(tasks, task);
         } else if (command.equals("event") && remaining.contains("/at")) {
-            final Task task = Parser.parseTaskLine(remaining, TaskType.EVENT);
+            final Task task = Parser.parseTaskLine(tasks, remaining, TaskType.EVENT);
             addTask(tasks, storage, task);
             return Duke.renderTaskAdded(tasks, task);
         } else if (command.equals("find")) {
@@ -102,18 +103,32 @@ public class Parser {
      * @param taskType Type of task.
      * @return Task object corresponding to the input parameters.
      */
-    public static Task parseTaskLine(String taskLine, TaskType taskType) {
+    public static Task parseTaskLine(TaskList tasks, String taskLine, TaskType taskType) {
         switch (taskType) {
         case TODO:
             return new Todo(taskLine);
         case DEADLINE:
-            String[] deadlineParts = taskLine.split("\\s+/by\\s+", 2);
+            final String[] deadlineParts = taskLine.split("\\s+/by\\s+", 2);
             assert deadlineParts.length == 2;
-            return new Deadline(deadlineParts[0], LocalDate.parse(deadlineParts[1]));
+            final String deadlineDescription = deadlineParts[0];
+            final LocalDate deadlineDate = LocalDate.parse(deadlineParts[1]);
+            return new Deadline(deadlineDescription, deadlineDate);
         case EVENT:
-            String[] eventParts = taskLine.split("\\s+/at\\s+", 2);
+            final String[] eventParts = taskLine.split("\\s+/at\\s+", 2);
             assert eventParts.length == 2;
-            return new Event(eventParts[0], LocalDate.parse(eventParts[1]));
+            final String eventDescription = eventParts[0];
+            final LocalDate eventDate = LocalDate.parse(eventParts[1]);
+
+            final Optional<Event> clashingEvent = tasks.findEvent(eventDate);
+            if (clashingEvent.isPresent()) {
+                throw new IllegalArgumentException(String.join(
+                        "\n",
+                        "Event date clashes with another event:",
+                        "  " + Duke.renderTask(clashingEvent.get())
+                ));
+            }
+
+            return new Event(eventDescription, eventDate);
         default:
             throw new UnsupportedOperationException("task type is not a valid enum value");
         }
