@@ -38,13 +38,13 @@ public class AddTaskCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
         String[] parsedUserInput = this.getUserInput().split(" ", 2);
-        if (parsedUserInput[0].equals("todo")) {
+        if (parsedUserInput[0].equals("todo") || parsedUserInput[0].equals("t")) {
             if (parsedUserInput.length == 1) {
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
             Task newTask = new ToDo(parsedUserInput[1]);
             addTaskToList(newTask, ui, tasks, storage);
-        } else if (parsedUserInput[0].equals("deadline")) { // Add deadline
+        } else if (parsedUserInput[0].equals("deadline") || parsedUserInput[0].equals("d")) { // Add deadline
             if (parsedUserInput.length == 1) {
                 throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
             } else if (!parsedUserInput[1].contains("/by")) {
@@ -61,7 +61,7 @@ public class AddTaskCommand extends Command {
                 Task newTask = new Deadline(parsedDeadlineInput[0], localDate);
                 addTaskToList(newTask, ui, tasks, storage);
             }
-        } else if (parsedUserInput[0].equals("event")) { // Add event
+        } else if (parsedUserInput[0].equals("event") || parsedUserInput[0].equals("e")) { // Add event
             if (parsedUserInput.length == 1) {
                 throw new DukeException("OOPS!!! The description of an event cannot be empty.");
             } else if (!parsedUserInput[1].contains("/at")) {
