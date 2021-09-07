@@ -12,10 +12,17 @@ import javafx.stage.Stage;
  * When run, parses input into parser class which utilizes ui class to give an output
  * After each command it saves to the storage text file
  */
-public class Duke extends Application{
+public class Duke extends Application {
 
-    public Duke() {}
+    public Duke() {
+    }
 
+    /**
+     * Start function for duke GUI
+     *
+     * @param stage
+     * @throws Exception
+     */
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(Duke.class.getResource("/duke.fxml"));
