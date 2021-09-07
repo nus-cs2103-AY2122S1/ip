@@ -38,14 +38,14 @@ public class Duke {
     /** The Ui for Duke to deal with all the interactions with the user. */
     private Ui ui;
 
-    private ScrollPane scrollPane;
+    /*private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));*/
 
     /**
      * Constructor to initialise the Duke chatbot.
@@ -104,13 +104,13 @@ public class Duke {
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
-    private Label getDialogLabel(String text) {
+    /*private Label getDialogLabel(String text) {
         // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
         return textToAdd;
-    }
+    }*/
 
     /**
      * Iteration 2:
