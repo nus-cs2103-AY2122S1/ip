@@ -1,12 +1,14 @@
 package duke.task;
 
+import java.util.Date;
+
 /**
  * This class encapsulates a task that Duke can handle.
  *
  * @author Teo Sin Yee
  * @version CS2103T AY21/22 Semester 1
  */
-public class Task {
+public abstract class Task implements Comparable<Task> {
     private final String taskName;
     private boolean isDone;
 
@@ -53,6 +55,13 @@ public class Task {
     }
 
     /**
+     * Gets the date of the task.
+     *
+     * @return Task date.
+     */
+    public abstract Date getDate();
+
+    /**
      * Converts task to the suitable format to be saved in storage file.
      *
      * @return Reformatted string representation of a task in the storage file.
@@ -69,5 +78,26 @@ public class Task {
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getIcon(), taskName);
+    }
+
+    @Override
+    public int compareTo(Task t) {
+        if (!this.isComplete() | !t.isComplete()) {
+            if (this.isComplete()) {
+                return -1;
+            } else if (t.isComplete()) {
+                return 1;
+            }
+        }
+        Date thisDate = this.getDate();
+        Date otherDate = t.getDate();
+        if (thisDate == null && otherDate == null) {
+            return 0;
+        } else if (thisDate == null) {
+            return -1;
+        } else if (otherDate == null) {
+            return 1;
+        }
+        return thisDate.compareTo(otherDate);
     }
 }

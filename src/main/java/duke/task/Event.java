@@ -1,5 +1,10 @@
 package duke.task;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * This class encapsulates an Event
  * (a task that happens at a specific time)
@@ -20,6 +25,29 @@ public class Event extends Task {
     public Event(String name, String time) {
         super(name);
         this.time = time;
+    }
+
+    /**
+     * Gets the time of the deadline task in Date form.
+     *
+     * @return Date of event task,
+     * null if time does not match specified simple date format.
+     */
+    public Date getDate() {
+        DateFormat inputFormat;
+        Date date;
+
+        if (time.contains(",")) {
+            inputFormat = new SimpleDateFormat("dd MMM yyyy, h.mm aa");
+        } else {
+            inputFormat = new SimpleDateFormat("dd MMM yyyy");
+        }
+        try {
+            date = inputFormat.parse(time);
+        } catch (ParseException e) {
+            return null;
+        }
+        return date;
     }
 
     /**

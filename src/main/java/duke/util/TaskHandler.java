@@ -1,6 +1,7 @@
 package duke.util;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import duke.exception.DukeException;
 import duke.exception.DukeInvalidIndexException;
@@ -26,6 +27,7 @@ public class TaskHandler {
     private static final String TASK_LIST = "Here are the task(s) in your list! ^_^\n\t";
     private static final String MATCHING_TASK_LIST = "Here are the matching task(s) in your list! ^_^:\n\t";
     private static final String NO_MATCHING_TASKS = "No matching tasks found :<";
+    private static final String SORT_TASK_LIST = "Task list is sorted! Enter list to view sorted task list :)";
 
     private final ArrayList<Task> taskList;
 
@@ -165,5 +167,20 @@ public class TaskHandler {
                 return matchingTasks.toString();
             }
         }
+    }
+
+    /**
+     * Sorts the task list in chronological order
+     *
+     * @param isReverse Reverse chronological order of task list if true.
+     */
+    public String sortTaskList(boolean isReverse) {
+        Comparator<Task> cmp = (Task t1, Task t2) -> {
+            return isReverse
+                    ? t1.compareTo(t2) * -1
+                    : t1.compareTo(t2);
+        };
+        taskList.sort(cmp);
+        return SORT_TASK_LIST;
     }
 }

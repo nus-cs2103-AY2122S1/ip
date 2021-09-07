@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.Date;
+
 /**
  * This class encapsulates a Todo.
  *
@@ -15,6 +17,16 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         super(description);
+    }
+
+    /**
+     * Gets the Date of the task, todo has no date.
+     *
+     * @return null.
+     */
+    @Override
+    public Date getDate() {
+        return null;
     }
 
     @Override

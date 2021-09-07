@@ -12,6 +12,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.SortCommand;
 import duke.exception.DukeDeadlineMissingDateException;
 import duke.exception.DukeEventMissingDateException;
 import duke.exception.DukeException;
@@ -43,6 +44,10 @@ public class Parser {
         switch (commandWord) {
         case "list":
             return new ListCommand();
+        case "sort":
+            return (splitInput.length == 2)
+                ? new SortCommand(true)
+                : new SortCommand(false);
         case "done":
             int doneIndex = parseIndex(input);
             return new DoneCommand(doneIndex);
@@ -145,7 +150,7 @@ public class Parser {
             throw new DukeMissingDescriptionException(splitInput[0]);
         }
         String[] deadlineDetails = input.split("\\s+/by\\s+", 2);
-        if (deadlineDetails.length < 2 || deadlineDetails[1].isEmpty()) {
+        if (deadlineDetails.length < 2 | deadlineDetails[1].isEmpty()) {
             throw new DukeDeadlineMissingDateException();
         } else {
             return deadlineDetails;
@@ -153,7 +158,7 @@ public class Parser {
     }
 
     /**
-     * Extracts the details fo the event command.
+     * Extracts the details for the event command.
      *
      * @param input Raw user input.
      * @return Details for event command

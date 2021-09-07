@@ -1,5 +1,10 @@
 package duke.task;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * This class encapsulates a deadline
  * (an event that needs to be done before a specific time)
@@ -20,6 +25,29 @@ public class Deadline extends Task {
     public Deadline(String name, String dueDate) {
         super(name);
         this.dueDate = dueDate;
+    }
+
+    /**
+     * Gets the due date of the deadline task in Date form.
+     *
+     * @return Date of deadline task,
+     * null if due date does not match specified simple date format.
+     */
+    public Date getDate() {
+        DateFormat inputFormat;
+        Date date;
+
+        if (dueDate.contains(",")) {
+            inputFormat = new SimpleDateFormat("dd MMM yyyy, h.mm aa");
+        } else {
+            inputFormat = new SimpleDateFormat("dd MMM yyyy");
+        }
+        try {
+            date = inputFormat.parse(dueDate);
+        } catch (ParseException e) {
+            return null;
+        }
+        return date;
     }
 
     public String formatToSave() {
