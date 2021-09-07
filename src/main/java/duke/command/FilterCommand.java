@@ -30,10 +30,10 @@ public class FilterCommand extends Command {
      * @param storage the storage file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList matchingTasks = tasks.findMatchingTasks(date.toString());
         String message = String.format("On %s, you have:", date.toString());
-        ui.showMatchingTasks(matchingTasks, date.toString(), message);
+        return ui.showMatchingTasks(matchingTasks, date.toString(), message);
 
     }
 }

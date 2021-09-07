@@ -31,10 +31,10 @@ public class ExitCommand extends Command {
      * @param storage the storage file.
      * @throws DukeException exception handled by DukeException class
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             storage.store(tasks);
-            ui.showFarewell();
+            return ui.showFarewell();
         } catch (IOException e) {
             throw new DukeException(e);
         }

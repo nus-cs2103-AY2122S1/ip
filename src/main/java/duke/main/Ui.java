@@ -39,8 +39,8 @@ public class Ui {
     /**
      * Welcomes the user.
      */
-    public void showWelcome() {
-        System.out.println(GREETING);
+    public String showWelcome() {
+        return GREETING;
     }
     
     /**
@@ -56,25 +56,24 @@ public class Ui {
     /**
      * Shows farewell message to user.
      */
-    public void showFarewell() {
-        System.out.println(FAREWELL);
-        sc.close();
+    public String showFarewell() {
+        return FAREWELL;
     }
     
     /**
      * Shows the diving line.
      */
-    public void showLine() {
+    public String showLine() {
         String line = "_________________________________";
-        System.out.println(line);
+        return line;
     }
 
     /**
      * Shows the error message from loading the file.
      */
-    public void showLoadingError() {
+    public String showLoadingError() {
         String loadingError = "There was a problem loading the file.";
-        System.out.println(loadingError);
+        return loadingError;
     }
 
     /**
@@ -82,8 +81,8 @@ public class Ui {
      *
      * @param errorMessage exception message.
      */
-    public void showError(String errorMessage) {
-        System.out.println(errorMessage);
+    public String showError(String errorMessage) {
+        return errorMessage;
     }
 
     /**
@@ -91,11 +90,10 @@ public class Ui {
      * 
      * @param task the task marked as done.
      */
-    public void showMarkTaskDone(Task task) {
-        String doneMessage = "Yay, one task down!";
-        System.out.println(doneMessage);
-        String taskMarkedAsDone = String.format("~~%s~~", task.toString());
-        System.out.println(taskMarkedAsDone);
+    public String showMarkTaskDone(Task task) {
+        String doneMessage = "Yay, one task down!\n";
+        doneMessage += String.format("~~%s~~", task.toString());
+        return doneMessage;
     }
 
     /**
@@ -104,14 +102,12 @@ public class Ui {
      * @param task the deleted task.
      * @param numTasksRemaining number of tasks after deleting the task.
      */
-    public void showTaskDeleted(Task task, int numTasksRemaining) {
-        String deletionMessage = "Alrighty, I've removed this task:";
-        System.out.println(deletionMessage);
-        String deletedTask = String.format("~~%s~~", task.toString());
-        System.out.println(deletedTask);
-        String tasksRemaining = String.format("Now, you have %s %s remaining", numTasksRemaining,
+    public String showTaskDeleted(Task task, int numTasksRemaining) {
+        String deletionMessage = "Alrighty, I've removed this task:\n";
+        deletionMessage += String.format("~~%s~~\n", task.toString());
+        deletionMessage += String.format("Now, you have %s %s remaining", numTasksRemaining,
                 (numTasksRemaining > 1 ? "tasks" : "task"));
-        System.out.println(tasksRemaining);
+        return deletionMessage;
     }
 
     /**
@@ -120,14 +116,12 @@ public class Ui {
      * @param task the task added.
      * @param newNumTasks number of tasks after adding the new task.
      */
-    public void showTaskAdded(Task task, int newNumTasks) {
-        String additionMessage = "Got it. I've added this task:";
-        System.out.println(additionMessage);
-        String addedTask = String.format("~~%S~~", task.toString());
-        System.out.println(addedTask);
-        String newTally = String.format("Now you have %s %s in the list.", newNumTasks,
+    public String showTaskAdded(Task task, int newNumTasks) {
+        String additionMessage = "Got it. I've added this task:\n";
+        additionMessage += String.format("~~%S~~\n", task.toString());
+        additionMessage += String.format("Now you have %s %s in the list.", newNumTasks,
                                     (newNumTasks > 1 ? "tasks" : "task"));
-        System.out.println(newTally);
+        return additionMessage;
     }
 
     /**
@@ -135,9 +129,9 @@ public class Ui {
      * 
      * @param tasks current taskList of tasks.
      */
-    public void showListOfTasks(TaskList tasks) {
+    public String showListOfTasks(TaskList tasks) {
         String header = "Here are the tasks in your list:";
-        iterate(header, tasks);
+        return iterate(header, tasks);
     }
 
     /**
@@ -147,14 +141,15 @@ public class Ui {
      * @param searchPhrase used to filterout tasks.
      * @param message the header message.
      */
-    public void showMatchingTasks(TaskList tasks, String searchPhrase, String message) {
-        iterate(message, tasks);
+    public String showMatchingTasks(TaskList tasks, String searchPhrase, String message) {
+        return iterate(message, tasks);
     }
     
-    private void iterate(String headerMessage, TaskList tasks) {
-        System.out.println(headerMessage);
+    private String iterate(String headerMessage, TaskList tasks) {
+        String listOfTasksDisplay = headerMessage + "\n";
         for(int i = 0; i < tasks.getNumTasks(); i++) {
-            System.out.println(String.format("%s.%s", i + 1, tasks.getTask(i).toString()));
+            listOfTasksDisplay += String.format("%s.%s\n", i + 1, tasks.getTask(i).toString());
         }
+        return listOfTasksDisplay;
     }
 }

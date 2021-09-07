@@ -139,8 +139,7 @@ public class DukeApplication extends Application {
     String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            c.execute(tasks, ui, storage);
-            return "done";
+            return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return e.getMessage();
         }

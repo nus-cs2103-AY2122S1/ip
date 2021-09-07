@@ -39,7 +39,7 @@ public class AddCommand extends Command {
      * @throws DukeException exception handled by DukeException class
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task task;
             if (addCommand.contains("deadline")) {
@@ -51,7 +51,7 @@ public class AddCommand extends Command {
             }
 
             Task taskAdded = tasks.add(task);
-            ui.showTaskAdded(taskAdded, tasks.getNumTasks());
+            return ui.showTaskAdded(taskAdded, tasks.getNumTasks());
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException(e);
         } catch (DateTimeParseException e) {

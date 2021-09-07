@@ -31,10 +31,10 @@ public class MarkDoneCommand extends Command {
      * @throws DukeException exception handled by DukeException class
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task task = tasks.markDone(taskNumber - 1);
-            ui.showMarkTaskDone(task);
+            return ui.showMarkTaskDone(task);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(e);
         }
