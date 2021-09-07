@@ -23,14 +23,13 @@ public class FindCommand extends Command {
 
     /**
      * Executes the response to the find command from the user.
-     *
      * @param storage The storage Duke uses to save and load the tasklist from.
      * @param taskList The list of tasks Duke needs to execute on.
      * @param ui The Ui Duke utilises to interact with the user.
+     * @return The String to be printed in the Duke GUI.
      */
     @Override
     public String execute(Storage storage, TaskList taskList, Ui ui) {
-        String output = ui.showFind(taskList, keyword);
-        return output;
+        return ui.showFind(taskList, keyword);
     }
 }
