@@ -1,39 +1,77 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.io.AliasStorage;
 import duke.task.TaskList;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A command keeps track of its string and parses user input using its parse function.
  */
 public abstract class Command {
-    private String commandString;
+    private String mainCommand;
+    private List<String> aliases = new ArrayList<>();
 
     /**
-     * Sets the command string of this command.
+     * Sets the main command of this action.
      *
-     * @param commandString User Input's first word to execute this command.
+     * @param mainCommand Default user input's first word to execute this action.
      */
-    protected void setCommandString(String commandString) {
-        this.commandString = commandString;
+    protected void setMainCommand(String mainCommand) {
+        this.mainCommand = mainCommand;
+    }
+
+    protected void setAliases(List<String> aliases) {
+        this.aliases = aliases;
     }
 
     /**
-     * Returns the length of the command string + 1 to account for the whitespace.
+     * Returns whether the provided command is an alias for this action.
      *
-     * @return Length of command string + 1 to account for the whitespace.
+     * @param command String to check against the list of aliases.
      */
-    protected int getCommandLength() {
-        return commandString.length() + 1;
+    public boolean containsCommand(String command) {
+        return mainCommand.equals(command) || aliases.contains(command);
     }
 
     /**
-     * Returns the command string of this command.
+     * Adds the alias as a possible command to be used for this action.
      *
-     * @return User Input's first word to execute this command.
+     * @param alias New command that can be used for this action.
+     * @return The response to inform the user that the alias has been added
      */
-    public String getCommandString() {
-        return commandString;
+    public String addAlias(String alias) throws DukeException {
+        aliases.add(alias);
+        AliasStorage.save();
+
+        return alias + " added as an alias for " + mainCommand + "!";
+    }
+
+    /**
+     * Returns a String representing the aliases of the command to be saved.
+     *
+     * @return String representing the aliases of the command.
+     */
+    public String getSaveFormat() {
+        StringBuilder sb = new StringBuilder(mainCommand);
+
+        for (String alias : aliases) {
+            sb.append(',');
+            sb.append(alias);
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * Returns the default command of this action.
+     *
+     * @return The default command of this action.
+     */
+    public String getMainCommand() {
+        return mainCommand;
     }
 
     /**

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.task.TaskList;
 
 /**
@@ -7,7 +8,7 @@ import duke.task.TaskList;
  */
 public class ExitCommand extends Command {
     public ExitCommand() {
-        setCommandString("bye");
+        setMainCommand("bye");
     }
 
     /**
@@ -19,9 +20,6 @@ public class ExitCommand extends Command {
      */
     @Override
     public String parse(String input, TaskList taskList) {
-        assert input.substring(0, getCommandLength() - 1).equals(getCommandString())
-                : "Input should start with command";
-
         System.exit(0);
         return "Goodbye, hope to see you again!";
     }

@@ -2,14 +2,14 @@ package duke.stubs;
 
 import java.util.ArrayList;
 
-import duke.io.Storage;
+import duke.io.TaskStorage;
 import duke.task.Task;
 
 /**
  * Storage stub used for testing that doesn't load or store.
  */
-public class StorageStub extends Storage {
-    public StorageStub() {
+public class TaskStorageStub extends TaskStorage {
+    public TaskStorageStub() {
         super("");
     }
 

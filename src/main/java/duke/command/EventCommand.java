@@ -12,7 +12,7 @@ import duke.task.TaskList;
  */
 public class EventCommand extends Command {
     public EventCommand() {
-        setCommandString("event");
+        setMainCommand("event");
     }
 
     /**
@@ -26,15 +26,17 @@ public class EventCommand extends Command {
      */
     @Override
     public String parse(String input, TaskList taskList) throws DukeException {
-        assert input.substring(0, getCommandLength() - 1).equals(getCommandString())
-                : "Input should start with command";
         assert taskList != null : "taskList should not be null";
 
-        if (input.length() <= getCommandLength()) {
+        int firstSpace = input.indexOf(' ');
+
+        // No space after the command
+        if (firstSpace == -1) {
             throw new DukeException("Please input the event's name and date.");
         }
 
-        String[] inputs = input.substring(getCommandLength()).split("/at");
+        String data = input.substring(firstSpace).strip();
+        String[] inputs = data.split("/at");
 
         if (inputs.length < 2) {
             // /by not specified

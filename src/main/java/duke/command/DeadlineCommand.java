@@ -12,7 +12,7 @@ import duke.task.TaskList;
  */
 public class DeadlineCommand extends Command {
     public DeadlineCommand() {
-        setCommandString("deadline");
+        setMainCommand("deadline");
     }
 
     /**
@@ -26,16 +26,17 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String parse(String input, TaskList taskList) throws DukeException {
-        assert input.substring(0, getCommandLength() - 1).equals(getCommandString())
-                : "Input should start with command";
         assert taskList != null : "taskList should not be null";
 
+        int firstSpace = input.indexOf(' ');
+
         // No space after the command
-        if (input.length() <= getCommandLength()) {
+        if (firstSpace == -1) {
             throw new DukeException("Please input the deadline's name and date.");
         }
 
-        String[] inputs = input.substring(getCommandLength()).split("/by");
+        String data = input.substring(firstSpace).strip();
+        String[] inputs = data.split("/by");
 
         if (inputs.length < 2) {
             // /by not specified
