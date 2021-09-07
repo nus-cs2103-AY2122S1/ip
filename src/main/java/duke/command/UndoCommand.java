@@ -19,13 +19,21 @@ public class UndoCommand extends Command {
     @Override
     public void execute(TaskHandler taskHandler, Ui ui) throws DukeInvalidCommandException {
         CommandHandler commandHandler = CommandHandler.getInstance();
-        commandHandler.undo(taskHandler);
+        Command command = commandHandler.undo(taskHandler);
+        if (command == null) {
+            ui.startMessage()
+                    .addLine("There are no commands (left over) to undo.")
+                    .printFormatted();
+        } else {
+            ui.startMessage()
+                    .addLine("Okay, I have undone the following command:")
+                    .addCommand(command)
+                    .printFormatted();
+        }
     }
 
     @Override
-    void parseCommand(String[] tokens) throws DukeInvalidCommandException {
-
-    }
+    void parseCommand(String[] tokens) throws DukeInvalidCommandException {}
 
     @Override
     CommandType getCommandType() {

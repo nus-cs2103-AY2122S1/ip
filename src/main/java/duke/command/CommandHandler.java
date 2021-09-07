@@ -25,11 +25,12 @@ class CommandHandler {
         undoableCommands.push(undoableCommand);
     }
 
-    void undo(TaskHandler taskHandler) {
+    Command undo(TaskHandler taskHandler) {
         if (undoableCommands.empty()) {
-            return;
+            return null;
         }
         UndoableCommand undoableCommand = undoableCommands.pop();
         undoableCommand.undo(taskHandler);
+        return (Command) undoableCommand;
     }
 }
