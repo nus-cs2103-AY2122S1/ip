@@ -10,19 +10,13 @@ import duke.task.Task;
  * UI class which handles all the interactions with the user.
  */
 public class Ui {
-
-    private static final String LOGO = " ____        _ _\n"
-            + "|  _ \\ _   _(_|_)\n"
-            + "| | | | | | | | |\n"
-            + "| |_| | |_| | | |\n"
-            + "|____/ \\__,_|_|_|\n";
-
     /**
      * Prints the welcome message to the user's terminal.
      */
-    public static String greet(User user) {
-        return LOGO
-                + String.format("Hello %s! I'm Duii, your personal assistant!\n", user.getUsername())
+    public String greet(TaskList tasks) {
+        return "Hello! I'm Duii, your personal assistant!\n"
+                + "Type in '/help' for the full list of supported commands. \n"
+                + printPrevSession(tasks)
                 + "What do you need help with?";
     }
 
@@ -43,13 +37,6 @@ public class Ui {
     }
 
     /**
-     * Prints the seperating line to the terminal.
-     */
-    public void showLine() {
-        System.out.println("___________________");
-    }
-
-    /**
      * Prints the error message from the thrown exception.
      */
     public String showError(String error) {
@@ -60,7 +47,7 @@ public class Ui {
      * Alerts the user that a task has been marked as done.
      */
     public String notifyDone(Task doneTask) {
-        assert(doneTask != null);
+        assert (doneTask != null);
         return "You've finished the task? Good job!\n"
                 + "This task has been marked as done:\n"
                 + doneTask.displayInfo();
@@ -70,7 +57,7 @@ public class Ui {
      * Alerts the user that multiple tasks have been marked as done.
      */
     public String notifyMultiDone(ArrayList<Task> doneTasks) {
-        assert(doneTasks.size() > 1);
+        assert (doneTasks.size() > 1);
         String output = "You've finished the task? Good job!\n"
                 + "This task has been marked as done:\n";
         for (int i = 0; i < doneTasks.size(); i++) {
@@ -83,16 +70,16 @@ public class Ui {
      * Alerts the user that a task has been deleted.
      */
     public String notifyDelete(Task removedTask) {
-        assert(removedTask != null);
+        assert (removedTask != null);
         return "Okay! Removing the task:\n"
-            + removedTask.displayInfo();
+                + removedTask.displayInfo();
     }
 
     /**
      * Alerts the user that multiple tasks have been deleted.
      */
     public String notifyMultiDelete(ArrayList<Task> removedTasks) {
-        assert(removedTasks.size() > 1);
+        assert (removedTasks.size() > 1);
         String output = "Okay! Removing the task:\n";
         for (int i = 0; i < removedTasks.size(); i++) {
             output += removedTasks.get(i).displayInfo() + "\n";
@@ -104,7 +91,7 @@ public class Ui {
      * Displays the list of tasks in the current active session.
      */
     public String notifyList(ArrayList<Task> taskArrList) {
-        assert(taskArrList != null);
+        assert (taskArrList != null);
         String output = "Here's your current list:\n";
         int listLength = taskArrList.size();
         for (int i = 0; i < listLength; i++) {
@@ -155,7 +142,7 @@ public class Ui {
      */
     public String notifyAdd(ArrayList<Task> taskArrList) {
         int listLength = taskArrList.size();
-        assert(listLength > 0);
+        assert (listLength > 0);
         Task newTask = taskArrList.get(listLength - 1);
         return "New Task? I've added it to the list:\n"
                 + newTask.displayInfo()
@@ -165,28 +152,22 @@ public class Ui {
 
     /**
      * Shows the tasks recorded from the previous session.
-     * If the user is a new user, nothing is printed to the terminal.
      */
-    public String printPrevSession(TaskList tasks, User user) {
-        assert(user != null);
-        if (!user.isNewUser()) {
-            ArrayList<Task> taskArrList = tasks.getAllTasks();
-            int listLength = taskArrList.size();
-            if (listLength == 0) {
-                return "You have no outstanding tasks from the previous session."
-                        + " What a productivity master!";
-            } else {
-                String output = "These tasks are from the previous session:\n";
-                for (int i = 0; i < taskArrList.size(); i++) {
-                    output += String.format("%d. %s", i + 1, taskArrList.get(i).displayInfo());
-                }
-                return output;
-            }
+    public String printPrevSession(TaskList tasks) {
+        ArrayList<Task> taskArrList = tasks.getAllTasks();
+        int listLength = taskArrList.size();
+        if (listLength == 0) {
+            return "You have no outstanding tasks from the previous session.\n";
         } else {
-            user.hasLoginBefore();
-            return "This is your first session!\n";
+            String output = "These tasks are from the previous session:\n";
+            for (int i = 0; i < taskArrList.size(); i++) {
+                output += String.format("%d. %s", i + 1, taskArrList.get(i).displayInfo());
+                output += "\n";
+            }
+            return output;
         }
     }
+
 
     /**
      * Prints the directory not found message to the user's terminal.

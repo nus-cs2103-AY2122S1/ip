@@ -1,6 +1,11 @@
 package duke.gui;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import duke.Duke;
+import duke.Ui;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -33,6 +39,17 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         bot = d;
+        start();
+    }
+
+    /**
+     * Starts up the Main Window of the GUI.
+     */
+    public void start() {
+        Ui userInterface = bot.getUi();
+        String greetings = userInterface.greet(bot.getTasks());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(greetings, dukeImage));
     }
 
     /**
@@ -48,5 +65,14 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (input.equals("bye")) {
+            new Timer().schedule(
+                    new TimerTask() {
+                        public void run() {
+                            Platform.exit();
+                            System.exit(0); }
+                    }, 3000);
+        }
     }
 }

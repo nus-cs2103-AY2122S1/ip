@@ -3,7 +3,6 @@ package duke.gui;
 import java.io.IOException;
 
 import duke.Duke;
-import duke.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,7 +20,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(new Duke(new User("User 1")));
+            fxmlLoader.<MainWindow>getController().setDuke(new Duke());
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -15,12 +15,8 @@ public class Duke {
     /**
      * Constructor of Duke instance, which initalises the other
      * components of the project.
-     *
-     * @param user User object which encapsulates the users' name and visit history
      */
-    public Duke(User user) {
-        assert(user != null) : "User for Duii cannot be null!";
-        this.user = user;
+    public Duke() {
         this.storage = new Storage();
         this.userInt = new Ui();
         try {
@@ -48,12 +44,21 @@ public class Duke {
     }
 
     /**
-     * Gets the user associated to the bot.
+     * Gets the tasks associated to the current user.
      *
-     * @return User object associated with the bot.
+     * @return TaskList object associated with the bot.
      */
-    public User getUser() {
-        return this.user;
+    public TaskList getTasks() {
+        return this.tasks;
+    }
+
+    /**
+     * Gets the Ui associated to the bot.
+     *
+     * @return Ui object associated with the bot.
+     */
+    public Ui getUi() {
+        return this.userInt;
     }
 
 }
