@@ -9,15 +9,17 @@ public class Duke {
     private Storage storage;
     private Ui ui;
     private Parser parser;
+    private PlaceList placeList;
 
     /**
      * Constructor for a Duke.
      */
     public Duke() {
         this.storage = new Storage();
-        this.taskList = this.storage.load();
+        this.taskList = this.storage.loadTaskList();
         this.ui = new Ui();
         this.parser = new Parser();
+        this.placeList = this.storage.loadPlaceList();
     }
 
     /**
@@ -63,7 +65,8 @@ public class Duke {
         }
         assert newTask != null;
         this.taskList.addTask(newTask);
-        this.storage.write(this.taskList);
+        this.placeList.addPlace(newTask.location);
+        this.storage.write(this.taskList, this.placeList);
         return this.ui.showAddMessage(newTask, this.taskList);
     }
 
@@ -84,7 +87,7 @@ public class Duke {
      */
     public String markDone(int itemNum) {
         this.taskList.markDone(itemNum - 1);
-        this.storage.write(this.taskList);
+        this.storage.write(this.taskList, this.placeList);
         return this.ui.showMarkDoneMessage(this.getTaskByIndex(itemNum - 1));
     }
 
@@ -102,7 +105,7 @@ public class Duke {
             Task toBeDeleted = this.getTaskByIndex(itemNum - 1);
             assert toBeDeleted != null;
             this.taskList.deleteTask(itemNum - 1);
-            this.storage.write(this.taskList);
+            this.storage.write(this.taskList, this.placeList);
             return this.ui.showDeleteMessage(toBeDeleted, this.taskList);
         }
     }
@@ -111,7 +114,7 @@ public class Duke {
      * Starts Duke to allow for inputs.
      */
     public void run() {
-        this.storage.load();
+        this.storage.loadTaskList();
         String userInput;
         boolean hasExited = false;
         while (!hasExited) {
@@ -150,6 +153,8 @@ public class Duke {
             case "find":
                 String result = this.taskList.find(parsedInput[1]);
                 return this.ui.showSearchResults(result);
+            case "places":
+                return this.ui.showPlaceList(this.placeList);
             default:
                 throw new DukeException("Invalid input. Perhaps you've made a mistake.");
             }

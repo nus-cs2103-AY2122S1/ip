@@ -14,7 +14,7 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
-     * Constructor for a duke.TaskList.
+     * Constructor for a TaskList.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
@@ -43,7 +43,7 @@ public class TaskList {
      * Gets the task given its index.
      *
      * @param index The index of the Task in the TaskList (0-indexed).
-     * @return duke.Task with the index in the duke.TaskList.
+     * @return Task with the index in the TaskList.
      */
     public Task getTaskByIndex(int index) {
         return this.tasks.get(index);

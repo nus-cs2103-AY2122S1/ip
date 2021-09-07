@@ -20,6 +20,10 @@ public class Ui {
         return taskList.toString();
     }
 
+    public String showPlaceList(PlaceList placeList) {
+        return placeList.toString();
+    }
+
     /**
      * Shows message for adding tasks.
      *

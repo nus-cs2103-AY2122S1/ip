@@ -12,7 +12,7 @@ public class Todo extends Task {
      * @param desc String array consisting of parsed description.
      */
     public Todo(String[] desc) {
-        super(desc[1], Boolean.valueOf(desc[3]));
+        super(desc[1], Boolean.parseBoolean(desc[3]), new Place(desc[4]));
     }
 
     /**
@@ -21,7 +21,7 @@ public class Todo extends Task {
      * @return String representation of task to write into storage.
      */
     public String toWrite() {
-        return "todo--" + Boolean.toString(this.isDone) + "--" + this.desc + "--0\n";
+        return "todo--" + this.isDone + "--" + this.desc + "--0--" + this.location.toWrite();
     }
 
     /**
@@ -31,6 +31,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString() + "\n";
+        String location = this.location.toString() == "" ? "" : " at " + this.location.toString();
+        return "[T]" + super.toString() + location + "\n";
     }
 }

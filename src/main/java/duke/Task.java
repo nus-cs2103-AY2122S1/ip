@@ -18,14 +18,20 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
+     * Place where the Task is conducted.
+     */
+    protected Place location;
+
+    /**
      * Constructor for a Task
      *
      * @param desc Description of the task details.
      * @param isDone Completion status of the task.
      */
-    public Task(String desc, boolean isDone) {
+    public Task(String desc, boolean isDone, Place location) {
         this.desc = desc;
         this.isDone = isDone;
+        this.location = location;
     }
 
     /**
