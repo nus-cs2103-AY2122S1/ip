@@ -78,10 +78,10 @@ public class Storage {
 
     protected void saveFile(ArrayList<Task> list) throws DukeException {
         try {
-
             File file = new File(FILEPATH);
             file.getParentFile().mkdir();
             file.createNewFile();
+            assert file.exists();
             FileWriter writer = new FileWriter(file);
             writer.write(list.stream().map(Task::saveString).reduce(
                 "", (string1, string2) -> string1 + string2 + "\n"));

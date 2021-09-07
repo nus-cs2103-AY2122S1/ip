@@ -22,6 +22,7 @@ public class Ui {
      * @param str message to be printed
      */
     public static String dukePrint(String str) {
+        assert !str.isEmpty();
         StringBuilder builder = new StringBuilder();
         Scanner scanner = new Scanner(str);
         builder.append(DIVIDER);
