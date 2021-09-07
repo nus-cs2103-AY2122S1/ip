@@ -1,5 +1,11 @@
 package head;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+
 import addon.Popup;
 import addon.Storage;
 import addon.Task;
@@ -22,12 +28,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 /**
  * A simple task tracking interface.
@@ -194,7 +194,7 @@ public class Sados extends Application {
     /**
      * Checks for duplicates in the tasklist, and asks if duplicates should be added.
      *
-     * @param task task to be added to the list.
+     * @param task Task to be added to the list.
      */
     private void addTask(Task task) {
 

@@ -28,7 +28,7 @@ public class Task {
      * Checks if the taskName contains the keyword provided.
      *
      * @param query String to be queried.
-     * @return true if found, false otherwise.
+     * @return Boolean true if found, false otherwise.
      */
     public boolean queryIfNameContains(String query) {
         String[] querySplit = query.split(" ");
@@ -54,6 +54,12 @@ public class Task {
         }
     }
 
+    /**
+     * Concats individual words into strings of n words.
+     * @param sourceArray Array containing the original strings (individual words).
+     * @param queryLength Desired length of strings.
+     * @return Output array of generated strings.
+     */
     public String[] concatNWords(String[] sourceArray, int queryLength) {
         int sourceArrayLength = sourceArray.length;
         int resultArrayLength = sourceArrayLength - queryLength + 1;

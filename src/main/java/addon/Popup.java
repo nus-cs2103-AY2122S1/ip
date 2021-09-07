@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 public class Popup {
 
     private static final Insets INSETS = new Insets(10, 10, 10, 10);
+    private static boolean returnBoolean;
     /**
      * Creates a popup window with the given message and an acknowledgement button.
      *
@@ -42,8 +43,6 @@ public class Popup {
         window.setScene(scene);
         window.show();
     }
-
-    static boolean returnBoolean;
 
     /**
      * Creates a popup window with the given message and an confirm and cancel button.
