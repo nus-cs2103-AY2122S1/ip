@@ -8,14 +8,15 @@ import org.junit.jupiter.api.Test;
 import duke.DukeException;
 
 public class EventTest {
+    private final String errorHeader = "(O_O;) Oh no!! ";
+
     @Test
     public void init_emptyDescription_throwException() {
         try {
             new Event("", "2pm");
             fail();
         } catch (DukeException e) {
-            assertEquals("∑(O_O;) Oh no!! Looks like you forgot to include a description of the event.",
-                e.toString());
+            assertEquals(errorHeader + "Looks like you forgot to include a description of the event.", e.toString());
         }
     }
 
@@ -25,7 +26,7 @@ public class EventTest {
             new Event("task", "");
             fail();
         } catch (DukeException e) {
-            assertEquals("∑(O_O;) Oh no!! Looks like you forgot to include when the event is at.", e.toString());
+            assertEquals(errorHeader + "Looks like you forgot to include when the event is at.", e.toString());
         }
     }
 

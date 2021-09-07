@@ -24,6 +24,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructs a dialog box.
+     *
+     * @param text Text to show in dialog box.
+     * @param img  Image to show in dialog box.
+     */
     public DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -33,10 +39,34 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         dialog.setText(text);
         displayPicture.setImage(img);
         displayPicture.setClip(new Circle(50, 50, 50));
+    }
+
+    /**
+     * Returns a user dialog box.
+     *
+     * @param text Text to show in user dialog.
+     * @param img  Image for user dialog.
+     * @return A user dialog box.
+     */
+    public static DialogBox getUserDialog(String text, Image img) {
+        return new DialogBox(text, img);
+    }
+
+    /**
+     * Returns a duke dialog box.
+     *
+     * @param text Text to show in duke dialog box.
+     * @param img  Image for duke dialog.
+     * @return A duke dialog box.
+     */
+    public static DialogBox getDukeDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
+        db.flip();
+        return db;
     }
 
     /**
@@ -47,15 +77,5 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-    }
-
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
-    }
-
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
     }
 }

@@ -27,13 +27,17 @@ public abstract class Command {
      * @return true if command is exit command.
      */
     public abstract boolean isExit();
-    
-    /** Append multiple strings into one string separated by newline character. */
+
+    /**
+     * Append multiple strings into one string separated by newline character.
+     */
     protected String formatOutput(String... outputs) {
         return String.join("\n", outputs);
     }
 
-    /** Append multiple strings in an array into one string separated by newline character. */
+    /**
+     * Append multiple strings in an array into one string separated by newline character.
+     */
     protected String formatOutput(ArrayList<String> outputs) {
         return String.join("\n", outputs);
     }
