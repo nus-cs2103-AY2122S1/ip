@@ -67,7 +67,6 @@ public class Ui {
         for (int i = 0; i < tasks.length(); i++) {
             response += "\t" + (i + 1) + ". " + tasks.getTask(i).toString() + "\n";
         }
-        System.out.println(response);
         return response;
     }
 
