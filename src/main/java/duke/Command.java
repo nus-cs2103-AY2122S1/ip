@@ -1,6 +1,5 @@
 package duke;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public abstract class Command {
@@ -33,7 +32,7 @@ public abstract class Command {
         return new Add(t);
     }
 
-    public static Response process(UserInput userInput) throws DukeException.DukeEmptyTask, DukeException.DukeEmptyNote, IOException {
+    public static Response process(UserInput userInput) throws DukeException.DukeEmptyTask, DukeException.DukeEmptyNote, DukeException.DukeIllegalArgumentException, DukeException.DukeParseTaskException {
         switch (userInput.pre_command) {
         case NULL_COMMAND:
             return NOTHING.execute();
@@ -54,7 +53,7 @@ public abstract class Command {
         case EVENT_COMMAND:
             return add(Task.event(userInput.body_command)).execute();
         default:
-            throw new IllegalArgumentException("Unexpected argument: " + userInput.pre_command);
+            throw new DukeException.DukeIllegalArgumentException(userInput);
         }
     }
 
@@ -82,7 +81,7 @@ public abstract class Command {
     /**
      * Execute the commands
      */
-    protected abstract Response execute() throws DukeException.DukeEmptyNote, IOException;
+    protected abstract Response execute() throws DukeException.DukeEmptyNote;
 
     private static class Nothing extends Command {
         private Nothing() {
@@ -91,7 +90,6 @@ public abstract class Command {
         @Override
         protected Response execute() {
             ResponseMessage message = new ResponseMessage("Say something to me :(");
-            message.appendNewLine();
             return new Response(true,  message);
         }
     }
@@ -103,7 +101,6 @@ public abstract class Command {
         @Override
         protected Response execute() {
             ResponseMessage message = new ResponseMessage("Bye. Hope to see you again soon!");
-            message.appendNewLine();
             return new Response(false, message);
         }
     }
@@ -116,16 +113,15 @@ public abstract class Command {
         }
 
         @Override
-        protected Response execute() throws DukeException.DukeEmptyNote, IOException {
+        protected Response execute() throws DukeException.DukeEmptyNote {
             ResponseMessage responseMessage = new ResponseMessage();
             if (t.getTaskName() != NULL_COMMAND) {
-                    t.add();
-                    responseMessage.appendMessage("Got it. I've added this task:\n    " + t);
-                    responseMessage.appendMessage("Now you have " + Duke.todoList.size() + " tasks in the list.");
+                t.add();
+                responseMessage.appendMessage("Got it. I've added this task:\n    " + t);
+                responseMessage.appendMessage("Now you have " + Duke.todoList.size() + " tasks in the list.");
             } else {
                 throw new DukeException.DukeEmptyNote(t.taskKind());
             }
-            responseMessage.appendNewLine();
             return new Response(true, responseMessage);
         }
     }
@@ -140,7 +136,6 @@ public abstract class Command {
             for (int i = 0; i < Duke.todoList.size(); i++) {
                 responseMessage.appendMessage(i + 1 + ". " + Duke.todoList.get(i).toString());
             }
-            responseMessage.appendNewLine();
             return new Response(true, responseMessage);
         }
     }
@@ -165,7 +160,6 @@ public abstract class Command {
             for (int i = 0; i < matchingList.size(); i++) {
                 responseMessage.appendMessage(i + 1 + ". " + matchingList.get(i).toString());
             }
-            responseMessage.appendNewLine();
             return new Response(true, responseMessage);
         }
     }
@@ -188,11 +182,10 @@ public abstract class Command {
                     t.done();
                     responseMessage.appendMessage("Nice! I've marked this task as done:\n    " + t);
                 }
-                responseMessage.appendNewLine();
             } catch (IndexOutOfBoundsException e) {
-                throw new IndexOutOfBoundsException("OOPS!!! I'm sorry, but I cannot find that task :(\n" + Ui.printLine());
+                throw new IndexOutOfBoundsException("OOPS!!! I'm sorry, but I cannot find that task :(");
             } catch (NumberFormatException e) {
-                throw new NumberFormatException("OOPS!!! You need to follow format \"done <number>\"\n" + Ui.printLine());
+                throw new NumberFormatException("OOPS!!! You need to follow format \"done <number>\"");
             }
             return new Response(true, responseMessage);
         }
@@ -212,11 +205,10 @@ public abstract class Command {
                 Task t = Duke.todoList.remove(Integer.parseInt(index) - 1);
                 responseMessage.appendMessage("Noted. I've removed this task:\n    " + t);
                 responseMessage.appendMessage("Now you have " + Duke.todoList.size() + " tasks in the list.");
-                Ui.printLine();
             } catch (IndexOutOfBoundsException e) {
-                throw new IndexOutOfBoundsException("OOPS!!! I'm sorry, but I cannot find that task :(\n" + Ui.printLine());
+                throw new IndexOutOfBoundsException("OOPS!!! I'm sorry, but I cannot find that task :(");
             } catch (NumberFormatException e) {
-                throw new NumberFormatException("OOPS!!! You need to follow format \"done <number>\"\n" + Ui.printLine());
+                throw new NumberFormatException("OOPS!!! You need to follow format \"done <number>\"");
             }
 
             return new Response(true, responseMessage);

@@ -30,7 +30,24 @@ public class DukeException extends Exception {
 
         @Override
         public String toString() {
-            return "OOPS!!! The description of a " + t + " need to have " + t.note() +
+            return "OOPS!!! The description of a " + t + " need to have keyword " + t.note() +
+                    "\nTry something like: \"" + t.getExample() + "\"";
+        }
+    }
+
+    /**
+     * Class handles if the task Deadline or Event doesn't specify the date
+     */
+    public static class DukeParseTaskException extends DukeException {
+        private Task.TaskKind t;
+
+        protected DukeParseTaskException(Task.TaskKind t) {
+            this.t = t;
+        }
+
+        @Override
+        public String toString() {
+            return "OOPS!!! Something went wrong with " + t + " that I cannot understand" +
                     "\nTry something like: \"" + t.getExample() + "\"";
         }
     }
@@ -47,7 +64,7 @@ public class DukeException extends Exception {
 
         @Override
         public String toString() {
-            return "Unexpected argument: " + input;
+            return "OOPS!!! I don't understand: " + input.pre_command;
         }
     }
 }

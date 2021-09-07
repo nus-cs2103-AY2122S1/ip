@@ -1,8 +1,8 @@
 package duke;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 import java.util.Optional;
 
@@ -59,14 +59,18 @@ public abstract class Task {
      * @throws DukeException.DukeEmptyTask
      * @throws DukeException.DukeEmptyNote
      */
-    protected static Task deadline(String bodyCommand) throws DukeException.DukeEmptyTask, DukeException.DukeEmptyNote {
+    protected static Task deadline(String bodyCommand) throws DukeException.DukeEmptyTask, DukeException.DukeEmptyNote, DukeException.DukeParseTaskException {
         if (bodyCommand != Command.NULL_COMMAND) {
             String[] parts = bodyCommand.split("/by ", 2);
             String taskName = parts[0];
             if (parts.length > 1) {
-                String date = parts[1];
-                LocalDate localDate = LocalDate.parse(date, dtf);
-                return new Deadline(false, taskName, localDate);
+                try {
+                    String date = parts[1];
+                    LocalDate localDate = LocalDate.parse(date, dtf);
+                    return new Deadline(false, taskName, localDate);
+                } catch (DateTimeParseException e) {
+                    throw new DukeException.DukeParseTaskException(TaskKind.DEADLINE);
+                }
             } else {
                 throw new DukeException.DukeEmptyNote(TaskKind.DEADLINE);
             }
@@ -83,14 +87,18 @@ public abstract class Task {
      * @throws DukeException.DukeEmptyTask
      * @throws DukeException.DukeEmptyNote
      */
-    protected static Task event(String bodyCommand) throws DukeException.DukeEmptyTask, DukeException.DukeEmptyNote {
+    protected static Task event(String bodyCommand) throws DukeException.DukeEmptyTask, DukeException.DukeEmptyNote, DukeException.DukeParseTaskException {
         if (bodyCommand != Command.NULL_COMMAND) {
             String[] parts = bodyCommand.split("/at ", 2);
             String taskName = parts[0];
             if (parts.length > 1) {
+                try{
                 String date = parts[1];
                 LocalDate localDate = LocalDate.parse(date, dtf);
                 return new Event(false, taskName, localDate);
+                } catch (DateTimeParseException e) {
+                    throw new DukeException.DukeParseTaskException(TaskKind.DEADLINE);
+                }
             } else {
                 throw new DukeException.DukeEmptyNote(TaskKind.EVENT);
             }
@@ -184,10 +192,8 @@ public abstract class Task {
 
     /**
      * Add task into memory
-     *
-     * @throws IOException
      */
-    public void add() throws IOException {
+    public void add() {
         Duke.todoList.add(this);
     }
 
@@ -196,8 +202,8 @@ public abstract class Task {
      */
     protected enum TaskKind {
         TODO("todo", "T", null, "todo borrow book"),
-        DEADLINE("Deadline", "D", "deadline", "deadline return book /by 2022-02-18"),
-        EVENT("Event", "E", "start time", "event book conference /at 2022-02-18");
+        DEADLINE("Deadline", "D", "by", "deadline return book /by 2022-02-18"),
+        EVENT("Event", "E", "at", "event book conference /at 2022-02-18");
 
         private final String kind;
         private final String shortName;

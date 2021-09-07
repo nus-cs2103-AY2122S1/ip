@@ -36,7 +36,12 @@ public class Ui {
      * Print the welcome message
      */
     public String printWelcome() {
-        return this.printLine() + "\n" + "Hello! I'm Duke.Duke\nWhat can I do for you?" + "\n" + this.printLine();
+        return this.printLine() + "\n" + "Hello! I'm Duke\nWhat can I do for you?" + "\n" + this.printLine();
+    }
+
+    public void printResponse(Response response) {
+        String message = Ui.printLine() + "\n" + response + "\n" + Ui.printLine();
+        System.out.println(message);
     }
 
 }

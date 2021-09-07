@@ -1,22 +1,23 @@
 package duke;
 
 public class ResponseMessage {
+    private final static String NULL_STRING = "";
     private String message;
 
     ResponseMessage() {
-        this.message = "";
+        this.message = NULL_STRING;
     }
 
     ResponseMessage(String message) {
-        this.message = message + "\n";
+        this.message = message;
     }
 
     public void appendMessage(String s) {
-        this.message += s + "\n";
-    }
-
-    public void appendNewLine() {
-        this.message += Ui.printLine();
+        if (message.equals(NULL_STRING)) {
+            this.message += s ;
+            return;
+        }
+        this.message += "\n" + s ;
     }
 
     @Override

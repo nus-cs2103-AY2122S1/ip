@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -25,23 +26,26 @@ public class DukeTest {
     }
 
     @Test
-    public void AddDeadline_StorageTest() {
+    public void Hi_Test() {
         Duke duke = new Duke("/Users/hungkhoaitay/Duke/data/dukeTest.txt");
-        Storage storage = duke.storage;
-        try {
-            Duke.todoList = new ArrayList<>();
-            Duke.todoList.add(Task.deadline("return book /by 2022-02-18"));
-            storage.clear();
-            storage.upload();
-            assertEquals(duke.storage.read().get(0), "D , false , return book  , 2022-02-18");
-            storage.clear();
-        } catch (DukeException.DukeEmptyTask e) {
-            e.printStackTrace();
-        } catch (DukeException.DukeEmptyNote e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String input = "hi";
+        String expected =
+                "--------------------------------------------------\n" +
+                "OOPS!!! I don't understand: hi\n" +
+                "--------------------------------------------------";
+        System.out.println(duke.getResponse(input));
+        System.out.println(expected);
+        System.out.println(Objects.equals(duke.getResponse(input), expected));
+        assertTrue(expected.equals(duke.getResponse(input)));
+    }
+
+    @Test
+    public void AddDeadline_Test() {
+        Duke duke = new Duke("/Users/hungkhoaitay/Duke/data/dukeTest.txt");
+        String expected = "--------------------------------------------------\n" +
+                "OOPS!!! I don't understand: hi\n" +
+                "--------------------------------------------------";
+        assertEquals(duke.getResponse("\"return book /by 2022-02-18\""), expected);
     }
 
     @Test
@@ -57,9 +61,7 @@ public class DukeTest {
             storage.upload();
             assertEquals(duke.storage.read().get(0), "D , true , return book  , 2022-02-18");
             storage.clear();
-        } catch (DukeException.DukeEmptyTask e) {
-            e.printStackTrace();
-        } catch (DukeException.DukeEmptyNote e) {
+        } catch (DukeException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -79,7 +81,7 @@ public class DukeTest {
             storage.upload();
             assertEquals(duke.storage.read().isEmpty(), true);
             storage.clear();
-        } catch (DukeException.DukeEmptyTask e) {
+        } catch (DukeException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();

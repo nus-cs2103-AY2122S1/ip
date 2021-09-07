@@ -9,6 +9,11 @@ public class Response {
         this.message = message;
     }
 
+    Response(ResponseMessage message) {
+        this.isContinue = true;
+        this.message = message;
+    }
+
     protected boolean isContinue() {
         return isContinue;
     }

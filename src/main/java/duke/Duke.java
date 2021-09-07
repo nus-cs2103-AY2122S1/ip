@@ -28,36 +28,38 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke("/Users/hungkhoaitay/Duke.Duke/data/duke.txt");
         Ui ui = new Ui();
-        System.out.println(ui.printWelcome());
-
-        boolean isContinue = true;
-
-        while (isContinue) {
-            try {
-                String userInput = ui.getUserInput();
-
-                Response response = duke.getResponse(userInput);
-
-                isContinue = response.isContinue();
-                System.out.println(response);
-            } catch (DukeException.DukeEmptyTask dukeEmptyTask) {
-                dukeEmptyTask.printStackTrace();
-            } catch (DukeException.DukeEmptyNote dukeEmptyNote) {
-                dukeEmptyNote.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
+        duke.run(ui);
         duke.finish();
+    }
+
+    private void run(Ui ui) {
+        System.out.println(ui.printWelcome());
+        process(ui, true);
+    }
+
+    private void process(Ui ui, boolean isContinue) {
+        if (!isContinue) {
+            return;
+        }
+        String userInput = ui.getUserInput();
+        Response response = this.getResponse(userInput);
+        ui.printResponse(response);
+        process(ui, response.isContinue());
     }
 
     /**
      * Print Welcome message and process user's command
      */
-    public Response getResponse(String input) throws DukeException.DukeEmptyTask, DukeException.DukeEmptyNote, IOException {
+    public Response getResponse(String input) {
         UserInput userInputProcessed = Command.analyze(input);
-        Response response = Command.process(userInputProcessed);
+        Response response = null;
+        try {
+            response = Command.process(userInputProcessed);
+        } catch (DukeException e) {
+            response = new Response(new ResponseMessage(e.toString()));
+        } catch (Exception e) {
+            response = new Response(new ResponseMessage(e.toString()));
+        }
 
         return response;
     }
