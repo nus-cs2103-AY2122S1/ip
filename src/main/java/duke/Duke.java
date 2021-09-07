@@ -78,7 +78,12 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            return c.execute(tasks, ui, storage);
+            String response = c.execute(tasks, ui, storage);
+
+            // Ensure that there is a response to return
+            assert (!response.equals(""));
+
+            return response;
         } catch (DukeException e) {
             return ui.showLoadingError(e.getMessage());
         }
