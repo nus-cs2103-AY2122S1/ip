@@ -37,6 +37,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         ui.showGreeting();
         String cmd = sc.nextLine();
+        assert cmd != null : "Scanner reads null";
         while (!cmd.equals("bye")) {
             try {
                 parser.parse(cmd);
@@ -60,6 +61,7 @@ public class Duke {
      */
     public String getResponse(String cmd) {
         String response;
+        assert cmd != null : "Input is null";
         if (cmd.equals("bye")) {
             return ui.showFarewellMsg();
         }
