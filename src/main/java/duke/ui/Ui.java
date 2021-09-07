@@ -3,7 +3,6 @@ package duke.ui;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import duke.exceptions.DukeException;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 import duke.utils.Constants;

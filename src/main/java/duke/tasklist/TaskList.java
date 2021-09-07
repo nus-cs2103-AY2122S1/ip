@@ -2,6 +2,7 @@ package duke.tasklist;
 
 import java.util.ArrayList;
 
+import duke.exceptions.DukeException;
 import duke.exceptions.InvalidNumberInputException;
 import duke.tasks.Task;
 
@@ -16,7 +17,8 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
-    public Task get(int i) throws InvalidNumberInputException {
+    public Task get(int i) {
+        assert i < this.size() : new InvalidNumberInputException();
         return taskList.get(i);
     }
 
@@ -50,6 +52,7 @@ public class TaskList {
     }
 
     public Task remove(int i) {
+        assert !taskList.isEmpty() : new DukeException("The task list is empty");
         return taskList.remove(i);
     }
 
