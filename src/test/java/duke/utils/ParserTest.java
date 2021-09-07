@@ -1,7 +1,7 @@
-package utils;
+package duke.utils;
 
-import commands.ExitCommand;
-import exceptions.InvalidInputException;
+import duke.commands.ExitCommand;
+import duke.exceptions.InvalidInputException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

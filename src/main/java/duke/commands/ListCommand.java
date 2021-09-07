@@ -1,17 +1,14 @@
-package commands;
+package duke.commands;
 
-import tasks.TaskList;
-import utils.Storage;
-import utils.Ui;
+import duke.tasks.TaskList;
+import duke.utils.Storage;
 
 public class ListCommand extends Command {
 
     private static final String TASK_MSG = "Here are your tasks:";
 
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         String message = TASK_MSG + "\n" + tasks.toString();
-
-        ui.printResponse(message);
 
         return message;
     }
