@@ -31,6 +31,7 @@ public class StorageList {
                 checkIfDoneAndAdd(todo, doneState);
 
             } else { // D for deadline
+
                 int thirdBarIdx = input.indexOf('|', 7);
                 String taskDesc = input.substring(8, thirdBarIdx - 1);
                 String taskTime = input.substring(thirdBarIdx + 2);
@@ -40,6 +41,7 @@ public class StorageList {
                     checkIfDoneAndAdd(dl, doneState);
 
                 } else if (type == 'E') { // E for event
+
                     Event event = new Event(taskDesc, taskTime);
                     checkIfDoneAndAdd(event, doneState);
                 }
@@ -102,6 +104,7 @@ public class StorageList {
                 itemNumber++;
             }
         }
+        assert itemNumber <= size : "Index out of bounds";
         return output;
     }
 

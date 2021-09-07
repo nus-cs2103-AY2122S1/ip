@@ -133,6 +133,7 @@ public class Duke extends Application {
 
 
     private void handleUserInput() {
+        assert user != null && duke != null : "User and duke images should not be null";
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
@@ -169,11 +170,14 @@ public class Duke extends Application {
                 }
                 return putTaskInList(TaskType.TODO, input);
 
+
             } else if (parser.isValidDeadline(input)) {
                 if (input.length() == 8) {
                     throw new DukeException(ui.taskErrorMsg(TASK_DEADLINE));
                 }
+
                 return putTaskInList(TaskType.DEADLINE, input);
+
 
             } else if (parser.isValidEvent(input)) {
                 if (input.length() == 5) {
@@ -181,10 +185,13 @@ public class Duke extends Application {
                 }
                 return putTaskInList(TaskType.EVENT, input);
 
+
             } else if (parser.isDeleteCmd(input)) {
                 if (input.length() == 6) {
                     throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
                 }
+                assert input.substring(8).length() == 1 : "There should be an index";
+
                 int idx = parser.getDeleteIdx(input);
                 String desc = SL.get(idx).getDescription();
                 SL.delete(idx);
@@ -195,11 +202,14 @@ public class Duke extends Application {
                 if (input.length() == 4) {
                     throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
                 }
+                assert input.substring(6).length() == 1 : "There should be an index";
+
                 String keyword = input.substring(5);
                 storage.save(SL);
                 return SL.findAndReturn(keyword);
 
             } else {
+
                 switch (input) {
                 case "bye":
                     ui.bye();
@@ -207,6 +217,7 @@ public class Duke extends Application {
                 case "list":
                     return ui.displayListContents(SL);
                 default:
+                    assert false : input + "is not a valid command";
                     throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
                 }
             }
@@ -242,6 +253,7 @@ public class Duke extends Application {
     }
 
 
+
     private String marking(String input) throws DukeException, IOException {
         if (input.length() >= 6 && input.substring(5).matches("[0-9]+")) {
             int taskNum = parser.getDoneIdx(input);
@@ -252,10 +264,10 @@ public class Duke extends Application {
                 return ui.taskDoneConfirmation();
             } else {
                 throw new DukeException(ui.taskErrorMsg(ERROR_OUTOFBOUNDS));
+
             }
-        } else {
-            throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
         }
+        throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
 
     }
 }

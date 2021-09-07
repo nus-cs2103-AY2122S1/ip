@@ -45,6 +45,7 @@ public class Storage {
                     taskType = "D ";
                     taskTime = ((Deadline) task).getBy();
                 } else {
+
                     taskType = "E ";
                     taskTime = ((Event) task).getAt();
                 }

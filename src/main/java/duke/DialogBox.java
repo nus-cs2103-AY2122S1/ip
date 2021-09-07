@@ -14,7 +14,6 @@ import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 
-
 public class DialogBox extends HBox{
     private Label text;
     @FXML

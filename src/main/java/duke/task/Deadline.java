@@ -21,6 +21,7 @@ public class Deadline extends Task {
      * @return The deadline.
      */
     public String getBy() {
+        assert by != null : "by variable should not be null";
         return by;
     }
 
@@ -31,6 +32,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
+        assert by != null : "by variable should not be null";
         localDateTime = new Parser().parseLocalDateTime(by);
         return "[D]" + super.toString() + " (by: " + localDateTime.format(dateTimeFormatter) + ")";
     }
