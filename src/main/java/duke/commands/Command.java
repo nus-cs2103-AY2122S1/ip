@@ -14,7 +14,6 @@ import duke.utils.Ui;
  * Contains all the static nested classes to represent various user commands to the chat-bot.
  */
 public abstract class Command {
-    private boolean isExit = false;
 
     /**
      * Executes this command accordingly. The actual implementation must be defined by
@@ -25,19 +24,6 @@ public abstract class Command {
      * @param storage the storage instance.
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage);
-
-    /**
-     * Checks whether this command is an ExitCommand.
-     *
-     * @return true if it is an exit command, else false is returned.
-     */
-    public boolean isExitCommand() {
-        return isExit;
-    }
-
-    private void setExitTrue() {
-        isExit = true;
-    }
 
     /**
      * The command indicating that the user wants to shut down the chat-bot.
@@ -53,10 +39,8 @@ public abstract class Command {
         @Override
         public void execute(TaskList tasks, Ui ui, Storage storage) {
             ui.showByeMessage();
-            super.setExitTrue();
         }
     }
-
 
     /**
      * The command indicating that the user wants to list all the tasks within the
@@ -231,6 +215,8 @@ public abstract class Command {
         @Override
         public void execute(TaskList tasks, Ui ui, Storage storage) {
             Task taskToDelete = tasks.getTask(this.taskNum);
+            assert (taskToDelete != null) : "A task you want to delete cannot be null.";
+
             tasks.deleteTask(this.taskNum);
             storage.removePersistedTask(this.taskNum);
             ui.showTaskDeletedInteraction(taskToDelete, tasks);
@@ -250,5 +236,4 @@ public abstract class Command {
             ui.showMessagePrintingAllMatchingTasks(matchingTasks, tasks);
         }
     }
-
 }
