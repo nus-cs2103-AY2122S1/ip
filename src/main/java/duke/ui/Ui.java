@@ -181,7 +181,9 @@ public class Ui extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
+        DialogBox userDialog = DialogBox.getUserDialog(input, userImage);
+        dialogContainer.getChildren()
+                .add(userDialog);
         userInput.clear();
         dukeChatbot.readInput(input);
     }
@@ -197,6 +199,8 @@ public class Ui extends AnchorPane {
 
     private void printFormattedMessage(String message) {
         String formattedMessage = messageFormatter.getFormattedMessage(message);
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(formattedMessage, dukeImage));
+        DialogBox dukeDialog = DialogBox.getDukeDialog(formattedMessage, dukeImage);
+        dialogContainer.getChildren()
+                .add(dukeDialog);
     }
 }
