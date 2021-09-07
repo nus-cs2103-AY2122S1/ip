@@ -89,6 +89,7 @@ public class TaskList {
                 .collect(Collectors.toList());
 
         StringBuilder output;
+        
         if (searchResult.isEmpty()) {
             output = new StringBuilder("No Result match your search keyword.\n");
         } else {
