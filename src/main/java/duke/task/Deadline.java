@@ -21,6 +21,15 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns the by argument of this Deadline task.
+     *
+     * @return the by argument of this Deadline task.
+     */
+    public LocalDate getBy() {
+        return by;
+    }
+
+    /**
      * Returns the string representation of this Deadline task to be saved in storage.
      *
      * @return the string representation of this Deadline task to be saved in storage.
