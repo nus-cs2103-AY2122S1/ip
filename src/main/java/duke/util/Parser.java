@@ -1,16 +1,8 @@
 package duke.util;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.UnknownCommand;
+import duke.command.*;
+import duke.exception.DukeException;
 import duke.exception.EmptyDescriptionException;
-import duke.exception.IncompleteDescriptionException;
-import duke.exception.InvalidDateFormatException;
 
 /**
  * A class that deals with making sense of the user command.
@@ -52,8 +44,7 @@ public class Parser {
      * @return The command class based on the type specified in the command.
      * @throws EmptyDescriptionException The exception that handles command with empty description.
      */
-    public static Command parse(String fullCommand) throws EmptyDescriptionException, IncompleteDescriptionException,
-            InvalidDateFormatException {
+    public static Command parse(String fullCommand) throws DukeException {
         boolean isEmptyCommand = fullCommand.isEmpty() || fullCommand.trim().isEmpty();
 
         if (isEmptyCommand) {
