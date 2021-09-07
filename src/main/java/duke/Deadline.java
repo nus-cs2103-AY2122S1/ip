@@ -22,7 +22,7 @@ public class Deadline extends Task {
      */
     public Deadline(String title, String deadline) throws InvalidDeadlineException {
         super(title);
-        this.type = "D";
+        type = "D";
         try {
             this.deadline = LocalDate.parse(deadline);
         } catch (DateTimeParseException e) {
@@ -32,8 +32,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[" + type + "]" + super.toString() + "(by:" +
-                deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        String deadline = this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return "[" + type + "]" + super.toString() + "(by: " + deadline + ")";
     }
 
     /**
@@ -43,7 +43,7 @@ public class Deadline extends Task {
      */
     @Override
     public String writeTask() {
-        return type + " | " + super.writeTask() + " | " +
-                deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String deadline = this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return type + " | " + super.writeTask() + " | " + deadline;
     }
 }

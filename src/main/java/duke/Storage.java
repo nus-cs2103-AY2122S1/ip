@@ -14,7 +14,7 @@ import java.util.Scanner;
  *
  */
 public class Storage {
-    private String filePath;
+    private final String filePath;
 
     /**
      * Constructor of a storage.
@@ -24,7 +24,6 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
     }
-
 
     /**
      * Method to load any existing data from file to the current list
@@ -48,16 +47,16 @@ public class Storage {
                 Task task;
                 switch (stuff[0]) {
                 case "T":
-                        task = new ToDos(stuff[2]);
-                        break;
+                    task = new ToDos(stuff[2]);
+                    break;
                 case "D":
-                        task = new Deadline(stuff[2], stuff[3]);
-                        break;
+                    task = new Deadline(stuff[2], stuff[3]);
+                    break;
                 case "E":
-                        task = new Events(stuff[2], stuff[3]);
-                        break;
+                    task = new Events(stuff[2], stuff[3]);
+                    break;
                 default:
-                        throw new InvalidTaskException();
+                    throw new InvalidTaskException();
                 }
 
                 if (stuff[1].equals("1")) {
@@ -79,16 +78,17 @@ public class Storage {
         File file = new File(filePath);
         if (!file.exists()) {
             file.createNewFile();
-        } else {
-            file.delete();
-            File newFile = new File(filePath);
-            newFile.createNewFile();
-            FileWriter writer = new FileWriter(file);
-
-            for (Task task : list.getList()) {
-                writer.write(task.writeTask() + "\n");
-            }
-            writer.close();
+            return;
         }
+        file.delete();
+        File newFile = new File(filePath);
+        newFile.createNewFile();
+        FileWriter writer = new FileWriter(file);
+
+        for (Task task : list.getList()) {
+            writer.write(task.writeTask() + "\n");
+        }
+        writer.close();
+
     }
 }

@@ -1,4 +1,5 @@
-T | 1 | hello
-T | 1 | bbabi
 T | 1 | dance
-T | 0 | fly
+T | 1 | fly
+T | 0 | shower
+T | 0 | homework
+D | 0 | helo  | Oct 11 2012

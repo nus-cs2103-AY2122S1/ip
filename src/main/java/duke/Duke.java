@@ -35,44 +35,28 @@ public class Duke {
      * Contains a parser which reads command from the input.
      */
 
-
     @FXML
     String getResponse(String input) {
         String result = "";
-
-        if (input.equals("bye")) {
-            result += "Babai! See you again soon! XD";
-        } else if (input.equals("list")) {
-            result += tasks.printList();
-        } else if (input.startsWith("done")) {
-            try {
-                result += tasks.markAsDone(input);
-            } catch (DukeException e) {
-                result = e.getMessage();
-            } catch (NumberFormatException e) {
-                result = "Task number is invalid!";
-            }
-        } else if (input.startsWith("delete")) {
-            try {
-                result += tasks.deleteTask(input);
-            } catch (DukeException e) {
-                result += e.getMessage();
-            }
-        } else if (input.startsWith("find")) {
-            try {
-                result += tasks.findTask(input);
-            } catch (DukeException e) {
-                result += e.getMessage();
-            }
-        } else {
-            try {
-                result += tasks.addTask(input);
-            } catch (DukeException e) {
-                result += e.getMessage();
-            }
-        }
         try {
+            if (input.equals("bye")) {
+                result += "Babai! See you again soon! XD";
+            } else if (input.equals("list")) {
+                result += tasks.printList();
+            } else if (input.startsWith("done")) {
+                result += tasks.markAsDone(input);
+            } else if (input.startsWith("delete")) {
+                result += tasks.deleteTask(input);
+            } else if (input.startsWith("find")) {
+                result += tasks.findTask(input);
+            } else {
+                result += tasks.addTask(input);
+            }
             storage.updateFile(tasks);
+        } catch (DukeException e) {
+            result = e.getMessage();
+        } catch (NumberFormatException e) {
+            result = "Task number is invalid!";
         } catch (IOException e) {
             return "File failed to load!";
         }
