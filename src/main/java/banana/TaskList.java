@@ -1,6 +1,9 @@
 package banana;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.ArrayList;
+import java.util.stream.*;
 
 /**
  * The TaskList class stores
@@ -11,13 +14,17 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    protected ArrayList<Task> allTasks;
+    private ArrayList<Task> allTasks;
 
     /**
      * Constructor for the TaskList class.
      */
     public TaskList(ArrayList<Task> tasks) {
         this.allTasks = tasks;
+    }
+
+    private ArrayList<Task> getTasks() {
+        return allTasks;
     }
 
     /**
@@ -56,6 +63,41 @@ public class TaskList {
      */
     public int getSize() {
         return allTasks.size();
+    }
+
+    /**
+     * Appends tasks from the other TaskList.
+     *
+     * @param otherTasks the other TaskList.
+     */
+    public void addTasks(TaskList otherTasks) {
+        allTasks.addAll(otherTasks.getTasks());
+    }
+
+    /**
+     * Removes common tasks in the original
+     * TaskList and the TaskList param.
+     *
+     * @param otherTasks the other TaskList.
+     */
+    public void removeTasks(TaskList otherTasks) {
+        allTasks.removeAll(otherTasks.getTasks());
+        /*for (Task t : otherTasks.getTasks()) {
+            allTasks.remove(t);
+        }*/
+    }
+
+    /**
+     * Gets part of the TaskList, from
+     * index start to end - 1.
+     *
+     * @param start the starting index (inclusive).
+     * @param end   the end index (exclusive).
+     */
+    public TaskList subList(int start, int end) {
+        List<Task> tempTasks = allTasks.subList(start, end);
+        ArrayList<Task> newTasks = new ArrayList<>(tempTasks);
+        return new TaskList(newTasks);
     }
 
 }

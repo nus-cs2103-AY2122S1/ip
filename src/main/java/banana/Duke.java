@@ -50,8 +50,8 @@ public class Duke extends Application {
         String helloText = "Hello I'm Hange! \n How can I help you?";
         HELLO_LABEL = new Label(helloText);
         try {
-            user = new Image(new FileInputStream("hange.jpg"));
-            bot = new Image(new FileInputStream("levi.jpg"));
+            user = new Image(new FileInputStream("levi.jpg"));
+            bot = new Image(new FileInputStream("hange.jpg"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -147,6 +147,13 @@ public class Duke extends Application {
         });
     }
 
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    protected static String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
 
     /**
      * Adds user input/corresponding
@@ -165,6 +172,7 @@ public class Duke extends Application {
             if (userInput.getText().equals("bye")) {
                 Platform.exit();
             } else {
+                Parser.setPrevInput(userInput.getText());
                 writeToFile();
             }
             userInput.clear();
@@ -184,8 +192,7 @@ public class Duke extends Application {
      */
     public void writeToFile() throws IOException {
         String text = "";
-        FileWriter fw = new FileWriter(
-                FILE_PATH, false);
+        FileWriter fw = new FileWriter(FILE_PATH, false);
         for (int i = 0; i < tasks.getSize(); i++) {
             String doneStr = "No";
             Task currentTask = tasks.getTask(i);

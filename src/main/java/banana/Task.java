@@ -42,8 +42,8 @@ class Task {
     /**
      * Sets the task as done.
      */
-    public void setIsDone() {
-        isDone = true;
+    public void setIsDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     @Override

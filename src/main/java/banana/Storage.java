@@ -61,7 +61,7 @@ public class Storage {
                 newTask = new Task(taskInfo[1]);
             }
             if (line.contains("Yes")) {
-                newTask.setIsDone();
+                newTask.setIsDone(true);
             }
             tasks.addTask(newTask);
         }

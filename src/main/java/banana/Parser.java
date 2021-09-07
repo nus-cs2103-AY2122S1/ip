@@ -13,6 +13,8 @@ import java.time.LocalDate;
 public class Parser {
 
     private String input;
+    protected static String prevInput;
+    private static Task deletedTask;
 
     /**
      * Constructor for the Parser class.
@@ -21,6 +23,10 @@ public class Parser {
      */
     public Parser(String input) {
         this.input = input;
+    }
+
+    public static void setPrevInput(String prevInput) {
+        Parser.prevInput = prevInput;
     }
 
     /**
@@ -52,7 +58,9 @@ public class Parser {
      */
     public String parseInput(TaskList tasks) throws DukeException {
         exceptionCommand(tasks);
-        if (input.equals("list")) {
+        if (input.equals("undo")) {
+            return undoCommand(tasks);
+        } else if (input.equals("list")) {
             return listCommand(tasks);
         } else if (input.contains("done")) {
             return doneCommand(tasks);
@@ -65,6 +73,41 @@ public class Parser {
         } else {
             return addTaskCommand(tasks);
         }
+    }
+
+    /**
+     * Undoes the previous command's
+     * action.
+     *
+     * @param tasks the list of tasks.
+     * @return the label.
+     */
+    public String undoCommand(TaskList tasks) {
+        String undoText = "Sorry, undo cannot be done,  "
+                + "there are currently "
+                + "no tasks in the list.";
+        if (tasks.getSize() >= 1) {
+            if (prevInput.contains("done")) {
+                int index = Integer.parseInt(prevInput.substring(5));
+                tasks.getTask(index - 1).setIsDone(false);
+                undoText = "Undid done on task " + index;
+            } else if (prevInput.contains("delete")) {
+                int index = Integer.parseInt(prevInput.substring(7));
+                TaskList latterTasks = tasks.subList(index - 1, tasks.getSize());
+                tasks.removeTasks(latterTasks);
+                tasks.addTask(deletedTask);
+                tasks.addTasks(latterTasks);
+                undoText = "Undid delete on task " + index;
+            } else if (!prevInput.contains("find")
+                    && !prevInput.equals("list")) {
+                Task temp = tasks.getTask(tasks.getSize() - 1);
+                tasks.removeTask(temp);
+                undoText = "Removed task " + temp.getDescription();
+            } else {
+                undoText = "There is nothing to undo.";
+            }
+        }
+        return undoText;
     }
 
     /**
@@ -90,7 +133,7 @@ public class Parser {
     public String doneCommand(TaskList tasks) {
         int index = Integer.parseInt(input.substring(5, 6)) - 1;
         assert index >= 0;
-        tasks.getTask(index).setIsDone();
+        tasks.getTask(index).setIsDone(true);
         String doneText = "Nice! I've marked this task as done: \n"
                 + "       ";
         return doneText + tasks.getTask(index).toString();
@@ -175,14 +218,14 @@ public class Parser {
     public String deleteCommand(TaskList tasks) {
         int index = Integer.parseInt(input.substring(7, 8)) - 1;
         assert index >= 0;
-        Task removedTask = tasks.getTask(index);
-        tasks.removeTask(removedTask);
+        deletedTask = tasks.getTask(index);
+        tasks.removeTask(deletedTask);
         String removeTaskText = "Noted. I've removed this task:  \n"
                 + "       ";
         String taskNumberText = "\n     "
                 + "Now you have " + Integer.toString(tasks.getSize())
                 + " tasks in the list.";
-        return removeTaskText + removedTask.toString()
+        return removeTaskText + deletedTask.toString()
                 + taskNumberText;
     }
 

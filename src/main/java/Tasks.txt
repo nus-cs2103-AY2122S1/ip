@@ -1,8 +1,4 @@
-T ~ Yes ~ finish training
-T ~ Yes ~ eat food
-T ~ No ~ cook food
-T ~ No ~ kill titan
-No ~ food
-D ~ Yes ~ eat food ~ 7pm
-D ~ No ~ return book ~ Dec 2 2019 6pm
-E ~ No ~ return book ~ Dec 2 2019 6pm
+No ~ cheese
+No ~ lit
+T ~ No ~ hug
+D ~ No ~ yup ~ 5pm
