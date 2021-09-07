@@ -35,7 +35,7 @@ public class Parser {
      *
      * @return A boolean indicating to end the session or not.
      */
-    public boolean isExit() {
+    public boolean isSessionDone() {
         return isSessionDone;
     }
 

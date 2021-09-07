@@ -32,13 +32,32 @@ public class TaskList {
         this.ui = new Ui();
     }
 
-    /***
+    /**
      * Returns the number of tasks present in the task list.
      *
      * @return The length of the user task list.
      */
     public int taskListLength() {
         return userTaskList.size();
+    }
+
+    /**
+     * Returns a boolean suggesting whether the format for adding a
+     * deadline task is followed or not.
+     *
+     * @param userInput The command entered by the user, to be checked.
+     * @return A boolean, true, if the format for adding the deadline task is followed.
+     */
+    public boolean isDeadlineFormatCorrect(String userInput) {
+        boolean hasByKeyword = userInput.toLowerCase().contains("/by");
+        if (!hasByKeyword) {
+            return false;
+        }
+
+        boolean hasLengthGreaterThanOrEqualToFour = userInput.split(" ").length >= 4;
+        boolean hasDescriptionAndDateSpecified = userInput.substring(9).split(" /by ").length >= 2;
+
+        return hasByKeyword && hasLengthGreaterThanOrEqualToFour && hasDescriptionAndDateSpecified;
     }
 
     /**
@@ -49,16 +68,16 @@ public class TaskList {
      * @throws IllegalDateFormatException If the date format is not followed.
      */
     public void addDeadlineTask(String userInput) throws IllegalDeadlineFormatException, IllegalDateFormatException {
+        int prefixLengthPlusSpace = 9;
+
         // Making sure that a properly formatted deadline task is entered.
-        if (!userInput.toLowerCase().contains("/by")
-                || userInput.split(" ").length < 4
-                || userInput.substring(9).split(" /by ").length < 2) {
+        if (!isDeadlineFormatCorrect(userInput)) {
             throw new IllegalDeadlineFormatException("Please Follow The Format For Adding A Deadline Task:\n"
                     + "\tdeadline task_description /by DD/MM/YYYY");
         }
 
         // Parsing the user input to obtain the information about the task.
-        String[] userInputArray = userInput.substring(9).split(" /by ");
+        String[] userInputArray = userInput.substring(prefixLengthPlusSpace).split(" /by ");
 
         // Making sure that the time is properly formatted.
         TaskDateAndTime deadlineDate = new TaskDateAndTime(userInputArray[1]);
@@ -73,6 +92,25 @@ public class TaskList {
     }
 
     /**
+     * Returns a boolean suggesting whether the format for adding an
+     * event task is followed or not.
+     *
+     * @param userInput The command entered by the user, to be checked.
+     * @return A boolean, true, if the format for adding the event task is followed.
+     */
+    public boolean isEventFormatCorrect(String userInput) {
+        boolean hasAtKeyword = userInput.toLowerCase().contains("/at");
+        if (!hasAtKeyword) {
+            return false;
+        }
+
+        boolean hasLengthGreaterThanOrEqualToFour = userInput.split(" ").length >= 4;
+        boolean hasDescriptionAndDateSpecified = userInput.substring(5).split(" /at ").length >= 2;
+
+        return hasAtKeyword && hasLengthGreaterThanOrEqualToFour && hasDescriptionAndDateSpecified;
+    }
+
+    /**
      * Adds an event type task to the task list and storage.
      *
      * @param userInput The task details input by the user.
@@ -80,16 +118,16 @@ public class TaskList {
      * @throws IllegalDateFormatException If the date format is not followed.
      */
     public void addEventTask(String userInput) throws IllegalEventFormatException, IllegalDateFormatException {
+        int prefixLengthPlusSpace = 6;
+
         // Making sure that a properly formatted event task is entered.
-        if (!userInput.toLowerCase().contains("/at")
-                || userInput.split(" ").length < 4
-                || userInput.substring(5).split(" /at ").length < 2) {
+        if (!isEventFormatCorrect(userInput)) {
             throw new IllegalEventFormatException("Please Follow The Format For Adding An Event Task:\n"
                     + "\tevent task_description /at time");
         }
 
         // Parsing the user input to obtain the information about the task.
-        String[] userInputArray = userInput.substring(6).split(" /at ");
+        String[] userInputArray = userInput.substring(prefixLengthPlusSpace).split(" /at ");
 
         // Making sure that the date is properly formatted.
         TaskDateAndTime eventDate = new TaskDateAndTime(userInputArray[1]);
@@ -104,21 +142,40 @@ public class TaskList {
     }
 
     /**
+     * Returns a boolean suggesting whether the format for adding a
+     * todo task is followed or not.
+     *
+     * @param userInput The command entered by the user, to be checked.
+     * @return A boolean, true, if the format for adding the todo task is followed.
+     */
+    public boolean isTodoFormatCorrect(String userInput) {
+        boolean hasLengthGreaterThanOrEqualToTwo = userInput.split(" ").length >= 2;
+        if (!hasLengthGreaterThanOrEqualToTwo) {
+            return false;
+        }
+
+        boolean hasDescriptionSpecified = userInput.substring(5).compareTo("") != 0;
+
+        return hasLengthGreaterThanOrEqualToTwo && hasDescriptionSpecified;
+    }
+
+    /**
      * Adds a todo type task to the task list and storage.
      *
      * @param userInput The task details input by the user.
      * @throws IllegalTodoFormatException If the format for adding a todo task is not followed.
      */
     public void addTodoTask(String userInput) throws IllegalTodoFormatException {
+        int prefixLengthPlusSpace = 5;
+
         // Making sure that a properly formatted todo task is entered.
-        if (userInput.split(" ").length < 2
-                || userInput.substring(5).compareTo("") == 0) {
+        if (!isTodoFormatCorrect(userInput)) {
             throw new IllegalTodoFormatException("Please Follow The Format For Adding A Todo Task:\n"
                     + "\ttodo task_description");
         }
 
         // Parsing the user input to obtain the information about the task.
-        String userInputTodo = userInput.substring(5);
+        String userInputTodo = userInput.substring(prefixLengthPlusSpace);
 
         Task todoTask = new Todo(userInputTodo);
         userTaskList.add(todoTask);
@@ -127,6 +184,34 @@ public class TaskList {
     }
 
     /**
+     * Returns a boolean suggesting if the task number is entered
+     * correctly.
+     *
+     * @param parsedUserInput The parsed user input which should hold the task number.
+     * @return A boolean, true, if the task number is entered well.
+     */
+    public boolean isTaskNumberSpecified(String[] parsedUserInput) {
+        boolean isArrayLengthGreaterThanOne = parsedUserInput.length > 1;
+        if (!isArrayLengthGreaterThanOne) {
+            return false;
+        }
+        boolean hasANumber = parsedUserInput[1].compareTo("") != 0;
+        boolean isDigit = Character.isDigit(parsedUserInput[1].charAt(0));
+
+        return isArrayLengthGreaterThanOne && hasANumber && isDigit;
+    }
+
+    /**
+     * Returns a boolean suggesting whether the task number entered is
+     * in the valid range according to the user task list length.
+     *
+     * @param taskNumber The task number to check.
+     * @return A boolean, true, if the task number is in the valid range.
+     */
+    public boolean isTaskNumberInRange(int taskNumber) {
+        return (taskNumber <= (userTaskList.size() - 1)) && (taskNumber >= 0);
+    }
+    /**
      * Deletes a particular task from the task list and storage.
      *
      * @param parsedUserInput The parsed command, entered by the user with the "delete" keyword.
@@ -134,26 +219,23 @@ public class TaskList {
      * @throws TaskNotFoundException If the entered task number does not exist.
      */
     public void deleteTask(String[] parsedUserInput) throws IllegalTaskNumberException, TaskNotFoundException {
-        String[] holder = parsedUserInput;
-
         // Checking if a task number is entered and is an integer.
-        if (holder.length <= 1 || holder[1].compareTo("") == 0
-                || !Character.isDigit(holder[1].charAt(0))) {
+        if (!isTaskNumberSpecified(parsedUserInput)) {
             throw new IllegalTaskNumberException("Please Enter An Integer Value For Task Number");
         }
 
         // Obtaining the task number to be deleted.
-        int taskNumber = (Integer.parseInt(holder[1])) - 1;
+        int taskNumber = (Integer.parseInt(parsedUserInput[1])) - 1;
 
         // Making sure the task number exists in the list.
-        if (taskNumber <= (userTaskList.size() - 1) && taskNumber >= 0) {
-            Task task = userTaskList.get(taskNumber);
-            userTaskList.remove(taskNumber);
-            taskStorage.deleteTask(taskNumber);
-            ui.printTaskDeleted(task, taskListLength());
-        } else {
+        if (!isTaskNumberInRange(taskNumber)) {
             throw new TaskNotFoundException("Sorry! The Task Number Entered Does Not Exist!");
         }
+
+        Task task = userTaskList.get(taskNumber);
+        userTaskList.remove(taskNumber);
+        taskStorage.deleteTask(taskNumber);
+        ui.printTaskDeleted(task, taskListLength());
     }
 
     /**
@@ -164,27 +246,23 @@ public class TaskList {
      * @throws TaskNotFoundException If the entered task number does not exist.
      */
     public void markTaskAsDone(String[] parsedUserInput) throws IllegalTaskNumberException, TaskNotFoundException {
-        // Parsing the user input.
-        String[] holder = parsedUserInput;
-
         // Checking if a task number is entered and is an integer.
-        if (holder.length <= 1 || holder[1].compareTo("") == 0
-                || !Character.isDigit(holder[1].charAt(0))) {
+        if (!isTaskNumberSpecified(parsedUserInput)) {
             throw new IllegalTaskNumberException("Please Enter An Integer Value For Task Number");
         }
 
         // Obtaining the task number to be marked as done.
-        int taskNumber = (Integer.parseInt(holder[1])) - 1;
+        int taskNumber = (Integer.parseInt(parsedUserInput[1])) - 1;
 
         // Making sure the task number exists in the list.
-        if (taskNumber <= (userTaskList.size() - 1) && taskNumber >= 0) {
-            Task task = userTaskList.get(taskNumber);
-            task.markAsDone();
-            taskStorage.updateTaskStatusToDone(taskNumber);
-            ui.printTaskMarkedAsDone(task);
-        } else {
+        if (!isTaskNumberInRange(taskNumber)) {
             throw new TaskNotFoundException("Sorry! The Task Number Entered Does Not Exist!");
         }
+
+        Task task = userTaskList.get(taskNumber);
+        task.markAsDone();
+        taskStorage.updateTaskStatusToDone(taskNumber);
+        ui.printTaskMarkedAsDone(task);
     }
 
     /**

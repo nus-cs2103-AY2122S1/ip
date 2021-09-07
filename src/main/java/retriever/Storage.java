@@ -167,9 +167,7 @@ public class Storage {
             String currentLine;
 
             while ((currentLine = reader.readLine()) != null) {
-                if (counter == taskNumber) {
-                    // Do not write the task into new file.
-                } else {
+                if (counter != taskNumber) {
                     writer.write(currentLine + System.getProperty("line.separator"));
                 }
                 counter++;
@@ -178,7 +176,7 @@ public class Storage {
             writer.close();
             reader.close();
 
-            boolean isNameChangeSuccessful = tempFile.renameTo(inputFile);
+            tempFile.renameTo(inputFile);
         } catch (IOException e) {
             ui.printErrorMessage("Master! Error Reading File. Gimme Treats, And I Help You!");
         }
@@ -220,7 +218,7 @@ public class Storage {
             writer.close();
             reader.close();
 
-            boolean isNameChangeSuccessful = tempFile.renameTo(inputFile);
+            tempFile.renameTo(inputFile);
         } catch (IOException e) {
             ui.printErrorMessage("Master! Error Reading File. Gimme Treats, And I Help You!");
         }
