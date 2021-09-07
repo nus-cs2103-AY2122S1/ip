@@ -35,10 +35,54 @@ public class Parser {
      * @param input String from user.
      * @return String response from the parser.
      */
-    public String parse(String input) {
-        String[] commandAndDesc = input.split(" ", 2);
-        String command = commandAndDesc[0];
-        String description = commandAndDesc.length == 2 ? commandAndDesc[1] : "";
+    public String parseAndExecute(String input) {
+        String command = getCommandFromInput(input);
+        String description = getDescriptionFromInput(input);
+        String response = executeCommand(command, description);
+        return response;
+    }
+
+    /**
+     * Returns the command in user input.
+     *
+     * @param input String from user.
+     * @return String command.
+     */
+    private String getCommandFromInput(String input) {
+        String[] commandAndDesc = splitInput(input);
+        return commandAndDesc[0];
+    }
+
+    /**
+     * Returns the description in user input.
+     *
+     * @param input String from user.
+     * @return String description.
+     */
+    private String getDescriptionFromInput(String input) {
+        String[] commandAndDesc = splitInput(input);
+        boolean containsDescription = commandAndDesc.length == 2;
+        return containsDescription ? commandAndDesc[1] : "";
+    }
+
+    /**
+     * Splits the input into its command and description.
+     *
+     * @param input String from user.
+     * @return String[] containing parts of the input.
+     */
+    private String[] splitInput(String input) {
+        return input.split(" ", 2);
+    }
+
+    /**
+     * Executes the command provided.
+     *
+     * @param command     String type of command.
+     * @param description String description of the command.
+     * @return String response upon executing the command.
+     */
+    private String executeCommand(String command, String description) {
         String response;
         switch (command) {
             case "bye":
@@ -80,18 +124,41 @@ public class Parser {
                     response = ui.getUnknownCommandMessage(command);
                 }
         }
-        storage.write(taskList);
+        updateStorage();
         return response;
     }
 
-    private Task selectTask(String taskNumString) {
+    /**
+     * Commits the changes in taskList to storage.
+     */
+    private void updateStorage() {
+        storage.writeToStorage(taskList);
+    }
+
+    /**
+     * Selects the task with the given description.
+     *
+     * @param description String number corresponding to the task.
+     * @return Task selected.
+     */
+    private Task selectTask(String description) {
+        int taskNum = getTaskNum(description);
+        Task selectedTask = taskList.getTask(taskNum);
+        if (selectedTask == null) {
+            throw new DukeException("\tSorry, I can't seem to find that task\n");
+        }
+        return selectedTask;
+    }
+
+    /**
+     * Parses the description for the task number.
+     *
+     * @param description String containing the task number.
+     * @return int task number.
+     */
+    private int getTaskNum(String description) {
         try {
-            int taskNum = Integer.parseInt(taskNumString);
-            Task taskInFocus = taskList.getTask(taskNum);
-            if (taskInFocus == null) {
-                throw new DukeException("\tSorry, I can't seem to find that task\n");
-            }
-            return taskInFocus;
+            return Integer.parseInt(description);
         } catch (NumberFormatException e) {
             throw new DukeException("\tI'm Sorry, WHAT?!?!\n");
         }

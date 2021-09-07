@@ -34,10 +34,12 @@ public class Duke {
             ui.greetWithFamiliarity(taskList);
         } catch (DukeException e) {
             ui.showDukeException(e);
-            storage.resetTasks();
+
+            //ensure that taskList has loaded before clearing tasks
             if (taskList != null) {
                 taskList.clearTasks();
             }
+            storage.resetTasks();
         } finally {
             parser = new Parser(storage, ui, taskList);
         }
@@ -49,7 +51,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            return parser.parse(input);
+            return parser.parseAndExecute(input);
         } catch (DukeException e) {
             return e.getMessage();
         }
