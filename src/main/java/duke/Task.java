@@ -13,10 +13,10 @@ public abstract class Task {
     private boolean isDone;
 
     private Task(String taskName) {
-        this(false, taskName, null);
+        this(taskName, null, false);
     }
 
-    private Task(boolean isDone, String taskName, LocalDate date) {
+    private Task(String taskName, LocalDate date, boolean isDone) {
         this.taskName = taskName;
         this.date = date;
         this.isDone = isDone;
@@ -25,11 +25,11 @@ public abstract class Task {
     private static Task of(TaskKind taskKind, boolean isDone, String taskName, LocalDate date) {
         switch (taskKind) {
         case TODO:
-            return new Todo(isDone, taskName);
+            return new Todo(taskName, isDone);
         case DEADLINE:
-            return new Deadline(isDone, taskName, date);
+            return new Deadline(taskName, date, isDone);
         case EVENT:
-            return new Event(isDone, taskName, date);
+            return new Event(taskName, date, isDone);
         default:
             throw new IllegalStateException("Unexpected value: " + taskKind);
         }
@@ -67,7 +67,7 @@ public abstract class Task {
                 try {
                     String date = parts[1];
                     LocalDate localDate = LocalDate.parse(date, dtf);
-                    return new Deadline(false, taskName, localDate);
+                    return new Deadline(taskName, localDate, false);
                 } catch (DateTimeParseException e) {
                     throw new DukeException.DukeParseTaskException(TaskKind.DEADLINE);
                 }
@@ -95,7 +95,7 @@ public abstract class Task {
                 try{
                 String date = parts[1];
                 LocalDate localDate = LocalDate.parse(date, dtf);
-                return new Event(false, taskName, localDate);
+                return new Event(taskName, localDate, false);
                 } catch (DateTimeParseException e) {
                     throw new DukeException.DukeParseTaskException(TaskKind.DEADLINE);
                 }
@@ -241,8 +241,8 @@ public abstract class Task {
             super(taskName);
         }
 
-        private Todo(boolean isDone, String taskName) {
-            super(isDone, taskName, null);
+        private Todo(String taskName, boolean isDone) {
+            super(taskName, null, isDone);
         }
 
         @Override
@@ -259,8 +259,8 @@ public abstract class Task {
     }
 
     private static class Deadline extends Task {
-        private Deadline(boolean isDone, String taskName, LocalDate date) {
-            super(isDone, taskName, date);
+        private Deadline(String taskName, LocalDate date, boolean isDone) {
+            super(taskName, date, isDone);
         }
 
         @Override
@@ -280,8 +280,8 @@ public abstract class Task {
     ;
 
     private static class Event extends Task {
-        private Event(boolean isDone, String taskName, LocalDate date) {
-            super(isDone, taskName, date);
+        private Event(String taskName, LocalDate date, boolean isDone) {
+            super(taskName, date, isDone);
         }
 
         @Override

@@ -52,12 +52,10 @@ public class Duke {
      */
     public Response getResponse(String input) {
         UserInput userInputProcessed = Command.analyze(input);
-        Response response = null;
+        Response response;
         try {
             response = Command.process(userInputProcessed);
         } catch (DukeException e) {
-            response = new Response(new ResponseMessage(e.toString()));
-        } catch (Exception e) {
             response = new Response(new ResponseMessage(e.toString()));
         }
 
