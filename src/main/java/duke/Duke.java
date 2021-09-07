@@ -202,7 +202,6 @@ public class Duke extends Application {
                 if (input.length() == 4) {
                     throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
                 }
-                assert input.substring(6).length() == 1 : "There should be an index";
 
                 String keyword = input.substring(5);
                 return SL.findAndReturn(keyword);
