@@ -22,7 +22,7 @@ public class TaskListTest {
         try {
             assertEquals((new Todo("Watch TV")).toString(), this.createTask("todo Watch TV", new TaskList()));
         } catch (DukeException e) {
-
+            System.out.println(e);
         }
     }
 
@@ -51,7 +51,7 @@ public class TaskListTest {
                     (LocalDate.of(2021, 8, 23), LocalTime.of(14, 00))))
                     .toString(), this.createTask("deadline Watch TV /by 23/08/2021 14:00", new TaskList()));
         } catch (DukeException e) {
-
+            System.out.println(e);
         }
 
     }

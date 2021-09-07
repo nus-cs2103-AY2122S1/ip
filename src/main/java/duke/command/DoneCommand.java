@@ -29,7 +29,7 @@ public class DoneCommand extends Command {
         if (next.length() > 5) {
             myTasks.getDone(next);
         } else {
-            Ui.myPrint("☹ OOPS!!! Please enter a valid number, such as done 3");
+            Ui.printDuke("☹ OOPS!!! Please enter a valid number, such as done 3");
         }
     }
 }

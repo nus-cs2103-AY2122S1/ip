@@ -62,8 +62,9 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
+        String time = this.whichOne == 0 ? Task.toTimeFormat(ddl) : Task.toDateFormat(date);
         return "[D]" + super.toString() + " (by: "
-                + (this.whichOne == 0 ? Task.toTimeFormat(ddl) : Task.toDateFormat(date)) + ")";
+                + time + ")";
     }
 
     /**
@@ -79,6 +80,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getTime() {
-        return (this.whichOne == 0 ? ddl.toLocalDate() + " " + ddl.toLocalTime() : date.toString());
+        String time = this.whichOne == 0 ? ddl.toLocalDate() + " " + ddl.toLocalTime() : date.toString();
+        return time;
     }
 }

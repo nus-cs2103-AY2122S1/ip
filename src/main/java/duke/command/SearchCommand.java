@@ -8,7 +8,7 @@ import duke.Ui;
  */
 public class SearchCommand extends Command {
     private TaskList taskList;
-    private String s;
+    private String searchString;
 
     /**
      * Creates a new SearchCommand
@@ -18,7 +18,7 @@ public class SearchCommand extends Command {
      */
     public SearchCommand(TaskList taskList, String s) {
         this.taskList = taskList;
-        this.s = s;
+        this.searchString = s;
     }
 
     /**
@@ -26,10 +26,10 @@ public class SearchCommand extends Command {
      */
     @Override
     public void execute() {
-        if (s.length() > 5 && s.split(" ").length >= 2) {
-            TaskList.search(s.substring(5));
+        if (searchString.length() > 5 && searchString.split(" ").length >= 2) {
+            TaskList.search(searchString.substring(5));
         } else {
-            Ui.myPrint("☹ OOPS!!! Please enter a valid keyword, such as find book");
+            Ui.printDuke("☹ OOPS!!! Please enter a valid keyword, such as find book");
         }
 
     }
