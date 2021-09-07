@@ -6,7 +6,7 @@ public class Task {
     private String description;
     private boolean isDone;
     private LocalDateTime doAfterDateTime;
-    private Task doAfterTask;
+    private TaskList doAfterTasks;
 
     /**
      * A constructor method for a Task object.
@@ -16,7 +16,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        doAfterTask = new Task("empty");
+        doAfterTasks = new TaskList();
         doAfterDateTime = LocalDateTime.MAX;
     }
 
@@ -62,7 +62,7 @@ public class Task {
      * @param task task that precedes this task
      */
     public void setDoAfterTask(Task task) {
-        this.doAfterTask = task;
+        this.doAfterTasks.addTask(task);
     }
 
     /**
@@ -72,5 +72,25 @@ public class Task {
      */
     public void setDoAfterDateTime(LocalDateTime dateTime) {
         this.doAfterDateTime = dateTime;
+    }
+
+    /**
+     * Checks if this Task is after a specific Task.
+     *
+     * @param task the Task to be checked against
+     * @return true if this Task is after the specified Task
+     */
+    public boolean isAfterTask(Task task) {
+        return this.doAfterTasks.containsTask(task);
+    }
+
+    /**
+     * Checks if this Task is after a specific date and time.
+     *
+     * @param dateTime the date and time to be checked against
+     * @return true if this Task is after the specified date and time
+     */
+    public boolean isAfterDateTime(LocalDateTime dateTime) {
+        return this.doAfterDateTime.compareTo(dateTime) < 1;
     }
 }
