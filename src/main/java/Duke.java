@@ -19,7 +19,6 @@ public class Duke {
         this.storage = new Storage(FILE_PATH);
         this.ui = new Ui();
         this.taskList = new TaskList(this.storage.load());
-
     }
 
     /**
