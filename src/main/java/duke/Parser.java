@@ -523,6 +523,9 @@ public class Parser {
             throw new DukeException("Please key in valid number to mark as done.");
         } else if (isPositiveInteger(separated[1])) {
             int index = Integer.valueOf(separated[1]) - 1;
+
+            assert index >= 0 && index < taskList.getSize();
+
             return new DoneCommand(index);
         } else if (isAll(separated[1])) {
             return new DoneCommand(-1);
