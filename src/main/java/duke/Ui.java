@@ -39,7 +39,7 @@ public class Ui {
     }
 
     /**
-     * Displays the list of tasks to user.
+     * Returns a message and the list of tasks in task list.
      *
      * @param taskList list of tasks.
      */
@@ -54,7 +54,7 @@ public class Ui {
     }
 
     /**
-     * Displays the message after a task has been marked as done.
+     * Returns the message to notify the user after a task has been marked as done.
      *
      * @param taskList list of tasks.
      * @param donePos position of task to mark as done.
@@ -64,7 +64,7 @@ public class Ui {
     }
 
     /**
-     * Displays the message after a task has been deleted.
+     * Returns the message to notify the user after a task has been deleted.
      *
      * @param taskList list of tasks.
      * @param deletePos position of task to delete.
@@ -75,7 +75,7 @@ public class Ui {
     }
 
     /**
-     * Displays the list of tasks with dates that match the date given.
+     * Returns a message with the list of tasks with dates that match the date given.
      *
      * @param taskList list of tasks.
      * @param localDate date to compare to.
@@ -91,7 +91,7 @@ public class Ui {
     }
 
     /**
-     * Displays the message to the user after a task has been added.
+     * Returns a message to notify the user after a task has been added.
      *
      * @param taskList list of tasks.
      * @param task to add.
@@ -102,7 +102,7 @@ public class Ui {
     }
 
     /**
-     * Prints error message to the screen.
+     * Returns an error message.
      *
      * @param message to print.
      */
@@ -111,7 +111,7 @@ public class Ui {
     }
 
     /**
-     * Prints error message when user enters an invalid input.
+     * Returns an error message when user enters an invalid input.
      *
      * @throws DukeException
      */
@@ -127,7 +127,7 @@ public class Ui {
     }
 
     /**
-     * Displays the tasks with descriptions that contain the given word.
+     * Returns a message with a list of the tasks with descriptions that contain the given word.
      *
      * @param taskList current list of all tasks.
      * @param word given by user.
@@ -143,10 +143,20 @@ public class Ui {
         return output.toString();
     }
 
+    /**
+     * Returns a message to notify the user that hard disk and task list have been cleared.
+     *
+     * @return String message
+     */
     public String clear() {
         return "Noted, I have cleared your list and hard disk.";
     }
 
+    /**
+     * Returns a message and the list of archive names to user.
+     *
+     * @return String message and list
+     */
     public String listArchives() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Here are your archives: \n");
@@ -155,25 +165,49 @@ public class Ui {
         int counter = 1;
         for (File f : file) {
             if (f.isFile()) {
-                stringBuilder.append(counter + ". " + f.getName() + "\n");
+                stringBuilder.append(" " + counter + ". " + f.getName() + "\n");
             }
         }
 
         return stringBuilder.toString();
     }
 
+    /**
+     * Returns a message to notify the user that the archive file has been deleted.
+     *
+     * @param fileName of archive file.
+     * @return message.
+     */
     public String deleteArchive(String fileName) {
         return "Noted, " + fileName + " Archive has been deleted.";
     }
 
+    /**
+     * Returns a message to notify the user that given archive has loaded in.
+     *
+     * @param fileName of archive file.
+     * @return message
+     */
     public String loadArchive(String fileName) {
         return "You have loaded " + fileName + " Archive.";
     }
 
+    /**
+     * Returns a message to notify the user that a new archive file has been created and current hard disk is saved
+     * to the archive file.
+     *
+     * @param fileName of archive file.
+     * @return message
+     */
     public String newArchive(String fileName) {
         return "Got it! A new " + fileName + " Archive has been created.";
     }
 
+    /**
+     * Prints Duke's response to the console.
+     *
+     * @param response to print.
+     */
     public void printToConsole(String response) {
         System.out.println(response);
     }

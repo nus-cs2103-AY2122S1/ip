@@ -120,11 +120,13 @@ public class Storage {
 
             Files.write(Path.of("src/data/duke.txt"), fileContent);
         } catch (IOException ioException) {
-//            System.out.println(ioException);
             ui.showError(ioException.getMessage());
         }
     }
 
+    /**
+     * Clears the hard disk.
+     */
     public void clear() {
         File file = new File(filePath);
         try {
@@ -170,6 +172,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads in an Archive file into the hard disk and tasklist.
+     *
+     * @param archiveName of archive file to load from.
+     * @param taskList to load into.
+     * @throws DukeException if task list or hard disk are not empty.
+     */
     public void loadArchive(String archiveName, TaskList taskList) throws DukeException {
         if (!taskList.getTasks().isEmpty()) {
             throw new DukeException("List is not empty, cannot load Archive.");

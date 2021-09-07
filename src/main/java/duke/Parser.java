@@ -2,7 +2,19 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.CheckDateCommand;
+import duke.command.ClearCommand;
+import duke.command.DeleteArchiveCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListArchiveCommand;
+import duke.command.ListCommand;
+import duke.command.LoadArchiveCommand;
+import duke.command.NewArchiveCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -170,11 +182,17 @@ public class Parser {
             return Command.Find;
         } else if (input.startsWith("archive")) {
             return Command.Archive;
-        } else{
+        } else {
             return Command.Invalid;
         }
     }
 
+    /**
+     * Checks if the user input is a valid Done command.
+     *
+     * @param input by user.
+     * @throws DukeException if format is invalid
+     */
     private void isValidDone(String input) throws DukeException {
         if (!input.startsWith("done ")) {
             throw new DukeException("Oops! Improper formatting for done. " + "Please use: done <task number>");
@@ -190,6 +208,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if user input is a valid Delete command.
+     *
+     * @param input by user.
+     * @throws DukeException if format is invalid.
+     */
     private void isValidDelete(String input) throws DukeException {
         if (!input.startsWith("delete ")) {
             throw new DukeException("Oops! Improper formatting for delete. " + "Please use: delete <task number>");
@@ -203,6 +227,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if user input is a valid Todo command.
+     *
+     * @param input by user.
+     * @throws DukeException if format is invalid.
+     */
     private void isValidTodo(String input) throws DukeException {
         // handles any characters after 'todo' that are not white space
         if (!input.startsWith("todo ")) {
@@ -213,6 +243,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if user input is a valid Deadline command.
+     *
+     * @param input by user.
+     * @throws DukeException if format is invalid.
+     */
     private void isValidDeadline(String input) throws DukeException {
         // handles any characters after 'deadline' that are not white space
         if (!input.startsWith("deadline ")) {
@@ -232,6 +268,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if user input is a valid Event command.
+     *
+     * @param input by user.
+     * @throws DukeException if format is invalid.
+     */
     private void isValidEvent(String input) throws DukeException {
         // handles any characters after 'event' that are not white space
         if (!input.startsWith("event ")) {
