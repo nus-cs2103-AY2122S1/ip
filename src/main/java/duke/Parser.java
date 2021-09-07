@@ -37,7 +37,10 @@ public class Parser {
             return 6;
         } else if (input.startsWith("find")) {
             return 7;
-        } else {
+        } else if (input.startsWith("undo")) {
+            return 8;
+        }
+        else {
             throw new DukeException("Dude! I don't understand what you're saying!");
         }
     }

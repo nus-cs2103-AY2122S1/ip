@@ -10,6 +10,7 @@ import java.util.LinkedList;
 
 public class TaskList {
     private LinkedList<Task> myList;
+    private LinkedList<Task> previousList;
 
     /**
      * Constructor for TaskList.
@@ -17,6 +18,7 @@ public class TaskList {
      */
     public TaskList(LinkedList<Task> myList) {
         this.myList = myList;
+        this.previousList = myList;
     }
 
     /**
@@ -56,12 +58,20 @@ public class TaskList {
             } else if (myList.get(taskNumber - 1).getDone()) {
                 throw new DukeException("This task is already done man!");
             } else {
+                updatePreviousList();
                 return myList.get(taskNumber - 1).setDone(true);
 
             }
         } catch (NumberFormatException ex) {
             throw new DukeException("Woah, enter the task number properly..");
         }
+    }
+
+    /**
+     * Method to update the previous taskList before updating the current taskList.
+     */
+    private void updatePreviousList() {
+        this.previousList = new LinkedList<Task>(myList);;
     }
 
     /**
@@ -82,6 +92,7 @@ public class TaskList {
                 throw new DukeException("Dude I don't think you have a list THAT long!");
             } else {
                 String infoOfTask = myList.get(taskNumber - 1).toString();
+                updatePreviousList();
                 myList.remove(taskNumber - 1);
                 return "Noted. I've removed this task:\n" + infoOfTask;
             }
@@ -102,6 +113,7 @@ public class TaskList {
             String[] splitLine = nextLine.split("todo");
             String title = splitLine[1];
             Todo nextTask = new Todo(title);
+            updatePreviousList();
             myList.add(nextTask);
             return "Got it. I've added this task:\n" + nextTask.toString();
         }
@@ -120,10 +132,9 @@ public class TaskList {
                 String[] splitLine = nextLine.split("/by ");
                 String date = splitLine[1];
                 LocalDateTime parsedDate = dateParser(date);
-//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-//                LocalDateTime parsedDate = LocalDateTime.parse(date, formatter);
                 String title = splitLine[0].split("deadline")[1];
                 Deadline nextTask = new Deadline(title, parsedDate);
+                updatePreviousList();
                 myList.add(nextTask);
                 return "Got it. I've added this task:\n" + nextTask.toString();
             } catch (DateTimeException | ArrayIndexOutOfBoundsException err) {
@@ -148,6 +159,7 @@ public class TaskList {
                 LocalDateTime parsedDate = dateParser(date);
                 String title = splitLine[0].split("event")[1];
                 Event nextTask = new Event(title, parsedDate);
+                updatePreviousList();
                 myList.add(nextTask);
                 return "Got it. I've added this task:\n" + nextTask.toString();
             } catch (DateTimeException | ArrayIndexOutOfBoundsException err) {
@@ -156,6 +168,12 @@ public class TaskList {
             }
         }
     }
+
+    /**
+     * Method to parse the date input from String to LocalDateTime
+     * @param stringDate the input String date
+     * @return the LocalDateTime
+     */
     private LocalDateTime dateParser(String stringDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         LocalDateTime parsedDate = LocalDateTime.parse(stringDate, formatter);
@@ -210,5 +228,15 @@ public class TaskList {
             return result;
         }
 
+    }
+
+    public String undo() throws DukeException {
+
+        if (!this.myList.equals(previousList)) {
+            this.myList = previousList;
+            return ("I've undone your last command!");
+        } else {
+            throw new DukeException("I can't go any further back in time!");
+        }
     }
 }

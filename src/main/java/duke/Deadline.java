@@ -36,4 +36,18 @@ public class Deadline extends Task {
         }
 
     }
+
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Deadline) {
+            Deadline otherTask = (Deadline) other;
+            if (this.getTitle().equals(otherTask.getTitle())) {
+                if (this.getDone() == otherTask.getDone()) {
+                    return this.date.equals(otherTask.date);
+                }
+            }
+        }
+        return false;
+    }
 }

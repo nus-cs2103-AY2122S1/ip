@@ -9,6 +9,7 @@ public class Todo extends Task {
 
     /**
      * Constructor for a Todo.
+     *
      * @param title takes in the title of the Task.
      */
     public Todo(String title) {
@@ -17,6 +18,7 @@ public class Todo extends Task {
 
     /**
      * The toString method.
+     *
      * @return a String describing the Todo.
      */
     @Override
@@ -27,5 +29,17 @@ public class Todo extends Task {
             return "[T][X]" + this.getTitle();
         }
 
+    }
+
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Todo) {
+            Todo otherTask = (Todo) other;
+            if (this.getTitle().equals(otherTask.getTitle())) {
+                return this.getDone() == otherTask.getDone();
+            }
+        }
+        return false;
     }
 }

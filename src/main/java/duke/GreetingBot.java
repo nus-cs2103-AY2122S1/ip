@@ -115,8 +115,14 @@ public class GreetingBot {
                 return message;
             } else if (action == 7) {
                 String message = tasks.findTask(nextLine);
+                storage.updateData(tasks.getList());
+                return message;
+            } else if (action == 8) {
+                String message = tasks.undo();
+                storage.updateData(tasks.getList());
                 return message;
             }
+
         } catch (DukeException err) {
             System.out.println(err.toString());
             return err.toString();

@@ -36,5 +36,18 @@ public class Event extends Task {
 
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Event) {
+            Event otherTask = (Event) other;
+            if (this.getTitle().equals(otherTask.getTitle())) {
+                if (this.getDone() == otherTask.getDone()) {
+                    return this.date.equals(otherTask.date);
+                }
+            }
+        }
+        return false;
+    }
+
 
 }

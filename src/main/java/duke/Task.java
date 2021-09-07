@@ -59,4 +59,17 @@ public class Task implements Serializable {
         }
 
     }
+
+    @Override
+    public boolean equals(Object other) {
+        Task otherTask = (Task) other;
+        if (this.getTitle().equals(otherTask.getTitle())) {
+            if (this.getDone() == otherTask.getDone()) {
+                if (this.getClass().equals(otherTask.getClass())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
