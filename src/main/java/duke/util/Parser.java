@@ -33,6 +33,7 @@ public class Parser {
      */
     public static String parse(String fullCommand, TaskList taskList,
                                 Ui ui, Storage storage) throws DukeException {
+
         String[] command = fullCommand.split(" ", 2);
         String commandWord = command[0].trim();
 
@@ -67,7 +68,7 @@ public class Parser {
      * @return Array of string containing description and date respectively
      * @throws DukeException if userInput doesn't contain description or date
      */
-    public static String[] parseDescriptionAndTime(String[] userInput,String regex,
+    private static String[] parseDescriptionAndTime(String[] userInput,String regex,
                                           String taskType) throws DukeException {
 
         String[] next = userInput[1].trim().split(regex);
@@ -101,7 +102,7 @@ public class Parser {
      * @param taskList List of tasks
      * @return String representation of duke's response for list input
      */
-    public static String parseList(TaskList taskList) {
+    private static String parseList(TaskList taskList) {
         return taskList.printTasksInList();
     }
 
@@ -113,7 +114,7 @@ public class Parser {
      * @return String representation for when user enters find
      * @throws DukeException If user didn't enter keyword for find
      */
-    public static String parseFind(TaskList taskList, String[] details) throws DukeException {
+    private static String parseFind(TaskList taskList, String[] details) throws DukeException {
         if (details.length == 1) {
             throw new DukeException("Please enter a keyword to find matching tasks...");
         }
@@ -130,15 +131,13 @@ public class Parser {
      * @return String representation of duke's response when user enters event
      * @throws DukeException If details doesn't contain description/date or date is of wrong format
      */
-    public static String parseEvent(TaskList taskList, String[] details) throws DukeException {
+    private static String parseEvent(TaskList taskList, String[] details) throws DukeException {
         if (details.length == 1) {
             throw new NoDescriptionAndTimeException("event");
-        } else {
-            String[] eventDetail = parseDescriptionAndTime(details,
-                    "/at", "event");
-            return taskList.addEventToList(eventDetail[0].trim(),
-                    eventDetail[1].trim());
         }
+
+        String[] eventDetail = parseDescriptionAndTime(details, "/at", "event");
+        return taskList.addEventToList(eventDetail[0].trim(), eventDetail[1].trim());
     }
 
     /**
@@ -152,12 +151,10 @@ public class Parser {
     public static String parseDeadline(TaskList taskList, String[] details) throws DukeException {
         if (details.length == 1) {
             throw new NoDescriptionAndTimeException("deadline");
-        } else {
-            String[] eventDetail = parseDescriptionAndTime(details,
-                    "/by", "deadline");
-            return taskList.addDeadlineToList(eventDetail[0].trim(),
-                    eventDetail[1].trim());
         }
+
+        String[] eventDetail = parseDescriptionAndTime(details, "/by", "deadline");
+        return taskList.addDeadlineToList(eventDetail[0].trim(), eventDetail[1].trim());
     }
 
     /**
@@ -169,7 +166,7 @@ public class Parser {
      * @return String representation of duke's response when user enters bye
      * @throws DukeException If folder/file for storage doesn't exist
      */
-    public static String parseBye(Storage storage, Ui ui, TaskList taskList) throws DukeException {
+    private static String parseBye(Storage storage, Ui ui, TaskList taskList) throws DukeException {
         storage.save(taskList);
         return ui.showBye();
     }
@@ -188,7 +185,10 @@ public class Parser {
         }
 
         int deleteNumber = Integer.parseInt(userInput[1].trim()) - 1;
-        if (deleteNumber < 0 || deleteNumber > taskList.listLength()-1) {
+        boolean isBelowValidIndex = deleteNumber < 0;
+        boolean isAboveValidIndex = deleteNumber > taskList.getListLength()-1;
+
+        if (isBelowValidIndex || isAboveValidIndex) {
             throw new InvalidTaskDeletionException();
         } else {
             return taskList.deleteFromList(deleteNumber);
@@ -209,7 +209,10 @@ public class Parser {
         }
 
         int doneNumber = Integer.parseInt(userInput[1].trim()) - 1;
-        if (doneNumber < 0 || doneNumber > taskList.listLength()-1) {
+        boolean isBelowValidIndex = doneNumber < 0;
+        boolean isAboveValidIndex = doneNumber > taskList.getListLength()-1;
+
+        if (isBelowValidIndex || isAboveValidIndex) {
             throw new InvalidTaskDoneException();
         } else {
             return taskList.setTaskAsDone(doneNumber);
@@ -224,12 +227,13 @@ public class Parser {
      * @return String response for todo command entered
      * @throws DukeException If no description is entered
      */
-    public static String parseTodo(TaskList taskList, String[] userInput) throws DukeException {
+    private static String parseTodo(TaskList taskList, String[] userInput) throws DukeException {
         if (userInput.length == 1) {
             throw new NoDescriptionException("todo");
-        } else {
-            return taskList.addTodoToList(userInput[1].trim());
         }
+
+        return taskList.addTodoToList(userInput[1].trim());
+
     }
 
 }

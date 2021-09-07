@@ -3,23 +3,21 @@ package duke.util;
 import duke.task.Task;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Encapsulates user interaction.
  */
 public class Ui {
-    private Scanner scanner = new Scanner(System.in);
-    private static final String WELCOME_MESSAGE= "Hello! I'm Duke " +
-            "What can I do for you?\n\n" +
-            "Please enter one of the following commands:\n" +
-            "- todo <description> \n" +
-            "- deadline <description> /by <date> \n  of format dd MMM yyyy\n" +
-            "- event <description> /at <date>\n  of format dd MMM yyyy\n" +
-            "- list: see task list\n" +
-            "- delete <task no.>\n" +
-            "- done <task no.>\n" +
-            "- bye: exit duke\n";
+    private static final String WELCOME_MESSAGE= "Hello! I'm Duke "
+            + "What can I do for you?\n\n"
+            + "Please enter one of the following commands:\n"
+            + "- todo <description> \n"
+            + "- deadline <description> /by <date> \n  of format dd MMM yyyy\n"
+            + "- event <description> /at <date>\n  of format dd MMM yyyy\n"
+            + "- list: see task list\n"
+            + "- delete <task no.>\n"
+            + "- done <task no.>\n"
+            + "- bye: exit duke\n";
 
     /**
      * Returns welcome message.
@@ -84,9 +82,11 @@ public class Ui {
      */
     public String getTasks(ArrayList<Task> tasks) {
         String list = "Here are the tasks in your list:\n";
+
         for (int i = 0; i < tasks.size(); i++) {
             list += String.format("\t%s.%s\n", i + 1, tasks.get(i).toString());
         }
+
         return list;
     }
 

@@ -45,7 +45,7 @@ public class TaskList {
      *
      * @return length of list
      */
-    public int listLength() {
+    public int getListLength() {
         return tasks.size();
     }
 
@@ -78,11 +78,13 @@ public class TaskList {
     public String findMatchingTasks(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<Task>();
         System.out.println("Here are the matching tasks in your list:");
+
         for (Task task : tasks) {
             if (task.hasKeyword(keyword)) {
                 matchingTasks.add(task);
             }
         }
+
         TaskList matchingList = new TaskList(matchingTasks);
         return matchingList.printTasksInList();
     }
@@ -163,7 +165,7 @@ public class TaskList {
     /**
      * Saves tasks in list to hard disk.
      *
-     * @param writer Filewriter that write tasks to hard disk
+     * @param writer FileWriter that write tasks to hard disk
      * @throws IOException If file is not found
      */
     public void saveTasksInStorage(FileWriter writer) throws IOException {
