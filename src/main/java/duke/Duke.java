@@ -7,6 +7,7 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+
 /**
  * Represents the main class that the program runs from.
  */
@@ -44,4 +45,5 @@ public class Duke {
     public Ui getUi() {
         return this.ui;
     }
+
 }
