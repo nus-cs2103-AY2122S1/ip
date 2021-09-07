@@ -31,21 +31,21 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException {
-        StringBuilder message = new StringBuilder();
-        if (userInputs.length == 2) {
-            int count = 1;
-            for (int i = 0; i < taskList.size(); i++) {
-                Task current = taskList.getTask(i);
-                if (current.getDescription().contains(userInputs[1])) {
-                    message.append(count).append(". ").append(taskList.getTask(i));
-                    count++;
-                }
-            }
-            if (count == 1) {
-                message = new StringBuilder("No matching tasks found.");
-            }
-        } else {
+        if (userInputs.length < 2) {
             throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! The search keyword cannot be empty.");
+        }
+
+        StringBuilder message = new StringBuilder();
+        int count = 1;
+        for (int i = 0; i < taskList.size(); i++) {
+            Task current = taskList.getTask(i);
+            if (current.getDescription().contains(userInputs[1])) {
+                message.append(count).append(". ").append(taskList.getTask(i));
+                count++;
+            }
+        }
+        if (count == 1) {
+            message = new StringBuilder("No matching tasks found.");
         }
         return message.toString();
     }
