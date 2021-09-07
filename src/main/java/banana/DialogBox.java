@@ -27,7 +27,6 @@ public class DialogBox extends HBox {
         this.getChildren().addAll(text, displayPicture);
     }
 
-
     private void flip() {
         this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
