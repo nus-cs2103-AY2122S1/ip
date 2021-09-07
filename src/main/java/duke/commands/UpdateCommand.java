@@ -112,7 +112,7 @@ public class UpdateCommand extends Command {
         if (!newDescription.isEmpty()) {
             description = newDescription;
         }
-        // if the split string has length 2, then it means the user has input the /by argument
+        // if the split string has length 2, then it means the user has input the /at argument
         if (split.length == 2) {
             String newEventTime = split[1].trim();
             at = newEventTime.isEmpty() ? at : newEventTime;
