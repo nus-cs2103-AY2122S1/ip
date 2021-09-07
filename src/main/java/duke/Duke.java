@@ -207,6 +207,12 @@ public class Duke extends Application {
                 String keyword = input.substring(5);
                 return SL.findAndReturn(keyword);
 
+            } else if(parser.isViewCmd(input)) {
+                if (input.length() == 4) {
+                    throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
+                }
+                String dateQuery = parser.getDateTime(input);
+                return SL.viewSchedule(dateQuery);
             } else {
 
                 switch (input) {

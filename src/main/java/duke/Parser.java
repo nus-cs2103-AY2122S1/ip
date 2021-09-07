@@ -87,6 +87,10 @@ public class Parser {
         return input.length() >= 6 && input.substring(0, 6).equals("delete");
     }
 
+    public boolean isViewCmd(String input) {
+        return input.length() >= 4 && input.substring(0,4).equals("view");
+    }
+
     /**
      * Returns the deadline associated with the deadline task.
      *
@@ -119,6 +123,10 @@ public class Parser {
 
     public int getDoneIdx(String input) {
         return Integer.parseInt(input.substring(5)) - 1;
+    }
+
+    public String getDateTime(String input) {
+        return input.substring(5);
     }
 
     /**

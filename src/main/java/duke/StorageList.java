@@ -7,6 +7,9 @@ import duke.task.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -106,6 +109,38 @@ public class StorageList {
         }
         assert itemNumber <= size : "Index out of bounds";
         return output;
+    }
+
+    public String viewSchedule(String dateQuery) throws DukeException{
+        Ui ui = new Ui();
+        try {
+            DateTimeFormatter stringFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
+
+            String output = "    Here is your schedule for this day:";
+            String parsedDate = LocalDate.parse(dateQuery, stringFormat)
+                    .format(stringFormat);
+
+            int itemNumber = 1;
+            for (Task task : storageList) {
+                String dateOfTask = "";
+                if (task instanceof Event) {
+                    dateOfTask = ((Event) task).getAt();
+                } else if (task instanceof Deadline) {
+                    dateOfTask = ((Deadline) task).getBy();
+                } else {
+                    continue;
+                }
+
+                if (dateOfTask.contains(parsedDate)) {
+                    output += "\n        " + itemNumber + "." + task.toString();
+                    itemNumber++;
+                }
+            }
+            return output;
+
+        } catch (DateTimeParseException e) {
+            return ui.parsingFormatErrorMsg();
+        }
     }
 
 }
