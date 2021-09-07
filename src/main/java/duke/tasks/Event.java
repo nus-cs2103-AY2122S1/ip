@@ -14,8 +14,8 @@ public class Event extends Task {
     /**
      * Public constructor of the event class.
      *
-     * @param description
-     * @param details
+     * @param description The text description of the event.
+     * @param details The time or date of the event.
      */
     public Event(String description, String details) {
         super(description);
@@ -26,7 +26,7 @@ public class Event extends Task {
     /**
      * Gets the task type of an event instance.
      *
-     * @return E meaning event
+     * @return E meaning event.
      */
     @Override
     public String getTaskType() {
@@ -45,7 +45,7 @@ public class Event extends Task {
     /**
      * Gets the description of an event task after the 'event' keyword.
      *
-     * @param input
+     * @param input The string input provided by the user.
      * @return Description of an event task after the 'event' keyword.
      * @throws MissingEventDetailsException
      */
@@ -63,7 +63,7 @@ public class Event extends Task {
     /**
      * Gets the event details such as date and time.
      *
-     * @param input
+     * @param input The string input provided by the user.
      * @return Date and/or time of event
      */
     public static String getEventDetails(String input) {

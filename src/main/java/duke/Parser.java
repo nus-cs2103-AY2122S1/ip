@@ -20,6 +20,13 @@ import java.util.Scanner;
  *
  */
 public class Parser {
+
+    /**
+     * Gets the command keyword from the user input.
+     *
+     * @param input The string input provided by the user.
+     * @return The command keyword.
+     */
     public static String getCommand(String input) {
         String[] strArr = input.split(" ", 2);
         return strArr[0];
@@ -29,8 +36,8 @@ public class Parser {
      * Takes in user input as a string and returns the task number for commands like
      * delete and done.
      *
-     * @param input
-     * @return task number of the task with reference to its number on the list
+     * @param input The string input provided by the user.
+     * @return Task number of the task with reference to its number on the list.
      * @throws MissingTaskNumberException
      */
     public static int taskNumber(String input) throws MissingTaskNumberException {
@@ -48,8 +55,8 @@ public class Parser {
     /**
      * Takes in user input and returns the keyword after 'find' command.
      *
-     * @param input
-     * @return Keyword after 'find' command
+     * @param input The string input provided by the user.
+     * @return Keyword after 'find' command.
      * @throws MissingKeywordException
      */
     public static String getKeyword(String input) throws MissingKeywordException{
@@ -66,8 +73,8 @@ public class Parser {
     /**
      * Gets the description of the task after the command word from user's input.
      *
-     * @param input
-     * @return description of the task
+     * @param input The string input provided by the user.
+     * @return Description of the task.
      * @throws MissingDescriptionException
      */
     public static String getDescription(String input) throws MissingDescriptionException {
@@ -85,8 +92,8 @@ public class Parser {
      * Identifies the type of task and creates an instance of the subclasses of Task
      * such as Todo, Deadline and Event.
      *
-     * @param input
-     * @return New instance of subclass of task
+     * @param input The string input provided by the user.
+     * @return New instance of subclass of task.
      * @throws DukeException
      */
     static Task identifyType(String input) throws DukeException {
@@ -113,9 +120,9 @@ public class Parser {
      * Parses the string input of the user to get the command keyword in order to
      * carry out the action such as add, delete, complete and exit.
      *
-     * @param taskList
-     * @param file
-     * @param writer
+     * @param taskList The arraylist of tasks.
+     * @param file The file that the data is written to.
+     * @param writer The printwriter.
      * @throws DukeException
      */
     public static void parseCommand(TaskList taskList, File file, PrintWriter writer) throws DukeException {
@@ -156,14 +163,15 @@ public class Parser {
     /**
      * Parses user input to find the command and generate the corresponding response.
      *
-     * @param taskList
-     * @param file
-     * @param writer
-     * @param action
+     * @param taskList The arraylist of tasks.
+     * @param file The file that data is written to.
+     * @param writer The printwriter to edit the file.
+     * @param action The string input provided by the user.
      * @return Corresponding response for the user input.
      * @throws DukeException
      */
-    public static String getCommandResponse(TaskList taskList, File file, PrintWriter writer, String action) throws DukeException {
+    public static String getCommandResponse(TaskList taskList, File file,
+                                            PrintWriter writer, String action) throws DukeException {
         String command = Parser.getCommand(action);
 
         switch (command) {

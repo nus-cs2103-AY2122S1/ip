@@ -68,7 +68,7 @@ public class Ui {
 
     /**
      * Method that warns user that there is a missing description for the task.
-     * @param command
+     * @param command Command word from user input.
      */
     public static void showWarningMissingDescription(String command) {
         switch (command) {
@@ -120,8 +120,8 @@ public class Ui {
 
     /**
      * Method to show added task, along with uodated number of tasks in list.
-     * @param taskName
-     * @param numTasks
+     * @param taskName Task to be added.
+     * @param numTasks Number of tasks in the arraylist.
      */
     public static void showAddedTask(String taskName, int numTasks) {
         String successfulMessage = "Got it. I've added this task:";
@@ -155,7 +155,7 @@ public class Ui {
 
     /**
      * Shows updated number of tasks in the list.
-     * @param numTasks
+     * @param numTasks Number of tasks in the arraylist.
      */
     public static void showUpdatedNumber(int numTasks) {
         String updatedListNumber = "Now you have " + numTasks + " task(s) in the list.";
@@ -206,7 +206,7 @@ public class Ui {
 
     /**
      * Method that takes in mutliple strings to form a message shown to the user.
-     * @param message
+     * @param message Messages that form the whole message.
      */
     public static void showToUser(String... message) {
         for (String m : message) {

@@ -14,15 +14,15 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     protected LocalDate toCompleteBy;
     protected String taskType;
-    protected String time; //todo
+    protected String time;
 
     /**
      * Public constructor of the class that takes in description,
      * due date and time it is due by.
      *
-     * @param description
-     * @param toCompleteBy
-     * @param time
+     * @param description The text description of the deadline task.
+     * @param toCompleteBy The due date of the deadline.
+     * @param time The time that it should be completed by.
      */
     public Deadline(String description, LocalDate toCompleteBy, String time) {
         super(description);
@@ -34,7 +34,7 @@ public class Deadline extends Task {
     /**
      * Gets the task type of an instance.
      *
-     * @return D meaning Deadline
+     * @return D meaning Deadline.
      */
     @Override
     public String getTaskType() {
@@ -53,7 +53,7 @@ public class Deadline extends Task {
     /**
      * Gets the description of the deadline task that comes after the keyword deadline.
      *
-     * @param input
+     * @param input The string input provided by the user.
      * @return Description of the deadline task that comes after the keyword deadline
      * @throws MissingDueDateDescriptionException
      */
@@ -71,7 +71,7 @@ public class Deadline extends Task {
     /**
      * Gets the due date and time from the users input.
      *
-     * @param input
+     * @param input The string input provided by the user.
      * @return Due date and time from the users input
      */
     public static LocalDate getDueDate(String input) {
@@ -82,7 +82,7 @@ public class Deadline extends Task {
     /**
      * Gets the date the deadline is due by.
      *
-     * @param input
+     * @param input The string input provided by the user.
      * @return Date the deadline is due by.
      */
     public static LocalDate getDate(String input) {
@@ -94,7 +94,7 @@ public class Deadline extends Task {
     /**
      * Gets the time the deadline is due by.
      *
-     * @param input
+     * @param input The string input provided by the user.
      * @return Time the deadline is due by.
      */
     public static String getTime(String input) {

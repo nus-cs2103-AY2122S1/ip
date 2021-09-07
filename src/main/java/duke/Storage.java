@@ -21,7 +21,7 @@ public class Storage {
     /**
      * Pubic constructor for storage class that takes in a file to write data to.
      *
-     * @param file
+     * @param file File data is written to.
      */
     public Storage(File file) {
         this.file = file;
@@ -40,7 +40,7 @@ public class Storage {
      * Method that loads the file, by creating it if it does not exist and adds the format
      * of the file to the top and clears all previous data before starting.
      *
-     * @return Printwriter instance to write data into file
+     * @return Printwriter instance to write data into file.
      * @throws IOException
      */
     public PrintWriter load() throws IOException {
@@ -61,8 +61,8 @@ public class Storage {
 
     /**
      * Method that writes data into the file.
-     * @param writer
-     * @param task
+     * @param writer Printwriter to write data into file.
+     * @param task Task to be written to file.
      */
     public static void addData(PrintWriter writer, Task task) {
         writer.println(task.toString());
@@ -73,8 +73,8 @@ public class Storage {
     /**
      * Method that edits tasks in the file and marks them as deleted.
      *
-     * @param file
-     * @param task
+     * @param file File data is written to.
+     * @param task Task to be deleted from file.
      */
     public static void markAsDeleted(File file, Task task) {
         try {
@@ -104,9 +104,9 @@ public class Storage {
     /**
      * Method that edits tasks in file and marks them as completed.
      *
-     * @param file
-     * @param task
-     * @param oldLine
+     * @param file File data is written to.
+     * @param task Task to be updated as completed in file.
+     * @param oldLine Initial description of the task.
      */
     public static void saveAsCompleted(File file, Task task, String oldLine) {
         try {

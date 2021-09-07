@@ -14,7 +14,7 @@ public class TaskList {
     /**
      * Public constructor.
      *
-     * @return An instance of TaskList
+     * @return An instance of TaskList.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
@@ -23,7 +23,7 @@ public class TaskList {
     /**
      * Marks task as complete and shows message to user.
      *
-     * @param taskID
+     * @param taskID Task index as shown to the user.
      */
     public void completeTask(int taskID) {
         Ui.showCompletedMessage();
@@ -34,7 +34,7 @@ public class TaskList {
     /**
      * Add task to list and shows message to user.
      *
-     * @param newTask
+     * @param newTask Task to be added.
      */
     public void addTask(Task newTask) {
         this.tasks.add(newTask);
@@ -57,7 +57,7 @@ public class TaskList {
     /**
      * Deletes a specific task from the list.
      *
-     * @param taskID
+     * @param taskID Task index as shown to user.
      * @throws IndexOutOfBoundsException
      */
     public void deleteTask(int taskID) throws IndexOutOfBoundsException{
@@ -76,7 +76,7 @@ public class TaskList {
     /**
      * Getter to get the arraylist of tasks.
      *
-     * @return Arraylist of tasks
+     * @return Arraylist of tasks.
      */
     public ArrayList<Task> getTasks() {
         return this.tasks;
@@ -84,8 +84,8 @@ public class TaskList {
 
     /**
      * Getter to get individual tasks from arraylist.
-     * @param id
-     * @return Individual tasks
+     * @param id Index of task in array.
+     * @return Individual tasks.
      */
     public Task getIndividualTask(int id) {
         return this.tasks.get(id);
@@ -104,7 +104,7 @@ public class TaskList {
      * Allows users to find a task by searching for a keyword
      * and using command 'find'.
      *
-     * @param keyword
+     * @param keyword Keyword to search with.
      */
     public String findTasks(String keyword) {
         int count = 0;

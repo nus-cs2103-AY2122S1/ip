@@ -16,16 +16,6 @@ public class Todo extends Task {
     }
 
     /**
-     * Gets task type of the todo instance.
-     *
-     * @return "T" meaning todo
-     */
-    @Override
-    public String getTaskType() {
-        return this.taskType;
-    }
-
-    /**
      * Marks task as completed.
      */
     @Override

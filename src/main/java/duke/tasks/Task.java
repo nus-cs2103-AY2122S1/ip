@@ -1,7 +1,5 @@
 package duke.tasks;
 
-import java.util.ArrayList;
-
 /**
  * Class that represents a task. A task has attributes description, isDone and taskType
  */
@@ -13,7 +11,7 @@ public class Task {
     /**
      * Public constructor of task class.
      *
-     * @param description
+     * @param description The text description of the task.
      */
     public Task(String description) {
         this.description = description;
@@ -24,7 +22,7 @@ public class Task {
     /**
      * Gets the status icon of the task, if its done, the status icon is X, else it is " ".
      *
-     * @return Status icon of task
+     * @return Status icon of task.
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); //mark done task with X
@@ -37,15 +35,6 @@ public class Task {
         this.isDone = true;
         System.out.println(this.toString());
 
-    }
-
-    /**
-     * Gets the task type of the instance.
-     *
-     * @return Task type of the instance.
-     */
-    public String getTaskType() {
-        return this.taskType;
     }
 
     /**
