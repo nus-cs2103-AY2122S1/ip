@@ -32,8 +32,7 @@ What it can do:
 - [ ] **Reschedule** tasks to new dates (coming soon)
 
 Here's a part of the program, maybe it can be of help in practising coding in Java, the `main` method:
-```
-```ruby
+```java
 public static void main(String[] args) {
     new Duke().run();
 }
