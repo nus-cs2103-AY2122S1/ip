@@ -48,15 +48,10 @@ public class DukeUi {
             returnThis = returnThis + dukeLine + "\n";
         }
 
-
         // Text Output
         System.out.println("");
         System.out.println(sepLineOpen);
-
-
         System.out.println(returnThis);
-
-
         System.out.println(sepLineClose);
 
         // Clear Duke output buffer so it can accept new lines
