@@ -70,6 +70,14 @@ public class GreetingBot {
         }
     }
 
+    /**
+     * Method to get the task list
+     * @return the TaskList
+     */
+    protected TaskList getTasks() {
+        return this.tasks;
+    }
+
 
 
 

@@ -41,6 +41,7 @@ public class Duke {
      */
     @FXML
     String getResponse(String input) {
+        assert dukeBot.getTasks() != null;
         return dukeBot.store(input);
     }
 
