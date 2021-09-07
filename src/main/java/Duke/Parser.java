@@ -1,8 +1,5 @@
 package Duke;
 
-import Duke.DukeException;
-import Duke.Keyword;
-
 public class Parser {
     /**
      * Checks if command is valid keyword.

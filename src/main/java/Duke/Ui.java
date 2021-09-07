@@ -1,7 +1,5 @@
 package Duke;
 
-import Duke.Keyword;
-
 public class Ui {
     /**
      * Returns formatted output string for bot message.
