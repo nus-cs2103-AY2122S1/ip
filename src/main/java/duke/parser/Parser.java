@@ -8,6 +8,7 @@ import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
+import duke.command.ExpenseCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
@@ -16,39 +17,17 @@ import duke.exception.EmptyCommandException;
 import duke.exception.IncorrectFormatException;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidDurationException;
+import duke.exception.InvalidExpenseFormatException;
 import duke.exception.MessageEmptyException;
+import duke.exception.TaskNotFoundException;
 
 /**
  * Handles and interprets user commands for Duke.
  */
 public class Parser {
 
-    /** Represents the bye command word to call. */
-    public final String BYE_COMMAND = "bye";
-
-    /** Represents the deadline command word to call. */
-    public final String DEADLINE_COMMAND = "deadline";
-
-    /** Represents the delete command word to call. */
-    public static final String DELETE_COMMAND = "delete";
-
-    /** Represents the done command word to call. */
-    public final String DONE_COMMAND = "done";
-
-    /** Represents the event command word to call. */
-    public final String EVENT_COMMAND = "event";
-
-    /** Represents the find command word to call. */
-    public final String FIND_COMMAND = "find";
-
-    /** Represents the list command word to call. */
-    public final String LIST_COMMAND = "list";
-
-    /** Represents the todo command word to call. */
-    public final String TODO_COMMAND = "todo";
-
     /** Represents an empty command word to call. */
-    public static final String EMPTY_COMMAND = "";
+    private final String EMPTY_COMMAND = "";
 
     /**
      * Parses a string task list index to an integer.
@@ -57,12 +36,13 @@ public class Parser {
      * @return Index as an integer.
      * @throws NumberFormatException If the string cannot be converted into an integer.
      */
-    private int parseIndex(String[] words) throws NumberFormatException, MessageEmptyException {
+    private int parseIndex(String[] words) throws NumberFormatException, MessageEmptyException,
+            TaskNotFoundException {
         try {
             String index = words[1];
             return Integer.parseInt(index) - 1;
         } catch (NumberFormatException e) {
-            throw new NumberFormatException();
+            throw new TaskNotFoundException();
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new MessageEmptyException();
         }
@@ -97,8 +77,6 @@ public class Parser {
         } else if (result[0].trim().equals("")) {
             throw new MessageEmptyException();
         }
-
-        assert result.length >= 2 : " Information missing in command";
 
         String description = result[0].trim();
         String by = result[1].trim();
@@ -139,8 +117,6 @@ public class Parser {
             throw new MessageEmptyException();
         }
 
-        assert result.length >= 2 : " Information missing in command";
-
         String description = result[0].trim();
         String at = result[1].trim();
 
@@ -180,6 +156,47 @@ public class Parser {
         }
     }
 
+    private Command chooseCorrectExpenseCommand(String expense) throws MessageEmptyException,
+            InvalidExpenseFormatException {
+
+        try {
+            expense = expense.trim().substring(8).trim();
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new MessageEmptyException();
+        }
+        boolean isAllPresent = expense.matches("(?i)/listall");
+        if (isAllPresent) {
+            return new ExpenseCommand(-1, "", 0);
+        }
+        String indexAsString = String.valueOf(expense.charAt(0));
+        try {
+            int index = Integer.parseInt(indexAsString) - 1;
+            ArrayList<String> parsedInfo = separatePurposeAndAmount(expense.substring(1));
+            String purpose = parsedInfo.get(0);
+            float amount = Float.parseFloat(parsedInfo.get(1));
+            return new ExpenseCommand(index, purpose, amount);
+        } catch (IndexOutOfBoundsException e) {
+            // listing out expenses of 1 task
+            int index = Integer.parseInt(indexAsString) - 1;
+            return new ExpenseCommand(index, "", 0);
+        } catch (NumberFormatException e) {
+            // happens when the values entered cannot be converted from String properly
+            throw new InvalidExpenseFormatException();
+        }
+    }
+
+    private ArrayList<String> separatePurposeAndAmount(String input) throws InvalidExpenseFormatException {
+        input = input.trim();
+        String[] parsedInfo = input.split("\\$");
+        if (parsedInfo.length > 2) {
+            throw new InvalidExpenseFormatException();
+        }
+        ArrayList<String> result = new ArrayList<>();
+        result.add(parsedInfo[0].trim());
+        result.add(parsedInfo[1].trim());
+        return result;
+    }
+
 
     /**
      * Logic for handling different commands and executing the appropriate methods for the inputted command.
@@ -195,21 +212,23 @@ public class Parser {
         String command = getCommand(words);
 
         switch (command) {
-        case BYE_COMMAND: // only applicable to GUI Duke
+        case ByeCommand.COMMAND: // only applicable to GUI Duke
             return new ByeCommand();
-        case DEADLINE_COMMAND:
+        case DeadlineCommand.COMMAND:
             return new DeadlineCommand(parseAddDeadline(input));
-        case DELETE_COMMAND:
+        case DeleteCommand.COMMAND:
             return new DeleteCommand(parseIndex(words));
-        case DONE_COMMAND:
+        case DoneCommand.COMMAND:
             return new DoneCommand(parseIndex(words));
-        case EVENT_COMMAND:
+        case EventCommand.COMMAND:
             return new EventCommand(parseAddEvent(input));
-        case FIND_COMMAND:
+        case ExpenseCommand.COMMAND:
+            return chooseCorrectExpenseCommand(input);
+        case FindCommand.COMMAND:
             return new FindCommand(words);
-        case LIST_COMMAND:
+        case ListCommand.COMMAND:
             return new ListCommand();
-        case TODO_COMMAND:
+        case TodoCommand.COMMAND:
             return new TodoCommand(parseTodo(input));
         case EMPTY_COMMAND:
             throw new EmptyCommandException();
@@ -236,6 +255,6 @@ public class Parser {
      * @return command word for the relevant task.
      */
     private String getCommand(String[] parsedInput) {
-        return parsedInput[0].toLowerCase();
+        return parsedInput[0].trim().toLowerCase();
     }
 }

@@ -10,6 +10,9 @@ import duke.ui.Ui;
  */
 public class ListCommand extends Command {
 
+    /** Represents the list command keyword. */
+    public static final String COMMAND = "list";
+
     /**
      * Executes the command.
      *

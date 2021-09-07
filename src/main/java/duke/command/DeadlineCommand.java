@@ -13,6 +13,9 @@ import duke.ui.Ui;
  */
 public class DeadlineCommand extends Command {
 
+    /** Represents the deadline command keyword. */
+    public static final String COMMAND = "deadline";
+
     /** Parsed information about the deadline to be added. */
     private final ArrayList<String> parsedDeadline;
 

@@ -36,17 +36,21 @@ public class Storage {
     /** Data file. */
     private final File file;
 
+    /** Expenses data file */
+    private final File expensesFile;
+
     /**
      * Constructor for Storage class.
      *
      * @param filePath path to data file.
      */
-    public Storage(String filePath) {
+    public Storage(String filePath, String expensesFilePath) {
         file = new File(filePath);
+        expensesFile = new File(expensesFilePath);
     }
 
     /**
-     * Saves and writes the current tasks to the data file.
+     * Saves and writes the current tasks to the data files.
      * If the file does not exist, it will create a new file.
      *
      * @param tasks contains all current tasks.
@@ -54,20 +58,27 @@ public class Storage {
      * rather than a regular file, does not exist but cannot be created,
      * or cannot be opened for any other reason.
      */
-
     public void save(TaskList tasks) throws IOException {
         ArrayList<Task> taskList = tasks.getTaskList();
         FileWriter fw = new FileWriter(file.getAbsoluteFile());
+        FileWriter fwExpenses = new FileWriter(expensesFile.getAbsoluteFile());
 
+        int count = 1;
         for (Task task : taskList) {
             fw.write(task.toString() + System.lineSeparator());
+            if (task.hasExpenses()) {
+                fwExpenses.write(count + "|" + task.formatExpensesToSave() + System.lineSeparator());
+            }
+            count++;
         }
         fw.flush();
         fw.close();
+        fwExpenses.flush();
+        fwExpenses.close();
     }
 
     /**
-     * Loads data from data file.
+     * Loads data from data files.
      * If the data file does not exist, a new data file will be created.
      *
      * @return an arraylist of tasks which contains any task read from the data file.
@@ -77,6 +88,8 @@ public class Storage {
      */
     public ArrayList<Task> load() throws IOException, DataFileChangedException {
         file.getParentFile().mkdirs();
+        expensesFile.getParentFile().mkdirs();
+        expensesFile.createNewFile();
 
         ArrayList<Task> taskList = new ArrayList<>();
 
@@ -89,6 +102,7 @@ public class Storage {
         Scanner sc = new Scanner(file);
 
         try {
+            int count = 1;
             while (sc.hasNext()) {
                 String nextCommand = sc.nextLine();
                 Task task;
@@ -107,16 +121,49 @@ public class Storage {
                     throw new DataFileChangedException();
                 }
 
+                assert task != null : " Trying to add nothing as a Task in Storage";
+
                 if (isMarkedDone(nextCommand)) {
                     task.markAsDone();
                 }
+                checkExpenses(count, task);
                 taskList.add(task);
+                count++;
             }
             sc.close();
             return taskList;
-        } catch (IndexOutOfBoundsException | DateTimeParseException e) {
+        } catch (IndexOutOfBoundsException | DateTimeParseException | NumberFormatException e) {
             throw new DataFileChangedException();
         }
+    }
+
+    /**
+     * Checks the expenses of the chosen task and adds them to the task.
+     *
+     * @param taskIndex the current index of task.
+     * @param task the task that expenses should be added to.
+     * @throws IOException if the expenses data file cannot be loaded properly.
+     */
+    private void checkExpenses(int taskIndex, Task task) throws IOException {
+        expensesFile.getParentFile().mkdirs();
+        if (expensesFile.createNewFile()) {
+            return;
+        }
+        Scanner sc = new Scanner(expensesFile);
+
+        while (sc.hasNext()) {
+            String nextLine = sc.nextLine();
+            String[] parsedInfo = nextLine.split("\\|");
+            int indexInDataFile = Integer.parseInt(parsedInfo[0]);
+            if (indexInDataFile == taskIndex) {
+                for (int i = 1; i <= parsedInfo.length - 2; i += 2) {
+                    String purpose = parsedInfo[i];
+                    float amount = Float.parseFloat(parsedInfo[i + 1]);
+                    task.addExpenseToTask(purpose, amount);
+                }
+            }
+        }
+        sc.close();
     }
 
     /**

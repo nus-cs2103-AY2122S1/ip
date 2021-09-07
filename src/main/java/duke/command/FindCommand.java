@@ -15,6 +15,9 @@ import duke.ui.Ui;
  */
 public class FindCommand extends Command {
 
+    /** Represents the find command keyword. */
+    public static final String COMMAND = "find";
+
     /** The user input split by space bars. */
     private final String[] words;
 

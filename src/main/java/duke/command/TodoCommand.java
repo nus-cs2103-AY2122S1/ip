@@ -11,6 +11,9 @@ import duke.ui.Ui;
  */
 public class TodoCommand extends Command {
 
+    /** Represents the todo command keyword. */
+    public static final String COMMAND = "todo";
+
     /** The todo message to be added. */
     private final String todo;
 
