@@ -69,6 +69,7 @@ public class Parser {
             break;
         case "deadline":
             output.append(TODO_MESSAGE);
+            assert param != null;
             taskItems = param.split(" /by ", 2);
             taskName = taskItems[0].strip();
 
@@ -81,6 +82,7 @@ public class Parser {
             break;
         case "event":
             output.append(TODO_MESSAGE);
+            assert param != null;
             taskItems = param.split(" /at ", 2);
             taskName = taskItems[0].strip();
 
@@ -93,12 +95,14 @@ public class Parser {
             break;
         case "done":
             output.append(DONE_MESSAGE);
+            assert param != null;
             int intParam = Integer.parseInt(param) - 1;
             taskList.get(intParam).markAsDone();
             output.append(taskList.get(intParam));
             break;
         case "delete":
             output.append(DELETE_MESSAGE);
+            assert param != null;
             intParam = Integer.parseInt(param) - 1;
             output.append(taskList.get(intParam)).append(System.lineSeparator());
             taskList.remove(intParam);
