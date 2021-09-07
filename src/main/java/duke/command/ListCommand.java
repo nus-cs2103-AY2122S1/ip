@@ -22,7 +22,7 @@ public class ListCommand extends Command {
 
     /**
      * Executes the command to list out all tasks Duke.Duke is keeping track of.
-     * 
+     *
      * @param tasks taskList of tasks
      * @param ui the user interface.
      * @param storage the storage file.

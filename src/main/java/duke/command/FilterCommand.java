@@ -14,20 +14,21 @@ import duke.main.Ui;
  */
 public class FilterCommand extends Command {
     private Date date;
-    private boolean isExitCommand;
+    private String dateString;
     /**
      * Class constructor.
      *
      * @param dateString the date of interest.
      */
     public FilterCommand(String dateString) throws DukeException {
+        super();
         String[] dateComponents = dateString.split("/");
         try {
-            this.date = new Date(dateComponents);
+            date = new Date(dateComponents);
+            dateString = date.toString();
         } catch (Exception e) {
             throw new DukeException(e);
         }
-        isExitCommand = false;
     }
     /**
      * Executes a command to filter out tasks falling on the specified date.
@@ -37,9 +38,15 @@ public class FilterCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        TaskList matchingTasks = tasks.findMatchingTasks(date.toString());
-        String message = String.format("On %s, you have:", date.toString());
-        return ui.showMatchingTasks(matchingTasks, date.toString(), message);
+        TaskList matchingTasks = findMatchingTasks(tasks);
+        String message = generateFilterCommandMessage();
+        return ui.showMatchingTasks(matchingTasks, dateString, message);
 
+    }
+    private TaskList findMatchingTasks(TaskList tasks) {
+        return tasks.findMatchingTasks(dateString);
+    }
+    private String generateFilterCommandMessage() {
+        return String.format("On %s, you have:", dateString);
     }
 }

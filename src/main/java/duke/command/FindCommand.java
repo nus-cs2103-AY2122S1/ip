@@ -20,12 +20,15 @@ public class FindCommand extends Command {
      * @throws StringIndexOutOfBoundsException if there is no search phrase.
      */
     public FindCommand(String userCommand) throws StringIndexOutOfBoundsException {
-        int startingIndex = userCommand.indexOf(KEYWORRD) + KEYWORRD.length();
-        this. searchPhrase = userCommand.substring(startingIndex);
-        if(searchPhrase.equals("")) {
+        int startingIndex = findStartingIndex(userCommand);
+        this.searchPhrase = userCommand.substring(startingIndex);
+        if (searchPhrase.equals("")) {
             throw new StringIndexOutOfBoundsException();
         }
         isExitCommand = false;
+    }
+    private int findStartingIndex(String userCommand) {
+        return userCommand.indexOf(KEYWORRD) + KEYWORRD.length();
     }
 
     /**
@@ -37,7 +40,10 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList matchingTasks = tasks.findMatchingTasks(searchPhrase);
-        String message = "Here are the matching tasks in your list:";
+        String message = generateExecutionMessage();
         return ui.showMatchingTasks(matchingTasks, searchPhrase, message);
+    }
+    private String generateExecutionMessage() {
+        return "Here are the matching tasks in your list:\n";
     }
 }

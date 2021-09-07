@@ -18,21 +18,20 @@ import java.time.format.DateTimeParseException;
  */
 public class AddCommand extends Command {
     private String addCommand;
-    private boolean isExitCommand;
 
     /**
      * Class constructor.
-     * 
+     *
      * @param addCommand the user inputed string to add a task.
      */
     public AddCommand(String addCommand) {
+        super();
         this.addCommand = addCommand;
-        isExitCommand = false;
     }
 
     /**
      * Executes the command to add a task for Duke.Duke to keep track of.
-     * 
+     *
      * @param tasks lists of tasks
      * @param ui the user interface.
      * @param storage the storage file.
@@ -58,5 +57,4 @@ public class AddCommand extends Command {
             throw new DukeException(e);
         }
     }
-    
 }
