@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -56,20 +57,25 @@ public class Storage {
                 arr.add(task);
             }
             else if (readLine.contains("[D]")) {
-                String[] spl = readLine.split("--");
-                int length = spl[1].length();
+                String[] spl = readLine.split("/");
 
-                LocalDate date = LocalDate.parse(spl[1].substring(5, length - 1));
-                Deadline task = new Deadline(spl[0].substring(7), date);
+                LocalDate date = LocalDate.parse(spl[1].substring(3, 13));
+                LocalTime time = LocalTime.parse(spl[1].substring(14));
+                Deadline task = new Deadline(spl[0].substring(7), date, time);
                 if (readLine.contains("[X]")) {
                     task.markAsDone();
                 }
                 arr.add(task);
             }
             else {
-                String[] spl = readLine.split("--");
-                int length = spl[1].length();
-                Event task = new Event(spl[0].substring(7), spl[1].substring(5, length - 1));
+                String[] spl = readLine.split("/");
+
+                LocalDate startDate = LocalDate.parse(spl[1].substring(3 , 13));
+                LocalTime startTime = LocalTime.parse(spl[1].substring(14, 19));
+                LocalDate endDate = LocalDate.parse(spl[1].substring(20 , 30));
+                LocalTime endTime = LocalTime.parse(spl[1].substring(31));
+
+                Event task = new Event(spl[0].substring(7), startDate, startTime, endDate, endTime);
                 if (readLine.contains("[X]")) {
                     task.markAsDone();
                 }

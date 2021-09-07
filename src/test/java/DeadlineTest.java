@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,9 +15,10 @@ public class DeadlineTest {
     @Test
     public void AddDeadlineTest() {
         try {
-            LocalDate date = LocalDate.parse("2021-11-11");
-            Deadline task = new Deadline("task1 ", date);
-            assertEquals("[D][ ] task1 --(by: Nov 11 2021)", task.toString());
+            LocalDate date = LocalDate.parse("2022-11-11");
+            LocalTime time = LocalTime.parse("18:00");
+            Deadline task = new Deadline("task1 ", date, time);
+            assertEquals("[D][ ] task1 (By: Nov 11 2022 18:00)", task.toString());
             System.out.println("AddDeadlineTest: " + ANSI_GREEN + "pass" + ANSI_RESET);
         } catch (Exception e) {
             System.out.println(e);
@@ -28,11 +30,12 @@ public class DeadlineTest {
     @Test
     public void markDeadLineDoneTest() {
         try {
-            LocalDate date = LocalDate.parse("2021-12-12");
-            Deadline task = new Deadline("task2 ", date);
-            assertEquals("[D][ ] task2 --(by: Dec 12 2021)", task.toString());
+            LocalDate date = LocalDate.parse("2022-12-12");
+            LocalTime time = LocalTime.parse("20:00");
+            Deadline task = new Deadline("task2 ", date, time);
+            assertEquals("[D][ ] task2 (By: Dec 12 2022 20:00)", task.toString());
             task.markAsDone();
-            assertEquals("[D][X] task2 --(by: Dec 12 2021)", task.toString());
+            assertEquals("[D][X] task2 (By: Dec 12 2022 20:00)", task.toString());
             System.out.println("markDeadlineDoneTest: " + ANSI_GREEN + "pass" + ANSI_RESET);
         } catch (Exception e) {
             System.out.println(e);

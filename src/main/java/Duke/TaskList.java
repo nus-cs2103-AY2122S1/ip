@@ -1,6 +1,7 @@
 package Duke;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 /**
@@ -64,8 +65,8 @@ public class TaskList {
      * @param date The date of the Deadline.
      * @return Response of Duke after successful addition of Deadline.
      */
-    public String addDeadline(String details, LocalDate date) {
-        Deadline task = new Deadline(details, date);
+    public String addDeadline(String details, LocalDate date, LocalTime time) {
+        Deadline task = new Deadline(details, date, time);
 
         assert tasks != null : "TaskList cannot be found!";
         tasks.add(task);
@@ -82,8 +83,8 @@ public class TaskList {
      * @param at The details of the event.
      * @return Response of Duke after successful addition of Event.
      */
-    public String addEvent(String details, String at) {
-        Event task = new Event(details, at);
+    public String addEvent(String details, LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime) {
+        Event task = new Event(details, startDate, startTime, endDate, endTime);
 
         assert tasks != null : "TaskList cannot be found!";
         tasks.add(task);

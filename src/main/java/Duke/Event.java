@@ -1,21 +1,46 @@
 package Duke;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * A Task that can be added to the Task List
  * which has more details after the description.
  */
 public class Event extends Task {
 
-    protected String at;
+    protected LocalDate startDate;
+    protected LocalDate endDate;
+    protected LocalTime startTime;
+    protected LocalTime endTime;
 
     /**
-     * A public constructor to create an Event Task.
+     * A public constructor to create an Event Task with no End Date and Time specified.
      * @param description The description of the Event.
-     * @param at The details of the Event.
+     * @param startDate The start date of the Event.
+     * @param startTime The start time of the Event.
      */
-    public Event(String description, String at) {
+    public Event(String description, LocalDate startDate, LocalTime startTime) {
         super(description);
-        this.at = at;
+        this.startDate = startDate;
+        this.startTime = startTime;
+    }
+
+    /**
+     * A public constructor to create an Event Task with End Date and Time specified.
+     * @param description The description of the Event.
+     * @param startDate The start date of the Event.
+     * @param startTime The start time of the Event.
+     * @param endDate The end date of the Event.
+     * @param endTime The end time of the Event.
+     */
+    public Event(String description, LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime) {
+        super(description);
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     /**
@@ -24,7 +49,16 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "--(at: " + at + ")";
+        return "[E]" + super.toString()
+                + "(Start: "
+                + startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + " "
+                + startTime.format(DateTimeFormatter.ofPattern("HH:mm"))
+                + " End: "
+                + endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + " "
+                + endTime.format(DateTimeFormatter.ofPattern("HH:mm"))
+                + ")";
     }
 
     /**
@@ -35,6 +69,14 @@ public class Event extends Task {
      */
     @Override
     public String toStore() {
-        return "[E]" + super.toString() + "--(at: " + at + ")";
+        return "[E]" + super.toString()
+                + "/at "
+                + startDate
+                + " "
+                + startTime
+                + " "
+                + endDate
+                + " "
+                + endTime;
     }
 }
