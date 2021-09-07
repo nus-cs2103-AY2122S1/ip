@@ -27,10 +27,12 @@ public class DeleteCommand extends Command {
      * Executes the "Delete" Command.
      * @return string that represents details of deleting this task.
      */
+    @Override
     public String execute() {
-        if (input.length() == 6) {
+        int minCommandLength = 6;
+        if (input.length() == minCommandLength) {
             throw new DukeException(Ui.getEmptyDescriptionMsg("delete"));
         }
-        return super.taskList.removeTask(Integer.parseInt(input.substring(7)));
+        return super.taskList.removeTask(Integer.parseInt(input.substring(minCommandLength + 1)));
     }
 }

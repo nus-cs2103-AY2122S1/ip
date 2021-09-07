@@ -28,12 +28,14 @@ public class EventCommand extends Command {
      * Executes the "Event" Command.
      * @return string that represents details of adding this Event task.
      */
-    public String execute() {
-        if (input.length() == 5) {
+    @Override
+    public String execute() throws DukeException {
+        int minCommandLength = 5;
+        if (input.length() == minCommandLength) {
             throw new DukeException(Ui.getEmptyDescriptionMsg("event"));
         }
         try {
-            String[] infoArray = input.substring(6).split("/at ", 2);
+            String[] infoArray = input.substring(minCommandLength + 1).split("/at ", 2);
             Event e = new Event(infoArray[0], infoArray[1]);
             return taskList.addTask(e);
         } catch (Exception e) {
