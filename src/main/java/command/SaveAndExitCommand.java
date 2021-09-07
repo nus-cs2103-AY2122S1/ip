@@ -4,6 +4,8 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+import java.io.IOException;
+
 /**
  * Command executed when user exits the bot.
  *
@@ -19,7 +21,8 @@ public class SaveAndExitCommand extends Command {
      * @param storage the storage object
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+        storage.save(taskList);
         return "Nice talking to you, goodbye!";
     }
 
