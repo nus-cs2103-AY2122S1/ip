@@ -15,7 +15,7 @@ import duke.task.TaskList;
  */
 public class DoneCommand extends Command{
 
-    String parameter;
+    private String parameter;
 
     /**
      * A constructor to initialize a done command.
@@ -33,7 +33,6 @@ public class DoneCommand extends Command{
      * @param storage The place to store the session.
      * @throws DukeException task does not exist.
      */
-
     @Override
     public void execute(TaskList taskList, Gui gui, Storage storage) throws DukeException {
         if (!parameter.matches("\\d+")) {

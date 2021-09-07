@@ -90,6 +90,18 @@ public class TaskList {
     }
 
     /**
+     * A method to tag a task.
+     * @param taskNo The task to be marked
+     */
+    public void tagTask(int taskNo, String tagDescription) throws DukeException {
+        if (taskNo - 1 > taskList.size()) {
+            // Task does not exist
+            throw new DukeException(String.format("Task %d does not exist.\nUse \"list\" to see all tasks.", taskNo));
+        }
+        taskList.get(taskNo - 1).addTag(tagDescription);
+    }
+
+    /**
      * A method to output all tasks as a string.
      * @return  String All the task as a string
      */

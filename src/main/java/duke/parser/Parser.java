@@ -1,12 +1,6 @@
 package duke.parser;
 
-import duke.command.AddCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.Command;
+import duke.command.*;
 import duke.exception.DukeException;
 
 
@@ -47,6 +41,11 @@ public class Parser {
                 throw missingParamException;
             }
             return new DoneCommand(command[1]);
+        case "tag":
+            if (noParameter) {
+                throw missingParamException;
+            }
+            return new TagCommand(command[1]);
         case "delete":
             if (noParameter) {
                 throw missingParamException;
