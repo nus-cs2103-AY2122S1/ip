@@ -7,14 +7,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-/**
- * Controller class for the JavaFX application
- * Controls the input given by user
- */
+
 public class Controller {
 
-    private static final Storage storage = new Storage("C:\\Users\\65906\\IdeaProjects\\ip\\duke.txt");
+    private static Storage storage = new Storage("C:\\Users\\65906\\IdeaProjects\\ip\\duke.txt");
     private static TaskList tasks;
 
     @FXML
@@ -47,11 +45,18 @@ public class Controller {
     @FXML
     private TextField findText;
 
-    /**
-     * Loads the tasklist when the load button is pressed
-     *
-     * @param a action of pressing load button
-     */
+    @FXML
+    private TextField updateIndex;
+
+    @FXML
+    private TextField updateDescription;
+
+    @FXML
+    private Label updateError;
+
+    @FXML
+    private DatePicker updateDate;
+
     public void load(ActionEvent a) {
         {
             try {
@@ -59,15 +64,20 @@ public class Controller {
             } catch (IOException | DukeException e) {
                 tasks = new TaskList();
             }
-            listLabel.setText(tasks.toString());
+            String listContent = "";
+            for (int i = 0; i < tasks.size(); i++) {
+                listContent += (i + 1) + ". " + tasks.getTask(i).toString() + "\n";
+            }
+            listLabel.setText("Here are the tasks in your list:\n" + listContent);
         }
     }
 
-    /**
-     * Loads updated tasklist when other buttons are pressed
-     */
     public void load() {
-        listLabel.setText(tasks.toString());
+        String listContent = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            listContent += (i + 1) + ". " + tasks.getTask(i).toString() + "\n";
+        }
+        listLabel.setText("Here are the tasks in your list:\n" + listContent);
         try {
             storage.save(tasks);
         } catch (IOException e) {
@@ -76,20 +86,28 @@ public class Controller {
         addTaskError.setText("");
         deleteError.setText("");
         doneError.setText("");
+        updateError.setText("");
     }
 
+    public Task taskParse(String type, String description, String dateTime){
+        if (type.equalsIgnoreCase("T")) {
+            return new Todo(description);
+        } else if (type.equalsIgnoreCase("D")) {
+            return new Deadline(description,dateTime);
+        } else if (type.equalsIgnoreCase("E")) {
+            return new Event(description,dateTime);
+        } else {
+            return null;
+        }
+    }
 
-    /**
-     * Adds a task to the list when add button is pressed
-     *
-     * @param a action of pressing add button
-     */
     public void add(ActionEvent a) {
         if (taskType.getText().equalsIgnoreCase("T")) {
-            tasks.addTask(Parser.taskParse(taskType.getText(), taskDescription.getText(), ""));
+            tasks.addTask(taskParse(taskType.getText(), taskDescription.getText(), ""));
             this.load();
-        } else if (taskType.getText().equalsIgnoreCase("D") || taskType.getText().equalsIgnoreCase("E")) {
-            tasks.addTask(Parser.taskParse(taskType.getText(), taskDescription.getText(),
+            assert addTaskError.getText().equals("");
+        } else if (taskType.getText().equalsIgnoreCase("D") || taskType.getText().equalsIgnoreCase( "E")) {
+            tasks.addTask(taskParse(taskType.getText(), taskDescription.getText(),
                     taskDate.getValue().toString()));
             this.load();
             assert addTaskError.getText().equals("");
@@ -99,15 +117,10 @@ public class Controller {
 
     }
 
-    /**
-     * Mark a task as done on the list when done button is pressed
-     *
-     * @param a action of press add button
-     */
     public void done(ActionEvent a) {
         try {
             int doneIndex = Integer.parseInt(doneText.getText()) - 1;
-            if (doneIndex > tasks.size() - 1 || doneIndex < 0) {
+            if(doneIndex > tasks.size() - 1 || doneIndex < 0) {
                 doneError.setText("Please enter a number in the list");
             } else {
                 tasks.markAsDone(doneIndex);
@@ -119,15 +132,10 @@ public class Controller {
         }
     }
 
-    /**
-     * Deletes a task to the list when delete button is pressed
-     *
-     * @param a action of press delete button
-     */
-    public void delete(ActionEvent a) {
+    public void delete(ActionEvent a){
         try {
             int deleteIndex = Integer.parseInt(deleteText.getText()) - 1;
-            if (deleteIndex > tasks.size() - 1 || deleteIndex < 0) {
+            if(deleteIndex > tasks.size() - 1 || deleteIndex < 0) {
                 deleteError.setText("Please enter a number in the list");
             } else {
                 tasks.removeTask(deleteIndex);
@@ -139,12 +147,37 @@ public class Controller {
         }
     }
 
-    /**
-     * Displays a filtered tasklist given a string to find
-     *
-     * @param a action of press find button
-     */
+    public void update(ActionEvent a) {
+        try {
+            int index = Integer.parseInt(updateIndex.getText()) - 1;
+            if(index > tasks.size() - 1 || index < 0) {
+                updateError.setText("Please enter a number in the list");
+            } else {
+                tasks.updateTask(index, updateDescription.getText(), updateDate.getValue());
+                this.load();
+                assert updateError.getText().equals("");
+            }
+        } catch (NumberFormatException e) {
+            updateError.setText("Please enter integer");
+        }
+    }
+
     public void find(ActionEvent a) {
-        listLabel.setText(tasks.findTask(findText.getText()) + "Press load to go back!");
+        ArrayList<Task> result = new ArrayList<>();
+        String listContent = "";
+
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.getTask(i).description.contains(findText.getText())) {
+                result.add(tasks.getTask(i));
+            }
+        }
+        if (result.size() == 0) {
+            listLabel.setText("There are no matching task in your list!\nPress load to go back!");
+        } else {
+            for (int i = 0; i < result.size(); i++) {
+                listContent += (i + 1) + ". " + result.get(i).toString() + "\n";
+            }
+            listLabel.setText("Here are the matching tasks in your list:\n" + listContent + "Press load to go back!");
+        }
     }
 }

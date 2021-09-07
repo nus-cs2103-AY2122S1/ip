@@ -22,6 +22,10 @@ public class Deadline extends Task {
         }
     }
 
+    public void changeDate(LocalDate date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";

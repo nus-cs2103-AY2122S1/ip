@@ -22,6 +22,10 @@ public class Event extends Task {
         }
     }
 
+    public void changeDate(LocalDate date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";

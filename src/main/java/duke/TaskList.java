@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -33,6 +34,27 @@ public class TaskList {
         return this.list.get(index);
     }
 
+    public void updateTask(int index, String description, LocalDate date) {
+        if (description.equalsIgnoreCase("")) {
+            if (date != null) {
+                if (this.list.get(index) instanceof Event) {
+                    ((Event) this.list.get(index)).changeDate(date);
+                } else if (this.list.get(index) instanceof Deadline) {
+                    ((Deadline) this.list.get(index)).changeDate(date);
+                }
+            }
+        } else {
+            this.getTask(index).changeDescription(description);
+            if (date != null) {
+                if (this.list.get(index) instanceof Event) {
+                    ((Event) this.list.get(index)).changeDate(date);
+                } else if (this.list.get(index) instanceof Deadline) {
+                    ((Deadline) this.list.get(index)).changeDate(date);
+                }
+            }
+        }
+    }
+
     public int size() {
         return this.list.size();
     }
@@ -58,11 +80,11 @@ public class TaskList {
 
     @Override
     public String toString() {
-        if(this.list.isEmpty()) {
+        if (this.list.isEmpty()) {
             return "There are no tasks in your list!\n";
         } else {
             String listContent = "Here are the tasks in your list:\n";
-            for (int i = 0 ; i < list.size() ; i++) {
+            for (int i = 0; i < list.size(); i++) {
                 listContent += (i + 1) + ". " + list.get(i).toString() + "\n";
             }
             return listContent;
