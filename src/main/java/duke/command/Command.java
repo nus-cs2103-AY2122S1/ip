@@ -19,15 +19,11 @@ public abstract class Command {
      */
     public Command(String command) throws DukeInvalidCommandException {
         String[] tokens = command.strip().split(" ");
-        if (tokens.length == 0 || tokens[0].length() == 0) {
-            throw new DukeInvalidCommandException("This command is empty.");
-        }
+        assert tokens.length != 0 && tokens[0].length() != 0 : "The String command cannot be empty";
         String commandName = tokens[0];
         CommandType commandType = getCommandType();
-        if (!commandName.equals(commandType.getCommandName())) {
-            throw new DukeInvalidCommandException(String.format("This command is not \"%s\".",
-                    commandType.getCommandDescription()));
-        }
+        assert commandName.equals(commandType.getCommandName()) : String.format("This command is not \"%s\".",
+                commandType.getCommandDescription());
         parseCommand(tokens);
     }
 
