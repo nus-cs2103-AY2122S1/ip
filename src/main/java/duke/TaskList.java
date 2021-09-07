@@ -193,6 +193,8 @@ public class TaskList {
             String[] tsData = ts.split(" \\| ");
             String taskType = tsData[0];
 
+            assert taskType == "T" || taskType == "D" || taskType == "E": "Invalid task type!";
+
             switch (taskType) {
             case "T":
                 tasks.add(new Todo(tsData[1], tsData[2]));

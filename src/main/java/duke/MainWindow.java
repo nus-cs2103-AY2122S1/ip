@@ -49,6 +49,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        assert !input.isEmpty() : "User input cannot be empty!";
         String response = duke.getResponse(input);
 
         dialogContainer.getChildren().addAll(
@@ -61,7 +62,8 @@ public class MainWindow extends AnchorPane {
             new Timer().schedule(new TimerTask() {
                 public void run () {
                     Platform.exit();
-                    System.exit(0); }
+                    System.exit(0);
+                }
             }, 700);
         }
 
