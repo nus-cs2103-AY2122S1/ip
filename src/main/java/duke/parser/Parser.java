@@ -194,11 +194,20 @@ public class Parser {
     }
 
     private Command handleDelete(String details) throws DukeException {
+        String[] argArr = details.split(" ");
         try {
-            int index = Integer.parseInt(details);
-            return new DeleteCommand(index);
+            if (argArr.length == 1) {
+                int index = Integer.parseInt(argArr[0]);
+                return new DeleteCommand(index);
+            } else if (argArr.length == 2) {
+                int fromIndex = Integer.parseInt(argArr[0]) - 1;
+                int toIndex = Integer.parseInt(argArr[1]);
+                return new DeleteCommand(fromIndex, toIndex);
+            } else {
+                throw new DukeException("Must be in the format: delete {index} or delete {fromIndex} {toIndex}");
+            }
         } catch (NumberFormatException e) {
-            throw new DukeException("You need to provide the index number of the task to be deleted");
+            throw new DukeException("Must be in the format: delete {index} or delete {fromIndex} {toIndex}");
         }
     }
 
