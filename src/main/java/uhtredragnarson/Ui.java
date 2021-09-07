@@ -21,15 +21,6 @@ public class Ui {
     }
 
     /**
-     * Returns a bye message when the user exits the bot.
-     *
-     * @return The String message.
-     */
-    protected String showByeMessage() {
-        return "Bye. Hope to see you again soon!";
-    }
-
-    /**
      * Returns a message when a to-do is added.
      *
      * @param todo  The task added.
