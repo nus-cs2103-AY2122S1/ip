@@ -19,10 +19,10 @@ public abstract class TimedTask extends Task {
     protected LocalDate date;
     /** Stores Date and Time if both are specified by user */
     protected LocalDateTime dateTime;
-    /** Stores Time specified by use */
-    protected LocalTime time;
+    /** Stores Time specified by user. Defaults to 00:00 */
+    protected LocalTime time = LocalTime.parse("00:00");
     /** Boolean flag to check if both Date and Time are specified by user */
-    protected boolean isDateAndTime;
+    protected boolean isDateAndTime = false;
 
     /**
      * Instantiates a timed task.
@@ -61,9 +61,7 @@ public abstract class TimedTask extends Task {
      */
     private void scheduleDate(String dateString) throws DateTimeParseException {
         date = LocalDate.parse(dateString);
-        isDateAndTime = false;
-        time = null;
-        dateTime = null;
+        dateTime = LocalDateTime.of(date, time);
     }
 
     /**
