@@ -27,7 +27,6 @@ public class ParserTest {
 
         Parser parser = new Parser(input);
         parser.getTaskName();
-        parser.getTaskDate();
-        assertEquals(parser.getDate(), LocalDateTime.of(2020, 3, 10, 14, 0));
+        assertEquals(parser.getTaskDate(), LocalDateTime.of(2020, 3, 10, 14, 0));
     }
 }
