@@ -29,12 +29,26 @@ public class TaskList {
      * @param task is one of the T/D/E tasks
      */
     public String list(Task task) {
+        if (checkTaskDuplication(task)) {
+            return "This task has already been added!";
+        }
         listOfTasks.add(task);
         int counter = listOfTasks.size();
         storage.save(listOfTasks); //write data to duke.txt
-        return ("Got it. I've added this task:\n" + "  " + task.toString() + "\nNow you have " + counter +
-                " tasks in the list.");
+        return "Got it. I've added this task:\n" + "  " + task.toString() + "\nNow you have " + counter +
+                " tasks in the list.";
 
+    }
+
+    private boolean checkTaskDuplication(Task task) {
+        String base = task.toString();
+        for(int i = 0; i < listOfTasks.size(); i++) {
+            String comparison = listOfTasks.get(i).toString();
+            if(base.equals(comparison)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
