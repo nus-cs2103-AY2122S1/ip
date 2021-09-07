@@ -118,13 +118,7 @@ public class TaskList {
             // throw new DukeException("YIKES!! The description of a todo cannot be empty!");
             return "YIKES!! The description of a todo cannot be empty!";
         } else {
-            tasks.add(new ToDo(userInput.substring(TODO_LENGTH + 1)));
-            String result = "Got it. I've added this task: \n";
-            result += tasks.get(counter).toString();
-            counter += 1;
-
-            result += String.format("\nYou now have %d task(s) in your list.", counter);
-            return result;
+            return makeTask(new ToDo(userInput.substring(TODO_LENGTH + 1)));
         }
     }
 
@@ -152,13 +146,7 @@ public class TaskList {
         } else {
             String output = userInput.substring(EVENT_LENGTH + 1);
             String[] info = output.split("/");
-            tasks.add(new Event(info[0], info[1].substring(WHEN)));
-            String result = "Got it. I've added this task: \n";
-            result += tasks.get(counter).toString();
-            counter += 1;
-
-            result += String.format("\nYou now have %d task(s) in your list.", counter);
-            return result;
+            return makeTask(new Event(info[0], info[1].substring(WHEN)));
         }
     }
 
@@ -187,13 +175,7 @@ public class TaskList {
         } else {
             String output = userInput.substring(DEADLINE_LENGTH + 1);
             String[] info = output.split("/");
-            tasks.add(new Deadline(info[0], info[1].substring(WHEN)));
-            String result = "Got it. I've added this task: \n";
-            result += tasks.get(counter).toString();
-            counter += 1;
-
-            result += String.format("\nYou now have %d task(s) in your list.", counter);
-            return result;
+            return makeTask(new Deadline(info[0], info[1].substring(WHEN)));
         }
     }
 
@@ -236,6 +218,22 @@ public class TaskList {
             }
             return result;
         }
+    }
+
+    /**
+     * Auxiliary method that adds specified task to TaskList and returns success message.
+     *
+     * @param task Task input provided by method.
+     * @return Success message upon addition of Task.
+     */
+    private String makeTask(Task task) {
+        tasks.add(task);
+        String result = "Got it. I've added this task: \n";
+        result += tasks.get(counter).toString();
+        counter += 1;
+
+        result += String.format("\nYou now have %d task(s) in your list.", counter);
+        return result;
     }
 
     /**
