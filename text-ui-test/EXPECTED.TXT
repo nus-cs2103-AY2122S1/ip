@@ -11,35 +11,35 @@ Hello! I'm Duke
 What can I do for you?
 ____________________________________________________________
 ____________________________________________________________
- Got it. I've added this task:
+ Got it. I've added this duke.task:
    [T][ ] read book
  Now you have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
- Got it. I've added this task:
+ Got it. I've added this duke.task:
    [D][ ] return book (by: June 6th)
  Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
- Got it. I've added this task:
+ Got it. I've added this duke.task:
    [E][ ] project meeting (at: Aug 6th 2-4pm)
  Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
- Got it. I've added this task:
+ Got it. I've added this duke.task:
    [T][ ] join sports club
  Now you have 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
- Nice! I've marked this task as done:
+ Nice! I've marked this duke.task as done:
    [T][X] read book
 ____________________________________________________________
 ____________________________________________________________
- Nice! I've marked this task as done:
+ Nice! I've marked this duke.task as done:
    [T][X] join sports club
 ____________________________________________________________
 ____________________________________________________________
- Got it. I've added this task:
+ Got it. I've added this duke.task:
    [T][ ] borrow book
  Now you have 5 tasks in the list.
 ____________________________________________________________
@@ -52,12 +52,12 @@ ____________________________________________________________
  5.[T][ ] borrow book
 ____________________________________________________________
 ____________________________________________________________
- Got it. I've added this task:
+ Got it. I've added this duke.task:
    [D][ ] return book (by: Sunday)
  Now you have 6 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
- Got it. I've added this task:
+ Got it. I've added this duke.task:
    [E][ ] project meeting (at: Monday 2-4pm)
  Now you have 7 tasks in the list.
 ____________________________________________________________

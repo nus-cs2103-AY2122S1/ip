@@ -1,3 +1,7 @@
+package duke.utils;
+
+import duke.task.Task;
+
 public class Ui {
 
     private final String SEP_LINE = "____________________________________________________________";
@@ -36,43 +40,43 @@ public class Ui {
     }
 
     public void todo(Task t, int size) {
-        String out = "Got it. I've added task:\n  "
+        String out = "Got it. I've added duke.task:\n  "
                 .concat(t.toString())
                 .concat("\nNow you have ".concat(size + "").concat(" tasks in the list."));
         System.out.println(messageWrapper(out));
     }
 
     public void deadline(Task t, int size) {
-        String out =  "Got it. I've added task:\n  "
+        String out =  "Got it. I've added duke.task:\n  "
                 .concat(t.toString())
                 .concat("\nNow you have ".concat(size + "").concat(" tasks in the list."));
         System.out.println(messageWrapper(out));
     }
 
     public void event(Task t, int size) {
-        String out = "Got it. I've added task:\n  "
+        String out = "Got it. I've added duke.task:\n  "
                 .concat(t.toString())
                 .concat("\nNow you have ".concat(size + "").concat(" tasks in the list."));
         System.out.println(messageWrapper(out));
     }
 
     public void delete(Task t, int size) {
-        String out = "Noted. I've removed task:\n  "
+        String out = "Noted. I've removed duke.task:\n  "
                 .concat(t.toString())
                 .concat("\nNow you have ".concat(size + "").concat(" tasks in the list."));
         System.out.println(messageWrapper(out));
     }
 
     public void done(Task t) {
-        String out = "Nice! I've marked task as done: \n  ".concat(t.toString());
+        String out = "Nice! I've marked duke.task as done: \n  ".concat(t.toString());
         System.out.println(messageWrapper(out));
     }
 
-    public void list(TaskList t) {
+    public void list(TaskList tl) {
         String out = "Here are the tasks in your list:\n";
-        for (int i = 0; i < t.size(); i++) {
+        for (int i = 0; i < tl.size(); i++) {
             if (i != 0) out = out.concat("\n");
-            out = out.concat((i+1) + ".").concat(t.get(i).toString());
+            out = out.concat((i+1) + ".").concat(tl.get(i).toString());
         }
         System.out.println(messageWrapper(out));
     }

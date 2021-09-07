@@ -1,11 +1,14 @@
+package duke.utils;
+
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
+import duke.task.Task;
 
-// Level 7: Created Storage class to maintain storage state
+// Level 7: Created duke.utils.Storage class to maintain storage state
 public class Storage {
 
     private final File storageFile;
@@ -15,7 +18,7 @@ public class Storage {
     private final String storagePath;
 
 
-    Storage (String folderPath, String fileName) {
+    public Storage(String folderPath, String fileName) {
         this.folderPath = folderPath;
         this.fileName = fileName;
         storagePath = folderPath
@@ -55,17 +58,17 @@ public class Storage {
     public void saveEntry(Task t) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(storageFile,true));
-            writer.write(t.type.name()
+            writer.write(t.getType().name()
                 .concat(" | ")
-                .concat(Boolean.toString(t.isDone))
+                .concat(Boolean.toString(t.getState()))
                 .concat(" | ")
-                .concat(t.description)
+                .concat(t.getDescription())
             );
-            if (t.by != null) {
-                writer.write(" | ".concat(t.by.toString()));
+            if (t.getBy() != null) {
+                writer.write(" | ".concat(t.getBy().toString()));
             }
-            if (t.at != null) {
-                writer.write(" | ".concat(t.at));
+            if (t.getAt() != null) {
+                writer.write(" | ".concat(t.getAt()));
             }
             writer.newLine();
             writer.close();
@@ -83,11 +86,11 @@ public class Storage {
             );
             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile,true));
             BufferedReader reader = new BufferedReader(new FileReader(storageFile));
-            String toDelete = t.type.name()
+            String toDelete = t.getType().name()
                     .concat(" | ")
-                    .concat(Boolean.toString(t.isDone))
+                    .concat(Boolean.toString(t.getState()))
                     .concat(" | ")
-                    .concat(t.description);
+                    .concat(t.getDescription());
             String curr;
             while(true){
                 curr = reader.readLine();

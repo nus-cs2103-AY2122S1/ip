@@ -1,3 +1,5 @@
+package duke.task;
+
 //Level-4 -> A-Inheritance: To-do Task Class
 public class Todo extends Task {
 

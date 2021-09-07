@@ -1,3 +1,5 @@
+package duke.utils;
+
 public class Parser {
 
     public static int decoder(String userInput) {

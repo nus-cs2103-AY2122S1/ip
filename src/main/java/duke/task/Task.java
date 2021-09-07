@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 
 // Level 3 -> A-Classes: Task class that represents all Tasks
@@ -9,7 +11,7 @@ public class Task {
     protected boolean isDone;
     protected TASK_TYPE type;
 
-    // overloaded constructors for separate task types
+    // overloaded constructors for separate duke.task types
     public Task(String description, String r, TASK_TYPE type) {
         this(description,type);
         if (type.equals(TASK_TYPE.D)) {
@@ -38,20 +40,40 @@ public class Task {
     public String getEventIcon() {
         String out;
         switch (type) {
-            case T: out = "T";
-                break;
-            case D: out = "D";
-                break;
-            case E: out = "E";
-                break;
-            default: out = " ";
-                break;
+        case T:
+            out = "T";
+            break;
+        case D:
+            out = "D";
+            break;
+        case E:
+            out = "E";
+            break;
+        default:
+            out = " ";
+            break;
         }
         return out;
     }
 
     public String getDescription() {
         return description;
+    }
+
+    public TASK_TYPE getType() {
+        return type;
+    }
+
+    public boolean getState() {
+        return isDone;
+    }
+
+    public String getAt() {
+        return at;
+    }
+
+    public LocalDate getBy() {
+        return by;
     }
 
     public void setDone() {

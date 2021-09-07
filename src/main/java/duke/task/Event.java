@@ -1,3 +1,5 @@
+package duke.task;
+
 //Level-4 -> A-Inheritance: Event Task Class
 public class Event extends Task {
 

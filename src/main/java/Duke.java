@@ -1,10 +1,15 @@
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-// A-Enums: Set Enums for Task type
-enum TASK_TYPE {
-    T,D,E
-}
+import duke.utils.Parser;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.utils.Ui;
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+import duke.task.TASK_TYPE;
 
 public class Duke {
 

@@ -1,6 +1,9 @@
+package duke.utils;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import duke.task.Task;
 
 public class TaskList {
     // Level-6 -> A-Collections: Task List
