@@ -10,6 +10,7 @@ import blue.handler.EventHandler;
 import blue.handler.ExitHandler;
 import blue.handler.FindHandler;
 import blue.handler.ListHandler;
+import blue.handler.StatsHandler;
 import blue.handler.ToDoHandler;
 
 /**
@@ -35,7 +36,7 @@ public class Blue {
         }
         initCommandHandlers();
     }
-    
+
     private void initCommandHandlers() {
         // Construct the handlers
         ListHandler listHandler = new ListHandler(tasks);
@@ -45,6 +46,7 @@ public class Blue {
         DoneHandler doneHandler = new DoneHandler(tasks);
         DeleteHandler deleteHandler = new DeleteHandler(tasks);
         FindHandler findHandler = new FindHandler(tasks);
+        StatsHandler statsHandler = new StatsHandler(tasks);
         ExitHandler exitHandler = new ExitHandler(tasks);
 
         // Put the handlers into HashMap
@@ -56,6 +58,7 @@ public class Blue {
         commandHandlers.put(Command.DONE, doneHandler);
         commandHandlers.put(Command.DELETE, deleteHandler);
         commandHandlers.put(Command.FIND, findHandler);
+        commandHandlers.put(Command.STATS, statsHandler);
         commandHandlers.put(Command.EXIT, exitHandler);
     }
 

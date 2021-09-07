@@ -16,6 +16,7 @@ public class Parser {
     private static final String DELETE_STRING = "delete";
     private static final String EXIT_STRING = "bye";
     private static final String FIND_STRING = "find";
+    private static final String STATS_STRING = "stats";
 
     static Command getCommand(String input) throws BlueException {
         if (input.length() == 0) {
@@ -39,6 +40,8 @@ public class Parser {
             return Command.EXIT;
         case FIND_STRING:
             return Command.FIND;
+        case STATS_STRING:
+            return Command.STATS;
         default:
             throw new BlueException(INVALID_COMMAND_MESSAGE);
         }

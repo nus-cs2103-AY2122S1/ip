@@ -3,7 +3,7 @@ package blue;
 /**
  * Holds the value of all commands.
  */
-public enum Command {
+enum Command {
     LIST,
     TODO,
     DEADLINE,
@@ -11,5 +11,6 @@ public enum Command {
     DONE,
     DELETE,
     EXIT,
-    FIND
+    FIND,
+    STATS
 }
