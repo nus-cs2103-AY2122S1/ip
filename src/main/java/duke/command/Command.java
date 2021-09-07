@@ -10,7 +10,7 @@ import duke.Parser;
 public abstract class Command {
     public static final Command[] COMMANDS = new Command[]{new DeadlineCommand(), new DeleteCommand(),
         new DoneCommand(), new EndCommand(), new EventCommand(), new FindCommand(), new ListCommand(),
-        new TodoCommand()};
+        new TodoCommand(), new HelpCommand()};
 
     /**
      * Identifies the command from the user's input.
