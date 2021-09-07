@@ -1,4 +1,5 @@
 package task;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +12,18 @@ public class TaskList {
 
     private List<Task> taskList;
 
+    /**
+     * Constructs a TaskList object given no current list of tasks.
+     */
     public TaskList() {
         this.taskList = new ArrayList<Task>();
     }
 
+    /**
+     * Constructs a TaskList object given a list of tasks.
+     *
+     * @param taskList list of tasks.
+     */
     public TaskList(List<Task> taskList) {
         this.taskList = taskList;
     }
@@ -82,6 +91,12 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Finds tasks matching query String given.
+     *
+     * @param query query String.
+     * @return String representation of tasks found matching query String.
+     */
     public String find(String query) {
         String message = "Here are the matching tasks in your list:\n";
         int count = 1;

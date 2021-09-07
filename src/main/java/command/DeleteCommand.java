@@ -1,4 +1,5 @@
 package command;
+
 import duke.Storage;
 import duke.Ui;
 import task.Task;
@@ -13,6 +14,11 @@ public class DeleteCommand extends Command {
 
     private int deleteIndex;
 
+    /**
+     * Constructs a new DeleteCommand object.
+     *
+     * @param deleteIndex index of the task to be deleted.
+     */
     public DeleteCommand(int deleteIndex) {
         this.deleteIndex = deleteIndex;
     }

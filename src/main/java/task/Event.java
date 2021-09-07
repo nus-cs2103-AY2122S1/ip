@@ -1,4 +1,5 @@
 package task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -12,6 +13,12 @@ public class Event extends Task {
 
     protected LocalDate at;
 
+    /**
+     * Constructs an Event object.
+     *
+     * @param description description of event.
+     * @param at date of event.
+     */
     public Event(String description, LocalDate at) {
         super(description);
         this.at = at;

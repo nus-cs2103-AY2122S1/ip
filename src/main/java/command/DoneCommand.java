@@ -1,4 +1,5 @@
 package command;
+
 import duke.Storage;
 import duke.Ui;
 import task.Task;
@@ -13,6 +14,11 @@ public class DoneCommand extends Command {
 
     private int doneIndex;
 
+    /**
+     * Constructs a DoneCommand object.
+     *
+     * @param doneIndex index of the task to be marked as done.
+     */
     public DoneCommand(int doneIndex) {
         this.doneIndex = doneIndex;
     }

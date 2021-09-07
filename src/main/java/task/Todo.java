@@ -6,6 +6,11 @@ package task;
  * @author Ho Wen Zhong
  */
 public class Todo extends Task {
+    /**
+     * Constructs a Todo object.
+     *
+     * @param description description of todo.
+     */
     public Todo(String description) {
         super(description);
     }
