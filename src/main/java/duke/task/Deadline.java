@@ -26,7 +26,7 @@ public class Deadline extends Task {
      * Returns a Deadline from string input with description and date.
      *
      * @param args String input with description and date in
-     *                  '[description] (by: [MMM d yyyy]' format.
+     *                  '[description] (by: [MMM d yyyy])' format.
      * @return Deadline from string input with description and date.
      */
     public static Deadline build(String args) {

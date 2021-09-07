@@ -26,7 +26,7 @@ public class Event extends Task {
      * Returns a Event from string input with description and date.
      *
      * @param args String input with description and date in
-     *                  '[description] (by: [MMM d yyyy]' format.
+     *                  '[description] (by: [MMM d yyyy])' format.
      * @return Event from string input with description and date.
      */
     public static Event build(String args) {
