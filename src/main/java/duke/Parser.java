@@ -32,6 +32,7 @@ public class Parser {
      * @param tasks The TaskList to be updated during parsing.
      */
     public Parser(TaskList tasks) {
+        assert tasks != null : "taskList is not initialized";
         this.tasks = tasks;
     }
 
