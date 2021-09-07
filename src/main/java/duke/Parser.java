@@ -7,6 +7,14 @@ public class Parser {
 
     public Parser() {}
 
+    /**
+     * Parses input given by user into a Task
+     *
+     * @param type of the task T, D or E
+     * @param description description of task
+     * @param dateTime for D,E to track time
+     * @return Task of the specific specifications
+     */
     public static Task taskParse(String type, String description, String dateTime){
         if (type.equalsIgnoreCase("T")) {
             return new Todo(description);

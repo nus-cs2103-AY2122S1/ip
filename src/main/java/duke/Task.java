@@ -22,6 +22,9 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    /**
+     * Marks task as done
+     */
     public void markAsDone() {
         this.isDone = true;
     }
