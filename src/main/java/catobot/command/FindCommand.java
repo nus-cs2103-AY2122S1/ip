@@ -9,7 +9,7 @@ import catobot.item.TaskList;
  */
 public class FindCommand extends Command {
 
-    private final String content;
+    private final String keyword;
 
     /**
      * Constructor for find command.
@@ -17,7 +17,7 @@ public class FindCommand extends Command {
      * @param content The content of the command.
      */
     protected FindCommand(String content) {
-        this.content = content;
+        this.keyword = Parser.parseSingleArgument(content, CommandType.FIND);
     }
 
     /**
@@ -30,11 +30,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws BotException {
-        int startIndex = CommandType.FIND.getValue().length();
-
-        String keyword = content.substring(startIndex).trim();
         String result = tasks.search(keyword);
-
         return result;
     }
 
