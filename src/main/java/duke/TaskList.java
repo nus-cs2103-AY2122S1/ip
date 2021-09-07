@@ -3,6 +3,7 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import duke.exception.DukeException;
 import duke.exception.DukeFileNotFoundException;
@@ -66,13 +67,37 @@ public class TaskList {
      * @param num the task number to delete
      * @throws DukeFileNotFoundException if file not found
      */
-    private static String deleteTask(int num) throws DukeFileNotFoundException {
+    private static String deleteSingleTask(int num) throws DukeFileNotFoundException {
         int taskIdx = num - 1;
         assert taskIdx >= 0;
         Task taskToDelete = getTasks().get(taskIdx);
         getTasks().remove(taskIdx);
         Duke.getStorage().saveTasks(getTasks());
         return ("Noted. I've removed this task:\n\t" + taskToDelete + "\n\tNow you have " + tasks.size()
+                + " tasks in the list.\n");
+    }
+
+    /**
+     * Deletes multiple tasks from the ArrayList of tasks. User inputs the task
+     * numbers separated by spaces.
+     *
+     * @param taskNums the task numbers to delete
+     * @throws DukeFileNotFoundException if file not found
+     */
+    private static String deleteTasks(int[] taskNums) throws DukeFileNotFoundException {
+        if (taskNums.length == 1) {
+            return deleteSingleTask(taskNums[0]);
+        }
+
+        Arrays.sort(taskNums);
+
+        // Delete from the end of the list so we don't run into indexing errors
+        for (int i = taskNums.length - 1; i >= 0; i--) {
+            System.out.println(i);
+            deleteSingleTask(taskNums[i]);
+        }
+
+        return ("Noted. I've removed task numbers: " + Arrays.toString(taskNums) + "\n\tNow you have " + tasks.size()
                 + " tasks in the list.\n");
     }
 
@@ -84,11 +109,14 @@ public class TaskList {
      * @throws DukeInvalidTaskNumberFormatException if task number not an integer
      * @throws DukeTaskNumberOutOfBoundsException   if task number not valid
      */
-    private static int getTaskNum(String command)
+    private static int[] getTaskNums(String command)
             throws DukeInvalidTaskNumberFormatException, DukeTaskNumberOutOfBoundsException {
         try {
-            return Integer.parseInt(command.split(" ")[1]);
+            String[] splitCommand = command.split(" ");
+            String[] taskNums = Arrays.copyOfRange(splitCommand, 1, splitCommand.length);
+            return Arrays.stream(taskNums).mapToInt(Integer::parseInt).toArray();
         } catch (NumberFormatException err) {
+            System.out.println(err.getMessage());
             throw new DukeInvalidTaskNumberFormatException();
         } catch (IndexOutOfBoundsException err) {
             throw new DukeTaskNumberOutOfBoundsException();
@@ -107,8 +135,8 @@ public class TaskList {
             throw new DukeTaskNotFoundException();
         }
 
-        int taskNum = getTaskNum(command);
-        return deleteTask(taskNum);
+        int[] taskNum = getTaskNums(command);
+        return deleteTasks(taskNum);
     }
 
     /**
@@ -126,8 +154,8 @@ public class TaskList {
             throw new DukeTaskNotFoundException();
         }
 
-        int taskNum = getTaskNum(command);
-        return completeTask(taskNum);
+        int[] taskNum = getTaskNums(command);
+        return completeTask(taskNum[0]);
     }
 
     /**
