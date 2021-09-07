@@ -15,6 +15,7 @@ public class Parser {
      */
     public static Command parse(final String stringCommand) {
         String keyword = stringCommand.split(" ")[0].trim().toLowerCase();
+        assert !keyword.equals("") : "keyword should not be empty";
         switch (keyword) {
         case "list":
             return new Command.ListCommand();

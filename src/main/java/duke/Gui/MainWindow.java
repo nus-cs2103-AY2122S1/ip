@@ -54,6 +54,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void introduceDuke() {
         String response = duke.introduceDuke();
+        assert !response.equals("") : "response should not be empty";
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(response, dukeImage)
         );
