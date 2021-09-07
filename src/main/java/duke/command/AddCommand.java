@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.ArchiveList;
 import duke.Storage;
 import duke.task.Task;
 import duke.TaskList;
@@ -34,11 +35,12 @@ public class AddCommand extends Command {
      * Executes the AddCommand.
      *
      * @param taskList TaskList object to add toAdd to.
+     * @param archiveList ArchiveList to store archived tasks.
      * @param ui Ui Object to print to user.
      * @param storage Storage object which saves and loads the taskList.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
         taskList.add(this.toAdd);
         ui.printAdd(this.toAdd, taskList.getSize());
     }
@@ -48,12 +50,13 @@ public class AddCommand extends Command {
      * execute method as well as execute the adding of the task.
      *
      * @param taskList TaskList object to add toAdd to.
+     * @param archiveList ArchiveList to store archived tasks.
      * @param ui Ui Object to get the String representation from.
      * @param storage Storage object which saves and loads the taskList.
      * @return String representation of the things printed in the execute method.
      */
     @Override
-    public String formatExecutedString(TaskList taskList, Ui ui, Storage storage) {
+    public String formatExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
         taskList.add(this.toAdd);
         return ui.formatPrintAddString(this.toAdd, taskList.getSize());
     }

@@ -33,14 +33,14 @@ public class Ui {
     /**
      * Prints out TaskList in a form of a list for users to see.
      *
-     * @param taskList TaskList to be printed.
+     * @param dukeList DukeList to be printed.
      */
-    public void print(TaskList taskList) {
+    public void print(DukeList dukeList) {
         System.out.println(LINE);
-        System.out.println("Here are the tasks in your list:");
+        System.out.println("Here are the tasks in your " + dukeList.type() + ":");
 
-        for (int i = 0; i < taskList.getSize(); i++) {
-            System.out.println((i + 1) + "." + taskList.taskToString(i));
+        for (int i = 0; i < dukeList.getSize(); i++) {
+            System.out.println((i + 1) + "." + dukeList.taskToString(i));
 
         }
         System.out.println(LINE);
@@ -49,14 +49,14 @@ public class Ui {
     /**
      * Gets String representation of what is printed out when print is called.
      *
-     * @param taskList TaskList to be printed.
+     * @param dukeList DukeList to be printed.
      * @return String representation of what gets printed out of print method.
      */
-    public String formatPrintString(TaskList taskList) {
-        String output = "Here are the tasks in your list:";
+    public String formatPrintString(DukeList dukeList) {
+        String output = "Here are the tasks in your " + dukeList.type() + ":";
 
-        for (int i = 0; i < taskList.getSize(); i++) {
-            output += "\n" + (i + 1) + "." + taskList.taskToString(i);
+        for (int i = 0; i < dukeList.getSize(); i++) {
+            output += "\n" + (i + 1) + "." + dukeList.taskToString(i);
         }
         return output;
     }
