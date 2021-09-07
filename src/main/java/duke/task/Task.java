@@ -1,33 +1,33 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDate;
 
-class Task {
+public class Task {
     protected String content;
     protected boolean isDone;
-    Task(String content) {
+    public Task(String content) {
         this.content = content;
         this.isDone = false;
     }
 
-    Task(String content, boolean isDone) {
+    public Task(String content, boolean isDone) {
         this.content = content;
         this.isDone = isDone;
     }
 
-    void setDone() {
+    public void setDone() {
         this.isDone = true;
     }
 
-    String encoding() {
+    public String encoding() {
         return (isDone ? "Done" : "InProgress") + "&&" + content;
     }
 
-    String getContent() {
+    public String getContent() {
         return content;
     }
 
-    LocalDate getDate() {
+    public LocalDate getDate() {
         return null;
     }
 

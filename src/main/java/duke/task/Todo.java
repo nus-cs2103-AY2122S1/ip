@@ -1,16 +1,18 @@
-package duke;
+package duke.task;
 
-class Todo extends Task {
-    Todo(String content) {
+import duke.task.Task;
+
+public class Todo extends Task {
+    public Todo(String content) {
         super(content);
     }
 
-    Todo(String content, boolean isDone) {
+    public Todo(String content, boolean isDone) {
         super(content, isDone);
     }
 
     @Override
-    String encoding() {
+    public String encoding() {
         return "T&&" + super.encoding();
     }
 

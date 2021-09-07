@@ -1,6 +1,5 @@
 T&&InProgress&&coding
 E&&Done&&submit lab&&tmr
-E&&InProgress&&class meeting&&Sunday
 E&&InProgress&&submit&&2021-8-23
 T&&InProgress&&shower
 E&&InProgress&&s&&2021-08-23

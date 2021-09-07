@@ -1,14 +1,16 @@
-package duke;
+package duke.task;
+
+import duke.task.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-class Deadline extends Task {
+public class Deadline extends Task {
     protected String by;
     protected LocalDate date;
 
-    Deadline(String content, String by) {
+    public Deadline(String content, String by) {
         super(content);
         this.by = by;
         try {
@@ -18,7 +20,7 @@ class Deadline extends Task {
         }
     }
 
-    Deadline(String content, String by, boolean isDone) {
+    public Deadline(String content, String by, boolean isDone) {
         super(content, isDone);
         this.by = by;
         try {
@@ -29,12 +31,12 @@ class Deadline extends Task {
     }
 
     @Override
-    LocalDate getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
     @Override
-    String encoding() {
+    public String encoding() {
         return "D&&" + super.encoding() + "&&" + by;
     }
 
