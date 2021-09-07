@@ -124,6 +124,18 @@ public class Duke {
                     response = taskList.remove(taskIndex - 1, commands);
                 }
                 break;
+            case UPDATE:
+                if (input.equals("")) {
+                    throw new EmptyTaskDescriptionException();
+                }
+                String [] update = input.split(":", 2);
+                String description = update[0];
+                if (update.length < 2) {
+                    throw new EmptyTaskNumberException();
+                }
+                int taskNumber = Integer.parseInt(update[1].trim());
+                response = taskList.updateDescription(commands, description, taskNumber - 1);
+                break;
             default:
                 throw new UnknownInputException();
             }

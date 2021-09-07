@@ -5,11 +5,15 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
-    public LocalDateTime time;
-
+    private LocalDateTime time;
+    
     public Event(String description, LocalDateTime time) {
         super(description);
         this.time = time;
+    }
+    
+    public LocalDateTime getTime() {
+        return this.time;
     }
 
     @Override
