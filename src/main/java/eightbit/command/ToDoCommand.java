@@ -29,6 +29,8 @@ public class ToDoCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
+        assert toDo != null : "Todo should be initialized";
+
         taskList.add(toDo);
         storage.appendToFile(toDo);
         return "Got it. I've added this task:\n  " + toDo

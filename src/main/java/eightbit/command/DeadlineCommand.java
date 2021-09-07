@@ -29,6 +29,8 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
+        assert deadline != null : "Deadline should be initialized";
+
         taskList.add(deadline);
         storage.appendToFile(deadline);
         return "Got it. I've added this task:\n  " + deadline

@@ -58,6 +58,8 @@ public class DialogBox extends HBox {
      * @return Dialog box containing the user's input and image.
      */
     public static DialogBox getUserDialog(String text, Image img) {
+        assert text != null : "Text should be initialized";
+        assert img != null : "Image should be initialized";
         return new DialogBox(text, img);
     }
 

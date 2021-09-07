@@ -29,6 +29,8 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
+        assert event != null : "Event should be initialized";
+
         taskList.add(event);
         storage.appendToFile(event);
         return "Got it. I've added this task:\n  " + event
