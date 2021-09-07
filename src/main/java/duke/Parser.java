@@ -24,4 +24,14 @@ public class Parser {
         String input = userInput.replace(command, "").strip();
         return Command.of(command, input);
     }
+
+    public static String[] splitBy(String string, String delimiter) {
+        String[] twoParts = string.split(delimiter);
+        if (twoParts.length == 1) {
+            twoParts = new String[]{twoParts[0], ""};
+        }
+        twoParts[0] = twoParts[0].trim();
+        twoParts[1] = twoParts[1].trim();
+        return twoParts;
+    }
 }

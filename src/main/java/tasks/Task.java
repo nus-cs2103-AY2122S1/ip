@@ -1,5 +1,6 @@
 package tasks;
 
+import duke.Parser;
 import exceptions.NoSuchCommandException;
 import exceptions.NoTaskNameException;
 
@@ -33,18 +34,19 @@ public abstract class Task {
      * commands
      * @throws NoTaskNameException if there is no task name
      */
-    private static Task createTask(String command, String input) throws NoSuchCommandException, NoTaskNameException {
+    public static Task createTask(String command, String input) throws NoSuchCommandException, NoTaskNameException {
         if (input.isEmpty()) {
             throw new NoTaskNameException("No task name, please try again.");
         }
+        input = input.trim();
         switch (command) {
         case "todo":
             return new ToDo(input);
         case "event":
-            String[] messageAndEventDate = input.split("/at ");
+            String[] messageAndEventDate = Parser.splitBy(input, "/at");
             return new Event(messageAndEventDate[0], messageAndEventDate[1]);
         case "deadline":
-            String[] messageAndEndTime = input.split("/by ");
+            String[] messageAndEndTime = Parser.splitBy(input, "/by");
             return new Deadline(messageAndEndTime[0], messageAndEndTime[1]);
         default:
             throw new NoSuchCommandException("No such command!");

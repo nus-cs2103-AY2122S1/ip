@@ -3,7 +3,8 @@ package command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import tasks.Deadline;
+import exceptions.DukeException;
+import tasks.Task;
 
 /**
  * Command to create a new Deadline task.
@@ -25,9 +26,9 @@ public class CreateNewDeadlineCommand extends Command {
      * @return acknowledgement that Deadline has been created
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
-        String[] messageAndEndTime = super.getExtraInput().split("/by ");
-        return taskList.add(new Deadline(messageAndEndTime[0], messageAndEndTime[1]));
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        String details = super.getExtraInput();
+        return taskList.add(Task.createTask("deadline", details));
     }
 
     /**

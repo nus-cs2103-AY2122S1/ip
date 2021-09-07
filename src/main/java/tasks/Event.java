@@ -1,5 +1,7 @@
 package tasks;
 
+import duke.Parser;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -16,18 +18,13 @@ public class Event extends Task implements Recurring {
      * Constructor for Event object.
      *
      * @param message name of Event
-     * @param eventDate date of Event
+     * @param extraDetails date of Event and optionally, a Recurrence
      */
-    public Event(String message, String eventDate) {
+    public Event(String message, String extraDetails) {
         super(message);
-        //TODO: consider putting this split method in Parser
-        String[] eventDateAndRecurrence = eventDate.split("/recur ");
-        this.eventDate = LocalDate.parse(eventDateAndRecurrence[0].trim());
-        if (eventDateAndRecurrence.length == 2) {
-            this.recurrence = Recurring.stringToRecurrence(eventDateAndRecurrence[1].trim());
-        } else {
-            this.recurrence = Recurring.stringToRecurrence("");
-        }
+        String[] eventDateAndRecurrence = Parser.splitBy(extraDetails, "/recur");
+        this.eventDate = LocalDate.parse(eventDateAndRecurrence[0]);
+        this.recurrence = Recurring.stringToRecurrence(eventDateAndRecurrence[1]);
     }
 
     /**
@@ -36,7 +33,7 @@ public class Event extends Task implements Recurring {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: "
+        return "[E]" + super.toString() + " (at: "
                 + eventDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ") "
                 + Recurring.recurrenceToString(this.recurrence);
     }
