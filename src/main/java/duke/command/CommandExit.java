@@ -3,12 +3,12 @@ package duke.command;
 import duke.ui.Ui;
 
 /**
- * Command to exit program
+ * Command to exit program.
  */
 public class CommandExit extends Command {
 
     /**
-     * Constructor
+     * Constructor.
      */
     public CommandExit() {
         this.commandName = "gubbai";
@@ -17,7 +17,7 @@ public class CommandExit extends Command {
     }
 
     /**
-     * This class signals to Duke that it should terminate the program
+     * This class signals to Duke that it should terminate the program.
      */
     @Override
     public String execute() {

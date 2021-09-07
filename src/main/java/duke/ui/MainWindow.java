@@ -27,6 +27,9 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initialise the main window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -52,8 +55,13 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Display the welcome message upon startup of the app.
+     */
     private void startUp() {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.introMessage(), dukeImage));
+        dialogContainer
+                .getChildren()
+                .add(DialogBox.getDukeDialog(Ui.introMessage(), dukeImage));
     }
 
 }

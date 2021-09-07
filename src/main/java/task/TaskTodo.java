@@ -3,12 +3,12 @@ package task;
 import java.time.LocalDate;
 
 /**
- * To-do task event
+ * To-do task event.
  */
 public class TaskTodo extends Task {
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param description Description of task
      * @param done Completion status
@@ -18,9 +18,9 @@ public class TaskTodo extends Task {
     }
 
     /**
-     * String representation of to-do
+     * String representation of to-do.
      *
-     * @return to-do display
+     * @return To-do display
      */
     @Override
     public String toString() {
@@ -31,7 +31,7 @@ public class TaskTodo extends Task {
     }
 
     /**
-     * The string representation of Task to be used for saving
+     * The string representation of Task to be used for saving.
      *
      * @return Save string
      */
@@ -43,10 +43,10 @@ public class TaskTodo extends Task {
     }
 
     /**
-     * Checks if the task falls on a given date
+     * Checks if the task falls on a given date.
      *
      * @param date Date to check
-     * @return false (To-dos have no date)
+     * @return False (To-dos have no date)
      */
     @Override
     public boolean isDate(LocalDate date) {

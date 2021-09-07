@@ -3,17 +3,17 @@ package duke.command;
 import task.TaskList;
 
 /**
- * Command to toggle task completion
+ * Command to toggle task completion.
  */
 public class CommandDone extends Command {
     private final TaskList taskList;
     private final int index;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param taskList Task list
-     * @param index Index to delete
+     * @param taskList Task list to toggle completion from
+     * @param index Index to toggle completion
      */
     public CommandDone(TaskList taskList, int index) {
         this.commandName = "done <index>";
@@ -27,7 +27,7 @@ public class CommandDone extends Command {
     }
 
     /**
-     * Toggles completion of task at index in task list
+     * Toggles completion of task at index in task list.
      */
     @Override
     public String execute() {

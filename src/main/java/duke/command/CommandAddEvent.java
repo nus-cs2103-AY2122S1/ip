@@ -1,23 +1,23 @@
 package duke.command;
 
 import java.time.format.DateTimeParseException;
-import java.util.regex.Matcher;
 
+import duke.ui.Ui;
 import task.TaskEvent;
 import task.TaskList;
 
 /**
- * Command to add an event
+ * Command to add an event.
  */
 public class CommandAddEvent extends Command {
     private final TaskList taskList;
     private final String[] input;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param taskList Task list
-     * @param input Matcher with info needed to create the class
+     * @param taskList Task list to add to
+     * @param input Array with info needed to create the class
      */
     public CommandAddEvent(TaskList taskList, String[] input) {
         this.commandName = "event <string> /at DD/MM/YYYY xxxxH";
@@ -33,7 +33,7 @@ public class CommandAddEvent extends Command {
     }
 
     /**
-     * Add an event to the task list if valid
+     * Add an event to the task list if valid.
      */
     @Override
     public String execute() {
@@ -44,7 +44,7 @@ public class CommandAddEvent extends Command {
                     input[2],
                     false));
         } catch (DateTimeParseException e) {
-            return "Please enter a valid date! :(";
+            return Ui.MESSAGE_INVALID_DATE;
         }
     }
 }

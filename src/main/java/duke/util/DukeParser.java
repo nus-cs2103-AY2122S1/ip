@@ -16,12 +16,12 @@ import duke.command.CommandList;
 import task.TaskList;
 
 /**
- * Parses any command that requires inputs
+ * Parses any command that requires inputs.
  */
 public class DukeParser {
 
     /**
-     * Patterns for the Parser to look out for in the input
+     * Patterns for the Parser to look out for in the input.
      */
     private static final Pattern LIST_PATTERN = Pattern.compile("list( .+)?", Pattern.CASE_INSENSITIVE);
     private static final Pattern DONE_PATTERN = Pattern.compile("done (\\d+)", Pattern.CASE_INSENSITIVE);
@@ -37,7 +37,7 @@ public class DukeParser {
     private final TaskList taskList;
 
     /**
-     * Constructor; Instantiates the task list to be edited
+     * Constructor; Instantiates the task list to be edited.
      *
      * @param tasks Task list to edit using this Parser object
      */
@@ -46,7 +46,7 @@ public class DukeParser {
     }
 
     /**
-     * Matches input with any regex, and passes it to the correct function
+     * Matches input with any regex, and passes the matching command.
      *
      * @param input String input from the Listener given by the User
      */
@@ -64,6 +64,7 @@ public class DukeParser {
         final Matcher checkDeadline = DEADLINE_PATTERN.matcher(input);
         final Matcher checkEvent = EVENT_PATTERN.matcher(input);
 
+        // Check if matcher found any matches and returns relevant command
         if (checkList.matches()) {
             return new CommandList(taskList, checkList.group(1));
         } else if (checkDone.matches()) {

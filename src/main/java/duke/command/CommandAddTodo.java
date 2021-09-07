@@ -4,7 +4,7 @@ import task.TaskList;
 import task.TaskTodo;
 
 /**
- * Command to add a to-do
+ * Command to add a to-do.
  */
 public class CommandAddTodo extends Command {
 
@@ -12,10 +12,10 @@ public class CommandAddTodo extends Command {
     private final String desc;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param taskList Task list to use
-     * @param desc description of task
+     * @param taskList Task list to add to
+     * @param desc Description of task
      */
     public CommandAddTodo(TaskList taskList, String desc) {
         this.commandName = "todo <string>";
@@ -29,7 +29,7 @@ public class CommandAddTodo extends Command {
     }
 
     /**
-     * Add To-do to task list if valid
+     * Add To-do to task list if valid.
      */
     @Override
     public String execute() {

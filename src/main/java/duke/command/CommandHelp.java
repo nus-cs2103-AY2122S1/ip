@@ -1,12 +1,12 @@
 package duke.command;
 
 /**
- * Command to display the help window
+ * Command to display the help window.
  */
 public class CommandHelp extends Command {
 
     /**
-     * Constructor
+     * Constructor.
      */
     public CommandHelp() {
         this.commandName = "help";
@@ -15,7 +15,7 @@ public class CommandHelp extends Command {
     }
 
     /**
-     * Displays all commands
+     * Displays all commands.
      */
     @Override
     public String execute() {
@@ -24,7 +24,7 @@ public class CommandHelp extends Command {
 
 
     /**
-     * Lists out all possible commands
+     * Lists out all possible commands.
      */
     private String displayHelp() {
         return new CommandAddTodo(null, null).toString()
