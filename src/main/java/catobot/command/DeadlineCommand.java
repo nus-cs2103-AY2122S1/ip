@@ -17,13 +17,13 @@ public class DeadlineCommand extends Command {
 
     /** Content of the command. */
     private final String description;
+    /** Raw input of the date of deadline. */
     private final String rawDate;
 
     /**
      * Constructor for DeadlineCommand.
      *
-     * @param description The description of the command.
-     * @param rawDate The raw format of date.
+     * @param content The content of the request.
      */
     protected DeadlineCommand(String content) throws BotException {
         String[] details = Parser.parseMultipleArgument(

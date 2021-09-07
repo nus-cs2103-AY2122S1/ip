@@ -3,6 +3,7 @@ package catobot.item;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 import catobot.exception.EmptyTaskListException;
 import catobot.exception.OutOfBoundException;
@@ -116,6 +117,31 @@ public class TaskList {
 
         return String.format(
                 "Here are the matching tasks in your list:%s",
+                filtered);
+    }
+
+    /**
+     * Sort filtered tasks.
+     *
+     * @param taskType The type of tasks to work on.
+     * @param condition The conditions for filtering relevant tasks to sort.
+     * @return The filtered list of tasks.
+     */
+    public String sort(TaskType taskType, Predicate<Task> condition) {
+        TaskList filtered = new TaskList();
+        this.taskList
+                .stream()
+                .filter(condition)
+                .sorted()
+                .forEach(filtered::add);
+
+        if (filtered.taskList.isEmpty()) {
+            return "Meow! No tasks found!";
+        }
+
+        return String.format(
+                "Here are the sorted %s in your list:%s",
+                taskType.getName(),
                 filtered);
     }
 

@@ -19,13 +19,13 @@ public class EventCommand extends Command {
 
     /** Content of the command. */
     private final String description;
+    /** Raw input of the date of event. */
     private final String rawDate;
 
     /**
      * Constructor for EventCommand.
      *
-     * @param description The description of the command.
-     * @param rawDate The raw format of date.
+     * @param content The content of the request.
      */
     protected EventCommand(String content) throws BotException {
         String[] details = Parser.parseMultipleArgument(

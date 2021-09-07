@@ -7,7 +7,7 @@ import catobot.exception.EmptyCommandException;
 /**
  * Represents items which can be done.
  */
-public class Task {
+public class Task implements Comparable<Task> {
     public static final DateTimeFormatter DATE_FORMAT_DOC =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     public static final DateTimeFormatter DATE_FORMAT_DISPLAY =
@@ -70,5 +70,18 @@ public class Task {
      */
     protected String toStringInDoc() {
         return String.format("%s | %s", this.isDone ? 1 : 0, this.description);
+    }
+
+    /**
+     * Compare two tasks lexicographically.
+     *
+     * @param o Another task being compared with.
+     * @return -1 if the description is lexicographically less than the other,
+     *         1 if the description is lexicographically greater than the other,
+     *         0 if the description are the same.
+     */
+    @Override
+    public int compareTo(Task o) {
+        return description.compareTo(o.description);
     }
 }

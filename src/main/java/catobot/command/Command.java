@@ -11,8 +11,10 @@ import catobot.item.TaskList;
  * Represents a command from the user.
  */
 public class Command implements Executable {
+    /** The date format for commands. */
     public static final DateTimeFormatter DATE_FORMAT =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
     /**
      * Executes the command given.
      *

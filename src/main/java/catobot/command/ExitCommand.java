@@ -12,6 +12,7 @@ import catobot.item.TaskList;
  */
 public class ExitCommand extends Command {
     private static final String ERROR = "Meow! There is an error occured when trying to save the tasks >.<";
+
     /**
      * Marks a task as done.
      *

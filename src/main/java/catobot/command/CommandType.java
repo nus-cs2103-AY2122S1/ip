@@ -13,6 +13,7 @@ public enum CommandType {
     FIND("find"),
     INVALID(""),
     LIST("list"),
+    SORT("sort"),
     TODO("todo");
 
     /** Content of the command. */

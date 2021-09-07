@@ -61,4 +61,21 @@ public class Event extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         return String.format("E | %s | %s", s, this.at.format(formatter));
     }
+
+    /**
+     * Compare two events chronologically (the latest first).
+     *
+     * @param o Another task being compared with.
+     * @return -1 if the datetime is later than the other
+     *         1 if the datetime is earlier than the other
+     *         0 if the datetimes are the same.
+     */
+    @Override
+    public int compareTo(Task o) {
+        if (o instanceof Event) {
+            Event ddl = (Event) o;
+            return at.compareTo(ddl.at);
+        }
+        return super.compareTo(o);
+    }
 }
