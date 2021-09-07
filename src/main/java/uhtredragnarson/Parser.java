@@ -44,6 +44,9 @@ public class Parser {
             case "find":
                 result = taskList.findTasks(userInput, ui);
                 break;
+            case "help":
+                result = ui.showHelpMessage();
+                break;
             default:
                 result = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
                 throw new UhtredRagnarsonException(result);
