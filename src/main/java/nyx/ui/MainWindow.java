@@ -1,4 +1,4 @@
-package ui;
+package nyx.ui;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -12,7 +12,7 @@ import nyx.Nyx;
 import nyx.NyxException;
 
 /**
- * Controller for ui.MainWindow. Provides the layout for the other controls.
+ * Controller for nyx.ui.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     private static final String START_MESSAGE = "Hello, this is Nyx! What can I do for you?";

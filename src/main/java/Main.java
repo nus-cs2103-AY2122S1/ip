@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import nyx.Nyx;
-import ui.MainWindow;
+import nyx.ui.MainWindow;
 
 /**
  * A GUI for nyx.Nyx using FXML.
