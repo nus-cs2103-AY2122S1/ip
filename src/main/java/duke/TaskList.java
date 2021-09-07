@@ -60,19 +60,13 @@ public class TaskList {
      * @return the TaskList containing tasks matching the keyword, if any.
      */
     public TaskList findTask(String keyword) {
-        ArrayList<TaskItem> copyOfTaskList = new ArrayList<TaskItem>(arrayList);
-        copyOfTaskList.removeIf(task -> {
-            String taskDescription = task.describeTaskItem();
-            String[] splicedTaskDescription = taskDescription.split(" ");
-            for (String s: splicedTaskDescription) {
-                if (s.equals(keyword)) {
-                    return false;
-                }
+        ArrayList<TaskItem> copyOfTaskList = new ArrayList<TaskItem>();
+        for (int i = 0; i < arrayList.size(); i++) {
+            String taskDescription = arrayList.get(i).describeTaskItem();
+            if (taskDescription.contains(keyword)) {
+                copyOfTaskList.add(arrayList.get(i));
             }
-            return true;
-        });
+        }
         return new TaskList(copyOfTaskList);
     }
-
-
 }
