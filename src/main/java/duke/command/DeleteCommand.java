@@ -9,7 +9,7 @@ import duke.Ui;
  * Represents command to delete Task.
  */
 public class DeleteCommand implements Command {
-    private final String desc;
+    private final String DESCRIPTION;
 
     /**
      * Constructor for DeleteCommand.
@@ -17,12 +17,12 @@ public class DeleteCommand implements Command {
      * @param desc Description for Command
      */
     public DeleteCommand(String desc) {
-        this.desc = desc;
+        this.DESCRIPTION = desc;
     }
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        return tasks.deleteTask(desc);
+        return tasks.deleteTask(DESCRIPTION);
     }
 
     @Override

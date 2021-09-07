@@ -9,9 +9,9 @@ import duke.command.Command;
  */
 public class Duke {
 
-    private final Storage storage;
+    private final Storage STORAGE;
     private TaskList tasks;
-    private final Ui ui;
+    private final Ui UI;
 
     /**
      * Constructor of Duke.
@@ -19,8 +19,8 @@ public class Duke {
      * @param filePath file path of to retrieve save file
      */
     public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
+        UI = new Ui();
+        STORAGE = new Storage(filePath);
     }
 
     /**
@@ -30,11 +30,11 @@ public class Duke {
      */
     public String initialize() {
         try {
-            tasks = new TaskList(storage.load(), storage);
-            return ui.greet();
+            tasks = new TaskList(STORAGE.load(), STORAGE);
+            return UI.greet();
         } catch (DukeException e) {
-            tasks = new TaskList(storage);
-            return ui.showLoadingError() + ui.greet();
+            tasks = new TaskList(STORAGE);
+            return UI.showLoadingError() + UI.greet();
         }
     }
 
@@ -44,9 +44,9 @@ public class Duke {
             Command c = Parser.parse(input);
             assert c != null;
             isExit = c.isExit();
-            return c.execute(tasks, ui, storage);
+            return c.execute(tasks, UI, STORAGE);
         } catch (DukeException e) {
-            return ui.printError(e.getMessage());
+            return UI.printError(e.getMessage());
         }
     }
 }

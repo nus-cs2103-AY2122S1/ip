@@ -9,7 +9,7 @@ import duke.Ui;
  * Represents command to add ToDo.
  */
 public class AddToDoCommand implements Command {
-    private final String desc;
+    private final String DESCRIPTION;
 
     /**
      * Constructor for AddToDoCommand.
@@ -17,12 +17,12 @@ public class AddToDoCommand implements Command {
      * @param desc Description for Command
      */
     public AddToDoCommand(String desc) {
-        this.desc = desc;
+        this.DESCRIPTION = desc;
     }
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        return tasks.addToDo(desc);
+        return tasks.addToDo(DESCRIPTION);
     }
 
     @Override

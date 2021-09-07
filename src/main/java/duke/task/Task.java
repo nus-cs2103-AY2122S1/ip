@@ -5,8 +5,8 @@ package duke.task;
  * Can be marked as done and has a description of the task.
  */
 public class Task {
-    private Boolean done;
-    private final String description;
+    private Boolean isDone;
+    private final String DATE_DESCRIPTION;
 
     /**
      * Constructor for Task.
@@ -14,8 +14,8 @@ public class Task {
      * @param str Description of Task
      */
     public Task(String str) {
-        done = false;
-        description = str;
+        isDone = false;
+        DATE_DESCRIPTION = str;
     }
 
     /**
@@ -25,17 +25,17 @@ public class Task {
      * @param str    Description of Task
      */
     public Task(String isDone, String str) {
-        done = !isDone.equals("0");
-        description = str;
+        this.isDone = !isDone.equals("0");
+        DATE_DESCRIPTION = str;
     }
 
     public void markDone() {
-        done = true;
+        isDone = true;
     }
 
     @Override
     public String toString() {
-        return "[" + (done ? 'X' : ' ') + "] " + description;
+        return "[" + (isDone ? 'X' : ' ') + "] " + DATE_DESCRIPTION;
 
     }
 
@@ -45,6 +45,6 @@ public class Task {
      * @return Task string to be saved
      */
     public String saveString() {
-        return (done ? "1" : "0") + "|" + description;
+        return (isDone ? "1" : "0") + "|" + DATE_DESCRIPTION;
     }
 }
