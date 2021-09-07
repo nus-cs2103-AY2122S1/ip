@@ -83,30 +83,31 @@ public class Parser {
      * @return the label.
      */
     public String undoCommand(TaskList tasks) {
-        String undoText = "Sorry, undo cannot be done,  "
-                + "there are currently "
-                + "no tasks in the list.";
-        if (tasks.getSize() >= 1) {
-            if (prevInput.contains("done")) {
-                int index = Integer.parseInt(prevInput.substring(5));
-                tasks.getTask(index - 1).setIsDone(false);
-                undoText = "Undid done on task " + index;
-            } else if (prevInput.contains("delete")) {
-                int index = Integer.parseInt(prevInput.substring(7));
-                TaskList latterTasks = tasks.subList(index - 1, tasks.getSize());
-                tasks.removeTasks(latterTasks);
-                tasks.addTask(deletedTask);
-                tasks.addTasks(latterTasks);
-                undoText = "Undid delete on task " + index;
-            } else if (!prevInput.contains("find")
-                    && !prevInput.equals("list")) {
-                Task temp = tasks.getTask(tasks.getSize() - 1);
-                tasks.removeTask(temp);
-                undoText = "Removed task " + temp.getDescription();
-            } else {
-                undoText = "There is nothing to undo.";
-            }
+        String undoText = "";
+        if (prevInput == null) {
+            undoText = "You have not inputted anything"
+                    + "to undo yet.";
+        } else if (prevInput.contains("done")) {
+            int index = Integer.parseInt(prevInput.substring(5));
+            tasks.getTask(index - 1).setIsDone(false);
+            undoText = "Undid done on task " + index;
+        } else if (prevInput.contains("delete")) {
+            int index = Integer.parseInt(prevInput.substring(7));
+            TaskList latterTasks = tasks.subList(index - 1, tasks.getSize());
+            tasks.removeTasks(latterTasks);
+            tasks.addTask(deletedTask);
+            tasks.addTasks(latterTasks);
+            undoText = "Undid delete on task " + index;
+        } else if (!prevInput.contains("find")
+                && !prevInput.equals("list")) {
+            Task temp = tasks.getTask(tasks.getSize() - 1);
+            tasks.removeTask(temp);
+            undoText = "Removed task " + temp.getDescription();
+        } else {
+            undoText = "This command does not change the tasklist,"
+                    + "so there is nothing to undo.";
         }
+
         return undoText;
     }
 
