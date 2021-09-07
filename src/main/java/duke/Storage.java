@@ -25,7 +25,7 @@ public class Storage {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                Ui.printString(e.toString());
+                assert 1 == 0 : "IO ERROR " + e.toString();
             }
         }
         try {
@@ -35,7 +35,7 @@ public class Storage {
             out.close();
             fileOut.close();
         } catch (IOException e) {
-            Ui.printString(e.toString());
+            assert 1 == 0 : "IO ERROR " + e.toString();
         }
     }
 
@@ -58,10 +58,10 @@ public class Storage {
                     return tasks; 
                 } catch (ClassNotFoundException e) {
                     in.close();
-                    Ui.printString(e.getMessage());
+                    assert 1 == 0 : "IO ERROR " + e.toString();
                 }
             } catch (IOException e) {
-                Ui.printString(e.toString());
+                assert 1 == 0 : "IO ERROR " + e.toString();
             }
         }
         return new TaskList();
