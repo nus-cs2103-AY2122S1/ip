@@ -14,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 
 
 /**
@@ -27,7 +29,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String person) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -38,10 +40,17 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setFont(new Font("Futura", 14));
+        if (person.equals("Duke")) {
+            dialog.setStyle("-fx-background-color:#c4d4e2; -fx-background-radius: 15; -fx-label-padding: 5, 5, 5, 5");
+        } else {
+            dialog.setStyle("-fx-background-color:#bca0dc; -fx-background-radius: 15;-fx-label-padding: 5, 5, 5, 5");
+        }
         displayPicture.setImage(img);
+        displayPicture.setClip(new Circle(40, 40, 40));
     }
 
-    /**
+    /**![](../../../resources/images/user.png)
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
@@ -52,11 +61,12 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox user = new DialogBox(text, img, "User");
+        return user;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img,"Duke");
         db.flip();
         return db;
     }
