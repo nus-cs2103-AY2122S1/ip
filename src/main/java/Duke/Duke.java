@@ -1,7 +1,5 @@
 package Duke;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
 import Duke.task.TaskList;
 
 import java.io.IOException;
@@ -60,8 +58,6 @@ public class Duke {
                 try {
                     int index = Integer.parseInt(text);
                     response = commands.done(index, tasks);
-                } catch (DukeException e) {
-                    return e.toString();
                 } catch (NumberFormatException err) {
                     response = "Please provide a task number!!";
                 }
@@ -75,8 +71,6 @@ public class Duke {
                 try {
                     int index = Integer.parseInt(text);
                     response = commands.delete(index, tasks);
-                } catch (DukeException e) {
-                    return e.toString();
                 } catch (NumberFormatException err) {
                     response = "Please provide a task number!!";
                 }
@@ -181,20 +175,12 @@ public class Duke {
                         }
                         break;
                     case DONE:
-                        try {
-                            int index = scanner.nextInt() - 1;
-                            Ui.display(commands.done(index, tasks));
-                        } catch (DukeException e) {
-                            Ui.display(e.toString());
-                        }
+                        int doneIndex = scanner.nextInt() - 1;
+                        Ui.display(commands.done(doneIndex, tasks));
                         break;
                     case DELETE:
-                        try {
-                            int index = (scanner.nextInt()) - 1;
-                            Ui.display(commands.delete(index, tasks));
-                        } catch (DukeException e) {
-                            Ui.display(e.toString());
-                        }
+                        int deleteIndex = (scanner.nextInt()) - 1;
+                        Ui.display(commands.delete(deleteIndex, tasks));
                         break;
                     case FIND:
                         try {
