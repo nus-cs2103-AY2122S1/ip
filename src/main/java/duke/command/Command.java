@@ -5,6 +5,8 @@ import duke.exception.IndexOutOfBoundException;
 import duke.exception.InvalidTaskException;
 import duke.task.Task;
 import duke.TaskList;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +23,7 @@ public class Command {
      *
      * @param taskList The TaskList stored tasks.
      * @param response The response object created by Duke.
-     * @param storage The storage object manipulate storage process of Duke
+     * @param storage The storage object manipulate storage process of Duke.
      */
     public Command(TaskList taskList, Response response, Storage storage) {
         this.taskList = taskList;
@@ -32,14 +34,14 @@ public class Command {
     /**
      * Ask storage to load tasks in the txt file.
      */
-    public void loadSavedTasks() {
+    public void loadSavedTasks() throws IOException {
         storage.loadSavedTasks();
     }
 
     /**
      * Get the welcome message.
      *
-     * @return A StringBuilder containing the welcome message
+     * @return A StringBuilder containing the welcome message.
      */
     public StringBuilder welcomeToUser() {
         return response.getWelcomeMessage();
@@ -48,7 +50,7 @@ public class Command {
     /**
      * Get the GoodBye message.
      *
-     * @return A StringBuilder containing the GoodBye message
+     * @return A StringBuilder containing the GoodBye message.
      */
     public StringBuilder goodByeToUser() {
         return response.getGoodByeMessage();
@@ -64,11 +66,11 @@ public class Command {
         try {
             switch (Parser.judgeType(task)) {
             case TODO:
-                return addNewTodo(task);
+                return addNewTodoTask(task);
             case EVENT:
-                return addNewEvent(task);
+                return addNewEventTask(task);
             case DEADLINE:
-                return addNewDeadline(task);
+                return addNewDeadlineTask(task);
             case DONE:
                 return setTaskDone(task);
             case LIST:
@@ -80,49 +82,51 @@ public class Command {
             case BYE:
                 return goodByeToUser();
             }
-        } catch (DukeException e) {
-            return new StringBuilder(e.getMessage());
+        } catch (DukeException dukeException) {
+            return new StringBuilder(dukeException.getMessage());
+        } catch (IOException ioException) {
+            return new StringBuilder("Sorry, something goes wrong with the IO process.");
         }
         return new StringBuilder("Sorry, I don't understand what do you want me to do.");
     }
 
-    private StringBuilder addNewTodo(String task) throws InvalidTaskException {
+    private StringBuilder addNewTodoTask(String task) throws InvalidTaskException, IOException {
         Task todoTask = Parser.testTodoValidity(task);
-        taskList.add(todoTask);
+        taskList.addTask(todoTask);
         storage.saveNewTask(todoTask);
         return response.getAddNewTaskMessage();
     }
 
-    private StringBuilder addNewDeadline(String task) throws InvalidTaskException {
+    private StringBuilder addNewDeadlineTask(String task) throws InvalidTaskException, IOException {
         Task deadlineTask = Parser.testDeadlineValidity(task);
-        taskList.add(deadlineTask);
+        taskList.addTask(deadlineTask);
         storage.saveNewTask(deadlineTask);
         return response.getAddNewTaskMessage();
     }
 
-    private StringBuilder addNewEvent(String task) throws InvalidTaskException {
+    private StringBuilder addNewEventTask(String task) throws InvalidTaskException, IOException {
         Task eventTask = Parser.testEventValidity(task);
-        taskList.add(eventTask);
+        taskList.addTask(eventTask);
         storage.saveNewTask(eventTask);
         return response.getAddNewTaskMessage();
     }
 
-    private StringBuilder setTaskDone(String task) throws DukeException {
+    private StringBuilder setTaskDone(String task) throws DukeException, IOException {
         int itemDone = Parser.findFinishedItem(task);
         if (itemDone > taskList.size()) {
             throw new IndexOutOfBoundException("mark item done", taskList.size());
         }
-        taskList.get(itemDone - 1).setToDone();
+        taskList.getTask(itemDone - 1).setToDone();
         storage.modifyTasks();
         return response.getMarkTaskDoneMessage(itemDone);
     }
 
-    private StringBuilder deleteTask(String task) throws DukeException {
+    private StringBuilder deleteTask(String task) throws DukeException, IOException {
         int itemDeleted = Parser.findDeleteItem(task);
         if (itemDeleted > taskList.size()) {
             throw new IndexOutOfBoundException("delete item", taskList.size());
         }
-        Task deletedTask = taskList.remove(itemDeleted - 1);
+        Task deletedTask = taskList.removeTask(itemDeleted - 1);
         storage.modifyTasks();
         return response.getDeleteMessage(deletedTask);
     }
@@ -131,8 +135,8 @@ public class Command {
         String target = task.substring(5);
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
-            Task cur = taskList.get(i);
-            if (cur.getTaskName().contains(target)) {
+            Task currentTask = taskList.getTask(i);
+            if (currentTask.getTaskName().contains(target)) {
                 result.add(i);
             }
         }

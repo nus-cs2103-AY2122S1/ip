@@ -35,7 +35,7 @@ public class Response {
     public StringBuilder getAddNewTaskMessage() {
         builder = new StringBuilder();
         builder.append("Got it. I've added this task:\n");
-        builder.append(taskList.get(taskList.size() - 1).toString()).append("\n");
+        builder.append(taskList.getTask(taskList.size() - 1).toString()).append("\n");
         builder.append("Now you have ").append(taskList.size()).append(" tasks in the list.");
         return builder;
     }
@@ -49,7 +49,7 @@ public class Response {
     public StringBuilder getMarkTaskDoneMessage(int itemDone) {
         builder = new StringBuilder();
         builder.append("Nice! I've marked this task as done:").append('\n');
-        builder.append(taskList.get(itemDone - 1).toString());
+        builder.append(taskList.getTask(itemDone - 1).toString());
         return builder;
     }
 
@@ -73,7 +73,7 @@ public class Response {
         builder = new StringBuilder();
         builder.append("Here are the tasks in your list:").append('\n');
         for (int i = 1; i <= taskList.size(); i++) {
-            builder.append(i).append(". ").append(taskList.get(i - 1).toString()).append('\n');
+            builder.append(i).append(". ").append(taskList.getTask(i - 1).toString()).append('\n');
         }
         return builder;
     }
@@ -107,7 +107,7 @@ public class Response {
         }
         for (int i = 1; i <= nums.size(); i++) {
             int num = nums.get(i - 1);
-            builder.append(i).append(". ").append(taskList.get(num).toString()).append('\n');
+            builder.append(i).append(". ").append(taskList.getTask(num).toString()).append('\n');
         }
         return builder;
     }
