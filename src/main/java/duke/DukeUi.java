@@ -30,6 +30,7 @@ public class DukeUi {
      * @param addThis the String to add into the buffer.
      */
     public void addToDukeBuffer(String addThis) {
+        assert dukeUiBuffer != null : "Duke UI Buffer is missing!!";
         dukeUiBuffer.add(addThis);
     }
 
