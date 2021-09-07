@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import duke.task.DeadlineTask;
+import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.ToDoTask;
 
@@ -80,7 +81,7 @@ public class StorageHandler {
             while (line != null) {
                 Task task;
                 try {
-                    task = parseTask(line);
+                    task = parseTaskRepresentation(line);
                 } catch (IllegalArgumentException e) {
                     throw new IOException();
                 }
@@ -100,99 +101,117 @@ public class StorageHandler {
         return fileContents;
     }
 
-    private Task parseTask(String taskRepresentation) throws IllegalArgumentException {
+    private Task parseTaskRepresentation(String taskRepresentation) throws IllegalArgumentException {
         String[] tokens = taskRepresentation.strip().split(" ");
-        // throw error if there are less than 3 tokens
+        checkTokensArrayLength(tokens);
+        Task task = parseTask(tokens);
+        String doneToken = tokens[1];
+        markTaskDoneIfLabelledDone(task, doneToken);
+        return task;
+    }
+
+    private void checkTokensArrayLength(String[] tokens) {
         if (tokens.length < 3) {
             throw new IllegalArgumentException();
         }
+    }
+
+    private Task parseTask(String[] tokens) throws IllegalArgumentException {
         String type = tokens[0];
-        Task task;
-        StringBuilder taskDescriptionSb = new StringBuilder();
-        StringBuilder timeSb = new StringBuilder();
-        int timeStartIndex = tokens.length;
-        String taskDescription;
-        String timeStr;
-        LocalDateTime time;
         switch (type) {
         case "T":
-            for (int i = 2; i < tokens.length; i++) {
-                String token = tokens[i];
-                taskDescriptionSb.append(token).append(" ");
-            }
-            taskDescription = taskDescriptionSb.toString().strip();
-            if (taskDescription.length() == 0) {
-                throw new IllegalArgumentException();
-            }
-            task = new ToDoTask(taskDescription);
-            break;
+            return parseToDoTask(tokens);
         case "D":
-            for (int i = 2; i < tokens.length; i++) {
-                String token = tokens[i];
-                if (token.equals("/by")) {
-                    timeStartIndex = i + 1;
-                    break;
-                }
-                taskDescriptionSb.append(token).append(" ");
-            }
-            for (int i = timeStartIndex; i < tokens.length; i++) {
-                String token = tokens[i];
-                timeSb.append(token).append(" ");
-            }
-            taskDescription = taskDescriptionSb.toString().strip();
-            timeStr = timeSb.toString().strip();
-            if (taskDescription.length() == 0 || timeStr.length() == 0) {
-                throw new IllegalArgumentException();
-            }
-            try {
-                time = LocalDateTime.parse(timeStr, DATE_TIME_FORMATTER);
-            } catch (DateTimeParseException e) {
-                throw new IllegalArgumentException();
-            }
-            task = new DeadlineTask(taskDescription, time);
-            break;
+            return parseDeadlineTask(tokens);
         case "E":
-            for (int i = 2; i < tokens.length; i++) {
-                String token = tokens[i];
-                if (token.equals("/at")) {
-                    timeStartIndex = i + 1;
-                    break;
-                }
-                taskDescriptionSb.append(token).append(" ");
-            }
-            for (int i = timeStartIndex; i < tokens.length; i++) {
-                String token = tokens[i];
-                timeSb.append(token).append(" ");
-            }
-            taskDescription = taskDescriptionSb.toString().strip();
-            timeStr = timeSb.toString().strip();
-            if (taskDescription.length() == 0 || timeStr.length() == 0) {
-                throw new IllegalArgumentException();
-            }
-            try {
-                time = LocalDateTime.parse(timeStr, DATE_TIME_FORMATTER);
-            } catch (DateTimeParseException e) {
-                throw new IllegalArgumentException();
-            }
-            task = new DeadlineTask(taskDescription, time);
+            return parseEventTask(tokens);
+        default:
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void markTaskDoneIfLabelledDone(Task task, String doneToken) throws IllegalArgumentException {
+        int done;
+        try {
+            done = Integer.parseInt(doneToken);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
+        switch (done) {
+        case 0:
+            break;
+        case 1:
+            task.markDone();
             break;
         default:
             throw new IllegalArgumentException();
         }
-        try {
-            int done = Integer.parseInt(tokens[1]);
-            switch (done) {
-            case 0:
-                break;
-            case 1:
-                task.markDone();
-                break;
-            default:
-                throw new IllegalArgumentException();
-            }
-        } catch (NumberFormatException e) {
+    }
+
+    private ToDoTask parseToDoTask(String[] tokens) {
+        String taskDescription = getTokenSequence(tokens, 2, tokens.length);
+        checkTaskDescriptionLength(taskDescription);
+        return new ToDoTask(taskDescription);
+    }
+
+    private DeadlineTask parseDeadlineTask(String[] tokens) {
+        int timeRelationIndex = findTokenIndex("/by", tokens, 2, tokens.length);
+        int timeStartIndex = timeRelationIndex + 1;
+        String taskDescription = getTokenSequence(tokens, 2, timeRelationIndex);
+        String timeStr = getTokenSequence(tokens, timeStartIndex, tokens.length);
+        checkTaskDescriptionLength(taskDescription);
+        checkTimeStringLength(timeStr);
+        LocalDateTime time = parseTime(timeStr);
+        return new DeadlineTask(taskDescription, time);
+    }
+
+    private EventTask parseEventTask(String[] tokens) {
+        int timeRelationIndex = findTokenIndex("/at", tokens, 2, tokens.length);
+        int timeStartIndex = timeRelationIndex + 1;
+        String taskDescription = getTokenSequence(tokens, 2, timeRelationIndex);
+        String timeStr = getTokenSequence(tokens, timeStartIndex, tokens.length);
+        checkTaskDescriptionLength(taskDescription);
+        checkTimeStringLength(timeStr);
+        LocalDateTime time = parseTime(timeStr);
+        return new EventTask(taskDescription, time);
+    }
+
+    private String getTokenSequence(String[] tokens, int inclusiveStart, int exclusiveEnd) {
+        StringBuilder tokenSequenceSb = new StringBuilder();
+        for (int i = inclusiveStart; i < exclusiveEnd; i++) {
+            String token = tokens[i];
+            tokenSequenceSb.append(token).append(" ");
+        }
+        return tokenSequenceSb.toString().strip();
+    }
+
+    private void checkTaskDescriptionLength(String taskDescription) throws IllegalArgumentException {
+        if (taskDescription.length() == 0) {
             throw new IllegalArgumentException();
         }
-        return task;
+    }
+
+    private int findTokenIndex(String tokenQuery, String[] tokens, int inclusiveStart, int exclusiveEnd) {
+        for (int i = inclusiveStart; i < exclusiveEnd; i++) {
+            String token = tokens[i];
+            if (token.equals(tokenQuery)) {
+                return i;
+            }
+        }
+        return tokens.length;
+    }
+
+    private void checkTimeStringLength(String timeString) throws IllegalArgumentException {
+        if (timeString.length() == 0) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private LocalDateTime parseTime(String timeStr) throws IllegalArgumentException {
+        try {
+            return LocalDateTime.parse(timeStr, DATE_TIME_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException();
+        }
     }
 }

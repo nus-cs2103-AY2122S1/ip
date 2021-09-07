@@ -29,43 +29,52 @@ public abstract class AddTemporalTaskCommand extends AddTaskCommand {
 
     @Override
     void parseCommand(String[] tokens) {
-        StringBuilder taskDescriptionSb = new StringBuilder();
-        int timeStartIndex = tokens.length;
-        for (int i = 1; i < tokens.length; i++) {
-            String token = tokens[i];
-            if (token.equals(String.format("/%s", getTimeRelation()))) {
-                timeStartIndex = i + 1;
-                break;
-            }
-            taskDescriptionSb.append(token).append(" ");
-        }
-        StringBuilder timeSb = new StringBuilder();
-        for (int i = timeStartIndex; i < tokens.length; i++) {
-            timeSb.append(tokens[i]).append(" ");
-        }
-        String taskDescription = taskDescriptionSb.toString().strip();
-        String timeStr = timeSb.toString().strip();
-        if (taskDescription.length() == 0) {
-            throw new DukeInvalidCommandException(String.format("A description is required for \"%s\" commands.",
-                    getCommandType().getCommandDescription()));
-        }
-        if (timeStr.length() == 0) {
-            throw new DukeInvalidCommandException(String.format("A date and time is required for \"%s\" commands.",
-                    getCommandType().getCommandDescription()));
-        }
-        LocalDateTime time;
-        try {
-            time = LocalDateTime.parse(timeStr, DATE_TIME_FORMATTER);
-        } catch (DateTimeParseException e) {
-            throw new DukeInvalidCommandException(String
-                    .format("The date and time should be in the %s format.", DATE_TIME_FORMAT_PATTERN));
-        }
+        int timeRelationIndex = findTimeRelationIndex(tokens);
+        int timeStartIndex = timeRelationIndex + 1;
+        String taskDescription = getTokenSequence(tokens, 1, timeRelationIndex);
+        String timeStr = getTokenSequence(tokens, timeStartIndex, tokens.length);
+        checkTaskDescriptionLength(taskDescription);
+        checkTimeStringLength(timeStr);
+        parseTime(timeStr);
         setTaskDescription(taskDescription);
-        this.time = time;
         setTask(createTask());
     }
 
     LocalDateTime getTaskTime() {
         return time;
+    }
+
+    private int findTimeRelationIndex(String[] tokens) {
+        String timeRelationToken = String.format("/%s", getTimeRelation());
+        for (int i = 1; i < tokens.length; i++) {
+            String token = tokens[i];
+            if (token.equals(timeRelationToken)) {
+                return i;
+            }
+        }
+        return tokens.length;
+    }
+
+    private void checkTaskDescriptionLength(String taskDescription) throws DukeInvalidCommandException {
+        if (taskDescription.length() == 0) {
+            throw new DukeInvalidCommandException(String.format("A description is required for \"%s\" commands.",
+                    getCommandType().getCommandDescription()));
+        }
+    }
+
+    private void checkTimeStringLength(String timeStr) {
+        if (timeStr.length() == 0) {
+            throw new DukeInvalidCommandException(String.format("A date and time is required for \"%s\" commands.",
+                    getCommandType().getCommandDescription()));
+        }
+    }
+
+    private void parseTime(String timeStr) throws DukeInvalidCommandException {
+        try {
+            time = LocalDateTime.parse(timeStr, DATE_TIME_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidCommandException(String
+                    .format("The date and time should be in the \"%s\" format.", DATE_TIME_FORMAT_PATTERN));
+        }
     }
 }

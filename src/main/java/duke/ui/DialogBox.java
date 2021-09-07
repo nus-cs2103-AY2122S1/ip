@@ -49,14 +49,16 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        DialogBox db = new DialogBox(text, img);
+    public static DialogBox getUserDialog(String text, Image image) {
+        assert image != null : "Image cannot be null";
+        DialogBox db = new DialogBox(text, image);
         db.dialog.setTextAlignment(TextAlignment.RIGHT);
         return db;
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        DialogBox db = new DialogBox(text, img);
+    public static DialogBox getDukeDialog(String text, Image image) {
+        assert image != null : "Image cannot be null";
+        DialogBox db = new DialogBox(text, image);
         db.flip();
         return db;
     }
