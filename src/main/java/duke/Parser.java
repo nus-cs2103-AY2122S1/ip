@@ -1,7 +1,6 @@
 package duke;
 
 import java.time.format.DateTimeParseException;
-import java.util.List;
 
 /**
  * The class that Parses the command line from user.
@@ -23,30 +22,31 @@ public class Parser {
      * @throws DukeException Exception that duke could generate.
      */
     public Command parse(String input) throws DukeException {
-        String[] command = input.split(splitRegex);
-        if (command[0].equals("list")) {
+        String[] commands = input.split(splitRegex);
+        if (commands[0].equals("list")) {
             return new ListCommand();
-        } else if (command[0].equals("done")) {
-            assert (command.length > 1);
-            int doneIndex = Integer.parseInt(command[1]);
+        } else if (commands[0].equals("done")) {
+            assert (commands.length > 1);
+            int doneIndex = Integer.parseInt(commands[1]);
             return new MarkAsDoneCommand(doneIndex - 1);
-        } else if (command[0].equals("delete")) {
-            assert (command.length > 1);
-            int deleteIndex = Integer.parseInt(command[1]);
+        } else if (commands[0].equals("delete")) {
+            assert (commands.length > 1);
+            int deleteIndex = Integer.parseInt(commands[1]);
             return new DeleteCommand(deleteIndex - 1);
-        } else if (command[0].equals("find")) {
-            assert (input.length() >= 5);
-            String keyWords = input.substring(5);
-            return new FindCommand(keyWords);
-        } else if (command[0].equals("bye")) {
+        } else if (commands[0].equals("find")) {
+            int keywordStartIndex = 5;
+            assert (input.length() >= keywordStartIndex);
+            String keywords = input.substring(keywordStartIndex);
+            return new FindCommand(keywords);
+        } else if (commands[0].equals("bye")) {
             return new ExitCommand();
-        } else if (command[0].equals("todo")) {
+        } else if (commands[0].equals("todo")) {
             Task task = parseToDo(input);
             return new AddCommand(task);
-        } else if (command[0].equals("deadline")) {
+        } else if (commands[0].equals("deadline")) {
             Task task = parseDeadline(input);
            return new AddCommand(task);
-        } else if (command[0].equals("event")) {
+        } else if (commands[0].equals("event")) {
             Task task = parseEvent(input);
            return new AddCommand(task);
         } else {
@@ -54,32 +54,49 @@ public class Parser {
         }
     }
 
-    private Task parseToDo(String input) throws ParserException{
+    /**
+     * Parses the input string to ToDo task.
+     *
+     * @param input Input string from user.
+     * @return ToDo task.
+     * @throws ParserException Exception generated while parsing the string.
+     */
+    private Task parseToDo(String input) throws ParserException {
         String[] command = input.split(splitRegex);
         if (command.length <= 1) {
             throw new ParserException("The description of a todo "
                     + "cannot be empty.");
         }
-        assert (input.length() > 5);
-        return new ToDo(input.substring(5));
+        int descriptionStartIndex = 5;
+        assert (input.length() > descriptionStartIndex);
+        return new ToDo(input.substring(descriptionStartIndex));
     }
 
-    private Task parseDeadline(String input) throws ParserException{
+    /**
+     * Parses the input string to Deadline task.
+     *
+     * @param input Input string from user.
+     * @return Deadline task.
+     * @throws ParserException Exception generated while parsing the string.
+     */
+    private Task parseDeadline(String input) throws ParserException {
         String[] command = input.split(splitRegex);
         if (command.length <= 1 || command[1].equals("/by")) {
             throw new ParserException("The description of deadline task "
                     + "cannot be empty.");
         }
-        boolean isDeadlineEmpty = input.indexOf("/by") + 4 >= input.length();
+        int deadlineStartIndex = input.indexOf("/by") + 4;
+        boolean isDeadlineEmpty = deadlineStartIndex >= input.length();
         if (!input.contains("/by") || isDeadlineEmpty) {
             throw new ParserException("Please enter '/by' followed by a task deadline.");
         }
-        assert (input.length() > 9);
-        String content = input.substring(9, input.indexOf("/by") - 1);
-        String by = input.substring(input.indexOf("/by") + 4);
+        int descriptionStartIndex = 9;
+        int descriptionEndIndex = input.indexOf("/by") - 1;
+        assert (input.length() > descriptionStartIndex);
+        String content = input.substring(descriptionStartIndex, descriptionEndIndex);
+        String by = input.substring(deadlineStartIndex);
         try {
-            Task task = new Deadline(content, by);
-            return task;
+            return new Deadline(content, by);
         } catch (DateTimeParseException e) {
             throw new ParserException("Invalid date, "
                     + "please enter a valid date in the format: "
@@ -87,22 +104,31 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the input string to Event task.
+     *
+     * @param input Input string from user.
+     * @return Event task.
+     * @throws ParserException Exception generated while parsing the string.
+     */
     private Task parseEvent(String input) throws ParserException {
         String[] command = input.split(splitRegex);
         if (command.length <= 1 || command[1].equals("/at")) {
             throw new ParserException("The description of event "
                     + "cannot be empty.");
         }
-        boolean isEventTimeEmpty = input.indexOf("/at") + 4 >= input.length();
+        int eventStartIndex = input.indexOf("/at") + 4;
+        boolean isEventTimeEmpty = eventStartIndex >= input.length();
         if (!input.contains("/at") || isEventTimeEmpty) {
             throw new ParserException("Please enter '/at' followed by an event time.");
         }
-        assert (input.length() > 6);
-        String content = input.substring(6, input.indexOf("/at") - 1);
-        String at = input.substring(input.indexOf("/at") + 4);
+        int descriptionStartIndex = 6;
+        int descriptionEndIndex = input.indexOf("/at") - 1;
+        assert (input.length() > descriptionStartIndex);
+        String content = input.substring(descriptionStartIndex, descriptionEndIndex);
+        String at = input.substring(eventStartIndex);
         try {
-            Task task = new Event(content, at);
-            return task;
+            return new Event(content, at);
         } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
             throw new ParserException("Invalid date, "
                     + "please enter a valid time period in the format: "

@@ -27,9 +27,7 @@ public class DeleteCommand extends Command {
         if (obj instanceof DeleteCommand) {
             @SuppressWarnings("have checked obj is MarkAsDoneCommand, can safely parse")
             DeleteCommand temp = (DeleteCommand) obj;
-            return temp.deletedTaskIndex == this.deletedTaskIndex
-                    ? true
-                    : false;
+            return temp.deletedTaskIndex == this.deletedTaskIndex;
         } else {
             return false;
         }

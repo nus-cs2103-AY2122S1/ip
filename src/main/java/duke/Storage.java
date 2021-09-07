@@ -57,7 +57,6 @@ public class Storage {
      * @throws DukeException Exception that duke bot can throw.
      */
     public static Task convertTaskStringToTask(String taskString) throws Exception {
-        Task task = new Task();
         int pointer = 0;
         String[] newTask = taskString.split("&&");
         String taskType = newTask[0];
@@ -67,6 +66,7 @@ public class Storage {
         String taskDescription = newTask[2];
         pointer += taskDescription.length() + 2;
         String taskTime = taskString.substring(pointer);
+        Task task;
         switch(taskType) {
         case "T":
             task = new ToDo(taskDescription);
