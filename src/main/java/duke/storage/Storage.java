@@ -35,9 +35,10 @@ public interface Storage {
      * @param type        the type of the task
      * @param description the description of the task
      * @param date        the date of the task (if deadline or event)
+     * @param priority    the priority of the task
      * @throws IOException if there is an error writing to the file
      */
-    void add(String type, String description, String date) throws IOException;
+    void add(String type, String description, String date, int priority) throws IOException;
 
     /**
      * Deletes the task from the storage file.

@@ -14,17 +14,17 @@ import org.junit.jupiter.api.Test;
  */
 public class EventTest {
 
-    private final Event e = new Event(false, "tutorial", "2021-03-21 2103");
+    private final Event e = new Event(false, "tutorial", "2021-03-21 2103", 3);
 
     @Test
     public void constructor() {
-        assertEquals("[E][ ] tutorial (at: 21 Mar 2021 9.03pm)", e.toString());
+        assertEquals("[E][ ][!!!] tutorial (at: 21 Mar 2021 9.03pm)", e.toString());
     }
 
     @Test
     public void setDone() {
         e.setDone();
-        assertEquals("[E][X] tutorial (at: 21 Mar 2021 9.03pm)", e.toString());
+        assertEquals("[E][X][!!!] tutorial (at: 21 Mar 2021 9.03pm)", e.toString());
     }
 
     @Test

@@ -11,15 +11,17 @@ import java.time.LocalDate;
 public abstract class Task {
     protected final String DESCRIPTION;
     private boolean isDone;
+    private int priority;
 
     /**
      * Constructor for task.
      *
      * @param description the description
      */
-    public Task(String description, boolean isDone) {
+    public Task(String description, boolean isDone, int priority) {
         this.DESCRIPTION = description;
         this.isDone = isDone;
+        this.priority = priority;
     }
 
     /**
@@ -28,7 +30,25 @@ public abstract class Task {
      * @return status icon
      */
     private String getStatusIcon() {
-        return (isDone ? "X" : " ");
+        return (isDone ? "[X]" : "[ ]");
+    }
+
+    /**
+     * Returns the status icon of the task.
+     *
+     * @return status icon
+     */
+    private String getPriorityIcon() {
+        switch (this.priority) {
+            case 1:
+                return "[!  ]";
+            case 2:
+                return "[!! ]";
+            case 3:
+                return "[!!!]";
+            default:
+                return "[   ]";
+        }
     }
 
     /**
@@ -50,7 +70,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.DESCRIPTION;
+        return this.getStatusIcon() + this.getPriorityIcon() + " " + this.DESCRIPTION;
     }
 
     /**

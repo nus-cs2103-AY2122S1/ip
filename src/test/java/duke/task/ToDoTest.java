@@ -14,17 +14,17 @@ import org.junit.jupiter.api.Test;
  */
 public class ToDoTest {
 
-    private final ToDo t = new ToDo(false, "tutorial");
+    private final ToDo t =  new ToDo(false, "tutorial", 1);
 
     @Test
     public void constructor() {
-        assertEquals("[T][ ] tutorial", t.toString());
+        assertEquals("[T][ ][!  ] tutorial", t.toString());
     }
 
     @Test
     public void setDone() {
         t.setDone();
-        assertEquals("[T][X] tutorial", t.toString());
+        assertEquals("[T][X][!  ] tutorial", t.toString());
     }
 
     @Test

@@ -59,13 +59,16 @@ public class StorageDuke implements Storage {
             String[] command = str.split("\\|");
             switch (command[0]) {
             case "T":
-                tasklist.add(new ToDo(command[1].equals("1"), command[2]));
+                tasklist.add(new ToDo(command[1].equals("1"),
+                        command[2], Integer.parseInt(command[3])));
                 break;
             case "E":
-                tasklist.add(new Event(command[1].equals("1"), command[2], command[3]));
+                tasklist.add(new Event(command[1].equals("1"),
+                        command[2], command[3], Integer.parseInt(command[4])));
                 break;
             case "D":
-                tasklist.add(new Deadline(command[1].equals("1"), command[2], command[3]));
+                tasklist.add(new Deadline(command[1].equals("1"),
+                        command[2], command[3], Integer.parseInt(command[4])));
                 break;
             default:
                 break;
@@ -96,8 +99,8 @@ public class StorageDuke implements Storage {
      * @throws IOException if there is an error writing to the file
      */
     @Override
-    public void add(String type, String description, String date) throws IOException {
-        fileContent.add(type + "|0|" + description + "|" + date);
+    public void add(String type, String description, String date, int priority) throws IOException {
+        fileContent.add(type + "|0|" + description + "|" + date + "|" + priority);
         Files.write(Paths.get(this.filepath), fileContent, StandardCharsets.UTF_8);
     }
 

@@ -20,9 +20,10 @@ public class Event extends Task {
      * @param isDone      true if the task is done
      * @param description the description
      * @param date        the date for which the event is occurring
+     * @param priority    the priority of the task
      */
-    public Event(boolean isDone, String description, String date) {
-        super(description, isDone);
+    public Event(boolean isDone, String description, String date, int priority) {
+        super(description, isDone, priority);
         this.DATE = LocalDateTime.parse(date.replace(" ", ""),
                 DateTimeFormatter.ofPattern("yyyy-MM-ddHHmm"));
     }

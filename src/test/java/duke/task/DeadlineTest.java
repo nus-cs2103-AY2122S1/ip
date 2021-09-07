@@ -14,17 +14,17 @@ import org.junit.jupiter.api.Test;
  */
 public class DeadlineTest {
 
-    private final Deadline d = new Deadline(false, "tutorial", "2021-03-21 2103");
+    private final Deadline d = new Deadline(false, "tutorial", "2021-03-21 2103", 2);
 
     @Test
     public void constructor() {
-        assertEquals("[D][ ] tutorial (by: 21 Mar 2021 9.03pm)", d.toString());
+        assertEquals("[D][ ][!! ] tutorial (by: 21 Mar 2021 9.03pm)", d.toString());
     }
 
     @Test
     public void setDone() {
         d.setDone();
-        assertEquals("[D][X] tutorial (by: 21 Mar 2021 9.03pm)", d.toString());
+        assertEquals("[D][X][!! ] tutorial (by: 21 Mar 2021 9.03pm)", d.toString());
     }
 
     @Test

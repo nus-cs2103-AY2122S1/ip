@@ -14,9 +14,10 @@ public class ToDo extends Task {
      * Constructor for ToDo task.
      *
      * @param description the description
+     * @param priority    the priority of the task
      */
-    public ToDo(boolean isDone, String description) {
-        super(description, isDone);
+    public ToDo(boolean isDone, String description, int priority) {
+        super(description, isDone, priority);
     }
 
     /**

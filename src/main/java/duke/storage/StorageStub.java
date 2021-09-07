@@ -43,8 +43,8 @@ public class StorageStub implements Storage {
      * @param date        the date of the task (if deadline or event)
      */
     @Override
-    public void add(String type, String description, String date) {
-        fileContent.add(type + "|0|" + description + "|" + date);
+    public void add(String type, String description, String date, int priority) {
+        fileContent.add(type + "|0|" + description + "|" + date + "|" + priority);
     }
 
     /**

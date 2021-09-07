@@ -35,12 +35,18 @@ public class ToDoCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         try {
-            if (DESCRIPTION.replace(" ", "").equals("")) {
-                throw new DukeException("The description for the Todo task cannot be empty.");
+            String[] info = DESCRIPTION.split("/by|/p", 2);
+            String desc = info[0].trim();
+            String priority = info[1].trim();
+            if (desc.equals("") || priority.equals("")) {
+                throw new DukeException("Your add todo command is incomplete.");
             }
-            String desc = DESCRIPTION.trim();
-            storage.add("T", desc, "");
-            return tasks.addTask(new ToDo(false, desc));
+            int priorityInt = Integer.parseInt(priority);
+            if (priorityInt < 1 || priorityInt > 3) {
+                throw new DukeException("Duke only allows priority of 1, 2 and 3!");
+            }
+            storage.add("T", desc, "", priorityInt);
+            return tasks.addTask(new ToDo(false, desc, priorityInt));
         } catch (IOException e) {
             throw new DukeException("There is an error in adding the Todo task to your saved data.");
         }

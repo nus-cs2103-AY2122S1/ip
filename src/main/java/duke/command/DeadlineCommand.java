@@ -38,19 +38,24 @@ public class DeadlineCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
-            String[] deadlinePair = DESCRIPTION.split("/by", 2);
-            if (deadlinePair.length < 2) {
+            String[] info = DESCRIPTION.split("/by|/p", 3);
+            if (info.length < 3) {
                 throw new DukeException("Your add deadline command is incomplete.");
             }
-            String desc = deadlinePair[0].trim();
-            String date = deadlinePair[1].trim();
-            if (desc.equals("") || date.equals("")) {
+            String desc = info[0].trim();
+            String date = info[1].trim();
+            String priority = info[2].trim();
+            if (desc.equals("") || date.equals("") || priority.equals("")) {
                 throw new DukeException("Your add deadline command is incomplete.");
+            }
+            int priorityInt = Integer.parseInt(priority);
+            if (priorityInt < 1 || priorityInt > 3) {
+                throw new DukeException("Duke only allows priority of 1, 2 and 3!");
             }
             LocalDateTime.parse(date.replace(" ", ""),
                     DateTimeFormatter.ofPattern("yyyy-MM-ddHHmm"));
-            storage.add("D", desc, date);
-            return tasks.addTask(new Deadline(false, desc, date));
+            storage.add("D", desc, date, priorityInt);
+            return tasks.addTask(new Deadline(false, desc, date, priorityInt));
         } catch (IOException e) {
             throw new DukeException("There is an error in adding the Deadline task to your saved data.");
         } catch (DateTimeException e) {
