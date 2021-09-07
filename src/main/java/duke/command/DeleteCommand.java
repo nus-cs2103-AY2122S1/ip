@@ -34,6 +34,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert args.length == 1 : "Delete Command should only store 1 argument";
         Task task = tasks.deleteTask(Integer.parseInt(args[0]));
         storage.writeToFile(tasks);
         return ui.showDeletedTask(task, tasks.size());

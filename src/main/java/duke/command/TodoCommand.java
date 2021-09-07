@@ -30,6 +30,7 @@ public class TodoCommand extends Command {
      * @return String message to be displayed.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert args.length == 1 : "Todo Command should only store 1 argument";
         tasks.addTodoTask(args[0]);
         storage.writeToFile(tasks);
         return ui.showNewTask(tasks.lastTask(), tasks.size());
