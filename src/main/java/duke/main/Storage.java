@@ -53,37 +53,37 @@ public class Storage {
             if (!file.exists()) {
                 file.createNewFile();
             }
-            if (file.length() != 0) {
-                Scanner sc = new Scanner(file);
-                String line;
-                while (sc.hasNext()) {
-                    line = sc.nextLine();
-                    Task t;
-                    String divider = " | ";
-                    int startingIndex = line.indexOf(divider) + divider.length() + 4;
-                    if (line.contains("D |")) {
-                        String taskDescriptionAndTime = line.substring(startingIndex);
-                        int startOfTimeIndex = taskDescriptionAndTime.indexOf(divider);
-                        String task = taskDescriptionAndTime.substring(0, startOfTimeIndex);
-                        String time = taskDescriptionAndTime.substring(startOfTimeIndex + divider.length());
-                        t = new Deadline(task, time);
-                    } else if (line.contains("E |")) {
-                        String taskDescriptionAndTime = line.substring(startingIndex);
-                        int startOfTimeIndex = taskDescriptionAndTime.indexOf(divider);
-                        String task = taskDescriptionAndTime.substring(0, startOfTimeIndex);
-                        String time = taskDescriptionAndTime.substring(startOfTimeIndex + divider.length());
-                        t = new Event(task, time);
-                    } else {
-                        String taskDescription = line.substring(startingIndex);
-                        t = new Todo(taskDescription);
-                    }
-                    if (line.contains("| 0 |")) {
-                        t.markAsDone();
-                    }
-                    tasks.add(t);
-                }
-                sc.close();
+            if (file.length() == 0) {
             }
+            Scanner sc = new Scanner(file);
+            String line;
+            while (sc.hasNext()) {
+                line = sc.nextLine();
+                Task t;
+                String divider = " | ";
+                int startingIndex = line.indexOf(divider) + divider.length() + 4;
+                if (line.contains("D |")) {
+                    String taskDescriptionAndTime = line.substring(startingIndex);
+                    int startOfTimeIndex = taskDescriptionAndTime.indexOf(divider);
+                    String task = taskDescriptionAndTime.substring(0, startOfTimeIndex);
+                    String time = taskDescriptionAndTime.substring(startOfTimeIndex + divider.length());
+                    t = new Deadline(task, time);
+                } else if (line.contains("E |")) {
+                    String taskDescriptionAndTime = line.substring(startingIndex);
+                    int startOfTimeIndex = taskDescriptionAndTime.indexOf(divider);
+                    String task = taskDescriptionAndTime.substring(0, startOfTimeIndex);
+                    String time = taskDescriptionAndTime.substring(startOfTimeIndex + divider.length());
+                    t = new Event(task, time);
+                } else {
+                    String taskDescription = line.substring(startingIndex);
+                    t = new Todo(taskDescription);
+                }
+                if (line.contains("| 0 |")) {
+                    t.markAsDone();
+                }
+                tasks.add(t);
+            }
+            sc.close();
         } catch (IOException e) {
             file = new File(filePath);
             throw new DukeException(e);

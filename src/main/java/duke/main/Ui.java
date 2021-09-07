@@ -22,11 +22,13 @@ public class Ui {
     private String secondLine = " What do you wanna do today? ";
     private int bufferLength = 5;
     private int width = Integer.max(firstLine.length(), secondLine.length()) + bufferLength;
-    private String farewell = "@@@@ Till we meet again, my friend @@@@";
+    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
+    private final String FAREWELL = "@@@@ Till we meet again, my friend @@@@";
     private String buffer1 = padding.repeat((width - firstLine.length()) / 2);
     private String buffer2 = padding.repeat((width - secondLine.length()) / 2);
     private String welcomeMessage = buffer1 + firstLine + buffer1 + "\n" + buffer2 + secondLine + buffer2 + "\n";
-    private String greeting = "Hello from\n" + logo + welcomeMessage;
+    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
+    private final String GREETING = "Hello from\n" + logo + welcomeMessage;
     private Scanner sc;
     private String command;
 
@@ -99,7 +101,7 @@ public class Ui {
 
     /**
      * Shows the task deleted.
-     * 
+     *
      * @param task the deleted task.
      * @param numTasksRemaining number of tasks after deleting the task.
      */
@@ -121,7 +123,7 @@ public class Ui {
         String additionMessage = "Got it. I've added this task:\n";
         additionMessage += String.format("~~%S~~\n", task.toString());
         additionMessage += String.format("Now you have %s %s in the list.", newNumTasks,
-                                    (newNumTasks > 1 ? "tasks" : "task"));
+                (newNumTasks > 1 ? "tasks" : "task"));
         return additionMessage;
     }
 
@@ -144,10 +146,9 @@ public class Ui {
     public String showMatchingTasks(TaskList tasks, String searchPhrase, String message) {
         return iterate(message, tasks);
     }
-    
     private String iterate(String headerMessage, TaskList tasks) {
         String listOfTasksDisplay = headerMessage + "\n";
-        for(int i = 0; i < tasks.getNumTasks(); i++) {
+        for (int i = 0; i < tasks.getNumTasks(); i++) {
             listOfTasksDisplay += String.format("%s.%s\n", i + 1, tasks.getTask(i).toString());
         }
         return listOfTasksDisplay;

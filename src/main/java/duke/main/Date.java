@@ -13,40 +13,11 @@ import java.time.format.DateTimeParseException;
  * @version CS2103T Semester 1
  */
 public class Date {
-<<<<<<< HEAD:src/main/java/duke/main/Date.java
-    private LocalDate localDate;
-
-    /**
-     * Class constructor.
-     *
-     * @param dateString string specifying a date in the form DD/MM/YYYY.
-     * @throws DateTimeParseException exception caused by improper time format.
-     */
-    public Date(String dateString) throws DateTimeParseException {
-        String[] dateParts = dateString.split("/");
-        localDate = LocalDate.parse(String.format("%s-%s-%s", "2021", dateParts[1], dateParts[0]));
-    }
-
-    /**
-     * converts a given date string into a date object.
-     *
-     * @param dateString in form of DD MMM YYYY.
-     * @return a date object corresponding to the date string.
-     * @throws ParseException exception caused by parsing date in improper format.
-     */
-    public static Date convertDateStringToDate(String dateString) throws ParseException {
-        SimpleDateFormat monthDayFormat = new SimpleDateFormat("MMM d");
-        java.util.Date monthDayDate = monthDayFormat.parse(dateString);
-        SimpleDateFormat dateFormatToDate = new SimpleDateFormat("dd/MM/yyyy");
-        return new Date(dateFormatToDate.format(monthDayDate));
-=======
     protected LocalDate localDate;
     private String[] date;
-    private final int MAX_COMP = 3;
-    private final int MIN_COMP = 2;
     /**
      * Class constructor.
-     * 
+     *
      * @param dateComponents components of the date
      * @throws DateTimeParseException exception caused by improper time format.
      */
@@ -58,7 +29,6 @@ public class Date {
         } catch (DateTimeParseException e) {
             throw new DukeException(e);
         }
->>>>>>> Branch-A-Varags:src/main/java/IP/duke/main/Date.java
     }
 
     /**
@@ -89,12 +59,10 @@ public class Date {
     public boolean isSameDate(String dateString) {
         return toString().equals(dateString);
     }
-<<<<<<< HEAD:src/main/java/duke/main/Date.java
-=======
 
     /**
      * converts a given date string into a date object.
-     * 
+     *
      * @param dateString in form of DD MMM YYYY.
      * @return a date object corresponding to the date string.
      * @throws ParseException exception caused by parsing date in improper format.
@@ -109,5 +77,4 @@ public class Date {
             throw new DukeException(e);
         }
     }
->>>>>>> Branch-A-Varags:src/main/java/IP/duke/main/Date.java
 }

@@ -1,18 +1,10 @@
 package duke.command;
 
 import duke.main.DukeException;
-<<<<<<< HEAD:src/main/java/duke/command/DeleteCommand.java
 import duke.main.Storage;
 import duke.main.TaskList;
 import duke.main.Ui;
 import duke.task.Task;
-
-=======
-import duke.task.Task;
-import duke.main.Storage;
-import duke.main.TaskList;
-import duke.main.Ui;
->>>>>>> branch-A-Level-10:src/main/java/IP/duke/command/DeleteCommand.java
 
 /**
  * Represents a duke.command to delete a duke.task.

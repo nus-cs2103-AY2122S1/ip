@@ -1,12 +1,9 @@
 package duke.task;
 
-import IP.duke.main.Date;
-import IP.duke.main.DukeException;
-
 import java.text.ParseException;
-import java.time.format.DateTimeParseException;
 
 import duke.main.Date;
+import duke.main.DukeException;
 
 /**
  * Represents tasks with deadline.
@@ -15,8 +12,11 @@ import duke.main.Date;
  * @version CS2103T, Semester 1
  */
 public class Deadline extends Task {
+    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     private final String TASK_MARKER = "D";
+    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     private final String TASK_KEYWORD = "deadline ";
+    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     private final String BY_KEYWORD = "by ";
     private String taskDescription;
     private Date dueDate;
