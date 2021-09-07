@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 // Level 3 -> A-Classes: Task class that represents all Tasks
 public class Task {

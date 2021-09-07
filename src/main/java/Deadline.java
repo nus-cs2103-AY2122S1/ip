@@ -1,4 +1,3 @@
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 //Level-4 -> A-Inheritance: Deadline Task Class

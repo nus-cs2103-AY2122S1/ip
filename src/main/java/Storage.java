@@ -1,10 +1,14 @@
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.IOException;
 
 // Level 7: Created Storage class to maintain storage state
 public class Storage {
 
     private final File storageFile;
-    private File tempFile;
     private static final String tempFileName = "temp.txt";
     private final String fileName;
     private final String folderPath;
@@ -20,16 +24,7 @@ public class Storage {
         storageFile = getFile();
     }
 
-    private File getFile() {
-        try {
-            createFile(folderPath,fileName);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return new File(storagePath);
-    }
-
-    private File getTempFile() {
+    public File getFile() {
         try {
             createFile(folderPath,fileName);
         } catch (IOException e) {
@@ -82,7 +77,7 @@ public class Storage {
     // Level 7: delete selected items to the storage
     public void deleteEntry(Task t) {
         try {
-            tempFile = new File(folderPath
+            File tempFile = new File(folderPath
                     .concat("\\")
                     .concat(tempFileName)
             );

@@ -1,7 +1,5 @@
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
 
 // A-Enums: Set Enums for Task type
 enum TASK_TYPE {
@@ -10,191 +8,54 @@ enum TASK_TYPE {
 
 public class Duke {
 
-    // shows if the Duke chat bot has been activated
     private boolean activated;
-    // Line Separator
-    private final String SEP_LINE = "____________________________________________________________";
-    // Standard boot response
-    private final String welcomeMessage =
-            SEP_LINE
-            .concat(
-            " \n____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n"
-            + "\nMade by Dr-Octavius\n")
-            .concat(SEP_LINE)
-            .concat(
-            "\nHello! I'm Duke\n"
-            + "What can I do for you?\n")
-            .concat(SEP_LINE);
-    // Level-6 -> A-Collections: Task List
-    private final List<Task> taskList = new ArrayList<>();
-    // Level-7: File Storage associated to an instance of Duke
-    private final Storage fileStorage;
+    private final TaskList tasks;
+    private final Storage storage;
+    private final Ui ui;
 
-    // Duke Constructor
     public Duke(String storagePath, String fileName) {
         activated = true;
-        fileStorage = new Storage(storagePath, fileName);
+        ui = new Ui();
+        storage = new Storage(storagePath, fileName);
+        tasks = new TaskList(storage.getFile());
     }
 
-    // Checks if Duke chat bot has been activated
-    public boolean isActive() {
-        return activated;
-    }
-
-    // Level-1: Greets user when Duke is initialised
-    public void greet() {
-        System.out.println(welcomeMessage);
-    }
-
-    // Level-1: echos user message back to user
-    // Level-5: returns the error message for unknown inputs
-    public String echo() {
-        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-    }
-
-    // Level-1: Exit Message triggered by "bye"
-    public String exit() {
-        activated = false;
-        return " Bye. Hope to see you again soon!";
-    }
-
-    // Level-2: adds new task to user
-    public String add(String text) {
-        Task nextTask = new Task(text);
-        taskList.add(nextTask);
-        fileStorage.saveEntry(nextTask);
-        return "added: ".concat(text);
-    }
-
-    // Level-4: setting of task urgency to "to-do"
-    public String todo(String description) {
-        Task task = new Todo(description,TASK_TYPE.T);
-        taskList.add(task);
-        fileStorage.saveEntry(task);
-        return "Got it. I've added task:\n  "
-                .concat(task.toString())
-                .concat("\nNow you have ".concat(taskList.size() + "").concat(" tasks in the list."));
-    }
-
-    // Level-4: setting of task urgency to "deadline"
-    // Level-4: setting of task urgency to "deadline"
-    public String deadline(String description, String by) {
-        Task task = new Deadline(description,by,TASK_TYPE.D);
-        taskList.add(task);
-        fileStorage.saveEntry(task);
-        return "Got it. I've added task:\n  "
-                .concat(task.toString())
-                .concat("\nNow you have ".concat(taskList.size() + "").concat(" tasks in the list."));
-    }
-
-    // Level-4: setting of task urgency to "event"
-    public String event(String description, String at) {
-        Task task = new Event(description,at,TASK_TYPE.E);
-        taskList.add(task);
-        fileStorage.saveEntry(task);
-        return "Got it. I've added task:\n  "
-                .concat(task.toString())
-                .concat("\nNow you have ".concat(taskList.size() + "").concat(" tasks in the list."));
-    }
-
-    // Level-6: delete items from list
-    public String delete(int index) {
-        Task task = taskList.get(index);
-        taskList.remove(index);
-        fileStorage.deleteEntry(task);
-        return "Noted. I've removed task:\n  "
-                .concat(task.toString())
-                .concat("\nNow you have ".concat(taskList.size() + "").concat(" tasks in the list."));
-    }
-
-    // Level-3: Mark items as done
-    public String done(int index) {
-        taskList.get(index).setDone();
-        Task task = taskList.get(index);
-        return "Nice! I've marked task as done: \n  ".concat(task.toString());
-    }
-
-    // Level-2: Lists all items in Task List
-    public String list() {
-        String out = "Here are the tasks in your list:\n";
-        System.out.println(taskList);
-        for (int i = 0; i < taskList.size(); i++) {
-            if (i != 0) out = out.concat("\n");
-            out = out.concat((i+1) + ".").concat(taskList.get(i).toString());
-        }
-        return out;
-    }
-
-    // wraps all messages between line separators
-    public String messageWrapper(String text) {
-        return SEP_LINE.concat("\n").concat(text).concat("\n").concat(SEP_LINE);
-    }
-
-    // decodes input from user and passes that argument to a response builder
-    public int decoder(String userInput) {
-        int res;
-        switch (userInput) {
-        case "bye":
-            res = 0;
-            break;
-        case "list":
-            res = 1;
-            break;
-        case "done":
-            res = 2;
-            break;
-        case "todo":
-            res = 3;
-            break;
-        case "deadline":
-            res = 4;
-            break;
-        case "event":
-            res = 5;
-            break;
-        case "delete":
-            res = 6;
-            break;
-        default:
-            res = 7;
-            break;
-        }
-        return res;
-    }
-
-    // Level-5 -> A-Exceptions: Added try and except to handle errors
     private void run() {
         Scanner scannerObj = new Scanner(System.in);
-        greet();
-        while (isActive()) {
+        ui.greet();
+        while (activated) {
             String nextIn;
+
             try {
                 nextIn = scannerObj.next();
             } catch (NoSuchElementException e) {
                 continue;
             }
-            int selector = decoder(nextIn);
-            String output;
+
+            int selector = Parser.decoder(nextIn);
+            Task nextTask;
             switch (selector) {
             case 0:
-                output = exit();
+                activated = false;
+                ui.exit();
                 break;
             case 1:
-                output = list();
+                ui.list(tasks);
                 break;
             case 2:
-                output = done(scannerObj.nextInt() - 1);
+                int index = scannerObj.nextInt() - 1;
+                tasks.get(index).setDone();
+                ui.done(tasks.get(index));
                 break;
             case 3:
                 try {
-                    output = todo(scannerObj.nextLine());
+                    nextTask = new Todo(scannerObj.nextLine(),TASK_TYPE.T);
+                    tasks.add(nextTask);
+                    storage.saveEntry(nextTask);
+                    ui.todo(nextTask, tasks.size());
                     break;
                 } catch (NoSuchElementException e) {
-                    output = "☹ OOPS!!! The description of a todo cannot be empty.";
+                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
                     break;
                 }
             case 4:
@@ -216,24 +77,38 @@ public class Duke {
                         desc = (desc.equals("") ? nextIn : desc.concat(" ").concat(nextIn));
                     }
                 }
-                output = (selector == 4 ? deadline(desc, var) : event(desc, var));
+                if (selector == 4) {
+                    nextTask = new Deadline(desc,var,TASK_TYPE.D);
+                    tasks.add(nextTask);
+                    storage.saveEntry(nextTask);
+                    ui.deadline(nextTask,tasks.size());
+                } else {
+                    nextTask = new Event(desc,var,TASK_TYPE.E);
+                    tasks.add(nextTask);
+                    storage.saveEntry(nextTask);
+                    ui.event(nextTask, tasks.size());
+                }
                 break;
             case 6:
-                output = delete(scannerObj.nextInt() - 1);
+                index = scannerObj.nextInt() - 1;
+                Task t = tasks.get(index);
+                tasks.remove(index);
+                storage.deleteEntry(t);
+                ui.delete(t, tasks.size());
                 break;
             case 7:
-                output = add(nextIn.concat(scannerObj.nextLine()));
+                nextTask = new Task(scannerObj.nextLine());
+                tasks.add(nextTask);
+                storage.saveEntry(nextTask);
+                ui.add(nextTask.toString());
                 break;
             default:
-                output = echo();
+                ui.echo();
             }
-            output = messageWrapper(output);
-            System.out.println(output);
         }
     }
 
     public static void main(String[] args) {
-        Duke chatBotObj = new Duke("data", "data.txt");
-        chatBotObj.run();
+        new Duke("data", "data.txt").run();
     }
 }
