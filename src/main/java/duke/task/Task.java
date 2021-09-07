@@ -1,4 +1,7 @@
-package duke;
+package duke.task;
+
+import duke.processor.Executable;
+import duke.processor.TaskList;
 
 import java.io.Serializable;
 

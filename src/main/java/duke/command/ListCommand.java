@@ -1,4 +1,8 @@
-package duke;
+package duke.command;
+
+import duke.processor.Executable;
+import duke.processor.TaskList;
+import duke.processor.Ui;
 
 /**
  * A class for the 'list' command, which lists all available tasks with type, whether done or not, names and dates.

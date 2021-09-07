@@ -1,4 +1,7 @@
-package duke;
+package duke.command;
+
+import duke.processor.Executable;
+import duke.processor.TaskList;
 
 /**
  * Command to find tasks with a keyword.

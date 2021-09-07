@@ -1,4 +1,9 @@
-package duke;
+package duke.command;
+
+import duke.processor.Executable;
+import duke.processor.Storage;
+import duke.processor.TaskList;
+import duke.processor.Ui;
 
 /**
  * Command that marks a task as done by its index. 
