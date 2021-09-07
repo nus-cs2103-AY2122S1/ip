@@ -48,18 +48,10 @@ public class TaskList {
     /**
      * A method to mark a task as done.
      *
-     * @param str User input which indicates details of the task to be marked as done.
-     * @return Task after it is marked as done.
-     * @throws OutOfBoundException Thrown when user inputs task number that is out of the given task range.
-     * @throws NumberFormatException Thrown when user gives a non-number as the task number.
+     * @param index index of the task to be marked as done.
+     * @return String representation of the task after marked as done.
      */
-    public String markAsDone(String str) throws OutOfBoundException, NumberFormatException {
-        String i = str.substring(str.length()-1);
-        int index = Integer.parseInt(i);
-
-        if (index < 0 || index > tasks.size()) {
-            throw new OutOfBoundException();
-        }
+    public String markAsDone(int index) {
         Task task = tasks.get(index - 1);
         task.markAsDone();
         String result = "Nice! I have marked this task as done!\n" + task.toString() ;
@@ -67,51 +59,28 @@ public class TaskList {
     }
 
     /**
+     * A method to mark a task as undone.
+     *
+     * @param index index of the task to be marked as undone.
+     * @return String representation of the task after marked as undone.
+     */
+    public String markAsUndone(int index) {
+        Task task = tasks.get(index - 1);
+        task.markAsUndone();
+        String result = "Nice! I have marked this task as undone!\n" + task.toString() ;
+        return result;
+    }
+
+    /**
      * A method to add a Task inside a TaskList
      *
-     * @param str User inputs which indicates details of the task to be added.
+     * @param task Task to be added.
      * @return Task after it is added.
-     * @throws EmptyDescriptionException Thrown when users do not give a task description.
-     * @throws InvalidTaskException Thrown when users give incorrect input for task.
-     * @throws InvalidDeadlineException Thrown when users give an incorrect deadline.
      */
-
-    public String addTask(String str) throws DukeException {
-        //if the task only contain 1 word
-        if (str.split(" ").length == 1) {
-            if (str.startsWith("todo") || str.startsWith("deadline") || str.startsWith("event")) {
-                throw new EmptyDescriptionException(str);
-            }
-            throw new InvalidTaskException();
-        }
-
-        //if task contains more than 1 word, but keyword is wrong
-        if (!str.startsWith("todo") && !str.startsWith("deadline") && !str.startsWith("event")) {
-            throw new InvalidTaskException();
-        }
-
-        Task task;
-        if (str.startsWith("todo")) {
-            task = new ToDos(str.substring(5));
-            tasks.add(task);
-        } else if (str.startsWith("deadline")) {
-            String[] message = str.split("/by ");
-            if (message.length != 2) {
-                throw new InvalidTaskException();
-            }
-            task = new Deadline(message[0].substring(9), message[1]);
-            tasks.add(task);
-        } else {
-            String[] message = str.split("/at ");
-            if (message.length != 2) {
-                throw new InvalidTaskException();
-            }
-            task = new Event(message[0].substring(6), message[1]);
-            tasks.add(task);
-        }
-
+    public String addTask(Task task) {
+        tasks.add(task);
         String result = "Got it. I've added this task.\n"
-                + tasks.get(tasks.size() - 1).toString() + "\r\n"
+                + task.toString() + "\r\n"
                 + "Now you have " + tasks.size()
                 + (tasks.size() == 1 ? " task in the list" : " tasks in the list.");
         return result;
@@ -120,24 +89,14 @@ public class TaskList {
     /**
      * A method to delete a certain in a TaskList.
      *
-     * @param str User inputs which indicates detail of task to be deleted.
-     * @return Task after it is deleted.
-     * @throws OutOfBoundException Thrown when user gives a task number that is outside of the range of TaskList.
+     * @param index index of task to be deleted.
+     * @return String representation of task after it is deleted.
      */
-    public String deleteTask(String str) throws OutOfBoundException {
-        String i = str.substring(str.length() - 1);
-        int index = Integer.parseInt(i);
-
-        if (index < 0 || index > tasks.size()) {
-            throw new OutOfBoundException();
-        }
-        Task task = tasks.get(index - 1);
-        tasks.remove(index - 1);
-
+    public String deleteTask(int index) {
+        Task task = tasks.remove(index - 1);
         String result = "Noted. I've removed this task: \n" + task.toString() + "\r\n"
                 + "Now you have " + tasks.size()
                 + (tasks.size() == 1 ? " task in the list" : " tasks in the list.");
-
         return result;
     }
 
@@ -168,6 +127,9 @@ public class TaskList {
         return result;
     }
 
+    public String undoTask() {
+        return "";
+    }
     /**
      * Getter to get ArrayList
      *

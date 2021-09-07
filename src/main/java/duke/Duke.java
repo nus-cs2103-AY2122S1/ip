@@ -1,6 +1,7 @@
 package duke;
 
 import duke.exception.DukeException;
+import duke.exception.InvalidCommandException;
 import javafx.fxml.FXML;
 
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.io.IOException;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
+    private Command currentCommand;
 
     /**
      * Constructor of Duke. UI object, storage and tasks are instantiated.
@@ -22,7 +24,7 @@ public class Duke {
         storage = new Storage(".\\src\\main\\level-7.txt");
         try {
             tasks = new TaskList(storage.load());
-            assert tasks != null: "tasks shouldnt be null here!";
+            assert tasks != null: "tasks shouldn't be null here!";
         } catch (DukeException e) {
             System.out.println("RESET!");
             tasks = new TaskList();
@@ -34,34 +36,43 @@ public class Duke {
     /**
      * A method that allows user give input and runs the program.
      * Contains a parser which reads command from the input.
+     *
+     * @return A String array with the input as the first element, and response as the second element.
      */
 
     @FXML
-    String getResponse(String input) {
+    String[] getResponse(String input) {
         String result = "";
+        Command command;
         try {
             if (input.equals("bye")) {
-                result += "Babai! See you again soon! XD";
+                command = new ByeCommand(tasks);
             } else if (input.equals("list")) {
-                result += tasks.printList();
+                command = new PrintListCommand(tasks);
             } else if (input.startsWith("done")) {
-                result += tasks.markAsDone(input);
+                command = new MarkAsDoneCommand(tasks, input);
             } else if (input.startsWith("delete")) {
-                result += tasks.deleteTask(input);
+                command = new DeleteTaskCommand(tasks, input);
             } else if (input.startsWith("find")) {
-                result += tasks.findTask(input);
+                command = new FindTaskCommand(tasks, input);
+            } else if (input.startsWith("todo") || input.startsWith("event") || input.startsWith("deadline")) {
+                command = new AddTaskCommand(tasks, input);
+            } else if (input.equals("undo")) {
+                command = new UndoCommand(tasks, currentCommand);
             } else {
-                result += tasks.addTask(input);
+                throw new InvalidCommandException();
             }
+            currentCommand = command;
+            result += command.run();
             storage.updateFile(tasks);
         } catch (DukeException e) {
             result = e.getMessage();
         } catch (NumberFormatException e) {
             result = "Task number is invalid!";
         } catch (IOException e) {
-            return "File failed to load!";
+            result = "File failed to load!";
         }
         assert result != null: "result cannot be null here!";
-        return result;
+        return new String[]{input, result};
     }
 }

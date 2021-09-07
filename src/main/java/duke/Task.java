@@ -32,6 +32,14 @@ public class Task {
     }
 
     /**
+     * Method to mark a task as done.
+     *
+     */
+    public void markAsUndone() {
+        done = false;
+    }
+
+    /**
      * A method that prints out details of a task.
      *
      * @return Details of task
