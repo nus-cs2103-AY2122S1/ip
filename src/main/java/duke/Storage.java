@@ -52,6 +52,7 @@ public class Storage {
                 String taskType = data[0].trim();
                 String statusIcon = data[1].trim();
                 String description = data[2].trim();
+
                 if (taskType.equalsIgnoreCase("T")) {
                     Todo todo = new Todo(description.trim());
                     if (statusIcon.equals("1")) {
