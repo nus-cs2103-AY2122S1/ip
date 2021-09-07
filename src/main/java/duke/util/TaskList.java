@@ -12,7 +12,9 @@ import duke.task.Task;
  * @version CS2103T AY21/22 Sem 1.
  */
 public class TaskList {
-    /** An ArrayList to store user's tasks. */
+    /**
+     * An ArrayList to store user's tasks.
+     */
     private final ArrayList<Task> taskList;
 
     /**
@@ -34,14 +36,18 @@ public class TaskList {
     /**
      * Adds a task into the taskList and returns the added task as a string.
      *
-     * @param task The task to be added.
-     * @param storage An instance of a the Storage class that saves and loads Duke's data.
+     * @param taskToAdd The task to be added.
+     * @param storage   An instance of a the Storage class that saves and loads Duke's data.
      * @return A string representing the task that has been added.
      */
-    public String add(Task task, Ui ui, Storage storage) throws IOException {
-        this.taskList.add(task);
+    public String add(Task taskToAdd, Ui ui, Storage storage) throws IOException {
+        String duplicatedTaskString = checkDuplicates(taskToAdd);
+        if (!duplicatedTaskString.equals("")) {
+            return ui.showDuplicateTaskError(duplicatedTaskString);
+        }
+        this.taskList.add(taskToAdd);
         storage.save(this);
-        return ui.showAddTask(task, this);
+        return ui.showAddTask(taskToAdd, this);
     }
 
     /**
@@ -56,7 +62,7 @@ public class TaskList {
     /**
      * Marks a task as completed and returns the completed task to the screen as a string.
      *
-     * @param index The index of the task to mark as completed in the taskList.
+     * @param index   The index of the task to mark as completed in the taskList.
      * @param storage An instance of a the Storage class that saves and loads Duke's data.
      * @return A string representing the task that has been marked as completed.
      */
@@ -74,7 +80,7 @@ public class TaskList {
     /**
      * Deletes a task and returns the deleted task as a string.
      *
-     * @param index The index of the task to delete in the taskList.
+     * @param index   The index of the task to delete in the taskList.
      * @param storage An instance of a the Storage class that saves and loads Duke's data.
      * @return A string representing the task that has been deleted.
      */
@@ -141,5 +147,24 @@ public class TaskList {
             }
             return sb.toString();
         }
+    }
+
+    /**
+     * Returns the first task in the taskList that matches the task to be added.
+     *
+     * @param taskToAdd The task to be added.
+     * @return A string representing the first task in the taskList that matches the task to be added.
+     */
+    private String checkDuplicates(Task taskToAdd) {
+        String result = "";
+        for (int i = 0; i < size(); i++) {
+            Task currTask = get(i);
+            int currNum = i + 1;
+            if (currTask.equals(taskToAdd)) {
+                result = "  " + currNum + ". " + currTask.toString();
+                break;
+            }
+        }
+        return result;
     }
 }

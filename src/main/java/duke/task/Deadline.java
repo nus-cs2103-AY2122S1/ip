@@ -46,22 +46,24 @@ public class Deadline extends Task {
                     + "or one time, Eg: \"18:00\" (This will enter today's date by default)";
             throw new InvalidCommandException(errorMessage);
         }
-        this.by = by;
         if (dateTime.length == 1) {
             //user only entered a single date or time
             if (dateTime[0].length() > 5) {
                 //user entered date only. Set default time to 23:59.
                 this.date = LocalDate.parse(dateTime[0]);
                 this.time = LocalTime.MAX;
+                this.by = by + " " + this.time.format(DateTimeFormatter.ofPattern("HH:mm"));
             } else {
                 //user entered time only. Set date to today's date.
                 this.date = LocalDate.now();
                 this.time = LocalTime.parse(dateTime[0]);
+                this.by = this.date.toString() + " " + by;
             }
         } else {
             //user entered both date and time
             this.date = LocalDate.parse(dateTime[0]);
             this.time = LocalTime.parse(dateTime[1]);
+            this.by = by;
         }
     }
 
@@ -76,13 +78,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toFileStringFormat() {
-        String[] dateTime = this.by.split(" ");
-        if (dateTime.length == 1 && dateTime[0].length() == 5) {
-            //user only entered time. so save task date (default)
-            return "D " + super.toFileStringFormat() + " | " + this.date.toString() + " " + this.by;
-        } else {
-            return "D " + super.toFileStringFormat() + " | " + this.by;
-        }
+        return "D " + super.toFileStringFormat() + " | " + this.by;
     }
 
     /**
@@ -98,5 +94,22 @@ public class Deadline extends Task {
                 + ", "
                 + this.time.format(DateTimeFormatter.ofPattern("h:mm a"))
                 + ")";
+    }
+
+    /**
+     * Returns if two Deadline objects are equal based on their description and by.
+     *
+     * @param obj The other object to compare to.
+     * @return A boolean if the two Deadline objects are equal and false otherwise.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Deadline) {
+            Deadline deadline = (Deadline) obj;
+            boolean isDescriptionSame = deadline.getDescription().equals(this.getDescription());
+            boolean isBySame = deadline.by.equals(this.by);
+            return isDescriptionSame && isBySame;
+        }
+        return false;
     }
 }
