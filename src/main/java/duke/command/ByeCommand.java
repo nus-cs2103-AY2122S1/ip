@@ -22,14 +22,4 @@ public class ByeCommand extends Command {
         storage.save(saveFileString);
         return Ui.endDuke();
     }
-
-    /**
-     * Returns true as the program should quit after "bye" is input.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean isExit() {
-        return true;
-    }
 }

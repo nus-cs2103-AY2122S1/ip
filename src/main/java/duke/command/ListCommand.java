@@ -21,13 +21,5 @@ public class ListCommand extends Command {
         return tasks.listOut();
     }
 
-    /**
-     * Returns false as the program should not terminate.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
+
 }

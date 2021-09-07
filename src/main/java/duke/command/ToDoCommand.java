@@ -36,14 +36,4 @@ public class ToDoCommand extends Command {
         storage.save(saveFileString);
         return output;
     }
-
-    /**
-     * Returns false as the program should not terminate.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

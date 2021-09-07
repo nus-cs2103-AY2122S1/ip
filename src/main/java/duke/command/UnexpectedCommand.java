@@ -63,14 +63,4 @@ public class UnexpectedCommand extends Command {
         }
         return output;
     }
-
-    /**
-     * Returns false as program does not end.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

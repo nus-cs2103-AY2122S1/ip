@@ -31,14 +31,4 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Storage storage, Ui ui) {
         return tasks.searchTask(keyword);
     }
-
-    /**
-     * Returns false as the program should not terminate.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

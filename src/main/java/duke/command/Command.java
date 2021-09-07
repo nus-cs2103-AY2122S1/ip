@@ -18,12 +18,5 @@ public abstract class Command {
      * @param ui ui
      */
     public abstract String execute(TaskList tasks, Storage storage, Ui ui);
-
-    /**
-     * This method determines if the scanner should keep scanning inputs.
-     *
-     * @return true if yes, false if no.
-     */
-    public abstract boolean isExit();
 }
 
