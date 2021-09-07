@@ -21,7 +21,6 @@ public class ListCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder response = new StringBuilder("Here are the tasks in your list:");
         int currentIndex = 1;
-
         for (Task task : tasks.getTasks()) {
             if (task != null) {
                 response.append("\n ")

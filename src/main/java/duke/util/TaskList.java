@@ -42,46 +42,51 @@ public class TaskList {
 
         tasks = new ArrayList<>();
 
+        addLoad(storageLoad);
+    }
+
+    private Task createTask(TaskType type, String description, String date) {
+        switch (type) {
+        case TODO:
+            return new Todo(description);
+        case EVENT:
+            LocalDate at = LocalDate.parse(date);
+            return new Event(description, at);
+        case DEADLINE:
+            LocalDate by = LocalDate.parse(date);
+            return new Deadline(description, by);
+        default:
+          return null;
+        }
+    }
+
+    private void addLoad(List<String> storageLoad) {
         for (String taskString : storageLoad) {
             // Extract task details into three parts
             String[] taskDetails = taskString.split(" \\| ", 4);
+
             TaskType type = TaskType.valueOf(taskDetails[0]);
-            boolean isDone = taskDetails[1].equals("1");
             String description = taskDetails[2];
+            String date = type.equals(TaskType.TODO) ? null : taskDetails[3];
+            Task task = createTask(type, description, date);
 
-            // Create task based on the extracted details
-            Task task = null;
-            switch (type) {
-            case TODO:
-                task = new Todo(description);
-                break;
-            case EVENT:
-                LocalDate at = LocalDate.parse(taskDetails[3]);
-                task = new Event(description, at);
-                break;
-            case DEADLINE:
-                LocalDate by = LocalDate.parse(taskDetails[3]);
-                task = new Deadline(description, by);
-                break;
+            boolean isTask =  task != null;
+            boolean isDone = taskDetails[1].equals("1");
+            if (isTask && isDone) {
+                task.markAsDone();
             }
-
-            // Add to the task list if and only if it is valid in data file
-            if (task != null) {
-                if (isDone) {
-                    task.markAsDone();
-                }
-                this.tasks.add(task);
-                this.taskNum++;
+            if (isTask) {
+                add(task);
             }
         }
     }
 
     public List<Task> getTasks() {
-        return this.tasks;
+        return tasks;
     }
 
     public int getTaskNum() {
-        return this.taskNum;
+        return taskNum;
     }
 
     /**
@@ -90,8 +95,8 @@ public class TaskList {
      * @param task The task to be added.
      */
     public void add(Task task) {
-        this.tasks.add(task);
-        this.taskNum++;
+        tasks.add(task);
+        taskNum++;
     }
 
     /**
@@ -100,7 +105,7 @@ public class TaskList {
      * @param taskNum The task to be deleted.
      */
     public void delete(int taskNum) {
-        this.tasks.remove(taskNum);
-        this.taskNum--;
+        tasks.remove(taskNum);
+        taskNum--;
     }
 }
