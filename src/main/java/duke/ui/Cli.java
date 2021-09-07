@@ -15,14 +15,14 @@ public class Cli extends Ui {
     private Scanner scanner;
 
     /**
-     * Constructs a CLI with the user's storage and tasks,
+     * Constructs a CLI with the user's storage and task list,
      * initialising a scanner to deal with user input.
      *
      * @param taskStorage The user's storage of tasks in the hard disk.
-     * @param tasks The user's list of tasks.
+     * @param taskList The user's list of tasks.
      */
-    public Cli(TaskStorage taskStorage, TaskList tasks) {
-        super(taskStorage, tasks);
+    public Cli(TaskStorage taskStorage, TaskList taskList) {
+        super(taskStorage, taskList);
         scanner = new Scanner(System.in);
     }
 
@@ -35,6 +35,7 @@ public class Cli extends Ui {
         while (getIsRunning()) {
             String userInput = scanner.nextLine();
             handleUserInput(userInput);
+
             printMessage();
         }
         scanner.close();
@@ -44,7 +45,7 @@ public class Cli extends Ui {
      * Prints the latest message in a formatted manner.
      */
     public void printMessage() {
-        printMessage(getCurrMessage());
+        printMessage(getCurrentMessage());
     }
 
     /**

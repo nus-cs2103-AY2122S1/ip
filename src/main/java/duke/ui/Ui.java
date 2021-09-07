@@ -17,19 +17,19 @@ import duke.task.Todo;
  */
 public abstract class Ui {
     private TaskStorage taskStorage;
-    private TaskList tasks;
+    private TaskList taskList;
     private boolean isRunning;
-    private String currMessage;
+    private String currentMessage;
 
     /**
-     * Constructs an ui with the user's storage and tasks.
+     * Constructs an ui with the user's storage and task list.
      *
      * @param taskStorage The user's storage of tasks in the hard disk.
-     * @param tasks The user's list of tasks.
+     * @param taskList The user's list of tasks.
      */
-    public Ui(TaskStorage taskStorage, TaskList tasks) {
+    public Ui(TaskStorage taskStorage, TaskList taskList) {
         this.taskStorage = taskStorage;
-        this.tasks = tasks;
+        this.taskList = taskList;
         isRunning = true;
     }
 
@@ -46,9 +46,9 @@ public abstract class Ui {
         if (description == null || description.equals("")) {
             throw new DukeException("Oops!!! The description of a todo cannot be empty.");
         }
-        Task task = tasks.addTask(new Todo(description));
+        Task task = taskList.addTask(new Todo(description));
         taskStorage.addTaskToStorage(task);
-        setCurrMessage(Message.getAddTaskMessage(task, tasks.getSize()));
+        setCurrentMessage(Message.getAddTaskMessage(task, taskList.getSize()));
     }
 
     /**
@@ -66,12 +66,12 @@ public abstract class Ui {
     public void handleAddDateTask(String descriptionAndDate, String command) throws DukeException, IOException {
         Task task = Parser.parseDateTask(descriptionAndDate, command);
         if (task == null) {
-            setCurrMessage(Message.getInvalidCommandMessage());
+            setCurrentMessage(Message.getInvalidCommandMessage());
             return;
         }
-        tasks.addTask(task);
+        taskList.addTask(task);
         taskStorage.addTaskToStorage(task);
-        setCurrMessage(Message.getAddTaskMessage(task, tasks.getSize()));
+        setCurrentMessage(Message.getAddTaskMessage(task, taskList.getSize()));
     }
 
     /**
@@ -82,11 +82,11 @@ public abstract class Ui {
      * @throws IOException When there is an error in writing to the file
      *                     that stores the user's task list.
      */
-    public void handleMarkTask(String taskNumberString) throws DukeException, IOException {
+    public void handleMarkTaskAsDone(String taskNumberString) throws DukeException, IOException {
         int taskNumber = retrieveTaskNumber(taskNumberString);
-        Task markedTask = tasks.markTask(taskNumber);
+        Task markedTask = taskList.markTask(taskNumber);
         taskStorage.editTaskFromStorage(taskNumber, markedTask);
-        setCurrMessage(Message.getMarkTaskDoneMessage(markedTask));
+        setCurrentMessage(Message.getMarkTaskAsDoneMessage(markedTask));
     }
 
     /**
@@ -99,9 +99,9 @@ public abstract class Ui {
      */
     public void handleDeleteTask(String taskNumberString) throws DukeException, IOException {
         int taskNumber = retrieveTaskNumber(taskNumberString);
-        Task removedTask = tasks.deleteTask(taskNumber);
+        Task removedTask = taskList.deleteTask(taskNumber);
         taskStorage.removeTaskFromStorage(taskNumber);
-        setCurrMessage(Message.getDeleteTaskMessage(removedTask, tasks.getSize()));
+        setCurrentMessage(Message.getDeleteTaskMessage(removedTask, taskList.getSize()));
     }
 
     /**
@@ -110,9 +110,9 @@ public abstract class Ui {
      *
      * @param query The keyword(s) to find the tasks in the task list.
      */
-    public void handleFindTask(String query) {
-        TaskList filteredTasks = tasks.getFilteredTasks(query);
-        setCurrMessage(Message.getFindTasksMessage(filteredTasks));
+    public void handleFindTasks(String query) {
+        TaskList filteredTaskList = taskList.getFilteredTaskList(query);
+        setCurrentMessage(Message.getFilteredTaskListMessage(filteredTaskList));
     }
 
     /**
@@ -133,7 +133,7 @@ public abstract class Ui {
             throw new DukeException("Oops!!! The done or delete command should be followed by an integer.");
         }
 
-        if (taskNumber < 1 || taskNumber > tasks.getSize()) {
+        if (taskNumber < 1 || taskNumber > taskList.getSize()) {
             throw new DukeException("Oops!!! The task number provided is not valid.");
         }
         return taskNumber;
@@ -168,13 +168,13 @@ public abstract class Ui {
             switch (command) {
             case "bye":
                 setIsRunning(false);
-                setCurrMessage(Message.getExitMessage());
+                setCurrentMessage(Message.getExitMessage());
                 break;
             case "list":
-                setCurrMessage(Message.getTasksMessage(tasks));
+                setCurrentMessage(Message.getTaskListMessage(taskList));
                 break;
             case "done":
-                handleMarkTask(action);
+                handleMarkTaskAsDone(action);
                 break;
             case "delete":
                 handleDeleteTask(action);
@@ -187,25 +187,25 @@ public abstract class Ui {
                 handleAddDateTask(action, command);
                 break;
             case "find":
-                handleFindTask(action);
+                handleFindTasks(action);
                 break;
             default:
-                setCurrMessage(Message.getInvalidCommandMessage());
+                setCurrentMessage(Message.getInvalidCommandMessage());
                 break;
             }
         } catch (DukeException e) {
-            setCurrMessage(Message.getDukeExceptionMessage(e));
+            setCurrentMessage(Message.getDukeExceptionMessage(e));
         } catch (IOException e) {
-            setCurrMessage(Message.getTryAgainMessage());
+            setCurrentMessage(Message.getTryAgainMessage());
         }
     }
 
-    public String getCurrMessage() {
-        return currMessage;
+    public String getCurrentMessage() {
+        return currentMessage;
     }
 
-    public void setCurrMessage(String message) {
-        currMessage = message;
+    public void setCurrentMessage(String message) {
+        currentMessage = message;
     }
 
     /**

@@ -52,12 +52,12 @@ public class Message {
     /**
      * Gets the user's task list.
      *
-     * @param tasks The user's task list.
+     * @param taskList The user's task list.
      * @return A string containing the message.
      */
-    public static String getTasksMessage(TaskList tasks) {
+    public static String getTaskListMessage(TaskList taskList) {
         return "Here are the tasks in your list:\n"
-                + tasks.toString();
+                + taskList.toString();
     }
 
     /**
@@ -66,7 +66,7 @@ public class Message {
      * @param task The task that was marked as done.
      * @return A string containing the message.
      */
-    public static String getMarkTaskDoneMessage(Task task) {
+    public static String getMarkTaskAsDoneMessage(Task task) {
         return "Nice! I've marked this task as done:\n" + task;
     }
 
@@ -87,12 +87,12 @@ public class Message {
      * Gets the matching tasks in the user's list after the user has made a query
      * to find tasks.
      *
-     * @param tasks Tasks that have been filtered out.
+     * @param filteredTaskList Task list consisting of tasks that have been filtered out.
      * @return A string containing the message.
      */
-    public static String getFindTasksMessage(TaskList tasks) {
+    public static String getFilteredTaskListMessage(TaskList filteredTaskList) {
         return "Here are the matching tasks in your list:\n"
-                + tasks.toString();
+                + filteredTaskList.toString();
     }
 
     /**
