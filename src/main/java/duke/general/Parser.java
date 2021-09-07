@@ -19,6 +19,8 @@ public class Parser {
      * @return Command created based on input by user
      */
     public Command parse(String fullCommand) {
+        assert(fullCommand == null) : "Null command cannot be parsed!";
+
         String[] inputSplit = fullCommand.split(" ", 2);
         Command c = null;
         try {

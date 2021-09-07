@@ -13,6 +13,7 @@ public class DoneCommand extends Command {
     private String[] input;
 
     public DoneCommand(String[] input) {
+        assert(input != null) : "Input into command was null!";
         this.input = input;
     }
 

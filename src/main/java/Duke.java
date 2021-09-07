@@ -4,18 +4,7 @@ import duke.general.Parser;
 import duke.general.Storage;
 import duke.general.Tasklist;
 import duke.general.Ui;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 /**
  * Chatbot that helps you form a task list
@@ -26,12 +15,6 @@ public class Duke {
     private Tasklist tasks;
     private Ui ui;
     private Parser parser;
-
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/data/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/data/DaDuke.png"));

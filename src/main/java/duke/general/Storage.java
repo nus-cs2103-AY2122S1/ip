@@ -99,6 +99,8 @@ public class Storage {
      * @param t duke.task.Task to be saved into save file
      */
     public void appendSave(Task t) {
+        assert(t != null) : "Task does not even exist to append!";
+
         try {
             File f = new File(filePath);
             Scanner sc = new Scanner(f);
@@ -118,6 +120,7 @@ public class Storage {
      * @param newList The new task list after modifications (delete, done)
      */
     public void modifySave(ArrayList<Task> newList) {
+        assert(newList != null) : "List of tasks needs to exist before adding";
         try {
             FileWriter fw = new FileWriter(filePath);
             fw.write("");
