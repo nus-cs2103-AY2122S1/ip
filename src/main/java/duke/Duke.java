@@ -162,37 +162,43 @@ public class Duke extends Application {
         Storage storage = new Storage("data/duke.txt");
         TaskList list = new TaskList(storage.load());
         Ui ui = new Ui(storage, list);
+        try {
+            if (input.startsWith("bye")) {
+                return ui.goodbye();
+            } else if (input.equals("list")) {
+                return ui.listTasks();
+            } else {
+                if (input.startsWith("done")) {
+                    taskNumber = Integer.parseInt(input.substring(input.indexOf(" ") + 1)) - 1;
+                    assert taskNumber >= 0 : "Task number should be positive";
+                    return ui.markDone(taskNumber);
+                } else if (input.startsWith("todo")) {
+                    Todo todo = new Todo(input.substring(input.indexOf(" ") + 1));
+                    return ui.add(todo);
+                } else if (input.startsWith("deadline")) {
+                    Deadline deadline = new Deadline(input.substring(input.indexOf(" ") + 1, input.indexOf(" /by")),
+                            input.substring(input.indexOf("/by") + 4));
+                    return ui.add(deadline);
+                } else if (input.startsWith("event")) {
+                    Event event = new Event(input.substring(input.indexOf(" ") + 1, input.indexOf(" /at")),
+                            input.substring(input.indexOf("/at") + 4));
+                    return ui.add(event);
+                } else if (input.startsWith("delete")) {
+                    taskNumber = Integer.parseInt(input.substring(input.indexOf(" ") + 1)) - 1;
+                    assert taskNumber >= 0 : "Task number should be positive";
+                    return ui.delete(taskNumber);
 
-        if (input.startsWith("bye")) {
-            return ui.goodbye();
-                } else if (input.equals("list")) {
-            return ui.listTasks();
-                } else {
-            if (input.startsWith("done")) {
-                taskNumber = Integer.parseInt(input.substring(input.indexOf(" ") + 1)) - 1;
-                assert taskNumber >= 0 : "Task number should be positive";
-                return ui.markDone(taskNumber);
-            } else if (input.startsWith("todo")) {
-                Todo todo = new Todo(input.substring(input.indexOf(" ") + 1));
-                return ui.add(todo);
-            } else if (input.startsWith("deadline")) {
-                Deadline deadline = new Deadline(input.substring(input.indexOf(" ") + 1, input.indexOf(" /by")),
-                        input.substring(input.indexOf("/by") + 4));
-                return ui.add(deadline);
-            } else if (input.startsWith("event")) {
-                Event event = new Event(input.substring(input.indexOf(" ") + 1, input.indexOf(" /at")),
-                        input.substring(input.indexOf("/at") + 4));
-                return ui.add(event);
-            } else if (input.startsWith("delete")) {
-                taskNumber = Integer.parseInt(input.substring(input.indexOf(" ") + 1)) - 1;
-                assert taskNumber >= 0 : "Task number should be positive";
-                return ui.delete(taskNumber);
-
-            } else if (input.startsWith("find")) {
-                int thingToFind = input.indexOf(" ") + 1;
-                return ui.findTasks(input.substring(thingToFind));
+                } else if (input.startsWith("find")) {
+                    int thingToFind = input.indexOf(" ") + 1;
+                    return ui.findTasks(input.substring(thingToFind));
+                }
             }
+            return "I don't understand. Please try again!";
+        } catch (StringIndexOutOfBoundsException e) {
+            return "You keyed in the command wrongly";
+        } catch (IndexOutOfBoundsException e) {
+            return "Sorry but the number you keyed in is out of range";
+
         }
-        return "I don't understand. Please try again!";
     }
 }
