@@ -136,7 +136,6 @@ public class TaskList {
      * @return A string of task description.
      */
     public String printList(LocalDate date) {
-
         ArrayList<Task> targetTasks = this.taskList.stream()
                 .filter(x -> x.getDate() != null && x.getDate().equals(date))
                 .collect(Collectors.toCollection(ArrayList::new));

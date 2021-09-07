@@ -36,9 +36,10 @@ public class Parser {
      * @throws DukeException If the input data does not make sense.
      */
     public static Task arrayCommandToTask(String[] data) throws DukeException {
-        if (data.length < 3
-                || !(data[1].equals("0") || data[1].equals("1"))
-                || data[2].trim().isEmpty()) {
+        boolean hasValidLength = data.length == 3 || data.length == 4;
+        boolean hasValidDoneIndicator = data[1].equals("0") || data[1].equals("1");
+        boolean hasDescription = !data[2].trim().isEmpty();
+        if (!hasValidLength || !hasValidDoneIndicator || !hasDescription) {
             throw new InvalidCommandException();
         }
         String proposedType = data[0];
@@ -47,11 +48,10 @@ public class Parser {
 
         switch (proposedType) {
         case "T":
-            if (data.length == 3) {
-                return new ToDo(description, isDone);
-            } else {
+            if (data.length != 3) {
                 throw new InvalidCommandException();
             }
+            return new ToDo(description, isDone);
         case "D":
             if (data.length != 4) {
                 throw new InvalidCommandException();
@@ -59,7 +59,7 @@ public class Parser {
             try {
                 return new Deadline(description, isDone, LocalDate.parse(data[3]));
             } catch (DateTimeParseException e) {
-                throw new DukeException("\tPlease use the YYYY-MM-DD format for the time!");
+                throw new DukeException("Please use the YYYY-MM-DD format for the time!");
             }
         case "E":
             if (data.length != 4) {
@@ -68,7 +68,7 @@ public class Parser {
             try {
                 return new Event(description, isDone, LocalDate.parse(data[3]));
             } catch (DateTimeParseException e) {
-                throw new DukeException("\tPlease use the YYYY-MM-DD format for the time!");
+                throw new DukeException("Please use the YYYY-MM-DD format for the time!");
             }
         default:
             assert false;
@@ -97,42 +97,39 @@ public class Parser {
         Task task;
         switch (type) {
         case TODO: {
-            if (!description.trim().isEmpty()) {
-                task = new ToDo(description);
-            } else {
+            if (description.trim().isEmpty()) {
                 throw new InvalidCommandException();
             }
+            task = new ToDo(description);
             break;
         }
         case DEADLINE: {
-            if (description.contains("/by")) {
-                String[] information = description.split("/by ", 2);
-                if (information[0].isEmpty()) {
-                    throw new InvalidCommandException();
-                }
-                try {
-                    task = new Deadline(information[0], LocalDate.parse(information[1]));
-                } catch (DateTimeParseException e) {
-                    throw new DukeException("Please use the YYYY-MM-DD format for the time!");
-                }
-            } else {
+            if (!description.contains("/by")) {
                 throw new InvalidCommandException();
+            }
+            String[] information = description.split("/by ", 2);
+            if (information[0].isEmpty()) {
+                throw new InvalidCommandException();
+            }
+            try {
+                task = new Deadline(information[0], LocalDate.parse(information[1]));
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Please use the YYYY-MM-DD format for the time!");
             }
             break;
         }
         case EVENT: {
-            if (description.contains("/at")) {
-                String[] information = description.split("/at ", 2);
-                if (information[0].isEmpty()) {
-                    throw new InvalidCommandException();
-                }
-                try {
-                    task = new Event(information[0], LocalDate.parse(information[1]));
-                } catch (DateTimeParseException e) {
-                    throw new DukeException("Please use the YYYY-MM-DD format for the time!");
-                }
-            } else {
+            if (!description.contains("/at")) {
                 throw new InvalidCommandException();
+            }
+            String[] information = description.split("/at ", 2);
+            if (information[0].isEmpty()) {
+                throw new InvalidCommandException();
+            }
+            try {
+                task = new Event(information[0], LocalDate.parse(information[1]));
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Please use the YYYY-MM-DD format for the time!");
             }
             break;
         }
