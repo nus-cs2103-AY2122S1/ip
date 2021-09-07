@@ -64,6 +64,7 @@ public class Storage {
 				// If the line contains "[X]" mark the task as done
 				if (line.contains("[X]")) {
 					task.setDone(true);
+					assert task.isDone();
 				}
 				tasks.add(task);
 			}

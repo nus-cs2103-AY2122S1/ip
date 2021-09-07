@@ -41,6 +41,10 @@ public class TaskList {
         return tasks;
     }
 
+    public int getNumTasks() {
+        return tasks.size();
+    }
+
     /**
      * Marks a task as done.
      * 
@@ -62,8 +66,9 @@ public class TaskList {
      * @param num the task number to delete
      * @throws DukeFileNotFoundException if file not found
      */
-    private static String deleteTask(int taskNum) throws DukeFileNotFoundException {
-        int taskIdx = taskNum - 1;
+    private static String deleteTask(int num) throws DukeFileNotFoundException {
+        int taskIdx = num - 1;
+        assert taskIdx >= 0;
         Task taskToDelete = getTasks().get(taskIdx);
         getTasks().remove(taskIdx);
         Duke.getStorage().saveTasks(getTasks());
@@ -129,6 +134,7 @@ public class TaskList {
      * Adds a task to the ArrayList of tasks.
      *
      * @param t the task to add
+     * @throws DukeFileNotFoundException if file not found
      */
     private static String addTask(Task t) throws DukeFileNotFoundException {
         TaskList.getTasks().add(t);
@@ -140,7 +146,8 @@ public class TaskList {
      * Adds ToDo task to the ArrayList of tasks.
      *
      * @param command user input to extract task
-     * @throws DukeException Task not specified
+     * @throws DukeTaskNotFoundException if task not specified
+     * @throws DukeFileNotFoundException if file not found
      */
     public static String addToDo(String command) throws DukeTaskNotFoundException, DukeFileNotFoundException {
         if (command.equals("todo")) {
