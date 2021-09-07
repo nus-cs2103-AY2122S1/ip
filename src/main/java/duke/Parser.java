@@ -18,7 +18,12 @@ import duke.task.ToDo;
  */
 public class Parser {
 
-    // The TaskList which the Parser updates
+    private static String dateTimeFormat = "ddMMyy HHmm";
+    private static String dateFormat = "ddMMyy";
+
+    /**
+     * The TaskList which the Parser updates.
+     */
     private TaskList tasks;
 
     /**
@@ -37,7 +42,7 @@ public class Parser {
      *
      * @param userInput The String inputted by the user.
      * @return A String to be displayed to the user.
-     * @throws DukeException if the user input is invalid.
+     * @throws DukeException If the user input is invalid.
      */
     public String parse(String userInput) throws DukeException {
         String[] inputStringArray = userInput.split(" ", 2);
@@ -77,40 +82,20 @@ public class Parser {
                     int taskIndex = Integer.parseInt(inputStringArray[1]) - 1;
                     Task deletedTask = tasks.getTask(taskIndex);
                     tasks.deleteTask(taskIndex);
-                    return "Noted. I've removed this task:\n " + deletedTask.toString();
+                    return "Noted. I've deleted this task:\n " + deletedTask.toString();
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
                     throw new DukeException("Please specify a valid task number.");
                 }
             case "find":
                 return tasks.getMatchingTasksString(inputStringArray[1]);
             case "deadline":
-                String[] deadlineInfo = inputStringArray[1].split(" /by ", 2);
-                if (deadlineInfo.length < 2) {
-                    throw new DukeException("Please enter a valid deadline format.");
-                }
-                try {
-                    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("ddMMyy");
-                    LocalDate by = LocalDate.parse(deadlineInfo[1], dateFormatter);
-                    Task newDeadline = new Deadline(deadlineInfo[0], by);
-                    tasks.addTask(newDeadline);
-                    return "Got it. I've added this task:\n " + newDeadline.toString();
-                } catch (DateTimeParseException e) {
-                    throw new DukeException("Please enter a valid date.");
-                }
+                Deadline newDeadline = createDeadline(inputStringArray[1]);
+                tasks.addTask(newDeadline);
+                return "Got it. I've added this task:\n " + newDeadline.toString();
             case "event":
-                String[] eventInfo = inputStringArray[1].split(" /at ", 2);
-                if (eventInfo.length < 2) {
-                    throw new DukeException("Please enter a valid event format.");
-                }
-                try {
-                    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("ddMMyy HHmm");
-                    LocalDateTime at = LocalDateTime.parse(eventInfo[1], dateTimeFormatter);
-                    Task newEvent = new Event(eventInfo[0], at);
-                    tasks.addTask(newEvent);
-                    return "Got it. I've added this task:\n " + newEvent.toString();
-                } catch (DateTimeParseException e) {
-                    throw new DukeException("Please enter a valid date.");
-                }
+                Event newEvent = createEvent(inputStringArray[1]);
+                tasks.addTask(newEvent);
+                return "Got it. I've added this task:\n " + newEvent.toString();
             case "todo":
                 Task newToDo = new ToDo(inputStringArray[1]);
                 tasks.addTask(newToDo);
@@ -119,6 +104,43 @@ public class Parser {
                 throw new DukeException("Sorry, I don't know what that means.");
             }
         }
+    }
+
+    private Deadline createDeadline(String taskInfo) throws DukeException {
+        String[] deadlineInfo = taskInfo.split(" /by ", 2);
+        if (deadlineInfo.length < 2) {
+            throw new DukeException("Please enter a valid deadline format.");
+        }
+
+        try {
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(dateFormat);
+            LocalDate by = LocalDate.parse(deadlineInfo[1], dateFormatter);
+            Deadline newDeadline = new Deadline(deadlineInfo[0], by);
+            return newDeadline;
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please enter a valid date with format " + dateFormat + ".");
+        }
+    }
+
+    private Event createEvent(String taskInfo) throws DukeException {
+        String[] eventInfo = taskInfo.split(" /at ", 2);
+        if (eventInfo.length < 2) {
+            throw new DukeException("Please enter a valid event format.");
+        }
+
+        try {
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(dateFormat);
+            LocalDateTime at = LocalDateTime.parse(eventInfo[1], dateTimeFormatter);
+            Event newEvent = new Event(eventInfo[0], at);
+            return newEvent;
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please enter a valid date with format " + dateFormat + ".");
+        }
+    }
+
+    private ToDo createToDo(String taskInfo) throws DukeException {
+        ToDo newToDo = new ToDo(taskInfo);
+        return newToDo;
     }
 
 }

@@ -35,8 +35,9 @@ public class Storage {
 
     /**
      * Parses the associated file, returning a collection of Tasks.
+     *
      * @return An ArrayList of Tasks corresponding to the data in the file.
-     * @throws DukeException if the file is formatted incorrectly or cannot be found
+     * @throws DukeException If the file is formatted incorrectly or cannot be found
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
