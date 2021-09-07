@@ -65,15 +65,17 @@ public class Parser {
                 throw new DukeException("This entry does not exist!");
             }
         } catch (NumberFormatException e) {
-            throw new DukeException("Please enter a number after delete!");
+            throw new DukeException("Please enter a number after " + command + "!");
         }
 
         if (command.equals("done")) {
             return new DoneCommand(index);
-        } else if (command.equals("delete")){
-            return new DeleteCommand(index);
-        } else {
-            throw new DukeException("An unknown error has occurred.");
         }
+
+        if (command.equals("delete")){
+            return new DeleteCommand(index);
+        }
+
+        throw new DukeException("An unknown error has occurred.");
     }
 }

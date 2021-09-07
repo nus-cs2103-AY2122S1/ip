@@ -20,11 +20,15 @@ public class Storage {
 
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();
-        file = new File(filePath);
+
+        file = new File(System.getProperty("user.dir") + "\\" + filePath);
 
         try {
             if (!file.exists()) {
+                File directory = new File("data");
+                directory.mkdir();
                 file.createNewFile();
+
             }
 
         } catch (IOException e) {
