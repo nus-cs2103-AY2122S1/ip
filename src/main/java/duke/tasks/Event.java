@@ -12,7 +12,7 @@ public class Event extends Task {
     protected LocalDateTime at;
 
     /**
-     * public constructor which initialises the description and end date and time of an event
+     * Initialises the description and end date and time of an event
      * @param description description of event
      * @param at end date of event
      */

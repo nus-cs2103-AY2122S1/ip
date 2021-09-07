@@ -25,13 +25,13 @@ import java.time.LocalDate;
 
 
 /**
- * The Parser class encapsulates the parsing, interpretation and validation of the user's input commands
+ * Encapsulates the parsing, interpretation and validation of the user's input commands
  *
  */
 public class Parser {
 
     /**
-     * The parse method interprets the keyword of the user's input and accordingly calls the other task-specific
+     * Interprets the keyword of the user's input and accordingly calls the other task-specific
      * parse functions
      *
      * @param input user's string input
@@ -46,19 +46,19 @@ public class Parser {
             case "BYE":
                 return parseBye();
             case "LIST":
-                return parseList(taskList);
+                return parseList();
             case "DONE":
                 return parseDone(input, taskList);
             case "DELETE":
                 return parseDelete(input, taskList);
             case "TASKS_ON":
-                return parseTasksOn(input, taskList);
+                return parseTasksOn(input);
             case "FIND":
-                return parseFind(input, taskList);
+                return parseFind(input);
             case "TODO":
             case "DEADLINE":
             case "EVENT":
-                return parseTask(input, taskList);
+                return parseTask(input);
             default:
                 throw new InvalidKeywordException();
             }
@@ -67,14 +67,12 @@ public class Parser {
     }
 
     /**
-     * The parseFind method is a task-specific parse function which is called when the user uses the
-     * 'find' keyword
+     * Returns a FindCommand when the user uses the 'find' keyword
      *
      * @param input user's string input
-     * @param taskList the list of tasks to be operated upon
      * @return a FindCommand which will execute the task corresponding to the 'find' keyword
      */
-    private static FindCommand parseFind(String input, TaskList taskList) {
+    private static FindCommand parseFind(String input) {
         try {
             String[] parsedString = input.split("\\s", 2);
             String word = parsedString[1].trim();
@@ -84,11 +82,8 @@ public class Parser {
         }
     }
 
-
-
     /**
-     * The parseBye method is a task-specific parse function which is called when the user uses the
-     * 'bye' keyword
+     * Returns a ByeCommand when the user uses the 'bye' keyword
      *
      * @return a ByeCommand which will execute the task corresponding to the 'bye' keyword
      */
@@ -97,25 +92,22 @@ public class Parser {
     }
 
     /**
-     * The parseList method is a task-specific parse function which is called when the user uses the
-     * 'list' keyword
+     * Returns a ListCommand when the user uses the 'list' keyword
      *
-     * @param taskList the list of tasks which is to be parsed
      * @return a ListCommand which will execute the task corresponding to the 'list' keyword
      */
-    private static ListCommand parseList(TaskList taskList) {
+    private static ListCommand parseList() {
         return new ListCommand();
     }
 
     /**
-     * The parseTask method is a task-specific parse function which is called when the user uses the
-     * 'todo', 'deadline' or 'event' keyword. Throws an exception if the tasks are formatted incorrectly
+     * Returns an AddCommand when the user uses the 'todo', 'deadline' or 'event' keyword.
+     * Throws an exception if the tasks are formatted incorrectly
      *
      * @param input the user's task input
-     * @param taskList the list of tasks which is to be operated on
      * @return an AddCommand which will execute the task corresponding to the 'todo', 'deadline' or 'event' keyword
      */
-    private static AddCommand parseTask(String input, TaskList taskList) {
+    private static AddCommand parseTask(String input) {
         Task task;
         String[] splitTasks = input.split("\\s", 2);
         String taskType = splitTasks[0].toLowerCase();
@@ -190,8 +182,7 @@ public class Parser {
     }
 
     /**
-     * The parseDone method is a task-specific parse function which is called when the user uses the
-     * 'done' keyword
+     * Returns a DoneCommand when the user uses the 'done' keyword
      *
      * @param input the user's string input
      * @param taskList the list to be operated on
@@ -204,17 +195,15 @@ public class Parser {
             int index = Integer.parseInt(indexOfTask);
             if (index > 0 && index > taskList.size()) {
                 throw new NonExistentTaskException();
-            } else {
-                return new DoneCommand(index);
             }
+            return new DoneCommand(index);
         } catch (IndexOutOfBoundsException | NumberFormatException | NullPointerException ex) {
             throw new InvalidNumberInputException();
         }
     }
 
     /**
-     * The parseDelete method is a task-specific parse function which is called when the user uses the
-     * 'delete' keyword
+     * Returns a DeleteCommand when the user uses the 'delete' keyword
      *
      * @param input the user's string input
      * @param taskList the list to be operated on
@@ -236,14 +225,12 @@ public class Parser {
     }
 
     /**
-     * The parseTasksOn method is a task-specific parse function which is called when the user uses the
-     * 'tasks_on' keyword
+     * Returns a TasksOnCommand when the user uses the 'tasks_on' keyword
      *
      * @param input the user's string input
-     * @param taskList the list to be operated on
      * @return a TasksOnCommand to execute the tasks_on operation
      */
-    private static TasksOnCommand parseTasksOn(String input, TaskList taskList) {
+    private static TasksOnCommand parseTasksOn(String input) {
         try {
             String[] parsedString = input.split("\\s", 2);
             LocalDate date = DateTimeParser.deadlineDateParse(parsedString[1].trim());
