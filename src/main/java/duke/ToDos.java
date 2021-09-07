@@ -15,7 +15,7 @@ public class ToDos extends Task {
      */
     public ToDos(String title) {
         super(title);
-        this.type = "T";
+        type = "T";
     }
 
     @Override
