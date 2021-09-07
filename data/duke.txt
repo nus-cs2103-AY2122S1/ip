@@ -1,5 +1,5 @@
 T/1/sleep
 T/1/eat
-T/1/yippee
-T/1/bye
-T/1/heyo
+E/1/syf/03/12/2020 10:00-10:45
+N/heyo
+N/help sis

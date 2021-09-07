@@ -4,7 +4,8 @@ import duke.tasks.Task;
 import duke.tasks.ToDo;
 import duke.tasks.Event;
 import duke.tasks.Deadline;
-
+import duke.notes.Note;
+import duke.notes.NotesList;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -193,5 +194,21 @@ public class Ui {
         String responseToFind = "\tInvalid command!";
         System.out.println(responseToFind);
         return responseToFind;
+    }
+
+    public String respondToNote(ArrayList<Note> notes, Note note) {
+        String responseToNote = "\t" + "Got it. I've added this note: " + "\n\t\t" + note.toString() +
+                "\n\tNow you have " + Integer.toString(notes.size()) + " notes in the list.";
+        System.out.println(responseToNote);
+        return responseToNote;
+    }
+
+    public String respondToNotesList(ArrayList<Note> notes) {
+        String responseToNotesList = "Here are the notes in your list:";
+        for (int i = 0; i < notes.size(); i++) {
+            responseToNotesList = responseToNotesList + "\n" + Integer.toString(i + 1) + "." + notes.get(i).toString();
+        }
+        System.out.println(responseToNotesList);
+        return responseToNotesList;
     }
 }

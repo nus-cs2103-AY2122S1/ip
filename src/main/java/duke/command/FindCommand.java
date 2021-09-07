@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
+import duke.notes.NotesList;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -24,6 +25,16 @@ public class FindCommand extends Command {
         }
         return ui.respondToFind(foundTasks);
     }
+
+    @Override
+    public String execute(NotesList notes, Ui ui, Storage storage) {
+        return "";
+    };
+
+    @Override
+    public Boolean isTaskRelatedCommand() {
+        return true;
+    };
 
     @Override
     public Boolean isExit() {

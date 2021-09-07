@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
+import duke.notes.NotesList;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -22,6 +23,16 @@ public class DeleteCommand extends Command {
         storage.rewriteFile(tasks.getTasks());
         return ui.respondToDelete(tasks.getTasks(), task);
     }
+
+    @Override
+    public String execute(NotesList notes, Ui ui, Storage storage) {
+        return "";
+    };
+
+    @Override
+    public Boolean isTaskRelatedCommand() {
+        return true;
+    };
 
     @Override
     public Boolean isExit() {

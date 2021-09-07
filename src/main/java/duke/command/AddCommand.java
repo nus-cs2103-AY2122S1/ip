@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Ui;
 import duke.Storage;
+import duke.notes.NotesList;
 import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 import duke.tasks.Deadline;
@@ -22,11 +23,12 @@ public class AddCommand extends Command {
             String[] parsedCommand = command.split(" ", 2);
             Integer lengthOfCommand = parsedCommand.length;
             String typeOfIncompleteTask = command.split(" ", 2)[0];
-            String descriptionOfTask = command.split(" ", 2)[1];
+            //String descriptionOfTask = command.split(" ", 2)[1];
             if(typeOfTask.equals("todo")) {
                 if(lengthOfCommand == 1) {
                     ToDo todo = new ToDo(typeOfIncompleteTask);
                 } else {
+                    String descriptionOfTask = command.split(" ", 2)[1];
                     ToDo todo = new ToDo(descriptionOfTask);
                     tasks.addTask(todo);
                     storage.appendToFile(todo);
@@ -36,6 +38,7 @@ public class AddCommand extends Command {
                 if (lengthOfCommand == 1) {
                     Deadline deadline = new Deadline(typeOfIncompleteTask, "");
                 } else {
+                    String descriptionOfTask = command.split(" ", 2)[1];
                     String descriptionOfDeadline = descriptionOfTask.split(" /")[0];
                     String by = command.split("/by ")[1];
                     Deadline deadline = new Deadline(descriptionOfDeadline, by);
@@ -62,6 +65,16 @@ public class AddCommand extends Command {
         }
         return "";
     }
+
+    @Override
+    public String execute(NotesList notes, Ui ui, Storage storage) {
+        return "";
+    };
+
+    @Override
+    public Boolean isTaskRelatedCommand() {
+        return true;
+    };
 
     @Override
     public Boolean isExit() {

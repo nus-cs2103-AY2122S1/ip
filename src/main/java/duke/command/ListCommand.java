@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
+import duke.notes.NotesList;
 import duke.tasks.TaskList;
 
 
@@ -15,6 +16,16 @@ public class ListCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         return ui.respondToList(tasks.getTasks());
     }
+
+    @Override
+    public String execute(NotesList notes, Ui ui, Storage storage) {
+        return "";
+    };
+
+    @Override
+    public Boolean isTaskRelatedCommand() {
+        return true;
+    };
 
     @Override
     public Boolean isExit() {

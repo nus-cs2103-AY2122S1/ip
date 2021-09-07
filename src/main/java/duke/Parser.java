@@ -16,24 +16,34 @@ public class Parser {
      * @return Parsed command.
      */
     public static Command parse(String command) {
+        String firstWord = command.split(" ")[0];
+        //String secondWord = command.split(" ")[1];
+        //String secondPhrase = command.split(" ", 2)[1];
         if(command.equals("bye")) {
             return new ExitCommand(command);
         } else if(command.equals("list")) {
             return new ListCommand(command);
         } else if(command.equals("blah")) {
             return new BlahCommand(command);
-        } else if(command.split(" ")[0].equals("done")) {
-            String taskNumber = command.split(" ")[1];
+        } else if(firstWord.equals("done")) {
+            String secondWord = command.split(" ")[1];
+            String taskNumber = secondWord;
             return new DoneCommand(taskNumber);
-        } else if(command.split(" ")[0].equals("delete")) {
-            String taskNumber = command.split(" ")[1];
+        } else if(firstWord.equals("delete")) {
+            String secondWord = command.split(" ")[1];
+            String taskNumber = secondWord;
             return new DeleteCommand(taskNumber);
-        } else if(command.split(" ", 2)[0].equals("find")) {
-            String input = command.split(" ", 2)[1];
+        } else if(firstWord.equals("find")) {
+            String secondPhrase = command.split(" ", 2)[1];
+            String input = secondPhrase;
             return new FindCommand(input);
-        } else if(command.split(" ")[0].equals("todo") || command.split(" ")[0].equals("event")
-                || command.split(" ")[0].equals("deadline")) {
+        } else if(firstWord.equals("todo") || firstWord.equals("event")
+                || firstWord.equals("deadline")) {
             return new AddCommand(command);
+        } else if(firstWord.equals("note")) {
+            return new AddNoteCommand(command);
+        } else if(command.equals("List of Notes")) {
+            return new ListNoteCommand(command);
         } else {
             assert false;
             return null;
