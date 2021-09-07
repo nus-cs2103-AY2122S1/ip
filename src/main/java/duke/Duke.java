@@ -42,6 +42,7 @@ public class Duke {
             String fullCommand = "";
             try {
                 fullCommand = ui.readCommand();
+                assert !fullCommand.equals("") : "fullCommand should not be empty";
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
