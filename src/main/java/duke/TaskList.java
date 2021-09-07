@@ -98,6 +98,7 @@ public class TaskList {
                 Task task;
                 if (str.startsWith("todo")) {
                     task = new ToDos(str.substring(5));
+                    assert task != null: "Task must not be null here";
                     list.add(task);
                 } else if (str.startsWith("deadline")) {
                     String[] message = str.split("/by ");
@@ -105,6 +106,7 @@ public class TaskList {
                         throw new InvalidTaskException();
                     } else {
                         task = new Deadline(message[0].substring(9), message[1]);
+                        assert task != null: "Task must not be null here";
                         list.add(task);
                     }
                 } else {
@@ -113,6 +115,7 @@ public class TaskList {
                         throw new InvalidTaskException();
                     } else {
                         task = new Events(message[0].substring(6), message[1]);
+                        assert task != null: "Task must not be null here";
                         list.add(task);
                     }
                 }

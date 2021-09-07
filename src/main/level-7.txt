@@ -1,4 +1,5 @@
-T | 1 | hello
-T | 1 | bbabi
 T | 1 | dance
-T | 0 | fly
+T | 1 | fly
+T | 0 | buy a house
+T | 0 | sing
+T | 0 | hello

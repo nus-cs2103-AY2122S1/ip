@@ -22,6 +22,7 @@ public class Duke {
         storage = new Storage(".\\src\\main\\level-7.txt");
         try {
             tasks = new TaskList(storage.load());
+            assert tasks != null: "tasks shouldnt be null here!";
         } catch (DukeException e) {
             System.out.println("RESET!");
             tasks = new TaskList();
@@ -39,7 +40,6 @@ public class Duke {
     @FXML
     String getResponse(String input) {
         String result = "";
-
         if (input.equals("bye")) {
             result += "Babai! See you again soon! XD";
         } else if (input.equals("list")) {
@@ -76,6 +76,7 @@ public class Duke {
         } catch (IOException e) {
             return "File failed to load!";
         }
+        assert result != null: "result cannot be null here!";
         return result;
     }
 }
