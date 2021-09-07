@@ -2,7 +2,7 @@ package duke.exceptions;
 
 /**
  * Class of exception that handles marking task
- * number greater than number of task available as done
+ * number greater than number of task available as done.
  */
 public class DoneOutOfBoundsException extends DukeException {
     

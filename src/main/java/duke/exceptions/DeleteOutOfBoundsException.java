@@ -1,8 +1,8 @@
 package duke.exceptions;
 
 /**
- * Class of exception that handles deleting task 
- * number greater than number odf task available
+ * Class of exception that handles deleting task
+ * number greater than number odf task available.
  */
 public class DeleteOutOfBoundsException extends DukeException {
 

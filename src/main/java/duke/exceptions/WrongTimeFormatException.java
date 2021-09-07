@@ -1,7 +1,7 @@
 package duke.exceptions;
 
-/** Class of exception that handles marking task.
- *  with a wrong format of time
+/** Class of exception that handles marking task
+ *  with a wrong format of time.
  */
 public class WrongTimeFormatException extends DukeException {
 
