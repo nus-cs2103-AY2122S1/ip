@@ -32,9 +32,9 @@ public class Ui {
     }
 
     public static String getWelcomeMessage() {
-        String welcome = "Hello! I'm duke.Duke. A friendly chatbot!! :)\n"
+        String welcome = "Hello! I'm Duke. A friendly chatbot!! :)\n"
                 + "What can I do for you?\n";
-        return (DIVIDER + "\n" + LOGO + "\n" + welcome + DIVIDER);
+        return ("\n" + welcome);
     }
 
     public void showGoodbyeMessage() {

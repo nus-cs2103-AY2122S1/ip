@@ -3,6 +3,7 @@ package duke;
 import java.io.IOException;
 import java.util.Collections;
 
+import duke.tools.Ui;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -34,9 +35,15 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
         displayPicture.setImage(img);
+    }
+
+    public static Node getDukeGreeting(Image dukeImage) {
+        String greeting = Ui.getWelcomeMessage();
+        DialogBox db = new DialogBox(greeting, dukeImage);
+        db.flip();
+        return db;
     }
 
     /**
