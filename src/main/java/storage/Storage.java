@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import model.Tag;
 import parser.Parser;
 import task.Deadline;
 import task.Event;
@@ -127,6 +128,17 @@ public class Storage {
                     if (isDone) {
                         todoTask.markDone();
                     }
+
+
+
+                    String[] tagsArr = Parser.sanitizeInput(new String(Base64.getDecoder().decode(dataArr[3])));
+                    if (!tagsArr[0].equals("None")) {
+                        for (int i = 0; i < tagsArr.length; i++) {
+                            String tag = tagsArr[i];
+                            todoTask.addTag(new Tag(tag));
+                        }
+                    }
+
                     taskList.add(todoTask);
                 }
             }

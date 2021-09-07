@@ -61,6 +61,19 @@ public class Task {
         return this.isDone;
     }
 
+    public String getTags() {
+        if (tags.isEmpty()) {
+            return "None";
+        }
+
+        List<String> tagNameList = this.tags.stream().map(tag -> {
+            return tag.getTagName();
+        }).collect(Collectors.toList());
+
+        String tags = String.join(" ", tagNameList);
+        return tags;
+    }
+
 
     public void addTag(Tag tag) {
         this.tags.add(tag);
@@ -86,9 +99,8 @@ public class Task {
             taskTags += "None";
         }
 
-        String message = String.format("[%s] %s.\n%s",
+        String message = String.format("[%s] %s\n          %s\n",
                 this.getStatusIcon(), this.description, taskTags);
-
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return message;
     }
 }

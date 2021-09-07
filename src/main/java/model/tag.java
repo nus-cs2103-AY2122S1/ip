@@ -55,6 +55,10 @@ public class Tag {
         return '[' + tagName + ']';
     }
 
+    public String getTagName() {
+        return this.tagName;
+    }
+
 
     /**
      * Checks that {@code condition} is true. Used for validating arguments to methods.

@@ -4,6 +4,7 @@ import java.util.Base64;
 
 import task.Deadline;
 import task.Event;
+import task.Task;
 import task.Todo;
 
 /**
@@ -74,9 +75,16 @@ public class Parser {
         String encodedString = Base64.getEncoder()
                 .encodeToString(todoTask.getDescription().getBytes());
 
+        String encodedTags = Base64.getEncoder()
+                .encodeToString(todoTask.getTags().getBytes());
+
         String dbEntry = "todo " + todoTask.getIsDone()
-                + " " + encodedString;
+                + " " + encodedString + " " + encodedTags;
 
         return dbEntry;
+    }
+
+    public static Task addTags(Task task) {
+        return task;
     }
 }
