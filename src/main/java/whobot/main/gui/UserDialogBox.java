@@ -33,8 +33,7 @@ public class UserDialogBox extends HBox {
     }
 
     public static UserDialogBox getDialog(String text) {
-        var db = new UserDialogBox(text);
-        return db;
+        return new UserDialogBox(text);
     }
 
 }

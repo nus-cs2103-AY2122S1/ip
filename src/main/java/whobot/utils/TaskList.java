@@ -241,14 +241,10 @@ public class TaskList {
             LocalDate date = LocalDate.parse(command.split(" /on ")[1], DateTimeFormatter.ofPattern("d/M/yyyy"));
             ArrayList<Task> tasksToDisplay = new ArrayList<>();
             for (Task tempTask : list) {
-                if (tempTask instanceof Deadline) {
-                    if (((Deadline) tempTask).getDeadline().toLocalDate().equals(date)) {
-                        tasksToDisplay.add(tempTask);
-                    }
-                } else if (tempTask instanceof Event) {
-                    if (((Event) tempTask).getTiming().toLocalDate().equals(date)) {
-                        tasksToDisplay.add(tempTask);
-                    }
+                if (tempTask instanceof Deadline && ((Deadline) tempTask).getDeadline().toLocalDate().equals(date)) {
+                    tasksToDisplay.add(tempTask);
+                } else if (tempTask instanceof Event && ((Event) tempTask).getTiming().toLocalDate().equals(date)) {
+                    tasksToDisplay.add(tempTask);
                 }
             }
             String dateString = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));

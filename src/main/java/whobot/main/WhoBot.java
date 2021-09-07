@@ -40,7 +40,8 @@ public class WhoBot {
         this.parser = new Parser();
         this.ui = new UI();
         try {
-            this.storage = new Storage("." + File.separator + "data" + File.separator + "WhoBotData.txt");
+            String filename = "." + File.separator + "data" + File.separator + "WhoBotData.txt";
+            this.storage = new Storage(filename);
             this.taskList = new TaskList(storage);
         } catch (WhoBotException ex) {
             ui.echo(ex.getMessage(), UI.Type.ERROR);

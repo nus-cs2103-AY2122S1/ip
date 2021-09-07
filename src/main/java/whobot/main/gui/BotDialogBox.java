@@ -52,6 +52,7 @@ public class BotDialogBox extends HBox {
         dialog.setText("");
         final IntegerProperty i = new SimpleIntegerProperty(0);
         Timeline timeline = new Timeline();
+
         KeyFrame keyFrame = new KeyFrame (
                 Duration.millis(delay), event -> {
             if (i.get() > text.length()) {
@@ -61,6 +62,7 @@ public class BotDialogBox extends HBox {
                 i.set(i.get() + 1);
             }
         });
+
         timeline.getKeyFrames().add(keyFrame);
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();

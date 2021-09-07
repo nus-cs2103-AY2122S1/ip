@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import whobot.main.Gui;
 import whobot.main.UI;
 
 public class DisplayBuffer {
@@ -70,18 +71,22 @@ public class DisplayBuffer {
      * Displays Lines in Buffer
      */
     public static void printBuffer() {
-        double delay = charCount > 150 ? 20.0 : 50.0;
+        long delay = charCount > Gui.getShortTextLimit()
+                ? Gui.getLongTextDelay()
+                : Gui.getShortTextDelay();
 
-        new Thread(() -> {
+        Thread printThread = new Thread(() -> {
             userInput.setDisable(true);
             sendButton.setDisable(true);
             int i = 0;
             if (!buffer.isEmpty()) {
                 int finalI = i;
-                Platform.runLater(() ->
-                        parent.getChildren().add(BotDialogBox.getDialog(buffer.get(finalI), false, delay)));
+                Platform.runLater(() -> {
+                    BotDialogBox dialogBox = BotDialogBox.getDialog(buffer.get(finalI), false, delay);
+                    parent.getChildren().add(dialogBox);
+                });
                 try {
-                    Thread.sleep((long) (delay * buffer.get(i).length()));
+                    Thread.sleep(delay * buffer.get(i).length());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -92,13 +97,14 @@ public class DisplayBuffer {
                 for (; i < buffer.size(); i++) {
                     int finalI1 = i;
                     Platform.runLater((() -> {
-                        parent.getChildren().add(BotDialogBox.getDialog(buffer.get(finalI1), true, delay));
+                        BotDialogBox dialogBox = BotDialogBox.getDialog(buffer.get(finalI1), true, delay);
+                        parent.getChildren().add(dialogBox);
                         if (finalI1 == buffer.size() - 1) {
                             buffer.removeIf(c -> true);
                         }
                     }));
                     try {
-                        Thread.sleep((long) (delay * buffer.get(i).length()));
+                        Thread.sleep(delay * buffer.get(i).length());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -112,6 +118,7 @@ public class DisplayBuffer {
                 userInput.setDisable(false);
                 sendButton.setDisable(false);
             }
-        }).start();
+        });
+        printThread.start();
     }
 }
