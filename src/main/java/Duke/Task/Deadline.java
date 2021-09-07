@@ -9,22 +9,19 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private static final DateTimeFormatter inputDateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private static final DateTimeFormatter outputDateFormat = DateTimeFormatter.ofPattern("MMM d yyyy");
-    /**
-     * The deadline in day.
-     */
-    protected LocalDate by;
+
+    protected LocalDate date;
 
 
     /**
      * Constructs a instance of Deadline that consist of its details and deadline in day.
      *
      * @param taskDetails Description of the task
-     * @param by day in dd/MM/yyyy
+     * @param date day in dd/MM/yyyy
      */
-    public Deadline(String taskDetails, String by) {
+    public Deadline(String taskDetails, String date) {
         super(taskDetails);
-        LocalDate byDate = LocalDate.parse(by, inputDateFormat);
-        this.by = byDate;
+        this.date = LocalDate.parse(date, inputDateFormat);
     }
 
     /**
@@ -34,7 +31,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String outputDate = this.by.format(outputDateFormat);
+        String outputDate = this.date.format(outputDateFormat);
         return "[D]" + super.toString() + " (by: " + outputDate + ")";
     }
 
@@ -50,6 +47,6 @@ public class Deadline extends Task {
             completeBinary = 1;
         }
         return "D" + " | " + completeBinary + " | " + this.taskDetails + " | "
-                + this.by.format(inputDateFormat);
+                + this.date.format(inputDateFormat);
     }
 }
