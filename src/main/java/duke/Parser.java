@@ -19,11 +19,12 @@ public class Parser {
      * @param userInput what the user inputted into Duke.
      */
     public static String evaluateUserInput(String userInput) {
-        boolean isQuitDuke = userInput.equals("bye");
-        boolean isListRequest = userInput.equals("list");
+        boolean isQuitDuke = userInput.equals("bye") || userInput.equals("b");
+        boolean isListRequest = userInput.equals("list") || userInput.equals("l");
         boolean isTaskCompleted = userInput.startsWith("done");
-        boolean isRemoveTask = userInput.startsWith("delete");
-        boolean isFindTask = userInput.startsWith("find");
+        boolean isRemoveTask = userInput.startsWith("delete") || userInput.startsWith("del ") ||
+                userInput.startsWith("rm ");
+        boolean isFindTask = userInput.startsWith("find") || userInput.startsWith("f ");
 
         if (isQuitDuke) {
             TaskList.markTasksSaved();

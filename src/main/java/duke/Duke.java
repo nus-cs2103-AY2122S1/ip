@@ -63,7 +63,7 @@ public class Duke extends Application {
                 Files.createFile(storagePath);
             }
 
-            TASKS = new TaskList(storage.load());
+            TASKS = new TaskList(Storage.load());
         } catch (IOException e) {
             System.out.println("Failed to create storage file: " +
                     e.getMessage());

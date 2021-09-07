@@ -26,7 +26,11 @@ public class Deadline extends Task {
             return temp;
         }
 
-        temp = temp.replace("deadline ", "");
+        if (temp.startsWith("d ")) {
+            temp = temp.replace("d", "");
+        } else {
+            temp = temp.replace("deadline ", "");
+        }
 
         // Obtain the time and date of the deadline
         String oldDate = temp.substring(temp.lastIndexOf("by") + 3);

@@ -22,7 +22,13 @@ public class ToDo extends Task {
      */
     @Override
     public String getDescription() {
-        return super.getDescription().replace("todo ", "");
+        String description = super.getDescription();
+        if (description.startsWith("t ")) {
+            description = description.replace("t ", "");
+        } else {
+            description = description.replace("todo ", "");
+        }
+        return description;
     }
 
     /**

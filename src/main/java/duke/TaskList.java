@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -29,9 +31,9 @@ public class TaskList {
      * @param userInput Line of user input which contains the task.
      */
     public static String addTask(String userInput) {
-        boolean isDeadLine = userInput.startsWith("deadline");
-        boolean isEvent = userInput.startsWith("event");
-        boolean isToDo = userInput.startsWith("todo");
+        boolean isDeadLine = userInput.startsWith("deadline") || userInput.startsWith("d ");
+        boolean isEvent = userInput.startsWith("event") || userInput.startsWith("e ");
+        boolean isToDo = userInput.startsWith("todo") || userInput.startsWith("t ");
         boolean isCorrectDeadlineFormat = userInput.contains("by");
         boolean isCorrectEventFormat = userInput.contains("at");
 
@@ -100,7 +102,17 @@ public class TaskList {
      */
     public static String removeTask(String userInput) {
         try {
-            String index = userInput.substring(7);
+            String index;
+
+            // Users may use delete, del or rm to remove tasks.
+            if (userInput.startsWith("delete")) {
+                index = userInput.substring(7);
+            } else if (userInput.startsWith("del")) {
+                index = userInput.substring(4);
+            } else {
+                index = userInput.substring(3);
+            }
+
             int x = Integer.parseInt(index);
             Task temp = contents.get(x - 1);
             contents.remove(temp);
@@ -129,7 +141,15 @@ public class TaskList {
      */
     public static String findTask(String userInput) {
         try {
-            String keyword = userInput.substring(5);
+            String keyword;
+            if (userInput.startsWith("f")) {
+                keyword = userInput.substring(2);
+            } else {
+                keyword = userInput.substring(5);
+            }
+
+            assert keyword != null : "Keyword should not be empty";
+
             ArrayList<Task> matchingList = new ArrayList<>();
             int counter = 0;
             for (Task x : contents) {

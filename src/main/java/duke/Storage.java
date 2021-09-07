@@ -67,7 +67,7 @@ public class Storage {
      *
      * @return ArrayList to be stored in TaskList.
      */
-    public ArrayList<Task> load() throws FileNotFoundException {
+    public static ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> newList = new ArrayList<>();
         File newFile = new File(filePath);
         Scanner readFile = new Scanner(newFile);

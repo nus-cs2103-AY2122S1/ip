@@ -26,7 +26,12 @@ public class Event extends Task {
         if (temp.endsWith(")")) {
             return temp;
         }
-        temp = temp.replace("event ", "");
+
+        if (temp.startsWith("e ")) {
+            temp = temp.replace("e ", "");
+        } else {
+            temp = temp.replace("event ", "");
+        }
 
         // Obtain the time and date of the Event
         String oldDate = temp.substring(temp.lastIndexOf("at") + 3);
