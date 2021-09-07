@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 /**
  * Handles interactions with user through message outputs.
@@ -82,11 +83,10 @@ public class Ui {
         } else {
             StringBuilder sb = new StringBuilder();
             sb.append("Here are the matching tasks in your list:\n");
-            int num = 1;
-            for (Task task : matchingTaskList) {
-                sb.append(String.format("%d.%s%n", num, task));
-                num++;
-            }
+
+            IntStream.range(0, matchingTaskList.size())
+                    .forEach(i -> sb.append(String.format("%d.%s%n", i, matchingTaskList.get(i))));
+
             return sb.toString();
         }
     }
@@ -103,11 +103,10 @@ public class Ui {
         } else {
             StringBuilder sb = new StringBuilder();
             sb.append("Here are tasks in your list:\n");
-            int num = 1;
-            for (Task task : taskList) {
-                sb.append(String.format("%d.%s%n", num, task));
-                num++;
-            }
+
+            IntStream.range(0, taskList.size())
+                    .forEach(i -> sb.append(String.format("%d.%s%n", i, taskList.get(i))));
+
             return sb.toString();
         }
     }

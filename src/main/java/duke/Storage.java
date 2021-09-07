@@ -63,6 +63,7 @@ public class Storage {
      * @param textToAdd new text that will be added to the file.
      */
     public void appendToFile(String textToAdd) {
+        assert !textToAdd.isEmpty(): "Text to add cannot be blank!";
         try {
             FileWriter fw = new FileWriter(filePath, true);
             fw.write(textToAdd);
@@ -80,6 +81,7 @@ public class Storage {
      * @param lineNumber denotes the line number of the line that needs to be replaced.
      */
     public void replaceFileLine(String textToReplaceWith, int lineNumber) {
+        assert !textToReplaceWith.isEmpty(): "Text to replace with cannot be blank!";
         try {
             Path path = Paths.get(filePath);
             List<String> lines = Files.readAllLines(path);
