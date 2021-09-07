@@ -26,10 +26,7 @@ public class CreateNewToDoCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.add(new ToDo(super.getExtraInput()));
-        return "Alright, I've added the following task:\n"
-                + "      " + taskList.get(taskList.size() - 1) + "\n      Now you have " + taskList.size()
-                + " tasks in the list.\n";
+        return taskList.add(new ToDo(super.getExtraInput()));
     }
 
     /**
@@ -40,7 +37,11 @@ public class CreateNewToDoCommand extends Command {
      */
     @Override
     public boolean equals(Object o) {
-        return o instanceof CreateNewToDoCommand
-                && super.getExtraInput().equals(((CreateNewToDoCommand) o).getExtraInput());
+        if (o instanceof CreateNewToDoCommand) {
+            // Compares the 2 extraInputs
+            String oExtraInput = ((CreateNewToDoCommand) o).getExtraInput();
+            return super.getExtraInput().equals(oExtraInput);
+        }
+        return false;
     }
 }
