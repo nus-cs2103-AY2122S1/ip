@@ -13,6 +13,7 @@ import exception.DescriptionException;
 import exception.DukeException;
 import exception.InvalidCommandException;
 import exception.TaskNumberException;
+import model.Tag;
 import parser.Parser;
 import storage.Storage;
 import task.Deadline;
@@ -177,11 +178,33 @@ public class TaskList {
             throw new DescriptionException("todo");
         }
 
-        String[] descriptionArray = Arrays.copyOfRange(inputArr, 1, inputArr.length);
+        int tagStart = 0;
+        for (int i = inputArr.length - 1; i >=0; i--) {
+            String currentString = inputArr[i];
+            if (currentString.charAt(0) == '#') {
+                tagStart = i;
+            }
+        }
+
+        String[] descriptionArray;
+        if (tagStart == 0) {
+            descriptionArray = Arrays.copyOfRange(inputArr, 1, inputArr.length);
+        } else {
+            descriptionArray = Arrays.copyOfRange(inputArr, 1, tagStart);
+        }
 
         String description = String.join(" ", descriptionArray);
 
         Todo todoTask = new Todo(description);
+
+        if (tagStart != 0) {
+            for (int j = tagStart; j < inputArr.length; j++) {
+                String tag = inputArr[j].substring(1, inputArr[j].length());
+                Tag currentTag = new Tag(tag);
+                todoTask.addTag(currentTag);
+            }
+        }
+
         this.taskList.add(todoTask);
         messages.taskAddMessage(todoTask.toString(), this.taskList.size());
     }
