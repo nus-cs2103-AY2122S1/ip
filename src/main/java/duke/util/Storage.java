@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.ui.Ui;
 import task.Task;
 import task.TaskDeadline;
 import task.TaskEvent;
@@ -16,7 +17,7 @@ import task.TaskList;
 import task.TaskTodo;
 
 /**
- * Contains all storage functions for Duke
+ * Contains all storage functions for Duke.
  */
 public class Storage {
 
@@ -25,7 +26,7 @@ public class Storage {
 
     /**
      * Saves the task list to a .txt file whose path
-     * is specified as FILE_LOCATION
+     * is specified as FILE_LOCATION.
      *
      * @param tasks task list to save
      */
@@ -44,7 +45,7 @@ public class Storage {
 
     /**
      * Loads a .txt file from the path
-     * specified as FILE_LOCATION
+     * specified as FILE_LOCATION.
      *
      * @return Loaded task list
      */
@@ -62,12 +63,9 @@ public class Storage {
             return new TaskList(loaded);
 
         } catch (FileNotFoundException e) {
-            System.out.println("Save file not found, creating new file");
+            System.out.println(Ui.MESSAGE_FILE_NOT_FOUND);
             // Create directory if doesn't exist
-            File directory = new File(PATH_LOCATION);
-            if (!directory.exists()) {
-                directory.mkdir();
-            }
+            createDirectory();
             return new TaskList();
 
         } catch (ParseException | IllegalArgumentException e) {
@@ -77,7 +75,17 @@ public class Storage {
     }
 
     /**
-     * Converts a given string for the txt save file to a valid Task
+     * Create a directory for the save file if non-existent.
+     */
+    private static void createDirectory() {
+        File directory = new File(PATH_LOCATION);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+    }
+
+    /**
+     * Converts a given string for the txt save file to a valid Task.
      *
      * @param task String from txt save file
      * @return task.Task corresponding to the string
@@ -102,10 +110,10 @@ public class Storage {
                         ? new TaskEvent(args[2], LocalDate.parse(args[3]), null, !args[1].equals("0"))
                         : new TaskEvent(args[2], LocalDate.parse(args[3]), args[4], !args[1].equals("0"));
             default:
-                throw new ParseException("Failed to read task; file not read", 0);
+                throw new ParseException(Ui.MESSAGE_INVALID_ARG + Ui.MESSAGE_FILE_NOT_READ, 0);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new ParseException("Invalid task found; file not read", 0);
+            throw new ParseException(Ui.MESSAGE_INVALID_ARG + Ui.MESSAGE_FILE_NOT_READ, 0);
         }
     }
 }

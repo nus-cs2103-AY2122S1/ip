@@ -1,22 +1,22 @@
 package duke.command;
 
 import java.time.format.DateTimeParseException;
-import java.util.regex.Matcher;
 
+import duke.ui.Ui;
 import task.TaskDeadline;
 import task.TaskList;
 
 /**
- * Command to add a deadline
+ * Command to add a deadline.
  */
 public class CommandAddDeadline extends Command {
     private final TaskList taskList;
     private final String[] input;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param taskList Task list
+     * @param taskList Task list to add to
      * @param input Array with info needed to create the class
      */
     public CommandAddDeadline(TaskList taskList, String[] input) {
@@ -33,7 +33,7 @@ public class CommandAddDeadline extends Command {
     }
 
     /**
-     * Adds a deadline to the task list if valid
+     * Adds a deadline to the task list if valid.
      */
     @Override
     public String execute() {
@@ -44,7 +44,7 @@ public class CommandAddDeadline extends Command {
                     input[2],
                     false));
         } catch (DateTimeParseException e) {
-            return "Please enter a valid date! :(";
+            return Ui.MESSAGE_INVALID_DATE;
         }
     }
 }

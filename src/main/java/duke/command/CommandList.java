@@ -5,11 +5,12 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
+import duke.ui.Ui;
 import task.Task;
 import task.TaskList;
 
 /**
- * Command to list out tasks
+ * Command to list out tasks.
  */
 public class CommandList extends Command {
 
@@ -17,10 +18,10 @@ public class CommandList extends Command {
     private final String args;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param taskList task list to list
-     * @param args un-parsed list of filters
+     * @param taskList Task list to list
+     * @param args Un-parsed list of filters
      */
     public CommandList(TaskList taskList, String args) {
         this.commandName = "list /name <name> /date DD/MM/YYYY";
@@ -36,31 +37,30 @@ public class CommandList extends Command {
     }
 
     /**
-     * Lists out tasks based on given filters
+     * Lists out tasks based on given filters.
      */
     @Override
     public String execute() {
-        // List tasks
-        if (args != null) {
-            // Extract modifiers and filter
-            try {
-                ArrayList<Predicate<Task>> filters = listStringToFilter(args);
-                return taskList.displayList(filters);
-            } catch (DateTimeParseException e) {
-                return "Please enter a valid date! :(";
-            } catch (IllegalArgumentException e) {
-                return e.getMessage();
-            }
-        } else {
-            // Display items
+        if (args == null) {
+            // Display all if no filters
             ArrayList<Predicate<Task>> filter = new ArrayList<>();
             filter.add(task -> true);
             return taskList.displayList(filter);
         }
+
+        // Extract modifiers and filter
+        try {
+            ArrayList<Predicate<Task>> filters = listStringToFilter(args);
+            return taskList.displayList(filters);
+        } catch (DateTimeParseException e) {
+            return Ui.MESSAGE_INVALID_DATE;
+        } catch (IllegalArgumentException e) {
+            return e.getMessage();
+        }
     }
 
     /**
-     * Gets arguments from a multi-argument string
+     * Gets arguments from a multi-argument string.
      *
      * @param stringToParse String to parse
      * @return Arraylist with all filters to use to display list
@@ -85,7 +85,7 @@ public class CommandList extends Command {
             // Ensure validity; has a command and an argument
             int index = str.indexOf(' ');
             if (index == -1) {
-                throw new IllegalArgumentException("Invalid argument found!");
+                throw new IllegalArgumentException(Ui.MESSAGE_INVALID_ARG);
             }
 
             // Get command and argument information
@@ -101,7 +101,7 @@ public class CommandList extends Command {
                 results.add(task -> task.isDate(date));
                 break;
             default:
-                throw new IllegalArgumentException("Invalid argument found! :(");
+                throw new IllegalArgumentException(Ui.MESSAGE_INVALID_ARG);
             }
         }
 

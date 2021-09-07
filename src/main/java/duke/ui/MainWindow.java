@@ -31,6 +31,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage;
     private Image dukeImage;
 
+    /**
+     * Initialise the main window.
+     */
     @FXML
     public void initialize() {
         assert this.getClass().getResourceAsStream(USER_IMAGE_LOCATION) != null:" User Image not found";
@@ -62,8 +65,13 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Display the welcome message upon startup of the app.
+     */
     private void startUp() {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.introMessage(), dukeImage));
+        dialogContainer
+                .getChildren()
+                .add(DialogBox.getDukeDialog(Ui.introMessage(), dukeImage));
     }
 
 }
