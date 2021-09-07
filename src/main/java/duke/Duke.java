@@ -1,7 +1,9 @@
 package duke;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 
@@ -204,14 +206,18 @@ public class Duke {
      * @return The TaskType enum of the task.
      */
     public static Task.TaskType convertToTaskType(String command) {
-        if (command.equals("todo")) {
+        switch (command) {
+        case "todo":
             return Task.TaskType.TODO;
-        } else if (command.equals("event")) {
+        case "event":
             return Task.TaskType.EVENT;
-        } else {
+        case "deadline":
             return Task.TaskType.DEADLINE;
+        default:
+            return Task.TaskType.NULL;
         }
     }
+
 
     /**
      * Main method for Duke.

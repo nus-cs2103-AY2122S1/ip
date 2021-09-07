@@ -11,7 +11,8 @@ public class Task {
     public enum TaskType {
         TODO,
         EVENT,
-        DEADLINE
+        DEADLINE,
+        NULL
     }
 
     /**
