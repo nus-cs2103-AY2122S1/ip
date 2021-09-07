@@ -84,6 +84,7 @@ public class Storage implements IStorage {
      * @param task Add a new task to storage.
      */
     public void addTask(Task task) {
+        assert task != null;
         this.list.addTask(task);
         writeTaskListToFile();
     }
