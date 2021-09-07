@@ -205,7 +205,6 @@ public class Duke extends Application {
                 assert input.substring(6).length() == 1 : "There should be an index";
 
                 String keyword = input.substring(5);
-                storage.save(SL);
                 return SL.findAndReturn(keyword);
 
             } else {
