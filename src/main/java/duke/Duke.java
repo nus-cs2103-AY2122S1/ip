@@ -26,7 +26,7 @@ public class Duke {
      * @return Task list of the current instance.
      */
     public TaskList getList() {
-        return this.list;
+        return list;
     }
 
     /**

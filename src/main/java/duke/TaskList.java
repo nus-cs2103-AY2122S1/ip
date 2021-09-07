@@ -12,7 +12,7 @@ import duke.task.Task;
  */
 public class TaskList {
     private static final String STORAGE_PATH = "data/duke.txt";
-    private List<Task> list = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
     private Storage storage;
 
     /**
@@ -21,8 +21,8 @@ public class TaskList {
     public TaskList() throws DukeException {
         try {
             // Load data from saved file, if present.
-            this.storage = new Storage(STORAGE_PATH);
-            list = storage.readFile();
+            storage = new Storage(STORAGE_PATH);
+            tasks = storage.readFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -34,8 +34,8 @@ public class TaskList {
      * @param task Task to be added to the list.
      */
     public void add(Task task) {
-        this.list.add(task);
-        this.save();
+        tasks.add(task);
+        save();
     }
 
     /**
@@ -45,7 +45,7 @@ public class TaskList {
      * @return Task at given index.
      */
     public Task get(int index) {
-        return this.list.get(index);
+        return tasks.get(index);
     }
 
     /**
@@ -55,8 +55,8 @@ public class TaskList {
      * @return Removed task.
      */
     public Task remove(int index) {
-        Task task = this.list.remove(index);
-        this.save();
+        Task task = tasks.remove(index);
+        save();
         return task;
     }
 
@@ -67,9 +67,9 @@ public class TaskList {
      * @return Task marked as done.
      */
     public Task setDone(int index) {
-        Task task = list.get(index);
+        Task task = tasks.get(index);
         task.setDone();
-        this.save();
+        save();
         return task;
     }
 
@@ -79,7 +79,7 @@ public class TaskList {
      * @return Number of tasks in the task list.
      */
     public int size() {
-        return this.list.size();
+        return tasks.size();
     }
 
     /**
@@ -89,10 +89,10 @@ public class TaskList {
      * @return task list containing only tasks that match search term.
      */
     public TaskList search(String searchTerm) throws DukeException {
-        List<Task> matches = list.stream().filter(task -> task.getName().contains(searchTerm))
+        List<Task> matches = tasks.stream().filter(task -> task.getName().contains(searchTerm))
                 .collect(Collectors.toList());
         TaskList output = new TaskList();
-        output.list = matches;
+        output.tasks = matches;
         return output;
     }
 
@@ -101,7 +101,7 @@ public class TaskList {
      */
     private void save() {
         try {
-            storage.save(this.list);
+            storage.save(tasks);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -115,10 +115,10 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
-        for (int i = 0; i < this.list.size(); i++) {
-            output.append(String.format("%d. %s", i + 1, this.list.get(i)));
+        for (int i = 0; i < tasks.size(); i++) {
+            output.append(String.format("%d. %s", i + 1, tasks.get(i)));
             // Append new line for all lines except last line.
-            if (i != this.list.size() - 1) {
+            if (i != tasks.size() - 1) {
                 output.append("\n");
             }
         }
