@@ -22,22 +22,6 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    /**
-     * Rewrites the .txt file to save the tasks when the user exits the bot.
-     *
-     * @param taskList The class that contains the list of tasks.
-     * @throws IOException Throws an exception if the I/O operations failed or are interrupted.
-     */
-    protected void rewriteFile(TaskList taskList) throws IOException {
-        StringBuilder newFileText = new StringBuilder();
-        for (Task task : taskList.getList()) {
-            newFileText.append(task.toString()).append("\n");
-        }
-        FileWriter fw = new FileWriter(filePath);
-        fw.write(String.valueOf(newFileText));
-        fw.close();
-    }
-
     protected void appendToFile(String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
         fw.write(textToAppend + "\n");
@@ -47,16 +31,16 @@ public class Storage {
     protected void deleteFromFile(String textToDelete) throws IOException {
         File file = new File(filePath);
         Scanner s = new Scanner(file);
-        String newFileText = "";
+        StringBuilder newFileText = new StringBuilder();
         while (s.hasNext()) {
             String line = s.nextLine();
             if (textToDelete.equals(line)) {
                 continue;
             }
-            newFileText += line + "\n";
+            newFileText.append(line).append("\n");
         }
         FileWriter fw = new FileWriter("src/main/java/data/Lawbringer.txt");
-        fw.write(newFileText);
+        fw.write(newFileText.toString());
         fw.close();
     }
 
@@ -70,8 +54,10 @@ public class Storage {
         List<Task> tasks = new ArrayList<>();
         File file = new File(filePath);
         if (!file.exists()) {
-            file.getParentFile().mkdirs();
-            file.createNewFile();
+            boolean isDirectoryCreated = file.getParentFile().mkdirs();
+            boolean isFileCreated = file.createNewFile();
+            assert isDirectoryCreated;
+            assert isFileCreated;
         }
         Scanner s = new Scanner(file);
         while (s.hasNext()) {
