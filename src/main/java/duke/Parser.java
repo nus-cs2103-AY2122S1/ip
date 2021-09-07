@@ -31,6 +31,10 @@ public class Parser {
         } else if (str.equals("list")) {
             return new ListCommand();
         } else if (str.split("\\s+")[0].equals("done")) {
+            if (str.split("\\s+").length == 1) {
+                throw new DukeException("Sorry please indicate a task number to update!");
+            }
+            assert str.split("\\s+").length > 1 : "No task indicated.";
             int doneNumber = Integer.parseInt(str.substring(5));
             return new DoneCommand(doneNumber);
         } else if (str.split("\\s+")[0].equals("deadline")) {
@@ -42,6 +46,7 @@ public class Parser {
             if (endDescription <= 9) {
                 throw new DukeException("Oh no! Deadlines cannot be empty! Please try again");
             }
+            assert str.substring(9).length() > 0 : "No deadlines given";
             String description = str.substring(9, endDescription - 1);
             if (description.equals("") || description.equals(" ")) {
                 throw new DukeException("Oh no! Deadlines cannot be empty! Please try again");
@@ -67,17 +72,26 @@ public class Parser {
             if (str.length() < 5) {
                 throw new DukeException("Oh no! ToDos cannot be empty! Please try again");
             }
+            assert str.split("\\s+").length > 1 : "No todo specified";
             String description = str.substring(5);
             if (description.equals("") || description.equals(" ")) {
                 throw new DukeException("Oh no! ToDos cannot be empty! Please try again");
             }
             return new TodoAddCommand(description);
         } else if (str.split("\\s+")[0].equals("delete")) {
+            if (str.split("\\s+").length == 1) {
+                throw new DukeException("Sorry please indicate a task number to delete!");
+            }
+            assert str.split("\\s+").length > 1 : "No task specified to delete";
             int deleteNumber = Integer.parseInt(str.substring(7));
             return new DeleteCommand(deleteNumber);
         } else if (str.split("\\s+")[0].equals("help")) {
             return new HelpCommand();
         } else if (str.split("\\s+")[0].equals("find")) {
+            if (str.split("\\s+").length == 1) {
+                throw new DukeException("Sorry please indicate a keyword to find!");
+            }
+            assert str.split("\\s+", 2).length == 2 : "No task specified to find";
             return new FindCommand(str.split("\\s+", 2)[1]);
         }
         throw new DukeException("I'm sorry :( I don't quite seem to understand, try again pls!");

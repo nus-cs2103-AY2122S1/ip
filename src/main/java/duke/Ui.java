@@ -25,7 +25,6 @@ public class Ui {
      */
     public String lineProducer() {
         String line = "   ------------------------------------------------------------------";
-        System.out.println(line);
         return line;
     }
 
@@ -50,7 +49,6 @@ public class Ui {
                 + "To enter an event, please type in this format: 'event {title of item} /on d/mm/yyyy hh:mm'\n"
                 + "To enter a todo, please type in this format: 'todo {title of item}'\n"
                 + "type help to know more commands available in this bot!");
-        System.out.println(toWelcome);
         return toWelcome;
     }
 
@@ -62,7 +60,6 @@ public class Ui {
      */
     public String showLoadingError() {
         String loadingError = ("Creating new folder since path does not exist!");
-        System.out.println(loadingError);
         return loadingError;
     }
 
@@ -84,7 +81,6 @@ public class Ui {
      * @return The error message.
      */
     public String showError(String errorMessage) {
-        System.out.println(errorMessage);
         return errorMessage;
     }
 
@@ -105,7 +101,6 @@ public class Ui {
      */
     public String printCompleted() {
         String completionMessage = ("Congratulations! You've completed all your tasks!");
-        System.out.println(completionMessage);
         return completionMessage;
     }
 
@@ -118,7 +113,6 @@ public class Ui {
     public String markAsDone(Task taskToChange) {
         String markedAsDone = ("Great job! I've marked the following as done:\n"
                 + taskToChange);
-        System.out.println(markedAsDone);
         return markedAsDone;
     }
 
@@ -131,7 +125,6 @@ public class Ui {
     public String markAsDeleted(Task toDelete) {
         String deletedMessage = ("Note: I've removed the following task from your list:\n"
                 + toDelete);
-        System.out.println(deletedMessage);
         return deletedMessage;
     }
 
@@ -169,7 +162,6 @@ public class Ui {
         String addedMessage = ("Understood! The following task has been added:\n" + " " + toAdd
                 + "\nYou have " + totalTasks + " " + (totalTasks == 1 ? "task" : "tasks")
                 + " in your current list");
-        System.out.println(addedMessage);
         return addedMessage;
     }
 
@@ -185,7 +177,6 @@ public class Ui {
                 + "done {number}:" + "\nticks the task with that number as done!\n"
                 + "delete {number}:\n" + "deletes the task with that number off the list.\n"
                 + "bye:\n" + "ends the program.");
-        System.out.println(helpfulMessage);
         return helpfulMessage;
     }
 
