@@ -23,6 +23,7 @@ public class ExitCommand extends Command {
      * @param tasks The list of tasks in the current programme.
      * @param ui The user interface.
      * @param storage Handles interaction with the file.
+     * @return Exit message.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
 

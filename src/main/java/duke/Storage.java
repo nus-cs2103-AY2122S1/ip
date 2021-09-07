@@ -44,9 +44,10 @@ public class Storage {
             if (!storage.exists()) {
                 storage.createNewFile();
             }
+            assert storage.exists() : "filepath should be validated";
             this.storage = storage;
         } catch (IOException e) {
-            Ui.showError(e.getMessage());
+            System.out.println(Ui.showError(e.getMessage()));
         }
     }
 
@@ -67,7 +68,7 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException | DukeException e) {
-            Ui.showError(e.getMessage());
+            System.out.println(Ui.showError(e.getMessage()));
         }
         return tasks;
     }
@@ -86,6 +87,7 @@ public class Storage {
         String time = "";
         if (!category.equals("T")) {
             time = input[1].strip();
+            assert !time.isBlank(): "time should not be empty";
         }
         if (des.equals("")) {
             throw new EmptyValueException();
@@ -124,7 +126,7 @@ public class Storage {
             }
             myWriter.close();
         } catch (IOException e) {
-            Ui.showError(e.getMessage());
+            System.out.println(Ui.showError(e.getMessage()));
         }
     }
 

@@ -5,7 +5,7 @@ package duke;
  * Deals with interactions with the user.
  */
 public class Ui {
-    private static String LOGO =
+    private static final String LOGO =
             "                     _               _         \n"
                     + "                    | |             | |        \n"
                     + "  _ __ ___     ___  | |   ___     __| |  _   _ \n"
