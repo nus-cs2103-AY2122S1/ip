@@ -37,3 +37,5 @@ public static void main(String[] args) {
     new Duke().run();
 }
 ```
+I think you should use an
+`<addr>` element here instead.
