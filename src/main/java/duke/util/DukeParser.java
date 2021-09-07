@@ -51,6 +51,8 @@ public class DukeParser {
      * @param input String input from the Listener given by the User
      */
     public Command parseInput(String input) {
+        assert input != null: "Input to parse cannot be null";
+
         if (input.equals("gubbai")) {
             return new CommandExit();
         } else if (input.equals("help")) {

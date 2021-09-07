@@ -58,6 +58,7 @@ public class Storage {
                 String task = text.nextLine();
                 loaded.add(stringToTask(task));
             }
+
             return new TaskList(loaded);
 
         } catch (FileNotFoundException e) {
@@ -88,12 +89,15 @@ public class Storage {
         try {
             switch (taskType) {
             case "T":
+                assert args.length == 3: "Invalid loaded task";
                 return new TaskTodo(args[2], args[1].equals("1"));
             case "D":
+                assert args.length == 4 || args.length == 5: "Invalid loaded task";
                 return args.length == 4
                         ? new TaskDeadline(args[2], LocalDate.parse(args[3]), null, !args[1].equals("0"))
                         : new TaskDeadline(args[2], LocalDate.parse(args[3]), args[4], !args[1].equals("0"));
             case "E":
+                assert args.length == 4 || args.length == 5: "Invalid loaded task";
                 return args.length == 4
                         ? new TaskEvent(args[2], LocalDate.parse(args[3]), null, !args[1].equals("0"))
                         : new TaskEvent(args[2], LocalDate.parse(args[3]), args[4], !args[1].equals("0"));

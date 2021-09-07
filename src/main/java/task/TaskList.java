@@ -28,6 +28,7 @@ public class TaskList {
      * @param tasks Existing task list to use
      */
     public TaskList(ArrayList<Task> tasks) {
+        assert tasks != null: "Tasks must be an arraylist, not null";
         this.tasks = tasks;
     }
 
@@ -48,6 +49,8 @@ public class TaskList {
     public String add(Task task) {
         if (task != null) {
             tasks.add(task);
+            assert tasks.contains(task): "Task list should contain added task";
+
             Storage.saveList(tasks);
             return "Got it. I've added this task:\n" + Ui.OUTPUT_SPACES + task + '\n' + getSize();
         } else {
@@ -85,6 +88,8 @@ public class TaskList {
     public String delete(int index) {
         try {
             Task removedTask = tasks.remove(index - 1);
+            assert !tasks.contains(removedTask): "Task list should not contain removed task";
+
             Storage.saveList(tasks);
             return "Noted. Duke-san removed this task:"
                     + removedTask

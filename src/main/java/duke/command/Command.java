@@ -23,6 +23,10 @@ public abstract class Command {
 
     @Override
     public String toString() {
+        assert commandName != null: "Command Name cannot be null";
+        assert description != null: "Description cannot be null";
+        assert arguments != null: "Arguments cannot be null";
+
         StringBuilder argString = new StringBuilder();
         for (String arg : arguments) {
             argString.append(Ui.OUTPUT_DISPLAY).append(arg).append('\n');
