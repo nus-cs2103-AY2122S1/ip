@@ -19,7 +19,7 @@ public class UndoCommand extends Command {
     @Override
     public void execute(TaskHandler taskHandler, Ui ui) throws DukeInvalidCommandException {
         CommandHandler commandHandler = CommandHandler.getInstance();
-        commandHandler.undo();
+        commandHandler.undo(taskHandler);
     }
 
     @Override

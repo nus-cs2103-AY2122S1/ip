@@ -2,6 +2,8 @@ package duke.command;
 
 import java.util.Stack;
 
+import duke.task.TaskHandler;
+
 class CommandHandler {
 
     private static CommandHandler instance;
@@ -23,11 +25,11 @@ class CommandHandler {
         undoableCommands.push(undoableCommand);
     }
 
-    void undo() {
+    void undo(TaskHandler taskHandler) {
         if (undoableCommands.empty()) {
             return;
         }
         UndoableCommand undoableCommand = undoableCommands.pop();
-        undoableCommand.undo();
+        undoableCommand.undo(taskHandler);
     }
 }
