@@ -32,6 +32,7 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert args.length == 2 : "Deadline Command should only store 2 arguments";
         tasks.addDeadlineTask(args[0], args[1]);
         storage.writeToFile(tasks);
         return ui.showNewTask(tasks.lastTask(), tasks.size());

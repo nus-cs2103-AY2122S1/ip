@@ -24,12 +24,12 @@ public class ParserTest {
 
     @Test
     public void testTodoInput() {
-        Assertions.assertEquals(Parser.parse("todo read book"), new TodoCommand(new String[] { "read book" }));
+        Assertions.assertEquals(Parser.parse("todo read book"), new TodoCommand("read book"));
     }
 
     @Test
     public void testValidDoneInput() {
-        Assertions.assertEquals(Parser.parse("done 1"), new DoneCommand(new String[] { "0" }));
+        Assertions.assertEquals(Parser.parse("done 1"), new DoneCommand("0"));
     }
 
     @Test
@@ -39,7 +39,7 @@ public class ParserTest {
 
     @Test
     public void testValidDeleteInput() {
-        Assertions.assertEquals(Parser.parse("delete 1"), new DeleteCommand(new String[] { "0" }));
+        Assertions.assertEquals(Parser.parse("delete 1"), new DeleteCommand("0"));
     }
 
     @Test
@@ -50,7 +50,7 @@ public class ParserTest {
     @Test
     public void testValidDeadlineInput() {
         Assertions.assertEquals(Parser.parse("deadline return book /by 06-06-2021 18:00"),
-                new DeadlineCommand(new String[] { "return book", "06-06-2021 18:00" }));
+                new DeadlineCommand("return book", "06-06-2021 18:00"));
     }
 
     @Test
@@ -61,7 +61,7 @@ public class ParserTest {
     @Test
     public void testValidEventInput() {
         Assertions.assertEquals(Parser.parse("event return book /at 06-06-2021 18:00"),
-                new EventCommand(new String[] { "return book", "06-06-2021 18:00" }));
+                new EventCommand("return book", "06-06-2021 18:00"));
     }
 
     @Test

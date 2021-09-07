@@ -34,6 +34,7 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert args.length == 1 : "Done Command should only store 1 argument";
         int taskNo = Integer.parseInt(args[0]);
         Pair<Boolean, Task> statusTaskPair = tasks.markTaskDone(taskNo);
         storage.writeToFile(tasks);
