@@ -23,8 +23,21 @@ import duke.tasks.Todo;
  */
 public class Storage {
 
+
+    /** Represents the deadline keyword. */
+    private final char DEADLINE = 'D';
+
+    /** Represents the event keyword. */
+    private final char EVENT = 'E';
+
+    /** Represents the todo keyword. */
+    private final char TODO = 'T';
+
     /** Path to data file. */
     private final String filePath;
+
+    /** Data file. */
+    private final File file;
 
     /**
      * Constructor for Storage class.
@@ -32,7 +45,7 @@ public class Storage {
      * @param filePath path to data file.
      */
     public Storage(String filePath) {
-        this.filePath = filePath;
+        file = new File(filePath);
     }
 
     /**
@@ -47,12 +60,11 @@ public class Storage {
 
     public void save(TaskList tasks) throws IOException {
         ArrayList<Task> taskList = tasks.getTaskList();
-        FileWriter fw = new FileWriter(filePath);
+        FileWriter fw = new FileWriter(file.getAbsoluteFile());
 
         for (Task task : taskList) {
             fw.write(task.toString() + System.lineSeparator());
         }
-
         fw.flush();
         fw.close();
     }
@@ -67,7 +79,7 @@ public class Storage {
      * @throws DataFileChangedException if the data file was changed and any entry contains a wrong format.
      */
     public ArrayList<Task> load() throws IOException, DataFileChangedException {
-        File file = new File(filePath);
+        file.getParentFile().mkdirs();
 
         ArrayList<Task> taskList = new ArrayList<>();
 
@@ -84,31 +96,60 @@ public class Storage {
                 String nextCommand = sc.nextLine();
                 Task task;
 
-                switch (nextCommand.charAt(1)) {
-                case 'D':
-                    task = extractDeadline(nextCommand.substring(7)); // [D][X] something by time
+                switch (extractTask(nextCommand)) {
+                case DEADLINE:
+                    task = extractDeadline(extractMessage(nextCommand));
                     break;
-                case 'E':
-                    task = extractEvent(nextCommand.substring(7)); // [D][X] something at time
+                case EVENT:
+                    task = extractEvent(extractMessage(nextCommand));
                     break;
-                case 'T': // todos
-                    task = new Todo(nextCommand.substring(7)); // disregards [T][X]
+                case TODO:
+                    task = new Todo(extractMessage(nextCommand));
                     break;
                 default:
                     throw new DataFileChangedException();
                 }
 
-                // check if marked as done
-                if (nextCommand.charAt(4) == 'X') {
+                if (isMarkedDone(nextCommand)) {
                     task.markAsDone();
                 }
                 taskList.add(task);
             }
             sc.close();
             return taskList;
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | DateTimeParseException e) {
             throw new DataFileChangedException();
         }
+    }
+
+    /**
+     * Checks if task from data file was marked done.
+     *
+     * @param input input from data file.
+     * @return boolean that indicates if the task has been marked done.
+     */
+    private boolean isMarkedDone(String input) {
+        return input.charAt(4) == 'X';
+    }
+
+    /**
+     * Extracts the message of the task.
+     *
+     * @param input input from data file.
+     * @return message of the task.
+     */
+    private String extractMessage(String input) {
+        return input.substring(7);
+    }
+
+    /**
+     * Extracts the letter that indicates the type of task.
+     *
+     * @param input input from data file.
+     * @return the letter indicating the type of task.
+     */
+    private char extractTask(String input) {
+        return input.charAt(1);
     }
 
     /**
@@ -116,22 +157,15 @@ public class Storage {
      *
      * @param text the deadline in the data file.
      * @return a new deadline that represents the deadline from the data file.
-     * @throws DataFileChangedException if the data file was changed and any entry contains a wrong format.
      */
-    private Deadline extractDeadline(String text) throws DataFileChangedException {
+    private Deadline extractDeadline(String text) {
         int lastOccurrenceOfBy = text.lastIndexOf(" (by: "); // in case other bys appear
         String description = text.substring(0, lastOccurrenceOfBy);
 
         // disregards "( by: " and trailing ")"
         String by = text.substring(lastOccurrenceOfBy + 6, text.length() - 1);
 
-        LocalDateTime dateTime;
-
-        try {
-            dateTime = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a"));
-        } catch (DateTimeParseException e) {
-            throw new DataFileChangedException();
-        }
+        LocalDateTime dateTime = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a"));
 
         return new Deadline(description, dateTime);
     }
@@ -141,33 +175,18 @@ public class Storage {
      *
      * @param text the event in the data file.
      * @return a new deadline that represents the deadline from the data file.
-     * @throws DataFileChangedException if the data file was changed and any entry contains a wrong format.
      */
-    private Event extractEvent(String text) throws DataFileChangedException {
+    private Event extractEvent(String text) {
         ArrayList<String> parsedInfo = parseEventInfo(text);
-        if (parsedInfo.isEmpty()) {
-            throw new DataFileChangedException();
-        }
 
         String description = parsedInfo.get(0);
         String date = parsedInfo.get(1);
-        String[] eventTimes = {parsedInfo.get(2), parsedInfo.get(3)};
+        String startTime = parsedInfo.get(2);
+        String endTime = parsedInfo.get(3);
 
-        String startTime = eventTimes[0].trim();
-        String endTime = eventTimes[1].trim();
-
-        LocalDate finalDate;
-        LocalTime finalStartTime;
-        LocalTime finalEndTime;
-
-        try {
-            // checks if the formats of the input date and time are correct
-            finalDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("MMM d yyyy"));
-            finalStartTime = LocalTime.parse(startTime, DateTimeFormatter.ofPattern("h:mm a"));
-            finalEndTime = LocalTime.parse(endTime, DateTimeFormatter.ofPattern("h:mm a"));
-        } catch (DateTimeParseException e) {
-            throw new DataFileChangedException();
-        }
+        LocalDate finalDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("MMM d yyyy"));
+        LocalTime finalStartTime = LocalTime.parse(startTime, DateTimeFormatter.ofPattern("h:mm a"));
+        LocalTime finalEndTime = LocalTime.parse(endTime, DateTimeFormatter.ofPattern("h:mm a"));
 
         return new Event(description, finalDate, finalStartTime, finalEndTime);
     }
@@ -177,9 +196,8 @@ public class Storage {
      *
      * @param text data saved in file.
      * @return ArrayList of description, date, and times of event.
-     * @throws DataFileChangedException if the contents of the event in data file is incorrect.
      */
-    private ArrayList<String> parseEventInfo(String text) throws DataFileChangedException {
+    private ArrayList<String> parseEventInfo(String text) {
         int lastOccurrenceOfAt = text.lastIndexOf(" (at: ");
         String description = text.substring(0, lastOccurrenceOfAt);
         ArrayList<String> parsedInfo = new ArrayList<>();
@@ -187,30 +205,16 @@ public class Storage {
         // disregards "( at: " and trailing ")"
         String at = text.substring(lastOccurrenceOfAt + 6, text.length() - 1);
 
-        // prepare variables
-        String atWithoutWhiteSpace = at.replaceAll("\\s", "");
-        int lengthOfAtNoSpace = atWithoutWhiteSpace.length();
-
-        // throws error if it doesn't even contain sufficient number of characters for correct format
-        if (lengthOfAtNoSpace < 22 || lengthOfAtNoSpace > 25) { // MMM d yyyy, HH:mm - HH:mm
-            return parsedInfo;
-        }
-
         // find start and end times
         int indexOfComma = at.indexOf(',');
         String date = at.substring(0, indexOfComma).trim(); // at this point, date contains 10 chars YYYY/MM/DD
         String eventDuration = at.substring(indexOfComma + 1).trim();
         String[] eventTimes = eventDuration.split("-");
 
-        // if no "-" present
-        if (eventTimes.length != 2) {
-            throw new DataFileChangedException();
-        }
-
-        parsedInfo.add(description);
-        parsedInfo.add(date);
-        parsedInfo.add(eventTimes[0]);
-        parsedInfo.add(eventTimes[1]);
+        parsedInfo.add(description.trim());
+        parsedInfo.add(date.trim());
+        parsedInfo.add(eventTimes[0].trim());
+        parsedInfo.add(eventTimes[1].trim());
         return parsedInfo;
     }
 }
