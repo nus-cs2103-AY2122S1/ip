@@ -23,7 +23,7 @@ public class SkeltalTest {
                 "Got it. I've added this task\n" +
                 "[T][ ] 1. quick\n" +
                 "Now you have 1 tasks in the list.\n" +
-                "wrote to skeltal.txt" +
+                "wrote to skeltal.txt\n" +
                 "---------------------------------------------", outputStreamCaptor.toString().trim());
     }
 
@@ -51,6 +51,7 @@ public class SkeltalTest {
                     "[T][ ] 3. todo test";
             assertEquals(expected, outputStreamCaptor.toString().trim());
         } catch (SkeltalException e) {
+
         }
     }
 

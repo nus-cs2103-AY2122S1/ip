@@ -10,20 +10,23 @@ public class TaskList {
      * A method to add a Task object into the list.
      * @param assignment A task object.
      */
-    public static void addTask (Task assignment) {
+    public static String addTask (Task assignment) {
         tasks.add(assignment);
-        System.out.println("Got it. I've added this task");
-        System.out.println(assignment);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        String reply = "Got it. I've added this task\n" +
+                assignment + "\n" +
+                "Now you have " + tasks.size() + " tasks in the list.";
+        return reply;
     }
 
     /**
      * A method to list the Task objects currently in the list.
      */
-    public static void listReply() {
+    public static String listReply() {
+        String reply = "";
         for (Task task : tasks) {
-            System.out.println(task);
+            reply += task + "\n";
         }
+        return reply.trim();
     }
 
     /**
@@ -39,24 +42,27 @@ public class TaskList {
      * Sets the Task at the index (index_1 - 1) in the TaskList to a "completed" state.
      * @param index_1 The index of the task in the list + 1.
      */
-    public static void done(String index_1) {
+    public static String done(String index_1) {
+        String reply = "";
         int i = Integer.parseInt(index_1) - 1;
         Task assignment = tasks.get(i);
         assignment.setComplete();
-        System.out.println("Done! I've marked this task as done!");
-        System.out.println(assignment);
-
+        reply += "Done! I've marked this task as done!\n";
+        reply += assignment;
+        return reply;
     }
 
     /**
      * Deletes the Task at the index index in the TaskList.
      * @param index The index of the task in the list.
      */
-    public static void delete(String index) {
+    public static String delete(String index) {
+        String reply = "";
         int i = Integer.parseInt(index) - 1;
-        System.out.println(tasks.get(i));
+        reply += tasks.get(i) + "\n";
         tasks.remove(i);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        reply += "Now you have " + tasks.size() + " tasks in the list.";
+        return reply;
     }
 
     /**
@@ -67,13 +73,15 @@ public class TaskList {
         tasks = arrayList;
     }
 
-    public static void findMatchingTasks(String str) {
-        System.out.println("Here are the matching tasks in your list.");
+    public static String findMatchingTasks(String str) {
+        String reply = "";
+        reply += "Here are the matching tasks in your list.";
         for (Task task : tasks) {
             if (task.getTask().contains(str)) {
-                System.out.println(task);
+                reply += task + "\n";
             }
         }
+        return reply.trim();
     }
 
     /**

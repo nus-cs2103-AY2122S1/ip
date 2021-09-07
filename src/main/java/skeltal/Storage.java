@@ -1,12 +1,12 @@
 package skeltal;
 
+import javafx.util.Pair;
 import java.io.File;
-import java.time.format.DateTimeParseException;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.FileWriter;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 /**
  * A class to handle the loading and storage of the list of tasks.
@@ -16,8 +16,9 @@ public class Storage {
      * Loads the txt file of the list of tasks from the specified path.
      * @return An ArrayList of Tasks representative of the file.
      */
-    public static ArrayList<Task> loadFile() {
+    public static Pair<ArrayList<Task>, String> loadFile() {
         ArrayList<Task> arrayList = new ArrayList<>();
+        String reply = "";
         try {
             File taskFile = new File("src/main/Data/skeltal.txt");
             Scanner sc =  new Scanner(taskFile);
@@ -51,30 +52,33 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("No existing tasks can be found! Creating a new list for you :)");
+            reply = "No existing tasks can be found! Creating a new list for you :)";
             File taskFile = new File("src/main/Data/skeltal.txt");
             try {
                 taskFile.createNewFile();
             } catch (IOException ioException) {
-                System.out.println("List could not be created :(");
+                reply = "List could not be created :(";
             }
         } catch (SkeltalException e) {
-            System.out.println(e.getMessage());
+            reply = e.getMessage();
+        } finally {
+            reply = "Saved tasks have been loaded into the skeltal system!";
+            return new Pair<>(arrayList, reply);
         }
-        System.out.println("Saved tasks have been loaded into the skeltal system!");
-        return arrayList;
     }
 
     /**
      * Writes the current list of tasks to the txt file at the specified filepath.
      * @throws Exception If the file does not exist.
      */
-    public static void store() throws SkeltalException {
+    public static String store() throws SkeltalException {
         try {
+            String reply = "";
             FileWriter fw = new FileWriter("src/main/Data/skeltal.txt", false);
             fw.write(TaskList.storeTasks());
-            System.out.println("wrote to skeltal.txt");
+            reply += "wrote to skeltal.txt";
             fw.close();
+            return reply;
         } catch (Exception e) {
             throw new SkeltalException(e.getMessage());
         }

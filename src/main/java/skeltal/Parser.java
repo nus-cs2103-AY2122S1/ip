@@ -14,54 +14,55 @@ public class Parser {
      * userInput should be in the form "command arg1 arg2".
      * @param userInput A String of the userInput.
      */
-    public static void parse(String userInput) {
+    public static String parse(String userInput) {
+        String reply = "";
         try {
             String[] commandDescriptionArr = parseInput(userInput);
-            System.out.println(Ui.line());
             switch(commandDescriptionArr[0]) {
                 case "list":
-                    TaskList.listReply();
+                    reply += TaskList.listReply();
                     break;
                 case "done":
-                    TaskList.done(commandDescriptionArr[1]);
-                    Storage.store();
+                    reply += TaskList.done(commandDescriptionArr[1]) + "\n";
+                    reply += Storage.store();
                     break;
                 case "deadline":
                     Deadline dead = new Deadline(commandDescriptionArr[1]);
-                    TaskList.addTask(dead);
-                    Storage.store();
+                    reply += TaskList.addTask(dead) + "\n";
+                    reply += Storage.store();
                     break;
                 case "event":
                     Event event = new Event(commandDescriptionArr[1]);
-                    TaskList.addTask(event);
-                    Storage.store();
+                    reply += TaskList.addTask(event) + "\n";
+                    reply += Storage.store();
                     break;
                 case "todo":
                     if (commandDescriptionArr.length == 1) {
                         throw new SkeltalException("OOPS! The description of todo cannot be empty!");
                     }
                     ToDo todo = new ToDo(commandDescriptionArr[1]);
-                    TaskList.addTask(todo);
-                    Storage.store();
+                    reply += TaskList.addTask(todo) + "\n";
+                    reply += Storage.store();
                     break;
                 case "delete":
-                    System.out.println("Noted. I have removed this task");
-                    TaskList.delete(commandDescriptionArr[1]);
-                    Storage.store();
+                    reply += "Noted. I have removed this task\n";
+                    reply += TaskList.delete(commandDescriptionArr[1]);
+                    reply += Storage.store();
                     break;
                 case "store":
-                    Storage.store();
+                    reply += Storage.store();
                     break;
                 case "find":
-                    TaskList.findMatchingTasks(commandDescriptionArr[1]);
+                    reply += TaskList.findMatchingTasks(commandDescriptionArr[1]);
                     break;
                 default:
                     throw new SkeltalException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (SkeltalException e) {
-            System.out.println(e.getMessage());
+            reply = e.getMessage();
+        } finally {
+            return reply;
         }
-        System.out.println(Ui.line());
     }
 
     public static String parseDescription(String description, String taskType) throws SkeltalException {
@@ -78,8 +79,6 @@ public class Parser {
                 time = time.substring(3);
             }
         }
-
-
 
         try {
             LocalDate date = LocalDate.parse(time, DateTimeFormatter.ofPattern("dd-MM-yyyy"));

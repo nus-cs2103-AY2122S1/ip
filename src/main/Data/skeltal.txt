@@ -1,5 +1,2 @@
-T | 0 | quick
-E | 0 | nice | 12pm
-E | 0 | hodo | 12
-E | 0 | tododo | 123
-D | 0 | cool beans | nice one
+T | 0 | list
+T | 1 | bread
