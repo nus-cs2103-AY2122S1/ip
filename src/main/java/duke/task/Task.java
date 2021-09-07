@@ -4,7 +4,7 @@ package duke.task;
  * Represents an abstract task.
  */
 
-public abstract class Task implements Comparable<Task> {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -58,7 +58,4 @@ public abstract class Task implements Comparable<Task> {
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
-
-    @Override
-    public abstract int compareTo(Task o);
 }

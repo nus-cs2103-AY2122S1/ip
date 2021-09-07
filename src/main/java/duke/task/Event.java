@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -14,7 +13,6 @@ import duke.exception.DukeException;
 public class Event extends Task {
     protected LocalDate date;
     protected LocalTime time;
-    protected LocalDateTime dateTime;
 
     /**
      * Creats an event with a description, time and date.
@@ -28,7 +26,6 @@ public class Event extends Task {
         try {
             this.date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             this.time = LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HHmm"));
-            this.dateTime = date.atTime(time);
         } catch (DateTimeParseException e) {
             throw new DukeException("Oops! Make sure that your date and time is valid"
                     + " and is formatted as 'dd/MM/yyyy HHmm'.");
@@ -74,17 +71,5 @@ public class Event extends Task {
                 + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + " "
                 + time.format(DateTimeFormatter.ofPattern("HHmm")) + ")";
-    }
-
-    @Override
-    public int compareTo(Task o) {
-        if (o instanceof Todo) {
-            return 1;
-        } else if (o instanceof Deadline) {
-            return this.dateTime.compareTo(((Deadline) o).dateTime);
-        } else if (o instanceof Event) {
-            return this.dateTime.compareTo(((Event) o).dateTime);
-        }
-        return 0;
     }
 }

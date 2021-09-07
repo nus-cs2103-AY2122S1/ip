@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import duke.exception.DukeException;
 
@@ -137,10 +136,6 @@ public class TaskList {
             }
         }
         return res;
-    }
-
-    public void sort() {
-        Collections.sort(tasks);
     }
 
 }

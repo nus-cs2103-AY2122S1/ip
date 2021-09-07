@@ -1,6 +1,14 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExceptionCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.UnknownCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -35,8 +43,6 @@ public class Parser {
                 return new ExitCommand();
             case "list":
                 return new ListCommand();
-            case "sort":
-                return new SortCommand();
             case "done":
                 if (words.length < 2) {
                     throw new DukeException("☹ OOPS!!!"
@@ -76,10 +82,6 @@ public class Parser {
                 }
                 description = splitRest[0];
                 dateTimeArr = splitRest[1].split(" ");
-                if (dateTimeArr.length != 2) {
-                    throw new DukeException("Oops! Make sure that your date and time is valid"
-                            + " and is formatted as 'dd/MM/yyyy HHmm'.");
-                }
                 dateString = dateTimeArr[0];
                 timeString = dateTimeArr[1];
                 task = new Deadline(description, dateString, timeString);
@@ -96,10 +98,6 @@ public class Parser {
                 }
                 description = splitRest[0];
                 dateTimeArr = splitRest[1].split(" ");
-                if (dateTimeArr.length != 2) {
-                    throw new DukeException("Oops! Make sure that your date and time is valid"
-                            + " and is formatted as 'dd/MM/yyyy HHmm'.");
-                }
                 dateString = dateTimeArr[0];
                 timeString = dateTimeArr[1];
                 task = new Event(description, dateString, timeString);
