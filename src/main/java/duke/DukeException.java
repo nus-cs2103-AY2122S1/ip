@@ -1,12 +1,12 @@
 package duke;
 
 /**
- * Exception for the Duke app
+ * Exception for the bhutu chat-bot app.
  */
 public class DukeException extends Exception {
 
     /**
-     * Constructor
+     * Instantiates a new DukeException object.
      * @param message The exception message.
      */
     public DukeException(String message) {

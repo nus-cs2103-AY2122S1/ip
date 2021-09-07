@@ -6,7 +6,8 @@ package duke.task;
 public class Todo extends Task {
 
     /**
-     * constructor of the class
+     * Instantiates a new todo object
+     *
      * @param description description of the task
      */
     public Todo(String description) {
@@ -14,7 +15,8 @@ public class Todo extends Task {
     }
 
     /**
-     * The string representation of todo
+     * Generates the string representation of todo
+     *
      * @return string representation of todo
      */
     @Override

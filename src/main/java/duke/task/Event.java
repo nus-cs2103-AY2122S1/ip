@@ -1,15 +1,16 @@
 package duke.task;
 
 /**
- * A task of type Event
+ * A task of type Event.
  */
 public class Event extends Task {
 
     protected String at;
 
     /**
-     * constructor of the class
-     * @param description description of the task
+     * Instantiates a new event object.
+     *
+     * @param description description of the task.
      */
     public Event(String description, String at) {
         super(description);
@@ -17,8 +18,9 @@ public class Event extends Task {
     }
 
     /**
-     * String representation of event
-     * @return String representation of event
+     * Generates the string representation of event.
+     *
+     * @return String representation of event.
      */
     @Override
     public String toString() {

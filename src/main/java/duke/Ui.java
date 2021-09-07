@@ -2,27 +2,33 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Handles all the interaction with the user.
+ */
 public class Ui {
 
     /**
      * Global variables
      */
-    private static final String SPACE = "    ";
-    private static final String LINE = SPACE + "______________________________________________________________________";
-    private static final String END_LINE = SPACE + "======================================================================\n";
-    private static final String LOGO = "\n" +
-            "███████████████████████████████\n" +
-            "█▄─▄─▀█─█─█▄─██─▄█─▄─▄─█▄─██─▄█\n" +
-            "██─▄─▀█─▄─██─██─████─████─██─██\n" +
-            "▀▄▄▄▄▀▀▄▀▄▀▀▄▄▄▄▀▀▀▄▄▄▀▀▀▄▄▄▄▀▀";
+    private static final String LINE = "\t______________________________________________________________________";
+    private static final String END_LINE = "\t======================================================================\n";
+    private static final String LOGO = "\n"
+            + "███████████████████████████████\n"
+            + "█▄─▄─▀█─█─█▄─██─▄█─▄─▄─█▄─██─▄█\n"
+            + "██─▄─▀█─▄─██─██─████─████─██─██\n"
+            + "▀▄▄▄▄▀▀▄▀▄▀▀▄▄▄▄▀▀▀▄▄▄▀▀▀▄▄▄▄▀▀";
     private Items items;
+    private Scanner sc = new Scanner(System.in);
 
+    /**
+     * Instantiates a new ui object.
+     */
     public Ui() {
         items = new Items();
     }
 
     /**
-     * method to greet the user
+     * Greets the user.
      */
     public void greet() {
         System.out.println(LOGO);
@@ -30,20 +36,25 @@ public class Ui {
     }
 
     /**
-     * Get the user input
-     * @param sc The scanner to get the input
+     * Gets the user input.
+     *
      * @return The string representation of the user input
      */
-    public static String getInput(Scanner sc) {
+    public String getInput() {
         return sc.nextLine();
     }
 
+    public void printGoodBye() {
+        printMessage("Going so soon? Hope to see you again!");
+    }
+
     /**
-     * print all bot messages in a specific format.
+     * Prints all bot messages in a specific format.
+     *
      * @param message message from the bot.
      */
     public static void printMessage(String message) {
-        message = SPACE + message.replace("\n", "\n" + SPACE);
+        message = "\t" + message.replace("\n", "\n\t");
         System.out.println(LINE);
         System.out.println(message);
         System.out.println(END_LINE);

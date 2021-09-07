@@ -1,9 +1,10 @@
 package duke;
 
-import duke.task.Todo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.task.Todo;
 
 public class TaskTest {
     @Test
@@ -11,9 +12,9 @@ public class TaskTest {
         Items item = new Items();
         String msg;
         msg = item.addItem(new Todo("abc"));
-        assertEquals("Got it, I've added this task:\n" +
-                "T | 0 | abc\n" +
-                "Now you have 1 task in the list.", msg);
+        assertEquals("Got it, I've added this task:\n"
+                + "T | 0 | abc\n"
+                + "Now you have 1 task in the list.", msg);
     }
 
     @Test
@@ -26,8 +27,8 @@ public class TaskTest {
         } catch (DukeException e) {
             msg = "";
         }
-        assertEquals("Nice! I've marked this task as done: \n" +
-                "T | 1 | abc", msg);
+        assertEquals("Nice! I've marked this task as done: \n"
+                + "T | 1 | abc", msg);
     }
 
     @Test
@@ -40,7 +41,7 @@ public class TaskTest {
         } catch (DukeException e) {
             msg = "";
         }
-        assertEquals("These are your tasks: \n" +
-                " 1. T | 0 | abc", msg);
+        assertEquals("These are your tasks: \n"
+                + " 1. T | 0 | abc", msg);
     }
 }

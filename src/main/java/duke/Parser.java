@@ -4,14 +4,17 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Reads and converts user input to bhutu-understandable inputs.
+ */
 public class Parser {
-    private LocalDate date;
     /**
-     * combines an array of strings into a space seperated sentence.
+     * Combines an array of strings into a space separated sentence.
+     *
      * @param input the string array.
      * @return the sentence.
      */
-    private StringBuilder combineInputArray(String[] input) {
+    private StringBuilder combineInputArray(String... input) {
         StringBuilder result = new StringBuilder();
         for (int i = 1; i < input.length; i++) {
             if (i < input.length - 1) {
@@ -25,13 +28,17 @@ public class Parser {
 
     /**
      * Converts the user input string into meaningful commands.
+     *
      * @param input the user input string.
      * @return the meaningful commands.
      */
-    public String[] compileInput(String[] input) throws DukeException {
+    public String[] compileInput(String... input) throws DukeException {
         StringBuilder result = combineInputArray(input);
         String date;
-        switch (input[0]) {
+        String commandEntered = input[0];
+        assert commandEntered != null : "Command is NULL";
+
+        switch (commandEntered) {
         case "deadline":
             String[] output = result.toString().split(" /by ");
             if (output.length < 2) {
@@ -43,6 +50,7 @@ public class Parser {
         case "event":
             String[] output1 = result.toString().split(" /at ");
             if (output1.length < 2) {
+
                 throw new DukeException("Please provide both description and time. Use '/at'. "
                         + "(eg. event fix hair /at 1pm)");
             }
@@ -64,7 +72,6 @@ public class Parser {
             } catch (Exception e) {
                 throw new DukeException("'done' command requires an integer as number. (eg. done 12)");
             }
-
             return new String[] {input[1]};
         case "list":
             if (input.length != 1) {
@@ -89,27 +96,29 @@ public class Parser {
             } catch (Exception e) {
                 throw new DukeException("'delete' command requires an integer as number. (eg. done 12)");
             }
-
             return new String[] {input[1]};
-
+        case "find":
+            return new String[] {input[1]};
         default:
             throw new DukeException("I don't recognise this command\n"
-                        + "Try 'list', 'todo', 'event', 'deadline', 'done' or 'bye'");
+                    + "Try 'list', 'todo', 'event', 'deadline', 'done' or 'bye'");
         }
     }
 
     /**
      * Parses a raw date string as input into a valid date and time string.
+     * 
      * @param input The raw date string.
      * @return A string valid as a date.
      * @throws DukeException Thrown if the input is an invalid date.
      */
     private String parseDate(String input) throws DukeException {
         try {
-            this.date = LocalDate.parse(input);
+            LocalDate date = LocalDate.parse(input);
             return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } catch (DateTimeParseException error) {
-            throw new DukeException("Please enter a valid date in this format 'YYYY-MM-dd'");
+            throw new DukeException("Please enter a valid date in this format 'YYYY-MM-dd' "
+                    + "(eg. 2021-10-07)");
         }
     }
 }
