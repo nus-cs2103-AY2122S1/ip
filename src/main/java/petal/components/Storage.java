@@ -126,6 +126,7 @@ public class Storage {
         if (!isFolderAndFilePresent) {
             return;
         }
+
         FileWriter currFileWriter = new FileWriter(saveFilePath);
         FileWriter archiveFileWriter = new FileWriter(archiveFilePath);
 

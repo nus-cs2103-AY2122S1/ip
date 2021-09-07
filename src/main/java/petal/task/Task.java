@@ -51,7 +51,7 @@ public abstract class Task {
      */
     public String taskDone() {
         this.isDone = true;
-        return "\nYou have completed the task: '" + this.description + "'!"
+        return "You have completed the task: '" + this.description + "'!"
                 + "\nI am so happy for you!\n";
     }
 
