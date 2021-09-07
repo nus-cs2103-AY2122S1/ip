@@ -101,19 +101,15 @@ public class Parser {
     }
 
     private String invalidEntry() throws InvalidEntryException {
-//        try {
-//            throw new InvalidEntryException("error");
-//        } catch (DukeException e) {
-//            e.printError();
-//            return "( ⚆ _ ⚆ ) OOPS!!! I'm sorry, but I don't know what that means :-(";
-//        }
         throw new InvalidEntryException("error");
     }
 
     private int getNum(String s) throws NoNumberException, TaskNotFoundException {
         try {
-            if (!s.equals("done") && !s.equals("delete")) {
+            if (s.contains(" ")) {
                 String[] parts = s.split(" ", 2);
+                assert parts[0].equals("done") || parts[0].equals("delete")
+                        : "Invalid Keyword";
                 int num = Integer.parseInt(parts[1]);
                 if (num <= 0 || num > this.tasks.getSize()) {
                     throw new TaskNotFoundException("error");
@@ -130,13 +126,12 @@ public class Parser {
     private String getName(String s) throws EmptyDescriptionException  {
         if (s.contains(" ")) {
             String[] parts = s.split(" ", 2);
-            if (parts[0].equals("todo") || parts[0].equals("deadline")
-                    || parts[0].equals("event") || parts[0].equals("find")) {
-                if (parts[1].equals("")) {
-                    throw new EmptyDescriptionException("error", parts[0]);
+            assert (parts[0].equals("todo") || parts[0].equals("deadline")
+                    || parts[0].equals("event") || parts[0].equals("find"))
+                    : "Invalid Keyword!";
+                if (!parts[1].equals("")) {
+                    return parts[1];
                 }
-                return parts[1];
-            }
         } else {
             throw new EmptyDescriptionException("error", s);
         }

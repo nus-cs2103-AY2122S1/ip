@@ -24,7 +24,6 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filepath);
         try {
-            System.out.println("Past records (if any):");
             taskList = storage.loadData();
         } catch (IOException e) {
             ui.showLoadingError();
@@ -45,6 +44,7 @@ public class Duke {
      * Activates programme
      */
     public void run() {
+        ui.showTaskList(taskList, "list");
         ui.welcome();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {

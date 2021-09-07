@@ -1,3 +1,4 @@
-T/0/read book
 D/0/return book /2021-09-21 18:00
 E/0/book club /2021-10-02 11:00
+T/1/borrow book
+T/0/eat lunch

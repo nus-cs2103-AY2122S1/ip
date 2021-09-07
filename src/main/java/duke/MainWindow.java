@@ -12,6 +12,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -67,23 +70,23 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        if (input.equals("bye")) {
-            duke.getUi().bye();
-            try
-            {
-                Thread.sleep(1000);
-                System.exit(0);
-            }
-            catch(InterruptedException ex)
-            {
-                Thread.currentThread().interrupt();
-            }
-        }
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (response.equals(duke.getUi().bye())) {
+            Timer timer = new Timer();
+            TimerTask exit = new TimerTask() {
+                @Override
+                public void run() {
+                    System.exit(0);
+                }
+            };
+            userInput.setDisable(true);
+            sendButton.setDisable(true);
+            timer.schedule(exit, new Date(System.currentTimeMillis() + 3 * 1000));
+        }
     }
 }

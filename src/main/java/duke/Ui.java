@@ -38,8 +38,7 @@ public class Ui {
      */
     public String showTaskAdded(Task task, int size) {
         String t = size == 1 ? "task" : "tasks";
-        String s = String.format("Got it. I've added this task:\n%s\nNow you have %d %s in the list.\n", task, size, t);
-        return s;
+        return String.format("Got it. I've added this task:\n%s\nNow you have %d %s in the list.\n", task, size, t);
     }
 
     /**
@@ -48,8 +47,7 @@ public class Ui {
      * @param task completed task
      */
     public String showTaskDone(Task task) {
-        String s = String.format("Nice! I've marked this task as done:\n" + task);
-        return s;
+        return "Nice! I've marked this task as done:\n" + task;
     }
 
     /**
@@ -60,8 +58,7 @@ public class Ui {
      */
     public String showTaskDeleted(Task task, int size) {
         String t = size == 1 ? "task" : "tasks";
-        String s = String.format("Noted.I've removed this task:\n%s\nNow you have %d %s in the list\n", task, size, t);
-        return s;
+        return String.format("Noted.I've removed this task:\n%s\nNow you have %d %s in the list\n", task, size, t);
     }
 
 
@@ -72,6 +69,8 @@ public class Ui {
      * @param cmd determine which message to be shown
      */
     public String showTaskList(TaskList list, String cmd) {
+        assert (cmd.equals("list") || cmd.equals("find") || (cmd.equals("past")))
+                : "Command is invalid";
         if (!list.getList().isEmpty()) {
             StringBuilder sb = new StringBuilder();
             String msg = cmd.equals("list")
@@ -80,17 +79,18 @@ public class Ui {
                     ? "Here are the matching tasks in your list:"
                     : "Here are your past records!";
             sb.append(msg).append("\n");
+
             for (int i = 0; i < list.getSize(); i++) {
                 Task t = list.getTask(i);
                 String s = String.format("%d.%s%n", i + 1, t);
                 sb.append(s);
             }
+
             return sb.toString();
         } else {
-            String msg = cmd.equals("past")
+            return cmd.equals("past")
                     ? "You have no past records!"
                     : "You have no tasks!";
-            return msg;
         }
     }
 }
