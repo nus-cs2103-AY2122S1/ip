@@ -26,9 +26,12 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private String dukeGreeting = "Hello! I'm Duke\nWhat can I do for you?";
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    private final int TIMER_DELAY = 700;
 
     /**
      * Displays greeting message to user upon program starting.
@@ -39,11 +42,11 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         userInput.setPromptText("Enter a command here: ");
         dialogContainer.getChildren().addAll(
-                    DialogBox.getDukeDialog("Hello! I'm Duke\nWhat can I do for you?", dukeImage));
+                    DialogBox.getDukeDialog(dukeGreeting, dukeImage));
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(Duke duke) {
+        this.duke = duke;
     }
 
     @FXML
@@ -57,16 +60,20 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
 
-        if (input.equals("bye")) {
-
-            new Timer().schedule(new TimerTask() {
-                public void run () {
-                    Platform.exit();
-                    System.exit(0);
-                }
-            }, 700);
-        }
+        handleByeInput(input);
 
         userInput.clear();
+    }
+
+    private void handleByeInput(String input) {
+        if (input.equals("bye")) {
+            new Timer().schedule(
+                    new TimerTask() {
+                        public void run() {
+                            Platform.exit();
+                            System.exit(0);
+                        }
+                    }, TIMER_DELAY);
+        }
     }
 }

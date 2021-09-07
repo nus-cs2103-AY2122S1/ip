@@ -26,6 +26,15 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    private final int TOP_PADDING = 5;
+    private final int RIGHT_PADDING = 10;
+    private final int BOTTOM_PADDING = 5;
+    private final int LEFT_PADDING = 10;
+    private final int DUKE_BOX_AND_IMAGE_DISTANCE = 5;
+
+    private final String DUKE_BG_COLOR = "#444444";
+    private final int DUKE_BG_RADIUS = 20;
+
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -44,21 +53,22 @@ public class DialogBox extends HBox {
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      * Sets certain properties on flipped box to distinguish it from the normally-oriented box.
      */
-    private void flip() {
+    private void setDukeDialogBox() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-        dialog.setTranslateX(5);
-        dialog.setPadding(new Insets(5, 10, 5, 10));
-        dialog.setStyle("-fx-background-color: #444444; -fx-background-radius: 20");
+        dialog.setTranslateX(DUKE_BOX_AND_IMAGE_DISTANCE);
+        dialog.setPadding(new Insets(TOP_PADDING, RIGHT_PADDING, BOTTOM_PADDING, LEFT_PADDING));
+        String style = String.format("-fx-background-color: %s; -fx-background-radius:%d", DUKE_BG_COLOR, DUKE_BG_RADIUS);
+        dialog.setStyle(style);
     }
 
     /**
      * Sets certain properties on  box to distinguish it from the flipped box.
      */
-    private void normal() {
-        dialog.setPadding(new Insets(5, 10, 5, 10));
+    private void setUserDialogBox() {
+        dialog.setPadding(new Insets(TOP_PADDING, RIGHT_PADDING, BOTTOM_PADDING, LEFT_PADDING));
     }
 
     /**
@@ -70,7 +80,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.normal();
+        db.setUserDialogBox();
         return db;
     }
 
@@ -83,7 +93,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.flip();
+        db.setDukeDialogBox();
         return db;
     }
 }

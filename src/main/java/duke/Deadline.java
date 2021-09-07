@@ -34,7 +34,7 @@ public class Deadline extends Task {
      */
     public Deadline(String num, String description, String by) {
         this(description, by);
-        this.isDone = !num.equals("0");
+        this.isDone = !num.equals(NOT_DONE_STRING);
         this.dateTimeBy = LocalDateTime.parse(by, formatter);
     }
 
@@ -43,7 +43,7 @@ public class Deadline extends Task {
      *
      * @return date and time following the format: MMM dd yyyy h:mm a.
      */
-    public String getFormattedBy() {
+    public String getFormattedDateTime() {
         return this.dateTimeBy.format(DateTimeFormatter.ofPattern("MMM dd yyyy h:mm a"));
     }
 
@@ -54,7 +54,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getFileString() {
-        return String.format("D | %d | %s | %s", this.isDone ? 1 : 0, this.description, this.by);
+        return String.format("D | %d | %s | %s", this.isDone ? DONE : NOT_DONE, this.description, this.by);
     }
 
     /**
@@ -64,6 +64,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + getFormattedBy() + ")";
+        return "[D]" + super.toString() + " (by: " + getFormattedDateTime() + ")";
     }
 }

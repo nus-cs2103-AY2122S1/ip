@@ -7,6 +7,9 @@ public abstract class Task {
 
     protected String description;
     protected boolean isDone;
+    protected final String NOT_DONE_STRING = "0";
+    protected final int DONE = 1;
+    protected final int NOT_DONE = 0;
 
     /**
      * Initialises Task object with a description and default undone status.
@@ -22,6 +25,11 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Returns the appropriate string based on whether the task is done.
+     *
+     * @return "[X]" if task is done or "[ ]" if not done yet.
+     */
     public String getStatusIcon() {
         return (isDone ? "[X]" : "[ ]");
     }

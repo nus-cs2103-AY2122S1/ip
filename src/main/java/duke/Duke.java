@@ -11,6 +11,13 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    private final int FIND_INPUT_START_INDEX = 5;
+    private final int DELETE_INPUT_START_INDEX = 7;
+    private final int DONE_INPUT_START_INDEX = 5;
+    private final int TODO_INPUT_START_INDEX = 5;
+    private final int DEADLINE_INPUT_START_INDEX = 9;
+    private final int EVENT_INPUT_START_INDEX = 6;
+
     /**
      * Creates Ui and Storage instances.
      * Loads data from fisk into TaskList object to create list of tasks user currently has.
@@ -49,17 +56,17 @@ public class Duke {
             case BYE:
                 return ui.showGoodbye();
             case FIND:
-                return tasks.find(fullCommand.substring(5), ui);
+                return tasks.find(fullCommand.substring(FIND_INPUT_START_INDEX), ui);
             case DELETE:
-                return tasks.delete(fullCommand.substring(7), storage, ui);
+                return tasks.delete(fullCommand.substring(DELETE_INPUT_START_INDEX), storage, ui);
             case DONE:
-                return tasks.done(fullCommand.substring(5), storage, ui);
+                return tasks.done(fullCommand.substring(DONE_INPUT_START_INDEX), storage, ui);
             case TODO:
-                return tasks.createTodo(fullCommand.substring(5), storage, ui);
+                return tasks.createTodo(fullCommand.substring(TODO_INPUT_START_INDEX), storage, ui);
             case DEADLINE:
-                return tasks.createDeadline(fullCommand.substring(9), storage, ui);
+                return tasks.createDeadline(fullCommand.substring(DEADLINE_INPUT_START_INDEX), storage, ui);
             case EVENT:
-                return tasks.createEvent(fullCommand.substring(6), storage, ui);
+                return tasks.createEvent(fullCommand.substring(EVENT_INPUT_START_INDEX), storage, ui);
             default:
                 throw new DukeException("Invalid command");
             }

@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
 public class TaskList {
 
     private ArrayList<Task> taskList;
+    private final int LENGTH_OF_BY = 4;
+    private final int LENGTH_OF_AT = 4;
 
     /**
      * Converts the ArrayList of task strings to Task objects stored in the ArrayList of tasks.
@@ -65,10 +67,10 @@ public class TaskList {
     public String done(String num, Storage storage, Ui ui) throws DukeException {
 
         try {
-            int listNum = Integer.parseInt(num);
-            this.taskList.get(listNum - 1).setDone(true);
-            Task doneTask = this.taskList.get(listNum - 1);
-            storage.replaceFileLine(doneTask.getFileString(), listNum - 1);
+            int listIndex = Integer.parseInt(num) - 1;
+            this.taskList.get(listIndex).setDone(true);
+            Task doneTask = this.taskList.get(listIndex);
+            storage.replaceFileLine(doneTask.getFileString(), listIndex);
             return ui.showDoneMessage(doneTask);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please provide a number after the done command that is within"
@@ -93,9 +95,9 @@ public class TaskList {
      */
     public String delete(String num, Storage storage, Ui ui) throws DukeException {
         try {
-            int listNum = Integer.parseInt(num);
-            Task deletedTask = this.taskList.remove(listNum - 1);
-            storage.deleteFileLine(listNum - 1);
+            int listIndex = Integer.parseInt(num) - 1;
+            Task deletedTask = this.taskList.remove(listIndex);
+            storage.deleteFileLine(listIndex);
             return String.format("%s %s", ui.showDeletedMessage(deletedTask),
                     ui.showTaskListSize(this.taskList.size()));
         } catch (IndexOutOfBoundsException e) {
@@ -118,10 +120,10 @@ public class TaskList {
      * @return task that was created and the new size of the task list
      */
     public String createTodo(String description, Storage storage, Ui ui) {
-        Task addedTask = new Todo(description);
-        this.taskList.add(addedTask);
-        storage.appendToFile(addedTask.getFileString());
-        return String.format("%s %s", ui.showAddMessage(addedTask), ui.showTaskListSize(this.taskList.size()));
+        Task taskToAdd = new Todo(description);
+        this.taskList.add(taskToAdd);
+        storage.appendToFile(taskToAdd.getFileString());
+        return String.format("%s %s", ui.showAddMessage(taskToAdd), ui.showTaskListSize(this.taskList.size()));
     }
 
     /**
@@ -138,7 +140,7 @@ public class TaskList {
     public String createDeadline(String description, Storage storage, Ui ui) throws DukeException {
         try {
             String newDescription = description.substring(0, description.indexOf(" /by "));
-            String by = description.substring(description.indexOf("/by ") + 4);
+            String by = description.substring(description.indexOf("/by ") + LENGTH_OF_BY);
             Task addedTask = new Deadline(newDescription, by);
             this.taskList.add(addedTask);
             storage.appendToFile(addedTask.getFileString());
@@ -166,7 +168,7 @@ public class TaskList {
     public String createEvent(String description, Storage storage, Ui ui) throws DukeException {
         try {
             String newDescription = description.substring(0, description.indexOf(" /at "));
-            String at = description.substring(description.indexOf("/at ") + 4);
+            String at = description.substring(description.indexOf("/at ") + LENGTH_OF_AT);
             Task addedTask = new Event(newDescription, at);
             this.taskList.add(addedTask);
             storage.appendToFile(addedTask.getFileString());
@@ -182,6 +184,7 @@ public class TaskList {
 
     /**
      * Converts ArrayList of strings representing Task objects to ArrayList of Task objects.
+     * String will be in the form of Task Type | 1 or 0 | Task description | date and time.
      *
      * @param taskListStrings ArrayList of strings representing Task objects.
      * @return ArrayList of Task objects
