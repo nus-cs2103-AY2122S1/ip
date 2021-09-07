@@ -30,7 +30,7 @@ public class TaskList extends ArrayList<Task> {
     }
 
     /**
-     * Mark task as complete using its index.
+     * Marks task as complete using its index.
      * Index is zero indexed.
      *
      * @param index index of task to mark as complete.
@@ -59,7 +59,7 @@ public class TaskList extends ArrayList<Task> {
      * Filters tasks that contain a string.
      *
      * @param searchString String to search for.
-     * @return ArrayList of all tasks that contain searchstring.
+     * @return ArrayList of all tasks that contain searchString.
      */
     public TaskList filter(String searchString) {
         TaskList filteredTasks = new TaskList();
@@ -80,14 +80,16 @@ public class TaskList extends ArrayList<Task> {
      */
     @Override
     public String toString() {
-        String stringifiedList = "";
+        StringBuilder stringBuilder = new StringBuilder();
+        String listItem;
         for (int i = 0; i < super.size(); i++) {
-            stringifiedList += (i + 1) + ". " + super.get(i).toString();
+            listItem = (i + 1) + ". " + super.get(i).toString();
+            stringBuilder.append(listItem);
             // After last item should not have line break
             if (i < super.size() - 1) {
-                stringifiedList += "\n";
+                stringBuilder.append("\n");
             }
         }
-        return stringifiedList;
+        return stringBuilder.toString();
     }
 }

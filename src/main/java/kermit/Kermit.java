@@ -6,9 +6,9 @@ import kermit.command.Command;
  * Driver class for Kermit, a frog that keeps tracks of your tasks.
  */
 public class Kermit {
-    private Storage storage;
+    private final Storage storage;
     private TaskList taskList;
-    private Ui ui;
+    private final Ui ui;
 
     /**
      * Constructor for Kermit.
@@ -21,13 +21,8 @@ public class Kermit {
         try {
             taskList = new TaskList(storage.load());
         } catch (KermitException e) {
-            ui.getLoadingError();
             taskList = new TaskList();
         }
-    }
-
-    public String getIntroMessage() {
-        return ui.getIntroMessage();
     }
 
     public String getResponse(String input) {

@@ -6,8 +6,6 @@ import kermit.tasks.Task;
  * Ui handles interface with user such as receiving user input and printing messages to user.
  */
 public class Ui {
-    private static final String introductionText =
-            "Hello I am Kermit ( *・∀・)ノ゛, eaten any flies today?\nWhat can I do for you?";
     private static final String listText = "Here are the tasks in your list:";
     private static final String completeTaskText = "Ribbit Ribbit! Good job, task has been marked as complete:";
     private static final String filteredTaskText = "Here are the matching tasks in your list:";
@@ -19,15 +17,6 @@ public class Ui {
      * Constructor for Ui.
      */
     public Ui() {
-    }
-
-    /**
-     * Return message to welcome user.
-     *
-     * @return String to welcome user.
-     */
-    public String getIntroMessage() {
-        return introductionText;
     }
 
     /**
