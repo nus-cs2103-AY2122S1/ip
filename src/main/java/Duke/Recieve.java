@@ -40,7 +40,7 @@ public class Recieve {
                 } else if (input.startsWith("find ") || input.startsWith("find")) {
                     return parser.find(input);
                 } else if (input.equals("help")){
-                    return parser.welcomeMessage();
+                    return parser.helpMessage();
                 } else {
                     return parser.add(input);
                 }

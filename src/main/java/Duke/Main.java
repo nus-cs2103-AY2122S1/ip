@@ -16,9 +16,17 @@ public class Main extends Application {
     private Duke duke = new Duke();
 
 
+    /**
+     * A public constructor for Main class.
+     * @throws IOException Thrown when storage file from dukec is not found.
+     */
     public Main() throws IOException {
     }
 
+    /**
+     * Overrides the stage method in Application. Sets the stage for the GUI.
+     * @param stage Stage for Duke GUI.
+     */
     @Override
     public void start(Stage stage) {
         try {

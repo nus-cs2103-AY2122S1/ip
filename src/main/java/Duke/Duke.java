@@ -20,7 +20,6 @@ public class Duke {
 
     /**
      * A public constructor to initialize a session with Duke.
-     *
      * @throws IOException Thrown when the file is not found.
      */
     public Duke() throws IOException {
@@ -32,15 +31,16 @@ public class Duke {
             tasks = new TaskList(storage.load());
             parser = new Parser(tasks, storage);
             recieve = new Recieve(parser);
-//            recieve.run();
+
         } catch (FileNotFoundException e) {
             tasks = new TaskList();
-            System.out.println("Creating new file... Please try again!");
         }
     }
 
     /**
-     *
+     * Returns Duke's response after user's input in string format.
+     * @param input The user's input.
+     * @return Duke's response in string format.
      */
     String getResponse(String input) {
         return recieve.run(input);
