@@ -121,7 +121,7 @@ public class TaskList {
             return "There is no task " + index;
         }
         Task task = list.get(index - 1);
-        String[] parts = input.split(" ");
+        String[] parts = input.split(" ", 2);
         String taskType = parts[0];
         String replacement = parts[1];
         switch (taskType.toLowerCase()) {
@@ -138,7 +138,7 @@ public class TaskList {
             throw new DukeException("Edit type unclear, please specify either /date, /time, /description");
         }
         store.writeToFile(list);
-        return  "Noted. I've edited this C-task: \n"
+        return  "Noted. I've edited this task: \n"
                 + task.toString();
     }
 
