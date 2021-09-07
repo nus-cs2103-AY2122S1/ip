@@ -75,6 +75,20 @@ public abstract class Task {
     }
 
     /**
+     * Updates the task description to a new string
+     *
+     * @param s new string to update the description with
+     * @throws PibException when s is blank
+     */
+    public String editDescription(String s) throws PibException {
+        if (s.isBlank()) {
+            throw new PibException("empty-new-value");
+        }
+        description = s;
+        return Ui.printUpdateSuccessful();
+    }
+
+    /**
      * Getter for isDone
      *
      * @return isDone value 0 (false) or 1 (true)

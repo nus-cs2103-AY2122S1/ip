@@ -78,6 +78,13 @@ public class Ui {
         return s;
     }
 
+    public static String printUpdateSuccessful() {
+        String s = "Task successfully updated!";
+        System.out.println(s);
+        System.out.println(DIVIDER);
+        return s;
+    }
+
     public static String printEnd() {
         String s = "Bye! See you next time!\n";
         System.out.println(s);
@@ -166,11 +173,28 @@ public class Ui {
             System.out.println(s15);
             System.out.println(DIVIDER);
             return s15;
-        default:
-            String s16 = "Error Occurred!";
+        case "edit-wrong-format":
+            String s16 = "Please format command as: edit <task number> </i or /d or /t> <new value>";
             System.out.println(s16);
             System.out.println(DIVIDER);
             return s16;
+        case "no-todo-date":
+            String s17 = "Todo tasks do not contain date";
+            System.out.println(DIVIDER);
+            return s17;
+        case "invalid-update-part":
+            String s18 = "Use /i to update task Information, /d to update task Date and /t to update task Time";
+            System.out.println(DIVIDER);
+            return s18;
+        case "empty-new-value":
+            String s19 = "New value cannot be blank";
+            System.out.println(DIVIDER);
+            return s19;
+        default:
+            String defaultError = "Error Occurred!";
+            System.out.println(defaultError);
+            System.out.println(DIVIDER);
+            return defaultError;
         }
     }
 }

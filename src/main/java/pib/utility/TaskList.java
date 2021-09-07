@@ -133,10 +133,66 @@ public class TaskList {
      */
     public String markAsDone(int taskNum) throws PibException {
         try {
+            String response = list.get(taskNum - 1).markAsDone();
             Storage.saveData(this, Pib.DATA_FILE_PATH);
-            return list.get(taskNum - 1).markAsDone();
+            return response;
         } catch (IndexOutOfBoundsException e) {
             throw new PibException("ioob-exception");
+        }
+    }
+
+    /**
+     * Edits the task's description, date or time
+     *
+     * @param taskDetails string that includes the task number to edit, which part of the task to edit and the new value
+     * @return string response if the update is successful
+     * @throws PibException when the command is blank, formatted wrongly or an invalid task number is provided
+     */
+    public String edit(String taskDetails) throws PibException {
+        try {
+            if (taskDetails.isBlank()) {
+                throw new PibException("edit-wrong-format");
+            }
+            taskDetails = taskDetails.trim();
+            int slash = taskDetails.indexOf("/");
+
+            Task t = list.get(Integer.parseInt(taskDetails.substring(0, slash).trim()) - 1);
+            char partToEdit = taskDetails.charAt(slash + 1);
+            String newValue = taskDetails.substring(slash + 3);
+            String response = editHelper(t, partToEdit, newValue);
+            Storage.saveData(this, Pib.DATA_FILE_PATH);
+            return response;
+        } catch (IndexOutOfBoundsException e) {
+            throw new PibException("edit-wrong-format");
+        } catch (NumberFormatException e) {
+            throw new PibException("ioob-exception");
+        }
+    }
+
+    private String editHelper(Task t, char partToEdit, String newValue) throws PibException {
+        String dateOrTime;
+        switch (partToEdit) {
+        case 'i':
+            return t.editDescription(newValue);
+        case 'd':
+            dateOrTime = "date";
+            break;
+        case 't':
+            dateOrTime = "time";
+            break;
+        default:
+            throw new PibException("invalid-update-part");
+        }
+
+        if (t instanceof Todo) {
+            throw new PibException("no-todo-date");
+        } else if (t instanceof Deadline) {
+            Deadline deadline = (Deadline) t;
+            return deadline.editDateTime(dateOrTime, newValue);
+        } else {
+            assert t instanceof Event;
+            Event event = (Event) t;
+            return event.editDateTime(dateOrTime, newValue);
         }
     }
 
@@ -175,4 +231,6 @@ public class TaskList {
         }
         return Ui.printQueryFound(query).concat("\n").concat(new TaskList(filtered).viewList());
     }
+
+
 }

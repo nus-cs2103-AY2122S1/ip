@@ -95,6 +95,9 @@ public class Parser {
             case "find":
                 list.find(taskDetails);
                 break;
+            case "edit":
+                list.edit(taskDetails);
+                break;
             default:
                 throw new PibException("unknown-command");
             }
@@ -122,6 +125,8 @@ public class Parser {
                 return list.delete(Integer.parseInt(taskDetails));
             case "find":
                 return list.find(taskDetails);
+            case "edit":
+                return list.edit(taskDetails);
             default:
                 throw new PibException("unknown-command");
             }
