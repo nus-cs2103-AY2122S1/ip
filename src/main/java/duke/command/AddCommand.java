@@ -20,6 +20,7 @@ public class AddCommand extends Command {
      * @param inputSplit Input by user
      */
     public AddCommand(TaskType t, String[] inputSplit) {
+        assert(input != null) : "Input into command was null!";
         this.type = t;
         this.input = inputSplit;
     }

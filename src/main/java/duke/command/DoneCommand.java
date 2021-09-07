@@ -13,6 +13,7 @@ public class DoneCommand extends Command {
     private String[] input;
 
     public DoneCommand(String[] input) {
+        assert(input != null) : "Input into command was null!";
         this.input = input;
     }
 
@@ -23,6 +24,6 @@ public class DoneCommand extends Command {
             storage.modifySave(tasks.getList());
             return ui.doneResponse(t);
         }
-        return "What do i done again???";
+        return "";
     }
 }

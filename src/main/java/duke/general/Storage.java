@@ -39,33 +39,41 @@ public class Storage {
         try {
             Files.createDirectories(Paths.get("data/"));
             File f = new File("data/duke.txt");
+
             if (f.createNewFile()) {
                 System.out.println("No save file found. New file created.");
             } else {
                 System.out.println("Save file found and restored");
-                Scanner s = new Scanner(f);
-                while (s.hasNext()) {
-                    String[] taskLine = s.nextLine().split("/");
-                    switch (taskLine[0]) {
-                    case "T":
-                        addToList(TaskType.TODO, taskLine);
-                        break;
-                    case "D":
-                        addToList(TaskType.DEADLINE, taskLine);
-                        break;
-                    case "E":
-                        addToList(TaskType.EVENT, taskLine);
-                        break;
-                    default:
-                        System.out.println("Unexpected value obtained: " + taskLine[0]);
-                    }
-                }
+                loadSaveAdder(new Scanner(f));
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
         return this.storedList;
+    }
+
+    /**
+     * Helper function for loadSave to take in lines from save file and add it to the storedList
+     * @param s Scanner object created with the save file
+     */
+    private void loadSaveAdder(Scanner s) {
+        while (s.hasNext()) {
+            String[] taskLine = s.nextLine().split("/");
+            switch (taskLine[0]) {
+            case "T":
+                addToList(TaskType.TODO, taskLine);
+                break;
+            case "D":
+                addToList(TaskType.DEADLINE, taskLine);
+                break;
+            case "E":
+                addToList(TaskType.EVENT, taskLine);
+                break;
+            default:
+                System.out.println("Unexpected value obtained: " + taskLine[0]);
+            }
+        }
     }
 
     /**
@@ -99,6 +107,8 @@ public class Storage {
      * @param t duke.task.Task to be saved into save file
      */
     public void appendSave(Task t) {
+        assert(t != null) : "Task does not even exist to append!";
+
         try {
             File f = new File(filePath);
             Scanner sc = new Scanner(f);
@@ -118,6 +128,7 @@ public class Storage {
      * @param newList The new task list after modifications (delete, done)
      */
     public void modifySave(ArrayList<Task> newList) {
+        assert(newList != null) : "List of tasks needs to exist before adding";
         try {
             FileWriter fw = new FileWriter(filePath);
             fw.write("");
