@@ -16,11 +16,4 @@ public abstract class Command {
      */
     public abstract String execute(TaskList taskList, Ui ui);
 
-    /**
-     * Checks whether the chatbot should exit following the execution of the command
-     *
-     * @return boolean value of whether the chatbot should exit
-     */
-    public abstract boolean isExit();
-
 }

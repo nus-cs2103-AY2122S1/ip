@@ -13,6 +13,7 @@ public class Event extends Task {
 
     /**
      * Initialises the description and end date and time of an event
+     *
      * @param description description of event
      * @param at end date of event
      */

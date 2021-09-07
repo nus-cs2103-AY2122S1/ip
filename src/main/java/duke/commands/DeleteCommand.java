@@ -11,20 +11,15 @@ import duke.ui.Ui;
  */
 public class DeleteCommand extends Command {
 
-    private int index;
+    private final int index;
 
     /**
-     * Public constructor which initialises the index of the task to be deleted
+     * Initialises the index of the task to be deleted
      *
      * @param index index of task which is to be deleted from the list
      */
     public DeleteCommand(int index) {
         this.index = index;
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 
     /**

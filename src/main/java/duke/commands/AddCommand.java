@@ -12,25 +12,19 @@ public class AddCommand extends Command {
     private Task task;
 
     /**
-     * Constructor - Initialises the task to be added.
+     * Initialises the task to be added.
      *
-     * @param task input task
+     * @param task input task to be added to the list
      */
     public AddCommand(Task task) {
         this.task = task;
     }
 
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
     /**
-     * Takes in a list of tasks and the ui. Checks whether the task is already present in the list of tasks
-     * and if it is, it throws a RepeatedTaskException. Else it adds the task to the list of tasks.
+     * Adds the specified task to the task list if it is not already inside, throws a RepeatedTaskException otherwise.
      *
-     * @param taskList the list of tasks upon which the operations need to be performed
-     * @param ui the ui in which the result message of the command execution is displayed to the user
+     * @param taskList Current list of tasks.
+     * @param ui Instance of the UI.
      */
     @Override
     public String execute(TaskList taskList, Ui ui) {

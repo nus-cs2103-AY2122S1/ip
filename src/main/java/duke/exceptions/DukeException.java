@@ -7,7 +7,8 @@ package duke.exceptions;
 public class DukeException extends RuntimeException {
 
     /**
-     * public constructor which takes in the error message as an input
+     * Initialises the input error message
+     *
      * @param message input error message
      */
     public DukeException(String message) {

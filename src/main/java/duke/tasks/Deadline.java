@@ -12,6 +12,7 @@ public class Deadline extends Task {
 
     /**
      * Initialises the description and end date of a deadline
+     *
      * @param description description of deadline
      * @param by end date of deadline
      */
@@ -19,7 +20,6 @@ public class Deadline extends Task {
         super(description);
         this.by = by;
     }
-
 
     @Override
     public String getDetails() {

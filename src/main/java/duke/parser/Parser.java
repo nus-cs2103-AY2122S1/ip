@@ -26,7 +26,6 @@ import java.time.LocalDate;
 
 /**
  * Encapsulates the parsing, interpretation and validation of the user's input commands
- *
  */
 public class Parser {
 

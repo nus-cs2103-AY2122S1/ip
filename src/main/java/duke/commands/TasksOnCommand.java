@@ -13,20 +13,15 @@ import duke.ui.Ui;
  */
 public class TasksOnCommand extends Command {
 
-    private LocalDate date;
+    private final LocalDate date;
 
     /**
-     * Public constructor which is used to initialise the input date
+     * Initialise the input date which is used to search the list
      *
      * @param date input date which is used to retrieve the tasks
      */
     public TasksOnCommand(LocalDate date) {
         this.date = date;
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 
     /**

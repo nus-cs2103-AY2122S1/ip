@@ -15,8 +15,7 @@ public class DateTimeParser extends Parser {
 
     /**
      * Parses the date of a deadline from String to LocalDate
-     * and throws an IncorrectFormatException in the case
-     * that the input date is formatted incorrectly
+     * and throws an IncorrectFormatException if the input date is formatted incorrectly
      *
      * @param date input date string
      * @return the parsed date as a LocalDate
@@ -85,5 +84,4 @@ public class DateTimeParser extends Parser {
             throw new IncorrectFormatException("The date and time have been stored in the wrong format");
         }
     }
-
 }
