@@ -48,6 +48,7 @@ public class Storage {
             while (s.hasNext()) {
                 String line = s.nextLine();
                 boolean isDone = line.charAt(7) == 'X';
+                assert line.charAt(3) == '[';
                 switch (line.charAt(4)) {
                 case 'T':
                     arr.add(new Todo(line.substring(10), isDone));

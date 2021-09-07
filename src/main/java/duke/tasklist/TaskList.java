@@ -97,7 +97,6 @@ public class TaskList {
         String dateTime = fullDescription.substring(sepIndex + 4);
         String[] dateTaskArray = dateTime.split(" ");
         if (dateTaskArray.length == 2) {
-            System.out.println(dateTime);
             tasks.add(new Deadline(description, dateTime, FORMAT_TIME, true, false));
         } else {
             tasks.add(new Deadline(description, dateTime, FORMAT_NO_TIME, false, false));
