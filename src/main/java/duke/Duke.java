@@ -190,7 +190,7 @@ public class Duke extends Application {
                 if (input.length() == 6) {
                     throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
                 }
-                assert input.substring(8).length() == 1 : "There should be an index";
+                assert input.substring(7).length() == 1 : "There should be an index";
 
                 int idx = parser.getDeleteIdx(input);
                 String desc = SL.get(idx).getDescription();
