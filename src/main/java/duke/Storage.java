@@ -53,7 +53,7 @@ public class Storage {
                 return;
             }
         }
-        assert dataFile.canRead() && dataFile.canWrite(): "File should be readable and writable at this point.";
+        assert dataFile.canRead() && dataFile.canWrite() : "File should be readable and writable at this point.";
         loadData();
     }
 

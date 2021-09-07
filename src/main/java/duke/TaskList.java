@@ -41,7 +41,7 @@ public class TaskList {
     public void deleteTask(int number) {
         taskList.remove(number);
         totalTasks -= 1;
-        assert totalTasks >= 0: "Number of Tasks should be more than or equals to 0";
+        assert totalTasks >= 0 : "Number of Tasks should be more than or equals to 0";
     }
 
     /**
@@ -52,7 +52,7 @@ public class TaskList {
     public void deleteTask(Task task) {
         taskList.remove(task);
         totalTasks -= 1;
-        assert totalTasks >= 0: "Number of Tasks should be more than or equals to 0";
+        assert totalTasks >= 0 : "Number of Tasks should be more than or equals to 0";
     }
 
     /**

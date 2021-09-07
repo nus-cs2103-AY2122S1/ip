@@ -1,10 +1,10 @@
 package duke;
 
-import javafx.application.Platform;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import javafx.application.Platform;
 
 /**
  * A class containing methods that parse relevant data from strings.
@@ -83,10 +83,15 @@ public class Parser {
         if (firstString.equals("")) {
             return Ui.getEmptyInputError();
         }
+
         //case if user wants to exit
         if (firstString.equals("bye")) {
             Platform.exit();
             return Ui.getEndMessage();
+        }
+
+        if (firstString.equals("help")) {
+            return Ui.getHelpMessage();
         }
 
         //below are cases for specified keywords:

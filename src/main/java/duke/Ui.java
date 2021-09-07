@@ -26,7 +26,7 @@ public class Ui {
     private static final String TASK_COMPLETED = "Ok, very nice. I have set the following task as completed.\n";
 
     private static final String BAD_INPUT_ERROR = "I could not understand your input. Please stop speaking gibberish"
-            + " to me!\n";
+            + " to me!\nType \"help\" if you don't know what to type!";
 
     private static final String END_MESSAGE = "kthxbye";
 
@@ -43,6 +43,11 @@ public class Ui {
     private static final String NO_MATCHES = "Looks like none of your tasks match with what you are searching for.\n";
 
     private static final String YES_MATCHES = "Lucky for you, the following Tasks seem to match your search term.\n";
+
+    private static final String HELP_MESSAGE = "Oh, you need my help? Here are some commands:\n"
+            + "todo <Task Name>\ndeadline <Task Name> <Date in YYYY-MM-DD format>\n"
+            + "event <Task Name> <Date in YYYY-MM-DD format>\nlist\ndelete <Task Index>\n"
+            + "done <Task Index>\nfind <Search Term>\nbye";
 
     /**
      * Returns a message about an error with a number.
@@ -143,6 +148,11 @@ public class Ui {
         return FILE_ERROR;
     }
 
+    /**
+     * Returns a message about an error when reading a file.
+     *
+     * @return The specified string.
+     */
     public static String getReadFileError() {
         return READ_FILE_ERROR;
     }
@@ -172,5 +182,14 @@ public class Ui {
      */
     public static String getMatch() {
         return YES_MATCHES;
+    }
+
+    /**
+     * Returns a message about user commands.
+     *
+     * @return The specified string.
+     */
+    public static String getHelpMessage() {
+        return HELP_MESSAGE;
     }
 }
