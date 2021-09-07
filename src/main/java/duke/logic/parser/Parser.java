@@ -91,6 +91,7 @@ public class Parser {
      * @return The prepared command.
      */
     private Command handleBye(String[] tokens) {
+        assert tokens.length > 0;
         if (tokens.length > 1) {
             return new InvalidCommand(INVALID_BYE_ERR_MSG);
         }
@@ -104,6 +105,7 @@ public class Parser {
      * @return The prepared command.
      */
     private Command handleList(String[] tokens) {
+        assert tokens.length > 0;
         if (tokens.length > 1) {
             return new InvalidCommand(INVALID_LIST_ERR_MSG);
         }
@@ -117,6 +119,7 @@ public class Parser {
      * @return The prepared command.
      */
     private Command handleDone(String[] tokens) {
+        assert tokens.length > 0;
         if (tokens.length < 2) {
             return new InvalidCommand(INVALID_DONE_ERR_MSG);
         }
@@ -135,6 +138,7 @@ public class Parser {
      * @return The prepared command.
      */
     private Command handleDelete(String[] tokens) {
+        assert tokens.length > 0;
         if (tokens.length < 2) {
             return new InvalidCommand(INVALID_DELETE_ERR_MSG);
         }
@@ -153,6 +157,7 @@ public class Parser {
      * @return The prepared command.
      */
     private Command handleToDo(String[] tokens) {
+        assert tokens.length > 0;
         if (tokens.length < 2) {
             return new InvalidCommand(INVALID_TODO_ERR_MSG);
         }
@@ -166,6 +171,7 @@ public class Parser {
      * @return The prepared command.
      */
     private Command handleDeadline(String[] tokens) {
+        assert tokens.length > 0;
         if (tokens.length < 2) {
             return new InvalidCommand(INVALID_DEADLINE_ERR_MSG);
         }
@@ -188,6 +194,7 @@ public class Parser {
      * @return The prepared command.
      */
     private Command handleEvent(String[] tokens) {
+        assert tokens.length > 0;
         if (tokens.length < 2) {
             return new InvalidCommand(INVALID_EVENT_ERR_MSG);
         }
@@ -215,6 +222,7 @@ public class Parser {
      * @return The prepared command.
      */
     private Command handleFind(String[] tokens) {
+        assert tokens.length > 0;
         if (tokens.length < 2) {
             return new InvalidCommand(INVALID_FIND_ERR_MSG);
         }

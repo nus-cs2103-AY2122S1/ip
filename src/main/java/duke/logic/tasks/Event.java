@@ -39,8 +39,8 @@ public class Event extends Task {
     }
 
     @Override
-    public String toSaveFormat() {
-        return "E" + super.toSaveFormat() + " | " + at + " | " + end;
+    public String getSaveFormat() {
+        return "E" + super.getSaveFormat() + " | " + at + " | " + end;
     }
 
     @Override

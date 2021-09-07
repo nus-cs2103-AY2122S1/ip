@@ -14,7 +14,7 @@ public class TaskStub extends Task {
     }
 
     @Override
-    public String toSaveFormat() {
+    public String getSaveFormat() {
         return "S | 1 | Stub task " + stubNo;
     }
 

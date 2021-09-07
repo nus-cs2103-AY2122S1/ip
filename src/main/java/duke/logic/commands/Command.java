@@ -20,6 +20,7 @@ public abstract class Command {
      * @param tl The task list to be operated on.
      */
     public void setTaskList(TaskList tl) {
+        assert tl != null;
         taskList = tl;
     }
 

@@ -41,7 +41,7 @@ public class TextDuke {
             textUi.showLoadingError(e.getMessage());
             taskList = new TaskList();
         }
-        textUi.showWelcome();
+        textUi.showWelcomeMessage();
     }
 
     /**
@@ -66,11 +66,11 @@ public class TextDuke {
      */
     private void exit() {
         try {
-            Storage.save(taskList.toSaveFormat());
+            Storage.save(taskList.getSaveFormat());
         } catch (IOException e) {
             textUi.showSavingError(e.getMessage());
         }
-        textUi.showGoodbye();
+        textUi.showGoodbyeMessage();
         textUi.close();
         System.exit(0);
     }
