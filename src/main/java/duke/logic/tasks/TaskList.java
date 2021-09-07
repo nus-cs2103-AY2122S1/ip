@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Represents a list of tasks.
@@ -87,9 +86,8 @@ public class TaskList {
      */
     public List<Task> find(String[] keywords) {
         assert keywords.length > 0;
-        Stream<String> searchWords = Arrays.stream(keywords);
         return list.stream()
-                .filter(task -> searchWords.anyMatch(task::containsKeyword))
+                .filter(task -> Arrays.stream(keywords).anyMatch(task::containsKeyword))
                 .collect(Collectors.toList());
     }
 
