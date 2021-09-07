@@ -8,14 +8,15 @@ import org.junit.jupiter.api.Test;
 import duke.DukeException;
 
 public class DeadlineTest {
+    private final String errorHeader = "(O_O;) Oh no!! ";
+
     @Test
     public void init_emptyDescription_throwException() {
         try {
             new Deadline("", "25-08-2021 14:30");
             fail();
         } catch (DukeException e) {
-            assertEquals("∑(O_O;) Oh no!! Looks like you forgot to include a description of the deadline.",
-                e.toString());
+            assertEquals(errorHeader + "Looks like you forgot to include a description of the deadline.", e.toString());
         }
     }
 
@@ -25,7 +26,7 @@ public class DeadlineTest {
             new Deadline("task", "");
             fail();
         } catch (DukeException e) {
-            assertEquals("∑(O_O;) Oh no!! Looks like you forgot to include a deadline for the task.", e.toString());
+            assertEquals("(O_O;) Oh no!! Looks like you forgot to include a deadline for the task.", e.toString());
         }
     }
 
@@ -35,7 +36,7 @@ public class DeadlineTest {
             new Deadline("task", "2pm");
             fail();
         } catch (DukeException e) {
-            assertEquals("∑(O_O;) Oh no!! The deadline date is invalid. Please follow this format: dd-MM-yyyy HH:mm",
+            assertEquals(errorHeader + "The deadline date is invalid. Please follow this format: dd-MM-yyyy HH:mm",
                 e.toString());
         }
     }

@@ -19,7 +19,7 @@ public class DisplayCommand extends Command {
         if (tasks.getListSize() == 0) {
             return "No tasks in your list.";
         }
-        
+
         return formatOutput("Your task list:", formatOutput(tasks.getTaskStrings()));
     }
 

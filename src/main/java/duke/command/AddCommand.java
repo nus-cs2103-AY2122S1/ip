@@ -34,15 +34,16 @@ public class AddCommand extends Command {
      *
      * @param tasks   The task list to execute the command on.
      * @param storage The storage for the tasks.
-     * @throws DukeException
      * @return a string output.
+     * @throws DukeException
      */
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         Task task = tasks.addTask(taskType, taskDescription);
-        
+
         storage.save(tasks.getListData());
-        
-        return formatOutput("I've added this task:", task.toString(), "Now you have " + tasks.getListSize() + " tasks in the list.");
+
+        return formatOutput("I've added this task:", task.toString(),
+            "Now you have " + tasks.getListSize() + " tasks in the list.");
     }
 
     /**
