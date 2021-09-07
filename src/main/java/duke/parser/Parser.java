@@ -34,19 +34,25 @@ public class Parser {
             } else if (cmd.equals("list")) {
                 return new ListCommand();
             } else if (cmd.matches("^done\\s\\d+$")) {
+                assert cmd.length() > 5;
                 int serialNo = Integer.parseInt(cmd.substring(5));
                 return new DoneCommand(serialNo);
             } else if (cmd.matches("^deadline\\s.*\\s/by\\s\\d{4}-\\d{2}-\\d{2}$")) {
-                String[] splitText = cmd.substring(9).split(" /by ");
+                assert cmd.length() > 9;
+                String[] splitText = cmd.substring(9).split("\\s/by\\s");
+                assert splitText.length == 2;
                 Task task = new Deadline(splitText[0].trim(), LocalDate.parse(splitText[1]), false);
                 return new AddCommand(task);
             } else if (cmd.matches("^event\\s.*\\s/at\\s\\d{4}-\\d{2}-\\d{2}$")) {
-                String[] splitText = cmd.substring(6).split(" /at ");
+                assert cmd.length() > 6;
+                String[] splitText = cmd.substring(6).split("\\s/at\\s");
+                assert splitText.length == 2;
                 Task task = new Event(splitText[0].trim(), LocalDate.parse(splitText[1]), false);
                 return new AddCommand(task);
             } else if (cmd.matches("^todo\\s*$")) {
                 throw new DukeException("Sorry Boss, todo must be followed with a description.");
             } else if (cmd.matches("^todo\\s.*$")) {
+                assert cmd.length() > 5;
                 Task task = new ToDo(cmd.substring(5).trim(), false);
                 return new AddCommand(task);
             } else if (cmd.matches("^delete\\s\\d+$")) {
