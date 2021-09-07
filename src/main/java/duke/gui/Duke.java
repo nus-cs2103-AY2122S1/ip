@@ -12,8 +12,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
-
 /**
  * A GUI for Duke using FXML.
  */

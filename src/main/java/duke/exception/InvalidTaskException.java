@@ -18,6 +18,7 @@ public class InvalidTaskException extends DukeException {
 
     /**
      * Return the warning that the input is not a valid task.
+     *
      * @return The warning that the input is not a valid task.
      */
     @Override

@@ -14,6 +14,8 @@ public enum InputType {
     }
 
     /**
+     * Gets the value of the enum.
+     *
      * @return The value of element.
      */
     public String getValue() {

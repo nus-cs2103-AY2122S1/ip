@@ -32,6 +32,11 @@ public class Response {
         return builder;
     }
 
+    /**
+     * Returns a StringBuilder that contains message to tell user that task was successfully added.
+     *
+     * @return StringBuilder that contains message to tell user that task was successfully added.
+     */
     public StringBuilder getAddNewTaskMessage() {
         builder = new StringBuilder();
         builder.append("Got it. I've added this task:\n");

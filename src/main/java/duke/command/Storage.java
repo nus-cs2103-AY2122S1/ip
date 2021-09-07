@@ -54,15 +54,16 @@ public class Storage {
      * Reads through the src file and update the taskList.
      *
      * @param sc The scanner for the src file.
+     * @throws DuplicateException Throws when there are duplicate tasks in the source file.
+     * @throws InvalidTaskException Throws when the format of input task in the source file
+     * is not valid.
      */
     public void readEvents(Scanner sc) throws DuplicateException, InvalidTaskException {
         while (sc.hasNextLine()) {
             String task = sc.nextLine();
-
             if (task.equals("\n")) {
                 continue;
             }
-
             char taskType = task.charAt(0);
             char taskDone = task.charAt(4);
             String taskValue = task.substring(8);
@@ -106,7 +107,9 @@ public class Storage {
     /**
      * Loads tasks saved on the src file.
      *
+     * @throws DuplicateException Throws when readEvents throws this exception.
      * @throws IOException Throws IOException when Scanner cannot be created with the given src.
+     * @throws InvalidTaskException Throws when readEvents throws this exception.
      */
     public void loadSavedTasks() throws DuplicateException, IOException, InvalidTaskException {
         Scanner sc = new Scanner(src);
