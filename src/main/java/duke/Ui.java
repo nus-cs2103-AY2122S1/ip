@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Ui {
 
-    private final String lines = "--------------------------------------------------------------------------------------------";
     private String currentResponse;
 
     /**
@@ -20,7 +19,6 @@ public class Ui {
      */
     public void reply(String dukeReply) {
         currentResponse = dukeReply;
-        //System.out.println(dukeReply);
     }
 
     public String getCurrentResponse() {
@@ -58,21 +56,6 @@ public class Ui {
         System.out.println("\nInput:");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
-    }
-
-    /**
-     * Returns the opening String
-     */
-    public void printReplyOpening() {
-        System.out.println(lines);
-        System.out.println("Output: \n");
-    }
-
-    /**
-     * Returns the closing String
-     */
-    public void printReplyClosing() {
-        System.out.println(lines);
     }
 
     /**
