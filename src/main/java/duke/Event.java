@@ -9,6 +9,10 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
+    public LocalDate getDate() {
+        return date;
+    }
+
     protected final LocalDate date;
     protected final String time;
 

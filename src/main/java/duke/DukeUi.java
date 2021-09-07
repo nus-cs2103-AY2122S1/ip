@@ -42,6 +42,17 @@ public class DukeUi {
         return e.getMessage();
     }
 
+    public String showSchedule(ArrayList<Task> tasks, String date) {
+        if (tasks.size() == 0) {
+            return "You don't have any tasks on that day! Yay!";
+        }
+        String response = "Here are the tasks you have on " + date + ": \n";
+        for (int i = 0; i < tasks.size(); i++) {
+            response += tasks.get(i).toString() + "\n";
+        }
+        return response;
+    }
+
     /**
      * Informs the user that the task they requested
      * to mark as deleted is deleted.

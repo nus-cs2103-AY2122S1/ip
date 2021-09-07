@@ -65,6 +65,9 @@ public class Parser {
                 break;
             }
         }
+        if (getFirstCommand().equals("schedule")) {
+            startingIndexOfDate = 1;
+        }
         if (startingIndexOfDate == -1) {
             return "";
         } else {
