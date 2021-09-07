@@ -46,12 +46,17 @@ public class Storage {
      * Accepts the tasklist and writes to file.
      *
      * @param taskList The Tasklist object in the current user's session.
-     * @throws IOException Throws an exception if an error occurs while writing to file.
+     * @throws DukeException Throws an exception if an error occurs while writing to file.
      */
-    public void save(Tasklist taskList) throws IOException {
-        String writableData = taskList.toWritable();
-        FileWriter fileWriter = new FileWriter(this.filePath.toString());
-        fileWriter.write(writableData);
-        fileWriter.close();
+    public void save(Tasklist taskList) throws DukeException {
+        try {
+            String writableData = taskList.toWritable();
+            FileWriter fileWriter = new FileWriter(this.filePath.toString());
+            fileWriter.write(writableData);
+            fileWriter.close();
+        } catch (IOException e) {
+            throw new DukeException("your data could not be saved.");
+        }
+
     }
 }

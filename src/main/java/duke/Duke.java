@@ -44,7 +44,6 @@ public class Duke {
     private String markAsDone(String input){
         try {
             String[] keywords = input.split(" ");
-            String command = keywords[0];
             Integer idx = keywords.length > 1 ? Integer.parseInt(keywords[1]) : -1;
             Task task = listOfItems.getTask(idx);
             task.setDone();
@@ -154,7 +153,7 @@ public class Duke {
             String keyword = parser.getDescription(input);
             Tasklist validItems = listOfItems.findAllBy(keyword);
             return ui.listToPrintableString(validItems);
-        }catch (ArrayIndexOutOfBoundsException e){
+        }catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("please input a keyword in the format: [find] (keyword)");
         } catch (NullPointerException e) {
             throw new DukeException("no tasks match your given keyword!");
@@ -199,12 +198,8 @@ public class Duke {
             case "find":
                 return findItems(input);
             case "bye":
-                try {
-                    storage.save(listOfItems);
-                    return "your data has been successfully saved!";
-                } catch (IOException e) {
-                    throw new DukeException("your data could not be saved.");
-                }
+                storage.save(listOfItems);
+                return "your data has been successfully saved!";
             default:
                 markAsInvalid(input);
                 break;
