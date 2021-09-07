@@ -3,3 +3,4 @@ D _ 0 _ return book _ 2020-11-23 _ 18:00
 D _ 0 _ return book _ 2020-12-23
 T _ 0 _ exercise
 T _ 0 _ return book
+T _ 0 _ buy food
