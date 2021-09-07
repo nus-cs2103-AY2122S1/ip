@@ -1,7 +1,10 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import duke.task.Task;
 
@@ -63,11 +66,14 @@ public class Ui {
      * @param taskList takes in a list of tasks
      */
     public static void printTasks(ArrayList<Task> taskList) {
+        Stream<String> taskString = taskList.stream().map(task -> {
+            int position = taskList.indexOf(task);
+            return IND_2 + position + ". " + task + "\n";
+        });
         String tasks = "";
-        int i = 1;
-        for (Task task : taskList) {
-            tasks += IND_2 + i + ". " + task + "\n";
-            i++;
+        List<String> stringList = taskString.collect(Collectors.toList());
+        for (String s: stringList) {
+            tasks += s;
         }
         if (mainWindow != null) {
             mainWindow.sendDukeResponse(tasks);
