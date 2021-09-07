@@ -23,6 +23,8 @@ public class TaskList {
      * @throws IOException thrown when there is an error saving
      */
     public void save(Storage storage) throws IOException {
+        assert (tasks != null) : "Task list is not initialised!";
+
         storage.write(tasks);
     }
 
@@ -33,6 +35,8 @@ public class TaskList {
      * @throws IndexOutOfBoundsException thrown when index out of bound
      */
     public String remove(int index) throws IndexOutOfBoundsException {
+        assert (tasks != null) : "Task list is not initialised!";
+
         Task task = tasks.remove(index);
         return "Noted. I've removed this task:\n  "
                 + task
@@ -47,6 +51,8 @@ public class TaskList {
      * @param task the task to be added.
      */
     public String add(Task task) {
+        assert (tasks != null) : "Task list is not initialised!";
+
         tasks.add(task);
 
         return "Got it. I've added this task:\n  "
@@ -62,6 +68,8 @@ public class TaskList {
      * @param index the index starting with 1.
      */
     public String setDone(int index) {
+        assert (tasks != null) : "Task list is not initialised!";
+
         Task task = tasks.get(index);
         task.setDone();
         return "Nice! I've marked this task as done:\n" + task + "\n";
@@ -73,6 +81,8 @@ public class TaskList {
      * @param searchString the string contained by the description.
      */
     public String filter(String searchString) {
+        assert (tasks != null) : "Task list is not initialised!";
+
         List<Task> searchResult = tasks
                 .stream()
                 .filter(str -> str.getDescription().contains(searchString))
@@ -94,6 +104,8 @@ public class TaskList {
 
     @Override
     public String toString() {
+        assert (tasks != null) : "Task list is not initialised!";
+
         StringBuilder output;
 
         if (tasks.isEmpty()) {
