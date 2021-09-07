@@ -38,12 +38,15 @@ public class Ui {
     /**
      * Gets the user input.
      *
-     * @return The string representation of the user input
+     * @return The string representation of the user input.
      */
     public String getInput() {
         return sc.nextLine();
     }
 
+    /**
+     * Prints the goodbye text.
+     */
     public void printGoodBye() {
         printMessage("Going so soon? Hope to see you again!");
     }

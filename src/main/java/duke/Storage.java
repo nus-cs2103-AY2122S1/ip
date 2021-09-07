@@ -48,10 +48,10 @@ public class Storage {
     public ArrayList<Task> loadData() throws DukeException {
         // Make directory and/or file if they don't exist
         File dataFolder = new File(directory);
-        boolean folderCreated = dataFolder.mkdirs();
+        dataFolder.mkdirs();
         File dataFile = new File(directory + "/" + file);
         try {
-            boolean fileCreated = dataFile.createNewFile();
+            dataFile.createNewFile();
         } catch (IOException e) {
             System.out.println("Failed to create a new file");
             return null;
@@ -69,6 +69,7 @@ public class Storage {
                 String taskType = data[0];
                 boolean isDone = data[1].equals("1");
                 Task task = null;
+
                 assert (taskType.equals("D") || taskType.equals("E") || taskType.equals("T")) : "Data Corrupt in File";
                 switch (taskType) {
                 case "T":
