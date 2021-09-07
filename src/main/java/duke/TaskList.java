@@ -33,7 +33,9 @@ public class TaskList {
      * @param i Takes in an integer to find the correct string placement
      */
     public String doTask(int i) {
-        assert i < tasks.size() : "Invalid Input for done command";
+        if (i > tasks.size()) {
+            return "Invalid Input for done command";
+        }
         if (!tasks.get(i - 1).isDone) {
             String output = "Nice! I've marked this task as done:\n";
             tasks.get(i - 1).markAsDone();
@@ -156,5 +158,47 @@ public class TaskList {
             }
             return result;
         }
+    }
+
+    public String rescheduleTask(int input, String date) {
+        if (input > tasks.size()) {
+            return "Invalid Input for reschedule command";
+        }
+        Task rescheduleTask = tasks.get(input - 1);
+        String rescheduleString = rescheduleTask.toString();
+        Boolean isDone = rescheduleTask.isDone;
+        if (rescheduleString.charAt(1) == 'E') {
+            int i = rescheduleString.indexOf("(");
+            rescheduleTask = new EventTask(rescheduleString.substring(7, i), date);
+            tasks.set(input - 1, rescheduleTask);
+            if (isDone) {
+                tasks.get(input-1).markAsDone();
+            }
+        } else if (rescheduleString.charAt(1) == 'D') {
+            int i = rescheduleString.indexOf("(");
+            rescheduleTask = new DeadlineTask(rescheduleString.substring(7, i), date);
+            tasks.set(input - 1, rescheduleTask);
+            if (isDone) {
+                tasks.get(input-1).markAsDone();
+            }
+        } else {
+            int i = rescheduleString.indexOf("(");
+            if (i < 0) {
+                ToDoTask postponedToDoTask = new ToDoTask(rescheduleString.substring(7)
+                        + "(postponed to: " + date + ")");
+                tasks.set(input - 1, postponedToDoTask);
+                if (isDone) {
+                    tasks.get(input-1).markAsDone();
+                }
+            } else {
+                ToDoTask postponedToDoTask = new ToDoTask(rescheduleString.substring(7, i)
+                        + "(rescheduled to: " + date + ")");
+                tasks.set(input - 1, postponedToDoTask);
+                if (isDone) {
+                    tasks.get(input-1).markAsDone();
+                }
+            }
+        }
+        return "Noted. Task rescheduled: " + tasks.get(input-1).toString();
     }
 }

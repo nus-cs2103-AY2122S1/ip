@@ -26,6 +26,19 @@ public class Parser {
         return true;
     }
 
+    public static boolean validIntInput(String string) {
+        assert string.length() == 3 : "Invalid task input";
+        if (!Character.isDigit(string.charAt(0))) {
+            return false;
+        }
+        if (!Character.isDigit(string.charAt(1)) && !Character.isWhitespace(string.charAt(1))) {
+            return false;
+        }
+        if (!Character.isWhitespace(string.charAt(2)) && string.charAt(2) != '/') {
+            return false;
+        }
+        return true;
+    }
     /**
      * The main method that processes the Ui input,
      * @param in The input from the Ui to be processed
@@ -49,6 +62,8 @@ public class Parser {
                 return Parser.deadlineOutput(in, tasklist);
             } else if (in.substring(0, 4).equals("find")) {
                 return Parser.findOutput(in, tasklist);
+            } else if (in.substring(0, 8).equals("postpone")) {
+                return Parser.rescheduleOutput(in, tasklist);
             } else {
                 return Parser.invalidInputResponse();
             }
@@ -104,7 +119,7 @@ public class Parser {
      * @param taskList
      */
     public static String deleteOutput(String in, TaskList taskList) {
-        assert in.length() > 7 : "Invalid Input for delete command";
+        assert in.length() < 7 : "Invalid Input for delete command";
         try {
             int taskDeleted = parseInt(in.substring(7));
             return taskList.deleteTask(taskDeleted);
@@ -168,4 +183,38 @@ public class Parser {
         String keyword = in.substring(4);
         return tasklist.findTask(keyword);
     }
+
+    /**
+     * Postpones the selected task to another date
+     * @param in task to be postponed
+     * @param tasklist
+     */
+    public static String rescheduleOutput(String in, TaskList tasklist) {
+        assert in.length() > 7 : "Invalid Input for reschedule command";
+        try {
+            validIntInput(in.substring(9, 12));
+        } catch (StringIndexOutOfBoundsException e) {
+            return "Invalid Input for reschedule command check";
+        }
+        if (validIntInput(in.substring(9, 12))) {
+            int i = in.indexOf("/");
+            try {
+                if (isValid(in.substring(i + 1, i + 11))) {
+                    if (Character.isDigit(in.charAt(10))) {
+                        return tasklist.rescheduleTask(parseInt(in.substring(9, 11)),
+                                in.substring(i + 1, i + 11));
+                    } else {
+                        return tasklist.rescheduleTask(parseInt(in.substring(9, 10)),
+                                in.substring(i + 1, i + 11));
+                    }
+                }
+            } catch (StringIndexOutOfBoundsException e) {
+                return "Invalid date and time";
+            } catch (NumberFormatException e) {
+                return "Invalid task input";
+            }
+        }
+        return "Invalid Input for reschedule command";
+    }
 }
+
