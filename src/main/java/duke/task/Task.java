@@ -26,6 +26,10 @@ public class Task {
         return taskName;
     }
 
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
+    }
+
     /**
      * Gets the current status of task.
      *
@@ -55,5 +59,9 @@ public class Task {
      */
     public void checkOffTask() {
         isDone = true;
+    }
+
+    public void uncheckTask() {
+        isDone = false;
     }
 }

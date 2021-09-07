@@ -1,7 +1,9 @@
 package duke.task;
 
+import duke.exception.DukeException;
 import duke.exception.TaskNotFoundException;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -54,6 +56,37 @@ public class TaskList {
         }
     }
 
+    public String updatePrompt() {
+        return "To update Task Name input:\n  edit-N/(Task Index) (New Task Name)\n"
+                + "\nTo update Task Duration input:\n  edit-D/(Task Index) (New Task Date and Time)";
+    }
+
+    public String updateTaskName(int item, String newData) throws DukeException {
+        if (item > tasks.size() || item <= 0) {
+            throw new TaskNotFoundException("☹ OH NO!!! The task cannot be found. \n   Please try again.");
+        } else {
+            Task taskToUpdate = tasks.get(item - 1);
+            taskToUpdate.setTaskName(newData);
+            return "Got it. I've updated this task:\n "+ taskToUpdate.displayTask();
+        }
+    }
+
+    public String updateTaskDuration(int item, LocalDateTime newData) throws DukeException {
+        if (item > tasks.size() || item <= 0) {
+            throw new TaskNotFoundException("☹ OH NO!!! The task cannot be found. \n   Please try again.");
+        } else {
+            Task taskToUpdate = tasks.get(item - 1);
+            if (taskToUpdate instanceof Deadline) {
+                ((Deadline) taskToUpdate).setDuration(newData);
+            } else if (taskToUpdate instanceof Event) {
+                ((Event) taskToUpdate).setDuration(newData);
+            } else {
+                throw new DukeException("This Task type does not have a Duration tied to it!");
+            }
+            return "Got it. I've updated this task:\n "+ taskToUpdate.displayTask();
+        }
+    }
+
     /**
      * Finds all tasks that contains the input keyword
      *
@@ -87,23 +120,33 @@ public class TaskList {
      * @param message the input command to check a task
      * @return the list index for the task to be checked
      */
-    public int taskToCheck(String message) {
+    public int getTaskIndex(String message) {
         StringBuilder number;
-        if (message.length() > 5) {
-            String check = message.substring(0, 4);
-            if (check.equals("done")) {
-                char firstNumber = message.charAt(5);
-                number = new StringBuilder(Character.toString(firstNumber));
-                int counter = 6;
-                while (counter < message.length()) {
-                    char next = message.charAt(counter);
-                    number.append(next);
-                    counter++;
-                }
-                return Integer.parseInt(number.toString());
+        if (message.startsWith("done") && message.length() > 5) {
+            char firstNumber = message.charAt(5);
+            number = new StringBuilder(Character.toString(firstNumber));
+            int counter = 6;
+            while (counter < message.length()) {
+                char next = message.charAt(counter);
+                number.append(next);
+                counter++;
             }
+            return Integer.parseInt(number.toString());
+
+        } else if (message.startsWith("edit") && message.length() > 7) {
+            char firstNumber = message.charAt(7);
+            number = new StringBuilder(Character.toString(firstNumber));
+            int len = message.substring(0, message.indexOf(" ")).length();
+            int counter = 8;
+            while (counter < len) {
+                char next = message.charAt(counter);
+                number.append(next);
+                counter++;
+            }
+            return Integer.parseInt(number.toString());
+        } else {
+            return 0;
         }
-        return 0;
     }
 
     /**

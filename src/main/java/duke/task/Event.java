@@ -19,6 +19,10 @@ public class Event extends Task{
         this.duration = duration;
     }
 
+    public void setDuration(LocalDateTime duration) {
+        this.duration = duration;
+    }
+
     /**
      * Prints the task in specified format
      *

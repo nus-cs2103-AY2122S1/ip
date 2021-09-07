@@ -47,13 +47,32 @@ public class Parser {
                 return deleted;
 
             } else if (message.startsWith("done")) {
-                String checkedTask = taskList.markAsCheckedTask(taskList.taskToCheck(message));
+                String checkedTask = taskList.markAsCheckedTask(taskList.getTaskIndex(message));
                 storage.updateFile(taskList.getTasks());
                 return checkedTask;
 
             } else if (message.startsWith("find")) {
                 String keyword = message.substring(5);
                 return taskList.findTask(keyword);
+
+            }else if (message.startsWith("update")) {
+                return taskList.updatePrompt();
+
+            } else if (message.startsWith("edit-N/")) {
+                String temp = message.substring(message.indexOf(" "));
+                String newData = temp.substring(temp.indexOf(" "));
+                String updateTask = taskList.updateTaskName(taskList.getTaskIndex(message), newData);
+                storage.updateFile(taskList.getTasks());
+                return updateTask;
+
+            } else if (message.startsWith("edit-D/")) {
+                String temp = message.substring(message.indexOf(" "));
+                String newData = temp.substring(temp.indexOf(" ") + 1);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                LocalDateTime parsedDate = LocalDateTime.parse(newData, formatter);
+                String updateTask = taskList.updateTaskDuration(taskList.getTaskIndex(message), parsedDate);
+                storage.updateFile(taskList.getTasks());
+                return updateTask;
 
             } else if (message.startsWith("todo")) {
                 isValidEntry(message, "todo");
