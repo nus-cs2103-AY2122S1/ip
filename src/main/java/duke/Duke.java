@@ -17,8 +17,6 @@ import java.util.Scanner;
  * @version Duke Level-9
  */
 public class Duke {
-
-    // List to store all user inputs
     private final TaskList taskList;
     private final Storage storage;
     private final Ui ui;
