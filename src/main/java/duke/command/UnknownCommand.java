@@ -17,7 +17,7 @@ public class UnknownCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        String prefix = "I'm sorry, but I don't know what that means :-(\nTry the following commands instead:";
+        String prefix = "Nani? What did you say?\nTry the following commands instead:";
         String suggestion1 = "1. list - List all the existing tasks";
         String suggestion2 = "2. bye - Exit from duke.Duke's service";
         String suggestion3 = "3. done {N} -  Mark task of number 'N' as done";
