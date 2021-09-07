@@ -126,6 +126,7 @@ public class Duke extends Application {
 
 
     private void handleUserInput() {
+        assert user != null && duke != null : "User and duke images should not be null";
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
@@ -162,6 +163,8 @@ public class Duke extends Application {
                 if(input.length() == 4) {
                     throw new DukeException(ui.taskErrorMsg(TASK_TODO));
                 }
+                assert input.substring(6).length() > 0 : "There should be a description";
+
                 ToDo todo = new ToDo(parser.getTodoDescription(input));
                 SL.addTask(todo);
                 storage.save(SL);
@@ -172,6 +175,8 @@ public class Duke extends Application {
                 if (input.length() == 8) {
                     throw new DukeException(ui.taskErrorMsg(TASK_DEADLINE));
                 }
+                assert input.substring(10).length() > 0 : "There should be a description";
+
                 String by = parser.getDeadlineTime(input);
                 Deadline dl = new Deadline(parser.getDeadlineDescription(input), by);
                 SL.addTask(dl);
@@ -182,6 +187,8 @@ public class Duke extends Application {
                 if (input.length() == 5) {
                     throw new DukeException(ui.taskErrorMsg(TASK_EVENT));
                 }
+                assert input.substring(7).length() > 0 : "There should be a description";
+
                 String at = parser.getEventTime(input);
                 Event event = new Event(parser.getEventDescription(input), at);
                 SL.addTask(event);
@@ -192,6 +199,8 @@ public class Duke extends Application {
                 if (input.length() == 6) {
                     throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
                 }
+                assert input.substring(8).length() == 1 : "There should be an index";
+
                 int idx = parser.getDeleteIdx(input);
                 String desc = SL.get(idx).getDescription();
                 SL.delete(idx);
@@ -202,11 +211,14 @@ public class Duke extends Application {
                 if (input.length() == 4) {
                     throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
                 }
+                assert input.substring(6).length() == 1 : "There should be an index";
+
                 String keyword = input.substring(5);
                 storage.save(SL);
                 return SL.findAndReturn(keyword);
 
             } else {
+
                 switch (input) {
                 case "bye":
                     ui.bye();
@@ -214,6 +226,7 @@ public class Duke extends Application {
                 case "list":
                     return ui.displayListContents(SL);
                 default:
+                    assert false : input + "is not a valid command";
                     throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
                 }
             }
@@ -232,22 +245,22 @@ public class Duke extends Application {
      * @param input The user input to be processed.
      * @throws DukeException If task index to be marked is not valid.
      */
-    public void marking(String input) throws DukeException {
+    private void marking(String input) throws DukeException {
+        assert parser.isDoneCmd(input) : "done command not inputted";
         if (input.length() >= 6) {
             if (parser.isIntegerToBeMarked(input)) {
                 int taskNum = Integer.parseInt(input.substring(5)) - 1;
                 if (taskNum < SL.size() && taskNum >= 0) {
                     SL.get(taskNum).markAsDone();
-                    ui.taskDoneConfirmation();
-                    SL.get(taskNum).displayTask();
+
+                    assert SL.get(taskNum).isDone() : "this should be marked as done";
+
+                    return;
                 } else {
                     throw new DukeException(ui.taskErrorMsg(ERROR_OUTOFBOUNDS));
                 }
-            } else {
-                throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
             }
-        } else {
-            throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
         }
+        throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
     }
 }

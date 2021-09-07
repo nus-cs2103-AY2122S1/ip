@@ -35,6 +35,8 @@ public class StorageList {
                 storageList.add(todo);
 
             } else {
+
+
                 int thirdBarIdx = input.indexOf('|', 7);
                 String taskDesc = input.substring(8, thirdBarIdx - 1);
                 String taskTime = input.substring(thirdBarIdx + 2);
@@ -46,7 +48,9 @@ public class StorageList {
                     }
                     storageList.add(dl);
 
-                } else if (type == 'E') {
+                } else {
+                    assert type == 'E' : "Invalid task type";
+
                     Event event = new Event(taskDesc, taskTime);
                     if(doneState == 1){
                         event.markAsDone();
@@ -105,6 +109,7 @@ public class StorageList {
                 itemNumber++;
             }
         }
+        assert itemNumber <= size : "Index out of bounds";
         return output;
     }
 
