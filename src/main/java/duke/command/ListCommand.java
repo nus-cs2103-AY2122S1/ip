@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -12,13 +11,14 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         String list = "";
         for (int i = 0; i < tasks.getSize(); i++) {
             list += " " + (i + 1) + "." + tasks.getTask(i);
-            if (i != tasks.getSize() - 1) {
-                list += System.lineSeparator();
+            if (i == tasks.getSize() - 1) {
+                break;
             }
+            list += System.lineSeparator();
         }
         ui.printTemplate(list);
     }

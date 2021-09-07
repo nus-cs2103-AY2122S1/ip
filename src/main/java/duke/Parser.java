@@ -46,6 +46,11 @@ public class Parser {
                     throw new DukeException("Please enter a number after done!");
                 }
                 return parseFurther(parsedArr[0], parsedArr[1]);
+            case "find":
+                if (parsedArr.length < 2 || parsedArr[1].isBlank()) {
+                    throw new DukeException("Your search query cannot be empty!");
+                }
+                return new FindCommand(parsedArr[1]);
             case "bye":
                 if (parsedArr.length > 1) {
                     throw new DukeException();
