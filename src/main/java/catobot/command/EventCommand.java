@@ -1,35 +1,40 @@
 package catobot.command;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import catobot.Storage;
 import catobot.exception.BotException;
-import catobot.exception.EmptyCommandException;
 import catobot.exception.InvalidDateTimeException;
-import catobot.exception.InvalidEventException;
 import catobot.item.Event;
 import catobot.item.TaskList;
+
 
 
 /**
  * Represents the command to add an event to tasks.
  */
 public class EventCommand extends Command {
+    private static final String EVENT_INDICATOR = "/at";
 
     /** Content of the command. */
-    private final String content;
+    private final String description;
+    private final String rawDate;
 
     /**
      * Constructor for EventCommand.
      *
-     * @param content The content of the command.
+     * @param description The description of the command.
+     * @param rawDate The raw format of date.
      */
-    protected EventCommand(String content) {
-        this.content = content;
+    protected EventCommand(String content) throws BotException {
+        String[] details = Parser.parseMultipleArgument(
+                content, CommandType.EVENT, EVENT_INDICATOR);
+        String description = details[0].trim();
+        String rawDate = details[1].trim();
+        this.description = description;
+        this.rawDate = rawDate;
     }
-
     /**
      * Adds an event to a list of tasks.
      *
@@ -40,33 +45,13 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws BotException {
-        // If the command is empty
-        if (content.split(" ").length == 1) {
-            throw new EmptyCommandException("event");
-        }
-        String rawInputs = content.split("event")[1].trim();
-
-        // If the command does not have "/at"
-        if (!rawInputs.contains("/at")) {
-            throw new InvalidEventException();
-        }
-        String[] details = rawInputs.split("/at");
-
-        // if there is no description or date
-        if (details.length < 2) {
-            throw new InvalidEventException();
-        }
-
-        String description = details[0].trim();
-        String rawDate = details[1].trim();
-
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-            LocalDateTime date = LocalDateTime.parse(rawDate, formatter);
+            LocalDateTime date = LocalDateTime.parse(rawDate, Command.DATE_FORMAT);
             return tasks.add(Event.of(description, date));
         } catch (DateTimeParseException e) {
             throw new InvalidDateTimeException();
         }
     }
+
 
 }

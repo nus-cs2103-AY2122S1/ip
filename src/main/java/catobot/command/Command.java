@@ -1,5 +1,7 @@
 package catobot.command;
 
+import java.time.format.DateTimeFormatter;
+
 import catobot.Storage;
 import catobot.exception.BotException;
 import catobot.exception.InvalidCommandException;
@@ -9,6 +11,8 @@ import catobot.item.TaskList;
  * Represents a command from the user.
  */
 public class Command implements Executable {
+    public static final DateTimeFormatter DATE_FORMAT =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     /**
      * Executes the command given.
      *

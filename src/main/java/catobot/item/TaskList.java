@@ -104,21 +104,19 @@ public class TaskList {
      * @return A list of matching tasks.
      */
     public String search(String keyword) {
-        ArrayList<Task> filtered = new ArrayList<>();
+        TaskList filtered = new TaskList();
+        this.taskList
+                .stream()
+                .filter((s) -> s.contains(keyword))
+                .forEach(filtered::add);
 
-        for (Task curr : taskList) {
-            if (curr.contains(keyword)) {
-                filtered.add(curr);
-            }
-        }
-        if (filtered.isEmpty()) {
+        if (filtered.taskList.isEmpty()) {
             return "Meow! No tasks found!";
         }
 
-        String s = String.format(
+        return String.format(
                 "Here are the matching tasks in your list:%s",
-                new TaskList(filtered));
-        return s;
+                filtered);
     }
 
     private void checkRange(int index) throws OutOfBoundException, EmptyTaskListException {

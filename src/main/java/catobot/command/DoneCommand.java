@@ -11,15 +11,16 @@ import catobot.item.TaskList;
 public class DoneCommand extends Command {
 
     /** Content of the command. */
-    private final String content;
+    private final int index;
 
     /**
      * Constructor for DoneCommand.
      *
-     * @param content The content of the command.
+     * @param content The content of the DoneCommand.
      */
     protected DoneCommand(String content) {
-        this.content = content;
+        String description = Parser.parseSingleArgument(content, CommandType.DONE);
+        this.index = Integer.parseInt(description);
     }
 
     /**
@@ -33,7 +34,6 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) throws BotException {
         try {
-            int index = Integer.parseInt(content.substring("done".length()).trim());
             return tasks.completeTask(index);
         } catch (NumberFormatException e) {
             throw new InvalidCommandException();
