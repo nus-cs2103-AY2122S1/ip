@@ -34,7 +34,7 @@ public class Duke {
     }
 
     private void run() {
-        Ui.showGreeting();
+        Ui.getGreeting();
         boolean isExit = false;
 
         while (!isExit) {
@@ -57,5 +57,9 @@ public class Duke {
         } catch (DukeException e) {
             return e.getMessage();
         }
+    }
+
+    public String getWelcome() {
+        return Ui.getGreeting();
     }
 }

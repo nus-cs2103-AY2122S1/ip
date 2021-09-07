@@ -100,7 +100,7 @@ public class Storage {
         FileWriter fw = new FileWriter(filePath);
         StringBuilder text = new StringBuilder();
         for (Task task : tasks) {
-            String taskString = String.join(deliminator, task.saveStrings()) + "\n";
+            String taskString = String.join(deliminator, task.getAsSaveStrings()) + "\n";
             text.append(taskString);
         }
         fw.write(text.toString());

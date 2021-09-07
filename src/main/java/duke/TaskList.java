@@ -17,7 +17,7 @@ public class TaskList {
     }
 
     /**
-     * save the task list to the local path.
+     * Save the task list to the local path.
      *
      * @param storage the Storage instance
      * @throws IOException thrown when there is an error saving
@@ -27,7 +27,7 @@ public class TaskList {
     }
 
     /**
-     * remove the task from the list.
+     * Remove the task from the list.
      *
      * @param index the index starting with 1.
      * @throws IndexOutOfBoundsException thrown when index out of bound
@@ -42,7 +42,7 @@ public class TaskList {
     }
 
     /**
-     * add task to the list.
+     * Add task to the list.
      *
      * @param task the task to be added.
      */
@@ -57,7 +57,7 @@ public class TaskList {
     }
 
     /**
-     * mark the task as done.
+     * Mark the task as done.
      *
      * @param index the index starting with 1.
      */
@@ -68,7 +68,7 @@ public class TaskList {
     }
 
     /**
-     * filter out the tasks by the search string and print the result.
+     * Filter out the tasks by the search string and print the result.
      *
      * @param searchString the string contained by the description.
      */
