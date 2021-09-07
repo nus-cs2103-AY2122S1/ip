@@ -30,11 +30,11 @@ public class Storage {
 
     private Task lineToTask(String line) throws NyxException {
         String[] splitLine = line.split(", ");
+        assert splitLine.length == 3 : "Row in data split wrongly";
         String taskSymbol = splitLine[0];
         String doneStatus = splitLine[1];
         String taskDescription = splitLine[2];
         boolean isDone = doneStatus.equals("1");
-
         Task task;
 
         switch(taskSymbol) {
@@ -50,7 +50,6 @@ public class Storage {
         default:
             throw new NyxException("Invalid task symbol found. Unable to load data!");
         }
-
         return task;
     }
 
@@ -69,8 +68,10 @@ public class Storage {
                     taskList.add(lineToTask((line)));
                 }
             } else {
-                data.getParentFile().mkdirs();
-                data.createNewFile();
+                boolean isFolderCreated = data.getParentFile().mkdirs();
+                assert isFolderCreated : "Error in creating new folder";
+                boolean isFileCreated = data.createNewFile();
+                assert isFileCreated : "Error in creating new file";
             }
             return taskList;
         } catch (IOException e) {

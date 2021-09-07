@@ -13,6 +13,7 @@ public class EventCommand extends Command {
     @Override
     public String execute(TaskList taskList, Storage storage) throws NyxException {
         String[] splitInfo = information.split(" /at ");
+        assert splitInfo.length == 2 : "Event info is split wrongly";
         Event event = new Event(splitInfo[0].strip(), splitInfo[1]);
         return AddHandler.handleAdd(event, taskList, storage);
     }
