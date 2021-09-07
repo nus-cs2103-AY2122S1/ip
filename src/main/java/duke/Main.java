@@ -1,6 +1,8 @@
 package duke;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,9 +15,9 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private static final String FILE_PATH = "/taskLog.txt";
+    private String filePath;
 
-    private Duke duke = new Duke(FILE_PATH);
+    private Duke duke;
     private FXMLLoader fxmlLoader;
 
     @Override
@@ -26,12 +28,21 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            filePath = this.getFilePath().toAbsolutePath().toString();
+            this.duke = new Duke(filePath);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             duke.run();
+            this.sendMessageToUser(System.getProperty("user.dir"));
             stage.show();
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    private Path getFilePath() {
+        String userHome = System.getProperty("user.dir");
+        return Paths.get(userHome, "taskLog.txt");
     }
 
     public void sendMessageToUser(String message) {
