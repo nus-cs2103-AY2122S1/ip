@@ -8,7 +8,6 @@ import duke.Storage;
 /**
  * Command is the abstract base class for all Commands.
  */
-
 public abstract class Command {
 
     /** Executes the Command using the arguments
@@ -19,7 +18,6 @@ public abstract class Command {
      * @throws IOException On Input error.
      * @see IOException
      */
-
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws IOException;
 
     /**
@@ -27,7 +25,6 @@ public abstract class Command {
      *
      * @return true if Command is an ExitCommand, false if Command is not an ExitCommand
      */
-
     public boolean isExit() {
         return false;
     }

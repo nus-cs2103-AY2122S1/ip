@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
  * Represents a Deadline Task.
  * A Deadline consists of a date and time representing the deadline of the task.
  */
-
 public class Deadline extends Task {
 
     private LocalDate date;
@@ -21,7 +20,6 @@ public class Deadline extends Task {
      * @param date deadline date of the task
      * @param time deadline time of the task
      */
-
     public Deadline(String toDo, LocalDate date, LocalTime time){
         super(toDo);
         this.date = date;
@@ -44,7 +42,6 @@ public class Deadline extends Task {
      *
      * @return string with the format "[D] | status | task | date and time of deadline"
      */
-
     public String getToWrite() {
         return this.getType() + " | " + super.getToWrite() + " | " + this.getDateString();
     }
@@ -56,7 +53,6 @@ public class Deadline extends Task {
      *
      * @return string with the format "[D] status and task (by: deadline)
      */
-
     @Override
     public String toString() {
         return("[D]" + super.toString() + "(by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " 

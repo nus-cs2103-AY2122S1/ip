@@ -60,7 +60,7 @@ public class Ui {
     public void printAdd(Task task, TaskList tasks) {
         System.out.println("Got it. I've added this task: ");
         System.out.println(String.format("  %s", task.toString()));
-        System.out.println(String.format("Now you have %d tasks in the list", tasks.size()));
+        System.out.println(String.format("Now you have %d tasks in the list", tasks.getSize()));
     }
 
     /**
@@ -81,7 +81,7 @@ public class Ui {
     public void printDelete(TaskList tasks, int toDelete){
         System.out.println("Noted. I've removed this task: ");
         System.out.println(String.format("  %s", tasks.get(toDelete)));
-        System.out.println(String.format("Now you have %d tasks in the list", tasks.size() - 1));
+        System.out.println(String.format("Now you have %d tasks in the list", tasks.getSize() - 1));
     }
 
     /**
@@ -105,7 +105,7 @@ public class Ui {
      */
     public void printList(TaskList tasks) {
         System.out.println("Here are the tasks in your list: ");
-        for(int i = 0; i < tasks.size(); i++){
+        for(int i = 0; i < tasks.getSize(); i++){
             System.out.println((i + 1) + ". " + tasks.get(i));
         }
     }

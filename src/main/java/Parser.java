@@ -40,13 +40,13 @@ public class Parser {
 
     /**
      * Parses the input received by the UI.
+     * Dates should be input in the format dd/mm/yyyy HHmm
      *
      * @param fullCommand String containing the full command input by the user.
      * @return Commands depending on the first word of the input.
      * @throws IllegalCommandException in the case no task is given after "todo".
      * @throws IllegalTaskException in the case an invalid task is given.
      */
-
     public static Command parse(String fullCommand) throws IllegalCommandException, IllegalTaskException {
         String command = fullCommand.split(" ")[0];
         switch (command) {

@@ -3,26 +3,24 @@ package duke.task;
 /**
  * Task is the abstract base class of all the Tasks.
  */
-
 public abstract class Task {
-    private int done;
+    private boolean isDone;
     private String toDo;
 
     Task(String toDo) {
-        this(0, toDo);
+        this(false, toDo);
     }
 
-    Task(int done, String toDo){
-        this.done = done;
+    Task(boolean isDone, String toDo){
+        this.isDone = isDone;
         this.toDo = toDo;
     }
 
     /**
      * Changes the done variable stored in Task to 1, representing a completed task.
      */
-
     public void complete(){
-        this.done = 1;
+        this.isDone = true;
     }
 
     String getToDo() {
@@ -30,19 +28,21 @@ public abstract class Task {
     }
 
     String getDone() {
-        return String.valueOf(done);
+        if (!isDone) {
+            return "0";
+        }
+        return "1";
     }
 
     /**
      * returns a String in the format "Completion Status | Task"
+     *
      * @return a String in the format "Completion Status | Task"
      */
-
     public String getToWrite() {
         return  this.getDone() + " | "  + this.getToDo();
     }
 
-    //Print String
 
     @Override
     public boolean equals(Object o) {
@@ -56,7 +56,7 @@ public abstract class Task {
 
     @Override
     public String toString(){
-        if(done == 1){
+        if(isDone){
             return String.format("[X] %s", toDo);
         } else {
             return String.format("[ ] %s", toDo);

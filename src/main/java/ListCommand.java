@@ -7,7 +7,6 @@ import duke.Storage;
 /**
  * Represents a Command to print the list of tasks.
  */
-
 public class ListCommand extends Command {
 
     /**
@@ -17,7 +16,7 @@ public class ListCommand extends Command {
      * @param ui UI to print out the TaskList
      * @param storage unused.
      */
-
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.printList(tasks);
     }

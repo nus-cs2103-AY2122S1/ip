@@ -8,7 +8,6 @@ import duke.Storage;
  * Represents a Command that deletes a task from the TaskList.
  * A DeleteCommand contains an index representing the index of the task in the TaskList to be deleted.
  */
-
 public class DeleteCommand extends Command {
 
     private int index;
@@ -29,7 +28,7 @@ public class DeleteCommand extends Command {
      * @param ui UI that reflects the changes made to the TaskList.
      * @param storage unused.
      */
-
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage){
         ui.printDelete(tasks, index);
         tasks.delete(index);

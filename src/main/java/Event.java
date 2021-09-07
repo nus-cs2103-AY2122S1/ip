@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
  *  Represents an Event task.
  *  An Event consists of a date and time representing the date and time of the Event.
  */
-
 public class Event extends Task {
 
     private LocalDate date;
@@ -21,7 +20,6 @@ public class Event extends Task {
      * @param date date of the event.
      * @param time time of the event.
      */
-
     public Event(String toDo, LocalDate date, LocalTime time){
         super(toDo);
         this.date = date;
@@ -44,14 +42,13 @@ public class Event extends Task {
      *
      * @return string with the format [E] | status | event name | date and time of event
      */
-
     public String getToWrite() {
         return this.getType() + " | " + super.getToWrite() + " | " + this.getDateString();
     }
 
     @Override
     public String toString() {
-        return("[E]" + super.toString() + "(by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " "
+        return("[E]" + super.toString() + "(at: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " "
                 + time.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")");
     }
 }

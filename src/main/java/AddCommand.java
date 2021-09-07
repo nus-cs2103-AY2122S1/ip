@@ -10,7 +10,6 @@ import duke.task.Task;
  * An AddCommand consists of a Task.
  *
  */
-
 public class AddCommand extends Command {
 
     private Task task;
@@ -20,7 +19,6 @@ public class AddCommand extends Command {
      *
      * @param task Task to be added to the TaskList.
      */
-
     public AddCommand(Task task){
         this.task = task;
     }
@@ -32,7 +30,7 @@ public class AddCommand extends Command {
      * @param ui UI to print out the output after task has been added.
      * @param storage unused.
      */
-
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage){
         tasks.add(task);
         ui.printAdd(task, tasks);
@@ -43,7 +41,6 @@ public class AddCommand extends Command {
      *
      * @return Task attached to this AddCommand
      */
-
     public Task getTask() {
         return task;
     }

@@ -11,7 +11,7 @@ import duke.task.Task;
  *
  */
 
-public class FindCommand extends Command{
+public class FindCommand extends Command {
 
     private final String keyword;
 
@@ -23,9 +23,10 @@ public class FindCommand extends Command{
         this.keyword = keyword;
     }
 
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList filteredTasks = new TaskList();
-        for (int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < tasks.getSize(); i++) {
             Task toFilter = tasks.get(i);
             if (toFilter.toString().contains(keyword)) {
                 filteredTasks.add(toFilter);

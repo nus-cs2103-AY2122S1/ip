@@ -21,7 +21,7 @@ public class ExitCommand extends Command {
      * @throws IOException On output Error.
      * @see IOException
      */
-
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         storage.write(tasks);
         ui.printExit();
