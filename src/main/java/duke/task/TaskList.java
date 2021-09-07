@@ -96,6 +96,36 @@ public class TaskList {
         this.tasks.sort(new TaskDateTimeComparator());
     }
 
+    /**
+     * Builds and returns the format string for storing current tasks.
+     *
+     * @return Storage String
+     */
+    public String getStorageString() {
+
+        String text = "";
+
+        for (int i = 0; i < tasks.size(); i++) {
+
+            Task currentTask = tasks.get(i);
+            if (currentTask instanceof Event) {
+                Event event = (Event) currentTask;
+                text += String.format("| E | %s | %s | %s | %s | %s\n", event.getIsDone() ? "X" : " ",
+                    event.getIsDateOnly() ? "X" : " ", event.getStartDateTime(), event.getEndDateTime(),
+                    event.getDescription());
+            } else if (currentTask instanceof Deadline) {
+                Deadline deadline = (Deadline) currentTask;
+                text += String.format("| D | %s | %s | %s | %s\n", deadline.getIsDone() ? "X" : " ",
+                    deadline.getIsDateOnly() ? "X" : " ", deadline.getDate(), deadline.getDescription());
+            } else {
+                Todo todo = (Todo) currentTask;
+                text += String.format("| T | %s | %s\n", todo.getIsDone() ? "X" : " ", todo.getDescription());
+            }
+        }
+
+        return text;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -112,5 +142,6 @@ public class TaskList {
     public String toString() {
         return this.tasks.toString();
     }
+
 
 }

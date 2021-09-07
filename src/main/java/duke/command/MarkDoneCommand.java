@@ -31,7 +31,7 @@ public class MarkDoneCommand extends Command {
     @Override
     public void execute() {
         task.markAsDone();
-        storage.save(tasks);
+        storage.saveTasks(tasks);
         ui.markDone(this.task);
     }
 }

@@ -17,18 +17,6 @@ public class Event extends Task {
     protected String taskType = "[E]";
     protected boolean isDateOnly = false;
 
-    /**
-     * Constructor for Event.
-     *
-     * @param description The description of the Event.
-     * @param startDateTime The start date and/or time of the Event.
-     * @param endDateTime The end date and/or time of the Event.
-     */
-    public Event(String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        super(description);
-        this.startDateTime = startDateTime;
-        this.endDateTime = endDateTime;
-    }
 
     /**
      * Constructor for Event.
@@ -100,6 +88,9 @@ public class Event extends Task {
         } else if (dateTimeStartInput.length == 2 && dateTimeStartInput.length == 2) {
             startDate = Parser.parseDateAndTime(dateTimeStartInput[0], dateTimeStartInput[1]);
             endDate = Parser.parseDateAndTime(dateTimeEndInput[0], dateTimeEndInput[1]);
+
+            assert startDate.compareTo(endDate) < 0 : "startDate should be earlier than endDate";
+
             isDateOnly = false;
         } else {
             throw new DukeException(exceptionMessage);
@@ -144,8 +135,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return taskType + super.toString() + " (at: " + Parser.dateTimeToString(this.startDateTime, isDateOnly)
-            + " to " + Parser.dateTimeToString(this.endDateTime, isDateOnly) + ")";
+        return taskType + super.toString() + " (at: " + Parser.getDateTimeString(this.startDateTime, isDateOnly)
+            + " to " + Parser.getDateTimeString(this.endDateTime, isDateOnly) + ")";
     }
 
     @Override

@@ -25,7 +25,7 @@ public class SortCommand extends Command {
     @Override
     public void execute() {
         tasks.sortByDate();
-        storage.save(tasks);
+        storage.saveTasks(tasks);
         ui.showSortedList(tasks);
     }
 }

@@ -22,7 +22,7 @@ public class Duke extends Application {
     public Duke() {
         this.storage = new Storage("data/taskList.txt");
         try {
-            this.tasks = storage.load();
+            this.tasks = storage.loadTasks();
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
@@ -37,7 +37,7 @@ public class Duke extends Application {
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         try {
-            this.tasks = storage.load();
+            this.tasks = storage.loadTasks();
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }

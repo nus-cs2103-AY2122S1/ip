@@ -5,7 +5,7 @@ package duke;
  *
  * @author Aiken Wong
  */
-public class DukeException extends RuntimeException {
+public class DukeException extends Exception {
 
     /**
      * Initialises a DukeException instance.

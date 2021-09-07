@@ -1,8 +1,10 @@
 package duke.command;
 
 
+import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
+import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -20,9 +22,9 @@ public class AddCommand extends Command {
     /**
      * Instantiates a command to add tasks. Tasks can be Todo, Event or Deadline.
      *
-     * @param task The task to add.
-     * @param tasks The list of tasks to add to.
-     * @param ui Ui to handle interactions.
+     * @param task    The task to add.
+     * @param tasks   The list of tasks to add to.
+     * @param ui      Ui to handle interactions.
      * @param storage Storage for tasks.
      */
     public AddCommand(Task task, TaskList tasks, Ui ui, Storage storage) {
@@ -38,20 +40,22 @@ public class AddCommand extends Command {
      *
      * @return Type of added task.
      */
-    public TaskType getTaskType() {
+    public TaskType getTaskType() throws DukeException {
         if (task instanceof Event) {
             return TaskType.EVENT;
         } else if (task instanceof Todo) {
             return TaskType.TODO;
-        } else {
+        } else if (task instanceof Deadline) {
             return TaskType.DEADLINE;
+        } else {
+            throw new DukeException(" Something went wrong: Not an addable Task!");
         }
     }
 
     @Override
     public void execute() {
         tasks.add(task);
-        storage.save(tasks);
+        storage.saveTasks(tasks);
         ui.add(task, tasks);
     }
 }
