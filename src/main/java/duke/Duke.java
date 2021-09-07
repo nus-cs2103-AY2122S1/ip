@@ -33,13 +33,13 @@ public class Duke {
             Command c = Parser.parse(input);
             response = c.execute(tasklist, ui, storage);
         } catch (DukeException e) {
-            ui.notifyEmptyDescription();
+            return ui.notifyEmptyDescription();
         } catch (IndexOutOfBoundsException e) {
-            ui.notifyIndexOutOfBounds();
+            return ui.notifyIndexOutOfBounds();
         } catch (NumberFormatException e) {
-            ui.notifyImproperIndex();
+            return ui.notifyImproperIndex();
         } catch (DateTimeParseException e) {
-            ui.notifyImproperDateTime();
+            return ui.notifyImproperDateTime();
         }
         return response;
     }
