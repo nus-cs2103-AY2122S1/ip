@@ -33,7 +33,7 @@ public class ListCommand extends Command {
             message = new StringBuilder("List is currently empty.");
         } else {
             for (int i = 0; i < taskList.size(); i++) {
-                message.append(i).append(". ").append(taskList.getTask(i)).append("\n");
+                message.append(i + 1).append(". ").append(taskList.getTask(i)).append("\n");
             }
         }
         return message.toString();

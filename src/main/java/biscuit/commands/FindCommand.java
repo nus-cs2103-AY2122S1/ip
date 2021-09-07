@@ -35,17 +35,17 @@ public class FindCommand extends Command {
             throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! The search keyword cannot be empty.");
         }
 
-        StringBuilder message = new StringBuilder();
+        StringBuilder message = new StringBuilder("The following tasks match your search keyword:");
         int count = 1;
         for (int i = 0; i < taskList.size(); i++) {
             Task current = taskList.getTask(i);
             if (current.getDescription().contains(userInputs[1])) {
-                message.append(count).append(". ").append(taskList.getTask(i));
+                message.append("\n\t").append(count).append(". ").append(taskList.getTask(i));
                 count++;
             }
         }
         if (count == 1) {
-            message = new StringBuilder("No matching tasks found.");
+            return "No matching tasks found.";
         }
         return message.toString();
     }
