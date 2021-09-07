@@ -102,16 +102,18 @@ public class Items {
         if (tasks.size() == 0) {
             throw new DukeException("You have 0 items in your list");
         }
-        StringBuilder str = new StringBuilder("These are your tasks: \n");
+        StringBuilder output = new StringBuilder("These are your tasks: \n");
 
         for (int i = 0; i < tasks.size(); i++) {
             if (i < tasks.size() - 1) {
-                str.append(" ").append(i + 1).append(". ").append(tasks.get(i).toString()).append("\n");
+                output.append(" ").append(i + 1).append(". ").append(tasks.get(i).toString()).append("\n");
             } else {
-                str.append(" ").append(i + 1).append(". ").append(tasks.get(i).toString());
+                output.append(" ").append(i + 1).append(". ").append(tasks.get(i).toString());
             }
         }
-        return str.toString();
+
+        assert !output.toString().equals("") : "Unforseen error: Unable to print the tasks. Please try again later.";
+        return output.toString();
     }
 
     /**
@@ -129,7 +131,7 @@ public class Items {
             String[] splitString = task.toString().split("\\s");
             for (String word : splitString) {
                 if (word.equals(keyword)) {
-                    output.append("\n").append(ctr + 1).append(". ").append(task.toString());
+                    output.append("\n").append(ctr + 1).append(". ").append(task);
                     ctr++;
                 }
             }

@@ -69,6 +69,7 @@ public class Storage {
                 String taskType = data[0];
                 boolean isDone = data[1].equals("1");
                 Task task = null;
+                assert (taskType.equals("D") || taskType.equals("E") || taskType.equals("T")) : "Data Corrupt in File";
                 switch (taskType) {
                 case "T":
                     // Add a todo task.
@@ -84,12 +85,10 @@ public class Storage {
                     break;
                 default: break;
                 }
-                if (task != null) {
-                    if (isDone) {
-                        task.doneTask();
-                    }
-                    fileList.add(task);
+                if (isDone) {
+                    task.doneTask();
                 }
+                fileList.add(task);
             }
         } catch (FileNotFoundException e) {
             throw new DukeException("No saved data found");
@@ -149,13 +148,9 @@ public class Storage {
 
 
     /**
-<<<<<<< HEAD
-     * Saves the file content to the hard drive
-=======
      * Saves the file content to the hard drive.
      *
->>>>>>> branch-A-Gradle
-     * @throws DukeException when saving the file fails
+     * @throws DukeException when saving the file fails.
      */
     private void saveToFile() throws DukeException {
         try {
