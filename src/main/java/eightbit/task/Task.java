@@ -22,7 +22,7 @@ public abstract class Task {
      * Constructs a task. Marks the task as done or not.
      *
      * @param description Description of the task.
-     * @param isDone Whether the task is done.
+     * @param isDone      Whether the task is done.
      */
     public Task(String description, boolean isDone) {
         this.description = description;
@@ -46,6 +46,8 @@ public abstract class Task {
     }
 
     /**
+     * Returns the string representation of a Task.
+     *
      * @return String representation of a Task.
      */
     @Override

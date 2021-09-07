@@ -8,6 +8,8 @@ import eightbit.util.TaskList;
  */
 public class ByeCommand extends Command {
 
+    public static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
+
     /**
      * Terminates the program.
      *
@@ -17,6 +19,6 @@ public class ByeCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
-        return "Bye. Hope to see you again soon!";
+        return BYE_MESSAGE;
     }
 }

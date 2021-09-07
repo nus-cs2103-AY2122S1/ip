@@ -1,6 +1,7 @@
 package eightbit.gui;
 
 import eightbit.EightBit;
+import eightbit.command.ByeCommand;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -14,6 +15,8 @@ import javafx.stage.Stage;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
+    private static final String WELCOME_MESSAGE = "Hello! I'm 8-Bit!\nWhat can I do for you?";
 
     @FXML
     private ScrollPane scrollPane;
@@ -29,6 +32,7 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private final Image eightBitImage = new Image(this.getClass().getResourceAsStream("/images/eightbit.png"));
 
+
     public void setEightBit(EightBit eightBit) {
         this.eightBit = eightBit;
     }
@@ -40,7 +44,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
-                DialogBox.getEightBitDialog("Hello! I'm 8-Bit!\nWhat can I do for you?", eightBitImage));
+                DialogBox.getEightBitDialog(WELCOME_MESSAGE, eightBitImage));
     }
 
     /**
@@ -57,7 +61,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        if (response.equals("Bye. Hope to see you again soon!")) {
+        if (response.equals(ByeCommand.BYE_MESSAGE)) {
             Stage stage = (Stage) userInput.getScene().getWindow();
             stage.close();
         }

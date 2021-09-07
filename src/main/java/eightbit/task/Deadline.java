@@ -14,7 +14,7 @@ public class Deadline extends Task {
      * Constructs a task with a deadline.
      *
      * @param description Description of the task.
-     * @param by Date and time of the deadline.
+     * @param by          Date and time of the deadline.
      */
     public Deadline(String description, LocalDateTime by) {
         super(description);
@@ -25,8 +25,8 @@ public class Deadline extends Task {
      * Constructs a task with a deadline. Marks the task as done or not.
      *
      * @param description Description of the task.
-     * @param by Date and time of the deadline.
-     * @param isDone Whether the task is done.
+     * @param by          Date and time of the deadline.
+     * @param isDone      Whether the task is done.
      */
     public Deadline(String description, LocalDateTime by, boolean isDone) {
         super(description, isDone);
@@ -38,6 +38,8 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns the string representation of a Deadline.
+     *
      * @return String representation of a Deadline.
      */
     @Override
