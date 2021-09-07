@@ -88,6 +88,16 @@ public class TaskList {
         return matches;
     }
 
+    /**
+     * Updates the tasks according to the task id.
+     *
+     * @param taskId The task id of the task to be updated. This should already be validated by the parser.
+     * @param updatedTask The new updated task.
+     */
+    public void update(int taskId, Task updatedTask) {
+        tasks.set(taskId - 1, updatedTask);
+    }
+
     private void validateTaskId(int id) throws InvalidTaskSelectedException {
         int index = id - 1;
         if (index < 0 || index >= this.tasks.size()) {

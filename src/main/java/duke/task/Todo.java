@@ -22,16 +22,6 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns a string representation of this todo
-     *
-     * @return string representation of this todo
-     */
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-
-    /**
      * Returns the savable string format of this task.
      *
      * @return Formatted string to be saved into storage.

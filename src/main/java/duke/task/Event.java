@@ -11,7 +11,7 @@ import duke.storage.Storage;
  */
 public class Event extends Task {
     private static final String TASK_TYPE = "E";
-    private String at;
+    private final String at;
 
     /**
      * Constructor of the duke.task.Event class
@@ -49,5 +49,9 @@ public class Event extends Task {
     @Override
     protected String getTaskType() {
         return TASK_TYPE;
+    }
+
+    public String getAt() {
+        return at;
     }
 }

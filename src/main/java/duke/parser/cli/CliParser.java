@@ -1,5 +1,6 @@
 package duke.parser.cli;
 
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -12,6 +13,7 @@ import duke.commands.FindCommand;
 import duke.commands.InvalidArgumentsException;
 import duke.commands.ListCommand;
 import duke.commands.UnknownCommandException;
+import duke.commands.UpdateCommand;
 import duke.parser.UnableToParseException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -21,21 +23,26 @@ import duke.task.Todo;
  * This class encapsulates the parsing of CLI commands and strings.
  */
 public class CliParser {
-    private static final InvalidArgumentsException INVALID_ARG_EXCEPTION_TODO =
-            new InvalidArgumentsException("todo [task]");
-    private static final InvalidArgumentsException INVALID_ARG_EXCEPTION_FIND =
-            new InvalidArgumentsException("find [query]");
-    private static final InvalidArgumentsException INVALID_ARG_EXCEPTION_EVENT =
-            new InvalidArgumentsException("event [task] /at [time period]");
-    private static final InvalidArgumentsException INVALID_ARG_EXCEPTION_DEADLINE =
-            new InvalidArgumentsException("deadline [task] /by [YYYY-MM-DD]");
-    private static final InvalidArgumentsException INVALID_ARG_EXCEPTION_DELETE =
-            new InvalidArgumentsException("delete [task id]");
-    private static final InvalidArgumentsException INVALID_ARG_EXCEPTION_DONE =
-            new InvalidArgumentsException("done [task id]");
+    public static final String DELIMITER_DEADLINE = "/by";
+    public static final String DELIMITER_EVENT = "/at";
     private static final String DELIMITER_CLI = " ";
-    private static final String DELIMITER_DEADLINE = " /by ";
-    private static final String DELIMITER_EVENT = " /at ";
+    private static final InvalidArgumentsException INVALID_ARG_EXCEPTION_TODO =
+            new InvalidArgumentsException("todo <description>");
+    private static final InvalidArgumentsException INVALID_ARG_EXCEPTION_FIND =
+            new InvalidArgumentsException("find <query>");
+    private static final InvalidArgumentsException INVALID_ARG_EXCEPTION_EVENT =
+            new InvalidArgumentsException("event <description> " + DELIMITER_EVENT + " <time period>");
+    private static final InvalidArgumentsException INVALID_ARG_EXCEPTION_DEADLINE =
+            new InvalidArgumentsException("deadline <description> " + DELIMITER_DEADLINE + " <YYYY-MM-DD>");
+    private static final InvalidArgumentsException INVALID_ARG_EXCEPTION_DELETE =
+            new InvalidArgumentsException("delete <task id>");
+    private static final InvalidArgumentsException INVALID_ARG_EXCEPTION_DONE =
+            new InvalidArgumentsException("done <task id>");
+    private static final InvalidArgumentsException INVALID_ARG_EXCEPTION_UPDATE =
+            new InvalidArgumentsException("update <task id> [updated description]\n\t"
+                    + "update <task id> [updated description] /by [updated deadline]\n\t"
+                    + "update <task id> [updated description] /at [updated time period]");
+
     /**
      * Returns the corresponding command from user input.
      *
@@ -63,6 +70,8 @@ public class CliParser {
             return parseDelete(splitInput);
         case "find":
             return parseFind(splitInput);
+        case "update":
+            return parseUpdate(splitInput);
         case "list":
             return new ListCommand();
         case "bye":
@@ -70,6 +79,21 @@ public class CliParser {
         default:
             throw new UnknownCommandException();
         }
+    }
+
+    private static Command parseUpdate(String[] args) throws InvalidArgumentsException, UnableToParseException {
+        if (args.length != 2) {
+            throw INVALID_ARG_EXCEPTION_UPDATE;
+        }
+        // extract out the task id and fields to be updated
+        // index 0 has task id, index 1 has fields ot be updated
+        String[] split = args[1].split(DELIMITER_CLI, 2);
+        if (split.length != 2) {
+            throw INVALID_ARG_EXCEPTION_UPDATE;
+        }
+        int taskId = parseTaskId(split[0]);
+        String updatedFields = split[1];
+        return new UpdateCommand(taskId, updatedFields);
     }
 
     /**
@@ -120,7 +144,7 @@ public class CliParser {
             throw INVALID_ARG_EXCEPTION_EVENT;
         }
 
-        return new AddTaskCommand(new Event(eventArgs[0], eventArgs[1]));
+        return new AddTaskCommand(new Event(eventArgs[0].trim(), eventArgs[1].trim()));
     }
 
     /**
@@ -140,13 +164,12 @@ public class CliParser {
         }
 
         try {
-            LocalDate by = LocalDate.parse(deadlineArgs[1]);
-            return new AddTaskCommand(new Deadline(deadlineArgs[0], by));
+            LocalDate by = LocalDate.parse(deadlineArgs[1].trim());
+            return new AddTaskCommand(new Deadline(deadlineArgs[0].trim(), by));
         } catch (DateTimeParseException e) {
             throw INVALID_ARG_EXCEPTION_DEADLINE;
         }
     }
-
 
     /**
      * Parses the done command
@@ -193,4 +216,5 @@ public class CliParser {
 
         return i;
     }
+
 }
