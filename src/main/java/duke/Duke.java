@@ -23,8 +23,8 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        String output = parser.takeInput(input);
+        String response = parser.takeInput(input);
         storage.writeToDatabase(tasks);
-        return output;
+        return response;
     }
 }

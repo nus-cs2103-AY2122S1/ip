@@ -53,6 +53,7 @@ public class Parser {
             return addTask(getArgs(input, "event "), Task.Type.EVENT);
         } else if (matches("reset", input)) {
             tasks.clear();
+            assert tasks.size() == 0 : "Tasks were not cleared";
             return "Cleared";
         } else {
             return "I did not understand, sorry!";
@@ -121,7 +122,7 @@ public class Parser {
                 output += "Great! I've marked this task as done:\n    " + task;
                 break;
             default:
-                throw new IllegalArgumentException("Invalid action");
+                assert false : "Action not in enum Action";
             }
             return output;
         } catch (NumberFormatException err) {
