@@ -8,8 +8,9 @@ import java.time.format.DateTimeFormatter;
  *
  * @author Quan Teng Foong
  */
-public class Event extends Task {
+public class Event extends Task implements Recurring {
     private final LocalDate eventDate;
+    private final Recurrence recurrence;
 
     /**
      * Constructor for Event object.
@@ -19,7 +20,14 @@ public class Event extends Task {
      */
     public Event(String message, String eventDate) {
         super(message);
-        this.eventDate = LocalDate.parse(eventDate);
+        //TODO: consider putting this split method in Parser
+        String[] eventDateAndRecurrence = eventDate.split("/recur ");
+        this.eventDate = LocalDate.parse(eventDateAndRecurrence[0].trim());
+        if (eventDateAndRecurrence.length == 2) {
+            this.recurrence = Recurring.stringToRecurrence(eventDateAndRecurrence[1].trim());
+        } else {
+            this.recurrence = Recurring.stringToRecurrence("");
+        }
     }
 
     /**
@@ -29,12 +37,13 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at: "
-                + eventDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + eventDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ") "
+                + Recurring.recurrenceToString(this.recurrence);
     }
 
     /**
      * Converts contents to a storable String.
-     *
+     * TODO: manage storing of recurring Events
      * @return a String that represents this Event in storage
      */
     @Override
