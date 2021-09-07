@@ -8,10 +8,18 @@ public class TaskList {
 
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructs a new TaskList object by initializing a new ArrayList for runtime storage.
+     */
     public TaskList() {
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Constructs a new TaskList object by storing the given ArrayList for runtime storage.
+     *
+     * @param tasks ArrayList to be used runtime storage.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
