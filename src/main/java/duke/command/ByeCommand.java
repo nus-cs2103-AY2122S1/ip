@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.data.TaskHandler;
+import duke.data.exception.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
@@ -31,7 +32,8 @@ public class ByeCommand extends Command {
      * @return Duke's response to the user.
      */
     @Override
-    public String execute(String cmd) {
+    public String execute(String cmd) throws DukeException {
+        storage.updateFile(taskHandler.formatTasksToSave());
         return Ui.bye();
     }
 }

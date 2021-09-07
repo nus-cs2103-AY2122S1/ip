@@ -33,8 +33,8 @@ public class Ui {
      * @param s Type of task input.
      * @return The error message to the user.
      */
-    public static String emptyDescription(String s) {
-        String error = "OOPS!!!";
+    public static String emptyDescription(String s) throws AssertionError {
+        String error;
         switch(s) {
         case "todo":
             error = Messages.EMPTY_TODO_DESC;
@@ -49,7 +49,7 @@ public class Ui {
             error = Messages.EMPTY_FIND_CMD;
             break;
         default:
-            error = error;
+            throw new AssertionError("No such tasks.");
         }
         return error;
     }
