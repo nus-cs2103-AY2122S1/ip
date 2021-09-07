@@ -8,6 +8,7 @@ import duke.tasks.ToDo;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.status.typeTask;
+import duke.exceptions.NoSuchCommandException;
 import duke.exceptions.WrongDateFormatException;
 import duke.exceptions.WrongEventOrDeadlineFormatException;
 import duke.exceptions.WrongTimeFormatException;
@@ -28,7 +29,8 @@ public class TaskCommand extends Command {
             TaskList taskList, Ui ui,
             Storage storage) throws WrongDateFormatException,
             WrongTimeFormatException,
-            WrongEventOrDeadlineFormatException {
+            WrongEventOrDeadlineFormatException,
+            NoSuchCommandException {
         String[] instructions = this.commandDescription.split(" ");
         String importantInstructions = String.join(" ",
                 Arrays.copyOfRange(instructions,
@@ -39,8 +41,11 @@ public class TaskCommand extends Command {
             task = new ToDo(importantInstructions);
         } else if (identity.equals(typeTask.DEADLINE.getTask())) {
             task = new Deadline(importantInstructions);
-        } else {
+        } else if (identity.equals(typeTask.EVENT.getTask())) {
             task = new Event(importantInstructions); 
+        } else {
+            String errorCommand = "No such command!";
+            throw new NoSuchCommandException(errorCommand);
         }
         taskList.addNewTask(task);
         storage.updateStorageList(taskList.getTaskList());
