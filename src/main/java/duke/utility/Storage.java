@@ -58,8 +58,8 @@ public class Storage {
             String task = sc.nextLine();
             String[] tokens = task.split(";");
             System.out.println(Arrays.toString(tokens));
-            boolean isCompleted = tokens[2].equals("T");
-            String taskName = tokens[1];
+            boolean isCompleted = tokens[1].equals("T");
+            String taskName = tokens[2];
             // format: duke.task type | isCompleted | event name | date/time
             switch (tokens[0]) {
             case "T":

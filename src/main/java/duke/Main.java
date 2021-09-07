@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private static final String FILE_PATH = "data/taskLog.txt";
+    private static final String FILE_PATH = "/taskLog.txt";
 
     private Duke duke = new Duke(FILE_PATH);
     private FXMLLoader fxmlLoader;

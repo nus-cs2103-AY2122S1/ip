@@ -133,7 +133,7 @@ public class Parser {
                 }
                 message = this.taskList.add(task);
                 if (this.storage != null) {
-                    this.storage.append(taskTypeForStorage, taskName, "F",
+                    this.storage.append(taskTypeForStorage, "F", taskName,
                             dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
                 }
             }
