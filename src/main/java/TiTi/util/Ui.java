@@ -2,6 +2,8 @@ package TiTi.util;
 
 import TiTi.task.Task;
 
+import java.util.Scanner;
+
 /**
  * Control the interaction with the user.
  * Prints to the user interface.
@@ -17,6 +19,7 @@ public class Ui {
     private TaskList taskList;
     private Parser parser;
     private boolean isContinue;
+    private Scanner sc;
 
     /**
      * Constructor for Ui class.
@@ -29,6 +32,7 @@ public class Ui {
         this.taskList = taskList;
         this.parser = new Parser(savedHistory, taskList);
         isContinue = true;
+        sc = new Scanner(System.in);
     }
 
     /**
@@ -52,7 +56,8 @@ public class Ui {
      * Prints the response for the user command onto the user interface.
      */
     public void userCommand() {
-        Response response = parser.cue();
+        String input = sc.nextLine();
+        Response response = parser.cue(input);
         TaskList tempTaskList = response.taskList;
 
         switch(response.cue) {

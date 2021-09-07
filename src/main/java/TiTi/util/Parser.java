@@ -5,9 +5,6 @@ import TiTi.task.Event;
 import TiTi.task.Deadline;
 import TiTi.task.ToDo;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 /**
  * Make sense of user command, and return Response
  * to tell Ui how to interact with user.
@@ -15,7 +12,6 @@ import java.util.Scanner;
 public class Parser {
     private SavedHistory savedHistory;
     private TaskList taskList;
-    private Scanner sc;
 
     /**
      * Constructor for Parser class.
@@ -26,7 +22,6 @@ public class Parser {
     public Parser(SavedHistory savedHistory, TaskList taskList) {
         this.savedHistory = savedHistory;
         this.taskList = taskList;
-        sc = new Scanner(System.in);
     }
 
     /**
@@ -34,8 +29,8 @@ public class Parser {
      *
      * @return Response object to tell Ui how to respons to user command
      */
-    public Response cue() {
-        String input = sc.nextLine();
+    public Response cue(String input) {
+
         String cue = input.split(" ", 2)[0];
 
         // handle missing description

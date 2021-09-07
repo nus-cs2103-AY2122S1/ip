@@ -7,13 +7,13 @@ import TiTi.util.Ui;
 /**
  * TiTi is a Personal Assistant Chatbot that helps you keep track of various things
  */
-public class TiTi {
+public class TiTi{
     private SavedHistory savedHistory;
     private TaskList taskList;
     private Ui ui;
 
 
-    private TiTi() {
+    public TiTi() {
         savedHistory = new SavedHistory();
         taskList = new TaskList(savedHistory.readHistory());
         ui = new Ui(savedHistory, taskList);
@@ -34,5 +34,4 @@ public class TiTi {
     public static void main(String[] args) {
         new TiTi().run();
     }
-
 }
