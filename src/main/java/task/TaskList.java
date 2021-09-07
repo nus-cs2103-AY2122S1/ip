@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class TaskList {
 
-    private List<Task> taskList;
+    private ArrayList<Task> taskList;
 
     /**
      * Constructs a TaskList object given no current list of tasks.
@@ -24,7 +24,7 @@ public class TaskList {
      *
      * @param taskList list of tasks.
      */
-    public TaskList(List<Task> taskList) {
+    public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
@@ -108,5 +108,9 @@ public class TaskList {
             }
         }
         return message;
+    }
+
+    public TaskList copy() {
+        return new TaskList((ArrayList<Task>) taskList.clone());
     }
 }

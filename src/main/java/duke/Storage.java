@@ -44,7 +44,7 @@ public class Storage {
      * @return List of Tasks.
      * @throws DukeException If there are file access errors.
      */
-    public List<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws DukeException {
         File dataDir = new File("data");
         if (!dataDir.exists()) {
             dataDir.mkdirs();
@@ -58,7 +58,7 @@ public class Storage {
             throw new DukeException("IOException");
         }
 
-        List<Task> strList = new ArrayList<Task>();
+        ArrayList<Task> strList = new ArrayList<Task>();
         try {
             Scanner s = new Scanner(file);
             while (s.hasNext()) {

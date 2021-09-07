@@ -1,6 +1,7 @@
 package duke;
 
 import command.Command;
+import command.UndoCommand;
 import task.TaskList;
 import duke_exception.DukeException;
 
@@ -35,6 +36,8 @@ public class Duke extends Application {
     private TaskList tasks;
     private Ui ui;
 
+    private TaskList previousTasks;
+
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -56,9 +59,10 @@ public class Duke extends Application {
 
         try {
             this.tasks = new TaskList(storage.load());
+            this.previousTasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
-            TaskList tasks = new TaskList();
+            this.tasks = new TaskList();
         }
     }
 
@@ -72,9 +76,10 @@ public class Duke extends Application {
 
         try {
             this.tasks = new TaskList(storage.load());
+            this.previousTasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
-            TaskList tasks = new TaskList();
+            this.tasks = new TaskList();
         }
     }
 
@@ -203,8 +208,15 @@ public class Duke extends Application {
      */
     String getResponse(String input) {
         try {
+            String result = "";
             Command newCommand = Parser.parse(input);
-            String result = newCommand.execute(tasks, ui, storage);
+            if (input.equals("undo")) {
+                tasks = previousTasks.copy();
+                result = newCommand.execute(tasks, ui, storage);
+            } else {
+                previousTasks = tasks.copy();
+                result = newCommand.execute(tasks, ui, storage);
+            }
             return result;
         } catch (DukeException e) {
             return e.getMessage();
