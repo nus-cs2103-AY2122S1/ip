@@ -6,13 +6,13 @@ import pika.ui.TaskList;
 import pika.ui.Ui;
 
 /**
- * FindCommand Class for the find commands
+ * FindCommand Class for the find commands.
  */
 public class FindCommand extends Command {
     private final String string;
 
     /**
-     * FindCommand Constructor
+     * FindCommand Constructor.
      *
      * @param string is the string to be searched
      */
@@ -26,14 +26,14 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes the Search Command to print the list of task with the given string to the user via the Ui
+     * Executes the Search Command to print the list of task with the given string to the user via the Ui.
      *
      * @param taskList The current list of tasks
-     * @param ui       The current Ui
      * @param storage  The current storage class to handle the txt file
+     * @return the string that the bot will say once the find command is executed
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         return Ui.searchList(taskList, this.string);
     }
 }

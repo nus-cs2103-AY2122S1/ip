@@ -1,13 +1,13 @@
 package pika.task;
 
 /**
- * Deadline Class to handle Deadline Tasks
+ * Deadline Class to handle Deadline Tasks.
  */
 public class Deadline extends Task {
     protected String dueDate;
 
     /**
-     * Constructor for Deadline Class
+     * Constructor for Deadline Class.
      *
      * @param name    name of the task
      * @param dueDate Due date of the task. Can be Date or Date/Time
@@ -18,7 +18,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the string to be written in the txt file
+     * Returns the string to be written in the txt file.
+     *
+     * @return txt format of the task for storage
      */
     @Override
     public String write() {
@@ -26,7 +28,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the task for the list format
+     * Returns the task for the list format.
+     *
+     * @return The task in string format
      */
     @Override
     public String toString() {

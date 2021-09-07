@@ -1,14 +1,14 @@
 package pika.task;
 
 /**
- * Base Task class
+ * Base Task class.
  */
 public class Task { //Base Task Class
     protected boolean isDone;
     private final String name;
 
     /**
-     * Constructor of Task class
+     * Constructor of Task class.
      *
      * @param name Name of Task
      */
@@ -18,15 +18,15 @@ public class Task { //Base Task Class
     }
 
     /**
-     * Marks the task as done when called and return it
+     * Marks the task as done when called and return it.
      */
-    public String done() {
+    public String markAsDone() {
         this.isDone = true;
         return this.toString();
     }
 
     /**
-     * Checks if the task is already completed
+     * Checks if the task is already completed.
      *
      * @return if the task has been completed
      */
@@ -35,9 +35,9 @@ public class Task { //Base Task Class
     }
 
     /**
-     * Returns the string to be written in the txt file
+     * Returns the string to be written in the txt file.
      *
-     * @return txt format of the task
+     * @return txt format of the task for storage
      */
     public String write() {
         if (this.isDone) {
@@ -48,7 +48,8 @@ public class Task { //Base Task Class
     }
 
     /**
-     * Returns the name of the task
+     * Returns the name of the task.
+     *
      * @return name of the task
      */
     public String getName() {
@@ -56,7 +57,7 @@ public class Task { //Base Task Class
     }
 
     /**
-     * Returns the task as String
+     * Returns the task as String.
      *
      * @return list format of the task
      */

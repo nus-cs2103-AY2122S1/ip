@@ -1,13 +1,13 @@
 package pika.task;
 
 /**
- * Event Class to handle event tasks
+ * Event Class to handle event tasks.
  */
 public class Event extends Task {
     protected String eventTime;
 
     /**
-     * Constructor for the event class
+     * Constructor for the event class.
      *
      * @param name      Name of the event Task
      * @param eventTime Date or Date and Time for the event Task
@@ -18,9 +18,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the string to be written in the txt file
+     * Returns the string to be written in the txt file.
      *
-     * @return txt format of the task
+     * @return txt format of the task for storage
      */
     @Override
     public String write() {
@@ -28,7 +28,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the list format of the task
+     * Returns the list format of the task.
      *
      * @return list format of the task
      */

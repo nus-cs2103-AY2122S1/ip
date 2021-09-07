@@ -6,6 +6,8 @@ public class Ui { //IU Class used to handle the interactions with the user.
 
     /**
      * Calls the goodbye message for Duke.
+     *
+     * @return Goodbye message
      */
     public static String goodByeMessage() {
         return "Pika...chuuuuu.... Pika is sad that you are leaving";
@@ -16,6 +18,7 @@ public class Ui { //IU Class used to handle the interactions with the user.
      * Calls the message to inform the user that the task has been added successfully.
      *
      * @param taskList List of tasks
+     * @return Added message
      */
     public static String addedMessage(TaskList taskList) {
         assert taskList != null : "Pika Pi, this is not valid!";
@@ -28,6 +31,7 @@ public class Ui { //IU Class used to handle the interactions with the user.
      * Prints the list of task for the users.
      *
      * @param taskList Takes in the current list of tasks
+     * @return The list of tasks
      */
     public static String printList(TaskList taskList) {
         assert taskList != null : "Pika Pi, this is not valid!";
@@ -39,6 +43,7 @@ public class Ui { //IU Class used to handle the interactions with the user.
      *
      * @param taskList List of tasks
      * @param pattern  pattern to be searched
+     * @return List of task with search term in task details
      */
     public static String searchList(TaskList taskList, String pattern) {
         assert pattern != null : "Pika Pi, this is not valid!";
@@ -50,6 +55,7 @@ public class Ui { //IU Class used to handle the interactions with the user.
      * Prints the done Message to inform the user that the task has been marked as done.
      *
      * @param msg task's message when marked as done
+     * @return done Message
      */
     public static String doneMessage(String msg) {
         assert msg != null : "Pika Pi, this is not valid!";
@@ -62,6 +68,7 @@ public class Ui { //IU Class used to handle the interactions with the user.
      *
      * @param task  Task to be deleted
      * @param index The number of tasks that remains in the list
+     * @return Deletion message
      */
     public static String deleteMessage(Task task, int index) {
         assert task != null : "Pika Pi, this is not valid!";
@@ -71,9 +78,11 @@ public class Ui { //IU Class used to handle the interactions with the user.
     }
 
     /**
-    * Prints the error to inform the user that their file format is incorrect
-    */
-    public static String showLoadingError() {
+     * Prints the error to inform the user that their file format is incorrect.
+     *
+     * @return Error message
+     */
+    public static String loadingErrorMessage() {
         return "Pika pi!! It seems like your file format is incorrect!";
     }
 }
