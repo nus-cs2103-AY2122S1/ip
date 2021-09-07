@@ -119,6 +119,10 @@ public class TaskList {
             boolean isDone = !split[1].equals("0");
             String description = split[2];
             String dateTimeString;
+            assert taskType.equals("T")
+                    || taskType.equals("D")
+                    || taskType.equals("E")
+                    : "taskType should only be T,D,E";
             switch (taskType) {
             case "T":
                 ToDo toDoTask = new ToDo(description, isDone);
