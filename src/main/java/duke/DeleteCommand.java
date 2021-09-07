@@ -29,9 +29,9 @@ public class DeleteCommand implements Command {
         }
         Task deletedTask = tasks.delete(deleteIndex);
         storage.save(tasks);
-        return "Noted. I've removed this task:\n" +
-                deletedTask +
-                "\nNow you have " + tasks.size() + " tasks in the list.";
+        return "Noted. I've removed this task:\n"
+                + deletedTask
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 
     /**

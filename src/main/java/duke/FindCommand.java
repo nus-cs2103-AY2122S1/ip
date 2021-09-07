@@ -1,7 +1,6 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.stream.IntStream;
 
 /**
  * Encapsulates a command to find tasks that match a given string.
