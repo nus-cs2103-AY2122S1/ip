@@ -9,7 +9,8 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class DeadLine extends Task {
-
+    static final String DONE = "[D][X] ";
+    static final String NOT_DONE = "[D][ ] ";
     private String deadLine;
     private LocalDateTime dateTime;
 
@@ -49,11 +50,11 @@ public class DeadLine extends Task {
     @Override
     public String printTask() {
         String result = "";
-        if (super.complete) {
-            result = "[D][X] ";
+        if (complete) {
+            result = DONE;
         } else {
-            result = "[D][ ] ";
+            result = NOT_DONE;
         }
-        return result + super.task + " (by: " + formatChanger() + ")";
+        return result + task + " (by: " + formatChanger() + ")";
     }
 }

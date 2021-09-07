@@ -6,20 +6,33 @@ import javafx.stage.Stage;
 
 public class Parser extends Application {
 
-    private Ui ui;
-    private TaskList taskList;
-    private Storage storage;
-
+    static final int BYE_LENGTH = 3;
+    static final int LIST_LENGTH = 4;
+    static final int DONE_LENGTH = 4;
+    static final int TODO_LENGTH = 4;
+    static final int DEADLINE_LENGTH = 8;
+    static final int EVENT_LENGTH = 5;
+    static final int DELETE_LENGTH = 6;
+    static final int FIND_LENGTH = 4;
+    static final int INVALID_INPUT = 0;
+    static final int BYE_INPUT = 1;
+    static final int LIST_INPUT = 2;
+    static final int DONE_INPUT = 3;
+    static final int TODO_INPUT = 4;
+    static final int DEADLINE_INPUT = 5;
+    static final int EVENT_INPUT = 6;
+    static final int DELETE_INPUT = 7;
+    static final int FIND_INPUT = 8;
+    private final Ui ui;
+    private final Storage storage;
     /**
      * Creates a Parser that processes the user's inputs.
      *
      * @param ui Ui object which interacts with the users.
-     * @param taskList TaskList object which stores the list of tasks.
      * @param storage Storage object which saves and retrieves files.
      */
-    public Parser(Ui ui, TaskList taskList, Storage storage) {
+    public Parser(Ui ui, Storage storage) {
         this.ui = ui;
-        this.taskList = taskList;
         this.storage = storage;
     }
 
@@ -31,8 +44,8 @@ public class Parser extends Application {
      */
     private boolean byeChecker(String str) {
         boolean isBye = false;
-        if (str.length() >= 3) {
-            isBye = str.equals("bye");
+        if (str.length() == BYE_LENGTH) {
+            isBye = str.startsWith("bye");
         }
         return isBye;
     }
@@ -45,8 +58,8 @@ public class Parser extends Application {
      */
     private boolean listChecker(String str) {
         boolean isList = false;
-        if (str.length() >= 4) {
-            isList = str.equals("list");
+        if (str.length() == LIST_LENGTH) {
+            isList = str.startsWith("list");
         }
         return isList;
     }
@@ -59,8 +72,8 @@ public class Parser extends Application {
      */
     private boolean doneChecker(String str) {
         boolean isDone = false;
-        if (str.length() >= 4) {
-            isDone = str.substring(0, 4).equals("done");
+        if (str.length() >= DONE_LENGTH) {
+            isDone = str.startsWith("done");
         }
         return isDone;
     }
@@ -73,8 +86,8 @@ public class Parser extends Application {
      */
     private boolean todoChecker(String str) {
         boolean isTodo = false;
-        if (str.length() >= 4) {
-            isTodo = str.substring(0, 4).equals("todo");
+        if (str.length() >= TODO_LENGTH) {
+            isTodo = str.startsWith("todo");
         }
         return isTodo;
     }
@@ -87,8 +100,8 @@ public class Parser extends Application {
      */
     private boolean deadlineChecker(String str) {
         boolean isDeadLine = false;
-        if (str.length() >= 8) {
-            isDeadLine = str.substring(0, 8).equals("deadline");
+        if (str.length() >= DEADLINE_LENGTH) {
+            isDeadLine = str.startsWith("deadline");
         }
         return isDeadLine;
     }
@@ -101,8 +114,8 @@ public class Parser extends Application {
      */
     private boolean eventChecker(String str) {
         boolean isEvent = false;
-        if (str.length() >= 5) {
-            isEvent = str.substring(0, 5).equals("event");
+        if (str.length() >= EVENT_LENGTH) {
+            isEvent = str.startsWith("event");
         }
         return isEvent;
     }
@@ -115,16 +128,16 @@ public class Parser extends Application {
      */
     private boolean deleteChecker(String str) {
         boolean isDelete = false;
-        if (str.length() >= 6) {
-            isDelete = str.substring(0, 6).equals("delete");
+        if (str.length() >= DELETE_LENGTH) {
+            isDelete = str.startsWith("delete");
         }
         return isDelete;
     }
 
     private boolean findChecker(String str) {
         boolean isFind = false;
-        if (str.length() >= 4) {
-            isFind = str.substring(0, 4).equals("find");
+        if (str.length() >= FIND_LENGTH) {
+            isFind = str.startsWith("find");
         }
         return isFind;
     }
@@ -136,24 +149,24 @@ public class Parser extends Application {
      * @return Case number of command.
      */
     public int caseChecker(String input) {
-        int caseNum = 0;
+        int caseNum = INVALID_INPUT;
 
         if (byeChecker(input)) {
-            caseNum = 1;
+            caseNum = BYE_INPUT;
         } else if (listChecker(input)) {
-            caseNum = 2;
+            caseNum = LIST_INPUT;
         } else if (doneChecker(input)) {
-            caseNum = 3;
+            caseNum = DONE_INPUT;
         } else if (todoChecker(input)) {
-            caseNum = 4;
+            caseNum = TODO_INPUT;
         } else if (deadlineChecker(input)) {
-            caseNum = 5;
+            caseNum = DEADLINE_INPUT;
         } else if (eventChecker(input)) {
-            caseNum = 6;
+            caseNum = EVENT_INPUT;
         } else if (deleteChecker(input)) {
-            caseNum = 7;
+            caseNum = DELETE_INPUT;
         } else if (findChecker(input)) {
-            caseNum = 8;
+            caseNum = FIND_INPUT;
         }
         return caseNum;
     }
@@ -175,11 +188,14 @@ public class Parser extends Application {
     private String doneInput(String str, TaskList taskList) throws InputError {
         String response = "";
         try {
-            if (str.length() == 4) {
+            if (str.length() == DONE_LENGTH) {
                 throw new InputError("No task indicated");
             }
             int indexNum = Integer.parseInt(str.replaceAll("[^0-9]", ""));
-            response = taskList.doneItem(indexNum);
+            if (indexNum <= 0 || indexNum > taskList.size()) {
+                throw new InputError("Invalid Number");
+            }
+            response = taskList.doneTask(indexNum);
         } catch (InputError e) {
             response = ui.errorMessage(e);
         }
@@ -190,10 +206,10 @@ public class Parser extends Application {
     private String findInput(String str, TaskList taskList) throws InputError {
         String response = "";
         try {
-            if (str.length() == 4) {
+            if (str.length() == FIND_LENGTH) {
                 throw new InputError("No task indicated");
             }
-            String searchWord = str.substring(5);
+            String searchWord = str.substring(FIND_LENGTH + 1);
             TaskList foundList = taskList.findTasks(searchWord);
             if (foundList.currList().isEmpty()) {
                 throw new InputError("No such tasks found");
@@ -209,7 +225,7 @@ public class Parser extends Application {
     private String todoInput(String str, TaskList taskList) throws InputError {
         String response = "";
         try {
-            if (str.length() == 4) {
+            if (str.length() == TODO_LENGTH) {
                 throw new InputError("Description Please!");
             }
             response = taskList.addTodo(str);
@@ -223,7 +239,7 @@ public class Parser extends Application {
     private String deadlineInput(String str, TaskList taskList) throws InputError {
         String response = "";
         try {
-            if (str.length() == 8) {
+            if (str.length() == DEADLINE_LENGTH) {
                 throw new InputError("Description Please!");
             }
             response = taskList.addDeadline(str);
@@ -237,7 +253,7 @@ public class Parser extends Application {
     private String eventInput(String str, TaskList taskList) throws InputError {
         String response = "";
         try {
-            if (str.length() == 5) {
+            if (str.length() == EVENT_LENGTH) {
                 throw new InputError("Description Please!");
             }
             response = taskList.addEvent(str);
@@ -251,11 +267,14 @@ public class Parser extends Application {
     private String deleteInput(String str, TaskList taskList) throws InputError {
         String response = "";
         try {
-            if (str.length() == 5) {
+            if (str.length() == DELETE_LENGTH) {
                 throw new InputError("No Task to delete");
             }
             int indexNum = Integer.parseInt(str.replaceAll("[^0-9]", ""));
-            response = taskList.deleteItem(indexNum);
+            if (indexNum <= 0 || indexNum > taskList.size()) {
+                throw new InputError("Invalid Number!");
+            }
+            response = taskList.deleteTask(indexNum);
         } catch (InputError e) {
             response = ui.errorMessage(e);
         }
@@ -274,34 +293,34 @@ public class Parser extends Application {
     public String caseHandler(int caseNum, String input, TaskList taskList) throws InputError {
         String response = "";
         switch (caseNum) {
-        case 1:
+        case BYE_INPUT:
             response = ui.byeMessage();
             Platform.exit();
             break;
-        case 2:
+        case LIST_INPUT:
             response = listInput(taskList);
             break;
-        case 3:
+        case DONE_INPUT:
             response = doneInput(input, taskList);
             storage.fileSaver(taskList.currList());
             break;
-        case 4:
+        case TODO_INPUT:
             response = todoInput(input, taskList);
             storage.fileSaver(taskList.currList());
             break;
-        case 5:
+        case DEADLINE_INPUT:
             response = deadlineInput(input, taskList);
             storage.fileSaver(taskList.currList());
             break;
-        case 6:
+        case EVENT_INPUT:
             response = eventInput(input, taskList);
             storage.fileSaver(taskList.currList());
             break;
-        case 7:
+        case DELETE_INPUT:
             response = deleteInput(input, taskList);
             storage.fileSaver(taskList.currList());
             break;
-        case 8:
+        case FIND_INPUT:
             response = findInput(input, taskList);
             break;
         default:
