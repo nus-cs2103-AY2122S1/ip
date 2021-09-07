@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
-import duke.Duke;
 import duke.command.*;
 import duke.exception.DukeException;
 import duke.task.Deadline;
@@ -190,7 +189,7 @@ public class Parser {
     }
 
 
-    public static List<Task> decode(String[] lines) {
+    public static List<Task> decode(String[] lines) throws DukeException {
         List<Task> tasks = new ArrayList<>();
         for (String line : lines) {
             String type = line.substring(0, 1);
@@ -267,6 +266,8 @@ public class Parser {
                 tasks.add(new Event(description, isDone, startDateTime, endDateTime));
                 break;
             }
+            default:
+                throw new DukeException("The data file is corrupted.");
             }
         }
 
@@ -275,6 +276,8 @@ public class Parser {
 
 
     private static boolean isDateTimeDelim(String str) {
+        assert str != null;
+
         return str.equals("/by") || str.equals("/at");
     }
 }

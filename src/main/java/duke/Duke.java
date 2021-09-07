@@ -80,7 +80,7 @@ public class Duke {
             storage = new Storage(filePath);
             tasks = new TaskList();
             tasks.loadFromFile(storage);
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | DukeException e) {
             ui.showError(e.getMessage());
         }
     }
