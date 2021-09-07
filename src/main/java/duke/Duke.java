@@ -81,6 +81,7 @@ public class Duke {
             String response = c.execute(tasks, ui, storage);
 
             // Ensure that there is a response to return
+            assert(response != null);
             assert (!response.equals(""));
 
             return response;
