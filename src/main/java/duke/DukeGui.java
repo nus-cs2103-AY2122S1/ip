@@ -55,7 +55,7 @@ public class DukeGui {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    protected String testResponse(String input) {
+    protected String newResponse(String input) {
         String output;
         try {
             output = parser.parse(input);
