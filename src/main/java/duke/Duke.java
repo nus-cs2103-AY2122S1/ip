@@ -27,9 +27,11 @@ public class Duke {
 
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     * @return
+     * Returns string response to GUI based on user input
+     *
+     * @param input
+     * @return response to GUI
+     * @throws DukeException
      */
     public String getResponse(String input) throws DukeException {
         try {
@@ -40,34 +42,34 @@ public class Duke {
                 return ui.showTaskList(tasks);
             } else if (command[0].equals("done")) {
                 int index = Integer.parseInt(command[1]);
-                Task doneTask = tasks.doneTask(index - 1);
+                Task completedTask = tasks.completeTask(index - 1);
                 storage.updateDone(index);
-                return ui.showDoneTask(doneTask);
+                return ui.showCompletedTask(completedTask);
             } else if (command[0].equals("delete")) {
                 int index = Integer.parseInt(command[1]);
-                Task deleteTask = tasks.deleteTask(index - 1);
+                Task deletedTask = tasks.deleteTask(index - 1);
                 storage.deleteData(index);
-                return ui.showDeleteTask(deleteTask, tasks.size());
+                return ui.showDeletedTask(deletedTask, tasks.getSize());
             } else if (command[0].equals("todo")) {
                 Task task = new Todo(command[1], false);
                 tasks.addTask(task);
                 String dataDescription = "T , 0 , " + command[1];
                 storage.addData(dataDescription);
-                return ui.showAddTask(task, tasks.size());
+                return ui.showAddedTask(task, tasks.getSize());
             } else if (command[0].equals("deadline")) {
                 LocalDate date = LocalDate.parse(command[2]);
                 Task task = new Deadline(command[1], date, false);
                 tasks.addTask(task);
                 String dataDescription = "D , 0 , " + command[1] + " , " + command[2];
                 storage.addData(dataDescription);
-                return ui.showAddTask(task, tasks.size());
+                return ui.showAddedTask(task, tasks.getSize());
             } else if (command[0].equals("event")) {
                 LocalDate date = LocalDate.parse(command[2]);
                 Task task = new Event(command[1], date, false);
                 tasks.addTask(task);
                 String dataDescription = "E , 0 , " + command[1] + " , " + command[2];
                 storage.addData(dataDescription);
-                return ui.showAddTask(task, tasks.size());
+                return ui.showAddedTask(task, tasks.getSize());
             } else if (command[0].equals("find")) {
                 return ui.showFindTask(tasks.find(command[1]));
             } else {

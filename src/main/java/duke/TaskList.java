@@ -27,7 +27,7 @@ public class TaskList {
      *
      * @return the number of tasks in the list
      */
-    public int size() {
+    public int getSize() {
         return tasks.size();
     }
 
@@ -58,20 +58,10 @@ public class TaskList {
      * @param index
      * @return task that is marked as done
      */
-    public Task doneTask(int index) {
-        Task doneTask = tasks.get(index);
-        doneTask.markAsDone();
-        return doneTask;
-    }
-
-    /**
-     * Get task based on index
-     *
-     * @param index
-     * @return task based on index
-     */
-    public Task getTask(int index) {
-        return tasks.get(index);
+    public Task completeTask(int index) {
+        Task completedTask = tasks.get(index);
+        completedTask.markAsDone();
+        return completedTask;
     }
 
     /**
