@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Event class is a task that takes in description and deadline
+ * Event class is a task that takes in description and deadline.
  */
 public class Event extends Task {
     protected LocalDate deadline;
@@ -16,7 +16,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns logo corresponding to type
+     * Returns logo corresponding to type.
      *
      * @return the logo [E]
      */
