@@ -31,20 +31,24 @@ public class FindTasksCommand extends Command {
     public void execute(TaskHandler taskHandler, Ui ui) throws DukeInvalidCommandException {
         List<Map.Entry<Integer, Task>> queryResults = taskHandler.findTasksDescribedBy(queryTaskDescription);
         int n = queryResults.size();
-        if (n == 0) {
+        switch (n) {
+        case 0:
             ui.startMessage()
                     .addLine("No matching tasks were found.")
                     .printFormatted();
-        } else if (n == 1) {
+            break;
+        case 1:
             ui.startMessage()
                     .addLine("Here is the 1 matching task in your list:")
                     .addFindTasksResultsList(queryResults)
                     .printFormatted();
-        } else {
+            break;
+        default:
             ui.startMessage()
                     .addLine(String.format("Here are the %d matching tasks in your list:", n))
                     .addFindTasksResultsList(queryResults)
                     .printFormatted();
+            break;
         }
     }
 
