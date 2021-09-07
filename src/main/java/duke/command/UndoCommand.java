@@ -5,7 +5,7 @@ import duke.ui.Ui;
 
 public class UndoCommand extends Command {
 
-    private static final CommandType COMMAND_TYPE = CommandType.ADD_DEADLINE_TASK;
+    private static final CommandType COMMAND_TYPE = CommandType.UNDO;
 
     /**
      * Creates a Command instance.
@@ -29,6 +29,6 @@ public class UndoCommand extends Command {
 
     @Override
     CommandType getCommandType() {
-        return null;
+        return COMMAND_TYPE;
     }
 }
