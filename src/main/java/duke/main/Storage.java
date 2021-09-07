@@ -81,7 +81,6 @@ public class Storage {
                         t.markAsDone();
                     }
                     tasks.add(t);
-                    file.delete();
                 }
                 sc.close();
             }
@@ -98,9 +97,7 @@ public class Storage {
      * @param tasks an arraylist of tasks.
      * @throws IOException exception caused in creating new file.
      */
-    public void store(TaskList tasks) throws IOException {
-        file.delete();
-        file.createNewFile();
+    public void store(TaskList tasks) throws IOException{
         fileWriter = new FileWriter(file, false);
         String data = "";
         for (int i = 0; i < tasks.getNumTasks(); i++) {

@@ -1,8 +1,7 @@
-<<<<<<< HEAD:src/main/java/duke/task/Task.java
 package duke.task;
-=======
-package IP.duke.task;
->>>>>>> Branch-A-Varags:src/main/java/IP/duke/task/Task.java
+
+import javax.xml.stream.FactoryConfigurationError;
+import java.time.LocalDate;
 
 /**
  * Represents a duke.task which can be marked done.

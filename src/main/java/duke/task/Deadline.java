@@ -1,12 +1,7 @@
-<<<<<<< HEAD:src/main/java/duke/task/Deadline.java
 package duke.task;
-=======
-package IP.duke.task;
 
 import IP.duke.main.Date;
-import IP.duke.main.Duke;
 import IP.duke.main.DukeException;
->>>>>>> Branch-A-Varags:src/main/java/IP/duke/task/Deadline.java
 
 import java.text.ParseException;
 import java.time.format.DateTimeParseException;

@@ -1,8 +1,8 @@
 package duke.main;
 
-import java.util.Scanner;
-
 import duke.task.Task;
+
+import java.util.Scanner;
 
 /**
  * Represents user interface abstraction.
@@ -40,8 +40,8 @@ public class Ui {
     /**
      * Welcomes the user.
      */
-    public void showWelcome() {
-        System.out.println(greeting);
+    public String showWelcome() {
+        return GREETING;
     }
 
     /**
@@ -57,25 +57,24 @@ public class Ui {
     /**
      * Shows farewell message to user.
      */
-    public void showFarewell() {
-        System.out.println(farewell);
-        sc.close();
+    public String showFarewell() {
+        return FAREWELL;
     }
 
     /**
      * Shows the diving line.
      */
-    public void showLine() {
+    public String showLine() {
         String line = "_________________________________";
-        System.out.println(line);
+        return line;
     }
 
     /**
      * Shows the error message from loading the file.
      */
-    public void showLoadingError() {
+    public String showLoadingError() {
         String loadingError = "There was a problem loading the file.";
-        System.out.println(loadingError);
+        return loadingError;
     }
 
     /**
@@ -83,8 +82,8 @@ public class Ui {
      *
      * @param errorMessage exception message.
      */
-    public void showError(String errorMessage) {
-        System.out.println(errorMessage);
+    public String showError(String errorMessage) {
+        return errorMessage;
     }
 
     /**
@@ -92,53 +91,38 @@ public class Ui {
      *
      * @param task the duke.task marked as done.
      */
-    public void showMarkTaskDone(Task task) {
-        String doneMessage = "Yay, one duke.task down!";
-        System.out.println(doneMessage);
-        String taskMarkedAsDone = String.format("~~%s~~", task.toString());
-        System.out.println(taskMarkedAsDone);
+    public String showMarkTaskDone(Task task) {
+        String doneMessage = "Yay, one task down!\n";
+        doneMessage += String.format("~~%s~~", task.toString());
+        return doneMessage;
     }
 
     /**
-<<<<<<< HEAD:src/main/java/duke/main/Ui.java
-     * Displays the duke.task deleted.
-     *
-     * @param task              the deleted duke.task.
-     * @param numTasksRemaining number of tasks after deleting the duke.task.
-     */
-    public void showTaskDeleted(Task task, int numTasksRemaining) {
-        String deletionMessage = "Alrightty, I've removed this duke.task:";
-=======
-     * Displays the task deleted.
+     * Shows the task deleted.
      * 
      * @param task the deleted task.
      * @param numTasksRemaining number of tasks after deleting the task.
      */
-    public void showTaskDeleted(Task task, int numTasksRemaining) {
-        String deletionMessage = "Alrighty, I've removed this task:";
->>>>>>> Branch-A-Varags:src/main/java/IP/duke/main/Ui.java
-        System.out.println(deletionMessage);
-        String deletedTask = String.format("~~%s~~", task.toString());
-        System.out.println(deletedTask);
-        String tasksRemaining = String.format("Now, you have %s %s remaining", numTasksRemaining, (
-            numTasksRemaining > 1 ? "tasks" : "duke/task"));
-        System.out.println(tasksRemaining);
+    public String showTaskDeleted(Task task, int numTasksRemaining) {
+        String deletionMessage = "Alrighty, I've removed this task:\n";
+        deletionMessage += String.format("~~%s~~\n", task.toString());
+        deletionMessage += String.format("Now, you have %s %s remaining", numTasksRemaining,
+                (numTasksRemaining > 1 ? "tasks" : "task"));
+        return deletionMessage;
     }
 
     /**
-     * Displays the duke.task added.
+     * Shows the duke.task added.
      *
      * @param task        the duke.task added.
      * @param newNumTasks number of tasks after adding the new duke.task.
      */
-    public void showTaskAdded(Task task, int newNumTasks) {
-        String additionMessage = "Got it. I've added this duke.task:";
-        System.out.println(additionMessage);
-        String addedTask = String.format("~~%S~~", task.toString());
-        System.out.println(addedTask);
-        String newTally = String.format("Now you have %s %s in the list.", newNumTasks, (
-            newNumTasks > 1 ? "tasks" : "duke/task"));
-        System.out.println(newTally);
+    public String showTaskAdded(Task task, int newNumTasks) {
+        String additionMessage = "Got it. I've added this task:\n";
+        additionMessage += String.format("~~%S~~\n", task.toString());
+        additionMessage += String.format("Now you have %s %s in the list.", newNumTasks,
+                                    (newNumTasks > 1 ? "tasks" : "task"));
+        return additionMessage;
     }
 
     /**
@@ -146,9 +130,9 @@ public class Ui {
      *
      * @param tasks current taskList of tasks.
      */
-    public void showListOfTasks(TaskList tasks) {
+    public String showListOfTasks(TaskList tasks) {
         String header = "Here are the tasks in your list:";
-        iterate(header, tasks);
+        return iterate(header, tasks);
     }
 
     /**
@@ -157,14 +141,15 @@ public class Ui {
      * @param tasks   list of duke.task that fall on the specified date.
      * @param message the header message.
      */
-    public void showMatchingTasks(TaskList tasks, String message) {
-        iterate(message, tasks);
+    public String showMatchingTasks(TaskList tasks, String searchPhrase, String message) {
+        return iterate(message, tasks);
     }
-
-    private void iterate(String headerMessage, TaskList tasks) {
-        System.out.println(headerMessage);
-        for (int i = 0; i < tasks.getNumTasks(); i++) {
-            System.out.println(String.format("%s.%s", i + 1, tasks.getTask(i).toString()));
+    
+    private String iterate(String headerMessage, TaskList tasks) {
+        String listOfTasksDisplay = headerMessage + "\n";
+        for(int i = 0; i < tasks.getNumTasks(); i++) {
+            listOfTasksDisplay += String.format("%s.%s\n", i + 1, tasks.getTask(i).toString());
         }
+        return listOfTasksDisplay;
     }
 }

@@ -6,39 +6,39 @@ import duke.main.TaskList;
 import duke.main.Ui;
 
 /**
- * Represents a duke.command given by the user.
- *
+ * Represents a command given by the user.
+ * 
  * @author Gordon Yit
  * @version CS2103T, Semester 2
  */
 public abstract class Command {
 
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final boolean IS_EXIT;
+    private boolean isExitCommand;
 
     /**
-     * Class constructor.
+     * Class constructor. 
      */
     public Command() {
-        IS_EXIT = false;
+        isExitCommand = false;
     }
 
     /**
-     * Executes the given duke.command.
-     *
-     * @param tasks   lists of tasks
-     * @param ui      the user interface.
+     * Executes the given command.
+     * 
+     * @param tasks lists of tasks
+     * @param ui the user interface.
      * @param storage the storage file.
      * @throws DukeException exception handled by DukeException Class
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
-     * Checks whether the duke.command is an exit duke.command.
-     *
-     * @return true if the duke.command is an exit duke.command, false otherwise.
+     * Checks whether the command is an exit command.
+     * 
+     * @return true if the command is an exit command, false otherwise.
      */
     public boolean isExit() {
-        return IS_EXIT;
+        return isExitCommand;
     }
+    
 }

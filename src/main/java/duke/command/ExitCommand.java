@@ -1,4 +1,5 @@
 package duke.command;
+<<<<<<< HEAD:src/main/java/duke/command/ExitCommand.java
 
 import java.io.IOException;
 
@@ -6,6 +7,15 @@ import duke.main.DukeException;
 import duke.main.Storage;
 import duke.main.TaskList;
 import duke.main.Ui;
+=======
+
+import duke.main.DukeException;
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
+
+import java.io.IOException;
+>>>>>>> branch-A-Level-10:src/main/java/IP/duke/command/ExitCommand.java
 
 /**
  * Represents a duke.command to exit Duke.
@@ -32,10 +42,10 @@ public class ExitCommand extends Command {
      * @param storage the storage file.
      * @throws DukeException exception handled by DukeException class
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             storage.store(tasks);
-            ui.showFarewell();
+            return ui.showFarewell();
         } catch (IOException e) {
             throw new DukeException(e);
         }

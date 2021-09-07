@@ -1,11 +1,18 @@
 package duke.command;
 
 import duke.main.DukeException;
+<<<<<<< HEAD:src/main/java/duke/command/DeleteCommand.java
 import duke.main.Storage;
 import duke.main.TaskList;
 import duke.main.Ui;
 import duke.task.Task;
 
+=======
+import duke.task.Task;
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
+>>>>>>> branch-A-Level-10:src/main/java/IP/duke/command/DeleteCommand.java
 
 /**
  * Represents a duke.command to delete a duke.task.
@@ -35,11 +42,11 @@ public class DeleteCommand extends Command {
      * @throws DukeException exception handled by DukeException class.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task deletedTask = tasks.delete(TASK_NUM - 1);
             int numTasksRemaining = tasks.getNumTasks();
-            ui.showTaskDeleted(deletedTask, numTasksRemaining);
+            return ui.showTaskDeleted(deletedTask, numTasksRemaining);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(e);
         }
