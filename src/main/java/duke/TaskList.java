@@ -71,11 +71,14 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the TaskList and prints a success message.
+     * Adds a task to the TaskList and returns a success message.
      * @param task the task to be added
      */
-    public void add(Task task) {
+    public String add(Task task) {
         this.taskList.add(task);
+        return "Alright, I've added the following task:\n"
+                + "      " + taskList.get(taskList.size() - 1) + "\n      Now you have " + taskList.size()
+                + " tasks in the list.\n";
     }
 
     /**
