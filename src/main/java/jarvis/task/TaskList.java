@@ -1,6 +1,7 @@
 package jarvis.task;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 import jarvis.exception.InvalidDateTimeInputException;
 
@@ -129,15 +130,12 @@ public class TaskList {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (int i = 0; i < taskList.size(); i++) {
-            String task = String.format(
-                    "%s. %s%s",
-                    i + 1,
-                    taskList.get(i).toString(),
-                    i < taskList.size() - 1 ? "\n" : ""
-            );
-            stringBuilder.append(task);
-        }
+        IntStream.range(0, taskList.size()).mapToObj(i -> String.format(
+                "%s. %s%s",
+                i + 1,
+                taskList.get(i).toString(),
+                i < taskList.size() - 1 ? "\n" : ""
+        )).forEach(stringBuilder::append);
 
         return stringBuilder.toString();
     }
@@ -150,10 +148,12 @@ public class TaskList {
     public String toStorageFormatString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (Task task : taskList) {
-            stringBuilder.append(task.toStorageFormatString());
-            stringBuilder.append(System.lineSeparator());
-        }
+        taskList.stream()
+                .map(Task::toStorageFormatString)
+                .forEach(taskString -> {
+                    stringBuilder.append(taskString);
+                    stringBuilder.append(System.lineSeparator());
+                });
 
         return stringBuilder.toString();
     }
