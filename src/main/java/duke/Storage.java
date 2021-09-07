@@ -39,6 +39,7 @@ public class Storage {
         ArrayList<Task> list = new ArrayList<>();
         File file = new File(filePath);
 
+        assert filePath != null: "filePath must not be null!";
         if (file.exists()) {
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
