@@ -105,6 +105,28 @@ public class Parser {
         return new AddCommand(task);
     }
 
+    private static Command parseIndexCommand(String line) throws DukeException {
+        String[] tokens = line.split(" ");
+        if (tokens.length != 2) {
+            throw new UnknownCommandException(line);
+        }
+
+        int index = -1;
+        try {
+            index = Integer.parseInt(tokens[1]);
+        } catch (NumberFormatException ex) {
+            throw new UnknownCommandException(line);
+        }
+
+        if (tokens[0].equals("done")) {
+            return new MarkDoneCommand(index);
+        } else if (tokens[0].equals("delete")) {
+            return new DeleteCommand(index);
+        } else {
+            throw new UnknownCommandException(line);
+        }
+    }
+
     /**
      * A static method to parse the input commands from user input.
      *
@@ -121,14 +143,10 @@ public class Parser {
             return new ExitCommand();
 
         } else if (line.split(" ")[0].equals("done")) {
-            /* todo: catch format and ioob exceptions */
-            int index = Integer.parseInt(line.split(" ")[1]) - 1;
-            return new MarkDoneCommand(index);
+            return Parser.parseIndexCommand(line);
 
         } else if (line.split(" ")[0].equals("delete")) {
-            /* todo: catch format and ioob exceptions */
-            int index = Integer.parseInt(line.split(" ")[1]) - 1;
-            return new DeleteCommand(index);
+            return Parser.parseIndexCommand(line);
 
         } else if (line.split(" ")[0].equals("find")) {
             return new FindCommand(line.substring(5));

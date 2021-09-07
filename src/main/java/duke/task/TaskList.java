@@ -77,6 +77,10 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    public boolean isValidIndex(int index) {
+        return index >= 0 && index < tasks.size();
+    }
+
     /**
     * Returns true if there are no tasks in the list.
     *

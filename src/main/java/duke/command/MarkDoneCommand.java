@@ -6,6 +6,8 @@ import duke.util.UI;
 import duke.util.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.exception.DukeException;
+import duke.exception.IndexOutOfBoundException;
 
 /**
  * The MarkDoneCommand class encapsulates information
@@ -38,7 +40,10 @@ public class MarkDoneCommand extends Command {
      * @param storage the Storage handler of Duke.
      * @throws IOException on failed loading of Storage files.
      */
-    public void execute(TaskList taskList, UI ui, Storage storage) throws IOException {
+    public void execute(TaskList taskList, UI ui, Storage storage) throws IOException, DukeException {
+        if (!taskList.isValidIndex(index)) {
+            throw new IndexOutOfBoundException(taskList.size());
+        }
         taskList.markDone(index);
         ui.add("Nice! I've marked this task as done:");
         ui.add("  " + taskList.get(index));

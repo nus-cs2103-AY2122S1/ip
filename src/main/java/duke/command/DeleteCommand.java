@@ -6,6 +6,8 @@ import duke.util.UI;
 import duke.util.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.exception.DukeException;
+import duke.exception.IndexOutOfBoundException;
 
 /**
  * The DeleteCommand class encapsulates information
@@ -37,7 +39,10 @@ public class DeleteCommand extends Command {
      * @param storage the Storage handler of Duke.
      * @throws IOException on failed loading of Storage files.
      */
-    public void execute(TaskList taskList, UI ui, Storage storage) throws IOException {
+    public void execute(TaskList taskList, UI ui, Storage storage) throws IOException, DukeException {
+        if (!taskList.isValidIndex(index)) {
+            throw new IndexOutOfBoundException(taskList.size());
+        }
         ui.add("Noted. I've removed this task:");
         ui.add("  " + taskList.get(this.index));
         taskList.delete(index);
