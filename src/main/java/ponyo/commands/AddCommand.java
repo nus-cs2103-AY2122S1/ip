@@ -28,12 +28,14 @@ public class AddCommand extends Command {
     public String[] execute(TaskList tasks, Storage storage) {
         switch (taskToAdd[0]) {
         case "todo":
+        case "t":
             try {
                 return addTodo(tasks, storage);
             } catch (ArrayIndexOutOfBoundsException e) {
                 return Ui.show(Messages.MESSAGE_INVALID_TODO);
             }
         case "deadline":
+        case "d":
             try {
                 return addDeadline(tasks, storage);
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -42,6 +44,7 @@ public class AddCommand extends Command {
                 return Ui.show(Messages.MESSAGE_INVALID_DATE_FORMAT);
             }
         case "event":
+        case "e":
             try {
                 return addEvent(tasks, storage);
             } catch (ArrayIndexOutOfBoundsException e) {
