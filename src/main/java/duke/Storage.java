@@ -51,6 +51,7 @@ public class Storage {
             }
             File file = new File(filePath);
             this.saveFile = new Scanner(file);
+            assert file.canRead(): "file should be readable";
         } catch (FileNotFoundException e) {
             Ui.fileNotFoundError();
         } catch (IOException e) {

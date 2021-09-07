@@ -115,6 +115,7 @@ public class Parser {
             output = new UnexpectedCommand("");
             break;
         }
+        assert !output.equals(null): "output should not be null";
         return output;
     }
 }
