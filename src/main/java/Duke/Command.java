@@ -19,9 +19,7 @@ public class Command {
      * @throws DukeException if description is empty.
      */
     public String todo(String description, TaskList tasks) throws DukeException {
-        if (description.isEmpty()) {
-            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-        }
+        assert !description.isEmpty() : "OOPS!!! The description of a todo cannot be empty.";
         return tasks.addTodo(description);
     }
 
@@ -89,34 +87,27 @@ public class Command {
      * @param index index of Duke.Duke.task to be deleted.
      * @param tasks Duke.Duke.task.TaskList of list of existing tasks.
      * @return delete message for bot.
-     * @throws DukeException if index < 0 or index > number of tasks
      */
-    public String delete(int index, TaskList tasks) throws DukeException {
-        if (index < 0) {
-            throw new DukeException("OOPS!!! Index must be greater than 0");
-        } else if (index >= tasks.length()) {
-            throw new DukeException(String.format("OOPS!!! You only have %1$d tasks",tasks.length()));
-        }
+    public String delete(int index, TaskList tasks) {
+        assert index >= 0 : "OOPS!!! Index must be greater than 0";
+        assert index < tasks.length() : String.format("OOPS!!! You only have %1$d tasks",tasks.length());
         return tasks.delete(index);
     }
 
     /**
      * Return Duke.Duke.task mark as done message.
      *
-     * @param index index of Duke.Duke.task that is done.
-     * @param tasks Duke.Duke.task.TaskList of list of existing tasks.
-     * @return Duke.Duke.task mark as done message.
-     * @throws DukeException if index < 0 or index points to null value.
+     * @param index index of task that is done.
+     * @param tasks TaskList of list of existing tasks.
+     * @return Task mark as done message.
      */
-    public String done(int index, TaskList tasks) throws DukeException {
-        if (index < 0) {
-            throw new DukeException("OOPS!!! Index must be greater than 0");
-        } else if (index >= tasks.length()) {
-            throw new DukeException(String.format("OOPS!!! You only have %1$d tasks",tasks.length()));
-        }
+    public String done(int index, TaskList tasks) {
+        assert index >= 0 : "OOPS!!! Index must be greater than 0";
+        assert index < tasks.length() : String.format("OOPS!!! You only have %1$d tasks",tasks.length());
+
         Task done = tasks.getTask(index);
         done.markAsDone();
-        return String.format("Nice! I've marked this Duke.Duke.task as done:\n\t %1$s \n\t", done.toString());
+        return String.format("Nice! I've marked this task as done:\n\t %1$s \n\t", done.toString());
     }
 
 
@@ -133,13 +124,5 @@ public class Command {
             throw new DukeException("OOPS!!! No keyword provided.");
         }
         return tasks.find(keyword);
-    }
-
-    /**
-     * Prints greeting message for bot.
-     */
-    public static String greet() {
-        String greet = "Hihi! This is halp! \n\tHow can I help?\n\t";
-        return greet;
     }
 }

@@ -50,7 +50,6 @@ public class TaskList {
      * @return added message for adding deadline task.
      */
     public String addDeadline(String description, LocalDate by) {
-
         Deadline toAdd = new Deadline(description, by);
         records.add(toAdd);
         return String.format("Got it. I've added this deadline:\n\t %1$s \n\t" +
