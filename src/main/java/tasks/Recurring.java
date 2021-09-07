@@ -24,11 +24,11 @@ public interface Recurring {
     static String recurrenceToString(Recurrence recurrence) {
         switch (recurrence) {
         case DAILY:
-            return "[recurs: daily]";
+            return "daily";
         case WEEKLY:
-            return "[recurs: weekly]";
+            return "weekly";
         case MONTHLY:
-            return "[recurs: monthly]";
+            return "monthly";
         default:
             return "";
         }

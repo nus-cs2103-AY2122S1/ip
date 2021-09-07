@@ -25,7 +25,7 @@ public class TaskCompletedCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.doTask(Integer.parseInt(super.getExtraInput()) - 1);
+        taskList.doTask(Integer.parseInt(super.getExtraInput()) - 1, taskList, ui, storage);
         if (taskList.toString().equals("")) {
             return "Your todo list is empty!";
         } else {

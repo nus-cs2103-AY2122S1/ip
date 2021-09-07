@@ -1,7 +1,12 @@
 package tasks;
 
 import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import exceptions.DukeException;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -11,7 +16,7 @@ import java.time.format.DateTimeFormatter;
  * @author Quan Teng Foong
  */
 public class Event extends Task implements Recurring {
-    private final LocalDate eventDate;
+    private LocalDate eventDate;
     private final Recurrence recurrence;
 
     /**
@@ -33,9 +38,12 @@ public class Event extends Task implements Recurring {
      */
     @Override
     public String toString() {
+        String recurrenceString = this.recurrence != Recurrence.NEVER
+                ? "[recurs: " + Recurring.recurrenceToString(this.recurrence) + "]"
+                : "";
         return "[E]" + super.toString() + " (at: "
                 + eventDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ") "
-                + Recurring.recurrenceToString(this.recurrence);
+                + recurrenceString;
     }
 
     /**
@@ -46,5 +54,35 @@ public class Event extends Task implements Recurring {
     @Override
     public String toStorage() {
         return "E|" + super.toStorage() + "/at " + this.eventDate;
+    }
+
+    @Override
+    public void doTask(TaskList taskList, Ui ui, Storage storage) {
+        super.doTask();
+        switch (this.recurrence) {
+        case DAILY:
+            try {
+                Parser.parse("event " + this.getMessage() + "/at " + this.eventDate.plusDays(1)
+                        + " /recur " + Recurring.recurrenceToString(this.recurrence)).execute(taskList, ui, storage);
+            } catch (DukeException | IOException e) {
+                e.printStackTrace();
+            }
+            break;
+        case WEEKLY:
+            try {
+                Parser.parse("event " + this.getMessage() + "/at " + this.eventDate.plusWeeks(1)
+                        + " /recur " + Recurring.recurrenceToString(this.recurrence)).execute(taskList, ui, storage);
+            } catch (DukeException | IOException e) {
+                e.printStackTrace();
+            }
+            break;
+        case MONTHLY:
+            try {
+                Parser.parse("event " + this.getMessage() + "/at " + this.eventDate.plusMonths(1)
+                        + " /recur " + Recurring.recurrenceToString(this.recurrence)).execute(taskList, ui, storage);
+            } catch (DukeException | IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

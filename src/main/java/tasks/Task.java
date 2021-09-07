@@ -1,6 +1,9 @@
 package tasks;
 
 import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import exceptions.NoSuchCommandException;
 import exceptions.NoTaskNameException;
 
@@ -96,6 +99,10 @@ public abstract class Task {
      * Sets the Task to completed.
      */
     public void doTask() {
+        this.completed = true;
+    }
+
+    public void doTask(TaskList taskList, Ui ui, Storage storage) {
         this.completed = true;
     }
 
