@@ -1,6 +1,10 @@
-package duke;
+package duke.ui;
 
 import java.util.Scanner;
+
+import duke.Message;
+import duke.TaskList;
+import duke.storage.TaskStorage;
 
 /**
  * Represents a command line interface (CLI) that the user interacts with.

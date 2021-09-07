@@ -1,4 +1,7 @@
-package duke;
+package duke.ui;
+
+import duke.TaskList;
+import duke.storage.TaskStorage;
 
 /**
  * Represents a Graphical User Interface (GUI) that the user interacts with.

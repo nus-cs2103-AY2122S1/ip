@@ -1,8 +1,10 @@
-package duke;
+package duke.storage;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+import duke.exception.DukeException;
+import duke.exception.FileParseException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;

@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * Represents an exception that can occur when running Duke.

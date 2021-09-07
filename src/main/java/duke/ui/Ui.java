@@ -1,7 +1,12 @@
-package duke;
+package duke.ui;
 
 import java.io.IOException;
 
+import duke.Message;
+import duke.Parser;
+import duke.TaskList;
+import duke.exception.DukeException;
+import duke.storage.TaskStorage;
 import duke.task.Task;
 import duke.task.Todo;
 

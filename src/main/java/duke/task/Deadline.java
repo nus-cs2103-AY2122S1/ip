@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 
 /**
  * Represents deadlines that are tasks to be done by a certain date.

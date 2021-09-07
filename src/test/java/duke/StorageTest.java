@@ -12,6 +12,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import duke.storage.Storage;
+
 public class StorageTest {
     @BeforeEach
     public void createTempFile() throws IOException {

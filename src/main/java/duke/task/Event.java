@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 
 /**
  * Represents events that are tasks taking place at a certain date.

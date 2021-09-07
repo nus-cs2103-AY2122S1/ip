@@ -2,6 +2,12 @@ package duke;
 
 import java.io.IOException;
 
+import duke.exception.FileParseException;
+import duke.storage.TaskStorage;
+import duke.ui.Cli;
+import duke.ui.Gui;
+import duke.ui.Ui;
+
 /**
  * Represents the entry point of the Duke application.
  *
