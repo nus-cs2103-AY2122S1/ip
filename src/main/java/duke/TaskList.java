@@ -37,12 +37,13 @@ public class TaskList {
      *
      * @param number the task number in the task list
      */
-    public void markDone(int number) {
+    public String markDone(int number) {
         Task task = taskList.get(number - 1);
         task.markDone();
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(task);
         save();
+        String s = "Nice! I've marked this task as done: \n" + task + "\n";
+        System.out.print(s);
+        return s;
     }
 
     /**
@@ -50,27 +51,41 @@ public class TaskList {
      *
      * @param number the task number in the task list
      */
-    public void remove(int number) {
+    public String remove(int number) {
         Task task = taskList.get(number - 1);
         taskList.remove(number - 1);
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println(task);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
         save();
+        StringBuilder resultString = new StringBuilder();
+        resultString.append("Noted. I've removed this task: \n" + task + "\n");
+        resultString.append("Now you have " + taskList.size() + " tasks in the list.\n");
+        System.out.print(resultString);
+        return resultString.toString();
     }
 
     /**
      * Prints all the task in task list.
      */
     public void list() {
+        System.out.print(this);
+    }
+
+    /**
+     * Formats the tasks into a list form.
+     *
+     * @return String of all task in list form
+     */
+    @Override
+    public String toString() {
+        StringBuilder resultString = new StringBuilder();
         int counter = 1;
         for (Task task: taskList) {
-            System.out.println(counter + "." + task);
+            resultString.append(counter + "." + task + "\n");
             counter++;
         }
         if (counter == 1) {
-            System.out.println("You have no more task!");
+            resultString.append("You have no more task!\n");
         }
+        return resultString.toString();
     }
 
     /**
@@ -78,15 +93,18 @@ public class TaskList {
      *
      * @param keyword a string to find task
      */
-    public void find(String keyword) {
+    public String find(String keyword) {
+        StringBuilder resultString = new StringBuilder();
         int counter = 1;
-        System.out.println("The following tasks contain keyword: " + keyword);
+        resultString.append("The following tasks contain keyword: " + keyword + "\n");
         for (Task task: taskList) {
             if (task.getDescription().contains(keyword)) {
-                System.out.println(counter + "." + task);
+                resultString.append(counter + "." + task + "\n");
             }
             counter++;
         }
+        System.out.print(resultString);
+        return resultString.toString();
     }
 
     /**
@@ -104,6 +122,15 @@ public class TaskList {
      */
     public boolean isEmpty() {
         return taskList.isEmpty();
+    }
+
+    /**
+     * Returns number of task in list.
+     *
+     * @return if task list is empty
+     */
+    public int size() {
+        return taskList.size();
     }
 
     /**
