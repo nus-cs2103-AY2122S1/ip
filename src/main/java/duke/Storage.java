@@ -22,6 +22,8 @@ public class Storage {
             System.out.println("unable to create file");
             e.printStackTrace();
         }
+        assert file.exists();
+        assert file.isFile();
     }
 
     private void createDirectory(File file) {

@@ -53,6 +53,7 @@ public abstract class Command {
         default:
             throw new DukeException("command not found");
         }
+        assert cmd != null;
         return cmd;
     }
 
