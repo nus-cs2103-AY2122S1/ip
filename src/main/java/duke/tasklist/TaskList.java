@@ -7,6 +7,7 @@ import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import duke.exception.DukeException;
 import duke.exception.Messages;
@@ -150,12 +151,15 @@ public class TaskList {
     public String find(String search) {
         StringBuilder output = new StringBuilder();
 
+        List<Task> found = library.stream()
+                .filter(tsk -> tsk.getName().contains(search))
+                .collect(Collectors.toList());
+
         int count = 1;
-        for (Task tsk : library) {
-            if (tsk.getName().contains(search)) {
-                output.append(String.format("%d.%s\n", count++, tsk));
-            }
+        for (Task tsk : found) {
+            output.append(String.format("%d.%s\n", count++, tsk));
         }
+
         return output.toString().trim();
     }
 

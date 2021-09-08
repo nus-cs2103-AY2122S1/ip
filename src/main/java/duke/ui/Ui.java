@@ -65,6 +65,9 @@ public class Ui {
      * @param tasks list of task found.
      */
     public String showFind(String tasks) {
+        if (tasks.equals("")) {
+            return "No match found!";
+        }
         return String.format("Here are the matching tasks in your list:\n%s", tasks);
     }
 
