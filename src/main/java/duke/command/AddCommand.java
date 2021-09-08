@@ -31,7 +31,10 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String output = ui.showAdded(tasks.add(getLine()), tasks.getSize());
+        int listSize = tasks.getSize();
+        String commandResult = tasks.add(getLine());
+
+        String output = ui.showAdded(commandResult, listSize);
         super.execute(tasks, ui, storage);
 
         return output;

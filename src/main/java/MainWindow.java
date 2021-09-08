@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.Objects;
 
+import duke.ui.Ui;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -29,6 +30,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    private Ui ui;
+
     private final Image userImage = new Image(Objects.requireNonNull(
             this.getClass().getResourceAsStream("/images/DaUser.png")));
     private final Image dukeImage = new Image(Objects.requireNonNull(
@@ -54,8 +57,9 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(Duke d, Ui ui) {
+        this.duke = d;
+        this.ui = ui;
     }
 
     /**
@@ -73,4 +77,12 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Displays chat box welcome message as DialogBox
+     */
+    public void welcomeMessage() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(ui.showWelcome(), dukeImage)
+        );
+    }
 }

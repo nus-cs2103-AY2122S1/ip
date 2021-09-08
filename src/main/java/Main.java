@@ -1,3 +1,4 @@
+import duke.ui.Ui;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -7,6 +8,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     private final Duke duke = new Duke();
+    private final Ui ui = new Ui();
 
     /**
      * Populates application window with UI.
@@ -17,7 +19,7 @@ public class Main extends Application {
     public void start(Stage stage) {
         try {
             MainWindow window = new MainWindow();
-            window.setDuke(duke);
+            window.setDuke(duke, ui);
 
             Scene scene = new Scene(window);
             scene.getStylesheets().add("/view/stylesheet.css");
@@ -25,6 +27,9 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.setTitle("Duke Chatterbot");
             stage.show();
+
+            window.welcomeMessage();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

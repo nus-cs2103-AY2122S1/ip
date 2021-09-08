@@ -7,9 +7,11 @@ import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import duke.exception.DukeException;
 import duke.exception.Messages;
+import duke.parser.Cutter;
 
 /**
  * Represents a list of task within chat bot.
@@ -41,47 +43,6 @@ public class TaskList {
             add(str);
         }
         taskFile.close();
-    }
-
-    /**
-     * Returns task title of task request.
-     * Substrings input line after start word till end of string.
-     *
-     * @param input task request line.
-     * @param start substring after target word.
-     * @return substring-ed title.
-     * @throws DukeException if start word doesn't exist.
-     */
-    private String cut(String input, String start) throws DukeException {
-        String result;
-        try {
-            result = input.substring(input.indexOf(start) + start.length() + 1);
-            assert result.length() < input.length() : "Details should always be smaller than entire command";
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException(String.format(Messages.EMPTY.toString(), start));
-        }
-        return result;
-    }
-
-    /**
-     * Returns task field of task request.
-     * Substrings input line between start word and end word.
-     *
-     * @param input task request line.
-     * @param start substring after target word.
-     * @param end substring before target word.
-     * @return substring-ed task field.
-     * @throws DukeException If start or end word doesn't exist.
-     */
-    private String cut(String input, String start, String end) throws DukeException {
-        String result;
-        try {
-            result = input.substring(input.indexOf(start) + start.length() + 1, input.indexOf(end));
-            assert result.length() < input.length() : "Details should always be smaller than entire command";
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException(String.format(Messages.EMPTY.toString(), start));
-        }
-        return result;
     }
 
     /**
@@ -122,17 +83,17 @@ public class TaskList {
         int oldSize = getSize();
 
         if (input.contains("todo")) {
-            String name = cut(input, "todo");
+            String name = Cutter.cut(input, "todo");
 
             tsk = new Todo(name);
         } else if (input.contains("deadline")) {
-            String name = cut(input, "deadline", "/by");
-            LocalDateTime time = dateTime(cut(input, "/by"));
+            String name = Cutter.cut(input, "deadline", "/by");
+            LocalDateTime time = dateTime(Cutter.cut(input, "/by"));
 
             tsk = new Deadline(name, time);
         } else if (input.contains("event")) {
-            String name = cut(input, "event", "/at");
-            LocalDateTime time = dateTime(cut(input, "/at"));
+            String name = Cutter.cut(input, "event", "/at");
+            LocalDateTime time = dateTime(Cutter.cut(input, "/at"));
 
             tsk = new Event(name, time);
         } else {
@@ -205,11 +166,13 @@ public class TaskList {
     public String find(String search) {
         StringBuilder output = new StringBuilder();
 
+        List<Task> found = library.stream()
+                .filter(tsk -> tsk.getName().contains(search))
+                .collect(Collectors.toList());
+
         int count = 1;
-        for (Task tsk : library) {
-            if (tsk.getName().contains(search)) {
-                output.append(String.format("%d.%s\n", count++, tsk));
-            }
+        for (Task tsk : found) {
+            output.append(String.format("%d.%s\n", count++, tsk));
         }
         assert count <= getSize() : "Find should be a subset of List";
         return output.toString().trim();
