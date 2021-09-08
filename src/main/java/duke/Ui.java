@@ -150,6 +150,7 @@ public class Ui {
      * @param input Duke's response as a String.
      */
     public void echo(String input) {
+        assert input.length() > 0;
         ImageView v = new ImageView(admin);
         dialogContainer.getChildren().add(DialogBox.getUserDialog(INDENT + input + INDENT, v, 1));
     }
