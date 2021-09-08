@@ -98,14 +98,19 @@ public class TaskList {
             Scanner r = new Scanner(this.file);
             while (r.hasNextLine()) {
                 String userInput = r.nextLine();
-                String[] split = userInput.split(" ");
+                String noBrackets = userInput.substring(7);
+                String[] split = noBrackets.split(" ");
                 String description = "";
-                for (int i = 2; i < split.length - 2; i++) {
+                for (int i = 0; i < split.length - 2; i++) {
                     description = description + split[i] + " ";
                 }
                 String day = split[split.length - 1].substring(0, split[split.length - 1].length() - 1);
                 if (userInput.substring(0,3).equals("[T]")) {
                     this.addTodo(description);
+                    int index = this.size();
+                    if (userInput.substring(3,6).equals("[X]")) {
+                        this.get(index-1).markAsDone();
+                    }
                 } else if (userInput.substring(0,3).equals("[D]")) {
                     String[] temp = userInput.split("by");
                     String firstDeadline = temp[0].substring(9);
@@ -113,6 +118,10 @@ public class TaskList {
                     System.out.println(splitDate[0]);
                     LocalDate date1 = LocalDate.parse(splitDate[1].substring(1));
                     this.addDeadline(description, date1);
+                    int index = this.size();
+                    if (userInput.substring(3,6).equals("[X]")) {
+                        this.get(index-1).markAsDone();
+                    }
                 } else if (userInput.substring(0,3).equals("[E]")) {
                     String[] tempEvent = userInput.split("at");
                     String firstEvent = tempEvent[0].substring(6);
@@ -120,6 +129,10 @@ public class TaskList {
                     System.out.println(splitDate[0]);
                     LocalDate date1 = LocalDate.parse(splitDate[1].substring(1));
                     this.addEvent(description, date1);
+                    int index = this.size();
+                    if (userInput.substring(3,6).equals("[X]")) {
+                        this.get(index-1).markAsDone();
+                    }
                 }
             }
             r.close();

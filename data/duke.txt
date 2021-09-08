@@ -1,6 +1,2 @@
-[E][ ]                 at: 2015-10-15
-[E][ ]          at: 2015-10-15
-[E][ ] project chicken         at: 2015-10-15
-[E][X] project weed        at: 2015-10-15
-[E][ ] project double weed       at: 2015-10-15
-[D][ ] project meeting      by: 2015-10-15
+[E][X] project meeting        at: 2015-10-15
+[E][X] project meet2       at: 2015-10-15
