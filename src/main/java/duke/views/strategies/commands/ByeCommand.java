@@ -1,4 +1,4 @@
-package duke.views.cli.strategies.commands;
+package duke.views.strategies.commands;
 
 public class ByeCommand extends Command {
     private static Command singleInstance;

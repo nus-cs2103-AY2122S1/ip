@@ -1,12 +1,14 @@
-package duke.views.cli.strategies;
+package duke.views.strategies;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 import duke.constants.Constants;
 import duke.shared.StringHelpers;
+import duke.views.Response;
+import duke.views.strategies.commands.ByeCommand;
+import duke.views.strategies.commands.Command;
 
 /**
  * A template class for responders that gives a string response upon receiving
@@ -18,11 +20,11 @@ public abstract class RespondWith {
      * A mapping storing commandName, function pairs. The function will be called
      * when the given input matches the command.
      */
-    protected Map<String, Function<String, String>> commands = new HashMap<>();
+    protected Map<String, Command> commands = new HashMap<>();
     protected String endMessage = "bye";
 
     public RespondWith() {
-        commands.put("bye", this::bye);
+        commands.put("bye", new ByeCommand());
     }
 
 
@@ -34,17 +36,20 @@ public abstract class RespondWith {
      */
     public String respond(String query) {
 
-        Function<String, String> f = commands.get(query.split(" ")[0]);
+        Command f = commands.get(query.split(" ")[0]);
         if (f != null) {
-            return f.apply(query);
+            return f.produce(query);
         }
         return null;
 
     }
 
-
-    private String bye(String _query) {
-        return "See you again" + System.lineSeparator();
+    public Response respondWithMetadata(String query) {
+        Command f = commands.get(query.split(" ")[0]);
+        if (f != null) {
+            return Response.withMessage(f.produce(query));
+        }
+        return null;
     }
 
     /**
@@ -77,5 +82,7 @@ public abstract class RespondWith {
         return "";
     }
 
-    public void load(List<String> dataList) { }
+    public void load(List<String> dataList) {
+
+    }
 }

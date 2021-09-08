@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import duke.interfaces.PrintableMixin;
 import duke.views.InteractionLayer;
-import duke.views.cli.strategies.RespondWithDelegated;
+import duke.views.strategies.RespondWith;
 
 /**
  * Encapsulates the command line interface. Listens to and generates response to
@@ -13,7 +13,7 @@ import duke.views.cli.strategies.RespondWithDelegated;
 public class Cli implements InteractionLayer, PrintableMixin {
     protected Loader loader;
     protected Greeter greeter;
-    protected RespondWithDelegated responder;
+    protected RespondWith responder;
     protected Scanner sc;
 
     /**
@@ -22,7 +22,7 @@ public class Cli implements InteractionLayer, PrintableMixin {
      * @param responder A parser of user input and generates a suitable response
      *                  when fed input.
      */
-    public Cli(RespondWithDelegated responder) {
+    public Cli(RespondWith responder) {
         loader = new Loader();
         greeter = new Greeter();
         this.responder = responder;
@@ -40,7 +40,7 @@ public class Cli implements InteractionLayer, PrintableMixin {
     }
 
     @Override
-    public RespondWithDelegated getResponder() {
+    public RespondWith getResponder() {
         return responder;
     }
 

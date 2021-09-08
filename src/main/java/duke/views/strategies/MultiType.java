@@ -1,4 +1,4 @@
-package duke.views.cli.strategies;
+package duke.views.strategies;
 
 import java.util.List;
 
@@ -11,44 +11,44 @@ import duke.domain.Todo;
 import duke.shared.DukeException;
 import duke.shared.DukeException.ExceptionCode;
 import duke.views.Response;
-import duke.views.cli.strategies.commands.AddDeadlineCommand;
-import duke.views.cli.strategies.commands.AddEventCommand;
-import duke.views.cli.strategies.commands.AddTodoCommand;
-import duke.views.cli.strategies.commands.DeleteCommand;
-import duke.views.cli.strategies.commands.FindCommand;
-import duke.views.cli.strategies.commands.ListCommand;
-import duke.views.cli.strategies.commands.MarkDoneCommand;
-import duke.views.cli.strategies.commands.OccurringOnCommand;
+import duke.views.strategies.commands.AddDeadlineCommand;
+import duke.views.strategies.commands.AddEventCommand;
+import duke.views.strategies.commands.AddTodoCommand;
+import duke.views.strategies.commands.DeleteCommand;
+import duke.views.strategies.commands.FindCommand;
+import duke.views.strategies.commands.ListCommand;
+import duke.views.strategies.commands.MarkDoneCommand;
+import duke.views.strategies.commands.OccurringOnCommand;
 
 /**
  * A responder that is able to handle tasks with CRUD functionality.
  */
-public class MultiTypeDelegated extends RespondWithDelegated {
+public class MultiType extends RespondWith {
 
-    private final String list = "list";
-    private final String done = "done";
-    private final String todo = "todo";
-    private final String deadline = "deadline";
-    private final String event = "event";
-    private final String delete = "delete";
-    private final String on = "on";
-    private final String find = "find";
+    private static final String LIST = "list";
+    private static final String DONE = "done";
+    private static final String TODO = "todo";
+    private static final String DEADLINE = "deadline";
+    private static final String EVENT = "event";
+    private static final String DELETE = "delete";
+    private static final String ON = "on";
+    private static final String FIND = "find";
 
     private final TaskList userTasks;
 
     /**
      * Creates a responder that handles multiple types of tasks.
      */
-    public MultiTypeDelegated() {
+    public MultiType() {
         userTasks = new TaskList();
-        commands.put(list, ListCommand.getInstance(userTasks));
-        commands.put(done, MarkDoneCommand.getInstance(userTasks));
-        commands.put(todo, AddTodoCommand.getInstance(userTasks));
-        commands.put(deadline, AddDeadlineCommand.getInstance(userTasks));
-        commands.put(event, AddEventCommand.getInstance(userTasks));
-        commands.put(delete, DeleteCommand.getInstance(userTasks));
-        commands.put(on, OccurringOnCommand.getInstance(userTasks));
-        commands.put(find, FindCommand.getInstance(userTasks));
+        commands.put(LIST, ListCommand.getInstance(userTasks));
+        commands.put(DONE, MarkDoneCommand.getInstance(userTasks));
+        commands.put(TODO, AddTodoCommand.getInstance(userTasks));
+        commands.put(DEADLINE, AddDeadlineCommand.getInstance(userTasks));
+        commands.put(EVENT, AddEventCommand.getInstance(userTasks));
+        commands.put(DELETE, DeleteCommand.getInstance(userTasks));
+        commands.put(ON, OccurringOnCommand.getInstance(userTasks));
+        commands.put(FIND, FindCommand.getInstance(userTasks));
     }
 
     @Override

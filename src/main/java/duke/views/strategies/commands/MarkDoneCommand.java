@@ -1,4 +1,4 @@
-package duke.views.cli.strategies.commands;
+package duke.views.strategies.commands;
 
 import duke.domain.Task;
 import duke.domain.TaskList;
@@ -23,7 +23,7 @@ public class MarkDoneCommand extends TaskCommand {
         assert query != null;
         try {
             int index = Integer.parseInt(query.substring(done.length()).strip()) - 1;
-            boolean isWithinBounds = index >= userTasks.size() || index < 0;
+            boolean isWithinBounds = index < userTasks.size() && index >= 0;
             if (!isWithinBounds) {
                 throw DukeException.createIndexOutOfBoundsException(userTasks.size(), index + 1);
             }
