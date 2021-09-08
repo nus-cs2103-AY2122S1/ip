@@ -122,7 +122,7 @@ public class Storage {
         for (Task t: lst.getListOfTasks()) {
             if (t instanceof Todo) {
                 outputText += "T | ";
-                if (t.getStatusIcon().equals("X")) {
+                if (isTaskComplete(t.getStatusIcon())) {
                     outputText += "X | " + t.getDescription() + "\n";
                 } else {
                     outputText += "0 | " + t.getDescription() + "\n";
@@ -130,7 +130,7 @@ public class Storage {
             } else if (t instanceof Deadline) {
                 Deadline d = (Deadline) t;
                 outputText += "D | ";
-                if (d.getStatusIcon().equals("X")) {
+                if (isTaskComplete(d.getStatusIcon())) {
                     outputText += "X | " + d.getDescription() + " | " + d.getBy() + "\n";
                 } else {
                     outputText += "0 | " + d.getDescription() + " | " + d.getBy() + "\n";
@@ -138,7 +138,7 @@ public class Storage {
             } else if (t instanceof Event) {
                 Event e = (Event) t;
                 outputText += "E | ";
-                if (e.getStatusIcon().equals("X")) {
+                if (isTaskComplete(e.getStatusIcon())) {
                     outputText += "X | " + e.getDescription() + " | " + e.getAt() + "\n";
                 } else {
                     outputText += "0 | " + e.getDescription() + " | " + e.getAt() + "\n";
@@ -146,6 +146,14 @@ public class Storage {
             }
         }
         return outputText;
+    }
+
+    public static boolean hasDeadlineInSentence(List<String> words) {
+        return words.size() == 4;
+    }
+
+    public static boolean isTaskComplete(String c) {
+        return c.equals("X");
     }
 
     /**
@@ -159,16 +167,15 @@ public class Storage {
         switch (words.get(0)) {
         case "T":
             Todo t = new Todo(words.get(2));
-            if (words.get(1).equals("X")) {
+            if (isTaskComplete(words.get(1))) {
                 t = t.markAsDone();
             }
             output = t;
             break;
         case "D":
             Deadline d = new Deadline(words.get(2), words.get(3));
-
-            if (words.size() == 4) {
-                if (words.get(1).equals("X")) {
+            if (hasDeadlineInSentence(words)) {
+                if (isTaskComplete(words.get(1))) {
                     d = d.markAsDone();
                 }
                 output = d;
@@ -176,9 +183,8 @@ public class Storage {
             break;
         case "E":
             Event e = new Event(words.get(2), words.get(3));
-
-            if (words.size() == 4) {
-                if (words.get(1).equals("X")) {
+            if (hasDeadlineInSentence(words)) {
+                if (isTaskComplete(words.get(1))) {
                     e = e.markAsDone();
                 }
                 output = e;
