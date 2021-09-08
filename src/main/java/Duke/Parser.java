@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class Parser {
     private TaskList tasks;
     private Storage storage;
+    private boolean isFirstCommand = true;
 
     /**
      * A public constructor to create a parser that takes in a TaskList
@@ -214,7 +215,12 @@ public class Parser {
 
 
             } else {
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                if (isFirstCommand) {
+                    isFirstCommand = false;
+                    return helpMessage();
+                } else {
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
             }
         } catch (IOException e) {
             return "Something went wrong: " + e.getMessage();
