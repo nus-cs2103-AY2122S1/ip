@@ -1,7 +1,6 @@
 package duke.utils;
 
 import java.util.HashMap;
-import java.util.Scanner;
 
 import duke.exceptions.DukeException;
 import duke.tasks.Task;
@@ -11,7 +10,6 @@ import duke.tasks.Task;
  */
 public class Ui {
     private static final String HORIZONTAL_LINES = "-----------------------------------------";
-    private final Scanner in = new Scanner(System.in);
 
     /**
      * Prints a long horizontal line which acts as a separator.
@@ -25,16 +23,6 @@ public class Ui {
      */
     public void showWelcome() {
         System.out.println(HORIZONTAL_LINES + "\nHello! I'm Naruto\nWhat can I do for you?\n" + HORIZONTAL_LINES);
-    }
-
-    /**
-     * Uses a scanner to take in a line of input from the user.
-     *
-     * @return the full command typed by the user.
-     */
-    public String readCommand() {
-        String userInput = in.nextLine();
-        return userInput;
     }
 
     /**
@@ -116,6 +104,7 @@ public class Ui {
             String key = String.valueOf(counter);
             if (matchingTasks.containsKey(key)) {
                 Task matchedTask = matchingTasks.get(key);
+                assert (matchedTask != null) : "Matched task cannot be null.";
                 System.out.println(key + "." + matchedTask.toString());
             }
         }
