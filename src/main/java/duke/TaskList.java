@@ -5,6 +5,7 @@ import duke.Event;
 import duke.Task;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
@@ -37,6 +38,8 @@ public class TaskList {
                 output = deleteTask(input);
             } else if (input.startsWith("find")) {
                 output = findTask(input);
+            } else if (input.startsWith("view")) {
+                output = viewTask(input);
             } else {
                 output = addTask(input);
             }
@@ -135,6 +138,30 @@ public class TaskList {
             String task = myList.get(i).toString();
             if (task.contains(segments[1])) {
                 output = output + count + ". " + task + "\n";
+                count++;
+            }
+        }
+        return output;
+    }
+
+    private String viewTask(String input) throws DukeException {
+        String[] segments = input.split(" ");
+        if (segments[1] == null) {
+            throw new DukeException("Please input a date after the keyword: view");
+        }
+        LocalDate myDate;
+        try {
+            myDate = LocalDate.parse(segments[1]);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Wrong date format. Please provide your date in this format: yyyy-mm-dd");
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+        String output = "Here are your tasks for that day:\n";
+        int count = 1;
+        for (int i = 0; i < myList.size(); i++) {
+            LocalDate taskDate = myList.get(i).getDate();
+            if (myDate.equals(taskDate)) {
+                output = output + count + ". " + myList.get(i).toString() + "\n";
                 count++;
             }
         }
