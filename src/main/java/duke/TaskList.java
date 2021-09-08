@@ -5,6 +5,7 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 public class TaskList {
+
     private ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> tasks) {
@@ -15,14 +16,6 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
-    public void addTask(Task task) {
-        tasks.add(task);
-    }
-
-    public void deleteTask(int index) {
-        tasks.remove(index);
-    }
-
     public Task getTask(int index) {
         return tasks.get(index);
     }
@@ -31,7 +24,15 @@ public class TaskList {
         return tasks.size();
     }
 
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
+
+    public void deleteTask(int index) {
+        tasks.remove(index);
+    }
+
     public void doneTask(int index) {
-        tasks.get(index).setDone();
+        getTask(index).setDone();
     }
 }

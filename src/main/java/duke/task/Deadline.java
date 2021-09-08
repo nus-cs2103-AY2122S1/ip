@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task{
+
     protected LocalDate by;
 
     public Deadline(String description, LocalDate by) {
@@ -18,7 +19,9 @@ public class Deadline extends Task{
 
     @Override
     public String toFileFormat() {
+
         char done = '0';
+
         if (super.isDone) {
             done = '1';
         }

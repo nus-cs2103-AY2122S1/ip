@@ -18,6 +18,7 @@ public class DoneCommand extends Command {
         if (index > tasks.getSize()) {
             throw new DukeException("This entry does not exist!");
         }
+
         tasks.doneTask(index);
         ui.printTemplate( "Nice! I've marked this task as done:\n" + "  " + tasks.getTask(index));
         storage.update(tasks);

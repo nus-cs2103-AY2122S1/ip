@@ -11,14 +11,6 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "X" : " ");
-    }
-
-    public void setDone() {
-        this.isDone = true;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -29,6 +21,14 @@ public class Task {
 
     public LocalDate getDate() {
         return null;
+    }
+
+    public String getStatusIcon() {
+        return (isDone ? "X" : " ");
+    }
+
+    public void setDone() {
+        this.isDone = true;
     }
 
     public String toFileFormat() {
