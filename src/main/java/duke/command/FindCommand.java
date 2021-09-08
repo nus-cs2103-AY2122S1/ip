@@ -32,9 +32,7 @@ public class FindCommand extends Command {
      */
     @Override
     public void executeAndShow(TaskList taskList, Storage storage) {
-        assert super.getAction() == Action.FIND : "Find command action type error";
-        ArrayList<Task> matchTasks = taskList.findTask(query);
-        Ui.showFindTasks(matchTasks);
+        Ui.showMultiLines(execute(taskList, storage));
     }
 
     /**
