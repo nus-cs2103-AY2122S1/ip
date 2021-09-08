@@ -9,6 +9,8 @@ import nyx.command.FindCommand;
 import nyx.command.ListCommand;
 import nyx.command.ToDoCommand;
 
+import java.util.Locale;
+
 /**
  * Deals with making sense of the user input.
  */
@@ -22,7 +24,7 @@ public class Parser {
      */
     public static Command parse(String input) throws NyxException {
         String[] splitInput = input.split(" ", 2);
-        String keyword = splitInput[0];
+        String keyword = splitInput[0].toLowerCase();
         String information = "";
         if (splitInput.length > 1) {
             information = splitInput[1].strip();

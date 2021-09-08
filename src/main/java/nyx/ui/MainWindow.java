@@ -10,6 +10,8 @@ import javafx.scene.layout.VBox;
 import nyx.Nyx;
 import nyx.NyxException;
 
+import java.util.Locale;
+
 /**
  * Controller for nyx.ui.MainWindow. Provides the layout for the other controls.
  */
@@ -50,7 +52,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
 
-        if (input.equals("bye")) {
+        if (input.equalsIgnoreCase("bye")) {
             Platform.exit();
         }
 
