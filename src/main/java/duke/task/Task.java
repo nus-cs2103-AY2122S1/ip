@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.general.TaskType;
+
 /**
  * Encapsulates the name and completion status of the task.
  */
@@ -49,6 +51,12 @@ public abstract class Task {
      * @return String type of task
      */
     public abstract String getType();
+
+    /**
+     * Obtain the TaskType of the task
+     * @return a Tasktype
+     */
+    public abstract TaskType getTaskType();
 
     /**
      * Obtains the additional information of the task. If not additional information, just return empty string

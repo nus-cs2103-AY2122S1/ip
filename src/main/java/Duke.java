@@ -16,9 +16,6 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/data/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/data/DaDuke.png"));
-
     /**
      * Initializes the Duke chatbot program
      * @param filePath File path to save the data files of the Tasklist to
@@ -41,7 +38,7 @@ public class Duke {
     }
 
     /**
-     * Run the main program
+     * Runs the main program for the Terminal
      */
     public void run() {
         ui.showWelcome();

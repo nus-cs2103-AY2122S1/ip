@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.error.DukeException;
 import duke.general.Storage;
 import duke.general.TaskType;
@@ -10,9 +12,10 @@ import duke.task.Task;
 /**
  * Command for the program to add a task
  */
-public class AddCommand extends Command {
+public class AddCommand extends Command implements Revertible {
     private TaskType type;
     private String[] input;
+    private ArrayList<Task> state;
 
     /**
      * Constructs the AddCommand object
@@ -20,15 +23,29 @@ public class AddCommand extends Command {
      * @param inputSplit Input by user
      */
     public AddCommand(TaskType t, String[] inputSplit) {
-        assert(input != null) : "Input into command was null!";
         this.type = t;
         this.input = inputSplit;
+
     }
 
     @Override
     public String execute(Tasklist tasks, Storage storage, Ui ui) throws DukeException {
+        // save state before execution
+        this.state = tasks.copyList();
+
+        // main execution
         Task t = tasks.addTask(this.type, this.input);
         storage.appendSave(t);
+
+        tasks.addHistory(this);
         return ui.addResponse(t, tasks.size());
+    }
+
+    @Override
+    public String revert(Tasklist tasks, Storage storage, Ui ui) throws DukeException {
+        // replace with previous state
+        tasks.replaceList(this.state);
+        storage.modifySave(tasks.getList());
+        return "Successfully undone add!";
     }
 }

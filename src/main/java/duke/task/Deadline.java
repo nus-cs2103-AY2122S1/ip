@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.general.TaskType;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -30,6 +32,15 @@ public class Deadline extends Task {
     @Override
     public String getType() {
         return "D";
+    }
+
+    /**
+     * Getter for the Tasktype of task
+     * @return Tasktype.DEADLINE
+     */
+    @Override
+    public TaskType getTaskType() {
+        return TaskType.DEADLINE;
     }
 
     /**

@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.general.TaskType;
+
 /**
  * Encapsulates the name of the todo task.
  */
@@ -16,6 +18,11 @@ public class ToDo extends Task {
     @Override
     public String getType() {
         return "T";
+    }
+
+    @Override
+    public TaskType getTaskType() {
+        return TaskType.TODO;
     }
 
     @Override

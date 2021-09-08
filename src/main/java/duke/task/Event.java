@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.general.TaskType;
+
 /**
  * duke.task.Event encapsulates the name of the event as well as the
  * when the event is occurring.
@@ -21,6 +23,11 @@ public class Event extends Task {
     @Override
     public String getType() {
         return "E";
+    }
+
+    @Override
+    public TaskType getTaskType() {
+        return TaskType.EVENT;
     }
 
     @Override

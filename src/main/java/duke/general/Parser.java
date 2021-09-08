@@ -1,13 +1,6 @@
 package duke.general;
 
-import duke.command.AddCommand;
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ErrorCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 
 /**
  * Deals with making sense of the user command
@@ -48,6 +41,9 @@ public class Parser {
                 break;
             case "find":
                 c = new FindCommand(inputSplit);
+                break;
+            case "undo":
+                c = new RevertCommand();
                 break;
             default:
                 c = new ErrorCommand();

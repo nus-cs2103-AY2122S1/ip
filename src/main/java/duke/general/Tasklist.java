@@ -1,7 +1,10 @@
 package duke.general;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
+import duke.command.ErrorCommand;
+import duke.command.Revertible;
 import duke.error.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -14,6 +17,7 @@ import duke.task.ToDo;
  */
 public class Tasklist {
     private ArrayList<Task> list;
+    private Stack<Revertible> history = new Stack<>();
 
     /**
      * Constructs the Tasklist based from a list provided
@@ -115,6 +119,26 @@ public class Tasklist {
             }
         }
         return foundTasks;
+    }
+
+    public ArrayList<Task> copyList() {
+        return new ArrayList<>(list);
+    }
+
+    public void replaceList(ArrayList<Task> lst) {
+        this.list = lst;
+    }
+
+    public void addHistory(Revertible c) {
+        history.add(c);
+    }
+
+    public Revertible popHistory() {
+        if (history.isEmpty()) {
+            return new ErrorCommand();
+        } else {
+            return history.pop();
+        }
     }
 
     public int size() {
