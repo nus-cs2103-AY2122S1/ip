@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.exception.InvalidCommandUsageException;
 import duke.response.DukeResponse;
 import duke.storage.Storage;
 import duke.task.TaskManager;
@@ -22,7 +23,7 @@ public class AddToDoCommand extends Command {
     @Override
     public DukeResponse execute(TaskManager taskManager, Storage storage) throws DukeException {
         if (commandArguments.isEmpty()) {
-            throw new DukeException("Invalid use of the 'todo' command.\n\n" + USAGE_MESSAGE);
+            throw new InvalidCommandUsageException(COMMAND_WORD, USAGE_MESSAGE);
         }
         ToDo toDo = new ToDo(commandArguments);
         String message = taskManager.addTask(toDo);

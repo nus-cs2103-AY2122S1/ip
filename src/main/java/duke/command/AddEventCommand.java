@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.exception.InvalidCommandUsageException;
 import duke.response.DukeResponse;
 import duke.storage.Storage;
 import duke.task.Event;
@@ -24,7 +25,7 @@ public class AddEventCommand extends Command {
     public DukeResponse execute(TaskManager taskManager, Storage storage) throws DukeException {
         String[] eventDetails = commandArguments.split("\\s+/at\\s+", 2);
         if (eventDetails.length < 2) {
-            throw new DukeException("Invalid use of the 'event' command.\n\n" + USAGE_MESSAGE);
+            throw new InvalidCommandUsageException(COMMAND_WORD, USAGE_MESSAGE);
         }
         String eventName = eventDetails[0];
         DukeDateTime eventTimestamp = DukeDateTime.parseUserInputDateTime(eventDetails[1]);

@@ -1,6 +1,7 @@
 package duke.parser;
 
 import duke.exception.DukeException;
+import duke.exception.TaskParseException;
 import duke.task.ToDo;
 
 /**
@@ -17,7 +18,7 @@ public class ToDoParser {
     protected static ToDo parse(String text) throws DukeException {
         String[] toDoDetails = text.split(" \\| ", 3);
         if (toDoDetails.length < 3) {
-            throw new DukeException(String.format("Cannot parse ToDo from \n\t`%s`", text));
+            throw new TaskParseException(text);
         }
         boolean isDone = toDoDetails[1].equals("X");
         String name = toDoDetails[2];

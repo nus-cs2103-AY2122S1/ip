@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.exception.InvalidCommandUsageException;
 import duke.response.DukeResponse;
 import duke.storage.Storage;
 import duke.task.Deadline;
@@ -24,7 +25,7 @@ public class AddDeadlineCommand extends Command {
     public DukeResponse execute(TaskManager taskManager, Storage storage) throws DukeException {
         String[] deadlineDetails = commandArguments.split("\\s+/by\\s+", 2);
         if (deadlineDetails.length < 2) {
-            throw new DukeException("Invalid use of the 'deadline' command.\n\n" + USAGE_MESSAGE);
+            throw new InvalidCommandUsageException(COMMAND_WORD, USAGE_MESSAGE);
         }
         String deadlineName = deadlineDetails[0];
         DukeDateTime deadlineDueDate = DukeDateTime.parseUserInputDateTime(deadlineDetails[1]);

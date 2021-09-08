@@ -1,6 +1,7 @@
 package duke.parser;
 
 import duke.exception.DukeException;
+import duke.exception.TaskParseException;
 import duke.task.Event;
 import duke.util.DukeDateTime;
 
@@ -18,7 +19,7 @@ public class EventParser {
     protected static Event parse(String text) throws DukeException {
         String[] eventDetails = text.split(" \\| ", 4);
         if (eventDetails.length < 4) {
-            throw new DukeException(String.format("Cannot parse Event from \n\t`%s`", text));
+            throw new TaskParseException(text);
         }
         boolean isDone = eventDetails[1].equals("X");
         String name = eventDetails[2];
