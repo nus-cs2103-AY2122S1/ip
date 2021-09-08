@@ -32,8 +32,7 @@ public class FindCommand extends Command {
      */
     @Override
     public void executeAndShow(TaskList taskList, Storage storage) {
-        ArrayList<Task> matchTasks = taskList.findTask(query);
-        Ui.showFindTasks(matchTasks);
+        Ui.showMultiLines(execute(taskList, storage));
     }
 
     /**

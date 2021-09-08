@@ -23,8 +23,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public void executeAndShow(TaskList taskList, Storage storage) {
-        Ui.bye();
-        storage.writeToTaskTxt(taskList.getTasks());
+        Ui.showMessage(execute(taskList, storage));
     }
 
     /**

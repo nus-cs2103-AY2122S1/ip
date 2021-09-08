@@ -30,8 +30,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void executeAndShow(TaskList taskList, Storage storage) {
-        Task temp = taskList.removeTask(index);
-        Ui.showRemoveTaskMessage(temp, taskList.getSize());
+        Ui.showMultiLines(execute(taskList, storage));
     }
 
     /**
