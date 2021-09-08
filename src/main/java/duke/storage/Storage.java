@@ -7,6 +7,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import duke.exception.InvalidInputException;
@@ -102,11 +106,49 @@ public class Storage {
             break;
         case ("E"):
             String at = format[3].trim();
-            task = new Event(taskDescription, at);
+            String[] splitAt = at.split(", ", 2);
+            LocalDate eventDate;
+            LocalTime eventTiming;
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+                eventDate = LocalDate.parse(splitAt[0].trim(), formatter);
+            } catch (DateTimeParseException e) {
+                throw new InvalidInputException("Error loading tasks!");
+            }
+            if (splitAt.length == 1) {
+                task = new Event(taskDescription, eventDate);
+            } else {
+                try {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma");
+                    eventTiming = LocalTime.parse(splitAt[1].trim(), formatter);
+                } catch (DateTimeParseException e) {
+                    throw new InvalidInputException("Error loading tasks!");
+                }
+                task = new Event(taskDescription, eventDate, eventTiming);
+            }
             break;
         case ("D"):
             String by = format[3].trim();
-            task = new Deadline(taskDescription, by);
+            String[] splitBy = by.split(",", 2);
+            LocalDate deadlineDate;
+            LocalTime deadlineTiming;
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+                deadlineDate = LocalDate.parse(splitBy[0].trim(), formatter);
+            } catch (DateTimeParseException e) {
+                throw new InvalidInputException("Error loading tasks!");
+            }
+            if (splitBy.length == 1) {
+                task = new Deadline(taskDescription, deadlineDate);
+            } else {
+                try {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma");
+                    deadlineTiming = LocalTime.parse(splitBy[1].trim(), formatter);
+                } catch (DateTimeParseException e) {
+                    throw new InvalidInputException("Error loading tasks!");
+                }
+                task = new Deadline(taskDescription, deadlineDate, deadlineTiming);
+            }
             break;
         default:
             throw new InvalidInputException("Error converting tasks!");

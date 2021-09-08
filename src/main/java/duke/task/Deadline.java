@@ -12,23 +12,10 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    /** String that specifies the time of Deadline. */
-    protected String by;
-    /** String that specifies the date of the Deadline. */
+    /** LocalDate that specifies the date of the Deadline. */
     protected LocalDate date;
-    /** String that specifies the timing of the Deadline. */
+    /** LocalTime that specifies the timing of the Deadline. */
     protected LocalTime time;
-
-    /**
-     * Constructor for creating a deadline task.
-     *
-     * @param description The deadline's description.
-     * @param by Time to complete the task by.
-     */
-    public Deadline(String description, String by) {
-        super(description);
-        this.by = by;
-    }
 
     /**
      * Constructor for creating a deadline task.
@@ -61,7 +48,7 @@ public class Deadline extends Task {
      * @return String representing the time.
      */
     public String getTime() {
-        return by;
+        return time.toString();
     }
 
     /**
@@ -74,11 +61,9 @@ public class Deadline extends Task {
             return "D | " + ((super.isDone) ? "1 | " : "0 | ") + super.getDescription() + " | "
                     + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", "
                     + time.format(DateTimeFormatter.ofPattern("h:mma"));
-        } else if (date != null) {
+        } else {
             return "D | " + ((super.isDone) ? "1 | " : "0 | ") + super.getDescription() + " | "
                     + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        } else {
-            return "D | " + ((super.isDone) ? "1 | " : "0 | ") + super.getDescription() + " | " + getTime();
         }
     }
 
@@ -87,11 +72,9 @@ public class Deadline extends Task {
         if (time != null) {
             return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern(
                     "MMM dd yyyy")) + ", " + time.format(DateTimeFormatter.ofPattern("h:mma")) + ")";
-        } else if (date != null) {
+        } else {
             return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern(
                     "MMM dd yyyy")) + ")";
-        } else {
-            return "[D]" + super.toString() + " (by: " + by + ")";
         }
     }
 }

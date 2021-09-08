@@ -9,8 +9,8 @@ public class TodoTest {
 
     @Test
     public void getStatusIconTest() {
-        Deadline deadline = new Deadline("sleep", "5pm");
-        deadline.markAsDone();
-        assertEquals(deadline.getStatusIcon(), "\u2713");
+        Todo todo = new Todo("sleep by 5pm");
+        todo.markAsDone();
+        assertEquals(todo.getStatusIcon(), "\u2713");
     }
 }

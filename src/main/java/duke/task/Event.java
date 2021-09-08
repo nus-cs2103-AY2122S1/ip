@@ -12,11 +12,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    /** String that specifies the time of event. */
-    protected String at;
-    /** String that specifies the date of event. */
+    /** LocalDate that specifies the date of event. */
     protected LocalDate date;
-    /** String that specifies timing of the event. */
+    /** LocalTime that specifies timing of the event. */
     protected LocalTime time;
 
     /**
@@ -34,17 +32,6 @@ public class Event extends Task {
      * Constructor for creating an event task.
      *
      * @param description The event's description.
-     * @param at Time that the event is scheduled.
-     */
-    public Event(String description, String at) {
-        super(description);
-        this.at = at;
-    }
-
-    /**
-     * Constructor for creating an event task.
-     *
-     * @param description The event's description.
      * @param date Date that the event is scheduled.
      * @param time Time that the event is scheduled.
      */
@@ -52,15 +39,6 @@ public class Event extends Task {
         super(description);
         this.date = date;
         this.time = time;
-    }
-
-    /**
-     * Returns time to the event.
-     *
-     * @return String representing the time of the event.
-     */
-    public String getTime() {
-        return at;
     }
 
     /**
@@ -73,11 +51,9 @@ public class Event extends Task {
             return "E | " + ((super.isDone) ? "1 | " : "0 | ") + super.getDescription() + " | "
                     + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", "
                     + time.format(DateTimeFormatter.ofPattern("h:mma"));
-        } else if (date != null) {
+        } else {
             return "E | " + ((super.isDone) ? "1 | " : "0 | ") + super.getDescription() + " | "
                     + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        } else {
-            return "E | " + ((super.isDone) ? "1 | " : "0 | ") + super.getDescription() + " | " + getTime();
         }
     }
 
@@ -86,11 +62,9 @@ public class Event extends Task {
         if (time != null) {
             return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern(
                     "MMM dd yyyy")) + ", " + time.format(DateTimeFormatter.ofPattern("h:mma")) + ")";
-        } else if (date != null) {
+        } else {
             return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern(
                     "MMM dd yyyy")) + ")";
-        } else {
-            return "[E]" + super.toString() + " (at: " + at + ")";
         }
     }
 }
