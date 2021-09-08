@@ -12,7 +12,6 @@ public class ListCommand extends Command {
      * @param tasks   task list
      * @param ui      ui
      * @param storage storage
-     * @return response string
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

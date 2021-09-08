@@ -5,7 +5,7 @@ import bobbybot.util.TaskList;
 import bobbybot.util.Ui;
 
 public class FindCommand extends Command {
-    private String keyword;
+    private final String keyword;
     /**
      * Finds all tasks with a keyword
      * @param keyword keyword to search for
@@ -20,7 +20,6 @@ public class FindCommand extends Command {
      * @param tasks   task list
      * @param ui      ui
      * @param storage storage
-     * @return response string
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

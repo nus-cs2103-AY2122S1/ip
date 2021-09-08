@@ -11,7 +11,7 @@ import bobbybot.util.Ui;
  * Represents command for DONE
  */
 public class DoneCommand extends Command {
-    private int taskNumToMarkAsDone;
+    private final int taskNumToMarkAsDone;
     public DoneCommand(int toMarkAsDone) {
         this.taskNumToMarkAsDone = toMarkAsDone;
     }
@@ -21,7 +21,6 @@ public class DoneCommand extends Command {
      * @param tasks   task list
      * @param ui      ui
      * @param storage storage
-     * @return
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

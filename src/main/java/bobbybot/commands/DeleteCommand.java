@@ -9,7 +9,7 @@ import bobbybot.util.Ui;
 
 public class DeleteCommand extends Command {
 
-    private int taskNumToDelete;
+    private final int taskNumToDelete;
 
     public DeleteCommand(int taskNumToDelete) {
         this.taskNumToDelete = taskNumToDelete;
@@ -20,7 +20,6 @@ public class DeleteCommand extends Command {
      * @param tasks   task list
      * @param ui      ui
      * @param storage storage
-     * @return
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (taskNumToDelete < 1 || taskNumToDelete > tasks.getTasks().size()) {
@@ -35,8 +34,8 @@ public class DeleteCommand extends Command {
             System.out.println("Could not save tasks to database!\n");
             e.printStackTrace();
         }
-        String response = "Noted. I've removed this task: " + taskToDelete
+        this.response = "Noted. I've removed this task: " + taskToDelete
                 + "\nNow you have " + tasks.getTasks().size() + " tasks in the list.";
-        this.response = response;
+
     }
 }

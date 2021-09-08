@@ -10,7 +10,6 @@ public class ExitCommand extends Command {
      * @param tasks   task list
      * @param ui      ui
      * @param storage storage
-     * @return
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
@@ -19,7 +18,7 @@ public class ExitCommand extends Command {
 
     /**
      * Prepares bot to exit
-     * @return
+     * @return true
      */
     @Override
     public boolean isExit() {
