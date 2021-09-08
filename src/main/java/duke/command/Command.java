@@ -1,5 +1,7 @@
 package duke.command;
 
+import static duke.task.TimedToDo.TIMED_TODO_DELIMITER;
+
 import duke.task.TaskList;
 import duke.util.DukeException;
 import duke.util.Storage;
@@ -21,7 +23,12 @@ public abstract class Command {
     public static Command initialiseCommand(String commandString, String remainingText) throws DukeException {
         switch (commandString) {
         case TodoCommand.COMMAND:
-            return new TodoCommand(remainingText);
+            // Overload the todo command
+            if (remainingText.contains(TIMED_TODO_DELIMITER)) {
+                return new TimedTodoCommand(remainingText);
+            } else {
+                return new TodoCommand(remainingText);
+            }
         case ListCommand.COMMAND:
             return new ListCommand(remainingText);
         case FindCommand.COMMAND:
