@@ -11,8 +11,6 @@ import duke.data.TaskList;
  * @version: Duke Level-10
  */
 public class Ui {
-    /** The border to be printed for messages */
-    private static final String BORDER = "____________________________________________________________";
     /** The introductory message to be printed for the start of the program */
     private static final String INTRO = "Hello from\n"
                                         +  " ____        _        \n"
@@ -33,13 +31,12 @@ public class Ui {
 
     /**
      * Returns the formatted input message for Duke.
-     * Message is lined with the borders stored in the attribute of the class.
      *
      * @param message The message to be printed.
      * @return The formatted message.
      */
     public String formatMessage(String message) {
-        return BORDER + '\n' + message + '\n' + BORDER;
+        return message + '\n';
     }
 
     /**
@@ -50,13 +47,11 @@ public class Ui {
      */
     public String formatList(TaskList taskList) {
         String formattedList = "Here are the tasks in your list:" + '\n';
-        formattedList += BORDER + '\n';
         for (int i = 1; i <= taskList.size(); i++) {
             Task thisTask = taskList.get(i - 1);
             String task = String.format("%d. %s", i, thisTask);
             formattedList += task + '\n';
         }
-        formattedList += BORDER;
         return formattedList;
     }
 
@@ -100,14 +95,13 @@ public class Ui {
      * @return The formatted message after a find command.
      */
     public String formatFind(TaskList matchedTasks) {
-        String toReturn = BORDER + '\n';
+        String toReturn = "";
         System.out.println("Here are the matching tasks in your list: ");
         for (int i = 1; i <= matchedTasks.size(); i++) {
             Task thisTask = matchedTasks.get(i - 1);
             String task = String.format("%d. %s", i, thisTask);
             toReturn += task + '\n';
         }
-        toReturn += BORDER;
         return toReturn;
     }
 }
