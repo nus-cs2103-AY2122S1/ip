@@ -1,8 +1,12 @@
 package duke.controller;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import duke.Duke;
 import duke.ui.Ui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -52,5 +56,15 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (response.equals(Ui.showFarewellMsg())) {
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Platform.exit();
+                    System.exit(0);
+                }
+            }, 1500);
+        }
     }
 }
