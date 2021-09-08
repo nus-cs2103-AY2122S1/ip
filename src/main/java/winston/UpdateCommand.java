@@ -47,7 +47,6 @@ public class UpdateCommand extends Command{
      */
     public Task updateTask(String str) {
         String cmd = arr[2];
-        final String invalidDateMessage = "Invalid date format. Please give a valid date format. E.g 2021-12-12";
         if (isValid()) {
             if (cmd.equals("todo")) {
                 try {
