@@ -18,7 +18,7 @@ public class ParserTest {
         try {
             String cmd = "deadline return book /by 06/12/2019 1800";
             parser.parse(cmd);
-            assertEquals("[D][ ] return book (by: Dec 06 2019 18:00)", taskList.get(0).toString());
+            assertEquals("[D][ ] return book (by: Dec 06 2019 18:00)\n  Notes: ", taskList.get(0).toString());
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }

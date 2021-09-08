@@ -17,12 +17,12 @@ public class TodoTest {
     @Test
     public void toStringTest() {
         Task todo = new Todo("do homework", true);
-        assertEquals("[T][X] do homework", todo.toString());
+        assertEquals("[T][X] do homework\n  Notes: ", todo.toString());
     }
 
     @Test
     public void saveFormatTest() {
         Task todo = new Todo("do homework", true);
-        assertEquals("T | 1 | do homework", todo.printInSaveFormat());
+        assertEquals("T | 1 | do homework | ", todo.printInSaveFormat());
     }
 }
