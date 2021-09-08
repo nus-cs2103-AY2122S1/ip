@@ -1,10 +1,10 @@
 package duke.ui;
 
-import duke.DukeException;
-import duke.task.*;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.DukeException;
+import duke.TaskList;
 
 /**
  * Provides methods to interact with user.
@@ -14,14 +14,18 @@ public class Ui {
     protected static final String HORIZONTAL_LINE = "____________________________________________________________";
     protected static final String LEFT_INDENT = "    ";
 
+    private static ArrayList<String> log;
+    private static UiMode uiMode;
+
     private Scanner scanner;
 
-    private static ArrayList<String> log;
-    private static boolean useGui;
-
-    public Ui(boolean useGui) {
-        Ui.useGui = useGui;
-        if (useGui) {
+    /**
+     * Initialize Ui component with Ui mode.
+     * @param useGui Does the
+     */
+    public Ui(UiMode useGui) {
+        Ui.uiMode = useGui;
+        if (useGui == UiMode.GUI) {
             log = new ArrayList<>();
         } else {
             this.scanner = new Scanner(System.in);
@@ -37,25 +41,34 @@ public class Ui {
     }
 
     protected static void printWithIndent(String s) {
-        if (!useGui) {
+        if (Ui.uiMode == UiMode.CLI) {
             System.out.println(LEFT_INDENT + s);
-        } else {
+        } else if (Ui.uiMode == UiMode.GUI) {
             log.add(s);
         }
     }
 
+    /**
+     * Prints a divider line.
+     */
     public static void printDividerLine() {
-        printWithIndent(HORIZONTAL_LINE);
+        if (Ui.uiMode == UiMode.CLI) {
+            printWithIndent(HORIZONTAL_LINE);
+        }
     }
 
+    /**
+     * Prints welcome message.
+     */
     public static void printWelcomeMessage() {
-        // print logo
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
+        if (Ui.uiMode == UiMode.CLI) {
+            String logo = " ____        _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
+            System.out.println("Hello from\n" + logo);
+        }
 
         // print welcome words
         printDividerLine();
@@ -68,9 +81,13 @@ public class Ui {
         printWithIndent("Bye. Hope to see you again soon!");
     }
 
-    public static void printList(ArrayList<Task> taskList) {
+    /**
+     * Print contents of task list.
+     * @param taskList Duke's ask list
+     */
+    public static void printList(TaskList taskList) {
         for (int i = 0; i < taskList.size(); i++) {
-            printWithIndent((i+1) + "." + taskList.get(i).toString());
+            printWithIndent((i + 1) + "." + taskList.get(i).toString());
         }
     }
 
@@ -78,6 +95,10 @@ public class Ui {
         printWithIndent(getTaskCountString(listSize));
     }
 
+    /**
+     * Prints found tasks info.
+     * @param tasks Found tasks
+     */
     public static void printFoundTasks(String[] tasks) {
         if (tasks != null) {
             printWithIndent("Here are the matching tasks in your list:");
@@ -89,11 +110,19 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints a new task info.
+     * @param taskStr String representation of the new task
+     */
     public static void printNewTask(String taskStr) {
         printWithIndent("Got it. I've added this task:");
         printWithIndent("  " + taskStr);
     }
 
+    /**
+     * Prints a removed task info.
+     * @param taskStr String representation of the removed task.
+     */
     public static void printRemoveTask(String taskStr) {
         printWithIndent("Noted. I've removed this task: ");
         printWithIndent("  " + taskStr);
@@ -103,6 +132,10 @@ public class Ui {
         printWithIndent("Noted. I've removed all tasks from list.");
     }
 
+    /**
+     * Prints a task which is marked as done.
+     * @param taskStr String representation of the task which is marked as done.
+     */
     public static void printMarkDone(String taskStr) {
         printWithIndent("Nice! I've marked this task as done: ");
         printWithIndent("  " + taskStr);
@@ -114,7 +147,7 @@ public class Ui {
      * @param userInput the lastest user command before exception happens
      */
     public static void printErrorMessage(DukeException e, String userInput) {
-        switch (e.type) {
+        switch (e.getType()) {
         case INDEX_OUT_OF_BOUND:
         case INVALID_COMMAND:
         case INVALID_OPERAND:
@@ -136,6 +169,8 @@ public class Ui {
         case FAIL_TO_WRITE:
             printWithIndent(e.getMessage());
             break;
+        default:
+            printWithIndent("Unknown exception occurred.");
         }
     }
 

@@ -2,11 +2,11 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.ui.Ui;
 import duke.TaskList;
+import duke.ui.Ui;
 
-public class DeleteCommand implements ICommand{
-    private int lineIndex;
+public class DeleteCommand implements ICommand {
+    private final int lineIndex;
 
     public DeleteCommand(int lineIndex) {
         this.lineIndex = lineIndex;
@@ -27,7 +27,9 @@ public class DeleteCommand implements ICommand{
 
     @Override
     public boolean equals(Object o) {
-        if (o == this) return true;
+        if (o == this) {
+            return true;
+        }
 
         if (o != null && o.getClass() == this.getClass()) {
             return ((DeleteCommand) o).lineIndex == this.lineIndex;

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected String by;
 
     protected LocalDate date;
@@ -13,7 +13,7 @@ public class Deadline extends Task{
     /**
      * Constructs a deadline instance with description and due time.
      * @param description description of deadline
-     * @param by due time. If given string is in format xxxx-xx-xx(x is number), a LocalDate instance will be created to
+     * @param by due time. If given string is in format yyyy-mm-dd, a LocalDate instance will be created to
      *          store the date
      */
     public Deadline(String description, String by) {
@@ -31,7 +31,7 @@ public class Deadline extends Task{
     /**
      * Constructs a deadline instance with description, due time and task status.
      * @param description description of deadline
-     * @param by due time. If given string is in format xxxx-xx-xx(x is number), a LocalDate instance will be created to
+     * @param by due time. If given string is in format yyyy-mm-dd, a LocalDate instance will be created to
      *          store the date
      * @param isDone task status
      */
@@ -54,7 +54,9 @@ public class Deadline extends Task{
 
     @Override
     public boolean equals(Object o) {
-        if (o == this) return true;
+        if (o == this) {
+            return true;
+        }
 
         if (o != null && o.getClass() == this.getClass()) {
             Deadline d = (Deadline) o;
@@ -71,7 +73,7 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " +
-                (hasDate ? date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) : by) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + (hasDate ? date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) : by) + ")";
     }
 }

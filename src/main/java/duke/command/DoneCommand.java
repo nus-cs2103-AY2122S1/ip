@@ -2,12 +2,12 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.ui.Ui;
 import duke.TaskList;
 import duke.task.Task;
+import duke.ui.Ui;
 
-public class DoneCommand implements ICommand{
-    private int lineIndex;
+public class DoneCommand implements ICommand {
+    private final int lineIndex;
 
     public DoneCommand(int lineIndex) {
         this.lineIndex = lineIndex;
@@ -28,7 +28,9 @@ public class DoneCommand implements ICommand{
 
     @Override
     public boolean equals(Object o) {
-        if (o == this) return true;
+        if (o == this) {
+            return true;
+        }
 
         if (o != null && o.getClass() == this.getClass()) {
             return ((DoneCommand) o).lineIndex == this.lineIndex;

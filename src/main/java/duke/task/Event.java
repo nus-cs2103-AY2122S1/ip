@@ -1,13 +1,24 @@
 package duke.task;
 
-public class Event extends Task{
+public class Event extends Task {
     protected String period;
 
+    /**
+     * Constructs an event.
+     * @param description Description of the event.
+     * @param period Time period of the event.
+     */
     public Event(String description, String period) {
         super(description);
         this.period = period;
     }
 
+    /**
+     * Constructs an event.
+     * @param description Description of the event.
+     * @param period Time period of the event.
+     * @param isDone Has the event been done?
+     */
     public Event(String description, String period, boolean isDone) {
         super(description, isDone);
         this.period = period;
@@ -20,7 +31,9 @@ public class Event extends Task{
 
     @Override
     public boolean equals(Object o) {
-        if (o == this) return true;
+        if (o == this) {
+            return true;
+        }
 
         if (o != null && o.getClass() == this.getClass()) {
             return ((Event) o).isDone == this.isDone

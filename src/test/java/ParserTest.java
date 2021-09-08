@@ -1,14 +1,19 @@
-import duke.command.*;
-import duke.DukeException;
-import duke.Parser;
-
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
+import duke.Parser;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+
 public class ParserTest {
     @Test
-    public void parse_validInputs_commandReturned() throws Exception{
+    public void parse_validInputs_commandReturned() throws Exception {
         assertEquals(Parser.parse(" bye  ", 1), new ExitCommand());
         assertEquals(Parser.parse("list", 1), new ListCommand());
         assertEquals(Parser.parse("todo a", 1), new AddCommand(new String[]{"todo", "a"}));
@@ -20,26 +25,11 @@ public class ParserTest {
 
     @Test
     public void parse_invalidInputs_exceptionThrown() {
-        assertThrows(DukeException.class, () -> {
-            Parser.parse("bye s", 1);
-        });
-        assertThrows(DukeException.class, () -> {
-            Parser.parse("list a", 1);
-        });
-        assertThrows(DukeException.class, () -> {
-            Parser.parse("todo", 1);
-        });
-        assertThrows(DukeException.class, () -> {
-            Parser.parse("deadline  /by s", 1);
-        });
-        assertThrows(DukeException.class, () -> {
-            Parser.parse("event a /by b", 1);
-        });
-        assertThrows(DukeException.class, () -> {
-            Parser.parse("delete -1", 0);
-        });
-        assertThrows(DukeException.class, () -> {
-            Parser.parse("done 2", 1);
-        });
+        assertThrows(DukeException.class, () -> Parser.parse("bye s", 1));
+        assertThrows(DukeException.class, () -> Parser.parse("todo", 1));
+        assertThrows(DukeException.class, () -> Parser.parse("deadline  /by s", 1));
+        assertThrows(DukeException.class, () -> Parser.parse("event a /by b", 1));
+        assertThrows(DukeException.class, () -> Parser.parse("delete -1", 0));
+        assertThrows(DukeException.class, () -> Parser.parse("done 2", 1));
     }
 }

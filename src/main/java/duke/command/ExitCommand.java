@@ -1,10 +1,10 @@
 package duke.command;
 
 import duke.Storage;
-import duke.ui.Ui;
 import duke.TaskList;
+import duke.ui.Ui;
 
-public class ExitCommand implements ICommand{
+public class ExitCommand implements ICommand {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Ui.printGoodbyeMessage();

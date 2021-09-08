@@ -4,9 +4,10 @@ package duke;
  * Signals that an exception has occurred during runtime.
  * Any exception during runtime will be converted to DukeException, resulting an error message to System.out.
  */
+@SuppressWarnings("checkstyle:Regexp")
 public class DukeException extends Exception {
 
-    public ExceptionType type;
+    private final ExceptionType type;
 
     /**
      * Constructs a DukeException with type of that exception.
@@ -42,8 +43,8 @@ public class DukeException extends Exception {
         case INVALID_OPERAND:
             return "invalid operand";
         case PIPE_SYMBOL:
-            return "OOPS!!! Duke cannot identify the symbol \"|\". Please do not include it " +
-                    "within your input :)";
+            return "OOPS!!! Duke cannot identify the symbol \"|\". Please do not include it "
+                    + "within your input :)";
         case FAIL_TO_READ:
             return "Failed to read from file";
         case FAIL_TO_WRITE:
@@ -51,5 +52,9 @@ public class DukeException extends Exception {
         default:
             return "";
         }
+    }
+
+    public ExceptionType getType() {
+        return this.type;
     }
 }

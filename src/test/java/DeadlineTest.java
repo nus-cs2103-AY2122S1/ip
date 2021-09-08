@@ -1,12 +1,12 @@
-import duke.task.Deadline;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import duke.task.Deadline;
 
 public class DeadlineTest {
     @Test
@@ -36,6 +36,7 @@ public class DeadlineTest {
 
         assertNotEquals(new Deadline("des", date.toString(), true), new Deadline("de", date.toString(), true));
         assertNotEquals(new Deadline("des", date.toString(), true), new Deadline("des", date.toString(), false));
-        assertNotEquals(new Deadline("des", date.toString(), false), new Deadline("des", date.minusDays(1L).toString(), false));
+        assertNotEquals(new Deadline("des", date.toString(), false),
+                new Deadline("des", date.minusDays(1L).toString(), false));
     }
 }

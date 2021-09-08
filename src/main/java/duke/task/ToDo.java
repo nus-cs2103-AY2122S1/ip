@@ -1,10 +1,19 @@
 package duke.task;
 
-public class ToDo extends Task{
+public class ToDo extends Task {
+    /**
+     * Constructs a "to do" instance.
+     * @param description Description of the "to do" instance.
+     */
     public ToDo(String description) {
         super(description);
     }
 
+    /**
+     * Constructs a "to do" instance.
+     * @param description Description of the "to do" instance.
+     * @param isDone Has the task been done?
+     */
     public ToDo(String description, boolean isDone) {
         super(description, isDone);
     }
@@ -15,8 +24,10 @@ public class ToDo extends Task{
     }
 
     @Override
-    public boolean equals(Object o){
-        if (o == this) return true;
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
 
         if (o != null && o.getClass() == this.getClass()) {
             return ((ToDo) o).isDone == this.isDone

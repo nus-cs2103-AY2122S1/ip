@@ -1,14 +1,14 @@
 package duke;
 
 import duke.command.ICommand;
-
 import duke.ui.Ui;
+import duke.ui.UiMode;
 
 /**
  * Wrapper of Duke's implementation.
  * Duke is a Personal Assistant Chatbot that helps a person to keep track of various things.
  */
-public class Duke{
+public class Duke {
     private Ui ui;
     private Storage storage;
     private TaskList taskList;
@@ -16,10 +16,11 @@ public class Duke{
     private boolean isExit;
 
     /**
-     * Initializes duke with default data save path.
+     * Initializes duke with specified UI mode
+     * @param uiMode UI mode
      */
-    public Duke(boolean useGui) {
-        ui = new Ui(useGui);
+    public Duke(UiMode uiMode) {
+        ui = new Ui(uiMode);
         taskList = new TaskList();
         storage = new Storage();
         try {
@@ -33,9 +34,10 @@ public class Duke{
     /**
      * Initializes duke with given data save path.
      * @param pathStr string of save path, ending with the name of save file
+     * @param uiMode UI mode
      */
-    public Duke(String pathStr, boolean useGui) {
-        ui = new Ui(useGui);
+    public Duke(String pathStr, UiMode uiMode) {
+        ui = new Ui(uiMode);
         taskList = new TaskList();
         storage = new Storage();
         try {
@@ -98,12 +100,7 @@ public class Duke{
         return Ui.getResponse();
     }
 
-    public boolean isExit() {
-        return this.isExit;
-    }
-
-
     public static void main(String[] args) {
-        new Duke(false).run();
+        new Duke(UiMode.CLI).run();
     }
 }

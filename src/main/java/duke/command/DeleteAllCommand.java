@@ -2,10 +2,10 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.ui.Ui;
 import duke.TaskList;
+import duke.ui.Ui;
 
-public class DeleteAllCommand implements ICommand{
+public class DeleteAllCommand implements ICommand {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.deleteAll();

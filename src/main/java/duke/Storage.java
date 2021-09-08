@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -40,8 +40,9 @@ public class Storage {
                 Path p = Paths.get("");
                 for (String s : SAVE_DIRECTORY) {
                     p = p.resolve(s);
-                    if (!Files.exists(p))
+                    if (!Files.exists(p)) {
                         Files.createDirectory(p);
+                    }
                 }
 
                 if (!Files.exists(path)) {
@@ -61,7 +62,7 @@ public class Storage {
      * @param pathStr string of given path, ending with save file name
      * @throws DukeException if failed to create file
      */
-    protected void initialize(String pathStr) throws DukeException{
+    protected void initialize(String pathStr) throws DukeException {
         try {
             Path path = Paths.get(pathStr);
 
@@ -70,8 +71,9 @@ public class Storage {
                 Iterator<Path> iterator = p.iterator();
                 while (iterator.hasNext()) {
                     p = p.resolve(iterator.next());
-                    if (!p.equals(path) && !Files.exists(p))
+                    if (!p.equals(path) && !Files.exists(p)) {
                         Files.createDirectory(p);
+                    }
                 }
 
                 if (!Files.exists(path)) {
@@ -92,7 +94,9 @@ public class Storage {
      * @throws DukeException if failed to write to save file
      */
     public void writeLine(String textToWrite) throws DukeException {
-        if (!this.initialized) return;
+        if (!this.initialized) {
+            return;
+        }
         try {
             FileWriter fileWriter = new FileWriter(savePath.toFile(), true);
             fileWriter.write(textToWrite);
@@ -108,7 +112,9 @@ public class Storage {
      * @throws DukeException if failed to write to save file
      */
     public void removeLine(int lineIndex) throws DukeException {
-        if (!this.initialized) return;
+        if (!this.initialized) {
+            return;
+        }
         try {
             List<String> originalContent = Files.readAllLines(savePath);
             originalContent.remove(lineIndex);
@@ -123,7 +129,9 @@ public class Storage {
      * @throws DukeException if failed to write to save file
      */
     public void removeAll() throws DukeException {
-        if (!this.initialized) return;
+        if (!this.initialized) {
+            return;
+        }
         try {
             Files.write(savePath, new ArrayList<String>());
         } catch (IOException e) {
@@ -138,7 +146,9 @@ public class Storage {
      * @throws DukeException if failed to write to save file
      */
     public void setLine(int lineIndex, String textToWrite) throws DukeException {
-        if (!this.initialized) return;
+        if (!this.initialized) {
+            return;
+        }
         try {
             List<String> originalContent = Files.readAllLines(savePath);
             originalContent.set(lineIndex, textToWrite);
@@ -154,7 +164,9 @@ public class Storage {
      * @throws DukeException if failed to read from save file
      */
     protected boolean isEmpty() throws DukeException {
-        if (!this.initialized) return true;
+        if (!this.initialized) {
+            return true;
+        }
         try {
             return Files.readString(savePath).isEmpty();
         } catch (IOException e) {
@@ -168,7 +180,9 @@ public class Storage {
      * @throws DukeException if failed to read from save file
      */
     protected List<String> getFileContents() throws DukeException {
-        if (!this.initialized) return new ArrayList<String>();
+        if (!this.initialized) {
+            return new ArrayList<>();
+        }
         try {
             return Files.readAllLines(savePath);
         } catch (IOException e) {
