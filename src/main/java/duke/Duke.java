@@ -1,7 +1,9 @@
 package duke;
 
+import java.util.HashMap;
+
 /**
- * The Duke chat bot app.
+ * The Duke chat-bot app.
  */
 public class Duke {
 
@@ -15,7 +17,7 @@ public class Duke {
     private final Parser parser;
 
     /** The list of tasks */
-    private TaskList list;
+    private TaskList taskList;
 
     /** True if Duke is still running */
     private boolean isRunning;
@@ -27,14 +29,18 @@ public class Duke {
      * @param file Name of the saved data file.
      */
     public Duke(String directory, String file) {
+        assert directory != null : "[duke.Duke.Duke]: directory parameter should not be null.";
+        assert file != null : "[duke.Duke.Duke]: file parameter should not be null.";
+
         ui = new Ui();
         storage = new Storage(directory, file);
         parser = new Parser();
         try {
-            list = new TaskList(storage.load());
+            // Get stored data.
+            taskList = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showMessage(e.getMessage());
-            list = new TaskList();
+            taskList = new TaskList();
         }
         isRunning = true;
     }
@@ -57,7 +63,7 @@ public class Duke {
         ui.showGreetings();
 
         // Get and process input.
-        String rawInput = ui.getInput();
+        String rawInput = "";
         String output = "Jak się masz? My name-a Borat. I like you.\nWhat I do for you?";
         while (isRunning) {
             // Gets user input
@@ -65,7 +71,7 @@ public class Duke {
             rawInput = ui.getInput();
             output = getResponse(rawInput);
         }
-        // Good bye message
+        // Goodbye message
         ui.showGoodBye();
     }
 
@@ -79,8 +85,8 @@ public class Duke {
         String output = "";
         try {
             // Parses user input.
-            String[] inputs = parser.parseInput(input);
-            Constant.Command command = Constant.Command.valueOf(inputs[0]);
+            HashMap<String, String> inputs = parser.parseInput(input);
+            Constant.Command command = Constant.Command.valueOf(inputs.get("command"));
             String task;
 
             // Process user input.
@@ -97,13 +103,13 @@ public class Duke {
                 break;
             case LIST:
                 // Gets the string represented tasks in the task list.
-                output = list.getAllTask();
+                output = taskList.getAllTask();
 
                 break;
             case DONE:
                 // Marks a task as being completed.
-                int index = parser.convertToInt(inputs[1]);
-                output = list.markDone(index);
+                int index = parser.convertToInt(inputs.get("index"));
+                output = taskList.markDone(index);
 
                 // Edits the file content.
                 task = storage.getFileLine(index - 1);
@@ -113,35 +119,38 @@ public class Duke {
                 break;
             case TODO:
                 // Adds a todo-typed task to the task list.
-                output = list.addItem(new Todo(inputs[1]));
+                Todo todo = new Todo(inputs.get("description"));
+                output = taskList.addItem(todo);
 
                 // Add to file content.
-                task = "T | 0 | " + inputs[1];
+                task = todo.savedToString();
                 storage.addToFile(task);
 
                 break;
             case DEADLINE:
                 // Adds a deadline-typed task in the task list.
-                output = list.addItem(new Deadline(inputs[1], inputs[2]));
+                Deadline deadline = new Deadline(inputs.get("description"), inputs.get("date"));
+                output = taskList.addItem(deadline);
 
                 // Add to file content.
-                task = "D | 0 | " + inputs[1] + " | " + inputs[2];
+                task = deadline.savedToString();
                 storage.addToFile(task);
 
                 break;
             case EVENT:
                 // Adds an event-typed task in the task list.
-                output = list.addItem(new Event(inputs[1], inputs[2]));
+                Event event = new Event(inputs.get("description"), inputs.get("date"));
+                output = taskList.addItem(event);
 
                 // Add to file content.
-                task = "E | 0 | " + inputs[1] + " | " + inputs[2];
+                task = event.savedToString();
                 storage.addToFile(task);
 
                 break;
             case DELETE:
                 // Deletes a task from the task list.
-                int id = parser.convertToInt(inputs[1]);
-                output = list.removeItem(id);
+                int id = parser.convertToInt(inputs.get("index"));
+                output = taskList.removeItem(id);
 
                 // Remove from file content.
                 storage.removeFromFile(id - 1);
@@ -154,7 +163,7 @@ public class Duke {
                 break;
             case FIND:
                 // Gets the task matching the queried keyword.
-                output = list.find(inputs[1]);
+                output = taskList.find(inputs.get("keyword"));
 
                 break;
             default:
