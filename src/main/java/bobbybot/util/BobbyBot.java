@@ -20,6 +20,7 @@ public class BobbyBot {
         ui = new Ui();
         ui.showWelcome();
         storage = new Storage(DBPATH);
+        assert storage != null;
         tasks = new TaskList(storage.load());
 
 
