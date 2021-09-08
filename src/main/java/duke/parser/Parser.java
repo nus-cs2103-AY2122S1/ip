@@ -56,7 +56,7 @@ public class Parser {
         int index;
         String description;
         String dateString;
-        String notes;
+        String notes = "";
         LocalDateTime at;
         LocalDateTime by;
         Task task;
@@ -86,16 +86,16 @@ public class Parser {
             if (argIndex == -1) {
                 throw new DukeException("Missing deadline.");
             }
+            description = String.join(" ", Arrays.copyOfRange(tokens, 1, argIndex));
             if (notesIndex == -1) {
-                description = String.join(" ", Arrays.copyOfRange(tokens, 1, argIndex));
                 dateString = String.join(" ", Arrays.copyOfRange(tokens, argIndex + 1, tokens.length));
             } else {
-                description = String.join(" ", Arrays.copyOfRange(tokens, 1, argIndex));
                 dateString = String.join(" ", Arrays.copyOfRange(tokens, argIndex + 1, notesIndex));
+                notes = String.join(" ", Arrays.copyOfRange(tokens, notesIndex + 1, tokens.length));
             }
             try {
                 by = LocalDateTime.parse(dateString, format);
-                task = new Deadline(description, by);
+                task = new Deadline(description, by, notes);
                 this.tasks.add(task);
                 message.append(ui.showAddTaskMsg(task));
             } catch (DateTimeParseException e) {
@@ -104,14 +104,20 @@ public class Parser {
             break;
         case EVENT:
             argIndex = Arrays.asList(tokens).indexOf("/at");
+            notesIndex = Arrays.asList(tokens).indexOf("/notes");
             if (argIndex == -1) {
                 throw new DukeException("Missing time of event.");
             }
             description = String.join(" ", Arrays.copyOfRange(tokens, 1, argIndex));
-            dateString = String.join(" ", Arrays.copyOfRange(tokens, argIndex + 1, tokens.length));
+            if (notesIndex == -1) {
+                dateString = String.join(" ", Arrays.copyOfRange(tokens, argIndex + 1, tokens.length));
+            } else {
+                dateString = String.join(" ", Arrays.copyOfRange(tokens, argIndex + 1, notesIndex));
+                notes = String.join(" ", Arrays.copyOfRange(tokens, notesIndex + 1, tokens.length));
+            }
             try {
                 at = LocalDateTime.parse(dateString, format);
-                task = new Event(description, at);
+                task = new Event(description, at, notes);
                 this.tasks.add(task);
                 message.append(ui.showAddTaskMsg(task));
             } catch (DateTimeParseException e) {

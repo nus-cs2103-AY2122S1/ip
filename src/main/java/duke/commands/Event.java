@@ -37,6 +37,17 @@ public class Event extends Task {
      * Constructor for Event.
      *
      * @param description Description to be stored in an Event.
+     * @param at Event Time.
+     * @param notes A string representation of notes.
+     */
+    public Event(String description, LocalDateTime at, String notes) {
+        this(description, false, at, notes);
+    }
+
+    /**
+     * Constructor for Event.
+     *
+     * @param description Description to be stored in an Event.
      * @param isDone Boolean that represents Task completion status.
      * @param at Event Time.
      * @param notes A string representation of notes.
@@ -55,7 +66,7 @@ public class Event extends Task {
     public String toString() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         String dateString = at.format(format);
-        return "[E]" + super.toString() + " (at: " + dateString + ")";
+        return "[E]" + super.toString() + " (at: " + dateString + ")" + "\n  Notes: " + notes;
     }
 
     /**

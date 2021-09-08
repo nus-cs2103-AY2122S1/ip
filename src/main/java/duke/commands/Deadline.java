@@ -37,6 +37,17 @@ public class Deadline extends Task {
      * Constructor for Deadline.
      *
      * @param description Description to be stored.
+     * @param by Deadline.
+     * @param notes A string representation of notes.
+     */
+    public Deadline(String description, LocalDateTime by, String notes) {
+        this(description, false, by, notes);
+    }
+
+    /**
+     * Constructor for Deadline.
+     *
+     * @param description Description to be stored.
      * @param isDone Boolean that represents Deadline completion status.
      * @param by Deadline.
      * @param notes A string representation of notes.
@@ -55,7 +66,7 @@ public class Deadline extends Task {
     public String toString() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         String dateString = by.format(format);
-        return "[D]" + super.toString() + " (by: " + dateString + ")";
+        return "[D]" + super.toString() + " (by: " + dateString + ")" + "\n  Notes: " + notes;
     }
 
     /**

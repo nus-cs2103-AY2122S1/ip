@@ -54,7 +54,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[T]" + super.toString() + "\n  Notes: " + notes;
     }
 
     /**
@@ -64,7 +64,7 @@ public class Todo extends Task {
      */
     @Override
     public String printInSaveFormat() {
-        String[] info = {"T", isDone ? "1" : "0", description};
+        String[] info = {"T", isDone ? "1" : "0", description, notes};
         return String.join(" | ", info);
     }
 }
