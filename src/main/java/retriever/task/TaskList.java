@@ -43,6 +43,71 @@ public class TaskList {
     }
 
     /**
+     * Returns the number of days present in the month
+     * entered by the user.
+     *
+     * @param month The month entered by the user as an integer.
+     * @param year The year entered by the user, used for detecting leap years.
+     * @return The number of days present in the month entered.
+     */
+    public int numberOfDaysInTheMonth(int month, int year) {
+        switch(month) {
+            case 1:
+                // Fallthrough
+            case 3:
+                // Fallthrough
+            case 5:
+                // Fallthrough
+            case 7:
+                // Fallthrough
+            case 8:
+                // Fallthrough
+            case 10:
+                // Fallthrough
+            case 12:
+                return 31;
+            case 4:
+                // Fallthrough
+            case 6:
+                // Fallthrough
+            case 9:
+                // Fallthrough
+            case 11:
+                return 30;
+            case 2:
+                if (year % 4 == 0) {
+                    return 29;
+                }
+                return 28;
+            default:
+                return 0;
+        }
+    }
+
+    /**
+     * Returns a boolean suggesting whether the entered date
+     * is valid or not.
+     *
+     * @param enteredDate The date entered by the user.
+     * @return A boolean, true, if the date is valid.
+     */
+    public boolean isDateRangeValid(String[] enteredDate) {
+        if (enteredDate.length < 3) {
+            return false;
+        }
+
+        int enteredDay = Integer.parseInt(enteredDate[0]);
+        int enteredMonth = Integer.parseInt(enteredDate[1]);
+        int enteredYear = Integer.parseInt(enteredDate[2]);
+
+        boolean isValidMonth = enteredMonth >= 1 && enteredMonth <= 12;
+        boolean isValidDay = enteredDay >= 1 && enteredDay <= numberOfDaysInTheMonth(enteredMonth, enteredYear);
+
+        return isValidMonth && isValidDay;
+    }
+
+
+    /**
      * Returns a boolean suggesting whether the format for adding a
      * deadline task is followed or not.
      *
@@ -79,16 +144,20 @@ public class TaskList {
 
         // Parsing the user input to obtain the information about the task.
         String[] userInputArray = userInput.substring(prefixLengthPlusSpace).split(" /by ");
+        String[] enteredDate = userInputArray[1].split("/");
 
         // Making sure that the time is properly formatted.
-        TaskDateAndTime deadlineDate = new TaskDateAndTime(userInputArray[1]);
-        if (!deadlineDate.isValidDate()) {
+        if (!isDateRangeValid(enteredDate)) {
             throw new IllegalDateFormatException("Please Follow The Date Format DD/MM/YYYY");
         }
 
-        Task deadlineTask = new Deadline(userInputArray[0], deadlineDate);
+        TaskDateAndTime deadlineDate = new TaskDateAndTime(userInputArray[1]);
+        String taskDescription = userInputArray[0];
+        String taskDate = userInputArray[1];
+
+        Task deadlineTask = new Deadline(taskDescription, deadlineDate);
         userTaskList.add(deadlineTask);
-        taskStorage.writeTask(Task.TaskType.DEADLINE, userInputArray[0], userInputArray[1]);
+        taskStorage.writeTask(Task.TaskType.DEADLINE, taskDescription, taskDate);
         ui.printTaskAdded(deadlineTask, taskListLength());
     }
 
@@ -129,16 +198,20 @@ public class TaskList {
 
         // Parsing the user input to obtain the information about the task.
         String[] userInputArray = userInput.substring(prefixLengthPlusSpace).split(" /at ");
+        String[] enteredDate = userInputArray[1].split("/");
 
         // Making sure that the date is properly formatted.
-        TaskDateAndTime eventDate = new TaskDateAndTime(userInputArray[1]);
-        if (!eventDate.isValidDate()) {
+        if (!isDateRangeValid(enteredDate)) {
             throw new IllegalDateFormatException("Please Follow The Date Format DD/MM/YYYY");
         }
 
-        Task eventTask = new Event(userInputArray[0], eventDate);
+        TaskDateAndTime eventDate = new TaskDateAndTime(userInputArray[1]);
+        String taskDescription = userInputArray[0];
+        String taskDate = userInputArray[1];
+
+        Task eventTask = new Event(taskDescription, eventDate);
         userTaskList.add(eventTask);
-        taskStorage.writeTask(Task.TaskType.EVENT, userInputArray[0], userInputArray[1]);
+        taskStorage.writeTask(Task.TaskType.EVENT, taskDescription, taskDate);
         ui.printTaskAdded(eventTask, taskListLength());
     }
 
@@ -284,66 +357,6 @@ public class TaskList {
         }
 
         ui.printTasksFoundByKeyword(matchingTasks);
-    }
-
-    /**
-     * Returns the number of days present in the month
-     * entered by the user.
-     *
-     * @param month The month entered by the user as an integer.
-     * @param year The year entered by the user, used for detecting leap years.
-     * @return The number of days present in the month entered.
-     */
-    public int numberOfDaysInTheMonth(int month, int year) {
-        switch(month) {
-        case 1:
-            // Fallthrough
-        case 3:
-            // Fallthrough
-        case 5:
-            // Fallthrough
-        case 7:
-            // Fallthrough
-        case 8:
-            // Fallthrough
-        case 10:
-            // Fallthrough
-        case 12:
-            return 31;
-        case 4:
-            // Fallthrough
-        case 6:
-            // Fallthrough
-        case 9:
-            // Fallthrough
-        case 11:
-            return 30;
-        case 2:
-            if (year % 4 == 0) {
-                return 29;
-            }
-            return 28;
-        default:
-            return 0;
-        }
-    }
-
-    /**
-     * Returns a boolean suggesting whether the entered date
-     * is valid or not.
-     *
-     * @param enteredDate The date entered by the user.
-     * @return A boolean, true, if the date is valid.
-     */
-    public boolean isDateRangeValid(String[] enteredDate) {
-        int enteredDay = Integer.parseInt(enteredDate[0]);
-        int enteredMonth = Integer.parseInt(enteredDate[1]);
-        int enteredYear = Integer.parseInt(enteredDate[2]);
-
-        boolean isValidMonth = enteredMonth >= 1 && enteredMonth <= 12;
-        boolean isValidDay = enteredDay >= 1 && enteredDay <= numberOfDaysInTheMonth(enteredMonth, enteredYear);
-
-        return isValidMonth && isValidDay;
     }
 
     /**

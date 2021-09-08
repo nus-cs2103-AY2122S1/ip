@@ -18,7 +18,7 @@ public class TaskDateAndTime {
      */
     public TaskDateAndTime(String userInputDateAndTime) {
         this.userInputDateAndTime = userInputDateAndTime;
-        isValidDate();
+        parseDateAndTime();
     }
 
     /**
@@ -27,14 +27,12 @@ public class TaskDateAndTime {
      *
      * @return A boolean indicating if the date is valid.
      */
-    public boolean isValidDate() {
+    public void parseDateAndTime() {
         String[] userInputDate = userInputDateAndTime.split("/");
 
         if (userInputDate.length == 3) {
             taskDateAndTime = LocalDate.parse(userInputDate[2] + "-" + userInputDate[1] + "-" + userInputDate[0]);
         }
-
-        return userInputDate.length == 3;
     }
 
     /**
