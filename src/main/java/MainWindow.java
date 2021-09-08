@@ -5,6 +5,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import seedu.duke.Duke;
 
 /**
@@ -19,6 +20,8 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+
+    private Stage stage;
 
     private Duke duke;
 
@@ -42,10 +45,19 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        stage = (Stage) dialogContainer.getScene().getWindow();
+
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage));
+        if (isBye(input)) {
+            stage.close();
+        }
         userInput.clear();
+    }
+
+    private boolean isBye(String input) {
+        return input.equals("bye");
     }
 }

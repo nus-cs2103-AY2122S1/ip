@@ -10,6 +10,7 @@ public enum CommandType {
     DELETE("delete"),
     FIND("find"),
     EMPTY("empty"),
+    TIMEDTASK("timedtask"),
     INVALID("invalid");
 
     private String command;
@@ -40,6 +41,8 @@ public enum CommandType {
             return CommandType.DELETE;
         case "find":
             return CommandType.FIND;
+        case "timedtask":
+            return CommandType.TIMEDTASK;
         case "":
             return CommandType.EMPTY;
         default:

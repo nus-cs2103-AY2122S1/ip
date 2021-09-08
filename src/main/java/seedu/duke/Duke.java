@@ -38,8 +38,7 @@ public class Duke {
             this.response = command.execute(taskList, storage);
             return this.response;
         } catch (ArrayIndexOutOfBoundsException e) {
-            Ui.printMessage(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
-            return "error";
+            return Ui.printMessage(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
         }
 
     }

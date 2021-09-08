@@ -1,12 +1,2 @@
-T | 1 | borrow hello 6
-T | 1 | borrow book 7
-T | 0 | nothing eelse
-T | 1 | borrow hello 6
-T | 1 | borrow book 7
-T | 0 | nothing eelse
-T | 1 | borrow hello 6
-T | 1 | borrow book 7
-T | 0 | nothing eelse
-T | 1 | borrow hello 6
-T | 1 | borrow book 7
-T | 0 | nothing eelse
+T | 1 | do nothing
+T | 0 | reading

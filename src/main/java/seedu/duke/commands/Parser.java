@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 import seedu.duke.tasks.Deadline;
 import seedu.duke.tasks.Events;
+import seedu.duke.tasks.TimedTask;
 import seedu.duke.tasks.ToDos;
 
 public class Parser {
@@ -38,7 +39,6 @@ public class Parser {
             if (isBlank(descriptions)) {
                 return new UiCommand(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
             }
-
             ToDos todos = new ToDos(descriptions);
             return new AddCommand(todos);
 
@@ -47,7 +47,6 @@ public class Parser {
             if (isBlank(descriptions)) {
                 return new UiCommand(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
             }
-
             Deadline deadline = new Deadline(getOnlyDescription(descriptions), getDeadlineDateTime(descriptions));
             return new AddCommand(deadline);
 
@@ -56,9 +55,16 @@ public class Parser {
             if (isBlank(descriptions)) {
                 return new UiCommand(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
             }
-
             Events event = new Events(getOnlyDescription(descriptions), getEventDateTime(descriptions));
             return new AddCommand(event);
+        
+        case TIMEDTASK:
+            descriptions = getDescriptions(actionDescription);
+            if (isBlank(descriptions)) {
+                return new UiCommand(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
+            }
+            TimedTask timedTask = new TimedTask(getOnlyDescription(descriptions), getTimeNeeded(descriptions));
+            return new AddCommand(timedTask);
 
         case DELETE:
             return new DeleteCommand(getDescriptions(actionDescription));
@@ -108,5 +114,9 @@ public class Parser {
 
     private boolean isBlank(String descriptions) {
         return descriptions.equals("");
+    }
+
+    private String getTimeNeeded(String descriptions) {
+        return descriptions.split(" /needs ")[1];
     }
 }
