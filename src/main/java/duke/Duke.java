@@ -182,13 +182,11 @@ public class Duke extends Application {
         try {
             Command cmd = Parser.parseCommand(text);
             if (UndoCommand.class.isInstance(cmd)) {
-//                response += this.prevTasks.printList();
                 ((UndoCommand) cmd).setStorage(this.storage);
                 response += cmd.execute(this.prevTasks);
                 this.tasks = this.prevTasks.duplicate();
             } else {
                 this.prevTasks = this.tasks.duplicate();
-//                response += this.prevTasks.printList();
                 response += cmd.execute(this.tasks);
             }
             this.storage.copyToFile();

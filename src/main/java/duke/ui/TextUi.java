@@ -17,7 +17,6 @@ public class TextUi {
      * @return String representation of the task added.
      */
     public static String showTaskAdded(TaskList tasks) {
-        System.out.println("added: " + tasks.getTaskList().get(tasks.getLength() - 1));
         return "added: " + tasks.getTaskList().get(tasks.getLength() - 1) + "\n";
     }
 
@@ -63,7 +62,6 @@ public class TextUi {
      * @return String representation of the error message.
      */
     public static String showErrorMessage(String s) {
-        System.out.println(s);
         return s;
     }
 
@@ -73,7 +71,6 @@ public class TextUi {
      * @return String representation of a goodbye message.
      */
     public static String showGoodbyeMessage() {
-        System.out.println("See you! :)");
         return "See you! :)";
     }
 

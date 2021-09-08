@@ -154,13 +154,10 @@ public class TaskList {
                 }
             }
             if (temp.isEmpty()) {
-                System.out.println("There are no matching tasks in your list.");
                 s += "There are no matching tasks in your list.";
             } else {
-                System.out.println("Here are the matching tasks in your list:");
                 s += "Here are the matching tasks in your list:\n";
                 for (int i = 0; i < temp.size(); i++) {
-                    System.out.println(temp.get(i));
                     s += temp.get(i) + "\n";
                 }
             }
@@ -177,7 +174,6 @@ public class TaskList {
         String s = "";
         int len = tasks.size();
         if (len == 0) {
-            System.out.println("The list is empty!");
             s += "The list is empty!";
         } else {
             s += TextUi.showTaskList(tasks);
