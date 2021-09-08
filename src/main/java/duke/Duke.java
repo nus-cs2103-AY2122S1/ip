@@ -1,7 +1,7 @@
 package duke;
 
-import java.util.Scanner;
-
+import duke.commands.Command;
+import duke.parser.Parser;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -51,53 +51,12 @@ public class Duke extends Application {
         } catch (DukeException e) {
             TextUi.showErrorMessage(e.getMessage());
         }
-
     }
 
     /**
-     * Runs the programme.
+     * Starts the programme with GUI.
+     * @param stage Stage provided by JavaFX.
      */
-    public void run() {
-        TextUi.showWelcomeMessage();
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNextLine()) {
-            try {
-                String text = sc.nextLine();
-                if (text.equals("q")) {
-                    TextUi.showGoodbyeMessage();
-                    break;
-                } else if (text.equals("ls")) {
-                    tasks.printList();
-                } else if (text.startsWith("done")) {
-                    tasks.markAsDone(text);
-                    storage.copyToFile();
-                } else if (text.startsWith("delete")) {
-                    tasks.deleteTask(text);
-                    storage.copyToFile();
-                } else if (text.startsWith("find")) {
-                    tasks.findTask(text);
-                } else {
-                    tasks.addTask(text);
-                    storage.copyToFile();
-                    TextUi.showTaskAdded(tasks);
-                    TextUi.showUpdatedNumberOfTasks(tasks);
-                }
-            } catch (DukeException e) {
-                TextUi.showErrorMessage(e.getMessage());
-            }
-        }
-        sc.close();
-    }
-
-    /**
-     * The main method of Nat's chat bot.
-     *
-     * @param args The command line arguments.
-     */
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
-    }
-
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -147,6 +106,8 @@ public class Duke extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label("Welcome to Duke!"), new ImageView(duke)));
 
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
@@ -209,27 +170,11 @@ public class Duke extends Application {
         Duke app = new Duke("data/duke.txt");
         String response = "";
         try {
-            if (text.equals("q")) {
-                response += TextUi.showGoodbyeMessage();
-            } else if (text.equals("ls")) {
-                response += app.tasks.printList();
-            } else if (text.startsWith("done")) {
-                response += app.tasks.markAsDone(text);
-                app.storage.copyToFile();
-            } else if (text.startsWith("delete")) {
-                response += app.tasks.deleteTask(text);
-                app.storage.copyToFile();
-            } else if (text.startsWith("find")) {
-                response += app.tasks.findTask(text);
-            } else {
-                app.tasks.addTask(text);
-                app.storage.copyToFile();
-                response += TextUi.showTaskAdded(app.tasks);
-                response += TextUi.showUpdatedNumberOfTasks(app.tasks);
-            }
+            Command cmd = Parser.parseCommand(text);
+            response = cmd.execute(app.tasks);
+            app.storage.copyToFile();
         } catch (DukeException e) {
-            response += TextUi.showErrorMessage(e.getMessage());
-            return response;
+            return TextUi.showErrorMessage(e.getMessage());
         }
         assert response != "" : "response should not be empty";
         return response;

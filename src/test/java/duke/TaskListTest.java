@@ -2,6 +2,8 @@ package duke;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import duke.commands.Command;
+import duke.parser.Parser;
 import org.junit.jupiter.api.Test;
 
 
@@ -12,7 +14,8 @@ public class TaskListTest {
         TaskList tasks = new TaskList();
 
         assertThrows(DukeException.class, () -> {
-            tasks.addTask("hello");
+            Command cmd = Parser.parseCommand("hello");
+            cmd.execute(tasks);
         });
     }
 
@@ -21,8 +24,10 @@ public class TaskListTest {
         TaskList tasks = new TaskList();
 
         assertThrows(DukeException.class, () -> {
-            tasks.addTask("todo read book");
-            tasks.deleteTask("delete 2");
+            Command cmd = Parser.parseCommand("todo read book");
+            cmd.execute(tasks);
+            Command nextCmd = Parser.parseCommand("delete 2");
+            nextCmd.execute(tasks);
         });
     }
 }
