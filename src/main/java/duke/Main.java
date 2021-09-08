@@ -35,11 +35,9 @@ public class Main extends Application {
 
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             duke.run();
-
             this.sendMessageToUser(this.duke.getStorageStatusMessage());
             this.sendMessageToUser(Ui.WELCOME_MESSAGE);
-
-            stage.show();
+            stage.show() 
         } catch (IOException e) {
             e.printStackTrace();
         }
