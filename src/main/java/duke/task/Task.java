@@ -1,11 +1,16 @@
 package duke.task;
 
+import duke.util.Priority;
+
 /**
  * The class models tasks in real life.
  */
-public class Task {
+public class Task implements Comparable<Task> {
+    protected final Priority DEFAULT_PRIORITY = Priority.MEDIUM;
+
     String content;
     boolean isDone;
+    Priority priority;
 
     /**
      * Constructor.
@@ -22,7 +27,7 @@ public class Task {
     /**
      * Constructor.
      * Instantiates a Task object with given task content and
-     * isDone status.
+     * isDone status with by default medium priority.
      *
      * @param content
      * @param isDone
@@ -30,6 +35,22 @@ public class Task {
     public Task(String content, boolean isDone) {
         this.content = content;
         this.isDone = isDone;
+        priority = DEFAULT_PRIORITY;
+    }
+
+
+    /**
+     * Constructor.
+     * Instantiates a Task object with given task content and
+     * isDone status with by default medium priority.
+     *
+     * @param content
+     * @param isDone
+     */
+    public Task(String content, boolean isDone, Priority priority) {
+        this.content = content;
+        this.isDone = isDone;
+        this.priority = priority;
     }
 
 
@@ -45,7 +66,7 @@ public class Task {
      * Check if the content of the task has the given keyword.
      *
      * @param keyword
-     * @return  A boolean indicating if the task contains the keyword.
+     * @return A boolean indicating if the task contains the keyword.
      */
     public boolean containsKeyword(String keyword) {
         return content.contains(keyword);
@@ -69,5 +90,17 @@ public class Task {
      */
     public String toString() {
         return String.format("[T] [%s] %s", isDone ? "X" : " ", content);
+    }
+
+
+    /**
+     * Compares with another task based on priority.
+     *
+     * @param o
+     * @return
+     */
+    @Override
+    public int compareTo(Task o) {
+        return priority.compareTo(o.priority);
     }
 }
