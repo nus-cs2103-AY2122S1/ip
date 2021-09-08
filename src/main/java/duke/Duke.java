@@ -18,6 +18,7 @@ public class Duke {
     private final Storage storage;
     private final TaskList tasks;
     private final Ui ui;
+    private final String NARUTO_REPLY_PREFIX = "Sage Mode On! \n";
 
     /**
      * Constructor for the Duke chat-bot.
@@ -28,37 +29,6 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(persistedData);
         tasks = new TaskList(storage.loadPersistedData());
-    }
-
-    /**
-     * Constructor for the Duke chat-bot.
-     */
-    public Duke() {
-        String persistedData = "data/duke.txt";
-        ui = new Ui();
-        storage = new Storage(persistedData);
-        tasks = new TaskList(storage.loadPersistedData());
-    }
-
-    /**
-     * Initializes and starts the chat-bot for operation/interaction.
-     */
-    public void run() {
-        boolean toExit = false;
-        ui.showWelcome();
-        while (!toExit) {
-            String fullCommand = ui.readCommand();
-            ui.showLines();
-            try {
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                toExit = c.isExitCommand();
-            } catch (DukeException e) {
-                ui.showError(e);
-            } finally {
-                ui.showLines();
-            }
-        }
     }
 
     public String getResponse(String fullCommand) {
@@ -84,9 +54,9 @@ public class Duke {
         System.out.flush();
         System.setOut(old);
         // Show what happened in the terminal on IntelliJ
-        System.out.println("Here: " + narutoStream.toString());
+        // System.out.println("Here: " + narutoStream.toString());
 
-        return "Naruto's reply! " + narutoStream.toString();
+        return NARUTO_REPLY_PREFIX + narutoStream.toString();
     }
 
     public String initialMessageFromNaruto() {
@@ -95,7 +65,7 @@ public class Duke {
         PrintStream ps = new PrintStream(narutoStream);
         // IMPORTANT: Save the old System.out!
         PrintStream old = System.out;
-        // Tell Java to use your special stream
+        // Tell Java to use my special stream
         System.setOut(ps);
 
         ui.showWelcome();
@@ -106,7 +76,7 @@ public class Duke {
         // Show what happened in the terminal on IntelliJ if needed
         // System.out.println("Here: " + narutoStream.toString());
 
-        return "Naruto's reply! " + narutoStream.toString();
+        return NARUTO_REPLY_PREFIX + narutoStream.toString();
     }
 
 }
