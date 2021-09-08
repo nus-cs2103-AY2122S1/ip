@@ -38,7 +38,7 @@ public class EditCommand extends Command {
     }
 
     private void checkInput(String input) throws DukeException {
-        String[] splitInput = input.split(" "); 
+        String[] splitInput = input.split(" ");
         if (splitInput.length < 2) {
             throw new DukeException("Please specify the index of the task to be edited"
                     + "\n i.e. done 3");
