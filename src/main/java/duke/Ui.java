@@ -1,10 +1,9 @@
 package duke;
 
-import java.lang.reflect.Array;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import duke.exceptions.DukeException;
+import duke.exceptions.IncorrectInputException;
+import duke.exceptions.InvalidInputException;
+import duke.tasks.Task;
 
 /**
  * User interface. Handles text for user interface.
@@ -31,8 +30,8 @@ public class Ui {
 
     public String getMessage(Storage storage, TaskList tasklist, String str) {
         try {
-            String[] strparse = str.split(" ");
             // splits input to parse for keywords.
+            String[] strparse = str.split(" ");
 
             switch (this.parser.parseCommand(strparse[0])) {
             case "bye":

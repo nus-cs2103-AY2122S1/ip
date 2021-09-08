@@ -1,5 +1,13 @@
 package duke;
 
+import duke.exceptions.DukeException;
+import duke.exceptions.IncorrectInputException;
+import duke.exceptions.InvalidInputException;
+import duke.exceptions.MissingInputException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Todo;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -9,7 +17,7 @@ import java.time.format.DateTimeParseException;
  * Class for parsing keywords, and handling unparsed Strings.
  */
 public class Parser {
-    Parser() {
+    public Parser() {
     }
 
     /**
@@ -44,34 +52,34 @@ public class Parser {
 
     /**
      * Joins together String for find keyword.
-     * @param strparse Array of Strings to be joined together.
+     * @param strParse Array of Strings to be joined together.
      * @return Keyword to be found.
      */
-    public String parseFind(String[] strparse) {
-        StringBuilder strb = new StringBuilder();
-        for (int i = 1; i < strparse.length; i++) {
-            strb.append(strparse[i]);
-            if (i != strparse.length - 1) {
-                strb.append(" ");
+    public String parseFind(String[] strParse) {
+        StringBuilder strBuilder = new StringBuilder();
+        for (int i = 1; i < strParse.length; i++) {
+            strBuilder.append(strParse[i]);
+            if (i != strParse.length - 1) {
+                strBuilder.append(" ");
             }
         }
-        return strb.toString();
+        return strBuilder.toString();
     }
 
     /**
      * Joins Array of Strings together without the keyword todo at the start.
-     * @param strparse Array of Strings to be parsed.
+     * @param strParse Array of Strings to be parsed.
      * @return Todo task.
      * @throws DukeException Errors that occur during parsing (incorrect commands, etc.).
      */
-    public Todo parseTodo(String[] strparse) throws DukeException {
+    public Todo parseTodo(String[] strParse) throws DukeException {
         StringBuilder taskb = new StringBuilder();
-        if (strparse.length == 1) {
+        if (strParse.length == 1) {
             throw new IncorrectInputException("todo", "using 'todo (taskw)'");
         }
-        for (int i = 1; i < strparse.length; i++) {
-            taskb.append(strparse[i]);
-            if (i != strparse.length - 1) {
+        for (int i = 1; i < strParse.length; i++) {
+            taskb.append(strParse[i]);
+            if (i != strParse.length - 1) {
                 taskb.append(" ");
             }
         }
@@ -80,38 +88,38 @@ public class Parser {
 
     /**
      * Examines String[] and produces a Deadline from it.
-     * @param strparse Array of Strings to be parsed.
+     * @param strParse Array of Strings to be parsed.
      * @return Deadline Task.
      * @throws DukeException Errors that occur during parsing (incorrect commands, etc.).
      */
-    public Deadline parseDeadline(String[] strparse) throws DukeException {
+    public Deadline parseDeadline(String[] strParse) throws DukeException {
         try {
-            if (strparse.length == 1) {
+            if (strParse.length == 1) {
                 throw new MissingInputException("deadline");
             }
-            StringBuilder strb = new StringBuilder();
+            StringBuilder strBuilder = new StringBuilder();
             int i = 1;
-            while (i < strparse.length
-                    && !strparse[i].equalsIgnoreCase("/by")) {
-                strb.append(strparse[i]);
-                if (i < strparse.length - 1
-                        && !strparse[i + 1].equalsIgnoreCase("/by")) {
-                    strb.append(" ");
+            while (i < strParse.length
+                    && !strParse[i].equalsIgnoreCase("/by")) {
+                strBuilder.append(strParse[i]);
+                if (i < strParse.length - 1
+                        && !strParse[i + 1].equalsIgnoreCase("/by")) {
+                    strBuilder.append(" ");
                 }
                 i++;
             }
             i++;
-            if (strb.toString().equals("") || (i != strparse.length - 1 && i != strparse.length - 2)) {
+            if (strBuilder.toString().equals("") || (i != strParse.length - 1 && i != strParse.length - 2)) {
                 throw new IncorrectInputException("deadline",
                         "using 'deadline (task) /by yyyy-mm-dd (date) xx:xx (time, optional)'");
             }
-            assert strparse[i - 1].equalsIgnoreCase("/by") : "Deadline missing /by keyword";
-            LocalDate date = LocalDate.parse(strparse[i++]);
-            if (i == strparse.length - 1) {
-                LocalTime time = LocalTime.parse(strparse[i]);
-                return new Deadline(strb.toString(), date, time);
+            assert strParse[i - 1].equalsIgnoreCase("/by") : "Deadline missing /by keyword";
+            LocalDate date = LocalDate.parse(strParse[i++]);
+            if (i == strParse.length - 1) {
+                LocalTime time = LocalTime.parse(strParse[i]);
+                return new Deadline(strBuilder.toString(), date, time);
             } else {
-                return new Deadline(strb.toString(), date);
+                return new Deadline(strBuilder.toString(), date);
             }
         } catch (DateTimeParseException e) {
             throw new IncorrectInputException("deadline",
@@ -119,33 +127,33 @@ public class Parser {
         }
     }
 
-    public Event parseEvent(String[] strparse) throws DukeException {
+    public Event parseEvent(String[] strParse) throws DukeException {
         try {
-            if (strparse.length == 1) {
+            if (strParse.length == 1) {
                 throw new MissingInputException("event");
             }
-            StringBuilder strb = new StringBuilder();
+            StringBuilder strBuilder = new StringBuilder();
             int i = 1;
-            while (i < strparse.length
-                    && !strparse[i].equalsIgnoreCase("/at")) {
-                strb.append(strparse[i]);
-                if (i < strparse.length - 1
-                        && !strparse[i + 1].equalsIgnoreCase("/at")) {
-                    strb.append(" ");
+            while (i < strParse.length
+                    && !strParse[i].equalsIgnoreCase("/at")) {
+                strBuilder.append(strParse[i]);
+                if (i < strParse.length - 1
+                        && !strParse[i + 1].equalsIgnoreCase("/at")) {
+                    strBuilder.append(" ");
                 }
                 i++;
             }
             i++;
-            if (strb.toString().equals("") || (i != strparse.length - 1 && i != strparse.length - 2)) {
+            if (strBuilder.toString().equals("") || (i != strParse.length - 1 && i != strParse.length - 2)) {
                 throw new IncorrectInputException("event",
                         "using 'event (task) /at yyyy-mm-dd (date) xx:xx (time, optional)'");            }
-            assert strparse[i - 1].equalsIgnoreCase("/at") : "Event missing /at keyword";
-            LocalDate date = LocalDate.parse(strparse[i++]);
-            if (i == strparse.length - 1) {
-                LocalTime time = LocalTime.parse(strparse[i]);
-                return new Event(strb.toString(), date, time);
+            assert strParse[i - 1].equalsIgnoreCase("/at") : "Event missing /at keyword";
+            LocalDate date = LocalDate.parse(strParse[i++]);
+            if (i == strParse.length - 1) {
+                LocalTime time = LocalTime.parse(strParse[i]);
+                return new Event(strBuilder.toString(), date, time);
             } else {
-                return new Event(strb.toString(), date);
+                return new Event(strBuilder.toString(), date);
             }
         } catch (DateTimeParseException e) {
             throw new IncorrectInputException("event",
@@ -172,19 +180,19 @@ public class Parser {
         int minute = time.getMinute();
         String hourInString;
         String minuteInString;
-        String AmOrPm;
+        String amOrPm;
         if (hour < 12) {
             hourInString = String.valueOf(hour);
-            AmOrPm = "am";
+            amOrPm = "am";
         } else {
             hourInString = String.valueOf(hour - 12);
-            AmOrPm = "pm";
+            amOrPm = "pm";
         }
         if (minute < 10) {
             minuteInString = "0" + String.valueOf(minute);
         } else {
             minuteInString = String.valueOf(minute);
         }
-        return hourInString + "." + minuteInString + AmOrPm;
+        return hourInString + "." + minuteInString + amOrPm;
     }
 }
