@@ -18,6 +18,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public LocalDate getDueDate() {
+        return this.time;
+    }
+
+    @Override
     public String getFormattedData() {
         String formattedStatus = super.isDone() ? "1|" : "0|";
         return "D|" + formattedStatus + super.getDescription()

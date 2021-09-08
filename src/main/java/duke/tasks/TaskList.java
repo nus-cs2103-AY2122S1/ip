@@ -39,6 +39,10 @@ public class TaskList {
         return taskString.toString();
     }
 
+    public void sort() {
+        this.tasks.sort(null);
+    }
+
     /**
      * Returns the list of tasks as a String
      *
