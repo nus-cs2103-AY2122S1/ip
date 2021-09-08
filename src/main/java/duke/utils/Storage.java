@@ -6,9 +6,18 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
+
+import duke.task.Deadline;
+import duke.task.TASK_TYPE;
 import duke.task.Task;
 
-// Level 7: Created duke.utils.Storage class to maintain storage state
+/**
+ * @author Dr-Octavius
+ *
+ * Class that represents Storage for all Tasks
+ *
+ * @version 1.0
+ */
 public class Storage {
 
     private final File storageFile;
@@ -17,7 +26,12 @@ public class Storage {
     private final String folderPath;
     private final String storagePath;
 
-
+    /**
+     * Class Constructor that takes 2 parameters
+     *
+     * @param folderPath Path to the parent folder of the File
+     * @param fileName Name of the File
+     */
     public Storage(String folderPath, String fileName) {
         this.folderPath = folderPath;
         this.fileName = fileName;
@@ -27,6 +41,11 @@ public class Storage {
         storageFile = getFile();
     }
 
+    /**
+     * Returns storage file as a Java File Object
+     *
+     * @return File Object of the storage file
+     */
     public File getFile() {
         try {
             createFile(folderPath,fileName);
@@ -54,7 +73,11 @@ public class Storage {
         }
     }
 
-    // Level 7: save newly added items to the storage
+    /**
+     * Adds a new task into the storage file
+     *
+     * @param t Task to be added into the storage
+     */
     public void saveEntry(Task t) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(storageFile,true));
@@ -77,7 +100,11 @@ public class Storage {
         }
     }
 
-    // Level 7: delete selected items to the storage
+    /**
+     * Removes task from storage file
+     *
+     * @param t Task to be deleted from storage
+     */
     public void deleteEntry(Task t) {
         try {
             File tempFile = new File(folderPath
