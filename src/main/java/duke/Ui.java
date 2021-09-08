@@ -2,7 +2,6 @@ package duke;
 
 import java.util.ArrayList;
 
-import duke.task.Task;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -71,7 +70,7 @@ public class Ui {
      * @param tasks List of tasks to be printed.
      * @param heading The heading to precede the list of tasks.
      */
-    public void printAll(ArrayList<Task> tasks, String heading) {
+    public void printAll(ArrayList<? extends Object> tasks, String heading) {
         String s = "\n";
         s += INDENT + heading + INDENT + "\n";
         for (int i = 1; i <= tasks.size(); i++) {

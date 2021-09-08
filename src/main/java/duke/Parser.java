@@ -6,6 +6,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 
 /**
@@ -26,6 +27,8 @@ public class Parser {
             return new ByeCommand();
         } else if (cmd.equals("list")) {
             return new ListCommand();
+        } else if (cmd.equals("help")) {
+            return new HelpCommand();
         } else if (arr[0].equals("find")) {
             if (arr.length == 1) {
                 throw new DukeException("Enter search keyword to find tasks");

@@ -1,37 +1,43 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
 /**
- * Class to execute the exit command.
+ * Class used to execute help command.
  */
-public class ByeCommand implements Command {
+public class HelpCommand implements Command {
+
+    private ArrayList<Command> commandList = new ArrayList<>();
 
     /**
-     * Execute command.
+     * Execute Help command.
      *
-     * @param taskList TaskList that manages all current tasks.
-     * @param ui Ui used to print messages.
-     * @param storage Loads and saves the tasks to a txt file.
+     * @param taskList Manages all current tasks.
+     * @param ui       Used to print messages.
+     * @param storage  Loads and saves the tasks to a txt file.
      * @throws DukeException Thrown if there are input/parsing errors.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        storage.save(taskList.getTasks());
-        ui.exit();
+        Collections.addAll(commandList, new ListCommand(), new AddTaskCommand(), new FindCommand(),
+                new DoneCommand(), new DeleteCommand(), new HelpCommand(), new ByeCommand(), new HelpCommand());
+        ui.printAll(commandList, "Command Help: \n");
     }
 
     /**
      * Returns a boolean to determine if Duke should stop running.
      *
-     * @return A boolean true as this is an exit command.
+     * @return A boolean false as this is not an exit command.
      */
     @Override
     public boolean isExit() {
-        return true;
+        return false;
     }
 
     /**
@@ -57,6 +63,6 @@ public class ByeCommand implements Command {
      */
     @Override
     public String toString() {
-        return "bye  [exit duke]";
+        return "help  [find details of all features]";
     }
 }
