@@ -57,5 +57,11 @@ public class Duke {
         return result;
     }
 
-
+    /**
+     * Gets the standard welcome message from Ui.
+     * @return welcome message
+     */
+    public String getWelcomeMessage() {
+        return ui.showWelcomeMessage();
+    }
 }

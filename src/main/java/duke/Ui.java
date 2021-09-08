@@ -1,12 +1,8 @@
 package duke;
 
 import duke.task.Task;
-import duke.task.ToDo;
-import duke.task.Event;
-import duke.task.Deadline;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Deals with interactions with the user.
@@ -16,6 +12,10 @@ public class Ui {
     private boolean isExit;
     private String response;
 
+    private static final String DIVIDER = "-------------------------------------";
+    private static final String LS = System.lineSeparator();
+    private static final String WELCOME_MESSAGE = "Hello! I'm Duke \n" + "What can I do for you?";
+
     /**
      * Constructs a Ui Object.
      */
@@ -23,28 +23,33 @@ public class Ui {
         isExit = false;
     }
 
+    /** Shows message(s) to the user in CLI
+     *
+     * Inspired by addressbook-level 2 Ui.
+     */
+    public void showToUser(String... message) {
+        for (String m : message) {
+            System.out.println(m);
+        }
+    }
+
     /**
      * Prints a standard line break.
      */
     public void showDivider() {
-        System.out.println("-------------------------------------");
+        System.out.println(DIVIDER);
     }
 
     /**
-     * Prints greeting statement.
+     * Prints welcome message statement to the terminal and returns the message.
      */
-    public void greet() {
-        String logo = " ____        _\n"
-                + "|  _ \\ _   _| | _____\n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
-        System.out.println(logo);
-        showDivider();
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-        showDivider();
+    public String showWelcomeMessage() {
+        showToUser(
+                DIVIDER,
+                WELCOME_MESSAGE,
+                DIVIDER
+        );
+        return WELCOME_MESSAGE;
     }
 
     /**

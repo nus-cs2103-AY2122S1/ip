@@ -52,4 +52,16 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
+
+    /**
+     * Creates a dialog box from Duke that contains the welcome message.
+     *
+     * Called by the start method in Main.java
+     */
+    public void welcomeMessage() {
+        String message = duke.getWelcomeMessage();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(message, dukeImage)
+        );
+    }
 }
