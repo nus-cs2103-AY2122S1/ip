@@ -57,12 +57,15 @@ public class Storage {
                 String line = myReader.nextLine();
 
                 // While creating duke.task from String, possibly corrupted file.
-                Task task;
+                Task task = null;
                 try {
                     task = createTaskFromString(line);
                 } catch (DukeException e) {
                     throw new DukeException(ERROR_FAILED_LOAD_CORRUPTED_FILE);
                 }
+
+                // asserts task to be added is not null
+                assert(task != null);
 
                 // Add successfully created duke.task to the list.
                 tasks.add(task);
@@ -107,6 +110,11 @@ public class Storage {
         try {
             FileWriter writer = new FileWriter(FILEPATH);
             String fileString = tasks.getFileString(DELIMITER, IDENTIFIER_DONE, IDENTIFIER_NOT_DONE);
+
+            // asserts fileString is not empty or null
+            assert(fileString != null);
+            assert(!fileString.equals(""));
+
             writer.write(fileString);
             writer.flush();
             writer.close();
