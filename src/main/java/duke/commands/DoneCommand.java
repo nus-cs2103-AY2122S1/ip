@@ -28,6 +28,8 @@ public class DoneCommand extends Command {
         } catch (NumberFormatException e) {
             throw new InvalidDescriptionException("Please append a task number after 'done'.");
         }
+
+        assert index > 0 : "Index provided is negative";
     }
     @Override
     public CommandResult execute() {
