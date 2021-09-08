@@ -11,10 +11,8 @@ repositories {
 sourceSets {
     main {
         java {
-            srcDirs = ['src']
         }
     }
 }
 dependencies {
-    compile 'junit:junit:4.12'
 }
