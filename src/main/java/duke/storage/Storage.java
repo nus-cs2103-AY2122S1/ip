@@ -57,6 +57,7 @@ public class Storage {
     public static ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(FileName);
+        assert !file.equals(null) : "load file should not be null";
         try {
             Scanner sc = new Scanner(file);
             System.out.println("Past tasks found. Use command \"list\" to list previous tasks.");
