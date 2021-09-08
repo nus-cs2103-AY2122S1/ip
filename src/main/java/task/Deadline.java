@@ -1,13 +1,11 @@
 package task;
 
-import task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a deadline under Task class with date-time format
- * Allows users to get_type and get_task
+ * Represents a deadline under Task class with date-time format.
+ * Allows users to get_type and get_task.
  */
 public class Deadline extends Task {
     private String type;
@@ -17,8 +15,8 @@ public class Deadline extends Task {
 
 
     /**
-     * Constructor to create a deadline task for newly inputed messages
-     * Sieve out the task and date separately
+     * Constructor to create a deadline task for newly inputed messages.
+     * Sieve out the task and date separately.
      *
      * @param message String the user input message
      */
@@ -31,11 +29,11 @@ public class Deadline extends Task {
 
 
     /**
-     * Constructor to create a deadline task for Duke.txt lines
-     * Sieve out the task and date separately
+     * Constructor to create a deadline task for Duke.txt lines.
+     * Sieve out the task and date separately.
      *
-     * @param message String the lines in Duke.txt file
-     * @param isDuke Boolean to differentiate between 2 constructors, always true
+     * @param message String the lines in Duke.txt file.
+     * @param isDuke Boolean to differentiate between 2 constructors, always true.
      */
     public Deadline (String message, boolean isDuke) {
         super(message);
@@ -55,8 +53,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Sieve out the task + date portion of the message
-     * Only for newly inputed messages
+     * Sieve out the task + date portion of the message.
+     * Only for newly inputed messages.
      *
      */
     @Override
@@ -64,26 +62,26 @@ public class Deadline extends Task {
         int startIndex = 0;
         int endIndex = 0;
         for (int i = 0; i < this.message.length(); i++) {
-            if (this.message.substring(i, i+1).equals("d")) {
+            if (this.message.substring(i, i + 1).equals("d")) {
                 startIndex = i + 8;
                 break;
             }
         }
         for (int i = 0; i < this.message.length(); i++) {
-            if (this.message.substring(i, i+1).equals("/")) {
+            if (this.message.substring(i, i + 1).equals("/")) {
                 endIndex = i - 1;
                 break;
             }
         }
-        this.task = message.substring(startIndex,endIndex)
+        this.task = message.substring(startIndex, endIndex)
                 + " (by "
                     + this.getDateTime()
                         + ")";
     }
 
     /**
-     * Sieve out the task + date portion of the message
-     * Only for lines in Duke.txt
+     * Sieve out the task + date portion of the message.
+     * Only for lines in Duke.txt.
      *
      */
     @Override
@@ -91,18 +89,18 @@ public class Deadline extends Task {
         int startIndex = 0;
         int endIndex = 0;
         for (int i = 0; i < this.message.length(); i++) {
-            if (this.message.substring(i, i+1).equals("d")) {
+            if (this.message.substring(i, i + 1).equals("d")) {
                 startIndex = i + 9;
                 break;
             }
         }
         for (int i = 0; i < this.message.length(); i++) {
-            if (this.message.substring(i, i+1).equals("(")) {
+            if (this.message.substring(i, i + 1).equals("(")) {
                 endIndex = i - 1;
                 break;
             }
         }
-        this.task = message.substring(startIndex,endIndex)
+        this.task = message.substring(startIndex, endIndex)
                 + " "
                     + this.getDateTime2();
     }
@@ -113,15 +111,15 @@ public class Deadline extends Task {
     }
 
     /**
-     * Sieve out the date portion of the message as LocalDate object
-     * Only for newly inputed message
+     * Sieve out the date portion of the message as LocalDate object.
+     * Only for newly inputed message.
      *
      */
     @Override
     public void setDateTime() {
         int startIndex = 0;
         for (int i = 0; i < this.message.length(); i++) {
-            if (this.message.substring(i, i+1).equals("/")) {
+            if (this.message.substring(i, i + 1).equals("/")) {
                 startIndex = i + 4;
                 break;
             }
@@ -132,8 +130,8 @@ public class Deadline extends Task {
 
 
     /**
-     * Sieve out the date portion of the message
-     * Only for Duke.txt messages
+     * Sieve out the date portion of the message.
+     * Only for Duke.txt messages.
      *
      */
     public void setDateTime2() {
@@ -144,8 +142,8 @@ public class Deadline extends Task {
 
 
     /**
-     * Print out the LocalDate object as month date year format
-     * Only for newly inputed messages
+     * Print out the LocalDate object as month date year format.
+     * Only for newly inputed messages.
      *
      * @return date string
      *

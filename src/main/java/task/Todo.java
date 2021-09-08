@@ -1,10 +1,9 @@
 package task;
 
-import task.Task;
 
 /**
- * Represents a todo under Task class
- * Allows users to get_type and get_task
+ * Represents a todo under Task class.
+ * Allows users to get_type and get_task.
  */
 public class Todo extends Task {
     private String type;
@@ -14,13 +13,12 @@ public class Todo extends Task {
 
 
     /**
-     * Constructor to create a todo task for newly inputed messages
-     * Sieve out the task and date separately
+     * Constructor to create a todo task for newly inputed messages.
+     * Sieve out the task and date separately.
      *
-     * @param message String the user input message
+     * @param message String the user input message.
      */
-    public Todo (
-            String message) {
+    public Todo (String message) {
         super(message);
         this.setDateTime();
         this.setTask();
@@ -29,15 +27,13 @@ public class Todo extends Task {
 
 
     /**
-     * Constructor to create a todo task for Duke.txt lines
-     * Sieve out the task and date separately
+     * Constructor to create a todo task for Duke.txt lines.
+     * Sieve out the task and date separately.
      *
-     * @param message String the lines in Duke.txt file
-     * @param isDuke Boolean to differentiate between 2 constructors, always true
+     * @param message String the lines in Duke.txt file.
+     * @param isDuke Boolean to differentiate between 2 constructors, always true.
      */
-    public Todo (
-            String message,
-                Boolean isDuke) {
+    public Todo (String message, Boolean isDuke) {
         super(message);
         this.setDateTime();
         this.setTask2();
@@ -50,37 +46,41 @@ public class Todo extends Task {
     }
 
     /**
-     * Sieve out the task + date portion of the message
-     * Only for newly inputed messages
+     * Sieve out the task + date portion of the message.
+     * Only for newly inputed messages.
      *
      */
     @Override
     public void setTask() {
         int startIndex = 0;
-        for (int i = 0; i < this.message.length(); i++) {
-            if (this.message.substring(i, i+1).equals("o")) {
+
+        for (int i = 0; i < getMessage().length(); i++) {
+            if (getMessage().substring(i, i + 1).equals("o")) {
                 startIndex = i + 4;
                 break;
             }
         }
-        this.task = " " + message.substring(startIndex);
+
+        this.task = " " + getMessage().substring(startIndex);
     }
 
     /**
-     * Sieve out the task + date portion of the message
-     * Only for lines in Duke.txt
+     * Sieve out the task + date portion of the message.
+     * Only for lines in Duke.txt.
      *
      */
     @Override
     public void setTask2() {
         int startIndex = 0;
-        for (int i = 0; i < this.message.length(); i++) {
-            if (this.message.substring(i, i+1).equals("o")) {
+
+        for (int i = 0; i < getMessage().length(); i++) {
+            if (getMessage().substring(i, i + 1).equals("o")) {
                 startIndex = i + 4;
                 break;
             }
         }
-        this.task = message.substring(startIndex);
+
+        this.task = getMessage().substring(startIndex);
     }
 
     @Override
