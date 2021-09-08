@@ -16,6 +16,55 @@ import java.util.HashMap;
  */
 public abstract class Command {
 
+    public enum CommandType {
+        TODO("todo"),
+        DEADLINE("deadline"),
+        EVENT("event"),
+        DELETE("delete"),
+        DONE("done"),
+        FIND("find"),
+        GET("get"),
+        BYE("bye"),
+        LIST("list"),
+        HELP("help"),
+        INVALID("");
+
+        private String type;
+
+        CommandType(String type) {
+            this.type = type;
+        }
+
+        //@@author Morrow1ndy-reused
+        // with minor modifications
+        public static CommandType parseTypeFromCommandWord(String word) {
+            switch (word) {
+            case "todo":
+                return TODO;
+            case "deadline":
+                return DEADLINE;
+            case "event":
+                return EVENT;
+            case "delete":
+                return DELETE;
+            case "done":
+                return DONE;
+            case "find":
+                return FIND;
+            case "get":
+                return GET;
+            case "bye":
+                return BYE;
+            case "list":
+                return LIST;
+            case "help":
+                return HELP;
+            default:
+                return INVALID;
+            }
+        }
+    }
+
     protected Ui ui;
     protected TaskList taskList;
 
