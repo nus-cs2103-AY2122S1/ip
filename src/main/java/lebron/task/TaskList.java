@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import lebron.Lebron;
 import lebron.Ui;
+import lebron.exception.LebronException;
 
 /**
  * Represents the list of tasks.
@@ -55,7 +56,10 @@ public class TaskList {
      *
      * @param pos the position of the task in the list to delete
      */
-    public String delete(int pos) {
+    public String delete(int pos) throws LebronException {
+        if (pos > tasks.size() - 1) {
+            throw new LebronException("Invalid index!");
+        }
         Task task = tasks.remove(pos);
         String reply = ui.replyDelete(task, tasks.size());
         return reply;
