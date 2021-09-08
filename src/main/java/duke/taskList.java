@@ -15,6 +15,10 @@ public class taskList {
     private boolean isFirstTimeOpening;
     private Storage memory;
 
+    private String toDoIndicator = "[T]";
+    private String deadlineIndicator = "[D]";
+    private String eventIndicator = "[E]";
+
     /**
      * The constructor for the List class that instantiates a List object.
      */
@@ -25,8 +29,7 @@ public class taskList {
         this.memory = new Storage("data/memory.txt");
     }
 
-
-    public taskList(File memory)  {
+    public taskList(File memory) {
         this.taskList = new ArrayList<Task>();
         this.memory = new Storage(memory.getPath());
 
@@ -45,12 +48,14 @@ public class taskList {
             int numberAdded = 1;
 
             while ((currentLine = reader.readLine()) != null) {
+
+                assert currentLine.length() > 4;
                 String[] seperate1 = currentLine.toString().split(" ", 2);
                 String taskTypeText = seperate1[0];
                 String taskType;
 
                 String[] seperate2 = seperate1[1].toString().split(" ", 2);
-                boolean isCompleted = (seperate2[0].equals("[✓]"))? true: false;
+                boolean isCompleted = (seperate2[0].equals("[✓]")) ? true : false;
                 String eventInfo = seperate2[1];
 
                 switch(taskTypeText) {
@@ -72,7 +77,7 @@ public class taskList {
                         break;
                 }
 
-                if (isCompleted){
+                if (isCompleted) {
                     this.updateTaskStatus(numberAdded, false);
                 }
                 numberAdded++;
@@ -102,7 +107,7 @@ public class taskList {
     public String printList() {
         int numb = 1;
         String output = "Here are the tasks in your list:";
-        for(Task task: taskList) {
+        for (Task task: taskList) {
             output += "\n" + numb + ". " + task.printName();
             numb++;
         }
@@ -120,7 +125,7 @@ public class taskList {
         String output = "";
 
         if (userInput > taskList.size()) {
-            output ="please enter a number that's between 1 and " + taskList.size();
+            output = "please enter a number that's between 1 and " + taskList.size();
             System.out.println(output);
             return output;
         }
@@ -214,8 +219,8 @@ public class taskList {
         taskList.add(task);
 
         if (isInput) {
-            String output = "Got it. I've added this task:" + "\n" + task.printName() +
-                    "\nNow you have " + taskList.size() + " tasks in the list.";
+            String output = "Got it. I've added this task:" + "\n" + task.printName()
+                    + "\nNow you have " + taskList.size() + " tasks in the list.";
             this.memory.addTaskToMemory(task.printName());
             System.out.println(output);
             return output;
@@ -233,8 +238,8 @@ public class taskList {
         String taskName = task.printName();
 
         taskList.remove(userInput);
-        String output = "Noted. I've removed the task:\n" + taskName +
-                "\nNow you have " + taskList.size() + " tasks in the list.";
+        String output = "Noted. I've removed the task:\n" + taskName
+                + "\nNow you have " + taskList.size() + " tasks in the list.";
         System.out.println(output);
 
         String lineToRemove = task.printName();
@@ -274,7 +279,7 @@ public class taskList {
     public String findWord(String keyWord) {
         String output = "Here are the matching tasks in your list:";
         int numb = 1;
-        for(Task task: taskList) {
+        for (Task task: taskList) {
             if (task.getName().contains(keyWord)) {
                 output += "\n" + numb + ". " + task.printName();
                 numb++;

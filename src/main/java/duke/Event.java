@@ -4,9 +4,9 @@ package duke;
  *
  * @author Dominic Siew Zhen Yu
  */
-public class Event extends Task{
+public class Event extends Task {
     private String timeline;
-    String TASKINDICATOR = "[E]";
+    private String TASKINDICATOR = "[E]";
 
     /**
      * The constructor of the events class.
