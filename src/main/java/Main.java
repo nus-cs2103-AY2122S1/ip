@@ -1,6 +1,7 @@
-import duke.Duke;
-import java.io.IOException;
 import java.io.File;
+import java.io.IOException;
+
+import duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

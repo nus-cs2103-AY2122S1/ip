@@ -6,35 +6,12 @@ package duke;
  *
  */
 public class Ui {
-
-    /**
-     * Prints out the logo of the DukeBot.
-     *
-     */
-    public static void logo() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-    }
-
-    /**
-     * Prints out the standard border between each print statement of the bot.
-     *
-     */
-    public static String border() {
-        return "──────────────────────────────────────────\n";
-    }
-
-
     /**
      * Prints out the welcome message upon startup of the bot.
      *
      */
-    public static void welcomeMessage() {
-        System.out.println("What can i do for you?");
+    public static String welcomeMessage() {
+        return "Hello this is Duke! What can I do for you today?";
     }
 
     /**
@@ -49,8 +26,8 @@ public class Ui {
      * Prints out the goodbye message once user closes the bot.
      *
      */
-    public static void goodbye() {
-        System.out.println("Bye, hope to see you again soon!");
+    public static String goodbye() {
+        return "Bye, hope to see you again soon!";
     }
 
 

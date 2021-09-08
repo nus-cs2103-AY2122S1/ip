@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Parser is a static class that interprets the users inputs.
+ * Parser is a static class that interprets the user's inputs.
  *
  * @author meerian
  */
