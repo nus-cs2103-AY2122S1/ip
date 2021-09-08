@@ -102,6 +102,11 @@ public class Ui {
         return text;
     }
 
+    public String undoUi() {
+        String text = "Okay, I have helped undo your most recent command!\n";
+        return text;
+    }
+
     /**
      * Returns the key 4 information from users' input encapsulated in a ArrayList of String.
      * They are: operationType, task, time, index. They will be useful when executing in Duke programme.
