@@ -1,9 +1,12 @@
 package duke.command;
 
 import duke.Action;
+import duke.Parser;
 import duke.Storage;
 import duke.StringUtils;
 import duke.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -48,8 +51,27 @@ public class EditCommand extends Command {
     @Override
     public String execute(TaskList taskList, Storage storage) {
         Task temp = taskList.getTask(index);
-        temp.setDescription(description);
-        taskList.setTask(temp, index);
-        return StringUtils.getEditMessage(temp);
+        if (description.contains("/by")) {
+            Deadline d = (Deadline) temp;
+            String[] arr = Parser.parseEditInfo(description);
+            assert arr.length == 2 : "Parse edit info error";
+            d.setDeadlineTime(Parser.parseDateTime(arr[1]));
+            if (!arr[0].equals("")) {
+                d.setDescription(arr[0]);
+            }
+            return StringUtils.getEditMessage(d);
+        } else if (description.contains("/at")) {
+            Event e = (Event) temp;
+            String[] arr = Parser.parseEditInfo(description);
+            assert arr.length == 2 : "Parse edit info error";
+            e.setEventTime(Parser.parseDateTime(arr[1]));
+            if (!arr[0].equals("")) {
+                e.setDescription(arr[0]);
+            }
+            return StringUtils.getEditMessage(e);
+        } else {
+            temp.setDescription(description);
+            return StringUtils.getEditMessage(temp);
+        }
     }
 }

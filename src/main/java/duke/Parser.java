@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import duke.command.AddCommand;
+import duke.command.CloneCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.EditCommand;
@@ -53,6 +54,8 @@ public class Parser {
             return Action.FIND;
         case "edit":
             return Action.EDIT;
+        case "clone":
+            return Action.CLONE;
         default:
             return Action.UNKNOWN;
         }
@@ -178,10 +181,36 @@ public class Parser {
                 throw new DukeException("A number must be given to specified the task.");
             }
         }
+        case CLONE: {
+            try {
+                int taskNumber = Integer.parseInt(rest);
+                return new CloneCommand(taskNumber - 1);
+            } catch (NumberFormatException e) {
+                throw new DukeException("A number must be given to specified the task.");
+            }
+        }
         case UNKNOWN:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         default:
             return null;
         }
+    }
+
+    /**
+     * Returns the edit command info based on the given input.
+     *
+     * @param input The given input.
+     * @return The edit command info based on the given input.
+     */
+    public static String[] parseEditInfo(String input) {
+        String[] arr;
+        if (input.contains("/by")) {
+            arr = input.indexOf("/by") != 0 ? input.split(" /by ") : input.split("/by ");
+        } else if (input.contains("/at")) {
+            arr = input.indexOf("/at") != 0 ? input.split(" /at ") : input.split("/at ");
+        } else {
+            arr = new String[]{input};
+        }
+        return arr;
     }
 }

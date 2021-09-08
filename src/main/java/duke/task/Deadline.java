@@ -11,7 +11,7 @@ import duke.Ui;
  */
 public class Deadline extends Task {
     /** Deadline time of the task. */
-    private final LocalDateTime deadlineTime;
+    private LocalDateTime deadlineTime;
 
     /**
      * Constructs a Deadline instance using the given description and deadline time.
@@ -34,6 +34,14 @@ public class Deadline extends Task {
     public Deadline(String description, boolean isDone, LocalDateTime deadlineTime) {
         super(description, isDone);
         this.deadlineTime = deadlineTime;
+    }
+
+    public void setDeadlineTime(LocalDateTime deadlineTime) {
+        this.deadlineTime = deadlineTime;
+    }
+
+    public LocalDateTime getDeadlineTime() {
+        return this.deadlineTime;
     }
 
     /**
