@@ -132,6 +132,13 @@ public class Ui {
         return taskList;
     }
 
+    /**
+     * Show that the task has been tagged.
+     *
+     * @param tag The tag that is added.
+     * @param task The task that is tagged.
+     * @return Task has been tagged.
+     */
     public String showTag(String tag, Task task) {
         String tagTemplate = "%s has been tagged to this task:\n%s";
         String tagDone = String.format(tagTemplate, tag, task.toString());

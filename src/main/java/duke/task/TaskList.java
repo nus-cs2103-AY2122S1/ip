@@ -137,6 +137,13 @@ public class TaskList {
         return newTasks;
     }
 
+    /**
+     * Add tag to the task.
+     *
+     * @param tag Tag to be added.
+     * @param taskNumber Task number of the task to be tagged.
+     * @throws DukeException If task get method has an error.
+     */
     public void addTag(String tag, int taskNumber) throws DukeException {
         assert taskNumber >= 1;
 

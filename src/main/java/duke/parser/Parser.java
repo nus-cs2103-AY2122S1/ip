@@ -1,6 +1,14 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.LostCommand;
+import duke.command.TagCommand;
 import duke.exception.DukeException;
 
 /**
@@ -98,7 +106,7 @@ public class Parser {
             String tag = fullCommand.split("#")[1];
             int taskNumber = Integer.parseInt(fullCommand.split(" ")[1]);
             newCommand = new TagCommand(tag, taskNumber);
-        } catch (IndexOutOfBoundsException | NumberFormatException e ) {
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeException("OOPS!!! Please enter a valid number/tag.");
         }
 
