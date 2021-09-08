@@ -81,7 +81,7 @@ public class TaskList {
     public String listTasks() {
         int n = 0;
 
-        StringBuilder message = new StringBuilder(Message.FORMAT_LINE + "\n");
+        StringBuilder message = new StringBuilder();
 
         message.append("Below are some of the tasks in your list!\n");
 
@@ -90,8 +90,6 @@ public class TaskList {
 
             n++;
         }
-
-        message.append(Message.FORMAT_LINE);
 
         return message.toString();
     }
@@ -136,7 +134,7 @@ public class TaskList {
 
             String taskCount = "Now you have " + this.count + " task(s) in the list!";
 
-            return Message.separateMessage(Message.ADD + "     " + recentlyAdded + "\n" + taskCount);
+            return (Message.ADD + "     " + recentlyAdded + "\n" + taskCount);
         } catch (EmptyTaskException e) {
             return Message.separateMessage(e.toString());
         }
@@ -229,7 +227,7 @@ public class TaskList {
 
                 assert t.isDone : "Task should be set to done, but is_done status is still false;";
 
-                return Message.separateMessage(Message.DONE + "     " + t + "\n" + Message.REWARD);
+                return (Message.DONE + "     " + t + "\n" + Message.REWARD);
             }
         } catch (IndexOutOfBoundsException e) {
             return Message.separateMessage(e.toString());
@@ -259,7 +257,7 @@ public class TaskList {
 
                 String taskCount = "Now you have " + count + " task(s) in the list!";
 
-                return Message.separateMessage(Message.DELETE + "     " + removed + "\n" + taskCount);
+                return (Message.DELETE + "     " + removed + "\n" + taskCount);
             }
         } catch (IndexOutOfBoundsException e) {
             return Message.separateMessage(e.toString());
@@ -280,7 +278,7 @@ public class TaskList {
                                         .filter(task -> task.toString().contains(arr[1]))
                                         .collect(Collectors.toList());
 
-        StringBuilder message = new StringBuilder(Message.FORMAT_LINE + "\n");
+        StringBuilder message = new StringBuilder();
 
         if (filteredTasks.size() == 0) {
             message.append("There are no matching tasks in your list. ☹\n");
@@ -294,11 +292,10 @@ public class TaskList {
                 n++;
             }
 
-            assert n == filteredTasks.size() + 1 : "Task numbers displayed for tasks " +
-                    "(containing matching keywords) did not increment as expected;";
+            assert n == filteredTasks.size() + 1
+                    : "Task numbers displayed for tasks "
+                    + "(containing matching keywords) did not increment as expected;";
         }
-
-        message.append(Message.FORMAT_LINE);
 
         return message.toString();
     }
@@ -312,7 +309,7 @@ public class TaskList {
     public String remindMe() {
         List<Task> recentTasks = findRecentTasks();
 
-        StringBuilder message = new StringBuilder(Message.FORMAT_LINE + "\n" + Message.REMIND);
+        StringBuilder message = new StringBuilder();
 
         if (recentTasks.size() == 0) {
             message.append("Good news! You don't have any deadlines/events coming up in the next 7 days!\n");
@@ -326,11 +323,10 @@ public class TaskList {
                 n++;
             }
 
-            assert n == recentTasks.size() + 1 : "Task numbers displayed for tasks " +
-                    "(containing matching keywords) did not increment as expected;";
+            assert n == recentTasks.size() + 1
+                    : "Task numbers displayed for tasks "
+                    + "(containing matching keywords) did not increment as expected;";
         }
-
-        message.append(Message.FORMAT_LINE);
 
         return message.toString();
     }
@@ -383,7 +379,7 @@ public class TaskList {
      * @return A String that provides a short list of commands users can use with Bubbles.
      */
     public String help() {
-        return Message.separateMessage(Message.HELP.toString());
+        return Message.HELP.toString();
     }
 
     /**

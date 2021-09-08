@@ -32,10 +32,10 @@ public class Ui {
             String input = sc.nextLine();
 
             if (input.equals("bye")) {
-                System.out.println(Message.separateMessage(Message.EXIT.toString()));
+                System.out.println(Message.EXIT);
                 break;
             } else {
-                System.out.println(Message.separateMessage(input));
+                System.out.println(input);
             }
         }
 
@@ -62,6 +62,6 @@ public class Ui {
         sc.close();
 
         storage.writeTasks();
-        return (Message.separateMessage(Message.EXIT.toString()));
+        return Message.EXIT.toString();
     }
 }

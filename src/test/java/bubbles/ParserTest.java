@@ -1,9 +1,10 @@
 package bubbles;
 
-import bubbles.util.Parser;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import bubbles.util.Parser;
 
 public class ParserTest {
     @Test

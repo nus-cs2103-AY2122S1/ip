@@ -40,7 +40,7 @@ public class Bubbles {
     }
 
     private void run() {
-        System.out.println(Message.separateMessage(Message.WELCOME.toString()));
+        System.out.println(Message.WELCOME);
 
         String input;
         while (!(input = ui.readCommand()).equals("bye")) {

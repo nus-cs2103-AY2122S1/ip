@@ -1,8 +1,8 @@
 package bubbles.tasks;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
     // as we are printing out the output, we can test what we sent to System.out.println() for printing
