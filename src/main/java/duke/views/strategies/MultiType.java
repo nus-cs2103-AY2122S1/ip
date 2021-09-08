@@ -14,6 +14,7 @@ import duke.views.Response;
 import duke.views.strategies.commands.AddDeadlineCommand;
 import duke.views.strategies.commands.AddEventCommand;
 import duke.views.strategies.commands.AddTodoCommand;
+import duke.views.strategies.commands.Command;
 import duke.views.strategies.commands.DeleteCommand;
 import duke.views.strategies.commands.FindCommand;
 import duke.views.strategies.commands.ListCommand;
@@ -25,15 +26,6 @@ import duke.views.strategies.commands.OccurringOnCommand;
  */
 public class MultiType extends RespondWith {
 
-    private static final String LIST = "list";
-    private static final String DONE = "done";
-    private static final String TODO = "todo";
-    private static final String DEADLINE = "deadline";
-    private static final String EVENT = "event";
-    private static final String DELETE = "delete";
-    private static final String ON = "on";
-    private static final String FIND = "find";
-
     private final TaskList userTasks;
 
     /**
@@ -41,14 +33,14 @@ public class MultiType extends RespondWith {
      */
     public MultiType() {
         userTasks = new TaskList();
-        commands.put(LIST, ListCommand.getInstance(userTasks));
-        commands.put(DONE, MarkDoneCommand.getInstance(userTasks));
-        commands.put(TODO, AddTodoCommand.getInstance(userTasks));
-        commands.put(DEADLINE, AddDeadlineCommand.getInstance(userTasks));
-        commands.put(EVENT, AddEventCommand.getInstance(userTasks));
-        commands.put(DELETE, DeleteCommand.getInstance(userTasks));
-        commands.put(ON, OccurringOnCommand.getInstance(userTasks));
-        commands.put(FIND, FindCommand.getInstance(userTasks));
+        commands.put(Command.LIST, ListCommand.getInstance(userTasks));
+        commands.put(Command.DONE, MarkDoneCommand.getInstance(userTasks));
+        commands.put(Command.TODO, AddTodoCommand.getInstance(userTasks));
+        commands.put(Command.DEADLINE, AddDeadlineCommand.getInstance(userTasks));
+        commands.put(Command.EVENT, AddEventCommand.getInstance(userTasks));
+        commands.put(Command.DELETE, DeleteCommand.getInstance(userTasks));
+        commands.put(Command.ON, OccurringOnCommand.getInstance(userTasks));
+        commands.put(Command.FIND, FindCommand.getInstance(userTasks));
     }
 
     @Override

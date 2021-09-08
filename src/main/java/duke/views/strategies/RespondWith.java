@@ -44,6 +44,13 @@ public abstract class RespondWith {
 
     }
 
+    /**
+     * Returns a Response object that not only encapsulates a text message but also
+     * additional metadata.
+     *
+     * @param query Incoming input.
+     * @return Response object.
+     */
     public Response respondWithMetadata(String query) {
         Command f = commands.get(query.split(" ")[0]);
         if (f != null) {

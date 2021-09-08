@@ -4,6 +4,9 @@ import duke.domain.Task;
 import duke.domain.TaskList;
 import duke.domain.Todo;
 
+/**
+ * Encapsulates a command to add a to-do object to the task list.
+ */
 public class AddTodoCommand extends TaskCommand {
     private static Command singleInstance;
 
@@ -21,7 +24,7 @@ public class AddTodoCommand extends TaskCommand {
     @Override
     public String produce(String query) {
         assert query != null;
-        Task task = new Todo(query.substring(todo.length()).strip());
+        Task task = new Todo(query.substring(TODO.length()).strip());
         boolean isUnique = userTasks.add(task);
         if (!isUnique) {
             return getDuplicateMessage();

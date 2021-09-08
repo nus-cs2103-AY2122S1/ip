@@ -1,8 +1,8 @@
 package duke;
 
 import duke.views.cli.Cli;
-import duke.views.strategies.MultiType;
 import duke.views.gui.Launcher;
+import duke.views.strategies.MultiType;
 import javafx.application.Application;
 
 public class Duke {

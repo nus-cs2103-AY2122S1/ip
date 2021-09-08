@@ -62,6 +62,7 @@ public class TaskList implements Iterable<Task> {
         Task removedTask = tasks.remove(index);
         assert removedTask != null;
         tasks.remove(removedTask);
+        taskSet.remove(removedTask);
         return removedTask;
     }
 

@@ -4,6 +4,9 @@ import duke.domain.Task;
 import duke.domain.TaskList;
 import duke.shared.DukeException;
 
+/**
+ * Encapsulates a command to mark a task object as complete.
+ */
 public class MarkDoneCommand extends TaskCommand {
     private static Command singleInstance;
 
@@ -22,7 +25,7 @@ public class MarkDoneCommand extends TaskCommand {
     public String produce(String query) throws DukeException {
         assert query != null;
         try {
-            int index = Integer.parseInt(query.substring(done.length()).strip()) - 1;
+            int index = Integer.parseInt(query.substring(DONE.length()).strip()) - 1;
             boolean isWithinBounds = index < userTasks.size() && index >= 0;
             if (!isWithinBounds) {
                 throw DukeException.createIndexOutOfBoundsException(userTasks.size(), index + 1);

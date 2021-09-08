@@ -9,6 +9,9 @@ import duke.domain.Task;
 import duke.domain.TaskList;
 import duke.shared.DukeException;
 
+/**
+ * Encapsulates a command to filter out deadline and event objects by datetime from the task list.
+ */
 public class OccurringOnCommand extends TaskCommand {
     private static Command singleInstance;
 
@@ -26,7 +29,7 @@ public class OccurringOnCommand extends TaskCommand {
     @Override
     public String produce(String query) throws DukeException {
         assert query != null;
-        String dateQuery = query.substring(on.length()).strip();
+        String dateQuery = query.substring(ON.length()).strip();
         if (dateQuery.length() == 0) {
             dateQuery = Constants.Input.DATETIME_FORMATTER.format(LocalDateTime.now());
         }

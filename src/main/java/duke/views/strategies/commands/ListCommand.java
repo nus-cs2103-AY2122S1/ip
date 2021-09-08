@@ -2,6 +2,9 @@ package duke.views.strategies.commands;
 
 import duke.domain.TaskList;
 
+/**
+ * Encapsulates a command to display the task list.
+ */
 public class ListCommand extends TaskCommand {
     private static Command singleInstance;
 

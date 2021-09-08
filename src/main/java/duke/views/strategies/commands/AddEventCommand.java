@@ -5,6 +5,9 @@ import duke.domain.Task;
 import duke.domain.TaskList;
 import duke.shared.DukeException;
 
+/**
+ * Encapsulates a command to add an event object to the task list.
+ */
 public class AddEventCommand extends TaskCommand {
     private static Command singleInstance;
 
@@ -22,7 +25,7 @@ public class AddEventCommand extends TaskCommand {
     @Override
     public String produce(String query) throws DukeException {
         assert query != null;
-        String[] queries = query.substring(event.length()).split("/at");
+        String[] queries = query.substring(EVENT.length()).split("/at");
         if (queries.length != 2) {
             throw DukeException.createArgumentCountException(2, queries.length);
         }

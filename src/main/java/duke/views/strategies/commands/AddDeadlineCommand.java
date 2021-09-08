@@ -5,6 +5,9 @@ import duke.domain.Task;
 import duke.domain.TaskList;
 import duke.shared.DukeException;
 
+/**
+ * Encapsulates a command to add a deadline object to the task list.
+ */
 public class AddDeadlineCommand extends TaskCommand {
     private static Command singleInstance;
 
@@ -22,7 +25,7 @@ public class AddDeadlineCommand extends TaskCommand {
     @Override
     public String produce(String query) throws DukeException {
         assert query != null;
-        String[] queries = query.substring(deadline.length()).split("/by");
+        String[] queries = query.substring(DEADLINE.length()).split("/by");
         if (queries.length != 2) {
             throw DukeException.createArgumentCountException(2, queries.length);
         }

@@ -1,5 +1,8 @@
 package duke.views.strategies.commands;
 
+/**
+ * Encapsulates a command to exit the program.
+ */
 public class ByeCommand extends Command {
     private static Command singleInstance;
 

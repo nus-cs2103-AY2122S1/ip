@@ -3,12 +3,12 @@ package duke.views.strategies.commands;
 import duke.interfaces.StringProducer;
 
 public abstract class Command implements StringProducer {
-    protected final String list = "list";
-    protected final String done = "done";
-    protected final String todo = "todo";
-    protected final String deadline = "deadline";
-    protected final String event = "event";
-    protected final String delete = "delete";
-    protected final String on = "on";
-    protected final String find = "find";
+    public static final String LIST = "list";
+    public static final String DONE = "done";
+    public static final String TODO = "todo";
+    public static final String DEADLINE = "deadline";
+    public static final String EVENT = "event";
+    public static final String DELETE = "delete";
+    public static final String ON = "on";
+    public static final String FIND = "find";
 }

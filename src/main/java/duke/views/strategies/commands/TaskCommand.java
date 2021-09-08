@@ -3,9 +3,9 @@ package duke.views.strategies.commands;
 import duke.domain.Task;
 import duke.domain.TaskList;
 
-
-
-
+/**
+ * Encapsulates a command involving the task list.
+ */
 public abstract class TaskCommand extends Command {
     protected final TaskList userTasks;
 
