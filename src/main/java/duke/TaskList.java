@@ -59,10 +59,12 @@ public class TaskList {
      * @throws DukeException if Id is invalid.
      */
     public void deleteTask(int id) throws DukeException {
+        int originalSize = tasks.size();
         if (id >= this.tasks.size()) {
             throw new DukeException("no such task");
         }
         this.tasks.remove(id);
+        assert tasks.size() < originalSize;
     }
 
     /**
