@@ -144,3 +144,21 @@ class FindCommand extends Command {
         return tasks.filter(super.getArgument());
     }
 }
+
+class HelpCommand extends Command {
+    public HelpCommand() {
+        super(Action.HELP, "");
+    }
+
+    @Override
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return "list - list all current tasks.\n"
+                + "todo <description> - add a todo task.\n"
+                + "deadline <description> /by <yyyy-mm-dd> - add a deadline task.\n"
+                + "event <description> /at <yyyy-mm-dd> - add a event task.\n"
+                + "delete <index> - delete the task at the index.\n"
+                + "done <index> - mark the task at the index as done.\n"
+                + "find <search string> - search the task description that matches the string.\n"
+                + "save - save the task to /data/duke.txt";
+    }
+}

@@ -20,6 +20,9 @@ public class Parser {
         Command command;
 
         switch (action) {
+        case HELP:
+            command = new HelpCommand();
+            break;
         case SAVE:
             command = new SaveCommand();
             break;
@@ -71,6 +74,8 @@ public class Parser {
         String action = input.split(" ")[0].toLowerCase();
 
         switch (action) {
+        case "help":
+            return Action.HELP;
         case "save":
             return Action.SAVE;
         case "list":
