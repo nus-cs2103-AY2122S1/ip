@@ -4,8 +4,6 @@ import duke.utils.DukeException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.Scanner;
 
 public class Ui {
@@ -90,3 +88,4 @@ public class Ui {
         }
     }
 }
+
