@@ -24,12 +24,12 @@ public class DoneCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            Task taskCompleted = tasks.getTask(taskNumToMarkAsDone - 1);
             tasks.markAsDone(taskNumToMarkAsDone);
+            Task taskCompleted = tasks.getTask(taskNumToMarkAsDone - 1);
             storage.save(tasks);
             response = "Nice! I've marked this task as done:\n" + " " + taskCompleted;
         } catch (BobbyException e) {
-            System.out.println(e.getMessage());
+            response = e.getMessage();
         }
     }
 }

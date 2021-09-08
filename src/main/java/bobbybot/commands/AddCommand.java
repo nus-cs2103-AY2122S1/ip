@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import bobbybot.enums.BotCommand;
 import bobbybot.exceptions.BobbyException;
 import bobbybot.exceptions.InvalidArgumentException;
 import bobbybot.tasks.Deadline;
@@ -32,16 +33,15 @@ public class AddCommand extends Command {
      * @param timeArg time argument string
      * @param type event or deadline
      */
-    public AddCommand(String description, String timeArg, String type) throws InvalidArgumentException {
-        type = type.toLowerCase();
+    public AddCommand(String description, String timeArg, BotCommand type) throws InvalidArgumentException {
         switch(type) {
-        case "todo":
+        case TODO:
             this.toAdd = new ToDo(description);
             break;
-        case "event":
+        case EVENT:
             this.toAdd = new Event(description, timeArg);
             break;
-        case "deadline":
+        case DEADLINE:
             try {
                 LocalDateTime dateBy = LocalDateTime.parse(timeArg, DT_FORMATTER);
                 this.toAdd = new Deadline(description, dateBy);
@@ -49,7 +49,6 @@ public class AddCommand extends Command {
                 System.out.println("Please input deadline date in the following format: [dd-mm-yyyy hh:mm]");
                 throw new InvalidArgumentException("Please input deadline date in the following format:"
                         + " [dd-mm-yyyy hh:mm]");
-
             }
             break;
         default:

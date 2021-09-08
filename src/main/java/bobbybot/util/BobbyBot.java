@@ -3,7 +3,7 @@ package bobbybot.util;
 import java.util.Scanner;
 
 import bobbybot.commands.Command;
-import bobbybot.exceptions.BobbyException;
+
 /**
  * Represents the chatbot
  */
@@ -33,17 +33,12 @@ public class BobbyBot {
         while (!isExit) {
             String userInput = sc.nextLine();
             ui.showLine();
-            try {
-                Command c = parser.parseCommand(userInput);
-                c.execute(tasks, ui, storage);
-                String response = c.getResponse();
-                System.out.println(response);
-                isExit = c.isExit();
-            } catch (BobbyException e) {
-                System.out.println(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+            Command c = parser.parseCommand(userInput);
+            c.execute(tasks, ui, storage);
+            String response = c.getResponse();
+            System.out.println(response);
+            isExit = c.isExit();
+            ui.showLine();
         }
     }
 

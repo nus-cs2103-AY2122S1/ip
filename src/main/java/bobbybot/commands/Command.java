@@ -19,9 +19,7 @@ public abstract class Command {
     public abstract void execute(TaskList tasks, Ui ui, Storage storage);
 
     public String getResponse() {
-        if (response == null) {
-            return "This delete Command is not executed yet";
-        }
+        assert response != null : "Response cannot be null";
         return response;
     }
 

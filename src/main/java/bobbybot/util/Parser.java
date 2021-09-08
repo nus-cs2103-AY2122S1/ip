@@ -33,7 +33,7 @@ public class Parser {
      * Parses user input and creates commands
      * @param userInput userInput to bot
      */
-    public Command parseCommand(String userInput) throws InvalidArgumentException {
+    public Command parseCommand(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand();
@@ -46,11 +46,11 @@ public class Parser {
 
             switch (enumCommand) {
             case TODO:
-                //Fallthrough
+                return prepareAdd(arguments, BotCommand.TODO);
             case EVENT:
-                //Fallthrough
+                return prepareAdd(arguments, BotCommand.EVENT);
             case DEADLINE:
-                return prepareAdd(arguments);
+                return prepareAdd(arguments, BotCommand.DEADLINE);
             case LIST:
                 return new ListCommand();
             case BYE:
@@ -63,25 +63,27 @@ public class Parser {
                 return prepareDelete(arguments);
             default:
                 System.out.println("Invalid command");
-                return null;
+                return new IncorrectCommand();
             }
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidArgumentException | IllegalArgumentException e) {
             return new IncorrectCommand();
         }
     }
 
-    private Command prepareAdd(String args) throws InvalidArgumentException {
-        // Check arg string format
+    private Command prepareAdd(String args, BotCommand type) throws InvalidArgumentException {
+        // Check arg string format to prevent errors
         final Matcher matcher = DATA_ARGS_FORMAT.matcher(args.trim());
-        // Add todo
-        if (!matcher.matches()) {
+        if (type.equals(BotCommand.TODO)) {
             return new AddCommand(args.trim());
         }
+        if (!matcher.matches()) {
+            return new IncorrectCommand();
+        }
         // Add event or deadline
-        if (args.contains("/by")) {
-            return new AddCommand(matcher.group("type").trim(), matcher.group("time").trim(), "deadline");
-        } else if (args.contains("/at")) {
-            return new AddCommand(matcher.group("type").trim(), matcher.group("time").trim(), "event");
+        if (args.contains("/by") & type.equals(BotCommand.DEADLINE)) {
+            return new AddCommand(matcher.group("type").trim(), matcher.group("time").trim(), type);
+        } else if (args.contains("/at") & type.equals(BotCommand.EVENT)) {
+            return new AddCommand(matcher.group("type").trim(), matcher.group("time").trim(), type);
         } else {
             System.out.println("Failed to add event/deadline");
             return new IncorrectCommand();

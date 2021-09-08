@@ -31,13 +31,9 @@ public class Duke {
      * Get response of BobbyBot from user input
      */
     String getResponse(String input) {
-        try {
-            Command c = parser.parseCommand(input);
-            assert c != null : "Command cannot be null";
-            c.execute(tasks, ui , storage);
-            return c.getResponse();
-        } catch (BobbyException e) {
-            return e.getMessage();
-        }
+        Command c = parser.parseCommand(input);
+        assert c != null : "Command cannot be null";
+        c.execute(tasks, ui , storage);
+        return c.getResponse();
     }
 }
