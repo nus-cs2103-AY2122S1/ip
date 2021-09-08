@@ -26,9 +26,7 @@ public class ToDo extends Task {
      */
     @Override
     public String getSave() {
-        return "T" +
-                (isDone() ? "1" : "0") + "|" +
-                getDescription();
+        return "T" + super.getSave();
     }
 
     /**
