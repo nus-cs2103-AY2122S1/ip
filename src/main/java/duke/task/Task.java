@@ -78,6 +78,10 @@ public class Task {
         return this.date.toString();
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
     /**
      * Wraps the task alphabet in square brackets
      *
