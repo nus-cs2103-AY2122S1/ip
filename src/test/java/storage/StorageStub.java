@@ -1,5 +1,7 @@
 package storage;
 
+import java.util.ArrayList;
+
 import exception.DukeException;
 import models.Task;
 import tasklist.TaskList;
@@ -7,7 +9,7 @@ import tasklist.TaskList;
 public class StorageStub implements IStorage {
 
     private TaskList loadTaskListFromFile() {
-        return new TaskList();
+        return new TaskList(new ArrayList<>());
     }
 
     private void writeTaskListToFile() {
@@ -47,5 +49,25 @@ public class StorageStub implements IStorage {
     @Override
     public TaskList findKeyword(String ... keywords) {
         return null;
+    }
+
+    @Override
+    public TaskList getPrevious() {
+        return null;
+    }
+
+    @Override
+    public TaskList getNext() {
+        return null;
+    }
+
+    @Override
+    public void undo() {
+
+    }
+
+    @Override
+    public void redo() {
+
     }
 }

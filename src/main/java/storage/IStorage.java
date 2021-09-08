@@ -57,4 +57,12 @@ public interface IStorage {
     int getSize();
 
     TaskList findKeyword(String ... keywords);
+
+    TaskList getPrevious();
+
+    TaskList getNext();
+
+    void undo();
+
+    void redo();
 }

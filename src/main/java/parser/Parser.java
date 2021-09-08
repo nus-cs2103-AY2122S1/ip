@@ -49,6 +49,10 @@ public class Parser implements IParser {
             return new Pair<>(true, this.processor.processCommand(Command.DELETE, arguments));
         } else if (command.equals("find")) {
             return new Pair<>(true, this.processor.processCommand(Command.FIND, arguments));
+        } else if (command.equals("undo")) {
+            return new Pair<>(true, this.processor.processCommand(Command.UNDO, arguments));
+        } else if (command.equals("redo")) {
+            return new Pair<>(true, this.processor.processCommand(Command.REDO, arguments));
         } else {
             return new Pair<>(true, this.processor.processCommand(Command.DEFAULT, arguments));
         }

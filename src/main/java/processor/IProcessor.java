@@ -49,6 +49,8 @@ public interface IProcessor {
 
     String processFind(String ... keywords);
 
+    String processUndo();
+
     /**
      * Process command with type DEFAULT.
      *

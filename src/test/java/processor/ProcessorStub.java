@@ -40,4 +40,9 @@ public class ProcessorStub implements IProcessor {
     public String processFind(String ... keywords) {
         return "";
     }
+
+    @Override
+    public String processUndo() {
+        return "";
+    }
 }
