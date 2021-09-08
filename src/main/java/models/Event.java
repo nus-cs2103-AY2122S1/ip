@@ -49,11 +49,12 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
+        String timeString = time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         if (this.isDone) {
             return "[E][X] " + this.description + " (by: "
-                    + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                    + timeString + ")";
         }
         return "[E][ ] " + this.description + " (by: "
-                + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + timeString + ")";
     }
 }
