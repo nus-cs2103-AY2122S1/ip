@@ -1,2 +1,2 @@
 T | 1 | do nothing
-T | 0 | reading
+T | 1 | reading

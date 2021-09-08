@@ -11,6 +11,7 @@ public enum CommandType {
     FIND("find"),
     EMPTY("empty"),
     TIMEDTASK("timedtask"),
+    PERIODTASK("periodtask"),
     INVALID("invalid");
 
     private String command;
@@ -43,6 +44,8 @@ public enum CommandType {
             return CommandType.FIND;
         case "timedtask":
             return CommandType.TIMEDTASK;
+        case "periodtask":
+            return CommandType.PERIODTASK;
         case "":
             return CommandType.EMPTY;
         default:

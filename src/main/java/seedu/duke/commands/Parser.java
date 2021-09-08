@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 import seedu.duke.tasks.Deadline;
 import seedu.duke.tasks.Events;
+import seedu.duke.tasks.PeriodTask;
 import seedu.duke.tasks.TimedTask;
 import seedu.duke.tasks.ToDos;
 
@@ -57,7 +58,7 @@ public class Parser {
             }
             Events event = new Events(getOnlyDescription(descriptions), getEventDateTime(descriptions));
             return new AddCommand(event);
-        
+
         case TIMEDTASK:
             descriptions = getDescriptions(actionDescription);
             if (isBlank(descriptions)) {
@@ -65,6 +66,15 @@ public class Parser {
             }
             TimedTask timedTask = new TimedTask(getOnlyDescription(descriptions), getTimeNeeded(descriptions));
             return new AddCommand(timedTask);
+
+        case PERIODTASK:
+            descriptions = getDescriptions(actionDescription);
+            if (isBlank(descriptions)) {
+                return new UiCommand(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
+            }
+            PeriodTask periodTask = new PeriodTask(getOnlyDescription(descriptions), periodTaskGetFrom(descriptions),
+            periodTaskGetTo(descriptions));
+            return new AddCommand(periodTask);
 
         case DELETE:
             return new DeleteCommand(getDescriptions(actionDescription));
@@ -118,5 +128,17 @@ public class Parser {
 
     private String getTimeNeeded(String descriptions) {
         return descriptions.split(" /needs ")[1];
+    }
+
+    private String periodTaskGetFrom(String descriptions) {
+        String period = descriptions.split(" /between ")[1];
+        System.out.println(period);
+        return period.split(" and ")[0];
+    }
+    
+    private String periodTaskGetTo(String descriptions) {
+        String period = descriptions.split(" /between ")[1];
+        System.out.println(period);
+        return period.split(" and ")[1];
     }
 }
