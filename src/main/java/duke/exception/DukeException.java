@@ -14,11 +14,5 @@ public abstract class DukeException extends Exception{
         super(task);
     }
 
-    /**
-     * Prints error message
-     * @return
-     */
-    public abstract void printError();
-
     public abstract String getError();
 }

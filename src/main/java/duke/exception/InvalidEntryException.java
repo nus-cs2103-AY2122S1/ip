@@ -5,7 +5,6 @@ package duke.exception;
  */
 public class InvalidEntryException extends DukeException {
 
-    private String error;
     /**
      * Constructor for creating InvalidEntryException object
      *
@@ -13,19 +12,11 @@ public class InvalidEntryException extends DukeException {
      */
     public InvalidEntryException(String msg) {
         super(msg);
-        this.error = "OOPS!!! I'm sorry, but I don't know what that means :-(";
-    }
-
-    /**
-     * Prints error message
-     */
-    @Override
-    public void printError() {
-        System.out.println(error);
     }
 
     @Override
     public String getError() {
-        return this.error;
+        String error = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+        return error;
     }
 }

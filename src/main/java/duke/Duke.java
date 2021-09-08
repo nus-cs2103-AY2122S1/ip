@@ -45,32 +45,11 @@ public class Duke {
         return this.taskList;
     }
 
-    /**
-     * Activates programme
-     */
-    public void run() {
-        ui.showTaskList(taskList, "list");
-        ui.showWelcome();
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNextLine()) {
-            String s = sc.nextLine();
-            try {
-                parser.parse(s);
-            } catch (DukeException e) {
-                e.printError();
-            }
-        }
-    }
-
     public String getResponse(String input) {
         try{
             return parser.parse(input);
         } catch (DukeException e) {
             return e.getError();
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
     }
 }
