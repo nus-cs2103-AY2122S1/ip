@@ -34,7 +34,12 @@ public class Event extends Task {
         } catch (DateTimeParseException e) {
             throw new DukeException("Use the right format for date and/or time: yyyy-MM-dd and/or HH:mm");
         }
+    }
 
+    public Event(String description, LocalDate date, LocalTime time, boolean isDone) {
+        super(description, isDone);
+        this.date = date;
+        this.time = time;
     }
 
     /**
@@ -53,4 +58,13 @@ public class Event extends Task {
         }
         return toPrint + ")";
     }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
 }

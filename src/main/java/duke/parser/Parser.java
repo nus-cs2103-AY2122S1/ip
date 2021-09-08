@@ -30,6 +30,8 @@ public class Parser {
             return new DoneCommand(text);
         } else if (text.startsWith("delete")) {
             return new DeleteCommand(text);
+        } else if (text.equals("undo")) {
+            return new UndoCommand();
         } else if (text.startsWith("find")) {
             return new FindCommand(text);
         } else if (text.startsWith("todo") || text.startsWith("deadline") || text.startsWith("event")) {

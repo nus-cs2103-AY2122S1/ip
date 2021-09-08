@@ -20,6 +20,9 @@ public class TaskList {
      */
     public TaskList() {}
 
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
     /**
      * Retrieves the ArrayList.
      *
@@ -33,6 +36,30 @@ public class TaskList {
         return tasks.size();
     }
 
+    public TaskList duplicate() {
+        ArrayList<Task> newTasks = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
+            if (t instanceof Todo) {
+                newTasks.add(new Todo(t.getDescription()));
+            } else if (t instanceof Deadline) {
+                newTasks.add(new Deadline(
+                        t.getDescription(),
+                        ((Deadline) t).getDate(),
+                        ((Deadline) t).getTime(),
+                        t.getIsDone()
+                ));
+            } else if (t instanceof Event) {
+                newTasks.add(new Event(
+                       t.getDescription(),
+                       ((Event) t).getDate(),
+                       ((Event) t).getTime(),
+                        t.getIsDone()
+                ));
+            }
+        }
+        return new TaskList(newTasks);
+    }
 
     /**
      * Adds a to-do task to the tasklist.

@@ -37,6 +37,12 @@ public class Deadline extends Task {
         }
     }
 
+    public Deadline(String description, LocalDate date, LocalTime time, boolean isDone) {
+        super(description, isDone);
+        this.date = date;
+        this.time = time;
+    }
+
     /**
      * Returns a string representation of a Deadline.
      *
@@ -52,5 +58,13 @@ public class Deadline extends Task {
             toPrint += " " + time.format(DateTimeFormatter.ofPattern("HH:mm"));
         }
         return toPrint + ")";
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public LocalTime getTime() {
+        return time;
     }
 }
