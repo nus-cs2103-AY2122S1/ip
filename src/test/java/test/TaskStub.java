@@ -1,7 +1,9 @@
+package test;
+
 import lebron.task.Task;
 
 public class TaskStub extends Task {
-    String name;
+    private String name;
     /**
      * Constructor.
      *
@@ -22,7 +24,7 @@ public class TaskStub extends Task {
     }
 
     @Override
-    public void mark() {
+    public void markAsDone() {
         name = "bob";
     }
 }

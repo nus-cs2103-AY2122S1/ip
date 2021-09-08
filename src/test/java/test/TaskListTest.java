@@ -1,16 +1,19 @@
+package test;
+
+import lebron.Lebron;
 import lebron.task.Task;
 import lebron.task.TaskList;
-import org.junit.jupiter.api.Test;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-import lebron.Lebron;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TaskListTest {
-    Lebron lebron = new Lebron();
+    private Lebron lebron = new Lebron();
 
     TaskListTest() throws IOException {
     }

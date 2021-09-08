@@ -1,8 +1,10 @@
-import lebron.Lebron;
-import lebron.task.Task;
-import lebron.Ui;
+package test;
 
+import lebron.Lebron;
+import lebron.Ui;
+import lebron.task.Task;
 import java.util.ArrayList;
+
 
 public class UiStub extends Ui {
     /**
@@ -15,8 +17,8 @@ public class UiStub extends Ui {
     }
 
     @Override
-    public void replyAdd(ArrayList<Task> lst, Task task) {
-
+    public String replyAdd(ArrayList<Task> lst, Task task) {
+        return "hi";
     }
 
 }
