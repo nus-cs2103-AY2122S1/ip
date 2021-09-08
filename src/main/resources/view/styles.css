@@ -1,0 +1,10 @@
+.vbox {
+    -fx-background-color: #7899D4;
+}
+
+.label {
+    -fx-background-color: #BBD5ED;
+    -fx-background-radius: 20px;
+    -fx-text-fill: black;
+    -fx-padding: 20px;
+}
