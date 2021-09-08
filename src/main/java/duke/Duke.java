@@ -1,6 +1,7 @@
 package duke;
 
 import duke.task.TaskList;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -14,13 +15,13 @@ public class Duke {
     private Ui ui;
 
     public Duke(Path savePath) {
-        this.ui = new Ui();
-        this.storage = new Storage(ui, savePath);
+        ui = new Ui();
+        storage = new Storage(ui, savePath);
         try {
-            this.taskList = new TaskList(ui, storage.load());
+            taskList = new TaskList(ui, storage.load());
         } catch (DukeException e) {
             ui.display(e);
-            this.taskList = new TaskList(ui);
+            taskList = new TaskList(ui);
         }
     }
 

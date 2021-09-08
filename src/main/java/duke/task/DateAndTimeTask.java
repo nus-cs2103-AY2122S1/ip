@@ -24,8 +24,8 @@ public class DateAndTimeTask extends Task {
             } else if (i == 0) {
                 throw new DukeException(DukeException.BLANK_DESCRIPTION);
             }
-            this.setDescription(input.substring(0, i));
-            this.dateTime = parseDateAndTime(input.substring(i + splitterKey.length()));
+            setDescription(input.substring(0, i));
+            dateTime = parseDateAndTime(input.substring(i + splitterKey.length()));
         }
     }
 
@@ -39,7 +39,7 @@ public class DateAndTimeTask extends Task {
      */
     public DateAndTimeTask(String description, String dateAndTime, boolean isDone) throws DukeException {
         super(description, isDone);
-        this.dateTime = parseDateAndTime(dateAndTime);
+        dateTime = parseDateAndTime(dateAndTime);
     }
 
     private LocalDateTime parseDateAndTime(String dateAndTime) throws DukeException {

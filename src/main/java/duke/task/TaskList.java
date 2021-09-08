@@ -10,7 +10,7 @@ public class TaskList {
 
     public TaskList(Ui ui) {
         this.ui = ui;
-        this.tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     public TaskList(Ui ui, ArrayList<Task> tasks) {
