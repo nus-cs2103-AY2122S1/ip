@@ -6,13 +6,15 @@ public class Ui {
      *
      * @param lines A variable number of lines to be printed as a repsonse to the user.
      */
-    public static void printResponse(String ... lines) {
-        final String LINE = "    --------------------------------------------------";
+    public static String getResponse(String ... lines) {
+        final String LINE = "    --------------------------------------------------\n";
         final String INDENTATION = "      ";
-        System.out.println(LINE);
+        String stringToPrint = "";
+        stringToPrint += LINE;
         for (String line : lines) {
-            System.out.println(INDENTATION + line);
+            stringToPrint += (INDENTATION + line + "\n");
         }
-        System.out.println(LINE);
+        stringToPrint += LINE;
+        return stringToPrint;
     }
 }
