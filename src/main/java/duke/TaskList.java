@@ -155,6 +155,7 @@ public class TaskList {
         } else {
             s += TextUi.showTaskList(tasks);
         }
+        assert s != "" : "s should not be empty in both cases";
         return s;
     }
 }

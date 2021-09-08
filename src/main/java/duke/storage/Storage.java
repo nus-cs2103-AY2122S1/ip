@@ -32,6 +32,7 @@ public class Storage {
             f.getParentFile().mkdirs();
             try {
                 f.createNewFile();
+                assert f.exists() : "file/directory should exist by this point";
             } catch (IOException e) {
                 e.printStackTrace();
             }
