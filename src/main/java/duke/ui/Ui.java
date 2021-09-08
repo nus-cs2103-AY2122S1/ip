@@ -81,6 +81,18 @@ public class Ui {
     }
 
     /**
+     * Displays sorted list of tasks.
+     *
+     * @param tasks list of sorted task.
+     */
+    public String showSortedList(String tasks) {
+        if (tasks.equals("")) {
+            return "No match found!";
+        }
+        return String.format("Here are the sorted task in your list:\n%s", tasks);
+    }
+
+    /**
      * Displays task completed.
      *
      * @param task task completed.

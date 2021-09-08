@@ -41,4 +41,8 @@ public class Deadline extends Task {
     public String save() {
         return String.format("D | %s| %s", super.save(), Messages.dateFormat(time));
     }
+
+    public LocalDateTime getDate() {
+        return time;
+    }
 }

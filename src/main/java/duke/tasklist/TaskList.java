@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -175,6 +176,49 @@ public class TaskList {
             output.append(String.format("%d.%s\n", count++, tsk));
         }
         assert count <= getSize() : "Find should be a subset of List";
+        return output.toString().trim();
+    }
+
+    /**
+     * Returns list of task sorted according to field in TaskList.
+     *
+     * @param input sort terms.
+     * @return list of sorted task.
+     */
+    public String sort(String input) {
+        String taskType = input.trim();
+
+        StringBuilder output = new StringBuilder();
+        List<Task> sortedTasks = new ArrayList<>();
+
+        if (taskType.contains("deadline")) {
+            sortedTasks = library.stream()
+                    .filter(tsk -> tsk.getClass() == Deadline.class)
+                    .map(tsk -> (Deadline) tsk)
+                    .sorted(Comparator.comparing(Deadline::getDate))
+                    .collect(Collectors.toList());
+        } else if (taskType.contains("event")) {
+            sortedTasks = library.stream()
+                    .filter(tsk -> tsk.getClass() == Event.class)
+                    .map(tsk -> (Event) tsk)
+                    .sorted(Comparator.comparing(Event::getDate))
+                    .collect(Collectors.toList());
+        } else if (taskType.contains("name")) {
+            sortedTasks = library.stream()
+                    .sorted(Comparator.comparing(Task::getName))
+                    .collect(Collectors.toList());
+        } else if (taskType.contains("todo")) {
+            sortedTasks = library.stream()
+                    .filter(tsk -> tsk.getClass() == Todo.class)
+                    .map(tsk -> (Todo) tsk)
+                    .sorted(Comparator.comparing(Task::getName))
+                    .collect(Collectors.toList());
+        }
+
+        int count = 1;
+        for (Task tsk : sortedTasks) {
+            output.append(String.format("%d.%s\n", count++, tsk));
+        }
         return output.toString().trim();
     }
 

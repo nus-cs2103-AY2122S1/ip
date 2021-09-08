@@ -1,12 +1,6 @@
 package duke.parser;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.exception.Messages;
 
@@ -37,6 +31,8 @@ public class Parser {
             return new ExitCommand("");
         } else if (cmd.contains("find")) {
             return new FindCommand(Cutter.cut(cmd, "find"));
+        } else if (cmd.contains("sort")) {
+            return new SortCommand(Cutter.cut(cmd, "sort"));
         } else {
             throw new DukeException(Messages.KNOWN.toString());
         }

@@ -41,4 +41,8 @@ public class Event extends Task {
     public String save() {
         return String.format("E | %s| %s", super.save(), Messages.dateFormat(time));
     }
+
+    public LocalDateTime getDate() {
+        return time;
+    }
 }
