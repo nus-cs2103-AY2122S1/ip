@@ -86,7 +86,8 @@ public class Ui {
      * Prints the welcome message.
      */
     public void printWelcomeMessage() {
-        retrieverResponse = welcomeMessage + "\n" + logo;
+        retrieverResponse = welcomeMessage + "\n" + logo + "\n"
+                + "Need Help? Type 'help'" + "\n" + "in the text field below." ;
     }
 
     /**
