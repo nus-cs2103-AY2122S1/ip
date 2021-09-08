@@ -66,6 +66,10 @@ public class TaskList {
         ui.listTasks(this);
     }
 
+    public void find(String str) {
+        ui.find(this, str);
+    }
+
     public int size() {
         return tasks.size();
     }
