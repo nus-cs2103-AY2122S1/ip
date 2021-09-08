@@ -2,7 +2,6 @@ package duke;
 
 import java.io.File;
 import java.util.Objects;
-import javafx.application.Platform;
 
 /**
  * Duke is the main class of the bot.
@@ -16,6 +15,7 @@ public class Duke {
      */
     private final Storage storage;
     private final TaskList list;
+    private final String verNumber = "1.2";
 
     /**
      * Creates a duke with storage pointing to the right file.
@@ -33,7 +33,9 @@ public class Duke {
      * response from the bot.
      */
     public String getResponse(String string) {
-        if (Objects.equals(string, "save")) {
+        if (Objects.equals(string.charAt(0), '/')) {
+            return Parser.helpCommand(string);
+        } else if (Objects.equals(string, "save")) {
             return storage.write(list);
         } else if (Objects.equals(string, "bye")) {
             String saveMsg = storage.write(list) + "\n";

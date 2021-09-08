@@ -1,6 +1,7 @@
 import java.util.Objects;
 
 import duke.Duke;
+import duke.HelpUi;
 import duke.Ui;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -26,6 +27,8 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
     @FXML
     private Button listButton;
+    @FXML
+    private Button helpButton;
 
     @FXML
     private ListView<String> taskList;
@@ -83,5 +86,14 @@ public class MainWindow extends AnchorPane {
         taskList.getItems().clear();
         String list = duke.displayList();
         taskList.getItems().addAll(list);
+    }
+
+    /**
+     * Displays a help message for new users.
+     */
+    @FXML
+    private void displayHelp() {
+        String helpMessage = HelpUi.helpText();
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(helpMessage, dukeImage));
     }
 }
