@@ -6,10 +6,7 @@ import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.exceptions.InvalidInputException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
+import duke.tasks.*;
 
 /**
  * Adds a task to the task list
@@ -51,6 +48,15 @@ public class AddCommand extends Command {
                     t = new Deadline(info[0], info[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new InvalidInputException("Please specify the date for the deadline");
+                } catch (DateTimeParseException e) {
+                    throw new InvalidInputException("Please specify date in 'YYYY-MM-DD TIME' format");
+                }
+            } else if (taskType.equals("dowithin")){
+                try {
+                    String[] info = Parser.parseDoWithin(taskDescription);
+                    t = new DoWithinPeriod(info[0], info[1], info[2]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new InvalidInputException("Please specify both start/end dates for the task");
                 } catch (DateTimeParseException e) {
                     throw new InvalidInputException("Please specify date in 'YYYY-MM-DD TIME' format");
                 }

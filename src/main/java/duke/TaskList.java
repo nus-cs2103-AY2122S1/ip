@@ -3,10 +3,7 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
+import duke.tasks.*;
 
 /**
  * Container class for the lists of tasks
@@ -87,6 +84,10 @@ public class TaskList {
             Deadline completedDeadline = ((Deadline) this.listOfTasks.get(taskIndex - 1)).markAsDone();
             this.listOfTasks.set(taskIndex - 1, completedDeadline);
             taskInfo = completedDeadline.toString();
+        } else if (this.listOfTasks.get(taskIndex - 1) instanceof DoWithinPeriod) {
+            DoWithinPeriod completedDoWithin = ((DoWithinPeriod) this.listOfTasks.get(taskIndex - 1)).markAsDone();
+            this.listOfTasks.set(taskIndex - 1, completedDoWithin);
+            taskInfo = completedDoWithin.toString();
         } else {
             Event completedEvent = ((Event) this.listOfTasks.get(taskIndex - 1)).markAsDone();
             this.listOfTasks.set(taskIndex - 1, completedEvent);

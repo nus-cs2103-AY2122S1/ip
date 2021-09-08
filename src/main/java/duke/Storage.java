@@ -12,10 +12,7 @@ import java.util.List;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidDirectoryException;
 import duke.exceptions.InvalidStorageFilePathException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
+import duke.tasks.*;
 
 /**
  * Represents the class used to store the tasklist data.
@@ -143,17 +140,48 @@ public class Storage {
                 } else {
                     outputText += "0 | " + e.getDescription() + " | " + e.getAt() + "\n";
                 }
+            } else if (t instanceof DoWithinPeriod) {
+                DoWithinPeriod dw = (DoWithinPeriod) t;
+                outputText += "DW | ";
+                if (isTaskComplete(dw.getStatusIcon())) {
+                    outputText += "X | " + dw.getDescription() + " | " + dw.getStartDate()
+                            + " | " + dw.getEndDate() + "\n";
+                } else {
+                    outputText += "0 | " + dw.getDescription() + " | " + dw.getStartDate()
+                            + " | " + dw.getEndDate() + "\n";
+                }
             }
         }
         return outputText;
     }
 
-    public static boolean hasDeadlineInSentence(List<String> words) {
+    /** Helper method to check if sentence includes a date from the parsed task in the storage file
+     *
+     * @param words a list in the format [task identifier, 'X'/'0', task description, date]
+     * @return true if there are 4 elements, false otherwise
+     */
+    public static boolean hasDateInSentence(List<String> words) {
         return words.size() == 4;
     }
 
-    public static boolean isTaskComplete(String c) {
-        return c.equals("X");
+    /** Helper method to check if sentence includes a start and end date from the parsed doWithinPeriod task
+     *  in the storage file
+     *
+     * @param words a list in the format [task identifier, 'X'/'0', task description, startDate, endDate]
+     * @return true if there are 5 elements, false otherwise
+     */
+    public static boolean hasStartAndEndDate(List<String> words) {
+        return words.size() == 5;
+    }
+
+    /**
+     * Helper method to check if task is completed after parsing the text from the storage file
+     *
+     * @param firstChar refers to the first character in the sentence (either "X" or "0")
+     * @return true if "X", false otherwise
+     */
+    public static boolean isTaskComplete(String firstChar) {
+        return firstChar.equals("X");
     }
 
     /**
@@ -174,7 +202,7 @@ public class Storage {
             break;
         case "D":
             Deadline d = new Deadline(words.get(2), words.get(3));
-            if (hasDeadlineInSentence(words)) {
+            if (hasDateInSentence(words)) {
                 if (isTaskComplete(words.get(1))) {
                     d = d.markAsDone();
                 }
@@ -183,13 +211,21 @@ public class Storage {
             break;
         case "E":
             Event e = new Event(words.get(2), words.get(3));
-            if (hasDeadlineInSentence(words)) {
+            if (hasDateInSentence(words)) {
                 if (isTaskComplete(words.get(1))) {
                     e = e.markAsDone();
                 }
                 output = e;
             }
             break;
+        case "DW":
+            DoWithinPeriod dw = new DoWithinPeriod(words.get(2), words.get(3), words.get(4));
+            if (hasStartAndEndDate(words)) {
+                if (isTaskComplete(words.get(1))) {
+                    dw = dw.markAsDone();
+                }
+                output = dw;
+            }
         default:
             break;
         }

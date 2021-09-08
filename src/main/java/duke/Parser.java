@@ -55,7 +55,7 @@ public class Parser {
                 throw new InvalidInputException("Please specify the TASK NUMBER after typing 'done'");
             }
             break;
-        case "todo": case "deadline": case "event":
+        case "todo": case "deadline": case "event": case "dowithin":
             c = new AddCommand(firstWord, remainingWords);
             break;
         case "delete":
@@ -71,6 +71,21 @@ public class Parser {
             break;
         }
         return c;
+    }
+
+    /**
+     * Parses the user input for 'doWithinPeriod' tasks for readability.
+     *
+     * @param doWithinDescription user input description and start/end date of the 'doWithinPeriod' task
+     * @return array of 3 elements where 1st element = 'doWithin' description, 2nd/3rd element = start/end date
+     *
+     */
+    public static String[] parseDoWithin(String doWithinDescription) {
+        String[] descAndDates = doWithinDescription.split("/between");
+        String[] startEndDate = descAndDates[1].split("and");
+        String[] result = new String[]{descAndDates[0].trim(),
+                parseDate(startEndDate[0].trim()), parseDate(startEndDate[1].trim())};
+        return result;
     }
 
     /**
