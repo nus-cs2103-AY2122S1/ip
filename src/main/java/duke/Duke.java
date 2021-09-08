@@ -6,12 +6,16 @@ import duke.commands.Command;
 import duke.exceptions.DukeException;
 import duke.exceptions.NoSuchCommandException;
 import duke.exceptions.NoSuchTaskException;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Main Class that calls the other components to put the whole system together
  */
 
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
     private Tasklist tasks;
@@ -53,6 +57,18 @@ public class Duke {
                 //ui.showLine();
             }
         }
+    }
+
+    public String getResponse(String input) {
+        return "hello";
+    };
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
     /**
