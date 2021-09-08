@@ -66,7 +66,6 @@ public class AddCommand extends Command {
             }
             task.addTask(t);
             return showAddTaskMessage(t.toString(), task.getNumTasks());
-            //ui.showAddTaskMessage(t.toString(), task.getNumTasks());
         }
     }
 
