@@ -231,6 +231,7 @@ public class Duke extends Application {
             response += TextUi.showErrorMessage(e.getMessage());
             return response;
         }
+        assert response != "" : "response should not be empty";
         return response;
     }
 }

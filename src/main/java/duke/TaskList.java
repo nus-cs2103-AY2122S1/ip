@@ -145,13 +145,15 @@ public class TaskList {
         String s = "";
         int len = tasks.size();
         if (len == 0) {
-//            System.out.println("The list is empty!");
+            System.out.println("The list is empty!");
             s += "The list is empty!";
         }
         for (int i = 0; i < len; i++) {
             Task t = (Task) tasks.get(i);
+            assert t != null : "task cannot be null since the list is not empty";
             s += TextUi.showTaskNumbered(i, t);
         }
+        assert s != "" : "s should not be empty in both cases";
         return s;
     }
 }
