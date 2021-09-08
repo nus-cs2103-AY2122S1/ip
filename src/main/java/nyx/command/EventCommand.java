@@ -19,4 +19,8 @@ public class EventCommand extends Command {
         Event event = new Event(splitInfo[0].strip(), splitInfo[1]);
         return AddHandler.handleAdd(event, taskList, storage);
     }
+
+    public static void throwEmptyException() throws NyxException {
+        throw new NyxException("The description of an event cannot be empty.");
+    }
 }

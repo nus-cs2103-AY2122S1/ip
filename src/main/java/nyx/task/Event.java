@@ -1,18 +1,16 @@
 package nyx.task;
 
-import nyx.NyxException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+
+import nyx.NyxException;
 
 /**
  * Represents an event that occurs at a specific date and time.
  * This class inherits from the parent abstract Task class.
  */
 public class Event extends Task {
-    private static final String DATETIME_FORMAT = "yyyy-MM-dd H:m";
-    private final LocalDateTime at;
+    private LocalDateTime at;
 
     /**
      * Constructs an event with its description, datetime, and an indicator of whether it is marked as done.
@@ -22,11 +20,7 @@ public class Event extends Task {
      */
     public Event(String content, String at, boolean isDone) throws NyxException {
         super(content, isDone);
-        try {
-            this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern(DATETIME_FORMAT));
-        } catch (DateTimeParseException e) {
-            throw new NyxException("Incorrect datetime format! The correct format is YYYY-MM-DD H:m");
-        }
+        this.at = DateTimeHandler.parseDateTime(at);
     }
 
     /**
@@ -44,8 +38,12 @@ public class Event extends Task {
      */
     @Override
     public String formatData() {
-        String dateFormat = at.format(DateTimeFormatter.ofPattern(DATETIME_FORMAT));
+        String dateFormat = at.format(DateTimeFormatter.ofPattern(DateTimeHandler.DATETIME_FORMAT));
         return String.format("E, %d, %s, %s\n", getStatusInt(), getContent(), dateFormat);
+    }
+
+    public void changeDateTime(String newDateTime) throws NyxException {
+        this.at = DateTimeHandler.parseDateTime(newDateTime);
     }
 
     /**

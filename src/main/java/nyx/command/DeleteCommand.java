@@ -32,4 +32,8 @@ public class DeleteCommand extends Command {
             throw new NyxException("Unable to save the changes...");
         }
     }
+
+    public static void throwEmptyException() throws NyxException {
+        throw new NyxException("Please specify the index to delete!");
+    }
 }
