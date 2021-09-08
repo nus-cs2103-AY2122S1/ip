@@ -1,11 +1,13 @@
 package duke;
 
+import java.io.IOException;
+import java.util.HashMap;
+
 import duke.command.Command;
+import duke.command.CommandKeyword;
 import duke.exception.DukeException;
-import duke.exception.InvalidCommandException;
 import duke.task.TaskList;
 import javafx.scene.layout.VBox;
-
 
 /**
  * The main program of the chatbot Duke. Consists of Tasklist, Ui and Storage instances.
@@ -21,18 +23,22 @@ public class Duke {
     public Duke(VBox dialogContainer) {
         this.ui = new Ui(dialogContainer);
         ui.greetUser();
-        this.storage = new Storage(this.ui);
-        this.tasks = new TaskList(this.storage.load(), this.ui);
+        this.storage = new Storage();
+        try {
+            HashMap<String, CommandKeyword> listOfCommands = this.storage.loadCommands();
+            this.ui.setListOfCommands(listOfCommands);
+            this.tasks = new TaskList(this.storage.loadTasks(), this.ui);
+        } catch (IOException e) {
+            this.ui.showLoadingError();
+        }
     }
 
     /**
-     * Starts Duke with the loaded tasks list.
+     * Get the response of Duke based on the user input.
+     *
+     * @param input The input entered by the user.
+     * @return A boolean to represent the continuation of the application.
      */
-    public void run() {
-        this.ui.greetUser();
-        this.ui.showFarewell();
-    }
-
     public boolean getResponse(String input) {
         boolean shouldExit = false;
         ui.showInput(input);
@@ -42,8 +48,6 @@ public class Duke {
             if (shouldExit) {
                 ui.showFarewell();
             }
-        } catch (IllegalArgumentException e) { // caused by user entering a command that is invalid
-            this.ui.showError(new InvalidCommandException());
         } catch (DukeException e) {
             this.ui.showError(e);
         }

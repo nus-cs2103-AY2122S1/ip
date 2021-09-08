@@ -41,14 +41,13 @@ public class TaskList {
      *
      * @param index The index of the arraylist that contains the task.
      * @param storage The storage to update the task marked.
-     * @return The updated task list after the task is marked.
      */
     public void markTask(int index, Storage storage) {
         try {
             Task task = this.tasks.get(index);
             task.markAsDone();
             this.ui.showMarkedTask(task);
-            storage.save(this.tasks);
+            storage.saveTasks(this.tasks);
             assert index >= 0;
         } catch (IndexOutOfBoundsException e) {
             this.ui.showMarkedTask(null);
@@ -82,21 +81,20 @@ public class TaskList {
         assert task != null : "Task not added successfully but error is not caught";
         tasks.add(task);
         this.ui.showAddTask(task, this.tasks.size());
-        storage.save(this.tasks);
+        storage.saveTasks(this.tasks);
     }
 
     /**
      * Delete the task at the given index.
      * @param index The index of the arraylist that contains the task.
      * @param storage The storage to update the task marked.
-     * @return The updated task list after the task is deleted.
      */
     public void deleteTask(int index, Storage storage) {
         try {
             Task task = this.tasks.get(index);
             this.tasks.remove(index);
             this.ui.showDeletedTask(task, this.tasks.size());
-            storage.save(this.tasks);
+            storage.saveTasks(this.tasks);
             assert index >= 0;
         } catch (IndexOutOfBoundsException e) {
             this.ui.showDeletedTask(null, -1);

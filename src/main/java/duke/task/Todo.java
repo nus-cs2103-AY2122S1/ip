@@ -38,6 +38,14 @@ public class Todo extends Task {
         return String.format("%c | %s | %s\n", Todo.TASK_LETTER, this.getStatusIcon(), this.description);
     }
 
+    /**
+     * Creates a new todo object.
+     *
+     * @param description The description of the task.
+     * @param isDone Whether the todo is done.
+     * @return The todo object created.
+     * @throws IncompleteTaskDescriptionException If the description is empty or in incorrect format.
+     */
     public static Todo create(String description, boolean isDone) throws IncompleteTaskDescriptionException {
         if (!description.equals("")) {
             return new Todo(description, isDone);

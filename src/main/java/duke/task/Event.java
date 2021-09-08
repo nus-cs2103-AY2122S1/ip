@@ -1,11 +1,10 @@
 package duke.task;
 
-import duke.exception.IncompleteTaskDescriptionException;
-
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.IncompleteTaskDescriptionException;
 
 /**
  * Event is a specific type of task that contains the description of the task.
@@ -53,6 +52,14 @@ public class Event extends Task {
                 Event.TASK_LETTER, this.getStatusIcon(), this.description, formattedDate, this.timeRange);
     }
 
+    /**
+     * Creates a new event object.
+     *
+     * @param description The description of the task.
+     * @param isDone Whether the event is done.
+     * @return The event object created.
+     * @throws IncompleteTaskDescriptionException If the description is empty or in incorrect format.
+     */
     public static Event create(String description, boolean isDone) throws IncompleteTaskDescriptionException {
         if (description.matches("[^ ].* /at *[^ ].* [^ ].*")) {
             String eventSeparator = "/at";
