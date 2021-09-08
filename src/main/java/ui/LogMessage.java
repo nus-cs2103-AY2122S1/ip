@@ -18,8 +18,11 @@ public class LogMessage {
         this.messages.add(msg);
     }
 
+    /**
+     * Prints all messages found in LogMessage
+     */
     public void printAllMessages() {
-        for(int i = 0; i < messages.size(); i++) {
+        for (int i = 0; i < messages.size(); i++) {
             System.out.println(messages.get(i));
         }
     }
@@ -27,7 +30,7 @@ public class LogMessage {
     @Override
     public String toString() {
         String result = "";
-        for(int i = 0; i < messages.size(); i++) {
+        for (int i = 0; i < messages.size(); i++) {
             result += messages.get(i);
             result += "\n";
         }

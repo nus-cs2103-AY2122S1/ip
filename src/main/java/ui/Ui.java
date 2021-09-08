@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import duke.DukeException;
 import duke.Storage;
+import javafx.application.Platform;
 import task.Task;
 import task.Tasklist;
 
@@ -32,19 +33,21 @@ public class Ui {
     /**
      * Provides the initialization message for the Duke Program
      */
-    public static void start() {
+    public static String start() {
         String greetingMsg = "Hello! I'm Duke\nWhat can I do for you?";
         System.out.println(greetingMsg);
         System.out.println(breakline);
+        return greetingMsg;
     }
 
     /**
      * Provides the exit message for the Duke Program
      */
-    public static void exit() {
+    public static String exit() {
         String byeMsg = "Bye. Hope to see you again soon!";
         System.out.println(byeMsg);
         System.out.println(breakline);
+        return byeMsg;
     }
 
     /**
@@ -103,7 +106,7 @@ public class Ui {
         String[] cmdAndInput = rawInput.split(" ", 2);
         String cmd = cmdAndInput[0];
         String input = "";
-        if(cmdAndInput.length > 1) {
+        if (cmdAndInput.length > 1) {
             input = cmdAndInput[1];
         }
 
@@ -113,7 +116,9 @@ public class Ui {
         switch (cmd) {
         case "bye":
             msg = storage.save();
-            Ui.exit();
+            msg.add(Ui.exit());
+            Platform.exit();
+            break;
         case "list":
             msg = tasklist.list();
             break;

@@ -2,7 +2,6 @@ package ui;
 
 import duke.Duke;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -73,7 +72,11 @@ public class DukeInterface extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
 
+        Label startupMsg = new Label(Ui.start());
 
+        dialogContainer.getChildren().addAll(
+                DialogBox.getFlippedDukeDialog(startupMsg, new ImageView(dukeImg))
+        );
 
         //Adding functionality
         sendButton.setOnMouseClicked((event) -> {
@@ -98,7 +101,7 @@ public class DukeInterface extends Application {
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(userImg)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImg))
+                DialogBox.getFlippedDukeDialog(dukeText, new ImageView(dukeImg))
         );
         userInput.clear();
     }

@@ -7,11 +7,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import ui.MainWindow;
 import ui.DukeInterface;
+import ui.MainWindow;
 
-public class Main extends Application{
+public class Main extends Application {
     private DukeInterface dukeInterface = new DukeInterface();
 
     @Override

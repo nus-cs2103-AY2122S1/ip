@@ -1,16 +1,12 @@
 package ui;
 
-import java.io.IOException;
-import java.util.Collections;
+
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
@@ -20,6 +16,11 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Initializes dialog box to contain text
+     * @param l Text to output
+     * @param iv Image to display
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
@@ -43,7 +44,7 @@ public class DialogBox extends HBox {
         return new DialogBox(l, iv);
     }
 
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
+    public static DialogBox getFlippedDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();
         return db;
