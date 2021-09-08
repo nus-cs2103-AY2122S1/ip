@@ -1,6 +1,5 @@
 package duchess.task;
 
-import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,12 +15,6 @@ import duchess.main.DuchessException;
 public class Deadline extends Task {
     /** The DateTimeFormatter used when printing the Event.*/
     private static final DateTimeFormatter PRINT_DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
-
-    /** The DateTimeFormatter when converting time from string.*/
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy ha");
-
-    /** The DateTimeFormatter when converting time with minutes from string.*/
-    private static final DateTimeFormatter DATE_MINUTES_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy h:mma");
 
     /** The date and time of the deadline task.*/
     protected LocalDateTime by;
@@ -42,23 +35,6 @@ public class Deadline extends Task {
      */
     public String toFileFormat() {
         return String.format("D%s,%s,%b", name, PRINT_DATE_FORMATTER.format(by), isDone);
-    }
-
-    /**
-     * Converts the user input string to a LocalDateTime.
-     * @param by The user input date as a string.
-     * @return The LocalDateTime representation.
-     * @throws DuchessException When an incorrect format is used for Deadline.
-     */
-    public static LocalDateTime convertStringToDate (String by) throws DuchessException {
-        try {
-            String replacement = by.replace("am", "AM").replace("pm", "PM");
-            System.out.println(replacement);
-            return LocalDateTime.parse(replacement,
-                    replacement.contains(":") ? DATE_MINUTES_FORMATTER : DATE_FORMATTER);
-        } catch (DateTimeException e) {
-            throw new DuchessException("Wrong format used.");
-        }
     }
 
     /**

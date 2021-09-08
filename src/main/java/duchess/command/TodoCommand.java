@@ -1,7 +1,7 @@
 package duchess.command;
 
-import duchess.main.Duchess;
 import duchess.main.DuchessFileHandler;
+import duchess.main.DuchessList;
 import duchess.task.ToDo;
 
 /**
@@ -10,7 +10,6 @@ import duchess.task.ToDo;
  * @author Amos Tan
  * @version CS2103T AY21/22 Semester 1
  */
-
 public class TodoCommand extends Command {
 
     /**
@@ -23,21 +22,19 @@ public class TodoCommand extends Command {
 
     /**
      * Handles the logic for checking and creating ToDo tasks.
-     * @param duchess The Duchess to return the output to.
-     * @return Whether to continue scanning for user input afterwards.
+     * @param duchessList The DuchessList to read or write tasks to.
+     * @return The reply from Duchess to the user.
      */
-    public String handleLogic(Duchess duchess) {
-        String task = getName();
-        String reply;
+    public String handleLogic(DuchessList duchessList) {
+        String task = getDescription();
         // Valid input
         ToDo todo = new ToDo(task);
-        duchess.getDuchessList().add(todo);
-        int listSize = duchess.getDuchessList().getSize();
-        reply = "Understood. I've added this task:\n    " + todo
+        duchessList.add(todo);
+        int listSize = duchessList.getSize();
+        String reply = "Understood. I've added this task:\n    " + todo
                 + "\nYou now have " + listSize
                 + (listSize > 1 ? " tasks in the list." : " task in the list.");
-        DuchessFileHandler.writeToFile(duchess.getDuchessList());
+        DuchessFileHandler.writeToFile(duchessList);
         return reply;
     }
-
 }

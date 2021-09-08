@@ -1,6 +1,6 @@
 package duchess.command;
 
-import duchess.main.Duchess;
+import duchess.main.DuchessList;
 
 /**
  * This class contains the logic to handle the deadline command.
@@ -18,10 +18,10 @@ public class ListCommand extends Command {
 
     /**
      * Handles the logic for creating an list command.
-     * @param duchess The Duchess to return the output to.
-     * @return Whether to continue scanning for user input afterwards.
+     * @param duchessList The DuchessList to read or write tasks to.
+     * @return The reply from Duchess to the user.
      */
-    public String handleLogic(Duchess duchess) {
-        return duchess.getDuchessList().printList();
+    public String handleLogic(DuchessList duchessList) {
+        return duchessList.printList();
     }
 }

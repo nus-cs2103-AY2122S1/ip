@@ -42,15 +42,18 @@ public class Parser {
         String front = parts[0];
         // Check if the prefix matches any command recognised by Duchess
         for (CommandNames c : CommandNames.values()) {
-            if (front.equals(c.commandName)) {
+            if (!front.equals(c.commandName)) {
+                // No command recognised
+                continue;
+            } else {
                 try {
                     if (front.equals("bye") || front.equals("list")) {
                         return Command.of(front); // No need second argument
                     }
                     String back = parts[1]; // May throw ArrayIndexOutOfBoundsException
                     if (back.isBlank()) {
-                        throw new DuchessException("The description of " + front + " cannot be empty.");
                         // Second argument is only whitespaces
+                        throw new DuchessException("The description of " + front + " cannot be empty.");
                     }
                     return Command.of(front, back);
                 } catch (ArrayIndexOutOfBoundsException e) {
@@ -58,7 +61,7 @@ public class Parser {
                 }
             }
         }
-        // No command recognised
+        // No command recognised at all
         return new InvalidCommand();
     }
 }
