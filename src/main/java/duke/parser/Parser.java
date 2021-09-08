@@ -32,11 +32,7 @@ public class Parser {
             break;
 
         case "delete":
-            try {
-                newCommand = new DeleteCommand(Integer.parseInt(fullCommand.split(" ")[1]));
-            } catch (IndexOutOfBoundsException | NumberFormatException e) {
-                throw new DukeException("OOPS!!! Please enter a valid task number.");
-            }
+            newCommand = Parser.createDeleteCommand(fullCommand);
             break;
 
         case "list":
@@ -44,11 +40,7 @@ public class Parser {
             break;
 
         case "done":
-            try {
-                newCommand = new DoneCommand(Integer.parseInt(fullCommand.split(" ")[1]));
-            } catch (IndexOutOfBoundsException | NumberFormatException e) {
-                throw new DukeException("OOPS!!! Please enter a valid task number.");
-            }
+            newCommand = Parser.createDoneCommand(fullCommand);
             break;
 
         case "todo": case "deadline": case "event":
@@ -56,17 +48,45 @@ public class Parser {
             break;
 
         case "find":
-            try {
-                newCommand = new FindCommand(fullCommand.split(" ")[1]);
-            } catch (IndexOutOfBoundsException | NumberFormatException e) {
-                throw new DukeException("OOPS!!! Please enter a valid keyword.");
-            }
+            newCommand = Parser.createFindCommand(fullCommand);
             break;
-
 
         default:
             newCommand = new LostCommand();
             break;
+        }
+
+        return newCommand;
+    }
+
+    private static Command createDeleteCommand(String fullCommand) throws DukeException {
+        Command newCommand;
+        try {
+            newCommand = new DeleteCommand(Integer.parseInt(fullCommand.split(" ")[1]));
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            throw new DukeException("OOPS!!! Please enter a valid task number.");
+        }
+
+        return newCommand;
+    }
+
+    private static Command createDoneCommand(String fullCommand) throws DukeException {
+        Command newCommand;
+        try {
+            newCommand = new DoneCommand(Integer.parseInt(fullCommand.split(" ")[1]));
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            throw new DukeException("OOPS!!! Please enter a valid task number.");
+        }
+
+        return newCommand;
+    }
+
+    private static Command createFindCommand(String fullCommand) throws DukeException {
+        Command newCommand;
+        try {
+            newCommand = new FindCommand(fullCommand.split(" ")[1]);
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            throw new DukeException("OOPS!!! Please enter a valid keyword.");
         }
 
         return newCommand;

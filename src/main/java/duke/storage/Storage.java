@@ -44,40 +44,44 @@ public class Storage {
             Scanner scan = new Scanner(this.file);
 
             while (scan.hasNext()) {
-                Task newTask;
-
                 String taskLine = scan.nextLine();
-
-                String[] task = taskLine.split(" \\| ");
-                String taskType = task[0];
-
-                switch (taskType) {
-                case ("T"):
-                    newTask = new Todo(task[2]);
-                    break;
-                case ("D"):
-                    newTask = new Deadline(task[2], task[3]);
-                    break;
-                case ("E"):
-                    newTask = new Event(task[2], task[3]);
-                    break;
-                default:
-                    throw new DukeException("Oops! Duke can't load a file");
-                }
-
-                if (task[1].equals("X")) {
-                    newTask.markDone();
-                }
-
+                Task newTask = this.createTaskFromString(taskLine);
                 tasks.add(newTask);
             }
-
             return tasks;
 
         } catch (FileNotFoundException e) {
             return tasks;
         }
     }
+
+    private Task createTaskFromString(String taskString) throws DukeException {
+        Task newTask;
+        String[] task = taskString.split(" \\| ");
+        String taskType = task[0];
+        boolean isDone = task[1].equals("X");
+
+        switch (taskType) {
+        case ("T"):
+            newTask = new Todo(task[2]);
+            break;
+        case ("D"):
+            newTask = new Deadline(task[2], task[3]);
+            break;
+        case ("E"):
+            newTask = new Event(task[2], task[3]);
+            break;
+        default:
+            throw new DukeException("Oops! Duke can't load a file");
+        }
+
+        if (isDone) {
+            newTask.markDone();
+        }
+
+        return newTask;
+    }
+
 
     /**
      * Stores all current tasks in the hard-drive.

@@ -29,8 +29,8 @@ public class Ui {
      * @return Task added to the list.
      */
     public String showAddTask(Task task, TaskList taskList) {
-        String addTask = String.format("Got it. I've added this task:\n%s\nNow you have %d task(s) in the list.",
-                task.toString(), taskList.totalTask());
+        String addTemplate = "Got it. I've added this task:\n%s\nNow you have %d task(s) in the list.";
+        String addTask = String.format(addTemplate, task.toString(), taskList.totalTask());
         return addTask;
     }
 
@@ -42,8 +42,8 @@ public class Ui {
      * @return Task that is deleted from the list.
      */
     public String showDeleteTask(Task task, TaskList taskList) {
-        String deleteTask = String.format("Noted. I've removed this task:\n%s\nNow you have %d task(s) in the list.",
-                task.toString(), taskList.totalTask());
+        String deleteTemplate = "Noted. I've removed this task:\n%s\nNow you have %d task(s) in the list.";
+        String deleteTask = String.format(deleteTemplate, task.toString(), taskList.totalTask());
         return deleteTask;
     }
 
@@ -54,7 +54,8 @@ public class Ui {
      * @return Task that is marked as done.
      */
     public String showDone(Task task) {
-        String done = String.format("Nice! I've marked this task as done:\n%s", task.toString());
+        String doneTemplate = "Nice! I've marked this task as done:\n%s";
+        String done = String.format(doneTemplate, task.toString());
         return done;
     }
 
@@ -67,18 +68,13 @@ public class Ui {
      */
     public String showList(TaskList taskList) throws DukeException {
         int numTask = taskList.totalTask();
-        String task;
+        String task = "";
 
-        if (numTask == 0) {
-            task = "";
-        } else {
-            task = "1. " + taskList.getTask(1).toString();
-            for (int taskNumber = 2; taskNumber <= numTask; taskNumber++) {
-                task = task + "\n" + taskNumber + ". " + taskList.getTask(taskNumber).toString();
-            }
+        for (int taskNumber = 1; taskNumber <= numTask; taskNumber++) {
+            task = task + "\n" + taskNumber + ". " + taskList.getTask(taskNumber).toString();
         }
 
-        String listStatement = "Here are the tasks in your list:\n";
+        String listStatement = "Here are the tasks in your list:";
         String output = listStatement + task;
         return output;
     }
@@ -112,18 +108,18 @@ public class Ui {
         if (tasks.size() == 0) {
             String noMatch = "Sorry, no match found";
             return noMatch;
-        } else {
-            int numTask = tasks.size();
-
-            String task = "1. " + tasks.get(0).toString();
-            for (int taskNumber = 2; taskNumber <= numTask; taskNumber++) {
-                task = task + "\n" + taskNumber + ". " + tasks.get(taskNumber - 1).toString();
-            }
-
-            task = "Here are the matching tasks in your list:\n" + task;
-
-            return task;
         }
+
+        int numTask = tasks.size();
+        String task = "";
+
+        for (int taskNumber = 1; taskNumber <= numTask; taskNumber++) {
+            task = task + "\n" + taskNumber + ". " + tasks.get(taskNumber - 1).toString();
+        }
+
+        String taskList = "Here are the matching tasks in your list:" + task;
+
+        return taskList;
     }
 
 }
