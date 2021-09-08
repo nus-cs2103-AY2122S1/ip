@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Encapsulates the idea of tasks that happens at a certain date and time.
  */
-public class Event extends Task {
+public class Event extends TimedTask {
     private static final String TYPE = "E";
     private static final DateTimeFormatter DATABASE_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
@@ -61,6 +61,11 @@ public class Event extends Task {
      */
     public String getLabel() {
         return TYPE;
+    }
+
+    @Override
+    public void changeDate(String newDate) {
+        this.date = LocalDateTime.parse(newDate, DATABASE_DATE_TIME_FORMAT);
     }
 
     /**

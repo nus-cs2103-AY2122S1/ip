@@ -87,4 +87,15 @@ public class TaskList {
         }
         return new TaskList(filterList);
     }
+
+    public Task search(String word) {
+        Task task = null;
+        for (Task t : tasks) {
+            if (t.toString().contains(word)) {
+                task = t;
+                break;
+            }
+        }
+        return task;
+    }
 }
