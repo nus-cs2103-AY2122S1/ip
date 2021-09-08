@@ -32,6 +32,7 @@ public class Find {
     public TaskList findMatch(TaskList taskList, String... input) {
         TaskList newList = new TaskList(new ArrayList<>());
         for (Task task : taskList.getEntire()) {
+            // this way of searching ensures there is a match even if keyword matches the item only partially
             for (String word : input) {
                 if (isMatch(word, task.getDescription())) {
                     newList.add(task);
