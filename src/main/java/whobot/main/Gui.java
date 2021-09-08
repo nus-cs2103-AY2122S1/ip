@@ -10,11 +10,11 @@ import javafx.stage.Stage;
 
 public class Gui extends Application {
 
-    private static long SHORT_TEXT_DELAY = 50;
+    private static final long SHORT_TEXT_DELAY = 50;
 
-    private static long LONG_TEXT_DELAY = 20;
+    private static final long LONG_TEXT_DELAY = 20;
 
-    private static long SHORT_TEXT_LIMIT = 150;
+    private static final long SHORT_TEXT_LIMIT = 150;
 
     public static long getShortTextDelay() {
         return SHORT_TEXT_DELAY;

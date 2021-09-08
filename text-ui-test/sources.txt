@@ -1,3 +1,4 @@
+../src/main/java/WhoBot/main/Gui.java
 ../src/main/java/WhoBot/main/UI.java
 ../src/main/java/WhoBot/main/WhoBot.java
 ../src/main/java/WhoBot/main/WhoBotException.java

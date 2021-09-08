@@ -77,59 +77,58 @@ public class DisplayBuffer {
         long delay = charCount > Gui.getShortTextLimit()
                 ? Gui.getLongTextDelay()
                 : Gui.getShortTextDelay();
-
         Thread printThread = new Thread(() -> {
-            assert userInput != null;
-            assert sendButton != null;
-            assert parent != null;
-            userInput.setDisable(true);
-            sendButton.setDisable(true);
-            int i = 0;
-            if (!buffer.isEmpty()) {
-                int finalI = i;
-                Platform.runLater(() -> {
-                    final Node node = BotDialogBox.getDialog(buffer.get(finalI), false, delay);
-                    FadeTransition transition = new FadeTransition(Duration.millis(300), node);
-                    transition.setFromValue(0);
-                    transition.setToValue(1);
-                    parent.getChildren().add(node);
-                    transition.play(); });
-                try {
-                    Thread.sleep(delay * buffer.get(i).length());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                i++;
-            }
-
-            if (buffer.size() > 1) {
-                for (; i < buffer.size(); i++) {
-                    int finalI1 = i;
-                    Platform.runLater((() -> {
-                        final Node node = BotDialogBox.getDialog(buffer.get(finalI1), true, delay);
+            if (userInput != null && sendButton != null) {
+                userInput.setDisable(true);
+                sendButton.setDisable(true);
+                int i = 0;
+                if (!buffer.isEmpty()) {
+                    int finalI = i;
+                    Platform.runLater(() -> {
+                        final Node node = BotDialogBox.getDialog(buffer.get(finalI), false, delay);
                         FadeTransition transition = new FadeTransition(Duration.millis(300), node);
                         transition.setFromValue(0);
                         transition.setToValue(1);
                         parent.getChildren().add(node);
                         transition.play();
-                        if (finalI1 == buffer.size() - 1) {
-                            buffer.removeIf(c -> true);
-                        }
-                    }));
+                    });
                     try {
                         Thread.sleep(delay * buffer.get(i).length());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    if (buffer.size() == 0) {
-                        userInput.setDisable(false);
-                        sendButton.setDisable(false);
-                    }
+                    i++;
                 }
-            } else {
-                buffer.removeIf(c -> true);
-                userInput.setDisable(false);
-                sendButton.setDisable(false);
+
+                if (buffer.size() > 1) {
+                    for (; i < buffer.size(); i++) {
+                        int finalI1 = i;
+                        Platform.runLater((() -> {
+                            final Node node = BotDialogBox.getDialog(buffer.get(finalI1), true, delay);
+                            FadeTransition transition = new FadeTransition(Duration.millis(300), node);
+                            transition.setFromValue(0);
+                            transition.setToValue(1);
+                            parent.getChildren().add(node);
+                            transition.play();
+                            if (finalI1 == buffer.size() - 1) {
+                                buffer.removeIf(c -> true);
+                            }
+                        }));
+                        try {
+                            Thread.sleep(delay * buffer.get(i).length());
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        if (buffer.size() == 0) {
+                            userInput.setDisable(false);
+                            sendButton.setDisable(false);
+                        }
+                    }
+                } else {
+                    buffer.removeIf(c -> true);
+                    userInput.setDisable(false);
+                    sendButton.setDisable(false);
+                }
             }
         });
         printThread.start();
