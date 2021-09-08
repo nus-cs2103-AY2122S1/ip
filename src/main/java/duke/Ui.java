@@ -136,13 +136,7 @@ public class Ui {
             return "\tYou have no task in your list.\n";
         }
 
-        TaskList filteredList = new TaskList();
-        for (int i = 1; i <= taskList.getLength(); i++) {
-            Task task = taskList.get(i);
-            if (task.contains(keyword)) {
-                filteredList.add(task);
-            }
-        }
+        TaskList filteredList = taskList.filter(keyword);
         if (filteredList.isEmpty()) {
             return "\tYou have no matching task in your list.\n";
         }
