@@ -1,6 +1,6 @@
 package duke;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -65,12 +65,12 @@ public class Ui {
     }
 
     /**
-     * Prints a list of tasks.
+     * Prints a list of objects.
      *
-     * @param tasks List of tasks to be printed.
-     * @param heading The heading to precede the list of tasks.
+     * @param tasks List of items to be printed.
+     * @param heading The heading to precede the list of items.
      */
-    public void printAll(ArrayList<? extends Object> tasks, String heading) {
+    public void printAll(List<? extends Object> tasks, String heading) {
         String s = "\n";
         s += INDENT + heading + INDENT + "\n";
         for (int i = 1; i <= tasks.size(); i++) {
