@@ -78,6 +78,9 @@ public class Parser {
         case "help":
             Ui.printHelpSection();
             break;
+        case "view":
+            taskList.viewScheduleForAParticularDay(userInput);
+            break;
         case "bye":
             markSessionDone();
             break;

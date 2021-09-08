@@ -17,6 +17,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public boolean isOnDate(TaskDateAndTime date) {
+        return date.equals(at);
+    }
+
     /**
      * Returns the event task description and its status in an
      * organised format.

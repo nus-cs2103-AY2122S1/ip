@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import retriever.Storage;
 import retriever.Ui;
+import retriever.exception.IllegalCommandException;
 import retriever.exception.IllegalDateFormatException;
 import retriever.exception.IllegalDeadlineFormatException;
 import retriever.exception.IllegalEventFormatException;
 import retriever.exception.IllegalTaskNumberException;
 import retriever.exception.IllegalTodoFormatException;
+import retriever.exception.RetrieverException;
 import retriever.exception.TaskNotFoundException;
 
 /**
@@ -282,7 +284,87 @@ public class TaskList {
             }
         }
 
-        ui.printTaskFoundByKeyword(matchingTasks);
+        ui.printTasksFoundByKeyword(matchingTasks);
+    }
+
+    public int numberOfDaysInTheMonth(int month, int year) {
+        switch(month) {
+        case 1:
+        case 3:
+        case 5:
+        case 7:
+        case 8:
+        case 10:
+        case 12:
+            return 31;
+        case 4:
+        case 6:
+        case 9:
+        case 11:
+            return 30;
+        case 2:
+            if (year % 4 == 0) {
+                return 29;
+            }
+            return 28;
+        default:
+            return 0;
+        }
+    }
+
+    public boolean isDateRangeValid(String[] enteredDate) {
+        int enteredDay = Integer.parseInt(enteredDate[0]);
+        int enteredMonth = Integer.parseInt(enteredDate[1]);
+        int enteredYear = Integer.parseInt(enteredDate[2]);
+
+        boolean isValidMonth = enteredMonth >= 1 && enteredMonth <= 12;
+        boolean isValidDay = enteredDay >= 1 && enteredDay <= numberOfDaysInTheMonth(enteredMonth, enteredYear);
+
+        return isValidMonth && isValidDay;
+    }
+
+    public boolean isViewScheduleFormatCorrect(String[] parsedUserInput) {
+        boolean hasDate = parsedUserInput.length == 2;
+        if(!hasDate) {
+            return false;
+        }
+
+        String[] enteredDate = parsedUserInput[1].split("/");
+        boolean isDateFormatValid = enteredDate.length == 3;
+        if(!isDateFormatValid) {
+            return false;
+        }
+
+        boolean isDateValid = isDateRangeValid(enteredDate);
+        return isDateValid;
+    }
+
+    public void viewScheduleForAParticularDay(String[] parsedUserInput) throws RetrieverException {
+        if(!isViewScheduleFormatCorrect(parsedUserInput)) {
+            throw new IllegalCommandException("Please Follow The Specified Format: view DD/MM/YYYY");
+        }
+
+        TaskDateAndTime enteredDate = new TaskDateAndTime(parsedUserInput[1]);
+        ArrayList<Task> scheduledTasksForTheDay = new ArrayList<Task>();
+
+        for (int i = 0; i < taskListLength(); i++) {
+            Task task = userTaskList.get(i);
+            if (task instanceof Deadline) {
+                Deadline deadlineTask = (Deadline) task;
+                if (deadlineTask.isOnDate(enteredDate)) {
+                    scheduledTasksForTheDay.add(task);
+                }
+            } else if (task instanceof Event) {
+                Event eventTask = (Event) task;
+                if (eventTask.isOnDate(enteredDate)) {
+                    scheduledTasksForTheDay.add(task);
+                }
+            } else {
+                // Don't Add
+            }
+        }
+
+        ui.printTasksScheduledForTheDay(scheduledTasksForTheDay);
     }
 
     /**

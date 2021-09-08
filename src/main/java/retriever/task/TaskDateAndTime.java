@@ -47,4 +47,10 @@ public class TaskDateAndTime {
     public String toString() {
         return taskDateAndTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        TaskDateAndTime date = (TaskDateAndTime) o;
+        return taskDateAndTime.compareTo(date.taskDateAndTime) == 0;
+    }
 }

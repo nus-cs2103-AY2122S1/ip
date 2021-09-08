@@ -17,6 +17,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public boolean isOnDate(TaskDateAndTime date) {
+        return date.equals(by);
+    }
+
     /**
      * Returns the deadline task description and its status in an
      * organised format.
