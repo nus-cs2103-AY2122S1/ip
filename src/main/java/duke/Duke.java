@@ -55,7 +55,9 @@ public class Duke {
     }
 
 
+
     private void exit() throws DukeDatabaseException {
+        assert this.isRunning;
         try {
             this.ui.closeInput();
             this.storage.saveData(this.taskList);
