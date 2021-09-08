@@ -63,7 +63,7 @@ public class Duke {
     }
 
 
-    private String getResponse(String input) {
+    protected String getResponse(String input) {
         try {
             switch (Parser.parseCmd(input)) {
             case BYE:
