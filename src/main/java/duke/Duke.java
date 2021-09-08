@@ -55,7 +55,6 @@ public class Duke {
         sc.close();
     }
 
-
     /**
      * Returns the result string based on the given input.
      */

@@ -11,7 +11,7 @@ import duke.Ui;
  */
 public class Event extends Task {
     /** Start or end time of the event. */
-    private final LocalDateTime eventTime;
+    private LocalDateTime eventTime;
 
     /**
      * Constructs an event using the given description and event time.
@@ -34,6 +34,14 @@ public class Event extends Task {
     public Event(String description, boolean isDone, LocalDateTime eventTime) {
         super(description, isDone);
         this.eventTime = eventTime;
+    }
+
+    public void setEventTime(LocalDateTime eventTime) {
+        this.eventTime = eventTime;
+    }
+
+    public LocalDateTime getEventTime() {
+        return this.eventTime;
     }
 
     /**

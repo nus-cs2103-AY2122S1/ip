@@ -9,7 +9,7 @@ import duke.Parser;
  */
 public class Task {
     /** Description of the task. */
-    private final String description;
+    private String description;
     /** State of the task. */
     private boolean isDone;
 
@@ -40,6 +40,10 @@ public class Task {
 
     public boolean isDone() {
         return isDone;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**

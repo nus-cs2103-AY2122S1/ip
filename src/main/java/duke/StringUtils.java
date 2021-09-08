@@ -79,4 +79,17 @@ public class StringUtils {
         }
         return result;
     }
+
+    /**
+     * Returns a String representation of the updated task.
+     *
+     * @param task The updated task.
+     * @return A String representation of the updated task.
+     */
+    public static String getEditMessage(Task task) {
+        StringBuffer result = new StringBuffer("Got it. Here is the updated task:\n");
+        result.append(task.toString());
+        result.append("\n");
+        return result.toString();
+    }
 }
