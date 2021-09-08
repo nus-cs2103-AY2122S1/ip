@@ -48,21 +48,22 @@ public class Storage {
      *                       be created.
      */
     public void checkFile() throws DukeException {
-        if (!taskFile.exists()) {
-            File dir = new File("data");
-            if (!(dir.exists() && dir.isDirectory())) {
-                dir.mkdir();
-            }
-            try {
-                taskFile.createNewFile();
-            } catch (IOException e) {
-                throw new DukeException("");
+        File dir = new File("data");
+        boolean hasDirectory = dir.exists() && dir.isDirectory();
 
-            } catch (SecurityException e) {
-                System.out.println("Oh No! There seems to be something wrong with the file...");
-            }
+        if(!hasDirectory) {
+            dir.mkdir();
+        }
+
+        try {
+            taskFile.createNewFile();
+        } catch (IOException e) {
+            throw new DukeException("Oh No! There seems to be something " +
+                    "wrong with the file...");
         }
     }
+
+
 
     /**
      * Loads the current file content and adds the tasks
@@ -127,7 +128,6 @@ public class Storage {
             Deadline temp = (Deadline) task;
             toAdd += " | " + temp.changeDateFormat().trim();
         } else if (task.taskIndicator().equals("E")) {
-
             Event temp = (Event) task;
             toAdd += " | " + temp.getAt().trim();
         }
