@@ -38,27 +38,27 @@ public class Parser {
         String regex = isEvent ? "/at" : "/by";
         String taskType = isEvent ? "event" : "deadline";
 
-        // Parse the command
-        if (words.length >= 2) {
-            String[] information = words[1].split(regex);
-            if (information.length == 2) {
-                try {
-                    if (isEvent) {
-                        return new AddTaskCommand(new Event(information[0], information[1]));
-                    } else {
-                        return new AddTaskCommand(new Deadline(information[0], information[1]));
-                    }
-                } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
-                    throw new InvalidTimeException(timeFormat);
-                }
-            } else if (information.length < 2) {
-                throw new MissingCommandDetailException("time", taskType, String.format("%s %s", regex, timeFormat));
-            } else {
-                throw new MultipleTimeSlotsException(taskType);
-            }
-        } else {
+        if (words.length < 2) {
             throw new MissingCommandDetailException("description", taskType,
                     String.format("%s %s", regex, timeFormat));
+        }
+
+        // Parse the command
+        String[] information = words[1].split(regex);
+        if (information.length == 2) {
+            try {
+                if (isEvent) {
+                    return new AddTaskCommand(new Event(information[0], information[1]));
+                } else {
+                    return new AddTaskCommand(new Deadline(information[0], information[1]));
+                }
+            } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
+                throw new InvalidTimeException(timeFormat);
+            }
+        } else if (information.length < 2) {
+            throw new MissingCommandDetailException("time", taskType, String.format("%s %s", regex, timeFormat));
+        } else {
+            throw new MultipleTimeSlotsException(taskType);
         }
     }
 
@@ -101,21 +101,19 @@ public class Parser {
         } else if (words[0].equals("delete")) {
             return parseCommandWithTaskNo(words, false);
         } else if (words[0].equals("todo")) {
-            if (words.length >= 2) {
-                return new AddTaskCommand(new ToDo(words[1]));
-            } else {
+            if (words.length < 2) {
                 throw new MissingCommandDetailException("description", "todo", "");
             }
+            return new AddTaskCommand(new ToDo(words[1]));
         } else if (words[0].equals("deadline")) {
             return Parser.parseCommandWithTime(words, false);
         } else if (words[0].equals("event")) {
             return Parser.parseCommandWithTime(words, true);
         } else if (words[0].equals("find")) {
-            if (words.length >= 2) {
-                return new FindTaskCommand(words[1].trim());
-            } else {
+            if (words.length < 2) {
                 throw new MissingCommandDetailException("keyword", "find", "");
             }
+            return new FindTaskCommand(words[1].trim());
         } else {
             throw new InvalidCommandException();
         }
