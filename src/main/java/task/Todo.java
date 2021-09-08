@@ -7,14 +7,14 @@ package task;
  */
 public class Todo extends Task {
 
-    private static String taskCat = "todo";
+    private static final String TASK_CAT = "todo";
 
     /**
      * Constructor to create a TODO task
      * @param name Name of task
      */
     public Todo(String name, boolean isDone) {
-        super(name, taskCat, isDone);
+        super(name, TASK_CAT, isDone);
     }
 
     /**
@@ -35,7 +35,7 @@ public class Todo extends Task {
      */
     @Override
     public String getTaskCat() {
-        return taskCat;
+        return TASK_CAT;
     }
 
     /**

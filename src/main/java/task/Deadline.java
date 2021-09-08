@@ -7,7 +7,7 @@ package task;
  */
 public class Deadline extends Task {
 
-    private static String taskCat = "deadline";
+    private static final String TASK_CAT = "deadline";
     private String deadline;
 
     /**
@@ -16,7 +16,7 @@ public class Deadline extends Task {
      * @param deadline Deadline of task
      */
     public Deadline(String name, String deadline, boolean isDone) {
-        super(name, taskCat, isDone);
+        super(name, TASK_CAT, isDone);
         this.deadline = deadline.trim();
     }
 
