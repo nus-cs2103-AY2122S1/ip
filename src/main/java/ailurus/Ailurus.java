@@ -1,9 +1,7 @@
 package ailurus;
 
-import ailurus.task.Deadline;
-import ailurus.task.Event;
 import ailurus.task.TaskList;
-import ailurus.task.Todo;
+import javafx.application.Application;
 
 /**
  * The main task chatbot class for Ailurus Chatbot
@@ -34,25 +32,17 @@ public class Ailurus {
     }
 
     /**
-     * Run the chatbot program with the correct environment setups.
+     * Exit JavaFX program
      */
-    public void run() {
-        ui.showWelcome();
-        while (!isExit) {
-            try {
-                String fullCommand = this.ui.readCommand();
-                String command = Parser.parse(fullCommand);
-                Parser.parseCommand(command, fullCommand, ui, storage, tasks);
-            } catch (AilurusException e) {
-                this.ui.showError(e.getMessage());
-            }
-        }
-    }
-
     public static void exit() {
         isExit = true;
     }
 
+    /**
+     * Get message and handle response
+     * @param message message to be parsed
+     * @return response to message
+     */
     public String getResponse(String message) {
         try {
             String command = Parser.parse(message);
@@ -63,7 +53,7 @@ public class Ailurus {
     }
 
     public static void main(String[] args) {
-        new Ailurus("./data/", "tasks.txt").run();
+        Application.launch(Main.class, args);
     }
 
 }

@@ -18,25 +18,18 @@ public class Ui {
 
     /**
      * Welcomes user to use the chatbot
+     *
+     * @return welcome message string
      */
     public String showWelcome() {
         return this.say(String.format("Hello! I'm %s. What can I do for you?", this.CHATBOT));
     }
 
     /**
-     * Read user input
-     *
-     * @return user input as string
-     */
-    public String readCommand() {
-        System.out.print(this.YOU + ": ");
-        return scanner.nextLine();
-    }
-
-    /**
      * Show user the error
      *
      * @param errorMessage Error message to be shown to user
+     * @return error message to be said
      */
     public String showError(String errorMessage) {
         return this.say(errorMessage);
@@ -46,6 +39,7 @@ public class Ui {
      * Customized display for chatbot messages
      *
      * @param message display message to be printed
+     * @return message to be said
      */
     public String say(String message) {
         System.out.println(String.format("%s: %s", this.CHATBOT, message));
@@ -57,6 +51,7 @@ public class Ui {
      * Printing out of the list of tasks
      *
      * @param list TaskList to be said by chatbot
+     * @return list of tasks as string
      */
     public String sayList(TaskList list) {
         if (list.length() == 0) {
@@ -76,6 +71,7 @@ public class Ui {
      * Tell the user that the task is marked as done
      *
      * @param task task that is marked as done
+     * @return message that task is done
      */
     public String sayDone(Task task) {
         return this.say(String.format("Nice! I've marked this task as done:\n\t%s", task));
@@ -86,6 +82,7 @@ public class Ui {
      *
      * @param task task that is added
      * @param size size of task list
+     * @return message for adding task
      */
     public String sayAdd(Task task, int size) {
         return this.say(String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.",
@@ -97,6 +94,7 @@ public class Ui {
      *
      * @param task task that is deleted
      * @param size size of task list
+     * @return message for deleting task
      */
     public String sayDelete(Task task, int size) {
         return this.say(String.format("Noted. I've removed this task:\n\t%s\nNow you have %d tasks in the list.",
@@ -107,6 +105,7 @@ public class Ui {
      * Tell the user that there are matching tasks, and the list of them
      *
      * @param tasks list of tasks that are matching
+     * @return message for finding task
      */
     public String sayFind(TaskList tasks) {
         String header = this.say("Here are the matching tasks in your list:");
@@ -116,6 +115,8 @@ public class Ui {
 
     /**
      * Tell the user that the command given was invalid
+     *
+     * @return message for invalid command
      */
     public String sayInvalidCommand() {
         return this.say("(!) OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -123,6 +124,8 @@ public class Ui {
 
     /**
      * Tell the user that it is the end of chatting
+     *
+     * @return message for exiting
      */
     public String sayBye() {
         return this.say("Bye. Hope to see you again soon!");
