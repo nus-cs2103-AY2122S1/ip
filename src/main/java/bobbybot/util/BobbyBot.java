@@ -10,7 +10,7 @@ import bobbybot.exceptions.BobbyException;
 public class BobbyBot {
     private static final String DBPATH = "data/database.txt";
     private final Storage storage;
-    private TaskList tasks;
+    private final TaskList tasks;
     private final Ui ui;
 
     /**
@@ -20,11 +20,7 @@ public class BobbyBot {
         ui = new Ui();
         ui.showWelcome();
         storage = new Storage(DBPATH);
-        assert storage != null;
         tasks = new TaskList(storage.load());
-
-
-
     }
 
     /**

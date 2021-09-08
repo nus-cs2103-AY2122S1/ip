@@ -2,11 +2,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import bobbybot.tasks.Task;
@@ -15,7 +13,7 @@ import bobbybot.util.Storage;
 public class StorageTest {
 
     @Test
-    public void load_loadTestDB_success() throws FileNotFoundException {
+    public void load_loadTestDB_success() {
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
         Storage storage = new Storage("src/test/testDatabase.txt");
 

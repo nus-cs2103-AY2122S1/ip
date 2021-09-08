@@ -33,6 +33,7 @@ public class Duke {
     String getResponse(String input) {
         try {
             Command c = parser.parseCommand(input);
+            assert c != null : "Command cannot be null";
             c.execute(tasks, ui , storage);
             return c.getResponse();
         } catch (BobbyException e) {
