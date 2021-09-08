@@ -51,10 +51,12 @@ public class Parser {
         String[] tokens = cmd.split(" ");
         Keyword command = validateCommand(tokens);
 
-        int middle;
+        int argIndex;
+        int notesIndex;
         int index;
         String description;
         String dateString;
+        String notes;
         LocalDateTime at;
         LocalDateTime by;
         Task task;
@@ -67,17 +69,30 @@ public class Parser {
             message.append(this.tasks.printTaskList());
             break;
         case TODO:
-            task = new Todo(cmd.substring(5));
+            notesIndex = Arrays.asList(tokens).indexOf("/notes");
+            if (notesIndex == -1) {
+                task = new Todo(cmd.substring(5));
+            } else {
+                description = String.join(" ", Arrays.copyOfRange(tokens, 1, notesIndex));
+                notes = String.join(" ", Arrays.copyOfRange(tokens, notesIndex + 1, tokens.length));
+                task = new Todo(description, notes);
+            }
             this.tasks.add(task);
             message.append(ui.showAddTaskMsg(task));
             break;
         case DEADLINE:
-            middle = Arrays.asList(tokens).indexOf("/by");
-            if (middle == -1) {
+            argIndex = Arrays.asList(tokens).indexOf("/by");
+            notesIndex = Arrays.asList(tokens).indexOf("/notes");
+            if (argIndex == -1) {
                 throw new DukeException("Missing deadline.");
             }
-            description = String.join(" ", Arrays.copyOfRange(tokens, 1, middle));
-            dateString = String.join(" ", Arrays.copyOfRange(tokens, middle + 1, tokens.length));
+            if (notesIndex == -1) {
+                description = String.join(" ", Arrays.copyOfRange(tokens, 1, argIndex));
+                dateString = String.join(" ", Arrays.copyOfRange(tokens, argIndex + 1, tokens.length));
+            } else {
+                description = String.join(" ", Arrays.copyOfRange(tokens, 1, argIndex));
+                dateString = String.join(" ", Arrays.copyOfRange(tokens, argIndex + 1, notesIndex));
+            }
             try {
                 by = LocalDateTime.parse(dateString, format);
                 task = new Deadline(description, by);
@@ -88,12 +103,12 @@ public class Parser {
             }
             break;
         case EVENT:
-            middle = Arrays.asList(tokens).indexOf("/at");
-            if (middle == -1) {
+            argIndex = Arrays.asList(tokens).indexOf("/at");
+            if (argIndex == -1) {
                 throw new DukeException("Missing time of event.");
             }
-            description = String.join(" ", Arrays.copyOfRange(tokens, 1, middle));
-            dateString = String.join(" ", Arrays.copyOfRange(tokens, middle + 1, tokens.length));
+            description = String.join(" ", Arrays.copyOfRange(tokens, 1, argIndex));
+            dateString = String.join(" ", Arrays.copyOfRange(tokens, argIndex + 1, tokens.length));
             try {
                 at = LocalDateTime.parse(dateString, format);
                 task = new Event(description, at);

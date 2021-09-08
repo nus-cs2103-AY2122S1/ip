@@ -19,19 +19,30 @@ public class Deadline extends Task {
      * @param by Deadline.
      */
     public Deadline(String description, LocalDateTime by) {
-        super(description);
-        this.by = by;
+        this(description, false, by, "");
     }
 
     /**
-     * Overloaded constructor for Deadline.
+     * Constructor for Deadline.
      *
-     * @param description Description to be stored.
+     * @param description Description to be stored in Deadline.
      * @param isDone Boolean that represents Deadline completion status.
      * @param by Deadline.
      */
     public Deadline(String description, boolean isDone, LocalDateTime by) {
-        super(description, isDone);
+        this(description, isDone, by, "");
+    }
+
+    /**
+     * Constructor for Deadline.
+     *
+     * @param description Description to be stored.
+     * @param isDone Boolean that represents Deadline completion status.
+     * @param by Deadline.
+     * @param notes A string representation of notes.
+     */
+    public Deadline(String description, boolean isDone, LocalDateTime by, String notes) {
+        super(description, isDone, notes);
         this.by = by;
     }
 

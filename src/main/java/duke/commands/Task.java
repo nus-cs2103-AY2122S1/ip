@@ -16,25 +16,13 @@ public abstract class Task {
      * Constructor for Task.
      *
      * @param description Description to be stored in a Task.
-     */
-    public Task(String description) {
-        this.description = description;
-        isDone = false;
-        notes = null;
-    }
-
-    /**
-     * Overloaded Constructor for Task.
-     *
-     * @param description Description to be stored in a Task.
      * @param isDone Completion state.
      */
-    public Task(String description, boolean isDone) {
+    public Task(String description, boolean isDone, String notes) {
         this.description = description;
         this.isDone = isDone;
-        notes = null;
+        this.notes = notes;
     }
-
 
     public String getStatusIcon() {
         return (isDone ? "[X]" : "[ ]");

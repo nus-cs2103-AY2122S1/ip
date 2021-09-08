@@ -52,7 +52,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
 
-        /** Does nothing if input is empty. */
+        // Does nothing if input is empty.
         if (input.trim().isEmpty()) {
             return;
         }

@@ -19,8 +19,7 @@ public class Event extends Task {
      * @param at Event Time.
      */
     public Event(String description, LocalDateTime at) {
-        super(description);
-        this.at = at;
+        this(description, false, at, "");
     }
 
     /**
@@ -31,7 +30,19 @@ public class Event extends Task {
      * @param at Event Time.
      */
     public Event(String description, boolean isDone, LocalDateTime at) {
-        super(description, isDone);
+        this(description, isDone, at, "");
+    }
+
+    /**
+     * Constructor for Event.
+     *
+     * @param description Description to be stored in an Event.
+     * @param isDone Boolean that represents Task completion status.
+     * @param at Event Time.
+     * @param notes A string representation of notes.
+     */
+    public Event(String description, boolean isDone, LocalDateTime at, String notes) {
+        super(description, isDone, notes);
         this.at = at;
     }
 
