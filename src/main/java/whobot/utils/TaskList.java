@@ -29,6 +29,7 @@ public class TaskList {
      * @throws WhoBotException if there is an error reading data
      */
     public TaskList(Storage storage) throws WhoBotException {
+        assert storage != null;
         storage.readData(list);
     }
 
@@ -47,6 +48,7 @@ public class TaskList {
      * @param ui UI to print list to
      */
     public void printList(UI ui) {
+        assert ui != null;
         if (list.isEmpty()) {
             ui.echo("There are currently no tasks in your list.", UI.Type.COMPLETE);
             return;
@@ -69,6 +71,7 @@ public class TaskList {
      * @throws WhoBotException If any error
      */
     public void markAsDone(String ind, UI ui) throws WhoBotException {
+        assert ui != null;
         try {
             int index = Integer.parseInt(ind) - 1;
             if (index < list.size()) {
@@ -93,6 +96,7 @@ public class TaskList {
      * @throws WhoBotException If any error
      */
     public void markAsUndone(String ind, UI ui) throws WhoBotException {
+        assert ui != null;
         try {
             int index = Integer.parseInt(ind) - 1;
             if (index < list.size()) {
@@ -117,6 +121,7 @@ public class TaskList {
      * @throws WhoBotException If any error
      */
     public void deleteFromList(String ind, UI ui) throws WhoBotException {
+        assert ui != null;
         try {
             int index = Integer.parseInt(ind) - 1;
             if (index < list.size()) {
@@ -158,6 +163,7 @@ public class TaskList {
      * @throws WhoBotException If there is any error on addition
      */
     public void addTodo(String command, UI ui) throws WhoBotException {
+        assert ui != null;
         try {
             Todo task = new Todo(command.substring(5));
             if (list.add(task)) {
@@ -180,6 +186,7 @@ public class TaskList {
      * @throws WhoBotException If there is any error on addition
      */
     public void addEvent(String command, UI ui) throws WhoBotException {
+        assert ui != null;
         try {
             if (!command.contains("/at ")) {
                 throw new WhoBotException("Ensure that the command is of the form \"event #description /at #timing\"."
@@ -206,6 +213,7 @@ public class TaskList {
      * @throws WhoBotException If there is any error on addition
      */
     public void addDeadline(String command, UI ui) throws WhoBotException {
+        assert ui != null;
         try {
             if (!command.contains("/by ")) {
                 throw new WhoBotException("Ensure that the command is of the form "
@@ -233,6 +241,7 @@ public class TaskList {
      * @throws WhoBotException If there is any error in the command
      */
     public void showOnDate(String command, UI ui) throws WhoBotException {
+        assert ui != null;
         try {
             if (!command.contains("/on ")) {
                 throw new WhoBotException("Ensure that the command is of the form \"show /on #date\"."
@@ -277,6 +286,7 @@ public class TaskList {
      * @param ui UI to show output to
      */
     public void findTask(String text, UI ui) {
+        assert ui != null;
         String searchText = text.substring(6).toLowerCase(Locale.ROOT);
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task : this.list) {

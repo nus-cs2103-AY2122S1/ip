@@ -2,12 +2,15 @@ package whobot.main.gui;
 
 import java.io.File;
 
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import whobot.main.UI;
 import whobot.main.WhoBotException;
 import whobot.utils.Parser;
@@ -74,9 +77,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String command = userInput.getText();
-        dialogContainer.getChildren().addAll(
-                UserDialogBox.getDialog(command)
-        );
+        final Node node = UserDialogBox.getDialog(command);
+        FadeTransition transition = new FadeTransition(Duration.millis(400), node);
+        transition.setFromValue(0);
+        transition.setToValue(1);
+        dialogContainer.getChildren().add(node);
+        transition.play();
         try {
             if (parser.parse(command, ui, storage, taskList) == -1) {
                 String message = "GoodBye, I hope to see you again soon :)";

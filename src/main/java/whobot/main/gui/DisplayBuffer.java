@@ -3,10 +3,13 @@ package whobot.main.gui;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import whobot.main.UI;
 
 public class DisplayBuffer {
@@ -73,13 +76,21 @@ public class DisplayBuffer {
         double delay = charCount > 150 ? 20.0 : 50.0;
 
         new Thread(() -> {
+            assert userInput != null;
+            assert sendButton != null;
+            assert parent != null;
             userInput.setDisable(true);
             sendButton.setDisable(true);
             int i = 0;
             if (!buffer.isEmpty()) {
                 int finalI = i;
-                Platform.runLater(() ->
-                        parent.getChildren().add(BotDialogBox.getDialog(buffer.get(finalI), false, delay)));
+                Platform.runLater(() -> {
+                    final Node node = BotDialogBox.getDialog(buffer.get(finalI), false, delay);
+                    FadeTransition transition = new FadeTransition(Duration.millis(300), node);
+                    transition.setFromValue(0);
+                    transition.setToValue(1);
+                    parent.getChildren().add(node);
+                    transition.play(); });
                 try {
                     Thread.sleep((long) (delay * buffer.get(i).length()));
                 } catch (InterruptedException e) {
@@ -92,7 +103,12 @@ public class DisplayBuffer {
                 for (; i < buffer.size(); i++) {
                     int finalI1 = i;
                     Platform.runLater((() -> {
-                        parent.getChildren().add(BotDialogBox.getDialog(buffer.get(finalI1), true, delay));
+                        final Node node = BotDialogBox.getDialog(buffer.get(finalI1), true, delay);
+                        FadeTransition transition = new FadeTransition(Duration.millis(300), node);
+                        transition.setFromValue(0);
+                        transition.setToValue(1);
+                        parent.getChildren().add(node);
+                        transition.play();
                         if (finalI1 == buffer.size() - 1) {
                             buffer.removeIf(c -> true);
                         }
