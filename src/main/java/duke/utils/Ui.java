@@ -104,6 +104,7 @@ public class Ui {
             String key = String.valueOf(counter);
             if (matchingTasks.containsKey(key)) {
                 Task matchedTask = matchingTasks.get(key);
+                assert (matchedTask != null) : "Matched task cannot be null.";
                 System.out.println(key + "." + matchedTask.toString());
             }
         }
