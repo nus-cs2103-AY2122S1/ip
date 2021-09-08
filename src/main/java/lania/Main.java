@@ -32,6 +32,7 @@ public class Main extends Application {
             stage.setScene(scene);
             tasks = storage.load();
             fxmlLoader.<MainWindow>getController().setLania(tasks, ui, storage, parser, log);
+            fxmlLoader.<MainWindow>getController().startDialog();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

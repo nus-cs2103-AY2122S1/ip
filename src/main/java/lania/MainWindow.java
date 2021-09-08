@@ -80,5 +80,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getLaniaDialog(reply, laniaImage)
         );
     }
+
+    public void startDialog() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getLaniaDialog(ui.showGreetingMessage() + "\n" + ui.showListMessage(tasks), laniaImage)
+        );
+    }
 }
 //@@author
