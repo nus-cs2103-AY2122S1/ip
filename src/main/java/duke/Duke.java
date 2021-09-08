@@ -75,6 +75,7 @@ public class Duke {
      * @return Duke's response.
      */
     public String getResponse(String input) {
+        assert input != null : "[duke.Duke.getResponse]: input parameter is null";
         String output = "";
         try {
             // Parses user input.

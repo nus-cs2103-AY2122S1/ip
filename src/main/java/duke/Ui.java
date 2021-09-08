@@ -39,6 +39,7 @@ public class Ui {
      * @param message The message content to be displayed
      */
     public void showMessage(String message) {
+        assert message != null : "[duke.Ui.showMessage]: message parameter should not be null.";
         message = SPACE + message.replace("\n", "\n" + SPACE);
         System.out.println(SPACE + USER_LINE);
         System.out.println(message);
