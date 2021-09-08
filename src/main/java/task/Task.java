@@ -19,6 +19,7 @@ public class Task {
      */
     public Task(String name, String taskCat, boolean isDone) {
         this.name = name.trim();
+        assert(name != "");
         this.isDone = isDone;
         this.taskCat = taskCat;
     }
