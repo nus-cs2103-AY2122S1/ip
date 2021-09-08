@@ -105,7 +105,7 @@ public class Parser {
             break;
         default:
             hasDateCommand = false;
-            assert false;
+            assert false: "invalid task command";
             break;
         }
         return hasDateCommand;
@@ -122,7 +122,8 @@ public class Parser {
      * @return A command representing the user command.
      * @throws DukeException If the input is in incorrect format.
      */
-    public Command checkInputTask(String input, String taskType) throws DukeException {
+    public Command checkInputTask(String input, String taskType)
+            throws DukeException {
         String[] splitInputWords = input.split(" +", 2);
 
         if (splitInputWords.length != 2) {

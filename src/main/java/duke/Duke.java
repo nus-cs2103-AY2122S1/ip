@@ -30,7 +30,6 @@ public class Duke {
             tasks = new TaskList();
         }
         parser = new Parser(ui, tasks);
-
     }
 
     /**
