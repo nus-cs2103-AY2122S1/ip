@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import tasks.Deadline;
+import tasks.Todo;
 
 
 class ParserTest {
@@ -38,5 +39,14 @@ class ParserTest {
                 + b.getTasks().size() + " tasks in the list.";
         boolean isEqual = message.equals(result);
         assertEquals(true, isEqual);
+    }
+    @Test
+    void parseCommand_duplicateTaskToAdd_exceptionThrown() throws BlitzException {
+        Blitz b = new Blitz("data/blitz.txt");
+        b.getTasks().addTask(new Todo("go running"));
+        String result = Parser.parseCommand("todo go running", b.getTasks(), b.getUi());
+        boolean isEquals = result.equals("OOPS!!! This task already exists in the list! "
+                + "Do you want to consider adding some other task?");
+        assertEquals(true, isEquals);
     }
 }

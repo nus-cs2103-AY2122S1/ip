@@ -68,7 +68,7 @@ public class Parser {
                 result = matchingList.listToString(ui.getMatchingListMessage(), ui);
                 break;
             case "todo" :
-                String todoTask = keywords[1];
+                String todoTask = command.substring(5);
                 result = tasks.addTask(new Todo(todoTask));
                 break;
             case "deadline":

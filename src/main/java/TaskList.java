@@ -31,7 +31,11 @@ public class TaskList {
      * @param taskToAdd
      * @return
      */
-    public String addTask(Task taskToAdd) {
+    public String addTask(Task taskToAdd) throws BlitzException {
+        if (taskList.contains(taskToAdd)) {
+            throw new BlitzException("This task already exists in the list! "
+                    + "Do you want to consider adding some other task?");
+        }
         taskList.add(taskToAdd);
         return "Got it. I've added this task:" + "\n\t" + taskToAdd
                 + "\n\nNow you have " + size() + " tasks in the list.";

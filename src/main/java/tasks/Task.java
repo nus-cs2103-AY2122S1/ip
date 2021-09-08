@@ -42,4 +42,13 @@ public class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Task) {
+            Task t = (Task) o;
+            return t.getDescription().equals(description);
+        }
+        return false;
+    }
 }
