@@ -34,7 +34,7 @@ import java.time.format.DateTimeParseException;
  * Represents a parser which parses the input given by users of Duke.
  */
 public class Parser {
-        private static final String SPACE = " ";
+    private static final String SPACE = " ";
 
     /**
      * Checks if dateString is in a valid date form depicted by dateFormatter.
@@ -317,8 +317,8 @@ public class Parser {
 
         for (int i = 1; i < strings.length; i++) {
 
-            if (i == 1 && (strings[i].equals("by") || strings[i].equals("at")) &&
-                    !(strings[0].equals("by") || strings[0].equals("at"))) {
+            if (i == 1 && (strings[i].equals("by") || strings[i].equals("at"))
+                    && !(strings[0].equals("by") || strings[0].equals("at"))) {
                 // handle the case where user formatted command wrongly (include a space after "/")
                 continue;
             }
@@ -409,7 +409,8 @@ public class Parser {
      * @return An UnarchiveCommand which unarchives a task.
      * @throws IncompleteUnarchiveException If insufficient or invalid values are passed in.
      */
-    private static Command parseUnarchiveCommand(String userInput, ArchiveList archiveList) throws IncompleteUnarchiveException {
+    private static Command parseUnarchiveCommand(
+            String userInput, ArchiveList archiveList) throws IncompleteUnarchiveException {
         String[] separated = userInput.split(" ");
 
         if (separated.length == 1) {
@@ -450,7 +451,8 @@ public class Parser {
      * @return An ArchiveCommand which archives a task.
      * @throws IncompleteArchiveException If insufficient or invalid values are passed in.
      */
-    private static ArchiveCommand parseArchiveCommand(String userInput, TaskList taskList) throws IncompleteArchiveException {
+    private static ArchiveCommand parseArchiveCommand(
+            String userInput, TaskList taskList) throws IncompleteArchiveException {
         String[] separated = userInput.split(" ");
 
         if (separated.length == 1) {
