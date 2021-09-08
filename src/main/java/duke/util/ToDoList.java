@@ -39,9 +39,9 @@ public class ToDoList {
         String response = "Here are the Tasks on your ToDoList: \n";
         for (Task a : this.record) {
             if (a.isCompleted()) {
-                response += number.toString() + "." + a.logo() + "[X] " + a.toString() + "\n";
+                response += number.toString() + ". " + a.logo() + "[X] " + a.toString() + "\n";
             } else {
-                response += number.toString() + "." + a.logo() + "[ ] " + a.toString() + "\n";
+                response += number.toString() + ". " + a.logo() + "[ ] " + a.toString() + "\n";
             }
             number++;
         }
@@ -57,7 +57,7 @@ public class ToDoList {
     public String markAsDone(int num) {
         this.record.get(num - 1).setCompleted();
         String response = "Good! Good! Took you long enough to complete this: \n";
-        response += "  " + "[X] " + record.get(num - 1).toString() + "\n";
+        response += "  " + record.get(num - 1).logo() + "[X] " + record.get(num - 1).toString() + "\n";
         return response;
     }
 
@@ -73,7 +73,9 @@ public class ToDoList {
         this.totalNumber++;
         String response = "Aye Aye Capt'. I've added this To Do: \n";
         response += "  [T][ ] " + item + "\n";
-        response += "Now you have " + this.totalNumber.toString() + " in the list. Wew.....";
+        String grammar = this.totalNumber > 1 ? "Tasks" : "Task";
+        response += "Now you have " + this.totalNumber.toString() + " " + grammar + " in the list.\n";
+        response += "Wew...";
         return response;
     }
 
@@ -89,8 +91,10 @@ public class ToDoList {
         this.record.add(event);
         this.totalNumber++;
         String response = "Aye Aye Capt'. I've added this Event: \n";
-        response += "  [E][ ] " + item + " (at: " + duration + ")\n";
-        response += "Now you have " + this.totalNumber.toString() + " in the list";
+        response += "  [E][ ] " + item + " (at:" + duration + ")\n";
+        String grammar = this.totalNumber > 1 ? "Tasks" : "Task";
+        response += "Now you have " + this.totalNumber.toString() + " " + grammar + " in the list.\n";
+        response += "Wew...";
         return response;
     }
 
@@ -107,7 +111,9 @@ public class ToDoList {
         this.totalNumber++;
         String response = "Aye Aye Capt'. I've added this Deadline:\n";
         response += "  [D][ ] " + dl.toString() + "\n";
-        response += "Now you have " + this.totalNumber.toString() + " in the list";
+        String grammar = this.totalNumber > 1 ? "Tasks" : "Task";
+        response += "Now you have " + this.totalNumber.toString() + " " + grammar + " in the list.\n";
+        response += "Wew...";
         return response;
     }
 
@@ -130,7 +136,8 @@ public class ToDoList {
         } else {
             response += "  [D]" + status + " " + removed.toString() + "\n";
         }
-        response += "Now you have " + this.totalNumber.toString() + " in the list";
+        String grammar = this.totalNumber > 1 ? "Tasks" : "Task";
+        response += "Now you have " + this.totalNumber.toString() + " " + grammar + " in the list.";
         return response;
     }
 

@@ -26,6 +26,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return super.getName() + " (at: " + this.duration + ")";
+        return super.getName() + " (at:" + this.duration + ")";
     }
 }
