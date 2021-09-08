@@ -9,8 +9,8 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 public class DeleteCommand extends Command {
-    private final String command;
-    private final String delimiter;
+    private final String COMMAND;
+    private final String DELIMITER;
 
     private final String MESSAGE_USAGE = String.format("Usage: %s <number>", Parser.COMMAND_DELETE);
     private final String MESSAGE_SUCCESS = "This duke.task has been removed:\n%s";
@@ -22,13 +22,13 @@ public class DeleteCommand extends Command {
      * @param delimiter String delimiter between the commands in the duke.command string input.
      */
     public DeleteCommand(String command, String delimiter) {
-        this.command = command;
-        this.delimiter = delimiter;
+        this.COMMAND = command;
+        this.DELIMITER = delimiter;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String[] commands = command.split(delimiter, 2);
+        String[] commands = COMMAND.split(DELIMITER, 2);
         if (commands.length < 2) {
             throw new DukeException(MESSAGE_USAGE);
         }

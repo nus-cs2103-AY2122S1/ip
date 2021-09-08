@@ -29,10 +29,10 @@ public class Storage {
     private static final String ERROR_FAILED_LOAD_CORRUPTED_FILE = "Error: Failed to load tasks from file. Corrupted file or filepath.\nWarning: File will be rewritten on next duke.command.";
     private static final String ERROR_FAILED_WRITE_CORRUPTED_FILE = "Error: Failed to write tasks to file. Corrupted file or filepath.";
 
-    private final String filepath;
+    private final String FILEPATH;
 
     public Storage(String filepath) {
-        this.filepath = filepath;
+        this.FILEPATH = filepath;
     }
 
     /**
@@ -44,7 +44,7 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
 
         // Parse the file and get the tasks list
-        File file = new File(filepath);
+        File file = new File(FILEPATH);
         ArrayList<Task> tasks = new ArrayList<>();
         try {
 
@@ -108,7 +108,7 @@ public class Storage {
         }
 
         try {
-            FileWriter writer = new FileWriter(filepath);
+            FileWriter writer = new FileWriter(FILEPATH);
             String fileString = tasks.getFileString(DELIMITER, IDENTIFIER_DONE, IDENTIFIER_NOT_DONE);
 
             // asserts fileString is not empty or null
@@ -132,7 +132,7 @@ public class Storage {
      * @return true if all files and folders required for filepath are created, else false.
      */
     private boolean checkPathExistsElseCreate() {
-        File file = new File(filepath);
+        File file = new File(FILEPATH);
 
         // handle the folder does not exist
         File parent = file.getParentFile();
