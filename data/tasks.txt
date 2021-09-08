@@ -1,4 +1,5 @@
-T | 0 | tasks | -
+T | 0 | tasks | tag1, tag2
 T | 0 | m | -
 T | 1 | task 1 | tag1, tag2, tag3
 E | 1 | testEvent | now | urgent, pink, monthly
+T | 0 | test write | tag1, tag2, tag3

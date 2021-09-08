@@ -60,7 +60,6 @@ public class Storage {
             String[] details = next.split(" \\| ", 2);
             String desc = details[0];
             String[] tags = details[1].split(", ");
-            System.out.println(tags[0]);
             if (tags[0].equals("-") && tags.length == 1) {
                 todo = new Todo(desc, isDone);
             } else {

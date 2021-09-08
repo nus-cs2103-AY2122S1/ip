@@ -75,8 +75,8 @@ public class DukeParser {
                 // command: tag x name1 name2...
                 String[] taskAndTags = parsedInput[1].split(" ", 2);
                 String[] tags = taskAndTags[1].split(" ");
-                Integer index = Integer.parseInt(parsedInput[1].trim());
-                return new AddTagsCommand(index, tags);
+                Integer index = Integer.parseInt(taskAndTags[0].trim());
+                return new AddTagsCommand(index - 1, tags);
             }
             return new UnknownCommand();
         } catch (NumberFormatException e) {
