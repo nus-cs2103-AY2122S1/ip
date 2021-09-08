@@ -26,7 +26,7 @@ public class AddCommand extends Command {
      */
     @Override
     public boolean isAExitCommand() {
-        return this.isExit;
+        return isExit;
     }
 
     /**
@@ -41,7 +41,7 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) throws DukeException {
         int sizeBeforeAdding = list.size();
-        list.add(this.task);
+        list.add(task);
         int sizeAfterAdding = list.size();
         assert sizeBeforeAdding + 1 == sizeAfterAdding : "size should increase by 1";
         storage.saveDukeData(list.convertToStorageString());

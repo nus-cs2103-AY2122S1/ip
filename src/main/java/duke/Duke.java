@@ -29,16 +29,16 @@ public class Duke {
      * Starts the Chatbot, listens for user input and executes the command accordingly.
      */
     public void start() {
-        this.ui.printAndReturnGreetingsString();
+        ui.printAndReturnGreetingsString();
         boolean isExit = false;
         while (!isExit) {
             try {
-                String input = this.ui.getInput();
+                String input = ui.getInput();
                 Command c = Parser.parse(input);
-                c.execute(this.list, this.ui, this.storage);
+                c.execute(list, ui, storage);
                 isExit = c.isAExitCommand();
             } catch (DukeException e) {
-                this.ui.printAndReturnMessage(e.getMessage());
+                ui.printAndReturnMessage(e.getMessage());
             }
         }
     }
@@ -46,9 +46,9 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            return c.execute(this.list, this.ui, this.storage);
+            return c.execute(list, ui, storage);
         } catch (DukeException e) {
-            this.ui.printAndReturnMessage(e.getMessage());
+            ui.printAndReturnMessage(e.getMessage());
             return e.getMessage();
         }
     }

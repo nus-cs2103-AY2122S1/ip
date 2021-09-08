@@ -33,8 +33,8 @@ public class Storage {
      */
     public String loadDukeData() throws StorageLoadingException {
         try {
-            File storageDir = new File(this.fileDir);
-            File storageFile = new File(this.filePath);
+            File storageDir = new File(fileDir);
+            File storageFile = new File(filePath);
             boolean isDirExistent = storageDir.exists();
             boolean isFileExistent = storageFile.exists();
             if (!isDirExistent) {
@@ -62,7 +62,7 @@ public class Storage {
      */
     public void saveDukeData(String data) throws StorageSavingException {
         try {
-            FileWriter fw = new FileWriter(this.filePath);
+            FileWriter fw = new FileWriter(filePath);
             fw.write(data);
             fw.close();
         } catch (IOException e) {
@@ -79,7 +79,7 @@ public class Storage {
      */
     public String loadTextFileData(String filename) throws StorageLoadingException {
         try {
-            File textFile = new File(this.fileDir + filename);
+            File textFile = new File(fileDir + filename);
             boolean isFileExistent = textFile.exists();
             if (!isFileExistent) {
                 throw new StorageLoadingException();

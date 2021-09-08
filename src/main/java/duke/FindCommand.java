@@ -25,7 +25,7 @@ public class FindCommand extends Command {
      */
     @Override
     public boolean isAExitCommand() {
-        return false;
+        return isExit;
     }
 
     /**
@@ -44,7 +44,7 @@ public class FindCommand extends Command {
         for (int i = 0; i < size; i++) {
             Task current = list.get(i);
             String currentDescription = current.getDescription();
-            if (currentDescription.contains(this.keyword)) {
+            if (currentDescription.contains(keyword)) {
                 newList.add(current);
             }
         }

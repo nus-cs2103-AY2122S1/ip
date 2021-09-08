@@ -43,8 +43,8 @@ public abstract class Task {
      * Marks the task as done.
      */
     public void markAsDone() {
-        this.isDone = true;
-        assert this.isDone : "task should be marked done";
+        isDone = true;
+        assert isDone : "task should be marked done";
     }
 
     /**
@@ -54,7 +54,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return getStatusIcon() + " " + this.description;
+        return getStatusIcon() + " " + description;
     }
 
     /**
@@ -63,7 +63,7 @@ public abstract class Task {
      * @return The description of the task.
      */
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     /**
@@ -72,7 +72,7 @@ public abstract class Task {
      * @return True if the task is marked done and false if otherwise.
      */
     public boolean getIsDone() {
-        return this.isDone;
+        return isDone;
     }
 
     /**

@@ -23,7 +23,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public boolean isAExitCommand() {
-        return this.isExit;
+        return isExit;
     }
 
     /**

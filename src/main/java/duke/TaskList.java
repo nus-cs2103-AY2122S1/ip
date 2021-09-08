@@ -32,7 +32,7 @@ public class TaskList {
      * @param task Task to be added
      */
     public void add(Task task) {
-        this.list.add(task);
+        list.add(task);
     }
 
     /**
@@ -41,7 +41,7 @@ public class TaskList {
      * @return The size of the TaskList.
      */
     public int size() {
-        return this.list.size();
+        return list.size();
     }
 
     /**
@@ -51,7 +51,7 @@ public class TaskList {
      * @return The Task that is located at the given index.
      */
     public Task get(int index) {
-        return this.list.get(index);
+        return list.get(index);
     }
 
     /**
@@ -63,10 +63,10 @@ public class TaskList {
      * @return A boolean value, true if successfully marked as done and false if invalid index given.
      */
     public boolean markDoneAtIndex(int index) {
-        if (index > this.size() - 1 || index < 0) {
+        if (index > size() - 1 || index < 0) {
             return false;
         } else {
-            Task taskToBeMarkDone = this.get(index);
+            Task taskToBeMarkDone = get(index);
             taskToBeMarkDone.markAsDone();
             return true;
         }
@@ -79,10 +79,10 @@ public class TaskList {
      * @return The task that is removed.
      */
     public Task deleteAtIndex(int index) {
-        if (index > this.size() - 1 || index < 0) {
+        if (index > size() - 1 || index < 0) {
             return null;
         } else {
-            return this.list.remove(index);
+            return list.remove(index);
         }
     }
 
@@ -92,12 +92,12 @@ public class TaskList {
      * @return The string that should be printed when the print command is executed.
      */
     public String generateMessage() {
-        int listSize = this.list.size();
+        int listSize = list.size();
 
         StringBuilder message = new StringBuilder("Here are the tasks in your list:");
         for (int i = 0; i < listSize; i++) {
             int index = i + 1;
-            Task content = this.list.get(i);
+            Task content = list.get(i);
             message.append("\n").append(index).append(".").append(content);
         }
         return message.toString();
@@ -126,17 +126,17 @@ public class TaskList {
             switch (taskType) {
             case "T":
                 ToDo toDoTask = new ToDo(description, isDone);
-                this.add(toDoTask);
+                add(toDoTask);
                 break;
             case "D":
                 dateTimeString = split[3];
                 Deadline deadlineTask = new Deadline(description, LocalDate.parse(dateTimeString), isDone);
-                this.add(deadlineTask);
+                add(deadlineTask);
                 break;
             case "E":
                 dateTimeString = split[3];
                 Event eventTask = new Event(description, LocalDate.parse(dateTimeString), isDone);
-                this.add(eventTask);
+                add(eventTask);
                 break;
             default:
                 break;

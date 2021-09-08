@@ -41,9 +41,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[E][%s] %s (at: %s)",
-                this.getStatusIcon(),
-                this.getDescription(),
-                this.dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                getStatusIcon(),
+                getDescription(),
+                dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 
     /**
@@ -53,7 +53,7 @@ public class Event extends Task {
      */
     @Override
     public String encodeTaskForStorage() {
-        int encodedIsDone = this.getIsDone() ? 1 : 0;
-        return String.format("E | %d | %s | %s", encodedIsDone, this.getDescription(), this.dateTime);
+        int encodedIsDone = getIsDone() ? 1 : 0;
+        return String.format("E | %d | %s | %s", encodedIsDone, getDescription(), dateTime);
     }
 }

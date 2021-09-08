@@ -31,7 +31,7 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[T][%s] %s", this.getStatusIcon(), this.getDescription());
+        return String.format("[T][%s] %s", getStatusIcon(), getDescription());
     }
 
     /**
@@ -41,7 +41,7 @@ public class ToDo extends Task {
      */
     @Override
     public String encodeTaskForStorage() {
-        int encodedIsDone = this.getIsDone() ? 1 : 0;
-        return String.format("T | %d | %s", encodedIsDone, this.getDescription());
+        int encodedIsDone = getIsDone() ? 1 : 0;
+        return String.format("T | %d | %s", encodedIsDone, getDescription());
     }
 }
