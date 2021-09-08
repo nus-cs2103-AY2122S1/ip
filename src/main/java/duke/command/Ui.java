@@ -1,8 +1,6 @@
 package duke.command;
 
 import java.util.Scanner;
-
-import duke.exception.InvalidCommandException;
 /**
  * This class handles the interactions with the user.
  */
@@ -38,9 +36,8 @@ public class Ui {
      *
      * @param input The user's input.
      * @return The String representing the command interpreted from user input.
-     * @throws InvalidCommandException If the command is unrecognised.
      */
-    public String receiveUserCommand(String input) throws InvalidCommandException {
+    public String receiveUserCommand(String input) {
         return this.parser.interpretCommand(input);
     }
 

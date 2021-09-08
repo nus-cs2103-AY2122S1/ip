@@ -59,54 +59,86 @@ public class Storage {
         String taskDetails = lineToAdd.substring(7);
 
         if (lineToAdd.charAt(1) == 'T') {
-            Task currentTask = new ToDo(taskDetails);
-            tasks.add(currentTask);
-            if (lineToAdd.charAt(4) == 'X') {
-                currentTask.markAsDone();
-            }
+            addTodoToList(lineToAdd, tasks, taskDetails);
         } else if (lineToAdd.charAt(1) == 'D') {
-            int separator = taskDetails.indexOf(" (by: ");
-            String taskName = taskDetails.substring(0, separator);
-            String timeFull = taskDetails.substring(separator + 6);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-            Task currentTask;
-
-            if (timeFull.length() > 12) {
-                String time = timeFull.substring(12, timeFull.length() - 1);
-                LocalDate date = LocalDate.parse(timeFull.substring(0, 11), formatter);
-                currentTask = new Deadline(taskName, date, time);
-            } else {
-                LocalDate date = LocalDate.parse(timeFull.substring(0, 11), formatter);
-                currentTask = new Deadline(taskName, date);
-            }
-            tasks.add(currentTask);
-
-            if (lineToAdd.charAt(4) == 'X') {
-                currentTask.markAsDone();
-            }
+            addDeadlineToList(lineToAdd, tasks, taskDetails);
         } else {
-            int separator = taskDetails.indexOf(" (at: ");
-            String taskName = taskDetails.substring(0, separator);
-            String timeFull = taskDetails.substring(separator + 6);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-            Task currentTask;
-
-            if (timeFull.length() > 12) {
-                String time = timeFull.substring(12, timeFull.length() - 1);
-                LocalDate date = LocalDate.parse(timeFull.substring(0, 11), formatter);
-                currentTask = new Event(taskName, date, time);
-            } else {
-                LocalDate date = LocalDate.parse(timeFull.substring(0, 11), formatter);
-                currentTask = new Event(taskName, date);
-            }
-            tasks.add(currentTask);
-
-            if (lineToAdd.charAt(4) == 'X') {
-                currentTask.markAsDone();
-            }
+            addEventToList(lineToAdd, tasks, taskDetails);
         }
     }
 
+    /**
+     * Parses to do from string format to add into in task list.
+     *
+     * @param lineToAdd The string representing the line to add.
+     * @param tasks The array representing the task list.
+     * @param taskDetails The to do details part of the string.
+     */
+    private static void addTodoToList(String lineToAdd, ArrayList<Task> tasks, String taskDetails) {
+        Task currentTask = new ToDo(taskDetails);
+        tasks.add(currentTask);
+        if (lineToAdd.charAt(4) == 'X') {
+            currentTask.markAsDone();
+        }
+    }
+
+    /**
+     * Parses deadline from string format to add into in task list.
+     *
+     * @param lineToAdd The string representing the line to add.
+     * @param tasks The array representing the task list.
+     * @param taskDetails The deadline details part of the string.
+     */
+    private static void addDeadlineToList(String lineToAdd, ArrayList<Task> tasks, String taskDetails) {
+        int separator = taskDetails.indexOf(" (by: ");
+        String taskName = taskDetails.substring(0, separator);
+        String timeFull = taskDetails.substring(separator + 6);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        Task currentTask;
+
+        if (timeFull.length() > 12) {
+            String time = timeFull.substring(12, timeFull.length() - 1);
+            LocalDate date = LocalDate.parse(timeFull.substring(0, 11), formatter);
+            currentTask = new Deadline(taskName, date, time);
+        } else {
+            LocalDate date = LocalDate.parse(timeFull.substring(0, 11), formatter);
+            currentTask = new Deadline(taskName, date);
+        }
+        tasks.add(currentTask);
+
+        if (lineToAdd.charAt(4) == 'X') {
+            currentTask.markAsDone();
+        }
+    }
+
+    /**
+     * Parses event from string format to add into in task list.
+     *
+     * @param lineToAdd The string representing the line to add.
+     * @param tasks The array representing the task list.
+     * @param taskDetails The event details part of the string.
+     */
+    private static void addEventToList(String lineToAdd, ArrayList<Task> tasks, String taskDetails) {
+        int separator = taskDetails.indexOf(" (at: ");
+        String taskName = taskDetails.substring(0, separator);
+        String timeFull = taskDetails.substring(separator + 6);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        Task currentTask;
+
+        if (timeFull.length() > 12) {
+            String time = timeFull.substring(12, timeFull.length() - 1);
+            LocalDate date = LocalDate.parse(timeFull.substring(0, 11), formatter);
+            currentTask = new Event(taskName, date, time);
+        } else {
+            LocalDate date = LocalDate.parse(timeFull.substring(0, 11), formatter);
+            currentTask = new Event(taskName, date);
+        }
+        tasks.add(currentTask);
+
+        if (lineToAdd.charAt(4) == 'X') {
+            currentTask.markAsDone();
+        }
+    }
 
     /**
      * Saves the last element in the user's list to the .txt file.
@@ -118,10 +150,12 @@ public class Storage {
         // Writes the data into the file.
         FileWriter fw = new FileWriter(this.filepath);
         StringBuilder textToAdd = new StringBuilder();
+
         for (Task task : tasks) {
             String taskName = task.toString();
             textToAdd.append(taskName).append("\n");
         }
+
         fw.write(textToAdd.toString());
         fw.close();
     }
