@@ -28,6 +28,7 @@ public class Duke {
         }
     }
 
+    /** Construct an instance of Duke program with default file path to store/load data from (data.txt). */
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage("data.txt");
@@ -56,7 +57,7 @@ public class Duke {
 
                 // Execute command based on user's input
                 duke.parser.Parser parser = new duke.parser.Parser(fullCommand);
-                parser.execute(tasks, ui, storage);
+                System.out.println(parser.execute(tasks, ui, storage));
                 isExit = parser.getIsByeCommand();
             } catch (DukeException e) {
                 System.out.println(ui.printError(e));

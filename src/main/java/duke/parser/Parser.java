@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
@@ -24,7 +25,7 @@ public class Parser {
 
     /** A list of all valid commands recognised. */
     enum Commands {
-        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, FIND
+        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, FIND, SCHEDULE
     }
 
     /**
@@ -98,6 +99,8 @@ public class Parser {
             str = deleteCommand(tasks, ui);
         } else if (input.startsWith(Commands.FIND.toString().toLowerCase())) {
             str = findCommand(tasks, ui);
+        } else if (input.startsWith(Commands.SCHEDULE.toString().toLowerCase())) {
+            str = scheduleCommand(tasks, ui);
         } else {
             if (input.startsWith(Commands.TODO.toString().toLowerCase())) {
                 t = todoCommand();
@@ -232,6 +235,60 @@ public class Parser {
             throw new DukeException("Your date and time is wrongly formatted. It should be in the form of"
                     + "dd-mm-yyyy hhmm.");
         }
+    }
+
+    /**
+     * Returns a {@code String} with a list of events happening per hour, like a schedule, on the specified date.
+     *
+     * @param tasks A TaskList object containing all user's tasks.
+     * @param ui The current user interface by the user.
+     * @return A {@code String} with a list of events happening on the specified date.
+     */
+
+    public String scheduleCommand(TaskList tasks, Ui ui) {
+        try {
+            ArrayList<Task> list = new ArrayList<>();
+            String[] splitStr = input.split("\\s+");
+            String date = splitStr[1];
+            LocalDate formattedDate = dateFormatter(date);
+            for (int i = 0; i < tasks.numberOfTasks(); i++) {
+                Task t = tasks.taskNumber(i);
+                assert t != null : "Task to be added should not be null.";
+                if (t instanceof Deadline | t instanceof Event) {
+                    boolean isSameDate = t.getDate().compareTo(formattedDate) == 0;
+                    if (isSameDate) {
+                        list.add(t);
+                    }
+                }
+            }
+
+            if (list.isEmpty()) {
+                return ui.noTaskScheduledMessage(formattedDate);
+            }
+
+            Collections.sort(list);
+            TaskList matchingTasks = new TaskList(list);
+            StringBuilder str = new StringBuilder(ui.viewScheduleMessage(formattedDate) + '\n');
+            int ctr = -1;
+            for (int i = 0; i < matchingTasks.numberOfTasks(); i++) {
+                Task t = matchingTasks.taskNumber(i);
+                assert t != null : "Task should not be null.";
+                int hourOfTask = t.getTime().getHour();
+                if (ctr != hourOfTask) {
+                    ctr = hourOfTask;
+                    str.append('\n');
+                    str.append(ui.printScheduleByHourMessage(t.getTime()));
+                }
+                str.append(t);
+                str.append('\n');
+            }
+            return str.toString();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Your date is wrongly formatted. It should be in the form of dd-mm-yyyy.");
+        } catch (DukeException e) {
+            ui.printError(e);
+        }
+        return "";
     }
 
     /** Signals the end of the program */

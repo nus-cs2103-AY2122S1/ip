@@ -42,7 +42,7 @@ public class TaskList {
     public String printAllTasks() {
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < this.numberOfTasks(); i++) {
-            str.append(i + 1).append(".").append(this.taskNumber(i)).append("\n");
+            str.append(i + 1).append(". ").append(this.taskNumber(i)).append("\n");
         }
         return str.toString();
     }

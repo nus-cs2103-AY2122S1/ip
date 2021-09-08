@@ -7,10 +7,6 @@ import java.time.format.FormatStyle;
 
 /** Encapsulates a Deadline with a description, time and date. */
 public class Deadline extends Task {
-
-    protected LocalTime time;
-    protected LocalDate date;
-
     /**
      * Public constructor to initialize a Deadline object.
      *
@@ -19,9 +15,7 @@ public class Deadline extends Task {
      * @param date The date of the deadline.
      */
     public Deadline(String description, LocalTime time, LocalDate date) {
-        super(description);
-        this.time = time;
-        this.date = date;
+        super(description, time, date);
     }
 
     @Override
