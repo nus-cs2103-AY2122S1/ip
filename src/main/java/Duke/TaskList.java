@@ -1,6 +1,8 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import duke.exception.DukeException;
@@ -16,7 +18,6 @@ import duke.task.ToDo;
 public class TaskList {
 
     private final ArrayList<Task> tasks = new ArrayList<>();
-
     /**
      * Add task to list.
      */
@@ -25,8 +26,22 @@ public class TaskList {
     }
 
 
+    private void checkUserInputValid(String userInput) throws DukeException {
+        String[] tokens = userInput.split(" ");
+        int taskNumber;
+        for (int i = 1; i < tokens.length; i++) {
+            try {
+                taskNumber = Integer.parseInt(tokens[i]);
+                if (taskNumber > tasks.size()) {
+                    throw new DukeException("OOPS!!! The task to " + tokens[0] + " does not exists. Please try again!");
+                }
+            } catch (NumberFormatException err) {
+                throw new DukeException("OOPS!!! The task to + " + tokens[0] + " does not exists. Please try again!");
+            }
+        }
+    }
     /**
-     * Marks the task as complete and return confirmation message,
+     * Marks all tasks specified by userInput as complete and return confirmation message,
      * return error message if done command is not properly formatted.
      *
      * @param userInput the index of the task in lis.
@@ -34,22 +49,18 @@ public class TaskList {
      */
     public String completeTask(String userInput) throws DukeException {
         String[] tokens = userInput.split(" ");
-        int taskNumber;
-        boolean isTaskDoneCommand = tokens.length == 2 && tokens[0].equals("done");
-        try {
-            taskNumber = Integer.parseInt(tokens[1]);
-            if (!isTaskDoneCommand || taskNumber > tasks.size()) {
-                throw new DukeException("OOPS!!! The task to set as done does not exists. Please try again!");
-            }
-        } catch (NumberFormatException err) {
-            throw new DukeException("OOPS!!! The task to set as done does not exists. Please try again!");
+        checkUserInputValid(userInput);
+        StringBuilder completedTasksInString = new StringBuilder();
+        for (int i = 1; i < tokens.length; i++) {
+            int taskNumber = Integer.parseInt(tokens[i]);
+            tasks.get(taskNumber - 1).completeTask();
+            completedTasksInString.append(tasks.get(taskNumber - 1).toString()).append("\n");
         }
-        tasks.get(taskNumber - 1).completeTask();
-        return "You have completed the following task: \n" + tasks.get(taskNumber - 1).toString();
+        return "You have completed the following task: \n" + completedTasksInString;
     }
 
     /**
-     * Delete the task and return string message for deleting tasks,
+     * Delete all tasks specified by userInput and return string message for deleting tasks,
      * else return error message if done command is not properly formatted.
      *
      * @param userInput the index of the task in list
@@ -57,18 +68,19 @@ public class TaskList {
      */
     public String deleteTask(String userInput) throws DukeException {
         String[] tokens = userInput.split(" ");
-        int taskNumber;
-        boolean isTaskDeleteCommand = tokens.length == 2 && tokens[0].equals("delete");
-        try {
-            taskNumber = Integer.parseInt(tokens[1]);
-            if (!isTaskDeleteCommand || taskNumber > tasks.size()) {
-                throw new DukeException("OOPS!!! The task to delete does not exists. Please try again!");
-            }
-        } catch (NumberFormatException err) {
-            throw new DukeException("OOPS!!! The task to delete does not exists. Please try again!");
+        checkUserInputValid(userInput);
+        StringBuilder removedTasksInString = new StringBuilder();
+        Integer[] removedTaskNumbers = new Integer[tokens.length - 1];
+        for (int i = 1; i < tokens.length; i++) {
+            int taskNumber = Integer.parseInt(tokens[i]);
+            removedTaskNumbers[i - 1] = taskNumber;
+            removedTasksInString.append(tasks.get(taskNumber - 1).toString()).append("\n");
         }
-        tasks.remove(tasks.get(taskNumber - 1));
-        return "You have removed the following task:\n" + tasks.get(taskNumber - 1).toString() + "\n"
+        Arrays.sort(removedTaskNumbers, Collections.reverseOrder());
+        for (int taskNumber: removedTaskNumbers) {
+            tasks.remove(tasks.get(taskNumber - 1));
+        }
+        return "You have removed the following task:\n" + removedTasksInString
                 + "You have " + tasks.size() + " task/s left.";
     }
 
@@ -177,7 +189,7 @@ public class TaskList {
 
 
     /**
-     * Return string representation of the taskss matching the searched description,
+     * Return string representation of the tasks matching the searched description,
      * if searching description is empty, it will throw an error.
      *
      * @param userInput user input String

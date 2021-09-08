@@ -56,9 +56,10 @@ public class Parser {
                     throw new DukeException("Invalid command! Try again.");
                 }
                 return tasks.listToString();
-
             case "find":
                 return tasks.findTasks(userInput);
+            case "undo":
+
             default:
                 throw new DukeException("Invalid command! Try again.");
             }
