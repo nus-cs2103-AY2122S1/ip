@@ -13,11 +13,9 @@ Duke is a todo task manager that helps you to track various sorts of tasks.
    Some example commands you can try:
 
     * **`list`** : Lists all tasks.
-
     * **`todo`**`do stuff` : Adds a todo task named `do stuff` to Duke.
-
+    * **`find`**`stuff` : Finds all tasks with name matching `stuff`.
     * **`delete`**`1` : Deletes the 1st task in the current list.
-
     * **`bye`** : Exits the app.
 
 6. Refer to the [Usage](#Usage) below for details of each command.
@@ -47,6 +45,17 @@ Format: `list`
 Example: 
 - Having added two tasks named `Task A`, `Task B` and listing them will show the following.<br>
 ![Demo of list command](./images/list.png)
+
+### `find` - Filters out tasks by name.
+Given a keyword, lists out all tasks with name matching the keyword.
+
+Format: `find SEARCH_KEYWORD`
+
+Example:
+- Having added two tasks named `Task A`, `Task B`, we use `find B`.<br>
+![Demo of find command](./images/find.png)<br>
+Of the tasks `Task A`, `Task B`, only `Task B` matches the search keyword `B`. Hence, only
+`Task B` is in the output.
 
 ### `done` - Completes a certain task.
 Sets the completion status of a specified task to complete.
@@ -91,15 +100,24 @@ Format: `event NAME_OF_EVENT /at DATERANGE`
   1. `d/m/yyyy HHmm-d/m/yyyy HHmm`
   2. `d/m/yyyy HHmm-HHmm`
 
-Example
-- `event test event /at 1/1/2000 1800-20/11/2003 1300`<br>
-  ![Demo of event command](./images/event.png)<br>
-  Using the list command now would show this.<br>
-  ![Listing events after adding event](./images/event-list.png)<br>
-- `event test event /at 1/1/2000 1800-1900`<br>
-  ![Demo of event command](./images/event2.png)<br>
-  Using the list command now would show this.<br>
-  ![Listing events after adding event](./images/event2-list.png)<br>
+### `on` - Filters out tasks by date.
+Filters tasks (**deadlines** and **events**) that occur on the given day.
+
+Format: `on DATE`
+- `DATE` format: `d/m/yyyy`
+
+Example<br>
+For context, these are the tasks currently registered in Duke.<br>
+![Listing all tasks](./images/on-list.png)<br>
+- `on 1/1/2000`<br>
+  ![Demo of on command](./images/on.png)<br>
+  - The deadline `test deadline` matches since it occurs on the same day.
+  - The events, both named `test event` match since 1st January 2000 falls in their respective date ranges.
+- `on 1/2/2000`<br>
+  ![Demo of on command](./images/on2.png)<br>
+    - The deadline `test deadline` does not match since it occurs on a different day than 1 February 2000.
+    - Of the 2 events, only the event that spans from the year 2000 to 2003 matches.
+
 ### `bye` - Exits the app.
 Quits the program and saves your tasks to local storage.
 
