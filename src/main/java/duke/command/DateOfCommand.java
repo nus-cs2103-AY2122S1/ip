@@ -6,9 +6,12 @@ import duke.main.TaskList;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.Todo;
 
 public class DateOfCommand extends Command {
 
+    private static final String DEADLINE = "Deadline";
+    private static final String EVENT = "Event";
     private final String description;
     private final TaskList taskList;
 
@@ -27,19 +30,26 @@ public class DateOfCommand extends Command {
         if (description.length() == 0) {
             throw new DukeIncompleteException();
         }
+        int taskIndex;
         try {
-            int index = Integer.parseInt(description);
-            Task task = taskList.get(index);
-            String type = (task instanceof Deadline) ? "Deadline"
-                        : (task instanceof Event) ? "Event" : "Todo";
-            if (type.equals("Todo")) {
-                return task.getDate() + index;
-            } else {
-                return "The " + type + " time of task "
-                        + index + " is " + task.getDate();
-            }
+            taskIndex = Integer.parseInt(description);
         } catch (NumberFormatException e) {
             throw new DukeSyntaxErrorException(description);
+        }
+        Task taskName = taskList.get(taskIndex);
+        String taskType;
+        if (taskName instanceof Deadline) {
+            taskType = DEADLINE;
+            return "The " + taskType + " time of task "
+                    + taskIndex + " is " + taskName.getDate();
+        } else if (taskName instanceof Event) {
+            taskType = EVENT;
+            return "The " + taskType + " time of task "
+                    + taskIndex + " is " + taskName.getDate();
+        } else if (taskName instanceof Todo) {
+            return taskName.getDate() + taskIndex;
+        } else {
+            throw new DukeSyntaxErrorException(taskName.toString());
         }
     }
 }

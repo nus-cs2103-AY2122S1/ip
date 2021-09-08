@@ -3,7 +3,6 @@ package duke.command;
 import duke.main.TaskList;
 
 public class SizeCommand extends Command {
-
     private final TaskList taskList;
     public SizeCommand(TaskList taskList) {
         this.taskList = taskList;
