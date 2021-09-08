@@ -1,6 +1,5 @@
 package lebron;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.scene.Scene;
@@ -9,6 +8,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+
+import lebron.exception.LebronException;
 import lebron.task.Deadline;
 import lebron.task.Events;
 import lebron.task.Task;
@@ -23,7 +24,8 @@ import lebron.task.ToDo;
 
 public class Lebron {
     public static final String FILE_PATH = "./data/duke.txt";
-    private static final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
+    private static final String HORIZONTAL_LINE = "    ____________________________" +
+            "________________________________\n";
     private final Storage storage;
     private TaskList taskList;
     private final Ui ui;
@@ -75,87 +77,101 @@ public class Lebron {
     /**
      * Constructor for the chatbot.
      *
-     * @throws IOException if stream to file is missing or invalid.
      */
-    public Lebron() throws IOException {
+    public Lebron() {
         this.ui = new Ui(this);
         this.storage = new Storage(FILE_PATH);
-        try {
-            ArrayList<Task> loadList = storage.loadFileContents(FILE_PATH);
-            taskList = new TaskList(loadList, this);
-        } catch (Exception e) {
-            ArrayList<Task> loadList = new ArrayList<>();
-            taskList = new TaskList(loadList, this);
-        }
+        ArrayList<Task> loadList = storage.loadFileContents(FILE_PATH);
+        taskList = new TaskList(loadList, this);
     }
 
     /**
      * Runs the bot.
      *
-     * @throws IOException if stream to file is missing or invalid.
      */
-    public String run(String text) throws IOException {
-        int position = 0;
+    public String run(String text) {
         Parser parser = new Parser();
         String reply = "";
-
-        if (!text.equals("bye")) {
-            String commandWord = parser.parseText(text);
-            String[] splitWords = parser.split(text);
-            Command command = Command.fromString(commandWord);
-            switch (command) {
-            case LIST:
-                reply = ui.replyDisplay(taskList);
-                break;
-            case DONE:
-                int pos = Integer.parseInt(splitWords[1]);
-                reply = taskList.markDone(pos - 1);
-                storage.saveToFile(taskList.getLst());
-                break;
-            case TODO:
-                try {
+        try {
+            if (text.equals("bye")) {
+                reply = ui.exit();
+            } else {
+                String commandWord = parser.parseText(text);
+                String[] splitWords = parser.split(text);
+                Command command = Command.fromString(commandWord);
+                switch (command) {
+                case LIST:
+                    reply = ui.replyDisplay(taskList);
+                    break;
+                case DONE:
+                    if (splitWords.length < 2 || splitWords[1].equals("")) {
+                        throw new LebronException("    :( OOPS! Please specify which task you wish "
+                                + "to complete.");
+                    }
+                    int pos = Integer.parseInt(splitWords[1]);
+                    reply = taskList.markDone(pos - 1);
+                    storage.saveToFile(taskList.getLst());
+                    break;
+                case TODO:
+                    if (splitWords.length < 2 || splitWords[1].equals("")) {
+                        throw new LebronException("    :( OOPS! The description of a ToDo "
+                                + "cannot be empty.");
+                    }
                     reply = taskList.add(new ToDo(splitWords[1]));
                     storage.saveToFile(taskList.getLst());
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.err.println("    :( OOPS! The description of a todo cannot be empty.\n");
-                }
-                break;
-            case DEADLINE:
-                try {
+                    break;
+                case DEADLINE:
+                    if (splitWords.length < 2 || splitWords[1].equals("")) {
+                        throw new LebronException("    :( OOPS! The description of a Deadline " +
+                                "cannot be empty.");
+                    }
                     String[] splitBy = splitWords[1].split("/by ", 2);
+                    if (splitBy.length < 2 || splitBy[1].equals("")) {
+                        throw new LebronException("    :( OOPS! Please check that the '/by' keyword " +
+                                "is used and that a due date is given.");
+                    }
                     reply = taskList.add(new Deadline(splitBy[0], splitBy[1]));
                     storage.saveToFile(taskList.getLst());
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.err.println("    :( OOPS! The description or a time of a deadline cannot be empty.\n");
-                }
-                break;
-            case EVENT:
-                try {
+                    break;
+                case EVENT:
+                    if (splitWords.length < 2 || splitWords[1].equals("")) {
+                        throw new LebronException("    :( OOPS! The description of an Event " +
+                                "cannot be empty.");
+                    }
                     String[] splitAt = splitWords[1].split("/at ", 2);
+                    if (splitAt.length < 2 || splitAt[1].equals("")) {
+                        throw new LebronException("    :( OOPS! Please check that the '/at' keyword " +
+                                "is used and that a due date is given.");
+                    }
                     reply = taskList.add(new Events(splitAt[0], splitAt[1]));
                     storage.saveToFile(taskList.getLst());
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.err.println("    :( OOPS! The description or a time of an event cannot be empty.\n");
+
+                    break;
+                case DELETE:
+                    if (splitWords.length < 2 || splitWords[1].equals("")) {
+                        throw new LebronException("    :( OOPS! Please specify which task you wish "
+                                + "to delete.");
+                    }
+                    int pos2 = Integer.parseInt(splitWords[1]);
+                    reply = taskList.delete(pos2 - 1);
+                    storage.saveToFile(taskList.getLst());
+                    break;
+                case FIND:
+                    if (splitWords.length < 2 || splitWords[1].equals("")) {
+                        throw new LebronException("    :( OOPS! Please specify some words to search for.");
+                    }
+                    String keyword = splitWords[1];
+                    reply = ui.replyFind(taskList, keyword);
+                    break;
+                case OTHER:
+                    throw new LebronException(" OOPS! I'm sorry, but I don't know what that means.\n");
+                default:
+                    break;
                 }
-                break;
-            case DELETE:
-                int pos2 = Integer.parseInt(splitWords[1]);
-                reply = taskList.delete(pos2 - 1);
-                storage.saveToFile(taskList.getLst());
-                break;
-            case FIND:
-                String keyword = splitWords[1];
-                reply = ui.replyFind(taskList, keyword);
-                break;
-            case OTHER:
-                reply = "    :( OOPS! I'm sorry, but I don't know what that means.\n";
-                break;
-            default:
-                break;
             }
-        } else {
-            reply = ui.exit();
+            return reply;
+        } catch (LebronException e) {
+            return ui.printException(e.getMessage());
         }
-        return reply;
     }
 }
