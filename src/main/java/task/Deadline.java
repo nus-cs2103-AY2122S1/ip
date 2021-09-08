@@ -79,4 +79,22 @@ public class Deadline extends Task {
     public boolean isTodayTask(LocalDate l) {
         return l.isEqual(deadlineDate);
     }
+
+    @Override
+    public int deadlineCompare(Deadline otherDeadline) {
+        return this.deadlineTime.compareTo(otherDeadline.deadlineTime);
+    }
+
+    @Override
+    public int eventCompare(Event otherEvent) {
+        return otherEvent.timeCompare(deadlineTime);
+    }
+
+    public int timeCompare(LocalTime time) {
+        return time.compareTo(deadlineTime);
+    }
+
+    public boolean isWholeDay() {
+        return !isTimeGiven;
+    }
 }

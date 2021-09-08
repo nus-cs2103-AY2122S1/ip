@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * Deals with user interactions, mostly printing messages to the console following user commands.
@@ -66,10 +67,22 @@ public class Ui {
      * @return A list of tasks taking place/to be done on the given date.
      */
     public String showDateFind(ArrayList<Task> taskList, LocalDate desiredDate) {
-        return "Here are the tasks taking place on that date:\n"
-                + IntStream.range(0, taskList.size())
-                .filter(i -> taskList.get(i).isTodayTask(desiredDate))
-                .mapToObj(i -> (i + 1) + "." + taskList.get(i).listEntry() + "\n")
+        Stream<Task> timedTasksStream = taskList.stream()
+                .filter(t -> t.isTodayTask(desiredDate))
+                .filter(t -> !t.isWholeDay());
+        Stream<Task> wholeDayTasksStream = taskList.stream()
+                .filter(t -> t.isTodayTask(desiredDate))
+                .filter(Task::isWholeDay);
+
+        return String.format("Here is the schedule for %s:\n", desiredDate.toString())
+                + timedTasksStream
+                .sorted(Task::compareTo)
+                .map(t -> t.listEntry() + "\n")
+                .collect(Collectors.joining())
+                + "\n"
+                + "Here are tasks without specific timing:\n"
+                + wholeDayTasksStream
+                .map(t -> t.listEntry() + "\n")
                 .collect(Collectors.joining());
     }
 

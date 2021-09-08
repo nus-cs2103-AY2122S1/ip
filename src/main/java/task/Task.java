@@ -5,7 +5,7 @@ import java.time.LocalDate;
 /**
  * Represents a task that a user can add to, delete from, find, or set to done in a task list.
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
     private final String taskName;
     private boolean done;
 
@@ -70,4 +70,21 @@ public abstract class Task {
      * @return true if the task is ongoing or takes place on the given date.
      */
     public abstract boolean isTodayTask(LocalDate l);
+
+    @Override
+    public int compareTo(Task otherTask) {
+        if (otherTask instanceof Deadline) {
+            return deadlineCompare((Deadline) otherTask);
+        } else if (otherTask instanceof Event) {
+            return eventCompare((Event) otherTask);
+        } else {
+            return 0;
+        }
+    }
+
+    public abstract int deadlineCompare(Deadline otherDeadline);
+
+    public abstract int eventCompare(Event otherEvent);
+
+    public abstract boolean isWholeDay();
 }

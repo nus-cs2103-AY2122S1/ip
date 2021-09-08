@@ -123,4 +123,22 @@ public class Event extends Task {
     public boolean isTodayTask(LocalDate l) {
         return l.isEqual(startDate) || l.isEqual(endDate) || (l.isAfter(startDate) && l.isBefore(endDate));
     }
+
+    @Override
+    public int deadlineCompare(Deadline otherDeadline) {
+        return otherDeadline.timeCompare(startTime);
+    }
+
+    @Override
+    public int eventCompare(Event otherEvent) {
+        return this.startTime.compareTo(otherEvent.startTime);
+    }
+
+    public int timeCompare(LocalTime time) {
+        return time.compareTo(startTime);
+    }
+
+    public boolean isWholeDay() {
+        return !hasTime;
+    }
 }

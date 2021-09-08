@@ -41,4 +41,19 @@ public class Todo extends Task {
     public boolean isTodayTask(LocalDate l) {
         return false;
     }
+
+    @Override
+    public int deadlineCompare(Deadline otherDeadline) {
+        return 0;
+    }
+
+    @Override
+    public int eventCompare(Event otherEvent) {
+        return 0;
+    }
+
+    @Override
+    public boolean isWholeDay() {
+        return false;
+    }
 }
