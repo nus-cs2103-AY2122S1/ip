@@ -13,6 +13,11 @@ import java.time.format.DateTimeParseException;
  * The class to parse user commands.
  */
 public class Parser {
+    private static final String UNKNOWN_COMMAND = "☹︎wut☁︎☻ unknown command";
+    private static final String INVALID_DATETIME_FORMAT =
+            "Invalid date and time input, indicate date in yyyy-MM-dd HH:mm format.";
+    private static final String TOO_MANY_ARGUMENTS = "Too many arguments for this command.";
+
 
     /**
      * The method to parse an input line by the user
@@ -29,54 +34,37 @@ public class Parser {
         String cmd = x[0];
         assert(cmd != null);
         if (x.length == 1) {
-            if ("bye".equals(cmd)) {
+            if (cmd.equals("bye")) {
                 return new ExitCommand();
-            } else if ("list".equals(cmd)) {
+            } else if (cmd.equals("list")) {
                 return new ListCommand();
-            } else if ("todo".equals(cmd) || "deadline".equals(cmd) || "event".equals(cmd)) {
+            } else if (cmd.equals("todo") || cmd.equals("deadline") || cmd.equals("event")) {
                 missingTaskName(cmd);
-            } else if ("done".equals(cmd) || "delete".equals(cmd)) {
+            } else if (cmd.equals("done") || cmd.equals("delete")) {
                 throw new DukeException("Indicate a task number beside the command ☻");
-            } else if ("find".equals(cmd)) {
+            } else if (cmd.equals("find")) {
                 throw new DukeException("Enter a keyword beside the command ☻");
             } else {
-                throw new DukeException("☹︎wut☁︎☻ unknown command");
+                throw new DukeException(UNKNOWN_COMMAND);
             }
         } else {
             if (cmd.equals("done")) {
-                if (x.length > 2) {
-                    throw new DukeException("Too many arguments for this command.");
-                } else {
-                    return new DoneCommand(getTaskNumber(x));
-                }
+                return parseDoneCommand(x);
             } else if (cmd.equals("delete")) {
-                if (x.length > 2) {
-                    throw new DukeException("Too many arguments for this command.");
-                } else {
-                    return new DeleteCommand(getTaskNumber(x));
-                }
+                return parseDeleteCommand(x);
             } else if (cmd.equals("find")) {
                 return new FindCommand(getKeyword(input));
             } else if (cmd.equals("todo")) {
                 return addToDo(input);
             } else if (cmd.equals("deadline")) {
-                try {
-                    return addDeadline(input);
-                } catch (DateTimeParseException e) {
-                    throw new DukeException("Invalid date and time input, indicate date in yyyy-MM-dd HH:mm format.");
-                }
+                return parseDeadlineCommand(input);
             } else if (cmd.equals("event")) {
-                try {
-                    return addEvent(input);
-                } catch (DateTimeParseException e) {
-                    throw new DukeException("Invalid date and time input, indicate date in yyyy-MM-dd HH:mm format.");
-                }
+                return parseEventCommand(input);
             } else {
-                // unknown command received
-                throw new DukeException("☹︎wut☁︎☻ unknown command");
+                throw new DukeException(UNKNOWN_COMMAND);
             }
         }
-        throw new DukeException("");
+        throw new DukeException(UNKNOWN_COMMAND);
     }
 
     /**
@@ -130,6 +118,36 @@ public class Parser {
         return new AddCommand(e);
     }
 
+    public static Command parseDoneCommand(String[] userInputArr) throws DukeException {
+        if (userInputArr.length > 2) {
+            throw new DukeException(TOO_MANY_ARGUMENTS);
+        }
+        return new DoneCommand(getTaskNumber(userInputArr));
+    }
+
+    public static Command parseDeleteCommand(String[] userInputArr) throws DukeException {
+        if (userInputArr.length > 2) {
+            throw new DukeException(TOO_MANY_ARGUMENTS);
+        }
+        return new DeleteCommand(getTaskNumber(userInputArr));
+    }
+
+    public static Command parseDeadlineCommand(String input) throws DukeException {
+        try {
+            return addDeadline(input);
+        } catch (DateTimeParseException e) {
+            throw new DukeException(INVALID_DATETIME_FORMAT);
+        }
+    }
+
+    public static Command parseEventCommand(String input) throws DukeException {
+        try {
+            return addEvent(input);
+        } catch (DateTimeParseException e) {
+            throw new DukeException(INVALID_DATETIME_FORMAT);
+        }
+    }
+
     /**
      * The method to get the index of the Task
      *
@@ -140,6 +158,12 @@ public class Parser {
         return Integer.parseInt(inputArr[1]) - 1;
     }
 
+    /**
+     * The method to get the keyword for a Find command
+     *
+     * @param input the user input
+     * @return the keyword to be searched for in the list of tasks
+     */
     public static String getKeyword(String input) {
         return input.substring(input.indexOf(" ")).strip();
     }

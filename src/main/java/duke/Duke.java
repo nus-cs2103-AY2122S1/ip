@@ -16,16 +16,13 @@ public class Duke {
     /** The list of tasks */
     private TaskList tasks;
 
-    /** The UI for the program */
-    private Ui ui;
-
+    /** The boolean to indicate whether an Exit command is made */
     private boolean isExit;
 
     /**
      * The constructor for Duke class
      */
     public Duke() {
-        ui = new Ui();
         storage = new Storage(FILE_PATH);
         try {
             tasks = new TaskList(storage.load());
@@ -44,7 +41,7 @@ public class Duke {
         String output = "";
         try {
             Command c = Parser.parse(input);
-            output = c.execute(tasks, ui, storage);
+            output = c.execute(tasks, storage);
             isExit = c.isExit();
         } catch (DukeException e) {
             output = e.getMessage();
@@ -52,10 +49,19 @@ public class Duke {
         return output;
     }
 
+    /**
+     * The method to determine if user has input an Exit command
+     * @return whether an Exit command has been made
+     */
     public boolean isExit() {
         return this.isExit;
     }
 
+    /**
+     * The method to retrieve the task list
+     *
+     * @return the list of tasks
+     */
     public TaskList getTaskList() {
         return this.tasks;
     }

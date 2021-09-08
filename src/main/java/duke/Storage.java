@@ -41,19 +41,13 @@ public class Storage {
         try {
             File f = new File(filePath);
             if (f.exists()) {
-//                System.out.println("Here are your existing tasks:");
                 Scanner sc = new Scanner(f);
                 while (sc.hasNext()) {
                     String next = sc.nextLine();
                     Task t = parseLine(next);
                     tasks.add(t);
-//                    System.out.println(t.toString());
                 }
                 sc.close();
-//                for (int i = 0; i < 60; i++) {
-////                    System.out.print("_");
-//                }
-//                System.out.println();
             } else {
                 if (!f.getParentFile().exists()) {
                     f.getParentFile().mkdir();
