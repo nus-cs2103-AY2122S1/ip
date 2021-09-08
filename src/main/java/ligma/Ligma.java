@@ -28,6 +28,13 @@ public class Ligma {
         this.tasks = new TaskList(storage.load());
     }
 
+    /**
+     * Performs tasks based on user input, essentially the
+     * point of entry for Ligma's program execution
+     *
+     * @param input User input
+     * @return Ligma's reply to be shown on GUI
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parseCommand(input);

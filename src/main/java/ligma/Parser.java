@@ -30,51 +30,47 @@ public class Parser {
      */
     public static Command parseCommand(String input)
             throws NoSuchMethodException, InputMismatchException, DateTimeParseException {
-        if (input.equals("bye")) {
-            return new ExitCommand();
-        }
-        if (input.equals("list")) {
-            return new ListCommand();
+        int splitInd = input.indexOf(' ');
+        boolean isSingleWord = splitInd == -1;
+        if (isSingleWord) {
+            switch (input) {
+            case "bye":
+                return new ExitCommand();
+            case "list":
+                return new ListCommand();
+            default:
+                return handleBadCommands(input);
+            }
         } else {
-            int splitInd = input.indexOf(' ');
-            String action = splitInd == -1
-                    ? input
-                    : input.substring(0, splitInd);
+            String action = input.substring(0, splitInd);
+            String description = input.substring(splitInd + 1).trim();
 
-            if (splitInd == -1) {
-                return handleBadCommands(action);
-            } else {
-                String description = input.substring(splitInd + 1);
-                int itemIndex = -1;
-                if (action.equals("done") || action.equals("delete")) {
-                    itemIndex = Character
-                            .getNumericValue(input.charAt(splitInd + 1)) - 1;
-                }
-                switch (action) {
-                case "todo":
-                    return new AddCommand(Task.TaskType.TODO,
-                            description);
-                case "event":
-                    return new AddCommand(Task.TaskType.EVENT,
-                            description);
-                case "deadline":
-                    return new AddCommand(Task.TaskType.DEADLINE,
-                            description);
-                case "done":
-                    return new DoneCommand(itemIndex);
-                case "delete":
-                    return new DeleteCommand(itemIndex);
-                case "find" :
-                    return new FindCommand(description.trim());
-                default:
-                    throw new NoSuchMethodException("Sorry, command does not exist.");
-                }
+            switch (action) {
+            case "todo":
+                return new AddCommand(Task.TaskType.TODO, description);
+            case "event":
+                return new AddCommand(Task.TaskType.EVENT, description);
+            case "deadline":
+                return new AddCommand(Task.TaskType.DEADLINE, description);
+            case "done":
+                return new DoneCommand(extractItemIndex(splitInd, input));
+            case "delete":
+                return new DeleteCommand(extractItemIndex(splitInd, input));
+            case "find" :
+                return new FindCommand(description);
+            default:
+                throw new NoSuchMethodException("Sorry, command does not exist.");
             }
         }
     }
 
+    private static int extractItemIndex(int splitInd, String input) {
+        return Character
+                .getNumericValue(input.charAt(splitInd + 1)) - 1;
+    }
+
     private static Command handleBadCommands(String action)
-            throws NoSuchMethodException, InputMismatchException, DateTimeParseException {
+            throws NoSuchMethodException, InputMismatchException {
         switch (action) {
         case "todo":
         case "event":

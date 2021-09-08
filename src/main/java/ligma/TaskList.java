@@ -6,7 +6,7 @@ import ligma.task.Task;
 
 public class TaskList {
     private ArrayList<Task> tasks;
-    private int noOfTasks;
+    private int numOfTasks;
 
     /**
      * Constructor for a TaskList object.
@@ -14,7 +14,7 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
-        this.noOfTasks = tasks.size();
+        this.numOfTasks = tasks.size();
     }
 
     /**
@@ -24,7 +24,7 @@ public class TaskList {
      */
     public void addTask(Task t) {
         tasks.add(t);
-        noOfTasks++;
+        numOfTasks++;
     }
 
     /**
@@ -33,7 +33,7 @@ public class TaskList {
      * @param index Index of task to be deleted
      */
     public Task deleteTask(int index) {
-        noOfTasks--;
+        numOfTasks--;
         return tasks.remove(index);
     }
 
@@ -51,7 +51,7 @@ public class TaskList {
      * @return Number of tasks
      */
     public int getTaskAmt() {
-        return noOfTasks;
+        return numOfTasks;
     }
 
     /**
@@ -72,7 +72,9 @@ public class TaskList {
      * @return array of tasks that contains the target string
      */
     public Task[] find(String target) {
-        return tasks.stream().filter(task -> task.match(target)).toArray(Task[]::new);
+        return tasks.stream()
+                .filter(task -> task.match(target))
+                .toArray(Task[]::new);
     }
 
 }
