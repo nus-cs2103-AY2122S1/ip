@@ -5,7 +5,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.exception.*;
+import duke.exception.DukeDatabaseException;
+import duke.exception.DukeException;
+import duke.exception.DukeInvalidArgumentException;
+import duke.exception.DukeInvalidDateException;
+import duke.exception.DukeInvalidDateRangeException;
+import duke.exception.DukeMissingArgumentException;
+import duke.exception.DukeNoTaskFoundException;
+import duke.exception.DukeUnknownCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -83,7 +90,7 @@ public class Duke {
                 throw new DukeUnknownCommandException(input);
             }
         } catch (DukeException e) {
-           return this.ui.showDukeException(e);
+            return this.ui.showDukeException(e);
         }
     }
 

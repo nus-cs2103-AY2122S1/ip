@@ -1,16 +1,15 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.Scanner;
 
 /**
  * Represents the user interface which handles input and output.
  */
 public class Ui {
-    private Scanner input = new Scanner(System.in);
     private static String LOGO =
             " ____        _\n"
             + "|  _ \\ _   _| | _____\n"
@@ -18,6 +17,7 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
+    private Scanner input = new Scanner(System.in);
 
     /**
      * Read the input from the user.
@@ -44,9 +44,9 @@ public class Ui {
      */
     public String showGreet() {
         return String.format(
-                "%s\n" +
-                "Welcome! I'm Duke.\n" +
-                "What can I do for you?\n", Ui.LOGO
+                "%s\n"
+                + "Welcome! I'm Duke.\n"
+                + "What can I do for you?\n", Ui.LOGO
         );
     }
 
@@ -70,8 +70,8 @@ public class Ui {
      */
     public String showAdd(Task task, int totalNumTask) {
         return String.format(
-                "\tadded:\n\t\t%s\n" +
-                "\tYou have %d tasks in the list.\n", task, totalNumTask
+                "\tadded:\n\t\t%s\n"
+                + "\tYou have %d tasks in the list.\n", task, totalNumTask
         );
     }
 
@@ -85,8 +85,8 @@ public class Ui {
      */
     public String showDelete(Task task, int totalNumTask) {
         return String.format(
-                "\tI've deleted this task from the list!\n" +
-                "\t\t%s\n\tYou have %d tasks in the list.\n",
+                "\tI've deleted this task from the list!\n"
+                + "\t\t%s\n\tYou have %d tasks in the list.\n",
                 task, totalNumTask - 1
         );
     }
@@ -100,8 +100,8 @@ public class Ui {
      */
     public String showDone(Task task) {
         return String.format(
-                "\tI've marked this task as done!\n" +
-                "\t\t%s\n", task
+                "\tI've marked this task as done!\n"
+                + "\t\t%s\n", task
         );
     }
 

@@ -11,6 +11,9 @@ public class DukeInvalidDateException extends DukeException {
      */
     @Override
     public String toString() {
-        return String.format("%s \tPlease enter the start/end time in the format of <DD/MM/YY HH:MM>!\n", super.toString());
+        return String.format(
+                "%s Please enter the start/end time in the format of <DD/MM/YY HH:MM>!\n",
+                super.toString()
+        );
     }
 }
