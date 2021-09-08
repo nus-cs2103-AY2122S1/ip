@@ -121,8 +121,10 @@ public class Parser {
             case EVENT:
                 throw new InvalidDateAndTimeException(Message.MESSAGE_MISSING_EVENT_TIME);
             default:
-                throw new InvalidInputException(Message.MESSAGE_ERROR_OCCURRED);
+                assert false : "Invalid task type for :getDateAndTime";
+                throw new AssertionError(taskType);
             }
+
         }
 
         DateAndTime dateAndTime = new DateAndTime(splitCommandArray[1].trim());
@@ -157,6 +159,7 @@ public class Parser {
     private Command.CommandType getCommandType(String command) throws InvalidInputException,
             EmptyCommandInformationException {
         String commandTypeString = getCommandTypeString(command);
+        assert commandTypeString.length() > 0 : "CommandType string length should be more than 0";
 
         switch (commandTypeString) {
         case TODO:
@@ -202,6 +205,8 @@ public class Parser {
     /** Throws the corresponding error when only the command type is keyed in without any information */
     private void checkOnlyCommandTypeStringKeyed(String command) throws EmptyCommandInformationException,
             InvalidInputException {
+        assert command.length() > 0 : "command string length should be more than 0";
+
         switch (command) {
         case TODO:
             throw new EmptyCommandInformationException(Message.MESSAGE_EMPTY_TODO);

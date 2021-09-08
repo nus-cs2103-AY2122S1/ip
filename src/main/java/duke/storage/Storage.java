@@ -60,6 +60,7 @@ public class Storage {
      * @throws IOException
      */
     public List<Task> txtToList(File dataFile) throws IOException, DukeException {
+        assert dataFile.exists() : "Data file does not exist";
         List<Task> taskList = new ArrayList<>();
         String currentTaskString;
         BufferedReader reader = new BufferedReader(new FileReader(dataFile));
@@ -103,6 +104,8 @@ public class Storage {
     private String getTaskNameFromString(String taskString) {
         int startingIndex = taskString.indexOf("] ");
         int endingIndex = taskString.indexOf("(");
+        boolean isStartingIndexValid = startingIndex > 0;
+        assert isStartingIndexValid : "Invalid task format in txt";
 
         if (endingIndex < 0) { //case of todo
             return taskString.substring(startingIndex + 2);
@@ -114,6 +117,7 @@ public class Storage {
     private String getDateAndTimeFromString(String taskString) {
         int startingIndex = taskString.indexOf(":");
         int endingIndex = taskString.indexOf(")");
+        assert startingIndex > 0 && endingIndex > 0 : "Invalid task format in txt";
 
         return taskString.substring(startingIndex + 2, endingIndex);
     }
@@ -128,6 +132,7 @@ public class Storage {
         case 'E':
             return "event";
         default:
+            assert false : "Invalid task type from txt";
             throw new DukeException(Message.MESSAGE_TXT_TO_LIST_CONVERSION_ERROR);
         }
 
