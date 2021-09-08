@@ -12,7 +12,7 @@ public class DateTime {
     private static final String SAVE_FILE_FORMAT = "MMM dd yyyy hh.mm a";
     private static final String COMMAND_LINE_FORMAT = "yyyy-MM-dd HHmm";
 
-    private final LocalDateTime dateTime;
+    private LocalDateTime dateTime;
 
     /**
      * Constructor for DateTime object.

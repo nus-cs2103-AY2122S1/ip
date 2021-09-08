@@ -5,7 +5,7 @@ package duke.task;
  * Represents an object in the TaskList
  */
 public abstract class Task {
-    private final String text;
+    private String text;
     private boolean isDone;
 
     /**

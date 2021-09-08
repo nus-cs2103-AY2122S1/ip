@@ -30,7 +30,7 @@ public class ToDo extends Task {
      * @return A Todo object
      * @throws DukeException An exception thrown according to the message given
      */
-    public static ToDo newTodo(String input) throws DukeException {
+    public static ToDo createNewTodo(String input) throws DukeException {
         if (input.isEmpty()) {
             throw new DukeException(MISSING_TODO_MESSAGE);
         }
@@ -46,14 +46,14 @@ public class ToDo extends Task {
      * @return A Todo object
      * @throws DukeException An exception thrown according to the message given
      */
-    public static ToDo newToDoFromSave(String input) throws DukeException {
+    public static ToDo createNewToDoFromSave(String input) throws DukeException {
         String[] inputArr = input.split("\\|");
         if (inputArr.length != 2) {
             throw new DukeException(INVALID_SAVE_MESSAGE);
         }
-        String isDone = inputArr[0].trim();
+        String doneString = inputArr[0].trim();
         String text = inputArr[1].trim();
-        return new ToDo(text, isDone.equals("1"));
+        return new ToDo(text, doneString.equals("1"));
     }
 
     /**

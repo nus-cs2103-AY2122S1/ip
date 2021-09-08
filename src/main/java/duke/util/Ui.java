@@ -29,7 +29,7 @@ public class Ui {
     private static final String INDENT = " ".repeat(INDENT_LENGTH);
 
     /** Class Instance Members */
-    private final Scanner sc;
+    private Scanner sc;
 
     /**
      * Constructor for Ui class.

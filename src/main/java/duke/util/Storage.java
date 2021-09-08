@@ -18,7 +18,7 @@ public class Storage {
     private static final String FILE_NOT_FOUND_MESSAGE = "An error occurred. Unable to find file.";
     private static final String INVALID_TASKLIST_MESSAGE = "Error reading taskLst. TaskList is probably invalid.";
 
-    private final File taskFile;
+    private File taskFile;
     private boolean didTaskFileExist = false;
 
     /**

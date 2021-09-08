@@ -8,19 +8,14 @@ import duke.util.Ui;
 
 public class EventCommand extends Command {
     protected static final String COMMAND = "event";
-    private final Event event;
+    private Event event;
 
     protected EventCommand(String remainingText) throws DukeException {
-        event = Event.newEvent(remainingText, false);
+        event = Event.createNewEvent(remainingText, false);
     }
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         return taskList.addTask(event);
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }
