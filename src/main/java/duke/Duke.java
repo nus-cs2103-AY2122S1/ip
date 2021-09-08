@@ -13,9 +13,9 @@ public class Duke {
     private Storage storage;
     private Parser parser;
     /**
-     * Main function of the duke program.
-     * Loops taking user input and converting it into commands to
-     * execute until look is broken (using bye command).
+     * Initialises all class needed for duke.
+     * Trigger storage to open existing data or create a new file
+     * for the data.
      */
     public void run() {
         storage = new Storage();

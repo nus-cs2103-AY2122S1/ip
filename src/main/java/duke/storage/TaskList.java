@@ -47,7 +47,6 @@ public class TaskList extends ArrayList<Task> {
             Task task;
             if (splitString[0].equals("T")) {
                 task = ToDo.create(splitString[2]);
-
             } else if (splitString[0].equals("E")) {
                 task = Event.create(splitString[2], LocalDateTime.parse(splitString[3],
                         formatter));
@@ -73,6 +72,7 @@ public class TaskList extends ArrayList<Task> {
                     .append(currTask.getStatusIcon())
                     .append(DIVIDER)
                     .append(currTask.getDescription());
+
             if (!(currTask.getTaskType().equals("T"))) {
                 result.append(DIVIDER)
                         .append(currTask.getTime());
@@ -111,7 +111,7 @@ public class TaskList extends ArrayList<Task> {
             if (task.getDescription().contains(keyword)) {
                 result.append(index)
                         .append(". ")
-                        .append(task.toString())
+                        .append(task)
                         .append('\n');
                 index++;
             }

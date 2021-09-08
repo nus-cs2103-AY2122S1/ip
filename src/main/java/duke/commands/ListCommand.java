@@ -13,11 +13,11 @@ public class ListCommand extends Command {
      *
      * @param ui The Ui instance for printing
      * @param storage The Storage instance to get the list
-     * @return A boolean of false to indicate the main while loop should not be broken
+     * @return String to represent the reply of Duke
      */
 
     @Override
     public String execute(Ui ui, Storage storage) {
-        return ui.print(storage.getList());
+        return ui.reply(storage.getList());
     }
 }

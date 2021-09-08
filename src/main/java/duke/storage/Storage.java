@@ -59,7 +59,7 @@ public class Storage {
     }
 
     /**
-     * Writes the current tasklisk data into the file.
+     * Writes the current tasklist data into the file.
      */
 
     public void save() {
@@ -118,7 +118,7 @@ public class Storage {
     }
 
     /**
-     * Returns the tsize of the list.
+     * Returns the size of the list.
      *
      * @return Size of the TaskList.
      */
@@ -127,10 +127,10 @@ public class Storage {
     }
 
     /**
-     * Find task which has the keyword in the list.
+     * Find tasks which has the keyword in the list.
      *
      * @param keyword The keyword to look for.
-     * @return String representation of a list of task that has the keyword in the description.
+     * @return String representation of a list of tasks that has the keyword in the description.
      */
     public String find(String keyword) {
         return tasks.find(keyword);

@@ -44,19 +44,19 @@ public class Parser {
         String command = splitUserInput[0].strip();
 
         switch (command) {
-        case "bye":
+        case "bye": {
             if (splitUserInput.length > 1 && !(splitUserInput[1].equals(""))) {
                 throw new DukeExceptions("What was that? You weren't suppose to say anything after bye!");
             }
             return new ByeCommand();
-
-        case "list":
+        }
+        case "list": {
             if (splitUserInput.length > 1 && !(splitUserInput[1].equals(""))) {
-                throw new DukeExceptions("List command cannot take any arguements");
+                throw new DukeExceptions("List command cannot take any arguments");
             }
             return new ListCommand();
-
-        case "delete":
+        }
+        case "delete": {
             try {
                 if (splitUserInput.length == 1) {
                     throw new DukeExceptions("I need to know which task you want to delete");
@@ -66,88 +66,87 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new DukeExceptions("Oops, delete command can only take a single integer as the argument!");
             }
-
-        case "done":
+        }
+        case "done": {
+            if (splitUserInput.length == 1) {
+                throw new DukeExceptions("I need to know which task you want to mark as finished");
+            }
             try {
-                if (splitUserInput.length == 1) {
-                    throw new DukeExceptions("I need to know which task you want to mark as finished");
-                }
                 int index = Integer.parseInt(splitUserInput[1]);
                 return new DoneCommand(index);
             } catch (NumberFormatException e) {
                 throw new DukeExceptions("Oops, done command can only take a single integer as the argument!");
             }
+        }
+        case "event": {
+            if (splitUserInput.length == 1 || splitUserInput[1].equals("")) {
+                throw new DukeExceptions("Oops, "
+                        + "you need to tell me the description and the time of the event");
+            }
+            String[] splitBody = splitUserInput[1].split("/at", 2);
+            if (splitBody[0].equals("")) {
+                throw new DukeExceptions("Oops, "
+                        + "you need to tell me the description and the time of the event");
 
-        case "event":
-            try {
-                if (splitUserInput.length == 1 || splitUserInput[1].equals("")) {
-                    throw new DukeExceptions("Oops, "
-                            + "you need to tell me the description and the time of the event");
-                }
-                String[] splitBody = splitUserInput[1].split("/at", 2);
-                if (splitBody[0].equals("")) {
-                    throw new DukeExceptions("Oops, "
-                            + "you need to tell me the description and the time of the event");
-
-                } else if (splitBody.length == 1 || splitBody[1].strip().equals("")) {
-                    throw new DukeExceptions("Oops! I need to know when the event is. \n"
-                            + "Use the /at argument followed by yyyy-MM-dd HH:mm please");
-                }
-
-                String desc = splitBody[0].strip();
-                LocalDateTime time = LocalDateTime.parse(splitBody[1].strip(),
-                        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-                Event event = Event.create(desc, time);
-                return new EventCommand(event);
-            } catch (DateTimeParseException e) {
-                throw new DukeExceptions(TIME_PARSE_ERROR);
+            } else if (splitBody.length == 1 || splitBody[1].strip().equals("")) {
+                throw new DukeExceptions("Oops! I need to know when the event is. \n"
+                        + "Use the /at argument followed by yyyy-MM-dd HH:mm please");
             }
 
-        case "deadline":
+            String desc = splitBody[0].strip();
+            LocalDateTime time = parseDateTime(splitBody[1]);
+            ;
+            Event event = Event.create(desc, time);
+            return new EventCommand(event);
+        }
+        case "deadline": {
             if (splitUserInput.length == 1 || splitUserInput[1].equals("")) {
                 throw new DukeExceptions("Oops, "
                         + "you need to tell me the description and the time of the deadline");
             }
-            try {
-                String[] splitBody = splitUserInput[1].split("/by", 2);
-                if (splitBody[0].equals("")) {
-                    throw new DukeExceptions("Oops,"
-                            + "you need to tell me the description and the time of the deadline");
-                } else if (splitBody.length == 1 || splitBody[1].strip().equals("")) {
-                    throw new DukeExceptions("Oops! I need to know when the deadline is. \n"
-                            + "Use the /by argument followed by yyyy-MM-dd HH:mm please");
-                }
-                String desc = splitBody[0].strip();
-                LocalDateTime time = LocalDateTime.parse(splitBody[1].strip(),
-                        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
-                );
-                Deadline deadline = Deadline.create(desc, time);
-                return new DeadlineCommand(deadline);
 
-            } catch (DateTimeParseException e) {
-                throw new DukeExceptions(TIME_PARSE_ERROR);
+            String[] splitBody = splitUserInput[1].split("/by", 2);
+            if (splitBody[0].equals("")) {
+                throw new DukeExceptions("Oops,"
+                        + "you need to tell me the description and the time of the deadline");
+            } else if (splitBody.length == 1 || splitBody[1].strip().equals("")) {
+                throw new DukeExceptions("Oops! I need to know when the deadline is. \n"
+                        + "Use the /by argument followed by yyyy-MM-dd HH:mm please");
             }
-
-        case "todo":
+            String desc = splitBody[0].strip();
+            LocalDateTime time = parseDateTime(splitBody[1]);
+            Deadline deadline = Deadline.create(desc, time);
+            return new DeadlineCommand(deadline);
+        }
+        case "todo": {
             if (splitUserInput.length == 1 || splitUserInput[1].equals("")) {
                 throw new DukeExceptions("Oops, "
                         + "you need to tell me the description of the task on hand");
             }
             ToDo toDo = ToDo.create(splitUserInput[1]);
             return new ToDoCommand(toDo);
-
-        case "find":
+        }
+        case "find": {
             if (splitUserInput.length == 1 || splitUserInput[1].equals("")) {
                 throw new DukeExceptions("Oops, "
                         + "you need to tell me the keyword you are looking for");
             }
             return new FindCommand(splitUserInput[1]);
-
-        case "":
+        }
+        case "": {
             throw new DukeExceptions("Can you type louder .. I mean.. input anything? I got nothing");
-
+        }
         default:
             throw new DukeExceptions("Sorry.. I don't know what your command means");
+        }
+    }
+
+    private LocalDateTime parseDateTime(String dateString) throws DukeExceptions {
+        try {
+            return LocalDateTime.parse(dateString.strip(),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        } catch (DateTimeParseException e) {
+            throw new DukeExceptions(TIME_PARSE_ERROR);
         }
     }
 }

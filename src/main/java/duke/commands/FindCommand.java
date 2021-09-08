@@ -7,7 +7,7 @@ import duke.storage.Storage;
  * Class to handle Find command
  */
 public class FindCommand extends Command {
-    private String keyword;
+    private final String keyword;
 
     /**
      * Public constructor to create a new FindCommand with the keyword stored
@@ -23,10 +23,10 @@ public class FindCommand extends Command {
      *
      * @param ui The Ui instance for printing
      * @param storage The Storage instance to find the task from
-     * @return A boolean of false to indicate the main while loop should not be broken
+     * @return String to represent the reply of Duke
      */
     @Override
     public String execute(Ui ui, Storage storage) {
-        return ui.print(storage.find(keyword));
+        return ui.reply(storage.find(keyword));
     }
 }

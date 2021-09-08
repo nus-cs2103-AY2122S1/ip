@@ -8,7 +8,7 @@ import duke.storage.Storage;
  * Class to handle the done command.
  */
 public class DoneCommand extends Command {
-    private int index;
+    private final int index;
 
     /**
      * Constructor for a new DoneCommand instance with the specified index stored.
@@ -26,17 +26,18 @@ public class DoneCommand extends Command {
      *
      * @param ui The Ui instance for printing
      * @param storage The Storage instance to get the task
-     * @return A boolean of false to indicate the main while loop should not be broken
+     * @return String to represent the reply of Duke
      */
     @Override
     public String execute(Ui ui, Storage storage) {
         try {
             storage.markAsFinished(index);
             storage.save();
-            return ui.print("Well done! I have marked the following as finished: \n"
-                    + storage.getTask(index));
+            String dukeReply = "Well done! I have marked the following as finished: \n"
+                    + storage.getTask(index);
+            return ui.reply(dukeReply);
         } catch (IndexOutOfBoundsException e) {
-            return ui.print("Oops, the list is not that big!");
+            return ui.reply("Oops, the list is not that big!");
         } catch (DukeExceptions e) {
             return ui.printException(e);
         }

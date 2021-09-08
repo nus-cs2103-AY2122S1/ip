@@ -9,7 +9,7 @@ import duke.tasks.Task;
  * Class to handle the delete command.
  */
 public class DeleteCommand extends Command {
-    private int index;
+    private final int index;
 
     /**
      * Construct a new DeleteCommand instance with the specified index stored.
@@ -22,12 +22,12 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Delete the task in the index.
+     * Deletes the task in the index.
      * Print out confirmation and Saves after.
      *
      * @param ui The Ui instance for printing messages
      * @param storage The Storage instance delete the task from
-     * @return A boolean of false to indicate the main while loop should not be broken
+     * @return String to represent the reply of Duke
      */
     @Override
     public String execute(Ui ui, Storage storage) {
@@ -35,10 +35,11 @@ public class DeleteCommand extends Command {
             Task deletedTask = storage.getTask(index);
             storage.deleteFromList(index);
             storage.save();
-            return ui.print("Okay! I have deleted this task from your list: \n"
-                    + deletedTask.toString());
+            String dukeReply = "Okay! I have deleted this task from your list: \n"
+                    + deletedTask.toString();
+            return ui.reply(dukeReply);
         } catch (IndexOutOfBoundsException e) {
-            return ui.print("Oops, the list is not that big!");
+            return ui.reply("Oops, the list is not that big!");
         }
     }
 }

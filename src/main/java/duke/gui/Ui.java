@@ -1,7 +1,5 @@
 package duke.gui;
 
-import java.util.Scanner;
-
 /**
  * A class to handle the input and output of user.
  */
@@ -12,13 +10,11 @@ public class Ui {
             + "How can I help you today?";
 
     private static final String GOODBYE = "Bye. Hope to see you again soon!";
-    private final Scanner myScanner;
 
     /**
      * Creates a new Ui instance with a new scanner instance
      **/
     public Ui() {
-        myScanner = new Scanner(System.in);
     }
 
     /**
@@ -27,8 +23,7 @@ public class Ui {
      *
      * @param output The message which should be displayed in the output.
      */
-
-    private static String reply(String output) {
+    public String reply(String output) {
         return (output);
     }
 
@@ -43,24 +38,6 @@ public class Ui {
                 ? GREETING
                 : GOODBYE;
         return reply(printMessage);
-    }
-
-    /**
-     * Get the next line of user input.
-     *
-     * @return The next line of the user input.
-     **/
-    public String getInput() {
-        return myScanner.nextLine();
-    }
-
-    /**
-     * Return the input string with proper format.
-     *
-     * @param s The String to be formatted.
-     **/
-    public String print(String s) {
-        return reply(s);
     }
 
     /**

@@ -8,7 +8,7 @@ import duke.tasks.ToDo;
  * Class to handle the todo command.
  */
 public class ToDoCommand extends Command {
-    private ToDo toDo;
+    private final ToDo toDo;
 
     /**
      * Construct a new ToDoCommand instance with the specified toDo task stored.
@@ -30,8 +30,9 @@ public class ToDoCommand extends Command {
     public String execute(Ui ui, Storage storage) {
         storage.addToList(toDo);
         storage.save();
-        return ui.print("Got it! I've added this task to the list: \n"
-                + "  " + toDo.toString() + '\n'
-                + String.format("Now you have %d tasks in the list", storage.getSize()));
+        String dukeReply = String.format("Got it! I've added this toDo to the list: \n"
+                        + " %s\n Now you have %d tasks in the list!\n",
+                toDo.toString(), storage.getSize());
+        return ui.reply(dukeReply);
     }
 }

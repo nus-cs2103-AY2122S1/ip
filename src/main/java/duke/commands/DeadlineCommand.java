@@ -8,7 +8,7 @@ import duke.tasks.Deadline;
  * Class to handle the deadline command.
  */
 public class DeadlineCommand extends Command {
-    private Deadline deadline;
+    private final Deadline deadline;
 
     /**
      * Constructor for a new DeadlineCommand instance with the specified deadline task stored.
@@ -24,16 +24,16 @@ public class DeadlineCommand extends Command {
      *
      * @param ui The Ui instance for printing
      * @param storage The Storage instance to add the task to
-     * @return A boolean of false to indicate the main while loop should not be broken
+     * @return String to represent the reply of Duke
      */
     @Override
     public String execute(Ui ui, Storage storage) {
         storage.addToList(deadline);
         storage.save();
-        return ui.print(String.format("Got it! I've added this deadline to the list: \n"
-                + "%s \n Now you have %d tasks in the list",
-                deadline.toString(), storage.getSize())
-        );
+        String dukeReply = String.format("Got it! I've added this deadline to the list: \n"
+                + "%s\n Now you have %d tasks in the list",
+                deadline.toString(), storage.getSize());
+        return ui.reply(dukeReply);
     }
 
 }

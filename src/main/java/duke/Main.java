@@ -16,7 +16,13 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private Duke duke = new Duke();
-
+    /**
+     * Starts and loads the applicaion.
+     * Trigger duke to initialise all classes.
+     * Initialise and shows all GUI element to the given stage.
+     *
+     * @param stage The stage where the GUI should be shown.
+     */
     @Override
     public void start(Stage stage) {
         try {
