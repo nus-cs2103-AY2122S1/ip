@@ -2,12 +2,8 @@ package duke;
 
 import duke.command.Command;
 import duke.task.TaskList;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+
 import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
 
 /**
  * Represents a chatbot to manage a list of tasks.
@@ -19,11 +15,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
+
     private Image user = new Image(this.getClass().getResourceAsStream("/images/cat.jpg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/samoyed.png"));
 
