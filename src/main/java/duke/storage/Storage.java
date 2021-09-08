@@ -67,7 +67,6 @@ public class Storage {
                 List<String> splitLine = Arrays.stream(line.split(","))
                         .map(String::trim)
                         .collect(Collectors.toList());
-
                 String taskType = splitLine.get(0);
                 boolean isDone = splitLine.get(1).equals("1");
                 String description = splitLine.get(2);
