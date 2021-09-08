@@ -56,6 +56,7 @@ public class TaskList {
         String result;
         try {
             result = input.substring(input.indexOf(start) + start.length() + 1);
+            assert result.length() < input.length() : "Details should always be smaller than entire command";
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException(String.format(Messages.EMPTY.toString(), start));
         }
@@ -76,6 +77,7 @@ public class TaskList {
         String result;
         try {
             result = input.substring(input.indexOf(start) + start.length() + 1, input.indexOf(end));
+            assert result.length() < input.length() : "Details should always be smaller than entire command";
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException(String.format(Messages.EMPTY.toString(), start));
         }
@@ -117,6 +119,7 @@ public class TaskList {
      */
     public String add(String input) throws DukeException {
         Task tsk;
+        int oldSize = getSize();
 
         if (input.contains("todo")) {
             String name = cut(input, "todo");
@@ -137,6 +140,8 @@ public class TaskList {
         }
 
         library.add(tsk);
+        int newSize = getSize();
+        assert (newSize - oldSize) == 1 : "TaskList size should increase by 1";
         return tsk.toString();
     }
 
@@ -145,10 +150,21 @@ public class TaskList {
      *
      * @param index task to be removed.
      * @return returned task description.
+     * @throws DukeException if unable to remove task
      */
-    public String remove(int index) {
-        Task tsk = library.remove(index);
-        return tsk.toString();
+    public String remove(int index) throws DukeException {
+        try {
+            int oldSize = getSize();
+
+            Task tsk = library.remove(index);
+
+            int newSize = getSize();
+            assert (newSize - oldSize) == -1 : "TaskList size should decrease by 1";
+            return tsk.toString();
+        } catch (Exception e) {
+            throw new DukeException("Unable to delete target task");
+        }
+
     }
 
     /**
@@ -172,10 +188,11 @@ public class TaskList {
     public String list() {
         StringBuilder output = new StringBuilder();
 
-        for (int i = 0; i < library.size(); i++) {
+        for (int i = 0; i < getSize(); i++) {
             Task tsk = library.get(i);
             output.append(String.format("%d.%s\n", i + 1, tsk));
         }
+
         return output.toString().trim();
     }
 
@@ -194,6 +211,7 @@ public class TaskList {
                 output.append(String.format("%d.%s\n", count++, tsk));
             }
         }
+        assert count <= getSize() : "Find should be a subset of List";
         return output.toString().trim();
     }
 
