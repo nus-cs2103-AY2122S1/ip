@@ -21,7 +21,9 @@ public class ListCommand extends Command {
      * @param duchessList The DuchessList to read or write tasks to.
      * @return The reply from Duchess to the user.
      */
-    public String handleLogic(DuchessList duchessList) {
-        return duchessList.printList();
+    public String handleLogic(Duchess duchess) {
+        String reply = duchess.getDuchessList().printList();
+        assert !reply.isBlank() : "Reply should not be empty.";
+        return reply;
     }
 }
