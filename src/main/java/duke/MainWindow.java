@@ -4,7 +4,6 @@ import java.util.Objects;
 //import java.util.concurrent.TimeUnit;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -22,8 +21,6 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Duke duke;
 
@@ -60,11 +57,6 @@ public class MainWindow extends AnchorPane {
     }
 
     private void closeApp() {
-        //        try {
-        //            TimeUnit.SECONDS.sleep(2);
-        //        } catch (InterruptedException e) {
-        //            e.printStackTrace();
-        //        }
         javafx.application.Platform.exit();
     }
 

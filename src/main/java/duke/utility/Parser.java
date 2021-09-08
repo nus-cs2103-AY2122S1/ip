@@ -21,13 +21,28 @@ import duke.task.ToDo;
 
 public class Parser {
 
+    public static final String UNABLE_TO_LOG_TASK_MESSAGE = "Unable to log task.";
+    public static final String MISSING_DETAILS_MESSAGE = "Invalid task description: missing details!";
+    public static final String UNKNOWN_ERROR_MESSAGE = "Unexpected error occurred. Please check input.";
+    public static final String EMPTY_INPUT_MESSAGE = "Please type some commands!";
+    public static final String INVALID_COMMAND_MESSAGE = "Invalid command!";
+    public static final String DATE_FORMAT = "dd-MM-yyyy";
+    public static final String TIME_FORMAT = "HHmm";
+    public static final String INVALID_LINE_NUMBER_MESSAGE = "Invalid input for delete command. Please enter [delete] "
+            + "followed by the number of the line to delete\ne.g. delete 2";
+    public static final String INVALID_DATETIME_MESSAGE = "Invalid task description: invalid date/time\n"
+            + "Please use [command type] [task name] / [dd-mm-yyyy] [time (in 24hr format)]\n"
+            + "e.g. event lecture / 21-02-2021 1500";
+
     private final TaskList taskList;
     private final Storage storage;
+
 
     Parser(TaskList taskList, Storage storage) {
         this.taskList = taskList;
         this.storage = storage;
     }
+
 
     /**
      * Parses a given command from the user.
@@ -36,9 +51,9 @@ public class Parser {
      */
     String parseCommand(String command) {
         if (command.trim().length() == 0) {
-            return "Please type some commands!";
+            return EMPTY_INPUT_MESSAGE;
         }
-        String[] commandTokens = command.split(" ");
+        String[] commandTokens = getStringTokens(command, " ");
         // parse command
         try {
             switch (commandTokens[0]) {
@@ -46,100 +61,134 @@ public class Parser {
                 return "TERMINATE";
             case "done":
                 return this.parseDoneTask(command.substring(5).trim());
+            case "delete":
+                return this.parseDeleteTask(command.substring(7).trim());
+            case "find":
+                return this.taskList.searchTasks(command.substring(5).trim());
             case "list":
                 return this.taskList.getAllTasks();
-            case "delete":
-                return this.parseDeleteTask(command.substring(7));
-            case "find":
-                return this.taskList.search(command.substring(5).trim());
             default:
-                return this.parseNewTask(command.trim()); // default is add new duke.task
+                return this.parseNewTask(command.trim());
             }
         } catch (DukeException ex) {
             return ex.getMessage();
         } catch (DateTimeParseException ex) {
-            return "Invalid task description: "
-                    + "invalid date/time\nPlease use [command type] [task name] / [dd-mm-yyyy] [time (in 24hr "
-                    + "format)]\ne.g. event lecture / 21-02-2021 1500";
+            return INVALID_DATETIME_MESSAGE;
         } catch (IOException ex) {
-            return "Unable to log task.";
+            return UNABLE_TO_LOG_TASK_MESSAGE;
         } catch (StringIndexOutOfBoundsException ex) {
-            return "Invalid task description: missing details!";
+            return MISSING_DETAILS_MESSAGE;
         } catch (NumberFormatException ex) {
-            return "Invalid input for delete command. Please enter [delete] followed by the number of the line to "
-                    + "delete\ne.g. delete 2";
+            return INVALID_LINE_NUMBER_MESSAGE;
         } catch (Exception ex) {
-            return "Unexpected error occurred. Please check input.";
+            return UNKNOWN_ERROR_MESSAGE;
         }
     }
+
 
     private String parseDeleteTask(String taskNum) throws DukeException.InvalidTaskNumException, IOException {
-        String message = this.taskList.deleteTask(Integer.parseInt(taskNum.trim()));
-        if (this.storage != null) {
-            this.storage.deleteTaskLogEntry(Integer.parseInt(taskNum.trim()) - 1);
+        int lineNumber = Integer.parseInt(taskNum.trim());
+        String message = this.taskList.deleteTask(lineNumber);
+        if (storageIsPresent()) {
+            this.storage.modifyExistingLog(lineNumber - 1, Storage.EditTaskLogOperations.DELETE);
+            // storage is 0 indexed
         }
         return message;
     }
 
-    private String parseDoneTask(String taskName) throws DukeException.NoSuchTaskException,
-            DukeException.TaskAlreadyCompleteException, IOException {
+
+    private String parseDoneTask(String taskName) throws IOException, DukeException.NoSuchTaskException,
+            DukeException.TaskAlreadyCompleteException {
         String message = this.taskList.markAsCompleted(taskName);
-        if (this.storage != null) { // log
-            int taskIdx = this.taskList.getTaskIndex(taskName);
-            this.storage.changeTaskLogToCompleted(taskIdx);
+        if (storageIsPresent()) {
+            this.storage.modifyExistingLog(this.taskList.getTaskIndex(taskName),
+                    Storage.EditTaskLogOperations.MARK_AS_COMPLETED);
         }
         return message;
     }
+
 
     private String parseNewTask(String command) throws DukeException.DuplicateTaskException,
             DukeException.InvalidTaskDescriptionException, DukeException.InvalidCommandException, IOException {
+
+        String[] taskTypeAndDetails = preProcessCommand(command);
+        String taskType = taskTypeAndDetails[0];
+        String taskDetails = taskTypeAndDetails[1];
+
+        // if task is todo, then name = details, else name will be before the "/"
+        String[] detailTokens = getStringTokens(taskDetails, "/");
+        String taskName = detailTokens[0].trim();
+        Task task = null;
+        String message = null;
+        /*
+        Have to hold on to the message instead of returning the message immediately because a message is confirmation
+        that the task is successfully added and only after that can the task be logged in storage
+        */
+        if ("todo".equals(taskType)) {
+            task = new ToDo(taskName);
+            message = this.taskList.add(task);
+            if (storageIsPresent()) {
+                this.storage.append("T", "<F>", taskName);
+            }
+        } else {
+            String[] tokens = getStringTokens(taskDetails, "/");
+            // tokens has the structure [task name, dateTime]
+            String[] dateAndTime = getStringTokens(tokens[1].trim(), " ");
+            // dateAndTime has the structure [date, time]
+            LocalDateTime dateTime = parseDateTime(dateAndTime);
+
+            String taskTypePrefix = "E";
+            if (taskType.equals("event")) {
+                task = new Event(taskName, dateTime);
+            } else { // deadline
+                task = new Deadline(taskName, dateTime);
+                taskTypePrefix = "D";
+            }
+
+            message = this.taskList.add(task);
+            if (storageIsPresent()) {
+                this.storage.append(taskTypePrefix, "<F>", taskName,
+                        dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+            }
+        }
+        return message;
+    }
+
+
+    private String[] preProcessCommand(String command) throws DukeException.InvalidCommandException,
+            DukeException.InvalidTaskDescriptionException {
         if (command.length() == 0) {
-            throw new DukeException.InvalidCommandException("Please type something!");
+            throw new DukeException.InvalidCommandException(MISSING_DETAILS_MESSAGE);
         }
-        String[] commandTokens = command.split(" ");
+
+        String[] commandTokens = getStringTokens(command, " ");
         String taskType = commandTokens[0];
-        if (taskType.equals("todo") || taskType.equals("event") || taskType.equals("deadline")) { // valid task
-            // remove tasktype to get taskName (+datetime) only
-            String details = command.substring(taskType.length() + 1).trim();
-            if (details.length() == 0) {
-                throw new DukeException.InvalidTaskDescriptionException("Missing task details!");
-            }
-            // if task is todo, then name = details, else name will be before the "/"
-            String taskName = details.split("/")[0].trim();
-            if (this.taskList.existingTasks.contains(taskName)) { // task already in list
-                throw new DukeException.DuplicateTaskException("Task already in list!");
-            }
-            Task task = null;
-            String message = null;
-            if ("todo".equals(taskType)) {
-                task = new ToDo(taskName);
-                message = this.taskList.add(task);
-                if (this.storage != null) {
-                    this.storage.append("T", "F", taskName);
-                }
-            } else {
-                String[] tokens = details.split("/"); // event or deadline
-                // tokens has the structure [task name, dateTime]
-                String[] dateTimeString = tokens[1].trim().split(" ");
-                LocalDate date = LocalDate.parse(dateTimeString[0], DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-                LocalTime time = LocalTime.parse(dateTimeString[1], DateTimeFormatter.ofPattern("HHmm"));
-                LocalDateTime dateTime = LocalDateTime.of(date, time);
-                String taskTypeForStorage = "E";
-                if (taskType.equals("event")) {
-                    task = new Event(taskName, dateTime);
-                } else { // deadline
-                    task = new Deadline(taskName, dateTime);
-                    taskTypeForStorage = "D";
-                }
-                message = this.taskList.add(task);
-                if (this.storage != null) {
-                    this.storage.append(taskTypeForStorage, "F", taskName,
-                            dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
-                }
-            }
-            return message;
-        } else { // invalid command
-            throw new DukeException.InvalidCommandException("Invalid command!");
+        if (!(taskType.equals("todo") || taskType.equals("event") || taskType.equals("deadline"))) {
+            throw new DukeException.InvalidCommandException(INVALID_COMMAND_MESSAGE);
         }
+
+        String taskDetails = command.substring(taskType.length() + 1).trim();
+        if (taskDetails.length() == 0) {
+            throw new DukeException.InvalidTaskDescriptionException(MISSING_DETAILS_MESSAGE);
+        }
+
+        return new String[]{taskType, taskDetails};
+    }
+
+
+    private LocalDateTime parseDateTime(String[] dateAndTime) throws DateTimeParseException {
+        LocalDate date = LocalDate.parse(dateAndTime[0].trim(), DateTimeFormatter.ofPattern(DATE_FORMAT));
+        LocalTime time = LocalTime.parse(dateAndTime[1].trim(), DateTimeFormatter.ofPattern(TIME_FORMAT));
+        return LocalDateTime.of(date, time);
+    }
+
+
+    private String[] getStringTokens(String original, String delimiter) {
+        return original.split(delimiter);
+    }
+
+
+    private boolean storageIsPresent() {
+        return this.storage != null;
     }
 }

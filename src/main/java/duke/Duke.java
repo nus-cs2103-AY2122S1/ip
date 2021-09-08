@@ -16,10 +16,12 @@ import duke.utility.Ui;
  */
 
 public class Duke {
+    public static final String UNABLE_TO_CREATE_STORAGE_MESSAGE = "Unable to create/open specified file."
+            + "\nTasks will not be logged.";
     private final Ui ui;
     private TaskList tasks;
     private Storage storage;
-    private String storageStatus;
+    private String storageStatusMessage;
 
     /**
      * Initialises a new <code>Duke</code> object with its own {@link duke.utility.Ui} and
@@ -27,34 +29,27 @@ public class Duke {
      * If possible it will create a {@link duke.utility.Storage} object from a given filepath, which enables loading
      * of previous tasks from that specified file if it exists, or automatically creates such a file for future
      * logging. If error is encountered creating the file, the program will not log tasks for that run of the program.
-     * @param logPath File path of previous saved task log (if any).
+     * @param logPath File path of previous saved task log (or name of file to automatically create in its absence)
      */
     public Duke(String logPath) {
         this.ui = new Ui();
         try {
             this.storage = new Storage(logPath);
             this.tasks = new TaskList(storage.loadPreviousTasks());
+            this.storageStatusMessage = this.storage.getStorageLoadStatusMessage();
         } catch (IOException ex) {
-            this.storageStatus = "Unable to create/open specified file.\nTasks will not be logged.";
+            this.storageStatusMessage = UNABLE_TO_CREATE_STORAGE_MESSAGE;
             this.storage = null;
             this.tasks = new TaskList();
         }
     }
 
-    public boolean hasStorage() {
-        return this.storage == null;
-    }
-
-    public void setStorageStatus(String message) {
-        this.storageStatus = message;
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method. TODO
-     */
     String getResponse(String input) {
         return this.ui.receiveInputFromUser(input);
+    }
+
+    public String getStorageStatusMessage() {
+        return this.storageStatusMessage;
     }
 
     void run() {
