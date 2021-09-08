@@ -1,5 +1,9 @@
 package tasks;
 
+import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import exceptions.NoSuchCommandException;
 import exceptions.NoTaskNameException;
 
@@ -33,18 +37,19 @@ public abstract class Task {
      * commands
      * @throws NoTaskNameException if there is no task name
      */
-    private static Task createTask(String command, String input) throws NoSuchCommandException, NoTaskNameException {
+    public static Task createTask(String command, String input) throws NoSuchCommandException, NoTaskNameException {
         if (input.isEmpty()) {
             throw new NoTaskNameException("No task name, please try again.");
         }
+        input = input.trim();
         switch (command) {
         case "todo":
             return new ToDo(input);
         case "event":
-            String[] messageAndEventDate = input.split("/at ");
+            String[] messageAndEventDate = Parser.splitBy(input, "/at");
             return new Event(messageAndEventDate[0], messageAndEventDate[1]);
         case "deadline":
-            String[] messageAndEndTime = input.split("/by ");
+            String[] messageAndEndTime = Parser.splitBy(input, "/by");
             return new Deadline(messageAndEndTime[0], messageAndEndTime[1]);
         default:
             throw new NoSuchCommandException("No such command!");
@@ -91,9 +96,18 @@ public abstract class Task {
     }
 
     /**
-     * Sets the Task to completed.
+     * Sets the Task as complete.
      */
     public void doTask() {
+        this.completed = true;
+    }
+
+    /**
+     * Sets the Task as complete.
+     *
+     * @param taskList the current TaskList
+     */
+    public void doTask(TaskList taskList) {
         this.completed = true;
     }
 
@@ -114,4 +128,10 @@ public abstract class Task {
     public String getMessage() {
         return this.message;
     }
+
+    /**
+     * Overrides clone method.
+     */
+    @Override
+    public abstract Task clone();
 }

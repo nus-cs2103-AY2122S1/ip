@@ -29,4 +29,9 @@ public class ToDo extends Task {
     public String toStorage() {
         return "T|" + super.toStorage();
     }
+
+    @Override
+    public Task clone() {
+        return new ToDo(this.getMessage());
+    }
 }

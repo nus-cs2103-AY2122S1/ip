@@ -3,7 +3,8 @@ package command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import tasks.ToDo;
+import exceptions.DukeException;
+import tasks.Task;
 
 /**
  * Command to create a new ToDo task.
@@ -25,8 +26,9 @@ public class CreateNewToDoCommand extends Command {
      * @return acknowledgement that Deadline has been created
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
-        return taskList.add(new ToDo(super.getExtraInput()));
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        String details = super.getExtraInput();
+        return taskList.add(Task.createTask("todo", details));
     }
 
     /**

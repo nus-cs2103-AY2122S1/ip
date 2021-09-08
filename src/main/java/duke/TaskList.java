@@ -62,11 +62,11 @@ public class TaskList {
      * Marks the taskNum-th item in the tasks list as completed.
      * @param taskIndex integer index of the task to be marked
      */
-    public void doTask(int taskIndex) throws TaskDoesNotExistException {
+    public void doTask(int taskIndex, TaskList taskList) throws TaskDoesNotExistException {
         if (taskIndex >= this.taskList.size()) {
             throw new TaskDoesNotExistException("Task number out of bounds!");
         } else {
-            this.taskList.get(taskIndex).doTask();
+            this.taskList.get(taskIndex).doTask(taskList);
         }
     }
 
