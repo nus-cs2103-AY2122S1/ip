@@ -49,6 +49,15 @@ public class Task {
     }
 
     /**
+     * Returns a String representing the task that is shown to the user and is overridden by subclasses.
+     *
+     * @return A String representing this task.
+     */
+    public String toListFormat() {
+        return "";
+    }
+
+    /**
      * Returns this task's status and description.
      *
      * @return A string representing the status of this task and its description.

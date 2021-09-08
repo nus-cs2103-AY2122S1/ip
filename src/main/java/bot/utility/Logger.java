@@ -22,6 +22,7 @@ import bot.tasks.ToDo;
  */
 public class Logger {
     private static BufferedReader bufferedReader;
+
     protected static void initialize() {
         Path path = Paths.get("tasks.txt");
         try {
@@ -46,30 +47,7 @@ public class Logger {
             StringBuilder builder = new StringBuilder();
 
             for (Task currentTask : tasks) {
-                int flag = currentTask.getStatusIcon().equals("X") ? 1 : 0;
-                if (currentTask instanceof ToDo) {
-                    builder.append("T | ")
-                            .append(flag)
-                            .append(" | ")
-                            .append(currentTask.getDescription())
-                            .append("\n");
-                } else if (currentTask instanceof Deadline) {
-                    builder.append("D | ")
-                            .append(flag)
-                            .append(" | ")
-                            .append(currentTask.getDescription())
-                            .append(" | ")
-                            .append(((Deadline) currentTask).getBy())
-                            .append("\n");
-                } else if (currentTask instanceof Event) {
-                    builder.append("E | ")
-                            .append(flag)
-                            .append(" | ")
-                            .append(currentTask.getDescription())
-                            .append(" | ")
-                            .append(((Event) currentTask).getTiming())
-                            .append("\n");
-                }
+                builder.append(currentTask.toListFormat());
             }
 
             writer.write(builder.toString());
@@ -91,37 +69,53 @@ public class Logger {
             String line = bufferedReader.readLine();
 
             while (line != null) {
-                String[] words = line.split("[|]");
-                switch (words[0].trim()) {
-                case "T":
-                    ToDo todo = new ToDo(words[2].trim());
-                    if (words[1].trim().equals("1")) {
-                        todo.markAsDone();
-                    }
-                    list.add(todo);
-                    break;
-                case "D":
-                    Deadline deadline = new Deadline(words[2].trim(), words[3].trim());
-                    if (words[1].trim().equals("1")) {
-                        deadline.markAsDone();
-                    }
-                    list.add(deadline);
-                    break;
-                case "E":
-                    Event event = new Event(words[2].trim(), words[3].trim());
-                    if (words[1].trim().equals("1")) {
-                        event.markAsDone();
-                    }
-                    list.add(event);
-                    break;
-                default:
-                    break;
-                }
+                markAndAddTask(line, list);
                 line = bufferedReader.readLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return list;
+    }
+
+    private static void markAndAddTask(String line, List<Task> list) throws IOException {
+        String[] words = line.split("[|]");
+        switch (words[0].trim()) {
+        case "T":
+            markAndAddTodo(list, words);
+            break;
+        case "D":
+            markAndAddDeadline(list, words);
+            break;
+        case "E":
+            markAndAddEvent(list, words);
+            break;
+        default:
+            break;
+        }
+    }
+
+    private static void markAndAddTodo(List<Task> list, String[] words) {
+        ToDo todo = new ToDo(words[2].trim());
+        if (words[1].trim().equals("1")) {
+            todo.markAsDone();
+        }
+        list.add(todo);
+    }
+
+    private static void markAndAddDeadline(List<Task> list, String[] words) {
+        Deadline deadline = new Deadline(words[2].trim(), words[3].trim());
+        if (words[1].trim().equals("1")) {
+            deadline.markAsDone();
+        }
+        list.add(deadline);
+    }
+
+    private static void markAndAddEvent(List<Task> list, String[] words) {
+        Event event = new Event(words[2].trim(), words[3].trim());
+        if (words[1].trim().equals("1")) {
+            event.markAsDone();
+        }
+        list.add(event);
     }
 }

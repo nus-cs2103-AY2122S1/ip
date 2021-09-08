@@ -49,6 +49,19 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns a String representing this task that is shown to the user.
+     *
+     * @return A String representing this task.
+     */
+    @Override
+    public String toListFormat() {
+        return String.format("D | %d | %s | %s\n",
+                this.getStatusIcon().equals("X") ? 1 : 0,
+                this.getDescription(),
+                this.getBy());
+    }
+
+    /**
      * Returns this task's status and description.
      *
      * @return A string showing what the task is, its description and its time limit.
