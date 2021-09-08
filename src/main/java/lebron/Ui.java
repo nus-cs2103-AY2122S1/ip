@@ -51,7 +51,7 @@ public class Ui {
      *
      * @return the desired response.
      */
-    public String exit() {
+    public String replyExit() {
         return ("    Bye. Hope to see you again soon!\n");
     }
 
