@@ -20,10 +20,7 @@ public class BotTemporalUnit {
      * @return LocalDateTime
      */
     public LocalDateTime convertStringToTemporalData(String data) {
-        return LocalDateTime.parse(
-                data,
-                DateTimeFormatter.ISO_LOCAL_DATE_TIME
-                );
+        return LocalDateTime.parse(data, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
 }
