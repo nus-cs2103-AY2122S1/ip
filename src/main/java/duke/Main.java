@@ -3,6 +3,10 @@ package duke;
 import javafx.application.Application;
 
 /**
+ * @author se-edu-reused
+ * Reused from https://github.com/se-edu/addressbook-level3
+ * with minor modifications
+ *
  * The main entry point to the application.
  *
  * This is a workaround for the following error when DukeApp is made the

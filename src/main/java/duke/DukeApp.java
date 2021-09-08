@@ -18,6 +18,10 @@ public class DukeApp extends Application {
     private static final boolean IS_RESIZABLE = false;
 
     /**
+     * @author se-edu-reused
+     * Reused from https://se-education.org/guides/tutorials/javaFx.html
+     * with minor modifications
+     *
      * Initializes Stage and starts GUI.
      *
      * @param stage Stage of GUI.
