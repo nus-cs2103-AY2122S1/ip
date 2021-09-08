@@ -28,7 +28,7 @@ public class TaskTest {
     }
 
     @Test
-    public void isTimeable_event_true() {
+    public void isTimeable_event_true()    {
         assertTrue(event.isTimeable());
     }
 
