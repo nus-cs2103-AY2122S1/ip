@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Represents a task that can be marked as completed/done.
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
     /**
      * Description or name of the task.
      */

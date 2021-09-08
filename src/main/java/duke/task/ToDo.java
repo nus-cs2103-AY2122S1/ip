@@ -21,4 +21,9 @@ public class ToDo extends Task {
                 + (this.isCompleted() ? "1" : "0") + Storage.DELIMITER
                 + this.getDescription();
     }
+
+    @Override
+    public int compareTo(Task task) {
+        return -1;
+    }
 }

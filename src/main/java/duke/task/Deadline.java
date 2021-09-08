@@ -24,6 +24,21 @@ public class Deadline extends Task {
         this.endDate = endDate;
     }
 
+    public boolean isBefore(LocalDate date) {
+        return this.endDate.isBefore(date);
+    }
+
+    @Override
+    public int compareTo(Task task) {
+        if (task instanceof ToDo) {
+            return 1;
+        }
+        if (task instanceof Deadline) {
+            return this.isBefore(((Deadline) task).endDate) ? -1 : 1;
+        }
+        return ((Event) task).isBefore(this.endDate) ? 1 : -1;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString()

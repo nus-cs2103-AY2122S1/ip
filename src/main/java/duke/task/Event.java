@@ -24,6 +24,21 @@ public class Event extends Task {
         this.eventDate = eventDate;
     }
 
+    public boolean isBefore(LocalDate date) {
+        return this.eventDate.isBefore(date);
+    }
+
+    @Override
+    public int compareTo(Task task) {
+        if (task instanceof ToDo) {
+            return 1;
+        }
+        if (task instanceof Event) {
+            return eventDate.isBefore(this.eventDate) ? 1 : -1;
+        }
+        return ((Deadline) task).isBefore(this.eventDate) ? 1 : -1;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString()
