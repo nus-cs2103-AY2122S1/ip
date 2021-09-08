@@ -14,11 +14,7 @@ public class Parser {
         return this.command;
     }
 
-    public String firstPart() {
-        return this.twoPart[0];
-    }
-
-    public int secondPartInInt() throws DukeException {
+    public int getSecondPartInInt() throws DukeException {
         try {
             return Integer.valueOf(this.twoPart[1]);
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -26,7 +22,7 @@ public class Parser {
         }
     }
 
-    public String secondPart() throws DukeException {
+    public String getSecondPart() throws DukeException {
         try {
             return this.twoPart[1];
         } catch (ArrayIndexOutOfBoundsException error) {
@@ -34,16 +30,12 @@ public class Parser {
         }
     }
 
-    public String[] deadline() {
+    public String[] splitSecondPartForDeadline() {
         return this.twoPart[1].split(" /by ", 2);
     }
 
-    public String[] event() {
+    public String[] splitSecondPartForEvent() {
         return this.twoPart[1].split(" /at ", 2);
-    }
-
-    public String[] parse() {
-        return this.twoPart;
     }
 
     public boolean isBye() {

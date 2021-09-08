@@ -28,9 +28,9 @@ public class Ui {
         System.out.println("Bye! Hope to see you again soon!");
     }
 
-    public void list(TaskList tasklist) {
+    public void list(TaskList taskList) {
         System.out.println("Here are the tasks in your list:");
-        System.out.println(tasklist);
+        System.out.println(taskList);
     }
 
     public void done(Task task) {
@@ -38,16 +38,17 @@ public class Ui {
         System.out.println(task);
     }
 
-    public void addTask(Task task, TaskList tasklist) {
-        int length = tasklist.noOfTask();
+    public void addTask(Task task, TaskList taskList) {
+        // Precompute length of taskList
+        int length = taskList.noOfTask();
 
         System.out.println("Added task:");
         System.out.println(task);
         System.out.println("You have " + length + " tasks in the list");
     }
 
-    public void deleteTask(Task task, TaskList tasklist) {
-        int length = tasklist.noOfTask();
+    public void deleteTask(Task task, TaskList taskList) {
+        int length = taskList.noOfTask();
 
         System.out.println("Ok! I have removed this task:");
         System.out.println(task);

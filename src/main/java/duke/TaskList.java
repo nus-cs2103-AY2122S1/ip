@@ -16,12 +16,16 @@ public class TaskList {
 
     @Override
     public String toString() {
+        // Precompute information required
         int length = this.tasks.size();
         String list = "";
+
+        // Iterate through all the tasks in the list
         for (int i = 0; i < length; i++) {
             list = list + String.valueOf(i + 1) + ". " + this.tasks.get(i) +"\n";
         }
 
+        // Return result
         return list;
     }
 
@@ -52,7 +56,7 @@ public class TaskList {
             throw new DukeException("you have to choose a number based on the list!");
         } else {
             Task task = this.tasks.get(taskIndex - 1);
-            task.Done();
+            task.setDone();
             this.mostRecent = task;
         }
     }

@@ -9,15 +9,11 @@ public class Task {
         this.isDone = false;
     }
 
-    public String convertToFile() {
-        return this.description;
-    }
-
     public String getStatusIcon() {
-        return (isDone ? "X" : " ");
+        return (isDone) ? "X" : " ";
     }
 
-    public void Done() {
+    public void setDone() {
         this.isDone = true;
     }
 
