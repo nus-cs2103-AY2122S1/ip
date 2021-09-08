@@ -1,10 +1,6 @@
 package duke;
 
-import java.lang.reflect.Array;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import duke.exceptions.DukeException;
 
 /**
  * Modified version of Duke (Personal Assistant Chatbot). Speaks owo language.
@@ -16,6 +12,10 @@ public class Duke {
     private Ui ui;
     private boolean continueDuke;
 
+    /**
+     * Main class for Duke. Handles the Ui, Storage, and receiving and sending input.
+     * @param filePath File path to save data to.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -29,6 +29,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Gets response from the Ui. Also saves any changes to storage while at it.
+     * @param input Input to Ui.
+     * @return Message from Ui.
+     */
     public String getResponse(String input){
         if (input.equalsIgnoreCase("bye")) {
             continueDuke = false;
@@ -36,15 +41,11 @@ public class Duke {
         return ui.getMessage(this.storage, this.tasklist, input);
     }
 
+    /**
+     * Checks if Duke should continue receiving input from interface.
+     * @return False if input is not "bye", true otherwise.
+     */
     public boolean isExit() {
         return !continueDuke;
     }
-
-//    public void run() throws DukeException {
-//    }
-//
-//    public static void main(String[] args) throws DukeException {
-//    }
-
-
 }

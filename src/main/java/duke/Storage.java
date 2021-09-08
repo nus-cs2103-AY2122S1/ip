@@ -1,10 +1,14 @@
 package duke;
 
+import duke.exceptions.DukeException;
+import duke.exceptions.LoadingFileError;
+import duke.exceptions.EmptyFileError;
+import duke.exceptions.SaveDirectoryError;
+import duke.exceptions.SaveFileError;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
 import java.util.regex.Pattern;
@@ -65,16 +69,11 @@ public class Storage {
                         }                    }
                 }
                 return tasklist;
-            } catch (DukeException e) {
-                throw e;
             } catch (Exception e) {
-                throw new LoadingFileError("Uwu! There's something wrong withw the existing file! "
-                        + "Did you meddle witwh it?\n"
-                        + "Creating new file for you. . .");
+                throw new LoadingFileError();
             }
         } else {
-            throw new LoadingFileError("Uwu! Pre-existing File not foundw! "
-                    + "Creating new file for you. . .");
+            throw new EmptyFileError();
         }
     }
 
@@ -104,5 +103,4 @@ public class Storage {
         }
 
     }
-
 }

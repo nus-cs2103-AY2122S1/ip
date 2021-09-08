@@ -1,9 +1,11 @@
-package duke;
+package duke.tasks;
+
+import duke.Parser;
+import duke.tasks.Task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 /**
  * Event (Task). Can be added to list in Duke.
@@ -25,7 +27,7 @@ public class Event extends Task {
     }
 
     /**
-     * Constructor to initialize Event. With time.
+     * Constructor to initialize Event. With Date and Time.
      * @param taskstr Task.
      * @param date Date/Time of task.
      * @param time Time of task.
@@ -37,8 +39,8 @@ public class Event extends Task {
     }
 
     /**
-     * Returns time Event occurs at, in String form.
-     * @return Time Event occurs at.
+     * Getter method for date Event occurs at.
+     * @return Date that Event occurs at in String form.
      */
     @Override
     public String getDate() {
@@ -46,8 +48,8 @@ public class Event extends Task {
     }
 
     /**
-     * Returns time Event occurs at.
-     * @return
+     * Getter method for time Event occurs
+     * @return Time that Event occurs at in String form.
      */
     @Override
     public String getTime() {
@@ -59,8 +61,8 @@ public class Event extends Task {
     }
 
     /**
-     * Returns simplified date and time Event occurs at, in String form.
-     * @return
+     * Getter method for simplified date and time Event occurs at.
+     * @return Simplified date and time Event occurs at in String form.
      */
     @Override
     public String getDateTimeStorage() {
