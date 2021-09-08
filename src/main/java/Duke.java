@@ -38,7 +38,9 @@ public class Duke {
         String output;
         try {
             Command c = Parser.parse(fullCommand);
-            output = c.execute(tasks, ui, storage);
+            String output = c.execute(tasks, ui, storage);
+            assert !output.equals("") : "Command response should not be empty";
+            return output;
         } catch (DukeException e) {
             output = e.getMessage();
         }
