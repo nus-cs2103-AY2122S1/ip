@@ -15,7 +15,6 @@ import bobbybot.util.TaskList;
 import bobbybot.util.Ui;
 
 public class AddCommand extends Command {
-    public static final String COMMAND_WORD = "add";
     private static final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
     private Task toAdd;
 
@@ -56,8 +55,15 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Executes Add command
+     *
+     * @param tasks task list
+     * @param ui ui
+     * @param storage storage
+     */
     @Override
-    public String getResponse(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(toAdd);
         try {
             storage.save(tasks);
@@ -66,7 +72,7 @@ public class AddCommand extends Command {
             e.printStackTrace();
         }
 
-        return "Got it. I've added this task:\n  " + toAdd + "\n"
+        response = "Got it. I've added this task:\n  " + toAdd + "\n"
                 + "Now you have " + tasks.getTasks().size() + " tasks in the list.";
     }
 }

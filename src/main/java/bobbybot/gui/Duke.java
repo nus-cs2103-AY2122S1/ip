@@ -45,6 +45,7 @@ public class Duke {
         } catch (InvalidArgumentException e) {
             e.printStackTrace();
         }
-        return c.getResponse(tasks, ui, storage);
+        c.execute(tasks, ui , storage);
+        return c.getResponse();
     }
 }

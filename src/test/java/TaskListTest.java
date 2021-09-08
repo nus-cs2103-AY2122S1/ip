@@ -20,7 +20,7 @@ public class TaskListTest {
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
     @Test
-    public void todo_create_success() {
+    public void getTask_create_success() {
         tasks.createToDo("test description");
         assertEquals(tasks.getTasks().size(), 1);
         assertEquals("[T][ ] test description", tasks.getTask(0).toString());

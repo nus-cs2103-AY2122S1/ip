@@ -40,7 +40,8 @@ public class BobbyBot {
             ui.showLine();
             try {
                 Command c = parser.parseCommand(userInput);
-                String response = c.getResponse(tasks, ui, storage);
+                c.execute(tasks, ui, storage);
+                String response = c.getResponse();
                 System.out.println(response);
                 isExit = c.isExit();
             } catch (BobbyException e) {

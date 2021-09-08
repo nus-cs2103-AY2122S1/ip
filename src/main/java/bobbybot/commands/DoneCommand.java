@@ -16,7 +16,7 @@ public class DoneCommand extends Command {
         this.taskNumToMarkAsDone = toMarkAsDone;
     }
     /**
-     * Executes command and get response
+     * Executes command
      *
      * @param tasks   task list
      * @param ui      ui
@@ -24,7 +24,7 @@ public class DoneCommand extends Command {
      * @return
      */
     @Override
-    public String getResponse(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task taskCompleted = tasks.getTask(taskNumToMarkAsDone - 1);
         tasks.markAsDone(taskNumToMarkAsDone);
         try {
@@ -33,6 +33,6 @@ public class DoneCommand extends Command {
             System.out.println("Could not save tasks to database!\n");
             e.printStackTrace();
         }
-        return "Nice! I've marked this task as done:\n" + " " + taskCompleted;
+        response = "Nice! I've marked this task as done:\n" + " " + taskCompleted;
     }
 }

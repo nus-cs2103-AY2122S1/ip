@@ -15,7 +15,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes command and get response
+     * Executes command
      *
      * @param tasks   task list
      * @param ui      ui
@@ -23,7 +23,7 @@ public class FindCommand extends Command {
      * @return response string
      */
     @Override
-    public String getResponse(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder response = new StringBuilder();
         response.append("Here are the tasks you're looking for sir!");
         for (int i = 0; i < tasks.getTasks().size(); i++) {
@@ -32,6 +32,6 @@ public class FindCommand extends Command {
                 response.append("\n").append(i + 1).append(".").append(sentence);
             }
         }
-        return response.toString();
+        this.response = response.toString();
     }
 }

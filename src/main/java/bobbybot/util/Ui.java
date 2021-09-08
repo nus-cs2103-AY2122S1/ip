@@ -5,6 +5,7 @@ package bobbybot.util;
  */
 public class Ui {
 
+
     public void showLoadingError() {
         System.out.println("Could not load data from past memory");
     }
