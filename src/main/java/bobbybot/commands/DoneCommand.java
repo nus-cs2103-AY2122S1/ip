@@ -1,35 +1,35 @@
 package bobbybot.commands;
 
+import bobbybot.exceptions.BobbyException;
 import bobbybot.tasks.Task;
 import bobbybot.util.Storage;
 import bobbybot.util.TaskList;
 import bobbybot.util.Ui;
 
-import java.io.IOException;
-
+/**
+ * Represents command for DONE
+ */
 public class DoneCommand extends Command {
-    private int taskNumToMarkAsDone;
+    private final int taskNumToMarkAsDone;
     public DoneCommand(int toMarkAsDone) {
         this.taskNumToMarkAsDone = toMarkAsDone;
     }
     /**
-     * Executes command and get response
+     * Executes command
      *
      * @param tasks   task list
      * @param ui      ui
      * @param storage storage
-     * @return
      */
     @Override
-    public String getResponse(TaskList tasks, Ui ui, Storage storage) {
-        Task taskCompleted = tasks.getTask(taskNumToMarkAsDone - 1);
-        tasks.markAsDone(taskNumToMarkAsDone);
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
+            Task taskCompleted = tasks.getTask(taskNumToMarkAsDone - 1);
+            tasks.markAsDone(taskNumToMarkAsDone);
             storage.save(tasks);
-        } catch (IOException e) {
-            System.out.println("Could not save tasks to database!\n");
-            e.printStackTrace();
+            response = "Nice! I've marked this task as done:\n" + " " + taskCompleted;
+        } catch (BobbyException e) {
+            System.out.println(e.getMessage());
         }
-        return "Nice! I've marked this task as done:\n" + " " + taskCompleted;
     }
 }

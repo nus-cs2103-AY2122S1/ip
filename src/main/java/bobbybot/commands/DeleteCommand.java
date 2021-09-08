@@ -1,38 +1,39 @@
 package bobbybot.commands;
 
+import bobbybot.exceptions.BobbyException;
+import bobbybot.tasks.Task;
 import bobbybot.util.Storage;
 import bobbybot.util.TaskList;
 import bobbybot.util.Ui;
 
-import java.io.IOException;
-
 public class DeleteCommand extends Command {
 
-    private int taskNumToDelete;
+    private final int taskNumToDelete;
+
     public DeleteCommand(int taskNumToDelete) {
         this.taskNumToDelete = taskNumToDelete;
     }
     /**
-     * Executes command and get response
+     * Executes command
      *
      * @param tasks   task list
      * @param ui      ui
      * @param storage storage
-     * @return
      */
-    @Override
-    public String getResponse(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (taskNumToDelete < 1 || taskNumToDelete > tasks.getTasks().size()) {
-            return "Invalid delete command! Task number: " + taskNumToDelete + "does not exist\n"
+            this.response = "Invalid delete command! Task number: " + taskNumToDelete + "does not exist\n"
                     + "Use [list] to see available tasks!";
         }
-        tasks.deleteTask(taskNumToDelete);
+
         try {
+            Task taskToDelete = tasks.getTask(taskNumToDelete - 1);
+            tasks.deleteTask(taskNumToDelete);
             storage.save(tasks);
-        } catch (IOException e) {
-            System.out.println("Could not save tasks to database!\n");
-            e.printStackTrace();
+            this.response = "Noted. I've removed this task: " + taskToDelete
+                    + "\nNow you have " + tasks.getTasks().size() + " tasks in the list.";
+        } catch (BobbyException e) {
+            System.out.println(e.getMessage());
         }
-        return "Now you have " + tasks.getTasks().size() + " tasks in the list.";
     }
 }

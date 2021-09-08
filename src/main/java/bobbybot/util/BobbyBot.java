@@ -1,11 +1,9 @@
 package bobbybot.util;
 
-import bobbybot.commands.Command;
-import bobbybot.exceptions.BobbyException;
-
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import bobbybot.commands.Command;
+import bobbybot.exceptions.BobbyException;
 /**
  * Represents the chatbot
  */
@@ -22,11 +20,11 @@ public class BobbyBot {
         ui = new Ui();
         ui.showWelcome();
         storage = new Storage(DBPATH);
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException e) {
-            ui.showLoadingError();
-        }
+        assert storage != null;
+        tasks = new TaskList(storage.load());
+
+
+
     }
 
     /**
@@ -41,7 +39,8 @@ public class BobbyBot {
             ui.showLine();
             try {
                 Command c = parser.parseCommand(userInput);
-                String response = c.getResponse(tasks, ui, storage);
+                c.execute(tasks, ui, storage);
+                String response = c.getResponse();
                 System.out.println(response);
                 isExit = c.isExit();
             } catch (BobbyException e) {

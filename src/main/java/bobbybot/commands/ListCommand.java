@@ -7,15 +7,14 @@ import bobbybot.util.Ui;
 public class ListCommand extends Command {
 
     /**
-     * Executes command and get response
+     * Executes command
      *
      * @param tasks   task list
      * @param ui      ui
      * @param storage storage
-     * @return response string
      */
     @Override
-    public String getResponse(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder response = new StringBuilder();
         response.append("Here are the tasks in your list:");
 
@@ -23,6 +22,6 @@ public class ListCommand extends Command {
             response.append("\n").append(i + 1).append(". ");
             response.append(tasks.getTask(i));
         }
-        return response.toString();
+        this.response = response.toString();
     }
 }
