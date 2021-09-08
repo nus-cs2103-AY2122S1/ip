@@ -266,7 +266,6 @@ public class BotCommandResponderUnit {
 
         if (searchResultList.isEmpty()) {
 
-            //botPrinter.print(botStaticMemoryUnit.MESSAGE_KEYWORD_NO_FOUND + keywordOutput);
             return botStaticMemoryUnit.MESSAGE_KEYWORD_NO_FOUND + keywordOutput;
 
         } else {
@@ -275,14 +274,6 @@ public class BotCommandResponderUnit {
                 taskFoundOutput += searchResult;
             }
 
-            /*
-            botPrinter.print(String.format(
-                    botStaticMemoryUnit.MESSAGE_TASK_FOUND,
-                    keywordOutput,
-                    taskFoundOutput
-                    )
-            );
-            */
             return String.format(
                     botStaticMemoryUnit.MESSAGE_TASK_FOUND,
                     keywordOutput,

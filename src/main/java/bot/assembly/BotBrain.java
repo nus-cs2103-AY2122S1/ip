@@ -1,7 +1,5 @@
 package bot.assembly;
 
-//import java.util.Scanner;
-
 import bot.assembly.function.BotCommandResponderUnit;
 import bot.assembly.function.BotPrinter;
 import bot.assembly.function.BotTaskStatusGeneratorUnit;
@@ -41,23 +39,17 @@ public class BotBrain {
         switch (commandInitial) {
         case BYE:
             isTerminated = true;
-            //botPrinter.print(botStaticMemoryUnit.MESSAGE_GOODBYE);
             return botStaticMemoryUnit.MESSAGE_GOODBYE;
         case LIST:
-            //botTaskGeneratorUnit.generateTaskTrackerReport();
             return botTaskGeneratorUnit.generateTaskTrackerReport();
         case DONE:
-            //botCommandResponderUnit.markTaskAsDone(input);
             return botCommandResponderUnit.markTaskAsDone(input);
         case DELETE:
-            //botCommandResponderUnit.deleteTaskFromList(input);
             return botCommandResponderUnit.deleteTaskFromList(input);
         case FIND:
-            //botCommandResponderUnit.findTaskFromList(input);
             return botCommandResponderUnit.findTaskFromList(input);
         default:
             botCommandResponderUnit.addTask(input);
-            // botTaskGeneratorUnit.generateAddTaskFeedback();
             return botTaskGeneratorUnit.generateAddTaskFeedback();
         }
     }
@@ -82,16 +74,13 @@ public class BotBrain {
     public String interact(String input) {
 
         input.trim();
-        //Scanner sc = new Scanner(System.in);
 
         while (!isTerminated) {
             try {
-                //String input = sc.nextLine().trim();
                 String output = reactToCommand(input);
                 botDynamicMemoryUnit.saveToHardDisk();
                 return output;
             } catch (Exception error) {
-                //botPrinter.print(botStaticMemoryUnit.ERROR_MESSAGE_PROMPT + error.getMessage());
                 return botStaticMemoryUnit.ERROR_MESSAGE_PROMPT + error.getMessage();
             }
         }
@@ -100,14 +89,6 @@ public class BotBrain {
         assert !isTerminated : "The application should not reach this step";
         return "BUG";
     }
-    /*
-    public void initiate() {
-        System.out.println("\t" + botStaticMemoryUnit.LOGO.replaceAll("\n", "\n\t"));
-        botPrinter.print(botStaticMemoryUnit.MESSAGE_GREETING);
-        this.wakeUpMemory();
-        this.interact();
-    }
-    */
 
     /**
      *
