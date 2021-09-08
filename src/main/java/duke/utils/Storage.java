@@ -14,7 +14,7 @@ import duke.tasks.Task;
  * A class to handle all the operations that deals with the computer hard drive or memory.
  */
 public class Storage {
-
+    private final String DISK_ERROR_MESSAGE = "A problem occurred while accessing the text file.";
     private final String persistedData;
 
     /**
@@ -70,7 +70,7 @@ public class Storage {
             allLines.set(taskNum, task.persistedDataStringFormat());
             Files.write(persistedDataPath, allLines);
         } catch (IOException e) {
-            System.out.println("A problem occurred while reading from the text file.");
+            System.out.println(DISK_ERROR_MESSAGE);
             e.printStackTrace();
         }
     }
@@ -88,7 +88,7 @@ public class Storage {
             fw.write(line);
             fw.close();
         } catch (IOException e) {
-            System.out.println("A problem occurred while writing to text file.");
+            System.out.println(DISK_ERROR_MESSAGE);
             e.printStackTrace();
         }
     }
@@ -106,7 +106,7 @@ public class Storage {
             allLines.remove(taskNum);
             Files.write(persistedDataPath, allLines);
         } catch (IOException e) {
-            System.out.println("A problem occurred while reading/writing the text file.");
+            System.out.println(DISK_ERROR_MESSAGE);
             e.printStackTrace();
         }
     }

@@ -19,6 +19,7 @@ public class Duke {
     private final Storage storage;
     private final TaskList tasks;
     private final Ui ui;
+    private final String NARUTO_REPLY_PREFIX = "Sage Mode On! \n";
 
     /**
      * Constructor for the Duke chat-bot.
@@ -26,16 +27,6 @@ public class Duke {
      * @param persistedData the relative path to the persisted data starting from the project directory.
      */
     public Duke(String persistedData) {
-        ui = new Ui();
-        storage = new Storage(persistedData);
-        tasks = new TaskList(storage.loadPersistedData());
-    }
-
-    /**
-     * Constructor for the Duke chat-bot.
-     */
-    public Duke() {
-        String persistedData = "data/duke.txt";
         ui = new Ui();
         storage = new Storage(persistedData);
         tasks = new TaskList(storage.loadPersistedData());
@@ -64,9 +55,9 @@ public class Duke {
         System.out.flush();
         System.setOut(oldPrintStream);
         // Show what happened in the terminal on IntelliJ
-        System.out.println("Here: " + narutoStream.toString());
+        // System.out.println("Here: " + narutoStream.toString());
 
-        return "Naruto's reply! " + narutoStream.toString();
+        return NARUTO_REPLY_PREFIX + narutoStream.toString();
     }
 
     /**
@@ -81,7 +72,7 @@ public class Duke {
         PrintStream ps = new PrintStream(narutoStream);
         // IMPORTANT: Save the old System.out!
         PrintStream old = System.out;
-        // Tell Java to use your special stream
+        // Tell Java to use my special stream
         System.setOut(ps);
 
         ui.showWelcome();
@@ -92,7 +83,7 @@ public class Duke {
         // Show what happened in the terminal on IntelliJ if needed
         // System.out.println("Here: " + narutoStream.toString());
 
-        return "Naruto's reply! " + narutoStream.toString();
+        return NARUTO_REPLY_PREFIX + narutoStream.toString();
     }
 
 }

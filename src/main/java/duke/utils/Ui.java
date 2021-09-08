@@ -1,7 +1,6 @@
 package duke.utils;
 
 import java.util.HashMap;
-import java.util.Scanner;
 
 import duke.exceptions.DukeException;
 import duke.tasks.Task;
@@ -11,7 +10,6 @@ import duke.tasks.Task;
  */
 public class Ui {
     private static final String HORIZONTAL_LINES = "-----------------------------------------";
-    private final Scanner in = new Scanner(System.in);
 
     /**
      * Prints a long horizontal line which acts as a separator.
