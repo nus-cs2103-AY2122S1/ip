@@ -58,6 +58,7 @@ public class TaskList {
             case "find":
                 return findTask(input);
             default:
+                assert false : "Unexpected command received from the user;";
                 throw new InvalidCommandException(input);
             }
         } catch (InvalidCommandException e) {
@@ -118,13 +119,16 @@ public class TaskList {
                 recentlyAdded = Event.addEvent(arr[1], false);
                 break;
             default:
+                assert false : "taskType is not one of the expected;";
                 break;
             }
+
+            assert recentlyAdded != null : "Task is null and has yet to be created";
 
             this.tasks.add(recentlyAdded);
             this.count++;
 
-            String taskCount = "Now you have " + count + " task(s) in the list!";
+            String taskCount = "Now you have " + this.count + " task(s) in the list!";
             return (Message.FORMAT_LINE + "\n"
                     + "Received order! I've added this task:\n"
                     + "     " + recentlyAdded + "\n"
@@ -170,7 +174,11 @@ public class TaskList {
                     + e
                     + Message.FORMAT_LINE);
         }
+
+        int previousCount = this.count;
         this.count++;
+
+        assert this.count - previousCount == 1 : "Count of tasks in task list did not increment as expected;";
     }
 
     /**
@@ -181,7 +189,11 @@ public class TaskList {
      */
     public void addDeadline(String input, boolean isDone) {
         this.tasks.add(Deadline.addDeadline(input, isDone));
+
+        int previousCount = this.count;
         this.count++;
+
+        assert this.count - previousCount == 1 : "Count of tasks in task list did not increment as expected;";
     }
 
     /**
@@ -192,7 +204,11 @@ public class TaskList {
      */
     public void addEvent(String input, boolean isDone) {
         this.tasks.add(Event.addEvent(input, isDone));
+
+        int previousCount = this.count;
         this.count++;
+
+        assert this.count - previousCount == 1 : "Count of tasks in task list did not increment as expected;";
     }
 
     /**
@@ -207,11 +223,13 @@ public class TaskList {
             String[] arr = input.split(" ");
             int index = Integer.parseInt(arr[1]) - 1;
 
-            if (index >= count) {
+            if (index >= this.count || index < 0) {
                 throw new IndexOutOfBoundsException("");
             } else {
                 Task t = this.tasks.get(index);
                 t.setAsDone();
+
+                assert t.isDone : "Task should be set to done, but is_done status is still false;";
 
                 String encouragement = "Good job! I've marked this task as done:";
                 String reward = "Bubbles will reward you with a piece of candy!";
@@ -239,11 +257,15 @@ public class TaskList {
             String[] arr = input.split(" ");
             int index = Integer.parseInt(arr[1]) - 1;
 
-            if (index >= count) {
+            if (index >= this.count || index < 0) {
                 throw new IndexOutOfBoundsException("");
             } else {
+                int previousCount = this.count;
+
                 Task removed = this.tasks.remove(index);
-                count--;
+                this.count--;
+
+                assert previousCount - this.count == 1 : "Count of tasks in task list did not decrement as expected;";
 
                 String taskCount = "Now you have " + count + " task(s) in the list!";
                 return (Message.FORMAT_LINE + "\n"
@@ -276,7 +298,7 @@ public class TaskList {
             }
         }
 
-        StringBuilder message = new StringBuilder(Message.FORMAT_LINE.toString() + "\n");
+        StringBuilder message = new StringBuilder(Message.FORMAT_LINE + "\n");
 
         if (filtered.size() == 0) {
             message.append("There are no matching tasks in your list. ☹\n");
@@ -289,6 +311,9 @@ public class TaskList {
 
                 n++;
             }
+
+            assert n == filtered.size() + 1 : "Task numbers displayed for tasks " +
+                    "(containing matching keywords) did not increment as expected;";
         }
 
         message.append(Message.FORMAT_LINE);
