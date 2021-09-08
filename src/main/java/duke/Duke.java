@@ -27,7 +27,7 @@ public class Duke {
         try {
             /* try loading text file from storage */
             this.taskList = new TaskList(storage.load());
-        } catch (DukeException de) {
+        } catch (DukeException e) {
             this.taskList = new TaskList();
         }
     }
@@ -45,8 +45,8 @@ public class Duke {
 
         try {
             response = new Parser(input, this.taskList, this.storage, this.ui).compute();
-        } catch (DukeException de) {
-            response = de.toString();
+        } catch (DukeException e) {
+            response = e.toString();
         }
 
         return response;

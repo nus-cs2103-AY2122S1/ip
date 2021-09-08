@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents the "Event" task type. It encapsulates an Event's name, type and deadline
  */
 public class Event extends Task {
-    private String taskName;
+    private String taskDescription;
     private String at;
     private String type = "E";
     private LocalDate date;
@@ -19,21 +19,21 @@ public class Event extends Task {
     /**
      * Constructor for an Event task
      *
-     * @param taskName a short description of the task
+     * @param taskDescription a short description of the task
      */
-    public Event(String taskName) {
-        assert taskName != null : "task description should not be null";
+    public Event(String taskDescription) {
+        assert taskDescription != null : "task description should not be null";
 
-        String[] taskAtSplit = taskName.split("/", 2);
+        String[] splitDescAt = taskDescription.split("/", 2);
 
-        if (taskName.contains("|")) {
-            taskAtSplit = taskName.split("\\|", 2);
-        } else if (taskName.contains("/at")) {
-            taskAtSplit = taskName.split("/at", 2);
+        if (taskDescription.contains("|")) {
+            splitDescAt = taskDescription.split("\\|", 2);
+        } else if (taskDescription.contains("/at")) {
+            splitDescAt = taskDescription.split("/at", 2);
         }
 
-        this.taskName = taskAtSplit[0].trim();
-        this.at = taskAtSplit[1].trim();
+        this.taskDescription = splitDescAt[0].trim();
+        this.at = splitDescAt[1].trim();
         String[] dateTimeSplit = this.at.split(" ", 2);
         this.time = Integer.parseInt(dateTimeSplit[1]);
 
@@ -53,8 +53,8 @@ public class Event extends Task {
      *
      * @return full description of the Event task
      */
-    public String showTask() {
-        return this.taskName + " (at: "
+    public String showDescription() {
+        return this.taskDescription + " (at: "
                 + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", "
                 + this.time + ")";
     }
@@ -65,7 +65,7 @@ public class Event extends Task {
      * @return name of the Event task
      */
     public String showTaskOnly() {
-        return this.taskName;
+        return this.taskDescription;
     }
 
     /**
