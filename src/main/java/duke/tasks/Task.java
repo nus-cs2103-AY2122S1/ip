@@ -16,6 +16,7 @@ public abstract class Task {
      */
     public Task(String taskDetails) {
         this.taskDetails = taskDetails;
+        assert (!taskDetails.trim().equals("")) : "taskDetails should not be empty String";
     }
 
     /**

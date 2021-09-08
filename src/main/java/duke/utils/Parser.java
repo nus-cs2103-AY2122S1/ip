@@ -23,6 +23,7 @@ public class Parser {
      * @throws DukeException If any error relating to duke occurs.
      */
     public static Command parseNext(String input) throws DukeException {
+        assert (input != null) : "input should not be null.";
         Command command = null;
         if (input.matches("bye")) {
             command = new ByeCommand();
@@ -60,9 +61,12 @@ public class Parser {
             String[] commands = command.split(keywords[1], 2);
             String taskDescription = commands[0].split(" ", 2)[1].trim();
             String timeInfo = commands[1].trim();
+            assert (taskDescription.length() > 0) : "taskDescription should not be \"\"";
+            assert (timeInfo.length() > 0) : "timeInfo should not be \"\"";
             return new String[]{taskDescription, timeInfo};
         } else {
             String taskDescription = command.split(keywords[0], 2)[1].trim();
+            assert (taskDescription.length() > 0) : "taskDescription should not be \"\"";
             return new String[]{taskDescription};
         }
     }

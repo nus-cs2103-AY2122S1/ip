@@ -23,7 +23,8 @@ public class TaskList {
         if (i == 0 || i > tasks.size()) {
             throw new InvalidTaskNumberException(tasks.size());
         } else {
-            return tasks.get(i - 1);
+            Task output = tasks.get(i - 1);
+            return output;
         }
     }
 
@@ -32,6 +33,7 @@ public class TaskList {
     }
 
     public void addTask(Task task) {
+        assert (task != null) : "TaskList should not contain any null objects";
         tasks.add(task);
     }
 

@@ -47,6 +47,7 @@ public class Storage {
                 if (info.length == 1) {
                     continue;
                 }
+                assert (info[1].equals("0") || info[1].equals("1")) : "Task status should be either \"0\" or \"1\"";
 
                 String command = info[0];
                 Task task = null;
@@ -80,9 +81,13 @@ public class Storage {
      */
     public void save(TaskList tasks) {
         String data = tasks.getData();
+        boolean isDataValid = data.equals("");
+        isDataValid = isDataValid || data.matches("[T, D, E] \\| [0, 1] \\|.*");
+        assert (!isDataValid)
+                : "data should be formatted as \"EVENT | VALUE | ...\","
+                    + "where EVENT is T, D or E, and VALUE is \" \" or X";
         try (PrintWriter out = new PrintWriter(filePath)) {
             out.println(data);
-            out.close();
         } catch (IOException e) {
             // will never occur since the file will always be created first
         }
