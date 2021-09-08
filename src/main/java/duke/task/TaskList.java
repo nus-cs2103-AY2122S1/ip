@@ -59,34 +59,32 @@ public class TaskList {
         if (taskType.equals(TaskType.TODO)) {
             task = new ToDo(details);
         } else if (taskType.equals(TaskType.DEADLINE)) {
-            int position = details.indexOf("/by");
-            String description;
-            String by;
-            if (position >= 0) {
-                description = details.substring(0, position);
-                by = details.substring(position + 3);
-            } else {
-                throw new DukeException("Please indicate the deadline eg \"/by Sunday\" ");
-            }
-            task = new Deadline(description.trim(), by.trim());
+            TaskParams params = getAdditionalDetail(details, "/by",
+                "Please indicate the deadline eg \"/by 09-09-2021 23:00\" ");
+            task = new Deadline(params.description, params.additional);
         } else if (taskType.equals(TaskType.EVENT)) {
-            int position = details.indexOf("/at");
-            String description;
-            String at;
-            if (position >= 0) {
-                description = details.substring(0, position);
-                at = details.substring(position + 3);
-            } else {
-                throw new DukeException("Please indicate the event time eg \"/at Mon 2-4pm\" ");
-            }
-            task = new Event(description.trim(), at.trim());
+            TaskParams params = getAdditionalDetail(details, "/at",
+                "Please indicate the event time eg \"/at Mon 2-4pm\" ");
+            task = new Event(params.description, params.additional);
         } else {
             // should not reach here
             throw new DukeException("Invalid task type.");
         }
-        todoList.add(task);
 
+        todoList.add(task);
         return task;
+    }
+
+    private TaskParams getAdditionalDetail(String fullDetails, String label, String errorMessage) throws DukeException {
+        int position = fullDetails.indexOf(label);
+
+        if (position < 0) {
+            throw new DukeException(errorMessage);
+        }
+
+        String description = fullDetails.substring(0, position).trim();
+        String additional = fullDetails.substring(position + label.length()).trim();
+        return new TaskParams(description, additional);
     }
 
     /**
@@ -159,5 +157,15 @@ public class TaskList {
      */
     public enum TaskType {
         TODO, DEADLINE, EVENT
+    }
+
+    class TaskParams {
+        private final String description;
+        private final String additional;
+
+        public TaskParams(String d, String a) {
+            this.description = d;
+            this.additional = a;
+        }
     }
 }
