@@ -12,7 +12,6 @@ import biscuit.task.Event;
 import biscuit.task.Task;
 import biscuit.task.TaskList;
 import biscuit.task.ToDo;
-import biscuit.ui.Ui;
 
 
 /**
@@ -33,13 +32,12 @@ public class AddCommand extends biscuit.commands.Command {
      * Adds specified task into list.
      *
      * @param taskList Task list.
-     * @param ui       Ui to display.
      * @param storage  Storage to save to.
      * @return Response to user input.
      * @throws BiscuitException Invalid input by user.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException {
+    public String execute(TaskList taskList, Storage storage) throws BiscuitException {
         if (userInputs.length < 2) {
             throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! The description of "
                     + userInputs[0] + " cannot be empty.");

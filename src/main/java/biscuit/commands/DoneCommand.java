@@ -9,7 +9,6 @@ import biscuit.exceptions.BiscuitException;
 import biscuit.storage.Storage;
 import biscuit.task.Task;
 import biscuit.task.TaskList;
-import biscuit.ui.Ui;
 
 /**
  * Done command to mark task as done.
@@ -29,13 +28,12 @@ public class DoneCommand extends Command {
      * Marks specified task as done.
      *
      * @param taskList Task list.
-     * @param ui       Ui to display.
      * @param storage  Storage to save to.
      * @return Response to user input.
      * @throws BiscuitException Invalid input by user.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException {
+    public String execute(TaskList taskList, Storage storage) throws BiscuitException {
         if (userInputs.length < 2) {
             throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! "
                     + "The done task number cannot be empty.");
@@ -56,7 +54,7 @@ public class DoneCommand extends Command {
 
             //Generate message to display to user
             StringBuilder message = new StringBuilder("Nice! I've marked this task as done, woof!");
-            for (Task task: doneTasks) {
+            for (Task task : doneTasks) {
                 message.append("\n\t").append(task);
             }
             return message.toString();

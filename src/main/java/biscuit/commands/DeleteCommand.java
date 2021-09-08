@@ -9,7 +9,6 @@ import biscuit.exceptions.BiscuitException;
 import biscuit.storage.Storage;
 import biscuit.task.Task;
 import biscuit.task.TaskList;
-import biscuit.ui.Ui;
 
 /**
  * Delete command to delete task.
@@ -29,13 +28,12 @@ public class DeleteCommand extends Command {
      * Deletes specified task from list.
      *
      * @param taskList Task list.
-     * @param ui       Ui to display.
      * @param storage  Storage to save to.
      * @return Response to user input.
      * @throws BiscuitException Invalid input by user.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException {
+    public String execute(TaskList taskList, Storage storage) throws BiscuitException {
         if (userInputs.length < 2) {
             throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D "
                     + "OOPS!!! The delete task number cannot be empty.");
@@ -55,7 +53,7 @@ public class DeleteCommand extends Command {
 
             // Generate message to display to user
             StringBuilder message = new StringBuilder("Noted. I've removed the following task:");
-            for (Task task: deletedTasks) {
+            for (Task task : deletedTasks) {
                 message.append("\n\t").append(task);
             }
             return message.append("\nNow you have ").append(taskList.size()).append(" tasks in the list.").toString();

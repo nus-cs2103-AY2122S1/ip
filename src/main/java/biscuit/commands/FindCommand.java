@@ -4,7 +4,6 @@ import biscuit.exceptions.BiscuitException;
 import biscuit.storage.Storage;
 import biscuit.task.Task;
 import biscuit.task.TaskList;
-import biscuit.ui.Ui;
 
 /**
  * Find command to find a task by searching for a keyword.
@@ -24,13 +23,12 @@ public class FindCommand extends Command {
      * Finds tasks matching keyword.
      *
      * @param taskList Task list.
-     * @param ui       Ui to display.
      * @param storage  Storage to save to.
      * @return Response to user input.
      * @throws BiscuitException Invalid input by user.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException {
+    public String execute(TaskList taskList, Storage storage) throws BiscuitException {
         if (userInputs.length < 2) {
             throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! The search keyword cannot be empty.");
         }

@@ -51,8 +51,9 @@ public class DialogBox extends HBox {
 
     /**
      * Returns dialog box for user.
+     *
      * @param text Text to display.
-     * @param img Image to display.
+     * @param img  Image to display.
      * @return Dialog box.
      */
     public static DialogBox getUserDialog(String text, Image img) {
@@ -61,8 +62,9 @@ public class DialogBox extends HBox {
 
     /**
      * Returns dialog box for biscuit.
+     *
      * @param text Text to display.
-     * @param img Image to display.
+     * @param img  Image to display.
      * @return Dialog box.
      */
     public static DialogBox getBiscuitDialog(String text, Image img) {

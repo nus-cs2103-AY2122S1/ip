@@ -3,7 +3,6 @@ package biscuit.commands;
 import biscuit.exceptions.BiscuitException;
 import biscuit.storage.Storage;
 import biscuit.task.TaskList;
-import biscuit.ui.Ui;
 
 /**
  * Abstract class for User Commands.
@@ -38,12 +37,11 @@ public abstract class Command {
      * Execute command from userInput.
      *
      * @param taskList Task list.
-     * @param ui       Ui to display.
      * @param storage  Storage to save to.
      * @return Response to user input.
      * @throws BiscuitException Invalid input by user.
      */
-    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException;
+    public abstract String execute(TaskList taskList, Storage storage) throws BiscuitException;
 
     /**
      * Checks if command type is EXIT.

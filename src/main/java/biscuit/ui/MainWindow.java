@@ -27,8 +27,8 @@ public class MainWindow extends AnchorPane {
 
     private Biscuit biscuit;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image biscuitImage = new Image(this.getClass().getResourceAsStream("/images/DaBiscuit.jpg"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image biscuitImage = new Image(this.getClass().getResourceAsStream("/images/DaBiscuit.jpg"));
 
     /**
      * Initialises MainWindow and outputs welcome message
@@ -60,7 +60,7 @@ public class MainWindow extends AnchorPane {
         try {
             input = userInput.getText();
             Command command = Parser.parse(input);
-            response = command.execute(biscuit.getTaskList(), biscuit.getUi(), biscuit.getStorage());
+            response = command.execute(biscuit.getTaskList(), biscuit.getStorage());
         } catch (BiscuitException be) {
             response = be.getMessage();
         } catch (Exception e) {
