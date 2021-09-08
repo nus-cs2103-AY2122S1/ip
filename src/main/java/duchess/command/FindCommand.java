@@ -30,5 +30,7 @@ public class FindCommand extends Command {
         } else {
             return results;
         }
+        assert !reply.isBlank() : "Reply should not be empty.";
+        return reply;
     }
 }

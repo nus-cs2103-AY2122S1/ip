@@ -40,7 +40,7 @@ public class DuchessList {
         for (int i = 0; i < size; i++) {
             printed += String.format("%d. " + itemList.get(i) + (i == size - 1 ? "" : "\n"), i + 1);
         }
-        return printed;
+        return printed.isBlank() ? "You have nothing in your list." : printed;
     }
 
     /**
@@ -80,6 +80,7 @@ public class DuchessList {
      * @return The deleted task.
      */
     public Task delete(int listNumber) {
+        assert checkWithinRange(listNumber) : "Number should be within the list.";
         return itemList.remove(listNumber - 1); // -1 due to difference between item list number and indexes
     }
 }

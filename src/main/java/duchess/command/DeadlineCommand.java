@@ -45,6 +45,7 @@ public class DeadlineCommand extends Command {
         } catch (DuchessException e) {
             reply = e.getMessage();
         }
+        assert !reply.isBlank() : "Reply should not be empty.";
         return reply;
     }
 

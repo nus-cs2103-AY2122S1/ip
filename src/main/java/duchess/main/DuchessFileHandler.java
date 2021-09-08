@@ -23,7 +23,7 @@ public class DuchessFileHandler {
     /** The file name of the existing Duchess.*/
     private static final String FILE_LOCATION = "data/duchess.txt";
     /** The save file of the tasks from Duchess. */
-    private static File savedDuchess;
+    private static File savedDuchessFile;
 
     /**
      * Extracts the DuchessList from the save file.
@@ -79,7 +79,9 @@ public class DuchessFileHandler {
                 break;
             }
             default: {
-                // Should not reach here
+                assert false : "Code execution should not reach here. Something went wrong. "
+                        + "Save file is in wrong format.";
+                return null;
             }
             }
         }
@@ -92,7 +94,7 @@ public class DuchessFileHandler {
      */
     public static void writeToFile(DuchessList tasks) {
         try {
-            FileWriter fw = new FileWriter(savedDuchess);
+            FileWriter fw = new FileWriter(savedDuchessFile);
             for (int i = 1; i < tasks.getSize() + 1; i++) {
                 fw.write(tasks.getTask(i).toFileFormat() + "\n");
             }
@@ -112,7 +114,7 @@ public class DuchessFileHandler {
         // Solution below adapted from https://www.w3schools.com/java/java_files_create.asp
         try {
             File savedDuchess = new File(FILE_LOCATION);
-            DuchessFileHandler.savedDuchess = savedDuchess;
+            DuchessFileHandler.savedDuchessFile = savedDuchess;
             if (savedDuchess.createNewFile()) {
                 System.out.println("File created: " + savedDuchess.getName());
                 return new DuchessList();
@@ -127,7 +129,7 @@ public class DuchessFileHandler {
             if (!dir.exists()) {
                 dir.mkdir();
             }
-            DuchessFileHandler.savedDuchess = new File(FILE_LOCATION);
+            DuchessFileHandler.savedDuchessFile = new File(FILE_LOCATION);
             return new DuchessList();
         }
     }
