@@ -19,6 +19,7 @@ public class Event extends Task {
      */
     public Event(String name, LocalDateTime at) {
         super(name);
+        assert(at != null);
         this.at = at;
     }
 
@@ -31,6 +32,7 @@ public class Event extends Task {
      */
     public Event(String name, boolean isDone, LocalDateTime at) {
         super(name, isDone);
+        assert(at != null);
         this.at = at;
     }
 
