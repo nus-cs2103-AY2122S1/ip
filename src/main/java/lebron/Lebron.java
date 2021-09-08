@@ -2,28 +2,18 @@ package lebron;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
-import javafx.application.Application;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Region;
-import javafx.stage.Stage;
-import javafx.application.Application;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import lebron.task.Deadline;
 import lebron.task.Events;
 import lebron.task.Task;
 import lebron.task.TaskList;
 import lebron.task.ToDo;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 /**
  * This class represents the chat bot.
@@ -32,12 +22,11 @@ import javafx.scene.image.ImageView;
  */
 
 public class Lebron {
-
-    final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
     public static final String FILE_PATH = "./data/duke.txt";
-    private Storage storage;
+    private static final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
+    private final Storage storage;
     private TaskList taskList;
-    private Ui ui;
+    private final Ui ui;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -45,8 +34,8 @@ public class Lebron {
     private Button sendButton;
     private Scene scene;
 
-    private Image lebron = new Image(this.getClass().getResourceAsStream("/images/lebron.jpg"));
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/blank.png"));
+    private final Image lebron = new Image(this.getClass().getResourceAsStream("/images/lebron.jpg"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/blank.png"));
 
     /**
      * Available commands that the bot can understand.
@@ -61,7 +50,7 @@ public class Lebron {
         FIND("find"),
         OTHER(" ");
 
-        private String text;
+        private final String text;
 
         Command(String text) {
             this.text = text;
@@ -164,8 +153,7 @@ public class Lebron {
             default:
                 break;
             }
-        }
-        else {
+        } else {
             reply = ui.exit();
         }
         return reply;

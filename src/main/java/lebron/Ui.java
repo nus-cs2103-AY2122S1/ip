@@ -1,9 +1,9 @@
 package lebron;
 
+import java.util.ArrayList;
+
 import lebron.task.Task;
 import lebron.task.TaskList;
-
-import java.util.ArrayList;
 
 /**
  * Represents a response the bot makes to the user.
@@ -11,9 +11,10 @@ import java.util.ArrayList;
  * @author Nigel Tan
  */
 public class Ui {
-    private final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
+    private static final String HORIZONTAL_LINE = "    "
+            + "____________________________________________________________\n";
     private int count;
-    private Lebron app;
+    private final Lebron app;
 
     /**
      * Constructor
@@ -55,13 +56,13 @@ public class Ui {
      * @param lst The TaskList to be displayed.
      */
     public String replyDisplay(TaskList lst) {
-        String reply = "    Here are the tasks in your list:\n";
+        StringBuilder reply = new StringBuilder("    Here are the tasks in your list:\n");
         this.count = 1;
         for (int i = 0; i < lst.getSize(); i++) {
-            reply += ("    " + count + ". " + lst.getItem(i).toString()) + "\n";
+            reply.append("    ").append(count).append(". ").append(lst.getItem(i).toString()).append("\n");
             count++;
         }
-        return reply;
+        return reply.toString();
     }
 
     /**
@@ -96,14 +97,14 @@ public class Ui {
      */
     public String replyFind(TaskList lst, String keyword) {
         this.count = 1;
-        String reply = "    Here are the matching tasks in your list:\n";
+        StringBuilder reply = new StringBuilder("    Here are the matching tasks in your list:\n");
         for (int i = 0; i < lst.getSize(); i++) {
             if (lst.getItem(i).getName().contains(keyword)) {
-                reply += "    " + count + ". " + lst.getItem(i).toString() + "\n";
+                reply.append("    ").append(count).append(". ").append(lst.getItem(i).toString()).append("\n");
                 count++;
             }
-        };
-        return reply;
+        }
+        return reply.toString();
     }
 
 }

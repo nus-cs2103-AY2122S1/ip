@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    private LocalDate by;
+    private final LocalDate by;
 
     /**
      * Constructor.
@@ -29,7 +29,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String toFile() {
+    public String getStringForFile() {
         return "D | " + super.getDoneValue() + " | " + super.getName() + " | " + this.by;
     }
 }

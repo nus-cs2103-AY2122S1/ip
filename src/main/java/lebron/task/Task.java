@@ -7,7 +7,7 @@ package lebron.task;
  */
 public class Task {
 
-    private String name;
+    private final String name;
     private boolean isDone;
 
     /**
@@ -23,7 +23,7 @@ public class Task {
     /**
      * This method marks the task as true.
      */
-    public void mark() {
+    public void markAsDone() {
         this.isDone = true;
     }
 
@@ -33,7 +33,7 @@ public class Task {
      * @return X if true, blank if false
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " "); // markAsDone done task with X
     }
 
     /**
@@ -49,7 +49,7 @@ public class Task {
         return isDone ? "1" : "0";
     }
 
-    public String toFile() {
+    public String getStringForFile() {
         return " | " + getDoneValue() + " | " + name;
     }
 

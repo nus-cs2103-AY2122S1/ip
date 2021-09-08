@@ -1,9 +1,9 @@
 package lebron.task;
 
-import lebron.Ui;
-import lebron.Lebron;
-
 import java.util.ArrayList;
+
+import lebron.Lebron;
+import lebron.Ui;
 
 /**
  * Represents the list of tasks.
@@ -12,9 +12,9 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    private ArrayList<Task> tasks;
-    private int position;
-    private Ui ui;
+    private final ArrayList<Task> tasks;
+    private final int position;
+    private final Ui ui;
 
     /**
      * Constructor.
@@ -45,7 +45,7 @@ public class TaskList {
      */
     public String markDone(int pos) {
         Task task = tasks.get(pos);
-        task.mark();
+        task.markAsDone();
         String reply = ui.replyMarkDone(task);
         return reply;
     }

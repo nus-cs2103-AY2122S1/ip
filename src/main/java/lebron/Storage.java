@@ -1,10 +1,5 @@
 package lebron;
 
-import lebron.task.Deadline;
-import lebron.task.Events;
-import lebron.task.Task;
-import lebron.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -12,15 +7,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import lebron.task.Deadline;
+import lebron.task.Events;
+import lebron.task.Task;
+import lebron.task.ToDo;
+
 /**
  * Represents a storage class to handle writing and loading from a file.
  *
  * @author Nigel Tan
  */
 public class Storage {
-
-    private File file;
-    private String filePath;
+    private static final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
+    private final File file;
+    private final String filePath;
 
     /**
      * Constructor.
@@ -46,7 +46,6 @@ public class Storage {
      * @throws FileNotFoundException
      */
     public ArrayList<Task> loadFileContents(String filePath) throws FileNotFoundException {
-        final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
         ArrayList<Task> taskList = new ArrayList<>();
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
@@ -61,7 +60,7 @@ public class Storage {
             case "T":
                 task = new ToDo(splitWords[2]);
                 if (isDone.equals("1")) {
-                    task.mark();
+                    task.markAsDone();
                 }
                 taskList.add(task);
                 break;
@@ -69,7 +68,7 @@ public class Storage {
                 String deadline = splitWords[3];
                 task = new Deadline(splitWords[2], deadline);
                 if (isDone.equals("1")) {
-                    task.mark();
+                    task.markAsDone();
                 }
                 taskList.add(task);
                 break;
@@ -77,7 +76,7 @@ public class Storage {
                 String at = splitWords[3];
                 task = new Events(splitWords[2], at);
                 if (isDone.equals("1")) {
-                    task.mark();
+                    task.markAsDone();
                 }
                 taskList.add(task);
                 break;
@@ -101,8 +100,8 @@ public class Storage {
     public void saveToFile(ArrayList<Task> taskList) throws IOException {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {
-            String textToAppend = taskList.get(i).toFile();
-            builder.append(textToAppend + "\n");
+            String textToAppend = taskList.get(i).getStringForFile();
+            builder.append(textToAppend).append("\n");
         }
         FileWriter fw = new FileWriter(filePath);
         fw.write(builder.toString());

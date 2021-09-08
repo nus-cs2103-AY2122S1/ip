@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Events extends Task {
 
-    private LocalDate at;
+    private final LocalDate at;
 
     /**
      * Constructor.
@@ -29,7 +29,7 @@ public class Events extends Task {
     }
 
     @Override
-    public String toFile() {
+    public String getStringForFile() {
         return "E | " + super.getDoneValue() + " | " + super.getName() + " | " + this.at;
     }
 }

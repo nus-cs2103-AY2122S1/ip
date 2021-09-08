@@ -22,7 +22,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String toFile() {
+    public String getStringForFile() {
         return "T | " + super.getDoneValue() + " | " + super.getName();
     }
 }
