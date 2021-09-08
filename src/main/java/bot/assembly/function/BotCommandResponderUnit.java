@@ -123,6 +123,8 @@ public class BotCommandResponderUnit {
 
         default:
             //  throw InvalidCommandException if all 3 cases above are not triggered
+            assert false : "addTask() Method Error, TODO, DEADLINE, EVENT command parsed wrongly.";
+
             throw new InvalidCommandException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND);
         }
     }
