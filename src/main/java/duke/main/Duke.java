@@ -46,4 +46,8 @@ public class Duke {
         }
     }
 
+    public void save() throws DukeException {
+        storage.save(taskList, "update");
+    }
+
 }

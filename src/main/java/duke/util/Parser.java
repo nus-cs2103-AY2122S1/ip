@@ -8,6 +8,7 @@ import duke.exception.NoDescriptionAndTimeException;
 import duke.exception.NoDescriptionException;
 import duke.exception.NoTimeException;
 
+import duke.task.Task;
 import duke.task.TaskList;
 
 import java.text.ParseException;
@@ -54,6 +55,8 @@ public class Parser {
             return parseDone(taskList, command);
         case "find":
             return parseFind(taskList, command);
+        case "archive":
+            return parseArchive(storage, ui, taskList);
         default:
             throw new NoCommandException();
         }
@@ -82,6 +85,12 @@ public class Parser {
         assert next.length == 2;
 
         return next;
+    }
+
+    public static String parseArchive(Storage storage, Ui ui, TaskList taskList) throws DukeException {
+        taskList.archiveAllTasks();
+        storage.save(taskList, "update");
+        return ui.showArchiveMessage();
     }
 
     /**
@@ -175,7 +184,7 @@ public class Parser {
      * @throws DukeException If folder/file for storage doesn't exist
      */
     private static String parseBye(Storage storage, Ui ui, TaskList taskList) throws DukeException {
-        storage.save(taskList);
+        storage.save(taskList, "update");
         return ui.showBye();
     }
 

@@ -81,10 +81,17 @@ public class Storage {
         tasks.add(task);
     }
 
-    public void save(TaskList taskList) throws DukeException {
+    public void save(TaskList taskList, String taskType) throws DukeException {
         File file = new File(filePath);
         try {
-            FileWriter writer = new FileWriter(file);
+            FileWriter writer;
+
+            if (taskType.equals("archive")) {
+                writer = new FileWriter(file, true);
+            } else {
+                writer = new FileWriter(file);
+            }
+
             taskList.saveTasksInStorage(writer);
             writer.close();
         } catch (IOException e) {

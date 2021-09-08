@@ -4,6 +4,7 @@ import duke.exception.DukeException;
 import duke.exception.InvalidDateTimeException;
 
 import duke.util.Parser;
+import duke.util.Storage;
 import duke.util.Ui;
 
 import java.io.FileWriter;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> tasks;
     private Ui ui = new Ui();
-
+    private final String ARCHIVE_FILE_PATH = "archive.txt";
 
     /**
      * Constructor for loading old task list.
@@ -162,6 +163,12 @@ public class TaskList {
     public String addTodoToList(String description) {
         Todo todo = new Todo(description);
         return addTaskToList(todo);
+    }
+
+    public void archiveAllTasks() throws DukeException {
+        Storage archiveStorage = new Storage(ARCHIVE_FILE_PATH);
+        archiveStorage.save(this, "archive");
+        this.tasks = new ArrayList<>();
     }
 
     /**

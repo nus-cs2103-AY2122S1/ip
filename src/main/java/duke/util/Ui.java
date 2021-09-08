@@ -83,11 +83,20 @@ public class Ui {
     public String getTasks(ArrayList<Task> tasks) {
         String list = "Here are the tasks in your list:\n";
 
+        if (tasks.size() == 0) {
+            list += "no tasks in list yet...";
+        }
+
         for (int i = 0; i < tasks.size(); i++) {
             list += String.format("\t%s.%s\n", i + 1, tasks.get(i).toString());
         }
 
         return list;
+    }
+
+    public String showArchiveMessage() {
+        String message = "All tasks have been archived!";
+        return message;
     }
 
 
