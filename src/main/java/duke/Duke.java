@@ -7,6 +7,10 @@ import java.time.format.DateTimeParseException;
 import duke.command.Storage;
 import duke.command.Ui;
 import duke.exception.DukeException;
+import duke.exception.InvalidCommandException;
+import duke.exception.InvalidTaskException;
+import duke.exception.MissingTaskException;
+import duke.exception.MissingTimeException;
 import duke.task.TaskList;
 
 /**
@@ -40,25 +44,44 @@ public class Duke {
      * Accepts the user's inputs and acts accordingly.
      *
      * @param input The input entered by the user.
+     * @return
      */
     private String handleUserInput(String input) {
         try {
             String command = ui.receiveUserCommand(input);
-
-            if (command.equals("bye")) {
-                isExit = true;
-                return ui.printBye();
-            }
-
-            storage.saveTasksToFile(tasks.getTasks());
-            return tasks.performCommand(command, input);
-
+            return executeAction(input, command);
         } catch (DukeException e) {
             return e.getMessage();
         } catch (IOException e) {
             return ui.printException("IOException");
         } catch (DateTimeParseException e) {
             return ui.printException("DateTimeParse");
+        }
+    }
+
+    /**
+     * Executes an action depending on the command.
+     *
+     * @param input The input entered by the user.
+     * @param command The command interpreted by the parser.
+     * @return The String representing the
+     * @throws IOException
+     * @throws InvalidCommandException
+     * @throws InvalidTaskException
+     * @throws MissingTaskException
+     * @throws MissingTimeException
+     */
+    private String executeAction(String input, String command)
+            throws IOException, InvalidCommandException, InvalidTaskException,
+            MissingTaskException, MissingTimeException {
+        if (command.equals("bye")) {
+            isExit = true;
+            return ui.printBye();
+        } else if (command.equals("help")) {
+            return ui.printHelp();
+        } else {
+            storage.saveTasksToFile(tasks.getTasks());
+            return tasks.performCommand(command, input);
         }
     }
 

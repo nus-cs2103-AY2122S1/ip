@@ -26,6 +26,8 @@ public class Parser {
             return "event";
         } else if (input.length() >= 6 && input.substring(0, 4).toLowerCase().contains("find")) {
             return "find";
+        } else if (input.length() >= 4 && input.substring(0, 4).equalsIgnoreCase("help")) {
+            return "help";
         } else if (input.length() >= 3 && input.substring(0, 3).equalsIgnoreCase("bye")) {
             return "bye";
         } else {
