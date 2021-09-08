@@ -7,8 +7,6 @@ import java.util.Scanner;
  */
 public class Skeltal{
 
-    public Skeltal() {
-    }
     /**
      * A method that scans for user input and prints a response.
      */

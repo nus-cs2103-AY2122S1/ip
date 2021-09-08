@@ -22,7 +22,7 @@ public class TaskList {
      * A method to list the Task objects currently in the list.
      */
     public static String listReply() {
-        String reply = "";
+        String reply = "Here are the tasks in your list:\n";
         for (Task task : tasks) {
             reply += task + "\n";
         }
