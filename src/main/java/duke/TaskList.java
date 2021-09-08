@@ -3,6 +3,7 @@ package duke;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class TaskList {
 
@@ -40,5 +41,11 @@ public class TaskList {
             }
         }
         return new TaskList(res);
+    }
+
+    public TaskList sortTasks(Comparator<? super Task> comparator) {
+        ArrayList<Task> sortedTasks = new ArrayList<>(taskList);
+        sortedTasks.sort(comparator);
+        return new TaskList(sortedTasks);
     }
 }
