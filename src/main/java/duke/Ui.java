@@ -46,6 +46,17 @@ public class Ui {
     }
 
     /**
+     * Returns a message when a task is updated.
+     *
+     * @param taskNum The item number of the task.
+     * @param task  The task added to the list.
+     */
+    public static String updateTaskMessage(int taskNum, Task task) {
+        return "Got it. I've update the task as:\n    "
+                + taskNum + ". " + task;
+    }
+
+    /**
      * Returns a message <strong>after</strong> a task is removed from the list.
      *
      * @param tasks The list from which a task is removed.

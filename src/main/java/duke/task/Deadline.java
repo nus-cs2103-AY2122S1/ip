@@ -34,6 +34,11 @@ public class Deadline extends Task {
         this.timeDue = timeDue;
     }
 
+    @Override
+    public void setDate(LocalDate localDate) {
+        this.timeDue = localDate;
+    }
+
     /**
      * Returns the due time of the task.
      *
