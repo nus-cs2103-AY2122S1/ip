@@ -5,7 +5,7 @@ import duke.exceptions.DukeException;
 import java.util.ArrayList;
 
 public class TaskList {
-    private final ArrayList<Task> tasks;
+    private final ArrayList<Task> TASKS;
 
     private final String ERROR_OUT_OF_INDEX = "Error: Task out of list. Use 'list' to check your task index.";
 
@@ -13,7 +13,7 @@ public class TaskList {
      * Constructor for an empty TaskList.
      */
     public TaskList() {
-        this.tasks = new ArrayList<>();
+        this.TASKS = new ArrayList<>();
     }
 
     /**
@@ -22,7 +22,7 @@ public class TaskList {
      * @param tasks Input tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
-        this.tasks = tasks;
+        this.TASKS = tasks;
     }
 
     /**
@@ -34,7 +34,7 @@ public class TaskList {
      */
     public Task getTask(int taskIndex) throws DukeException {
         try {
-            return tasks.get(taskIndex - 1);
+            return TASKS.get(taskIndex - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(ERROR_OUT_OF_INDEX);
         }
@@ -46,7 +46,7 @@ public class TaskList {
      * @param task Input duke.task.
      */
     public void addTask(Task task) {
-        tasks.add(task);
+        TASKS.add(task);
     }
 
     /**
@@ -56,7 +56,7 @@ public class TaskList {
      * @param taskIndex taskIndex in the duke.task list to add the duke.task to.
      */
     public void addTask(Task task, int taskIndex) {
-        tasks.add(taskIndex - 1, task);
+        TASKS.add(taskIndex - 1, task);
     }
 
     /**
@@ -68,7 +68,7 @@ public class TaskList {
      */
     public Task removeTask(int taskIndex) throws DukeException {
         try {
-            return tasks.remove(taskIndex - 1);
+            return TASKS.remove(taskIndex - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(ERROR_OUT_OF_INDEX);
         }
@@ -80,7 +80,7 @@ public class TaskList {
      * @param task Input duke.task.
      */
     public void removeTask(Task task) {
-        tasks.remove(task);
+        TASKS.remove(task);
     }
 
     /**
@@ -89,7 +89,7 @@ public class TaskList {
      * @return number of tasks in the list.
      */
     public int length() {
-        return tasks.size();
+        return TASKS.size();
     }
 
     /**
@@ -102,7 +102,7 @@ public class TaskList {
      */
     public String getFileString(String delimiter, String done, String notDone) {
         StringBuilder builder = new StringBuilder();
-        for (Task task : tasks) {
+        for (Task task : TASKS) {
             String appendedString = task.getTaskFileString(delimiter, done, notDone) + "\n";
             builder.append(appendedString);
         }
@@ -117,7 +117,7 @@ public class TaskList {
      */
     public TaskList findTasksContainingString(String string) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
-        for (Task task : tasks) {
+        for (Task task : TASKS) {
             if (task.checkDescriptionContains(string)) {
                 matchingTasks.add(task);
             };
@@ -128,8 +128,8 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < tasks.size(); i++) {
-            builder.append(i + 1).append(" ").append(tasks.get(i).toString()).append("\n");
+        for (int i = 0; i < TASKS.size(); i++) {
+            builder.append(i + 1).append(" ").append(TASKS.get(i).toString()).append("\n");
         }
         return builder.toString();
     }

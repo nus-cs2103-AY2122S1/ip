@@ -29,9 +29,9 @@ public class AddCommand extends Command {
     public static final String USAGE_DEADLINE = String.format("Usage: %s <description>%s<date> <time (optional)>", COMMAND_DEADLINE, DeadlineTask.DELIMITER);
     public static final String USAGE_EVENT = String.format("Usage: %s <description>%s<date> <time (optional)>", COMMAND_EVENT, EventTask.DELIMITER);
 
-    private final String command;
-    private final String delimiter;
-    private final TaskType taskType;
+    private final String COMMAND;
+    private final String DELIMITER;
+    private final TaskType TASKTYPE;
 
     private final String MESSAGE_SUCCESS = "Added task:\n" +
             "%s\n" +
@@ -55,15 +55,15 @@ public class AddCommand extends Command {
      * @param taskType TaskType input.
      */
     public AddCommand(String command, String delimiter, TaskType taskType) {
-        this.command = command;
-        this.delimiter = delimiter;
-        this.taskType = taskType;
+        this.COMMAND = command;
+        this.DELIMITER = delimiter;
+        this.TASKTYPE = taskType;
         this.MESSAGE_USAGE = MESSAGE_USAGE_MAP.get(taskType);
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String[] commands = command.split(delimiter, 2);
+        String[] commands = COMMAND.split(DELIMITER, 2);
         if (commands.length < 2) {
             throw new DukeException(MESSAGE_USAGE);
         }
@@ -72,7 +72,7 @@ public class AddCommand extends Command {
         Task task;
 
         try {
-            switch (taskType) {
+            switch (TASKTYPE) {
             case TODO:
                 task = new TodoTask(commands[1]);
                 break;

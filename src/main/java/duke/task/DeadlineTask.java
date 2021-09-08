@@ -19,22 +19,22 @@ public class DeadlineTask extends Task {
     private static final DateTimeFormatter FORMATTER_SAVE_DATE = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter FORMATTER_SAVE_TIME = DateTimeFormatter.ofPattern("HH:mm");
 
-    private final LocalDate date;
-    private final LocalTime time;
+    private final LocalDate DATE;
+    private final LocalTime TIME;
 
     public static final String DELIMITER = " /by ";
     private static final String DELIMITER_DATETIME = " ";
 
     private DeadlineTask(String description, LocalDate date, LocalTime time) {
         super(description);
-        this.date = date;
-        this.time = time;
+        this.DATE = date;
+        this.TIME = time;
     }
 
     private DeadlineTask(String description, boolean isDone, LocalDate date, LocalTime time) {
         super(description, isDone);
-        this.date = date;
-        this.time = time;
+        this.DATE = date;
+        this.TIME = time;
     }
 
     /**
@@ -85,11 +85,11 @@ public class DeadlineTask extends Task {
     @Override
     public String getTaskFileString(String delimiter, String done, String notDone) {
         return "D" + delimiter + (this.isDone ? done : notDone) + delimiter + this.description
-                + delimiter + date.format(FORMATTER_SAVE_DATE) + delimiter + time.format(FORMATTER_SAVE_TIME);
+                + delimiter + DATE.format(FORMATTER_SAVE_DATE) + delimiter + TIME.format(FORMATTER_SAVE_TIME);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + date.format(FORMATTER_DISPLAY_DATE) + " " + time.format(FORMATTER_DISPLAY_TIME) + ")";
+        return "[D]" + super.toString() + " (by: " + DATE.format(FORMATTER_DISPLAY_DATE) + " " + TIME.format(FORMATTER_DISPLAY_TIME) + ")";
     }
 }
