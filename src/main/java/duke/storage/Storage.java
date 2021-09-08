@@ -87,6 +87,7 @@ public class Storage {
         boolean isDone = tokens[1].equals("1");
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         LocalDateTime timestamp = null;
+        assert tokens[0].equals("T") || tokens[0].equals("D") || tokens[0].equals("E");
         switch (tokens[0]) {
         case "T":
             t = new Todo(tokens[2], isDone);
