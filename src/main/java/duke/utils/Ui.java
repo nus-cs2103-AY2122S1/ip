@@ -1,8 +1,10 @@
 package duke.utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import duke.exceptions.DukeException;
+import duke.tasks.Deadlines;
 import duke.tasks.Task;
 
 /**
@@ -111,4 +113,19 @@ public class Ui {
         System.out.println(String.format("There are %d matching tasks in the list.", matchingTasks.size()));
     }
 
+    /**
+     * Displays all the deadlines in the sorted deadlines list.
+     *
+     * @param allDeadlines the array list of deadlines already sorted in chronological order.
+     * @param tasks the full task list.
+     */
+    public void showGettingAllSortedDeadlinesInteraction(ArrayList<Deadlines> allDeadlines, TaskList tasks) {
+        System.out.println("Here are all the deadlines in your list, sorted in chronological order:");
+        for (Deadlines deadline : allDeadlines) {
+            int taskNum = tasks.getTaskNumberOf(deadline);
+            assert (taskNum > 0) : "Invalid task number received for this deadline";
+            System.out.println(taskNum + "." + deadline.toString());
+        }
+        System.out.println(String.format("There are %d deadlines in the list.", allDeadlines.size()));
+    }
 }
