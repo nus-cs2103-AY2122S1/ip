@@ -43,7 +43,7 @@ public class Duke {
     }
 
     private String printList() {
-        return ui.printListUi(tasks);
+        return tasks.printListUi();
     }
 
     private String markDone(int index) {

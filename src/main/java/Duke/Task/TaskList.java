@@ -34,13 +34,26 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
-    private boolean returnIsFound(String time, String task, int index) {
+    /**
+     * Returns all the tasks in a given list.
+     *
+     * @return A list of tasks info.
+     */
+    public String printListUi() {
+        StringBuilder text = new StringBuilder();
+        text.append("Here are the tasks in your list:\n");
+        int[] index = {0};
+        tasks.forEach(task -> text.append(++index[0]).append(".").append(task.getTaskStatus()).append("\n"));
+        return text.toString();
+    }
+
+    private boolean returnIsFound(String time, String unparsedInfo, String task, int index) {
         Parser parser = new Parser("");
-        String unparsedInfo = tasks.get(index).getTimeForSaveData();
+
         String timeInFormat = (parser.parseTime(time) != null)
                 ? parser.parseTime(time).format(DateTimeFormatter.
                 ofPattern("MMM dd yyyy HH:mm", Locale.ENGLISH))
-                : "Nope";
+                : "Null time Info";
         boolean isMessageContains = task.contains(time)
                 || task.contains(timeInFormat);
         boolean isUnparsedInfoContains =  unparsedInfo != null && (unparsedInfo.contains(time)
@@ -57,16 +70,14 @@ public class TaskList {
      */
     public String getSpecificDateEvent(String time) {
         StringBuilder text = new StringBuilder();
-        int count = 0; //count the number of the events happen on the time.
+        final int[] count = {0}; //count the number of the events happen on the time.
+        tasks.stream()
+                .filter(task -> returnIsFound(time
+                        , task.getTimeForSaveData(), task.getTaskStatus(), count[0]))
+                .forEach(task -> text.append(++count[0])
+                        .append(".").append(task.getTaskStatus()).append("\n"));
 
-        for (int i = 0; i < tasks.size(); i++) {
-            String message = tasks.get(i).getTaskStatus();
-            if (returnIsFound(time, message, i)) {
-                count++;
-                text.append(count).append(".").append(message).append("\n");
-            }
-        }
-        if (count == 0) {
+        if (count[0] == 0) {
             return "Sorry. There is no tasks occurred on the time you give me!! :(\n";
         }
         return text.toString();
@@ -80,17 +91,14 @@ public class TaskList {
      */
     public String findTasks(String keyword) {
         StringBuilder text = new StringBuilder();
-        int count = 0;
+        final int[] count = {0};
 
-        for (Task task : tasks) {
-            String message = task.getTaskStatus();
-            if (message.contains(keyword)) {
-                count++;
-                text.append(count).append(".").append(message).append("\n");
-            }
-        }
+        tasks.stream()
+                .filter(task -> task.getTaskStatus().contains(keyword))
+                .forEach(task -> text.append(++count[0]).append(".")
+                        .append(task.getTaskStatus()).append("\n"));
 
-        if (count == 0) {
+        if (count[0] == 0) {
             return "Sorry. There is no tasks matching the keyword you give me!! :(\n";
         }
 
