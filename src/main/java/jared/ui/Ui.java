@@ -11,13 +11,13 @@ import jared.task.TaskList;
  * Deals with user interactions.
  */
 public class Ui {
-    private final Scanner scan;
+    private Scanner scanner;
 
     /**
      * Constructor for Ui.
      */
     public Ui() {
-        scan = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         showWelcomeMessage();
     }
 
@@ -45,7 +45,7 @@ public class Ui {
             if (command.equals("bye")) {
                 showExitMessage();
                 System.exit(0);
-                scan.close();
+                scanner.close();
             } else if (command.equals("list")) {
                 return tasks.list();
             } else if (command.equals("done")) {

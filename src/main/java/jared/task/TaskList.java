@@ -28,10 +28,10 @@ public class TaskList {
     /**
      * Adds a task to the list.
      * @param command User input string command.
-     * @param next Full user input string.
+     * @param fullCommand Full user input string.
      * @throws DukeException If user input command is invalid.
      */
-    public String add(String command, String next) throws DukeException {
+    public String add(String command, String fullCommand) throws DukeException {
         Task newTask;
         String desc;
         String dateStr;
@@ -41,14 +41,14 @@ public class TaskList {
 
         if (command.equals("todo")) {
             try {
-                desc = next.split(" ", 2)[1];
+                desc = fullCommand.split(" ", 2)[1];
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
             newTask = new Todo(desc);
         } else if (command.equals("deadline")) {
             try {
-                String body = next.split(" ", 2)[1];
+                String body = fullCommand.split(" ", 2)[1];
                 desc = body.split("/by", 2)[0].trim();
                 dateStr = body.split("/by", 2)[1].trim();
                 dateTime = dateStr.split(" ");
@@ -71,7 +71,7 @@ public class TaskList {
             }
         } else if (command.equals("event")) {
             try {
-                String body = next.split(" ", 2)[1];
+                String body = fullCommand.split(" ", 2)[1];
                 desc = body.split("/at", 2)[0].trim();
                 dateStr = body.split("/at", 2)[1].trim();
                 dateTime = dateStr.split(" ");

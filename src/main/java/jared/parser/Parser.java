@@ -14,7 +14,8 @@ public class Parser {
      */
     public static String parseCommand(String s) {
         String[] inputArr = s.split(" ", 2);
-        return inputArr[0];
+        String command = inputArr[0];
+        return command;
     }
 
     /**
