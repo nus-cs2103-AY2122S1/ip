@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "lebron.Lebron"
+    mainClassName = "lebron.Launcher"
 }
 
 shadowJar {
@@ -53,7 +53,8 @@ shadowJar {
 }
 
 checkstyle {
-    toolVersion = '8.29'
+    //toolVersion = '8.29'
+    sourceSets = []
 }
 
 run{
