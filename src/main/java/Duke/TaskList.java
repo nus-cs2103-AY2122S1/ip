@@ -22,14 +22,6 @@ public class TaskList {
         tasks.add(task);
     }
 
-    /**
-     * Deletes the task from list.
-     *
-     * @param task task
-     */
-    private void deleteTask(Task task) {
-        tasks.remove(task);
-    }
 
     /**
      * Marks the task as complete and return confirmation message,
@@ -73,7 +65,7 @@ public class TaskList {
         } catch (NumberFormatException err) {
             throw new DukeException("OOPS!!! The task to delete does not exists. Please try again!");
         }
-        deleteTask(tasks.get(taskNumber - 1));
+        tasks.remove(tasks.get(taskNumber - 1));
         return "You have removed the following task:\n" + tasks.get(taskNumber - 1).toString() + "\n"
                 + "You have " + tasks.size() + " task/s left.";
     }

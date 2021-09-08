@@ -16,6 +16,7 @@ public class Parser {
         this.tasks = tasks;
         this.isExit = false;
     }
+
     /**
      * Adds user inputted String to list and prints the user added tasks and the current number of tasks, else
      * print error message for the error
@@ -25,6 +26,7 @@ public class Parser {
     public String getResponse(String userInput) {
         Task newTask;
         String[] tokens = userInput.split(" ");
+        int noOfTasks = tasks.noOfTasks();
         try {
             switch (tokens[0]) {
             case "done":
@@ -45,7 +47,7 @@ public class Parser {
                     throw new DukeException("Invalid command! Try again.");
                 }
                 this.isExit = true;
-                return UI.bye();
+                return Ui.bye();
             case "list":
                 if (tokens.length > 1) {
                     throw new DukeException("Invalid command! Try again.");
@@ -58,6 +60,8 @@ public class Parser {
                 throw new DukeException("Invalid command! Try again.");
             }
         } catch (DukeException err) {
+            assert tasks.noOfTasks() == noOfTasks
+                    : "There is unexpected changes to tasks for invalid command.";
             return err.getMessage();
         }
         tasks.addTask(newTask);

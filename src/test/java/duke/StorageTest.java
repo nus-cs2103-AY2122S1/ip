@@ -1,6 +1,5 @@
-package Duke;
+package duke;
 
-import duke.Storage;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -13,12 +12,12 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Tests the Storage class
  */
-class StorageTest {
+public class StorageTest {
     /**
      * Tests whether the storage writes properly.
      */
     @Test
-    void writeTest() {
+    public void writeTest() {
         Storage storage = new Storage("data/Duke.txt");
         ArrayList<String> input = new ArrayList<>();
         input.add("hello world");
