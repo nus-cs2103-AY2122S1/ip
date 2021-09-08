@@ -1,9 +1,8 @@
 package duke.exception;
 
 /**
- * Represents an exception that occurs when the
- * file format is not of the format whereby each line
- * denotes the storage string representation of a task.
+ * Throws an exception when the file format is not of the format whereby
+ * each line denotes the storage string representation of a task.
  *
  * @author botr99
  */

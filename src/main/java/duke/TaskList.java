@@ -73,7 +73,7 @@ public class TaskList {
      * @return A new task list containing tasks that satisfy
      *         the query.
      */
-    public TaskList getFilteredTasks(String query) {
+    public TaskList getFilteredTaskList(String query) {
         ArrayList<Task> filteredTasks = new ArrayList<>();
         for (Task task : tasks) {
             if (task.getDescription().contains(query)) {

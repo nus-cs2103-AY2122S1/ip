@@ -10,6 +10,11 @@ import duke.task.Task;
  * @author botr99
  */
 public class Message {
+    private static final String WELCOME_MESSAGE = "Hello! I'm Duke.\n" + "What can I do for you?";
+    private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String INVALID_COMMAND_MESSAGE =
+            "Oops!!! I'm sorry, but I don't know what that means.";
+    private static final String TRY_AGAIN_MESSAGE = "Please try again or restart the application.";
 
     /**
      * Gets the welcome message when Duke is started,
@@ -18,13 +23,7 @@ public class Message {
      * @return A string containing the message.
      */
     public static String getWelcomeMessage() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
-        return logo + "Hello! I'm Duke.\n" + "What can I do for you?";
+        return WELCOME_MESSAGE;
     }
 
     /**
@@ -33,7 +32,12 @@ public class Message {
      * @return A string containing the message.
      */
     public static String getExitMessage() {
-        return "Bye. Hope to see you again soon!";
+        return EXIT_MESSAGE;
+    }
+
+    private static String getTaskCountMessage(int taskCount) {
+        return "Now you have " + taskCount
+                + (taskCount == 1 ? " task " : " tasks ") + "in the list.";
     }
 
     /**
@@ -45,19 +49,18 @@ public class Message {
      */
     public static String getAddTaskMessage(Task task, int taskCount) {
         return "Got it. I've added this task:\n" + task
-                + "\nNow you have " + taskCount
-                + (taskCount == 1 ? " task " : " tasks ") + "in the list.";
+                + "\n" + getTaskCountMessage(taskCount);
     }
 
     /**
      * Gets the user's task list.
      *
-     * @param tasks The user's task list.
+     * @param taskList The user's task list.
      * @return A string containing the message.
      */
-    public static String getTasksMessage(TaskList tasks) {
+    public static String getTaskListMessage(TaskList taskList) {
         return "Here are the tasks in your list:\n"
-                + tasks.toString();
+                + taskList.toString();
     }
 
     /**
@@ -66,7 +69,7 @@ public class Message {
      * @param task The task that was marked as done.
      * @return A string containing the message.
      */
-    public static String getMarkTaskDoneMessage(Task task) {
+    public static String getMarkTaskAsDoneMessage(Task task) {
         return "Nice! I've marked this task as done:\n" + task;
     }
 
@@ -79,20 +82,19 @@ public class Message {
      */
     public static String getDeleteTaskMessage(Task task, int taskCount) {
         return "Noted. I've removed this task:\n" + task
-                + "\nNow you have " + taskCount
-                + (taskCount == 1 ? " task " : " tasks ") + "in the list.";
+                + "\n" + getTaskCountMessage(taskCount);
     }
 
     /**
      * Gets the matching tasks in the user's list after the user has made a query
      * to find tasks.
      *
-     * @param tasks Tasks that have been filtered out.
+     * @param filteredTaskList Task list consisting of tasks that have been filtered out.
      * @return A string containing the message.
      */
-    public static String getFindTasksMessage(TaskList tasks) {
+    public static String getFilteredTaskListMessage(TaskList filteredTaskList) {
         return "Here are the matching tasks in your list:\n"
-                + tasks.toString();
+                + filteredTaskList.toString();
     }
 
     /**
@@ -101,7 +103,7 @@ public class Message {
      * @return A string containing the message.
      */
     public static String getInvalidCommandMessage() {
-        return "Oops!!! I'm sorry, but I don't know what that means.";
+        return INVALID_COMMAND_MESSAGE;
     }
 
     /**
@@ -120,7 +122,7 @@ public class Message {
      * @return A string containing the message.
      */
     public static String getTryAgainMessage() {
-        return "Please try again or restart the application.";
+        return TRY_AGAIN_MESSAGE;
     }
 
 }
