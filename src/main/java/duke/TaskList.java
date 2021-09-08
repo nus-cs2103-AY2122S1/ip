@@ -22,6 +22,7 @@ public class TaskList {
      * @param tasks An ArrayList of Tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
+        assert tasks != null : "[duke.TaskList.TaskList]: tasks parameter should not be null.";
         this.tasks = tasks;
     }
 
@@ -31,6 +32,7 @@ public class TaskList {
      * @return A status message to be displayed.
      */
     public String addItem(Task task) throws DukeException {
+        assert tasks != null : "[duke.TaskList.addItem]: tasks parameter should not be null.";
         tasks.add(task);
         String res = "Got it. I've added this task: \n" + "  " + task.toString() + "\n";
         res += ("Now you have " + tasks.size() + " tasks in the tasks");
@@ -44,20 +46,7 @@ public class TaskList {
      * @throws DukeException when a task is not found
      */
     public String markDone(int index) throws DukeException {
-        index = index - 1;
-        if (index < 0 || index >= tasks.size()) {
-            if (tasks.size() == 0) {
-                throw new DukeException(DukeException.Errors.TASK_NOT_FOUND.toString()
-                        + " Task list is empty.");
-            } else if (tasks.size() == 1) {
-                throw new DukeException(DukeException.Errors.TASK_NOT_FOUND.toString()
-                        + " Only 1 item in the list.");
-            } else {
-                throw new DukeException(DukeException.Errors.TASK_NOT_FOUND.toString()
-                        + " Input a number from [1..." + tasks.size() + "].");
-            }
-        }
-        Task task = tasks.get(index);
+        Task task = getTask(index - 1);
         task.markDone();
         return "Great success! Task Complete: \n" + "  " + task.toString();
     }
@@ -70,19 +59,7 @@ public class TaskList {
      */
     public String removeItem(int index) throws DukeException {
         index = index - 1;
-        if (index < 0 || index >= tasks.size()) {
-            if (tasks.size() == 0) {
-                throw new DukeException(DukeException.Errors.TASK_NOT_FOUND.toString()
-                        + " Task list is empty.");
-            } else if (tasks.size() == 1) {
-                throw new DukeException(DukeException.Errors.TASK_NOT_FOUND.toString()
-                        + " Only 1 item in the list.");
-            } else {
-                throw new DukeException(DukeException.Errors.TASK_NOT_FOUND.toString()
-                        + " Input a number from [1..." + tasks.size() + "].");
-            }
-        }
-        Task task = tasks.get(index);
+        Task task = getTask(index);
         tasks.remove(index);
         String res = "Got it. I've removed this task: \n" + "  " + task.toString() + "\n";
         res += ("Now you have " + tasks.size() + " tasks in the list");
@@ -95,6 +72,7 @@ public class TaskList {
      * @return all the tasks (string) that contains the given keyword.
      */
     public String find(String keyword) {
+        assert keyword != null : "[duke.TaskList.find]: keyword parameter should not be null.";
         StringBuilder str = new StringBuilder();
         str.append("Here are the matching tasks in your list:\n");
         int id = 1;
@@ -130,5 +108,22 @@ public class TaskList {
             str.append(" ").append(i + 1).append(". ").append(tasks.get(i).toString()).append("\n");
         }
         return size == 0 ? "You currently have nothing in your list" : str.substring(0, str.length() - 1);
+    }
+
+
+    private Task getTask(int index) throws DukeException {
+        if (index < 0 || index >= tasks.size()) {
+            if (tasks.size() == 0) {
+                throw new DukeException(DukeException.Errors.TASK_NOT_FOUND.toString()
+                        + " Task list is empty.");
+            } else if (tasks.size() == 1) {
+                throw new DukeException(DukeException.Errors.TASK_NOT_FOUND.toString()
+                        + " Only 1 item in the list.");
+            } else {
+                throw new DukeException(DukeException.Errors.TASK_NOT_FOUND.toString()
+                        + " Input a number from [1..." + tasks.size() + "].");
+            }
+        }
+        return tasks.get(index);
     }
 }
