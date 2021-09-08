@@ -10,6 +10,7 @@ import stub.DukeStub;
 public class UiTest {
     private final Ui ui;
     private final Duke duke;
+
     UiTest() throws IOException {
         ui = new Ui("Test user");
         duke = new DukeStub();

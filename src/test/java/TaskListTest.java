@@ -31,8 +31,8 @@ class TaskListTest {
     void testAddTask() {
         assertEquals(4, taskList.size());
         taskList.addTask(new TaskStub("", null));
-        assertThrows(InvalidTaskNumberException.class,
-            () -> taskList.addTask(TasksEnum.DEADLINE.getTask("get a gf /by 9/12/2023")),
+        assertThrows(InvalidTaskNumberException.class, () ->
+                taskList.addTask(TasksEnum.DEADLINE.getTask("get a gf /by 9/12/2023")),
             "Task list exceeded hard limit");
     }
 
@@ -81,7 +81,9 @@ class TaskListTest {
         tl.addTask(new TaskStub("Seventh", LocalDateTime.of(2023, 10, 31, 19, 21))); // 1
         tl.addTask(new TaskStub("Eighth", LocalDateTime.of(2023, 12, 31, 19, 21))); // 6
         tl.getTask(5).markAsDone();
-        assertFalse(tl.getUpcomingTasks().stream().map(AbstractMap.SimpleImmutableEntry::getValue).anyMatch(x -> x == 5), "Task 5 is still in the upcoming");
+        assertFalse(
+            tl.getUpcomingTasks().stream().map(AbstractMap.SimpleImmutableEntry::getValue).anyMatch(x -> x == 5),
+            "Task 5 is still in the upcoming");
         assertEquals(8, tl.getUpcomingTasks().size(), "Wrong size of task.");
         assertEquals(7, tl.getUpcomingTasks().get(4).getValue(), "Task 7 should be in position 4");
         assertEquals(1, tl.getUpcomingTasks().get(7).getValue(), "Todo item must be last");

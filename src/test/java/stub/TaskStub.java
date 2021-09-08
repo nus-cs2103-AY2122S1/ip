@@ -12,6 +12,7 @@ public class TaskStub extends Task {
 
     /**
      * Creates a new task object with the description and type of task.
+     *
      * @param description The description of the task
      * @param dateTime    The date and time of this task
      */

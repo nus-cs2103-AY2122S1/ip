@@ -16,6 +16,7 @@ public class DukeStub extends Duke {
 
     /**
      * Creates a new dummy Duke stub.
+     *
      * @throws IOException when there is a problem creating the temporary test file.
      */
     public DukeStub() throws IOException {
