@@ -3,6 +3,7 @@ package duke.views.gui.controllers;
 import java.io.IOException;
 import java.util.Collections;
 
+import duke.constants.Constants;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -54,8 +55,9 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getDukeDialog(String text, Image img, Constants.Display.BootstrapColor color) {
         var db = new DialogBox(text, img);
+        db.getStyleClass().add(color.toString());
         db.flip();
         return db;
     }

@@ -2,6 +2,7 @@ package duke.shared;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 import duke.constants.Constants;
 
@@ -36,8 +37,12 @@ public class DateRange {
      * @throws DukeException When start datetime occurs after end datetime.
      */
     public static DateRange createFromString(String start, String end) throws DukeException {
-        return new DateRange(LocalDateTime.parse(start, Constants.Input.DATETIME_FORMATTER),
-                LocalDateTime.parse(end, Constants.Input.DATETIME_FORMATTER));
+        try {
+            return new DateRange(LocalDateTime.parse(start, Constants.Input.DATETIME_FORMATTER),
+                    LocalDateTime.parse(end, Constants.Input.DATETIME_FORMATTER));
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateException("Date format not recognized.");
+        }
     }
 
     /**
@@ -50,6 +55,9 @@ public class DateRange {
      */
     public static DateRange createFromRange(String range) throws DukeException {
         String[] rangeArr = range.split(Constants.Input.DATE_RANGE_SEPARATOR);
+        if (rangeArr.length != 2) {
+            throw new InvalidDateException("Date format not recognized.");
+        }
         String start = rangeArr[0];
         String datePart = rangeArr[0].split(" ")[0];
         String end = rangeArr[1];

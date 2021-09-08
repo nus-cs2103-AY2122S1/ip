@@ -51,6 +51,10 @@ public interface InteractionLayer {
         return getResponder().respond(query);
     }
 
+    default Response getResponseWithMetadata(String query) {
+        return getResponder().respondWithMetadata(query);
+    }
+
     /**
      * Runs before the application terminates.
      */

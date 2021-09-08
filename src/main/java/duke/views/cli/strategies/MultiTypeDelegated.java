@@ -10,6 +10,7 @@ import duke.domain.TaskList;
 import duke.domain.Todo;
 import duke.shared.DukeException;
 import duke.shared.DukeException.ExceptionCode;
+import duke.views.Response;
 import duke.views.cli.strategies.commands.AddDeadlineCommand;
 import duke.views.cli.strategies.commands.AddEventCommand;
 import duke.views.cli.strategies.commands.AddTodoCommand;
@@ -105,6 +106,20 @@ public class MultiTypeDelegated extends RespondWithDelegated {
             throw new DukeException(DukeException.ExceptionCode.UNPROCESSABLE_ENTITY);
         } catch (DukeException e) {
             return e.getMessage() + System.lineSeparator();
+        }
+    }
+
+    @Override
+    public Response respondWithMetadata(String query) {
+        assert query != null;
+        try {
+            String specialResponse = super.respond(query);
+            if (specialResponse != null) {
+                return new Response(specialResponse, Response.ResponseType.INFO);
+            }
+            throw new DukeException(DukeException.ExceptionCode.UNPROCESSABLE_ENTITY);
+        } catch (DukeException e) {
+            return new Response(e.getMessage() + System.lineSeparator(), Response.ResponseType.ERROR);
         }
     }
 }
