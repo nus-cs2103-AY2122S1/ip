@@ -32,6 +32,7 @@ public class Duke {
         } finally {
             Storage.saveData(file, taskList);
         }
+        assert (response.length() > 0) : "No response has been made";
         return response;
     }
 }

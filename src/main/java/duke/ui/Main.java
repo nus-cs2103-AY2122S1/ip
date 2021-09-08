@@ -16,6 +16,8 @@ public class Main extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
+            assert (ap.getPrefHeight() == 600) : "Undesirable attributes";
+            assert (ap.getPrefWidth() == 500) : "Undesirable attributes";
             Scene scene = new Scene(ap);
             primaryStage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);

@@ -46,6 +46,8 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         welcomeMessage = "Hello from\n" + welcomeMessage;
+        assert (dialogContainer.getStyle().equals("-fx-background-color: aliceblue;"))
+                : "Undesirable attributes";
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcomeMessage, dukeImage),
                 DialogBox.getDukeDialog("What can I do for you today?", dukeImage)

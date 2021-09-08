@@ -69,13 +69,4 @@ public class Parser {
             throw new DukeSyntaxErrorException(type);
         }
     }
-
-    /**
-     * Check whether a command entered is exit command ("bye")
-     * @param command User command entered
-     * @return whether command is equals to bye
-     */
-    public static boolean isExit(String command) {
-        return command.equalsIgnoreCase("bye");
-    }
 }
