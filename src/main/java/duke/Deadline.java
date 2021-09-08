@@ -66,9 +66,7 @@ public class Deadline extends Task {
     @Override
     public Task getToggledDone() {
         Deadline toggledDeadline = new Deadline(description, dateAndTime);
-        if (this.getDone()) {
-            toggledDeadline.setUndone();
-        } else {
+        if (!this.getDone()) {
             toggledDeadline.setDone();
         }
         return toggledDeadline;

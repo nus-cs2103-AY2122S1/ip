@@ -23,7 +23,7 @@ public class Undo implements GeneralCommand {
      * @param uiList List of past Ui.
      * @param tasksList List of past TaskList.
      * @param duke Current Duke object.
-     * @throws UndoException
+     * @throws UndoException If Undo command is not complete.
      */
     public Undo(List<Storage> storageList, List<Ui> uiList, List<TaskList> tasksList, Duke duke) throws UndoException {
         this.duke = duke;

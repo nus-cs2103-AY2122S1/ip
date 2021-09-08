@@ -33,10 +33,6 @@ public abstract class Task {
         isDone = true;
     }
 
-    public void setUndone() {
-        isDone = false;
-    }
-
     /**
      * Checks if a task is done, or not.
      *

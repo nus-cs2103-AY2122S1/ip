@@ -66,9 +66,7 @@ public class Event extends Task {
     @Override
     public Task getToggledDone() {
         Event toggledEvent = new Event(description, dateAndTime);
-        if (this.getDone()) {
-            toggledEvent.setUndone();
-        } else {
+        if (!this.getDone()) {
             toggledEvent.setDone();
         }
         return toggledEvent;
