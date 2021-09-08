@@ -31,7 +31,7 @@ public class Storage {
      * @return The string in the storage if it is existent or an empty string otherwise.
      * @throws StorageLoadingException If error encountered during loading.
      */
-    public String load() throws StorageLoadingException {
+    public String loadDukeData() throws StorageLoadingException {
         try {
             File storageDir = new File(this.fileDir);
             File storageFile = new File(this.filePath);
@@ -60,13 +60,38 @@ public class Storage {
      * @param data The string data to be saved.
      * @throws StorageSavingException If error encountered during saving.
      */
-    public void save(String data) throws StorageSavingException {
+    public void saveDukeData(String data) throws StorageSavingException {
         try {
             FileWriter fw = new FileWriter(this.filePath);
             fw.write(data);
             fw.close();
         } catch (IOException e) {
             throw new StorageSavingException();
+        }
+    }
+
+    /**
+     * Loads the content of the file in the path "[fileDir]/[fileName]".
+     *
+     * @param filename The name of the file to be loaded.
+     * @return The string content in the file.
+     * @throws StorageLoadingException If error encountered during loading.
+     */
+    public String loadTextFileData(String filename) throws StorageLoadingException {
+        try {
+            File textFile = new File(this.fileDir + filename);
+            boolean isFileExistent = textFile.exists();
+            if (!isFileExistent) {
+                throw new StorageLoadingException();
+            }
+            Scanner scanner = new Scanner(textFile);
+            StringBuilder data = new StringBuilder();
+            while (scanner.hasNext()) {
+                data.append(scanner.nextLine()).append("\n");
+            }
+            return data.toString();
+        } catch (IOException e) {
+            throw new StorageLoadingException();
         }
     }
 }

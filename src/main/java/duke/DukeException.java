@@ -43,7 +43,7 @@ class InvalidIndexException extends DukeException {
  */
 class StorageLoadingException extends DukeException {
     public StorageLoadingException() {
-        super("OOPS!!! There was an error loading the data from storage. Initialising new Duke!");
+        super("OOPS!!! There was an error loading the data from storage.");
     }
 }
 

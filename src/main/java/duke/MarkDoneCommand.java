@@ -49,7 +49,7 @@ public class MarkDoneCommand extends Command {
             String message =
                     "Nice! I've marked this task as done:\n"
                     + list.get(index);
-            storage.save(list.convertToStorageString());
+            storage.saveDukeData(list.convertToStorageString());
             return ui.printAndReturnMessage(message);
         } else {
             throw new InvalidIndexException();

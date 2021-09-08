@@ -49,7 +49,7 @@ public class DeleteCommand extends Command {
                     "Noted.I've removed this task:\n"
                     + "  " + removed + "\n"
                     + String.format("Now you have %d tasks in the list.", list.size());
-            storage.save(list.convertToStorageString());
+            storage.saveDukeData(list.convertToStorageString());
             return ui.printAndReturnMessage(message);
         } else {
             throw new InvalidIndexException();

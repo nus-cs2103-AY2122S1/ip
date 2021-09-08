@@ -19,7 +19,7 @@ public class Duke {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
-            this.list = new TaskList(storage.load());
+            this.list = new TaskList(storage.loadDukeData());
         } catch (DukeException e) {
             this.ui.printAndReturnMessage(e.getMessage());
             this.list = new TaskList();
