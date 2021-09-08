@@ -18,6 +18,7 @@ public class DeleteCommand extends Command {
      * @param taskNumber Task number of the task to be deleted.
      */
     public DeleteCommand(int taskNumber) {
+        assert taskNumber >= 1;
         this.taskNumber = taskNumber;
     }
 
@@ -33,6 +34,10 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
+
         Task deletedTask = tasks.getTask(taskNumber);
         tasks.deleteTask(taskNumber);
         storage.save(tasks);

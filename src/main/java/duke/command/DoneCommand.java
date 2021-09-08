@@ -17,6 +17,7 @@ public class DoneCommand extends Command {
      * @param taskNumber Task number of the task to be marked done.
      */
     public DoneCommand(int taskNumber) {
+        assert taskNumber >= 1;
         this.taskNumber = taskNumber;
     }
 
@@ -32,6 +33,10 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
+
         tasks.doneTask(taskNumber);
         storage.save(tasks);
         return ui.showDone(tasks.getTask(taskNumber));
