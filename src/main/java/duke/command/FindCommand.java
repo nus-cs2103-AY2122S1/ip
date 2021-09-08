@@ -1,6 +1,8 @@
 package duke.command;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.DukeException;
 import duke.Storage;
@@ -14,7 +16,7 @@ import duke.task.Task;
 public class FindCommand implements Command {
 
     private String keyword;
-    private ArrayList<Task> filtered;
+    private List<Task> filtered;
 
     /**
      * Constructor to initialize Find Command.
@@ -41,14 +43,15 @@ public class FindCommand implements Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ArrayList<Task> tasks = taskList.getTasks();
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getDetail().toLowerCase().contains(keyword)) {
-                filtered.add(tasks.get(i));
-            }
-        }
-        ui.printAll(filtered, "Here are the matching tasks in your list");
+        List<Task> filteredTasks = taskList
+                .getTasks()
+                .stream()
+                .filter(task -> task.getDetail().toLowerCase().contains(keyword))
+                .collect(Collectors.toList());
+        filtered = filteredTasks;
+        ui.printAll(filteredTasks, "Here are the matching tasks in your list");
     }
+
 
     /**
      * Returns a boolean to determine if Duke should stop running.
