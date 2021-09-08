@@ -38,6 +38,7 @@ public class TaskList {
         } else {
             output = addTask(input);
         }
+        assert output != null;
         return output;
     }
 
@@ -135,6 +136,7 @@ public class TaskList {
             int index = Integer.parseInt(segments[segments.length - 1]);
             Task myTask = myList.get(index - 1);
             myTask.markAsDone();
+            assert myList.get(index - 1).isDone;
             return "I've marked this task as done:\n[X] " + myTask.description + "\n";
         } catch (NumberFormatException e) {
             return "Please input a number after the keyword: done";
