@@ -16,6 +16,8 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 
+
+
 /**
  * Represents a parser to make sense of user input.
  *
@@ -56,7 +58,7 @@ public class Parser {
         case DELETE:
             return new DeleteCommand(toTaskIndex(userDescription));
         case FIND:
-            return new FindCommand(userDescription);
+            return new FindCommand(getKeywords(userDescription));
         case CLEAR:
             return new ClearCommand();
         case EXIT:
@@ -97,5 +99,9 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new InvalidTaskIndexException();
         }
+    }
+
+    public static String[] getKeywords(String userDescription) {
+        return userDescription.split(", ");
     }
 }

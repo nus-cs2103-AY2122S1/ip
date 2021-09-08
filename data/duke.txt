@@ -1,0 +1,4 @@
+T | 0 | aaa
+T | 0 | aa
+T | 0 | aaab
+T | 0 | bb
