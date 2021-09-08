@@ -2,8 +2,20 @@ package duke;
 
 import duke.command.*;
 
+/**
+ * Parses input from the user from a given string into arguments for other
+ * parts of the program to process.
+ */
 public class Parser {
 
+    /**
+     * Parses a given string input from the user and returns the appropriate
+     * command.
+     *
+     * @param command Input from the user.
+     * @return Command to be executed.
+     * @throws DukeException If input is invalid.
+     */
     public static Command parse(String command) throws DukeException {
         String[] parsedArr = command.split("\\s", 2);
 
@@ -56,6 +68,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses <code>done</code> and <code>delete</code> commands in order to
+     * extract task index from the user input.
+     *
+     * @param command The <code>done</code> or <code>delete</code> command.
+     * @param rest The rest of the user's string input.
+     * @return Command to be executed.
+     * @throws DukeException If <code>rest</code> is not a legitimate integer.
+     */
     private static Command parseFurther(String command, String rest) throws DukeException {
         int index;
 

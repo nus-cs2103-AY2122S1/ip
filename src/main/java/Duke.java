@@ -1,12 +1,22 @@
 import duke.*;
 import duke.command.Command;
 
+/**
+ * The main class for the Duke program, which manages tasks for the user.
+ *
+ * @author nhjryan
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * The constructor for a Duke object.
+     *
+     * @param filePath The path to the file for storage.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -18,6 +28,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the main logic of the program.
+     * Displays the welcome message upon start up and exits the program when
+     * the condition is met.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -33,6 +48,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the Duke program.
+     *
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
