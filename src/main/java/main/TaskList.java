@@ -43,6 +43,7 @@ public class TaskList {
                                         + list.get(i).getTask() + "\n";
             count = count + 1;
         }
+        assert returned.equals(null) : "the list is not outputted correctly";
         return returned;
     }
 
@@ -50,6 +51,7 @@ public class TaskList {
         String returned = "";
         returned = returned + "Yay! you have finished this task!" + "\n";
         taskNumber = Integer.valueOf(next_line.substring(5)) - 1;
+        assert taskNumber > 0 : "the task number cannot be negative";
         this.doneCheck.set(taskNumber, "X");
         returned = returned + "["
                 + this.list.get(taskNumber).getType()
@@ -62,6 +64,7 @@ public class TaskList {
     public String deleteTask(String next_line) {
         String returned = "";
         taskNumber = Integer.valueOf(next_line.substring(7));
+        assert taskNumber > 0 : "the task number cannot be negative";
         returned = returned + "Congrats! You have completed this task!" + "\n";
         returned = returned + "["
                 + this.list.get(taskNumber - 1).getType()
