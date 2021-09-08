@@ -33,6 +33,7 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(
                 DialogBox.getLigmaDialog(Ui.getIntroduction(), ligmaImage)
         );
+        scrollPane.setFitToWidth(true);
     }
 
     public void setLigma(Ligma ligma) {

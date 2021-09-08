@@ -1,0 +1,25 @@
+.scroll-pane .viewport {
+    -fx-background-image: url('../images/background.jpeg');
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: rgba(79, 109, 122, 0.6);
+}
+
+.userInput {
+    -fx-background-color: rgba(219, 233, 238, 0.4);
+    -fx-border-color: rgba(219, 233, 238, 1);
+    -fx-border-width: 2;
+    -fx-border-radius: 17;
+    -fx-background-radius: 17;
+    -fx-text-fill: WHITE;
+}
+
+.mainWindow {
+    -fx-background-color: rgb(3, 12, 18);
+}
+
+.label {
+    -fx-font-family: Arial;
+    -fx-font-size: 13;
+}

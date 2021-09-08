@@ -32,7 +32,9 @@ public class Ligma {
         try {
             Command c = Parser.parseCommand(input);
             return c.execute(tasks, storage);
-        } catch (InputMismatchException | NoSuchMethodException e1) {
+        } catch (InputMismatchException
+                | NoSuchMethodException
+                | IllegalArgumentException e1) {
             return e1.getMessage();
         } catch (DateTimeParseException e2) {
             return "Time must be in yyyy-mm-dd format.";

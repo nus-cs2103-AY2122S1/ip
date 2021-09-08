@@ -44,7 +44,7 @@ public class AddCommand implements Command {
         try {
             tasks.addTask(task);
             storage.saveTask(task);
-            return Ui.getSuccessMessage(task.toString());
+            return Ui.getSuccessMessage("added:\n" + task.toString());
         } catch (IOException e) {
             return "Failed to save task to storage: \n" + task;
         }

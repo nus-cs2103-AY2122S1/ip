@@ -17,6 +17,7 @@ public class Task {
      * @return                          task created
      */
     public Task(String desc) {
+        assert(desc.trim() != "") : "Todo is empty";
         this.desc = desc;
         this.isDone = false;
     }
@@ -29,6 +30,7 @@ public class Task {
      * @return                          task created
      */
     public Task(String desc, boolean isDone) {
+        assert(desc.trim() != "") : "Todo is empty";
         this.desc = desc;
         this.isDone = isDone;
     }

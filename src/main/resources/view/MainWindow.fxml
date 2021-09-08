@@ -5,14 +5,21 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ligma.ui.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" styleClass="mainWindow" stylesheets="@../style/styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ligma.ui.MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" AnchorPane.bottomAnchor="1.0" />
-        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
+        <TextField fx:id="userInput" onAction="#handleUserInput" prefHeight="35.0" prefWidth="348.0" styleClass="userInput" stylesheets="@../style/styles.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font></TextField>
+        <Button fx:id="sendButton" graphicTextGap="0.0" layoutX="325.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #4A6FA5; -fx-background-radius: 20;" text="&gt;" textFill="WHITE" AnchorPane.bottomAnchor="6.0" AnchorPane.rightAnchor="4.0">
+         <font>
+            <Font name="Arial Bold" size="19.0" />
+         </font></Button>
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" style="-fx-padding: 0 0 0 0;" styleClass="background" stylesheets="@../style/styles.css" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" />
+                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="400.0" />
             </content>
         </ScrollPane>
     </children>

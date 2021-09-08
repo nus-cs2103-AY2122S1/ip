@@ -11,8 +11,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -20,10 +22,14 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+
+    private static final String LIGHT_BLUE = "#C0D6DF";
+    private static final String DEEP_BLUE = "#4F6D7A";
+    private static final String BG_RADIUS_STYLE = "-fx-background-radius: 10 10 10 10;";
     @FXML
     private Label dialog;
     @FXML
-    private ImageView displayPicture;
+    private Circle displayPic;
 
     private DialogBox(String text, Image img) {
         try {
@@ -36,7 +42,8 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        displayPicture.setImage(img);
+        dialog.setWrapText(true);
+        displayPic.setFill(new ImagePattern(img));
     }
 
     /**
@@ -50,12 +57,18 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox userDb = new DialogBox(text, img);
+        userDb.dialog.setStyle("-fx-background-color:" + DEEP_BLUE
+                + "; -fx-text-fill: #FFFFFF;"
+                + BG_RADIUS_STYLE);
+        return userDb;
     }
 
     public static DialogBox getLigmaDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.dialog.setStyle("-fx-background-color:" + LIGHT_BLUE + ";"
+                + BG_RADIUS_STYLE);
         return db;
     }
 }

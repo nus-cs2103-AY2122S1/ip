@@ -14,8 +14,8 @@ public class Ui {
     public static String getStringTaskList(TaskList tasks) {
         String[] tasksText = tasks.getStringArr();
         int len = tasksText.length;
-        String reply = "";
-        for (int i = 0; i < len; i++) {
+        String reply = "1." + tasksText[0];
+        for (int i = 1; i < len; i++) {
             reply += String.format("\n%d." + tasksText[i], i + 1);
         }
         return reply;
@@ -46,7 +46,7 @@ public class Ui {
      * Prints Ligma's exit message.
      */
     public static String getFarewell() {
-        return "Bye. I love Imagine Dragons...\n\n\n" +
+        return "Bye. I love Imagine Dragons...\n\n\n\n\n\n\n\n\n\n" +
                 "Imagine Dragon Deez Nuts Cross Your Face.";
     }
 
