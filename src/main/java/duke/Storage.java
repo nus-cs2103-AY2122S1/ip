@@ -68,7 +68,7 @@ public class Storage {
     }
 
 
-    private Task readEntry(String entry) {
+    private Task readEntry(String entry) throws DukeDatabaseException {
         String[] fields = entry.split("\\|");
         Task taskToAdd;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -82,9 +82,11 @@ public class Storage {
                     LocalDateTime.parse(fields[3], formatter),
                     LocalDateTime.parse(fields[4], formatter));
             break;
-        default: // (case "D")
+        case "D":
             taskToAdd = new Deadline(fields[2], LocalDateTime.parse(fields[3], formatter));
             break;
+        default:
+            throw new DukeDatabaseException();
         }
         if (Integer.parseInt(fields[1]) == 1) {
             taskToAdd.markAsDone();

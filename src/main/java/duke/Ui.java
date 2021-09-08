@@ -11,6 +11,13 @@ import java.util.Scanner;
  */
 public class Ui {
     private Scanner input = new Scanner(System.in);
+    private static String LOGO =
+            " ____        _\n"
+            + "|  _ \\ _   _| | _____\n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+
 
     /**
      * Read the input from the user.
@@ -36,15 +43,10 @@ public class Ui {
      * @return the greeting message
      */
     public String showGreet() {
-        String logo = " ____        _\n"
-                + "|  _ \\ _   _| | _____\n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
         return String.format(
                 "%s\n" +
                 "Welcome! I'm Duke.\n" +
-                "What can I do for you?\n", logo
+                "What can I do for you?\n", Ui.LOGO
         );
     }
 
@@ -151,36 +153,6 @@ public class Ui {
             sb.append(String.format("\t%d. %s\n", count++, filteredList.get(i)));
         }
         return "\tHere are the matching tasks in your list:\n" + sb;
-    }
-
-
-    /**
-     * Display to users that error was thrown while saving data to the database.
-     *
-     * @return the error message
-     */
-    public String showSavingError() {
-        return "Error when saving data!";
-    }
-
-
-    /**
-     * Display to user that their date is of invalid format.
-     *
-     * @return the error message
-     */
-    public String showInvalidDateFormat() {
-        return "\tPlease enter the start/end time in the format of <DD/MM/YY HH:MM>!\n";
-    }
-
-
-    /**
-     * Display to user that their date is of invalid range.
-     *
-     * @return the error message
-     */
-    public String showInvalidDateRange() {
-        return "\tEnd time must be after the start time!\n";
     }
 
 

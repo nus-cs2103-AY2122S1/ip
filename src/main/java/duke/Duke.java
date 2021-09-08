@@ -1,20 +1,16 @@
 package duke;
 
-import duke.exception.DukeException;
-import duke.exception.DukeInvalidArgumentException;
-import duke.exception.DukeMissingArgumentException;
-import duke.exception.DukeNoTaskFoundException;
-import duke.exception.DukeUnknownCommandException;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import duke.exception.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
-
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents the Duke chatbot object.
@@ -52,13 +48,13 @@ public class Duke {
     }
 
 
-    private void exit() {
+    private void exit() throws DukeDatabaseException {
         try {
             this.ui.closeInput();
             this.storage.saveData(this.taskList);
             this.isRunning = false;
         } catch (IOException e) {
-            this.ui.showSavingError();
+            throw new DukeDatabaseException();
         }
     }
 
@@ -103,7 +99,8 @@ public class Duke {
     }
 
 
-    private String addEvent(String args) throws DukeMissingArgumentException {
+    private String addEvent(String args)
+            throws DukeMissingArgumentException, DukeInvalidDateException, DukeInvalidDateRangeException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
             String[] splits = args.split(" /from ", 2);
@@ -113,21 +110,20 @@ public class Duke {
             LocalDateTime startTime = LocalDateTime.parse(start, formatter);
             LocalDateTime endTime = LocalDateTime.parse(end, formatter);
             if (startTime.isAfter(endTime)) {
-                return this.ui.showInvalidDateRange();
+                throw new DukeInvalidDateRangeException();
             }
-
             Task event = new Event(splits[0], startTime, endTime);
             this.taskList.add(event);
             return this.ui.showAdd(event, this.taskList.getLength());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeMissingArgumentException();
         } catch (DateTimeParseException e) {
-            return this.ui.showInvalidDateFormat();
+            throw new DukeInvalidDateException();
         }
     }
 
 
-    private String addDeadline(String args) throws DukeMissingArgumentException {
+    private String addDeadline(String args) throws DukeMissingArgumentException, DukeInvalidDateException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
             String[] splits = args.split(" /by ", 2);
@@ -139,7 +135,7 @@ public class Duke {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeMissingArgumentException();
         } catch (DateTimeParseException e) {
-            return this.ui.showInvalidDateFormat();
+            throw new DukeInvalidDateException();
         }
     }
 
@@ -165,7 +161,7 @@ public class Duke {
             throws DukeNoTaskFoundException, DukeMissingArgumentException, DukeInvalidArgumentException {
         try {
             int taskNum = Integer.parseInt(args);
-            if (taskNum > this.taskList.getLength()) {
+            if (taskNum > this.taskList.getLength() || taskNum < 0) {
                 throw new DukeNoTaskFoundException(taskNum);
             }
             Task taskToDelete = this.taskList.get(taskNum);
