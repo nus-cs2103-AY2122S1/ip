@@ -50,6 +50,9 @@ public class TaskList {
      * Condition 4: Specified task is not the first/last task
      */
     public String deleteTask(int deleteIndex) {
+
+        assert (deleteIndex >= 0 && deleteIndex <= listOfTasks.size()) : "Invalid index";
+
         String deletedTask = listOfTasks.get(deleteIndex - 1).toString();
         if (this.listOfTasks.size() == 1) {
             this.listOfTasks.clear();
@@ -72,6 +75,9 @@ public class TaskList {
      * Returns the toString() value of the task for Ui class to output.
      */
     public String completeTask(int taskIndex) {
+
+        assert (taskIndex >= 0 && taskIndex <= listOfTasks.size()) : "Invalid index";
+
         String taskInfo;
         if (this.listOfTasks.get(taskIndex - 1) instanceof Todo) {
             Todo completedTodo = ((Todo) this.listOfTasks.get(taskIndex - 1)).markAsDone();
