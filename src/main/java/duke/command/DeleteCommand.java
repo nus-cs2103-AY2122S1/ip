@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
 
     /**
      * A public constructor to initialise the command
-     * to the given one.
+     * and index to the given one.
      *
      * @param command The command inputted by the user.
      */

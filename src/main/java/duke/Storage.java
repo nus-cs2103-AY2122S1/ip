@@ -63,8 +63,6 @@ public class Storage {
         }
     }
 
-
-
     /**
      * Loads the current file content and adds the tasks
      * into the TaskList if any.
@@ -93,7 +91,7 @@ public class Storage {
                     userInput.add(new Deadline(splitString[2].trim(), date));
                     break;
                 case "E":
-                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d yyyy , HH:mm");
                     LocalDateTime dateTime = LocalDateTime.parse(splitString[3].trim(), dtf);
                     userInput.add(new Event(splitString[2], dateTime));
                     break;
@@ -129,7 +127,7 @@ public class Storage {
             toAdd += " | " + temp.changeDateFormat().trim();
         } else if (task.taskIndicator().equals("E")) {
             Event temp = (Event) task;
-            toAdd += " | " + temp.getAt().trim();
+            toAdd += " | " + temp.getFormattedAt().trim();
         }
         return toAdd;
     }
