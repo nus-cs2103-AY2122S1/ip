@@ -40,6 +40,7 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
+        assert input != null : "Input is null";
         try {
             Command c = Parser.parse(input);
             return c.execute(taskList, storage);
