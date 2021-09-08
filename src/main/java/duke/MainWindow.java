@@ -51,7 +51,7 @@ public class MainWindow extends AnchorPane {
     private Image getDukeImage(String dukeResponse) {
         if (dukeResponse.startsWith("OOPS")) {
             return new Image(this.getClass().getResourceAsStream("/images/DaDukeConfused.gif"));
-        } else if (dukeResponse.startsWith("See you")) {
+        } else if (dukeResponse.startsWith("Your tasks have been saved")) {
             return new Image(this.getClass().getResourceAsStream("/images/DaDukeBye.gif"));
         } else {
             return new Image(this.getClass().getResourceAsStream("/images/DaDuke.gif"));
