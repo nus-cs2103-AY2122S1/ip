@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class TodoTest {
     @Test
     public void fileFormat_normalNoInput_properFormat() {
-        assertEquals("T | 0 | buy bread", new Todo("buy bread").fileFormat());
+        assertEquals("T | 0 | buy bread", new Todo("buy bread").convertToFileFormat());
     }
 
     @Test

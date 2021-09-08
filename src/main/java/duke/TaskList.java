@@ -62,7 +62,7 @@ public class TaskList {
     public String showTask() {
         String temp = "";
         for (int i = 0; i < this.list.size(); i++) {
-            temp += String.format("%s. %s\n", i+1, this.list.get(i).toString());
+            temp += String.format("%s. %s\n", i + 1, this.list.get(i).toString());
         }
         return temp;
     }

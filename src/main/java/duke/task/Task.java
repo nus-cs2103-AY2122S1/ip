@@ -30,7 +30,7 @@ public class Task {
         this.isDone = true;
     }
 
-    public String fileFormat() {
+    public String convertToFileFormat() {
         return String.format(" | %s | %s", this.isDone ? "1" : "0", this.description);
     }
 }
