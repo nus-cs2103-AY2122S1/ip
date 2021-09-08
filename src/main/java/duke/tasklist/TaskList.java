@@ -2,6 +2,7 @@ package duke.tasklist;
 
 import java.util.ArrayList;
 
+import duke.exception.DuplicateTaskException;
 import duke.task.Task;
 
 /**
@@ -39,7 +40,11 @@ public class TaskList {
      *
      * @param toStore The task to store into the TaskList.
      */
-    public void storeTask(Task toStore) {
+    public void storeTask(Task toStore) throws DuplicateTaskException {
+        if (checkForDuplicates(toStore)) {
+            throw new DuplicateTaskException();
+        }
+
         allTasks.add(toStore);
         nextSpaceToStore = nextSpaceToStore + 1;
     }
@@ -90,6 +95,23 @@ public class TaskList {
      */
     public Task getSpecificTask(int taskNo) {
         return allTasks.get(taskNo - 1);
+    }
+
+    /**
+     * Checks if the new task to be added is a duplicate of another task already in the tasklist.
+     * @param taskToCheck The task to be checked.
+     * @return True if the task to be added is a duplicate, false otherwise.
+     * @throws DuplicateTaskException If the task to be added is a duplicate.
+     */
+    public boolean checkForDuplicates(Task taskToCheck) {
+        boolean isDuplicate = false;
+        for (int i = 0; i < nextSpaceToStore; i++) {
+            if (taskToCheck.equals(allTasks.get(i))) {
+                isDuplicate = true;
+                break;
+            }
+        }
+        return isDuplicate;
     }
 
     /**

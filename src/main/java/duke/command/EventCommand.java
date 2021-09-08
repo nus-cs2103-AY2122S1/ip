@@ -42,9 +42,10 @@ public class EventCommand extends Command {
         LocalDateTime atDateTime = LocalDateTime.parse(eventTime);
 
         Event event = new Event(taskDescription, atDateTime);
+        String output = ui.showTaskAdded(event, taskList);
         taskList.storeTask(event);
         storage.saveFile(taskList.getAllTasks());
-        return ui.showTaskAdded(event, taskList);
+        return output;
 
     }
 }

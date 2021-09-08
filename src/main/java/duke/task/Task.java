@@ -52,6 +52,21 @@ public class Task {
     }
 
     /**
+     * Checks the description of two tasks, the tasks are equal if they have the same description.
+     *
+     * @param task The task to compare with.
+     * @return True if the tasks are equal, false otherwise.
+     */
+    @Override
+    public boolean equals(Object task) {
+        if (task instanceof Task) {
+            Task newTask = (Task) task;
+            return this.description.equals(newTask.description);
+        }
+        return false;
+    }
+
+    /**
      * Returns the string representation of the Task.
      *
      * @return String representation of the Task.
