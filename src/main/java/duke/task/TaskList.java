@@ -40,6 +40,28 @@ public class TaskList {
     }
 
     /**
+     *  Gets the index of the Task to delete
+     *
+     * @param message the input command to delete a task
+     * @return the list index for the task to be checked
+     */
+    public int taskToDelete(String message) {
+        StringBuilder number;
+        if (message.length() > 6 && message.startsWith("delete")) {
+            char firstNumber = message.charAt(7);
+            number = new StringBuilder(Character.toString(firstNumber));
+            int counter = 8;
+            while (counter < message.length()) {
+                char next = message.charAt(counter);
+                number.append(next);
+                counter++;
+            }
+            return Integer.parseInt(number.toString());
+        }
+        return 0;
+    }
+
+    /**
      * Deletes current task from list
      *
      * @param item the list index of the task to be deleted
@@ -53,6 +75,44 @@ public class TaskList {
             String display = "Noted. I've removed this task:\n  " + deletedTask.displayTask();
             tasks.remove(item - 1);
             return display + "\n Now you have " + tasks.size() + " tasks in the list.";
+        }
+    }
+
+    /**
+     * Gets the index of the Task to check
+     *
+     * @param message the input command to check a task
+     * @return the list index for the task to be checked
+     */
+    public int taskToCheck(String message) {
+        StringBuilder number;
+        if (message.length() > 5 && message.startsWith("done")) {
+            char firstNumber = message.charAt(5);
+            number = new StringBuilder(Character.toString(firstNumber));
+            int counter = 6;
+            while (counter < message.length()) {
+                char next = message.charAt(counter);
+                number.append(next);
+                counter++;
+            }
+            return Integer.parseInt(number.toString());
+        }
+        return 0;
+    }
+
+    /**
+     * Mark the task as completed
+     *
+     * @param item the list index of the task to be mark as done
+     * @throws TaskNotFoundException if the list index is not valid
+     */
+    public String markAsCheckedTask(int item) throws TaskNotFoundException {
+        if (item > tasks.size()) {
+            throw new TaskNotFoundException("☹ OH NO!!! The task cannot be found. \n   Please try again.");
+        } else {
+            Task t = tasks.get(item -1);
+            t.checkOffTask();
+            return "Nice! I've marked this task as done:\n  " + t.displayTask();
         }
     }
 
@@ -81,72 +141,6 @@ public class TaskList {
                 return tasksToPrint.toString();
             }
         }
-    }
-
-    /**
-     * Gets the index of the Task to check
-     *
-     * @param message the input command to check a task
-     * @return the list index for the task to be checked
-     */
-    public int taskToCheck(String message) {
-        StringBuilder number;
-        if (message.length() > 5) {
-            String check = message.substring(0, 4);
-            if (check.equals("done")) {
-                char firstNumber = message.charAt(5);
-                number = new StringBuilder(Character.toString(firstNumber));
-                int counter = 6;
-                while (counter < message.length()) {
-                    char next = message.charAt(counter);
-                    number.append(next);
-                    counter++;
-                }
-                return Integer.parseInt(number.toString());
-            }
-        }
-        return 0;
-    }
-
-    /**
-     * Mark the task as completed
-     *
-     * @param item the list index of the task to be mark as done
-     * @throws TaskNotFoundException if the list index is not valid
-     */
-    public String markAsCheckedTask(int item) throws TaskNotFoundException {
-        if (item > tasks.size()) {
-            throw new TaskNotFoundException("☹ OH NO!!! The task cannot be found. \n   Please try again.");
-        } else {
-            Task t = tasks.get(item -1);
-            t.checkOffTask();
-            return "Nice! I've marked this task as done:\n  " + t.displayTask();
-        }
-    }
-
-    /**
-     *  Gets the index of the Task to delete
-     *
-     * @param message the input command to delete a task
-     * @return the list index for the task to be checked
-     */
-    public int taskToDelete(String message) {
-        StringBuilder number;
-        if (message.length() > 6) {
-            String check = message.substring(0, 6);
-            if (check.equals("delete")) {
-                char firstNumber = message.charAt(7);
-                number = new StringBuilder(Character.toString(firstNumber));
-                int counter = 8;
-                while (counter < message.length()) {
-                    char next = message.charAt(counter);
-                    number.append(next);
-                    counter++;
-                }
-                return Integer.parseInt(number.toString());
-            }
-        }
-        return 0;
     }
 
     /**

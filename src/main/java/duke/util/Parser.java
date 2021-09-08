@@ -19,6 +19,7 @@ public class Parser {
     private TaskList taskList;
     private Storage storage;
     private Ui ui;
+    final static String UNKNOWN_COMMAND_MESSAGE = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
     /**
      * Constructor for Parser
@@ -57,32 +58,23 @@ public class Parser {
 
             } else if (message.startsWith("todo")) {
                 isValidEntry(message, "todo");
-                String taskName = message.substring(message.indexOf(" "));
-                String newTodo = taskList.addTask(new Todo(taskName, false));
+                String newTodo = taskList.addTask(new Todo(getTaskName(message), false));
                 storage.updateFile(taskList.getTasks());
                 return newTodo;
 
             } else if (message.startsWith("deadline")) {
                 isValidEntry(message, "deadline");
                 isFormatCorrect(message, "deadline");
-                String taskName = message.substring(message.indexOf(" "), message.indexOf("/"));
-                String temp = message.substring(message.indexOf("/") + 1);
-                String due = temp.substring(temp.indexOf(" ") + 1);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                LocalDateTime parsedDate = LocalDateTime.parse(due, formatter);
-                String deadline = taskList.addTask(new Deadline(taskName, parsedDate, false));
+                String deadline = taskList
+                        .addTask(new Deadline(getTaskName(message), getDuration(message), false));
                 storage.updateFile(taskList.getTasks());
                 return deadline;
 
             } else if (message.startsWith("event")) {
                 isValidEntry(message, "event");
                 isFormatCorrect(message, "event");
-                String taskName = message.substring(message.indexOf(" "), message.indexOf("/"));
-                String temp = message.substring(message.indexOf("/") + 1);
-                String due = temp.substring(temp.indexOf(" ") + 1);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                LocalDateTime parsedDate = LocalDateTime.parse(due, formatter);
-                String event = taskList.addTask(new Event(taskName, parsedDate, false));
+                String event = taskList
+                        .addTask(new Event(getTaskName(message), getDuration(message), false));
                 storage.updateFile(taskList.getTasks());
                 return event;
 
@@ -96,7 +88,23 @@ public class Parser {
             String errorMessage = "Format of date and time should be \n yyyy-MM-dd HH:mm";
             return errorMessage + "\n Please try again.";
         }
-        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        return UNKNOWN_COMMAND_MESSAGE;
+    }
+
+    private String getTaskName(String message) {
+        if (message.startsWith("todo")) {
+            return message.substring(message.indexOf(" "));
+        } else {
+            return message.substring(message.indexOf(" "), message.indexOf("/"));
+        }
+    }
+
+    private LocalDateTime getDuration(String message) {
+        String temp = message.substring(message.indexOf("/") + 1);
+        String due = temp.substring(temp.indexOf(" ") + 1);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return LocalDateTime.parse(due, formatter);
+
     }
 
     public void isValidEntry(String message, String type) throws DescriptionEmptyException {
@@ -120,6 +128,6 @@ public class Parser {
     }
 
     public static void notValid() throws InvalidTaskTypeException {
-        throw new InvalidTaskTypeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        throw new InvalidTaskTypeException(UNKNOWN_COMMAND_MESSAGE);
     }
 }

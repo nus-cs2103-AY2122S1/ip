@@ -56,35 +56,31 @@ public class Storage {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(dukeData));
         String line = bufferedReader.readLine();
         while (line != null) {
+            String status = line.substring(1, 2);
             if (line.startsWith("T")) {
-                String status = line.substring(1, 2);
-                String task = line.substring(5);
-                Task newTask = new Todo(task, status.equals("1"));
+                Task newTask = new Todo(line.substring(5), status.equals("1"));
                 list.add(newTask);
             } else if (line.startsWith("D")) {
-                String status = line.substring(1, 2);
-                String temp = line.substring(5);
-                String task = line.substring(5, temp.indexOf("|") + 5);
-                String due = temp.substring(temp.indexOf("|") + 2);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy h.mma");
-                LocalDateTime parsedDate = LocalDateTime.parse(due, formatter);
-                Task newTask = new Deadline(task, parsedDate, status.equals("1"));
+                Task newTask = new Deadline(getTaskName(line), getDuration(line.substring(5)), status.equals("1"));
                 list.add(newTask);
             } else {
+                Task newTask = new Event(getTaskName(line), getDuration(line.substring(5)), status.equals("1"));
                 assert line.startsWith("E");
-
-                String status = line.substring(1, 2);
-                String temp = line.substring(5);
-                String task = line.substring(5, line.substring(5).indexOf("|") + 5);
-                String due = temp.substring(temp.indexOf("|") + 2);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy h.mma");
-                LocalDateTime parsedDate = LocalDateTime.parse(due, formatter);
-                Task newTask = new Event(task, parsedDate, status.equals("1"));
                 list.add(newTask);
             }
             line = bufferedReader.readLine();
         }
         return list;
+    }
+
+    private String getTaskName(String line) {
+        return line.substring(5, line.substring(5).indexOf("|") + 5);
+    }
+
+    private LocalDateTime getDuration(String line) {
+        String due = line.substring(line.indexOf("|") + 2);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy h.mma");
+        return LocalDateTime.parse(due, formatter);
     }
 
     /**
