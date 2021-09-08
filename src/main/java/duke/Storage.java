@@ -15,17 +15,33 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles saving of tasks and loading said saves.
+ * @author Thomas Hogben
+ */
 public class Storage {
     private Path saveDirectory;
     private Path savePath;
     private Ui ui;
 
+    /**
+     * @param ui A Ui to send display commands to.
+     * @param saveDirectory A path to the directory to save in.
+     *                      It will be created it if it does not exist.
+     */
     public Storage(Ui ui, Path saveDirectory) {
         this.ui = ui;
         this.saveDirectory = saveDirectory;
         savePath = Paths.get(saveDirectory.toString(), "duke.txt");
     }
 
+    /**
+     * Attempts to load a previous save file.
+     * Will create a blank save file if one does not exist, and load that.
+     *
+     * @return An ArrayList of Tasks from the save file.
+     * @throws DukeException If the save file or any of the tasks are corrupt.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc;
@@ -52,6 +68,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Overwrites the previous save file with one storing the current TaskList.
+     *
+     * @param taskList The TaskList to be saved.
+     */
     public void save(TaskList taskList) {
         try {
             Files.delete(savePath);
@@ -67,6 +88,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Parses a line of the save file and creates a task from it.
+     *
+     * @param nextTask A line from the save file.
+     * @return The Task created from the save line.
+     * @throws DukeException If the task is corrupt, ie. the format of the save line is invalid.
+     */
     private Task getTaskFromSave(String nextTask) throws DukeException {
         char taskType = nextTask.charAt(0);
         boolean isDone;
