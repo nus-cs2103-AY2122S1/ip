@@ -76,7 +76,7 @@ public class Parser {
             assert location > 6;
             newTask = new Event(input.substring(eventFirstIndex, location - 1), input.substring(location + 4));
         } else {
-            throw new DukeException("Please specify a type of task!");
+            throw new DukeException("Please specify a type of task.");
         }
 
         return new AddCommand(newTask);
