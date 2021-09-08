@@ -44,6 +44,7 @@ public class Deadline extends Task {
         if (time != null) {
             res += " " + time.format(DateTimeFormatter.ofPattern("H:mm"));
         }
+        assert res != null;
         return res += ")";
     }
 
@@ -57,6 +58,7 @@ public class Deadline extends Task {
         if (time != null) {
             res += " _ " + this.time;
         }
+        assert res != null;
         return res;
     }
 }
