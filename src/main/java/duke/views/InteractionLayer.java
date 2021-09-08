@@ -5,7 +5,7 @@ import java.util.List;
 import duke.constants.Constants;
 import duke.views.cli.Greeter;
 import duke.views.cli.Loader;
-import duke.views.cli.strategies.RespondWithDelegated;
+import duke.views.strategies.RespondWith;
 
 public interface InteractionLayer {
 
@@ -13,7 +13,7 @@ public interface InteractionLayer {
 
     Loader getLoader();
 
-    RespondWithDelegated getResponder();
+    RespondWith getResponder();
 
     /**
      * Runs before the application becomes responsive to user input.

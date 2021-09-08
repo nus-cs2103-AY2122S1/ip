@@ -1,4 +1,4 @@
-package duke.views.cli.strategies.commands;
+package duke.views.strategies.commands;
 
 import java.util.List;
 import java.util.stream.Collectors;

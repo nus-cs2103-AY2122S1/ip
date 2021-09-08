@@ -1,4 +1,4 @@
-package duke.views.cli.strategies.commands;
+package duke.views.strategies.commands;
 
 import duke.domain.Event;
 import duke.domain.Task;
