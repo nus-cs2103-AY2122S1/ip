@@ -94,7 +94,7 @@ public class BotBrain {
      *
      * @return
      */
-    public String startMem() {
+    public String startBrain() {
         String output = botStaticMemoryUnit.MESSAGE_GREETING;
         return output;
     }
