@@ -7,9 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Deadline;
-import duke.task.Event;
+import duke.parser.Parser;
 
 /**
  * Class responsible for reading and writing to file for persistent storage
@@ -43,16 +41,7 @@ public class Storage {
             ArrayList<Task> tasks = new ArrayList<>();
             Scanner sc = new Scanner(taskFile);
             while (sc.hasNextLine()) {
-                String[] taskArray = sc.nextLine().split(" : ");
-                Task task;
-                if (taskArray[0].equals("T")) {
-                    task = new Todo(taskArray[2], taskArray[1].equals("1"));
-                } else  if (taskArray[0].equals("D")) {
-                    task = new Deadline(taskArray[2], taskArray[1].equals("1"), taskArray[3]);
-                } else {
-                    task = new Event(taskArray[2], taskArray[1].equals("1"), taskArray[3]);
-                }
-                tasks.add(task);
+                tasks.add(Parser.parseStorage(sc.nextLine()));
             }
             sc.close();
             return tasks;
