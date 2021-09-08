@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -33,6 +34,14 @@ public class TaskListTest {
     @Test
     public void testAddToList() {
         File file = new File("test.txt");
+        if (file.exists()) {
+            file.delete();
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         try {
             Storage storage = new Storage("test.txt");
             TaskList taskList = new TaskList(storage);
@@ -66,6 +75,14 @@ public class TaskListTest {
     @Test
     public void testListOrder() {
         File file = new File("test.txt");
+        if (file.exists()) {
+            file.delete();
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         try {
             Storage storage = new Storage("test.txt");
             TaskList taskList = new TaskList(storage);
@@ -95,6 +112,14 @@ public class TaskListTest {
     @Test
     public void testMarkAsDone() {
         File file = new File("test.txt");
+        if (file.exists()) {
+            file.delete();
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         try {
             Storage storage = new Storage("test.txt");
             TaskList taskList = new TaskList(storage);

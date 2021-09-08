@@ -2,6 +2,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.testng.Assert.assertEquals;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -31,6 +32,14 @@ public class StorageTest {
     @Test
     public void testRetention() {
         File file = new File("test.txt");
+        if (file.exists()) {
+            file.delete();
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         try {
             Storage storage1 = new Storage("test.txt");
             TaskList taskList1 = new TaskList(storage1);
