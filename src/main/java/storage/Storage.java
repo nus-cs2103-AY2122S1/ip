@@ -101,44 +101,13 @@ public class Storage {
                 String[] dataArr = task.split(" ");
 
                 if (dataArr[0].equals("deadline")) {
-                    Boolean isDone = Boolean.valueOf(dataArr[1]);
-                    LocalDate by = LocalDate.parse(dataArr[2]);
-                    String description = new String(Base64.getDecoder().decode(dataArr[3]));
-
-                    Deadline deadlineTask = new Deadline(description, by);
-                    if (isDone) {
-                        deadlineTask.markDone();
-                    }
+                    Deadline deadlineTask = Parser.decodeDeadline(dataArr);
                     taskList.add(deadlineTask);
                 } else if (dataArr[0].equals("event")) {
-                    Boolean isDone = Boolean.valueOf(dataArr[1]);
-                    String at = new String(Base64.getDecoder().decode(dataArr[2]));
-                    String description = new String(Base64.getDecoder().decode(dataArr[3]));
-
-                    Event eventTask = new Event(description, at);
-                    if (isDone) {
-                        eventTask.markDone();
-                    }
+                    Event eventTask = Parser.decodeEvent(dataArr);
                     taskList.add(eventTask);
                 } else {
-                    Boolean isDone = Boolean.valueOf(dataArr[1]);
-                    String description = new String(Base64.getDecoder().decode(dataArr[2]));
-
-                    Todo todoTask = new Todo(description);
-                    if (isDone) {
-                        todoTask.markDone();
-                    }
-
-
-
-                    String[] tagsArr = Parser.sanitizeInput(new String(Base64.getDecoder().decode(dataArr[3])));
-                    if (!tagsArr[0].equals("None")) {
-                        for (int i = 0; i < tagsArr.length; i++) {
-                            String tag = tagsArr[i];
-                            todoTask.addTag(new Tag(tag));
-                        }
-                    }
-
+                    Task todoTask = Parser.decodeTodo(dataArr);
                     taskList.add(todoTask);
                 }
             }

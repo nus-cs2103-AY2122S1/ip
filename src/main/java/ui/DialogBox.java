@@ -47,7 +47,7 @@ public class DialogBox extends HBox {
         }
 
         // @@author DrWala-reused
-        // Display mask idea taken from Azeem Arshad Vasanwala from https://github.com/DrWala/.
+        // Display mask idea by Azeem Arshad Vasanwala from https://github.com/DrWala/.
         setupDisplayMask();
 
         dialog.setText(text);
@@ -95,6 +95,9 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+
+        // @@author DrWala-reused
+        // Flip dialogBox's orientation idea by Azeem Arshad Vasanwala from https://github.com/DrWala/.
         db.flip();
         return db;
     }

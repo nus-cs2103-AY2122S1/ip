@@ -3,7 +3,7 @@ package model;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Code from AB3
+ * Code from AB3.
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  *

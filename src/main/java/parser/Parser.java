@@ -1,7 +1,10 @@
 package parser;
 
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Base64;
 
+import model.Tag;
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -35,8 +38,7 @@ public class Parser {
      */
     public static String encodeEvent(Event eventTask) {
 
-        String encodedDescription = Base64.getEncoder()
-                .encodeToString(eventTask.getDescription().getBytes());
+        String encodedDescription = Parser.encodeDescription(eventTask);
 
         String encodedAt = Base64.getEncoder()
                 .encodeToString(eventTask.getAt().getBytes());
@@ -47,6 +49,18 @@ public class Parser {
         return dbEntry;
     }
 
+    public static Event decodeEvent(String[] dataArr) {
+        Boolean isDone = Boolean.valueOf(dataArr[1]);
+        String at = new String(Base64.getDecoder().decode(dataArr[2]));
+        String description = Parser.decodeDescription(dataArr[3]);
+
+        Event eventTask = new Event(description, at);
+        if (isDone) {
+            eventTask.markDone();
+        }
+        return eventTask;
+    }
+
     /**
      * Encodes a deadline description into base64 for storage.
      *
@@ -55,13 +69,34 @@ public class Parser {
      */
     public static String encodeDeadline(Deadline deadlineTask) {
 
-        String encodedString = Base64.getEncoder()
-                .encodeToString(deadlineTask.getDescription().getBytes());
+        String encodedDescription = Parser.encodeDescription(deadlineTask);
+
+        String encodedTags = Parser.encodeTags(deadlineTask);
 
         String dbEntry = "deadline " + deadlineTask.getIsDone() + " "
-                + deadlineTask.getBy() + " " + encodedString;
+                + deadlineTask.getBy() + " " + encodedDescription + " " + encodedTags;
 
         return dbEntry;
+    }
+
+    public static Deadline decodeDeadline(String[] dataArr) {
+        Boolean isDone = Boolean.valueOf(dataArr[1]);
+        LocalDate by = LocalDate.parse(dataArr[2]);
+        String description = Parser.decodeDescription(dataArr[3]);
+        String[] tagsArr = Parser.sanitizeInput(new String(Base64.getDecoder().decode(dataArr[4])));
+
+        Deadline deadlineTask = new Deadline(description, by);
+        if (isDone) {
+            deadlineTask.markDone();
+        }
+
+        if (!tagsArr[0].equals("None")) {
+            for (int i = 0; i < tagsArr.length; i++) {
+                String tag = tagsArr[i];
+                deadlineTask.addTag(new Tag(tag));
+            }
+        }
+        return deadlineTask;
     }
 
     /**
@@ -72,19 +107,93 @@ public class Parser {
      */
     public static String encodeTodo(Todo todoTask) {
 
-        String encodedString = Base64.getEncoder()
-                .encodeToString(todoTask.getDescription().getBytes());
+        String encodedDescription = Parser.encodeDescription(todoTask);
 
-        String encodedTags = Base64.getEncoder()
-                .encodeToString(todoTask.getTags().getBytes());
+        String encodedTags = Parser.encodeTags(todoTask);
 
         String dbEntry = "todo " + todoTask.getIsDone()
-                + " " + encodedString + " " + encodedTags;
+                + " " + encodedDescription + " " + encodedTags;
 
         return dbEntry;
     }
 
-    public static Task addTags(Task task) {
-        return task;
+    public static Todo decodeTodo(String[] dataArr) {
+        Boolean isDone = Boolean.valueOf(dataArr[1]);
+        String description = new String(Base64.getDecoder().decode(dataArr[2]));
+        Todo todoTask = new Todo(description);
+        if (isDone) {
+            todoTask.markDone();
+        }
+
+        String[] tagsArr = Parser.sanitizeInput(new String(Base64.getDecoder().decode(dataArr[3])));
+        if (!tagsArr[0].equals("None")) {
+            for (int i = 0; i < tagsArr.length; i++) {
+                String tag = tagsArr[i];
+                todoTask.addTag(new Tag(tag));
+            }
+        }
+        return todoTask;
+    }
+
+    public static String encodeDescription(Task task) {
+        return Base64.getEncoder()
+                .encodeToString(task.getDescription().getBytes());
+    }
+
+    public static String decodeDescription(String dbString) {
+        return new String(Base64.getDecoder().decode(dbString));
+    }
+
+    public static String encodeTags(Task task) {
+        return Base64.getEncoder()
+                .encodeToString(task.getTags().getBytes());
+    }
+
+    public static void addTag(Task task, String tag) {
+        String tagContent = tag.substring(1);
+        Tag currentTag = new Tag(tagContent);
+        task.addTag(currentTag);
+    }
+
+    public static void addTags(Task task, String[] inputArr, int tagStart) {
+        if (tagStart != -1) {
+            for (int j = tagStart; j < inputArr.length; j++) {
+                Parser.addTag(task, inputArr[j]);
+            }
+        }
+    }
+
+    public static int getTagsStart(String[] inputArr) {
+        int tagStart = -1;
+        for (int i = inputArr.length - 1; i >=0; i--) {
+            String currentString = inputArr[i];
+            if (currentString.charAt(0) == '#') {
+                tagStart = i;
+            }
+        }
+        return tagStart;
+    }
+
+    public static String getDeadlineDescription(String[] inputArr, int tagStart, int commandIndex) {
+        String[] descriptionArray;
+        if (tagStart == -1) {
+            descriptionArray = Arrays.copyOfRange(inputArr, 1, commandIndex);
+        } else {
+            descriptionArray = Arrays.copyOfRange(inputArr, 1, tagStart);
+        }
+        String description = String.join(" ", descriptionArray);
+        return description;
+    }
+
+    public static int getCommandIndex(String[] inputArr) {
+        int commandIndex = -1;
+        for (int i = 0; i < inputArr.length; i++) {
+            String currentStr = inputArr[i];
+            if (currentStr.equals("/by")) {
+                commandIndex = i;
+                break;
+            }
+        }
+        return commandIndex;
     }
 }

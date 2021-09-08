@@ -9,6 +9,6 @@ public class TaskNumberException extends DukeException {
      * Constructs a new TaskNumberException.
      */
     public TaskNumberException() {
-        super("The number is not in the list / your number needs to be an Integer!");
+        super("The number is not in the list!");
     }
 }
