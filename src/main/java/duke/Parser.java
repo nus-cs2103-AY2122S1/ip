@@ -1,10 +1,5 @@
 package duke;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -32,7 +27,6 @@ public class Parser {
      * @param taskList the list storing all the tasks.
      */
     public Parser(Ui ui, TaskList taskList) {
-
         this.ui = ui;
         this.taskList = taskList;
     }
@@ -46,43 +40,77 @@ public class Parser {
      * @throws DukeException If the command is inputted wrongly.
      */
     public Command parse(String command) throws DukeException {
-        String[] splitInput = command.trim().split(" +");
-        switch (splitInput[0]) {
+        String trimmedCommand = command.trim();
+        String[] splitInput = trimmedCommand.split(" +", 2);
+        switch (splitInput[0].trim()) {
+
         //fall through
         case "bye":
-            return new ExitCommand(command);
-
+            return new ExitCommand(trimmedCommand);
         case "list":
             if (splitInput.length > 1) {
                 throw new DukeException(ui.commandError());
             }
-            return new ListCommand(command);
-
+            return new ListCommand(trimmedCommand);
         case "find":
             if (splitInput.length == 1) {
                 throw new DukeException(ui.commandError());
             }
-            return new FindCommand(command);
-
+            return new FindCommand(trimmedCommand);
         case "done":
-            return checkDone(command);
-
         case "delete":
-            return checkDelete(command);
-
+            return checkDeleteAndDone(trimmedCommand);
         case "todo":
         case "event":
         case "deadline":
-            return checkInput(command.trim(), splitInput[0].trim());
+            return checkInputTask(trimmedCommand, splitInput[0].trim());
 
         default:
             throw new DukeException(ui.commandError());
 
-
         }
     }
 
+    public boolean hasDescriptionAndDate(String descriptionAndDate, String taskType) {
+        boolean isMissingDescription;
 
+        switch (taskType) {
+        case "deadline":
+            isMissingDescription = descriptionAndDate.startsWith("/by")
+                    && descriptionAndDate.endsWith("/by");
+            break;
+        case "event":
+            isMissingDescription = descriptionAndDate.startsWith("/at")
+                    && descriptionAndDate.endsWith("/at");
+            break;
+        default:
+            isMissingDescription = false;
+            assert false;
+            break;
+        }
+        return !isMissingDescription;
+    }
+
+    public boolean hasDateCommand(String descriptionAndDate,
+            String taskType) {
+
+        boolean hasDateCommand;
+
+        switch (taskType) {
+        case "deadline":
+            hasDateCommand = descriptionAndDate.contains("/by");
+            break;
+        case "event":
+            hasDateCommand = descriptionAndDate.contains("/at");
+            break;
+        default:
+            hasDateCommand = false;
+            assert false;
+            break;
+        }
+        return hasDateCommand;
+
+    }
 
     /**
      * Checks if the input of the user for commands indicating
@@ -94,94 +122,56 @@ public class Parser {
      * @return A command representing the user command.
      * @throws DukeException If the input is in incorrect format.
      */
-    public Command checkInput(String input, String taskType) throws DukeException {
-        String[] splitInput2 = input.trim().split(" +", 2);
-        if (splitInput2.length == 2) {
-            String[] splitTask2 = splitInput2[1].split(" +");
-            String[] splitTask = taskType.equals("deadline")
-                    ? splitInput2[1].split("/by")
-                    : splitInput2[1].split("/at");
-            if (splitTask.length == 2 && !splitTask[0].isBlank()) {
-                switch (taskType) {
-                case "deadline":
-                    try {
-                        LocalDate date = LocalDate.parse(splitTask[1].trim());
-                    } catch (DateTimeParseException e) {
-                        throw new DukeException(ui.dateTimeError());
-                    }
-                    break;
+    public Command checkInputTask(String input, String taskType) throws DukeException {
+        String[] splitInputWords = input.split(" +", 2);
 
-                case "event":
-                    try {
-                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(
-                                "yyyy-MM-dd HH:mm");
-                        LocalDateTime dateTime = LocalDateTime.parse(
-                                splitTask[1].trim(), dtf);
-                    } catch (DateTimeParseException e) {
-                        throw new DukeException(ui.dateTimeError());
-                    }
-                    break;
-                default:
-                    break;
-                }
-            } else {
-                if (taskType.equals("deadline") && !splitInput2[1].contains("/by")
-                        || taskType.equals("event")
-                        && !splitInput2[1].contains("/at")) {
-                    throw new DukeException(ui.incorrectAtOrBy(taskType));
-                }
-
-            }
-            return new AddCommand(input, taskType);
-        } else {
+        if (splitInputWords.length != 2) {
             throw new DukeException(ui.noDescription(taskType));
         }
+
+        String descriptionAndDate = splitInputWords[1].trim();
+        if(taskType.equals("deadline") || taskType.equals("event")) {
+            boolean hasDescription = hasDescriptionAndDate(descriptionAndDate,
+                    taskType);
+            boolean hasDateCommand = hasDateCommand(descriptionAndDate,
+                    taskType);
+            if (!hasDateCommand) {
+                throw new DukeException(ui.incorrectAtOrBy(taskType));
+            }
+            if (!hasDescription) {
+                throw new DukeException(ui.noDescription(taskType));
+            }
+        }
+        return new AddCommand(input, taskType);
     }
 
+
     /**
-     * Checks if the delete command is inputted correctly.
+     * Checks if the command for delete and done is inputted correctly.
      * The task number must be indicated and valid.
-     * Returns the DeleteCommand if it is in correct form.
+     * Returns the respective command if it is in correct form.
      *
      * @param input The user command.
      * @return The command representing user command.
      * @throws DukeException If the command is in incorrect form.
      */
-    public Command checkDelete(String input) throws DukeException {
-        String[] splitInput = input.split(" +");
-        if (splitInput.length == 2) {
-            int taskNum = Integer.valueOf(splitInput[1]);
-            if (taskNum <= 0 || taskNum > taskList.size()) {
-                throw new DukeException(ui.deleteInvalidError());
-            } else {
-                return new DeleteCommand(input);
-            }
-        } else {
-            throw new DukeException(ui.deleteNoNumError());
-        }
-    }
-
-    /**
-     * Checks if the done command is inputted correctly,
-     * where the number indicating the task to delete is
-     * inputted and within range.
-     *
-     * @param input The user command.
-     * @return The DoneCommand representing user command.
-     * @throws DukeException If the number is not stated or
-     *                       out of range.
-     */
-    public Command checkDone(String input) throws DukeException {
+    public Command checkDeleteAndDone(String input) throws DukeException {
         String[] splitInput = input.trim().split(" +");
-        if (splitInput.length == 2) {
-            int taskNum = Integer.valueOf(splitInput[1]);
-            if (taskNum > taskList.size() || taskNum <= 0) {
-                throw new DukeException(ui.doneError());
-            } else {
-                return new DoneCommand(input, taskNum);
-            }
+        boolean isDelete = splitInput[0].equals("delete");
+        String errorCommand = isDelete ? "deleted" : " marked done";
+
+        if (splitInput.length != 2) {
+            throw new DukeException("OOPS!!! The task to be"
+                    + errorCommand + "is not indicated properly!!");
+        }
+
+        int taskNum = Integer.valueOf(splitInput[1]);
+        if (taskNum <= 0 || taskNum > taskList.size()) {
+            throw new DukeException("OOPS!!! There is no corresponding task to be "
+                    + errorCommand);
         } else {
-            throw new DukeException(ui.doneNoNumError());
+            return isDelete ? new DeleteCommand(input, taskNum)
+                            : new DoneCommand(input, taskNum);
         }
     }
 
