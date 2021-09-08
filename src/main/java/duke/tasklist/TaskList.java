@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import duke.exception.DukeException;
 import duke.exception.Messages;
+import duke.parser.Cutter;
 
 /**
  * Represents a list of task within chat bot.
@@ -41,45 +42,6 @@ public class TaskList {
             add(str);
         }
         taskFile.close();
-    }
-
-    /**
-     * Returns task title of task request.
-     * Substrings input line after start word till end of string.
-     *
-     * @param input task request line.
-     * @param start substring after target word.
-     * @return substring-ed title.
-     * @throws DukeException if start word doesn't exist.
-     */
-    private String cut(String input, String start) throws DukeException {
-        String result;
-        try {
-            result = input.substring(input.indexOf(start) + start.length() + 1);
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException(String.format(Messages.EMPTY.toString(), start));
-        }
-        return result;
-    }
-
-    /**
-     * Returns task field of task request.
-     * Substrings input line between start word and end word.
-     *
-     * @param input task request line.
-     * @param start substring after target word.
-     * @param end substring before target word.
-     * @return substring-ed task field.
-     * @throws DukeException If start or end word doesn't exist.
-     */
-    private String cut(String input, String start, String end) throws DukeException {
-        String result;
-        try {
-            result = input.substring(input.indexOf(start) + start.length() + 1, input.indexOf(end));
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException(String.format(Messages.EMPTY.toString(), start));
-        }
-        return result;
     }
 
     /**
@@ -119,17 +81,17 @@ public class TaskList {
         Task tsk;
 
         if (input.contains("todo")) {
-            String name = cut(input, "todo");
+            String name = Cutter.cut(input, "todo");
 
             tsk = new Todo(name);
         } else if (input.contains("deadline")) {
-            String name = cut(input, "deadline", "/by");
-            LocalDateTime time = dateTime(cut(input, "/by"));
+            String name = Cutter.cut(input, "deadline", "/by");
+            LocalDateTime time = dateTime(Cutter.cut(input, "/by"));
 
             tsk = new Deadline(name, time);
         } else if (input.contains("event")) {
-            String name = cut(input, "event", "/at");
-            LocalDateTime time = dateTime(cut(input, "/at"));
+            String name = Cutter.cut(input, "event", "/at");
+            LocalDateTime time = dateTime(Cutter.cut(input, "/at"));
 
             tsk = new Event(name, time);
         } else {

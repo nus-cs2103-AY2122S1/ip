@@ -33,12 +33,12 @@ public abstract class Command {
      * @throws DukeException If errors occur within list.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        int listSize = tasks.getSize();
+        List<Task> listOfTask = tasks.getTasks();
 
-        List<Task> tasksTasks = tasks.getTasks();
-
-        String[] saveList = new String[tasksTasks.size()];
-        for (int i = 0; i < tasksTasks.size(); i++) {
-            saveList[i] = tasksTasks.get(i).save();
+        String[] saveList = new String[listSize];
+        for (int i = 0; i < listSize; i++) {
+            saveList[i] = listOfTask.get(i).save();
         }
 
         storage.save(saveList);
@@ -47,6 +47,13 @@ public abstract class Command {
 
     public String getLine() {
         return line;
+    }
+
+    /**
+     * Returns index from command line.
+     */
+    public int getIndex() {
+        return Integer.parseInt(line) - 1;
     }
 
     /**

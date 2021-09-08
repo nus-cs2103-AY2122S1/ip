@@ -49,12 +49,8 @@ public class Storage {
 
             File f = new File(location);
             if (!f.exists()) {
-                if (f.getParentFile().mkdirs()) {
-                    System.out.println("Directory created");
-                }
-                if (f.createNewFile()) {
-                    System.out.println("Text file created");
-                }
+                f.getParentFile().mkdirs();
+                f.createNewFile();
             }
 
             FileWriter fw = new FileWriter(location);

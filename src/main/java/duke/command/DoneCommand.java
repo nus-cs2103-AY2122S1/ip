@@ -33,8 +33,10 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            int index = Integer.parseInt(getLine()) - 1;
-            String output = ui.showDone(tasks.done(index));
+            int index = getIndex();
+            String commandResult = tasks.done(index);
+
+            String output = ui.showDone(commandResult);
             super.execute(tasks, ui, storage);
 
             return output;

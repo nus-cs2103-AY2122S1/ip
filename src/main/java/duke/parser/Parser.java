@@ -15,18 +15,6 @@ import duke.exception.Messages;
  */
 public class Parser {
     /**
-     * Returns command body of task request.
-     * Substrings input line after start word till end of string.
-     *
-     * @param input user command line.
-     * @param start substring after target word.
-     * @return task details.
-     */
-    private static String cut(String input, String start) {
-        return input.substring(input.indexOf(start) + start.length() + 1);
-    }
-
-    /**
      * Returns a command, respective to user command/request.
      * If command is add, returns AddCommand.
      * If command is delete, returns DeleteCommand.
@@ -38,17 +26,17 @@ public class Parser {
      */
     public static Command parse(String cmd) throws DukeException {
         if (cmd.contains("add")) {
-            return new AddCommand(cut(cmd, "add"));
+            return new AddCommand(Cutter.cut(cmd, "add"));
         } else if (cmd.contains("list")) {
             return new ListCommand("");
         } else if (cmd.contains("done")) {
-            return new DoneCommand(cut(cmd, "done"));
+            return new DoneCommand(Cutter.cut(cmd, "done"));
         } else if (cmd.contains("delete")) {
-            return new DeleteCommand(cut(cmd, "delete"));
+            return new DeleteCommand(Cutter.cut(cmd, "delete"));
         } else if (cmd.contains("bye")) {
             return new ExitCommand("");
         } else if (cmd.contains("find")) {
-            return new FindCommand(cut(cmd, "find"));
+            return new FindCommand(Cutter.cut(cmd, "find"));
         } else {
             throw new DukeException(Messages.KNOWN.toString());
         }

@@ -12,27 +12,8 @@ public class Ui {
      * @return string of logo
      */
     public String showWelcome() {
-        String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
-
-        String greet = "____________________________________________________________\n"
-                     + "Hello! I'm Duke\n"
-                     + "What can I do for you?\n"
-                     + "____________________________________________________________";
-
-        return logo + greet;
-    }
-
-    /**
-     * Displays loading error message.
-     *
-     * @return file loading error message
-     */
-    public String showLoadingError() {
-        return "An error occurred when loading file.";
+        return "Hello! I'm Duke\n"
+             + "What can I do for you?\n";
     }
 
     /**
@@ -42,24 +23,6 @@ public class Ui {
      */
     public String showBye() {
         return "Bye. Hope to see you again soon!";
-    }
-
-    /**
-     * Displays error message.
-     *
-     * @return error message
-     */
-    public String showError(String message) {
-        return "☹ OOPS!!! " + message;
-    }
-
-    /**
-     * Displays a line.
-     *
-     * @return line message
-     */
-    public String showLine() {
-        return "____________________________________________________________";
     }
 
     /**
