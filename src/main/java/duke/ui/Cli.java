@@ -34,18 +34,10 @@ public class Cli extends Ui {
     public void scanUserInput() {
         while (getIsRunning()) {
             String userInput = scanner.nextLine();
-            handleUserInput(userInput);
-
-            printMessage();
+            String responseMessage = getResponse(userInput);
+            printMessage(responseMessage);
         }
         scanner.close();
-    }
-
-    /**
-     * Prints the latest message in a formatted manner.
-     */
-    public void printMessage() {
-        printMessage(getCurrentMessage());
     }
 
     /**
@@ -64,7 +56,8 @@ public class Cli extends Ui {
      */
     @Override
     public void start() {
-        printMessage(Message.getWelcomeMessage());
+        String welcomeMessage = Message.getWelcomeMessage();
+        printMessage(welcomeMessage);
         scanUserInput();
     }
 

@@ -15,6 +15,8 @@ import duke.ui.Ui;
  */
 public class Duke {
     private static final String STORAGE_LOCATION = "data/duke.txt";
+    private TaskList taskList;
+    private TaskStorage taskStorage;
     private Ui ui;
 
     /**
@@ -26,8 +28,8 @@ public class Duke {
      * @throws FileParseException When the file is not of the right format.
      */
     public Duke(String fileLocation, boolean isGui) throws IOException, FileParseException {
-        TaskStorage taskStorage = new TaskStorage(fileLocation);
-        TaskList taskList = new TaskList(taskStorage.loadTasks());
+        taskStorage = new TaskStorage(fileLocation);
+        taskList = new TaskList(taskStorage.loadTasks());
         ui = isGui ? new Gui(taskStorage, taskList) : new Cli(taskStorage, taskList);
     }
 
@@ -38,9 +40,14 @@ public class Duke {
         ui.start();
     }
 
-    public String getResponse(String input) {
-        ui.handleUserInput(input);
-        return ui.getCurrentMessage();
+    /**
+     * Gets the response from the ui of Duke.
+     *
+     * @param input The user input.
+     * @return A message from Duke.
+     */
+    public String getResponseFromUi(String input) {
+        return ui.getResponse(input);
     }
 
     /**
