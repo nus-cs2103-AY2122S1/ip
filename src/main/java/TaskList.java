@@ -38,27 +38,38 @@ public class TaskList {
     }
 
     /**
-     * Returns string representation of list items to be printed on screen.
+     * Deletes task at the given index from the task list.
      *
-     * @param str string to be displayed before list.
-     * @return string representation of list items to be printed on screen.
+     * @param taskIndex Index of task to be deleted.
+     * @return Message to be displayed upon successful deletion.
+     * @throws BlitzException when taskIndex is invalid.
      */
-    public String listToString(String str, Ui ui) throws BlitzException {
-        String result = str;
-        int ctr = 1;
-        if (taskList.size() == 0) {
-            if (str.equals(ui.getGreetingMessage())) {
-                result = result.concat("\n\n---No items added yet ---\n");
-            } else {
-                throw new BlitzException("No items currently in the list!!");
-            }
+
+    public String deleteTask(int taskIndex) throws BlitzException {
+        if (size() == 0) {
+            throw new BlitzException("Cannot perform deletion on empty list!!");
         }
-        for (Task t: taskList) {
-            result = result.concat("\n" + ctr + ". " + taskList.get(ctr - 1));
-            ctr++;
+        if (taskIndex < 0 || taskIndex >= size()) {
+            throw new BlitzException("You are attempting to delete an invalid task number!");
         }
-        System.out.println(result);
-        return result + "\n";
+        Task deletedTask = taskList.remove(taskIndex);
+        return "Noted. I've removed this task:" + "\n\t" + deletedTask
+                + "\n\nNow you have " + size() + " tasks in the list.";
+    }
+
+    /**
+     * Marks task at given index as done in the task list.
+     *
+     * @param taskIndex index of task to be marked as done.
+     * @throws BlitzException if taskIndex is invalid.
+     */
+    public String markTaskAsDone(int taskIndex) throws BlitzException {
+        if (taskIndex < 0 || taskIndex >= size()) {
+            throw new BlitzException("You are attempting to mark an invalid task number!");
+        }
+        taskList.get(taskIndex).markAsDone();
+        return "Nice! I've marked this task as done:\n" + "\t" + taskList.get(taskIndex);
+
     }
     /**
      * Finds tasks which contain the given keyword.
@@ -82,32 +93,26 @@ public class TaskList {
         return new TaskList(matchList);
     }
     /**
-     * Marks task at given index as done in the task list.
+     * Returns string representation of list items to be printed on screen.
      *
-     * @param taskIndex index of task to be marked as done.
-     * @throws BlitzException if taskIndex is invalid.
+     * @param str string to be displayed before list.
+     * @return string representation of list items to be printed on screen.
      */
-    public String markTaskAsDone(int taskIndex) throws BlitzException {
-        if (taskIndex < 0 || taskIndex >= size()) {
-            throw new BlitzException("You are attempting to mark an invalid task number!");
+    public String listToString(String str, Ui ui) throws BlitzException {
+        String result = str;
+        int ctr = 1;
+        if (taskList.size() == 0) {
+            if (str.equals(ui.getGreetingMessage())) {
+                result = result.concat("\n\n---No items added yet ---\n");
+            } else {
+                throw new BlitzException("No items currently in the list!!");
+            }
         }
-        taskList.get(taskIndex).markAsDone();
-        return "Nice! I've marked this task as done:\n" + "\t" + taskList.get(taskIndex);
-    }
-
-    /**
-     * Deletes task at the given index from the task list.
-     *
-     * @param taskIndex Index of task to be deleted.
-     * @return Message to be displayed upon successful deletion.
-     * @throws BlitzException when taskIndex is invalid.
-     */
-    public String deleteTask(int taskIndex) throws BlitzException {
-        if (taskIndex < 0 || taskIndex >= size()) {
-            throw new BlitzException("You are attempting to delete an invalid task number!");
+        for (Task t: taskList) {
+            result = result.concat("\n" + ctr + ". " + taskList.get(ctr - 1));
+            ctr++;
         }
-        Task deletedTask = taskList.remove(taskIndex);
-        return "Noted. I've removed this task:" + "\n\t" + deletedTask
-                + "\n\nNow you have " + size() + " tasks in the list.";
+        System.out.println(result);
+        return result + "\n";
     }
 }

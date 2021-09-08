@@ -44,7 +44,9 @@ public class MainWindow extends AnchorPane {
         } catch (BlitzException ex) {
             listOfTasks = ex.toString();
         }
+
         assert(listOfTasks.equals(new BlitzException("\"No items currently in the list!!\"")));
+
         String openingMessage = listOfTasks + "\nSo what can I do for you today?";
         dialogContainer.getChildren().addAll(
                 DialogBox.getBlitzDialog(openingMessage, blitzImage)

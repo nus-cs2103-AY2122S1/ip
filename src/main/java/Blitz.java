@@ -16,7 +16,7 @@ public class Blitz {
         try {
             tasks = new TaskList(storage.loadFileContents());
         } catch (BlitzException e) {
-            ui.showLoadingError();
+            ui.getLoadErrorMessage();
             tasks = new TaskList();
         }
     }
