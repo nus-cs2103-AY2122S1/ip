@@ -1,26 +1,30 @@
 package duke.storage;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.data.exceptions.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
+import duke.ui.Message;
 
 /**
  * Stores the tasks and data provided by the user, so that when the program re-opens data can be restored.
  */
 public class Storage {
-    private String storagePath;
     private File dataFile;
 
     private TaskList taskList = new TaskList();
 
     public Storage(String storagePath) {
-        this.storagePath = storagePath;
         dataFile = new File(storagePath);
     }
 
@@ -30,7 +34,7 @@ public class Storage {
      * @return a list of stored tasks
      * @throws IOException
      */
-    public List<Task> load() throws IOException {
+    public List<Task> load() throws IOException, DukeException {
         return txtToList(dataFile);
     }
 
@@ -55,10 +59,10 @@ public class Storage {
      * @return a list of stored tasks
      * @throws IOException
      */
-    public List<Task> txtToList(File dataFile) throws IOException {
+    public List<Task> txtToList(File dataFile) throws IOException, DukeException {
         assert dataFile.exists() : "Data file does not exist";
         List<Task> taskList = new ArrayList<>();
-        String currentTaskString = "";
+        String currentTaskString;
         BufferedReader reader = new BufferedReader(new FileReader(dataFile));
 
         do {
@@ -73,7 +77,7 @@ public class Storage {
 
     }
 
-    private Task getTaskFromString(String taskString) {
+    private Task getTaskFromString(String taskString) throws DukeException {
         String taskType = getTaskTypeFromString(taskString);
         String taskName = getTaskNameFromString(taskString);
         boolean taskStatus = getTaskStatusFromString(taskString);
@@ -88,7 +92,7 @@ public class Storage {
             String eventTime = getDateAndTimeFromString(taskString);
             return new Event(taskName, eventTime, taskStatus);
         default:
-            return new Task(); //todo error
+            throw new DukeException(Message.MESSAGE_TXT_TO_LIST_CONVERSION_ERROR);
         }
     }
 
@@ -98,7 +102,7 @@ public class Storage {
     }
 
     private String getTaskNameFromString(String taskString) {
-        int startingIndex = taskString.indexOf("] ");  //todo change hard code-ish?
+        int startingIndex = taskString.indexOf("] ");
         int endingIndex = taskString.indexOf("(");
         boolean isStartingIndexValid = startingIndex > 0;
         assert isStartingIndexValid : "Invalid task format in txt";
@@ -118,8 +122,8 @@ public class Storage {
         return taskString.substring(startingIndex + 2, endingIndex);
     }
 
-    private String getTaskTypeFromString(String taskString) {
-        Character taskType = taskString.charAt(1);
+    private String getTaskTypeFromString(String taskString) throws DukeException {
+        char taskType = taskString.charAt(1);
         switch (taskType) {
         case 'T':
             return "todo";
@@ -129,7 +133,7 @@ public class Storage {
             return "event";
         default:
             assert false : "Invalid task type from txt";
-            throw new AssertionError(taskType);
+            throw new DukeException(Message.MESSAGE_TXT_TO_LIST_CONVERSION_ERROR);
         }
 
 

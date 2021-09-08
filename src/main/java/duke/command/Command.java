@@ -2,14 +2,13 @@ package duke.command;
 
 import duke.data.exceptions.DukeException;
 import duke.storage.Storage;
-import duke.ui.Ui;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents a command by the user.
  */
 public abstract class Command {
-    private CommandType commandType;
     public enum CommandType {
         LIST,
         TODO,

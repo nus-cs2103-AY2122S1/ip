@@ -7,7 +7,7 @@ public class EmptyCommandInformationException extends DukeException {
     /**
      * Initialises a EmptyCommandInformationException object.
      *
-     * @param errorMessage
+     * @param errorMessage contains the error message when an empty command information exception occurs
      */
     public EmptyCommandInformationException(String errorMessage) {
         super(errorMessage);

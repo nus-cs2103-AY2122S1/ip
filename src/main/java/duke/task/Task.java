@@ -6,14 +6,17 @@ package duke.task;
 public class Task {
     private String taskName;
     private boolean isDone;
-    private boolean isEmpty = true;
 
     public Task() {}
 
+    /**
+     * Initialises a Task object.
+     *
+     * @param taskName the task name
+     */
     public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;
-        this.isEmpty = false;
     }
 
     /**
@@ -22,8 +25,6 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
-
-    public boolean isEmpty() { return isEmpty; }
 
     public String getTaskName() {
         return taskName;
@@ -48,7 +49,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        String result = this.getCheckBox() + " " + this.taskName;
-        return result;
+        return this.getCheckBox() + " " + this.taskName;
     }
 }

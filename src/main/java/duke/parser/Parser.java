@@ -1,5 +1,14 @@
 package duke.parser;
 
+import static duke.ui.Tag.DEADLINE;
+import static duke.ui.Tag.DELETE;
+import static duke.ui.Tag.DONE;
+import static duke.ui.Tag.EVENT;
+import static duke.ui.Tag.EXIT;
+import static duke.ui.Tag.FIND;
+import static duke.ui.Tag.LIST;
+import static duke.ui.Tag.TODO;
+
 import duke.command.AddTaskCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -20,15 +29,6 @@ import duke.ui.Tag;
  * Represents a parser that makes sense of what the user input is.
  */
 public class Parser {
-    public static final String TODO = "todo";
-    public static final String DEADLINE = "deadline";
-    public static final String EVENT = "event";
-    public static final String EXIT = "exit";
-    public static final String LIST = "list";
-    public static final String DONE = "done";
-    public static final String DELETE = "delete";
-    public static final String FIND = "find";
-
     /**
      * Initialises a Parser object.
      */
@@ -39,7 +39,7 @@ public class Parser {
      *
      * @param command user input
      * @return a Command object
-     * @throws DukeException
+     * @throws DukeException when an error occurs while parsing the command
      */
     public Command parse(String command) throws DukeException {
         Command.CommandType commandType = getCommandType(command);
@@ -90,8 +90,8 @@ public class Parser {
                 throw new EmptyTaskNameException(Message.MESSAGE_EMPTY_DEADLINE_NAME);
             }
 
-            String[] nameAndDateArray = splitCommandArray[1].split(Tag.BY, 2);
-            if (nameAndDateArray.length == 1){
+            String[] nameAndDateArray = splitCommandArray[1].split(Tag.DATE_AND_TIME, 2);
+            if (nameAndDateArray.length == 1) {
                 throw new InvalidDateAndTimeException(Message.MESSAGE_MISSING_DEADLINE);
             }
             return nameAndDateArray[0].trim();
@@ -100,8 +100,8 @@ public class Parser {
                 throw new EmptyTaskNameException(Message.MESSAGE_EMPTY_EVENT_NAME);
             }
 
-            String[] nameAndEventTimeArray = splitCommandArray[1].split(Tag.AT, 2);
-            if (nameAndEventTimeArray.length == 1){
+            String[] nameAndEventTimeArray = splitCommandArray[1].split(Tag.DATE_AND_TIME, 2);
+            if (nameAndEventTimeArray.length == 1) {
                 throw new InvalidDateAndTimeException(Message.MESSAGE_MISSING_EVENT_TIME);
             }
             return nameAndEventTimeArray[0].trim();
@@ -110,34 +110,25 @@ public class Parser {
         }
     }
 
-    private String getDateAndTime(String message, Command.CommandType taskType) throws InvalidDateAndTimeException {
-        String[] splitCommandArray;
+    private String getDateAndTime(String message, Command.CommandType taskType) throws InvalidDateAndTimeException,
+            InvalidInputException {
+        String[] splitCommandArray = message.split(Tag.DATE_AND_TIME, 2);
 
-        switch (taskType) {
-        case DEADLINE:
-            splitCommandArray = message.split(Tag.BY, 2);
-
-            //Checks whether "by/" is present in the command input
-            if (splitCommandArray.length == 1) {
+        if (splitCommandArray.length == 1) {
+            switch (taskType) {
+            case DEADLINE:
                 throw new InvalidDateAndTimeException(Message.MESSAGE_MISSING_DEADLINE);
-            }
-
-            DateAndTime deadline = new DateAndTime(splitCommandArray[1].trim());
-            return deadline.getReformattedDateAndTime();
-        case EVENT:
-            splitCommandArray = message.split(Tag.AT, 2);
-
-            //Checks whether "at/" is present in the command input
-            if (splitCommandArray.length == 1) {
+            case EVENT:
                 throw new InvalidDateAndTimeException(Message.MESSAGE_MISSING_EVENT_TIME);
+            default:
+                assert false : "Invalid task type for :getDateAndTime";
+                throw new AssertionError(taskType);
             }
 
-            DateAndTime eventTime = new DateAndTime(splitCommandArray[1].trim());
-            return eventTime.getReformattedDateAndTime();
-        default:
-            assert false : "Invalid task type for :getDateAndTime";
-            throw new AssertionError(taskType);
         }
+
+        DateAndTime dateAndTime = new DateAndTime(splitCommandArray[1].trim());
+        return dateAndTime.getReformattedDateAndTime();
     }
 
     private static int getTaskNumber (String message) throws InvalidInputException {
@@ -165,7 +156,8 @@ public class Parser {
         return message.substring(spaceIndex + 1);
     }
 
-    private Command.CommandType getCommandType(String command) throws InvalidInputException, EmptyCommandInformationException {
+    private Command.CommandType getCommandType(String command) throws InvalidInputException,
+            EmptyCommandInformationException {
         String commandTypeString = getCommandTypeString(command);
         assert commandTypeString.length() > 0 : "CommandType string length should be more than 0";
 
@@ -194,15 +186,12 @@ public class Parser {
 
     private String getCommandTypeString(String command) throws InvalidInputException, EmptyCommandInformationException {
         int spaceIndex = command.indexOf(" ");
-        boolean isCommandList = command.equals(LIST);
-        boolean isCommandExit = command.equals(EXIT);
 
-        //Checks whether command type is LIST or EXIT
-        if (isCommandList) {
+        if (command.equals(LIST)) {
             return LIST;
         }
 
-        if (isCommandExit) {
+        if (command.equals(EXIT)) {
             return EXIT;
         }
 
@@ -213,6 +202,7 @@ public class Parser {
         return command.substring(0, spaceIndex);
     }
 
+    /** Throws the corresponding error when only the command type is keyed in without any information */
     private void checkOnlyCommandTypeStringKeyed(String command) throws EmptyCommandInformationException,
             InvalidInputException {
         assert command.length() > 0 : "command string length should be more than 0";

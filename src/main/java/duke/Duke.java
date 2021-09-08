@@ -10,20 +10,16 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-//todo command to print deadlines/events occuring on specific date
-//todo bug of task name/date/time being deleted by one when the program reopens and list keyed in
-
 /**
  * The Duke programme implements a bot that help users to record the tasks they have.
  */
 public class Duke {
+    private static final String STORAGE_DIRECTORY_PATH = "data/duke.txt";
 
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
-    private static final String STORAGE_DIRECTORY = "data/";
-    private String storageFile;
     private File dataFile;
 
     public Duke() {} //needed for Application.launch() to work
@@ -83,7 +79,7 @@ public class Duke {
      * @return a response string from Duke
      */
     public String getResponse(String input) {
-        String response = "";
+        String response;
         Parser p = new Parser();
         try {
             Command c = p.parse(input);
