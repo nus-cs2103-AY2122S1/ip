@@ -31,6 +31,25 @@ public class AddCommand extends Command {
     private final String taskDescription;
     private final LocalDate taskDate;
 
+    /**
+     * Constructs an AddCommand instance that handles the logic of task-addition.
+     *
+     * @param taskType The type of the to-be-added task.
+     * @param taskFullDetail The description of the to-be-added task.
+     * @throws IncompleteDescriptionException The exception for handling command with incomplete description.
+     * @throws InvalidDateFormatException The exception for handling command with invalid date format.
+     */
+    public AddCommand(String taskType, String taskTag, String taskFullDetail) throws IncompleteDescriptionException,
+            InvalidDateFormatException, MissingArgumentException {
+        this.taskType = getTaskType(taskType);
+        this.taskTag = taskTag;
+        this.hasTaskDate = checksHasTaskDate(taskType);
+
+        String[] taskDetails = splitDetail(taskFullDetail);
+        this.taskDescription = getTaskDescription(taskDetails);
+        this.taskDate = getTaskDate(taskDetails);
+    }
+
     /** The following methods are the method used in constructing an AddCommand instance. */
     // Returns the enumeration of task type string.
     private TaskType getTaskType(String taskTypeString) {
@@ -72,25 +91,6 @@ public class AddCommand extends Command {
         }
 
         return date;
-    }
-
-    /**
-     * Constructs an AddCommand instance that handles the logic of task-addition.
-     *
-     * @param taskType The type of the to-be-added task.
-     * @param taskFullDetail The description of the to-be-added task.
-     * @throws IncompleteDescriptionException The exception for handling command with incomplete description.
-     * @throws InvalidDateFormatException The exception for handling command with invalid date format.
-     */
-    public AddCommand(String taskType, String taskTag, String taskFullDetail) throws IncompleteDescriptionException,
-            InvalidDateFormatException, MissingArgumentException {
-        this.taskType = getTaskType(taskType);
-        this.taskTag = taskTag;
-        this.hasTaskDate = checksHasTaskDate(taskType);
-
-        String[] taskDetails = splitDetail(taskFullDetail);
-        this.taskDescription = getTaskDescription(taskDetails);
-        this.taskDate = getTaskDate(taskDetails);
     }
 
     /** The following methods are getter helper function. */
