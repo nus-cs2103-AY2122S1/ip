@@ -11,6 +11,7 @@ public class Parser {
      * @return The string representing the command interpreted.
      */
     public String interpretCommand(String input) {
+        assert input != null : "User input cannot be null!";
         if (input.equalsIgnoreCase("list")) {
             return "list";
         } else if (input.length() >= 6 && input.substring(0, 4).toLowerCase().contains("done")) {

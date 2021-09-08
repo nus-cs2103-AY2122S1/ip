@@ -56,6 +56,8 @@ public class Storage {
      * @param tasks The array representing the task list.
      */
     public static void addTaskToList(String lineToAdd, ArrayList<Task> tasks) {
+        assert lineToAdd.length() > 0 : "Line to add cannot be empty!";
+
         String taskDetails = lineToAdd.substring(7);
 
         if (lineToAdd.charAt(1) == 'T') {
@@ -106,7 +108,6 @@ public class Storage {
             }
         }
     }
-
 
     /**
      * Saves the last element in the user's list to the .txt file.

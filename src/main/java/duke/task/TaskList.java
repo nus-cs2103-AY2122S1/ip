@@ -37,6 +37,9 @@ public class TaskList {
     public String performCommand(String command, String input)
             throws InvalidCommandException, InvalidTaskException, MissingTaskException, MissingTimeException {
 
+        assert command.length() > 0 : "Command cannot be empty!";
+        assert input.length() > 0 : "Input cannot be empty!";
+
         switch (command) {
         case "list":
             return printList();
@@ -233,6 +236,8 @@ public class TaskList {
             taskList.add(new Event(taskName, date));
         }
 
+        assert taskList.size() > 0 : "Check if item was added properly to task list!";
+
         return printTaskAdded(taskName);
     }
 
@@ -290,11 +295,13 @@ public class TaskList {
             }
         }
 
+        assert output.length() > 0 : "Output should contain text!";
+
         return output.toString();
     }
 
     /**
-     * Returns the last task added to the task list.
+     * Returns the tasks added to the task list.
      *
      * @return The array containing the tasks.
      */
