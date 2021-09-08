@@ -3,7 +3,7 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.lang.NumberFormatException;
+// import java.lang.NumberFormatException;
 
 public class Deadline extends Task {
     /** The date the task is due, in LocalDate format. */
@@ -64,7 +64,9 @@ public class Deadline extends Task {
         int startIndex = hasTime ? 2 : hasDate ? 1 : 0;
         this.dueStr = "";
         for (int i = startIndex; i < dateTimeArr.length; i++) {
-            if (i != 0) this.dueStr += " ";
+            if (i != 0) {
+                this.dueStr += " ";
+            }
             this.dueStr += dateTimeArr[i];
         }
         if (hasTime) {

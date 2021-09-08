@@ -7,8 +7,8 @@ public class Ui {
      * @param lines A variable number of lines to be printed as a repsonse to the user.
      */
     public static void printResponse(String ... lines) {
-        String LINE = "    --------------------------------------------------";
-        String INDENTATION = "      ";
+        final String LINE = "    --------------------------------------------------";
+        final String INDENTATION = "      ";
         System.out.println(LINE);
         for (String line : lines) {
             System.out.println(INDENTATION + line);
