@@ -41,6 +41,19 @@ public class Task implements Comparable<Task> {
 
     /**
      * Constructor.
+     * Instantiates a Task object with given task content and priority.
+     *
+     * @param content
+     */
+    public Task(String content, Priority priority) {
+        this.content = content;
+        this.isDone = false;
+        this.priority = priority;
+    }
+
+
+    /**
+     * Constructor.
      * Instantiates a Task object with given task content and
      * isDone status with by default medium priority.
      *

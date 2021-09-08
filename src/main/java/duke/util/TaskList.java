@@ -8,21 +8,22 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 /**
  * The class that stores and modifies Tasks of the software.
  */
 public class TaskList {
-    private List<Task> tasks;
+    private TreeSet<Task> tasks;
 
     /**
      * Constructor of TaskList.
      * It instantiates the TaskList object with initial Tasks passed.
      *
-     * @param tasks Initial tasks to be stored in TaskList.
+     * @param taskList Initial tasks to be stored in TaskList.
      */
-    public TaskList(List<Task> tasks) {
-        this.tasks = tasks;
+    public TaskList(List<Task> taskList) {
+        this.tasks = new TreeSet<>(taskList);
     }
 
 
@@ -31,7 +32,7 @@ public class TaskList {
      * It instantiates an empty TaskList object.
      */
     public TaskList() {
-        this(new ArrayList<>());
+        tasks = new TreeSet<>();
     }
 
 
@@ -64,8 +65,11 @@ public class TaskList {
      */
     public String deleteTask(int idx) throws DukeException {
         try {
+            Task[] taskArr = tasks.toArray(new Task[0]);
+            Task curr = taskArr[idx - 1];
+            tasks.remove(curr);
+
             StringBuilder msg = new StringBuilder();
-            Task curr = tasks.remove(idx - 1);
             msg.append("Noted. I've removed this task:\n");
             msg.append("\t" + curr + "\n");
             msg.append("Now you have " + tasks.size() + " tasks in the list.\n");
@@ -86,9 +90,11 @@ public class TaskList {
      */
     public String markTaskDone(int idx) throws DukeException {
         try {
-            StringBuilder msg = new StringBuilder();
-            Task curr = tasks.get(idx - 1);
+            Task[] taskArr = tasks.toArray(new Task[0]);
+            Task curr = taskArr[idx - 1];
             curr.markDone();
+
+            StringBuilder msg = new StringBuilder();
             msg.append("Nice! I've marked this task as done:\n");
             msg.append("\t" + curr + "\n");
 
@@ -106,14 +112,14 @@ public class TaskList {
      * @return A TaskList containing all tasks with keyword.
      */
     public TaskList find(String keyword) {
-        List<Task> matched = new ArrayList<>();
+        List<Task> matchedTasks = new ArrayList<>();
         for (Task task : tasks) {
             if (task.containsKeyword(keyword)) {
-                matched.add(task);
+                matchedTasks.add(task);
             }
         }
 
-        return new TaskList(matched);
+        return new TaskList(matchedTasks);
     }
 
 
@@ -128,11 +134,13 @@ public class TaskList {
      * @return String representation of the TaskList.
      */
     public String toString() {
+        Task[] taskArr = tasks.toArray(new Task[0]);
+
         StringBuilder str = new StringBuilder();
         for (int i = 1; i <= tasks.size() - 1; i++) {
-            str.append(String.format("%d.%s\n", i, tasks.get(i - 1)));
+            str.append(String.format("%d.%s\n", i, taskArr[i - 1]));
         }
-        str.append(String.format("%d.%s", tasks.size(), tasks.get(tasks.size() - 1)));
+        str.append(String.format("%d.%s", tasks.size(), taskArr[taskArr.length - 1]));
         return str.toString();
     }
 
@@ -162,7 +170,7 @@ public class TaskList {
     public void loadFromFile(Storage storage) throws FileNotFoundException, DukeException {
         assert storage != null;
 
-        List<Task> decodedTasks = Parser.decode(storage.load());
+        TreeSet<Task> decodedTasks = Parser.decode(storage.load());
         tasks = decodedTasks;
     }
 }

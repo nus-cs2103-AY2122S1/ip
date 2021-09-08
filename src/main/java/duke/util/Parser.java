@@ -5,7 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.TreeSet;
 
+import duke.Duke;
 import duke.command.*;
 import duke.exception.DukeException;
 import duke.task.Deadline;
@@ -23,7 +25,7 @@ public class Parser {
     private static String DEFAULT_DELIMITER = " ";
     private static String DEADLINE_DATETIME_FLAG = "/by";
     private static String EVENT_DATETIME_FLAG = "/at";
-
+    private static String PRIORITY_FLAG = "-p";
 
     /**
      * The method takes a user input and parse out all necessary parts needed
@@ -50,6 +52,11 @@ public class Parser {
         case "list":
             return new CommandList();
         case "todo": {
+            if (hasPriorityFlag(input)) {
+                Priority priority = parsePriority(splitInput);
+                return new CommandAdd(new Task(parseDescription(splitInput), priority));
+            }
+
             return new CommandAdd(new Task(parseDescription(splitInput)));
         }
         case "deadline": {
@@ -186,13 +193,41 @@ public class Parser {
     }
 
 
+    private static boolean hasPriorityFlag(String input) {
+        return input.contains(PRIORITY_FLAG);
+    }
+
+
+    private static Priority parsePriority(String[] splitInput) throws DukeException {
+        int idx = 0;
+        for (String str : splitInput) {
+            idx++;
+            if (str.equals(PRIORITY_FLAG)) {
+                break;
+            }
+        }
+
+        String priorityStr = splitInput[idx].toUpperCase();
+
+        switch(priorityStr) {
+        case "H":
+            return Priority.HIGH;
+        case "M":
+            return Priority.MEDIUM;
+        case "L":
+            return Priority.LOW;
+        default:
+            throw new DukeException("The specified priority is invalid!");
+        }
+    }
+
     /**
      * Encodes the taskList to formatted string to be stored.
      *
      * @param tasks The taskList to be converted to formatted string.
      * @return      Formatted string of the taskList.
      */
-    public static String encode(List<Task> tasks) {
+    public static String encode(TreeSet<Task> tasks) {
         StringBuilder sb = new StringBuilder();
         for (Task task : tasks) {
             sb.append(task.encode() + "\n");
@@ -207,21 +242,24 @@ public class Parser {
      * @param lines String array containing lines of strings to be decoded.
      * @return      A taskList that contains decoded tasks.
      */
-    public static List<Task> decode(String[] lines) {
-        List<Task> tasks = new ArrayList<>();
+    public static TreeSet<Task> decode(String[] lines) {
+        TreeSet<Task> tasks = new TreeSet<>();
         for (String line : lines) {
             String type = line.substring(0, 1);
             switch(type) {
             case "T": {
-                decodeTodo(tasks, line);
+                Task todo = decodeTodo(line);
+                tasks.add(todo);
                 break;
             }
             case "D": {
-                decodeDeadline(tasks, line);
+                Deadline ddl = decodeDeadline(line);
+                tasks.add(ddl);
                 break;
             }
             case "E": {
-                decodeEvent(tasks, line);
+                Event e = decodeEvent(line);
+                tasks.add(e);
                 break;
             }
             default:
@@ -233,7 +271,7 @@ public class Parser {
     }
 
 
-    private static void decodeEvent(List<Task> tasks, String line) {
+    private static Event decodeEvent(String line) {
         String[] strArr = line.split(DEFAULT_DELIMITER);
         boolean isDone = Boolean.parseBoolean(strArr[1]);
 
@@ -262,11 +300,11 @@ public class Parser {
                 .parse(String.format("%s %s", dateTimes[2], dateTimes[3]),
                         DateTimeFormatter.ofPattern(EVENT_DATETIME_FORMAT));
 
-        tasks.add(new Event(description, isDone, startDateTime, endDateTime));
+        return new Event(description, isDone, startDateTime, endDateTime);
     }
 
 
-    private static void decodeDeadline(List<Task> tasks, String line) {
+    private static Deadline decodeDeadline(String line) {
         String[] strArr = line.split(DEFAULT_DELIMITER);
         boolean isDone = Boolean.parseBoolean(strArr[1]);
 
@@ -290,11 +328,11 @@ public class Parser {
                 .parse(dateTimeSj.toString(),
                         DateTimeFormatter.ofPattern(DEADLINE_DATETIME_FORMAT));
 
-        tasks.add(new Deadline(description, isDone, dateTime));
+        return new Deadline(description, isDone, dateTime);
     }
 
 
-    private static void decodeTodo(List<Task> tasks, String line) {
+    private static Task decodeTodo(String line) {
         String[] strArr = line.split(DEFAULT_DELIMITER);
         boolean isDone = Boolean.parseBoolean(strArr[1]);
 
@@ -304,7 +342,7 @@ public class Parser {
         }
         String description = sj.toString();
 
-        tasks.add(new Task(description, isDone));
+        return new Task(description, isDone);
     }
 
 
