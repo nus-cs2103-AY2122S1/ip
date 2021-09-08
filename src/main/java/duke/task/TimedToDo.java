@@ -9,7 +9,7 @@ import duke.util.DukeException;
 public class TimedToDo extends Task {
     public static final char SYMBOL = 'F';
 
-    private static final String TIMED_TODO_DELIMITER = "/for";
+    public static final String TIMED_TODO_DELIMITER = "/for";
 
     // Messages
     private static final String INVALID_TIMED_TODO_MESSAGE = "Invalid use of timed todo command."
@@ -33,6 +33,7 @@ public class TimedToDo extends Task {
 
     /**
      * Factory method for creating a timed todo object.
+     *
      * @param input The remaining input after the initial 'todo' string
      * @param isDone Whether the Timed Todo is finished
      * @return A timed todo object
@@ -71,8 +72,8 @@ public class TimedToDo extends Task {
     }
 
     /**
-     * The format of the Event in taskList.txt
-     * @return The String format of the Event in taskList.txt
+     * The format of the Timed Todo in taskList.txt
+     * @return The String format of the Timed Todo in taskList.txt
      */
     public String getSaveFormat() {
         return String.format("%c | %d | %s | %s", SYMBOL, super.getDoneInt(), this.getText(),
@@ -80,8 +81,8 @@ public class TimedToDo extends Task {
     }
 
     /**
-     * The format of the event in console.
-     * @return The String format of the event in console.
+     * The format of the Timed Todo in console.
+     * @return The String format of the Timed Todo in console.
      */
     @Override
     public String toString() {

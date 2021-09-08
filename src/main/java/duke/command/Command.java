@@ -1,5 +1,7 @@
 package duke.command;
 
+import static duke.task.TimedToDo.TIMED_TODO_DELIMITER;
+
 import duke.task.TaskList;
 import duke.util.DukeException;
 import duke.util.Storage;
@@ -22,7 +24,7 @@ public abstract class Command {
         switch (commandString) {
         case TodoCommand.COMMAND:
             // Overload the todo command
-            if (remainingText.contains("/for")) {
+            if (remainingText.contains(TIMED_TODO_DELIMITER)) {
                 return new TimedTodoCommand(remainingText);
             } else {
                 return new TodoCommand(remainingText);

@@ -1,5 +1,7 @@
 package duke.task;
 
+import static duke.task.TimedToDo.TIMED_TODO_DELIMITER;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,6 +96,10 @@ public class TaskList {
      * @throws DukeException An exception thrown according to the message given
      */
     public void addSavedTask(String input) throws ArrayIndexOutOfBoundsException, DukeException {
+        if (input == null || input.equals("")) {
+            return;
+        }
+
         String[] inputArr = input.split("\\|");
         String symbol = inputArr[0];
         String remainingText = Parser.getRemainingText(symbol, input);
@@ -101,6 +107,10 @@ public class TaskList {
         case ToDo.SYMBOL:
             ToDo myTodo = ToDo.createNewToDoFromSave(remainingText);
             this.addTask(myTodo);
+            break;
+        case TimedToDo.SYMBOL:
+            TimedToDo myTimedToDo = TimedToDo.createNewTimedTodoFromSave(remainingText);
+            this.addTask(myTimedToDo);
             break;
         case Deadline.SYMBOL:
             Deadline myDeadline = Deadline.createNewDeadlineFromSave(remainingText);
