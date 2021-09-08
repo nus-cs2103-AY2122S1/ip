@@ -31,6 +31,7 @@ public class Lebron {
         EVENT("event"),
         DELETE("delete"),
         FIND("find"),
+        UNDO("undo"),
         BYE("bye"),
         OTHER(" ");
 
@@ -70,6 +71,8 @@ public class Lebron {
     /**
      * Runs the bot.
      *
+     * @param text the input text
+     * @return the reply received from the bot given an input
      */
     public String run(String text) {
         Parser parser = new Parser();
@@ -165,6 +168,11 @@ public class Lebron {
                 assert splitWords.length == 2 : "There should be 2 items to specify a string to search for.";
                 String keyword = splitWords[1];
                 reply = ui.replyFind(taskList, keyword);
+                break;
+            case UNDO:
+                taskList.undo();
+                reply = ui.replyUndo();
+                storage.saveToFile(taskList.getLst());
                 break;
             case OTHER:
                 throw new LebronException(" OOPS! I'm sorry, but I don't know what that means.\n");

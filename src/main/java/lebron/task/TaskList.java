@@ -32,6 +32,7 @@ public class TaskList {
      * This method handles the add event.
      *
      * @param task the Task that the user wants to add
+     * @return the reply from the bot
      */
     public String add(Task task) {
         tasks.add(task);
@@ -43,6 +44,7 @@ public class TaskList {
      * This method handles the markDone event when the user says done, marking the Task as done.
      *
      * @param pos the position of the Task in the ArrayList lst
+     * @return the reply from the bot
      */
     public String markDone(int pos) {
         Task task = tasks.get(pos);
@@ -55,6 +57,7 @@ public class TaskList {
      * This method handles the delete response.
      *
      * @param pos the position of the task in the list to delete
+     * @return the reply from the bot
      */
     public String delete(int pos) throws LebronException {
         if (pos > tasks.size() - 1) {
@@ -65,6 +68,18 @@ public class TaskList {
         return reply;
     }
 
+    /**
+     * Handles the undo event.
+     *
+     * @throws LebronException if the list is empty.
+     */
+    public void undo() throws LebronException {
+       if (this.tasks.isEmpty()) {
+           throw new LebronException("Oops! Your list is already empty.");
+       }
+       tasks.remove(tasks.size() - 1);
+    }
+
     public ArrayList<Task> getLst() {
         return this.tasks;
     }
@@ -73,6 +88,12 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    /**
+     * Retrieve the task from the list given an index.
+     *
+     * @param position the index
+     * @return the task
+     */
     public Task getItem(int position) {
         return this.tasks.get(position);
     }
