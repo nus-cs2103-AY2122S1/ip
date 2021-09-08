@@ -53,6 +53,7 @@ public class Storage {
      * @param taskString The task in string representation.
      */
     public void saveTask(String taskString) {
+        assert !taskString.equals("") : "Cannot save empty string";
         try {
             FileWriter writer = new FileWriter(filepath.toString(), true);
             writer.write(taskString + "\n");
@@ -85,6 +86,7 @@ public class Storage {
      * @param filename The name of the file to be created.
      */
     public void createFile(String filename) {
+        assert !filename.equals("");
         try {
             File newFile = new File(filename);
             if (newFile.createNewFile()) {
