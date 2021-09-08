@@ -43,8 +43,10 @@ public class Parser {
         String encodedAt = Base64.getEncoder()
                 .encodeToString(eventTask.getAt().getBytes());
 
+        String encodedTags = Parser.encodeTags(eventTask);
+
         String dbEntry = "event " + eventTask.getIsDone() + " "
-                + encodedAt + " " + encodedDescription;
+                + encodedAt + " " + encodedDescription + " " + encodedTags;
 
         return dbEntry;
     }
@@ -53,10 +55,18 @@ public class Parser {
         Boolean isDone = Boolean.valueOf(dataArr[1]);
         String at = new String(Base64.getDecoder().decode(dataArr[2]));
         String description = Parser.decodeDescription(dataArr[3]);
+        String[] tagsArr = Parser.sanitizeInput(new String(Base64.getDecoder().decode(dataArr[4])));
 
         Event eventTask = new Event(description, at);
         if (isDone) {
             eventTask.markDone();
+        }
+
+        if (!tagsArr[0].equals("None")) {
+            for (int i = 0; i < tagsArr.length; i++) {
+                String tag = tagsArr[i];
+                eventTask.addTag(new Tag(tag));
+            }
         }
         return eventTask;
     }
@@ -174,22 +184,17 @@ public class Parser {
         return tagStart;
     }
 
-    public static String getDeadlineDescription(String[] inputArr, int tagStart, int commandIndex) {
-        String[] descriptionArray;
-        if (tagStart == -1) {
-            descriptionArray = Arrays.copyOfRange(inputArr, 1, commandIndex);
-        } else {
-            descriptionArray = Arrays.copyOfRange(inputArr, 1, tagStart);
-        }
+    public static String getDescription(String[] inputArr, int commandIndex) {
+        String[] descriptionArray = Arrays.copyOfRange(inputArr, 1, commandIndex);
         String description = String.join(" ", descriptionArray);
         return description;
     }
 
-    public static int getCommandIndex(String[] inputArr) {
+    public static int getCommandIndex(String[] inputArr, String command) {
         int commandIndex = -1;
         for (int i = 0; i < inputArr.length; i++) {
             String currentStr = inputArr[i];
-            if (currentStr.equals("/by")) {
+            if (currentStr.equals(command)) {
                 commandIndex = i;
                 break;
             }

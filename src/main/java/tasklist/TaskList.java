@@ -224,14 +224,14 @@ public class TaskList {
             throw new DescriptionException("deadline");
         }
 
-        int commandIndex = Parser.getCommandIndex(inputArr);
+        int commandIndex = Parser.getCommandIndex(inputArr, "/by");
         if (commandIndex == -1) {
             throw new CommandException("deadline", "/by");
         } else if (commandIndex == 1) {
             throw new DescriptionException("deadline");
         }
         int tagStart = Parser.getTagsStart(inputArr);
-        String description = Parser.getDeadlineDescription(inputArr, tagStart, commandIndex);
+        String description = Parser.getDescription(inputArr, commandIndex);
 
         try {
             LocalDate by = LocalDate.parse(inputArr[commandIndex + 1]);
@@ -314,36 +314,40 @@ public class TaskList {
             throw new DescriptionException("event");
         }
 
-        boolean commandAbsent = true;
-        int commandIndex = 1;
-        for (int i = 0; i < inputArr.length; i++) {
-            String currentStr = inputArr[i];
-            if (currentStr.equals("/at")) {
-                commandAbsent = false;
-                commandIndex = i;
-                break;
-            }
-        }
-        if (commandAbsent) {
+        int commandIndex = Parser.getCommandIndex(inputArr, "/at");
+        if (commandIndex == -1) {
             throw new CommandException("event", "/at");
         } else if (commandIndex == 1) {
             throw new DescriptionException("event");
         }
 
-        String[] descriptionArray = Arrays.copyOfRange(inputArr, 1, commandIndex);
-        String description = String.join(" ", descriptionArray);
+        int tagStart = Parser.getTagsStart(inputArr);
+        String description = Parser.getDescription(inputArr, commandIndex);
 
-        String at;
-        if (commandIndex + 1 <= inputArr.length - 1) {
-            String[] atArray = Arrays.copyOfRange(inputArr, commandIndex + 1, inputArr.length);
-            at = String.join(" ", atArray);
-        } else {
-            at = "No data was inputted";
+        try {
+            String at;
+            if ((tagStart > commandIndex) && (commandIndex + 1 != inputArr.length)) {
+                String[] atArray = Arrays.copyOfRange(inputArr, commandIndex + 1, tagStart);
+                at = String.join(" ", atArray);
+            } else if (tagStart == -1 && (commandIndex + 1 != inputArr.length)) {
+                String[] atArray = Arrays.copyOfRange(inputArr, commandIndex + 1, inputArr.length);
+                at = String.join(" ", atArray);
+            } else if ((tagStart < commandIndex) && (commandIndex + 1 != inputArr.length)) {
+                System.out.println(commandIndex);
+                System.out.println(inputArr.length);
+                throw new DukeException("Tags must be after your /at location!");
+            } else {
+                throw new DukeException("NO LOCATION DATA INPUT");
+            }
+            Event eventTask = new Event(description, at);
+            if (tagStart > commandIndex) {
+                Parser.addTags(eventTask, inputArr, tagStart);
+            }
+            this.taskList.add(eventTask);
+            messages.taskAddMessage(eventTask.toString(), this.taskList.size());
+        } catch (DukeException e) {
+            messages.displayText(e.toString());
         }
-
-        Event eventTask = new Event(description, at);
-        this.taskList.add(eventTask);
-        messages.taskAddMessage(eventTask.toString(), this.taskList.size());
     }
 
     /**
