@@ -9,8 +9,8 @@ import java.util.Locale;
  * Similar to a task, a task with a deadline has a description,
  * but also contains the deadline for the task.
  *
- * @author: Jason Ng
- * @version: Duke Level-10
+ * @author Jason Ng
+ * @version Duke Level-10
  */
 public class Deadline extends Task {
     /** Deadline of the task */

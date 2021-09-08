@@ -9,8 +9,8 @@ import duke.commands.Task;
  * This class also contains methods that are
  * related to the operations on the list of tasks.
  *
- * @author: Jason Ng
- * @version: Duke Level-10
+ * @author Jason Ng
+ * @version Duke Level-10
  */
 public class TaskList {
     /** List of tasks */

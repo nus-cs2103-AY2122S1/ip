@@ -21,8 +21,8 @@ import javafx.scene.text.Font;
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  *
- * @author: Jason Ng
- * @version: Duke Level-10
+ * @author Jason Ng
+ * @version Duke Level-10
  */
 public class DialogBox extends HBox {
     /** The label for the dialog to come */

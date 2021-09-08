@@ -9,8 +9,8 @@ import java.util.Locale;
  * Similar to a task, an event has a description,
  * but also contains the date/time for the event.
  *
- * @author: Jason Ng
- * @version: Duke Level-10
+ * @author Jason Ng
+ * @version Duke Level-10
  */
 public class Event extends Task {
     /** Event time of the task */

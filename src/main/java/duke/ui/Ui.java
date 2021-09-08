@@ -7,8 +7,8 @@ import duke.data.TaskList;
  * Encapsulates the Ui component of Duke.
  * This class deals with interactions with the user.
  *
- * @author: Jason Ng
- * @version: Duke Level-10
+ * @author Jason Ng
+ * @version Duke Level-10
  */
 public class Ui {
     /** The introductory message to be printed for the start of the program */

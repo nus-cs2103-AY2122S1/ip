@@ -7,8 +7,8 @@ import duke.data.TaskList;
  * Encapsulates a Find command.
  * This class handles the searching of tasks based on user's input.
  *
- * @author: Jason Ng
- * @version: Duke Level-10
+ * @author Jason Ng
+ * @version Duke Level-10
  */
 public class Find {
     /**

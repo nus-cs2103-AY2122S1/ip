@@ -13,8 +13,8 @@ import javafx.stage.Stage;
 /**
  * Main class encapsulates the initialization process of the application.
  *
- * @author: Jason Ng
- * @version: Duke Level-10
+ * @author Jason Ng
+ * @version Duke Level-10
  */
 public class Main extends Application {
     /**

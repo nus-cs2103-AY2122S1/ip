@@ -19,8 +19,8 @@ import javafx.application.Platform;
  * Duke class contains the storage, ui, tasklist, parser and finder objects,
  * to help run the program.
  *
- * @author: Jason Ng
- * @version: Duke Level-10
+ * @author Jason Ng
+ * @version Duke Level-10
  */
 public class Duke {
     /** Storage component for Duke */
@@ -40,7 +40,7 @@ public class Duke {
     public Duke() {
         this.storage = new Storage();
         this.ui = new Ui();
-        this.taskList = new TaskList(storage.Load());
+        this.taskList = new TaskList(storage.load());
         this.parser = new Parser();
         this.finder = new Find();
     }

@@ -11,8 +11,8 @@ import duke.data.TaskList;
  * This class helps to split the command inputs of the user,
  * for further usage by other classes.
  *
- * @author: Jason Ng
- * @version: Duke Level-10
+ * @author Jason Ng
+ * @version Duke Level-10
  */
 public class Parser {
     /** Special names that are the commands for Duke */

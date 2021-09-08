@@ -6,8 +6,8 @@ package duke.commands;
  * a boolean of whether task is completed,
  * and also the logo tied to the task.
  *
- * @author: Jason Ng
- * @version: Duke Level-10
+ * @author Jason Ng
+ * @version Duke Level-10
  */
 public class Task {
     /** Description of the task */

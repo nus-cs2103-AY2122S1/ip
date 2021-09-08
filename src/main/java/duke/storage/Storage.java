@@ -21,8 +21,8 @@ import duke.data.TaskList;
  * This class helps with operations concerning the
  * saving of new tasks and loading of old tasks from the hard disk.
  *
- * @author: Jason Ng
- * @version: Duke Level-10
+ * @author Jason Ng
+ * @version Duke Level-10
  */
 public class Storage {
     /** Filename of the taskList */
@@ -59,7 +59,7 @@ public class Storage {
             printWriter.write(sb.toString());
             printWriter.close();
         } catch (FileNotFoundException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 
@@ -70,7 +70,7 @@ public class Storage {
      *
      * @return The previously stored taskList, or if it is unavailable, an empty taskList.
      */
-    public static ArrayList<Task> Load() {
+    public static ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(FileName);
         try {
@@ -89,20 +89,20 @@ public class Storage {
 
                 Task toAdd;
                 switch (taskType) {
-                    case "T":
-                        toAdd = new Todo(description);
-                        break;
-                    case "D":
-                        LocalDateTime by = LocalDateTime.parse(splitLine.get(3));
-                        toAdd = new Deadline(description, by);
-                        break;
-                    case "E":
-                        LocalDateTime at = LocalDateTime.parse(splitLine.get(3));
-                        toAdd = new Event(description, at);
-                        break;
-                    default:
-                        toAdd = new Task(description);
-                        break;
+                case "T":
+                    toAdd = new Todo(description);
+                    break;
+                case "D":
+                    LocalDateTime by = LocalDateTime.parse(splitLine.get(3));
+                    toAdd = new Deadline(description, by);
+                    break;
+                case "E":
+                    LocalDateTime at = LocalDateTime.parse(splitLine.get(3));
+                    toAdd = new Event(description, at);
+                    break;
+                default:
+                    toAdd = new Task(description);
+                    break;
                 }
 
                 if (isDone) {

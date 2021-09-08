@@ -15,8 +15,8 @@ import javafx.scene.text.Font;
  * Encapsulates a MainWindow for Duke's GUI.
  * Provides the layout for the other controls.
  *
- * @author: Jason Ng
- * @version: Duke Level-10
+ * @author Jason Ng
+ * @version Duke Level-10
  */
 public class MainWindow extends AnchorPane {
     /** The scrollpane for the main window */
