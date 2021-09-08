@@ -7,8 +7,8 @@ public class Todo extends Task {
      *
      * @param description
      */
-    public Todo(String description) {
-        super(description);
+    public Todo(String description, String priority) {
+        super(description, priority);
     }
 
     @Override

@@ -32,13 +32,16 @@ public class Add extends Command {
                 String message = "OOPS!!! The description of a todo cannot be empty.";
                 throw new EmptyDescriptionException(message);
             }
-            this.task = new Todo(temp.trim());
+            String[] arr = temp.split("p=");
+            this.task = new Todo(arr[0].trim(), arr[1].trim());
         } else if (input.startsWith("deadline")) {
             String[] arr = input.split(" /by ");
-            this.task = new Deadline(arr[0].substring(9), arr[1]);
+            String[] temp = arr[1].split("p=");
+            this.task = new Deadline(arr[0].substring(9), temp[1].trim(), temp[0]);
         } else if (input.startsWith("event")) {
-            String[] arr = input.split("/at ");
-            this.task = new Event(arr[0].substring(6), arr[1]);
+            String[] arr = input.split(" /at ");
+            String[] temp = arr[1].split("p=");
+            this.task = new Event(arr[0].substring(6), temp[1].trim(), temp[0]);
         } else {
             throw new IllegalCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -54,6 +57,7 @@ public class Add extends Command {
      */
     public String exec(TaskList tasks, Ui ui, Storage storage) throws NoListException {
         tasks.add(this.task);
+        System.out.println("hello");
         try {
             storage.save(tasks);
             return "Got it. I've added this task:\n"

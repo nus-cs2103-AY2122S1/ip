@@ -43,11 +43,11 @@ public class Storage {
         }
         Task curr;
         if (arr[0].equals("T")) {
-            curr = new Todo(arr[2]);
+            curr = new Todo(arr[3], arr[2]);
         } else if (arr[0].equals("E")) {
-            curr = new Event(arr[2], arr[3]);
+            curr = new Event(arr[3], arr[2], arr[4]);
         } else {
-            curr = new Deadline(arr[2], arr[3]);
+            curr = new Deadline(arr[3], arr[2], arr[4]);
         }
         if (arr[1].equals("1")) {
             curr.markAsDone();
