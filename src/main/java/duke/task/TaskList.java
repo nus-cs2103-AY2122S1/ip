@@ -43,6 +43,8 @@ public class TaskList {
      * @throws DukeException If task number entered is invalid.
      */
     public void deleteTask(int taskNumber) throws DukeException {
+        assert taskNumber >= 1;
+
         try {
             this.taskList.remove(taskNumber - 1);
         } catch (IndexOutOfBoundsException e) {
@@ -59,6 +61,8 @@ public class TaskList {
      * @throws DukeException If task number entered is invalid.
      */
     public Task getTask(int taskNumber) throws DukeException {
+        assert taskNumber >= 1;
+
         try {
             return this.taskList.get(taskNumber - 1);
         } catch (IndexOutOfBoundsException e) {
@@ -74,6 +78,8 @@ public class TaskList {
      * @throws DukeException If task number entered is invalid.
      */
     public void doneTask(int taskNumber) throws DukeException {
+        assert taskNumber >= 1;
+
         try {
             this.taskList.get(taskNumber - 1).markDone();
         } catch (IndexOutOfBoundsException e) {
