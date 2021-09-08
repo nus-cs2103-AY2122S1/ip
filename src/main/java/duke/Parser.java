@@ -62,7 +62,7 @@ public class Parser {
                 return Parser.deadlineOutput(in, tasklist);
             } else if (in.substring(0, 4).equals("find")) {
                 return Parser.findOutput(in, tasklist);
-            } else if (in.substring(0, 8).equals("postpone")) {
+            } else if (in.substring(0, 10).equals("reschedule")) {
                 return Parser.rescheduleOutput(in, tasklist);
             } else {
                 return Parser.invalidInputResponse();
@@ -190,21 +190,21 @@ public class Parser {
      * @param tasklist
      */
     public static String rescheduleOutput(String in, TaskList tasklist) {
-        assert in.length() > 7 : "Invalid Input for reschedule command";
+        assert in.length() > 9 : "Invalid Input for reschedule command";
         try {
-            validIntInput(in.substring(9, 12));
+            validIntInput(in.substring(11, 14));
         } catch (StringIndexOutOfBoundsException e) {
             return "Invalid Input for reschedule command check";
         }
-        if (validIntInput(in.substring(9, 12))) {
+        if (validIntInput(in.substring(11, 14))) {
             int i = in.indexOf("/");
             try {
                 if (isValid(in.substring(i + 1, i + 11))) {
                     if (Character.isDigit(in.charAt(10))) {
-                        return tasklist.rescheduleTask(parseInt(in.substring(9, 11)),
+                        return tasklist.rescheduleTask(parseInt(in.substring(11, 13)),
                                 in.substring(i + 1, i + 11));
                     } else {
-                        return tasklist.rescheduleTask(parseInt(in.substring(9, 10)),
+                        return tasklist.rescheduleTask(parseInt(in.substring(11, 12)),
                                 in.substring(i + 1, i + 11));
                     }
                 }
