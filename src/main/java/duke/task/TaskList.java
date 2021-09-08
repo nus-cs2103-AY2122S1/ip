@@ -2,6 +2,7 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 
 /**
@@ -60,6 +61,13 @@ public class TaskList {
         return this.list.get(taskNum - 1);
     }
 
+
+    public TaskList filter(String keyword) {
+        return new TaskList(this.list.stream()
+                .filter(t -> t.description.contains(keyword))
+                .toArray(Task[]::new)
+        );
+    }
 
     /**
      * Find out whether the list of task is empty.

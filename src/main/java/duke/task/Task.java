@@ -27,11 +27,6 @@ public abstract class Task {
     }
 
 
-    public boolean contains(String keyword) {
-        return this.description.contains(keyword);
-    }
-
-
     private String getStatus() {
         return this.isDone ? "X" : " ";
     }
