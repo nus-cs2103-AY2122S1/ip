@@ -28,6 +28,8 @@ public class DeleteCommand extends Command {
         } catch (NumberFormatException e) {
             throw new InvalidDescriptionException("Please append a task number after 'delete'.");
         }
+
+        assert index > 0 : "Index provided is negative";
     }
 
     public CommandResult execute() {
