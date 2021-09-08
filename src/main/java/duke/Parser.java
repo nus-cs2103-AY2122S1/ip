@@ -100,6 +100,32 @@ public class Parser {
             task.done();
         }
         return task;
+    }
 
+    /**
+     * Interpret which help the client is trying to get.
+     *
+     * @param command the description of the task to recreate.
+     * @return the relevant string of help command.
+     */
+    public static String helpCommand(String command) {
+        switch (command) {
+        case "/general":
+            return HelpUi.generalText();
+        case "/task":
+            return HelpUi.taskText();
+        case "/todo":
+            return HelpUi.todoText();
+        case "/deadline":
+            return HelpUi.deadlineText();
+        case "/event":
+            return HelpUi.eventText();
+        case "/commands1":
+            return HelpUi.commandText1();
+        case "/commands2":
+            return HelpUi.commandText2();
+        default:
+            return Ui.unknownCommand();
+        }
     }
 }
