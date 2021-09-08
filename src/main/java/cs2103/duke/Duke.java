@@ -66,9 +66,6 @@ public class Duke {
     }
 
     public static void main(String[] args) throws IOException {
-        String dukeFilePath = "./data/duke.txt";
-        Storage s = new Storage(dukeFilePath);
-        s.initialize();
-        new Duke(dukeFilePath).run();
+        DukeLauncher.main(null);
     }
 }
