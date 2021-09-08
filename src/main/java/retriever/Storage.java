@@ -73,6 +73,9 @@ public class Storage {
                 String completionStatus = tokens[1];
                 String taskDescription = tokens[2];
 
+                assert (taskType.contains("D") || taskType.contains("E") || taskType.contains("T"))
+                        : "Data Corrupt in File";
+
                 // Checking the type of task.
                 if (taskType.contains("D")) {
                     Task deadlineTask = new Deadline(taskDescription, new TaskDateAndTime(tokens[3]));
@@ -136,9 +139,11 @@ public class Storage {
             taskAsText = "T | 0 | " + taskDescription + System.getProperty("line.separator");
             break;
         default:
-            taskAsText = " ";
+            taskAsText = "";
             break;
         }
+
+        assert !taskAsText.equals("") : "Response Could Not Be Saved (Error in Formatting and Saving)";
 
         // Writing the task to file.
         try {
@@ -167,9 +172,7 @@ public class Storage {
             String currentLine;
 
             while ((currentLine = reader.readLine()) != null) {
-                if (counter == taskNumber) {
-                    // Do not write the task into new file.
-                } else {
+                if (counter != taskNumber) {
                     writer.write(currentLine + System.getProperty("line.separator"));
                 }
                 counter++;
@@ -178,7 +181,7 @@ public class Storage {
             writer.close();
             reader.close();
 
-            boolean isNameChangeSuccessful = tempFile.renameTo(inputFile);
+            tempFile.renameTo(inputFile);
         } catch (IOException e) {
             ui.printErrorMessage("Master! Error Reading File. Gimme Treats, And I Help You!");
         }
@@ -220,7 +223,7 @@ public class Storage {
             writer.close();
             reader.close();
 
-            boolean isNameChangeSuccessful = tempFile.renameTo(inputFile);
+            tempFile.renameTo(inputFile);
         } catch (IOException e) {
             ui.printErrorMessage("Master! Error Reading File. Gimme Treats, And I Help You!");
         }

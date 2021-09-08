@@ -35,7 +35,7 @@ public class Parser {
      *
      * @return A boolean indicating to end the session or not.
      */
-    public boolean isExit() {
+    public boolean isSessionDone() {
         return isSessionDone;
     }
 
@@ -51,6 +51,7 @@ public class Parser {
         // Parsing the user input.
         String[] userInput = userCommand.split(" ");
         String commandEntered = userInput[0].toLowerCase();
+        assert commandEntered != null : "Command is Null";
 
         switch (commandEntered) {
         case "list":
@@ -73,6 +74,9 @@ public class Parser {
             break;
         case "find":
             taskList.findTaskWithKeyword(userInput);
+            break;
+        case "help":
+            Ui.printHelpSection();
             break;
         case "bye":
             markSessionDone();

@@ -55,10 +55,12 @@ public class Retriever {
             retrieverResponse = e.getMessage();
         }
 
-        if (parser.isExit()) {
+        if (parser.isSessionDone()) {
             retrieverResponse = "Sad To See You Go!";
             Platform.exit();
         }
+
+        assert !retrieverResponse.equals("") : "Response Could Not Be Formed!";
 
         return retrieverResponse;
     }

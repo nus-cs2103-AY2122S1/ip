@@ -11,6 +11,34 @@ import retriever.task.Task;
 public class Ui {
     private static String retrieverResponse;
 
+    // Help Section Strings.
+    private static String welcomeToHelpSectionMessage = "Master, I shall guide you to my best ability to smell.";
+    private static String byeCommandMessage = "Use the bye command to end the session.";
+    private static String byeCommandExample = "Command Example: bye";
+    private static String deadlineCommandMessage = "Use the deadline command to add a deadline type task.";
+    private static String deadlineCommandExample = "Command Example: deadline CS2103T iP /by 23/09/2021";
+    private static String deadlineCommandFormat = "-> deadline TASK_DESCRIPTION /by DD/MM/YYYY";
+    private static String deleteCommandMessage = "Use the delete command to delete a task.";
+    private static String deleteCommandExample = "Command Example: delete 4";
+    private static String deleteCommandFormat = "-> delete TASK_NUMBER";
+    private static String doneCommandMessage = "Use the done command to mark a task as done.";
+    private static String doneCommandExample = "Command Example: done 3";
+    private static String doneCommandFormat = "-> done TASK_NUMBER";
+    private static String eventCommandMessage = "Use the event command to add an event type task.";
+    private static String eventCommandExample = "Command Example: event Apple iPhone 13 /at 14/09/2021";
+    private static String eventCommandFormat = "-> event TASK_DESCRIPTION /at DD/MM/YYYY";
+    private static String findCommandMessage = "Use the find command to find tasks.";
+    private static String findCommandExample = "Command Example: find notes";
+    private static String findCommandFormat = "-> find KEYWORD";
+    private static String helpCommandMessage = "Use the help command to open the help section.";
+    private static String helpCommandExample = "Command Example: help";
+    private static String listCommandMessage = "Use the list command to view the tasks "
+            + "currently present in the task list.";
+    private static String listCommandExample = "Command Example: list";
+    private static String todoCommandMessage = "Use the todo command to add a todo type task.";
+    private static String todoCommandExample = "Command Example: todo laundry";
+    private static String todoCommandFormat = "-> todo TASK_DESCRIPTION";
+
     // Predetermined strings.
     private String welcomeMessage = "Hello, I am Retriever\nHow Can I Help You Today?";
     private String goodByeMessage = "-> Sad To See You Go!";
@@ -27,6 +55,22 @@ public class Ui {
      * Sets up the scanner to take in user input.
      */
     public Ui() {
+    }
+
+    /**
+     * Prints the help section.
+     */
+    public static void printHelpSection() {
+        retrieverResponse = welcomeToHelpSectionMessage + "\n\n"
+                + byeCommandMessage + "\n" + byeCommandExample + "\n\n"
+                + deadlineCommandMessage + "\n" + deadlineCommandFormat + "\n" + deadlineCommandExample + "\n\n"
+                + eventCommandMessage + "\n" + eventCommandFormat + "\n" + eventCommandExample + "\n\n"
+                + todoCommandMessage + "\n" + todoCommandFormat + "\n" + todoCommandExample + "\n\n"
+                + deleteCommandMessage + "\n" + deleteCommandFormat + "\n" + deleteCommandExample + "\n\n"
+                + doneCommandMessage + "\n" + doneCommandFormat + "\n" + doneCommandExample + "\n\n"
+                + findCommandMessage + "\n" + findCommandFormat + "\n" + findCommandExample + "\n\n"
+                + listCommandMessage + "\n" + listCommandExample + "\n\n"
+                + helpCommandMessage + "\n" + helpCommandExample + "\n\n";
     }
 
     /**
@@ -103,7 +147,7 @@ public class Ui {
      */
     public void printTaskFoundByKeyword(ArrayList<Task> taskList) {
         if (taskList.size() == 0) {
-            retrieverResponse = "Sorry Master, I Couldn't Smell And Find WHat You Asked For!"
+            retrieverResponse = "Sorry Master, I Couldn't Smell And Find What You Asked For!"
                     + "\n (Task With the Given Keyword Does Not Exist)\n";
             return;
         }
