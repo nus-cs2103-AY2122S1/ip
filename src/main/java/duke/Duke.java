@@ -1,15 +1,13 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.CommandKeyword;
-import duke.exception.DukeException;
-import duke.exception.InvalidCommandException;
-import duke.task.TaskList;
-import javafx.scene.layout.VBox;
-
 import java.io.IOException;
 import java.util.HashMap;
 
+import duke.command.Command;
+import duke.command.CommandKeyword;
+import duke.exception.DukeException;
+import duke.task.TaskList;
+import javafx.scene.layout.VBox;
 
 /**
  * The main program of the chatbot Duke. Consists of Tasklist, Ui and Storage instances.
