@@ -30,12 +30,15 @@ public class Deadline extends Task {
 
     @Override
     public void handleException(String... arr) {
+        // no description
         if (arr[0].length() == 0) {
             throw new AilurusException(AilurusException.Error.EMPTYDEADLINE);
         }
+        // no /by argument
         if (arr.length <= 1) {
             throw new AilurusException(AilurusException.Error.BY);
         }
+        // no /by date
         if (arr[1].length() == 0) {
             throw new AilurusException(AilurusException.Error.EMPTYBY);
         }

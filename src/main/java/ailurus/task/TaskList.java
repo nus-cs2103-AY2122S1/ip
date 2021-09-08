@@ -3,6 +3,7 @@ package ailurus.task;
 import ailurus.AilurusException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TaskList {
     private ArrayList<Task> list;
@@ -55,22 +56,28 @@ public class TaskList {
     /**
      * Marking a specific task as done
      *
-     * @param str String to be converted to integer, representing task number to be marked as done
-     * @return task that has been marked as done
+     * @param str String to be converted to integer, representing task numbers to be marked as done
+     * @return tasks that has been marked as done
      */
-    public Task done(String str) throws AilurusException {
-        try {
-            int taskNo = Integer.parseInt(str);
-            if (taskNo > list.size() || taskNo < 1) {
-                throw new AilurusException(AilurusException.Error.NUMBER);
-            } else {
-                Task task = list.get(taskNo - 1);
-                task.markAsDone();
-                return task;
+    public ArrayList<Task> done(String str) throws AilurusException {
+        String[] arr = str.trim().split(" ", -1);
+        ArrayList<Task> tasks = new ArrayList<>();
+        assert arr.length > 0 : "string array must have length more than 0";
+        for (int i = 0; i < arr.length; i++) {
+            try {
+                int taskNo = Integer.parseInt(arr[i]);
+                if (taskNo > list.size() || taskNo < 1) {
+                    throw new AilurusException(AilurusException.Error.NUMBER);
+                } else {
+                    Task task = list.get(taskNo - 1);
+                    task.markAsDone();
+                    tasks.add(task);
+                }
+            } catch (NumberFormatException e) {
+                throw new AilurusException(AilurusException.Error.NAN);
             }
-        } catch (NumberFormatException e) {
-            throw new AilurusException(AilurusException.Error.NAN);
         }
+        return tasks;
     }
 
     /**
@@ -85,23 +92,33 @@ public class TaskList {
     }
 
     /**
-     * Deleting task from a list of tasks
+     * Deleting tasks from a list of tasks
      *
-     * @param str String to be converted to integer, representing task number to be deleted
-     * @return task that has been deleted
+     * @param str String to be converted to integer, representing task numbers to be deleted
+     * @return tasks that has been deleted
      */
-    public Task deleteTask(String str) {
+    public ArrayList<Task> deleteTask(String str) {
+        ArrayList<Integer> arr = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
+
         try {
-            int taskNo = Integer.parseInt(str);
-            if (taskNo > list.size() || taskNo < 1) {
-                throw new AilurusException(AilurusException.Error.NUMBER);
-            } else {
-                Task task = list.get(taskNo - 1);
-                list.remove(taskNo - 1);
-                return task;
+            String[] strArray = str.trim().split(" ", -1);
+            assert strArray.length > 0 : "string array must have length more than 0";
+            for (int i = 0; i < strArray.length; i++) {
+                int taskNo = Integer.parseInt(strArray[i]);
+                if (taskNo > list.size() || taskNo < 1) {
+                    throw new AilurusException(AilurusException.Error.NUMBER);
+                } else {
+                    arr.add(taskNo);
+                    tasks.add(list.get(arr.get(i) - 1));
+                }
             }
+            arr.sort((Integer a, Integer b) -> b - a);
+            arr.forEach((Integer taskNo) -> list.remove(taskNo - 1));
         } catch (NumberFormatException e) {
             throw new AilurusException(AilurusException.Error.NAN);
         }
+
+        return tasks;
     }
 }

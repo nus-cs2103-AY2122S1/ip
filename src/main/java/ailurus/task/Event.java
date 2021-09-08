@@ -29,12 +29,15 @@ public class Event extends Task {
 
     @Override
     public void handleException(String... arr) {
+        // no description
         if (arr[0].length() == 0) {
             throw new AilurusException(AilurusException.Error.EMPTYEVENT);
         }
+        // no /by argument
         if (arr.length <= 1) {
             throw new AilurusException(AilurusException.Error.AT);
         }
+        // no /by date
         if (arr[1].length() == 0) {
             throw new AilurusException(AilurusException.Error.EMPTYAT);
         }

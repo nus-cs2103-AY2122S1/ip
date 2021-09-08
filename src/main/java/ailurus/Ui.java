@@ -4,15 +4,11 @@ import ailurus.task.Task;
 import ailurus.task.TaskList;
 import javafx.scene.image.Image;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
     private final String CHATBOT = "Ailurus";
-    private final String YOU = "You";
-    private Scanner scanner = new Scanner(System.in);
-
-    private Image ailurus = new Image(this.getClass().getResourceAsStream("/images/Ailurus.jpg"));
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/Pixel.png"));
 
     /**
      * Welcomes user to use the chatbot
@@ -20,7 +16,14 @@ public class Ui {
      * @return welcome message string
      */
     public String showWelcome() {
-        return this.say(String.format("Hello! I'm %s. What can I do for you?", this.CHATBOT));
+        return this.say(String.format("Hello! I'm %s. These are your available commands:\n" +
+                "todo <description>\n\t- add todo task\n" +
+                "deadline <description> /by <yyyy-mm-dd>\n\t- add deadline task with date\n" +
+                "event <description> /at <yyyy-mm-dd>\n\t- add event task with date\n" +
+                "list\n\t- list all tasks and their task number\n" +
+                "done <task number(s)>\n\t- mark task(s) as done (e.g. done 1 2 3)\n" +
+                "delete <task number(s)>\n\t- delete task(s) (e.g. delete 1 2 3)\n" +
+                "find <matching word>\n\t- find all tasks with matching word", this.CHATBOT));
     }
 
     /**
@@ -66,13 +69,17 @@ public class Ui {
     }
 
     /**
-     * Tell the user that the task is marked as done
+     * Tell the user that the tasks are marked as done
      *
-     * @param task task that is marked as done
-     * @return message that task is done
+     * @param tasks tasks that are marked as done
+     * @return message that tasks are done
      */
-    public String sayDone(Task task) {
-        return this.say(String.format("Nice! I've marked this task as done:\n\t%s", task));
+    public String sayDone(ArrayList<Task> tasks) {
+        String tasksString = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            tasksString += tasks.get(i) + "\n\t";
+        }
+        return this.say(String.format("Nice! I've marked this task as done:\n\t%s", tasksString));
     }
 
     /**
@@ -88,15 +95,19 @@ public class Ui {
     }
 
     /**
-     * Tell the user that the task is deleted
+     * Tell the user that the tasks are deleted
      *
-     * @param task task that is deleted
+     * @param tasks tasks that are deleted
      * @param size size of task list
-     * @return message for deleting task
+     * @return message for deleting tasks
      */
-    public String sayDelete(Task task, int size) {
+    public String sayDelete(ArrayList<Task> tasks, int size) {
+        String tasksString = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            tasksString += tasks.get(i) + "\n\t";
+        }
         return this.say(String.format("Noted. I've removed this task:\n\t%s\nNow you have %d tasks in the list.",
-                task, size));
+                tasksString, size));
     }
 
     /**
