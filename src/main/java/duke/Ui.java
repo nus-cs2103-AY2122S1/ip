@@ -33,6 +33,11 @@ public class Ui {
         );
     }
 
+    /**
+     * To show the input as a dialog in the GUI.
+     *
+     * @param input The input to be shown.
+     */
     public void showInput(String input) {
         dialogContainer.getChildren().add(
                 DialogBox.getUserDialog(input, userImage));

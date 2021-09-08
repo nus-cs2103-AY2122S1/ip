@@ -35,6 +35,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Get the response of Duke based on the user input.
+     *
+     * @param input The input entered by the user.
+     * @return A boolean to represent the continuation of the application.
+     */
     public boolean getResponse(String input) {
         boolean shouldExit = false;
         ui.showInput(input);

@@ -1,6 +1,12 @@
 package duke;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -40,7 +46,7 @@ public class Storage {
             }
             if (!this.commandsFile.exists()) {
                 this.commandsFile.createNewFile();
-                this.createDefault(this.commandsFile);
+                this.createDefaultCommands(this.commandsFile);
             }
             assert this.tasksFile != null && this.commandsFile != null : "File not created";
         } catch (IOException e) {
@@ -90,7 +96,12 @@ public class Storage {
         }
     }
 
-    public void createDefault(File file) {
+    /**
+     * Create a file with a hashmap with default commands.
+     *
+     * @param file The file to store the hashmap of commands.
+     */
+    public void createDefaultCommands(File file) {
         HashMap<String, CommandKeyword> map = new HashMap<>();
         map.put("TODO", CommandKeyword.TODO);
         map.put("T", CommandKeyword.TODO);
@@ -119,6 +130,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Load the commands from the file and return the hashmap.
+     *
+     * @return The hashmap containing keys of the commands user can input.
+     */
     public HashMap<String, CommandKeyword> loadCommands() {
         try {
             FileInputStream fis = new FileInputStream(this.commandsFile);

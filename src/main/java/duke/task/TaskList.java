@@ -41,7 +41,6 @@ public class TaskList {
      *
      * @param index The index of the arraylist that contains the task.
      * @param storage The storage to update the task marked.
-     * @return The updated task list after the task is marked.
      */
     public void markTask(int index, Storage storage) {
         try {
@@ -89,7 +88,6 @@ public class TaskList {
      * Delete the task at the given index.
      * @param index The index of the arraylist that contains the task.
      * @param storage The storage to update the task marked.
-     * @return The updated task list after the task is deleted.
      */
     public void deleteTask(int index, Storage storage) {
         try {

@@ -18,10 +18,10 @@ public class Deadline extends Task {
     /**
      * Constructs a deadline task.
      *
-     * @param description The description of the ask.
+     * @param description The description of the task.
      * @param date The deadline date.
      * @param time The deadline time.
-     * @param isDone Whether the deadline is done or not.
+     * @param isDone Whether the deadline is done.
      */
     public Deadline(String description, LocalDate date, LocalTime time, boolean isDone) {
         super(description, isDone);
@@ -53,6 +53,14 @@ public class Deadline extends Task {
                 this.getStatusIcon(), this.description, formattedDate, this.time);
     }
 
+    /**
+     * Creates a new deadline object.
+     *
+     * @param description The description of the task.
+     * @param isDone Whether the deadline is done.
+     * @return The deadline object created.
+     * @throws IncompleteTaskDescriptionException If the description is empty or in incorrect format.
+     */
     public static Deadline create(String description, boolean isDone) throws IncompleteTaskDescriptionException {
         if (description.matches("[^ ].* /by *[^ ].* [^ ].*")) {
             String deadlineSeparator = "/by";
