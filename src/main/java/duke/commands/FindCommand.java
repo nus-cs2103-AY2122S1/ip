@@ -26,7 +26,6 @@ public class FindCommand extends Command {
             throw new InvalidInputException("Keyword cannot be a space or be empty");
         } else {
             ArrayList<Task> matched = task.findMatching(keyWord);
-            //ui.printFoundTasks(matched, keyWord);
             return printFoundTasks(matched, keyWord);
         }
     }
