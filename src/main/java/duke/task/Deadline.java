@@ -16,7 +16,7 @@ public class Deadline extends Task {
      * @param by due time. If given string is in format yyyy-mm-dd, a LocalDate instance will be created to
      *          store the date
      */
-    public Deadline(String description, String by) {
+    protected Deadline(String description, String by) {
         super(description);
         try {
             date = LocalDate.parse(by);
@@ -35,7 +35,7 @@ public class Deadline extends Task {
      *          store the date
      * @param isDone task status
      */
-    public Deadline(String description, String by, boolean isDone) {
+    protected Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
         try {
             date = LocalDate.parse(by);

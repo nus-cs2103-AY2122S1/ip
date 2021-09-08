@@ -4,23 +4,57 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
 
-    /**
-     * Constructs a task.
-     * @param description Description of a task.
-     */
-    public Task(String description) {
+    protected Task(String description) {
         this.description = description;
-        this.isDone = false;
     }
 
-    /**
-     * Constructs a task.
-     * @param description Description of a task.
-     * @param isDone Has the task been done?
-     */
-    public Task(String description, boolean isDone) {
+    protected Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
+    }
+
+    // factory methods
+    public static ToDo getToDo(String description) throws IllegalArgumentException {
+        if (description == null) {
+            throw new IllegalArgumentException("Description of ToDo cannot be null");
+        }
+        return new ToDo(description);
+    }
+
+    public static ToDo getToDo(String description, boolean isDone) throws IllegalArgumentException {
+        if (description == null) {
+            throw new IllegalArgumentException("Description of ToDo cannot be null");
+        }
+        return new ToDo(description, isDone);
+    }
+
+    public static Deadline getDeadline(String description, String dueTime) throws IllegalArgumentException {
+        if (description == null) {
+            throw new IllegalArgumentException("Description of deadline cannot be null");
+        }
+        return new Deadline(description, dueTime);
+    }
+
+    public static Deadline getDeadline(String description, String dueTime, boolean isDone)
+            throws IllegalArgumentException {
+        if (description == null) {
+            throw new IllegalArgumentException("Description of deadline cannot be null");
+        }
+        return new Deadline(description, dueTime, isDone);
+    }
+
+    public static Event getEvent(String description, String period) throws IllegalArgumentException {
+        if (description == null) {
+            throw new IllegalArgumentException("Description of event cannot be null");
+        }
+        return new Event(description, period);
+    }
+
+    public static Event getEvent(String description, String period, boolean isDone) throws IllegalArgumentException {
+        if (description == null) {
+            throw new IllegalArgumentException("Description of event cannot be null");
+        }
+        return new Event(description, period, isDone);
     }
 
     public String getStatusIcon() {

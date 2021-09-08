@@ -6,7 +6,10 @@ import duke.ui.Ui;
 
 public class ExitCommand implements ICommand {
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws IllegalArgumentException {
+        if (taskList == null || ui == null || storage == null) {
+            throw new IllegalArgumentException("One of the parameters is null.");
+        }
         Ui.printGoodbyeMessage();
     }
 

@@ -14,7 +14,10 @@ public class DoneCommand implements ICommand {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IllegalArgumentException {
+        if (taskList == null || ui == null || storage == null) {
+            throw new IllegalArgumentException("One of the parameters is null.");
+        }
         Task task = taskList.get(lineIndex);
         storage.setLine(lineIndex, task.populateSaveData());
         task.setStatus(true);

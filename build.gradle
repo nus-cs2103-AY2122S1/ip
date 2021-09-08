@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id "com.github.johnrengelman.shadow" version "6.1.0"
 }
 
 repositories {
@@ -40,10 +41,11 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }
 

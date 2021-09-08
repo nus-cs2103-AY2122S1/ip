@@ -7,7 +7,10 @@ import duke.ui.Ui;
 
 public class DeleteAllCommand implements ICommand {
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IllegalArgumentException {
+        if (taskList == null || ui == null || storage == null) {
+            throw new IllegalArgumentException("One of the parameters is null.");
+        }
         taskList.deleteAll();
         storage.removeAll();
         Ui.printRemoveAll();

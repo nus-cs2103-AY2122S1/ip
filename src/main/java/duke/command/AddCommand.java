@@ -1,13 +1,9 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.ExceptionType;
 import duke.Storage;
 import duke.TaskList;
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
-import duke.task.ToDo;
 import duke.ui.Ui;
 
 public class AddCommand implements ICommand {
@@ -19,24 +15,32 @@ public class AddCommand implements ICommand {
      * Initialize the task to add.
      * @param strArr Info of the task to add.
      */
-    public AddCommand(String[] strArr) throws DukeException {
-        switch (strArr[0]) {
-        case WORD_TODO:
-            task = new ToDo(strArr[1]);
-            break;
-        case WORD_DEADLINE:
-            task = new Deadline(strArr[1], strArr[2]);
-            break;
-        case WORD_EVENT:
-            task = new Event(strArr[1], strArr[2]);
-            break;
-        default:
-            throw new DukeException(ExceptionType.INVALID_COMMAND);
+    public AddCommand(String[] strArr) throws IllegalArgumentException {
+        if (strArr == null || strArr.length < 2) {
+            throw new IllegalArgumentException("Input string array is null or shorter than required.");
+        }
+        if (strArr[0].equals(WORD_TODO)) {
+            task = Task.getToDo(strArr[1]);
+        } else {
+            if (strArr.length == 3) {
+                if (strArr[0].equals(WORD_DEADLINE)) {
+                    task = Task.getDeadline(strArr[1], strArr[2]);
+                } else if (strArr[0].equals(WORD_EVENT)) {
+                    task = Task.getEvent(strArr[1], strArr[2]);
+                } else {
+                    throw new AssertionError(strArr[0]);
+                }
+            } else {
+                throw new IllegalArgumentException("Input string array is shorter than required.");
+            }
         }
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws IllegalArgumentException, DukeException {
+        if (taskList == null || ui == null || storage == null) {
+            throw new IllegalArgumentException("One of the parameters is null.");
+        }
         taskList.add(task);
         Ui.printNewTask(task.toString());
         Ui.printTaskCount(taskList.size());

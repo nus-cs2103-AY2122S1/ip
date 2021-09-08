@@ -4,7 +4,7 @@ package duke;
  * Signals that an exception has occurred during runtime.
  * Any exception during runtime will be converted to DukeException, resulting an error message to System.out.
  */
-@SuppressWarnings("checkstyle:Regexp")
+
 public class DukeException extends Exception {
 
     private final ExceptionType type;
@@ -49,8 +49,10 @@ public class DukeException extends Exception {
             return "Failed to read from file";
         case FAIL_TO_WRITE:
             return "Failed to write to file";
+        case OTHERS:
+            return "Error";
         default:
-            return "";
+            throw new AssertionError(type);
         }
     }
 

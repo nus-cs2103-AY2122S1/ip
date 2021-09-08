@@ -11,10 +11,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ICommand;
 import duke.command.ListCommand;
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
-import duke.task.ToDo;
 
 /**
  * Provides methods to parse user command and saved contents.
@@ -38,13 +35,21 @@ public class Parser {
 
 
     /**
-     * Convert user input to {@link duke.command ICommand}.
+     * Convert user input to {@link duke.command.ICommand ICommand}.
      * @param s user command
      * @param listSize size of current task list
      * @return command for duke to execute
      * @throws DukeException if user command is missing operand or invalid
+     * @throws IllegalArgumentException if parameters are invalid
      */
-    public static ICommand parse(String s, int listSize) throws DukeException {
+    public static ICommand parse(String s, int listSize) throws DukeException, IllegalArgumentException {
+        // Check if parameters are valid
+        if (s == null) {
+            throw new IllegalArgumentException("user command cannot be null");
+        } else if (listSize < 0) {
+            throw new IllegalArgumentException("list size cannot be" + listSize);
+        }
+
         // Remove all leading and trailing whitespaces
         s = s.strip();
         String[] strArr = s.split(" ", 2);
@@ -86,7 +91,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses mark_done/delete command to retrieve line index.
+     * @param s mark_done/delete command
+     * @param listSize size of current list
+     * @return Line index in save file to mark as done/delete.
+     * @throws DukeException If command is lacking a number or line index is out of bound.
+     */
     private static int tryParseDoneOrDelete(String s, int listSize) throws DukeException {
+        assert s != null : "input string is null";
         try {
             int taskIndex = Integer.parseInt(s) - 1;
             if (taskIndex >= 0 && taskIndex < listSize) {
@@ -103,8 +116,10 @@ public class Parser {
      * Parses deadline command to description and due time.
      * @param s deadline command
      * @return An string array of length 2, with the first element being description and the second being due time.
+     * @throws DukeException If command is missing operand (description, due time) or missing keyword (" /by ")
      */
     private static String[] tryParseDeadline(String s) throws DukeException {
+        assert s != null : "input string is null";
         s = s.strip();
         List<String> strList = Arrays.asList(s.split(" "));
         if (strList.contains(WORD_DEADLINE_BY)) {
@@ -124,9 +139,11 @@ public class Parser {
     /**
      * Parses event command to description and time period.
      * @param s event command
-     * @return An string array of length 3, with the second element being description and the third being time period.
+     * @return An string array of length 3, with the second element being description and the third being time period
+     * @throws DukeException If command is missing operand (description, time period) or missing keyword (" /by ")
      */
     private static String[] tryParseEvent(String s) throws DukeException {
+        assert s != null : "input string is null";
         s = s.strip();
         List<String> strList = Arrays.asList(s.split(" "));
         if (strList.contains(WORD_EVENT_AT)) {
@@ -148,18 +165,29 @@ public class Parser {
      * @param s save data string
      * @return a new task constructs based on the given string
      * @throws DukeException if the string is not aligned with save data format
+     * @throws IllegalArgumentException if input string is null
      */
-    public static Task fileContentsToTask(String s) throws DukeException {
+    public static Task fileContentsToTask(String s) throws DukeException, IllegalArgumentException {
+        if (s == null) {
+            throw new IllegalArgumentException("String to write cannot be null");
+        }
+
         String[] arr = s.split(DIVIDER_WORD, 4);
+        if (arr.length < 3) {
+            throw new DukeException(ExceptionType.FAIL_TO_WRITE, "Unknown symbol in file.");
+        }
+
         boolean isDone = arr[1].equals("1");
-        switch (arr[0]) {
-        case "T":
-            return new ToDo(arr[2], isDone);
-        case "D":
-            return new Deadline(arr[2], arr[3], isDone);
-        case "E":
-            return new Event(arr[2], arr[3], isDone);
-        default:
+        if (arr[0].equals("T")) {
+            return Task.getToDo(arr[2], isDone);
+        } else {
+            if (arr.length == 4) {
+                if (arr[0].equals("D")) {
+                    return Task.getDeadline(arr[2], arr[3], isDone);
+                } else if (arr[0].equals("E")) {
+                    return Task.getEvent(arr[2], arr[3], isDone);
+                }
+            }
             throw new DukeException(ExceptionType.FAIL_TO_WRITE, "Unknown symbol in file.");
         }
     }

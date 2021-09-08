@@ -7,20 +7,21 @@ import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.Test;
 
 import duke.task.Deadline;
+import duke.task.Task;
 
 public class DeadlineTest {
     @Test
     public void constructor_validDate_dateReturned() {
         LocalDate date = LocalDate.now();
-        Deadline ddl = new Deadline("des", date.toString());
+        Deadline ddl = Task.getDeadline("des", date.toString());
         assertEquals(ddl.toString(), "[D][ ] des (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")");
         assertEquals(ddl.populateSaveData(), "D | 0 | des | " + date.toString());
 
-        ddl = new Deadline("des", date.toString(), true);
+        ddl = Task.getDeadline("des", date.toString(), true);
         assertEquals(ddl.toString(), "[D][X] des (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")");
         assertEquals(ddl.populateSaveData(), "D | 1 | des | " + date.toString());
 
-        ddl = new Deadline("des", date.toString(), false);
+        ddl = Task.getDeadline("des", date.toString(), false);
         assertEquals(ddl.toString(), "[D][ ] des (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")");
         assertEquals(ddl.populateSaveData(), "D | 0 | des | " + date.toString());
     }
@@ -28,15 +29,17 @@ public class DeadlineTest {
     @Test
     public void equals_validDate_test() {
         LocalDate date = LocalDate.now();
-        assertEquals(new Deadline("des", date.toString()), new Deadline("des", date.toString()));
-        assertEquals(new Deadline("des", date.toString(), true), new Deadline("des", date.toString(), true));
+        assertEquals(Task.getDeadline("des", date.toString()), Task.getDeadline("des", date.toString()));
+        assertEquals(Task.getDeadline("des", date.toString(), true), Task.getDeadline("des", date.toString(), true));
 
-        assertNotEquals(new Deadline("des", date.toString()), new Deadline("de", date.toString()));
-        assertNotEquals(new Deadline("des", date.toString()), new Deadline("des", date.minusDays(1L).toString()));
+        assertNotEquals(Task.getDeadline("des", date.toString()), Task.getDeadline("de", date.toString()));
+        assertNotEquals(Task.getDeadline("des", date.toString()),
+                Task.getDeadline("des", date.minusDays(1L).toString()));
 
-        assertNotEquals(new Deadline("des", date.toString(), true), new Deadline("de", date.toString(), true));
-        assertNotEquals(new Deadline("des", date.toString(), true), new Deadline("des", date.toString(), false));
-        assertNotEquals(new Deadline("des", date.toString(), false),
-                new Deadline("des", date.minusDays(1L).toString(), false));
+        assertNotEquals(Task.getDeadline("des", date.toString(), true), Task.getDeadline("de", date.toString(), true));
+        assertNotEquals(Task.getDeadline("des", date.toString(), true),
+                Task.getDeadline("des", date.toString(), false));
+        assertNotEquals(Task.getDeadline("des", date.toString(), false),
+                Task.getDeadline("des", date.minusDays(1L).toString(), false));
     }
 }

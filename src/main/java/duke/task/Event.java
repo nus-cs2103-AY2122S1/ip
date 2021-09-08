@@ -8,7 +8,7 @@ public class Event extends Task {
      * @param description Description of the event.
      * @param period Time period of the event.
      */
-    public Event(String description, String period) {
+    protected Event(String description, String period) {
         super(description);
         this.period = period;
     }
@@ -19,7 +19,7 @@ public class Event extends Task {
      * @param period Time period of the event.
      * @param isDone Has the event been done?
      */
-    public Event(String description, String period, boolean isDone) {
+    protected Event(String description, String period, boolean isDone) {
         super(description, isDone);
         this.period = period;
     }

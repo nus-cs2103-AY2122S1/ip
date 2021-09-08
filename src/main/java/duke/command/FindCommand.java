@@ -14,6 +14,9 @@ public class FindCommand implements ICommand {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
+        if (taskList == null || ui == null || storage == null) {
+            throw new IllegalArgumentException("One of the parameters is null.");
+        }
         Ui.printFoundTasks(taskList.stream()
                 .filter(t -> t.getDescription().contains(keyWord))
                 .map(Task::toString)

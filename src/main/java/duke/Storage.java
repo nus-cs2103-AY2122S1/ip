@@ -52,6 +52,7 @@ public class Storage {
 
             savePath = path;
             this.initialized = true;
+            assert Files.exists(savePath) : "Failed to create file at " + savePath;
         } catch (IOException e) {
             throw new DukeException(ExceptionType.FAIL_TO_CREATE_FILE, e.getMessage());
         }
@@ -83,6 +84,7 @@ public class Storage {
 
             savePath = path;
             this.initialized = true;
+            assert Files.exists(savePath) : "Failed to create file at " + savePath;
         } catch (IOException e) {
             throw new DukeException(ExceptionType.FAIL_TO_CREATE_FILE, e.getMessage());
         }
@@ -93,9 +95,12 @@ public class Storage {
      * @param textToWrite text to write to save file
      * @throws DukeException if failed to write to save file
      */
-    public void writeLine(String textToWrite) throws DukeException {
+    public void writeLine(String textToWrite) throws DukeException, IllegalArgumentException {
         if (!this.initialized) {
             return;
+        }
+        if (textToWrite == null) {
+            throw new IllegalArgumentException("text to write cannot be null");
         }
         try {
             FileWriter fileWriter = new FileWriter(savePath.toFile(), true);
@@ -110,10 +115,14 @@ public class Storage {
      * Remove a line of text in save file
      * @param lineIndex index of line to remove
      * @throws DukeException if failed to write to save file
+     * @throws IllegalArgumentException if line index is negative
      */
-    public void removeLine(int lineIndex) throws DukeException {
+    public void removeLine(int lineIndex) throws DukeException, IllegalArgumentException {
         if (!this.initialized) {
             return;
+        }
+        if (lineIndex < 0) {
+            throw new IllegalArgumentException("line index cannot be negative");
         }
         try {
             List<String> originalContent = Files.readAllLines(savePath);
@@ -144,10 +153,16 @@ public class Storage {
      * @param lineIndex index of line to change
      * @param textToWrite new text at the line
      * @throws DukeException if failed to write to save file
+     * @throws IllegalArgumentException if line index is negative or text to write is null
      */
     public void setLine(int lineIndex, String textToWrite) throws DukeException {
         if (!this.initialized) {
             return;
+        }
+        if (lineIndex < 0) {
+            throw new IllegalArgumentException("line index cannot be negative");
+        } else if (textToWrite == null) {
+            throw new IllegalArgumentException("text to write cannot be null");
         }
         try {
             List<String> originalContent = Files.readAllLines(savePath);

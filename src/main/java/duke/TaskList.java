@@ -15,8 +15,10 @@ public class TaskList extends ArrayList<Task> {
      * @param list lines of save data as list
      */
     protected void load(List<String> list) {
+        assert list != null : "lines of save data should not be null";
         for (String s : list) {
             try {
+                assert s != null : "a line of save data should not be null";
                 super.add(Parser.fileContentsToTask(s));
             } catch (DukeException e) {
                 Ui.printErrorMessage(e);

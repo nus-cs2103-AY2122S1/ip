@@ -5,7 +5,7 @@ public class ToDo extends Task {
      * Constructs a "to do" instance.
      * @param description Description of the "to do" instance.
      */
-    public ToDo(String description) {
+    protected ToDo(String description) {
         super(description);
     }
 
@@ -14,7 +14,7 @@ public class ToDo extends Task {
      * @param description Description of the "to do" instance.
      * @param isDone Has the task been done?
      */
-    public ToDo(String description, boolean isDone) {
+    protected ToDo(String description, boolean isDone) {
         super(description, isDone);
     }
 
