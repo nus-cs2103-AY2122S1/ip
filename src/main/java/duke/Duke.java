@@ -47,6 +47,9 @@ public class Duke {
             Command command = Parser.parse(input);
             String reply = command.execute(taskList, ui, myStorage);
             myStorage.updateTaskListToFile(taskList);
+
+            assert reply != null && !reply.equals("") : "Reply should not be blank";
+
             return reply;
         } catch (DukeException err) {
             return err.getMessage();
