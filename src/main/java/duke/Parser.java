@@ -2,14 +2,9 @@ package duke;
 
 import java.time.LocalDate;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.OnCommand;
+import duke.command.*;
+
+import javax.swing.text.html.HTML;
 
 /**
  * Parser class deals with making sense of the user command.
@@ -25,34 +20,38 @@ public class Parser {
      */
     public static Command parse(String commandMessage) throws DukeException {
         assert commandMessage != null : "Command message is null";
-        String[] message = commandMessage.split(" ", 2);
-        String command = message[0];
+        String[] messages = commandMessage.split(" ", 2);
+        String command = messages[0];
         switch (command) {
         case "bye":
             return new ExitCommand();
         case "list":
             return new ListCommand();
         case "done":
-            return new DoneCommand(getTaskNumber(message[1]));
+            return new DoneCommand(getTaskNumber(messages[1]));
         case "todo":
             return new AddCommand(AddCommand.TaskType.TODO,
-                    new String[] {checkDescriptionAvailable(message[1], command)});
+                    new String[] {checkDescriptionAvailable(messages[1], command)});
         case "deadline":
-            String deadlineDescription = checkDescriptionAvailable(message[1], command);
+            String deadlineDescription = checkDescriptionAvailable(messages[1], command);
             String[] deadlineParameters = getParameters(deadlineDescription, command, " /by ");
             return new AddCommand(AddCommand.TaskType.DEADLINE, deadlineParameters);
         case "event":
-            String eventDescription = checkDescriptionAvailable(message[1], command);
+            String eventDescription = checkDescriptionAvailable(messages[1], command);
             String[] eventParameters = getParameters(eventDescription, command, " /at ");
             return new AddCommand(AddCommand.TaskType.EVENT, eventParameters);
         case "delete":
-            return new DeleteCommand(getTaskNumber(message[1]));
+            return new DeleteCommand(getTaskNumber(messages[1]));
         case "on":
-            String dateString = checkDescriptionAvailable(message[1], command);
+            String dateString = checkDescriptionAvailable(messages[1], command);
             LocalDate date = LocalDate.parse(dateString.trim());
             return new OnCommand(date);
         case "find":
-            return new FindCommand(checkDescriptionAvailable(message[1], command));
+            return new FindCommand(checkDescriptionAvailable(messages[1], command));
+        case "tag":
+            String tagDescription = checkDescriptionAvailable(messages[1], command);
+            String[] tagParameters = tagDescription.split(" ", 2);
+            return new TagCommand(getTaskNumber(tagParameters[0]), tagParameters[1].split("/"));
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(\n");
         }

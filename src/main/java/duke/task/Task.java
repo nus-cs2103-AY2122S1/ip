@@ -6,10 +6,11 @@ package duke.task;
 public class Task {
 
     static final String TASK_STRING_FORMAT = "[%s] %s";
-    static final String TASK_FILE_FORMAT = "%d / %s";
+    static final String TASK_FILE_FORMAT = "%d // %s";
     static final String DONE_STATUS_ICON = "X";
     protected String description;
     protected boolean isDone;
+    private TagList tagList;
 
     /**
      * Constructs the task object.
@@ -19,6 +20,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.tagList = new TagList();
     }
 
     /**
@@ -70,5 +72,17 @@ public class Task {
      */
     public String convertToFileFormat() {
         return String.format(TASK_FILE_FORMAT, isDone ? 1 : 0, description);
+    }
+
+    public void addTags(String ... tagStrings) {
+        tagList.addTags(tagStrings);
+    }
+
+    public String getTagsString() {
+        return tagList.toString();
+    }
+
+    public String getTagsFileFormat() {
+        return tagList.convertToFileFormat();
     }
 }

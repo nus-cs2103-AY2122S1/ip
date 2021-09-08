@@ -9,8 +9,8 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     protected static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy");
-    static final String EVENT_STRING_FORMAT = "[E]%s (at: %s)";
-    static final String EVENT_FILE_FORMAT = "E / %s / %s";
+    static final String EVENT_STRING_FORMAT = "[E]%s (at: %s) %s";
+    static final String EVENT_FILE_FORMAT = "E // %s // %s // %s";
     protected LocalDate time;
 
     /**
@@ -37,11 +37,11 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format(EVENT_STRING_FORMAT, super.toString(), time.format(DATE_FORMATTER));
+        return String.format(EVENT_STRING_FORMAT, super.toString(), time.format(DATE_FORMATTER), getTagsString());
     }
 
     @Override
     public String convertToFileFormat() {
-        return String.format(EVENT_FILE_FORMAT, super.convertToFileFormat(), time);
+        return String.format(EVENT_FILE_FORMAT, super.convertToFileFormat(), time, getTagsFileFormat());
     }
 }

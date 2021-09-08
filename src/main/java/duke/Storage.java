@@ -45,21 +45,24 @@ public class Storage {
                 Scanner fileScanner = new Scanner(localFile);
                 while (fileScanner.hasNextLine()) {
                     String data = fileScanner.nextLine();
-                    String[] parameters = data.split(" / ");
+                    String[] parameters = data.split(" // ");
                     switch (parameters[0]) {
                     case "T":
                         ToDo toDo = new ToDo(parameters[2]);
                         toDo.setDoneStatus(Integer.parseInt(parameters[1]));
+                        toDo.addTags(getTagsFromFile(parameters, 3));
                         taskList.add(toDo);
                         break;
                     case "D":
                         Deadline deadline = new Deadline(parameters[2], LocalDate.parse(parameters[3]));
                         deadline.setDoneStatus(Integer.parseInt(parameters[1]));
+                        deadline.addTags(getTagsFromFile(parameters, 4));
                         taskList.add(deadline);
                         break;
                     case "E":
                         Event event = new Event(parameters[2], LocalDate.parse(parameters[3]));
                         event.setDoneStatus(Integer.parseInt(parameters[1]));
+                        event.addTags(getTagsFromFile(parameters, 4));
                         taskList.add(event);
                         break;
                     default:
@@ -88,6 +91,14 @@ public class Storage {
             myWriter.close();
         } catch (IOException e) {
             throw new DukeException("An error occurred. :-(\n");
+        }
+    }
+
+    private String[] getTagsFromFile(String[] parameters, int parameterNumber) {
+        if (parameters.length > parameterNumber) {
+            return parameters[parameterNumber].split("/");
+        } else {
+            return null;
         }
     }
 }
