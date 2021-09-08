@@ -27,7 +27,7 @@ public class Task {
      *
      * @return a string that will be saved to the file
      */
-    public String saveTask(){
+    public String toStorageFormat(){
         return toString();
     }
 

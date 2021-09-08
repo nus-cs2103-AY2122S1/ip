@@ -19,7 +19,7 @@ public class Deadline extends Task {
                 + endTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
-    public String saveTask() {
+    public String toStorageFormat() {
         return "[D]" + super.toString() + "->by: " + endTime;
     }
 }
