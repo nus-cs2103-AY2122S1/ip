@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.HashMap;
+
 /**
  * The Duke chat-bot app.
  */
@@ -82,8 +84,8 @@ public class Duke {
         String output = "";
         try {
             // Parses user input.
-            String[] inputs = parser.parseInput(input);
-            Constant.Command command = Constant.Command.valueOf(inputs[0]);
+            HashMap<String, String> inputs = parser.parseInput(input);
+            Constant.Command command = Constant.Command.valueOf(inputs.get("command"));
             String task;
 
             // Process user input.
@@ -105,7 +107,7 @@ public class Duke {
                 break;
             case DONE:
                 // Marks a task as being completed.
-                int index = parser.convertToInt(inputs[1]);
+                int index = parser.convertToInt(inputs.get("index"));
                 output = taskList.markDone(index);
 
                 // Edits the file content.
@@ -116,7 +118,7 @@ public class Duke {
                 break;
             case TODO:
                 // Adds a todo-typed task to the task list.
-                Todo todo = new Todo(inputs[1]);
+                Todo todo = new Todo(inputs.get("description"));
                 output = taskList.addItem(todo);
 
                 // Add to file content.
@@ -126,7 +128,7 @@ public class Duke {
                 break;
             case DEADLINE:
                 // Adds a deadline-typed task in the task list.
-                Deadline deadline = new Deadline(inputs[1], inputs[2]);
+                Deadline deadline = new Deadline(inputs.get("description"), inputs.get("date"));
                 output = taskList.addItem(deadline);
 
                 // Add to file content.
@@ -136,7 +138,7 @@ public class Duke {
                 break;
             case EVENT:
                 // Adds an event-typed task in the task list.
-                Event event = new Event(inputs[1], inputs[2]);
+                Event event = new Event(inputs.get("description"), inputs.get("date"));
                 output = taskList.addItem(event);
 
                 // Add to file content.
@@ -146,7 +148,7 @@ public class Duke {
                 break;
             case DELETE:
                 // Deletes a task from the task list.
-                int id = parser.convertToInt(inputs[1]);
+                int id = parser.convertToInt(inputs.get("index"));
                 output = taskList.removeItem(id);
 
                 // Remove from file content.
@@ -160,7 +162,7 @@ public class Duke {
                 break;
             case FIND:
                 // Gets the task matching the queried keyword.
-                output = taskList.find(inputs[1]);
+                output = taskList.find(inputs.get("keyword"));
 
                 break;
             default:

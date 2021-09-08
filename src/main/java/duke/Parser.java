@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.HashMap;
 
 
 /**
@@ -12,12 +13,12 @@ import java.time.format.DateTimeParseException;
 public class Parser {
 
     /**
-     * Returns a string array from the parsed user input string.
+     * Returns a HashMap from the parsed user input string.
      * @param rawInput The user input.
-     * @return String array from the parsed input [COMMAND, arguments...].
+     * @return HashMap from the parsed input {"command": "event", "description": "desc", ...}.
      * @throws DukeException An invalid user input will produce this exception.
      */
-    public String[] parseInput(String rawInput) throws DukeException {
+    public HashMap<String, String> parseInput(String rawInput) throws DukeException {
         String[] inputs = rawInput.split("\\s+");
         if (inputs.length < 1) {
             throw new DukeException(DukeException.Errors.INVALID_COMMAND.toString());
@@ -29,14 +30,17 @@ public class Parser {
         } catch (Exception e) {
             throw new DukeException(DukeException.Errors.INVALID_COMMAND.toString());
         }
+
+        HashMap<String, String> parsedInput = new HashMap<>();
         switch (command) {
         case LIST:
             if (inputs.length != 1) {
                 throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString()
                         + " `list` command has no arguments");
             }
-            return new String[] {commandStr};
+            parsedInput.put("command", commandStr);
 
+            break;
         case DONE:
             if (inputs.length != 2) {
                 throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString()
@@ -49,16 +53,20 @@ public class Parser {
                 throw new DukeException(DukeException.Errors.WRONG_ARGUMENT_TYPE.toString()
                         + " (example: 'done 5')");
             }
-            return new String[] {commandStr, inputs[1]};
+            parsedInput.put("command", commandStr);
+            parsedInput.put("index", inputs[1]);
 
+            break;
         case TODO:
             if (inputs.length < 2) {
                 throw new DukeException(DukeException.Errors.MISSING_DESCRIPTION.toString()
                         + " (example: 'todo watch Borat')");
             }
             String description = combineStringArray(inputs, 1, inputs.length);
-            return new String[] {commandStr, description};
+            parsedInput.put("command", commandStr);
+            parsedInput.put("description", description);
 
+            break;
         case DEADLINE:
             if (inputs.length < 2) {
                 throw new DukeException(DukeException.Errors.MISSING_DESCRIPTION.toString()
@@ -74,8 +82,11 @@ public class Parser {
                         + " (example: 'deadline watch Borat /by 2021-08-21 18:00')");
             }
             String date = parseDate(arguments[1]);
-            return new String[] {commandStr, arguments[0], date};
+            parsedInput.put("command", commandStr);
+            parsedInput.put("description", arguments[0]);
+            parsedInput.put("date", date);
 
+            break;
         case EVENT:
             if (inputs.length < 2) {
                 throw new DukeException(DukeException.Errors.MISSING_DESCRIPTION.toString()
@@ -91,15 +102,19 @@ public class Parser {
                         + " (example: 'event watch Borat /at 2021-08-21 18:00')");
             }
             String dateTest = parseDate(args[1]);
-            return new String[] {commandStr, args[0], dateTest};
+            parsedInput.put("command", commandStr);
+            parsedInput.put("description", args[0]);
+            parsedInput.put("date", dateTest);
 
+            break;
         case BYE:
             if (inputs.length != 1) {
                 throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString()
                         + " `bye` command has no arguments");
             }
-            return new String[] {commandStr};
+            parsedInput.put("command", commandStr);
 
+            break;
         case DELETE:
             if (inputs.length != 2) {
                 throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString()
@@ -112,34 +127,41 @@ public class Parser {
                 throw new DukeException(DukeException.Errors.WRONG_ARGUMENT_TYPE.toString()
                         + " (example: 'delete 5')");
             }
-            return new String[] {commandStr, inputs[1]};
+            parsedInput.put("command", commandStr);
+            parsedInput.put("index", inputs[1]);
 
+            break;
         case HELP:
             if (inputs.length != 1) {
                 throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString()
                         + " `help` command has no arguments");
-            }
-            return new String[] {commandStr};
+            };
+            parsedInput.put("command", commandStr);
 
+            break;
         case DATES:
             if (inputs.length != 1) {
                 throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString()
                         + " `dates` command has no arguments");
             }
-            return new String[] {commandStr};
+            parsedInput.put("command", commandStr);
 
+            break;
         case FIND:
             if (inputs.length < 2) {
                 throw new DukeException(DukeException.Errors.MISSING_DESCRIPTION.toString()
                         + " (example: 'find book')");
             }
             String keyword = combineStringArray(inputs, 1, inputs.length);
-            return new String[] {commandStr, keyword};
+            parsedInput.put("command", commandStr);
+            parsedInput.put("keyword", keyword);
 
+            break;
         default:
             // Invalid command
             throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString());
         }
+        return parsedInput;
     }
 
     /**
