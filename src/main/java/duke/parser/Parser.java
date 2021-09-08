@@ -6,50 +6,75 @@ import java.time.format.DateTimeParseException;
 import java.util.Map;
 
 import duke.DukeException;
+import duke.commands.*;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
 
     /**
-     * Parses the user input and split it into different variables.
+     * Parses user input into command for execution.
      *
-     * @param input The user input.
-     * @return A Map containing the type, description and time (if applicable) of a Task.
-     * @throws DukeException if the input is in invalid format.
+     * @param input Full user input string.
+     * @return The command based on the user input.
+     * @throws DukeException if user uses the wrong keyword.
      */
-    public static Map<String, String> parseAddCommandFromInput(String input) throws DukeException {
+    public static Command parseCommand(String input) throws DukeException {
+        String text = input.trim();
+        if (text.equals("q")) {
+            return new ExitCommand();
+        } else if (text.equals("ls")) {
+            return new ListCommand();
+        } else if (text.startsWith("done")) {
+            return new DoneCommand(text);
+        } else if (text.startsWith("delete")) {
+            return new DeleteCommand(text);
+        } else if (text.startsWith("find")) {
+            return new FindCommand(text);
+        } else if (text.startsWith("todo") || text.startsWith("deadline") || text.startsWith("event")) {
+            return parseAddCommand(text);
+        } else {
+            throw new DukeException("Please use the keyword --todo, deadline or event--");
+        }
+    }
+
+    /**
+     * Parses command to add a task.
+     * @param input Full user input string.
+     * @return The command based on the user input.
+     * @throws DukeException if user uses the wrong format.
+     */
+    public static Command parseAddCommand(String input) throws DukeException {
         input = input.trim();
-        String type = "";
         String description = "";
         String time = "";
-
         try {
             if (input.contains("todo")) {
-                type = "T";
                 description = input.split(" ", 2)[1];
+                return new TodoCommand(description);
             } else if (input.contains("deadline")) {
                 try {
-                    type = "D";
                     description = input.split(" ", 2)[1].split(" /by ", 2)[0];
                     time = input.split(" ", 2)[1].split(" /by ", 2)[1];
+                    return new DeadlineCommand(description, time);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new DukeException("Use the format --deadline xx /by (yyyy-MM-dd) (HH:mm)--");
                 }
             } else if (input.contains("event")) {
                 try {
-                    type = "E";
                     description = input.split(" ", 2)[1].split(" /at ", 2)[0];
                     time = input.split(" ", 2)[1].split(" /at ", 2)[1];
+                    return new EventCommand(description, time);
                 } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
                     throw new DukeException("Use the format --event xx /at (yyyy-MM-dd) (HH:mm)--");
                 }
             } else {
                 throw new DukeException("Please use the keyword --todo, deadline or event--");
             }
-            return Map.of("type", type, "description", description, "time", time);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("The description of a task cannot be empty.");
         }
-
     }
 
     /**
@@ -58,13 +83,12 @@ public class Parser {
      * @param input The text from the file containing the task list.
      * @return A Map containing the type, description and time (if applicable) of a Task.
      */
-    public static Map<String, String> parseFromFile(String input) {
+    public static Map<String, String> parseFromFile(String input) throws DukeException {
         String type = input.substring(1, 2);
         String status = input.substring(4, 5);
         String description = input.split("\\(")[0].substring(7).trim();
         String time = "";
         String finalText = "";
-
         if (type.equals("D") || type.equals("E")) {
             String temp = input.split(":", 2)[1];
             time = temp.substring(1, temp.length() - 1);
@@ -79,13 +103,17 @@ public class Parser {
         }
 
         switch (type) {
-        case "T": finalText = "todo " + description;
+        case "T":
+            finalText = "todo " + description;
             break;
-        case "D": finalText = "deadline " + description + " /by " + time;
+        case "D":
+            finalText = "deadline " + description + " /by " + time;
             break;
-        case "E": finalText = "event " + description + " /at " + time;
+        case "E":
+            finalText = "event " + description + " /at " + time;
             break;
         default:
+            throw new DukeException("Wrong formatting in duke.txt");
         }
 
         return Map.of("finalText", finalText, "status", status);

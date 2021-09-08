@@ -2,13 +2,13 @@ package duke.commands;
 
 import duke.DukeException;
 import duke.TaskList;
+import duke.ui.TextUi;
 
 public class ListCommand extends Command {
-    protected ListCommand() {}
+    public ListCommand() {}
 
     @Override
     public String execute(TaskList tasks) throws DukeException {
-//        return TextUi.show
-        return null;
+        return tasks.printList();
     }
 }

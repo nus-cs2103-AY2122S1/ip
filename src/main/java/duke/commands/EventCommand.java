@@ -2,23 +2,20 @@ package duke.commands;
 
 import duke.DukeException;
 import duke.TaskList;
-import duke.TaskType;
 import duke.ui.TextUi;
-
-import java.util.Map;
 
 public class EventCommand extends Command {
     private String description;
-    private String by;
+    private String at;
 
-    protected EventCommand(Map<String, String> command) throws DukeException {
-        this.description = command.get("description");
-        this.by = command.get("time");
+    public EventCommand(String description, String at) throws DukeException {
+        this.description = description;
+        this.at = at;
     }
 
     @Override
     public String execute(TaskList tasks) throws DukeException {
-        tasks.addTask(TaskType.EVENT, description, by);
+        tasks.addTask("EVENT", description, at);
         String response = TextUi.showTaskAdded(tasks);
         response += TextUi.showUpdatedNumberOfTasks(tasks);
         return response;

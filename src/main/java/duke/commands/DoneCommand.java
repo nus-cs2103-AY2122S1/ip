@@ -8,7 +8,7 @@ import duke.ui.TextUi;
 public class DoneCommand extends Command {
     private int index;
 
-    protected DoneCommand(String input) throws DukeException {
+    public DoneCommand(String input) throws DukeException {
         try {
             int index = Integer.parseInt(input.split(" ")[1]) - 1;
             this.index = index;

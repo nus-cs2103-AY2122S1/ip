@@ -8,7 +8,7 @@ import duke.ui.TextUi;
 public class DeleteCommand extends Command {
     private int index;
 
-    protected DeleteCommand(String input) throws DukeException {
+    public DeleteCommand(String input) throws DukeException {
         try {
             int index = Integer.parseInt(input.split(" ")[1]) - 1;
             this.index = index;

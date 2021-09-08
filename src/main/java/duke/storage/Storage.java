@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import duke.DukeException;
 import duke.TaskList;
+import duke.commands.Command;
 import duke.parser.Parser;
 
 public class Storage {
@@ -51,7 +52,8 @@ public class Storage {
             while (s.hasNext()) {
                 String text = s.nextLine();
                 Map<String, String> m = Parser.parseFromFile(text);
-                tasks.addTask(m.get("finalText"));
+                Command cmd = Parser.parseCommand(m.get("finalText"));
+                cmd.execute(tasks);
                 if (m.get("status").equals("X")) {
                     tasks.getTaskList().get(tasks.getTaskList().size() - 1).setDone();
                 }
