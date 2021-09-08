@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 /**
@@ -25,8 +26,12 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    @FXML
+    private ImageView imageView = new ImageView();
+
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.gif"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.gif"));
+
 
     @FXML
     public void initialize() {
@@ -40,15 +45,25 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    private Image getDukeImage(String dukeResponse) {
+        if (dukeResponse.startsWith("OOPS")) {
+            return new Image(this.getClass().getResourceAsStream("/images/DaDukeConfused.gif"));
+        } else {
+            return new Image(this.getClass().getResourceAsStream("/images/DaDuke.gif"));
+        }
+    }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
+        userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.gif"));
         Ui ui = new Ui();
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        dukeImage = getDukeImage(response);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
