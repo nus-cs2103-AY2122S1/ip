@@ -23,7 +23,7 @@ public class Storage {
 
     private static final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
     private final String filePath;
-
+    private final String dirPath = "data";
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -34,7 +34,7 @@ public class Storage {
      */
     public List<Task> load() {
         File f = new File(filePath);
-        File dir = new File("data");
+        File dir = new File(dirPath);
         if (!dir.isDirectory()) {
             dir.mkdir();
         }
@@ -67,7 +67,7 @@ public class Storage {
             }
             return tasks;
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Failed to load from save file");
             return Collections.emptyList();
         }
     }
