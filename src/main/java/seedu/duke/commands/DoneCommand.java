@@ -29,7 +29,14 @@ public class DoneCommand extends Command {
     public String execute(TaskList taskList, Storage storage) {
         int index = Integer.parseInt(this.taskId) - 1;
         try {
+            Task currTask = taskList.getTaskList().get(index);
             Task updatedTask = taskList.doneItem(index);
+            if (currTask.hasAfterTask()) {
+                String afterTaskDescription = currTask.getAfterTask().getDescription();
+                taskList.addTask(currTask.getAfterTask().getTask());
+                storage.updateDone(index);
+                return getReplyMessageWithAfterTask(taskList, updatedTask, afterTaskDescription);
+            }
             storage.updateDone(index);
 
             return getReplyMessage(taskList, updatedTask);
@@ -41,6 +48,12 @@ public class DoneCommand extends Command {
 
     private String getReplyMessage(TaskList taskList, Task updatedTask) {
         return Ui.printMessage(Ui.DONE_MESSAGE + "\n" + updatedTask.toString());
+    }
+
+    private String getReplyMessageWithAfterTask(TaskList taskList, Task updatedTask, String afterTaskDescription) {
+        String message = getReplyMessage(taskList, updatedTask);
+        message += "Added new task: " + afterTaskDescription;
+        return message;
     }
 
     /**

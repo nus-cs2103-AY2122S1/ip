@@ -73,8 +73,12 @@ public class Parser {
                 return new UiCommand(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
             }
             PeriodTask periodTask = new PeriodTask(getOnlyDescription(descriptions), periodTaskGetFrom(descriptions),
-            periodTaskGetTo(descriptions));
+                    periodTaskGetTo(descriptions));
             return new AddCommand(periodTask);
+
+        case CHAINTASK:
+            descriptions = getDescriptions(actionDescription);
+            return new AddChainCommand(getOnlyDescription(descriptions), getAfterIndex(descriptions));
 
         case DELETE:
             return new DeleteCommand(getDescriptions(actionDescription));
@@ -135,10 +139,14 @@ public class Parser {
         System.out.println(period);
         return period.split(" and ")[0];
     }
-    
+
     private String periodTaskGetTo(String descriptions) {
         String period = descriptions.split(" /between ")[1];
         System.out.println(period);
         return period.split(" and ")[1];
+    }
+
+    private String getAfterIndex(String descriptions) {
+        return descriptions.split(" /after ")[1];
     }
 }

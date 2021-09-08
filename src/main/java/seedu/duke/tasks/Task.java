@@ -4,6 +4,7 @@ public class Task {
     protected final String description;
     protected final String dateTime;
     protected final boolean isDone;
+    protected AfterTask afterTask;
 
     /**
      * Constructor. Default having the isDone parameter to be set as false and
@@ -55,6 +56,14 @@ public class Task {
         this.description = description;
         this.dateTime = dateTime;
         this.isDone = isDone;
+    }
+
+    public void setAfterTask(AfterTask afterTask) {
+        this.afterTask = afterTask;
+    }
+
+    public AfterTask getAfterTask() {
+        return this.afterTask;
     }
 
     /**
@@ -112,6 +121,10 @@ public class Task {
      */
     public Task markAsDone() {
         return new Task(this.getDescription(), true);
+    }
+
+    public boolean hasAfterTask() {
+        return this.afterTask != null;
     }
 
     /**
