@@ -43,10 +43,12 @@ public class Parser {
 
             return tasks.find(userInput);
 
+        } else if (userInput.length() > 3 && userInput.substring(0, 4).matches("help")) {
+
+            return tasks.getHelp();
+
         } else {
-
             return tasks.displayError();
-
         }
 
     }
