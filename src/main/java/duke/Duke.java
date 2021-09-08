@@ -21,6 +21,12 @@ public class Duke {
 
     }
 
+    /**
+     * Get the response according to the user input
+     *
+     * @param input user command
+     * @return Duke's response
+     */
     public String getResponse(String input) {
         try {
             //Echo

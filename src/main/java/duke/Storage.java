@@ -17,6 +17,7 @@ public class Storage {
 
     /**
      * Creates a new storage file for Duke in the corresponding file path
+     *
      * @param directory directory store the file
      * @param filePath the path of the file
      * @return a new 'Storage' object
@@ -41,6 +42,7 @@ public class Storage {
 
     /**
      * Save the taskList to the file
+     *
      * @param taskList a list of tasks
      * @throws DukeException Exceptions that are possible to occur in Duke
      */
@@ -60,6 +62,7 @@ public class Storage {
 
     /**
      * Read the file and reload the data from the file
+     *
      * @param taskList a list of tasks
      * @throws DukeException Exceptions that are possible to occur in Duke
      */
@@ -74,7 +77,7 @@ public class Storage {
                 type = current.charAt(1);
                 if (type == 'T') {
                     Task newTask = new Todo(current.substring(7));
-                    newTask.setCompleted(current.charAt(4)=='X');
+                    newTask.setIsDone(current.charAt(4)=='X');
                     taskList.add(newTask);
                 }
                 else if (type == 'E') {
@@ -83,7 +86,7 @@ public class Storage {
                     name = split[0];
                     time = LocalDate.parse(split[1]);
                     Task newTask = new Event(name, time);
-                    newTask.setCompleted(current.charAt(4)=='X');
+                    newTask.setIsDone(current.charAt(4)=='X');
                     taskList.add(newTask);
                 }
                 else {
@@ -92,7 +95,7 @@ public class Storage {
                     name = split[0];
                     time = LocalDate.parse(split[1]);
                     Task newTask = new Deadline(name, time);
-                    newTask.setCompleted(current.charAt(4)=='X');
+                    newTask.setIsDone(current.charAt(4)=='X');
                     taskList.add(newTask);
                 }
             }

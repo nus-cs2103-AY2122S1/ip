@@ -5,7 +5,7 @@ package duke;
  */
 public class Task {
     private String name;
-    private Boolean completed = false;
+    private Boolean isDone = false;
 
     public Task(String name) {
         this.name = name;
@@ -14,16 +14,17 @@ public class Task {
     /**
      * Mark the task completed
      */
-    public void doneTask() {
-        this.completed = true;
+    public void markAsDone() {
+        this.isDone = true;
     }
 
-    public void setCompleted(Boolean completed) {
-        this.completed = completed;
+    public void setIsDone(Boolean isDone) {
+        this.isDone = isDone;
     }
 
     /**
      * make the string that will be saved to the file
+     *
      * @return a string that will be saved to the file
      */
     public String saveTask(){
@@ -35,7 +36,7 @@ public class Task {
     }
 
     public String toString() {
-        if(completed) {
+        if(isDone) {
             return "[X] " + name;
         }
         return "[ ] " + name;
