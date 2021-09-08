@@ -63,6 +63,13 @@ public class Deadline extends Task {
                 + localDateTime.format(dtf) + ")";
     }
 
+    @Override
+    public Task getToggledDone() {
+        Deadline toggledDeadline = new Deadline(description, dateAndTime);
+        toggledDeadline.toggleDone();
+        return toggledDeadline;
+    }
+
     /**
      * Checks to see if two deadlines are equal in description and status.
      * Returns false if object is not equal to this deadline.

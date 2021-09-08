@@ -38,7 +38,8 @@ public class Done implements GeneralCommand {
      */
     @Override
     public String execute() throws IOException {
-        currentTask.setDone();
+        Task toggledStatusTask = currentTask.getToggledDone();
+        tasks.set(index, toggledStatusTask);
         storage.save(tasks);
         return ui.doneMessageToString(currentTask);
     }

@@ -3,7 +3,7 @@ package duke;
 /**
  * A general task that a user can input.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -29,8 +29,12 @@ public class Task {
     /**
      * Sets boolean if task is done, or not.
      */
-    public void setDone() {
-        this.isDone = true;
+    public void toggleDone() {
+        if (isDone) {
+            isDone = false;
+        } else {
+            isDone = true;
+        }
     }
 
     /**
@@ -60,6 +64,8 @@ public class Task {
     public String toString() {
         return this.getStatusIcon() + " " + this.getDescription();
     }
+
+    public abstract Task getToggledDone();
 
     /**
      * Checks to see if two tasks are equal in description and status.

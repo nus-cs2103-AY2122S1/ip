@@ -78,7 +78,7 @@ public class Storage implements Cloneable {
                 desc = text.substring(8);
                 ToDo todo = new ToDo(desc);
                 if (status.equals("1")) {
-                    todo.setDone();
+                    todo.toggleDone();
                 }
                 tasks.add(todo);
             } else {
@@ -89,13 +89,13 @@ public class Storage implements Cloneable {
                 if (activity.equals("D")) {
                     Deadline deadline = new Deadline(desc, date);
                     if (status.equals("1")) {
-                        deadline.setDone();
+                        deadline.toggleDone();
                     }
                     tasks.add(deadline);
                 } else {
                     Event event = new Event(desc, date);
                     if (status.equals("1")) {
-                        event.setDone();
+                        event.toggleDone();
                     }
                     tasks.add(event);
                 }

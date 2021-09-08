@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
  * "Event <event name> /at <event date>".
  */
 public class Event extends Task {
-    protected boolean isDone;
     private final String EVENT = "[E]";
     protected String dateAndTime;
     protected LocalDateTime localDateTime;
@@ -22,7 +21,6 @@ public class Event extends Task {
      */
     public Event(String description, String dateAndTime) {
         super(description);
-        this.isDone = false;
         this.dateAndTime = dateAndTime;
     }
 
@@ -58,6 +56,13 @@ public class Event extends Task {
         formatLocalDateTime();
         assert localDateTime != null : "Date should not be null";
         return EVENT + this.getStatusIcon() + " " + this.getDescription() + " (at: " + localDateTime.format(dtf) + ")";
+    }
+
+    @Override
+    public Task getToggledDone() {
+        Event toggledEvent = new Event(description, dateAndTime);
+        toggledEvent.toggleDone();
+        return toggledEvent;
     }
 
     /**

@@ -5,7 +5,6 @@ package duke;
  * "todo <todo name>".
  */
 public class ToDo extends Task {
-    protected boolean isDone;
     private final String TODO = "[T]";
 
     /**
@@ -15,7 +14,6 @@ public class ToDo extends Task {
      */
     public ToDo(String description) {
         super(description);
-        this.isDone = false;
     }
 
     /**
@@ -26,6 +24,13 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         return TODO + this.getStatusIcon() + " " + this.getDescription();
+    }
+
+    @Override
+    public Task getToggledDone() {
+        ToDo toggledTodo = new ToDo(description);
+        toggledTodo.toggleDone();
+        return toggledTodo;
     }
 
     /**

@@ -97,6 +97,8 @@ public class Parser {
             } catch (NumberFormatException e) {
                 return "Please input a correct number";
             }
+
+            setNewLists(storage, tasks, ui);
             return new Done(index, tasks, storage, ui).execute();
         }
         case LIST: {
