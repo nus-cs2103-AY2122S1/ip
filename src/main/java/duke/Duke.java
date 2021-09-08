@@ -39,6 +39,8 @@ public class Duke {
      * @return the response with regard to the input
      */
     public String getResponse(String input) {
+        assert input != null : "input cannot be null";
+
         String response = "";
 
         try {
