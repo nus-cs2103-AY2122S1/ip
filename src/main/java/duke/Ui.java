@@ -39,6 +39,7 @@ public class Ui {
      *
      * @param task task to be marked
      * @param isDone boolean flag for whether the task is done or not
+     * @return The message to be returned to the user
      */
     public static String getTaskDoneMessage(Task task, boolean isDone) {
         if (isDone) {
@@ -57,6 +58,7 @@ public class Ui {
      *
      * @param task the task that is being removed
      * @param size the current size of the task list
+     * @return Message to be returned to the user
      */
     public static String getRemoveTaskMsg(Task task, int size) {
         return "I have removed the task:\n  "
@@ -69,6 +71,7 @@ public class Ui {
      *
      * @param task the task that is being removed
      * @param size the current size of the task list
+     * @return Message to be returned to the user
      */
     public static String getAddTaskMsg(Task task, int size) {
         return "I have added the task!\n  "

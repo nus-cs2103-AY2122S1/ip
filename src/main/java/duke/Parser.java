@@ -20,7 +20,7 @@ public class Parser {
      *
      * @param scan the scanner to be used
      * @param taskList the taskList to be used
-     * @return false if previous input was to terminate ("bye"), else returns true
+     * @return A String based on what message needs to be returned
      */
     public String scanInputs(Scanner scan, TaskList taskList) {
         String data = scan.next();
