@@ -6,8 +6,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.util.ArrayList;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -26,6 +30,11 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DukeIcon.png"));
 
     private Parser parser;
+
+    // To keep track of input history so user can switch between past inputs
+    private ArrayList<String> pastInputs = new ArrayList<>();
+    private int inputIndex = -1;
+    private String currentInput;
 
     /**
      * Initializes settings, and greets user.
@@ -52,12 +61,50 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        // add the input to the front of the past inputs
+        pastInputs.add(0, input);
+        // reset the selected history
+        inputIndex = -1;
         // if there is not input, no need to have any action
         if (!input.equals("")) {
             userInput.clear();
             addUserDialog(input);
             String response = parser.getResponse(input);
             addDukeDialog(response);
+        }
+    }
+
+    /**
+     * Switches between past inputs when user keys up or down.
+     *
+     * @param keyEvent The key that was pressed.
+     */
+    @FXML
+    private void handleUserKeystroke(KeyEvent keyEvent) {
+        if (inputIndex == -1) {
+            // save the current input so it's accessible when returning
+            currentInput = userInput.getText();
+        }
+
+        switch (keyEvent.getCode()) {
+        case UP:
+            if (inputIndex + 1 < pastInputs.size()) {
+                inputIndex++;
+                userInput.setText(pastInputs.get(inputIndex));
+                userInput.end();
+            }
+            break;
+        case DOWN:
+            if (inputIndex > -1) {
+                inputIndex--;
+                String newText = inputIndex == -1 ? currentInput : pastInputs.get(inputIndex);
+                userInput.setText(newText);
+                userInput.end();
+            }
+            break;
+        default:
+            // nothing special to do otherwise
+            break;
         }
     }
 
