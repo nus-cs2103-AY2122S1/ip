@@ -100,6 +100,24 @@ public class TaskList {
     }
 
     /**
+     * Sorts the tasks
+     * @param order Order for tasks to be sorted in
+     */
+    public void sort(SortOrder order) {
+        switch (order) {
+        case ALPHABETICALLY:
+            tasks.sort((Task t1, Task t2) -> t1.getDescription().compareToIgnoreCase(t2.getDescription()));
+            break;
+        case CHRONOLOGICALLY:
+            tasks.sort(Comparable::compareTo);
+            break;
+        default:
+            throw new DukeException("No such sorting order!");
+        }
+        this.saveToStorage();
+    }
+
+    /**
      * Represents a found result.
      */
     public static class FindResult {

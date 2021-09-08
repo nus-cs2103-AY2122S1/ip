@@ -86,4 +86,8 @@ public class Ui {
     public static String goodbye() {
         return "Bye bye, see you next time.";
     }
+
+    public static String notifySort(SortOrder order) {
+        return "Sorted your tasks by " + order.label;
+    }
 }
