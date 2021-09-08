@@ -17,6 +17,7 @@ public abstract class Task {
      * @param name name of task
      */
     public Task(String name) {
+        assert(name != null);
         this.name = name;
         this.isDone = false;
     }
@@ -28,6 +29,7 @@ public abstract class Task {
      * @param isDone whether the task has been completed
      */
     public Task(String name, boolean isDone) {
+        assert(name != null);
         this.name = name;
         this.isDone = isDone;
     }
