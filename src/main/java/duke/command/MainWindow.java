@@ -17,9 +17,10 @@ public class MainWindow extends AnchorPane {
     private static final String LOADING_ERROR = DOTTED_LINES + "\nFile cannot be created\n" + DOTTED_LINES;
     private static final String SAVING_ERROR = DOTTED_LINES + "\nFile cannot be saved\n" + DOTTED_LINES;
 
+    private static final String EMPTY_LIST_MESSAGE = "There are no items in your list";
     private static final String WELCOME_MESSAGE = DOTTED_LINES +
             "\nHello I'm LOTTERY-A\n" +
-            "Also known as the List Of Tasks That Eventually Require Your Attention\n" +
+            "AKA List Of Tasks That Eventually Require Your Attention\n" +
             "What can I do for you?\n" +
             DOTTED_LINES;
     private static final String BYE_MESSAGE = DOTTED_LINES +
@@ -67,6 +68,8 @@ public class MainWindow extends AnchorPane {
             command = input.substring(0, commandIndex);
             description = input.substring(commandIndex);
         }
+
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, dukeImage));
 
         try {
             parser.parse(command, description, duke);
@@ -145,7 +148,18 @@ public class MainWindow extends AnchorPane {
      * @param taskList String representing list of tasks
      */
     public void showListOfTasks(String taskList) {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(taskList, dukeImage));
+        if (taskList.isBlank()) {
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(EMPTY_LIST_MESSAGE, dukeImage));
+        } else {
+            String listMessage = "Here is your list of tasks\n" +
+                    DOTTED_LINES +
+                    "\n" +
+                    taskList +
+                    DOTTED_LINES;
+
+
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(listMessage, dukeImage));
+        }
     }
 
 }

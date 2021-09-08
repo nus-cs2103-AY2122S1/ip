@@ -10,12 +10,15 @@
 <fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <ImageView fx:id="displayPicture" fitHeight="100.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
-      <ScrollPane prefHeight="100.0" prefWidth="487.0" vmax="1.0" vvalue="0.0">
+      <ScrollPane hbarPolicy="NEVER" prefHeight="100.0" vmax="1.0" vvalue="0.0">
         <content>
-            <Label fx:id="dialog" contentDisplay="CENTER" maxHeight="-Infinity" text="Label" wrapText="false">
+            <Label fx:id="dialog" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="550.0" text="Label" wrapText="true">
                <font>
                   <Font name="Arial" size="14.0" />
-               </font></Label>
+               </font>
+               <padding>
+                  <Insets left="10.0" right="20.0" top="5.0" />
+               </padding></Label>
         </content>
       </ScrollPane>
   </children>
