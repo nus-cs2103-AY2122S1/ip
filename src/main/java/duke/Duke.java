@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Duke {
@@ -68,11 +69,13 @@ public class Duke {
             break;
         }
         case COMMAND_DONE: {
+            assert Arrays.asList(commands).size() >= 2 : "Invalid format of index for command done given";
             int taskIndex = Integer.parseInt(commands[1]);
             message = this.taskArray.handleDone(taskIndex);
             break;
         }
         case COMMAND_DELETE: {
+            assert Arrays.asList(commands).size() >= 2 : "Invalid format of index for command delete given";
             int taskIndex = Integer.parseInt(commands[1]);
             message = this.taskArray.handleDelete(taskIndex);
             break;
