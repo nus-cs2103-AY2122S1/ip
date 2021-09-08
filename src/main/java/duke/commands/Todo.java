@@ -8,22 +8,43 @@ package duke.commands;
  */
 public class Todo extends Task {
     /**
-     * Public constructor for Todo.
+     * Constructor for Todo.
      *
      * @param description Description to be stored.
      */
     public Todo(String description) {
-        super(description);
+        this(description, false, "");
     }
 
     /**
-     * Overloaded public constructor for Todo.
+     * Constructor for Todo.
      *
      * @param description Description to be stored.
      * @param isDone Boolean that represents Todo completion status.
      */
     public Todo(String description, boolean isDone) {
-        super(description, isDone);
+        this(description, isDone, "");
+    }
+
+    /**
+     * Constructor for Todo.
+     *
+     * @param description Description to be stored.
+     * @param notes A string representation of notes.
+     */
+    public Todo(String description, String notes) {
+        this(description, false, notes);
+    }
+
+    /**
+     * Constructor for Todo.
+     *
+     * @param description Description to be stored.
+     * @param isDone Boolean that represents Todo completion status.
+     * @param notes A string representation of notes.
+     */
+    public Todo(String description, boolean isDone, String notes) {
+        super(description, isDone, notes);
     }
 
     /**
@@ -33,7 +54,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[T]" + super.toString() + "\n  Notes: " + notes;
     }
 
     /**
@@ -43,7 +64,7 @@ public class Todo extends Task {
      */
     @Override
     public String printInSaveFormat() {
-        String[] info = {"T", isDone ? "1" : "0", description};
+        String[] info = {"T", isDone ? "1" : "0", description, notes};
         return String.join(" | ", info);
     }
 }

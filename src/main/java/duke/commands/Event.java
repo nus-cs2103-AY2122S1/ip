@@ -19,8 +19,7 @@ public class Event extends Task {
      * @param at Event Time.
      */
     public Event(String description, LocalDateTime at) {
-        super(description);
-        this.at = at;
+        this(description, false, at, "");
     }
 
     /**
@@ -31,7 +30,30 @@ public class Event extends Task {
      * @param at Event Time.
      */
     public Event(String description, boolean isDone, LocalDateTime at) {
-        super(description, isDone);
+        this(description, isDone, at, "");
+    }
+
+    /**
+     * Constructor for Event.
+     *
+     * @param description Description to be stored in an Event.
+     * @param at Event Time.
+     * @param notes A string representation of notes.
+     */
+    public Event(String description, LocalDateTime at, String notes) {
+        this(description, false, at, notes);
+    }
+
+    /**
+     * Constructor for Event.
+     *
+     * @param description Description to be stored in an Event.
+     * @param isDone Boolean that represents Task completion status.
+     * @param at Event Time.
+     * @param notes A string representation of notes.
+     */
+    public Event(String description, boolean isDone, LocalDateTime at, String notes) {
+        super(description, isDone, notes);
         this.at = at;
     }
 
@@ -44,7 +66,7 @@ public class Event extends Task {
     public String toString() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         String dateString = at.format(format);
-        return "[E]" + super.toString() + " (at: " + dateString + ")";
+        return "[E]" + super.toString() + " (at: " + dateString + ")" + "\n  Notes: " + notes;
     }
 
     /**
@@ -56,7 +78,7 @@ public class Event extends Task {
     public String printInSaveFormat() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         String dateString = at.format(format);
-        String[] info = {"E", isDone ? "1" : "0", description, dateString};
+        String[] info = {"E", isDone ? "1" : "0", description, dateString, notes};
         return String.join(" | ", info);
     }
 }

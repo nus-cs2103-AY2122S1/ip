@@ -19,19 +19,41 @@ public class Deadline extends Task {
      * @param by Deadline.
      */
     public Deadline(String description, LocalDateTime by) {
-        super(description);
-        this.by = by;
+        this(description, false, by, "");
     }
 
     /**
-     * Overloaded constructor for Deadline.
+     * Constructor for Deadline.
      *
-     * @param description Description to be stored.
+     * @param description Description to be stored in Deadline.
      * @param isDone Boolean that represents Deadline completion status.
      * @param by Deadline.
      */
     public Deadline(String description, boolean isDone, LocalDateTime by) {
-        super(description, isDone);
+        this(description, isDone, by, "");
+    }
+
+    /**
+     * Constructor for Deadline.
+     *
+     * @param description Description to be stored.
+     * @param by Deadline.
+     * @param notes A string representation of notes.
+     */
+    public Deadline(String description, LocalDateTime by, String notes) {
+        this(description, false, by, notes);
+    }
+
+    /**
+     * Constructor for Deadline.
+     *
+     * @param description Description to be stored.
+     * @param isDone Boolean that represents Deadline completion status.
+     * @param by Deadline.
+     * @param notes A string representation of notes.
+     */
+    public Deadline(String description, boolean isDone, LocalDateTime by, String notes) {
+        super(description, isDone, notes);
         this.by = by;
     }
 
@@ -44,7 +66,7 @@ public class Deadline extends Task {
     public String toString() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         String dateString = by.format(format);
-        return "[D]" + super.toString() + " (by: " + dateString + ")";
+        return "[D]" + super.toString() + " (by: " + dateString + ")" + "\n  Notes: " + notes;
     }
 
     /**
@@ -56,7 +78,7 @@ public class Deadline extends Task {
     public String printInSaveFormat() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         String dateString = by.format(format);
-        String[] info = {"D", isDone ? "1" : "0", description, dateString};
+        String[] info = {"D", isDone ? "1" : "0", description, dateString, notes};
         return String.join(" | ", info);
     }
 }

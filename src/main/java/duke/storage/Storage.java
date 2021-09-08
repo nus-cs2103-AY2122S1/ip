@@ -81,20 +81,32 @@ public class Storage {
     }
 
     private Task parseTask(String task) {
-        // Format to Parse: T | 0 | description | addInfo
+        // Format to Parse: T | 0 | description | addInfo | notes (optional)
+        final int maxLengthT = 4;
+        final int maxLengthD = 5;
+        final int maxLengthE = 5;
+        final int taskPos = 0;
+        final int isDonePos = 1;
+        final int descriptionPos = 2;
+        final int addInfoPos = 3;
+        final int notesPos = 4;
+
         String[] tokens = task.split(" \\| ");
-        Task t = null;
-        boolean isDone = tokens[1].equals("1");
+        Task taskCreated = null;
+        boolean isDone = tokens[isDonePos].equals("1");
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         LocalDateTime timestamp = null;
-        switch (tokens[0]) {
+        String notes;
+        switch (tokens[taskPos]) {
         case "T":
-            t = new Todo(tokens[2], isDone);
+            notes = tokens.length == maxLengthT ? tokens[maxLengthT - 1] : "";
+            taskCreated = new Todo(tokens[descriptionPos], isDone, notes);
             break;
         case "D":
             try {
-                timestamp = LocalDateTime.parse(tokens[3], format);
-                t = new Deadline(tokens[2], isDone, timestamp);
+                timestamp = LocalDateTime.parse(tokens[addInfoPos], format);
+                notes = tokens.length == maxLengthD ? tokens[notesPos] : "";
+                taskCreated = new Deadline(tokens[descriptionPos], isDone, timestamp, notes);
             } catch (DateTimeParseException e) {
                 System.out.println("Error parsing task from saved file");
             }
@@ -102,13 +114,14 @@ public class Storage {
         case "E":
             try {
                 timestamp = LocalDateTime.parse(tokens[3], format);
-                t = new Event(tokens[2], isDone, timestamp);
+                notes = tokens.length == maxLengthE ? tokens[notesPos] : "";
+                taskCreated = new Event(tokens[descriptionPos], isDone, timestamp, notes);
             } catch (DateTimeParseException e) {
                 System.out.println("Error parsing task from saved file");
             }
             break;
         default:
         }
-        return t;
+        return taskCreated;
     }
 }

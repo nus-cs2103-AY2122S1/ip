@@ -31,7 +31,7 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/itadori.jpeg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/todo.jpeg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/todo3.jpeg"));
 
     /** Initialise main components */
     @FXML
@@ -52,7 +52,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
 
-        /** Does nothing if input is empty. */
+        // Does nothing if input is empty.
         if (input.trim().isEmpty()) {
             return;
         }
