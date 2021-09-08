@@ -10,8 +10,15 @@ import duke.tasks.Task;
 import duke.tasks.Todo;
 import duke.ui.TextUi;
 
+public enum TaskType {
+    TODO,
+    DEADLINE,
+    EVENT
+}
+
 
 public class TaskList {
+
     private ArrayList<Task> tasks = new ArrayList<>();
 
     /**
@@ -57,6 +64,14 @@ public class TaskList {
 
     }
 
+    public String addTask(TaskType type, String description) {
+        return "";
+    }
+
+    public String addTask(TaskType type, String description, String by) {
+        return "";
+    }
+
     /**
      * Deletes a Task from the list.
      *
@@ -80,6 +95,13 @@ public class TaskList {
         }
         return s;
     }
+
+    public Task deleteTask(int index) throws DukeException {
+        Task t = tasks.get(index);
+        tasks.remove(index);
+        return t;
+    }
+
     /**
      * Marks a Task as done.
      *
@@ -100,6 +122,12 @@ public class TaskList {
                     + "Indicate the correct task number that you want to mark as done.");
         }
         return s;
+    }
+
+    public Task markAsDone(int index) {
+        Task t = (Task) tasks.get(index);
+        t.setDone();
+        return t;
     }
 
     /**

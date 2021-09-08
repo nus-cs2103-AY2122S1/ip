@@ -211,6 +211,7 @@ public class Duke extends Application {
      */
     private String getResponse(String text) {
         Duke app = new Duke("data/duke.txt");
+        // remember to do storage.copyToFile() at the end
         String response = "";
         try {
             if (text.equals("q")) {
