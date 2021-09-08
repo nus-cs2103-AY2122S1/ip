@@ -51,13 +51,16 @@ public class Storage {
                 this.readData(task);
             }
             fileScanner.close();
-        } catch (FileNotFoundException fileNotFoundException) { // If file doesn't exist, create it.
+        } catch (FileNotFoundException fileNotFoundException) {
+            // If file doesn't exist, create it.
             try {
                 Storage.data.createNewFile();
-            } catch (IOException ioException) { // If directory doesn't exist, create it.
+            } catch (IOException ioException) {
+                // If directory doesn't exist, create it.
                 File directory = Paths.get(Storage.DIRECTORY_PATH, "data").toFile();
                 directory.mkdirs();
-                this.readFile(); // Run this method again to create a file.
+                // Run this method again to create a file.
+                this.readFile();
             }
         }
     }
@@ -68,7 +71,6 @@ public class Storage {
      * @param line A line of data.
      */
     private void readData(String line) {
-        // Split data into words
         String[] splitted = line.split(" / ");
 
         // Determine type of the task and create corresponding task instance

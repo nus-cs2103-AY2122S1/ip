@@ -45,20 +45,20 @@ public class Parser {
 
         // Parse the command
         String[] information = words[1].split(regex);
-        if (information.length == 2) {
-            try {
-                if (isEvent) {
-                    return new AddTaskCommand(new Event(information[0], information[1]));
-                } else {
-                    return new AddTaskCommand(new Deadline(information[0], information[1]));
-                }
-            } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
-                throw new InvalidTimeException(timeFormat);
-            }
-        } else if (information.length < 2) {
+        if (information.length < 2) {
             throw new MissingCommandDetailException("time", taskType, String.format("%s %s", regex, timeFormat));
-        } else {
+        }
+        if (information.length > 2) {
             throw new MultipleTimeSlotsException(taskType);
+        }
+        try {
+            if (isEvent) {
+                return new AddTaskCommand(new Event(information[0], information[1]));
+            } else {
+                return new AddTaskCommand(new Deadline(information[0], information[1]));
+            }
+        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
+            throw new InvalidTimeException(timeFormat);
         }
     }
 
