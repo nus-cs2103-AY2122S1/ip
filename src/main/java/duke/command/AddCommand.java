@@ -73,8 +73,8 @@ public class AddCommand extends Command {
         return false;
     }
 
-    private static Task createDeadline(String description) throws DukeException{
-        String[] splitString = description.split("deadline ");
+    private static Task createTodo(String description) throws DukeException{
+        String[] splitString = description.split("todo ");
         Task newTask;
 
         if (splitString.length > 1) {
@@ -87,7 +87,7 @@ public class AddCommand extends Command {
         return newTask;
     }
 
-    private static Task createTodo(String description) throws DukeException{
+    private static Task createDeadline(String description) throws DukeException{
         String[] splitString = description.split("deadline |/by");
         Task newTask;
 

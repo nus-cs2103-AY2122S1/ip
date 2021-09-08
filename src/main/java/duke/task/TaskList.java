@@ -124,12 +124,27 @@ public class TaskList {
 
         for (int i = 1; i <= numTask; i++) {
             Task task = this.getTask(i);
-            if (task.isKeyWordPresent(keyWord)) {
+
+            boolean isKeyWordPresent = task.isKeyWordPresent(keyWord);
+            boolean isTagPresent = task.isTagPresent(keyWord);
+            boolean isWantedTask = isKeyWordPresent || isTagPresent;
+
+            if (isWantedTask) {
                 newTasks.add(task);
             }
         }
 
         return newTasks;
+    }
+
+    public void addTag(String tag, int taskNumber) throws DukeException {
+        assert taskNumber >= 1;
+
+        try {
+            this.getTask(taskNumber).addTag(tag);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Please enter a valid task number.");
+        }
     }
 
 }

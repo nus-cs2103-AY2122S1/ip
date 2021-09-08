@@ -1,11 +1,14 @@
 package duke.task;
 
+import java.util.ArrayList;
+
 /**
  * Task store information that user wants to do.
  */
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected ArrayList<String> tags;
 
     /**
      * Constructs a Task object.
@@ -15,6 +18,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        tags = new ArrayList<>();
     }
 
     /**
@@ -48,13 +52,22 @@ public class Task {
         return fullDescription;
     }
 
+    private String getTagToFileString() {
+        String fileString = "";
+        for (int i = 0; i < tags.size(); i++) {
+            fileString = fileString + "#" + tags.get(i);
+        }
+        return fileString;
+    }
+
     /**
      * Convert the task into a string that can be store in the file.
      *
      * @return the text format of the task to be store in the file.
      */
     public String toFileString() {
-        String fileString = String.format("%s | %s", getStatusIcon(), getDescription());
+        String fileString = String.format("%s | %s | %s",
+                getStatusIcon(), getTagToFileString(), getDescription());
         return fileString;
     }
 
@@ -69,6 +82,27 @@ public class Task {
         boolean isPresent = !(intIndex == -1);
 
         return isPresent;
+    }
+
+    /**
+     * Add tag to the task.
+     *
+     * @param tag Tag to be added into tags.
+     */
+    public void addTag(String tag) {
+        if (!tags.contains(tag)) {
+            tags.add(tag);
+        }
+    }
+
+    /**
+     * Check whether tag is present.
+     *
+     * @param tag Tag to search for.
+     * @return
+     */
+    public boolean isTagPresent(String tag) {
+        return tags.contains(tag);
     }
 
 }

@@ -60,16 +60,17 @@ public class Storage {
         String[] task = taskString.split(" \\| ");
         String taskType = task[0];
         boolean isDone = task[1].equals("X");
+        String[] tags = task[2].split("#");
 
         switch (taskType) {
         case ("T"):
-            newTask = new Todo(task[2]);
+            newTask = new Todo(task[3]);
             break;
         case ("D"):
-            newTask = new Deadline(task[2], task[3]);
+            newTask = new Deadline(task[3], task[4]);
             break;
         case ("E"):
-            newTask = new Event(task[2], task[3]);
+            newTask = new Event(task[3], task[4]);
             break;
         default:
             throw new DukeException("Oops! Duke can't load a file");
@@ -77,6 +78,10 @@ public class Storage {
 
         if (isDone) {
             newTask.markDone();
+        }
+
+        for (int i = 0; i < tags.length; i++) {
+            newTask.addTag(tags[i]);
         }
 
         return newTask;

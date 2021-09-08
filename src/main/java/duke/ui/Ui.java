@@ -132,4 +132,10 @@ public class Ui {
         return taskList;
     }
 
+    public String showTag(String tag, Task task) {
+        String tagTemplate = "%s has been tagged to this task:\n%s";
+        String tagDone = String.format(tagTemplate, tag, task.toString());
+        return tagDone;
+    }
+
 }
