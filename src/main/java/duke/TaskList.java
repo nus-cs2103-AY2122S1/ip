@@ -37,7 +37,8 @@ public class TaskList {
     }
 
     /**
-     * The method to print all tasks to console
+     * The method to show user all the tasks in the list
+     * @return the string containing all tasks
      */
     public String showAllTasks() {
         if (listOfTasks.isEmpty()) {
@@ -47,6 +48,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * The method to show user all the matching tasks given a keyword
+     *
+     * @param matchingTasks the list of tasks matching the keyword given by user
+     * @return the string containing all matching tasks
+     */
     public String showMatchingTasks(ArrayList<Task> matchingTasks) {
         if (matchingTasks.isEmpty()) {
             return "No matching tasks found! ☹";
@@ -55,6 +62,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * The method to return all tasks as a String
+     *
+     * @param tasks the tasks in the list
+     * @return the String containing all tasks in the given ArrayList
+     */
     public String showTasks(ArrayList<Task> tasks) {
         String output = "";
         int size = tasks.size();
