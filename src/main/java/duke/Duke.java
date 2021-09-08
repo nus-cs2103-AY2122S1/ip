@@ -163,19 +163,19 @@ public class Duke {
                             //deadline task
                             done = (line.charAt(startIndex+4) == 'X');
 
-                            minutes = Integer.parseInt(line.substring(endIndex-2,endIndex));
+                            minutes = Integer.parseInt(line.substring(endIndex-2, endIndex));
                             hours = Integer.parseInt(line.substring(endIndex-5, endIndex-3));
 
-                            day = Integer.parseInt(line.substring(endIndex-8,endIndex-6));
-                            month = Integer.parseInt(line.substring(endIndex-11,endIndex-9));
-                            year = Integer.parseInt(line.substring(endIndex-16,endIndex-12));
+                            day = Integer.parseInt(line.substring(endIndex-8, endIndex-6));
+                            month = Integer.parseInt(line.substring(endIndex-11, endIndex-9));
+                            year = Integer.parseInt(line.substring(endIndex-16, endIndex-12));
 
                             description = line.substring(startIndex+7, endIndex-22);
 
                             date = java.time.LocalDate.of(year, month, day);
                             time = java.time.LocalTime.of(hours, minutes);
 
-                            loadedList.add(new Deadline(description,date,time,done));
+                            loadedList.add(new Deadline(description, date, time, done));
 
                         } else{
 
@@ -301,30 +301,32 @@ public class Duke {
 
         public void showError(String errorType){
             switch (errorType){
-                case "loadFail":
-                    System.out.println("Oops! I couldn't load the task file.");
-                    System.out.println("Starting over with an empty task list.");
-                case "invalidCommand":
-                    System.out.println("Oops! Sorry I don't recognise that command!");
-                    System.out.println("Type \"help\" for list of commands, check for illegal characters/trailing spaces");
-                    break;
-                case "emptyInput":
-                    System.out.println("Oops! Please input something.");
-                    break;
-                case "invalidDate":
-                    System.out.println("Oops! Please follow the format: dd/mm/yyyy hhmm or I can't process the date!");
-                    break;
-                case "noTasks":
-                    System.out.println("Oops! There are no tasks yet!");
-                    break;
-                case "maxTasks":
-                    System.out.println("Oops! My task list is full, no new tasks can be added.");
-                    break;
-                case "invalidIndex":
-                    System.out.println("Oops! Please enter a valid task number.");
-                    break;
-                default:
-                    System.out.println("Oops! An unknown error occurred.");
+            case "loadFail":
+                System.out.println("Oops! I couldn't load the task file.");
+                System.out.println("Starting over with an empty task list.");
+            case "invalidCommand":
+                System.out.println("Oops! Sorry I don't recognise that command!");
+                System.out.println("Type \"help\" for list of commands, "
+                        + "check for illegal characters/trailing spaces");
+                break;
+            case "emptyInput":
+                System.out.println("Oops! Please input something.");
+                break;
+            case "invalidDate":
+                System.out.println("Oops! Please follow the format: dd/mm/yyyy hhmm "
+                        + "or I can't process the date!");
+                break;
+            case "noTasks":
+                System.out.println("Oops! There are no tasks yet!");
+                break;
+            case "maxTasks":
+                System.out.println("Oops! My task list is full, no new tasks can be added.");
+                break;
+            case "invalidIndex":
+                System.out.println("Oops! Please enter a valid task number.");
+                break;
+            default:
+                System.out.println("Oops! An unknown error occurred.");
             }
 
         }
@@ -349,177 +351,178 @@ public class Duke {
         //Check user commands and handle them.
         public void parseCommand(String input, TaskList list){
             switch (input){
-                case "bye":
-                    ui.showMessage("Bye! *Poof!*");
-                    System.exit(0);
-                case "help":
-                    ui.showHelp();
-                    break;
-                case "list":
-                    ui.showMessage("Tasks so far:");
-                    list.printAllTasks();
-                    break;
-                case "done":
-                    if (list.getSize() == 0){
-                        ui.showError("noTasks");
-                    } else{
-                        while (true){
-                            try {
-                                int index = Integer.parseInt(ui.readInput("Can do! Which task should I mark as done?\n"
-                                        + "From task number 1 to " + list.getSize()));
-                                if (index > list.getSize() || index <= 0) {
-                                    ui.showError("invalidIndex");
-                                    continue;
-                                }
-                                ui.showMessage("Ok I've marked the following task as done");
-                                list.markDone(index);
-                                break;
-                            } catch (Exception e){
-                                ui.showError("invalidIndex");
-                            }
-                        }
-
-                    }
-                    break;
-                case "delete":
-                    if (list.getSize() == 0) {
-                        ui.showError("noTasks");
-                    } else {
-                        while (true) {
-                            try {
-                                int index = Integer.parseInt(ui.readInput(
-                                        "Can Do! Which task should I delete?\n" +
-                                                "From task number 1 to " + list.getSize()));
-                                if (index > list.getSize() || index <= 0) {
-                                    ui.showError("invalidIndex");
-                                    continue;
-                                }
-                                ui.showMessage("Ok, boom this task is gone!");
-                                System.out.println(list.getTask(index));
-                                list.delete(index);
-                                ui.showMessage("There are now " + list.getSize() + " tasks");
-                                break;
-                            } catch (Exception e){
-                                ui.showError("invalidIndex");
-                            }
-                        }
-
-                    }
-                    break;
-                case "todo":
-                    ui.showMessage("Ok! A to-do task");
-
+            case "bye":
+                ui.showMessage("Bye! *Poof!*");
+                System.exit(0);
+            case "help":
+                ui.showHelp();
+                break;
+            case "list":
+                ui.showMessage("Tasks so far:");
+                list.printAllTasks();
+                break;
+            case "done":
+                 if (list.getSize() == 0){
+                    ui.showError("noTasks");
+                 } else{
                     while (true){
-                        String description;
-                        description = ui.readInput("What is the description of the task?");
-                        if (description.equals("")){
-                            ui.showError("emptyInput");
-                        } else{
-                            Task t = new ToDo(description, false);
-                            ui.taskCreationSuccess(t);
-                            list.add(t);
-                            ui.showMessage("There are now " + list.getSize() + " tasks");
+                        try {
+                            int index = Integer.parseInt(ui.readInput(
+                                    "Can do! Which task should I mark as done?\n"
+                                            + "From task number 1 to " + list.getSize()));
+                            if (index > list.getSize() || index <= 0) {
+                                ui.showError("invalidIndex");
+                                continue;
+                            }
+                            ui.showMessage("Ok I've marked the following task as done");
+                            list.markDone(index);
                             break;
+                        } catch (Exception e){
+                            ui.showError("invalidIndex");
                         }
                     }
-                    break;
-                case "deadline":
 
-                    ui.showMessage("Ok! A Deadline task");
+                 }
+                 break;
+            case "delete":
+                 if (list.getSize() == 0) {
+                     ui.showError("noTasks");
+                 } else {
+                     while (true) {
+                         try {
+                             int index = Integer.parseInt(ui.readInput(
+                                     "Can Do! Which task should I delete?\n"
+                                             + "From task number 1 to " + list.getSize()));
+                             if (index > list.getSize() || index <= 0) {
+                                 ui.showError("invalidIndex");
+                                 continue;
+                             }
+                             ui.showMessage("Ok, boom this task is gone!");
+                             System.out.println(list.getTask(index));
+                             list.delete(index);
+                             ui.showMessage("There are now " + list.getSize() + " tasks");
+                             break;
+                         } catch (Exception e){
+                             ui.showError("invalidIndex");
+                         }
+                     }
+
+                    }
+                 break;
+            case "todo":
+                ui.showMessage("Ok! A to-do task");
+
+                while (true){
                     String description;
-                    int day, month, year;
-                    int hours, minutes;
-                    LocalDate date;
-                    LocalTime time;
-
-                    while (true){
-                        description = ui.readInput("What is the description of the task?");
-                        if (description.equals("")){
-                            ui.showError("emptyInput");
-                        } else{
-                            break;
-                        }
+                    description = ui.readInput("What is the description of the task?");
+                    if (description.equals("")){
+                        ui.showError("emptyInput");
+                    } else{
+                        Task t = new ToDo(description, false);
+                        ui.taskCreationSuccess(t);
+                        list.add(t);
+                        ui.showMessage("There are now " + list.getSize() + " tasks");
+                        break;
                     }
-                    while (true) {
+                }
+                break;
+            case "deadline":
 
-                        input = ui.readInput("Enter the deadline for the task\n" +
-                                "Enter date/time in this exact format: dd/mm/yyyy hhmm");
+                ui.showMessage("Ok! A Deadline task");
+                String description;
+                int day, month, year;
+                int hours, minutes;
+                LocalDate date;
+                LocalTime time;
 
-                        try {
-                            day = Integer.parseInt(input.substring(0, 2));
-                            month = Integer.parseInt(input.substring(3, 5));
-                            year = Integer.parseInt(input.substring(6, 10));
-
-                            hours = Integer.parseInt(input.substring(11, 13));
-                            minutes = Integer.parseInt(input.substring(13));
-
-                            date = java.time.LocalDate.of(year, month, day);
-                            time = java.time.LocalTime.of(hours, minutes);
-
-                            break;
-                        } catch (Exception e) {
-                            ui.showError("invalidDate");
-                        }
-
-
+                while (true){
+                    description = ui.readInput("What is the description of the task?");
+                    if (description.equals("")){
+                        ui.showError("emptyInput");
+                    } else{
+                        break;
                     }
+                }
+                while (true) {
 
-                    Task t = new Deadline(description, date, time, false);
-                    ui.taskCreationSuccess(t);
-                    list.add(t);
-                    ui.showMessage("There are now " + list.getSize() + " tasks");
-                    break;
+                    input = ui.readInput("Enter the deadline for the task\n"
+                            + "Enter date/time in this exact format: dd/mm/yyyy hhmm");
 
-                case "event":
-                    ui.showMessage("Ok! A Deadline task");
-                    int startHours, endHours, startMinutes, endMinutes;
-                    LocalTime startTime, endTime;
-                    while (true){
-                        description = ui.readInput("What is the description of the task?");
-                        if (description.equals("")){
-                            ui.showError("emptyInput");
-                        } else{
-                            break;
-                        }
+                    try {
+                        day = Integer.parseInt(input.substring(0, 2));
+                        month = Integer.parseInt(input.substring(3, 5));
+                        year = Integer.parseInt(input.substring(6, 10));
+
+                        hours = Integer.parseInt(input.substring(11, 13));
+                        minutes = Integer.parseInt(input.substring(13));
+
+                        date = java.time.LocalDate.of(year, month, day);
+                        time = java.time.LocalTime.of(hours, minutes);
+
+                        break;
+                    } catch (Exception e) {
+                        ui.showError("invalidDate");
                     }
 
-                    while (true) {
 
-                        input = ui.readInput("Enter the event time range for the task\n" +
-                                "Enter date/time in this exact format: dd/mm/yyyy hhmm hhmm");
+                }
 
-                        try {
-                            day = Integer.parseInt(input.substring(0, 2));
-                            month = Integer.parseInt(input.substring(3, 5));
-                            year = Integer.parseInt(input.substring(6, 10));
+                Task t = new Deadline(description, date, time, false);
+                ui.taskCreationSuccess(t);
+                list.add(t);
+                ui.showMessage("There are now " + list.getSize() + " tasks");
+                break;
 
-                            startHours = Integer.parseInt(input.substring(11, 13));
-                            startMinutes = Integer.parseInt(input.substring(13,15));
-
-                            endHours = Integer.parseInt(input.substring(16,18));
-                            endMinutes = Integer.parseInt(input.substring(18));
-
-                            date = java.time.LocalDate.of(year, month, day);
-                            startTime = java.time.LocalTime.of(startHours, startMinutes);
-                            endTime = java.time.LocalTime.of(endHours, endMinutes);
-
-                            break;
-                        } catch (Exception e) {
-                            ui.showError("invalidDate");
-                        }
-
-
+            case "event":
+                ui.showMessage("Ok! An Event task");
+                int startHours, endHours, startMinutes, endMinutes;
+                LocalTime startTime, endTime;
+                while (true){
+                    description = ui.readInput("What is the description of the task?");
+                    if (description.equals("")){
+                        ui.showError("emptyInput");
+                    } else{
+                        break;
                     }
-                    t = new Event(description, date, startTime, endTime, false);
-                    ui.taskCreationSuccess(t);
-                    list.add(t);
-                    ui.showMessage("There are now " + list.getSize() + " tasks");
-                    break;
+                }
 
-                default:
-                    //invalid command
-                    ui.showError("invalidCommand");
-                    break;
+                while (true) {
+
+                    input = ui.readInput("Enter the event time range for the task\n"
+                            + "Enter date/time in this exact format: dd/mm/yyyy hhmm hhmm");
+
+                    try {
+                        day = Integer.parseInt(input.substring(0, 2));
+                        month = Integer.parseInt(input.substring(3, 5));
+                        year = Integer.parseInt(input.substring(6, 10));
+
+                        startHours = Integer.parseInt(input.substring(11, 13));
+                        startMinutes = Integer.parseInt(input.substring(13,15));
+
+                        endHours = Integer.parseInt(input.substring(16,18));
+                        endMinutes = Integer.parseInt(input.substring(18));
+
+                        date = java.time.LocalDate.of(year, month, day);
+                        startTime = java.time.LocalTime.of(startHours, startMinutes);
+                        endTime = java.time.LocalTime.of(endHours, endMinutes);
+
+                        break;
+                    } catch (Exception e) {
+                        ui.showError("invalidDate");
+                    }
+
+
+                }
+                t = new Event(description, date, startTime, endTime, false);
+                ui.taskCreationSuccess(t);
+                list.add(t);
+                ui.showMessage("There are now " + list.getSize() + " tasks");
+                break;
+
+            default:
+                //invalid command
+                ui.showError("invalidCommand");
+                break;
             }
 
         }
@@ -545,7 +548,7 @@ public class Duke {
         while (true){
             //read input, parse command, update list if needed, save to file.
             String input = ui.readInput("");
-            parser.parseCommand(input,tasks);
+            parser.parseCommand(input, tasks);
             storage.save(tasks.getList());
         }
 
