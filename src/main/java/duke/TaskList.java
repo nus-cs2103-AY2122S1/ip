@@ -97,7 +97,7 @@ public class TaskList {
     /**
      * A method that sorts the task list by task.
      *
-     * @return The response to be displayed in the GUI. 
+     * @return The response to be displayed in the GUI.
      */
     public String sortByTask() {
         ArrayList<Task> sortedList = new ArrayList<>();

@@ -3,17 +3,18 @@ package duke;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Test;
+
 import duke.commands.DeadlineCommand;
 import duke.commands.EventCommand;
 import duke.commands.TodoCommand;
-import org.junit.jupiter.api.Test;
 
 public class ParserTest {
     @Test
     public void testParse1() throws DukeException {
         String input = "todo eat sleep eat sleep";
         Parser parser = new Parser(input);
-        assertTrue(parser.parse() instanceof TodoCommand); 
+        assertTrue(parser.parse() instanceof TodoCommand);
     }
 
     @Test
