@@ -67,7 +67,6 @@ public class Ui {
         for (int i = 0; i < tasks.length(); i++) {
             response += "\t" + (i + 1) + ". " + tasks.getTask(i).toString() + "\n";
         }
-        System.out.println(response);
         return response;
     }
 
@@ -77,12 +76,18 @@ public class Ui {
      * @param taskNumber Index of the task you want to mark as done.
      */
     public String markDone(int taskNumber) {
-        String response = "Nice! I've marked this task as done:\n";
-        tasks.getTask(taskNumber).markAsDone();
-        storage.write(tasks.getTaskList(), storage.getFilePath());
-        response += "\t[" + tasks.getTask(taskNumber).getStatusIcon() + "] "
-                + tasks.getTask(taskNumber).getDescription() + "\n";
-        return response;
+        try {
+            tasks.getTask(taskNumber).markAsDone();
+            String response = "Nice! I've marked this task as done:\n";
+            tasks.getTask(taskNumber).markAsDone();
+            storage.write(tasks.getTaskList(), storage.getFilePath());
+            response += "\t[" + tasks.getTask(taskNumber).getStatusIcon() + "] "
+                    + tasks.getTask(taskNumber).getDescription() + "\n";
+            return response;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return e.toString();
+        }
+
     }
 
     /**

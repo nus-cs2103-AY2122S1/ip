@@ -28,7 +28,7 @@ import javafx.stage.Stage;
  * It takes in user input and create the task object.
  * It will save the final list into the file when programmes end.
  */
-public class Duke extends Application { //extends Application
+public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -162,12 +162,13 @@ public class Duke extends Application { //extends Application
         Storage storage = new Storage("data/duke.txt");
         TaskList list = new TaskList(storage.load());
         Ui ui = new Ui(storage, list);
-
-        if (input.startsWith("bye")) {
-            return ui.goodbye();
-                } else if (input.equals("list")) {
-            return ui.listTasks();
-                } else if (input.startsWith("done")) {
+        try {
+            if (input.startsWith("bye")) {
+                return ui.goodbye();
+            } else if (input.equals("list")) {
+                return ui.listTasks();
+            } else {
+                if (input.startsWith("done")) {
                     taskNumber = Integer.parseInt(input.substring(input.indexOf(" ") + 1)) - 1;
                     assert taskNumber >= 0 : "Task number should be positive";
                     return ui.markDone(taskNumber);
@@ -190,7 +191,27 @@ public class Duke extends Application { //extends Application
                 } else if (input.startsWith("find")) {
                     int thingToFind = input.indexOf(" ") + 1;
                     return ui.findTasks(input.substring(thingToFind));
+                } else if (input.startsWith("help")) {
+                    String helpMessage = "Welcome to the quick help page!\n" +
+                            "Here are some examples of what you can type: \n" +
+                            "\t1) help\n" +
+                            "\t2) list\n" +
+                            "\t3) todo do homework\n" +
+                            "\t4) deadline assignment \\by 2021-09-24\n" +
+                            "\t5) event career fair \\at 2021-09-08\n" +
+                            "\t6) find homework\n" +
+                            "\t7) done 3\n" +
+                            "\t8) delete 1\n" +
+                            "\t9) bye\n";
+                    return helpMessage;
                 }
-        return "Duke heard: " + input;
+            }
+            return "I don't understand. Please try again!";
+        } catch (StringIndexOutOfBoundsException e) {
+            return "You keyed in the command wrongly";
+        } catch (IndexOutOfBoundsException e) {
+            return "Sorry but the number you keyed in is out of range";
+
+        }
     }
 }
