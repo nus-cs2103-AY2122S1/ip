@@ -33,7 +33,7 @@ public class TaskListTest {
      */
     @Test
     public void testAddToList() {
-        File file = new File("test.txt");
+        File file = new File("test1.txt");
         if (file.exists()) {
             file.delete();
             try {
@@ -43,7 +43,7 @@ public class TaskListTest {
             }
         }
         try {
-            Storage storage = new Storage("test.txt");
+            Storage storage = new Storage("test1.txt");
             TaskList taskList = new TaskList(storage);
             UI ui = new UI();
 
@@ -74,7 +74,7 @@ public class TaskListTest {
      */
     @Test
     public void testListOrder() {
-        File file = new File("test.txt");
+        File file = new File("test2.txt");
         if (file.exists()) {
             file.delete();
             try {
@@ -84,7 +84,7 @@ public class TaskListTest {
             }
         }
         try {
-            Storage storage = new Storage("test.txt");
+            Storage storage = new Storage("test2.txt");
             TaskList taskList = new TaskList(storage);
             taskList.getList().add(todo);
             taskList.getList().add(deadline);
@@ -111,7 +111,7 @@ public class TaskListTest {
      */
     @Test
     public void testMarkAsDone() {
-        File file = new File("test.txt");
+        File file = new File("test3.txt");
         if (file.exists()) {
             file.delete();
             try {
@@ -121,7 +121,7 @@ public class TaskListTest {
             }
         }
         try {
-            Storage storage = new Storage("test.txt");
+            Storage storage = new Storage("test3.txt");
             TaskList taskList = new TaskList(storage);
             taskList.getList().add(todo);
             taskList.getList().add(deadline);
