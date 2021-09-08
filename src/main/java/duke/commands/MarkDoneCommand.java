@@ -19,11 +19,20 @@ public class MarkDoneCommand extends Command {
         this.taskNumber = Integer.parseInt(taskNumber);
     }
 
+    /**
+     * Marks the specified task as done.
+     *
+     * @param taskList The list of tasks in Duke. Handles all task related functions.
+     * @param cliUi Ui object to deal with user input/outputs.
+     * @param storage Storage object to deal with saving taskList to disk.
+     * @return String[] with the messages to be printed out to the Ui.
+     * @throws InvalidTaskNumberException if the taskNumber is 0 or greater than the size of the taskList.
+     */
     @Override
-    public String execute(TaskList tasks, CliUi cliUi, Storage storage) throws InvalidTaskNumberException {
-        String[] messages = tasks.markDone(taskNumber);
+    public String execute(TaskList taskList, CliUi cliUi, Storage storage) throws InvalidTaskNumberException {
+        String[] messages = taskList.markDone(taskNumber);
         cliUi.printOut(messages);
-        storage.save(tasks);
+        storage.save(taskList);
         return String.join("\n", messages);
     }
 

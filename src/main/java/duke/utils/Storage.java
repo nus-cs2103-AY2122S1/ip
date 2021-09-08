@@ -43,34 +43,38 @@ public class Storage {
             Scanner reader = new Scanner(data);
             while (reader.hasNextLine()) {
                 String line = reader.nextLine();
-                String[] info = line.split(" \\| ");
-                if (info.length == 1) {
-                    continue;
-                }
-
-                String command = info[0];
-                Task task = null;
-                boolean done = info[1].equals("1");
-                if (command.equals("T")) {
-                    task = new Todo(info[2]);
-                } else if (command.equals("D")) {
-                    task = new Deadline(info[2], info[3]);
-                } else if (command.equals("E")) {
-                    task = new Event(info[2], info[3]);
-                }
-
-                if (task != null) {
-                    if (done) {
-                        task.markDone();
-                    }
-                    tasks.add(task);
-                }
+                addTask(line, tasks);
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
 
         return tasks;
+    }
+
+    private void addTask(String line, List<Task> tasks) throws DukeException {
+        String[] info = line.split(" \\| ");
+        if (info.length == 1) {
+            return;
+        }
+
+        String command = info[0];
+        Task task = null;
+        boolean done = info[1].equals("1");
+        if (command.equals("T")) {
+            task = new Todo(info[2]);
+        } else if (command.equals("D")) {
+            task = new Deadline(info[2], info[3]);
+        } else if (command.equals("E")) {
+            task = new Event(info[2], info[3]);
+        }
+
+        if (task != null) {
+            if (done) {
+                task.markDone();
+            }
+            tasks.add(task);
+        }
     }
 
     /**
@@ -80,9 +84,10 @@ public class Storage {
      */
     public void save(TaskList tasks) {
         String data = tasks.getData();
+        boolean isDataValid = data.equals("");
+        isDataValid = isDataValid || data.matches("[T, D, E] \\| [0, 1] \\|.*");
         try (PrintWriter out = new PrintWriter(filePath)) {
             out.println(data);
-            out.close();
         } catch (IOException e) {
             // will never occur since the file will always be created first
         }

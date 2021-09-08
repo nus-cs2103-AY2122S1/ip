@@ -11,10 +11,18 @@ import duke.tasks.Task;
 public class TaskList {
     private List<Task> tasks;
 
+    /**
+     * TaskList constructor.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * TaskList constructor.
+     *
+     * @param tasks list of tasks to be added.
+     */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
@@ -23,14 +31,25 @@ public class TaskList {
         if (i == 0 || i > tasks.size()) {
             throw new InvalidTaskNumberException(tasks.size());
         } else {
-            return tasks.get(i - 1);
+            Task output = tasks.get(i - 1);
+            return output;
         }
     }
 
+    /**
+     * Returns the size of the TaskList.
+     *
+     * @return size of the taskList.
+     */
     public int getSize() {
         return tasks.size();
     }
 
+    /**
+     * Adds a task to the taskList.
+     *
+     * @param task Task to be added to taskList.
+     */
     public void addTask(Task task) {
         tasks.add(task);
     }
@@ -59,8 +78,8 @@ public class TaskList {
      */
     public String[] markDone(int i) throws InvalidTaskNumberException {
         Task task = getTask(i);
-        boolean marked = task.markDone();
-        if (marked) {
+        boolean isMarked = task.markDone();
+        if (isMarked) {
             return new String[] {"Nice! I've marked this task as done:", "    " + task.toString()};
         } else {
             return new String[] {"This was completed previously:", "    " + task.toString()};
@@ -129,6 +148,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns String representation of the taskList.
+     *
+     * @return String representation of the taskList.
+     */
     @Override
     public String toString() {
         return String.join("\n", toStrings());

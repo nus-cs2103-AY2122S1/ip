@@ -28,12 +28,22 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns a String representation of the Event.
+     *
+     * @return String representation of the Event.
+     */
     @Override
     public String toString() {
         String timeInfoString = timeInfo.format(outputFormatter);
         return String.format("[E]%s (at: %s)", super.toString(), timeInfoString);
     }
 
+    /**
+     * Returns a String which is used to save data to disk.
+     *
+     * @return String representation of how data will be saved to disk.
+     */
     @Override
     public String toDataString() {
         String timeInfoString = timeInfo.format(inputFormatter);

@@ -56,18 +56,17 @@ public class Duke extends Application {
     public void run() {
         cliUi.showWelcome();
         Command command;
-        boolean isExited = false;
         do {
             try {
                 String input = cliUi.readCommand();
                 command = Parser.parseNext(input);
                 command.execute(taskList, cliUi, storage);
-                isExited = command.hasExited();
+                isExit = command.hasExited();
             } catch (DukeException e) {
                 cliUi.printOut(e.getMessage());
             }
         }
-        while (!isExited);
+        while (!isExit);
 
     }
 
