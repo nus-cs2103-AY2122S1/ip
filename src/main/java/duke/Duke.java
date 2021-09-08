@@ -1,10 +1,6 @@
 package duke;
 
-import java.lang.reflect.Array;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import duke.exceptions.DukeException;
 
 /**
  * Modified version of Duke (Personal Assistant Chatbot). Speaks owo language.

@@ -1,44 +1,46 @@
-package duke;
+package duke.tasks;
+
+import duke.Parser;
+import duke.tasks.Task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 /**
- * Event (Task). Can be added to list in Duke.
+ * Deadline (Task). Can be added to list in Duke.
  *
  * @author Ruth Poh
  */
-public class Event extends Task {
+public class Deadline extends Task {
 
     /**
      * Constructor to initialize Deadline.
      *
-     * @param taskstr Task.
-     * @param date Date/Time of task.
+     * @param taskString Task.
+     * @param date Date of deadline.
      */
-    public Event(String taskstr, LocalDate date) {
-        super(taskstr);
+    public Deadline(String taskString, LocalDate date) {
+        super(taskString);
         super.date = date;
         super.time = null;
     }
 
     /**
-     * Constructor to initialize Event. With time.
+     * Constructor to initialize Deadline. With time.
      * @param taskstr Task.
-     * @param date Date/Time of task.
+     * @param deadline Deadline of task.
      * @param time Time of task.
      */
-    public Event(String taskstr, LocalDate date, LocalTime time) {
+    public Deadline(String taskstr, LocalDate deadline, LocalTime time) {
         super(taskstr);
-        super.date = date;
+        super.date = deadline;
         super.time = time;
     }
 
     /**
-     * Returns time Event occurs at, in String form.
-     * @return Time Event occurs at.
+     * Returns date Deadline occurs at, in String form.
+     * @return
      */
     @Override
     public String getDate() {
@@ -46,7 +48,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns time Event occurs at.
+     * Returns time Deadline occurs at.
      * @return
      */
     @Override
@@ -59,7 +61,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns simplified date and time Event occurs at, in String form.
+     * Returns simplified date and time Deadline occurs at, in String form.
      * @return
      */
     @Override
@@ -72,8 +74,8 @@ public class Event extends Task {
     }
 
     /**
-     * Converts Event to String for storage.
-     * @return Event String for storage.
+     * Converts Deadline to String for Storage.
+     * @return Deadline String for storage.
      */
     @Override
     public String toStorageString() {
@@ -83,24 +85,25 @@ public class Event extends Task {
         } else {
             isDoneString = "0";
         }
-        return ("E | " + isDoneString + " | " + super.taskString + " | " + this.getDateTimeStorage());
+        return ("D | " + isDoneString + " | " + super.taskString + " | " + this.getDateTimeStorage());
     }
 
     /**
-     * Returns string of Event (Task).
-     * @return string of Event.
+     * Returns string of Deadline (Task).
+     * @return string of Deadline.
      */
     @Override
     public String toString() {
         Parser parser = new Parser();
         if (this.time == null) {
-            return "[E] " + super.toString() + " (at: "
+            return "[D] " + super.toString() + " (by: "
                     + parser.simplifyDate(this.date) + ")";
         } else {
-            return "[E] " + super.toString() + " (at: "
+            return "[D] " + super.toString() + " (by: "
                     + parser.simplifyDate(this.date)
                     + " " + parser.simplifyTime(this.time)
                     + ")";
         }
     }
+
 }

@@ -1,5 +1,13 @@
 package duke;
 
+import duke.exceptions.DukeException;
+import duke.exceptions.IncorrectInputException;
+import duke.exceptions.InvalidInputException;
+import duke.exceptions.MissingInputException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Todo;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -9,7 +17,7 @@ import java.time.format.DateTimeParseException;
  * Class for parsing keywords, and handling unparsed Strings.
  */
 public class Parser {
-    Parser() {
+    public Parser() {
     }
 
     /**

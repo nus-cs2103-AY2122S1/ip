@@ -1,13 +1,14 @@
 package duke;
 
-import java.io.IOException;
-import java.time.format.DateTimeParseException;
+import duke.exceptions.*;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
 import java.util.ArrayList;
-import java.util.List;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 /**
  * Stores list of Tasks in an array for reference.
@@ -140,7 +141,7 @@ public class TaskList {
         if (taskArr.get(i - 1).markAsDone()) {
             return i;
         } else {
-            throw new TaskDoneError();
+            throw new TaskDoneException();
         }
     }
 
@@ -268,7 +269,7 @@ public class TaskList {
         if (isFound) {
             return strb.toString();
         } else {
-            throw new KeywordNotFoundError(keyword);
+            throw new KeywordNotFoundException(keyword);
         }
     }
 

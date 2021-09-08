@@ -1,9 +1,6 @@
-package duke;
+package duke.tasks;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+import duke.tasks.Task;
 
 /**
  * Todo (Task). Can be added to list in Duke.

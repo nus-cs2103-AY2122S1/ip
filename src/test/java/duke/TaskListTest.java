@@ -1,5 +1,9 @@
 package duke;
 
+import duke.exceptions.DukeException;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalTime;
