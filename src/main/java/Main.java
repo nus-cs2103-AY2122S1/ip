@@ -15,8 +15,8 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-    private static final String SCROLLPANE_STYLE = "-fx-background: FEF7FC;";
-    private static final String INPUT_BOX_STYLE = "-fx-background-color: FDE7FE;"
+    private static final String STYLE_SCROLL_PANE = "-fx-background: FEF7FC;";
+    private static final String STYLE_INPUT_BOX = "-fx-background-color: FDE7FE;"
             + "-fx-border-color: A1A191";
     private Morgan morgan = new Morgan();
 
@@ -44,10 +44,10 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
 
-        scrollPane.setStyle(SCROLLPANE_STYLE);
-        userInput.setStyle(INPUT_BOX_STYLE);
+        scrollPane.setStyle(STYLE_SCROLL_PANE);
+        userInput.setStyle(STYLE_INPUT_BOX);
         userInput.setOpacity(0.8);
-        sendButton.setStyle(INPUT_BOX_STYLE);
+        sendButton.setStyle(STYLE_INPUT_BOX);
         sendButton.setOpacity(0.8);
 
         //Step 2. Formatting the window to look as expected

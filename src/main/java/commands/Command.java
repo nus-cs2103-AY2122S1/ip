@@ -10,7 +10,7 @@ import tasks.TaskList;
 public abstract class Command {
     /**
      * An abstract execute method to be inherited by sub-classes of Command.
-     * @param taskList The existing list where the task.
+     * @param tasks The existing list where the task.
      * @param storage The storage object of morgan.
      * @return The completion message after execution.
      * @throws MorganException If input is invalid.
