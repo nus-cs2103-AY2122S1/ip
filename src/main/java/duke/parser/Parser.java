@@ -1,6 +1,10 @@
 package duke.parser;
 
 import duke.command.Command;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
 
 /**
  * Class providing static parse method for parsing user input
@@ -28,5 +32,18 @@ public class Parser {
         } else {
             return Command.UNKNOWN;
         }
+    }
+
+    public static Task parseStorage(String line) {
+        String[] taskArray = line.split(" : ");
+        Task task;
+        if (taskArray[0].equals("T")) {
+            task = new Todo(taskArray[2], taskArray[1].equals("1"));
+        } else  if (taskArray[0].equals("D")) {
+            task = new Deadline(taskArray[2], taskArray[1].equals("1"), taskArray[3]);
+        } else {
+            task = new Event(taskArray[2], taskArray[1].equals("1"), taskArray[3]);
+        }
+        return task;
     }
 }
