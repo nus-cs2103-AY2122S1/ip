@@ -133,10 +133,11 @@ public class Storage {
             LocalDate date = LocalDate.parse(timeFull.substring(0, 11), formatter);
             currentTask = new Event(taskName, date);
         }
+
         tasks.add(currentTask);
 
         if (lineToAdd.charAt(4) == 'X') {
-            currentTask.markAsDone();
+            currentTask.markAsDone()
         }
     }
 
