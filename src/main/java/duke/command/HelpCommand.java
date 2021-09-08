@@ -12,8 +12,8 @@ public class HelpCommand extends Command {
     @Override
     public String reply() {
         StringBuilder builder = new StringBuilder();
+        File file = new File("taskFile/instructions.txt");
         try {
-            File file = new File("taskFile/instructions.txt");
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 builder.append(sc.nextLine()).append("\n");

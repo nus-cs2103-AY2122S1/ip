@@ -5,6 +5,10 @@ import duke.exceptions.DukeSyntaxErrorException;
 import duke.main.TaskList;
 
 public class DoneCommand extends Command {
+    private static final String REPLY_DONE_ALL =
+            "Nice! I've marked all tasks in your list as done!";
+    private static final String REPLY_DONE =
+            "Nice! I've marked this task as done: \n";
     private final String description;
     private final TaskList taskList;
 
@@ -22,16 +26,13 @@ public class DoneCommand extends Command {
     public String reply() {
         if (description.length() == 0) {
             throw new DukeIncompleteException();
+        } else if (description.equalsIgnoreCase("all")) {
+            taskList.doneAll();
+            return REPLY_DONE_ALL;
         }
         try {
-            if (description.equalsIgnoreCase("all")) {
-                taskList.doneAll();
-                return "Nice! I've marked all tasks in your list as done!";
-            } else {
-                int index = Integer.parseInt(description);
-                return "Nice! I've marked this task as done: \n"
-                        + taskList.done(index);
-            }
+            int taskIndex = Integer.parseInt(description);
+            return REPLY_DONE + taskList.done(taskIndex);
         } catch (NumberFormatException e) {
             throw new DukeSyntaxErrorException(description);
         }

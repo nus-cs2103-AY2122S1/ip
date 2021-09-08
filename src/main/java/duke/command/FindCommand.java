@@ -6,7 +6,8 @@ import duke.main.TaskList;
 import duke.task.Task;
 
 public class FindCommand extends Command {
-
+    private static final String REPLY_HEADER = "The following task(s) match given query '";
+    private static final String NO_MATCH = "OOPS! There are no task that matches your query!";
     private final String description;
     private final List<Task> taskList;
 
@@ -22,17 +23,16 @@ public class FindCommand extends Command {
 
     @Override
     public String reply() {
-        StringBuilder output = new StringBuilder("The following task(s) matches query '"
-                + description + "':\n");
+        StringBuilder output = new StringBuilder(REPLY_HEADER + description + "':\n");
         int count = 0;
         for (Task currentTask : taskList) {
-            if (currentTask.getTaskName().contains(description)) {
+            if (currentTask.contains(description)) {
                 output.append(count + 1).append(". ").append(currentTask).append("\n");
                 count++;
             }
         }
         if (count == 0) {
-            return "OOPS! There are no task that matches your query!";
+            return NO_MATCH;
         } else {
             return output.toString();
         }

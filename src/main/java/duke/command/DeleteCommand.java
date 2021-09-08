@@ -1,12 +1,15 @@
 package duke.command;
 
 import duke.exceptions.DukeIncompleteException;
-import duke.exceptions.DukeOutOfBoundException;
 import duke.exceptions.DukeSyntaxErrorException;
 import duke.main.TaskList;
 
 public class DeleteCommand extends Command {
 
+    private static final String REPLY_DELETE_ALL =
+            "Noted! I've deleted all tasks and reset your list";
+    private static final String REPLY_DELETE =
+            "Noted! I've deleted the following task: \n";
     private final String description;
     private final TaskList taskList;
 
@@ -24,19 +27,14 @@ public class DeleteCommand extends Command {
     public String reply() {
         if (description.length() <= 0) {
             throw new DukeIncompleteException();
+        } else if (description.equalsIgnoreCase("all")) {
+            taskList.deleteAll();
+            return REPLY_DELETE_ALL;
         }
+        int index;
         try {
-            if (description.equalsIgnoreCase("all")) {
-                taskList.deleteAll();
-                return "Noted! I've deleted all tasks and reset your list";
-            } else {
-                int index = Integer.parseInt(description);
-                if (index > taskList.size() || index <= 0) {
-                    throw new DukeOutOfBoundException();
-                }
-                return "Noted! I've deleted the following task: \n"
-                        + taskList.delete(index);
-            }
+            index = Integer.parseInt(description);
+            return REPLY_DELETE + taskList.delete(index);
         } catch (NumberFormatException e) {
             throw new DukeSyntaxErrorException(description);
         }
