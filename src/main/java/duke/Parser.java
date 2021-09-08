@@ -105,6 +105,7 @@ public class Parser {
                 throw new IncorrectInputException("deadline",
                         "using 'deadline (task) /by yyyy-mm-dd (date) xx:xx (time, optional)'");
             }
+            assert strparse[i - 1].equalsIgnoreCase("/by") : "Deadline missing /by keyword";
             LocalDate date = LocalDate.parse(strparse[i++]);
             if (i == strparse.length - 1) {
                 LocalTime time = LocalTime.parse(strparse[i]);
@@ -138,6 +139,7 @@ public class Parser {
             if (strb.toString().equals("") || (i != strparse.length - 1 && i != strparse.length - 2)) {
                 throw new IncorrectInputException("event",
                         "using 'event (task) /at yyyy-mm-dd (date) xx:xx (time, optional)'");            }
+            assert strparse[i - 1].equalsIgnoreCase("/at") : "Event missing /at keyword";
             LocalDate date = LocalDate.parse(strparse[i++]);
             if (i == strparse.length - 1) {
                 LocalTime time = LocalTime.parse(strparse[i]);
