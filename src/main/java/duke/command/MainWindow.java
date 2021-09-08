@@ -39,7 +39,12 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
     private MyParser parser = new MyParser();
 
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaLottery.png"));
+    private Image dukeByeImg = new Image(this.getClass().getResourceAsStream("/images/dukeBye.png"));
+    private Image dukeHeartImg = new Image(this.getClass().getResourceAsStream("/images/dukeHeart.png"));
+    private Image dukeThinkingImg = new Image(this.getClass().getResourceAsStream("/images/dukeThink.png"));
+    private Image dukeThumbsUpImg = new Image(this.getClass().getResourceAsStream("/images/dukeThumb.png"));
+    private Image dukeGreetImg = new Image(this.getClass().getResourceAsStream("/images/dukeWave.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/knightImage.png"));
 
     @FXML
     public void initialize() {
@@ -69,12 +74,12 @@ public class MainWindow extends AnchorPane {
             description = input.substring(commandIndex);
         }
 
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
 
         try {
             parser.parse(command, description, duke);
         } catch (DukeException e) {
-            dialogContainer.getChildren().add(DialogBox.getDukeDialog(e.getMessage(), dukeImage));
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(e.getMessage(), dukeThinkingImg));
         }
 
         userInput.clear();
@@ -84,22 +89,22 @@ public class MainWindow extends AnchorPane {
 
     /** Shows welcome message. */
     public void showWelcomeMessage() {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(WELCOME_MESSAGE, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(WELCOME_MESSAGE, dukeGreetImg));
     }
 
     /** Shows loading error. */
     public void showLoadingError() {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(LOADING_ERROR, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(LOADING_ERROR, dukeThinkingImg));
     }
 
     /** Shows saving error. */
     public void showSavingError() {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(SAVING_ERROR, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(SAVING_ERROR, dukeThinkingImg));
     }
 
     /** Shows exit message. */
     public void showByeMessage() {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(BYE_MESSAGE, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(BYE_MESSAGE, dukeByeImg));
     }
 
     /** Shows that task has been added.
@@ -113,7 +118,7 @@ public class MainWindow extends AnchorPane {
                 taskDesc +
                 "\nNow you have " + size + " tasks in the list\n" +
                 DOTTED_LINES;
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(addTaskMessage, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(addTaskMessage, dukeThumbsUpImg));
     }
 
     /** Shows that task has been deleted.
@@ -127,7 +132,7 @@ public class MainWindow extends AnchorPane {
                 taskDesc +
                 "\nNow you have " + size + " tasks in the list\n" +
                 DOTTED_LINES;
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(deleteTaskMessage, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(deleteTaskMessage, dukeThumbsUpImg));
     }
 
     /** Shows that task has been marked as done.
@@ -140,7 +145,7 @@ public class MainWindow extends AnchorPane {
                 taskDesc +
                 "\n" +
                 DOTTED_LINES;
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(markAsDoneMessage, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(markAsDoneMessage, dukeHeartImg));
     }
 
     /** Shows list of tasks.
@@ -149,7 +154,7 @@ public class MainWindow extends AnchorPane {
      */
     public void showListOfTasks(String taskList) {
         if (taskList.isBlank()) {
-            dialogContainer.getChildren().add(DialogBox.getDukeDialog(EMPTY_LIST_MESSAGE, dukeImage));
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(EMPTY_LIST_MESSAGE, dukeThinkingImg));
         } else {
             String listMessage = "Here is your list of tasks\n" +
                     DOTTED_LINES +
@@ -158,7 +163,7 @@ public class MainWindow extends AnchorPane {
                     DOTTED_LINES;
 
 
-            dialogContainer.getChildren().add(DialogBox.getDukeDialog(listMessage, dukeImage));
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(listMessage, dukeHeartImg));
         }
     }
 
