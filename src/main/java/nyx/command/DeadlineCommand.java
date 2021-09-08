@@ -13,7 +13,9 @@ public class DeadlineCommand extends Command {
     @Override
     public String execute(TaskList taskList, Storage storage) throws NyxException {
         String[] splitInfo = information.split(" /by ");
-        assert splitInfo.length == 2 : "Deadline info is split wrongly";
+        if (splitInfo.length != 2) {
+            throw new NyxException("Incorrect Deadline format! The correct format is { details } /by { datetime }");
+        }
         Deadline deadline = new Deadline(splitInfo[0].strip(), splitInfo[1]);
         return AddHandler.handleAdd(deadline, taskList, storage);
     }

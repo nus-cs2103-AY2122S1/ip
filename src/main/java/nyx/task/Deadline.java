@@ -1,7 +1,10 @@
 package nyx.task;
 
+import nyx.NyxException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a task with a deadline.
@@ -17,9 +20,13 @@ public class Deadline extends Task {
      * @param by Datetime of the deadline.
      * @param isDone Indicator to indicate whether the deadline task is done.
      */
-    public Deadline(String content, String by, boolean isDone) {
+    public Deadline(String content, String by, boolean isDone) throws NyxException {
         super(content, isDone);
-        this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern(DATETIME_FORMAT));
+        try {
+            this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern(DATETIME_FORMAT));
+        } catch (DateTimeParseException e) {
+            throw new NyxException("Incorrect datetime format! The correct format is YYYY-MM-DD H:m");
+        }
     }
 
     /**
@@ -27,7 +34,7 @@ public class Deadline extends Task {
      * @param content Description of the deadline task.
      * @param by Datetime of the deadline.
      */
-    public Deadline(String content, String by) {
+    public Deadline(String content, String by) throws NyxException {
         this(content, by, false);
     }
 

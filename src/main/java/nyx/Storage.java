@@ -33,6 +33,7 @@ public class Storage {
         assert splitLine.length == 3 : "Row in data split wrongly";
         String taskSymbol = splitLine[0];
         String doneStatus = splitLine[1];
+        assert Integer.parseInt(doneStatus) >= 0 && Integer.parseInt(doneStatus) < 2: "Incorrect done status";
         String taskDescription = splitLine[2];
         boolean isDone = doneStatus.equals("1");
         Task task;

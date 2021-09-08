@@ -1,7 +1,10 @@
 package nyx.task;
 
+import nyx.NyxException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents an event that occurs at a specific date and time.
@@ -17,9 +20,13 @@ public class Event extends Task {
      * @param at Datetime at which the event occurs.
      * @param isDone Indicator to indicate whether the deadline task is done.
      */
-    public Event(String content, String at, boolean isDone) {
+    public Event(String content, String at, boolean isDone) throws NyxException {
         super(content, isDone);
-        this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern(DATETIME_FORMAT));
+        try {
+            this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern(DATETIME_FORMAT));
+        } catch (DateTimeParseException e) {
+            throw new NyxException("Incorrect datetime format! The correct format is YYYY-MM-DD H:m");
+        }
     }
 
     /**
@@ -27,7 +34,7 @@ public class Event extends Task {
      * @param content Description of the event.
      * @param at Datetime at which the event occurs.
      */
-    public Event(String content, String at) {
+    public Event(String content, String at) throws NyxException {
         this(content, at, false);
     }
 
