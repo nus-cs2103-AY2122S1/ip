@@ -34,7 +34,11 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        Command c = Parser.parse(input);
-        return c.execute(tasks, ui, storage);
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }

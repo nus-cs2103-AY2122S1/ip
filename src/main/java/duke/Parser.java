@@ -10,6 +10,7 @@ import duke.command.FindCommand;
 import duke.command.IncorrectCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
+import duke.command.UpdateCommand;
 
 public class Parser {
     /**
@@ -24,6 +25,7 @@ public class Parser {
 
         String parameter1 = getParameters(inputValues)[0];
         String parameter2 = getParameters(inputValues)[1];
+        String parameter3 = getParameters(inputValues)[2];
 
         try {
             switch (commandInstruction) {
@@ -41,6 +43,8 @@ public class Parser {
                 return new DeleteCommand(parameter1);
             case FindCommand.INSTRUCTION_FIND:
                 return new FindCommand(parameter1);
+            case UpdateCommand.INSTRUCTION_UPDATE:
+                return new UpdateCommand(parameter1, parameter2, parameter3);
             case ExitCommand.INSTRUCTION_EXIT:
                 return new ExitCommand();
             default:
@@ -61,17 +65,30 @@ public class Parser {
     public static String[] getParameters(String[] inputValues) {
         String parameter1 = "";
         String parameter2 = "";
+        String parameter3 = "";
 
         if (inputValues.length > 1) {
-            String[] inputParameters = inputValues[1].split("\\s/((at)|(by))\\s");
-            if (inputParameters.length > 1) {
-                parameter1 = inputParameters[0];
-                parameter2 = inputParameters[1];
+            if (inputValues[1].contains("-")) {
+                String[] inputParameters = inputValues[1].split(" ", 3);
+                if (inputParameters.length > 2) {
+                    parameter1 = inputParameters[0];
+                    parameter2 = inputParameters[1];
+                    parameter3 = inputParameters[2];
+                } else {
+                    parameter1 = inputParameters[0];
+                    parameter2 = inputParameters[1];
+                }
             } else {
-                parameter1 = inputParameters[0];
+                String[] inputParameters = inputValues[1].split("\\s/((at)|(by))\\s");
+                if (inputParameters.length > 1) {
+                    parameter1 = inputParameters[0];
+                    parameter2 = inputParameters[1];
+                } else {
+                    parameter1 = inputParameters[0];
+                }
             }
         }
 
-        return new String[]{parameter1, parameter2};
+        return new String[]{parameter1, parameter2, parameter3};
     }
 }

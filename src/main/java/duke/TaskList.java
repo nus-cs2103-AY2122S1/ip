@@ -2,6 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 
+import duke.task.Achievable;
 import duke.task.Task;
 
 public class TaskList {
@@ -51,6 +52,47 @@ public class TaskList {
     public Task remove(int taskNumber) {
         Task task = this.tasks.get(taskNumber);
         this.tasks.remove(task);
+        return task;
+    }
+
+    /**
+     * Changes the date of the task with the given task number
+     *
+     * @param taskNumber the task number of the task
+     * @param taskDate   the task date of the task
+     * @return           the task modified
+     */
+    public Task changeDate(int taskNumber, String taskDate) {
+        Task task = this.tasks.get(taskNumber);
+        if (task instanceof Achievable) {
+            Achievable achievable = (Achievable) task;
+            achievable.changeDate(taskDate);
+        }
+        return task;
+    }
+
+    /**
+     * Changes the description of the task with the given task number
+     *
+     * @param taskNumber      the task number of the task
+     * @param taskDescription the task description of the task
+     * @return                the task modified
+     */
+    public Task changeDescription(int taskNumber, String taskDescription) {
+        Task task = this.tasks.get(taskNumber);
+        task.changeDescription(taskDescription);
+        return task;
+    }
+
+    /**
+     * Mark the task with the given task number as incomplete
+     *
+     * @param taskNumber      the task number of the task
+     * @return                the task modified
+     */
+    public Task markAsIncomplete(int taskNumber) {
+        Task task = this.tasks.get(taskNumber);
+        task.markAsIncomplete();
         return task;
     }
 
