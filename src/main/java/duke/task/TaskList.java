@@ -1,9 +1,11 @@
 package duke.task;
 
+import java.util.List;
 import java.util.ArrayList;
 import duke.exception.DukeTaskDetailsException;
 import duke.exception.DukeIndexInputException;
 import duke.exception.DukeUpdateException;
+import java.util.stream.*;
 
 /**
  * Class that represents the list of tasks
@@ -89,15 +91,16 @@ public class TaskList {
 		return this.tasks.get(index);
 	}
 
-    public ArrayList<Task> find(String keyword) {
-        ArrayList<Task> newList = new ArrayList<>();
-        for (int i = 0; i < this.tasks.size(); i++) {
-            Task task = this.tasks.get(i);
-            if (task.getTitle().contains(keyword)) {
-                newList.add(task);
-            }
-        }
-        return newList;
+    public List<Task> find(String keyword) {
+        // ArrayList<Task> newList = new ArrayList<>();
+        // for (int i = 0; i < this.tasks.size(); i++) {
+        //     Task task = this.tasks.get(i);
+        //     if (task.getTitle().contains(keyword)) {
+        //         newList.add(task);
+        //     }
+        // }
+        // return newList;
+        return this.tasks.stream().filter(task -> task.getTitle().contains(keyword)).collect(Collectors.toList());
     }
 
     public Task updateTask(String[] taskArray) throws DukeUpdateException {

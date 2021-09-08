@@ -2,7 +2,7 @@ package duke.ui;
 
 import duke.task.Task;
 import duke.task.TaskList;
-import java.util.ArrayList;
+import java.util.List;
 
 public class Ui {
 
@@ -50,7 +50,7 @@ public class Ui {
      *
      * @param tasks ArrayList of Task objects to loop through
      */
-    public String list(ArrayList<Task> tasks) {
+    public String list(List<Task> tasks) {
         String toReturn = "Here are the matching tasks your list\n";
         for (int i = 0; i < tasks.size(); i++) {
             toReturn += (i + 1) + ". " + tasks.get(i).toString() +"\n";
