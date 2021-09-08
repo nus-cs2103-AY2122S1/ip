@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
+import duke.command.AddRecurringCommand;
 import duke.command.AddToDoCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -22,6 +23,7 @@ public class Parser {
         Deadline,
         Event,
         Find,
+        Recurring,
     }
 
     /**
@@ -69,6 +71,8 @@ public class Parser {
             return Action.Event;
         case "find":
             return Action.Find;
+        case "recurring":
+            return Action.Recurring;
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
@@ -89,6 +93,8 @@ public class Parser {
             return new AddEventCommand(str);
         case Find:
             return new FindCommand(str);
+        case Recurring:
+            return new AddRecurringCommand(str);
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }

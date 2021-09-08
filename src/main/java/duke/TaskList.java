@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.RecurringTask;
 import duke.task.Task;
 import duke.task.ToDo;
 
@@ -134,6 +135,25 @@ public class TaskList {
         STORAGE.saveFile(LIST);
         return dukePrint("Got it. I've added this task:\n" + t + "\n" + "Now you have "
                 + LIST.size() + " task" + (LIST.size() < 2 ? " " : "s ") + "in the list.");
+    }
+
+    /**
+     * Add Deadline to list with description from user input.
+     *
+     * @param str User input of description
+     * @throws DukeException Exception based on invalid user input
+     */
+    public String addRecurringTask(String str) throws DukeException {
+        if (!str.contains("/at")) {
+            throw new DukeException("Date cannot be empty!");
+        }
+        String[] arr = str.split("/at ", 2);
+        if (!arr[1].contains("/repeat ")) {
+            throw new DukeException("Repeat amount cannot be empty!");
+        }
+        String[] descriptions = str.split("/repeat ", 2);
+        Task t = new RecurringTask(arr[0], descriptions[0], descriptions[1]);
+        return addTask(t);
     }
 
     /**

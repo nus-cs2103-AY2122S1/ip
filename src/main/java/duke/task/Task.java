@@ -5,7 +5,7 @@ package duke.task;
  * Can be marked as done and has a description of the task.
  */
 public class Task {
-    private Boolean isDone;
+    protected Boolean isDone;
     private final String DATE_DESCRIPTION;
 
     /**
@@ -29,6 +29,9 @@ public class Task {
         DATE_DESCRIPTION = str;
     }
 
+    /**
+     * Marks a task as done.
+     */
     public void markDone() {
         isDone = true;
     }

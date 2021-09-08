@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.RecurringTask;
 import duke.task.Task;
 import duke.task.ToDo;
 
@@ -68,6 +69,9 @@ public class Storage {
                 return new Deadline(stringProcessor.next(), stringProcessor.next(), stringProcessor.next());
             case "E":
                 return new Event(stringProcessor.next(), stringProcessor.next(), stringProcessor.next());
+            case "R":
+                return new RecurringTask(stringProcessor.next(), stringProcessor.next(),
+                        stringProcessor.next(), stringProcessor.next());
             default:
                 return null;
             }
