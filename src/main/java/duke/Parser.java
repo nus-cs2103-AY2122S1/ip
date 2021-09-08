@@ -20,7 +20,7 @@ public abstract class Parser {
             return new Pair(Command.READ, List.of());
         } else if (input.matches("done.*")) {
             if (!input.matches("done \\d+")) {
-                throw new DukeException.MissingArgumentException("index of task to be deleted");
+                throw new DukeException.MissingArgumentException("index of task to be marked as done");
             }
             return new Pair(Command.UPDATE_MARKASDONE,
                     List.of(input.substring("done ".length())));

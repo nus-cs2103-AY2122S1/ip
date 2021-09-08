@@ -18,7 +18,7 @@ public class TaskList {
      * @return true if task is successfully added, else false
      * @throws DukeException if the the String representation is invalid
      */
-    public boolean addTaskFromRepr(String repr) throws DukeException {
+    public boolean addTaskFromRepr(String repr) throws DukeException.EmptyTaskDescriptionException, DukeException.InvalidReprException {
             Task t = Task.fromRepr(repr);
             return tasks.add(t);
     }

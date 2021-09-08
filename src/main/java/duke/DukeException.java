@@ -2,7 +2,7 @@ package duke;
 
 public abstract class DukeException extends Exception {
     public DukeException(String s) {
-        super("☹ OOPS!!! " + s);
+        super("OOPS!!! " + s);
     }
 
     public static class EmptyTaskDescriptionException extends DukeException {

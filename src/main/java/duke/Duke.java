@@ -2,6 +2,8 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javafx.application.Application.launch;
+
 /**
  * Duke is the main entity coordinating the user interface, program state, persistent storage and list of tasks.
  */
@@ -10,86 +12,69 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
 
-    public Duke(String filePath) throws java.io.IOException {
+    public Duke() throws java.io.IOException {
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage( "data/tasks.txt");
         this.tasks = new TaskList();
     }
 
-    public void run() {
-        try {
-            ArrayList<String> lines = this.storage.readFile();
-            for (String line : lines) {
-                this.tasks.addTaskFromRepr(line);
-            }
-        } catch (java.io.IOException | DukeException e) {
-            this.ui.stderr(e.getMessage());
-        }
-
-        this.ui.init();
-        Task t;
-        int i;
-        while (true) {
-            try {
-                Pair p = Parser.parseInput(this.ui.readInput());
-                Command cmd = p.getCommand();
-                List<String> varargs = p.getList();
-                switch (cmd) {
-                case EXIT:
-                    this.ui.stdout("Bye. Hope to see you again soon!");
-                    return;
-                case READ:
-                    this.ui.stdout(this.tasks.toString());
-                    break;
-                case FIND:
-                    TaskList filteredTasks = this.tasks.filter(varargs.get(0));
-                    this.ui.stdout(
-                        String.format("Here are the matching tasks in your list:\n%s",
-                            filteredTasks.toString()));
-                    break;
-                case UPDATE_MARKASDONE:
-                    i = Integer.parseInt(varargs.get(0));
-                        t = this.tasks.markAsComplete(i);
-                        this.ui.stdout(String.format("Nice! I've marked this task as done:\n%s", t));
-                        this.storage.writeFile(this.tasks.toRepr());
-                    break;
-                case DELETE:
-                    this.ui.stdout("Noted. I've removed this task:");
-                    i = Integer.parseInt(varargs.get(0));
-                        t = this.tasks.deleteTask(i);
-                        this.ui.stdout(String.format("Noted. I've removed this task:\n%s", t));
-                        this.storage.writeFile(this.tasks.toRepr());
-                    break;
-                case CREATE_DEADLINE:
-                    t = new Task.Deadline(false, varargs.get(0), varargs.get(1));
-                    this.tasks.addTask(t);
-                    this.storage.appendFile(t.getRepr());
-                    this.ui.stdout(String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list\n",
-                            t, tasks.numberOfTasks()));
-                    break;
-                case CREATE_EVENT:
-                    t = new Task.Event(false, varargs.get(0), varargs.get(1));
-                    this.tasks.addTask(t);
-                    this.storage.appendFile(t.getRepr());
-                    this.ui.stdout(String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list\n",
-                            t, tasks.numberOfTasks()));
-                    break;
-                case CREATE_TODO:
-                    t = new Task.Todo(false, varargs.get(0));
-                    this.tasks.addTask(t);
-                    this.storage.appendFile(t.getRepr());
-                    this.ui.stdout(String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list\n",
-                            t, tasks.numberOfTasks()));
-                    break;
-                }
-            } catch (DukeException | java.io.IOException | IndexOutOfBoundsException e) {
-                this.ui.stderr(e.getMessage());
-            }
+    public void init() throws DukeException, java.io.IOException {
+        ArrayList<String> lines = this.storage.readFile();
+        for (String line : lines) {
+            this.tasks.addTaskFromRepr(line);
         }
     }
 
-    public static void main(String[] args) throws java.io.IOException {
-        new Duke("data/tasks.txt").run();
+    public String getResponse(String userInput) {
+        Task t;
+        int i;
+        try {
+            Pair p = Parser.parseInput(userInput);
+            Command cmd = p.getCommand();
+            List<String> varargs = p.getList();
+            switch (cmd) {
+            case EXIT:
+                return "Bye. Hope to see you again soon!";
+            case READ:
+                return this.tasks.toString();
+            case FIND:
+                TaskList filteredTasks = this.tasks.filter(varargs.get(0));
+                return String.format("Here are the matching tasks in your list:\n%s",
+                    filteredTasks.toString());
+            case UPDATE_MARKASDONE:
+                i = Integer.parseInt(varargs.get(0));
+                    t = this.tasks.markAsComplete(i);
+                this.storage.writeFile(this.tasks.toRepr());
+                return String.format("Nice! I've marked this task as done:\n%s", t);
+            case DELETE:
+                i = Integer.parseInt(varargs.get(0));
+                    t = this.tasks.deleteTask(i);
+                this.storage.writeFile(this.tasks.toRepr());
+                return String.format("Noted. I've removed this task:\n%s", t);
+            case CREATE_DEADLINE:
+                t = new Task.Deadline(false, varargs.get(0), varargs.get(1));
+                this.tasks.addTask(t);
+                this.storage.appendFile(t.getRepr());
+                return String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list\n",
+                        t, tasks.numberOfTasks());
+            case CREATE_EVENT:
+                t = new Task.Event(false, varargs.get(0), varargs.get(1));
+                this.tasks.addTask(t);
+                this.storage.appendFile(t.getRepr());
+                return String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list\n",
+                        t, tasks.numberOfTasks());
+            case CREATE_TODO:
+                t = new Task.Todo(false, varargs.get(0));
+                this.tasks.addTask(t);
+                this.storage.appendFile(t.getRepr());
+                return String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list\n",
+                        t, tasks.numberOfTasks());
+            default:
+                return ""; // shouldn't reach here
+            }
+        } catch (DukeException | java.io.IOException | IndexOutOfBoundsException e) {
+            return e.getMessage();
+        }
     }
 }
 
