@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -39,6 +40,7 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         this.setHgrow(dialog, Priority.ALWAYS);
         displayPicture.setImage(img);
+        displayPicture.setClip(new Circle(50,40,40));
     }
 
     /**
