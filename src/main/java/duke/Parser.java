@@ -21,9 +21,9 @@ public class Parser {
      * @return Array with 2 elements containing task name and time.
      */
     public static String[] parseArgs(String args, String delim) {
-        String[] nameTime = args.split(delim);
-        checkArg(nameTime);
-        return stripStrings(nameTime);
+        String[] strings = args.split(delim, 2);
+        checkArg(strings);
+        return stripStrings(strings);
     }
 
     /**

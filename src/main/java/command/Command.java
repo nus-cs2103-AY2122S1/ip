@@ -50,6 +50,9 @@ public abstract class Command {
         case "deadline":
             cmd = new DeadlineCommand(cmdArgs[1]);
             break;
+        case "tag":
+            cmd = new TagCommand(cmdArgs[1]);
+            break;
         default:
             throw new DukeException("command not found");
         }
