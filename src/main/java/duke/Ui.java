@@ -80,7 +80,7 @@ public class Ui {
                 sb.append(line);
             }
             if (!found) {
-                return String.format("I don't have a manual entry for ' %s '!", cmd);
+                return String.format("I don't have a manual entry for ` %s `!", cmd);
             }
             return sb.toString();
         } catch (FileNotFoundException e) {
