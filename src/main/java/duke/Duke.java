@@ -33,28 +33,6 @@ public class Duke {
         storage.load();
     }
 
-    private void run() {
-        Scanner sc = new Scanner(System.in);
-        ui.showGreeting();
-        String cmd = sc.nextLine();
-        assert cmd != null : "Scanner reads null";
-        while (!cmd.equals("bye")) {
-            try {
-                parser.parse(cmd);
-                storage.save();
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-            }
-            cmd = sc.nextLine();
-        }
-        sc.close();
-        ui.showFarewellMsg();
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
-
     /**
      * Gets the response of Duke after parsing and executing user's input.
      *
