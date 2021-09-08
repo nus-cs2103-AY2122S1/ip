@@ -1,23 +1,18 @@
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.ArrayList;
-
 import org.junit.jupiter.api.Test;
 
 import bobbybot.commands.AddCommand;
 import bobbybot.commands.Command;
+import bobbybot.commands.DeleteCommand;
 import bobbybot.commands.DoneCommand;
+import bobbybot.commands.ExitCommand;
+import bobbybot.commands.FindCommand;
 import bobbybot.commands.IncorrectCommand;
+import bobbybot.commands.ListCommand;
 import bobbybot.util.Parser;
-import bobbybot.util.Storage;
-import bobbybot.util.TaskList;
-import bobbybot.util.Ui;
-
 
 public class ParserTest {
-    private final TaskList tasks = new TaskList(new ArrayList<>());
-    private final Ui ui = new Ui();
-    private final Storage storage = new Storage("src/test.txt");
     private final Parser parser = new Parser();
 
     @Test
@@ -31,8 +26,7 @@ public class ParserTest {
     public void parse_bye_exitsProgram() {
         String input = "bye";
         Command c = parser.parseCommand(input);
-        c.execute(tasks, ui , storage);
-        assertTrue(c.isExit());
+        assertTrue(c instanceof ExitCommand);
     }
 
     @Test
@@ -139,4 +133,75 @@ public class ParserTest {
         assertTrue(c instanceof IncorrectCommand);
     }
 
+    @Test
+    public void parse_delete_success() {
+        String input = "delete 1";
+        Command c = parser.parseCommand(input);
+        assertTrue(c instanceof DeleteCommand);
+    }
+
+    @Test
+    public void parse_extraArgDeleteCommand_fail() {
+        String input = "delete 1 4";
+        Command c = parser.parseCommand(input);
+        assertTrue(c instanceof IncorrectCommand);
+    }
+
+    @Test
+    public void parse_noArgDeleteCommand_fail() {
+        String input = "done";
+        Command c = parser.parseCommand(input);
+        assertTrue(c instanceof IncorrectCommand);
+    }
+
+    @Test
+    public void parse_listCommand_success() {
+        String input = "list";
+        Command c = parser.parseCommand(input);
+        assertTrue(c instanceof ListCommand);
+    }
+
+    @Test
+    public void parse_listCommandExtraArgs_success() {
+        String input = "list 2 2";
+        Command c = parser.parseCommand(input);
+        System.out.println(c.getClass());
+        assertTrue(c instanceof ListCommand);
+    }
+
+    @Test
+    public void parse_listSpellingError_fail() {
+        String input = "lists";
+        Command c = parser.parseCommand(input);
+        assertTrue(c instanceof IncorrectCommand);
+    }
+
+    @Test
+    public void parse_findCommand_success() {
+        String input = "find";
+        Command c = parser.parseCommand(input);
+        assertTrue(c instanceof FindCommand);
+    }
+
+    @Test
+    public void parse_findCapitalLettersCommand_success() {
+        String input = "FIND";
+        Command c = parser.parseCommand(input);
+        assertTrue(c instanceof FindCommand);
+    }
+
+    @Test
+    public void parse_findCommandExtraArgs_success() {
+        String input = "find 2 2";
+        Command c = parser.parseCommand(input);
+        System.out.println(c.getClass());
+        assertTrue(c instanceof FindCommand);
+    }
+
+    @Test
+    public void parse_findSpellingError_fail() {
+        String input = "lists";
+        Command c = parser.parseCommand(input);
+        assertTrue(c instanceof IncorrectCommand);
+    }
 }

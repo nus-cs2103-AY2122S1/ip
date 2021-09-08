@@ -15,6 +15,7 @@ bin/
 
 # database files
 /data/
+testDatabase.txt
 
 # .class files
 *.class
