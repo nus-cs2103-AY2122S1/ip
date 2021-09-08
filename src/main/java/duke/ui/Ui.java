@@ -16,7 +16,7 @@ public class Ui {
                     + "What can I do for you?\n"
                     + "____________________________________________________________\n";
     /** Scanner used to read commands */
-    private Scanner input;
+    private final Scanner input;
 
     /**
      * Constructor for the class `Ui`.

@@ -15,11 +15,11 @@ import duke.ui.Ui;
  */
 public class Duke {
     /** Storage that can write to or retrieve data from a file on hard disk */
-    private Storage storage;
+    private final Storage storage;
     /** List of tasks added */
-    private TaskList tasks;
+    private final TaskList tasks;
     /** UI of the program */
-    private Ui ui;
+    private final Ui ui;
 
     /**
      * Constructor of the class 'Duke'.
@@ -51,7 +51,6 @@ public class Duke {
                 isRunning = command.isRunning();
             } catch (DukeException dukeException) {
                 this.ui.showError(dukeException);
-                continue;
             }
         }
     }
