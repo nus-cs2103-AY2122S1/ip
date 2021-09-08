@@ -1,15 +1,19 @@
 package duke.controller;
 
 import duke.Duke;
+import duke.HelpPage;
 import duke.Main;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Date;
@@ -30,15 +34,16 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private Stage stage;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/horse.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/pug.jpg"));
 
-    public MainWindow() {
+    public MainWindow(Stage stage) {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-
+        this.stage = stage;
         try {
             fxmlLoader.load();
         } catch (IOException exception) {
@@ -70,23 +75,34 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
-        userInput.clear();
-        if (response.equals(duke.getUi().showBye())) {
-            Timer timer = new Timer();
-            TimerTask exit = new TimerTask() {
-                @Override
-                public void run() {
-                    System.exit(0);
-                }
-            };
-            userInput.setDisable(true);
-            sendButton.setDisable(true);
-            timer.schedule(exit, new Date(System.currentTimeMillis() + 3 * 1000));
+        if (input.equals("help")) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog("Hope I was of help!", dukeImage)
+            );
+            userInput.clear();
+            Scene prev = this.getScene();
+            HelpPage helpPage = new HelpPage(stage, prev);
+            helpPage.start();
+        } else {
+            String response = duke.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+            userInput.clear();
+            if (response.equals(duke.getUi().showBye())) {
+                Timer timer = new Timer();
+                TimerTask exit = new TimerTask() {
+                    @Override
+                    public void run() {
+                        System.exit(0);
+                    }
+                };
+                userInput.setDisable(true);
+                sendButton.setDisable(true);
+                timer.schedule(exit, new Date(System.currentTimeMillis() + 3 * 1000));
+            }
         }
     }
 }
