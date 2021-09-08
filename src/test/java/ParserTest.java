@@ -1,4 +1,3 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayOutputStream;
@@ -28,7 +27,7 @@ public class ParserTest {
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     @Test
     public void parse_bye_exitsProgram() throws InvalidArgumentException, TooManyArgumentsException {
-        parser.parseCommand("bye", tasks, ui);
+
         //program should not leave here
         fail();
     }
@@ -40,26 +39,5 @@ public class ParserTest {
     @AfterEach
     public void tearDown() {
         System.setOut(standardOut);
-    }
-
-    @Test
-    public void parse_find_success() throws InvalidArgumentException, TooManyArgumentsException {
-        tasks.createToDo("test description");
-        tasks.createToDo("description");
-        tasks.createToDo("test find ");
-        parser.parseCommand("find test", tasks, ui);
-        String expectedString = "Got it. I've added this task:\n"
-                + "  [T][ ] test description\n"
-                + "Now you have 1 tasks in the list.\n"
-                + "Got it. I've added this task:\n"
-                + "  [T][ ] description\n"
-                + "Now you have 2 tasks in the list.\n"
-                + "Got it. I've added this task:\n"
-                + "  [T][ ] test find \n"
-                + "Now you have 3 tasks in the list.\n"
-                + "Here are the tasks you're looking for sir!\n"
-                + "1.[T][ ] test description\n"
-                + "2.[T][ ] test find";
-        assertEquals(expectedString, outputStreamCaptor.toString().trim());
     }
 }

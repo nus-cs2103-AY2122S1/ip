@@ -84,7 +84,7 @@ public class Parser {
             return new AddCommand(matcher.group("type").trim(), matcher.group("time").trim(), "event");
         } else {
             System.out.println("Failed to add event/deadline");
-            return null;
+            return new IncorrectCommand();
         }
     }
 

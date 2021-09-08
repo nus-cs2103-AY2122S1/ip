@@ -1,6 +1,5 @@
 package bobbybot.util;
 
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import bobbybot.commands.Command;
@@ -21,11 +20,10 @@ public class BobbyBot {
         ui = new Ui();
         ui.showWelcome();
         storage = new Storage(DBPATH);
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException e) {
-            ui.showLoadingError();
-        }
+        tasks = new TaskList(storage.load());
+
+
+
     }
 
     /**

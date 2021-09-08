@@ -1,10 +1,10 @@
 package bobbybot.commands;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import bobbybot.exceptions.BobbyException;
 import bobbybot.exceptions.InvalidArgumentException;
 import bobbybot.tasks.Deadline;
 import bobbybot.tasks.Event;
@@ -15,7 +15,7 @@ import bobbybot.util.TaskList;
 import bobbybot.util.Ui;
 
 public class AddCommand extends Command {
-    private static final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
+    public static final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
     private Task toAdd;
 
     /**
@@ -46,8 +46,10 @@ public class AddCommand extends Command {
                 LocalDateTime dateBy = LocalDateTime.parse(timeArg, DT_FORMATTER);
                 this.toAdd = new Deadline(description, dateBy);
             } catch (DateTimeParseException e) {
-                this.toAdd = null;
                 System.out.println("Please input deadline date in the following format: [dd-mm-yyyy hh:mm]");
+                throw new InvalidArgumentException("Please input deadline date in the following format:"
+                        + " [dd-mm-yyyy hh:mm]");
+
             }
             break;
         default:
@@ -67,9 +69,8 @@ public class AddCommand extends Command {
         tasks.addTask(toAdd);
         try {
             storage.save(tasks);
-        } catch (IOException e) {
-            System.out.println("Could not save tasks to database!\n");
-            e.printStackTrace();
+        } catch (BobbyException e) {
+            System.out.println(e.getMessage());
         }
 
         response = "Got it. I've added this task:\n  " + toAdd + "\n"

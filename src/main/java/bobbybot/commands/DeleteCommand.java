@@ -1,7 +1,6 @@
 package bobbybot.commands;
 
-import java.io.IOException;
-
+import bobbybot.exceptions.BobbyException;
 import bobbybot.tasks.Task;
 import bobbybot.util.Storage;
 import bobbybot.util.TaskList;
@@ -26,16 +25,15 @@ public class DeleteCommand extends Command {
             this.response = "Invalid delete command! Task number: " + taskNumToDelete + "does not exist\n"
                     + "Use [list] to see available tasks!";
         }
-        Task taskToDelete = tasks.getTask(taskNumToDelete - 1);
-        tasks.deleteTask(taskNumToDelete);
-        try {
-            storage.save(tasks);
-        } catch (IOException e) {
-            System.out.println("Could not save tasks to database!\n");
-            e.printStackTrace();
-        }
-        this.response = "Noted. I've removed this task: " + taskToDelete
-                + "\nNow you have " + tasks.getTasks().size() + " tasks in the list.";
 
+        try {
+            Task taskToDelete = tasks.getTask(taskNumToDelete - 1);
+            tasks.deleteTask(taskNumToDelete);
+            storage.save(tasks);
+            this.response = "Noted. I've removed this task: " + taskToDelete
+                    + "\nNow you have " + tasks.getTasks().size() + " tasks in the list.";
+        } catch (BobbyException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

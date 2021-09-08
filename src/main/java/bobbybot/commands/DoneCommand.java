@@ -1,7 +1,6 @@
 package bobbybot.commands;
 
-import java.io.IOException;
-
+import bobbybot.exceptions.BobbyException;
 import bobbybot.tasks.Task;
 import bobbybot.util.Storage;
 import bobbybot.util.TaskList;
@@ -24,14 +23,13 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task taskCompleted = tasks.getTask(taskNumToMarkAsDone - 1);
-        tasks.markAsDone(taskNumToMarkAsDone);
         try {
+            Task taskCompleted = tasks.getTask(taskNumToMarkAsDone - 1);
+            tasks.markAsDone(taskNumToMarkAsDone);
             storage.save(tasks);
-        } catch (IOException e) {
-            System.out.println("Could not save tasks to database!\n");
-            e.printStackTrace();
+            response = "Nice! I've marked this task as done:\n" + " " + taskCompleted;
+        } catch (BobbyException e) {
+            System.out.println(e.getMessage());
         }
-        response = "Nice! I've marked this task as done:\n" + " " + taskCompleted;
     }
 }
