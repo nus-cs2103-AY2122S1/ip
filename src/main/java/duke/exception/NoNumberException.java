@@ -4,7 +4,7 @@ package duke.exception;
  * Thrown when user does not enter task number to delete a task or mark a task as completed
  */
 public class NoNumberException extends DukeException {
-    private String error;
+
     /**
      * Constructs NoNumberException object
      *
@@ -12,19 +12,11 @@ public class NoNumberException extends DukeException {
      */
     public NoNumberException(String msg) {
         super(msg);
-        this.error = "OOPS!!! Please enter a task number!";
-    }
-
-    /**
-     * Prints error message
-     */
-    @Override
-    public void printError() {
-        System.out.println(this.error);
     }
 
     @Override
     public String getError() {
-        return this.error;
+        String error = "OOPS!!! Please enter a task number!";
+        return error;
     }
 }

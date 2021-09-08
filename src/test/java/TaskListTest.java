@@ -1,4 +1,4 @@
-import duke.TaskList;
+import duke.data.TaskList;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;

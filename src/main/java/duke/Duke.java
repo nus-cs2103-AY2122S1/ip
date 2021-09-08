@@ -1,6 +1,10 @@
 package duke;
 
+import duke.data.TaskList;
 import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -23,6 +27,7 @@ public class Duke {
     public Duke(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
+
         try {
             taskList = storage.loadData();
         } catch (IOException e) {
@@ -40,32 +45,11 @@ public class Duke {
         return this.taskList;
     }
 
-    /**
-     * Activates programme
-     */
-    public void run() {
-        ui.showTaskList(taskList, "list");
-        ui.welcome();
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNextLine()) {
-            String s = sc.nextLine();
-            try {
-                parser.parse(s);
-            } catch (DukeException e) {
-                e.printError();
-            }
-        }
-    }
-
     public String getResponse(String input) {
         try{
             return parser.parse(input);
         } catch (DukeException e) {
             return e.getError();
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
     }
 }

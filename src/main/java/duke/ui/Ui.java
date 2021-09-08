@@ -1,8 +1,7 @@
-package duke;
+package duke.ui;
 
+import duke.data.TaskList;
 import duke.task.Task;
-
-import java.io.File;
 
 /**
  * Deals with interactions with the user
@@ -12,14 +11,14 @@ public class Ui {
     /**
      * Greets user when programme is run
      */
-    public String welcome() {
+    public String showWelcome() {
         return "Hello! I'm Duke\n" + "What can I do for you?";
     }
 
     /**
      * Bids user goodbye when programme is exited
      */
-    public String bye() {
+    public String showBye() {
         return "Bye. Hope to see you again soon!";
     }
 
@@ -69,13 +68,19 @@ public class Ui {
      * @param cmd determine which message to be shown
      */
     public String showTaskList(TaskList list, String cmd) {
-        assert (cmd.equals("list") || cmd.equals("find") || (cmd.equals("past")))
+        boolean isListCmd = cmd.equals("list");
+        boolean isFindCmd = cmd.equals("find");
+        boolean isPastCmd = cmd.equals("past");
+
+        assert (isListCmd || isFindCmd || isPastCmd)
                 : "Command is invalid";
+
         if (!list.getList().isEmpty()) {
             StringBuilder sb = new StringBuilder();
-            String msg = cmd.equals("list")
+
+            String msg = isListCmd
                     ? "Here are the tasks in your list:"
-                    : cmd.equals("find")
+                    : isFindCmd
                     ? "Here are the matching tasks in your list:"
                     : "Here are your past records!";
             sb.append(msg).append("\n");
@@ -88,7 +93,7 @@ public class Ui {
 
             return sb.toString();
         } else {
-            return cmd.equals("past")
+            return isPastCmd
                     ? "You have no past records!"
                     : "You have no tasks!";
         }

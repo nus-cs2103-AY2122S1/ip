@@ -1,4 +1,8 @@
-package duke;
+package duke.controller;
+
+import duke.Duke;
+import duke.HelpPage;
+import duke.Main;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -60,7 +64,7 @@ public class MainWindow extends AnchorPane {
     public void start() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(duke.getUi().showTaskList(duke.getTaskList(), "past"), dukeImage),
-                DialogBox.getDukeDialog(duke.getUi().welcome(), dukeImage)
+                DialogBox.getDukeDialog(duke.getUi().showWelcome(), dukeImage)
         );
     }
 
@@ -79,10 +83,7 @@ public class MainWindow extends AnchorPane {
             userInput.clear();
             Scene prev = this.getScene();
             HelpPage helpPage = new HelpPage(stage, prev);
-            Scene scene = new Scene(helpPage);
-            stage.setScene(scene);
             helpPage.start();
-            stage.show();
         } else {
             String response = duke.getResponse(input);
             dialogContainer.getChildren().addAll(
@@ -90,7 +91,7 @@ public class MainWindow extends AnchorPane {
                     DialogBox.getDukeDialog(response, dukeImage)
             );
             userInput.clear();
-            if (response.equals(duke.getUi().bye())) {
+            if (response.equals(duke.getUi().showBye())) {
                 Timer timer = new Timer();
                 TimerTask exit = new TimerTask() {
                     @Override
