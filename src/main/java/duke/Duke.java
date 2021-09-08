@@ -11,11 +11,8 @@ import duke.ui.Ui;
 import java.io.FileNotFoundException;
 
 /**
- * The main class of CS2103 iP.
- * It is the main body of this task tracking software
- * that drives the main logic.
+ * The main body of Duke task tracking software.
  */
-
 public class Duke {
     private static final String DEFAULT_PATH = "./data/duke.txt";
     private Ui ui;
@@ -29,11 +26,10 @@ public class Duke {
 
 
     /**
-     * Starts the main logic of Duke,
+     * Starts the conversation in command line interface.
      * it starts the conversation loop and continuously reads input from
      * user and execute corresponding functions until exit instructions are given.
      */
-
     public void run() {
         ui.showWelcome();
         boolean hasExited = false;
@@ -59,9 +55,15 @@ public class Duke {
      * It instantiates an empty which save and load its contents
      * to the default file (./data/duke.txt).
      */
-
     public Duke() {
         this(new Ui(), new Storage(DEFAULT_PATH), new TaskList());
+    }
+
+
+    private Duke(Ui ui, Storage storage, TaskList taskList) {
+        this.ui = ui;
+        this.storage = storage;
+        this.tasks = taskList;
     }
 
 
@@ -99,13 +101,4 @@ public class Duke {
 
         return cmd.execute(tasks, ui, storage);
     }
-
-
-    private Duke(Ui ui, Storage storage, TaskList taskList) {
-        this.ui = ui;
-        this.storage = storage;
-        this.tasks = taskList;
-    }
-
-
 }
