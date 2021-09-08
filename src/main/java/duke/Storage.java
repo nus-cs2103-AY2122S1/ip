@@ -33,6 +33,7 @@ public class Storage {
         directory.mkdirs();
         // creates file if it does not exist
         store.createNewFile();
+        assert store.isFile() : "Storage file could not be found nor created.";
         return store;
     }
 
@@ -91,6 +92,9 @@ public class Storage {
     }
 
     private static Task parseTask(String fileLine, int lineNo) throws DukeException {
+        assert fileLine != null : "Line " + lineNo + " of storage file is null";
+        assert !fileLine.isBlank() : "Line " + lineNo + " of storage file is blank";
+        
         try {
             String[] parts = fileLine.split(" \\| ");
             String taskType = parts[0];
