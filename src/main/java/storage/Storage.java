@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 import exception.DukeException;
 import models.Task;
@@ -30,7 +31,7 @@ public class Storage implements IStorage {
      */
     public Storage(String fileDirectory, String fileName) {
         this.filePath = fileDirectory + "/" + fileName;
-        this.list = new TaskList();
+        this.list = new TaskList(new ArrayList<>());
         try {
             File directory = new File(fileDirectory);
             if (!directory.exists()) {
@@ -63,7 +64,7 @@ public class Storage implements IStorage {
             System.out.println("Object from the file cannot be casted to ArrayList<Task>, error: "
                     + error.getMessage());
         }
-        return new TaskList();
+        return new TaskList(new ArrayList<>());
     }
 
     /**
@@ -85,7 +86,8 @@ public class Storage implements IStorage {
      */
     public void addTask(Task task) {
         assert task != null;
-        this.list.addTask(task);
+        list.addTask(task);
+        list = getNext();
         writeTaskListToFile();
     }
 
@@ -96,7 +98,8 @@ public class Storage implements IStorage {
      * @throws DukeException If there is no task with the specified index.
      */
     public void setDone(int index) throws DukeException {
-        this.list.setDone(index);
+        list.setDone(index);
+        list = getNext();
         writeTaskListToFile();
     }
 
@@ -127,7 +130,8 @@ public class Storage implements IStorage {
      * @throws DukeException If there is no Task with the specified index.
      */
     public String deleteTask(int index) throws DukeException {
-        String result = this.list.deleteTask(index);
+        String result = list.deleteTask(index);
+        list = getNext();
         writeTaskListToFile();
         return result;
     }
@@ -153,5 +157,28 @@ public class Storage implements IStorage {
     @Override
     public String toString() {
         return this.list.toString();
+    }
+
+    @Override
+    public TaskList getPrevious() {
+        if (list.getPrevious() == null) {
+            return list;
+        }
+        return list.getPrevious();
+    }
+
+    public TaskList getNext() {
+        if (list.getNext() == null) {
+            return list;
+        }
+        return list.getNext();
+    }
+
+    public void undo() {
+        list = getPrevious();
+    }
+
+    public void redo() {
+        list = getNext();
     }
 }

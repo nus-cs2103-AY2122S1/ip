@@ -11,24 +11,32 @@ import models.Task;
  */
 public class TaskList implements Serializable {
 
+    private TaskList previous;
+
+    private TaskList next;
+
     /** ArrayList that store all of the Task objects. */
     private final ArrayList<Task> list;
 
     /**
      * Constructor of the TaskList class where we initialize ArrayList which will contain all of the Tasks.
      */
-    public TaskList() {
-        this.list = new ArrayList<>();
+    public TaskList(ArrayList<Task> list) {
+        this.list = list;
+        previous = null;
+        next = null;
     }
 
     /**
      * Function to add task to the ArrayList.
      *
-     * @param task Task object that will be added
+     * @param task Task object that will be added.
      */
     public void addTask(Task task) {
         assert task != null;
-        this.list.add(task);
+        next = new TaskList(new ArrayList<>(list));
+        next.list.add(task);
+        next.previous = this;
     }
 
     /**
@@ -39,7 +47,12 @@ public class TaskList implements Serializable {
      */
     public void setDone(int index) throws DukeException {
         try {
-            this.list.get(index).setDone();
+            if (index < 0 || index >= list.size()) {
+                throw new IndexOutOfBoundsException();
+            }
+            next = new TaskList(new ArrayList<>(list));
+            next.list.get(index).setDone();
+            next.previous = this;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("There is no task with number " + (index + 1) + " in the list");
         }
@@ -82,7 +95,13 @@ public class TaskList implements Serializable {
      */
     public String deleteTask(int index) throws DukeException {
         try {
-            return this.list.remove(index).toString();
+            if (index < 0 || index >= list.size()) {
+                throw new IndexOutOfBoundsException();
+            }
+            next = new TaskList(new ArrayList<>(list));
+            String result = next.list.remove(index).toString();
+            next.previous = this;
+            return result;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("There is no task with number " + (index + 1) + " in the list");
         }
@@ -95,7 +114,7 @@ public class TaskList implements Serializable {
      * @return TaskList object with all lists that match the keyword.
      */
     public TaskList findKeyword(String ... keywords) {
-        TaskList result = new TaskList();
+        TaskList result = new TaskList(new ArrayList<>());
         for (String keyword: keywords) {
             for (int i = 0; i < this.list.size(); i++) {
                 if (this.list.get(i).toString().contains(keyword)) {
@@ -121,5 +140,13 @@ public class TaskList implements Serializable {
             }
         }
         return result;
+    }
+
+    public TaskList getPrevious() {
+        return previous;
+    }
+
+    public TaskList getNext() {
+        return next;
     }
 }

@@ -3,6 +3,8 @@ package tasklist;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import exception.DukeException;
@@ -10,7 +12,7 @@ import models.Task;
 
 public class TaskListTest {
 
-    private final TaskList list = new TaskList();
+    private final TaskList list = new TaskList(new ArrayList<>());
 
     @Test
     public void addTask_validInput_addSuccessfully() {

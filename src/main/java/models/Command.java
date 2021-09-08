@@ -9,5 +9,7 @@ public enum Command {
     DONE,
     DELETE,
     DEFAULT,
-    FIND
+    FIND,
+    UNDO,
+    REDO
 }

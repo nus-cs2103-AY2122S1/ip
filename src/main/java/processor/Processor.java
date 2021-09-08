@@ -48,6 +48,10 @@ public class Processor implements IProcessor {
             return processDelete(arguments.get(1));
         case FIND:
             return processFind(arguments.toArray(new String[0]));
+        case UNDO:
+            return processUndo();
+        case REDO:
+            return processRedo();
         default:
             return processDefault(arguments);
         }
@@ -178,5 +182,21 @@ public class Processor implements IProcessor {
         String response = "Bye. Please meet me again later!";
         Ui.print(response);
         return response;
+    }
+
+    @Override
+    public String processUndo() {
+        storage.undo();
+        return storage.toString();
+    }
+
+    /**
+     * Redo to the previous TaskList.
+     *
+     * @return String representation of the previous TaskList.
+     */
+    public String processRedo() {
+        storage.redo();
+        return storage.toString();
     }
 }
