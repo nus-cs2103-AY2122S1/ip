@@ -29,10 +29,13 @@ public class MainWindow extends AnchorPane {
     @FXML
     private ImageView imageView = new ImageView();
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.gif"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.gif"));
 
 
+    /**
+     * Initialises the chat bot.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -48,6 +51,8 @@ public class MainWindow extends AnchorPane {
     private Image getDukeImage(String dukeResponse) {
         if (dukeResponse.startsWith("OOPS")) {
             return new Image(this.getClass().getResourceAsStream("/images/DaDukeConfused.gif"));
+        } else if (dukeResponse.startsWith("See you")) {
+            return new Image(this.getClass().getResourceAsStream("/images/DaDukeBye.gif"));
         } else {
             return new Image(this.getClass().getResourceAsStream("/images/DaDuke.gif"));
         }
@@ -59,7 +64,6 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.gif"));
         Ui ui = new Ui();
         String input = userInput.getText();
         String response = duke.getResponse(input);
@@ -77,7 +81,7 @@ public class MainWindow extends AnchorPane {
                 public void run() {
                     System.exit(0);
                 }
-            }, 1000);
+            }, 3000);
         }
     }
 }
