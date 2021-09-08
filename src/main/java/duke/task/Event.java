@@ -20,7 +20,7 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + this.at + ")";
     }
 
-    public String fileFormat() {
-        return String.format("E%s | %s", super.fileFormat(), this.at);
+    public String convertToFileFormat() {
+        return String.format("E%s | %s", super.convertToFileFormat(), this.at);
     }
 }

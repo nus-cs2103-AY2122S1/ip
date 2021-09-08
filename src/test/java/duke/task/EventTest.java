@@ -8,7 +8,7 @@ public class EventTest {
     @Test
     public void fileFormat_normalNoInput_properFormat() {
         assertEquals("D | 0 | report | 2/12/2021 1800",
-                new Deadline("report", "2/12/2021 1800").fileFormat());
+                new Deadline("report", "2/12/2021 1800").convertToFileFormat());
     }
 
     @Test

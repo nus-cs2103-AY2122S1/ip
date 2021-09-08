@@ -36,7 +36,7 @@ public class Storage {
      * @param fullString The given string.
      * @return The Task with the appropriate information.
      */
-    public static Task stringToTask(String fullString) {
+    public static Task convertStringToTask(String fullString) {
         String[] arr = fullString.split("\\|");
         for (int i = 0; i < arr.length; i++) {
             arr[i] = arr[i].trim();
@@ -61,8 +61,8 @@ public class Storage {
      * @param task THe given Task.
      * @return The string to be stored into the file.
      */
-    public static String taskToString(Task task) {
-        return task.fileFormat();
+    public static String convertTaskToString(Task task) {
+        return task.convertToFileFormat();
     }
 
     /**
@@ -77,7 +77,7 @@ public class Storage {
             ArrayList<Task> temp = new ArrayList<>();
             while (sc.hasNextLine()) {
                 String currTask = sc.nextLine();
-                Task task = Storage.stringToTask(currTask);
+                Task task = Storage.convertStringToTask(currTask);
                 temp.add(task);
             }
             return temp;
@@ -97,7 +97,7 @@ public class Storage {
             FileWriter fw = new FileWriter(this.file);
             String curr = "";
             for (int i = 0; i < tasks.size(); i++) {
-                curr += Storage.taskToString(tasks.get(i)) + "\n";
+                curr += Storage.convertTaskToString(tasks.get(i)) + "\n";
             }
             fw.write(curr);
             fw.close();
