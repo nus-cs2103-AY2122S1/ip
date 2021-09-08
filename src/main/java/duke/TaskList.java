@@ -61,7 +61,7 @@ public class TaskList {
     public String markDone(String userInput) {
         if (userInput.substring(DONE_LENGTH).length() == EMPTY) {
             // throw new DukeException("User has not indicated task to mark as complete.");
-            return "Sorry, which task do you wish to mark as completed?";
+            return "Sorry, which task do you wish to mark as completed?\nType 'done <TASK NO.>'";
 
         } else {
             int index = Integer.parseInt(userInput.substring(DONE_LENGTH + 1));
@@ -94,7 +94,7 @@ public class TaskList {
     public String delete(String userInput) {
         if (userInput.substring(DELETE_LENGTH).length() == EMPTY) {
             // throw new DukeException("User has not indicated task to delete.");
-            return "Sorry, which task do you wish to delete?";
+            return "Sorry, which task do you wish to delete?\nType 'delete <TASK NO.>'";
 
         } else {
             int index = Integer.parseInt(userInput.substring(DELETE_LENGTH + 1));
@@ -118,7 +118,7 @@ public class TaskList {
     public String makeTodo(String userInput) {
         if (userInput.substring(TODO_LENGTH).length() == EMPTY) {
             // throw new DukeException("YIKES!! The description of a todo cannot be empty!");
-            return "YIKES!! The description of a todo cannot be empty!";
+            return "YIKES!! The description of a todo cannot be empty!\nType 'todo <description>'";
         } else {
             return makeTask(new ToDo(userInput.substring(TODO_LENGTH + 1)));
         }
@@ -144,7 +144,9 @@ public class TaskList {
     public String makeEvent(String userInput) {
         if (userInput.substring(EVENT_LENGTH).length() == EMPTY) {
             // throw new DukeException("YIKES!! The description of an Event cannot be empty!");
-            return "YIKES!! The description of an Event cannot be empty!";
+            String result = "YIKES!! The description of an Event cannot be empty!\n";
+            result += "Type 'event <description> /at <date/time>'";
+            return result;
         } else {
             String output = userInput.substring(EVENT_LENGTH + 1);
             String[] info = output.split("/");
@@ -173,7 +175,9 @@ public class TaskList {
     public String makeDeadline(String userInput) {
         if (userInput.substring(DEADLINE_LENGTH).length() == EMPTY) {
             // throw new DukeException("YIKES!! The description of a Deadline cannot be empty!");
-            return "YIKES!! The description of a Deadline cannot be empty!";
+            String result = "YIKES!! The description of a Deadline cannot be empty!\n";
+            result += "Type 'deadline <description> /by <YYYY-MM-DD>'";
+            return result;
         } else {
             String output = userInput.substring(DEADLINE_LENGTH + 1);
             String[] info = output.split("/");
@@ -202,7 +206,9 @@ public class TaskList {
      */
     public String find(String userInput) {
         if (userInput.substring(FIND_LENGTH).length() == EMPTY) {
-            return "Uh Oh!! Please specify the keyword of a task!";
+            String result = "Uh Oh!! Please specify the keyword of a task!\n";
+            result += "Type 'find <keyword>'";
+            return result;
 
         } else {
             String keyword = userInput.substring(FIND_LENGTH + 1);
@@ -239,10 +245,25 @@ public class TaskList {
     }
 
     /**
+     * Returns instructions and sample commands for user to follow.
+     *
+     * @return Guide for users to adhere to when using Duke.
+     */
+    public String getHelp() {
+        String result = "Here are the commands you can give Duke:\n";
+        result += "Create tasks: todo, deadline, event\n";
+        result += "Manage tasks: list, delete, done, find\n";
+        result += "Exit: bye";
+        return result;
+    }
+
+    /**
      * Alerts user to an invalid command.
      */
     public String displayError() {
-        return "OOPS!! I don't know how to respond to this command! :-(";
+        String result = "OOPS!! I don't know how to respond to this command! :-(\n";
+        result += "Type 'help' to view list of commands available.";
+        return result;
     }
 
 }

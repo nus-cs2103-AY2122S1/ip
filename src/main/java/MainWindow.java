@@ -33,7 +33,8 @@ public class MainWindow extends AnchorPane {
         setDuke(duke);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(
-                "Welcome to Duke!\n How may I assist you today?", dukeImage));
+                "Welcome to Duke!\nHow may I assist you today?\n"
+                        + "Type 'help' to view list of commands.", dukeImage));
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.getTasks(), dukeImage));
     }
 
