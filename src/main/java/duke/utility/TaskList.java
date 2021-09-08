@@ -41,6 +41,7 @@ public class TaskList {
     }
 
     protected String add(Task task) {
+        assert !this.existingTasks.contains(task.getTaskName()) : "duplicate task";
         this.tasks.add(task);
         this.existingTasks.add(task.getTaskName());
         return String.format("New task added to list:\n%s", task);
@@ -48,6 +49,7 @@ public class TaskList {
 
     protected String markAsCompleted(String taskName) throws DukeException.TaskAlreadyCompleteException,
             DukeException.NoSuchTaskException {
+        assert this.existingTasks.contains(taskName): "task to delete does not exist";
         int taskIdx = this.getTaskIndex(taskName);
         Task completedTask = this.tasks.get(taskIdx);
         if (completedTask.getIsCompleted()) {
@@ -59,6 +61,7 @@ public class TaskList {
     }
 
     protected String deleteTask(int taskNum) throws DukeException.InvalidTaskNumException {
+        assert taskNum > 0 && taskNum <= this.tasks.size() : "invalid task number";
         if (taskNum > this.tasks.size() || taskNum < 1) {
             throw new DukeException.InvalidTaskNumException("Task number " + taskNum + " does not exist!");
         } else {
@@ -92,6 +95,7 @@ public class TaskList {
     }
 
     protected int getTaskIndex(String taskName) throws DukeException.NoSuchTaskException {
+        assert this.existingTasks.contains(taskName) : "task does not exist";
         int currentTaskNum = 0;
         while (currentTaskNum < this.tasks.size()) {
             if (this.tasks.get(currentTaskNum).getTaskName().equals(taskName)) {

@@ -47,7 +47,8 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
+        String input = userInput.getText().trim();
+        assert input.length() > 0: "invalid user input: blank line";
         if (input.equals("bye")) {
             this.closeApp();
         }
