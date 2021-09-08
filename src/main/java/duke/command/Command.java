@@ -12,4 +12,5 @@ public enum Command {
      ADDCOMMAND,
      UNKNOWN,
      FIND,
+     UPDATE,
 }

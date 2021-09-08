@@ -3,6 +3,7 @@ package duke.task;
 import java.util.ArrayList;
 import duke.exception.DukeTaskDetailsException;
 import duke.exception.DukeIndexInputException;
+import duke.exception.DukeUpdateException;
 
 /**
  * Class that represents the list of tasks
@@ -97,5 +98,16 @@ public class TaskList {
             }
         }
         return newList;
+    }
+
+    public Task updateTask(String[] taskArray) throws DukeUpdateException {
+        String[] updateDetails = taskArray[1].split(" ", 2);
+        int index = Integer.parseInt(updateDetails[0]);
+        Task task = this.tasks.get(index - 1);
+        if (task instanceof Todo) {
+            throw new DukeUpdateException("You can only update a deadline or an event!");
+        }
+        task.updateDate(updateDetails[1]);
+        return task;
     }
 }

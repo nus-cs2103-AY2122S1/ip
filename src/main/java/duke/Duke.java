@@ -3,6 +3,7 @@ package duke;
 import duke.command.Command;
 import duke.exception.DukeIndexInputException;
 import duke.exception.DukeTaskDetailsException;
+import duke.exception.DukeUpdateException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.Task;
@@ -51,10 +52,13 @@ public class Duke {
                 case FIND:
                     ArrayList<Task> list = this.tasks.find(splitInput[1]);
                     return this.ui.list(list);
+                case UPDATE:
+                    Task updatedTask = this.tasks.updateTask(splitInput);
+                    return this.ui.updateTask(updatedTask);
                 default:
                     return this.ui.unknownCommand();
                 }
-            } catch (DukeTaskDetailsException | DukeIndexInputException e) {
+            } catch (DukeTaskDetailsException | DukeIndexInputException | DukeUpdateException e) {
                 return "\t" + e.toString();
             } finally {
                 this.storage.saveTasks(this.tasks.getTasks());

@@ -38,6 +38,10 @@ public class Deadline extends Task {
         this.parseDate(deadline);
     }
 
+    public void updateDate(String deadline) {
+        this.parseDate(deadline);
+    }
+
     private String formatTime(String time) {
         if (time.length() > 4) {
             return time;
@@ -57,6 +61,8 @@ public class Deadline extends Task {
             return;
         } catch (DateTimeParseException e) {
             this.deadline = deadline;
+            this.deadlineDate = null;
+            this.deadlineTime = null;
         }
     }
 

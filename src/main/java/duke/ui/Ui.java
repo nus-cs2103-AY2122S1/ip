@@ -92,4 +92,9 @@ public class Ui {
                            " tasks in the list.";
         return toReturn;
     }
+
+    public String updateTask(Task task) {
+        String toReturn = "Okay I\'ve update this task:\n";
+		return toReturn += "\t" + task.toString();
+    }
 }

@@ -38,6 +38,10 @@ public class Event extends Task {
         this.parseDate(eventDate);
     }
 
+    public void updateDate(String eventDate) {
+        this.parseDate(eventDate);
+    }
+
     private String formatTime(String time) {
         if (time.length() > 4) {
             return time;
@@ -57,6 +61,8 @@ public class Event extends Task {
             return;
         } catch (DateTimeParseException e) {
             this.eventString = event;
+            this.eventDate = null;
+            this.eventTime = null;
         }
     }
 

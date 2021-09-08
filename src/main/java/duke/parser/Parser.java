@@ -29,6 +29,8 @@ public class Parser {
             return Command.ADDCOMMAND;
         } else if (input[0].equals("find")) {
             return Command.FIND;
+        } else if (input[0].equals("update")) {
+            return Command.UPDATE;
         } else {
             return Command.UNKNOWN;
         }

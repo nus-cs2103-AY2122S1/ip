@@ -26,6 +26,8 @@ public class Todo extends Task {
         super(title, isDone);
     }
 
+    public void updateDate(String date) {}
+
     /**
      * Returns a string representation of the todo task for displaying in ui
      *

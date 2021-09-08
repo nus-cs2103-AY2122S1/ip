@@ -4,7 +4,7 @@ package duke.task;
  * class to represent tasks
  *
  */
-public class Task {
+public abstract class Task {
 
     protected String title;
     protected Boolean isDone;
@@ -23,6 +23,8 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    abstract void updateDate(String date);
 
     /**
      * Returns string representation of the task for displaying
