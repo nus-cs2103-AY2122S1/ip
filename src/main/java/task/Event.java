@@ -8,7 +8,7 @@ package task;
  */
 public class Event extends Task {
 
-    private static String taskCat = "event";
+    private static final String TASK_CAT = "event";
     private String eventDetails;
 
     /**
@@ -17,7 +17,7 @@ public class Event extends Task {
      * @param eventDetails Location or time of event
      */
     public Event(String name, String eventDetails, boolean isDone) {
-        super(name, taskCat, isDone);
+        super(name, TASK_CAT, isDone);
         this.eventDetails = eventDetails;
     }
 

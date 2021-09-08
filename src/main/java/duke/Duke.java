@@ -15,7 +15,7 @@ public class Duke {
     private static final String DEFAULT_ADDRESS = "src/main/java/data/tasklist.txt";
     private Storage storage;
     private Tasklist tasklist;
-    private String exitCmd = "bye";
+    private static final String EXIT_CMD = "bye";
     private LogMessage logMessage = new LogMessage();
     private Ui ui;
 
@@ -45,7 +45,7 @@ public class Duke {
         Ui.start();
         boolean isExit = false;
         while (!isExit) {
-            if (this.ui.readCommand().equals(exitCmd)) {
+            if (this.ui.readCommand().equals(EXIT_CMD)) {
                 break;
             }
         }
