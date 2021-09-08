@@ -95,6 +95,8 @@ public class TaskList {
      * @throws DukeException
      */
     public Task markTaskDone(Integer taskNum) throws DukeException {
+        assert todoList.size() > 0;
+
         Task task = todoList.get(taskNum - 1);
         task.markAsDone();
 
@@ -109,6 +111,8 @@ public class TaskList {
      * @throws DukeException
      */
     public Task deleteTask(Integer taskNum) throws DukeException {
+        assert todoList.size() > 0;
+
         Task task = todoList.remove(taskNum - 1);
 
         return task;
@@ -126,13 +130,8 @@ public class TaskList {
             throw new DukeException("Looks like you forgot to enter a keyword.");
         }
 
-        ArrayList<Task> matchingTasks = new ArrayList<>();
-        for (Task task : todoList) {
-            if (task.contains(keyword)) {
-                matchingTasks.add(task);
-            }
-        }
-        return matchingTasks;
+        return todoList.stream().filter(task -> task.contains(keyword)).collect(
+            Collectors.toCollection(ArrayList::new));
     }
 
     /**
