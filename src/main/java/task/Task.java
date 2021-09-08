@@ -45,6 +45,7 @@ public abstract class Task {
         default:
             throw new DukeException("command not found");
         }
+        assert newTask != null;
         return newTask;
     }
 
@@ -56,6 +57,7 @@ public abstract class Task {
      */
     public static Task getTask(String s) {
         String[] parts = Parser.parseStorage(s);
+        assert parts.length == 3;
         Task t = createTask(parts[0], parts[1]);
         if (parts[2].equals("1")) {
             t.markDone();
