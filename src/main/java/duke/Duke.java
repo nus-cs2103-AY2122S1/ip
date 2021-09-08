@@ -54,12 +54,11 @@ public class Duke {
     }
 
     public static String showComings() {
-            TaskList taskListMonth = tasks.tasksWithinMonthOrDay(2);
+            TaskList taskListMonth = tasks.tasksWithinMonthOrDay("month");
             assert taskListMonth != null;
-            TaskList taskListDay = tasks.tasksWithinMonthOrDay(1);
+            TaskList taskListDay = tasks.tasksWithinMonthOrDay("day");
             assert taskListDay != null;
             return ui.showComings(taskListMonth, taskListDay);
-
     }
 
     public static String showList() {

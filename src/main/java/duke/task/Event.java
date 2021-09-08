@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.MismatchedFormException;
+
 /**
  * Represents the event that has time. .
  *
@@ -18,8 +20,8 @@ public class Event extends Task {
      * @param at The time when the task should be done.
      */
     public Event(String description, String at) {
-        super(description, formatOutputDateAndTime(at));
-        this.at = formatOutputDateAndTime(at);
+        super(description, at);
+        this.at = at;
     }
 
     /**

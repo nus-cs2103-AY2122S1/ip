@@ -76,7 +76,13 @@ public class Storage {
         return taskList;
     }
 
-
+    /**
+     * Adds the tasks to the tasklist.
+     *
+     * @param task The task input.
+     * @param taskList The list store tasks.
+     * @param lens The length of task string.
+     */
     public void addRelatedTasks(String task, ArrayList<Task> taskList, int lens) {
         char type = task.charAt(0);
         char done = task.charAt(4);
@@ -87,8 +93,19 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns the deadline or event task added.
+     *
+     * @param task The string form of task.
+     * @param lens The length of task.
+     * @param type The type representing event or deadline.
+     * @param done The char representing done or not.
+     * @return The added deadline or event task.
+     */
     public Task addEventOrDeadline(String task, int lens, int type, char done) {
-        String[] parts = task.substring(8, lens).split(" ~ ");
+        String splitString = " ~ ";
+        int splitIndex = 8;
+        String[] parts = task.substring(splitIndex, lens).split(splitString);
         String content = parts[0];
         String time = parts[1];
         Task deadlineOrEvent;
@@ -103,13 +120,22 @@ public class Storage {
         return deadlineOrEvent;
     }
 
+    /**
+     * Returns the todo task added.
+     *
+     * @param task The task in string form.
+     * @param lens The length of task.
+     * @param done The char representing done or not.
+     * @return The added todo task.
+     */
     public Task addTodo(String task, int lens, char done) {
-        Task todo = new Task("");
+        Task todo;
+        int splitIndex = 8;
         if (done == '1') {
-            todo = new Todo(task.substring(8, lens));
+            todo = new Todo(task.substring(splitIndex, lens));
             todo.markAsDone();
         } else {
-            todo = new Todo(task.substring(8, lens));
+            todo = new Todo(task.substring(splitIndex, lens));
         }
         return todo;
     }
@@ -147,24 +173,25 @@ public class Storage {
      */
     public static String transformToData(String task) {
         int lens = task.length();
-        char type = task.charAt(1);
-        char done = task.charAt(4);
-        String split = "by: ";
+        char type = task.charAt(1);//char at index 1 represents type.
+        char done = task.charAt(4);//char at index 4 represents status of done.
+        int splitIndex = 7;
+        String splitString = "by: ";
         String prefix = "0";
         String dataForm;
         if (type == 'E') {
-            split = "at: ";
+            splitString = "at: ";
         }
         if (done == 'X') {
             prefix = "1";
         }
         if (type == 'T') {
-            dataForm = "T | " + prefix + " | " + task.substring(7, lens);
+            dataForm = "T | " + prefix + " | " + task.substring(splitIndex, lens);
         } else {
-            String[] parts = task.substring(7, lens).split(split);
+            String[] parts = task.substring(splitIndex, lens).split(splitString);
             String content = parts[0];
             int lensContent = content.length();
-            content = content.substring(0, lensContent - 2);
+            content = content.substring(0, lensContent - 2);//Just avoding
             String time = parts[1];
             int lensBy = time.length();
             time = time.substring(0, lensBy - 1);

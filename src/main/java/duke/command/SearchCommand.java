@@ -1,10 +1,9 @@
 package duke.command;
 
+import duke.exception.MismatchedFormException;
 import duke.storage.Storage;
-//
 import duke.task.Task;
 import duke.task.TaskList;
-//
 import duke.ui.Ui;
 
 /**
@@ -13,6 +12,7 @@ import duke.ui.Ui;
 public class SearchCommand extends Command {
     private Operation type;
     private String response;
+    private int splitIndex;
 
     /**
      * Sets up the search command.
@@ -20,9 +20,10 @@ public class SearchCommand extends Command {
      * @param response The user input.
      * @param type The type of search command.
      */
-    public SearchCommand(String response, Operation type) {
+    public SearchCommand(String response, Operation type, int splitIndex) {
         this.response = response;
         this.type = type;
+        this.splitIndex = splitIndex;
     }
 
     /**
@@ -33,17 +34,16 @@ public class SearchCommand extends Command {
      * @param storage The instance to store data.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws MismatchedFormException {
         TaskList resultList = new TaskList();
+        String toSearch = response.substring(splitIndex);
         switch (type) {
         case DATE:
-            String preTime = response.substring(5);
-            String actualTime = Task.formatOutputDateAndTime(preTime);         
+            String actualTime = Task.formatOutputDateAndTime(toSearch);
             resultList = tasks.tasksWithDateSame(actualTime);
             break;
         case FIND:
-            String content = response.substring(5);
-            resultList = tasks.tasksWithContent(content);
+            resultList = tasks.tasksWithContent(toSearch);
             break;
         default:
             break;

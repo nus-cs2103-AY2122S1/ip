@@ -2,6 +2,9 @@ package duke.command;
 
 import java.io.IOException;
 
+import duke.exception.DukeException;
+import duke.exception.MismatchedFormException;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -16,6 +19,8 @@ import duke.ui.Ui;
 public class AddCommand extends Command {
     private String response;
     private Operation type;
+    private int splitIndex;
+    private String splitString;
 
     /**
      * Adds the command.
@@ -23,9 +28,15 @@ public class AddCommand extends Command {
      * @param response The content of user input.
      * @param type The type of adding command.
      */
-    public AddCommand(String response, Operation type) {
+    public AddCommand(String response, Operation type,int splitIndex, String splitString) {
+        this(response, type, splitIndex);
+        this.splitString = splitString;
+    }
+
+    public AddCommand(String response, Operation type, int splitIndex) {
         this.response = response;
         this.type = type;
+        this.splitIndex = splitIndex;
     }
 
     /**
@@ -36,23 +47,17 @@ public class AddCommand extends Command {
      * @param storage The instance to store data.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         Task task = new Task("");
         switch (type) {
         case TODO:
-            task = new Todo(response.substring(5));
+            task = new Todo(response.substring(splitIndex));
             break;
         case DEADLINE:
-            String[] deadlineParts = response.substring(9).split(" /by ");
-            String deadlineContent = deadlineParts[0];
-            String deadlineTime = deadlineParts[1];
-            task = new Deadline(deadlineContent, deadlineTime);
+            task = new Deadline(partsForEventOrDeadline()[0], partsForEventOrDeadline()[1]);
             break;
         case EVENT:
-            String[] eventParts = response.substring(6).split(" /at ");
-            String eventContent = eventParts[0];
-            String eventTime = eventParts[1];
-            task = new Event(eventContent, eventTime);
+            task = new Event(partsForEventOrDeadline()[0], partsForEventOrDeadline()[1]);
             break;
         default:
             break;
@@ -66,5 +71,19 @@ public class AddCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    /**
+     * Provides required parameter for deadline or event.
+     *
+      * @return The string array that contains their required parameter.
+     * @throws MismatchedFormException The exception inherit from checkContent.
+     */
+    public String[] partsForEventOrDeadline() throws MismatchedFormException {
+        String LaterPart = Parser.checkContent(response, splitIndex, splitString);
+        String[] Parts = LaterPart.split(splitString);
+        String Content = Parts[0];
+        String Time = Task.formatOutputDateAndTime(Parts[1]);
+        return new String[] {Content, Time};
     }
 }

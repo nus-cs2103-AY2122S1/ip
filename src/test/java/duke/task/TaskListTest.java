@@ -25,8 +25,8 @@ public class TaskListTest {
         testList.add(new Event("not", "11/11/1111"));
         testList.add(new Event("also not", "7/9/1177 1655"));
         TaskList currListExpected = new TaskList(testList);
-        String actualDay = currListExpected.tasksWithinMonthOrDay(1).toString();
-        String actualMonth = currListExpected.tasksWithinMonthOrDay(2).toString();
+        String actualDay = currListExpected.tasksWithinMonthOrDay("day").toString();
+        String actualMonth = currListExpected.tasksWithinMonthOrDay("month").toString();
         assertEquals(expectedDay, actualDay);
         assertEquals(expectedMonth, actualMonth);
     }

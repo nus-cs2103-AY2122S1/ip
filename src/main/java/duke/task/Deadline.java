@@ -16,8 +16,8 @@ public class Deadline extends Task {
      * @param by The deadline.
      */
     public Deadline(String description, String by) {
-        super(description, formatOutputDateAndTime(by));
-        this.by = formatOutputDateAndTime(by);
+        super(description, by);
+        this.by = by;
     }
 
     /**

@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+import duke.exception.MismatchedFormException;
 import duke.parser.Parser;
 
 /**
@@ -182,7 +183,7 @@ public class Task {
      * @param preTime The time user input.
      * @return The specified form of time.
      */
-    public static String formatOutputDateAndTime(String preTime) {
+    public static String formatOutputDateAndTime(String preTime) throws MismatchedFormException {
         int lens = preTime.length();
         if (isDateInputFormat(preTime) == 1) {
             return getDate(transferToDateFormat(preTime));
@@ -190,7 +191,7 @@ public class Task {
             return getDate(transferToDateFormat(preTime)) + " "
                     + getTime(preTime.substring(lens - 4, lens));
         } else {
-            return preTime;
+            throw new MismatchedFormException("date part", "dd/mm/yyyy");
         }
     }
 
@@ -208,7 +209,7 @@ public class Task {
         return this.description.contains(content);
     }
 
-    public int isWithinMonthOrDay(String date) {
+    public String isWithinMonthOrDay(String date) {
             String[] partsEventDate = atOrBy.split(" ");
             String monthEvent = partsEventDate[0];
             String yearEvent = partsEventDate[2];
@@ -223,7 +224,6 @@ public class Task {
             boolean isDayAfter = Integer.parseInt(dayDate) <= Integer.parseInt(dayEvent);
             boolean isWithinDay = isMonthSame && isYearAfter && isDaySame;
             boolean isWithinMonth = isMonthSame && isYearAfter && isDayAfter;
-            return isWithinDay ? 1 : isWithinMonth ? 2 : 0;
-
+            return isWithinDay ? "day" : isWithinMonth ? "month" : "not within time period";
     }
 }

@@ -111,7 +111,7 @@ public class TaskList {
         return currList;
     }
 
-    public TaskList tasksWithinMonthOrDay(int type) {
+    public TaskList tasksWithinMonthOrDay(String type) {
         TaskList currList = new TaskList();
         LocalDate dateNow = LocalDate.now();
         String now = dateNow.format(DateTimeFormatter.ofPattern("MMM d yyyy", Locale.ENGLISH));

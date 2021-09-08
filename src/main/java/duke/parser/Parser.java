@@ -10,10 +10,8 @@ import duke.command.Operation;
 import duke.command.SearchCommand;
 import duke.exception.DukeException;
 import duke.exception.EmptyInputException;
+import duke.exception.MismatchedFormException;
 import duke.exception.NotRecognizeException;
-import duke.task.Task;
-
-import java.util.function.Predicate;
 
 public class Parser {
     /**
@@ -40,6 +38,28 @@ public class Parser {
     }
 
     /**
+     * Checks whether the required key word is in user input or not.
+     *
+     * @param response The user input.
+     * @param splitIndex The index where string splits apart.
+     * @param splitString The string specifies how to split.
+     * @return The content part.
+     * @throws MismatchedFormException Deadline doesn't contain /by and event doesn't contain /at.
+     */
+    public static String checkContent(String response,
+                                      int splitIndex, String splitString) throws MismatchedFormException {
+        String content = response.substring(splitIndex);
+        boolean isContain = content.contains(splitString);
+        if (splitString.equals(" /by ") && !isContain) {
+            throw new MismatchedFormException("deadline", " /by ");
+        } else if (splitString.equals(" /at ") && !isContain) {
+            throw new MismatchedFormException("event", " /at ");
+        } else {
+            return content;
+        }
+    }
+
+    /**
      * Transfers the user input to correct command.
      *
      * @param response The user input.
@@ -47,72 +67,34 @@ public class Parser {
      * @throws DukeException The exception related to duke.
      */
     public static Command parse(String response) throws DukeException {
-        int len = response.length();
-        switch (response) {
-        case "bye":
-            return new ExitCommand();
-        case "list":
-            return new ListCommand();
-        default:
-            Operation op = checkResponse(response, len);
-            switch (op) {
-            case DEADLINE:
-                return new AddCommand(response, Operation.DEADLINE);
-            case EVENT:
-                return new AddCommand(response, Operation.EVENT);
-            case TODO:
-                return new AddCommand(response, Operation.TODO);
-            case DONE:
-                return new MarkCommand(response);
-            case DELETE:
-                return new DeleteCommand(response);
-            case DATE:
-                return new SearchCommand(response, Operation.DATE);
-            case FIND:
-                return new SearchCommand(response, Operation.FIND);
-            default:
-                return null;
+            if (response.equals("bye")) {
+                return new ExitCommand();
+            } else if (response.equals("list")) {
+                return new ListCommand();
+            } else if (isEmpty(response)) {
+                throw new EmptyInputException(response);
+            } else if (response.matches("^todo( .*)?")) {
+                return new AddCommand(response, Operation.TODO, 5);
+            } else if (response.matches("^deadline( .*)?")) {
+                return new AddCommand(response, Operation.DEADLINE, 9, " /by ");
+            } else if (response.matches("^event( .*)?")) {
+                return new AddCommand(response, Operation.EVENT, 6, " /at ");
+            } else if (response.matches("^done( .*)?")) {
+                return new MarkCommand(response, 5);
+            } else if (response.matches("^delete( .*)?")) {
+                return new DeleteCommand(response, 7);
+            } else if (response.matches("^find( .*)?")) {
+                return new SearchCommand(response, Operation.FIND, 5);
+            } else if (response.matches("^date( .*)?")) {
+                return new SearchCommand(response, Operation.DATE, 5);
+            } else {
+                throw new NotRecognizeException();
             }
-        }
     }
 
-    /**
-     * Returns the correct enum operation according to response,
-     * or it returns null to show exception occurred.
-     *
-     * @param response The user input.
-     * @param len The length of user input.
-     * @return Type of operation for the next judgement.
-     * @throws DukeException The exception related to duke.
-     */
-    public static Operation checkResponse(String response, int len) throws DukeException {
-        boolean isEmpty = response.equals("delete") || response.equals("todo") || response.equals("deadline")
+    public static boolean isEmpty(String response) {
+        return response.equals("delete") || response.equals("todo") || response.equals("deadline")
                 || response.equals("event") || response.equals("done") || response.equals("date")
                 || response.equals("find");
-        Predicate<String> isDateFormat = input -> Task.isDateInputFormat(input) != 0;
-        if (response.startsWith("find ") && len > 5) {
-            return Operation.FIND;
-        } else if (response.startsWith("date ")
-                && isDateFormat.test(response.substring(5))) {
-            return Operation.DATE;
-        } else if (response.startsWith("done ")
-                && checkIsDigit(response.substring(5))) {
-            return Operation.DONE;
-        } else if (response.startsWith("todo ") && len > 5) {
-            return Operation.TODO;
-        } else if (response.startsWith("deadline ")
-                && response.substring(9).contains(" /by ") && isDateFormat.test(response.split(" /by ")[1])) {
-            return Operation.DEADLINE;
-        } else if (response.startsWith("event ")
-                && response.substring(6).contains(" /at ") && isDateFormat.test(response.split(" /at ")[1])) {
-            return Operation.EVENT;
-        } else if (response.startsWith("delete ")
-                && checkIsDigit(response.substring(7))) {
-            return Operation.DELETE;
-        } else if (isEmpty) {
-            throw new EmptyInputException(response);
-        } else {
-            throw new NotRecognizeException();//This means there's no match of operations.
-        }
     }
 }
