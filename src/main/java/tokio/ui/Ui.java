@@ -23,14 +23,14 @@ public class Ui {
      * Prints welcome message, to be shown when Duke starts up at the beginning.
      */
     public String printWelcome() {
-        return "Hola Río!\n" + "I am your chatbot, Tokio.\n" + "Let me know what do you need help in!";
+        return "Hola Rio!\n" + "I am your chatbot, Tokio.\n" + "Let me know what do you need help in!";
     }
 
     /**
      * Prints bye message, to be shown when user terminates Duke with "Bye" command.
      */
     public String printBye() {
-        return "Come back soon Río! \n" + "I'll miss you <3";
+        return "Come back soon Rio! \n" + "I'll miss you <3";
     }
 
     /**
@@ -44,7 +44,7 @@ public class Ui {
      * Prints invalid index error, to be shown when index does not exist/is more than size of task list.
      */
     public String printInvalidIndexError() {
-        return "Oh no Río, this index does not exist!\n" + "Please make sure that index < size of tasks";
+        return "Oh no Rio, this index does not exist!\n" + "Please make sure that index < size of tasks";
     }
 
     /**
@@ -53,7 +53,7 @@ public class Ui {
      * @param tasks Task list to be printed.
      */
     public String printList(TaskList tasks) {
-        StringBuilder listMsg = new StringBuilder("Sure Río! Here's everything on your list:\n");
+        StringBuilder listMsg = new StringBuilder("Sure Rio! Here's everything on your list:\n");
         for (int i = 0; i < tasks.getSize(); i++) {
             int taskNo = i + 1;
             Task curr = tasks.getTask(i);
@@ -71,15 +71,16 @@ public class Ui {
     public String printFindResults(TaskList taskList, String keyword) {
         StringBuilder findResultsMsg;
         if (taskList.getSize() > 0) {
-            findResultsMsg = new StringBuilder("Okay Río, this is what I have found based on the keyword: " + keyword);
+            findResultsMsg = new StringBuilder("Sure Rio!\n" + "This is what I have found based on the keyword: \""
+                    + keyword + "\"\n");
             for (int i = 0; i < taskList.getSize(); i++) {
                 int taskNo = i + 1;
                 Task curr = taskList.getTask(i);
                 findResultsMsg.append(taskNo).append(". ").append(curr.toString()).append("\n");
             }
         } else {
-            findResultsMsg = new StringBuilder("Oops Río, based on your keyword: "
-                    + keyword + ", I am not able to find any match :(");
+            findResultsMsg = new StringBuilder("Oops Rio, based on your keyword: \""
+                    + keyword + "\", I am not able to find any match :(");
         }
         return findResultsMsg.toString();
     }
@@ -92,8 +93,8 @@ public class Ui {
      * @return Success message.
      */
     public String printAddCommand(Task task, TaskList taskList) {
-        return "Sure Río! I Have added " + task.toString() + " to your list.\n"
-                + "Now you have a total of " + taskList.getSize() + " tasks!";
+        return "Sure Rio! I Have added \"" + task.toString() + "\" to your list.\n"
+                + "You have a total of " + taskList.getSize() + " tasks!";
     }
 
     /**
@@ -104,8 +105,8 @@ public class Ui {
      * @return Success message.
      */
     public String printDoneCommand(Task task, TaskList taskList) {
-        return "Good job on completing your task Río!\n" + "I have marked this task as done: "
-                + task.toString() + "\nNow you have " + taskList.getSize() + " tasks left.";
+        return "Good job on completing your task Rio!\n" + "I have marked this task as done: \""
+                + task.toString() + "\"\n" + "Now you have " + taskList.getSize() + " task(s) left.";
     }
 
     /**
@@ -114,7 +115,7 @@ public class Ui {
      * @return Message.
      */
     public String printEmptyList() {
-        return "Wow Río, there's nothing on your list\n"
+        return "Wow Rio, there's nothing on your list!\n"
                 + "Feel free to let me know if you would like to add anything.";
     }
 
@@ -126,8 +127,8 @@ public class Ui {
      * @return Success message.
      */
     public String printDeleteCommand(Task task, TaskList taskList) {
-        return "Okay Río, I have deleted this task from you list:\n" + task.toString()
-                + "\nNow, you have " + taskList.getSize() + " tasks left.";
+        return "Okay Rio, I have deleted this task from your list:\n" + task.toString()
+                + "\nYou have " + taskList.getSize() + " task(s) left.";
     }
 
     /**
@@ -137,7 +138,7 @@ public class Ui {
      * @return Warning message.
      */
     public String printSomethingMissing(String cmdType) {
-        return "Oh no Río, I think something is missing from this " + cmdType;
+        return "Oh no Rio, I think something is missing from this " + cmdType + " command";
     }
 
     /**

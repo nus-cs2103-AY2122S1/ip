@@ -89,7 +89,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            Command command = Parser.parse(input);
+            Command command = Parser.parse(input.trim());
             if (command.isExit()) {
                 ui.printBye();
                 PauseTransition delay = new PauseTransition(Duration.seconds(2));
