@@ -1,7 +1,9 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.File;
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
 import bobbybot.commands.DoneCommand;
@@ -16,6 +18,12 @@ public class DoneCommandTest {
     private final TaskList tasks = new TaskList(new ArrayList<>());
     private final Ui ui = new Ui();
     private final Storage storage = new Storage(STORAGE_PATH);
+
+    @AfterAll
+    public static void cleanUp() {
+        File file = new File(STORAGE_PATH);
+        file.delete();
+    }
 
     @Test
     public void doneCommand_todo_success() {
