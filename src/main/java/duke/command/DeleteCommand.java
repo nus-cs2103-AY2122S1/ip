@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.constant.MessageType;
 import duke.exception.DukeTaskNumberOutOfBoundsException;
 import duke.listener.Message;
 import duke.task.Task;
@@ -37,14 +38,15 @@ public class DeleteCommand extends Command {
         }
         try {
             Task task = taskList.deleteTask(number);
-            getMessage().show(TASK_REMOVED_MESSAGE,
+            getMessage().show(MessageType.NORMAL,
+                    TASK_REMOVED_MESSAGE,
                     "  " + task.toString(),
                     "Now you have " + taskList.getSize()
                             + " " + (taskList.getSize() <= 1 ? "task" : "tasks")
                             + " in the list."
             );
         } catch (DukeTaskNumberOutOfBoundsException e) {
-            getMessage().show(e.getMessage());
+            getMessage().show(MessageType.ERROR, e.getMessage());
         }
     }
 }

@@ -7,6 +7,7 @@ import duke.controller.component.MessageBox;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 /**
  * Controller for DukeDialog.
@@ -46,17 +47,19 @@ public class DialogController extends HBox {
      *
      * @param dialog Dialog for the MessageBox.
      * @param text Content will be shown.
+     * @param color Content text color.
      * @param layoutX MessageBox layoutX.
      * @param layoutY MessageBox layoutY.
      */
-    public void addMessageBox(Pane dialog, String text, double layoutX, double layoutY) {
+    public void addMessageBox(
+            Pane dialog, String text, Color color, double layoutX, double layoutY) {
         // The reason of following approach is because the size of the messageBox
         // will be returned only after it is added by the dialog.
         MessageBox preMessageBox = new MessageBox(text, layoutX, layoutY);
         preMessageBox.heightProperty()
                 .addListener(observable -> {
                     MessageBox messageBox = new MessageBox(
-                            text, layoutX, layoutY, preMessageBox.getHeight());
+                            text, color, layoutX, layoutY, preMessageBox.getHeight());
                     dialog.getChildren().add(messageBox);
                     dialog.getChildren().remove(preMessageBox);
                 });

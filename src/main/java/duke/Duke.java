@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.constant.MessageType;
 import duke.listener.Message;
 import duke.storage.Storage;
 import duke.task.TaskList;
@@ -63,7 +64,7 @@ public class Duke implements Message {
      * Displays messages.
      */
     @Override
-    public void show(String... messages) {
+    public void show(MessageType messageType, String... messages) {
         ui.show(messages);
     }
 }

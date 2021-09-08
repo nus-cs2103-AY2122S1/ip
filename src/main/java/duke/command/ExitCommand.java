@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.constant.MessageType;
 import duke.listener.Message;
 
 /**
@@ -22,6 +23,6 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute() {
-        getMessage().show(EXIT_MESSAGE);
+        getMessage().show(MessageType.NORMAL, EXIT_MESSAGE);
     }
 }

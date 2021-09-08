@@ -9,6 +9,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.constant.MessageType;
 import duke.exception.DukeExtractCommandException;
 import duke.exception.DukeUnknownException;
 import duke.listener.Message;
@@ -50,7 +51,7 @@ public class Parser {
                 return new AddCommand(command, operation, message);
             }
         } catch (DukeExtractCommandException | DukeUnknownException e) {
-            message.show(e.getMessage());
+            message.show(MessageType.ERROR, e.getMessage());
         }
         return null;
     }

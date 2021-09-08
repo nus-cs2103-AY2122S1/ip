@@ -2,6 +2,7 @@ package duke.command;
 
 import java.time.LocalDateTime;
 
+import duke.constant.MessageType;
 import duke.exception.DukeExtractCommandException;
 import duke.listener.Message;
 import duke.task.Deadline;
@@ -42,7 +43,7 @@ public class AddCommand extends Command {
         try {
             description = CommandUtils.extractTaskDescription(command);
         } catch (DukeExtractCommandException e) {
-            getMessage().show(e.getMessage());
+            getMessage().show(MessageType.ERROR, e.getMessage());
         }
         return description;
     }
@@ -50,7 +51,8 @@ public class AddCommand extends Command {
     private void addTodoTask(TaskList taskList, String description) {
         Todo todo = new Todo(description);
         taskList.addTask(todo);
-        getMessage().show(TASK_ADDED_MESSAGE,
+        getMessage().show(MessageType.NORMAL,
+                TASK_ADDED_MESSAGE,
                 "  " + todo.toString(),
                 "Now you have " + taskList.getSize()
                         + " " + (taskList.getSize() <= 1 ? "task" : "tasks")
@@ -66,13 +68,14 @@ public class AddCommand extends Command {
             LocalDateTime byDateTime = CommandUtils.extractDeadlineDateTime(taskDetails[1]);
             Deadline deadline = new Deadline(taskName, byDateTime);
             taskList.addTask(deadline);
-            getMessage().show(TASK_ADDED_MESSAGE,
+            getMessage().show(MessageType.NORMAL,
+                    TASK_ADDED_MESSAGE,
                     "  " + deadline.toString(),
                     "Now you have " + taskList.getSize()
                             + " " + (taskList.getSize() <= 1 ? "task" : "tasks")
                             + " in the list.");
         } catch (DukeExtractCommandException e) {
-            getMessage().show(e.getMessage());
+            getMessage().show(MessageType.ERROR, e.getMessage());
         }
     }
 
@@ -86,13 +89,14 @@ public class AddCommand extends Command {
                 .extractEventDatetime(taskDetails[1], REGEX_SPACE);
             Event event = new Event(taskName, eventDateTime);
             taskList.addTask(event);
-            getMessage().show(TASK_ADDED_MESSAGE,
+            getMessage().show(MessageType.NORMAL,
+                    TASK_ADDED_MESSAGE,
                     "  " + event.toString(),
                     "Now you have " + taskList.getSize() + " "
                             + (taskList.getSize() <= 1 ? "task" : "tasks")
                             + " in the list.");
         } catch (DukeExtractCommandException e) {
-            getMessage().show(e.getMessage());
+            getMessage().show(MessageType.ERROR, e.getMessage());
         }
     }
 

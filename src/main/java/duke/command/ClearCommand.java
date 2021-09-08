@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.constant.MessageType;
 import duke.listener.Message;
 import duke.task.TaskList;
 
@@ -26,6 +27,6 @@ public class ClearCommand extends Command {
     @Override
     public void execute(TaskList taskList) {
         taskList.clearTasks();
-        getMessage().show(TASK_CLEARED_MESSAGE);
+        getMessage().show(MessageType.NORMAL, TASK_CLEARED_MESSAGE);
     }
 }

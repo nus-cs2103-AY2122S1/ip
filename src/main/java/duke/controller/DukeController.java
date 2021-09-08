@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import duke.command.Command;
 import duke.constant.Constants;
+import duke.constant.MessageType;
 import duke.controller.dialog.DukeDialogController;
 import duke.controller.dialog.UserDialogController;
 import duke.listener.Message;
@@ -22,6 +23,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -74,28 +76,33 @@ public class DukeController extends AnchorPane implements Message {
     /**
      * Adds DukeDialog with content.
      *
+     * @param messageType Message type.
      * @param content Content.
      */
-    public void addDukeDialog(String content) {
+    public void addDukeDialog(MessageType messageType, String content) {
         if (dialogContainer == null) {
             return;
         }
         try {
+            Color color = messageType == MessageType.NORMAL ? Color.BLACK : Color.RED;
             // The reason of following approach is because the size of the dukeDialogController
             // will be returned only after it is added by the dialogContainer.
-            DukeDialogController preDukeDialogController = new DukeDialogController(content);
+            DukeDialogController preDukeDialogController = new DukeDialogController(
+                    content, color);
             preDukeDialogController.heightProperty()
-                    .addListener(observable -> replaceDukeDialog(content, preDukeDialogController));
+                    .addListener(observable -> replaceDukeDialog(
+                            content, color, preDukeDialogController));
             dialogContainer.getChildren().add(preDukeDialogController);
         } catch (IOException e) {
             System.out.println("Duke dialog fxml file not found: " + e.getMessage());
         }
     }
 
-    private void replaceDukeDialog(String content, DukeDialogController preDukeDialogController) {
+    private void replaceDukeDialog(
+            String content, Color color, DukeDialogController preDukeDialogController) {
         try {
             DukeDialogController dukeDialogController = new DukeDialogController(
-                    content, preDukeDialogController.getHeight());
+                    content, color, preDukeDialogController.getHeight());
             dialogContainer.getChildren().add(dukeDialogController);
         } catch (IOException e) {
             System.out.println("Duke dialog fxml file not found: "
@@ -117,8 +124,7 @@ public class DukeController extends AnchorPane implements Message {
         try {
             // The reason of following approach is because the size of the userDialogController
             // will be returned only after it is added by the dialogContainer.
-            UserDialogController preUserDialogController = new UserDialogController(
-                    content);
+            UserDialogController preUserDialogController = new UserDialogController(content);
             preUserDialogController.heightProperty()
                     .addListener(observable -> replaceUserDialog(content, preUserDialogController));
             dialogContainer.getChildren().add(preUserDialogController);
@@ -164,7 +170,7 @@ public class DukeController extends AnchorPane implements Message {
 
     private void init() {
         storage.loadTasks(taskList);
-        addDukeDialog(GREET);
+        addDukeDialog(MessageType.NORMAL, GREET);
         tfInput.setDisable(false);
         customThreadPool.execute(() -> {
             while (true) {
@@ -210,7 +216,7 @@ public class DukeController extends AnchorPane implements Message {
     }
 
     @Override
-    public void show(String... messages) {
-        addDukeDialog(String.join("\n", messages));
+    public void show(MessageType messageType, String... messages) {
+        addDukeDialog(messageType, String.join("\n", messages));
     }
 }

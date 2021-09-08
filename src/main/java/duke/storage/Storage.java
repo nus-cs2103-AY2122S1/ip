@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.constant.MessageType;
 import duke.exception.DukeIoException;
 import duke.listener.Message;
 import duke.task.TaskList;
@@ -28,7 +29,7 @@ public class Storage {
         try {
             taskList.loadTasksFromFile();
         } catch (DukeIoException e) {
-            message.show(e.getMessage());
+            message.show(MessageType.ERROR, e.getMessage());
         }
     }
 
@@ -41,7 +42,7 @@ public class Storage {
         try {
             taskList.saveTasksToFile();
         } catch (DukeIoException e) {
-            message.show(e.getMessage());
+            message.show(MessageType.ERROR, e.getMessage());
         }
     }
 }

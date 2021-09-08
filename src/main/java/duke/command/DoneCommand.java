@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.constant.MessageType;
 import duke.exception.DukeTaskNumberOutOfBoundsException;
 import duke.listener.Message;
 import duke.task.TaskList;
@@ -36,11 +37,12 @@ public class DoneCommand extends Command {
         }
         try {
             taskList.completeTask(number);
-            getMessage().show(TASK_MARKED_MESSAGE,
+            getMessage().show(MessageType.NORMAL,
+                    TASK_MARKED_MESSAGE,
                     "  " + taskList.findTaskByNumber(number).toString()
             );
         } catch (DukeTaskNumberOutOfBoundsException e) {
-            getMessage().show(e.getMessage());
+            getMessage().show(MessageType.ERROR, e.getMessage());
         }
     }
 }

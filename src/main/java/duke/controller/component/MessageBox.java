@@ -35,15 +35,17 @@ public class MessageBox extends Label {
      * Constructs a MessageBox object.
      *
      * @param text Content will be shown.
+     * @param color Content text color.
      * @param layoutX MessageBox layoutX.
      * @param layoutY MessageBox layoutY.
      * @param height MessageBox height.
      */
-    public MessageBox(String text, double layoutX, double layoutY, double height) {
+    public MessageBox(String text, Color color, double layoutX, double layoutY, double height) {
         super();
         init(layoutX, layoutY);
         setMinHeight(height);
         setText(text);
+        setTextFill(color);
     }
 
     private void init(double layoutX, double layoutY) {

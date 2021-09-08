@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 /**
  * Controller for UserDialog.
@@ -25,7 +26,7 @@ public class UserDialogController extends DialogController {
     public UserDialogController(String text)
             throws IOException {
         super(USER_DIALOG_FXML_PATH);
-        addMessageBox(dialog, text, LAYOUT_X, LAYOUT_Y);
+        addMessageBox(dialog, text, Color.BLACK, LAYOUT_X, LAYOUT_Y);
     }
 
     /**
@@ -38,6 +39,6 @@ public class UserDialogController extends DialogController {
     public UserDialogController(String text, double height)
             throws IOException {
         super(USER_DIALOG_FXML_PATH, height);
-        addMessageBox(dialog, text, LAYOUT_X, LAYOUT_Y);
+        addMessageBox(dialog, text, Color.BLACK, LAYOUT_X, LAYOUT_Y);
     }
 }

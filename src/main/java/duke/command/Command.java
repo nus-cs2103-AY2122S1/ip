@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.constant.MessageType;
 import duke.exception.DukeExtractCommandException;
 import duke.exception.DukeTaskNumberOutOfBoundsException;
 import duke.listener.Message;
@@ -74,7 +75,7 @@ public abstract class Command {
             number = CommandUtils.extractTaskNumber(command);
         } catch (DukeExtractCommandException | NumberFormatException
                 | DukeTaskNumberOutOfBoundsException e) {
-            getMessage().show(e.getMessage());
+            getMessage().show(MessageType.ERROR, e.getMessage());
         }
         return number;
     }

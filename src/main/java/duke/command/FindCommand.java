@@ -3,6 +3,7 @@ package duke.command;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
+import duke.constant.MessageType;
 import duke.exception.DukeExtractCommandException;
 import duke.listener.Message;
 import duke.task.TaskList;
@@ -37,12 +38,12 @@ public class FindCommand extends Command {
     public void execute(TaskList taskList) {
         try {
             String keyword = CommandUtils.extractKeyword(command);
-            getMessage().show(Stream.concat(
+            getMessage().show(MessageType.NORMAL, Stream.concat(
                     Arrays.stream(new String[]{MATCHING_TASK_LISTED_MESSAGE}),
                     Arrays.stream(taskList.findTasks(keyword))
             ).toArray(String[]::new));
         } catch (DukeExtractCommandException e) {
-            getMessage().show(e.getMessage());
+            getMessage().show(MessageType.ERROR, e.getMessage());
         }
     }
 }

@@ -3,6 +3,7 @@ package duke.command;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
+import duke.constant.MessageType;
 import duke.listener.Message;
 import duke.task.TaskList;
 
@@ -28,7 +29,7 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList) {
-        getMessage().show(Stream.concat(
+        getMessage().show(MessageType.NORMAL, Stream.concat(
                 Arrays.stream(new String[] {TASK_LISTED_MESSAGE}),
                 Arrays.stream(taskList.printTasks())
         ).toArray(String[]::new));
