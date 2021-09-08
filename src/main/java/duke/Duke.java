@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Optional;
 
 import duke.exception.DukeFileSystemException;
@@ -97,18 +98,24 @@ public class Duke {
         if (args.equals("")) {
             return "The done command expects an integer argument indicating the index of a task.";
         }
-        Task task;
+        TaskList completedTasks;
         try {
-            task = taskList.getTask(Integer.parseInt(args));
+            if (parser.containsRangeSymbol(args)) {
+                int[] rangeBoundaries = parser.getRangeBoundaries(args);
+                completedTasks = taskList.doTasks(rangeBoundaries[0], rangeBoundaries[1]);
+            } else {
+                Task completedTask = taskList.doTasks(Integer.parseInt(args));
+                completedTasks = new TaskList(Collections.singletonList(completedTask));
+            }
         } catch (NumberFormatException e) {
-            return "Invalid argument for done command. Argument should be an integer.";
+            return "Invalid argument for done command. Argument should be an integer or a range of integers. "
+                    + "Example usage: done 1 OR done 1...3";
         } catch (IndexOutOfBoundsException e) {
-            return "Invalid integer. Integer should match the index of a task."
-                    + " Run list to look at the list of tasks and their corresponding indices.";
+            return "Invalid integer(s). Integer(s) should match the indices of the tasks and be in ascending order"
+                    + " for range of integers. Run list to look at the list of tasks and their corresponding indices.";
         }
         String acknowledgementMessage = "Nice! I've marked this task as done:\n";
-        task.markAsDone();
-        return acknowledgementMessage + task;
+        return acknowledgementMessage + completedTasks;
     }
 
     private String deleteHandler(String args) {
@@ -116,17 +123,24 @@ public class Duke {
         if (args.equals("")) {
             return "The delete command expects an integer argument indicating the index of a task.";
         }
-        Task task;
+        TaskList removedTasks;
         try {
-            task = taskList.deleteTask(Integer.parseInt(args));
+            if (parser.containsRangeSymbol(args)) {
+                int[] rangeBoundaries = parser.getRangeBoundaries(args);
+                removedTasks = taskList.deleteTasks(rangeBoundaries[0], rangeBoundaries[1]);
+            } else {
+                Task removedTask = taskList.deleteTasks(Integer.parseInt(args));
+                removedTasks = new TaskList(Collections.singletonList(removedTask));
+            }
         } catch (NumberFormatException e) {
-            return "Invalid argument for delete command. Argument should be an integer.";
+            return "Invalid argument for delete command. Argument should be an integer or a range of integers. "
+                    + "Example usage: delete 1 OR delete 1...3";
         } catch (IndexOutOfBoundsException e) {
-            return "Invalid integer. Integer should match the index of a task."
-                    + " Run list to look at the list of tasks and their corresponding indices.";
+            return "Invalid integer(s). Integer(s) should match the indices of the tasks and be in ascending order"
+                    + " for range of integers. Run list to look at the list of tasks and their corresponding indices.";
         }
-        return String.format("Noted. I've removed this task:\n%s\nNow you have %d task%s in the list.",
-                task, taskList.size(), taskList.size() > 1 ? "s" : "");
+        return String.format("Noted. I've removed these tasks:\n%s\nNow you have %d task%s in the list.",
+                removedTasks, taskList.size(), taskList.size() > 1 ? "s" : "");
     }
 
     private String findHandler(String args) {

@@ -13,6 +13,7 @@ import duke.type.DukeCommand;
 public class DukeParser {
     // Defines the representation of a task that is done in Duke's store format
     private static final String TRUTH_REPRESENTATION = "1";
+
     /**
      * Provides a task based on data read from line.
      *
@@ -100,5 +101,32 @@ public class DukeParser {
     public String getArgsLiteral(String inputString) {
         String[] args = inputString.split(" ", 2);
         return args.length > 1 ? args[1] : "";
+    }
+
+    /**
+     * Checks if given string contains the range symbol, defined as "...".
+     *
+     * @param inputString the string to be checked.
+     * @return true if given string contains range symbol.
+     */
+    public boolean containsRangeSymbol(String inputString) {
+        return inputString.contains("...");
+    }
+
+    /**
+     * Returns an array of the two numbers in the string of format of a range: "%d...%d", where the first
+     * number corresponds with the first element of the array.
+     *
+     * @param inputString the string to be parsed.
+     * @return an integer array that contains the 2 numbers following the format, in the order they appear.
+     * @throws NumberFormatException if the given string does not contain valid integers.
+     * @throws ArrayIndexOutOfBoundsException if the string does not follow the given format.
+     */
+    public int[] getRangeBoundaries(String inputString) throws NumberFormatException, ArrayIndexOutOfBoundsException {
+        String[] args = inputString.split("\\.\\.\\.", 2);
+        int[] resultRange = new int[2];
+        resultRange[0] = Integer.parseInt(args[0]);
+        resultRange[1] = Integer.parseInt(args[1]);
+        return resultRange;
     }
 }
