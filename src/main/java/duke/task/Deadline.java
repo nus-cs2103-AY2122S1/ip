@@ -20,7 +20,11 @@ public class Deadline extends Task {
         super(description);
         this.by = by;
         String[] arr = by.split(" ");
+        assert(arr.length == 2);
         String[] arr1 = arr[0].split("\\/");
+        assert(arr1.length == 3);
+        assert(Integer.valueOf(arr1[1]) <= 12 && Integer.valueOf(arr1[1]) > 0);
+        assert(Integer.valueOf(arr1[0]) <= 31 && Integer.valueOf(arr1[0]) > 0);
         this.date = LocalDate.parse(String.format("%s-%s-%s", arr1[2], arr1[1].length() == 1
                 ? "0" + arr1[1] : arr1[1], arr1[0].length() == 1 ? "0" + arr1[0] : arr1[0]));
         this.time = LocalTime.parse(arr[1].substring(0, 2) + ":" + arr[1].substring(2));
