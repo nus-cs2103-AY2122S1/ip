@@ -2,6 +2,7 @@ package duke.commands;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import duke.DateTimeHandler;
 import duke.Event;
@@ -36,12 +37,12 @@ public class EventCommand extends Command {
         }
         String description;
         String dateString;
-        String[] tags = new String[0];
+        ArrayList<String> tags = new ArrayList<>();
         if (args.contains("/t")) {
             ArrayList<String> parts = Parser.parseCommandArguments(args, "at", "t");
             description = parts.get(0);
             dateString = parts.get(1);
-            tags = parts.get(2).split(" ");
+            tags = new ArrayList<>(Arrays.asList(parts.get(2).split(" ")));
         } else {
             ArrayList<String> parts = Parser.parseCommandArguments(args, "at");
             description = parts.get(0);

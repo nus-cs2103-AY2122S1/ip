@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /**
  * Encapsulates a deadline task with a deadline.
@@ -15,7 +16,7 @@ public class Deadline extends Task {
      * @param isCompleted Completion status of task.
      * @param deadlineDate Deadline of task.
      */
-    public Deadline(String description, Boolean isCompleted, LocalDateTime deadlineDate, String[] tags) {
+    public Deadline(String description, Boolean isCompleted, LocalDateTime deadlineDate, ArrayList<String> tags) {
         super(description, isCompleted, tags);
         this.deadlineDate = deadlineDate;
     }

@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Encapsulates a class which interacts with the output file to save data after.
@@ -49,13 +50,13 @@ public class Storage {
                 ArrayList<String> argumentParts;
                 String description;
                 LocalDateTime dateTime;
-                String[] tags = new String[0];
+                ArrayList<String> tags = new ArrayList<>();
                 switch(taskType) {
                 case 'T':
                     if (parts[2].contains(" (Tags: ")) {
                         argumentParts = Parser.parseFileOutputArguments(parts[2], "Tags");
                         description = argumentParts.get(0);
-                        tags = argumentParts.get(1).split(" ");
+                        tags = new ArrayList<>(Arrays.asList(argumentParts.get(1).split(" ")));
                         t.addToList(new Todo(description, isCompleted, tags));
                     } else {
                         t.addToList(new Todo(parts[2], isCompleted, tags));
@@ -66,7 +67,7 @@ public class Storage {
                         argumentParts = Parser.parseFileOutputArguments(parts[2], "by", "Tags");
                         description = argumentParts.get(0);
                         dateTime = LocalDateTime.parse(argumentParts.get(1));
-                        tags = argumentParts.get(2).split(" ");
+                        tags = new ArrayList<>(Arrays.asList(argumentParts.get(2).split(" ")));
                     } else {
                         argumentParts = Parser.parseFileOutputArguments(parts[2], "by");
                         description = argumentParts.get(0);
@@ -79,7 +80,7 @@ public class Storage {
                         argumentParts = Parser.parseFileOutputArguments(parts[2], "at", "Tags");
                         description = argumentParts.get(0);
                         dateTime = LocalDateTime.parse(argumentParts.get(1));
-                        tags = argumentParts.get(2).split(" ");
+                        tags = new ArrayList<>(Arrays.asList(argumentParts.get(2).split(" ")));
                     } else {
                         argumentParts = Parser.parseFileOutputArguments(parts[2], "at");
                         description = argumentParts.get(0);

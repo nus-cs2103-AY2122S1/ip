@@ -1,12 +1,14 @@
 package duke;
 
+import java.util.ArrayList;
+
 /**
  * Encapsulates the abstract task class that concrete task implementations extend from.
  */
 public abstract class Task {
     private final String description;
     private Boolean completionStatus;
-    private String[] tags;
+    private ArrayList<String> tags;
 
     /**
      * Constructs a Task object. Only for use with extended classes.
@@ -14,7 +16,7 @@ public abstract class Task {
      * @param description Task description.
      * @param isCompleted Completion status of task.
      */
-    public Task(String description, Boolean isCompleted, String[] tags) {
+    public Task(String description, Boolean isCompleted, ArrayList<String> tags) {
         this.description = description;
         this.completionStatus = isCompleted;
         this.tags = tags;
@@ -46,7 +48,7 @@ public abstract class Task {
      * @return The String of tags.
      */
     public String getTags() {
-        if (tags.length == 0) {
+        if (tags.size() == 0) {
             return "";
         }
         StringBuilder result = new StringBuilder(" (Tags:");

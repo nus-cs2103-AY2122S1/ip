@@ -1,6 +1,7 @@
 package duke.commands;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import duke.DateTimeHandler;
 import duke.Parser;
@@ -30,11 +31,11 @@ public class TodoCommand extends Command {
             return "Please enter the name of the task after todo";
         }
         String description;
-        String[] tags = new String[0];
+        ArrayList<String> tags = new ArrayList<>();
         if (args.contains("/t")) {
             ArrayList<String> parts = Parser.parseCommandArguments(args, "t");
             description = parts.get(0);
-            tags = parts.get(1).split(" ");
+            tags = new ArrayList<>(Arrays.asList(parts.get(1).split(" ")));
         } else {
             description = args;
         }

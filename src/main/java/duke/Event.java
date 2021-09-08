@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /**
  * Encapsulates an event task with a start date.
@@ -15,7 +16,7 @@ public class Event extends Task {
      * @param isCompleted Completion status of task.
      * @param startDate Start date of task.
      */
-    public Event(String description, Boolean isCompleted, LocalDateTime startDate, String[] tags) {
+    public Event(String description, Boolean isCompleted, LocalDateTime startDate, ArrayList<String> tags) {
         super(description, isCompleted, tags);
         this.startDate = startDate;
     }
