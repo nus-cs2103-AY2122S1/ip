@@ -2,12 +2,14 @@ package duke.logic.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  * Represents a deadline task.
  */
 public class Deadline extends Task {
     private static final String DEADLINE_DATE_FORMAT = "dd MMM yyyy h.mma";
+    private static final Locale REGION = Locale.UK;
 
     private LocalDateTime by;
 
@@ -42,6 +44,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString()
-                + " (by: " + by.format(DateTimeFormatter.ofPattern(DEADLINE_DATE_FORMAT)) + ")";
+                + " (by: " + by.format(DateTimeFormatter.ofPattern(DEADLINE_DATE_FORMAT, REGION)) + ")";
     }
 }

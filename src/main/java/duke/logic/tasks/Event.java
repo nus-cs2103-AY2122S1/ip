@@ -2,6 +2,7 @@ package duke.logic.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  * Represents an event task.
@@ -9,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private static final String START_DATE_FORMAT = "dd MMM yyyy h.mma";
     private static final String END_DATE_FORMAT = "dd MMM yyyy h.mma";
+    private static final Locale REGION = Locale.UK;
 
     private LocalDateTime at;
     private LocalDateTime end;
@@ -47,10 +49,10 @@ public class Event extends Task {
     public String toString() {
         String s = "[E]" + super.toString();
         if (end == null) {
-            s += " (at: " + at.format(DateTimeFormatter.ofPattern(START_DATE_FORMAT)) + ")";
+            s += " (at: " + at.format(DateTimeFormatter.ofPattern(START_DATE_FORMAT, REGION)) + ")";
         } else {
-            s += " (from: " + at.format(DateTimeFormatter.ofPattern(START_DATE_FORMAT))
-                    + " — " + end.format(DateTimeFormatter.ofPattern(END_DATE_FORMAT)) + ")";
+            s += " (from: " + at.format(DateTimeFormatter.ofPattern(START_DATE_FORMAT, REGION))
+                    + " — " + end.format(DateTimeFormatter.ofPattern(END_DATE_FORMAT, REGION)) + ")";
         }
         return s;
     }
