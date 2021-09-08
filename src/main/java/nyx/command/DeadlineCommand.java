@@ -19,4 +19,8 @@ public class DeadlineCommand extends Command {
         Deadline deadline = new Deadline(splitInfo[0].strip(), splitInfo[1]);
         return AddHandler.handleAdd(deadline, taskList, storage);
     }
+
+    public static void throwEmptyException() throws NyxException {
+        throw new NyxException("The description of a deadline cannot be empty.");
+    }
 }

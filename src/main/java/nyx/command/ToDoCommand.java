@@ -15,4 +15,8 @@ public class ToDoCommand extends Command {
         ToDo toDo = new ToDo(information);
         return AddHandler.handleAdd(toDo, taskList, storage);
     }
+
+    public static void throwEmptyException() throws NyxException {
+        throw new NyxException("The description of a todo cannot be empty.");
+    }
 }

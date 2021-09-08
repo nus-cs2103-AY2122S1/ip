@@ -2,6 +2,7 @@ package nyx.command;
 
 import java.util.ArrayList;
 
+import nyx.NyxException;
 import nyx.Storage;
 import nyx.task.Task;
 import nyx.task.TaskList;
@@ -23,5 +24,9 @@ public class FindCommand extends Command {
             }
             return output.toString();
         }
+    }
+
+    public static void throwEmptyException() throws NyxException {
+        throw new NyxException("Please enter the keyword to search tasks by!");
     }
 }

@@ -10,8 +10,6 @@ import javafx.scene.layout.VBox;
 import nyx.Nyx;
 import nyx.NyxException;
 
-import java.util.Locale;
-
 /**
  * Controller for nyx.ui.MainWindow. Provides the layout for the other controls.
  */

@@ -1,18 +1,16 @@
 package nyx.task;
 
-import nyx.NyxException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+
+import nyx.NyxException;
 
 /**
  * Represents a task with a deadline.
  * This class inherits from the parent abstract Task class.
  */
 public class Deadline extends Task {
-    private static final String DATETIME_FORMAT = "yyyy-MM-dd H:m";
-    private final LocalDateTime by;
+    private LocalDateTime by;
 
     /**
      * Constructs a deadline task with its description, deadline and an indicator of whether it is marked as done.
@@ -22,11 +20,7 @@ public class Deadline extends Task {
      */
     public Deadline(String content, String by, boolean isDone) throws NyxException {
         super(content, isDone);
-        try {
-            this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern(DATETIME_FORMAT));
-        } catch (DateTimeParseException e) {
-            throw new NyxException("Incorrect datetime format! The correct format is YYYY-MM-DD H:m");
-        }
+        this.by = DateTimeHandler.parseDateTime(by);
     }
 
     /**
@@ -38,13 +32,17 @@ public class Deadline extends Task {
         this(content, by, false);
     }
 
+    public void changeDateTime(String newDateTime) throws NyxException {
+        this.by = DateTimeHandler.parseDateTime(newDateTime);
+    }
+
     /**
      * Returns a String representation of the deadline task in the format required for saving into hard disk.
      * @return String representation of the deadline task in the format required to save into hard disk.
      */
     @Override
     public String formatData() {
-        String dateFormat = by.format(DateTimeFormatter.ofPattern(DATETIME_FORMAT));
+        String dateFormat = by.format(DateTimeFormatter.ofPattern(DateTimeHandler.DATETIME_FORMAT));
         return String.format("D, %d, %s, %s\n", getStatusInt(), getContent(), dateFormat);
     }
 

@@ -5,7 +5,7 @@ package nyx.task;
  * Contains information about the task and whether it is marked as done.
  */
 public abstract class Task {
-    private final String content;
+    private String content;
     private boolean isDone;
 
     /**
@@ -41,6 +41,10 @@ public abstract class Task {
      */
     public void setDone() {
         this.isDone = true;
+    }
+
+    public void updateContent(String newContent) {
+        this.content = newContent;
     }
 
     /**
