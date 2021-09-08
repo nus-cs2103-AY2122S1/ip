@@ -34,6 +34,7 @@ public class BobbyBot {
             String userInput = sc.nextLine();
             ui.showLine();
             Command c = parser.parseCommand(userInput);
+            assert c != null : "Command cannot be null";
             c.execute(tasks, ui, storage);
             String response = c.getResponse();
             System.out.println(response);
