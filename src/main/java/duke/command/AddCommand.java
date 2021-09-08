@@ -44,11 +44,13 @@ public class AddCommand extends Command {
         String messageHeader = "Alright! New task added:\n";
         switch (type) {
         case DEADLINE:
+            assert parameters.length == 2 : "Wrong number of parameters";
             Deadline deadline = new Deadline(parameters[0].trim(), LocalDate.parse(parameters[1]));
             taskList.addTask(deadline);
             storage.saveList(taskList.convertToFileFormat());
             return messageHeader + deadline + taskList.getListStatus();
         case EVENT:
+            assert parameters.length == 2 : "Wrong number of parameters";
             Event event = new Event(parameters[0], LocalDate.parse(parameters[1]));
             taskList.addTask(event);
             storage.saveList(taskList.convertToFileFormat());

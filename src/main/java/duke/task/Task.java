@@ -51,6 +51,7 @@ public class Task {
      * @return Whether description contains query string.
      */
     public boolean containsQuery(String query) {
+        assert query != null : "Query to check is null";
         return description.contains(query);
     }
 
