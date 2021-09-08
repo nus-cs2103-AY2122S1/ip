@@ -29,6 +29,10 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setTitle("Duke App CS2103T");
             stage.setScene(scene);
+
+            String css = getClass().getResource("/view/styles.scss").toExternalForm();
+            scene.getStylesheets().add(css);
+
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {

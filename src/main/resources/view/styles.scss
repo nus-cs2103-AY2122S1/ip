@@ -1,0 +1,22 @@
+.root {
+  -fx-font-size: 13;
+  -fx-font-weight: 500;
+}
+
+.send-button {
+  -fx-background-radius: 10em;
+}
+
+.app-container {
+  -fx-background-image: url(../images/telegramBG.jpg);
+  -fx-background-size: 100%;
+}
+
+Label {
+  -fx-background-color: white;
+  -fx-background-radius: 5;
+  -fx-padding : 2em 2em 2em 2em;
+}
+
+ImageView {
+}
