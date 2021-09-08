@@ -157,7 +157,9 @@ public class Duke extends Application {
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        String response = this.getResponse(userInput.getText());
+        assert response.length() > 0 : "response cannot be empty";
+        Label dukeText = new Label(response);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))

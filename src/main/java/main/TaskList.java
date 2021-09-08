@@ -50,7 +50,9 @@ public class TaskList {
                                         + list.get(i).getTask() + "\n";
             count = count + 1;
         }
-
+      
+        assert returned.equals(null) : "the list is not outputted correctly";
+      
         return returned;
     }
 
@@ -62,6 +64,7 @@ public class TaskList {
      */
     public String markTaskAsDone(String next_line) {
         taskNumber = Integer.valueOf(next_line.substring(5)) - 1;
+        assert taskNumber > 0 : "the task number cannot be negative";
         this.doneCheck.set(taskNumber, "X");
 
         String returned = "";
@@ -84,6 +87,7 @@ public class TaskList {
         taskNumber = Integer.valueOf(next_line.substring(7));
         this.doneCheck.remove(taskNumber - 1);
         this.list.remove(taskNumber - 1);
+        assert taskNumber > 0 : "the task number cannot be negative";
 
         String returned = "";
         returned = returned + "Congrats! You have completed this task!" + "\n";
