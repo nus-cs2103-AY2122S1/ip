@@ -42,6 +42,10 @@ public class Ui {
     public Ui(Duke duke) {
         this.duke = duke;
     }
+
+    /**
+     * Constructor for duke's UI.
+     */
     public Ui() {}
 
     /**

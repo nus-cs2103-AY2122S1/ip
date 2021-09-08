@@ -25,5 +25,5 @@ public interface Command {
      *
      * @return A boolean true If the command is an exit command and false otherwise.
      */
-    boolean isExit();
+    boolean isRunning();
 }

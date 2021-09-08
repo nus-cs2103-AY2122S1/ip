@@ -49,7 +49,7 @@ public class DeleteCommand implements Command {
      * @return A boolean false as this is not an exit command.
      */
     @Override
-    public boolean isExit() {
+    public boolean isRunning() {
         return false;
     }
 
