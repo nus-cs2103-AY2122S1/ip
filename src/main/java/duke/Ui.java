@@ -12,8 +12,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 /**
@@ -69,10 +72,10 @@ public class Ui {
      * @param heading The heading to precede the list of tasks.
      */
     public void printAll(ArrayList<Task> tasks, String heading) {
-        String s = "";
-        s += INDENT + heading + "\n";
+        String s = "\n";
+        s += INDENT + heading + INDENT + "\n";
         for (int i = 1; i <= tasks.size(); i++) {
-            s += INDENT + i + " " + tasks.get(i - 1) + "\n";
+            s += (INDENT + i + " " + tasks.get(i - 1) + INDENT + "\n");
         }
         echo(s);
     }
@@ -98,6 +101,7 @@ public class Ui {
         dialogContainer.setPadding(new Insets(10));
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
         dialogContainer.setMaxWidth(800.0);
+        dialogContainer.setBackground(new Background(new BackgroundFill(Paint.valueOf("#444444"), null, null)));
         scrollPane.setPrefSize(800, 560);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
@@ -109,7 +113,6 @@ public class Ui {
         sendButton.setPrefWidth(70.0);
         sendButton.setPrefHeight(35);
         AnchorPane.setTopAnchor(scrollPane, 1.0);
-
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
@@ -145,6 +148,6 @@ public class Ui {
      */
     public void echo(String input) {
         ImageView v = new ImageView(admin);
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(INDENT + input, v, 1));
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(INDENT + input + INDENT, v, 1));
     }
 }

@@ -2,11 +2,17 @@ package duke;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 
 /**
@@ -25,11 +31,11 @@ public class DialogBox extends HBox {
     public DialogBox(Label label, ImageView iv) {
         text = label;
         displayPicture = iv;
-
         text.setWrapText(true);
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
-
+        displayPicture.setClip(new Circle(50, 50, 50));
+        displayPicture.setImage(iv.getImage());
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
     }
@@ -53,9 +59,15 @@ public class DialogBox extends HBox {
         Label label = new Label(fullCommand);
         label.setWrapText(true);
         label.setFont(new Font("Arial", 12));
-        label.setMaxSize(650, 800);
+        label.setMaxHeight(600);
+        label.setPadding(new Insets(10));
+        label.setAlignment(Pos.CENTER);
         DialogBox db = new DialogBox(label, iv);
+        label.setBackground(new Background(new BackgroundFill(Paint.valueOf("#d0dfff"),
+                new CornerRadii(10), new Insets(10))));
         if (i == 1) {
+            label.setBackground(new Background(new BackgroundFill(Paint.valueOf("#a8c2fb"),
+                    new CornerRadii(10), new Insets(10))));
             db.flip();
         }
         return db;
