@@ -30,10 +30,12 @@ public class ListCommand extends Command {
      */
 
     @Override
-    public void execute(Tasklist tasklist, Ui ui, Storage storage) throws NoSuchTaskException {
-        ui.showListMessage();
+    public String execute(Tasklist tasklist, Ui ui, Storage storage) throws NoSuchTaskException {
+        String result = ui.showListMessage();
         for (int i = 1; i <= tasklist.getTasklistSize(); i++) {
-            System.out.println(String.valueOf(i) + ". " + tasklist.getTask(i - 1));
+            result += "\n";
+            result += (String.valueOf(i) + ". " + tasklist.getTask(i - 1));
         }
+        return result;
     }
 }

@@ -16,7 +16,7 @@ public class ConcreteImpl extends Command {
     }
 
     @Override
-    public void execute(Tasklist tasklist, Ui ui, Storage storage) {
+    public String execute(Tasklist tasklist, Ui ui, Storage storage) {
     }
 
     @Test

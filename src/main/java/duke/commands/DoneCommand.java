@@ -38,12 +38,13 @@ public class DoneCommand extends Command {
      */
 
     @Override
-    public void execute(Tasklist tasklist, Ui ui, Storage storage) throws NoSuchTaskException {
+    public String execute(Tasklist tasklist, Ui ui, Storage storage) throws NoSuchTaskException {
         try {
             Task temp = tasklist.getTask(index);
             tasklist.doneTask(index);
-            ui.showDoneMessage(temp, tasklist);
+            String result = ui.showDoneMessage(temp, tasklist);
             storage.writeToFile(tasklist);
+            return result;
         } catch (NoSuchTaskException | IOException e) {
             throw new NoSuchTaskException("Task index is out of bounds");
         }

@@ -11,7 +11,7 @@ import duke.exceptions.NoSuchTaskException;
 
 public abstract class Command {
 
-    public abstract void execute(Tasklist taskList, Ui ui, Storage storage) throws NoSuchTaskException, IOException;
+    public abstract String execute(Tasklist taskList, Ui ui, Storage storage) throws NoSuchTaskException, IOException;
 
     public boolean isExit() {
         return false;

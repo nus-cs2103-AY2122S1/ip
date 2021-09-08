@@ -41,12 +41,13 @@ public class DeleteCommand extends Command {
      */
 
     @Override
-    public void execute(Tasklist tasklist, Ui ui, Storage storage) throws NoSuchTaskException {
+    public String execute(Tasklist tasklist, Ui ui, Storage storage) throws NoSuchTaskException {
         try {
             Task temp = tasklist.getTask(index);
             tasklist.deleteTask(index);
-            ui.showDeleteMessage(temp, tasklist);
+            String result = ui.showDeleteMessage(temp, tasklist);
             storage.writeToFile(tasklist);
+            return result;
         } catch (NoSuchTaskException | IOException e) {
             throw new NoSuchTaskException("Task index is out of bounds");
         }

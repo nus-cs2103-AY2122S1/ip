@@ -37,11 +37,12 @@ public class AddCommand extends Command {
      */
 
     @Override
-    public void execute(Tasklist tasklist, Ui ui, Storage storage) throws IOException {
+    public String execute(Tasklist tasklist, Ui ui, Storage storage) throws IOException {
         try {
             tasklist.addTask(toAdd);
-            ui.showAddMessage(toAdd, tasklist);
+            String result = ui.showAddMessage(toAdd, tasklist);
             storage.writeToFile(tasklist);
+            return result;
         } catch (IOException e) {
             throw new IOException();
         }

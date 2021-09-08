@@ -39,28 +39,20 @@ public class Duke extends Application {
     }
 
     /**
-     * Logic for running Duke
+     * Logic for getting Duke's Response
      */
 
-    public void run() {
-        ui.showWelcomeMessage();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command command = Parser.parse(fullCommand);
-                command.execute(tasks, ui, storage);
-                isExit = command.isExit();
-            } catch (NoSuchCommandException | NoSuchTaskException | IOException ex) {
-                System.out.println("Something went wrong");
-            } finally {
-                //ui.showLine();
-            }
-        }
-    }
-
     public String getResponse(String input) {
-        return "hello";
+
+        try {
+            //String fullCommand = ui.readCommand();
+            Command command = Parser.parse(input);
+            String result = command.execute(tasks, ui, storage);
+            return result;
+            //isExit = command.isExit();
+        } catch (NoSuchCommandException | NoSuchTaskException | IOException ex) {
+            return "Something went wrong";
+        }
     };
     @Override
     public void start(Stage stage) {
@@ -75,8 +67,5 @@ public class Duke extends Application {
      * Main Method that creates new Duke and runs it
      */
 
-    public static void main(String[] args) {
-        new Duke("\\tasks.txt").run();
-    }
 }
 

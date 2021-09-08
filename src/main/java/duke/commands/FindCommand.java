@@ -15,16 +15,18 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(Tasklist tasklist, Ui ui, Storage storage) throws NoSuchTaskException {
-        ui.showFindMessage();
+    public String execute(Tasklist tasklist, Ui ui, Storage storage) throws NoSuchTaskException {
+        String result = ui.showFindMessage();
         int counter = 1;
         for (int i = 1; i <= tasklist.getTasklistSize(); i++) {
             Task temp = tasklist.getTask(i - 1);
             if (temp.isMatch(toFind)) {
-                System.out.println(String.valueOf(counter) + ". " + temp);
+                result += "\n";
+                result += (String.valueOf(counter) + ". " + temp);
                 counter++;
             }
 
         }
+        return result;
     }
 }

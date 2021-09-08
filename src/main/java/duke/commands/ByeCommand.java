@@ -39,8 +39,8 @@ public class ByeCommand extends Command {
      */
 
     @Override
-    public void execute(Tasklist tasklist, Ui ui, Storage storage) {
-        ui.showByeMessage();
+    public String execute(Tasklist tasklist, Ui ui, Storage storage) {
+        return ui.showByeMessage();
     }
 
 }
