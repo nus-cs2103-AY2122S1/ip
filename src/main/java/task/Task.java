@@ -3,10 +3,14 @@ package task;
 import duke.DukeException;
 import duke.Parser;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public abstract class Task {
 
     private String name;
     private boolean done;
+    private ArrayList<String> tags;
 
     public Task(String name) throws DukeException {
         if (name.isBlank()) {
@@ -14,6 +18,7 @@ public abstract class Task {
         }
         this.name = name;
         this.done = false;
+        this.tags = new ArrayList<>();
     }
 
     /**
@@ -80,6 +85,10 @@ public abstract class Task {
         return done;
     }
 
+    public void addTag(String tag){
+        this.tags.add(tag);
+    }
+
     /**
      * Returns string representing task to be saved to text file.
      *
@@ -95,6 +104,10 @@ public abstract class Task {
     @Override
     public String toString() {
         String check = done ? "X" : " ";
-        return "[" + check + "] " + name;
+        StringBuilder showTags = new StringBuilder("\nTags:");
+        for (int i = 0; i < this.tags.size(); i++) {
+            showTags.append("\n#").append(this.tags.get(i));
+        }
+        return "[" + check + "] " + name + showTags.toString();
     }
 }

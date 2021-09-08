@@ -84,6 +84,12 @@ public class TaskList {
         return response.toString();
     }
 
+    public Task tagTask(int id, String tagName){
+        Task t = tasks.get(id);
+        t.addTag(tagName);
+        return t;
+    }
+
     /**
      * Returns string representing task list to be saved to text file.
      *
