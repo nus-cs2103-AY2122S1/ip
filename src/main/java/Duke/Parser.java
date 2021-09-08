@@ -3,6 +3,9 @@ package duke;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+/**
+ * Parser is a parser that parses user inputs from Duke.
+ */
 public class Parser {
     private final TaskList tasks;
     private boolean isExit;

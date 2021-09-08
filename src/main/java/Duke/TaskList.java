@@ -10,7 +10,9 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 
-
+/**
+ * TaskList is a series of tasks.
+ */
 public class TaskList {
 
     private final ArrayList<Task> tasks = new ArrayList<>();

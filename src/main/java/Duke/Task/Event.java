@@ -12,19 +12,18 @@ public class Event extends Task {
     /**
      * The day and time in LocalDate.
      */
-    protected LocalDate at;
+    protected LocalDate date;
 
 
     /**
      * Constructs a instance of Event that consist of event details, day and time
      *
      * @param taskDetails Description of the task
-     * @param at day and time in string
+     * @param date day and time in string
      */
-    public Event(String taskDetails, String at) {
+    public Event(String taskDetails, String date) {
         super(taskDetails);
-        LocalDate byDate = LocalDate.parse(at, inputDateFormat);
-        this.at = byDate;
+        this.date = LocalDate.parse(date, inputDateFormat);
     }
 
     /**
@@ -33,7 +32,7 @@ public class Event extends Task {
      * @return the string representation of Event details
      */
     public String toString() {
-        String outputDate = this.at.format(outputDateFormat);
+        String outputDate = this.date.format(outputDateFormat);
         return "[E]" + super.toString() + " (at: " + outputDate + ")";
     }
 
@@ -49,7 +48,7 @@ public class Event extends Task {
         if (this.isComplete) {
             completeBinary = 1;
         }
-        return "E" + " | " + completeBinary + " | " + this.taskDetails + " | " + this.at.format(inputDateFormat);
+        return "E" + " | " + completeBinary + " | " + this.taskDetails + " | " + this.date.format(inputDateFormat);
     }
 
 }

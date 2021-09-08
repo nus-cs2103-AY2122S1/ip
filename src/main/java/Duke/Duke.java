@@ -21,8 +21,16 @@ public class Duke {
         this.parser = new Parser(tasks);
     }
 
+    /**
+     * Returns parser response from user input.
+     *
+     * @param input user input
+     * @return parser response to user input
+     */
     public String getResponse(String input) {
-        return this.parser.getResponse(input);
+        String response = this.parser.getResponse(input);
+        storage.saveData(tasks.encodeTasks());
+        return response;
     }
 
 
