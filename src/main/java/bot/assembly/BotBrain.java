@@ -96,6 +96,8 @@ public class BotBrain {
             }
         }
 
+        // If isTerminated, the application should already end.
+        assert !isTerminated : "The application should not reach this step";
         return "BUG";
     }
     /*
