@@ -137,6 +137,7 @@ public class TaskList {
         } else if (taskIndex >= taskCount) {
             throw new DukeException("Invalid task number. There are only " + taskCount + "tasks in the list");
         }
+        assert taskIndex >= 0 && taskIndex < taskCount : "Invalid task index";
     }
 
     /**

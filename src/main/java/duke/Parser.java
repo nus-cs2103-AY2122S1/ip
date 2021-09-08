@@ -23,6 +23,10 @@ public class Parser {
      * @throws DukeException If user input is not in the correct format or not a recognised command.
      */
     public static Command parse(String answer) throws DukeException {
+        if (answer == null) {
+            throw new DukeException("User input is null.");
+        }
+        
         String[] parts = answer.split(" ");
         String command = parts[0];
         String taskDetails = "";
