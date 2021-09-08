@@ -7,10 +7,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import lebron.exception.LebronException;
 import lebron.task.Deadline;
 import lebron.task.Events;
 import lebron.task.Task;
 import lebron.task.ToDo;
+import lebron.Ui;
 
 /**
  * Represents a storage class to handle writing and loading from a file.
@@ -72,20 +74,30 @@ public class Storage {
                     taskList.add(task);
                     break;
                 case "D":
-                    String deadline = splitWords[3];
-                    task = new Deadline(splitWords[2], deadline);
-                    if (isDone.equals("1")) {
-                        task.markAsDone();
+                    try {
+                        String deadline = splitWords[3];
+                        String[] dateTimeDeadline = deadline.split(" ", 2);
+                        task = new Deadline(splitWords[2], dateTimeDeadline[0], dateTimeDeadline[1]);
+                        if (isDone.equals("1")) {
+                            task.markAsDone();
+                        }
+                        taskList.add(task);
+                    } catch (LebronException e) {
+                        System.err.println(e);
                     }
-                    taskList.add(task);
                     break;
                 case "E":
-                    String at = splitWords[3];
-                    task = new Events(splitWords[2], at);
-                    if (isDone.equals("1")) {
-                        task.markAsDone();
+                    try {
+                        String at = splitWords[3];
+                        String[] dateTimeEvent = at.split(" ", 2);
+                        task = new Events(splitWords[2], dateTimeEvent[0], dateTimeEvent[1]);
+                        if (isDone.equals("1")) {
+                            task.markAsDone();
+                        }
+                        taskList.add(task);
+                    } catch (LebronException e) {
+                        System.err.println(e);
                     }
-                    taskList.add(task);
                     break;
                 default:
                     System.out.println(":( OOPS! There is a task that I don't recognise.\n");
