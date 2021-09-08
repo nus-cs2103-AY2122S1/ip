@@ -246,6 +246,7 @@ public class BotCommandResponderUnit {
 
         List<String> taskToStringList = new ArrayList<String>();
         List<String> searchResultList = new ArrayList<String>();
+
         taskTracker.stream().forEach(x -> taskToStringList.add(x.toString()));
 
         for (String eachKeyword : keywordToken) {
