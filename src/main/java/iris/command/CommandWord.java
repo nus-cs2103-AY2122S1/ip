@@ -18,10 +18,16 @@ public enum CommandWord {
         case "list":
             return CommandWord.LIST;
         case "todo":
+        case "todo!":
+        case "todo!!":
             return CommandWord.TODO;
         case "deadline":
+        case "deadline!":
+        case "deadline!!":
             return CommandWord.DEADLINE;
         case "event":
+        case "event!":
+        case "event!!":
             return CommandWord.EVENT;
         case "done":
             return CommandWord.DONE;

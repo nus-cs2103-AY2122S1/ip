@@ -29,6 +29,22 @@ public class Event extends Task {
     }
 
     /**
+     * Creates a new Event object with given TaskPriority
+     * @param name          name of the deadline
+     * @param at            due date for this deadline e.g. "2021-08-23"
+     * @param taskPriority  priority level of this deadline
+     * @throws IrisException
+     */
+    public Event(String name, String at, TaskPriority taskPriority) throws IrisException {
+        super(name, taskPriority);
+        try {
+            this.at = LocalDate.parse(at);
+        } catch (DateTimeParseException exception) {
+            throw new IrisException("Invalid date provided.");
+        }
+    }
+
+    /**
      * Converts Event object to String
      *
      * @return String representation of Event object
@@ -51,7 +67,8 @@ public class Event extends Task {
     @Override
     public String toCommand(int index) {
         return String.format(
-                "event %s /at %s\n%s",
+                "event%s %s /at %s\n%s",
+                this.getPriorityIcon(),
                 this.name,
                 this.at,
                 super.toCommand(index)

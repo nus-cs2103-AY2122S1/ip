@@ -6,6 +6,7 @@ package iris.task;
 public class Task {
     protected static final String DATE_FORMAT = "MMM d yyyy";
     protected boolean isDone;
+    protected TaskPriority taskPriority = TaskPriority.LOW;
     protected String name;
 
     /**
@@ -16,6 +17,17 @@ public class Task {
     public Task(String name) {
         this.name = name;
         this.isDone = false;
+    }
+
+    /**
+     * Creates a new Task object with given TaskPriority
+     * @param name         name of the Task
+     * @param taskPriority priority level of the Task
+     */
+    public Task(String name, TaskPriority taskPriority) {
+        this.name = name;
+        this.isDone = false;
+        this.taskPriority = taskPriority;
     }
 
     /**
@@ -33,6 +45,20 @@ public class Task {
         return this.isDone ? "✔️" : "   ";
     }
 
+    String getPriorityIcon() {
+        switch (taskPriority) {
+        case LOW:
+            return "";
+        case MEDIUM:
+            return "!";
+        case HIGH:
+            return "!!";
+        default:
+            assert false;
+            return "";
+        }
+    }
+
     /**
      * Converts Task object to String
      *
@@ -40,7 +66,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format(" %s %s", this.getStatusIcon(), this.name);
+        return String.format("%s %s %s", this.getPriorityIcon(), this.getStatusIcon(), this.name);
     }
 
     /**
