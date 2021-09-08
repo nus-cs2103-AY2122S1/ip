@@ -10,7 +10,7 @@ import duke.task.TaskList;
  * Represents the user interface which handles input and output.
  */
 public class Ui {
-    private static String LOGO =
+    private static final String LOGO =
             " ____        _\n"
             + "|  _ \\ _   _| | _____\n"
             + "| | | | | | | |/ / _ \\\n"
@@ -57,7 +57,7 @@ public class Ui {
      * @return the farewell message
      */
     public String showFarewell() {
-        return "\tBye, hope to see you again!";
+        return "Bye, hope to see you again!";
     }
 
 
@@ -70,8 +70,8 @@ public class Ui {
      */
     public String showAdd(Task task, int totalNumTask) {
         return String.format(
-                "\tadded:\n\t\t%s\n"
-                + "\tYou have %d tasks in the list.\n", task, totalNumTask
+                "added:\n\t%s\n"
+                + "You have %d tasks in the list.\n", task, totalNumTask
         );
     }
 
@@ -85,8 +85,8 @@ public class Ui {
      */
     public String showDelete(Task task, int totalNumTask) {
         return String.format(
-                "\tI've deleted this task from the list!\n"
-                + "\t\t%s\n\tYou have %d tasks in the list.\n",
+                "I've deleted this task from the list!\n"
+                + "\t%s\nYou have %d tasks in the list.\n",
                 task, totalNumTask - 1
         );
     }
@@ -100,8 +100,8 @@ public class Ui {
      */
     public String showDone(Task task) {
         return String.format(
-                "\tI've marked this task as done!\n"
-                + "\t\t%s\n", task
+                "I've marked this task as done!\n"
+                + "\t%s\n", task
         );
     }
 
@@ -114,13 +114,13 @@ public class Ui {
      */
     public String showList(TaskList taskList) {
         if (taskList.isEmpty()) {
-            return "\tYou have no task in your list.\n";
+            return "You have no task in your list.\n";
         }
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i <= taskList.getLength(); i++) {
             sb.append(String.format("\t%d. %s\n", i, taskList.get(i)));
         }
-        return "\tHere are the tasks in your list:\n" + sb;
+        return "Here are the tasks in your list:\n" + sb;
     }
 
 
@@ -133,12 +133,12 @@ public class Ui {
      */
     public String showSearchResult(TaskList taskList, String keyword) {
         if (taskList.isEmpty()) {
-            return "\tYou have no task in your list.\n";
+            return "You have no task in your list.\n";
         }
 
         TaskList filteredList = taskList.filter(keyword);
         if (filteredList.isEmpty()) {
-            return "\tYou have no matching task in your list.\n";
+            return "You have no matching task in your list.\n";
         }
 
         StringBuilder sb = new StringBuilder();
@@ -146,7 +146,7 @@ public class Ui {
         for (int i = 1; i <= filteredList.getLength(); i++) {
             sb.append(String.format("\t%d. %s\n", count++, filteredList.get(i)));
         }
-        return "\tHere are the matching tasks in your list:\n" + sb;
+        return "Here are the matching tasks in your list:\n" + sb;
     }
 
 
@@ -157,6 +157,6 @@ public class Ui {
      * @return the exception message for DukeException
      */
     public String showDukeException(DukeException e) {
-        return String.format("\t%s\n", e);
+        return String.format("%s\n", e);
     }
 }

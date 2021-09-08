@@ -23,7 +23,7 @@ import duke.task.Todo;
  * Represents the Duke chatbot object.
  */
 public class Duke {
-    private static String FILEPATH = "./data/duke.txt";
+    private static final String FILEPATH = "./data/duke.txt";
 
     private Storage storage;
     private TaskList taskList;
@@ -49,11 +49,10 @@ public class Duke {
     private void run() {
         System.out.println(this.ui.showGreet());
         while (this.isRunning) {
-            String input = this.ui.readInput();
+            String input = this.ui.readInput().strip();
             System.out.println(this.getResponse(input));
         }
     }
-
 
 
     private void exit() throws DukeDatabaseException {

@@ -2,8 +2,6 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.stream.Collectors;
-
 
 /**
  * Represents a list for all tasks, akin to array lists.
@@ -62,6 +60,12 @@ public class TaskList {
     }
 
 
+    /**
+     * Generate a task list containing tasks that contains the keyword
+     *
+     * @param keyword the keyword to be searched on
+     * @return the task list containing all filtered tasks
+     */
     public TaskList filter(String keyword) {
         return new TaskList(this.list.stream()
                 .filter(t -> t.description.contains(keyword))
