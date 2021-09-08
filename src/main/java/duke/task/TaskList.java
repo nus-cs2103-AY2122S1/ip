@@ -71,13 +71,11 @@ public class TaskList {
             output = new StringBuilder("There are no tasks to be done! Hooray!\n");
         } else {
             output = new StringBuilder("Here is your list of tasks:\n");
-
             for (int i = 0; i < taskList.size(); i++) {
                 String taskName = taskList.get(i).toString();
                 output.append(i + 1).append(".").append(taskName).append("\n");
             }
         }
-
         return output.toString();
     }
 
