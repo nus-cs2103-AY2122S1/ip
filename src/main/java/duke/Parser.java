@@ -64,15 +64,22 @@ public class Parser {
 
         switch (taskType) {
         case TODO:
-            return new ToDo(userInputScanner.nextLine().trim());
+            String todoName = userInputScanner.nextLine().trim();
+            return new ToDo(todoName);
         case DEADLINE:
             userInputScanner.useDelimiter(" /by ");
-            return new Deadline(userInputScanner.next().trim(),
-                    LocalDate.parse(userInputScanner.next().trim()));
+            String deadlineName = userInputScanner.next().trim();
+            LocalDate deadlineDateTime =
+                    LocalDate.parse(userInputScanner.next().trim());
+
+            return new Deadline(deadlineName, deadlineDateTime);
         case EVENT:
             userInputScanner.useDelimiter(" /at ");
-            return new Event(userInputScanner.next().trim(),
-                    LocalDate.parse(userInputScanner.next().trim()));
+            String eventName = userInputScanner.next().trim();
+            LocalDate eventDateTime =
+                    LocalDate.parse(userInputScanner.next().trim());
+
+            return new Event(eventName, eventDateTime);
         default:
             return null; // Error
         }

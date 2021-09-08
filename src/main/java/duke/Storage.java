@@ -54,10 +54,11 @@ public class Storage {
         try (BufferedReader reader = Files.newBufferedReader(savePath)) {
 
             ArrayList<Task> tasks = new ArrayList<>();
-            String line = null;
+            String line = reader.readLine();
 
-            while ((line = reader.readLine()) != null) {
+            while (line != null) {
                 tasks.add(loadTask(line));
+                line = reader.readLine();
             }
 
             return tasks;
@@ -76,18 +77,18 @@ public class Storage {
 
         switch (taskType) {
         case "T":
-            loadedTask = new ToDo(taskDesc, isTaskDone));
+            loadedTask = new ToDo(taskDesc, isTaskDone);
             break;
         case "D":
-            loadedTask = new Deadline(taskDesc,
-                    LocalDate.parse(saveDataScanner.next()), isTaskDone);
+            LocalDate deadlineDateTime = LocalDate.parse(saveDataScanner.next());
+            loadedTask = new Deadline(taskDesc, deadlineDateTime, isTaskDone);
             break;
         case "E":
-            loadedTask = new Event(taskDesc,
-                    LocalDate.parse(saveDataScanner.next()), isTaskDone);
+            LocalDate eventDateTime = LocalDate.parse(saveDataScanner.next());
+            loadedTask = new Event(taskDesc, eventDateTime, isTaskDone);
             break;
         default:
-            break; //Error
+            break; // Error
         }
         saveDataScanner.close();
 
