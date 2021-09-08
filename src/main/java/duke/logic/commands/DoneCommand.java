@@ -12,7 +12,7 @@ public class DoneCommand extends Command {
     private static final String TASK_MARKED_AS_DONE_MSG = "I've marked this task as done:\n  ";
     private static final String TASK_ALREADY_DONE_MSG = "Task already done.";
 
-   /** The index of the task to mark as done, 1-based not zero-based. */
+    /** The index of the task to mark as done, 1-based not zero-based. */
     private final int taskNo;
 
     /**

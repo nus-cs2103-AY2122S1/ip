@@ -17,7 +17,7 @@ public class TextUi {
     private static final String HORIZONTAL_LINE = "-------------------------------------------------------------";
     private static final String GREETINGS = "Hello! What can I do for you?\n";
     private static final String GOODBYE = "See you later.";
-    private static final String LOAD_TASK_ERR_MSG = "\n  ==> Could not load your saved tasks. Creating a new task list...";
+    private static final String LOAD_TASK_ERR_MSG = "\n  > Couldn't load your saved tasks. Creating a new task list...";
     private static final String SAVE_TASK_ERR_MSG = "Error while saving tasks: \n";
 
     private Scanner in;

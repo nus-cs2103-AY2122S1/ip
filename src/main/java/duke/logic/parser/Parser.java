@@ -29,10 +29,10 @@ public class Parser {
     private static final String INVALID_DELETE_ERR_MSG = "Which task would you like to delete?";
     private static final String REQUIRE_TASK_NUMBER_ERR_MSG = "I don't see a task number! >.<";
     private static final String INVALID_TODO_ERR_MSG = "The description of a todo cannot be empty.";
-    private static final String INVALID_DEADLINE_ERR_MSG = "Wrong format! " +
-            "Requires \"deadline <task name> /by <DD-MM-YYYY hhmm> (24hr time)\"";
-    private static final String INVALID_EVENT_ERR_MSG = "Wrong format! " +
-            "Requires \"event <task name> /at <DD-MM-YYYY hhmm[ to DD-MM-YYY hhmm]> (24hr time)\"";
+    private static final String INVALID_DEADLINE_ERR_MSG = "Wrong format! "
+            + "Requires \"deadline <task name> /by <DD-MM-YYYY hhmm> (24hr time)\"";
+    private static final String INVALID_EVENT_ERR_MSG = "Wrong format! "
+            + "Requires \"event <task name> /at <DD-MM-YYYY hhmm[ to DD-MM-YYY hhmm]> (24hr time)\"";
     private static final String INVALID_FIND_ERR_MSG = "What would you like to find? Separate keywords with a space.";
 
     /** Date format for deadline and event */
