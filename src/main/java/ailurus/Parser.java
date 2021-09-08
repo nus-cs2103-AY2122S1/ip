@@ -72,29 +72,24 @@ public class Parser {
      */
     public static Task parseData(String data) {
         String[] dataArr = data.split("[|]");
+        assert dataArr.length != 0 : "dataArr cannot be length 0";
         switch (dataArr[0]) {
             case "T":
-                if (dataArr.length < 3) {
-                    return null;
-                }
+                assert dataArr.length > 2 : "todo format incorrect";
                 Task todo = new Todo(dataArr[2]);
                 if (Integer.parseInt(dataArr[1]) == 1) {
                     todo.markAsDone();
                 }
                 return todo;
             case "D":
-                if (dataArr.length < 4) {
-                    return null;
-                }
+                assert dataArr.length > 3 : "deadline format incorrect";
                 Task deadline = new Deadline(dataArr[2] + "/by " + dataArr[3]);
                 if (Integer.parseInt(dataArr[1]) == 1) {
                     deadline.markAsDone();
                 }
                 return deadline;
             case "E":
-                if (dataArr.length < 4) {
-                    return null;
-                }
+                assert dataArr.length > 3 : "event format incorrect";
                 Task event = new Event(dataArr[2] + "/at " + dataArr[3]);
                 if (Integer.parseInt(dataArr[1]) == 1) {
                     event.markAsDone();
@@ -117,7 +112,7 @@ public class Parser {
         for (int i = 0; i < tasks.length(); i++) {
             Task task = tasks.getTask(i);
             String desc = task.getDescription();
-            if (desc.indexOf(match) != -1) {
+            if (desc.contains(match)) {
                 newList.addTask(task);
             }
         }
