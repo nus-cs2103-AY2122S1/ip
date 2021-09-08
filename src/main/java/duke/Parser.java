@@ -19,6 +19,7 @@ public class Parser {
         new DeadlineCommand(""),
         new EventCommand(""),
         new FindCommand(""),
+        new TagCommand("")
     };
 
     /**

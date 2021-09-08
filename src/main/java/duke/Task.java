@@ -59,6 +59,15 @@ public abstract class Task {
         return result.toString();
     }
 
+    /**
+     * Adds a string to tags ArrayList.
+     *
+     * @param s Tag to be added.
+     */
+    public void addTag(String s) {
+        tags.add(s);
+    }
+
     @Override
     public String toString() {
         return typeIcon() + " " + completionIcon() + " " + description;
