@@ -12,6 +12,7 @@ import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.ReminderCommand;
 import seedu.duke.command.ToDoCommand;
+import seedu.duke.command.UndoCommand;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
 
@@ -84,6 +85,8 @@ public class Duke {
                 return new HelpCommand(ui, taskList);
             case REMINDER:
                 return new ReminderCommand(ui, taskList, dateTasks);
+            case UNDO:
+                return new UndoCommand(ui, taskList, storage);
             default:
                 handleInvalidInputs(commandWord);
                 // Will not reach here since handleInvalidInputs(commandWord)
@@ -120,7 +123,8 @@ public class Duke {
                 this.date = manager.parseDateTime(
                         userInput.substring(indexOfDate + command.length())
                 );
-                return description = userInput.substring(startOfDescription, indexOfDate);
+                description = userInput.substring(startOfDescription, indexOfDate).strip();
+                return description;
             } catch (DateTimeParseException | DukeException e) {
                 System.out.println(e.getMessage());
             }
@@ -148,9 +152,8 @@ public class Duke {
             switch (type) {
             case TODO:
                 int startOfDescription = userInput.indexOf(" ") + 1;
-                String description = userInput.substring(startOfDescription);
-                return new ToDoCommand(ui, taskList,
-                        description, storage);
+                String description = userInput.substring(startOfDescription).strip();
+                return new ToDoCommand(ui, taskList, description, storage);
             case DEADLINE:
                 description = parseDescriptionWithDate(userInput, "/by ");
 
@@ -212,7 +215,8 @@ public class Duke {
         private String executeTasks(Command type) throws DukeException {
             String response = type.execute();
             type.updateDateTasks(dateTasks, manager);
-            if (type.updatesTaskList()) {
+
+            if (type.isUpdatesTaskList()) {
                 taskList = type.getTaskList();
             }
             isExit = type.isExit();
@@ -237,7 +241,20 @@ public class Duke {
     private final Parser parser = new Parser();
     private HashMap<LocalDate, ArrayList<Task>> dateTasks = new HashMap<>();
 
-    public Duke() {
+    public void init() {
+        String directoryPath = "./data";
+
+        File directory = new File(directoryPath);
+        // Check folder exists
+        if (!directory.exists()) {
+            boolean created = directory.mkdirs();
+            if (created) {
+                System.out.println("Successfully created directory.");
+            } else {
+                System.out.println("An error occurred");
+            }
+        }
+
         taskList = storage.loadData(dateTasks, taskList);
     }
 

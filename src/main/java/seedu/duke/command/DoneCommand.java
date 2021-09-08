@@ -36,7 +36,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public boolean updatesTaskList() {
+    public boolean isUpdatesTaskList() {
         return true;
     }
 
@@ -47,9 +47,10 @@ public class DoneCommand extends Command {
     public String execute() throws DukeException {
         boolean isValid = taskList.isValidTaskIndex(index);
         if (isValid) {
-            String toUpdate = this.taskList.getTask(index).toString();
-            Task task = this.taskList.markTaskAsCompleted(index);
+            String toUpdate = taskList.getTask(index).toString();
+            taskList = taskList.markTaskAsCompleted(index);
 
+            Task task = taskList.getTask(index);
             storage.markTaskAsCompleted(task.toString(), toUpdate);
 
             return String.format("%s\n%s\n%s",

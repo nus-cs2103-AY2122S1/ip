@@ -50,7 +50,7 @@ public class ReminderCommand extends Command {
                     dateTasks.getOrDefault(date, new ArrayList<>())
             );
         }
-        return new TaskList(upcomingTasksList);
+        return new TaskList(null, upcomingTasksList);
     }
 
     /**

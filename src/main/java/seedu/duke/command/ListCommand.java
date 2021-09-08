@@ -3,7 +3,6 @@ package seedu.duke.command;
 import seedu.duke.Ui;
 import seedu.duke.task.TaskList;
 
-
 /**
  * Represents a list command. A <code>ListCommand</code> returns
  * the list of tasks when a user requests for it.

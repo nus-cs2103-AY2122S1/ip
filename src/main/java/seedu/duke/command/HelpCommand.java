@@ -27,12 +27,12 @@ public class HelpCommand extends Command {
 
         commands.add(new ExitCommand(ui, taskList));
         commands.add(new ListCommand(ui, taskList));
-        commands.add(new ToDoCommand(ui, taskList, "", null));
-        commands.add(new DeadlineCommand(ui, taskList, "", null, null));
-        commands.add(new EventCommand(ui, taskList, "", null, null));
-        commands.add(new DoneCommand(ui, taskList, 0, null));
-        commands.add(new DeleteCommand(ui, taskList, 0, null));
-        commands.add(new GetCommand(ui, taskList, null, null));
+        commands.add(new ToDoCommand(ui, taskList,"", null));
+        commands.add(new DeadlineCommand(ui, taskList,"", null, null));
+        commands.add(new EventCommand(ui, taskList,"", null, null));
+        commands.add(new DoneCommand(ui, taskList,0, null));
+        commands.add(new DeleteCommand(ui, taskList,0, null));
+        commands.add(new GetCommand(ui, taskList,null, null));
         commands.add(new FindCommand(ui, taskList, ""));
     }
 

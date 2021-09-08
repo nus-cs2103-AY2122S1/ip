@@ -25,6 +25,18 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    public Deadline(String description, LocalDate deadline, boolean isCompleted) {
+        super(description, isCompleted);
+        this.deadline = deadline;
+    }
+
+    /**
+     * Mark <code>Task</code> object as completed.
+     */
+    public Task markAsCompleted() {
+        return new Deadline(super.description, this.deadline, true);
+    }
+
     /**
      * String representation of <code>Deadline</code> object.
      *

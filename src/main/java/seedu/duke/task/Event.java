@@ -24,6 +24,18 @@ public class Event extends Task {
         this.timeOfEvent = timeOfEvent;
     }
 
+    public Event(String description, LocalDate deadline, boolean isCompleted) {
+        super(description, isCompleted);
+        this.timeOfEvent = deadline;
+    }
+
+    /**
+     * Mark <code>Task</code> object as completed.
+     */
+    public Task markAsCompleted() {
+        return new Event(super.description, this.timeOfEvent, true);
+    }
+
     /**
      * String representation of an <code>Event</code>.
      *

@@ -38,7 +38,7 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public boolean updatesTaskList() {
+    public boolean isUpdatesTaskList() {
         return true;
     }
 
