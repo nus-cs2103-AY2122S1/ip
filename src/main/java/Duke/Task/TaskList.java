@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.command.LastCommand;
 import duke.command.Parser;
 import duke.exceptions.DukeException;
 
@@ -17,6 +18,7 @@ import java.util.Locale;
 public class TaskList {
 
     private final ArrayList<Task> tasks;
+    private LastCommand lastCommand;
 
     /**
      * Constructor to store all the tasks in a Generic ArrayList.
@@ -25,6 +27,7 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
+        this.lastCommand = new LastCommand("Null", null, 0, null);
     }
 
     /**
@@ -47,7 +50,7 @@ public class TaskList {
         return text.toString();
     }
 
-    private boolean returnIsFound(String time, String unparsedInfo, String task, int index) {
+    private boolean returnIsFound(String time, String unparsedInfo, String task) {
         Parser parser = new Parser("");
 
         String timeInFormat = (parser.parseTime(time) != null)
@@ -73,7 +76,7 @@ public class TaskList {
         final int[] count = {0}; //count the number of the events happen on the time.
         tasks.stream()
                 .filter(task -> returnIsFound(time
-                        , task.getTimeForSaveData(), task.getTaskStatus(), count[0]))
+                        , task.getTimeForSaveData(), task.getTaskStatus()))
                 .forEach(task -> text.append(++count[0])
                         .append(".").append(task.getTaskStatus()).append("\n"));
 
@@ -81,6 +84,17 @@ public class TaskList {
             return "Sorry. There is no tasks occurred on the time you give me!! :(\n";
         }
         return text.toString();
+    }
+
+    /**
+     * Undo last duke operation.
+     *
+     * @return Duke's response for undo message.
+     */
+    public String undo() {
+        String text = lastCommand.undo();
+        this.lastCommand = new LastCommand("Null", null, 0, null);
+        return text;
     }
 
     /**
@@ -111,7 +125,9 @@ public class TaskList {
      * @param index Integer indicates the index for the task
      */
     public void markDone(int index) {
-        this.tasks.get(index).markDone();
+        Task task = this.tasks.get(index);
+        task.markDone();
+        lastCommand = new LastCommand("done", task, index, tasks);
     }
 
     /**
@@ -120,7 +136,9 @@ public class TaskList {
      * @param index Integer indicates the index for the task
      */
     public void delete(int index) {
+        Task task = this.tasks.get(index);
         this.tasks.remove(index);
+        lastCommand = new LastCommand("delete", task, index, tasks);
     }
 
     private void createNewTask(String taskType, String task, LocalDateTime parsedTime) {
@@ -130,10 +148,12 @@ public class TaskList {
             if (isMatch) {
                 Task newTask = t.assignTaskType(t, task, parsedTime);
                 tasks.add(newTask);
+                lastCommand = new LastCommand("add", newTask, tasks.size() - 1, tasks);
                 break;
             }
         }
     }
+
 
     /**
      * Adds a task to the TaskLists. This method will automatically decide which type of the
@@ -187,7 +207,7 @@ public class TaskList {
      * It also contains a method AssignTask Type to find the specific type of task to create.
      */
     public enum OperationType {
-        BYE, DONE, DELETE, TELL, FIND, LIST, TODO, DEADLINE, EVENT;
+        BYE, DONE, DELETE, TELL, FIND, UNDO, LIST, TODO, DEADLINE, EVENT;
 
         /**
          * Returns a task in a specific operationType. It can be either todo, deadline or event.

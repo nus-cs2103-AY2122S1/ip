@@ -89,6 +89,12 @@ public class Duke {
         return text;
     }
 
+    private String undo() {
+        String text;
+        text = ui.undoUi() + tasks.undo();
+        return text;
+    }
+
     /**
      * Chooses a specific task to execute via tasks type and add to the tasklists.
      * Every time an execution is done, the task will be stored to the local file called tasks.txt
@@ -108,6 +114,7 @@ public class Duke {
                case "delete" -> delete(index);
                case "tell" -> tell(time);
                case "find" -> find(task);
+               case "undo" -> undo();
                default -> add(operationType, task, time);
         };
         assert text.equals("") : "OOPS, Duke stops responding!";

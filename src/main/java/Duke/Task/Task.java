@@ -42,4 +42,6 @@ public abstract class Task {
      * Mark this task as done.
      */
     public abstract void markDone();
+
+    public abstract void resetDone();
 }

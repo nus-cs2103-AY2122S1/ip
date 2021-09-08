@@ -128,4 +128,12 @@ public class Deadlines extends Task {
     public void markDone() {
         this.isDone = true;
     }
+
+    /**
+     * Reset this task as undone.
+     */
+    @Override
+    public void resetDone() {
+        this.isDone = false;
+    }
 }
