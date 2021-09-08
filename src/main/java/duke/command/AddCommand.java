@@ -38,7 +38,6 @@ public class AddCommand implements Command {
         Task t;
         String taskType = params[0];
         String taskInfo = params[1];
-        System.out.println(taskInfo);
         switch (taskType) {
         case "event":
             String[] eventInfo = taskInfo.split(" /at ");
