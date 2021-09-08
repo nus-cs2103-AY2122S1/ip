@@ -24,8 +24,13 @@ public class Event extends Task {
         this.at = at;
     }
 
-    public String getAt() {
-        return at.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
+    public LocalDateTime getAt() {
+        return at;
+    }
+
+    public String getFormattedAt() {
+        return at.format(DateTimeFormatter.ofPattern(
+                "MMM d yyyy ',' HH:mm"));
     }
 
     /**
@@ -36,7 +41,6 @@ public class Event extends Task {
      */
     @Override
     public String taskIndicator() {
-
         return "E";
     }
 
@@ -48,8 +52,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "
-                + at.format(DateTimeFormatter.ofPattern(
-                        "MMM d yyyy ',' HH:mm")) + ")";
+                + getFormattedAt() + ")";
     }
 
 }

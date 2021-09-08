@@ -1,13 +1,11 @@
 package duke;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.exception.DukeException;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * A class to process and make sense of the command
@@ -57,6 +55,8 @@ public class Parser {
                 throw new DukeException(ui.commandError());
             }
             return new FindCommand(trimmedCommand);
+        case "schedule":
+            return checkScheduleCommand(trimmedCommand);
         case "done":
         case "delete":
             return checkDeleteAndDone(trimmedCommand);
@@ -173,6 +173,22 @@ public class Parser {
         } else {
             return isDelete ? new DeleteCommand(input, taskNum)
                             : new DoneCommand(input, taskNum);
+        }
+    }
+
+    public Command checkScheduleCommand(String input) throws DukeException {
+        String[] inputs = input.split(" +", 2);
+        if(inputs.length != 2) {
+            throw new DukeException("OOPS!! Please indicate the date of the "
+                    + "schedule you want to view :) Use the format "
+                            + "yyyy-mm-dd!!");
+        }
+        try {
+            LocalDate scheduleDate = LocalDate.parse(inputs[1].trim());
+            return new ScheduleCommand(input, scheduleDate);
+        } catch(DateTimeParseException e) {
+            throw new DukeException("Please indicate the date in yyyy-mm-dd"
+                    + "format :)");
         }
     }
 
