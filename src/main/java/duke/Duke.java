@@ -15,7 +15,7 @@ public class Duke {
     private final Parser parser;
 
     /** The list of tasks */
-    private TaskList list;
+    private TaskList taskList;
 
     /** True if Duke is still running */
     private boolean isRunning;
@@ -31,10 +31,10 @@ public class Duke {
         storage = new Storage(directory, file);
         parser = new Parser();
         try {
-            list = new TaskList(storage.load());
+            taskList = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showMessage(e.getMessage());
-            list = new TaskList();
+            taskList = new TaskList();
         }
         isRunning = true;
     }
@@ -96,13 +96,13 @@ public class Duke {
                 break;
             case LIST:
                 // Gets the string represented tasks in the task list.
-                output = list.getAllTask();
+                output = taskList.getAllTask();
 
                 break;
             case DONE:
                 // Marks a task as being completed.
                 int index = parser.convertToInt(inputs[1]);
-                output = list.markDone(index);
+                output = taskList.markDone(index);
 
                 // Edits the file content.
                 task = storage.getFileLine(index - 1);
@@ -112,7 +112,7 @@ public class Duke {
                 break;
             case TODO:
                 // Adds a todo-typed task to the task list.
-                output = list.addItem(new Todo(inputs[1]));
+                output = taskList.addItem(new Todo(inputs[1]));
 
                 // Add to file content.
                 task = "T | 0 | " + inputs[1];
@@ -121,7 +121,7 @@ public class Duke {
                 break;
             case DEADLINE:
                 // Adds a deadline-typed task in the task list.
-                output = list.addItem(new Deadline(inputs[1], inputs[2]));
+                output = taskList.addItem(new Deadline(inputs[1], inputs[2]));
 
                 // Add to file content.
                 task = "D | 0 | " + inputs[1] + " | " + inputs[2];
@@ -130,7 +130,7 @@ public class Duke {
                 break;
             case EVENT:
                 // Adds an event-typed task in the task list.
-                output = list.addItem(new Event(inputs[1], inputs[2]));
+                output = taskList.addItem(new Event(inputs[1], inputs[2]));
 
                 // Add to file content.
                 task = "E | 0 | " + inputs[1] + " | " + inputs[2];
@@ -140,7 +140,7 @@ public class Duke {
             case DELETE:
                 // Deletes a task from the task list.
                 int id = parser.convertToInt(inputs[1]);
-                output = list.removeItem(id);
+                output = taskList.removeItem(id);
 
                 // Remove from file content.
                 storage.removeFromFile(id - 1);
@@ -153,7 +153,7 @@ public class Duke {
                 break;
             case FIND:
                 // Gets the task matching the queried keyword.
-                output = list.find(inputs[1]);
+                output = taskList.find(inputs[1]);
 
                 break;
             default:

@@ -20,7 +20,6 @@ public class Constant {
         DATES ("", "Shows all the available date and time type"),
         BYE ("", "Quit the app");
 
-
         private final String arguments;
         private final String description;
 
@@ -29,6 +28,10 @@ public class Constant {
             this.description = description;
         }
 
+        /**
+         * Returns a string representation of the command.
+         * @return A string representation of the command.
+         */
         @Override
         public String toString() {
             return this.name() + " " + arguments + "   -->   " + description;
