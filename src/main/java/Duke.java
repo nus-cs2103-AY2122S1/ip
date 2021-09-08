@@ -1,5 +1,5 @@
 import java.io.*;
-import java.nio.file.Files;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -64,13 +64,13 @@ public class Duke {
                             }
                             System.out.println("  " + (n) + "." + todo.toString());
                         } else if (type.equals("D")) {
-                            Deadline deadline = new Deadline(description, parsed[3]);
+                            Deadline deadline = new Deadline(description, LocalDate.parse(parsed[3]));
                             if (parsed[1].equals("1")) {
                                 deadline.markAsDone();
                             }
                             System.out.println("  " + (n) + "." + deadline.toString());
                         } else if (type.equals("E")) {
-                            Event event = new Event(description, parsed[3]);
+                            Event event = new Event(description, LocalDate.parse(parsed[3]));
                             if (parsed[1].equals("1")) {
                                 event.markAsDone();
                             }
@@ -130,7 +130,31 @@ public class Duke {
                                 "____________________________________________________________");
                     }
                     String task = input.split(" ")[1];
+                    Todo todo = new Todo(task);
                     // arr.add(new Todo(task));
+                    try {
+                        Scanner reader = new Scanner(file);
+                        List<String> lines = new ArrayList<>();
+                        while (reader.hasNextLine()) {
+                            String data = reader.nextLine();
+                            lines.add(data);
+                        }
+
+                        file.delete();
+                        try {
+                            file.createNewFile();
+                            PrintWriter writer = new PrintWriter(file);
+                            for (String line : lines) {
+                                writer.println(line);
+                            }
+                            writer.println(todo.addToFile());
+                            writer.close();
+                        } catch (IOException e) {
+                            System.out.println(e);
+                        }
+                    } catch (FileNotFoundException e) {
+                        System.out.println(e);
+                    }
                     count++;
                     String s = "";
                     if (count > 1 && count != 0) {
@@ -138,7 +162,7 @@ public class Duke {
                     }
                     String reply = "____________________________________________________________\n" +
                             "Got it. I've added this task:\n  " +
-                            arr.get(count-1) + "\n" +
+                            todo.toString() + "\n" +
                             "Now you have " + count + " task" + s + " in the list.\n" +
                             "____________________________________________________________";
                     System.out.println(reply);
@@ -147,7 +171,33 @@ public class Duke {
                 }
             } else if (input.startsWith("deadline")) {
                 String[] n = input.split(" ", 2)[1].split(" /by ");
-                arr.add(new Deadline(n[0], n[1]));
+                // arr.add(new Deadline(n[0], n[1]));
+                String task = n[0];
+                LocalDate time = LocalDate.parse(n[1]);
+                Deadline deadline = new Deadline(task, time);
+                try {
+                    Scanner reader = new Scanner(file);
+                    List<String> lines = new ArrayList<>();
+                    while (reader.hasNextLine()) {
+                        String data = reader.nextLine();
+                        lines.add(data);
+                    }
+
+                    file.delete();
+                    try {
+                        file.createNewFile();
+                        PrintWriter writer = new PrintWriter(file);
+                        for (String line : lines) {
+                            writer.println(line);
+                        }
+                        writer.println(deadline.addToFile());
+                        writer.close();
+                    } catch (IOException e) {
+                        System.out.println(e);
+                    }
+                } catch (FileNotFoundException e) {
+                    System.out.println(e);
+                }
                 count++;
                 String s = "";
                 if (count > 1 && count != 0) {
@@ -155,13 +205,39 @@ public class Duke {
                 }
                 String reply = "____________________________________________________________\n" +
                         "Got it. I've added this task:\n  " +
-                        arr.get(count-1) + "\n" +
+                        deadline.toString() + "\n" +
                         "Now you have " + count + " task" + s + " in the list.\n" +
                         "____________________________________________________________";
                 System.out.println(reply);
             } else if (input.startsWith("event")) {
                 String[] n = input.split(" ", 2)[1].split(" /at ");
-                arr.add(new Event(n[0], n[1]));
+                // arr.add(new Event(n[0], n[1]));
+                String task = n[0];
+                LocalDate time = LocalDate.parse(n[1]);
+                Event event = new Event(task, time);
+                try {
+                    Scanner reader = new Scanner(file);
+                    List<String> lines = new ArrayList<>();
+                    while (reader.hasNextLine()) {
+                        String data = reader.nextLine();
+                        lines.add(data);
+                    }
+
+                    file.delete();
+                    try {
+                        file.createNewFile();
+                        PrintWriter writer = new PrintWriter(file);
+                        for (String line : lines) {
+                            writer.println(line);
+                        }
+                        writer.println(event.addToFile());
+                        writer.close();
+                    } catch (IOException e) {
+                        System.out.println(e);
+                    }
+                } catch (FileNotFoundException e) {
+                    System.out.println(e);
+                }
                 count++;
                 String s = "";
                 if (count > 1 && count != 0) {
@@ -169,7 +245,7 @@ public class Duke {
                 }
                 String reply = "____________________________________________________________\n" +
                         "Got it. I've added this task:\n  " +
-                        arr.get(count-1) + "\n" +
+                        event.toString() + "\n" +
                         "Now you have " + count + " task" + s + " in the list.\n" +
                         "____________________________________________________________";
                 System.out.println(reply);
