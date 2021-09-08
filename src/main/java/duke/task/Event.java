@@ -31,6 +31,7 @@ public class Event extends Task {
      * @return Whether date and time are the same dates.
      */
     public boolean isSameTime(LocalDate date) {
+        assert date != null : "Date to check is null";
         return time.equals(date);
     }
 

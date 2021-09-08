@@ -31,6 +31,7 @@ public class Deadline extends Task {
      * @return Whether date and by are the same dates.
      */
     public boolean isSameBy(LocalDate date) {
+        assert date != null : "Date to check is null";
         return by.isEqual(date);
     }
 

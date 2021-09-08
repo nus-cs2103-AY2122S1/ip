@@ -24,6 +24,7 @@ public class Parser {
      * @throws DukeException  If correct command cannot be created.
      */
     public static Command parse(String commandMessage) throws DukeException {
+        assert commandMessage != null : "Command message is null";
         String[] message = commandMessage.split(" ", 2);
         String command = message[0];
         switch (command) {
@@ -66,6 +67,7 @@ public class Parser {
      * @throws DukeException If description is empty.
      */
     private static String checkDescriptionAvailable(String des, String command) throws DukeException {
+        assert des != null : "Description to check is null";
         String description = des.trim();
         if (description.isEmpty()) {
             throw new DukeException(String.format("The description of a %s cannot be empty!\n", command));
@@ -84,6 +86,7 @@ public class Parser {
      * @throws DukeException If description does not contain a date.
      */
     private static String[] getParameters(String des, String command, String regex) throws DukeException {
+        assert des != null : "Description to check is null";
         if (!des.contains(regex)) {
             throw new DukeException(String.format("The new %s is missing a date!\n", command));
         } else {
@@ -99,6 +102,7 @@ public class Parser {
      * @throws DukeException If no task number is provided.
      */
     private static int getTaskNumber(String des) throws DukeException {
+        assert des != null : "Description to check is null";
         String description = des.trim();
         if (description.isEmpty()) {
             throw new DukeException("I do not know which task to change!\n");
