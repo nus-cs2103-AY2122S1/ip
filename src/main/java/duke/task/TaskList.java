@@ -32,6 +32,8 @@ public class TaskList {
      * @param task new input task
      */
     public String addTask(Task task) {
+        assert tasks != null : "Task List should be created before adding";
+
         tasks.add(task);
         return "Got it. I've added this task:\n "+ task.displayTask()
                 + "\n Now you have " + tasks.size() +  " tasks in the list.";

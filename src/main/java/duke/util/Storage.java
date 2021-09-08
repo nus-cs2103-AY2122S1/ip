@@ -34,6 +34,9 @@ public class Storage {
      */
     public ArrayList<Task> load() throws IOException {
         File tempFile = new File("data/dukeData.txt");
+        if (tempFile.getParentFile().mkdir()) {
+            System.out.println("directory created");
+        }
         if (tempFile.exists()) {
             return txtToArrayList();
         } else {
@@ -68,6 +71,8 @@ public class Storage {
                 Task newTask = new Deadline(task, parsedDate, status.equals("1"));
                 list.add(newTask);
             } else {
+                assert line.startsWith("E");
+
                 String status = line.substring(1, 2);
                 String temp = line.substring(5);
                 String task = line.substring(5, line.substring(5).indexOf("|") + 5);
