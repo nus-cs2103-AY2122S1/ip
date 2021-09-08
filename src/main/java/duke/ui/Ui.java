@@ -20,7 +20,6 @@ public class Ui {
     public Ui(TaskList tasks) {
         this.tasks = tasks;
     }
-
     public static String showGreeting() {
         String message = "MY BEST FRIEND! \nWhat can I do for you?";
         return message;
