@@ -11,7 +11,7 @@ import duke.task.Task;
  */
 public class TaskList {
     /** List of tasks */
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructor of the class `TaskList`.

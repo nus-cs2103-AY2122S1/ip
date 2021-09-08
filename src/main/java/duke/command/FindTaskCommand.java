@@ -11,7 +11,7 @@ import duke.task.Task;
  */
 public class FindTaskCommand extends Command {
     /** The keyword to be found */
-    private String keyword;
+    private final String keyword;
 
     /**
      * Constructor of the class `FindTaskCommand`.

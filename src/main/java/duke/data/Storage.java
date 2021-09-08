@@ -25,7 +25,7 @@ public class Storage {
     /** Path of file containing data saved */
     private static File data;
     /** A temporary list of tasks */
-    private TaskList tasks;
+    private final TaskList tasks;
 
     /**
      * Constructor of the `Storage` class.
@@ -71,7 +71,6 @@ public class Storage {
      * @param line A line of data.
      */
     private void readData(String line) {
-        // Split data into words
         String[] splitted = line.split(" / ");
 
         // Determine type of the task and create corresponding task instance
