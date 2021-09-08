@@ -38,6 +38,9 @@ public class Ui {
     private static String todoCommandMessage = "Use the todo command to add a todo type task.";
     private static String todoCommandExample = "Command Example: todo laundry";
     private static String todoCommandFormat = "-> todo TASK_DESCRIPTION";
+    private static String viewCommandMessage = "Use the view command to view scheduled tasks for a day.";
+    private static String viewCommandExample = "Command Example: view 23/09/2021";
+    private static String viewCommandFormat = "-> view DD/MM/YYYY";
 
     // Predetermined strings.
     private String emptyListMessage = "My Memory Is Empty, Please Feed Items!";
@@ -65,7 +68,8 @@ public class Ui {
                 + doneCommandMessage + "\n" + doneCommandFormat + "\n" + doneCommandExample + "\n\n"
                 + findCommandMessage + "\n" + findCommandFormat + "\n" + findCommandExample + "\n\n"
                 + listCommandMessage + "\n" + listCommandExample + "\n\n"
-                + helpCommandMessage + "\n" + helpCommandExample + "\n\n";
+                + helpCommandMessage + "\n" + helpCommandExample + "\n\n"
+                + viewCommandMessage + "\n" + viewCommandFormat + "\n" + viewCommandExample + "\n\n";
     }
 
     /**
