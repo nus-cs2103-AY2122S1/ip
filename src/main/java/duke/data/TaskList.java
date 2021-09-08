@@ -1,6 +1,8 @@
 package duke.data;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import duke.task.Task;
 
@@ -78,20 +80,15 @@ public class TaskList {
     }
 
     /**
-     * Filters the task list and returns a new list with tasks containing the keyword.
+     * Filters the task list using the given predicate, returns the result as a string.
      *
-     * @param keyword The keyword to be checked.
-     * @return A new list with tasks containing the keyword.
+     * @param predicate The predicate to filter the list.
+     * @return The string representation of the filtered tasks.
      */
-    public ArrayList<Task> filter(String keyword) {
-        int len = this.getNumOfTasks();
-        ArrayList<Task> filteredTasks = new ArrayList<>();
-        for (int i = 0; i < len; i++) {
-            Task task = this.tasks.get(i);
-            if (task.containsKeyword(keyword)) {
-                filteredTasks.add(task);
-            }
-        }
-        return filteredTasks;
+    public String getFilteredListAsString(Predicate<Task> predicate) {
+        return this.tasks.stream()
+                .filter(predicate)
+                .map(task -> String.format("%d.%s\n", this.indexOf(task) + 1, task.toString()))
+                .reduce("", (result, taskString) -> result + taskString);
     }
 }

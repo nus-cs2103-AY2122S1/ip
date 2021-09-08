@@ -32,10 +32,6 @@ public class FindTaskCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Storage storage) {
-        ArrayList<Task> filteredTasks = tasks.filter(this.keyword);
-        int len = filteredTasks.size();
-        for (int i = 0; i < len; i++) {
-            this.message += String.format("%d.%s\n", i + 1, filteredTasks.get(i).toString());
-        }
+        this.message += tasks.getFilteredListAsString(task -> task.containsKeyword(this.keyword));
     }
 }
