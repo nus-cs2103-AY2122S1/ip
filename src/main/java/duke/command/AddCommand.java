@@ -59,6 +59,18 @@ public class AddCommand extends Command {
     }
 
     /**
+     * Checks if a duplicate task already exists in the taskList.
+     *
+     * @param taskList
+     * @throws DukeException If a duplicate task exists.
+     */
+    private void checkForDuplicate(TaskList taskList) throws DukeException {
+        if (taskList.hasDuplicate(this.task)) {
+            throw new DukeException("This task already exists!");
+        }
+    }
+
+    /**
      * Executes the add command by adding the task to the TaskList then outputting the number of
      * current tasks in the TaskList.
      *
@@ -67,8 +79,9 @@ public class AddCommand extends Command {
      * @param storage A Storage object that loads and saves tasks in the file.
      */
     @Override
-    public String runCommand(TaskList taskList, Ui ui, Storage storage) {
+    public String runCommand(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String s = "";
+        checkForDuplicate(taskList);
         s += ui.showTaskAdded(task);
         taskList.addTask(task);
         s += ui.showTaskListSize(taskList);

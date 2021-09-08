@@ -65,4 +65,40 @@ public class Event extends Task {
     public String toString() {
         return String.format("[E]%s (at: %s %s hrs)", super.toString(), this.getDate(), this.getTime());
     }
+
+    /**
+     * Checks if the current task object is the same as a given task object.
+     *
+     * @param obj The given task object.
+     * @return True if equals, False if not equals.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+        Event other = (Event) obj;
+        if (!this.description.equals(other.getDescription())
+            || !this.getDate().equals(other.getDate())
+            || !this.getTime().equals(other.getTime())) {
+            return false;
+        }
+        return true;
+    }
+
+    /** Returns a hash of the current object.
+     *
+     * @return The hash.
+     */
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 53 * hash + (this.description != null ? this.description.hashCode() : 0);
+        hash = 53 * hash + (this.date != null ? this.date.hashCode() : 0);
+        hash = 53 * hash + (this.time != null ? this.time.hashCode() : 0);
+        return hash;
+    }
 }

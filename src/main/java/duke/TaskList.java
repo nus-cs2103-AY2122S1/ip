@@ -109,12 +109,27 @@ public class TaskList {
         ArrayList<Task> searchResult = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            if (task.getDescription().contains(filter)) {
+            if (task.toString().contains(filter)) {
                 searchResult.add(task);
                 assert(!searchResult.isEmpty());
             }
         }
         return new TaskList(searchResult);
+    }
+
+    /**
+     * Checks if the taskList has a duplicate of the given task.
+     * @param other The given task.
+     * @return True if a duplicate exists, False if a duplicate does not exist.
+     */
+    public Boolean hasDuplicate(Task other) {
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            if (task.equals(other)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

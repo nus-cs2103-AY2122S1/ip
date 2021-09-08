@@ -44,6 +44,15 @@ public class Duke {
     }
 
     /**
+     * Returns the initial welcome message on start up.
+     *
+     * @return The welcome message.
+     */
+    public String getWelcome() {
+        return ui.showStartup();
+    }
+
+    /**
      * Returns a response after receiving input from user.
      *
      * @param input The user input.
