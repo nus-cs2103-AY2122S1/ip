@@ -1,6 +1,7 @@
 package duke;
 
 import duke.commands.Command;
+import duke.commands.UndoCommand;
 import duke.parser.Parser;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -32,6 +33,7 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/dog0.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/dog1.png"));
+    private TaskList prevTasks;
 
     /**
      * An empty constructor for a Duke chat bot.
@@ -44,10 +46,10 @@ public class Duke extends Application {
      * @param filePath The path of the file the task list is saved in.
      */
     public Duke(String filePath) {
-        tasks = new TaskList();
-        storage = new Storage(filePath, tasks);
+        this.tasks = new TaskList();
+        this.storage = new Storage(filePath, tasks);
         try {
-            storage.readFile();
+            this.storage.readFile();
         } catch (DukeException e) {
             TextUi.showErrorMessage(e.getMessage());
         }
@@ -59,6 +61,14 @@ public class Duke extends Application {
      */
     @Override
     public void start(Stage stage) {
+        tasks = new TaskList();
+        prevTasks = new TaskList();
+        storage = new Storage("data/duke.txt", tasks);
+        try {
+            storage.readFile();
+        } catch (DukeException e) {
+            TextUi.showErrorMessage(e.getMessage());
+        }
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -167,12 +177,18 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String text) {
-        Duke app = new Duke("data/duke.txt");
         String response = "";
         try {
             Command cmd = Parser.parseCommand(text);
-            response = cmd.execute(app.tasks);
-            app.storage.copyToFile();
+            if (UndoCommand.class.isInstance(cmd)) {
+                ((UndoCommand) cmd).setStorage(this.storage);
+                response += cmd.execute(this.prevTasks);
+                this.tasks = this.prevTasks.duplicate();
+            } else {
+                this.prevTasks = this.tasks.duplicate();
+                response += cmd.execute(this.tasks);
+            }
+            this.storage.copyToFile();
         } catch (DukeException e) {
             return TextUi.showErrorMessage(e.getMessage());
         }

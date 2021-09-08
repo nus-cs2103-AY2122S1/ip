@@ -20,6 +20,9 @@ public class TaskList {
      */
     public TaskList() {}
 
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
     /**
      * Retrieves the ArrayList.
      *
@@ -33,6 +36,30 @@ public class TaskList {
         return tasks.size();
     }
 
+    public TaskList duplicate() {
+        ArrayList<Task> newTasks = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
+            if (t instanceof Todo) {
+                newTasks.add(new Todo(t.getDescription()));
+            } else if (t instanceof Deadline) {
+                newTasks.add(new Deadline(
+                        t.getDescription(),
+                        ((Deadline) t).getDate(),
+                        ((Deadline) t).getTime(),
+                        t.getIsDone()
+                ));
+            } else if (t instanceof Event) {
+                newTasks.add(new Event(
+                       t.getDescription(),
+                       ((Event) t).getDate(),
+                       ((Event) t).getTime(),
+                        t.getIsDone()
+                ));
+            }
+        }
+        return new TaskList(newTasks);
+    }
 
     /**
      * Adds a to-do task to the tasklist.
@@ -127,13 +154,10 @@ public class TaskList {
                 }
             }
             if (temp.isEmpty()) {
-                System.out.println("There are no matching tasks in your list.");
                 s += "There are no matching tasks in your list.";
             } else {
-                System.out.println("Here are the matching tasks in your list:");
                 s += "Here are the matching tasks in your list:\n";
                 for (int i = 0; i < temp.size(); i++) {
-                    System.out.println(temp.get(i));
                     s += temp.get(i) + "\n";
                 }
             }
@@ -147,15 +171,11 @@ public class TaskList {
      * Prints the list of Tasks.
      */
     public String printList() {
-        String s = "";
         int len = tasks.size();
         if (len == 0) {
-            System.out.println("The list is empty!");
-            s += "The list is empty!";
+            return "The list is empty!";
         } else {
-            s += TextUi.showTaskList(tasks);
+            return TextUi.showTaskList(tasks);
         }
-        assert s != "" : "s should not be empty in both cases";
-        return s;
     }
 }

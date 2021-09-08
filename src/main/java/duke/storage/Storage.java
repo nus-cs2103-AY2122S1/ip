@@ -75,13 +75,17 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(filePath);
             for (int i = 0; i < tasks.getTaskList().size(); i++) {
-                fw.write(tasks.getTaskList().get(i).toString() + System.lineSeparator());
+                fw.write(tasks.getTaskList().get(i) + System.lineSeparator());
             }
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
             throw new DukeException("There's something wrong with the file.");
         }
+    }
+
+    public void setTasks(TaskList tasks) {
+        this.tasks = tasks;
     }
 
 }

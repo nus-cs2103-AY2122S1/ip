@@ -17,8 +17,7 @@ public class TextUi {
      * @return String representation of the task added.
      */
     public static String showTaskAdded(TaskList tasks) {
-        System.out.println("added: " + tasks.getTaskList().get(tasks.getLength() - 1));
-        return "added: " + tasks.getTaskList().get(tasks.getLength() - 1);
+        return "added: " + tasks.getTaskList().get(tasks.getLength() - 1) + "\n";
     }
 
     /**
@@ -28,7 +27,6 @@ public class TextUi {
      * @return String representaiton of the task removed.
      */
     public static String showTaskRemoved(Task t) {
-        System.out.printf("Noted. I've removed this task:\n%s\n", t);
         return "Noted. I've removed this task: \n" + t.toString() + "\n";
     }
 
@@ -39,8 +37,7 @@ public class TextUi {
      * @return String representation of the task marked as done.
      */
     public static String showTaskDone(Task t) {
-        System.out.printf("%s\nThe task is marked as done! Good job :D\n", t);
-        return t.toString() + "\nThe task is marked as done! Good job :D";
+        return t.toString() + "\nThe task is marked as done! Good job :D\n";
     }
 
     /**
@@ -52,11 +49,9 @@ public class TextUi {
     public static String showUpdatedNumberOfTasks(TaskList tasks) {
         int len = tasks.getLength();
         if (len == 1) {
-            System.out.printf("Now you have %d task in the list.\n", tasks.getLength());
-            return "Now you have " + tasks.getLength() + " task in the list.";
+            return "Now you have " + tasks.getLength() + " task in the list.\n";
         } else {
-            System.out.printf("Now you have %d tasks in the list.\n", tasks.getLength());
-            return "Now you have " + tasks.getLength() + " tasks in the list.";
+            return "Now you have " + tasks.getLength() + " tasks in the list.\n";
         }
     }
 
@@ -67,7 +62,6 @@ public class TextUi {
      * @return String representation of the error message.
      */
     public static String showErrorMessage(String s) {
-        System.out.println(s);
         return s;
     }
 
@@ -77,7 +71,6 @@ public class TextUi {
      * @return String representation of a goodbye message.
      */
     public static String showGoodbyeMessage() {
-        System.out.println("See you! :)");
         return "See you! :)";
     }
 
@@ -91,7 +84,6 @@ public class TextUi {
         String s = "";
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            System.out.printf("%s. %s\n", i + 1, task);
             s += (i + 1) + ". " + task.toString() + "\n";
         }
         return s;

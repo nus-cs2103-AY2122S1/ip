@@ -4,7 +4,6 @@ package duke.tasks;
  * Represents a to-do, which is a subtype of a Task.
  */
 public class Todo extends Task {
-    protected String description;
 
     /**
      * A constructor of a To-do.
