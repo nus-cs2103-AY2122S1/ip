@@ -1,155 +1,96 @@
-import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileReader;
-import java.io.BufferedReader;
+import java.time.DateTimeException;
 
 public class Duke {
-    private static final ArrayList<Task> list = new ArrayList<>();
+    private Storage storage;
+    private TaskList tasks;
+    private ArrayList<Task> list;
+    private Ui ui;
 
-    private static void update(Task t) {
-        System.out.println("Got it. I've added this task:\n  "
-                + t.toString()
-                + "\nNow you have " + list.size() + " tasks in the list.");
-    }
-
-    private static void delete(int number) {
-        Task toDelete = list.get(number - 1);
-        list.remove(number - 1);
-        System.out.println("Noted. I've removed this task:\n  "
-                + toDelete.toString()
-                + "\nNow you have " + list.size() + " tasks in the list.");
-    }
-
-    private static void readAll() {
-        File f = new File("./Data/");
-        File f2 = new File("./Data/Duke.txt");
-        if (!f.exists()) {
-            f.mkdir();
-        }
-
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
         try {
-            f2.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            BufferedReader b = new BufferedReader(new FileReader(f2));
-            String line = b.readLine();
-            while (line != null) {
-                String[] split = line.split("\\|");
-                switch(split[0]) {
-                case("T"):
-                    Todo t = new Todo(split[2]);
-                    if (!split[1].equals("0")) {
-                        t.markAsDone();
-                    }
-                    list.add(t);
-                    break;
-                case("E"):
-                    Event e = new Event(split[2], split[3]);
-                    if (!split[1].equals("0")) {
-                        e.markAsDone();
-                    }
-                    list.add(e);
-                    break;
-                case("D"):
-                    Deadline d = new Deadline(split[2], split[3]);
-                    if (!split[1].equals("0")) {
-                        d.markAsDone();
-                    }
-                    list.add(d);
-                    break;
-                }
-                line = b.readLine();
-            }
-            b.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            tasks = new TaskList(storage.load());
+            list = tasks.list;
+        } catch (DukeException e) {
+            ui.sayError(e);
+            tasks = new TaskList();
+            list = tasks.list;
         }
     }
 
-    private static void writeAll() {
-        try {
-            FileWriter w = new FileWriter("./Data/Duke.txt");
-            for (Task task : list) {
-                w.write(task.toWrite());
-            }
-            w.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void main(String[] args) {
-        String logo = "DUKE\n";
-        System.out.println("Hello from\n" + logo + "What can I do for you?");
-        readAll();
+    public void run() {
+        ui.sayHi();
         Scanner s = new Scanner(System.in);
         String command = s.nextLine();
         while(!command.equals("bye")) {
-            switch(command.split(" ")[0]) {
-            case "list":
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < list.size(); i++) {
-                    int num = i + 1;
-                    if (list.get(i) != null) {
-                        System.out.println(num + "." + list.get(i).toString());
-                    }
-                }
-                command = s.nextLine();
-                break;
-            case "done":
-                int finished = Integer.parseInt(command.split(" ")[1]) - 1;
-                list.get(finished).markAsDone();
-                System.out.println("Nice! I've marked this task as done:\n" + "  " + list.get(finished).toString());
-                command = s.nextLine();
-                break;
-            case "todo":
+            try {
                 try {
-                    if (command.equals("todo") || command.equals("todo ")) {
-                        throw new DukeException();
+                    switch (command.split(" ")[0]) {
+                        case "list":
+                            ui.sayList(list);
+                            command = s.nextLine();
+                            break;
+                        case "done":
+                            int finished = Integer.parseInt(command.split(" ")[1]) - 1;
+                            tasks.done(finished);
+                            ui.sayCompleted(list.get(finished));
+                            command = s.nextLine();
+                            break;
+                        case "todo":
+                            if (command.equals("todo") || command.equals("todo ")) {
+                                throw new DukeException(DukeException.Type.TODO);
+                            }
+                            Todo toAdd = new Todo(command.split(" ", 2)[1]);
+                            tasks.add(toAdd);
+                            ui.sayUpdates(toAdd, list.size());
+                            command = s.nextLine();
+                            break;
+                        case "deadline":
+                            String[] splitD = command.split(" ", 2)[1].split(" /by ", 2);
+                            String first = splitD[0];
+                            String second = splitD[1];
+                            Deadline toAdd2 = new Deadline(first, second);
+                            tasks.add(toAdd2);
+                            ui.sayUpdates(toAdd2, list.size());
+                            command = s.nextLine();
+                            break;
+                        case "event":
+                            String[] splitE = command.split(" ", 2)[1].split(" /at ", 2);
+                            String one = splitE[0];
+                            String two = splitE[1];
+                            Event toAdd3 = new Event(one, two);
+                            tasks.add(toAdd3);
+                            ui.sayUpdates(toAdd3, list.size());
+                            command = s.nextLine();
+                            break;
+                        case "delete":
+                            int del = Integer.parseInt(command.split(" ", 2)[1]);
+                            Task toDelete = list.get(del - 1);
+                            tasks.delete(del);
+                            ui.sayDeletes(toDelete, list.size());
+                            command = s.nextLine();
+                            break;
+                        default:
+                            ui.sayWrongInput();
+                            command = s.nextLine();
                     }
-                    Todo toAdd = new Todo(command.split(" ", 2)[1]);
-                    list.add(toAdd);
-                    update(toAdd);
-                } catch (DukeException exception) {
-                    System.out.println(exception.getMessage());
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new DukeException(DukeException.Type.INVALID);
+                } catch (DateTimeException e) {
+                    throw new DukeException(DukeException.Type.DATE);
                 }
-                command = s.nextLine();
-                break;
-            case "deadline":
-                String[] splitD = command.split(" ", 2)[1].split(" /by ", 2);
-                String first = splitD[0];
-                String second = splitD[1];
-                Deadline toAdd2 = new Deadline(first, second);
-                list.add(toAdd2);
-                update(toAdd2);
-                command = s.nextLine();
-                break;
-            case "event":
-                String[] splitE = command.split(" ", 2)[1].split(" /at ", 2);
-                String one = splitE[0];
-                String two = splitE[1];
-                Event toAdd3 = new Event(one, two);
-                list.add(toAdd3);
-                update(toAdd3);
-                command = s.nextLine();
-                break;
-            case "delete":
-                int del = Integer.parseInt(command.split(" ", 2)[1]);
-                delete(del);
-                command = s.nextLine();
-                break;
-            default:
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            } catch (DukeException e) {
+                ui.sayError(e);
                 command = s.nextLine();
             }
         }
-        System.out.println("Bye. Hope to see you again soon!");
-        writeAll();
+        ui.sayBye();
+        storage.writeAll(tasks);
+    }
+    public static void main(String[] args) {
+            new Duke("./Data/Duke.txt").run();
     }
 }
