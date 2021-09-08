@@ -26,6 +26,10 @@ public class Parser {
      */
     public int parse(String command, UI ui, Storage storage, TaskList taskList) throws WhoBotException {
 
+        assert ui != null;
+        assert storage != null;
+        assert taskList != null;
+
         Helper helper = new Helper(ui);
 
         if (command.isBlank()) {
