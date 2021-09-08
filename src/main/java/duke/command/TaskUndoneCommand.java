@@ -5,21 +5,21 @@ import duke.data.TaskList;
 import duke.exception.InvalidTaskNoException;
 
 /**
- * Represents a command that marks a task as done. A subclass of the Command class.
+ * Represents a command that marks a task as undone. A subclass of the Command class.
  */
-public class TaskDoneCommand extends Command {
+public class TaskUndoneCommand extends Command {
     /** Index of the task to be deleted in the task list */
     private final int taskIndex;
 
     /**
-     * Constructor of the class `TaskDoneCommand`.
+     * Constructor of the class `TaskUndoneCommand`.
      *
      * @param taskIndex Index of a task.
      */
-    public TaskDoneCommand(int taskIndex) {
-        super("done");
+    public TaskUndoneCommand(int taskIndex) {
+        super("undone");
         this.taskIndex = taskIndex;
-        this.message = "Nice! I've marked this task as done:\n";
+        this.message = "Oops! I've marked this task as undone:\n";
     }
 
     /**
@@ -32,7 +32,7 @@ public class TaskDoneCommand extends Command {
     }
 
     /**
-     * Executes the command. Marks a task as done, stores changes and updates the message to be printed.
+     * Executes the command. Marks a task as undone, stores changes and updates the message to be printed.
      *
      * @param tasks A list of tasks.
      * @param storage An instance of Storage that can read from and write to the hard disk.
@@ -47,9 +47,9 @@ public class TaskDoneCommand extends Command {
             throw new InvalidTaskNoException();
         }
 
-        // Mark task as done
+        // Mark task as undone
         assert this.task != null : "task shouldn't be null";
-        this.task.setDone();
+        this.task.setUndone();
         storage.rewriteFile();
 
         // Update message

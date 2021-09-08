@@ -40,6 +40,13 @@ public class Task {
     }
 
     /**
+     * Marks the current task as undone.
+     */
+    public void setUndone() {
+        this.isDone = false;
+    }
+
+    /**
      * Converts the task to a string.
      *
      * @return The string representation of the task.

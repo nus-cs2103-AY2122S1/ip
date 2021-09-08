@@ -1,6 +1,7 @@
 package duke.ui;
 
 import java.time.format.DateTimeParseException;
+import java.util.Stack;
 
 import duke.command.AddTaskCommand;
 import duke.command.Command;
@@ -9,12 +10,15 @@ import duke.command.ExitCommand;
 import duke.command.FindTaskCommand;
 import duke.command.GetListCommand;
 import duke.command.TaskDoneCommand;
+import duke.command.TaskUndoneCommand;
+import duke.command.UndoCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidTaskNoException;
 import duke.exception.InvalidTimeException;
 import duke.exception.MissingCommandDetailException;
 import duke.exception.MultipleTimeSlotsException;
+import duke.exception.UnableToUndoException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -24,6 +28,8 @@ import duke.task.ToDo;
  * Represents a parser that deals with making sense of the user command.
  */
 public class Parser {
+
+    private static Stack<Command> commands = new Stack<>();
 
     /**
      * Returns parsed command which involves time.
@@ -57,7 +63,9 @@ public class Parser {
             Task task = isEvent
                     ? new Event(information[0], information[1])
                     : new Deadline(information[0], information[1]);
-            return new AddTaskCommand(task);
+            AddTaskCommand addTaskCommand = new AddTaskCommand(task);
+            Parser.commands.push(addTaskCommand);
+            return addTaskCommand;
         } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
             throw new InvalidTimeException(timeFormat);
         }
@@ -67,40 +75,59 @@ public class Parser {
      * Returns parsed command which involves a task number.
      *
      * @param words An array of words in the command.
-     * @param isDoneCommand Whether the command is a `done` command.
      * @return Parsed command.
      * @throws InvalidTaskNoException If task number is invalid.
      */
     private static Command parseCommandWithTaskNo(
-            String[] words, boolean isDoneCommand) throws InvalidTaskNoException {
+            String[] words) throws InvalidTaskNoException {
+        String leadingWord = words[0];
         try {
             int index = Integer.parseInt(words[1]) - 1;
-            return isDoneCommand ? new TaskDoneCommand(index) : new DeleteTaskCommand(index);
+            Command command = leadingWord.equals("done")
+                    ? new TaskDoneCommand(index)
+                    : leadingWord.equals("undone")
+                        ? new TaskUndoneCommand(index)
+                        : new DeleteTaskCommand(index);
+            Parser.commands.push(command);
+            return command;
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
             throw new InvalidTaskNoException();
         }
     }
 
-    private static Command parseTodo(String[] words) throws MissingCommandDetailException {
+    private static AddTaskCommand parseTodo(String[] words) throws MissingCommandDetailException {
         if (words.length < 2) {
             throw new MissingCommandDetailException("description", "todo", "");
         }
-        return new AddTaskCommand(new ToDo(words[1]));
+        AddTaskCommand addTaskCommand = new AddTaskCommand(new ToDo(words[1]));
+        Parser.commands.push(addTaskCommand);
+        return addTaskCommand;
     }
 
-    private static Command parseFind(String[] words) throws MissingCommandDetailException {
+    private static FindTaskCommand parseFind(String[] words) throws MissingCommandDetailException {
         if (words.length < 2) {
             throw new MissingCommandDetailException("keyword", "find", "");
         }
+        // Cannot undo a find command
         return new FindTaskCommand(words[1].trim());
+    }
+
+    private static UndoCommand parseUndo() throws UnableToUndoException {
+        if (Parser.commands.empty()) {
+            throw new UnableToUndoException();
+        }
+        // Cannot undo an undo command
+        return new UndoCommand(Parser.commands.pop());
     }
 
     private static Command parseCommandWithTwoOrMoreWords(String[] words) throws DukeException {
         String leadingWord = words[0];
         if (leadingWord.equals("done")) {
-            return Parser.parseCommandWithTaskNo(words, true);
+            return Parser.parseCommandWithTaskNo(words);
+        } else if (leadingWord.equals("undone")) {
+            return Parser.parseCommandWithTaskNo(words);
         } else if (leadingWord.equals("delete")) {
-            return Parser.parseCommandWithTaskNo(words, false);
+            return Parser.parseCommandWithTaskNo(words);
         } else if (leadingWord.equals("todo")) {
             return Parser.parseTodo(words);
         } else if (leadingWord.equals("deadline")) {
@@ -127,6 +154,8 @@ public class Parser {
             return new ExitCommand();
         } else if (command.equals("list")) {
             return new GetListCommand();
+        } else if (command.equals("undo")) {
+            return Parser.parseUndo();
         } else {
             // Split the command into two phrases
             String[] words = command.split(" ", 2);
