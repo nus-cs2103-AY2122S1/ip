@@ -26,23 +26,23 @@ public abstract class Task implements Comparable<Task> {
 
     @Override
     public int compareTo(Task t) {
-        int temp = this.getDate().compareTo(t.getDate());
+        int temp = getDate().compareTo(t.getDate());
         if (temp == 0) {
-            return this.getTime().compareTo(t.getTime());
+            return getTime().compareTo(t.getTime());
         }
         return temp;
     }
 
     public LocalDate getDate() {
-        return this.date;
+        return date;
     }
 
     public LocalTime getTime() {
-        return this.time;
+        return time;
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     /**
@@ -58,7 +58,7 @@ public abstract class Task implements Comparable<Task> {
      * Marks a task as done.
      */
     public void markTaskDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
@@ -67,12 +67,12 @@ public abstract class Task implements Comparable<Task> {
      * @return A string representing the output.
      */
     public String outputFormat() {
-        return " | " + (this.isDone ? "1" : "0") + " | " + this.description;
+        return " | " + (isDone ? "1" : "0") + " | " + description;
     }
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + getStatusIcon() + "] " + description;
     }
 
     //...

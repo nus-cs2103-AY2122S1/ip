@@ -58,7 +58,7 @@ public class Duke {
                 // Execute command based on user's input
                 duke.parser.Parser parser = new duke.parser.Parser(fullCommand);
                 System.out.println(parser.execute(tasks, ui, storage));
-                isExit = parser.getIsByeCommand();
+                isExit = parser.isByeCommand();
             } catch (DukeException e) {
                 System.out.println(ui.printError(e));
             } finally {
