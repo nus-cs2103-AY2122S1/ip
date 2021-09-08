@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -11,7 +12,7 @@ import java.time.format.DateTimeFormatter;
  * @see ToDo
  */
 
-public class Deadline extends Task {
+public class Deadline extends Task implements DateTimeTask {
 
     private final LocalDateTime dateTime;
 
@@ -55,6 +56,10 @@ public class Deadline extends Task {
     @Override
     public Deadline markAsCompleted() {
         return new Deadline(this);
+    }
+
+    public LocalDate getDate() {
+        return this.dateTime.toLocalDate();
     }
 
     @Override

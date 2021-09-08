@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -10,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  * @see ToDo
  */
 
-public class Event extends Task {
+public class Event extends Task implements DateTimeTask {
 
     private final LocalDateTime dateTime;
 
@@ -44,6 +45,10 @@ public class Event extends Task {
         } else {
             return e;
         }
+    }
+
+    public LocalDate getDate() {
+        return this.dateTime.toLocalDate();
     }
 
     /**

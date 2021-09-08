@@ -76,7 +76,7 @@ public class Storage {
                         DateTimeFormatter.ISO_LOCAL_DATE_TIME)));
                 break;
             default: // "D"
-                assert tokens[0].equals("D"): "invalid task type in tasklog";
+                assert tokens[0].equals("D") : "invalid task type in taskLog";
                 previousTasks.add(Deadline.createTask(taskName, isCompleted, LocalDateTime.parse(tokens[3].trim(),
                         DateTimeFormatter.ISO_LOCAL_DATE_TIME)));
                 break;

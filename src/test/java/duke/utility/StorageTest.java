@@ -15,7 +15,7 @@ public class StorageTest {
             Storage s = new Storage("");
             fail();
         } catch (IOException ex) {
-            assertEquals("Unable to create/open specified file.\nTasks will not be logged.", ex.getMessage());
+            assertEquals("No such file or directory", ex.getMessage());
         }
     }
 }

@@ -72,4 +72,10 @@ public abstract class DukeException extends Exception {
             super(message);
         }
     }
+
+    public static class EmptyScheduleException extends DukeException {
+        public EmptyScheduleException(String message) {
+            super(message);
+        }
+    }
 }
