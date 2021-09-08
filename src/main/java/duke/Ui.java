@@ -1,15 +1,22 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.Scanner;
 
 /**
  * Represents the user interface which handles input and output.
  */
 public class Ui {
+    private static String LOGO =
+            " ____        _\n"
+            + "|  _ \\ _   _| | _____\n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+
     private Scanner input = new Scanner(System.in);
 
     /**
@@ -36,15 +43,10 @@ public class Ui {
      * @return the greeting message
      */
     public String showGreet() {
-        String logo = " ____        _\n"
-                + "|  _ \\ _   _| | _____\n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
         return String.format(
-                "%s\n" +
-                "Welcome! I'm Duke.\n" +
-                "What can I do for you?\n", logo
+                "%s\n"
+                + "Welcome! I'm Duke.\n"
+                + "What can I do for you?\n", Ui.LOGO
         );
     }
 
@@ -68,8 +70,8 @@ public class Ui {
      */
     public String showAdd(Task task, int totalNumTask) {
         return String.format(
-                "\tadded:\n\t\t%s\n" +
-                "\tYou have %d tasks in the list.\n", task, totalNumTask
+                "\tadded:\n\t\t%s\n"
+                + "\tYou have %d tasks in the list.\n", task, totalNumTask
         );
     }
 
@@ -83,8 +85,8 @@ public class Ui {
      */
     public String showDelete(Task task, int totalNumTask) {
         return String.format(
-                "\tI've deleted this task from the list!\n" +
-                "\t\t%s\n\tYou have %d tasks in the list.\n",
+                "\tI've deleted this task from the list!\n"
+                + "\t\t%s\n\tYou have %d tasks in the list.\n",
                 task, totalNumTask - 1
         );
     }
@@ -98,8 +100,8 @@ public class Ui {
      */
     public String showDone(Task task) {
         return String.format(
-                "\tI've marked this task as done!\n" +
-                "\t\t%s\n", task
+                "\tI've marked this task as done!\n"
+                + "\t\t%s\n", task
         );
     }
 
@@ -145,36 +147,6 @@ public class Ui {
             sb.append(String.format("\t%d. %s\n", count++, filteredList.get(i)));
         }
         return "\tHere are the matching tasks in your list:\n" + sb;
-    }
-
-
-    /**
-     * Display to users that error was thrown while saving data to the database.
-     *
-     * @return the error message
-     */
-    public String showSavingError() {
-        return "Error when saving data!";
-    }
-
-
-    /**
-     * Display to user that their date is of invalid format.
-     *
-     * @return the error message
-     */
-    public String showInvalidDateFormat() {
-        return "\tPlease enter the start/end time in the format of <DD/MM/YY HH:MM>!\n";
-    }
-
-
-    /**
-     * Display to user that their date is of invalid range.
-     *
-     * @return the error message
-     */
-    public String showInvalidDateRange() {
-        return "\tEnd time must be after the start time!\n";
     }
 
 
