@@ -6,11 +6,6 @@ import duke.util.DukeException;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 
 import java.nio.file.Path;
 
@@ -21,13 +16,6 @@ public class Duke {
     /** Storage file path */
     public static final String OUTER_DIR = "data";
     public static final String FILE = "taskList.txt";
-
-    /** Gui Variables */
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
 
     /** Instance variables */
     private final Storage myStorage;
@@ -63,7 +51,6 @@ public class Duke {
         } catch (DukeException err) {
             return err.getMessage();
         }
-//        canContinue = !command.isExit();
     }
 
 }
