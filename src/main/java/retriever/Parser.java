@@ -75,6 +75,9 @@ public class Parser {
         case "find":
             taskList.findTaskWithKeyword(userInput);
             break;
+        case "help":
+            Ui.printHelpSection();
+            break;
         case "bye":
             markSessionDone();
             break;
