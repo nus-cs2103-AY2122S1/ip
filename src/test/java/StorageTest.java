@@ -30,7 +30,7 @@ public class StorageTest {
     @Test
     public void load_loadInvalidFileDb_emptyLoad() {
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
-        String invalidFiTlePath = "data/invalidfile.txt";
+        String invalidFilePath = "data/invalidfile.txt";
         Storage storage = new Storage(invalidFilePath);
         assertEquals(Collections.emptyList(), storage.load());
         // check file created and directory created properly
