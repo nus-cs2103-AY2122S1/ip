@@ -7,21 +7,18 @@ Duke is a todo task manager that helps you to track various sorts of tasks.
 1. Ensure you have Java `11` or above installed in your Computer.
 2. Download the latest `ip.jar` from [here](https://github.com/sunjc826/ip/releases).
 3. Copy the file to the folder you want to use as the *home folder* for your Duke.
-4. Double-click the file to start the app. The GUI should be similar to the below should appear in a few seconds. 
-Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI should be similar to the below should appear in a few seconds.<br>
    ![Ui](./Ui.png)
 5. Type the command in the command box and press Enter to execute it.
    Some example commands you can try:
 
-    * **`list`** : Lists all contacts.
+    * **`list`** : Lists all tasks.
 
-    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * **`todo`**`do stuff` : Adds a todo task named `do stuff` to Duke.
 
-    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+    * **`delete`**`1` : Deletes the 1st task in the current list.
 
-    * **`clear`** : Deletes all contacts.
-
-    * **`exit`** : Exits the app.
+    * **`bye`** : Exits the app.
 
 6. Refer to the [Usage](#Usage) below for details of each command.
 
@@ -99,10 +96,10 @@ Example
   ![Demo of event command](./images/event.png)<br>
   Using the list command now would show this.<br>
   ![Listing events after adding event](./images/event-list.png)<br>
-- `event test event /at 1/1/2000 1800-1900`
+- `event test event /at 1/1/2000 1800-1900`<br>
   ![Demo of event command](./images/event2.png)<br>
   Using the list command now would show this.<br>
-  ![Listing events after adding event](./images/event2-list.png)
+  ![Listing events after adding event](./images/event2-list.png)<br>
 ### `bye` - Exits the app.
 Quits the program and saves your tasks to local storage.
 
