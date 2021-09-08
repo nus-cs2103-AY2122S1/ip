@@ -81,9 +81,9 @@ public class Parser {
                 } else {
                     found = 1;
                     returned = returned + count
-                            + ".[" + taskList.get(i).getType()
+                            + ". [" + taskList.get(i).getType()
                             + "][" + completeList.get(i) + "]"
-                            + taskList.get(i).getTask();
+                            + taskList.get(i).getTask() + "\n";
                     count = count + 1;
                 }
             }
