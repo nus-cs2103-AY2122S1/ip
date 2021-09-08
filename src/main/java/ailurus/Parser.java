@@ -19,31 +19,26 @@ public class Parser {
     }
 
     public static String parseCommand(String command, String fullCommand, Ui ui, Storage storage, TaskList tasks) {
+        String message = Parser.parseMessage(fullCommand);
         switch (command) {
+            case "list":
+                return ui.sayList(tasks);
+            case "done":
+                return ui.sayDone(tasks.done(message));
+            case "todo":
+                return ui.sayAdd(tasks.addTask(new Todo(message)), tasks.length());
+            case "deadline":
+                return ui.sayAdd(tasks.addTask(new Deadline(message)), tasks.length());
+            case "event":
+                return ui.sayAdd(tasks.addTask(new Event(message)), tasks.length());
+            case "delete":
+                return ui.sayDelete(tasks.deleteTask(message), tasks.length());
+            case "find":
+                return ui.sayFind(Parser.parseFind(message, tasks));
             case "bye":
                 storage.unload(tasks);
                 Ailurus.exit();
                 return ui.sayBye();
-            case "list":
-                return ui.sayList(tasks);
-            case "done":
-                String str = Parser.parseMessage(fullCommand);
-                return ui.sayDone(tasks.done(str));
-            case "todo":
-                String todoMessage = Parser.parseMessage(fullCommand);
-                return ui.sayAdd(tasks.addTask(new Todo(todoMessage)), tasks.length());
-            case "deadline":
-                String deadlineMessage = Parser.parseMessage(fullCommand);
-                return ui.sayAdd(tasks.addTask(new Deadline(deadlineMessage)), tasks.length());
-            case "event":
-                String eventMessage = Parser.parseMessage(fullCommand);
-                return ui.sayAdd(tasks.addTask(new Event(eventMessage)), tasks.length());
-            case "delete":
-                String deleteMessage = Parser.parseMessage(fullCommand);
-                return ui.sayDelete(tasks.deleteTask(deleteMessage), tasks.length());
-            case "find":
-                String match = Parser.parseMessage(fullCommand);
-                return ui.sayFind(Parser.parseFind(match, tasks));
             default:
                 return ui.sayInvalidCommand();
         }
@@ -77,32 +72,33 @@ public class Parser {
                 if (dataArr.length < 3) {
                     return null;
                 }
-                Task todo = new Todo(dataArr[2]);
-                if (Integer.parseInt(dataArr[1]) == 1) {
-                    todo.markAsDone();
-                }
-                return todo;
+                return loadTask(new Todo(dataArr[2]), dataArr[1]);
             case "D":
                 if (dataArr.length < 4) {
                     return null;
                 }
-                Task deadline = new Deadline(dataArr[2] + "/by " + dataArr[3]);
-                if (Integer.parseInt(dataArr[1]) == 1) {
-                    deadline.markAsDone();
-                }
-                return deadline;
+                return loadTask(new Deadline(dataArr[2] + "/by " + dataArr[3]), dataArr[1]);
             case "E":
                 if (dataArr.length < 4) {
                     return null;
                 }
-                Task event = new Event(dataArr[2] + "/at " + dataArr[3]);
-                if (Integer.parseInt(dataArr[1]) == 1) {
-                    event.markAsDone();
-                }
-                return event;
+                return loadTask(new Event(dataArr[2] + "/at " + dataArr[3]), dataArr[1]);
             default:
                 return null;
         }
+    }
+
+    /**
+     * Load task with marking as done
+     * @param task task to be loaded
+     * @param marked string for whether task is marked
+     * @return task that is either marked or not marked as done
+     */
+    private static Task loadTask(Task task, String marked) {
+        if (Integer.parseInt(marked) == 1) {
+            task.markAsDone();
+        }
+        return task;
     }
 
     /**

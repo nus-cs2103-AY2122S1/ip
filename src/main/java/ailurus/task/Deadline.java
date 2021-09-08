@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
-    private LocalDate by;
+    private final LocalDate by;
 
     /**
      * Constructor for Ailurus.Deadline tasks
@@ -19,18 +19,25 @@ public class Deadline extends Task {
     public Deadline(String description) throws AilurusException {
         super(description.split("/by", -1)[0].trim());
         String[] arr = description.split("/by", -1);
+        handleException(arr);
+        try {
+            this.by = LocalDate.parse(arr[1].trim());
+        } catch (DateTimeParseException e) {
+            throw new AilurusException(AilurusException.Error.DATEPARSE);
+        }
+
+    }
+
+    @Override
+    public void handleException(String... arr) {
         if (arr[0].length() == 0) {
             throw new AilurusException(AilurusException.Error.EMPTYDEADLINE);
-        } else if (arr.length <= 1) {
+        }
+        if (arr.length <= 1) {
             throw new AilurusException(AilurusException.Error.BY);
-        } else if (arr[1].length() == 0) {
+        }
+        if (arr[1].length() == 0) {
             throw new AilurusException(AilurusException.Error.EMPTYBY);
-        } else {
-            try {
-                this.by = LocalDate.parse(arr[1].trim());
-            } catch (DateTimeParseException e) {
-                throw new AilurusException(AilurusException.Error.DATEPARSE);
-            }
         }
     }
 
