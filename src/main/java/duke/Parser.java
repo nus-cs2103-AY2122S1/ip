@@ -14,30 +14,32 @@ public class Parser {
      * @return if the command required to exit
      * @throws DukeException exceptions that are possible to occur in Duke
      */
-    public static String parser(String input, TaskList taskList) throws DukeException{
+    public static String parser(String input, TaskList taskList) throws DukeException {
         String[] pieces = input.split(" ", 2);
         String command = pieces[0];
 
-        if (command.equals("list")) {
+        switch (command) {
+        case "list":
             return handleList(taskList);
-        } else if (command.equals("bye")) {
+        case "bye":
             return handleBye();
-        } else if (command.equals("done")) {
+        case "done":
             return handleDone(pieces, taskList);
-        } else if (command.equals("todo")) {
+        case "todo":
             return handleTodo(pieces, taskList);
-        } else if (command.equals("event")) {
+        case "event":
             return handleEvent(pieces, taskList);
-        } else if (command.equals("deadline")) {
+        case "deadline":
             return handleDeadline(pieces, taskList);
-        } else if (command.equals("delete")){
+        case "delete":
             return handleDelete(pieces, taskList);
-        } else if (command.equals("find")) {
+        case "find":
             return handleFind(pieces, taskList);
-        } else {
+        default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
+
 
     /**
      * Handle the input started with "find"

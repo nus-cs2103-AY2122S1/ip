@@ -19,11 +19,11 @@ public class testDeadline {
     }
 
     @Test
-    public void testSaveTask() {
+    public void testToStorageFormat() {
         assertEquals("[D][ ] return book->by: 2021-12-12",
-                new Deadline("return book", LocalDate.parse("2021-12-12")).saveTask());
+                new Deadline("return book", LocalDate.parse("2021-12-12")).toStorageFormat());
         assertEquals("[D][ ] complete assignment->by: 2021-10-11",
-                new Deadline("complete assignment", LocalDate.parse("2021-10-11")).saveTask());
+                new Deadline("complete assignment", LocalDate.parse("2021-10-11")).toStorageFormat());
     }
 
 }
