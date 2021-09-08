@@ -109,6 +109,11 @@ public class Duke {
                 storage.saveEntry(nextTask);
                 ui.add(nextTask.toString());
                 break;
+            case 8:
+                String phrase = scannerObj.nextLine());
+                Task[] res = tasks.find(phrase);
+                ui.find(res);
+                break;
             default:
                 ui.echo();
             }
