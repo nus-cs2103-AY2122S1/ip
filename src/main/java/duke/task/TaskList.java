@@ -128,13 +128,8 @@ public class TaskList {
             throw new DukeException("Looks like you forgot to enter a keyword.");
         }
 
-        ArrayList<Task> matchingTasks = new ArrayList<>();
-        for (Task task : todoList) {
-            if (task.contains(keyword)) {
-                matchingTasks.add(task);
-            }
-        }
-        return matchingTasks;
+        return todoList.stream().filter(task -> task.contains(keyword)).collect(
+            Collectors.toCollection(ArrayList::new));
     }
 
     /**
