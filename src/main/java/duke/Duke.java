@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * The Duke chat bot app.
+ * The Duke chat-bot app.
  */
 public class Duke {
 
@@ -27,10 +27,14 @@ public class Duke {
      * @param file Name of the saved data file.
      */
     public Duke(String directory, String file) {
+        assert directory != null : "[duke.Duke.Duke]: directory parameter should not be null.";
+        assert file != null : "[duke.Duke.Duke]: file parameter should not be null.";
+
         ui = new Ui();
         storage = new Storage(directory, file);
         parser = new Parser();
         try {
+            // Get stored data.
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showMessage(e.getMessage());
@@ -57,7 +61,7 @@ public class Duke {
         ui.showGreetings();
 
         // Get and process input.
-        String rawInput = ui.getInput();
+        String rawInput = "";
         String output = "Jak się masz? My name-a Borat. I like you.\nWhat I do for you?";
         while (isRunning) {
             // Gets user input
@@ -65,7 +69,7 @@ public class Duke {
             rawInput = ui.getInput();
             output = getResponse(rawInput);
         }
-        // Good bye message
+        // Goodbye message
         ui.showGoodBye();
     }
 
@@ -112,28 +116,31 @@ public class Duke {
                 break;
             case TODO:
                 // Adds a todo-typed task to the task list.
-                output = taskList.addItem(new Todo(inputs[1]));
+                Todo todo = new Todo(inputs[1]);
+                output = taskList.addItem(todo);
 
                 // Add to file content.
-                task = "T | 0 | " + inputs[1];
+                task = todo.savedToString();
                 storage.addToFile(task);
 
                 break;
             case DEADLINE:
                 // Adds a deadline-typed task in the task list.
-                output = taskList.addItem(new Deadline(inputs[1], inputs[2]));
+                Deadline deadline = new Deadline(inputs[1], inputs[2]);
+                output = taskList.addItem(deadline);
 
                 // Add to file content.
-                task = "D | 0 | " + inputs[1] + " | " + inputs[2];
+                task = deadline.savedToString();
                 storage.addToFile(task);
 
                 break;
             case EVENT:
                 // Adds an event-typed task in the task list.
-                output = taskList.addItem(new Event(inputs[1], inputs[2]));
+                Event event = new Event(inputs[1], inputs[2]);
+                output = taskList.addItem(event);
 
                 // Add to file content.
-                task = "E | 0 | " + inputs[1] + " | " + inputs[2];
+                task = event.savedToString();
                 storage.addToFile(task);
 
                 break;

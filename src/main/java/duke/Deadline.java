@@ -11,6 +11,9 @@ public class Deadline extends Task {
     /** The deadline date time */
     protected LocalDateTime date;
 
+    /** The save-friendly String representation of the date */
+    protected String dateString;
+
     /**
      * The Deadline constructor.
      * @param description The description of the task.
@@ -19,6 +22,16 @@ public class Deadline extends Task {
     public Deadline(String description, String date) {
         super(description);
         this.date = LocalDateTime.parse(date);
+        this.dateString = date;
+    }
+
+    /**
+     * Returns the string representation of a Deadline task in the saved file.
+     * @return The string representation of a Deadline task in the saved file.
+     */
+    public String savedToString() {
+        String doneStatus = super.isDone ? "1" : "0";
+        return "D | " + doneStatus + " | " + super.description + " | " + dateString;
     }
 
     /**
