@@ -1,7 +1,17 @@
 package duke;
 
-import duke.commands.*;
-import duke.exceptions.*;
+import duke.commands.Command;
+import duke.commands.DeadlineCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.EventCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.InvalidCommand;
+import duke.commands.ListCommand;
+import duke.commands.ToDoCommand;
+
+import duke.exceptions.DukeException;
 
 /**
  * Deals with making sense of the user command.
@@ -16,10 +26,9 @@ public class Parser {
     public Parser() {}
 
     /**
-     * Passes the full command to various helper function to check validity.
+     * Parses the full command and returns the corresponding Command type.
      *
      * The only instance method in Parser class.
-     *
      * @param fullCommand The full command.
      */
     public static Command parse(String fullCommand) {
@@ -29,7 +38,6 @@ public class Parser {
         String cmd = splitCmd[0];
 
         try {
-            //Switch statement based on initial command
             switch (cmd) {
                 case ListCommand.COMMAND_WORD:
                     return new ListCommand();

@@ -2,13 +2,14 @@ package duke;
 
 import duke.commands.DeadlineCommand;
 import duke.commands.EventCommand;
+import duke.commands.ToDoCommand;
+
 import duke.exceptions.DukeException;
+
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-import duke.task.Event;
-import duke.task.Deadline;
-
-import duke.commands.ToDoCommand;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -23,11 +24,10 @@ import java.util.Scanner;
  * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
-    private String FILEPATH;
+    private final String FILEPATH;
 
     /**
      * Constructs a Storage object.
-     *
      * @param filePath The path of saved file.
      */
     public Storage(String filePath) {
@@ -36,7 +36,6 @@ public class Storage {
 
     /**
      * Starts up the file reader, creates file if it does not exist.
-     *
      * @return TaskList New TaskList with inputs from filePath.
      * @throws DukeException
      * @throws IOException
