@@ -22,10 +22,7 @@ public class TaskDateAndTime {
     }
 
     /**
-     * Validates if the date is entered in the correct
-     * format.
-     *
-     * @return A boolean indicating if the date is valid.
+     * Parses and Stores the date in the desired format.
      */
     public void parseDateAndTime() {
         String[] userInputDate = userInputDateAndTime.split("/");

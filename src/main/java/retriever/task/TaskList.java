@@ -52,35 +52,35 @@ public class TaskList {
      */
     public int numberOfDaysInTheMonth(int month, int year) {
         switch(month) {
-            case 1:
-                // Fallthrough
-            case 3:
-                // Fallthrough
-            case 5:
-                // Fallthrough
-            case 7:
-                // Fallthrough
-            case 8:
-                // Fallthrough
-            case 10:
-                // Fallthrough
-            case 12:
-                return 31;
-            case 4:
-                // Fallthrough
-            case 6:
-                // Fallthrough
-            case 9:
-                // Fallthrough
-            case 11:
-                return 30;
-            case 2:
-                if (year % 4 == 0) {
-                    return 29;
-                }
-                return 28;
-            default:
-                return 0;
+        case 1:
+            // Fallthrough
+        case 3:
+            // Fallthrough
+        case 5:
+            // Fallthrough
+        case 7:
+            // Fallthrough
+        case 8:
+            // Fallthrough
+        case 10:
+            // Fallthrough
+        case 12:
+            return 31;
+        case 4:
+            // Fallthrough
+        case 6:
+            // Fallthrough
+        case 9:
+            // Fallthrough
+        case 11:
+            return 30;
+        case 2:
+            if (year % 4 == 0) {
+                return 29;
+            }
+            return 28;
+        default:
+            return 0;
         }
     }
 
