@@ -191,6 +191,19 @@ public class Duke extends Application {
                 } else if (input.startsWith("find")) {
                     int thingToFind = input.indexOf(" ") + 1;
                     return ui.findTasks(input.substring(thingToFind));
+                } else if (input.startsWith("help")) {
+                    String helpMessage = "Welcome to the quick help page!\n" +
+                            "Here are some examples of what you can type: \n" +
+                            "\t1) help\n" +
+                            "\t2) list\n" +
+                            "\t3) todo do homework\n" +
+                            "\t4) deadline assignment \\by 2021-09-24\n" +
+                            "\t5) event career fair \\at 2021-09-08\n" +
+                            "\t6) find homework\n" +
+                            "\t7) done 3\n" +
+                            "\t8) delete 1\n" +
+                            "\t9) bye\n";
+                    return helpMessage;
                 }
             }
             return "I don't understand. Please try again!";
