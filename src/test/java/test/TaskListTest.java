@@ -1,6 +1,7 @@
 package test;
 
 import lebron.Lebron;
+import lebron.exception.LebronException;
 import lebron.task.Task;
 import lebron.task.TaskList;
 
@@ -37,7 +38,7 @@ class TaskListTest {
     }
 
     @Test
-    void delete() {
+    void delete() throws LebronException {
         ArrayList<Task> lst = new ArrayList<Task>();
         lst.add(new TaskStub("swag"));
         TaskList taskList = new TaskList(lst, lebron);

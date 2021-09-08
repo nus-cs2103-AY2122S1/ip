@@ -90,6 +90,7 @@ public class Lebron {
                     throw new LebronException("    :( OOPS! Please specify which task you wish "
                             + "to complete.");
                 }
+                assert splitWords.length == 2 : "There should be 2 items to specify which task is done.";
                 int pos = Integer.parseInt(splitWords[1]);
                 reply = taskList.markDone(pos - 1);
                 storage.saveToFile(taskList.getLst());
@@ -99,6 +100,7 @@ public class Lebron {
                     throw new LebronException("    :( OOPS! The description of a ToDo "
                             + "cannot be empty.");
                 }
+                assert splitWords.length == 2 : "There should be 2 items to specify task and description.";
                 reply = taskList.add(new ToDo(splitWords[1]));
                 storage.saveToFile(taskList.getLst());
                 break;
@@ -107,16 +109,19 @@ public class Lebron {
                     throw new LebronException("    :( OOPS! The description of a Deadline " +
                             "cannot be empty.");
                 }
+                assert splitWords.length == 2 : "There should be 2 items to specify task and description.";
                 String[] splitBy = splitWords[1].split("/by ", 2);
                 if (splitBy.length < 2 || splitBy[1].equals("")) {
                     throw new LebronException("    :( OOPS! Please check that the '/by' keyword " +
                             "is used and that a due date and time is given.");
                 }
+                assert splitBy.length == 2 : "There should be a description and a datetime.";
                 String[] dateTimeArrDeadline = splitBy[1].split(" ", 2);
                 if (dateTimeArrDeadline.length < 2 || dateTimeArrDeadline[1].equals("")) {
                     throw new LebronException("    :( OOPS! Please check that your date and time is " +
                             "valid and formatted as 'yyyy-MM-dd' 'HHmm'.");
                 }
+                assert dateTimeArrDeadline.length == 2 : "There should be a date and time.";
                 reply = taskList.add(new Deadline(splitBy[0], dateTimeArrDeadline[0]
                         , dateTimeArrDeadline[1]));
                 storage.saveToFile(taskList.getLst());
@@ -126,16 +131,19 @@ public class Lebron {
                     throw new LebronException("    :( OOPS! The description of an Event " +
                             "cannot be empty.");
                 }
+                assert splitWords.length == 2 : "There should be 2 items to specify task and description.";
                 String[] splitAt = splitWords[1].split("/at ", 2);
                 if (splitAt.length < 2 || splitAt[1].equals("")) {
                     throw new LebronException("    :( OOPS! Please check that the '/at' keyword " +
                             "is used and that a due date is given.");
                 }
+                assert splitAt.length == 2 : "There should be a description and a datetime.";
                 String[] dateTimeArrEvent = splitAt[1].split(" ", 2);
                 if (dateTimeArrEvent.length < 2 || dateTimeArrEvent[1].equals("")) {
                     throw new LebronException("    :( OOPS! Please check that your date and time is " +
                             "valid and formatted as 'yyyy-MM-dd' 'HHmm'.");
                 }
+                assert dateTimeArrEvent.length == 2 : "There should be a date and time.";
                 reply = taskList.add(new Events(splitAt[0], dateTimeArrEvent[0], dateTimeArrEvent[1]));
                 storage.saveToFile(taskList.getLst());
 
@@ -145,6 +153,7 @@ public class Lebron {
                     throw new LebronException("    :( OOPS! Please specify which task you wish "
                             + "to delete.");
                 }
+                assert splitWords.length == 2 : "There should be 2 items to specify which task to delete.";
                 int pos2 = Integer.parseInt(splitWords[1]);
                 reply = taskList.delete(pos2 - 1);
                 storage.saveToFile(taskList.getLst());
@@ -153,6 +162,7 @@ public class Lebron {
                 if (splitWords.length < 2 || splitWords[1].equals("")) {
                     throw new LebronException("    :( OOPS! Please specify some words to search for.");
                 }
+                assert splitWords.length == 2 : "There should be 2 items to specify a string to search for.";
                 String keyword = splitWords[1];
                 reply = ui.replyFind(taskList, keyword);
                 break;
