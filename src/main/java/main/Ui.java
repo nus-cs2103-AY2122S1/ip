@@ -7,7 +7,7 @@ import exception.RandomDescription;
 import java.util.Scanner;
 
 /**
- * Handle errors and scanning for interaction with user
+ * Handle errors and scanning for interaction with user.
  */
 public class Ui {
     private Scanner scan;
@@ -23,10 +23,10 @@ public class Ui {
 
 
     /**
-     * Check whether the user input is a empty description
-     * if yes, print out error statement
+     * Check whether the user input is a empty description.
+     * if yes, print out error statement.
      *
-     * @param nextLine String input to be checked
+     * @param nextLine String input to be checked.
      */
     public String emptyDescriptionException(String nextLine) {
         String returned = "";
@@ -40,6 +40,12 @@ public class Ui {
         return returned;
     }
 
+    /**
+     * Catch empty description error and throw correct type of task error.
+     *
+     * @param nextLine String input without task description.
+     * @throws DukeException  If the description is empty.
+     */
     public void catchError(String nextLine) throws DukeException {
         if (nextLine.equals("todo")) {
             DukeException e = new EmptyDescription(nextLine);
@@ -55,14 +61,16 @@ public class Ui {
 
 
     /**
-     * Check whether the user input is a random unrelated description
-     * if yes, print out error statement
+     * Check whether the user input is a random unrelated description.
+     * if yes, print out error statement.
      *
-     * @param nextLine String input to be checked
+     * @param nextLine String input to be checked.
      */
     public String randomDescriptionException(String nextLine) {
         String returned = "";
+
         while (true) {
+
             try {
                 this.randomError(nextLine);
             } catch (DukeException e) {
@@ -70,10 +78,17 @@ public class Ui {
             } finally {
                 break;
             }
+
         }
         return returned;
     }
 
+    /**
+     * Catch random invalid description error.
+     *
+     * @param nextLine String input without task description.
+     * @throws DukeException  If the input is gibberish.
+     */
     public void randomError(String nextLine) throws DukeException {
         DukeException e = new RandomDescription(nextLine);
         throw e;

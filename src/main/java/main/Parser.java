@@ -1,27 +1,26 @@
 package main;
 
+import java.util.ArrayList;
 
 import task.Deadline;
 import task.Event;
 import task.Task;
 import task.Todo;
-import java.util.ArrayList;
 
 /**
- * Handle flow of user command
+ * Handle flow of user command.
  */
 public class Parser {
 
     public Parser() {}
 
-
     /**
-     * Read the user inputs and respond accordingly
+     * Read the user inputs and respond accordingly.
      *
-     * @param ui Ui to scan in lines
-     * @param nextLine the next line being read
-     * @param task TaskList the task used to access ArrayList of task n done_check
-     * @return the output to be given to the user
+     * @param ui Ui to scan in lines.
+     * @param nextLine the next line being read.
+     * @param task TaskList the task used to access ArrayList of task n done_check.
+     * @return the output to be given to the user.
      */
     public String readCommand(Ui ui, String nextLine, TaskList task) {
         String returned = "";
@@ -58,7 +57,7 @@ public class Parser {
             String error = ui.emptyDescriptionException(nextLine);
             if (error.equals("")) {
                 Task todo = new Todo(nextLine);
-                returned = task.addTodo(nextLine, todo);
+                returned = task.addTodo(todo);
             } else {
                 returned = error;
             }
@@ -71,7 +70,6 @@ public class Parser {
             ArrayList<String> completeList = task.getDoneCheck();
             int count = 1;
             int found = 0;
-
 
             for (int i = 0; i < taskList.size(); i++) {
                 String current_line = taskList.get(i).getTask();
@@ -87,6 +85,7 @@ public class Parser {
                     count = count + 1;
                 }
             }
+
             if (found == 0) {
                 returned = nextLine.substring(5) + " not found";
             }
@@ -97,7 +96,7 @@ public class Parser {
             String error = ui.emptyDescriptionException(nextLine);
             if (error.equals("")) {
                 Task deadline = new Deadline(nextLine);
-                returned = task.addDeadline(nextLine, deadline);
+                returned = task.addDeadline(deadline);
             } else {
                 returned = error;
             }
@@ -108,7 +107,7 @@ public class Parser {
             String error = ui.emptyDescriptionException(nextLine);
             if (error.equals("")) {
                 Task event = new Event(nextLine);
-                returned = task.addEvent(nextLine, event);
+                returned = task.addEvent(event);
             } else {
                 returned = error;
             }

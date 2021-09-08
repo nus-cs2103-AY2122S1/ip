@@ -1,8 +1,4 @@
 package main;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,18 +10,22 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
 /**
- * Handle all hard disk related operations
- * Writes and Loads file
+ * Handle all hard disk related operations.
+ * Writes and Loads file.
  */
 public class Storage {
 
-    public Storage() {
-    }
+    public Storage() {}
 
     /**
-     * Read the task list in Duke.txt
-     * Input the task into the ArrayList list and update doneCheck;
+     * Read the task list in Duke.txt.
+     * Input the task into the ArrayList list and update doneCheck.
      *
      * @param doneCheck ArrayList for checking whether task is completed.
      * @param list ArrayList for the list of tasks.
@@ -33,8 +33,11 @@ public class Storage {
      */
     public void loadTextFile(ArrayList doneCheck, ArrayList list, File file) {
         String added = "";
+
+
         try {
             Scanner sc = new Scanner(file);
+
 
             while (sc.hasNextLine()) {
                 added = sc.nextLine();
@@ -59,8 +62,10 @@ public class Storage {
                 }
             }
 
+
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
+
             try {
                 Path path = Paths.get("./data");
                 Files.createDirectories(path);
@@ -74,14 +79,15 @@ public class Storage {
 
 
     /**
-     * Check whether the relevant files for ./data/Duke.txt is created
-     * If not, create the folders
+     * Check whether the relevant files for ./data/Duke.txt is created.
+     * If not, create the folders.
      */
     public void checkFileCreation() {
         try {
             this.checkFile();
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
+
             try {
                 Path path = Paths.get("./data");
                 Files.createDirectories(path);
@@ -90,6 +96,7 @@ public class Storage {
                 System.err.println("Failed to create directory!"
                         + r.getMessage());
             }
+
         }
     }
 
@@ -103,10 +110,10 @@ public class Storage {
 
 
     /**
-     * Write the task list into Duke.txt
+     * Write the task list into Duke.txt.
      *
-     * @param list ArrayList<Task> list of tasks
-     * @param done_check ArrayList<String> to keep track of completion of tasks
+     * @param list ArrayList<Task> list of tasks.
+     * @param done_check ArrayList<String> to keep track of completion of tasks.
      */
     public static void writingToFile(ArrayList<Task> list, ArrayList<String> done_check) {
         try {

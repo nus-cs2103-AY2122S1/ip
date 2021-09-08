@@ -1,24 +1,21 @@
 package task;
 
 /**
- * Template for a task: event, deadline, todo
- * Allows users to get_type and get_task
+ * Template for a task: event, deadline, todo.
+ * Allows users to get_type and get_task.
  */
 
 public class Task {
-    public String type;
-    public String date_time;
-    public String message;
+    private String date_time;
+    private String message;
+    private String type;
 
 
-    public Task (
-            String message) {
+    public Task (String message) {
         this.message = message;
-        }
+    }
 
-    public Task (
-            String message,
-                boolean isDuke) {}
+    public Task (String message, boolean isDuke) {}
 
     public String getType() {
         return this.type;
@@ -28,10 +25,12 @@ public class Task {
         this.type = "";
     }
 
-    public void setTask() {
-    }
+    public void setTask() {}
 
-    public void setTask2() {
+    public void setTask2() {}
+
+    public String getMessage() {
+        return this.message;
     }
 
     public String getTask() {

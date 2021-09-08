@@ -1,25 +1,24 @@
 import java.io.File;
-import javafx.scene.control.Label;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
-
 import main.Parser;
 import main.Storage;
 import main.TaskList;
 import main.Ui;
 
 /**
- * Contains main and supports the whole bot system
+ * Contains main and supports the whole bot system.
  */
 public class Duke extends Application {
     private Ui ui;
@@ -35,6 +34,9 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
 
+    /**
+     * constructor for starting Duke.
+     */
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage();
@@ -137,7 +139,7 @@ public class Duke extends Application {
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
+     * @param text String containing text to add.
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
@@ -170,9 +172,6 @@ public class Duke extends Application {
     private String getResponse(String input) {
         return parser.readCommand(ui, input, tasks);
     }
-
-
-
 
 
     public static void main(String[] args) {

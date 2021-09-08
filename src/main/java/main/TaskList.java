@@ -1,17 +1,23 @@
 package main;
-import task.Task;
 
 import java.util.ArrayList;
 
+import task.Task;
+
+
 /**
- * Handle all list related operations: Add and Delete
- * Handle list and done_check
+ * Handle all list related operations: Add and Delete.
+ * Handle list and done_check.
  */
 public class TaskList {
-    ArrayList<Task> list;
-    ArrayList<String> doneCheck;
+    private ArrayList<Task> list;
+    private ArrayList<String> doneCheck;
     private int taskNumber;
 
+    /**
+     * constructor for creating a Tasklist.
+     * while initialising the doneCheck arrayList and list arrayList.
+     */
     public TaskList() {
         this.list = new ArrayList<Task>();
         this.doneCheck = new ArrayList<String>();
@@ -27,12 +33,13 @@ public class TaskList {
 
 
     /**
-     * output the current task list when user calls "list"
+     * output the current task list when user calls "list".
      */
     public String outputList() {
         int count = 1;
         String returned = null;
         returned = "Do these soon:" + "\n";
+
         for (int i = 0; i < this.list.size(); i++) {
             returned = returned + count
                     + ". ["
@@ -43,14 +50,22 @@ public class TaskList {
                                         + list.get(i).getTask() + "\n";
             count = count + 1;
         }
+
         return returned;
     }
 
+    /**
+     * Marks task as done in the Task List.
+     *
+     * @param next_line String command line inputed by user.
+     * @return the task success text to return to the user.
+     */
     public String markTaskAsDone(String next_line) {
-        String returned = "";
-        returned = returned + "Yay! you have finished this task!" + "\n";
         taskNumber = Integer.valueOf(next_line.substring(5)) - 1;
         this.doneCheck.set(taskNumber, "X");
+
+        String returned = "";
+        returned = returned + "Yay! you have finished this task!" + "\n";
         returned = returned + "["
                 + this.list.get(taskNumber).getType()
                     + "][" + doneCheck.get(taskNumber)
@@ -59,25 +74,39 @@ public class TaskList {
         return returned;
     }
 
+    /**
+     * Delete task from the Task List.
+     *
+     * @param next_line String command line inputed by user.
+     * @return the task success text to return to the user.
+     */
     public String deleteTask(String next_line) {
-        String returned = "";
         taskNumber = Integer.valueOf(next_line.substring(7));
+        this.doneCheck.remove(taskNumber - 1);
+        this.list.remove(taskNumber - 1);
+
+        String returned = "";
         returned = returned + "Congrats! You have completed this task!" + "\n";
         returned = returned + "["
                 + this.list.get(taskNumber - 1).getType()
                     + "][] "
                         + list.get(taskNumber - 1).getTask() + "\n";
-        this.doneCheck.remove(taskNumber - 1);
-        this.list.remove(taskNumber - 1);
         returned = returned + this.list.size()
                 + " more to go!! Press on!!";
         return returned;
     }
 
-    public String addTodo(String next_line, Task todo) {
-        String returned = "";
+    /**
+     * Add task type todo to the Task List.
+     *
+     * @param todo Task inputted by the user.
+     * @return the task success text to return to the user.
+     */
+    public String addTodo(Task todo) {
         this.list.add(todo);
         doneCheck.add(" ");
+
+        String returned = "";
         returned = returned + "Added the task! :)" + "\n";
         returned = returned + "["
                 + todo.getType()
@@ -89,9 +118,16 @@ public class TaskList {
         return returned;
     }
 
-    public String addDeadline(String next_line, Task deadline) {
+    /**
+     * Add task type deadline to the Task List.
+     *
+     * @param deadline Task inputted by the user.
+     * @return the task success text to return to the user.
+     */
+    public String addDeadline(Task deadline) {
         this.list.add(deadline);
         doneCheck.add(" ");
+
         String returned = "Added the task! :)" + "\n";
         returned = returned + "["
                 + deadline.getType()
@@ -103,9 +139,16 @@ public class TaskList {
         return returned;
     }
 
-    public String addEvent(String next_line, Task event) {
+    /**
+     * Add task type deadline to the Task List.
+     *
+     * @param event Task inputted by the user.
+     * @return the task success text to return to the user.
+     */
+    public String addEvent(Task event) {
         this.list.add(event);
         doneCheck.add(" ");
+
         String returned = "Added the task! :)" + "\n";
         returned = returned + "["
                 + event.getType()
