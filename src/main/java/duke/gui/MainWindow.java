@@ -51,7 +51,7 @@ public class MainWindow extends AnchorPane {
         String response = duke.getResponse(input);
 
         // Idea and code from alissayarmantho's issue
-        if (input.equals(EXIT_MESSAGE)) {
+        if (response.equals(EXIT_MESSAGE)) {
             Platform.exit();
         }
 
