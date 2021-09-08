@@ -64,6 +64,7 @@ public class TaskList {
      * @return The task added.
      */
     public Task addToDo(String description) {
+        assert !description.equals("") : "Description cannot be blank";
         Task task = new ToDo(description);
         this.list.add(task);
         return task;
@@ -76,6 +77,7 @@ public class TaskList {
      * @param isDone Indicates if the task is done.
      */
     public void addToDo(String description, boolean isDone) {
+        assert !description.equals("") : "Description cannot be blank";
         Task task = new ToDo(description, isDone);
         this.list.add(task);
     }
@@ -87,7 +89,9 @@ public class TaskList {
      * @param date The deadline of the task.
      * @return The Deadline task added.
      */
+
     public Task addDeadline(String description, LocalDate date) {
+        assert !description.equals("") : "Description cannot be blank";
         Task task = new Deadline(description, date);
         this.list.add(task);
         return task;
@@ -101,6 +105,7 @@ public class TaskList {
      * @param isDone Indicates if the task is done.
      */
     public void addDeadline(String description, LocalDate date, boolean isDone) {
+        assert !description.equals("") : "Description cannot be blank";
         Task task = new Deadline(description, date, isDone);
         this.list.add(task);
     }
@@ -171,6 +176,7 @@ public class TaskList {
      * @return An Arraylist of Strings containing all matching tasks.
      */
     public ArrayList<String> findTask(String keyword) {
+        assert !keyword.equals("") : "Keyword cannot be blank";
         ArrayList<String> resultArray = new ArrayList<>();
         keyword = keyword.toLowerCase();
 
