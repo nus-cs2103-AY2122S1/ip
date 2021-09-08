@@ -2,9 +2,7 @@ package ailurus;
 
 import ailurus.task.Task;
 import ailurus.task.TaskList;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 import java.util.Scanner;
 

@@ -5,7 +5,8 @@ import ailurus.task.Event;
 import ailurus.task.TaskList;
 import ailurus.task.Todo;
 import ailurus.task.Task;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import org.junit.jupiter.api.Test;
 
 public class AilurusTest {
