@@ -41,6 +41,7 @@ public class TaskList {
      * @return String representation of the completed task.
      */
     public String markDone(int i) {
+        assert i <= tasks.size();
         Task task = getTask(i);
         task.markDone();
         storage.save(tasks);
@@ -68,6 +69,7 @@ public class TaskList {
      * @return String representation of the deleted task.
      */
     public String removeTask(int i) {
+        assert i > 0;
         Task task = getTask(i);
         tasks.remove(i);
         storage.save(tasks);

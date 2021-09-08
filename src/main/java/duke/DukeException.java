@@ -17,6 +17,7 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
+        assert error != null;
         return this.error;
     }
 }
