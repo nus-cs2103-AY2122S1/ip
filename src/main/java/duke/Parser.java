@@ -35,6 +35,7 @@ public class Parser {
             String[] commandAndDescription = fullCommand.split(" ", 2);
             commandWord = commandAndDescription[0];
             taskDescription = commandAndDescription[1];
+            assert taskDescription != null;
         } else {
             commandWord = fullCommand;
         }
@@ -101,6 +102,7 @@ public class Parser {
         } catch (DateTimeParseException e) {
             System.out.println("OOPS! Please input date in this format: yyyy-mm-dd");
         }
+        assert command != null;
         return command;
     }
 

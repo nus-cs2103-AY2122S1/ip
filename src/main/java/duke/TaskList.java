@@ -46,9 +46,9 @@ public class TaskList {
     public void deleteTask(int taskNo) throws TaskOutOfRangeException {
         if (taskNo < 1 || taskNo > taskList.size()) {
             throw new TaskOutOfRangeException(taskList.size());
-        } else {
-            taskList.remove(taskNo - 1);
         }
+        assert (taskNo >= 1 && taskNo <= taskList.size());
+        taskList.remove(taskNo - 1);
     }
 
     /**
@@ -60,11 +60,12 @@ public class TaskList {
     public void taskDone(int taskNo) throws TaskOutOfRangeException {
         if (taskNo < 1 || taskNo > taskList.size()) {
             throw new TaskOutOfRangeException(taskList.size());
-        } else {
-            Task task = this.taskList.get(taskNo - 1);
-            task.markTaskDone();
-            taskList.set(taskNo - 1, task);
         }
+        assert (taskNo >= 1 && taskNo <= taskList.size());
+        Task task = this.taskList.get(taskNo - 1);
+        task.markTaskDone();
+        taskList.set(taskNo - 1, task);
+
     }
 
     public ArrayList<Task> findTask(String searchDescription) {

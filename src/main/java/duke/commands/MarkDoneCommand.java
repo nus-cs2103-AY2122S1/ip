@@ -18,10 +18,9 @@ public class MarkDoneCommand extends Command {
         Task task = tasks.getTask(this.taskNo - 1);
         if (task.getCompletionStatus()) {
             return ui.showTaskDone(task);
-        } else {
-            tasks.taskDone(this.taskNo);
-            storage.rewriteTaskRecord(tasks);
-            return ui.showMarkedDone(task);
         }
+        tasks.taskDone(this.taskNo);
+        storage.rewriteTaskRecord(tasks);
+        return ui.showMarkedDone(task);
     }
 }
