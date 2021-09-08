@@ -45,7 +45,7 @@ test {
 }
 
 application {
-    mainClassName = "bubbles.Bubbles"
+    mainClassName = "bubbles.Launcher"
 }
 
 shadowJar {
@@ -63,5 +63,6 @@ checkstyle {
 }
 
 run{
+    enableAssertions = true
     standardInput = System.in
 }
