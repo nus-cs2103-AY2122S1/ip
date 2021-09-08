@@ -44,4 +44,19 @@ public class ArchiveList extends DukeList {
         return "archived list";
     }
 
+    /**
+     * Unarchives Task at given index of taskArrayList.
+     *
+     * @param indexToUnarchive Index of Task to be unarchived.
+     * @param taskList taskList to add the Task to.
+     * @return Task which was unarchived.
+     */
+    public Task unarchive(int indexToUnarchive, TaskList taskList) {
+        Task toUnarchive = this.remove(indexToUnarchive);
+
+        taskList.add(toUnarchive);
+
+        return toUnarchive;
+    }
+
 }

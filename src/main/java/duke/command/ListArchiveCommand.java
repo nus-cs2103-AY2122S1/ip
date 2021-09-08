@@ -5,6 +5,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Representation for the list archive command on duke.
+ */
 public class ListArchiveCommand extends ListCommand {
     /**
      * Executes the ListArchiveCommand.

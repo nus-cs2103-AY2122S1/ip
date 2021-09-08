@@ -5,6 +5,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Representation for the remove archive command on duke.
+ */
 public class RemoveArchiveCommand extends RemoveCommand {
 
     /**

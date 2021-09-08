@@ -8,7 +8,7 @@ import duke.Ui;
 import duke.task.Task;
 
 /**
- * Representation of remove command of Duke.
+ * Representation for the remove command of Duke.
  */
 public class RemoveCommand extends Command {
 

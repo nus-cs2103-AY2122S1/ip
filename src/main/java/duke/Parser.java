@@ -10,7 +10,17 @@ import duke.command.ListArchiveCommand;
 import duke.command.ListCommand;
 import duke.command.RemoveArchiveCommand;
 import duke.command.RemoveCommand;
-import duke.exception.*;
+import duke.command.UnarchiveCommand;
+import duke.exception.DukeException;
+import duke.exception.IncompleteArchiveException;
+import duke.exception.IncompleteDeadlineException;
+import duke.exception.IncompleteDoneException;
+import duke.exception.IncompleteEventException;
+import duke.exception.IncompleteFindException;
+import duke.exception.IncompleteRemoveException;
+import duke.exception.IncompleteToDoException;
+import duke.exception.IncompleteUnarchiveException;
+import duke.exception.InvalidCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
@@ -167,6 +177,17 @@ public class Parser {
     private static boolean isArchive(String input) {
         String[] separated = input.split(" ");
         return separated[0].equals("archive");
+    }
+
+    /**
+     * Checks if input is an unarchive command.
+     *
+     * @param input Input which is being checked.
+     * @return true if input is an unarchive command.
+     */
+    private static boolean isUnarchive(String input) {
+        String[] separated = input.split(" ");
+        return separated[0].equals("unarchive");
     }
 
     /**
@@ -373,8 +394,34 @@ public class Parser {
             return parseEventCommand(userInput);
         } else if (Parser.isArchive(userInput)) {
             return parseArchiveCommand(userInput, taskList);
+        } else if (Parser.isUnarchive(userInput)) {
+            return parseUnarchiveCommand(userInput, archiveList);
         } else {
             throw new InvalidCommandException();
+        }
+    }
+
+    /**
+     * Parses the command string into an ArchiveCommand which archives a task.
+     *
+     * @param userInput Command which user entered.
+     * @param archiveList list which Task would be unarchived.
+     * @return An UnarchiveCommand which unarchives a task.
+     * @throws IncompleteUnarchiveException If insufficient or invalid values are passed in.
+     */
+    private static Command parseUnarchiveCommand(String userInput, ArchiveList archiveList) throws IncompleteUnarchiveException {
+        String[] separated = userInput.split(" ");
+
+        if (separated.length == 1) {
+            throw new IncompleteUnarchiveException();
+        }
+
+        if (isPositiveInteger(separated[1]) && !isOutOfRange(archiveList, separated[1])) {
+            return new UnarchiveCommand(Integer.valueOf(separated[1]) - 1);
+        } else if (isAll(separated[1])) {
+            return new UnarchiveCommand(-1);
+        } else {
+            throw new IncompleteUnarchiveException();
         }
     }
 
@@ -401,9 +448,9 @@ public class Parser {
      * @param userInput Command which user entered.
      * @param taskList list which Task would be archived.
      * @return An ArchiveCommand which archives a task.
-     * @throws DukeException If insufficient or invalid values are passed in.
+     * @throws IncompleteArchiveException If insufficient or invalid values are passed in.
      */
-    private static ArchiveCommand parseArchiveCommand(String userInput, TaskList taskList) throws DukeException {
+    private static ArchiveCommand parseArchiveCommand(String userInput, TaskList taskList) throws IncompleteArchiveException {
         String[] separated = userInput.split(" ");
 
         if (separated.length == 1) {

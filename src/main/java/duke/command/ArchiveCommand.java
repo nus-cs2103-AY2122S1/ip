@@ -6,6 +6,9 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
+/**
+ * Representation for the Archive Command of Duke.
+ */
 public class ArchiveCommand extends Command {
     private final int indexToArchive;
     private final boolean isArchiveAll;

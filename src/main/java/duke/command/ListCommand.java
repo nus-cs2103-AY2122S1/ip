@@ -6,7 +6,7 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * Representation of the list command of Duke.
+ * Representation for the list command of Duke.
  */
 public class ListCommand extends Command {
 
