@@ -287,19 +287,36 @@ public class TaskList {
         ui.printTasksFoundByKeyword(matchingTasks);
     }
 
+    /**
+     * Returns the number of days present in the month
+     * entered by the user.
+     *
+     * @param month The month entered by the user as an integer.
+     * @param year The year entered by the user, used for detecting leap years.
+     * @return The number of days present in the month entered.
+     */
     public int numberOfDaysInTheMonth(int month, int year) {
         switch(month) {
         case 1:
+            // Fallthrough
         case 3:
+            // Fallthrough
         case 5:
+            // Fallthrough
         case 7:
+            // Fallthrough
         case 8:
+            // Fallthrough
         case 10:
+            // Fallthrough
         case 12:
             return 31;
         case 4:
+            // Fallthrough
         case 6:
+            // Fallthrough
         case 9:
+            // Fallthrough
         case 11:
             return 30;
         case 2:
@@ -312,6 +329,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns a boolean suggesting whether the entered date
+     * is valid or not.
+     *
+     * @param enteredDate The date entered by the user.
+     * @return A boolean, true, if the date is valid.
+     */
     public boolean isDateRangeValid(String[] enteredDate) {
         int enteredDay = Integer.parseInt(enteredDate[0]);
         int enteredMonth = Integer.parseInt(enteredDate[1]);
@@ -323,6 +347,13 @@ public class TaskList {
         return isValidMonth && isValidDay;
     }
 
+    /**
+     * Returns a boolean, suggesting whether the format for viewing a
+     * schedule is followed or not.
+     *
+     * @param parsedUserInput The command entered by the user, to be checked.
+     * @return A boolean, true, if the command for viewing the schedule is formatted well.
+     */
     public boolean isViewScheduleFormatCorrect(String[] parsedUserInput) {
         boolean hasDate = parsedUserInput.length == 2;
         if(!hasDate) {
@@ -339,9 +370,15 @@ public class TaskList {
         return isDateValid;
     }
 
+    /**
+     * Finds tasks with the same due date as the date entered, and prints them.
+     *
+     * @param parsedUserInput The parsed command, entered by the user with the "view" keyword.
+     * @throws RetrieverException If the command entered is not formatted well.
+     */
     public void viewScheduleForAParticularDay(String[] parsedUserInput) throws RetrieverException {
         if(!isViewScheduleFormatCorrect(parsedUserInput)) {
-            throw new IllegalCommandException("Please Follow The Specified Format: view DD/MM/YYYY");
+            throw new RetrieverException("Please Follow The Specified Format: view DD/MM/YYYY");
         }
 
         TaskDateAndTime enteredDate = new TaskDateAndTime(parsedUserInput[1]);
