@@ -5,21 +5,21 @@ package duke;
  *
  * @author Sherman Ng Wei Sheng
  */
-public class ExitCommand extends Command {
-    private static String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
+public class HelpCommand extends Command {
+    private static final String FILE_NAME = "documentation.txt";
     private final boolean isExit;
 
     /**
      * Constructor for the exit command.
      */
-    public ExitCommand() {
-        this.isExit = true;
+    public HelpCommand() {
+        this.isExit = false;
     }
 
     /**
      * Returns true if the command is a programme terminating command, in this case, this is a terminating command.
      *
-     * @return True.
+     * @return True if it is a terminating command and false otherwise.
      */
     @Override
     public boolean isAExitCommand() {
@@ -36,9 +36,8 @@ public class ExitCommand extends Command {
      * @throws StorageSavingException If exception encountered when storing the list.
      */
     @Override
-    public String execute(TaskList list, Ui ui, Storage storage) throws StorageSavingException {
-        ui.closeScanner();
-        storage.saveDukeData(list.convertToStorageString());
-        return ui.printAndReturnMessage(MESSAGE_EXIT);
+    public String execute(TaskList list, Ui ui, Storage storage) throws StorageLoadingException {
+        String data = storage.loadTextFileData(FILE_NAME);
+        return ui.printAndReturnMessage(data);
     }
 }

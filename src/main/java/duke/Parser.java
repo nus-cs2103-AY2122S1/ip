@@ -50,6 +50,9 @@ public class Parser {
             String keyword = getKeyword(input);
             return new FindCommand(keyword);
         }
+        if (input.equals("help")) {
+            return new HelpCommand();
+        }
         throw new UnknownCommandException();
     }
     private static int getTaskToBeMarkedDoneIndex(String input) throws IllegalFormatException {
