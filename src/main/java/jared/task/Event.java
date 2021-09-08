@@ -62,4 +62,23 @@ public class Event extends Task {
         assert res != null;
         return res;
     }
+
+    public LocalDate getDate() {
+        return this.date;
+    }
+
+    @Override
+    public int compareTo(Task t) {
+        if (t instanceof Deadline) {
+            Deadline deadlineTask = (Deadline) t;
+            return this.date.compareTo(deadlineTask.getDate());
+        } else if (t instanceof Event) {
+            Event eventTask = (Event) t;
+            return this.date.compareTo(eventTask.getDate());
+        } else if (t instanceof Todo) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
 }

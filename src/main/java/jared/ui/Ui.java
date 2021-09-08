@@ -54,6 +54,8 @@ public class Ui {
                 return tasks.delete(input);
             } else if (command.equals("find")) {
                 return tasks.find(input);
+            } else if (command.equals("sort")) {
+                return tasks.sort();
             } else {
                 return tasks.add(command, input);
             }

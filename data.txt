@@ -4,3 +4,6 @@ D _ 0 _ return book _ 2020-12-23
 T _ 0 _ exercise
 T _ 0 _ return book
 T _ 0 _ buy food
+E _ 0 _ project meeting _ 2020-12-13 _ 15:00
+D _ 0 _ project meeting _ 2020-12-13 _ 13:00
+E _ 0 _ project meeting _ 2020-12-11

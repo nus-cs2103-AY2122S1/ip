@@ -139,9 +139,9 @@ public class Storage {
      * @throws DukeException if progress data is invalid
      */
     public boolean isDone(String progressData) throws DukeException {
-        if (progressData == "1") {
+        if (progressData.equals("1")) {
             return true;
-        } else if (progressData == "0") {
+        } else if (progressData.equals("0")) {
             return false;
         } else {
             throw new DukeException("Data invalid");

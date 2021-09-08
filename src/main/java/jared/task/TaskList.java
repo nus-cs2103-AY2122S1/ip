@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import jared.common.DukeException;
 import jared.storage.Storage;
@@ -115,15 +116,15 @@ public class TaskList {
 
     /**
      * Marks the specified task as done.
-     * @param next Full user input string.
+     * @param fullCommand Full user input string.
      * @throws DukeException If task is invalid.
      */
-    public String done(String next) throws DukeException {
+    public String done(String fullCommand) throws DukeException {
         int taskNum;
         Task currTask;
 
         try {
-            taskNum = Integer.valueOf(next.split(" ", 2)[1]);
+            taskNum = Integer.valueOf(fullCommand.split(" ", 2)[1]);
             currTask = tasks.get(taskNum - 1);
         } catch (Exception e) {
             throw new DukeException("Invalid task number provided.");
@@ -139,15 +140,15 @@ public class TaskList {
 
     /**
      * Deletes task from list.
-     * @param next Full user input string.
+     * @param fullCommand Full user input string.
      * @throws DukeException If task is invalid.
      */
-    public String delete(String next) throws DukeException {
+    public String delete(String fullCommand) throws DukeException {
         int taskNum;
         Task currTask;
         int index;
         try {
-            taskNum = Integer.valueOf(next.split(" ", 2)[1]);
+            taskNum = Integer.valueOf(fullCommand.split(" ", 2)[1]);
             index = taskNum - 1;
             currTask = tasks.get(index);
         } catch (Exception e) {
@@ -176,10 +177,10 @@ public class TaskList {
 
     /**
      * Finds the task from keyword.
-     * @param next User input string.
+     * @param fullCommand User input string.
      */
-    public String find(String next) {
-        String word = next.split(" ")[1];
+    public String find(String fullCommand) {
+        String word = fullCommand.split(" ")[1];
         ArrayList<Task> matchedTasks = new ArrayList<>();
         String findMessage = "Here are the matching tasks in your list:\n";
 
@@ -189,5 +190,13 @@ public class TaskList {
             }
         }
         return (findMessage + listTasks(matchedTasks));
+    }
+
+    /**
+     * Sorts existing tasks by date
+     */
+    public String sort() {
+        Collections.sort(this.tasks);
+        return listTasks(this.tasks);
     }
 }
