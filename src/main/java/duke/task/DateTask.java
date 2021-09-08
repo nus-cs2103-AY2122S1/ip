@@ -37,6 +37,7 @@ public abstract class DateTask extends Task {
         } catch (DateTimeParseException e) {
             throw new DukeException("Oops!!! Date should be in this format: dd/MM/yyyy");
         }
+        assert date != null;
     }
 
     /**
