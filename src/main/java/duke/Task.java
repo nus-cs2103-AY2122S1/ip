@@ -29,7 +29,7 @@ public class Task {
      */
 
     public String printName() {
-        String completionStatus = completed? COMPLETED: UNCOMPLETED;
+        String completionStatus = completed ? COMPLETED : UNCOMPLETED;
         return completionStatus + " " + this.name;
     }
 
