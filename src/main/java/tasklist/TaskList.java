@@ -205,11 +205,37 @@ public class TaskList {
         if (this.descriptionInvalid(inputArr)) {
             throw new DescriptionException("todo");
         }
+
+        // -1 indicates there are no tags in the command
+        int tagStart = Parser.getTagsStart(inputArr);
+
+        String[] descriptionArray;
+        if (tagStart == -1) {
+            descriptionArray = Arrays.copyOfRange(inputArr, 1, inputArr.length);
+        } else {
+            descriptionArray = Arrays.copyOfRange(inputArr, 1, tagStart);
+        }
+        String description = String.join(" ", descriptionArray);
+        Todo todoTask = new Todo(description);
+
+        if (tagStart != -1) {
+            for (int j = tagStart; j < inputArr.length; j++) {
+                Parser.addTag(todoTask, inputArr[j]);
+            }
+        }
+
+        this.taskList.add(todoTask);
+        return messages.taskAddMessageGui(todoTask.toString(), this.taskList.size());
+        /*
+        if (this.descriptionInvalid(inputArr)) {
+            throw new DescriptionException("todo");
+        }
         String[] descriptionArray = Arrays.copyOfRange(inputArr, 1, inputArr.length);
         String description = String.join(" ", descriptionArray);
         Todo todoTask = new Todo(description);
         this.taskList.add(todoTask);
         return messages.taskAddMessageGui(todoTask.toString(), this.taskList.size());
+         */
     }
 
     /**
@@ -259,6 +285,34 @@ public class TaskList {
             throw new DescriptionException("deadline");
         }
 
+        int commandIndex = Parser.getCommandIndex(inputArr, "/by");
+        if (commandIndex == -1) {
+            throw new CommandException("deadline", "/by");
+        } else if (commandIndex == 1) {
+            throw new DescriptionException("deadline");
+        }
+        int tagStart = Parser.getTagsStart(inputArr);
+        String description = Parser.getDescription(inputArr, commandIndex);
+
+        try {
+            LocalDate by = LocalDate.parse(inputArr[commandIndex + 1]);
+            Deadline deadlineTask = new Deadline(description, by);
+            Parser.addTags(deadlineTask, inputArr, tagStart);
+            this.taskList.add(deadlineTask);
+            return messages.taskAddMessageGui(deadlineTask.toString(),
+                    this.taskList.size());
+        } catch (DateTimeParseException e) {
+            return messages.wrongDateInputMessageGui();
+        } catch (Exception e) {
+            return messages.displayTextGui("Need to have a yyyy-mm-dd after /by and # " +
+                    "should not come before yyyy-mm-dd");
+        }
+
+        /*
+        if (this.descriptionInvalid(inputArr)) {
+            throw new DescriptionException("deadline");
+        }
+
         boolean commandAbsent = true;
         int commandIndex = 1;
         for (int i = 0; i < inputArr.length; i++) {
@@ -300,6 +354,7 @@ public class TaskList {
         } catch (DukeException e) {
             return messages.displayTextGui(e.toString());
         }
+        */
     }
 
     /**
@@ -359,6 +414,49 @@ public class TaskList {
      * @throws CommandException if "/at" is absent from input.
      */
     public String addEventGui(String[] inputArr) throws DescriptionException, CommandException {
+
+        if (this.descriptionInvalid(inputArr)) {
+            throw new DescriptionException("event");
+        }
+
+        int commandIndex = Parser.getCommandIndex(inputArr, "/at");
+        if (commandIndex == -1) {
+            throw new CommandException("event", "/at");
+        } else if (commandIndex == 1) {
+            throw new DescriptionException("event");
+        }
+
+        int tagStart = Parser.getTagsStart(inputArr);
+        String description = Parser.getDescription(inputArr, commandIndex);
+
+        try {
+            String at;
+            if ((tagStart > commandIndex) && (commandIndex + 1 != inputArr.length)) {
+                String[] atArray = Arrays.copyOfRange(inputArr, commandIndex + 1, tagStart);
+                at = String.join(" ", atArray);
+            } else if (tagStart == -1 && (commandIndex + 1 != inputArr.length)) {
+                String[] atArray = Arrays.copyOfRange(inputArr, commandIndex + 1, inputArr.length);
+                at = String.join(" ", atArray);
+            } else if ((tagStart < commandIndex) && (commandIndex + 1 != inputArr.length)) {
+                System.out.println(commandIndex);
+                System.out.println(inputArr.length);
+                throw new DukeException("Tags must be after your /at location!");
+            } else {
+                throw new DukeException("NO LOCATION DATA INPUT");
+            }
+            Event eventTask = new Event(description, at);
+            if (tagStart > commandIndex) {
+                Parser.addTags(eventTask, inputArr, tagStart);
+            }
+            this.taskList.add(eventTask);
+            return messages.taskAddMessageGui(eventTask.toString(), this.taskList.size());
+        } catch (DukeException e) {
+            return messages.displayTextGui(e.toString());
+        }
+
+
+
+        /*
         if (this.descriptionInvalid(inputArr)) {
             throw new DescriptionException("event");
         }
@@ -393,6 +491,8 @@ public class TaskList {
         Event eventTask = new Event(description, at);
         this.taskList.add(eventTask);
         return messages.taskAddMessageGui(eventTask.toString(), this.taskList.size());
+
+         */
     }
 
     /**
