@@ -48,6 +48,8 @@ public class MainWindow extends AnchorPane {
         this.defaultFont = new Font("Arial", 15);
         sendButton.setFont(defaultFont);
         userInput.setFont(defaultFont);
+        assert this.defaultFont.equals(new Font("Arial", 15))
+                : "font must be set to prevent rubbish being printed";
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(Ui.intro(), dukeImage)
@@ -70,7 +72,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        assert !input.equals(null) : "user input should not be null";
         String response = duke.getResponse(input);
+        assert !response.equals(null) : "system response should not be null";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
