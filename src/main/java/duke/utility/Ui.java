@@ -2,10 +2,9 @@ package duke.utility;
 
 public class Ui {
 
+    public static final String WELCOME_MESSAGE = "Hello I'm Duke!\nWhat can I do for you?";
     private Parser parser;
 
-    public Ui() {
-    }
 
     /**
      * Starts listening for commands from the user.
@@ -14,10 +13,8 @@ public class Ui {
      */
     public void startListening(TaskList tasks, Storage storage) {
         this.parser = new Parser(tasks, storage);
-
-        String welcomeMessage = "Hello I'm Duke!\nWhat can I do for you?";
-        // TODO print welcome message
     }
+
 
     /**
      * Receives input from user and sends it to the parser to parse

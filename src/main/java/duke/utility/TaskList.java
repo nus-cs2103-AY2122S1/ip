@@ -15,24 +15,32 @@ import duke.task.Task;
 
 public class TaskList {
 
+    public static final int MAX_NUMBER_OF_TASKS = 100;
+    public static final String DUPLICATE_TASK_MESSAGE = "Task already in list!";
+    public static final String TASK_ALREADY_COMPLETE_MESSAGE = "Task is already complete!!";
+    public static final String MISSING_SEARCH_KEYWORD_MESSAGE = "Please enter some keywords to search for!";
+    public static final String NO_SUCH_TASK_MESSAGE = "No tasks found containing the keyword(s) ";
+    public static final String EMPTY_LIST_MESSAGE = "There are no items in your list!";
     protected final HashSet<String> existingTasks;
     private final List<Task> tasks;
 
+
     /**
-     * Creates a new tasklist object with a capacity of 100 and a hashset to track tasks that are already in the list
+     * Creates a new taskList object with a capacity of 100 and a hashset to track tasks that are already in the list
      */
     public TaskList() {
-        this.tasks = new ArrayList<Task>(100);
+        this.tasks = new ArrayList<Task>(MAX_NUMBER_OF_TASKS);
         this.existingTasks = new HashSet<String>();
     }
 
+
     /**
-     * Adds tasks from a provided list of tasks to this tasklist. Used in conjunction with
+     * Adds tasks from a provided list of tasks to this taskList. Used in conjunction with
      * {@link duke.utility.Storage} for loading from previously saved task logs
-     * @param previousTasks a list of tasks to add to this tasklist
+     * @param previousTasks a list of tasks to add to this taskList
      */
     public TaskList(List<Task> previousTasks) {
-        this.tasks = new ArrayList<Task>(100);
+        this.tasks = new ArrayList<Task>(MAX_NUMBER_OF_TASKS);
         this.existingTasks = new HashSet<String>();
         for (Task previousTask : previousTasks) {
             this.tasks.add(previousTask);
@@ -40,59 +48,42 @@ public class TaskList {
         }
     }
 
-    protected String add(Task task) {
-        assert !this.existingTasks.contains(task.getTaskName()) : "duplicate task";
+
+    protected String add(Task task) throws DukeException.DuplicateTaskException {
+        if (this.existingTasks.contains(task.getTaskName())) {
+            throw new DukeException.DuplicateTaskException(DUPLICATE_TASK_MESSAGE);
+        }
         this.tasks.add(task);
         this.existingTasks.add(task.getTaskName());
         return String.format("New task added to list:\n%s", task);
     }
 
+
     protected String markAsCompleted(String taskName) throws DukeException.TaskAlreadyCompleteException,
             DukeException.NoSuchTaskException {
         assert this.existingTasks.contains(taskName): "task to delete does not exist";
-        int taskIdx = this.getTaskIndex(taskName);
-        Task completedTask = this.tasks.get(taskIdx);
+        int taskIndex = this.getTaskIndex(taskName);
+        Task completedTask = this.tasks.get(taskIndex);
         if (completedTask.getIsCompleted()) {
-            throw new DukeException.TaskAlreadyCompleteException("Task is already complete!!");
+            throw new DukeException.TaskAlreadyCompleteException(TASK_ALREADY_COMPLETE_MESSAGE);
         }
-        this.tasks.remove(taskIdx);
-        this.tasks.add(taskIdx, completedTask.markAsCompleted());
-        return "Task marked as completed:\n" + this.tasks.get(taskIdx).toString();
+        this.tasks.remove(taskIndex);
+        this.tasks.add(taskIndex, completedTask.markAsCompleted());
+        return String.format("Task marked as completed:\n%s", this.tasks.get(taskIndex));
     }
+
 
     protected String deleteTask(int taskNum) throws DukeException.InvalidTaskNumException {
         assert taskNum > 0 && taskNum <= this.tasks.size() : "invalid task number";
         if (taskNum > this.tasks.size() || taskNum < 1) {
             throw new DukeException.InvalidTaskNumException("Task number " + taskNum + " does not exist!");
-        } else {
-            Task toRemove = this.tasks.get(taskNum - 1);
-            this.tasks.remove(taskNum - 1);
-            this.existingTasks.remove(toRemove.getTaskName());
-            return "Successfully deleted:\n" + toRemove;
         }
+        Task toRemove = this.tasks.get(taskNum - 1);
+        this.tasks.remove(taskNum - 1);
+        this.existingTasks.remove(toRemove.getTaskName());
+        return String.format("Successfully deleted:\n%s", toRemove);
     }
 
-    /**
-     * Aggregates all the tasks in the list and presents it neatly to output to the user.
-     * @return all the tasks currently in the list as a <code>String</code> representation.
-     * @throws DukeException.EmptyTaskListException if the taskList currently contains no tasks.
-     */
-    public String getAllTasks() throws DukeException.EmptyTaskListException {
-        StringBuilder sb = new StringBuilder();
-        if (this.tasks.size() == 0) {
-            throw new DukeException.EmptyTaskListException("There are no items in your list!");
-        }
-        sb.append("Your list contains:\n");
-        for (int i = 0; i < this.tasks.size(); i++) {
-            String itemNum = i + 1 + ". ";
-            sb.append(itemNum);
-            sb.append(this.tasks.get(i).toString());
-            if (i < this.tasks.size() - 1) {
-                sb.append("\n");
-            }
-        }
-        return sb.toString();
-    }
 
     protected int getTaskIndex(String taskName) throws DukeException.NoSuchTaskException {
         assert this.existingTasks.contains(taskName) : "task does not exist";
@@ -107,29 +98,52 @@ public class TaskList {
         throw new DukeException.NoSuchTaskException("Task is not in list!");
     }
 
-    protected String search(String keywords) throws DukeException.InvalidTaskDescriptionException,
+
+    protected String searchTasks(String keywords) throws DukeException.InvalidTaskDescriptionException,
             DukeException.NoSuchTaskException {
         if (keywords.equals("")) {
-            throw new DukeException.InvalidTaskDescriptionException("Please enter some keywords to search for!");
-        } else {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < this.tasks.size(); i++) {
-                String taskName = this.tasks.get(i).getTaskName();
-                if (taskName.contains(keywords)) {
-                    if (sb.length() != 0) {
-                        sb.append("\n");
-                    }
-                    sb.append(i + 1);
-                    sb.append(". ");
-                    sb.append(this.tasks.get(i).toString());
+            throw new DukeException.InvalidTaskDescriptionException(MISSING_SEARCH_KEYWORD_MESSAGE);
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < this.tasks.size(); i++) {
+            String taskName = this.tasks.get(i).getTaskName();
+            if (taskName.contains(keywords)) {
+                if (sb.length() != 0) {
+                    sb.append("\n");
                 }
-            }
-            if (sb.length() == 0) {
-                throw new DukeException.NoSuchTaskException(String.format("No tasks found containing the keyword(s) "
-                        + "\"%s\"", keywords));
-            } else {
-                return String.format("Tasks found with names containing \"%s\" as a substring:\n", keywords) + sb;
+                sb.append(i + 1);
+                sb.append(". ");
+                sb.append(this.tasks.get(i).toString());
             }
         }
+
+        if (sb.length() == 0) {
+            throw new DukeException.NoSuchTaskException(String.format(NO_SUCH_TASK_MESSAGE + "\"%s\"", keywords));
+        }
+
+        return String.format("Tasks found with names containing \"%s\" as a substring:\n", keywords) + sb;
+    }
+
+    /**
+     * Aggregates all the tasks in the list and presents it neatly to output to the user.
+     * @return all the tasks currently in the list as a <code>String</code> representation.
+     * @throws DukeException.EmptyTaskListException if the taskList currently contains no tasks.
+     */
+    String getAllTasks() throws DukeException.EmptyTaskListException {
+        StringBuilder sb = new StringBuilder();
+        if (this.tasks.size() == 0) {
+            throw new DukeException.EmptyTaskListException(EMPTY_LIST_MESSAGE);
+        }
+        sb.append("Your list contains:\n");
+        for (int i = 0; i < this.tasks.size(); i++) {
+            String itemNum = i + 1 + ". ";
+            sb.append(itemNum);
+            sb.append(this.tasks.get(i).toString());
+            if (i < this.tasks.size() - 1) {
+                sb.append("\n");
+            }
+        }
+        return sb.toString();
     }
 }

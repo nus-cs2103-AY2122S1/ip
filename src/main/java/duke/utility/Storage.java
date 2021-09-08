@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -23,7 +22,14 @@ import duke.task.ToDo;
 
 public class Storage {
 
+    enum EditTaskLogOperations {
+        MARK_AS_COMPLETED,
+        DELETE
+    }
+
     private final String filePath;
+    private String storageLoadStatusMessage = null;
+
 
     /**
      * Creates a link to a locally saved task log or creates a new file for future logging of tasks.
@@ -35,13 +41,14 @@ public class Storage {
         this.filePath = filePath;
         // try to load the file, if not, create it
         File previousLog = new File(this.filePath);
-        if (!previousLog.createNewFile()) { // file already exists
-            System.out.println("Successfully established connection with file " + filePath
+        boolean newFileCreated = previousLog.createNewFile();
+        if (newFileCreated) { // file already exists
+            this.storageLoadStatusMessage = "Specified file not found.\nNew file created: " + filePath
+                    + "\nTask log will be saved there.";
+        } else { // file already exists
+            this.storageLoadStatusMessage = "Successfully established connection with file " + filePath
                     + "\nPrevious duke.task log imported."
-                    + "\nAll changes to task log will be saved there.");
-        } else { // new file is created
-            System.out.println("Specified file not found.\nNew file created: " + filePath
-                    + "\nTask log will be saved there.");
+                    + "\nAll changes to task log will be saved there.";
         }
     }
 
@@ -52,54 +59,61 @@ public class Storage {
      * be created.
      */
     public List<Task> loadPreviousTasks() throws FileNotFoundException {
-        List<Task> prevTasks = new ArrayList<Task>();
+        List<Task> previousTasks = new ArrayList<Task>();
         Scanner sc = new Scanner(new File(this.filePath));
         while (sc.hasNextLine()) {
-            String task = sc.nextLine();
-            String[] tokens = task.split(";");
-            System.out.println(Arrays.toString(tokens));
-            boolean isCompleted = tokens[1].equals("T");
+            String entry = sc.nextLine();
+            String[] tokens = entry.split(";");
+            boolean isCompleted = tokens[1].equals("<T>");
             String taskName = tokens[2];
             // format: duke.task type | isCompleted | event name | date/time
             switch (tokens[0]) {
             case "T":
-                prevTasks.add(ToDo.createTask(taskName, isCompleted));
+                previousTasks.add(ToDo.createTask(taskName, isCompleted));
                 break;
             case "E":
-                prevTasks.add(Event.createTask(taskName, isCompleted, LocalDateTime.parse(tokens[3].trim(),
+                previousTasks.add(Event.createTask(taskName, isCompleted, LocalDateTime.parse(tokens[3].trim(),
                         DateTimeFormatter.ISO_LOCAL_DATE_TIME)));
                 break;
             default: // "D"
                 assert tokens[0].equals("D"): "invalid task type in tasklog";
-                prevTasks.add(Deadline.createTask(taskName, isCompleted, LocalDateTime.parse(tokens[3].trim(),
+                previousTasks.add(Deadline.createTask(taskName, isCompleted, LocalDateTime.parse(tokens[3].trim(),
                         DateTimeFormatter.ISO_LOCAL_DATE_TIME)));
                 break;
             };
         }
-        return prevTasks;
+        return previousTasks;
     }
 
-    void append(String e, String f, String taskName, String dateTime) throws IOException {
-        this.append(e, f, taskName + ";" + dateTime);
-    }
 
-    void append(String type, String isCompleted, String detail) throws IOException {
-        assert isCompleted.equals("T") || isCompleted.equals("F") : "Invalid task completion status";
+    void append(String taskType, String isCompleted, String detail) throws IOException {
+        assert isCompleted.equals("<T>") || isCompleted.equals("<F>") : "Invalid task completion status";
         FileWriter fw = new FileWriter(this.filePath, true); // append flag true -> append, not overwrite
-        fw.write(type + ";" + isCompleted + ";" + detail + "\n");
+        fw.write(taskType + ";" + isCompleted + ";" + detail + "\n");
         fw.close();
     }
 
-    void changeTaskLogToCompleted(int lineNum) throws IOException {
+
+    void append(String taskType, String isCompleted, String taskName, String dateTime) throws IOException {
+        this.append(taskType, isCompleted, taskName + ";" + dateTime);
+    }
+
+
+    void modifyExistingLog(int lineToChange, EditTaskLogOperations operation) throws IOException {
         int currentLine = 0;
         Scanner sc = new Scanner(new File(this.filePath));
         StringBuilder sb = new StringBuilder();
-        while (sc.hasNextLine()) { // read the entire file except the line to change, which is ignored
+        while (sc.hasNextLine()) {
             String entry = sc.nextLine();
-            if (currentLine != lineNum) { // line to be modified
+            if (currentLine != lineToChange) {
                 sb.append(entry);
             } else { // generate new entry
-                sb.append(entry.replaceAll(";F;", ";T;"));
+                if (operation == EditTaskLogOperations.MARK_AS_COMPLETED) {
+                    sb.append(entry.replaceAll(";<F>;", ";<T>;"));
+                } else if (operation == EditTaskLogOperations.DELETE) {
+                    currentLine++;
+                    continue;
+                }
             }
             sb.append("\n");
             currentLine++;
@@ -110,21 +124,8 @@ public class Storage {
         sc.close();
     }
 
-    void deleteTaskLogEntry(int lineIdx) throws IOException {
-        int currentLine = 0;
-        Scanner sc = new Scanner(new File(this.filePath));
-        StringBuilder sb = new StringBuilder();
-        while (sc.hasNextLine()) { // read the entire file except the line to change, which would be ignored
-            String entry = sc.nextLine();
-            if (currentLine != lineIdx) { // line to be modified
-                sb.append(entry);
-                sb.append("\n");
-            }
-            currentLine++;
-        }
-        FileWriter fw = new FileWriter(this.filePath, false); // append false -> overwrite file
-        fw.write(sb.toString());
-        fw.close();
-        sc.close();
+
+    public String getStorageLoadStatusMessage() {
+        return this.storageLoadStatusMessage;
     }
 }

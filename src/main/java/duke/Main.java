@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import duke.utility.Ui;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -28,23 +29,26 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+
             filePath = this.getFilePath().toAbsolutePath().toString();
             this.duke = new Duke(filePath);
+
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             duke.run();
-            stage.show();
-            
+            this.sendMessageToUser(this.duke.getStorageStatusMessage());
+            this.sendMessageToUser(Ui.WELCOME_MESSAGE);
+            stage.show() 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
+
     private Path getFilePath() {
-        String userHome = System.getProperty("user.dir");
-        return Paths.get(userHome, "taskLog.txt");
+        String userDir = System.getProperty("user.dir");
+        return Paths.get(userDir, "taskLog.txt");
     }
 
-    public void sendMessageToUser(String message) {
+    private void sendMessageToUser(String message) {
         this.fxmlLoader.<MainWindow>getController().sendMessageToUser(message);
     }
 }
