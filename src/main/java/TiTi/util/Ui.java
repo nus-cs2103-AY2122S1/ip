@@ -9,11 +9,11 @@ import java.util.Scanner;
  * Prints to the user interface.
  */
 public class Ui {
-    private static final String STARTER_NORMAL =   "   (=^ ･ｪ･^=) < ";
-    private static final String STARTER_BUFFER =   "                ";
-    private static final String STARTER_SLEEPY =   "   (=^ ‐ｪ‐^=) < ";
-    private static final String STARTER_CONFUSED = "   (=^ ･x･^=)? < ";
-    private static final String STARTER_HAPPY =    "   (=^ ･ω･^=)❀ < ";
+    private static final String STARTER_NORMAL =   "(=^ ･ｪ･^=) < ";
+    private static final String STARTER_BUFFER =   "       ";
+    private static final String STARTER_SLEEPY =   "(=^ ‐ｪ‐^=) < ";
+    private static final String STARTER_CONFUSED = "(=^ ･x･^=)? < ";
+    private static final String STARTER_HAPPY =    "(=^ ･ω･^=)❀ < ";
 
     private SavedHistory savedHistory;
     private TaskList taskList;
@@ -39,9 +39,15 @@ public class Ui {
      * Prints Welcome message when user first run programme.
      */
     public void welcome() {
-        System.out.println(STARTER_NORMAL + "Hello! I'm TiTi~ ");
-        System.out.println(STARTER_BUFFER + "What would you like to do nya? ");
+        System.out.println(welcomeMessage());
     }
+
+    public String welcomeMessage() {
+        return STARTER_NORMAL + "Hello! I'm TiTi~ \n" +
+                STARTER_BUFFER + "What would you like to do nya? \n";
+    }
+
+
 
     /**
      * Return false if programme has terminated. True if otherwise.
@@ -52,86 +58,94 @@ public class Ui {
         return isContinue;
     }
 
+
+    public void UserCommand() {
+        String input = sc.nextLine();
+        System.out.println(getResponse(input));
+    }
+
     /**
      * Prints the response for the user command onto the user interface.
      */
-    public void userCommand() {
-        String input = sc.nextLine();
+    public String getResponse(String input) {
         Response response = parser.cue(input);
         TaskList tempTaskList = response.taskList;
+        String result = "";
 
         switch(response.cue) {
         case EXIT:
-            System.out.println(STARTER_SLEEPY + "Already done? Come back again soon nya~");
+            result += STARTER_SLEEPY + "Already done? Come back again soon nya~ \n";
             isContinue = false;
             break;
 
         case LIST:
             if (taskList.size() == 0) {
-                System.out.println(STARTER_NORMAL + "Looks like you have no tasks nya~");
+                result += STARTER_NORMAL + "Looks like you have no tasks nya~ \n";
                 break;
             }
-            System.out.println(STARTER_NORMAL + "Have you competed these tasks nya?");
+            result += STARTER_NORMAL + "Have you competed these tasks nya? \n";
             for (int i = 0; i < taskList.size(); i++) {
-                System.out.println(STARTER_BUFFER + (i + 1) + ". " + taskList.get(i));
+                result += STARTER_BUFFER + (i + 1) + ". " + taskList.get(i) + " \n";
             }
             break;
 
         case TASKERROR:
-            System.out.println(STARTER_CONFUSED + "Nya?... I can't find the task...");
+            result += STARTER_CONFUSED + "Nya?... I can't find the task... \n";
             break;
 
         case DONE:
-            System.out.println(STARTER_HAPPY + "Nya! You've worked hard haven't you!");
-            System.out.println(STARTER_BUFFER + "I'll mark this task as done:");
-            System.out.println(STARTER_BUFFER + "  " + tempTaskList.get(0));
+            result += STARTER_HAPPY + "Nya! You've worked hard haven't you! \n";
+            result += STARTER_BUFFER + "I'll mark this task as done: \n";
+            result += STARTER_BUFFER + "  " + tempTaskList.get(0) + " \n";
             break;
 
         case DELETE:
-            System.out.println(STARTER_NORMAL + "Nya! This task shall be removed:");
-            System.out.println(STARTER_BUFFER + "  " + tempTaskList.get(0));
-            System.out.println(STARTER_BUFFER + printTaskCount(taskList));
+            result += STARTER_NORMAL + "Nya! This task shall be removed: \n";
+            result += STARTER_BUFFER + "  " + tempTaskList.get(0) + " \n";
+            result += STARTER_BUFFER + printTaskCount(taskList) + " \n";
             break;
 
         case MISSINGDESCRIPTION:
-            System.out.println(STARTER_CONFUSED + "Nya? Give me a description of the task pwease.");
+            result += STARTER_CONFUSED + "Nya? Give me a description of the task pwease. \n";
             break;
             
         case TODO:
-            System.out.println(STARTER_NORMAL + "A new task? I'll add this to the list:");
-            System.out.println(STARTER_BUFFER + "  " + tempTaskList.get(0));
-            System.out.println(STARTER_BUFFER + printTaskCount(taskList));
-            System.out.println(STARTER_BUFFER + "Don't forget to complete it nya~");
+            result += STARTER_NORMAL + "A new task? I'll add this to the list: \n";
+            result += STARTER_BUFFER + "  " + tempTaskList.get(0) + " \n";
+            result += STARTER_BUFFER + printTaskCount(taskList) + " \n";
+            result += STARTER_BUFFER + "Don't forget to complete it nya~ \n";
             break;
 
         case DEADLINE:
-            System.out.println(STARTER_NORMAL + "A new deadline? Sounds tough nya...");
-            System.out.println(STARTER_BUFFER + "  " + tempTaskList.get(0));
-            System.out.println(STARTER_BUFFER + printTaskCount(taskList));
-            System.out.println(STARTER_BUFFER + "Gambatte nya~");
+            result += STARTER_NORMAL + "A new deadline? Sounds tough nya... \n";
+            result += STARTER_BUFFER + "  " + tempTaskList.get(0) + " \n";
+            result += STARTER_BUFFER + printTaskCount(taskList) + " \n";
+            result += STARTER_BUFFER + "Gambatte nya~ \n";
             break;
 
         case EVENT:
-            System.out.println(STARTER_NORMAL + "A new event? Let me record it down:");
-            System.out.println(STARTER_BUFFER + "  " + tempTaskList.get(0));
-            System.out.println(STARTER_BUFFER + printTaskCount(taskList));
-            System.out.println(STARTER_BUFFER + "I'll be waiting nya~");
+            result += STARTER_NORMAL + "A new event? Let me record it down: \n";
+            result += STARTER_BUFFER + "  " + tempTaskList.get(0) + " \n";
+            result += STARTER_BUFFER + printTaskCount(taskList) + " \n";
+            result += STARTER_BUFFER + "I'll be waiting nya~ \n";
             break;
 
         case FIND:
-            System.out.println(STARTER_NORMAL + "Found it! Here you go! ");
+            result += STARTER_NORMAL + "Found it! Here you go! \n";
             for (int i = 0; i < tempTaskList.size(); i++) {
-                System.out.println(STARTER_BUFFER + (i + 1) + ". " + tempTaskList.get(i));
+                result += STARTER_BUFFER + (i + 1) + ". " + tempTaskList.get(i) + " \n";
             }
             break;
 
         default:
-            System.out.println(STARTER_CONFUSED + "Nya?... I can't find what you are looking for...");
+            result += STARTER_CONFUSED + "Nya?... I can't find what you are looking for... \n";
         }
-    }
-    
-    private String printTaskCount(TaskList taskList) {
 
+        return result;
+    }
+
+
+    private String printTaskCount(TaskList taskList) {
         if (taskList.size() == 1) {
             return "We now have " + taskList.size() + " task on our list.";
         } else {

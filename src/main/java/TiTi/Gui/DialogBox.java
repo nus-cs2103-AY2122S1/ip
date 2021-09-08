@@ -1,18 +1,18 @@
-package TiTi;
-
-import java.io.IOException;
-import java.util.Collections;
+package TiTi.Gui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.geometry.Insets;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
+
 
 /**
  * An example of a custom control using FXML.
@@ -36,6 +36,7 @@ public class DialogBox extends HBox {
         this.getChildren().addAll(text, displayPicture);
     }
 
+
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
@@ -46,13 +47,20 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+
     public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+        var b = new DialogBox(l, iv);
+        b.setBackground(new Background(new BackgroundFill(
+                Color.LAVENDERBLUSH, CornerRadii.EMPTY, Insets.EMPTY)));
+        return b;
     }
 
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
+
+    public static DialogBox getTiTiDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();
+        db.setBackground(new Background(new BackgroundFill(
+                Color.AZURE, CornerRadii.EMPTY, Insets.EMPTY)));
         return db;
     }
 

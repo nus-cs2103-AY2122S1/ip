@@ -1,4 +1,8 @@
-package TiTi;
+package TiTi.Gui;
+
+import TiTi.util.SavedHistory;
+import TiTi.util.TaskList;
+import TiTi.util.Ui;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -18,7 +22,9 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private TiTi tiTi = new TiTi();
+    private SavedHistory savedHistory;
+    private TaskList taskList;
+    private Ui ui;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -29,11 +35,13 @@ public class Main extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/TiTi.jpg"));
 
 
-
     @Override
     public void start(Stage stage) {
-        //Step 1. Setting up required components
+        savedHistory = new SavedHistory();
+        taskList = new TaskList(savedHistory.readHistory());
+        ui = new Ui(savedHistory, taskList);
 
+        //Step 1. Setting up required components
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -56,7 +64,7 @@ public class Main extends Application {
 
         mainLayout.setPrefSize(300.0, 600.0);
 
-        scrollPane.setPrefSize(398, 556);
+        scrollPane.setPrefSize(430, 556);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -67,10 +75,10 @@ public class Main extends Application {
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-        userInput.setPrefWidth(324.0);
+        userInput.setPrefWidth(354.0);
         userInput.setPrefHeight(41);
 
-        sendButton.setPrefWidth(73.0);
+        sendButton.setPrefWidth(75.0);
         sendButton.setPrefHeight(41);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
@@ -90,6 +98,11 @@ public class Main extends Application {
         });
 
         stage.show();
+
+        Label dukeText = new Label(ui.welcomeMessage());
+        dialogContainer.getChildren().addAll(
+            DialogBox.getTiTiDialog(dukeText, new ImageView(duke))
+        );
     }
 
 
@@ -99,11 +112,11 @@ public class Main extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText() + "  ");
-        Label dukeText = new Label("  " + getResponse(userInput.getText()));
+        Label userText = new Label(userInput.getText());
+        Label tiTiText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getTiTiDialog(tiTiText, new ImageView(duke))
         );
         userInput.clear();
     }
@@ -114,7 +127,7 @@ public class Main extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "TiTi heard: " + input;
+        return ui.getResponse(input);
     }
 
 }

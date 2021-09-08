@@ -22,7 +22,7 @@ public class TiTi{
     private void run() {
         ui.welcome();
         while (ui.isContinue()) {
-            ui.userCommand();
+            ui.UserCommand();
         }
     }
 

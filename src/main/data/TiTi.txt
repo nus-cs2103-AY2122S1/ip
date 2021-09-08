@@ -1,4 +1,5 @@
 [E][X] concert (at: 8pm)
-[E][ ] birthday (at: Jan 22 2022)
-[T][X] buy groceries
+[E][X] birthday (at: Jan 22 2022)
 [D][X] homework (by: Jul 24 1930)
+[T][ ] homework
+[T][ ] groceries
