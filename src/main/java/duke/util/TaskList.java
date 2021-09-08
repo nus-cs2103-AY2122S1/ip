@@ -78,7 +78,7 @@ public class TaskList {
 
 
     /**
-     * Mark task at the specified index as done.
+     * Mark the task at the specified index as done.
      *
      * @param idx The index of the task to be marked.
      * @return String of messages to be printed by Ui object after marking.
@@ -118,7 +118,7 @@ public class TaskList {
 
 
     public boolean isEmpty() {
-        return tasks.size() == 0;
+        return tasks.isEmpty();
     }
 
 
@@ -162,7 +162,7 @@ public class TaskList {
     public void loadFromFile(Storage storage) throws FileNotFoundException, DukeException {
         assert storage != null;
 
-        List<Task> decoded = Parser.decode(storage.load());
-        tasks = decoded;
+        List<Task> decodedTasks = Parser.decode(storage.load());
+        tasks = decodedTasks;
     }
 }

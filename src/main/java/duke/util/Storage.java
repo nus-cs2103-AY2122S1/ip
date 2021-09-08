@@ -29,13 +29,13 @@ public class Storage {
     /**
      * The method saves the given String (encoded content) to the associated file.
      *
-     * @param encoded String containing encoded/formatted content.
+     * @param encodedStr String containing encoded/formatted content.
      * @throws IOException When there is problem in I/O system.
      */
-    public void save(String encoded) throws IOException {
+    public void save(String encodedStr) throws IOException {
         File file = linkFileOrCreateFile(filePath);
         FileWriter fw = new FileWriter(file);
-        fw.write(encoded);
+        fw.write(encodedStr);
         fw.close();
     }
 
