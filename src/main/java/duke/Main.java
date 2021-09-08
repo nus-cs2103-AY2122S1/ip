@@ -1,8 +1,8 @@
 package duke;
 
-import java.io.IOException;
-
 import duke.controller.MainWindow;
+
+import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A Main class which drives Duke using FXML.
  */
 public class Main extends Application {
 

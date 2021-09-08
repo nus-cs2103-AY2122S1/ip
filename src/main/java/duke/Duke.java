@@ -18,7 +18,6 @@ public class Duke {
      * Constructs a Duke object to start the program.
      *
      * Calls storage to load the TaskList data from the hard disk.
-     *
      * @param filePath relative file path of output file.
      */
     public Duke(String filePath) {
@@ -36,14 +35,9 @@ public class Duke {
     }
 
     /**
-     * Empty constructor for JavaFX launcher
-     */
-    public Duke() {
-    }
-
-    /**
-     * You should have your own function to generate a response to user.
-     * Replace this stub with your complete method.
+     * Generates a response to the user.
+     * @param input full command the user typed in
+     * @return
      */
     public String getResponse(String input) {
         Command c = Parser.parse(input);
@@ -51,16 +45,18 @@ public class Duke {
         return result.toString();
     }
 
+    /**
+     * Executes a command and returns a CommandResult.
+     * @param command type of command.
+     * @return command result to get the String response.
+     */
     private CommandResult executeCommand(Command command) {
         command.setData(tasks, storage);
         CommandResult result = command.execute();
         return result;
     }
 
-    /**
-     * Gets the standard welcome message from Ui.
-     * @return welcome message
-     */
+    /** Gets the standard welcome message from Ui. */
     public String getWelcomeMessage() {
         return ui.showWelcomeMessage();
     }
