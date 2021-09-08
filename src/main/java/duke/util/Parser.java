@@ -17,46 +17,53 @@ import duke.task.Task;
  */
 public class Parser {
 
+    private static String DEADLINE_DATETIME_FORMAT = "yyyy/MM/dd HH:mm";
+    private static String EVENT_DATETIME_FORMAT = "yyyy/MM/dd HH:mm";
+    private static String DEFAULT_TIME_STRING = "23:59";  // default time string when time is not given.
+    private static String DEFAULT_DELIMITER = " ";
+    private static String DEADLINE_DATETIME_FLAG = "/by";
+    private static String EVENT_DATETIME_FLAG = "/at";
+
+
     /**
      * The method takes a user input and parse out all necessary parts needed
      * to execute user command and finally returns a Command object that can be executed
      *
-     * @param input A line of user input
-     * @return A Command object which can then be called to execute user command
-     * @throws DukeException When the input is empty String or the command is invalid
+     * @param input             A line of user input
+     * @return                  A Command object which can then be called to execute user command
+     * @throws DukeException    When the input is empty String or the command is invalid
      */
     public static Command parseCommand(String input) throws DukeException {
-        String[] splitedInput = input.strip().split(" +");
-        if (splitedInput.length < 1) {
+        String[] splitInput = input.strip().split(DEFAULT_DELIMITER);
+        if (splitInput.length < 1) {
             throw new DukeException("The input cannot be empty!");
         }
 
-        String cmdType = splitedInput[0].toLowerCase();
+        String cmdType = splitInput[0].toLowerCase();
         switch(cmdType) {
         case "bye":
             return new CommandBye();
         case "done":
-            return new CommandDone(parseIndex(splitedInput));
+            return new CommandDone(parseIndex(splitInput));
         case "delete":
-            return new CommandDelete(parseIndex(splitedInput));
+            return new CommandDelete(parseIndex(splitInput));
         case "list":
             return new CommandList();
         case "todo": {
-            String description = parseDescription(splitedInput);
-            return new CommandAdd(new Task(description));
+            return new CommandAdd(new Task(parseDescription(splitInput)));
         }
         case "deadline": {
-            String description = parseDescription(splitedInput);
-            LocalDateTime dateTime = parseDeadlineDateTime(splitedInput);
+            String description = parseDescription(splitInput);
+            LocalDateTime dateTime = parseDeadlineDateTime(splitInput);
             return new CommandAdd(new Deadline(description, dateTime));
         }
         case "event": {
-            String description = parseDescription(splitedInput);
-            LocalDateTime[] dateTimes = parseEventDateTime(splitedInput);
+            String description = parseDescription(splitInput);
+            LocalDateTime[] dateTimes = parseEventDateTime(splitInput);
             return new CommandAdd(new Event(description, dateTimes[0], dateTimes[1]));
         }
         case "find": {
-            String keyword = parseKeyword(splitedInput);
+            String keyword = parseKeyword(splitInput);
             return new CommandFind(keyword);
         }
         default:
@@ -69,9 +76,9 @@ public class Parser {
     /**
      * Parse and return the task index of CommandDelete and CommandDone.
      *
-     * @param strArr String array that contains splited input string.
-     * @return parsedIndex
-     * @throws DukeException when the index is missing from the input.
+     * @param strArr            String array that contains split input string.
+     * @return                  Parsed index.
+     * @throws DukeException    When the index is missing from the input.
      */
     public static int parseIndex(String[] strArr) throws DukeException {
         if (strArr.length < 2) {
@@ -84,26 +91,26 @@ public class Parser {
     /**
      * Parse and return the description of the task.
      *
-     * @param strArr String array that contains splited input string.
-     * @return description
-     * @throws DukeException when the task description is missing from input.
+     * @param strArr            String array that contains split input string.
+     * @return                  description
+     * @throws DukeException    When the task description is missing from input.
      */
     public static String parseDescription(String[] strArr) throws DukeException {
-        StringBuilder sb = new StringBuilder();
-        if (strArr.length >= 2 && !isDateTimeDelim(strArr[1])) {
-            sb.append(strArr[1]);
+        StringJoiner sj = new StringJoiner(DEFAULT_DELIMITER);
+        if (strArr.length >= 2 && !isDateTimeFlag(strArr[1])) {
+            sj.add(strArr[1]);
         }
         for (int i = 2; i < strArr.length; i++) {
-            if (isDateTimeDelim(strArr[i])) {
+            if (isDateTimeFlag(strArr[i])) {
                 break;
             }
-            sb.append(" " + strArr[i]);
+            sj.add(strArr[i]);
         }
-        if (sb.length() < 1) {
+        if (sj.length() < 1) {
             throw new DukeException("The task description cannot be empty");
         }
 
-        return sb.toString();
+        return sj.toString();
     }
 
 
@@ -117,7 +124,7 @@ public class Parser {
 
     private static LocalDateTime parseDeadlineDateTime(String[] strArr) throws DukeException {
         int i = 1;
-        while (!isDateTimeDelim(strArr[i]) && i < strArr.length) {
+        while (!isDateTimeFlag(strArr[i]) && i < strArr.length) {
             i++;
         }
         if (i == strArr.length - 1) {
@@ -126,14 +133,14 @@ public class Parser {
 
         // format should be "yyyy/MM/dd" or "yyyy/MM/dd HH:mm"
         String dateStr = strArr[i + 1];
-        String timeStr = "23:59";  // default value in case time is missing from input
+        String timeStr = DEFAULT_TIME_STRING;
         if (strArr.length - i - 1 >= 2) {
             timeStr = strArr[i + 2];
         }
 
         try {
             return LocalDateTime.parse(dateStr + " " + timeStr,
-                    DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+                    DateTimeFormatter.ofPattern(DEADLINE_DATETIME_FORMAT));
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }
@@ -143,7 +150,7 @@ public class Parser {
 
     private static LocalDateTime[] parseEventDateTime(String[] strArr) throws DukeException {
         int i = 1;
-        while (!isDateTimeDelim(strArr[i]) && i < strArr.length) {
+        while (!isDateTimeFlag(strArr[i]) && i < strArr.length) {
             i++;
         }
         if (strArr.length - 1 - i < 3) {
@@ -151,7 +158,7 @@ public class Parser {
         }
 
         // format should be "yyyy/MM/dd HH:mm yyyy/MM/dd HH:mm"
-        // alternativly can be "yyyy-MM-dd HH:mm HH:mm"
+        // alternatively can be "yyyy-MM-dd HH:mm HH:mm"
         String startDateStr = strArr[i + 1];
         String startTimeStr = strArr[i + 2];
         String endDateStr, endTimeStr;
@@ -163,15 +170,14 @@ public class Parser {
             endTimeStr = strArr[i + 4];
         }
 
-
         try {
             LocalDateTime startDateTime = LocalDateTime
                     .parse(String.format("%s %s", startDateStr, startTimeStr),
-                            DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+                            DateTimeFormatter.ofPattern(EVENT_DATETIME_FORMAT));
 
             LocalDateTime endDateTime = LocalDateTime
                     .parse(String.format("%s %s", endDateStr, endTimeStr),
-                            DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+                            DateTimeFormatter.ofPattern(EVENT_DATETIME_FORMAT));
 
             return new LocalDateTime[]{startDateTime, endDateTime};
         } catch (Exception e) {
@@ -180,6 +186,12 @@ public class Parser {
     }
 
 
+    /**
+     * Encodes the taskList to formatted string to be stored.
+     *
+     * @param tasks The taskList to be converted to formatted string.
+     * @return      Formatted string of the taskList.
+     */
     public static String encode(List<Task> tasks) {
         StringBuilder sb = new StringBuilder();
         for (Task task : tasks) {
@@ -189,85 +201,31 @@ public class Parser {
     }
 
 
-    public static List<Task> decode(String[] lines) throws DukeException {
+    /**
+     * Decodes lines of strings to a taskList to be loaded by Duke.
+     *
+     * @param lines String array containing lines of strings to be decoded.
+     * @return      A taskList that contains decoded tasks.
+     */
+    public static List<Task> decode(String[] lines) {
         List<Task> tasks = new ArrayList<>();
         for (String line : lines) {
             String type = line.substring(0, 1);
             switch(type) {
             case "T": {
-                String[] strArr = line.split(" ");
-                boolean isDone = Boolean.parseBoolean(strArr[1]);
-
-                StringJoiner sj = new StringJoiner(" ");
-                for (int i = 2; i < strArr.length; i++) {
-                    sj.add(strArr[i]);
-                }
-                String description = sj.toString();
-
-                tasks.add(new Task(description, isDone));
+                decodeTodo(tasks, line);
                 break;
             }
             case "D": {
-                String[] strArr = line.split(" ");
-                boolean isDone = Boolean.parseBoolean(strArr[1]);
-
-                StringJoiner descriptionSj = new StringJoiner(" ");
-                StringJoiner dateTimeSj = new StringJoiner(" ");
-                boolean isDateTimeStr = false;
-                for (int i = 2; i < strArr.length; i++) {
-                    String curr = strArr[i];
-                    if (curr.equals("/by")) {
-                        isDateTimeStr = true;
-                        continue;
-                    }
-                    if (!isDateTimeStr) {
-                        descriptionSj.add(curr);
-                    } else {
-                        dateTimeSj.add(curr);
-                    }
-                }
-                String description = descriptionSj.toString();
-                LocalDateTime dateTime = LocalDateTime
-                        .parse(dateTimeSj.toString(),
-                                DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
-
-                tasks.add(new Deadline(description, isDone, dateTime));
+                decodeDeadline(tasks, line);
                 break;
             }
             case "E": {
-                String[] strArr = line.split(" ");
-                boolean isDone = Boolean.parseBoolean(strArr[1]);
-
-                StringJoiner descriptionSj = new StringJoiner(" ");
-                StringJoiner dateTimeSj = new StringJoiner(" ");
-                boolean isDateTimeStr = false;
-                for (int i = 2; i < strArr.length; i++) {
-                    String curr = strArr[i];
-                    if (curr.equals("/at")) {
-                        isDateTimeStr = true;
-                        continue;
-                    }
-                    if (!isDateTimeStr) {
-                        descriptionSj.add(curr);
-                    } else {
-
-                        dateTimeSj.add(curr);
-                    }
-                }
-                String description = descriptionSj.toString();
-                String[] dateTimes = dateTimeSj.toString().split(" ");
-                LocalDateTime startDateTime = LocalDateTime
-                        .parse(String.format("%s %s", dateTimes[0], dateTimes[1]),
-                                DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
-                LocalDateTime endDateTime = LocalDateTime
-                        .parse(String.format("%s %s", dateTimes[2], dateTimes[3]),
-                                DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
-
-                tasks.add(new Event(description, isDone, startDateTime, endDateTime));
+                decodeEvent(tasks, line);
                 break;
             }
             default:
-                throw new DukeException("The data file is corrupted.");
+                break;  // ignore unidentifiable lines.
             }
         }
 
@@ -275,9 +233,84 @@ public class Parser {
     }
 
 
-    private static boolean isDateTimeDelim(String str) {
+    private static void decodeEvent(List<Task> tasks, String line) {
+        String[] strArr = line.split(DEFAULT_DELIMITER);
+        boolean isDone = Boolean.parseBoolean(strArr[1]);
+
+        StringJoiner descriptionSj = new StringJoiner(DEFAULT_DELIMITER);
+        StringJoiner dateTimeSj = new StringJoiner(DEFAULT_DELIMITER);
+        boolean isDateTimeStr = false;
+        for (int i = 2; i < strArr.length; i++) {
+            String curr = strArr[i];
+            if (curr.equals(EVENT_DATETIME_FLAG)) {
+                isDateTimeStr = true;
+                continue;
+            }
+            if (!isDateTimeStr) {
+                descriptionSj.add(curr);
+            } else {
+
+                dateTimeSj.add(curr);
+            }
+        }
+        String description = descriptionSj.toString();
+        String[] dateTimes = dateTimeSj.toString().split(" ");
+        LocalDateTime startDateTime = LocalDateTime
+                .parse(String.format("%s %s", dateTimes[0], dateTimes[1]),
+                        DateTimeFormatter.ofPattern(EVENT_DATETIME_FORMAT));
+        LocalDateTime endDateTime = LocalDateTime
+                .parse(String.format("%s %s", dateTimes[2], dateTimes[3]),
+                        DateTimeFormatter.ofPattern(EVENT_DATETIME_FORMAT));
+
+        tasks.add(new Event(description, isDone, startDateTime, endDateTime));
+    }
+
+
+    private static void decodeDeadline(List<Task> tasks, String line) {
+        String[] strArr = line.split(DEFAULT_DELIMITER);
+        boolean isDone = Boolean.parseBoolean(strArr[1]);
+
+        StringJoiner descriptionSj = new StringJoiner(DEFAULT_DELIMITER);
+        StringJoiner dateTimeSj = new StringJoiner(DEFAULT_DELIMITER);
+        boolean isDateTimeStr = false;
+        for (int i = 2; i < strArr.length; i++) {
+            String curr = strArr[i];
+            if (curr.equals(DEADLINE_DATETIME_FLAG)) {
+                isDateTimeStr = true;
+                continue;
+            }
+            if (!isDateTimeStr) {
+                descriptionSj.add(curr);
+            } else {
+                dateTimeSj.add(curr);
+            }
+        }
+        String description = descriptionSj.toString();
+        LocalDateTime dateTime = LocalDateTime
+                .parse(dateTimeSj.toString(),
+                        DateTimeFormatter.ofPattern(DEADLINE_DATETIME_FORMAT));
+
+        tasks.add(new Deadline(description, isDone, dateTime));
+    }
+
+
+    private static void decodeTodo(List<Task> tasks, String line) {
+        String[] strArr = line.split(DEFAULT_DELIMITER);
+        boolean isDone = Boolean.parseBoolean(strArr[1]);
+
+        StringJoiner sj = new StringJoiner(DEFAULT_DELIMITER);
+        for (int i = 2; i < strArr.length; i++) {
+            sj.add(strArr[i]);
+        }
+        String description = sj.toString();
+
+        tasks.add(new Task(description, isDone));
+    }
+
+
+    private static boolean isDateTimeFlag(String str) {
         assert str != null;
 
-        return str.equals("/by") || str.equals("/at");
+        return str.equals(DEADLINE_DATETIME_FLAG) || str.equals(EVENT_DATETIME_FLAG);
     }
 }
