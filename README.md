@@ -19,7 +19,7 @@ and completely **offline** experience of planning your tasks!
 4. Enjoy **mastery** over your tasks 😆
 
 A snippet of the workings of controlling your tasks. Behold, you've got the power!
-   ```
+   ```java
     public String finishTask(int index) throws DukeException {
         if (index > taskArrayList.size()) {
             throw new DukeException("This task index is not in the task list!");
