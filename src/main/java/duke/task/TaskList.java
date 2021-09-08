@@ -47,7 +47,7 @@ public class TaskList {
 
     /**
      * Gets the i-th task from the task list, using 1-based indexing.
-     * This means that getTask(1) removes the first task in the list.
+     * This means that getTask(1) gets the first task in the list.
      *
      * @param i The index of the task to be returned based on 1-based indexing.
      * @return the task that corresponds to the index based on 1-based indexing.
@@ -59,16 +59,79 @@ public class TaskList {
     }
 
     /**
+     * Marks the i-th task from the task list as done, using 1-based indexing.
+     * This means that doTask(1) marks the first task in the list as done.
+     *
+     * @param i The index of the task to be marked as done based on 1-based indexing.
+     * @return the task that corresponds to the index based on 1-based indexing.
+     * @throws IndexOutOfBoundsException if the task index specified is less than 1 or more than the size of the list.
+     */
+    public Task doTasks(int i) throws IndexOutOfBoundsException {
+        int idx = i - 1;
+        Task task = taskList.get(idx);
+        task.markAsDone();
+        return task;
+    }
+
+    /**
+     * Marks the tasks in the task list from indices start to end, inclusive, as done, using 1-based indexing.
+     * This means that doTasks(1,3) marks the first 3 task in the list as done.
+     *
+     * @param start The index of the first to be marked as done based on 1-based indexing, inclusive.
+     * @param end The index of the last task to be marked as done based on 1-based indexing, inclusive.
+     * @return the tasks that are marked as done by this method.
+     * @throws IndexOutOfBoundsException if the task index specified is less than 1 or more than the size of the list.
+     */
+    public TaskList doTasks(int start, int end) throws IndexOutOfBoundsException {
+        if (start < 1 || end > this.size() || start > end) {
+            throw new IndexOutOfBoundsException();
+        }
+        TaskList completedTasks = new TaskList();
+        int startIdx = start - 1;
+        for (int i = startIdx; i < end; i++) {
+            Task task = taskList.get(i);
+            task.markAsDone();
+            completedTasks.appendTask(task);
+        }
+
+        return completedTasks;
+    }
+
+    /**
      * Deletes the i-th task from the task list, using 1-based indexing.
-     * This means that deleteTask(1) removes the first task in the list.
+     * This means that deleteTasks(1) removes the first task in the list.
      *
      * @param i The index of the task to be removed based on 1-based indexing.
      * @return the task that is removed.
      * @throws IndexOutOfBoundsException if the task index specified is less than 1 or more than the size of the list.
      */
-    public Task deleteTask(int i) throws IndexOutOfBoundsException {
+    public Task deleteTasks(int i) throws IndexOutOfBoundsException {
         int idx = i - 1;
         return taskList.remove(idx);
+    }
+
+    /**
+     * Deletes the tasks from indices start to end, inclusive, from the task list, using 1-based indexing.
+     * This means that deleteTasks(1,3) removes the first 3 task in the list.
+     *
+     * @param start The index of the first task to be removed based on 1-based indexing, inclusive.
+     * @param end The index of the last task to be removed based on 1-based indexing, inclusive.
+     * @return the tasks that are removed.
+     * @throws IndexOutOfBoundsException if the task index specified is less than 1 or more than the size of the list.
+     */
+    public TaskList deleteTasks(int start, int end) throws IndexOutOfBoundsException {
+        if (start < 1 || end > this.size() || start > end) {
+            throw new IndexOutOfBoundsException();
+        }
+        TaskList removedTasks = new TaskList();
+        int startIdx = start - 1;
+        int numOfRemovals = end - start + 1;
+        for (int i = 0; i < numOfRemovals; i++) {
+            Task removedTask = taskList.remove(startIdx);
+            removedTasks.appendTask(removedTask);
+        }
+
+        return removedTasks;
     }
 
     /**
