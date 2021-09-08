@@ -21,10 +21,14 @@ import duke.task.Todo;
 
 public class AddCommand extends Command {
 
-    /** String to represent the command */
+    /**
+     * String to represent the command
+     */
     private String command;
 
-    /** The type of the task */
+    /**
+     * The type of the task
+     */
     private String taskType;
 
 
@@ -32,7 +36,7 @@ public class AddCommand extends Command {
      * A public constructor to initialize the command
      * and task type to the given one.
      *
-     * @param command A string from the input of the user.
+     * @param command  A string from the input of the user.
      * @param taskType The type of the task inputted by the user.
      */
     public AddCommand(String command, String taskType) {
@@ -41,41 +45,65 @@ public class AddCommand extends Command {
         this.taskType = taskType;
     }
 
+
+    public Task addDeadline(String inputDate, String description) throws DukeException {
+        try {
+            LocalDate date = LocalDate.parse(inputDate.trim());
+            return new Deadline(description.trim(), date);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("OH NO :( I can't seem to understand "
+                    + "the date you have entered.\n" + "I can only understand if it "
+                            + "is in  the yyyy-mm-dd format..");
+        }
+    }
+
+    public Task addEvent(String inputDateTime, String description) throws DukeException {
+        try {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(inputDateTime.trim(), dtf);
+            return new Event(description.trim().split("event")[1].trim(), dateTime);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("OH NO :( I can't seem "
+                    + "to understand the date and time you have entered.\n"
+                            + "I can only understand if it is in "
+                                    + "yyyy-MM-dd HH:mm format..");
+        }
+    }
+
     /**
      * Checks if the command is written correctly and executes
      * the command. If the date and time is not indicated wrongly, a
      * DukeException is thrown.
      *
-     * @param tasks The list of tasks stored so far.
-     * @param ui A Ui which deals with interactions with user.
+     * @param tasks   The list of tasks stored so far.
+     * @param ui      A Ui which deals with interactions with user.
      * @param storage The storage which saves and edits the file.
      * @throws DukeException DukeException thrown when format of date/time
-     * is incorrect.
+     *                       is incorrect.
      */
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task;
-        if (taskType.equals("todo")) {
-            String[] addTask = command.split(" +", 2);
+        String[] addTask;
+
+        switch (taskType) {
+        case "todo":
+            addTask = command.split(" +", 2);
             task = new Todo(addTask[1]);
-        } else if (taskType.equals("deadline")) {
-            String[] addTask = command.split("/by", 2);
-            try {
-                LocalDate date = LocalDate.parse(addTask[1].trim());
-                task = new Deadline(addTask[0].split("deadline")[1].trim(), date);
-            } catch (DateTimeParseException e) {
-                throw new DukeException(ui.dateError());
-            }
-        } else {
-            try {
-                String[] addTask = command.split("/at", 2);
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                LocalDateTime dateTime = LocalDateTime.parse(addTask[1].trim(), dtf);
-                task = new Event(addTask[0].split("event")[1].trim(), dateTime);
-            } catch (DateTimeParseException e) {
-                throw new DukeException(ui.dateTimeError());
-            }
+            break;
+        case "deadline":
+            addTask = command.split("/by", 2);
+            task = addDeadline(addTask[1], addTask[0]);
+            break;
+        case "event":
+            addTask = command.split("/at", 2);
+            task = addEvent(addTask[1], addTask[0]);
+            break;
+        default:
+            task= null;
+            assert false;
+            break;
         }
 
         tasks.add(task);

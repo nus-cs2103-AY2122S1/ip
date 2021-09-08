@@ -14,16 +14,19 @@ public class DeleteCommand extends Command {
     /** The string containing the command */
     private String command;
 
+    /** Index of the task to be deleted.*/
+    private int index;
+
     /**
      * A public constructor to initialise the command
      * to the given one.
      *
      * @param command The command inputted by the user.
      */
-    public DeleteCommand(String command) {
+    public DeleteCommand(String command, int index) {
         super(command);
         this.command = command;
-
+        this.index = index;
     }
 
     /**
@@ -37,8 +40,8 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
 
-        ui.removeTask(tasks.get(Integer.valueOf(command.split(" +")[1]) - 1));
-        tasks.delete(Integer.valueOf(command.split(" +")[1]));
+        ui.removeTask(tasks.get(index - 1));
+        tasks.delete(index);
         storage.editFileAll(tasks);
         return ui.numberOfTasks(tasks);
     }
