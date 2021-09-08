@@ -44,6 +44,7 @@ public class TaskList {
      * @return Message to be displayed upon successful deletion.
      * @throws BlitzException when taskIndex is invalid.
      */
+
     public String deleteTask(int taskIndex) throws BlitzException {
         if (size() == 0) {
             throw new BlitzException("Cannot perform deletion on empty list!!");
@@ -68,8 +69,8 @@ public class TaskList {
         }
         taskList.get(taskIndex).markAsDone();
         return "Nice! I've marked this task as done:\n" + "\t" + taskList.get(taskIndex);
-    }
 
+    }
     /**
      * Finds tasks which contain the given keyword.
      *
@@ -91,7 +92,6 @@ public class TaskList {
         }
         return new TaskList(matchList);
     }
-
     /**
      * Returns string representation of list items to be printed on screen.
      *

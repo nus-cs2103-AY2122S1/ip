@@ -33,6 +33,7 @@ public class Storage {
             while (s.hasNext()) {
                 String task = s.nextLine();
                 String[] keywords = task.split(" \\| ");
+                assert(keywords.length >= 3);
                 String done = keywords[1];
                 Task current = new Task("");
                 switch(task.charAt(0)) {
@@ -73,8 +74,9 @@ public class Storage {
      *     write to the file indicated.
      */
     public void saveTasksInFile(TaskList tasks) throws IOException {
-        FileWriter fw = new FileWriter("data/blitz.txt");
+        FileWriter fw = new FileWriter(filePath);
         for (Task t : tasks.getTaskList()) {
+            assert(!t.getDescription().isEmpty());
             if (t instanceof Todo) {
                 fw.write("T | " + t.getStatusIcon() + " | " + t.getDescription()
                         + System.lineSeparator());

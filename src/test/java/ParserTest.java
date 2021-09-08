@@ -28,7 +28,6 @@ class ParserTest {
         boolean isEqual = b.getUi().getIncorrectDateTimeFormatMessage().equals(result);
         assertEquals(true, isEqual);
     }
-
     @Test
     void parseCommand_taskToAdd_success() {
         Blitz b = new Blitz("data/blitz.txt");
@@ -41,4 +40,3 @@ class ParserTest {
         assertEquals(true, isEqual);
     }
 }
-

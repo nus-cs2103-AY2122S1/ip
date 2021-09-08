@@ -2,8 +2,8 @@ package tasks;
 
 public class Task {
 
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Creates task with given description.

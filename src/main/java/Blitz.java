@@ -12,6 +12,7 @@ public class Blitz {
     public Blitz(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+
         try {
             tasks = new TaskList(storage.loadFileContents());
         } catch (BlitzException e) {
