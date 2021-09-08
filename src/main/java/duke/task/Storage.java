@@ -71,14 +71,17 @@ public class Storage {
             List<String> dataList = Files.lines(filePath).collect(Collectors.toList());
             for (String line : dataList) {
                 String[] details = line.split("\\|", 4);
+                assert details.length > 2;
                 String tag = details[0];
                 Boolean done = details[1].equals("1");
                 Task task;
                 if (tag.equals("T")) {
                     task = new ToDo(details[2]);
                 } else if (tag.equals("D")) {
+                    assert details.length == 4;
                     task = new Deadline(details[2], details[3]);
                 } else if (tag.equals("E")) {
+                    assert details.length == 4;
                     task = new Event(details[2], details[3]);
                 } else {
                     throw new DukeException("Unknown tag '" + tag + "'.");
