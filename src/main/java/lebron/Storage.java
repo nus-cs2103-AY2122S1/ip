@@ -88,9 +88,7 @@ public class Storage {
                     taskList.add(task);
                     break;
                 default:
-                    System.out.println(HORIZONTAL_LINE
-                            + "    :( OOPS! I'm sorry, but I don't know what that means.\n"
-                            + HORIZONTAL_LINE);
+                    System.out.println(":( OOPS! There is a task that I don't recognise.\n");
                     break;
                 }
 
