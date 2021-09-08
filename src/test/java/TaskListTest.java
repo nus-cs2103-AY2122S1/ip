@@ -1,13 +1,18 @@
-import bobbybot.util.TaskList;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
+import bobbybot.util.TaskList;
+
+/**
+ * Tests for TaskList
+ */
 public class TaskListTest {
     private TaskList tasks = new TaskList(new ArrayList<>());
     // testing print statements

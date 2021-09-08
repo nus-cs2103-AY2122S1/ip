@@ -1,13 +1,13 @@
 package bobbybot.gui;
 
+import java.io.FileNotFoundException;
+
 import bobbybot.commands.Command;
 import bobbybot.exceptions.InvalidArgumentException;
 import bobbybot.util.Parser;
 import bobbybot.util.Storage;
 import bobbybot.util.TaskList;
 import bobbybot.util.Ui;
-
-import java.io.FileNotFoundException;
 
 /**
  * This class wraps the cli BobbyBot

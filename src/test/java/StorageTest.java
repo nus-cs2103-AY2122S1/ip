@@ -1,11 +1,12 @@
-import bobbybot.util.Storage;
-import bobbybot.tasks.Task;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.FileNotFoundException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import bobbybot.tasks.Task;
+import bobbybot.util.Storage;
 
 public class StorageTest {
     //todo: remove dependencies with stub

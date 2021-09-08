@@ -1,10 +1,5 @@
 package bobbybot.util;
 
-import bobbybot.tasks.Deadline;
-import bobbybot.tasks.Event;
-import bobbybot.tasks.Task;
-import bobbybot.tasks.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,6 +8,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import bobbybot.tasks.Deadline;
+import bobbybot.tasks.Event;
+import bobbybot.tasks.Task;
+import bobbybot.tasks.ToDo;
 
 /**
  * Represents the storage of data needed to load tasks

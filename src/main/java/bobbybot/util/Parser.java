@@ -1,5 +1,8 @@
 package bobbybot.util;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import bobbybot.commands.AddCommand;
 import bobbybot.commands.Command;
 import bobbybot.commands.DeleteCommand;
@@ -10,10 +13,6 @@ import bobbybot.commands.IncorrectCommand;
 import bobbybot.commands.ListCommand;
 import bobbybot.enums.BotCommand;
 import bobbybot.exceptions.InvalidArgumentException;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 
 /**
  * Class helps to handle parsing of user commands

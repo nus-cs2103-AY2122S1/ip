@@ -1,5 +1,10 @@
 package bobbybot.commands;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import bobbybot.exceptions.InvalidArgumentException;
 import bobbybot.tasks.Deadline;
 import bobbybot.tasks.Event;
@@ -8,11 +13,6 @@ import bobbybot.tasks.ToDo;
 import bobbybot.util.Storage;
 import bobbybot.util.TaskList;
 import bobbybot.util.Ui;
-
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";

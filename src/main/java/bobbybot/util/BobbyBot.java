@@ -1,11 +1,10 @@
 package bobbybot.util;
 
-import bobbybot.commands.Command;
-import bobbybot.exceptions.BobbyException;
-
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import bobbybot.commands.Command;
+import bobbybot.exceptions.BobbyException;
 /**
  * Represents the chatbot
  */

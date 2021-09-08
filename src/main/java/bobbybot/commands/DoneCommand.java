@@ -1,12 +1,15 @@
 package bobbybot.commands;
 
+import java.io.IOException;
+
 import bobbybot.tasks.Task;
 import bobbybot.util.Storage;
 import bobbybot.util.TaskList;
 import bobbybot.util.Ui;
 
-import java.io.IOException;
-
+/**
+ * Represents command for DONE
+ */
 public class DoneCommand extends Command {
     private int taskNumToMarkAsDone;
     public DoneCommand(int toMarkAsDone) {

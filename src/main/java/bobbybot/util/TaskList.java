@@ -1,9 +1,8 @@
 package bobbybot.util;
 
-import bobbybot.tasks.Task;
-
-
 import java.util.List;
+
+import bobbybot.tasks.Task;
 
 /**
  * Represents a task list

@@ -1,10 +1,10 @@
 package bobbybot.commands;
 
+import java.io.IOException;
+
 import bobbybot.util.Storage;
 import bobbybot.util.TaskList;
 import bobbybot.util.Ui;
-
-import java.io.IOException;
 
 public class DeleteCommand extends Command {
 
