@@ -78,7 +78,7 @@ public class Deadline extends Task {
     public String printInSaveFormat() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         String dateString = by.format(format);
-        String[] info = {"D", isDone ? "1" : "0", description, dateString};
+        String[] info = {"D", isDone ? "1" : "0", description, dateString, notes};
         return String.join(" | ", info);
     }
 }

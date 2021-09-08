@@ -78,7 +78,7 @@ public class Event extends Task {
     public String printInSaveFormat() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         String dateString = at.format(format);
-        String[] info = {"E", isDone ? "1" : "0", description, dateString};
+        String[] info = {"E", isDone ? "1" : "0", description, dateString, notes};
         return String.join(" | ", info);
     }
 }
