@@ -41,12 +41,26 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+    /**
+     * Returns a user DialogBox.
+     *
+     * @param label
+     * @param imageView
+     * @return DialogBox originating from user with specified label and image.
+     */
+    public static DialogBox getUserDialog(Label label, ImageView imageView) {
+        return new DialogBox(label, imageView);
     }
 
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
+    /**
+     * Returns a Duke DialogBox.
+     *
+     * @param label
+     * @param imageView
+     * @return DialogBox originating from Duke with specified label and image.
+     */
+    public static DialogBox getDukeDialog(Label label, ImageView imageView) {
+        var db = new DialogBox(label, imageView);
         db.flip();
         return db;
     }

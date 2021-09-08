@@ -43,35 +43,38 @@ public class Storage {
             Scanner reader = new Scanner(data);
             while (reader.hasNextLine()) {
                 String line = reader.nextLine();
-                String[] info = line.split(" \\| ");
-                if (info.length == 1) {
-                    continue;
-                }
-                assert (info[1].equals("0") || info[1].equals("1")) : "Task status should be either \"0\" or \"1\"";
-
-                String command = info[0];
-                Task task = null;
-                boolean done = info[1].equals("1");
-                if (command.equals("T")) {
-                    task = new Todo(info[2]);
-                } else if (command.equals("D")) {
-                    task = new Deadline(info[2], info[3]);
-                } else if (command.equals("E")) {
-                    task = new Event(info[2], info[3]);
-                }
-
-                if (task != null) {
-                    if (done) {
-                        task.markDone();
-                    }
-                    tasks.add(task);
-                }
+                addTask(line, tasks);
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
 
         return tasks;
+    }
+
+    private void addTask(String line, List<Task> tasks) throws DukeException {
+        String[] info = line.split(" \\| ");
+        if (info.length == 1) {
+            return;
+        }
+
+        String command = info[0];
+        Task task = null;
+        boolean done = info[1].equals("1");
+        if (command.equals("T")) {
+            task = new Todo(info[2]);
+        } else if (command.equals("D")) {
+            task = new Deadline(info[2], info[3]);
+        } else if (command.equals("E")) {
+            task = new Event(info[2], info[3]);
+        }
+
+        if (task != null) {
+            if (done) {
+                task.markDone();
+            }
+            tasks.add(task);
+        }
     }
 
     /**

@@ -53,6 +53,11 @@ public abstract class Task {
         return String.format("%d | %s", done ? 1 : 0, taskDetails);
     }
 
+    /**
+     * Returns a String representation of the Task.
+     *
+     * @return String representation of the Task.
+     */
     @Override
     public String toString() {
         return String.format("[%s] %s", done ? "X" : " ", taskDetails);

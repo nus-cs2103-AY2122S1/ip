@@ -32,12 +32,22 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns a String representation of the Deadline.
+     *
+     * @return String representation of the Deadline.
+     */
     @Override
     public String toString() {
         String timeInfoString = timeInfo.format(outputFormatter);
         return String.format("[D]%s (by: %s)", super.toString(), timeInfoString);
     }
 
+    /**
+     * Returns a String which is used to save data to disk.
+     *
+     * @return String representation of how data will be saved to disk.
+     */
     @Override
     public String toDataString() {
         String timeInfoString = timeInfo.format(inputFormatter);
