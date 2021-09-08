@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -10,6 +8,11 @@ public class Deadline extends Task {
     protected String by;
     protected LocalDate date;
 
+    /**
+     * Creates a Deadline object which is not done by default.
+     * @param content content in this task
+     * @param by time of deadline
+     */
     public Deadline(String content, String by) {
         super(content);
         this.by = by;
@@ -20,6 +23,12 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Creates a Deadline object.
+     * @param content content in this task
+     * @param by time of deadline
+     * @param isDone specify whether task is done
+     */
     public Deadline(String content, String by, boolean isDone) {
         super(content, isDone);
         this.by = by;

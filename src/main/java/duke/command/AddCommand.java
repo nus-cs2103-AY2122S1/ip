@@ -1,12 +1,16 @@
 package duke.command;
 
-import duke.exception.DukeException;
-import duke.task.*;
-import duke.util.Storage;
-import duke.util.Ui;
-
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.util.Storage;
+import duke.util.Ui;
 
 public class AddCommand implements Command {
     private String[] inputs;
@@ -52,7 +56,7 @@ public class AddCommand implements Command {
             }
             tasks.add(new Event(content.split(" /at ")[0], content.split(" /at ")[1]));
         } else {
-            assert false: "The type of task is not recognized.";
+            assert false : "The type of task is not recognized.";
         }
 
         try {

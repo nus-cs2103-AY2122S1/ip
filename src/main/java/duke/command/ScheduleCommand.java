@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.Storage;
 import duke.util.Ui;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class ScheduleCommand implements Command {
     private String[] inputs;

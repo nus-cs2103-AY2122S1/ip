@@ -5,11 +5,14 @@ import java.time.LocalDate;
 public class Task {
     protected String content;
     protected boolean isDone;
+
+    /** Creates a task which is not done by default. */
     public Task(String content) {
         this.content = content;
         this.isDone = false;
     }
 
+    /** Creates a task. */
     public Task(String content, boolean isDone) {
         this.content = content;
         this.isDone = isDone;

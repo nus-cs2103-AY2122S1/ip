@@ -5,8 +5,8 @@ import java.util.Scanner;
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
-import duke.util.Storage;
 import duke.util.Parser;
+import duke.util.Storage;
 import duke.util.Ui;
 import javafx.fxml.FXML;
 
@@ -16,15 +16,6 @@ public class Duke {
     private TaskList taskList;
     @FXML
     private Ui ui;
-
-//    private ScrollPane scrollPane;
-//    private VBox dialogContainer;
-//    private TextField userInput;
-//    private Button sendButton;
-//    private Scene scene;
-//
-//    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-//    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Constructs duke.Duke objects
@@ -40,11 +31,16 @@ public class Duke {
         }
     }
 
+    /**
+     * Uses Parser to process the input.
+     * @param input input string from user
+     * @return output to user
+     */
     public String process(String input) {
         Command command;
         try {
             command = Parser.parseInput(input);
-        } catch (DukeException e){
+        } catch (DukeException e) {
             return e.toString();
         }
         String output = command.execute(taskList, ui, storage);
@@ -71,16 +67,4 @@ public class Duke {
         new duke.Duke().run();
     }
 
-
-    Ui getUi() {
-        return ui;
-    }
-//
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    String getResponse(String input) {
-        return "duke.Duke heard: " + input;
-    }
 }

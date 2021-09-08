@@ -1,12 +1,13 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.Storage;
 import duke.util.Ui;
 
-import java.util.ArrayList;
 
 public class DeleteCommand implements Command {
     private String[] inputs;
@@ -15,6 +16,7 @@ public class DeleteCommand implements Command {
         this.inputs = inputs;
     }
 
+    /** Deletes the task */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         if (inputs.length != 2) {
             return "Wrong input format";

@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.Storage;
 import duke.util.Ui;
-
-import java.util.ArrayList;
 
 public class ListCommand implements Command {
     private String[] inputs;
@@ -14,6 +14,7 @@ public class ListCommand implements Command {
         this.inputs = inputs;
     }
 
+    /** Display all the tasks */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         if (inputs.length == 1) {
             return getTasks(taskList);

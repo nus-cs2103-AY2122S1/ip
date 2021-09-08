@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.util.ArrayList;
+
+import duke.exception.DukeException;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -23,6 +23,7 @@ public class TaskList {
         return tasks;
     }
 
+    /** Deletes a task specified by index */
     public void deleteTask(int index) throws DukeException {
         try {
             tasks.remove(index);

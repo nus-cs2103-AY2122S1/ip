@@ -5,6 +5,7 @@ import duke.util.Storage;
 import duke.util.Ui;
 
 public class HelpCommand implements Command {
+    /** Displays help information */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         String helpMessage = "Bye: end the program \n"
                     + "Delete: delete a task \n"
