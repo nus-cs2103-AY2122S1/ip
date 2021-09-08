@@ -46,10 +46,10 @@ public class Duke extends Application {
      * @param filePath The path of the file the task list is saved in.
      */
     public Duke(String filePath) {
-        tasks = new TaskList();
-        storage = new Storage(filePath, tasks);
+        this.tasks = new TaskList();
+        this.storage = new Storage(filePath, tasks);
         try {
-            storage.readFile();
+            this.storage.readFile();
         } catch (DukeException e) {
             TextUi.showErrorMessage(e.getMessage());
         }
@@ -69,7 +69,6 @@ public class Duke extends Application {
         } catch (DukeException e) {
             TextUi.showErrorMessage(e.getMessage());
         }
-
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
