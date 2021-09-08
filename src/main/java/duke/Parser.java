@@ -3,11 +3,11 @@ package duke;
 import command.AddCommand;
 import command.ByeCommand;
 import command.Command;
-import command.DoneCommand;
 import command.DeleteCommand;
-import command.FindDateCommand;
+import command.DoneCommand;
 import command.FindKeywordCommand;
 import command.ListCommand;
+import command.ShowScheduleCommand;
 
 import exception.DukeException;
 import exception.DukeExceptionType;
@@ -58,6 +58,10 @@ public class Parser {
         // "find" command given
         case "find":
             return parseFind(parsedCommand);
+
+        // "schedule" command given
+        case "schedule":
+            return parseSchedule(parsedCommand);
 
         // Task command given
         default:
@@ -114,10 +118,10 @@ public class Parser {
     }
 
     /**
-     * Further parses a 'find' instruction from the user and returns a FindCommand.
+     * Further parses a 'find' instruction from the user and returns a FindKeywordCommand.
      *
      * @param parsedCommand Array of parsed instructions from the parse function.
-     * @return FindKeywordCommand or FindDateCommand based on user input.
+     * @return FindKeywordCommand based on user input.
      * @throws DukeException if invalid command is given.
      */
     public static Command parseFind(String[] parsedCommand) throws DukeException {
@@ -125,27 +129,25 @@ public class Parser {
             throw new DukeException(DukeExceptionType.INVALID_FIND);
         }
 
-        String findDetails = parsedCommand[1];
+        String keyword = parsedCommand[1];
+        return new FindKeywordCommand(keyword);
+    }
 
-        if (findDetails.contains("/date")) {
-            if (parsedCommand.length == 2) {
-                throw new DukeException(DukeExceptionType.MISSING_FIND_DATE);
-            }
-
-            LocalDate desiredDate = LocalDate.parse(parsedCommand[2]);
-            return new FindDateCommand(desiredDate);
-
-        } else if (findDetails.contains("/keyword")) {
-            if (parsedCommand.length == 2) {
-                throw new DukeException(DukeExceptionType.MISSING_FIND_KEYWORD);
-            }
-
-            String keyword = parsedCommand[2];
-            return new FindKeywordCommand(keyword);
-
-        } else {
-            throw new DukeException(DukeExceptionType.INVALID_FIND);
+    /**
+     * Further parses a 'schedule' instruction from the user and returns a ShowScheduleCommand.
+     *
+     * @param parsedCommand Array of parsed instructions from the parse function.
+     * @return ShowScheduleCommand based on user input.
+     * @throws DukeException if invalid command is given.
+     */
+    public static Command parseSchedule(String[] parsedCommand) throws DukeException {
+        if (parsedCommand.length == 1) {
+            throw new DukeException(DukeExceptionType.INVALID_SCHEDULE);
         }
+
+        String desiredDateString = parsedCommand[1];
+        LocalDate desiredDate = LocalDate.parse(desiredDateString);
+        return new ShowScheduleCommand(desiredDate);
     }
 
     /**

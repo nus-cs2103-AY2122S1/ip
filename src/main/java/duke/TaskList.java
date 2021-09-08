@@ -40,7 +40,7 @@ public class TaskList {
      * @return String representing the displayed list.
      */
     public String showList() {
-        return ui.showList(list);
+        return ui.displayList(list);
     }
 
     /**
@@ -76,8 +76,8 @@ public class TaskList {
      * @param desiredDate The date used to find tasks.
      * @return String representing the displayed list.
      */
-    public String findTasksByDate(LocalDate desiredDate) {
-        return ui.showDateFind(list, desiredDate);
+    public String showSchedule(LocalDate desiredDate) {
+        return ui.displaySchedule(list, desiredDate);
     }
 
     /**

@@ -28,7 +28,7 @@ public class Ui {
      * @param taskList The task list to be displayed.
      * @return The task list in string representation.
      */
-    public String showList(ArrayList<Task> taskList) {
+    public String displayList(ArrayList<Task> taskList) {
         return "Here are the tasks in your list:\n"
                 + IntStream.range(0, taskList.size())
                 .mapToObj(i -> (i + 1) + "." + taskList.get(i).listEntry() + "\n")
@@ -60,13 +60,13 @@ public class Ui {
     }
 
     /**
-     * Displays a list of tasks in the current task list that takes place on the given date.
+     * Displays a schedule of tasks for the given date.
      *
      * @param taskList The task list.
-     * @param desiredDate The date used to find tasks.
-     * @return A list of tasks taking place/to be done on the given date.
+     * @param desiredDate The date for which the schedule is found.
+     * @return A schedule of tasks taking place/to be done on the given date.
      */
-    public String showDateFind(ArrayList<Task> taskList, LocalDate desiredDate) {
+    public String displaySchedule(ArrayList<Task> taskList, LocalDate desiredDate) {
         Stream<Task> timedTasksStream = taskList.stream()
                 .filter(t -> t.isTodayTask(desiredDate))
                 .filter(t -> !t.isWholeDay());

@@ -37,7 +37,7 @@ public class DukeException extends Exception {
                     + "The required format is yyyy-mm-dd or yyyy-mm-dd hh:mm.";
             break;
         case INVALID_FIND:
-            customMessage = "OOPS!!! You need to specify a keyword or date!";
+            customMessage = "OOPS!!! You need to specify a keyword!";
             break;
         case INVALID_INPUT:
             customMessage = "OOPS!!! I don't recognise the command you've given me.";
@@ -48,6 +48,9 @@ public class DukeException extends Exception {
                     + "    1. start and end dates\n"
                     + "    2. one date, start and end times\n"
                     + "    3. start date and time, end date and time";
+            break;
+        case INVALID_SCHEDULE:
+            customMessage = "OOPS!!! You need to specify a date!";
             break;
         case INVALID_TASK_INDEX:
             customMessage = "OOPS!!! That is not a valid task index!";
