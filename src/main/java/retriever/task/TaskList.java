@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import retriever.Storage;
 import retriever.Ui;
-import retriever.exception.IllegalCommandException;
 import retriever.exception.IllegalDateFormatException;
 import retriever.exception.IllegalDeadlineFormatException;
 import retriever.exception.IllegalEventFormatException;
@@ -356,13 +355,13 @@ public class TaskList {
      */
     public boolean isViewScheduleFormatCorrect(String[] parsedUserInput) {
         boolean hasDate = parsedUserInput.length == 2;
-        if(!hasDate) {
+        if (!hasDate) {
             return false;
         }
 
         String[] enteredDate = parsedUserInput[1].split("/");
         boolean isDateFormatValid = enteredDate.length == 3;
-        if(!isDateFormatValid) {
+        if (!isDateFormatValid) {
             return false;
         }
 
@@ -377,7 +376,7 @@ public class TaskList {
      * @throws RetrieverException If the command entered is not formatted well.
      */
     public void viewScheduleForAParticularDay(String[] parsedUserInput) throws RetrieverException {
-        if(!isViewScheduleFormatCorrect(parsedUserInput)) {
+        if (!isViewScheduleFormatCorrect(parsedUserInput)) {
             throw new RetrieverException("Please Follow The Specified Format: view DD/MM/YYYY");
         }
 

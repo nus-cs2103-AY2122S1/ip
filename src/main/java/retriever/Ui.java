@@ -154,7 +154,7 @@ public class Ui {
         }
 
         retrieverResponse = scheduleMessage + "\n";
-        for (int i = 0; i < taskList.size() ; i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             retrieverResponse += (i + 1) + ". " + taskList.get(i) + "\n";
         }
     }
