@@ -132,21 +132,24 @@ public class Duke extends Application {
             }
         }
         //exit
+        assert !taskList.equals(null) : "Task list should not be null.";
         storage.writeTasksToFile(taskList.getTasks());
     }
 
     public String getResponse(String input) {
+        String response;
         try {
             Command cmd = Parser.parse(input);
             if (cmd.isExit()) {
                 storage.writeTasksToFile(taskList.getTasks());
                 return ui.getGoodbyeMsg();
             }
-            String response = cmd.execute(taskList, ui);
-            return response;
+            response = cmd.execute(taskList, ui);
         } catch (DukeException e) {
             return e.toString();
         }
+        assert !response.equals("") : "Response should not be empty.";
+        return response;
     }
 
     public static void main(String[] args) {

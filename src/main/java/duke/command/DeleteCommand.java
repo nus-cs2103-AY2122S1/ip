@@ -32,6 +32,7 @@ public class DeleteCommand implements Command {
         if (idx >= tasks.getSize()) {
             throw new DukeException("OOPS!!! That task doesn't exist.");
         }
+        assert tasks != null;
         String response = "Noted. I've removed this task: \n\t" + tasks.get(idx)
                 + "\nNow you have " + ui.formatNumTasks(tasks.getSize() - 1) + " in the list.";
         tasks.remove(idx);

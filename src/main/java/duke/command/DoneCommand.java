@@ -35,6 +35,7 @@ public class DoneCommand implements Command {
         if (idx >= tasks.getSize()) {
             throw new DukeException("OOPS!!! That task doesn't exist.");
         }
+        assert tasks != null;
         Task t = tasks.get(idx);
         t.markAsDone();
         return "Nice! I've marked this task as done: \n\t" + t;
