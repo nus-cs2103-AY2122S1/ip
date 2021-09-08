@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public class Duke extends Application {
     private final String DEFAULT_FILEPATH = "data/tasks.txt";
 
-    private final Storage storage;
+    private final Storage STORAGE;
     private TaskList tasks;
     private Ui ui;
 
@@ -22,9 +22,9 @@ public class Duke extends Application {
      * If fail, start with an empty TaskList.
      */
     public Duke() {
-        storage = new Storage(DEFAULT_FILEPATH);
+        STORAGE = new Storage(DEFAULT_FILEPATH);
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(STORAGE.load());
         } catch (DukeException e) {
             ui.showError(e.getMessage());
             tasks = new TaskList();
@@ -33,7 +33,7 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        ui = new Ui(stage, storage, tasks);
+        ui = new Ui(stage, STORAGE, tasks);
 
         // Initialize the UI and start the program
         ui.init();

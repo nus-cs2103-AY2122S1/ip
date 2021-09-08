@@ -19,22 +19,22 @@ public class EventTask extends Task {
     private static final DateTimeFormatter SAVE_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter SAVE_TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
-    private final LocalDate date;
-    private final LocalTime time;
+    private final LocalDate DATE;
+    private final LocalTime TIME;
 
     public static final String DELIMITER = " /at ";
     private static final String DELIMITER_DATETIME = " ";
 
     private EventTask(String description, LocalDate date, LocalTime time) {
         super(description);
-        this.date = date;
-        this.time = time;
+        this.DATE = date;
+        this.TIME = time;
     }
 
     private EventTask(String description, boolean isDone, LocalDate date, LocalTime time) {
         super(description, isDone);
-        this.date = date;
-        this.time = time;
+        this.DATE = date;
+        this.TIME = time;
     }
 
     /**
@@ -85,11 +85,11 @@ public class EventTask extends Task {
     @Override
     public String getTaskFileString(String delimiter, String done, String notDone) {
         return "E" + delimiter + (this.isDone ? done : notDone) + delimiter + this.description
-                + delimiter + date.format(SAVE_DATE_FORMATTER) + delimiter + time.format(SAVE_TIME_FORMATTER);
+                + delimiter + DATE.format(SAVE_DATE_FORMATTER) + delimiter + TIME.format(SAVE_TIME_FORMATTER);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date.format(dateFormatter) + " " + time.format(timeFormatter) + ")";
+        return "[E]" + super.toString() + " (at: " + DATE.format(dateFormatter) + " " + TIME.format(timeFormatter) + ")";
     }
 }
