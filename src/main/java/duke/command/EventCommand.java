@@ -16,6 +16,7 @@ public class EventCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        assert event != null : "event should not be null";
         return taskList.addTask(event);
     }
 

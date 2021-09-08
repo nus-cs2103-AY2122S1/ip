@@ -16,6 +16,7 @@ public class TodoCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        assert todo != null : "todo should not be null";
         return taskList.addTask(todo);
     }
 
