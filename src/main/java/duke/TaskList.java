@@ -91,4 +91,27 @@ public class TaskList {
         }
         return matchingTasks;
     }
+
+    /**
+     * Gets a task from the list.
+     *
+     * @param index The task to be retrieved from the list.
+     * @return The task with the index in the list.
+     */
+    public Task get(int index) {
+        return tasks.get(index);
+    }
+
+    /**
+     * Tags a task in the list.
+     *
+     * @param index The index of the task to tag.
+     * @param description The description of the tag.
+     * @return The tagged task.
+     */
+    public Task tag(int index, String description) {
+        Task t = tasks.get(index - 1);
+        t.setTag(description);
+        return t;
+    }
 }

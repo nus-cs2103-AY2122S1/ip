@@ -41,6 +41,8 @@ public class Parser {
             return new DeleteCommand(Integer.parseInt(remainingWords));
         case "find":
             return new FindCommand(remainingWords);
+        case "tag":
+            return new TagCommand(remainingWords);
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

@@ -6,6 +6,7 @@ package duke;
 public class Task {
     protected String description;
     protected boolean isDone;
+    private String tag = null;
 
     /**
      * Constructor for a task.
@@ -26,6 +27,19 @@ public class Task {
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
+    }
+
+    /**
+     * Constructor for a task.
+     *
+     * @param description A short description of the task.
+     * @param isDone A boolean to indicate whether the task is already done.
+     * @param tag The tag to attach to the task.
+     */
+    public Task(String description, boolean isDone, String tag) {
+        this.description = description;
+        this.isDone = isDone;
+        this.tag = tag;
     }
 
     /**
@@ -51,11 +65,26 @@ public class Task {
      */
     public String toStringForFile() {
         String status = (this.isDone) ? "1" : "0";
-        return status + " | " + this.description;
+        return status + " | " + this.description + " | " + this.tag;
     }
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        if (this.tag == null || this.tag.equals("null")) {
+            // There is no tag
+            return "[" + this.getStatusIcon() + "] " + this.description;
+        } else {
+            // There is a tag
+            return "[" + this.getStatusIcon() + "] " + this.description + " #" + this.tag;
+        }
+    }
+
+    /**
+     * Tag the task.
+     *
+     * @param tag The tag to attach to the task.
+     */
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }

@@ -17,7 +17,11 @@ public class Duke {
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
-        this.tasks = new TaskList(storage.load());
+        try {
+            this.tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**

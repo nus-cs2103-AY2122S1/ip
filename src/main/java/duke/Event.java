@@ -35,6 +35,20 @@ public class Event extends Task {
     }
 
     /**
+     * Constructor for an event task.
+     *
+     * @param description A short description of the event.
+     * @param isDone A boolean to indicate whether the event is already done.
+     * @param tag The tag to attach to the task.
+     * @param at The time of the event.
+     */
+    public Event(String description, boolean isDone, String tag, String at) {
+        super(description, isDone, tag);
+        LocalDate d = LocalDate.parse(at);
+        this.at = d;
+    }
+
+    /**
      * Returns the string representation of the task, in a format suitable for storing in a text file.
      *
      * @return The string representation of the task, in a format suitable for storing in a text file.

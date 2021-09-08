@@ -27,7 +27,7 @@ public class Storage {
      *
      * @return An ArrayList of tasks, parsed from the strings in the text file.
      */
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws DukeException {
         try {
             ArrayList<Task> tasks = new ArrayList<>();
             File f = new File(filePath);
@@ -41,18 +41,19 @@ public class Storage {
                 String taskType = splitLine[0];
                 boolean isDone = splitLine[1].equals("1");
                 String description = splitLine[2];
+                String tag = splitLine[3];
 
                 // Store data from file into tasks arraylist
                 Task t = null;
                 switch (taskType) {
                 case "T":
-                    t = new Todo(description, isDone);
+                    t = new Todo(description, isDone, tag);
                     break;
                 case "D":
-                    t = new Deadline(description, isDone, splitLine[3]);
+                    t = new Deadline(description, isDone, tag, splitLine[4]);
                     break;
                 case "E":
-                    t = new Event(description, isDone, splitLine[3]);
+                    t = new Event(description, isDone, tag, splitLine[4]);
                     break;
                 default:
                     break;

@@ -35,6 +35,20 @@ public class Deadline extends Task {
     }
 
     /**
+     * Constructor for a deadline task.
+     *
+     * @param description A short description of the task.
+     * @param isDone A boolean to indicate whether the task is already done.
+     * @param tag The tag to attach to the task.
+     * @param by The deadline of the task.
+     */
+    public Deadline(String description, boolean isDone, String tag, String by) {
+        super(description, isDone, tag);
+        LocalDate d = LocalDate.parse(by);
+        this.by = d;
+    }
+
+    /**
      * Returns the string representation of the task, in a format suitable for storing in a text file.
      *
      * @return The string representation of the task, in a format suitable for storing in a text file.
