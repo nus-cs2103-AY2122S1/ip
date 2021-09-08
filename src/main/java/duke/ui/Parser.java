@@ -2,13 +2,7 @@ package duke.ui;
 
 import java.time.format.DateTimeParseException;
 
-import duke.command.AddTaskCommand;
-import duke.command.Command;
-import duke.command.DeleteTaskCommand;
-import duke.command.ExitCommand;
-import duke.command.FindTaskCommand;
-import duke.command.GetListCommand;
-import duke.command.TaskDoneCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidTaskNoException;
@@ -67,15 +61,19 @@ public class Parser {
      * Returns parsed command which involves a task number.
      *
      * @param words An array of words in the command.
-     * @param isDoneCommand Whether the command is a `done` command.
      * @return Parsed command.
      * @throws InvalidTaskNoException If task number is invalid.
      */
     private static Command parseCommandWithTaskNo(
-            String[] words, boolean isDoneCommand) throws InvalidTaskNoException {
+            String[] words) throws InvalidTaskNoException {
+        String leadingWord = words[0];
         try {
             int index = Integer.parseInt(words[1]) - 1;
-            return isDoneCommand ? new TaskDoneCommand(index) : new DeleteTaskCommand(index);
+            return leadingWord.equals("done")
+                    ? new TaskDoneCommand(index)
+                    : leadingWord.equals("undone")
+                        ? new TaskUndoneCommand(index)
+                        : new DeleteTaskCommand(index);
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
             throw new InvalidTaskNoException();
         }
@@ -98,9 +96,11 @@ public class Parser {
     private static Command parseCommandWithTwoOrMoreWords(String[] words) throws DukeException {
         String leadingWord = words[0];
         if (leadingWord.equals("done")) {
-            return Parser.parseCommandWithTaskNo(words, true);
+            return Parser.parseCommandWithTaskNo(words);
+        } else if (leadingWord.equals("undone")) {
+            return Parser.parseCommandWithTaskNo(words);
         } else if (leadingWord.equals("delete")) {
-            return Parser.parseCommandWithTaskNo(words, false);
+            return Parser.parseCommandWithTaskNo(words);
         } else if (leadingWord.equals("todo")) {
             return Parser.parseTodo(words);
         } else if (leadingWord.equals("deadline")) {
