@@ -59,14 +59,14 @@ public class DuchessFileHandler {
             case 'T': {
                 String[] nameAndDone = task.substring(1).split(",");
                 ToDo todo = new ToDo(nameAndDone[0]);
-                todo.setDone(Boolean.parseBoolean(nameAndDone[1]));
+                todo.setDoneStatus(Boolean.parseBoolean(nameAndDone[1]));
                 d.add(todo);
                 break;
             }
             case 'D': {
                 String[] nameByAndDone = task.substring(1).split(",");
                 Deadline deadline = new Deadline(nameByAndDone[0], Deadline.convertTextToDate(nameByAndDone[1]));
-                deadline.setDone(Boolean.parseBoolean(nameByAndDone[2]));
+                deadline.setDoneStatus(Boolean.parseBoolean(nameByAndDone[2]));
                 d.add(deadline);
                 break;
             }
@@ -74,7 +74,7 @@ public class DuchessFileHandler {
                 String[] nameDayTimeAndDone = task.substring(1).split(",");
                 Event event = new Event(nameDayTimeAndDone[0], Event.convertTextToDate(nameDayTimeAndDone[1]),
                         Event.convertTextToDate(nameDayTimeAndDone[2]));
-                event.setDone(Boolean.parseBoolean(nameDayTimeAndDone[3]));
+                event.setDoneStatus(Boolean.parseBoolean(nameDayTimeAndDone[3]));
                 d.add(event);
                 break;
             }

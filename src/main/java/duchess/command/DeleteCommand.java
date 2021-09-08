@@ -1,8 +1,8 @@
 package duchess.command;
 
-import duchess.main.Duchess;
 import duchess.main.DuchessException;
 import duchess.main.DuchessFileHandler;
+import duchess.main.DuchessList;
 import duchess.task.Task;
 
 /**
@@ -24,20 +24,20 @@ public class DeleteCommand extends Command {
 
     /**
      * Handles the logic for deleting a task.
-     * @param duchess The Duchess to return the output to.
-     * @return Whether to continue scanning for user input afterwards.
+     * @param duchessList The DuchessList to read or write tasks to.
+     * @return The reply from Duchess to the user.
      */
-    public String handleLogic(Duchess duchess) {
-        String index = getName();
+    public String handleLogic(DuchessList duchessList) {
+        String index = getDescription();
         String reply;
         // Parsing a non-numeric string will throw a NumberFormatException
         try {
-            if (duchess.getDuchessList().checkWithinRange(Integer.parseInt(index))) {
+            if (duchessList.checkWithinRange(Integer.parseInt(index))) {
                 // Valid delete task
-                Task deletedTask = duchess.getDuchessList().delete(Integer.parseInt(index));
+                Task deletedTask = duchessList.delete(Integer.parseInt(index));
                 reply = "Alright. I've removed this task:   \n  " + deletedTask
-                        + "\nNow you have " + duchess.getDuchessList().getSize() + " tasks in the list.";
-                DuchessFileHandler.writeToFile(duchess.getDuchessList());
+                        + "\nNow you have " + duchessList.getSize() + " tasks in the list.";
+                DuchessFileHandler.writeToFile(duchessList);
             } else {
                 // "delete" followed by an integer outside of range of the list
                 throw new DuchessException("Apologies, that task does not exist and cannot be deleted.");
@@ -47,7 +47,7 @@ public class DeleteCommand extends Command {
             if (e instanceof NumberFormatException) {
                 reply = "The command \"delete\" should be followed by an integer.";
             } else {
-                reply = ((DuchessException) e).getMessage();
+                reply = e.getMessage();
             }
         }
         assert !reply.isBlank() : "Reply should not be empty.";

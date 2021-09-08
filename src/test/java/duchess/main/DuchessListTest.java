@@ -11,8 +11,17 @@ import duchess.task.Event;
 import duchess.task.Task;
 import duchess.task.ToDo;
 
+/**
+ * This class implements a JUnit Test for the DuchessList methods.
+ *
+ * @author Amos Tan
+ * @version CS2103T AY21/22 Semester 1
+ */
 public class DuchessListTest {
 
+    /**
+     * Tests the add() and getTask() methods.
+     */
     @Test
     public void testAddAndGetTask() {
         DuchessList d = new DuchessList();
@@ -21,6 +30,9 @@ public class DuchessListTest {
         assertEquals(t, d.getTask(1));
     }
 
+    /**
+     * Tests the printList() method.
+     */
     @Test
     public void testPrintList() {
         DuchessList dl = new DuchessList();
@@ -34,6 +46,9 @@ public class DuchessListTest {
                         + "3. [E][ ] meeting (at: Jan 1 +1000000000 00:00 to Dec 31 +999999999 23:59)");
     }
 
+    /**
+     * Tests the checkWithinRange() method.
+     */
     @Test
     public void testCheckWithinRange() {
         DuchessList dl = new DuchessList();
@@ -45,6 +60,9 @@ public class DuchessListTest {
         assertEquals(dl.checkWithinRange(3), false);
     }
 
+    /**
+     * Tests the delete() method.
+     */
     @Test
     public void testDelete() {
         DuchessList dl = new DuchessList();

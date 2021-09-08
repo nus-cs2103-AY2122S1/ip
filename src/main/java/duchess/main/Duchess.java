@@ -14,8 +14,6 @@ public class Duchess {
     private DuchessList duchessList;
     /** The Scanner used to read in user input.*/
     private Scanner sc;
-    /** The Ui object which handles printing to screen.*/
-    private Ui ui;
     /** The parser to determine the respective commands from the user input.*/
     private Parser parser;
 
@@ -24,14 +22,9 @@ public class Duchess {
      * Constructs a Duchess object.
      */
     public Duchess() {
-        this.ui = new Ui();
         this.sc = new Scanner(System.in);
         this.duchessList = DuchessFileHandler.load();
         this.parser = new Parser();
-    }
-
-    public Ui getUi() {
-        return this.ui;
     }
 
     public DuchessList getDuchessList() {
@@ -40,7 +33,7 @@ public class Duchess {
 
     public String getResponse(String input) {
         try {
-            return parser.checkPrefix(input).handleLogic(this);
+            return parser.checkPrefix(input).handleLogic(this.duchessList);
         } catch (DuchessException d) {
             return d.getMessage();
         }

@@ -2,9 +2,9 @@ package duchess.command;
 
 import java.time.LocalDateTime;
 
-import duchess.main.Duchess;
 import duchess.main.DuchessException;
 import duchess.main.DuchessFileHandler;
+import duchess.main.DuchessList;
 import duchess.task.Event;
 
 /**
@@ -16,6 +16,10 @@ import duchess.task.Event;
 
 public class EventCommand extends Command {
 
+    /** The message on the usage of the event command. */
+    private static final String INVALID_MESSAGE = "The command \"event\" should be followed by "
+            + "a task and a date and time, e.g (meeting /at 2/10/2019 2pm-4pm).";
+
     /**
      * Constructs an EventCommand.
      * @param name The description of the Event.
@@ -26,43 +30,50 @@ public class EventCommand extends Command {
 
     /**
      * Handles the logic for checking and creating Event tasks.
-     * @param duchess The Duchess to return the output to.
-     * @return Whether to continue scanning for user input afterwards.
+     * @param duchessList The DuchessList to read or write tasks to.
+     * @return The reply from Duchess to the user.
      */
-    public String handleLogic(Duchess duchess) {
-        String invalidMessage = "The command \"event\" should be followed by "
-                + "a task and a date and time, e.g (meeting /at 2/10/2019 2pm-4pm).";
+    public String handleLogic(DuchessList duchessList) {
         String reply;
-        String taskAndDuration = getName();
+        String taskAndDuration = getDescription();
         try {
-            if (!taskAndDuration.contains(" /at ")) {
-                throw new DuchessException(invalidMessage);
-            }
-            String[] taskParts = taskAndDuration.split(" /at ", 2);
-            String task = taskParts[0];
-            String time = taskParts[1];
-            if (!time.contains(" ")) {
-                throw new DuchessException(invalidMessage);
-            }
-            String[] timeParts = time.split(" ", 2);
-            String day = timeParts[0];
-            String duration = timeParts[1];
-            if (!duration.contains("-")) {
-                throw new DuchessException(invalidMessage);
-            }
-            // Valid input
-            LocalDateTime[] events = Event.convertStringToDate(day, duration);
-            Event event = new Event(task, events[0], events[1]);
-            duchess.getDuchessList().add(event);
-            int listSize = duchess.getDuchessList().getSize();
+            Event event = buildEvent(taskAndDuration);
+            duchessList.add(event);
+            int listSize = duchessList.getSize();
             reply = "Understood. I've added this task:\n    " + event
                     + "\nYou now have " + listSize
                     + (listSize > 1 ? " tasks in the list." : " task in the list.");
-            DuchessFileHandler.writeToFile(duchess.getDuchessList());
+            DuchessFileHandler.writeToFile(duchessList);
         } catch (DuchessException e) {
             reply = e.getMessage();
         }
         assert !reply.isBlank() : "Reply should not be empty.";
         return reply;
+    }
+
+    /**
+     * Builds an Event if the description is a valid input.
+     * @param description The user given input following the event command.
+     * @return The generated Event.
+     * @throws DuchessException If the input does not follow the Event template.
+     */
+    public static Event buildEvent(String description) throws DuchessException {
+        if (!description.contains(" /at ")) {
+            throw new DuchessException(INVALID_MESSAGE);
+        }
+        String[] taskParts = description.split(" /at ", 2);
+        String task = taskParts[0];
+        String time = taskParts[1];
+        if (!time.contains(" ")) {
+            throw new DuchessException(INVALID_MESSAGE);
+        }
+        String[] timeParts = time.split(" ", 2);
+        String day = timeParts[0];
+        String duration = timeParts[1];
+        if (!duration.contains("-")) {
+            throw new DuchessException(INVALID_MESSAGE);
+        }
+        LocalDateTime[] events = Event.convertStringToDates(day, duration);
+        return new Event(task, events[0], events[1]);
     }
 }
