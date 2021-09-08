@@ -102,7 +102,7 @@ public class AddCommand extends Command {
             break;
         default:
             task= null;
-            assert false;
+            assert false: "invalid task command";
             break;
         }
 
