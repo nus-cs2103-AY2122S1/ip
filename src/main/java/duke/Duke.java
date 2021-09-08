@@ -13,6 +13,11 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Provide a path to the directory for Duke to save in.
+     * Duke will create it if it does not exist.
+     * @param savePath
+     */
     public Duke(Path savePath) {
         this.ui = new Ui();
         this.storage = new Storage(ui, savePath);
@@ -24,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke bot.
+     */
     public void run() {
         Parser parser = new Parser(taskList, storage, ui);
         ui.init();

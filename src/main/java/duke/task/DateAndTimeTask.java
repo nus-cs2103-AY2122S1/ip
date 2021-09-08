@@ -5,7 +5,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class DateAndTimeTask extends Task {
+/**
+ * A Task with a Date and Time.
+ * @author Thomas Hogben
+ */
+public abstract class DateAndTimeTask extends Task {
     private LocalDateTime dateTime;
 
     /**
@@ -42,6 +46,11 @@ public class DateAndTimeTask extends Task {
         this.dateTime = parseDateAndTime(dateAndTime);
     }
 
+    /**
+     * @param dateAndTime Expected format: "yyyy-MM-dd HHmm"
+     * @return A LocalDateTime encapsulating the provided date and time.
+     * @throws DukeException If the format of the date and time is incorrect.
+     */
     private LocalDateTime parseDateAndTime(String dateAndTime) throws DukeException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
@@ -51,12 +60,18 @@ public class DateAndTimeTask extends Task {
         }
     }
 
+    /**
+     * @return The save string of this task. Incomplete, to be completed by child classes.
+     */
     @Override
     public String getSave() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         return super.getSave() + "|" + dateTime.format(formatter);
     }
 
+    /**
+     * @return The display string of this task. Incomplete; to be completed by child classes.
+     */
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d LLL yyyy h.mma");
