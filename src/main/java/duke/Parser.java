@@ -45,9 +45,9 @@ public class Parser {
             }
             return new FindCommand(params[1]);
         case ("todo"):
-            //fallthrough
+        //fallthrough
         case ("event"):
-            //fallthrough
+        //fallthrough
         case ("deadline"):
             return new AddCommand(params);
         case ("bye"):

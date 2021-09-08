@@ -116,17 +116,20 @@ public class Duke extends Application {
         return textToAdd;
     }
 
+
     public String getResponse(String input) {
+        String response;
         try {
             Command cmd = Parser.parse(input);
             if (cmd.isExit()) {
                 storage.writeTasksToFile(taskList.getTasks());
-                return ui.getGoodbyeMsg();
+                response = ui.getGoodbyeMsg();
             }
-            String response = cmd.execute(taskList, ui);
-            return response;
+            response = cmd.execute(taskList, ui);
         } catch (DukeException | IOException e) {
             return e.toString();
         }
+        assert !response.equals("") : "Response should not be empty.";
+        return response;
     }
 }
