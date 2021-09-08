@@ -23,6 +23,9 @@ public class Duke {
      * @param filePath user specified file path to store/load saved data
      */
     Duke(String filePath) {
+
+        assert filePath != null : "Filepath is not specified";
+
         try {
             storage = new Storage(filePath);
             tasks = new TaskList(storage.load());
