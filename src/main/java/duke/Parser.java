@@ -42,15 +42,6 @@ public class Parser {
     }
 
     /**
-     * Returns a boolean, whether a program should end or not.
-     *
-     * @return True if program should still run, false otherwise.
-     */
-    public boolean getRun() {
-        return !storage.isExit();
-    }
-
-    /**
      * Parses the user command and inputs the task accordingly.
      *
      * @return String to be printed on GUI.
@@ -60,7 +51,8 @@ public class Parser {
      * @throws FindException If Find is incomplete.
      * @throws DoneException If Done is incomplete.
      */
-    public String parseCommand() throws DukeException, DeleteException, IOException, FindException, DoneException, UndoException, CloneNotSupportedException {
+    public String parseCommand() throws DukeException, DeleteException, IOException, FindException,
+            DoneException, UndoException, CloneNotSupportedException {
 
         Activity activity;
         if (command.equals("bye")) {
@@ -97,7 +89,6 @@ public class Parser {
             } catch (NumberFormatException e) {
                 return "Please input a correct number";
             }
-
             setNewLists(storage, tasks, ui);
             return new Done(index, tasks, storage, ui).execute();
         }
@@ -112,14 +103,9 @@ public class Parser {
             }
             assert desc.substring(1).length() > 0 : "Description should be present";
             ToDo toDo = new ToDo(command.substring(5));
-
-            //
             setNewLists(storage, tasks, ui);
-
             tasks.add(toDo);
             storage.save(tasks);
-
-
             return ui.taskMessageToString(toDo, tasks);
         }
         case EVENT: {
@@ -132,13 +118,9 @@ public class Parser {
             int escapeIndex = command.lastIndexOf("/");
             String dateAndTime = command.substring(escapeIndex + 4);
             Event event = new Event(command.substring(6, escapeIndex - 1), dateAndTime);
-
-            //
             setNewLists(storage, tasks, ui);
-
             tasks.add(event);
             storage.save(tasks);
-
             return ui.taskMessageToString(event, tasks);
         }
         case DELETE: {
@@ -148,10 +130,7 @@ public class Parser {
             } catch (NumberFormatException e) {
                 return "Please input a correct number";
             }
-
-            //
             setNewLists(storage, tasks, ui);
-
             return new Delete(index, tasks, storage, ui).execute();
         }
         case DEADLINE: {
@@ -164,13 +143,9 @@ public class Parser {
             int escapeIndex = command.lastIndexOf("/");
             String dateAndTime = command.substring(escapeIndex + 4);
             Deadline deadline = new Deadline(command.substring(9, escapeIndex - 1), dateAndTime);
-            //
             setNewLists(storage, tasks, ui);
-
             tasks.add(deadline);
             storage.save(tasks);
-
-
             return ui.taskMessageToString(deadline, tasks);
         }
         case FIND: {
@@ -181,7 +156,6 @@ public class Parser {
                 throw new FindException();
             }
             assert desc.substring(1).length() > 0 : "Description should be present";
-
             for (Task t : tasks) {
                 if (t.toString().contains(desc)) {
                     matchingTasks.add(t);
@@ -202,6 +176,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Adds a new Storage, TaskList and Ui to the current Lists for undo command.
+     * @param storage Current Storage to be appended.
+     * @param tasks Current TaskList to be appended.
+     * @param ui Current Ui to be appended.
+     * @throws CloneNotSupportedException If Cloning fails.
+     */
     public void setNewLists(Storage storage, TaskList tasks, Ui ui) throws CloneNotSupportedException {
         this.storageList.add(storage.clone());
         this.tasksList.add((TaskList) tasks.clone());

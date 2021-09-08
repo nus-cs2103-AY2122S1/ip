@@ -29,7 +29,11 @@ public class ToDo extends Task {
     @Override
     public Task getToggledDone() {
         ToDo toggledTodo = new ToDo(description);
-        toggledTodo.toggleDone();
+        if (this.getDone()) {
+            toggledTodo.setUndone();
+        } else {
+            toggledTodo.setDone();
+        }
         return toggledTodo;
     }
 

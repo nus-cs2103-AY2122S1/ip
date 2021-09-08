@@ -2,6 +2,9 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * Done class to maintain done commands.
+ */
 public class Done implements GeneralCommand {
     private int index;
     private TaskList tasks;
@@ -41,6 +44,6 @@ public class Done implements GeneralCommand {
         Task toggledStatusTask = currentTask.getToggledDone();
         tasks.set(index, toggledStatusTask);
         storage.save(tasks);
-        return ui.doneMessageToString(currentTask);
+        return ui.doneMessageToString(toggledStatusTask, toggledStatusTask.getDone());
     }
 }

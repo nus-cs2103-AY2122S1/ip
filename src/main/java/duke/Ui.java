@@ -48,8 +48,8 @@ public class Ui implements Cloneable {
      * @param currentTask The current task.
      * @return Done message.
      */
-    public String doneMessageToString(Task currentTask) {
-        String message = "Nice! I've marked this task as done:" + "\n" + currentTask.toString();
+    public String doneMessageToString(Task currentTask, boolean isDone) {
+        String message = String.format("Nice! I've marked this task as %s:", isDone ? "done" : "undone") + "\n" + currentTask.toString();
         return message;
     }
 

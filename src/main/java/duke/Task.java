@@ -29,12 +29,12 @@ public abstract class Task {
     /**
      * Sets boolean if task is done, or not.
      */
-    public void toggleDone() {
-        if (isDone) {
-            isDone = false;
-        } else {
-            isDone = true;
-        }
+    public void setDone() {
+        isDone = true;
+    }
+
+    public void setUndone() {
+        isDone = false;
     }
 
     /**

@@ -2,6 +2,9 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * Delete class to maintain delete commands
+ */
 public class Delete implements GeneralCommand{
     private int index;
     private TaskList tasks;

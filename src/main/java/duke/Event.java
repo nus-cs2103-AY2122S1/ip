@@ -58,10 +58,19 @@ public class Event extends Task {
         return EVENT + this.getStatusIcon() + " " + this.getDescription() + " (at: " + localDateTime.format(dtf) + ")";
     }
 
+    /**
+     * Returns new Task with the same description as this, but an opposite status.
+     *
+     * @return Copy of this task object.
+     */
     @Override
     public Task getToggledDone() {
         Event toggledEvent = new Event(description, dateAndTime);
-        toggledEvent.toggleDone();
+        if (this.getDone()) {
+            toggledEvent.setUndone();
+        } else {
+            toggledEvent.setDone();
+        }
         return toggledEvent;
     }
 

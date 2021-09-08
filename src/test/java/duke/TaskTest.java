@@ -8,7 +8,7 @@ public class TaskTest {
     public void eventTest() {
         Event firstEvent = new Event("project meeting", "Aug 26 2021 19:15");
         Event secondEvent = new Event("project meeting", "Aug 26 2021 19:15");
-        secondEvent.toggleDone();
+        secondEvent.setDone();
         assertEquals(false, firstEvent.equals(secondEvent));
     }
 

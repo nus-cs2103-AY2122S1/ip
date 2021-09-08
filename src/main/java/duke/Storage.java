@@ -32,7 +32,7 @@ public class Storage implements Cloneable {
         FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            String status = task.isDone ? "1" : "0";
+            String status = task.getDone() ? "1" : "0";
             String date;
             String activity;
             String information;
@@ -78,7 +78,7 @@ public class Storage implements Cloneable {
                 desc = text.substring(8);
                 ToDo todo = new ToDo(desc);
                 if (status.equals("1")) {
-                    todo.toggleDone();
+                    todo.setDone();
                 }
                 tasks.add(todo);
             } else {
@@ -89,13 +89,13 @@ public class Storage implements Cloneable {
                 if (activity.equals("D")) {
                     Deadline deadline = new Deadline(desc, date);
                     if (status.equals("1")) {
-                        deadline.toggleDone();
+                        deadline.setDone();
                     }
                     tasks.add(deadline);
                 } else {
                     Event event = new Event(desc, date);
                     if (status.equals("1")) {
-                        event.toggleDone();
+                        event.setDone();
                     }
                     tasks.add(event);
                 }
