@@ -44,11 +44,11 @@ test {
 }
 
 application {
-    mainClassName = "TiTi.TiTI"
+    mainClassName = "TiTi.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "TiTI"
+    archiveBaseName = "TiTi"
     archiveClassifier = null
 }
 
