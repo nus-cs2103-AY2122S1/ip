@@ -4,6 +4,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Ui {
     public void display(String msg) {
@@ -60,7 +61,8 @@ public class Ui {
 
         for (int i = 0; i < taskList.size(); i++) {
             String taskDescription = taskList.getTask(i).toString();
-            if (taskDescription.contains(str)) {
+            boolean hasKeyword = taskDescription.toUpperCase().contains(str.toUpperCase());
+            if (hasKeyword) {
                 tasksFound.add((i + 1) + "." + taskDescription + ".");
             }
         }
