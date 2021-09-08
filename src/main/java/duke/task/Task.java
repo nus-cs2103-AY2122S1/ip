@@ -66,12 +66,9 @@ public class Task {
      */
     public boolean isKeyWordPresent(String keyWord) {
         int intIndex = description.indexOf(keyWord);
+        boolean isPresent = !(intIndex == -1);
 
-        if (intIndex == -1) {
-            return false;
-        } else {
-            return true;
-        }
+        return isPresent;
     }
 
 }

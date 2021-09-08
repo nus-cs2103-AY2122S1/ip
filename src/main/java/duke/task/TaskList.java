@@ -102,16 +102,10 @@ public class TaskList {
      * @return String format of all tasks in the task list.
      */
     public String toFileString() {
-        String fileTask;
+        String fileTask = "";
 
-        if (taskList.isEmpty()) {
-            fileTask = "";
-        } else {
-            fileTask = taskList.get(0).toFileString();
-        }
-
-        for (int i = 1; i < taskList.size(); i++) {
-            fileTask = fileTask + "\n" + taskList.get(i).toFileString();
+        for (int i = 0; i < taskList.size(); i++) {
+            fileTask = fileTask + taskList.get(i).toFileString() + "\n";
         }
 
         return fileTask;
@@ -126,7 +120,6 @@ public class TaskList {
      */
     public ArrayList<Task> findTask(String keyWord) throws DukeException {
         ArrayList<Task> newTasks = new ArrayList<>();
-
         int numTask = this.totalTask();
 
         for (int i = 1; i <= numTask; i++) {

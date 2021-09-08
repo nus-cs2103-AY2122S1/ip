@@ -23,38 +23,23 @@ public class AddCommand extends Command {
      * @throws DukeException If description given is invalid.
      */
     public AddCommand(String command, String description) throws DukeException {
-        if (command.equals("todo")) {
-            String[] splitString = description.split("todo ");
+        switch(command) {
+        case "todo":
+            task = AddCommand.createTodo(description);
+            break;
 
-            if (splitString.length > 1) {
-                String taskDescription = splitString[1];
-                task = new Todo(taskDescription);
-            } else {
-                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-            }
+        case "deadline":
+            task = AddCommand.createDeadline(description);
+            break;
 
-        } else if (command.equals("deadline")) {
-            String[] splitString = description.split("deadline |/by");
+        case "event":
+            task = AddCommand.createEvent(description);
+            break;
 
-            if (splitString.length > 2) {
-                String taskDescription = splitString[1];
-                String by = splitString[2];
-                task = new Deadline(taskDescription, by);
-            } else {
-                throw new DukeException("OOPS!!! The description/by of a deadline cannot be empty.");
-            }
-
-        } else {
-            String[] splitString = description.split("event |/at");
-
-            if (splitString.length > 2) {
-                String taskDescription = splitString[1];
-                String at = splitString[2];
-                task = new Event(taskDescription, at);
-            } else {
-                throw new DukeException("OOPS!!! The description/at of an event cannot be empty.");
-            }
+        default:
+            throw new DukeException("The command enter is invalid");
         }
+
     }
 
     /**
@@ -88,4 +73,47 @@ public class AddCommand extends Command {
         return false;
     }
 
+    private static Task createDeadline(String description) throws DukeException{
+        String[] splitString = description.split("deadline ");
+        Task newTask;
+
+        if (splitString.length > 1) {
+            String taskDescription = splitString[1];
+            newTask = new Todo(taskDescription);
+        } else {
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+        }
+
+        return newTask;
+    }
+
+    private static Task createTodo(String description) throws DukeException{
+        String[] splitString = description.split("deadline |/by");
+        Task newTask;
+
+        if (splitString.length > 2) {
+            String taskDescription = splitString[1];
+            String by = splitString[2];
+            newTask = new Deadline(taskDescription, by);
+        } else {
+            throw new DukeException("OOPS!!! The description/by of a deadline cannot be empty.");
+        }
+
+        return newTask;
+    }
+
+    private static Task createEvent(String description) throws DukeException{
+        String[] splitString = description.split("event |/at");
+        Task newTask;
+
+        if (splitString.length > 2) {
+            String taskDescription = splitString[1];
+            String at = splitString[2];
+            newTask = new Event(taskDescription, at);
+        } else {
+            throw new DukeException("OOPS!!! The description/at of an event cannot be empty.");
+        }
+
+        return newTask;
+    }
 }

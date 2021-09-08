@@ -29,6 +29,7 @@ public class Ui {
      * @return Task added to the list.
      */
     public String showAddTask(Task task, TaskList taskList) {
+
         assert task != null;
         assert taskList != null;
 
@@ -77,18 +78,13 @@ public class Ui {
         assert taskList != null;
 
         int numTask = taskList.totalTask();
-        String task;
+        String task = "";
 
-        if (numTask == 0) {
-            task = "";
-        } else {
-            task = "1. " + taskList.getTask(1).toString();
-            for (int taskNumber = 2; taskNumber <= numTask; taskNumber++) {
-                task = task + "\n" + taskNumber + ". " + taskList.getTask(taskNumber).toString();
-            }
+        for (int taskNumber = 1; taskNumber <= numTask; taskNumber++) {
+            task = task + "\n" + taskNumber + ". " + taskList.getTask(taskNumber).toString();
         }
 
-        String listStatement = "Here are the tasks in your list:\n";
+        String listStatement = "Here are the tasks in your list:";
         String output = listStatement + task;
         return output;
     }
@@ -122,18 +118,18 @@ public class Ui {
         if (tasks.size() == 0) {
             String noMatch = "Sorry, no match found";
             return noMatch;
-        } else {
-            int numTask = tasks.size();
-
-            String task = "1. " + tasks.get(0).toString();
-            for (int taskNumber = 2; taskNumber <= numTask; taskNumber++) {
-                task = task + "\n" + taskNumber + ". " + tasks.get(taskNumber - 1).toString();
-            }
-
-            task = "Here are the matching tasks in your list:\n" + task;
-
-            return task;
         }
+
+        int numTask = tasks.size();
+        String task = "";
+
+        for (int taskNumber = 1; taskNumber <= numTask; taskNumber++) {
+            task = task + "\n" + taskNumber + ". " + tasks.get(taskNumber - 1).toString();
+        }
+
+        String taskList = "Here are the matching tasks in your list:" + task;
+
+        return taskList;
     }
 
 }
