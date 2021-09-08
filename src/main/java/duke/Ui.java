@@ -9,21 +9,15 @@ import duke.tasks.Task;
  * Handles both input and displaying output.
  */
 public class Ui {
-    private boolean isExit;
-    static final String GREETING = "Hello! I'm Duck! *quack*\n"
+    private static final String GREETING = "Hello! I'm Duck! *quack*\n"
             + "What can I do for you?\n";
     private static final String BYE = "Bye. Hope to see you again soon!\n"
             + "*quack*\n";
-    
-    /** Constructor for Ui object.*/
-    public Ui() {
-        this.isExit = false;
-    }
 
     /**
      * Prints greeting to users upon running.
      */
-    public String showGreeting() {
+    public static String showGreeting() {
         return GREETING;
     }
 
@@ -39,7 +33,7 @@ public class Ui {
      *
      * @param errorMessage message from errors caught.
      */
-    public String showError(String errorMessage) {
+    public static String showError(String errorMessage) {
         return errorMessage;
     }
 
@@ -50,10 +44,6 @@ public class Ui {
      */
     public void showLoadingError(String errorMessage) {
         System.out.println("OOPS!! An error has occurred: " + errorMessage);
-    }
-
-    public boolean getIsExit() {
-        return this.isExit;
     }
 
     /**
