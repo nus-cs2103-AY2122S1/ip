@@ -3,7 +3,6 @@ package duke.exceptions;
 /**
  * Class that handles all exceptions specific to Duke.
  *
- * @author Ruth Poh
  */
 public class DukeException extends Exception {
     /**

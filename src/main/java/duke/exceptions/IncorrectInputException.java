@@ -7,6 +7,6 @@ public class IncorrectInputException extends DukeException {
      * @param suggestion suggestion made to user.
      */
     public IncorrectInputException(String keyword, String suggestion) {
-        super ("Ohw no! Youw cawn't use " + keyword + " likw that! Twy " + suggestion + " inswead!");
+        super("Ohw no! Youw cawn't use " + keyword + " likw that! Twy " + suggestion + " inswead!");
     }
 }

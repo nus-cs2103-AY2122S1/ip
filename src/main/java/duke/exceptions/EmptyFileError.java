@@ -1,5 +1,9 @@
 package duke.exceptions;
 
+/**
+ * Class that handles empty file errors.
+ *
+ */
 public class EmptyFileError extends DukeException {
     /**
      * Occurs when Duke tries to read txt file for Task list, but comes up empty.

@@ -33,15 +33,13 @@ public class TaskList {
     TaskList(ArrayList<Task> taskArr) {
         this.taskArr = taskArr;
         this.counter = taskArr.size();
-
     }
 
     /**
      * Adds Todo (Task) to TaskList.
      * @param todo Todo task.
-     * @throws DukeException Occurs when anything goes wrong during method.
      */
-    public void addTodo(Todo todo) throws DukeException {
+    public void addTodo(Todo todo) {
         taskArr.add(todo);
         counter++;
     }
@@ -50,9 +48,8 @@ public class TaskList {
      * Adds Todo Task to TaskList. Occurs when loading from file.
      * @param task String of task.
      * @param isDoneInt Whether task is done or not. 0 is not done, 1 is done.
-     * @throws DukeException Occurs when anything goes wrong during method.
      */
-    public void addReadTodo(String task, int isDoneInt) throws DukeException {
+    public void addReadTodo(String task, int isDoneInt) {
         taskArr.add(new Todo(task));
         if (isDoneInt == 1) {
             this.markReadDone(this.counter);
@@ -63,9 +60,8 @@ public class TaskList {
     /**
      * Adds Deadline Task to TaskList.
      * @param deadline Deadline task.
-     * @throws DukeException Occurs when anything goes wrong during method.
      */
-    public void addDeadline(Deadline deadline) throws DukeException {
+    public void addDeadline(Deadline deadline) {
         taskArr.add(deadline);
         counter++;
     }
@@ -76,9 +72,8 @@ public class TaskList {
      * @param isDoneInt Whether task is done or not. 0 is not done, 1 is done.
      * @param date Date deadline task needs to be done by.
      * @param time Time deadline occurs by.
-     * @throws DukeException Occurs when anything goes wrong during method.
      */
-    public void addReadDeadline(String task, int isDoneInt, String date, String time) throws DukeException {
+    public void addReadDeadline(String task, int isDoneInt, String date, String time) {
         if (time != null) {
             taskArr.add(new Deadline(task, LocalDate.parse(date)));
         } else {
@@ -93,9 +88,8 @@ public class TaskList {
     /**
      * Adds Event Task to TaskList.
      * @param event Event task.
-     * @throws DukeException Occurs when anything goes wrong during method.
      */
-    public void addEvent(Event event) throws DukeException {
+    public void addEvent(Event event) {
         taskArr.add(event);
         counter++;
     }
@@ -106,9 +100,8 @@ public class TaskList {
      * @param isDoneInt Whether task is done or not. 0 is not done, 1 is done.
      * @param date Date event occurs at.
      * @param time Time event occurs at.
-     * @throws DukeException Occurs when anything goes wrong during method.
      */
-    public void addReadEvent(String task, int isDoneInt, String date, String time) throws DukeException {
+    public void addReadEvent(String task, int isDoneInt, String date, String time) {
         if (time != null) {
             taskArr.add(new Event(task, LocalDate.parse(date)));
         } else {
@@ -123,7 +116,9 @@ public class TaskList {
      * Marks task as done. Returns number of task in TaskList that is done.
      * @param strparse Array of Strings to be parsed.
      * @return Number of tasks in TaskList that is done.
-     * @throws DukeException Occurs when anything goes wrong during method.
+     * @throws MissingInputException When there is a missing input after the keyword "done".
+     * @throws MissingNoException When there is a missing number after the keyword.
+     * @throws TaskDoneException When task is already marked as done.
      */
     public int markDone(String[] strparse) throws DukeException {
         if (strparse.length == 1) {
@@ -148,9 +143,8 @@ public class TaskList {
     /**
      * Marks task as done. Occurs when loading from file.
      * @param i Number of task in TaskList that is done.
-     * @throws DukeException Occurs when anything goes wrong during method.
      */
-    public void markReadDone(int i) throws DukeException {
+    public void markReadDone(int i) {
         boolean temp = taskArr.get(i).markAsDone();
     }
 
@@ -158,7 +152,8 @@ public class TaskList {
      * Removes Task from TaskList. Returns deleted Task.
      * @param strparse Array of Strings to be parsed.
      * @return Deleted Task.
-     * @throws DukeException Occurs when anything goes wrong during method.
+     * @throws MissingInputException When there is a missing input after the keyword "delete".
+     * @throws MissingNoException When there is a missing number after the keyword.
      */
     public Task delete(String[] strparse) throws DukeException {
         if (strparse.length == 1) {
@@ -183,18 +178,16 @@ public class TaskList {
     /**
      * Gets current number of tasks in TaskList - 1 (because it is counter).
      * @return Current number of tasks in TaskList - 1
-     * @throws DukeException Occurs when anything goes wrong during method.
      */
-    public int getTaskCounter() throws DukeException {
+    public int getTaskCounter() {
         return this.counter;
     }
 
     /**
      * Displays list of Tasks in TaskList, numbered.
      * @return List of Tasks in TaskList, numbered.
-     * @throws DukeException Occurs when anything goes wrong during method.
      */
-    public String displayList() throws DukeException {
+    public String displayList() {
         StringBuilder strb = new StringBuilder();
         for (int i = 0; i < this.counter; i++) {
             strb.append(i + 1).append(". ").append(this.taskArr.get(i).toString()).append('\n');
@@ -206,9 +199,8 @@ public class TaskList {
      * Gets Task from TaskList.
      * @param i Specifies which Task to take.
      * @return Task as specified.
-     * @throws DukeException Occurs when anything goes wrong during method.
      */
-    public Task getTask(int i) throws DukeException {
+    public Task getTask(int i) {
         return taskArr.get(counter - 1);
     }
 
@@ -216,27 +208,24 @@ public class TaskList {
      * Gets Task from TaskList, in String form.
      * @param i Specifies which Task to take.
      * @return String of Task as specified.
-     * @throws DukeException Occurs when anything goes wrong during method.
      */
-    public String getTaskDescr(int i) throws DukeException {
+    public String getTaskDescr(int i) {
         return taskArr.get(i - 1).toString();
     }
 
     /**
      * Returns last Task added to the TaskList, in String form.
      * @return Last Task added to the TaskList.
-     * @throws DukeException Occurs when anything goes wrong during method.
      */
-    public String lastAddedTask() throws DukeException {
+    public String lastAddedTask() {
         return taskArr.get(counter - 1).toString();
     }
 
     /**
      * Converts TaskList to String form to save in file. Different from displayList.
      * @return TaskList in String form to save in file.
-     * @throws DukeException Occurs when anything goes wrong during method.
      */
-    public String saveAsString() throws DukeException {
+    public String saveAsString() {
         StringBuilder strb = new StringBuilder();
         for (int i = 0; i < this.counter; i++) {
             strb.append(taskArr.get(i).toStorageString());
@@ -251,6 +240,7 @@ public class TaskList {
      * Finds Tasks that has the keyword for find.
      * @param keyword keyword to find.
      * @return String of Tasks found with the keyword.
+     * @throws KeywordNotFoundException When there is nothing to find.
      */
     public String find(String keyword) throws DukeException {
         boolean isFound = false;
@@ -272,5 +262,4 @@ public class TaskList {
             throw new KeywordNotFoundException(keyword);
         }
     }
-
 }
