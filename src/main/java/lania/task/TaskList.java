@@ -29,6 +29,16 @@ public class TaskList {
     }
 
     /**
+     * Adds a task to the task list at specified index.
+     *
+     * @param task The task to be added.
+     */
+    public void update(Task task, int index) {
+        tasks.add(index, task);
+        assert tasks.contains(task);
+    }
+
+    /**
      * Marks a task in the task list as done
      * with the given index.
      *

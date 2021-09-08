@@ -2,6 +2,7 @@ package lania;
 
 import java.util.ArrayList;
 
+import javafx.util.Pair;
 import lania.task.Task;
 
 /**
@@ -13,10 +14,10 @@ import lania.task.Task;
 public class Log {
     /** List of past user commands */
     private ArrayList<String> commandLog;
-    /** List of past removed tasks */
-    private ArrayList<Task> removedTasks;
     /** List of tasks marked as complete */
     private ArrayList<Integer> doneTasks;
+    /** List of past removed tasks */
+    private ArrayList<Pair<Task, Integer>> removedTasks;
 
     /**
      * Constructor for Log. Initialises the empty fields.
@@ -43,9 +44,10 @@ public class Log {
      * @param description The type of command given.
      * @param task The removed task.
      */
-    public void addLog(String description, Task task) {
+    public void addLog(String description, Task task, int index) {
         commandLog.add(description);
-        removedTasks.add(task);
+        Pair<Task, Integer> taskPair = new Pair<>(task, index - 1);
+        removedTasks.add(taskPair);
     }
 
     /**
@@ -75,8 +77,8 @@ public class Log {
      *
      * @return The most recent deleted task.
      */
-    public Task getDeletedTask() {
-        Task recentTask = removedTasks.get(removedTasks.size() - 1);
+    public Pair<Task, Integer> getDeletedTask() {
+        Pair<Task, Integer> recentTask = removedTasks.get(removedTasks.size() - 1);
         return recentTask;
     }
 

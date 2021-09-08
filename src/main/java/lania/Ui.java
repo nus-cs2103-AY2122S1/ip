@@ -104,7 +104,7 @@ public class Ui {
      * @param i The index of the task the user has completed.
      * @return The message displayed to user concatenated as a string.
      */
-    public String showUnCompleteMessage(TaskList tasks, int i) {
+    public String showIncompleteMessage(TaskList tasks, int i) {
         // display to user
         System.out.println("Lania has marked this task as undone:");
         System.out.println(tasks.get(i));

@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage, Ui ui, Log log) {
         Task deletedTask = tasks.remove(index);
-        log.addLog("delete", deletedTask);
+        log.addLog("delete", deletedTask, index);
         String message = ui.showRemoveMessage(tasks, deletedTask);
 
         try {

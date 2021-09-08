@@ -2,6 +2,7 @@ package lania.command;
 
 import java.io.IOException;
 
+import javafx.util.Pair;
 import lania.Log;
 import lania.Storage;
 import lania.Ui;
@@ -36,13 +37,13 @@ public class UndoCommand extends Command {
             Task deletedTask = tasks.remove(tasks.size());
             message = ui.showRemoveMessage(tasks, deletedTask);
         } else if (command.equals("delete")) {
-            Task removedTask = log.getDeletedTask();
-            tasks.update(removedTask);
-            message = ui.showUpdateMessage(tasks, removedTask);
+            Pair<Task, Integer> removedTask = log.getDeletedTask();
+            tasks.update(removedTask.getKey(), removedTask.getValue());
+            message = ui.showUpdateMessage(tasks, removedTask.getKey());
         } else {
             int markedIndex = log.getMarkedTask();
             tasks.unComplete(markedIndex);
-            message = ui.showUnCompleteMessage(tasks, markedIndex - 1);
+            message = ui.showIncompleteMessage(tasks, markedIndex - 1);
         }
 
         try {

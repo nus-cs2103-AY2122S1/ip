@@ -81,6 +81,10 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Generates a greeting and list of task message when GUI is opened.
+     *
+     */
     public void startDialog() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getLaniaDialog(ui.showGreetingMessage() + "\n" + ui.showListMessage(tasks), laniaImage)
