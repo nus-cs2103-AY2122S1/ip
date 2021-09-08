@@ -4,6 +4,7 @@ import duke.exception.DukeException;
 import duke.exception.DukeInvalidArgumentException;
 import duke.exception.DukeMissingArgumentException;
 import duke.exception.DukeNoTaskFoundException;
+import duke.exception.DukeUnknownCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -19,19 +20,21 @@ import java.time.format.DateTimeParseException;
  * Represents the Duke chatbot object.
  */
 public class Duke {
+    private static String FILEPATH = "./data/duke.txt";
+
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
+    private boolean isRunning;
 
 
     /**
      * Constructor for Duke.
-     *
-     * @param filePath the path to an existing txt database file or the path to save the new txt database file
      */
-    public Duke(String filePath) {
-        this.storage = new Storage(filePath);
+    public Duke() {
+        this.storage = new Storage(Duke.FILEPATH);
         this.ui = new Ui();
+        this.isRunning = true;
         try {
             this.taskList = new TaskList(this.storage.loadData());
         } catch (DukeException e) {
@@ -41,42 +44,11 @@ public class Duke {
 
 
     private void run() {
-        this.ui.showGreet();
-        running:
-        while (true) {
-            try {
-                String userInput = this.ui.readInput();
-                switch (Parser.parseCmd(userInput)) {
-                case BYE:
-                    this.exit();
-                    break running;
-                case LIST:
-                    this.ui.showList(this.taskList);
-                    break;
-                case TODO:
-                    this.addTodo(Parser.parseArgs(userInput));
-                    break;
-                case EVENT:
-                    this.addEvent(Parser.parseArgs(userInput));
-                    break;
-                case DEADLINE:
-                    this.addDeadline(Parser.parseArgs(userInput));
-                    break;
-                case DONE:
-                    this.markAsDone(Parser.parseArgs(userInput));
-                    break;
-                case DELETE:
-                    this.delete(Parser.parseArgs(userInput));
-                    break;
-                case FIND:
-                    this.ui.showSearchResult(this.taskList, Parser.parseArgs(userInput));
-                    break;
-                }
-            } catch (DukeException e) {
-                this.ui.showDukeException(e);
-            }
+        System.out.println(this.ui.showGreet());
+        while (this.isRunning) {
+            String input = this.ui.readInput();
+            System.out.println(this.getResponse(input));
         }
-        this.ui.showFarewell();
     }
 
 
@@ -84,24 +56,54 @@ public class Duke {
         try {
             this.ui.closeInput();
             this.storage.saveData(this.taskList);
+            this.isRunning = false;
         } catch (IOException e) {
             this.ui.showSavingError();
         }
     }
 
 
-    private void addTodo(String args) throws DukeMissingArgumentException {
+    protected String getResponse(String input) {
+        try {
+            switch (Parser.parseCmd(input)) {
+            case BYE:
+                this.exit();
+                return this.ui.showFarewell();
+            case LIST:
+                return this.ui.showList(this.taskList);
+            case TODO:
+                return this.addTodo(Parser.parseArgs(input));
+            case EVENT:
+                return this.addEvent(Parser.parseArgs(input));
+            case DEADLINE:
+                return this.addDeadline(Parser.parseArgs(input));
+            case DONE:
+                return this.markAsDone(Parser.parseArgs(input));
+            case DELETE:
+                return this.delete(Parser.parseArgs(input));
+            case FIND:
+                return this.ui.showSearchResult(this.taskList, Parser.parseArgs(input));
+            default:
+                throw new DukeUnknownCommandException(input);
+            }
+        } catch (DukeException e) {
+           return this.ui.showDukeException(e);
+        }
+    }
+
+
+    private String addTodo(String args) throws DukeMissingArgumentException {
         try {
             Task todo = new Todo(args);
             this.taskList.add(todo);
-            this.ui.showAdd(todo, this.taskList.getLength());
+            return this.ui.showAdd(todo, this.taskList.getLength());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeMissingArgumentException();
         }
     }
 
 
-    private void addEvent(String args) throws DukeMissingArgumentException {
+    private String addEvent(String args) throws DukeMissingArgumentException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
             String[] splits = args.split(" /from ", 2);
@@ -111,22 +113,21 @@ public class Duke {
             LocalDateTime startTime = LocalDateTime.parse(start, formatter);
             LocalDateTime endTime = LocalDateTime.parse(end, formatter);
             if (startTime.isAfter(endTime)) {
-                this.ui.showInvalidDateRange();
-                return;
+                return this.ui.showInvalidDateRange();
             }
 
             Task event = new Event(splits[0], startTime, endTime);
             this.taskList.add(event);
-            this.ui.showAdd(event, this.taskList.getLength());
+            return this.ui.showAdd(event, this.taskList.getLength());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeMissingArgumentException();
         } catch (DateTimeParseException e) {
-            this.ui.showInvalidDateFormat();
+            return this.ui.showInvalidDateFormat();
         }
     }
 
 
-    private void addDeadline(String args) throws DukeMissingArgumentException {
+    private String addDeadline(String args) throws DukeMissingArgumentException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
             String[] splits = args.split(" /by ", 2);
@@ -134,16 +135,16 @@ public class Duke {
 
             Task deadline = new Deadline(splits[0], time);
             this.taskList.add(deadline);
-            this.ui.showAdd(deadline, this.taskList.getLength());
+            return this.ui.showAdd(deadline, this.taskList.getLength());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeMissingArgumentException();
         } catch (DateTimeParseException e) {
-            this.ui.showInvalidDateFormat();
+            return this.ui.showInvalidDateFormat();
         }
     }
 
 
-    private void markAsDone(String args)
+    private String markAsDone(String args)
             throws DukeNoTaskFoundException, DukeMissingArgumentException, DukeInvalidArgumentException {
         try {
             int taskNum = Integer.parseInt(args);
@@ -151,7 +152,7 @@ public class Duke {
                 throw new DukeNoTaskFoundException(taskNum);
             }
             this.taskList.get(taskNum).markAsDone();
-            this.ui.showDone(this.taskList.get(taskNum));
+            return this.ui.showDone(this.taskList.get(taskNum));
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException();
         } catch (IndexOutOfBoundsException e) {
@@ -160,7 +161,7 @@ public class Duke {
     }
 
 
-    private void delete(String args)
+    private String delete(String args)
             throws DukeNoTaskFoundException, DukeMissingArgumentException, DukeInvalidArgumentException {
         try {
             int taskNum = Integer.parseInt(args);
@@ -168,8 +169,9 @@ public class Duke {
                 throw new DukeNoTaskFoundException(taskNum);
             }
             Task taskToDelete = this.taskList.get(taskNum);
-            this.ui.showDelete(taskToDelete, this.taskList.getLength());
+            String msg = this.ui.showDelete(taskToDelete, this.taskList.getLength());
             this.taskList.delete(taskNum);
+            return msg;
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException();
         } catch (IndexOutOfBoundsException e) {
@@ -179,6 +181,6 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        new Duke("./data/duke.txt").run();
+        new Duke().run();
     }
 }
