@@ -163,10 +163,9 @@ public class Parser {
      * @return appropriate expense command given the user input.
      * @throws MessageEmptyException if the message is missing from the user input.
      * @throws InvalidExpenseFormatException if the format of entering an expense command is invalid.
-     * @throws TaskNotFoundException if the task cannot be found.
      */
     private Command chooseCorrectExpenseCommand(String expense) throws MessageEmptyException,
-            InvalidExpenseFormatException, TaskNotFoundException {
+            InvalidExpenseFormatException {
 
         try {
             expense = expense.trim().substring(8).trim();
@@ -175,29 +174,57 @@ public class Parser {
         }
         boolean isAllPresent = expense.matches("(?i)/listall");
         if (isAllPresent) {
-            return new ExpenseCommand(-1, "", 0);
+            return new ExpenseCommand(-1, "", 0, true, false);
         }
+
         String[] parsedExpense = expense.split(" ");
         String indexAsString = parsedExpense[0];
+
+        boolean isDelete = expense.matches("([0-9]+)\\s+/delete\\s+([0-9]+)");
+        boolean isDisplay = expense.matches("([0-9]+)");
+        boolean isAdd = expense.matches("(\\d+)\\s+(.+)\\s+(\\$)(\\d+)");
+
         try {
-            int index = Integer.parseInt(indexAsString) - 1;
-            if (index < 0) {
-                throw new TaskNotFoundException();
-            }
             int endingIndexOfNumber = expense.indexOf(indexAsString) + indexAsString.length();
-            ArrayList<String> parsedInfo = separatePurposeAndAmount(expense.substring(endingIndexOfNumber));
-            String purpose = parsedInfo.get(0);
-            float amount = Float.parseFloat(parsedInfo.get(1));
-            return new ExpenseCommand(index, purpose, amount);
-        } catch (IndexOutOfBoundsException e) {
-            // listing out expenses of 1 task
-            int index = Integer.parseInt(indexAsString) - 1;
-            if (index < 0) {
-                throw new TaskNotFoundException();
+
+
+            if (isAdd) {
+                int index = Integer.parseInt(indexAsString) - 1;
+                ArrayList<String> parsedInfo = separatePurposeAndAmount(expense.substring(endingIndexOfNumber));
+                String purpose = parsedInfo.get(0);
+                float amount = Float.parseFloat(parsedInfo.get(1));
+                return new ExpenseCommand(index, purpose, amount);
+            } else if (isDisplay) {
+                int index = Integer.parseInt(indexAsString) - 1;
+                return new ExpenseCommand(index, "", 0, false, true);
+            } else if (isDelete) {
+                int index = Integer.parseInt(indexAsString) - 1;
+                int deleteIndex = extractExpenseDelete(expense.substring(endingIndexOfNumber));
+                return new ExpenseCommand(index, deleteIndex);
+            } else {
+                throw new InvalidExpenseFormatException();
             }
-            return new ExpenseCommand(index, "", 0);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidExpenseFormatException();
+        }
+    }
+
+    /**
+     * Extracts the index of expense to be deleted.
+     *
+     * @param input the user input without the expense command.
+     * @return the index of expense to be deleted.
+     * @throws InvalidExpenseFormatException if the format of expense command is wrong.
+     */
+    private int extractExpenseDelete(String input) throws InvalidExpenseFormatException {
+        input = input.trim();
+        String[] parsedInfo = input.split("/delete");
+        if (parsedInfo.length > 2) {
+            throw new InvalidExpenseFormatException();
+        }
+        try {
+            return Integer.parseInt(parsedInfo[1].trim()) - 1;
         } catch (NumberFormatException e) {
-            // happens when the values entered cannot be converted from String properly
             throw new InvalidExpenseFormatException();
         }
     }

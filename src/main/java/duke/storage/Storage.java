@@ -65,7 +65,7 @@ public class Storage {
 
         int count = 1;
         for (Task task : taskList) {
-            fw.write(task.toString() + System.lineSeparator());
+            fw.write(task.parseToSave() + System.lineSeparator());
             if (task.hasExpenses()) {
                 fwExpenses.write(count + "|" + task.formatExpensesToSave() + System.lineSeparator());
             }
@@ -109,13 +109,13 @@ public class Storage {
 
                 switch (extractTask(nextCommand)) {
                 case DEADLINE:
-                    task = extractDeadline(extractMessage(nextCommand));
+                    task = extractDeadline(nextCommand);
                     break;
                 case EVENT:
-                    task = extractEvent(extractMessage(nextCommand));
+                    task = extractEvent(nextCommand);
                     break;
                 case TODO:
-                    task = new Todo(extractMessage(nextCommand));
+                    task = extractTodo(nextCommand);
                     break;
                 default:
                     throw new DataFileChangedException();
@@ -173,17 +173,7 @@ public class Storage {
      * @return boolean that indicates if the task has been marked done.
      */
     private boolean isMarkedDone(String input) {
-        return input.charAt(4) == 'X';
-    }
-
-    /**
-     * Extracts the message of the task.
-     *
-     * @param input input from data file.
-     * @return message of the task.
-     */
-    private String extractMessage(String input) {
-        return input.substring(7);
+        return input.charAt(2) == 'X';
     }
 
     /**
@@ -193,7 +183,19 @@ public class Storage {
      * @return the letter indicating the type of task.
      */
     private char extractTask(String input) {
-        return input.charAt(1);
+        return input.charAt(0);
+    }
+
+    /**
+     * Extracts a todo from the data file in the proper format for duke to read.
+     *
+     * @param text the todo in the data file.
+     * @return a new todo that represents the todo from the data file.
+     */
+    private Todo extractTodo(String text) {
+        String[] parsedTodo = text.split("\\|");
+        String description = parsedTodo[2];
+        return new Todo(description);
     }
 
     /**
@@ -203,11 +205,10 @@ public class Storage {
      * @return a new deadline that represents the deadline from the data file.
      */
     private Deadline extractDeadline(String text) {
-        int lastOccurrenceOfBy = text.lastIndexOf(" (by: "); // in case other bys appear
-        String description = text.substring(0, lastOccurrenceOfBy);
+        String[] parsedText = text.split("\\|");
 
-        // disregards "( by: " and trailing ")"
-        String by = text.substring(lastOccurrenceOfBy + 6, text.length() - 1);
+        String description = parsedText[2];
+        String by = parsedText[3];
 
         LocalDateTime dateTime = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a"));
 
@@ -221,44 +222,17 @@ public class Storage {
      * @return a new deadline that represents the deadline from the data file.
      */
     private Event extractEvent(String text) {
-        ArrayList<String> parsedInfo = parseEventInfo(text);
+        String[] parsedEvent = text.split("\\|");
 
-        String description = parsedInfo.get(0);
-        String date = parsedInfo.get(1);
-        String startTime = parsedInfo.get(2);
-        String endTime = parsedInfo.get(3);
+        String description = parsedEvent[2];
+        String date = parsedEvent[3];
+        String startTime = parsedEvent[4];
+        String endTime = parsedEvent[5];
 
         LocalDate finalDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("MMM d yyyy"));
         LocalTime finalStartTime = LocalTime.parse(startTime, DateTimeFormatter.ofPattern("h:mm a"));
         LocalTime finalEndTime = LocalTime.parse(endTime, DateTimeFormatter.ofPattern("h:mm a"));
 
         return new Event(description, finalDate, finalStartTime, finalEndTime);
-    }
-
-    /**
-     * Method to parse information of the event.
-     *
-     * @param text data saved in file.
-     * @return ArrayList of description, date, and times of event.
-     */
-    private ArrayList<String> parseEventInfo(String text) {
-        int lastOccurrenceOfAt = text.lastIndexOf(" (at: ");
-        String description = text.substring(0, lastOccurrenceOfAt);
-        ArrayList<String> parsedInfo = new ArrayList<>();
-
-        // disregards "( at: " and trailing ")"
-        String at = text.substring(lastOccurrenceOfAt + 6, text.length() - 1);
-
-        // find start and end times
-        int indexOfComma = at.indexOf(',');
-        String date = at.substring(0, indexOfComma).trim(); // at this point, date contains 10 chars YYYY/MM/DD
-        String eventDuration = at.substring(indexOfComma + 1).trim();
-        String[] eventTimes = eventDuration.split("-");
-
-        parsedInfo.add(description.trim());
-        parsedInfo.add(date.trim());
-        parsedInfo.add(eventTimes[0].trim());
-        parsedInfo.add(eventTimes[1].trim());
-        return parsedInfo;
     }
 }

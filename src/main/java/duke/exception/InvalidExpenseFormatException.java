@@ -11,6 +11,7 @@ public class InvalidExpenseFormatException extends DukeException {
     public InvalidExpenseFormatException() {
         super("You entered a wrong format for Expense! Please use the format "
                 + "(expense) (index) (purpose) $(amount) or "
-                + "(expense) (/listall)");
+                + "(expense) (/listall) or "
+                + "(expense) (index) (/delete) (expenseIndex)");
     }
 }

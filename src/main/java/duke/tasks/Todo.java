@@ -14,6 +14,10 @@ public class Todo extends Task {
         super(description);
     }
 
+    @Override
+    public String parseToSave() {
+        return "T|" + super.parseToSave();
+    }
 
     /**
      * toString method of Todo.

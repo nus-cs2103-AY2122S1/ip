@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+import duke.exception.DukeException;
 import duke.exception.EmptyListException;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidIndexException;
@@ -224,6 +225,33 @@ public class TaskList {
         DecimalFormat df = new DecimalFormat("0.00");
         task.addExpenseToTask(purpose, amount);
         return "I added " + purpose + ": $" + df.format(amount) + " to " + task + "!";
+    }
+
+    /**
+     * Deletes an expense from a task in the task list.
+     *
+     * @param taskIndex index of task for expense to be deleted from.
+     * @param deleteIndex index of expense to be deleted from task.
+     * @return an appropriate message for the deletion of an expense.
+     * @throws EmptyListException if the task list is empty.
+     * @throws InvalidIndexException if the index of task given is out of bounds.
+     */
+    public String deleteExpense(int taskIndex, int deleteIndex) throws EmptyListException,
+            InvalidIndexException {
+        int taskListSize = taskList.size();
+
+        if (taskListSize == 0) {
+            throw new EmptyListException();
+        } else if (taskIndex < 0 || taskIndex >= taskListSize) {
+            throw new InvalidIndexException(1, taskListSize, taskIndex + 1);
+        }
+        Task task = taskList.get(taskIndex);
+        try {
+            task.deleteExpenseFromTask(deleteIndex);
+            return "I deleted " + (deleteIndex + 1) + " from " + task + "!";
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
     /**

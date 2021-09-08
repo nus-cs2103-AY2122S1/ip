@@ -4,6 +4,9 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import duke.exception.EmptyListException;
+import duke.exception.InvalidIndexException;
+
 /**
  * Represents a task.
  */
@@ -16,9 +19,10 @@ public class Task {
     private boolean isDone;
 
     /** List of expenses for current task. */
-    private HashMap<String, ArrayList<Float>> expenses;
+    private final HashMap<String, ArrayList<Float>> expenses;
 
-    private DecimalFormat df = new DecimalFormat("0.00");
+    /** Formatter to convert floats to 2 decimal places. */
+    private final DecimalFormat df = new DecimalFormat("0.00");
 
     /**
      * Constructor for Task.
@@ -62,6 +66,32 @@ public class Task {
         }
         spending.add(amount);
         expenses.put(purpose, spending);
+    }
+
+    /**
+     * Deletes an expense from the task.
+     *
+     * @param deleteIndex index of expense to be deleted.
+     * @throws EmptyListException if the list of expenses is currently empty.
+     * @throws InvalidIndexException if the index of expense to be deleted is out of bounds.
+     */
+    public void deleteExpenseFromTask(int deleteIndex) throws EmptyListException,
+            InvalidIndexException {
+
+        if (expenses.isEmpty()) {
+            throw new EmptyListException();
+        } else if (deleteIndex < 0 || deleteIndex >= expenses.size()) {
+            throw new InvalidIndexException(1, expenses.size(), deleteIndex + 1);
+        }
+        int count = 0;
+        for (String key : expenses.keySet()) {
+            if (count == deleteIndex) {
+                expenses.remove(key);
+                break;
+            }
+            count++;
+        }
+
     }
 
     /**
@@ -109,6 +139,15 @@ public class Task {
      */
     public boolean hasExpenses() {
         return !expenses.isEmpty();
+    }
+
+    /**
+     * Parses the Task to a format to be saved.
+     *
+     * @return a string containing only important information of the task to be saved.
+     */
+    public String parseToSave() {
+        return getStatusIcon() + "|" + description;
     }
 
     /**

@@ -25,17 +25,61 @@ public class ExpenseCommand extends Command {
     /** Amount spent. */
     private final float amount;
 
+    private final boolean isList;
+    private final boolean isDelete;
+    private final boolean isDisplay;
+    private final int deleteIndex;
+
     /**
-     * Constructor of ExpenseCommand
+     * Constructor of ExpenseCommand.
      *
-     * @param taskIndex index of task to run expense commands on.
+     * @param taskIndex index of task run expense commands on.
      * @param purpose purpose of expenditure.
-     * @param amount amount spent.
+     * @param amount amount spent
+     * @param isList whether showing the entire list of expenses is necessary.
+     * @param isDisplay whether showing a particular task's expenses is necessary.
+     */
+    public ExpenseCommand(int taskIndex, String purpose, float amount, boolean isList, boolean isDisplay) {
+        this.taskIndex = taskIndex;
+        this.purpose = purpose;
+        this.amount = amount;
+        this.isList = isList;
+        isDelete = false;
+        this.isDisplay = isDisplay;
+        deleteIndex = -1;
+    }
+
+    /**
+     * Overloaded constructor for ExpenseCommand.
+     *
+     * @param taskIndex index of task run expense commands on.
+     * @param purpose purpose of expenditure.
+     * @param amount amount spent
      */
     public ExpenseCommand(int taskIndex, String purpose, float amount) {
         this.taskIndex = taskIndex;
         this.purpose = purpose;
         this.amount = amount;
+        isList = false;
+        isDelete = false;
+        isDisplay = false;
+        deleteIndex = -1;
+    }
+
+    /**
+     * Overloaded constructor for ExpenseCommand.
+     *
+     * @param taskIndex index of task run expense commands on.
+     * @param deleteIndex index of expense to be deleted.
+     */
+    public ExpenseCommand(int taskIndex, int deleteIndex) {
+        this.taskIndex = taskIndex;
+        this.deleteIndex = deleteIndex;
+        purpose = "";
+        amount = 0;
+        isList = false;
+        isDelete = true;
+        isDisplay = false;
     }
 
     /**
@@ -70,11 +114,15 @@ public class ExpenseCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, EmptyListException,
             InvalidIndexException {
-        if (!isIndexValid()) {
+        if (!isIndexValid() && isList) {
             return tasks.showAllExpenses();
-        } else if (isPurposeEmpty()) {
+        } else if (isPurposeEmpty() && isDisplay) {
             // list all expenses of a specific task
             return tasks.showExpense(taskIndex);
+        } else if (isDelete) {
+            String message = tasks.deleteExpense(taskIndex, deleteIndex);
+            storage.save(tasks);
+            return message;
         }
         String message = tasks.addExpense(taskIndex, purpose, amount);
         storage.save(tasks);

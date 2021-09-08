@@ -33,6 +33,13 @@ public class Event extends Task {
         this.end = end;
     }
 
+    @Override
+    public String parseToSave() {
+        return "E|" + super.parseToSave() + "|" + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + "|" + start.format(DateTimeFormatter.ofPattern("h:mm a"))
+                + "|" + end.format(DateTimeFormatter.ofPattern("h:mm a"));
+    }
+
     /**
      * toString method of Event.
      *

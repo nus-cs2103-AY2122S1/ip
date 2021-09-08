@@ -22,6 +22,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    @Override
+    public String parseToSave() {
+        return "D|" + super.parseToSave() + "|" + by.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a"));
+    }
+
     /**
      * toString method of Deadline.
      *
