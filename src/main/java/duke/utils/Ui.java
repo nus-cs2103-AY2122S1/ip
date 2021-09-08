@@ -28,16 +28,6 @@ public class Ui {
     }
 
     /**
-     * Uses a scanner to take in a line of input from the user.
-     *
-     * @return the full command typed by the user.
-     */
-    public String readCommand() {
-        String userInput = in.nextLine();
-        return userInput;
-    }
-
-    /**
      * Displays the message indicating that a new task has been added to the TaskList.
      *
      * @param newTask the new task that has been added.
@@ -116,6 +106,7 @@ public class Ui {
             String key = String.valueOf(counter);
             if (matchingTasks.containsKey(key)) {
                 Task matchedTask = matchingTasks.get(key);
+                assert (matchedTask != null) : "Matched task cannot be null.";
                 System.out.println(key + "." + matchedTask.toString());
             }
         }

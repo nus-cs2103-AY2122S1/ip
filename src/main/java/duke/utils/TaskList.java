@@ -78,6 +78,9 @@ public class TaskList {
      * @param taskNum the task number that we want to mark as done.
      */
     public void markTaskAsDone(int taskNum) {
+        boolean taskNumberInRange = (taskNum >= 0) && (taskNum < tasks.size());
+        assert (taskNumberInRange) : "Task number that you want to mark as done is out of bounds.";
+
         Task currTask = tasks.get(taskNum);
         currTask.markAsDone();
     }
@@ -89,6 +92,8 @@ public class TaskList {
      * @return the task corresponding to the given task number.
      */
     public Task getTask(int taskNum) {
+        boolean taskNumberInRange = (taskNum >= 0) && (taskNum < tasks.size());
+        assert (taskNumberInRange) : "Task number that you want to get is out of bounds.";
         return tasks.get(taskNum);
     }
 
@@ -110,7 +115,7 @@ public class TaskList {
     public HashMap<String, Task> getMatchingTasks(String keyword) {
         HashMap<String, Task> matchingTasks = new HashMap<>();
         int counter = 1; // Start from 1 because that is how we print
-        for (Task currTask: tasks) {
+        for (Task currTask : tasks) {
             if (currTask.toString().contains(keyword)) {
                 matchingTasks.put(String.valueOf(counter), currTask);
             }
