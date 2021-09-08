@@ -12,7 +12,6 @@ import lebron.task.Deadline;
 import lebron.task.Events;
 import lebron.task.Task;
 import lebron.task.ToDo;
-import lebron.Ui;
 
 /**
  * Represents a storage class to handle writing and loading from a file.
@@ -29,7 +28,6 @@ public class Storage {
      * Constructor.
      *
      * @param filePath the file path
-     * @throws IOException
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -52,7 +50,6 @@ public class Storage {
      *
      * @param filePath the file path
      * @return an ArrayList containing tasks
-     * @throws FileNotFoundException
      */
     public ArrayList<Task> loadFileContents(String filePath) {
         try {
@@ -118,7 +115,6 @@ public class Storage {
      * Saves the current list of tasks into the specified file.
      *
      * @param taskList the list of tasks
-     * @throws IOException if the stream is invalid
      */
     public void saveToFile(ArrayList<Task> taskList) {
         try {

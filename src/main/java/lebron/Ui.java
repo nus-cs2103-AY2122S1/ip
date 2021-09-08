@@ -118,6 +118,15 @@ public class Ui {
     }
 
     /**
+     * Responds to the undo event.
+     *
+     * @return a reply
+     */
+    public String replyUndo() {
+        return "I have removed your last action.";
+    }
+
+    /**
      * Prints out the given message.
      * @param message the given message.
      * @return the error message.
@@ -125,7 +134,4 @@ public class Ui {
     public String printException(String message) {
         return message;
     }
-
-
-
 }

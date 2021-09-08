@@ -45,10 +45,20 @@ public class Task {
         return this.name;
     }
 
+    /**
+     * Get the value representing if the task is done.
+     *
+     * @return 1 if the task is done, 0 if the task is not done.
+     */
     public String getDoneValue() {
         return isDone ? "1" : "0";
     }
 
+    /**
+     * Produce the desired format for storing to file.
+     *
+     * @return the desired string.
+     */
     public String getStringForFile() {
         return " | " + getDoneValue() + " | " + name;
     }

@@ -16,6 +16,7 @@ public class Events extends Task {
 
     private final LocalDate date;
     private final LocalTime time;
+
     /**
      * Constructor.
      *
@@ -40,6 +41,11 @@ public class Events extends Task {
                 + " " + time.format(DateTimeFormatter.ofPattern("HHmm"))+ ")";
     }
 
+    /**
+     * Produce the desired format for storing to file.
+     *
+     * @return the desired string.
+     */
     @Override
     public String getStringForFile() {
         return "E | " + super.getDoneValue() + " | " + super.getName() + " | " + this.date + " " + this.time;

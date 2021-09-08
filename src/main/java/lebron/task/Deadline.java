@@ -41,6 +41,11 @@ public class Deadline extends Task {
                 + " " + time.format(DateTimeFormatter.ofPattern("HHmm"))+ ")";
     }
 
+    /**
+     * Produce the desired format for storing to file.
+     *
+     * @return the desired string.
+     */
     @Override
     public String getStringForFile() {
         return "D | " + super.getDoneValue() + " | " + super.getName() + " | " + this.date + " " + this.time;

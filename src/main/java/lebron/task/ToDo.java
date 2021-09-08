@@ -21,6 +21,11 @@ public class ToDo extends Task {
         return "[T]" + super.toString();
     }
 
+    /**
+     * Produce the desired format for storing to file.
+     *
+     * @return the desired string.
+     */
     @Override
     public String getStringForFile() {
         return "T | " + super.getDoneValue() + " | " + super.getName();
