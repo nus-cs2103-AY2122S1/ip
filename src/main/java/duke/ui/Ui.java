@@ -29,8 +29,12 @@ public class Ui {
      * @return Task added to the list.
      */
     public String showAddTask(Task task, TaskList taskList) {
-        String addTemplate = "Got it. I've added this task:\n%s\nNow you have %d task(s) in the list.";
-        String addTask = String.format(addTemplate, task.toString(), taskList.totalTask());
+
+        assert task != null;
+        assert taskList != null;
+
+        String addTask = String.format("Got it. I've added this task:\n%s\nNow you have %d task(s) in the list.",
+                task.toString(), taskList.totalTask());
         return addTask;
     }
 
@@ -42,8 +46,11 @@ public class Ui {
      * @return Task that is deleted from the list.
      */
     public String showDeleteTask(Task task, TaskList taskList) {
-        String deleteTemplate = "Noted. I've removed this task:\n%s\nNow you have %d task(s) in the list.";
-        String deleteTask = String.format(deleteTemplate, task.toString(), taskList.totalTask());
+        assert task != null;
+        assert taskList != null;
+
+        String deleteTask = String.format("Noted. I've removed this task:\n%s\nNow you have %d task(s) in the list.",
+                task.toString(), taskList.totalTask());
         return deleteTask;
     }
 
@@ -54,8 +61,9 @@ public class Ui {
      * @return Task that is marked as done.
      */
     public String showDone(Task task) {
-        String doneTemplate = "Nice! I've marked this task as done:\n%s";
-        String done = String.format(doneTemplate, task.toString());
+        assert task != null;
+
+        String done = String.format("Nice! I've marked this task as done:\n%s", task.toString());
         return done;
     }
 
@@ -67,6 +75,8 @@ public class Ui {
      * @throws DukeException If task list has error.
      */
     public String showList(TaskList taskList) throws DukeException {
+        assert taskList != null;
+
         int numTask = taskList.totalTask();
         String task = "";
 
