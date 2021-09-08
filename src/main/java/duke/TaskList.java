@@ -147,15 +147,12 @@ public class TaskList {
      * Prints the list of Tasks.
      */
     public String printList() {
-        String s = "";
         int len = tasks.size();
         if (len == 0) {
             System.out.println("The list is empty!");
-            s += "The list is empty!";
+            return "The list is empty!";
         } else {
-            s += TextUi.showTaskList(tasks);
+            return TextUi.showTaskList(tasks);
         }
-        assert s != "" : "s should not be empty in both cases";
-        return s;
     }
 }

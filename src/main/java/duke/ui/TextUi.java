@@ -18,7 +18,7 @@ public class TextUi {
      */
     public static String showTaskAdded(TaskList tasks) {
         System.out.println("added: " + tasks.getTaskList().get(tasks.getLength() - 1));
-        return "added: " + tasks.getTaskList().get(tasks.getLength() - 1);
+        return "added: " + tasks.getTaskList().get(tasks.getLength() - 1) + "\n";
     }
 
     /**
@@ -40,7 +40,7 @@ public class TextUi {
      */
     public static String showTaskDone(Task t) {
         System.out.printf("%s\nThe task is marked as done! Good job :D\n", t);
-        return t.toString() + "\nThe task is marked as done! Good job :D";
+        return t.toString() + "\nThe task is marked as done! Good job :D\n";
     }
 
     /**
@@ -53,10 +53,10 @@ public class TextUi {
         int len = tasks.getLength();
         if (len == 1) {
             System.out.printf("Now you have %d task in the list.\n", tasks.getLength());
-            return "Now you have " + tasks.getLength() + " task in the list.";
+            return "Now you have " + tasks.getLength() + " task in the list.\n";
         } else {
             System.out.printf("Now you have %d tasks in the list.\n", tasks.getLength());
-            return "Now you have " + tasks.getLength() + " tasks in the list.";
+            return "Now you have " + tasks.getLength() + " tasks in the list.\n";
         }
     }
 

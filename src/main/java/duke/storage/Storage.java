@@ -84,4 +84,23 @@ public class Storage {
         }
     }
 
+    public void replaceTasks(TaskList prevTasks) throws DukeException {
+        this.tasks = prevTasks;
+        this.copyToFile();
+    }
+
+    public void customCopyToFile(TaskList prevTasks) throws DukeException {
+        try {
+            FileWriter fw = new FileWriter(filePath);
+
+            for (int i = 0; i < prevTasks.getLength(); i++) {
+                fw.write(prevTasks.getTaskList().get(i).toString() + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new DukeException("There's something wrong with the file.");
+        }
+    }
+
 }
