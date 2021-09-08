@@ -51,6 +51,7 @@ public class TaskList {
      * @param task Task to be added to taskList.
      */
     public void addTask(Task task) {
+        assert (task != null) : "TaskList should not contain any null objects";
         tasks.add(task);
     }
 

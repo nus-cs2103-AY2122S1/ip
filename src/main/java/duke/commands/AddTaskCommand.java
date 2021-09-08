@@ -16,6 +16,7 @@ public abstract class AddTaskCommand extends Command {
      */
     public AddTaskCommand(Task task) {
         this.task = task;
+        assert (task != null) : "task should not be null";
     }
 
     /**
@@ -29,6 +30,7 @@ public abstract class AddTaskCommand extends Command {
     @Override
     public String execute(TaskList taskList, CliUi cliUi, Storage storage) {
         taskList.addTask(task);
+        assert taskList.getSize() > 0 : "taskList should not be empty after adding a task";
         String[] messages = new String[] {
             "Got it. I've added this task:",
             "    " + task.toString(),

@@ -86,6 +86,9 @@ public class Storage {
         String data = tasks.getData();
         boolean isDataValid = data.equals("");
         isDataValid = isDataValid || data.matches("[T, D, E] \\| [0, 1] \\|.*");
+        assert (!isDataValid)
+                : "data should be formatted as \"EVENT | VALUE | ...\","
+                    + "where EVENT is T, D or E, and VALUE is \" \" or X";
         try (PrintWriter out = new PrintWriter(filePath)) {
             out.println(data);
         } catch (IOException e) {
