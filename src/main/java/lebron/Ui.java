@@ -26,6 +26,8 @@ public class Ui {
 
     /**
      * Handles the greet event.
+     *
+     * @return the desired response.
      */
     public String greet() {
         return ("    Hello! I'm LebronChatBot\n"
@@ -36,6 +38,7 @@ public class Ui {
      * Responds to the add event.
      *
      * @param lst the TaskList that the user wants to add the task to
+     * @return the desired response.
      */
     public String replyAdd(ArrayList<Task> lst, Task task) {
         String num = String.valueOf(lst.size());
@@ -45,6 +48,8 @@ public class Ui {
 
     /**
      * Responds to the exit event when the user says bye.
+     *
+     * @return the desired response.
      */
     public String exit() {
         return ("    Bye. Hope to see you again soon!\n");
@@ -53,7 +58,8 @@ public class Ui {
     /**
      * Responds to the display list event when the user says list.
      *
-     * @param lst The TaskList to be displayed.
+     * @param lst The TaskList to be displayed
+     * @return the desired response.
      */
     public String replyDisplay(TaskList lst) {
         StringBuilder reply = new StringBuilder("    Here are the tasks in your list:\n");
@@ -68,7 +74,8 @@ public class Ui {
     /**
      * Responds to the markDone event.
      *
-     * @param task The task that is marked done.
+     * @param task The task that is marked done
+     * @return the desired response.
      */
     public String replyMarkDone(Task task) {
         return "    Nice! I've marked this task as done:\n"
@@ -79,8 +86,9 @@ public class Ui {
     /**
      * Responds to the delete event.
      *
-     * @param task the task in the list to delete.
-     * @param size the size of the TaskList.
+     * @param task the task in the list to delete
+     * @param size the size of the TaskList
+     * @return the desired response.
      */
     public String replyDelete(Task task, int size) {
         String num = String.valueOf(size);
@@ -94,6 +102,7 @@ public class Ui {
      *
      * @param lst the current TaskList
      * @param keyword the keyword
+     * @return the desired response.
      */
     public String replyFind(TaskList lst, String keyword) {
         this.count = 1;
@@ -106,5 +115,16 @@ public class Ui {
         }
         return reply.toString();
     }
+
+    /**
+     * Prints out the given message.
+     * @param message the given message.
+     * @return the error message.
+     */
+    public String printException(String message) {
+        return message;
+    }
+
+
 
 }
