@@ -27,6 +27,7 @@ public class Duke {
     public Duke(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
+
         try {
             taskList = storage.loadData();
         } catch (IOException e) {
@@ -49,7 +50,7 @@ public class Duke {
      */
     public void run() {
         ui.showTaskList(taskList, "list");
-        ui.welcome();
+        ui.showWelcome();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String s = sc.nextLine();

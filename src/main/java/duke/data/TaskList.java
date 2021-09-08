@@ -62,6 +62,7 @@ public class TaskList {
      */
     public TaskList matchTasks(String keyword) {
         TaskList matches = new TaskList();
+
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             if (task.toString().contains(keyword)) {

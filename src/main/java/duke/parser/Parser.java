@@ -41,7 +41,7 @@ public class Parser {
      */
     public String parse(String input) throws DukeException {
                if (input.equals("bye")) {
-                   return ui.bye();
+                   return ui.showBye();
                }
 
                if (input.equals("list")) {
@@ -68,33 +68,29 @@ public class Parser {
 
                if (input.contains("deadline")) {
                    String description = getName(input);
-                   if (!description.equals("")) {
-                       if (checkDescriptionIsValid(description, "/by", "deadline")) {
-                           String[] parts = description.split("/by");
-                           String name = parts[0];
-                           LocalDateTime by = getDateTime(parts[1]);
+                   if (checkDescriptionIsValid(description, "/by", "deadline")) {
+                       String[] parts = description.split("/by");
+                       String name = parts[0];
+                       LocalDateTime by = getDateTime(parts[1]);
 
-                           Deadline deadline = new Deadline(name, by);
-                           tasks.addTask(deadline);
-                           storage.updateData(tasks);
-                           return ui.showTaskAdded(deadline, tasks.getSize());
-                       }
+                       Deadline deadline = new Deadline(name, by);
+                       tasks.addTask(deadline);
+                       storage.updateData(tasks);
+                       return ui.showTaskAdded(deadline, tasks.getSize());
                    }
                }
 
                if (input.contains("event")) {
                    String description = getName(input);
-                   if (!description.equals("")) {
-                       if (checkDescriptionIsValid(description, "/at", "event")) {
-                           String[] parts = description.split("/at");
-                           String name = parts[0];
-                           LocalDateTime at = getDateTime(parts[1]);
+                   if (checkDescriptionIsValid(description, "/at", "event")) {
+                       String[] parts = description.split("/at");
+                       String name = parts[0];
+                       LocalDateTime at = getDateTime(parts[1]);
 
-                           Event event = new Event(name, at);
-                           tasks.addTask(event);
-                           storage.updateData(tasks);
-                           return ui.showTaskAdded(event, tasks.getSize());
-                       }
+                       Event event = new Event(name, at);
+                       tasks.addTask(event);
+                       storage.updateData(tasks);
+                       return ui.showTaskAdded(event, tasks.getSize());
                    }
                }
 
@@ -124,9 +120,12 @@ public class Parser {
         try {
             if (s.contains(" ")) {
                 String[] parts = s.split(" ", 2);
+
                 assert parts[0].equals("done") || parts[0].equals("delete")
                         : "Invalid Keyword";
+
                 int num = Integer.parseInt(parts[1]);
+
                 if (num <= 0 || num > this.tasks.getSize()) {
                     throw new TaskNotFoundException("error");
                 }
@@ -142,12 +141,14 @@ public class Parser {
     private String getName(String s) throws EmptyDescriptionException  {
         if (s.contains(" ")) {
             String[] parts = s.split(" ", 2);
+
             boolean isKeyword = (parts[0].equals("todo") || parts[0].equals("deadline")
                     || parts[0].equals("event") || parts[0].equals("find"));
             assert isKeyword : "Invalid Keyword!";
-                if (!parts[1].equals("")) {
+
+            if (!parts[1].equals("")) {
                     return parts[1];
-                }
+            }
         } else {
             throw new EmptyDescriptionException("error", s);
         }
@@ -166,24 +167,24 @@ public class Parser {
     }
 
     private boolean checkDescriptionIsValid(String description, String pre, String task)
-            throws TaskNoDateTimeException, TaskNoNameException, EmptyDescriptionException, MissingPreException {
-        if (description.contains(pre)) {
-            if (checkForMissingDescription(description, pre)) {
-                if(description.startsWith(pre)) {
+            throws TaskNoDateTimeException, TaskNoNameException, InvalidDescriptionException, MissingPreException {
+
+        boolean hasPreposition = description.contains("pre");
+        boolean hasNameOrDateTime = !description.equals("") && !description.equals(pre);
+        boolean isMissingName = description.startsWith(pre);
+        boolean isMissingDateTime = description.endsWith(pre);
+
+        if (hasPreposition) {
+            if (hasNameOrDateTime) {
+                if(isMissingName) {
                     throw new TaskNoNameException("error", task);
-                } else if (description.endsWith(pre)) {
+                } else if (isMissingDateTime) {
                     throw new TaskNoDateTimeException("error", task);
                 }
                 return true;
             }
-            throw new EmptyDescriptionException("error", task);
+            throw new InvalidDescriptionException("error", task);
         }
         throw new MissingPreException("error", pre);
-    }
-
-    boolean checkForMissingDescription(String description, String pre) {
-        return !description.equals(pre)
-                && !(description.startsWith(pre) && description.endsWith(" "))
-                && !(description.startsWith(" ") && description.endsWith(pre));
     }
 }
