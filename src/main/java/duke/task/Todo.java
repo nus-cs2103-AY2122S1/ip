@@ -4,6 +4,7 @@ import duke.exceptions.DukeIncompleteException;
 import duke.exceptions.DukeWrongCommandException;
 
 public class Todo extends Task {
+    private String taskName;
     /**
      * Constructor of a TODO task
      * @param taskName name of the task
@@ -17,11 +18,14 @@ public class Todo extends Task {
         } else if (taskName.contains("/at")) {
             throw new DukeWrongCommandException("Event");
         }
+        this.taskName = taskName;
     }
 
 
     @Override
     public String toString() {
+        assert (!taskName.contains("/by") && !taskName.contains("/at"))
+                : "Use the other commands instead";
         return "[T]" + super.toString();
     }
 

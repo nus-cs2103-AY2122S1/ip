@@ -112,6 +112,7 @@ public class TaskList {
      */
     public void deleteAll() {
         taskList.clear();
+        assert (taskList.isEmpty()) : "Is not empty";
     }
 
     /**
