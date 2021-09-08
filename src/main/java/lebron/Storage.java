@@ -20,7 +20,8 @@ import lebron.Ui;
  * @author Nigel Tan
  */
 public class Storage {
-    private static final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
+    private static final String HORIZONTAL_LINE = "    ________________________________________" +
+            "____________________\n";
     private File file;
     private final String filePath;
 

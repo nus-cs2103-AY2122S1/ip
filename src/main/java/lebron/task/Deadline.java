@@ -1,6 +1,5 @@
 package lebron.task;
 
-import lebron.exception.InvalidInputException;
 import lebron.exception.LebronException;
 
 import java.time.LocalDate;
