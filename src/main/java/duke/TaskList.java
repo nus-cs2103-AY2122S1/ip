@@ -145,4 +145,19 @@ public class TaskList {
             return String.format(MULTIPLE_TASK_STRING, tasks.size());
         }
     }
+    /**
+     * Removes a task from the task list.
+     *
+     * @param i Index of task in task list.
+     * @return Task removed from task list.
+     * @throws DukeException  If taskNumber is invalid.
+     */
+    public Task addTags(int i, String[] tags) throws DukeException {
+        if (i < 0 || i >= tasks.size()) {
+            throw new DukeException("I cannot find this task number!\n");
+        }
+        Task task = tasks.get(i);
+        task.addTags(tags);
+        return task;
+    }
 }

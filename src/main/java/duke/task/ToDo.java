@@ -5,8 +5,8 @@ package duke.task;
  */
 public class ToDo extends Task {
 
-    static final String TODO_STRING_FORMAT = "[T]%s";
-    static final String TODO_FILE_FORMAT = "T / %s";
+    static final String TODO_STRING_FORMAT = "[T]%s %s";
+    static final String TODO_FILE_FORMAT = "T // %s // %s";
     /**
      * Constructs the ToDo object.
      *
@@ -18,11 +18,11 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        return String.format(TODO_STRING_FORMAT, super.toString());
+        return String.format(TODO_STRING_FORMAT, super.toString(), getTagsString());
     }
 
     @Override
     public String convertToFileFormat() {
-        return String.format(TODO_FILE_FORMAT, super.convertToFileFormat());
+        return String.format(TODO_FILE_FORMAT, super.convertToFileFormat(), getTagsFileFormat());
     }
 }
