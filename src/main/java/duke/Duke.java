@@ -53,6 +53,7 @@ public class Duke {
 
 
     private void exit() {
+        assert this.isRunning;
         try {
             this.ui.closeInput();
             this.storage.saveData(this.taskList);
