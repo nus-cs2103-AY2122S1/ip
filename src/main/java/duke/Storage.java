@@ -81,6 +81,8 @@ public class Storage {
                 }
             }
 
+            assert isDone.equals("1") || isDone.equals("0")  : "Stored file is false";
+
             if (isDone.equals("1")) {
                 storedTaskList.markAsDone(index);
             }
