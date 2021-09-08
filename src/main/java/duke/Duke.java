@@ -43,8 +43,8 @@ public class Duke extends Application {
             try {
                 Parser p = new Parser(input, ui, storage, tasks);
                 return p.parseCommand();
-            } catch (DeleteException | DukeException | IOException | StringIndexOutOfBoundsException
-                    | duke.FindException e) {
+            } catch (DeleteException | DukeException | IOException | StringIndexOutOfBoundsException | FindException
+                    | NumberFormatException | DoneException e) {
                 return e.getMessage();
             }
         }

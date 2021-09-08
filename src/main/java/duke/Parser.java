@@ -47,7 +47,7 @@ public class Parser {
      * @throws IOException If an input or output operation is failed or interpreted.
      * @throws FindException If Find is incomplete.
      */
-    public String parseCommand() throws DukeException, DeleteException, IOException, FindException {
+    public String parseCommand() throws DukeException, DeleteException, IOException, FindException, DoneException {
 
         Activity activity;
         if (command.equals("bye")) {
@@ -76,11 +76,13 @@ public class Parser {
             return ui.goodbyeMessageToString();
         }
         case DONE: {
-            int index = Integer.parseInt(command.substring(5)) - 1;
-            Task currentTask = tasks.get(index);
-            currentTask.setDone();
-            storage.save(tasks);
-            return ui.doneMessageToString(currentTask);
+            int index;
+            try {
+                index = Integer.parseInt(command.substring(5)) - 1;
+            } catch (NumberFormatException e) {
+                return "Please input a correct number";
+            }
+            return new Done(index, tasks, storage, ui).execute();
         }
         case LIST: {
             return ui.listMessageToString(tasks);
@@ -112,16 +114,13 @@ public class Parser {
             return ui.taskMessageToString(event, tasks);
         }
         case DELETE: {
-            int index = Integer.parseInt(command.substring(7)) - 1;
-            assert index <= tasks.size() : "Index out of bounds";
-
-            if (index >= tasks.size()) {
-                throw new DeleteException();
+            int index;
+            try {
+                index = Integer.parseInt(command.substring(7)) - 1;
+            } catch (NumberFormatException e) {
+                return "Please input a correct number";
             }
-            Task currentTask = tasks.get(index);
-            tasks.remove(index);
-            storage.save(tasks);
-            return ui.deleteMessageToString(currentTask, tasks);
+            return new Delete(index, tasks, storage, ui).execute();
         }
         case DEADLINE: {
             String desc = command.substring(8);
@@ -161,5 +160,9 @@ public class Parser {
             return ui.unknownMessageToString();
         }
         }
+    }
+
+    public static void checkMissingArguments(String[] sections, String errorMessage) {
+
     }
 }
