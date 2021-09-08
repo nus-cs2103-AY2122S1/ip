@@ -53,7 +53,7 @@ class TaskListTest {
     }
 
     @Test
-    void deleteTask() {
+    void deleteTask() throws BlitzException {
         String date = "2/12/2019 1800";
         LocalDateTime d = LocalDateTime.parse(date,
                 DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
