@@ -1,6 +1,6 @@
 package duchess.command;
 
-import duchess.main.Duchess;
+import duchess.main.DuchessList;
 
 /**
  * This abstract class contains the logic to handle commands.
@@ -49,10 +49,14 @@ public abstract class Command {
         }
     }
 
-    public String getName() {
+    public String getDescription() {
         return this.name;
     }
 
-    /** Handles the logic specific to the command.*/
-    public abstract String handleLogic(Duchess duchess);
+    /**
+     * Handles the logic specific to the command.
+     * @param duchessList The DuchessList to read or write tasks to.
+     * @return The reply from Duchess to the user.
+     */
+    public abstract String handleLogic(DuchessList duchessList);
 }

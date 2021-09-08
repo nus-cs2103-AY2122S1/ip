@@ -19,7 +19,7 @@ public class Main extends Application {
 
     /**
      * Starts the setting of the stage and showing the window to the user.
-     * @param stage
+     * @param stage The Main window to show the user.
      */
     @Override
     public void start(Stage stage) {
