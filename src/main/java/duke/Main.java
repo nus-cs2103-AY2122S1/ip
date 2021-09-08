@@ -32,7 +32,6 @@ public class Main extends Application {
             this.duke = new Duke(filePath);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             duke.run();
-            this.sendMessageToUser(System.getProperty("user.dir"));
             stage.show();
             
         } catch (IOException e) {
