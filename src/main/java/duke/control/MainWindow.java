@@ -45,6 +45,21 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    // Exit Duke after 2 seconds if the user input "bye"
+    private void delayedExit(String input) {
+        boolean isExitCommand = input.equals("bye");
+        Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            public void run() {
+                Platform.exit();
+            }
+        };
+        int delayedTime = 2000;
+        if (isExitCommand) {
+            timer.schedule(timerTask, delayedTime);
+        }
+    }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -59,11 +74,6 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        if (input.equals("bye")) {
-            new Timer().schedule(new TimerTask() {
-                public void run () {
-                    Platform.exit(); }
-            }, 2000);
-        }
+        delayedExit(input);
     }
 }

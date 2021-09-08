@@ -19,6 +19,14 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
+    // Appends matched result to response.
+    private void appendMatched(StringBuilder response, String task, int index) {
+        String matchedResult = String.format(" %d.%s\n", index, task);
+        if (task.contains(keyword)) {
+            response.append(matchedResult);
+        }
+    }
+
     /**
      * Returns the response after finding a task by searching for a keyword.
      *
@@ -32,11 +40,7 @@ public class FindCommand extends Command {
         int index = 1;
         for (Task task : tasks.getTasks()) {
             String taskString = task.toString();
-
-            if (taskString.contains(keyword)) {
-                String matchedResult = String.format(" %d.%s\n", index++, taskString);
-                response.append(matchedResult);
-            }
+            appendMatched(response, taskString, index++);
         }
 
         return response.toString();

@@ -24,7 +24,9 @@ public class Parser {
     // Returns CommandType representation of the command.
     private static CommandType toEnum(String command) {
         for (CommandType commandType : CommandType.values()) {
-            if (commandType.name().equals(command.toUpperCase())) {
+            String commandTypeName = commandType.name();
+            boolean isMatched = commandTypeName.equalsIgnoreCase(command);
+            if (isMatched) {
                 return commandType;
             }
         }
@@ -64,7 +66,7 @@ public class Parser {
         }
 
         boolean isShortCommand = commandComponents.length < 2;
-        boolean isMissingArgument = isShortCommand || commandComponents[1].trim().isEmpty();
+        boolean isMissingArgument = isShortCommand || commandComponents[1].isBlank();
         if (isMissingArgument) {
             String hint = getHint(commandType);
             throw new MissingArgumentException(commandPrefix, hint);
@@ -124,7 +126,7 @@ public class Parser {
      * @throws MissingArgumentException The exception that handles command with empty description.
      */
     public static Command parse(String fullCommand) throws DukeException {
-        boolean isEmptyCommand = fullCommand.isEmpty() || fullCommand.trim().isEmpty();
+        boolean isEmptyCommand = fullCommand.isEmpty() || fullCommand.isBlank();
 
         if (isEmptyCommand) {
             throw new EmptyCommandException("Do not enter empty command!");

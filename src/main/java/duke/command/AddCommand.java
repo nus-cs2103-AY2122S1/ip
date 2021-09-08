@@ -31,6 +31,49 @@ public class AddCommand extends Command {
     private final String taskDescription;
     private final LocalDate taskDate;
 
+    /** The following methods are the method used in constructing an AddCommand instance. */
+    // Returns the enumeration of task type string.
+    private TaskType getTaskType(String taskTypeString) {
+        return TaskType.valueOf(taskTypeString.toUpperCase());
+    }
+
+    // Checks whether the task has Date
+    private boolean checksHasTaskDate(String taskType) {
+        return !taskType.equals("todo");
+    }
+
+    // Returns an array consisting task details and throws exception if fullDetail cannot be split.
+    private String[] splitDetail(String fullDetail) throws MissingArgumentException {
+        String delimiter = getDelimiter();
+        // Splits the full detail into 2 if the task type is not a todo.
+        String[] details = fullDetail.split(delimiter, taskType.equals(TaskType.TODO) ? 1 : 2);
+        identifyMissingArgument(details);
+
+        return details;
+    }
+
+    // Returns task description if it is not empty, else, throws exception.
+    private String getTaskDescription(String[] taskDetails) throws IncompleteDescriptionException {
+        String description = taskDetails[0];
+        identifyAllWhiteSpace(description);
+
+        return description;
+    }
+
+    // Returns task date if it is not empty/invalid, else, throws exception.
+    private LocalDate getTaskDate(String[] taskDetails) throws IncompleteDescriptionException,
+            InvalidDateFormatException {
+        LocalDate date = null;
+        if (hasTaskDate) {
+            String taskDateString = taskDetails[1];
+            identifyAllWhiteSpace(taskDateString);
+            identifyInvalidDateFormat(taskDateString);
+            date = getLocalDate(taskDateString);
+        }
+
+        return date;
+    }
+
     /**
      * Constructs an AddCommand instance that handles the logic of task-addition.
      *
@@ -41,15 +84,16 @@ public class AddCommand extends Command {
      */
     public AddCommand(String taskType, String taskTag, String taskFullDetail) throws IncompleteDescriptionException,
             InvalidDateFormatException, MissingArgumentException {
-        this.taskType = TaskType.valueOf(taskType.toUpperCase());
+        this.taskType = getTaskType(taskType);
         this.taskTag = taskTag;
-        this.hasTaskDate = !taskType.equals("todo");
+        this.hasTaskDate = checksHasTaskDate(taskType);
 
         String[] taskDetails = splitDetail(taskFullDetail);
         this.taskDescription = getTaskDescription(taskDetails);
         this.taskDate = getTaskDate(taskDetails);
     }
 
+    /** The following methods are getter helper function. */
     // Returns the regex used to split the command.
     private String getDelimiter() {
         return taskType.equals(TaskType.EVENT)
@@ -73,31 +117,8 @@ public class AddCommand extends Command {
         }
     }
 
-    // Returns an array consisting task details and throws exception if fullDetail cannot be split.
-    private String[] splitDetail(String fullDetail) throws MissingArgumentException {
-        String delimiter = getDelimiter();
-        // Splits the full detail into 2 if the task type is not a todo.
-        String[] details = fullDetail.split(delimiter, taskType.equals(TaskType.TODO) ? 1 : 2);
-        boolean isShortDescription = details.length < 2;
-        if (hasTaskDate && isShortDescription) {
-            String taskTypeString = taskType.toString().toLowerCase();
-            String hint = getHint(taskType);
-            throw new MissingArgumentException(taskTypeString, hint);
-        }
-
-        return details;
-    }
-
-    // Returns task description if it is not empty, else, throws exception.
-    private String getTaskDescription(String[] taskDetails) throws IncompleteDescriptionException {
-        String description = taskDetails[0];
-        identifyAllWhiteSpace(description);
-
-        return description;
-    }
-
     // Parses date string to LocalDate instance, then, returns it.
-    private LocalDate toLocalDate(String dateString) throws InvalidDateFormatException {
+    private LocalDate getLocalDate(String dateString) throws InvalidDateFormatException {
         try {
             return LocalDate.parse(dateString);
         } catch (DateTimeParseException e) {
@@ -105,23 +126,20 @@ public class AddCommand extends Command {
         }
     }
 
-    // Returns task date if it is not empty/invalid, else, throws exception.
-    private LocalDate getTaskDate(String[] taskDetails) throws IncompleteDescriptionException,
-            InvalidDateFormatException {
-        LocalDate date = null;
-        if (hasTaskDate) {
-            String taskDateString = taskDetails[1];
-            identifyAllWhiteSpace(taskDateString);
-            identifyInvalidDateFormat(taskDateString);
-            date = toLocalDate(taskDateString);
+    /** The followings are methods that identify if exceptions should be thrown. */
+    // Throws exception if detail array has missing argument(s).
+    private void identifyMissingArgument(String[] details) throws MissingArgumentException {
+        boolean isShortDescription = details.length < 2;
+        if (hasTaskDate && isShortDescription) {
+            String taskTypeString = taskType.toString().toLowerCase();
+            String hint = getHint(taskType);
+            throw new MissingArgumentException(taskTypeString, hint);
         }
-
-        return date;
     }
 
     // Throws IncompleteDescriptionException when the task description or the task date consists purely whitespace(s).
     private void identifyAllWhiteSpace(String detail) throws IncompleteDescriptionException {
-        boolean isAllWhiteSpace = detail.trim().isEmpty();
+        boolean isAllWhiteSpace = detail.isBlank();
         if (isAllWhiteSpace) {
             throw new IncompleteDescriptionException(errorMessage);
         }
@@ -136,6 +154,7 @@ public class AddCommand extends Command {
         }
     }
 
+    /** The followings are methods used in 'execute(...)' method. */
     // Returns a task instance according to the type, description and date, if any.
     private Task createTask() {
         switch (taskType) {
