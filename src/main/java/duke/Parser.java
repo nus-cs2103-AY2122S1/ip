@@ -48,7 +48,9 @@ public class Parser {
             return tasks.getHelp();
 
         } else {
+
             return tasks.displayError();
+
         }
 
     }
