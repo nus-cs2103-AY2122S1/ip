@@ -1,9 +1,18 @@
 package duke;
 
+import duke.command.AddTaskCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteTaskCommand;
+import duke.command.FindTasksCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListTasksCommand;
+import duke.command.MarkTaskAsDoneCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Represents a class that deals with making sense of the user command.
@@ -11,6 +20,22 @@ import duke.task.Task;
  * @author botr99
  */
 public class Parser {
+
+    /**
+     * Parses the user input of a task creation and returns the task
+     * corresponding to the user input.
+     *
+     * @param description The user input.
+     * @return The task created from the user input.
+     * @throws DukeException When the description is null or missing.
+     */
+    public static Task parseTask(String description) throws DukeException {
+        if (description == null || description.equals("")) {
+            throw new DukeException("Oops!!! The description of a todo cannot be empty.");
+        }
+        return new Todo(description);
+    }
+
     /**
      * Parses the user input of a date task creation and returns the date task
      * corresponding to the user input.
@@ -39,7 +64,46 @@ public class Parser {
                     + "a /by or /at respectively, followed by a date.");
         }
 
+        if (task == null) {
+            throw new DukeException("Invalid command to create a deadline or event.");
+        }
+
         return task;
+    }
+
+    /**
+     * Parses the user input.
+     *
+     * @param userInput A string the user has inputted.
+     * @return A Command corresponding to the user input.
+     * @throws DukeException When an exception occurs when parsing tasks.
+     */
+    public static Command parseUserInput(String userInput) throws DukeException {
+        String[] userInputSplit = userInput.trim().split(" ", 2);
+        String commandString = userInputSplit[0];
+        String action = userInputSplit.length == 2 ? userInputSplit[1].trim() : "";
+
+        switch (commandString) {
+        case "bye":
+            return new ByeCommand();
+        case "list":
+            return new ListTasksCommand();
+        case "done":
+            return new MarkTaskAsDoneCommand(action);
+        case "delete":
+            return new DeleteTaskCommand(action);
+        case "todo":
+            Task task = parseTask(action);
+            return new AddTaskCommand(task);
+        case "deadline":
+        case "event":
+            Task dateTask = parseDateTask(action, commandString);
+            return new AddTaskCommand(dateTask);
+        case "find":
+            return new FindTasksCommand(action);
+        default:
+            return new InvalidCommand();
+        }
     }
 
 }
