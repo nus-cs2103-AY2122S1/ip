@@ -42,6 +42,8 @@ public class Parser {
                     taskList.addTask(new Event(input.substring(6)));
                 } else if (input.startsWith("delete ")) {
                     taskList.deleteTask(input.substring(7));
+                } else if (input.startsWith("find ")) {
+                    taskList.find(input.substring(5));
                 } else {
                     throw new DukeException(DukeException.DEFAULT);
                 }

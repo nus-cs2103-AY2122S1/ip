@@ -3,6 +3,8 @@ package duke;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.util.ArrayList;
+
 public class Ui {
     public void display(String msg) {
         System.out.println(msg);
@@ -40,9 +42,34 @@ public class Ui {
         if (taskList.size() == 0) {
             display("is no tasks today.");
         } else {
-            for (int i = 1; i <= taskList.size(); i++) {
-                String taskDescription = taskList.getTask(i - 1).toString();
-                display(i + "." + taskDescription + ".");
+            for (int i = 0; i < taskList.size(); i++) {
+                String taskDescription = taskList.getTask(i).toString();
+                display((i + 1) + "." + taskDescription + ".");
+            }
+        }
+    }
+
+    /**
+     * Finds and displays tasks from the given TaskList containing the given string.
+     *
+     * @param taskList The TaskList to search.
+     * @param str The string to search for.
+     */
+    public void find(TaskList taskList, String str) {
+        ArrayList<String> tasksFound = new ArrayList<>();
+
+        for (int i = 0; i < taskList.size(); i++) {
+            String taskDescription = taskList.getTask(i).toString();
+            if (taskDescription.contains(str)) {
+                tasksFound.add((i + 1) + "." + taskDescription + ".");
+            }
+        }
+
+        if (tasksFound.size() == 0) {
+            display("is didn't find matching task.");
+        } else {
+            for (int i = 0; i < tasksFound.size(); i++) {
+                display(tasksFound.get(i));
             }
         }
     }
