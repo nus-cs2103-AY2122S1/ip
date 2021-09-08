@@ -39,23 +39,7 @@ public class Storage {
         try {
             ArrayList<Task> arr = taskList.getEntire();
             PrintWriter printWriter = new PrintWriter(FileName);
-            StringBuilder sb = new StringBuilder();
-            for (Task task : arr) {
-                sb.append(task.getLogo());
-                sb.append(",");
-                sb.append(task.checkDone() ? "1" : "0");
-                sb.append(",");
-                sb.append(task.getDescription());
-                if (task instanceof Event) {
-                    sb.append(",");
-                    sb.append(((Event) task).getAt());
-                }
-                if (task instanceof Deadline) {
-                    sb.append(",");
-                    sb.append(((Deadline) task).getBy());
-                }
-                sb.append(System.lineSeparator());
-            }
+            StringBuilder sb = makeStringToWriteToFile(arr);
             printWriter.write(sb.toString());
             printWriter.close();
         } catch (FileNotFoundException e) {
@@ -114,5 +98,32 @@ public class Storage {
             System.out.println("No past tasks found. Starting with a new list.");
         }
         return tasks;
+    }
+
+    /**
+     * Creates a StringBuilder object containing all the content to write into save file.
+     *
+     * @param arr The array of tasks to be saved.
+     * @return The StringBuilder object with the tasks written.
+     */
+    private StringBuilder makeStringToWriteToFile(ArrayList<Task> arr) {
+        StringBuilder sb = new StringBuilder();
+        for (Task task : arr) {
+            sb.append(task.getLogo());
+            sb.append(",");
+            sb.append(task.checkDone() ? "1" : "0");
+            sb.append(",");
+            sb.append(task.getDescription());
+            if (task instanceof Event) {
+                sb.append(",");
+                sb.append(((Event) task).getAt());
+            }
+            if (task instanceof Deadline) {
+                sb.append(",");
+                sb.append(((Deadline) task).getBy());
+            }
+            sb.append(System.lineSeparator());
+        }
+        return sb;
     }
 }
