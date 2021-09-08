@@ -1,21 +1,12 @@
 package duke.exceptions;
 
 public abstract class DukeException extends RuntimeException {
-
-    /**
-     * INCOMPLETE: Command is incomplete
-     * OUT_OF_BOUND: The index number is not within task list size
-     * SYNTAX_ERROR: Command type is not recognized
-     * INVALID_FORMAT: Date and time format entered are not supported
-     */
-    public enum Type { INCOMPLETE, OUT_OF_BOUND, SYNTAX_ERROR, INVALID_FORMAT, WRONG_COMMAND }
-
+    private static final String DEFAULT_STRING = "Please type in 'help' for instructions";
     /**
      * Constructor for Duke Exception class
      * @param message Error message
-     * @param type Type of Duke Exception indicated
      */
-    public DukeException(String message, Type type) {
+    public DukeException(String message) {
         super(message);
     }
 
@@ -25,8 +16,7 @@ public abstract class DukeException extends RuntimeException {
      */
     @Override
     public String getMessage() {
-        String defaultString = "Please type in 'help' for instructions";
-        return super.getMessage() + defaultString;
+        return super.getMessage() + DEFAULT_STRING;
     }
 }
 

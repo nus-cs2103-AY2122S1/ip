@@ -21,15 +21,13 @@ public class Deadline extends Task {
     public Deadline(String taskName) {
         super(taskName.split("/by")[0].trim());
         this.taskName = taskName;
-        if (!taskName.contains("/by")) {
-            if (taskName.contains("/at")) {
-                throw new DukeWrongCommandException("Event");
-            } else {
-                throw new DukeWrongCommandException("Todo");
-            }
+        if (!taskName.contains("/by") && taskName.contains("/at")) {
+            throw new DukeWrongCommandException("Event");
+        } else if (!taskName.contains("/by")) {
+            throw new DukeWrongCommandException("Todo");
         }
-        String[] divide = taskName.split("/by");
-        String taskTime = divide[1].trim();
+        String[] taskComponents = taskName.split("/by");
+        String taskTime = taskComponents[1].trim();
         try {
             this.date = Parser.convert(LocalDate.parse(taskTime));
         } catch (DateTimeParseException e) {

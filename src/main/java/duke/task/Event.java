@@ -20,15 +20,13 @@ public class Event extends Task {
     public Event(String taskName) {
         super(taskName.split("/at")[0].trim());
         this.taskName = taskName;
-        if (!taskName.contains("/at")) {
-            if (taskName.contains("/by")) {
-                throw new DukeWrongCommandException("Deadline");
-            } else {
-                throw new DukeWrongCommandException("Todo");
-            }
+        if (!taskName.contains("/at") && taskName.contains("/by")) {
+            throw new DukeWrongCommandException("Deadline");
+        } else if (!taskName.contains("/at")) {
+            throw new DukeWrongCommandException("Todo");
         }
-        String[] divide = taskName.split("/at");
-        String taskTime = divide[1].trim();
+        String[] taskComponents = taskName.split("/at");
+        String taskTime = taskComponents[1].trim();
         try {
             this.date = Parser.convert(LocalDate.parse(taskTime));
         } catch (DateTimeParseException e) {
