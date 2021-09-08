@@ -37,7 +37,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(this.bot.startBrain(),
+                DialogBox.getDukeDialog(this.bot.initiate(),
                         new Image(this.getClass().getResourceAsStream("/images/Peter_Greet.png"))));
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(this.bot.checkMem(),

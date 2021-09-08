@@ -12,7 +12,6 @@ import bot.assembly.task.Task;
  */
 public class BotTaskStatusGeneratorUnit {
 
-    //private BotPrinter botPrinter = new BotPrinter();
     private BotStaticMemoryUnit botStaticMemoryUnit = new BotStaticMemoryUnit();
     private BotDynamicMemoryUnit botDynamicMemoryUnit = BotDynamicMemoryUnit.getInstance();
     private List<Task> taskTracker = botDynamicMemoryUnit.getTaskTacker();
@@ -54,14 +53,12 @@ public class BotTaskStatusGeneratorUnit {
 
         StringBuilder formattedTask = new StringBuilder();
         formattedTask.append(botStaticMemoryUnit.MESSAGE_TASK_REPORT + "\n\t");
+
         taskTracker.stream()
-                        .forEach(
-                            x -> formattedTask.append((taskTracker.indexOf(x) + 1) + ". " + x.toString() + "\n\t"));
+                .forEach(x -> formattedTask.append((taskTracker.indexOf(x) + 1) + ". " + x.toString() + "\n\t"));
 
         formattedTask.append("(end)");
 
         return formattedTask.toString();
     }
-
-
 }
