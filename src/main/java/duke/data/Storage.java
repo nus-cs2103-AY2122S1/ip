@@ -21,7 +21,7 @@ import duke.ui.Ui;
  */
 public class Storage {
     /** Path of the current folder as a string */
-    public static final String DIRECTORY_PATH = System.getProperty("user.dir");
+    private static final String DIRECTORY_PATH = System.getProperty("user.dir");
     /** Path of file containing data saved */
     private static File data;
     /** A temporary list of tasks */
@@ -51,13 +51,16 @@ public class Storage {
                 this.readData(task);
             }
             fileScanner.close();
-        } catch (FileNotFoundException fileNotFoundException) { // If file doesn't exist, create it.
+        } catch (FileNotFoundException fileNotFoundException) {
+            // If file doesn't exist, create it.
             try {
                 Storage.data.createNewFile();
-            } catch (IOException ioException) { // If directory doesn't exist, create it.
+            } catch (IOException ioException) {
+                // If directory doesn't exist, create it.
                 File directory = Paths.get(Storage.DIRECTORY_PATH, "data").toFile();
                 directory.mkdirs();
-                this.readFile(); // Run this method again to create a file.
+                // Run this method again to create a file.
+                this.readFile();
             }
         }
     }
@@ -73,16 +76,20 @@ public class Storage {
 
         // Determine type of the task and create corresponding task instance
         Task task;
-        if (splitted[0].equals("T")) { // a todo task
+        if (splitted[0].equals("T")) {
+            // a todo task
             task = new ToDo(splitted[2]);
-        } else if (splitted[0].equals("D")) { // a task with deadline
+        } else if (splitted[0].equals("D")) {
+            // a task with deadline
             task = new Deadline(splitted[2], splitted[3]);
-        } else if (splitted[0].equals("E")) { // an event
+        } else if (splitted[0].equals("E")) {
+            // an event
             task = new Event(splitted[2], splitted[3]);
         } else {
             task = new Task(splitted[2]);
         }
 
+        assert task != null : "task shouldn't be null";
         // Check whether task is done
         if (splitted[1].equals("1")) {
             task.setDone();
@@ -98,6 +105,7 @@ public class Storage {
      * @param task The task to be added.
      */
     public void addToFile(Task task) {
+        assert task != null : "task shouldn't be null";
         try {
             FileWriter fileWriter = new FileWriter(Storage.data, true);
             fileWriter.append(task.toFileFormatString()); // write to file.

@@ -39,6 +39,7 @@ public class TaskDoneCommand extends Command {
         }
 
         // Mark task as done
+        assert this.task != null : "task shouldn't be null";
         this.task.setDone();
         storage.rewriteFile();
 
