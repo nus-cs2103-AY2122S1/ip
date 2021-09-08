@@ -32,7 +32,7 @@ public class Main extends Application {
     private Button sendButton;
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/Setsu.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/TiTi.jpg"));
+    private Image tiTi = new Image(this.getClass().getResourceAsStream("/images/TiTi.jpg"));
 
 
     @Override
@@ -99,9 +99,9 @@ public class Main extends Application {
 
         stage.show();
 
-        Label dukeText = new Label(ui.welcomeMessage());
+        Label tiTiText = new Label(ui.welcomeMessage());
         dialogContainer.getChildren().addAll(
-            DialogBox.getTiTiDialog(dukeText, new ImageView(duke))
+            DialogBox.getTiTiDialog(tiTiText, new ImageView(tiTi))
         );
     }
 
@@ -116,7 +116,7 @@ public class Main extends Application {
         Label tiTiText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getTiTiDialog(tiTiText, new ImageView(duke))
+                DialogBox.getTiTiDialog(tiTiText, new ImageView(tiTi))
         );
         userInput.clear();
     }
