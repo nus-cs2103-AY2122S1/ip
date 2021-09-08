@@ -41,6 +41,22 @@ public abstract class Task {
 
 
     /**
+     * Determine if the task is identical with another task.
+     *
+     * @param obj the object to compare with
+     * @return true if the descriptions are identical, false otherwise
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Task)) {
+            return false;
+        }
+        Task task = (Task) obj;
+        return this.description.equals(task.description);
+    }
+
+
+    /**
      * Return the string representation of the task.
      *
      * @return string representation of the task

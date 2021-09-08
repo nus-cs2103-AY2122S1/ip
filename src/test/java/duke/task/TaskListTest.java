@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import duke.exception.DukeDuplicateTaskException;
+
 public class TaskListTest {
 
     @Test
@@ -13,9 +15,11 @@ public class TaskListTest {
         Todo test1 = new Todo("test1");
         Todo test2 = new Todo("test1");
         Todo test3 = new Todo("test3");
-        taskList.add(test1);
-        taskList.add(test2);
-        taskList.add(test3);
+        try {
+            taskList.add(test1);
+            taskList.add(test2);
+            taskList.add(test3);
+        } catch (DukeDuplicateTaskException ignored) { }
         taskList.delete(2);
         assertEquals(test3, taskList.get(2), "`delete()` should remove the task from the list");
     }
@@ -23,8 +27,12 @@ public class TaskListTest {
     @Test
     void testGetLength() {
         TaskList taskList = new TaskList();
-        for (int i = 0; i < 10; i++) {
-            taskList.add(new Todo("test"));
+        try {
+            for (int i = 0; i < 10; i++) {
+                taskList.add(new Todo("test"));
+            }
+        } catch (DukeDuplicateTaskException ignored) {
+
         }
         assertEquals(10, taskList.getLength(), "`getLength()` should return the length of list.");
     }
@@ -34,7 +42,9 @@ public class TaskListTest {
     void testGet() {
         TaskList taskList = new TaskList();
         Todo todo = new Todo("todo");
-        taskList.add(todo);
+        try {
+            taskList.add(todo);
+        } catch (DukeDuplicateTaskException ignored) { }
         assertEquals(todo, taskList.get(1), "`get()` should return the task inside the list.");
     }
 

@@ -3,6 +3,8 @@ package duke.task;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import duke.exception.DukeDuplicateTaskException;
+
 /**
  * Represents a list for all tasks, akin to array lists.
  */
@@ -24,7 +26,12 @@ public class TaskList {
      *
      * @param task the task to be added
      */
-    public void add(Task task) {
+    public void add(Task task) throws DukeDuplicateTaskException {
+        for (Task t : this.list) {
+            if (task.equals(t)) {
+                throw new DukeDuplicateTaskException();
+            }
+        }
         this.list.add(task);
     }
 

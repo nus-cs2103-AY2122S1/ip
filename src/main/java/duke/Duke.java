@@ -96,7 +96,7 @@ public class Duke {
     }
 
 
-    private String addTodo(String args) throws DukeMissingArgumentException {
+    private String addTodo(String args) throws DukeException {
         try {
             Task todo = new Todo(args);
             this.taskList.add(todo);
@@ -107,8 +107,7 @@ public class Duke {
     }
 
 
-    private String addEvent(String args)
-            throws DukeMissingArgumentException, DukeInvalidDateException, DukeInvalidDateRangeException {
+    private String addEvent(String args) throws DukeException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
             String[] splits = args.split(" /from ", 2);
@@ -131,7 +130,7 @@ public class Duke {
     }
 
 
-    private String addDeadline(String args) throws DukeMissingArgumentException, DukeInvalidDateException {
+    private String addDeadline(String args) throws DukeException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
             String[] splits = args.split(" /by ", 2);
@@ -148,8 +147,7 @@ public class Duke {
     }
 
 
-    private String markAsDone(String args)
-            throws DukeNoTaskFoundException, DukeMissingArgumentException, DukeInvalidArgumentException {
+    private String markAsDone(String args) throws DukeException {
         try {
             int taskNum = Integer.parseInt(args);
             if (taskNum > this.taskList.getLength()) {
@@ -165,8 +163,7 @@ public class Duke {
     }
 
 
-    private String delete(String args)
-            throws DukeNoTaskFoundException, DukeMissingArgumentException, DukeInvalidArgumentException {
+    private String delete(String args) throws DukeException {
         try {
             int taskNum = Integer.parseInt(args);
             if (taskNum > this.taskList.getLength() || taskNum < 0) {
