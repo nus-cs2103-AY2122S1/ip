@@ -38,4 +38,11 @@ public class Todo extends Task {
     public String getDate() {
         return "There are no date specified with task ";
     }
+
+    @Override
+    public Task completedTask() {
+        Task newTask = new Todo(taskName);
+        newTask.markAsCompleted();
+        return newTask;
+    }
 }

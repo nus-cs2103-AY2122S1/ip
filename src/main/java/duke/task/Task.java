@@ -28,6 +28,8 @@ public abstract class Task {
         this.status = true;
     }
 
+    public abstract Task completedTask();
+
     public boolean isCompleted() {
         return this.status;
     }

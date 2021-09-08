@@ -2,6 +2,7 @@ package duke.main;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.exceptions.DukeOutOfBoundException;
 import duke.task.Deadline;
@@ -12,7 +13,7 @@ import duke.task.Todo;
 
 public class TaskList {
 
-    private final List<Task> taskList;
+    private List<Task> taskList;
 
     /**
      * Constructor for TaskList
@@ -69,9 +70,7 @@ public class TaskList {
      * Indicate that all tasks are completed
      */
     public void doneAll() {
-        for (Task task : taskList) {
-            task.markAsCompleted();
-        }
+        taskList = taskList.stream().map(Task::completedTask).collect(Collectors.toList());
     }
 
     /**

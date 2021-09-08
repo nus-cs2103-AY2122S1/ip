@@ -10,6 +10,7 @@ import duke.main.Parser;
 public class Event extends Task {
 
     private final String date;
+    private final String taskName;
 
     /**
      * Constructor of an Event Task
@@ -18,6 +19,7 @@ public class Event extends Task {
      */
     public Event(String taskName) {
         super(taskName.split("/at")[0].trim());
+        this.taskName = taskName;
         if (!taskName.contains("/at")) {
             if (taskName.contains("/by")) {
                 throw new DukeWrongCommandException("Deadline");
@@ -55,5 +57,12 @@ public class Event extends Task {
     @Override
     public String getDate() {
         return this.date;
+    }
+
+    @Override
+    public Task completedTask() {
+        Task newTask = new Event(taskName);
+        newTask.markAsCompleted();
+        return newTask;
     }
 }
