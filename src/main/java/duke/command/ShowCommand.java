@@ -37,6 +37,7 @@ public class ShowCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
+        assert super.getAction() == Action.LIST : "Show command action type error";
         return StringUtils.getTaskList(taskList.getTasks());
     }
 }

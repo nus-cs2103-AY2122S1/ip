@@ -80,10 +80,13 @@ public class Parser {
         String[] array = input.split(SPLITER);
         switch (array[0]) {
         case "T":
+            assert array.length == 3 : "Parse todo document fails";
             return new Todo(array[2], parseIsDone(array[1]));
         case "E":
+            assert array.length == 4 : "Parse event document fails";
             return new Event(array[2], parseIsDone(array[1]), parseDateTime(array[3]));
         case "D":
+            assert array.length == 4 : "Parse deadline document fails";
             return new Deadline(array[2], parseIsDone(array[1]), parseDateTime(array[3]));
         default:
             throw new DukeException("Error in saved tasks document");

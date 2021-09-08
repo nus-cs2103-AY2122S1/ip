@@ -42,6 +42,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
+        assert super.getAction() == Action.DELETE : "Delete command action type error";
         Task temp = taskList.removeTask(index);
         return StringUtils.getRemoveTaskMessage(temp, taskList.getSize());
     }
