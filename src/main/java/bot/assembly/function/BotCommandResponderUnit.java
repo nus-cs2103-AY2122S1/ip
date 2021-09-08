@@ -20,7 +20,6 @@ import bot.assembly.task.ToDo;
  */
 public class BotCommandResponderUnit {
 
-    private BotPrinter botPrinter = new BotPrinter();
     private BotStaticMemoryUnit botStaticMemoryUnit = new BotStaticMemoryUnit();
     private BotTemporalUnit botTemporalUnit = new BotTemporalUnit();
     private BotDynamicMemoryUnit botDynamicMemoryUnit = BotDynamicMemoryUnit.getInstance();
@@ -62,69 +61,50 @@ public class BotCommandResponderUnit {
     public void addTask(String input) throws InvalidCommandException, InvalidCommandFormatException {
 
         String[] inputToken = tokenize(input);
-
         CommandInput taskType = identifyCommand(input);
 
         switch (taskType) {
         case TODO:
-
             //  throw InvalidCommandFormatException if command input is entered without task title
             if (inputToken.length == 1) {
-                throw new InvalidCommandFormatException(
-                        botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND_FORMAT
-                );
+                throw new InvalidCommandFormatException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND_FORMAT);
             }
 
-            taskTracker.add(
-                    new ToDo(inputToken[1])
-            );
-
+            taskTracker.add(new ToDo(inputToken[1]));
             break;
 
         case DEADLINE:
-
             String[] deadlineTask = inputToken[1].split(" /by ", 2);
-
             // throw InvalidCommandFormatException if command input does not contain task title and task datetime
             if (deadlineTask.length != 2) {
-                throw new InvalidCommandFormatException(
-                        botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND_FORMAT
-                );
+                throw new InvalidCommandFormatException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND_FORMAT);
             }
 
-            taskTracker.add(
-                    new Deadline(
+            taskTracker.add(new Deadline(
                             deadlineTask[0].trim(),
                             botTemporalUnit.convertStringToTemporalData(deadlineTask[1].trim())
                     )
             );
-
             break;
 
         case EVENT:
 
             String[] eventTask = inputToken[1].split(" /at ", 2);
-
             // throw InvalidCommandFormatException if command input does not contain task title and task datetime
             if (eventTask.length != 2) {
-                throw new InvalidCommandFormatException(
-                        botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND_FORMAT
-                );
+                throw new InvalidCommandFormatException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND_FORMAT);
             }
 
-            taskTracker.add(
-                    new Event(
+            taskTracker.add(new Event(
                             eventTask[0].trim(),
                             botTemporalUnit.convertStringToTemporalData(eventTask[1].trim())
                     )
             );
-
             break;
 
         default:
             //  throw InvalidCommandException if all 3 cases above are not triggered
             assert false : "addTask() Method Error, TODO, DEADLINE, EVENT command parsed wrongly.";
-
             throw new InvalidCommandException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND);
         }
     }
@@ -266,7 +246,6 @@ public class BotCommandResponderUnit {
 
         if (searchResultList.isEmpty()) {
 
-            //botPrinter.print(botStaticMemoryUnit.MESSAGE_KEYWORD_NO_FOUND + keywordOutput);
             return botStaticMemoryUnit.MESSAGE_KEYWORD_NO_FOUND + keywordOutput;
 
         } else {
@@ -275,14 +254,6 @@ public class BotCommandResponderUnit {
                 taskFoundOutput += searchResult;
             }
 
-            /*
-            botPrinter.print(String.format(
-                    botStaticMemoryUnit.MESSAGE_TASK_FOUND,
-                    keywordOutput,
-                    taskFoundOutput
-                    )
-            );
-            */
             return String.format(
                     botStaticMemoryUnit.MESSAGE_TASK_FOUND,
                     keywordOutput,

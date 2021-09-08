@@ -12,7 +12,6 @@ import bot.assembly.task.Task;
  */
 public class BotTaskStatusGeneratorUnit {
 
-    //private BotPrinter botPrinter = new BotPrinter();
     private BotStaticMemoryUnit botStaticMemoryUnit = new BotStaticMemoryUnit();
     private BotDynamicMemoryUnit botDynamicMemoryUnit = BotDynamicMemoryUnit.getInstance();
     private List<Task> taskTracker = botDynamicMemoryUnit.getTaskTacker();
@@ -62,6 +61,4 @@ public class BotTaskStatusGeneratorUnit {
 
         return formattedTask.toString();
     }
-
-
 }

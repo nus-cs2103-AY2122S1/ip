@@ -20,7 +20,6 @@ import bot.assembly.task.ToDo;
  */
 public class BotDynamicMemoryUnit {
 
-
     private static BotDynamicMemoryUnit dynamicMemoryUnit = null;
     private List<Task> taskTracker = new ArrayList<Task>();
     private BotStaticMemoryUnit botStaticMemoryUnit = new BotStaticMemoryUnit();
@@ -59,8 +58,7 @@ public class BotDynamicMemoryUnit {
 
         switch (taskType) {
         case "T": {
-            return String.format(
-                    "%s | %s | %s\n",
+            return String.format("%s | %s | %s\n",
                     task.getTaskType(),
                     task.getIsDone(),
                     task.getTaskTitle()
@@ -159,8 +157,7 @@ public class BotDynamicMemoryUnit {
                     )
             );
 
-            // If data.txt cannot be found in the specified directory, then create a new data.txt
-            // in that directory
+            // If data.txt cannot be found in the specified directory, then create a new data.txt in that directory
             if (dataFile.createNewFile()) {
                 return;
             }
@@ -195,7 +192,6 @@ public class BotDynamicMemoryUnit {
         if (dynamicMemoryUnit == null) {
             dynamicMemoryUnit = new BotDynamicMemoryUnit();
         }
-
         return dynamicMemoryUnit;
     }
 }
