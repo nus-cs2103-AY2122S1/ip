@@ -21,7 +21,12 @@ public abstract class Command {
     public static Command initialiseCommand(String commandString, String remainingText) throws DukeException {
         switch (commandString) {
         case TodoCommand.COMMAND:
-            return new TodoCommand(remainingText);
+            // Overload the todo command
+            if (remainingText.contains("/for")) {
+                return new TimedTodoCommand(remainingText);
+            } else {
+                return new TodoCommand(remainingText);
+            }
         case ListCommand.COMMAND:
             return new ListCommand(remainingText);
         case FindCommand.COMMAND:
