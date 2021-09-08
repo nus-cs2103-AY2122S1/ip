@@ -1,6 +1,9 @@
 package bubbles.tasks;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import bubbles.exceptions.EmptyTaskException;
 import bubbles.exceptions.IndexOutOfBoundsException;
@@ -266,31 +269,28 @@ public class TaskList {
      *              wants to search for within the tasks in TaskList.
      */
     public String findTask(String input) {
-        ArrayList<Task> filtered = new ArrayList<>();
-
         String[] arr = input.split(" ", 2);
 
-        for (Task t : tasks) {
-            if (t.toString().contains(arr[1])) {
-                filtered.add(t);
-            }
-        }
+        List<Task> filteredTasks = this.tasks
+                                        .stream()
+                                        .filter(task -> task.toString().contains(arr[1]))
+                                        .collect(Collectors.toList());
 
         StringBuilder message = new StringBuilder(Message.FORMAT_LINE + "\n");
 
-        if (filtered.size() == 0) {
+        if (filteredTasks.size() == 0) {
             message.append("There are no matching tasks in your list. ☹\n");
         } else {
             message.append("Here are the matching tasks in your list!\n");
 
             int n = 1;
-            for (Task t : filtered) {
+            for (Task t : filteredTasks) {
                 message.append((n) + ". " + t + "\n");
 
                 n++;
             }
 
-            assert n == filtered.size() + 1 : "Task numbers displayed for tasks " +
+            assert n == filteredTasks.size() + 1 : "Task numbers displayed for tasks " +
                     "(containing matching keywords) did not increment as expected;";
         }
 
