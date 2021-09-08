@@ -29,6 +29,8 @@ public class Storage {
      * @param filePath path to the directory of the text file
      */
     public Storage(String filePath) {
+        assert filePath != null :"file path should not be null";
+
         dukeText = filePath;
     }
 
@@ -37,7 +39,7 @@ public class Storage {
      * to an ArrayList and returns it.
      *
      * @return an ArrayList of tasks read from the text file
-     * @throws DukeException
+     * @throws DukeException "unable to retrieve file, creating a new list" exception
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> loadedList = new ArrayList<>();
@@ -98,7 +100,7 @@ public class Storage {
      *
      * @param textToAppend tasks to write to the file
      * @param appendStatus if true, text is appended to text file
-     * @throws DukeException
+     * @throws DukeException "file requested cannot be found" exception
      */
     public void save(String textToAppend, boolean appendStatus) throws DukeException {
         try {
@@ -114,7 +116,7 @@ public class Storage {
      * Overrides and re-writes a new taskList to the text file.
      *
      * @param taskList new taskList to re-write to the text file
-     * @throws DukeException
+     * @throws DukeException "file requested cannot be found" exception
      */
     public void rewrite(TaskList taskList) throws DukeException {
         try {

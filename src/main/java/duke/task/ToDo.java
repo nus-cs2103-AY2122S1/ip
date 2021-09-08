@@ -8,6 +8,8 @@ public class ToDo extends Task {
     private String type = "T";
 
     public ToDo(String taskName) {
+        assert taskName != null : "task description cannot be null";
+
         this.taskName = taskName;
     }
 

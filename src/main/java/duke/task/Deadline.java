@@ -22,6 +22,8 @@ public class Deadline extends Task {
      * @param taskName a short description of the task
      */
     public Deadline(String taskName) {
+        assert taskName != null : "task description should not be null";
+
         String[] taskBySplit = taskName.split("/", 2);
 
         if (taskName.contains("|")) {

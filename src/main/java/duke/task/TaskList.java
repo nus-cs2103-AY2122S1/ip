@@ -24,6 +24,8 @@ public class TaskList {
      * @param task
      */
     public void addTask(Task task) {
+        assert task != null : "task cannot be null";
+
         this.list.add(task);
         counter++;
     }
@@ -31,7 +33,7 @@ public class TaskList {
     /**
      * Marks the task with the respective index as done in the TaskList object
      *
-     * @param index
+     * @param index index of the task in the task list
      */
     public String markDone(int index) {
         int trueIndex = index - 1;
@@ -46,7 +48,7 @@ public class TaskList {
     /**
      * Deletes the task with the respective index in the TaskList object
      *
-     * @param index
+     * @param index index of the task in the task list
      */
     public String deleteTask(int index) {
         int trueIndex = index - 1;
@@ -92,16 +94,16 @@ public class TaskList {
      */
     public String refreshList() {
         String refreshList = "";
-        for (int j = 0; j < list.size(); j++) {
-            if (list.get(j).showType().equals("D") || list.get(j).showType().equals("E")) {
-                refreshList += list.get(j).showType() + " | "
-                        + (list.get(j).checkDone().equals("[X]") ? "1" : "0") + " | "
-                        + list.get(j).showTaskOnly() + " | "
-                        + list.get(j).showWhen() + "\n";
+        for (Task task : list) {
+            if (task.showType().equals("D") || task.showType().equals("E")) {
+                refreshList += task.showType() + " | "
+                        + (task.checkDone().equals("[X]") ? "1" : "0") + " | "
+                        + task.showTaskOnly() + " | "
+                        + task.showWhen() + "\n";
             } else {
-                refreshList += list.get(j).showType() + " | "
-                        + (list.get(j).checkDone().equals("[X]") ? "1" : "0") + " | "
-                        + list.get(j).showTask() + "\n";
+                refreshList += task.showType() + " | "
+                        + (task.checkDone().equals("[X]") ? "1" : "0") + " | "
+                        + task.showTask() + "\n";
             }
         }
         return refreshList;
