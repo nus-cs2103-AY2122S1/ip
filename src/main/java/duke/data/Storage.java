@@ -75,16 +75,20 @@ public class Storage {
 
         // Determine type of the task and create corresponding task instance
         Task task;
-        if (splitted[0].equals("T")) { // a todo task
+        if (splitted[0].equals("T")) {
+            // a todo task
             task = new ToDo(splitted[2]);
-        } else if (splitted[0].equals("D")) { // a task with deadline
+        } else if (splitted[0].equals("D")) {
+            // a task with deadline
             task = new Deadline(splitted[2], splitted[3]);
-        } else if (splitted[0].equals("E")) { // an event
+        } else if (splitted[0].equals("E")) {
+            // an event
             task = new Event(splitted[2], splitted[3]);
         } else {
             task = new Task(splitted[2]);
         }
 
+        assert task != null : "task shouldn't be null";
         // Check whether task is done
         if (splitted[1].equals("1")) {
             task.setDone();
@@ -100,6 +104,7 @@ public class Storage {
      * @param task The task to be added.
      */
     public void addToFile(Task task) {
+        assert task != null : "task shouldn't be null";
         try {
             FileWriter fileWriter = new FileWriter(Storage.data, true);
             fileWriter.append(task.toFileFormatString()); // write to file.

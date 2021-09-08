@@ -39,6 +39,7 @@ public class DeleteTaskCommand extends Command {
         }
 
         // Remove the task
+        assert this.task != null : "task shouldn't be null";
         storage.removeFromFile(tasks.indexOf(this.task));
         tasks.removeFromList(this.task);
 
