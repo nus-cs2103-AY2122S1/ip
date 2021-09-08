@@ -81,18 +81,19 @@ public class Parser {
     private static Command parseCommandWithTaskNo(
             String[] words) throws InvalidTaskNoException {
         String leadingWord = words[0];
+        int index;
         try {
-            int index = Integer.parseInt(words[1]) - 1;
-            Command command = leadingWord.equals("done")
-                    ? new TaskDoneCommand(index)
-                    : leadingWord.equals("undone")
-                        ? new TaskUndoneCommand(index)
-                        : new DeleteTaskCommand(index);
-            Parser.commands.push(command);
-            return command;
+            index = Integer.parseInt(words[1]) - 1;
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
             throw new InvalidTaskNoException();
         }
+        Command command = leadingWord.equals("done")
+                ? new TaskDoneCommand(index)
+                : leadingWord.equals("undone")
+                ? new TaskUndoneCommand(index)
+                : new DeleteTaskCommand(index);
+        Parser.commands.push(command);
+        return command;
     }
 
     private static AddTaskCommand parseTodo(String[] words) throws MissingCommandDetailException {
@@ -161,5 +162,12 @@ public class Parser {
             String[] words = command.split(" ", 2);
             return Parser.parseCommandWithTwoOrMoreWords(words);
         }
+    }
+
+    /**
+     * Assumes the last command in the history is invalid and pops it.
+     */
+    public static void popInvalidCommand() {
+        Parser.commands.pop();
     }
 }

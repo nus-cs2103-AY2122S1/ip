@@ -3,6 +3,7 @@ package duke.command;
 import duke.data.Storage;
 import duke.data.TaskList;
 import duke.exception.InvalidTaskNoException;
+import duke.ui.Parser;
 
 /**
  * Represents a command that marks a task as done. A subclass of the Command class.
@@ -44,6 +45,7 @@ public class TaskDoneCommand extends Command {
         try {
             this.task = tasks.get(this.taskIndex);
         } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException e) {
+            Parser.popInvalidCommand();
             throw new InvalidTaskNoException();
         }
 

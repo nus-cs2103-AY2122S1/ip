@@ -3,6 +3,7 @@ package duke.command;
 import duke.data.Storage;
 import duke.data.TaskList;
 import duke.exception.InvalidTaskNoException;
+import duke.ui.Parser;
 
 /**
  * Represents a command that marks a task as undone. A subclass of the Command class.
@@ -19,7 +20,7 @@ public class TaskUndoneCommand extends Command {
     public TaskUndoneCommand(int taskIndex) {
         super("undone");
         this.taskIndex = taskIndex;
-        this.message = "Oops! I've marked this task as undone:\n";
+        this.message = "Got it! I've marked this task as undone:\n";
     }
 
     /**
@@ -44,6 +45,7 @@ public class TaskUndoneCommand extends Command {
         try {
             this.task = tasks.get(this.taskIndex);
         } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException e) {
+            Parser.popInvalidCommand();
             throw new InvalidTaskNoException();
         }
 

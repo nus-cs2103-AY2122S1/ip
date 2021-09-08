@@ -3,6 +3,7 @@ package duke.command;
 import duke.data.Storage;
 import duke.data.TaskList;
 import duke.exception.InvalidTaskNoException;
+import duke.ui.Parser;
 
 /**
  * Represents a command that deletes a task from the task list. A subclass of the Command class.
@@ -35,6 +36,7 @@ public class DeleteTaskCommand extends Command {
         try {
             this.task = tasks.get(this.taskIndex);
         } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException e) {
+            Parser.popInvalidCommand();
             throw new InvalidTaskNoException();
         }
 
