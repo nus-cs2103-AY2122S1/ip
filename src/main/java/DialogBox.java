@@ -75,10 +75,24 @@ public class DialogBox extends HBox {
                 new CornerRadii(10.0), new Insets(0))));
     }
 
+    /**
+     * Creates a new dialog box using the string of text and image given.
+     *
+     * @param text The string to be displayed.
+     * @param img The image to be shown.
+     * @return A dialog box containing both items.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates a new dialog box for the program instead of the user.
+     *
+     * @param text The string to be displayed.
+     * @param img The image of Duke.
+     * @return A dialog box containing both items.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
