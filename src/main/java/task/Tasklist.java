@@ -122,6 +122,7 @@ public class Tasklist {
      * @param item key to search for
      */
     public LogMessage findString(String item) {
+        assert(item != "");
         Tasklist filteredList = new Tasklist(new ArrayList<>());
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
