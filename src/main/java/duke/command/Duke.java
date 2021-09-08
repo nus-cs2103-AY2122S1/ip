@@ -3,7 +3,12 @@ package duke.command;
 import java.io.IOException;
 import java.util.Calendar;
 
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * This class is an implementation of Duke customised to be named LOTTERY-A
@@ -17,40 +22,45 @@ import duke.task.*;
  */
 public class Duke {
     /** Contains task list. */
-    private TaskList tasks;
+    private TaskList listOfTasks;
+
     /** Deals with loading and saving tasks from and to file. */
     private Storage storage;
 
+    /** Deals with GUI. */
     private MainWindow mainWindow;
 
-    /** Default Constructor. */
+    /**
+     * Default Constructor.
+     */
     public Duke(String txtFile) {
         try {
             storage = new Storage(txtFile);
-            tasks = new TaskList(storage.load());
+            listOfTasks = new TaskList(storage.load());
         } catch (IOException e) {
             mainWindow.showLoadingError();
         }
     }
 
+    /**
+     * Set the mainWindow of this instance of duke.
+     *
+     * @param mainWindow GUI viewController.
+     */
     public void setMainWindow(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
         mainWindow.showWelcomeMessage();
     }
 
     /** Saves task to file then exits. */
-    protected void dukeBye() throws DukeException {
+    protected void executeByeCommand() {
         mainWindow.showByeMessage();
-        try {
-            storage.save(tasks);
-        } catch (IOException e) {
-            mainWindow.showSavingError();
-        }
+        executeSave();
     }
 
     /** Lists tasks. */
-    protected void dukeList() {
-        mainWindow.showListOfTasks(tasks.list());
+    protected void executeListCommand() {
+        mainWindow.showListOfTasks(listOfTasks.list());
     }
 
     /**
@@ -59,9 +69,10 @@ public class Duke {
      * @param i Index of tasks to be marked.
      * @throws DukeException if no such tasks exist.
      */
-    protected void dukeDone(int i) throws DukeException {
-        tasks.markAsDone(i);
-        mainWindow.showMarkAsDoneMessage(tasks.getStringDes(i));
+    protected void executeDoneCommand(int i) throws DukeException {
+        listOfTasks.markAsDone(i);
+        mainWindow.showMarkAsDoneMessage(listOfTasks.getStringDes(i));
+        executeSave();
     }
 
     /**
@@ -70,9 +81,10 @@ public class Duke {
      * @param i Index of tasks to be deleted.
      * @throws DukeException if no such tasks exist.
      */
-    protected void dukeDelete(int i) throws DukeException {
-        Task t = tasks.delete(i);
-        mainWindow.showDeleteTaskMessage(t.toString(), tasks.size());
+    protected void executeDeleteCommand(int i) throws DukeException {
+        Task t = listOfTasks.delete(i);
+        mainWindow.showDeleteTaskMessage(t.toString(), listOfTasks.size());
+        executeSave();
     }
 
     /**
@@ -80,12 +92,13 @@ public class Duke {
      *
      * @param desc Description of Todo Object.
      */
-    protected void dukeTodo(String desc) {
+    protected void executeTodoCommand(String desc) {
         Todo todo = new Todo(desc);
-        tasks.add(todo);
-        int currentListSize = tasks.size();
+        listOfTasks.add(todo);
+        int currentListSize = listOfTasks.size();
         assert currentListSize > 0 : "tasks should never be empty after adding task";
         mainWindow.showAddTaskMessage(todo.toString(), currentListSize);
+        executeSave();
     }
 
     /**
@@ -94,12 +107,14 @@ public class Duke {
      * @param desc Description of Deadline Object.
      * @param cal Calendar set to dueBy date of Deadline.
      */
-    protected void dukeDeadline(String desc, Calendar cal) {
+    protected void executeDeadlineCommand(String desc, Calendar cal) {
         Deadline deadline = new Deadline(desc, cal);
-        tasks.add(deadline);
-        int currentListSize = tasks.size();
+        listOfTasks.add(deadline);
+        int currentListSize = listOfTasks.size();
         assert currentListSize > 0 : "tasks should never be empty after adding task";
         mainWindow.showAddTaskMessage(deadline.toString(), currentListSize);
+        executeSave();
+
     }
 
     /**
@@ -108,24 +123,55 @@ public class Duke {
      * @param desc Description of Event Object.
      * @param cal Calendar set to time of Event.
      */
-    protected void dukeEvent(String desc, Calendar cal) {
+    protected void executeEventCommand(String desc, Calendar cal) {
         Event event = new Event(desc, cal);
-        tasks.add(event);
-        int currentListSize = tasks.size();
+        listOfTasks.add(event);
+        int currentListSize = listOfTasks.size();
         assert currentListSize > 0 : "tasks should never be empty after adding task";
         mainWindow.showAddTaskMessage(event.toString(), currentListSize);
+        executeSave();
     }
 
-    protected void dukeFind(String desc) {
-        mainWindow.showListOfTasks(tasks.find(desc));
+    /**
+     * Executes find command
+     *
+     * @param desc String being searched for.
+     */
+    protected void executeFindCommand(String desc) {
+        mainWindow.showListOfTasks(listOfTasks.find(desc));
     }
 
-    protected void dukeEditDescription(String desc, int i) throws DukeException{
-        tasks.editDescription(desc, i);
+    /**
+     * Edits the description of task at index i
+     *
+     * @param desc New description.
+     * @param i Index of tasks to be edited.
+     */
+    protected void executeEditDescriptionCommand(String desc, int i) throws DukeException{
+        listOfTasks.editDescription(desc, i);
+        executeSave();
     }
 
-    protected void dukeEditTime(Calendar cal, int i) throws DukeException {
-        tasks.editTime(cal, i);
+    /**
+     * Edits the date and time of task at index i
+     *
+     * @param cal New date and time.
+     * @param i Index of tasks to be edited.
+     */
+    protected void executeEditTimeCommand(Calendar cal, int i) throws DukeException {
+        listOfTasks.editTime(cal, i);
+        executeSave();
+    }
+
+    /**
+     * Saves info in listOfTasks to storage.
+     */
+    private void executeSave() {
+        try {
+            storage.save(listOfTasks);
+        } catch (IOException e) {
+            mainWindow.showSavingError();
+        }
     }
 
 }

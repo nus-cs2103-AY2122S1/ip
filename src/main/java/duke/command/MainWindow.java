@@ -135,6 +135,7 @@ public class MainWindow extends AnchorPane {
         String markAsDoneMessage = DOTTED_LINES +
                 "\nNice! I've marked this task as done:\n" +
                 taskDesc +
+                "\n" +
                 DOTTED_LINES;
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(markAsDoneMessage, dukeImage));
     }

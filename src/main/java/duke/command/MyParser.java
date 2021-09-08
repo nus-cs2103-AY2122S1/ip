@@ -28,10 +28,10 @@ public class MyParser {
         assert userDescription != null : "description field should never be null";
         switch (command) {
         case "bye":
-            duke.dukeBye();
+            duke.executeByeCommand();
             break;
         case "list":
-            duke.dukeList();
+            duke.executeListCommand();
             break;
         case "done":
             parseDoneCommand(userDescription, duke);
@@ -72,7 +72,7 @@ public class MyParser {
 
         int targetTask = Integer.parseInt(userDescription);
 
-        duke.dukeDone(targetTask);
+        duke.executeDoneCommand(targetTask);
     }
 
     private void parseDeleteCommand(String userDescription, Duke duke) throws DukeException {
@@ -87,7 +87,7 @@ public class MyParser {
         }
 
         int targetTask = Integer.parseInt(userDescription);
-        duke.dukeDelete(targetTask);
+        duke.executeDeleteCommand(targetTask);
     }
 
     private void parseTodoCommand(String userDescription, Duke duke) throws DukeException {
@@ -95,7 +95,7 @@ public class MyParser {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty");
         }
 
-        duke.dukeTodo(userDescription);
+        duke.executeTodoCommand(userDescription);
     }
 
     private void parseDeadlineCommand(String userDescription, Duke duke) throws DukeException {
@@ -120,7 +120,7 @@ public class MyParser {
         } catch (ParseException e) {
             throw new DukeException("OOPS!!! The date is not formatted as dd/mm/yyyy 0000");
         }
-        duke.dukeDeadline(desc, deadlineCal);
+        duke.executeDeadlineCommand(desc, deadlineCal);
     }
 
     private void parseEventCommand(String userDescription, Duke duke) throws DukeException {
@@ -143,7 +143,7 @@ public class MyParser {
         } catch (ParseException e) {
             throw new DukeException("OOPS!!! The date is not formatted as dd/mm/yyyy 0000");
         }
-        duke.dukeEvent(desc, eventCal);
+        duke.executeEventCommand(desc, eventCal);
     }
 
     private void parseFindCommand(String userDescription, Duke duke) throws DukeException {
@@ -151,7 +151,7 @@ public class MyParser {
             throw new DukeException("OOPS!!! The description of find cannot be empty");
         }
 
-        duke.dukeFind(userDescription);
+        duke.executeFindCommand(userDescription);
     }
 
     private void parseEditCommand(String userDescription, Duke duke) throws DukeException {
@@ -186,7 +186,7 @@ public class MyParser {
 
         int targetTask = Integer.parseInt(editIndex);
 
-        duke.dukeEditDescription(info, targetTask);
+        duke.executeEditDescriptionCommand(info, targetTask);
     }
 
     private void parseEditTimeCommand(String userDescription, int infoIndex, Duke duke) throws DukeException {
@@ -211,7 +211,7 @@ public class MyParser {
             throw new DukeException("OOPS!!! The date is not formatted as dd/mm/yyyy 0000");
         }
 
-        duke.dukeEditTime(editCal, targetTask);
+        duke.executeEditTimeCommand(editCal, targetTask);
     }
 
     private void parseUnknownCommand(String command) throws DukeException {

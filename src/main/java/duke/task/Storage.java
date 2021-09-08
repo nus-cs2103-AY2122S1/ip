@@ -32,8 +32,8 @@ public class Storage {
     public Storage(String txtFile) throws IOException {
         String home = System.getProperty("user.home");
         Path path = Paths.get(home, "duke", "dir");
-        txtPath = new StringBuilder().append(home).append("\\duke")
-                .append("\\dir").append("\\" + txtFile).toString();
+        txtPath = home + File.separator + "duke" + File.separator + "dir" + File.separator + txtFile;
+
         boolean directoryExists = Files.exists(path);
 
         if (!directoryExists) {
@@ -66,13 +66,14 @@ public class Storage {
     /**
      * Saves task to file.
      *
-     * @param tasks List of tasks to be saved.
+     * @param listOfTasks List of tasks to be saved.
      * @throws IOException if file cannot be written to.
      */
-    public void save(TaskList tasks) throws IOException {
+    public void save(TaskList listOfTasks) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(txtPath));
-        for (int i = 1; i < tasks.size() + 1; i++) {
-            writer.write(tasks.getStringDes(i) + "\n");
+
+        for (int i = 1; i < listOfTasks.size() + 1; i++) {
+            writer.write(listOfTasks.getStringDes(i) + "\n");
         }
         writer.close();
     }
