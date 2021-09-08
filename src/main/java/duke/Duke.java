@@ -13,8 +13,20 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 
+/**
+ * <code>Duke</code> is the Overarching class for the Duke Bot.
+ * Contains Task class and subclasses To-Do, Deadline and Event
+ * Code for the bot behaviour itself is separated into 4 different classes:
+ * Ui, TaskList, Storage and Parser
+ */
+
 public class Duke {
 
+
+    /**
+     * <code>Task</code> class which is the parent class of To-Do, Deadline and Event
+     * A basic task consists of a description and a boolean to indicate if the task is done.
+     */
     public static class Task{
 
         protected String description;
@@ -41,6 +53,11 @@ public class Duke {
 
     }
 
+    /**
+     * <code>ToDo</code> subclass is almost identical to a Task Class
+     * The [T] in toString() identifies a To-Do object.
+     */
+
     public static class ToDo extends Task {
         public ToDo(String description, boolean isDone){
             super(description, isDone);
@@ -52,7 +69,11 @@ public class Duke {
         }
 
     }
-
+    /**
+     * <code>Deadline</code> subclass has two additional attributes:
+     * A LocalDate "date" and a Localtime "time" to indicate the deadline of the Deadline object
+     * The [D] in toString() identifies a Deadline object
+     */
     public static class Deadline extends Task {
         protected LocalDate date;
         protected LocalTime time;
@@ -71,6 +92,12 @@ public class Duke {
                     + " (by: " + this.date + " " + this.time + ")";
         }
     }
+
+    /**
+     * <code>Event</code> subclass includes two LocalTime attributes "startTime" and "endTime"
+     * to indicate the time range of the Event object
+     * The [E] in toString() identifies an Event object
+     */
 
     public static class Event extends Task {
         protected LocalDate date;
@@ -94,13 +121,29 @@ public class Duke {
     }
 
 
+    /**
+     * <code>Storage</code> class handles saving and loading of task list for a file
+     * A Storage object is initialised with a String "path"
+     * "path" represents the file directory path to the task file
+     * Storage object implements two methods save(tasks) and load() which handles the saving/loading.
+     */
+
     public static class Storage{
-        //handles file writing and data extraction
+
         protected String path; //path of task file
 
         public Storage(String path){
             this.path = path;
         }
+
+
+        /**
+         * Saves an arraylist of tasks to the file at this.path
+         *
+         * @param tasks arraylist of task objects to be saved in the arraylist.
+         * Tasks will be converted into their toString() equivalent before saving to the list.
+         */
+
 
         public void save(ArrayList<Task> tasks){
             //create a new file if not available
@@ -129,6 +172,14 @@ public class Duke {
             }
         }
 
+
+        /**
+         * loads file at this.path, converts each line into a Task object
+         * then inserts task into an ArrayList of Tasks
+         *
+         * @return ArrayList of Tasks
+         */
+
         public ArrayList<Task> load(){
             //reads the file line by line and adds tasks saved by the file.
             ArrayList<Task> loadedList = new ArrayList<>();
@@ -146,7 +197,7 @@ public class Duke {
                     int startIndex = String.valueOf(lineNumber).length() + 3;
 
                     if (line.charAt(startIndex) == 'T'){
-                        //to-do task
+                        //parse to-do task
                         done = (line.charAt(startIndex+4) == 'X');
                         description = line.substring(startIndex+7);
 
@@ -160,7 +211,7 @@ public class Duke {
                         if(line.charAt(startIndex) == 'D'){
                             int hours, minutes;
                             LocalTime time;
-                            //deadline task
+                            //parse description, date and time of deadline task
                             done = (line.charAt(startIndex+4) == 'X');
 
                             minutes = Integer.parseInt(line.substring(endIndex-2,endIndex));
@@ -183,7 +234,7 @@ public class Duke {
                             LocalTime startTime;
                             int startMinutes, endMinutes;
                             LocalTime endTime;
-                            //event task
+                            //parse description, date and times of event task
 
                             done = (line.charAt(startIndex + 4) == 'X');
 
@@ -225,6 +276,14 @@ public class Duke {
 
     }
 
+    /**
+     * <code>TaskList</code> class represents a list of Tasks with added functionality
+     * Initialise a TaskList with an existing ArrayList of Tasks
+     * or without one to start from scratch with an empty TaskList
+     *
+     * Implements 3 getter methods getList(), getSize() and getTask(index)
+     * and 4 other methods add(task), delete(index), markDone(index) and printAllTasks()
+     */
     public static class TaskList{
         //contains the list of tasks and operations to the list.
         protected ArrayList<Task> list;
@@ -255,7 +314,7 @@ public class Duke {
             this.list.add(task);
         }
 
-        //delete a task of a specific index
+        //delete a task at a specific index
         public void delete(int index){
             this.list.remove(index);
         }
@@ -274,16 +333,32 @@ public class Duke {
 
     }
 
+    /**
+     * <code>Ui</code> class manages user input and output
+     * Ui object has one attribute reader which makes use of Scanner library to read user input
+     * Also contains 4 methods showHelp(), showError(errorType), showMessage() and taskCreationSuccess()
+     * These deal with Ui Output.
+     */
+
     public static class Ui{
-        //Shows messages and takes in user input.
+
         Scanner reader;
         public Ui(){
             this.reader = new Scanner(System.in);
         }
+
+        /**
+         * Prompts user to give text input, then reads and returns input as a String.
+         *
+         * @param prompt a string which shows a prompt for the user to type in an input
+         * @return User input string to be fed into Parser
+         */
+
         public String readInput(String prompt){
             System.out.println(prompt);
             return this.reader.nextLine();
         }
+
         public void showHelp(){
             String logo = "                                        _       \n"
                     + "  _ __  _ _   _ __  ___ ___ ___ ___ ___| |__ ___\n"
@@ -298,6 +373,12 @@ public class Duke {
             System.out.println("Type \"done\" to mark a task as done");
             System.out.println("Type \"bye\" to exit");
         }
+
+        /**
+         * Prints out specific error messages for specific errors caught by the bot
+         *
+         * @param errorType a string which indicates the type of error detected/caught
+         */
 
         public void showError(String errorType){
             switch (errorType){
@@ -339,6 +420,13 @@ public class Duke {
         }
 
     }
+
+    /**
+     * <code>Parser</code> class contains main bot logic to parse user commands
+     * Has a ui attribute to print out specific messages according to user command.
+     * parseCommand(input,list) is the sole method of the class.
+     */
+
     public static class Parser{
 
         Ui ui;
@@ -346,7 +434,14 @@ public class Duke {
             this.ui = ui;
         }
 
-        //Check user commands and handle them.
+        /**
+         * Takes a user input command string and processes it
+         * Updates the referenced input TaskList where applicable
+         * Prints invalidInput if input is not a recognised command
+         *
+         * @param input input String which corresponds to a user command
+         * @param list ArrayList of classes to be updated
+         */
         public void parseCommand(String input, TaskList list){
             switch (input){
                 case "bye":
