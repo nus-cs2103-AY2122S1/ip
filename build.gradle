@@ -47,7 +47,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "jared"
     archiveClassifier = null
 }
 
@@ -57,4 +57,5 @@ checkstyle {
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }
