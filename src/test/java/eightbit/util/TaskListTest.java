@@ -43,7 +43,7 @@ public class TaskListTest {
     @Test
     void get_validIndex_correctTask() {
         TaskStub t = (TaskStub) taskList.get(1);
-        assertEquals("Task1", t.description);
+        assertEquals("Task1", t.getDescription());
     }
 
     @Test
@@ -63,7 +63,7 @@ public class TaskListTest {
         taskList.remove(0);
         assertEquals(2, taskList.size());
         TaskStub t = (TaskStub) taskList.get(0);
-        assertEquals("Task1", t.description);
+        assertEquals("Task1", t.getDescription());
     }
 
     @Test

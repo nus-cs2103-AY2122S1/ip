@@ -1,5 +1,7 @@
 package eightbit.task;
 
+import java.util.List;
+
 /**
  * Represents a todo item.
  */
@@ -15,13 +17,15 @@ public class ToDo extends Task {
     }
 
     /**
-     * Constructs a todo. Marks the todo as done or not.
+     * Constructs a todo.
+     * Marks the todo as done or not. Adds a list of tags to the task.
      *
      * @param description Description of the todo.
      * @param isDone      Whether the todo is done.
+     * @param tags        List of tags.
      */
-    public ToDo(String description, boolean isDone) {
-        super(description, isDone);
+    public ToDo(String description, boolean isDone, List<String> tags) {
+        super(description, isDone, tags);
     }
 
     /**

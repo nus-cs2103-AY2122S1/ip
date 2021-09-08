@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -37,13 +38,13 @@ public class Storage {
         String isDone = task.isDone() ? "1" : "0";
         if (task instanceof ToDo) {
             ToDo t = (ToDo) task;
-            return "T | " + isDone + " | " + t.getDescription();
+            return "T | " + isDone + " | " + t.getDescription() + " | " + t.getTagsAsString();
         } else if (task instanceof Deadline) {
             Deadline d = (Deadline) task;
-            return "D | " + isDone + " | " + d.getDescription() + " | " + d.getBy();
+            return "D | " + isDone + " | " + d.getDescription() + " | " + d.getBy() + " | " + d.getTagsAsString();
         } else if (task instanceof Event) {
             Event e = (Event) task;
-            return "E | " + isDone + " | " + e.getDescription() + " | " + e.getAt();
+            return "E | " + isDone + " | " + e.getDescription() + " | " + e.getAt() + " | " + e.getTagsAsString();
         } else {
             return "";
         }
@@ -122,23 +123,16 @@ public class Storage {
                 String str = s.nextLine();
                 String[] words = str.split(" \\| ");
                 String taskType = words[0];
-                boolean isDone = words[1].equals("1");
-                String taskDescription = words[2];
 
                 switch (taskType) {
                 case "T":
-                    ToDo todo = new ToDo(taskDescription, isDone);
-                    tasksInFile.add(todo);
+                    loadToDo(tasksInFile, words);
                     break;
                 case "D":
-                    LocalDateTime by = LocalDateTime.parse(words[3]);
-                    Deadline deadline = new Deadline(taskDescription, by, isDone);
-                    tasksInFile.add(deadline);
+                    loadDeadline(tasksInFile, words);
                     break;
                 case "E":
-                    LocalDateTime at = LocalDateTime.parse(words[3]);
-                    Event event = new Event(taskDescription, at, isDone);
-                    tasksInFile.add(event);
+                    loadEvent(tasksInFile, words);
                     break;
                 default:
                     break;
@@ -151,5 +145,55 @@ public class Storage {
             createFile();
             return new ArrayList<>();
         }
+    }
+
+    private void loadToDo(List<Task> tasksInFile, String[] words) {
+        boolean isDone = words[1].equals("1");
+        String taskDescription = words[2];
+        List<String> todoTags;
+
+        if (words.length < 4) {
+            todoTags = new ArrayList<>();
+        } else {
+            String todoTagsInSingleString = words[3];
+            todoTags = Arrays.asList(todoTagsInSingleString.split(" "));
+        }
+
+        ToDo todo = new ToDo(taskDescription, isDone, todoTags);
+        tasksInFile.add(todo);
+    }
+
+    private void loadDeadline(List<Task> tasksInFile, String[] words) {
+        boolean isDone = words[1].equals("1");
+        String taskDescription = words[2];
+        LocalDateTime by = LocalDateTime.parse(words[3]);
+        List<String> deadlineTags;
+
+        if (words.length < 5) {
+            deadlineTags = new ArrayList<>();
+        } else {
+            String deadlineTagsInSingleString = words[4];
+            deadlineTags = Arrays.asList(deadlineTagsInSingleString.split(" "));
+        }
+
+        Deadline deadline = new Deadline(taskDescription, by, isDone, deadlineTags);
+        tasksInFile.add(deadline);
+    }
+
+    private void loadEvent(List<Task> tasksInFile, String[] words) {
+        boolean isDone = words[1].equals("1");
+        String taskDescription = words[2];
+        LocalDateTime at = LocalDateTime.parse(words[3]);
+        List<String> eventTags;
+
+        if (words.length < 5) {
+            eventTags = new ArrayList<>();
+        } else {
+            String eventTagsInSingleString = words[4];
+            eventTags = Arrays.asList(eventTagsInSingleString.split(" "));
+        }
+
+        Event event = new Event(taskDescription, at, isDone, eventTags);
+        tasksInFile.add(event);
     }
 }

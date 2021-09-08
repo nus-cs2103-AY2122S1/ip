@@ -2,6 +2,9 @@ package eightbit.util;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import eightbit.EightBitException;
 import eightbit.command.ByeCommand;
@@ -13,6 +16,7 @@ import eightbit.command.DoneCommand;
 import eightbit.command.EventCommand;
 import eightbit.command.FindCommand;
 import eightbit.command.ListCommand;
+import eightbit.command.TagCommand;
 import eightbit.command.ToDoCommand;
 import eightbit.task.Deadline;
 import eightbit.task.Event;
@@ -49,6 +53,8 @@ public class Parser {
             return parseDeleteCommand(command);
         case FIND:
             return parseFindCommand(command);
+        case TAG:
+            return parseTagCommand(command);
         case BYE:
             return parseByeCommand();
         default:
@@ -181,6 +187,32 @@ public class Parser {
 
         String keyword = command.substring(5);
         return new FindCommand(keyword);
+    }
+
+    private static TagCommand parseTagCommand(String command) throws EightBitException {
+        if (command.split(" ").length < 3) { // missing index or tags or both
+            throw new EightBitException("OOPS!!! Please enter in this format: (you can enter multiple tags)\n"
+                    + "tag <index> <tags>...");
+        }
+
+        try {
+            Integer.parseInt(command.split(" ")[1]);
+        } catch (NumberFormatException e) { // not integer
+            throw new EightBitException("OOPS!!! Please enter in this format: (you can enter multiple tags)\n"
+                    + "tag <index> <tags>...");
+        }
+
+        int index = Integer.parseInt(command.split(" ")[1]) - 1;
+        if (index < 0) { // input number < 1
+            throw new EightBitException("OOPS!!! Task " + (index + 1) + " does not exist.");
+        }
+
+        String tagCommand = command.split(" ")[0];
+        String tagIndex = command.split(" ")[1];
+        int tagsStartIndex = tagCommand.length() + tagIndex.length() + 2; // 2 spaces
+        String[] tags = command.substring(tagsStartIndex).split(" ");
+        List<String> tagsList = new ArrayList<>(Arrays.asList(tags));
+        return new TagCommand(index, tagsList);
     }
 
     private static ByeCommand parseByeCommand() {

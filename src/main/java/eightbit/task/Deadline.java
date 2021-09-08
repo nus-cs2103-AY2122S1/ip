@@ -2,6 +2,7 @@ package eightbit.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  * Represents a task with a deadline.
@@ -22,14 +23,16 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructs a task with a deadline. Marks the task as done or not.
+     * Constructs a task with a deadline.
+     * Marks the task as done or not. Adds a list of tags to the task.
      *
      * @param description Description of the task.
      * @param by          Date and time of the deadline.
      * @param isDone      Whether the task is done.
+     * @param tags        List of tags.
      */
-    public Deadline(String description, LocalDateTime by, boolean isDone) {
-        super(description, isDone);
+    public Deadline(String description, LocalDateTime by, boolean isDone, List<String> tags) {
+        super(description, isDone, tags);
         this.by = by;
     }
 
