@@ -135,7 +135,8 @@ public class Parser {
             DateAndTime eventTime = new DateAndTime(splitCommandArray[1].trim());
             return eventTime.getReformattedDateAndTime();
         default:
-            throw new InvalidDateAndTimeException(Message.MESSAGE_INVALID_DATE_AND_TIME);
+            assert false : "Invalid task type for :getDateAndTime";
+            throw new AssertionError(taskType);
         }
     }
 
@@ -166,6 +167,7 @@ public class Parser {
 
     private Command.CommandType getCommandType(String command) throws InvalidInputException, EmptyCommandInformationException {
         String commandTypeString = getCommandTypeString(command);
+        assert commandTypeString.length() > 0 : "CommandType string length should be more than 0";
 
         switch (commandTypeString) {
         case TODO:
@@ -213,6 +215,8 @@ public class Parser {
 
     private void checkOnlyCommandTypeStringKeyed(String command) throws EmptyCommandInformationException,
             InvalidInputException {
+        assert command.length() > 0 : "command string length should be more than 0";
+
         switch (command) {
         case TODO:
             throw new EmptyCommandInformationException(Message.MESSAGE_EMPTY_TODO);
