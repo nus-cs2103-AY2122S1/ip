@@ -82,5 +82,23 @@ public class Event extends Task {
                         + endDateTime.format(
                         DateTimeFormatter.ofPattern(PRINT_DATETIME_FORMAT)));
     }
+
+    /**
+     * Compares two deadlines' priority.
+     * If there is a tie of priority, then compare by dateTime that
+     * the one with nearer dateTime has higher priority.
+     *
+     * @param other
+     * @return
+     */
+    public int compareTo(Event other) {
+        int priorityCompare = super.compareTo(other);
+
+        if (priorityCompare == 0) {
+            return startDateTime.compareTo(other.startDateTime);
+        } else {
+            return priorityCompare;
+        }
+    }
 }
 
