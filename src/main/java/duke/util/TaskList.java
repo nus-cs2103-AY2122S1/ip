@@ -3,6 +3,7 @@ package duke.util;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+import javax.print.attribute.HashPrintServiceAttributeSet;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,8 +42,11 @@ public class TaskList {
      * @return String of messages to be printed by Ui object after adding.
      */
     public String addTask(Task task) {
-        StringBuilder msg = new StringBuilder();
+        assert task != null;
+
         tasks.add(task);
+
+        StringBuilder msg = new StringBuilder();
         msg.append("Got it. I've added this task:\n");
         msg.append("\t" + task + "\n");
         msg.append("Now you have " + tasks.size() + " tasks in the list.\n");
@@ -141,6 +145,8 @@ public class TaskList {
      * @throws IOException When I/O system goes wrong.
      */
     public void saveToFile(Storage storage) throws IOException {
+        assert storage != null;
+
         String encoded = Parser.encode(tasks);
         storage.save(encoded);
     }
@@ -153,7 +159,9 @@ public class TaskList {
      * @param storage The Storage object that handles loading.
      * @throws FileNotFoundException When the file does not exist.
      */
-    public void loadFromFile(Storage storage) throws FileNotFoundException {
+    public void loadFromFile(Storage storage) throws FileNotFoundException, DukeException {
+        assert storage != null;
+
         List<Task> decoded = Parser.decode(storage.load());
         tasks = decoded;
     }
