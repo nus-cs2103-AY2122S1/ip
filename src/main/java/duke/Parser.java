@@ -48,6 +48,7 @@ public class Parser {
      */
     private static String handleFind(String[] pieces, TaskList taskList) {
         TaskList tempList = new TaskList();
+        assert(pieces.length == 2);
         for(int i = 0; i < taskList.size(); i++) {
             Task checkTask = taskList.get(i);
             if (checkTask.getName().contains(pieces[1])) {
@@ -67,6 +68,7 @@ public class Parser {
      */
     private static String handleDelete(String[] pieces,TaskList taskList) throws DukeException{
         try {
+            assert(pieces.length == 2);
             int index = Integer.parseInt(pieces[1]);
             Task task = taskList.get(index - 1);
             taskList.remove(task);
@@ -85,6 +87,7 @@ public class Parser {
      */
     private static String handleDeadline(String[] pieces, TaskList taskList) throws DukeException{
         try {
+            assert(pieces.length == 2);
             String[] eventPieces = pieces[1].split("/", 2);
             String name = eventPieces[0];
             String[] timePieces = eventPieces[1].split("by ", 2);
@@ -129,7 +132,9 @@ public class Parser {
      */
     public static String handleDone(String[] pieces, TaskList taskList) throws DukeException{
         try {
+            assert(pieces.length == 2);
             int index = Integer.parseInt(pieces[1]);
+            assert(index <= taskList.size());
             Task task = taskList.get(index - 1);
             task.markAsDone();
             return Ui.done(task);
