@@ -21,6 +21,11 @@ public class Event extends Task {
     }
 
     @Override
+    public LocalDate getDueDate() {
+        return this.startTime;
+    }
+
+    @Override
     public String getFormattedData() {
         String formattedStatus = super.isDone() ? "1|" : "0|";
         return "E|" + formattedStatus + super.getDescription()

@@ -2,13 +2,7 @@ package duke.utils;
 
 import java.time.LocalDate;
 
-import duke.commands.Command;
-import duke.commands.AddCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.ExitCommand;
-import duke.commands.FindCommand;
-import duke.commands.ListCommand;
+import duke.commands.*;
 
 import duke.exceptions.InvalidInputException;
 
@@ -38,6 +32,8 @@ public class Parser {
                 return new ExitCommand();
             case "list":
                 return new ListCommand();
+            case "sort":
+                return new SortCommand();
             case "done":
                 index = Integer.parseInt(description) - 1;
 

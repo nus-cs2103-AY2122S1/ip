@@ -1,6 +1,8 @@
 package duke.tasks;
 
-public abstract class Task {
+import java.time.LocalDate;
+
+public abstract class Task implements Comparable<Task>{
 
     private String type;
     private String description;
@@ -33,12 +35,28 @@ public abstract class Task {
      */
     public abstract String getFormattedData();
 
+    /**
+     * Return the due date of the task
+     *
+     * @return due date
+     */
+    public abstract LocalDate getDueDate();
+
     public boolean isDone() {
         return this.isDone;
     }
 
     public String getDescription() {
         return this.description;
+    }
+
+    @Override
+    public int compareTo(Task otherTask) {
+        if (this == otherTask) {
+            return 0;
+        } else {
+            return this.getDueDate().compareTo(otherTask.getDueDate());
+        }
     }
 
     @Override
