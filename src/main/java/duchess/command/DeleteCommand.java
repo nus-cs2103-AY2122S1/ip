@@ -50,6 +50,7 @@ public class DeleteCommand extends Command {
                 reply = ((DuchessException) e).getMessage();
             }
         }
+        assert !reply.isBlank() : "Reply should not be empty.";
         return reply;
     }
 }

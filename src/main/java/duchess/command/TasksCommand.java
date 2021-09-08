@@ -55,6 +55,7 @@ public class TasksCommand extends Command {
                 reply = e.getMessage();
             }
         }
+        assert !reply.isBlank() : "Reply should not be empty.";
         return reply;
     }
 }

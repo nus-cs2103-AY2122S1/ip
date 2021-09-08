@@ -22,6 +22,8 @@ public class ListCommand extends Command {
      * @return Whether to continue scanning for user input afterwards.
      */
     public String handleLogic(Duchess duchess) {
-        return duchess.getDuchessList().printList();
+        String reply = duchess.getDuchessList().printList();
+        assert !reply.isBlank() : "Reply should not be empty.";
+        return reply;
     }
 }

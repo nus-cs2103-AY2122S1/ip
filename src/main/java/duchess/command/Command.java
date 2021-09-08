@@ -24,6 +24,8 @@ public abstract class Command {
         case "list":
             return new ListCommand();
         default:
+            assert false : "Code execution should not reach here. Something went wrong. Command does not match any"
+                    + " known commands.";
             return null;
         }
     }
@@ -45,6 +47,8 @@ public abstract class Command {
         case "find":
             return new FindCommand(description);
         default:
+            assert false : "Code execution should not reach here. Something went wrong. Command does not match any"
+                    + " known commands.";
             return null;
         }
     }
