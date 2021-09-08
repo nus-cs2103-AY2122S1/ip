@@ -36,6 +36,10 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         sendButton.setFont(Font.font("Helvetica"));
         userInput.setFont(Font.font("Helvetica"));
+        String greeting = "Welcome! I'm Duke.\nWhat can I do for you?";
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(greeting, dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
