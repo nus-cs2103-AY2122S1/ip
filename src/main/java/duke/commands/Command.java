@@ -250,5 +250,4 @@ public abstract class Command {
             ui.showMessagePrintingAllMatchingTasks(matchingTasks, tasks);
         }
     }
-
 }
