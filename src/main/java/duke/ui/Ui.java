@@ -35,6 +35,16 @@ public class Ui {
         lineGenerator();
     }
 
+    public static String guiWelcomeMessage() {
+        return "Hello, I'm Duke\nWhat can I do for you?\n"
+                + "╭━━━╮╱╱╭╮\n"
+                + "╰╮╭╮┃╱╱┃┃\n"
+                + "╱┃┃┃┣╮╭┫┃╭┳━━╮\n"
+                + "╱┃┃┃┃┃┃┃╰╯┫┃━┫\n"
+                + "╭╯╰╯┃╰╯┃╭╮┫┃━┫\n"
+                + "╰━━━┻━━┻╯╰┻━━╯\n";
+    }
+
     public void lineGenerator() {
         System.out.println("____________________________________________________________\n");
     }

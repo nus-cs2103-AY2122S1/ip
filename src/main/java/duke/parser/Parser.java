@@ -38,7 +38,7 @@ public class Parser {
         this.isByeCommand = false;
     }
 
-    public boolean getIsByeCommand() {
+    public boolean isByeCommand() {
         return isByeCommand;
     }
 
@@ -87,7 +87,7 @@ public class Parser {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String str;
         if (input.equals(Commands.BYE.toString().toLowerCase())) {
-            this.isByeCommand = true;
+            isByeCommand = true;
             return byeCommand(ui);
         }
         Task t;
@@ -167,8 +167,13 @@ public class Parser {
     public String doneCommand(TaskList tasks, Ui ui) {
         // format is "done x", for any positive integer x
         String[] splitStr = input.split("\\s+");
-        tasks.taskNumber(Integer.parseInt(splitStr[1]) - 1).markTaskDone();
-        return ui.taskDone(tasks.taskNumber(Integer.parseInt(splitStr[1]) - 1));
+        int taskIndexFromInputIndex = parseCommandArgument(splitStr[1]) - 1;
+        tasks.taskNumber(taskIndexFromInputIndex).markTaskDone();
+        return ui.taskDone(tasks.taskNumber(taskIndexFromInputIndex));
+    }
+
+    private int parseCommandArgument(String s) {
+        return Integer.parseInt(s);
     }
 
     /**
@@ -181,8 +186,8 @@ public class Parser {
     public String deleteCommand(TaskList tasks, Ui ui) {
         // format is "delete x", for any positive integer x
         String[] splitStr = input.split("\\s+");
-        String str = ui.deleteTask(tasks.taskNumber(Integer.parseInt(splitStr[1]) - 1));
-        tasks.removeTask(Integer.parseInt(splitStr[1]) - 1);
+        String str = ui.deleteTask(tasks.taskNumber(parseCommandArgument(splitStr[1]) - 1));
+        tasks.removeTask(parseCommandArgument(splitStr[1]) - 1);
         return str + ui.printTaskLength(tasks);
     }
 
@@ -248,40 +253,21 @@ public class Parser {
     public String scheduleCommand(TaskList tasks, Ui ui) {
         try {
             ArrayList<Task> list = new ArrayList<>();
-            String[] splitStr = input.split("\\s+");
-            String date = splitStr[1];
+            String date = getDate();
             LocalDate formattedDate = dateFormatter(date);
-            for (int i = 0; i < tasks.numberOfTasks(); i++) {
-                Task t = tasks.taskNumber(i);
-                assert t != null : "Task to be added should not be null.";
-                if (t instanceof Deadline | t instanceof Event) {
-                    boolean isSameDate = t.getDate().compareTo(formattedDate) == 0;
-                    if (isSameDate) {
-                        list.add(t);
-                    }
-                }
-            }
+
+            extractSameDayTasks(tasks, list, formattedDate);
 
             if (list.isEmpty()) {
                 return ui.noTaskScheduledMessage(formattedDate);
             }
 
             Collections.sort(list);
-            TaskList matchingTasks = new TaskList(list);
+            TaskList sameDayTasks = new TaskList(list);
+
             StringBuilder str = new StringBuilder(ui.viewScheduleMessage(formattedDate) + '\n');
-            int ctr = -1;
-            for (int i = 0; i < matchingTasks.numberOfTasks(); i++) {
-                Task t = matchingTasks.taskNumber(i);
-                assert t != null : "Task should not be null.";
-                int hourOfTask = t.getTime().getHour();
-                if (ctr != hourOfTask) {
-                    ctr = hourOfTask;
-                    str.append('\n');
-                    str.append(ui.printScheduleByHourMessage(t.getTime()));
-                }
-                str.append(t);
-                str.append('\n');
-            }
+            groupTasksByHour(ui, sameDayTasks, str);
+
             return str.toString();
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Your date is wrongly formatted. It should be in the form of dd-mm-yyyy.");
@@ -291,7 +277,46 @@ public class Parser {
         return "";
     }
 
-    /** Signals the end of the program */
+    private String getDate() {
+        String[] splitStr = input.split("\\s+");
+        return splitStr[1];
+    }
+
+    private void groupTasksByHour(Ui ui, TaskList matchingTasks, StringBuilder str) {
+        int ctr = -1;
+        for (int i = 0; i < matchingTasks.numberOfTasks(); i++) {
+            Task t = matchingTasks.taskNumber(i);
+            assert t != null : "Task should not be null.";
+            int hourOfTask = t.getTime().getHour();
+            if (ctr != hourOfTask) {
+                ctr = hourOfTask;
+                str.append('\n');
+                str.append(ui.printScheduleByHourMessage(t.getTime()));
+            }
+            str.append(t);
+            str.append('\n');
+        }
+    }
+
+    private void extractSameDayTasks(TaskList tasks, ArrayList<Task> list, LocalDate formattedDate) {
+        for (int i = 0; i < tasks.numberOfTasks(); i++) {
+            Task t = tasks.taskNumber(i);
+            assert t != null : "Task to be added should not be null.";
+            if (t instanceof Deadline | t instanceof Event) {
+                boolean isSameDate = t.getDate().compareTo(formattedDate) == 0;
+                if (isSameDate) {
+                    list.add(t);
+                }
+            }
+        }
+    }
+
+    /**
+     * Signals the end of the program and returns a standard bye message.
+     *
+     * @param ui The current user interface of the user.
+     * @return A {@code String} with a standard bye message.
+     */
     private String byeCommand(Ui ui) {
         return ui.byeMessage();
     }
