@@ -49,17 +49,17 @@ public class Storage {
                     switch (parameters[0]) {
                     case "T":
                         ToDo toDo = new ToDo(parameters[2]);
-                        toDo.setDone(Integer.parseInt(parameters[1]));
+                        toDo.setDoneStatus(Integer.parseInt(parameters[1]));
                         taskList.add(toDo);
                         break;
                     case "D":
                         Deadline deadline = new Deadline(parameters[2], LocalDate.parse(parameters[3]));
-                        deadline.setDone(Integer.parseInt(parameters[1]));
+                        deadline.setDoneStatus(Integer.parseInt(parameters[1]));
                         taskList.add(deadline);
                         break;
                     case "E":
                         Event event = new Event(parameters[2], LocalDate.parse(parameters[3]));
-                        event.setDone(Integer.parseInt(parameters[1]));
+                        event.setDoneStatus(Integer.parseInt(parameters[1]));
                         taskList.add(event);
                         break;
                     default:
@@ -84,7 +84,7 @@ public class Storage {
     public void saveList(String content) throws DukeException {
         try {
             FileWriter myWriter = new FileWriter(filePath);
-            myWriter.write(content.toString());
+            myWriter.write(content);
             myWriter.close();
         } catch (IOException e) {
             throw new DukeException("An error occurred. :-(\n");

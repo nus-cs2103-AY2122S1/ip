@@ -2,7 +2,14 @@ package duke;
 
 import java.time.LocalDate;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.OnCommand;
 
 /**
  * Parser class deals with making sense of the user command.
@@ -24,35 +31,27 @@ public class Parser {
             return new ExitCommand();
         case "list":
             return new ListCommand();
-        case "done": {
-            int taskNumber = getTaskNumber(message[1]);
-            return new DoneCommand(taskNumber);
-        }
+        case "done":
+            return new DoneCommand(getTaskNumber(message[1]));
         case "todo":
             return new AddCommand(AddCommand.TaskType.TODO,
                     new String[] {checkDescriptionAvailable(message[1], command)});
-        case "deadline": {
-            String description = checkDescriptionAvailable(message[1], command);
-            String[] parameters = getParameters(description, command, " /by ");
-            return new AddCommand(AddCommand.TaskType.DEADLINE, parameters);
-        }
-        case "event": {
-            String description = checkDescriptionAvailable(message[1], command);
-            String[] parameters = getParameters(description, command, " /at ");
-            return new AddCommand(AddCommand.TaskType.EVENT, parameters);
-        }
-        case "delete": {
-            int taskNumber = getTaskNumber(message[1]);
-            return new DeleteCommand(taskNumber);
-        }
-        case "on": {
+        case "deadline":
+            String deadlineDescription = checkDescriptionAvailable(message[1], command);
+            String[] deadlineParameters = getParameters(deadlineDescription, command, " /by ");
+            return new AddCommand(AddCommand.TaskType.DEADLINE, deadlineParameters);
+        case "event":
+            String eventDescription = checkDescriptionAvailable(message[1], command);
+            String[] eventParameters = getParameters(eventDescription, command, " /at ");
+            return new AddCommand(AddCommand.TaskType.EVENT, eventParameters);
+        case "delete":
+            return new DeleteCommand(getTaskNumber(message[1]));
+        case "on":
             String dateString = checkDescriptionAvailable(message[1], command);
             LocalDate date = LocalDate.parse(dateString.trim());
             return new OnCommand(date);
-        }
         case "find":
-            String query = checkDescriptionAvailable(message[1], command);
-            return new FindCommand(query);
+            return new FindCommand(checkDescriptionAvailable(message[1], command));
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(\n");
         }

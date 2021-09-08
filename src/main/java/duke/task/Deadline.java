@@ -8,7 +8,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    protected static DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy");
+    protected static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy");
+    static final String DEADLINE_STRING_FORMAT = "[D]%s (by: %s)";
+    static final String DEADLINE_FILE_FORMAT = "D / %s / %s";
     protected LocalDate by;
 
     /**
@@ -34,11 +36,11 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DATE_FORMATTER) + ")";
+        return String.format(DEADLINE_STRING_FORMAT, super.toString(), by.format(DATE_FORMATTER));
     }
 
     @Override
     public String convertToFileFormat() {
-        return "D / " + super.convertToFileFormat() + " / " + by;
+        return String.format(DEADLINE_FILE_FORMAT, super.convertToFileFormat(), by);
     }
 }

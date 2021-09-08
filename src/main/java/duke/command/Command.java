@@ -18,13 +18,4 @@ public abstract class Command {
      * @throws DukeException  If error occur during execution.
      */
     public abstract String execute(TaskList taskList, Storage storage) throws DukeException;
-
-    /**
-     * Checks if command is an ExitCommand.
-     *
-     * @return Whether command is an ExitCommand.
-     */
-    public boolean isExit() {
-        return this instanceof ExitCommand;
-    }
 }

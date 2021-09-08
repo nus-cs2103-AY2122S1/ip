@@ -1,11 +1,11 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 
 public class FindCommand extends Command {
 
+    static final String FIND_HEADER = "Here are the matching tasks in your list:\n";
     private String query;
 
     /**
@@ -18,17 +18,15 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Finds tasks from the tasklist that contain the query string
+     * Finds tasks from the task list that contain the query string
      * and returns the response message.
      *
      * @param taskList The TaskList of Duke.
      * @param storage The Storage of Duke.
      * @return Response string.
-     * @throws DukeException  If error occur during execution.
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) throws DukeException {
-        String message = "Here are the matching tasks in your list:\n";
-        return message + taskList.checkForQuery(query);
+    public String execute(TaskList taskList, Storage storage) {
+        return FIND_HEADER + taskList.checkForQuery(query);
     }
 }
