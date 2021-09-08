@@ -16,12 +16,12 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private final Duke duke = new Duke();
 
     /**
      * Start the GUI process with a specific stage.
      *
-     * @param stage
+     * @param stage Stage info to start a GUI.
      */
     @Override
     public void start(Stage stage) {

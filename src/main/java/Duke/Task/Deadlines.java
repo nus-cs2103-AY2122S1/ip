@@ -14,17 +14,17 @@ import java.util.Locale;
 public class Deadlines extends Task {
 
     private boolean isDone;
-    private String task;
-    private LocalDateTime time;
+    private final String task;
+    private final LocalDateTime time;
     private static final String TASKTYPE = "D";
 
     /**
      * Constructor for Deadlines containing boolean value if the task is done, the
      * specific task info, and the time for the task.
      *
-     * @param isDone
-     * @param task
-     * @param time
+     * @param isDone Indicates if the task is done.
+     * @param task Task info.
+     * @param time Time info.
      */
     public Deadlines(boolean isDone, String task, LocalDateTime time) {
         this.isDone = isDone;
@@ -111,13 +111,13 @@ public class Deadlines extends Task {
     @Override
     public String getSaveDataInfo() {
         String dataInfo;
-        int value = 0;
+        int value;
         if (this.isDone) {
             value = 1;
         } else {
             value = 0;
         }
-        dataInfo =  this.TASKTYPE + " | " + value + " | " + task + " | " + getTimeForSaveData();
+        dataInfo =  TASKTYPE + " | " + value + " | " + task + " | " + getTimeForSaveData();
         return dataInfo;
     }
 

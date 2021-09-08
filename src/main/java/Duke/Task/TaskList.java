@@ -16,7 +16,7 @@ import java.util.Locale;
  */
 public class TaskList {
 
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructor to store all the tasks in a Generic ArrayList.
@@ -31,7 +31,7 @@ public class TaskList {
      * Another Constructor to initialize an empty TaskList if there is no save data.
      */
     public TaskList() {
-        this.tasks = new ArrayList<Task>();
+        this.tasks = new ArrayList<>();
     }
 
     private boolean returnIsFound(String time, String task, int index) {
@@ -46,11 +46,7 @@ public class TaskList {
         boolean isUnparsedInfoContains =  unparsedInfo != null && (unparsedInfo.contains(time)
                 || unparsedInfo.contains(timeInFormat));
 
-        if (isMessageContains || isUnparsedInfoContains) {
-            return true;
-        } else {
-            return false;
-        }
+        return isMessageContains || isUnparsedInfoContains;
     }
 
     /**
@@ -60,20 +56,20 @@ public class TaskList {
      * @return All the tasks that match the time users take in.
      */
     public String getSpecificDateEvent(String time) {
-        String text = "";
+        StringBuilder text = new StringBuilder();
         int count = 0; //count the number of the events happen on the time.
 
         for (int i = 0; i < tasks.size(); i++) {
             String message = tasks.get(i).getTaskStatus();
             if (returnIsFound(time, message, i)) {
                 count++;
-                text += count + "." + message + "\n";
+                text.append(count).append(".").append(message).append("\n");
             }
         }
         if (count == 0) {
             return "Sorry. There is no tasks occurred on the time you give me!! :(\n";
         }
-        return text;
+        return text.toString();
     }
 
     /**
@@ -83,14 +79,14 @@ public class TaskList {
      * @return All the tasks that match the key word users take in.
      */
     public String findTasks(String keyword) {
-        String text = "";
+        StringBuilder text = new StringBuilder();
         int count = 0;
 
-        for (int i = 0; i < tasks.size(); i++) {
-            String message = tasks.get(i).getTaskStatus();
+        for (Task task : tasks) {
+            String message = task.getTaskStatus();
             if (message.contains(keyword)) {
                 count++;
-                text += count + "." + message + "\n";
+                text.append(count).append(".").append(message).append("\n");
             }
         }
 
@@ -98,7 +94,7 @@ public class TaskList {
             return "Sorry. There is no tasks matching the keyword you give me!! :(\n";
         }
 
-        return text;
+        return text.toString();
     }
 
     /**
@@ -188,22 +184,18 @@ public class TaskList {
         /**
          * Returns a task in a specific operationType. It can be either todo, deadline or event.
          *
-         * @param type
-         * @param task
-         * @param time
+         * @param type Task type given to Duke.
+         * @param task Specific task info.
+         * @param time Specific time info.
          * @return Task in a specific operationType. It can be either todo, deadline or event.
          */
         public Task assignTaskType(OperationType type, String task, LocalDateTime time) {
-            switch (type) {
-            case TODO:
-                return new ToDos(false, task);
-            case DEADLINE:
-                return new Deadlines(false, task, time);
-            case EVENT:
-                return new Events(false, task, time);
-            default:
-                return null;
-            }
+            return switch (type) {
+                   case TODO -> new ToDos(false, task);
+                   case DEADLINE -> new Deadlines(false, task, time);
+                   case EVENT -> new Events(false, task, time);
+                   default -> null;
+            };
         }
     }
 }

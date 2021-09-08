@@ -24,8 +24,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
     private Duke duke;
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Initialize DialogBox and MainWindow stuff.
@@ -38,7 +38,7 @@ public class MainWindow extends AnchorPane {
     /**
      * Constructor for MainWindow, initialize with a helloMessage.
      *
-     * @param d
+     * @param d Duke to set ui position.
      */
     public void setDuke(Duke d) {
         duke = d;

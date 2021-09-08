@@ -15,7 +15,7 @@ public class ParserExceptionDetector {
     /**
      * Takes in the message and will configure it later.
      *
-     * @param message
+     * @param message Message to be parsed.
      */
     public ParserExceptionDetector(String message) {
         this.message = message;
@@ -97,10 +97,6 @@ public class ParserExceptionDetector {
     public boolean detectIndexException() {
         boolean isCorrectFormat = message.contains(" ") && (message.startsWith("done") || message.startsWith("delete"));
 
-        if (isCorrectFormat) {
-            return true;
-        } else {
-            return false;
-        }
+        return isCorrectFormat;
     }
 }

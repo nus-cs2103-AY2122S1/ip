@@ -8,15 +8,15 @@ package duke.task;
 public class ToDos extends Task {
 
     private boolean isDone;
-    private String task;
+    private final String task;
     private static final String TASKTYPE = "T";
 
     /**
      * Constructor for ToDos containing boolean value if the task is done, the
      * specific task info.
      *
-     * @param isDone
-     * @param task
+     * @param isDone Indicates if the task is done or not.
+     * @param task Specifc task info.
      */
     public ToDos(boolean isDone, String task) {
         this.isDone = isDone;
@@ -73,13 +73,13 @@ public class ToDos extends Task {
     @Override
     public String getSaveDataInfo() {
         String dataInfo;
-        int value = 0;
+        int value;
         if (this.isDone) {
             value = 1;
         } else {
             value = 0;
         }
-        dataInfo =  this.TASKTYPE + " | " + value + " | " + task;
+        dataInfo = TASKTYPE + " | " + value + " | " + task;
         return dataInfo;
     }
 
