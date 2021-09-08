@@ -44,7 +44,7 @@ public class Parser {
                 throw new DukeException("Please enter a valid command so that I will be able to help you...");
             }
         } catch (Exception e) {
-            throw new DukeException("Río! Please enter a command to proceed...");
+            throw new DukeException("Rio! Please enter a command to proceed...");
         }
     }
 }
