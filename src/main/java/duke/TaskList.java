@@ -22,31 +22,37 @@ public class TaskList {
 
     /**
      * calls an appropriate method based on the input param
+     *
      * @param input
      */
 
-    public String action(String input) {
-        String output;
-        if (input.equals("list")) {
-            output = listTasks();
-        } else if (input.startsWith("done")) {
-            output = markAsDone(input);
-        } else if (input.startsWith("delete")) {
-            output = deleteTask(input);
-        } else if (input.startsWith("find")) {
-            output = findTask(input);
-        } else {
-            output = addTask(input);
+    public String action(String input) throws DukeException {
+        try {
+            String output;
+            if (input.equals("list")) {
+                output = listTasks();
+            } else if (input.startsWith("done")) {
+                output = markAsDone(input);
+            } else if (input.startsWith("delete")) {
+                output = deleteTask(input);
+            } else if (input.startsWith("find")) {
+                output = findTask(input);
+            } else {
+                output = addTask(input);
+            }
+            assert output != null;
+            return output;
+        } catch (DukeException e) {
+            throw new DukeException(e.toString());
         }
-        assert output != null;
-        return output;
     }
 
     /**
      * forms a String of all the tasks, for saving into file
+     *
      * @return String
      */
-    
+
     public String output() {
         String output = "";
         for (int i = 0; i < myList.size(); i++) {
@@ -64,7 +70,7 @@ public class TaskList {
         return output;
     }
 
-    private String addTask(String input) {
+    private String addTask(String input) throws DukeException {
         String output = "";
         try {
             if (input.startsWith("todo")) {
@@ -81,67 +87,79 @@ public class TaskList {
                 LocalDate myDate = LocalDate.parse(segments[1]);
                 myList.add(new Event(segments[0], myDate));
             } else {
-                output = "Invalid task. Please specify the type of task.";
-                return output;
+                throw new DukeException("Invalid task. Please specify the type of task.");
             }
             output = "I've added this task:\n";
             output = output + myList.get(myList.size() - 1) + "\n";
             output = output + "Now you have " + myList.size() + " tasks.\n";
         } catch (ArrayIndexOutOfBoundsException e) {
-            output = "Invalid format. Please follow this format. <type of task> <description> /<date if necessary>";
+            throw new DukeException("Invalid format. Please follow this format. <type of task> <description> /<date if necessary>");
         } catch (StringIndexOutOfBoundsException e) {
-            output = "Invalid input. Please type something after specifying the type of task.";
+            throw new DukeException("Invalid input. Please type something after specifying the type of task.");
         } catch (DateTimeParseException e) {
-            output = "Wrong date format. Please provide your date in this format: yyyy-mm-dd";
+            throw new DukeException("Wrong date format. Please provide your date in this format: yyyy-mm-dd");
         }
         return output;
     }
 
-    private String deleteTask(String input) {
+    private String deleteTask(String input) throws DukeException {
         String[] segments = input.split(" ");
-        try {
-            int index = Integer.parseInt(segments[segments.length - 1]);
-            Task myTask = myList.get(index - 1);
-            myList.remove(index - 1);
-            return "I've deleted this task:\n[X] " + myTask.description + "\n";
-        } catch (NumberFormatException e) {
-            return "Please input a number after the keyword: delete";
-        } catch (IndexOutOfBoundsException | NullPointerException e ) {
-            return "Please input a valid task index";
+        if (segments.length <= 1) {
+            throw new DukeException("Please input a number after the keyword: delete");
         }
+
+        int index;
+
+        try {
+            index = Integer.parseInt(segments[segments.length - 1]);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please input a number after the keyword: delete");
+        }
+
+        if (index <= 0 || index > myList.size()) {
+            throw new DukeException("Please input a valid task index");
+        }
+        Task myTask = myList.get(index - 1);
+        myList.remove(index - 1);
+        return "I've deleted this task:\n[X] " + myTask.description + "\n";
     }
 
-    private String findTask(String input) {
+    private String findTask(String input) throws DukeException {
         String[] segments = input.split(" ");
-        try {
-            String output = "Here are the matching tasks:\n";
-            int count = 1;
-            for (int i = 0; i < myList.size(); i++) {
-                String task = myList.get(i).toString();
-                if (task.contains(segments[1])) {
-                    output = output + count + ". " + task + "\n";
-                    count++;
-                }
+        if (segments[1] == null) {
+            throw new DukeException("Please input a word after the keyword: find");
+        }
+        String output = "Here are the matching tasks:\n";
+        int count = 1;
+        for (int i = 0; i < myList.size(); i++) {
+            String task = myList.get(i).toString();
+            if (task.contains(segments[1])) {
+                output = output + count + ". " + task + "\n";
+                count++;
             }
-            return output;
-        } catch (NumberFormatException e) {
-            return "Please input a word after the keyword: find";
         }
+        return output;
     }
 
 
-    private String markAsDone(String input) {
+    private String markAsDone(String input) throws DukeException {
         String[] segments = input.split(" ");
-        try {
-            int index = Integer.parseInt(segments[segments.length - 1]);
-            Task myTask = myList.get(index - 1);
-            myTask.markAsDone();
-            assert myList.get(index - 1).isDone;
-            return "I've marked this task as done:\n[X] " + myTask.description + "\n";
-        } catch (NumberFormatException e) {
-            return "Please input a number after the keyword: done";
-        } catch (IndexOutOfBoundsException | NullPointerException e ) {
-            return "Please input a valid task index";
+        if (segments[1] == null) {
+            throw new DukeException("Please input a number after the keyword: done");
         }
+
+        int index;
+
+        try {
+            index = Integer.parseInt(segments[segments.length - 1]);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please input a number after the keyword: done");
+        }
+        if (index <= 0 || index > myList.size()) {
+            throw new DukeException("Please input a valid task index");
+        }
+        Task myTask = myList.get(index - 1);
+        myTask.markAsDone();
+        return "I've marked this task as done:\n[X] " + myTask.description + "\n";
     }
 }
