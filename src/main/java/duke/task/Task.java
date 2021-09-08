@@ -9,8 +9,8 @@ public abstract class Task {
     private boolean isDone;
 
     public Task() {
-        this.description = "";
-        this.isDone = false;
+        description = "";
+        isDone = false;
     }
 
     /**
@@ -18,7 +18,7 @@ public abstract class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     public Task(String description, boolean isDone) {
@@ -31,11 +31,11 @@ public abstract class Task {
     }
 
     public void setDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     public boolean isDone() {
-        return this.isDone;
+        return isDone;
     }
 
     public String getStatusIcon() {
@@ -43,15 +43,15 @@ public abstract class Task {
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public String getSave() {
-        return (this.isDone() ? "1" : "0") + "|" + this.getDescription();
+        return (isDone ? "1" : "0") + "|" + description;
     }
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.getDescription();
+        return "[" + getStatusIcon() + "] " + description;
     }
 }

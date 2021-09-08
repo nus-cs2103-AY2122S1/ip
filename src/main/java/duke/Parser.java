@@ -4,7 +4,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.ToDo;
-
 import java.util.Scanner;
 
 public class Parser {
@@ -17,7 +16,7 @@ public class Parser {
         this.taskList = taskList;
         this.storage = storage;
         this.ui = ui;
-        this.sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
     }
 
     /**

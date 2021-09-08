@@ -1,11 +1,17 @@
 package duke;
 
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,7 +23,7 @@ public class Storage {
     public Storage(Ui ui, Path saveDirectory) {
         this.ui = ui;
         this.saveDirectory = saveDirectory;
-        this.savePath = Paths.get(saveDirectory.toString(), "duke.txt");
+        savePath = Paths.get(saveDirectory.toString(), "duke.txt");
     }
 
     public ArrayList<Task> load() throws DukeException {
