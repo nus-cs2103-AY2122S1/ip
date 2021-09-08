@@ -3,6 +3,7 @@ package duke.command;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import duke.Duke;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -34,29 +35,15 @@ public class AddCommand implements Command {
         if (!validType.contains(type)) {
             return "I'm sorry, but I don't know what that means :-(";
         }
-
         if (inputs.length < 2) {
             return "The description of a todo cannot be empty.";
         }
 
-        String content = inputs[1];
-
-        if (type.equals("todo")) {
-            tasks.add(new Todo(content));
-        } else if (type.equals("deadline")) {
-            String[] strings = content.split(" /by ");
-            if (strings.length != 2) {
-                return "Please check the format of your deadline.";
-            }
-            tasks.add(new Deadline(content.split(" /by ")[0], content.split(" /by ")[1]));
-        } else if (type.equals("event")) {
-            String[] strings = content.split(" /at ");
-            if (strings.length != 2) {
-                return "Please check the format of your event.";
-            }
-            tasks.add(new Event(content.split(" /at ")[0], content.split(" /at ")[1]));
-        } else {
-            assert false : "The type of task is not recognized.";
+        try {
+            String content = inputs[1];
+            addTask(type, content, tasks);
+        } catch (DukeException e) {
+            return e.toString();
         }
 
         try {
@@ -70,6 +57,27 @@ public class AddCommand implements Command {
                 + "     Now you have " + tasks.size() + " tasks in the list. \n";
 
         return output;
+    }
+
+    void addTask(String type, String content, ArrayList<Task> tasks) throws DukeException {
+        if (type.equals("todo")) {
+            tasks.add(new Todo(content));
+        } else if (type.equals("deadline")) {
+            String[] strings = content.split(" /by ");
+            if (strings.length != 2) {
+                throw new DukeException("Please check the format of your deadline.");
+            }
+            tasks.add(new Deadline(content.split(" /by ")[0], content.split(" /by ")[1]));
+        } else if (type.equals("event")) {
+            String[] strings = content.split(" /at ");
+            if (strings.length != 2) {
+                throw new DukeException("Please check the format of your event.");
+            }
+            tasks.add(new Event(content.split(" /at ")[0], content.split(" /at ")[1]));
+        } else {
+            assert false : "The type of task is not recognized.";
+        }
+
     }
 
 

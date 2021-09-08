@@ -25,13 +25,14 @@ public class FindCommand implements Command {
     }
 
     String findContent(String content, TaskList taskList) {
-        ArrayList<Task> lst = taskList.getTasks();
-        String output = "";
-        for (Task t: lst) {
-            if (t.getContent().contains(content)) {
-                output += (t.toString() + "\n");
-            }
-        }
+        ArrayList<Task> tasks = taskList.getTasks();
+
+        String output = tasks
+                .stream()
+                .filter(task -> task.getContent().contains(content))
+                .map(task -> task.toString())
+                .reduce("", (previousTask, thisTask) -> previousTask + thisTask + "\n");
+
         if (output.equals("")) {
             return "No matching tasks";
         }
