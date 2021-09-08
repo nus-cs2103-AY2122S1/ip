@@ -61,8 +61,7 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getDukeGreeting(Image img) {
-        String greeting = Duke.getName() + ": \n";
-        greeting += "Hello... I'm " + Duke.getName() + ":/\n";
+        String greeting = "Hello... I'm " + Duke.getName() + ":/\n";
         greeting += "And how can I help you?";
         DialogBox db = new DialogBox(greeting, img);
         db.flip();
