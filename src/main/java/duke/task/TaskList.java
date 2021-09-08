@@ -3,7 +3,6 @@ package duke.task;
 import java.util.ArrayList;
 
 import duke.DukeException;
-import duke.Ui;
 
 /**
  * This class manage all the tasks of Duke.
@@ -63,6 +62,20 @@ public class TaskList {
     }
 
     /**
+     * Returns the task specified by the given index.
+     *
+     * @param index The given index.
+     * @return The task specified by the given index.
+     * @throws DukeException If the index is out of range.
+     */
+    public Task getTask(int index) throws DukeException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new DukeException("Task number: " + (index + 1) + " does not exist.");
+        }
+        return this.tasks.get(index);
+    }
+
+    /**
      * Returns the size of the tasks list.
      *
      * @return The size of the tasks list.
@@ -105,5 +118,19 @@ public class TaskList {
             }
         }
         return result;
+    }
+
+    /**
+     * Sets the task specified by the given index to the given new task.
+     *
+     * @param newTask The given new task.
+     * @param index The given index.
+     * @throws DukeException If the index is out of range.
+     */
+    public void setTask(Task newTask, int index) throws DukeException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new DukeException("Task number: " + (index + 1) + " does not exist.");
+        }
+        this.tasks.set(index, newTask);
     }
 }

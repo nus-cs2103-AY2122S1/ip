@@ -7,6 +7,7 @@ import java.time.format.DateTimeParseException;
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
+import duke.command.EditCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.SetCommand;
@@ -50,6 +51,8 @@ public class Parser {
             return Action.DELETE;
         case "find":
             return Action.FIND;
+        case "edit":
+            return Action.EDIT;
         default:
             return Action.UNKNOWN;
         }
@@ -163,6 +166,17 @@ public class Parser {
         }
         case FIND: {
             return new FindCommand(Action.FIND, rest);
+        }
+        case EDIT: {
+            try {
+                int indexOfSpace = rest.indexOf(" ");
+                String num = rest.substring(0, indexOfSpace);
+                String info = rest.substring(indexOfSpace + 1);
+                int taskNumber = Integer.parseInt(num);
+                return new EditCommand(Action.EDIT, taskNumber - 1, info);
+            } catch (NumberFormatException e) {
+                throw new DukeException("A number must be given to specified the task.");
+            }
         }
         case UNKNOWN:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
