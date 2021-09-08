@@ -61,6 +61,27 @@ public class TaskList {
     }
 
     /**
+     * Adds tag to the chosen task.
+     *
+     * @param taskNum Task index of the task.
+     * @param tag String of tag.
+     * @return string representation of the task after adding tags.
+     */
+    public String addTag(int taskNum, String tag) throws DukeException {
+        if (taskNum < 1) {
+            throw new DukeException("negative item");
+        } else if (list.size() == 0) {
+            throw new DukeException("no task found");
+        } else if (taskNum > list.size()) {
+            throw new DukeException("no such task");
+        }
+        Task item = list.get(taskNum - 1);
+        item.addTag(tag);
+        return Ui.getAddTagMsg(item.toString());
+
+    }
+
+    /**
      * Marks the task at the given task index as done.
      *
      * @param taskNum Task index of the task.

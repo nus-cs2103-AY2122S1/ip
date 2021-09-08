@@ -1,5 +1,7 @@
 package duke.data.task;
 
+import java.util.ArrayList;
+
 /**
  * Class that represents a task.
  *
@@ -8,6 +10,7 @@ package duke.data.task;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected ArrayList<String> tags = new ArrayList<>();
 
     /**
      * Constructor for Task class.
@@ -42,7 +45,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "]" + " " + this.description;
+        return "[" + this.getStatusIcon() + "]" + " " + this.description + getTags();
     }
 
     /**
@@ -61,5 +64,27 @@ public class Task {
      */
     public boolean isDone() {
         return isDone;
+    }
+
+    /**
+     * Returns the String containing all the tags.
+     *
+     * @return String representation of all tags.
+     */
+    public String getTags() {
+        String allTags = "";
+        for (String tag : tags) {
+            allTags += String.format("#%s ", tag);
+        }
+        return allTags;
+    }
+
+    /**
+     * Returns the String containing all the tags.
+     *
+     * @return String representation of all tags.
+     */
+    public void addTag(String tag) {
+        this.tags.add(tag);
     }
 }

@@ -10,6 +10,7 @@ import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.TagCommand;
 import duke.command.TodoCommand;
 import duke.data.TaskList;
 import duke.data.exception.DukeException;
@@ -69,6 +70,9 @@ public class Parser {
             break;
         case "bye":
             command = new ByeCommand(taskList);
+            break;
+        case "tag":
+            command = new TagCommand(taskList, input);
             break;
         default:
             throw new DukeException(Ui.getUnknownInputMsg());

@@ -97,6 +97,16 @@ public class Ui {
     }
 
     /**
+     * Informs the user that tag has been added.
+     *
+     * @param tags String representing all the tags.
+     */
+    public static String getAddTagMsg(String task) {
+        String msg = Messages.MESSAGE_ADD + LS + TAB + TAB + TAB + task + LS;
+        return msg;
+    }
+
+    /**
      * Informs the user that task has been removed.
      */
     public static String getNoSuchTaskMsg() {

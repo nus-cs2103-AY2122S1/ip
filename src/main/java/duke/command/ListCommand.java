@@ -10,7 +10,7 @@ import duke.data.TaskList;
 public class ListCommand extends Command {
 
     /**
-     * Constructor for EventCommand.
+     * Constructor for ListCommand.
      *
      * @param tasklist Task Handler that handles the operation.
      */

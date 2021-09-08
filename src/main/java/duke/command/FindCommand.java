@@ -24,7 +24,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes the "Event" Command.
+     * Executes the "Find" Command.
      * @return string that represents details of searching up this task.
      */
     @Override

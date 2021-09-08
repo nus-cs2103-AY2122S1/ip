@@ -13,7 +13,7 @@ public class DoneCommand extends Command {
     private String input;
 
     /**
-     * Constructor for DeleteCommand.
+     * Constructor for Done Command.
      *
      * @param tasklist Task Handler that handles the operation.
      * @param input command string to be executed.

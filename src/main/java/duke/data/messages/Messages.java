@@ -22,6 +22,7 @@ public class Messages {
     public static final String MESSAGE_INPUT_UNKNOWN = " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     public static final String MESSAGE_IO_ERR = "IOException";
     public static final String MESSAGE_ADD = "     Got it. I've added this task:";
+    public static final String MESSAGE_ADD_TAG = "     Got it. I've added this tag:";
     public static final String MESSAGE_TASKS_LEFT = "     Now you have %d tasks in the list.";
     public static final String MESSAGE_REMOVE = "     Noted. I've removed this task:";
     public static final String MESSAGE_DONE = "Nice! I've marked this task as done:";
