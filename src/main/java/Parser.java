@@ -28,9 +28,10 @@ public class Parser {
      * @param tasks current list of tasks
      *
      */
+
     public static String parseCommand (String command, TaskList tasks, Ui ui) {
         String[] keywords = command.split(" ");
-
+        assert(keywords.length > 0);
         //stores the first word (keyword) in the user input
         String firstKeyword = keywords[0];
 
@@ -42,7 +43,6 @@ public class Parser {
 
         //stores the string representation of parse result
         String result = "";
-
         /*If the keyword is a task or a feature other than "list"
         then it cannot be the only word in the command */
         if ((isTask || (isFeature && !firstKeyword.equals("list"))) && keywords.length < 2) {
