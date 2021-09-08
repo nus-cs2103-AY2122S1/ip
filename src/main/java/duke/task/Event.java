@@ -6,10 +6,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 public class Event extends Task {
-
-    protected LocalTime time;
-    protected LocalDate date;
-
     /**
      * Public constructor to initialize an Event object.
      *
@@ -18,9 +14,15 @@ public class Event extends Task {
      * @param date The date of the event.
      */
     public Event(String description, LocalTime time, LocalDate date) {
-        super(description);
-        this.time = time;
-        this.date = date;
+        super(description, time, date);
+    }
+
+    public LocalDate getDate() {
+        return this.date;
+    }
+
+    public LocalTime getTime() {
+        return this.time;
     }
 
     @Override
@@ -33,7 +35,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
+        return "[E]" + super.toString() + " (at: "
+                + date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
                 + " " + time.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";
     }
 }

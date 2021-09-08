@@ -1,21 +1,46 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /**
  * Encapsulates a task with a description and whether has it been completed.
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
+    protected LocalTime time;
+    protected LocalDate date;
 
     /**
      * Public constructor to initialize a Task object.
      *
      * @param description The description of the Task.
      */
-    public Task(String description) {
+    public Task(String description, LocalTime time, LocalDate date) {
         this.description = description;
+        this.time = time;
+        this.date = date;
         this.isDone = false;
     }
+
+    @Override
+    public int compareTo(Task t) {
+        int temp = this.getDate().compareTo(t.getDate());
+        if (temp == 0) {
+            return this.getTime().compareTo(t.getTime());
+        }
+        return temp;
+    }
+
+    public LocalDate getDate() {
+        return this.date;
+    }
+
+    public LocalTime getTime() {
+        return this.time;
+    }
+
     public String getDescription() {
         return this.description;
     }
