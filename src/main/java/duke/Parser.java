@@ -55,19 +55,22 @@ public class Parser {
     private static AddCommand comprehendTask(String input) {
         Task newTask;
         if (input.startsWith("todo ")) {
-            newTask = new Todo(input.substring(5));
+            int todoFirstIndex = 5;
+            newTask = new Todo(input.substring(todoFirstIndex));
         } else if (input.startsWith("deadline ")) {
             int location = input.indexOf("/by ");
             if (location < 0) {
                 throw new DukeException("Please provide a deadline.");
             }
-            newTask = new Deadline(input.substring(9, location - 1), input.substring(location + 4));
+            int deadlineFirstIndex = 9;
+            newTask = new Deadline(input.substring(deadlineFirstIndex, location - 1), input.substring(location + 4));
         } else if (input.startsWith("event ")) {
             int location = input.indexOf("/at ");
             if (location < 0) {
                 throw new DukeException("Please provide an event time.");
             }
-            newTask = new Event(input.substring(6, location - 1), input.substring(location + 4));
+            int eventFirstIndex = 6;
+            newTask = new Event(input.substring(eventFirstIndex, location - 1), input.substring(location + 4));
         } else {
             throw new DukeException("Please specify a type of task!");
         }
