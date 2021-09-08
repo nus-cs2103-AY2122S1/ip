@@ -38,8 +38,14 @@ public class MainWindow extends AnchorPane {
 
     public void setBlitz(Blitz d) {
         blitz = d;
-        String openingMessage = blitz.getTasks().listToString(blitz.getUi().getGreetingMessage())
-                + "\nSo what can I do for you today?";
+        String listOfTasks = "";
+        try {
+            listOfTasks = blitz.getTasks().listToString(blitz.getUi().getGreetingMessage(), blitz.getUi());
+        } catch (BlitzException ex) {
+            listOfTasks = ex.toString();
+        }
+        assert(listOfTasks.equals(new BlitzException("\"No items currently in the list!!\"")));
+        String openingMessage = listOfTasks + "\nSo what can I do for you today?";
         dialogContainer.getChildren().addAll(
                 DialogBox.getBlitzDialog(openingMessage, blitzImage)
         );
@@ -66,10 +72,11 @@ public class MainWindow extends AnchorPane {
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getBlitzDialog(blitz.getUi().getGoodbyeMessage(), blitzImage)
             );
+            assert(!flag);
             flag = true;
 
         } else {
-            String response = Parser.parse(input, blitz.getTasks());
+            String response = Parser.parseCommand(input, blitz.getTasks(), blitz.getUi());
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getBlitzDialog(response, blitzImage)

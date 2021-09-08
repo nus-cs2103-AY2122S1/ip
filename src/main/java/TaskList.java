@@ -15,20 +15,26 @@ public class TaskList {
         this.taskList = new ArrayList<>(taskList);
     }
 
+    public List<Task> getTaskList() {
+        return taskList;
+    }
+
     public Task get(int index) {
         return taskList.get(index);
     }
-
-    public void addTask(Task t) {
-        taskList.add(t);
-    }
-
-    public Task deleteTask(int index) {
-        return taskList.remove(index);
-    }
-
     public int size() {
         return taskList.size();
+    }
+    /**
+     * Adds given task to the task list.
+     *
+     * @param taskToAdd
+     * @return
+     */
+    public String addTask(Task taskToAdd) {
+        taskList.add(taskToAdd);
+        return "Got it. I've added this task:" + "\n\t" + taskToAdd
+                + "\n\nNow you have " + size() + " tasks in the list.";
     }
 
     /**
@@ -37,50 +43,71 @@ public class TaskList {
      * @param str string to be displayed before list.
      * @return string representation of list items to be printed on screen.
      */
-    public String listToString(String str) {
+    public String listToString(String str, Ui ui) throws BlitzException {
         String result = str;
-        if (taskList.size() == 0) {
-            result = result.concat("\n\n---No items added yet ---\n");
-        } else {
-            int ctr = 1;
-            for (Task t: taskList) {
-                result = result.concat("\n" + ctr + ". " + taskList.get(ctr - 1));
-                ctr++;
-            }
-            System.out.println(result);
-        }
-
-        return result + "\n";
-    }
-
-    /**
-     * Prints list of tasks.
-     */
-    public void printList() {
         int ctr = 1;
-        for (Task task: taskList) {
-            System.out.println("\t" + ctr + "." + taskList.get(ctr - 1));
+        if (taskList.size() == 0) {
+            if (str.equals(ui.getGreetingMessage())) {
+                result = result.concat("\n\n---No items added yet ---\n");
+            } else {
+                throw new BlitzException("No items currently in the list!!");
+            }
+        }
+        for (Task t: taskList) {
+            result = result.concat("\n" + ctr + ". " + taskList.get(ctr - 1));
             ctr++;
         }
+        System.out.println(result);
+        return result + "\n";
     }
-
     /**
      * Finds tasks which contain the given keyword.
      *
      * @param keyword specifies keyword to be searched for.
      * @return list of tasks that contain the given keyword.
      */
-    public TaskList findMatchingTasks(String keyword) {
+    public TaskList findMatchingTasks(String keyword) throws BlitzException {
+        if (size() == 0) {
+            throw new BlitzException("Cannot perform find on empty list!!");
+        }
         ArrayList<Task> matchList = new ArrayList<>();
         for (Task task : taskList) {
             if (task.toString().contains(keyword)) {
                 matchList.add(task);
             }
         }
+        if (matchList.size() == 0) {
+            throw new BlitzException("No matches found!!");
+        }
         return new TaskList(matchList);
     }
+    /**
+     * Marks task at given index as done in the task list.
+     *
+     * @param taskIndex index of task to be marked as done.
+     * @throws BlitzException if taskIndex is invalid.
+     */
+    public String markTaskAsDone(int taskIndex) throws BlitzException {
+        if (taskIndex < 0 || taskIndex >= size()) {
+            throw new BlitzException("You are attempting to mark an invalid task number!");
+        }
+        taskList.get(taskIndex).markAsDone();
+        return "Nice! I've marked this task as done:\n" + "\t" + taskList.get(taskIndex);
+    }
 
-    public List<Task> getTaskList() {
-        return taskList;
+    /**
+     * Deletes task at the given index from the task list.
+     *
+     * @param taskIndex Index of task to be deleted.
+     * @return Message to be displayed upon successful deletion.
+     * @throws BlitzException when taskIndex is invalid.
+     */
+    public String deleteTask(int taskIndex) throws BlitzException {
+        if (taskIndex < 0 || taskIndex >= size()) {
+            throw new BlitzException("You are attempting to delete an invalid task number!");
+        }
+        Task deletedTask = taskList.remove(taskIndex);
+        return "Noted. I've removed this task:" + "\n\t" + deletedTask
+                + "\n\nNow you have " + size() + " tasks in the list.";
     }
 }

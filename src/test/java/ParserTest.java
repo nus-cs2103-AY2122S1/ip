@@ -2,10 +2,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-class ParserTest {
 
+class ParserTest {
     @Test
-    void getIndex() throws BlitzException {
-        assertEquals(9, Parser.getIndex("done 10", 11));
+    void parseCommand() {
+        Blitz b = new Blitz("data/blitz.txt");
+        boolean isEqual = "OOPS!!! Sorry, but I don't know what that means :-("
+                .equals(Parser.parseCommand("hello", b.getTasks(), b.getUi()));
+        assertEquals(true, isEqual);
     }
 }

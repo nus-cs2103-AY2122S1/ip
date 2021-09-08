@@ -28,4 +28,5 @@ public class Ui {
     public String showLoadingError() {
         return loadErrorMessage;
     }
+
 }
