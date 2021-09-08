@@ -35,6 +35,11 @@ public class Ui {
         lineGenerator();
     }
 
+    /**
+     * Returns a standard welcome message for Duke GUI
+     *
+     * @return A standard welcome message {@code String} for Duke GUI
+     */
     public static String guiWelcomeMessage() {
         return "Hello, I'm Duke\nWhat can I do for you?\n"
                 + "╭━━━╮╱╱╭╮\n"
