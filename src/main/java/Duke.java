@@ -84,12 +84,12 @@ public class Duke {
      *
      * @param fullCommand user input.
      * @return Duke's chat bot message.
-     * @throws DukeException if errors occur within list.
      */
     protected String getResponse(String fullCommand) {
         try {
             Command c = Parser.parse(fullCommand);
             String output = c.execute(tasks, ui, storage);
+            assert !output.equals("") : "Command response should not be empty";
             return output;
         } catch (DukeException e) {
             return e.getMessage();

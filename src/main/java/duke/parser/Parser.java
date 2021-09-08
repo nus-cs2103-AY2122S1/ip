@@ -23,7 +23,9 @@ public class Parser {
      * @return task details.
      */
     private static String cut(String input, String start) {
-        return input.substring(input.indexOf(start) + start.length() + 1);
+        String result = input.substring(input.indexOf(start) + start.length() + 1);
+        assert result.length() < input.length() : "Details should always be smaller than entire command";
+        return result;
     }
 
     /**
