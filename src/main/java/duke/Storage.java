@@ -1,22 +1,21 @@
 package duke;
 
-import duke.exception.DukeDatabaseException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.Todo;
-
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.exception.DukeDatabaseException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * Represents the storage that loads data from and saves data to the database file.
@@ -68,7 +67,7 @@ public class Storage {
     }
 
 
-    private Task readEntry(String entry) {
+    private Task readEntry(String entry) throws DukeDatabaseException {
         String[] fields = entry.split("\\|");
         Task taskToAdd;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -82,9 +81,11 @@ public class Storage {
                     LocalDateTime.parse(fields[3], formatter),
                     LocalDateTime.parse(fields[4], formatter));
             break;
-        default: // (case "D")
+        case "D":
             taskToAdd = new Deadline(fields[2], LocalDateTime.parse(fields[3], formatter));
             break;
+        default:
+            throw new DukeDatabaseException();
         }
         if (Integer.parseInt(fields[1]) == 1) {
             taskToAdd.markAsDone();
