@@ -5,6 +5,7 @@ package Duke.task;
  * with no time attached. 
  */
 public class Todo extends Task {
+    private final String symbol = "[T]";
 
     /**
      * Constructor for an to-do Duke.Duke.task.
@@ -32,6 +33,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return this.symbol + super.toString();
     }
 }

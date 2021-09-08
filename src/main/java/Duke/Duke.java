@@ -119,7 +119,7 @@ public class Duke {
         try {
             storage.writeToFile(tasks);
         } catch (IOException e){
-            System.out.println("Error in saving data to storage");
+            response = "Error in saving data to storage";
         }
         return response;
     }
@@ -142,6 +142,7 @@ public class Duke {
                     Ui.display(e.toString());
                 }
                 if (keyword != null) {
+                    final String errorMessage = "Not a valid command!!";
                     switch (keyword) {
                     case LIST:
                         Ui.display(commands.list(tasks));
@@ -190,6 +191,8 @@ public class Duke {
                             Ui.display(e.toString());
                         }
                         break;
+                    default:
+                        Ui.display(errorMessage);
                     }
                 }
             }

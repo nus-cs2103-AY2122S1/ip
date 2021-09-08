@@ -46,29 +46,31 @@ public class Storage {
             switch (taskType) {
             case "T":
                 task = new Todo(entry[2]);
-                if (isDone.equals("true")) {
-                    task.markAsDone();
-                }
+                checkIsDone(isDone, task);
                 records.add(task);
                 break;
             case "D":
                 task = new Deadline(entry[2], LocalDate.parse(entry[3]));
-                if (isDone.equals("true")) {
-                    task.markAsDone();
-                }
+                checkIsDone(isDone, task);
                 records.add(task);
                 break;
             case "E":
                 task = new Event(entry[2], LocalDate.parse(entry[3]));
-                if (isDone.equals("true")) {
-                    task.markAsDone();
-                }
+                checkIsDone(isDone, task);
                 records.add(task);
                 break;
+            default:
+                throw new IOException();
             }
         }
         reader.close();
         return records;
+    }
+
+    private void checkIsDone(String isDone, Task task) {
+        if (isDone.equals("true")) {
+            task.markAsDone();
+        }
     }
 
     /**

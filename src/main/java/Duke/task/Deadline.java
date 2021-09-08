@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
  * that need to be done before a specific date/time.
  */
 public class Deadline extends Task {
+    private final String symbol = "[D]";
     protected LocalDate by;
 
     /**
@@ -38,6 +39,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) +")";
+        return this.symbol + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) +")";
     }
 }

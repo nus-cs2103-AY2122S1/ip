@@ -14,7 +14,6 @@ public class TaskList {
         }
     }
 
-    //add
     /**
      * Returns message for adding a to-do task.
      *
@@ -56,7 +55,6 @@ public class TaskList {
                 "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), records.size());
     }
 
-    //delete
     /**
      * Returns delete message for bot.
      *
@@ -69,18 +67,17 @@ public class TaskList {
                 "Now you have %2$d tasks in the list.\n\t", removedTask.toString(), records.size());
     }
 
-    //list
     /**
      * Returns message representing list of all items user added.
      *
      * @return formatted string representing elements in records array.
      */
     public String list() {
-        final StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n\t");
-        records.forEach((el) -> sb.append(
+        final StringBuilder list = new StringBuilder("Here are the tasks in your list:\n\t");
+        records.forEach((el) -> list.append(
                 String.format("%1$d. %2$s \n\t",
                         records.indexOf(el) + 1, el.toString())));
-        return sb.toString();
+        return list.toString();
     }
 
     /**
@@ -90,7 +87,7 @@ public class TaskList {
      */
     public String find(String keyword) {
         ArrayList<Task> result = new ArrayList<>();
-        final StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n\t");
+        final StringBuilder matchedTasks = new StringBuilder("Here are the matching tasks in your list:\n\t");
 
         for (int i = 0; i < records.size(); i++) {
             Task current = records.get(i);
@@ -98,10 +95,10 @@ public class TaskList {
                 result.add(current);
             }
         }
-        result.forEach((el) -> sb.append(
+        result.forEach((el) -> matchedTasks.append(
                 String.format("%1$d. %2$s \n\t",
                         result.indexOf(el) + 1, el.toString())));
-        return sb.toString();
+        return matchedTasks.toString();
     }
 
     /**

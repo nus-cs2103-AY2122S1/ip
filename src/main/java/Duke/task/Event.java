@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
  * that start at a specific time and ends at a specific time.
  */
 public class Event extends Task {
+    private final String symbol = "[E]";
     protected LocalDate at;
 
     /**
@@ -38,6 +39,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) +")";
+        return this.symbol + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) +")";
     }
 }
