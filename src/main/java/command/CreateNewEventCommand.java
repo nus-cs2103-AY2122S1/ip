@@ -3,7 +3,8 @@ package command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import tasks.Event;
+import exceptions.DukeException;
+import tasks.Task;
 
 /**
  * Command to create a new Event task.
@@ -25,9 +26,9 @@ public class CreateNewEventCommand extends Command {
      * @return acknowledgement that Deadline has been created
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
-        String[] messageAndEventDate = super.getExtraInput().split("/at ");
-        return taskList.add(new Event(messageAndEventDate[0], messageAndEventDate[1]));
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        String details = super.getExtraInput();
+        return taskList.add(Task.createTask("event", details));
     }
 
     /**
