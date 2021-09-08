@@ -17,8 +17,8 @@ public class TaskListTest {
 //        ArrayList<Task> tasklist = new ArrayList<Task>(100);
 //        tasklist.add(new Todo("Kill me"));
 //        tasklist.add(new Event("Revive me", LocalDate.of(2022, 12,12)));
-//        TaskList t = new TaskList(tasklist);
-//        assertEquals("[T] [ ] Kill me", t.getTaskDescr(1));
+//        TaskList tasks = new TaskList(tasklist);
+//        assertEquals("[T] [ ] Kill me", tasks.getTaskDescr(1));
 //    }
 
 //    @Test
@@ -28,9 +28,9 @@ public class TaskListTest {
 //        tasklist.add(new Event("Revive me", LocalDate.of(2022, 12,12)));
 //        tasklist.add(new Event("Revive me", LocalDate.of(2022, 12,12),
 //                LocalTime.parse("23:23")));
-//        TaskList t = new TaskList(tasklist);
+//        TaskList tasks = new TaskList(tasklist);
 //        assertEquals("T | 0 | Kill me\nE | 0 | Revive me | 2022-12-12\n" +
-//                "E | 0 | Revive me | 2022-12-12 | 23:23", t.saveAsString());
+//                "E | 0 | Revive me | 2022-12-12 | 23:23", tasks.saveAsString());
 //    }
 
     @Test
@@ -40,9 +40,9 @@ public class TaskListTest {
         tasklist.add(new Event("Revive me", LocalDate.of(2022, 12,12)));
         tasklist.add(new Event("Revive me", LocalDate.of(2022, 12,12),
                 LocalTime.parse("23:23")));
-        TaskList t = new TaskList(tasklist);
+        TaskList tasks = new TaskList(tasklist);
         assertEquals("T | 0 | Kill me\nE | 0 | Revive me | 2022-12-12\n" +
-                "E | 0 | Revive me | 2022-12-12 | 23:23", t.saveAsString());
+                "E | 0 | Revive me | 2022-12-12 | 23:23", tasks.saveAsString());
     }
 
 }

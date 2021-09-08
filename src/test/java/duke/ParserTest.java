@@ -16,15 +16,15 @@ public class ParserTest {
 //    @Test
 //    public void parseTodo() throws DukeException {
 //        Parser parser = new Parser();
-//        String[] strparse = new String[] {"todo", "kill", "me"};
-//        assertEquals("kill me", parser.parseTodo(strparse).getTaskStr());
+//        String[] strParse = new String[] {"todo", "kill", "me"};
+//        assertEquals("kill me", parser.parseTodo(strParse).getTaskStr());
 //    }
 
 //    @Test
 //    public void parseEvent() throws DukeException {
 //        Parser parser = new Parser();
-//        String[] strparse = new String[] {"event", "date", "/at", "2020-01-01", "01:00"};
-//        assertEquals("2020-01-01 | 01:00", parser.parseEvent(strparse).getDateTimeStorage());
+//        String[] strParse = new String[] {"event", "date", "/at", "2020-01-01", "01:00"};
+//        assertEquals("2020-01-01 | 01:00", parser.parseEvent(strParse).getDateTimeStorage());
 //    }
 
 //    @Test
@@ -37,8 +37,8 @@ public class ParserTest {
     @Test
     public void parseEvent() throws DukeException {
         Parser parser = new Parser();
-        String[] strparse = new String[] {"event", "kill", "me" ,"now", "/at", "2020-01-01", "23:23"};
-        Event event = parser.parseEvent(strparse);
+        String[] strParse = new String[] {"event", "kill", "me" ,"now", "/at", "2020-01-01", "23:23"};
+        Event event = parser.parseEvent(strParse);
         assertEquals("E | 0 | kill me now | 2020-01-01 | 23:23", event.toStorageString());
     }
 

@@ -30,8 +30,8 @@ public class Ui {
 
     public String getMessage(Storage storage, TaskList tasklist, String str) {
         try {
-            String[] strparse = str.split(" ");
             // splits input to parse for keywords.
+            String[] strparse = str.split(" ");
 
             switch (this.parser.parseCommand(strparse[0])) {
             case "bye":

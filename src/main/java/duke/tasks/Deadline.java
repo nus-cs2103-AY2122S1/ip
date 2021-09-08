@@ -39,8 +39,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns date Deadline occurs at, in String form.
-     * @return
+     * Getter method for date Deadline occurs at.
+     * @return Date that Deadline occurs at in String form.
      */
     @Override
     public String getDate() {
@@ -48,8 +48,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns time Deadline occurs at.
-     * @return
+     * Getter method for time Deadline occurs at.
+     * @return Time that Deadline occurs at in String form.
      */
     @Override
     public String getTime() {
@@ -61,8 +61,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns simplified date and time Deadline occurs at, in String form.
-     * @return
+     * Getter method for simplified date and time Deadline occurs at.
+     * @return Simplified date and time Deadline occurs at in String form.
      */
     @Override
     public String getDateTimeStorage() {

@@ -69,8 +69,6 @@ public class Storage {
                         }                    }
                 }
                 return tasklist;
-            } catch (DukeException e) {
-                throw e;
             } catch (Exception e) {
                 throw new LoadingFileError();
             }
