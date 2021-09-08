@@ -10,7 +10,7 @@ import tasks.TaskList;
  */
 public class MarkDoneCommand extends Command {
     public static final String KEYWORD = "done";
-    private static final String INPUT_FORMAT = String.format("\t\"%s [task number]\"", KEYWORD);
+    public static final String INPUT_FORMAT = String.format("\t%s [task number]", KEYWORD);
     private static final String INPUT_FORMAT_ERROR = String.format("Please "
             + "ensure your input is in the following format:\n" + INPUT_FORMAT);
     private static final String TASK_NUMBER_ERROR = String.format("Please "

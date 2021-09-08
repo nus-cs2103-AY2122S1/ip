@@ -11,12 +11,12 @@ import tasks.DeadlineTask;
  */
 public class AddDeadlineCommand extends AddCommand {
     public static final String KEYWORD = "deadline";
-    private static final String DELIMITER = "/by";
+    public static final String DELIMITER = "/by";
+    public static final String INPUT_FORMAT = String.format("\t%s [task] %s "
+            + "[dd-mm-yyyy hh:mm]", KEYWORD, DELIMITER);
     private static final int TASK_INDEX = 0;
     private static final int DATETIME_INDEX = 1;
     private static final int INPUT_PARAMETERS = 2;
-    private static final String INPUT_FORMAT = String.format("\t\"%s [task] %s "
-            + "[dd-mm-yyyy hh:mm]\"", KEYWORD, DELIMITER);
     private static final String INPUT_FORMAT_ERROR = String.format("Please "
             + "ensure your input is in the following format:\n" + INPUT_FORMAT);
 

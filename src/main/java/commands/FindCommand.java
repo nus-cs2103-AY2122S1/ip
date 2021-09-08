@@ -11,7 +11,7 @@ import tasks.TaskList;
  */
 public class FindCommand extends Command {
     public static final String KEYWORD = "find";
-    private static final String INPUT_FORMAT = String.format("\t\"%s [keyword]\"", KEYWORD);
+    public static final String INPUT_FORMAT = String.format("\t%s [keyword]", KEYWORD);
     private static final String INPUT_FORMAT_ERROR = String.format("Please "
             + "ensure your input is in the following format:\n" + INPUT_FORMAT);
     private static final String NOT_FOUND_ERROR = "No matching task found. "
