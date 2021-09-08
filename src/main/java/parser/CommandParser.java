@@ -28,6 +28,8 @@ public class CommandParser {
      * @throws MorganException If input format is invalid.
      */
     public Command getCommand(String userInput) throws MorganException {
+        assert userInput != null;
+
         // Checks if user input contains delimiter.
         if (userInput.contains(TaskParser.DELIMITER)) {
             throw new MorganException(DELIMITER_FOUND_ERROR_MESSAGE);

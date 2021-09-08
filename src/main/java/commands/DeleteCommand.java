@@ -24,6 +24,7 @@ public class DeleteCommand extends Command {
      * @throws MorganException If input format is invalid.
      */
     public DeleteCommand(String userInput) throws MorganException {
+        assert userInput != null;
         String intString = userInput.substring(KEYWORD.length()).trim();
 
         // Checks if user specified task number
@@ -45,6 +46,7 @@ public class DeleteCommand extends Command {
      * @return The completion message after execution.
      */
     public String execute(TaskList tasks, Storage storage) throws MorganException {
+        assert tasks != null && storage != null;
         boolean isValidTaskNumber = this.taskNumber <= tasks.getNumOfTasks()
                 && this.taskNumber > 0;
 

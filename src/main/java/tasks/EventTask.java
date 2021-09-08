@@ -18,6 +18,7 @@ public class EventTask extends Task {
      */
     public EventTask(String taskName, String dateTime) {
         super(taskName);
+        assert dateTime != null;
         this.dateTime = LocalDateTime.parse(dateTime, INPUT_FORMAT);
     }
 

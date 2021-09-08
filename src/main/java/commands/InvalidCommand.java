@@ -18,6 +18,7 @@ public class InvalidCommand extends Command {
      * @throws MorganException If no matching command is found.
      */
     public String execute(TaskList tasks, Storage storage) throws MorganException {
+        assert tasks != null && storage != null;
         throw new MorganException(INVALID_COMMAND_ERROR);
     }
 }

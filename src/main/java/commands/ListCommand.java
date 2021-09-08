@@ -18,6 +18,7 @@ public class ListCommand extends Command {
      * @return The list of tasks.
      */
     public String execute(TaskList tasks, Storage storage) throws MorganException {
+        assert tasks != null && storage != null;
         if (tasks.isEmpty()) {
             throw new MorganException(EMPTY_LIST_ERROR);
         }

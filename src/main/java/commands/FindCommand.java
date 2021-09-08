@@ -24,6 +24,8 @@ public class FindCommand extends Command {
      * @throws MorganException If input format is invalid.
      */
     public FindCommand(String userInput) throws MorganException {
+        assert userInput != null;
+
         String inputData = userInput.substring(KEYWORD.length()).trim();
         this.keyTerm = inputData.toLowerCase();
 
@@ -35,11 +37,12 @@ public class FindCommand extends Command {
 
     /**
      * Returns a list of tasks containing the specified keyword.
-     * @param taskList The existing list of tasks.
+     * @param tasks The existing list of tasks.
      * @return The list of tasks containing the specified keyword.
      */
-    public String execute(TaskList taskList, Storage storage) throws MorganException {
-        TaskList foundTasks = taskList.findTasks(keyTerm);
+    public String execute(TaskList tasks, Storage storage) throws MorganException {
+        assert tasks != null && storage != null;
+        TaskList foundTasks = tasks.findTasks(keyTerm);
 
         // Throws exception if no matching task found
         if (foundTasks.isEmpty()) {

@@ -25,6 +25,7 @@ public class AddEventCommand extends AddCommand {
      * @throws MorganException If input format is invalid.
      */
     public AddEventCommand (String userInput) throws MorganException {
+        assert userInput != null;
         // Check whether input contains delimiter
         boolean hasDelimiter = userInput.contains(DELIMITER);
         if (!hasDelimiter) {

@@ -26,6 +26,7 @@ public class AddDeadlineCommand extends AddCommand {
      * @throws MorganException If input format is invalid.
      */
     public AddDeadlineCommand(String userInput) throws MorganException {
+        assert userInput != null;
         // Check whether input contains delimiter
         boolean hasDelimiter = userInput.contains(DELIMITER);
         if (!hasDelimiter) {
