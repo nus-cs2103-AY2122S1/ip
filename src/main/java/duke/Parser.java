@@ -20,65 +20,57 @@ public class Parser {
      *
      * @param scan the scanner to be used
      * @param taskList the taskList to be used
-     * @param printMsg prints confirmation messages if true, does not if false
      * @return false if previous input was to terminate ("bye"), else returns true
      */
-    public boolean scanInputs(Scanner scan, TaskList taskList, boolean printMsg) {
+    public String scanInputs(Scanner scan, TaskList taskList) {
         String data = scan.next();
         switch (data.toLowerCase()) {
         case "bye":
             scan.close();
-            Ui.showGoodbyeMessage();
-            return false;
+            return Ui.getGoodbyeMessage();
         case "list":
             if (taskList.getSize() == 0) {
-                Ui.showNoTasksMessage();
+                return Ui.getNoTasksMessage();
             } else {
-                taskList.printTaskList();
+                return taskList.printTaskList();
             }
-            return true;
         case "done":
-            taskList.markAsDone(scan.nextInt() - 1, printMsg);
-            return true;
+            return taskList.markAsDone(scan.nextInt() - 1);
         case "delete":
-            taskList.deleteTask(scan.nextInt() - 1);
-            return true;
+            return taskList.deleteTask(scan.nextInt() - 1);
         case "todo":
             try {
-                taskList.addTask(new Todo(scan.nextLine()), printMsg);
+                return taskList.addTask(new Todo(scan.nextLine()));
             } catch (DukeException e) {
                 e.printMsg();
             }
-            return true;
+            break;
         case "deadline":
             try {
-                taskList.addTask(new Deadline(scan.nextLine()), printMsg);
+                return taskList.addTask(new Deadline(scan.nextLine()));
             } catch (DukeException e) {
                 e.printMsg();
             } catch (DateTimeParseException e) {
                 System.out.println("Wrong date time format! Please use DD-MM-YYYY HHHH");
             }
-            return true;
-
+            break;
         case "event":
             try {
-                taskList.addTask(new Event(scan.nextLine()), printMsg);
+                return taskList.addTask(new Event(scan.nextLine()));
             } catch (DukeException e) {
                 e.printMsg();
             }
-            return true;
+            break;
         case "find":
             try {
-                taskList.findTask(scan.nextLine());
+                return taskList.findTask(scan.nextLine());
             } catch (DukeException e) {
                 e.printMsg();
             }
-            return true;
+            break;
         default:
-            System.out.println("What are you even typing omg get it right...");
-            scan.nextLine(); // Remove all other input to the scanner
-            return true;
+            return "What are you even typing omg get it right...";
         }
-
+        return "What are you even typing omg get it right...";
     }
 }
