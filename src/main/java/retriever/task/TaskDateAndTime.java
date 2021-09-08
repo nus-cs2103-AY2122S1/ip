@@ -47,4 +47,17 @@ public class TaskDateAndTime {
     public String toString() {
         return taskDateAndTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
+
+    /**
+     * Returns a boolean, suggesting if the two dates are the same
+     * or not.
+     *
+     * @param o The object that contains the date to be checked against.
+     * @return A boolean, true, if both the dates are same.
+     */
+    @Override
+    public boolean equals(Object o) {
+        TaskDateAndTime date = (TaskDateAndTime) o;
+        return taskDateAndTime.compareTo(date.taskDateAndTime) == 0;
+    }
 }

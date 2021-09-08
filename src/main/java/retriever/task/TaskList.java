@@ -9,6 +9,7 @@ import retriever.exception.IllegalDeadlineFormatException;
 import retriever.exception.IllegalEventFormatException;
 import retriever.exception.IllegalTaskNumberException;
 import retriever.exception.IllegalTodoFormatException;
+import retriever.exception.RetrieverException;
 import retriever.exception.TaskNotFoundException;
 
 /**
@@ -282,7 +283,124 @@ public class TaskList {
             }
         }
 
-        ui.printTaskFoundByKeyword(matchingTasks);
+        ui.printTasksFoundByKeyword(matchingTasks);
+    }
+
+    /**
+     * Returns the number of days present in the month
+     * entered by the user.
+     *
+     * @param month The month entered by the user as an integer.
+     * @param year The year entered by the user, used for detecting leap years.
+     * @return The number of days present in the month entered.
+     */
+    public int numberOfDaysInTheMonth(int month, int year) {
+        switch(month) {
+        case 1:
+            // Fallthrough
+        case 3:
+            // Fallthrough
+        case 5:
+            // Fallthrough
+        case 7:
+            // Fallthrough
+        case 8:
+            // Fallthrough
+        case 10:
+            // Fallthrough
+        case 12:
+            return 31;
+        case 4:
+            // Fallthrough
+        case 6:
+            // Fallthrough
+        case 9:
+            // Fallthrough
+        case 11:
+            return 30;
+        case 2:
+            if (year % 4 == 0) {
+                return 29;
+            }
+            return 28;
+        default:
+            return 0;
+        }
+    }
+
+    /**
+     * Returns a boolean suggesting whether the entered date
+     * is valid or not.
+     *
+     * @param enteredDate The date entered by the user.
+     * @return A boolean, true, if the date is valid.
+     */
+    public boolean isDateRangeValid(String[] enteredDate) {
+        int enteredDay = Integer.parseInt(enteredDate[0]);
+        int enteredMonth = Integer.parseInt(enteredDate[1]);
+        int enteredYear = Integer.parseInt(enteredDate[2]);
+
+        boolean isValidMonth = enteredMonth >= 1 && enteredMonth <= 12;
+        boolean isValidDay = enteredDay >= 1 && enteredDay <= numberOfDaysInTheMonth(enteredMonth, enteredYear);
+
+        return isValidMonth && isValidDay;
+    }
+
+    /**
+     * Returns a boolean, suggesting whether the format for viewing a
+     * schedule is followed or not.
+     *
+     * @param parsedUserInput The command entered by the user, to be checked.
+     * @return A boolean, true, if the command for viewing the schedule is formatted well.
+     */
+    public boolean isViewScheduleFormatCorrect(String[] parsedUserInput) {
+        boolean hasDate = parsedUserInput.length == 2;
+        if (!hasDate) {
+            return false;
+        }
+
+        String[] enteredDate = parsedUserInput[1].split("/");
+        boolean isDateFormatValid = enteredDate.length == 3;
+        if (!isDateFormatValid) {
+            return false;
+        }
+
+        boolean isDateValid = isDateRangeValid(enteredDate);
+        return isDateValid;
+    }
+
+    /**
+     * Finds tasks with the same due date as the date entered, and prints them.
+     *
+     * @param parsedUserInput The parsed command, entered by the user with the "view" keyword.
+     * @throws RetrieverException If the command entered is not formatted well.
+     */
+    public void viewScheduleForAParticularDay(String[] parsedUserInput) throws RetrieverException {
+        if (!isViewScheduleFormatCorrect(parsedUserInput)) {
+            throw new RetrieverException("Please Follow The Specified Format: view DD/MM/YYYY");
+        }
+
+        TaskDateAndTime enteredDate = new TaskDateAndTime(parsedUserInput[1]);
+        ArrayList<Task> scheduledTasksForTheDay = new ArrayList<Task>();
+
+        for (int i = 0; i < taskListLength(); i++) {
+            Task task = userTaskList.get(i);
+            if (task instanceof Deadline) {
+                Deadline deadlineTask = (Deadline) task;
+                if (deadlineTask.isOnDate(enteredDate)) {
+                    scheduledTasksForTheDay.add(task);
+                }
+            } else if (task instanceof Event) {
+                Event eventTask = (Event) task;
+                if (eventTask.isOnDate(enteredDate)) {
+                    scheduledTasksForTheDay.add(task);
+                }
+            } else {
+                // Don't Add
+            }
+        }
+
+        ui.printTasksScheduledForTheDay(scheduledTasksForTheDay);
     }
 
     /**

@@ -44,6 +44,7 @@ public class Ui {
     private String printListMessage = "-> Your Tasks, My Master:";
     private String goodBoyMessage = "Woof! Whose a Good Boy?";
     private String badBoyMessage = "Woof! Whose a Bad Boy?";
+    private String scheduleMessage = "Master, You are Busy For The Day...";
 
     /**
      * Sets up the scanner to take in user input.
@@ -125,7 +126,7 @@ public class Ui {
      *
      * @param taskList The ArrayList containing tasks with matching keyword.
      */
-    public void printTaskFoundByKeyword(ArrayList<Task> taskList) {
+    public void printTasksFoundByKeyword(ArrayList<Task> taskList) {
         if (taskList.size() == 0) {
             retrieverResponse = "Sorry Master, I Couldn't Smell And Find What You Asked For!"
                     + "\n (Task With the Given Keyword Does Not Exist)\n";
@@ -139,6 +140,23 @@ public class Ui {
         }
 
         retrieverResponse += "You Owe Me " + taskList.size() + " Treat(s), Master!";
+    }
+
+    /**
+     * Prints the tasks which are scheduled for the date entered.
+     *
+     * @param taskList The ArrayList containing tasks scheduled for the date entered.
+     */
+    public void printTasksScheduledForTheDay(ArrayList<Task> taskList) {
+        if (taskList.size() == 0) {
+            retrieverResponse = "Master, You Can Play With Me, No Scheduled Tasks For The Day, Woooof!";
+            return;
+        }
+
+        retrieverResponse = scheduleMessage + "\n";
+        for (int i = 0; i < taskList.size(); i++) {
+            retrieverResponse += (i + 1) + ". " + taskList.get(i) + "\n";
+        }
     }
 
     /**

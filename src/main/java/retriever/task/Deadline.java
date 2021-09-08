@@ -18,6 +18,17 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns a boolean suggesting if the deadline task
+     * is due on the same date, as the date entered.
+     *
+     * @param date The date entered by the user, to be checked against.
+     * @return A boolean, true, if the task is due on the same date as the date entered.
+     */
+    public boolean isOnDate(TaskDateAndTime date) {
+        return date.equals(by);
+    }
+
+    /**
      * Returns the deadline task description and its status in an
      * organised format.
      *
