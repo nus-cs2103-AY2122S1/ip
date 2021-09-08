@@ -12,6 +12,9 @@ public class Parser {
      * @return duke.commands.Command which performs the corresponding action.
      */
     static Command parse(String input) {
+
+        assert input != null;
+
         if (input.equals("bye")) {
             return new ByeCommand(input);
         } else if (input.equals("list")) {
