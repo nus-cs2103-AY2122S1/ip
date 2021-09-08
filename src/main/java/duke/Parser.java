@@ -81,7 +81,8 @@ public class Parser {
 
             return new Event(eventName, eventDateTime);
         default:
-            return null; // Error
+            assert false; // Undefined task type input
+            return null;
         }
     }
 

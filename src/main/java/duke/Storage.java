@@ -88,7 +88,7 @@ public class Storage {
             loadedTask = new Event(taskDesc, eventDateTime, isTaskDone);
             break;
         default:
-            break; // Error
+            assert false; // Undefined task type input
         }
         saveDataScanner.close();
 
