@@ -3,7 +3,6 @@ package duke;
 import duke.controller.MainWindow;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -19,7 +18,6 @@ public class Main extends Application {
         stage.setTitle("DUKE!");
         String css = getClass().getResource("/view/style.css").toExternalForm();
         scene.getStylesheets().add(css);
-        //scene.getRoot().setStyle("-fx-font-family: 'serif'");
         stage.show();
     }
 
