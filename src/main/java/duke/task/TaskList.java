@@ -44,11 +44,12 @@ public class TaskList {
             String isCompleted = task.hasCompleted() ? "X" : " ";
             sb.append(
                     String.format(
-                            "%d. %s  [%s] [%s] (%s)\n",
+                            "%d. %s  [%s] [%s] [%s] (%s)\n",
                             i,
                             task.getName(),
                             task.getTaskType(),
                             isCompleted,
+                            task.getTags(),
                             time
                     )
             );
@@ -110,7 +111,7 @@ public class TaskList {
      */
     public String deleteTask(int taskId) {
         if (!isValidId(taskId)) {
-            return String.format("Uh oh, seems like there is no duke.task number %d", taskId);
+            return String.format("Uh oh, seems like there is no task number %d", taskId);
         }
 
         int taskIndex = taskIdToIndex(taskId);
@@ -119,10 +120,11 @@ public class TaskList {
         listSize--;
         String isCompleted = task.hasCompleted() ? "X" : " ";
         return String.format(
-                "Alright,\nTask: %s [%s] [%s] (%s)\nHas been removed, you have %d tasks in the list",
+                "Alright,\nTask: %s [%s] [%s] [%s] (%s)\nHas been removed, you have %d tasks in the list",
                 task.getName(),
                 task.getTaskType(),
                 isCompleted,
+                task.getTags(),
                 getTaskTime(task),
                 listSize
         );
@@ -173,6 +175,44 @@ public class TaskList {
                 keyword,
                 sb.toString()
         );
+    }
+
+    public String getTaskTags(int taskId) {
+        if (!isValidId(taskId)) {
+            return String.format("Uh oh, seems like there is no task number %d", taskId);
+        }
+
+        int taskIndex = taskIdToIndex(taskId);
+        Task task = userList.get(taskIndex);
+        String tags = task.getTags();
+        return String.format(
+                "Task: %s [%s]\nTags: %s",
+                task.getName(),
+                task.getTaskType(),
+                tags
+        );
+    }
+
+    public String addTaskTag(int taskId, String tag) {
+        assert !tag.contains(",");
+        if (!isValidId(taskId)) {
+            return String.format("Uh oh, seems like there is no task number %d", taskId);
+        }
+
+        int taskIndex = taskIdToIndex(taskId);
+        Task task = userList.get(taskIndex);
+        return task.addTag(tag);
+    }
+
+    public String deleteTaskTag(int taskId, String tag) {
+        assert !tag.contains(",");
+        if (!isValidId(taskId)) {
+            return String.format("Uh oh, seems like there is no task number %d", taskId);
+        }
+
+        int taskIndex = taskIdToIndex(taskId);
+        Task task = userList.get(taskIndex);
+        return task.deleteTag(tag);
     }
 
     private String getTaskTime(Task t) {

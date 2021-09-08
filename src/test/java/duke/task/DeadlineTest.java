@@ -1,6 +1,8 @@
 package duke.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 
@@ -15,21 +17,29 @@ public class DeadlineTest {
         );
         assertEquals(
                 LocalDate.of(2020, 10, 15),
-                new Deadline("deadline 1", LocalDate.of(2020, 10, 15), true)
-                        .getTime()
+                new Deadline(
+                        "deadline 1",
+                        LocalDate.of(2020, 10, 15),
+                        true,
+                        new String[Task.MAX_TAGS]
+                ).getTime()
         );
     }
 
     @Test
     public void getSaveFormat_emptyInput_correctSaveFormat() {
         assertEquals(
-                "D|i|deadline 1|15/10/2020",
+                "D|i|deadline 1||15/10/2020",
                 new Deadline("deadline 1", LocalDate.of(2020, 10, 15)).getSaveFormat()
         );
         assertEquals(
-                "D|c|deadline 1|15/10/2020",
-                new Deadline("deadline 1", LocalDate.of(2020, 10, 15), true)
-                        .getSaveFormat()
+                "D|c|deadline 1||15/10/2020",
+                new Deadline(
+                        "deadline 1",
+                        LocalDate.of(2020, 10, 15),
+                        true,
+                        new String[Task.MAX_TAGS]
+                ).getSaveFormat()
         );
     }
 
@@ -41,34 +51,42 @@ public class DeadlineTest {
         );
         assertEquals(
                 "deadline 1",
-                new Deadline("deadline 1", LocalDate.of(2020, 10, 15), true)
-                        .getName()
+                new Deadline(
+                        "deadline 1",
+                        LocalDate.of(2020, 10, 15),
+                        true,
+                        new String[Task.MAX_TAGS]
+                ).getName()
         );
     }
 
     @Test
     public void completeTask_emptyInput_true() {
-        assertEquals(
-                true,
+        assertTrue(
                 new Deadline("deadline 1", LocalDate.of(2020, 10, 15)).completeTask()
         );
-        assertEquals(
-                true,
-                new Deadline("deadline 1", LocalDate.of(2020, 10, 15), true)
-                        .completeTask()
+        assertTrue(
+                new Deadline(
+                        "deadline 1",
+                        LocalDate.of(2020, 10, 15),
+                        true,
+                        new String[Task.MAX_TAGS]
+                ).completeTask()
         );
     }
 
     @Test
     public void isCompleted_emptyInput_correctCompletion() {
-        assertEquals(
-                false,
+        assertFalse(
                 new Deadline("deadline 1", LocalDate.of(2020, 10, 15)).hasCompleted()
         );
-        assertEquals(
-                true,
-                new Deadline("deadline 1", LocalDate.of(2020, 10, 15), true)
-                        .hasCompleted()
+        assertTrue(
+                new Deadline(
+                        "deadline 1",
+                        LocalDate.of(2020, 10, 15),
+                        true,
+                        new String[Task.MAX_TAGS]
+                ).hasCompleted()
         );
     }
 
@@ -80,8 +98,12 @@ public class DeadlineTest {
         );
         assertEquals(
                 "D",
-                new Deadline("deadline 1", LocalDate.of(2020, 10, 15), true)
-                        .getTaskType()
+                new Deadline(
+                        "deadline 1",
+                        LocalDate.of(2020, 10, 15),
+                        true,
+                        new String[Task.MAX_TAGS]
+                ).getTaskType()
         );
     }
 }

@@ -33,10 +33,19 @@ public class DukeCommandException extends Exception {
             msg = "Wrong usage of \"done\".\nCorrect usage: \"done TASK_NUMBER\".";
             break;
         case "delete":
-            msg = "Wrong usage of \"delete\".\nCorrect usage: \"delete TASK_NUMBER\"";
+            msg = "Wrong usage of \"delete\".\nCorrect usage: \"delete TASK_NUMBER\".";
             break;
         case "find":
-            msg = "Wrong usage of \"find\".\nCorrect usage: \"find KEYWORD\"";
+            msg = "Wrong usage of \"find\".\nCorrect usage: \"find KEYWORD\".";
+            break;
+        case "addTag":
+            msg = "Wrong usage of \"addTag\".\nCorrect usage: \"addTag TASK_NUMBER TAG\".";
+            break;
+        case "listTag":
+            msg = "Wrong usage of \"listTag\".\nCorrect usage: \"listTag TASK_NUMBER\".";
+            break;
+        case "deleteTag":
+            msg = "Wrong usage of \"deleteTag\".\nCorrect usage: \"deleteTag TASK_NUMBER TAG\".";
             break;
         default:
             msg = command + " is not a supported command.";

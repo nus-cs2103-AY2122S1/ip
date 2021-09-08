@@ -51,7 +51,9 @@ public class CommandTodo extends DukeCommand {
         assert userArgs.length == 2;
 
         if (userArgs[1].equals("")) {
-            throw new DukeArgumentException("A todo task's name cannot be empty");
+            throw new DukeArgumentException("Todo name cannot be empty");
+        } else if (userArgs[1].contains("|")) {
+            throw new DukeArgumentException("Todo name cannot contain \"|\".");
         }
 
         ToDo task = new ToDo(userArgs[1]);

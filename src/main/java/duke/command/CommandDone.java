@@ -50,11 +50,13 @@ public class CommandDone extends DukeCommand {
 
         assert userArgs.length == 2;
 
+        int taskId;
         try {
-            int taskId = Integer.parseInt(userArgs[1]);
-            return new CommandDone(taskId);
+            taskId = Integer.parseInt(userArgs[1]);
         } catch (NumberFormatException nfe) {
             throw new DukeArgumentException("Incorrect argument for command Delete, must be an integer");
         }
+
+        return new CommandDone(taskId);
     }
 }

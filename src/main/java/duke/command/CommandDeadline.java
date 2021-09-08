@@ -56,7 +56,9 @@ public class CommandDeadline extends DukeCommand {
         if (nameAndTime.length < 2) {
             throw new DukeCommandException("deadline");
         } else if (nameAndTime[0].equals("")) {
-            throw new DukeCommandException("deadline");
+            throw new DukeArgumentException("Deadline name cannot be empty");
+        } else if (nameAndTime[0].contains("|")) {
+            throw new DukeArgumentException("Deadline name cannot contain \"|\".");
         }
 
         Deadline task = new Deadline(nameAndTime[0], DukeDate.parseDateInput(nameAndTime[1]));

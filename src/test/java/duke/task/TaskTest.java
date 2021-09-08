@@ -1,23 +1,27 @@
 package duke.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 public class TaskTest {
     @Test
     public void getSaveFormat_emptyInput_correctSaveFormat() {
         assertEquals(
-                "G|i|task 1",
+                "G|i|task 1|",
                 new Task("task 1").getSaveFormat()
         );
         assertEquals(
-                "A|i|task 1",
+                "A|i|task 1|",
                 new Task("task 1", "A").getSaveFormat()
         );
         assertEquals(
-                "K|c|task 1",
-                new Task("task 1", true, "K").getSaveFormat()
+                "K|c|task 1|",
+                new Task("task 1", true, "K", new String[Task.MAX_TAGS]).getSaveFormat()
         );
     }
 
@@ -33,40 +37,38 @@ public class TaskTest {
         );
         assertEquals(
                 "task 1",
-                new Task("task 1", true, "K").getName()
+                new Task("task 1", true, "K", new String[Task.MAX_TAGS]).getName()
         );
     }
 
     @Test
     public void completeTask_emptyInput_true() {
-        assertEquals(
-                true,
+        assertTrue(
                 new Task("task 1").completeTask()
         );
-        assertEquals(
-                true,
+        assertTrue(
                 new Task("task 1", "A").completeTask()
         );
-        assertEquals(
-                true,
-                new Task("task 1", true, "K").completeTask()
+        assertTrue(
+                new Task("task 1", true, "K", new String[Task.MAX_TAGS]).completeTask()
         );
     }
 
     @Test
     public void isCompleted_emptyInput_correctCompletion() {
-        assertEquals(
-                false,
+        assertFalse(
                 new Task("task 1").hasCompleted()
         );
-        assertEquals(
-                false,
+        assertFalse(
                 new Task("task 1", "A").hasCompleted()
         );
-        assertEquals(
-                true,
-                new Task("task 1", true, "K").hasCompleted()
+        assertTrue(
+                new Task("task 1", true, "K", new String[Task.MAX_TAGS]).hasCompleted()
         );
+
+        Task task = new Task("task 1");
+        task.completeTask();
+        assertTrue(task.hasCompleted());
     }
 
     @Test
@@ -81,7 +83,19 @@ public class TaskTest {
         );
         assertEquals(
                 "K",
-                new Task("task 1", true, "K").getTaskType()
+                new Task("task 1", true, "K", new String[Task.MAX_TAGS]).getTaskType()
         );
+    }
+
+    @Test
+    public void getTags_emptyInput_correctString() {
+        Task task = new Task("task 1", "T");
+        assertEquals("", task.getTags());
+
+        task.addTag("tag1");
+        assertEquals("tag1", task.getTags());
+
+        task.addTag("tag2");
+        assertEquals("tag1, tag2", task.getTags());
     }
 }

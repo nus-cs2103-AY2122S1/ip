@@ -56,7 +56,9 @@ public class CommandEvent extends DukeCommand {
         if (nameAndTime.length < 2) {
             throw new DukeCommandException("event");
         } else if (nameAndTime[0].equals("")) {
-            throw new DukeCommandException("event");
+            throw new DukeArgumentException("Event name cannot be empty");
+        } else if (nameAndTime[0].contains("|")) {
+            throw new DukeArgumentException("Event name cannot contain \"|\".");
         }
 
         Event task = new Event(nameAndTime[0], DukeDate.parseDateInput(nameAndTime[1]));

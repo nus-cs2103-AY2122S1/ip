@@ -1,12 +1,15 @@
 package duke;
 
+import duke.command.CommandAddTag;
 import duke.command.CommandBye;
 import duke.command.CommandDeadline;
 import duke.command.CommandDelete;
+import duke.command.CommandDeleteTag;
 import duke.command.CommandDone;
 import duke.command.CommandEvent;
 import duke.command.CommandFind;
 import duke.command.CommandList;
+import duke.command.CommandListTag;
 import duke.command.CommandTodo;
 import duke.command.DukeCommand;
 import duke.exception.DukeArgumentException;
@@ -40,6 +43,15 @@ public class DukeCommandParser {
             break;
         case "find":
             dc = CommandFind.parseCommand(inputArr);
+            break;
+        case "addTag":
+            dc = CommandAddTag.parseCommand(inputArr);
+            break;
+        case "deleteTag":
+            dc = CommandDeleteTag.parseCommand(inputArr);
+            break;
+        case "listTag":
+            dc = CommandListTag.parseCommand(inputArr);
             break;
         default:
             throw new DukeCommandException(inputArr[0]);

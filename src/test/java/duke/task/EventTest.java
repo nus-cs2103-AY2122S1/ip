@@ -1,6 +1,8 @@
 package duke.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 
@@ -15,21 +17,29 @@ public class EventTest {
         );
         assertEquals(
                 LocalDate.of(2020, 10, 15),
-                new Event("event 1", LocalDate.of(2020, 10, 15), true)
-                        .getTime()
+                new Event(
+                        "event 1",
+                        LocalDate.of(2020, 10, 15),
+                        true,
+                        new String[Task.MAX_TAGS]
+                ).getTime()
         );
     }
 
     @Test
     public void getSaveFormat_emptyInput_correctSaveFormat() {
         assertEquals(
-                "E|i|event 1|15/10/2020",
+                "E|i|event 1||15/10/2020",
                 new Event("event 1", LocalDate.of(2020, 10, 15)).getSaveFormat()
         );
         assertEquals(
-                "E|c|event 1|15/10/2020",
-                new Event("event 1", LocalDate.of(2020, 10, 15), true)
-                        .getSaveFormat()
+                "E|c|event 1||15/10/2020",
+                new Event(
+                        "event 1",
+                        LocalDate.of(2020, 10, 15),
+                        true,
+                        new String[Task.MAX_TAGS]
+                ).getSaveFormat()
         );
     }
 
@@ -41,34 +51,42 @@ public class EventTest {
         );
         assertEquals(
                 "event 1",
-                new Event("event 1", LocalDate.of(2020, 10, 15), true)
-                        .getName()
+                new Event(
+                        "event 1",
+                        LocalDate.of(2020, 10, 15),
+                        true,
+                        new String[Task.MAX_TAGS]
+                ).getName()
         );
     }
 
     @Test
     public void completeTask_emptyInput_true() {
-        assertEquals(
-                true,
+        assertTrue(
                 new Event("event 1", LocalDate.of(2020, 10, 15)).completeTask()
         );
-        assertEquals(
-                true,
-                new Event("event 1", LocalDate.of(2020, 10, 15), true)
-                        .completeTask()
+        assertTrue(
+                new Event(
+                        "event 1",
+                        LocalDate.of(2020, 10, 15),
+                        true,
+                        new String[Task.MAX_TAGS]
+                ).completeTask()
         );
     }
 
     @Test
     public void isCompleted_emptyInput_correctCompletion() {
-        assertEquals(
-                false,
+        assertFalse(
                 new Event("event 1", LocalDate.of(2020, 10, 15)).hasCompleted()
         );
-        assertEquals(
-                true,
-                new Event("event 1", LocalDate.of(2020, 10, 15), true)
-                        .hasCompleted()
+        assertTrue(
+                new Event(
+                        "event 1",
+                        LocalDate.of(2020, 10, 15),
+                        true,
+                        new String[Task.MAX_TAGS]
+                ).hasCompleted()
         );
     }
 
@@ -80,8 +98,11 @@ public class EventTest {
         );
         assertEquals(
                 "E",
-                new Event("event 1", LocalDate.of(2020, 10, 15), true)
-                        .getTaskType()
+                new Event("event 1",
+                        LocalDate.of(2020, 10, 15),
+                        true,
+                        new String[Task.MAX_TAGS]
+                ).getTaskType()
         );
     }
 }

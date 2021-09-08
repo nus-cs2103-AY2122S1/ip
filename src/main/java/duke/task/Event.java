@@ -29,8 +29,8 @@ public class Event extends Task {
      * @param time Time the task is to be completed by.
      * @param isComplete Boolean representing whether task is completed.
      */
-    public Event(String name, LocalDate time, boolean isComplete) {
-        super(name, isComplete, "E");
+    public Event(String name, LocalDate time, boolean isComplete, String[] tags) {
+        super(name, isComplete, "E", tags);
         this.time = time;
     }
 

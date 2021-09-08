@@ -51,6 +51,8 @@ public class CommandFind extends DukeCommand {
 
         if (userArgs[1].equals("")) {
             throw new DukeArgumentException("Search term cannot be empty.");
+        } else if (userArgs[1].contains("|")) {
+            throw new DukeArgumentException("Search term cannot contain \"|\".");
         }
 
         return new CommandFind(userArgs[1]);

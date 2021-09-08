@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.exception.DukeArgumentException;
@@ -31,7 +32,9 @@ public class DukeStorage {
         File f = new File(DATA_FOLDER);
         if (!f.exists()) {
             try {
-                f.createNewFile();
+                if (!f.createNewFile()) {
+                    throw new DukeFileException("Failed to create data file. Not too sure why this happened.");
+                };
             } catch (IOException e) {
                 throw new DukeFileException(
                         "Something went wrong while creating data file, with error message:",
@@ -67,7 +70,7 @@ public class DukeStorage {
                     break;
                 }
 
-                String[] taskInfo = nextTask.split("[|]", 4);
+                String[] taskInfo = nextTask.split("[|]", 5);
                 parseTaskIntoTaskList(taskList, taskInfo);
             }
         } catch (FileNotFoundException e) {
@@ -80,18 +83,21 @@ public class DukeStorage {
     }
 
     private static void parseTaskIntoTaskList(TaskList taskList, String[] taskInfo) throws DukeArgumentException {
+        String taskName = taskInfo[2];
+        boolean isComplete = taskInfo[1].equals("c");
+        String[] tagsArray = taskInfo[3].split(", ", 5);
         switch (taskInfo[0]) {
         case "T":
-            taskList.addTask(new ToDo(taskInfo[2], taskInfo[1] == "c"));
+            taskList.addTask(new ToDo(taskName, isComplete, tagsArray));
             break;
         case "D":
             taskList.addTask(
-                    new Deadline(taskInfo[2], DukeDate.parseDateInput(taskInfo[3]), taskInfo[1].equals("c"))
+                    new Deadline(taskName, DukeDate.parseDateInput(taskInfo[4]), isComplete, tagsArray)
             );
             break;
         case "E":
             taskList.addTask(
-                    new Event(taskInfo[2], DukeDate.parseDateInput(taskInfo[3]), taskInfo[1].equals("c"))
+                    new Event(taskName, DukeDate.parseDateInput(taskInfo[4]), isComplete, tagsArray)
             );
             break;
         default:
