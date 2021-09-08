@@ -75,18 +75,14 @@ public class Storage {
      *
      * @param tasks List of tasks to be saved.
      */
-    public void writeTasksToFile(List<Task> tasks) {
-        try {
-            FileWriter fileWriter = new FileWriter(filePath);
-            StringBuilder fileRecords = new StringBuilder();
-            for (Task task : tasks) {
-                fileRecords.append(task.toFileRecord());
-                fileRecords.append("\n");
-            }
-            fileWriter.write(fileRecords.toString());
-            fileWriter.close();
-        } catch (IOException e) {
-            System.out.println(Ui.format(e.toString()));
+    public void writeTasksToFile(List<Task> tasks) throws IOException {
+        FileWriter fileWriter = new FileWriter(filePath);
+        StringBuilder fileRecords = new StringBuilder();
+        for (Task task : tasks) {
+            fileRecords.append(task.toFileRecord());
+            fileRecords.append("\n");
         }
+        fileWriter.write(fileRecords.toString());
+        fileWriter.close();
     }
 }

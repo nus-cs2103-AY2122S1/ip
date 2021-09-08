@@ -11,7 +11,7 @@ public class ParserTest {
         try {
             Parser.parse(testInput);
         } catch (DukeException e) {
-            assertEquals(e.toString(), "☹ OOPS!!! Please enter the task you'd like to"
+            assertEquals(e.toString(), "OOPS!!! Please enter the task you'd like to"
                     + "mark as done in the following format: \n\t done [task number]");
         }
     }
@@ -22,7 +22,7 @@ public class ParserTest {
         try {
             Parser.parse(testInput);
         } catch (DukeException e) {
-            assertEquals(e.toString(), "☹ OOPS!!! Please enter the task you'd like to"
+            assertEquals(e.toString(), "OOPS!!! Please enter the task you'd like to"
                     + "delete in the following format: \n\t delete [task number]");
         }
     }

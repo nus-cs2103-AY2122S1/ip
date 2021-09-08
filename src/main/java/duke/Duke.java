@@ -116,25 +116,6 @@ public class Duke extends Application {
         return textToAdd;
     }
 
-    /**
-     * Launches Duke.
-     */
-    void run() {
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(taskList, ui);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                System.out.println(e.toString());
-            }
-        }
-        //exit
-        storage.writeTasksToFile(taskList.getTasks());
-    }
-
     public String getResponse(String input) {
         try {
             Command cmd = Parser.parse(input);
@@ -144,12 +125,8 @@ public class Duke extends Application {
             }
             String response = cmd.execute(taskList, ui);
             return response;
-        } catch (DukeException e) {
+        } catch (DukeException | IOException e) {
             return e.toString();
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
     }
 }
