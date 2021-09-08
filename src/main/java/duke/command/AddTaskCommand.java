@@ -27,6 +27,7 @@ public class AddTaskCommand implements Command {
      * @param arr of length 2 which contains the task type and description.
      */
     public AddTaskCommand(String... arr) {
+        assert arr.length == 2;
         this.type = arr[0];
         this.detail = arr[1];
     }
