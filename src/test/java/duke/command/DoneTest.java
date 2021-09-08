@@ -19,7 +19,7 @@ public class DoneTest {
             Storage storage = new Storage("./testData/file.txt");
             Ui ui = new Ui();
             TaskList tasks = new TaskList();
-            tasks.add(new Todo("project log"));
+            tasks.add(new Todo("project log", "H"));
             new Done(1).exec(tasks, ui, storage);
             assertEquals("X", tasks.get(0).getStatusIcon());
         } catch (NoListException e) {

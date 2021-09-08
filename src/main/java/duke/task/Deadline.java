@@ -16,8 +16,8 @@ public class Deadline extends Task {
      * @param description
      * @param by
      */
-    public Deadline(String description, String by) {
-        super(description);
+    public Deadline(String description, String priority, String by) {
+        super(description, priority);
         this.by = by;
         String[] arr = by.split(" ");
         assert(arr.length == 2);

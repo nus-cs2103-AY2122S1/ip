@@ -10,8 +10,8 @@ public class Event extends Task {
      * @param description
      * @param at
      */
-    public Event(String description, String at) {
-        super(description);
+    public Event(String description, String priority, String at) {
+        super(description, priority);
         this.at = at;
     }
 

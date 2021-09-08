@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 public class EventTest {
     @Test
     public void fileFormat_normalNoInput_properFormat() {
-        assertEquals("D | 0 | report | 2/12/2021 1800",
-                new Deadline("report", "2/12/2021 1800").convertToFileFormat());
+        assertEquals("D | 0 | H | report | 2/12/2021 1800",
+                new Deadline("report", "H", "2/12/2021 1800").convertToFileFormat());
     }
 
     @Test
     public void toString_normalNoInput_expectedString() {
-        assertEquals("[D][ ] report (by: Dec 2 2021 06:00 PM)",
-                new Deadline("report", "2/12/2021 1800").toString());
+        assertEquals("[D][ ][H] report (by: Dec 2 2021 06:00 PM)",
+                new Deadline("report", "H", "2/12/2021 1800").toString());
     }
 }
