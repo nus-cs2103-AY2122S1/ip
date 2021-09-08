@@ -40,6 +40,7 @@ public class TaskList {
             } else {
                 output = addTask(input);
             }
+            assert output != null;
             return output;
         } catch (DukeException e) {
             throw new DukeException(e.toString());
