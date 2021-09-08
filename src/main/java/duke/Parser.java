@@ -56,20 +56,7 @@ public class Parser {
      */
     public static Task parseNewTask(String userInput) throws MissingInputException {
         Scanner userInputScanner = new Scanner((userInput));
-        TaskType taskType = null;
-        switch (userInputScanner.next().toLowerCase()) {
-        case "todo":
-            taskType = TaskType.TODO;
-            break;
-        case "deadline":
-            taskType = TaskType.DEADLINE;
-            break;
-        case "event":
-            taskType = TaskType.EVENT;
-            break;
-        default:
-            return null; // Invalid input
-        }
+        TaskType taskType = TaskType.getTaskType(userInputScanner.next().toLowerCase());
 
         if (!userInputScanner.hasNext()) {
             throw new MissingInputException(taskType);
