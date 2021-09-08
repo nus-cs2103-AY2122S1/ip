@@ -79,7 +79,7 @@ public class ArchiveCommand extends Command {
     }
 
     /**
-     * Formats and archive task at indexToArchive in taskList.
+     * Formats and archives task at indexToArchive in taskList.
      *
      * @param taskList taskList to archive task at indexToArchive.
      * @param archiveList archiveList to add the archived task to.
@@ -93,7 +93,7 @@ public class ArchiveCommand extends Command {
     }
 
     /**
-     * Formats and archive all tasks in taskList.
+     * Formats and archives all tasks in taskList.
      *
      * @param taskList taskList to archive all tasks.
      * @param archiveList archiveList to add the archived task to.

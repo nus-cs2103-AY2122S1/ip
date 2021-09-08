@@ -56,8 +56,8 @@ public class UnarchiveCommand extends Command {
     }
     /**
      * Gets the String representation of the things printed in the
-     * execute method as well as execute the Unarchiving of the task at
-     * indexToBeArchived.
+     * execute method as well as execute the unarchiving of the task at
+     * indexToBeUnarchived.
      *
      * @param taskList taskList to store the unarchived task.
      * @param archiveList archiveList which task at indexToUnarchive would be unarchived.
@@ -79,7 +79,7 @@ public class UnarchiveCommand extends Command {
     }
 
     /**
-     * Formats and unarchive task at indexToUnarchive in archiveList.
+     * Formats and unarchives task at indexToUnarchive in archiveList.
      *
      * @param taskList taskList to add the unarchived task to.
      * @param archiveList archiveList to unarchive the task.
@@ -93,7 +93,7 @@ public class UnarchiveCommand extends Command {
     }
 
     /**
-     * Formats and archive all tasks in taskList.
+     * Formats and unarchives all tasks in taskList.
      *
      * @param taskList taskList to add all unarchived tasks to.
      * @param archiveList archiveList to unarchive all the tasks.

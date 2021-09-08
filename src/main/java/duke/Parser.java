@@ -402,7 +402,7 @@ public class Parser {
     }
 
     /**
-     * Parses the command string into an ArchiveCommand which archives a task.
+     * Parses the command string into an UnarchiveCommand which unarchives a task.
      *
      * @param userInput Command which user entered.
      * @param archiveList list which Task would be unarchived.
