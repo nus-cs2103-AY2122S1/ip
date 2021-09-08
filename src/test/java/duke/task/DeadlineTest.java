@@ -10,7 +10,7 @@ public class DeadlineTest {
 
     @Test
     public void testStringConversion() {
-        assertEquals("[D][ ] return book (by: Oct 8 2021)",
+        assertEquals("[D][ ][ ] return book (by: Oct 8 2021)",
                 new Deadline("return book", LocalDate.parse("2021-10-08")).toString());
     }
 }

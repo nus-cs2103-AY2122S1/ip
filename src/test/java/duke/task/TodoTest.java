@@ -8,6 +8,6 @@ public class TodoTest {
 
     @Test
     public void testStringConversion() {
-        assertEquals("[T][ ] buy bread", new Todo("buy bread").toString());
+        assertEquals("[T][ ][ ] buy bread", new Todo("buy bread").toString());
     }
 }
