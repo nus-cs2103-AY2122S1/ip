@@ -26,11 +26,26 @@ public class Storage {
     public Storage(String fileLocation) throws IOException {
         Path filePath = Path.of(fileLocation);
         Files.createDirectories(filePath.getParent());
-        if (!Files.exists(filePath)) {
+        if (checkFileDoesNotExist(filePath)) {
             Files.createFile(filePath);
         }
         this.filePath = filePath;
         this.lines = readLines();
+
+        boolean doesFileExist = checkFileExist(filePath);
+        assert doesFileExist;
+    }
+
+    private boolean checkFileExist(Path filePath) {
+        return Files.exists(filePath);
+    }
+
+    private boolean checkFileDoesNotExist(Path filePath) {
+        return !Files.exists(filePath);
+    }
+
+    private boolean checkLinesIsUpdated() throws IOException {
+        return lines.equals(readLines());
     }
 
     private ArrayList<String> readLines() throws IOException {
@@ -41,6 +56,9 @@ public class Storage {
     private void saveLinesToStorage() throws IOException {
         // store updated lines to the file path
         Files.write(filePath, lines);
+
+        boolean isLinesUpdated = checkLinesIsUpdated();
+        assert isLinesUpdated;
     }
 
     /**
