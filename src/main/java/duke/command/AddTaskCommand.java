@@ -15,6 +15,7 @@ public class AddTaskCommand extends Command {
      */
     public AddTaskCommand(Task task) {
         super("add");
+        assert task != null : "task shouldn't be null";
         this.task = task;
     }
 
