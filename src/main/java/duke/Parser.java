@@ -102,8 +102,9 @@ public class Parser {
                 throw new DukeException("todo", "'todo borrow book'");
             }
             assert desc.substring(1).length() > 0 : "Description should be present";
-            ToDo toDo = new ToDo(command.substring(5));
+
             setNewLists(storage, tasks, ui);
+            ToDo toDo = new ToDo(command.substring(5));
             tasks.add(toDo);
             storage.save(tasks);
             return ui.taskMessageToString(toDo, tasks);
@@ -115,10 +116,11 @@ public class Parser {
                 throw new DukeException("event", "'event project meeting /at Aug 26 2021 19:15'");
             }
             assert desc.substring(1).length() > 0 : "Description should be present";
+
+            setNewLists(storage, tasks, ui);
             int escapeIndex = command.lastIndexOf("/");
             String dateAndTime = command.substring(escapeIndex + 4);
             Event event = new Event(command.substring(6, escapeIndex - 1), dateAndTime);
-            setNewLists(storage, tasks, ui);
             tasks.add(event);
             storage.save(tasks);
             return ui.taskMessageToString(event, tasks);
@@ -130,6 +132,7 @@ public class Parser {
             } catch (NumberFormatException e) {
                 return "Please input a correct number";
             }
+
             setNewLists(storage, tasks, ui);
             return new Delete(index, tasks, storage, ui).execute();
         }
@@ -140,10 +143,11 @@ public class Parser {
                 throw new DukeException("deadline", "'deadline return book /by 2021-08-27 14:15'");
             }
             assert desc.substring(1).length() > 0 : "Description should be present";
+
+            setNewLists(storage, tasks, ui);
             int escapeIndex = command.lastIndexOf("/");
             String dateAndTime = command.substring(escapeIndex + 4);
             Deadline deadline = new Deadline(command.substring(9, escapeIndex - 1), dateAndTime);
-            setNewLists(storage, tasks, ui);
             tasks.add(deadline);
             storage.save(tasks);
             return ui.taskMessageToString(deadline, tasks);
