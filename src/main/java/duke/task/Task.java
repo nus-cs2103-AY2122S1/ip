@@ -51,10 +51,6 @@ public abstract class Task {
 
     public abstract String getDate();
 
-    public String getTaskName() {
-        return this.taskName;
-    }
-
     public boolean contains(String query) {
         return this.taskName.contains(query);
     }

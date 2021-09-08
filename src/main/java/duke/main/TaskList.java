@@ -145,6 +145,32 @@ public class TaskList {
         this.taskList.add(task);
     }
 
+    /**
+     * Update a task at a specify index number
+     * @param task
+     * @param type
+     * @param index
+     * @return
+     */
+    public Task replaceTask(String task, Task.Type type, int index) {
+        task = task.trim();
+        Task newTask;
+        switch (type) {
+        case DEADLINE:
+            newTask = new Deadline(task);
+            break;
+        case EVENT:
+            newTask = new Event(task);
+            break;
+        default:
+            newTask = new Todo(task);
+        }
+        index--;
+        this.taskList.remove(index);
+        this.taskList.add(index, newTask);
+        return newTask;
+    }
+
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder("Here is the list of all tasks: \n");
