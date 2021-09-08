@@ -17,7 +17,7 @@ public class ParserTest {
         Parser p = new Parser(new TaskList(), null);
         assertEquals("Please type some commands!", p.parseCommand(""));
         assertEquals("Please type some commands!", p.parseCommand("  "));
-        assertEquals("Invalid task description: missing name / date & time!", p.parseCommand("event"));
+        assertEquals("Invalid task description: missing details!", p.parseCommand("event"));
         assertEquals("Invalid input for delete command. Please enter [delete] followed by the number of"
                 + " the line to delete\ne.g. delete 2", p.parseCommand("delete abc"));
         assertEquals("Invalid command!", p.parseCommand("beans"));

@@ -63,6 +63,8 @@ public class Parser {
                 return this.parseDoneTask(command.substring(5).trim());
             case "delete":
                 return this.parseDeleteTask(command.substring(7).trim());
+            case "schedule":
+                return this.parseViewScheduleTask(command.substring(9).trim());
             case "find":
                 return this.taskList.searchTasks(command.substring(5).trim());
             case "list":
@@ -83,6 +85,12 @@ public class Parser {
         } catch (Exception ex) {
             return UNKNOWN_ERROR_MESSAGE;
         }
+    }
+
+
+    private String parseViewScheduleTask(String date) throws DukeException.EmptyScheduleException {
+        LocalDate dateToView = LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT));
+        return this.taskList.getTasksOnDate(dateToView);
     }
 
 

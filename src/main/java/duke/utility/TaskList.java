@@ -1,10 +1,13 @@
 package duke.utility;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
 import duke.exception.DukeException;
+import duke.task.DateTimeTask;
 import duke.task.Task;
 
 /**
@@ -21,6 +24,7 @@ public class TaskList {
     public static final String MISSING_SEARCH_KEYWORD_MESSAGE = "Please enter some keywords to search for!";
     public static final String NO_SUCH_TASK_MESSAGE = "No tasks found containing the keyword(s) ";
     public static final String EMPTY_LIST_MESSAGE = "There are no items in your list!";
+    public static final String DATE_FORMAT = "E, dd MMM yyyy";
     protected final HashSet<String> existingTasks;
     private final List<Task> tasks;
 
@@ -61,7 +65,7 @@ public class TaskList {
 
     protected String markAsCompleted(String taskName) throws DukeException.TaskAlreadyCompleteException,
             DukeException.NoSuchTaskException {
-        assert this.existingTasks.contains(taskName): "task to delete does not exist";
+        // assert this.existingTasks.contains(taskName) : "task to delete does not exist";
         int taskIndex = this.getTaskIndex(taskName);
         Task completedTask = this.tasks.get(taskIndex);
         if (completedTask.getIsCompleted()) {
@@ -74,7 +78,7 @@ public class TaskList {
 
 
     protected String deleteTask(int taskNum) throws DukeException.InvalidTaskNumException {
-        assert taskNum > 0 && taskNum <= this.tasks.size() : "invalid task number";
+        // assert taskNum > 0 && taskNum <= this.tasks.size() : "invalid task number";
         if (taskNum > this.tasks.size() || taskNum < 1) {
             throw new DukeException.InvalidTaskNumException("Task number " + taskNum + " does not exist!");
         }
@@ -86,7 +90,7 @@ public class TaskList {
 
 
     protected int getTaskIndex(String taskName) throws DukeException.NoSuchTaskException {
-        assert this.existingTasks.contains(taskName) : "task does not exist";
+        // assert this.existingTasks.contains(taskName) : "task does not exist";
         int currentTaskNum = 0;
         while (currentTaskNum < this.tasks.size()) {
             if (this.tasks.get(currentTaskNum).getTaskName().equals(taskName)) {
@@ -96,6 +100,24 @@ public class TaskList {
             }
         }
         throw new DukeException.NoSuchTaskException("Task is not in list!");
+    }
+
+    protected String getTasksOnDate(LocalDate dateToView) throws DukeException.EmptyScheduleException {
+        StringBuilder sb = new StringBuilder();
+        for (Task task: this.tasks) {
+            if (task instanceof DateTimeTask) {
+                DateTimeTask t = (DateTimeTask) task;
+                if (t.getDate().isEqual(dateToView)) {
+                    sb.append(t);
+                    sb.append("\n");
+                }
+            }
+        }
+        String date = dateToView.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+        if (sb.length() == 0) {
+            throw new DukeException.EmptyScheduleException(String.format("You have no tasks scheduled for %s", date));
+        }
+        return String.format("Here are your tasks scheduled for %s:\n\n", date) + sb;
     }
 
 
