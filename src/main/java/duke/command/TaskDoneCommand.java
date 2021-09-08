@@ -23,6 +23,15 @@ public class TaskDoneCommand extends Command {
     }
 
     /**
+     * Returns the index of the task.
+     *
+     * @return Index of the task.
+     */
+    public int getTaskIndex() {
+        return taskIndex;
+    }
+
+    /**
      * Executes the command. Marks a task as done, stores changes and updates the message to be printed.
      *
      * @param tasks A list of tasks.

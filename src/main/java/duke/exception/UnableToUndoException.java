@@ -9,4 +9,8 @@ public class UnableToUndoException extends DukeException {
     public UnableToUndoException(Command lastCommand) {
         super(String.format("☹ OOPS!!! I cannot undo the previous command: %s\n", lastCommand.toString()));
     }
+
+    public UnableToUndoException() {
+        super("☹ OOPS!!! No more previous commands in the stack.");
+    }
 }
