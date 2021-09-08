@@ -53,7 +53,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws IOException {
+    private void handleUserInput() {
         String userText = userInput.getText();
         String lebronText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
@@ -64,7 +64,7 @@ public class MainWindow extends AnchorPane {
     }
 
     @FXML
-    private String getResponse(String input) throws IOException {
+    private String getResponse(String input) {
         return lebron.run(input);
     }
 }
