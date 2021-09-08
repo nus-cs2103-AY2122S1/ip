@@ -56,20 +56,7 @@ public class Parser {
      */
     public static Task parseNewTask(String userInput) throws MissingInputException {
         Scanner userInputScanner = new Scanner((userInput));
-        TaskType taskType = null;
-        switch (userInputScanner.next().toLowerCase()) {
-        case "todo":
-            taskType = TaskType.TODO;
-            break;
-        case "deadline":
-            taskType = TaskType.DEADLINE;
-            break;
-        case "event":
-            taskType = TaskType.EVENT;
-            break;
-        default:
-            assert false; // Invalid task type input
-        }
+        TaskType taskType = TaskType.getTaskType(userInputScanner.next().toLowerCase());
 
         if (!userInputScanner.hasNext()) {
             throw new MissingInputException(taskType);
@@ -77,15 +64,22 @@ public class Parser {
 
         switch (taskType) {
         case TODO:
-            return new ToDo(userInputScanner.nextLine().trim());
+            String todoName = userInputScanner.nextLine().trim();
+            return new ToDo(todoName);
         case DEADLINE:
             userInputScanner.useDelimiter(" /by ");
-            return new Deadline(userInputScanner.next().trim(),
-                    LocalDate.parse(userInputScanner.next().trim()));
+            String deadlineName = userInputScanner.next().trim();
+            LocalDate deadlineDateTime =
+                    LocalDate.parse(userInputScanner.next().trim());
+
+            return new Deadline(deadlineName, deadlineDateTime);
         case EVENT:
             userInputScanner.useDelimiter(" /at ");
-            return new Event(userInputScanner.next().trim(),
-                    LocalDate.parse(userInputScanner.next().trim()));
+            String eventName = userInputScanner.next().trim();
+            LocalDate eventDateTime =
+                    LocalDate.parse(userInputScanner.next().trim());
+
+            return new Event(eventName, eventDateTime);
         default:
             assert false; // Undefined task type input
             return null;

@@ -54,37 +54,45 @@ public class Storage {
         try (BufferedReader reader = Files.newBufferedReader(savePath)) {
 
             ArrayList<Task> tasks = new ArrayList<>();
-            String line = null;
-            Scanner saveDataScanner;
+            String line = reader.readLine();
 
-            while ((line = reader.readLine()) != null) {
-                saveDataScanner = new Scanner(line).useDelimiter(", ");
-                String taskType = saveDataScanner.next();
-                boolean isTaskDone = saveDataScanner.nextInt() == 1;
-                String taskDesc = saveDataScanner.next();
-
-                switch (taskType) {
-                case "T":
-                    tasks.add(new ToDo(taskDesc, isTaskDone));
-                    break;
-                case "D":
-                    tasks.add(new Deadline(taskDesc,
-                            LocalDate.parse(saveDataScanner.next()), isTaskDone));
-                    break;
-                case "E":
-                    tasks.add(new Event(taskDesc,
-                            LocalDate.parse(saveDataScanner.next()), isTaskDone));
-                    break;
-                default:
-                    assert false; // Undefined task type input
-                }
-                saveDataScanner.close();
+            while (line != null) {
+                tasks.add(loadTask(line));
+                line = reader.readLine();
             }
+
             return tasks;
         } catch (IOException ex) {
             ex.printStackTrace();
             return null;
         }
+    }
+
+    private Task loadTask(String savedTask) {
+        Scanner saveDataScanner = new Scanner(savedTask).useDelimiter(", ");
+        String taskType = saveDataScanner.next();
+        boolean isTaskDone = saveDataScanner.nextInt() == 1;
+        String taskDesc = saveDataScanner.next();
+        Task loadedTask = null;
+
+        switch (taskType) {
+        case "T":
+            loadedTask = new ToDo(taskDesc, isTaskDone);
+            break;
+        case "D":
+            LocalDate deadlineDateTime = LocalDate.parse(saveDataScanner.next());
+            loadedTask = new Deadline(taskDesc, deadlineDateTime, isTaskDone);
+            break;
+        case "E":
+            LocalDate eventDateTime = LocalDate.parse(saveDataScanner.next());
+            loadedTask = new Event(taskDesc, eventDateTime, isTaskDone);
+            break;
+        default:
+            assert false; // Undefined task type input
+        }
+        saveDataScanner.close();
+
+        return loadedTask;
     }
 
     /**
