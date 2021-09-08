@@ -76,7 +76,7 @@ public class Storage {
                             LocalDate.parse(saveDataScanner.next()), isTaskDone));
                     break;
                 default:
-                    break; //Error
+                    assert false; // Undefined task type input
                 }
                 saveDataScanner.close();
             }
