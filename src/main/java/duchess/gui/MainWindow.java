@@ -1,5 +1,6 @@
 package duchess.gui;
 
+import duchess.command.ByeCommand;
 import duchess.main.Duchess;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,6 +15,8 @@ import javafx.stage.Stage;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    /** The exit message to detect for closing the window. */
+    private static final String BYE_MESSAGE = new ByeCommand().handleLogic(null);
     /** A scroll pane to vertical scroll.*/
     @FXML
     private ScrollPane scrollPane;
@@ -53,7 +56,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duchess.getResponse(input);
-        if (response.equals("I bid thee farewell")) {
+        if (response.equals(BYE_MESSAGE)) {
             Stage stage = (Stage) sendButton.getScene().getWindow();
             stage.close();
         }

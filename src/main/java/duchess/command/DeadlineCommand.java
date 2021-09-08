@@ -11,7 +11,6 @@ import duchess.task.Deadline;
  * @author Amos Tan
  * @version CS2103T AY21/22 Semester 1
  */
-
 public class DeadlineCommand extends Command {
 
     /** The message on the usage of the deadline command. */
@@ -36,12 +35,16 @@ public class DeadlineCommand extends Command {
         String reply = "";
         try {
             Deadline deadline = buildDeadline(description);
-            duchessList.add(deadline);
-            int listSize = duchessList.getSize();
-            reply = "Understood. I've added this task:\n    " + deadline
-                    + "\nYou now have " + listSize
-                    + (listSize > 1 ? " tasks in the list." : " task in the list.");
-            DuchessFileHandler.writeToFile(duchessList);
+            if (duchessList.checkForDuplicates(deadline)) {
+                reply = "This deadline already exists in your list.";
+            } else {
+                duchessList.add(deadline);
+                int listSize = duchessList.getSize();
+                reply = "Understood. I've added this task:\n    " + deadline
+                        + "\nYou now have " + listSize
+                        + (listSize > 1 ? " tasks in the list." : " task in the list.");
+                DuchessFileHandler.writeToFile(duchessList);
+            }
         } catch (DuchessException e) {
             reply = e.getMessage();
         }

@@ -12,7 +12,6 @@ import duchess.main.DuchessException;
  * @author Amos Tan
  * @version CS2103T AY21/22 Semester 1
  */
-
 public abstract class Task {
     /** The DateTimeFormatter when converting time from string.*/
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy ha");
@@ -60,7 +59,7 @@ public abstract class Task {
         return isDone;
     }
 
-    public abstract LocalDateTime getDateTime();
+    public abstract LocalDateTime getDateTimeStart();
 
     /**
      * Converts the user input string to a LocalDateTime.
@@ -86,5 +85,4 @@ public abstract class Task {
     public String toString() {
         return String.format("[" + (isDone ? "X" : " ") + "] " + name);
     }
-
 }

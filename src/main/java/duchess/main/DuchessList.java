@@ -10,24 +10,23 @@ import duchess.task.Task;
  * @author Amos Tan
  * @version CS2103T AY21/22 Semester 1
  */
-
 public class DuchessList {
     /** The ArrayList which stores the messages by the user.*/
-    private ArrayList<Task> itemList;
+    private ArrayList<Task> taskList;
 
     /**
      * Constructs a DuchessList.
      */
     public DuchessList() {
-        itemList = new ArrayList<>();
+        taskList = new ArrayList<>();
     }
 
     /**
      * Adds a string to the back of the DuchessList.
-     * @param input The string to be added.
+     * @param taskToAdd The string to be added.
      */
-    public void add(Task input) {
-        itemList.add(input);
+    public void add(Task taskToAdd) {
+        taskList.add(taskToAdd);
     }
 
     /**
@@ -36,9 +35,9 @@ public class DuchessList {
      */
     public String printList() {
         String printed = "";
-        int size = itemList.size();
+        int size = taskList.size();
         for (int i = 0; i < size; i++) {
-            printed += String.format("%d. " + itemList.get(i) + (i == size - 1 ? "" : "\n"), i + 1);
+            printed += String.format("%d. " + taskList.get(i) + (i == size - 1 ? "" : "\n"), i + 1);
         }
         return printed.isBlank() ? "You have nothing in your list." : printed;
     }
@@ -49,7 +48,7 @@ public class DuchessList {
      * @return Whether the number is within the list's range.
      */
     public boolean checkWithinRange(int listNumber) {
-        return 0 < listNumber && listNumber <= itemList.size();
+        return 0 < listNumber && listNumber <= taskList.size();
     }
 
     /**
@@ -60,7 +59,7 @@ public class DuchessList {
      */
     public Task getTask(int listNumber) throws IllegalArgumentException {
         if (checkWithinRange(listNumber)) {
-            return itemList.get(listNumber - 1); // -1 due to difference between item list number and array indexes
+            return taskList.get(listNumber - 1); // -1 due to difference between item list number and array indexes
         } else {
             throw new IllegalArgumentException("Task index is not within range."); // Not within range
         }
@@ -71,7 +70,7 @@ public class DuchessList {
      * @return The number of elements in the DuchessList.
      */
     public int getSize() {
-        return itemList.size();
+        return taskList.size();
     }
 
     /**
@@ -81,6 +80,20 @@ public class DuchessList {
      */
     public Task delete(int listNumber) {
         assert checkWithinRange(listNumber) : "Number should be within the list.";
-        return itemList.remove(listNumber - 1); // -1 due to difference between item list number and indexes
+        return taskList.remove(listNumber - 1); // -1 due to difference between item list number and indexes
+    }
+
+    /**
+     * Checks if a task already exists in the list.
+     * @param taskToCheck The task to be checked for duplicate entries in the list.
+     * @return Whether the task already exists in the list.
+     */
+    public boolean checkForDuplicates(Task taskToCheck) {
+        for (Task t : taskList) {
+            if (t.equals(taskToCheck)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

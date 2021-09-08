@@ -11,22 +11,21 @@ import duchess.main.DuchessException;
  * @author Amos Tan
  * @version CS2103T AY21/22 Semester 1
  */
-
 public class Deadline extends Task {
     /** The DateTimeFormatter used when printing the Event.*/
     private static final DateTimeFormatter PRINT_DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
 
     /** The date and time of the deadline task.*/
-    protected LocalDateTime by;
+    protected LocalDateTime dueDate;
 
     /**
      * Constructs a Deadline.
      * @param name The name of the deadline task.
-     * @param by The deadline of the task.
+     * @param dueDate The deadline of the task.
      */
-    public Deadline(String name, LocalDateTime by) {
+    public Deadline(String name, LocalDateTime dueDate) {
         super(name);
-        this.by = by;
+        this.dueDate = dueDate;
     }
 
     /**
@@ -34,7 +33,7 @@ public class Deadline extends Task {
      * @return The file formatted string representation of the Deadline.
      */
     public String toFileFormat() {
-        return String.format("D%s,%s,%b", name, PRINT_DATE_FORMATTER.format(by), isDone);
+        return String.format("D%s,%s,%b", name, PRINT_DATE_FORMATTER.format(dueDate), isDone);
     }
 
     /**
@@ -47,8 +46,8 @@ public class Deadline extends Task {
         return LocalDateTime.parse(by, PRINT_DATE_FORMATTER);
     }
 
-    public LocalDateTime getDateTime() {
-        return this.by;
+    public LocalDateTime getDateTimeStart() {
+        return this.dueDate;
     }
 
 
@@ -58,6 +57,21 @@ public class Deadline extends Task {
     */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + PRINT_DATE_FORMATTER.format(by) + ")";
+        return "[D]" + super.toString() + " (by: " + PRINT_DATE_FORMATTER.format(dueDate) + ")";
+    }
+
+    /**
+     * Compares the Deadline with another object.
+     * @param o The object to compare with.
+     * @return Whether the object is a Deadline with the same description and date.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Task)) {
+            return false;
+        } else {
+            Deadline d = (Deadline) o;
+            return d.name.equals(this.name) && d.dueDate.equals(this.dueDate);
+        }
     }
 }

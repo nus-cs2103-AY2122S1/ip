@@ -13,7 +13,6 @@ import duchess.task.Event;
  * @author Amos Tan
  * @version CS2103T AY21/22 Semester 1
  */
-
 public class EventCommand extends Command {
 
     /** The message on the usage of the event command. */
@@ -38,12 +37,16 @@ public class EventCommand extends Command {
         String taskAndDuration = getDescription();
         try {
             Event event = buildEvent(taskAndDuration);
-            duchessList.add(event);
-            int listSize = duchessList.getSize();
-            reply = "Understood. I've added this task:\n    " + event
-                    + "\nYou now have " + listSize
-                    + (listSize > 1 ? " tasks in the list." : " task in the list.");
-            DuchessFileHandler.writeToFile(duchessList);
+            if (duchessList.checkForDuplicates(event)) {
+                reply = "This event already exists in your list.";
+            } else {
+                duchessList.add(event);
+                int listSize = duchessList.getSize();
+                reply = "Understood. I've added this task:\n    " + event
+                        + "\nYou now have " + listSize
+                        + (listSize > 1 ? " tasks in the list." : " task in the list.");
+                DuchessFileHandler.writeToFile(duchessList);
+            }
         } catch (DuchessException e) {
             reply = e.getMessage();
         }

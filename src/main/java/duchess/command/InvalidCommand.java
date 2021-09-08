@@ -8,7 +8,6 @@ import duchess.main.DuchessList;
  * @author Amos Tan
  * @version CS2103T AY21/22 Semester 1
  */
-
 public class InvalidCommand extends Command {
 
     /** Constructs an InvalidCommand.*/
@@ -24,5 +23,4 @@ public class InvalidCommand extends Command {
     public String handleLogic(DuchessList duchessList) {
         return "Apologies, I didn't catch that.";
     }
-
 }

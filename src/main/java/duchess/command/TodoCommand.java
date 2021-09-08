@@ -29,6 +29,9 @@ public class TodoCommand extends Command {
         String task = getDescription();
         // Valid input
         ToDo todo = new ToDo(task);
+        if (duchessList.checkForDuplicates(todo)) {
+            return "This todo already exists in your list.";
+        }
         duchessList.add(todo);
         int listSize = duchessList.getSize();
         String reply = "Understood. I've added this task:\n    " + todo

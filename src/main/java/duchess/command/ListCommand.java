@@ -8,7 +8,6 @@ import duchess.main.DuchessList;
  * @author Amos Tan
  * @version CS2103T AY21/22 Semester 1
  */
-
 public class ListCommand extends Command {
 
     /** Constructs a ListCommand.*/
@@ -21,8 +20,8 @@ public class ListCommand extends Command {
      * @param duchessList The DuchessList to read or write tasks to.
      * @return The reply from Duchess to the user.
      */
-    public String handleLogic(Duchess duchess) {
-        String reply = duchess.getDuchessList().printList();
+    public String handleLogic(DuchessList duchessList) {
+        String reply = duchessList.printList();
         assert !reply.isBlank() : "Reply should not be empty.";
         return reply;
     }

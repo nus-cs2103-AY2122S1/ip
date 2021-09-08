@@ -12,7 +12,6 @@ import duchess.main.DuchessException;
  * @author Amos Tan
  * @version CS2103T AY21/22 Semester 1
  */
-
 public class Event extends Task {
 
     /** The DateTimeFormatter used when printing the Event.*/
@@ -67,10 +66,6 @@ public class Event extends Task {
         }
     }
 
-    public LocalDateTime getDateTime() {
-        return this.dateTimeStart;
-    }
-
     /**
      * Returns a simplified representation of the Event for easier recovery from save file.
      * @return The file formatted string representation of the Event.
@@ -90,6 +85,10 @@ public class Event extends Task {
         return LocalDateTime.parse(by, PRINT_DATE_FORMATTER);
     }
 
+    public LocalDateTime getDateTimeStart() {
+        return this.dateTimeStart;
+    }
+
     /**
      * Returns a string representation of the Event, with an [X] marked for done and [ ] as undone.
      * @return the string representation of the Event.
@@ -99,5 +98,21 @@ public class Event extends Task {
         return "[E]" + super.toString()
                 + " (at: " + dateTimeStart.format(PRINT_DATE_FORMATTER) + " to "
                 + dateTimeEnd.format(PRINT_DATE_FORMATTER) + ")";
+    }
+
+    /**
+     * Compares the Event with another object.
+     * @param o The object to compare with.
+     * @return Whether the object is an Event with the same description and dates.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Task)) {
+            return false;
+        } else {
+            Event e = (Event) o;
+            return e.name.equals(this.name) && e.dateTimeStart.equals(this.dateTimeStart)
+                    && e.dateTimeEnd.equals(this.dateTimeEnd);
+        }
     }
 }

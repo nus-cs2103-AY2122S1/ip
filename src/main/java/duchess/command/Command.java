@@ -8,7 +8,6 @@ import duchess.main.DuchessList;
  * @author Amos Tan
  * @version CS2103T AY21/22 Semester 1
  */
-
 public abstract class Command {
     /** The name of the Command.*/
     private String name;

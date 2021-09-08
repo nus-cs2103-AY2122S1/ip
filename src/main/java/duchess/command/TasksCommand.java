@@ -6,6 +6,12 @@ import duchess.main.DuchessException;
 import duchess.main.DuchessList;
 import duchess.task.Task;
 
+/**
+ * This class contains the logic to handle the tasks command.
+ *
+ * @author Amos Tan
+ * @version CS2103T AY21/22 Semester 1
+ */
 public class TasksCommand extends Command {
 
     /** The message on the usage of the tasks command. */
@@ -71,9 +77,9 @@ public class TasksCommand extends Command {
         String tasksToPrint = "";
         for (int i = 1; i < duchessList.getSize() + 1; i++) {
             Task t = duchessList.getTask(i);
-            if (isBefore && t.getDateTime().isBefore(dateAndTime)) {
+            if (isBefore && t.getDateTimeStart().isBefore(dateAndTime)) {
                 tasksToPrint += t + "\n";
-            } else if (!isBefore && t.getDateTime().isAfter(dateAndTime)) {
+            } else if (!isBefore && t.getDateTimeStart().isAfter(dateAndTime)) {
                 tasksToPrint += t + "\n";
             }
         }

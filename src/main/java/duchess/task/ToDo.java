@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
  * @author Amos Tan
  * @version CS2103T AY21/22 Semester 1
  */
-
 public class ToDo extends Task {
 
     /**
@@ -31,7 +30,7 @@ public class ToDo extends Task {
      * Returns a string representation of the ToDo, with an [X] marked for done and [ ] as undone.
      * @return the string representation of the ToDo.
      */
-    public LocalDateTime getDateTime() {
+    public LocalDateTime getDateTimeStart() {
         return LocalDateTime.MAX;
     }
 

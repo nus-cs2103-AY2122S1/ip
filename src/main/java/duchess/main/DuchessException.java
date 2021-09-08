@@ -6,7 +6,6 @@ package duchess.main;
  * @author Amos Tan
  * @version CS2103T AY21/22 Semester 1
  */
-
 public class DuchessException extends Exception {
 
     /**

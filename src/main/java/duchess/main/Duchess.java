@@ -8,7 +8,6 @@ import java.util.Scanner;
  * @author Amos Tan
  * @version CS2103T AY21/22 Semester 1
  */
-
 public class Duchess {
     /** The DuchessList which holds the string stored by the user.*/
     private DuchessList duchessList;
