@@ -7,6 +7,7 @@ import java.util.List;
 import duke.constants.Constants;
 import duke.shared.DateHelpers;
 import duke.shared.GenericHelpers;
+import duke.shared.InvalidDateException;
 
 /**
  * Encapsulates a task with a deadline.
@@ -20,9 +21,8 @@ public class Deadline extends Task {
      * @param name Name of deadline.
      * @param dueDate String representing date task is due.
      */
-    public Deadline(String name, String dueDate) {
+    public Deadline(String name, String dueDate) throws InvalidDateException {
         super(name);
-        // typeString = TYPE_STRING;
         this.dueDate = DateHelpers.parseDateString(dueDate);
     }
 
@@ -32,9 +32,8 @@ public class Deadline extends Task {
      * @param isDone Whether deadline is to be marked complete upon creation.
      * @param dueDate String representing date task is due.
      */
-    public Deadline(String name, boolean isDone, String dueDate) {
+    public Deadline(String name, boolean isDone, String dueDate) throws InvalidDateException {
         super(name, isDone);
-        // typeString = TYPE_STRING;
         this.dueDate = DateHelpers.parseDateString(dueDate);
     }
 

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import duke.constants.Constants;
 import duke.shared.StringHelpers;
+import duke.views.Response;
 import duke.views.cli.strategies.commands.ByeCommand;
 import duke.views.cli.strategies.commands.Command;
 
@@ -41,6 +42,14 @@ public abstract class RespondWithDelegated {
         }
         return null;
 
+    }
+
+    public Response respondWithMetadata(String query) {
+        Command f = commands.get(query.split(" ")[0]);
+        if (f != null) {
+            return Response.withMessage(f.produce(query));
+        }
+        return null;
     }
 
     /**

@@ -32,6 +32,24 @@ public class Constants {
 
         }
 
+        public static enum BootstrapColor {
+            PRIMARY("color-primary"),
+            SUCCESS("color-success"),
+            INFO("color-info"),
+            WARNING("color-warning"),
+            DANGER("color-danger");
+            private String cssClass;
+
+            private BootstrapColor(String cssClass) {
+                this.cssClass = cssClass;
+            }
+
+            @Override
+            public String toString() {
+                return cssClass;
+            }
+        }
+
 
         public static final IndentationType INDENTATION_TYPE = IndentationType.TAB;
         /**
@@ -51,6 +69,8 @@ public class Constants {
         }
         public static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter
                 .ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.MEDIUM);
+
+
     }
 
     /**

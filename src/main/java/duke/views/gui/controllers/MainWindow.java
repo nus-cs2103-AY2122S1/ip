@@ -1,5 +1,7 @@
 package duke.views.gui.controllers;
 
+import duke.constants.Constants;
+import duke.views.Response;
 import duke.views.gui.Gui;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -29,8 +31,9 @@ public class MainWindow extends AnchorPane {
     public void setGui(Gui gui) {
         this.gui = gui;
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(gui.getGreeting(), dukeImage)
+                DialogBox.getDukeDialog(gui.getGreeting(), dukeImage, Constants.Display.BootstrapColor.INFO)
         );
+
     }
 
     @FXML
@@ -50,12 +53,22 @@ public class MainWindow extends AnchorPane {
             Platform.exit();
         }
 
-        String response = gui.getRawResponse(query);
-
+        Response response = gui.getResponseWithMetadata(query);
+        Constants.Display.BootstrapColor color;
+        switch (response.getResponseType()) {
+        case INFO:
+            color = Constants.Display.BootstrapColor.INFO;
+            break;
+        case ERROR:
+            color = Constants.Display.BootstrapColor.DANGER;
+            break;
+        default:
+            throw new IllegalStateException("Unexpected Response Type");
+        }
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(query, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response.getMessage(), dukeImage, color)
         );
         userInput.clear();
     }
