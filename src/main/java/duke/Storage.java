@@ -9,7 +9,7 @@ import java.util.Scanner;
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
  */
-public class Storage {
+public class Storage implements Cloneable {
     private static String filePath;
     private boolean shouldExit = false;
 
@@ -118,5 +118,9 @@ public class Storage {
      */
     public void setExit() {
         shouldExit = true;
+    }
+
+    public Storage clone() throws CloneNotSupportedException {
+        return (Storage) super.clone();
     }
 }

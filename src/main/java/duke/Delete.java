@@ -12,8 +12,11 @@ public class Delete implements GeneralCommand{
     /**
      * Constructs Delete object.
      *
-     * @param index Index of task to be deleted.
+     * @param index Index of task to be deleted
      * @param tasks The TaskList of tasks.
+     * @param storage Storage to be saved.
+     * @param ui Ui to return String.
+     * @throws DeleteException If Delete is incomplete.
      */
     Delete(int index, TaskList tasks, Storage storage, Ui ui) throws DeleteException {
         this.index = index;
@@ -30,6 +33,9 @@ public class Delete implements GeneralCommand{
 
     /**
      * Executes deletion of task.
+     *
+     * @return String to be printed on GUI.
+     * @throws IOException If an input or output operation is failed or interpreted.
      */
     @Override
     public String execute() throws IOException {

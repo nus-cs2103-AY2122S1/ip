@@ -9,6 +9,15 @@ public class Done implements GeneralCommand {
     private Task currentTask;
     private Ui ui;
 
+    /**
+     * Constructs Done object.
+     *
+     * @param index Index of task to be marked as done.
+     * @param tasks The TaskList of tasks.
+     * @param storage Storage to be saved.
+     * @param ui Ui to return String.
+     * @throws DoneException If Done is incomplete.
+     */
     public Done(int index, TaskList tasks, Storage storage, Ui ui) throws DoneException {
         this.index = index;
         this.tasks = tasks;
@@ -23,6 +32,9 @@ public class Done implements GeneralCommand {
 
     /**
      * Executes marking done of task.
+     *
+     * @return String to be printed on GUI.
+     * @throws IOException If an input or output operation is failed or interpreted.
      */
     @Override
     public String execute() throws IOException {

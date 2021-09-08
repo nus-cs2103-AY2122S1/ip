@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Parser class to parse the input commands by the user.
@@ -10,9 +11,13 @@ public class Parser {
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
+    private List<Storage> storageList;
+    private List<Ui> uiList;
+    private List<TaskList> tasksList;
+    private Duke duke;
 
     enum Activity {
-        TODO, DONE, EVENT, DELETE, DEADLINE, BYE, LIST, NORMAL, FIND
+        TODO, DONE, EVENT, DELETE, DEADLINE, BYE, LIST, NORMAL, FIND, UNDO
     }
 
     /**
@@ -22,12 +27,18 @@ public class Parser {
      * @param ui The Ui to return messages to the user.
      * @param storage To load or save tasks by the user.
      * @param tasks The list of tasks input by the user.
+     * @param duke Current Duke.
      */
-    public Parser(String command, Ui ui, Storage storage, TaskList tasks) {
+    public Parser(String command, Ui ui, Storage storage, TaskList tasks, List<Storage> storageList
+            , List<Ui> uiList, List<TaskList> tasksList, Duke duke) {
         this.command = command;
         this.ui = ui;
         this.storage = storage;
         this.tasks = tasks;
+        this.storageList = storageList;
+        this.uiList = uiList;
+        this.tasksList = tasksList;
+        this.duke = duke;
     }
 
     /**
@@ -42,12 +53,14 @@ public class Parser {
     /**
      * Parses the user command and inputs the task accordingly.
      *
+     * @return String to be printed on GUI.
      * @throws DukeException If task input by user is incomplete.
      * @throws DeleteException If delete is incomplete.
      * @throws IOException If an input or output operation is failed or interpreted.
      * @throws FindException If Find is incomplete.
+     * @throws DoneException If Done is incomplete.
      */
-    public String parseCommand() throws DukeException, DeleteException, IOException, FindException, DoneException {
+    public String parseCommand() throws DukeException, DeleteException, IOException, FindException, DoneException, UndoException, CloneNotSupportedException {
 
         Activity activity;
         if (command.equals("bye")) {
@@ -66,6 +79,8 @@ public class Parser {
             activity = Activity.DELETE;
         } else if (command.startsWith("find")) {
             activity = Activity.FIND;
+        } else if (command.startsWith("undo")) {
+            activity = Activity.UNDO;
         } else {
             activity = Activity.NORMAL;
         }
@@ -95,8 +110,14 @@ public class Parser {
             }
             assert desc.substring(1).length() > 0 : "Description should be present";
             ToDo toDo = new ToDo(command.substring(5));
+
+            //
+            setNewLists(storage, tasks, ui);
+
             tasks.add(toDo);
             storage.save(tasks);
+
+
             return ui.taskMessageToString(toDo, tasks);
         }
         case EVENT: {
@@ -109,8 +130,13 @@ public class Parser {
             int escapeIndex = command.lastIndexOf("/");
             String dateAndTime = command.substring(escapeIndex + 4);
             Event event = new Event(command.substring(6, escapeIndex - 1), dateAndTime);
+
+            //
+            setNewLists(storage, tasks, ui);
+
             tasks.add(event);
             storage.save(tasks);
+
             return ui.taskMessageToString(event, tasks);
         }
         case DELETE: {
@@ -120,6 +146,10 @@ public class Parser {
             } catch (NumberFormatException e) {
                 return "Please input a correct number";
             }
+
+            //
+            setNewLists(storage, tasks, ui);
+
             return new Delete(index, tasks, storage, ui).execute();
         }
         case DEADLINE: {
@@ -132,8 +162,13 @@ public class Parser {
             int escapeIndex = command.lastIndexOf("/");
             String dateAndTime = command.substring(escapeIndex + 4);
             Deadline deadline = new Deadline(command.substring(9, escapeIndex - 1), dateAndTime);
+            //
+            setNewLists(storage, tasks, ui);
+
             tasks.add(deadline);
             storage.save(tasks);
+
+
             return ui.taskMessageToString(deadline, tasks);
         }
         case FIND: {
@@ -156,13 +191,18 @@ public class Parser {
                 return ui.listMessageToString("matching", matchingTasks);
             }
         }
+        case UNDO: {
+            return new Undo(storageList, uiList, tasksList, duke).execute();
+        }
         default: {
             return ui.unknownMessageToString();
         }
         }
     }
 
-    public static void checkMissingArguments(String[] sections, String errorMessage) {
-
+    public void setNewLists(Storage storage, TaskList tasks, Ui ui) throws CloneNotSupportedException {
+        this.storageList.add(storage.clone());
+        this.tasksList.add((TaskList) tasks.clone());
+        this.uiList.add(ui);
     }
 }

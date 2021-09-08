@@ -2,6 +2,8 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -12,11 +14,14 @@ import javafx.stage.Stage;
  * Duke supports functions such as done, delete, find, and list too.
  */
 public class Duke extends Application {
-
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
     private final String filePath = "data/tasks.txt";
+    private List<Storage> storageList;
+    private List<Ui> uiList;
+    private List<TaskList> tasksList;
+
 
     /**
      * Constructs Duke.
@@ -29,7 +34,26 @@ public class Duke extends Application {
         } catch (FileNotFoundException e) {
             tasks = new TaskList();
         }
+        storageList = new ArrayList<>();
+        uiList = new ArrayList<>();
+        tasksList = new ArrayList<>();
         assert tasks != null : "Task should not be null";
+    }
+
+    /**
+     * Setting new Storage, TaskList, and Ui.
+     *
+     * @param storage New Storage set.
+     * @param tasks New TaskList set.
+     * @param ui New Ui set.
+     */
+    public void setElements(Storage storage, TaskList tasks, Ui ui, List<Storage> storageList, List<Ui> uiList, List<TaskList> tasksList) {
+        this.storage = storage;
+        this.tasks = tasks;
+        this.ui = ui;
+        this.storageList = storageList;
+        this.uiList = uiList;
+        this.tasksList = tasksList;
     }
 
     /**
@@ -41,10 +65,10 @@ public class Duke extends Application {
     public String run(String input) {
         if (!storage.isExit()) {
             try {
-                Parser p = new Parser(input, ui, storage, tasks);
+                Parser p = new Parser(input, ui, storage, tasks, storageList, uiList, tasksList, this);
                 return p.parseCommand();
             } catch (DeleteException | DukeException | IOException | StringIndexOutOfBoundsException | FindException
-                    | NumberFormatException | DoneException e) {
+                    | NumberFormatException | DoneException | UndoException | CloneNotSupportedException e) {
                 return e.getMessage();
             }
         }

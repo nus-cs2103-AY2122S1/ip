@@ -16,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Deals with the interaction of a user.
  */
-public class Ui {
+public class Ui implements Cloneable {
     private final String OUTRO = "Bye. Hope to see you again soon!";
 
     private static final String INSTRUCTIONS = "Welcome to Duke!\n"
@@ -109,6 +109,10 @@ public class Ui {
     public String deleteMessageToString(Task currentTask, ArrayList<Task> tasks) {
         String message = String.format("Noted. I've removed this task:\n" + currentTask.toString() + "\n"
                 + "Now you have %d tasks in the list\n", tasks.size());
+        return message;
+    }
+
+    public String undoMessageToString(String message) {
         return message;
     }
 
@@ -261,4 +265,7 @@ public class Ui {
         );
     }
 
+    public Ui clone() throws CloneNotSupportedException {
+        return (Ui) super.clone();
+    }
 }
