@@ -29,13 +29,6 @@ public class Task {
     }
 
     /**
-     * Marks the Task as done.
-     */
-    public void setDone() {
-        this.isDone = true;
-    }
-
-    /**
      * Returns the description of the Task.
      *
      * @return The Task's description.
@@ -60,6 +53,13 @@ public class Task {
      */
     public LocalDate getDate() {
         return null;
+    }
+
+    /**
+     * Marks the Task as done.
+     */
+    public void setDone() {
+        this.isDone = true;
     }
 
     /**

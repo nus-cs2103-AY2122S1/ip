@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents an Event with a description and a 'done' status and an Event date.
  */
 public class Event extends Task {
+
     protected LocalDate at;
 
     /**
@@ -36,7 +37,9 @@ public class Event extends Task {
      */
     @Override
     public String toFileFormat() {
+
         char done = '0';
+
         if (super.isDone) {
             done = '1';
         }

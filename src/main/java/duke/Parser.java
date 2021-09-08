@@ -1,6 +1,12 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 
 /**
  * Parses input from the user from a given string into arguments for other
@@ -17,59 +23,68 @@ public class Parser {
      * @throws DukeException If input is invalid.
      */
     public static Command parse(String command) throws DukeException {
+
         String[] parsedArr = command.split("\\s", 2);
 
         switch(parsedArr[0]) {
-            case "list":
-                if (parsedArr.length > 1) {
-                    throw new DukeException();
-                }
-                return new ListCommand();
-            case "todo":
-                if (parsedArr.length < 2) {
-                    throw new DukeException("The description of a todo cannot be empty.");
-                }
-                return new AddCommand(parsedArr[0], parsedArr[1]);
-            case "deadline":
-                if (parsedArr.length < 2) {
-                    throw new DukeException("The description of a deadline cannot be empty.");
-                }
-
-                if (!parsedArr[1].contains("/by")) {
-                    throw new DukeException("Please specify a date using the /by keyword.");
-                }
-                return new AddCommand(parsedArr[0], parsedArr[1]);
-            case "event":
-                if (parsedArr.length < 2) {
-                    throw new DukeException("The description of an event cannot be empty.");
-                }
-
-                if (!parsedArr[1].contains("/at")) {
-                    throw new DukeException("Please specify a date using the /at keyword.");
-                }
-                return new AddCommand(parsedArr[0], parsedArr[1]);
-            case "delete":
-                if (parsedArr.length < 2) {
-                    throw new DukeException("Please enter a number after delete!");
-                }
-                return parseFurther(parsedArr[0], parsedArr[1]);
-            case "done":
-                if (parsedArr.length < 2) {
-                    throw new DukeException("Please enter a number after done!");
-                }
-                return parseFurther(parsedArr[0], parsedArr[1]);
-            case "find":
-                if (parsedArr.length < 2 || parsedArr[1].isBlank()) {
-                    throw new DukeException("Your search query cannot be empty!");
-                }
-                return new FindCommand(parsedArr[1]);
-            case "bye":
-                if (parsedArr.length > 1) {
-                    throw new DukeException();
-                }
-                return new ExitCommand();
-            default:
+        case "list":
+            if (parsedArr.length > 1) {
                 throw new DukeException();
+            }
+
+            return new ListCommand();
+        case "todo":
+            if (parsedArr.length < 2) {
+                throw new DukeException("The description of a todo cannot be empty.");
+            }
+
+            return new AddCommand(parsedArr[0], parsedArr[1]);
+        case "deadline":
+            if (parsedArr.length < 2) {
+                throw new DukeException("The description of a deadline cannot be empty.");
+            }
+
+            if (!parsedArr[1].contains("/by")) {
+                throw new DukeException("Please specify a date using the /by keyword.");
+            }
+
+            return new AddCommand(parsedArr[0], parsedArr[1]);
+        case "event":
+            if (parsedArr.length < 2) {
+                throw new DukeException("The description of an event cannot be empty.");
+            }
+
+            if (!parsedArr[1].contains("/at")) {
+                throw new DukeException("Please specify a date using the /at keyword.");
+            }
+
+            return new AddCommand(parsedArr[0], parsedArr[1]);
+        case "delete":
+            if (parsedArr.length < 2) {
+                throw new DukeException("Please enter a number after delete!");
+            }
+
+            return parseFurther(parsedArr[0], parsedArr[1]);
+        case "done":
+            if (parsedArr.length < 2) {
+                throw new DukeException("Please enter a number after done!");
+            }
+
+            return parseFurther(parsedArr[0], parsedArr[1]);
+        case "find":
+            if (parsedArr.length < 2 || parsedArr[1].isBlank()) {
+                throw new DukeException("Your search query cannot be empty!");
+            }
+
+            return new FindCommand(parsedArr[1]);
+        case "bye":
+            if (parsedArr.length > 1) {
+                throw new DukeException();
+            }
+
+            return new ExitCommand();
+        default:
+            throw new DukeException();
         }
     }
 
@@ -83,10 +98,12 @@ public class Parser {
      * @throws DukeException If <code>rest</code> is not a legitimate integer.
      */
     private static Command parseFurther(String command, String rest) throws DukeException {
+
         int index;
 
         try {
             index = Integer.parseInt(rest) - 1;
+
             if (index < 0) {
                 throw new DukeException("This entry does not exist!");
             }

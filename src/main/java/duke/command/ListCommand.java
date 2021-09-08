@@ -25,7 +25,9 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+
         String list = "";
+
         for (int i = 0; i < tasks.getSize(); i++) {
             list += " " + (i + 1) + "." + tasks.getTask(i);
             if (i == tasks.getSize() - 1) {
@@ -33,6 +35,7 @@ public class ListCommand extends Command {
             }
             list += System.lineSeparator();
         }
+
         ui.printTemplate(list);
     }
 }

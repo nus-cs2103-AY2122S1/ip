@@ -5,7 +5,11 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,6 +19,7 @@ import java.util.Scanner;
  * same file whenever the program starts up.
  */
 public class Storage {
+
     private String filePath;
     private File file;
 
@@ -35,6 +40,7 @@ public class Storage {
      * @throws DukeException If an error occurs when loading the file.
      */
     public ArrayList<Task> load() throws DukeException {
+
         ArrayList<Task> list = new ArrayList<>();
 
         file = new File(System.getProperty("user.dir") + "\\" + filePath);
@@ -42,9 +48,9 @@ public class Storage {
         try {
             if (!file.exists()) {
                 File directory = new File("data");
+
                 directory.mkdir();
                 file.createNewFile();
-
             }
 
         } catch (IOException e) {
@@ -53,6 +59,7 @@ public class Storage {
 
         try {
             Scanner scanner = new Scanner(file);
+
             while (scanner.hasNext()) {
                 String str = scanner.nextLine();
                 list.add(parseInput(str));
@@ -96,33 +103,40 @@ public class Storage {
      * @throws DukeException When the file is corrupted and the string cannot be parsed.
      */
     private static Task parseInput(String str) throws DukeException {
+
         String[] taskArr = str.split(" \\| ");
         Task newTask;
 
         switch (taskArr[0]) {
-            case "T":
-                Todo todo = new Todo(taskArr[2]);
-                if (taskArr[1].equals("1")) {
-                    todo.setDone();
-                }
-                newTask = todo;
-                break;
-            case "E":
-                Event event = new Event(taskArr[2], LocalDate.parse(taskArr[3]));
-                if (taskArr[1].equals("1")) {
-                    event.setDone();
-                }
-                newTask = event;
-                break;
-            case "D":
-                Deadline deadline = new Deadline(taskArr[2], LocalDate.parse(taskArr[3]));
-                if (taskArr[1].equals("1")) {
-                    deadline.setDone();
-                }
-                newTask = deadline;
-                break;
-            default:
-                throw new DukeException("File is corrupted. Please either create a new file or check your existing file.");
+        case "T":
+            Todo todo = new Todo(taskArr[2]);
+
+            if (taskArr[1].equals("1")) {
+                todo.setDone();
+            }
+
+            newTask = todo;
+            break;
+        case "E":
+            Event event = new Event(taskArr[2], LocalDate.parse(taskArr[3]));
+
+            if (taskArr[1].equals("1")) {
+                event.setDone();
+            }
+
+            newTask = event;
+            break;
+        case "D":
+            Deadline deadline = new Deadline(taskArr[2], LocalDate.parse(taskArr[3]));
+
+            if (taskArr[1].equals("1")) {
+                deadline.setDone();
+            }
+
+            newTask = deadline;
+            break;
+        default:
+            throw new DukeException("File corrupted. Please create a new file or check your existing file.");
         }
 
         return newTask;

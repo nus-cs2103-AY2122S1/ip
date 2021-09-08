@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents a Deadline with a description and a 'done' status and a Deadline due date.
  */
 public class Deadline extends Task{
+
     protected LocalDate by;
 
     /**
@@ -36,7 +37,9 @@ public class Deadline extends Task{
      */
     @Override
     public String toFileFormat() {
+
         char done = '0';
+
         if (super.isDone) {
             done = '1';
         }

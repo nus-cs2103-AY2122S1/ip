@@ -9,6 +9,7 @@ import java.util.ArrayList;
  * necessary methods for interaction.
  */
 public class TaskList {
+
     private ArrayList<Task> tasks;
 
     /**
@@ -27,24 +28,6 @@ public class TaskList {
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
-    }
-
-    /**
-     * Adds a Task to the TaskList.
-     *
-     * @param task The Task to be added.
-     */
-    public void addTask(Task task) {
-        tasks.add(task);
-    }
-
-    /**
-     * Deletes a Task from the TaskList
-     *
-     * @param index The index of the Task to be deleted.
-     */
-    public void deleteTask(int index) {
-        tasks.remove(index);
     }
 
     /**
@@ -67,11 +50,30 @@ public class TaskList {
     }
 
     /**
+     * Adds a Task to the TaskList.
+     *
+     * @param task The Task to be added.
+     */
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
+
+    /**
+     * Deletes a Task from the TaskList
+     *
+     * @param index The index of the Task to be deleted.
+     */
+    public void deleteTask(int index) {
+        tasks.remove(index);
+    }
+
+
+    /**
      * Marks a Task as 'done' on the TaskList.
      *
      * @param index The index of the Task to be marked.
      */
     public void doneTask(int index) {
-        tasks.get(index).setDone();
+        getTask(index).setDone();
     }
 }

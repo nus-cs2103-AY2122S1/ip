@@ -35,6 +35,7 @@ public class DeleteCommand extends Command {
         if (index > tasks.getSize()) {
             throw new DukeException("This entry does not exist!");
         }
+
         Task deletedTask = tasks.getTask(index);
         tasks.deleteTask(index);
         ui.printTemplate( " Noted. I've removed this task:\n" + "  " + deletedTask + System.lineSeparator() + " Now you have " + tasks.getSize() + " tasks in the list.");
