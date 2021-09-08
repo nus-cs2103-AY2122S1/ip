@@ -45,7 +45,7 @@ test {
 }
 
 application {
-    mainClassName = "bubbles.Bubbles"
+    mainClassName = "bubbles.Launcher"
 }
 
 shadowJar {
