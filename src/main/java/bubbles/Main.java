@@ -7,7 +7,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /** A GUI for Bubbles using FXML. */
 public class Main extends Application {
@@ -20,7 +19,6 @@ public class Main extends Application {
 
             stage.setScene(scene);
             stage.setResizable(false);
-            stage.initStyle(StageStyle.TRANSPARENT);
             stage.show();
         } catch (IOException e) {
             System.out.println(e);

@@ -12,8 +12,17 @@ public enum Message {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n"),
+    ADD("Received order! I've added this task:\n"),
+    DELETE("Noted! I've removed this task:\n"),
+    DONE("Good job! I've marked this task as done:\n"),
+    REWARD("Bubbles will reward you with a piece of candy!"),
     WELCOME("You should do what you want to do!\n"
             + "Hello I'm Bubbles from the Powerpuff Girls, what are you up to?"),
+    HELP("Don't worry, Bubbles is here to help!\n"
+            + "Supported commands: todo, deadline, event, list, done, delete, find, help, bye;\n"
+            + "Note: You must include `/by` for deadlines, and `/at` for events"
+            + "after your task description! The date must be entered in the form"
+            + "of yyyy-mm-dd, or else I won't be able to understand your command. ☹"),
     EXIT("Bye-bye! Hope to see you again soon!");
 
     private String message;
@@ -23,7 +32,7 @@ public enum Message {
     }
 
     public static String separateMessage(String message) {
-        return FORMAT_LINE.toString() + "\n" + message + "\n" + FORMAT_LINE.toString();
+        return FORMAT_LINE + "\n" + message + "\n" + FORMAT_LINE;
     }
 
     /**

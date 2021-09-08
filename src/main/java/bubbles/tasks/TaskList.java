@@ -57,14 +57,13 @@ public class TaskList {
                 return deleteTask(input);
             case "find":
                 return findTask(input);
+            case "help":
+                return help();
             default:
-                assert false : "Unexpected command received from the user;";
                 throw new InvalidCommandException(input);
             }
         } catch (InvalidCommandException e) {
-            return (Message.FORMAT_LINE + "\n"
-                    + e
-                    + Message.FORMAT_LINE);
+            return Message.separateMessage(e.toString());
         }
     }
 
@@ -107,7 +106,7 @@ public class TaskList {
             switch (t) {
             case TODO:
                 if (arr.length == 1) {
-                    recentlyAdded = ToDo.addToDo("", false);
+                    ToDo.addToDo("", false);
                 }
 
                 recentlyAdded = ToDo.addToDo(arr[1], false);
@@ -129,16 +128,10 @@ public class TaskList {
             this.count++;
 
             String taskCount = "Now you have " + this.count + " task(s) in the list!";
-            return (Message.FORMAT_LINE + "\n"
-                    + "Received order! I've added this task:\n"
-                    + "     " + recentlyAdded + "\n"
-                    + taskCount + "\n"
-                    + Message.FORMAT_LINE);
 
+            return Message.separateMessage(Message.ADD + "     " + recentlyAdded + "\n" + taskCount);
         } catch (EmptyTaskException e) {
-            return (Message.FORMAT_LINE + "\n"
-                    + e
-                    + Message.FORMAT_LINE);
+            return Message.separateMessage(e.toString());
         }
     }
 
@@ -170,9 +163,7 @@ public class TaskList {
         try {
             this.tasks.add(ToDo.addToDo(input, isDone));
         } catch (EmptyTaskException e) {
-            System.out.println(Message.FORMAT_LINE + "\n"
-                    + e
-                    + Message.FORMAT_LINE);
+            System.out.println(Message.separateMessage(e.toString()));
         }
 
         int previousCount = this.count;
@@ -231,18 +222,10 @@ public class TaskList {
 
                 assert t.isDone : "Task should be set to done, but is_done status is still false;";
 
-                String encouragement = "Good job! I've marked this task as done:";
-                String reward = "Bubbles will reward you with a piece of candy!";
-                return (Message.FORMAT_LINE + "\n"
-                        + encouragement + "\n"
-                        + "     " + t + "\n"
-                        + reward + "\n"
-                        + Message.FORMAT_LINE);
+                return Message.separateMessage(Message.DONE + "     " + t + "\n" + Message.REWARD);
             }
         } catch (IndexOutOfBoundsException e) {
-            return (Message.FORMAT_LINE + "\n"
-                    + e
-                    + Message.FORMAT_LINE);
+            return Message.separateMessage(e.toString());
         }
     }
 
@@ -268,16 +251,11 @@ public class TaskList {
                 assert previousCount - this.count == 1 : "Count of tasks in task list did not decrement as expected;";
 
                 String taskCount = "Now you have " + count + " task(s) in the list!";
-                return (Message.FORMAT_LINE + "\n"
-                        + "Noted! I've removed this task:\n"
-                        + "     " + removed + "\n"
-                        + taskCount + "\n"
-                        + Message.FORMAT_LINE);
+
+                return Message.separateMessage(Message.DELETE + "     " + removed + "\n" + taskCount);
             }
         } catch (IndexOutOfBoundsException e) {
-            return (Message.FORMAT_LINE + "\n"
-                    + e
-                    + Message.FORMAT_LINE);
+            return Message.separateMessage(e.toString());
         }
     }
 
@@ -319,6 +297,15 @@ public class TaskList {
         message.append(Message.FORMAT_LINE);
 
         return message.toString();
+    }
+
+    /**
+     * Returns the help string to guide users on how to use Bubbles.
+     *
+     * @return A String that provides a short list of commands users can use with Bubbles.
+     */
+    public String help() {
+        return Message.separateMessage(Message.HELP.toString());
     }
 
     /**

@@ -21,6 +21,6 @@ public class IndexOutOfBoundsException extends Exception {
      */
     @Override
     public String toString() {
-        return "☹ OOPS!!! The number you have entered is out of bounds, please enter another number! ☹\n";
+        return "☹ OOPS!!! The number you have entered is out of bounds, please enter another number! ☹";
     }
 }

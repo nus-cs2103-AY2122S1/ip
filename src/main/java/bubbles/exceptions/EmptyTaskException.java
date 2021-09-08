@@ -23,6 +23,6 @@ public class EmptyTaskException extends Exception {
      */
     @Override
     public String toString() {
-        return "☹ OOPS!!! The description of a " + taskType + " cannot be empty. ☹\n";
+        return "☹ OOPS!!! The description of a " + taskType + " cannot be empty. ☹";
     }
 }
