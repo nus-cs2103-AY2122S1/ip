@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Represents a Duke chatbot. It helps to collate tasks for the user.
+ */
 public class Duke {
 
     private static final String LOCAL_FILE = "data/duke.txt";
@@ -10,6 +13,12 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Class constructor that constructs a Duke object.
+     *
+     * @param filePath File Path for Storage to obtain saved data. If data does not exist, a new file will be created
+     *                 with that filePath.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -20,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs Duke object. Follows the commands scanned by the Scanner. Ends when "bye" command is detected.
+     */
     public void run() {
         this.ui.welcome();
 

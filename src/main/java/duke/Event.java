@@ -3,21 +3,34 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an event that consists of a task to be done on a specified date and time.
+ */
 public class Event extends Task {
 
-    protected LocalDateTime date;
+    protected LocalDateTime dateTime;
 
-
-    public Event(String description, String date) {
+    /**
+     * Class constructor that constructs a Event object.
+     *
+     * @param description Description of the event task.
+     * @param dateTime Date and time for the task to be done at.
+     */
+    public Event(String description, String dateTime) {
         super(description);
 
         DateTimeFormatter scanned = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-        this.date = LocalDateTime.parse(date, scanned);
+        this.dateTime = LocalDateTime.parse(dateTime, scanned);
     }
 
+    /**
+     * Returns a String representation of Event.
+     *
+     * @return String representation of Event.
+     */
     @Override
     public String toString() {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma");
-        return "[E]" + super.toString() + " (at: " + this.date.format(dateFormat) + ")";
+        return "[E]" + super.toString() + " (at: " + this.dateTime.format(dateFormat) + ")";
     }
 }
