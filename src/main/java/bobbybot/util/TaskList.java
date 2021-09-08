@@ -47,12 +47,11 @@ public class TaskList {
     }
 
     /**
-     * Delete a task
+     * Delete a task and return response
      * @param taskNo bobbybot.tasks.Task Number (starting from index 1)
      */
     public void deleteTask(int taskNo) {
         Task taskToDelete = tasks.get(taskNo - 1);
-        System.out.println("Noted. I've removed this task:");
         System.out.println("  " + taskToDelete);
         tasks.remove(taskToDelete);
     }
