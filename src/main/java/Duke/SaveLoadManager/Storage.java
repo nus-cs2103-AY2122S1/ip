@@ -20,7 +20,7 @@ import java.util.Scanner;
  * In other words, programme allows Duke to save and read data from a file.
  */
 public class Storage {
-    private String filePath;
+    private final String filePath;
 
     private final ArrayList<Task> list;
 

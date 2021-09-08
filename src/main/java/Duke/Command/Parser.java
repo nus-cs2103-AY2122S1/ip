@@ -16,8 +16,8 @@ import java.time.format.DateTimeParseException;
  * Some invalid input Messages may cause throwing DukeException.
  */
 public class Parser {
-    private String message;
-    private ParserExceptionDetector parserExceptionDetector;
+    private final String message;
+    private final ParserExceptionDetector parserExceptionDetector;
 
     /**
      * @param message Message users take in to be parsed.
@@ -43,11 +43,7 @@ public class Parser {
             return false;
         }
 
-        if (!isValidMonth || !isValidDay || !isValidDay2 || !isValidHour || !isValidMinute) {
-            return false;
-        }
-
-        return true;
+        return isValidMonth && isValidDay && isValidDay2 && isValidHour && isValidMinute;
     }
 
     private LocalDateTime parseTimeInFormat1(String time) {
@@ -55,8 +51,8 @@ public class Parser {
         int endIndex1 = time.indexOf("/");
         int endIndex2 = time.lastIndexOf(" ");
         day = Integer.parseInt(time.substring(0, endIndex1));
-        Integer dayInteger = day;
-        int endIndex3 = time.indexOf("/", dayInteger.toString().length() + 1);
+        int dayInteger = day;
+        int endIndex3 = time.indexOf("/", Integer.toString(dayInteger).length() + 1);
 
         month = Integer.parseInt(time.substring(endIndex1 + 1, endIndex3));
         year = Integer.parseInt(time.substring(endIndex3 + 1, endIndex2));
@@ -168,7 +164,7 @@ public class Parser {
      * @throws DukeException Throws when the task info cannot be retrieved from users' one line of command.
      */
     public String getTask() throws DukeException{
-        String task = "";
+        String task;
 
         parserExceptionDetector.detectGetTaskException();
 

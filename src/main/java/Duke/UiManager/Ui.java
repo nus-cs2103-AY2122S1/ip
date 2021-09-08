@@ -2,7 +2,6 @@ package duke.uimanager;
 
 import duke.command.Parser;
 import duke.exceptions.DukeException;
-import duke.task.TaskList;
 
 import java.util.ArrayList;
 
@@ -35,21 +34,6 @@ public class Ui {
      */
     public String goodbyeMessage() {
         String text = "Bye. Hope to see you again soon!";
-        return text;
-    }
-
-    /**
-     * Returns all the tasks in a given list.
-     *
-     * @param tasks TaskList contains all the tasks to be printed.
-     * @return A list of tasks info.
-     */
-    public String printListUi(TaskList tasks) {
-        String text = "";
-        text += "Here are the tasks in your list:\n";
-        for (int i = 0; i < tasks.size(); i++) {
-            text += i + 1 + "." + tasks.get(i).getTaskStatus() + "\n";
-        }
         return text;
     }
 
@@ -104,7 +88,7 @@ public class Ui {
      * @return Ui message when getSpecificDateEvent is invoked.
      */
     public String getSpecificDateEventUi() {
-        String text = "Here are all the tasks taking place on the date you give me:";
+        String text = "Here are all the tasks taking place on the date you give me: \n";
         return text;
     }
 

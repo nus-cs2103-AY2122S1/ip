@@ -43,7 +43,7 @@ public class Duke {
     }
 
     private String printList() {
-        return ui.printListUi(tasks);
+        return tasks.printListUi();
     }
 
     private String markDone(int index) {
@@ -101,29 +101,15 @@ public class Duke {
         String text;
         String operationType = commands[0], task = commands[1], time = commands[2];
 
-        switch (operationType) {
-        case "bye":
-            text = goodbye();
-            break;
-        case "list":
-            text = printList();
-            break;
-        case "done":
-            text = markDone(index);
-            break;
-        case "delete":
-            text = delete(index);
-            break;
-        case "tell":
-            text = tell(time);
-            break;
-        case "find":
-            text = find(task);
-            break;
-        default:
-            text = add(operationType, task, time);
-            break;
-        }
+        text = switch (operationType) {
+               case "bye" -> goodbye();
+               case "list" -> printList();
+               case "done" -> markDone(index);
+               case "delete" -> delete(index);
+               case "tell" -> tell(time);
+               case "find" -> find(task);
+               default -> add(operationType, task, time);
+        };
         assert text.equals("") : "OOPS, Duke stops responding!";
         return text;
     }
