@@ -58,6 +58,10 @@ public enum Commands {
         return sb.toString();
     }
 
+    /**
+     * Loads the aliases of each command from the AliasStorage.
+     * AliasStorage should have been loaded before calling this.
+     */
     public static void loadAliases() {
         for (Commands commands : Commands.values()) {
             Command command = commands.command;

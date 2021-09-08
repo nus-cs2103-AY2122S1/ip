@@ -47,13 +47,15 @@ public class DeadlineCommand extends Command {
         }
 
         String name = inputs[0].strip();
+        String dateString = inputs[1].strip();
+
         if (name.equals("")) {
             throw new DukeException("Please input the deadline's name.");
         }
 
         LocalDate date;
         try {
-            date = LocalDate.parse(inputs[1].strip());
+            date = LocalDate.parse(dateString);
         } catch (DateTimeParseException e) {
             throw new DukeException("Please input your date in the format YYYY-MM-DD.");
         }

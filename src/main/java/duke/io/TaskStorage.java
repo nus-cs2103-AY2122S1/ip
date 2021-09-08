@@ -17,23 +17,19 @@ import duke.task.ToDo;
  * Storage class that manages the saving and loading of the task list.
  */
 public class TaskStorage {
-    private final File saveFile;
-
-    public TaskStorage(String filepath) {
-        this.saveFile = new File(filepath);
-    }
+    private static final File SAVE_FILE = new File("save.csv");
 
     /**
      * Loads the taskList from the saveFile.
      *
      * @return The TaskList generated from loading a task from each line in the file.
      */
-    public ArrayList<Task> load() {
+    public static ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc;
 
         try {
-            sc = new Scanner(saveFile);
+            sc = new Scanner(SAVE_FILE);
         } catch (FileNotFoundException e) {
             // no save data, use a fresh list
             return new ArrayList<>();
@@ -66,17 +62,17 @@ public class TaskStorage {
      * @param tasks The tasks to be saved.
      * @throws DukeException Any exception caught that has to do with the I/O.
      */
-    public void save(ArrayList<Task> tasks) throws DukeException {
+    public static void save(ArrayList<Task> tasks) throws DukeException {
         String taskListContent = convertToSaveString(tasks);
 
         try {
             // create the file if it does not exist
-            saveFile.createNewFile();
+            SAVE_FILE.createNewFile();
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
 
-        try (FileWriter fw = new FileWriter(saveFile)) {
+        try (FileWriter fw = new FileWriter(SAVE_FILE)) {
             fw.write(taskListContent);
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
@@ -89,7 +85,7 @@ public class TaskStorage {
      * @param tasks The tasks to be saved.
      * @return A string representing the tasks compliant to the save format.
      */
-    private String convertToSaveString(ArrayList<Task> tasks) {
+    private static String convertToSaveString(ArrayList<Task> tasks) {
         StringBuilder sb = new StringBuilder();
 
         if (tasks.size() == 0) {

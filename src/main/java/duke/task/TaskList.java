@@ -10,16 +10,12 @@ import duke.io.TaskStorage;
  */
 public class TaskList {
     private final ArrayList<Task> tasks;
-    private final TaskStorage taskStorage;
 
     /**
-     * Constructor of task list. Loads tasks from specified savefile.
-     *
-     * @param taskStorage The storage system that manages saving and loading.
+     * Constructor of task list. Loads tasks from the saved tasks.
      */
-    public TaskList(TaskStorage taskStorage) {
-        this.taskStorage = taskStorage;
-        this.tasks = taskStorage.load();
+    public TaskList() {
+        this.tasks = TaskStorage.load();
     }
 
     /**
@@ -206,7 +202,7 @@ public class TaskList {
      * @throws DukeException I/O exception from saving.
      */
     private void save() throws DukeException {
-        taskStorage.save(tasks);
+        TaskStorage.save(tasks);
     }
 
     /**

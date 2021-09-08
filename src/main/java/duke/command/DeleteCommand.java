@@ -3,6 +3,8 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
+import java.util.Arrays;
+
 /**
  * Command to delete a task, or delete tasks that satisfy a specified condition.
  */
@@ -40,7 +42,7 @@ public class DeleteCommand extends Command {
         if (data.equalsIgnoreCase("expired")) {
             return taskList.deleteExpired();
         }
-
+        
         int idx;
         try {
             idx = Integer.parseInt(data);
