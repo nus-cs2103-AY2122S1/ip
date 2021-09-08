@@ -27,8 +27,12 @@ public class Parser {
      * @throws DukeException
      */
     public static Command parse(String input) throws DukeException {
+        if (input.equals("")) {
+            throw new DukeException("Type something...");
+        }
         String[] x = input.split(" ");
         String cmd = x[0];
+        assert(cmd != null);
         if (x.length == 1) {
             if (cmd.equals("bye")) {
                 return new ExitCommand();

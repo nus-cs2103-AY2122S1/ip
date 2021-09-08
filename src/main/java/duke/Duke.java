@@ -24,7 +24,12 @@ public class Duke {
      */
     public Duke() {
         storage = new Storage(FILE_PATH);
-        tasks = new TaskList(storage.load());
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            tasks = new TaskList();
+        }
+        assert(tasks.getListOfTasks() != null);
     }
 
     /**

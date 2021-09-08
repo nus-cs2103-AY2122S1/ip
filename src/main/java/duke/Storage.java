@@ -36,7 +36,7 @@ public class Storage {
      * @return the list of tasks
      * @throws DukeException
      */
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             File f = new File(filePath);
@@ -55,7 +55,7 @@ public class Storage {
             }
             f.createNewFile();
         } catch (IOException e) {
-            return new ArrayList<Task>();
+            throw new DukeException("Error retrieving/reading from data file, creating new file instead.");
         }
         return tasks;
     }
@@ -84,6 +84,8 @@ public class Storage {
      * @return the Task to be added into the list of tasks
      */
     public Task parseLine(String line) {
+        assert(line != null && !line.equals(""));
+
         String[] x = line.split("\\|");
         String taskType = x[0].strip();
         boolean isDone = !x[1].strip().equals("0");
