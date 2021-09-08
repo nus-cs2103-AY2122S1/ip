@@ -28,15 +28,13 @@ public class Parser {
      * @throws DukeException If task description is empty, user input for date or task number is invalid.
      */
     public static Command parse(String fullCommand) throws DukeException {
-        String commandWord;
+        String commandWord = fullCommand;
         String taskDescription = null;
         Command command = null;
         if (fullCommand.contains(" ")) {
             String[] commandAndDescription = fullCommand.split(" ", 2);
             commandWord = commandAndDescription[0];
             taskDescription = commandAndDescription[1];
-        } else {
-            commandWord = fullCommand;
         }
         try {
             switch (commandWord) {

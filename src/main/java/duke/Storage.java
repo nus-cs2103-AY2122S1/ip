@@ -1,10 +1,5 @@
 package duke;
 
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -14,6 +9,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
@@ -46,7 +46,7 @@ public class Storage {
             Files.createDirectories(directoryPath); // Create directory if it does not exist
             File taskRecord = new File(filepath);
             if (!taskRecord.createNewFile()) {
-                // File already exists, parse file and add duke.tasks to ArrayList
+                // File already exists, parse file and add tasks to ArrayList
                 System.out.println("Retrieving your existing task list... *quack*");
                 tasks = readSaved(taskRecord);
             }
@@ -82,7 +82,7 @@ public class Storage {
                             taskAttributes[1].equals("1")));
                     break;
                 default:
-                    System.out.println("OOPS! There is an unknown value in the data file.");
+                    Ui.showError("OOPS! There is an unknown value in the data file.");
                     break;
                 }
             }
@@ -105,7 +105,7 @@ public class Storage {
             writer.write(task.saveText() + "\n");
             writer.close();
         } catch (IOException e) {
-            System.out.println("OOPS! An error occurred: " + e);
+            Ui.showError("OOPS! An error occurred: " + e);
         }
     }
 
@@ -125,7 +125,7 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            System.out.println("OOPS! An error occurred: " + e);
+            Ui.showError("OOPS! An error occurred: " + e);
         }
     }
 }
