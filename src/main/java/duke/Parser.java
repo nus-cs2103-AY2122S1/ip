@@ -43,13 +43,13 @@ public class Parser {
         case LIST:
             return new ListCommand();
         case TODO:
-            taskDescriptions = getTaskDescription(userDescription, "");
+            taskDescriptions = getTaskDescriptions(userDescription, "");
             return new AddCommand(new Todo(taskDescriptions[0]));
         case DEADLINE:
-            taskDescriptions = getTaskDescription(userDescription, " /by ");
+            taskDescriptions = getTaskDescriptions(userDescription, " /by ");
             return new AddCommand(new Deadline(taskDescriptions[0], taskDescriptions[1]));
         case EVENT:
-            taskDescriptions = getTaskDescription(userDescription, " /at ");
+            taskDescriptions = getTaskDescriptions(userDescription, " /at ");
             return new AddCommand(new Event(taskDescriptions[0], taskDescriptions[1]));
         case DONE:
             return new DoneCommand(toTaskIndex(userDescription));
@@ -66,9 +66,12 @@ public class Parser {
         }
     }
 
-    public static String[] getTaskDescription(String userDescription, String specifier) throws DukeException {
+    public static String[] getTaskDescriptions(String userDescription, String specifier) throws DukeException {
         if (userDescription.isBlank()) {
             throw new DukeException("oops, please add task description!");
+        }
+        if (specifier.isBlank()) {
+            return new String[] {userDescription};
         }
         return userDescription.split(specifier);
     }

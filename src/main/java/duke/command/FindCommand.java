@@ -13,7 +13,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList keywordTasks = new TaskList();
         for (Task t : tasks.getTaskList()) {
             String description = t.getDescription().toLowerCase();
@@ -21,6 +21,6 @@ public class FindCommand extends Command {
                 keywordTasks.addTask(t);
             }
         }
-        ui.showTaskList(keywordTasks);
+        return ui.showTaskList(keywordTasks);
     }
 }

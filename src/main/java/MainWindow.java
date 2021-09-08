@@ -1,5 +1,4 @@
-package duke;
-
+import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -22,12 +21,14 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/cat.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/samoyed.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog("\tHello! I'm Adam, your personal chat bot."
+                + "\n\tHow may I assist you today?", dukeImage));
     }
 
     public void setDuke(Duke d) {
@@ -38,7 +39,6 @@ public class MainWindow extends AnchorPane {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    @javafx.fxml.FXML
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
