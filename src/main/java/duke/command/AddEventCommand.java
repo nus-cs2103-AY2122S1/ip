@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.task.Event;
-import duke.TaskList;
-import duke.Ui;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import duke.DukeException;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Event;
 
 /**
  * Handles the event command which adds

@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.TaskList;
-import duke.task.ToDo;
-import duke.Ui;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import duke.DukeException;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.ToDo;
 
 /**
  * Handles the todo command which

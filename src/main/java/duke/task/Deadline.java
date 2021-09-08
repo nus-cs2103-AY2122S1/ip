@@ -1,9 +1,9 @@
 package duke.task;
 
-import duke.Storage;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import duke.Storage;
 
 /**
  * A task with a description and an end date/time
@@ -12,6 +12,13 @@ public class Deadline extends Task {
 
     private LocalDate endDate;
 
+    /**
+     * Constructs a new Deadline with description, completion status
+     * and completion date.
+     * @param description description for the deadline
+     * @param completed completion status of the deadline
+     * @param endDate day on which this deadline is due
+     */
     public Deadline(String description, boolean completed, LocalDate endDate) {
         super(description, completed);
         this.endDate = endDate;
@@ -19,8 +26,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() +
-                String.format(" (by: %s)", endDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
+        return "[D]" + super.toString()
+                + String.format(" (by: %s)", endDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
     }
 
     @Override
