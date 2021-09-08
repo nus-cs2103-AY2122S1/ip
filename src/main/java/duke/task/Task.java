@@ -75,8 +75,24 @@ public class Task {
         return null;
     }
 
+    /**
+     * Set the date of the task, if possible.
+     */
+    public void setDate(LocalDate localDate) {
+        return;
+    }
+
     public String getDescription() {
         return this.description;
+    }
+
+    /**
+     * Set the description of the task.
+     *
+     * @param description The new description.
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**

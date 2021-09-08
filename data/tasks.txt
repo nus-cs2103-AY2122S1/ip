@@ -1,4 +1,3 @@
 T | 1 | book
-T | 1 | project
 D | 1 | project  | 2020-12-22
-T | 0 | Javafx
+D | 0 | e | 2020-01-12

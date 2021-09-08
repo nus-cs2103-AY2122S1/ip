@@ -8,6 +8,7 @@ import duke.command.Command;
 import duke.command.ExitCommand;
 import duke.command.ModifyTaskCommand;
 import duke.command.QueryCommand;
+import duke.command.UpdateTaskCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.task.Deadline;
@@ -104,7 +105,7 @@ public class Parser {
             break;
         }
         case DEADLINE: {
-            if (!description.contains("/by")) {
+            if (!description.contains("/by ")) {
                 throw new InvalidCommandException();
             }
             String[] information = description.split("/by ", 2);
@@ -119,7 +120,7 @@ public class Parser {
             break;
         }
         case EVENT: {
-            if (!description.contains("/at")) {
+            if (!description.contains("/at ")) {
                 throw new InvalidCommandException();
             }
             String[] information = description.split("/at ", 2);
@@ -188,6 +189,9 @@ public class Parser {
             case "find": {
                 return new QueryCommand(QueryCommand.CommandType.FIND, description);
             }
+            case "update": {
+                return new UpdateTaskCommand(description);
+            }
             default: {
                 assert false;
                 throw new InvalidCommandException();
@@ -201,7 +205,6 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         default:
-            assert false;
             throw new InvalidCommandException();
         }
     }

@@ -34,6 +34,11 @@ public class Event extends Task {
         this.timeStart = timeStart;
     }
 
+    @Override
+    public void setDate(LocalDate localDate) {
+        this.timeStart = localDate;
+    }
+
     /**
      * Transforms the task to a single line that can be stored in a txt file.
      *
