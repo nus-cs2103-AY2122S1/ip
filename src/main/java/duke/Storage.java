@@ -1,9 +1,14 @@
 package duke;
 
+import duke.commands.DeadlineCommand;
+import duke.commands.EventCommand;
+import duke.exceptions.DukeException;
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.task.Event;
 import duke.task.Deadline;
+
+import duke.commands.ToDoCommand;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -12,14 +17,13 @@ import java.io.IOException;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
 import java.util.Scanner;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
-    private String filePath;
+    private String FILEPATH;
 
     /**
      * Constructs a Storage object.
@@ -27,7 +31,7 @@ public class Storage {
      * @param filePath The path of saved file.
      */
     public Storage(String filePath) {
-        this.filePath = filePath;
+        this.FILEPATH = filePath;
     };
 
     /**
@@ -38,9 +42,9 @@ public class Storage {
      * @throws IOException
      */
     public TaskList load() throws DukeException, IOException {
-        File f = new File(filePath);
+        File f = new File(FILEPATH);
         if (!f.exists()) {
-            Files.createFile(Paths.get(filePath));
+            Files.createFile(Paths.get(FILEPATH));
         }
 
         TaskList storedTaskList = new TaskList();
@@ -57,24 +61,28 @@ public class Storage {
             String body = splitTask[2];
 
             if (command.equals("T")) {
-                ToDo t = Parser.validateToDo("todo " + body);
-                storedTaskList.add(t);
+                ToDoCommand t = new ToDoCommand("todo " + body);
+                storedTaskList.add(t.getTaskToAdd());
             } else if (command.equals("D") || command.equals("E")) {
                 String[] descAndTime = body.split(" \\| ", 3);
 
                 if (command.equals("D")) {
-                    Deadline d = Parser.validateDeadline(
-                            "deadline " + descAndTime[0] + " /by " + descAndTime[1]);
-                    storedTaskList.add(d);
+                    DeadlineCommand d = new DeadlineCommand("deadline "
+                            + descAndTime[0]
+                            + " /by"
+                            + descAndTime[1]);
+                    storedTaskList.add(d.getTaskToAdd());
                 } else {
-                    Event e = Parser.validateEvent(
-                            "event " + descAndTime[0] + " /at " + descAndTime[1]);
-                    storedTaskList.add(e);
+                    EventCommand e = new EventCommand("event "
+                            + descAndTime[0]
+                            + " /at"
+                            + descAndTime[1]);
+                    storedTaskList.add(e.getTaskToAdd());
                 }
             }
 
             if (isDone.equals("1")) {
-                Parser.validateDone("done " + index);
+                storedTaskList.markAsDone(index);
             }
             index += 1;
         }
@@ -87,7 +95,7 @@ public class Storage {
      * @throws IOException
      */
     public void appendToFile(String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true);
+        FileWriter fw = new FileWriter(FILEPATH, true);
         fw.write(System.lineSeparator() + textToAppend);
         fw.close();
     }
@@ -121,7 +129,7 @@ public class Storage {
             }
         }
 
-        FileWriter fw = new FileWriter(filePath);
+        FileWriter fw = new FileWriter(FILEPATH);
         fw.write(req);
         fw.close();
     }
