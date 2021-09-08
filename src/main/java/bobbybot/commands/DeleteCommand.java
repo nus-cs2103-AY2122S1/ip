@@ -22,8 +22,9 @@ public class DeleteCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (taskNumToDelete < 1 || taskNumToDelete > tasks.getTasks().size()) {
-            this.response = "Invalid delete command! Task number: " + taskNumToDelete + "does not exist\n"
+            this.response = "Invalid delete command! Task number: " + taskNumToDelete + " does not exist\n"
                     + "Use [list] to see available tasks!";
+            return;
         }
 
         try {

@@ -1,7 +1,6 @@
 package bobbybot.gui;
 
 import bobbybot.commands.Command;
-import bobbybot.exceptions.BobbyException;
 import bobbybot.util.Parser;
 import bobbybot.util.Storage;
 import bobbybot.util.TaskList;
