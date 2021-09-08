@@ -12,6 +12,7 @@ import duke.ui.Ui;
 
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -50,7 +51,7 @@ public class Duke {
                     Task addedTask = this.tasks.addTask(splitInput);
                     return this.ui.addTask(addedTask, this.tasks.size());
                 case FIND:
-                    ArrayList<Task> list = this.tasks.find(splitInput[1]);
+                    List<Task> list = this.tasks.find(splitInput[1]);
                     return this.ui.list(list);
                 case UPDATE:
                     Task updatedTask = this.tasks.updateTask(splitInput);
