@@ -6,6 +6,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.exceptions.DukeException;
 
@@ -24,13 +25,14 @@ public class Parser {
     public static final String COMMAND_DONE = "done";
     public static final String COMMAND_DELETE = "delete";
     public static final String COMMAND_FIND = "find";
+    public static final String COMMAND_HELP = "help";
 
     private static final String DELIMITER = " ";
 
     /**
      * Error Messages.
      */
-    private static final String ERROR_UNKNOWN_COMMAND = "Unknown Command. See README for full list of commands.";
+    private static final String ERROR_UNKNOWN_COMMAND = "Unknown Command. Type 'help' for more information!";
 
     /**
      * Returns the Command corresponding to the full String duke.command input.
@@ -57,6 +59,9 @@ public class Parser {
         case COMMAND_EXIT:
             command = new ExitCommand();
             break;
+        case COMMAND_HELP:
+            command = new HelpCommand();
+            break;
         case COMMAND_LIST:
             command = new ListCommand();
             break;
@@ -77,6 +82,7 @@ public class Parser {
             break;
         case COMMAND_FIND:
             command = new FindCommand(fullCommand, DELIMITER);
+            break;
         default:
             break;
         }
