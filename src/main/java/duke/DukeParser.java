@@ -21,15 +21,25 @@ import duke.tasks.ToDo;
 public class DukeParser {
     //List of enum keywords
     enum Keywords {
-        bye,
-        deadline,
-        delete,
-        done,
-        error,
-        event,
-        find,
-        list,
-        todo,
+        bye("bye ; exits the program"),
+        deadline("deadline [task] /by [date] ; Creates a deadline task"),
+        delete("delete [#] ; deletes task [#] in the list"),
+        done("done [#] ; marks task [#] as done"),
+        event("event [task] /at [date] ; Creates a event task"),
+        find("find [keyword] ; looks for tasks containing [keyword]"),
+        help("help ; you've used this already"),
+        list("list ; lists the tasks in the list currently"),
+        todo("todo [task] ; Creates a todo task"),
+        error("");
+
+        private final String helpText;
+        Keywords(String helpText) {
+            this.helpText = helpText;
+        }
+
+        public String getHelpText() {
+            return this.helpText;
+        }
     }
 
     private TaskList taskList;
@@ -114,6 +124,8 @@ public class DukeParser {
             key = Keywords.bye;
         } else if (str.equals("list")) {
             key = Keywords.list;
+        } else if (str.equals("help")) {
+            key = Keywords.help;
         } else if (words.length > 1) {
             String temp = words[0];
             if (temp.equals("done")) {
@@ -134,10 +146,8 @@ public class DukeParser {
                 }
             } else if (temp.equals("find")) {
                 key = Keywords.find;
-                filtered = taskList.filter(str.replaceFirst("find", "").trim());
             } else if (temp.equals("todo")) {
                 key = Keywords.todo;
-                desc = str.replaceFirst("todo ", "");
             } else if (temp.equals("deadline")) {
                 key = Keywords.deadline;
                 List<String> postFilter = processDesc("/by", words);
@@ -148,7 +158,6 @@ public class DukeParser {
                     throw new DukeException("!!! Input the description then use /by to input date !!!");
                 }
                 time = LocalDate.parse(postFilter.get(1), standard);
-
             } else if (temp.equals("event")) {
                 key = Keywords.event;
                 List<String> postFilter = processDesc("/at", words);
@@ -159,9 +168,10 @@ public class DukeParser {
                     throw new DukeException("!!! Input the description then use /at to input date !!!");
                 }
                 time = LocalDate.parse(postFilter.get(1), standard);
+            } else if (temp.equals("help")) {
+                key = Keywords.help;
             }
         } else {
-            //Error Handling (Can be improved)
             if (str.equals("todo") || str.equals("deadline") || str.equals("event")) {
                 throw new DukeException("!!! The description cannot be empty. !!!");
             }
@@ -172,7 +182,14 @@ public class DukeParser {
         switch (key) {
         case list:
             return DukeUI.printList(taskList);
+        case help:
+            String temp = null;
+            if (words.length > 1) {
+                temp = words[1];
+            }
+            return DukeUI.printHelp(temp);
         case todo:
+            desc = str.replaceFirst("todo ", "");
             taskList.add(new ToDo(desc));
             return DukeUI.printTask(taskList);
         case deadline:
@@ -194,6 +211,7 @@ public class DukeParser {
             Task task = taskList.remove(index);
             return DukeUI.removeTask(task, taskList.size());
         case find:
+            filtered = taskList.filter(str.replaceFirst("find", "").trim());
             return DukeUI.printFiltered(filtered);
         case bye:
             return "Good Bye";

@@ -78,4 +78,18 @@ public class DukeUI {
         }
         return output;
     }
+
+    /**
+     * Nullary function printing the user guide for Duke
+     *
+     * @return String to be output by Duke
+     */
+    public static String printHelp(String keyword) throws IllegalArgumentException {
+        if (keyword == null) {
+            return "use help to get the usage of commands";
+        } else {
+            return DukeParser.Keywords.valueOf(keyword).getHelpText();
+        }
+    }
 }
+

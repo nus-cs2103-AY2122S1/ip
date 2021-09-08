@@ -56,7 +56,7 @@ public class DukeStorage {
 
                     taskList.add(new ToDo(desc, isDone));
                 } else if (words[0].equals("E")) {
-                    //Task is a Event
+                    //Task is an Event
                     taskList.add(new Event(desc, words[words.length - 1], isDone));
                 } else if (words[0].equals("D")) {
                     //Task is a Deadline
@@ -66,6 +66,8 @@ public class DukeStorage {
                 }
             }
             listScanner.close();
+        } else {
+            // Make a template helper list
         }
         return taskList;
     }
