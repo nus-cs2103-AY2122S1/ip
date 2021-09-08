@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents the "Deadline" task type. It encapsulates the Deadline's name, type and deadline.
  */
 public class Deadline extends Task {
-    private String taskName;
+    private String taskDescription;
     private String by;
     private String type = "D";
     private LocalDate date;
@@ -19,21 +19,21 @@ public class Deadline extends Task {
     /**
      * Constructor for a Deadline task.
      *
-     * @param taskName a short description of the task
+     * @param taskDescription a short description of the task
      */
-    public Deadline(String taskName) {
-        assert taskName != null : "task description should not be null";
+    public Deadline(String taskDescription) {
+        assert taskDescription != null : "task description should not be null";
 
-        String[] taskBySplit = taskName.split("/", 2);
+        String[] splitDescBy = taskDescription.split("/", 2);
 
-        if (taskName.contains("|")) {
-            taskBySplit = taskName.split("\\|", 2);
-        } else if (taskName.contains("/by")) {
-            taskBySplit = taskName.split("/by", 2);
+        if (taskDescription.contains("|")) {
+            splitDescBy = taskDescription.split("\\|", 2);
+        } else if (taskDescription.contains("/by")) {
+            splitDescBy = taskDescription.split("/by", 2);
         }
 
-        this.taskName = taskBySplit[0].trim();
-        this.by = taskBySplit[1].trim();
+        this.taskDescription = splitDescBy[0].trim();
+        this.by = splitDescBy[1].trim();
         String[] dateTimeSplit = this.by.split(" ", 2);
         this.time = Integer.parseInt(dateTimeSplit[1]);
 
@@ -53,8 +53,8 @@ public class Deadline extends Task {
      *
      * @return full description of the Deadline task
      */
-    public String showTask() {
-        return this.taskName + " (by: "
+    public String showDescription() {
+        return this.taskDescription + " (by: "
                 + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", "
                 + this.time + ")";
     }
@@ -65,7 +65,7 @@ public class Deadline extends Task {
      * @return name of the Deadline task
      */
     public String showTaskOnly() {
-        return this.taskName;
+        return this.taskDescription;
     }
 
     /**

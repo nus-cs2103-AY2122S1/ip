@@ -8,7 +8,6 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private ArrayList<Task> list;
-    private int counter = 0;
 
     public TaskList(ArrayList<Task> list) {
         this.list = list;
@@ -21,13 +20,12 @@ public class TaskList {
     /**
      * Adds a task to the TaskList object
      *
-     * @param task
+     * @param task task to be added to the task list
      */
     public void addTask(Task task) {
         assert task != null : "task cannot be null";
 
         this.list.add(task);
-        counter++;
     }
 
     /**
@@ -37,11 +35,14 @@ public class TaskList {
      */
     public String markDone(int index) {
         int trueIndex = index - 1;
+
         list.get(trueIndex).isDone();
+
         String taskDoneMessage = "     Nice! I've marked this task as done:\n"
                 + "       " + "[" + list.get(trueIndex).showType() + "]"
                 + list.get(trueIndex).checkDone() + " "
-                + list.get(trueIndex).showTask() + "\n";
+                + list.get(trueIndex).showDescription() + "\n";
+
         return taskDoneMessage;
     }
 
@@ -52,13 +53,17 @@ public class TaskList {
      */
     public String deleteTask(int index) {
         int trueIndex = index - 1;
+
         String listData = "[" + list.get(trueIndex).showType() + "]"
                 + list.get(trueIndex).checkDone() + " "
-                + list.get(trueIndex).showTask() + "\n";
+                + list.get(trueIndex).showDescription() + "\n";
+
         String deletedData = "     Noted. I've removed this task:\n"
                 + "       " + listData
                 + "     Now you have " + (list.size() - 1) + " tasks in the list\n";
+
         list.remove(trueIndex);
+
         return deletedData;
     }
 
@@ -76,13 +81,15 @@ public class TaskList {
      */
     public String showList() {
         String fullList = "     " + "Here are the tasks in your list:";
+
         for (int i = 0; i < list.size(); i++) {
             String taskItem = "\n" + "     " + (i + 1) + "." + "["
                     + list.get(i).showType() + "]"
                     + list.get(i).checkDone() + " "
-                    + list.get(i).showTask();
+                    + list.get(i).showDescription();
             fullList += taskItem;
         }
+
         return fullList;
     }
 
@@ -94,6 +101,7 @@ public class TaskList {
      */
     public String refreshList() {
         String refreshList = "";
+
         for (Task task : list) {
             if (task.showType().equals("D") || task.showType().equals("E")) {
                 refreshList += task.showType() + " | "
@@ -103,9 +111,10 @@ public class TaskList {
             } else {
                 refreshList += task.showType() + " | "
                         + (task.checkDone().equals("[X]") ? "1" : "0") + " | "
-                        + task.showTask() + "\n";
+                        + task.showDescription() + "\n";
             }
         }
+
         return refreshList;
     }
 
@@ -117,15 +126,17 @@ public class TaskList {
      */
     public String searchList(String keyword) {
         String searchList = "     " + "Here are the matching tasks in your list:";
+
         for (int k = 0; k < list.size(); k++) {
             if (list.get(k).showTaskOnly().contains(keyword)) {
                 String searchItem = "\n" + "     " + (k + 1) + "." + "["
                         + list.get(k).showType() + "]"
                         + list.get(k).checkDone() + " "
-                        + list.get(k).showTask();
+                        + list.get(k).showDescription();
                 searchList += searchItem;
             }
         }
+
         return searchList;
     }
 

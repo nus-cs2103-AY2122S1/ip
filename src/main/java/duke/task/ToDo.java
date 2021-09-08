@@ -4,13 +4,13 @@ package duke.task;
  * Represents a "ToDo" task type. It stores details of a ToDo task, such as its name and type.
  */
 public class ToDo extends Task {
-    private String taskName;
+    private String taskDescription;
     private String type = "T";
 
-    public ToDo(String taskName) {
-        assert taskName != null : "task description cannot be null";
+    public ToDo(String taskDescription) {
+        assert taskDescription != null : "task description cannot be null";
 
-        this.taskName = taskName;
+        this.taskDescription = taskDescription;
     }
 
     /**
@@ -18,8 +18,8 @@ public class ToDo extends Task {
      *
      * @return name of the ToDo task
      */
-    public String showTask() {
-        return taskName;
+    public String showDescription() {
+        return taskDescription;
     }
 
     /**
@@ -36,7 +36,7 @@ public class ToDo extends Task {
     }
 
     public String showTaskOnly() {
-        return taskName;
+        return taskDescription;
     }
 
 }

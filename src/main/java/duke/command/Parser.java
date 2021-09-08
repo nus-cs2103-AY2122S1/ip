@@ -111,7 +111,7 @@ public class Parser {
 
         String textToAppend = newToDo.showType() + " | "
                 + ((newToDo.checkDone()).equals("[X]") ? "1" : "0") + " | "
-                + newToDo.showTask() + "\n";
+                + newToDo.showDescription() + "\n";
         try {
             this.storage.save(textToAppend, true);
         } catch (DukeException de) {
@@ -119,14 +119,70 @@ public class Parser {
         }
 
         return this.ui.todoAddedMessage(
-                newToDo.showType(), newToDo.checkDone(), newToDo.showTask(), this.taskList);
+                newToDo.showType(), newToDo.checkDone(), newToDo.showDescription(), this.taskList);
+    }
+
+    /**
+     * Computes the task type to add to the task list depending on the command given
+     *
+     * @param taskDescription a short description of the task including its name, type, deadline
+     * @return a full description of the task
+     * @throws DukeException "description cannot be empty" exception
+     */
+    public String manageAddTask(String[] taskDescription) throws DukeException {
+        String output = "";
+
+        try {
+            if (taskDescription[0].equals("todo")) {
+                output = newToDo(taskDescription[1], this.taskList);
+            } else if (taskDescription[0].equals("deadline")) {
+                output = newDeadline(taskDescription[1], this.taskList);
+            } else {
+                output = newEvent(taskDescription[1], this.taskList);
+            }
+
+            return output;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("The description of a " + taskDescription[0] + " cannot be empty.");
+        }
+    }
+
+    /**
+     * Marks the task as done or deletes the task depending on the command given
+     *
+     * @param taskDescription a short description of the task
+     * @return a full description of the completion or deletion of the task
+     * @throws DukeException "invalid index number" exception
+     */
+    public String manageDoneAndDeleteTask(String[] taskDescription) throws DukeException {
+        String output = "";
+
+        try {
+            int taskIndex = Integer.parseInt(taskDescription[1]);
+
+            if (taskDescription[0].equals("delete")) {
+                output = this.taskList.deleteTask(taskIndex);
+            } else {
+                output = this.taskList.markDone(taskIndex);
+            }
+
+            try {
+                this.storage.rewrite(this.taskList);
+            } catch (DukeException e) {
+                System.out.println(e);
+            }
+
+            return output;
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeException("Please enter a valid task number.");
+        }
     }
 
     /**
      * Takes the input received by the parser and deciphers the command
      *
      * @return the respective descriptions of the task or command
-     * @throws DukeException
+     * @throws DukeException unable to process command exception
      */
     public String compute() throws DukeException {
         String output = "";
@@ -140,40 +196,19 @@ public class Parser {
             // Fallthrough
         case "event":
             try {
-                if (instruction[0].equals("todo")) {
-                    output = newToDo(instruction[1], this.taskList);
-                } else if (instruction[0].equals("deadline")) {
-                    output = newDeadline(instruction[1], this.taskList);
-                } else {
-                    output = newEvent(instruction[1], this.taskList);
-                }
+                output = manageAddTask(instruction);
                 break;
-            } catch (ArrayIndexOutOfBoundsException a) {
-                throw new DukeException("The description of a " + instruction[0] + " cannot be empty.");
+            } catch (DukeException e) {
+                System.out.println(e);
             }
         case "done":
             // Fallthrough
         case "delete":
             try {
-                int taskIndex = Integer.parseInt(instruction[1]);
-                String taskOutput = "";
-
-                if (instruction[0].equals("delete")) {
-                    taskOutput = this.taskList.deleteTask(taskIndex);
-                } else {
-                    taskOutput = this.taskList.markDone(taskIndex);
-                }
-
-                try {
-                    this.storage.rewrite(this.taskList);
-                } catch (DukeException de) {
-                    System.out.println(de);
-                }
-
-                output = taskOutput;
+                output = manageDoneAndDeleteTask(instruction);
                 break;
-            } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                throw new DukeException("Please enter a valid task number.");
+            } catch (DukeException e) {
+                System.out.println(e);
             }
         case "list":
             output = this.taskList.showList();
@@ -187,8 +222,8 @@ public class Parser {
         default:
             try {
                 this.storage.rewrite(this.taskList);
-            } catch (DukeException de) {
-                System.out.println(de);
+            } catch (DukeException e) {
+                System.out.println(e);
             }
 
             output = new DukeException("I'm sorry, but I don't know what that means :-(").toString();

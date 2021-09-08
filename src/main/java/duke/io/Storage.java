@@ -54,6 +54,7 @@ public class Storage {
         while (listScan.hasNext()) {
             String listInput = listScan.nextLine();
             String[] listInputArray = listInput.split("\\|", 3);
+
             for (int i = 0; i < listInputArray.length; i++) {
                 listInputArray[i] = listInputArray[i].trim();
             }
@@ -61,27 +62,33 @@ public class Storage {
             switch (listInputArray[0]) {
             case "T":
                 ToDo todo = new ToDo(listInputArray[2]);
+
                 if (listInputArray[1].equals("1")) {
                     todo.isDone();
                 }
+
                 loadedList.add(todo);
                 break;
             case "D":
                 String[] deadlineTask = listInputArray[2].split("\\|", 2);
                 String deadlineInput = deadlineTask[0].trim() + "|" + deadlineTask[1].trim();
                 Deadline deadline = new Deadline(deadlineInput);
+
                 if (listInputArray[1].equals("1")) {
                     deadline.isDone();
                 }
+
                 loadedList.add(deadline);
                 break;
             case "E":
                 String[] eventTask = listInputArray[2].split("\\|", 2);
                 String eventInput = eventTask[0] + " / " + eventTask[1];
                 Event event = new Event(eventInput);
+
                 if (listInputArray[1].equals("1")) {
                     event.isDone();
                 }
+
                 loadedList.add(event);
                 break;
             default:
@@ -107,7 +114,7 @@ public class Storage {
             FileWriter writeToFile = new FileWriter(HOME + dukeText, appendStatus);
             writeToFile.write(textToAppend);
             writeToFile.close();
-        } catch (IOException i) {
+        } catch (IOException e) {
             throw new DukeException("The file that you requested cannot be found.");
         }
     }
@@ -123,7 +130,7 @@ public class Storage {
             FileWriter rewriteFile = new FileWriter(HOME + dukeText);
             rewriteFile.write(taskList.refreshList());
             rewriteFile.close();
-        } catch (IOException i) {
+        } catch (IOException e) {
             throw new DukeException("The file that you requested cannot be found.");
         }
     }
