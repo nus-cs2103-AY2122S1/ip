@@ -10,9 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-
-import whobot.main.UI;
 import whobot.main.Gui;
+import whobot.main.UI;
 
 public class DisplayBuffer {
 
