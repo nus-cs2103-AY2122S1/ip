@@ -63,6 +63,29 @@ public class Ui {
     }
 
     /**
+     * Returns the help message for the user.
+     *
+     * @return The String representing the help message.
+     */
+    public static String printHelp() {
+        return "Here is the list of commands you can enter:\n"
+                + "- Create new tasks:\n"
+                + "\ttodo <task name>\n"
+                + "\tdeadline <task name> /by <YYYY-MM-DD>\n"
+                + "\tevent <task name> /at <YYYY-MM-DD>\n"
+                + "- Display your list of tasks:\n"
+                + "\tlist\n"
+                + "- Mark a task as done\n"
+                + "\tdone <task number>\n"
+                + "- Delete a task\n"
+                + "\tdelete <task number>\n"
+                + "- Search the list for tasks matching keyword\n"
+                + "\tfind <keyword>\n"
+                + "- Exit the assistant\n"
+                + "\tbye\n";
+    }
+
+    /**
      * Returns the farewell message for the user.
      *
      * @return The String representing the farewell message.
