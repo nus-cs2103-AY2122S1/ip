@@ -7,10 +7,11 @@ import duke.task.Task;
 
 /**
  * DoneCommand class handles the commands that marks a
- * particular task in the tasklist as done.
+ * particular task in the task list as done.
  */
 public class DoneCommand extends Command {
 
+    static final String DONE_HEADER = "Good work! Task is now marked as done:\n";
     private int taskNumber;
     /**
      * Constructs the DoneCommand object.
@@ -22,7 +23,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Marks the task with index taskNumber in the tasklist as done
+     * Marks the task with index taskNumber in the task list as done
      * and returns the response message.
      *
      * @param taskList The TaskList of Duke.
@@ -34,7 +35,7 @@ public class DoneCommand extends Command {
     public String execute(TaskList taskList, Storage storage) throws DukeException {
         Task completedTask = taskList.markTaskAsDone(taskNumber - 1);
         storage.saveList(taskList.convertToFileFormat());
-        return "Good work! Task is now marked as done:\n" + completedTask + "\n";
+        return DONE_HEADER + completedTask + "\n";
     }
 
 

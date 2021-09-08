@@ -11,6 +11,7 @@ import duke.TaskList;
  */
 public class OnCommand extends Command {
 
+    static final String ON_HEADER = "The tasks that you have on %s are:\n";
     private LocalDate date;
 
     /**
@@ -31,7 +32,7 @@ public class OnCommand extends Command {
     @Override
     public String execute(TaskList taskList, Storage storage) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-        String message = "The tasks that you have on " + date.format(formatter) + " are:\n";
+        String message = String.format(ON_HEADER, date.format(formatter));
         return message + taskList.checkForDate(date);
     }
 }

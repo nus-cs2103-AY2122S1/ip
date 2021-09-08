@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 
@@ -15,7 +14,6 @@ public class ListCommand extends Command {
      * @param taskList The TaskList of Duke.
      * @param storage The Storage of Duke.
      * @return Response string.
-     * @throws DukeException  If error occur during execution.
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {

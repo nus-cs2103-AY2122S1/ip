@@ -5,6 +5,9 @@ package duke.task;
  */
 public class Task {
 
+    static final String TASK_STRING_FORMAT = "[%s] %s";
+    static final String TASK_FILE_FORMAT = "%d / %s";
+    static final String DONE_STATUS_ICON = "X";
     protected String description;
     protected boolean isDone;
 
@@ -24,7 +27,7 @@ public class Task {
      * @return String status icon.
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? DONE_STATUS_ICON : " "); // mark done task with X
     }
 
     /**
@@ -39,10 +42,9 @@ public class Task {
      *
      * @param done Integer representation of status.
      */
-    public void setDone(int done) {
+    public void setDoneStatus(int done) {
         isDone = done == 1;
     }
-
 
     /**
      * Checks whether description contains query string.
@@ -57,7 +59,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), description);
+        return String.format(TASK_STRING_FORMAT, getStatusIcon(), description);
     }
 
     /**
@@ -67,6 +69,6 @@ public class Task {
      * @return String representation of task in file format.
      */
     public String convertToFileFormat() {
-        return String.format("%d / %s", isDone ? 1 : 0, description);
+        return String.format(TASK_FILE_FORMAT, isDone ? 1 : 0, description);
     }
 }

@@ -11,7 +11,9 @@ import duke.task.Task;
  * TaskList class handles the task list of Duke.
  */
 public class TaskList {
-
+    static final String ZERO_TASK_STRING = "There are no tasks in the list\n";
+    static final String ONE_TASK_STRING = "There is currently 1 task in your list\n";
+    static final String MULTIPLE_TASK_STRING = "There are currently %d tasks in your list\n";
     private ArrayList<Task> tasks;
 
     /**
@@ -58,8 +60,7 @@ public class TaskList {
     public String checkForQuery(String query) {
         StringBuilder message = new StringBuilder();
         int n = 1;
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
+        for (Task task : tasks) {
             if (task.containsQuery(query)) {
                 message.append(n).append(".").append(task).append("\n");
                 n++;
@@ -76,8 +77,7 @@ public class TaskList {
      */
     public String checkForDate(LocalDate date) {
         StringBuilder message = new StringBuilder();
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
+        for (Task task : tasks) {
             if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
                 if (deadline.isSameBy(date)) {
@@ -107,7 +107,7 @@ public class TaskList {
     }
 
     /**
-     * Converts the tasklist to file format for saving.
+     * Converts the task list to file format for saving.
      *
      * @return List of tasks in file format.
      */
@@ -118,7 +118,6 @@ public class TaskList {
         }
         return content.toString();
     }
-
     /**
      * Returns String representation of task list.
      *
@@ -139,11 +138,11 @@ public class TaskList {
      */
     public String getListStatus() {
         if (tasks.size() == 0) {
-            return "There are no tasks in the list\n";
+            return ZERO_TASK_STRING;
         } else if (tasks.size() == 1) {
-            return "\nThere is currently 1 task in your list\n";
+            return ONE_TASK_STRING;
         } else {
-            return String.format("\nThere are currently %d tasks in your list\n", tasks.size());
+            return String.format(MULTIPLE_TASK_STRING, tasks.size());
         }
     }
 }

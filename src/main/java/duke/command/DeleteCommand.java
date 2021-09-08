@@ -6,9 +6,11 @@ import duke.TaskList;
 import duke.task.Task;
 
 /**
- * DeleteCommand class handles the commands that deletes a particular task in the tasklist.
+ * DeleteCommand class handles the commands that deletes a particular task in the task list.
  */
 public class DeleteCommand extends Command {
+
+    static final String DELETE_HEADER = "Alright! I've deleted this task:\n";
     private int taskNumber;
     /**
      * Constructs the DeleteCommand object.
@@ -20,7 +22,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Deletes the task with index taskNumber from the tasklist
+     * Deletes the task with index taskNumber from the task list
      * and returns the response message.
      *
      * @param taskList The TaskList of Duke.
@@ -32,7 +34,7 @@ public class DeleteCommand extends Command {
     public String execute(TaskList taskList, Storage storage) throws DukeException {
         Task deletedTask = taskList.removeTask(taskNumber - 1);
         storage.saveList(taskList.convertToFileFormat());
-        return "Alright! I've deleted this task:\n" + deletedTask + taskList.getListStatus();
+        return DELETE_HEADER + deletedTask + taskList.getListStatus();
     }
 
 

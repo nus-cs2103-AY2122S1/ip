@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 
@@ -9,17 +8,18 @@ import duke.TaskList;
  */
 public class ExitCommand extends Command {
 
+    static final String BYE_MESSAGE = "Goodbye! Hope to see you again soon!\n";
+
     /**
      * Returns the exit message.
      *
      * @param taskList The TaskList of Duke.
      * @param storage The Storage of Duke.
      * @return Response string.
-     * @throws DukeException  If error occur during execution.
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
-        return "Goodbye! Hope to see you again soon!\n";
+        return BYE_MESSAGE;
     }
 
     @Override
