@@ -60,6 +60,10 @@ public class Constant {
             this.example = example;
         }
 
+        /**
+         * Returns a string representation of the date.
+         * @return A string representation of the date.
+         */
         @Override
         public String toString() {
             return accepted + "   -->   example: " + example;
