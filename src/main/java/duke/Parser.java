@@ -68,7 +68,7 @@ public class Parser {
             taskType = TaskType.EVENT;
             break;
         default:
-            return null; // Invalid input
+            assert false; // Invalid task type input
         }
 
         if (!userInputScanner.hasNext()) {
@@ -87,7 +87,8 @@ public class Parser {
             return new Event(userInputScanner.next().trim(),
                     LocalDate.parse(userInputScanner.next().trim()));
         default:
-            return null; // Error
+            assert false; // Undefined task type input
+            return null;
         }
     }
 

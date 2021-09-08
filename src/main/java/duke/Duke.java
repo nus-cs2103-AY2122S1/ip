@@ -96,22 +96,28 @@ public class Duke {
         default:
             throw new UnsupportedOperationException(); // Error
         }
+        assert false; // Execution should not reach this point
         return "";
     }
 
     private String addNewTask(Task newTask) {
+        assert newTask != null; // Task to be added cannot be null
         tasks.addTask(newTask);
         storage.saveTasks(tasks);
         return ui.printAddTask(tasks, newTask);
     }
 
     private String completeTask(int taskNum) {
+        // TaskNum should be within 1 to the size of the TaskList
+        assert taskNum > 0 && taskNum <= tasks.getSize(): taskNum;
         tasks.completeTask(taskNum);
         storage.saveTasks(tasks);
         return ui.printCompleteTask(tasks.getTask(taskNum));
     }
 
     private String deleteTask(int taskNum) {
+        // TaskNum should be within 1 to the size of the TaskList
+        assert taskNum > 0 && taskNum <= tasks.getSize(): taskNum;
         Task deletedTask = tasks.deleteTask(taskNum);
         storage.saveTasks(tasks);
         return ui.printDeleteTask(tasks, deletedTask);
