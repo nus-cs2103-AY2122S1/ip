@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.task.Deadline;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import duke.DukeException;
 import duke.TaskList;
 import duke.Ui;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import duke.task.Deadline;
 
 /**
  * Handles the deadline command which adds

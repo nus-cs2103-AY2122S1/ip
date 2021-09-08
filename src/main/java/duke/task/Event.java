@@ -1,9 +1,9 @@
 package duke.task;
 
-import duke.Storage;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import duke.Storage;
 
 /**
  * A task with a description and a start and end date/time
@@ -12,6 +12,13 @@ public class Event extends Task {
 
     private LocalDate eventDate;
 
+    /**
+     * Constructs an Event object given its description, completion status
+     * and event date
+     * @param description Description of the event
+     * @param completed Completition status of the event
+     * @param eventDate Date of the event
+     */
     public Event(String description, boolean completed, LocalDate eventDate) {
         super(description, completed);
         this.eventDate = eventDate;

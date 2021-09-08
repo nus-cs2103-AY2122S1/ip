@@ -6,6 +6,9 @@ public class Duke {
 
     private final TaskList tasks;
 
+    /**
+     * Constructs a Duke object.
+     */
     public Duke() {
         Storage storage = new Storage("data/tasks.txt");
         tasks = new TaskList(storage);

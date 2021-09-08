@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.task.Task;
-import duke.TaskList;
-import duke.Ui;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import duke.DukeException;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
 
 /**
  * Handles the delete command which
@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
 
 
         // Check if user is attempting to mark a task as done.
-        Matcher matcher =  PATTERN_DELETE.matcher(input);
+        Matcher matcher = PATTERN_DELETE.matcher(input);
         if (!matcher.find()) {
             throw new DukeException("Delete a task like this: delete <task number>");
         }
