@@ -1,9 +1,7 @@
 package duke.data;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import duke.task.Task;
@@ -80,17 +78,14 @@ public class TaskList {
     }
 
     /**
-     * Filters the task list and returns filtered tasks as a stream.
+     * Filters the task list using the given predicate, returns the result as a string.
      *
-     * @param predicate The predicate to be checked.
-     * @return A stream with filtered tasks.
+     * @param predicate The predicate to filter the list.
+     * @return The string representation of the filtered tasks.
      */
-    private Stream<Task> getFilteredStream(Predicate<Task> predicate) {
-        return this.tasks.stream().filter(predicate);
-    }
-
     public String getFilteredListAsString(Predicate<Task> predicate) {
-        return this.getFilteredStream(predicate)
+        return this.tasks.stream()
+                .filter(predicate)
                 .map(task -> String.format("%d.%s\n", this.indexOf(task) + 1, task.toString()))
                 .reduce("", (result, taskString) -> result + taskString);
     }
