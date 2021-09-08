@@ -18,6 +18,7 @@ public class Parser {
      * @throws DukeException An invalid user input will produce this exception.
      */
     public String[] parseInput(String rawInput) throws DukeException {
+        assert rawInput != null : "[duke.Parser.parseInput]: rawInput is null";
         String[] inputs = rawInput.split("\\s+");
         if (inputs.length < 1) {
             throw new DukeException(DukeException.Errors.INVALID_COMMAND.toString());
@@ -149,6 +150,7 @@ public class Parser {
      * @throws DukeException when the given argument is not a number.
      */
     public int convertToInt(String number) throws DukeException {
+        assert number != null : "[duke.Parser.convertToInt]: number parameter should not be null.";
         try {
             return Integer.parseInt(number);
         } catch (Exception e) {
@@ -163,6 +165,7 @@ public class Parser {
      * @throws DukeException Thrown if the input is an invalid date.
      */
     private String parseDate(String input) throws DukeException {
+        assert input != null : "[duke.Parser.parseDate]: input parameter should not be null.";
         String[] dateTime = input.split("\\s+");
         int len = dateTime.length;
         String formatPattern = "yyyy-MM-dd";
@@ -211,6 +214,7 @@ public class Parser {
      * @throws DukeException Thrown if the time is invalid
      */
     private String stringToTime(String time) throws DukeException {
+        assert time != null : "[duke.Parser.stringToTime]: time parameter should not be null.";
         String[] splitTime = time.split(":");
         if (splitTime.length > 2 || splitTime.length < 1) {
             throw new DukeException(DukeException.Errors.INVALID_TIME.toString());
@@ -252,6 +256,7 @@ public class Parser {
      * @throws DukeException An invalid date will produce this
      */
     private String stringToDate(String[] date) throws DukeException {
+        assert date != null : "[duke.Parser.stringToDate]: date parameter should not be null.";
         // can be [yyyy, mm, dd] or [dd, mm, yyyy]
         try {
             // Check if all the string are numbers:
@@ -292,6 +297,7 @@ public class Parser {
      * @return The sentence.
      */
     private String combineStringArray(String[] arr, int start, int exclusiveEnd) {
+        assert arr != null : "[duke.Parser.combineStringArray]: arr input should not be null.";
         StringBuilder tmp = new StringBuilder();
         if (exclusiveEnd > arr.length) {
             exclusiveEnd = arr.length;

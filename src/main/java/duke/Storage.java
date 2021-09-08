@@ -115,6 +115,7 @@ public class Storage {
      * @throws DukeException When saving the file fails.
      */
     public void addToFile(String task) throws DukeException {
+        assert task != null : "[duke.Storage.addToFile]: task parameter should not be null.";
         fileContents.add(task);
         commitChanges();
     }
@@ -136,6 +137,7 @@ public class Storage {
      * @throws DukeException When saving the file fails.
      */
     public void updateLineFile(int id, String task) throws DukeException {
+        assert task != null : "[duke.Storage.updateLineFile]: task parameter should not be null.";
         fileContents.set(id, task);
         commitChanges();
     }
