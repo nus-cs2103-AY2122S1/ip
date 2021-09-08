@@ -25,7 +25,7 @@ public class Storage {
     public Storage() {
     }
 
-    private File getStoreFile() throws IOException {
+    private static File getStoreFile() throws IOException {
         File store = new File(FILEPATH);
         String dirPath = store.getParent();
         File directory = new File(dirPath);
@@ -40,26 +40,15 @@ public class Storage {
      * Loads tasks from file specified by FILEPATH into an ArrayList of Tasks.
      *
      * @return ArrayList of Tasks loaded from the FILEPATH.
-     * @throws DukeException
+     * @throws DukeException If tasks cannot be loaded from storage file or file is not found.
      */
-    public ArrayList<Task> load() throws DukeException {
-        ArrayList<Task> tasks = new ArrayList<>();
+    public static ArrayList<Task> load() throws DukeException {
         try {
             File store = getStoreFile();
-            BufferedReader reader = new BufferedReader(new FileReader(store));
-            String fileLine = reader.readLine();
-            int lineNo = 1;
-            while (fileLine != null) {
-                Task task = parseTask(fileLine, lineNo);
-                tasks.add(task);
-                lineNo++;
-                fileLine = reader.readLine();
-            }
-            reader.close();
+            return getTasksFromStore(store);
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
-        return tasks;
     }
 
     /**
@@ -67,19 +56,38 @@ public class Storage {
      *
      * @param tasks TaskList containing Tasks that should be saved.
      */
-    public void saveTasks(TaskList tasks) {
+    public static void saveTasks(TaskList tasks) {
         try {
             File store = getStoreFile();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(store));
-            ArrayList<String> taskStrings = tasks.getTaskStrings();
-            for (String taskString : taskStrings) {
-                writer.write(taskString);
-                writer.newLine();
-            }
-            writer.close();
+            writeTasksToStore(store, tasks);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+    
+    private static ArrayList<Task> getTasksFromStore(File store) throws DukeException, IOException {
+        ArrayList<Task> tasks = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new FileReader(store));
+        String fileLine = reader.readLine();
+        int lineNo = 1;
+        while (fileLine != null) {
+            Task task = parseTask(fileLine, lineNo);
+            tasks.add(task);
+            lineNo++;
+            fileLine = reader.readLine();
+        }
+        reader.close();
+        return tasks;
+    }
+    
+    private static void writeTasksToStore(File store, TaskList tasks) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(store));
+        ArrayList<String> taskStrings = tasks.getTaskStrings();
+        for (String taskString : taskStrings) {
+            writer.write(taskString);
+            writer.newLine();
+        }
+        writer.close();
     }
 
     private static Task parseTask(String fileLine, int lineNo) throws DukeException {
