@@ -10,6 +10,7 @@ package duke.commands;
 public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected String notes;
 
     /**
      * Constructor for Task.
@@ -19,6 +20,7 @@ public abstract class Task {
     public Task(String description) {
         this.description = description;
         isDone = false;
+        notes = null;
     }
 
     /**
@@ -30,6 +32,7 @@ public abstract class Task {
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
+        notes = null;
     }
 
 
