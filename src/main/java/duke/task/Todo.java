@@ -1,10 +1,22 @@
 package duke.task;
 
-//Level-4 -> A-Inheritance: To-do Task Class
+/**
+ * @author Dr-Octavius
+ *
+ * Class that represents a 'todo' Task.
+ * Child Class of Task Class
+ *
+ * @version 1.0
+ */
 public class Todo extends Task {
 
-    public Todo(String description,TASK_TYPE type) {
-        super(description,type);
+    /**
+     * Class Constructor
+     *
+     * @param description Task description
+     */
+    public Todo(String description) {
+        super(description,TASK_TYPE.T);
     }
 
 }
