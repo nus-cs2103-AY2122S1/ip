@@ -48,7 +48,9 @@ public class Duke {
             String commandWord = arrOfCommandWords[0];
 
             if (arrOfCommandWords.length <= 1) {
-                return parseOneWordCommand(commandWord);
+                Command command = parseOneWordCommand(commandWord);
+                assert command != null: "Command is valid.";
+                return command;
             }
 
             switch (commandWord) {
@@ -96,22 +98,32 @@ public class Duke {
             }
         }
 
-        private void parseDescription(String userInput, String command) {
+        private String parseDescriptionWithDate(String userInput, String command) {
+            String description = "";
+
+            assert command == "/by " || command == "/at "
+                    : "Date indicated by /by or /at ";
+
             try {
                 int indexOfDate = userInput.indexOf(command);
                 int startOfDescription = userInput.indexOf(' ');
+
+                assert startOfDescription != -1 : "Description is not empty.";
+
                 if (indexOfDate < 0) {
                     throw new DukeException("No date specified for task.");
                 }
 
-                String description = userInput.substring(startOfDescription, indexOfDate);
-                listOfWords[1] = description;
                 LocalDate date = manager.parseDateTime(
                         userInput.substring(indexOfDate + command.length())
                 );
                 this.date = date;
+
+                description = userInput.substring(startOfDescription, indexOfDate);
             } catch (DateTimeParseException | DukeException e) {
                 System.out.println(e.getMessage());
+            } finally {
+                return description;
             }
         }
 
@@ -141,14 +153,20 @@ public class Duke {
                 return new ToDoCommand(ui, taskList,
                         description, storage);
             case "deadline":
-                parseDescription(userInput, "/by ");
+                description = parseDescriptionWithDate(userInput, "/by ");
+
+                assert !description.equals("") : "Description is not empty.";
+
                 // listOfWords = {"commandType", "date"}
-                return new DeadlineCommand(ui, taskList, listOfWords[1],
+                return new DeadlineCommand(ui, taskList, description,
                         date, storage);
             case "event":
-                parseDescription(userInput, "/at ");
+                description = parseDescriptionWithDate(userInput, "/at ");
+
+                assert !description.equals("") : "Description is not empty.";
+
                 // listOfWords = {"commandType", "date"}
-                return new EventCommand(ui, taskList, listOfWords[1],
+                return new EventCommand(ui, taskList, description,
                         date, storage);
             default:
                 throw new DukeException("Type of task is invalid.");
@@ -238,6 +256,18 @@ public class Duke {
      */
     protected String getGreeting() {
         return "Hello! I'm Duke\nWhat can I do for you?";
+    }
+
+    protected HashMap<LocalDate, ArrayList<Task>> getDateTasks() {
+        return dateTasks;
+    }
+
+    protected Storage getStorage() {
+        return storage;
+    }
+
+    protected TaskList getTaskList() {
+        return taskList;
     }
 
     /**
