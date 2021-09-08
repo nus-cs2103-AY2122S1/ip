@@ -41,6 +41,7 @@ public class Storage {
             myFile = new File(filePath);
             myFile.createNewFile();
 
+            assert myFile.exists(); // Make sure that the file exists
 
             // Reads from file is there is anything in it
             Scanner fileReader = new Scanner(myFile);

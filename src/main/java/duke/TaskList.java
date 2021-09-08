@@ -98,6 +98,7 @@ public class TaskList {
         if (!hasMatches) {
             return "Nothing matched your search! Try something else.";
         } else {
+            assert !returnStr.isEmpty(); // Return value from tasks should never be empty
             return returnStr;
         }
     }
