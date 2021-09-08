@@ -10,14 +10,30 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Stores the list of tasks into a given text file and loads the
+ * same file whenever the program starts up.
+ */
 public class Storage {
     private String filePath;
     private File file;
 
+    /**
+     * The constructor for a Storage object.
+     *
+     * @param filePath The path to the file for storage.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads and reads the text file and returns an ArrayList of the
+     * entries converted into Tasks.
+     *
+     * @return An ArrayList with Tasks from the text file.
+     * @throws DukeException If an error occurs when loading the file.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();
 
@@ -48,6 +64,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Updates the text file whenever an update is made to the task list.
+     *
+     * @param tasks The given TaskList.
+     * @throws DukeException If there is an writing to the file.
+     */
     public void update(TaskList tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(file);
@@ -65,6 +87,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Parses the input from the text file into arguments
+     * for Tasks to be created.
+     *
+     * @param str String input from the text file.
+     * @return Task from the string input.
+     * @throws DukeException When the file is corrupted and the string cannot be parsed.
+     */
     private static Task parseInput(String str) throws DukeException {
         String[] taskArr = str.split(" \\| ");
         Task newTask;

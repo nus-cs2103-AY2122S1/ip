@@ -11,16 +11,33 @@ import duke.task.Todo;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a Command to add a Task to the TaskList.
+ */
 public class AddCommand extends Command {
 
     private String taskType;
     private String description;
 
+    /**
+     * The constructor for an AddCommand object.
+     *
+     * @param taskType The given type of Task.
+     * @param description The given description of Task.
+     */
     public AddCommand(String taskType, String description) {
         this.taskType = taskType;
         this.description = description;
     }
 
+    /**
+     * Executes the command to add a Task.
+     *
+     * @param tasks The given TaskList to be updated.
+     * @param ui The given Ui to print messages to the user.
+     * @param storage The given Storage to save changes to.
+     * @throws DukeException When the user input does not adhere to the format.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch(taskType) {
