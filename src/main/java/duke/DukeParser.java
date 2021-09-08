@@ -2,9 +2,19 @@ package duke;
 
 import java.time.LocalDate;
 
-import commands.*;
-import tasks.*;
-import exceptions.*;
+import commands.AddDeadlineCommand;
+import commands.AddEventCommand;
+import commands.AddTagsCommand;
+import commands.AddTodoCommand;
+import commands.Command;
+import commands.DeleteTaskCommand;
+import commands.DisplayTasksCommand;
+import commands.ErrorCommand;
+import commands.FindTaskCommand;
+import commands.HelpCommand;
+import commands.MarkDoneCommand;
+import commands.QuitCommand;
+import commands.UnknownCommand;
 
 /**
  * This class handles the parsing of the user input into duke.Duke
@@ -61,6 +71,12 @@ public class DukeParser {
             } else if (command.equals("find")) {
                 String query = parsedInput[1];
                 return new FindTaskCommand(query);
+            } else if (command.equals("tag")) {
+                // command: tag x name1 name2...
+                String[] taskAndTags = parsedInput[1].split(" ", 2);
+                String[] tags = taskAndTags[1].split(" ");
+                Integer index = Integer.parseInt(parsedInput[1].trim());
+                return new AddTagsCommand(index, tags);
             }
             return new UnknownCommand();
         } catch (NumberFormatException e) {

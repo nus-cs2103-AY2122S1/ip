@@ -1,11 +1,18 @@
 package tasks;
 
+import exceptions.EmptyDescException;
+
 public class Event extends Task {
 
     String time;
 
     public Event(String desc, Boolean isDone, String time) {
         super(desc, isDone);
+        this.time = time;
+    }
+
+    public Event(String desc, Boolean isDone, String[] tags, String time) throws EmptyDescException {
+        super(desc, isDone, tags);
         this.time = time;
     }
 
@@ -18,11 +25,13 @@ public class Event extends Task {
     @Override
     public String getSaveText() {
         int isDone = this.isDone ? 1 : 0;
-        return "E | " + isDone + " | " + desc + " | " + time + "\n";
+        return "E | " + isDone + " | " + desc + " | " + time + " | " + this.getTagString() + "\n";
     }
 
     @Override
     public String toString() {
-       return "[E]" + this.completionStatus() + desc + " (at: " + time + ")";
+        String tagString = this.getTagString();
+        return "[E]" + this.completionStatus() + desc + " (at: " + time + ")"
+                + (tagString.equals("-") ? "" : " (Tags: " + tagString + ")");
     }
 }

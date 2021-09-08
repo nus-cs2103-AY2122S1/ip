@@ -54,21 +54,43 @@ public class Storage {
         String taskType = parsedLine[0];
         Boolean isDone = parsedLine[1].equals("1");
         String next = parsedLine[2];
+
         if (taskType.equals("T")) {
-            Todo todo = new Todo(next, isDone);
+            Todo todo;
+            String[] details = next.split(" \\| ", 2);
+            String desc = details[0];
+            String[] tags = details[1].split(", ");
+            System.out.println(tags[0]);
+            if (tags[0].equals("-") && tags.length == 1) {
+                todo = new Todo(desc, isDone);
+            } else {
+                todo = new Todo(desc, isDone, tags);
+            }
             taskList.add(todo);
         } else if (taskType.equals("D")) {
-            String[] details = next.split(" \\| ", 2);
+            Deadline dl;
+            String[] details = next.split(" \\| ", 3);
             String desc = details[0];
             LocalDate dueDate = LocalDate.parse(details[1]);
-            Deadline dl = new Deadline(desc, isDone, dueDate);
+            String[] tags = details[2].split(", ");
+            if (tags[0].equals("-") && tags.length == 1) {
+                dl = new Deadline(desc, isDone, dueDate);
+            } else {
+                dl = new Deadline(desc, isDone, tags, dueDate);
+            }
             taskList.add(dl);
         } else if (taskType.equals("E")) {
-            String[] details = next.split(" \\| ", 2);
+            Event event;
+            String[] details = next.split(" \\| ", 3);
             String desc = details[0];
             String time = details[1];
-            Event e = new Event(desc, isDone, time);
-            taskList.add(e);
+            String[] tags = details[2].split(", ");
+            if (tags[0].equals("-") && tags.length == 1) {
+                event = new Event(desc, isDone, time);
+            } else {
+                event = new Event(desc, isDone, tags, time);
+            }
+            taskList.add(event);
         } else {
             throw new DukeException();
         }
@@ -96,7 +118,7 @@ public class Storage {
             System.out.println("IO Exception occurred");
             return new ArrayList<>();
         } catch (DukeException e) {
-            System.out.println("Invalid command found in file");
+            System.out.println("Invalid task type found in file");
             return new ArrayList<>();
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Invalid file format");

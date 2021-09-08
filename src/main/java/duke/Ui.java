@@ -93,6 +93,10 @@ public class Ui {
         return "Failed to write to file at " + file.toString();
     }
 
+    public String getSuccessfulTagResponse(Task task, int index, String[] tags) {
+        return "The task has been tagged! \n" + (index + 1) + ". " + task.toString() + "\n"
+                + tags;
+    }
     /**
      * Passes the input to the parser and returns the corresponding Command returned by it.
      * @param s The user input string.

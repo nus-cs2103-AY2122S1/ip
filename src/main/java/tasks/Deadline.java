@@ -1,5 +1,7 @@
 package tasks;
 
+import exceptions.EmptyDescException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -12,6 +14,11 @@ public class Deadline extends Task {
         this.dueDate = time;
     }
 
+    public Deadline(String desc, Boolean isDone, String[] tags, LocalDate time) throws EmptyDescException {
+        super(desc, isDone, tags);
+        this.dueDate = time;
+    }
+
     /**
      * Provides the String representation of the task in the format
      * meant for writing to the file.
@@ -21,12 +28,14 @@ public class Deadline extends Task {
     @Override
     public String getSaveText() {
         int isDone = this.isDone ? 1 : 0;
-        return "D | " + isDone + " | " + desc + " | " + dueDate + "\n";
+        return "D | " + isDone + " | " + desc + " | " + dueDate + " | " + this.getTagString() + "\n";
     }
 
     @Override
     public String toString() {
+        String tagString = this.getTagString();
         return "[D]" + this.completionStatus() + desc + " (by: "
-                + dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+                + dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")"
+                + (tagString.equals("-") ? "" : " (Tags: " + tagString + ")");
     }
 }
