@@ -38,15 +38,16 @@ public class Parser implements IParser {
     @Override
     public Pair<Boolean, String> parseLine(String line) {
         List<String> arguments = new ArrayList<>(Arrays.asList(line.split(" ")));
+        String command = arguments.get(0);
         if (line.equals("bye")) {
             return new Pair<>(false, this.processor.processCommand(Command.BYE, arguments));
         } else if (line.equals("list")) {
             return new Pair<>(true, this.processor.processCommand(Command.LIST, arguments));
-        } else if (arguments.get(0).equals("done")) {
+        } else if (command.equals("done")) {
             return new Pair<>(true, this.processor.processCommand(Command.DONE, arguments));
-        } else if (arguments.get(0).equals("delete")) {
+        } else if (command.equals("delete")) {
             return new Pair<>(true, this.processor.processCommand(Command.DELETE, arguments));
-        } else if (arguments.get(0).equals("find")) {
+        } else if (command.equals("find")) {
             return new Pair<>(true, this.processor.processCommand(Command.FIND, arguments));
         } else {
             return new Pair<>(true, this.processor.processCommand(Command.DEFAULT, arguments));
