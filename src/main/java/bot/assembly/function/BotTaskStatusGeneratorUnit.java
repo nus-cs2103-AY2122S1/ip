@@ -54,9 +54,9 @@ public class BotTaskStatusGeneratorUnit {
 
         StringBuilder formattedTask = new StringBuilder();
         formattedTask.append(botStaticMemoryUnit.MESSAGE_TASK_REPORT + "\n\t");
+
         taskTracker.stream()
-                        .forEach(
-                            x -> formattedTask.append((taskTracker.indexOf(x) + 1) + ". " + x.toString() + "\n\t"));
+                .forEach(x -> formattedTask.append((taskTracker.indexOf(x) + 1) + ". " + x.toString() + "\n\t"));
 
         formattedTask.append("(end)");
 
