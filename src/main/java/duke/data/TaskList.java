@@ -24,7 +24,8 @@ public class TaskList {
      * @param task The task to be added.
      */
     public void addTask(Task task) {
-        this.tasks.add(task); // add to task list.
+        assert task != null : "task shouldn't be null";
+        this.tasks.add(task);
     }
 
     /**
@@ -33,7 +34,8 @@ public class TaskList {
      * @param task The task to be removed.
      */
     public void removeFromList(Task task) {
-        this.tasks.remove(task); // remove from task list.
+        assert task != null : "task shouldn't be null";
+        this.tasks.remove(task);
     }
 
     /**
