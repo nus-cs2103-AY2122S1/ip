@@ -19,7 +19,7 @@ import lebron.task.ToDo;
  */
 public class Storage {
     private static final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
-    private final File file;
+    private File file;
     private final String filePath;
 
     /**
@@ -28,13 +28,19 @@ public class Storage {
      * @param filePath the file path
      * @throws IOException
      */
-    public Storage(String filePath) throws IOException {
+    public Storage(String filePath) {
         this.filePath = filePath;
-        this.file = new File(filePath);
-        //if file does not exist
-        if (!file.isFile()) {
-            file.getParentFile().mkdirs();
-            file.createNewFile();
+        try {
+            File file = new File(filePath);
+            //if file does not exist
+            if (!file.isFile()) {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            }
+            this.file = file;
+        } catch (IOException e) {
+            System.out.println("Something went wrong when creating/finding directory: "
+                    + e.getMessage());
         }
     }
 
@@ -45,50 +51,56 @@ public class Storage {
      * @return an ArrayList containing tasks
      * @throws FileNotFoundException
      */
-    public ArrayList<Task> loadFileContents(String filePath) throws FileNotFoundException {
-        ArrayList<Task> taskList = new ArrayList<>();
-        File f = new File(filePath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+    public ArrayList<Task> loadFileContents(String filePath) {
+        try {
+            ArrayList<Task> taskList = new ArrayList<>();
+            File f = new File(filePath); // create a File for the given file path
+            Scanner s = new Scanner(f); // create a Scanner using the File as the source
 
-        while (s.hasNext()) {
-            String line = s.nextLine();
-            String[] splitWords = line.split(" \\| ", 4);
-            String taskName = splitWords[0];
-            String isDone = splitWords[1];
-            Task task;
-            switch (taskName) {
-            case "T":
-                task = new ToDo(splitWords[2]);
-                if (isDone.equals("1")) {
-                    task.markAsDone();
+            while (s.hasNext()) {
+                String line = s.nextLine();
+                String[] splitWords = line.split(" \\| ", 4);
+                String taskName = splitWords[0];
+                String isDone = splitWords[1];
+                Task task;
+                switch (taskName) {
+                case "T":
+                    task = new ToDo(splitWords[2]);
+                    if (isDone.equals("1")) {
+                        task.markAsDone();
+                    }
+                    taskList.add(task);
+                    break;
+                case "D":
+                    String deadline = splitWords[3];
+                    task = new Deadline(splitWords[2], deadline);
+                    if (isDone.equals("1")) {
+                        task.markAsDone();
+                    }
+                    taskList.add(task);
+                    break;
+                case "E":
+                    String at = splitWords[3];
+                    task = new Events(splitWords[2], at);
+                    if (isDone.equals("1")) {
+                        task.markAsDone();
+                    }
+                    taskList.add(task);
+                    break;
+                default:
+                    System.out.println(HORIZONTAL_LINE
+                            + "    :( OOPS! I'm sorry, but I don't know what that means.\n"
+                            + HORIZONTAL_LINE);
+                    break;
                 }
-                taskList.add(task);
-                break;
-            case "D":
-                String deadline = splitWords[3];
-                task = new Deadline(splitWords[2], deadline);
-                if (isDone.equals("1")) {
-                    task.markAsDone();
-                }
-                taskList.add(task);
-                break;
-            case "E":
-                String at = splitWords[3];
-                task = new Events(splitWords[2], at);
-                if (isDone.equals("1")) {
-                    task.markAsDone();
-                }
-                taskList.add(task);
-                break;
-            default:
-                System.out.println(HORIZONTAL_LINE
-                        + "    :( OOPS! I'm sorry, but I don't know what that means.\n"
-                        + HORIZONTAL_LINE);
-                break;
+
             }
-
+            return taskList;
+        } catch (FileNotFoundException e) {
+            System.out.println("Something went wrong when loading file contents "
+                    + e.getMessage());
         }
-        return taskList;
+        return new ArrayList<>();
     }
 
     /**
@@ -97,14 +109,19 @@ public class Storage {
      * @param taskList the list of tasks
      * @throws IOException if the stream is invalid
      */
-    public void saveToFile(ArrayList<Task> taskList) throws IOException {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < taskList.size(); i++) {
-            String textToAppend = taskList.get(i).getStringForFile();
-            builder.append(textToAppend).append("\n");
+    public void saveToFile(ArrayList<Task> taskList) {
+        try {
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < taskList.size(); i++) {
+                String textToAppend = taskList.get(i).getStringForFile();
+                builder.append(textToAppend).append("\n");
+            }
+            FileWriter fw = new FileWriter(filePath);
+            fw.write(builder.toString());
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong when saving file contents "
+                    + e.getMessage());
         }
-        FileWriter fw = new FileWriter(filePath);
-        fw.write(builder.toString());
-        fw.close();
     }
 }
