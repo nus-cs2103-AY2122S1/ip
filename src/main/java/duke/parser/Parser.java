@@ -182,7 +182,7 @@ public class Parser {
 
         boolean isDelete = expense.matches("([0-9]+)\\s+/delete\\s+([0-9]+)");
         boolean isDisplay = expense.matches("([0-9]+)");
-        boolean isAdd = expense.matches("(\\d+)\\s+(.+)\\s+(\\$)(\\d+)");
+        boolean isAdd = expense.matches("([0-9]+)\\s+(\\w+)\\s+(\\$)([0-9]+)");
 
         try {
             int endingIndexOfNumber = expense.indexOf(indexAsString) + indexAsString.length();
