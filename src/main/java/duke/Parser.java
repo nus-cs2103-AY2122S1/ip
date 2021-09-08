@@ -7,12 +7,23 @@ import duke.task.ToDo;
 
 import java.util.Scanner;
 
+/**
+ * Parses input commands.
+ * @author Thomas Hogben
+ */
 public class Parser {
     Scanner sc;
     Storage storage;
     TaskList taskList;
     Ui ui;
 
+    /**
+     * Currently only scans System.in.
+     *
+     * @param taskList The TaskList the Parser should operate on.
+     * @param storage A Storage to use for saving tasks.
+     * @param ui A Ui to send display commands to.
+     */
     public Parser(TaskList taskList, Storage storage, Ui ui) {
         this.taskList = taskList;
         this.storage = storage;
@@ -22,7 +33,13 @@ public class Parser {
 
     /**
      * Parses input continously and executes the commands provided.
-     * Type 'bye' to exit the program.
+     * Commands recognised: "bye" - exits parsing loop
+     *                      "deadline" - creates new Deadline task
+     *                      "delete" - deletes specified task
+     *                      "done" - completes specified task
+     *                      "event" - creates new Event task
+     *                      "list" - lists all tasks in task list
+     *                      "todo" - creates new ToDo task
      */
     public void parse() {
         while (sc.hasNextLine()) {

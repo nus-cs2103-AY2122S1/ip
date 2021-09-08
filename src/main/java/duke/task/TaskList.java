@@ -12,11 +12,22 @@ public class TaskList {
     private ArrayList<Task> tasks;
     private Ui ui;
 
+    /**
+     * Creates and empty TaskList.
+     *
+     * @param ui The Ui for the TaskList to send display commands to.
+     */
     public TaskList(Ui ui) {
         this.ui = ui;
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Creates a non-empty TaskList.
+     *
+     * @param ui The Ui for the TaskList to send display commands to.
+     * @param tasks An ArrayList of Tasks to initialise the TaskList.
+     */
     public TaskList(Ui ui, ArrayList<Task> tasks) {
         this.ui = ui;
         this.tasks = tasks;
@@ -86,6 +97,7 @@ public class TaskList {
 
     /**
      * Parses the task number contained in the input string.
+     *
      * @param input A string of an integer.
      * @return The task number in the string.
      * @throws DukeException If the input String is blank, not an integer,

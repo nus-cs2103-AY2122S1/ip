@@ -16,7 +16,11 @@ public class DukeException extends Exception {
     public static final String NOT_ENOUGH_TASKS = "we is dont have that many tasks yet.";
     public static final String UNSPECIFIED_TASK = "please is specify task please,";
 
-    public DukeException(String s) {
-        super(s);
+    /**
+     * @param msg The message the DukeException should contain.
+     *            The DukeException class has many to pick from.
+     */
+    public DukeException(String msg) {
+        super(msg);
     }
 }

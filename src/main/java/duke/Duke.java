@@ -16,6 +16,7 @@ public class Duke {
     /**
      * Provide a path to the directory for Duke to save in.
      * Duke will create it if it does not exist.
+     *
      * @param savePath
      */
     public Duke(Path savePath) {
