@@ -5,9 +5,11 @@ package duke.task;
  */
 public abstract class Task {
     private boolean isDone = false;
+    private boolean hasNotes = false;
+    private String notes = "";
 
-    public abstract String showDescription();
-    public abstract String showTaskOnly();
+    public abstract String showFullDescription();
+    public abstract String showTaskName();
     public abstract String showType();
     public abstract String showWhen();
 
@@ -20,10 +22,26 @@ public abstract class Task {
         return isDone ? "[X]" : "[ ]";
     }
 
+    public String checkNotes() {
+        return hasNotes ? "[N]" : "[ ]";
+    }
+
+    public void writeNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public String showNotes() {
+        return this.notes;
+    }
+
     /**
      * Sets the done status of task to true
      */
     public void isDone() {
-        isDone = true;
+        this.isDone = true;
+    }
+
+    public void hasNotes() {
+        this.hasNotes = true;
     }
 }

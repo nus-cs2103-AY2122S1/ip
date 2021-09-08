@@ -53,7 +53,7 @@ public class Event extends Task {
      *
      * @return full description of the Event task
      */
-    public String showDescription() {
+    public String showFullDescription() {
         return this.taskDescription + " (at: "
                 + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", "
                 + this.time + ")";
@@ -64,7 +64,7 @@ public class Event extends Task {
      *
      * @return name of the Event task
      */
-    public String showTaskOnly() {
+    public String showTaskName() {
         return this.taskDescription;
     }
 

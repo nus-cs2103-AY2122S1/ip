@@ -53,7 +53,7 @@ public class Storage {
 
         while (listScan.hasNext()) {
             String listInput = listScan.nextLine();
-            String[] listInputArray = listInput.split("\\|", 3);
+            String[] listInputArray = listInput.split("\\|", 6);
 
             for (int i = 0; i < listInputArray.length; i++) {
                 listInputArray[i] = listInputArray[i].trim();
@@ -61,32 +61,45 @@ public class Storage {
 
             switch (listInputArray[0]) {
             case "T":
-                ToDo todo = new ToDo(listInputArray[2]);
+                ToDo todo = new ToDo(listInputArray[3]);
 
                 if (listInputArray[1].equals("1")) {
                     todo.isDone();
                 }
 
+                if (listInputArray[2].equals("N")) {
+                    todo.writeNotes(listInputArray[4]);
+                    todo.hasNotes();
+                }
+
                 loadedList.add(todo);
                 break;
             case "D":
-                String[] deadlineTask = listInputArray[2].split("\\|", 2);
-                String deadlineInput = deadlineTask[0].trim() + "|" + deadlineTask[1].trim();
+                String deadlineInput = listInputArray[3].trim() + "|" + listInputArray[4].trim();
                 Deadline deadline = new Deadline(deadlineInput);
 
                 if (listInputArray[1].equals("1")) {
                     deadline.isDone();
                 }
 
+                if (listInputArray[2].equals("N")) {
+                    deadline.writeNotes(listInputArray[5]);
+                    deadline.hasNotes();
+                }
+
                 loadedList.add(deadline);
                 break;
             case "E":
-                String[] eventTask = listInputArray[2].split("\\|", 2);
-                String eventInput = eventTask[0] + " / " + eventTask[1];
+                String eventInput = listInputArray[3].trim() + " | " + listInputArray[4].trim();
                 Event event = new Event(eventInput);
 
                 if (listInputArray[1].equals("1")) {
                     event.isDone();
+                }
+
+                if (listInputArray[2].equals("N")) {
+                    event.writeNotes(listInputArray[5]);
+                    event.hasNotes();
                 }
 
                 loadedList.add(event);

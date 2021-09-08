@@ -18,7 +18,7 @@ public class ToDo extends Task {
      *
      * @return name of the ToDo task
      */
-    public String showDescription() {
+    public String showFullDescription() {
         return taskDescription;
     }
 
@@ -35,7 +35,7 @@ public class ToDo extends Task {
         return "";
     }
 
-    public String showTaskOnly() {
+    public String showTaskName() {
         return taskDescription;
     }
 

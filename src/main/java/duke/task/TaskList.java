@@ -2,12 +2,16 @@ package duke.task;
 
 import java.util.ArrayList;
 
+import duke.ui.Ui;
+
 /**
  * Represents a TaskList object. The TaskList is able to add tasks, delete tasks, mark tasks as done,
  * as well as print out all the tasks in its list.
  */
 public class TaskList {
     private ArrayList<Task> list;
+
+    private Ui ui = new Ui();
 
     public TaskList(ArrayList<Task> list) {
         this.list = list;
@@ -41,7 +45,7 @@ public class TaskList {
         String taskDoneMessage = "     Nice! I've marked this task as done:\n"
                 + "       " + "[" + list.get(trueIndex).showType() + "]"
                 + list.get(trueIndex).checkDone() + " "
-                + list.get(trueIndex).showDescription() + "\n";
+                + list.get(trueIndex).showFullDescription() + "\n";
 
         return taskDoneMessage;
     }
@@ -56,7 +60,7 @@ public class TaskList {
 
         String listData = "[" + list.get(trueIndex).showType() + "]"
                 + list.get(trueIndex).checkDone() + " "
-                + list.get(trueIndex).showDescription() + "\n";
+                + list.get(trueIndex).showFullDescription() + "\n";
 
         String deletedData = "     Noted. I've removed this task:\n"
                 + "       " + listData
@@ -86,7 +90,8 @@ public class TaskList {
             String taskItem = "\n" + "     " + (i + 1) + "." + "["
                     + list.get(i).showType() + "]"
                     + list.get(i).checkDone() + " "
-                    + list.get(i).showDescription();
+                    + list.get(i).checkNotes() + " "
+                    + list.get(i).showFullDescription();
             fullList += taskItem;
         }
 
@@ -106,12 +111,16 @@ public class TaskList {
             if (task.showType().equals("D") || task.showType().equals("E")) {
                 refreshList += task.showType() + " | "
                         + (task.checkDone().equals("[X]") ? "1" : "0") + " | "
-                        + task.showTaskOnly() + " | "
-                        + task.showWhen() + "\n";
+                        + (task.checkNotes().equals("[N]") ? "N" : "X") + " | "
+                        + task.showTaskName() + " | "
+                        + task.showWhen() + " | "
+                        + (task.checkNotes().equals("[N]") ? task.showNotes() : " ") + "\n";
             } else {
                 refreshList += task.showType() + " | "
                         + (task.checkDone().equals("[X]") ? "1" : "0") + " | "
-                        + task.showDescription() + "\n";
+                        + (task.checkNotes().equals("[N]") ? "N" : "X") + " | "
+                        + task.showFullDescription() + " | "
+                        + (task.checkNotes().equals("[N]") ? task.showNotes() : " ") + "\n";
             }
         }
 
@@ -128,16 +137,38 @@ public class TaskList {
         String searchList = "     " + "Here are the matching tasks in your list:";
 
         for (int k = 0; k < list.size(); k++) {
-            if (list.get(k).showTaskOnly().contains(keyword)) {
+            if (list.get(k).showTaskName().contains(keyword)) {
                 String searchItem = "\n" + "     " + (k + 1) + "." + "["
                         + list.get(k).showType() + "]"
                         + list.get(k).checkDone() + " "
-                        + list.get(k).showDescription();
+                        + list.get(k).checkNotes() + " "
+                        + list.get(k).showFullDescription();
                 searchList += searchItem;
             }
         }
 
         return searchList;
+    }
+
+    public void writeTaskNotes(String taskName, String taskNotes) {
+        for (int l = 0; l < list.size(); l++) {
+            if (list.get(l).showTaskName().contains(taskName)) {
+                list.get(l).writeNotes(taskNotes);
+                list.get(l).hasNotes();
+            }
+        }
+    }
+
+    public String showTaskNotes(String taskName) {
+        String output = "It seems like like this task does not have any notes";
+
+        for (int m = 0; m < list.size(); m++) {
+            if (list.get(m).showTaskName().contains(taskName)) {
+                output = list.get(m).showNotes();
+            }
+        }
+
+        return output;
     }
 
 }
