@@ -51,7 +51,7 @@ public class Parser {
 
         String textToAppend = newEvent.showType() + " | "
                 + ((newEvent.checkDone()).equals("[X]") ? "1" : "0") + " | "
-                + newEvent.showTaskOnly() + " | "
+                + newEvent.showTaskName() + " | "
                 + newEvent.showWhen() + "\n";
 
         try {
@@ -61,7 +61,7 @@ public class Parser {
         }
 
         return this.ui.deadlineOrEventAddedMessage(
-                newEvent.showType(), newEvent.checkDone(), newEvent.showTaskOnly(),
+                newEvent.showType(), newEvent.checkDone(), newEvent.showTaskName(),
                 newEvent.showDate().format(DateTimeFormatter.ofPattern("MMM d yyyy")),
                 newEvent.showTime(), taskList);
     }
@@ -81,7 +81,7 @@ public class Parser {
 
         String textToAppend = newDeadline.showType() + " | "
                 + ((newDeadline.checkDone()).equals("[X]") ? "1" : "0") + " | "
-                + newDeadline.showTaskOnly() + " | "
+                + newDeadline.showTaskName() + " | "
                 + newDeadline.showWhen() + "\n";
 
         try {
@@ -91,7 +91,7 @@ public class Parser {
         }
 
         return this.ui.deadlineOrEventAddedMessage(
-                newDeadline.showType(), newDeadline.checkDone(), newDeadline.showTaskOnly(),
+                newDeadline.showType(), newDeadline.checkDone(), newDeadline.showTaskName(),
                 newDeadline.showDate().format(DateTimeFormatter.ofPattern("MMM d yyyy")),
                 newDeadline.showTime(), taskList);
     }
@@ -110,8 +110,8 @@ public class Parser {
         tList.addTask(newToDo);
 
         String textToAppend = newToDo.showType() + " | "
-                + ((newToDo.checkDone()).equals("[X]") ? "1" : "0") + " | "
-                + newToDo.showDescription() + "\n";
+                + (newToDo.checkDone().equals("[X]") ? "1" : "0") + " | "
+                + newToDo.showFullDescription() + "\n";
         try {
             this.storage.save(textToAppend, true);
         } catch (DukeException de) {
@@ -119,7 +119,9 @@ public class Parser {
         }
 
         return this.ui.todoAddedMessage(
-                newToDo.showType(), newToDo.checkDone(), newToDo.showDescription(), this.taskList);
+                newToDo.showType(), newToDo.checkDone(), newToDo.showFullDescription(), this.taskList);
+
+
     }
 
     /**
@@ -178,6 +180,26 @@ public class Parser {
         }
     }
 
+    public String manageAddTaskNotes(String taskNameAndNotes) throws DukeException {
+        String output = "";
+
+        String[] taskNameAndNotesArray = taskNameAndNotes.split("/", 2);
+        String taskName = taskNameAndNotesArray[0].trim();
+        String taskNotes = taskNameAndNotesArray[1].trim();
+
+        this.taskList.writeTaskNotes(taskName, taskNotes);
+
+        try {
+            this.storage.rewrite(this.taskList);
+        } catch (DukeException e) {
+            System.out.println(e);
+        }
+
+        output = this.ui.notesAddedMessage(taskName, taskNotes);
+
+        return output;
+    }
+
     /**
      * Takes the input received by the parser and deciphers the command
      *
@@ -201,6 +223,12 @@ public class Parser {
             } catch (DukeException e) {
                 System.out.println(e);
             }
+        case "addNote":
+            output = manageAddTaskNotes(instruction[1]);
+            break;
+        case "showNote":
+            output = this.taskList.showTaskNotes(instruction[1]);
+            break;
         case "done":
             // Fallthrough
         case "delete":
