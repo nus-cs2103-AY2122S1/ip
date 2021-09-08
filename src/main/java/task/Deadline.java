@@ -61,19 +61,19 @@ public class Deadline extends Task {
     public void setTask() {
         int startIndex = 0;
         int endIndex = 0;
-        for (int i = 0; i < this.message.length(); i++) {
-            if (this.message.substring(i, i + 1).equals("d")) {
+        for (int i = 0; i < getMessage().length(); i++) {
+            if (getMessage().substring(i, i + 1).equals("d")) {
                 startIndex = i + 8;
                 break;
             }
         }
-        for (int i = 0; i < this.message.length(); i++) {
-            if (this.message.substring(i, i + 1).equals("/")) {
+        for (int i = 0; i < getMessage().length(); i++) {
+            if (getMessage().substring(i, i + 1).equals("/")) {
                 endIndex = i - 1;
                 break;
             }
         }
-        this.task = message.substring(startIndex, endIndex)
+        this.task = getMessage().substring(startIndex, endIndex)
                 + " (by "
                     + this.getDateTime()
                         + ")";
@@ -88,19 +88,19 @@ public class Deadline extends Task {
     public void setTask2() {
         int startIndex = 0;
         int endIndex = 0;
-        for (int i = 0; i < this.message.length(); i++) {
-            if (this.message.substring(i, i + 1).equals("d")) {
+        for (int i = 0; i < getMessage().length(); i++) {
+            if (getMessage().substring(i, i + 1).equals("d")) {
                 startIndex = i + 9;
                 break;
             }
         }
-        for (int i = 0; i < this.message.length(); i++) {
-            if (this.message.substring(i, i + 1).equals("(")) {
+        for (int i = 0; i < getMessage().length(); i++) {
+            if (getMessage().substring(i, i + 1).equals("(")) {
                 endIndex = i - 1;
                 break;
             }
         }
-        this.task = message.substring(startIndex, endIndex)
+        this.task = getMessage().substring(startIndex, endIndex)
                 + " "
                     + this.getDateTime2();
     }
@@ -118,13 +118,13 @@ public class Deadline extends Task {
     @Override
     public void setDateTime() {
         int startIndex = 0;
-        for (int i = 0; i < this.message.length(); i++) {
-            if (this.message.substring(i, i + 1).equals("/")) {
+        for (int i = 0; i < getMessage().length(); i++) {
+            if (getMessage().substring(i, i + 1).equals("/")) {
                 startIndex = i + 4;
                 break;
             }
         }
-        String dateTiming = message.substring(startIndex);
+        String dateTiming = getMessage().substring(startIndex);
         this.dateTime = LocalDate.parse(dateTiming);
     }
 
@@ -135,9 +135,9 @@ public class Deadline extends Task {
      *
      */
     public void setDateTime2() {
-        int length = this.message.length();
+        int length = getMessage().length();
         this.dateTime2 = "("
-                + message.substring(length - 15);
+                + getMessage().substring(length - 15);
     }
 
 

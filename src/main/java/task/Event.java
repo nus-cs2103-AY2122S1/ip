@@ -53,21 +53,20 @@ public class Event extends Task {
     public void setTask() {
         int startIndex = 0;
         int endIndex = 0;
-        for (int i = 0; i < this.message.length(); i++) {
-            if (this.message.substring(i, i + 1).equals("t")) {
+        for (int i = 0; i < getMessage().length(); i++) {
+            if (getMessage().substring(i, i + 1).equals("t")) {
                 startIndex = i + 2;
                 break;
             }
         }
-        for (int i = 0; i < this.message.length(); i++) {
-            if (this.message.substring(i, i + 1).equals("/")) {
+        for (int i = 0; i < getMessage().length(); i++) {
+            if (getMessage().substring(i, i + 1).equals("/")) {
                 endIndex = i - 1;
                 break;
             }
         }
-        this.task = " "
-                + message.substring(startIndex, endIndex)
-                    + this.getDateTime();
+        this.task = " " + getMessage().substring(startIndex, endIndex)
+                + this.getDateTime();
     }
 
     /**
@@ -79,19 +78,19 @@ public class Event extends Task {
     public void setTask2() {
         int startIndex = 0;
         int endIndex = 0;
-        for (int i = 0; i < this.message.length(); i++) {
-            if (this.message.substring(i, i + 1).equals("e")) {
+        for (int i = 0; i < getMessage().length(); i++) {
+            if (getMessage().substring(i, i + 1).equals("e")) {
                 startIndex = i + 6;
                 break;
             }
         }
-        for (int i = 0; i < this.message.length(); i++) {
-            if (this.message.substring(i, i + 1).equals("(")) {
+        for (int i = 0; i < getMessage().length(); i++) {
+            if (getMessage().substring(i, i + 1).equals("(")) {
                 endIndex = i - 1;
                 break;
             }
         }
-        this.task = message.substring(startIndex, endIndex)
+        this.task = getMessage().substring(startIndex, endIndex)
                 + this.getDateTime();
     }
 
@@ -114,14 +113,14 @@ public class Event extends Task {
     @Override
     public void setDateTime() {
         int startIndex = 0;
-        for (int i = 0; i < this.message.length(); i++) {
-            if (this.message.substring(i, i + 1).equals("/")) {
+        for (int i = 0; i < getMessage().length(); i++) {
+            if (getMessage().substring(i, i + 1).equals("/")) {
                 startIndex = i + 4;
                 break;
             }
         }
         this.date_time = " (at "
-                + message.substring(startIndex)
+                + getMessage().substring(startIndex)
                     + ")";
     }
 
@@ -133,13 +132,13 @@ public class Event extends Task {
      */
     public void setDateTime2() {
         int startIndex = 0;
-        for (int i = 0; i < this.message.length(); i++) {
-            if (this.message.substring(i, i + 1).equals("(")) {
+        for (int i = 0; i < getMessage().length(); i++) {
+            if (getMessage().substring(i, i + 1).equals("(")) {
                 startIndex = i - 1;
                 break;
             }
         }
-        this.date_time = message.substring(startIndex);
+        this.date_time = getMessage().substring(startIndex);
     }
 
     @Override
