@@ -30,7 +30,7 @@ public class DukeTest {
         String firstWord = inputArr[0];
         String remainingText = Parser.getRemainingText(firstWord, inputString);
         try {
-            ToDo myTodo = ToDo.newTodo(remainingText);
+            ToDo myTodo = ToDo.createNewTodo(remainingText);
             Ui.displayMessage(taskList.addTask(myTodo));
         } catch (DukeException err) {
             Ui.displayMessage(err.getMessage());
@@ -47,7 +47,7 @@ public class DukeTest {
         String firstWord = inputArr[0];
         String remainingText = Parser.getRemainingText(firstWord, inputString);
         try {
-            Deadline myDeadline = Deadline.newDeadline(remainingText, false);
+            Deadline myDeadline = Deadline.createNewDeadline(remainingText, false);
             Ui.displayMessage(taskList.addTask(myDeadline));
         } catch (DukeException err) {
             Ui.displayMessage(err.getMessage());
@@ -64,7 +64,7 @@ public class DukeTest {
         String firstWord = inputArr[0];
         String remainingText = Parser.getRemainingText(firstWord, inputString);
         try {
-            Event myEvent = Event.newEvent(remainingText, false);
+            Event myEvent = Event.createNewEvent(remainingText, false);
             Ui.displayMessage(taskList.addTask(myEvent));
         } catch (DukeException err) {
             Ui.displayMessage(err.getMessage());
@@ -98,7 +98,7 @@ public class DukeTest {
         TaskList taskList = new TaskList();
         Storage myStorage = new Storage(Paths.get(OUTER_DIR, FILE));
         try {
-            taskList.addTask(ToDo.newTodo("eat lunch"));
+            taskList.addTask(ToDo.createNewTodo("eat lunch"));
             myStorage.updateTaskListToFile(taskList);
 
             Scanner taskScanner = new Scanner(new File(String.join(File.separator, FILE_PATH_ARR)));

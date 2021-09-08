@@ -22,7 +22,7 @@ public class Event extends Task {
     private static final String MISSING_EVENT_MESSAGE = "Some arguments are missing. Use 'event <text> /at <datetime>'";
     private static final String INVALID_SAVE_MESSAGE = "Event save is given in the wrong format";
 
-    private final DateTime eventDatetime;
+    private DateTime eventDatetime;
 
     /**
      * Constructor for the event object.
@@ -47,7 +47,7 @@ public class Event extends Task {
      * @return An Event object
      * @throws DukeException An exception thrown according to the message given
      */
-    public static Event newEvent(String input, boolean isDone) throws DukeException {
+    public static Event createNewEvent(String input, boolean isDone) throws DukeException {
         if (input.split(" ").length < 3) {
             throw new DukeException(MISSING_EVENT_MESSAGE);
         }
@@ -67,15 +67,15 @@ public class Event extends Task {
      * @return A Event object
      * @throws DukeException An exception thrown according to the message given
      */
-    public static Event newEventFromSave(String input) throws DukeException {
+    public static Event createNewEventFromSave(String input) throws DukeException {
         String[] inputArr = input.split("\\|");
         if (inputArr.length != 3) {
             throw new DukeException(INVALID_SAVE_MESSAGE);
         }
-        String isDone = inputArr[0].trim();
+        String doneString = inputArr[0].trim();
         String eventText = inputArr[1].trim();
         String event = inputArr[2].trim();
-        return new Event(eventText, event, isDone.equals("1"));
+        return new Event(eventText, event, doneString.equals("1"));
     }
 
     /**

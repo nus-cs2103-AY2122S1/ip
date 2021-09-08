@@ -19,7 +19,7 @@ public class TaskList {
     private static final String NO_TASK_FOUND_MESSAGE = "Unfortunately no tasks with that name are found";
     private static final String MATCHING_TASKS_MESSAGE = "Here are the matching tasks in your list:\n";
 
-    private final List<Task> taskArr;
+    private List<Task> taskArr;
 
     /**
      * Constructor for TaskList
@@ -38,7 +38,7 @@ public class TaskList {
 
     // Nouns for plural and singular
     private String taskWord() {
-        return this.size() <= 1 ? "task" : "tasks";
+        return this.getSize() <= 1 ? "task" : "tasks";
     }
 
 
@@ -46,7 +46,7 @@ public class TaskList {
      * The size of the array storing the Tasks.
      * @return The size of the array storing the Tasks.
      */
-    public int size() {
+    public int getSize() {
         return taskArr.size();
     }
 
@@ -57,7 +57,7 @@ public class TaskList {
      */
     public String addTask(Task task) {
         this.taskArr.add(task);
-        return String.format(ADD_TASK_MESSAGE, task, this.size(), taskWord());
+        return String.format(ADD_TASK_MESSAGE, task, this.getSize(), taskWord());
     }
 
     /**
@@ -99,15 +99,15 @@ public class TaskList {
         String remainingText = Parser.getRemainingText(symbol, input);
         switch (symbol.charAt(0)) {
         case ToDo.SYMBOL:
-            ToDo myTodo = ToDo.newToDoFromSave(remainingText);
+            ToDo myTodo = ToDo.createNewToDoFromSave(remainingText);
             this.addTask(myTodo);
             break;
         case Deadline.SYMBOL:
-            Deadline myDeadline = Deadline.newDeadlineFromSave(remainingText);
+            Deadline myDeadline = Deadline.createNewDeadlineFromSave(remainingText);
             this.addTask(myDeadline);
             break;
         case Event.SYMBOL:
-            Event myEvent = Event.newEventFromSave(remainingText);
+            Event myEvent = Event.createNewEventFromSave(remainingText);
             this.addTask(myEvent);
             break;
         default:
@@ -146,7 +146,7 @@ public class TaskList {
         int index = taskIndex - 1;
         try {
             Task task = taskArr.remove(index);
-            return String.format(REMOVE_TASK_MESSAGE, task, this.size(), taskWord());
+            return String.format(REMOVE_TASK_MESSAGE, task, this.getSize(), taskWord());
         } catch (IndexOutOfBoundsException err) {
             throw new DukeException(OUT_OF_BOUNDS_TASK);
         }

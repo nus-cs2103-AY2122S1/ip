@@ -1,13 +1,13 @@
 package duke;
 
+import java.nio.file.Path;
+
 import duke.command.Command;
 import duke.task.TaskList;
 import duke.util.DukeException;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
-
-import java.nio.file.Path;
 
 /**
  * The Duke program. The input loop is abstracted here.
@@ -18,9 +18,9 @@ public class Duke {
     public static final String FILE = "taskList.txt";
 
     /** Instance variables */
-    private final Storage myStorage;
+    private Storage myStorage;
     private TaskList taskList;
-    private final Ui ui;
+    private Ui ui;
 
     /**
      * Constructor for Duke.
@@ -55,5 +55,4 @@ public class Duke {
             return err.getMessage();
         }
     }
-
 }

@@ -7,7 +7,6 @@ import duke.util.Ui;
 
 /**
  * Represents the input of the user.
- *
  */
 public abstract class Command {
     private static final String INCOHERENT_INPUT_MESSAGE = "I'm sorry, but I don't know what that means :-(";
@@ -51,11 +50,4 @@ public abstract class Command {
      * @throws DukeException The exception to be thrown.
      */
     public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
-
-    /**
-     * Returns a boolean on whether to exit the inputLoop or not.
-     *
-     * @return true if the inputLoop should be exited
-     */
-    public abstract boolean isExit();
 }

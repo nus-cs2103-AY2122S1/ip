@@ -23,7 +23,7 @@ public class Deadline extends Task {
             + "Use 'deadline <text> /by <datetime>'";
     private static final String INVALID_SAVE_MESSAGE = "Deadline save is given in the wrong format";
 
-    private final DateTime dueDate;
+    private DateTime dueDate;
 
     /**
      * Constructor for the deadline object.
@@ -48,7 +48,7 @@ public class Deadline extends Task {
      * @return A Deadline object.
      * @throws DukeException An exception thrown according to the message given.
      */
-    public static Deadline newDeadline(String input, boolean isDone) throws DukeException {
+    public static Deadline createNewDeadline(String input, boolean isDone) throws DukeException {
         if (input.split(" ").length < 3) {
             throw new DukeException(MISSING_DEADLINE_MESSAGE);
         }
@@ -68,15 +68,15 @@ public class Deadline extends Task {
      * @return A Deadline object
      * @throws DukeException An exception thrown according to the message given
      */
-    public static Deadline newDeadlineFromSave(String input) throws DukeException {
+    public static Deadline createNewDeadlineFromSave(String input) throws DukeException {
         String[] inputArr = input.split("\\|");
         if (inputArr.length != 3) {
             throw new DukeException(INVALID_SAVE_MESSAGE);
         }
-        String isDone = inputArr[0].trim();
+        String doneString = inputArr[0].trim();
         String deadlineText = inputArr[1].trim();
         String deadline = inputArr[2].trim();
-        return new Deadline(deadlineText, deadline, isDone.equals("1"));
+        return new Deadline(deadlineText, deadline, doneString.equals("1"));
     }
 
     /**

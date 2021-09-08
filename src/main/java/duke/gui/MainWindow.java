@@ -1,5 +1,7 @@
 package duke.gui;
 
+import static duke.util.Ui.EXIT_MESSAGE;
+
 import duke.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -8,8 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import static duke.util.Ui.EXIT_MESSAGE;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -43,13 +43,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText().trim();
+        String response = duke.getResponse(input);
 
         if (input.equals("")) {
             return;
         }
-
-        String response = duke.getResponse(input);
-
         // Idea and code from alissayarmantho's issue
         if (response.equals(EXIT_MESSAGE)) {
             Platform.exit();
