@@ -29,12 +29,11 @@ public class Ui {
      * @return Task added to the list.
      */
     public String showAddTask(Task task, TaskList taskList) {
-
         assert task != null;
         assert taskList != null;
 
-        String addTask = String.format("Got it. I've added this task:\n%s\nNow you have %d task(s) in the list.",
-                task.toString(), taskList.totalTask());
+        String addTemplate = "Got it. I've added this task:\n%s\nNow you have %d task(s) in the list.";
+        String addTask = String.format(addTemplate, task.toString(), taskList.totalTask());
         return addTask;
     }
 
@@ -49,8 +48,8 @@ public class Ui {
         assert task != null;
         assert taskList != null;
 
-        String deleteTask = String.format("Noted. I've removed this task:\n%s\nNow you have %d task(s) in the list.",
-                task.toString(), taskList.totalTask());
+        String deleteTemplate = "Noted. I've removed this task:\n%s\nNow you have %d task(s) in the list.";
+        String deleteTask = String.format(deleteTemplate, task.toString(), taskList.totalTask());
         return deleteTask;
     }
 
@@ -63,7 +62,8 @@ public class Ui {
     public String showDone(Task task) {
         assert task != null;
 
-        String done = String.format("Nice! I've marked this task as done:\n%s", task.toString());
+        String doneTemplate = "Nice! I've marked this task as done:\n%s";
+        String done = String.format(doneTemplate, task.toString());
         return done;
     }
 
