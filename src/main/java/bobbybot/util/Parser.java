@@ -3,16 +3,13 @@ package bobbybot.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import bobbybot.commands.AddCommand;
-import bobbybot.commands.Command;
-import bobbybot.commands.DeleteCommand;
-import bobbybot.commands.DoneCommand;
-import bobbybot.commands.ExitCommand;
-import bobbybot.commands.FindCommand;
-import bobbybot.commands.IncorrectCommand;
-import bobbybot.commands.ListCommand;
+import bobbybot.commands.*;
 import bobbybot.enums.BotCommand;
 import bobbybot.exceptions.InvalidArgumentException;
+import bobbybot.person.Address;
+import bobbybot.person.Email;
+import bobbybot.person.Name;
+import bobbybot.person.Phone;
 
 /**
  * Class helps to handle parsing of user commands
@@ -61,6 +58,10 @@ public class Parser {
                 return new FindCommand(arguments);
             case DELETE:
                 return prepareDelete(arguments);
+            case CONTACT:
+                return prepareAddContact(arguments);
+            case LIST_CONTACT:
+                return new ListContactsCommand();
             default:
                 System.out.println("Invalid command");
                 return new IncorrectCommand();
@@ -88,6 +89,17 @@ public class Parser {
             System.out.println("Failed to add event/deadline");
             return new IncorrectCommand();
         }
+    }
+
+    private Command prepareAddContact(String args) throws InvalidArgumentException {
+        // Check arg string format to prevent errors
+        //todo add regex check for contact list and user input
+        // stub for now
+        Name name = new Name("Darren");
+        Email email = new Email("mokkwd@gmail.com");
+        Phone phone = new Phone("83821019");
+        Address address = new Address("32 Phoenix Road");
+        return new AddContactCommand(name, email, phone, address);
     }
 
     private Command prepareDone(String args) {

@@ -1,5 +1,6 @@
 package bobbybot.commands;
 
+import bobbybot.util.PersonList;
 import bobbybot.util.Storage;
 import bobbybot.util.TaskList;
 import bobbybot.util.Ui;
@@ -16,13 +17,13 @@ public class FindCommand extends Command {
 
     /**
      * Executes command
-     *
-     * @param tasks   task list
+     *  @param tasks   task list
      * @param ui      ui
      * @param storage storage
+     * @param contacts
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage, PersonList contacts) {
         StringBuilder response = new StringBuilder();
         response.append("Here are the tasks you're looking for sir!");
         for (int i = 0; i < tasks.getTasks().size(); i++) {

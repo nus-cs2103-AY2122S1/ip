@@ -46,7 +46,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        System.out.println(input);
         String response = duke.getResponse(input);
         // @@author CheyanneSim-reused
         if (response.contains("Bye. Hope to see you again soon!")) {
@@ -56,7 +55,6 @@ public class MainWindow extends AnchorPane {
             });
             pause.play();
         }
-
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

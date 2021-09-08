@@ -1,8 +1,11 @@
 package bobbybot.util;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 import bobbybot.commands.Command;
+import bobbybot.person.Person;
 
 /**
  * Represents the chatbot
@@ -12,7 +15,7 @@ public class BobbyBot {
     private final Storage storage;
     private final TaskList tasks;
     private final Ui ui;
-
+    private final PersonList contacts;
     /**
      * Constructor to initialise classes
      */
@@ -21,6 +24,7 @@ public class BobbyBot {
         ui.showWelcome();
         storage = new Storage(DBPATH);
         tasks = new TaskList(storage.load());
+        contacts = new PersonList(new ArrayList<Person>());
     }
 
     /**
@@ -35,7 +39,7 @@ public class BobbyBot {
             ui.showLine();
             Command c = parser.parseCommand(userInput);
             assert c != null : "Command cannot be null";
-            c.execute(tasks, ui, storage);
+            c.execute(tasks, ui, storage, contacts);
             String response = c.getResponse();
             System.out.println(response);
             isExit = c.isExit();

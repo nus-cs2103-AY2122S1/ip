@@ -2,12 +2,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
 import bobbybot.commands.FindCommand;
 import bobbybot.tasks.ToDo;
+import bobbybot.util.PersonList;
 import bobbybot.util.Storage;
 import bobbybot.util.TaskList;
 import bobbybot.util.Ui;
@@ -18,6 +20,7 @@ public class FindCommandTest {
     private final TaskList tasks = new TaskList(new ArrayList<>());
     private final Ui ui = new Ui();
     private final Storage storage = new Storage(STORAGE_PATH);
+    private final PersonList contacts = new PersonList(Collections.emptyList());
 
     @AfterAll
     public static void cleanUp() {
@@ -34,7 +37,7 @@ public class FindCommandTest {
         tasks.addTask(new ToDo("not related"));
 
         FindCommand c = new FindCommand(keyword);
-        c.execute(tasks, ui, storage);
+        c.execute(tasks, ui, storage, contacts);
         String response = c.getResponse();
         String expected = "Here are the tasks you're looking for sir!\n"
                 + "1.[T][ ] test\n"

@@ -11,6 +11,7 @@ import bobbybot.tasks.Deadline;
 import bobbybot.tasks.Event;
 import bobbybot.tasks.Task;
 import bobbybot.tasks.ToDo;
+import bobbybot.util.PersonList;
 import bobbybot.util.Storage;
 import bobbybot.util.TaskList;
 import bobbybot.util.Ui;
@@ -58,13 +59,13 @@ public class AddCommand extends Command {
 
     /**
      * Executes Add command
-     *
-     * @param tasks task list
+     *  @param tasks task list
      * @param ui ui
      * @param storage storage
+     * @param contacts
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage, PersonList contacts) {
         tasks.addTask(toAdd);
         try {
             storage.save(tasks);

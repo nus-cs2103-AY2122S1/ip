@@ -5,7 +5,7 @@ import bobbybot.util.Storage;
 import bobbybot.util.TaskList;
 import bobbybot.util.Ui;
 
-public class ListCommand extends Command {
+public class ListContactsCommand extends Command {
 
     /**
      * Executes command
@@ -17,11 +17,11 @@ public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage, PersonList contacts) {
         StringBuilder response = new StringBuilder();
-        response.append("Here are the tasks in your list:");
+        response.append("Here are your contacts:");
 
-        for (int i = 0; i < tasks.getTasks().size(); i++) {
+        for (int i = 0; i < contacts.size(); i++) {
             response.append("\n").append(i + 1).append(". ");
-            response.append(tasks.getTask(i));
+            response.append(contacts.getContact(i));
         }
         this.response = response.toString();
     }

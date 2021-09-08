@@ -2,13 +2,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 
-import bobbybot.commands.ListCommand;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
-import bobbybot.commands.FindCommand;
+import bobbybot.commands.ListCommand;
 import bobbybot.tasks.ToDo;
+import bobbybot.util.PersonList;
 import bobbybot.util.Storage;
 import bobbybot.util.TaskList;
 import bobbybot.util.Ui;
@@ -19,7 +20,7 @@ public class ListCommandTest {
     private final TaskList tasks = new TaskList(new ArrayList<>());
     private final Ui ui = new Ui();
     private final Storage storage = new Storage(STORAGE_PATH);
-
+    private final PersonList contacts = new PersonList(Collections.emptyList());
     @AfterAll
     public static void cleanUp() {
         File file = new File(STORAGE_PATH);
@@ -34,7 +35,7 @@ public class ListCommandTest {
         tasks.addTask(new ToDo("not related"));
 
         ListCommand c = new ListCommand();
-        c.execute(tasks, ui, storage);
+        c.execute(tasks, ui, storage, contacts);
         String response = c.getResponse();
         String expected = "Here are the tasks in your list:\n"
                 + "1. [T][ ] test\n"
@@ -47,7 +48,7 @@ public class ListCommandTest {
     @Test
     public void listCommand_emptyList_success() {
         ListCommand c = new ListCommand();
-        c.execute(tasks, ui, storage);
+        c.execute(tasks, ui, storage, contacts);
         String response = c.getResponse();
         String expected = "Here are the tasks in your list:";
         assertEquals(expected, response);

@@ -1,5 +1,6 @@
 package bobbybot.commands;
 
+import bobbybot.util.PersonList;
 import bobbybot.util.Storage;
 import bobbybot.util.TaskList;
 import bobbybot.util.Ui;
@@ -15,8 +16,9 @@ public abstract class Command {
      * @param tasks task list
      * @param ui ui
      * @param storage storage
+     * @param contacts
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage, PersonList contacts);
 
     public String getResponse() {
         assert response != null : "Response cannot be null";

@@ -2,6 +2,7 @@ package bobbybot.commands;
 
 import bobbybot.exceptions.BobbyException;
 import bobbybot.tasks.Task;
+import bobbybot.util.PersonList;
 import bobbybot.util.Storage;
 import bobbybot.util.TaskList;
 import bobbybot.util.Ui;
@@ -15,12 +16,12 @@ public class DeleteCommand extends Command {
     }
     /**
      * Executes command
-     *
-     * @param tasks   task list
+     *  @param tasks   task list
      * @param ui      ui
      * @param storage storage
+     * @param contacts
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage, PersonList contacts) {
         if (taskNumToDelete < 1 || taskNumToDelete > tasks.getTasks().size()) {
             this.response = "Invalid delete command! Task number: " + taskNumToDelete + " does not exist\n"
                     + "Use [list] to see available tasks!";

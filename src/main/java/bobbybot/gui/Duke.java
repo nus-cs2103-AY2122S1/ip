@@ -1,10 +1,15 @@
 package bobbybot.gui;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import bobbybot.commands.Command;
 import bobbybot.util.Parser;
+import bobbybot.util.PersonList;
 import bobbybot.util.Storage;
 import bobbybot.util.TaskList;
 import bobbybot.util.Ui;
+
 
 /**
  * This class wraps the cli BobbyBot
@@ -15,6 +20,7 @@ public class Duke {
     private final Storage storage;
     private final Ui ui;
     private final TaskList tasks;
+    private final PersonList contacts;
     /**
      * Initialise Duke object with filepath of storage
      * @param filePath storage .txt file path
@@ -24,6 +30,8 @@ public class Duke {
         ui = new Ui();
         tasks = new TaskList(storage.load());
         parser = new Parser();
+        contacts = new PersonList(new ArrayList<>());
+        //todo add storage feature for contacts
     }
 
     /**
@@ -32,7 +40,7 @@ public class Duke {
     String getResponse(String input) {
         Command c = parser.parseCommand(input);
         assert c != null : "Command cannot be null";
-        c.execute(tasks, ui , storage);
+        c.execute(tasks, ui , storage, contacts);
         return c.getResponse();
     }
 }

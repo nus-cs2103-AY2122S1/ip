@@ -2,6 +2,7 @@ package bobbybot.commands;
 
 import bobbybot.exceptions.BobbyException;
 import bobbybot.tasks.Task;
+import bobbybot.util.PersonList;
 import bobbybot.util.Storage;
 import bobbybot.util.TaskList;
 import bobbybot.util.Ui;
@@ -16,13 +17,13 @@ public class DoneCommand extends Command {
     }
     /**
      * Executes command
-     *
-     * @param tasks   task list
+     *  @param tasks   task list
      * @param ui      ui
      * @param storage storage
+     * @param contacts
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage, PersonList contacts) {
         try {
             tasks.markAsDone(taskNumToMarkAsDone);
             Task taskCompleted = tasks.getTask(taskNumToMarkAsDone - 1);
