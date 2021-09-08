@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -22,6 +23,7 @@ public class TaskList {
 
     public void add(Task newTask) {
         list.add(newTask);
+        Collections.sort(list);
     }
 
     public Task delete(int index) {

@@ -3,7 +3,7 @@ package duke;
 /**
  * Encapsulates a general task.
  */
-abstract class Task {
+abstract class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
 
@@ -33,6 +33,11 @@ abstract class Task {
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + description;
+    }
+
+    @Override
+    public int compareTo(Task otherTask) {
+        return this.description.compareTo(otherTask.description);
     }
 
     /**
