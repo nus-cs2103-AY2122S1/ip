@@ -51,7 +51,7 @@ public class Storage {
         try {
             File file = new File(filePath);
             PrintWriter writer = new PrintWriter(file);
-            tasks.getTasks().forEach(task -> writer.write(task.format() + System.lineSeparator()));
+            writer.write(tasks.getAsSaveFormat());
             writer.close();
         } catch (FileNotFoundException e) {
             throw new DukeException("The save file does not denote an existing, writable regular file");

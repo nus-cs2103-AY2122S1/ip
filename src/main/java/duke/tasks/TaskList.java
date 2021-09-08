@@ -78,6 +78,20 @@ public class TaskList {
     }
 
     /**
+     * Remove from the list all the tasks whose index is between fromIndex, inclusive,
+     * and toIndex, exclusive.
+     *
+     * @param fromIndex Index of the first task to be removed.
+     * @param toIndex Index after the last task to be removed.
+     * @return A TaskList representing the list of tasks deleted.
+     */
+    public TaskList deleteRange(int fromIndex, int toIndex) {
+        TaskList deletedTasks = new TaskList(new ArrayList<>(tasks.subList(fromIndex, toIndex)));
+        tasks.subList(fromIndex, toIndex).clear();
+        return deletedTasks;
+    }
+
+    /**
      * Takes in a keyword and returns a TaskList of tasks with the given
      * keyword in the description of the task. The matching is case-insensitive.
      *
@@ -90,6 +104,19 @@ public class TaskList {
                 .filter(task -> task.getDescription().toLowerCase().contains(keyword.toLowerCase()))
                 .collect(Collectors.toList());
         return new TaskList(filteredTasks);
+    }
+
+    public String getAsSaveFormat() {
+        StringBuilder result = new StringBuilder();
+        int len = tasks.size();
+        if (len == 0) {
+            return result.toString();
+        }
+
+        for (Task task : tasks) {
+            result.append(task.format()).append(System.lineSeparator());
+        }
+        return result.toString();
     }
 
     @Override

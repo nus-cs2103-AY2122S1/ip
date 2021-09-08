@@ -1,5 +1,7 @@
 package duke.commands;
 
+import java.util.Set;
+
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Task;
@@ -11,16 +13,20 @@ import duke.tasks.TaskList;
  * @author ruiquan
  */
 public class DoneCommand extends Command {
-    private final int index;
+    private final Set<Integer> indices;
 
     /**
-     * Constructs a DoneCommand given an index.
+     * Constructs a DoneCommand given a collection of indices.
      *
-     * @param index The index of the Task to be marked as done.
+     * @param indices The indices of the tasks to be marked as done.
      */
-    public DoneCommand(int index) {
+    public DoneCommand(Set<Integer> indices) {
         super(false);
-        this.index = index;
+        this.indices = indices;
+    }
+
+    private boolean noSuchTaskExist(int index, TaskList tasks) {
+        return index <= 0 || index > tasks.size();
     }
 
     /**
@@ -34,17 +40,24 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
-        if (index <= 0 || index > tasks.size()) {
-            throw new DukeException("Looks like there is no such task to be marked as done");
+        TaskList doneTasks = new TaskList();
+        for (int index: indices) {
+            if (noSuchTaskExist(index, tasks)) {
+                continue;
+            }
+            Task doneTask = tasks.markTaskAsDone(index);
+            assert doneTask.getStatusIcon().equals("X") : "The status of the task should be done";
+            doneTasks.addTask(doneTask);
         }
 
-        assert index <= tasks.size() && index > 0
-                : "index should neither be negative nor bigger than the size of task list";
-        Task task = tasks.markTaskAsDone(index);
-        assert task.getStatusIcon().equals("X") : "The status of the task should be done";
+        if (doneTasks.size() <= 0) {
+            throw new DukeException("Looks like none of the the indices given are valid");
+        }
         storage.save(tasks);
-
-        String message = String.format("Nice! I've marked this task as done:\n  %s", task);
+        String message = String.format("Nice! I've marked %s %s as done:\n%s\n",
+                doneTasks.size() == 1 ? "this" : "these",
+                doneTasks.size() == 1 ? "task" : "tasks",
+                doneTasks);
         return message;
     }
 }
