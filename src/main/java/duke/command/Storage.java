@@ -139,7 +139,7 @@ public class Storage {
         tasks.add(currentTask);
 
         if (lineToAdd.charAt(4) == 'X') {
-            currentTask.markAsDone()
+            currentTask.markAsDone();
         }
     }
 
