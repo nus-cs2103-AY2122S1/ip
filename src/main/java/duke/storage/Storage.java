@@ -96,6 +96,7 @@ public class Storage {
         boolean isDone = tokens[isDonePos].equals("1");
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         LocalDateTime timestamp = null;
+        assert tokens[0].equals("T") || tokens[0].equals("D") || tokens[0].equals("E");
         String notes;
         switch (tokens[taskPos]) {
         case "T":
