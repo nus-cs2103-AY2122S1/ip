@@ -14,22 +14,13 @@ import java.util.Scanner;
 public class Ui {
 
     private boolean isExit;
+    private String response;
 
     /**
      * Constructs a Ui Object.
      */
     public Ui() {
         isExit = false;
-    }
-
-    /**
-     * Creates a scanner to read the input command.
-     *
-     * @return One command line.
-     */
-    public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
     }
 
     /**
@@ -69,11 +60,13 @@ public class Ui {
      *
      * Changes isExit to true.
      */
-    public void sendGoodbye() {
+    public String sendGoodbye() {
+        String exitMessage = "Bye. Hope to see you again soon!";
         showDivider();
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(exitMessage);
         showDivider();
         this.isExit = true;
+        return exitMessage;
     }
 
     /**
@@ -82,10 +75,15 @@ public class Ui {
      * @param task Added Task.
      */
     public void sendAddTask(Task task) {
+        String acknowledgement = "Got it. I've added this task:";
+        String taskAdded = task.toString();
+
         showDivider();
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task.toString());
+        System.out.println(acknowledgement);
+        System.out.println(taskAdded);
         showDivider();
+
+        response = acknowledgement + taskAdded;
     }
 
     /**
@@ -154,5 +152,9 @@ public class Ui {
      */
     public void showError(String s) {
         System.err.println(s);
+    }
+
+    public String getResponse() {
+        return response;
     }
 }
