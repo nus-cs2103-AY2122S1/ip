@@ -11,6 +11,7 @@ import duke.command.FindCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.TaskCommand;
+import duke.command.UpdateCommand;
 import duke.exceptions.DukeSyntaxErrorException;
 import duke.task.Task;
 
@@ -43,9 +44,9 @@ public class Parser {
      * @return appropriate command to be shown to users
      */
     public static Command parse(String command, TaskList taskList) {
-        String[] components = command.split(" ", 2);
-        String type = components[0].toLowerCase().trim();
-        String description = (components.length < 2) ? "" : components[1].trim();
+        String[] commandComponents = command.split(" ", 2);
+        String type = commandComponents[0].toLowerCase().trim();
+        String description = (commandComponents.length < 2) ? "" : commandComponents[1].trim();
         switch (type) {
         case "help":
             return new HelpCommand();
@@ -65,6 +66,8 @@ public class Parser {
             return new FindCommand(description, taskList);
         case "date-of":
             return new DateOfCommand(description, taskList);
+        case "update":
+            return new UpdateCommand(description, taskList);
         default:
             throw new DukeSyntaxErrorException(type);
         }
