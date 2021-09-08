@@ -26,8 +26,8 @@ public class EventCommand extends Command {
     }
 
     private void checkInput(String input) throws DukeException {
-        int inputLen = input.length();
-        if (inputLen < 2) {
+        String[] splitInput = input.split(" ");
+        if (splitInput.length < 2) {
             throw new DukeException("OOPS!! The description of an event"
                     + " cannot be empty :(");
         } else if (!input.contains("/at")) {

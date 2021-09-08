@@ -26,8 +26,8 @@ public class DeadlineCommand extends Command {
     }
 
     private void checkInput(String input) throws DukeException {
-        int inputLen = input.length();
-        if (inputLen < 2) {
+        String[] splitInput = input.split(" ");
+        if (splitInput.length < 2) {
             throw new DukeException("OOPS!! The description of a deadline"
                     + " cannot be empty :(");
         } else if (!input.contains("/by")) {

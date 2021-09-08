@@ -20,11 +20,11 @@ public class FindCommand extends Command {
     }
 
     private String getKeyword(String input) throws DukeException {
-        if (input.length() < 2) {
+        String[] splitInput = input.split(" ");
+        if (splitInput.length < 2) {
             throw new DukeException("Please specify a search keyword");
         } else {
-            assert input.length() >= 2 : "Improper input length for find command";
-            String[] splitInput = input.split(" ");
+            assert splitInput.length >= 2 : "Improper input length for find command";
             return splitInput[1].strip();
         }
     }
