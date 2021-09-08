@@ -30,7 +30,7 @@ public class ByeCommand implements Command {
      * @return A boolean true as this is an exit command.
      */
     @Override
-    public boolean isExit() {
+    public boolean isRunning() {
         return true;
     }
 

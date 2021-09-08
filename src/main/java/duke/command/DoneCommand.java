@@ -49,7 +49,7 @@ public class DoneCommand implements Command {
      * @return A boolean false As this is not an exit command.
      */
     @Override
-    public boolean isExit() {
+    public boolean isRunning() {
         return false;
     }
 
