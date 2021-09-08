@@ -21,11 +21,11 @@ import duke.ui.Ui;
  */
 public class Storage {
     /** Path of the current folder as a string */
-    public static final String DIRECTORY_PATH = System.getProperty("user.dir");
+    private static final String DIRECTORY_PATH = System.getProperty("user.dir");
     /** Path of file containing data saved */
     private static File data;
     /** A temporary list of tasks */
-    private TaskList tasks;
+    private final TaskList tasks;
 
     /**
      * Constructor of the `Storage` class.
