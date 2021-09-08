@@ -43,7 +43,7 @@ test {
 }
 
 application {
-    mainClassName = "bobbybot.ui.Launcher"
+    mainClassName = "bobbybot.gui.Launcher"
 }
 
 shadowJar {

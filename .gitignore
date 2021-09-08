@@ -14,7 +14,7 @@ src/main/resources/docs/
 bin/
 
 # database files
-*database.txt
+/data/
 
 # .class files
 *.class
