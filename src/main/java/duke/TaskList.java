@@ -25,21 +25,22 @@ public class TaskList {
      * Constructor for TaskList.
      * Constructs the list based on the given array of strings.
      *
-     * @param tasklist An array of strings of tasks.
+     * @param taskList An array of strings of tasks.
      */
-    public TaskList(ArrayList<String> tasklist) {
+    public TaskList(ArrayList<String> taskList) {
         this();
-        for (String s : tasklist) {
+
+        for (String s : taskList) {
             String[] splitData = s.split(",");
             switch(splitData[0]) {
             case("T"):
-                addTask(splitData[2], Boolean.parseBoolean(splitData[1]));
+                addToDo(splitData[2], Boolean.parseBoolean(splitData[1]));
                 break;
             case("D"):
-                addTask(splitData[2], LocalDate.parse(splitData[3]),"deadline", Boolean.parseBoolean(splitData[1]));
+                addDeadline(splitData[2], LocalDate.parse(splitData[3]), Boolean.parseBoolean(splitData[1]));
                 break;
             case("E"):
-                addTask(splitData[2], LocalDate.parse(splitData[3]), "event", Boolean.parseBoolean(splitData[1]));
+                addEvent(splitData[2], LocalDate.parse(splitData[3]), Boolean.parseBoolean(splitData[1]));
                 break;
             default:
                 break;
@@ -57,12 +58,12 @@ public class TaskList {
     }
 
     /**
-     * Adds a task the list and saves to the file.
+     * Adds a ToDo task to the list and saves to the file.
      *
      * @param description The description of the task.
      * @return The task added.
      */
-    public Task addTask(String description) {
+    public Task addToDo(String description) {
         assert !description.equals("") : "Description cannot be blank";
         Task task = new ToDo(description);
         this.list.add(task);
@@ -70,57 +71,67 @@ public class TaskList {
     }
 
     /**
-     * Adds a task the list without saving to file.
+     * Adds a ToDo task to the list without saving to file.
      *
      * @param description The description of the task.
      * @param isDone Indicates if the task is done.
      */
-    public void addTask(String description, boolean isDone) {
+    public void addToDo(String description, boolean isDone) {
         assert !description.equals("") : "Description cannot be blank";
         Task task = new ToDo(description, isDone);
         this.list.add(task);
     }
 
     /**
-     * Adds a task the list and saves to the file.
-     * Task added have a date/time attached.
+     * Adds a Deadline task to the list and saves to the file.
      *
      * @param description The description of the task.
-     * @param date The date/time attached to the task.
-     * @param type Indicates if the task is a Deadline or Event.
-     * @return The task added.
+     * @param date The deadline of the task.
+     * @return The Deadline task added.
      */
-    public Task addTask(String description, LocalDate date, String type) {
+
+    public Task addDeadline(String description, LocalDate date) {
         assert !description.equals("") : "Description cannot be blank";
-        assert description.equals("deadline") || description.equals("event") : "Wrong type";
-        Task task;
-        if (type.equals("deadline")) {
-            task = new Deadline(description, date);
-        } else {
-            task = new Event(description, date);
-        }
+        Task task = new Deadline(description, date);
         this.list.add(task);
         return task;
     }
 
     /**
-     * Adds a task the list without saving to file.
-     * Task added have a date/time attached.
+     * Adds a Deadline task to the list without saving to the file.
      *
      * @param description The description of the task.
-     * @param dateTime The date associated with the task.
-     * @param type The type of task.
+     * @param date The deadline of the task.
      * @param isDone Indicates if the task is done.
      */
-    public void addTask(String description, LocalDate dateTime, String type, boolean isDone) {
+    public void addDeadline(String description, LocalDate date, boolean isDone) {
         assert !description.equals("") : "Description cannot be blank";
-        assert description.equals("deadline") || description.equals("event") : "Wrong type";
-        Task task;
-        if (type.equals("deadline")) {
-            task = new Deadline(description, dateTime, isDone);
-        } else {
-            task = new Event(description, dateTime, isDone);
-        }
+        Task task = new Deadline(description, date, isDone);
+        this.list.add(task);
+    }
+
+    /**
+     * Adds an Event task to the list and saves to the file.
+     *
+     * @param description The description of the task.
+     * @param date The date of the event.
+     * @return The Event task added.
+     */
+    public Task addEvent(String description, LocalDate date) {
+        Task task = new Event(description, date);
+        this.list.add(task);
+        return task;
+    }
+
+    /**
+     * Adds an Event task to the list without saving to the file.
+     *
+     * @param description The description of the task.
+     * @param date The date of the event.
+     * @param isDone Indicates if the task is done.
+     */
+    public void addEvent(String description, LocalDate date, boolean isDone) {
+        Task task = new Event(description, date, isDone);
         this.list.add(task);
     }
 
@@ -130,14 +141,14 @@ public class TaskList {
      * @param taskNumber The index(plus 1) of the task to be marked as done.
      * @return The string representation of the task after it is marked as done.
      */
-    public String changeTaskStatus(int taskNumber) throws DukeException {
+    public String markAsDone(int taskNumber) throws DukeException {
         if (taskNumber <= 0 || taskNumber > this.list.size()) {
             throw new DukeException("Task does not exist. Use list to check all tasks available.");
-        } else {
-            Task task = list.get(taskNumber - 1);
-            task.setDone(true);
-            return task.toString() + "\nNumber of tasks remaining: " + list.size();
         }
+
+        Task task = list.get(taskNumber - 1);
+        task.setDone(true);
+        return task.toString() + "\nNumber of tasks remaining: " + list.size();
     }
 
     /**
@@ -150,22 +161,31 @@ public class TaskList {
     public String deleteTask(int taskNumber) throws DukeException {
         if (taskNumber <= 0 || taskNumber > this.list.size()) {
             throw new DukeException("Task does not exist. Use list to check all tasks available.");
-        } else {
-            Task task = list.get(taskNumber - 1);
-            list.remove(taskNumber - 1);
-            return task.toString() + "\nNumber of tasks remaining: " + list.size();
         }
+
+        Task task = list.get(taskNumber - 1);
+        list.remove(taskNumber - 1);
+        return task.toString() + "\nNumber of tasks remaining: " + list.size();
     }
 
+    /**
+     * Takes in a keyword and searches for all tasks that contains the keyword in
+     * the description. Returns the results in an ArrayList of Strings.
+     *
+     * @param keyword The keyword to search for.
+     * @return An Arraylist of Strings containing all matching tasks.
+     */
     public ArrayList<String> findTask(String keyword) {
         assert !keyword.equals("") : "Keyword cannot be blank";
         ArrayList<String> resultArray = new ArrayList<>();
         keyword = keyword.toLowerCase();
+
         for (Task t : list) {
             if (t.getDescription().toLowerCase().contains(keyword)) {
                 resultArray.add(t.toString());
             }
         }
+
         return resultArray;
     }
 
@@ -176,9 +196,11 @@ public class TaskList {
      */
     public ArrayList<String> getTaskList() {
         ArrayList<String> tasks = new ArrayList<>();
+
         for (Task t : list) {
             tasks.add(t.toString());
         }
+
         return tasks;
     }
 }
