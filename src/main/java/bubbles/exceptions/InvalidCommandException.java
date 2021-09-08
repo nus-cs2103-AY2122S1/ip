@@ -20,6 +20,6 @@ public class InvalidCommandException extends Exception {
      */
     @Override
     public String toString() {
-        return "☹ OOPS!!! I'm sorry, but I do not know what this means. ☹\n";
+        return "☹ OOPS!!! I'm sorry, but I do not know what this means. ☹";
     }
 }
