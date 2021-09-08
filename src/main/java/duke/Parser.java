@@ -35,27 +35,21 @@ public class Parser {
         }
         switch (command) {
         case "done":
-            int taskIndex = getTaskIndex(answer);
-            return new DoneCommand(taskIndex);
+            return parseDoneCommand(answer);
         case "delete":
-            taskIndex = getTaskIndex(answer);
-            return new DeleteCommand(taskIndex);
+            return parseDeleteCommand(answer);
         case "list":
-            return new ListCommand();
+            return parseListCommand();
         case "todo":
-            Todo todo = parseTodo(taskDetails);
-            return new AddTaskCommand(todo);
+            return parseTodoCommand(taskDetails);
         case "event":
-            Event event = parseEvent(taskDetails);
-            return new AddTaskCommand(event);
+            return parseEventCommand(taskDetails);
         case "deadline":
-            Deadline deadline = parseDeadline(taskDetails);
-            return new AddTaskCommand(deadline);
+            return parseDeadlineCommand(taskDetails);
         case "find":
-            String keyword = parseKeyword(taskDetails);
-            return new FindTasksCommand(keyword);
+            return parseFindCommand(taskDetails);
         case "bye":
-            return new ByeCommand();
+            return parseByeCommand();
         default:
             throw new DukeException("Unknown command.");
         }
@@ -74,12 +68,13 @@ public class Parser {
         }
     }
 
-    private static Todo parseTodo(String taskDetails) throws DukeException {
+    private static AddTaskCommand parseTodoCommand(String taskDetails) throws DukeException {
         checkEmptyTaskDetails(taskDetails);
-        return new Todo(taskDetails);
+        Todo todo = new Todo(taskDetails);
+        return new AddTaskCommand(todo);
     }
 
-    private static Event parseEvent(String taskDetails) throws DukeException {
+    private static AddTaskCommand parseEventCommand(String taskDetails) throws DukeException {
         checkEmptyTaskDetails(taskDetails);
         String[] parts = taskDetails.split(" /at ");
         if (parts.length < 2) {
@@ -87,10 +82,11 @@ public class Parser {
         }
         String description = parts[0];
         String at = parts[1];
-        return new Event(description, at);
+        Event event = new Event(description, at);
+        return new AddTaskCommand(event);
     }
 
-    private static Deadline parseDeadline(String taskDetails) throws DukeException {
+    private static AddTaskCommand parseDeadlineCommand(String taskDetails) throws DukeException {
         checkEmptyTaskDetails(taskDetails);
         String[] parts = taskDetails.split(" /by ");
         if (parts.length < 2) {
@@ -98,7 +94,8 @@ public class Parser {
         }
         String description = parts[0];
         String by = parts[1];
-        return new Deadline(description, by);
+        Deadline deadline = new Deadline(description, by);
+        return new AddTaskCommand(deadline);
     }
 
     protected static int getTaskIndex(String answer) throws DukeException {
@@ -113,5 +110,28 @@ public class Parser {
             throw new DukeException("Invalid task number. Sample input with correct format: [command] [taskNo]"
                     + " eg. 'done 2'");
         }
+    }
+    
+    private static DoneCommand parseDoneCommand(String answer) throws DukeException {
+        int taskIndex = getTaskIndex(answer);
+        return new DoneCommand(taskIndex);
+    }
+    
+    private static DeleteCommand parseDeleteCommand(String answer) throws DukeException {
+        int taskIndex = getTaskIndex(answer);
+        return new DeleteCommand(taskIndex);
+    }
+    
+    private static ListCommand parseListCommand() {
+        return new ListCommand();
+    }
+    
+    private static FindTasksCommand parseFindCommand(String taskDetails) throws DukeException {
+        checkEmptyTaskDetails(taskDetails);
+        return new FindTasksCommand(taskDetails);
+    }
+    
+    private static ByeCommand parseByeCommand() {
+        return new ByeCommand();
     }
 }

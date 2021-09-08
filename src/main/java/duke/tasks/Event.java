@@ -1,7 +1,10 @@
 package duke.tasks;
 
+import duke.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * This class represents an Event Task.
@@ -17,7 +20,7 @@ public class Event extends Task {
      * @param description Description of event task.
      * @param at Date that event is occurring.
      */
-    public Event(String description, String at) {
+    public Event(String description, String at) throws DukeException {
         super(description, false);
         this.date = parseDateTime(at);
     }
@@ -28,14 +31,18 @@ public class Event extends Task {
      * @param at Date that event is occurring.
      * @param isDone Whether task is done.
      */
-    public Event(String description, String at, boolean isDone) {
+    public Event(String description, String at, boolean isDone) throws DukeException {
         super(description, isDone);
         this.date = parseDateTime(at);
     }
 
-    private LocalDateTime parseDateTime(String at) {
-        // TODO: need to catch exception
-        return LocalDateTime.parse(at, FORMATTER);
+    private LocalDateTime parseDateTime(String at) throws DukeException {
+        try {
+            return LocalDateTime.parse(at, FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Unable to parse datetime. Datetime should be input in this format: "
+                    + "dd-mm-yyyy hh:mm");
+        }
     }
 
     @Override
