@@ -40,7 +40,9 @@ public class BotDynamicMemoryUnit {
      */
     private String produceStringData() {
         StringBuilder outputData = new StringBuilder();
+
         taskTracker.stream().forEach(x -> outputData.append(generateEasyDataTaskFormat(x)));
+
         return outputData.toString();
     }
 
