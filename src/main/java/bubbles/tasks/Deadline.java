@@ -54,6 +54,16 @@ public class Deadline extends Task {
     }
 
     /**
+     * Gets the due date of this deadline and returns that to the user.
+     *
+     * @return The due date of the deadline, eg. 2021-09-09
+     */
+    @Override
+    public LocalDate getDate() {
+        return this.dueDate;
+    }
+
+    /**
      * Returns the String representation of the Deadline.
      *
      * @return The String representation of the Deadline.

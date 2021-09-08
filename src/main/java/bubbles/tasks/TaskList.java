@@ -1,9 +1,11 @@
 package bubbles.tasks;
 
+import java.time.Clock;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import bubbles.exceptions.EmptyTaskException;
 import bubbles.exceptions.IndexOutOfBoundsException;
@@ -60,6 +62,8 @@ public class TaskList {
                 return deleteTask(input);
             case "find":
                 return findTask(input);
+            case "remind":
+                return remindMe();
             case "help":
                 return help();
             default:
@@ -297,6 +301,80 @@ public class TaskList {
         message.append(Message.FORMAT_LINE);
 
         return message.toString();
+    }
+
+    /**
+     * Returns a string that collates the deadlines and events that are happening within the next week.
+     * (or allow user input for the time frame he/she wants)
+     *
+     * @return A String with the reminders for the user.
+     */
+    public String remindMe() {
+        List<Task> recentTasks = findRecentTasks();
+
+        StringBuilder message = new StringBuilder(Message.FORMAT_LINE + "\n" + Message.REMIND);
+
+        if (recentTasks.size() == 0) {
+            message.append("Good news! You don't have any deadlines/events coming up in the next 7 days!\n");
+        } else {
+            message.append("Here are the upcoming deadlines and events coming up soon!\n");
+
+            int n = 1;
+            for (Task t : recentTasks) {
+                message.append((n) + ". " + t + "\n");
+
+                n++;
+            }
+
+            assert n == recentTasks.size() + 1 : "Task numbers displayed for tasks " +
+                    "(containing matching keywords) did not increment as expected;";
+        }
+
+        message.append(Message.FORMAT_LINE);
+
+        return message.toString();
+    }
+
+    /**
+     * Finds and returns a list of tasks occurring within the next seven days of the current date.
+     *
+     * @return A list of tasks that are going to occur within the next seven days.
+     */
+    public List<Task> findRecentTasks() {
+        return new ArrayList<>(this.tasks)
+                        .stream()
+                        .filter(task -> (task instanceof Deadline || task instanceof Event))
+                        .filter(task -> {
+                            Clock cl = Clock.systemUTC();
+
+                            LocalDate now = LocalDate.now(cl);
+                            LocalDate limit = now.plusDays(7);
+
+                            LocalDate taskDate = task.getDate();
+
+                            return (taskDate.isBefore(limit) && taskDate.isAfter(now));
+                        })
+                        .sorted(Comparator.comparing(Task::getDate))
+                        .collect(Collectors.toList());
+    }
+
+    /**
+     * Finds and returns a list of tasks that are overdue and undone.
+     *
+     * @return A list of tasks that are overdue and undone.
+     */
+    public List<Task> findOverdueTasks() {
+        return new ArrayList<>(this.tasks)
+                .stream()
+                .filter(task -> (task instanceof Deadline || task instanceof Event))
+                .filter(task -> {
+                    Clock cl = Clock.systemUTC();
+                    LocalDate now = LocalDate.now(cl);
+
+                    return (!task.isDone && task.getDate().isBefore(now));
+                })
+                .sorted(Comparator.comparing(Task::getDate))
+                .collect(Collectors.toList());
     }
 
     /**

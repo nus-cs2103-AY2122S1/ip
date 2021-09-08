@@ -16,10 +16,11 @@ public enum Message {
     DELETE("Noted! I've removed this task:\n"),
     DONE("Good job! I've marked this task as done:\n"),
     REWARD("Bubbles will reward you with a piece of candy!"),
+    REMIND("Need a reminder? Bubbles' got you!\n"),
     WELCOME("You should do what you want to do!\n"
             + "Hello I'm Bubbles from the Powerpuff Girls, what are you up to?"),
     HELP("Don't worry, Bubbles is here to help!\n"
-            + "Supported commands: todo, deadline, event, list, done, delete, find, help, bye;\n"
+            + "Supported commands: todo, deadline, event, list, done, delete, find, remind, help, bye;\n"
             + "Note: You must include `/by` for deadlines, and `/at` for events"
             + "after your task description! The date must be entered in the form"
             + "of yyyy-mm-dd, or else I won't be able to understand your command. ☹"),

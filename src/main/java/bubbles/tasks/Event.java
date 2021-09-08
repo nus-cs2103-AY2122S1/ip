@@ -54,6 +54,16 @@ public class Event extends Task {
     }
 
     /**
+     * Gets the event time of this event and returns that to the user.
+     *
+     * @return The event time of the event, eg. 2021-09-09
+     */
+    @Override
+    public LocalDate getDate() {
+        return this.eventTime;
+    }
+
+    /**
      * Returns the String representation of the Event.
      *
      * @return The String representation of the Event.

@@ -1,5 +1,6 @@
 package bubbles.tasks;
 
+import java.time.Clock;
 import java.time.LocalDate;
 
 /**
@@ -59,6 +60,17 @@ public class Task {
         LocalDate ld = LocalDate.parse(dateInput);
 
         return ld;
+    }
+
+    /**
+     * Gets the current date and returns that to the user.
+     *
+     * @return The current date, eg. 2021-09-09
+     */
+    public LocalDate getDate() {
+        Clock cl = Clock.systemUTC();
+
+        return LocalDate.now(cl);
     }
 
     /**
