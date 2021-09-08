@@ -109,7 +109,8 @@ public class Ui {
         StringBuilder reply = new StringBuilder("    Here are the matching tasks in your list:\n");
         for (int i = 0; i < lst.getSize(); i++) {
             if (lst.getItem(i).getName().contains(keyword)) {
-                reply.append("    ").append(count).append(". ").append(lst.getItem(i).toString()).append("\n");
+                reply.append("    ").append(count).append(". ")
+                        .append(lst.getItem(i).toString()).append("\n");
                 count++;
             }
         }
