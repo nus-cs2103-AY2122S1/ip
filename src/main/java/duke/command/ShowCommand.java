@@ -25,7 +25,7 @@ public class ShowCommand extends Command {
      */
     @Override
     public void executeAndShow(TaskList taskList, Storage storage) {
-        Ui.showTasks(taskList.getTasks());
+        Ui.showMultiLines(execute(taskList, storage));
     }
 
     /**
