@@ -1,5 +1,6 @@
 package duke;
 
+import duke.exceptions.InvalidDescriptionException;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -15,7 +16,6 @@ public class TaskList {
 
     /**
      * Constructor for a new, empty TaskList.
-     *
      */
     public TaskList() {
         this.arrayList = new ArrayList<Task>();
@@ -23,7 +23,6 @@ public class TaskList {
 
     /**
      * Adds a task to the TaskList.
-     *
      * @param task The task to be added.
      */
     public void add(Task task) {
