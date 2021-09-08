@@ -15,6 +15,7 @@ public class Ui {
      * @param name The name of the bot.
      */
     public Ui(String name) {
+        assert name.length() > 0 : "Name should not be empty!";
         this.botName = name;
         sc = new Scanner(System.in);
         this.parser = new Parser();
@@ -48,6 +49,7 @@ public class Ui {
      * @return A string representing the exception.
      */
     public String printException(String type) {
+        assert type.length() > 0 : "Exception type should be stated!";
         switch (type) {
         case "IOException":
             return "There is a problem with saving the list to the file.\n"
