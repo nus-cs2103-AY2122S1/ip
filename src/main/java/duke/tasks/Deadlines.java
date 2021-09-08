@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a deadline entry in the task list.
  */
-public class Deadlines extends Task {
+public class Deadlines extends Task implements Comparable<Deadlines> {
 
     private LocalDate dateTimeBy;
 
@@ -37,4 +37,15 @@ public class Deadlines extends Task {
                 dateTimeBy.format(DateTimeFormatter.ofPattern("d MMM yyyy")));
     }
 
+    /**
+     * Returns negative number if this deadline happened before the other. Returns positive number if this deadline
+     * happened after the other.
+     *
+     * @param other the other deadline to compare to.
+     * @return an integer representing the comparsion result.
+     */
+    @Override
+    public int compareTo(Deadlines other) {
+        return dateTimeBy.compareTo(other.dateTimeBy);
+    }
 }

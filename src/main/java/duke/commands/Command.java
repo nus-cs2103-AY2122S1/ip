@@ -1,5 +1,7 @@
 package duke.commands;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import duke.tasks.Deadlines;
@@ -230,10 +232,35 @@ public abstract class Command {
             this.keyword = keyword;
         }
 
+        /**
+         * Searches all the existing tasks for those that contain the particular keyword and returns the output.
+         *
+         * @param tasks   the full task list containing all the tasks.
+         * @param ui      the ui instance.
+         * @param storage the storage instance.
+         */
         @Override
         public void execute(TaskList tasks, Ui ui, Storage storage) {
             HashMap<String, Task> matchingTasks = tasks.getMatchingTasks(this.keyword);
             ui.showMessagePrintingAllMatchingTasks(matchingTasks, tasks);
+        }
+    }
+
+    public static class SortDeadlinesCommand extends Command {
+
+        /**
+         * Gives the user the output containing all the deadlines inside the task list, with them sorted
+         * in chronological order.
+         *
+         * @param tasks   the full task list containing all the tasks.
+         * @param ui      the ui instance.
+         * @param storage the storage instance.
+         */
+        @Override
+        public void execute(TaskList tasks, Ui ui, Storage storage) {
+            ArrayList<Deadlines> allDeadlines = tasks.getAllDeadlines();
+            Collections.sort(allDeadlines);
+            ui.showGettingAllSortedDeadlinesInteraction(allDeadlines, tasks);
         }
     }
 }

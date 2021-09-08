@@ -123,4 +123,31 @@ public class TaskList {
         }
         return matchingTasks;
     }
+
+    /**
+     * Returns an array list containing all the deadlines that are in the task list currently.
+     *
+     * @return array list containing all the deadlines in the task list currently.
+     */
+    public ArrayList<Deadlines> getAllDeadlines() {
+        ArrayList<Deadlines> allDeadlines = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task instanceof Deadlines) {
+                Deadlines toAdd = (Deadlines) task;
+                allDeadlines.add(toAdd);
+            }
+        }
+        return allDeadlines;
+    }
+
+    /**
+     * Returns the index at which this deadline exists within the full task list, but adding 1 to it.
+     * This number is used for displaying to the user, hence it starts counting from 1.
+     *
+     * @param deadline the deadlines instance to retrieve the index for.
+     * @return integer representing the task number at which this deadline instance exist within the task list.
+     */
+    public int getTaskNumberOf(Deadlines deadline) {
+        return tasks.indexOf(deadline) + 1;
+    }
 }

@@ -57,10 +57,11 @@ public class Parser {
         } else if (true == fullCommand.startsWith("find")) {
             String keyword = fullCommand.substring(5);
             return new Command.FindCommand(keyword);
+        } else if (true == fullCommand.startsWith("chrono deadlines")) {
+            return new Command.SortDeadlinesCommand();
         } else {
             UnknownInputException e = new UnknownInputException();
             throw e;
         }
     }
-
 }
