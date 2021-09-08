@@ -25,15 +25,6 @@ public class TaskList {
     }
 
     /**
-     * Adds the task into the list without print statements.
-     *
-     * @param task task provided to add to the list.
-     */
-    public void read(Task task) {
-        list.add(task);
-    }
-
-    /**
      * Fetches the task specified by the user.
      *
      * @param pos index of the task the user wants.

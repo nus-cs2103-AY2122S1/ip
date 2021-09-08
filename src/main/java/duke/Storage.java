@@ -31,7 +31,7 @@ public class Storage {
      *
      * @param list the provided task list to write.
      */
-    public void write(TaskList list) {
+    public String write(TaskList list) {
         try {
             assert taskList.canWrite() : "Error! File cannot be written!";
             FileWriter writer = new FileWriter(taskList);
@@ -41,13 +41,11 @@ public class Storage {
                 writer.write(temp);
                 writer.write("\n");
             }
-
-            System.out.println("List saved!");
             writer.close();
-
         } catch (IOException | DukeException e) {
             System.out.println(e.getMessage());
         }
+        return "List saved!";
     }
 
     /**
@@ -62,12 +60,9 @@ public class Storage {
 
             while (scanner.hasNextLine()) {
                 String temp = scanner.nextLine();
-                list.read(Parser.read(temp));
+                list.add(Parser.read(temp));
             }
-
-            System.out.println("List loaded successfully!");
             scanner.close();
-
         } catch (IOException | DukeException e) {
             System.out.println(e.getMessage());
         }

@@ -2,6 +2,7 @@ package duke;
 
 import java.io.File;
 import java.util.Objects;
+import javafx.application.Platform;
 
 /**
  * Duke is the main class of the bot.
@@ -33,8 +34,10 @@ public class Duke {
      */
     public String getResponse(String string) {
         if (Objects.equals(string, "save")) {
-            storage.write(list);
-            return "List saved!";
+            return storage.write(list);
+        } else if (Objects.equals(string, "bye")) {
+            String saveMsg = storage.write(list) + "\n";
+            return saveMsg + Ui.goodbye();
         } else if (string.indexOf(' ') != -1) {
             String task = string.substring(0, string.indexOf(' '));
             String description = string.substring(string.indexOf(' ') + 1);
