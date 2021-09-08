@@ -10,8 +10,26 @@ import javafx.stage.Stage;
 
 public class Gui extends Application {
 
+    private static long SHORT_TEXT_DELAY = 50;
+
+    private static long LONG_TEXT_DELAY = 20;
+
+    private static long SHORT_TEXT_LIMIT = 150;
+
+    public static long getShortTextDelay() {
+        return SHORT_TEXT_DELAY;
+    }
+
+    public static long getLongTextDelay() {
+        return LONG_TEXT_DELAY;
+    }
+
+    public static long getShortTextLimit() {
+        return SHORT_TEXT_LIMIT;
+    }
+
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();

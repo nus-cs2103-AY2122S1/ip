@@ -52,7 +52,8 @@ public class MainWindow extends AnchorPane {
         this.parser = new Parser();
         this.ui = new UI();
         try {
-            this.storage = new Storage("." + File.separator + "data" + File.separator + "WhoBotData.txt");
+            String filename = "." + File.separator + "data" + File.separator + "WhoBotData.txt";
+            this.storage = new Storage(filename);
             this.taskList = new TaskList(storage);
         } catch (WhoBotException ex) {
             ui.echo(ex.getMessage(), UI.Type.ERROR);
@@ -88,14 +89,15 @@ public class MainWindow extends AnchorPane {
                 String message = "GoodBye, I hope to see you again soon :)";
                 long delay = message.length() * 50 + 500;
                 ui.echo("GoodBye, I hope to see you again soon :)", UI.Type.COMPLETE);
-                new Thread(() -> {
+                Thread delayThread = new Thread(() -> {
                     try {
                         Thread.sleep(delay);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     System.exit(0);
-                }).start();
+                });
+                delayThread.start();
             }
         } catch (WhoBotException e) {
             ui.echo(e.getMessage(), UI.Type.ERROR);

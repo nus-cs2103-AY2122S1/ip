@@ -10,7 +10,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+
 import whobot.main.UI;
+import whobot.main.Gui;
 
 public class DisplayBuffer {
 
@@ -73,9 +75,11 @@ public class DisplayBuffer {
      * Displays Lines in Buffer
      */
     public static void printBuffer() {
-        double delay = charCount > 150 ? 20.0 : 50.0;
+        long delay = charCount > Gui.getShortTextLimit()
+                ? Gui.getLongTextDelay()
+                : Gui.getShortTextDelay();
 
-        new Thread(() -> {
+        Thread printThread = new Thread(() -> {
             assert userInput != null;
             assert sendButton != null;
             assert parent != null;
@@ -92,7 +96,7 @@ public class DisplayBuffer {
                     parent.getChildren().add(node);
                     transition.play(); });
                 try {
-                    Thread.sleep((long) (delay * buffer.get(i).length()));
+                    Thread.sleep(delay * buffer.get(i).length());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -114,7 +118,7 @@ public class DisplayBuffer {
                         }
                     }));
                     try {
-                        Thread.sleep((long) (delay * buffer.get(i).length()));
+                        Thread.sleep(delay * buffer.get(i).length());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -128,6 +132,7 @@ public class DisplayBuffer {
                 userInput.setDisable(false);
                 sendButton.setDisable(false);
             }
-        }).start();
+        });
+        printThread.start();
     }
 }
