@@ -13,6 +13,11 @@ public class Todo extends Task{
      */
     public Todo(String description) throws AilurusException {
         super(description.trim());
+        handleException();
+    }
+
+    @Override
+    public void handleException(String... arr) {
         if (description.length() == 0) {
             throw new AilurusException(AilurusException.Error.EMPTYTODO);
         }

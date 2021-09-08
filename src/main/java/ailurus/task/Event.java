@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
-    private LocalDate at;
+    private final LocalDate at;
 
     /**
      * Constructor for Event tasks
@@ -19,18 +19,24 @@ public class Event extends Task {
     public Event(String description) throws AilurusException {
         super(description.split("/at", -1)[0].trim());
         String[] arr = description.split("/at", -1);
+        handleException(arr);
+        try {
+            this.at = LocalDate.parse(arr[1].trim());
+        } catch (DateTimeParseException e) {
+            throw new AilurusException(AilurusException.Error.DATEPARSE);
+        }
+    }
+
+    @Override
+    public void handleException(String... arr) {
         if (arr[0].length() == 0) {
             throw new AilurusException(AilurusException.Error.EMPTYEVENT);
-        } else if (arr.length <= 1) {
+        }
+        if (arr.length <= 1) {
             throw new AilurusException(AilurusException.Error.AT);
-        } else if (arr[1].length() == 0) {
+        }
+        if (arr[1].length() == 0) {
             throw new AilurusException(AilurusException.Error.EMPTYAT);
-        } else {
-            try {
-                this.at = LocalDate.parse(arr[1].trim());
-            } catch (DateTimeParseException e) {
-                throw new AilurusException(AilurusException.Error.DATEPARSE);
-            }
         }
     }
 

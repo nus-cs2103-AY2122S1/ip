@@ -1,5 +1,7 @@
 package ailurus.task;
 
+import ailurus.AilurusException;
+
 import java.io.FileWriter;
 
 abstract public class Task {
@@ -47,6 +49,8 @@ abstract public class Task {
     public String getDescription() {
         return this.description;
     }
+
+    public abstract void handleException(String... arr) throws AilurusException;
 
     @Override
     public String toString() {
