@@ -2,7 +2,10 @@ package duke.parser;
 
 import duke.exception.DukeException;
 import duke.exception.TaskParseException;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * Parses tasks.
@@ -18,11 +21,11 @@ public class TaskParser {
     public static Task parse(String text) throws DukeException {
         char taskType = text.charAt(0);
         switch (taskType) {
-        case 'T':
+        case ToDo.TEXT_ENCODING_CHAR:
             return ToDoParser.parse(text);
-        case 'D':
+        case Deadline.TEXT_ENCODING_CHAR:
             return DeadlineParser.parse(text);
-        case 'E':
+        case Event.TEXT_ENCODING_CHAR:
             return EventParser.parse(text);
         default:
             throw new TaskParseException(text);

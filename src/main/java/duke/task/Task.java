@@ -4,6 +4,9 @@ package duke.task;
  * Represents a task.
  */
 public abstract class Task {
+    public static final String TASK_COMPLETED_SYMBOL = "X";
+    public static final String FIELD_SEPARATOR = " | ";
+
     private String name;
     private boolean isDone;
 
@@ -39,7 +42,7 @@ public abstract class Task {
      * Returns the string representation of the completion status of the <code>Task</code>.
      */
     public String getStatusIcon() {
-        return isDone ? "X" : " ";
+        return isDone ? TASK_COMPLETED_SYMBOL : " ";
     }
 
     /**

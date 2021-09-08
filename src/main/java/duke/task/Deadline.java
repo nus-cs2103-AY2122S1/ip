@@ -6,6 +6,8 @@ import duke.util.DukeDateTime;
  * Represents a <code>Task</code> with a due date.
  */
 public class Deadline extends Task implements Timestampable {
+    public static final char TEXT_ENCODING_CHAR = 'D';
+
     private final DukeDateTime dueDate;
 
     /**
@@ -26,8 +28,8 @@ public class Deadline extends Task implements Timestampable {
 
     @Override
     public String toText() {
-        String[] props = {"D", super.getStatusIcon(), super.getName(), dueDate.toIso()};
-        return String.join(" | ", props);
+        String[] props = {String.valueOf(TEXT_ENCODING_CHAR), super.getStatusIcon(), super.getName(), dueDate.toIso()};
+        return String.join(FIELD_SEPARATOR, props);
     }
 
     @Override
@@ -37,6 +39,6 @@ public class Deadline extends Task implements Timestampable {
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), dueDate);
+        return String.format("[%s]%s (by: %s)", TEXT_ENCODING_CHAR, super.toString(), dueDate);
     }
 }

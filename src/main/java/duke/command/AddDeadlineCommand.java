@@ -14,6 +14,8 @@ import duke.util.DukeDateTime;
 public class AddDeadlineCommand extends Command {
     public static final String COMMAND_WORD = "deadline";
     public static final String USAGE_MESSAGE = "To add a new deadline, use 'deadline <name> /by <due-date>'.";
+    private static final String SPLIT_REGEX = "\\s+/by\\s+";
+    private static final int ARGUMENTS_LENGTH = 2;
 
     private final String commandArguments;
 
@@ -23,8 +25,8 @@ public class AddDeadlineCommand extends Command {
 
     @Override
     public DukeResponse execute(TaskManager taskManager, Storage storage) throws DukeException {
-        String[] deadlineDetails = commandArguments.split("\\s+/by\\s+", 2);
-        if (deadlineDetails.length < 2) {
+        String[] deadlineDetails = commandArguments.split(SPLIT_REGEX, ARGUMENTS_LENGTH);
+        if (deadlineDetails.length < ARGUMENTS_LENGTH) {
             throw new InvalidCommandUsageException(COMMAND_WORD, USAGE_MESSAGE);
         }
         String deadlineName = deadlineDetails[0];

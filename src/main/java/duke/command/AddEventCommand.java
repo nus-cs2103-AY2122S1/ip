@@ -14,6 +14,8 @@ import duke.util.DukeDateTime;
 public class AddEventCommand extends Command {
     public static final String COMMAND_WORD = "event";
     public static final String USAGE_MESSAGE = "To add a new event, use 'event <name> /at <event-timestamp>'.";
+    private static final String SPLIT_REGEX = "\\s+/at\\s+";
+    private static final int ARGUMENTS_LENGTH = 2;
 
     private final String commandArguments;
 
@@ -23,8 +25,8 @@ public class AddEventCommand extends Command {
 
     @Override
     public DukeResponse execute(TaskManager taskManager, Storage storage) throws DukeException {
-        String[] eventDetails = commandArguments.split("\\s+/at\\s+", 2);
-        if (eventDetails.length < 2) {
+        String[] eventDetails = commandArguments.split(SPLIT_REGEX, ARGUMENTS_LENGTH);
+        if (eventDetails.length < ARGUMENTS_LENGTH) {
             throw new InvalidCommandUsageException(COMMAND_WORD, USAGE_MESSAGE);
         }
         String eventName = eventDetails[0];

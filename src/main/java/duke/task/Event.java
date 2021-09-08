@@ -6,6 +6,8 @@ import duke.util.DukeDateTime;
  * Represents a <code>Task</code> that occurs on a specific date and time.
  */
 public class Event extends Task implements Timestampable {
+    public static final char TEXT_ENCODING_CHAR = 'E';
+
     private final DukeDateTime timestamp;
 
     /**
@@ -26,8 +28,9 @@ public class Event extends Task implements Timestampable {
 
     @Override
     public String toText() {
-        String[] props = {"E", super.getStatusIcon(), super.getName(), timestamp.toIso()};
-        return String.join(" | ", props);
+        String[] props = {String.valueOf(TEXT_ENCODING_CHAR), super.getStatusIcon(), super.getName(),
+                timestamp.toIso()};
+        return String.join(FIELD_SEPARATOR, props);
     }
 
     @Override
@@ -37,6 +40,6 @@ public class Event extends Task implements Timestampable {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), timestamp);
+        return String.format("[%s]%s (at: %s)", TEXT_ENCODING_CHAR, super.toString(), timestamp);
     }
 }
