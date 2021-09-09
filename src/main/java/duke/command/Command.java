@@ -16,11 +16,11 @@ public abstract class Command {
     /**
      * Basic Constructor
      *
-     * @param storage Storage object to save
+     * @param storage StorageTxt object to save
      * @param taskList Tasklist to add task to
      * @param isBye boolean to check whether to end the program
      */
-    public Command(Storage storage,TaskList taskList, boolean isBye) {
+    public Command(Storage storage, TaskList taskList, boolean isBye) {
         this.storage = storage;
         this.taskList = taskList;
         this.isBye = isBye;

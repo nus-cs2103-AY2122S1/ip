@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -22,6 +23,9 @@ import java.util.Collections;
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
+
+    @FXML
+    private Text textDialog;
 
     @FXML
     private ImageView displayPicture;
@@ -45,8 +49,10 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-
         dialog.setText(text);
+        dialog.setWrapText(true);
+        dialog.setMaxWidth(Double.MAX_VALUE);
+
         alignDialogBoxBasedOnSpeaker(isDukeSpeaking);
         circleCropDisplayPicture(speakerImage);
     }

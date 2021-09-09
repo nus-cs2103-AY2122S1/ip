@@ -14,7 +14,7 @@ public class ByeCommand extends Command{
     /**
      * Basic Constructor
      *
-     * @param storage Storage object to save
+     * @param storage StorageTxt object to save
      * @param taskList Tasklist to add task to
      */
     public ByeCommand(Storage storage, TaskList taskList){

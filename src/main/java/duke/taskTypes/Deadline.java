@@ -50,6 +50,7 @@ public class Deadline extends Task{
      * @return list
      */
     private List<String> formatInput(String input) {
+        System.out.println(input);
         return Pattern.compile("/by")
                 .splitAsStream(input)
                 .map(String::trim)
@@ -86,5 +87,10 @@ public class Deadline extends Task{
     @Override
     public String saveTask() {
         return super.saveTask() + " /by " + super.getSaveDate();
+    }
+
+    @Override
+    public String saveTaskCsv() {
+        return super.saveTaskCsv() + ",/by," + super.getSaveDateCsv();
     }
 }

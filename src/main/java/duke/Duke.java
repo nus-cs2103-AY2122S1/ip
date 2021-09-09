@@ -6,6 +6,8 @@ import duke.exception.DukeException;
 
 import duke.util.Parser;
 import duke.util.Storage;
+import duke.util.StorageTxt;
+import duke.util.StorageCsv;
 import duke.util.TaskList;
 
 import java.util.Scanner;
@@ -26,7 +28,8 @@ public class Duke {
      * @throws DukeException
      */
     public Duke(){
-        storage = new Storage("src/main/java/resources");
+//        storage = new StorageTxt("src/main/java/resources");
+        storage = new StorageCsv("src/main/java/resources");
         taskList = new TaskList();
         parser = new Parser(storage, taskList);
         parser.loadTask();
@@ -76,7 +79,17 @@ public class Duke {
      * @param args
      */
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.textProcess();
+//        Duke duke = new Duke();
+//        duke.textProcess();
+
     }
+
+    //TEsting
+    public static String[] convertTaskDetailsToCsvRow(String taskDetails) {
+        String[] csvRow = new String[5];
+        String[] parsedInput = taskDetails.trim().split(" ", 6);
+        return parsedInput;
+    }
+
+
 }

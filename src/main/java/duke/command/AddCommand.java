@@ -18,7 +18,7 @@ public class AddCommand extends Command {
     /**
      * Basic Constructor
      *
-     * @param storage Storage object to save
+     * @param storage StorageTxt object to save
      * @param taskList Tasklist to add task to
      * @param taskDetails User input
      * @param addType

@@ -28,9 +28,9 @@ public class TaskList {
     }
 
     /**
-     * Insert Past state from storage into current tasklist
+     * Insert Past state from storageTxt into current tasklist
      *
-     * @param pastTaskLists List of past task details found in the storage
+     * @param pastTaskLists List of past task details found in the storageTxt
      * @throws DukeException
      */
     public void insertPast(List<String> pastTaskLists) throws DukeException {
@@ -43,6 +43,8 @@ public class TaskList {
             assert formattedTask.length == 3;
 
             boolean isDone = (formattedTask[1].equals("T"));
+            System.out.println(formattedTask[1].equals("T"));
+            System.out.println(Arrays.asList(formattedTask));
             Task pastTask = Task.empty();
             switch (formattedTask[0]) {
                 case "T" :
@@ -107,7 +109,7 @@ public class TaskList {
     }
 
     /**
-     * Creates a task instance, adds to storage and prints a success msg
+     * Creates a task instance, adds to storageTxt and prints a success msg
      *
      * @param input takes in the input from user
      * @return Task returns newly created task
@@ -119,7 +121,7 @@ public class TaskList {
     }
 
     /**
-     * Creates a task instance, adds to storage and prints a success msg
+     * Creates a task instance, adds to storageTxt and prints a success msg
      *
      * @param input tajes in the input from user
      * @return Task returns newly created task
@@ -130,7 +132,7 @@ public class TaskList {
         return deadline;
     }
     /**
-     * Creates a task instance, adds to storage and prints a success msg
+     * Creates a task instance, adds to storageTxt and prints a success msg
      *
      * @param input tajes in the input from user
      * @return Task returns newly created task
@@ -207,6 +209,19 @@ public class TaskList {
         String[] check = new String[mapper.size()];;
         for (int pos = 0; pos < mapper.size(); pos++) {
             check[pos] = look.next().saveTask();
+        }
+        return check;
+    }
+
+    public String[] saveStateCsv() {
+        if (mapper.size() == 0) {
+            return new String[]{};
+        }
+        Collection<Task> values = mapper.values();
+        Iterator<Task> look = values.iterator();
+        String[] check = new String[mapper.size()];;
+        for (int pos = 0; pos < mapper.size(); pos++) {
+            check[pos] = look.next().saveTaskCsv();
         }
         return check;
     }

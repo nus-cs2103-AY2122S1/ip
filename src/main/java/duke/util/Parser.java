@@ -1,6 +1,13 @@
 package duke.util;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
 
 import duke.exception.DukeException;
 
@@ -23,12 +30,12 @@ public class Parser {
      * @param taskList tasklist object
      */
     public Parser(Storage storage, TaskList taskList) {
-        this.storage = storage;
+        this.storage= storage;
         this.taskList = taskList;
     }
 
     /**
-     * Loads the previous state stored in the storage into tasklist
+     * Loads the previous state stored in the storageTxt into tasklist
      */
     public void loadTask() {
         try {
