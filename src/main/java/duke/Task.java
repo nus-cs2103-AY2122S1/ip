@@ -65,4 +65,13 @@ public class Task {
     public String toBackupFormat() {
         return String.format("%s | %d", description, isDone ? 1 : 0);
     }
+
+    /**
+     * Returns true if the tasks clashed.
+     *
+     * @return false.
+     */
+    public boolean clash(Task t) {
+        return false;
+    }
 }

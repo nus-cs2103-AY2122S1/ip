@@ -73,4 +73,21 @@ public class Event extends Task {
                 atDate == null ? "" : atDate.format(DATE_TIME_FORMAT)
         );
     }
+
+    /**
+     * Returns true if the tasks clashed.
+     *
+     * @return true if the tasks clashed.
+     */
+    public boolean clash(Task t) {
+        if (t instanceof Event) {
+            Event temp = (Event) t;
+            if (at != null) {
+                return at.equals(temp.at);
+            } else {
+                return atDate.equals(temp.atDate);
+            }
+        }
+        return false;
+    }
 }

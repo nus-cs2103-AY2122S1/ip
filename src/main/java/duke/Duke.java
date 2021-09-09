@@ -50,7 +50,7 @@ public class Duke {
     }
 
 
-    private String addTodo(Todo taskToAdd) throws IOException {
+    private String addTodo(Todo taskToAdd) throws IOException, DukeException {
         String res = String.format(
             ADD_TASK_MSG_TEMPLATE,
             tasks.addTask(taskToAdd),
@@ -61,7 +61,7 @@ public class Duke {
         return res;
     }
 
-    private String addDeadline(Deadline taskToAdd) throws IOException {
+    private String addDeadline(Deadline taskToAdd) throws IOException, DukeException {
         String res = String.format(
             ADD_TASK_MSG_TEMPLATE,
             tasks.addTask(taskToAdd),
@@ -72,7 +72,7 @@ public class Duke {
         return res;
     }
 
-    private String addEvent(Event taskToAdd) throws IOException {
+    private String addEvent(Event taskToAdd) throws IOException, DukeException {
         String res = String.format(
             ADD_TASK_MSG_TEMPLATE,
             tasks.addTask(taskToAdd),
