@@ -47,7 +47,7 @@ public class Event extends Task {
         String updatedDescription = updateDescriptor.getDescription().orElse(this.getDescription());
         LocalDateTime updatedAt = updateDescriptor.getAt().orElse(this.at);
         LocalDateTime updatedEnd = updateDescriptor.getEnd().orElse(this.end);
-        return new Event(updatedDescription, updatedAt, updatedEnd);
+        return new Event(updatedDescription, getIsDone(), updatedAt, updatedEnd);
     }
 
     @Override
@@ -65,5 +65,20 @@ public class Event extends Task {
                     + " — " + end.format(DateTimeFormatter.ofPattern(END_DATE_FORMAT, REGION)) + ")";
         }
         return s;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Event)) {
+            return false;
+        }
+        Event other = (Event) obj;
+        return getDescription().equals(other.getDescription())
+                && getIsDone() == other.getIsDone()
+                && at.equals(other.at)
+                && end.equals(other.end);
     }
 }

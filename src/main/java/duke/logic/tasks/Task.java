@@ -28,6 +28,10 @@ public abstract class Task {
         return description;
     }
 
+    public boolean getIsDone() {
+        return isDone;
+    }
+
     public abstract Task createUpdatedCopy(UpdateTaskDescriptor updateDescriptor);
 
     /**

@@ -6,13 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
+import duke.logic.commands.UpdateTaskDescriptorBuilder;
+
 public class TaskListTest {
     private TaskList list = new TaskList();
-
-    @Test
-    public void testEmptyListToString() {
-        assertEquals("You have no tasks!", list.toString());
-    }
 
     @Test
     public void testAdd() {
@@ -38,6 +35,15 @@ public class TaskListTest {
     }
 
     @Test
+    public void testUpdate() {
+        list.add(new TaskStub(1));
+        list.add(new TaskStub(2));
+        Task updatedTask = list.update(1, new UpdateTaskDescriptorBuilder().build());
+        assertEquals(2, list.size());
+        assertEquals(new TaskStub(11), updatedTask);
+    }
+
+    @Test
     public void testFind() {
         for (int i = 1; i < 5; i++) {
             list.add(new TaskStub(i));
@@ -60,7 +66,12 @@ public class TaskListTest {
     }
 
     @Test
-    public void testNonEmptyListToString() {
+    public void testToString_emptyList() {
+        assertEquals("You have no tasks!", list.toString());
+    }
+
+    @Test
+    public void testToString_nonEmptyList() {
         StringBuilder s = new StringBuilder("Current tasks:\n");
         for (int i = 1; i < 5; i++) {
             list.add(new TaskStub(i));

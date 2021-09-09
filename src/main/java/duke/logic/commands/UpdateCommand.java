@@ -36,14 +36,13 @@ public class UpdateCommand extends Command {
         return new CommandResult(TASK_UPDATED_MSG + result);
     }
 
-    // My static nested class
     public static class UpdateTaskDescriptor {
         private final String description;
         private final LocalDateTime by;
         private final LocalDateTime at;
         private final LocalDateTime end;
 
-        private UpdateTaskDescriptor(String description, LocalDateTime by, LocalDateTime at, LocalDateTime end) {
+        UpdateTaskDescriptor(String description, LocalDateTime by, LocalDateTime at, LocalDateTime end) {
             this.description = description;
             this.by = by;
             this.at = at;

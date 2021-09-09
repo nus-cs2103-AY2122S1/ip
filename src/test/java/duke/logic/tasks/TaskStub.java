@@ -1,11 +1,18 @@
 package duke.logic.tasks;
 
+import duke.logic.commands.UpdateCommand.UpdateTaskDescriptor;
+
 public class TaskStub extends Task {
     private final int stubNo;
 
     TaskStub(int stubNo) {
         super("Stub task " + stubNo, true);
         this.stubNo = stubNo;
+    }
+
+    @Override
+    public Task createUpdatedCopy(UpdateTaskDescriptor updateDescriptor) {
+        return new TaskStub(stubNo + 10);
     }
 
     @Override
@@ -23,4 +30,9 @@ public class TaskStub extends Task {
         return "[S][X] Stub task " + stubNo;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return obj == this
+                || (obj instanceof TaskStub && stubNo == ((TaskStub) obj).stubNo);
+    }
 }

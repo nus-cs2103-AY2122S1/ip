@@ -42,7 +42,7 @@ public class Deadline extends Task {
     public Task createUpdatedCopy(UpdateCommand.UpdateTaskDescriptor updateDescriptor) {
         String updatedDescription = updateDescriptor.getDescription().orElse(this.getDescription());
         LocalDateTime updatedBy = updateDescriptor.getBy().orElse(this.by);
-        return new Deadline(updatedDescription, updatedBy);
+        return new Deadline(updatedDescription, getIsDone(), updatedBy);
     }
 
     @Override
@@ -54,5 +54,19 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString()
                 + " (by: " + by.format(DateTimeFormatter.ofPattern(DEADLINE_DATE_FORMAT, REGION)) + ")";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Deadline)) {
+            return false;
+        }
+        Deadline other = (Deadline) obj;
+        return getDescription().equals(other.getDescription())
+                && getIsDone() == other.getIsDone()
+                && by.equals(other.by);
     }
 }
