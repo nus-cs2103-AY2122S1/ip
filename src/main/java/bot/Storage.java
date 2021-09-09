@@ -17,6 +17,11 @@ public class Storage {
 
     public static final String SAVE_FILE_PATH = "data/save.txt";
 
+    /**
+     * Writes list of strings to the save file
+     *
+     * @param texts list of strings to write
+     */
     private static void write(List<String> texts) {
         try {
             FileWriter writer = new FileWriter(getAbsolutePath());
@@ -28,6 +33,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads save file
+     *
+     * @return list of string lines in save file
+     */
     private static List<String> read() {
         try {
             List<String> lines = new ArrayList<>();
@@ -59,14 +69,12 @@ public class Storage {
      * @param bot running bot
      */
     public static void load(Bot bot) {
-        List<Task> tasks = new ArrayList<>();
         List<String> taskStrings = Storage.read();
         for (String taskString : taskStrings) {
             if (!taskString.equals("")) {
-                tasks.add(Task.deserialize(taskString));
+                bot.getTaskList().addTask(Task.deserialize(taskString));
             }
         }
-        bot.getTaskList().set(tasks);
     }
 
     private static String getAbsolutePath() {

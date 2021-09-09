@@ -11,11 +11,10 @@ import tasks.Task;
 public class DoneCommand extends Command {
 
     @Override
-    public String[] run(Bot bot, String[] args) {
+    public String[] run(Bot bot, String[] args) throws InvalidTaskException {
         int index = Integer.parseInt(args[0]) - 1;
-        if (index < 0 || index >= bot.getTaskList().get().size()) {
-            throw new InvalidTaskException(Ui.ERROR_SIGNATURE + "This task does not exist in the task list!");
-        }
+        validateArgs(index, bot);
+
         Task task = bot.getTaskList().getTaskAt(index);
         task.markDone();
         return new String[]{
@@ -23,5 +22,19 @@ public class DoneCommand extends Command {
             Ui.TEXT_BLOCK_MARGIN + task.toString()
         };
     }
+
+    /**
+     * Validate command arg
+     *
+     * @param arg command argument
+     * @param bot Bot in context
+     * @throws InvalidTaskException invalid command task
+     */
+    public void validateArgs(int arg, Bot bot) throws InvalidTaskException {
+        if (arg < 0 || arg >= bot.getTaskList().size()) {
+            throw new InvalidTaskException(Ui.ERROR_SIGNATURE + "This task does not exist in the task list!");
+        }
+    }
+
 
 }

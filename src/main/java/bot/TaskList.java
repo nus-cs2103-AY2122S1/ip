@@ -27,15 +27,6 @@ public class TaskList {
     }
 
     /**
-     * Set the taskList
-     *
-     * @param taskList list of tasks
-     */
-    public void set(List<Task> taskList) {
-        this.taskList = taskList;
-    }
-
-    /**
      * Add a new task to the list
      *
      * @param newTask task being added
@@ -82,12 +73,26 @@ public class TaskList {
         return this.taskList.get(index);
     }
 
+    /**
+     * Get the list of serialized task strings
+     *
+     * @return list of serialized task strings
+     */
     public List<String> getTaskStringList() {
         List<String> taskStrings = new ArrayList<>();
         for (Task t : taskList) {
             taskStrings.add(t.serialize());
         }
         return taskStrings;
+    }
+
+    /**
+     * Number of tasks in TaskList
+     *
+     * @return size of TaskList
+     */
+    public int size() {
+        return this.taskList.size();
     }
 
 }
