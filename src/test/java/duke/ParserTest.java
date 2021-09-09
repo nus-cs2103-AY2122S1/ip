@@ -1,11 +1,15 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
 import duke.command.Command;
 import duke.command.ExitCommand;
 import duke.command.ListCommand;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {
 
@@ -26,15 +30,17 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_ExitCommand_parsedCorrectly() throws DukeException {
+    public void parse_exitCommand_parsedCorrectly() throws DukeException {
         final String input = "bye";
         parseAndAssertCommandType(input, ExitCommand.class);
     }
 
     //@@author nhjryan-reused
-    //Reused from https://github.com/se-edu/addressbook-level2/blob/master/test/java/seedu/addressbook/parser/ParserTest.java
+    //Reused from
+    // https://github.com/se-edu/addressbook-level2/blob/master/test/java/seedu/addressbook/parser/ParserTest.java
     //with minor modifications
-    private <T extends Command> T parseAndAssertCommandType(String input, Class<T> expectedCommandClass) throws DukeException {
+    private <T extends Command> T parseAndAssertCommandType(String input,
+                                                            Class<T> expectedCommandClass) throws DukeException {
         final Command result = Parser.parse(input);
         assertTrue(result.getClass().isAssignableFrom(expectedCommandClass));
         return (T) result;

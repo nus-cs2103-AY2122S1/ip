@@ -115,7 +115,7 @@ public class Parser {
             return new DoneCommand(index);
         }
 
-        if (command.equals("delete")){
+        if (command.equals("delete")) {
             return new DeleteCommand(index);
         }
 

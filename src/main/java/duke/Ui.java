@@ -7,8 +7,8 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private Scanner scanner;
     private static final String WELCOME = " Hello! I'm Duke\n" + " What can I do for you?";
+    private Scanner scanner;
 
     /**
      * The constructor for a Ui object.

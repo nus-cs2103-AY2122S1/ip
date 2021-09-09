@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a Deadline with a description and a 'done' status and a Deadline due date.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     protected LocalDate by;
 

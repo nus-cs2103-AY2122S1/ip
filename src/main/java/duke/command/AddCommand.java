@@ -1,5 +1,8 @@
 package duke.command;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
@@ -7,9 +10,6 @@ import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Command to add a Task to the TaskList.
@@ -78,6 +78,8 @@ public class AddCommand extends Command {
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("Please specify a description for this event.");
             }
+        default:
+            throw new DukeException("An error has occurred while executing an AddCommand.");
         }
     }
 }

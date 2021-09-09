@@ -1,16 +1,18 @@
 package duke;
 
-import duke.task.Deadline;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.task.Deadline;
+
 
 public class DeadlineTest {
 
-    LocalDate date = LocalDate.parse("2021-09-17");
-    Deadline deadline = new Deadline("CS2103 iP", date);
+    private LocalDate date = LocalDate.parse("2021-09-17");
+    private Deadline deadline = new Deadline("CS2103 iP", date);
 
     @Test
     public void toFileFormat_deadlineComplete_printedCorrectly() {

@@ -36,7 +36,7 @@ public class DoneCommand extends Command {
         }
 
         tasks.doneTask(index);
-        ui.printTemplate( "Nice! I've marked this task as done:\n" + "  " + tasks.getTask(index));
+        ui.printTemplate(" Nice! I've marked this task as done:\n" + "  " + tasks.getTask(index));
         storage.update(tasks);
     }
 }
