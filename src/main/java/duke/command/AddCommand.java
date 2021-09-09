@@ -78,6 +78,7 @@ public class AddCommand extends Command {
      * @param tasks   The list of tasks stored so far.
      * @param ui      A Ui which deals with interactions with user.
      * @param storage The storage which saves and edits the file.
+     * @return The string indicating the command has been executed.
      * @throws DukeException DukeException thrown when format of date/time
      *                       is incorrect.
      */

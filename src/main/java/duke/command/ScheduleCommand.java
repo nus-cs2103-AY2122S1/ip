@@ -31,17 +31,26 @@ public class ScheduleCommand extends Command {
         this.scheduleDate = scheduleDate;
     }
 
-    public String taskInSchedule(Task task) {
-        assert !(task instanceof Todo): "task is todo";
-        if(task instanceof Deadline) {
+    /**
+     * Checks if the task should be included in the
+     * schedule and returns the string representing
+     * the task or an empty string if the task should not
+     * be included.
+     *
+     * @param task The task to check.
+     * @return The string to add to the schedule string.
+     */
+    public String computeScheduleString(Task task) {
+        assert !(task instanceof Todo) : "task is todo";
+        if (task instanceof Deadline) {
             Deadline deadline = (Deadline) task;
             if (deadline.getBy().equals(scheduleDate)) {
                 return deadline.toString() + System.lineSeparator();
             }
-        } else if(task instanceof Event) {
+        } else if (task instanceof Event) {
             Event event = (Event) task;
             LocalDate taskDate = event.getAt().toLocalDate();
-            if(taskDate.equals(scheduleDate)) {
+            if (taskDate.equals(scheduleDate)) {
                 return event.toString() + System.lineSeparator();
             }
         } else {
@@ -56,16 +65,18 @@ public class ScheduleCommand extends Command {
      * @param tasks   The list of tasks stored so far.
      * @param ui      The Ui to deal with interactions with user.
      * @param storage The storage which saves and edits file content.
+     * @return The string representing the schedule for specified date.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String taskSchedule = "You are sooo busy!! :\n";
         for (int i = 0; i < tasks.size(); i++) {
             Task checkTask = tasks.get(i);
-            if(!(checkTask instanceof Todo)) {
-                taskSchedule += taskInSchedule(checkTask);
+            if (!(checkTask instanceof Todo)) {
+                taskSchedule += computeScheduleString(checkTask);
             }
-        } return taskSchedule;
+        }
+        return taskSchedule;
     }
 
 }

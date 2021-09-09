@@ -26,6 +26,7 @@ public class FindCommand extends Command {
      * @param tasks The list of tasks stored so far.
      * @param ui The Ui to deal with interactions with user.
      * @param storage The storage which saves and edits file content.
+     * @return The string indicating the command has been executed.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         assert command.contains("find"): "find is not included";

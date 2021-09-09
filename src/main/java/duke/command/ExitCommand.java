@@ -40,7 +40,7 @@ public class ExitCommand extends Command {
      * @param tasks   The list of tasks stored so far.
      * @param ui      The Ui to deal with interactions with user.
      * @param storage The storage which saves and edits file content.
-     * @throws DukeException
+     * @return The string indicating the command has been executed.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

@@ -36,17 +36,18 @@ public class DeleteCommand extends Command {
      * @param tasks The list of tasks stored so far.
      * @param ui The Ui to deal with interactions with user.
      * @param storage The storage which saves and edits file content.
+     * @return The string indicating the delete command is executed.
      */
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.removeTask(tasks.get(index - 1));
         tasks.delete(index);
         try {
             storage.editFileAll(tasks);
         } catch(DukeException e) {
             return e.getMessage();
         }
-        return ui.numberOfTasks(tasks);
+        return ui.removeTask(tasks.get(index - 1))
+                + ui.numberOfTasks(tasks);
     }
 }

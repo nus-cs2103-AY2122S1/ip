@@ -154,14 +154,14 @@ public class Storage {
      * @return The string representing the task.
      */
     public String getFileString(Task task) {
-        String toAdd = task.taskIndicator() + " | "
+        String toAdd = task.getTaskIndicator() + " | "
                 + (task.getStatusIcon().equals("X")
                         ? "Y" : "N") + " | " + task.getDescription().trim();
 
-        if (task.taskIndicator().equals("D")) {
+        if (task.getTaskIndicator().equals("D")) {
             Deadline temp = (Deadline) task;
             toAdd += " | " + temp.changeDateFormat().trim();
-        } else if (task.taskIndicator().equals("E")) {
+        } else if (task.getTaskIndicator().equals("E")) {
             Event temp = (Event) task;
             toAdd += " | " + temp.getFormattedAt().trim();
         }
