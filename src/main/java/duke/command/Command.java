@@ -7,6 +7,7 @@
 
 package duke.command;
 
+import duke.exceptions.DateNotAcceptedException;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.NotDoneRightException;
 import duke.parser.Parser;
@@ -46,7 +47,7 @@ public class Command {
      * @throws IOException
      */
     public String addDeadline(String userCommand, String cmd, TaskList taskList)
-            throws EmptyDescriptionException, IOException {
+            throws EmptyDescriptionException, IOException, DateNotAcceptedException {
         Parser parser = new Parser(userCommand);
         String deadlineInfo = parser.getDeadlineInfo();
         LocalDate date = parser.getDeadlineDate();
@@ -168,5 +169,25 @@ public class Command {
      */
     public String list(TaskList taskList) {
         return ui.showList(taskList);
+    }
+
+    /**
+     * Finds all items from the task list that match a given string.
+     *
+     * @param userCommand The command inputted from the user
+     * @param taskList The task list which contains the tasks
+     * @return The bot's output for the tag command.
+     * @throws EmptyDescriptionException If the user input is missing extra information after the command.
+     * @throws NotDoneRightException If there are errors processing the "done" command.
+     */
+    public String tag(String userCommand, TaskList taskList) throws EmptyDescriptionException, NotDoneRightException,
+            IOException {
+        Parser parser = new Parser(userCommand);
+        int ref = parser.getSecondInteger(taskList.size()) - 1;
+        String tagInfo = parser.getTagInfo();
+        taskList.get(ref).addTag(tagInfo);
+        storage.addTag(ref, taskList.get(ref).getStatusString());
+
+        return ui.showTag(tagInfo, taskList.get(ref));
     }
 }

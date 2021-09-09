@@ -7,33 +7,49 @@
 
 package duke.tasks;
 
+import java.util.ArrayList;
+
 public class Todo extends Task {
+
+    protected ArrayList<String> tags = new ArrayList<>();
 
     public Todo(String description) {
         super(description);
     }
-    public Todo(String description, boolean isDone) {
+    public Todo(String description, boolean isDone, ArrayList<String> tags) {
         super(description);
         this.isDone = isDone;
+        this.tags = tags;
     }
 
     /**
      * Returns the string of the task to be represented in the list.
      *
-     * @returns the string of the task to be represented in the list
+     * @return the string of the task to be represented in the list
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString() + description;
+        return String.format("[T]%s %s %s", super.toString(), description, getTags(this.tags));
     }
 
     /**
      * Returns the string of the task to be represented in the text file.
      *
-     * @returns the string of the task to be represented in the text file
+     * @return the string of the task to be represented in the text file
      */
     @Override
     public String getStatusString() {
-        return "T@" + (isDone ? 1 : 0) + "@" + this.description;
+        return String.format("T@%d@%s@ @%s@", (isDone ? 1 : 0), this.description, getTagsForStorage(this.tags));
+        // return "T@" + (isDone ? 1 : 0) + "@" + this.description;
+    }
+
+    /**
+     * Returns a String representation of the tags to any event.
+     *
+     * @param tagInfo The information associated with a tag.
+     */
+    @Override
+    public void addTag(String tagInfo) {
+        this.tags.add(tagInfo);
     }
 }

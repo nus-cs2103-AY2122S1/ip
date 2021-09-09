@@ -7,25 +7,29 @@
 
 package duke.tasks;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Task {
 
     protected final String description;
     protected boolean isDone;
+    protected ArrayList<String> eventTags = new ArrayList<>();
 
+    /**
+     * Constructor of Task objects.
+     *
+     * @param description The description of the Task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    public Task(String description, boolean isDone) {
-        this.description = description;
-        this.isDone = isDone;
-    }
-
     /**
      * Returns an 'X' if the task has been marked as done, and an " " otherwise.
      *
-     * @returns the string of the task to be represented in the list
+     * @return the string of the task to be represented in the list
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
@@ -41,9 +45,8 @@ public class Task {
     /**
      * Returns the string representation of the task completion.
      *
-     * @returns the string representation of the task completion
+     * @return the string representation of the task completion
      */
-    // TODO use String.format for all the tasks instead of String concat
     public String toString() {
         return "[" + this.getStatusIcon() + "] ";
     }
@@ -57,5 +60,52 @@ public class Task {
         return "";
     }
 
+
+    /**
+     * Returns a String representation of the tags to any event.
+     *
+     * @return String representation of the tags to any event.
+     */
+    // TODO where should this fnc be
+    public String getTags(ArrayList<String> eventTags) {
+        StringBuilder eventTagsStr = new StringBuilder();
+        if (!eventTags.isEmpty()) {
+            for (String s : eventTags) {
+                eventTagsStr.append(String.format(" #%s", s));
+            }
+            return eventTagsStr.toString();
+
+        } else {
+            return "";
+        }
+    }
+
+    /**
+     * Returns a String representation of the tags to any event.
+     *
+     * @return String representation of the tags to any event.
+     */
+    // TODO where should this fnc be
+    public String getTagsForStorage(ArrayList<String> tags) {
+        StringBuilder eventTagsStr = new StringBuilder();
+        if (!tags.isEmpty()) {
+            for (String s : tags) {
+                eventTagsStr.append(s).append(" ");
+            }
+            return eventTagsStr.toString();
+
+        } else {
+            return " ";
+        }
+    }
+
+    /**
+     * Returns a String representation of the tags to any event.
+     *
+     * @param tagInfo The information associated with a tag.
+     */
+    public void addTag(String tagInfo) {
+        this.eventTags.add(tagInfo);
+    }
 }
 

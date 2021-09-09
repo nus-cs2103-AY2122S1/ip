@@ -8,6 +8,8 @@
 package duke.ui;
 
 import duke.tasklist.TaskList;
+import duke.tasks.Task;
+
 import java.util.ArrayList;
 
 public class Ui {
@@ -129,5 +131,17 @@ public class Ui {
             }
             return String.format("Here are the matching tasks in your list: %s Good luck!", words.toString());
         }
+    }
+
+    /**
+     * Logs the completion of a Task.
+     *
+     * @param tagInfo The information of the tag.
+     * @param task The task that the added tag is associated with.
+     * @return The bot's output for the tag command.
+     */
+    public String showTag(String tagInfo, Task task) {
+        return String.format("Oki! The tag %s has been added. Here is the modified task!\n %s",
+                tagInfo, task.toString());
     }
 }

@@ -8,9 +8,11 @@
 
 package duke.parser;
 
+import duke.exceptions.DateNotAcceptedException;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.NotDoneRightException;
 import java.time.LocalDate;
+import java.util.zip.DataFormatException;
 
 public class Parser {
 
@@ -103,16 +105,21 @@ public class Parser {
      *
      * @return The date of a Deadline task
      * @throws EmptyDescriptionException If the user input is missing extra information after the command.
+     * @throws DateNotAcceptedException If there is an error with the date inputted.
      */
-    public LocalDate getDeadlineDate() throws EmptyDescriptionException {
+    public LocalDate getDeadlineDate() throws EmptyDescriptionException, DateNotAcceptedException {
 
         if (commandWords.length == 1 || this.command.split(" ", 2).length == 1) {
             throw new EmptyDescriptionException("deadline");
         }
 
         String allDetails = this.command.split(" ", 2)[1];
-        return LocalDate.parse(allDetails.split("/by", 2)[1].strip());
-        // TODO add DateNotAcceptedException
+        try {
+            return LocalDate.parse(allDetails.split("/by", 2)[1].strip());
+
+        } catch (Exception e) {
+            throw new DateNotAcceptedException(e.getMessage());
+        }
     }
 
     /**
@@ -144,5 +151,20 @@ public class Parser {
 
         String allDetails = this.command.split(" ", 2)[1];
         return allDetails.split("/at", 2)[1];
+    }
+
+    /**
+     * Returns the information of a Tag.
+     *
+     * @return The information of a Tag
+     * @throws EmptyDescriptionException If the user input is missing extra information after the command.
+     */
+    public String getTagInfo() throws EmptyDescriptionException {
+
+        if (commandWords.length == 1 || this.command.split(" ", 3).length < 3) {
+            throw new EmptyDescriptionException("event");
+        }
+
+        return this.command.split(" ", 3)[2];
     }
 }

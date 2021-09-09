@@ -67,6 +67,9 @@ public class CommandExecutor {
         } else if (cmd.equals("find")) {
             return command.find(userCommand, taskList);
 
+        } else if (cmd.equals("tag")) {
+            return command.tag(userCommand, taskList);
+
             // Else, an item has been added to the chat bot
             // Commands are either todo, deadline or event
         } else if (cmd.equals("todo")) {
