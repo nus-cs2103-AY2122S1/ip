@@ -45,7 +45,7 @@ public class TaskList {
 						+ "____________________________________________________________\n";
 				throw new DukeException(message);
 			}
-			task = new ToDo(inputLine.substring(5));
+			task = ToDo.splitToDO(inputLine);
 			this.taskList.add(task);
 			guiOutput = printAddTask(taskList.size(), task);
 			break;
@@ -60,6 +60,7 @@ public class TaskList {
 						+ "____________________________________________________________\n";
 				throw new DukeException(message);
 			}
+			
 			task = Deadline.splitDeadline(inputLine);
 			taskList.add(task);
 			guiOutput = printAddTask(taskList.size(), task);
