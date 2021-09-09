@@ -38,6 +38,7 @@ public class Storage {
                     + "Couldn't access/create necessary file to store tasks."
                     + "Please exit the bot if you don't want to lose new tasks.");
         }
+        assert taskDataFile.exists() : "File for storage is supposed to exist";
     }
 
     /**
