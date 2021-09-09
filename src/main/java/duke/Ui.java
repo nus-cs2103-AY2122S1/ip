@@ -25,7 +25,6 @@ public class Ui {
      */
     public Ui() {
         items = new Items();
-
     }
 
     /**
