@@ -25,6 +25,7 @@ public class Storage {
             }
             writer.close();
         } catch (IOException ignored) {
+            return;
         }
     }
 
@@ -50,6 +51,7 @@ public class Storage {
      * @param bot running bot
      */
     public static void save(Bot bot) {
+        assert bot.getTaskList() != null : "Bot has no tasks to save";
         Storage.write(bot.getTaskList().getTaskStringList());
     }
 
