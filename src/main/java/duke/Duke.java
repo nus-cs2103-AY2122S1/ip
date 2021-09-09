@@ -62,19 +62,21 @@ public class Duke extends Application {
         while (cli.shouldContinue()) {
             String commandStr = cli.nextCommand();
             DukeCommandWithArgs command = parser.parse(commandStr);
+
             if (command == null) {
                 // Command not found
                 cli.outputLine(String.format("Unknown command: %s. Type \"help\" for a list of available commands.",
                         commandStr));
-            } else {
-                try {
-                    command.runWith(taskList, cli, storage);
-                } catch (InvalidCommandException e) {
-                    cli.outputLine(
-                            String.format("Error in \"%s\": %s\nType \"help %s\" to view proper usage of the command.",
-                                    command.getBaseCommand().getName(), e.getMessage(),
-                                    command.getBaseCommand().getName()));
-                }
+                continue;
+            }
+
+            try {
+                command.runWith(taskList, cli, storage);
+            } catch (InvalidCommandException e) {
+                cli.outputLine(
+                        String.format("Error in \"%s\": %s\nType \"help %s\" to view proper usage of the command.",
+                                command.getBaseCommand().getName(), e.getMessage(),
+                                command.getBaseCommand().getName()));
             }
         }
         cli.printExitMessage();
