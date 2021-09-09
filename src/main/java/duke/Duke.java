@@ -146,6 +146,7 @@ public class Duke {
                 break;
             }
             assert !output.equals(""): "Unable to generate response. Please try again.";
+            prevCommand = inputWords;
             return output;
         } catch (Exception dukeException) {
             return dukeException.getMessage();
