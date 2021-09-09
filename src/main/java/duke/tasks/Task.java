@@ -16,6 +16,7 @@ public class Task {
     private boolean done;
 
     Task(String name, boolean done) {
+        assert name != "";
         this.name = name;
         this.done = done;
     }
