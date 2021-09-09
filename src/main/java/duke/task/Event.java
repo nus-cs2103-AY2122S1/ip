@@ -3,6 +3,9 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import duke.DukeException;
 
 /**
  * Encapsulates the Event class which has a starting date and time.
@@ -17,10 +20,18 @@ public class Event extends Task {
      *
      * @param description Description of the event task.
      * @param at Starting date and time of the event as input by user.
+     * @throws DukeException If the date and time are formatted incorrectly.
      */
-    public Event(String description, String at) {
+    public Event(String description, String at) throws DukeException {
         super(description);
-        setDateTime(at);
+        try {
+            String[] dateTime = at.split(" ");
+            this.eventDate = LocalDate.parse(dateTime[0].trim());
+            this.eventTime = LocalTime.parse(dateTime[1].trim());
+        } catch (DateTimeParseException e) {
+            throw new DukeException("OOPS!! Event date and time are formatted incorrectly."
+                    + "\n\t Please format them as: [yyyy-mm-dd HH:MM]");
+        }
     }
 
     /**
@@ -30,12 +41,8 @@ public class Event extends Task {
      * @param isDone Indicates if event is done.
      * @param at Starting date and time of the event as input by user.
      */
-    public Event(String description, boolean isDone, String at) {
+    public Event(String description, boolean isDone, String at) throws DukeException {
         super(description, isDone);
-        setDateTime(at);
-    }
-
-    private void setDateTime(String at) {
         this.at = at;
         String[] dateTime = at.split(" ");
         this.eventDate = LocalDate.parse(dateTime[0].trim());

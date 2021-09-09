@@ -40,6 +40,11 @@ public class AddCommand implements Command {
         String taskInfo = params[1];
         switch (taskType) {
         case "event":
+            if (taskInfo.startsWith("/at")) {
+                throw new DukeException("OOPS!!! You are missing the name of the event."
+                        + "\nThe correct format is:"
+                        + "\nevent [event name] /at [yyyy-mm-dd HH:MM]");
+            }
             String[] eventInfo = taskInfo.split(" /at ");
             if (eventInfo.length == 1) {
                 throw new DukeException("OOPS!!! Please enter event information in the following "
@@ -48,6 +53,11 @@ public class AddCommand implements Command {
             t = new Event(eventInfo[0], eventInfo[1]);
             break;
         case "deadline":
+            if (taskInfo.startsWith("/by")) {
+                throw new DukeException("OOPS!!! You are missing the name of the deadline."
+                        + "\nThe correct format is:"
+                        + "\ndeadline [deadline name] /by [yyyy-mm-dd]");
+            }
             String[] deadlineInfo = taskInfo.split(" /by ");
             if (deadlineInfo.length == 1) {
                 throw new DukeException("OOPS!!! Please enter deadline information in the following "

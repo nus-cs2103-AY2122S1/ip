@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -51,7 +52,7 @@ public class MainWindow extends AnchorPane {
     private Image getDukeImage(String dukeResponse) {
         if (dukeResponse.startsWith("OOPS")) {
             return new Image(this.getClass().getResourceAsStream("/images/DaDukeConfused.gif"));
-        } else if (dukeResponse.startsWith("See you")) {
+        } else if (dukeResponse.startsWith("Your tasks have been saved")) {
             return new Image(this.getClass().getResourceAsStream("/images/DaDukeBye.gif"));
         } else {
             return new Image(this.getClass().getResourceAsStream("/images/DaDuke.gif"));
@@ -81,7 +82,7 @@ public class MainWindow extends AnchorPane {
                 public void run() {
                     System.exit(0);
                 }
-            }, 3000);
+            }, 2900);
         }
     }
 }

@@ -26,8 +26,13 @@ public class Storage {
      * @param path The path of the file.
      */
     public Storage(String path) {
-        this.filePath = path;
+        File file = new File(path);
         this.file = new File(path);
+        if (!file.exists()) {
+            String dir = file.getParent();
+            File dirFile = new File(dir);
+        }
+        this.filePath = path;
     }
 
     private Task toTask(String fileRecord) {
@@ -58,7 +63,7 @@ public class Storage {
      * @return A TaskList object representing user's tasks.
      * @throws IOException If there is error reading from the file.
      */
-    public TaskList loadTasksFromFile() throws IOException {
+    public List<Task> loadTasksFromFile() throws IOException {
         FileReader fileReader = new FileReader(filePath);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String line;
@@ -67,7 +72,7 @@ public class Storage {
             tasks.add(toTask(line));
         }
         fileReader.close();
-        return new TaskList(tasks);
+        return tasks;
     }
 
     /**
