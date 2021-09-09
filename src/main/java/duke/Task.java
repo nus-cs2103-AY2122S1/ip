@@ -1,12 +1,13 @@
 package duke;
 
 /**
- * Class includes methods required for creating a task and obtaining information relating to it.
+ * Class includes methods required for creating a task
+ * and obtaining information relating to it.
  */
 public class Task {
-    protected String information;
-    protected Boolean isCompletedTask;
-    protected String type;
+    private String information;
+    private Boolean isCompletedTask;
+    private String type;
 
     /**
      * Constructor for creating a task.
@@ -39,7 +40,7 @@ public class Task {
      *
      * @return task type
      */
-    public String getType(){
+    public String getType() {
         return this.type;
     }
 

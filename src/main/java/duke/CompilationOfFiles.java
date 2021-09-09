@@ -19,7 +19,7 @@ public class CompilationOfFiles {
      *
      * @param filepath path of the file
      */
-    public CompilationOfFiles(String filepath) {
+    public CompilationOfFiles( String filepath) {
         this.filepath = filepath;
     }
 
@@ -28,13 +28,13 @@ public class CompilationOfFiles {
      *
      * @param tasks list of tasks
      */
-    public static void loadAndSaveFile(ListOfTasks tasks) {
+    public static void loadAndSaveFile( ListOfTasks tasks) {
         try {
-            Task temp;
             Files.createDirectories(Paths.get("data/"));
             File newFile = new File(filepath);
             if (newFile.createNewFile()) {
-                System.out.println("A new file has been created as there are no saved files.");
+                System.out.println("A new file has been created "
+                        + "as there are no saved files.");
             } else {
                 Scanner sc = new Scanner(newFile);
                 while (sc.hasNext()) {
@@ -50,7 +50,7 @@ public class CompilationOfFiles {
                         if (line[1].equals("1")) {
                             d.markDone();
                         }
-                        tasks.includeAdditionalTask( d);
+                        tasks.includeAdditionalTask(d);
                     } else if ((line[0]).equals("EVENT")) {
                         Event e = new Event(line[2], line[3], "EVENT");
                         if (line[1].equals("1")) {
@@ -58,7 +58,8 @@ public class CompilationOfFiles {
                         }
                         tasks.includeAdditionalTask(e);
                     } else {
-                        System.out.println("    OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        System.out.println("    OOPS!!! I'm sorry, "
+                                + "but I don't know what that means :-(");
                     }
                 }
             }
@@ -73,7 +74,7 @@ public class CompilationOfFiles {
      *
      * @param list list of tasks
      */
-    public static void updateFile(ArrayList<Task> list) {
+    public static void updateFile( ArrayList<Task> list) {
         try {
             FileWriter newFileWriter = new FileWriter(filepath);
             newFileWriter.write("");
@@ -81,7 +82,7 @@ public class CompilationOfFiles {
             e.printStackTrace();
         }
         for (Task task : list) {
-            updateSavedFile(task,task.getType());
+            updateSavedFile(task, task.getType());
         }
     }
 
@@ -96,8 +97,10 @@ public class CompilationOfFiles {
             File newFile = new File(filepath);
             Scanner sc = new Scanner(newFile);
             FileWriter f = new FileWriter(filepath, true);
-            f.write((sc.hasNextLine() ? System.lineSeparator() : "") + taskType + "/"
-                    + (t.getStatusIcon() == "[X] " ? "1" : "0") + "/" + t.getInformation()
+            f.write((sc.hasNextLine() ? System.lineSeparator() : "")
+                    + taskType + "/"
+                    + (t.getStatusIcon() == "[X] " ? "1" : "0")
+                    + "/" + t.getInformation()
                     + (taskType.equals("TODO") ? "" : "/" + t.getDetails()));
             f.close();
         } catch (IOException e) {

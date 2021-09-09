@@ -1,10 +1,11 @@
 package duke;
 
 /**
- * Class includes methods required for creating a todoTask and obtaining information relating to it.
+ * Class includes methods required for creating a todoTask
+ * and obtaining information relating to it.
  */
 public class ToDo extends Task {
-    protected String type;
+    private String type;
 
     /**
      * Constructor for creating a todoTask.
@@ -12,7 +13,7 @@ public class ToDo extends Task {
      * @param information refers to details of task
      * @param type refers to type of task
      */
-    public ToDo(String information,String type){
+    public ToDo(String information, String type) {
         super(information);
         this.type = type;
     }

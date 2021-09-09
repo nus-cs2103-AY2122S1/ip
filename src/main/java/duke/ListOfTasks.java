@@ -20,7 +20,7 @@ public class ListOfTasks {
     }
 
     /**
-     * Returns the list of tasks
+     * Returns the list of tasks.
      *
      * @return tasks
      */
@@ -34,7 +34,7 @@ public class ListOfTasks {
      * @param newTask represents the new task to be added
      */
     public void includeAdditionalTask(Task newTask) {
-        tasks.add(this.count,newTask);
+        tasks.add(this.count, newTask);
         count++;
     }
 
@@ -60,7 +60,7 @@ public class ListOfTasks {
         ui.listTaskMessage();
         int a = 0;
         while (a < count) {
-            ui.listEachTask(tasks,a);
+            ui.listEachTask(tasks, a);
             a = a + 1;
         }
     }
@@ -121,6 +121,7 @@ public class ListOfTasks {
      *
      * @param command represents command given to remove value
      * @param val represents value to be removed
+     * @return value after changes made
      */
     private String removeVal(String val, String command) {
         int len = command.length();
@@ -146,8 +147,9 @@ public class ListOfTasks {
         information = removeVal(information, "event");
         String[] moreInformation = information.split("/at", 2);
 
-        this.tasks.add(count,new Event(moreInformation[0],moreInformation[1].strip(),"EVENT") );
-        CompilationOfFiles.updateSavedFile(this.tasks.get(count),"EVENT");
+        this.tasks.add(count, new Event(moreInformation[0],
+                moreInformation[1].strip(), "EVENT"));
+        CompilationOfFiles.updateSavedFile(this.tasks.get(count), "EVENT");
         ui.printCurrentTask(this.tasks.get(count));
         count = count + 1;
         ui.printNumberOfTasks(count);
@@ -168,7 +170,8 @@ public class ListOfTasks {
         information = removeVal(information, "deadline");
         String[] moreInformation2 = information.split("/by", 2);
 
-        this.tasks.add(count,new Deadline(moreInformation2[0],moreInformation2[1].strip(), "DEADLINE") );
+        this.tasks.add(count, new Deadline(moreInformation2[0],
+                moreInformation2[1].strip(), "DEADLINE"));
         CompilationOfFiles.updateSavedFile(this.tasks.get(count), "DEADLINE");
         System.out.println("     Got it. I've added this task:");
         ui.printCurrentTask(this.tasks.get(count));

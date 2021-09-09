@@ -4,20 +4,22 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Class includes methods required for creating a deadline and obtaining information relating to it.
+ * Class includes methods required for creating a deadline and
+ * obtaining information relating to it.
  */
 public class Deadline extends Task {
-    protected String by;
-    protected String type;
+    private String by;
+    private String type;
     private LocalDate completionDate;
 
     /**
      * Constructor for creating a deadline.
      *
      * @param information refers to details of deadline
+     * @param by refers to when task should be completed
      * @param type refers to type of task
      */
-    public Deadline(String information, String by,String type) {
+    public Deadline(String information, String by, String type) {
         super(information);
         this.completionDate = LocalDate.parse(by);
         this.type = type;
@@ -48,6 +50,9 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + completionDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + completionDate
+                .format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + ")";
     }
 }

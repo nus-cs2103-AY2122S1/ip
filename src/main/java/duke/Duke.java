@@ -16,7 +16,7 @@ public class Duke {
      *
      * @param filepath refers to path of the file
      */
-    public Duke (String filepath) {
+    public Duke(String filepath) {
         ui = new Ui();
         storage = new CompilationOfFiles(filepath);
         tasks = new ListOfTasks();
@@ -30,15 +30,17 @@ public class Duke {
         boolean isEnd = false;
         while (!isEnd) {
             String command = in.nextLine();
-            isEnd = Parser.handleCommand(command,tasks);
+            isEnd = Parser.handleCommand(command, tasks);
         }
         ui.end();
     }
 
     /**
      * This is the main method.
+     *
+     * @param args required for main method
      */
-    public static void main (String[]args) {
+    public static void main(String[]args) {
         new Duke("data/duke.txt").run();
     }
 

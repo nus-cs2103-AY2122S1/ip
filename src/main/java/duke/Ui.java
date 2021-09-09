@@ -17,19 +17,27 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("____________________________________________________________");
+        System.out.println("____________________________"
+                +
+                "________________________________");
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
-        System.out.println("____________________________________________________________");
+        System.out.println("_____________________________"
+                +
+                "_______________________________");
     }
 
     /**
      * Method provides message for ending the application.
      */
     public void end() {
-        System.out.println("    ____________________________________________________________");
+        System.out.println("    ________________________________"
+                +
+                "____________________________");
         System.out.println("    Bye. Hope to see you again soon!");
-        System.out.println("    ____________________________________________________________");
+        System.out.println("    ______________________________"
+                +
+                "______________________________");
     }
 
     /**
@@ -41,9 +49,12 @@ public class Ui {
 
     /**
      * Method provides message for returning number of tasks.
+     *
+     * @param count represents number of tasks
      */
     public void  printNumberOfTasks(int count) {
-        System.out.println("     Now you have " + count + " task" + ((count > 1) ? "s" : "") + " in the list.");
+        System.out.println("     Now you have " + count
+                + " task" + ((count > 1) ? "s" : "") + " in the list.");
 
     }
 
@@ -70,7 +81,7 @@ public class Ui {
      * @param a index of task
      */
     public void listEachTask(ArrayList<Task> xs, int a) {
-        System.out.println("     " + ( a + 1 ) + ". " + xs.get(a).toString() );
+        System.out.println("     " + (a + 1) + ". " + xs.get(a).toString());
     }
 
     /**

@@ -1,19 +1,21 @@
 package duke;
 
 /**
- * Class includes methods required for creating a event and obtaining information relating to it.
+ * Class includes methods required for creating a event
+ * and obtaining information relating to it.
  */
-public class Event extends Task{
-    protected String time;
-    protected String type;
+public class Event extends Task {
+    private String time;
+    private String type;
 
     /**
      * Constructor for creating an event.
      *
      * @param information refers to details of event
+     * @param time refers to time event has occurred
      * @param type refers to type of task
      */
-    public Event(String information,String time,String type){
+    public Event(String information, String time, String type) {
         super(information);
         this.type = type;
         this.time = time;
