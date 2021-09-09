@@ -100,15 +100,13 @@ public class TaskList {
      * @return ArrayList of Task objects.
      */
     public ArrayList<Task> findTasks(String content) {
-        ArrayList<Task> findTasksResult = new ArrayList<>();
+        ArrayList<Task> filteredList = new ArrayList<>();
 
-        for (Task currTask: tasks) {
-            if (currTask.hasContent(content)) {
-                findTasksResult.add(currTask);
-            }
-        }
+        tasks.stream()
+                .filter((currTask) -> currTask.hasContent(content))
+                .forEach(filteredList::add);
 
-        return findTasksResult;
+        return filteredList;
     }
 
     private String countTasks() {
