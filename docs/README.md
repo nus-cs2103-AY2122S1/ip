@@ -1,4 +1,4 @@
-# Duke User Guide
+# Duke Guide
 
 Duke is a task-manager chat bot optimized for keyboard lovers.
 
