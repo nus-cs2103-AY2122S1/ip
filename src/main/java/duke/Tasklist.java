@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import duke.exceptions.NoSuchTaskException;
 import duke.tasks.DeadlinesTask;
 import duke.tasks.EventsTask;
+import duke.tasks.FixedDurationTask;
 import duke.tasks.Task;
 import duke.tasks.ToDosTask;
 
@@ -63,6 +64,9 @@ public class Tasklist {
             case "T":
                 return new ToDosTask(line.split(" \\| ")[2],
                         line.split(" \\| ")[1].equals("X"));
+            case "F":
+                return new FixedDurationTask(line.split(" \\| ")[2],
+                        line.split(" \\| ")[1].equals("X"), line.split(" \\| ")[3]);
             default:
                 throw new NoSuchTaskException("Invalid Line");
             }
