@@ -1,11 +1,14 @@
-package tasks;
+package duke.tasks;
+
+import duke.tasks.Task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     private String description;
-    private String time;
+    private String startDate;
+    private String endDate;
 
     /**
      * A constructor for the Event task.
@@ -13,9 +16,11 @@ public class Event extends Task {
      * @param description user input task description.
      * @param isDone status of the task.
      */
-    public Event(String description, Boolean isDone) {
-        super(description, isDone, "E");
+    public Event(String description, String deadline, Boolean isDone) {
+        super(description + " /from " + deadline.split(" ", 2)[0] + " /to " + deadline.split(" ", 2)[1], isDone, "E");
         this.description = description;
+        this.startDate = deadline.split(" ", 2)[0];
+        this.endDate = deadline.split(" ", 2)[1];
     }
 
     /**
@@ -24,20 +29,10 @@ public class Event extends Task {
      * @return a string representation of the event task.
      */
     public String getTask() {
-        // split text and duration
-        String[] splitted = description.split("/from ", 2);
-        String text = splitted[0].trim();
-        String duration = splitted[1].trim();
-
-        // split start date and end date
-        String[] splitted2 = duration.split("/to ", 2);
-        String startDate = splitted2[0].trim();
-        String endDate = splitted2[1].trim();
-
         LocalDateTime startDateTime = LocalDateTime.parse(startDate);
         LocalDateTime endDateTime = LocalDateTime.parse(endDate);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm a");
-        return "[E]" + "[" + super.getStatusIcon() + "] " + text + " (from: " + startDateTime.format(formatter) +
+        return "[E]" + "[" + super.getStatusIcon() + "] " + description + " (from: " + startDateTime.format(formatter) +
                 " to " + endDateTime.format(formatter) + ")";
     }
 }

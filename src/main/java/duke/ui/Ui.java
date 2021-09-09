@@ -1,10 +1,10 @@
-package duke;
+package duke.ui;
 
 public class Ui {
     private static String DIVIDER = "____________________________________________________________";
 
     /**
-     * Shows a welcome message from Duke chatbot.
+     * Shows a welcome message from duke.Duke chatbot.
      */
     public static void welcome() {
         String logo = " ____        _        \n"
@@ -24,6 +24,10 @@ public class Ui {
      */
     public static void showLoadingError() {
         System.out.println("LOADING ERROR");
+    }
+
+    public String showBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
 }

@@ -1,4 +1,7 @@
-package tasks;
+package duke.tasks;
+
+import duke.exceptions.DeadlineFormatException;
+import duke.tasks.Task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,9 +16,10 @@ public class Deadline extends Task {
      * @param description user input task description.
      * @param isDone status of the task.
      */
-    public Deadline(String description, Boolean isDone) {
-        super(description, isDone, "D");
+    public Deadline(String description, String deadline, Boolean isDone) {
+        super(description + " /by " + deadline, isDone, "D");
         this.description = description;
+        this.deadline = deadline;
     }
 
     /**
@@ -24,13 +28,10 @@ public class Deadline extends Task {
      * @return a string representation of the deadline task.
      */
     public String getTask() {
-        String[] splitted = description.split("/by ", 2);
-        String text = splitted[0].trim();
-        deadline = splitted[1].trim();
         LocalDateTime dateTime = LocalDateTime.parse(deadline);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm a");
 
-        return "[D]" + "[" + super.getStatusIcon() + "] " + text + " (by: " + dateTime.format(formatter) + ")";
+        return "[D]" + "[" + super.getStatusIcon() + "] " + description + " (by: " + dateTime.format(formatter) + ")";
     }
 
 }

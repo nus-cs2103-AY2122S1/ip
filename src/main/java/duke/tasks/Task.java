@@ -1,13 +1,13 @@
-package tasks;
+package duke.tasks;
 
 /**
- * tasks.Task class to represent a task.
+ * duke.tasks.Task class to represent a task.
  *
  * @author: Chen Hsiao Ting
  */
 
 public class Task {
-    private String description;
+    private String input;
     private boolean isDone;
     private String type;
 
@@ -18,8 +18,8 @@ public class Task {
      * @param isDone status of the task.
      * @param type type of task.
      */
-    public Task(String description, Boolean isDone, String type) {
-        this.description = description;
+    public Task(String input, Boolean isDone, String type) {
+        this.input = input;
         this.isDone = isDone;
         this.type = type;
     }
@@ -39,7 +39,7 @@ public class Task {
      * @return a string representation of the task.
      */
     public String getTask() {
-        return "[" + getStatusIcon() + "] " + description;
+        return "[" + getStatusIcon() + "] " + input;
     }
 
     /**
@@ -83,7 +83,7 @@ public class Task {
      * @return string description of task.
      */
     public String getDescription() {
-        return description;
+        return input;
     }
 
     /**

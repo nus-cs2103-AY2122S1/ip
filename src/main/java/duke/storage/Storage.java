@@ -1,9 +1,10 @@
-package duke;
+package duke.storage;
 
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
+import duke.parser.Parser;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -66,16 +67,25 @@ public class Storage {
                 String[] words = nextLine.split(", ", 0);
                 String type = words[0];
                 Boolean isDone = Boolean.valueOf(words[1]);
-                String task = words[2];
+                String description = words[2];
+
                 switch (type) {
                     case "T":
-                        tasks.add(new Todo(task, isDone));
+                        Parser todoParser = new Parser("todo " + description);
+                        String todo = todoParser.getTodoDescription();
+                        tasks.add(new Todo(todo, isDone));
                         break;
                     case "D":
-                        tasks.add(new Deadline(task, isDone));
+                        Parser deadlineParser = new Parser("deadline " + description);
+                        String deadline = deadlineParser.getDeadlineDescription();
+                        String date = deadlineParser.getDeadlineDate();
+                        tasks.add(new Deadline(deadline, date, isDone));
                         break;
                     case "E":
-                        tasks.add(new Event(task, isDone));
+                        Parser eventParser = new Parser("event " + description);
+                        String event = eventParser.getEventDescription();
+                        String duration = eventParser.getEventDate();
+                        tasks.add(new Event(event, duration, isDone));
                         break;
                     default:
                         throw new IllegalStateException("Unexpected type: " + type);
