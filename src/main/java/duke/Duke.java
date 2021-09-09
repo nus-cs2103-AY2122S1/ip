@@ -45,11 +45,9 @@ public class Duke extends Application {
     public String getResponse(String input) {
 
         try {
-            //String fullCommand = ui.readCommand();
             Command command = Parser.parse(input);
             String result = command.execute(tasks, ui, storage);
             return result;
-            //isExit = command.isExit();
         } catch (NoSuchCommandException | NoSuchTaskException | IOException ex) {
             return "Something went wrong";
         }
