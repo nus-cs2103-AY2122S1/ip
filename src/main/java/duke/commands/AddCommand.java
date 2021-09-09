@@ -5,7 +5,9 @@ import duke.functionality.Ui;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.TaskList;
+import duke.tasks.Task;
 import duke.tasks.Todo;
+
 /**
  * Represents the command when the user wants to add a new task.
  */
@@ -35,40 +37,27 @@ public class AddCommand extends Command {
      */
     public String execute(Storage storage, Ui ui) {
         int taskListLen = storage.taskListLen();
+        if (taskListLen >= TaskList.MAX_TASKS) {
+           return ui.maxTaskReachedMessage();
+        }
+
+        Task newTask;
         if (this.taskType.equals(Todo.taskTag())) {
-            if (taskListLen < TaskList.MAX_TASKS) {
-                Todo newTodo = new Todo(this.taskName);
-                storage.addTask(newTodo);
-                taskListLen += 1;
-                storage.saveToFile();
-                return ui.taskAddedMessage(newTodo, taskListLen);
-            } else {
-                return ui.maxTaskReachedMessage();
-            }
+            newTask = new Todo(this.taskName);
         } else if (this.taskType.equals(Deadline.taskTag())) {
-            if (taskListLen < TaskList.MAX_TASKS) {
-                Deadline newDeadline = new Deadline(taskName, this.datetime);
-                storage.addTask(newDeadline);
-                taskListLen += 1;
-                storage.saveToFile();
-                return ui.taskAddedMessage(newDeadline, taskListLen);
-            } else {
-                return ui.maxTaskReachedMessage();
-            }
+            newTask = new Deadline(taskName, this.datetime);
         } else if (this.taskType.equals(Event.taskTag())) {
-            if (taskListLen < TaskList.MAX_TASKS) {
-                Event newEvent = new Event(this.taskName, this.datetime);
-                storage.addTask(newEvent);
-                taskListLen += 1;
-                storage.saveToFile();
-                return ui.taskAddedMessage(newEvent, taskListLen);
-            } else {
-                return ui.maxTaskReachedMessage();
-            }
+            newTask = new Event(this.taskName, this.datetime);
         } else {
             //Will never reach this state.
             return "Impossible task.";
         }
+
+        storage.addTask(newTask);
+        taskListLen++;
+        storage.saveToFile();
+        return ui.taskAddedMessage(newTask, taskListLen);
+
     }
 
 }

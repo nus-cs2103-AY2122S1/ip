@@ -44,6 +44,8 @@ public class Storage {
             }
             f.createNewFile();
 
+            assert(this.taskList.taskListLen() >= 0) : "taskList has not been created properly.";
+
         } catch (IOException e) {
             System.err.println("Error in storage creation!");
         }
