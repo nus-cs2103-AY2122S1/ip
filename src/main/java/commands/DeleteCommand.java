@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
     /**
      * Validate command arg
      *
-     * @param args command argument
+     * @param ind command argument
      * @param bot Bot in context
      * @throws InvalidTaskException invalid command task
      */
