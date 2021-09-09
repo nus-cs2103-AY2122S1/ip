@@ -36,7 +36,7 @@ public class Parser {
 		} else if (command.startsWith("event")) {
 			response = TaskList.addEvent(command);
 		} else {
-			throw new DukeException("I don't understand that command!\n");
+			return "I don't understand that command!\n";
 		}
 
 		Duke.getStorage().saveTasks(TaskList.getTasks());
