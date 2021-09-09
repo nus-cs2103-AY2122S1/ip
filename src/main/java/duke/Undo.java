@@ -1,14 +1,12 @@
-package duke.task;
+package duke;
 
-import duke.DukeException;
-import duke.Items;
+import java.util.ArrayList;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 public class Undo {
-    // event, deadline, todo: just delete the last task
-    // done: mark as undone
-    // delete: add task at same index.
-    // find, list: no undo available.
-
     private Items items;
 
     public Undo(Items items) {
