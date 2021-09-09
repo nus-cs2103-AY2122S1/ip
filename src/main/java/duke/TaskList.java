@@ -2,6 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.task.Task;
 
@@ -73,11 +74,7 @@ public class TaskList {
         List<Task> searchList = new ArrayList<>();
         String msg = "";
 
-        for (Task task : taskList) {
-            if (task.getValue().contains(searchItem)) {
-                searchList.add(task);
-            }
-        }
+        searchList = taskList.stream().filter(x -> x.getValue().contains(searchItem)).collect(Collectors.toList());
 
         if (searchList.size() > 0) {
             msg = "Here are the matching tasks in your list: \n";
