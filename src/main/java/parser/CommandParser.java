@@ -28,12 +28,11 @@ public class CommandParser {
      * @throws MorganException If input format is invalid.
      */
     public Command getCommand(String userInput) throws MorganException {
-        // Checks if user input contains delimiter.
-        if (userInput.contains(TaskParser.DELIMITER)) {
+        boolean hasBannedDelimiter = userInput.contains(TaskParser.DELIMITER);
+        if (hasBannedDelimiter) {
             throw new MorganException(DELIMITER_FOUND_ERROR_MESSAGE);
         }
 
-        // Retrieve relevant data from user input
         String trimmedUserInput = userInput.trim();
         String[] words = trimmedUserInput.split(DELIMITER);
         String commandKeyword = words[COMMAND_INDEX].toLowerCase();
@@ -54,7 +53,6 @@ public class CommandParser {
         case ListCommand.KEYWORD:
             return new ListCommand();
         default:
-            // User gave an invalid command
             return new InvalidCommand();
         }
     }

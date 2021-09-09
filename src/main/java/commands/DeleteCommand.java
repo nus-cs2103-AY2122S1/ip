@@ -25,13 +25,9 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(String userInput) throws MorganException {
         String intString = userInput.substring(KEYWORD.length()).trim();
-
-        // Checks if user specified task number
         if (intString.isEmpty()) {
             throw new MorganException(INPUT_FORMAT_ERROR);
         }
-
-        // Checks if task number is an integer
         try {
             this.taskNumber = Integer.parseInt(intString);
         } catch (NumberFormatException e) {
@@ -48,17 +44,14 @@ public class DeleteCommand extends Command {
         boolean isValidTaskNumber = this.taskNumber <= tasks.getNumOfTasks()
                 && this.taskNumber > 0;
 
-        // Checks if task number is valid
         if (!isValidTaskNumber) {
             throw new MorganException(TASK_NUMBER_ERROR);
         }
 
-        // Obtain task and remove
         Task task = tasks.getTask(this.taskNumber);
         tasks.remove(this.taskNumber);
         storage.save(tasks);
 
-        // Message displayed upon execution
         return "Noted. I've removed this task:\n\t" + task.toString()
                 + "\nNow you have " + tasks.getNumOfTasks()
                 + " tasks in the list.";

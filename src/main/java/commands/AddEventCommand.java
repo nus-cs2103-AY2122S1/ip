@@ -25,21 +25,18 @@ public class AddEventCommand extends AddCommand {
      * @throws MorganException If input format is invalid.
      */
     public AddEventCommand (String userInput) throws MorganException {
-        // Check whether input contains delimiter
         boolean hasDelimiter = userInput.contains(DELIMITER);
         if (!hasDelimiter) {
             throw new MorganException(INPUT_FORMAT_ERROR);
 
         }
 
-        // Check whether input contains task and date/time
         String[] inputData = userInput.substring(KEYWORD.length()).trim().split(DELIMITER);
         boolean isValidInput = (inputData.length == INPUT_PARAMETERS);
         if (!isValidInput) {
             throw new MorganException(INPUT_FORMAT_ERROR);
         }
 
-        // Retrieve input parameters
         String taskName = inputData[TASK_INDEX].trim();
         String dateTime = inputData[DATETIME_INDEX].trim();
         try {
