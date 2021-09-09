@@ -29,7 +29,7 @@ public class Task {
      * Construct an instance of Task with only a description and a taskType.
      *
      * @param description Description of the task
-     * @param taskType Type of the task (event, deadline, etc)
+     * @param taskType Type of the task (event, deadline, etc.)
      */
     public Task(String description, String taskType) {
         this(description);
@@ -40,7 +40,7 @@ public class Task {
      * Construct an instance of Task with description, taskType and a time
      *
      * @param description Description of the task
-     * @param taskType Type of the task (event, deadline, etc)
+     * @param taskType Type of the task (event, deadline, etc.)
      * @param time The time associated with the task
      */
     public Task(String description, String taskType, LocalDateTime time) {
@@ -92,7 +92,6 @@ public class Task {
 
     @Override
     public String toString() {
-
-        return "[" + taskType + "]" + "[" + getStatusIcon() + "]" + " " + this.description;
+        return String.format("[%s][%s] %s", taskType, getStatusIcon(), getDescription());
     }
 }
