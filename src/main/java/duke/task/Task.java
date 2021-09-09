@@ -44,13 +44,6 @@ public class Task {
     }
 
     /**
-     * Marks the task as not done.
-     */
-    public void markAsNotDone() {
-        this.isDone = false;
-    }
-
-    /**
      * Serializes the task as a string representation.
      *
      * @return Serialized string representation.
