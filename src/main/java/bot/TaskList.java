@@ -92,9 +92,9 @@ public class TaskList {
     }
 
     /**
-     * Get list of serialized task strings
+     * Get the list of serialized task strings
      *
-     * @return list of string representation of tasks
+     * @return list of serialized task strings
      */
     public List<String> getTaskStringList() {
         List<String> taskStrings = new ArrayList<>();
@@ -102,6 +102,15 @@ public class TaskList {
             taskStrings.add(t.serialize());
         }
         return taskStrings;
+    }
+
+    /**
+     * Number of tasks in TaskList
+     *
+     * @return size of TaskList
+     */
+    public int size() {
+        return this.taskList.size();
     }
 
 }
