@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Represents a runner for the Duke program.
+ */
 public class Duke {
 
     public static void main(String[] args) {
@@ -17,6 +20,9 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
 
+    /**
+     * Class constructor.
+     */
     public Duke() {
         ui = new UserInterface();
         dtformatter = DateTimeFormatter.ISO_DATE;
@@ -26,6 +32,9 @@ public class Duke {
         taskList = storage.load(ui);
     }
 
+    /**
+     * Runs this Duke program.
+     */
     public void run() {
         ui.displayGreeting();
         Command command;

@@ -2,8 +2,16 @@ package duke;
 
 import java.util.Arrays;
 
+/**
+ * A helper class that parses a command from a String.
+ */
 public class Parser {
 
+    /**
+     * Reads a String, and parses it into a Command. 
+     * @param command A string containing a command to be parsed
+     * @return The Command parsed from the input String
+     */
     public static Command parse(String command) {
         String[] tokens = command.split(" ");
         try {
