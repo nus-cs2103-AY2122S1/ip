@@ -55,6 +55,7 @@ public class Duke {
      */
     public String getResponse(String cmd) {
         int count = 0 + commandList.getLength();
+        assert count >= 0 : "number of tasks in task list must be at least 0";
 
         if (Parser.isNotBye(cmd)) {
             try {
@@ -65,6 +66,7 @@ public class Duke {
                     // when command given is "done"
 
                     int itemNo = Parser.parseDoneCmd(cmd);
+                    assert itemNo >= 1 : "item number in task list must be at least 1";
 
                     // Make sure itemNo is within limit
                     if ((itemNo <= count) && (itemNo > 0)) {
@@ -108,6 +110,7 @@ public class Duke {
                     }
                 } else if (Parser.isDelete(cmd)) {
                     int itemNo = Parser.parseDeleteCmd(cmd);
+                    assert itemNo >= 1 : "item number in task list must be at least 1";
 
                     // Make sure itemNo is within limit
                     if ((itemNo <= count) && (itemNo > 0)) {
