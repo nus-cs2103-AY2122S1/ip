@@ -59,5 +59,6 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        assert userInput.getText().length() == 0 : "User input in GUI text field is supposed to be cleared";
     }
 }

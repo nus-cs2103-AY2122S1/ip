@@ -75,6 +75,7 @@ public class Duke {
         } catch (DukeException | IOException ex) {
             errorMessage = ui.showError(ex.getMessage());
         }
+        assert errorMessage.length() != 0 : "Error message supposed to contain readable text";
         return errorMessage;
     }
 
