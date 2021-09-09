@@ -2,6 +2,7 @@ package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 
 /**
@@ -81,5 +82,9 @@ public class Deadline extends Task {
     public String saveDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         return deadlineDate.format(formatter);
+    }
+
+    public LocalDateTime getDate() {
+        return this.deadlineDate;
     }
 }

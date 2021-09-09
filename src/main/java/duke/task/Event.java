@@ -54,4 +54,8 @@ public class Event extends Task {
                 super.isDone ? "1" : "0");
     }
 
+    public String getAt() {
+        return this.at;
+    }
+
 }

@@ -8,9 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class EventTest {
     @Test
 
-    public void initTest() {
+    public void equalTest() {
         assertEquals(new Event("event",
                 "place",
-                false).at, "place");
+                false).getAt(), "place");
     }
 }
