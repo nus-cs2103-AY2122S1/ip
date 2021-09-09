@@ -4,7 +4,6 @@ import duke.command.*;
 import duke.exception.DukeException;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -71,6 +70,16 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if the input contains description and date.
+     * Returns the boolean value containing the result
+     * of the check.
+     *
+     * @param descriptionAndDate The input description.
+     * @param taskType The type of the task.
+     * @return The boolean value of the result of the check.
+     *
+     */
     public boolean hasDescriptionAndDate(String descriptionAndDate, String taskType) {
         boolean isMissingDescription;
 
@@ -91,6 +100,16 @@ public class Parser {
         return !isMissingDescription;
     }
 
+    /**
+     * Checks if the input contains the correct date
+     * command, either /at or /by.Returns the boolean
+     * value containing the result of the check.
+     *
+     * @param descriptionAndDate The input description.
+     * @param taskType The type of the task.
+     * @return The boolean value of the result of the check.
+     *
+     */
     public boolean hasDateCommand(String descriptionAndDate,
             String taskType) {
 
@@ -176,6 +195,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if the input schedule command is in correct
+     * format and returns the respective command if correct.
+     * Otherwise, an exception is thrown.
+     *
+     * @param input The user input.
+     * @return The schedule command representing the input.
+     * @throws DukeException if the format of the command is incorrect.
+     */
     public Command checkScheduleCommand(String input) throws DukeException {
         String[] inputs = input.split(" +", 2);
         if(inputs.length != 2) {
@@ -187,7 +215,7 @@ public class Parser {
             LocalDate scheduleDate = LocalDate.parse(inputs[1].trim());
             return new ScheduleCommand(input, scheduleDate);
         } catch(DateTimeParseException e) {
-            throw new DukeException("Please indicate the date in yyyy-mm-dd"
+            throw new DukeException("I can only understand the date in yyyy-mm-dd"
                     + "format :)");
         }
     }
