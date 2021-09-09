@@ -20,6 +20,7 @@ public class Parser {
      */
     public static Command parse(String input) throws DukeException {
         String firstWord = input.split(" ")[0];
+        assert firstWord != null;
 
 
         if (input.equals("bye")) {

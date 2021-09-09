@@ -15,8 +15,9 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        int size = tasks.size();
         Task task = tasks.deleteTask(index);
-
+        assert tasks.size() == size - 1;
         String result = "";
         result += ("Deleted:\n" + task.getDescription() + "\n");
         result += ("There are " + tasks.size() + " tasks remaining in the list");
