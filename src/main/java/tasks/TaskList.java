@@ -1,10 +1,10 @@
 package tasks;
 
-import java.time.format.DateTimeParseException;
-import java.util.List;
-
 import duke.DukeException;
 import duke.Storage;
+
+import java.time.format.DateTimeParseException;
+import java.util.List;
 
 
 /**
@@ -46,6 +46,7 @@ public class TaskList {
      */
     public String markDone(String str) {
         int completedTaskIndex = Integer.parseInt(str.substring(5)) - 1;
+        assert completedTaskIndex >= 0 && completedTaskIndex <= tasks.size();
         tasks.get(completedTaskIndex).taskDone();
         Storage.getAllTasks(tasks);
         return "Nice! I've marked this task as done: \n" + tasks.get(completedTaskIndex);
@@ -60,6 +61,7 @@ public class TaskList {
      */
     public String todoTask(String str) throws DukeException {
         try {
+            assert str.length() >= 5;
             str = str.substring(5);
             Task task = new Todo(str);
             tasks.add(task);
@@ -83,6 +85,7 @@ public class TaskList {
     public String deadlineTask(String str) {
         try {
             int slashIndex = str.indexOf("/");
+            assert slashIndex >= 0;
             String day = str.substring(slashIndex + 4, slashIndex + 14);
             String time = str.substring(slashIndex + 14);
             Task task = new Deadline(str.substring(0, slashIndex), Storage.formatDate(day) + time);
@@ -109,6 +112,7 @@ public class TaskList {
     public String eventsTask(String str) {
         try {
             int slashIndex = str.indexOf("/");
+            assert slashIndex >= 0;
             String day = str.substring(slashIndex + 4, slashIndex + 14);
             Task task = new Events(str.substring(0, slashIndex), day);
             tasks.add(task);
@@ -133,6 +137,7 @@ public class TaskList {
      */
     public String deleteTask(String str) {
         int indexOfTaskToDelete = Integer.parseInt(str.substring(7)) - 1;
+        assert indexOfTaskToDelete >= 0 && indexOfTaskToDelete <= tasks.size();
         Task t = tasks.get(indexOfTaskToDelete);
         tasks.remove(indexOfTaskToDelete);
         Storage.getAllTasks(tasks);
