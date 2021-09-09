@@ -9,8 +9,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Parser {
 
-    public enum Command {BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, CLEAR, FIND}
-    boolean toTerminate = false;
+    public enum Command { BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, CLEAR, FIND }
+    private boolean toTerminate = false;
 
     /**
      * Class constructor.
@@ -29,9 +29,10 @@ public class Parser {
      * @param input Input that user entered.
      * @throws DukeException If an error occurs.
      */
-    public void executeCommand(Ui ui, TaskList tasks, String input) throws DukeException {
+    public String executeCommand(Ui ui, TaskList tasks, String input) throws DukeException {
         String[] parsedInput = input.split(" ");
         Parser.Command command;
+        String message;
         try {
             command = Parser.Command.valueOf(parsedInput[0].toUpperCase());
         } catch (IllegalArgumentException e) {
@@ -39,51 +40,52 @@ public class Parser {
         }
         switch (command) {
         case BYE:
-            this.terminate(ui);
+            message = this.terminate(ui);
             break;
         case LIST:
-            ui.listTasks(tasks);
+            message = ui.listTasks(tasks);
             break;
         case DONE:
             if (parsedInput.length <= 1) {
                 throw new TaskIndexOutOfBoundException("Missing Task Number!");
             }
-            this.markDone(tasks, ui, Integer.parseInt(parsedInput[1]) - 1);
+            message = this.markDone(tasks, ui, Integer.parseInt(parsedInput[1]) - 1);
             break;
         case TODO:
-            this.addTodo(tasks, ui, input);
+            message = this.addTodo(tasks, ui, input);
             break;
         case DEADLINE:
-            this.addDeadline(tasks, ui, input);
+            message = this.addDeadline(tasks, ui, input);
             break;
         case EVENT:
-            this.addEvent(tasks, ui, input);
+            message = this.addEvent(tasks, ui, input);
             break;
         case DELETE:
             if (parsedInput.length <= 1) {
                 throw new TaskIndexOutOfBoundException("Missing Task Number!");
             }
-            this.delete(tasks, ui,Integer.parseInt(parsedInput[1]) - 1);
+            message = this.delete(tasks, ui, Integer.parseInt(parsedInput[1]) - 1);
             break;
         case CLEAR:
-            this.clear(tasks, ui);
+            message = this.clear(tasks, ui);
             break;
         case FIND:
-            this.findTasks(tasks, ui, parsedInput[1]);
+            message = this.findTasks(tasks, ui, parsedInput[1]);
             break;
         default:
             throw new InvalidCommandException("Invalid Command");
         }
         tasks.saveList();
+        return message;
     }
 
     /**
      * Terminates the Duke Personal Assistant Chatbot.
      * @param ui UI object to render output to user.
      */
-    public void terminate(Ui ui) {
+    public String terminate(Ui ui) {
         this.toTerminate = true;
-        ui.terminateMessage();
+        return ui.terminateMessage();
     }
 
     /**
@@ -91,9 +93,9 @@ public class Parser {
      * @param tasks TaskList object that contains the tasks.
      * @param ui UI object to render output to user.
      */
-    public void clear(TaskList tasks, Ui ui) {
+    public String clear(TaskList tasks, Ui ui) {
         tasks.clear();
-        ui.clearMessage();
+        return ui.clearMessage();
     }
 
     /**
@@ -103,14 +105,14 @@ public class Parser {
      * @param input Input that user entered.
      * @throws ToDoDescriptionNotFoundException If user did not enter a task description.
      */
-    public void addTodo(TaskList tasks, Ui ui, String input) throws ToDoDescriptionNotFoundException {
+    public String addTodo(TaskList tasks, Ui ui, String input) throws ToDoDescriptionNotFoundException {
         if (input.length() <= 5 || input.substring(5).stripLeading().length() <= 0) {
             throw new ToDoDescriptionNotFoundException("Missing Description!");
         }
         String toDo = input.substring(5);
         ToDo newToDo = new ToDo(toDo);
         tasks.addTask(newToDo);
-        ui.addMessage(newToDo, tasks);
+        return ui.addMessage(newToDo, tasks);
     }
 
     /**
@@ -121,8 +123,8 @@ public class Parser {
      * @throws DeadlineDescriptionNotFoundException If user did not enter a task description.
      * @throws DeadlineNotFoundException If user did not enter a deadline.
      */
-    public void addDeadline(TaskList tasks, Ui ui, String input) throws DeadlineDescriptionNotFoundException,
-            DeadlineNotFoundException{
+    public String addDeadline(TaskList tasks, Ui ui, String input) throws DeadlineDescriptionNotFoundException,
+            DeadlineNotFoundException {
         if (input.length() <= 9 || input.substring(9).stripLeading().length() <= 0) {
             throw new DeadlineDescriptionNotFoundException("Missing Description!");
         } else if (!input.contains(" /by ")) {
@@ -134,7 +136,7 @@ public class Parser {
         LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         Deadline newDeadline = new Deadline(task, parsedDate);
         tasks.addTask(newDeadline);
-        ui.addMessage(newDeadline, tasks);
+        return ui.addMessage(newDeadline, tasks);
     }
 
     /**
@@ -145,7 +147,7 @@ public class Parser {
      * @throws EventDescriptionNotFoundException If user did not enter a task description.
      * @throws EventTimeNotFoundException If user did not enter date and time of event.
      */
-    public void addEvent(TaskList tasks, Ui ui, String input) throws EventDescriptionNotFoundException,
+    public String addEvent(TaskList tasks, Ui ui, String input) throws EventDescriptionNotFoundException,
             EventTimeNotFoundException {
         if (input.length() <= 6 || input.substring(6).stripLeading().length() <= 0) {
             throw new EventDescriptionNotFoundException("Missing Description!");
@@ -158,7 +160,7 @@ public class Parser {
         LocalDateTime parsedTime = LocalDateTime.parse(time, DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
         Event newEvent = new Event(task, parsedTime);
         tasks.addTask(newEvent);
-        ui.addMessage(newEvent, tasks);
+        return ui.addMessage(newEvent, tasks);
     }
 
     /**
@@ -168,12 +170,12 @@ public class Parser {
      * @param index Index of the task to be marked as done.
      * @throws TaskIndexOutOfBoundException If no task bears the index.
      */
-    public void markDone(TaskList tasks, Ui ui, int index) throws TaskIndexOutOfBoundException{
+    public String markDone(TaskList tasks, Ui ui, int index) throws TaskIndexOutOfBoundException {
         if (index >= tasks.getListSize()) {
             throw new TaskIndexOutOfBoundException("Task index is invalid!");
         }
         Task task = tasks.setComplete(index);
-        ui.doneMessage(task);
+        return ui.doneMessage(task);
     }
 
     /**
@@ -183,12 +185,12 @@ public class Parser {
      * @param index Index of the task to be deleted.
      * @throws TaskIndexOutOfBoundException If no task bears the index.
      */
-    public void delete(TaskList tasks, Ui ui, int index) throws TaskIndexOutOfBoundException{
+    public String delete(TaskList tasks, Ui ui, int index) throws TaskIndexOutOfBoundException {
         if (index >= tasks.getListSize()) {
             throw new TaskIndexOutOfBoundException("Task index is invalid!");
         }
         Task task = tasks.deleteTask(index);
-        ui.deleteMessage(task, tasks);
+        return ui.deleteMessage(task, tasks);
     }
 
     /**
@@ -197,7 +199,7 @@ public class Parser {
      * @param ui UI object to render output to user.
      * @param keyword Keyword to be searched.
      */
-    public void findTasks(TaskList tasks, Ui ui, String keyword) {
-        ui.findMessage(tasks.findTasks(keyword));
+    public String findTasks(TaskList tasks, Ui ui, String keyword) {
+        return ui.findMessage(tasks.findTasks(keyword));
     }
 }

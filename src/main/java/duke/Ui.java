@@ -7,7 +7,9 @@ import java.util.Scanner;
  * Represents the User Interface which interacts with the user.
  */
 public class Ui {
-    Scanner sc;
+    private static final String HEADER = "____________________________________________________________\n";
+    private static final String FOOTER = "\n____________________________________________________________\n";
+    private Scanner sc;
 
     /**
      * Class constructor specifying the Scanner object to read user input.
@@ -17,15 +19,22 @@ public class Ui {
     }
 
     /**
+     * Prints message.
+     * @param message to be printed.
+     */
+    public void printMessage(String message) {
+        System.out.println(HEADER
+            + message
+            + FOOTER);
+    }
+
+    /**
      * Prints welcome message.
      */
-    public void welcome() {
-        String message =
-                "____________________________________________________________\n" +
-                        " Hello! I'm Duke\n" +
-                        " What can I do for you?\n" +
-                        "____________________________________________________________\n";
-        System.out.println(message);
+    public String welcome() {
+        String message = " Hello! I'm Duke\n"
+                + " What can I do for you?";
+        return message;
     }
 
     public String readInput() {
@@ -36,33 +45,25 @@ public class Ui {
      * Prints a list of all the tasks
      * @param tasks TaskList containing the tasks.
      */
-    public void listTasks(TaskList tasks) {
-        System.out.println("____________________________________________________________");
-        System.out.println(" Here are the tasks in your list:");
-        System.out.println(tasks.toString());
-        System.out.println("____________________________________________________________\n");
+    public String listTasks(TaskList tasks) {
+        String message = String.format(" Here are the tasks in your list:\n%s", tasks.toString());
+        return message;
     }
 
     /**
      * Prints terminating message.
      */
-    public void terminateMessage() {
-        String message =
-                "____________________________________________________________\n" +
-                        " Bye. Hope to see you again soon!\n" +
-                        "____________________________________________________________\n";
-        System.out.println(message);
+    public String terminateMessage() {
+        String message = " Bye. Hope to see you again soon!";
+        return message;
     }
 
     /**
      * Prints message to confirm all tasks has been cleared.
      */
-    public void clearMessage() {
-        String message =
-                "____________________________________________________________\n" +
-                        " List is cleared!\n" +
-                        "____________________________________________________________\n";
-        System.out.println(message);
+    public String clearMessage() {
+        String message = " List is cleared!";
+        return message;
     }
 
     /**
@@ -70,27 +71,21 @@ public class Ui {
      * @param task Task that was added
      * @param tasks TaskList
      */
-    public void addMessage(Task task, TaskList tasks) {
-        String message =
-                "____________________________________________________________\n" +
-                        " Got it. I've added this task:\n   " +
-                        task.toString() +
-                        tasks.getListSizeString() +
-                        "____________________________________________________________\n";
-        System.out.println(message);
+    public String addMessage(Task task, TaskList tasks) {
+        String message = " Got it. I've added this task:\n   "
+                + task.toString()
+                + tasks.getListSizeString();
+        return message;
     }
 
     /**
      * Prints message indicating that task has been marked as done.
      * @param task Task to be marked as done.
      */
-    public void doneMessage(Task task) {
-        String message =
-                "____________________________________________________________\n" +
-                        " Nice! I've marked this task as done:\n" +
-                        String.format("   [%s] %s\n", task.getCompletedMarker(), task.getTask()) +
-                        "____________________________________________________________\n";
-        System.out.println(message);
+    public String doneMessage(Task task) {
+        String message = " Nice! I've marked this task as done:\n"
+                        + String.format("   [%s] %s", task.getCompletedMarker(), task.getTask());
+        return message;
     }
 
     /**
@@ -98,81 +93,50 @@ public class Ui {
      * @param task Task to be deleted.
      * @param tasks TaskList.
      */
-    public void deleteMessage(Task task, TaskList tasks) {
-        String message =
-                "____________________________________________________________\n" +
-                        " Noted. I've removed this task:\n   " +
-                        task.toString() +
-                        String.format("\n Now you have %d tasks in the list.\n", tasks.getListSize()) +
-                        "____________________________________________________________\n";
-        System.out.println(message);
+    public String deleteMessage(Task task, TaskList tasks) {
+        String message = " Noted. I've removed this task:\n   "
+                        + task.toString()
+                        + String.format("\n Now you have %d tasks in the list.", tasks.getListSize());
+        return message;
     }
 
     /**
      * Prints tasks containing specified keyword.
      * @param tasks TaskList containing filtered tasks.
      */
-    public void findMessage(TaskList tasks) {
-        System.out.println("____________________________________________________________");
-        System.out.println(" Here are the matching tasks in your list:");
-        System.out.println(tasks.toString());
-        System.out.println("____________________________________________________________\n");
+    public String findMessage(TaskList tasks) {
+        String message = " Here are the matching tasks in your list:"
+                + tasks.toString();
+        return message;
     }
 
     /**
      * Prints the appropriate error handling message.
      * @param e Exception caught.
      */
-    public void handleException(Exception e) {
+    public String handleException(Exception e) {
         String message;
         if (e instanceof InvalidCommandException) {
-            message =
-                    "____________________________________________________________\n" +
-                            " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                            "____________________________________________________________\n";
+            message = " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
         } else if (e instanceof ToDoDescriptionNotFoundException) {
-            message =
-                    "____________________________________________________________\n" +
-                            " ☹ OOPS!!! The description of a todo cannot be empty.\n" +
-                            "____________________________________________________________\n";
+            message = " ☹ OOPS!!! The description of a todo cannot be empty.";
         } else if (e instanceof EventDescriptionNotFoundException) {
-            message =
-                    "____________________________________________________________\n" +
-                            " ☹ OOPS!!! The description of an event cannot be empty.\n" +
-                            "____________________________________________________________\n";
+            message = " ☹ OOPS!!! The description of an event cannot be empty.";
         } else if (e instanceof DeadlineDescriptionNotFoundException) {
-            message =
-                    "____________________________________________________________\n" +
-                            " ☹ OOPS!!! The description of a deadline cannot be empty.\n" +
-                            "____________________________________________________________\n";
+            message = " ☹ OOPS!!! The description of a deadline cannot be empty.";
         } else if (e instanceof DeadlineNotFoundException) {
-            message =
-                    "____________________________________________________________\n" +
-                            " ☹ OOPS!!! The date of the deadline cannot be empty.\n" +
-                            "____________________________________________________________\n";
+            message = " ☹ OOPS!!! The date of the deadline cannot be empty.";
         } else if (e instanceof EventTimeNotFoundException) {
-            message =
-                    "____________________________________________________________\n" +
-                            " ☹ OOPS!!! The time of an event cannot be empty.\n" +
-                            "____________________________________________________________\n";
+            message = " ☹ OOPS!!! The time of an event cannot be empty.";
         } else if (e instanceof TaskIndexOutOfBoundException) {
-            message =
-                    "____________________________________________________________\n" +
-                            " ☹ OOPS!!! The task number is invalid.\n" +
-                            "____________________________________________________________\n";
+            message = " ☹ OOPS!!! The task number is invalid.";
         } else if (e instanceof DateTimeParseException) {
-            message =
-                    "____________________________________________________________\n" +
-                            " ☹ OOPS!!! The date is in the wrong format. Please use the following format\n" +
-                            " For event: dd-MM-yyyy HHmm\n" +
-                            " For deadline: dd-MM-yyyy\n" +
-                            "____________________________________________________________\n";
+            message = " ☹ OOPS!!! The date is in the wrong format. Please use the following format\n"
+                            + " For event: dd-MM-yyyy HHmm\n"
+                            + " For deadline: dd-MM-yyyy";
         } else {
-            message =
-                    "____________________________________________________________\n" +
-                            " ☹ OOPS!!! An unknown error has occurred!\n" +
-                            "____________________________________________________________\n";
+            message = " ☹ OOPS!!! An unknown error has occurred!";
         }
-        System.out.println(message);
+        return message;
     }
 }
