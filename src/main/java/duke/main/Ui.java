@@ -53,7 +53,7 @@ public class Ui {
         assert t != null : "Task added should not be null";
         assert tasks != null : "TaskList should have been initialized";
         String s = "I have added to the list: \n\t \t " + t.toString()
-                + "There are " + tasks.getSize() + " items in the list";
+                + " There are " + tasks.getSize() + " items in the list";
         return s;
     }
 
@@ -95,11 +95,21 @@ public class Ui {
     }
 
     /**
-     * Method that displays message informing user that the task indicated has been removed.
+     * Returns message informing user that the task indicated has been removed.
      * @return String The successfully deleted message.
      */
     public String displayDeleteMessage() {
         return " Noted. The task has been removed!";
     }
 
+    /**
+     * Returns a message that indicates that the priority has changed.
+     * @param task The task that has been changed.
+     * @return The successful priority changed message.
+     */
+    public String displayChangedPriorityMessage(Task task) {
+        assert task != null : "Task to be marked as done should not be null";
+        String s = "The priority for this task has been changed: \n" + "\t \t" + task.toString();
+        return s;
+    }
 }
