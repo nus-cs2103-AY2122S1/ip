@@ -15,6 +15,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 /**
  * This program duke.Duke is a chatbot.
  *
@@ -93,7 +95,7 @@ public class Duke extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws Exception {
         //Step 1. Setting up required components
-
+        assert stage != null;
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -173,6 +175,8 @@ public class Duke extends javafx.application.Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
+        assert userInput != null;
+        assert dialogContainer != null;
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
@@ -189,6 +193,7 @@ public class Duke extends javafx.application.Application {
     public String getResponse(String input) {
         String output = "";
         try {
+            assert input != null;
             Command userCommand = Parser.parse(input);
             output = userCommand.execute(taskList, ui, storage);
             if (!(userCommand instanceof ByeCommand)) {
