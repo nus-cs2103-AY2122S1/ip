@@ -72,7 +72,7 @@ public class TaskList {
             this.TASKLIST.get(currListLength - 1).markAsDone();
         }
     }
-    //Todo
+    
     /**
      * Method to add a new task to the task list. But prevents duplicate.
      * @param t takes in a task object
