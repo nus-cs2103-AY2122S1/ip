@@ -1,5 +1,7 @@
 package duke.logic.tasks;
 
+import duke.logic.commands.UpdateCommand.UpdateTaskDescriptor;
+
 /**
  * Represents a task.
  */
@@ -21,6 +23,12 @@ public abstract class Task {
     public Task(String description) {
         this(description, false);
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public abstract Task createUpdatedCopy(UpdateTaskDescriptor updateDescriptor);
 
     /**
      * Returns a string representing the status of the task.

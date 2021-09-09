@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+import duke.logic.commands.UpdateCommand;
+
 /**
  * Represents a deadline task.
  */
@@ -34,6 +36,13 @@ public class Deadline extends Task {
     public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
+    }
+
+    @Override
+    public Task createUpdatedCopy(UpdateCommand.UpdateTaskDescriptor updateDescriptor) {
+        String updatedDescription = updateDescriptor.getDescription().orElse(this.getDescription());
+        LocalDateTime updatedBy = updateDescriptor.getBy().orElse(this.by);
+        return new Deadline(updatedDescription, updatedBy);
     }
 
     @Override

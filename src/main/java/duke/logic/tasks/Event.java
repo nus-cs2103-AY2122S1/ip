@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+import duke.logic.commands.UpdateCommand;
+
 /**
  * Represents an event task.
  */
@@ -38,6 +40,14 @@ public class Event extends Task {
      */
     public Event(String description, LocalDateTime at, LocalDateTime end) {
         this(description, false, at, end);
+    }
+
+    @Override
+    public Task createUpdatedCopy(UpdateCommand.UpdateTaskDescriptor updateDescriptor) {
+        String updatedDescription = updateDescriptor.getDescription().orElse(this.getDescription());
+        LocalDateTime updatedAt = updateDescriptor.getAt().orElse(this.at);
+        LocalDateTime updatedEnd = updateDescriptor.getEnd().orElse(this.end);
+        return new Event(updatedDescription, updatedAt, updatedEnd);
     }
 
     @Override

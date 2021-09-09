@@ -8,6 +8,7 @@ public enum CommandCode {
     LIST,
     DONE,
     DELETE,
+    UPDATE,
     TODO,
     DEADLINE,
     EVENT,

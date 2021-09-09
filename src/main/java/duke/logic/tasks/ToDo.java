@@ -1,5 +1,7 @@
 package duke.logic.tasks;
 
+import duke.logic.commands.UpdateCommand.UpdateTaskDescriptor;
+
 /**
  * Represents a to-do task.
  */
@@ -22,6 +24,12 @@ public class ToDo extends Task {
      */
     public ToDo(String description) {
         super(description);
+    }
+
+    @Override
+    public Task createUpdatedCopy(UpdateTaskDescriptor updateDescriptor) {
+        String updatedDescription = updateDescriptor.getDescription().orElse(this.getDescription());
+        return new ToDo(updatedDescription);
     }
 
     @Override
