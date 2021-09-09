@@ -163,12 +163,9 @@ public class Duke extends Application {
      * Runs the program until the bye command is used to end it.
      */
     public String react(String input) {
-        //ui.introduceYourself();
-
         ICommand c = parser.getInput(input);
+        assert(c != null);
         c.execute(taskManager, responseManager, storage);
         return c.getReply();
     }
-
-
 }

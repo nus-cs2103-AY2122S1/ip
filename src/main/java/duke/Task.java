@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  */
 public class Task {
 
-    private final String NAME;
+    private final String name;
 
     private boolean isDone;
 
@@ -23,7 +23,7 @@ public class Task {
         if (name.replaceAll(" ", "").equals("")) {
             throw new DukeException.NoNameException("Duke.Duke says: Duke.Task cannot have no name");
         }
-        this.NAME = name;
+        this.name = name;
         isDone = false;
         this.taskType = taskType;
     }
@@ -39,13 +39,14 @@ public class Task {
         if (name.replaceAll(" ", "").equals("")) {
             throw new DukeException.NoNameException("Duke.Duke says: Duke.Task cannot have no name");
         }
-        this.NAME = name;
+        this.name = name;
         this.isDone = done;
         this.taskType = taskType;
+        assert(name != null) : (name!= "");
     }
 
     public String getName() {
-        return NAME;
+        return name;
     }
 
     public void completeTask() {
@@ -53,7 +54,7 @@ public class Task {
     }
 
     public String toString() {
-        return (taskType + (isDone ? " (done) " : " (not done) ") + NAME);
+        return (taskType + (isDone ? " (done) " : " (not done) ") + name);
     }
 
     public String toStringSave() {
@@ -63,7 +64,7 @@ public class Task {
                 : taskType.equals("#Deadline")
                 ? 'D'
                 : 'E';
-        return taskTypeData + ">" + doneData + ">" + NAME;
+        return taskTypeData + ">" + doneData + ">" + name;
     }
 
     public static class ToDo extends Task {
@@ -84,11 +85,13 @@ public class Task {
         public Deadline(String name, LocalDateTime deadline) throws DukeException.NoNameException {
             super(name, "#Deadline");
             this.deadline = deadline;
+            assert (deadline != null);
         }
 
         public Deadline(String name, LocalDateTime deadline, boolean done) throws DukeException.NoNameException {
             super(name, "#Deadline", done);
             this.deadline = deadline;
+            assert (deadline != null);
         }
 
         public String toString() {
@@ -108,11 +111,13 @@ public class Task {
         public Event(String name, LocalDateTime when) throws DukeException.NoNameException {
             super(name, "#Event");
             this.when = when;
+            assert (when != null);
         }
 
         public Event(String name, LocalDateTime when, boolean done) throws DukeException.NoNameException {
             super(name, "#Event", done);
             this.when = when;
+            assert (when != null);
         }
 
         public String toString() {
