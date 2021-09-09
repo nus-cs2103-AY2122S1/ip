@@ -21,6 +21,7 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
+            assert c != null;
             return c.execute(taskList, storage, ui);
         } catch (DukeException e) {
             return ui.getError(e.getMessage());

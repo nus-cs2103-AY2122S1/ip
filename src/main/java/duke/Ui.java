@@ -68,8 +68,12 @@ public class Ui {
     }
 
     public String getFindMessage(String foundTasks) {
-        return "Here are the matching tasks in your list:\n"
-                + foundTasks;
+        if (foundTasks.equals("")) {
+            return "No task found with the given keyword";
+        } else {
+            return "Here are the matching tasks in your list:\n"
+                    + foundTasks;
+        }
     }
 
     /**
