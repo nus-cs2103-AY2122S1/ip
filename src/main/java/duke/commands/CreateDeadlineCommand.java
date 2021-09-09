@@ -20,6 +20,7 @@ public class CreateDeadlineCommand extends Command {
      * @param userInput The raw input string from the user
      */
     public CreateDeadlineCommand(String userInput) {
+        assert userInput.split(" /by ").length > 1;
         this.name = userInput.split(" /by ", 2)[0].substring(9);
         try {
             this.date = LocalDate.parse(userInput.split(" /by ", 2)[1]);

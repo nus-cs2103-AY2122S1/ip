@@ -16,6 +16,7 @@ public class CreateEventCommand extends Command {
      * @param userInput The raw input string from the user
      */
     public CreateEventCommand(String userInput) {
+        assert userInput.split(" /at ").length > 1;
         this.name = userInput.split(" /at ", 2)[0].substring(6);
         this.date = userInput.split(" /at ", 2)[1];
     }
