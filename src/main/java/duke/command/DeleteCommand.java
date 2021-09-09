@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             tasks.deleteTask(index);
-            return ui.displayDeleteMessage(tasks, index);
+            return ui.displayDeleteMessage();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("\t List number out of range, please enter a valid number\n");
         }
