@@ -109,7 +109,7 @@ public class Duke {
 
     private String completeTask(int taskNum) {
         // TaskNum should be within 1 to the size of the TaskList
-        assert taskNum > 0 && taskNum <= tasks.getSize(): taskNum;
+        assert taskNum > 0 && taskNum <= tasks.getSize() : taskNum;
         tasks.completeTask(taskNum);
         storage.saveTasks(tasks);
         return ui.printCompleteTask(tasks.getTask(taskNum));
@@ -117,7 +117,7 @@ public class Duke {
 
     private String deleteTask(int taskNum) {
         // TaskNum should be within 1 to the size of the TaskList
-        assert taskNum > 0 && taskNum <= tasks.getSize(): taskNum;
+        assert taskNum > 0 && taskNum <= tasks.getSize() : taskNum;
         Task deletedTask = tasks.deleteTask(taskNum);
         storage.saveTasks(tasks);
         return ui.printDeleteTask(tasks, deletedTask);
