@@ -1,7 +1,10 @@
 package duke;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -9,7 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -59,6 +61,17 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
 
+        if (input.trim().equals("bye")) {
+            new Timer().schedule(
+                    new TimerTask() {
+                        @Override
+                        public void run() {
+                            Platform.exit();
+                            System.exit(0);
+                        }
+                    }, 1500);
+        }
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
@@ -70,5 +83,4 @@ public class MainWindow extends AnchorPane {
     private void intro() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(INTRO, dukeImage));
     }
-
 }
