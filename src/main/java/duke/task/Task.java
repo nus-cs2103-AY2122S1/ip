@@ -30,6 +30,10 @@ public abstract class Task {
         return description;
     }
 
+    public boolean getIsDone() {
+        return isDone;
+    }
+
     /**
      * Sets a task to be done.
      */

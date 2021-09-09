@@ -8,6 +8,7 @@ import duke.command.FindTasksCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListTasksCommand;
 import duke.command.MarkTaskAsDoneCommand;
+import duke.command.RemindCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -20,6 +21,21 @@ import duke.task.Todo;
  * @author botr99
  */
 public class Parser {
+
+    /**
+     * Parses a given string to an integer.
+     *
+     * @param integerString The string to be parsed.
+     * @return An integer parsed from the string.
+     * @throws DukeException When the string to be parsed does not consist of an integer.
+     */
+    public static int parseToInt(String integerString) throws DukeException {
+        try {
+            return Integer.parseInt(integerString);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Oops!!! The command should be followed by an integer.");
+        }
+    }
 
     /**
      * Parses the user input of a task creation and returns the task
@@ -101,6 +117,9 @@ public class Parser {
             return new AddTaskCommand(dateTask);
         case "find":
             return new FindTasksCommand(action);
+        case "remind":
+            int numberOfDays = parseToInt(action);
+            return new RemindCommand(numberOfDays);
         default:
             return new InvalidCommand();
         }
