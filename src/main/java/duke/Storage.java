@@ -7,15 +7,30 @@ import java.io.IOException;
 
 import java.util.Scanner;
 
+/**
+ * Represents saved data for Duke.
+ */
 public class Storage {
     private File storage;
     private String fileName;
 
+    /**
+     * Class constructor that constructs a Storage object.
+     *
+     * @param fileName File name to access file in directory.
+     */
     public Storage(String fileName) {
         this.fileName = fileName;
         this.storage = new File(fileName);
     }
 
+    /**
+     * Loads a TaskList object based on the data saved within Storage. If data does not exist, create a new file
+     * within Storage to store future data and return an empty TaskList.
+     *
+     * @return The list of tasks the user saved in Storage.
+     * @throws DukeException If the user did not create a folder named "data" within the main project directory.
+     */
     public TaskList load() throws DukeException {
         try {
             this.storage.createNewFile();
@@ -68,6 +83,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Saves user command into Storage.
+     *
+     * @param history The text command given by the user.
+     * @throws DukeException If the IO operation fails.
+     */
     public void save(String history) throws DukeException{
         try {
             appendToFile(history + System.lineSeparator());
