@@ -27,6 +27,10 @@ public class Parser {
 
     public void parsing(String input) {
 
+        if (input.equals("bye")) {
+            this.taskName = "bye";
+        }
+
         String[] parsedInput = input.split(" ", 2);
         String eventType = parsedInput[0];
         this.command = eventType;

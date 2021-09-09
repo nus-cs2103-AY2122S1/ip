@@ -16,6 +16,10 @@ public class taskList {
     private boolean isFirstTimeOpening;
     private Storage memory;
 
+    private String toDoIndicator = "[T]";
+    private String deadlineIndicator = "[D]";
+    private String eventIndicator = "[E]";
+
     /**
      * The constructor for the List class that instantiates a List object.
      */
@@ -25,7 +29,6 @@ public class taskList {
         File file = new File("data/memory.txt");
         this.memory = new Storage("data/memory.txt");
     }
-
 
     public taskList(File memory) {
         this.taskList = new ArrayList<Task>();
@@ -46,6 +49,8 @@ public class taskList {
             int numberAdded = 1;
 
             while ((currentLine = reader.readLine()) != null) {
+
+                assert currentLine.length() > 4;
                 String[] seperate1 = currentLine.toString().split(" ", 2);
                 String taskTypeText = seperate1[0];
                 String taskType;
