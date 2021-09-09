@@ -15,7 +15,6 @@ public class Ui {
     /**
      * Returns updated user task list and prints feedback to the user based on their input
      *
-     * @param taskList list of user's tasks
      * @param input user input
      * @return updated task list
      */
