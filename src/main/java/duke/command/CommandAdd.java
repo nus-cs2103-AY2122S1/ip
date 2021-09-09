@@ -36,7 +36,7 @@ public class CommandAdd extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            String msg = tasks.addTask(this.taskToAdd);
+            String msg = tasks.addTask(taskToAdd);
             tasks.saveToFile(storage);
             return msg;
         } catch (IOException e) {

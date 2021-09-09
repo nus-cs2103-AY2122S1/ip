@@ -20,7 +20,7 @@ public class Duke {
     private TaskList tasks;
 
     public static void main(String[] args) {
-        Duke duke = new Duke(DEFAULT_PATH);
+        Duke duke = new Duke();
         duke.run();
     }
 
@@ -39,7 +39,8 @@ public class Duke {
                 String input = ui.readLine();
                 ui.printHorizLine();
                 Command cmd = Parser.parseCommand(input);
-                cmd.execute(tasks, ui, storage);
+                String executionMsg = cmd.execute(tasks, ui, storage);
+                ui.printMsg(executionMsg);
                 hasExited = cmd.getExecutionResult();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
