@@ -36,7 +36,7 @@ public class TaskList {
     /**
      * Prints all the tasks in the list of tasks.
      */
-    public String printTaskList() {
+    public String getTaskList() {
         String returnStr = "";
         for (int i = 1; i <= myTasks.size(); i++) {
             returnStr += i + ". " + myTasks.get(i - 1) + "\n";
@@ -109,6 +109,7 @@ public class TaskList {
         if (!hasMatches) {
             return "Nothing matched your search! Try something else.";
         } else {
+            assert !returnStr.isEmpty(); // Return value from tasks should never be empty
             return returnStr;
         }
     }

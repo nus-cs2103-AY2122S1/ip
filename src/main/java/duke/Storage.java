@@ -41,6 +41,7 @@ public class Storage {
             myFile = new File(filePath);
             myFile.createNewFile();
 
+            assert myFile.exists(); // Make sure that the file exists
 
             // Reads from file is there is anything in it
             Scanner fileReader = new Scanner(myFile);
@@ -69,6 +70,7 @@ public class Storage {
             for (int i = 0; i < taskList.size(); i++) {
                 taskList.get(i).writeToFile(myWriter);
                 myWriter.write("\n");
+
                 // Write a done command if task is done
                 if (taskList.get(i).isDone) {
                     myWriter.write("done " + (i + 1));
