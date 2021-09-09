@@ -12,7 +12,7 @@ public class ErrorCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage, Statistics stats) throws DukeException {
         return ui.printErrorMessage(errorMessage);
     }
 

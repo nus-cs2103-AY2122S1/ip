@@ -12,14 +12,14 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage, Statistics stats) throws DukeException {
         if (index >= tasks.size() || index < 0) {
             return "Invalid value!";
         }
-
         Task taskRef = tasks.get(index);
         taskRef.setDone();
         String toReturn = ui.printDoneTask(taskRef);
+        stats.incrementTaskDone();
         return toReturn;
     }
 

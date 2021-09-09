@@ -38,8 +38,9 @@ public class Parser {
             }
             String keyword = commandArr[1];
             return new FindCommand(keyword);
+        } else if (commandArr[0].equals("statistics")) {
+            return new StatisticsCommand();
         }
-        
         
         boolean wrongArrayLength = commandArrLength <= 1;
         switch (commandArr[0]) {

@@ -12,7 +12,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage, Statistics stats) throws DukeException {
         if (index >= tasks.size() || index < 0) {
             return "Invalid value!";
         }
@@ -20,6 +20,7 @@ public class DeleteCommand extends Command {
         tasks.remove(index);
         String toReturn = ui.printDeleteMessage(taskRef);
         toReturn += ui.listTaskNumber(tasks);
+        stats.incrementTaskDeleted();
         return toReturn;
         
 
