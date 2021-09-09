@@ -23,6 +23,7 @@ public class BotCommandResponderUnit {
     private BotStaticMemoryUnit botStaticMemoryUnit = new BotStaticMemoryUnit();
     private BotTemporalUnit botTemporalUnit = new BotTemporalUnit();
     private BotDynamicMemoryUnit botDynamicMemoryUnit = BotDynamicMemoryUnit.getInstance();
+    private BotMassOps botMassOps = new BotMassOps();
 
     /**
      * ArrayList as a main data structure to store Task
@@ -278,6 +279,29 @@ public class BotCommandResponderUnit {
             CommandInput taskType = CommandInput.valueOf(commandInitial.toUpperCase());
             return taskType;
         } catch (Exception e) {
+            throw new InvalidCommandException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND);
+        }
+    }
+
+    /**
+     *
+     * @param input
+     * @return
+     * @throws InvalidCommandException
+     */
+    public void massOps(String input) throws InvalidCommandException {
+        CommandInput commandType = identifyCommand(tokenize(input)[1]);
+
+        switch (commandType) {
+        case DELETE:
+            botMassOps.deleteAll(taskTracker);
+            break;
+
+        case DONE:
+            botMassOps.doneAll(taskTracker);
+            break;
+
+        default:
             throw new InvalidCommandException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND);
         }
     }

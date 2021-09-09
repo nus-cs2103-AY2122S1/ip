@@ -7,5 +7,5 @@ public enum CommandInput {
     BYE,
     DONE, DELETE,
     TODO, EVENT, DEADLINE,
-    LIST, FIND
+    LIST, FIND, MASSOPS
 }
