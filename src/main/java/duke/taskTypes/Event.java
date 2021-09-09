@@ -1,7 +1,6 @@
 package duke.taskTypes;
 
 import duke.exception.DukeException;
-import duke.exception.EmptyDescriptionException;
 import duke.exception.EmptyTimeException;
 import duke.exception.InvalidFormatException;
 
@@ -15,6 +14,8 @@ import java.util.stream.Collectors;
 public class Event extends Task{
 
 
+
+    // Constructor
     /**
      * Takes in a string and splits msg into based on /at pattern. Set the eventType and time of the instance
      *
@@ -22,22 +23,50 @@ public class Event extends Task{
      */
     public Event(String input, boolean isDone) throws DukeException {
         super(isDone);
-        List<String> results = Pattern.compile("/at").splitAsStream(input).map(x->x.trim()).collect(Collectors.toList());
+        List<String> formattedInput = formatInput(input);
 
-        if (results.size() == 0) {
-            throw new InvalidFormatException("\nMissing description and empty");
-        } else if (results.size() == 1) {
+        boolean isMissingDescriptionTimestamp = formattedInput.size() == 0;
+        boolean isMissingTimestamp = formattedInput.size() == 1;
+
+        if (isMissingDescriptionTimestamp) {
+            throw new InvalidFormatException("\nMissing description and timestamp");
+        }
+
+        if (isMissingTimestamp) {
             throw new EmptyTimeException("\nInvalid timestamp format");
         }
-        assert (results.size() > 1);
-        String key = results.get(0);
-        if (key.equals("")) {
-            throw new EmptyDescriptionException("\nMissing description");
-        }
-        super.setEventType("E");
-        super.setDescription(key);
-        super.setDate(results.get(1));
+
+        super.setTaskDetails(getTaskType(), formattedInput);
     }
+
+
+
+    // Event format methods
+    /**
+     * Formats the input into 2 parts : taskDetails, date together with time
+     *
+     * @param input user input
+     * @return list
+     */
+    private List<String> formatInput (String input) {
+        return Pattern.compile("/at")
+                .splitAsStream(input)
+                .map(String::trim)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns string containing the task type of event
+     *
+     * @return String
+     */
+    private String getTaskType() {
+        return "E";
+    }
+
+
+
+    // methods that returns formatted string for saving / displaying
     /**
      * Returns a string that describes the instance
      *
@@ -48,8 +77,13 @@ public class Event extends Task{
         return super.toString() + " (at: " + super.getFormatDate() + ")";
     }
 
+    /**
+     * Returns a string that describes the instance for saving
+     *
+     * @return String containing details of the task
+     */
     @Override
     public String saveTask() {
-        return super.saveTask() + " /at " + super.getDate();
+        return super.saveTask() + " /at " + super.getSaveDate();
     }
 }
