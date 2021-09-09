@@ -41,6 +41,6 @@ public class TaskList {
     }
 
     public List<Task> getTasks() {
-        return taskList;
+        return new ArrayList<Task>(taskList);
     }
 }
