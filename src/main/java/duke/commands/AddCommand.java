@@ -49,7 +49,7 @@ public class AddCommand extends Command {
         } else if (this.taskType.equals(Event.taskTag())) {
             newTask = new Event(this.taskName, this.datetime);
         } else {
-            //Will never reach this state.
+            //Should never reach this state.
             return "Impossible task.";
         }
 
