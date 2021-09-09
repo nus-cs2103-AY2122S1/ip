@@ -27,9 +27,11 @@ public class Deadline extends Task {
 	 * @return new split Deadline object
 	 */
 	public static Deadline splitDeadline(String input) {
+		assert input.contains("/by") : "OOPS!!! Missing keyword '/by' for deadline input.";
 		String[] partsOfDeadline = input.split("/by ");
 		String deadlineContent = partsOfDeadline[0].substring(9);
 		DateTimeFormatter dateTimeFormatterFrom = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		assert partsOfDeadline.length == 2 : "OOPS!!! Missing deadline date.";
 		LocalDateTime by = LocalDateTime.parse(partsOfDeadline[1], dateTimeFormatterFrom);
 		return new Deadline(deadlineContent, by);
 	}

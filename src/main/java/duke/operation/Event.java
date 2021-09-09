@@ -27,9 +27,12 @@ public class Event extends Task {
 	 * @return new split event object
 	 */
 	public static Event splitEvent(String input) {
+		assert input.contains("/at") : "OOPS!!! Missing keyword '/at' for event input.";
 		String[] partsOfEvent = input.split("/at ");
 		String eventContent = partsOfEvent[0].substring(6);
+
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		assert partsOfEvent.length == 2 : "OOPS!!! Missing event date.";
 		LocalDateTime at = LocalDateTime.parse(partsOfEvent[1], dateTimeFormatter);
 		return new Event(eventContent, at);
 	}
