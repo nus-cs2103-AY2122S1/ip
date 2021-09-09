@@ -44,6 +44,7 @@ public class Task {
         this.name = name;
         this.isDone = done;
         this.taskType = taskType;
+        assert(name != null) : (name!= "");
     }
 
     public String getName() {
@@ -96,6 +97,7 @@ public class Task {
         public Deadline(String name, LocalDateTime deadline) throws DukeException.NoNameException {
             super(name, "#Deadline");
             this.deadline = deadline;
+            assert (deadline != null);
         }
 
         /**
@@ -108,6 +110,7 @@ public class Task {
         public Deadline(String name, LocalDateTime deadline, boolean done) throws DukeException.NoNameException {
             super(name, "#Deadline", done);
             this.deadline = deadline;
+            assert (deadline != null);
         }
 
         public String toString() {
@@ -133,6 +136,7 @@ public class Task {
         public Event(String name, LocalDateTime when) throws DukeException.NoNameException {
             super(name, "#Event");
             this.when = when;
+            assert (when != null);
         }
 
         /**
@@ -145,6 +149,7 @@ public class Task {
         public Event(String name, LocalDateTime when, boolean done) throws DukeException.NoNameException {
             super(name, "#Event", done);
             this.when = when;
+            assert (when != null);
         }
 
         public String toString() {
