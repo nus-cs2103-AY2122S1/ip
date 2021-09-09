@@ -2,13 +2,16 @@ package duke.util;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.StringJoiner;
 import java.util.TreeSet;
 
-import duke.Duke;
-import duke.command.*;
+import duke.command.Command;
+import duke.command.CommandAdd;
+import duke.command.CommandBye;
+import duke.command.CommandDelete;
+import duke.command.CommandDone;
+import duke.command.CommandFind;
+import duke.command.CommandList;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -62,11 +65,19 @@ public class Parser {
         case "deadline": {
             String description = parseDescription(splitInput);
             LocalDateTime dateTime = parseDeadlineDateTime(splitInput);
+            if (hasPriorityFlag(input)) {
+                Priority priority = parsePriority(splitInput);
+                return new CommandAdd(new Deadline(description, dateTime, priority));
+            }
             return new CommandAdd(new Deadline(description, dateTime));
         }
         case "event": {
             String description = parseDescription(splitInput);
             LocalDateTime[] dateTimes = parseEventDateTime(splitInput);
+            if (hasPriorityFlag(input)) {
+                Priority priority = parsePriority(splitInput);
+                return new CommandAdd(new Event(description, dateTimes[0], dateTimes[1], priority));
+            }
             return new CommandAdd(new Event(description, dateTimes[0], dateTimes[1]));
         }
         case "find": {

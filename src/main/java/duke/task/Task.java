@@ -102,7 +102,7 @@ public class Task implements Comparable<Task> {
      * @return String representation of the task.
      */
     public String toString() {
-        return String.format("[T] [%s] %s", isDone ? "X" : " ", content);
+        return String.format("[T] [%s] [%s] %s", priority, isDone ? "X" : " ", content);
     }
 
 

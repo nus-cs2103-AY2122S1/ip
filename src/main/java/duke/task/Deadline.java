@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.util.Priority;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -10,7 +12,7 @@ public class Deadline extends Task {
     private final String ENCODE_STRING_FORMAT = "D %b %s /by %s";  // [type] [isDone] [description] /by [dateTime]
     private final String ENCODE_DATETIME_FORMAT = "yyyy/MM/dd HH:mm";
 
-    private final String PRINT_STRING_FORMAT = "[D] [%s] %s (by: %s)";
+    private final String PRINT_STRING_FORMAT = "[D] [%s] [%s] %s (by: %s)";
     private final String PRINT_DATETIME_FORMAT = "MMM d yyyy, HH:mm";
     private final String PRINT_ISDONE_MARKER_POSITIVE = "X";
     private final String PRINT_ISDONE_MARKER_NEGATIVE = " ";
@@ -36,10 +38,42 @@ public class Deadline extends Task {
      * deadline dateTime.
      *
      * @param description
+     * @param isDone
      * @param dateTime
      */
     public Deadline(String description, boolean isDone, LocalDateTime dateTime) {
         super(description, isDone);
+        this.dateTime = dateTime;
+    }
+
+
+    /**
+     * Constructor.
+     * Instantiates a Deadline object with given description,
+     * deadline dateTime, and deadline priority.
+     *
+     * @param description
+     * @param dateTime
+     * @param priority
+     */
+    public Deadline(String description, LocalDateTime dateTime, Priority priority) {
+        super(description, priority);
+        this.dateTime = dateTime;
+    }
+
+
+    /**
+     * Constructor.
+     * Instantiates a Deadline object with given description, idDone status,
+     * deadline dateTime, and deadline priority.
+     *
+     * @param description
+     * @param isDone
+     * @param dateTime
+     * @param priority
+     */
+    public Deadline(String description, boolean isDone, LocalDateTime dateTime, Priority priority) {
+        super(description, isDone, priority);
         this.dateTime = dateTime;
     }
 
@@ -64,6 +98,7 @@ public class Deadline extends Task {
      */
     public String toString() {
         return String.format(PRINT_STRING_FORMAT,
+                priority,
                 isDone ? PRINT_ISDONE_MARKER_POSITIVE : PRINT_ISDONE_MARKER_NEGATIVE,
                 content,
                 dateTime.format(DateTimeFormatter.ofPattern(PRINT_DATETIME_FORMAT)));
