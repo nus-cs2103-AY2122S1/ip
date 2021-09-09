@@ -89,6 +89,7 @@ public class Ui {
 
     /**
      * Shows message(s) to the user.
+     *
      * @param msgs Array of message(s)
      */
     public void printMsg(String... msgs) {
