@@ -38,6 +38,12 @@ public class DukeException extends RuntimeException {
                 return "(O_O) OOPS!!! The description of a deadline cannot be empty.";
             }
         },
+        EmptyUpdate {
+            @Override
+            public String getMessage() {
+                return "(O_O) OOPS!!! The update cannot be empty.";
+            }
+        },
         InvalidCommand {
             @Override
             public String getMessage() {

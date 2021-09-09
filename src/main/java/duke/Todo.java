@@ -11,6 +11,16 @@ public class Todo extends Task {
     }
 
     /**
+     * Updates the description of the Todo.
+     *
+     * @param description the description of the todo task.
+     * @return new Todo with updated description and due date.
+     */
+    public Todo update(String description) {
+        return new Todo(description);
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

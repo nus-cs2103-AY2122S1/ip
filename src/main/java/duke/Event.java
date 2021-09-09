@@ -22,6 +22,37 @@ public class Event extends Task {
     }
 
     /**
+     * Updates the description and due date of the Event.
+     *
+     * @param description the description of the event task.
+     * @param at the date the event is happening.
+     * @return new Event with updated description and due date.
+     */
+    public Event update(String description, String at) {
+        return new Event(description, at);
+    }
+
+    //    /**
+    //     * Updates the date of the Event.
+    //     *
+    //     * @param at the due date of the task.
+    //     * @return new Event with the updated event time.
+    //     */
+    //    public Event updateDate(String at) {
+    //        return new Event(this.description, at);
+    //    }
+
+    /**
+     * Updates the description of the Event.
+     *
+     * @param description the description of the task.
+     * @return new Event with the updated description;
+     */
+    public Event updateDesc(String description) {
+        return new Event(description, this.at);
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

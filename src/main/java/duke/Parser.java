@@ -25,6 +25,8 @@ public class Parser {
             return "deadline";
         } else if (inputLower.length() >= 4 && inputLower.substring(0, 4).equals("find")) {
             return "find";
+        } else if (inputLower.length() >= 6 && inputLower.substring(0, 6).equals("update")) {
+            return "update";
         } else {
             return "InvalidCommand";
         }
