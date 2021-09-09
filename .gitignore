@@ -21,3 +21,6 @@ text-ui-test/EXPECTED-UNIX.TXT
 #Build output files
 /src/out/test
 /src/out/production
+
+#duke task file
+/duke.txt
