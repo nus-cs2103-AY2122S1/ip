@@ -136,6 +136,9 @@ public class Task {
     protected String getSaveDate() {
         return this.date.toString() + " " + this.time;
     }
+    protected String getSaveDateCsv() {
+        return this.date.toString() + "," + this.time;
+    }
     protected String getFormatDate() {
         return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + this.time + " hrs";
     }
@@ -168,8 +171,9 @@ public class Task {
         return taskType + " " + state + " " + description;
     }
 
-
-
-
+    public String saveTaskCsv() {
+        String state = isDone ? "T" : "F";
+        return taskType + "," + state + "," + description;
+    }
 }
 

@@ -50,4 +50,9 @@ public class Todo extends Task{
         return super.toString();
     }
 
+    @Override
+    public String saveTaskCsv() {
+        String state = isDone ? "T" : "F";
+        return taskType + "," + state + "," + description + ",,,";
+    }
 }

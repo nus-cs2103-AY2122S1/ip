@@ -86,4 +86,9 @@ public class Event extends Task{
     public String saveTask() {
         return super.saveTask() + " /at " + super.getSaveDate();
     }
+
+    @Override
+    public String saveTaskCsv() {
+        return super.saveTaskCsv() + ",/at," + super.getSaveDateCsv();
+    }
 }

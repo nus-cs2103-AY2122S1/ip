@@ -15,7 +15,7 @@ public class DeleteCommand extends Command {
     /**
      * Basic Constructor
      *
-     * @param storage Storage object to save
+     * @param storage StorageTxt object to save
      * @param taskList Tasklist to add task to
      * @param taskNumber contains the string that describes which task to be deleted
      */

@@ -8,6 +8,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.util.concurrent.CompletableFuture;
@@ -47,6 +48,8 @@ public class MainWindow extends AnchorPane {
     public void setScrollPane () {
         dialogContainer.heightProperty()
                 .addListener((observable) -> scrollPane.setVvalue(1.0));
+        dialogContainer.autosize();
+
     }
 
     /**
@@ -81,6 +84,7 @@ public class MainWindow extends AnchorPane {
      * @throws InterruptedException exception when error with delay
      */
     private void addUserDukeResponseIntoContainer(String userStringInput, String dukeStringInput) throws InterruptedException {
+
         this.dialogContainer.getChildren().add(DialogBox.getUserDialog(userStringInput, userImage));
         Thread.sleep(200);
         this.dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeStringInput, dukeImage));
@@ -104,7 +108,10 @@ public class MainWindow extends AnchorPane {
     private void handleGetList()  {
         String getList = "list";
         String response = duke.guiProcess(getList);
-        this.dialogContainer.getChildren().add(DialogBox.getDukeDialog(response, dukeImage));
+        HBox list = DialogBox.getDukeDialog(response, dukeImage);
+        list.setMinWidth(scrollPane.getWidth());
+
+        this.dialogContainer.getChildren().add(list);
     }
 
     /**
