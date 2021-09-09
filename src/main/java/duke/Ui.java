@@ -10,13 +10,7 @@ public class Ui {
     Ui() {
         this.scanner = new Scanner(System.in); // Create a Scanner object
     }
-
-    public String readCommand() {
-        if (scanner.hasNextLine()) {
-            return scanner.nextLine();
-        }
-        return "bye";
-    }
+    
 
     public String showWelcomeMessage() {
         String logo = " ____        _        \n"

@@ -32,60 +32,38 @@ public class Parser {
 
     @SuppressWarnings("checkstyle:WhitespaceAround")
     public static Command parse(String input) throws NoSuchCommandException {
-        switch(input.split(" ")[0]) {
-        case "list":
-            return new ListCommand();
-        case "done":
-            try {
-                Integer index = Integer.parseInt(input.split(" ")[1]);
+        Integer index;
+        try {
+            switch(input.split(" ")[0]) {
+            case "list":
+                return new ListCommand();
+            case "done":
+                index = Integer.parseInt(input.split(" ")[1]);
                 return new DoneCommand(index);
-            } catch (NullPointerException ex) {
-                throw new NoSuchCommandException("Invalid Command");
-            }
-        case "delete":
-            try {
-                Integer index = Integer.parseInt(input.split(" ")[1]);
+            case "delete":
+                index = Integer.parseInt(input.split(" ")[1]);
                 return new DeleteCommand(index);
-            } catch (NullPointerException ex) {
-                throw new NoSuchCommandException("Invalid Command");
-            }
-
-        case "todo":
-            try {
+            case "todo":
                 ToDosTask.isLegitInput(input);
                 return new AddCommand(new ToDosTask(ToDosTask.getNameInput(input), false));
-            } catch (NoSuchCommandException ex) {
-                throw new NoSuchCommandException("Invalid Command");
-            }
-
-        case "deadline":
-            try {
+            case "deadline":
                 DeadlinesTask.isLegitInput(input);
                 return new AddCommand(new DeadlinesTask(DeadlinesTask.getNameInput(input),
                         false, Task.parseDateTime(DeadlinesTask.getDeadlineInput(input))));
-            } catch (NoSuchCommandException ex) {
-                throw new NoSuchCommandException("Invalid Command");
-            }
-
-        case "event":
-            try {
+            case "event":
                 EventsTask.isLegitInput(input);
                 return new AddCommand(new EventsTask(EventsTask.getNameInput(input),
                         false, Task.parseDateTime(EventsTask.getDeadlineInput(input))));
-            } catch (NoSuchCommandException ex) {
-                throw new NoSuchCommandException("Invalid Command");
-            }
-        case "find":
-            try {
+            case "find":
                 Task.isLegitFindInput(input);
                 return new FindCommand(input.split(" ")[1]);
-            } catch (NoSuchCommandException ex) {
+            case "bye":
+                return new ByeCommand();
+            default:
                 throw new NoSuchCommandException("Invalid Command");
             }
-        case "bye":
-            return new ByeCommand();
-        default:
-            throw new NoSuchCommandException("Invalid Command");
+        } catch (NullPointerException | NoSuchCommandException ex) {
+            throw new NoSuchCommandException("Command");
         }
     }
 

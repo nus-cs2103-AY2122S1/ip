@@ -18,6 +18,7 @@ public class ToDosTask extends Task {
     }
 
     public static String getNameInput(String input) {
+        
         return input.split("todo")[1].strip();
     }
 
