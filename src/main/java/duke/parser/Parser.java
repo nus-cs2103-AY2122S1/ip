@@ -11,6 +11,7 @@ import duke.command.DukeCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.SortCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.NoCommandDescriptionException;
@@ -61,7 +62,7 @@ public class Parser {
      *                       like the user inputted some command that duke does not support.
      */
     public DukeCommand processInput(String userInput) throws DukeException {
-        String commandType = getCommandType(userInput);
+        String commandType = getCommandType(userInput).toLowerCase();
         String commandDescription = getCommandDescription(userInput, " ");
 
         if (checkDescriptionExist(commandDescription, commandType)) {
@@ -83,6 +84,9 @@ public class Parser {
 
             case "find":
                 return new FindCommand(ui, storage, list, commandDescription);
+
+            case "sort":
+                return new SortCommand(ui, storage, list);
 
             default:
                 throw new UnknownCommandException();

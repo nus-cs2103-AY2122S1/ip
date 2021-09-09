@@ -19,4 +19,20 @@ public class ToDo extends Task {
         super(description, isDone, 'T');
     }
 
+    /**
+     * Compares the task description with another task.
+     * Checks time as well. If the other task do not have Date and Time,
+     * it is deemed to be "larger" than the task with Date and Time.
+     *
+     * @param t The task to be compared with.
+     * @return -1 if the description for this task is lexicographically smaller
+     *         and chronologically later, 0 if same, else 1.
+     */
+    @Override
+    public int compareTo(Task t) {
+        if (t instanceof TaskWithDateTime) {
+            return 1;
+        }
+        return super.compareTo(t);
+    }
 }

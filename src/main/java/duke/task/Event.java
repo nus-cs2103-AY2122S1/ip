@@ -11,8 +11,7 @@ import java.time.format.DateTimeFormatter;
  * @author Zhi Bin
  * @version Duke Level 10
  */
-public class Event extends Task {
-    private final LocalDateTime when;
+public class Event extends TaskWithDateTime {
 
     /**
      * Constructor of an Event task.
@@ -22,8 +21,7 @@ public class Event extends Task {
      * @param when        The datetime of the event occurring.
      */
     public Event(String description, boolean isDone, LocalDateTime when) {
-        super(description, isDone, 'E');
-        this.when = when;
+        super(description, isDone, 'E', when);
     }
 
     /**
@@ -45,7 +43,7 @@ public class Event extends Task {
      * @return The string containing the information on when the event is happening.
      */
     public String showWhen() {
-        return String.format("(at: %s)", when.format(DateTimeFormatter.ofPattern("dd MMM yyyy HHmm")));
+        return String.format("(at: %s)", dateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy HHmm")));
     }
 
     /**
@@ -56,6 +54,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + String.format("|%s", when);
+        return super.toString() + String.format("|%s", dateTime);
     }
 }
