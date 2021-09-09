@@ -79,6 +79,17 @@ public class TaskList {
     }
 
     /**
+     * Adds a tag to a task.
+     *
+     * @param index the index of the task
+     * @param tag the tag to be added
+     * @return a confirmation message
+     */
+    public String addTag(int index, String tag) {
+        return myTasks.get(index).addTag(tag);
+    }
+
+    /**
      * Show tasks if there are any that match the search.
      * Else tells user that search has yielded nothing.
      *

@@ -34,11 +34,11 @@ public class Duke {
     String getResponse(String input) {
         Scanner scan = new Scanner(input);
         String returnStr = parser.scanInputs(scan, tasks);
+        scan.close();
         if (returnStr.equals("Bye. Hope to see you again soon!")) {
             storage.saveToFile(tasks.getTasks());
             return returnStr + "\n" + Ui.getTasksSaved();
-        } else {
-            return returnStr;
         }
+        return returnStr;
     }
 }
