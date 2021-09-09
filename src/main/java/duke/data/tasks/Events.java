@@ -22,8 +22,8 @@ public class Events extends Task {
      * @param name The description of the eventhe
      * @param deadline The date which the event falls on
      */
-    public Events(boolean completed, String name, String deadline) {
-        super(completed, name);
+    public Events(boolean completed, String name, String deadline, String tags) {
+        super(completed, name, tags);
         this.date = deadline;
     }
 
@@ -34,9 +34,9 @@ public class Events extends Task {
     @Override
     public String getSaveData() {
         if (this.isCompleted()) {
-            return String.format("E~1~%s~%s", this.getName(), this.date);
+            return String.format("E~1~%s~%s~%s", this.getName(), this.date, this.getTags());
         } else {
-            return String.format("E~0~%s~%s", this.getName(), this.date);
+            return String.format("E~0~%s~%s~%s", this.getName(), this.date, this.getTags());
         }
     }
 

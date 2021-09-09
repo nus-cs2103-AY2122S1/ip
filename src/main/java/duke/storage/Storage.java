@@ -51,6 +51,7 @@ public class Storage {
                         loadedTasks.add(
                                 new ToDos(
                                         s.next().equals("1"),
+                                        s.next(),
                                         s.next()
                                 ));
                         break;
@@ -59,6 +60,7 @@ public class Storage {
                                 new Deadlines(
                                         s.next().equals("1"),
                                         s.next(),
+                                        s.next(),
                                         s.next()
                                 ));
                         break;
@@ -66,6 +68,7 @@ public class Storage {
                         loadedTasks.add(
                                 new Events(
                                         s.next().equals("1"),
+                                        s.next(),
                                         s.next(),
                                         s.next()
                                 ));
