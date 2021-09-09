@@ -1,18 +1,12 @@
 package duke;
-import java.time.LocalDate;
 
-import duke.command.AddCommand;
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.FindCommand;
-import duke.command.InvalidCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+
+import java.time.LocalDate;
 
 
 public class Parser {
@@ -46,40 +40,41 @@ public class Parser {
             //ADD duke.command.Command
             Task newTask = null;
             if (input.toUpperCase().contains(CommandList.TODO.toString())) {
-                if (input.length() > 5) {
-                    String taskMessage = input.substring(5);
-                    newTask = new Todo(taskMessage.strip());
-                } else {
+                if (input.length() <= 5) {
                     throw new IncompleteCommandException("OOPS!!! The description of a todo cannot be empty.");
                 }
-            } else if (input.toUpperCase().contains(CommandList.DEADLINE.toString())) {
-                if (input.length() > 8) {
-                    if (input.contains("/by")) {
-                        String[] stringArr = input.substring(9).split("/by");
-                        LocalDate date;
-                        try {
-                            date = LocalDate.parse(stringArr[1].strip());
-                            newTask = new Deadline(stringArr[0], date);
-                        } catch (Exception e) {
-                            System.out.println("Incorrect date format! Please follow YYYY-MM-DD for the date");
-                        }
+                String taskMessage = input.substring(5);
+                newTask = new Todo(taskMessage.strip());
 
-                    } else {
-                        System.out.println("Your deadline is missing a /by (date)");
-                    }
-                } else {
+            } else if (input.toUpperCase().contains(CommandList.DEADLINE.toString())) {
+                if (input.length() <= 8) {
                     throw new IncompleteCommandException("OOPS!!! The description of a deadline cannot be empty.");
                 }
-            } else if (input.toUpperCase().contains(CommandList.EVENT.toString())) {
-                if (input.length() > 5) {
-                    if (input.contains("/at")) {
-                        String[] stringArr = input.substring(6).split("/at");
-                        newTask = new Event(stringArr[0], LocalDate.parse(stringArr[1].strip()));
-                    } else {
-                        System.out.println("Your duke.task.Event is missing a /at (date)");
+
+                if (input.contains("/by")) {
+                    String[] stringArr = input.substring(9).split("/by");
+                    LocalDate date;
+                    try {
+                        date = LocalDate.parse(stringArr[1].strip());
+                        newTask = new Deadline(stringArr[0], date);
+                    } catch (Exception e) {
+                        System.out.println("Incorrect date format! Please follow YYYY-MM-DD for the date");
                     }
+
                 } else {
+                    System.out.println("Your deadline is missing a /by (date)");
+                }
+
+            } else if (input.toUpperCase().contains(CommandList.EVENT.toString())) {
+                if (input.length() <= 5) {
                     throw new IncompleteCommandException("OOPS!!! The description of a event cannot be empty.");
+                }
+                boolean containsAt = input.contains("/at");
+                if (containsAt) {
+                    String[] stringArr = input.substring(6).split("/at");
+                    newTask = new Event(stringArr[0], LocalDate.parse(stringArr[1].strip()));
+                } else {
+                    System.out.println("Your duke.task.Event is missing a /at (date)");
                 }
             }
             if (newTask != null) {
