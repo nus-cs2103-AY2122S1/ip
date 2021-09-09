@@ -19,10 +19,13 @@ public class FindCommand extends Command {
             for (Task t : tasks.getTaskList()) {
                 if (!keywordTasks.getTaskList().contains(t)
                         && t.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+                    assert (keywordTasks.getListSize() <= tasks.getListSize())
+                            : "Task list found by find command should not be greater than original task list.";
                     keywordTasks.addTask(t);
                 }
             }
         }
-        return ui.showTaskList(keywordTasks);
+
+        return ui.showTasksFound(keywordTasks);
     }
 }
