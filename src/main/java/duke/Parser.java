@@ -7,6 +7,7 @@ import duke.command.DoneTaskCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.PrintListCommand;
+import duke.command.UpdateCommand;
 
 public class Parser {
 
@@ -42,6 +43,9 @@ public class Parser {
         }
         if (userInput.startsWith("find")) {
             return new FindCommand(userInput);
+        }
+        if (userInput.startsWith(("update"))) {
+            return new UpdateCommand(userInput);
         }
 
         throw new DukeException("unknown duke command");

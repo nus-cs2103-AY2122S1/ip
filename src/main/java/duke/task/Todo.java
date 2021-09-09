@@ -18,6 +18,17 @@ public class Todo extends Task {
         return String.format("T,%s", super.getData());
     }
 
+
+    /**
+     * Updates the Todo based on the given updated data.
+     * @param updatedData is in the form {description}
+     */
+    @Override
+    public void update(String updatedData) {
+        assert updatedData.split("/").length == 1 : "only 1 field can be updated for todos";
+        this.description = updatedData;
+    }
+
     /**
      * Returns the string representation of a Todo.
      *
