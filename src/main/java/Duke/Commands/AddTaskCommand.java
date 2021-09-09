@@ -73,12 +73,12 @@ class AddTaskCommand extends Command {
                 String dateString = splitInput.length > 1 ? splitInput[1] : "";
                 return new Event(splitInput[0], LocalDate.parse(dateString));
             }
+            default:
+                throw new InvalidTaskException("Invalid task type");
             }
         } catch (DateTimeParseException e) {
             throw new InvalidTaskException("Invalid date provided", e);
         }
-
-        throw new InvalidTaskException("Invalid task type");
     }
 
     @Override

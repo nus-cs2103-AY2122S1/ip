@@ -108,18 +108,10 @@ public class TaskStorage implements Storage<Task> {
             throw new FileFormatException("Expected 4 values, got " + splitData.length);
         }
 
-        int completionStatus;
-        try {
-            completionStatus = Integer.parseInt(splitData[1]);
-        } catch (NumberFormatException e) {
-            throw new FileFormatException(String.format("Unable to parse \"%s\" as an integer", splitData[1]));
-        }
-        if (!(completionStatus == 0 || completionStatus == 1)) {
-            throw new FileFormatException("Expected 0 or 1 for completion status, got " + completionStatus);
-        }
-
-        String type = splitData[0], description = splitData[2], date = splitData[3];
-        boolean isDone = completionStatus == 1;
+        String type = splitData[0];
+        boolean isDone = parseCompletionStatus(splitData[1]) == 1;
+        String description = splitData[2];
+        String date = splitData[3];
 
         try {
             switch (type) {
@@ -132,14 +124,37 @@ public class TaskStorage implements Storage<Task> {
                     return new Deadline(description, LocalDate.parse(date), isDone);
                 case Event.TASK_TYPE_ICON:
                     return new Event(description, LocalDate.parse(date), isDone);
+                default:
+                    throw new FileFormatException(String.format("Unrecognized task type \"%s\"", type));
             }
         } catch (InvalidTaskException e) {
             throw new FileFormatException("", e);
         } catch (DateTimeParseException e) {
             throw new FileFormatException(String.format("Unable to parse \"%s\" as a date", date));
         }
+    }
 
-        throw new FileFormatException(String.format("Unrecognized task type \"%s\"", type));
+    /**
+     * Parses the string argument as a completion status, which is an integer of value 0 or 1.
+     *
+     * @param status String to parse.
+     * @return An integer of value 0 or 1, representing the completion status.
+     * @throws FileFormatException If the string cannot be parsed as an integer of value 0 or 1.
+     */
+    private static int parseCompletionStatus(String status) throws FileFormatException {
+        int completionStatus;
+
+        try {
+            completionStatus = Integer.parseInt(status);
+        } catch (NumberFormatException e) {
+            throw new FileFormatException(String.format("Unable to parse \"%s\" as an integer", status));
+        }
+
+        if (!(completionStatus == 0 || completionStatus == 1)) {
+            throw new FileFormatException("Expected 0 or 1 for completion status, got " + completionStatus);
+        }
+
+        return completionStatus;
     }
 
     /**
