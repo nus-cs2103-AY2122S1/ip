@@ -22,4 +22,9 @@ public class Event extends Task{
     public String toStorageFormat() {
         return "[E]" + super.toString() + "->at: " + startTime;
     }
+
+    @Override
+    public void setTime(LocalDate time) throws DukeException {
+        this.startTime = time;
+    }
 }

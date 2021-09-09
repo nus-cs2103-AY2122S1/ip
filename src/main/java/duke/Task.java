@@ -1,9 +1,11 @@
 package duke;
 
+import java.time.LocalDate;
+
 /**
  * General category
  */
-public class Task {
+public abstract class Task {
     private String name;
     private Boolean isDone = false;
 
@@ -34,6 +36,12 @@ public class Task {
     public String getName() {
         return name;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    abstract public void setTime(LocalDate time) throws DukeException;
 
     public String toString() {
         if(isDone) {

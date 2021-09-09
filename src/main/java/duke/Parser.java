@@ -1,5 +1,6 @@
 package duke;
 
+import java.rmi.UnexpectedException;
 import java.time.LocalDate;
 
 /**
@@ -35,11 +36,48 @@ public class Parser {
             return handleDelete(pieces, taskList);
         case "find":
             return handleFind(pieces, taskList);
+        case "update":
+            return handleUpdate(pieces, taskList);
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
+    private static String handleUpdate(String[] pieces, TaskList taskList) throws DukeException{
+        try {
+            assert(pieces.length == 2);
+            String[] pieces2 = pieces[1].split(" ", 2);
+            String updateType = pieces2[0];
+            String[] pieces3 = pieces2[1].split(" ", 2);
+            Integer taskIndex = Integer.parseInt(pieces3[0]);
+            Task task = taskList.get(taskIndex-1);
+            String updateDetail = pieces3[1] ;
+            switch (updateType) {
+            case "time":
+                return handleUpdateTime(task, updateDetail);
+            case "description":
+                return handleUpdateDescription(task, updateDetail);
+            default:
+                throw new IllegalStateException("Unexpected value: " + updateType);
+            }
+        }
+        catch (IndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! Invalid task number");
+        }
+        catch (IllegalStateException e) {
+            throw new DukeException("OOPS!!! Invalid command");
+        }
+    }
+
+    private static String handleUpdateDescription(Task task, String detail) {
+        task.setName(detail);
+        return Ui.update(task);
+    }
+
+    private static String handleUpdateTime(Task task, String detail) throws DukeException{
+        task.setTime(LocalDate.parse(detail));
+        return Ui.update(task);
+    }
 
     /**
      * Handle the input started with "find"
@@ -62,11 +100,12 @@ public class Parser {
     }
 
     /**
-     * Handle the input started with "delete"
+     * Handle input started with "delete"
      *
      * @param pieces split command
      * @param taskList a list of tasks
      * @return the response of Duke
+     * @throws DukeException Exception of Duke system
      */
     private static String handleDelete(String[] pieces,TaskList taskList) throws DukeException{
         try {
@@ -86,6 +125,7 @@ public class Parser {
      * @param pieces split command
      * @param taskList a list of tasks
      * @return the response of Duke
+     * @throws DukeException Exception of Duke system
      */
     private static String handleDeadline(String[] pieces, TaskList taskList) throws DukeException{
         try {
@@ -109,7 +149,7 @@ public class Parser {
      * @param taskList a list of tasks
      * @return the response of Duke
      */
-    public static String handleList(TaskList taskList) {
+    private static String handleList(TaskList taskList) {
         if(taskList.size() == 0) {
             return "Your list is empty!";
         }
@@ -121,7 +161,7 @@ public class Parser {
      *
      * @return the response of Duke
      */
-    public static String handleBye() {
+    private static String handleBye() {
         return Ui.bye();
     }
 
@@ -131,8 +171,9 @@ public class Parser {
      * @param pieces split command
      * @param taskList a list of tasks
      * @return the response of Duke
+     * @throws DukeException Exception of Duke system
      */
-    public static String handleDone(String[] pieces, TaskList taskList) throws DukeException{
+    private static String handleDone(String[] pieces, TaskList taskList) throws DukeException{
         try {
             assert(pieces.length == 2);
             int index = Integer.parseInt(pieces[1]);
@@ -151,8 +192,9 @@ public class Parser {
      * @param pieces split command
      * @param taskList a list of tasks
      * @return the response of Duke
+     * @throws DukeException Exception of Duke system
      */
-    public static String handleTodo(String[] pieces, TaskList taskList) throws DukeException {
+    private static String handleTodo(String[] pieces, TaskList taskList) throws DukeException {
         try {
             Task newTask = new Todo(pieces[1]);
             taskList.add(newTask);
@@ -168,8 +210,9 @@ public class Parser {
      * @param pieces split command
      * @param taskList a list of tasks
      * @return the response of Duke
+     * @throws DukeException Exception of Duke system
      */
-    public static String handleEvent(String[] pieces, TaskList taskList) throws DukeException{
+    private static String handleEvent(String[] pieces, TaskList taskList) throws DukeException{
         try {
             String[] eventPieces = pieces[1].split("/", 2);
             String name = eventPieces[0];

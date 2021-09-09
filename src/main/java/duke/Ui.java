@@ -65,6 +65,12 @@ public class Ui {
         return line1 + line2 + line3;
     }
 
+    public static String update(Task task) {
+        String line1 = " Got it. I've updated this task:\n";
+        String line2 = "    " + task.toString() + "\n";
+        return line1 + line2;
+    }
+
     public static String showError(String s) {
         return s;
     }

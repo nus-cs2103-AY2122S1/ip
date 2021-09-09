@@ -22,4 +22,9 @@ public class Deadline extends Task {
     public String toStorageFormat() {
         return "[D]" + super.toString() + "->by: " + endTime;
     }
+
+    @Override
+    public void setTime(LocalDate time) throws DukeException {
+        this.endTime = time;
+    }
 }
