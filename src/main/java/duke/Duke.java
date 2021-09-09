@@ -82,6 +82,8 @@ public class Duke {
                 case DONE:
                     // -1 to account for zero-indexing
                     index = Integer.parseInt(command.getArgs()[0]) - 1;
+                    assert(index >= 0);
+
                     taskList.get(index).markAsDone();
 
                     // update file
@@ -90,7 +92,10 @@ public class Duke {
                     return "Nice! I've marked this task as done:\n  " + taskList.get(index);
                 case DELETE:
                     // -1 to account for zero-indexing
-                    Task removedTask = taskList.remove(Integer.parseInt(command.getArgs()[0]) - 1);
+                    index = Integer.parseInt(command.getArgs()[0]) - 1;
+                    assert(index >= 0);
+
+                    Task removedTask = taskList.remove(index);
 
                     // update file
                     storage.saveTaskData(taskList);
@@ -136,7 +141,6 @@ public class Duke {
 
                     return OutputFormatter.formatTaskList(dueTasks, queryDate);
                 case FIND:
-                    // -1 to account for zero-indexing
                     keyword = command.getArgs()[0];
 
                     return OutputFormatter.formatTaskList(taskList.containsKeyword(keyword));
