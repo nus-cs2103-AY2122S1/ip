@@ -1,6 +1,7 @@
 package duke.ui;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import duke.task.Task;
 
@@ -110,7 +111,7 @@ public class Ui {
      * @param list The list of related tasks.
      * @return A string showing the list of related tasks.
      */
-    public String getRelatedTasks(ArrayList<Task> list) {
+    public String getRelatedTasks(List<Task> list) {
         StringBuilder s = new StringBuilder("");
 
         if (list.size() > 0) {
