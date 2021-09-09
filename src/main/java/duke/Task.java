@@ -40,32 +40,34 @@ public class Task {
 
         /**
          * Method to parse a given String input and return a Type.
+         * Used when parsing input from the user.
          *
-         * @param str The given String input.
+         * @param input The given String input.
          * @return The Type matching the String input.
          */
-        public static Type getType(String str) {
+        public static Type getTypeFromInput(String input) throws DukeException {
             for (Type type : Type.values()) {
-                if (str.contentEquals(type.toString())) {
+                if (input.contentEquals(type.toString())) {
                     return type;
                 }
             }
-            return null;
+            throw new DukeException();
         }
 
         /**
          * Returns the Type represented by the symbol.
+         * Used when reading from the file.
          *
          * @param symbol The symbol provided.
          * @return The represented Type.
          */
-        public static Type getTypeFromSymbol(String symbol) {
+        public static Type getTypeFromSymbol(String symbol) throws ReadFileException {
             for (Type type : Type.values()) {
                 if (symbol.equals(type.getSymbol())) {
                     return type;
                 }
             }
-            return null;
+            throw new ReadFileException();
         }
     }
 
@@ -136,7 +138,7 @@ public class Task {
             try {
                 this.time = LocalDate.parse(time, DATE_TIME_FORMATTER);
             } catch (DateTimeParseException e) {
-                throw new ReadFileException();
+                throw new DateFormatException();
             }
         }
 
@@ -145,7 +147,7 @@ public class Task {
             try {
                 this.time = LocalDate.parse(time, DATE_TIME_FORMATTER);
             } catch (DateTimeParseException e) {
-                throw new ReadFileException();
+                throw new DateFormatException();
             }
         }
 
@@ -187,9 +189,6 @@ public class Task {
 
         // parse task type
         Type type = Type.getTypeFromSymbol(taskSymbol);
-        if (type == null) {
-            throw new ReadFileException();
-        }
 
         // parse status icon
         if (statusIcon.equals(DONE_STATUS_ICON)) {
@@ -241,7 +240,7 @@ public class Task {
      * @return A duke.Task made by the user.
      * @throws duke.exception.DukeException The exception thrown when input is invalid.
      */
-    public static Task createTask(String str) throws DukeException {
+    public static Task createTaskFromInput(String str) throws DukeException {
 
         Pattern pattern = Pattern.compile("^(todo|deadline|event)( (.*?))?$");
         Matcher m = pattern.matcher(str);
@@ -251,10 +250,7 @@ public class Task {
         String details;
 
         if (m.find()) {
-            type = Type.getType(m.group(1));
-            if (type == null) {
-                throw new DukeException();
-            }
+            type = Type.getTypeFromInput(m.group(1));
 
             String tmp = m.group(2);
             details = m.group(3);

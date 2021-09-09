@@ -13,7 +13,7 @@ public class AddCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        Task toAdd = Task.createTask(input);
+        Task toAdd = Task.createTaskFromInput(input);
         taskList.addToList(toAdd);
         return ui.getAddMessage(toAdd, taskList);
     }

@@ -72,4 +72,9 @@ public class Ui {
             return result.toString();
         }
     }
+
+    public String getUpdateMessage(int index, Task task) {
+        return "Nice! I've updated this task:\n"
+                + index + ". " + task;
+    }
 }

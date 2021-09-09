@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.ExitCommand;
 import duke.exception.DukeException;
 
 public class Duke {
@@ -20,8 +21,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Parses the input from the user and returns a string response from Duke.
+     *
+     * @param input The given user String input.
+     * @return The String output from duke.
      */
     public String getResponse(String input) {
         String output;
@@ -34,7 +37,16 @@ public class Duke {
         return output;
     }
 
+    /**
+     * Greets the user.
+     *
+     * @return The greeting message
+     */
     public String greet() {
         return ui.greet();
+    }
+
+    public void exit() {
+        new ExitCommand().execute(taskList, ui, storage);
     }
 }

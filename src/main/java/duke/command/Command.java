@@ -13,6 +13,7 @@ public abstract class Command {
         LIST("^list *?"),
         MARK_DONE("done"),
         FIND("find"),
+        UPDATE("update"),
         EXIT("^bye *?");
 
         public String commandRegex;
@@ -52,6 +53,8 @@ public abstract class Command {
                 return new MarkDoneCommand(input);
             case FIND:
                 return new FindCommand(input);
+            case UPDATE:
+                return new UpdateCommand(input);
             case EXIT:
                 return new ExitCommand();
             default:
