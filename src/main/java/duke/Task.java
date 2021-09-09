@@ -185,6 +185,8 @@ public class Task {
             throw new ReadFileException();
         }
 
+        assert details != null && !details.matches("^ *?$");
+
         boolean isDone;
 
         // parse task type
