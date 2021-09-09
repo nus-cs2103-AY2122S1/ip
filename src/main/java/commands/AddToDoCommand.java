@@ -19,13 +19,10 @@ public class AddToDoCommand extends AddCommand {
      */
     public AddToDoCommand (String userInput) throws MorganException {
         String inputData = userInput.substring(KEYWORD.length()).trim();
-
-        // Check whether input contains task
         boolean hasTask = !inputData.isEmpty();
         if (!hasTask) {
             throw new MorganException(INPUT_FORMAT_ERROR);
         }
-
         this.task = new ToDoTask(inputData);
     }
 }

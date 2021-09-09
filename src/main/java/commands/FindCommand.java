@@ -27,8 +27,8 @@ public class FindCommand extends Command {
         String inputData = userInput.substring(KEYWORD.length()).trim();
         this.keyTerm = inputData.toLowerCase();
 
-        // Checks if user specified key term
-        if (keyTerm.isEmpty()) {
+        boolean isKeyTermFound = !keyTerm.isEmpty();
+        if (!isKeyTermFound) {
             throw new MorganException(INPUT_FORMAT_ERROR);
         }
     }
@@ -40,13 +40,11 @@ public class FindCommand extends Command {
      */
     public String execute(TaskList taskList, Storage storage) throws MorganException {
         TaskList foundTasks = taskList.findTasks(keyTerm);
-
-        // Throws exception if no matching task found
-        if (foundTasks.isEmpty()) {
+        boolean isMatchingTaskFound = !foundTasks.isEmpty();
+        if (!isMatchingTaskFound) {
             throw new MorganException(NOT_FOUND_ERROR);
         }
 
-        // Message displayed upon execution
         String output = "Here are the matching tasks in your list:\n";
         output += foundTasks.toString();
         return output;
