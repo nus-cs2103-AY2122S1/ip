@@ -2,6 +2,10 @@ package duke;
 
 import java.util.Scanner;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+
 /**
  * Handles all the interaction with the user.
  */
@@ -19,12 +23,16 @@ public class Ui {
             + "▀▄▄▄▄▀▀▄▀▄▀▀▄▄▄▄▀▀▀▄▄▄▀▀▀▄▄▄▄▀▀";
     private Items items;
     private Scanner sc = new Scanner(System.in);
+    private Storage storage;
+    private Parser parser;
 
     /**
      * Instantiates a new ui object.
      */
-    public Ui() {
+    public Ui(String directory, String file) {
         items = new Items();
+        storage = new Storage(directory, file);
+        parser = new Parser();
     }
 
     /**
@@ -61,5 +69,73 @@ public class Ui {
         System.out.println(LINE);
         System.out.println(message);
         System.out.println(END_LINE);
+    }
+
+    /**
+     * Interacts with the user.
+     */
+    public String getResponse(String input) {
+        String[] inputWords;
+        String output = "";
+        String fileTask;
+        inputWords = input.split("\\s+");
+
+        if (inputWords.length == 0) {
+            output = "Sorry, I don't understand empty statements.";
+            return output;
+        }
+        String command = inputWords[0];
+
+        assert command != null : "Command cannot be NULL";
+        try {
+            String[] task = parser.compileInput(inputWords);
+            switch (command) {
+            case "list":
+                output = items.printList();
+                break;
+            case "done":
+                int idx = Integer.parseInt(inputWords[1]);
+                output = items.markDone(idx);
+                fileTask = storage.getFileLine(idx);
+                fileTask = fileTask.substring(0, 4) + "1" + fileTask.substring(5);
+                storage.updateListTask(idx, fileTask);
+                break;
+            case "bye":
+                Duke.isRunning = false;
+                output = "Going so soon? I'll be waiting for you.";
+                break;
+            case "todo":
+                output = items.addItem(new Todo(task[0]));
+                fileTask = "T | 0 | " + task[0];
+                storage.addToFile(fileTask);
+                break;
+            case "event":
+                output = items.addItem(new Event(task[0], task[1]));
+                fileTask = "E | 0 | " + task[0] + " | " + task[1];
+                storage.addToFile(fileTask);
+                break;
+            case "deadline":
+                output = items.addItem(new Deadline(task[0], task[1]));
+                fileTask = "D | 0 | " + task[0] + " | " + task[1];
+                storage.addToFile(fileTask);
+                break;
+            case "delete":
+                int id = Integer.parseInt(inputWords[1]);
+                output = items.deleteItem(id);
+                storage.deleteFromFile(id);
+                break;
+            case "find":
+                output = items.findTask(task[0]);
+                break;
+            default:
+                output = "I don't recognise this command\n"
+                        + "Try 'list', 'todo', 'event', 'deadline', 'done', 'find' or 'bye'";
+                break;
+            }
+            assert !output.equals(""): "Unable to generate response. Please try again.";
+            return output;
+        } catch (Exception dukeException) {
+            return dukeException.getMessage();
+        }
     }
 }
