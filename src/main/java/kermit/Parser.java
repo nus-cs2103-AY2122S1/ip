@@ -8,6 +8,7 @@ import kermit.command.CompleteTaskCommand;
 import kermit.command.DeleteTaskCommand;
 import kermit.command.ExitCommand;
 import kermit.command.FindKeywordCommand;
+import kermit.command.HelpCommand;
 import kermit.command.ListTasksCommand;
 
 /**
@@ -61,6 +62,8 @@ public class Parser {
             return new AddTaskCommand("deadline", argument, dateString);
         case "find":
             return new FindKeywordCommand(argument);
+        case "help":
+            return new HelpCommand(argument);
         default:
             throw new KermitException(invalidCommandText);
         }
