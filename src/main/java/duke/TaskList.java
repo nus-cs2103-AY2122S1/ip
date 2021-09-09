@@ -74,6 +74,7 @@ public class TaskList {
         List<Task> searchList = new ArrayList<>();
         String msg = "";
 
+        //filter out the search item into a list.
         searchList = taskList.stream().filter(x -> x.getValue().contains(searchItem)).collect(Collectors.toList());
 
         if (searchList.size() > 0) {
