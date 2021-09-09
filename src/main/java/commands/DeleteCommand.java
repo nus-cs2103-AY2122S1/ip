@@ -17,7 +17,6 @@ public class DeleteCommand extends Command {
 
     @Override
     public String[] run(Bot bot, String[] args) throws InvalidTaskException {
-        System.out.println(args[0]);
         Stream<Integer> indices = Arrays.stream(args[0].split(","))
                                         .map(s -> Integer.parseInt(s.trim()) - 1);
         List<String> messages = new ArrayList<>();

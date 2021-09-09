@@ -1,5 +1,11 @@
 package commands;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Stream;
+
 import bot.Bot;
 import bot.Ui;
 import exceptions.InvalidTaskException;
@@ -12,15 +18,16 @@ public class DoneCommand extends Command {
 
     @Override
     public String[] run(Bot bot, String[] args) throws InvalidTaskException {
-        int index = Integer.parseInt(args[0]) - 1;
-        validateArgs(index, bot);
-
-        Task task = bot.getTaskList().getTaskAt(index);
-        task.markDone();
-        return new String[]{
-            "Nice! I've marked this task as done:",
-            Ui.TEXT_BLOCK_MARGIN + task.toString()
-        };
+        Stream<Integer> indices = Arrays.stream(args[0].split(","))
+                .map(s -> Integer.parseInt(s.trim()) - 1);
+        List<String> messages = new ArrayList<>();
+        indices.sorted(Collections.reverseOrder()).peek((i) -> validateArgs(i, bot)).forEach(ind -> {
+            Task task = bot.getTaskList().getTaskAt(ind);
+            task.markDone();
+            messages.addAll(Arrays.asList(getTaskDoneMessage(task)));
+            messages.add("");
+        });
+        return messages.toArray(new String[0]);
     }
 
     /**
@@ -36,5 +43,17 @@ public class DoneCommand extends Command {
         }
     }
 
+    /**
+     * Message for completing a task
+     *
+     * @param task task that was completed
+     * @return task done message
+     */
+    public String[] getTaskDoneMessage(Task task) {
+        return new String[]{
+            "Nice! I've marked this task as done:",
+            Ui.TEXT_BLOCK_MARGIN + task.toString()
+        };
+    }
 
 }
