@@ -8,7 +8,6 @@ import kermit.Ui;
  * List command displays tasks in task list.
  */
 public class ListTasksCommand extends Command {
-
     /**
      * ListTasks command constructor.
      */
@@ -34,5 +33,14 @@ public class ListTasksCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    /**
+     * Return syntax for list command.
+     *
+     * @return Syntax for how list command is used.
+     */
+    protected static String getSyntax() {
+        return "list";
     }
 }

@@ -9,7 +9,6 @@ import kermit.Ui;
  * Represents a command that Kermit can execute.
  */
 public abstract class Command {
-
     /**
      * Execute command and process action.
      *

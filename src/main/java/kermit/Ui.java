@@ -12,6 +12,7 @@ public class Ui {
     private static final String goodbyeText = "Bye. Hope to see you again soon!";
     private static final String errorText = "Burp burp! Something went wrong!";
     private static final String loadingErrorText = "Could not read this file Nuuuuuuu!";
+    private static final String invalidCommandText = "I'm sorry, but I don't know what that means :-(";
 
     /**
      * Constructor for Ui.
@@ -99,4 +100,5 @@ public class Ui {
     public String getFilteredTasks(TaskList filteredTasks) {
         return filteredTaskText + "\n" + filteredTasks;
     }
+
 }

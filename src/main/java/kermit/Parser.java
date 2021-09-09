@@ -2,7 +2,9 @@ package kermit;
 
 import java.util.Arrays;
 
-import kermit.command.AddTaskCommand;
+import kermit.command.AddDeadlineCommand;
+import kermit.command.AddEventCommand;
+import kermit.command.AddToDoCommand;
 import kermit.command.Command;
 import kermit.command.CompleteTaskCommand;
 import kermit.command.DeleteTaskCommand;
@@ -55,11 +57,11 @@ public class Parser {
         case "delete":
             return new DeleteTaskCommand(argument);
         case "todo":
-            return new AddTaskCommand("todo", argument, dateString);
+            return new AddToDoCommand(argument);
         case "event":
-            return new AddTaskCommand("event", argument, dateString);
+            return new AddEventCommand(argument, dateString);
         case "deadline":
-            return new AddTaskCommand("deadline", argument, dateString);
+            return new AddDeadlineCommand(argument, dateString);
         case "find":
             return new FindKeywordCommand(argument);
         case "help":

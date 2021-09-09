@@ -57,4 +57,14 @@ public class DeleteTaskCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    /**
+     * Return syntax for command.
+     *
+     * @return Syntax for how command is used.
+     */
+    @Override
+    protected static String getSyntax() {
+        return "delete <task index>";
+    };
 }

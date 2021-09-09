@@ -6,8 +6,8 @@ import kermit.TaskList;
 import kermit.Ui;
 
 public class HelpCommand extends Command {
-    private static final String HELP_SYNTAX = "Type 'help <command>'  to find out more about a command";
     private static final String INVALID_COMMAND_MESSAGE = "I'm sorry, but I don't know what that means :-(";
+    private static final String HELP_MESSAGE = "Type 'help <command>'  to find out more about a command";
 
     private String command;
 
@@ -27,8 +27,26 @@ public class HelpCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws KermitException {
         switch (command) {
+        case "bye":
+            return ExitCommand.getSyntax();
+        case "list":
+            return ListTasksCommand.getSyntax();
+        case "done":
+            return CompleteTaskCommand.getSyntax();
+        case "delete":
+            return DeleteTaskCommand.getSyntax();
+        case "todo":
+            return AddToDoCommand.getSyntax();
+        case "event":
+            return AddEventCommand.getSyntax();
+        case "deadline":
+            return AddDeadlineCommand.getSyntax();
+        case "find":
+            return FindKeywordCommand.getSyntax();
+        case "help":
+            return HelpCommand.getSyntax();
         case "":
-            return HELP_SYNTAX;
+            return HELP_MESSAGE;
         default:
             throw new KermitException(INVALID_COMMAND_MESSAGE);
         }
@@ -38,4 +56,15 @@ public class HelpCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    /**
+     * Return syntax for command.
+     *
+     * @return Syntax for how command is used.
+     */
+    protected static String getSyntax() {
+        return "help <command>";
+    }
+
+
 }

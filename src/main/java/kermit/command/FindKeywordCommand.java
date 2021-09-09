@@ -32,6 +32,15 @@ public class FindKeywordCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    /**
+     * Return syntax for find command.
+     *
+     * @return Syntax for how find command is used.
+     */
+    protected static String getSyntax() {
+        return "find <keyword>";
+    }
 }
 
 

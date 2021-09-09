@@ -9,6 +9,8 @@ import kermit.Ui;
  * Exit command tells program to exit.
  */
 public class ExitCommand extends Command {
+
+
     /**
      * Exit command constructor
      */
@@ -38,5 +40,15 @@ public class ExitCommand extends Command {
     @Override
     public boolean isExit() {
         return true;
+    }
+
+    /**
+     * Return syntax for command.
+     *
+     * @return Syntax for how command is used.
+     */
+    @Override
+    protected static String getSyntax() {
+        return "bye";
     }
 }

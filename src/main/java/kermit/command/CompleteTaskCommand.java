@@ -57,4 +57,13 @@ public class CompleteTaskCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    /**
+     * Return syntax for command.
+     *
+     * @return Syntax for how command is used.
+     */
+    protected static String getSyntax() {
+        return "done <task index>";
+    }
 }
