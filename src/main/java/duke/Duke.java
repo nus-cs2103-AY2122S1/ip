@@ -14,7 +14,7 @@ import java.util.Scanner;
 @SuppressWarnings("checkstyle:Regexp")
 public class Duke {
 
-    private int index = 0; //will figure out a way to make this private :<
+    private int index = 0;
     private final String filePath;
     private final TaskList tasks;
     private Ui ui;
@@ -39,6 +39,9 @@ public class Duke {
     public void setIndex(int index) {
         this.index = index;
     }
+    public String getFilePath() {
+        return this.filePath;
+    }
 
     /**
      * Main function that does the main flow of the application
@@ -47,7 +50,6 @@ public class Duke {
      */
 
     public static void main(String[] args) {
-
         Duke bot = new Duke("data/Duke.txt");
         Scanner scanObj = new Scanner(System.in);
 
@@ -84,12 +86,43 @@ public class Duke {
                 } else if (splitInput[0].equals("find")) {
                     c.find_execute();
                 } else {
-                    System.out.println("split input: " + splitInput[0]);
                     System.out.println("sorry! i'm not taught that command yet :<");
                 }
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("sorry! i'm not taught that command yet :<<");
             }
+        }
+    }
+
+    public String getResponse(String input) {
+        Duke bot = new Duke("data/Duke.txt");
+
+        bot.ui.printGreeting();
+
+        Parser c = new Parser(bot.tasks, input, bot.getIndex(), bot);
+        String[] splitInput = input.split(" ");
+        try {
+            if (input.equals("bye")) {
+                return c.bye_execute();
+            } else if (input.equals("list")) {
+                return c.list_execute();
+            } else if (splitInput[0].equals("done")) {
+                return c.done_execute();
+            } else if (splitInput[0].equals("todo")) {
+                return c.todo_execute();
+            } else if (splitInput[0].equals("event")) {
+                return c.event_execute();
+            } else if (splitInput[0].equals("deadline")) {
+                return c.deadline_execute();
+            } else if (splitInput[0].equals("delete")) {
+                return c.delete_execute();
+            } else if (splitInput[0].equals("find")) {
+                return c.find_execute();
+            } else {
+                return "sorry! i'm not taught that command yet :<";
+            }
+        } catch (IndexOutOfBoundsException e) {
+            return "sorry! i'm not taught that command yet :<<";
         }
     }
 }

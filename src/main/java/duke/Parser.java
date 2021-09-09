@@ -1,7 +1,11 @@
 package duke;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import javafx.application.Platform;
 
 /**
  * Represents a Parser that receives inputs from the user and executes the correct commands.
@@ -12,6 +16,7 @@ public class Parser {
     private String userInput;
     private int index;
     private Duke duke;
+    private Ui response;
 
     /**
      * Constructor for the Parser object
@@ -25,70 +30,67 @@ public class Parser {
         this.userInput = userInput;
         this.index = index;
         this.duke = duke;
+        this.response = new Ui();
     }
 
     /**
      * Executes when Duke receives a bye command
      * Sends a goodbye message to the user
      */
-    public void bye_execute() {
-        String byeMsg = "    ----------------------------\n"
-                + "    okay :<, bye!" + "\n"
-                + "    ----------------------------";
-        System.out.println(byeMsg);
+    public String bye_execute() {
+        System.out.println(response.byeResponse());
+        this.writeToFile(duke.getFilePath());
+        Platform.exit();
+        return response.byeResponse();
     }
 
     /**
      * Executes when Duke receives a list command
      * Outputs the list of current tasks to the user
      */
-    public void list_execute() {
-        String message = "    ----------------------------\n"
-                + "    " + "Here are the tasks in your list:\n";
+    public String list_execute() {
         int i = 0;
+        String body = "";
         while (i < tasks.getNumberOfTasks()) {
-            message += "    " + (i + 1) + ". " + tasks.get(i).toString() + "\n";
+            body += "    " + (i + 1) + ". " + tasks.get(i).toString() + "\n";
             i++;
         }
-        message += "    ----------------------------";
+        String message = response.listResponse(tasks, body);
+        this.writeToFile(duke.getFilePath());
         System.out.println(message);
+        return message;
     }
 
     /**
      * Executes when Duke receives a done command
      * Marks the relevant task as done
      */
-    public void done_execute() {
+    public String done_execute() {
         String userIndex = userInput.substring(5);
         int i = Integer.valueOf(userIndex);
-        if (tasks.get(i - 1) == null) {
-            System.out.println("no task found!");
-        } else {
-            tasks.get(i - 1).markAsDone();
-            String message = "    ----------------------------\n"
-                    + "Nice! I have marked this task as done:\n"
-                    + "[X] " + tasks.get(i - 1).getDescription() + "\n" + "    ----------------------------";
-            System.out.println(message);
-        }
+        tasks.get(i - 1).markAsDone();
+        String message = response.doneResponse(i, tasks);
+        this.writeToFile(duke.getFilePath());
+        System.out.println(message);
+        return message;
     }
 
     /**
      * Executes when Duke receives a toDo command
      * Adds a todo task to the list of tasks
      */
-    public void todo_execute() {
+    public String todo_execute() {
         try {
-            Task tempTask = new ToDo(userInput.substring(5));
-            tasks.addTask(tempTask);
+            Task newTask = new ToDo(userInput.substring(5));
+            tasks.addTask(newTask);
             duke.setIndex(duke.getIndex() + 1);
-            String message = "    ----------------------------\n"
-                    + "Got it, I've added this task: \n"
-                    + tempTask.toString() + "\n"
-                    + "Now you have " + duke.getIndex() + " tasks in the list\n"
-                    + "    ----------------------------";
+            String message = response.addTaskResponse(duke.getIndex(), newTask);
+            this.writeToFile(duke.getFilePath());
             System.out.println(message);
+            return message;
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Oops! The description of a todo cannot be empty!");
+            System.out.println(response.errorMessage("todo"));
+            return response.errorMessage("todo");
         }
     }
 
@@ -96,7 +98,7 @@ public class Parser {
      * Executes when Duke receives an event command
      * Adds an event task to the list of tasks
      */
-    public void event_execute() {
+    public String event_execute() {
         try {
             int i = userInput.indexOf("/");
             String description = userInput.substring(6 , i - 1);
@@ -104,17 +106,16 @@ public class Parser {
             String date = split[1].substring(1);
             LocalDate d = LocalDate.parse(date);
             String formattedTime = d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-            Task tempTask = new Event(description, formattedTime);
-            tasks.addTask(tempTask);
+            Task newTask = new Event(description, formattedTime);
+            tasks.addTask(newTask);
             duke.setIndex(duke.getIndex() + 1);
-            String message = "    ----------------------------\n"
-                    + "Got it, I've added this task: \n"
-                    + tempTask.toString() + "\n"
-                    + "Now you have " + duke.getIndex() + " tasks in the list\n"
-                    + "    ----------------------------";
+            String message = response.addTaskResponse(duke.getIndex(), newTask);
+            this.writeToFile(duke.getFilePath());
             System.out.println(message);
+            return message;
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Oops! The description of an event cannot be empty and must contain a time!");
+            System.out.println(response.errorMessage("event"));
+            return response.errorMessage("event");
         }
     }
 
@@ -122,26 +123,24 @@ public class Parser {
      * Executes when Duke receives a deadline command
      * Adds a deadline task to the list of tasks
      */
-    public void deadline_execute() {
+    public String deadline_execute() {
         try {
             int i = userInput.indexOf("/");
             String description = userInput.substring(9 , i - 1);
-            //String time = userInput.substring(i+1);
             String[] split = userInput.split("by");
             String date = split[1].substring(1);
             LocalDate d = LocalDate.parse(date);
             String formattedTime = d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-            Task tempTask = new Deadlines(description, formattedTime);
-            tasks.addTask(tempTask);
+            Task newTask = new Deadlines(description, formattedTime);
+            tasks.addTask(newTask);
             duke.setIndex(duke.getIndex() + 1);
-            String message = "    ----------------------------\n"
-                    + "Got it, I've added this task: \n"
-                    + tempTask.toString() + "\n"
-                    + "Now you have " + duke.getIndex() + " tasks in the list\n"
-                    + "    ----------------------------";
+            String message = response.addTaskResponse(duke.getIndex(), newTask);
+            this.writeToFile(duke.getFilePath());
             System.out.println(message);
+            return message;
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Oops! The description of a deadline cannot be empty and must contain a time!");
+            System.out.println(response.errorMessage("deadline"));
+            return response.errorMessage("deadline");
         }
     }
 
@@ -149,20 +148,20 @@ public class Parser {
      * Executes when Duke receives a delete command
      * Deletes the relevant task from the list of tasks
      */
-    public void delete_execute() {
+    public String delete_execute() {
         String userIndex = userInput.substring(7);
         int i = Integer.valueOf(userIndex);
-        if (tasks.get(i - 1) == null) {
+        Task task = tasks.get(i - 1);
+        if (task == null) {
             System.out.println("no task found!");
+            return "no task found!";
         } else {
             duke.setIndex(duke.getIndex() - 1);
-            String message = "    ----------------------------\n"
-                    + "Got it, I've removed this task: \n"
-                    + tasks.get(i - 1).toString() + "\n"
-                    + "Now you have " + duke.getIndex() + " tasks in the list\n"
-                    + "    ----------------------------";
+            String message = response.deleteTaskResponse(duke.getIndex(), task);
             System.out.println(message);
             tasks.removeTask(i - 1);
+            this.writeToFile(duke.getFilePath());
+            return message;
         }
     }
 
@@ -170,7 +169,7 @@ public class Parser {
      * Executes when Duke receives a find command
      * Finds tasks in the list that contain the keyword specified by the user
      */
-    public void find_execute() {
+    public String find_execute() {
         String keyword = userInput.split(" ")[1];
         String taskString = "";
         boolean hasTask = false;
@@ -182,19 +181,9 @@ public class Parser {
                 hasTask = true;
             }
         }
-        if (hasTask) {
-            String messageTrue = "    ----------------------------\n"
-                    + "Here are your tasks: \n"
-                    + taskString
-                    + "    ----------------------------";
-            System.out.println(messageTrue);
-        } else {
-            String messageFalse = "    ----------------------------\n"
-                    + "There are no tasks with this keyword!\n"
-                    + "    ----------------------------";
-            System.out.println(messageFalse);
-        }
-
+        String message = response.findResponse(taskString, hasTask);
+        System.out.println(message);
+        return message;
     }
 
 
@@ -202,7 +191,6 @@ public class Parser {
      * Generates a formatted string of tasks to be outputted to the user and to be saved into hard disk.
      * @return Formatted string of tasks
      */
-
     public String generateTasks() {
         String taskString = "";
         int i = 0;
@@ -211,5 +199,19 @@ public class Parser {
             i++;
         }
         return taskString;
+    }
+
+    /**
+     * asd
+     * @param filePath
+     */
+    public void writeToFile(String filePath) {
+        try {
+            FileWriter fw = new FileWriter(filePath);
+            fw.write(this.generateTasks());
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("unable to write to file :<");
+        }
     }
 }
