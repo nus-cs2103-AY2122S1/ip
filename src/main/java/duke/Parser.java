@@ -64,6 +64,9 @@ public class Parser {
         case("find"): // Find all tasks corresponding to the given keyword
             output = findTasks(messages);
             break;
+        case("tag"): // Tag the corresponding task
+            output = addTag(messages);
+            break;
         default: // If input does not have a recognised command
             output = ui.showInputError("invalid");
             break;
@@ -134,7 +137,7 @@ public class Parser {
     private String addToDo(String[] messages) {
         String output;
         try {
-            String description = messages[1];
+            String description = messages[1].strip();
             Task task = taskList.addToDo(description);
             storage.saveTask(task.saveString());
             output = ui.writeOutput("Task added successfully: \n" + task
@@ -157,7 +160,7 @@ public class Parser {
         String output;
 
         try {
-            String description = messages[1].split("/by ")[0];
+            String description = messages[1].split("/by ")[0].strip();
             String dateTime = messages[1].split("/by ")[1];
             LocalDate date = LocalDate.parse(dateTime);
             Task task = taskList.addDeadline(description, date);
@@ -184,7 +187,7 @@ public class Parser {
         String output;
 
         try {
-            String description = messages[1].split("/at ")[0];
+            String description = messages[1].split("/at ")[0].strip();
             String dateTime = messages[1].split("/at ")[1];
             LocalDate date = LocalDate.parse(dateTime);
             Task task = taskList.addEvent(description, date);
@@ -207,13 +210,50 @@ public class Parser {
      * @return String with the added task or an error message.
      */
     private String findTasks(String[] messages) {
+
+        if (messages.length != 2) { // If there is no keyword given
+            return ui.showInputError("find");
+        }
+
+        String output;
+        ArrayList<String> results;
+        if (messages[1].startsWith("#")) {
+            String tag = messages[1].substring(1);
+            if (tag.strip().equals("")) {
+                return ui.showInputError("find");
+            }
+            results = taskList.findTag(tag);
+        } else {
+            results = taskList.findKeyword(messages[1]);
+        }
+        output = ui.showList(results);
+
+        return output;
+    }
+
+    /**
+     * Processes the String array and add the tag to the task.
+     *
+     * @param messages String array containing the input from user.
+     * @return String with the tagged task or an error message.
+     */
+    private String addTag(String[] messages) {
         String output;
 
-        if (messages.length == 2) { // If there is a keyword given
-            ArrayList<String> results = taskList.findTask(messages[1]);
-            output = ui.showList(results);
-        } else {
-            output = ui.showInputError("find");
+        if (messages.length != 2) { // If there is no keyword given
+            return ui.showInputError("tag");
+        }
+
+        try {
+            int taskNumber = Integer.parseInt(messages[1].substring(0, 1));
+            String tag = messages[1].split("#")[1];
+            String taskMessage = taskList.addTag(taskNumber, tag);
+            storage.rewriteFile(taskList.getList());
+            output = ui.writeOutput("Alright, I have tagged the tasks as #" + tag + ":\n" + taskMessage);
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            output = ui.showInputError("tag");
+        } catch (DukeException d) {
+            output = ui.showDukeException(d);
         }
 
         return output;

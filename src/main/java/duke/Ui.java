@@ -108,7 +108,10 @@ public class Ui {
             output = writeOutput("You forgot to indicate which task!!!");
             break;
         case("find"):
-            output = writeOutput("Please enter a keyword/phrase to search for!");
+            output = writeOutput("Please enter a keyword/phrase/#tag to search for!");
+            break;
+        case("tag"):
+            output = writeOutput("Enter an integer followed by #tagName after tag...");
             break;
         default:
             output = writeOutput("Oops, something went wrong!");

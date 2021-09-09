@@ -9,6 +9,8 @@ public class Task {
     private String description;
     /** Indicates if task is done */
     private boolean isDone;
+    /** The tag for the task */
+    private String tag;
 
     /**
      * Constructor for Task.
@@ -20,10 +22,15 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.tag = " ";
     }
 
     public String getDescription() {
         return description;
+    }
+
+    public String getTag() {
+        return tag;
     }
 
     /**
@@ -40,7 +47,8 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
+        String tagString = tag.equals(" ") ? "" : " #" + tag;
+        return "[" + getStatusIcon() + "] " + description + tagString;
     }
 
     /**
@@ -53,12 +61,21 @@ public class Task {
     }
 
     /**
+     * Adds tag to the task.
+     *
+     * @param tag The tag to be added.
+     */
+    public void addTag(String tag) {
+        this.tag = tag;
+    }
+
+    /**
      * Returns a string formatted for writing into file.
      *
      * @return String representation of the task for file writing.
      */
     public String saveString() {
-        return isDone + "," + description;
+        return isDone + "," + description + "," + tag;
     }
 
 }
