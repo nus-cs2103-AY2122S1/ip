@@ -1,7 +1,7 @@
-T | 1 | task1
+T | 0 | task1
 T | 1 | task2
 T | 1 | task3
-D | 1 | d1 | Oct 12 2021
+D | 0 | d1 | Dec 12 2025
 D | 0 | d2 | Oct 12 2021
 D | 0 | d3 | Oct 12 2022
 E | 1 | e1 | Oct 12 2021 2000

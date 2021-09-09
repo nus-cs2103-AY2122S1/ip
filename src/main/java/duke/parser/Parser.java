@@ -5,6 +5,7 @@ import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
+import duke.commands.EditCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.TasksOnCommand;
@@ -54,6 +55,8 @@ public class Parser {
                 return parseTasksOn(input);
             case "FIND":
                 return parseFind(input);
+            case "EDIT":
+                return parseEdit(input, taskList);
             case "TODO":
             case "DEADLINE":
             case "EVENT":
@@ -64,6 +67,33 @@ public class Parser {
         }
         throw new DukeException("Missing input!!!");
     }
+
+    private static EditCommand parseEdit(String input, TaskList taskList) {
+        try {
+            String[] parsedString = input.split("\\s", 2);
+            String body = parsedString[1].trim();
+            int taskNo = Integer.parseInt(body.split("\\s", 2)[0]) - 1;
+            String fieldAndContent = body.split("\\s", 2)[1];
+            String content = fieldAndContent.split("\\s", 2)[1];
+            String field = fieldAndContent.split("\\s", 2)[0];
+            System.out.println("content: " + content);
+            System.out.println("field: " + field);
+            if (taskNo > taskList.size()) {
+                throw new NonExistentTaskException();
+            }
+            Task taskToBeEdited = taskList.get(taskNo);
+            if (taskToBeEdited instanceof ToDo || taskToBeEdited instanceof Deadline || taskToBeEdited instanceof Event) {
+                return new EditCommand(taskToBeEdited, field, content, taskNo);
+            } else {
+                throw new DukeException("This task cannot be edited");
+            }
+            } catch(ArrayIndexOutOfBoundsException | NumberFormatException ex){
+                throw new EmptyDescriptionException("Please enter a valid task number and field in the given format:\n "
+                        + Constants.EDIT_FORMAT);
+            }
+        }
+
+
 
     /**
      * Returns a FindCommand when the user uses the 'find' keyword
@@ -107,77 +137,90 @@ public class Parser {
      * @return an AddCommand which will execute the task corresponding to the 'todo', 'deadline' or 'event' keyword
      */
     private static AddCommand parseTask(String input) {
-        Task task;
         String[] splitTasks = input.split("\\s", 2);
         String taskType = splitTasks[0].toLowerCase();
         try {
-                switch (taskType) {
-                case "todo":
-                    if (hasEmptyDesc(splitTasks)) {
-                        throw new EmptyDescriptionException(
-                                "Sorry, the description of a todo cannot be empty" + Constants.TODO_FORMAT
-                        );
-                    } else {
-                        String desc = splitTasks[1].trim();
-                        task = new ToDo(desc);
-                    }
-                    break;
-                case "deadline":
-                    if (hasEmptyDesc(splitTasks)) {
-                        throw new EmptyDescriptionException(
-                                "Sorry, the description of a deadline cannot be empty" + Constants.DEADLINE_FORMAT
-                        );
-                    } else {
-                        String[] parsedDeadline = splitTasks[1].split("/by");
-                        if (hasDateButEmptyDesc(parsedDeadline)) {
-                            throw new EmptyDescriptionException(
-                                    "Sorry, the description of a deadline cannot be empty" + Constants.DEADLINE_FORMAT
-                            );
-                        } else if (hasEmptyDesc(parsedDeadline)) {
-                            throw new IncorrectFormatException(
-                                    "Please add a date for your deadline!" + Constants.DEADLINE_FORMAT);
-                        } else {
-                            String desc = parsedDeadline[0].trim();
-                            String date = parsedDeadline[1].trim();
-                            task = new Deadline(desc, DateTimeParser.deadlineDateParse(date));
-                        }
-                    }
-                    break;
-                case "event":
-                    if (hasEmptyDesc(splitTasks)) {
-                        throw new EmptyDescriptionException(
-                                "Sorry the description of an event cannot be empty" + Constants.EVENT_FORMAT
-                        );
-                    } else {
-                        String[] parsedEvent = splitTasks[1].split("/at");
-                        if (hasDateButEmptyDesc(parsedEvent)) {
-                            throw new EmptyDescriptionException(
-                                    "Sorry the description of an event cannot be empty" + Constants.EVENT_FORMAT
-                            );
-                        } else if (hasEmptyDesc(parsedEvent)) {
-                            throw new IncorrectFormatException(
-                                    "Please add a date and time for your event!" + Constants.EVENT_FORMAT);
-                        } else {
-                            String details = parsedEvent[0].trim();
-                            String at = parsedEvent[1].trim();
-                            task = new Event(details, DateTimeParser.eventDateTimeParse(at));
-                        }
-                    }
-                    break;
-                default:
-                    throw new InvalidKeywordException();
-                }
-            return new AddCommand(task);
+            switch (taskType) {
+            case "todo":
+                return parseTodo(splitTasks);
+            case "deadline":
+                return parseDeadline(splitTasks);
+            case "event":
+                return parseEvent(splitTasks);
+            default:
+                throw new InvalidKeywordException();
+            }
         } catch (ArrayIndexOutOfBoundsException ex) {
-                switch (taskType) {
-                case "deadline": throw new IncorrectFormatException(
-                        "Please specify a description and date for your deadline!" + Constants.DEADLINE_FORMAT);
-                case "event": throw new IncorrectFormatException(
-                        "Please specify a description, date and time for your event!" + Constants.EVENT_FORMAT);
-                default: throw new IncorrectFormatException(
-                        "Please specify a description and date/time for your task!");
-                }
+            switch (taskType) {
+            case "deadline": throw new IncorrectFormatException(
+                    "Please specify a description and date for your deadline!" + Constants.DEADLINE_FORMAT);
+            case "event": throw new IncorrectFormatException(
+                    "Please specify a description, date and time for your event!" + Constants.EVENT_FORMAT);
+            default: throw new IncorrectFormatException(
+                    "Please specify a description and date/time for your task!");
+            }
         }
+    }
+
+    private static AddCommand parseTodo(String[] splitTasks) {
+        Task task;
+        if (hasEmptyDesc(splitTasks)) {
+            throw new EmptyDescriptionException(
+                    "Sorry, the description of a todo cannot be empty" + Constants.TODO_FORMAT
+            );
+        } else {
+            String desc = splitTasks[1].trim();
+            task = new ToDo(desc);
+        }
+        return new AddCommand(task);
+    }
+
+    private static AddCommand parseDeadline(String[] splitTasks) {
+        Task task;
+        if (hasEmptyDesc(splitTasks)) {
+            throw new EmptyDescriptionException(
+                    "Sorry, the description of a deadline cannot be empty" + Constants.DEADLINE_FORMAT
+            );
+        } else {
+            String[] parsedDeadline = splitTasks[1].split("/by");
+            if (hasDateButEmptyDesc(parsedDeadline)) {
+                throw new EmptyDescriptionException(
+                        "Sorry, the description of a deadline cannot be empty" + Constants.DEADLINE_FORMAT
+                );
+            } else if (hasEmptyDesc(parsedDeadline)) {
+                throw new IncorrectFormatException(
+                        "Please add a date for your deadline!" + Constants.DEADLINE_FORMAT);
+            } else {
+                String desc = parsedDeadline[0].trim();
+                String date = parsedDeadline[1].trim();
+                task = new Deadline(desc, DateTimeParser.deadlineDateParse(date));
+            }
+        }
+        return new AddCommand(task);
+    }
+
+    private static AddCommand parseEvent(String[] splitTasks) {
+        Task task;
+        if (hasEmptyDesc(splitTasks)) {
+            throw new EmptyDescriptionException(
+                    "Sorry the description of an event cannot be empty" + Constants.EVENT_FORMAT
+            );
+        } else {
+            String[] parsedEvent = splitTasks[1].split("/at");
+            if (hasDateButEmptyDesc(parsedEvent)) {
+                throw new EmptyDescriptionException(
+                        "Sorry the description of an event cannot be empty" + Constants.EVENT_FORMAT
+                );
+            } else if (hasEmptyDesc(parsedEvent)) {
+                throw new IncorrectFormatException(
+                        "Please add a date and time for your event!" + Constants.EVENT_FORMAT);
+            } else {
+                String details = parsedEvent[0].trim();
+                String at = parsedEvent[1].trim();
+                task = new Event(details, DateTimeParser.eventDateTimeParse(at));
+            }
+        }
+        return new AddCommand(task);
     }
 
     /**

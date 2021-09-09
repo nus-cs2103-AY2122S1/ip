@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.parser.DateTimeParser;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -49,5 +51,13 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E] " + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy HHmm")) + ")";
+    }
+
+    public void setAt(String editedContent) {
+        this.at = DateTimeParser.eventDateTimeParse(editedContent);
+    }
+
+    public LocalDateTime getAt() {
+        return this.at;
     }
 }

@@ -15,6 +15,12 @@ public class Ui {
     public Ui() {
     }
 
+    public String displayEdit(Task oTask, Task eTask) {
+        return "This task has been successfully edited:\n" +
+                "Here is the previous version\n" + oTask.toString() + "\n\n" +
+                "Here is the edited version\n"+ eTask.toString();
+    }
+
     public String displayBye() {
         return Constants.BYE;
     }

@@ -20,6 +20,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public void setDescription(String newDesc) {
+        this.description = newDesc;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done duke.task with X
     }

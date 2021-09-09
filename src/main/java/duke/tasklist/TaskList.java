@@ -75,6 +75,9 @@ public class TaskList {
         return taskList.isEmpty();
     }
 
+    public void set(int i, Task task) {
+        taskList.set(i, task);
+    }
     /**
      * Checks if a list of tasks contains the given task
      *
