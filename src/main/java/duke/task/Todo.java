@@ -22,7 +22,7 @@ public class Todo extends Task {
      * @return The string containing T.
      */
     @Override
-    public String taskIndicator() {
+    public String getTaskIndicator() {
         return "T";
     }
 

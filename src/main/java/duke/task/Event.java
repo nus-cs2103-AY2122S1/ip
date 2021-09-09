@@ -40,7 +40,7 @@ public class Event extends Task {
      * @return The letter E to represent event.
      */
     @Override
-    public String taskIndicator() {
+    public String getTaskIndicator() {
         return "E";
     }
 

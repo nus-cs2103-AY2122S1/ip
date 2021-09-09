@@ -43,7 +43,7 @@ public class Deadline extends Task {
      * @return The letter which represents Deadline.
      */
     @Override
-    public String taskIndicator() {
+    public String getTaskIndicator() {
         return "D";
     }
 

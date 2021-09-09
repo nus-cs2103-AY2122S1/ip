@@ -49,7 +49,7 @@ public class Task {
      *
      * @return The string containing "Task"
      */
-    public String taskIndicator() {
+    public String getTaskIndicator() {
         return "Task";
     }
 
