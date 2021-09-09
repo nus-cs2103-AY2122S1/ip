@@ -2,6 +2,9 @@ package duke.task;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 import duke.exception.NoSuchTaskException;
 
@@ -111,8 +114,9 @@ public class TaskList {
      * @param s The keyword to search for in the description of task.
      * @return The list containing the related task.
      */
-    public ArrayList<Task> findRelatedTask(String s) {
-        ArrayList<Task> list = new ArrayList<>();
+    public List<Task> findRelatedTask(String s) {
+        Stream<Task> taskStream = list.stream().filter(task -> task.findKeyword(s));
+        List<Task> list = Arrays.asList(taskStream.toArray(Task[]::new));
         for (Task t : this.list) {
             if (t.findKeyword(s)) {
                 list.add(t);
