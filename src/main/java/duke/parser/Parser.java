@@ -1,9 +1,9 @@
-package duke;
+package duke.parser;
 
-import duke.DeadlineFormatException;
-import duke.EmptyDescriptionException;
-import duke.EventFormatException;
-import duke.OutOfBoundException;
+import duke.exceptions.DeadlineFormatException;
+import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.EventFormatException;
+import duke.exceptions.OutOfBoundException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -47,7 +47,6 @@ public class Parser {
      */
     public int getIndex(int size) throws OutOfBoundException {
         int index = Integer.parseInt(input.split(" ")[1]);
-        System.out.println("GET INDEX FUNCTION");
         if (index > size || index < 1) {
             throw new OutOfBoundException(size);
         }

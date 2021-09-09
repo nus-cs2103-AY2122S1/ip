@@ -1,5 +1,8 @@
-package duke;
+package duke.ui;
 
+import duke.DialogBox;
+import duke.Duke;
+import duke.storage.Storage;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

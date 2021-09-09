@@ -1,4 +1,13 @@
-package duke;
+package duke.command;
+
+import duke.exceptions.DeadlineFormatException;
+import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.EventFormatException;
+import duke.parser.Parser;
+import duke.taskList.TaskList;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Todo;
 
 /**
  * Represents a command class that adds a task.

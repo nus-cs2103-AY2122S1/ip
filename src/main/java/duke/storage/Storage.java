@@ -1,4 +1,10 @@
-package duke;
+package duke.storage;
+
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+import duke.parser.Parser;
+import duke.tasks.Deadline;
 
 import java.io.File;
 import java.io.FileNotFoundException;

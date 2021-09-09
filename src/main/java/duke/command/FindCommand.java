@@ -1,4 +1,7 @@
-package duke;
+package duke.command;
+
+import duke.parser.Parser;
+import duke.taskList.TaskList;
 
 /**
  * Represents a command class that find all tasks with matching keyword.

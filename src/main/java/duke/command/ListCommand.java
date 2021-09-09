@@ -1,4 +1,6 @@
-package duke;
+package duke.command;
+
+import duke.taskList.TaskList;
 
 /**
  * Represents a command class that list out all tasks.

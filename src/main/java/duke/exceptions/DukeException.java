@@ -1,4 +1,4 @@
-package duke;
+package duke.exceptions;
 
 /**
  * Encapsulates exceptions thrown by the chat bot.

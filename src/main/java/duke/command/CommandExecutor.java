@@ -1,4 +1,10 @@
-package duke;
+package duke.command;
+
+import duke.exceptions.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.taskList.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents a CommandExecutor class that executes user input command.

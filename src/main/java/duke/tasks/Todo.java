@@ -1,4 +1,6 @@
-package duke;
+package duke.tasks;
+
+import duke.tasks.Task;
 
 /**
  * Represents a task that has no due date.
