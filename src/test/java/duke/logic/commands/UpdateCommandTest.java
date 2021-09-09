@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import duke.logic.commands.UpdateCommand.UpdateTaskDescriptor;
 import duke.logic.tasks.Task;
 import duke.logic.tasks.TaskList;
-import duke.logic.tasks.TaskStub;
+import duke.logic.tasks.TaskListTest.TaskStub;
 
 class UpdateCommandTest {
     private UpdateCommand updateCommand;
