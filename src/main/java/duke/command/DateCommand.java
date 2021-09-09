@@ -2,6 +2,7 @@ package duke.command;
 
 import java.time.LocalDate;
 
+import duke.DukeResponse;
 import duke.Parser;
 import duke.Storable;
 import duke.TaskList;
@@ -113,14 +114,15 @@ public class DateCommand extends Command {
      * @param tasks TaskList that command executes upon.
      * @param ui Ui contains enums, response messages and exception messages that command execution will use.
      * @param storage Storage that command executes upon.
-     * @return String describing tasks falling on user specified date.
+     * @return DukeResponse containing string describing tasks falling on user specified date or error message.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storable storage) {
+    public DukeResponse execute(TaskList tasks, Ui ui, Storable storage) {
         try {
-            return this.getTaskAtDate(tasks, ui);
+            String output = this.getTaskAtDate(tasks, ui);
+            return new DukeResponse(output, false);
         } catch (DukeException dukeException) {
-            return dukeException.toString();
+            return new DukeResponse(dukeException.toString(), true);
         }
     }
 

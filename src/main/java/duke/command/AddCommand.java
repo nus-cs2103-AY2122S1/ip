@@ -2,6 +2,7 @@ package duke.command;
 
 import java.time.LocalDate;
 
+import duke.DukeResponse;
 import duke.Parser;
 import duke.Storable;
 import duke.TaskList;
@@ -115,16 +116,17 @@ public class AddCommand extends Command {
      * @param tasks TaskList that command executes upon.
      * @param ui Ui contains enums, response messages and exception messages that command execution will use.
      * @param storage Storage that command executes upon.
-     * @return String describing task added and new total count of task.
+     * @return DukeResponse containing either string describing task added and new total count of task
+     *         or error message.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storable storage) {
+    public DukeResponse execute(TaskList tasks, Ui ui, Storable storage) {
         try {
             String output = this.addTask(tasks, ui, '/');
             storage.saveTasksToData(tasks);
-            return output;
+            return new DukeResponse(output, false);
         } catch (DukeException dukeException) {
-            return dukeException.toString();
+            return new DukeResponse(dukeException.toString(), true);
         }
     }
 

@@ -49,15 +49,15 @@ public class Duke {
      * Returns Duke's string output from executing input String.
      *
      * @param input User's input String.
-     * @return Duke's string output from executing input String.
+     * @return DukeResponse containing details on Duke's output from executing input String.
      */
-    public String getResponse(String input) {
+    public DukeResponse getResponse(String input) {
         if (!input.equals(UserCommands.BYE.getCommand())) {
             Command command = Parser.parse(input);
             return command.execute(this.tasks, this.ui, this.storage);
         }
 
-        return this.ui.getGoodbyeMessage();
+        return new DukeResponse(this.ui.getGoodbyeMessage(), false);
     }
 
     /**

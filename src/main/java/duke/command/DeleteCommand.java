@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeResponse;
 import duke.Parser;
 import duke.Storable;
 import duke.TaskList;
@@ -70,16 +71,17 @@ public class DeleteCommand extends Command {
      * @param tasks TaskList that command executes upon.
      * @param ui Ui contains enums, response messages and exception messages that command execution will use.
      * @param storage Storage that command executes upon.
-     * @return String describing the task deleted and new total count of tasks.
+     * @return DukeResponse containing string describing the task deleted and new total count of tasks
+     *         or error message.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storable storage) {
+    public DukeResponse execute(TaskList tasks, Ui ui, Storable storage) {
         try {
             String output = this.deleteTask(tasks, ui);
             storage.saveTasksToData(tasks);
-            return output;
+            return new DukeResponse(output, false);
         } catch (DukeException dukeException) {
-            return dukeException.toString();
+            return new DukeResponse(dukeException.toString(), true);
         }
     }
 

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeResponse;
 import duke.Parser;
 import duke.Storable;
 import duke.TaskList;
@@ -69,14 +70,16 @@ public class FindCommand extends Command {
      * @param tasks TaskList that command executes upon.
      * @param ui Ui contains enums, response messages and exception messages that command execution will use.
      * @param storage Storage that command executes upon.
-     * @return String describing found tasks with descriptions that matches search keyword.
+     * @return DukeResponse containing string describing found tasks with descriptions that matches search keyword
+     *         or error message.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storable storage) {
+    public DukeResponse execute(TaskList tasks, Ui ui, Storable storage) {
         try {
-            return getTaskMatchingSearch(tasks, ui);
+            String output = getTaskMatchingSearch(tasks, ui);
+            return new DukeResponse(output, false);
         } catch (DukeException dukeException) {
-            return dukeException.toString();
+            return new DukeResponse(dukeException.toString(), true);
         }
     }
 

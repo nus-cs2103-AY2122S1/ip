@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeResponse;
 import duke.Storable;
 import duke.TaskList;
 import duke.Ui;
@@ -15,7 +16,8 @@ public abstract class Command {
      * @param tasks TaskList that command executes upon.
      * @param ui Ui contains enums, response messages and exception messages that command execution will use.
      * @param storage Storage that command executes upon.
-     * @return Output String.
+     * @return DukeResponse object containing the response string and boolean indicating whether response indicates an
+     *         error.
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storable storage);
+    public abstract DukeResponse execute(TaskList tasks, Ui ui, Storable storage);
 }

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeResponse;
 import duke.Parser;
 import duke.Storable;
 import duke.TaskList;
@@ -70,16 +71,16 @@ public class MarkCommand extends Command {
      * @param tasks TaskList that command executes upon.
      * @param ui Ui contains enums, response messages and exception messages that command execution will use.
      * @param storage Storage that command executes upon.
-     * @return String describing the marked task.
+     * @return DukeResponse containing string describing the marked task or error message.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storable storage) {
+    public DukeResponse execute(TaskList tasks, Ui ui, Storable storage) {
         try {
             String output = this.markTask(tasks, ui);
             storage.saveTasksToData(tasks);
-            return output;
+            return new DukeResponse(output, false);
         } catch (DukeException dukeException) {
-            return dukeException.toString();
+            return new DukeResponse(dukeException.toString(), true);
         }
     }
 

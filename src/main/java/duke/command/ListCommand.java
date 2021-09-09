@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeResponse;
 import duke.Storable;
 import duke.TaskList;
 import duke.Ui;
@@ -50,12 +51,13 @@ public class ListCommand extends Command {
      * @param tasks TaskList that command executes upon.
      * @param ui Ui contains enums, response messages and exception messages that command execution will use.
      * @param storage Not Used. Storage that command executes upon.
-     * @return String describing all existing tasks.
+     * @return DukeResponse containing string describing all existing tasks.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storable storage) {
+    public DukeResponse execute(TaskList tasks, Ui ui, Storable storage) {
         // Returns tasks in tasks.
-        return this.getTasks(tasks, ui);
+        String output = this.getTasks(tasks, ui);
+        return new DukeResponse(output, false);
     }
 
     /**
