@@ -2,7 +2,6 @@ package duke;
 
 public class GUI {
 
-    private DataFile dataFile;
     private TaskList taskList;
 
     public static void main(String[] args) {
@@ -10,7 +9,7 @@ public class GUI {
     }
 
     public GUI() {
-        dataFile = new DataFile("./duke_data.txt");
+        DataFile dataFile = new DataFile("./duke_data.txt");
         taskList = new TaskList(dataFile);
     }
 
@@ -18,15 +17,15 @@ public class GUI {
         return processInput(s);
     }
 
-    String processInput(String str) {
-
-        assert str != "";
+    private String processInput(String str) {
+        assert !str.equals("");
         Task newTask = Parser.parseInput(str);
 
         if (newTask == null) {
             if (str.equals("bye")) {
                 taskList.save();
-                return "Tasklist saved; exiting not implemented yet!";
+                return "Tasklist saved; Exit command not implemented yet!";
+
             } else if (str.equals("list")) {
                 return taskList.list();
             } else if (str.startsWith("done")) {

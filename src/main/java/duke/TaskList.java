@@ -32,6 +32,8 @@ public class TaskList {
             case EVENT:
                 type = "Event";
                 break;
+            default:
+                assert false;
         }
         return "Added this " + type + " task:\n" + task.toString();
     }
@@ -61,7 +63,6 @@ public class TaskList {
         return "Noted. Removed this task:\n" + t.toString();
     }
 
-
     public void save() {
         if (this.dataFile != null) {
             this.dataFile.saveToDisk(this.list());
@@ -79,6 +80,6 @@ public class TaskList {
     }
 
 }
-// >>>>>>> branch-Level-9
+
 
 
