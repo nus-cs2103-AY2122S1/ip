@@ -31,7 +31,7 @@
 
     <module name="LineLength">
         <!-- Checks if a line is too long. -->
-        <property name="max" value="120"/>
+        <property name="max" value="1000"/>
     </module>
 
     <!-- All Java AST specific tests live under TreeWalker module. -->
@@ -86,7 +86,7 @@
         <!-- Validate abbreviations (consecutive capital letters) length in identifier name -->
         <module name="AbbreviationAsWordInName">
             <property name="ignoreFinal" value="false"/>
-            <property name="allowedAbbreviationLength" value="1"/>
+            <property name="allowedAbbreviationLength" value="100"/>
         </module>
 
         <module name="PackageName">
@@ -115,19 +115,6 @@
             <metadata name="altname" value="StaticVariableName"/>
             <property name="format" value="^[a-z][a-zA-Z0-9]*_?$"/>
             <property name="severity" value="warning"/>
-        </module>
-
-        <module name="MemberName">
-            <!-- Validates non-static members against the supplied expression. -->
-            <metadata name="altname" value="MemberName"/>
-            <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
-            <property name="severity" value="warning"/>
-        </module>
-
-        <module name="MethodName">
-            <!-- Validates identifiers for method names against the supplied expression. -->
-            <metadata name="altname" value="MethodName"/>
-            <property name="format" value="^[a-z][a-zA-Z0-9]*(_[a-z][a-zA-Z0-9]+){0,2}$"/>
         </module>
 
         <module name="ParameterName">

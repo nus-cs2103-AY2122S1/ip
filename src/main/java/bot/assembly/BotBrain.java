@@ -48,6 +48,9 @@ public class BotBrain {
             return botCommandResponderUnit.deleteTaskFromList(input);
         case FIND:
             return botCommandResponderUnit.findTaskFromList(input);
+        case MASSOPS:
+            botCommandResponderUnit.massOps(input);
+            return botTaskGeneratorUnit.generateTaskTrackerReport();
         default:
             botCommandResponderUnit.addTask(input);
             return botTaskGeneratorUnit.generateAddTaskFeedback();
