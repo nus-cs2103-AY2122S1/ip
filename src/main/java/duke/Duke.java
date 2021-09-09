@@ -41,6 +41,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         if (isActive) {
+            assert isActive : "Should only respond when duke is active";
             try {
                 DukeCommand c = parser.processInput(input);
                 if (c instanceof ExitCommand) {
