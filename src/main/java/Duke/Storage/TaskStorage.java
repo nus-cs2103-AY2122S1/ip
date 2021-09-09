@@ -151,6 +151,8 @@ public class TaskStorage implements Storage<Task> {
      * @return The string representing the task.
      */
     private static String encodeTask(Task task) {
+        assert task != null;
+
         String type = task.getTaskTypeIcon(), completionStatus = task.isDone() ? "1" : "0",
                 description = task.getDescription(), date = "";
 

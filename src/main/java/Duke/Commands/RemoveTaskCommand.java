@@ -17,6 +17,7 @@ class RemoveTaskCommand extends Command {
 
     @Override
     public void run(Duke duke, UserInput input) throws InvalidTaskException {
+        assert input != null;
         int taskIndex = parseTaskNumber(input);
         TaskList taskList = duke.getTaskList();
         Task task = taskList.remove(taskIndex);

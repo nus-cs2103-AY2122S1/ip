@@ -19,7 +19,7 @@ public class Ui {
     public static final String FILE_FORMAT_ERROR_MESSAGE = "The file storing your tasks is in an unrecognized format. "
             + "Please fix or remove it.";
 
-    private MainWindow mainController;
+    private final MainWindow mainController;
 
     /**
      * Constructs a new instance of the GUI associated with the specified Duke and Stage.
@@ -29,10 +29,15 @@ public class Ui {
     public Ui(Stage stage, Duke duke) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainWindow.fxml"));
         AnchorPane ap = fxmlLoader.load();
+        assert ap != null;
+
         Scene scene = new Scene(ap);
         stage.setScene(scene);
+
         mainController = fxmlLoader.getController();
+        assert mainController != null;
         mainController.setDuke(duke);
+
         stage.show();
     }
 

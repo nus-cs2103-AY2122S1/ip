@@ -15,6 +15,7 @@ class DoneTaskCommand extends Command {
 
     @Override
     public void run(Duke duke, UserInput input) throws InvalidTaskException {
+        assert input != null;
         int taskIndex = parseTaskNumber(input);
         TaskList taskList = duke.getTaskList();
         taskList.markAsDone(taskIndex);
