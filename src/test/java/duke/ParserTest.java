@@ -9,9 +9,9 @@ import java.time.LocalTime;
 
 import org.junit.jupiter.api.Test;
 
-import duke.command.AddCommand;
+import duke.command.AddTaskCommand;
 import duke.command.ByeCommand;
-import duke.command.DeleteCommand;
+import duke.command.DeleteTaskCommand;
 import duke.command.DoneCommand;
 import duke.command.DueCommand;
 import duke.command.ListCommand;
@@ -119,7 +119,7 @@ public class ParserTest {
     @Test
     public void parseCommandFromInput_todoCommand_success() {
         try {
-            assertTrue(Parser.parseCommandFromInput("todo") instanceof AddCommand);
+            assertTrue(Parser.parseCommandFromInput("todo") instanceof AddTaskCommand);
         } catch (Exception e) {
             fail();
         }
@@ -128,7 +128,7 @@ public class ParserTest {
     @Test
     public void parseCommandFromInput_deadlineCommand_success() {
         try {
-            assertTrue(Parser.parseCommandFromInput("deadline") instanceof AddCommand);
+            assertTrue(Parser.parseCommandFromInput("deadline") instanceof AddTaskCommand);
         } catch (Exception e) {
             fail();
         }
@@ -137,7 +137,7 @@ public class ParserTest {
     @Test
     public void parseCommandFromInput_eventCommand_success() {
         try {
-            assertTrue(Parser.parseCommandFromInput("event") instanceof AddCommand);
+            assertTrue(Parser.parseCommandFromInput("event") instanceof AddTaskCommand);
         } catch (Exception e) {
             fail();
         }
@@ -146,7 +146,7 @@ public class ParserTest {
     @Test
     public void parseCommandFromInput_deleteCommand_success() {
         try {
-            assertTrue(Parser.parseCommandFromInput("delete") instanceof DeleteCommand);
+            assertTrue(Parser.parseCommandFromInput("delete") instanceof DeleteTaskCommand);
         } catch (Exception e) {
             fail();
         }

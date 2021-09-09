@@ -4,13 +4,16 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
-import duke.command.AddCommand;
+import duke.command.AddAliasCommand;
+import duke.command.AddTaskCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
-import duke.command.DeleteCommand;
+import duke.command.DeleteAliasCommand;
+import duke.command.DeleteTaskCommand;
 import duke.command.DoneCommand;
 import duke.command.DueCommand;
 import duke.command.FindCommand;
+import duke.command.ListAliasCommand;
 import duke.command.ListCommand;
 import duke.command.OnDateCommand;
 
@@ -19,6 +22,25 @@ import duke.command.OnDateCommand;
  * and commands from user input.
  */
 public class Parser {
+    private static AliasHandler aliasHandler = new AliasHandler();
+
+    /**
+     * Assigns an AliasHandler object that contains a list of aliases to Parser.
+     *
+     * @param aliasHandler An AliasHandler object containing a list of aliases.
+     */
+    public static void setAliasHandler(AliasHandler aliasHandler) {
+        Parser.aliasHandler = aliasHandler;
+    }
+
+    /**
+     * Gets an AliasHandler object assigned to Parser that contains a list of aliases.
+     *
+     * @return An AliasHandler object containing a list of aliases.
+     */
+    public static AliasHandler getAliasHandler() {
+        return aliasHandler;
+    }
 
     /**
      * Converts a string representing a date into a LocalDate object.
@@ -52,31 +74,41 @@ public class Parser {
 
     /**
      * Parses the user's input to determine what command is being called.
+     * Command are not case sensitive. (e.g. bye is treated the same as BYE)
      *
      * @param input Input that contains the user's command.
      * @return Command object that can be used to execute the related function.
      * @throws DukeException If an invalid command is given.
      */
     public static Command parseCommandFromInput(String input) throws DukeException {
-        String commandString = input.split(" ")[0].toUpperCase();
+        String inputString = input.split(" ")[0].toLowerCase();
+        String commandString = aliasHandler.convertAlias(inputString);
+        // Note: any changes made to this switch-case should also be made
+        // to the switch-case in AliasHandler method isCommandKeyWord
         switch (commandString) {
-        case "BYE":
+        case "addalias":
+            return new AddAliasCommand(input);
+        case "bye":
             return new ByeCommand();
-        case "LIST":
+        case "list":
             return new ListCommand();
-        case "DONE":
+        case "listalias":
+            return new ListAliasCommand();
+        case "done":
             return new DoneCommand(input);
-        case "TODO":
-        case "DEADLINE":
-        case "EVENT":
-            return new AddCommand(input);
-        case "DELETE":
-            return new DeleteCommand(input);
-        case "ONDATE":
+        case "todo":
+        case "deadline":
+        case "event":
+            return new AddTaskCommand(input);
+        case "delete":
+            return new DeleteTaskCommand(input);
+        case "deletealias":
+            return new DeleteAliasCommand(input);
+        case "ondate":
             return new OnDateCommand(input);
-        case "DUE":
+        case "due":
             return new DueCommand(input);
-        case "FIND":
+        case "find":
             return new FindCommand(input);
         default:
             throw new DukeException("You have entered an invalid command.");

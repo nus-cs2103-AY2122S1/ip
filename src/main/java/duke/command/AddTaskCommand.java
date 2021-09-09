@@ -10,14 +10,14 @@ import duke.util.Ui;
 /**
  * A class that represents the command when the user types in 'todo', 'deadline' or 'event'.
  */
-public class AddCommand extends Command {
+public class AddTaskCommand extends Command {
 
     /**
-     * Creates an AddCommand, which relies on user inputs to function.
+     * Creates an AddTaskCommand, which relies on user inputs to function.
      *
      * @param input A string containing the user's input.
      */
-    public AddCommand(String input) {
+    public AddTaskCommand(String input) {
         super(input);
     }
 
