@@ -37,8 +37,8 @@ public class Task {
             throw new VirushadeException("Error: File cannot be parsed.");
         }
 
-        String taskCategory = text.substring(0,3);
-        String taskCompletionStatus = text.substring(3,6);
+        String taskCategory = text.substring(0, 3);
+        String taskCompletionStatus = text.substring(3, 6);
         String taskDescription = text.substring(6).trim();
         String[] strings = StringManipulator.slashPartition(taskDescription);
 

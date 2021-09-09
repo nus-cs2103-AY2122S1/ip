@@ -80,11 +80,11 @@ public class StringManipulator {
             int timeIn24hRepresentation = Integer.parseInt(timeString);
 
             if (timeIn24hRepresentation < 0 || timeIn24hRepresentation > 2359
-                    || Integer.parseInt(timeString.substring(2,3)) > 5) {
+                    || Integer.parseInt(timeString.substring(2, 3)) > 5) {
                 return timeString;
             } else {
-                int hours = timeIn24hRepresentation/100;
-                int minutes = timeIn24hRepresentation%100;
+                int hours = timeIn24hRepresentation / 100;
+                int minutes = timeIn24hRepresentation % 100;
 
                 if (hours > 11) {
                     if (hours != 12) {

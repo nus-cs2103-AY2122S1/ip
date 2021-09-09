@@ -62,13 +62,13 @@ public class ResponseProcessor {
 
     /**
      * Determines what Virushade should do with given string str.
-     * Note: str is assumed to not be "bye".
      *
      * @param str The input instructional string.
      */
     private static String assignTask(String str) throws VirushadeException {
         String keyword = StringManipulator.wordSeparator(str)[0];
         String instruction = StringManipulator.wordSeparator(str)[1];
+
 
         if (!instruction.equals("")) {
             switch (keyword) {
@@ -89,6 +89,8 @@ public class ResponseProcessor {
 
             case "delete":
                 return TaskList.delete(instruction);
+
+            default:
             }
         }
         return handleSingleWordInput(keyword);
