@@ -1,1 +1,3 @@
+T | 1 | 1
+E | 0 | la | laa
 T | 1 | lalala
