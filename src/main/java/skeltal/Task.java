@@ -18,7 +18,7 @@ public class Task {
      * A method to get the task description.
      * @return The description of the task.
      */
-    public String getTask() {
+    public String getTaskDescription() {
         return task;
     }
 
@@ -28,7 +28,7 @@ public class Task {
      */
     public String store() {
         int done = this.isCompleted() ? 1 : 0;
-        return done + " | " + this.getTask();
+        return done + " | " + this.getTaskDescription();
     }
 
 
