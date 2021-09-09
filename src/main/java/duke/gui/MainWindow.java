@@ -31,6 +31,9 @@ public class MainWindow extends AnchorPane {
     private final Image dukeImage = new Image(
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke.png")));
 
+    /**
+     * Initialises Duke with a welcome message
+     */
     @FXML
     public void initialize() {
         final String welcomeMessage = "Hello! I'm duke.\nWhat can I do for you?";
@@ -56,7 +59,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
 
-        if(input.equals("bye")) {;
+        if (input.equals("bye")) {
             System.exit(0);
         }
         userInput.clear();
