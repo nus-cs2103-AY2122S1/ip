@@ -95,8 +95,7 @@ public class Parser {
                 System.out.println(e.getMessage());
             } finally {
                 System.out.println("    __________________________"
-                        +
-                        "__________________________________");
+                        + "__________________________________");
                 return false;
             }
         }
