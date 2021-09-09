@@ -123,14 +123,23 @@ public class TaskList {
     /**
      * Sort the task list according to the date and time.
      */
-    public void sortTaskList() {
+    public void sortTaskList(boolean isReverse) {
         for (int i = 0; i < list.size(); i++) {
             for (int j = i + 1; j < list.size(); j++) {
-                if (list.get(i).compareTo(list.get(j)) == 1) {
-                    Task temp = list.get(i);
-                    list.set(i, list.get(j));
-                    list.set(j, temp);
+                if (!isReverse) {
+                    if (list.get(i).compareTo(list.get(j)) == 1) {
+                        Task temp = list.get(i);
+                        list.set(i, list.get(j));
+                        list.set(j, temp);
+                    }
+                } else {
+                    if (list.get(i).compareTo(list.get(j)) == -1) {
+                        Task temp = list.get(i);
+                        list.set(i, list.get(j));
+                        list.set(j, temp);
+                    }
                 }
+
             }
         }
     }

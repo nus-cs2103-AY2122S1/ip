@@ -12,15 +12,19 @@ import duke.ui.Ui;
  * @version Duke Level 10
  */
 public class SortCommand extends DukeCommand {
+    private final boolean isReverse;
+
     /**
      * Constructor for a DukeCommand.
      *
-     * @param ui      The Ui handler that handles the printing of message with respect to the command.
-     * @param storage The storage handler that handles saving or loading data to local directory.
-     * @param list    The TaskList handler that handles operation related to task.
+     * @param ui        The Ui handler that handles the printing of message with respect to the command.
+     * @param storage   The storage handler that handles saving or loading data to local directory.
+     * @param list      The TaskList handler that handles operation related to task.
+     * @param isReverse The order of sorting.
      */
-    public SortCommand(Ui ui, Storage storage, TaskList list) {
+    public SortCommand(Ui ui, Storage storage, TaskList list, boolean isReverse) {
         super(ui, storage, list);
+        this.isReverse = isReverse;
     }
 
     /**
@@ -31,7 +35,7 @@ public class SortCommand extends DukeCommand {
      */
     @Override
     public String execute() throws DukeException {
-        list.sortTaskList();
+        list.sortTaskList(isReverse);
         return ui.sortListMessage(list.getList());
     }
 }

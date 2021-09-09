@@ -86,7 +86,7 @@ public class Parser {
                 return new FindCommand(ui, storage, list, commandDescription);
 
             case "sort":
-                return new SortCommand(ui, storage, list);
+                return new SortCommand(ui, storage, list, checkReverseSort(commandDescription));
 
             default:
                 throw new UnknownCommandException();
@@ -174,5 +174,9 @@ public class Parser {
         }
 
         throw new NoDateTimeException();
+    }
+
+    private boolean checkReverseSort(String commandDescription) {
+        return commandDescription.toLowerCase().contains("reverse");
     }
 }
