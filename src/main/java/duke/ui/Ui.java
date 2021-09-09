@@ -3,18 +3,14 @@ package duke.ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.util.Scanner;
-
 /**
  * Class that deals with interactions with the user
  * such as reading user commands and displaying messages
  * to the user.
  */
 public class Ui {
-    private final Scanner sc;
 
     public Ui() {
-        this.sc = new Scanner(System.in);
     }
 
     /**
@@ -22,14 +18,6 @@ public class Ui {
      */
     public String showWelcome() {
         return "Hello! I'm Duke\n What can I do for you?";
-    }
-
-    /**
-     * Method that reads in the user's next inputs
-     * @return the command entered by the user
-     */
-    public String readCommand() {
-        return sc.nextLine();
     }
 
     /**
@@ -73,9 +61,7 @@ public class Ui {
      * @param task the task to be marked as done
      */
     public String doneTask(Task task) {
-        StringBuilder res = new StringBuilder("Nice! I've marked this task as done:\n");
-        res.append(task);
-        return res.toString();
+        return "Nice! I've marked this task as done:\n" + task;
     }
 
     /**
