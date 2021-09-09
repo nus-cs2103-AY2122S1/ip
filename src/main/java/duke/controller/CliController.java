@@ -10,9 +10,10 @@ import duke.ui.Ui;
 import java.util.Scanner;
 
 public class CliController {
-	private Storage storage = new Storage();
-	private TaskList taskList = new TaskList();
-	private Ui ui = new Ui();
+	private final Storage storage = new Storage();
+	private final TaskList taskList = new TaskList();
+	private final Ui ui = new Ui();
+	private final Parser parser = new Parser();
 
 	public void getCliOutput() {
 		storage.createFile();
@@ -40,7 +41,7 @@ public class CliController {
 				} else if (nextCliCommand == Command.DELETE) {
 					taskList.deleteTask(nextLine);
 				} else {
-					Parser.invalidTask();
+					parser.invalidTask();
 				}
 			} catch (DukeException e) {
 				System.out.println(e);

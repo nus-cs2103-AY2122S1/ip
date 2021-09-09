@@ -11,6 +11,7 @@ public class GuiController {
 	private Storage storage = new Storage();
 	private TaskList taskList = new TaskList();
 	private Ui ui = new Ui();
+	private Parser parser = new Parser();
 	private String guiOutput = "";
 
 	public String getGuiOutput(String guiInput) {
@@ -35,7 +36,7 @@ public class GuiController {
 				} else if (nextGuiCommand == Command.DELETE) {
 					guiOutput = taskList.deleteTask(guiInput);
 				} else {
-					Parser.invalidTask();
+					parser.invalidTask();
 				}
 			} catch (DukeException e) {
 				guiOutput = e.getMessage();

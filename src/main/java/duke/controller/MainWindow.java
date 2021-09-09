@@ -1,6 +1,7 @@
 package duke.controller;
 
 import duke.Duke;
+import duke.exception.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -9,8 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -27,8 +28,10 @@ public class MainWindow extends AnchorPane {
 
 	private Duke duke;
 
-	private Image userImage = new Image(this.getClass().getResourceAsStream("/images/duke_icon.jpg"));
-	private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/user_icon.jpg"));
+	private final Image userImage = new Image(Objects.requireNonNull(this.getClass().
+			 getResourceAsStream("/images/duke_icon.jpg")));
+	private final Image dukeImage = new Image(Objects.requireNonNull(this.getClass().
+			 getResourceAsStream("/images/user_icon.jpg")));
 
 	@FXML
 	public void initialize() {

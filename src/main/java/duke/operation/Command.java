@@ -15,7 +15,7 @@ public enum Command {
 	BYE("bye"),
 	INVALID_COMMAND("");
 
-	private String commandWord;
+	private final String commandWord;
 
 	Command(String commandWord) {
 		this.commandWord = commandWord;

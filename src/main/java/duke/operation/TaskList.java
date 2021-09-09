@@ -10,11 +10,11 @@ import java.util.ArrayList;
  */
 public class TaskList {
 	protected ArrayList<Task> taskList;
+	private final Parser parser = new Parser();
 
 	public TaskList() {
 		this.taskList = new ArrayList<>();
 	}
-
 	public TaskList(ArrayList<Task> list) {
 		this.taskList = list;
 	}
@@ -33,49 +33,24 @@ public class TaskList {
 	public String addTask(Command command, String inputLine) throws DukeException {
 		String message;
 		Task task;
-		String guiOutput = "";
+		String guiOutput;
 		switch (command) {
 		case TODO: {
-			Parser.checkIfFirstWordValid(inputLine, "todo");
-			if (Parser.isDescriptionEmpty(inputLine)) {
-				message = "____________________________________________________________\n"
-						+ "OOPS!!! The description of a "
-						+ "todo"
-						+ " cannot be empty.\n"
-						+ "____________________________________________________________\n";
-				throw new DukeException(message);
-			}
+			parser.firstWordAndDescriptionCheck(inputLine, "todo");
 			task = ToDo.splitToDO(inputLine);
 			this.taskList.add(task);
 			guiOutput = printAddTask(taskList.size(), task);
 			break;
 		}
 		case DEADLINE: {
-			Parser.checkIfFirstWordValid(inputLine, "deadline");
-			if (Parser.isDescriptionEmpty(inputLine)) {
-				message = "____________________________________________________________\n"
-						+ "OOPS!!! The description of a "
-						+ "deadline"
-						+ " cannot be empty.\n"
-						+ "____________________________________________________________\n";
-				throw new DukeException(message);
-			}
-			
+			parser.firstWordAndDescriptionCheck(inputLine, "deadline");
 			task = Deadline.splitDeadline(inputLine);
 			taskList.add(task);
 			guiOutput = printAddTask(taskList.size(), task);
 			break;
 		}
 		case EVENT: {
-			Parser.checkIfFirstWordValid(inputLine, "event");
-			if (Parser.isDescriptionEmpty(inputLine)) {
-				message = "____________________________________________________________\n"
-						+ "OOPS!!! The description of a "
-						+ "event"
-						+ " cannot be empty.\n"
-						+ "____________________________________________________________\n";
-				throw new DukeException(message);
-			}
+			parser.firstWordAndDescriptionCheck(inputLine, "event");
 			task = Event.splitEvent(inputLine);
 			taskList.add(task);
 			guiOutput = printAddTask(taskList.size(), task);
@@ -249,7 +224,6 @@ public class TaskList {
 				filteredArrayList.add(task);
 			}
 		}
-		TaskList filteredTaskList = new TaskList(filteredArrayList);
-		return filteredTaskList;
+		return new TaskList(filteredArrayList);
 	}
 }
