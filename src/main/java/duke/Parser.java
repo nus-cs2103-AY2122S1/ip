@@ -25,6 +25,11 @@ import duke.task.Todo;
  */
 public class Parser {
 
+    public static final String NO_SPECIFIER = "";
+    public static final String BY_SPECIFIER = " /by ";
+    public static final String AT_SPECIFIER = " /at ";
+    public static final String FIND_SPECIFIER = ", ";
+
     /**
      * Makes sense of the user input.
      * @param fullCommand The input from user.
@@ -45,20 +50,20 @@ public class Parser {
         case LIST:
             return new ListCommand();
         case TODO:
-            taskDescriptions = getTaskDescriptions(userDescription, "");
+            taskDescriptions = getTaskDescriptions(userDescription, NO_SPECIFIER);
             return new AddCommand(new Todo(taskDescriptions[0]));
         case DEADLINE:
-            taskDescriptions = getTaskDescriptions(userDescription, " /by ");
+            taskDescriptions = getTaskDescriptions(userDescription, BY_SPECIFIER);
             return new AddCommand(new Deadline(taskDescriptions[0], taskDescriptions[1]));
         case EVENT:
-            taskDescriptions = getTaskDescriptions(userDescription, " /at ");
+            taskDescriptions = getTaskDescriptions(userDescription, AT_SPECIFIER);
             return new AddCommand(new Event(taskDescriptions[0], taskDescriptions[1]));
         case DONE:
             return new DoneCommand(toTaskIndex(userDescription));
         case DELETE:
             return new DeleteCommand(toTaskIndex(userDescription));
         case FIND:
-            taskDescriptions = getTaskDescriptions(userDescription, ", ");
+            taskDescriptions = getTaskDescriptions(userDescription, FIND_SPECIFIER);
             return new FindCommand(taskDescriptions);
         case CLEAR:
             return new ClearCommand();

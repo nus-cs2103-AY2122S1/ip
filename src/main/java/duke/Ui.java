@@ -14,18 +14,19 @@ import duke.task.TaskList;
 public class Ui {
     public static final String LIST_TASK_MSG = "\tHere are the tasks in your list:\n";
     public static final String FIND_TASKS_MSG = "\tThe tasks that match your keywords are:\n";
+    public static final String DONE_MSG = "\tNice! I've marked this task as done:\n\t  ";
+    public static final String CLEAR_MSG = "\t All your tasks have been cleared!";
+    public static final String LOAD_ERROR_MSG = "\tWe couldn't load your data file ><";
+    public static final String EXIT_MSG = "\tGoodbye! Please visit me again soon :(";
+
     private Scanner sc = new Scanner(System.in);
 
     public String readCommand() {
         return sc.nextLine();
     }
 
-    public String showWelcome() {
-        return "\tHello! I'm Adam, your personal chat bot.\n\tHow may I assist you today?";
-    }
-
     public String showGoodbye() {
-        return "\tGoodbye! Please visit me again soon :(";
+        return EXIT_MSG;
     }
 
     /**
@@ -48,7 +49,7 @@ public class Ui {
     }
 
     public String showLoadingError() {
-        return "\tWe couldn't load your data file ><";
+        return LOAD_ERROR_MSG;
     }
 
     /**
@@ -64,14 +65,14 @@ public class Ui {
     }
 
     public String showTaskDone(Task task) {
-        return "\tNice! I've marked this task as done:\n\t  " + task;
+        return DONE_MSG + task;
     }
 
     /**
      * Shows to user that the task list has been cleared.
      */
     public String showClearTasks() {
-        return "\t All your tasks have been cleared!";
+        return CLEAR_MSG;
     }
 
 
