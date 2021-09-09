@@ -67,9 +67,7 @@ public class Duke extends Application {
      */
     @Override
     public void start(Stage stage) {
-        //Step 1. Setting up required components
 
-        //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -165,6 +163,12 @@ public class Duke extends Application {
         userInput.clear();
     }
 
+    /**
+     * Gets the program output give the user input.
+     *
+     * @param input User input
+     * @return Duke's response
+     */
     String getResponse(String input) {
         return this.ui.run(this.storage, input);
     }
