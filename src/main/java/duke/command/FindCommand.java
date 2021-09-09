@@ -3,19 +3,29 @@ package duke.command;
 import duke.parser.Parser;
 import duke.taskList.TaskList;
 
+/**
+ * Represents a command class that find all tasks with matching keyword.
+ *
+ * @author Chen Hsiao Ting
+ * @version CS2103T AY21/22 Semester 1
+ */
 public class FindCommand extends Command {
-    private boolean isExit;
 
+    /**
+     * A constructor for FindCommand.
+     *
+     * @param tasks A list of current Tasks.
+     * @param input User input.
+     */
     public FindCommand(TaskList tasks, String input) {
         super(tasks, input);
     }
 
-
-    @Override
-    public boolean isExitCommand() {
-        return isExit;
-    }
-
+    /**
+     * Finds all tasks with matching keyword.
+     *
+     * @return String representation of a list of matching tasks.
+     */
     public String find() {
         Parser parser = new Parser(input);
         String keyword = parser.getKeyword();

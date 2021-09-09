@@ -1,9 +1,10 @@
 package duke.tasks;
 
 /**
- * duke.tasks.Task class to represent a task.
+ * Represents a Task that user inputted.
  *
- * @author: Chen Hsiao Ting
+ * @author Chen Hsiao Ting
+ * @version CS2103T AY21/22 Semester 1
  */
 
 public class Task {
@@ -12,11 +13,11 @@ public class Task {
     private String type;
 
     /**
-     * A constructor for the task.
+     * A constructor for Task.
      *
-     * @param description user input task description.
-     * @param isDone status of the task.
-     * @param type type of task.
+     * @param input User input.
+     * @param isDone Status of the task.
+     * @param type Type of task.
      */
     public Task(String input, Boolean isDone, String type) {
         this.input = input;
@@ -27,7 +28,7 @@ public class Task {
     /**
      * Returns the status of the task.
      *
-     * @return a status in string.
+     * @return "X" if task is done, " " of task is not done.
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
@@ -36,7 +37,7 @@ public class Task {
     /**
      * Returns the status and description of the task.
      *
-     * @return a string representation of the task.
+     * @return String representation of the task.
      */
     public String getTask() {
         return "[" + getStatusIcon() + "] " + input;
@@ -52,7 +53,7 @@ public class Task {
     /**
      * Returns the status and description of the task when marked done.
      *
-     * @return a string representation of the done status.
+     * @return String representation of the done status.
      */
     public String markDone() {
         done();
@@ -62,16 +63,16 @@ public class Task {
     /**
      * Returns the status and description of the task when deleted.
      *
-     * @return a string representation of the deleted task.
+     * @return String representation of the deleted task.
      */
     public String delete() {
         return getTask();
     }
 
     /**
-     * Returns the status of task.
+     * Returns the status of task in boolean.
      *
-     * @return boolean status of task.
+     * @return Boolean true if task is done, false otherwise.
      */
     public boolean isDone() {
         return isDone;
@@ -80,7 +81,7 @@ public class Task {
     /**
      * Returns the description of task.
      *
-     * @return string description of task.
+     * @return String description of task.
      */
     public String getDescription() {
         return input;
@@ -89,7 +90,7 @@ public class Task {
     /**
      * Returns the type of task.
      *
-     * @return string type of task.
+     * @return String type of task.
      */
     public String getType() {
         return type;

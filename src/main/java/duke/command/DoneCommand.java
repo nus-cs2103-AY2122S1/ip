@@ -4,22 +4,33 @@ import duke.exceptions.OutOfBoundException;
 import duke.parser.Parser;
 import duke.taskList.TaskList;
 
+/**
+ * Represents a command class that marks a task as done.
+ *
+ * @author Chen Hsiao Ting
+ * @version CS2103T AY21/22 Semester 1
+ */
 public class DoneCommand extends Command {
-    private boolean isExit;
 
+    /**
+     * A constructor for DoneCommand.
+     *
+     * @param tasks A list of current Tasks.
+     * @param input User input.
+     */
     public DoneCommand(TaskList tasks, String input) {
         super(tasks, input);
     }
 
-    @Override
-    public boolean isExitCommand() {
-        return isExit;
-    }
-
+    /**
+     * Marks a task as done.
+     *
+     * @return String representation of the done task.
+     * @throws OutOfBoundException If user enter an invalid index.
+     */
     public String done() throws OutOfBoundException {
         Parser parser = new Parser(input);
         int index = parser.getIndex(tasks.getSize());
         return tasks.done(index);
     }
-
 }

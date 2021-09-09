@@ -6,17 +6,37 @@ import duke.storage.Storage;
 import duke.taskList.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents a CommandExecutor class that executes user input command.
+ *
+ * @author Chen Hsiao Ting
+ * @version CS2103T AY21/22 Semester 1
+ */
 public class CommandExecutor {
     private final TaskList tasks;
     private final Storage storage;
     private final Ui ui;
 
+    /**
+     * A constructor for CommandExecutor.
+     *
+     * @param tasks A list of current Tasks.
+     * @param storage Storage file.
+     * @param ui Ui to log the execution of the command.
+     */
     public CommandExecutor(TaskList tasks, Storage storage, Ui ui) {
         this.tasks = tasks;
         this.storage = storage;
         this.ui = ui;
     }
 
+    /**
+     * Executes user command.
+     *
+     * @param input User input.
+     * @return String representation of the executed command.
+     * @throws DukeException If user input is invalid.
+     */
     public String execute(String input) throws DukeException {
         Parser parser = new Parser(input);
         String command = parser.getCommandWord();

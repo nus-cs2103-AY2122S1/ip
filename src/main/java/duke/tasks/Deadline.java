@@ -1,20 +1,24 @@
 package duke.tasks;
 
-import duke.exceptions.DeadlineFormatException;
-import duke.tasks.Task;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task that has a deadline.
+ *
+ * @author Chen Hsiao Ting
+ * @version CS2103T AY21/22 Semester 1
+ */
 public class Deadline extends Task {
     private String description;
     private String deadline;
 
     /**
-     * A constructor for the deadline task.
+     * A constructor for the Deadline.
      *
-     * @param description user input task description.
-     * @param isDone status of the task.
+     * @param description User input task description.
+     * @param deadline User input task deadline date.
+     * @param isDone Status of the task.
      */
     public Deadline(String description, String deadline, Boolean isDone) {
         super(description + " /by " + deadline, isDone, "D");
@@ -25,7 +29,7 @@ public class Deadline extends Task {
     /**
      * Returns the status and description of the deadline task.
      *
-     * @return a string representation of the deadline task.
+     * @return String representation of the deadline task.
      */
     public String getTask() {
         LocalDateTime dateTime = LocalDateTime.parse(deadline);
@@ -33,5 +37,4 @@ public class Deadline extends Task {
 
         return "[D]" + "[" + super.getStatusIcon() + "] " + description + " (by: " + dateTime.format(formatter) + ")";
     }
-
 }

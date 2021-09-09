@@ -1,11 +1,12 @@
 package duke.exceptions;
 
+/**
+ * Encapsulates exceptions thrown by the chat bot.
+ *
+ * @author Chen Hsiao Ting
+ * @version CS2103T AY21/22 Semester 1
+ */
 public class DukeException extends RuntimeException {
-    /**
-     * A constructor for the DukeException.
-     *
-     * @param errorMessage error message output
-     */
     public DukeException(String errorMessage) {
         super(errorMessage);
     }

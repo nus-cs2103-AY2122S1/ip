@@ -1,10 +1,16 @@
 package duke.ui;
 
+/**
+ * Represents an Ui class that is responsible for the interaction with user.
+ *
+ * @author Chen Hsiao Ting
+ * @version CS2103T AY21/22 Semester 1
+ */
 public class Ui {
     private static String DIVIDER = "____________________________________________________________";
 
     /**
-     * Shows a welcome message from duke.Duke chatbot.
+     * Shows a welcome message from chat bot.
      */
     public static void welcome() {
         String logo = " ____        _        \n"
@@ -20,14 +26,11 @@ public class Ui {
     }
 
     /**
-     * Shows a loading error message when error occurs.
+     * Shows a goodbye message when user enter exit command.
+     *
+     * @return String of the goodbye message.
      */
-    public static void showLoadingError() {
-        System.out.println("LOADING ERROR");
-    }
-
     public String showBye() {
         return "Bye. Hope to see you again soon!";
     }
-
 }

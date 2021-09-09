@@ -17,6 +17,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a storage that stores the task data locally.
+ *
+ * @author Chen Hsiao Ting
+ * @version CS2103T AY21/22 Semester 1
+ */
 public class Storage {
     private static String PATH;
     private static ArrayList<Task> tasks = new ArrayList<Task>();
@@ -24,16 +30,16 @@ public class Storage {
     /**
      * A constructor for Storage.
      *
-     * @param filePath input path for the data file
+     * @param filePath Input path for the data file.
      */
     public Storage(String filePath) {
         this.PATH = filePath;
     }
 
     /**
-     * Create file path if input file does not exist.
+     * Creates file path if input file does not exist.
      *
-     * @throws IOException if an input or output exception occurred.
+     * @throws IOException If an input or output exception occurred.
      */
     public static void checkFile() throws IOException {
         final Path p = Paths.get(PATH);
@@ -52,10 +58,10 @@ public class Storage {
     }
 
     /**
-     * Adds old tasks in the saved file to an array list of Task.
+     * Initialize the old tasks into current list of Tasks.
      *
-     * @return Array list of Task
-     * @throws IOException if an input or output exception occurred.
+     * @return Array list of Task.
+     * @throws IOException If an input or output exception occurred.
      */
     public static ArrayList<Task> loadTask() throws IOException {
         try {
