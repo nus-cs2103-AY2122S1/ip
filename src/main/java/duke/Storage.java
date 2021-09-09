@@ -111,4 +111,8 @@ public class Storage {
             ex.printStackTrace();
         }
     }
+
+    public String getPath() {
+        return savePath.toString();
+    }
 }
