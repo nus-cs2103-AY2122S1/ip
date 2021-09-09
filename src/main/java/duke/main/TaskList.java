@@ -1,7 +1,5 @@
 package duke.main;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 
 import duke.task.Task;
@@ -27,9 +25,8 @@ public class TaskList {
 
     /**
      * Alternative class constructor, used when there is an error loading the file.
-     * Initiates the tasks arraylist.
+     * Initializes an empty arraylist.
      */
-    @SuppressWarnings("checkstyle:Indentation")
     public TaskList() {
         tasks = new ArrayList<>();
     }
@@ -91,7 +88,7 @@ public class TaskList {
     public TaskList findMatchingTasks(String searchPhrase) {
         TaskList matchingTasks = new TaskList();
         for (Task t : tasks) {
-            if (t.toString().contains(searchPhrase)) {
+            if (t.contains(searchPhrase)) {
                 matchingTasks.add(t);
             }
         }

@@ -24,18 +24,13 @@ public class Todo extends Task {
     public Todo(String description) throws DukeException {
         super();
         try {
-            if (!description.contains("todo")) {
-                throw new IllegalArgumentException();
-            }
-            int startingIndex = description.indexOf(TASK_KEYWORD);
-            taskDescription = description.substring(startingIndex + TASK_KEYWORD.length());
+            int startingIndex = calculateStartingIndex(description, TASK_KEYWORD);
+            taskDescription = getSubString(description, startingIndex);
             if (taskDescription == "") {
                 throw new StringIndexOutOfBoundsException();
             }
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException(e);
-        } catch (IllegalArgumentException e) {
-            throw new DukeException(e);
+            throw new DukeException(DukeException.Exceptions.StringIndexOutOfBoundsException);
         }
     }
 
@@ -48,7 +43,15 @@ public class Todo extends Task {
     public Todo(String todoDescription, String dateOfTask) {
         taskDescription = todoDescription;
     }
-
+    private int calculateStartingIndex(String description, String wordSlicer) {
+        return description.indexOf(wordSlicer) + wordSlicer.length();
+    }
+    private String getSubString(String taskDescription, int startIndex, int ... endIndex) {
+        if (endIndex != null) {
+            return taskDescription.substring(startIndex, endIndex[0]);
+        }
+        return taskDescription.substring(startIndex);
+    }
     /**
      * Prints out the duke.task.
      *

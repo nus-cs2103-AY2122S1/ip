@@ -7,6 +7,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+import javafx.scene.chart.ScatterChart;
 
 import java.time.format.DateTimeParseException;
 
@@ -39,22 +40,26 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String taskType = addCommand.split(" ")[0];
+        Task task;
         try {
-            Task task;
-            if (addCommand.contains("deadline")) {
+            switch (taskType) {
+            case "deadline" :
                 task = new Deadline(addCommand);
-            } else if (addCommand.contains("event")) {
+                break;
+            case "event":
                 task = new Event(addCommand);
-            } else {
+                break;
+            case "todo" :
                 task = new Todo(addCommand);
+                break;
+            default:
+                throw new IllegalArgumentException();
             }
-
             Task taskAdded = tasks.add(task);
             return ui.showTaskAdded(taskAdded, tasks.getNumTasks());
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException(e);
-        } catch (DateTimeParseException e) {
-            throw new DukeException(e);
+        } catch (IllegalArgumentException e) {
+            throw new DukeException(DukeException.Exceptions.EXCEPTIONS);
         }
     }
 }

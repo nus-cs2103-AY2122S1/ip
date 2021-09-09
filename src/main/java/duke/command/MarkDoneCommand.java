@@ -20,8 +20,12 @@ public class MarkDoneCommand extends Command {
      *
      * @param taskNumber the serial number of the duke.task.
      */
-    public MarkDoneCommand(int taskNumber) {
-        this.TASK_NUM = taskNumber;
+    public MarkDoneCommand(String taskNumber) throws DukeException {
+        try {
+            this.TASK_NUM = Integer.parseInt(taskNumber);
+        } catch (NumberFormatException e) {
+            throw new DukeException(DukeException.Exceptions.EXCEPTIONS);
+        }
     }
 
     /**
@@ -35,7 +39,7 @@ public class MarkDoneCommand extends Command {
             Task task = tasks.markDone(TASK_NUM - 1);
             return ui.showMarkTaskDone(task);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(e);
+            throw new DukeException(DukeException.Exceptions.IndexOutOfBoundsException);
         }
     }
 }

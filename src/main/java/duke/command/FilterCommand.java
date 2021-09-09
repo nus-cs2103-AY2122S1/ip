@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.main.Date;
 import duke.main.DukeException;
 import duke.main.Storage;
+import duke.main.TaskDate;
 import duke.main.TaskList;
 import duke.main.Ui;
 
@@ -13,7 +13,7 @@ import duke.main.Ui;
  * @version CS2103T, Semester 2
  */
 public class FilterCommand extends Command {
-    private Date date;
+    private TaskDate date;
     private String dateString;
     /**
      * Class constructor.
@@ -23,25 +23,21 @@ public class FilterCommand extends Command {
     public FilterCommand(String dateString) throws DukeException {
         super();
         String[] dateComponents = dateString.split("/");
-        try {
-            date = new Date(dateComponents);
-            dateString = date.toString();
-        } catch (Exception e) {
-            throw new DukeException(e);
-        }
+        date = new TaskDate(dateComponents);
+        dateString = date.toString();
     }
     /**
      * Executes a command to filter out tasks falling on the specified date.
      * @param tasks lists of tasks
      * @param ui the user interface.
      * @param storage the storage file.
+     * @return message displaying all tasks that falls on the specified date.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList matchingTasks = findMatchingTasks(tasks);
         String message = generateFilterCommandMessage();
-        return ui.showMatchingTasks(matchingTasks, dateString, message);
-
+        return ui.showMatchingTasks(matchingTasks, dateString, message, tasks.getNumTasks());
     }
     private TaskList findMatchingTasks(TaskList tasks) {
         return tasks.findMatchingTasks(dateString);

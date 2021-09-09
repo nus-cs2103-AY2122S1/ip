@@ -21,8 +21,12 @@ public class DeleteCommand extends Command {
      *
      * @param taskNumber the serial number of the duke.task.
      */
-    public DeleteCommand(int taskNumber) {
-        this.TASK_NUM = taskNumber;
+    public DeleteCommand(String taskNumber) throws DukeException {
+        try {
+            this.TASK_NUM = Integer.parseInt(taskNumber);
+        } catch (NumberFormatException e) {
+            throw new DukeException(DukeException.Exceptions.EXCEPTIONS);
+        }
     }
 
     /**
@@ -40,7 +44,7 @@ public class DeleteCommand extends Command {
             int numTasksRemaining = tasks.getNumTasks();
             return ui.showTaskDeleted(deletedTask, numTasksRemaining);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(e);
+            throw new DukeException(DukeException.Exceptions.IndexOutOfBoundsException);
         }
     }
 }

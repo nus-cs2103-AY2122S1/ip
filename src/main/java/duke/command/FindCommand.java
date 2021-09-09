@@ -10,9 +10,9 @@ import duke.main.Ui;
  * @version CS2103T, Semester 2
  */
 public class FindCommand extends Command {
-    private final String KEYWORRD = "find ";
+    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
+    private final String KEYWORD = "find ";
     private String searchPhrase;
-    private boolean isExitCommand;
     /**
      * Class constructor.
      *
@@ -20,17 +20,19 @@ public class FindCommand extends Command {
      * @throws StringIndexOutOfBoundsException if there is no search phrase.
      */
     public FindCommand(String userCommand) throws StringIndexOutOfBoundsException {
+        super();
         int startingIndex = findStartingIndex(userCommand);
-        this.searchPhrase = userCommand.substring(startingIndex);
+        this.searchPhrase = getSearchPhrase(userCommand, startingIndex);
         if (searchPhrase.equals("")) {
             throw new StringIndexOutOfBoundsException();
         }
-        isExitCommand = false;
     }
     private int findStartingIndex(String userCommand) {
-        return userCommand.indexOf(KEYWORRD) + KEYWORRD.length();
+        return userCommand.indexOf(KEYWORD) + KEYWORD.length();
     }
-
+    private String getSearchPhrase(String userInput, int startingIndex) {
+        return userInput.substring(startingIndex);
+    }
     /**
      * Executes a command to filter out tasks falling on the specified date.
      * @param tasks lists of tasks
@@ -40,8 +42,8 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList matchingTasks = tasks.findMatchingTasks(searchPhrase);
-        String message = generateExecutionMessage();
-        return ui.showMatchingTasks(matchingTasks, searchPhrase, message);
+        String executionMessage = generateExecutionMessage();
+        return ui.showMatchingTasks(matchingTasks, searchPhrase, executionMessage, tasks.getNumTasks());
     }
     private String generateExecutionMessage() {
         return "Here are the matching tasks in your list:\n";

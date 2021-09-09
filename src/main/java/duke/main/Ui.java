@@ -1,8 +1,8 @@
 package duke.main;
 
-import duke.task.Task;
-
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Represents user interface abstraction.
@@ -106,35 +106,35 @@ public class Ui {
      * @param numTasksRemaining number of tasks after deleting the task.
      */
     public String showTaskDeleted(Task task, int numTasksRemaining) {
-        String deletionMessage = "Alrighty, I've removed this task:\n";
-        deletionMessage += String.format("~~%s~~\n", task.toString());
-        deletionMessage += String.format("Now, you have %s %s remaining", numTasksRemaining,
-                (numTasksRemaining > 1 ? "tasks" : "task"));
-        return deletionMessage;
+        return generateNotificationMessage("Alrightty, I've removed this task:", task, numTasksRemaining);
     }
 
     /**
-     * Shows the duke.task added.
+     * Shows the task added.
      *
-     * @param task        the duke.task added.
+     * @param task the task added.
      * @param newNumTasks number of tasks after adding the new duke.task.
      */
     public String showTaskAdded(Task task, int newNumTasks) {
-        String additionMessage = "Got it. I've added this task:\n";
-        additionMessage += String.format("~~%S~~\n", task.toString());
-        additionMessage += String.format("Now you have %s %s in the list.", newNumTasks,
-                (newNumTasks > 1 ? "tasks" : "task"));
-        return additionMessage;
+        return generateNotificationMessage("Got it. I've added this task:", task, newNumTasks);
     }
 
+    @SuppressWarnings("checkstyle:SeparatorWrap")
+    private String generateNotificationMessage(String headerMessage, Task task, int taskNum) {
+        String notificationMessage = String.format("%s\n", headerMessage);
+        notificationMessage += String.format("~~%S~~\n", task.toString());
+        notificationMessage += String.format("Now you have %s %s remaining.", taskNum,
+                (taskNum > 1 ? "tasks" : "task"));
+        return notificationMessage;
+    }
     /**
      * Lists out all the tasks Duke.Duke is keeping track of.
      *
      * @param tasks current taskList of tasks.
      */
-    public String showListOfTasks(TaskList tasks) {
+    public String showListOfTasks(TaskList tasks, int numTasks) {
         String header = "Here are the tasks in your list:";
-        return iterate(header, tasks);
+        return iterate(header, tasks, numTasks);
     }
 
     /**
@@ -143,13 +143,17 @@ public class Ui {
      * @param tasks   list of duke.task that fall on the specified date.
      * @param message the header message.
      */
-    public String showMatchingTasks(TaskList tasks, String searchPhrase, String message) {
-        return iterate(message, tasks);
+    public String showMatchingTasks(TaskList tasks, String searchPhrase, String message, int numTasks) {
+        return iterate(message, tasks, numTasks);
     }
-    private String iterate(String headerMessage, TaskList tasks) {
-        String listOfTasksDisplay = headerMessage + "\n";
-        for (int i = 0; i < tasks.getNumTasks(); i++) {
-            listOfTasksDisplay += String.format("%s.%s\n", i + 1, tasks.getTask(i).toString());
+    private String iterate(String headerMessage, TaskList tasks, int numTasks) {
+        String listOfTasksDisplay = String.format("%s\n", headerMessage);
+        Task task;
+        String taskString;
+        for (int i = 0; i < numTasks; i++) {
+            task = tasks.getTask(i);
+            taskString = task.toString();
+            listOfTasksDisplay += String.format("%s.%s\n", i + 1, taskString);
         }
         return listOfTasksDisplay;
     }

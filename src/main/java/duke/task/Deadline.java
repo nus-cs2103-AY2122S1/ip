@@ -2,8 +2,9 @@ package duke.task;
 
 import java.text.ParseException;
 
-import duke.main.Date;
 import duke.main.DukeException;
+import duke.main.TaskDate;
+
 
 /**
  * Represents tasks with deadline.
@@ -19,7 +20,8 @@ public class Deadline extends Task {
     @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     private final String BY_KEYWORD = "by ";
     private String taskDescription;
-    private Date dueDate;
+    private TaskDate dueDate;
+    private String dateString;
 
     /**
      * Class constructor.
@@ -28,12 +30,13 @@ public class Deadline extends Task {
      */
     public Deadline(String description) throws DukeException {
         super();
-        int startingIndex = description.indexOf(TASK_KEYWORD) + TASK_KEYWORD.length();
-        int startOfTimingIndex = description.indexOf(BY_KEYWORD);
-        taskDescription = description.substring(startingIndex, startOfTimingIndex - 1);
-        String deadlineDate = description.substring(startOfTimingIndex + BY_KEYWORD.length());
-        String[] dateComponents = deadlineDate.split("/");
-        dueDate = new Date(dateComponents);
+        int startingIndex = calculateStartingIndex(description, TASK_KEYWORD);
+        int startOfTimingIndex = calculateStartingIndex(description, BY_KEYWORD);
+        taskDescription = getSubString(description, startingIndex, startOfTimingIndex - BY_KEYWORD.length());
+        String deadlineDate = getSubString(description, startOfTimingIndex);
+        String[] dayMonthYear = getDayMonthYear(deadlineDate);
+        dueDate = new TaskDate(dayMonthYear);
+        dateString = dueDate.toString();
     }
 
     /**
@@ -44,10 +47,23 @@ public class Deadline extends Task {
      * @throws ParseException due to improper date format.
      */
     public Deadline(String deadlineDescription, String dateOfTask) throws DukeException {
+        super();
         taskDescription = deadlineDescription;
-        dueDate = Date.convertDateStringToDate(dateOfTask);
+        dueDate = TaskDate.convertDateStringToDate(dateOfTask);
+        dateString = dueDate.toString();
     }
-
+    private int calculateStartingIndex(String description, String wordSlicer) {
+        return description.indexOf(wordSlicer) + wordSlicer.length();
+    }
+    private String getSubString(String taskDescription, int startIndex, int ... endIndex) {
+        if (endIndex != null) {
+            return taskDescription.substring(startIndex, endIndex[0]);
+        }
+        return taskDescription.substring(startIndex);
+    }
+    private String[] getDayMonthYear(String date) {
+        return date.split("/");
+    }
     /**
      * Print out the deadline duke.task,
      *
@@ -57,7 +73,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format("[%s]%s %s (by: %s)", TASK_MARKER, super.toString(), taskDescription,
-            dueDate.toString());
+            dateString);
     }
 
     /**
@@ -67,7 +83,7 @@ public class Deadline extends Task {
      */
     public String formatToStore() {
         return String.format("%s | %s | %s | %s", TASK_MARKER, getStatusIcon() == " " ? 1 : 0,
-            taskDescription, dueDate.toString());
+            taskDescription, dateString);
     }
 
     /**

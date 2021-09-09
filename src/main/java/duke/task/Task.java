@@ -1,8 +1,5 @@
 package duke.task;
 
-import javax.xml.stream.FactoryConfigurationError;
-import java.time.LocalDate;
-
 /**
  * Represents a duke.task which can be marked done.
  *
@@ -76,4 +73,13 @@ public class Task {
         return false;
     }
 
+    /**
+     * Determines if the task description contains the given search phrase.
+     *
+     * @param searchPhrase the search word.
+     * @return true if the description contains the phrase, false otherwise.
+     */
+    public boolean contains(String searchPhrase) {
+        return toString().contains(searchPhrase);
+    }
 }

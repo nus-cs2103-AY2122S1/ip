@@ -1,15 +1,13 @@
 package duke.task;
 
-import duke.main.Date;
-import duke.main.Duke;
-import duke.main.DukeException;
-
 import java.text.ParseException;
-import java.time.format.DateTimeParseException;
+
+import duke.main.DukeException;
+import duke.main.TaskDate;
 
 /**
  * Represents tasks with specific timing.
- * 
+ *
  * @author Gordon Yit
  * @version CS2103T, Semester 2
  */
@@ -18,11 +16,12 @@ public class Event extends Task {
     private final String TASK_MARKER = "E";
     private String taskDescription;
     private String eventDate;
-    private Date dueDate;
+    private TaskDate dueDate;
     @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     private final String TASK_KEYWORD = "event ";
     @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     private final String AT_KEYWORD = "at ";
+    private String dateString;
     /**
      * Class constructor.
      *
@@ -30,17 +29,14 @@ public class Event extends Task {
      */
     public Event(String description) throws DukeException {
         super();
-        int startingIndex = description.indexOf(TASK_KEYWORD) + TASK_KEYWORD.length();
-        int startOfTimeIndex = description.indexOf(AT_KEYWORD);
-        taskDescription = description.substring(startingIndex, startOfTimeIndex - 1);
-        eventDate = description.substring(startOfTimeIndex + AT_KEYWORD.length());
-        try {
-            this.dueDate = new Date(eventDate);
-        } catch (DateTimeParseException e) {
-            throw new DukeException(e);
-        }
+        int startingIndex = calculateStartingIndex(description, TASK_KEYWORD);
+        int startOfTimeIndex = calculateStartingIndex(description, AT_KEYWORD);
+        taskDescription = getSubString(description, startingIndex, startOfTimeIndex - AT_KEYWORD.length());
+        eventDate = getSubString(description, startOfTimeIndex);
+        String[] dayMonthYear = getDayMonthYear(eventDate);
+        dueDate = new TaskDate(dayMonthYear);
+        dateString = dueDate.toString();
     }
-
     /**
      * Class constructor for loading tasks from storage file.
      *
@@ -49,13 +45,28 @@ public class Event extends Task {
      * @throws ParseException due to improper date format.
      */
     public Event(String eventDescription, String dateOfTask) throws DukeException {
+        super();
         taskDescription = eventDescription;
-        dueDate = Date.convertDateStringToDate(dateOfTask);
+        dueDate = TaskDate.convertDateStringToDate(dateOfTask);
+        dateString = dueDate.toString();
     }
+    private int calculateStartingIndex(String description, String wordSlicer) {
+        return description.indexOf(wordSlicer) + wordSlicer.length();
+    }
+    private String getSubString(String taskDescription, int startIndex, int ... endIndex) {
+        if (endIndex != null) {
+            return taskDescription.substring(startIndex, endIndex[0]);
+        }
+        return taskDescription.substring(startIndex);
+    }
+    private String[] getDayMonthYear(String date) {
+        return date.split("/");
+    }
+
     /**
      * Print out the event task,
      *
-     * @return string format of the event task, 
+     * @return string format of the event task,
      * consisting of the task marker "E", task description and duration of the event.
      */
     @Override
@@ -85,7 +96,7 @@ public class Event extends Task {
 
     /**
      * Checks if given datetime matches the tasks date time.
-     * 
+     *
      * @param dateString date to compare with in string form.
      * @return true if the task date time matches the date time given.
      */

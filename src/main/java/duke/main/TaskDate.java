@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Date;
 
 /**
  * Represents the local date format of the given date..
@@ -12,22 +13,21 @@ import java.time.format.DateTimeParseException;
  * @author Gordon Yit
  * @version CS2103T Semester 1
  */
-public class Date {
+public class TaskDate {
     protected LocalDate localDate;
-    private String[] date;
     /**
      * Class constructor.
      *
-     * @param dateComponents components of the date
+     * @param dayMonthYear the day, month and year of the given date.
      * @throws DateTimeParseException exception caused by improper time format.
      */
-    public Date(String ... dateComponents) throws DukeException {
+    public TaskDate(String ... dayMonthYear) throws DukeException {
         try {
-            localDate = LocalDate.parse(String.format("%s-%s-%s", "2021", dateComponents[1], dateComponents[0]));
+            localDate = LocalDate.parse(String.format("%s-%s-%s", "2021", dayMonthYear[1], dayMonthYear[0]));
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(e);
+            throw new DukeException(DukeException.Exceptions.ArrayIndexOutOfBoundsException);
         } catch (DateTimeParseException e) {
-            throw new DukeException(e);
+            throw new DukeException(DukeException.Exceptions.DateTimeParseException);
         }
     }
 
@@ -38,9 +38,12 @@ public class Date {
      */
     @Override
     public String toString() {
-        return localDate.format(DateTimeFormatter.ofPattern("MMM dd"));
+        return localDate.format(getDateFormat());
     }
 
+    private DateTimeFormatter getDateFormat() {
+        return DateTimeFormatter.ofPattern("MMM dd");
+    }
     /**
      * Retrieves the local date object.
      *
@@ -67,14 +70,20 @@ public class Date {
      * @return a date object corresponding to the date string.
      * @throws ParseException exception caused by parsing date in improper format.
      */
-    public static Date convertDateStringToDate(String dateString) throws DukeException {
+    public static TaskDate convertDateStringToDate(String dateString) throws DukeException {
         try {
-            SimpleDateFormat monthDayFormat = new SimpleDateFormat("MMM D");
-            java.util.Date monthDayDate = monthDayFormat.parse(dateString);
-            SimpleDateFormat dateFormatToDate = new SimpleDateFormat("DD/MM/YYYY");
-            return new Date(dateFormatToDate.format(monthDayDate));
+            java.util.Date monthDayDate = getFormattedDate("MMM D", dateString);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("DD/MM/YYYY");
+            return new TaskDate(getFormattedDateString(dateFormat, monthDayDate));
         } catch (ParseException e) {
-            throw new DukeException(e);
+            throw new DukeException(DukeException.Exceptions.EXCEPTIONS);
         }
+    }
+    private static Date getFormattedDate(String dateFormatString, String dateString) throws ParseException {
+        SimpleDateFormat monthDayFormat = new SimpleDateFormat(dateFormatString);
+        return monthDayFormat.parse(dateString);
+    }
+    private static String getFormattedDateString(SimpleDateFormat simpleDateFormat, java.util.Date monthDayDate) {
+        return simpleDateFormat.format(monthDayDate);
     }
 }

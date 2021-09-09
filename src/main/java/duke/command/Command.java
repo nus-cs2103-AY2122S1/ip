@@ -7,7 +7,7 @@ import duke.main.Ui;
 
 /**
  * Represents a command given by the user.
- * 
+ *
  * @author Gordon Yit
  * @version CS2103T, Semester 2
  */

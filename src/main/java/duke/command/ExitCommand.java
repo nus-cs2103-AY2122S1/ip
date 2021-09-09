@@ -37,7 +37,7 @@ public class ExitCommand extends Command {
             storage.store(tasks);
             return ui.showFarewell();
         } catch (IOException e) {
-            throw new DukeException(e);
+            throw new DukeException(DukeException.Exceptions.IOException);
         }
     }
 
