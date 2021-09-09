@@ -28,35 +28,35 @@ public class Parser {
         // return command based on user input
         switch (first) {
         case "list": {
-            assert rest.length() == 0;
+            assert rest.length() == 0 : "list should have 1 argument.";
             return new ListCommand();
         }
         case "done": {
-            assert rest.length() == 1;
+            assert rest.length() == 1 : "Specify index to complete";
             return new UpdateCommand(rest);
         }
         case "deadline": {
-            assert rest.length() == 1;
+            assert rest.length() == 1 : "Add a deadline";
             return new AddCommand(TaskType.DEADLINE, rest);
         }
         case "todo": {
-            assert rest.length() == 1;
+            assert rest.length() == 1 : "Add a todo";
             return new AddCommand(TaskType.TO_DO, rest);
         }
         case "event": {
-            assert rest.length() == 1;
+            assert rest.length() == 1 : "Add an event";
             return new AddCommand(TaskType.EVENT, rest);
         }
         case "date" : {
-            assert rest.length() == 1;
+            assert rest.length() == 1 : "Specify date to find";
             return new FindCommand(TaskType.FIND_BY_DATE, rest);
         }
         case "find": {
-            assert rest.length() == 1;
+            assert rest.length() == 1 : "Specify keyword to find";
             return new FindCommand(TaskType.FIND, rest);
         }
         case "delete": {
-            assert rest.length() == 1;
+            assert rest.length() == 1 : "Specify index to delete";
             return new DeleteCommand(rest);
         }
         case "bye": {
