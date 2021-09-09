@@ -38,6 +38,7 @@ public class DoneCommand extends SaberCommand {
             doneUI.showUnableToFindTaskError();
             return;
         }
+        assert taskIndex < totalTask && taskIndex >= 0 : "Index out of bounds";
         Task task = taskList.get(taskIndex);
         task.markAsDone();
         doneUI.setSuccessMessage(task);
@@ -55,6 +56,7 @@ public class DoneCommand extends SaberCommand {
         if (taskIndex >= totalTask || taskIndex < 0) {
             return doneUI.getUnableToFindTaskError();
         }
+        assert taskIndex < totalTask && taskIndex >= 0 : "Index out of bounds";
         Task task = taskList.get(taskIndex);
         task.markAsDone();
         doneUI.setSuccessMessage(task);
