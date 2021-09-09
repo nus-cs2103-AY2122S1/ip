@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import gnosis.controller.GnosisController;
+import gnosis.model.Place;
 import gnosis.model.Task;
 import gnosis.util.GnosisConstants;
 import gnosis.util.GnosisException;
@@ -106,13 +107,22 @@ public class GnosisUI extends AnchorPane {
      * Displays greeting message to user with message of
      * whether file system is available or not.
      *
-     * @param isDataAvailable Whether file system is available or not.
+     * @param isTaskDataAvailable Whether task file system is available or not.
+     * @param isPlaceDataAvailable Whether place file system is available or not.
      */
-    public void displayGreetMessage(boolean isDataAvailable) {
-        displayMessage(GnosisConstants.GREET_MESSAGE,
-                        isDataAvailable
+    public void displayGreetMessage(boolean isTaskDataAvailable, boolean isPlaceDataAvailable) {
+
+        String taskDataAvailabeMesasge =
+                isTaskDataAvailable
                         ? GnosisConstants.DATA_TASK_FILE_FOUND_MESSAGE
-                        : GnosisConstants.DATA_TASK_FILE_NOT_FOUND_MESSAGE);
+                        : GnosisConstants.DATA_TASK_FILE_NOT_FOUND_MESSAGE;
+
+        String placeDataAvailableMessage =
+                isPlaceDataAvailable
+                        ? GnosisConstants.DATA_PLACE_FILE_FOUND_MESSAGE
+                        : GnosisConstants.DATA_PLACE_FILE_NOT_FOUND_MESSAGE;
+
+        displayMessage(GnosisConstants.GREET_MESSAGE, taskDataAvailabeMesasge, placeDataAvailableMessage);
     }
 
     /**
@@ -170,6 +180,36 @@ public class GnosisUI extends AnchorPane {
      */
     public void displayMarkedTaskMessage(Task task, int taskIndex) {
         displayMessage("Task " + (taskIndex) + " marked as done:", "\t" + task);
+    }
+
+    /**
+     * Update Place view message from specified place command.
+     *
+     * @param place - place added.
+     * @param numOfPlaces - Number of places visited.
+     */
+    public void updatePlaceManagementViewMessage(Place place, int numOfPlaces) {
+        displayMessage(place.toString(), "Total places visited: " + numOfPlaces);
+    }
+
+    /**
+     * Displays all places user have visited.
+     *
+     * @param places - place added.
+     */
+    public void displayAllPlaces(List<Place> places) {
+        int len = places.size();
+        if (len == 0) {
+            displayMessage("No places you have visited.");
+        } else {
+            displayMessage("Listing all places visited:");
+            String message = "";
+            for (int i = 0; i < len; i++) {
+                message += (i + 1) + ". " + places.get(i) + "\n";
+            }
+            displayMessage(message);
+
+        }
     }
 
     /**

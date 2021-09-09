@@ -2,6 +2,7 @@ package gnosis.model;
 
 import java.util.List;
 
+import gnosis.place.PlaceCommandManager;
 import gnosis.task.TaskCommandManager;
 import gnosis.ui.GnosisUI;
 import gnosis.util.GnosisConstants;
@@ -14,8 +15,39 @@ import gnosis.util.GnosisException;
  * @author Pawandeep Singh
  * */
 public enum Command implements ActionHandler {
-    TODO, DEADLINE, EVENT, LIST, FIND, DONE, DELETE, BYE;
+    TODO,
+    DEADLINE,
+    EVENT,
+    LIST,
+    FIND,
+    DONE,
+    DELETE,
+    PLACES,
+    VISITED,
+    BYE;
 
+    public static String getCommandIdentifier(Command command) {
+        String identifier = "";
+        switch (command) {
+        case TODO:
+        case DEADLINE:
+        case EVENT:
+        case LIST:
+        case FIND:
+        case DONE:
+        case DELETE:
+            identifier = GnosisConstants.TASK_COMMAND_IDENTIFIER;
+            break;
+        case PLACES:
+        case VISITED:
+            identifier = GnosisConstants.PLACE_COMMAND_IDENTIFIER;
+            break;
+        default:
+            return GnosisConstants.SYSTEM_EXIT_IDENTIFER;
+
+        }
+        return identifier;
+    }
 
     @Override
     public void setTaskActionHandler(GnosisUI view, TaskCommandManager taskCommandManager,
@@ -49,6 +81,25 @@ public enum Command implements ActionHandler {
             taskIndex = Integer.parseInt(input.trim()) - 1;
             Task task = taskCommandManager.deleteTask(taskIndex);
             view.updateTaskManagementViewMessage(command.name(), task, taskCommandManager.getNumOfTasks());
+            break;
+        default:
+            throw new GnosisException(GnosisConstants.COMMAND_NOT_FOUND_MESSAGE);
+        }
+    }
+
+    @Override
+    public void setPlaceActionHandler(GnosisUI view, PlaceCommandManager placeCommandManager,
+                                      Command command, String input) throws GnosisException {
+        // do something
+        switch (command) {
+        case VISITED:
+            // add place visited
+            Place place = placeCommandManager.addPlace(input);
+            view.updatePlaceManagementViewMessage(place, placeCommandManager.getNumOfPlaces());
+            break;
+        case PLACES:
+            // list places
+            view.displayAllPlaces(placeCommandManager.getPlaces());
             break;
         default:
             throw new GnosisException(GnosisConstants.COMMAND_NOT_FOUND_MESSAGE);
