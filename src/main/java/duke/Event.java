@@ -6,7 +6,7 @@ package duke;
  */
 public class Event extends Task {
     private String timeline;
-    private String TASKINDICATOR = "[E]";
+    private String taskIndicator = "[E]";
 
     /**
      * The constructor of the events class.
@@ -25,6 +25,6 @@ public class Event extends Task {
      * @return a string representation of a Event object
      */
     public String printName() {
-        return TASKINDICATOR + " " + super.printName() + " (at: " + this.timeline + " )";
+        return taskIndicator + " " + super.printName() + " (at: " + this.timeline + ")";
     }
 }

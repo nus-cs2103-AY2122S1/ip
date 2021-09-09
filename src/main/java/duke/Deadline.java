@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     private String deadline;
-    private String TASKINDICATOR = "[D]";
+    private String taskIndicator = "[D]";
 
     /**
      * The constructor for the Deadlines class with the userInput (which refers to the name of the task)
@@ -40,6 +40,6 @@ public class Deadline extends Task {
      */
 
     public String printName() {
-        return TASKINDICATOR + " " + super.printName() + " (by: " + this.deadline + " )";
+        return taskIndicator + " " + super.printName() + " (by: " + this.deadline + ")";
     }
 }

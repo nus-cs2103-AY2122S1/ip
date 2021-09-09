@@ -1,13 +1,14 @@
 package duke;
+
+import java.io.*;
+import java.util.ArrayList;
+
 /**
  * List refers to a task list that is used in the Duke program.
  * An List object contains the tasks and several methods that work on the task.
  *
  * @author Dominic Siew Zhen Yu
  */
-
-import java.io.*;
-import java.util.ArrayList;
 
 public class taskList {
     private ArrayList<Task> taskList;
@@ -59,22 +60,22 @@ public class taskList {
                 String eventInfo = seperate2[1];
 
                 switch(taskTypeText) {
-                    case "[T]":
-                        String eventname = eventInfo;
-                        this.addTodo(eventname, false);
-                        break;
-                    case "[D]":
-                        String[] seperateAgain = seperate2[1].split(" \\(by: ", 2);
-                        String eventName = seperateAgain[0];
-                        String deadline = seperateAgain[1].split("\\)", 2)[0];
-                        this.addDeadline(eventName, deadline, false);
-                        break;
-                    case "[E]":
-                        String[] seperateAgaining = seperate2[1].split(" \\(at: ", 2);
-                        String event = seperateAgaining[0];
-                        String timeline = seperateAgaining[1].split("\\)", 2)[0];
-                        this.addEvent(event, timeline, false);
-                        break;
+                case "[T]":
+                    String eventname = eventInfo;
+                    this.addTodo(eventname, false);
+                    break;
+                case "[D]":
+                    String[] seperateAgain = seperate2[1].split(" \\(by: ", 2);
+                    String eventName = seperateAgain[0];
+                    String deadline = seperateAgain[1].split("\\)", 2)[0];
+                    this.addDeadline(eventName, deadline, false);
+                    break;
+                case "[E]":
+                    String[] seperateAgaining = seperate2[1].split(" \\(at: ", 2);
+                    String event = seperateAgaining[0];
+                    String timeline = seperateAgaining[1].split("\\)", 2)[0];
+                    this.addEvent(event, timeline, false);
+                    break;
                 }
 
                 if (isCompleted) {
@@ -105,6 +106,7 @@ public class taskList {
      */
 
     public String printList() {
+        System.out.println("hello");
         int numb = 1;
         String output = "Here are the tasks in your list:";
         for (Task task: taskList) {
@@ -148,7 +150,6 @@ public class taskList {
                 String currentLine = "";
 
                 while ((currentLine = reader.readLine()) != null) {
-
                     if (currentLine.equals(lineToRemove)) {
                         writer.write(task.printName() + "\n");
                         continue;
@@ -178,8 +179,7 @@ public class taskList {
         taskList.add(task);
 
         if (isInput) {
-            String output = "Got it. I've added this task:" + "\n" + task.printName() +
-                    "\nNow you have " + taskList.size() + " tasks in the list.";
+            String output = this.addTaskResponse(task);
             System.out.println(output);
             this.memory.addTaskToMemory(task.printName());
             return output;
@@ -198,16 +198,28 @@ public class taskList {
         Task task = new Event(name, timeline);
         taskList.add(task);
         if (isInput) {
-            String output = "Got it. I've added this task:" + "\n" + task.printName() +
-                    "\nNow you have " + taskList.size() + " tasks in the list.";
+            String output = this.addTaskResponse(task);
             this.memory.addTaskToMemory(task.printName());
             System.out.println(output);
             return output;
         } else {
             return "";
         }
-
     }
+
+    /**
+     * prints out the response from DukeMan when a task is added.
+     * @param input
+     * @return
+     */
+
+    public String addTaskResponse(Task input) {
+        String output = "Got it. I've added this task:" + "\n" + input.printName()
+                + "\nNow you have " + taskList.size() + " tasks in the list.";
+
+        return output;
+    }
+
     /**
      * the addDeadline() method adds Events task into the list object.
      *
@@ -219,8 +231,7 @@ public class taskList {
         taskList.add(task);
 
         if (isInput) {
-            String output = "Got it. I've added this task:" + "\n" + task.printName()
-                    + "\nNow you have " + taskList.size() + " tasks in the list.";
+            String output = this.addTaskResponse(task);
             this.memory.addTaskToMemory(task.printName());
             System.out.println(output);
             return output;
