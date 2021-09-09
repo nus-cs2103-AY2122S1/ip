@@ -41,17 +41,19 @@ public class todoCommand extends Command {
      * file (duke.txt)
      *
      * @param taskList TaskList that stores the tasks.
-     * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.            
+     * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.
+     * @return String representation of the new todo task as well as the number of tasks in the task list.
      */
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         if (command.length() <= 5) {
             DukeException exp = new EmptyDescriptionException("OOPS!!! The description of a todo cannot be empty.");
-            System.out.println(exp);
+            return exp.toString();
         } else {
             Task task = new Todo(command.substring(5));
             taskList.addTask(task);
-            Ui.taskResponse(task);
             storage.writeToFile("./duke.txt", taskList);
+            String response = Ui.taskResponse(task);
+            return response;
         }
     }
 }

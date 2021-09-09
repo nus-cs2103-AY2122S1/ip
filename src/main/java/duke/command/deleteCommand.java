@@ -37,13 +37,16 @@ public class deleteCommand extends Command {
      * file (duke.txt)
      *
      * @param taskList TaskList that stores the tasks.
-     * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.            
+     * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.
+     * @return String representation of the task that is deleted by the user as well as the number of 
+     * tasks remaining in the task list.
      */
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         int value = Integer.parseInt(command.replaceAll("[^0-9]", ""));
         Task task = taskList.getTask(value-1);
         taskList.removeTask(value-1);
-        Ui.deleteResponse(task);
         storage.writeToFile("./duke.txt", taskList);
+        String response = Ui.deleteResponse(task);
+        return response;
     }
 }

@@ -38,8 +38,8 @@ public class InvalidCommand extends Command {
      * @param taskList TaskList that stores the tasks.
      * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.            
      */
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         DukeException exp = new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-        System.out.println(exp);
+        return exp.toString();
     }
 }

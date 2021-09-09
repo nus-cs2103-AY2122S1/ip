@@ -20,16 +20,19 @@ public class TaskList {
     /**
      * Prints every task in the task list.
      */
-    public void printList() {
+    public String printList() {
         if (userList.isEmpty()) {
-            Ui.printMessage("You don't have any tasks in the list!");
+            String response = Ui.printMessage("You don't have any tasks in the list!");
+            return response;
         } else {
+            String response = "";
             int count = 1;
             for (int i = 0; i < userList.size(); i++) {
                 Task t = userList.get(i);
-                System.out.println(count + ". " + t.toString());
+                response += count + ". " + t.toString() + "\n";
                 count++;
             }
+            return response;
         }
     }
 

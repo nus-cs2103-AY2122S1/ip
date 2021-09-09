@@ -9,15 +9,16 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
-    public Duke(String filePath) {
+    public Duke() {
         taskList = new TaskList();
-        storage = new Storage(filePath);
+        storage = new Storage("./duke.txt");
+        storage.loadTaskListData(taskList);
         ui = new Ui(taskList, storage);
     }
-
-    public void run() {
-        ui.showWelcome();
-        ui.showLine();
+    
+    public void runCLI() {
+        this.ui.showWelcome();
+        Ui.showLine();
         boolean isExit = false;
         while (!isExit) {
             String command = ui.getCommand();
@@ -32,6 +33,17 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("./duke.txt").run();
+        new Duke().runCLI();
+    } 
+    
+    public String getResponse(String input) {
+        Parser parser = new Parser(input);
+        if (parser.isExit()) {
+            String response = Ui.sayBye();
+            return response;
+        } 
+        Command c = parser.parse();
+        String response = c.execute(this.taskList, this.storage);
+        return response;
     }
 }

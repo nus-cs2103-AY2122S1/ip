@@ -23,6 +23,7 @@ public abstract class Command {
      * Abstract method which represents Duke's response to various types of user commands.
      *
      * @param taskList TaskList where the tasks are stored.
+     * @return String response to various types of commands.
      */
-    public abstract void execute(TaskList taskList, Storage storage);
+    public abstract String execute(TaskList taskList, Storage storage);
 }

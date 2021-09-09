@@ -46,12 +46,13 @@ public class eventCommand extends Command {
      * file (duke.txt)
      *
      * @param taskList TaskList that stores the tasks.
-     * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.            
+     * @param storage Storage that deals with loading tasks from the file and saving tasks in the file. 
+     * @return String representation of the new event task as well as the number of tasks in the task list.
      */
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         if (command.length() <= 6) {
             DukeException exp = new EmptyDescriptionException("OOPS!!! The description of an event cannot be empty.");
-            System.out.println(exp);
+            return exp.toString();
         } else {
             String[] parts = command.split("/");
             try {
@@ -59,12 +60,13 @@ public class eventCommand extends Command {
                 LocalDateTime dateTime = LocalDateTime.parse(parts[1].substring(3).trim(), dtf);
                 Task task = new Event(parts[0].substring(6), dateTime);
                 taskList.addTask(task);
-                Ui.taskResponse(task);
                 storage.writeToFile("./duke.txt", taskList);
+                String response = Ui.taskResponse(task);
+                return response;
             } catch (DateTimeParseException e) {
                 DukeException exp = new InvalidDateTimeException("The format of your command is incorrect! It should be event/at " 
                         + "<yyyy-mm-dd HHmm>");
-                System.out.println(exp);
+                return exp.toString();
             }
         }
     }
