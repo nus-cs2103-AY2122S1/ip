@@ -31,6 +31,8 @@ public class MainWindow extends Stage {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/soyBoy.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/yesChad.png"));
+    private Image chatBackgroundImage =
+            new Image(this.getClass().getResourceAsStream("/images/chatBackground.jpg"));
 
     private FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/MainWindow.fxml"));
 
@@ -47,6 +49,9 @@ public class MainWindow extends Stage {
         }
     }
 
+    /**
+     * Sets up javafx components after this MainWindow constructor is called.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -72,7 +77,8 @@ public class MainWindow extends Stage {
 
         // Only create dialog is user input is not whitespace(s) or null.
         if (!input.isBlank()) {
-            String response = duke.getResponse(input);
+            DukeResponse dukeResponse = duke.getResponse(input);
+            String response = dukeResponse.getResponse();
 
             // Allow Duke to say goodbye to the user before closing application.
             if (response.equals(duke.getUi().getGoodbyeMessage())) {
@@ -81,13 +87,18 @@ public class MainWindow extends Stage {
                 delay.play();
             }
 
-            // Differentiate Duke's response from user response.
-            input = "You: " + input;
-            response = "Duke: " + response;
+            DialogBox userDialogBox = DialogBox.getUserDialog(input, userImage);
+            // Check is Duke Response indicates an error. If so, use an Error DialogBox instead.
+            DialogBox dukeDialogBox;
+            if (dukeResponse.isError()) {
+                dukeDialogBox = DialogBox.getErrorDialog(response, dukeImage);
+            } else {
+                dukeDialogBox = DialogBox.getDukeDialog(response, dukeImage);
+            }
 
             dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
+                    userDialogBox,
+                    dukeDialogBox
             );
         }
 

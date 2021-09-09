@@ -12,8 +12,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
@@ -64,7 +62,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Returns a DialogBox.
+     * Returns a DialogBox meant to echo User input.
      * The returned DialogBox will be anchored to the right of its container.
      *
      * @param text Text String to be displayed in DialogBox.
@@ -72,13 +70,14 @@ public class DialogBox extends HBox {
      * @return DialogBox containing specified text and image.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        DialogBox db = new DialogBox(text, img);
-        db.setBackground(new Background(new BackgroundFill(Color.PEACHPUFF, null, null)));
+        String modifiedText = "You: " + text;
+        DialogBox db = new DialogBox(modifiedText, img);
+        db.dialog.setStyle(db.dialog.getStyle() + " -fx-background-color: Peachpuff;");
         return db;
     }
 
     /**
-     * Returns a flipped DialogBox.
+     * Returns a flipped DialogBox meant to display Duke response.
      * The returned DialogBox will be anchored to the left of its container.
      *
      * @param text Text String to be displayed in DialogBox.
@@ -86,8 +85,25 @@ public class DialogBox extends HBox {
      * @return Flipped DialogBox containing specified text and image.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        DialogBox db = new DialogBox(text, img);
-        db.setBackground(new Background(new BackgroundFill(Color.SEASHELL, null, null)));
+        String modifiedText = "Duke: " + text;
+        DialogBox db = new DialogBox(modifiedText, img);
+        db.dialog.setStyle(db.dialog.getStyle() + " -fx-background-color: Seashell;");
+        db.flip();
+        return db;
+    }
+
+    /**
+     * Returns a flipped DialogBox meant to display error messages.
+     *
+     * @param text Text String to be displayed in DialogBox.
+     * @param img Image to be displayed alongside text in DialogBox.
+     * @return Flipped DialogBox containing an image and error message.
+     */
+    public static DialogBox getErrorDialog(String text, Image img) {
+        String modifiedText = "Error: " + text;
+        DialogBox db = new DialogBox(modifiedText, img);
+        db.dialog.setStyle(db.dialog.getStyle() + " -fx-background-color: Salmon;");
+        db.dialog.setTextFill(Color.WHITE);
         db.flip();
         return db;
     }
