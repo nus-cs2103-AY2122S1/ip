@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.DukeException;
 import duke.Items;
 
 public class Undo {
@@ -14,30 +15,35 @@ public class Undo {
         this.items = items;
     }
 
-    /**
-     *
-     * @param inputCommand actual command entered by user
-     * @return
-     */
-    public String undoTask(String[] inputCommand) {
-        // done 5
-        // command[0] = done, command[1] = 5
-        String typeOfTask = inputCommand[0];
-        String output;
-        switch (typeOfTask) {
-        case "done":
-            int taskIndex = Integer.parseInt(inputCommand[1]);
-            String task = undoDone(taskIndex);
-            output = "Alright. The following task has been marked as 'Not Done'"
-                    + task;
+    public String undoDelete(int index, String task) throws DukeException {
+        String[] parseTask = task.split(" \\| ");
+        String taskType = parseTask[0];
+        String output = "";
+        switch (taskType) {
+        case "D":
+            System.out.println("entered deadline");
+            output = items.addDeletedTask(index, new Deadline(parseTask[2], parseTask[3]));
             break;
-        default:
-            output = "Only undo has been implemented";
+        case "E":
+            System.out.println("entered event");
+            output = items.addDeletedTask(index, new Event(parseTask[2], parseTask[3]));
+            break;
+        case "T":
+            output = items.addDeletedTask(index, new Todo(parseTask[2]));
+            break;
         }
+        if (parseTask[1].equals("1")) {
+            items.markDone(index);
+        }
+        output += "\n" + task;
         return output;
     }
 
     public String undoDone(int index) {
         return items.markUndone(index);
+    }
+
+    public String deleteTask() {
+        return items.deleteLatestTask();
     }
 }
