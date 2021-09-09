@@ -20,7 +20,7 @@ public class Duke {
     public void run() {
         storage = new Storage();
         ui = new Ui();
-        parser = new Parser();
+        parser = new Parser(storage);
         storage.open();
     }
     public String greet() {

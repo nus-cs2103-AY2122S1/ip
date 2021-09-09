@@ -3,6 +3,9 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import duke.commands.ByeCommand;
 import duke.commands.Command;
@@ -13,8 +16,11 @@ import duke.commands.EventCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.ToDoCommand;
+import duke.commands.UpdateCommand;
+import duke.storage.Storage;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
+import duke.tasks.Task;
 import duke.tasks.ToDo;
 
 
@@ -28,8 +34,13 @@ public class Parser {
             + "Please use the following format:\n"
             + "yyyy-MM-dd HH:MM (e.g 2020-05-19 15:30)";
 
-    private enum CommandType { Bye, List, Delete, Done, Event, ToDo, Deadline, Find }
+    private enum CommandType { Bye, List, Delete, Done, Event, ToDo, Deadline, Find, Update }
 
+    private Storage storage;
+
+    public Parser(Storage storage) {
+        this.storage = storage;
+    }
     /**
      * Interprets user input and returns the appropriate command
      *
@@ -43,9 +54,10 @@ public class Parser {
      */
 
     public Command parse(String userInput) throws DukeExceptions {
-        String[] splitUserInput = userInput.split(" ", 2);
-        CommandType command = changeToEnum(splitUserInput[0]);
-        String[] splitCommand = checkArguments(splitUserInput, command);
+        List<String> splitUserInput = new ArrayList<String>();
+        Collections.addAll(splitUserInput, userInput.split(" ", 2));
+        CommandType command = changeToEnum(splitUserInput.get(0));
+        checkArguments(splitUserInput, command);
 
         switch (command) {
         case Bye: {
@@ -57,27 +69,37 @@ public class Parser {
         }
 
         case Delete: {
-            return new DeleteCommand(castIndex(splitCommand));
+            return new DeleteCommand(castIndex(splitUserInput));
         }
 
         case Done: {
-            return new DoneCommand(castIndex(splitCommand));
+            return new DoneCommand(castIndex(splitUserInput));
         }
 
         case Event: {
-            return new EventCommand(Event.create(splitCommand[1], parseDateTime(splitCommand[2])));
+            return new EventCommand(Event.create(splitUserInput.get(1), parseDateTime(splitUserInput.get(2))));
         }
 
         case Deadline: {
-            return new DeadlineCommand(Deadline.create(splitCommand[1], parseDateTime(splitCommand[2])));
+            return new DeadlineCommand(Deadline.create(splitUserInput.get(1), parseDateTime(splitUserInput.get(2))));
         }
 
         case ToDo: {
-            return new ToDoCommand(ToDo.create(splitCommand[1]));
+            return new ToDoCommand(ToDo.create(splitUserInput.get(1)));
         }
 
         case Find: {
-            return new FindCommand(splitCommand[1]);
+            return new FindCommand(splitUserInput.get(1));
+        }
+
+        case Update: {
+            if (splitUserInput.size() > 3) {
+                return new UpdateCommand(castIndex(splitUserInput),
+                        splitUserInput.get(2),
+                        parseDateTime(splitUserInput.get(3)));
+            } else {
+                return new UpdateCommand(castIndex(splitUserInput), splitUserInput.get(2));
+            }
         }
 
         default:
@@ -119,6 +141,10 @@ public class Parser {
             return CommandType.Find;
         }
 
+        case "update": {
+            return CommandType.Update;
+        }
+
         case "": {
             throw new DukeExceptions("Can you type louder.. or type anything? I got nothing..");
         }
@@ -128,7 +154,7 @@ public class Parser {
         }
     }
 
-    private String[] checkArguments(String[] splitUserInput, CommandType command) throws DukeExceptions {
+    private void checkArguments(List<String> splitUserInput, CommandType command) throws DukeExceptions {
 
         switch (command) {
         case Bye:
@@ -146,16 +172,19 @@ public class Parser {
         case Event:
             //Fallthrough
         case Deadline:
-            splitUserInput = checkForDescriptionTask(splitUserInput, command);
+            separateDescription(splitUserInput, command);
             break;
         case Find:
             checkForKeyword(splitUserInput);
             break;
+        case Update:
+            processUpdate(splitUserInput);
+            break;
         default:
             throw new DukeExceptions("Unknown error!");
         }
-        return splitUserInput;
     }
+
 
     private LocalDateTime parseDateTime(String dateString) throws DukeExceptions {
         try {
@@ -166,39 +195,35 @@ public class Parser {
         }
     }
 
-    private void checkForExtraInput(String[] splitUserInput) throws DukeExceptions {
-        if (splitUserInput.length > 1 && !(splitUserInput[1].equals(""))) {
+    private void checkForExtraInput(List<String> splitUserInput) throws DukeExceptions {
+        if (splitUserInput.size() > 1 && !(splitUserInput.get(1).equals(""))) {
             String message = String.format ("Hey! %s command cannot"
-                    + "take any additional parameter!", splitUserInput[0]);
+                    + "take any additional parameter!", splitUserInput.get(0));
             throw new DukeExceptions(message);
         }
     }
 
-    private void checkIndex(String[] splitUserInput) throws DukeExceptions {
-        if (splitUserInput.length == 1) {
+    private void checkIndex(List<String> splitUserInput) throws DukeExceptions {
+        if (splitUserInput.size() == 1) {
             throw new DukeExceptions("You have to tell me the index of the task to process!");
         }
     }
 
-    private int castIndex(String[] splitUserInput) throws DukeExceptions {
+    private int castIndex(List<String> splitUserInput) throws DukeExceptions {
         try {
-            return Integer.parseInt(splitUserInput[1]);
+            return Integer.parseInt(splitUserInput.get(1));
         } catch (NumberFormatException e) {
             String message = String.format ("Oops! %s command can "
                             + "only take a single integer as the argument!",
-                    splitUserInput[0]
+                    splitUserInput.get(0)
             );
             throw new DukeExceptions(message);
         }
     }
 
-    private String[] checkForDescriptionTask(String[] splitUserInput, CommandType commandType)
+    private void separateDescription(List<String> splitUserInput, CommandType commandType)
             throws DukeExceptions {
-        String[] output = new String[3];
-        output[0] = splitUserInput[0];
-        output[1] = splitUserInput[1];
-        String[] temp;
-        if (splitUserInput.length == 1 || splitUserInput[1].equals("")) {
+        if (splitUserInput.size() == 1 || splitUserInput.get(1).equals("")) {
             String message;
             switch (commandType) {
             case ToDo:
@@ -222,14 +247,11 @@ public class Parser {
             throw new DukeExceptions(message);
         }
         if (commandType.equals(CommandType.Deadline) || commandType.equals(CommandType.Event)) {
-            temp = checkForDescriptionAndTime(output, commandType);
-            output[1] = temp[0];
-            output[2] = temp[1];
+            splitDescriptionAndTime(splitUserInput, commandType, 1);
         }
-        return output;
     }
 
-    private String[] checkForDescriptionAndTime(String[] body, CommandType commandType)
+    private void splitDescriptionAndTime(List<String> splitUserInput, CommandType commandType, int index)
             throws DukeExceptions {
         String splitter;
         String task;
@@ -249,7 +271,7 @@ public class Parser {
             throw new DukeExceptions ("Error: check desc error. Please contact developer");
         }
 
-        String[] splitBody = body[1].strip().split(splitter, 2);
+        String[] splitBody = splitUserInput.get(index).strip().split(splitter, 2);
         if (splitBody[0].equals("")) {
             String message = String.format("Oops, you need to tell me the description "
                     + "and the time of the %s", task);
@@ -262,14 +284,48 @@ public class Parser {
             throw new DukeExceptions(message);
         }
         splitBody[0].strip();
-
-        return splitBody;
+        splitUserInput.remove(index);
+        Collections.addAll(splitUserInput, splitBody);
     }
 
-    private void checkForKeyword(String[] splitUserInput) throws DukeExceptions {
-        if (splitUserInput.length == 1 || splitUserInput[1].equals("")) {
+    private void checkForKeyword(List<String> splitUserInput) throws DukeExceptions {
+        if (splitUserInput.size() == 1 || splitUserInput.get(1).equals("")) {
             throw new DukeExceptions("Oops, "
                     + "you need to tell me the keyword you are looking for");
         }
+    }
+
+    private void processUpdate(List<String> splitUserInput) throws DukeExceptions {
+        String[] body = splitUserInput.get(1).strip().split(" ", 2);
+        if (body.length == 1) {
+            throw new DukeExceptions("Please tell me which task to update and the new description");
+        }
+        splitUserInput.remove(1);
+        splitUserInput.add(body[0]);
+        int index = castIndex(splitUserInput);
+        splitUserInput.add(body[1]);
+        Task taskToUpdate = storage.getTask(index);
+        CommandType taskType = taskToEnum(taskToUpdate);
+        if (!(taskType.equals(CommandType.ToDo))) {
+            splitDescriptionAndTime(splitUserInput, taskType, 2);
+        }
+    }
+
+    private CommandType taskToEnum(Task task) throws DukeExceptions {
+        CommandType taskType;
+        switch(task.getTaskType()) {
+        case "T":
+            taskType = CommandType.ToDo;
+            break;
+        case "E":
+            taskType = CommandType.Event;
+            break;
+        case "D":
+            taskType = CommandType.Deadline;
+            break;
+        default:
+            throw new DukeExceptions("Unknown Error in taskToEnum!");
+        }
+        return taskType;
     }
 }
