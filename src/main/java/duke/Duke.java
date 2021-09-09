@@ -35,7 +35,6 @@ public class Duke {
      */
     public void run() {
         ui.printGreetings();
-        //isExit implementation is referenced from classmate Wu Xiaoyun
         boolean isExit = false;
         while (!isExit) {
             try {

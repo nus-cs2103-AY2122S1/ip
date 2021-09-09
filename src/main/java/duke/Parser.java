@@ -63,7 +63,7 @@ public class Parser {
         details[0] = desc;
         details[1] = command.split(" /by ")[1];
         if (details[1].equals("")) {
-            throw new ArrayIndexOutOfBoundsException();
+            throw new IllegalArgumentException();
         }
         return details;
     }
@@ -117,7 +117,7 @@ public class Parser {
         } catch (IllegalArgumentException | StringIndexOutOfBoundsException e) {
             return new ErrorCommand("Don't leave it empty!!", "(・`ω´・)");
         } catch (ArrayIndexOutOfBoundsException e) {
-            return new ErrorCommand("You forgot the date...", "(-_-)");
+            return new ErrorCommand("Say something!!!", "(-_-)");
         } catch (DateTimeException e) {
             return new ErrorCommand(
                     "Please input a valid date format of 'dd/mm/yyyy HHmm' in 24 Hour Format",

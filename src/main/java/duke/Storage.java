@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.Todo;
 
 /**
@@ -45,7 +46,7 @@ public class Storage {
         while (sc.hasNext()) {
             String task = sc.nextLine();
             String[] parsed = task.split("\\|");
-            assert parsed.length > 0;
+            assert parsed.length > 0 : "Nothing in storage";
 
             switch (parsed[0]) {
             case "T":
@@ -80,7 +81,8 @@ public class Storage {
         FileWriter fw = new FileWriter(f.getAbsoluteFile());
 
         for (int i = 0; i < taskList.getList().size(); i++) {
-            fw.write(taskList.getList().get(i).toSaveString() + System.lineSeparator());
+            Task task = taskList.getList().get(i);
+            fw.write(task.toSaveString() + System.lineSeparator());
         }
 
         fw.close();
