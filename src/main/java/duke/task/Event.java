@@ -27,6 +27,18 @@ public class Event extends Task {
     }
 
     /**
+     * Updates the Event based on the given updated data.
+     * @param updatedData is in the form {description}/{timeframe}
+     */
+    @Override
+    public void update(String updatedData) {
+        assert updatedData.split("/").length == 2 : "2 fields to update for events";
+        String[] updatedFields = updatedData.split("/");
+        this.description = updatedFields[0];
+        this.timeFrame = updatedFields[1];
+    };
+
+    /**
      * Returns the string representation of an Event.
      *
      * @return String representing an Event
