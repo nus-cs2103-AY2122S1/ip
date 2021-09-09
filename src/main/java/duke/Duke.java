@@ -39,17 +39,23 @@ public class Duke {
      */
     public void run() {
         boolean terminate = false;
-        this.ui.welcome();
+        ui.printMessage(this.onStart());
 
         while (!terminate) {
+            String message;
             try {
                 String input = ui.readInput();
-                parser.executeCommand(ui, tasks, input);
+                message = parser.executeCommand(ui, tasks, input);
                 terminate = parser.getToTerminate();
             } catch (Exception e) {
-                ui.handleException(e);
+                message = ui.handleException(e);
             }
+            ui.printMessage(message);
         }
+    }
+
+    public String onStart() {
+        return ui.welcome();
     }
 
     public static void main(String[] args) {
@@ -62,6 +68,10 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            return parser.executeCommand(ui, tasks, input);
+        } catch (Exception e) {
+            return ui.handleException(e);
+        }
     }
 }
