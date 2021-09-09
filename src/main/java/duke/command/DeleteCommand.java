@@ -15,8 +15,8 @@ public class DeleteCommand extends Command {
      * @param fullCommand Unedited user command.
      */
     public DeleteCommand(String fullCommand) throws DukeException {
-        String taskIndexString = fullCommand.replace("delete", "").trim();
         try {
+            String taskIndexString = fullCommand.replace("delete", "").trim();
             this.taskIndex = Integer.parseInt(taskIndexString);
         } catch (NumberFormatException e) {
             throw new DukeException("Invalid Task Selected");
@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
         try {
             Task task = (Task) tasks.remove(taskIndex - 1);
             storage.save(tasks);
-            return String.format("Task deleted.\n %s", task);
+            return ui.showMessage(String.format("Task deleted.\n %s", task));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Invalid Task Index");
         }

@@ -19,13 +19,12 @@ public class ListCommand extends Command {
      */
     public ListCommand(String fullCommand) throws DukeException {
         String timeString = fullCommand.replace("list", "").trim();
-        if (timeString.isEmpty()) {
-            return;
-        }
-        try {
-            this.time = LocalDateTime.parse(timeString);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Invalid Date Time Format");
+        if (!timeString.isEmpty()) {
+            try {
+                this.time = LocalDateTime.parse(timeString);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Invalid Date Time Format");
+            }
         }
     }
 
@@ -47,7 +46,7 @@ public class ListCommand extends Command {
             }
             response += String.format("\n%d. %s", listIndex++, task);
         }
-        return response;
+        return ui.showMessage(response);
     }
 
     /**

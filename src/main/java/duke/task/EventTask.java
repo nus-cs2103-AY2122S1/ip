@@ -6,8 +6,6 @@ public class EventTask extends Task {
 
     public EventTask(String description, String time) throws DukeException {
         super(description, time);
-        assert(description.isEmpty());
-        assert(time.isEmpty());
     }
 
     /**

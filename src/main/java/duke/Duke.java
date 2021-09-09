@@ -8,10 +8,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 
 /**
  *  The Duke interactive chatbot, which allows users to keep track of schedules.
@@ -39,7 +41,6 @@ public class Duke extends Application {
     }
 
     private Duke(String filePath) {
-        assert (filePath.isEmpty());
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -48,9 +49,7 @@ public class Duke extends Application {
             ui.showLoadingError();
             tasks = new TaskList();
         }
-        assert(tasks instanceof TaskList);
     }
-
     private void run() {
         ui.showWelcome();
         boolean isExit = false;

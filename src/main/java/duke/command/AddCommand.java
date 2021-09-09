@@ -1,6 +1,9 @@
 package duke.command;
 
-import duke.*;
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
@@ -18,34 +21,6 @@ public class AddCommand extends Command {
         parseTask(fullCommand);
     }
 
-    private void parseTodo(String fullCommand) throws DukeException {
-        String description = fullCommand.replace("todo", "").trim();
-        if (description.isEmpty()) {
-            throw new DukeException("Empty Todo Command!");
-        }
-        this.taskToAdd = new TodoTask(description);
-    }
-
-    private void parseDeadline(String fullCommand) throws DukeException {
-        String[] descriptions = fullCommand.replace("deadline", "").split("/by");
-        String description = descriptions[0].trim();
-        String time = descriptions[1].trim();
-        if (description.isEmpty() || time.isEmpty()) {
-            throw new DukeException("Empty Deadline Command!");
-        }
-        this.taskToAdd = new DeadlineTask(description, time);
-    }
-
-    private void parseEvent(String fullCommand) throws DukeException {
-        String[] descriptions = fullCommand.replace("event", "").split("/at");
-        String description = descriptions[0].trim();
-        String time = descriptions[1].trim();
-        if (description.isEmpty() || time.isEmpty()) {
-            throw new DukeException("Empty Event Command!");
-        }
-        this.taskToAdd = new EventTask(description, time);
-    }
-
     /**
      * Differentate which tasks user is adding.
      * @param fullCommand Unedited user command.
@@ -54,17 +29,33 @@ public class AddCommand extends Command {
     private void parseTask(String fullCommand) throws DukeException {
         String type = fullCommand.split(" ")[0];
         switch (type) {
-            case "todo":
-                parseTodo(fullCommand);
-                break;
-            case "deadline":
-                parseDeadline(fullCommand);
-                break;
-            case "event":
-                parseEvent(fullCommand);
-                break;
-            default:
-                throw new DukeException("Invalid Command!");
+        case "todo":
+            String todoDescription = fullCommand.replace("todo", "").trim();
+            if (todoDescription.isEmpty()) {
+                throw new DukeException("Empty Todo Command!");
+            }
+            this.taskToAdd = new TodoTask(todoDescription);
+            break;
+        case "deadline":
+            String[] deadlineDescriptions = fullCommand.replace("deadline", "").split("/by");
+            String deadlineDescription = deadlineDescriptions[0].trim();
+            String deadlineTime = deadlineDescriptions[1].trim();
+            if (deadlineDescription.isEmpty() || deadlineTime.isEmpty()) {
+                throw new DukeException("Empty Deadline Command!");
+            }
+            this.taskToAdd = new DeadlineTask(deadlineDescription, deadlineTime);
+            break;
+        case "event":
+            String[] eventDescriptions = fullCommand.replace("event", "").split("/at");
+            String eventDescription = eventDescriptions[0].trim();
+            String eventTime = eventDescriptions[1].trim();
+            if (eventDescription.isEmpty() || eventTime.isEmpty()) {
+                throw new DukeException("Empty Event Command!");
+            }
+            this.taskToAdd = new EventTask(eventDescription, eventTime);
+            break;
+        default:
+            throw new DukeException("Invalid Command!");
         }
     }
 
@@ -78,7 +69,7 @@ public class AddCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.add(taskToAdd);
         storage.save(tasks);
-        return String.format("Task Added!\n %s", taskToAdd);
+        return ui.showMessage(String.format("Task Added!\n %s", taskToAdd));
     }
 
     /**
