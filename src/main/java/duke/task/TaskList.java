@@ -107,15 +107,6 @@ public class TaskList {
         this.taskList.get(index).markAsDone();
     }
 
-    /**
-     * Marks task at the specified index to not done.
-     *
-     * @param index The index of task to be marked.
-     */
-    public void markNotDone(int index) {
-        this.taskList.get(index).markAsNotDone();
-    }
-
     @Override
     public String toString() {
         String s = "";
