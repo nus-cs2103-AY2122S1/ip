@@ -23,7 +23,7 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image("file:./DaUser.png");
     private Image dukeImage = new Image("file:./DaDuke.png");
 
-    private final String WELCOME_MESSAGE = "Welcome! I am Dude.";
+    private static final String WELCOME_MESSAGE = "Welcome! I am Dude.";
 
     @FXML
     public void initialize() {
@@ -35,8 +35,8 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply
+     * and then appends them to the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
@@ -54,7 +54,7 @@ public class MainWindow extends AnchorPane {
 
     public void welcome() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(WELCOME_MESSAGE, dukeImage));
+                DialogBox.getDukeDialog(MainWindow.WELCOME_MESSAGE, dukeImage));
     }
 
     public static void main(String[] args) {

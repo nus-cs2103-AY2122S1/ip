@@ -4,6 +4,12 @@ import java.util.Scanner;
 
 
 public class Duke {
+    // Source : https://patorjk.com/software/taag/#p=display&f=Standard&t=Dude
+    private static final String LOGO = " ____            _      \n"
+            + "|  _ \\ _   _  __| | ___ \n"
+            + "| | | | | | |/ _` |/ _ \\\n"
+            + "| |_| | |_| | (_| |  __/\n"
+            + "|____/ \\__,_|\\__,_|\\___|\n";
 
     /**
      * Contains all the driver code currently, will be refactored in the future.
@@ -12,15 +18,7 @@ public class Duke {
      */
     public static void main(String[] args) {
 
-
-        // Source : https://patorjk.com/software/taag/#p=display&f=Standard&t=Dude
-        String logo2 = " ____            _      \n"
-                + "|  _ \\ _   _  __| | ___ \n"
-                + "| | | | | | |/ _` |/ _ \\\n"
-                + "| |_| | |_| | (_| |  __/\n"
-                + "|____/ \\__,_|\\__,_|\\___|\n";
-
-        System.out.println("Hello from\n" + logo2);
+        System.out.println("Hello from\n" + Duke.LOGO);
         System.out.println("Hello! I'm Dude");
 
         Scanner stdIn = new Scanner(System.in);
