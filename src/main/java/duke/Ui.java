@@ -45,8 +45,8 @@ public class Ui {
      * @return String representation of welcome commands and the current task list.
      */
     public String showWelcome() {
-        String welcomeMessage = "Hello from duke! \n\n" + "Here is your current task list: \n" + this.taskList.printList() 
-                + "\nEnd of task list \n\n" + "Hope you are doing well. How can I help you?";
+        String welcomeMessage = "Hello from duke :)) \n\n" + "Here is your current task list: \n" + showLine() + "\n" 
+                + this.taskList.printList() + "\n" + showLine()  + "\nEnd of task list \n\n" + "How can I help you?";
         System.out.println(welcomeMessage);
         return welcomeMessage;
     }
