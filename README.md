@@ -27,3 +27,13 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    |____/ \__,_|_|\_\___|
    ```
 4. Alternatively, if you prefer a GUI version, locate the `src/main/java/duke/Launcher.java`and choose `Run Launcher.main()`. You should see the GUI pop up.
+
+
+<div align="center">
+   <h3>Here's GUI Duke! </h3>
+</div>
+
+<div align="center">
+   <img src="/docs/Ui.png" width=400/>
+</div>
+
