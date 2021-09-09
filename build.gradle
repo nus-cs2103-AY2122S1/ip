@@ -11,6 +11,7 @@ repositories {
 }
 
 dependencies {
+
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 
@@ -30,6 +31,11 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 
+javafx {
+    version = "11"
+    modules = ['javafx.base', 'javafx.controls', 'javafx.fxml', 'javafx.graphics']
+}
+
 test {
     useJUnitPlatform()
 
@@ -45,12 +51,11 @@ test {
 }
 
 application {
-    mainClassName = "Alice"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
     archiveBaseName = "alice"
-    archiveClassifier = null
 }
 
 checkstyle {

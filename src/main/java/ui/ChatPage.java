@@ -188,9 +188,8 @@ public class ChatPage extends AnchorPane {
     public void exit() {
         try {
             Stage stage = (Stage) anchorPaneReference.getScene().getWindow();
-
             stage.setTitle("Alice");
-            FXMLLoader fxmlLoader = new FXMLLoader(StartPage.class.getResource("../view/StartPage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(StartPage.class.getResource("/view/StartPage.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
