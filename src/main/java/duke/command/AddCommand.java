@@ -39,29 +39,33 @@ public class AddCommand extends Command {
         switch (addType) {
         case "deadline":
             Task deadline = taskList.deadline(taskDetails);
-            storage.saveAdded(deadline);
-            return taskAdded(deadline);
+            storage.saveAddedTask(deadline);
+            return successfullyAddedTask(deadline);
             // returns success message after adding deadline
         case "todo":
             Task todo = taskList.todo(taskDetails);
-            storage.saveAdded(todo);
-            return taskAdded(todo);
+            storage.saveAddedTask(todo);
+            return successfullyAddedTask(todo);
             // returns success message after adding task
         case "event":
             Task event = taskList.event(taskDetails);
-            storage.saveAdded(event);
-            return taskAdded(event);
+            storage.saveAddedTask(event);
+            return successfullyAddedTask(event);
             // returns success message after adding event
         }
         return "";
     }
 
-    private String taskAdded(Task task) {
-        String msg = task.toString();
+    private String successfullyAddedTask(Task task) {
+        String taskDetails = task.toString();
         int task_left = taskList.taskLeft();
-        String dukeAddedTask = "Got it. I've added this task:\n " + msg +  "\nNow you have "
-                + task_left + " tasks in the list.";
-
-        return dukeAddedTask;
+        return successMessage(taskDetails, task_left);
     }
+
+    private String successMessage(String taskDetails, int task_left) {
+        return "Got it. I've added this task:\n " + taskDetails +  "\nNow you have "
+                + task_left + " tasks in the list.";
+    }
+
+
 }

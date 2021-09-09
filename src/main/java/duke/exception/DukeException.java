@@ -7,10 +7,10 @@ public class DukeException extends Exception {
 
     /**
      * Basic Constructor
-     * @param msg Explanation as to why error occurred
+     * @param errorDetails Explanation as to why error occurred
      */
-    public DukeException(String msg){
-        super(msg);
+    public DukeException(String errorDetails){
+        super(errorDetails);
 
     }
 }

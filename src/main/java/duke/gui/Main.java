@@ -10,23 +10,46 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Main Stage
+ * Main Stage of the application
  */
 public class Main extends Application {
     private final Duke duke = new Duke();
+    private final FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
 
+    /**
+     * Method to start the application
+     *
+     * @param primaryStage
+     * @throws Exception
+     */
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
+            setPrimaryScene(primaryStage);
+            setupMainWindow();
+            primaryStage.show();
+    }
+
+    /**
+     * Setting up primary stage with anchorpane scene
+     *
+     * @param primaryStage
+     */
+    private void setPrimaryScene(Stage primaryStage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             primaryStage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
-            fxmlLoader.<MainWindow>getController().setScrollPane();
-            primaryStage.show();
         } catch (IOException exception) {
             exception.printStackTrace();
         }
     }
+
+    /**
+     * Setting up Main window controller
+     */
+    private void setupMainWindow() {
+        fxmlLoader.<MainWindow>getController().setDuke(duke);
+        fxmlLoader.<MainWindow>getController().setScrollPane();
+    }
+
 }

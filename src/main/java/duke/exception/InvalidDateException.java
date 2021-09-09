@@ -8,9 +8,9 @@ public class InvalidDateException extends DukeException {
     /**
      * Basic Constructor
      *
-     * @param msg Explanation as to why error occured
+     * @param errorDetails Explanation as to why error occured
      */
-    public InvalidDateException(String msg) {
-        super(msg);
+    public InvalidDateException(String errorDetails) {
+        super(errorDetails);
     }
 }

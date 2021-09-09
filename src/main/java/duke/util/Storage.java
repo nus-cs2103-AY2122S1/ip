@@ -64,7 +64,7 @@ public class Storage {
      * @param task Newly added task
      * @throws DukeException Thrown when file does not exist
      */
-    public void saveAdded(Task task) throws DukeException {
+    public void saveAddedTask(Task task) throws DukeException {
         String msg = task.saveTask();
         try {
             FileWriter fileWriter = new FileWriter(savedOutput, true);
@@ -81,7 +81,7 @@ public class Storage {
      * @param taskList current state
      * @throws DukeException Thrown when file does not exist
      */
-    public void saveUpdate(TaskList taskList) throws DukeException {
+    public void saveUpdateTask(TaskList taskList) throws DukeException {
         String[] currentState = taskList.saveState();
         try {
             // Reset the file
