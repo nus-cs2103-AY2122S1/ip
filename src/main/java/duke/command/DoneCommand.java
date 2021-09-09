@@ -30,7 +30,7 @@ public class DoneCommand extends Command {
         Task task = (Task) tasks.get(taskIndex - 1);
         task.finishTask();
         storage.save(tasks);
-        return ui.showMessage(String.format("Congratulations on finishing this task!\n %s", task));
+        return String.format("Congratulations on finishing this task!\n %s", task);
     }
 
     /**
