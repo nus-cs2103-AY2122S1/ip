@@ -17,7 +17,7 @@ public class TaskManager {
         return tasks;
     }
 
-    public Task addToDo(String input) throws DukeException.NoNameException, DukeException.NoNameException {
+    public Task addToDo(String input) throws DukeException.NoNameException {
         if (input.length() < 5) {
             throw new DukeException.NoNameException("Duke says: You can't add a task with no name");
         }
