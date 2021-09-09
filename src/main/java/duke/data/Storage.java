@@ -71,6 +71,8 @@ public class Storage {
                 // Index 0 should contain the identifier for the type of task being loaded
                 // The rest of the indices are arguments that provide more information (E.g. description, deadline, etc)
                 String[] taskDetails = task.split("\\|");
+                assert(taskDetails.length >= 3);
+                assert(Objects.equals(taskDetails[1], "0") || Objects.equals(taskDetails[1], "1"));
                 boolean taskDone = Objects.equals(taskDetails[1], "1");
 
                 switch (taskDetails[0]) {
@@ -78,9 +80,11 @@ public class Storage {
                     taskData.add(new Todo(taskDetails[2], taskDone));
                     break;
                 case "D":
+                    assert(taskDetails.length == 4);
                     taskData.add(new Deadline(taskDetails[2], LocalDate.parse(taskDetails[3]), taskDone));
                     break;
                 case "E":
+                    assert(taskDetails.length == 4);
                     taskData.add(new Event(taskDetails[2], LocalDate.parse(taskDetails[3]), taskDone));
                     break;
                 default:
