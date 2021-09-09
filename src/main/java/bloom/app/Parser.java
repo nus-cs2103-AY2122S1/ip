@@ -95,6 +95,13 @@ public class Parser {
         int minute = Integer.parseInt(min);
         int second = Integer.parseInt(sec);
 
+        assert year > 0;
+        assert month > 0;
+        assert day > 0;
+        assert hour > 0;
+        assert minute > 0;
+        assert second > 0;
+
         return LocalDateTime.of(year, month, day, hour, minute, second);
     }
 }
