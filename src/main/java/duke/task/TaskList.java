@@ -41,6 +41,7 @@ public class TaskList {
 
         try {
             Task completedTask = tasks.get(taskNumber);
+            assert completedTask != null;
             completedTask.markDone();
             message = Ui.getDoneMessage(completedTask);
         } catch (IndexOutOfBoundsException e) {
@@ -95,6 +96,7 @@ public class TaskList {
     public String deleteTask(int taskNumber) {
         try {
             Task removedTask = tasks.get(taskNumber);
+            assert removedTask != null;
             tasks.remove(taskNumber);
             return Ui.getDeleteMessage(removedTask, tasks.size());
         } catch (IndexOutOfBoundsException e) {

@@ -97,12 +97,15 @@ public class Storage {
 
                 switch (lineSplit[0]) {
                 case "T":
+                    assert lineSplit.length == 3;
                     loadedTaskList.add(new ToDo(lineSplit[2]));
                     break;
                 case "D":
+                    assert lineSplit.length == 5;
                     loadedTaskList.add(new Deadline(lineSplit[2], lineSplit[3], lineSplit[4]));
                     break;
                 case "E":
+                    assert lineSplit.length == 4;
                     loadedTaskList.add(new Event(lineSplit[2], lineSplit[3]));
                     break;
                 default:
