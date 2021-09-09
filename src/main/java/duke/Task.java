@@ -2,10 +2,12 @@ package duke;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected ArrayList<String> tags;
 
     /**
      * Constructor.
@@ -14,7 +16,8 @@ public abstract class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
+        tags = new ArrayList<>();
     }
 
     /**
@@ -35,6 +38,16 @@ public abstract class Task {
     }
 
     /**
+     * Add a tag for a specific task.
+     *
+     * @param tag the tag to add
+     */
+    public String addTag(String tag) {
+        tags.add(tag);
+        return "The tag #" + tag + " has been added to task\n" + description;
+    }
+
+    /**
      * Writes to a file using a FileWriter.
      *
      * @param myWriter the given FileWriter
@@ -44,8 +57,15 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + description;
+        String returnString = "[" + this.getStatusIcon() + "] " + description;
+        if (tags.size() == 0) {
+            return returnString;
+        } else {
+            String tagString = "";
+            for (int i = 0; i < tags.size(); i++) {
+                tagString += " #" + tags.get(i);
+            }
+            return returnString + tagString;
+        }
     }
-
-
 }

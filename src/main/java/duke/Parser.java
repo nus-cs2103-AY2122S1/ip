@@ -26,7 +26,7 @@ public class Parser {
         String data = scan.next();
         switch (data.toLowerCase()) {
         case "bye":
-            scan.close();
+
             return Ui.getGoodbyeMessage();
         case "list":
             if (taskList.getSize() == 0) {
@@ -68,6 +68,10 @@ public class Parser {
                 e.printMsg();
             }
             break;
+        case "tag":
+            int index = scan.nextInt();
+            String tag = scan.next();
+            return taskList.addTag(index - 1, tag);
         default:
             return "What are you even typing omg get it right...";
         }
