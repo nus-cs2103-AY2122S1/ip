@@ -73,4 +73,19 @@ public class Task {
         return "[" + getStatusIcon() + "] " + description;
     }
 
+    @Override
+    public boolean equals(Object otherObject) {
+        if (!(otherObject instanceof Task)) {
+            return false;
+        }
+        Task otherTask = (Task) otherObject;
+        boolean isDescriptionEquals = this.description.equals(otherTask.description);
+        boolean bothTimesExist = (this.time != null && otherTask.time != null);
+        if (bothTimesExist) {
+            boolean isTimeEquals = this.time.equals(otherTask.time);
+            return (isDescriptionEquals && isTimeEquals);
+        }
+        return isDescriptionEquals;
+    }
+
 }

@@ -6,6 +6,8 @@ import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.TodoTask;
 
+import java.time.LocalDateTime;
+
 public class AddCommand extends Command {
 
     private Task taskToAdd;
@@ -68,6 +70,16 @@ public class AddCommand extends Command {
         }
     }
 
+    private void addTask(TaskList tasks) throws DukeException {
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = (Task) tasks.get(i);
+            if (task.equals(this.taskToAdd)) {
+                throw new DukeException("Duplicate Found!");
+            }
+        }
+        tasks.add(taskToAdd);
+    }
+
     /**
      * Execute user command.
      * @param tasks List of tasks.
@@ -76,7 +88,7 @@ public class AddCommand extends Command {
      * @throws DukeException If execution fails.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.add(taskToAdd);
+        addTask(tasks);
         storage.save(tasks);
         return String.format("Task Added!\n %s", taskToAdd);
     }
