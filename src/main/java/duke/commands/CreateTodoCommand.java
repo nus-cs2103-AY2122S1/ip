@@ -15,6 +15,7 @@ public class CreateTodoCommand extends Command {
      * @param name The raw input from the user
      */
     public CreateTodoCommand(String userInput) {
+        assert userInput.length() > 6;
         this.name = userInput.substring(5);
     }
 
