@@ -28,7 +28,7 @@ public class Task {
     /**
      * Construct an instance of Task with only a description and a taskType.
      *
-     * @param description Description of the task
+     * @param description Description of the task.
      * @param taskType Type of the task (event, deadline, etc.)
      */
     public Task(String description, String taskType) {
@@ -37,11 +37,11 @@ public class Task {
     }
 
     /**
-     * Construct an instance of Task with description, taskType and a time
+     * Construct an instance of Task with description, taskType and a time.
      *
-     * @param description Description of the task
+     * @param description Description of the task.
      * @param taskType Type of the task (event, deadline, etc.)
-     * @param time The time associated with the task
+     * @param time The time associated with the task.
      */
     public Task(String description, String taskType, LocalDateTime time) {
         this(description, taskType);
@@ -54,41 +54,60 @@ public class Task {
     }
 
     /**
-     * Changes the isDone of this task to the boolean input
+     * Changes the isDone of this task to the boolean input.
      *
-     * @param t boolean input for the isDone property to follow
+     * @param t boolean input for the isDone property to follow.
      */
     public void markFinished(boolean t) {
         this.isDone = t;
     }
 
     /**
-     * Returns the taskType of the task
+     * Returns the taskType of the task.
      *
-     * @return the task type
+     * @return the task type.
      */
     public String getTaskType() {
         return taskType;
     }
 
     /**
-     * Returns the description of the task
+     * Returns the description of the task.
      *
-     * @return the description
+     * @return the description.
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * Returns the time associated to the task
+     * Returns the time associated to the task.
      *
-     * @return the time in the format of yyyy-MM-dd HH:mm
+     * @return the time in the format of yyyy-MM-dd HH:mm.
      */
     public String getTime() {
         return time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
+    /**
+     * Update the description of the task.
+     *
+     * @param desc The new description.
+     */
+    public void update(String desc) {
+        this.description = desc;
+    }
+
+    /**
+     * Update the description of the task and the time of the task.
+     *
+     * @param desc The new description.
+     * @param date The new time.
+     */
+    public void update(String desc, LocalDateTime date) {
+        this.description = desc;
+        this.time = date;
+    }
 
     @Override
     public String toString() {

@@ -4,10 +4,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import duke.commands.ToDoCommand;
+import duke.storage.Storage;
+import duke.tasks.Task;
 import duke.tasks.ToDo;
 
 public class ParserTest {
-    private Parser parser = new Parser();
+    private Parser parser = new Parser(new DumbStorage());
     private String input1 = "";
     private String input2 = "bob";
     private String input3 = "todo playgames";
@@ -36,4 +38,11 @@ public class ParserTest {
         Assertions.assertEquals(o.getClass(), toDoCommand.getClass());
     }
 
+}
+
+class DumbStorage extends Storage {
+    @Override
+    public Task getTask(int index) {
+        return ToDo.create("SHOULD NOT REACH HERE");
+    }
 }
