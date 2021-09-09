@@ -307,54 +307,6 @@ public class TaskList {
             return messages.displayTextGui("Need to have a yyyy-mm-dd after /by and # " +
                     "should not come before yyyy-mm-dd");
         }
-
-        /*
-        if (this.descriptionInvalid(inputArr)) {
-            throw new DescriptionException("deadline");
-        }
-
-        boolean commandAbsent = true;
-        int commandIndex = 1;
-        for (int i = 0; i < inputArr.length; i++) {
-            String currentStr = inputArr[i];
-            if (currentStr.equals("/by")) {
-                commandAbsent = false;
-                commandIndex = i;
-                break;
-            }
-        }
-
-        if (commandAbsent) {
-            throw new CommandException("deadline", "/by");
-        } else if (commandIndex == 1) {
-            throw new DescriptionException("deadline");
-        }
-
-        String[] descriptionArray = Arrays.copyOfRange(inputArr, 1, commandIndex);
-        String description = String.join(" ", descriptionArray);
-
-        try {
-            if (commandIndex + 1 <= inputArr.length - 1) {
-                String[] byArray = Arrays.copyOfRange(inputArr, commandIndex + 1, inputArr.length);
-                if (byArray.length == 1) {
-                    LocalDate by = LocalDate.parse(byArray[0]);
-                    Deadline deadlineTask = new Deadline(description, by);
-                    this.taskList.add(deadlineTask);
-                    return messages.taskAddMessageGui(deadlineTask.toString(),
-                            this.taskList.size());
-
-                } else {
-                    throw new DukeException("Command after /by should at most only have date!");
-                }
-            } else {
-                throw new DukeException("Command after /by cannot be empty!");
-            }
-        } catch (DateTimeParseException e) {
-            return messages.wrongDateInputMessageGui();
-        } catch (DukeException e) {
-            return messages.displayTextGui(e.toString());
-        }
-        */
     }
 
     /**
@@ -453,46 +405,6 @@ public class TaskList {
         } catch (DukeException e) {
             return messages.displayTextGui(e.toString());
         }
-
-
-
-        /*
-        if (this.descriptionInvalid(inputArr)) {
-            throw new DescriptionException("event");
-        }
-
-        boolean commandAbsent = true;
-        int commandIndex = 1;
-        for (int i = 0; i < inputArr.length; i++) {
-            String currentStr = inputArr[i];
-            if (currentStr.equals("/at")) {
-                commandAbsent = false;
-                commandIndex = i;
-                break;
-            }
-        }
-        if (commandAbsent) {
-            throw new CommandException("event", "/at");
-        } else if (commandIndex == 1) {
-            throw new DescriptionException("event");
-        }
-
-        String[] descriptionArray = Arrays.copyOfRange(inputArr, 1, commandIndex);
-        String description = String.join(" ", descriptionArray);
-
-        String at;
-        if (commandIndex + 1 <= inputArr.length - 1) {
-            String[] atArray = Arrays.copyOfRange(inputArr, commandIndex + 1, inputArr.length);
-            at = String.join(" ", atArray);
-        } else {
-            at = "No data was inputted";
-        }
-
-        Event eventTask = new Event(description, at);
-        this.taskList.add(eventTask);
-        return messages.taskAddMessageGui(eventTask.toString(), this.taskList.size());
-
-         */
     }
 
     /**

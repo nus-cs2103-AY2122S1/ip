@@ -6,6 +6,7 @@ import duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import ui.MainWindow;
@@ -27,7 +28,8 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
-            stage.setTitle("Duke App CS2103T");
+            stage.setTitle("Fake (Telegram) App 2021");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/telegramIcon.png")));
             stage.setScene(scene);
 
             String css = getClass().getResource("/view/styles.scss").toExternalForm();
