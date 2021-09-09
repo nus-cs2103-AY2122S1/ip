@@ -6,6 +6,8 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 
+import duke.task.Undo;
+
 
 
 /**
@@ -24,6 +26,14 @@ public class Duke {
     // checking if user still wants to input
     private boolean isRunning;
 
+    private Undo undo;
+
+    private String[] prevCommand;
+    // boolean to check if last task is undo-able
+    private boolean isUndoable = false;
+
+    private String deletedTask;
+
     /**
      * Duke Constructor
      */
@@ -37,6 +47,7 @@ public class Duke {
         } catch (DukeException e) {
             items = new Items();
         }
+        this.undo = new Undo(this.items);
     }
 
     /**
@@ -74,6 +85,7 @@ public class Duke {
             switch (command) {
             case "list":
                 output = items.printList();
+                isUndoable = false;
                 break;
             case "done":
                 int idx = Integer.parseInt(inputWords[1]);
@@ -81,6 +93,7 @@ public class Duke {
                 fileTask = storage.getFileLine(idx);
                 fileTask = fileTask.substring(0, 4) + "1" + fileTask.substring(5);
                 storage.updateListTask(idx, fileTask);
+                isUndoable = true;
                 break;
             case "bye":
                 isRunning = false;
@@ -90,31 +103,49 @@ public class Duke {
                 output = items.addItem(new Todo(task[0]));
                 fileTask = "T | 0 | " + task[0];
                 storage.addToFile(fileTask);
+                isUndoable = true;
                 break;
             case "event":
                 output = items.addItem(new Event(task[0], task[1]));
                 fileTask = "E | 0 | " + task[0] + " | " + task[1];
                 storage.addToFile(fileTask);
+                isUndoable = true;
                 break;
             case "deadline":
                 output = items.addItem(new Deadline(task[0], task[1]));
                 fileTask = "D | 0 | " + task[0] + " | " + task[1];
                 storage.addToFile(fileTask);
+                isUndoable = true;
                 break;
             case "delete":
                 int id = Integer.parseInt(inputWords[1]);
+                deletedTask = items.getTaskAtIndex(id);
                 output = items.deleteItem(id);
                 storage.deleteFromFile(id);
+                isUndoable = true;
                 break;
             case "find":
                 output = items.findTask(task[0]);
+                isUndoable = false;
+                break;
+            case "undo":
+                if (!isUndoable) {
+                    output = "Please implement a valid undo-able task so I can undo!\n"
+                            + "'todo', 'event', 'deadline', 'done' and 'delete' can be undone";
+                } else {
+                    output = undoLogic(prevCommand);
+                }
                 break;
             default:
+                isUndoable = false;
                 output = "I don't recognise this command\n"
-                        + "Try 'list', 'todo', 'event', 'deadline', 'done', 'find' or 'bye'";
+                        + "Try 'list', 'todo', 'event', 'deadline', 'done', 'find', 'undo' or 'bye'";
                 break;
             }
             assert !output.equals(""): "Unable to generate response. Please try again.";
+            if (isUndoable) {
+                prevCommand = inputWords;
+            }
             return output;
         } catch (Exception dukeException) {
             return dukeException.getMessage();
@@ -122,7 +153,46 @@ public class Duke {
     }
 
     /**
+     * Undoes the last command
+     *
+     * @param undoCommand the command to be undone
+     * @return
+     * @throws DukeException
+     * @throws IOException
+     */
+    private String undoLogic(String[] undoCommand) throws DukeException, IOException {
+        String output;
+        String fileTask;
+        String inputCommand = undoCommand[0];
+        switch (inputCommand) {
+        case "delete":
+            int index = Integer.parseInt(prevCommand[1]);
+            output = undo.undoDelete(index, deletedTask);
+            storage.addToFile(index, deletedTask);
+            break;
+        case "done":
+            int taskIndex = Integer.parseInt(undoCommand[1]);
+            fileTask = undo.undoDone(taskIndex);
+            storage.updateListTask(taskIndex, fileTask);
+            output = "The following task has been marked as 'Not Done':\n" + fileTask;
+            break;
+        case "deadline":
+        case "event":
+        case "todo":
+            fileTask = undo.deleteTask();
+            storage.deleteFromFile(items.getListSize() - 1);
+            output = "Following task has been removed:\n" + fileTask;
+            break;
+        default:
+            output = "Only undo has been implemented";
+        }
+        isUndoable = false;
+        return output;
+    }
+
+    /**
      * Returns true when duke is awake and false otherwise.
+     *
      * @return True when duke is awake and false otherwise.
      */
     public boolean isRunning() {

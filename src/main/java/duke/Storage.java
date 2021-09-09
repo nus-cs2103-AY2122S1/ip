@@ -110,6 +110,19 @@ public class Storage {
     }
 
     /**
+     * Adds a task to the saved file at given index.
+     * Used with undo functionality.
+     *
+     * @param index at which task should be added
+     * @param task The task as a String.
+     * @throws DukeException When saving the file fails.
+     */
+    public void addToFile(int index, String task) throws DukeException, IOException {
+        fileTasks.add(index - 1, task);
+        saveToFile();
+    }
+
+    /**
      * Removes a task from the saved file.
      *
      * @param id The line to be removed.

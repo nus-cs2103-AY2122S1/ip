@@ -42,6 +42,14 @@ public abstract class Task {
     }
 
     /**
+     * Marks the task as not done.
+     * Used for the undo functionality.
+     */
+    public void undoTask() {
+        this.isDone = false;
+    }
+
+    /**
      * Generates the task string representation.
      *
      * @return The description of the task.
