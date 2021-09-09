@@ -42,8 +42,8 @@ public class Duke extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        assert(USE_GUI);
+    public void start(Stage primaryStage) {
+        assert USE_GUI;
         Gui gui = (Gui) ui;
         Scene scene = new Scene(gui.getRootNode());
         primaryStage.setTitle("Duke");
@@ -55,7 +55,7 @@ public class Duke extends Application {
      * Starts Duke CLI.
      */
     public void startCli() {
-        assert(!USE_GUI);
+        assert !USE_GUI;
         Cli cli = (Cli) ui;
         cli.printWelcomeMessage();
         cli.printHelp();

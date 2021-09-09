@@ -179,7 +179,7 @@ public class Gui implements Ui {
         LocalDate date = datePicker.getValue();
 
         // Deadline and date cannot be defined at the same time
-        assert((deadline == null) || (date == null));
+        assert (deadline == null) || (date == null);
 
         DukeTask task;
         if (deadline != null) {
