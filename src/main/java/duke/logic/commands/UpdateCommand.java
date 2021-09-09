@@ -6,10 +6,10 @@ import java.util.Optional;
 import duke.logic.tasks.TaskList;
 
 public class UpdateCommand extends Command {
-    private static final String TASK_UPDATED_MSG = "I've updated this task:\n  ";
-    private static final String EMPTY_TASK_LIST_MSG = "You don't have any tasks!";
-    private static final String TASK_NUMBER_OUT_OF_BOUNDS_MSG = "Invalid task number! Must be between 1 and ";
-    private static final String NO_FIELD_PROVIDED_MSG = "Provide at lease one field to update.";
+     static final String TASK_UPDATED_MSG = "I've updated this task:\n  %s";
+     static final String EMPTY_TASK_LIST_MSG = "You don't have any tasks!";
+     static final String TASK_NUMBER_OUT_OF_BOUNDS_MSG = "Invalid task number! Must be between 1 and %d";
+     static final String NO_FIELD_PROVIDED_MSG = "Provide at lease one field to update.";
 
     private final int taskNo;
     private final UpdateTaskDescriptor updateTaskDescriptor;
@@ -25,7 +25,7 @@ public class UpdateCommand extends Command {
         if (taskNo > taskList.size() || taskNo <= 0) {
             String msg = (taskList.size() == 0)
                     ? EMPTY_TASK_LIST_MSG
-                    : TASK_NUMBER_OUT_OF_BOUNDS_MSG + taskList.size();
+                    : String.format(TASK_NUMBER_OUT_OF_BOUNDS_MSG, taskList.size());
             return new CommandResult(msg);
         }
         if (!updateTaskDescriptor.isAnyFieldNonNull()) {
@@ -33,7 +33,7 @@ public class UpdateCommand extends Command {
         }
 
         String result = taskList.update(taskNo, updateTaskDescriptor).toString();
-        return new CommandResult(TASK_UPDATED_MSG + result);
+        return new CommandResult(String.format(TASK_UPDATED_MSG, result));
     }
 
     public static class UpdateTaskDescriptor {
@@ -65,12 +65,27 @@ public class UpdateCommand extends Command {
             return Optional.ofNullable(end);
         }
 
-        private boolean isAnyFieldNonNull() {
+        public boolean isAnyFieldNonNull() {
             boolean isDescriptionNonNull = (description != null);
             boolean isNewByNonNull = (by != null);
             boolean isNewAtNonNull = (at != null);
             boolean isNewEndNonNull = (end != null);
             return isDescriptionNonNull || isNewByNonNull || isNewAtNonNull || isNewEndNonNull;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj == this) {
+                return true;
+            }
+            if (!(obj instanceof UpdateTaskDescriptor)) {
+                return false;
+            }
+            UpdateTaskDescriptor other = (UpdateTaskDescriptor) obj;
+            return description.equals(other.description)
+                    && by.equals(other.by)
+                    && at.equals(other.at)
+                    && end.equals(other.end);
         }
     }
 }

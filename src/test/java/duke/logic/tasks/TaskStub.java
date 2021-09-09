@@ -5,7 +5,7 @@ import duke.logic.commands.UpdateCommand.UpdateTaskDescriptor;
 public class TaskStub extends Task {
     private final int stubNo;
 
-    TaskStub(int stubNo) {
+    public TaskStub(int stubNo) {
         super("Stub task " + stubNo, true);
         this.stubNo = stubNo;
     }

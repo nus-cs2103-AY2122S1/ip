@@ -11,6 +11,10 @@ public class UpdateTaskDescriptorBuilder {
         descriptor = new UpdateTaskDescriptor(null, null, null, null);
     }
 
+    public UpdateTaskDescriptorBuilder(UpdateTaskDescriptor descriptor) {
+        this.descriptor = descriptor;
+    }
+
     public UpdateTaskDescriptor build() {
         return descriptor;
     }
