@@ -1,29 +1,37 @@
-# User Guide
+# Duke User Guide
 
-## Features 
+## Features Overview
+1. Add todo tasks
+2. Add deadline tasks
+3. Add events
 
-### Feature-ABC
+### 1. Add-ToDo
 
-Description of the feature.
+This feature allows you to add a simple task to your task list.
 
-### Feature-XYZ
+### 2. Add Deadline tasks
 
-Description of the feature.
+This feature allows you to add tasks to be completed by a certain deadline (in yyyy-mm-dd) format.
+
+### 2. Add Events 
+
+This feature allows you to add events at some date and/or time.
+
 
 ## Usage
 
-### `Keyword` - Describe action
+### `list` - List all added tasks
 
-Describe the action and its outcome.
+All the tasks in the task list will be displayed, with the earliest added tasks first.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`list (optional arguments)`
 
 Expected outcome:
 
-Description of the outcome.
+Returns a simple message if there are no tasks.
 
 ```
-expected output
+You have no tasks!
 ```
