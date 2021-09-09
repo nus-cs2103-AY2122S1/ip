@@ -12,6 +12,7 @@ public enum Message {
     COMMAND_ADD("\t Got it. I've added this task:\n"),
     COMMAND_DELETE("\t Noted. I've removed this task:\n"),
     COMMAND_MARK("\t Nice! I've marked this task as done:\n"),
+    COMMAND_NOTE("\t Noted. I've added a note to this task:\n"),
 
     EXCEPTION_IO("\t Something is wrong with Bloom memory :(\n"),
     EXCEPTION_UNKNOWN_COMMAND("\t This command is not supported.\n");

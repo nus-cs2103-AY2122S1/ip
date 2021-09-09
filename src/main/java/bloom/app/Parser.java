@@ -11,6 +11,7 @@ import bloom.command.FindCommand;
 import bloom.command.GreetCommand;
 import bloom.command.ListCommand;
 import bloom.command.MarkCommand;
+import bloom.command.NoteCommand;
 import bloom.command.ToDoCommand;
 import bloom.constant.Message;
 import bloom.exception.command.BloomUnknownCommandException;
@@ -45,6 +46,9 @@ public class Parser {
             return new MarkCommand(Integer.parseInt(parse[1]) - 1);
         case "delete":
             return new DeleteCommand(Integer.parseInt(parse[1]) - 1);
+        case "note":
+            descIdx = action.length() + 3;
+            return new NoteCommand(Integer.parseInt(parse[1]) - 1, userInput.substring(descIdx));
         case "todo":
             descIdx = action.length() + 1;
             return new ToDoCommand(userInput.substring(descIdx));

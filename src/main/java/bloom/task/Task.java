@@ -11,6 +11,8 @@ public class Task {
     /** The status of the task. */
     protected boolean isDone;
 
+    protected String note;
+
     /**
      * Constructor for a Task.
      *
@@ -19,6 +21,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.note = null;
     }
 
     /**
@@ -28,7 +31,10 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return "["
+                + this.getStatusIcon() + "] "
+                + this.description
+                + (this.note == null ? "" : " (" + this.note + ")");
     }
 
     /**
@@ -58,5 +64,9 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }
