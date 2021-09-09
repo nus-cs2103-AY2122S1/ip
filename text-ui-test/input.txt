@@ -4,7 +4,7 @@ todo
 list
 deadline return book /by Sunday
 list
-event project meeting /at Mon 2-4pm
+event project meeting /at 10/11/2021 1800
 todo borrow book
 deadline
 event
@@ -17,6 +17,6 @@ done 3
 done -123
 todo list bye /at 1234
 list
-delete 1
-delete 9
+delete 1,2,3
+list
 bye
