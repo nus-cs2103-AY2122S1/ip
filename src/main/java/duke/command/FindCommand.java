@@ -32,6 +32,12 @@ public class FindCommand extends Command {
         return filteredTasks;
     }
 
+    /**
+     * Filters the task list according to the keyword provided.
+     * @param tasks The list of tasks.
+     * @param keyword The keyword input by the user.
+     * @return A TaskList containing only the tasks that contains the keyword.
+     */
     public TaskList filterWithSingleKeyword(TaskList tasks, String keyword) {
         List<Task> taskList = tasks
                 .getTaskList()

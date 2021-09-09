@@ -2,7 +2,6 @@ package duke;
 
 import duke.command.Command;
 import duke.task.TaskList;
-
 import javafx.scene.image.Image;
 
 /**

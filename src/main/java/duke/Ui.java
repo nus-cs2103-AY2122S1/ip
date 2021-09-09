@@ -80,6 +80,11 @@ public class Ui {
         return "\t" + errorMessage;
     }
 
+    /**
+     * Returns a String representation of the task list as an ordered list.
+     * @param tasks The tasks in the task list.
+     * @return An ordered list of the tasks.
+     */
     public String printTaskLists(TaskList tasks) {
         String s = "";
         int id = 1;
