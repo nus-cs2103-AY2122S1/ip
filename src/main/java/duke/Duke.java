@@ -6,7 +6,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
 import duke.utils.Parser;
 import duke.utils.Storage;
 import duke.utils.TaskList;
@@ -15,7 +14,6 @@ import duke.task.Task;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
-import duke.task.TASK_TYPE;
 
 public class Duke extends Application {
 
@@ -23,6 +21,10 @@ public class Duke extends Application {
     private final TaskList tasks;
     private final Storage storage;
     private final Ui ui;
+
+    public Duke() {
+        this("/data", "data.txt");
+    }
 
     public Duke(String storagePath, String fileName) {
         activated = true;
@@ -89,12 +91,12 @@ public class Duke extends Application {
                     }
                 }
                 if (selector == 4) {
-                    nextTask = new Deadline(desc,var);
+                    nextTask = new Deadline(desc, var);
                     tasks.add(nextTask);
                     storage.saveEntry(nextTask);
-                    ui.deadline(nextTask,tasks.size());
+                    ui.deadline(nextTask, tasks.size());
                 } else {
-                    nextTask = new Event(desc,var);
+                    nextTask = new Event(desc, var);
                     tasks.add(nextTask);
                     storage.saveEntry(nextTask);
                     ui.event(nextTask, tasks.size());
@@ -115,13 +117,17 @@ public class Duke extends Application {
                 break;
             case 8:
                 String phrase = scannerObj.nextLine();
-                Task [] res = tasks.find(phrase);
-                ui.find(res);
+                // Task [] res = tasks.find(phrase);
+                // ui.find(res);
                 break;
             default:
                 ui.echo();
             }
         }
+    }
+
+    public void main(String[] args) {
+        new Duke().run();
     }
 
     @Override
