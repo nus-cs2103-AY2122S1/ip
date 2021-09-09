@@ -9,6 +9,7 @@ package duke.storage;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -63,25 +64,30 @@ public class Storage {
                     String taskType = txtFileCmd[0];
                     boolean taskState = Integer.parseInt(txtFileCmd[1]) != 0;  // 0 for not done, 1 for done
                     String taskInfo = txtFileCmd[2];
+                    ArrayList<String> taskTags = formTagList(txtFileCmd[4]);
+
+                    // This is either the dateBy for Deadline or eventDetails for Events. Empty field for Todo.
+                    String moreTaskInfo = txtFileCmd[3];
+
 
                     commandsSaved.add(nextLine);
 
                     // Checks the task type (i.e. deadline, todo or event) and add them to tasks respectively
                     switch (taskType) {
                     case "T": {
-                        tasks.add(new Todo(taskInfo, taskState));
+                        tasks.add(new Todo(taskInfo, taskState, taskTags));
                         break;
 
                     }
                     case "D": {
-                        String dateBy = txtFileCmd[3];
-                        tasks.add(new Deadline(taskInfo, LocalDate.parse(dateBy), taskState));
+                        // String dateBy = txtFileCmd[3];
+                        tasks.add(new Deadline(taskInfo, LocalDate.parse(moreTaskInfo), taskState, taskTags));
                         break;
 
                     }
                     case "E": {
-                        String eventDetails = txtFileCmd[3];
-                        tasks.add(new Event(taskInfo, eventDetails, taskState));
+                        // String eventDetails = txtFileCmd[3];
+                        tasks.add(new Event(taskInfo, moreTaskInfo, taskState, taskTags));
                         break;
                     }
                     default:
@@ -107,6 +113,29 @@ public class Storage {
 
         return tasks;
     }
+
+    /**
+     * Forms an ArrayList<String> tags from a String tags.
+     *
+     * @param tags the String of tags to be put into the ArrayList
+     * @return the ArrayList formed from the tags
+     */
+    private ArrayList<String> formTagList(String tags) {
+        String[] splitTags = tags.split(" ");
+        if (splitTags.length == 0) {
+            return new ArrayList<String>();
+        } else {
+            ArrayList<String> tagList = new ArrayList<>();
+            for (String s : splitTags) {
+                tagList.add(s);
+            }
+            return tagList;
+        }
+    }
+//    private static ArrayList<String> formTagList(String tags) {
+//        String[] splitTags = tags.split(" ");
+//        return (ArrayList<String>) Arrays.asList(splitTags);
+//    }
 
     /**
      * Updates the file.
@@ -144,6 +173,18 @@ public class Storage {
      */
     public void addTask(String s) throws IOException {
         commandsSaved.add(s);
+        update();
+    }
+
+    /**
+     * Adds a task to the commandsSaved.
+     *
+     * @param ref The index of the item in the commandsSaved being referenced to add the tag to.
+     * @param task The string to be added to the commandsSaved.
+     * @throws IOException If there are errors processing the file.
+     */
+    public void addTag(int ref, String task) throws IOException {
+        commandsSaved.set(ref, task);
         update();
     }
 
