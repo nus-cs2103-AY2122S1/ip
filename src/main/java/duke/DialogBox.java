@@ -45,8 +45,8 @@ public class DialogBox extends VBox {
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
-        this.textBackgroundBox.setStyle("-fx-background-color: #e7efc5; -fx-background-radius: 20;");
-        this.imagePane.setTranslateX(0);
+        textBackgroundBox.setStyle("-fx-background-color: #e7efc5; -fx-background-radius: 20;");
+        imagePane.setTranslateX(0);
     }
 
     /**
