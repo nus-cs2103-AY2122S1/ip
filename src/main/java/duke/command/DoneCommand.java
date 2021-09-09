@@ -36,7 +36,11 @@ public class DoneCommand extends DukeCommand {
      */
     @Override
     public String execute() throws NoSuchTaskException {
-        storage.save(list.getList());
-        return ui.markDoneMessage(list.mark(taskNumber));
+        try {
+            storage.save(list.getList());
+            return ui.markDoneMessage(list.mark(taskNumber));
+        } catch (IndexOutOfBoundsException e) {
+            throw new NoSuchTaskException();
+        }
     }
 }

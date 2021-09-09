@@ -66,11 +66,12 @@ public class MainWindow extends AnchorPane {
                     @Override
                     public void run() {
                         Platform.exit();
+                        System.exit(0);
                     }
                 }, 3000);
-
             }
         } else {
+            assert response.equals("") : "Response should be empty because duke is not active anymore";
             dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
         }
 
