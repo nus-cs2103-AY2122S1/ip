@@ -21,6 +21,7 @@ public class Storage {
     private Path filePath;
 
     public Storage(Path filePath) {
+        assert !filePath.toString().equals("") : "file path cannot be empty";
         this.filePath = filePath;
     }
 
@@ -36,6 +37,8 @@ public class Storage {
         TaskList taskList = new TaskList();
         for (String content : contents) {
             String[] taskDetails = content.split("=");
+
+            assert !taskDetails[0].equals("") : "task name cannot be empty";
 
             if (taskDetails[0].equals("ToDo")) {
                 ToDo todo = new ToDo(taskDetails[2]);
@@ -70,12 +73,13 @@ public class Storage {
     public void saveData(TaskList taskList) throws IOException {
         List<String> lines = new ArrayList<>();
         Ui ui = new Ui();
+        assert taskList.getSize() > 0 : "Task List has nothing and shouldn't be saved";
         for (int i = 0; i < taskList.getSize(); i++) {
             try {
                 Task task = taskList.get(i);
                 if (task instanceof ToDo) {
                     String line = String.format("ToDo=%s=%s",
-                            String.valueOf(task.getCompleted()), task.getTaskName());
+                            task.getCompleted(), task.getTaskName());
                     lines.add(line);
                 } else if (task instanceof Event) {
                     String line = String.format("Event=%s=%s=%s", String.valueOf(task.getCompleted()),
@@ -83,7 +87,7 @@ public class Storage {
                     lines.add(line);
                 } else {
                     String line = String.format("Deadline=%s=%s=%s",
-                            String.valueOf(task.getCompleted()), task.getTaskName(),
+                            task.getCompleted(), task.getTaskName(),
                             ((Deadline) task).getDeadline());
                     lines.add(line);
                 }
