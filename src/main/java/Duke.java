@@ -8,6 +8,7 @@ import Task.EventsException;
 
 public class Duke{
     private final Ui userInterface = new Ui();
+    private boolean initialised = false;
 
     public static void main(String[] args) {
         Duke user = new Duke();
@@ -21,7 +22,13 @@ public class Duke{
     }
 
     public String getResponse(String input) {
-        return userInterface.choiceOfAction(input);
+        if (initialised) {
+            return userInterface.choiceOfAction(input);
+        } else {
+            initialised = true;
+            userInterface.getDataInputList();
+            return userInterface.greet();
+        }
     }
 }
 
@@ -51,7 +58,7 @@ class Ui {
      * generate the end message.
      */
     public String bye() {
-        store.saveListInFile("src/main/java/Duke/Duke.txt", taskList);
+        store.saveListInFile("src/main/java/Duke.txt", taskList);
         return "Bye. Hope to see you again soon!";
     }
     /**

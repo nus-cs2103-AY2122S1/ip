@@ -17,7 +17,7 @@ public class Storage {
      */
     public void getDataInputList(TaskList lst) {
         try {
-            File f = new File("src/main/java/Duke/Duke.txt");
+            File f = new File("src/main/java/Duke.txt");
             if(!f.exists()){
                 f.createNewFile();
             }
@@ -139,8 +139,10 @@ class Parser {
             return new TodoTasks(action);
         } else {
             if (type.equals("Deadline")) {
+                assert action.contains("Deadline") : "invalid format";
                 return new DeadlineTask(action);
             } else if  (type.equals("Events")) {
+                assert action.contains("Events") : "invalid format";
                 return new EventsTask(action);
             } else {
                 throw new Exception("Error type");
