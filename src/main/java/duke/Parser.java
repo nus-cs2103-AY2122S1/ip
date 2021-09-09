@@ -1,15 +1,6 @@
 package duke;
 
-import duke.commands.Command;
-import duke.commands.DeadlineCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.EventCommand;
-import duke.commands.ExitCommand;
-import duke.commands.FindCommand;
-import duke.commands.InvalidCommand;
-import duke.commands.ListCommand;
-import duke.commands.ToDoCommand;
+import duke.commands.*;
 
 import duke.exceptions.DukeException;
 
@@ -59,6 +50,9 @@ public class Parser {
 
                 case FindCommand.COMMAND_WORD:
                     return new FindCommand(fullCommand);
+
+                case ReminderCommand.COMMAND_WORD:
+                    return new ReminderCommand(fullCommand);
 
                 case ExitCommand.COMMAND_WORD:
                     return new ExitCommand();
