@@ -22,10 +22,14 @@ public class DoneCommand extends Command {
      */
     public String execute(Storage storage, Ui ui) {
         try {
-            Task taskToMark = storage.getTask(taskNum);
-            taskToMark.markDone();
-            storage.saveToFile();
-            return ui.markedDoneMessage(taskToMark);
+            if (taskNum + 1 <= storage.taskListLen()) {
+                Task taskToMark = storage.getTask(taskNum);
+                taskToMark.markDone();
+                storage.saveToFile();
+                return ui.markedDoneMessage(taskToMark);
+            } else {
+                return ui.missingTaskMessage();
+            }
         } catch (IndexOutOfBoundsException e) {
             return Ui.showErrorMessage("Please enter a valid index!");
         }
