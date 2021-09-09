@@ -18,7 +18,8 @@ import javafx.stage.Stage;
  * Encapsulates the Duke chatbot.
  */
 public class Duke extends Application {
-    private Storage storage;
+    private Storage taskStorage;
+    private Storage archiveStorage;
     private TaskList taskList;
     private Ui ui;
     private ScrollPane scrollPane;
@@ -27,11 +28,12 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    Duke(String filePath) {
+    Duke(String taskFilePath, String archiveFilePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        taskStorage = new Storage(taskFilePath);
+        archiveStorage = new Storage(archiveFilePath);
         try {
-            taskList = storage.loadTasksFromFile();
+            taskList = new TaskList(taskStorage.loadTasksFromFile(), archiveStorage.loadTasksFromFile());
         } catch (IOException e) {
             System.out.println(Ui.format(e.toString()));
             taskList = new TaskList();
@@ -48,7 +50,9 @@ public class Duke extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
+
         sendButton = new Button("Send");
+        //sendButton.setGraphic(new ImageView(getClass().getResource("/images/Icon.png").toExternalForm()));
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
@@ -122,7 +126,8 @@ public class Duke extends Application {
         try {
             Command cmd = Parser.parse(input);
             if (cmd.isExit()) {
-                storage.writeTasksToFile(taskList.getTasks());
+                taskStorage.writeTasksToFile(taskList.getTasks());
+                archiveStorage.writeTasksToFile(taskList.getArchives());
                 response = ui.getGoodbyeMsg();
             }
             response = cmd.execute(taskList, ui);

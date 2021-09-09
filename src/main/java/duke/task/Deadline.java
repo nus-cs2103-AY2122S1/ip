@@ -2,7 +2,9 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
+import duke.DukeException;
 /**
  * Encapsulates the Deadline class which has a date as its deadline.
  */
@@ -15,10 +17,16 @@ public class Deadline extends Task {
      *
      * @param description Description of the deadline task.
      * @param by Date of the deadline as input by user.
+     * @throws DukeException If the date and time are formatted incorrectly.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeException {
         super(description);
-        this.date = LocalDate.parse(by.trim());
+        try {
+            this.date = LocalDate.parse(by.trim());
+        } catch (DateTimeParseException e) {
+            throw new DukeException("OOPS!! Deadline date is formatted incorrectly."
+                    + "\n\t Please format it as: [yyyy-mm-dd])");
+        }
         this.by = by;
     }
 

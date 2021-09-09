@@ -1,12 +1,17 @@
 package duke;
 
 import duke.command.AddCommand;
+import duke.command.ArchiveTaskCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
+import duke.command.ListArchiveCommand;
 import duke.command.ListCommand;
+import duke.command.UnarchiveTaskCommand;
+
+
 
 public class Parser {
     /**
@@ -28,22 +33,42 @@ public class Parser {
             try {
                 int doneIdx = Integer.parseInt(params[1]) - 1;
                 return new DoneCommand(doneIdx);
-            } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("OOPS!!! Please enter the task you'd like to"
+            } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                throw new DukeException("OOPS!!! Please enter the task you'd like to "
                         + "mark as done in the following format: \n\t done [task number]");
             }
         case ("delete"):
-            if (params.length == 1) {
-                throw new DukeException("OOPS!!! Please enter the task you'd like to"
-                        + "delete in the following format: \n\t delete [task number]");
+            try {
+                int doneIdx = Integer.parseInt(params[1]) - 1;
+                return new DeleteCommand(Integer.parseInt(params[1]) - 1);
+            } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                throw new DukeException("OOPS!!! Please enter the task you'd like to "
+                        + "delete in the following format: \n\t done [task number]");
             }
-            return new DeleteCommand(Integer.parseInt(params[1]) - 1);
         case ("find"):
             if (params.length == 1) {
                 throw new DukeException("OOPS!!! Please enter the keyword you'd like to "
-                        + "search for.");
+                        + "search for in the following format \n\t find [keyword].");
             }
             return new FindCommand(params[1]);
+        case ("archive"):
+            try {
+                int doneIdx = Integer.parseInt(params[1]) - 1;
+                return new ArchiveTaskCommand(doneIdx);
+            } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                throw new DukeException("OOPS!!! Please enter the task you'd like to "
+                        + "archive in the following format: \n\t archive [task number]");
+            }
+        case ("archives"):
+            return new ListArchiveCommand();
+        case ("unarchive"):
+            try {
+                int doneIdx = Integer.parseInt(params[1]) - 1;
+                return new UnarchiveTaskCommand(doneIdx);
+            } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                throw new DukeException("OOPS!!! Please enter the task you'd like to "
+                        + "unarchive in the following format: \n\t unarchive [task number]");
+            }
         case ("todo"):
         //fallthrough
         case ("event"):
