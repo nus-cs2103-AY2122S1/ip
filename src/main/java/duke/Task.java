@@ -101,7 +101,7 @@ public class Task {
     }
 
     /** A type of task that needs to be done before a specific date/time. */
-    public static class Deadline extends Task {
+    private static class Deadline extends Task {
         private final LocalDate time;
 
         public Deadline(String description, String time) throws DukeException {
@@ -130,7 +130,7 @@ public class Task {
     }
 
     /** A type of duke.Task that starts at a specific time and ends at a specific date/time. */
-    public static class Event extends Task {
+    private static class Event extends Task {
         private final LocalDate time;
 
         public Event(String description, String time) throws DukeException {
@@ -276,7 +276,9 @@ public class Task {
 
                 if (m_deadline.find()) {
                     return new Deadline(m_deadline.group(1), m_deadline.group(2));
-                }else {
+                } else if (details.matches("^/by .*?$") || details.matches("^ *?$")) {
+                    throw new EmptyDescException(type);
+                } else {
                     throw new EmptyDateException(type);
                 }
             case EVENT:
@@ -285,7 +287,9 @@ public class Task {
 
                 if (m_event.find()) {
                     return new Event(m_event.group(1), m_event.group(2));
-                }else {
+                } else if (details.matches("^/at .*?$") || details.matches("^ *?$")) {
+                    throw new EmptyDescException(type);
+                } else {
                     throw new EmptyDateException(type);
                 }
             default:

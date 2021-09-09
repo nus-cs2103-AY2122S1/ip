@@ -11,6 +11,13 @@ public class EmptyDateException extends DukeException {
 
     @Override
     public String getMessage() {
-        return "The " + type + " must have a date / time!";
+        String result = "The " + type + " must have a date / time!\n"
+                + "Please user the format:\n";
+        if (type == Task.Type.DEADLINE) {
+            result += "deadline <description> /by dd-MM-YYYY";
+        } else {
+            result += "event <description> /at dd-MM-YYYY";
+        }
+        return result;
     }
 }
