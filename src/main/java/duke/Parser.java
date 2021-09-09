@@ -10,6 +10,7 @@ import duke.commands.ListCommand;
 import duke.exceptions.NoSuchCommandException;
 import duke.tasks.DeadlinesTask;
 import duke.tasks.EventsTask;
+import duke.tasks.FixedDurationTask;
 import duke.tasks.Task;
 import duke.tasks.ToDosTask;
 
@@ -54,6 +55,10 @@ public class Parser {
                 EventsTask.isLegitInput(input);
                 return new AddCommand(new EventsTask(EventsTask.getNameInput(input),
                         false, Task.parseDateTime(EventsTask.getDeadlineInput(input))));
+            case "fixed":
+                FixedDurationTask.isLegitInput(input);
+                return new AddCommand(new FixedDurationTask(FixedDurationTask.getNameInput(input),
+                        false, FixedDurationTask.getDurationInput(input)));
             case "find":
                 Task.isLegitFindInput(input);
                 return new FindCommand(input.split(" ")[1]);

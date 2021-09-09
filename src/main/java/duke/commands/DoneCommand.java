@@ -40,7 +40,7 @@ public class DoneCommand extends Command {
     @Override
     public String execute(Tasklist tasklist, Ui ui, Storage storage) throws NoSuchTaskException {
         try {
-            Task temp = tasklist.getTask(index);
+            Task temp = tasklist.getTask(index - 1);
             tasklist.doneTask(index);
             String result = ui.showDoneMessage(temp, tasklist);
             storage.writeToFile(tasklist);

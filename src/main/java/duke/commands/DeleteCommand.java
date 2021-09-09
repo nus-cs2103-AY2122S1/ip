@@ -43,7 +43,7 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(Tasklist tasklist, Ui ui, Storage storage) throws NoSuchTaskException {
         try {
-            Task temp = tasklist.getTask(index);
+            Task temp = tasklist.getTask(index - 1);
             tasklist.deleteTask(index);
             String result = ui.showDeleteMessage(temp, tasklist);
             storage.writeToFile(tasklist);
