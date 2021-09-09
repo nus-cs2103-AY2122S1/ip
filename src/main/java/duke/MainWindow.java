@@ -12,6 +12,9 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
+    private static final String GREETING_MESSAGE = "Hello from Duke!";
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -23,10 +26,12 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private static final String GREETING_MESSAGE = "Hello from Duke!";
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initializes the properties of gui elements and displays welcome message.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

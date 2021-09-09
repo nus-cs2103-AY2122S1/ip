@@ -13,7 +13,7 @@ public class Ui {
     }
 
     public String getDukeMessage(String message) {
-       return String.format("Duke says:\n%s", message);
+        return String.format("Duke says:\n%s", message);
     }
 
     public String sayBye() {

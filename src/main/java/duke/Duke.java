@@ -6,10 +6,11 @@ import javafx.application.Platform;
 
 public class Duke {
 
+    private static final String FILE_PATH = "data/data.txt";
+
     private TaskList taskList;
     private Storage storage;
     private Ui ui;
-    private static final String FILE_PATH = "data/data.txt";
 
     /**
      * Constructs a duke chat bot.

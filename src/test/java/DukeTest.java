@@ -1,9 +1,10 @@
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import duke.task.Todo;
-import duke.task.Event;
+import org.junit.jupiter.api.Test;
+
 import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 public class DukeTest {
 
