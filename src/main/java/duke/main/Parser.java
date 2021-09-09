@@ -12,6 +12,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
+import duke.command.PriorityCommand;
 import duke.command.SaveCommand;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -51,6 +52,8 @@ public class Parser {
             return new SaveCommand();
         case "find":
             return parseFind(command);
+        case "priority":
+            return parsePriority(command);
         default:
             return new InvalidCommand();
         }
@@ -158,6 +161,27 @@ public class Parser {
         return new DoneCommand(index);
     }
 
+    private static Command parsePriority(String command) throws DukeException {
+        if (command.length() < 9 || isInvalidString(command.substring(9))) {
+            String errorMessage = "\t Invalid command, please use the command as follows:\n";
+            errorMessage += "\t \t priority {number} {priority}";
+            throw new DukeException(errorMessage);
+        }
+
+        String body = command.substring(9);
+        String[] components = body.split(" ");
+        int index = Integer.parseInt(components[0].replaceAll(" ", "")) - 1;
+        String priority = components[1];
+
+        if (!validPriority(priority)) {
+            String errorMessage = "\t Invalid command, please use the command as follows:\n";
+            errorMessage += "\t \t priority {number} {priority}";
+            throw new DukeException(errorMessage);
+        }
+
+        return new PriorityCommand(index, priority);
+    }
+
     private static Command parseFind(String command) throws DukeException {
         if (command.length() < 5 || isInvalidString(command.substring(5))) {
             String errorMessage = "\t Invalid command, please key in the find command as follows:\n";
@@ -182,5 +206,16 @@ public class Parser {
         }
 
         return true;
+    }
+
+    private static boolean validPriority(String priority) {
+        switch (priority.toLowerCase()) {
+        case "low":
+        case "medium":
+        case "high":
+            return true;
+        default:
+            return false;
+        }
     }
 }
