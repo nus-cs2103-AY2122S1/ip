@@ -1,5 +1,7 @@
 T|1|eat bfast
 T|1|eat
-T|0|eat again
+T|1|eat again
 T|1|eat until sleep
-D|0|eat|2021-01-01
+D|1|eat|2021-01-01
+T|0|eat again
+E|1|eat|2021-01-10
