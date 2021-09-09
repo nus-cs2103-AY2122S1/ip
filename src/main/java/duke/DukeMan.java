@@ -44,7 +44,7 @@ public class DukeMan {
     public String getResponse(String userInput) {
 
         Parser parser = new Parser();
-        parser.parsing(userInput);System.out.println("hello");
+        parser.parsing(userInput);
         String command = parser.getCommand();
         String output = null;
 
