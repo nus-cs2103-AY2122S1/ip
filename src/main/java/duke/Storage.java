@@ -69,9 +69,16 @@ public class Storage {
             for (int i = 0; i < taskList.size(); i++) {
                 taskList.get(i).writeToFile(myWriter);
                 myWriter.write("\n");
-                // Add another command to mark it as done
+
+                // Write a done command if task is done
                 if (taskList.get(i).isDone) {
                     myWriter.write("done " + (i + 1));
+                    myWriter.write("\n");
+                }
+
+                // Write all tags
+                for (int j = 0; j < taskList.get(i).tags.size(); j++) {
+                    myWriter.write("tag " + (i + 1) + " " + taskList.get(i).tags.get(j));
                     myWriter.write("\n");
                 }
             }
