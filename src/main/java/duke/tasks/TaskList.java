@@ -294,4 +294,16 @@ public class TaskList {
         return sb.toString();
     }
 
+    public String sumExpense(int taskIndex) throws EmptyListException, InvalidIndexException {
+        int taskListSize = taskList.size();
+
+        if (taskListSize == 0) {
+            throw new EmptyListException();
+        } else if (taskIndex < 0 || taskIndex >= taskListSize) {
+            throw new InvalidIndexException(1, taskListSize, taskIndex + 1);
+        }
+        Task task = taskList.get(taskIndex);
+        return task.sumExpense();
+    }
+
 }

@@ -29,6 +29,7 @@ public class ExpenseCommand extends Command {
     private final boolean isDelete;
     private final boolean isDisplay;
     private final int deleteIndex;
+    private final boolean isSum;
 
     /**
      * Constructor of ExpenseCommand.
@@ -47,6 +48,7 @@ public class ExpenseCommand extends Command {
         isDelete = false;
         this.isDisplay = isDisplay;
         deleteIndex = -1;
+        isSum = false;
     }
 
     /**
@@ -64,6 +66,7 @@ public class ExpenseCommand extends Command {
         isDelete = false;
         isDisplay = false;
         deleteIndex = -1;
+        isSum = false;
     }
 
     /**
@@ -80,6 +83,18 @@ public class ExpenseCommand extends Command {
         isList = false;
         isDelete = true;
         isDisplay = false;
+        isSum = false;
+    }
+
+    public ExpenseCommand(int taskIndex, boolean isSum) {
+        this.taskIndex = taskIndex;
+        deleteIndex = -1;
+        purpose = "";
+        amount = 0;
+        isList = false;
+        isDelete = false;
+        isDisplay = false;
+        this.isSum = isSum;
     }
 
     /**
@@ -123,6 +138,8 @@ public class ExpenseCommand extends Command {
             String message = tasks.deleteExpense(taskIndex, deleteIndex);
             storage.save(tasks);
             return message;
+        } else if (isSum) {
+            return "$" + tasks.sumExpense(taskIndex);
         }
         String message = tasks.addExpense(taskIndex, purpose, amount);
         storage.save(tasks);

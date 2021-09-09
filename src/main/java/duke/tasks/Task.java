@@ -132,6 +132,16 @@ public class Task {
         return sb.toString();
     }
 
+    public String sumExpense() {
+        float total = 0;
+        for (String purpose : expenses.keySet()) {
+            for (Float f : expenses.get(purpose)) {
+                total += f;
+            }
+        }
+        return df.format(total) + " spent on " + this;
+    }
+
     /**
      * Boolean to determine if this task currently contains any expenses.
      *
