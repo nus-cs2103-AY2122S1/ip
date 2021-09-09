@@ -5,6 +5,7 @@ import commands.AddToDoCommand;
 import commands.Command;
 import commands.DeleteCommand;
 import commands.FindCommand;
+import commands.HelpCommand;
 import commands.InvalidCommand;
 import commands.ListCommand;
 import commands.MarkDoneCommand;
@@ -52,6 +53,8 @@ public class CommandParser {
             return new MarkDoneCommand(trimmedUserInput);
         case ListCommand.KEYWORD:
             return new ListCommand();
+        case HelpCommand.KEYWORD:
+            return new HelpCommand();
         default:
             return new InvalidCommand();
         }

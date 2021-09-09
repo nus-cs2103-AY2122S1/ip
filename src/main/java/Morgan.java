@@ -51,7 +51,7 @@ public class Morgan {
     }
 
     public String getGreeting() {
-        String greeting = "Hello, my name is Morgan, and I'm your personal task assistant.\n"
+        String greeting = "Hello, my name is Morgan, and I'm your personal task assistant."
                 + " What can I do for you today?";
         return greeting;
     }
