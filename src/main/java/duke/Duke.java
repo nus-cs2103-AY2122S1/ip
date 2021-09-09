@@ -4,6 +4,7 @@ public class Duke {
     private static String userDir = System.getProperty("user.dir");
     private DukeTaskList dukeTaskList;
     private Storage storage;
+    private Parser parser;
 
     /**
      * Constructor for the Duke class.
@@ -11,6 +12,7 @@ public class Duke {
     public Duke() {
         dukeTaskList = new DukeTaskList();
         storage = new Storage(userDir, dukeTaskList);
+        parser = new Parser(dukeTaskList, storage);
         storage.loadDataFile();
     }
 
@@ -21,7 +23,7 @@ public class Duke {
      * @return Duke's response.
      */
     public String getResponse(String input) {
-        return Parser.parse(input, dukeTaskList, storage);
+        return parser.parse(input);
     }
 }
 
