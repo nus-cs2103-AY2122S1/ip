@@ -4,6 +4,7 @@ public class TodoTask extends Task {
 
     public TodoTask(String taskCommand) {
         super(taskCommand);
+        assert(taskCommand.isEmpty());
     }
 
     /**

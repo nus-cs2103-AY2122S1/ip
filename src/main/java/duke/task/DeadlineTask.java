@@ -6,6 +6,8 @@ public class DeadlineTask extends Task {
 
     public DeadlineTask(String description, String time) throws DukeException {
         super(description, time);
+        assert(description.isEmpty());
+        assert(time.isEmpty());
     }
 
     /**
