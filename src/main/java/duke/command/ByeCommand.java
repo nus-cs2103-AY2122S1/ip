@@ -1,15 +1,14 @@
 package duke.command;
 
-import duke.Duke;
+import java.util.Map;
+import java.util.Optional;
+
+import duke.util.DukeConfig;
 import duke.util.DukeDB;
 import duke.util.DukeException;
-import duke.util.DukeConfig;
 import duke.util.DukeExitException;
 import duke.util.DukeTaskList;
 import duke.util.Ui;
-
-import java.util.Map;
-import java.util.Optional;
 
 
 /**

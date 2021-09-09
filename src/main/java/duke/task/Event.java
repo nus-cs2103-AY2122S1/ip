@@ -4,7 +4,7 @@ package duke.task;
  * The event class is a task class that has an additional parameter at.
  */
 public class Event extends Task {
-    String at;
+    private String at;
 
 
     /**

@@ -1,5 +1,8 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.Optional;
+
 import duke.command.DukeCommand;
 import duke.util.DukeConfig;
 import duke.util.DukeDB;
@@ -9,9 +12,6 @@ import duke.util.DukeTaskList;
 import duke.util.Parser;
 import duke.util.Ui;
 
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.Scanner;
 
 /**
  * Class for Duke. Holds all the class variables and methods.
@@ -38,6 +38,10 @@ public class Duke {
     }
 
 
+    /**
+     * Constructor for creating duke with an input Database
+     * @param database The dukeDB to write to.
+     */
     public Duke(DukeDB database) {
         super();
         this.ui = new Ui();
@@ -47,6 +51,9 @@ public class Duke {
         this.config = new DukeConfig();
     }
 
+    /**
+     * Public constructor to init duke without a DB.
+     */
     public Duke() {
         this.ui = new Ui();
         this.database = new DukeDB(null);
@@ -71,28 +78,12 @@ public class Duke {
         return output;
     }
 
-    @Deprecated
-    public void listen() {
-        Scanner scanner = new Scanner(System.in);
-        this.ui.greet(this.list.getSize());
-        boolean shouldTerminate = true;
-        while (scanner.hasNextLine()) {
-            String scannedLine = scanner.nextLine();
-            Optional<DukeCommand> prefix = DukeCommand.getCommand(scannedLine.split(" ")[0]);
-            DukeCommand command = prefix.orElseGet(() -> DukeCommand.INVALID);
-            try {
-                command.action.run(Parser.parseCommand(scannedLine),
-                        this.list,
-                        this.database,
-                        this.config,
-                        this.ui);
-                this.database.save(this.list.getList());
-            } catch (DukeException e) {
-                this.ui.defaultPrint(e.toString());
-            }
-        }
-    }
 
+    /**
+     * Takes in an input from the user and returns an output
+     * @param input Optional string output. If empty, indicates that the user used the Bye command
+     * @return Optional String containing the output
+     */
     public Optional<String> takeInput(String input) {
         Optional<DukeCommand> prefix = DukeCommand.getCommand(input.split(" ")[0]);
         DukeCommand command = prefix.orElseGet(() -> DukeCommand.INVALID);
@@ -104,9 +95,9 @@ public class Duke {
                     this.ui);
             this.database.save(this.list.getList());
             return output;
-        } catch (DukeExitException exitException){
+        } catch (DukeExitException exitException) {
             return Optional.empty();
-        } catch(DukeException e){
+        } catch (DukeException e) {
             return Optional.of(e.toString());
         }
     }

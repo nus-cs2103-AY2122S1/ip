@@ -9,20 +9,21 @@ import java.util.Optional;
  */
 public enum DukeCommand {
 
-    BYE("bye",new ByeCommand()),
-    LIST("list", new ListCommand()),
-    DONE("done", new DoneCommand()),
-    EVENT("event", new EventCommand()),
-    DELETE("delete", new DeleteCommand()),
-    DEADLINE("deadline", new DeadlineCommand()),
-    TODO("todo", new TodoCommand()),
-    FIND("find", new FindCommand()),
-    INVALID("invalid", new InvalidCommand()),
-    HELP("help", new HelpCommand());
+    BYE("bye",
+            new ByeCommand()), LIST("list",
+            new ListCommand()), DONE("done",
+            new DoneCommand()), EVENT("event",
+            new EventCommand()), DELETE("delete",
+            new DeleteCommand()), DEADLINE("deadline",
+            new DeadlineCommand()), TODO("todo",
+            new TodoCommand()), FIND("find",
+            new FindCommand()), INVALID("invalid",
+            new InvalidCommand()), HELP("help",
+            new HelpCommand());
 
 
+    public final DukeActions action;
     final String command;
-    final public DukeActions action;
 
     /**
      * Simple constructor to initialise a duke.command.DukeCommand enum

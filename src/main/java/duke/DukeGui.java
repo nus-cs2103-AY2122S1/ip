@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.Optional;
+
 import duke.util.DukeDB;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -14,20 +16,18 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.util.Optional;
+public class DukeGui extends Application {
 
-public class DukeGUI extends Application {
-
+    private final Image userImage = new Image(this.getClass()
+            .getResourceAsStream("/images/DaUser.png"));
+    private final Image dukeImage = new Image(this.getClass()
+            .getResourceAsStream("/images/DaDuke.png"));
     private Duke duke = new Duke(new DukeDB("./data/dukeStore.txt"));
-
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-
-    private final Image USER = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image DUKE = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @Override
     public void start(Stage stage) {
@@ -93,7 +93,8 @@ public class DukeGUI extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput(stage);
         });
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        dialogContainer.heightProperty()
+                .addListener((observable) -> scrollPane.setVvalue(1.0));
 
         stage.setScene(scene);
         stage.show();
@@ -120,10 +121,11 @@ public class DukeGUI extends Application {
             stage.close();
             return "Bye.";
         }));
-        dialogContainer.getChildren().addAll(
-                DukeDialogBox.getUserDialog(userText, new ImageView(USER)),
-                DukeDialogBox.getDukeDialog(dukeText, new ImageView(DUKE))
-        );
+        dialogContainer.getChildren()
+                .addAll(DukeDialogBox.getUserDialog(userText,
+                        new ImageView(userImage)),
+                        DukeDialogBox.getDukeDialog(dukeText,
+                                new ImageView(dukeImage)));
         userInput.clear();
     }
 
