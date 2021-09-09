@@ -90,7 +90,7 @@ Example of usage:
 
 `event group project (at: 2021-09-08 18:00)`
 
-`event group project(by: 2021-09-08)`
+`event group project (at: 2021-09-08)`
 
 Expected outcome: 
 The successfully created event task will be printed out.
@@ -101,24 +101,24 @@ Got it. I've added this task: [E][ ] group project (at: Sep 08 2021, 6.00pm)
 Now you have 1 task in the list.
 ```
 
-### `find`
 
-Finds a task with a keyword.
 
-Format: `find <KEYWORD>`
+### `done`
+
+Marks a task as done.
+
+Format: `done <TASK_NUMBER>`
 
 Example of usage: 
 
-`find book`
+`done 2`
 
 Expected outcome: 
-All the tasks matching the keyword will be printed out.
+The task deleted will be printed.
 
 **Expected output:**
 ```
-Here are the tasks that matches your keyword: 
-1.[D][ ] return book (by: Sep 08 2021, 6.00pm) 
-2.[E][ ] buy book (at: Sep 09 2021, 6.00pm) 
+Nice, I've marked this task as done: [D][✓] return book (by: Sep 08 2021, 6.00pm) 
 ```
 
 
@@ -141,6 +141,29 @@ The task deleted will be printed.
 Noted, I've removed this task: [D][ ] return book (by: Sep 08 2021, 6.00pm) 
 Now you have 3 tasks in the list.
 ```
+
+
+
+### `find`
+
+Finds a task with a keyword.
+
+Format: `find <KEYWORD>`
+
+Example of usage: 
+
+`find book`
+
+Expected outcome: 
+All the tasks matching the keyword will be printed out.
+
+**Expected output:**
+```
+Here are the tasks that matches your keyword: 
+1.[D][ ] return book (by: Sep 08 2021, 6.00pm) 
+2.[E][ ] buy book (at: Sep 09 2021, 6.00pm) 
+```
+
 
 ### `bye`
 
