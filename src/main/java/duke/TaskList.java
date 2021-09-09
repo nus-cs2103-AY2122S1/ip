@@ -9,13 +9,6 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
-     * A constructor to create an empty list of tasks.
-     */
-    public TaskList() {
-        tasks = new ArrayList<>();
-    }
-
-    /**
      * A constructor to create a list of tasks with the given data.
      */
     public TaskList(ArrayList<Task> taskData) {
@@ -93,7 +86,7 @@ public class TaskList {
      * Find task(s) with a particular keyword in the task list.
      *
      * @param s Keyword to look for
-     * @return A tasklist containing all matching tasks
+     * @return A task list containing all matching tasks
      */
 
     public TaskList findTask(String s) {

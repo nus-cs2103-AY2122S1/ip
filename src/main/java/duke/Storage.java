@@ -64,7 +64,7 @@ public class Storage {
                 ));
                 break;
             default:
-                break;
+                return new ArrayList<>();
             }
         }
         return taskData;

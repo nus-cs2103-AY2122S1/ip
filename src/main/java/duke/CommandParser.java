@@ -22,32 +22,8 @@ public class CommandParser extends Parser<String[]> {
      * @throws DukeException If the command is invalid or has invalid arguments.
      */
     public String[] parse(String cmd) throws DukeException {
-        cmd = cmd.trim();
-        boolean isInvalidCommand = true;
-
-        String[] cmdSplit = cmd.split("[ \\t]+", 2);
+        String[] cmdSplit = cmdFormatValidate(cmd);
         String cmdSplitFront = cmdSplit[0];
-        for (String cmdCheck : COMMANDS_WITHOUT_ARGS) {
-            if (cmd.equals(cmdCheck)) {
-                assert(cmdSplit.length == 1);
-                return new String[]{cmd};
-            } else if (cmdSplitFront.equals(cmdCheck)) {
-                throw new DukeException("☹ OOPS!!! Unknown Argument for " + cmdCheck);
-            }
-        }
-
-        for (String cmdCheck : COMMANDS_WITH_ARGS) {
-            isInvalidCommand = isInvalidCommand && !(cmdSplitFront.equals(cmdCheck));
-        }
-
-        if (isInvalidCommand) {
-            throw new DukeException(UNKNOWN_COMMAND_MSG);
-        } else if (cmdSplit.length != 2) {
-            throw new DukeException(String.format(MISSING_ARGUMENT_TEMPLATE, cmdSplitFront));
-        } else if ((cmdSplitFront.equals("delete") || cmdSplitFront.equals("done"))
-                && !cmdSplit[1].matches("[0-9]+")) {
-            throw new DukeException(String.format(NON_NUMBER_ARGUMENT_TEMPLATE, cmdSplitFront));
-        }
 
         switch (cmdSplitFront) {
         case "todo":
@@ -75,5 +51,34 @@ public class CommandParser extends Parser<String[]> {
         default:
             return new String[]{};
         }
+    }
+
+    private String[] cmdFormatValidate(String cmd) throws DukeException {
+        String cmdTrimmed = cmd.trim();
+        boolean isInvalidCommand = true;
+        String[] cmdSplit = cmdTrimmed.split("[ \\t]+", 2);
+        String cmdSplitFront = cmdSplit[0];
+        for (String cmdCheck : COMMANDS_WITHOUT_ARGS) {
+            if (cmdTrimmed.equals(cmdCheck)) {
+                assert(cmdSplit.length == 1);
+                return new String[]{cmdTrimmed};
+            } else if (cmdSplitFront.equals(cmdCheck)) {
+                throw new DukeException("☹ OOPS!!! Unknown Argument for " + cmdCheck);
+            }
+        }
+
+        for (String cmdCheck : COMMANDS_WITH_ARGS) {
+            isInvalidCommand = isInvalidCommand && !(cmdSplitFront.equals(cmdCheck));
+        }
+
+        if (isInvalidCommand) {
+            throw new DukeException(UNKNOWN_COMMAND_MSG);
+        } else if (cmdSplit.length != 2) {
+            throw new DukeException(String.format(MISSING_ARGUMENT_TEMPLATE, cmdSplitFront));
+        } else if ((cmdSplitFront.equals("delete") || cmdSplitFront.equals("done"))
+            && !cmdSplit[1].matches("[0-9]+")) {
+            throw new DukeException(String.format(NON_NUMBER_ARGUMENT_TEMPLATE, cmdSplitFront));
+        }
+        return cmdSplit;
     }
 }
