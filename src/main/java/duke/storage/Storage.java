@@ -43,11 +43,11 @@ public class Storage {
      */
     public static void checkFile() throws IOException {
         final Path p = Paths.get(PATH);
-        final String DIRECTORY = p.getParent().toString();
-        final String FILENAME = p.getFileName().toString();
+        final String directory = p.getParent().toString();
+        final String filename = p.getFileName().toString();
 
-        File file = new File(FILENAME);
-        File dir = new File(DIRECTORY);
+        File file = new File(filename);
+        File dir = new File(directory);
 
         if (!dir.exists()) {
             dir.mkdirs();
@@ -76,25 +76,25 @@ public class Storage {
                 String description = words[2];
 
                 switch (type) {
-                    case "T":
-                        Parser todoParser = new Parser("todo " + description);
-                        String todo = todoParser.getTodoDescription();
-                        tasks.add(new Todo(todo, isDone));
-                        break;
-                    case "D":
-                        Parser deadlineParser = new Parser("deadline " + description);
-                        String deadline = deadlineParser.getDeadlineDescription();
-                        String date = deadlineParser.getDeadlineDate();
-                        tasks.add(new Deadline(deadline, date, isDone));
-                        break;
-                    case "E":
-                        Parser eventParser = new Parser("event " + description);
-                        String event = eventParser.getEventDescription();
-                        String duration = eventParser.getEventDate();
-                        tasks.add(new Event(event, duration, isDone));
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected type: " + type);
+                case "T":
+                    Parser todoParser = new Parser("todo " + description);
+                    String todo = todoParser.getTodoDescription();
+                    tasks.add(new Todo(todo, isDone));
+                    break;
+                case "D":
+                    Parser deadlineParser = new Parser("deadline " + description);
+                    String deadline = deadlineParser.getDeadlineDescription();
+                    String date = deadlineParser.getDeadlineDate();
+                    tasks.add(new Deadline(deadline, date, isDone));
+                    break;
+                case "E":
+                    Parser eventParser = new Parser("event " + description);
+                    String event = eventParser.getEventDescription();
+                    String duration = eventParser.getEventDate();
+                    tasks.add(new Event(event, duration, isDone));
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected type: " + type);
                 }
             }
             System.out.println("Finished loading saved file.");

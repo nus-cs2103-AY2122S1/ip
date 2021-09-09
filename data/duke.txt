@@ -1,5 +1,3 @@
 D, false, borrow book /by 2021-02-06T18:00
-T, true, return book /by 
 T, false, read me
-T, true, me
 E, false, project meeting /from 2021-02-04T18:00 /to 2021-02-05T23:59

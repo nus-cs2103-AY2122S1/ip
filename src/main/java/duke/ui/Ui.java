@@ -7,7 +7,6 @@ package duke.ui;
  * @version CS2103T AY21/22 Semester 1
  */
 public class Ui {
-    private static String DIVIDER = "____________________________________________________________";
 
     /**
      * Shows a welcome message from chat bot.
@@ -19,10 +18,7 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Duke: Hello from\n" + logo);
-
-        System.out.println(DIVIDER);
         System.out.println("Duke: Hello! I'm Duke\nWhat can I do for you?");
-        System.out.println(DIVIDER);
     }
 
     /**

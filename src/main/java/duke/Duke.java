@@ -69,8 +69,7 @@ public class Duke {
         } catch (DukeException e) {
             response = e.getMessage();
         }
-
-        return "duke: " + response;
+        return response;
     }
 }
 

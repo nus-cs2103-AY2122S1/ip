@@ -16,7 +16,6 @@ import java.time.format.DateTimeParseException;
  * @version CS2103T AY21/22 Semester 1
  */
 public class Parser {
-    private static String DIVIDER = "____________________________________________________________";
     private String input;
     private String[] inputCommandAndDescription;
 
@@ -73,7 +72,7 @@ public class Parser {
      *
      * @return String description of the deadline task.
      * @throws EmptyDescriptionException If user input an empty description.
-     * @throws DeadlineFormatException If user input an invalid deadline format.
+     * @throws DeadlineFormatException   If user input an invalid deadline format.
      */
     public String getDeadlineDescription() throws EmptyDescriptionException, DeadlineFormatException {
         if (inputCommandAndDescription.length == 1) {
@@ -105,12 +104,13 @@ public class Parser {
      *
      * @return String description of the event task.
      * @throws EmptyDescriptionException If user input an empty description.
-     * @throws EventFormatException If user input an invalid event format.
+     * @throws EventFormatException      If user input an invalid event format.
      */
     public String getEventDescription() throws EmptyDescriptionException, EventFormatException {
         if (inputCommandAndDescription.length == 1) {
             throw new EmptyDescriptionException();
-        } else if (!inputCommandAndDescription[1].contains("/from ") || !inputCommandAndDescription[1].contains("/to ")) {
+        } else if (!inputCommandAndDescription[1].contains("/from ")
+                || !inputCommandAndDescription[1].contains("/to ")) {
             throw new EventFormatException();
         }
         String eventDescription = inputCommandAndDescription[1];
