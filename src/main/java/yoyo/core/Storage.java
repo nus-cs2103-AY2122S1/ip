@@ -12,18 +12,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 import static yoyo.utility.Constant.NEWLINE_CHAR;
 import static yoyo.utility.Constant.COMMA_SEPARATOR;
 
+/**
+ * Storage class that represents the storage component of Yoyo program.
+ */
 public class Storage {
-    /**Index of where type info is stored in the line string being read*/
     private static final int STR_INDEX_TYPE = 1;
-    /**Index of where isDone info is stored in the line string being read*/
     private static final int STR_INDEX_ISDONE = 4;
-    /**Index of where name is stored in the token array being read*/
     private static final int ARRAY_INDEX_NAME = 1;
-    /**Index of where date time info is stored in the token array being read*/
     private static final int ARRAY_INDEX_DATETIME = 2;
     private static final Character CHAR_CROSS = 'X';
     private static final Character CHAR_TODO = 'T';
@@ -59,91 +59,6 @@ public class Storage {
     }
 
     /**
-     * Reads a file and returns a Tasklist consisting of tasks listed in the file.
-     *
-     * @return A TaskList instance consisting of tasks listed in the file.
-     * @throws YoyoException
-     */
-    public TaskList load() throws YoyoException {
-        return readExistingTasks(this.file);
-    }
-
-    /**
-     * Reads a file and returns a Tasklist consisting of tasks listed in the file.
-     *
-     * @param f File to be read.
-     * @return A TaskList instance consisting of tasks listed in the file.
-     * @throws YoyoException
-     */
-    private TaskList readExistingTasks(File f) throws YoyoException {
-        TaskList tasks = new TaskList();
-        try {
-            Scanner s = new Scanner(f);
-
-            while (s.hasNext()) {
-                String currLine = s.nextLine();
-                addTaskFromLine(tasks, currLine);
-            }
-            return tasks;
-        } catch (FileNotFoundException e) {
-            throw new YoyoException("Critical Error! File exists but could not be found.");
-        }
-    }
-
-    /**
-     * Adds new task to task list from loaded line.
-     *
-     * @param tasks    Main Tasklist.
-     * @param currLine The line to be parsed.
-     */
-    private void addTaskFromLine(TaskList tasks, String currLine) {
-        boolean isTaskComplete = currLine.charAt(STR_INDEX_ISDONE) == CHAR_CROSS;
-
-        char typeChar = currLine.charAt(STR_INDEX_TYPE);
-        TaskType currType = getTaskType(typeChar);
-
-        String[] currTokenArr = currLine.split(COMMA_SEPARATOR);
-
-        String[] tagsArray;
-        if (currType.equals(TaskType.TODO)) {
-                tagsArray = subArray(3, currTokenArr);
-        } else {
-            tagsArray = subArray(4, currTokenArr);
-        }
-
-        switch (currType) {
-        case TODO:
-            tasks.add(new Todo(currTokenArr[ARRAY_INDEX_NAME], isTaskComplete, tagsArray));
-            break;
-        case EVENT:
-            tasks.add(new Event(currTokenArr[ARRAY_INDEX_NAME],
-                    LocalDateTime.parse(currTokenArr[ARRAY_INDEX_DATETIME]),
-                    isTaskComplete, tagsArray));
-            break;
-        case DEADLINE:
-            tasks.add(new Deadline(currTokenArr[ARRAY_INDEX_NAME],
-                    LocalDateTime.parse(currTokenArr[ARRAY_INDEX_DATETIME]),
-                    isTaskComplete, tagsArray));
-            break;
-        default:
-            assert false : "Something went wrong with save file format";
-        }
-    }
-
-    private String[] subArray(int i, String[] currTokenArr) {
-//        intStream.range()
-    }
-
-    private TaskType getTaskType(char typeChar) {
-        TaskType currType = typeChar == CHAR_TODO
-                ? TaskType.TODO
-                : typeChar == CHAR_DEADLINE
-                ? TaskType.DEADLINE
-                : TaskType.EVENT;
-        return currType;
-    }
-
-    /**
      * Writes all of input TaskList's tasks to the file at storage's data path.
      *
      * @param tasks TaskList of the program.
@@ -165,5 +80,98 @@ public class Storage {
                     + NEWLINE_CHAR
                     + e.getMessage());
         }
+    }
+
+    /**
+     * Reads a file and returns a Tasklist consisting of tasks listed in the file.
+     *
+     * @return A TaskList instance consisting of tasks listed in the file.
+     * @throws YoyoException
+     */
+    public TaskList load() throws YoyoException {
+        return readExistingTasks(this.file);
+    }
+
+    private TaskList readExistingTasks(File f) throws YoyoException {
+        TaskList tasks = new TaskList();
+        try {
+            Scanner s = new Scanner(f);
+
+            while (s.hasNext()) {
+                String currLine = s.nextLine();
+                addTaskFromLine(tasks, currLine);
+            }
+            return tasks;
+        } catch (FileNotFoundException e) {
+            throw new YoyoException("Critical Error! File exists but could not be found.");
+        }
+    }
+
+    private void addTaskFromLine(TaskList tasks, String currLine) {
+        String[] currTokenArr = currLine.split(COMMA_SEPARATOR);
+
+        //get type of task
+        char typeChar = currLine.charAt(STR_INDEX_TYPE);
+        TaskType currType = getTaskType(typeChar);
+
+        //get info needed for creating this type of task
+        String[] tagsArray = getTagsArray(currType, currTokenArr);
+        LocalDateTime taskDateTime = getTaskDateTime(currTokenArr, currType);
+        String taskName = currTokenArr[ARRAY_INDEX_NAME];
+        boolean isTaskComplete = currLine.charAt(STR_INDEX_ISDONE) == CHAR_CROSS;
+
+        addTask(tasks, currType, tagsArray, taskName, taskDateTime, isTaskComplete);
+    }
+
+    private LocalDateTime getTaskDateTime(String[] currTokenArr, TaskType currType) {
+        if (currType.equals(TaskType.TODO)) {
+            return null;
+        }
+        return LocalDateTime.parse(currTokenArr[ARRAY_INDEX_DATETIME]);
+    }
+
+    private void addTask(TaskList tasks, TaskType currType, String[] tagsArray, String taskName,
+                         LocalDateTime taskDateTime, boolean isTaskComplete) {
+        switch (currType) {
+        case TODO:
+            tasks.add(new Todo(taskName, isTaskComplete, tagsArray));
+            break;
+        case EVENT:
+            tasks.add(new Event(taskName, taskDateTime, isTaskComplete, tagsArray));
+            break;
+        case DEADLINE:
+            tasks.add(new Deadline(taskName, taskDateTime, isTaskComplete, tagsArray));
+            break;
+        default:
+            assert false : "Something went wrong with save file format";
+        }
+    }
+
+    private String[] getTagsArray(TaskType currType, String[] currTokenArr) {
+        String[] tagsArray;
+        if (currType.equals(TaskType.TODO)) { //deadline name time t1 t2
+            assert currTokenArr.length > 1 : "Error in storage formatting code";
+            tagsArray = skipArray(2, currTokenArr);
+        } else {
+            assert currTokenArr.length > 2 : "Error in storage formatting code";
+            tagsArray = skipArray(3, currTokenArr);
+        }
+        return tagsArray;
+    }
+
+    private String[] skipArray(int i, String[] currTokenArr) {
+        Stream<String> tokenStream = Stream.of(currTokenArr);
+        String[] result = tokenStream.skip(i)
+                .toArray(String[]::new);
+        return result;
+    }
+
+    private TaskType getTaskType(char typeChar) {
+        TaskType currType = typeChar == CHAR_TODO
+                ? TaskType.TODO
+                : typeChar == CHAR_DEADLINE
+                ? TaskType.DEADLINE
+                : TaskType.EVENT;
+        return currType;
     }
 }

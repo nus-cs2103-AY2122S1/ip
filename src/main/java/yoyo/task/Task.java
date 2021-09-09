@@ -14,8 +14,7 @@ public abstract class Task {
 
     public Task(String name) {
         this.name = name;
-        tags.add("test1");
-        tags.add("test2");
+
     }
 
     public Task(String name, boolean isDone) {
@@ -58,7 +57,25 @@ public abstract class Task {
             }
             result += "#" + tags.get(length - 1);
         }
-        System.out.println(result);
+        return result;
+    }
+
+    /**
+     * Returns string displaying all tags belonging to this task in write format.
+     *
+     * @return String about tags in ", tag1, tag2 ..." format.
+     */
+    public String showTagsWriteFormat() {
+        int length = tags.size();
+        if (length == 0) {
+            return "";
+        }
+        String result = COMMA_SEPARATOR;
+        for (int i = 0; i < length - 1; i++) {
+            String toAdd = tags.get(i) + COMMA_SEPARATOR;
+            result += toAdd;
+        }
+        result += tags.get(length - 1);
         return result;
     }
 
@@ -116,9 +133,7 @@ public abstract class Task {
                 + WHITESPACE
                 + name
                 + WHITESPACE
-                + showTimeInfo()
-                + WHITESPACE
-                + this.showTags();
+                + showTags();
 
     }
 
@@ -130,8 +145,9 @@ public abstract class Task {
     public String showStatusWrite() {
         return this.printType()
                 + this.printCompletionStatus()
-                + COMMA_SEPARATOR + this.name;
-
+                + COMMA_SEPARATOR
+                + this.name
+                + this.showTagsWriteFormat();
     }
 
     /**

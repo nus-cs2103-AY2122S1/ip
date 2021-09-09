@@ -5,11 +5,10 @@ import yoyo.task.TaskList;
 
 import static yoyo.utility.Constant.NEWLINE_CHAR;
 
-
+/**
+ * Dialog handler class that represents the component of Yoyo program that handles dialog.
+ */
 public class DialogHandler {
-    public DialogHandler() {
-    }
-
     /**
      * Say goodbye to users.
      */
@@ -117,5 +116,4 @@ public class DialogHandler {
                 + NEWLINE_CHAR;
         return res;
     }
-
 }

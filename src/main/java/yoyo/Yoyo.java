@@ -38,7 +38,6 @@ public class Yoyo {
         } catch (YoyoException e) {
             return e.getMessage();
         }
-
     }
 
 }

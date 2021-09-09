@@ -2,9 +2,8 @@ package yoyo.task;
 
 import java.time.LocalDateTime;
 
-import yoyo.utility.Constant;
-
 import static yoyo.utility.Constant.COMMA_SEPARATOR;
+import static yoyo.utility.Constant.WHITESPACE;
 
 /**
  * A subclass of Task of event type.
@@ -15,7 +14,7 @@ public class Event extends Task {
     /**
      * Constructor for the Event class with name and datetime parameters.
      *
-     * @param name Name of Event.
+     * @param name     Name of Event.
      * @param datetime Datetime of Event.
      */
     public Event(String name, LocalDateTime datetime) {
@@ -26,9 +25,9 @@ public class Event extends Task {
     /**
      * Constructor for the Event class with name, datetime and isDone parameters.
      *
-     * @param name Name of Event.
+     * @param name     Name of Event.
      * @param datetime Datetime of Event.
-     * @param isDone Completion status of task.
+     * @param isDone   Completion status of task.
      */
     public Event(String name, LocalDateTime datetime, boolean isDone) {
         super(name, isDone);
@@ -38,10 +37,10 @@ public class Event extends Task {
     /**
      * Constructor for the Event class with name, datetime, isDone and tags parameters.
      *
-     * @param name Name of Deadline.
+     * @param name     Name of Deadline.
      * @param datetime Datetime of Deadline.
-     * @param isDone Completion status of task.
-     * @param tags Tags of the task.
+     * @param isDone   Completion status of task.
+     * @param tags     Tags of the task.
      */
     public Event(String name, LocalDateTime datetime, boolean isDone, String[] tags) {
         super(name, isDone, tags);
@@ -51,6 +50,28 @@ public class Event extends Task {
     @Override
     public String showTimeInfo() {
         return "(at: " + datetime.toString().replace('T', ' ') + ")";
+    }
+
+
+    /**
+     * Produces a string containing task's status.
+     *
+     * @return a string containing task's status.
+     */
+    @Override
+    public String showStatus() {
+        String resultString  = printType()
+                + printCompletionStatus()
+                + WHITESPACE
+                + name
+                + WHITESPACE
+                + showTimeInfo();
+
+        if (tags.size() == 0) {
+            return resultString;
+        }
+
+        return resultString + WHITESPACE + showTags();
     }
 
     /**
@@ -63,7 +84,8 @@ public class Event extends Task {
         return this.printType()
                 + this.printCompletionStatus()
                 + COMMA_SEPARATOR + this.name
-                + COMMA_SEPARATOR + this.datetime;
+                + COMMA_SEPARATOR + this.datetime
+                + this.showTagsWriteFormat();
     }
 
     /**

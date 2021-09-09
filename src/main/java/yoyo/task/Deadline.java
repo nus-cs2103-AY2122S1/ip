@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import yoyo.utility.Constant;
 
+import static yoyo.utility.Constant.WHITESPACE;
+
 
 /**
  * A subclass of duke.task.Task of deadline type.
@@ -55,7 +57,26 @@ public class Deadline extends Task {
         return "(by: " + datetime.toString().replace('T', ' ') + ")";
     }
 
+    /**
+     * Produces a string containing task's status.
+     *
+     * @return a string containing task's status.
+     */
+    @Override
+    public String showStatus() {
+        String resultString  = printType()
+                + printCompletionStatus()
+                + WHITESPACE
+                + name
+                + WHITESPACE
+                + showTimeInfo();
 
+        if (tags.size() == 0) {
+            return resultString;
+        }
+
+        return resultString + WHITESPACE + showTags();
+    }
 
     /**
      * Produces a string containing task's status in write format.
@@ -67,7 +88,8 @@ public class Deadline extends Task {
         return this.printType()
                 + this.printCompletionStatus()
                 + Constant.COMMA_SEPARATOR + this.name
-                + Constant.COMMA_SEPARATOR + this.datetime;
+                + Constant.COMMA_SEPARATOR + this.datetime
+                + this.showTagsWriteFormat();
     }
 
     /**
