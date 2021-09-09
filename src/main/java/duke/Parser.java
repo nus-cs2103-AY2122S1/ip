@@ -26,11 +26,16 @@ public class Parser {
      */
 
     public void parsing(String input) {
+        if (input.equals("list") || input.equals("bye")) {
+            this.command = input;
+            return;
+        }
+
         String[] parsedInput = input.split(" ", 2);
         String eventType = parsedInput[0];
         this.command = eventType;
 
-        if (this.command.equals("deadline")){
+        if (this.command.equals("deadline")) {
             String[] parsedAgain = parsedInput[1].split(" /by ", 2);
             this.taskName = parsedAgain[0];
             this.deadlineOrTimeline = parsedAgain[1];
@@ -38,16 +43,12 @@ public class Parser {
             String[] parsedAgain = parsedInput[1].split(" /at ", 2);
             this.taskName = parsedAgain[0];
             this.deadlineOrTimeline = parsedAgain[1];
-        } else if (this.command.equals("todo")) {
+        } else if (this.command.equals("todo") || this.command.equals("done")
+                || this.command.equals("remove") || this.command.equals("find")
+                || this.command.equals("schedule")) {
             this.taskName = parsedInput[1];
-        } else if (this.command.equals("bye")){
-
-        } else if (this.command.equals("done")) {
-            this.taskName = parsedInput[1];
-        } else if (this.command.equals("remove")) {
-            this.taskName = parsedInput[1];
-        } else if (this.command.equals("find")) {
-            this.taskName = parsedInput[1];
+        } else {
+            throw new DukeException("parse");
         }
     }
 
