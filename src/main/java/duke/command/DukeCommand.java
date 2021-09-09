@@ -17,7 +17,8 @@ public enum DukeCommand {
     DEADLINE("deadline", new DeadlineCommand()),
     TODO("todo", new TodoCommand()),
     FIND("find", new FindCommand()),
-    INVALID("invalid", new InvalidCommand());
+    INVALID("invalid", new InvalidCommand()),
+    HELP("help", new HelpCommand());
 
 
     final String command;
