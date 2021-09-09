@@ -173,6 +173,7 @@ public class Storage {
      * what is stored in the list.
      *
      * @param taskList The list containing the tasks.
+     * @throws DukeException if file cannot be edited.
      */
     public void editFileAll(TaskList taskList) throws DukeException {
         for (int i = 0; i < taskList.size(); i++) {
@@ -191,13 +192,13 @@ public class Storage {
      *
      * @param content The content to be added into the file.
      */
-    public void editFile(String content) {
+    public void editFile(String content) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);
-            fw.write(System.lineSeparator() + content);
+            fw.write(content);
             fw.close();
         } catch (IOException e) {
-            System.out.println("OH NO :( "
+            throw new DukeException("OH NO :( "
                     + "There seems to be something wrong with the file.");
         }
     }
@@ -206,6 +207,7 @@ public class Storage {
      * Appends content to the file.
      *
      * @param content The content to be appended.
+     * @throws DukeException if file cannot be edited.
      */
     public void appendToFile(String content) throws DukeException {
         try {

@@ -41,13 +41,13 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String toDelete = ui.removeTask(tasks.get(index - 1));
         tasks.delete(index);
         try {
             storage.editFileAll(tasks);
         } catch(DukeException e) {
             return e.getMessage();
         }
-        return ui.removeTask(tasks.get(index - 1))
-                + ui.numberOfTasks(tasks);
+        return toDelete + ui.numberOfTasks(tasks);
     }
 }
