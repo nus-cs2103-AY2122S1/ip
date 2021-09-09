@@ -40,4 +40,8 @@ public class Deadline extends Task {
     public String toDb() {
         return "D | " + super.toDb() + " | " + this.by;
     }
+
+    public LocalDateTime getDate() {
+        return by;
+    }
 }

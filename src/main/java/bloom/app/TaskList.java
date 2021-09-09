@@ -1,9 +1,15 @@
 package bloom.app;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import bloom.task.Deadline;
+import bloom.task.Event;
 import bloom.task.Task;
+import bloom.task.ToDo;
 
 
 /**
@@ -57,5 +63,17 @@ public class TaskList {
      */
     public static Task delete(int index) {
         return TaskList.tasks.remove(index);
+    }
+
+    /**
+     * Prints upcoming tasks after a specific input date.
+     *
+     * @param dateTime the input date
+     * @return         the upcoming tasks
+     */
+    public static List<Task> printUpcomingTaskList(LocalDateTime dateTime) {
+        return tasks.stream()
+                .filter(t -> t.getDate().isBefore(dateTime))
+                .collect(Collectors.toList());
     }
 }

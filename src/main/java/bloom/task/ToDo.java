@@ -1,5 +1,7 @@
 package bloom.task;
 
+import java.time.LocalDateTime;
+
 public class ToDo extends Task {
 
     /**
@@ -29,5 +31,10 @@ public class ToDo extends Task {
     @Override
     public String toDb() {
         return "T | " + super.toDb();
+    }
+
+    @Override
+    public LocalDateTime getDate() {
+        return null;
     }
 }

@@ -1,9 +1,11 @@
 package bloom.task;
 
+import java.time.LocalDateTime;
+
 /**
  * Represents a general task.
  */
-public class Task {
+public abstract class Task {
 
     /** The description of the task. */
     protected final String description;
@@ -69,4 +71,6 @@ public class Task {
     public void setNote(String note) {
         this.note = note;
     }
+
+    public abstract LocalDateTime getDate();
 }

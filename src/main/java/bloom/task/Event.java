@@ -40,4 +40,8 @@ public class Event extends Task {
     public String toDb() {
         return "E | " + super.toDb() + " | " + this.at;
     }
+
+    public LocalDateTime getDate() {
+        return at;
+    }
 }
