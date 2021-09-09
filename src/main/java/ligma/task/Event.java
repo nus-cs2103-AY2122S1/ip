@@ -11,13 +11,13 @@ import java.util.InputMismatchException;
 public class Event extends Task {
     private LocalDate time;
 
-    private Event(String details, LocalDate time) {
-        super(details);
+    private Event(String details, LocalDate time, String meta) {
+        super(details, meta);
         this.time = time;
     }
 
-    private Event(String details, LocalDate time, boolean isDone) {
-        super(details, isDone);
+    private Event(String details, LocalDate time, boolean isDone, String meta) {
+        super(details, isDone, meta);
         this.time = time;
     }
 
@@ -30,11 +30,15 @@ public class Event extends Task {
      * @throws DateTimeParseException   if format of time is wrong
      */
     public static Event createEvent(String desc)
-            throws InputMismatchException, DateTimeParseException {
+            throws InputMismatchException {
         if (desc.contains("/at")) {
             String[] arr = desc.split("/at");
-            LocalDate time = LocalDate.parse(arr[1].trim());
-            return new Event(arr[0].trim(), time);
+            try {
+                LocalDate time = LocalDate.parse(arr[1].trim());
+                return new Event(arr[0].trim(), time, desc);
+            } catch (DateTimeParseException e) {
+                throw new InputMismatchException("Time must be in yyyy-mm-dd format.");
+            }
         } else {
             throw new InputMismatchException("Time must be stipulated for events using '/at'.");
         }
@@ -50,16 +54,18 @@ public class Event extends Task {
      * @throws DateTimeParseException   if format of time is wrong
      */
     public static Event createEvent(String desc, boolean isDone) throws InputMismatchException {
-        if (desc.contains("at")) {
-            int i = desc.indexOf('(');
-            LocalDate time = LocalDate.parse(desc.substring(i + 5, desc.length() - 1),
-                    DateTimeFormatter.ofPattern("MMM d yyyy"));
-            return new Event(desc.substring(0, i - 1),
-                    time,
-                    isDone);
+        if (desc.contains("/at")) {
+            String[] arr = desc.split("/at");
+            LocalDate time = LocalDate.parse(arr[1].trim());
+            return new Event(arr[0].trim(), time, isDone, desc);
         } else {
-            throw new InputMismatchException();
+            throw new InputMismatchException("Time must be stipulated for events using '/at'.");
         }
+    }
+
+    @Override
+    public String getFullMeta() {
+        return "E" + super.getFullMeta();
     }
 
     @Override

@@ -11,13 +11,13 @@ import java.util.InputMismatchException;
 public class Deadline extends Task {
     private LocalDate time;
 
-    private Deadline(String details, LocalDate time) {
-        super(details);
+    private Deadline(String details, LocalDate time, String meta) {
+        super(details, meta);
         this.time = time;
     }
 
-    private Deadline(String details, LocalDate time, boolean isDone) {
-        super(details, isDone);
+    private Deadline(String details, LocalDate time, boolean isDone, String meta) {
+        super(details, isDone, meta);
         this.time = time;
     }
 
@@ -34,7 +34,7 @@ public class Deadline extends Task {
         if (desc.contains("/by")) {
             String[] arr = desc.split("/by");
             LocalDate time = LocalDate.parse(arr[1].trim());
-            return new Deadline(arr[0].trim(), time);
+            return new Deadline(arr[0].trim(), time, desc);
         } else {
             throw new InputMismatchException("Time must be stipulated for deadlines using '/by'.");
         }
@@ -50,16 +50,18 @@ public class Deadline extends Task {
      * @throws DateTimeParseException   if format of time is wrong
      */
     public static Deadline createDeadline(String desc, boolean isDone) throws InputMismatchException {
-        if (desc.contains("by")) {
-            int i = desc.indexOf('(');
-            LocalDate time = LocalDate.parse(desc.substring(i + 5, desc.length() - 1),
-                    DateTimeFormatter.ofPattern("MMM d yyyy"));
-            return new Deadline(desc.substring(0, i - 1),
-                    time,
-                    isDone);
+        if (desc.contains("/by")) {
+            String[] arr = desc.split("/by");
+            LocalDate time = LocalDate.parse(arr[1].trim());
+            return new Deadline(arr[0].trim(), time, isDone, desc);
         } else {
-            throw new InputMismatchException("");
+            throw new InputMismatchException("Time must be stipulated for deadlines using '/by'.");
         }
+    }
+
+    @Override
+    public String getFullMeta() {
+        return "D" + super.getFullMeta();
     }
 
     @Override

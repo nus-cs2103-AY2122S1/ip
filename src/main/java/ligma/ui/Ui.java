@@ -12,6 +12,9 @@ public class Ui {
      * @param tasks tasklist whose tasks are to be printed
      */
     public static String getStringTaskList(TaskList tasks) {
+        if (tasks.isEmpty()) {
+            return "No tasks.";
+        }
         String[] tasksText = tasks.getStringArr();
         int len = tasksText.length;
         String reply = "1." + tasksText[0];

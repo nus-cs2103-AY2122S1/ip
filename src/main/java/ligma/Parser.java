@@ -10,10 +10,7 @@ import ligma.command.DoneCommand;
 import ligma.command.ExitCommand;
 import ligma.command.FindCommand;
 import ligma.command.ListCommand;
-import ligma.task.Deadline;
-import ligma.task.Event;
-import ligma.task.Task;
-import ligma.task.Todo;
+import ligma.task.*;
 
 /**
  * This class contains functions that help parse strings into
@@ -52,6 +49,8 @@ public class Parser {
                 return new AddCommand(Task.TaskType.EVENT, description);
             case "deadline":
                 return new AddCommand(Task.TaskType.DEADLINE, description);
+            case "recur":
+                return new AddCommand(Task.TaskType.RECURRING, description);
             case "done":
                 return new DoneCommand(extractItemIndex(splitInd, input));
             case "delete":
@@ -65,8 +64,7 @@ public class Parser {
     }
 
     private static int extractItemIndex(int splitInd, String input) {
-        return Character
-                .getNumericValue(input.charAt(splitInd + 1)) - 1;
+        return (Character.getNumericValue(input.charAt(splitInd + 1))) - 1;
     }
 
     private static Command handleBadCommands(String action)
@@ -75,6 +73,7 @@ public class Parser {
         case "todo":
         case "event":
         case "deadline":
+        case "recur":
             throw new InputMismatchException(
                     String.format("The description of %s cannot be empty.",
                             action.toUpperCase()));
@@ -98,16 +97,20 @@ public class Parser {
      * @throws DateTimeParseException if time of task is improperly formatted
      */
     public static Task parseFileContent(String s) throws IllegalArgumentException {
-        char taskType = s.charAt(1);
-        String desc = s.substring(7);
-        boolean isDone = s.charAt(4) == 'X';
+        String statusAndDeets[] = s.split(" ", 3);
+        String taskType = statusAndDeets[0].trim();
+        boolean isDone = Boolean.valueOf(statusAndDeets[1].trim());
+        String desc = statusAndDeets[2].trim();
+
         switch (taskType) {
-        case 'T':
+        case "T":
             return new Todo(desc, isDone);
-        case 'D':
+        case "D":
             return Deadline.createDeadline(desc, isDone);
-        case 'E':
+        case "E":
             return Event.createEvent(desc, isDone);
+        case "R":
+            return Recurring.createRecurring(desc, isDone);
         default:
             throw new IllegalArgumentException("File improperly formatted");
         }

@@ -66,6 +66,26 @@ public class TaskList {
     }
 
     /**
+     * Converts all tasks in this tasklist to a string array.
+     *
+     * @return the converted string array
+     */
+    public String[] getMetaTasks() {
+        return tasks.stream()
+                .map(Task::getFullMeta)
+                .toArray(String[]::new);
+    }
+
+    /**
+     * Checks if there are any tasks right now.
+     *
+     * @return true if no tasks exist
+     */
+    public boolean isEmpty() {
+        return tasks.isEmpty();
+    }
+
+    /**
      * Searches for tasks containing the target string.
      *
      * @param target string to search for in task descriptions

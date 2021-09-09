@@ -44,7 +44,7 @@ public class Ligma {
                 | IllegalArgumentException e1) {
             return e1.getMessage();
         } catch (DateTimeParseException e2) {
-            return "Time must be in yyyy-mm-dd format.";
+            return e2.getMessage();
         }
     }
 

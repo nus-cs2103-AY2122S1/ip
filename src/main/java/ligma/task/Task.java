@@ -5,9 +5,10 @@ package ligma.task;
  */
 public class Task {
     public enum TaskType {
-        TODO, EVENT, DEADLINE
+        TODO, EVENT, DEADLINE, RECURRING
     }
     private String desc;
+    private String meta;
     private boolean isDone;
 
     /**
@@ -16,9 +17,10 @@ public class Task {
      * @param desc                      the description of the task
      * @return                          task created
      */
-    public Task(String desc) {
-        assert(desc.trim() != "") : "Todo is empty";
+    public Task(String desc, String meta) {
+        assert(desc.trim() != "") : "Task description is empty";
         this.desc = desc;
+        this.meta = meta;
         this.isDone = false;
     }
 
@@ -29,9 +31,10 @@ public class Task {
      * @param isDone                    whether task has been completed
      * @return                          task created
      */
-    public Task(String desc, boolean isDone) {
-        assert(desc.trim() != "") : "Todo is empty";
+    public Task(String desc, boolean isDone, String meta) {
+        assert(desc.trim() != "") : "Task description is empty";
         this.desc = desc;
+        this.meta = meta;
         this.isDone = isDone;
     }
 
@@ -55,13 +58,22 @@ public class Task {
     }
 
     /**
-     * Determine if task contains target string.
+     * Determines if task contains target string.
      *
      * @param target string to search for in task description
      * @return true if it's a match, false otherwise
      */
     public boolean match(String target) {
         return desc.contains(target);
+    }
+
+    /**
+     * Returns meta details about task for storage purposes.
+     *
+     * @return meta details for task creation upon reload
+     */
+    public String getFullMeta() {
+        return " " + isDone + " " + meta;
     }
 
     @Override

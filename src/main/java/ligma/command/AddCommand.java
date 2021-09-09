@@ -4,11 +4,8 @@ import java.io.IOException;
 
 import ligma.Storage;
 import ligma.TaskList;
+import ligma.task.*;
 import ligma.ui.Ui;
-import ligma.task.Deadline;
-import ligma.task.Event;
-import ligma.task.Task;
-import ligma.task.Todo;
 
 /**
  * This class represents a command to add a task.
@@ -28,6 +25,8 @@ public class AddCommand implements Command {
             return Event.createEvent(desc);
         case DEADLINE:
             return Deadline.createDeadline(desc);
+        case RECURRING:
+            return Recurring.createRecurring(desc);
         default:
             return null;
         }
@@ -43,7 +42,7 @@ public class AddCommand implements Command {
     public String execute(TaskList tasks, Storage storage) {
         try {
             tasks.addTask(task);
-            storage.saveTask(task);
+            storage.saveTaskList(tasks);
             return Ui.getSuccessMessage("added:\n" + task.toString());
         } catch (IOException e) {
             return "Failed to save task to storage: \n" + task;

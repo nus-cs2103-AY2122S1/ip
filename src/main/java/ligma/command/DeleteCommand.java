@@ -14,7 +14,7 @@ public class DeleteCommand implements Command {
     private int index;
 
     public DeleteCommand(int index) {
-        if (index <= 0) {
+        if (index < 0) {
             throw new IllegalArgumentException("Index is must be more than zero.");
         }
         this.index = index;
@@ -34,7 +34,7 @@ public class DeleteCommand implements Command {
         Task t = tasks.deleteTask(index);
 
         try {
-            storage.deleteTask(t);
+            storage.saveTaskList(tasks);
             return Ui.getSuccessMessage("deleted:\n" + t
                     + String.format("\n You now have %d task(s).", tasks.getTaskAmt()));
         } catch (IOException e) {

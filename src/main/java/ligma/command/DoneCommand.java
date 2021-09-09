@@ -14,7 +14,7 @@ public class DoneCommand implements Command {
     private int index;
 
     public DoneCommand(int index) {
-        if (index <= 0) {
+        if (index < 0) {
             throw new IllegalArgumentException("Index is must be more than zero.");
         }
         this.index = index;
@@ -35,7 +35,7 @@ public class DoneCommand implements Command {
         Task t = tasks.markAsDone(index);
 
         try {
-            storage.markDone(t);
+            storage.saveTaskList(tasks);
             return Ui.getSuccessMessage("marked as done:\n" + t);
         } catch (IOException e) {
             return "Failed to update task in storage: \n" + t;

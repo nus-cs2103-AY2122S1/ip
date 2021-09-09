@@ -43,9 +43,32 @@ public class Storage {
     }
 
     /**
-     * Saves tasks to file.
+     * Saves TaskList to file.
      *
-     * @param task          task to be saved to file
+     * @param tasks         TaskList to be saved to file
+     * @throws IOException  if there was an error in writing to file
+     */
+    public void saveTaskList(TaskList tasks) throws IOException {
+        if (tasks.isEmpty()) {
+            return;
+        }
+        FileWriter fw = new FileWriter(f);
+        if (f.length() != 0) {
+            fw.write(System.lineSeparator());
+        }
+        String[] contents = tasks.getMetaTasks();
+        int len = contents.length;
+        for (int i = 0; i < len - 1; i++) {
+            fw.write(contents[i] + "\n");
+        }
+        fw.write(contents[len - 1]);
+        fw.close();
+    }
+
+    /**
+     * Saves Task to file.
+     *
+     * @param task         Task to be saved to file
      * @throws IOException  if there was an error in writing to file
      */
     public void saveTask(Task task) throws IOException {
@@ -55,51 +78,6 @@ public class Storage {
         }
         fw.write(task.toString());
         fw.close();
-    }
-
-    /**
-     * Deletes task from file.
-     *
-     * @param task          task to be deleted from file
-     * @throws IOException  if there was an error in writing to file
-     */
-    public void deleteTask(Task task) throws IOException {
-        rewriteLine(task.toString(), "");
-    }
-
-    /**
-     * Updates completion status of task in file.
-     *
-     * @param task          task to be updated
-     * @throws IOException  if there was an error in writing to file
-     */
-    public void markDone(Task task) throws IOException {
-        rewriteLine(task.getTaskDesc(),
-                task.toString());
-    }
-
-    private void rewriteLine(String target, String replace)
-            throws IOException {
-        File temp = File.createTempFile("temp", ".txt", f.getParentFile());
-        Scanner scanner = new Scanner(f);
-        FileWriter tempWriter = new FileWriter(temp, true);
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            if (line.contains(target)) {
-                if (replace.isEmpty()) {
-                    continue;
-                }
-                tempWriter.write(replace);
-            } else {
-                tempWriter.write(line);
-            }
-            if (scanner.hasNextLine()) {
-                tempWriter.write(System.lineSeparator());
-            }
-        }
-        tempWriter.close();
-        f.delete();
-        temp.renameTo(f);
     }
 
 }

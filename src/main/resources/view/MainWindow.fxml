@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" styleClass="mainWindow" stylesheets="@../style/styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ligma.ui.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" styleClass="mainWindow" stylesheets="@../style/styles.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ligma.ui.MainWindow">
     <children>
         <TextField fx:id="userInput" onAction="#handleUserInput" prefHeight="35.0" prefWidth="348.0" styleClass="userInput" stylesheets="@../style/styles.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0">
          <font>

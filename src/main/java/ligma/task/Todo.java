@@ -11,7 +11,7 @@ public class Todo extends Task {
      * @return                          todo created
      */
     public Todo(String desc) {
-        super(desc);
+        super(desc, desc);
     }
 
     /**
@@ -22,7 +22,12 @@ public class Todo extends Task {
      * @return                          todo created
      */
     public Todo(String desc, boolean isDone) {
-        super(desc, isDone);
+        super(desc, isDone, desc);
+    }
+
+    @Override
+    public String getFullMeta() {
+        return "T" + super.getFullMeta();
     }
 
     @Override
