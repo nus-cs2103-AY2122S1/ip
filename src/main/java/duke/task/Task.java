@@ -20,6 +20,7 @@ public class Task {
     protected Task(String description) {
         this.description = description;
         this.isDone = false;
+        assert(description.isEmpty());
     }
 
     protected Task(String description, String time) throws DukeException {
@@ -29,6 +30,8 @@ public class Task {
         } catch (DateTimeParseException e) {
             throw new DukeException("Incorrect Time Format!");
         }
+        assert(description.isEmpty());
+        assert(time.isEmpty());
     }
 
     /**
