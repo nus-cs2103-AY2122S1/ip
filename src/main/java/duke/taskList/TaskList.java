@@ -1,7 +1,4 @@
-package duke.taskList;
-
-import duke.exceptions.OutOfBoundException;
-import duke.tasks.Task;
+package duke;
 
 import java.util.ArrayList;
 

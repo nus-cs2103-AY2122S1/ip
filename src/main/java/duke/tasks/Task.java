@@ -1,4 +1,4 @@
-package duke.tasks;
+package duke;
 
 /**
  * Represents a Task that user inputted.

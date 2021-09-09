@@ -1,4 +1,4 @@
-package duke.ui;
+package duke;
 
 /**
  * Represents an Ui class that is responsible for the interaction with user.

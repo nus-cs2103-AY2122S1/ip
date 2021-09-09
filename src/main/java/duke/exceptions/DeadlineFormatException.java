@@ -1,4 +1,4 @@
-package duke.exceptions;
+package duke;
 
 /**
  * Encapsulates exceptions thrown by the chat bot when user enter invalid deadline format.

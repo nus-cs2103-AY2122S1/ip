@@ -1,8 +1,4 @@
-package duke.command;
-
-import duke.exceptions.OutOfBoundException;
-import duke.parser.Parser;
-import duke.taskList.TaskList;
+package duke;
 
 /**
  * Represents a command class that marks a task as done.

@@ -1,9 +1,9 @@
-package duke.parser;
+package duke;
 
-import duke.exceptions.DeadlineFormatException;
-import duke.exceptions.EmptyDescriptionException;
-import duke.exceptions.EventFormatException;
-import duke.exceptions.OutOfBoundException;
+import duke.DeadlineFormatException;
+import duke.EmptyDescriptionException;
+import duke.EventFormatException;
+import duke.OutOfBoundException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
