@@ -11,6 +11,7 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
+    private Statistics statistics;
 
     /**
      * Constructor of a Duke object
@@ -22,6 +23,7 @@ public class Duke {
         storage = new Storage(filePath);
         parser = new Parser();
         tasks = new TaskList(storage.loadFile());
+        statistics = storage.loadStats();
     }
 
     /**
@@ -37,7 +39,7 @@ public class Duke {
     String getResponse(String input) throws DukeException {
         String command = input;
         Command c = parser.parse(command);
-        return c.execute(tasks, ui, storage);
+        return c.execute(tasks, ui, storage, statistics);
 
     }
     String greetingMessage() {

@@ -115,4 +115,12 @@ public class Ui {
     public String addedTaskMessage() {
         return "Got it. I've added this task: \n";
     }
+    
+    public String printStatistics(Statistics stats) {
+        String returnMessage = "";
+        returnMessage += "Total Tasks Done: " + stats.getTasksDone() + "\n";
+        returnMessage += "Total Tasks Added: " + stats.getTasksAdded() + "\n";
+        returnMessage += "Total Tasks Deleted: " + stats.getTasksDeleted() + "\n";
+        return returnMessage;
+    }
 }

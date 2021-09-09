@@ -8,9 +8,10 @@ import java.io.IOException;
 public class SaveCommand extends Command {
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage, Statistics stats) throws DukeException {
         try {
             storage.writeToFile(tasks);
+            storage.writeStatistics(stats);
         } catch (IOException e) {
             e.printStackTrace();
         }

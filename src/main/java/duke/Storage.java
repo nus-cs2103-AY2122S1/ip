@@ -56,7 +56,44 @@ public class Storage {
         }
         return this.taskArr;
     }
+    
+    public Statistics loadStats() {
+        File f = new File("./data/stats.txt");
+        Statistics statistics;
+        try {
+            Scanner s = new Scanner(f);
+            ArrayList<Integer> statisticsArr = new ArrayList<>();
+            while (s.hasNext()) {
+                String statisticString = s.nextLine();
+                int statisticInt = Integer.parseInt(statisticString);
+                statisticsArr.add(statisticInt);
+                }
+            assert statisticsArr.size() == 3: "Incorrect Statistic Length";
+            statistics = convertToStats(statisticsArr);
 
+
+        } catch (FileNotFoundException e) {
+            System.out.println("No saved statistics found. Creating new file.");
+            createFile(f);
+            statistics = new Statistics();
+            return statistics;
+        } catch (ParseException e) {
+            System.out.println(e.getMessage());
+            statistics = new Statistics();
+            return statistics;
+        }
+        
+        return statistics;
+    }
+
+    public Statistics convertToStats(ArrayList<Integer> statisticArr) throws ParseException {
+        int done = statisticArr.get(0);
+        int added = statisticArr.get(1);
+        int deleted = statisticArr.get(2);
+        
+        return new Statistics(done, added, deleted);
+    }
+    
     /**
      * Carries tasks from previous save file to current application run.
      *
@@ -129,6 +166,14 @@ public class Storage {
         for (int i = 0; i < taskArr.size(); i++) {
             fw.write(taskArr.get(i).toString() + System.lineSeparator());
         }
+        fw.close();
+    }
+    
+    public void writeStatistics(Statistics statistics) throws IOException {
+        FileWriter fw = new FileWriter("./data/stats.txt");
+        fw.write(statistics.getTasksDone() + System.lineSeparator());
+        fw.write(statistics.getTasksAdded() + System.lineSeparator());
+        fw.write(statistics.getTasksDeleted() + System.lineSeparator());
         fw.close();
     }
 
