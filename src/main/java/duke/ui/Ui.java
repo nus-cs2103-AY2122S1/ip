@@ -4,18 +4,18 @@ package duke.ui;
  * This is the Display class to handle UI of Duke.
  */
 public class Ui {
-	private String welcomeString = "Yo! Duke here...on behalf of Yang Yuzhao.\n"
+	private final String WELCOME_STRING = "Yo! Duke here...on behalf of Yang Yuzhao.\n"
 			+ "What do ya want from me?";
-	private String byeString = "Duke out! Wake me up when ya need me again:)";
+	private final String BYE_STRING = "Duke out! Wake me up when ya need me again:)";
 
 	/**
 	 * Prints welcome message.
 	 */
 	public String showWelcomeMessage() {
 		System.out.println("____________________________________________________________\n"
-				+ welcomeString
+				+ WELCOME_STRING
 				+ "____________________________________________________________\n");
-		return welcomeString;
+		return WELCOME_STRING;
 	}
 
 	/**
@@ -23,9 +23,9 @@ public class Ui {
 	 */
 	public String showByeMessage() {
 		System.out.println("____________________________________________________________\n"
-				+ byeString
+				+ BYE_STRING
 				+ "____________________________________________________________\n");
-		return byeString;
+		return BYE_STRING;
 	}
 
 }

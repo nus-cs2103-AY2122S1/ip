@@ -14,7 +14,7 @@ import java.nio.file.Paths;
  * This is the Storage class to load and save tasks in file.
  */
 public class Storage {
-	private Path dir = Paths.get(System.getProperty("user.dir") + "/src/main/java/output");
+	private final Path dir = Paths.get(System.getProperty("user.dir") + "/src/main/java/output");
 
 	/**
 	 * Creates duke.txt to contain task list, if not exists.
