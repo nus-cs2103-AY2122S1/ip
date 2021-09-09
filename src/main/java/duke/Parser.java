@@ -32,7 +32,7 @@ public class Parser {
             if (taskList.getSize() == 0) {
                 return Ui.getNoTasksMessage();
             } else {
-                return taskList.printTaskList();
+                return taskList.getTaskList();
             }
         case "done":
             return taskList.markAsDone(scan.nextInt() - 1);
