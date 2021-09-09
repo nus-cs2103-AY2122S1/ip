@@ -15,6 +15,10 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     /**
      * returns converted to string representation of completion status
      *
@@ -31,6 +35,11 @@ public class Task {
      */
     public String check() {
         this.isDone = true;
+        return this.toString();
+    }
+
+    public String uncheck() {
+        this.isDone = false;
         return this.toString();
     }
 

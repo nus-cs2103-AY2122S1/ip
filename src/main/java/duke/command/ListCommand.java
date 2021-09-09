@@ -1,9 +1,6 @@
 package duke.command;
 
-import duke.ResponseFormatter;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.*;
 
 public class ListCommand extends Command {
     public static final String COMMAND = "list";
@@ -16,7 +13,7 @@ public class ListCommand extends Command {
      * @return
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage, History history) {
         ui.printList(taskList);
     }
 
@@ -29,7 +26,7 @@ public class ListCommand extends Command {
      * @return formatted response
      */
     @Override
-    public String execute(TaskList taskList, ResponseFormatter rf, Storage storage) {
+    public String execute(TaskList taskList, ResponseFormatter rf, Storage storage, History history) {
         return rf.formatList(taskList);
     }
 }

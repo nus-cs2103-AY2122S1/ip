@@ -11,6 +11,7 @@ public class Duke {
     private Ui ui;
     private Storage storage;
     private ResponseFormatter responseFormatter;
+    private History history;
 
     /**
      * Constructor for Duke object
@@ -21,6 +22,7 @@ public class Duke {
         ui = new Ui();
         responseFormatter = new ResponseFormatter();
         storage = new Storage(filePath);
+        history = new History();
         try {
             TaskList temp = storage.readFile();
             taskList = temp == null ? new TaskList() : new TaskList(temp);
@@ -41,7 +43,7 @@ public class Duke {
             try {
                 String input = ui.readInput();
                 Command c = Parser.parseCommands(input);
-                c.execute(this.taskList, this.ui, this.storage);
+                c.execute(this.taskList, this.ui, this.storage, history);
                 isExit = c.getExit();
             } catch (IOException e) {
                 ui.printFileError(e);
@@ -69,7 +71,7 @@ public class Duke {
                 Platform.exit();
             }
 
-            return command.execute(taskList, responseFormatter, storage);
+            return command.execute(taskList, responseFormatter, storage, history);
         } catch (IOException e) {
             return responseFormatter.formatFileError(e);
         }

@@ -2,10 +2,7 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.ResponseFormatter;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.*;
 
 public class DoneCommand extends Command {
     public static final String COMMAND = "done";
@@ -34,7 +31,7 @@ public class DoneCommand extends Command {
      * @return
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws
+    public void execute(TaskList taskList, Ui ui, Storage storage, History history) throws
             ArrayIndexOutOfBoundsException,
             IOException {
         try {
@@ -44,6 +41,7 @@ public class DoneCommand extends Command {
             String display = taskList.complete(this.taskNo);
             storage.writeToFile(taskList);
             ui.printDone(display);
+            history.addHistory(this);
         } catch (ArrayIndexOutOfBoundsException e) {
             ui.printError(
                     "Eh... No such task found. Cannot mark as done.",
@@ -65,7 +63,7 @@ public class DoneCommand extends Command {
      * @return
      */
     @Override
-    public String execute(TaskList taskList, ResponseFormatter rf, Storage storage) throws
+    public String execute(TaskList taskList, ResponseFormatter rf, Storage storage, History history) throws
             ArrayIndexOutOfBoundsException,
             IOException {
         try {
@@ -74,6 +72,7 @@ public class DoneCommand extends Command {
             }
             String display = taskList.complete(this.taskNo);
             storage.writeToFile(taskList);
+            history.addHistory(this);
             return rf.formatDone(display);
         } catch (ArrayIndexOutOfBoundsException e) {
             return rf.formatError(
@@ -81,5 +80,12 @@ public class DoneCommand extends Command {
                     "(＃￣ω￣)"
             );
         }
+    }
+
+    @Override
+    public String undo(TaskList taskList, ResponseFormatter rf, Storage storage) throws IOException {
+        taskList.uncheck(this.taskNo);
+        storage.writeToFile(taskList);
+        return rf.formatUndo("Done Command");
     }
 }

@@ -116,4 +116,8 @@ public class ResponseFormatter {
                     + foundList;
         }
     }
+
+    public String formatUndo(String commandType) {
+        return commandType + " has been undone!";
+    }
 }

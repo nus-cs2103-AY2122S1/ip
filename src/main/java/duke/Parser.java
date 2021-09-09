@@ -4,21 +4,13 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ErrorCommand;
-import duke.command.EventCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.TodoCommand;
+import duke.command.*;
 
 /**
  * Parser object that parses all the input from user to commands understood by Duke
  */
 public class Parser {
+    public static History history;
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HHmm");
     private static String[] parsed;
 
@@ -109,6 +101,8 @@ public class Parser {
                 return new DeadlineCommand(deadlineDetails[0], parseDate(deadlineDetails[1]));
             case FindCommand.COMMAND:
                 return new FindCommand(parseKeyword(input));
+            case UndoCommand.COMMAND:
+                return new UndoCommand();
             default:
                 throw new DukeException("Ehhh... (￣ ￣|||) Sorry I do not understand.");
             }
