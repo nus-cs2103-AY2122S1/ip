@@ -27,6 +27,8 @@ public class DukeException extends ArrayIndexOutOfBoundsException {
     public String toString() {
         if (this.cause.equals("empty")) {
             return "OOPS!!! The description of a todo cannot be empty.";
+        } else if (this.cause.equals("parse")) {
+            return "Please parse!!";
         } else {
             return "OOPS!!! I'm sorry, but I don't know what that means :-(";
         }

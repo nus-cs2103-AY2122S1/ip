@@ -8,10 +8,16 @@ import java.time.format.DateTimeFormatter;
  * @author Dominic Siew Zhen Yu
  *
  */
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class Deadline extends Task {
     private String deadline;
-    private String taskIndicator = "[D]";
+    private LocalDateTime dateAndTime;
+    String TASKINDICATOR = "[D]";
+
 
     /**
      * The constructor for the Deadlines class with the userInput (which refers to the name of the task)
@@ -25,12 +31,24 @@ public class Deadline extends Task {
         super(userInput);
 
         if (newInput) {
-            LocalDate date = LocalDate.parse(deadline);
-            this.deadline = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime date = LocalDateTime.parse(deadline, formatter);
+            this.deadline = date.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
+            this.dateAndTime = date;
         } else {
             this.deadline = deadline;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
+            LocalDateTime date = LocalDateTime.parse(deadline, formatter);
+            this.dateAndTime = date;
         }
 
+    }
+
+    public boolean isDate(String comparisonDate) {
+        LocalDate comparison = LocalDate.parse(comparisonDate);
+        LocalDate deadlineDate = this.dateAndTime.toLocalDate();
+
+        return comparison.isEqual(deadlineDate);
     }
 
     /**
@@ -39,7 +57,12 @@ public class Deadline extends Task {
      * @return the string representation of the deadlines
      */
 
+    public LocalDateTime getLocalDateTime() {
+        return this.dateAndTime;
+    }
+
     public String printName() {
-        return taskIndicator + " " + super.printName() + " (by: " + this.deadline + ")";
+        return TASKINDICATOR + " " + super.printName() + " (by: " + this.deadline + ")";
     }
 }
+

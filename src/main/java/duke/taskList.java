@@ -195,7 +195,7 @@ public class taskList {
      * @param timeline the period that the event is taking place
      */
     public String addEvent(String name, String timeline, boolean isInput) {
-        Task task = new Event(name, timeline);
+        Task task = new Event(name, timeline, isInput);
         taskList.add(task);
         if (isInput) {
             String output = this.addTaskResponse(task);
@@ -297,6 +297,19 @@ public class taskList {
             }
         }
         System.out.println(output);
+        return output;
+    }
+
+    public String printSchedule(String date) {
+        Schedule dateEvents = new Schedule();
+        ArrayList<Task> schedule = dateEvents.sortTask(taskList, date);
+        String output = "";
+        int numb = 1;
+
+        for (Task task : schedule) {
+            output += numb + ". " + task.printName() + "\n";
+            numb++;
+        }
         return output;
     }
 }

@@ -27,8 +27,9 @@ public class Parser {
 
     public void parsing(String input) {
 
-        if (input.equals("bye")) {
-            this.taskName = "bye";
+        if (input.equals("list") || input.equals("bye")) {
+            this.command = input;
+            return;
         }
 
         String[] parsedInput = input.split(" ", 2);
@@ -44,12 +45,11 @@ public class Parser {
             this.taskName = parsedAgain[0];
             this.deadlineOrTimeline = parsedAgain[1];
         } else if (this.command.equals("todo") || this.command.equals("done")
-                || this.command.equals("remove") || this.command.equals("find")) {
+                || this.command.equals("remove") || this.command.equals("find")
+                || this.command.equals("schedule")) {
             this.taskName = parsedInput[1];
-        } else if (this.command.equals("list") || this.command.equals("bye")) {
-            //does nothing since the command input is empty
         } else {
-            throw new DukeException("Generic");
+            throw new DukeException("parse");
         }
     }
 
