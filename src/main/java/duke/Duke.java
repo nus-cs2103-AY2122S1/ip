@@ -22,8 +22,8 @@ public class Duke {
      * Duke Constructor
      */
     public Duke(String directory, String file) {
-        ui = new Ui(directory, file);
         storage = new Storage(directory, file);
+        ui = new Ui(this.storage);
         parser = new Parser();
         isRunning = true;
         try {

@@ -50,7 +50,6 @@ public class Parser {
         case "event":
             String[] output1 = result.toString().split(" /at ");
             if (output1.length < 2) {
-
                 throw new DukeException("Please provide both description and time. Use '/at'. "
                         + "(eg. event fix hair /at 1pm)");
             }
@@ -99,9 +98,11 @@ public class Parser {
             return new String[] {input[1]};
         case "find":
             return new String[] {input[1]};
+        case "undo":
+            return new String[] {commandEntered};
         default:
             throw new DukeException("I don't recognise this command\n"
-                    + "Try 'list', 'todo', 'event', 'deadline', 'done' or 'bye'");
+                    + "Try 'list', 'todo', 'event', 'deadline', 'done', 'bye' or 'undo'.");
         }
     }
 

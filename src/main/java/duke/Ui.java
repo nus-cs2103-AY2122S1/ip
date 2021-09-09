@@ -5,6 +5,7 @@ import java.util.Scanner;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
+import duke.task.Undo;
 
 /**
  * Handles all the interaction with the user.
@@ -25,14 +26,17 @@ public class Ui {
     private Scanner sc = new Scanner(System.in);
     private Storage storage;
     private Parser parser;
+    private String[] prevCommand;
+    private Undo undo;
 
     /**
      * Instantiates a new ui object.
      */
-    public Ui(String directory, String file) {
+    public Ui(Storage storage) {
         items = new Items();
-        storage = new Storage(directory, file);
+        this.storage = storage;
         parser = new Parser();
+        undo = new Undo(items);
     }
 
     /**
@@ -127,12 +131,20 @@ public class Ui {
             case "find":
                 output = items.findTask(task[0]);
                 break;
+            case "undo":
+                undo.undoTask(task);
+                int index = Integer.parseInt(inputWords[1]);
+                fileTask = storage.getFileLine(index);
+                fileTask = fileTask.substring(0, 4) + "0" + fileTask.substring(5);
+                storage.updateListTask(index, fileTask);
+                break;
             default:
                 output = "I don't recognise this command\n"
-                        + "Try 'list', 'todo', 'event', 'deadline', 'done', 'find' or 'bye'";
+                        + "Try 'list', 'todo', 'event', 'deadline', 'done', 'find', 'undo' or 'bye'";
                 break;
             }
             assert !output.equals(""): "Unable to generate response. Please try again.";
+            prevCommand = inputWords;
             return output;
         } catch (Exception dukeException) {
             return dukeException.getMessage();

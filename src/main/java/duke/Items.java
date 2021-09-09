@@ -70,6 +70,18 @@ public class Items {
     }
 
     /**
+     * Marks the specified task as not done.
+     *
+     * @param index the index at which the task is.
+     * @return string representation of changed task
+     */
+    public String markUndone(int index) {
+        Task task = tasks.get(index - 1);
+        task.undoTask();
+        return task.toString();
+    }
+
+    /**
      * Deletes the item at the specified index.
      *
      * @param index index at which item is to be deleted.
