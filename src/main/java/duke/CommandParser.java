@@ -24,14 +24,12 @@ public class CommandParser extends Parser<String[]> {
     public String[] parse(String cmd) throws DukeException {
         String[] cmdSplit = cmdFormatValidate(cmd);
         String cmdSplitFront = cmdSplit[0];
-
         switch (cmdSplitFront) {
-        case "todo":
-            // Fallthrough
-        case "done":
-            // Fallthrough
-        case "delete":
-            // Fallthrough
+        case "bye": // Fallthrough
+        case "list": // Fallthrough
+        case "todo": // Fallthrough
+        case "done": // Fallthrough
+        case "delete": // Fallthrough
         case "find":
             return cmdSplit;
         case "deadline":
