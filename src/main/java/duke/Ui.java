@@ -27,7 +27,7 @@ public class Ui {
         ADD,
         DELETE,
         UNDO,
-        NONE
+        NONE,
     }
 
     public void showLine() {
