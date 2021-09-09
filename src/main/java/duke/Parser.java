@@ -7,6 +7,8 @@ import duke.command.DisplayCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.HelpWindowCommand;
 import duke.task.TaskList;
 
 /**
@@ -43,6 +45,10 @@ public class Parser {
             return new DeleteCommand(validateTaskNumber(description, tasks));
         case "find":
             return new FindCommand(description);
+        case "help":
+            return new HelpCommand();
+        case ":help":
+            return new HelpWindowCommand();
         default:
             throw new DukeException("Sorry, I don't know what that means.");
         }
