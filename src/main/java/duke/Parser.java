@@ -95,6 +95,7 @@ public class Parser {
      */
     public String clear(TaskList tasks, Ui ui) {
         tasks.clear();
+        assert tasks.getListSize() == 0 : "TaskList should be empty after clearing";
         return ui.clearMessage();
     }
 
@@ -175,6 +176,7 @@ public class Parser {
             throw new TaskIndexOutOfBoundException("Task index is invalid!");
         }
         Task task = tasks.setComplete(index);
+        assert task.getIsCompleted() : "Task should be marked as completed";
         return ui.doneMessage(task);
     }
 
@@ -190,6 +192,7 @@ public class Parser {
             throw new TaskIndexOutOfBoundException("Task index is invalid!");
         }
         Task task = tasks.deleteTask(index);
+        assert !tasks.getList().contains(task) : "Task should be deleted";
         return ui.deleteMessage(task, tasks);
     }
 

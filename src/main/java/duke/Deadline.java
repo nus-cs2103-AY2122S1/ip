@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a Deadline Task.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     private LocalDate date;
 
     /**
@@ -26,7 +26,7 @@ public class Deadline extends Task{
      * @param date Deadline by which the task needs to be done.
      */
     public Deadline(String task, boolean completed, LocalDate date) {
-        super(task, completed,"D");
+        super(task, completed, "D");
         this.date = date;
     }
 
