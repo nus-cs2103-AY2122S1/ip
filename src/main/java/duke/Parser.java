@@ -28,6 +28,8 @@ public class Parser {
             + "Please use the following format:\n"
             + "yyyy-MM-dd HH:MM (e.g 2020-05-19 15:30)";
 
+    private enum CommandType { Bye, List, Delete, Done, Event, ToDo, Deadline, Find }
+
     /**
      * Interprets user input and returns the appropriate command
      *
@@ -39,105 +41,120 @@ public class Parser {
      * @throws DukeExceptions if the input is empty.
      * @throws DukeExceptions if the first word of the input is not a recognisable command.
      */
+
     public Command parse(String userInput) throws DukeExceptions {
         String[] splitUserInput = userInput.split(" ", 2);
-        String command = splitUserInput[0].strip();
+        CommandType command = changeToEnum(splitUserInput[0]);
+        String[] splitCommand = checkArguments(splitUserInput, command);
 
         switch (command) {
-        case "bye": {
-            if (splitUserInput.length > 1 && !(splitUserInput[1].equals(""))) {
-                throw new DukeExceptions("What was that? You weren't suppose to say anything after bye!");
-            }
+        case Bye: {
             return new ByeCommand();
         }
-        case "list": {
-            if (splitUserInput.length > 1 && !(splitUserInput[1].equals(""))) {
-                throw new DukeExceptions("List command cannot take any arguments");
-            }
+
+        case List: {
             return new ListCommand();
         }
-        case "delete": {
-            try {
-                if (splitUserInput.length == 1) {
-                    throw new DukeExceptions("I need to know which task you want to delete");
-                }
-                int index = Integer.parseInt(splitUserInput[1]);
-                return new DeleteCommand(index);
-            } catch (NumberFormatException e) {
-                throw new DukeExceptions("Oops, delete command can only take a single integer as the argument!");
-            }
-        }
-        case "done": {
-            if (splitUserInput.length == 1) {
-                throw new DukeExceptions("I need to know which task you want to mark as finished");
-            }
-            try {
-                int index = Integer.parseInt(splitUserInput[1]);
-                return new DoneCommand(index);
-            } catch (NumberFormatException e) {
-                throw new DukeExceptions("Oops, done command can only take a single integer as the argument!");
-            }
-        }
-        case "event": {
-            if (splitUserInput.length == 1 || splitUserInput[1].equals("")) {
-                throw new DukeExceptions("Oops, "
-                        + "you need to tell me the description and the time of the event");
-            }
-            String[] splitBody = splitUserInput[1].split("/at", 2);
-            if (splitBody[0].equals("")) {
-                throw new DukeExceptions("Oops, "
-                        + "you need to tell me the description and the time of the event");
 
-            } else if (splitBody.length == 1 || splitBody[1].strip().equals("")) {
-                throw new DukeExceptions("Oops! I need to know when the event is. \n"
-                        + "Use the /at argument followed by yyyy-MM-dd HH:mm please");
-            }
+        case Delete: {
+            return new DeleteCommand(castIndex(splitCommand));
+        }
 
-            String desc = splitBody[0].strip();
-            LocalDateTime time = parseDateTime(splitBody[1]);
-            Event event = Event.create(desc, time);
-            return new EventCommand(event);
+        case Done: {
+            return new DoneCommand(castIndex(splitCommand));
         }
-        case "deadline": {
-            if (splitUserInput.length == 1 || splitUserInput[1].equals("")) {
-                throw new DukeExceptions("Oops, "
-                        + "you need to tell me the description and the time of the deadline");
-            }
 
-            String[] splitBody = splitUserInput[1].split("/by", 2);
-            if (splitBody[0].equals("")) {
-                throw new DukeExceptions("Oops,"
-                        + "you need to tell me the description and the time of the deadline");
-            } else if (splitBody.length == 1 || splitBody[1].strip().equals("")) {
-                throw new DukeExceptions("Oops! I need to know when the deadline is. \n"
-                        + "Use the /by argument followed by yyyy-MM-dd HH:mm please");
-            }
-            String desc = splitBody[0].strip();
-            LocalDateTime time = parseDateTime(splitBody[1]);
-            Deadline deadline = Deadline.create(desc, time);
-            return new DeadlineCommand(deadline);
+        case Event: {
+            return new EventCommand(Event.create(splitCommand[1], parseDateTime(splitCommand[2])));
         }
-        case "todo": {
-            if (splitUserInput.length == 1 || splitUserInput[1].equals("")) {
-                throw new DukeExceptions("Oops, "
-                        + "you need to tell me the description of the task on hand");
-            }
-            ToDo toDo = ToDo.create(splitUserInput[1]);
-            return new ToDoCommand(toDo);
+
+        case Deadline: {
+            return new DeadlineCommand(Deadline.create(splitCommand[1], parseDateTime(splitCommand[2])));
         }
-        case "find": {
-            if (splitUserInput.length == 1 || splitUserInput[1].equals("")) {
-                throw new DukeExceptions("Oops, "
-                        + "you need to tell me the keyword you are looking for");
-            }
-            return new FindCommand(splitUserInput[1]);
+
+        case ToDo: {
+            return new ToDoCommand(ToDo.create(splitCommand[1]));
         }
-        case "": {
-            throw new DukeExceptions("Can you type louder .. I mean.. input anything? I got nothing");
+
+        case Find: {
+            return new FindCommand(splitCommand[1]);
         }
+
         default:
-            throw new DukeExceptions("Sorry.. I don't know what your command means");
+            throw new DukeExceptions("Unknown error!");
         }
+    }
+
+    private CommandType changeToEnum(String command) throws DukeExceptions {
+        switch (command) {
+        case "bye": {
+            return CommandType.Bye;
+        }
+
+        case "list": {
+            return CommandType.List;
+        }
+
+        case "delete": {
+            return CommandType.Delete;
+        }
+
+        case "done": {
+            return CommandType.Done;
+        }
+
+        case "event": {
+            return CommandType.Event;
+        }
+
+        case "deadline": {
+            return CommandType.Deadline;
+        }
+
+        case "todo": {
+            return CommandType.ToDo;
+        }
+
+        case "find": {
+            return CommandType.Find;
+        }
+
+        case "": {
+            throw new DukeExceptions("Can you type louder.. or type anything? I got nothing..");
+        }
+
+        default:
+            throw new DukeExceptions("Sorry! I don't recognise your command!");
+        }
+    }
+
+    private String[] checkArguments(String[] splitUserInput, CommandType command) throws DukeExceptions {
+
+        switch (command) {
+        case Bye:
+            // Fallthrough
+        case List:
+            checkForExtraInput(splitUserInput);
+            break;
+        case Delete:
+            // Fallthrough
+        case Done:
+            checkIndex(splitUserInput);
+            break;
+        case ToDo:
+            //Fallthrough
+        case Event:
+            //Fallthrough
+        case Deadline:
+            splitUserInput = checkForDescriptionTask(splitUserInput, command);
+            break;
+        case Find:
+            checkForKeyword(splitUserInput);
+            break;
+        default:
+            throw new DukeExceptions("Unknown error!");
+        }
+        return splitUserInput;
     }
 
     private LocalDateTime parseDateTime(String dateString) throws DukeExceptions {
@@ -146,6 +163,113 @@ public class Parser {
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         } catch (DateTimeParseException e) {
             throw new DukeExceptions(TIME_PARSE_ERROR);
+        }
+    }
+
+    private void checkForExtraInput(String[] splitUserInput) throws DukeExceptions {
+        if (splitUserInput.length > 1 && !(splitUserInput[1].equals(""))) {
+            String message = String.format ("Hey! %s command cannot"
+                    + "take any additional parameter!", splitUserInput[0]);
+            throw new DukeExceptions(message);
+        }
+    }
+
+    private void checkIndex(String[] splitUserInput) throws DukeExceptions {
+        if (splitUserInput.length == 1) {
+            throw new DukeExceptions("You have to tell me the index of the task to process!");
+        }
+    }
+
+    private int castIndex(String[] splitUserInput) throws DukeExceptions {
+        try {
+            return Integer.parseInt(splitUserInput[1]);
+        } catch (NumberFormatException e) {
+            String message = String.format ("Oops! %s command can "
+                            + "only take a single integer as the argument!",
+                    splitUserInput[0]
+            );
+            throw new DukeExceptions(message);
+        }
+    }
+
+    private String[] checkForDescriptionTask(String[] splitUserInput, CommandType commandType)
+            throws DukeExceptions {
+        String[] output = new String[3];
+        output[0] = splitUserInput[0];
+        output[1] = splitUserInput[1];
+        String[] temp;
+        if (splitUserInput.length == 1 || splitUserInput[1].equals("")) {
+            String message;
+            switch (commandType) {
+            case ToDo:
+                message = "Oops you need to tell me the description of the task";
+                break;
+
+            case Event:
+                message = "Oops, you need to tell me the description "
+                        + "and the time of the event";
+                break;
+
+            case Deadline:
+                message = "Oops, you need to tell me the description "
+                        + "and the time of the deadline";
+                break;
+
+            default:
+                message = "Hmm.. there is an unknown error.. contact developer please";
+                break;
+            }
+            throw new DukeExceptions(message);
+        }
+        if (commandType.equals(CommandType.Deadline) || commandType.equals(CommandType.Event)) {
+            temp = checkForDescriptionAndTime(output, commandType);
+            output[1] = temp[0];
+            output[2] = temp[1];
+        }
+        return output;
+    }
+
+    private String[] checkForDescriptionAndTime(String[] body, CommandType commandType)
+            throws DukeExceptions {
+        String splitter;
+        String task;
+
+        switch (commandType) {
+        case Event:
+            splitter = "/at";
+            task = "event";
+            break;
+
+        case Deadline:
+            splitter = "/by";
+            task = "deadline";
+            break;
+
+        default:
+            throw new DukeExceptions ("Error: check desc error. Please contact developer");
+        }
+
+        String[] splitBody = body[1].strip().split(splitter, 2);
+        if (splitBody[0].equals("")) {
+            String message = String.format("Oops, you need to tell me the description "
+                    + "and the time of the %s", task);
+            throw new DukeExceptions(message);
+
+        } else if (splitBody.length == 1 || splitBody[1].strip().equals("")) {
+            String message = String.format("Oops! I need to know when the %s is. \n"
+                    + "Use the %s argument followed by yyyy-MM-dd HH:mm please",
+                    task, splitter);
+            throw new DukeExceptions(message);
+        }
+        splitBody[0].strip();
+
+        return splitBody;
+    }
+
+    private void checkForKeyword(String[] splitUserInput) throws DukeExceptions {
+        if (splitUserInput.length == 1 || splitUserInput[1].equals("")) {
+            throw new DukeExceptions("Oops, "
+                    + "you need to tell me the keyword you are looking for");
         }
     }
 }
