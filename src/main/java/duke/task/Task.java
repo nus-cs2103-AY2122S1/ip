@@ -66,4 +66,14 @@ public abstract class Task {
     public boolean findKeyword(String s) {
         return description.contains(s);
     }
+
+    /**
+     * Compares the task description with another task.
+     *
+     * @param t The task to be compared with.
+     * @return -1 if the description for this task is lexicographically smaller, 0 if same, else 1.
+     */
+    public int compareTo(Task t) {
+        return description.compareTo(t.description);
+    }
 }

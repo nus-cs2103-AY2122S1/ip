@@ -10,8 +10,7 @@ import java.time.format.DateTimeFormatter;
  * @author Zhi Bin
  * @version Duke Level 10
  */
-public class Deadline extends Task {
-    protected final LocalDateTime by;
+public class Deadline extends TaskWithDateTime {
 
     /**
      * Constructor of a Deadline task.
@@ -21,8 +20,7 @@ public class Deadline extends Task {
      * @param by          The deadline for the task.
      */
     public Deadline(String description, boolean isDone, LocalDateTime by) {
-        super(description, isDone, 'D');
-        this.by = by;
+        super(description, isDone, 'D', by);
     }
 
     /**
@@ -43,7 +41,7 @@ public class Deadline extends Task {
      * @return The string containing the deadline.
      */
     public String showDeadline() {
-        return String.format("(by: %s)", by.format(DateTimeFormatter.ofPattern("dd MMM yyyy HHmm")));
+        return String.format("(by: %s)", dateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy HHmm")));
     }
 
     /**
@@ -54,6 +52,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + String.format("|%s", by);
+        return super.toString() + String.format("|%s", dateTime);
     }
 }

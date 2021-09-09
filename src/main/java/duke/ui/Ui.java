@@ -112,7 +112,7 @@ public class Ui {
      * @return A string showing the list of related tasks.
      */
     public String getRelatedTasks(List<Task> list) {
-        StringBuilder s = new StringBuilder("");
+        StringBuilder s = new StringBuilder();
 
         if (list.size() > 0) {
             s.append("Here are the matching tasks in your list:");
@@ -122,6 +122,13 @@ public class Ui {
         } else {
             s.append("There are no matching task in your list.");
         }
+        return s.toString();
+    }
+
+    public String sortListMessage(ArrayList<Task> list) {
+        StringBuilder s = new StringBuilder("I have sorted the list according to the chronological order. " +
+                "Here is the sorted list.\n");
+        s.append(listTasks(list));
         return s.toString();
     }
 }
