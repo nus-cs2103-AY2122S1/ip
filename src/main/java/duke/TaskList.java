@@ -95,6 +95,7 @@ public class TaskList {
      * @param id Index of the task given in the list of Tasks.
      */
     public void removeTaskById(int id) {
+        assert id >= 0;
         taskList.remove(id);
     }
 }
