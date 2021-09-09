@@ -95,7 +95,6 @@ public class Parser {
 
             String desc = splitBody[0].strip();
             LocalDateTime time = parseDateTime(splitBody[1]);
-            ;
             Event event = Event.create(desc, time);
             return new EventCommand(event);
         }
