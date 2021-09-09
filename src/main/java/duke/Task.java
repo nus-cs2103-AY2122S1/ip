@@ -40,6 +40,7 @@ public class Task {
      * Returns the string representation of a task.
      * @return The description of the task.
      */
+    @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }

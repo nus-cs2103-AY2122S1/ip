@@ -10,16 +10,29 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     /** The event date time */
-    protected LocalDateTime at;
+    protected LocalDateTime date;
+
+    /** The String representation of a save-friendly date */
+    protected String dateString;
 
     /**
      * The Event constructor.
      * @param description The description of the task.
-     * @param at The time of the event.
+     * @param date The time of the event.
      */
-    public Event(String description, String at) {
+    public Event(String description, String date) {
         super(description);
-        this.at = LocalDateTime.parse(at);
+        this.date = LocalDateTime.parse(date);
+        this.dateString = date;
+    }
+
+    /**
+     * Returns the string representation of an Event task in the saved file.
+     * @return The string representation of an Event task in the saved file.
+     */
+    public String savedToString() {
+        String doneStatus = super.isDone ? "1" : "0";
+        return "E | " + doneStatus + " | " + super.description + " | " + dateString;
     }
 
     /**
@@ -29,6 +42,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
+                + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
     }
 }
