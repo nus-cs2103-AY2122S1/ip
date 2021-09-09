@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.exception.DukeException;
+
 import duke.storage.Storage;
 
 import duke.task.Task;
@@ -31,7 +33,12 @@ public class DeleteCommand extends Command {
      * @throws IOException If an I/O error occurs.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
+        boolean outOfBound = this.index < 1 || this.index > taskList.size();
+        if (outOfBound) {
+            throw new DukeException("Index provided is out of bound. Fail to delete task");
+        }
+
         Task deletedTask = taskList.getTask(this.index - 1);
         taskList.deleteTask(this.index - 1);
         ui.sayDeleteTask(deletedTask, taskList.size());
