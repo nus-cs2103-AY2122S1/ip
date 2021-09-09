@@ -19,6 +19,7 @@ public class DeleteCommand extends Command {
      *
      * @param storage The storage system of the bot involved with this command.
      * @param ui The ui of the bot involved with this command.
+     * @return Message indicating whether the task has been successfully deleted.
      */
     public String execute(Storage storage, Ui ui) {
         try {
@@ -32,7 +33,7 @@ public class DeleteCommand extends Command {
                         : "Task has not been deleted properly from storage during execution of DeleteCommand.";
                 return ui.taskDeletedMessage(removedTask, taskListLen);
             } else {
-                return ui.missingTaskMessage();
+                return ui.missingTaskMessage(this.taskNum + 1);
             }
         } catch (IndexOutOfBoundsException e) {
             return Ui.showErrorMessage("Please enter a valid index!");

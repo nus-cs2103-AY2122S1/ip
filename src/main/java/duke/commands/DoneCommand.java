@@ -19,6 +19,7 @@ public class DoneCommand extends Command {
      *
      * @param storage The storage system of the bot involved with this command.
      * @param ui The ui of the bot involved with this command.
+     * @return Message indicating whether the task has been successfully marked as done.
      */
     public String execute(Storage storage, Ui ui) {
         try {
@@ -28,7 +29,7 @@ public class DoneCommand extends Command {
                 storage.saveToFile();
                 return ui.markedDoneMessage(taskToMark);
             } else {
-                return ui.missingTaskMessage();
+                return ui.missingTaskMessage(this.taskNum + 1);
             }
         } catch (IndexOutOfBoundsException e) {
             return Ui.showErrorMessage("Please enter a valid index!");

@@ -6,9 +6,9 @@ import duke.functionality.Ui;
 /**
  * Represents the command when the user wants to list all tasks currently saved in the bot.
  */
-public class ListCommand extends Command {
+public class ArchiveListCommand extends Command {
 
-    public ListCommand() {
+    public ArchiveListCommand() {
     }
 
     /**
@@ -19,8 +19,7 @@ public class ListCommand extends Command {
      * @return Message containing all currently saved tasks.
      */
     public String execute(Storage storage, Ui ui) {
-        String printedTaskList = storage.printTaskList();
+        String printedTaskList = storage.printArchiveTaskList();
         return ui.printTaskListMessage(printedTaskList);
     }
-
 }

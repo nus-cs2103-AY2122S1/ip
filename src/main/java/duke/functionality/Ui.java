@@ -8,11 +8,13 @@ import duke.tasks.Task;
  * Creates an Ui system that is responsible for creation of responses to be output to user.
  */
 public class Ui {
+    //TODO String return javadocs
     private static final String BORDER = "________________________________________________________";
     private static final String NEW_LINE = System.lineSeparator();
     private static final String PLACEHOLDER = "%text%";
     private static final String DONE_TASK = "Nice! I've marked this task as done:";
-    private static final String MAX_TASK = "Sorry! You have max number of tasks stored already.";
+    private static final String MAX_TASKS = "Sorry! You have max number of tasks stored already.";
+    private static final String MAX_ARCHIVE_TASKS = "Sorry! You have max number of archivable tasks stored already.";
     private static final String ADDED_TASK = "Got it. I've added this task:";
     private static final String REMAINING_TASK_NUM = String.format("Now you have %s tasks in the list.", PLACEHOLDER);
     private static final String DELETED_TASK = "Noted. I've removed this task:";
@@ -20,6 +22,8 @@ public class Ui {
     private static final String NO_MATCHING_TASKS = "There are no matching tasks found.";
     private static final String UNKNOWN_COMMAND = "OOPS!!! I'm sorry, but I don't know what that means :(";
     private static final String GOODBYE_MSG = "It has been a pleasure, goodbye!";
+    private static final String TASKS_ARCHIVED = "All specified tasks have been successfully archived!";
+    private static final String TASKS_RESTORED = "All specified tasks have been successfully restored!";
 
     /**
      * Returns an Ui object that is responsible for the creation of responses to be output to the user.
@@ -34,6 +38,8 @@ public class Ui {
 
     /**
      * Sends a welcome message to the user.
+     *
+     * @return Welcome message.
      */
     public String welcomeMessage() {
         String welcome = "Helwoof, this is WoofBot.\nHow can I help you?";
@@ -42,6 +48,8 @@ public class Ui {
 
     /**
      * Sends a goodbye message to the user.
+     *
+     * @return Goodbye message.
      */
     public String goodbyeMessage() {
         return prettyPrint(GOODBYE_MSG);
@@ -52,6 +60,7 @@ public class Ui {
      *
      * @param addedTask The task that has been added.
      * @param taskLeftNum The number of tasks present in the current list of tasks.
+     * @return Message of added task.
      */
     public String taskAddedMessage(Task addedTask, int taskLeftNum) {
         String tasksLeft = REMAINING_TASK_NUM.replace(PLACEHOLDER, String.valueOf(taskLeftNum));
@@ -82,7 +91,7 @@ public class Ui {
     }
 
     /**
-     * Prints out the list of current tasks to the user.
+     * Prints out the list of tasks to the user.
      *
      * @param stringifyTaskLast String representation of current list of tasks.
      */
@@ -107,6 +116,20 @@ public class Ui {
             }
             return prettyPrint(msg.toString());
         }
+    }
+
+    /**
+     * Sends a message to the user that all tasks specified have been archived successfully.
+     */
+    public String tasksArchivedMessage() {
+        return prettyPrint(TASKS_ARCHIVED);
+    }
+
+    /**
+     * Sends a message to the user that all archived tasks specified have been restored successfully.
+     */
+    public String tasksRestoredMessage() {
+        return prettyPrint(TASKS_RESTORED);
     }
 
     /**
@@ -138,16 +161,26 @@ public class Ui {
 
     /**
      * Sends a message to the user when the task indicated by them cannot be found.
+     *
+     * @param index The task index specified by the user, which cannot be found.
      */
-    public String missingTaskMessage() {
-        return prettyPrint(MISSING_TASK);
+    public String missingTaskMessage(int index) {
+        String msg = String.format("%s Index: %d", MISSING_TASK, index);
+        return prettyPrint(msg);
     }
 
     /**
      * Sends a message to the user when no more tasks can be added to the task list.
      */
     public String maxTaskReachedMessage() {
-        return prettyPrint(MAX_TASK);
+        return prettyPrint(MAX_TASKS);
+    }
+
+    /**
+     * Sends a message to the user when no more archivable tasks can be added to the archive task list.
+     */
+    public String maxArchiveTaskReachedMessage() {
+        return prettyPrint(MAX_ARCHIVE_TASKS);
     }
 
 }

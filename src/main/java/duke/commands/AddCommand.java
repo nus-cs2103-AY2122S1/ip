@@ -4,8 +4,8 @@ import duke.functionality.Storage;
 import duke.functionality.Ui;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
-import duke.tasks.TaskList;
 import duke.tasks.Task;
+import duke.tasks.TaskList;
 import duke.tasks.Todo;
 
 /**
@@ -34,11 +34,12 @@ public class AddCommand extends Command {
      *
      * @param storage The storage system of the bot involved with this command.
      * @param ui The ui of the bot involved with this command.
+     * @return Message indicating whether the task has been successfully added.
      */
     public String execute(Storage storage, Ui ui) {
         int taskListLen = storage.taskListLen();
         if (taskListLen >= TaskList.MAX_TASKS) {
-           return ui.maxTaskReachedMessage();
+            return ui.maxTaskReachedMessage();
         }
 
         Task newTask;

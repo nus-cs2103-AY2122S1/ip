@@ -1,12 +1,15 @@
 package duke.functionality;
 
 import duke.commands.AddCommand;
+import duke.commands.ArchiveCommand;
+import duke.commands.ArchiveListCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
+import duke.commands.RestoreCommand;
 import duke.commands.UnknownCommand;
 import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
@@ -45,6 +48,12 @@ public class Parser {
             return prepareDeleteCommand(inputSplit);
         } else if (command.equals("find")) {
             return prepareFindCommand(inputSplit);
+        } else if (command.equals("archive")) {
+            return prepareArchiveCommand(inputSplit);
+        } else if (command.equals("listarchive")) {
+            return new ArchiveListCommand();
+        } else if (command.equals("restore")) {
+            return prepareRestoreCommand(inputSplit);
         } else {
             return new UnknownCommand();
         }
@@ -89,8 +98,12 @@ public class Parser {
             throw new DukeException("OOPS!!! Please indicate which task you want to delete.");
         }
         String strTaskNum = inputSplit[1].split(" ")[0];
-        int taskNum = Integer.parseInt(strTaskNum) - 1;
-        return new DoneCommand(taskNum);
+        try {
+            int taskNum = Integer.parseInt(strTaskNum) - 1;
+            return new DoneCommand(taskNum);
+        } catch (NumberFormatException e) {
+            throw new DukeException("OOPS!!! Please indicate a valid index.");
+        }
     }
 
     private static DeleteCommand prepareDeleteCommand(String[] inputSplit) throws DukeException {
@@ -98,8 +111,12 @@ public class Parser {
             throw new DukeException("OOPS!!! Please indicate which task you want to delete.");
         }
         String strTaskNum = inputSplit[1].split(" ")[0];
-        int taskNum = Integer.parseInt(strTaskNum) - 1;
-        return new DeleteCommand(taskNum);
+        try {
+            int taskNum = Integer.parseInt(strTaskNum) - 1;
+            return new DeleteCommand(taskNum);
+        } catch (NumberFormatException e) {
+            throw new DukeException("OOPS!!! Please indicate a valid index.");
+        }
 
     }
 
@@ -110,6 +127,42 @@ public class Parser {
         String args = inputSplit[1];
         String keyword = args.contains(" ") ? args.split(" ", 2)[0] : args;
         return new FindCommand(keyword);
+    }
+
+    private static ArchiveCommand prepareArchiveCommand(String[] inputSplit) throws DukeException {
+        if (checkInputLength(inputSplit)) {
+            throw DukeException.missingInput("find");
+        }
+        String[] strArrOfTaskNums = inputSplit[1].split(" ", 2);
+        int numOfTasks = strArrOfTaskNums.length;
+        int[] arrOfTaskNums = new int[numOfTasks];
+        try {
+            for (int i = 0; i < numOfTasks; i++) {
+                int taskNum = Integer.parseInt(strArrOfTaskNums[i]) - 1;
+                arrOfTaskNums[i] = taskNum;
+            }
+        } catch (NumberFormatException e) {
+            throw new DukeException("OOPS!!! Please indicate a valid index.");
+        }
+        return new ArchiveCommand(arrOfTaskNums);
+    }
+
+    private static RestoreCommand prepareRestoreCommand(String[] inputSplit) throws DukeException {
+        if (checkInputLength(inputSplit)) {
+            throw DukeException.missingInput("find");
+        }
+        String[] strArrOfTaskNums = inputSplit[1].split(" ", 2);
+        int numOfTasks = strArrOfTaskNums.length;
+        int[] arrOfTaskNums = new int[numOfTasks];
+        try {
+            for (int i = 0; i < numOfTasks; i++) {
+                int taskNum = Integer.parseInt(strArrOfTaskNums[i]) - 1;
+                arrOfTaskNums[i] = taskNum;
+            }
+        } catch (NumberFormatException e) {
+            throw new DukeException("OOPS!!! Please indicate a valid index.");
+        }
+        return new RestoreCommand(arrOfTaskNums);
     }
 
     private static boolean checkInputLength(String[] inputSplit) {

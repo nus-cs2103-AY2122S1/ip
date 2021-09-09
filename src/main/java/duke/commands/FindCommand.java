@@ -23,6 +23,7 @@ public class FindCommand extends Command {
      *
      * @param storage The storage system of the bot involved with this command.
      * @param ui The ui of the bot involved with this command.
+     * @return Message containing list of all matching tasks, if any.
      */
     public String execute(Storage storage, Ui ui) {
         TaskList taskList = storage.getTaskList();
