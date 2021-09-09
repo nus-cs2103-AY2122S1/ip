@@ -9,6 +9,7 @@ public class DukeException extends Exception {
     }
 
     public static DukeException missingInput(String taskName) {
-        return new DukeException(String.format("☹ OOPS!!! The description of a %s cannot be empty.", taskName));
+        return new DukeException(String.format("OOPS!!! The description of a %s cannot be empty.", taskName));
     }
+
 }

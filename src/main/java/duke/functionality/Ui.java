@@ -27,7 +27,7 @@ public class Ui {
     public Ui() {
     }
 
-    private String prettyPrint(String msg) {
+    private static String prettyPrint(String msg) {
         String indentedMsg = msg.replaceAll("(?m)^", "    ");
         return String.format("%s\n%s\n%s\n", BORDER, indentedMsg, BORDER);
     }
@@ -37,7 +37,7 @@ public class Ui {
      */
     public String welcomeMessage() {
         String welcome = "Helwoof, this is WoofBot.\nHow can I help you?";
-        return String.format("%s\n%s\n%s%n", BORDER, welcome, BORDER);
+        return prettyPrint(welcome);
     }
 
     /**
@@ -122,7 +122,7 @@ public class Ui {
      * @param errorMsg The error message.
      */
     public static String showErrorMessage(String errorMsg) {
-        return errorMsg;
+        return prettyPrint(errorMsg);
     }
 
     /**
