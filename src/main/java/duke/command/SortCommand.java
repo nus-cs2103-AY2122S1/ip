@@ -11,7 +11,7 @@ import duke.ui.Ui;
  * @author Zhi Bin
  * @version Duke Level 10
  */
-public class SortCommand extends DukeCommand{
+public class SortCommand extends DukeCommand {
     /**
      * Constructor for a DukeCommand.
      *

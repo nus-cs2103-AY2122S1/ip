@@ -125,9 +125,15 @@ public class Ui {
         return s.toString();
     }
 
+    /**
+     * Shows the sorted list with a message.
+     *
+     * @param list The sorted list.
+     * @return A string with a message and the sorted list.
+     */
     public String sortListMessage(ArrayList<Task> list) {
-        StringBuilder s = new StringBuilder("I have sorted the list according to the chronological order. " +
-                "Here is the sorted list.\n");
+        StringBuilder s = new StringBuilder("I have sorted the list according to the chronological order. "
+                + "Here is the sorted list.\n");
         s.append(listTasks(list));
         return s.toString();
     }
