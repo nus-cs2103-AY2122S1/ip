@@ -59,6 +59,9 @@ public class TaskList {
                 throw new VirushadeException("OOPS!!! Please enter the task description!!!");
             }
 
+            // Checks that taskType can only be one of the selected types.
+            assert (taskType.equals("TODO") || taskType.equals("DEADLINE") || taskType.equals("EVENT"));
+
             switch (taskType) {
             case "TODO":
                 addedTask = new ToDo(addedTaskDescription, false);
@@ -68,8 +71,8 @@ public class TaskList {
                 if (strings[1].startsWith("by ")) {
                     addedTask = new Deadline(strings[0], strings[1].substring(3), false);
                 } else {
-                    throw new VirushadeException("Please include a deadline after your task name. " +
-                            "(e.g. /by Sunday)");
+                    throw new VirushadeException("Please include a deadline after your task name. "
+                            + "(e.g. /by Sunday)");
                 }
                 break;
 
@@ -77,8 +80,8 @@ public class TaskList {
                 if (strings[1].startsWith("at ")) {
                     addedTask = new Event(strings[0], strings[1].substring(3), false);
                 } else {
-                    throw new VirushadeException("Please include a time after your task name. " +
-                            "(e.g. /at 12 noon)");
+                    throw new VirushadeException("Please include a time after your task name. "
+                            + "(e.g. /at 12 noon)");
                 }
                 break;
 
@@ -90,8 +93,8 @@ public class TaskList {
             TASKS.add(addedTask);
             listCount++;
             updateFile(generateList());
-            return ("Added: " + addedTask.getTaskDescription() +
-                    "\nNow you have " + listCount + " tasks in the list.\n");
+            return ("Added: " + addedTask.getTaskDescription()
+                    + "\nNow you have " + listCount + " tasks in the list.\n");
         } else {
             throw new VirushadeException("Sorry, Virushade cannot keep track of more than 100 tasks!!!");
         }
@@ -186,7 +189,7 @@ public class TaskList {
     public static String findFromList(String text) {
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:");
         int counter = 1;
-        for(int i = 0; i < listCount; i++) {
+        for (int i = 0; i < listCount; i++) {
             String taskName = TASKS.get(i).toString();
             if (taskName.contains(text)) {
                 String foundTaskName = counter + "." + taskName;
