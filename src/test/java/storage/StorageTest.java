@@ -29,6 +29,7 @@ public class StorageTest {
         }
         ArrayList<Task> list = storage.load();
         assertEquals("[T][ ] return book", list.get(0).toString());
+        System.out.println(list.get(1).getDate());
         assertEquals("[E][X] carnival (at: 2 Dec 2021 02:30 PM)", list.get(1).toString());
         assertEquals("[D][ ] assignment 0 (by: 29 Aug 2021 11:59 PM)", list.get(2).toString());
     }

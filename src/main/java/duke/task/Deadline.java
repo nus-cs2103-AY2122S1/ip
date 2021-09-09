@@ -3,7 +3,6 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 /** Encapsulates a Deadline with a description, time and date. */
 public class Deadline extends Task {
@@ -29,7 +28,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
+                + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
                 + " " + time.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";
     }
 }
