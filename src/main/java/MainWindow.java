@@ -25,6 +25,9 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+
+    private HelpWindow helpWindow;
+
     private Duke duke;
 
     /**
@@ -35,6 +38,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
             DialogBox.getDukeDialog("Hello I'm Duke :) What do you want to do today?", dukeImage));
+        helpWindow = new HelpWindow();
     }
 
     /**
@@ -53,13 +57,40 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+
         String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
-            DialogBox.getDukeDialog(response, dukeImage));
+        Boolean isGuiResponse = false;
+        if (response.startsWith(":")) {
+            isGuiResponse = handleGuiResponse(response);
+        }
+        if (!isGuiResponse) {
+            dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage));
+        }
         userInput.clear();
 
         if (duke.hasExit()) {
             CompletableFuture.delayedExecutor(2, TimeUnit.SECONDS).execute(Platform::exit);
+        }
+    }
+
+    private boolean handleGuiResponse(String res) {
+        if (res.equals(":help")) {
+            handleHelp();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleHelp() {
+        if (!helpWindow.isShowing()) {
+            helpWindow.show();
+        } else {
+            helpWindow.focus();
         }
     }
 }
