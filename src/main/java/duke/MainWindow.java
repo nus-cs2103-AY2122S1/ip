@@ -55,6 +55,7 @@ public class MainWindow extends AnchorPane {
         );
         if (response == null) {
             // Solution below adapted from https://stackoverflow.com/a/21974490
+            assert (input.trim().equals("bye"));
             new Timer().schedule(new TimerTask() {
                 public void run () {
                     System.exit(0);

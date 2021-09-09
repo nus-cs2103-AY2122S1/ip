@@ -29,6 +29,7 @@ public class CommandParser extends Parser<String[]> {
         String cmdSplitFront = cmdSplit[0];
         for (String cmdCheck : COMMANDS_WITHOUT_ARGS) {
             if (cmd.equals(cmdCheck)) {
+                assert(cmdSplit.length == 1);
                 return new String[]{cmd};
             } else if (cmdSplitFront.equals(cmdCheck)) {
                 throw new DukeException("☹ OOPS!!! Unknown Argument for " + cmdCheck);
