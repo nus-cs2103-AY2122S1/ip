@@ -40,7 +40,7 @@ public class FindCommand extends Command {
             }
             response += String.format("\n%d. %s", listIndex++, task);
         }
-        return response;
+        return ui.showMessage(response);
     }
 
     /**
