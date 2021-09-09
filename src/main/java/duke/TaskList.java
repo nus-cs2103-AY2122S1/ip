@@ -77,7 +77,9 @@ public class TaskList {
         int counter = 1;
         for (int i = 0; i < taskList.size(); i++) {
             Task nextTask = taskList.get(i);
-            if (nextTask.getDescription().toLowerCase().contains(searchWord.toLowerCase())) {
+            String nextDescriptionLower = nextTask.getDescription().toLowerCase();
+            String searchWordLower = searchWord.toLowerCase();
+            if (nextDescriptionLower.contains(searchWordLower)) {
                 result += counter + "." + nextTask.toString() + "\n";
                 counter++;
             }

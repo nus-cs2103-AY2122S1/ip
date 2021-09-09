@@ -35,32 +35,7 @@ public class Storage {
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String item = myReader.nextLine();
-                String[] splitItem = item.split("\\|");
-                if (splitItem.length < 2) {
-                    continue;
-                }
-                String taskType = splitItem[0];
-                String completed = splitItem[1];
-                String desc = splitItem[2];
-                String date = "";
-                if (splitItem.length > 3) {
-                    date = splitItem[3];
-                }
-                Task nextTask = null;
-                switch (taskType) {
-                case ("T"):
-                    nextTask = new Todo(desc);
-                    break;
-                case ("D"):
-                    nextTask = new Deadline(desc, date);
-                    break;
-                case ("E"):
-                    nextTask = new Event(desc, date);
-                }
-                if (completed.equals("1") && nextTask != null) {
-                    nextTask.markAsDone();
-                }
-                taskList.add(nextTask);
+                parseStorageLine(item);
             }
             myReader.close();
         } catch (FileNotFoundException e) {
@@ -77,6 +52,44 @@ public class Storage {
             }
         }
         return this.taskList;
+    }
+
+    /**
+     * Reads a line as stored in the storage and adds the corresponding task
+     * to the task list.
+     *
+     * @throws DukeException If there is an error in recognising the type of task
+     */
+    private void parseStorageLine(String item) throws DukeException {
+        String[] splitItem = item.split("\\|");
+        if (splitItem.length < 2) {
+            return;
+        }
+        String taskType = splitItem[0];
+        String completed = splitItem[1];
+        String desc = splitItem[2];
+        String date = "";
+        if (splitItem.length > 3) {
+            date = splitItem[3];
+        }
+        Task nextTask = null;
+        switch (taskType) {
+        case ("T"):
+            nextTask = new Todo(desc);
+            break;
+        case ("D"):
+            nextTask = new Deadline(desc, date);
+            break;
+        case ("E"):
+            nextTask = new Event(desc, date);
+            break;
+        default:
+            throw new DukeException("Unrecognised task type");
+        }
+        if (completed.equals("1") && nextTask != null) {
+            nextTask.markAsDone();
+        }
+        taskList.add(nextTask);
     }
 
     /**
@@ -111,17 +124,4 @@ public class Storage {
             throw new DukeException("Error deleting or marking task as done");
         }
     }
-
-//    @Override
-//    public String toString() {
-//        String result = "";
-//
-//        for (int i = 0; i < taskList.size(); i++) {
-//            Task nextTask = taskList.get(i);
-//            result += "\n" + nextTask.toStorageString();
-//        }
-//
-//        result = result.trim();
-//        return result;
-//    }
 }
