@@ -1,23 +1,25 @@
 package duke.task;
 
-import duke.exception.NoSuchTaskException;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.exception.NoSuchTaskException;
+import org.junit.jupiter.api.Test;
+
+
 
 public class TaskListTest {
 
     @Test
-    public void addTest(){
+    public void addTest() {
         TaskList list = new TaskList();
         list.add(new ToDo("sleep", false));
-        assertEquals(1,list.size());
+        assertEquals(1, list.size());
     }
 
     @Test
-    public void loadFromListTest(){
+    public void loadFromListTest() {
         TaskList tasklist = new TaskList();
         ArrayList<Task> list = new ArrayList<>();
         list.add(new ToDo("sleep", false));
@@ -26,7 +28,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void deleteTest(){
+    public void deleteTest() {
         TaskList tasklist = new TaskList();
         ArrayList<Task> list = new ArrayList<>();
         list.add(new ToDo("sleep", false));
