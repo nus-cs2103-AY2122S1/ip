@@ -199,6 +199,15 @@ public class Ui {
     }
 
     /**
+     * Prints out the Error Message received in Assertions when Parsing.
+     *
+     * @param assertError Error encountered while parsing input.
+     */
+    public String getAssertingError(AssertionError assertError) {
+        return assertError.getMessage();
+    }
+
+    /**
      * Prints out the Error Message received when loading data from memory.
      *
      * @param loadingError Error encountered while loading data from memory.

@@ -8,6 +8,6 @@ public class DukeTest {
     @Test
     public void dukeTest() {
         Duke duke = new Duke();
-        assertEquals("I'm a Duke, a simple chatbot to help you remember tasks!", duke.toString());
+        assertEquals("I'm Duke, a simple chatbot to help you remember tasks!", duke.toString());
     }
 }

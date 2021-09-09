@@ -28,8 +28,8 @@ public class Duke extends Application {
     private final Storage dukeStorage;
     private EntryList entries;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     private final String TERMINATION_COMMAND = "bye";
     private final String LIST_ENTRIES_COMMAND = "list";
@@ -265,6 +265,8 @@ public class Duke extends Application {
             this.dukeStorage.saveEntries(this.entries);
         } catch (DukeException e) {
             output = this.dukeUi.getParsingError(e);
+        } catch (AssertionError e) {
+            output = this.dukeUi.getAssertingError(e);
         }
         return output;
     }
