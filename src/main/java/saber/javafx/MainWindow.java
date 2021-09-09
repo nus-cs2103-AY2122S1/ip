@@ -1,5 +1,8 @@
 package saber.javafx;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,9 +14,6 @@ import javafx.scene.layout.VBox;
 import saber.Saber;
 import saber.ui.ByeUI;
 import saber.ui.SaberUI;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -33,6 +33,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image saberImage = new Image(this.getClass().getResourceAsStream("/images/saberprofile.png"));
 
+    /**
+     * Initializes the UI
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

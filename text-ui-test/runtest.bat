@@ -7,7 +7,10 @@ REM delete output from previous run
 if exist ACTUAL.TXT del ACTUAL.TXT
 
 REM compile the code into the bin folder
-javac  -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\*.java
+find ../src/main/java/*/*.java  > sources.txt
+find ../src/main/java/*/*/*.java  > sources.txt
+
+if ! javac -cp ../json-simple-1.1.jar:../src/main/java -Xlint:none -d ../bin @sources.txt
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1
