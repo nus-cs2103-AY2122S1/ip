@@ -11,9 +11,8 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.goodBye();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         storage.saveData(taskList);
-        return false;
+        return ui.goodBye();
     }
 }

@@ -10,17 +10,19 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String msg = "";
         if (taskList.getTotalNumberOfTask() > 0) {
-            System.out.println("Here are the tasks in your list:");
+            msg = "Here are the tasks in your list:\n";
             for (int i = 0; i < taskList.getTotalNumberOfTask(); i++) {
                 int index = i + 1;
-                System.out.println(index + "." + taskList.getTaskById(i));
+                msg += index + "." + taskList.getTaskById(i) + "\n";
             }
-            System.out.println();
+            msg += "\n";
         } else {
-            ui.printErrorMessage("Looks like there isn't any task!");
+            msg = ui.printErrorMessage("Looks like there isn't any task!");
+            System.out.println(msg);
         }
-        return true;
+        return msg;
     }
 }

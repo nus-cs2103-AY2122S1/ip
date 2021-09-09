@@ -11,8 +11,8 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
-        return false;
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return "Exit";
     }
 
 

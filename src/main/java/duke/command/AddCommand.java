@@ -24,10 +24,9 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.addTask(task);
-        ui.taskAddedMessage(task, taskList.getTotalNumberOfTask());
-        return true;
+        return ui.taskAddedMessage(task, taskList.getTotalNumberOfTask());
     }
 
 

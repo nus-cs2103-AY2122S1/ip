@@ -11,8 +11,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) throws Exception {
-        taskList.findAndDisplay(super.input);
-        return true;
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws Exception {
+        return taskList.findAndDisplay(super.input);
     }
 }

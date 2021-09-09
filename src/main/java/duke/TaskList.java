@@ -49,11 +49,10 @@ public class TaskList {
      *
      * @param id Index of the task given in the list of Tasks.
      */
-    public void markTaskDoneById(int id) {
+    public String markTaskDoneById(int id) {
         Task task = taskList.get(id);
         task.markDone();
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("\t" + task);
+        return "Nice! I've marked this task as done: \n\t" + task;
     }
 
     /**
@@ -70,8 +69,9 @@ public class TaskList {
      *
      * @param searchItem The query.
      */
-    public void findAndDisplay(String searchItem) {
+    public String findAndDisplay(String searchItem) {
         List<Task> searchList = new ArrayList<>();
+        String msg = "";
 
         for (Task task : taskList) {
             if (task.getValue().contains(searchItem)) {
@@ -80,14 +80,16 @@ public class TaskList {
         }
 
         if (searchList.size() > 0) {
-            System.out.println("Here are the matching tasks in your list: ");
+            msg = "Here are the matching tasks in your list: \n";
             for (int i = 0; i < searchList.size(); i++) {
                 int index = i + 1;
-                System.out.println(index + "." + searchList.get(i));
+                msg += index + "." + searchList.get(i) + "\n";
             }
         } else {
-            System.out.println("Sorry there are no items that match your query!");
+            msg = "Sorry there are no items that match your query!";
         }
+
+        return msg;
     }
 
     /**

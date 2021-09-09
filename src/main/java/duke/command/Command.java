@@ -12,5 +12,5 @@ public abstract class Command {
         this.input = input;
     }
 
-    public abstract boolean execute(TaskList taskList, Ui ui, Storage storage) throws Exception;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws Exception;
 }

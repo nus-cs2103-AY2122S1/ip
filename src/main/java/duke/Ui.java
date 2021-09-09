@@ -22,16 +22,15 @@ public class Ui {
     /**
      * Display the welcome message to the user.
      */
-    public void showWelcome() {
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
+    public String getWelcome() {
+        return "Hello from\n" + logo + "\n" + "What can I do for you?";
     }
 
     /**
      * Display a prompt asking user for an action.
      */
-    public void showLoopWelcome() {
-        System.out.println("What else can I do for you?");
+    public String showLoopWelcome() {
+        return "What else can I do for you?";
     }
 
     /**
@@ -56,8 +55,8 @@ public class Ui {
      *
      * @param msg The error message that is to be printed.
      */
-    public void printErrorMessage(String msg) {
-        System.out.println(msg);
+    public String printErrorMessage(String msg) {
+        return msg;
     }
 
     /**
@@ -70,8 +69,8 @@ public class Ui {
     /**
      * Display goodbye message.
      */
-    public void goodBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String goodBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -79,11 +78,13 @@ public class Ui {
      *
      * @param taskToBeDeleted The Task that is to be deleted.
      * @param totalTask The remaining number of task.
+     * @return String msg to be printed
      */
-    public void taskRemovedMessage(Task taskToBeDeleted, int totalTask) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("\t" + taskToBeDeleted.toString());
-        System.out.println("Now you have " + totalTask + " task in the list.");
+    public String taskRemovedMessage(Task taskToBeDeleted, int totalTask) {
+        String msg = "Noted. I've removed this task:\n";
+        msg += "\t" + taskToBeDeleted.toString() + "\n";
+        msg += "Now you have " + totalTask + " task in the list.";
+        return msg;
     }
 
     /**
@@ -91,10 +92,12 @@ public class Ui {
      *
      * @param task The Task that is to be Added.
      * @param totalTask The new total number of task.
+     * @return String msg to be printed
      */
-    public void taskAddedMessage(Task task, int totalTask) {
-        System.out.println("Got it. I've added this task.");
-        System.out.println(task);
-        System.out.println("Now you have " + totalTask + " tasks in the list.");
+    public String taskAddedMessage(Task task, int totalTask) {
+        String msg = "Got it. I've added this task." + "\n";
+        msg += task + "\n";
+        msg += "Now you have " + totalTask + " tasks in the list.";
+        return msg;
     }
 }

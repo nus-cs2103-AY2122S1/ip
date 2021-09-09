@@ -1,5 +1,6 @@
 package duke;
 
+import duke.command.ByeCommand;
 import duke.command.Command;
 
 import javafx.scene.Scene;
@@ -30,6 +31,7 @@ public class Duke extends javafx.application.Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private boolean firstTime = true;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -61,7 +63,7 @@ public class Duke extends javafx.application.Application {
      * This method runs the program indefinitely till user types in "bye".
      */
     public void runProgram() {
-        ui.showWelcome();
+        System.out.println(ui.getWelcome());
         boolean run = true;
 
         while (run) {
@@ -69,16 +71,19 @@ public class Duke extends javafx.application.Application {
                 // wait to read in the user's input
                 String input = ui.readCommand();
                 Command userCommand = Parser.parse(input);
-                run = userCommand.execute(taskList, ui, storage);
+                System.out.println(userCommand.execute(taskList, ui, storage));
+                if (userCommand instanceof ByeCommand) {
+                    run = false;
+                }
             } catch (IncompleteCommandException e) {
                 run = true;
-                ui.printErrorMessage(e.getMessage());
+                System.out.println(ui.printErrorMessage(e.getMessage()));
             } catch (Exception e) {
                 run = false;
                 e.printStackTrace();
             }
             if (run) {
-                ui.showLoopWelcome();
+                System.out.println(ui.showLoopWelcome());
             }
 
         }
@@ -168,19 +173,6 @@ public class Duke extends javafx.application.Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-//        Label userText = new Label(userInput.getText());
-//        Label dukeText = new Label(getResponse(userInput.getText()));
-//        ImageView userImage = new ImageView(user);
-//        userImage.setFitHeight(100);
-//        userImage.setFitWidth(100);
-//        ImageView dukeImage = new ImageView(duke);
-//        dukeImage.setFitHeight(100);
-//        dukeImage.setFitWidth(100);
-//        dialogContainer.getChildren().addAll(
-//                DialogBox.getUserDialog(userText, userImage),
-//                DialogBox.getDukeDialog(dukeText, dukeImage)
-//        );
-//        userInput.clear();
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
@@ -195,7 +187,21 @@ public class Duke extends javafx.application.Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        String output = "";
+        try {
+            Command userCommand = Parser.parse(input);
+            output = userCommand.execute(taskList, ui, storage);
+            if (!(userCommand instanceof ByeCommand)) {
+                output += "\n" + ui.showLoopWelcome();
+            }
+        } catch (IncompleteCommandException e) {
+            output = ui.printErrorMessage(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            output = e.getMessage();
+        }
+
+        return "Duke: " + output;
     }
 
 

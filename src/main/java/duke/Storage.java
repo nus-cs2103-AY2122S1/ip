@@ -57,7 +57,7 @@ public class Storage {
             }
             File txtDataFile = new File(filePath);
             if (!txtDataFile.exists()) {
-                ui.printErrorMessage("No stored data! Starting a brand new state!");
+                System.out.println(ui.printErrorMessage("No stored data! Starting a brand new state!"));
                 txtDataFile = new File(filePath);
                 txtDataFile.createNewFile();
             } else {

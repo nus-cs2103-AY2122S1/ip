@@ -11,9 +11,9 @@ public class InvalidCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printErrorMessage("Invalid command!\n"
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.printErrorMessage("Invalid command!\n"
                 + "Try TODO, DEADLINE or EVENT follow by task description.");
-        return true;
+
     }
 }

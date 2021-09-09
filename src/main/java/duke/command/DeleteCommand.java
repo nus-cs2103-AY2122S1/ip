@@ -13,17 +13,18 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String msg = "";
         if (input.length() > 7) {
             String[] stringArr = input.split(" ");
             if (Parser.isNumeric(stringArr[1])) {
                 int taskId = Integer.parseInt(stringArr[1]) - 1;
                 Task taskToBeDeleted = taskList.getTaskById(taskId);
                 taskList.removeTaskById(taskId);
-                ui.taskRemovedMessage(taskToBeDeleted, taskList.getTotalNumberOfTask());
+                msg = ui.taskRemovedMessage(taskToBeDeleted, taskList.getTotalNumberOfTask());
             }
         }
-        return false;
+        return msg;
     }
 
 }
