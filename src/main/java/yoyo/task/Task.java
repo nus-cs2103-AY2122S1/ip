@@ -1,27 +1,44 @@
 package yoyo.task;
 
-import yoyo.utility.Constant;
+import static yoyo.utility.Constant.COMMA_SEPARATOR;
 
 import java.util.ArrayList;
 
-import static yoyo.utility.Constant.COMMA_SEPARATOR;
-import static yoyo.utility.Constant.WHITESPACE;
-
+/**
+ * Abstract class representing a task in Yoyo app.
+ */
 public abstract class Task {
     protected boolean isDone = false;
     protected String name;
     protected ArrayList<String> tags = new ArrayList<>();
 
+    /**
+     * Constructor for creating an instance of Task. Must specify name.
+     *
+     * @param name Name of the task.
+     */
     public Task(String name) {
         this.name = name;
-
     }
 
+    /**
+     * Constructor for creating an instance of Task. Must specify name, isDone.
+     *
+     * @param name   Name of the task.
+     * @param isDone Boolean indicating if task is done.
+     */
     public Task(String name, boolean isDone) {
         this.name = name;
         this.isDone = isDone;
     }
 
+    /**
+     * Constructor for creating an instance of Task. Must specify name, isDone, tags.
+     *
+     * @param name   Name of the task.
+     * @param isDone Boolean indicating if task is done.
+     * @param tags   Array of tags belonging to this task.
+     */
     public Task(String name, boolean isDone, String[] tags) {
         this.name = name;
         this.isDone = isDone;
@@ -29,6 +46,27 @@ public abstract class Task {
             this.addTag(tags[i]);
         }
     }
+
+    /**
+     * Returns a status string indicating type of task.
+     *
+     * @return An indicator string for the type of task.
+     */
+    public abstract String printType();
+
+    /**
+     * Produces a string containing task's status.
+     *
+     * @return a string containing task's status.
+     */
+    public abstract String showStatus();
+
+    /**
+     * Produces a string containing task's status in write format.
+     *
+     * @return a string containing task's status in write format.
+     */
+    public abstract String showStatusWrite();
 
     /**
      * Adds a new tag to this task.
@@ -79,7 +117,6 @@ public abstract class Task {
         return result;
     }
 
-
     /**
      * Checks if name contains input string.
      *
@@ -104,50 +141,10 @@ public abstract class Task {
     }
 
     /**
-     * Returns a status string indicating type of task.
-     *
-     * @return An indicator string for the type of task.
-     */
-    public abstract String printType();
-
-    /**
      * Toggles completion status.
      */
     public void toggleDone() {
         this.isDone = true;
-    }
-
-    public String showTimeInfo() {
-        return "";
-    }
-
-
-    /**
-     * Produces a string containing task's status.
-     *
-     * @return a string containing task's status.
-     */
-    public String showStatus() {
-        return printType()
-                + printCompletionStatus()
-                + WHITESPACE
-                + name
-                + WHITESPACE
-                + showTags();
-
-    }
-
-    /**
-     * Produces a string containing task's status in write format.
-     *
-     * @return a string containing task's status in write format.
-     */
-    public String showStatusWrite() {
-        return this.printType()
-                + this.printCompletionStatus()
-                + COMMA_SEPARATOR
-                + this.name
-                + this.showTagsWriteFormat();
     }
 
     /**

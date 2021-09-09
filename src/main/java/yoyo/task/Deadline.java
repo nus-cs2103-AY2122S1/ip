@@ -1,11 +1,10 @@
 package yoyo.task;
 
+import static yoyo.utility.Constant.WHITESPACE;
+
 import java.time.LocalDateTime;
 
 import yoyo.utility.Constant;
-
-import static yoyo.utility.Constant.WHITESPACE;
-
 
 /**
  * A subclass of duke.task.Task of deadline type.
@@ -16,7 +15,7 @@ public class Deadline extends Task {
     /**
      * Constructor for the Deadline class with name and datetime parameters.
      *
-     * @param name Name of Deadline.
+     * @param name     Name of Deadline.
      * @param datetime Datetime of Deadline.
      */
     public Deadline(String name, LocalDateTime datetime) {
@@ -27,9 +26,9 @@ public class Deadline extends Task {
     /**
      * Constructor for the Deadline class with name, datetime and isDone parameters.
      *
-     * @param name Name of Deadline.
+     * @param name     Name of Deadline.
      * @param datetime Datetime of Deadline.
-     * @param isDone Completion status of task.
+     * @param isDone   Completion status of task.
      */
     public Deadline(String name, LocalDateTime datetime, boolean isDone) {
         super(name, isDone);
@@ -39,20 +38,21 @@ public class Deadline extends Task {
     /**
      * Constructor for the Deadline class with name, datetime, isDone and tags parameters.
      *
-     * @param name Name of Deadline.
+     * @param name     Name of Deadline.
      * @param datetime Datetime of Deadline.
-     * @param isDone Completion status of task.
-     * @param tags Tags of the task.
+     * @param isDone   Completion status of task.
+     * @param tags     Tags of the task.
      */
     public Deadline(String name, LocalDateTime datetime, boolean isDone, String[] tags) {
         super(name, isDone, tags);
         this.datetime = datetime;
     }
 
-
-
-
-    @Override
+    /**
+     * Returns a string containing time info of this task.
+     *
+     * @return String containing time info of this task.
+     */
     public String showTimeInfo() {
         return "(by: " + datetime.toString().replace('T', ' ') + ")";
     }
@@ -64,7 +64,7 @@ public class Deadline extends Task {
      */
     @Override
     public String showStatus() {
-        String resultString  = printType()
+        String resultString = printType()
                 + printCompletionStatus()
                 + WHITESPACE
                 + name

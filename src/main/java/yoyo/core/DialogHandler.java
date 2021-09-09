@@ -1,9 +1,9 @@
 package yoyo.core;
 
+import static yoyo.utility.Constant.NEWLINE_CHAR;
+
 import yoyo.task.Task;
 import yoyo.task.TaskList;
-
-import static yoyo.utility.Constant.NEWLINE_CHAR;
 
 /**
  * Dialog handler class that represents the component of Yoyo program that handles dialog.

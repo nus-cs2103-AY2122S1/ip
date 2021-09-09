@@ -2,12 +2,23 @@ package yoyo.task;
 
 import java.util.ArrayList;
 
+/**
+ * A task list class representing a list of tasks.
+ */
 public class TaskList {
     private ArrayList<Task> tasks = new ArrayList<>();
 
+    /**
+     * Constructor for an empty TaskList.
+     */
     public TaskList() {
     }
 
+    /**
+     * Constructor for TaskList with specified Tasks.
+     *
+     * @param tasks Array of Tasks to be included.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }

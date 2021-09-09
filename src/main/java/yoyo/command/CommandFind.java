@@ -6,7 +6,15 @@ import yoyo.exception.YoyoException;
 import yoyo.task.Task;
 import yoyo.task.TaskList;
 
+/**
+ * A command subclass representing "find" command.
+ */
 public class CommandFind extends Command {
+    /**
+     * Constructor for "find" command class.
+     *
+     * @param inputTokens Array of string tokens constructed from user input.
+     */
     public CommandFind(String[] inputTokens) {
         super(inputTokens);
     }

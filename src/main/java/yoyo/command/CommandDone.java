@@ -6,7 +6,15 @@ import yoyo.exception.YoyoException;
 import yoyo.task.Task;
 import yoyo.task.TaskList;
 
+/**
+ * A command subclass representing "done" command.
+ */
 public class CommandDone extends Command {
+    /**
+     * Constructor for "done" command class.
+     *
+     * @param inputTokens Array of string tokens constructed from user input.
+     */
     public CommandDone(String[] inputTokens) {
         super(inputTokens);
     }

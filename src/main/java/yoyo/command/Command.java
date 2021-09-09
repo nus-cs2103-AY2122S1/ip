@@ -1,16 +1,23 @@
 package yoyo.command;
 
+import java.util.Arrays;
+
 import yoyo.core.DialogHandler;
 import yoyo.core.Storage;
 import yoyo.exception.YoyoException;
 import yoyo.task.TaskList;
 
-import java.util.Arrays;
-
-
+/**
+ * A command class representing an user command.
+ */
 public abstract class Command {
     protected String[] inputTokens;
 
+    /**
+     * Constructor for Command class.
+     *
+     * @param inputTokens Array of string tokens constructed from user input.
+     */
     public Command(String[] inputTokens) {
         this.inputTokens = inputTokens;
     }

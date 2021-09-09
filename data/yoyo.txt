@@ -1,10 +1,6 @@
-[D][], geq eajlkhadslkja, 1221-12-12T19:00
 [E][X], sleep, 1221-12-12T19:00
-[T][X], dsalkj
-[T][], dslkjahdlksa
-[T][X], dslkajdlkas
 [T][X], dslaikjdlsa, zhenglin
 [T][], eat, stuart, kevin, bernard
 [T][], eateateateat
-[T][], dlkasdjklsadslkajdlksadsajlk
-[T][], dasdlksajdklajdklsadjsa
+[D][X], cs2100 assignment, 2021-09-15T23:59, graded
+[T][], clean cupboard, cleaning

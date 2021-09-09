@@ -6,7 +6,15 @@ import yoyo.exception.YoyoException;
 import yoyo.task.Task;
 import yoyo.task.TaskList;
 
+/**
+ * A command subclass representing "tag" command.
+ */
 public class CommandTag extends Command {
+    /**
+     * Constructor for "tag" command class.
+     *
+     * @param inputTokens Array of string tokens constructed from user input.
+     */
     public CommandTag(String[] inputTokens) {
         super(inputTokens);
     }

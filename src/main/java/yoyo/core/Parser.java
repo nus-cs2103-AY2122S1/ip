@@ -1,5 +1,10 @@
 package yoyo.core;
 
+import static java.lang.Integer.parseInt;
+
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+
 import yoyo.command.Command;
 import yoyo.command.CommandBye;
 import yoyo.command.CommandDeadline;
@@ -11,11 +16,6 @@ import yoyo.command.CommandList;
 import yoyo.command.CommandTag;
 import yoyo.command.CommandTodo;
 import yoyo.exception.YoyoException;
-
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
-
-import static java.lang.Integer.parseInt;
 
 /**
  * Parser class that represents the parser component of Yoyo program.

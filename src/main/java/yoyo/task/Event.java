@@ -1,9 +1,9 @@
 package yoyo.task;
 
-import java.time.LocalDateTime;
-
 import static yoyo.utility.Constant.COMMA_SEPARATOR;
 import static yoyo.utility.Constant.WHITESPACE;
+
+import java.time.LocalDateTime;
 
 /**
  * A subclass of Task of event type.
@@ -47,7 +47,11 @@ public class Event extends Task {
         this.datetime = datetime;
     }
 
-    @Override
+    /**
+     * Returns a string containing time info of this task.
+     *
+     * @return String containing time info of this task.
+     */
     public String showTimeInfo() {
         return "(at: " + datetime.toString().replace('T', ' ') + ")";
     }
@@ -60,7 +64,7 @@ public class Event extends Task {
      */
     @Override
     public String showStatus() {
-        String resultString  = printType()
+        String resultString = printType()
                 + printCompletionStatus()
                 + WHITESPACE
                 + name

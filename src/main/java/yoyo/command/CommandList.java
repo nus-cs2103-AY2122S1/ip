@@ -5,7 +5,15 @@ import yoyo.core.Storage;
 import yoyo.exception.YoyoException;
 import yoyo.task.TaskList;
 
+/**
+ * A command subclass representing "list" command.
+ */
 public class CommandList extends Command {
+    /**
+     * Constructor for "list" command class.
+     *
+     * @param inputTokens Array of string tokens constructed from user input.
+     */
     public CommandList(String[] inputTokens) {
         super(inputTokens);
     }

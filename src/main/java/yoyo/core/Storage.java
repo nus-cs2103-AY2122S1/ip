@@ -1,10 +1,7 @@
 package yoyo.core;
 
-import yoyo.exception.YoyoException;
-import yoyo.task.Deadline;
-import yoyo.task.Event;
-import yoyo.task.TaskList;
-import yoyo.task.Todo;
+import static yoyo.utility.Constant.COMMA_SEPARATOR;
+import static yoyo.utility.Constant.NEWLINE_CHAR;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,8 +11,11 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
-import static yoyo.utility.Constant.NEWLINE_CHAR;
-import static yoyo.utility.Constant.COMMA_SEPARATOR;
+import yoyo.exception.YoyoException;
+import yoyo.task.Deadline;
+import yoyo.task.Event;
+import yoyo.task.TaskList;
+import yoyo.task.Todo;
 
 /**
  * Storage class that represents the storage component of Yoyo program.

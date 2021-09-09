@@ -7,11 +7,18 @@ import yoyo.task.Task;
 import yoyo.task.TaskList;
 import yoyo.task.Todo;
 
+/**
+ * A command subclass representing "todo" command.
+ */
 public class CommandTodo extends Command {
+    /**
+     * Constructor for "todo" command class.
+     *
+     * @param inputTokens Array of string tokens constructed from user input.
+     */
     public CommandTodo(String[] inputTokens) {
         super(inputTokens);
     }
-
 
     /**
      * Executes "todo" command.

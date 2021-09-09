@@ -6,7 +6,15 @@ import yoyo.exception.YoyoException;
 import yoyo.task.Task;
 import yoyo.task.TaskList;
 
+/**
+ * A command subclass representing "delete" command.
+ */
 public class CommandDelete extends Command {
+    /**
+     * Constructor for "delete" command class.
+     *
+     * @param inputTokens Array of string tokens constructed from user input.
+     */
     public CommandDelete(String[] inputTokens) {
         super(inputTokens);
     }
