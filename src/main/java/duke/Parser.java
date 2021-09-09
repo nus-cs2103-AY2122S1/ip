@@ -87,6 +87,7 @@ public class Parser {
      * @return returns a command type to be executed in duke.run()
      */
     public static Command parseCommands(String input) {
+        assert !input.isEmpty() : "input should not be empty";
         parsed = input.split(" ");
         try {
             switch (parsed[0]) {
@@ -105,7 +106,7 @@ public class Parser {
                 return new EventCommand(eventDetails[0], parseDate(eventDetails[1]));
             case DeadlineCommand.COMMAND:
                 String[] deadlineDetails = parseDeadlineTask(input);
-                return new EventCommand(deadlineDetails[0], parseDate(deadlineDetails[1]));
+                return new DeadlineCommand(deadlineDetails[0], parseDate(deadlineDetails[1]));
             case FindCommand.COMMAND:
                 return new FindCommand(parseKeyword(input));
             default:
@@ -120,7 +121,7 @@ public class Parser {
         } catch (DateTimeException e) {
             return new ErrorCommand(
                     "Please input a valid date format of 'dd/mm/yyyy HHmm' in 24 Hour Format",
-                    "(`ー´)");
+                    "(`-´)");
         }
 
     }

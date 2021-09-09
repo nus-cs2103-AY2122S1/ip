@@ -45,6 +45,7 @@ public class Storage {
         while (sc.hasNext()) {
             String task = sc.nextLine();
             String[] parsed = task.split("\\|");
+            assert parsed.length > 0;
 
             switch (parsed[0]) {
             case "T":

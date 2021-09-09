@@ -60,6 +60,7 @@ public class Duke {
     }
 
     public String getResponse(String input) {
+        assert !input.isEmpty() : "input should not be empty!";
         try {
             Command command = Parser.parseCommands(input);
             boolean isExit = command.getExit();
