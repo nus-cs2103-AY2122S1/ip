@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 class ExitCommand extends Command {
-    private static final Set<String> KEYWORDS = new HashSet<>(List.of("exit", "bye", "quit"));
+    private static final Set<String> KEYWORDS = new HashSet<>(List.of("exit", "bye", "quit", "q"));
 
     @Override
     public void run(Duke duke, UserInput input) {

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 class FindTaskCommand extends Command {
-    private static final Set<String> KEYWORDS = new HashSet<>(List.of("find", "search"));
+    private static final Set<String> KEYWORDS = new HashSet<>(List.of("find", "search", "/"));
     private static final String HELP_MESSAGE = "Here are the matching tasks in your list:\n%s";
     private static final String NO_RESULTS_MESSAGE = "No tasks found matching \"%s\"!";
 

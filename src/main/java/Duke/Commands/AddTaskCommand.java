@@ -1,5 +1,12 @@
 package Duke.Commands;
 
+import static java.util.Map.entry;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.Map;
+import java.util.Set;
+
 import Duke.Duke;
 import Duke.Task.Deadline;
 import Duke.Task.Event;
@@ -9,27 +16,20 @@ import Duke.Task.TaskList;
 import Duke.Task.Todo;
 import Duke.Ui.UserInput;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 /**
  * A command that adds a specified task to the list.
  *
  * @author cai
  */
 class AddTaskCommand extends Command {
-    /**
-     * The list of keywords associated with adding a task.
-     * The names of the values in the enum `TaskType` is used as keywords.
-     */
-    private static final Set<String> KEYWORDS = new HashSet<>(
-            Arrays.stream(TaskType.values())
-                    .map(Enum::name)
-                    .collect(Collectors.toList())
+    /** Maps a keyword to its corresponding task type */
+    private static final Map<String, TaskType> KEYWORD_TO_TASKTYPE = Map.ofEntries(
+            entry("todo", TaskType.TODO),
+            entry("deadline", TaskType.DEADLINE),
+            entry("event", TaskType.EVENT),
+            entry("t", TaskType.TODO),
+            entry("d", TaskType.DEADLINE),
+            entry("e", TaskType.EVENT)
     );
     private static final String ADD_TASK_SUCCESS_MESSAGE = "I've added this task:\n\t%s\n" + TASKS_COUNT_MESSAGE;
     private static final String DEADLINE_BY_REGEX = "(?i)\\s+/by\\s+";
@@ -59,7 +59,9 @@ class AddTaskCommand extends Command {
      * @throws InvalidTaskException If invalid task details were provided.
      */
     private static Task createTask(UserInput input) throws InvalidTaskException {
-        TaskType taskType = TaskType.valueOf(input.getKeyword().toUpperCase());
+        TaskType taskType = KEYWORD_TO_TASKTYPE.get(input.getKeyword().toLowerCase());
+        assert taskType != null;
+
         try {
             switch (taskType) {
             case TODO:
@@ -84,6 +86,6 @@ class AddTaskCommand extends Command {
 
     @Override
     protected Set<String> getKeywords() {
-        return KEYWORDS;
+        return KEYWORD_TO_TASKTYPE.keySet();
     }
 }
