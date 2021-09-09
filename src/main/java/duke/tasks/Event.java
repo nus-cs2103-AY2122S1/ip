@@ -24,7 +24,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[" + this.taskType + "]" + "[" + getStatusIcon() + "]" + " " + this.description
-                + String.format(" (at: %s)", this.time.format(formatter));
+        return String.format("[%s][%s] %s (by: %s)",
+                getTaskType(), getStatusIcon(), getDescription(), getTime()
+        );
     }
 }

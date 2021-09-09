@@ -36,7 +36,7 @@ public class TaskList extends ArrayList<Task> {
     }
 
     /**
-     * Add all of the task in the List of String.
+     * Add all the task in the List of String.
      *
      * @param inputString The list of lines of string.
      */
