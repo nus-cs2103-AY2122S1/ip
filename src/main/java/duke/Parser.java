@@ -3,6 +3,7 @@ package duke;
 import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.ToDo;
 
 import java.time.LocalDateTime;
@@ -18,6 +19,11 @@ public class Parser {
             "Invalid date and time input, indicate date in yyyy-MM-dd HH:mm format.";
     private static final String TOO_MANY_ARGUMENTS = "Too many arguments for this command.";
 
+    private Duke duke;
+
+    public Parser(Duke duke) {
+        this.duke = duke;
+    }
 
     /**
      * The method to parse an input line by the user
@@ -26,7 +32,7 @@ public class Parser {
      * @return the command to be executed
      * @throws DukeException
      */
-    public static Command parse(String input) throws DukeException {
+    public Command parse(String input) throws DukeException {
         if (input.equals("")) {
             throw new DukeException("Type something...");
         }
@@ -44,6 +50,8 @@ public class Parser {
                 throw new DukeException("Indicate a task number beside the command ☻");
             } else if (cmd.equals("find")) {
                 throw new DukeException("Enter a keyword beside the command ☻");
+            } else if (cmd.equals("undo")) {
+                return getUndoCommand(this.duke.getPreviousCommand());
             } else {
                 throw new DukeException(UNKNOWN_COMMAND);
             }
@@ -118,18 +126,20 @@ public class Parser {
         return new AddCommand(e);
     }
 
-    public static Command parseDoneCommand(String[] userInputArr) throws DukeException {
+    public Command parseDoneCommand(String[] userInputArr) throws DukeException {
         if (userInputArr.length > 2) {
             throw new DukeException(TOO_MANY_ARGUMENTS);
         }
-        return new DoneCommand(getTaskNumber(userInputArr));
+        int index = getTaskNumber(userInputArr);
+        return new DoneCommand(index);
     }
 
-    public static Command parseDeleteCommand(String[] userInputArr) throws DukeException {
+    public Command parseDeleteCommand(String[] userInputArr) throws DukeException {
         if (userInputArr.length > 2) {
             throw new DukeException(TOO_MANY_ARGUMENTS);
         }
-        return new DeleteCommand(getTaskNumber(userInputArr));
+        int index = getTaskNumber(userInputArr);
+        return new DeleteCommand(index, this.duke.getTaskList());
     }
 
     public static Command parseDeadlineCommand(String input) throws DukeException {
@@ -166,5 +176,30 @@ public class Parser {
      */
     public static String getKeyword(String input) {
         return input.substring(input.indexOf(" ")).strip();
+    }
+
+    public Command getUndoCommand(Command prevCommand) throws DukeException {
+        if (prevCommand == null) {
+            throw new DukeException("No previous command to undo");
+        }
+        if (prevCommand instanceof AddCommand) {
+            if (((AddCommand) prevCommand).isAlreadyUndone()) {
+                throw new DukeException("Previous command cannot be undone");
+            }
+            int index = this.duke.getTaskList().size() - 1;
+            return new DeleteCommand(index, this.duke.getTaskList(), true);
+        } else if (prevCommand instanceof DeleteCommand) {
+            if (((DeleteCommand) prevCommand).isAlreadyUndone()) {
+                throw new DukeException("Previous command cannot be undone");
+            }
+            Task prevDeletedTask = ((DeleteCommand) prevCommand).getDeletedTask();
+            int prevDeletedIndex = ((DeleteCommand) prevCommand).getDeletedIndex();
+            return new AddCommand(prevDeletedTask, prevDeletedIndex);
+        } else if (prevCommand instanceof DoneCommand) {
+            return new UndoneCommand(((DoneCommand) prevCommand).getIndex());
+        } else {
+            // the command cannot be undone
+            throw new DukeException("Previous command cannot be undone");
+        }
     }
 }

@@ -59,6 +59,10 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public void markAsUndone() {
+        this.isDone = false;
+    }
+
     /**
      * Method to return the string representation of the Task
      *

@@ -19,6 +19,9 @@ public class Duke {
     /** The boolean to indicate whether an Exit command is made */
     private boolean isExit;
 
+    // to be used for undo feature for add, delete and done commands
+    private Command previousCommand;
+
     /**
      * The constructor for Duke class
      */
@@ -30,6 +33,7 @@ public class Duke {
             tasks = new TaskList();
         }
         assert(tasks.getListOfTasks() != null);
+        this.previousCommand = null;
     }
 
     /**
@@ -40,7 +44,9 @@ public class Duke {
     public String getResponse(String input) {
         String output = "";
         try {
-            Command c = Parser.parse(input);
+            Parser parser = new Parser(this);
+            Command c = parser.parse(input);
+            previousCommand = c;
             output = c.execute(tasks, storage);
             isExit = c.isExit();
         } catch (DukeException e) {
@@ -64,5 +70,9 @@ public class Duke {
      */
     public TaskList getTaskList() {
         return this.tasks;
+    }
+
+    public Command getPreviousCommand() {
+        return this.previousCommand;
     }
 }

@@ -1,7 +1,10 @@
 package duke.command;
 
+import duke.Duke;
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
+import duke.task.Task;
 
 /**
  * The class to represent a command to delete tasks.
@@ -11,9 +14,21 @@ public class DeleteCommand extends Command {
     /** index of task to delete */
     private int index;
 
+    private TaskList tasks;
+
+    private Task deletedTask;
+    private boolean isAlreadyUndone = false;
+
     /** Constructor of DeleteCommand class */
-    public DeleteCommand(int index) {
+    public DeleteCommand(int index, TaskList tasks) {
         this.index = index;
+        this.tasks = tasks;
+    }
+
+    public DeleteCommand(int index, TaskList tasks, boolean isAlreadyUndone) {
+        this.index = index;
+        this.tasks = tasks;
+        this.isAlreadyUndone = isAlreadyUndone;
     }
 
     /**
@@ -36,6 +51,7 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Storage storage) {
         String output = tasks.deleteTask(this.index);
         storage.writeToFile(tasks);
+        deletedTask = tasks.getMostRecentlyDeletedTask();
         return output;
     }
 
@@ -48,5 +64,17 @@ public class DeleteCommand extends Command {
     @Override
     public boolean equals(Object obj) {
         return (obj instanceof DeleteCommand) && (this.index == ((DeleteCommand) obj).index);
+    }
+
+    public Task getDeletedTask() {
+        return this.deletedTask;
+    }
+
+    public int getDeletedIndex() {
+        return this.index;
+    }
+
+    public boolean isAlreadyUndone() {
+        return this.isAlreadyUndone;
     }
 }

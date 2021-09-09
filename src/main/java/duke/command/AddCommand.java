@@ -11,10 +11,18 @@ public class AddCommand extends Command {
 
     /** The task to be added */
     private Task task;
+    private Integer index = null;
+    private boolean isAlreadyUndone = false;
 
     /** Constructor of AddCommand class */
     public AddCommand(Task t) {
         this.task = t;
+    }
+
+    public AddCommand(Task t, int index) {
+        this.task = t;
+        this.index = index;
+        this.isAlreadyUndone = true;
     }
 
     /**
@@ -35,7 +43,12 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        String output = tasks.addTask(this.task);
+        String output;
+        if (this.index == null) {
+            output = tasks.addTask(this.task);
+        } else {
+            output = tasks.addTask(this.task, index);
+        }
         storage.writeToFile(tasks);
         return output;
     }
@@ -49,5 +62,9 @@ public class AddCommand extends Command {
     @Override
     public boolean equals(Object obj) {
         return (obj instanceof AddCommand) && this.task.equals((((AddCommand) obj).task));
+    }
+
+    public boolean isAlreadyUndone() {
+        return this.isAlreadyUndone;
     }
 }

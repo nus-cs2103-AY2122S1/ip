@@ -4,15 +4,16 @@ import duke.Storage;
 import duke.TaskList;
 
 /**
- * The class to represent a command to mark tasks as done.
+ * The class to represent a command to mark tasks as undone.
+ * Only for undo-ing a DoneCommand, and not for users to mark tasks as Undone yet.
  */
-public class DoneCommand extends Command {
+public class UndoneCommand extends Command {
 
-    /** index of task to be marked as done */
+    /** index of task to be marked as undone */
     private int index;
 
-    /** Constructor of DoneCommand class */
-    public DoneCommand(int index) {
+    /** Constructor of UndoneCommand class */
+    public UndoneCommand(int index) {
         this.index = index;
     }
 
@@ -34,23 +35,19 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        String output = tasks.markTaskAsDone(this.index);
+        String output = tasks.markTaskAsUndone(this.index);
         storage.writeToFile(tasks);
         return output;
     }
 
     /**
-     * Method to determine if two instances of DoneCommand are equal
+     * Method to determine if two instances of UndoneCommand are equal
      *
      * @param obj the object to be used for comparison
-     * @return boolean indicating if the two DoneCommand instances are equal
+     * @return boolean indicating if the two UndoneCommand instances are equal
      */
     @Override
     public boolean equals(Object obj) {
-        return (obj instanceof DoneCommand) && (this.index == ((DoneCommand) obj).index);
-    }
-
-    public int getIndex() {
-        return this.index;
+        return (obj instanceof UndoneCommand) && (this.index == ((UndoneCommand) obj).index);
     }
 }

@@ -11,6 +11,8 @@ public class TaskList {
     /** the list of tasks */
     private ArrayList<Task> listOfTasks;
 
+    private Task getMostRecentlyDeletedTask = null;
+
     /**
      * The constructor of the TaskList class
      *
@@ -117,6 +119,12 @@ public class TaskList {
             "You now have " + listOfTasks.size() + " task(s) in the list.";
     }
 
+    public String addTask(Task t, int index) {
+        listOfTasks.add(index, t);
+        return "Okay! Task added back:\n  " + t.toString() + "\n" +
+                "You now have " + listOfTasks.size() + " task(s) in the list.";
+    }
+
     /**
      * The method to delete a Task from the list
      *
@@ -130,6 +138,7 @@ public class TaskList {
             return "Input a task number from 1 - " + numOfTasks;
         } else {
             Task t = listOfTasks.get(index);
+            getMostRecentlyDeletedTask = t;
             listOfTasks.remove(index);
             return "Ok! I've deleted this task:\n  " + t.toString() + "\n" +
                 "You now have " + (numOfTasks - 1) + " task(s) in the list.";
@@ -154,6 +163,12 @@ public class TaskList {
         }
     }
 
+    public String markTaskAsUndone(int index) {
+        Task t = listOfTasks.get(index);
+        t.markAsUndone();
+        return "Ok, this task has not yet been completed:\n  " + t.toString();
+    }
+
     /**
      * The method to get a list of matching tasks based on a given keyword.
      *
@@ -169,5 +184,9 @@ public class TaskList {
             }
         }
         return matchingTasks;
+    }
+
+    public Task getMostRecentlyDeletedTask() {
+        return this.getMostRecentlyDeletedTask;
     }
 }
