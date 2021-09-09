@@ -1,7 +1,5 @@
 package me.yukun99.ip;
 
-import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -9,6 +7,7 @@ import me.yukun99.ip.core.Parser;
 import me.yukun99.ip.core.Storage;
 import me.yukun99.ip.core.TaskFinder;
 import me.yukun99.ip.core.TaskList;
+import me.yukun99.ip.exceptions.HelpBotIoException;
 import me.yukun99.ip.ui.Ui;
 
 /**
@@ -25,11 +24,11 @@ public class HelpBot extends Application {
     /**
      * Constructor for a HelpBot instance.
      */
-    public HelpBot() throws IOException {
+    public HelpBot() throws HelpBotIoException {
         TaskFinder taskFinder = new TaskFinder();
         TaskList taskList = new TaskList(taskFinder);
         Storage storage = new Storage(FILEPATH, taskList);
-        storage.loadTasks();
+        storage.loadSavedTasks();
         Parser parser = new Parser(this, taskList, storage, taskFinder);
         this.ui = new Ui(LOGO, taskList, storage, taskFinder, parser);
     }

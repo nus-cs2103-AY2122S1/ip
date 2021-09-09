@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import me.yukun99.ip.exceptions.HelpBotDateTimeFormatException;
@@ -18,8 +20,9 @@ import me.yukun99.ip.tasks.ToDo;
  * Handles storage of tasks and outputting replies.
  */
 public class Storage {
-    private final String outpath;
-    private final String savepath;
+    private final String outputPath;
+    private final String savePath;
+    private final String archivePath;
     private final TaskList taskList;
 
     /**
@@ -27,18 +30,17 @@ public class Storage {
      *
      * @param filepath Filepath to use for the current Storage instance.
      * @param taskList List of tasks currently in the bot.
-     * @throws IOException If any file could not be fetched.
      */
-    public Storage(String filepath, TaskList taskList) throws IOException {
+    public Storage(String filepath, TaskList taskList) {
         this.taskList = taskList;
         filepath.replace("\\", "/");
-        this.savepath = filepath + "/tasks.txt";
-        this.outpath = filepath + "/ACTUAL.txt";
-        File previous = new File(outpath);
+        this.savePath = filepath + "/tasks.txt";
+        this.outputPath = filepath + "/ACTUAL.txt";
+        this.archivePath = filepath + "/archive.txt";
+        File previous = new File(outputPath);
         if (previous.exists()) {
             previous.delete();
         }
-        previous.createNewFile();
     }
 
     /**
@@ -49,27 +51,50 @@ public class Storage {
      */
     public void saveMessage(String message) throws HelpBotIoException {
         try {
-            FileWriter output = new FileWriter(outpath, true);
+            FileWriter output = getFile(outputPath);
             output.write(message);
             output.close();
         } catch (IOException e) {
-            throw new HelpBotIoException(e, outpath);
+            throw new HelpBotIoException(e, outputPath);
         }
     }
 
     /**
      * Loads previously saved tasks from file.
      */
-    public void loadTasks() {
-        File saved = new File(savepath);
-        Scanner savedScanner;
+    public void loadSavedTasks() throws HelpBotIoException {
+        File save = new File(savePath);
+        loadTasks(save, false);
+    }
+
+    /**
+     * Loads previously archived tasks from file.
+     * Will save archive to current task list and clear archive file.
+     *
+     * @return List of loaded tasks.
+     */
+    public List<Task> loadArchivedTasks() throws HelpBotIoException {
         try {
-            savedScanner = new Scanner(saved);
-        } catch (FileNotFoundException e) {
-            return;
+            File archive = new File(archivePath);
+            List<Task> loadedTasks = loadTasks(archive, true);
+            FileWriter archiveWriter = new FileWriter(archivePath);
+            archiveWriter.write("");
+            return loadedTasks;
+        } catch (IOException e) {
+            throw new HelpBotIoException(e, archivePath);
         }
-        while (savedScanner.hasNext()) {
-            Task task = parseTask(savedScanner.nextLine());
+    }
+
+    private List<Task> loadTasks(File file, boolean archived) throws HelpBotIoException {
+        List<Task> loadedTasks = new ArrayList<>();
+        Scanner scanner;
+        try {
+            scanner = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            return loadedTasks;
+        }
+        while (scanner.hasNext()) {
+            Task task = parseTask(scanner.nextLine());
             if (task != null) {
                 try {
                     taskList.addTask(task, task.getDate());
@@ -77,7 +102,12 @@ public class Storage {
                     taskList.addTask(task, null);
                 }
             }
+            if (archived) {
+                saveTask(task);
+            }
+            loadedTasks.add(task);
         }
+        return loadedTasks;
     }
 
     /**
@@ -123,17 +153,38 @@ public class Storage {
      */
     public void saveTask(Task task) throws HelpBotIoException {
         try {
-            File previous = new File(savepath);
-            if (!previous.exists()) {
-                previous.createNewFile();
-            }
-            FileWriter output = new FileWriter(savepath, true);
+            FileWriter output = getFile(savePath);
             String strTask = task.saveString();
             output.write(strTask);
             output.close();
         } catch (IOException e) {
-            throw new HelpBotIoException(e, savepath);
+            throw new HelpBotIoException(e, savePath);
         }
+    }
+
+    /**
+     * Saves a task to archive file.
+     *
+     * @param task Task to be archived.
+     * @throws HelpBotIoException If task could not be archived.
+     */
+    public void archiveTask(Task task) throws HelpBotIoException {
+        try {
+            FileWriter output = getFile(archivePath);
+            String strTask = task.saveString();
+            output.write(strTask);
+            output.close();
+        } catch (IOException e) {
+            throw new HelpBotIoException(e, archivePath);
+        }
+    }
+
+    private FileWriter getFile(String path) throws IOException {
+        File previous = new File(path);
+        if (!previous.exists()) {
+            previous.createNewFile();
+        }
+        return new FileWriter(path, true);
     }
 
     /**
@@ -143,12 +194,12 @@ public class Storage {
      */
     public void updateTasks() throws HelpBotIoException {
         try {
-            FileWriter output = new FileWriter(savepath);
+            FileWriter output = new FileWriter(savePath);
             String strTaskList = taskList.saveString();
             output.write(strTaskList);
             output.close();
         } catch (IOException e) {
-            throw new HelpBotIoException(e, savepath);
+            throw new HelpBotIoException(e, savePath);
         }
     }
 }

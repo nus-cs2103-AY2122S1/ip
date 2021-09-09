@@ -9,6 +9,7 @@ import java.util.Objects;
 import me.yukun99.ip.exceptions.HelpBotDateTimeFormatException;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskException;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskTypeException;
+import me.yukun99.ip.exceptions.HelpBotIoException;
 import me.yukun99.ip.tasks.Task;
 
 /**
@@ -178,6 +179,44 @@ public class TaskList {
             task.updateFinder(taskFinder, true);
         }
         return deletedTasks;
+    }
+
+    /**
+     * Deletes all tasks from the TaskList
+     *
+     * @return List containing all deleted tasks.
+     */
+    public List<Task> deleteAll() {
+        List<Task> deletedTasks = new ArrayList<>(taskList);
+        taskList.clear();
+        taskFinder.deleteAllTasks();
+        return deletedTasks;
+    }
+
+    /**
+     * Archives all tasks from the TaskList.
+     *
+     * @param storage Storage instance to save archived tasks to.
+     * @return List of archived tasks.
+     * @throws HelpBotIoException If tasks could not be archived.
+     */
+    public List<Task> archiveTasks(Storage storage, String... args)
+            throws HelpBotIoException, HelpBotInvalidTaskException {
+        List<Task> archivedTasks = new ArrayList<>();
+        for (String strIndex : args) {
+            try {
+                int index = Integer.parseInt(strIndex) - 1;
+                archivedTasks.add(taskList.get(index));
+            } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                throw new HelpBotInvalidTaskException(e, "archive", strIndex);
+            }
+        }
+        for (Task task : archivedTasks) {
+            storage.archiveTask(task);
+            taskList.remove(task);
+            task.updateFinder(taskFinder, true);
+        }
+        return archivedTasks;
     }
 
     /**

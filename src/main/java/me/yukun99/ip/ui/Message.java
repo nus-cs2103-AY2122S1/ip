@@ -34,7 +34,10 @@ public class Message {
     private static final String HELP_TIME = "     - time format: hh:mm:ss";
     private static final String HELP_UPDATE = "modify the date/time of task at specified index";
     private static final String HELP_DELETE = "delete multiple tasks (LIFT MY BURDEN!)";
-    private static final String HELP_EXIT = "(please for the love of God) let me rest! :)";
+    private static final String HELP_DELETE_ALL = "delete all tasks (YES YES YES YES YES)";
+    private static final String HELP_ARCHIVE_SAVE = "archives multiple tasks (ahh... temporal relief...)";
+    private static final String HELP_ARCHIVE_LOAD = "loads archived tasks";
+    private static final String HELP_EXIT = "(please for the love of God) lets me rest! :)";
 
     // Message sent to user when bot starts.
     private static final String ENABLE = "Beep... You've reached the voicemail of HelpBot inc. "
@@ -51,6 +54,9 @@ public class Message {
             + NEW_LINE + HELP_DATE
             + NEW_LINE + HELP_TIME
             + NEW_LINE + CMD_PREFIX + "'delete (task index) (task index 2) ...' - " + HELP_DELETE
+            + NEW_LINE + CMD_PREFIX + "'delete all' - " + HELP_DELETE_ALL
+            + NEW_LINE + CMD_PREFIX + "'archive (task index) (task index 2) ...' - " + HELP_ARCHIVE_SAVE
+            + NEW_LINE + CMD_PREFIX + "'archive load' - " + HELP_ARCHIVE_LOAD
             + NEW_LINE + CMD_PREFIX + "'bye' - " + HELP_EXIT;
 
     // Message sent to user when user requests for help.
@@ -65,6 +71,8 @@ public class Message {
             + NEW_LINE + HELP_DATE
             + NEW_LINE + HELP_TIME
             + NEW_LINE + CMD_PREFIX + "'delete (task index) (task index 2) ...' - " + HELP_DELETE
+            + NEW_LINE + CMD_PREFIX + "'archive (task index) (task index 2) ...' - " + HELP_ARCHIVE_SAVE
+            + NEW_LINE + CMD_PREFIX + "'archive load' - " + HELP_ARCHIVE_LOAD
             + NEW_LINE + CMD_PREFIX + "'bye' - " + HELP_EXIT;
 
     // Message sent to user when user lists all tasks.
@@ -85,6 +93,10 @@ public class Message {
     // Message sent to user when user deletes multiple tasks at once.
     private static final String DELETE_MULTIPLE_LARGE =
             "HOW LONG HAVE YOU BEEN LETTING THESE PILE UP? DAMN IT, DELETED THESE:";
+    private static final String ARCHIVE_SAVE = "Finally gonna take some load off me, are you?"
+            + "These better not come back anytime soon:";
+    private static final String ARCHIVE_LOAD = "I knew it... Sometimes I wonder why I even try with you."
+            + "Archived tasks loaded:";
     // Message sent to user when user marks an undone task as done.
     private static final String DONE_UNCOMPLETED =
             "About time you did your work, you lazy bum! I GUESS I'll mark it as done for you:";
@@ -209,7 +221,7 @@ public class Message {
      *
      * @param tasks List of deleted tasks.
      * @param taskList TaskList that user deleted the tasks from.
-     * @return Message sent whenuser deletes multiple tasks at once.
+     * @return Message sent when user deletes multiple tasks at once.
      */
     public static String getDeleteMultipleMessage(List<Task> tasks, TaskList taskList) {
         StringBuilder reply;
@@ -222,7 +234,37 @@ public class Message {
             reply.append(NEW_LINE).append(task.toString());
         }
         reply.append(NEW_LINE).append(getRemainingMessage(taskList));
-        return reply.toString();
+        return formatMessage(reply.toString());
+    }
+
+    /**
+     * Gets message sent when user archives tasks.
+     *
+     * @param tasks List of archived tasks.
+     * @return Message sent when user archives tasks.
+     */
+    public static String getArchiveSaveMessage(List<Task> tasks) {
+        StringBuilder reply = new StringBuilder(ARCHIVE_SAVE);
+        for (Task task : tasks) {
+            reply.append(NEW_LINE).append(task.toString());
+        }
+        return formatMessage(reply.toString());
+    }
+
+    /**
+     * Gets message sent when user loads archived tasks.
+     *
+     * @param tasks List of loaded tasks.
+     * @param taskList TaskList that tasks are loaded to.
+     * @return Message sent when user loads archived tasks.
+     */
+    public static String getArchiveLoadMessage(List<Task> tasks, TaskList taskList) {
+        StringBuilder reply = new StringBuilder(ARCHIVE_LOAD);
+        for (Task task : tasks) {
+            reply.append(NEW_LINE).append(task.toString());
+        }
+        reply.append(NEW_LINE).append(getRemainingMessage(taskList));
+        return formatMessage(reply.toString());
     }
 
     /**

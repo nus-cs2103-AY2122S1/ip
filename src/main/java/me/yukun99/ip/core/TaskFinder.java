@@ -49,6 +49,13 @@ public class TaskFinder {
     }
 
     /**
+     * Deletes all tasks from the TaskFinder instance.
+     */
+    public void deleteAllTasks() {
+        this.wordTaskMap.clear();
+    }
+
+    /**
      * Parses the words in a task name.
      *
      * @param name Task name to be parsed.

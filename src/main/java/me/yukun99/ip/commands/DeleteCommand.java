@@ -28,10 +28,17 @@ public class DeleteCommand extends Command {
     @Override
     public String getResponse() throws HelpBotInvalidTaskException, HelpBotIoException {
         List<Task> deletedTasks = new ArrayList<>();
-        if (args.length > 1) {
-            deletedTasks = taskList.deleteTasks(args);
-        } else {
-            deletedTasks.add(taskList.deleteTask(args[0]));
+        boolean deleteAll = false;
+        if (args[0].equals("all")) {
+            deletedTasks = taskList.deleteAll();
+            deleteAll = true;
+        }
+        if (!deleteAll) {
+            if (args.length > 1) {
+                deletedTasks = taskList.deleteTasks(args);
+            } else {
+                deletedTasks.add(taskList.deleteTask(args[0]));
+            }
         }
         storage.updateTasks();
         if (deletedTasks.size() > 1) {

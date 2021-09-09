@@ -4,6 +4,7 @@ import static me.yukun99.ip.tasks.Task.Type;
 
 import me.yukun99.ip.HelpBot;
 import me.yukun99.ip.commands.AddCommand;
+import me.yukun99.ip.commands.ArchiveCommand;
 import me.yukun99.ip.commands.Command;
 import me.yukun99.ip.commands.DeleteCommand;
 import me.yukun99.ip.commands.DoneCommand;
@@ -103,6 +104,11 @@ public class Parser {
             String strIndex = message.replaceFirst("delete ", "");
             String[] args = strIndex.split(" ");
             command = new DeleteCommand(args, taskList, storage);
+        }
+        if (message.startsWith("archive ")) {
+            String strIndex = message.replaceFirst("archive ", "");
+            String[] args = strIndex.split(" ");
+            command = new ArchiveCommand(args, taskList, storage);
         }
         if (message.startsWith("done ")) {
             String strIndex = message.replaceFirst("done ", "");
