@@ -196,7 +196,9 @@ public class Duke extends javafx.application.Application {
             assert input != null;
             Command userCommand = Parser.parse(input);
             output = userCommand.execute(taskList, ui, storage);
-            if (!(userCommand instanceof ByeCommand)) {
+
+            boolean userStillUsing = !(userCommand instanceof ByeCommand);
+            if (userStillUsing) {
                 output += "\n" + ui.showLoopWelcome();
             }
         } catch (IncompleteCommandException e) {
