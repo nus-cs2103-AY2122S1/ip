@@ -6,12 +6,12 @@ package duke;
  */
 public class DeleteCommand implements ICommand {
 
-    String taskIndex;
-    TaskManager tm;
-    ResponseManager responseManager;
-    Storage storage;
-    Task deletedTask;
-    String reply;
+    private String taskIndex;
+    private TaskManager tm;
+    private ResponseManager responseManager;
+    private Storage storage;
+    private Task deletedTask;
+    private String reply;
 
 
     /**
