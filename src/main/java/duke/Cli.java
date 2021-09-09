@@ -25,7 +25,7 @@ public class Cli implements Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
     private final Scanner scanner;
     private final PrintStream outputStream;
-    private boolean exit;
+    private boolean shouldExit;
 
     /**
      * Creates a new user interface with the given input and output streams.
@@ -35,7 +35,7 @@ public class Cli implements Ui {
     public Cli(InputStream inputStream, PrintStream outputStream) {
         this.scanner = new Scanner(inputStream);
         this.outputStream = outputStream;
-        this.exit = false;
+        this.shouldExit = false;
     }
 
     /**
@@ -86,7 +86,7 @@ public class Cli implements Ui {
      * Marks Duke as to be exited after the latest command is done processing.
      */
     public void markExit() {
-        exit = true;
+        shouldExit = true;
     }
 
     /**
@@ -95,7 +95,7 @@ public class Cli implements Ui {
      * @return if Duke should continue accepting commands.
      */
     public boolean shouldContinue() {
-        return !exit;
+        return !shouldExit;
     }
 
     /**
