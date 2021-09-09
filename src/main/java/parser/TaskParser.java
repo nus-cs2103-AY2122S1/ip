@@ -24,6 +24,7 @@ public class TaskParser {
      * @return The storage string representation of the task.
      */
     public String encode(Task task) {
+        assert task != null;
         String status = String.valueOf(task.getStatus());
         String description = task.getDescription();
 
@@ -48,12 +49,13 @@ public class TaskParser {
 
     /**
      * Translates a task in string format to a Task object.
-     * @param string The string to be parsed.
+     * @param taskText The task text to be parsed.
      * @return The Task object based on the string.
      * @throws MorganException If storage data has been tampered.
      */
-    public Task decode(String string) throws MorganException {
-        String[] data = string.split(DELIMITER);
+    public Task decode(String taskText) throws MorganException {
+        assert taskText != null;
+        String[] data = taskText.split(DELIMITER);
 
         if (data.length <= DESCRIPTION_INDEX) {
             throw new MorganException(TAMPERED_ERROR);
@@ -90,7 +92,6 @@ public class TaskParser {
         if (isDone) {
             task.markDone();
         }
-
         return task;
     }
 }

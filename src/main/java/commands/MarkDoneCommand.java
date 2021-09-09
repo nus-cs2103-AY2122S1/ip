@@ -23,6 +23,7 @@ public class MarkDoneCommand extends Command {
      * @throws MorganException If input format is invalid.
      */
     public MarkDoneCommand(String userInput) throws MorganException {
+        assert userInput != null;
         String intString = userInput.substring(KEYWORD.length()).trim();
 
         if (intString.isEmpty()) {
@@ -43,6 +44,7 @@ public class MarkDoneCommand extends Command {
      * @throws MorganException If input format is invalid.
      */
     public String execute(TaskList tasks, Storage storage) throws MorganException {
+        assert tasks != null && storage != null;
         boolean isValidTaskNumber = this.taskNumber <= tasks.getNumOfTasks()
                 && this.taskNumber > 0;
         if (!isValidTaskNumber) {

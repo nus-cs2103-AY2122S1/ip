@@ -18,6 +18,7 @@ public class AddToDoCommand extends AddCommand {
      * @throws MorganException If input format is invalid.
      */
     public AddToDoCommand (String userInput) throws MorganException {
+        assert userInput != null;
         String inputData = userInput.substring(KEYWORD.length()).trim();
         boolean hasTask = !inputData.isEmpty();
         if (!hasTask) {

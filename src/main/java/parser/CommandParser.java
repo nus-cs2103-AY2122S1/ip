@@ -29,6 +29,7 @@ public class CommandParser {
      * @throws MorganException If input format is invalid.
      */
     public Command getCommand(String userInput) throws MorganException {
+        assert userInput != null;
         boolean hasBannedDelimiter = userInput.contains(TaskParser.DELIMITER);
         if (hasBannedDelimiter) {
             throw new MorganException(DELIMITER_FOUND_ERROR_MESSAGE);

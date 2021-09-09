@@ -18,6 +18,7 @@ public abstract class AddCommand extends Command {
      * @return The completion message after execution.
      */
     public String execute(TaskList tasks, Storage storage) throws MorganException {
+        assert tasks != null && storage != null;
         tasks.addTask(task);
         int numTasks = tasks.getNumOfTasks();
         storage.save(tasks);

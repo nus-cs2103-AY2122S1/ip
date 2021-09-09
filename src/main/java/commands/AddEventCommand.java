@@ -25,6 +25,7 @@ public class AddEventCommand extends AddCommand {
      * @throws MorganException If input format is invalid.
      */
     public AddEventCommand (String userInput) throws MorganException {
+        assert userInput != null;
         boolean hasDelimiter = userInput.contains(DELIMITER);
         if (!hasDelimiter) {
             throw new MorganException(INPUT_FORMAT_ERROR);

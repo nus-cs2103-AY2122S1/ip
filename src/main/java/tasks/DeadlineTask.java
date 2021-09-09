@@ -18,6 +18,7 @@ public class DeadlineTask extends Task {
      */
     public DeadlineTask(String taskName, String dateTime) {
         super(taskName);
+        assert dateTime != null;
         this.dateTime = LocalDateTime.parse(dateTime, INPUT_FORMAT);
     }
 
