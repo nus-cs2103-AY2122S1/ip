@@ -47,6 +47,10 @@ public class Duke {
         }
     }
 
+    public String getUpcomingDeadlinesString() {
+        return tasks.getUpcomingTasksString();
+    }
+
     /**
      * The entry point of the application.
      *
