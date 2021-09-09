@@ -1,6 +1,8 @@
 # Duke User Guide
 
-<img src="Ui.png" width="400"  alt="Ui demo"/>
+<p align="center">
+    <img src="Ui.png" width="400" alt="Ui demo"/>
+</p>
 
 Welcome to Duke! Duke is a simple CLIBot built to assist you in keeping your life in check. Treat it like your personal assistant who can help you to remember all your tasks in your daily life so that you don't need to!
 
