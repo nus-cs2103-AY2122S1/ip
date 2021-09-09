@@ -70,7 +70,7 @@ public class TaskList {
                 throw new InvalidCommandException(input);
             }
         } catch (InvalidCommandException e) {
-            return Message.separateMessage(e.toString());
+            return e.toString();
         }
     }
 
@@ -136,7 +136,7 @@ public class TaskList {
 
             return (Message.ADD + "     " + recentlyAdded + "\n" + taskCount);
         } catch (EmptyTaskException e) {
-            return Message.separateMessage(e.toString());
+            return e.toString();
         }
     }
 
@@ -168,7 +168,7 @@ public class TaskList {
         try {
             this.tasks.add(ToDo.addToDo(input, isDone));
         } catch (EmptyTaskException e) {
-            System.out.println(Message.separateMessage(e.toString()));
+            System.out.println(e);
         }
 
         int previousCount = this.count;
@@ -230,7 +230,7 @@ public class TaskList {
                 return (Message.DONE + "     " + t + "\n" + Message.REWARD);
             }
         } catch (IndexOutOfBoundsException e) {
-            return Message.separateMessage(e.toString());
+            return e.toString();
         }
     }
 
@@ -260,7 +260,7 @@ public class TaskList {
                 return (Message.DELETE + "     " + removed + "\n" + taskCount);
             }
         } catch (IndexOutOfBoundsException e) {
-            return Message.separateMessage(e.toString());
+            return e.toString();
         }
     }
 
