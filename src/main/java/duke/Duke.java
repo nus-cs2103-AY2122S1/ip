@@ -45,6 +45,7 @@ public class Duke {
     public void process(String response) {
         try {
             Command c = Parser.parse(response);
+            assert c != null : "Parser.parse should never return a null command";
             c.execute(taskList, ui, storage);
             this.isExit = c.isExit();
         } catch (IOException | DukeException e) {
