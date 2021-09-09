@@ -60,7 +60,7 @@ public class Message {
      */
     public static String getTaskListMessage(TaskList taskList) {
         return "Here are the tasks in your list:\n"
-                + taskList.toString();
+                + taskList;
     }
 
     /**
@@ -94,7 +94,18 @@ public class Message {
      */
     public static String getFilteredTaskListMessage(TaskList filteredTaskList) {
         return "Here are the matching tasks in your list:\n"
-                + filteredTaskList.toString();
+                + filteredTaskList;
+    }
+
+    /**
+     * Gets the upcoming tasks in the user's list to be done.
+     *
+     * @param upcomingTaskList Task List consisting of upcoming tasks.
+     * @return A string containing the message.
+     */
+    public static String getUpcomingTaskListMessage(TaskList upcomingTaskList) {
+        return "Here are the tasks to be done before they are due:\n"
+                + upcomingTaskList;
     }
 
     /**

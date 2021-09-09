@@ -46,6 +46,13 @@ public abstract class Ui {
         this.isRunning = isRunning;
     }
 
+    /**
+     * Retrieves the current message of the ui that is set as a response
+     * to user input.
+     *
+     * @param userInput The user input.
+     * @return A string representing Duke's response.
+     */
     public String getResponse(String userInput) {
         try {
             Command command = Parser.parseUserInput(userInput);

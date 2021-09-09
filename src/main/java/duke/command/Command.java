@@ -2,6 +2,7 @@ package duke.command;
 
 import java.io.IOException;
 
+import duke.Parser;
 import duke.TaskList;
 import duke.exception.DukeException;
 import duke.storage.TaskStorage;
@@ -20,12 +21,7 @@ public abstract class Command {
      *                       of the size of the task lists.
      */
     public int retrieveTaskNumber(String taskNumberString, TaskList taskList) throws DukeException {
-        int taskNumber;
-        try {
-            taskNumber = Integer.parseInt(taskNumberString);
-        } catch (NumberFormatException e) {
-            throw new DukeException("Oops!!! The done or delete command should be followed by an integer.");
-        }
+        int taskNumber = Parser.parseToInt(taskNumberString);
 
         if (taskNumber < 1 || taskNumber > taskList.getSize()) {
             throw new DukeException("Oops!!! The task number provided is not valid.");

@@ -1,7 +1,11 @@
 package duke;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
+import duke.exception.DukeException;
+import duke.task.DateTask;
 import duke.task.Task;
 
 /**
@@ -81,6 +85,36 @@ public class TaskList {
             }
         }
         return new TaskList(filteredTasks);
+    }
+
+    /**
+     * Retrieves undone tasks that have dates falling within
+     * a specified range of days from the current day.
+     *
+     * @param numberOfDays The range of days.
+     * @return A new task list containing all undone tasks
+     *         that are due within the number of days from the current day.
+     */
+    public TaskList getUpcomingTaskList(int numberOfDays) throws DukeException {
+        boolean isDaysNegative = numberOfDays < 0;
+        if (isDaysNegative) {
+            throw new DukeException("Oops!!! Days cannot be negative.");
+        }
+
+        LocalDate upperBoundDate = LocalDate.now().plusDays(numberOfDays);
+
+        ArrayList<Task> upcomingTasks = tasks
+                .stream()
+                .filter(t -> !t.getIsDone())
+                .filter(t -> t instanceof DateTask)
+                .filter(t -> isDateWithinRange(((DateTask) t).getDate(), upperBoundDate))
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        return new TaskList(upcomingTasks);
+    }
+
+    private boolean isDateWithinRange(LocalDate date, LocalDate upperBoundDate) {
+        return !upperBoundDate.isBefore(date);
     }
 
     /**

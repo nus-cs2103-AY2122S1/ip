@@ -49,6 +49,10 @@ public abstract class DateTask extends Task {
         return dateString;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
     /**
      * Returns a string representation of the date of a task
      * that is formatted to a "d MMM yyyy" pattern.
