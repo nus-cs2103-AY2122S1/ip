@@ -113,6 +113,7 @@ public class Parser {
         String toDo = input.substring(5);
         ToDo newToDo = new ToDo(toDo);
         tasks.addTask(newToDo);
+        assert tasks.getList().contains(newToDo) : "New Todo should be added";
         return ui.addMessage(newToDo, tasks);
     }
 
@@ -137,6 +138,7 @@ public class Parser {
         LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         Deadline newDeadline = new Deadline(task, parsedDate);
         tasks.addTask(newDeadline);
+        assert tasks.getList().contains(newDeadline) : "New Deadline should be added";
         return ui.addMessage(newDeadline, tasks);
     }
 
@@ -161,6 +163,7 @@ public class Parser {
         LocalDateTime parsedTime = LocalDateTime.parse(time, DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
         Event newEvent = new Event(task, parsedTime);
         tasks.addTask(newEvent);
+        assert tasks.getList().contains(newEvent) : "New Event should be added";
         return ui.addMessage(newEvent, tasks);
     }
 

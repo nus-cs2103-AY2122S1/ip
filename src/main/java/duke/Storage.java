@@ -51,6 +51,7 @@ public class Storage {
             while (sc.hasNext()) {
                 String task = sc.nextLine();
                 String[] values = task.split(" \\| ");
+                assert values.length >= 3 : "Data should be read correctly";
                 assert values[1].equals("1") || values[1].equals("0") : "Done should be 1 or 0";
                 assert values[0].equals("T") || values[0].equals("E") || values[0].equals("D")
                         : "Task type should be T, D or E";
