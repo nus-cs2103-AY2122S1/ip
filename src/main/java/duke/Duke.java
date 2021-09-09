@@ -20,6 +20,10 @@ public class Duke {
     private final Storage storage;
     private final Ui ui;
 
+    public Duke() {
+        this("data", "data.txt");
+    }
+
     public Duke(String storagePath, String fileName) {
         activated = true;
         ui = new Ui();
@@ -116,6 +120,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data", "data.txt").run();
+        new Duke().run();
     }
 }
