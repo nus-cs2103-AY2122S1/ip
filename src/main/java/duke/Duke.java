@@ -21,15 +21,10 @@ public class Duke {
      */
     public Duke(String filepath) {
         ui = new Ui();
-        storage = new Storage(filepath);
 
         try {
-            tasks = new TaskList(storage.load());
-            if (tasks.getSize() > 0) {
-                ui.printLoadTasks(tasks);
-            }
+            setStoragePath(filepath);
         } catch (DukeException e) {
-            ui.printErrorMessage(e.getMessage());
             tasks = new TaskList();
         }
     }
@@ -93,6 +88,10 @@ public class Duke {
             return deleteTask(Parser.parseTaskNum(userInput));
         case FIND_TASK:
             return findTask(Parser.parseSearchSubject(userInput));
+        case SHOW_PATH:
+            return ui.printCurrentStoragePath(storage);
+        case SET_PATH:
+            return setNewStoragePath(Parser.parseNewPath(userInput));
         default:
             throw new UnsupportedOperationException(); // Error
         }
@@ -125,5 +124,22 @@ public class Duke {
 
     private String findTask(String subject) {
         return ui.printTasksWithSubject(tasks, subject);
+    }
+
+    private void setStoragePath(String newPath) throws LoadingException {
+        Storage newStorage = new Storage(newPath);
+        TaskList newTasks = new TaskList(newStorage.load());
+
+        storage = newStorage;
+        tasks = newTasks;
+    }
+
+    private String setNewStoragePath(String newPath) {
+        try {
+            setStoragePath(newPath);
+            return ui.printNewStoragePath(storage, tasks);
+        } catch (DukeException e) {
+            return ui.printErrorMessage(e.getMessage());
+        }
     }
 }

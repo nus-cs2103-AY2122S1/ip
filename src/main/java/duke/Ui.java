@@ -116,4 +116,13 @@ public class Ui {
     public String printErrorMessage(String message) {
         return "Error: " + message + ".";
     }
+
+    public String printCurrentStoragePath(Storage storage) {
+        return "Current path is:\n" + storage.getPath();
+    }
+
+    public String printNewStoragePath(Storage storage, TaskList tasks) {
+        return "New path set:\n" + storage.getPath() + "\n\n"
+                + printLoadTasks(tasks);
+    }
 }

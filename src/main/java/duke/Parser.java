@@ -39,6 +39,10 @@ public class Parser {
             return CommandType.DELETE_TASK;
         case "find":
             return CommandType.FIND_TASK;
+        case "showpath":
+            return CommandType.SHOW_PATH;
+        case "setpath":
+            return CommandType.SET_PATH;
         default:
             throw new UnsupportedOperationException();
         }
@@ -107,6 +111,12 @@ public class Parser {
      * @return The search term specified in the user command.
      */
     public static String parseSearchSubject(String userInput) {
+        Scanner userInputScanner = new Scanner(userInput);
+        userInputScanner.next();
+        return userInputScanner.nextLine().trim();
+    }
+
+    public static String parseNewPath(String userInput) {
         Scanner userInputScanner = new Scanner(userInput);
         userInputScanner.next();
         return userInputScanner.nextLine().trim();
