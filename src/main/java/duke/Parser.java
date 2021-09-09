@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 import duke.commands.AddCommand;
 import duke.commands.Command;
@@ -104,4 +105,16 @@ public class Parser {
         return command;
     }
 
+    public static ArrayList<String> parseSearchString(String searchString) {
+        ArrayList<String> searchTerms = new ArrayList<>();
+        searchTerms.add(searchString);
+        if (searchString.contains(" ")) {
+            for (String word : searchString.split(" ")) {
+                searchTerms.add(word);
+                // Can possibly split into subwords.
+                // E.g. Searching "birds" would return description with "bird"
+            }
+        }
+        return searchTerms;
+    }
 }
