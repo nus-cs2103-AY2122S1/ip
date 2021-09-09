@@ -39,8 +39,13 @@ public class Parser {
         } else if (input.split(" ")[0].equals("event")) {
             return new AddEventCommand(input);
 
+        // Searches list of tasks
         } else if (input.split(" ")[0].equals("find")) {
             return new FindTasksCommand(input);
+
+        // Reschedules a Deadline or Event task
+        } else if (input.split(" ")[0].equals("snooze")) {
+            return new SnoozeCommand(input);
 
         // Unknown command
         } else {
