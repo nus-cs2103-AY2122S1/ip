@@ -1,7 +1,5 @@
 # Duke User Guide
 
-Duke is a task-manager chat bot optimized for keyboard lovers.
-
 ## Features Overview
 1. Add todo tasks
 2. Add deadline tasks
