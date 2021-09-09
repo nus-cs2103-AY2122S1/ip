@@ -115,19 +115,19 @@ public class TaskList {
     private int parseTaskNumber(String input) throws DukeException {
         try {
             if (input.length() < 1) {
-                throw new DukeException(DukeException.UNSPECIFIED_TASK);
+                throw DukeException.UNSPECIFIED_TASK;
             } else {
                 int i = Integer.parseInt(input/*.substring(1)*/);
                 if (i > tasks.size()) {
-                    throw new DukeException(DukeException.NOT_ENOUGH_TASKS);
+                    throw DukeException.NOT_ENOUGH_TASKS;
                 } else if (i <= 0) {
-                    throw new DukeException(DukeException.INVALID_TASK_NUMBER);
+                    throw DukeException.INVALID_TASK_NUMBER;
                 } else {
                     return i - 1;
                 }
             }
         } catch (NumberFormatException e) {
-            throw new DukeException(DukeException.DEFAULT);
+            throw DukeException.DEFAULT;
         }
     }
 }

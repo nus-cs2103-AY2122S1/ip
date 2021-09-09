@@ -62,7 +62,7 @@ public class Parser {
                 } else if (input.startsWith("find ")) {
                     taskList.find(input.substring(5));
                 } else {
-                    throw new DukeException(DukeException.DEFAULT);
+                    throw DukeException.DEFAULT;
                 }
                 storage.save(taskList);
             } catch (DukeException e) {

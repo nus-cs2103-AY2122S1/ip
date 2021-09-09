@@ -9,7 +9,7 @@ import duke.task.TaskList;
  * Duke.
  * @author Thomas Hogben
  */
-public class Duke {
+public class    Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;

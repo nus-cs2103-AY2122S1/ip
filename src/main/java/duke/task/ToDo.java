@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.DukeException;
+
 /**
  * A To-do kind of Task.
  * @author Thomas Hogben
@@ -9,7 +11,7 @@ public class ToDo extends Task {
     /**
      * @param description The description of the Task.
      */
-    public ToDo(String description) {
+    public ToDo(String description) throws DukeException {
         super(description);
     }
 
