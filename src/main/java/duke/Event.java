@@ -54,7 +54,9 @@ public class Event extends Task {
      */
 
     public String printName() {
+
         return TASKINDICATOR + " " + super.printName() + " (at: " + this.timeline + ")";
     }
 
 }
+

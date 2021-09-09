@@ -1,11 +1,13 @@
 package duke;
+
 /**
  * Todos are generic tasks, with a "Todo" indicator.
  *
  * @author Dominic Siew Zhen Yu
  */
-public class Todos extends Task{
-    String TASKINDICATOR = "[T]";
+
+public class Todos extends Task {
+    private final String taskIndicator = "[T]";
 
     /**
      * the constructor of the Todos object
@@ -25,6 +27,6 @@ public class Todos extends Task{
      */
 
     public String printName() {
-        return TASKINDICATOR + " " + super.printName();
+        return taskIndicator + " " + super.printName();
     }
 }

@@ -1,4 +1,8 @@
 package duke;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Deadline is a task that have a deadline which is a string.
  * @author Dominic Siew Zhen Yu
@@ -13,6 +17,7 @@ public class Deadline extends Task {
     private String deadline;
     private LocalDateTime dateAndTime;
     String TASKINDICATOR = "[D]";
+
 
     /**
      * The constructor for the Deadlines class with the userInput (which refers to the name of the task)
@@ -59,5 +64,5 @@ public class Deadline extends Task {
     public String printName() {
         return TASKINDICATOR + " " + super.printName() + " (by: " + this.deadline + ")";
     }
-
 }
+
