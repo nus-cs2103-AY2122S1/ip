@@ -14,7 +14,7 @@ public class Task {
     /**
      * Class constructor.
      *
-     * @param description The given task description.
+     * @param description The given Task description.
      */
     public Task(String description) {
         this.description = description;
@@ -24,7 +24,7 @@ public class Task {
     /**
      * Outputs this task as a String.
      *
-     * @return String representation of the task.
+     * @return String representation of the Task.
      */
     public String toString() {
         String statusIcon = this.isDone ? "[X]" : "[ ]"; // mark done task with X
@@ -32,10 +32,17 @@ public class Task {
     }
 
     /**
-     * Sets the isDone boolean flag of the task to true.
+     * Sets the isDone boolean flag of the Task to true.
      */
     public void setDone() {
         this.isDone = true;
+    }
+
+    /**
+     * Gets the done status of the Task.
+     */
+    public boolean getDone() {
+        return isDone;
     }
 
     /**

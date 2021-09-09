@@ -1,7 +1,9 @@
 package duke;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
+import duke.task.Deadline;
 import duke.task.Task;
 
 /**
@@ -85,7 +87,7 @@ public class TaskList {
     }
 
     /**
-     * Returns a formatted string of all tasks in the TaskList matching a given keyword.
+     * Returns a formatted String of all tasks in the TaskList matching a given keyword.
      * The String contains all Tasks in the TaskList with numbering.
      *
      * @param keyword The keyword which is filtered for.
@@ -94,10 +96,36 @@ public class TaskList {
     public String getMatchingTasksString(String keyword) {
         ArrayList<Task> matchingTaskList = new ArrayList<>(tasks);
         matchingTaskList.removeIf(task -> !task.getDescription().contains(keyword));
-        StringBuilder result = new StringBuilder("Here are the tasks in your list:");
+        StringBuilder result = new StringBuilder("Here are the matching tasks in your list:");
         int taskCount = matchingTaskList.size();
         for (int i = 0; i < taskCount; i++) {
             result.append("\n" + (i + 1) + ". " + matchingTaskList.get(i).toString());
+        }
+        return result.toString();
+    }
+
+    /**
+     * Returns a formatted String of all Deadlines in the TaskList which
+     * <ul>
+     *     <li>are not done, and</li>
+     *     <li> are due within 1 week of the current date.</li>
+     * </ul>
+     *
+     * @return A formatted String representation of upcoming incomplete Deadlines.
+     */
+    public String getUpcomingTasksString() {
+        ArrayList<Task> upcomingTaskList = new ArrayList<>(tasks);
+        upcomingTaskList.removeIf(task -> {
+            if (task instanceof Deadline) {
+                Deadline currDeadline = (Deadline) task;
+                return currDeadline.getDone() || currDeadline.getBy().isAfter(LocalDate.now().plusWeeks(1));
+            }
+            return true;
+        });
+        StringBuilder result = new StringBuilder("Here are your upcoming deadlines:");
+        int taskCount = upcomingTaskList.size();
+        for (int i = 0; i < taskCount; i++) {
+            result.append("\n" + (i + 1) + ". " + upcomingTaskList.get(i).toString());
         }
         return result.toString();
     }
