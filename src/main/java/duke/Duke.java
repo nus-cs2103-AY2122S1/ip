@@ -62,89 +62,37 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns a String response to be sent to the user after performing the respective action indicated by user.
+     *
+     * @param userInput A string containing the commands that the user desires to execute
+     * @return A string containing the response from the application after performing the desired command
      */
     public String getResponse(String userInput) {
         while (true) {
             try {
                 Command command = Parser.parse(userInput);
-                String description;
-                String keyword;
-                LocalDate dateTime;
-                int index;
 
                 switch (command.getCommand()) {
                 case BYE:
-                    return "Bye. Hope to see you again soon!";
+                    return getResponseBye();
                 case LIST:
-                    return OutputFormatter.formatTaskList(taskList);
+                    return getResponseList();
                 case DONE:
-                    // -1 to account for zero-indexing
-                    index = Integer.parseInt(command.getArgs()[0]) - 1;
-                    assert(index >= 0);
-
-                    taskList.get(index).markAsDone();
-
-                    // update file
-                    storage.saveTaskData(taskList);
-
-                    return "Nice! I've marked this task as done:\n  " + taskList.get(index);
+                    return getResponseDone(command);
                 case DELETE:
-                    // -1 to account for zero-indexing
-                    index = Integer.parseInt(command.getArgs()[0]) - 1;
-                    assert(index >= 0);
-
-                    Task removedTask = taskList.remove(index);
-
-                    // update file
-                    storage.saveTaskData(taskList);
-
-                    return "Noted. I've removed this task:\n  " + removedTask + "\nNow you have "
-                            + taskList.size() + " tasks in the list.";
+                    return getResponseDelete(command);
                 case TODO:
-                    Todo newTodo = new Todo(userInput.substring(5).trim());
-                    this.taskList.add(newTodo);
-
-                    // update file
-                    storage.saveTaskData(taskList);
-
-                    return "Got it. I've added this task:\n  "
-                            + newTodo + "\nNow you have " + this.taskList.size()
-                            + " tasks in the list.";
+                    return getResponseTodo(userInput);
                 case DEADLINE:
-                    description = command.getArgs()[0];
-                    dateTime = LocalDate.parse(command.getArgs()[1]);
-                    Deadline newDeadline = new Deadline(description, dateTime);
-                    taskList.add(newDeadline);
-
-                    // update file
-                    storage.saveTaskData(taskList);
-
-                    return "Got it. I've added this task:\n  " + newDeadline + "\nNow you have "
-                            + taskList.size() + " tasks in the list.";
+                    return getResponseDeadline(command);
                 case EVENT:
-                    description = command.getArgs()[0];
-                    dateTime = LocalDate.parse(command.getArgs()[1]);
-                    Event newEvent = new Event(description, dateTime);
-                    taskList.add(newEvent);
-
-                    // update file
-                    storage.saveTaskData(taskList);
-
-                    return "Got it. I've added this task:\n  "
-                            + newEvent + "\nNow you have " + taskList.size()
-                            + " tasks in the list.";
+                    return getResponseEvent(command);
                 case DATE:
-                    LocalDate queryDate = LocalDate.parse(userInput.substring(5));
-                    TaskList dueTasks = taskList.filterByDate(queryDate);
-
-                    return OutputFormatter.formatTaskList(dueTasks, queryDate);
+                    return getResponseDate(userInput);
                 case FIND:
-                    keyword = command.getArgs()[0];
-
-                    return OutputFormatter.formatTaskList(taskList.containsKeyword(keyword));
+                    return getResponseFind(command);
                 default:
+                    assert(true); // Should never reach here
                     break;
                 }
             } catch (DukeException | IOException e) {
@@ -153,5 +101,147 @@ public class Duke {
                 return "Unknown date format. Please input a valid date in the format: YYYY-MM-DD";
             }
         }
+    }
+
+    /**
+     * Returns a message that the application will respond to the user with when BYE command is used.
+     *
+     * @return A String containing the message to be transmitted to the user
+     */
+    public String getResponseBye() {
+        return "Bye. Hope to see you again soon!";
+    }
+
+    /**
+     * Returns a message that the application will respond to the user with when LIST command is used.
+     *
+     * @return A String containing the message to be transmitted to the user
+     */
+    public String getResponseList() {
+        return OutputFormatter.formatTaskList(taskList);
+    }
+
+    /**
+     * Returns a message that the application will respond to the user with when DONE command is used.
+     *
+     * @param command The object containing all the details about the requested action by the user
+     * @return A String containing the message to be transmitted to the user
+     * @throws IOException Thrown when IO exceptions occurs when saving task data to hard disk
+     */
+    public String getResponseDone(Command command) throws IOException {
+        // -1 to account for zero-indexing
+        int index = Integer.parseInt(command.getArgs()[0]) - 1;
+        taskList.get(index).markAsDone();
+
+        // update file
+        storage.saveTaskData(taskList);
+
+        return "Nice! I've marked this task as done:\n  " + taskList.get(index);
+    }
+
+    /**
+     * Returns a message that the application will respond to the user with when DELETE command is used.
+     *
+     * @param command The object containing all the details about the requested action by the user
+     * @return A String containing the message to be transmitted to the user
+     * @throws IOException Thrown when IO exceptions occurs when saving task data to hard disk
+     */
+    public String getResponseDelete(Command command) throws IOException {
+        // -1 to account for zero-indexing
+        Task removedTask = taskList.remove(Integer.parseInt(command.getArgs()[0]) - 1);
+
+        // update file
+        storage.saveTaskData(taskList);
+
+        return "Noted. I've removed this task:\n  " + removedTask + "\nNow you have "
+                + taskList.size() + " tasks in the list.";
+
+    }
+
+    /**
+     * Returns a message that the application will respond to the user with when TODO command is used.
+     *
+     * @param userInput The string containing the original unparsed command by the user
+     * @return A String containing the message to be transmitted to the user
+     * @throws IOException Thrown when IO exceptions occurs when saving task data to hard disk
+     */
+    public String getResponseTodo(String userInput) throws IOException {
+        Todo newTodo = new Todo(userInput.substring(5).trim());
+        this.taskList.add(newTodo);
+
+        // update file
+        storage.saveTaskData(taskList);
+
+        return "Got it. I've added this task:\n  "
+                + newTodo + "\nNow you have " + this.taskList.size()
+                + " tasks in the list.";
+    }
+
+    /**
+     * Returns a message that the application will respond to the user with when DEADLINE command is used.
+     *
+     * @param command The object containing all the details about the requested action by the user
+     * @return A String containing the message to be transmitted to the user
+     * @throws IOException Thrown when IO exceptions occurs when saving task data to hard disk
+     */
+    public String getResponseDeadline(Command command) throws IOException {
+        String description = command.getArgs()[0];
+        LocalDate dateTime = LocalDate.parse(command.getArgs()[1]);
+        Deadline newDeadline = new Deadline(description, dateTime);
+        taskList.add(newDeadline);
+
+        // update file
+        storage.saveTaskData(taskList);
+
+        return "Got it. I've added this task:\n  " + newDeadline + "\nNow you have "
+                + taskList.size() + " tasks in the list.";
+    }
+
+    /**
+     * Returns a message that the application will respond to the user with when EVENT command is used.
+     *
+     * @param command The object containing all the details about the requested action by the user
+     * @return A String containing the message to be transmitted to the user
+     * @throws IOException Thrown when IO exceptions occurs when saving task data to hard disk
+     */
+    public String getResponseEvent(Command command) throws IOException {
+        String description = command.getArgs()[0];
+        LocalDate dateTime = LocalDate.parse(command.getArgs()[1]);
+        Event newEvent = new Event(description, dateTime);
+        taskList.add(newEvent);
+
+        // update file
+        storage.saveTaskData(taskList);
+
+        return "Got it. I've added this task:\n  "
+                + newEvent + "\nNow you have " + taskList.size()
+                + " tasks in the list.";
+    }
+
+    /**
+     * Returns a message that the application will respond to the user with when DATE command is used.
+     *
+     * @param userInput The string containing the original unparsed command by the user
+     * @return A String containing the message to be transmitted to the user
+     * @throws IOException Thrown when IO exceptions occurs when saving task data to hard disk
+     */
+    public String getResponseDate(String userInput) {
+        LocalDate queryDate = LocalDate.parse(userInput.substring(5));
+        TaskList dueTasks = taskList.filterByDate(queryDate);
+
+        return OutputFormatter.formatTaskList(dueTasks, queryDate);
+    }
+
+    /**
+     * Returns a message that the application will respond to the user with when EVENT command is used.
+     *
+     * @param command The object containing all the details about the requested action by the user
+     * @return A String containing the message to be transmitted to the user
+     * @throws IOException Thrown when IO exceptions occurs when saving task data to hard disk
+     */
+    public String getResponseFind(Command command) {
+        String keyword = command.getArgs()[0];
+
+        return OutputFormatter.formatTaskList(taskList.containsKeyword(keyword));
     }
 }
