@@ -107,7 +107,7 @@ public class AddCommand extends Command {
         }
 
         tasks.add(task);
-        storage.appendToFile(storage.fileString(task));
+        storage.appendToFile(storage.getFileString(task));
         return ui.addTask(task) + System.lineSeparator() + ui.numberOfTasks(tasks);
     }
 }

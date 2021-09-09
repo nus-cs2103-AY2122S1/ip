@@ -10,7 +10,7 @@ import duke.task.Task;
  */
 public class Ui {
 
-    /** The INDENTation for 4 spaces */
+    /** The indentation for 4 spaces */
     private final static String INDENT = "  ";
     
     /** The scanner to read user input */
@@ -59,7 +59,7 @@ public class Ui {
      * Prints the message for listing tasks.
      */
     public String showList() {
-        return "Here are the tasks in your list:";
+        return "Look at how busy you are!! :";
     }
 
     /**
@@ -114,23 +114,10 @@ public class Ui {
      * @param taskList The list of tasks.
      */
     public String numberOfTasks(TaskList taskList) {
-        String numberOfTasks =  "Now you have " + taskList.size()
+        String numberOfTasks =  "You have " + taskList.size()
                 + (taskList.size() == 1 ? " task" : " tasks")
-                        + " in the list.";
+                        + " in the list :)";
         return numberOfTasks;
-    }
-
-    /**
-     * Reads the user input and returns it as a string.
-     *
-     * @return The user command.
-     */
-    public String readCommand() {
-        if (scanner.hasNextLine()) {
-            return scanner.nextLine();
-        } else {
-            return null;
-        }
     }
 
     /**
@@ -141,30 +128,6 @@ public class Ui {
     public String commandError() {
         return "OH NO I'm sorry, but I don't "
                 + "know what that means :-(";
-    }
-
-    /**
-     * Returns the error message for incorrect date format.
-     *
-     * @return The string containing the error message.
-     */
-    public String dateError() {
-        return  "OH NO :( I can't seem to understand "
-                + "the date you have entered.\n"
-                        + "I can only understand if it "
-                                + "is in  the yyyy-mm-dd format..";
-    }
-
-    /**
-     * Returns the error message for incorrect date and time format.
-     *
-     * @return The string containing the error message.
-     */
-    public String dateTimeError() {
-        return  "OH NO :( I can't seem "
-                +"to understand the date and time you have entered.\n"
-                        + "I can only understand if it is in "
-                                + "yyyy-MM-dd HH:mm format..";
     }
 
     /**
@@ -194,59 +157,6 @@ public class Ui {
         return "OOPS!!! The description of "
                 + (taskType.equals("event") ? "an " : "a ")
                         + taskType + " cannot be empty.";
-    }
-
-    /**
-     * Returns the error message for inputting an invalid
-     * index for the task to be deleted.
-     *
-     * @return The string containing the error message.
-     */
-    public String deleteInvalidError() {
-        return "OOPS!!! There is no "
-                + "corresponding task to be deleted.";
-    }
-
-    /**
-     * Returns the error message for not indicating which
-     * task to delete.
-     *
-     * @return The string containing the error message.
-     */
-    public String deleteNoNumError() {
-        return "OOPS!!! The task to be deleted"
-                + "is not indicated!!";
-    }
-
-    /**
-     * Prints the given string.
-     *
-     * @param message The message to be printed.
-     */
-    public void showError(String message) {
-        System.out.println(message);
-    }
-
-    /**
-     * Returns the error message for inputting an
-     * invalid index for the task to be deleted.
-     *
-     * @return The string containing the error message.
-     */
-    public String doneError() {
-        return "OOPS!!! There is no corresponding task to be "
-                + "marked done.";
-    }
-
-    /**
-     * Returns the error message for not indicating
-     * which task to delete.
-     *
-     * @return The string containing the error message.
-     */
-    public String doneNoNumError() {
-
-        return "OOPS!!! The task to be marked done is not indicated!!";
     }
 
     /**

@@ -79,36 +79,72 @@ public class Storage {
             while (s.hasNextLine()) {
                 String taskString = s.nextLine();
                 String[] splitString = taskString.split(" \\| ");
+                Task task;
 
                 switch (splitString[0].trim()) {
-
                 case "T":
-                    userInput.add(new Todo(splitString[2]));
+                    task = new Todo(splitString[2]);
                     break;
                 case "D":
-                    DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM d yyyy");
-                    LocalDate date = LocalDate.parse(splitString[3].trim(), df);
-                    userInput.add(new Deadline(splitString[2].trim(), date));
+                    task = loadDeadline(splitString[2], splitString[3]);
                     break;
                 case "E":
-                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d yyyy , HH:mm");
-                    LocalDateTime dateTime = LocalDateTime.parse(splitString[3].trim(), dtf);
-                    userInput.add(new Event(splitString[2], dateTime));
+                    task = loadEvent(splitString[2], splitString[3]);
                     break;
                 default:
-                    break;
+                    throw new DukeException("I cannot recognise the file content :(");
                 }
-
-                if (splitString.length > 2 && splitString[1].equals("Y")) {
-                    userInput.get(userInput.size() - 1).markAsDone();
-                }
+                userInput.add(task);
+                checkDoneStatus(task, splitString[1]);
             }
             return userInput;
 
         } catch (FileNotFoundException e) {
-            throw new DukeException("");
+            throw new DukeException("File is not found...");
         }
     }
+
+    /**
+     * Loads the string from the file and returns the deadline
+     * task which the string represents.
+     *
+     * @param description Description of the task
+     * @param date Deadline of the task
+     * @return Deadline task
+     */
+    public Deadline loadDeadline(String description, String date) {
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM d yyyy");
+        LocalDate localDate = LocalDate.parse(date.trim(), df);
+        return new Deadline(description.trim(), localDate);
+    }
+
+    /**
+     * Loads the string from the file and returns the
+     * event task which the string represents.
+     *
+     * @param description Description of the task.
+     * @param dateTime Date and time of the task.
+     * @return The event task.
+     */
+    public Event loadEvent(String description, String dateTime) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d yyyy , HH:mm");
+        LocalDateTime localDateTime = LocalDateTime.parse(dateTime.trim(), dtf);
+        return new Event(description.trim(), localDateTime);
+    }
+
+    /**
+     * Marks task as done if the content from file
+     * states that it is done.
+     *
+     * @param task Task to be checked.
+     * @param doneIndicator The done status of the task.
+     */
+    public void checkDoneStatus(Task task, String doneIndicator) {
+        if(doneIndicator.trim().equals("Y")) {
+            task.markAsDone();
+        }
+    }
+
 
     /**
      * Returns the string containing the task in
@@ -117,7 +153,7 @@ public class Storage {
      * @param task The task to be saved in the file.
      * @return The string representing the task.
      */
-    public String fileString(Task task) {
+    public String getFileString(Task task) {
         String toAdd = task.taskIndicator() + " | "
                 + (task.getStatusIcon().equals("X")
                         ? "Y" : "N") + " | " + task.getDescription().trim();
@@ -138,10 +174,10 @@ public class Storage {
      *
      * @param taskList The list containing the tasks.
      */
-    public void editFileAll(TaskList taskList) {
+    public void editFileAll(TaskList taskList) throws DukeException {
         for (int i = 0; i < taskList.size(); i++) {
             Task tempFile = taskList.get(i);
-            String toAdd = fileString(tempFile);
+            String toAdd = getFileString(tempFile);
             if (i == 0) {
                 editFile(toAdd);
             } else {
@@ -171,14 +207,15 @@ public class Storage {
      *
      * @param content The content to be appended.
      */
-    public void appendToFile(String content) {
+    public void appendToFile(String content) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath, true);
             fw.append(System.lineSeparator() + content);
             fw.close();
         } catch (IOException e) {
-            System.out.println("OH NO :( There "
-                   + "seems to be something wrong with the file.");
+            throw new DukeException("OH NO :( There "
+                   + "seems to be something wrong with the file. I"
+                            + "cannot sync the file with these new changes :(");
         }
     }
 

@@ -40,7 +40,11 @@ public class DoneCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task temp = tasks.get(taskNum - 1);
         temp.markAsDone();
-        storage.editFileAll(tasks);
+        try {
+            storage.editFileAll(tasks);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
         return ui.doneTask(temp);
     }
 }

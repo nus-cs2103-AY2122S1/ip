@@ -3,6 +3,7 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
 
 /**
  * A class which encapsulates the command of
@@ -41,7 +42,11 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         ui.removeTask(tasks.get(index - 1));
         tasks.delete(index);
-        storage.editFileAll(tasks);
+        try {
+            storage.editFileAll(tasks);
+        } catch(DukeException e) {
+            return e.getMessage();
+        }
         return ui.numberOfTasks(tasks);
     }
 }
