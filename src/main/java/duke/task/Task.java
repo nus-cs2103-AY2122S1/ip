@@ -35,6 +35,8 @@ public abstract class Task {
     
     /**
      * Abstract method which denotes the string representation of the task list that is stored on duke.txt.
+     * 
+     * @return String representation of task list stored on duke.txt.
      */
     public abstract String getTaskListOnDisk();
     

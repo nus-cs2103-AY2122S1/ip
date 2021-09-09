@@ -37,17 +37,19 @@ public class doneCommand extends Command {
      * file (duke.txt)
      *
      * @param taskList TaskList that stores the tasks.
-     * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.            
+     * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.
+     * @return String representation of the task that is done by the user.
      */
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         int value = Integer.parseInt(command.replaceAll("[^0-9]", ""));
         if (value > taskList.getSize()) {
-            System.out.println("Sorry the task doesn't exist yet, please try again!");
+            return "Sorry the task doesn't exist yet, please try again!";
         } else {
             Task t = taskList.getTask(value - 1);
             t.markAsDone();
-            Ui.doneResponse(t);
             storage.writeToFile("./duke.txt", taskList);
+            String response = Ui.doneResponse(t);
+            return response;
         }
     }
 }

@@ -36,20 +36,18 @@ public class Parser {
         } else if (command.startsWith("done") && Character.isDigit(command.charAt(command.length() - 1)) && command.length() <= 8 
                 && !Character.isAlphabetic(command.charAt(command.length() - 2))  && Character.isDigit(command.charAt(5))) {
             return new doneCommand(command);
+        } else if (command.startsWith("todo")) {
+            return new todoCommand(command);
+        } else if (command.startsWith("deadline")) {
+            return new deadlineCommand(command);
+        } else if (command.startsWith("event")) {
+            return new eventCommand(command);
+        } else if (command.startsWith("delete")) {
+            return new deleteCommand(command);
+        } else if (command.startsWith("find")) {
+            return new findCommand(command);
         } else {
-            if (command.startsWith("todo")) {
-                return new todoCommand(command);
-            } else if (command.startsWith("deadline")) {
-                return new deadlineCommand(command);
-            } else if (command.startsWith("event")) {
-                return new eventCommand(command);
-            } else if (command.startsWith("delete")) {
-                return new deleteCommand(command);
-            } else if (command.startsWith("find")) {
-                return new findCommand(command);
-            } else {
-                return new InvalidCommand(command);
-            }
+            return new InvalidCommand(command);
         }
     }
 
