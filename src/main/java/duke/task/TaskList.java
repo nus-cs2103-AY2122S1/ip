@@ -117,11 +117,6 @@ public class TaskList {
     public List<Task> findRelatedTask(String s) {
         Stream<Task> taskStream = list.stream().filter(task -> task.findKeyword(s));
         List<Task> list = Arrays.asList(taskStream.toArray(Task[]::new));
-        for (Task t : this.list) {
-            if (t.findKeyword(s)) {
-                list.add(t);
-            }
-        }
         return list;
     }
 }
