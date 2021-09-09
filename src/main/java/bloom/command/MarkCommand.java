@@ -8,7 +8,6 @@ import bloom.task.Task;
  * Represents a mark command which
  * marks a specified task as done.
  */
-
 public class MarkCommand extends Command {
 
     /** The index of the task to be marked as done. */
@@ -19,7 +18,6 @@ public class MarkCommand extends Command {
      *
      * @param index the index of the task to be marked as done
      */
-
     public MarkCommand(int index) {
         this.index = index;
     }
@@ -27,15 +25,14 @@ public class MarkCommand extends Command {
     /**
      * Marks the specified task as done.
      */
-
     @Override
-    public void run() {
+    public String run() {
         Task task = TaskList.get(this.index);
         task.markAsDone();
-        System.out.println(Message.COMMAND_MARK.getMessage());
-        System.out.println("\t   " + task);
+        return Message.COMMAND_MARK.getMessage() + "\t   " + task;
     }
 
+    // TODO: Add method description
     public void run(int ... indexes) {
         for (int i : indexes){
             new MarkCommand(i).run();

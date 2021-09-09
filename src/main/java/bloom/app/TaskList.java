@@ -9,7 +9,6 @@ import bloom.task.Task;
 /**
  * Represents a list of tasks.
  */
-
 public class TaskList {
 
     /** The list of tasks. */
@@ -18,7 +17,6 @@ public class TaskList {
     /**
      * Constructor for a TaskList.
      */
-
     public TaskList() {
         TaskList.tasks = new ArrayList<>();
     }
@@ -28,7 +26,6 @@ public class TaskList {
      *
      * @return the number of tasks in the list
      */
-
     public static int size() {
         return TaskList.tasks.size();
     }
@@ -39,7 +36,6 @@ public class TaskList {
      * @param index the index of the task being queried
      * @return      the required task
      */
-
     public static Task get(int index) {
         return TaskList.tasks.get(index);
     }
@@ -49,7 +45,6 @@ public class TaskList {
      *
      * @param task the task to be added to the list
      */
-
     public static void add(Task task) {
         TaskList.tasks.add(task);
     }
@@ -60,7 +55,6 @@ public class TaskList {
      * @param index the index of the task to be removed
      * @return      the removed task
      */
-
     public static Task delete(int index) {
         return TaskList.tasks.remove(index);
     }

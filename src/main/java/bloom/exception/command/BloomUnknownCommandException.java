@@ -5,7 +5,6 @@ import bloom.exception.BloomException;
 /**
  * Represents an exception when users input unlisted commands.
  */
-
 public class BloomUnknownCommandException extends BloomException {
 
     /**
@@ -13,7 +12,6 @@ public class BloomUnknownCommandException extends BloomException {
      *
      * @param errorMessage the error message
      */
-
     public BloomUnknownCommandException(String errorMessage) {
         super(errorMessage);
     }

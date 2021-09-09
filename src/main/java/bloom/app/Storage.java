@@ -10,13 +10,11 @@ import bloom.constant.Message;
 /**
  * Manages database.
  */
-
 public class Storage {
 
     /**
      * Saves the list of tasks into the database file.
     */
-
     public void saveToDb() {
         try {
             Path path = Paths.get("src/main/java/bloom/data/bloomDB.txt");

@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 /**
  * Represents a deadline task.
  */
-
 public class Deadline extends Task {
 
     /** The date and time of the deadline. */
@@ -27,7 +26,6 @@ public class Deadline extends Task {
      *
      * @return a string representing the deadline
      */
-
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by + ")";
@@ -38,7 +36,6 @@ public class Deadline extends Task {
      *
      * @return a string representing the deadline
      */
-
     @Override
     public String toDb() {
         return "D | " + super.toDb() + " | " + this.by;

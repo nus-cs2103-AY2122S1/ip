@@ -11,7 +11,6 @@ import bloom.task.Event;
  * creates an event task with given description
  * with date and time.
  */
-
 public class EventCommand extends Command {
 
     /** The description of the event. */
@@ -26,7 +25,6 @@ public class EventCommand extends Command {
      * @param description the description of the event
      * @param at          the date and time of the event
      */
-
     public EventCommand(String description, LocalDateTime at) {
         this.description = description;
         this.at = at;
@@ -35,12 +33,10 @@ public class EventCommand extends Command {
     /**
      * Creates an event task.
      */
-
     @Override
-    public void run() {
+    public String run() {
         Event event = new Event(this.description, this.at);
         TaskList.add(event);
-        System.out.println(Message.COMMAND_ADD.getMessage());
-        System.out.println("\t   " + event + "\n");
+        return Message.COMMAND_ADD.getMessage() + "\t   " + event + "\n";
     }
 }

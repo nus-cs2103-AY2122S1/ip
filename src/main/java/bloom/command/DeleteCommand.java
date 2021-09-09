@@ -9,7 +9,6 @@ import bloom.task.Task;
  * removes a task from the database based on
  * the inputted index.
  */
-
 public class DeleteCommand extends Command {
 
     /** The index of the task to be deleted. */
@@ -20,7 +19,6 @@ public class DeleteCommand extends Command {
      *
      * @param index the index of the task to be deleted.
      */
-
     public DeleteCommand(int index) {
         this.index = index;
     }
@@ -28,11 +26,9 @@ public class DeleteCommand extends Command {
     /**
      * Deletes the task as requested.
      */
-
     @Override
-    public void run() {
+    public String run() {
         Task task = TaskList.delete(this.index);
-        System.out.println(Message.COMMAND_DELETE.getMessage());
-        System.out.println("\t   " + task + "\n");
+        return Message.COMMAND_DELETE.getMessage() + "\t   " + task + "\n";
     }
 }
