@@ -48,9 +48,9 @@ public class FindCommand extends Command {
 
     private void filterTasksWithKeyword(TaskList tasks, TaskList keywordTasks, String keyword) {
         for (Task t : tasks.getTaskList()) {
-            boolean isNotFound = !tasks.containsTask(t);
+            boolean notYetFound = !tasks.containsTask(t);
             boolean isMatch = containsKeyword(t, keyword);
-            if (isNotFound && isMatch) {
+            if (notYetFound && isMatch) {
                 assert (keywordTasks.getListSize() <= tasks.getListSize())
                         : "Filtered list should not be greater than original list.";
                 keywordTasks.addTask(t);

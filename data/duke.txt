@@ -1,7 +1,2 @@
-<<<<<<< HEAD
-=======
-T | 1 | aaa
-T | 0 | aa
-T | 0 | aaab
-T | 0 | aac
->>>>>>> branch-A-Streams
+T | 0 | run at west coast
+D | 0 | assignment 1 | next wednesday
