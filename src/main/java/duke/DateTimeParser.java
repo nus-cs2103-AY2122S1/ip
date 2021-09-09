@@ -33,7 +33,7 @@ public class DateTimeParser extends Parser<LocalDate> {
             try {
                 return LocalDate.parse(s, formatter);
             } catch (DateTimeParseException e) {
-                /* no-op */
+                // Try different formats and catch when unable to do so, hence no action required
             }
         }
         return null;
