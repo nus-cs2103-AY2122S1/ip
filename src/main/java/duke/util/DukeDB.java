@@ -19,8 +19,9 @@ public class DukeDB {
     String databasePath;
 
     public DukeDB(String database) {
+        assert(database != null);
         File check = new File(database);
-        if (!check.exists() || database == null) {
+        if (!check.exists()) {
             this.create()
                     .map((x) -> {
                         Duke.printMsg("DB cannot be found. New DB created successfully.");
@@ -39,6 +40,10 @@ public class DukeDB {
 
     }
 
+    public DukeDB() {
+        this("./data/dukeStore.txt");
+    }
+
     @Deprecated
     public static void drop() {
         File file = new File("./data/dukeStore.txt");
@@ -53,6 +58,7 @@ public class DukeDB {
 
     public void save(ArrayList<Task> arr) {
         try {
+            assert(this.databasePath != null);
             FileWriter writer = new FileWriter(this.databasePath);
             for (Task item : arr) {
                 writer.write(item.saveString());
@@ -66,8 +72,9 @@ public class DukeDB {
 
     public Optional<ArrayList<Task>> load() {
         try {
+            assert(this.databasePath != null);
             ArrayList<Task> arr = new ArrayList<>();
-            File database = new File(databasePath);
+            File database = new File(this.databasePath);
             Scanner reader = new Scanner(database);
             while (reader.hasNextLine()) {
                 String strTask = reader.nextLine();

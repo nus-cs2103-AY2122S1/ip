@@ -49,7 +49,7 @@ public class Duke {
 
     public Duke() {
         this.ui = new Ui();
-        this.database = new DukeDB(null);
+        this.database = new DukeDB();
         this.list = new DukeTaskList(database.load()
                 .orElse(new ArrayList<>()));
         this.config = new DukeConfig();
