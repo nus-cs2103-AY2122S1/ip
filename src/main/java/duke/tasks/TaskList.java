@@ -303,7 +303,20 @@ public class TaskList {
             throw new InvalidIndexException(1, taskListSize, taskIndex + 1);
         }
         Task task = taskList.get(taskIndex);
-        return task.sumExpense();
+        return task.sumExpenseToString();
     }
 
+    public String sumAllExpense() throws EmptyListException {
+        int taskListSize = taskList.size();
+
+        if (taskListSize == 0) {
+            throw new EmptyListException();
+        }
+        float total = 0;
+        for (Task task : taskList) {
+            total += task.sumExpense();
+        }
+        DecimalFormat df = new DecimalFormat("0.00");
+        return df.format(total);
+    }
 }

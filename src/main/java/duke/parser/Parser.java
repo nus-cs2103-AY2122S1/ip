@@ -173,8 +173,14 @@ public class Parser {
             throw new MessageEmptyException();
         }
         boolean isAllPresent = expense.matches("(?i)/listall");
+        boolean isSumAll = expense.matches("(/sumall)");
+
         if (isAllPresent) {
             return new ExpenseCommand(-1, "", 0, true, false);
+        }
+        if (isSumAll) {
+            System.out.println(expense);
+            return new ExpenseCommand(true);
         }
 
         String[] parsedExpense = expense.split(" ");

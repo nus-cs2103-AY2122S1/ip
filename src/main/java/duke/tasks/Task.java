@@ -132,7 +132,7 @@ public class Task {
         return sb.toString();
     }
 
-    public String sumExpense() {
+    public String sumExpenseToString() {
         float total = 0;
         for (String purpose : expenses.keySet()) {
             for (Float f : expenses.get(purpose)) {
@@ -140,6 +140,16 @@ public class Task {
             }
         }
         return df.format(total) + " spent on " + this;
+    }
+
+    public float sumExpense() {
+        float total = 0;
+        for (String purpose : expenses.keySet()) {
+            for (Float f : expenses.get(purpose)) {
+                total += f;
+            }
+        }
+        return total;
     }
 
     /**

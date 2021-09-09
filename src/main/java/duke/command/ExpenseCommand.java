@@ -30,6 +30,7 @@ public class ExpenseCommand extends Command {
     private final boolean isDisplay;
     private final int deleteIndex;
     private final boolean isSum;
+    private final boolean isSumAll;
 
     /**
      * Constructor of ExpenseCommand.
@@ -49,6 +50,7 @@ public class ExpenseCommand extends Command {
         this.isDisplay = isDisplay;
         deleteIndex = -1;
         isSum = false;
+        isSumAll = false;
     }
 
     /**
@@ -67,6 +69,7 @@ public class ExpenseCommand extends Command {
         isDisplay = false;
         deleteIndex = -1;
         isSum = false;
+        isSumAll = false;
     }
 
     /**
@@ -84,6 +87,7 @@ public class ExpenseCommand extends Command {
         isDelete = true;
         isDisplay = false;
         isSum = false;
+        isSumAll = false;
     }
 
     public ExpenseCommand(int taskIndex, boolean isSum) {
@@ -95,6 +99,19 @@ public class ExpenseCommand extends Command {
         isDelete = false;
         isDisplay = false;
         this.isSum = isSum;
+        isSumAll = false;
+    }
+
+    public ExpenseCommand(boolean isSumAll) {
+        taskIndex = -1;
+        deleteIndex = -1;
+        purpose = "";
+        amount = 0;
+        isList = false;
+        isDelete = false;
+        isDisplay = false;
+        isSum = false;
+        this.isSumAll = isSumAll;
     }
 
     /**
@@ -140,6 +157,8 @@ public class ExpenseCommand extends Command {
             return message;
         } else if (isSum) {
             return "$" + tasks.sumExpense(taskIndex);
+        } else if (isSumAll) {
+            return "$" + tasks.sumAllExpense();
         }
         String message = tasks.addExpense(taskIndex, purpose, amount);
         storage.save(tasks);
