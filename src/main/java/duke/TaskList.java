@@ -46,6 +46,7 @@ public class TaskList {
     public String markTaskDone(int taskIndex) {
         Task currTask = tasks.get(taskIndex - 1);
         currTask.setDone();
+        assert currTask.toString().charAt(5) == 'X' : "Task is supposed to be marked done";
         return "Nice! I've marked this task as done:\n"
                 + "  " + taskIndex + ". " + currTask;
     }
@@ -59,6 +60,7 @@ public class TaskList {
     public String deleteTask(int taskIndex) {
         Task currTask = tasks.get(taskIndex - 1);
         tasks.remove(taskIndex - 1);
+        assert !tasks.contains(currTask) : "Removed task is not supposed to be in the TaskList";
         return "Noted. I've removed this task:\n"
                 + "  " + taskIndex + ". " + currTask + "\n"
                 + countTasks();
