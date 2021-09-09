@@ -144,12 +144,6 @@ public class DukeLauncher extends Application {
         userInput.clear();
     }
 
-    private void greet(Duke dukeObject) {
-        Label greeting = new Label(dukeObject.turnOn());
-        dialogContainer.getChildren().addAll(
-                DukeLauncher.DialogBox.getDukeDialog(greeting, new ImageView(duke))
-        );
-    }
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
