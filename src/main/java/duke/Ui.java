@@ -84,7 +84,7 @@ public class Ui {
             }
             return sb.toString();
         } catch (FileNotFoundException e) {
-            throw new DukeException("help.txt not found @ " + HELP);
+            throw new DukeException("help.txt not found at file location: " + HELP);
         }
     }
 }
