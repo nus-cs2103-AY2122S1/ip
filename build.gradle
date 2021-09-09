@@ -9,6 +9,7 @@ plugins {
     id 'checkstyle'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.10'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
  //   id 'org.beryx.jlink' version '2.15.1'
 }
 
@@ -17,12 +18,12 @@ checkstyle {
     configFile file('config/checkstyle/checkstyle.xml')
 }
 
-checkstyleMain {
-    source ='src/main/java'
-}
-checkstyleTest {
-    source ='src/test/java'
-}
+//checkstyleMain {
+//    source ='src/main/java'
+//}
+//checkstyleTest {
+//    source ='src/test/java'
+//}
 
 test {
     useJUnitPlatform()
@@ -63,7 +64,11 @@ jar {
 
     manifest {
         attributes(
-                'Main-Class': 'duke.Duke'
+                'Main-Class': 'duke.Launcher'
         )
     }
+}
+
+application {
+    mainClassName = "duke.Launcher"
 }
