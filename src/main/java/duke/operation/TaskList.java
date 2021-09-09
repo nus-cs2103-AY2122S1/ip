@@ -1,9 +1,10 @@
 package duke.operation;
 
-import duke.parser.Parser;
 import duke.exception.DukeException;
+import duke.parser.Parser;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * This is the TaskList class to contain task list and handle operations.
@@ -15,6 +16,7 @@ public class TaskList {
 	public TaskList() {
 		this.taskList = new ArrayList<>();
 	}
+
 	public TaskList(ArrayList<Task> list) {
 		this.taskList = list;
 	}
@@ -31,7 +33,6 @@ public class TaskList {
 	 * @throws DukeException
 	 */
 	public String addTask(Command command, String inputLine) throws DukeException {
-		String message;
 		Task task;
 		String guiOutput;
 		switch (command) {
@@ -57,10 +58,7 @@ public class TaskList {
 			break;
 		}
 		default: {
-			message = "____________________________________________________________\n"
-					+ "OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-					+ "____________________________________________________________\n";
-			throw new DukeException(message);
+			throw new DukeException(parser.getNotUnderstoodMessage());
 		}
 		}
 		return guiOutput;
@@ -100,6 +98,7 @@ public class TaskList {
 	 * Returns task list as String.
 	 */
 	public String getTaskListAsString() {
+		Collections.sort(this.taskList);
 		String message = "Here are the tasks in your list:\n";
 		int counter = 1;
 		for (Task taskForLoop : taskList) {

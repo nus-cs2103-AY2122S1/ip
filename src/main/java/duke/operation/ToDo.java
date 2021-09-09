@@ -6,6 +6,7 @@ package duke.operation;
 public class ToDo extends Task {
 	public ToDo(String description) {
 		super(description);
+		taskType = Command.TODO;
 	}
 
 	public static ToDo splitToDO(String input) {

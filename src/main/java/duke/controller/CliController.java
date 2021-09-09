@@ -1,9 +1,9 @@
 package duke.controller;
 
-import duke.parser.Parser;
 import duke.exception.DukeException;
 import duke.operation.Command;
 import duke.operation.TaskList;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
 

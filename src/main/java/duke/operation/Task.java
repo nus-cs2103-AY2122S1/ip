@@ -3,9 +3,16 @@ package duke.operation;
 /**
  * This is the Task class to handle all tasks.
  */
-public class Task {
+public class Task implements Comparable<Task> {
 	protected String description;
 	protected boolean isDone;
+	protected Command taskType;
+
+	public Command getTaskType() {
+		return taskType;
+	}
+
+	;
 
 	/**
 	 * Constructor for Task objects.
@@ -36,5 +43,36 @@ public class Task {
 	@Override
 	public String toString() {
 		return this.getStatusIcon() + " " + this.description;
+	}
+
+	@Override
+	public int compareTo(Task otherTask) {
+		Command thisTaskType = this.getTaskType();
+		Command otherTaskType = otherTask.getTaskType();
+
+		switch (thisTaskType) {
+		case TODO: {
+			return -1;
+		}
+		case EVENT: {
+			if (otherTaskType.equals(Command.TODO)) {
+				return 1;
+			}
+			if (otherTaskType.equals(Command.DEADLINE)) {
+				return 1;
+			}
+		}
+		case DEADLINE: {
+			if (otherTaskType.equals(Command.TODO)) {
+				return 1;
+			}
+			if (otherTaskType.equals(Command.EVENT)) {
+				return -1;
+			}
+		}
+		default: {
+			return 0;
+		}
+		}
 	}
 }

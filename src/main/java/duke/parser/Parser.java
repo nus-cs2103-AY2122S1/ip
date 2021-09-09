@@ -7,6 +7,10 @@ public class Parser {
 			+ "OOPS!!! I'm sorry, but I don't know what that means :-(\n"
 			+ "____________________________________________________________\n";
 
+	public String getNotUnderstoodMessage() {
+		return NOT_UNDERSTOOD_MESSAGE;
+	}
+
 	/**
 	 * Handles situation when input is invalid.
 	 *

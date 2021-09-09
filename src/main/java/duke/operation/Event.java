@@ -18,6 +18,7 @@ public class Event extends Task {
 	public Event(String description, LocalDateTime at) {
 		super(description);
 		this.at = at;
+		taskType = Command.EVENT;
 	}
 
 	/**
