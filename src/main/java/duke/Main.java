@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 
 /**
  * A GUI for Duke using FXML.
+ *
+ * @author Tan Yi Guan
  */
 public class Main extends Application {
 
