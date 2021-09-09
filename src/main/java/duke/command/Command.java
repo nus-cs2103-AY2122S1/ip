@@ -2,10 +2,7 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.ResponseFormatter;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.*;
 
 
 /**
@@ -34,6 +31,9 @@ public abstract class Command {
      * @throws IOException for commands that needs to write to storage file
      * @return
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws IOException;
-    public abstract String execute(TaskList taskList, ResponseFormatter rf, Storage storage) throws IOException;
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage, History history) throws IOException;
+    public abstract String execute(TaskList taskList, ResponseFormatter rf, Storage storage, History history) throws IOException;
+    public String undo(TaskList taskList, ResponseFormatter rf, Storage storage) throws IOException {
+        return null;
+    };
 }

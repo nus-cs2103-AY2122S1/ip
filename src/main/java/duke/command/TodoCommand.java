@@ -1,16 +1,17 @@
 package duke.command;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-import duke.ResponseFormatter;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.*;
+import duke.task.Deadline;
+import duke.task.Task;
 import duke.task.Todo;
 
 public class TodoCommand extends Command {
     public static final String COMMAND = "todo";
     private String desc;
+    private Todo todo;
 
     /**
      * Constructor for Todo Command
@@ -33,14 +34,15 @@ public class TodoCommand extends Command {
      * @return
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    public void execute(TaskList taskList, Ui ui, Storage storage, History history) throws IOException {
         if (this.desc.equals("")) {
             throw new IllegalArgumentException();
         }
-        Todo newTodo = new Todo(this.desc);
-        taskList.add(newTodo);
+        todo = new Todo(this.desc);
+        taskList.add(todo);
         storage.writeToFile(taskList);
-        ui.printAdd(newTodo, taskList.getList().size());
+        ui.printAdd(todo, taskList.getList().size());
+        history.addHistory(this);
     }
 
     /**
@@ -55,13 +57,27 @@ public class TodoCommand extends Command {
      * @return formatted response
      */
     @Override
-    public String execute(TaskList taskList, ResponseFormatter rf, Storage storage) throws IOException {
+    public String execute(TaskList taskList, ResponseFormatter rf, Storage storage, History history) throws IOException {
         if (this.desc.equals("")) {
             throw new IllegalArgumentException();
         }
-        Todo newTodo = new Todo(this.desc);
-        taskList.add(newTodo);
+        todo = new Todo(this.desc);
+        taskList.add(todo);
         storage.writeToFile(taskList);
-        return rf.formatAdd(newTodo, taskList.getList().size());
+        history.addHistory(this);
+        return rf.formatAdd(todo, taskList.getList().size());
+    }
+
+    @Override
+    public String undo(TaskList taskList, ResponseFormatter rf, Storage storage) throws IOException {
+        ArrayList<Task> currentList = taskList.getList();
+        currentList.removeIf(task ->
+                task instanceof Todo &&
+                        task.getDescription().equals(this.todo.getDescription())
+        );
+        taskList.updateTaskList(currentList);
+
+        storage.writeToFile(taskList);
+        return rf.formatUndo("Todo Command");
     }
 }

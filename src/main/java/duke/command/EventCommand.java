@@ -2,18 +2,19 @@ package duke.command;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
-import duke.ResponseFormatter;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.*;
+import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 
 
 public class EventCommand extends Command {
     public static final String COMMAND = "event";
     private String desc;
     private LocalDateTime at;
+    private Event event;
 
     /**
      * Constructor for Event Command
@@ -38,11 +39,12 @@ public class EventCommand extends Command {
      * @return
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-        Event newEvent = new Event(this.desc, this.at);
-        taskList.add(newEvent);
+    public void execute(TaskList taskList, Ui ui, Storage storage, History history) throws IOException {
+        event = new Event(this.desc, this.at);
+        taskList.add(event);
         storage.writeToFile(taskList);
-        ui.printAdd(newEvent, taskList.getList().size());
+        ui.printAdd(event, taskList.getList().size());
+        history.addHistory(this);
     }
 
     /**
@@ -56,10 +58,24 @@ public class EventCommand extends Command {
      * @return
      */
     @Override
-    public String execute(TaskList taskList, ResponseFormatter rf, Storage storage) throws IOException {
-        Event newEvent = new Event(this.desc, this.at);
-        taskList.add(newEvent);
+    public String execute(TaskList taskList, ResponseFormatter rf, Storage storage, History history) throws IOException {
+        this.event = new Event(this.desc, this.at);
+        taskList.add(event);
         storage.writeToFile(taskList);
-        return rf.formatAdd(newEvent, taskList.getList().size());
+        history.addHistory(this);
+        return rf.formatAdd(event, taskList.getList().size());
+    }
+
+    @Override
+    public String undo(TaskList taskList, ResponseFormatter rf, Storage storage) throws IOException {
+        ArrayList<Task> currentList = taskList.getList();
+        currentList.removeIf(task ->
+                task instanceof Event &&
+                        task.getDescription().equals(this.event.getDescription())
+        );
+        taskList.updateTaskList(currentList);
+
+        storage.writeToFile(taskList);
+        return rf.formatUndo("Event Command");
     }
 }

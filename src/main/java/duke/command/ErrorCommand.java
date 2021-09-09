@@ -1,9 +1,6 @@
 package duke.command;
 
-import duke.ResponseFormatter;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.*;
 
 public class ErrorCommand extends Command {
     private String error;
@@ -40,7 +37,7 @@ public class ErrorCommand extends Command {
      * @return
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage, History history) {
         if (this.emoticon != null) {
             ui.printError(this.error, this.emoticon);
         } else {
@@ -58,7 +55,7 @@ public class ErrorCommand extends Command {
      * @return
      */
     @Override
-    public String execute(TaskList taskList, ResponseFormatter rf, Storage storage) {
+    public String execute(TaskList taskList, ResponseFormatter rf, Storage storage, History history) {
         if (this.emoticon != null) {
             return rf.formatError(this.error, this.emoticon);
         } else {

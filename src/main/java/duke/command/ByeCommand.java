@@ -1,9 +1,6 @@
 package duke.command;
 
-import duke.ResponseFormatter;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.*;
 
 public class ByeCommand extends Command {
     public static final String COMMAND = "Bye!";
@@ -27,7 +24,7 @@ public class ByeCommand extends Command {
      * @return
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage, History history) {
         ui.printBye();
     }
 
@@ -40,7 +37,7 @@ public class ByeCommand extends Command {
      * @return
      */
     @Override
-    public String execute(TaskList taskList, ResponseFormatter rf, Storage storage) {
+    public String execute(TaskList taskList, ResponseFormatter rf, Storage storage, History history) {
         return rf.formatBye();
     }
 }

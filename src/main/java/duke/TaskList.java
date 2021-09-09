@@ -54,6 +54,8 @@ public class TaskList {
         return tasks.get(taskNo).check();
     }
 
+    public String uncheck(int taskNo) { return tasks.get(taskNo).uncheck(); }
+
     /**
      * delete certain task
      *
@@ -81,5 +83,9 @@ public class TaskList {
             }
         }
         return matchedTasks;
+    }
+
+    public void updateTaskList(ArrayList taskList) {
+        this.tasks = taskList;
     }
 }

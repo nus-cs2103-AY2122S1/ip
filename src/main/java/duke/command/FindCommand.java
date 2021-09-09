@@ -1,9 +1,6 @@
 package duke.command;
 
-import duke.ResponseFormatter;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.*;
 
 
 public class FindCommand extends Command {
@@ -29,7 +26,7 @@ public class FindCommand extends Command {
      * @return
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage, History history) {
         ui.printFound(taskList.findKeyword(this.keyword));
     }
 
@@ -42,7 +39,7 @@ public class FindCommand extends Command {
      * @return formatted response
      */
     @Override
-    public String execute(TaskList taskList, ResponseFormatter rf, Storage storage) {
+    public String execute(TaskList taskList, ResponseFormatter rf, Storage storage, History history) {
         return rf.formatFound(taskList.findKeyword(this.keyword));
     }
 }
