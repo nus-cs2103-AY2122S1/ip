@@ -70,8 +70,9 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws IOException, DukeExceptions {
+    private void handleUserInput() {
         String input = userInput.getText();
+        assert input != null : "The user input cannot be null.";
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

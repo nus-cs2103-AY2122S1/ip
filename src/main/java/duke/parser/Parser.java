@@ -23,6 +23,7 @@ public class Parser {
      * @param command The command issued by the user.
      */
     public Parser(String command) {
+        assert command != null : "Command to be parsed cannot be null";
         this.command = command;
         this.commandWords = command.split(" ");
     }
