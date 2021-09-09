@@ -1,7 +1,7 @@
 package duke;
 
 import duke.main.DukeException;
-import duke.main.Parser;
+import duke.main.Executor;
 import duke.main.Storage;
 import duke.main.Ui;
 import duke.task.TaskList;
@@ -15,7 +15,7 @@ public class Duke {
     private Storage storage;
     private Ui ui;
     private TaskList taskList;
-    private Parser parser;
+    private Executor executor;
 
     /**
      * Default constructor for GUI Launcher.
@@ -40,7 +40,7 @@ public class Duke {
                 taskList.clearTasks();
             }
         } finally {
-            parser = new Parser(storage, ui, taskList);
+            Executor executor = new Executor(storage, ui, taskList);
         }
     }
 
@@ -50,7 +50,8 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            return parser.parseAndExecute(input);
+
+            return executor.parseAndExecute(input);
         } catch (DukeException e) {
             return e.getMessage();
         }
