@@ -1,7 +1,7 @@
 package duke.command;
 
+import duke.Duke;
 import duke.Storage;
-import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -21,14 +21,11 @@ public class TodoCommand extends AddCommand {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage, boolean shouldPrintMessage) throws DukeException {
+    public void execute(Duke duke, TaskList tasks, Storage storage) throws DukeException {
         Task task = new Todo(description);
         tasks.add(task, storage);
         String message = "Got it. I've added this task:\n  " + task + "\nNow you have " + tasks.toArray().length
             + " task(s) in the list.";
-        if (shouldPrintMessage) {
-            ui.showMessage(message);
-        }
-        return message;
+        duke.setResponse(message);
     }
 }

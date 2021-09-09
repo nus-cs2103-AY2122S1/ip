@@ -6,11 +6,6 @@ import java.util.Scanner;
  * Ui class deals with interactions with the user.
  */
 public class Ui {
-    private static final String LOGO = " ____        _        \n"
-        + "|  _ \\ _   _| | _____ \n"
-        + "| | | | | | | |/ / _ \\\n"
-        + "| |_| | |_| |   <  __/\n"
-        + "|____/ \\__,_|_|\\_\\___|\n";
 
     /**
      * Prompts user input and returns it.
@@ -30,23 +25,6 @@ public class Ui {
     public void showLoadingError() {
         System.err.println(
             "☹ OOPS!!! Seems like your data is corrupted. " + "Please make sure you data file has the correct format.");
-    }
-
-    /**
-     * Prints welcome message.
-     */
-    public void showWelcome() {
-        this.showLine();
-        System.out.println(LOGO);
-        System.out.println("Hello! I'm duke.Duke\nWhat can I do for you?");
-        this.showLine();
-    }
-
-    /**
-     * Prints good bye message.
-     */
-    public void showGoodBye() {
-        System.out.println("Bye. Hope to see you again soon!");
     }
 
     /**

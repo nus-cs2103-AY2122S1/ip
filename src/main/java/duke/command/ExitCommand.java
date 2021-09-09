@@ -1,7 +1,7 @@
 package duke.command;
 
+import duke.Duke;
 import duke.Storage;
-import duke.Ui;
 import duke.task.TaskList;
 
 /**
@@ -9,11 +9,8 @@ import duke.task.TaskList;
  */
 public class ExitCommand extends Command {
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage, boolean shouldPrintMessage) {
+    public void execute(Duke duke, TaskList tasks, Storage storage) {
         String message = "\"Bye. Hope to see you again soon!\"";
-        if (shouldPrintMessage) {
-            ui.showGoodBye();
-        }
-        return message;
+        duke.setResponse(message);
     }
 }

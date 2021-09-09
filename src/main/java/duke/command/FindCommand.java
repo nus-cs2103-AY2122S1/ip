@@ -3,8 +3,8 @@ package duke.command;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import duke.Duke;
 import duke.Storage;
-import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -24,7 +24,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage, boolean shouldPrintMessage) {
+    public void execute(Duke duke, TaskList tasks, Storage storage) {
         List<Task> filtered =
             tasks.stream().filter(task -> task.getDescription().contains(keyword)).collect(Collectors.toList());
 
@@ -34,10 +34,7 @@ public class FindCommand extends Command {
             sb.append(item);
         }
         String message = sb.toString();
-        if (shouldPrintMessage) {
-            ui.showMessage(message);
-        }
-        return message;
+        duke.setResponse(message);
     }
 }
 

@@ -12,6 +12,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
+import duke.command.WelcomeCommand;
 import duke.exception.DukeParseException;
 
 /**
@@ -30,6 +31,9 @@ public class Parser {
         String input = sc.next();
         try {
             switch (input) {
+            case "hi": {
+                return new WelcomeCommand();
+            }
             case "list": {
                 return new ListCommand();
             }
