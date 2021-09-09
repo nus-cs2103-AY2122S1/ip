@@ -23,7 +23,7 @@ public class Storage {
 
 
         try {
-            if (!file.exists()){
+            if (!file.exists()) {
                 file.getParentFile().mkdir();
                 file.createNewFile();
             }
