@@ -25,25 +25,10 @@ public class TaskList {
     /**
      * Adds an item to the task list.
      *
-     * @param input The input entered by the user.
+     * @param t The input entered by the user.
      * @return The new task generated based on the user's input.
      */
-    public Task addItem(String input) {
-        Task t;
-
-        if (input.contains("todo")) {
-            String description = input.substring(input.indexOf(' ') + 1);
-            t = new ToDo(description);
-        } else {
-            String description = input.substring(input.indexOf(' ') + 1, input.lastIndexOf('/') - 1);
-            String time = input.substring(input.lastIndexOf("/") + 4);
-            if (input.contains("deadline")) {
-                t = new Deadline(description, time);
-            } else {
-                t = new Event(description, time);
-            }
-        }
-
+    public Task addItem(Task t) {
         taskList.add(t);
 
         return t;

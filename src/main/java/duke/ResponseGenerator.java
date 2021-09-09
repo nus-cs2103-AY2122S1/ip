@@ -2,7 +2,7 @@ package duke;
 
 import java.util.*;
 
-public class UserInterface {
+public class ResponseGenerator {
     public String greet() {
         String s = "Hello from Duke" + "\n" + "What can I do for you?";
         return s;
@@ -11,6 +11,8 @@ public class UserInterface {
     public String showLoadingError() {
         return "Problem loading";
     }
+
+    public String showGoodbyeMessage() { return "Bye. Hope to see you again soon!"; }
 
     public String showList(TaskList taskList) {
         String s = "Here are the tasks in your list:\n";
