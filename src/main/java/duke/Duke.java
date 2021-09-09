@@ -1,12 +1,13 @@
 package duke;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import duke.command.Command;
 import duke.task.TaskList;
+import duke.util.AliasHandler;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
@@ -33,18 +34,37 @@ public class Duke {
     /**
      * Creates a Duke chat bot instance, using a file path for loading/saving.
      *
-     * @param filePath Relative path to the location of the save file.
+     * @param saveFilePath Relative path to the location of the save file.
      */
-    public Duke(Path filePath) {
+    public Duke(Path saveFilePath, Path configFilePath) {
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage(saveFilePath, configFilePath);
+        // Load saved tasks from data file
         try {
-            taskList = storage.loadTasksFromFile();
-        } catch (FileNotFoundException e) {
-            initMessage = ui.showFileNotFoundError();
-            taskList = new TaskList();
+            if (!Files.exists(saveFilePath)) {
+                initMessage += ui.showSaveFileNotFoundError();
+                taskList = new TaskList();
+                storage.saveTasksToFile(taskList);
+            } else {
+                taskList = storage.loadTasksFromFile();
+            }
         } catch (Exception e) {
-            initMessage = ui.showLoadingError(e.getMessage());
+            initMessage += ui.showSaveFileLoadingError(e.getMessage());
+            taskList = new TaskList();
+        }
+        // Load saved aliases from config file
+        try {
+            // Initialize Parser to recognize aliases for commands
+            AliasHandler aliasHandler = new AliasHandler();
+            if (!Files.exists(configFilePath)) {
+                initMessage += ui.showConfigFileNotFoundError();
+                storage.saveAliasesToFile(aliasHandler);
+            } else {
+                aliasHandler = storage.loadAliasesFromFile();
+            }
+            Parser.setAliasHandler(aliasHandler);
+        } catch (Exception e) {
+            initMessage += ui.showConfigLoadingError(e.getMessage());
             taskList = new TaskList();
         }
         initMessage += ui.showIntroduction();
@@ -54,7 +74,8 @@ public class Duke {
      * Creates a Duke chat bot instance, using a default file path for loading/saving.
      */
     public Duke() {
-        this(Paths.get(System.getProperty("user.dir"), "data", "tasks.txt"));
+        this(Paths.get(System.getProperty("user.dir"), "data", "tasks.txt"),
+                Paths.get(System.getProperty("user.dir"), "data", "config.txt"));
     }
 
     /**
@@ -78,7 +99,7 @@ public class Duke {
             taskList = command.execute(taskList, ui, storage);
             isTerminated = command.isTerminated();
             // Duke should always give a response to a command
-            assert(!taskList.getRecentMessage().equals(""));
+            assert (!taskList.getRecentMessage().equals(""));
             return taskList.getRecentMessage();
         } catch (IOException e) {
             return ui.showError("The data failed to save to the save file with error:"

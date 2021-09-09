@@ -9,14 +9,14 @@ import duke.util.Ui;
 /**
  * A class that represents the command when the user types in 'delete'.
  */
-public class DeleteCommand extends Command {
+public class DeleteTaskCommand extends Command {
 
     /**
-     * Creates a DeleteCommand, which relies on user inputs to function.
+     * Creates a DeleteTaskCommand, which relies on user inputs to function.
      *
      * @param input A string containing the user's input.
      */
-    public DeleteCommand(String input) {
+    public DeleteTaskCommand(String input) {
         super(input);
     }
 

@@ -15,16 +15,11 @@ import duke.util.Ui;
 /**
  * A class that contains the base functionality for a task list,
  * including adding, deleting, listing, and marking tasks as done.
+ * It also contains the response for Duke after a user input.
  */
 public class TaskList {
     private static final int DEADLINE_EXTRA_LENGTH = 3;
     private static final int EVENT_EXTRA_LENGTH = 4;
-
-    private static final int DELETE_COMMAND_LENGTH = 7;
-    private static final int DONE_COMMAND_LENGTH = 5;
-    private static final int FIND_COMMAND_LENGTH = 5;
-    private static final int DUE_COMMAND_LENGTH = 4;
-    private static final int ONDATE_COMMAND_LENGTH = 7;
 
     private final List<Task> tasks;
     private final String recentMessage;
@@ -82,32 +77,33 @@ public class TaskList {
      * Adds a task to the task list with a task name.
      * Task is either a todo, deadline or event task depending on the input.
      *
-     * @param ui    Object that handles user interface functionality. (e.g. printing)
+     * @param ui     Object that handles printing/formatting of messages.
      * @param inputs A variable amount of strings representing the user input.
      * @return A new TaskList instance containing the new task and an output message.
      * @throws DukeException If input contains |, or is in an invalid format.
      */
-    public TaskList addTask(Ui ui, String ...inputs) throws DukeException {
-        for (String input: inputs) {
+    public TaskList addTask(Ui ui, String... inputs) throws DukeException {
+        for (String input : inputs) {
             if (input.contains("|")) {
                 throw new DukeException("Input contains |, which is an invalid/reserved character.");
             }
         }
         List<Task> newTasks = new ArrayList<>(tasks);
         Task newTask;
-        String commandString = inputs[0].toUpperCase();
+        String aliasString = inputs[0].toLowerCase();
+        String commandString = Parser.getAliasHandler().convertAlias(aliasString);
         // If the code enters this function, the command must be one of the words below
-        assert(commandString.equals("TODO")
-                || commandString.equals("DEADLINE")
-                || commandString.equals("EVENT"));
+        assert (commandString.equals("todo")
+                || commandString.equals("deadline")
+                || commandString.equals("event"));
         switch (commandString) {
-        case "TODO":
+        case "todo":
             newTask = createTodo(inputs);
             break;
-        case "DEADLINE":
+        case "deadline":
             newTask = createDeadline(inputs);
             break;
-        case "EVENT":
+        case "event":
             newTask = createEvent(inputs);
             break;
         default:
@@ -126,7 +122,7 @@ public class TaskList {
      * @param inputs A variable amount of strings representing the user input.
      * @return A new todo task with a task name.
      */
-    private Todo createTodo(String ...inputs) {
+    private Todo createTodo(String... inputs) {
         String taskName = Parser.parseTaskNameFromInput(inputs, 1, inputs.length);
         return new Todo(taskName);
     }
@@ -138,7 +134,7 @@ public class TaskList {
      * @return A new deadline task with a task name, date and time.
      * @throws DukeException If the input is in an invalid format.
      */
-    private Deadline createDeadline(String ...inputs) throws DukeException {
+    private Deadline createDeadline(String... inputs) throws DukeException {
         // Placeholder variable
         int byIndex = -1;
         // Locate the /by keyword in the inputs
@@ -172,7 +168,7 @@ public class TaskList {
      * @return A new event task with a task name, date, start time and end time.
      * @throws DukeException If the input is in an invalid format.
      */
-    private Event createEvent(String ...inputs) throws DukeException {
+    private Event createEvent(String... inputs) throws DukeException {
         // Placeholder variable
         int atIndex = -1;
         // Locate the /at keyword in the inputs
@@ -204,17 +200,18 @@ public class TaskList {
      * Deletes a task from the task list.
      * Index of deleted task depends on the input.
      *
-     * @param ui    Object that handles user interface functionality. (e.g. printing)
+     * @param ui    Object that handles printing/formatting of messages.
      * @param input String containing user input.
      * @return A new TaskList instance with the selected task removed and an output message.
      * @throws DukeException If input is in an invalid format, or specified index is out of bounds.
      */
     public TaskList deleteTask(Ui ui, String input) throws DukeException {
-        if (input.length() <= DELETE_COMMAND_LENGTH) {
-            throw new DukeException("Please type in a task number to delete.");
+        String[] splitInputs = input.split(" ");
+        if (splitInputs.length != 2) {
+            throw new DukeException("Input should be of the format: delete [taskNumber]");
         }
         List<Task> newTasks = new ArrayList<>(tasks);
-        String taskNumberString = input.substring(DELETE_COMMAND_LENGTH);
+        String taskNumberString = splitInputs[1];
 
         boolean isNumber = taskNumberString.matches("\\d+");
         if (!isNumber) {
@@ -245,11 +242,12 @@ public class TaskList {
      * @throws DukeException If input is in an invalid format, or specified index is out of bounds.
      */
     public TaskList markTask(Ui ui, String input) throws DukeException {
-        if (input.length() <= DONE_COMMAND_LENGTH) {
-            throw new DukeException("Please type in a task number to mark as done.");
+        String[] splitInputs = input.split(" ");
+        if (splitInputs.length != 2) {
+            throw new DukeException("Input should be of the format: done [taskNumber]");
         }
         List<Task> newTasks = new ArrayList<>(tasks);
-        String taskNumberString = input.substring(DONE_COMMAND_LENGTH);
+        String taskNumberString = splitInputs[1];
 
         boolean isNumber = taskNumberString.matches("\\d+");
         if (!isNumber) {
@@ -279,10 +277,12 @@ public class TaskList {
      * @throws DukeException If input is in an invalid format.
      */
     public TaskList findTasks(String input) throws DukeException {
-        if (input.length() <= FIND_COMMAND_LENGTH) {
-            throw new DukeException("Please type in a keyphrase to search your tasks with.");
+        String[] splitInputs = input.split(" ");
+        if (splitInputs.length < 2) {
+            throw new DukeException("Input should be of the format: find [keyphrase]");
         }
-        String keyphrase = input.substring(FIND_COMMAND_LENGTH);
+        int keyphraseIndex = splitInputs[0].length();
+        String keyphrase = input.substring(keyphraseIndex);
         List<Task> foundTasks = tasks.stream()
                 .filter(task -> task.containsPhrase(keyphrase))
                 .collect(Collectors.toList());
@@ -297,11 +297,12 @@ public class TaskList {
      * @throws DukeException If input is in an invalid format.
      */
     public TaskList getDueTasks(String input) {
-        if (input.length() <= DUE_COMMAND_LENGTH) {
+        String[] splitInputs = input.split(" ");
+        if (splitInputs.length != 2) {
             throw new DukeException("Command must be of the form: due [integer][h/d/m] "
                     + "(h = hours, d = days, m = months)");
         }
-        String offset = input.substring(DUE_COMMAND_LENGTH, input.length() - 1);
+        String offset = splitInputs[1];
         boolean isValidInput = offset.matches("\\d+");
         if (!isValidInput) {
             throw new DukeException("Command must be of the form: due [integer][h/d/m] "
@@ -340,10 +341,11 @@ public class TaskList {
      * @throws DukeException If input is in an invalid format, or an invalid date is given.
      */
     public TaskList getOnDateTasks(String input) {
-        if (input.length() <= ONDATE_COMMAND_LENGTH) {
+        String[] splitInputs = input.split(" ");
+        if (splitInputs.length != 2) {
             throw new DukeException("Date must be of the form YYYY-MM-DD, and must be a real/valid date.");
         }
-        String dateString = input.substring(ONDATE_COMMAND_LENGTH);
+        String dateString = splitInputs[1];
         LocalDate date = Parser.parseDateFromInput(dateString);
         List<Task> onDateTasks = tasks.stream()
                 .filter(task -> task.hasSameDate(date))

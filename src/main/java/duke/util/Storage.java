@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,15 +25,17 @@ import duke.task.Todo;
  */
 public class Storage {
 
-    private final Path filePath;
+    private final Path saveFilePath;
+    private final Path configFilePath;
 
     /**
      * Creates an instance of the Storage class.
      *
-     * @param filePath File path for the save file.
+     * @param saveFilePath File path for the save file.
      */
-    public Storage(Path filePath) {
-        this.filePath = filePath;
+    public Storage(Path saveFilePath, Path configFilePath) {
+        this.saveFilePath = saveFilePath;
+        this.configFilePath = configFilePath;
     }
 
     /**
@@ -43,7 +46,7 @@ public class Storage {
      * @throws DukeException         If the file contains invalid task data.
      */
     public TaskList loadTasksFromFile() throws FileNotFoundException, DukeException {
-        File saveFile = filePath.toFile();
+        File saveFile = saveFilePath.toFile();
         Scanner scanner = new Scanner(saveFile);
         List<Task> tasks = new ArrayList<>();
 
@@ -85,14 +88,52 @@ public class Storage {
      */
     public void saveTasksToFile(TaskList taskList) throws IOException {
         // Create directories if they do not exist, so that the file can be created without error
-        Files.createDirectories(filePath.getParent());
-        FileWriter fw = new FileWriter(filePath.toAbsolutePath().toString());
+        Files.createDirectories(saveFilePath.getParent());
+        FileWriter fw = new FileWriter(saveFilePath.toAbsolutePath().toString());
         // Convert all tasks in the task list into save data format
         StringBuilder saveData = new StringBuilder();
         taskList.forEach((task) -> saveData.append(task.toSaveData())
                 .append(System.lineSeparator())); // Each task will be on its own line
 
         fw.write(saveData.toString());
+        fw.close();
+    }
+
+    /**
+     * Loads aliases from the specified file path. Called when Duke starts.
+     *
+     * @return The AliasHandler object containing a list aliases loaded from the config file.
+     * @throws FileNotFoundException If the file does not exist.
+     * @throws DukeException         If the file contains invalid alias data.
+     */
+    public AliasHandler loadAliasesFromFile() throws FileNotFoundException, DukeException {
+        File configFile = configFilePath.toFile();
+        Scanner scanner = new Scanner(configFile);
+        HashMap<String, String> aliasHashMap = new HashMap<>();
+        while (scanner.hasNextLine()) {
+            String aliasLine = scanner.nextLine();
+            String[] aliasData = aliasLine.split("\\|");
+            String alias = aliasData[0];
+            String command = aliasData[1].toLowerCase();
+            aliasHashMap.put(alias, command);
+        }
+        return new AliasHandler(aliasHashMap);
+    }
+
+    /**
+     * Saves aliases to the file path given at instantiation. Called when the alias list is
+     * modified. (e.g. When the user adds/deletes an alias)
+     *
+     * @param aliasHandler An object containing the aliases to be saved.
+     * @throws IOException If the saving process fails.
+     */
+    public void saveAliasesToFile(AliasHandler aliasHandler) throws IOException {
+        // Create directories if they do not exist, so that the file can be created without error
+        Files.createDirectories(configFilePath.getParent());
+        FileWriter fw = new FileWriter(configFilePath.toAbsolutePath().toString());
+        // Convert all aliases into save data format
+        String aliasData = aliasHandler.toConfigData();
+        fw.write(aliasData);
         fw.close();
     }
 }

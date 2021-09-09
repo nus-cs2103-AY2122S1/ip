@@ -74,6 +74,32 @@ public class Ui {
     }
 
     /**
+     * Displays a formatted message. Called when a new alias is added.
+     *
+     * @param alias The alias being added.
+     * @param command The command that corresponds to the alias being added.
+     * @return A formatted string.
+     */
+    public String showAddAliasMessage(String alias, String command) {
+        String outputString = String.format("Got it. Alias %s now corresponds to command %s.",
+                alias, command);
+        return showMessage(outputString);
+    }
+
+    /**
+     * Displays a formatted message. Called when an alias is deleted.
+     *
+     * @param alias The alias being deleted.
+     * @param command The command that corresponds to the alias being deleted.
+     * @return A formatted string.
+     */
+    public String showDeleteAliasMessage(String alias, String command) {
+        String outputString = String.format("Got it. Alias %s no longer corresponds to command %s.",
+                alias, command);
+        return showMessage(outputString);
+    }
+
+    /**
      * Returns a formatted error string.
      *
      * @param errorMessage Error string that is to be formatted and printed.
@@ -88,9 +114,18 @@ public class Ui {
      *
      * @return A formatted error string.
      */
-    public String showFileNotFoundError() {
+    public String showSaveFileNotFoundError() {
         return String.format(FORMAT, "This appears to be your first time using Duke.")
-                + String.format(FORMAT, "A save file will be created to save your tasks when you first add a task.");
+                + String.format(FORMAT, "A save file will be created to save your tasks.");
+    }
+
+    /**
+     * Returns a formatted error string. Is called if the config file does not exist.
+     *
+     * @return A formatted error string.
+     */
+    public String showConfigFileNotFoundError() {
+        return String.format(FORMAT, "A config file will be created to save your settings.");
     }
 
     /**
@@ -99,10 +134,23 @@ public class Ui {
      *
      * @return A formatted error string.
      */
-    public String showLoadingError(String errorMessage) {
+    public String showSaveFileLoadingError(String errorMessage) {
         return showError(errorMessage)
                 + String.format(FORMAT, "This appears to be an error with your save file.")
                 + String.format(FORMAT, "Either edit data/tasks.txt to rectify the error, or delete it.")
                 + String.format(FORMAT, "For now, you'll start with an empty task list.");
+    }
+
+    /**
+     * Returns a formatted error string. Is called if the config file contains incorrectly
+     * formatted data.
+     *
+     * @return A formatted error string.
+     */
+    public String showConfigLoadingError(String errorMessage) {
+        return showError(errorMessage)
+                + String.format(FORMAT, "This appears to be an error with your config file.")
+                + String.format(FORMAT, "Either edit data/config.txt to rectify the error, or delete it.")
+                + String.format(FORMAT, "For now, you'll start without any aliases for your commands.");
     }
 }
