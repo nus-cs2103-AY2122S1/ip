@@ -20,8 +20,14 @@ public class TaskList {
      *
      * @param newTask The task to be added.
      * @return The task added.
+     * @throws DukeException If the task clash with any previous tasks.
      */
-    public Task addTask(Task newTask) {
+    public Task addTask(Task newTask) throws DukeException {
+        for (Task t: tasks) {
+            if (t.clash(newTask)) {
+                throw new DukeException("Sorry could not add this task as it clashes with another task");
+            }
+        }
         tasks.add(newTask);
         return newTask;
     }
