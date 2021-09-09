@@ -116,14 +116,29 @@ public class Event extends Task {
      * @param other
      * @return
      */
-    public int compareTo(Event other) {
-        int priorityCompare = super.compareTo(other);
+    public int compareTo(Task other) {
+        if(other.getClass().getName().equals("Task")) {
+            return -1;
+        }
+
+        int priorityCompare = priority.compareTo(other.priority);
 
         if (priorityCompare == 0) {
-            return startDateTime.compareTo(other.startDateTime);
-        } else {
-            return priorityCompare;
+            int timeCompare = 0;
+            if(other.getClass().getName().equals("Deadline")) {
+                Deadline o = (Deadline) other;
+                timeCompare = startDateTime.compareTo(o.dateTime);
+            } else if (other.getClass().getName().equals("Event")) {
+                Event o = (Event) other;
+                timeCompare = startDateTime.compareTo(o.startDateTime);
+            }
+
+            if(timeCompare == 0) {
+                return content.compareTo(other.content);
+            }
+            return timeCompare;
         }
+        return priorityCompare;
     }
 }
 

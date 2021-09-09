@@ -115,6 +115,14 @@ public class Task implements Comparable<Task> {
      */
     @Override
     public int compareTo(Task o) {
-        return priority.compareTo(o.priority);
+        if (!o.getClass().getName().equals("Task")) {
+            return 1;   // subclasses with time have higher priority;
+        }
+
+        int priorityCompare = priority.compareTo(o.priority);
+        if(priorityCompare == 0) {
+            return content.compareTo(o.content);
+        }
+        return priorityCompare;
     }
 }
