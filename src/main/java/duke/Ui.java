@@ -117,10 +117,25 @@ public class Ui {
         return "Error: " + message + ".";
     }
 
+    /**
+     * Returns the message describing the current path of the
+     * save file location.
+     *
+     * @param storage The Storage object whose path is to be returned.
+     * @return The current save file path.
+     */
     public String printCurrentStoragePath(Storage storage) {
         return "Current path is:\n" + storage.getPath();
     }
 
+    /**
+     * Returns the message describing the new path of the save file
+     * location and also print out the loaded task list.
+     *
+     * @param storage The Storage object whose new path is to be returned.
+     * @param tasks The TaskList object containing the loaded tasks.
+     * @return The new save file path and the list of loaded tasks.
+     */
     public String printNewStoragePath(Storage storage, TaskList tasks) {
         return "New path set:\n" + storage.getPath() + "\n\n"
                 + printLoadTasks(tasks);

@@ -126,6 +126,16 @@ public class Duke {
         return ui.printTasksWithSubject(tasks, subject);
     }
 
+    /**
+     * Sets a new save file location given a new file path and loads any saved
+     * TaskList from the given location, or otherwise starts a new TaskList.
+     *
+     * @param newPath A String object describing the new path of the save file.
+     *                The path should be the relative path from the working
+     *                directory of the program.
+     * @throws LoadingException If an IOException occurs while loading the new
+     *                save file.
+     */
     private void setStoragePath(String newPath) throws LoadingException {
         Storage newStorage = new Storage(newPath);
         TaskList newTasks = new TaskList(newStorage.load());

@@ -116,6 +116,12 @@ public class Parser {
         return userInputScanner.nextLine().trim();
     }
 
+    /**
+     * Returns the new path to be set as the save file location.
+     *
+     * @param userInput The whole line of command from the user.
+     * @return The new save file path.
+     */
     public static String parseNewPath(String userInput) {
         Scanner userInputScanner = new Scanner(userInput);
         userInputScanner.next();
