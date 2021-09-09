@@ -60,7 +60,7 @@ public class Ui {
      *
      * @param addedTask The task that has been added.
      * @param taskLeftNum The number of tasks present in the current list of tasks.
-     * @return Message of added task.
+     * @return Message that task has been added.
      */
     public String taskAddedMessage(Task addedTask, int taskLeftNum) {
         String tasksLeft = REMAINING_TASK_NUM.replace(PLACEHOLDER, String.valueOf(taskLeftNum));
@@ -73,6 +73,7 @@ public class Ui {
      *
      * @param removedTask The task that has been deleted.
      * @param taskLeftNum The number of remaining tasks present in the current list of tasks.
+     * @return Message that task has been deleted.
      */
     public String taskDeletedMessage(Task removedTask, int taskLeftNum) {
         String tasksLeft = REMAINING_TASK_NUM.replace(PLACEHOLDER, String.valueOf(taskLeftNum));
@@ -84,6 +85,7 @@ public class Ui {
      * Sends a message to the user when a task has been marked as done.
      *
      * @param task The task that has been marked as done.
+     * @return Message that task has been marked as done.
      */
     public String markedDoneMessage(Task task) {
         String msg = String.format("%s\n  %s", DONE_TASK, task.toString());
@@ -94,6 +96,7 @@ public class Ui {
      * Prints out the list of tasks to the user.
      *
      * @param stringifyTaskLast String representation of current list of tasks.
+     * @return Message of list of tasks saved.
      */
     public String printTaskListMessage(String stringifyTaskLast) {
         return prettyPrint(stringifyTaskLast);
@@ -103,6 +106,7 @@ public class Ui {
      * Prints out the list of matching tasks to the user.
      *
      * @param listOfMatches List of all tasks that match the user's keyword.
+     * @return Message of matching tasks found.
      */
     public String printMatchingTasksMessage(List<Task> listOfMatches) {
         int len = listOfMatches.size();
@@ -120,6 +124,8 @@ public class Ui {
 
     /**
      * Sends a message to the user that all tasks specified have been archived successfully.
+     *
+     * @return Message that task has been archived.
      */
     public String tasksArchivedMessage() {
         return prettyPrint(TASKS_ARCHIVED);
@@ -127,6 +133,8 @@ public class Ui {
 
     /**
      * Sends a message to the user that all archived tasks specified have been restored successfully.
+     *
+     * @return Message that task has been restored.
      */
     public String tasksRestoredMessage() {
         return prettyPrint(TASKS_RESTORED);
@@ -134,6 +142,8 @@ public class Ui {
 
     /**
      * Sends a message to the user when an unknown command has been input by them.
+     *
+     * @return Message that an invalid command has been input.
      */
     public String unknownCommandMessage() {
         return prettyPrint(UNKNOWN_COMMAND);
@@ -143,6 +153,7 @@ public class Ui {
      * Sends a message to the user when an error/exception has been encountered.
      *
      * @param errorMsg The error message.
+     * @return Message about error.
      */
     public static String showErrorMessage(String errorMsg) {
         return prettyPrint(errorMsg);
@@ -163,6 +174,7 @@ public class Ui {
      * Sends a message to the user when the task indicated by them cannot be found.
      *
      * @param index The task index specified by the user, which cannot be found.
+     * @return Message that there is no such task available.
      */
     public String missingTaskMessage(int index) {
         String msg = String.format("%s Index: %d", MISSING_TASK, index);
@@ -171,6 +183,8 @@ public class Ui {
 
     /**
      * Sends a message to the user when no more tasks can be added to the task list.
+     *
+     * @return Message that max number of tasks that can be saved has been reached.
      */
     public String maxTaskReachedMessage() {
         return prettyPrint(MAX_TASKS);
@@ -178,6 +192,8 @@ public class Ui {
 
     /**
      * Sends a message to the user when no more archivable tasks can be added to the archive task list.
+     *
+     * @return Message that max number of tasks that can be archived has been reached.
      */
     public String maxArchiveTaskReachedMessage() {
         return prettyPrint(MAX_ARCHIVE_TASKS);
