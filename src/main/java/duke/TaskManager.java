@@ -72,7 +72,7 @@ public class TaskManager {
             tasks.add(newEvent);
             addedEvent = newEvent;
         } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
-            throw new DukeException.NoTimeSpecifiedException("Duke.Duke says: Please include a time");
+            throw new DukeException.NoTimeSpecifiedException("Duke says: Please include a time");
         } catch (DateTimeParseException e) {
             System.out.println("Duke says: Please use the format YYYY-MM-DD HH:MM when entering when the event is \n "
                     + "E.g. 2021-08-28T18:30");
@@ -125,4 +125,24 @@ public class TaskManager {
         return deletedTask;
     }
 
+    public Task snoozeTask(String input) throws DukeException.NoTimeSpecifiedException, DukeException.InvalidInputException,
+            DukeException.UnsnoozeableTaskException {
+        Task snoozedTask = null;
+        try {
+            int taskIndex = Integer.parseInt(String.valueOf(input.charAt(7)));
+            if (!(taskIndex > tasks.size())) {
+                snoozedTask = tasks.get(taskIndex - 1);
+                snoozedTask.snoozeTask(LocalDateTime.parse(input.substring(6).split(" /")[1],
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+            } else {
+                throw new DukeException.InvalidInputException("You don't have that many tasks!");
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException.NoTimeSpecifiedException("Duke says: Please include a time");
+        } catch (DateTimeParseException e) {
+            System.out.println("Duke says: Please use the format YYYY-MM-DD HH:MM when entering when the event is \n "
+                    + "E.g. 2021-08-28T18:30");
+        }
+        return snoozedTask;
+    }
 }

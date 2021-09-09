@@ -55,6 +55,10 @@ public class Task {
         isDone = true;
     }
 
+    public void snoozeTask(LocalDateTime time) throws DukeException.UnsnoozeableTaskException {
+        throw new DukeException.UnsnoozeableTaskException("This task cannot be snoozed!");
+    }
+
     public String toString() {
         return (taskType + (isDone ? " (done) " : " (not done) ") + name);
     }
@@ -86,7 +90,7 @@ public class Task {
 
     public static class Deadline extends Task {
 
-        private final LocalDateTime deadline;
+        private LocalDateTime deadline;
 
         /**
          * Constructor for a new deadline.
@@ -113,6 +117,10 @@ public class Task {
             assert (deadline != null);
         }
 
+        public void snoozeTask(LocalDateTime time) {
+            this.deadline = time;
+        }
+
         public String toString() {
             return super.toString() + " (" + deadline.toString().replace('T', ' ') + ")";
         }
@@ -125,7 +133,7 @@ public class Task {
     public static class Event extends Task {
 
         //private final LocalDate date;
-        private final LocalDateTime when;
+        private LocalDateTime when;
 
         /**
          * Constructor for a new event.
@@ -150,6 +158,10 @@ public class Task {
             super(name, "#Event", done);
             this.when = when;
             assert (when != null);
+        }
+
+        public void snoozeTask(LocalDateTime time) {
+            this.when = time;
         }
 
         public String toString() {

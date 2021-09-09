@@ -71,6 +71,12 @@ public class ResponseManager {
                 + "You now have " + numTasks + " tasks, jiayouz!";
     }
 
+    public String getSnoozeTaskMessage(Task task) {
+        return "Duke says: The task: \n"
+                + "     " + task.toString() + "\n"
+                + "has been snoozed\n";
+    }
+
     /**
      * Prints an error message to the user.
      *

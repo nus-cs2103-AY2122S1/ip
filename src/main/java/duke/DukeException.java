@@ -35,4 +35,10 @@ public class DukeException extends Exception {
         }
     }
 
+    public static class UnsnoozeableTaskException extends Exception {
+        public UnsnoozeableTaskException(String message) {
+            super(message);
+        }
+    }
+
 }
