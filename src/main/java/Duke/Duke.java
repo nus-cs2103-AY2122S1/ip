@@ -44,6 +44,7 @@ public class Duke extends Application {
     }
 
     public void say(String message) {
+        assert ui != null;
         ui.addDukeMessage(message);
     }
 

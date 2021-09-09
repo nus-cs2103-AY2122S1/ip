@@ -70,6 +70,7 @@ public abstract class Command {
      * @throws InvalidTaskException If an invalid task number was provided.
      */
     protected static int parseTaskNumber(UserInput input) throws InvalidTaskException {
+        assert input != null;
         String args = input.getArgs();
         try {
             return Integer.parseInt(args);

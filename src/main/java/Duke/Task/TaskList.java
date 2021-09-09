@@ -18,6 +18,7 @@ public class TaskList {
     }
 
     public void add(Task newTask) {
+        assert newTask != null;
         this.list.add(newTask);
         this.save();
     }

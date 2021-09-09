@@ -44,6 +44,7 @@ class AddTaskCommand extends Command {
 
     @Override
     public void run(Duke duke, UserInput input) throws InvalidTaskException {
+        assert input != null;
         Task newTask = createTask(input);
         TaskList taskList = duke.getTaskList();
         taskList.add(newTask);

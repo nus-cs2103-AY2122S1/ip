@@ -15,6 +15,7 @@ class FindTaskCommand extends Command {
 
     @Override
     public void run(Duke duke, UserInput input) {
+        assert input != null;
         String keyword = input.getArgs();
         List<Task> results = duke.getTaskList().findByKeyword(keyword);
 
