@@ -34,6 +34,9 @@ public class Deadline extends Task {
         byOriginal = by;
 
         String[] temp = by.split(" ", 2);
+        if (temp.length == 1) {
+            throw new DukeException("time has to be in the format yyyy-mm-dd HHmm instead of " + by);
+        }
         try {
             this.by = LocalDate.parse(temp[0]);
         } catch (DateTimeParseException e) {
