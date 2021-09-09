@@ -11,7 +11,7 @@ import tasks.TaskList;
  */
 public class DeleteCommand extends Command {
     public static final String KEYWORD = "delete";
-    private static final String INPUT_FORMAT = String.format("\t\"%s [task number]\"", KEYWORD);
+    public static final String INPUT_FORMAT = String.format("\t%s [task number]", KEYWORD);
     private static final String INPUT_FORMAT_ERROR = String.format("Please "
             + "ensure your input is in the following format:\n" + INPUT_FORMAT);
     private static final String TASK_NUMBER_ERROR = String.format("Please "
@@ -26,13 +26,9 @@ public class DeleteCommand extends Command {
     public DeleteCommand(String userInput) throws MorganException {
         assert userInput != null;
         String intString = userInput.substring(KEYWORD.length()).trim();
-
-        // Checks if user specified task number
         if (intString.isEmpty()) {
             throw new MorganException(INPUT_FORMAT_ERROR);
         }
-
-        // Checks if task number is an integer
         try {
             this.taskNumber = Integer.parseInt(intString);
         } catch (NumberFormatException e) {
@@ -50,17 +46,14 @@ public class DeleteCommand extends Command {
         boolean isValidTaskNumber = this.taskNumber <= tasks.getNumOfTasks()
                 && this.taskNumber > 0;
 
-        // Checks if task number is valid
         if (!isValidTaskNumber) {
             throw new MorganException(TASK_NUMBER_ERROR);
         }
 
-        // Obtain task and remove
         Task task = tasks.getTask(this.taskNumber);
         tasks.remove(this.taskNumber);
         storage.save(tasks);
 
-        // Message displayed upon execution
         return "Noted. I've removed this task:\n\t" + task.toString()
                 + "\nNow you have " + tasks.getNumOfTasks()
                 + " tasks in the list.";

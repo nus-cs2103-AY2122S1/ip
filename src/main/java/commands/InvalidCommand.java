@@ -9,7 +9,8 @@ import tasks.TaskList;
  * valid command.
  */
 public class InvalidCommand extends Command {
-    private static final String INVALID_COMMAND_ERROR = "Please enter a valid command.";
+    private static final String INVALID_COMMAND_ERROR = "Please enter a valid command. Enter \""
+            + HelpCommand.KEYWORD +"\" to see the list of valid commands.";
 
     /**
      * Throws an exception to prompt user to enter a valid command.

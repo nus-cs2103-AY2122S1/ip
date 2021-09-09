@@ -32,11 +32,15 @@ public class TaskParser {
             EventTask event = (EventTask) task;
             return EventTask.KEYWORD + DELIMITER + status + DELIMITER
                     + description + DELIMITER + event.getDateTime();
-        } else if (task instanceof DeadlineTask) {
+        }
+
+        if (task instanceof DeadlineTask) {
             DeadlineTask deadline = (DeadlineTask) task;
             return DeadlineTask.KEYWORD + DELIMITER + status + DELIMITER
                     + description + DELIMITER + deadline.getDateTime();
-        } else if (task instanceof ToDoTask) {
+        }
+
+        if (task instanceof ToDoTask) {
             return ToDoTask.KEYWORD + DELIMITER + status + DELIMITER
                     + description;
         }
@@ -53,7 +57,6 @@ public class TaskParser {
         assert taskText != null;
         String[] data = taskText.split(DELIMITER);
 
-        // Checks if storage data has been tampered
         if (data.length <= DESCRIPTION_INDEX) {
             throw new MorganException(TAMPERED_ERROR);
         }
@@ -92,6 +95,3 @@ public class TaskParser {
         return task;
     }
 }
-
-
-

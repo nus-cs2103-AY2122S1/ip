@@ -11,7 +11,7 @@ import tasks.TaskList;
  */
 public class FindCommand extends Command {
     public static final String KEYWORD = "find";
-    private static final String INPUT_FORMAT = String.format("\t\"%s [keyword]\"", KEYWORD);
+    public static final String INPUT_FORMAT = String.format("\t%s [keyword]", KEYWORD);
     private static final String INPUT_FORMAT_ERROR = String.format("Please "
             + "ensure your input is in the following format:\n" + INPUT_FORMAT);
     private static final String NOT_FOUND_ERROR = "No matching task found. "
@@ -29,8 +29,8 @@ public class FindCommand extends Command {
         String inputData = userInput.substring(KEYWORD.length()).trim();
         this.keyTerm = inputData.toLowerCase();
 
-        // Checks if user specified key term
-        if (keyTerm.isEmpty()) {
+        boolean isKeyTermFound = !keyTerm.isEmpty();
+        if (!isKeyTermFound) {
             throw new MorganException(INPUT_FORMAT_ERROR);
         }
     }
@@ -43,13 +43,12 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Storage storage) throws MorganException {
         assert tasks != null && storage != null;
         TaskList foundTasks = tasks.findTasks(keyTerm);
+        boolean isMatchingTaskFound = !foundTasks.isEmpty();
+        if (!isMatchingTaskFound) {
 
-        // Throws exception if no matching task found
-        if (foundTasks.isEmpty()) {
             throw new MorganException(NOT_FOUND_ERROR);
         }
 
-        // Message displayed upon execution
         String output = "Here are the matching tasks in your list:\n";
         output += foundTasks.toString();
         return output;

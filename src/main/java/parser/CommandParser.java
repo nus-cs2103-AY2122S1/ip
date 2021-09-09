@@ -5,6 +5,7 @@ import commands.AddToDoCommand;
 import commands.Command;
 import commands.DeleteCommand;
 import commands.FindCommand;
+import commands.HelpCommand;
 import commands.InvalidCommand;
 import commands.ListCommand;
 import commands.MarkDoneCommand;
@@ -29,13 +30,11 @@ public class CommandParser {
      */
     public Command getCommand(String userInput) throws MorganException {
         assert userInput != null;
-
-        // Checks if user input contains delimiter.
-        if (userInput.contains(TaskParser.DELIMITER)) {
+        boolean hasBannedDelimiter = userInput.contains(TaskParser.DELIMITER);
+        if (hasBannedDelimiter) {
             throw new MorganException(DELIMITER_FOUND_ERROR_MESSAGE);
         }
 
-        // Retrieve relevant data from user input
         String trimmedUserInput = userInput.trim();
         String[] words = trimmedUserInput.split(DELIMITER);
         String commandKeyword = words[COMMAND_INDEX].toLowerCase();
@@ -55,8 +54,9 @@ public class CommandParser {
             return new MarkDoneCommand(trimmedUserInput);
         case ListCommand.KEYWORD:
             return new ListCommand();
+        case HelpCommand.KEYWORD:
+            return new HelpCommand();
         default:
-            // User gave an invalid command
             return new InvalidCommand();
         }
     }

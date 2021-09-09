@@ -10,7 +10,7 @@ import tasks.TaskList;
  */
 public class MarkDoneCommand extends Command {
     public static final String KEYWORD = "done";
-    private static final String INPUT_FORMAT = String.format("\t\"%s [task number]\"", KEYWORD);
+    public static final String INPUT_FORMAT = String.format("\t%s [task number]", KEYWORD);
     private static final String INPUT_FORMAT_ERROR = String.format("Please "
             + "ensure your input is in the following format:\n" + INPUT_FORMAT);
     private static final String TASK_NUMBER_ERROR = String.format("Please "
@@ -26,12 +26,10 @@ public class MarkDoneCommand extends Command {
         assert userInput != null;
         String intString = userInput.substring(KEYWORD.length()).trim();
 
-        // Checks if user specified task number
         if (intString.isEmpty()) {
             throw new MorganException(INPUT_FORMAT_ERROR);
         }
 
-        // Checks if task number is an integer
         try {
             this.taskNumber = Integer.parseInt(intString);
         } catch (NumberFormatException e) {
@@ -49,18 +47,14 @@ public class MarkDoneCommand extends Command {
         assert tasks != null && storage != null;
         boolean isValidTaskNumber = this.taskNumber <= tasks.getNumOfTasks()
                 && this.taskNumber > 0;
-
-        // Checks if task number is valid
         if (!isValidTaskNumber) {
             throw new MorganException(TASK_NUMBER_ERROR);
         }
 
-        // Obtain task and mark done
         tasks.markAsDone(this.taskNumber);
         Task task = tasks.getTask(this.taskNumber);
         storage.save(tasks);
 
-        // Message displayed upon execution
         return "Nice! I've marked this task as done:\n\t"
                 + task.toString();
     }
