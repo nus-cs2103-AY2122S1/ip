@@ -15,7 +15,6 @@ import duke.exception.DukeException;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.NoCommandDescriptionException;
 import duke.exception.NoDateTimeException;
-import duke.exception.NoTaskDescriptionException;
 import duke.exception.UnknownCommandException;
 import duke.storage.Storage;
 import duke.task.Deadline;
@@ -24,6 +23,8 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
 import duke.ui.Ui;
+
+
 
 /**
  * Encapsulates the processing of user inputs to duke.
@@ -35,10 +36,6 @@ public class Parser {
     private final TaskList list;
     private final Storage storage;
     private final Ui ui;
-
-    private enum TaskTypes {
-        TODO, DEADLINE, EVENT
-    }
 
     /**
      * Creates a Parser that handles user input and turn it into respective
@@ -64,98 +61,114 @@ public class Parser {
      *                       like the user inputted some command that duke does not support.
      */
     public DukeCommand processInput(String userInput) throws DukeException {
-        String commandType = userInput.split(" ")[0];
+        String commandType = getCommandType(userInput);
+        String commandDescription = getCommandDescription(userInput, " ");
 
-        int spaceIndex = userInput.indexOf(" ");
-        String commandDescription = userInput.substring(spaceIndex + 1);
-        if (!(commandType.equals("list") || commandType.equals("bye"))
-                && (commandDescription.isBlank() || spaceIndex == -1)) {
-            throw new NoCommandDescriptionException();
+        if (checkDescriptionExist(commandDescription, commandType)) {
+            switch (commandType) {
+            case "list":
+                return new ListCommand(ui, storage, list);
+
+            case "bye":
+                return new ExitCommand(ui, storage, list);
+
+            case "done":
+                return new DoneCommand(ui, storage, list, getTaskNumber(commandDescription));
+
+            case "todo": case "deadline": case "event":
+                return new AddCommand(ui, storage, list, processTaskDescriptions(commandType, userInput));
+
+            case "delete":
+                return new DeleteCommand(ui, storage, list, getTaskNumber(commandDescription));
+
+            case "find":
+                return new FindCommand(ui, storage, list, commandDescription);
+
+            default:
+                throw new UnknownCommandException();
+            }
         }
-
-        switch (commandType) {
-        case "list":
-            return new ListCommand(ui, storage, list);
-
-        case "bye":
-            return new ExitCommand(ui, storage, list);
-
-        case "done":
-            return new DoneCommand(ui, storage, list, Integer.parseInt(userInput.split(" ")[1]));
-
-        case "todo":
-            return new AddCommand(ui, storage, list, processTaskDescriptions(TaskTypes.TODO, userInput));
-
-        case "deadline":
-            return new AddCommand(ui, storage, list, processTaskDescriptions(TaskTypes.DEADLINE, userInput));
-
-        case "event":
-            return new AddCommand(ui, storage, list, processTaskDescriptions(TaskTypes.EVENT, userInput));
-
-        case "delete":
-            return new DeleteCommand(ui, storage, list, Integer.parseInt(userInput.split(" ")[1]));
-
-        case "find":
-            return new FindCommand(ui, storage, list, userInput.substring(userInput.indexOf(" ") + 1));
-
-        default:
-            throw new UnknownCommandException();
-        }
+        throw new NoCommandDescriptionException();
     }
 
-    private Task processTaskDescriptions(TaskTypes t, String userInput) throws InvalidDateTimeException,
-            NoTaskDescriptionException, NoDateTimeException {
-        int spaceIndex = userInput.indexOf(" ");
-        String taskDescription = userInput.substring(spaceIndex + 1);
-        if (taskDescription.isBlank() || spaceIndex == -1) {
-            throw new NoTaskDescriptionException();
-        }
-        switch (t) {
-        case DEADLINE:
-            try {
-                int byIndex = taskDescription.indexOf("/by") - 1;
-                if (byIndex < -1) {
-                    throw new NoDateTimeException();
-                }
-                String deadlineDescription = taskDescription.substring(0, byIndex);
-                if (deadlineDescription.isBlank()) {
-                    throw new NoTaskDescriptionException();
-                }
-                try {
-                    LocalDateTime by = LocalDateTime.parse(taskDescription.substring(taskDescription.indexOf("by") + 3),
-                            DateTimeFormatter.ofPattern("yyyy-M-d H:m"));
-                    return new Deadline(deadlineDescription, false, by);
-                } catch (DateTimeParseException e) {
-                    throw new InvalidDateTimeException();
-                }
-            } catch (StringIndexOutOfBoundsException e) {
-                throw new NoTaskDescriptionException();
+    private Task processTaskDescriptions(String taskType, String userInput) throws InvalidDateTimeException,
+            NoDateTimeException, NoCommandDescriptionException {
+        if (checkDescriptionExist(userInput, taskType)) {
+            String commandDescription = getCommandDescription(userInput, " ");
+            switch (taskType) {
+            case "deadline": case "event":
+                return createTaskWithDateTime(commandDescription, taskType);
+
+            default:
+                return new ToDo(commandDescription, false);
             }
-
-
-        case EVENT:
-            try {
-                int atIndex = taskDescription.indexOf("/at") - 1;
-                if (atIndex < -1) {
-                    throw new NoDateTimeException();
-                }
-                String eventDescription = taskDescription.substring(0, atIndex);
-                if (eventDescription.isBlank()) {
-                    throw new NoTaskDescriptionException();
-                }
-                try {
-                    LocalDateTime at = LocalDateTime.parse(taskDescription.substring(taskDescription.indexOf("at") + 3),
-                            DateTimeFormatter.ofPattern("yyyy-M-d H:m"));
-                    return new Event(eventDescription, false, at);
-                } catch (DateTimeParseException e) {
-                    throw new InvalidDateTimeException();
-                }
-            } catch (StringIndexOutOfBoundsException e) {
-                throw new NoTaskDescriptionException();
-            }
-
-        default:
-            return new ToDo(taskDescription, false);
         }
+        throw new NoCommandDescriptionException();
+    }
+
+    private String getCommandType(String userInput) {
+        return userInput.split(" ")[0];
+    }
+
+    private boolean checkDescriptionExist(String commandDescription, String commandType)
+            throws NoCommandDescriptionException {
+        if (!(commandType.equals("list") || commandType.equals("bye"))) {
+            if (commandDescription.isBlank()) {
+                throw new NoCommandDescriptionException();
+            }
+        }
+        return true;
+    }
+
+    private Task createTaskWithDateTime(String commandDescription, String taskType) throws NoDateTimeException,
+            InvalidDateTimeException {
+        LocalDateTime dt = getDateTime(commandDescription, taskType);
+        String taskDescription = getTaskDescription(commandDescription);
+        if (taskType.equals("deadline")) {
+            return new Deadline(taskDescription, false, dt);
+        } else {
+            return new Event(taskDescription, false, dt);
+        }
+
+    }
+
+    private String getCommandDescription(String userInput, String substring) {
+        int index = userInput.indexOf(substring);
+        String description = userInput.substring(index + 1);
+        return description;
+    }
+
+    private String getTaskDescription(String commandDescription) throws NoDateTimeException {
+        int slashIndex = commandDescription.indexOf("/");
+        if (slashIndex < 0) {
+            throw new NoDateTimeException();
+        }
+        return commandDescription.substring(0, slashIndex - 1);
+    }
+
+    private int getTaskNumber(String commandDescription) {
+        return Integer.parseInt(commandDescription.split(" ")[0]);
+    }
+
+    private LocalDateTime getDateTime(String taskDescription, String taskType) throws NoDateTimeException,
+            InvalidDateTimeException {
+        String indicator;
+        if (taskType.equals("deadline")) {
+            indicator = "/by";
+        } else {
+            indicator = "/at";
+        }
+
+        int index = taskDescription.indexOf(indicator);
+        if (index >= 0) {
+            try {
+                return LocalDateTime.parse(taskDescription.substring(index + 4),
+                        DateTimeFormatter.ofPattern("yyyy-M-d H:m"));
+            } catch (DateTimeParseException e) {
+                throw new InvalidDateTimeException();
+            }
+        }
+
+        throw new NoDateTimeException();
     }
 }
