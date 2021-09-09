@@ -18,8 +18,7 @@ public class ToDo extends Task {
     public String toString(){
         if (this.isDone){
             return "[T][X] " + this.name;
-        }
-        else {
+        } else {
             return "[T][ ] " + this.name;
         }
     }
