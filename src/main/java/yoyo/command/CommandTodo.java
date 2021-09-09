@@ -7,11 +7,18 @@ import yoyo.task.Task;
 import yoyo.task.TaskList;
 import yoyo.task.Todo;
 
+/**
+ * A command subclass representing "todo" command.
+ */
 public class CommandTodo extends Command {
+    /**
+     * Constructor for "todo" command class.
+     *
+     * @param inputTokens Array of string tokens constructed from user input.
+     */
     public CommandTodo(String[] inputTokens) {
         super(inputTokens);
     }
-
 
     /**
      * Executes "todo" command.
@@ -25,7 +32,7 @@ public class CommandTodo extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage, DialogHandler dialogHandler)
             throws YoyoException {
-        checkCompleteCommand(inputTokens);
+        checkTwoTokenCommand(inputTokens);
         Task newTask = new Todo(inputTokens[1]);
         tasks.add(newTask);
         return dialogHandler.printAddMessage(newTask, tasks);

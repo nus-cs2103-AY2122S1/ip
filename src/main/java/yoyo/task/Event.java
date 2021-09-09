@@ -1,8 +1,9 @@
 package yoyo.task;
 
-import java.time.LocalDateTime;
+import static yoyo.utility.Constant.COMMA_SEPARATOR;
+import static yoyo.utility.Constant.WHITESPACE;
 
-import yoyo.utility.Constant;
+import java.time.LocalDateTime;
 
 /**
  * A subclass of Task of event type.
@@ -13,7 +14,7 @@ public class Event extends Task {
     /**
      * Constructor for the Event class with name and datetime parameters.
      *
-     * @param name Name of Event.
+     * @param name     Name of Event.
      * @param datetime Datetime of Event.
      */
     public Event(String name, LocalDateTime datetime) {
@@ -24,13 +25,37 @@ public class Event extends Task {
     /**
      * Constructor for the Event class with name, datetime and isDone parameters.
      *
-     * @param name Name of Event.
+     * @param name     Name of Event.
      * @param datetime Datetime of Event.
+     * @param isDone   Completion status of task.
      */
     public Event(String name, LocalDateTime datetime, boolean isDone) {
         super(name, isDone);
         this.datetime = datetime;
     }
+
+    /**
+     * Constructor for the Event class with name, datetime, isDone and tags parameters.
+     *
+     * @param name     Name of Deadline.
+     * @param datetime Datetime of Deadline.
+     * @param isDone   Completion status of task.
+     * @param tags     Tags of the task.
+     */
+    public Event(String name, LocalDateTime datetime, boolean isDone, String[] tags) {
+        super(name, isDone, tags);
+        this.datetime = datetime;
+    }
+
+    /**
+     * Returns a string containing time info of this task.
+     *
+     * @return String containing time info of this task.
+     */
+    public String showTimeInfo() {
+        return "(at: " + datetime.toString().replace('T', ' ') + ")";
+    }
+
 
     /**
      * Produces a string containing task's status.
@@ -39,10 +64,19 @@ public class Event extends Task {
      */
     @Override
     public String showStatus() {
-        String status = super.showStatus();
-        return status + " (by: " + datetime.toString().replace('T', ' ') + ")";
-    }
+        String resultString = printType()
+                + printCompletionStatus()
+                + WHITESPACE
+                + name
+                + WHITESPACE
+                + showTimeInfo();
 
+        if (tags.size() == 0) {
+            return resultString;
+        }
+
+        return resultString + WHITESPACE + showTags();
+    }
 
     /**
      * Produces a string containing task's status in write format.
@@ -51,9 +85,11 @@ public class Event extends Task {
      */
     @Override
     public String showStatusWrite() {
-        return this.printType() + this.printCompletionStatus()
-                + Constant.SEPARATOR + this.name
-                + Constant.SEPARATOR + this.datetime;
+        return this.printType()
+                + this.printCompletionStatus()
+                + COMMA_SEPARATOR + this.name
+                + COMMA_SEPARATOR + this.datetime
+                + this.showTagsWriteFormat();
     }
 
     /**

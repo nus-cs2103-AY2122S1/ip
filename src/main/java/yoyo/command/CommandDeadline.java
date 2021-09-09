@@ -1,5 +1,7 @@
 package yoyo.command;
 
+import java.time.LocalDateTime;
+
 import yoyo.core.DialogHandler;
 import yoyo.core.Parser;
 import yoyo.core.Storage;
@@ -8,9 +10,15 @@ import yoyo.task.Deadline;
 import yoyo.task.Task;
 import yoyo.task.TaskList;
 
-import java.time.LocalDateTime;
-
+/**
+ * A command subclass representing "deadline" command.
+ */
 public class CommandDeadline extends Command {
+    /**
+     * Constructor for "deadline" command class.
+     *
+     * @param inputTokens Array of string tokens constructed from user input.
+     */
     public CommandDeadline(String[] inputTokens) {
         super(inputTokens);
     }
@@ -27,7 +35,7 @@ public class CommandDeadline extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage, DialogHandler dialogHandler)
             throws YoyoException {
-        checkCompleteCommand(inputTokens);
+        checkTwoTokenCommand(inputTokens);
         String[] taskInfo = inputTokens[1].split(" /by ");
         if (taskInfo.length < 2) {
             throw new YoyoException.YoyoIncompleteCommandException("command has bad format or"

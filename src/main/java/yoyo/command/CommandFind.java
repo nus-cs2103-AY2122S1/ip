@@ -6,7 +6,15 @@ import yoyo.exception.YoyoException;
 import yoyo.task.Task;
 import yoyo.task.TaskList;
 
+/**
+ * A command subclass representing "find" command.
+ */
 public class CommandFind extends Command {
+    /**
+     * Constructor for "find" command class.
+     *
+     * @param inputTokens Array of string tokens constructed from user input.
+     */
     public CommandFind(String[] inputTokens) {
         super(inputTokens);
     }
@@ -23,7 +31,7 @@ public class CommandFind extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage, DialogHandler dialogHandler)
             throws YoyoException {
-        checkCompleteCommand(inputTokens);
+        checkTwoTokenCommand(inputTokens);
         int taskListLength = tasks.size();
         if (taskListLength == 0) {
             return dialogHandler.printTaskList(tasks);

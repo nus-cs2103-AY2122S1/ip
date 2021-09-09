@@ -5,8 +5,16 @@ import yoyo.core.Storage;
 import yoyo.exception.YoyoException;
 import yoyo.task.TaskList;
 
+/**
+ * A command subclass representing "bye" command.
+ */
 public class CommandBye extends Command {
 
+    /**
+     * Constructor for "bye" command class.
+     *
+     * @param inputTokens Array of string tokens constructed from user input.
+     */
     public CommandBye(String[] inputTokens) {
         super(inputTokens);
     }

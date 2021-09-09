@@ -6,7 +6,15 @@ import yoyo.exception.YoyoException;
 import yoyo.task.Task;
 import yoyo.task.TaskList;
 
+/**
+ * A command subclass representing "delete" command.
+ */
 public class CommandDelete extends Command {
+    /**
+     * Constructor for "delete" command class.
+     *
+     * @param inputTokens Array of string tokens constructed from user input.
+     */
     public CommandDelete(String[] inputTokens) {
         super(inputTokens);
     }
@@ -23,7 +31,7 @@ public class CommandDelete extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage, DialogHandler dialogHandler)
             throws YoyoException {
-        checkCompleteCommand(this.inputTokens);
+        checkTwoTokenCommand(this.inputTokens);
         try {
             int taskIndex = Integer.parseInt(inputTokens[1]) - 1;
             Task toRemove = tasks.get(taskIndex);

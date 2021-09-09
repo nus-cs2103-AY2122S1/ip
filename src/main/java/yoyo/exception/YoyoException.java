@@ -3,10 +3,15 @@ package yoyo.exception;
 import java.io.IOException;
 
 /**
- * Exception class for duke.Yoyo's commands.
+ * Exception class containing all of Yoyo-related exceptions.
  */
 public class YoyoException extends IOException {
 
+    /**
+     * Constructor for YoyoException class.
+     *
+     * @param message Exception message.
+     */
     public YoyoException(String message) {
         super(message);
     }

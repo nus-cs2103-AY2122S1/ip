@@ -1,5 +1,7 @@
 package yoyo.gui;
 
+import java.io.IOException;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,8 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import yoyo.Yoyo;
-
-import java.io.IOException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -44,7 +44,7 @@ public class MainWindow extends AnchorPane {
 
 
     /**
-     * Actions to be executed when starting up GUI.
+     * Executes actions to be completed when main windows is rendered.
      */
     @FXML
     public void initialize() {
@@ -54,19 +54,6 @@ public class MainWindow extends AnchorPane {
         );
     }
 
-    /**
-     * Sets up Yoyo instance for MainWindow.
-     *
-     * @param y Yoyo instance.
-     */
-    public void setYoyo(Yoyo y) {
-        yoyo = y;
-    }
-
-    /**
-     * Creates two dialog boxes, one echoing user input and the other containing Yoyo's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
@@ -76,6 +63,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getYoyoDialog(response, yoyoImage)
         );
         userInput.clear();
+
         if (input.equals("bye")) {
             Platform.exit();
         }

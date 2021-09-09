@@ -1,5 +1,10 @@
 package yoyo.core;
 
+import static java.lang.Integer.parseInt;
+
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+
 import yoyo.command.Command;
 import yoyo.command.CommandBye;
 import yoyo.command.CommandDeadline;
@@ -8,14 +13,13 @@ import yoyo.command.CommandDone;
 import yoyo.command.CommandEvent;
 import yoyo.command.CommandFind;
 import yoyo.command.CommandList;
+import yoyo.command.CommandTag;
 import yoyo.command.CommandTodo;
 import yoyo.exception.YoyoException;
 
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
-
-import static java.lang.Integer.parseInt;
-
+/**
+ * Parser class that represents the parser component of Yoyo program.
+ */
 public class Parser {
     private static final String COMMAND_BYE = "bye";
     private static final String COMMAND_LIST = "list";
@@ -25,6 +29,7 @@ public class Parser {
     private static final String COMMAND_DEADLINE = "deadline";
     private static final String COMMAND_EVENT = "event";
     private static final String COMMAND_FIND = "find";
+    private static final String COMMAND_TAG = "tag";
 
     /**
      * Reads an input string and returns the appropriate Command.
@@ -41,6 +46,7 @@ public class Parser {
 
         String[] inputTokens = fullCommand.split(" ", 2);
         String commandKeyword = inputTokens[0];
+
         switch (commandKeyword) {
         case COMMAND_BYE:
             return new CommandBye(inputTokens);
@@ -58,27 +64,13 @@ public class Parser {
             return new CommandEvent(inputTokens);
         case COMMAND_FIND:
             return new CommandFind(inputTokens);
+        case COMMAND_TAG:
+            return new CommandTag(inputTokens);
         default:
             assertCommandNotMissed(commandKeyword);
             throw new YoyoException.YoyoCommandNotFoundException("Yoyo doesn't understand "
                     + "what you mean :-(");
         }
-    }
-
-    /**
-     * Checks by using assertion that valid commands are not missed by the program.
-     *
-     * @param commandKeyword Command entered by user.
-     */
-    private static void assertCommandNotMissed(String commandKeyword) {
-        assert !commandKeyword.equals("bye") : "Did not catch valid command";
-        assert !commandKeyword.equals("list") : "Did not catch valid command";
-        assert !commandKeyword.equals("done") : "Did not catch valid command";
-        assert !commandKeyword.equals("delete") : "Did not catch valid command";
-        assert !commandKeyword.equals("todo") : "Did not catch valid command";
-        assert !commandKeyword.equals("deadline") : "Did not catch valid command";
-        assert !commandKeyword.equals("event") : "Did not catch valid command";
-        assert !commandKeyword.equals("find") : "Did not catch valid command";
     }
 
     /**
@@ -94,7 +86,7 @@ public class Parser {
 
 
         String[] dateTimeArr = timeString.split(" ");
-        Command.checkCompleteCommand(dateTimeArr);
+        Command.checkTwoTokenCommand(dateTimeArr);
         String[] dateArr = dateTimeArr[0].split(String.valueOf(separator));
         String hourMinuteString = dateTimeArr[1];
 
@@ -108,6 +100,18 @@ public class Parser {
         }
 
         return getLocalDateTime(dateArr, hourMinuteString);
+    }
+
+    private static void assertCommandNotMissed(String commandKeyword) {
+        assert !commandKeyword.equals("bye") : "Did not catch valid command";
+        assert !commandKeyword.equals("list") : "Did not catch valid command";
+        assert !commandKeyword.equals("done") : "Did not catch valid command";
+        assert !commandKeyword.equals("delete") : "Did not catch valid command";
+        assert !commandKeyword.equals("todo") : "Did not catch valid command";
+        assert !commandKeyword.equals("deadline") : "Did not catch valid command";
+        assert !commandKeyword.equals("event") : "Did not catch valid command";
+        assert !commandKeyword.equals("find") : "Did not catch valid command";
+        assert !commandKeyword.equals("tag") : "Did not catch valid command";
     }
 
     private static LocalDateTime getLocalDateTime(String[] dateArr, String time)

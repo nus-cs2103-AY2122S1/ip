@@ -1,9 +1,10 @@
 package yoyo.task;
 
+import static yoyo.utility.Constant.WHITESPACE;
+
 import java.time.LocalDateTime;
 
 import yoyo.utility.Constant;
-
 
 /**
  * A subclass of duke.task.Task of deadline type.
@@ -14,7 +15,7 @@ public class Deadline extends Task {
     /**
      * Constructor for the Deadline class with name and datetime parameters.
      *
-     * @param name Name of Deadline.
+     * @param name     Name of Deadline.
      * @param datetime Datetime of Deadline.
      */
     public Deadline(String name, LocalDateTime datetime) {
@@ -25,12 +26,35 @@ public class Deadline extends Task {
     /**
      * Constructor for the Deadline class with name, datetime and isDone parameters.
      *
-     * @param name Name of Deadline.
+     * @param name     Name of Deadline.
      * @param datetime Datetime of Deadline.
+     * @param isDone   Completion status of task.
      */
     public Deadline(String name, LocalDateTime datetime, boolean isDone) {
         super(name, isDone);
         this.datetime = datetime;
+    }
+
+    /**
+     * Constructor for the Deadline class with name, datetime, isDone and tags parameters.
+     *
+     * @param name     Name of Deadline.
+     * @param datetime Datetime of Deadline.
+     * @param isDone   Completion status of task.
+     * @param tags     Tags of the task.
+     */
+    public Deadline(String name, LocalDateTime datetime, boolean isDone, String[] tags) {
+        super(name, isDone, tags);
+        this.datetime = datetime;
+    }
+
+    /**
+     * Returns a string containing time info of this task.
+     *
+     * @return String containing time info of this task.
+     */
+    public String showTimeInfo() {
+        return "(by: " + datetime.toString().replace('T', ' ') + ")";
     }
 
     /**
@@ -40,9 +64,18 @@ public class Deadline extends Task {
      */
     @Override
     public String showStatus() {
-        String status = super.showStatus();
-        return status + " (by: " + datetime.toString().replace('T', ' ') + ")";
+        String resultString = printType()
+                + printCompletionStatus()
+                + WHITESPACE
+                + name
+                + WHITESPACE
+                + showTimeInfo();
 
+        if (tags.size() == 0) {
+            return resultString;
+        }
+
+        return resultString + WHITESPACE + showTags();
     }
 
     /**
@@ -54,8 +87,9 @@ public class Deadline extends Task {
     public String showStatusWrite() {
         return this.printType()
                 + this.printCompletionStatus()
-                + Constant.SEPARATOR + this.name
-                + Constant.SEPARATOR + this.datetime;
+                + Constant.COMMA_SEPARATOR + this.name
+                + Constant.COMMA_SEPARATOR + this.datetime
+                + this.showTagsWriteFormat();
     }
 
     /**

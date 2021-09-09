@@ -1,16 +1,23 @@
 package yoyo.command;
 
+import java.util.Arrays;
+
 import yoyo.core.DialogHandler;
 import yoyo.core.Storage;
 import yoyo.exception.YoyoException;
 import yoyo.task.TaskList;
 
-import java.util.Arrays;
-
-
+/**
+ * A command class representing an user command.
+ */
 public abstract class Command {
     protected String[] inputTokens;
 
+    /**
+     * Constructor for Command class.
+     *
+     * @param inputTokens Array of string tokens constructed from user input.
+     */
     public Command(String[] inputTokens) {
         this.inputTokens = inputTokens;
     }
@@ -21,7 +28,7 @@ public abstract class Command {
      * @param inputTokens String array from user input.
      * @throws YoyoException.YoyoIncompleteCommandException Thrown if command is incomplete.
      */
-    public static void checkCompleteCommand(String[] inputTokens)
+    public static void checkTwoTokenCommand(String[] inputTokens)
             throws YoyoException.YoyoIncompleteCommandException {
         if (inputTokens.length < 2 || inputTokens[1].trim().length() == 0) {
             throw new YoyoException.YoyoIncompleteCommandException(

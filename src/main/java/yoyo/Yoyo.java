@@ -7,6 +7,9 @@ import yoyo.core.Storage;
 import yoyo.exception.YoyoException;
 import yoyo.task.TaskList;
 
+/**
+ * Main class for Yoyo app.
+ */
 public class Yoyo {
     private final Storage storage;
     private final DialogHandler dialogHandler;
@@ -38,7 +41,6 @@ public class Yoyo {
         } catch (YoyoException e) {
             return e.getMessage();
         }
-
     }
 
 }
