@@ -1,5 +1,9 @@
 package duke.task;
 
+import duke.command.Deadline;
+
+import java.util.Objects;
+
 /**
  * Outlines a general task.
  */
@@ -83,5 +87,34 @@ public abstract class Task {
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
+    }
+
+    /**
+     * Checks if the object is the same Task.
+     *
+     * @param obj Object to be compared to.
+     * @return If object is equal to this Task.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Task) {
+            Task task = (Task) obj;
+            boolean isSameDescription = this.description.equals(task.description);
+            boolean isSameName = this.name.equals(task.name);
+            boolean isSameCategory = this.category == task.category;
+            boolean isSameDone = this.isDone == task.isDone;
+            return isSameDescription && isSameName && isSameCategory && isSameDone;
+        }
+        return false;
+    }
+
+    /**
+     * Generates hash for task object.
+     *
+     * @return Integer hash of Task.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, isDone, category, name);
     }
 }

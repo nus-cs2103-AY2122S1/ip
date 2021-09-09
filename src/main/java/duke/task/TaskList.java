@@ -1,7 +1,9 @@
 package duke.task;
 
-// import java packages
 import java.util.ArrayList;
+import java.util.HashSet;
+
+import duke.DukeException;
 
 /**
  * Represents a list of tasks to be completed. Supports operations on the tasks.
@@ -66,8 +68,10 @@ public class TaskList {
      * Adds a task to the list of tasks.
      *
      * @param t Task to be added.
+     * @throws DukeException when duplicate task exists.
      */
-    public void add(Task t) {
+    public void add(Task t) throws DukeException {
+        checkDuplicates(t);
         tasks.add(t);
     }
 
@@ -131,5 +135,23 @@ public class TaskList {
     @Override
     public String toString() {
         return "contains tasks";
+    }
+
+    /**
+     * Checks for duplicates in task list.
+     *
+     * @param t Task to be checked.
+     */
+    private void checkDuplicates(Task t) throws DukeException {
+        tasks.add(t);
+        // Convert to HashSet to check for duplicates
+        HashSet<Task> set = new HashSet<>(tasks);
+        ArrayList<Task> result = new ArrayList<>(set);
+        // Check if there are duplicates using length of ArrayLists.
+        if (tasks.size() != result.size()) {
+            tasks.remove(tasks.size() - 1);
+            throw new DukeException("task has already been added");
+        }
+        tasks.remove(tasks.size() - 1);
     }
 }
