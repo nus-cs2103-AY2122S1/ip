@@ -34,8 +34,7 @@ public abstract class Task {
     public String toString(){
         if (this.isDone){
             return "[X] " + name;
-        }
-        else {
+        } else {
             return "[ ] " + name;
         }
     }
