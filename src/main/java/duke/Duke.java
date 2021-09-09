@@ -1,8 +1,6 @@
 package duke;
 
 import java.util.Scanner;
-import java.io.File;
-import java.io.IOException;
 
 
 public class Duke {
@@ -79,40 +77,3 @@ public class Duke {
     }
 
 }
-
-/*        if (str.equals("bye")) {
->>>>>>> branch-A-CodingStandard
-            System.out.println("Bye. Hope to see you again soon!");
-            taskList.save();
-            return false;
-        } else if (str.equals("list")) {
-            System.out.println(taskList.list());
-        } else if (str.startsWith("done")){
-            String substr = str.replaceFirst("done ", "");
-            int index = Integer.parseInt(substr);
-            System.out.println(taskList.markDone(index));
-        } else if (str.startsWith("delete")) {
-            String substr = str.replaceFirst("delete ", "");
-            int index = Integer.parseInt(substr);
-            System.out.println(taskList.delete(index));
-        } else if (str.startsWith("find")) {
-            String substr = str.replaceFirst("find", "").stripLeading();
-            System.out.println(taskList.findTask(substr));
-        } else if (str.startsWith("todo")) {
-            String substr = str.replaceFirst("todo", "").stripLeading();
-            System.out.println(taskList.addToDo(substr));
-        } else if (str.startsWith("deadline")) {
-            String substr = str.replaceFirst("deadline", "").stripLeading();
-            String[] substrArray = substr.split(" /by ", 2);
-            System.out.println(taskList.addDeadLine(substrArray[0], substrArray[1]));
-        } else if (str.startsWith("event")) {
-            String substr = str.replaceFirst("event", "").stripLeading();
-            String[] substrArray = substr.split(" /at ", 2);
-            System.out.println(taskList.addEvent(substrArray[0], substrArray[1]));
-        } else {
-            System.out.println("??? Unknown command!");
-        }
-        return true;
-    }
-
-}*/

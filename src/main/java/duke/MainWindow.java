@@ -23,6 +23,8 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image("file:./DaUser.png");
     private Image dukeImage = new Image("file:./DaDuke.png");
 
+    private final String WELCOME_MESSAGE = "Welcome! I am Dude.";
+
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -48,5 +50,14 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+    }
+
+    public void welcome() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(WELCOME_MESSAGE, dukeImage));
+    }
+
+    public static void main(String[] args) {
+        Launcher.main(args);
     }
 }
