@@ -21,9 +21,30 @@ This feature allows you to add events at some date and/or time.
 ## Usage
 
 ### `list` - List all added tasks
+### `todo <task>` - List all added tasks
+Example: `todo work`
 
-All the tasks in the task list will be displayed, with the earliest added tasks first.
+### `deadline <task> /by <yyyy-mm-dd>` - Add deadline task
+Example: `deadline essay /by 2021-09-17`
 
+### `event <task> /at <date/time>` - Add event task
+Example: `event tp meeting /at Sunday 3.30pm`
+
+### `done <task_number>` - Mark task as done
+Example: `done 3`
+
+### `delete <task_number> (task_number_1 ... task_number_n)` - Delete task from list
+Examples of usage: 
+
+`delete 3` ➡️  deletes task 3
+
+`delete 1 2` ➡️  deletes tasks 1 and 2
+
+### `bye` - Say bye to Duke!
+
+
+
+<!-- 
 Example of usage: 
 
 `list (optional arguments)`
@@ -34,4 +55,4 @@ Returns a simple message if there are no tasks.
 
 ```
 You have no tasks!
-```
+``` -->
