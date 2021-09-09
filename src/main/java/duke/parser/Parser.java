@@ -2,6 +2,7 @@ package duke.parser;
 
 import java.util.regex.Pattern;
 
+import duke.commands.AddTagCommand;
 import duke.commands.Command;
 import duke.commands.CreateDeadlineCommand;
 import duke.commands.CreateEventCommand;
@@ -11,6 +12,7 @@ import duke.commands.DoneCommand;
 import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
+import duke.commands.RemoveTagCommand;
 import duke.data.exception.DukeException;
 
 /**
@@ -34,6 +36,12 @@ public class Parser {
 
     private static final Pattern EVENTS_FORMAT =
             Pattern.compile("^event\\s.+\\s/at\\s.+");
+
+    private static final Pattern ADDTAG_FORMAT =
+            Pattern.compile("^addtag\\s\\d\\s\\w+");
+
+    private static final Pattern REMOVETAG_FORMAT =
+            Pattern.compile("^removetag\\s\\d\\s\\w+");
 
     /**
      * Parsers user input into command for execution.
@@ -75,6 +83,20 @@ public class Parser {
             }
 
             return new CreateEventCommand(userInput);
+        } else if (userInput.startsWith("addtag")) {
+
+            if (!ADDTAG_FORMAT.matcher(userInput).matches()) {
+                throw new DukeException("addtag format: addtag [taskId] [tag]");
+            }
+
+            return new AddTagCommand(userInput);
+        } else if (userInput.startsWith("removetag")) {
+
+            if (!REMOVETAG_FORMAT.matcher(userInput).matches()) {
+                throw new DukeException("removetag format: removetag [taskId] [tag]");
+            }
+
+            return new RemoveTagCommand(userInput);
         } else {
             throw new DukeException("Wrong format: please use todo, deadline or event");
         }

@@ -26,8 +26,8 @@ public class Deadlines extends Task {
      * @param name The description of the deadline
      * @param deadline The date which the deadline is due
      */
-    public Deadlines(boolean completed, String name, String deadline) {
-        super(completed, name);
+    public Deadlines(boolean completed, String name, String deadline, String tags) {
+        super(completed, name, tags);
         this.date = LocalDate.parse(deadline);
     }
 
@@ -38,9 +38,9 @@ public class Deadlines extends Task {
     @Override
     public String getSaveData() {
         if (this.isCompleted()) {
-            return String.format("D~1~%s~%s", this.getName(), this.date);
+            return String.format("D~1~%s~%s~%s", this.getName(), this.date, this.getTags());
         } else {
-            return String.format("D~0~%s~%s", this.getName(), this.date);
+            return String.format("D~0~%s~%s~%s", this.getName(), this.date, this.getTags());
         }
     }
 
