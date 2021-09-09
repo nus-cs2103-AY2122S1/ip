@@ -15,6 +15,9 @@ public class Task {
     public void markCompleted() {
         completed = true;
     }
+    public void markIncomplete() {
+        completed = false;
+    }
     public String getTaskContent() {
         return taskContent;
     }

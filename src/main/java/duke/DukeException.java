@@ -62,4 +62,15 @@ public abstract class DukeException extends Exception{
             return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
     }
+
+    public static class cannotUndoException extends DukeException {
+        @Override
+        void exceptionMessage() {
+            System.out.println("☹ OOPS!!! I'm sorry, but there is no command to undo :-(");
+        }
+
+        String stringExceptionMessage() {
+            return "☹ OOPS!!! I'm sorry, but there is no command to undo :-(";
+        }
+    }
 }
