@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.util.Map;
+import java.util.Optional;
+
 import duke.util.DukeConfig;
 import duke.util.DukeDB;
 import duke.util.DukeException;
 import duke.util.DukeTaskList;
 import duke.util.Ui;
-
-import java.util.Map;
-import java.util.Optional;
 
 
 /**
@@ -28,6 +28,6 @@ public interface DukeActions {
      * @throws DukeException When erroneous inputs are given.
      */
 
-    public Optional<String> run(Map<String, String> map, DukeTaskList list, DukeDB database, DukeConfig config,
-                                Ui ui) throws DukeException;
+    public Optional<String> run(Map<String, String> map, DukeTaskList list, DukeDB database, DukeConfig config, Ui ui)
+            throws DukeException;
 }

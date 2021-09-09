@@ -7,7 +7,7 @@ import java.util.Optional;
  * DukeConfig class encapsulates the user configurations for duke.
  */
 public class DukeConfig {
-    DukeDateConfig dateConfig;
+    private DukeDateConfig dateConfig;
 
     public DukeConfig(DukeDateConfig dateConfig) {
         this.dateConfig = dateConfig;

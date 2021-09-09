@@ -1,5 +1,8 @@
 package duke.command;
 
+import java.util.Map;
+import java.util.Optional;
+
 import duke.task.Task;
 import duke.task.Todo;
 import duke.util.DukeConfig;
@@ -7,9 +10,6 @@ import duke.util.DukeDB;
 import duke.util.DukeException;
 import duke.util.DukeTaskList;
 import duke.util.Ui;
-
-import java.util.Map;
-import java.util.Optional;
 
 
 /**
@@ -29,8 +29,8 @@ public class TodoCommand implements DukeActions {
      * @throws DukeException When erroneous inputs are given.
      */
     @Override
-    public Optional<String> run(Map<String, String> map, DukeTaskList list, DukeDB database, DukeConfig config,
-                                     Ui ui) throws DukeException {
+    public Optional<String> run(Map<String, String> map, DukeTaskList list, DukeDB database, DukeConfig config, Ui ui)
+            throws DukeException {
         if (map.get("todo") == null) {
             throw new DukeException("duke.task.Todo body cannot be empty.");
         } else {

@@ -87,6 +87,12 @@ public class Parser {
             this.value = value;
         }
 
+
+        /**
+         * Checks if the params are valid for the given command.
+         * @param test The param to be tested
+         * @return boolean if the param is valid
+         */
         public static boolean isValid(String test) {
             return Arrays.stream(ValidParams.values())
                     .anyMatch(x -> x.value.equals(test));
@@ -115,7 +121,7 @@ public class Parser {
      *
      * @throws DukeException When the date specified is invalid.
      */
-    public static Optional<LocalDateTime> parseDateTime(String dateTime, DukeConfig config) throws DukeException{
+    public static Optional<LocalDateTime> parseDateTime(String dateTime, DukeConfig config) throws DukeException {
         String dateConfig = config.getDateConfig();
         String[] timeSplit = dateTime.split("\\s");
         String[] dateSplit = timeSplit[0].split("/");
@@ -124,7 +130,11 @@ public class Parser {
             throw new DukeException("Invalid date format. The current specified format is " + dateConfig);
         }
 
-        int date, month, year, hour, minute;
+        int date;
+        int month;
+        int year;
+        int hour;
+        int minute;
         date = parseInt(dateSplit[0]).filter(x -> x < 32).orElseThrow(() -> new DukeException("Invalid day"));
         month = parseInt(dateSplit[1]).filter(x -> x < 13).orElseThrow(() -> new DukeException("Invalid month"));
         year = parseInt(dateSplit[2]).orElseThrow(() -> new DukeException("Invalid year"));
@@ -142,13 +152,12 @@ public class Parser {
                 throw new DukeException("Invalid time");
             }
             hour = parseInt(timeSplit[1].substring(0, 2)).filter(x -> x < 25).orElseThrow(() -> new DukeException(
-                    "Invalid hour " +
-                    "specified"));
-            minute = parseInt(timeSplit[1].substring(2,4)).filter(x -> x < 60).orElseThrow(() -> new DukeException(
-                    "Invalid " +
-                    "minute " +
-                    "specified"));
-            return Optional.of(LocalDateTime.of(year,month,date,hour,minute));
+                    "Invalid hour "
+                            + "specified"));
+            minute = parseInt(timeSplit[1].substring(2, 4)).filter(x -> x < 60).orElseThrow(() -> new DukeException(
+                    "Invalid "
+                            + "minute " + "specified"));
+            return Optional.of(LocalDateTime.of(year, month, date, hour, minute));
         } else {
             return Optional.of(LocalDateTime.of(year, month, date, 0, 0));
         }

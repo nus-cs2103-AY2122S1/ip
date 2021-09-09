@@ -27,6 +27,11 @@ public class Task {
     }
 
 
+    /**
+     * Constructor for a task, where the isDone condition can be set.
+     * @param description The description of the task.
+     * @param isDone The status of completion of the task.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;

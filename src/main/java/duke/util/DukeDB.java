@@ -1,11 +1,5 @@
 package duke.util;
 
-import duke.Duke;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,9 +9,19 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class DukeDB {
-    String databasePath;
+import duke.Duke;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
+public class DukeDB {
+    private String databasePath;
+
+    /**
+     * Creates a new DukeDB instance
+     * @param database The database path of the database file to be used.
+     */
     public DukeDB(String database) {
         File check = new File(database);
         if (!check.exists() || database == null) {
@@ -28,8 +32,8 @@ public class DukeDB {
                         return x;
                     })
                     .orElseGet(() -> {
-                        Duke.printMsg("Unable to create the file." +
-                                " Check if the file already exists. Defaulting to " + "default database");
+                        Duke.printMsg("Unable to create the file."
+                                + " Check if the file already exists. Defaulting to " + "default database");
                         this.databasePath = "./data/dukeStore.txt";
                         return null;
                     });
@@ -39,18 +43,11 @@ public class DukeDB {
 
     }
 
-    @Deprecated
-    public static void drop() {
-        File file = new File("./data/dukeStore.txt");
-        long size = file.getTotalSpace();
-        boolean deleted = file.delete();
-        if (deleted) {
-            Duke.printMsg("Successfully dropped database of " + size + "B.");
-        } else {
-            Duke.printMsg("Error deleting file.");
-        }
-    }
-
+    /**
+     * Takes in an arrayList of tasks and writes it to the .txt file
+     *
+     * @param arr Arraylist of tasks.
+     */
     public void save(ArrayList<Task> arr) {
         try {
             FileWriter writer = new FileWriter(this.databasePath);
@@ -64,6 +61,11 @@ public class DukeDB {
         }
     }
 
+    /**
+     * Takes in a .txt db and loads it into Duke in an ArrayList
+     *
+     * @return ArrayList of Task objects.
+     */
     public Optional<ArrayList<Task>> load() {
         try {
             ArrayList<Task> arr = new ArrayList<>();
@@ -73,8 +75,8 @@ public class DukeDB {
                 String strTask = reader.nextLine();
                 String[] splitTask = strTask.split("\\|");
                 Optional<Task> task = this.readTask(splitTask);
-                task.ifPresentOrElse(arr::add,
-                        () -> Duke.printMsg("Error loading task. Database is corrupt."));
+                task.ifPresentOrElse(
+                    arr::add, () -> Duke.printMsg("Error loading task. Database is corrupt."));
             }
             return Optional.of(arr);
         } catch (FileNotFoundException e) {
@@ -85,6 +87,11 @@ public class DukeDB {
         return Optional.empty();
     }
 
+    /**
+     * Creates a new .txt store for the database
+     *
+     * @return Optional of Boolean type to indicate if the DB was successfully created.
+     */
     public Optional<Boolean> create() {
         File file = new File("./data/dukeStore.txt");
         try {
@@ -134,9 +141,8 @@ public class DukeDB {
 
             try {
                 LocalDateTime dateBy = Parser.parseDateTime(by)
-                        .orElseThrow(() ->
-                                new DukeException("Unable to load " +
-                                        "date for task" + description + ". Removing the task."));
+                        .orElseThrow(() -> new DukeException("Unable to load "
+                                + "date for task" + description + ". Removing the task."));
                 return Optional.of(new Deadline(description,
                         dateBy,
                         isDone));
