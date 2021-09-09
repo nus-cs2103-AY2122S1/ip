@@ -10,6 +10,8 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    public static final String WELCOME_MSG = "\tHello! I'm Adam, your personal chat bot."
+            + "\n\tHow may I assist you today?";
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -30,8 +32,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog("\tHello! I'm Adam, your personal chat bot."
-                + "\n\tHow may I assist you today?", dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(WELCOME_MSG, dukeImage));
     }
 
     public void setDuke(Duke d) {

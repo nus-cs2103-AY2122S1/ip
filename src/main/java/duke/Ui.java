@@ -12,6 +12,8 @@ import duke.task.TaskList;
  * @author Adam Ho
  */
 public class Ui {
+    public static final String LIST_TASK_MSG = "\tHere are the tasks in your list:\n";
+    public static final String FIND_TASKS_MSG = "\tThe tasks that match your keywords are:\n";
     private Scanner sc = new Scanner(System.in);
 
     public String readCommand() {
@@ -54,23 +56,15 @@ public class Ui {
      * @param tasks The task list containing the user's tasks.
      */
     public String showTaskList(TaskList tasks) {
-        String response = "\tHere are the tasks in your list:\n";
-        int id = 1;
-        for (Task task : tasks.getTaskList()) {
-            response += "\t" + id++ + "." + task + "\n";
-        }
-        return response;
+        return LIST_TASK_MSG + printTaskLists(tasks);
+    }
+
+    public String showTasksFound(TaskList tasks) {
+        return FIND_TASKS_MSG + printTaskLists(tasks);
     }
 
     public String showTaskDone(Task task) {
         return "\tNice! I've marked this task as done:\n\t  " + task;
-    }
-
-    /**
-     * Shows a confirmation message to the user before clearing all tasks.
-     */
-    public String showConfirmClearTasks() {
-        return "\tAre you sure you want to clear your tasks?\ny/n:";
     }
 
     /**
@@ -80,14 +74,17 @@ public class Ui {
         return "\t All your tasks have been cleared!";
     }
 
-    /**
-     * Shows to user that the task list will not be cleared.
-     */
-    public String showTasksNotCleared() {
-        return "\tAlright I won't clear your tasks :)";
-    }
 
     public String showError(String errorMessage) {
         return "\t" + errorMessage;
+    }
+
+    public String printTaskLists(TaskList tasks) {
+        String s = "";
+        int id = 1;
+        for (Task task : tasks.getTaskList()) {
+            s += "\t" + id++ + "." + task + "\n";
+        }
+        return s;
     }
 }

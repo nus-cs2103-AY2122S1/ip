@@ -58,7 +58,8 @@ public class Parser {
         case DELETE:
             return new DeleteCommand(toTaskIndex(userDescription));
         case FIND:
-            return new FindCommand(getKeywords(userDescription));
+            taskDescriptions = getTaskDescriptions(userDescription, ", ");
+            return new FindCommand(taskDescriptions);
         case CLEAR:
             return new ClearCommand();
         case EXIT:
@@ -99,9 +100,5 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new InvalidTaskIndexException();
         }
-    }
-
-    public static String[] getKeywords(String userDescription) {
-        return userDescription.split(", ");
     }
 }
