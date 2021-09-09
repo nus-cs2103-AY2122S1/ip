@@ -19,8 +19,8 @@ public class Duke {
      * Constructor for Duke.
      */
     public Duke() {
-        storage = new Storage("data/duke.txt");
         try {
+            storage = new Storage("data/duke.txt");
             tasks = new TaskList(getStorage().loadTasks());
         } catch (DukeException e) {
             tasks = new TaskList();
@@ -30,10 +30,6 @@ public class Duke {
 
     public static Storage getStorage() {
         return Duke.storage;
-    }
-
-    public static TaskList getTasks() {
-        return Duke.tasks;
     }
 
     /**
