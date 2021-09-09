@@ -39,6 +39,9 @@ public class Storage {
                 if (splitItem.length < 2) {
                     continue;
                 }
+
+                assert splitItem.length >= 2;
+
                 String taskType = splitItem[0];
                 String completed = splitItem[1];
                 String desc = splitItem[2];
@@ -111,17 +114,4 @@ public class Storage {
             throw new DukeException("Error deleting or marking task as done");
         }
     }
-
-//    @Override
-//    public String toString() {
-//        String result = "";
-//
-//        for (int i = 0; i < taskList.size(); i++) {
-//            Task nextTask = taskList.get(i);
-//            result += "\n" + nextTask.toStorageString();
-//        }
-//
-//        result = result.trim();
-//        return result;
-//    }
 }
