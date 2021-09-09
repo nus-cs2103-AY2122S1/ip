@@ -7,14 +7,15 @@ package duke;
 public class AddDeadlineCommand implements ICommand {
 
     private final String input;
-    TaskManager tm;
-    ResponseManager responseManager;
-    Storage storage;
-    Task addedDeadline;
-    String reply;
+    private TaskManager tm;
+    private ResponseManager responseManager;
+    private Storage storage;
+    private Task addedDeadline;
+    private String reply;
 
     /**
      * Constructor for the command.
+     *
      * @param input The user's input which triggered the creation of this command.
      */
     public AddDeadlineCommand(String input) {
@@ -39,11 +40,12 @@ public class AddDeadlineCommand implements ICommand {
                 reply = responseManager.getTaskAdditionMessage(addedDeadline, tm.getTasks().size());
                 storage.updateSave(tm.getTasks());
             } else {
-                throw new DukeException.NoTimeSpecifiedException("Please use the format YYYY-MM-DD HH:MM when entering when the event is \n" +
-                        "E.g. 2021-08-28 18:30");
+                throw new DukeException.NoTimeSpecifiedException(
+                        "Please use the format YYYY-MM-DD HH:MM when entering when the event is \n"
+                        + "E.g. 2021-08-28 18:30");
             }
-        } catch (DukeException.NoNameException |
-                DukeException.NoTimeSpecifiedException e) {
+        } catch (DukeException.NoNameException
+                | DukeException.NoTimeSpecifiedException e) {
             reply = responseManager.getErrorMessage(e);
         }
     }

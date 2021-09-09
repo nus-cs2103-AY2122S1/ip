@@ -6,10 +6,11 @@ package duke;
  */
 public class ByeCommand implements ICommand {
 
-    String reply;
+    private String reply;
 
     /**
-     * Called the Ui object to display the 'bye' message then ends the program.
+     * Calls the Ui object to display the 'bye' message then ends the program.
+     *
      * @param tm The TaskManager object controlling the tasks in Duke.
      * @param responseManager The Ui object managing Duke's user interface.
      * @param storage The Storage object managing the local storing of tasks.

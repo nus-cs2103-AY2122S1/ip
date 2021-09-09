@@ -6,10 +6,11 @@ package duke;
  */
 public class ListTasksCommand implements ICommand {
 
-    String reply;
+    private String reply;
 
     /**
      * Calls the Ui object to display the current list of tasks.
+     *
      * @param tm The TaskManager object controlling the tasks in Duke.
      * @param responseManager The Ui object managing Duke's user interface.
      * @param storage The Storage object managing the local storing of tasks.

@@ -5,7 +5,7 @@ package duke;
  */
 public class UnknownCommand implements ICommand {
 
-    String reply;
+    private String reply;
 
     public UnknownCommand() {}
 

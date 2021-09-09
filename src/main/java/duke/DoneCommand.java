@@ -6,12 +6,12 @@ package duke;
  */
 public class DoneCommand implements ICommand {
 
-    String taskIndex;
-    TaskManager tm;
-    ResponseManager responseManager;
-    Storage storage;
-    Task completedTask;
-    String reply;
+    private String taskIndex;
+    private TaskManager tm;
+    private ResponseManager responseManager;
+    private Storage storage;
+    private Task completedTask;
+    private String reply;
 
     /**
      * Constructor for the command.

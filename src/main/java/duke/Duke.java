@@ -33,10 +33,30 @@ public class Duke extends Application {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Jesse.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
+    /**
+     * Constructor for Duke.
+     *
+     * @param saveFileLocation The path to where the save file is to be stored.
+     */
+    public Duke(String saveFileLocation) {
+        responseManager = new ResponseManager();
+        storage = new Storage(saveFileLocation);
+        taskManager = new TaskManager(storage.loadSave());
+    }
+
+    public Duke() {
+
+    }
+
     public static void main(String[] args) {
         //new Duke("docs\\save.txt");
     }
 
+    /**
+     * Starts running the program.
+     *
+     * @param stage The UI stage to display the chat.
+     */
     public void start(Stage stage) {
         //Step 1. Setting up required components
         duke = new Duke("docs\\save.txt");
@@ -141,23 +161,6 @@ public class Duke extends Application {
         c.execute(taskManager, responseManager, storage);
         return c.getReply();
     }
-
-    /**
-     * Constructor for Duke.
-     *
-     * @param saveFileLocation The path to where the save file is to be stored.
-     */
-    public Duke(String saveFileLocation) {
-        responseManager = new ResponseManager();
-        storage = new Storage(saveFileLocation);
-        taskManager = new TaskManager(storage.loadSave());
-    }
-
-    public Duke() {
-
-    }
-
-
 
     /**
      * Runs the program until the bye command is used to end it.

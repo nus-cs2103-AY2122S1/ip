@@ -6,11 +6,12 @@ package duke;
  */
 public class AddToDoCommand implements ICommand {
 
-    String input;
+    private String input;
     private String reply;
 
     /**
      * Constructor for the command.
+     *
      * @param input The user's input which triggered the creation of this command.
      */
     public AddToDoCommand(String input) {
@@ -19,6 +20,7 @@ public class AddToDoCommand implements ICommand {
 
     /**
      * Adds the to-do task by interacting with the relevant instances as mentioned above.
+     *
      * @param tm The TaskManager object controlling the tasks in Duke.
      * @param responseManager The Ui object managing Duke's user interface.
      * @param storage The Storage object managing the local storing of tasks.

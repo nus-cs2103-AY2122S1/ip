@@ -65,17 +65,17 @@ public class Storage {
                 String name = taskDetails[2];
                 boolean done = taskDetails[1].equals("1");
                 switch (taskDetails[0]) {
-                    case "T":
-                        newTask = new Task.ToDo(name, done);
-                        break;
-                    case "D":
-                        newTask = new Task.Deadline(name, LocalDateTime.parse(taskDetails[3]), done);
-                        break;
-                    case "E":
-                        newTask = new Task.Event(name, LocalDateTime.parse(taskDetails[3]), done);
-                        break;
-                    default:
-                        throw new DukeException.NoNameException("Duke.Task type invalid");
+                case "T":
+                    newTask = new Task.ToDo(name, done);
+                    break;
+                case "D":
+                    newTask = new Task.Deadline(name, LocalDateTime.parse(taskDetails[3]), done);
+                    break;
+                case "E":
+                    newTask = new Task.Event(name, LocalDateTime.parse(taskDetails[3]), done);
+                    break;
+                default:
+                    throw new DukeException.NoNameException("Duke.Task type invalid");
                 }
                 tasks.add(newTask);
             }
