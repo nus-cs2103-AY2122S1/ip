@@ -1,5 +1,9 @@
 package duke.util;
 
+import duke.DukeException;
+import duke.command.Deadline;
+import duke.command.Event;
+
 /**
  * Parses the commands given by a user.
  */
@@ -22,8 +26,8 @@ public class Parser {
      * @param cmd Command to be processed.
      * @return Whether is bye command.
      */
-    public static boolean isNotBye(String cmd) {
-        return !cmd.equals("bye");
+    public static boolean isBye(String cmd) {
+        return cmd.equals("bye");
     }
 
     /**
@@ -195,5 +199,31 @@ public class Parser {
     @Override
     public String toString() {
         return "parses commands";
+    }
+
+    /**
+     * Creates a Deadline task based on a description.
+     *
+     * @param desc Description of task.
+     * @return Deadline Task.
+     * @throws DukeException If unable to parse description properly.
+     */
+    public static Deadline getDeadlineTask(String desc) throws DukeException {
+        String deadlineInfo = Parser.getDeadlineInfo(desc);
+        String deadlineDue = Parser.getDeadlineDue(desc);
+        return new Deadline(deadlineInfo, deadlineDue);
+    }
+
+    /**
+     * Creates an Event task based on a description.
+     *
+     * @param desc Description of task.
+     * @return Event Task.
+     * @throws DukeException If unable to parse description properly.
+     */
+    public static Event getEventTask(String desc) throws DukeException {
+        String eventInfo = Parser.getEventInfo(desc);
+        String eventDue = Parser.getEventDue(desc);
+        return new Event(eventInfo, eventDue);
     }
 }
