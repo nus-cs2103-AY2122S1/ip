@@ -33,10 +33,10 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image saberImage = new Image(this.getClass().getResourceAsStream("/images/saberprofile.png"));
 
-    @FXML
     /**
      * Initializes the UI
      */
+    @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         SaberUI saberGeneralUI = new SaberUI();
