@@ -3,6 +3,7 @@ package duke.task;
 public class Event extends Task {
     public static final String SYMBOL = "E";
     public static final String COMMAND_REGEX = "event \\w[\\w, ]+\\w \\/at \\w[\\w, ]*";
+    public static final String COMMAND_SYNTAX = "event <task> /at <eventTime>";
     private String eventTime;
 
 
@@ -42,7 +43,7 @@ public class Event extends Task {
      * @return helper text of correct syntax
      */
     public static String syntax() {
-        return "event command syntax: 'event <task> /at <eventTime>'";
+        return String.format("event command syntax: \n    '%s'", Event.COMMAND_SYNTAX);
     }
 
     /**

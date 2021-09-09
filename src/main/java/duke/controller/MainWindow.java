@@ -50,6 +50,7 @@ public class MainWindow extends AnchorPane {
                 @Override
                 public void run() {
                     Platform.exit();
+                    //System.exit() may be better
                 }
             },
             secondsBeforeTerminate * 1000
@@ -64,7 +65,6 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

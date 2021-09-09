@@ -8,6 +8,8 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     public static final String SYMBOL = "D";
     public static final String COMMAND_REGEX = "deadline \\w[\\w, ]+\\w \\/by \\w[\\w,\\-, ]*";
+    public static final String COMMAND_SYNTAX = "deadline <task> /by <eventTime>";
+
     private String userInputDeadline;
     private LocalDateTime dateTimeDeadline;
     private LocalDateTime dateTimeTaskCreation;
@@ -91,9 +93,9 @@ public class Deadline extends Task {
      * @return helper text of correct syntax
      */
     public static String syntax() {
-        return "deadline command syntax: \n" +
-                "    'deadline <task> /by dd-MM-yyyy HHmm'\n" +
-                "Eg. 'deadline project /by 01-01-2020 2359'";
+        return String.format("deadline command syntax: \n" +
+                "    '%s'\n" +
+                "Eg. 'deadline project /by 01-01-2020 2359'", Deadline.COMMAND_SYNTAX);
     }
 
     /**

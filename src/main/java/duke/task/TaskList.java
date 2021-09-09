@@ -13,9 +13,11 @@ import java.util.stream.IntStream;
 public final class TaskList {
     private final ArrayList<Task> TASKS;
     private final Storage STORAGE_FILE;
-    public static final String DONE_COMMAND_REGEX = "done [0-9]{1,2}";
-    public static final String DELETE_COMMAND_REGEX = "delete [0-9]{1,2}";
-    public static final String FIND_COMMAND_REGEX = "find \\w+";
+    public static final String LIST_COMMAND_REGEX = "list";
+    public static final String BYE_COMMAND_REGEX = "bye";
+    public static final String DONE_COMMAND_REGEX = "done [0-9]{1,2}"; //done <num>
+    public static final String DELETE_COMMAND_REGEX = "delete [0-9]{1,2}"; //delete <num
+    public static final String FIND_COMMAND_REGEX = "find \\w+"; //find <word>
 
     //parse in Files containing Strings (line) of duke.task representation
     public static TaskList of(Storage storageFile) {
@@ -71,6 +73,12 @@ public final class TaskList {
         this.STORAGE_FILE.write(this.TASKS);
     }
 
+    /**
+     * Helper function which checks if index is valid given a list length
+     * @param idxFrom0 index which is being checked if valid
+     * @param numOfTasks length of list
+     * @return
+     */
     public static boolean isValidIndex(int idxFrom0, int numOfTasks) {
         if (idxFrom0 < 0 || idxFrom0 >= numOfTasks) {
             throw new IllegalArgumentException("task index passed in out of range");

@@ -31,13 +31,14 @@ public class Duke {
     }
 
     public String getResponse(String userInput) {
-        String reply = "defaultReply";
+        String reply = "defaultReply-";
         try {
             reply = PARSER.parseCommand(userInput);
         } catch (DukeException e) {
             reply = e.toString();
         } catch (Exception e) {
             e.printStackTrace();
+            reply = e.getMessage();
         }
         return reply;
     }

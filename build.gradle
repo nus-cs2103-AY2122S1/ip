@@ -5,6 +5,10 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
+run {
+    enableAssertions = true
+}
+
 repositories {
     mavenCentral()
 }
@@ -43,7 +47,8 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    // compulsory property which tells Gradle the entry pt to application
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {

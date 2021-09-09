@@ -2,7 +2,8 @@ package duke.task;
 
 public class ToDo extends Task {
     public static final String SYMBOL = "T";
-    public static final String COMMAND_REGEX = "todo \\w+.*";
+    public static final String COMMAND_REGEX = "todo \\w+.*";       //eg. todo read book
+    public static final String COMMAND_SYNTAX = "todo <task>";
 
     /**
      * Factory method of ToDo class
@@ -49,7 +50,7 @@ public class ToDo extends Task {
      * @return helper text of correct syntax
      */
     public static String syntax() {
-        return "todo command syntax: 'todo <task>'";
+        return String.format("todo command syntax: \n    '%s'",ToDo.COMMAND_SYNTAX);
     }
 
     /**

@@ -28,34 +28,30 @@ public class Parser {
     }
 
     /**
-     * Parses string command and returns system reply
+     * Parses string command, executes appropriate command and returns system reply
      *
      * @return System's reply message to user input
      */
     public String parseCommand(String userInput) {
-        if (userInput.equals("list")) {
+        if (userInput.matches(TaskList.LIST_COMMAND_REGEX)) {
             return String.format(
                     "Here are the tasks in your list:\n%s",
                     TASKLIST.toString()
             );
-        } else if (userInput.equals("bye")) {
+        } else if (userInput.matches(TaskList.BYE_COMMAND_REGEX)) {
             return Ui.CLOSING_STATEMENT;
-            // MainWindow handles termination logic
+            // MainWindow handles termination logic (closure of application)
         } else if (userInput.matches(TaskList.FIND_COMMAND_REGEX)) {
-            //eg. find <word>
             String keyword = userInput.split(" ", 2)[1];
             Integer[] indexesFrom0 = TASKLIST.filter((task) -> task.isInTaskSummary(keyword));
             String res = TASKLIST.selectedTasks(indexesFrom0);
             return String.format("Here are the matching tasks in your list:\n%s", res);
         } else if (userInput.matches(TaskList.DONE_COMMAND_REGEX)) {
-            //eg. done 12
-            //limiting tasks from 0-99
+            //limits user to toggling first 99 tasks
             String inputBody = userInput.split(" ", 2)[1];
             int idxFrom0 = Integer.parseInt(inputBody) - 1;
-
             if (TaskList.isValidIndex(idxFrom0, TASKLIST.length())) {
                 TASKLIST.toggleDone(idxFrom0);
-
                 return String.format(
                         "Nice! I've marked this task as done:\n    %s",
                         TASKLIST.get(idxFrom0).toString()
@@ -76,7 +72,6 @@ public class Parser {
                 return reply;
             }
         } else if (userInput.matches(ToDo.COMMAND_REGEX)) {
-            //eg. todo read book
             String inputBody = userInput.split(" ", 2)[1];
             Task newTask = ToDo.of(inputBody);
             String reply = String.format(
