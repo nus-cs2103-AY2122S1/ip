@@ -3,15 +3,15 @@ package duke;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TASK_TYPE;
-import duke.task.Task;
-import duke.task.Todo;
 import duke.utils.Parser;
 import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+import duke.task.TASK_TYPE;
 
 public class Duke {
 
@@ -56,7 +56,7 @@ public class Duke {
                 break;
             case 3:
                 try {
-                    nextTask = new Todo(scannerObj.nextLine(), TASK_TYPE.T);
+                    nextTask = new Todo(scannerObj.nextLine());
                     tasks.add(nextTask);
                     storage.saveEntry(nextTask);
                     ui.todo(nextTask, tasks.size());
@@ -85,12 +85,12 @@ public class Duke {
                     }
                 }
                 if (selector == 4) {
-                    nextTask = new Deadline(desc, var , TASK_TYPE.D);
+                    nextTask = new Deadline(desc,var);
                     tasks.add(nextTask);
                     storage.saveEntry(nextTask);
-                    ui.deadline(nextTask, tasks.size());
+                    ui.deadline(nextTask,tasks.size());
                 } else {
-                    nextTask = new Event(desc, var , TASK_TYPE.E);
+                    nextTask = new Event(desc,var);
                     tasks.add(nextTask);
                     storage.saveEntry(nextTask);
                     ui.event(nextTask, tasks.size());
@@ -108,6 +108,11 @@ public class Duke {
                 tasks.add(nextTask);
                 storage.saveEntry(nextTask);
                 ui.add(nextTask.toString());
+                break;
+            case 8:
+                String phrase = scannerObj.nextLine();
+                Task [] res = tasks.find(phrase);
+                ui.find(res);
                 break;
             default:
                 ui.echo();
