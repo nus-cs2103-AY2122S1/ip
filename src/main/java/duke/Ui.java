@@ -62,6 +62,12 @@ public class Ui {
                 }
             } else if (parsedInput.equals("find")) {
                 return getFindString(list, input);
+            } else if (parsedInput.equals("update")) {
+                if (input.replaceAll("\\s", "").length() == 6) {
+                    throw new DukeException(DukeException.Type.EmptyUpdate);
+                } else {
+                    return getUpdateString(list, input);
+                }
             } else if (parsedInput.equals("InvalidCommand")) {
                 throw new DukeException(DukeException.Type.InvalidCommand);
             }
@@ -85,7 +91,7 @@ public class Ui {
         }
     }
 
-    private String getDeleteTaskString(ArrayList<Task> list, String input, Storage storage) {
+    private String getDeleteTaskString(ArrayList<Task> list, String input, Storage storage) throws DukeException {
         String modInput = input.replaceAll("\\s", "");
         int index = Integer.parseInt(modInput.substring(modInput.length() - 1)) - 1;
         if (list.size() <= index) {
@@ -158,6 +164,33 @@ public class Ui {
                 output += String.format("    %d. %s\n", (i + 1), item.toString());
             }
             return output;
+        }
+    }
+
+    private String getUpdateString(ArrayList<Task> list, String input) throws DukeException {
+        int index = Integer.parseInt(input.substring(7, 8)) - 1;
+        if (list.size() <= index) {
+            throw new DukeException(DukeException.Type.InvalidTaskNumber);
+        } else {
+            Task item = list.get(index);
+            if (item instanceof Todo) {
+                list.set(index, ((Todo) item).update(input.substring(8)));
+            } else if (item instanceof Deadline) {
+                if (input.contains("/by")) {
+                    String[] splitString = input.substring(8).split("/by", 2);
+                    list.set(index, ((Deadline) item).update(splitString[0], splitString[1]));
+                } else {
+                    list.set(index, ((Deadline) item).updateDesc(input.substring(8)));
+                }
+            } else if (item instanceof Event) {
+                if (input.contains("/at")) {
+                    String[] splitString = input.substring(8).split("/at", 2);
+                    list.set(index, ((Event) item).update(splitString[0], splitString[1]));
+                } else {
+                    list.set(index, ((Event) item).updateDesc(input.substring(8)));
+                }
+            }
+            return "Your task has been updated!\n" + list.get(index);
         }
     }
 

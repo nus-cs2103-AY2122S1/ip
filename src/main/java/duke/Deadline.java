@@ -21,6 +21,37 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Updates the description and due date of the deadline.
+     *
+     * @param description the description of the deadline task.
+     * @param by the due date of the task.
+     * @return new Deadline with updated description and due date.
+     */
+    public static Deadline update(String description, String by) {
+        return new Deadline(description, by);
+    }
+
+    //    /**
+    //     * Updates the date of the deadline.
+    //     *
+    //     * @param by the due date of the task.
+    //     * @return new Deadline with the updated due date.
+    //     */
+    //    public Deadline updateDate(String by) {
+    //        return new Deadline(this.description, by);
+    //    }
+
+    /**
+     * Updates the description of the deadline.
+     *
+     * @param description the description of the task.
+     * @return new Deadline with the updated description;
+     */
+    public Deadline updateDesc(String description) {
+        return new Deadline(description, this.by);
+    }
+
 
     /**
      * {@inheritDoc}
