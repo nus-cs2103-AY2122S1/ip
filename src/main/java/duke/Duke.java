@@ -25,26 +25,6 @@ public class Duke {
         }
     }
 
-    /**
-     * Runs bot program
-     */
-    public void run() {
-        ui.greet();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String input = ui.readCommand();
-                Command c = Parser.parse(input);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
-        }
-
-
-    }
-
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
