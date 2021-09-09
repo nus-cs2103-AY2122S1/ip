@@ -1,7 +1,15 @@
 package duke;
 
+/**
+ * Represents a command that adds a Task to a TaskList
+ */
 public class CommandAdd extends Command {
     private Task task;
+
+    /**
+     * Class constructor
+     * @param task The Task to be added to TaskLists from the execution of this Command
+     */
     public CommandAdd(Task task) {
         this.task = task;
     }
