@@ -6,6 +6,9 @@ public class Ui {
     private Storage storage;
     private TaskList taskList;
     boolean isExit = false;
+    private Task recentlyModifiedTask = new Task("", null);
+    private int previousTaskIndex = -1;
+    private Type previousCommand = Type.NONE;
     private final Scanner scanner = new Scanner(System.in);
     public Ui(Storage storage, TaskList taskList) {
         this.storage = storage;
@@ -21,6 +24,9 @@ public class Ui {
         ADDEVENT,
         ADDTODO,
         ADDDEADLINE,
+        ADD,
+        DELETE,
+        UNDO,
         NONE
     }
 
@@ -42,6 +48,8 @@ public class Ui {
     public String deleteTask(String input) {
         Task taskToBeDeleted = taskList.get(Parser.parseDelete(input) - 1);
         taskList.deleteTask(Parser.parseDelete(input) - 1);
+        previousCommand = Type.DELETE;
+        recentlyModifiedTask = taskToBeDeleted;
         System.out.println("Noted. I've removed this task: \n"
                 + "  " + taskToBeDeleted.toString() +"\n" +
                 "Now you have " + taskList.length() + " tasks in the list.");
@@ -76,6 +84,7 @@ public class Ui {
 
     public String markTaskAsDone(String input) {
         int taskIndex = Parser.parseDone(input);
+        previousTaskIndex = taskIndex;
         taskList.get(taskIndex - 1).markCompleted();
         System.out.println("Nice! I've marked this task as done:\n" + taskList.get(taskIndex - 1).toString());
         storage.saveTask(taskList);
@@ -90,6 +99,8 @@ public class Ui {
         String taskContent = Parser.parseEvent(input);
         Task newEvent = new Event(taskContent);
         taskList.addTask(newEvent);
+        previousCommand = Type.ADD;
+        previousTaskIndex = taskList.length();
         System.out.println("Got it. I've added this task: \n"
                 + "  " + newEvent.toString() + "\n" +
                 "Now you have " + taskList.length() + " tasks in the list.");
@@ -107,6 +118,8 @@ public class Ui {
         String taskContent = Parser.parseDeadline(input);
         Task newEvent = new Deadline(taskContent);
         taskList.addTask(newEvent);
+        previousCommand = Type.ADD;
+        previousTaskIndex = taskList.length();
         System.out.println("Got it. I've added this task: \n"
                 + "  " + newEvent.toString() + "\n" +
                 "Now you have " + taskList.length() + " tasks in the list.");
@@ -122,23 +135,87 @@ public class Ui {
             return error;
         }
         String taskContent = Parser.parseTodo(input);
-        Task newEvent = new ToDo(taskContent);
-        taskList.addTask(newEvent);
+        Task newTodo = new ToDo(taskContent);
+        taskList.addTask(newTodo);
+        previousCommand = Type.ADD;
+        previousTaskIndex = taskList.length();
         System.out.println("Got it. I've added this task: \n"
-                + "  " + newEvent.toString() + "\n" +
+                + "  " + newTodo.toString() + "\n" +
                 "Now you have " + taskList.length() + " tasks in the list.");
         storage.saveTask(taskList);
         return "Got it. I've added this task: \n"
-                + "  " + newEvent.toString() + "\n" +
+                + "  " + newTodo.toString() + "\n" +
                 "Now you have " + taskList.length() + " tasks in the list.";
     }
 
     public String handleInvalidInput() {
-        try{
+        try {
             throw new DukeException.invalidInputException();
         } catch (DukeException.invalidInputException e) {
             e.exceptionMessage();
             return e.stringExceptionMessage();
+        }
+    }
+
+    public String unableToUndo() {
+        try {
+            throw new DukeException.cannotUndoException();
+        } catch (DukeException.cannotUndoException e) {
+            e.exceptionMessage();
+            return e.stringExceptionMessage();
+        }
+    }
+
+    public String markTaskUndone() {
+        taskList.get(previousTaskIndex - 1).markIncomplete();
+        System.out.println("Okay! I've marked this task as incomplete:\n" + taskList.get(previousTaskIndex - 1).toString());
+        storage.saveTask(taskList);
+        resetUndo();
+        return "Okay! I've marked this task as incomplete:\n" + taskList.get(previousTaskIndex - 1).toString();
+    }
+
+    public String undoAddTask() {
+        Task taskToBeDeleted = taskList.get(previousTaskIndex - 1);
+        taskList.deleteTask(previousTaskIndex - 1);
+        System.out.println("Noted. I've removed this task: \n"
+                + "  " + taskToBeDeleted.toString() +"\n" +
+                "Now you have " + taskList.length() + " tasks in the list.");
+        storage.saveTask(taskList);
+        resetUndo();
+        return "Noted. I've removed this task: \n"
+                + "  " + taskToBeDeleted.toString() +"\n" +
+                "Now you have " + taskList.length() + " tasks in the list.";
+    }
+
+    public String undoDeleteTask() {
+        Task task = recentlyModifiedTask;
+        taskList.addTask(task);
+        System.out.println("Got it. I've added this task: \n"
+                + "  " + task.toString() + "\n" +
+                "Now you have " + taskList.length() + " tasks in the list.");
+        storage.saveTask(taskList);
+        resetUndo();
+        return "Got it. I've added this task: \n"
+                + "  " + task.toString() + "\n" +
+                "Now you have " + taskList.length() + " tasks in the list.";
+    }
+
+    public void resetUndo() {
+        recentlyModifiedTask = new Task("", null);
+        previousTaskIndex = -1;
+        previousCommand = Type.NONE;
+    }
+
+    public String undo() {
+        switch (previousCommand) {
+            case MARKDONE:
+                return markTaskUndone();
+            case ADD:
+                return undoAddTask();
+            case DELETE:
+                return undoDeleteTask();
+            default:
+                return unableToUndo();
         }
     }
 
@@ -160,6 +237,8 @@ public class Ui {
                 return addTodo(actualInput);
             case ADDDEADLINE:
                 return addDeadline(actualInput);
+            case UNDO:
+                return undo();
             default:
                 return handleInvalidInput();
         }
@@ -176,6 +255,8 @@ public class Ui {
             action = Type.DELETETASK;
         } else if (input.equals("list")) {
             action = Type.VIEWLIST;
+        } else if (input.equals("undo")) {
+            action = Type.UNDO;
         } else if (input.split(" ")[0].equals("find")) {
             action = Type.FINDTASK;
         } else if (input.split(" ")[0].equals("done")){
