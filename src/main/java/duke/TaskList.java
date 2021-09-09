@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import duke.exception.DukeException;
-import duke.exception.DukeFileNotFoundException;
 import duke.exception.DukeInvalidTaskNumberFormatException;
 import duke.exception.DukeTaskNotFoundException;
 import duke.exception.DukeTaskNumberOutOfBoundsException;
@@ -50,11 +49,14 @@ public class TaskList {
      * Marks a task as done.
      * 
      * @param taskNum the task number to mark as done
-     * @throws DukeFileNotFoundException if file not found
+     * @throws DukeTaskNumberOutOfBoundsException if task number not valid
      */
-    private static String completeTask(int taskNum) throws DukeFileNotFoundException {
+    private static String completeTask(int taskNum) throws DukeTaskNumberOutOfBoundsException {
+        if (taskNum > tasks.size() || taskNum <= 0) {
+            throw new DukeTaskNumberOutOfBoundsException();
+        }
+
         int taskIdx = taskNum - 1;
-        assert taskIdx >= 0;
         Task task = tasks.get(taskIdx);
         task.setDone(true);
         return ("Good job! I've marked this task as done:\n\n\t" + task + "\n");
@@ -63,14 +65,17 @@ public class TaskList {
     /**
      * Deletes a task from the ArrayList of tasks.
      * 
-     * @param num the task number to delete
-     * @throws DukeFileNotFoundException if file not found
+     * @param taskNum the task number to delete
+     * @throws DukeTaskNumberOutOfBoundsException if task number not within range
      */
-    private static String deleteSingleTask(int num) throws DukeFileNotFoundException {
-        int taskIdx = num - 1;
-        assert taskIdx >= 0;
+    private static String deleteSingleTask(int taskNum) throws DukeTaskNumberOutOfBoundsException {
+        if (taskNum > tasks.size() || taskNum <= 0) {
+            throw new DukeTaskNumberOutOfBoundsException();
+        }
+
+        int taskIdx = taskNum - 1;
         Task taskToDelete = getTasks().get(taskIdx);
-        getTasks().remove(taskIdx);
+        tasks.remove(taskIdx);
         return ("Noted. I've removed this task:\n\t" + taskToDelete + "\n\tNow you have " + tasks.size()
                 + " tasks in the list.\n");
     }
@@ -80,18 +85,18 @@ public class TaskList {
      * numbers separated by spaces.
      *
      * @param taskNums the task numbers to delete
-     * @throws DukeFileNotFoundException if file not found
+     * @throws DukeTaskNumberOutOfBoundsException if task number not within range
      */
-    private static String deleteTasks(int[] taskNums) throws DukeFileNotFoundException {
+    private static String deleteTasks(int[] taskNums) throws DukeTaskNumberOutOfBoundsException {
         if (taskNums.length == 1) {
             return deleteSingleTask(taskNums[0]);
         }
 
+        assert taskNums.length > 1;
         Arrays.sort(taskNums);
 
         // Delete from the end of the list so we don't run into indexing errors
         for (int i = taskNums.length - 1; i >= 0; i--) {
-            System.out.println(i);
             deleteSingleTask(taskNums[i]);
         }
 
@@ -102,22 +107,17 @@ public class TaskList {
     /**
      * Gets the task number in the list.
      * 
-     * @param command Command to extract task number from.
-     * @return Task number.
+     * @param command Command to extract task number from
+     * @return Task number
      * @throws DukeInvalidTaskNumberFormatException if task number not an integer
-     * @throws DukeTaskNumberOutOfBoundsException   if task number not valid
      */
-    private static int[] getTaskNums(String command)
-            throws DukeInvalidTaskNumberFormatException, DukeTaskNumberOutOfBoundsException {
+    private static int[] getTaskNums(String command) throws DukeInvalidTaskNumberFormatException {
         try {
             String[] splitCommand = command.split(" ");
             String[] taskNums = Arrays.copyOfRange(splitCommand, 1, splitCommand.length);
             return Arrays.stream(taskNums).mapToInt(Integer::parseInt).toArray();
         } catch (NumberFormatException err) {
-            System.out.println(err.getMessage());
             throw new DukeInvalidTaskNumberFormatException();
-        } catch (IndexOutOfBoundsException err) {
-            throw new DukeTaskNumberOutOfBoundsException();
         }
     }
 
@@ -127,8 +127,8 @@ public class TaskList {
      * @param command user input to parse
      * @throws DukeTaskNotFoundException if task not specified
      */
-    public static String handleDelete(String command) throws DukeTaskNotFoundException,
-            DukeInvalidTaskNumberFormatException, DukeTaskNumberOutOfBoundsException, DukeFileNotFoundException {
+    public static String handleDelete(String command)
+            throws DukeTaskNotFoundException, DukeInvalidTaskNumberFormatException, DukeTaskNumberOutOfBoundsException {
         if (command.equals("delete")) {
             throw new DukeTaskNotFoundException();
         }
@@ -144,25 +144,23 @@ public class TaskList {
      * @throws DukeTaskNotFoundException            if task not specified
      * @throws DukeInvalidTaskNumberFormatException if task is not an integer
      * @throws DukeTaskNumberOutOfBoundsException   if task number not valid
-     * @throws DukeFileNotFoundException            if file not found
      */
-    public static String handleDone(String command) throws DukeTaskNotFoundException,
-            DukeInvalidTaskNumberFormatException, DukeTaskNumberOutOfBoundsException, DukeFileNotFoundException {
+    public static String handleDone(String command)
+            throws DukeTaskNotFoundException, DukeInvalidTaskNumberFormatException, DukeTaskNumberOutOfBoundsException {
         if (command.equals("done")) {
             throw new DukeTaskNotFoundException();
         }
 
-        int[] taskNum = getTaskNums(command);
-        return completeTask(taskNum[0]);
+        int[] taskNums = getTaskNums(command);
+        return completeTask(taskNums[0]);
     }
 
     /**
      * Adds a task to the ArrayList of tasks.
      *
      * @param t the task to add
-     * @throws DukeFileNotFoundException if file not found
      */
-    private static String addTask(Task t) throws DukeFileNotFoundException {
+    private static String addTask(Task t) {
         TaskList.getTasks().add(t);
         return ("Got it. I've added this task:\n\t" + t + "\n\tNow you have " + tasks.size() + " tasks in the list.\n");
     }
@@ -172,9 +170,8 @@ public class TaskList {
      *
      * @param command user input to extract task
      * @throws DukeTaskNotFoundException if task not specified
-     * @throws DukeFileNotFoundException if file not found
      */
-    public static String addToDo(String command) throws DukeTaskNotFoundException, DukeFileNotFoundException {
+    public static String addToDo(String command) throws DukeTaskNotFoundException {
         if (command.equals("todo")) {
             throw new DukeTaskNotFoundException();
         }
@@ -194,7 +191,8 @@ public class TaskList {
             throw new DukeException("You need to specify which event you want to add!\n");
         }
 
-        String eventDetails = command.substring(6);
+        final int eventStartIdx = 6;
+        String eventDetails = command.substring(eventStartIdx);
         String[] commandSplit = splitCommand(eventDetails, "/at"); // "taskName /at datetime"
         String task = getTask(commandSplit);
         String dateTime = getDateTime(commandSplit); // dateTime is the 2nd part of the command
@@ -212,7 +210,8 @@ public class TaskList {
             throw new DukeException("You need to specify which deadline you want to add!\n");
         }
 
-        String taskDetails = command.substring(9);
+        final int deadlineStartIdx = 9;
+        String taskDetails = command.substring(deadlineStartIdx);
         String[] commandSplit = splitCommand(taskDetails, "/by");
         String task = getTask(commandSplit);
         String dateTime = getDateTime(commandSplit);
@@ -236,7 +235,7 @@ public class TaskList {
     private static String[] splitCommand(String command, String by) throws DukeException {
         String[] commandSplit = command.split(by);
 
-        // If cannot split the command, throw an exception
+        // If cannot split the command
         if (commandSplit.length <= 1) {
             throw new DukeException("You need to provide a date/time!" + "\n");
         }
@@ -264,6 +263,7 @@ public class TaskList {
      * @return the datetime in String format
      */
     private static String getDateTime(String[] commandSplit) {
+        assert commandSplit.length > 1;
         return commandSplit[1].trim(); // Get the 2nd part of the command
     }
 
