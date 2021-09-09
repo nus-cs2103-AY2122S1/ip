@@ -1,6 +1,10 @@
 package duke.command;
 
-import duke.*;
+import duke.History;
+import duke.ResponseFormatter;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 public class ByeCommand extends Command {
     public static final String COMMAND = "Bye!";

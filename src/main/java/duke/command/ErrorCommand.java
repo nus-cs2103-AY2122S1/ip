@@ -1,6 +1,11 @@
 package duke.command;
 
-import duke.*;
+import duke.History;
+import duke.ResponseFormatter;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 
 public class ErrorCommand extends Command {
     private String error;

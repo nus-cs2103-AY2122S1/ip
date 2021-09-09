@@ -3,8 +3,12 @@ package duke.command;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import duke.*;
-import duke.task.Deadline;
+import duke.History;
+import duke.ResponseFormatter;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 import duke.task.Task;
 import duke.task.Todo;
 

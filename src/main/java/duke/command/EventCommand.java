@@ -4,10 +4,14 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import duke.*;
-import duke.task.Deadline;
-import duke.task.Event;
+import duke.History;
+import duke.ResponseFormatter;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 import duke.task.Task;
+import duke.task.Event;
 
 
 public class EventCommand extends Command {
