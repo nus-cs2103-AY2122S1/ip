@@ -2,7 +2,17 @@ plugins {
     id 'java'
     id 'checkstyle'
     id 'application'
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
 }
+
+// Output to build/libs/duke.jar
+shadowJar {
+    archiveBaseName.set('duke')
+    archiveClassifier.set('')
+    archiveVersion.set('')
+}
+
+mainClassName = "duke.Launcher"
 
 checkstyle {
     toolVersion = '8.29'
