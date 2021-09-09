@@ -3,6 +3,8 @@ package parser;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import model.Tag;
 import task.Deadline;
@@ -63,10 +65,8 @@ public class Parser {
         }
 
         if (!tagsArr[0].equals("None")) {
-            for (int i = 0; i < tagsArr.length; i++) {
-                String tag = tagsArr[i];
-                eventTask.addTag(new Tag(tag));
-            }
+            List<Tag> tagsList = Parser.decodeTags(tagsArr);
+            Parser.addTags(tagsList, eventTask);
         }
         return eventTask;
     }
@@ -101,10 +101,8 @@ public class Parser {
         }
 
         if (!tagsArr[0].equals("None")) {
-            for (int i = 0; i < tagsArr.length; i++) {
-                String tag = tagsArr[i];
-                deadlineTask.addTag(new Tag(tag));
-            }
+            List<Tag> tagsList = Parser.decodeTags(tagsArr);
+            Parser.addTags(tagsList, deadlineTask);
         }
         return deadlineTask;
     }
@@ -137,10 +135,9 @@ public class Parser {
 
         String[] tagsArr = Parser.sanitizeInput(new String(Base64.getDecoder().decode(dataArr[3])));
         if (!tagsArr[0].equals("None")) {
-            for (int i = 0; i < tagsArr.length; i++) {
-                String tag = tagsArr[i];
-                todoTask.addTag(new Tag(tag));
-            }
+
+            List<Tag> tagsList = Parser.decodeTags(tagsArr);
+            Parser.addTags(tagsList, todoTask);
         }
         return todoTask;
     }
@@ -159,6 +156,13 @@ public class Parser {
                 .encodeToString(task.getTags().getBytes());
     }
 
+    public static List<Tag> decodeTags(String[] tagsArr) {
+        List<Tag> tagsList = Arrays.stream(tagsArr).map(tagStr -> {
+            return new Tag(tagStr);
+        }).collect(Collectors.toList());
+        return tagsList;
+    }
+
     public static void addTag(Task task, String tag) {
         String tagContent = tag.substring(1);
         Tag currentTag = new Tag(tagContent);
@@ -170,6 +174,12 @@ public class Parser {
             for (int j = tagStart; j < inputArr.length; j++) {
                 Parser.addTag(task, inputArr[j]);
             }
+        }
+    }
+
+    public static void addTags(List<Tag> tagsList, Task task) {
+        for (Tag tag: tagsList) {
+            task.addTag(tag);
         }
     }
 
