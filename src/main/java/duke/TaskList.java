@@ -79,7 +79,6 @@ public class TaskList {
      */
     public void addNewTask(Task t) throws DukeException {
         String currTask = t.toString();
-        System.out.println(currTask);
         for (Task oldT : TASKLIST) {
             if (oldT.toString().contains(currTask)) {
                 throw new DukeException("\nDuplicate task! Please enter a unique task!!");
