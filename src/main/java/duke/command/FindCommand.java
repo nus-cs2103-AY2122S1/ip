@@ -16,16 +16,20 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList keywordTasks = new TaskList();
         for (String keyword : keywords) {
-            for (Task t : tasks.getTaskList()) {
-                if (!keywordTasks.getTaskList().contains(t)
-                        && t.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
-                    assert (keywordTasks.getListSize() <= tasks.getListSize())
-                            : "Task list found by find command should not be greater than original task list.";
-                    keywordTasks.addTask(t);
-                }
+            matchKeywordToTask(tasks, keywordTasks, keyword);
+        }
+        return ui.showTasksFound(keywordTasks);
+    }
+
+    private void matchKeywordToTask(TaskList tasks, TaskList keywordTasks, String keyword) {
+        for (Task t : tasks.getTaskList()) {
+            boolean isNotFound = !keywordTasks.getTaskList().contains(t);
+            boolean isMatch = t.getDescription().toLowerCase().contains(keyword.toLowerCase());
+            if (isNotFound && isMatch) {
+                assert (keywordTasks.getListSize() <= tasks.getListSize())
+                        : "Task list found by find command should not be greater than original task list.";
+                keywordTasks.addTask(t);
             }
         }
-
-        return ui.showTasksFound(keywordTasks);
     }
 }

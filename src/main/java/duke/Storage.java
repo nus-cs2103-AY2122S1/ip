@@ -7,11 +7,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.DukeException.MissingDescriptionException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
+
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file
@@ -35,19 +37,7 @@ public class Storage {
             FileWriter fw = new FileWriter(filePath);
             ArrayList<Task> taskList = tasks.getTaskList();
             for (Task task : taskList) {
-                String taskDetails;
-                String done = task.checkStatus() ? "1" : "0";
-                if (task instanceof Todo) {
-                    taskDetails = "T" + BAR + done + BAR + task.getDescription() + "\n";
-                } else if (task instanceof Deadline) {
-                    Deadline deadline = (Deadline) task;
-                    taskDetails = "D" + BAR + done + BAR + deadline.getDescription()
-                            + BAR + deadline.getBy() + "\n";
-                } else {
-                    Event event = (Event) task;
-                    taskDetails = "E" + BAR + done + BAR + event.getDescription()
-                            + BAR + event.getAt() + "\n";
-                }
+                String taskDetails = writeTaskDetails(task);
                 fw.write(taskDetails);
             }
             fw.close();
@@ -55,6 +45,23 @@ public class Storage {
             throw new DukeException("Unable to save your tasks");
         }
 
+    }
+
+    private String writeTaskDetails(Task task) {
+        String taskDetails;
+        String done = task.checkStatus() ? "1" : "0";
+        if (task instanceof Todo) {
+            taskDetails = "T" + BAR + done + BAR + task.getDescription() + "\n";
+        } else if (task instanceof Deadline) {
+            Deadline deadline = (Deadline) task;
+            taskDetails = "D" + BAR + done + BAR + deadline.getDescription()
+                    + BAR + deadline.getBy() + "\n";
+        } else {
+            Event event = (Event) task;
+            taskDetails = "E" + BAR + done + BAR + event.getDescription()
+                    + BAR + event.getAt() + "\n";
+        }
+        return taskDetails;
     }
 
     /**
@@ -67,22 +74,27 @@ public class Storage {
             File f = new File(filePath);
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
-                String[] taskFormat = s.nextLine().split(" \\| ");
-                Task t;
-                if (taskFormat[0].equals("T")) {
-                    t = new Todo(taskFormat[2]);
-                } else if (taskFormat[0].equals("D")) {
-                    t = new Deadline(taskFormat[2], taskFormat[3]);
-                } else {
-                    t = new Event(taskFormat[2], taskFormat[3]);
-                }
-                t.setDone(taskFormat[1].equals("1"));
+                Task t = readTaskDetails(s);
                 taskList.add(t);
             }
             return taskList;
         } catch (FileNotFoundException e) {
             throw new DukeException("Oops couldn't load your file :(");
         }
+    }
+
+    private Task readTaskDetails(Scanner s) throws MissingDescriptionException {
+        String[] taskFormat = s.nextLine().split(" \\| ");
+        Task t;
+        if (taskFormat[0].equals("T")) {
+            t = new Todo(taskFormat[2]);
+        } else if (taskFormat[0].equals("D")) {
+            t = new Deadline(taskFormat[2], taskFormat[3]);
+        } else {
+            t = new Event(taskFormat[2], taskFormat[3]);
+        }
+        t.setDone(taskFormat[1].equals("1"));
+        return t;
     }
 
     /**

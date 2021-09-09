@@ -7,7 +7,7 @@ package duke;
  */
 public class DukeException extends Exception {
     /**
-     * Creates a seedu.duke exception with the specified error message.
+     * Creates a duke exception with the specified error message.
      * @param errorMessage The error message to display when the error is encountered.
      */
     public DukeException(String errorMessage) {

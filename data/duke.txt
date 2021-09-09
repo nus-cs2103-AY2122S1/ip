@@ -1,3 +1,0 @@
-T | 1 | aaa
-T | 0 | aa
-T | 0 | aaab
