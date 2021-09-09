@@ -34,6 +34,9 @@ public class AddCommand extends Command {
             String[] temp = description.split("at ", 2);
             task = new Task.Event(temp[0], false, temp[1]);
 
+        } else if (type.equals("within")) {
+            String[] temp = description.split("between | and ", 3);
+            task = new Task.Within(temp[0], false, temp[1], temp[2]);
         } else {
             throw new DukeException("Sorry, I don't understand what that means. :(");
         }

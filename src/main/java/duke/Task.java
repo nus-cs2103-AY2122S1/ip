@@ -2,6 +2,7 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
 /**
@@ -76,7 +77,7 @@ public class Task {
 
 
         /**
-         * Constructs Todo task
+         * Constructs Deadline task
          *
          * @param description Description for the task
          * @param status Completion status of task
@@ -119,7 +120,7 @@ public class Task {
         private LocalDate at;
 
         /**
-         * Constructs Todo task
+         * Constructs Event task
          *
          * @param description Description for the task
          * @param status Completion status of task
@@ -154,6 +155,60 @@ public class Task {
         @Override
         public String toString() {
             return "event" + " | " + (this.status ? "1" : "0") + " | " + this.description + " | " + this.at;
+        }
+
+    }
+
+    public static class Within extends Task {
+        private LocalDate firstDate;
+        private LocalDate secondDate;
+
+        /**
+         * Constructs Within task
+         *
+         * @param description Description for the task
+         * @param status Completion status of task
+         * @param firstDate Starting timeframe of task in YYYY-MM-DD format
+         * @param secondDate Ending timeframe of task in YYYY-MM-DD format
+         * @throws DukeException When date format is incorrect
+         */
+        public Within(String description, boolean status, String firstDate, String secondDate) throws DukeException {
+            super(description, status);
+            try {
+                this.firstDate = LocalDate.parse(firstDate, DateTimeFormatter.ISO_LOCAL_DATE);
+                this.secondDate = LocalDate.parse(secondDate, DateTimeFormatter.ISO_LOCAL_DATE);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Please enter date in format YYYY-MM-DD");
+            }
+        }
+
+        @Override
+        public String getTaskType() {
+            return "[W]";
+        }
+
+        /**
+         * Returns description of task including date
+         *
+         * @return Description of task including date
+         */
+        @Override
+        public String getDescription() {
+            return super.getDescription() + "(between "
+                    + this.firstDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG))
+                    + " and "
+                    + this.secondDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) + ")";
+        }
+
+        /**
+         * Formats task information into String format to be saved onto storage
+         *
+         * @return String containing task info
+         */
+        @Override
+        public String toString() {
+            return "within" + " | " + (this.status ? "1" : "0") + " | " + this.description + " | "
+                    + this.firstDate + " | " + this.secondDate;
         }
 
     }

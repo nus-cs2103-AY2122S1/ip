@@ -45,6 +45,9 @@ public class Storage {
             case "event":
                 list.add(new Task.Event(data[2], data[1].equals("0") ? false : true, data[3]));
                 break;
+            case "within":
+                list.add(new Task.Within(data[2], data[1].equals("0") ? false : true, data[3], data[4]));
+                break;
             default:
                 throw new DukeException("Invalid input");
             }
