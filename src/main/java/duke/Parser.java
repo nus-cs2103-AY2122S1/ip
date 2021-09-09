@@ -138,28 +138,23 @@ public class Parser {
         Task task;
         switch (type) {
         case "todo":
-            if (splitString.length == 1) {
-                return new String[]{"OOPS!!! The description of a todo cannot be empty.\n"};
+            String[] splitTask = processTask(splitString);
+            if (splitTask.length == 1) {
+                return splitTask;
             }
-            task = new Todo(splitString[1]);
+            task = new Todo(splitTask[1]);
             break;
         case "deadline":
-            if (splitString.length == 1) {
-                return new String[]{"OOPS!!! The description of a deadline cannot be empty.\n"};
-            }
-            String[] splitDeadline = splitString[1].split(" /by ", 2);
+            String[] splitDeadline = processDeadline(splitString);
             if (splitDeadline.length == 1) {
-                return new String[]{"OOPS!!! The description or deadline can't be empty or it must be after a '/'"};
+                return splitDeadline;
             }
             task = new Deadline(splitDeadline[0], LocalDateTime.parse(splitDeadline[1], fmt));
             break;
         case "event":
-            if (splitString.length == 1) {
-                return new String[]{"OOPS! The description of an event cannot be empty.\n"};
-            }
-            String[] splitEvent = splitString[1].split(" /at ", 2);
+            String[] splitEvent = processEvent(splitString);
             if (splitEvent.length == 1) {
-                return new String[]{"\tOOPS!!! The description or duration can't be empty or it must be after a '/'"};
+                return splitEvent;
             }
             task = new Event(splitEvent[0], LocalDateTime.parse(splitEvent[1], fmt));
             break;
@@ -170,6 +165,35 @@ public class Parser {
         storage.write(task.save());
         return displayTasks();
     }
+
+    String[] processTask(String[] input) {
+        if (input.length == 1) {
+            return new String[]{"OOPS!!! The description of a todo cannot be empty.\n"};
+        }
+        return input;
+    }
+    String[] processDeadline(String[] input) {
+        if (input.length == 1) {
+            return new String[]{"OOPS!!! The description of a deadline cannot be empty.\n"};
+        }
+        String[] splitDeadline = input[1].split(" /by ", 2);
+        if (splitDeadline.length == 1) {
+            return new String[]{"OOPS!!! The description or deadline can't be empty or it must be after a '/'"};
+        }
+        return splitDeadline;
+    }
+    String[] processEvent(String[] input) {
+        if (input.length == 1) {
+            return new String[]{"OOPS! The description of an event cannot be empty.\n"};
+        }
+        String[] splitEvent = input[1].split(" /at ", 2);
+        if (splitEvent.length == 1) {
+            return new String[]{"\tOOPS!!! The description or duration can't be empty or it must be after a '/'"};
+        }
+        return splitEvent;
+    }
+
+
     private String[] displayTasks() {
         ArrayList<String> results = new ArrayList<>();
         results.add("\tGot it. I've added this task:\n\t\t" + tasks.get(tasks.size() - 1).toString()
