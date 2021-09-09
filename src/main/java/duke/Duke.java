@@ -41,6 +41,8 @@ public class Duke {
             return (this.isDone ? "X" : " "); // mark done task with X
         }
 
+        public String getDescription() {return this.description;}
+
         public void setDone(){
             this.isDone = true;
             System.out.println(this.toString());
@@ -371,6 +373,7 @@ public class Duke {
             System.out.println("Type in \"todo\", \"deadline\" or \"event\" and I will keep track of a task!");
             System.out.println("Type \"list\" to show all tasks so far");
             System.out.println("Type \"done\" to mark a task as done");
+            System.out.println("Type \"find\" to search for a task by keywords");
             System.out.println("Type \"bye\" to exit");
         }
 
@@ -607,17 +610,47 @@ public class Duke {
                     }
 
 
-                }
-                t = new Event(description, date, startTime, endTime, false);
-                ui.taskCreationSuccess(t);
-                list.add(t);
-                ui.showMessage("There are now " + list.getSize() + " tasks");
-                break;
 
-            default:
-                //invalid command
-                ui.showError("invalidCommand");
-                break;
+                }
+                    t = new Event(description, date, startTime, endTime, false);
+                    ui.taskCreationSuccess(t);
+                    list.add(t);
+                    ui.showMessage("There are now " + list.getSize() + " tasks");
+                    break;
+
+                case "find":
+                    if (list.getSize() == 0){
+                        ui.showMessage("Oops! There are no tasks to search for.");
+                        break;
+                    }
+
+                    ui.showMessage("Can Do! Please give me a string and "
+                                + "I'll return all tasks with descriptions containing that string!");
+
+                    String target;
+
+                    while (true){
+                        target = ui.readInput("What should I search for?");
+                        if (target.equals("")){
+                            ui.showError("emptyInput");
+                            continue;
+                        }
+                        break;
+                    }
+
+                    ui.showMessage("Ok! Here are the tasks that match your search!");
+                    for (int i = 0; i<list.getSize(); i++){
+                        Task task = list.getTask(i);
+                        if (task.getDescription().contains(target)){
+                            System.out.println(task);
+                        }
+                    }
+
+                    break;
+                default:
+                    //invalid command
+                    ui.showError("invalidCommand");
+                    break;
             }
 
         }
