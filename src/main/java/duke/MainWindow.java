@@ -1,5 +1,8 @@
 package duke;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,9 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -56,7 +56,9 @@ public class MainWindow extends AnchorPane {
         if (response == null) {
             // Solution below adapted from https://stackoverflow.com/a/21974490
             new Timer().schedule(new TimerTask() {
-                public void run () { System.exit(0); }
+                public void run () {
+                    System.exit(0);
+                }
             }, 200);
         }
         userInput.clear();
