@@ -9,7 +9,7 @@ import duke.ui.Ui;
  * Command to mark a task in the task list as done.
  *
  * @author Cheong Yee Ming
- * @version Duke Level-9
+ * @version Duke Level-10
  */
 public class DoneCommand extends Command {
     private final int taskNumber;
@@ -31,10 +31,12 @@ public class DoneCommand extends Command {
      * Executes runCommand. Marks the task as done,
      * prints a message to tell user that task has been marked as done
      * and update local data file.
+     *
+     * @return String representation when Duke successfully marks a task as done.
      */
     @Override
-    public void runCommand() throws NoSuchTaskException {
-        ui.taskDoneMessage(taskList.markAsDone(taskNumber));
+    public String runCommand() throws NoSuchTaskException {
         storage.save(taskList.getList());
+        return ui.guiTaskDoneMessage(taskList.markAsDone(taskNumber));
     }
 }

@@ -9,7 +9,7 @@ import duke.ui.Ui;
  * Command to add a task to the task list.
  *
  * @author Cheong Yee Ming
- * @version Duke Level-9
+ * @version Duke Level-10
  */
 public class AddCommand extends Command {
     private final Task task;
@@ -31,11 +31,13 @@ public class AddCommand extends Command {
      * Executes runCommand. Adds the task to the task list,
      * prints a message to tell user that task has been added
      * and update local data file.
+     *
+     * @return String representation when Duke successfully adds a task.
      */
     @Override
-    public void runCommand() {
+    public String runCommand() {
         taskList.addTask(task);
-        ui.taskAddedMessage(task, taskList.size());
         storage.save(taskList.getList());
+        return ui.guiTaskAddedMessage(task, taskList.size());
     }
 }

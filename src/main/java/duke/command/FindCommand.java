@@ -8,7 +8,7 @@ import duke.ui.Ui;
  * Command to search for tasks containing the keyword.
  *
  * @author Cheong Yee Ming
- * @version Duke Level-9
+ * @version Duke Level-10
  */
 public class FindCommand extends Command {
     private final String keyword;
@@ -29,9 +29,11 @@ public class FindCommand extends Command {
     /**
      * Executes command to print out
      * every task containing the keyword.
+     *
+     * @return String representation of tasks related to keyword.
      */
     @Override
-    public void runCommand() {
-        ui.printFindTask(taskList.findRelatedTask(keyword));
+    public String runCommand() {
+        return ui.getFindTask(taskList.findRelatedTask(keyword));
     }
 }

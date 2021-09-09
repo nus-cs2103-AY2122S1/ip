@@ -15,7 +15,7 @@ import duke.task.TaskList;
  * from the local directory.
  *
  * @author Cheong Yee Ming
- * @version Duke Level-9
+ * @version Duke Level-10
  */
 public class Storage {
 
@@ -82,7 +82,7 @@ public class Storage {
      * Saves tasks in TaskList to local directory.
      * Folder and file will be created if not already present.
      *
-     * @param taskList
+     * @param taskList List of task saved in local directory.
      */
     public void save(ArrayList<Task> taskList) {
         try {

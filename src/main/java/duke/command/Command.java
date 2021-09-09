@@ -9,7 +9,7 @@ import duke.ui.Ui;
  * Commands that can be executed by Duke.
  *
  * @author Cheong Yee Ming
- * @version Duke Level-9
+ * @version Duke Level-10
  */
 public abstract class Command {
     protected final TaskList taskList;
@@ -32,7 +32,8 @@ public abstract class Command {
     /**
      * Executes the command.
      *
+     * @return String representation of Duke's response.
      * @throws DukeException when an error occurs.
      */
-    public abstract void runCommand() throws DukeException;
+    public abstract String runCommand() throws DukeException;
 }

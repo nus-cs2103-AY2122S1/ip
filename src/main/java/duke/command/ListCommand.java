@@ -8,7 +8,7 @@ import duke.ui.Ui;
  * Command to list all tasks in the task list.
  *
  * @author Cheong Yee Ming
- * @version Duke Level-9
+ * @version Duke Level-10
  */
 public class ListCommand extends Command {
     /**
@@ -26,9 +26,11 @@ public class ListCommand extends Command {
      * Executes runCommand.
      * Prints the list of tasks in the task list
      * in order of addition to task list.
+     *
+     * @return String representation of list of tasks.
      */
     @Override
-    public void runCommand() {
-        ui.listTaskMessage(taskList);
+    public String runCommand() {
+        return ui.guiListTaskMessage(taskList);
     }
 }

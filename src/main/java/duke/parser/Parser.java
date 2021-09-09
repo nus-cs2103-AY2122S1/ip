@@ -31,7 +31,7 @@ import duke.ui.Ui;
  * respective commands.
  *
  * @author Cheong Yee Ming
- * @version Duke Level-9
+ * @version Duke Level-10
  */
 public class Parser {
     private final TaskList taskList;
@@ -124,7 +124,7 @@ public class Parser {
                     throw new NoTaskDescriptionException(ui);
                 }
                 try {
-                    LocalDateTime by = LocalDateTime.parse(commandDetails.substring(deadlineDetails.indexOf("by") + 3),
+                    LocalDateTime by = LocalDateTime.parse(commandDetails.substring(commandDetails.indexOf("by") + 3),
                             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
                     return new Deadline(deadlineDetails, false, by);
                 } catch (DateTimeParseException e) {
@@ -146,7 +146,7 @@ public class Parser {
                     throw new NoTaskDescriptionException(ui);
                 }
                 try {
-                    LocalDateTime at = LocalDateTime.parse(commandDetails.substring(eventDetails.indexOf("at") + 3),
+                    LocalDateTime at = LocalDateTime.parse(commandDetails.substring(commandDetails.indexOf("at") + 3),
                             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
                     return new Event(eventDetails, false, at);
                 } catch (DateTimeParseException e) {

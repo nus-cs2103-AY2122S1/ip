@@ -8,7 +8,7 @@ import duke.ui.Ui;
  * Command to exit the Duke program.
  *
  * @author Cheong Yee Ming
- * @version Duke Level-9
+ * @version Duke Level-10
  */
 public class ExitCommand extends Command {
     /**
@@ -26,10 +26,12 @@ public class ExitCommand extends Command {
      * Executes runCommand.
      * Prints a message to say good bye to user
      * and update local data file.
+     *
+     * @return String representation of farewell message
      */
     @Override
-    public void runCommand() {
-        ui.bye();
+    public String runCommand() {
         storage.save(taskList.getList());
+        return ui.guiBye();
     }
 }

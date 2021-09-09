@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.command.Command;
 import duke.command.ExitCommand;
 import duke.exception.DukeException;
@@ -14,55 +12,44 @@ import duke.ui.Ui;
  * Program to keep track of a list of tasks.
  *
  * @author Cheong Yee Ming
- * @version Duke Level-9
+ * @version Duke Level-10
  */
 public class Duke {
     private final TaskList taskList;
     private final Storage storage;
     private final Ui ui;
     private final Parser parser;
-
+    private boolean isActive;
     /**
      * Constructor for Duke.
      */
     public Duke() {
         taskList = new TaskList();
         storage = new Storage();
+        taskList.loadFromStorage(storage.load());
         ui = new Ui();
         parser = new Parser(taskList, storage, ui);
+        isActive = true;
     }
 
     /**
-     * Runs when bot is first initialised.
-     * Greets the user and loads data from local directory if present
-     * If not, local directory and local data file are created.
-     * Takes in user input and responds respectively.
+     * Response of Duke in string form.
+     *
+     * @param input The user's input
+     * @return A string of the response of Duke
      */
-    private void initiateSystem() {
-        taskList.loadFromStorage(storage.load());
-        ui.greet();
-        Scanner sc = new Scanner(System.in);
-        boolean isActive = true;
-
-        while (isActive) {
-            String userInput = sc.nextLine();
+    protected String getResponse(String input) {
+        if (isActive) {
             try {
-                Command command = parser.parseUserInput(userInput);
-                command.runCommand();
-                isActive = !(command instanceof ExitCommand);
+                Command command = parser.parseUserInput(input);
+                if (command instanceof ExitCommand) {
+                    isActive = false;
+                }
+                return command.runCommand();
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                return e.getMessage();
             }
         }
-        sc.close();
-    }
-
-    /**
-     * Main function for Duke program.
-     * @param args Null.
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.initiateSystem();
+        return "";
     }
 }

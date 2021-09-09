@@ -11,7 +11,7 @@ import duke.ui.Ui;
  * Handles all operations regarding tasks.
  *
  * @author Cheong Yee Ming
- * @version Duke Level-9
+ * @version Duke Level-10
  */
 public class TaskList {
 
@@ -77,7 +77,7 @@ public class TaskList {
      * @throws NoSuchTaskException If task index number does not exist.
      */
     public Task deleteTask(int taskNumber) throws NoSuchTaskException {
-        if (taskNumber < 0 || taskNumber >= list.size()) {
+        if (taskNumber < 0 || taskNumber > list.size()) {
             throw new NoSuchTaskException(new Ui());
         }
         return list.remove(taskNumber - 1);

@@ -7,7 +7,7 @@ package duke.task;
  * and the type of task.
  *
  * @author Cheong Yee Ming
- * @version Duke A-JavaDoc
+ * @version Duke Level-10
  */
 public abstract class Task {
     public final TaskType taskType;

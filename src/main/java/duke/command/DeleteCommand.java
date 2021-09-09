@@ -10,7 +10,7 @@ import duke.ui.Ui;
  * Command to remove a task from the task list.
  *
  * @author Cheong Yee Ming
- * @version Duke Level-9
+ * @version Duke Level-10
  */
 public class DeleteCommand extends Command {
     private final int taskNumber;
@@ -32,12 +32,14 @@ public class DeleteCommand extends Command {
      * Executes runCommand. Removes the task from the task list,
      * prints a message to tell user that task has been removed
      * and update local data file.
+     *
+     * @return String representation when Duke successfully deletes a task.
      */
     @Override
-    public void runCommand() throws NoSuchTaskException {
+    public String runCommand() throws NoSuchTaskException {
         Task deletedTask = taskList.deleteTask(taskNumber);
-        ui.taskDeletedMessage(deletedTask, taskList.size());
         storage.save(taskList.getList());
+        return ui.guiTaskDeletedMessage(deletedTask, taskList.size());
     }
 }
 
