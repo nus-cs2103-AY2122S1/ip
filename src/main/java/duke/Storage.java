@@ -33,18 +33,18 @@ public class Storage {
 
         Task task;
         switch (type) {
-        case "T":
-            task = new TodoTask(description);
-            break;
-        case "D":
-            task = new DeadlineTask(description, time);
-            break;
-        case "E":
-            task = new EventTask(description, time);
-            break;
-        default:
-            throw new DukeException("Incorrect Task Format!");
-        };
+            case "T":
+                task = new TodoTask(description);
+                break;
+            case "D":
+                task = new DeadlineTask(description, time);
+                break;
+            case "E":
+                task = new EventTask(description, time);
+                break;
+            default:
+                throw new DukeException("Incorrect Task Format!");
+        }
         if (isDone) {
             task.finishTask();
         }
