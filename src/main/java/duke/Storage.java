@@ -60,9 +60,9 @@ public class Storage {
      */
     public void save(TaskList list) {
         try {
-            File list_data = new File(filepath);
+            File listData = new File(filepath);
             Files.createDirectories(Paths.get("data/"));
-            FileWriter myWriter = new FileWriter(list_data);
+            FileWriter myWriter = new FileWriter(listData);
             myWriter.write(list.toString());
             myWriter.close();
         } catch (IOException e) {
