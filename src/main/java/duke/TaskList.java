@@ -72,12 +72,19 @@ public class TaskList {
             this.TASKLIST.get(currListLength - 1).markAsDone();
         }
     }
-
+    //Todo
     /**
-     * Method to add a new task to the task list.
+     * Method to add a new task to the task list. But prevents duplicate.
      * @param t takes in a task object
      */
-    public void addNewTask(Task t) {
+    public void addNewTask(Task t) throws DukeException {
+        String currTask = t.toString();
+        System.out.println(currTask);
+        for (Task oldT : TASKLIST) {
+            if (oldT.toString().contains(currTask)) {
+                throw new DukeException("\nDuplicate task! Please enter a unique task!!");
+            }
+        }
         this.TASKLIST.add(t);
     }
 
