@@ -1,10 +1,8 @@
 package duke.command;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import duke.task.Task;
 import duke.util.DukeConfig;
 import duke.util.DukeDB;
 import duke.util.DukeException;
@@ -34,7 +32,7 @@ public class HelpCommand implements DukeActions {
             + "5. delete_{taskId} to remove a particular task from the list\n"
             + "6. done_{taskId} to set a particular task to complete\n";
 
-            return Optional.of(helpString);
+        return Optional.of(helpString);
 
 
     }
