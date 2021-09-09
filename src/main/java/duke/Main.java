@@ -8,6 +8,8 @@
 package duke;
 
 import java.io.IOException;
+
+import duke.exceptions.DukeDataLoadException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -26,7 +28,7 @@ public class Main extends Application {
      *
      * @throws IOException If there are errors processing the file.
      */
-    public Main() throws IOException {
+    public Main() throws IOException, DukeDataLoadException {
     }
 
     /**

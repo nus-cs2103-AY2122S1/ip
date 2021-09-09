@@ -134,8 +134,6 @@ public class Command {
      */
     public String done(String userCommand, TaskList taskList) throws IOException, NotDoneRightException {
         Parser parser = new Parser(userCommand);
-        // Throws exception if there is error accessing the integer following "done"
-        // Marks the task as done and prints statements as proof
         int ref = parser.getSecondInteger(taskList.size()) - 1;
         Task task = taskList.get(ref);
 
