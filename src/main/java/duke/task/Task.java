@@ -6,7 +6,7 @@ import duke.util.Priority;
  * The class models tasks in real life.
  */
 public class Task implements Comparable<Task> {
-    protected final Priority DEFAULT_PRIORITY = Priority.MEDIUM;
+    final Priority DEFAULT_PRIORITY = Priority.MEDIUM;
 
     String content;
     boolean isDone;
@@ -20,7 +20,8 @@ public class Task implements Comparable<Task> {
      */
     public Task(String content) {
         this.content = content;
-        this.isDone = false;
+        isDone = false;
+        priority = DEFAULT_PRIORITY;
     }
 
 
@@ -47,7 +48,7 @@ public class Task implements Comparable<Task> {
      */
     public Task(String content, Priority priority) {
         this.content = content;
-        this.isDone = false;
+        isDone = false;
         this.priority = priority;
     }
 
@@ -71,7 +72,7 @@ public class Task implements Comparable<Task> {
      * Mark the task as done.
      */
     public void markDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
 
@@ -92,7 +93,7 @@ public class Task implements Comparable<Task> {
      * @return encoded task string
      */
     public String encode() {
-        return String.format("T %b %s", isDone, content);
+        return String.format("T %s %b %s", priority, isDone, content);
     }
 
 

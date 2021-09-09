@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
  * The class models an event which is a special type of task.
  */
 public class Event extends Task {
-    private final String ENCODE_STRING_FORMAT = "E %b %s /at %s %s";  // [type] [isDone] [description] /by [dateTime]
+    private final String ENCODE_STRING_FORMAT = "E %s %b %s /at %s %s";  // [type] [priority] [isDone] [description] /by [dateTime]
     private final String ENCODE_DATETIME_FORMAT = "yyyy/MM/dd HH:mm";
 
     private final String PRINT_STRING_FORMAT = "[E] [%s] [%s] %s (at: %s)";
@@ -81,6 +81,7 @@ public class Event extends Task {
      */
     public String encode() {
         return String.format(ENCODE_STRING_FORMAT,
+                priority,
                 isDone,
                 content,
                 startDateTime

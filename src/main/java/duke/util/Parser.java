@@ -34,11 +34,15 @@ public class Parser {
      * The method takes a user input and parse out all necessary parts needed
      * to execute user command and finally returns a Command object that can be executed
      *
-     * @param input             A line of user input
-     * @return                  A Command object which can then be called to execute user command
-     * @throws DukeException    When the input is empty String or the command is invalid
+     * @param input A line of user input
+     * @return A Command object which can then be called to execute user command
+     * @throws DukeException When the input is empty String or the command is invalid
      */
     public static Command parseCommand(String input) throws DukeException {
+        // todo {description} [-p {priority}]
+        // deadline {description} /by {yyyy/MM/dd} [{HH:mm}] -p {priority}
+        // event {description} /at {yyyy/MM/dd} {HH:mm} [{yyyy/MM/dd}] {HH:mm} -p {priority}
+
         String[] splitInput = input.strip().split(DEFAULT_DELIMITER);
         if (splitInput.length < 1) {
             throw new DukeException("The input cannot be empty!");
@@ -55,29 +59,40 @@ public class Parser {
         case "list":
             return new CommandList();
         case "todo": {
-            if (hasPriorityFlag(input)) {
-                Priority priority = parsePriority(splitInput);
-                return new CommandAdd(new Task(parseDescription(splitInput), priority));
+            int priorityFlagIndex = findIndex(splitInput, PRIORITY_FLAG);
+            String description = parseDescription(splitInput, priorityFlagIndex);
+
+            if (priorityFlagIndex != splitInput.length) {
+                Priority priority = parsePriority(splitInput, priorityFlagIndex);
+                return new CommandAdd(new Task(description, priority));
             }
 
-            return new CommandAdd(new Task(parseDescription(splitInput)));
+            return new CommandAdd(new Task(description));
         }
         case "deadline": {
-            String description = parseDescription(splitInput);
-            LocalDateTime dateTime = parseDeadlineDateTime(splitInput);
-            if (hasPriorityFlag(input)) {
-                Priority priority = parsePriority(splitInput);
+            int datetimeFlagIndex = findIndex(splitInput, DEADLINE_DATETIME_FLAG);
+            String description = parseDescription(splitInput, datetimeFlagIndex);
+            int priorityFlagIndex = findIndex(splitInput, PRIORITY_FLAG);
+            LocalDateTime dateTime = parseDeadlineDateTime(splitInput, datetimeFlagIndex, priorityFlagIndex);
+
+            if (priorityFlagIndex != splitInput.length) {
+                Priority priority = parsePriority(splitInput, priorityFlagIndex);
                 return new CommandAdd(new Deadline(description, dateTime, priority));
             }
+
             return new CommandAdd(new Deadline(description, dateTime));
         }
         case "event": {
-            String description = parseDescription(splitInput);
-            LocalDateTime[] dateTimes = parseEventDateTime(splitInput);
-            if (hasPriorityFlag(input)) {
-                Priority priority = parsePriority(splitInput);
+            int datetimeFlagIndex = findIndex(splitInput, DEADLINE_DATETIME_FLAG);
+            String description = parseDescription(splitInput, datetimeFlagIndex);
+            int priorityFlagIndex = findIndex(splitInput, PRIORITY_FLAG);
+            LocalDateTime[] dateTimes = parseEventDateTime(splitInput, datetimeFlagIndex, priorityFlagIndex);
+
+            if (priorityFlagIndex != splitInput.length) {
+                Priority priority = parsePriority(splitInput, priorityFlagIndex);
                 return new CommandAdd(new Event(description, dateTimes[0], dateTimes[1], priority));
             }
+
             return new CommandAdd(new Event(description, dateTimes[0], dateTimes[1]));
         }
         case "find": {
@@ -92,11 +107,31 @@ public class Parser {
 
 
     /**
+     * Returns the index of the flag.
+     * If not found, splitInput.length is returned.
+     *
+     * @param splitInput
+     * @param flag
+     * @return
+     */
+    private static int findIndex(String[] splitInput, String flag) {
+        int index = 0;
+        for (String str : splitInput) {
+            if (str.equals(flag)) {
+                break;
+            }
+            index++;
+        }
+        return index;
+    }
+
+
+    /**
      * Parse and return the task index of CommandDelete and CommandDone.
      *
-     * @param strArr            String array that contains split input string.
-     * @return                  Parsed index.
-     * @throws DukeException    When the index is missing from the input.
+     * @param strArr String array that contains split input string.
+     * @return Parsed index.
+     * @throws DukeException When the index is missing from the input.
      */
     public static int parseIndex(String[] strArr) throws DukeException {
         if (strArr.length < 2) {
@@ -109,17 +144,15 @@ public class Parser {
     /**
      * Parse and return the description of the task.
      *
-     * @param strArr            String array that contains split input string.
-     * @return                  description
-     * @throws DukeException    When the task description is missing from input.
+     * @param strArr String array that contains split input string.
+     * @return description
+     * @throws DukeException When the task description is missing from input.
      */
-    public static String parseDescription(String[] strArr) throws DukeException {
+    public static String parseDescription(String[] strArr, int stopIndex) throws DukeException {
         StringJoiner sj = new StringJoiner(DEFAULT_DELIMITER);
-        if (strArr.length >= 2 && !isDateTimeFlag(strArr[1])) {
-            sj.add(strArr[1]);
-        }
-        for (int i = 2; i < strArr.length; i++) {
-            if (isDateTimeFlag(strArr[i])) {
+
+        for (int i = 1; i < stopIndex; i++) {
+            if (isDateTimeFlag(strArr[i]) || isPriorityFlag(strArr[i])) {
                 break;
             }
             sj.add(strArr[i]);
@@ -140,20 +173,16 @@ public class Parser {
     }
 
 
-    private static LocalDateTime parseDeadlineDateTime(String[] strArr) throws DukeException {
-        int i = 1;
-        while (!isDateTimeFlag(strArr[i]) && i < strArr.length) {
-            i++;
-        }
-        if (i == strArr.length - 1) {
+    private static LocalDateTime parseDeadlineDateTime(String[] strArr, int startIndex, int stopIndex) throws DukeException {
+        if (startIndex == strArr.length - 1) {
             throw new DukeException("The time of deadline cannot be empty");
         }
 
         // format should be "yyyy/MM/dd" or "yyyy/MM/dd HH:mm"
-        String dateStr = strArr[i + 1];
+        String dateStr = strArr[startIndex + 1];
         String timeStr = DEFAULT_TIME_STRING;
-        if (strArr.length - i - 1 >= 2) {
-            timeStr = strArr[i + 2];
+        if (stopIndex - startIndex > 2) {
+            timeStr = strArr[startIndex + 2];
         }
 
         try {
@@ -166,26 +195,22 @@ public class Parser {
     }
 
 
-    private static LocalDateTime[] parseEventDateTime(String[] strArr) throws DukeException {
-        int i = 1;
-        while (!isDateTimeFlag(strArr[i]) && i < strArr.length) {
-            i++;
-        }
-        if (strArr.length - 1 - i < 3) {
-            throw new DukeException("Invalid start and end dateTime format");
+    private static LocalDateTime[] parseEventDateTime(String[] strArr, int startIndex, int stopIndex) throws DukeException {
+        if (stopIndex - startIndex < 4) {
+            throw new DukeException("Invalid start and end dateTime format: insufficient input");
         }
 
         // format should be "yyyy/MM/dd HH:mm yyyy/MM/dd HH:mm"
         // alternatively can be "yyyy-MM-dd HH:mm HH:mm"
-        String startDateStr = strArr[i + 1];
-        String startTimeStr = strArr[i + 2];
+        String startDateStr = strArr[startIndex + 1];
+        String startTimeStr = strArr[startIndex + 2];
         String endDateStr, endTimeStr;
-        if (strArr.length - 1 - i == 3) {
-            endDateStr = startDateStr;
-            endTimeStr = strArr[i + 3];
+        if (stopIndex - startIndex >= 5) {
+            endDateStr = strArr[startIndex + 3];
+            endTimeStr = strArr[startIndex + 4];
         } else {
-            endDateStr = strArr[i + 3];
-            endTimeStr = strArr[i + 4];
+            endDateStr = startDateStr;
+            endTimeStr = strArr[startIndex + 3];
         }
 
         try {
@@ -209,17 +234,14 @@ public class Parser {
     }
 
 
-    private static Priority parsePriority(String[] splitInput) throws DukeException {
-        int idx = 0;
-        for (String str : splitInput) {
-            idx++;
-            if (str.equals(PRIORITY_FLAG)) {
-                break;
-            }
-        }
+    private static Priority parsePriority(String[] splitInput, int flagIndex) throws DukeException {
+        assert flagIndex < splitInput.length - 1;
 
-        String priorityStr = splitInput[idx].toUpperCase();
+        String priorityStr = splitInput[flagIndex + 1].toUpperCase();
+        return strToPriority(priorityStr);
+    }
 
+    private static Priority strToPriority(String priorityStr) throws DukeException {
         switch(priorityStr) {
         case "H":
             return Priority.HIGH;
@@ -236,7 +258,7 @@ public class Parser {
      * Encodes the taskList to formatted string to be stored.
      *
      * @param tasks The taskList to be converted to formatted string.
-     * @return      Formatted string of the taskList.
+     * @return Formatted string of the taskList.
      */
     public static String encode(TreeSet<Task> tasks) {
         StringBuilder sb = new StringBuilder();
@@ -251,9 +273,9 @@ public class Parser {
      * Decodes lines of strings to a taskList to be loaded by Duke.
      *
      * @param lines String array containing lines of strings to be decoded.
-     * @return      A taskList that contains decoded tasks.
+     * @return A taskList that contains decoded tasks.
      */
-    public static TreeSet<Task> decode(String[] lines) {
+    public static TreeSet<Task> decode(String[] lines) throws DukeException {
         TreeSet<Task> tasks = new TreeSet<>();
         for (String line : lines) {
             String type = line.substring(0, 1);
@@ -282,9 +304,10 @@ public class Parser {
     }
 
 
-    private static Event decodeEvent(String line) {
+    private static Event decodeEvent(String line) throws DukeException {
         String[] strArr = line.split(DEFAULT_DELIMITER);
-        boolean isDone = Boolean.parseBoolean(strArr[1]);
+        Priority priority = strToPriority(strArr[1]);
+        boolean isDone = Boolean.parseBoolean(strArr[2]);
 
         StringJoiner descriptionSj = new StringJoiner(DEFAULT_DELIMITER);
         StringJoiner dateTimeSj = new StringJoiner(DEFAULT_DELIMITER);
@@ -311,13 +334,14 @@ public class Parser {
                 .parse(String.format("%s %s", dateTimes[2], dateTimes[3]),
                         DateTimeFormatter.ofPattern(EVENT_DATETIME_FORMAT));
 
-        return new Event(description, isDone, startDateTime, endDateTime);
+        return new Event(description, isDone, startDateTime, endDateTime, priority);
     }
 
 
-    private static Deadline decodeDeadline(String line) {
+    private static Deadline decodeDeadline(String line) throws DukeException {
         String[] strArr = line.split(DEFAULT_DELIMITER);
-        boolean isDone = Boolean.parseBoolean(strArr[1]);
+        Priority priority = strToPriority(strArr[1]);
+        boolean isDone = Boolean.parseBoolean(strArr[2]);
 
         StringJoiner descriptionSj = new StringJoiner(DEFAULT_DELIMITER);
         StringJoiner dateTimeSj = new StringJoiner(DEFAULT_DELIMITER);
@@ -343,9 +367,10 @@ public class Parser {
     }
 
 
-    private static Task decodeTodo(String line) {
+    private static Task decodeTodo(String line) throws DukeException {
         String[] strArr = line.split(DEFAULT_DELIMITER);
-        boolean isDone = Boolean.parseBoolean(strArr[1]);
+        Priority priority = strToPriority(strArr[1]);
+        boolean isDone = Boolean.parseBoolean(strArr[2]);
 
         StringJoiner sj = new StringJoiner(DEFAULT_DELIMITER);
         for (int i = 2; i < strArr.length; i++) {
@@ -361,5 +386,11 @@ public class Parser {
         assert str != null;
 
         return str.equals(DEADLINE_DATETIME_FLAG) || str.equals(EVENT_DATETIME_FLAG);
+    }
+
+    private static boolean isPriorityFlag(String str) {
+        assert str != null;
+
+        return str.equals(PRIORITY_FLAG);
     }
 }

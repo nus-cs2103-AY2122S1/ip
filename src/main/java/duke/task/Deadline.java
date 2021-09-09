@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
  * The class models a deadline which is a special type of task.
  */
 public class Deadline extends Task {
-    private final String ENCODE_STRING_FORMAT = "D %b %s /by %s";  // [type] [isDone] [description] /by [dateTime]
+    private final String ENCODE_STRING_FORMAT = "D %s %b %s /by %s";  // [type] [priority] [isDone] [description] /by [dateTime]
     private final String ENCODE_DATETIME_FORMAT = "yyyy/MM/dd HH:mm";
 
     private final String PRINT_STRING_FORMAT = "[D] [%s] [%s] %s (by: %s)";
@@ -85,6 +85,7 @@ public class Deadline extends Task {
      */
     public String encode() {
         return String.format(ENCODE_STRING_FORMAT,
+                priority,
                 isDone,
                 content,
                 dateTime.format(DateTimeFormatter.ofPattern(ENCODE_DATETIME_FORMAT))
