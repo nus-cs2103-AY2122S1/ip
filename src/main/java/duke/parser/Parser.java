@@ -1,14 +1,30 @@
 package duke.parser;
 
-import duke.command.*;
-import duke.exception.*;
-import duke.storage.Storage;
-import duke.task.*;
-import duke.ui.Ui;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.DukeCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.exception.DukeException;
+import duke.exception.InvalidDateTimeException;
+import duke.exception.NoCommandDescriptionException;
+import duke.exception.NoDateTimeException;
+import duke.exception.UnknownCommandException;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
+import duke.ui.Ui;
+
+
 
 /**
  * Encapsulates the processing of user inputs to duke.
@@ -50,26 +66,26 @@ public class Parser {
 
         if (checkDescriptionExist(commandDescription, commandType)) {
             switch (commandType) {
-                case "list":
-                    return new ListCommand(ui, storage, list);
+            case "list":
+                return new ListCommand(ui, storage, list);
 
-                case "bye":
-                    return new ExitCommand(ui, storage, list);
+            case "bye":
+                return new ExitCommand(ui, storage, list);
 
-                case "done":
-                    return new DoneCommand(ui, storage, list, getTaskNumber(commandDescription));
+            case "done":
+                return new DoneCommand(ui, storage, list, getTaskNumber(commandDescription));
 
-                case "todo": case "deadline": case "event":
-                    return new AddCommand(ui, storage, list, processTaskDescriptions(commandType, userInput));
+            case "todo": case "deadline": case "event":
+                return new AddCommand(ui, storage, list, processTaskDescriptions(commandType, userInput));
 
-                case "delete":
-                    return new DeleteCommand(ui, storage, list, getTaskNumber(commandDescription));
+            case "delete":
+                return new DeleteCommand(ui, storage, list, getTaskNumber(commandDescription));
 
-                case "find":
-                    return new FindCommand(ui, storage, list, commandDescription);
+            case "find":
+                return new FindCommand(ui, storage, list, commandDescription);
 
-                default:
-                    throw new UnknownCommandException();
+            default:
+                throw new UnknownCommandException();
             }
         }
         throw new NoCommandDescriptionException();
@@ -77,15 +93,14 @@ public class Parser {
 
     private Task processTaskDescriptions(String taskType, String userInput) throws InvalidDateTimeException,
             NoDateTimeException, NoCommandDescriptionException {
-
         if (checkDescriptionExist(userInput, taskType)) {
             String commandDescription = getCommandDescription(userInput, " ");
             switch (taskType) {
-                case "deadline": case "event":
-                    return createTaskWithDateTime(commandDescription, taskType);
+            case "deadline": case "event":
+                return createTaskWithDateTime(commandDescription, taskType);
 
-                default:
-                    return new ToDo(commandDescription, false);
+            default:
+                return new ToDo(commandDescription, false);
             }
         }
         throw new NoCommandDescriptionException();
@@ -95,7 +110,8 @@ public class Parser {
         return userInput.split(" ")[0];
     }
 
-    private boolean checkDescriptionExist(String commandDescription, String commandType) throws NoCommandDescriptionException {
+    private boolean checkDescriptionExist(String commandDescription, String commandType)
+            throws NoCommandDescriptionException {
         if (!(commandType.equals("list") || commandType.equals("bye"))) {
             if (commandDescription.isBlank()) {
                 throw new NoCommandDescriptionException();
@@ -104,12 +120,13 @@ public class Parser {
         return true;
     }
 
-    private Task createTaskWithDateTime(String commandDescription, String taskType) throws NoDateTimeException, InvalidDateTimeException {
+    private Task createTaskWithDateTime(String commandDescription, String taskType) throws NoDateTimeException,
+            InvalidDateTimeException {
         LocalDateTime dt = getDateTime(commandDescription, taskType);
         String taskDescription = getTaskDescription(commandDescription);
         if (taskType.equals("deadline")) {
             return new Deadline(taskDescription, false, dt);
-        } else{
+        } else {
             return new Event(taskDescription, false, dt);
         }
 
@@ -133,11 +150,12 @@ public class Parser {
         return Integer.parseInt(commandDescription.split(" ")[0]);
     }
 
-    private LocalDateTime getDateTime(String taskDescription, String taskType) throws NoDateTimeException, InvalidDateTimeException {
+    private LocalDateTime getDateTime(String taskDescription, String taskType) throws NoDateTimeException,
+            InvalidDateTimeException {
         String indicator;
         if (taskType.equals("deadline")) {
             indicator = "/by";
-        } else{
+        } else {
             indicator = "/at";
         }
 
