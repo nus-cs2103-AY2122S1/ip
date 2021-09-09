@@ -66,7 +66,7 @@ public class Deadline extends Task {
      *
      * @return Date and Time (if applicable) as String
      */
-    private String getDateTimeFormatted() {
+    public String getDateTimeFormatted() {
         return hasTime
                 ? this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a"))
                 : this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));

@@ -85,6 +85,18 @@ public class Parser {
         } else if (commandList[0].equals("find")) {
             //If input starts with todos, add that to list
             taskList.findTask(command, ui);
+        } else if (commandList[0].equals("tag")) {
+            //If input starts with todos, add that to list
+            taskList.tagTask(command, ui);
+            storage.saveMemory(taskList.getList());
+        } else if (commandList[0].equals("untag")) {
+            //If input starts with todos, add that to list
+            taskList.untagTask(command, ui);
+            storage.saveMemory(taskList.getList());
+        } else if (commandList[0].equals("list")) {
+            //If input starts with todos, add that to list
+            taskList.listTagTask(command, ui);
+            storage.saveMemory(taskList.getList());
         } else {
             // Else Invalid
             throw new WhoBotException("Oops, That's an invalid command."

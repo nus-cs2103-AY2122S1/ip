@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import whobot.main.WhoBotException;
@@ -18,6 +19,8 @@ import whobot.task.Todo;
  * Class to Maintain the Storage File
  */
 public class Storage {
+
+    private static final String NO_TAG = "Others";
 
     /** Name of storage file */
     private String filename;
@@ -54,7 +57,7 @@ public class Storage {
      * @param list the task list to store tasks in
      * @throws WhoBotException if file could not be read
      */
-    public void readData(ArrayList<Task> list) throws WhoBotException {
+    public void readData(ArrayList<Task> list, HashMap<String, ArrayList<Task>> taggedList) throws WhoBotException {
         try {
             Scanner taskReader = new Scanner(taskFile);
             while (taskReader.hasNextLine()) {
@@ -64,17 +67,44 @@ public class Storage {
                     if (data[1].equals("X")) {
                         tempTodo.markAsDone();
                     }
+                    if (data.length == 4) {
+                        if (!taggedList.containsKey(data[3])) {
+                            taggedList.put(data[3], new ArrayList<>());
+                        }
+                        taggedList.get(data[3]).add(tempTodo);
+                        tempTodo.setTag(data[3]);
+                    } else {
+                        taggedList.get(NO_TAG).add(tempTodo);
+                    }
                     list.add(tempTodo);
                 } else if (data[0].equals("D")) {
                     Deadline tempDeadline = new Deadline(data[2]);
                     if (data[1].equals("X")) {
                         tempDeadline.markAsDone();
                     }
+                    if (data.length == 4) {
+                        if (!taggedList.containsKey(data[3])) {
+                            taggedList.put(data[3], new ArrayList<>());
+                        }
+                        taggedList.get(data[3]).add(tempDeadline);
+                        tempDeadline.setTag(data[3]);
+                    } else {
+                        taggedList.get(NO_TAG).add(tempDeadline);
+                    }
                     list.add(tempDeadline);
                 } else if (data[0].equals("E")) {
                     Event tempEvent = new Event(data[2]);
                     if (data[1].equals("X")) {
                         tempEvent.markAsDone();
+                    }
+                    if (data.length == 4) {
+                        if (!taggedList.containsKey(data[3])) {
+                            taggedList.put(data[3], new ArrayList<>());
+                        }
+                        taggedList.get(data[3]).add(tempEvent);
+                        tempEvent.setTag(data[3]);
+                    } else {
+                        taggedList.get(NO_TAG).add(tempEvent);
                     }
                     list.add(tempEvent);
                 }
@@ -90,6 +120,7 @@ public class Storage {
     /***
      * Saves Task List to File
      *
+     *
      * @param list the task list to save
      * @throws WhoBotException if data could not be written
      */
@@ -99,18 +130,21 @@ public class Storage {
             for (Task tempTask : list) {
                 String type = tempTask.getType();
                 if (type.equals("T")) {
-                    dataWriter.write(type + " | " + tempTask.getStatusIcon().charAt(1) + " | " + tempTask.getTask());
+                    dataWriter.write(type + " | " + tempTask.getStatusIcon().charAt(1) + " | " + tempTask.getTask()
+                            + (tempTask.hasTag() ? (" | " + tempTask.getTag()) : ""));
                 } else if (type.equals("E")) {
                     Event tempEvent = (Event) tempTask;
                     dataWriter.write(type + " | " + tempTask.getStatusIcon().charAt(1) + " | " + tempTask.getTask()
-                            + " /at " + tempEvent.getTiming().format(DateTimeFormatter.ofPattern("d/M/yyyy HH:mm")));
+                            + " /at " + tempEvent.getTiming().format(DateTimeFormatter.ofPattern("d/M/yyyy HH:mm"))
+                            + (tempTask.hasTag() ? (" | " + tempTask.getTag()) : ""));
                 } else if (type.equals("D")) {
                     Deadline tempDeadline = (Deadline) tempTask;
                     dataWriter.write(type + " | " + tempTask.getStatusIcon().charAt(1) + " | " + tempTask.getTask()
                             + " /by "
                             + (tempDeadline.hasTime()
                                     ? tempDeadline.getDeadline().format(DateTimeFormatter.ofPattern("d/M/yyyy HH:mm"))
-                                    : tempDeadline.getDeadline().format(DateTimeFormatter.ofPattern("d/M/yyyy"))));
+                                    : tempDeadline.getDeadline().format(DateTimeFormatter.ofPattern("d/M/yyyy")))
+                            + (tempTask.hasTag() ? (" | " + tempTask.getTag()) : ""));
                 }
                 dataWriter.write("\n");
             }

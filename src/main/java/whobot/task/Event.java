@@ -37,7 +37,7 @@ public class Event extends Task {
      *
      * @return String containing the output format date and time
      */
-    private String getDateTimeFormatted() {
+    public String getDateTimeFormatted() {
         return this.timing.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a"));
     }
 

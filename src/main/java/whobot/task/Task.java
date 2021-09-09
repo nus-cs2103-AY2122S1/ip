@@ -11,6 +11,8 @@ public class Task implements Comparable<Task> {
     /** Whether Task is Done */
     private boolean isDone;
 
+    private String tag;
+
     /***
      * Constructor for Task Class
      *
@@ -18,7 +20,20 @@ public class Task implements Comparable<Task> {
      */
     public Task(String task) {
         this.description = task;
+        this.tag = "";
         this.isDone = false;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public boolean hasTag() {
+        return !tag.isBlank();
     }
 
     /***
