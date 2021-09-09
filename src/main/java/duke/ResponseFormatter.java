@@ -35,7 +35,7 @@ public class ResponseFormatter {
      */
     public String formatAdd(Task task, int taskLength) {
         return "added: " + task.toString() + "\n"
-                + "You have " + taskLength + " task(s) to go! (]＞＜)]";
+                + "You have " + taskLength + " task(s) to go! (]><)]";
     }
 
     /**
@@ -66,7 +66,7 @@ public class ResponseFormatter {
     public String formatDelete(String deletedTask, int listLength) {
         return "(￢_￢) Ok... This task has been deleted:\n"
                 + "deleted: " + deletedTask + "\n"
-                + "You have " + listLength + " task(s) to go! (]＞＜)]";
+                + "You have " + listLength + " task(s) to go! (]><)]";
     }
 
     /**
