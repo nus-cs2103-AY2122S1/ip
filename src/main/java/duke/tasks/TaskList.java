@@ -294,6 +294,14 @@ public class TaskList {
         return sb.toString();
     }
 
+    /**
+     * Sums all expenses up in one Task and returns the total as a formatted String.
+     *
+     * @param taskIndex task whose expenses are to be summed up.
+     * @return total expenses of that task in a formatted String.
+     * @throws EmptyListException if the task list is empty.
+     * @throws InvalidIndexException if the index given is out of bounds.
+     */
     public String sumExpense(int taskIndex) throws EmptyListException, InvalidIndexException {
         int taskListSize = taskList.size();
 
@@ -306,6 +314,12 @@ public class TaskList {
         return task.sumExpenseToString();
     }
 
+    /**
+     * Sums the total expenses in the entire task list and returns it as a formatted String.
+     *
+     * @return total expenses in the entire task list as a formatted String.
+     * @throws EmptyListException if the task list is empty.
+     */
     public String sumAllExpense() throws EmptyListException {
         int taskListSize = taskList.size();
 

@@ -172,24 +172,23 @@ public class Parser {
         } catch (StringIndexOutOfBoundsException e) {
             throw new MessageEmptyException();
         }
-        boolean isAllPresent = expense.matches("(?i)/listall");
-        boolean isSumAll = expense.matches("(/sumall)");
+        boolean isAllPresent = expense.matches("^(?i)(/listall)");
+        boolean isSumAll = expense.matches("^(?i)(/sumall)");
 
         if (isAllPresent) {
             return new ExpenseCommand(-1, "", 0, true, false);
         }
         if (isSumAll) {
-            System.out.println(expense);
             return new ExpenseCommand(true);
         }
 
         String[] parsedExpense = expense.split(" ");
         String indexAsString = parsedExpense[0];
 
-        boolean isDelete = expense.matches("([0-9]+)\\s+/delete\\s+([0-9]+)");
+        boolean isDelete = expense.matches("([0-9]+)\\s+(?i)/delete\\s+([0-9]+)");
         boolean isDisplay = expense.matches("([0-9]+)");
         boolean isAdd = expense.matches("([0-9]+)\\s+(\\w+)\\s+(\\$)([0-9]+)");
-        boolean isSum = expense.matches("([0-9])\\s/sum");
+        boolean isSum = expense.matches("([0-9]+)\\s(?i)/sum$");
 
         try {
             int endingIndexOfNumber = expense.indexOf(indexAsString) + indexAsString.length();
@@ -210,7 +209,7 @@ public class Parser {
             } else {
                 throw new InvalidExpenseFormatException();
             }
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new InvalidExpenseFormatException();
         }
     }

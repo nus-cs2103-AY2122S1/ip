@@ -25,11 +25,22 @@ public class ExpenseCommand extends Command {
     /** Amount spent. */
     private final float amount;
 
+    /** Boolean to check if the command is to list all expenses in task list. */
     private final boolean isList;
+
+    /** Boolean to check if the command is to delete an expense from a task. */
     private final boolean isDelete;
+
+    /** Boolean to check if the command is to display the expenses of a task. */
     private final boolean isDisplay;
+
+    /** Boolean to check if the command is to delete an expense of a task. */
     private final int deleteIndex;
+
+    /** Boolean to check if the command is to sum the expenses of a task. */
     private final boolean isSum;
+
+    /** Boolean to check if the command is to sum all expenses in the task list. */
     private final boolean isSumAll;
 
     /**
@@ -90,6 +101,12 @@ public class ExpenseCommand extends Command {
         isSumAll = false;
     }
 
+    /**
+     * Overloaded constructor for ExpenseCommand.
+     *
+     * @param taskIndex  index of task whose expenses are to be summed up.
+     * @param isSum flag to check if the command is to sum the expenses of a task.
+     */
     public ExpenseCommand(int taskIndex, boolean isSum) {
         this.taskIndex = taskIndex;
         deleteIndex = -1;
@@ -102,6 +119,11 @@ public class ExpenseCommand extends Command {
         isSumAll = false;
     }
 
+    /**
+     * Overloaded constructor for ExpenseCommand.
+     *
+     * @param isSumAll flag to check if the command is to sum all expenses in task list.
+     */
     public ExpenseCommand(boolean isSumAll) {
         taskIndex = -1;
         deleteIndex = -1;

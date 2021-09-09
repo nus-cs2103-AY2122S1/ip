@@ -132,6 +132,11 @@ public class Task {
         return sb.toString();
     }
 
+    /**
+     * Sums all expenses in the task and returns it in a formatted String message.
+     *
+     * @return total expenses in the task as a formatted String message.
+     */
     public String sumExpenseToString() {
         float total = 0;
         for (String purpose : expenses.keySet()) {
@@ -142,6 +147,11 @@ public class Task {
         return df.format(total) + " spent on " + this;
     }
 
+    /**
+     * Sums all expenses in the task.
+     *
+     * @return total expenses in the task.
+     */
     public float sumExpense() {
         float total = 0;
         for (String purpose : expenses.keySet()) {
