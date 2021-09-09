@@ -30,6 +30,7 @@ public class SetDoneCommand extends Command {
         }
         Task currTask = tasks.getTask(taskIndex);
         currTask.markAsDone();
+        assert currTask.getDoneStatus() : "Task should have been marked as done";
         storage.updateTasks(tasks);
         ui.showMarkedAsDone(currTask);
     }

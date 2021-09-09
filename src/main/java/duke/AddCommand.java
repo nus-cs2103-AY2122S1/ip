@@ -52,6 +52,7 @@ public class AddCommand extends Command {
             throw new DukeException("Invalid task type provided!");
         }
         tasks.addTask(newTask);
+        assert tasks.doesContain(newTask) : "Should have added new task into TaskList";
         storage.updateTasks(tasks);
         ui.showAddedNewTask(newTask, tasks);
     }

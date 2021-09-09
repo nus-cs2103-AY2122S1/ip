@@ -44,7 +44,7 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
-
+        assert f.exists() : "Data File should be present";
         Scanner s;
         try {
             s = new Scanner(f); // create a Scanner using the File as the source
@@ -52,7 +52,9 @@ public class Storage {
             throw new DukeException(e.getMessage());
         }
         ArrayList<Task> tasks = new ArrayList<>();
+        int count = 0;
         while (s.hasNext()) {
+            count++;
             String l = s.nextLine();
             String[] taskEntry = l.split("\\|");
             switch(taskEntry[0]) {
@@ -66,12 +68,13 @@ public class Storage {
                 tasks.add(new Event(taskEntry[2], LocalDate.parse(taskEntry[3])));
                 break;
             default:
-                throw new DukeException("Invalid duke.Task Type stored in Data File");
+                throw new DukeException("Invalid duke. Task Type stored in Data File");
             }
             if (taskEntry[1].equals("X")) {
                 tasks.get(tasks.size() - 1).markAsDone();
             }
         }
+        assert count == tasks.size() : "Should have the same number of tasks as lines in data file";
         return tasks;
     }
 

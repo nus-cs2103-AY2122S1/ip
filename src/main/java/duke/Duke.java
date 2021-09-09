@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 /**
  * The Duke Application.
  */
@@ -40,6 +42,7 @@ public class Duke extends Application {
             ui.showFullCommand(fullCommand);
             ui.clearInput();
             Command c = Parser.parse(fullCommand);
+            assert !Objects.isNull(c) : "Should always return a command, if no error thrown.";
             c.execute(tasks, storage, ui);
             if (c instanceof ExitCommand) {
                 Platform.exit();
