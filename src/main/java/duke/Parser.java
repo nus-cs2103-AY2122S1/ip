@@ -1,9 +1,11 @@
 package duke;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAdjusters;
 
 
 /**
@@ -74,7 +76,7 @@ public class Parser {
                 throw new DukeException(DukeException.Errors.INVALID_DATE.toString()
                         + " (example: 'deadline watch Borat /by 2021-08-21 18:00')");
             }
-            String date = parseDate(arguments[1]);
+            String date = parseDateTime(arguments[1]);
             return new String[] {commandStr, arguments[0], date};
 
         case EVENT:
@@ -91,7 +93,7 @@ public class Parser {
                 throw new DukeException(DukeException.Errors.INVALID_DATE.toString()
                         + " (example: 'event watch Borat /at 2021-08-21 18:00')");
             }
-            String dateTest = parseDate(args[1]);
+            String dateTest = parseDateTime(args[1]);
             return new String[] {commandStr, args[0], dateTest};
 
         case BYE:
@@ -164,38 +166,11 @@ public class Parser {
      * @return A string valid as a date.
      * @throws DukeException Thrown if the input is an invalid date.
      */
-    private String parseDate(String input) throws DukeException {
+    private String parseDateTime(String input) throws DukeException {
         assert input != null : "[duke.Parser.parseDate]: input parameter should not be null.";
-        String[] dateTime = input.split("\\s+");
-        int len = dateTime.length;
-        String formatPattern = "yyyy-MM-dd";
-        if (len < 1 || len > 2) {
-            throw new DukeException(DukeException.Errors.INVALID_DATE.toString());
-        }
-        String result = "";
-        if (dateTime[0].equals("today")) {
-            LocalDate date = LocalDate.now();
-            result += date.format(DateTimeFormatter.ofPattern(formatPattern));
-        } else if (dateTime[0].equals("tomorrow")) {
-            LocalDate date = LocalDate.now().plusDays(1);
-            result += date.format(DateTimeFormatter.ofPattern(formatPattern));
-        } else {
-            // Date
-            String[] date1 = dateTime[0].split("-");
-            String[] date2 = dateTime[0].split("/");
-            if (date1.length == 3 || date2.length == 3) {
-                result = date1.length == 3 ? stringToDate(date1) : stringToDate(date2);
-            } else {
-                throw new DukeException(DukeException.Errors.INVALID_DATE.toString());
-            }
-        }
 
-        // Parse given time.
-        if (dateTime.length == 2) {
-            result += "T" + stringToTime(dateTime[1]);
-        } else {
-            result += "T23:59";
-        }
+        String[] dateTime = input.split("\\s+");
+        String result = parseDate(dateTime) + parseTime(dateTime);
 
         // Test for validity
         try {
@@ -206,6 +181,98 @@ public class Parser {
         return result;
     }
 
+    /**
+     * Returns a parsed date as a String.
+     * @param dateTime String array of date and time.
+     * @return A parsed date as a string.
+     * @throws DukeException Thrown when date is invalid.
+     */
+    private String parseDate(String[] dateTime) throws DukeException {
+        String date = dateTime[0].toUpperCase();
+        String formatPattern = "yyyy-MM-dd";
+        String result = "";
+        LocalDate todayDate = LocalDate.now();
+        try {
+            switch (date) {
+            case "TODAY":
+                result += todayDate.format(DateTimeFormatter.ofPattern(formatPattern));
+
+                break;
+            case "TOMORROW":
+                LocalDate tomorrowDate = todayDate.plusDays(1);
+                result += tomorrowDate.format(DateTimeFormatter.ofPattern(formatPattern));
+
+                break;
+            case "MON":
+            case "MONDAY":
+                LocalDate nextMonday = todayDate.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
+                result += nextMonday.format(DateTimeFormatter.ofPattern(formatPattern));
+
+                break;
+            case "TUE":
+            case "TUESDAY":
+                LocalDate nextTuesday = todayDate.with(TemporalAdjusters.next(DayOfWeek.TUESDAY));
+                result += nextTuesday.format(DateTimeFormatter.ofPattern(formatPattern));
+
+                break;
+            case "WED":
+            case "WEDNESDAY":
+                LocalDate nextWednesday = todayDate.with(TemporalAdjusters.next(DayOfWeek.WEDNESDAY));
+                result += nextWednesday.format(DateTimeFormatter.ofPattern(formatPattern));
+
+                break;
+            case "THU":
+            case "THURSDAY":
+                LocalDate nextThursday = todayDate.with(TemporalAdjusters.next(DayOfWeek.THURSDAY));
+                result += nextThursday.format(DateTimeFormatter.ofPattern(formatPattern));
+
+                break;
+            case "FRI":
+            case "FRIDAY":
+                LocalDate nextFriday = todayDate.with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
+                result += nextFriday.format(DateTimeFormatter.ofPattern(formatPattern));
+
+                break;
+            case "SAT":
+            case "SATURDAY":
+                LocalDate nextSaturday = todayDate.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
+                result += nextSaturday.format(DateTimeFormatter.ofPattern(formatPattern));
+
+                break;
+            case "SUN":
+            case "SUNDAY":
+                LocalDate nextSunday = todayDate.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
+                result += nextSunday.format(DateTimeFormatter.ofPattern(formatPattern));
+
+                break;
+            default:
+                String[] date1 = date.split("-");
+                String[] date2 = date.split("/");
+                if (date1.length == 3 || date2.length == 3) {
+                    result = date1.length == 3 ? stringToDate(date1) : stringToDate(date2);
+                } else {
+                    throw new DukeException(DukeException.Errors.INVALID_DATE.toString());
+                }
+            }
+        } catch (Exception e) {
+            throw new DukeException(DukeException.Errors.INVALID_DATE.toString());
+        }
+        return result;
+    }
+
+    /**
+     * Returns a String representation of the parsed time.
+     * @param dateTime The String Array of date and time.
+     * @return The String representation of the parsed time.
+     * @throws DukeException Thrown when a time is invalid.
+     */
+    private String parseTime(String[] dateTime) throws DukeException {
+        if (dateTime.length == 2) {
+            return "T" + stringToTime(dateTime[1]);
+        } else {
+            return "T23:59";
+        }
+    }
 
     /**
      * Returns a valid time as a string.
