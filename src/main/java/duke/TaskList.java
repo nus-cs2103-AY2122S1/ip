@@ -52,7 +52,7 @@ public class TaskList {
         if (isValid) {
             return "Nice! This task is marked as done\n" + t.toString();
         } else {
-            return "";
+            return "Already Done!" + t.toString();
         }
     }
     public String delete(int index) {
