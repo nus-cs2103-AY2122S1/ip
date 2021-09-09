@@ -146,24 +146,6 @@ public class Duke {
                 break;
             }
             assert !output.equals(""): "Unable to generate response. Please try again.";
-            if (isUndoable) {
-                prevCommand = inputWords;
-            }
-                break;
-            case "delete":
-                int id = Integer.parseInt(inputWords[1]);
-                output = items.deleteItem(id);
-                storage.deleteFromFile(id);
-                break;
-            case "find":
-                output = items.findTask(task[0]);
-                break;
-            default:
-                output = "I don't recognise this command\n"
-                        + "Try 'list', 'todo', 'event', 'deadline', 'done', 'find' or 'bye'";
-                break;
-            }
-            assert !output.equals(""): "Unable to generate response. Please try again.";
             return output;
         } catch (Exception dukeException) {
             return dukeException.getMessage();
