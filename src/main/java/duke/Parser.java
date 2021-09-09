@@ -14,10 +14,6 @@ public class Parser {
         return this.command;
     }
 
-    public String firstPart() {
-        return this.twoPart[0];
-    }
-
     public int secondPartInInt() throws DukeException {
         try {
             return Integer.valueOf(this.twoPart[1]);
@@ -96,6 +92,14 @@ public class Parser {
 
     public boolean isDelete() {
         if (this.twoPart[0].equals("delete")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isFind() {
+        if (this.twoPart[0].equals("find")) {
             return true;
         } else {
             return false;

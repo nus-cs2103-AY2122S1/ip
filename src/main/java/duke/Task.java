@@ -9,8 +9,12 @@ public class Task {
         this.isDone = false;
     }
 
-    public String convertToFile() {
-        return this.description;
+    public boolean isKeyword(String keyword) {
+        if (this.description.contains(keyword)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public String getStatusIcon() {
