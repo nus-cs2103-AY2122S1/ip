@@ -17,7 +17,7 @@ public class Place {
     }
 
     /**
-     * String representation of the place.
+     * Returns the string representation of the place.
      *
      * @return the name of the place.
      */

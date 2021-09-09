@@ -33,58 +33,68 @@ public class Parser {
      * @throws DukeException exception thrown due to invalid command or file writing error.
      */
     public String parse(String input) throws DukeException {
-        Command command;
         String[] userInput = input.split(" ", 2);
+        Command command = parseInputToCommand(userInput[0]);
+        return executeCommand(command, userInput.length > 1 ? userInput[1] : null);
+    }
 
-        if (!userInput[0].equals(userInput[0].toLowerCase())) {
+    /**
+     * Checks and parses the input, returning a command of Command type.
+     *
+     * @param userInput of type string.
+     * @return command as given by user input.
+     * @throws DukeException exception converting user input into command.
+     */
+    private Command parseInputToCommand(String userInput) throws DukeException {
+        Command command;
+        if (!userInput.equals(userInput.toLowerCase())) {
             throw new DukeException(
-                    String.format("Please input command with lowercase! Did you mean %s?", userInput[0].toLowerCase()));
+                    String.format("Please input command with lowercase! Did you mean %s?", userInput.toLowerCase()));
         }
 
         try {
-            command = Command.valueOf(userInput[0].toUpperCase());
+            command = Command.valueOf(userInput.toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
-        String message;
+        return command;
+    }
+
+    /**
+     * Executes the command with the relevant arguments.
+     *
+     * @param command the command to execute.
+     * @param args the arguments to fill the command with.
+     * @return string response by system after command execution.
+     * @throws DukeException exception arising from failed execution.
+     */
+    private String executeCommand(Command command, String args) throws DukeException {
         switch (command) {
         case LIST:
-            message = tasks.print();
-            break;
+            return tasks.print();
         case SORT:
-            message = tasks.sort();
-            break;
+            return tasks.sort();
         case DONE:
-            message = setTaskDone(userInput);
-            break;
+            return setTaskDone(args);
         case TODO:
-            message = addTodo(userInput);
-            break;
+            return addTodo(args);
         case DEADLINE:
-            message = addDeadline(userInput);
-            break;
+            return addDeadline(args);
         case EVENT:
-            message = addEvent(userInput);
-            break;
+            return addEvent(args);
         case PERIOD:
-            message = addPeriod(userInput);
-            break;
+            return addPeriod(args);
         case PLACE:
-            message = addPlace(userInput);
-            break;
+            return addPlace(args);
         case DELETE:
-            message = deleteTask(userInput);
-            break;
+            return deleteTask(args);
         case FIND:
-            message = findTask(userInput);
-            break;
+            return findTask(args);
         case BYE:
-            message = Ui.sayBye();
-            break;
+            return Ui.sayBye();
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
-        return message;
     }
 
     /**
@@ -103,13 +113,13 @@ public class Parser {
     /**
      * Adds a todo task to the list of tasks.
      *
-     * @param userInput given by user.
+     * @param args given by user.
      * @return string to inform user of successful command.
      * @throws DukeException error when adding task.
      */
-    private String addTodo(String... userInput) throws DukeException {
+    private String addTodo(String args) throws DukeException {
         try {
-            return addTask(new Todo(userInput[1]));
+            return addTask(new Todo(args));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Todo description cannot be empty");
         }
@@ -118,14 +128,14 @@ public class Parser {
     /**
      * Adds a deadline task to the list of tasks.
      *
-     * @param userInput given by user.
+     * @param args given by user.
      * @return string to inform user of successful command.
      * @throws DukeException error when adding task.
      */
-    private String addDeadline(String... userInput) throws DukeException {
+    private String addDeadline(String args) throws DukeException {
         try {
-            String deadlineDescription = userInput[1].split(" /by ")[0];
-            String by = userInput[1].split(" /by ")[1];
+            String deadlineDescription = args.split(" /by ")[0];
+            String by = args.split(" /by ")[1];
             return addTask(new Deadline(deadlineDescription, by));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("duke.task.Deadline description and time by cannot be empty");
@@ -135,14 +145,14 @@ public class Parser {
     /**
      * Adds a event task to the list of tasks.
      *
-     * @param userInput given by user.
+     * @param args given by user.
      * @return string to inform user of successful command.
      * @throws DukeException error when adding task.
      */
-    private String addEvent(String... userInput) throws DukeException {
+    private String addEvent(String args) throws DukeException {
         try {
-            String eventDescription = userInput[1].split(" /at ")[0];
-            String by = userInput[1].split(" /at ")[1];
+            String eventDescription = args.split(" /at ")[0];
+            String by = args.split(" /at ")[1];
             return addTask(new Event(eventDescription, by));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Event description and time at cannot be empty");
@@ -152,15 +162,15 @@ public class Parser {
     /**
      * Adds a period task to the list of task.
      *
-     * @param userInput given by user.
+     * @param args given by user.
      * @return string to inform user of successful command.
      * @throws DukeException error when adding task.
      */
-    private String addPeriod(String... userInput) throws DukeException {
+    private String addPeriod(String args) throws DukeException {
         try {
-            String eventDescription = userInput[1].split(" /start ")[0];
-            String start = userInput[1].split(" /start ")[1].split(" /end ")[0];
-            String end = userInput[1].split(" /start ")[1].split(" /end ")[1];
+            String eventDescription = args.split(" /start ")[0];
+            String start = args.split(" /start ")[1].split(" /end ")[0];
+            String end = args.split(" /start ")[1].split(" /end ")[1];
             return addTask(new Period(eventDescription, start, end));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Period description and times cannot be empty");
@@ -170,18 +180,18 @@ public class Parser {
     /**
      * Adds a place to the list of tasks.
      *
-     * @param userInput given by user.
+     * @param args given by user.
      * @return string to inform user of successful command.
      * @throws DukeException error when adding place to task.
      */
-    public String addPlace(String... userInput) throws DukeException {
+    public String addPlace(String args) throws DukeException {
         try {
-            int i = Integer.parseInt(userInput[1].split(" /at ")[0]);
+            int i = Integer.parseInt(args.split(" /at ")[0]);
             Task task = tasks.get(i - 1);
             String taskWord = tasks.size() == 1
                     ? "task"
                     : "tasks";
-            task.addPlace(new Place(userInput[1].split(" /at ")[1]));
+            task.addPlace(new Place(args.split(" /at ")[1]));
             return Ui.print(String.format("Noted. I've added the place to the task:\n  "
                     + "%s\nNow you have %d %s in the list.", task, tasks.size(), taskWord));
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
@@ -192,13 +202,13 @@ public class Parser {
     /**
      * Deletes a task given it's index from the list of tasks.
      *
-     * @param userInput given by user.
+     * @param args given by user.
      * @return string to inform user of successful command.
      * @throws DukeException error when adding task.
      */
-    private String deleteTask(String... userInput) throws DukeException {
+    private String deleteTask(String args) throws DukeException {
         try {
-            int i = Integer.parseInt(userInput[1]);
+            int i = Integer.parseInt(args);
             Task task = tasks.get(i - 1);
             tasks.remove(i - 1);
             String taskWord = tasks.size() == 1
@@ -214,28 +224,28 @@ public class Parser {
     /**
      * Prints the tasks filtered by keyword.
      *
-     * @param userInput given by user.
+     * @param args given by user.
      * @return string to inform user of successful command.
      * @throws DukeException error when adding task.
      */
-    private String findTask(String... userInput) throws DukeException {
+    private String findTask(String args) throws DukeException {
         try {
-            return tasks.filter(userInput[1]).print("Here are the matching tasks in your list:");
+            return tasks.filter(args).print("Here are the matching tasks in your list:");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please enter something to find for!");
         }
     }
 
     /**
-     * Set i-th task to be done and prints confirmation message.
+     * Sets i-th task to be done and prints confirmation message.
      *
-     * @param userInput given by user.
+     * @param args given by user.
      * @return string to inform user of successful command.
      * @throws DukeException error when adding task.
      */
-    private String setTaskDone(String... userInput) throws DukeException {
+    private String setTaskDone(String args) throws DukeException {
         try {
-            int i = Integer.parseInt(userInput[1]);
+            int i = Integer.parseInt(args);
             Task task = tasks.get(i - 1);
             task.setDone();
             return Ui.print(String.format("Nice! I've marked this task as done:\n  %s", task.toString()));

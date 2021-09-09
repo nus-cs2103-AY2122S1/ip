@@ -67,7 +67,7 @@ public class TaskList {
     }
 
     /**
-     * String representation of the list of task.
+     * Returns the string representation of the list of task.
      *
      * @return String that represents the list of task.
      */
