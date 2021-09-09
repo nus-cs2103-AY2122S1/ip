@@ -71,6 +71,7 @@ public class MainWindow extends AnchorPane {
 
             }
         } else {
+            assert response.equals("") : "Response should be empty because duke is not active anymore";
             dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
         }
 
