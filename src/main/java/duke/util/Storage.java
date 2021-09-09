@@ -1,6 +1,7 @@
 package duke.util;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,6 +25,15 @@ public class Storage {
 	 * Constructs a new Storage object with the specified file path.
 	 */
 	public Storage(String filePath) {
+		// https://stackoverflow.com/questions/26239151/
+		File file = new File("data/duke.txt");
+		try {
+			file.getParentFile().mkdirs();	// Create data folder if not exists
+			file.createNewFile();			// Create data file if not exists
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+
 		this.filePath = filePath;
 	}
 
