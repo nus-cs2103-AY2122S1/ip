@@ -1,6 +1,6 @@
 # Duke: Task Manager for Dudes
 
-<div align="left">
+<div align="center">
    <img src="/docs/Duke.png" width=400/>
 </div>
 
