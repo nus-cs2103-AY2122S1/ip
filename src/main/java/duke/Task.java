@@ -86,6 +86,6 @@ public abstract class Task {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return isDone == task.isDone && Objects.equals(description, task.description);
+        return Objects.equals(description, task.description);
     }
 }

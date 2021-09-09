@@ -39,12 +39,34 @@ public class Parser {
                 } else if (input.contains("event") && input.length() == 5) {
                     throw new MissingEventDescriptionException();
                 } else {
-                    Task t = taskList.addItem(input);
+                    Task t;
+
+                    if (input.contains("todo")) {
+                        String description = input.substring(input.indexOf(' ') + 1);
+                        t = new ToDo(description);
+                    } else {
+                        String description = input.substring(input.indexOf(' ') + 1, input.lastIndexOf('/') - 1);
+                        String time = input.substring(input.lastIndexOf("/") + 4);
+                        if (input.contains("deadline")) {
+                            t = new Deadline(description, time);
+                        } else {
+                            t = new Event(description, time);
+                        }
+                    }
+
+                    if (taskList.contains(t)) {
+                        return userInterface.showDuplicateTaskMessage();
+                    }
+
+                    taskList.addItem(t);
                     storage.write();
                     return userInterface.showAddedTask(t, taskList);
                 }
             } else if (input.contains("delete")) {
                 int index = Integer.parseInt(input.split(" " )[1]) - 1;
+                if (index < 0 || index >= taskList.getSize()) {
+
+                }
                 Task t = taskList.deleteItem(index);
                 storage.write();
                 return userInterface.showDeletedTask(t, taskList);

@@ -3,3 +3,4 @@ T|1|eat
 T|0|eat again
 T|1|eat until sleep
 D|0|eat|2021-01-01
+T|0|eat
