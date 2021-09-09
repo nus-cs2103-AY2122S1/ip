@@ -64,4 +64,18 @@ public class TaskList {
         }
         return counter;
     }
+    public String taskCompetedPercentage(){
+        double totalTasks = list.size();
+        double completedTasks = 0;
+        double res;
+        for(Task task: this.list){
+            if(task.isDone){
+                completedTasks ++;
+            }
+        }
+        res = Math.round( completedTasks/totalTasks * 100);
+        System.out.println(completedTasks/totalTasks);
+        return Double.toString(res);
+    }
+
 }

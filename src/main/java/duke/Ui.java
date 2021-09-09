@@ -37,9 +37,11 @@ public class Ui {
     public String statsReponse(String item) {
         String output = "";
         List<Integer> distribution = taskList.taskDistribution();
+        String percentageCompleted = taskList.taskCompetedPercentage();
         output += distribution.get(0).toString() + " ToDos\n";
         output += distribution.get(1).toString() + " Deadlines\n";
         output += distribution.get(2).toString() + " Events\n";
+        output += percentageCompleted + "% done\n";
         return output;
     }
 
