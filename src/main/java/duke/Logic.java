@@ -25,30 +25,15 @@ public class Logic {
             if (command.equals("")) {
                 throw new EmptyCommandException();
             } else if (command.equals("bye")) {
-                Duke.stop();
-                DataHandlerLayer.updateHistory();
-                DataHandlerLayer.stopWriting();
-                return "See ya";
+                return processBye();
             } else if (listOfCommandInputs.size() == 1 && listOfCommandInputs.get(0).equals("list")) {
-                return DataHandlerLayer.getFilteredLog(a -> true);
+                return processList();
             } else if (listOfCommandInputs.contains("delete")) {
-                int position = Integer.parseInt(listOfCommandInputs.get(listOfCommandInputs.indexOf("delete") + 1));
-                DataHandlerLayer.delete(position);
-                DataHandlerLayer.updateHistory();
-                return "Cancel culture is real, even in this world";
+                return processDelete(packagedCommand, listOfCommandInputs, loggedCommand);
             } else if (listOfCommandInputs.contains("done")) {
-                int pos = Integer.parseInt(listOfCommandInputs.get(1));
-                if (pos > Task.getNumberOfTask()) {
-                    throw new InvalidCommandException();
-                }
-                Task currentTask = DataHandlerLayer.getTask(pos - 1);
-                currentTask.completeTask();
-                DataHandlerLayer.updateHistory();
-                return "Ohhhh myyyy. I have been waiting for this quest to complete for ages.";
+                return processDone(packagedCommand, listOfCommandInputs, loggedCommand);
             } else if (listOfCommandInputs.contains("find")) {
-                String temp = listOfCommandInputs.get(listOfCommandInputs.indexOf("find") + 1);
-                Function<Task, Boolean> findKeyword = a -> a.toString().contains(temp);
-                return DataHandlerLayer.getFilteredLog(findKeyword);
+                return processFind(packagedCommand, listOfCommandInputs, loggedCommand);
             } else {
                 processTask(packagedCommand, true);
                 return loggedCommand;
@@ -92,38 +77,12 @@ public class Logic {
         switch (packagedCommand.getTaskType()) {
         case TODO:
             tempTask = new Todo(loggedCommand);
-//            DataHandlerLayer.addToLog(tempTask);
-//            if (isWrittenToHistory) {
-//                DataHandlerLayer.appendToHistory(tempTodo);
-//            }
             break;
         case DEADLINE:
-            int indicatorDeadline = listOfCommandInputs.indexOf("/by");
-            String tempDeadlineString = new String();
-            String deadlineDate = listOfCommandInputs.get(indicatorDeadline + 1);
-            String deadlineTime = listOfCommandInputs.get(indicatorDeadline + 2);
-            String deadlineDateTime = deadlineDate + " " + deadlineTime;
-            for (int i = 0; i < indicatorDeadline; i++) {
-                tempDeadlineString = tempDeadlineString + listOfCommandInputs.get(i);
-            }
-
-            System.out.println(deadlineDateTime);
-            Deadline tempDeadLine = new Deadline(tempDeadlineString, Parser.convertToDateTime(deadlineDateTime));
-            DataHandlerLayer.addToLog(tempDeadLine);
-            if (isWrittenToHistory) {
-                DataHandlerLayer.appendToHistory(tempDeadLine);
-            }
+            processDeadline(packagedCommand, listOfCommandInputs, loggedCommand, isWrittenToHistory);
             break;
         case EVENT:
-            int indicatorEvent = listOfCommandInputs.indexOf("/at");
-            String date = listOfCommandInputs.get(indicatorEvent + 1);
-            String time = listOfCommandInputs.get(indicatorEvent + 2);
-            String dateTime = date + " " + time;
-            String temp = new String();
-            for (int i = 0; i < indicatorEvent; i++) {
-                temp = temp + listOfCommandInputs.get(i);
-            }
-            Event tempEvent = new Event(temp, Parser.convertToDateTime(dateTime));
+            processEvent(packagedCommand, listOfCommandInputs, loggedCommand, isWrittenToHistory);
             break;
         case NOTAPPLICABLE:
             throw new InvalidCommandException();
@@ -140,5 +99,85 @@ public class Logic {
 
         DataHandlerLayer.updateHistory();
         DataHandlerLayer.printHistory();
+    }
+
+    private static String processBye() {
+        Duke.stop();
+        DataHandlerLayer.updateHistory();
+        DataHandlerLayer.stopWriting();
+        return "See ya";
+    }
+
+    private static String processList() {
+        return DataHandlerLayer.getFilteredLog(a-> true);
+    }
+
+    private static String processDelete(Command packagedCommand,
+                                        ArrayList<String> listOfCommandInputs, String loggedCommand) {
+        int position = Integer.parseInt(listOfCommandInputs.get(listOfCommandInputs.indexOf("delete") + 1));
+        DataHandlerLayer.delete(position);
+        DataHandlerLayer.updateHistory();
+        return "Cancel culture is real, even in this world";
+    }
+
+    private static String processDone(Command packagedCommand, ArrayList<String> listOfCommandInputs,
+                                      String loggedCommand) throws InvalidCommandException {
+        int pos = Integer.parseInt(listOfCommandInputs.get(1));
+        if (pos > Task.getNumberOfTask()) {
+            throw new InvalidCommandException();
+        }
+        Task currentTask = DataHandlerLayer.getTask(pos - 1);
+        currentTask.completeTask();
+        DataHandlerLayer.updateHistory();
+        return "Ohhhh myyyy. I have been waiting for this quest to complete for ages.";
+    }
+
+    private static String processFind(Command packagedCommand,
+                                      ArrayList<String> listOfCommandInputs, String loggedCommand) {
+        String temp = listOfCommandInputs.get(listOfCommandInputs.indexOf("find") + 1);
+        Function<Task, Boolean> findKeyword = a -> a.toString().contains(temp);
+        return DataHandlerLayer.getFilteredLog(findKeyword);
+    }
+
+
+    private static void processDeadline(Command packagedCommand,
+                                        ArrayList<String> listOfCommandInputs,
+                                        String loggedCommand,
+                                        boolean isWrittenToHistory) throws InvalidCommandException {
+
+        int indicatorDeadline = listOfCommandInputs.indexOf("/by");
+        String tempDeadlineString = new String();
+        String deadlineDate = listOfCommandInputs.get(indicatorDeadline + 1);
+        String deadlineTime = listOfCommandInputs.get(indicatorDeadline + 2);
+        String deadlineDateTime = deadlineDate + " " + deadlineTime;
+        for (int i = 0; i < indicatorDeadline; i++) {
+            tempDeadlineString = tempDeadlineString + listOfCommandInputs.get(i) + " ";
+        }
+
+        System.out.println(deadlineDateTime);
+        Deadline tempDeadLine = new Deadline(tempDeadlineString, Parser.convertToDateTime(deadlineDateTime));
+        DataHandlerLayer.addToLog(tempDeadLine);
+        if (isWrittenToHistory) {
+            DataHandlerLayer.appendToHistory(tempDeadLine);
+        }
+    }
+
+    private static void processEvent(Command packagedCommand,
+                                        ArrayList<String> listOfCommandInputs,
+                                        String loggedCommand,
+                                        boolean isWrittenToHistory) throws InvalidCommandException {
+        int indicatorEvent = listOfCommandInputs.indexOf("/at");
+        String date = listOfCommandInputs.get(indicatorEvent + 1);
+        String time = listOfCommandInputs.get(indicatorEvent + 2);
+        String dateTime = date + " " + time;
+        String temp = new String();
+        for (int i = 0; i < indicatorEvent; i++) {
+            temp = temp + listOfCommandInputs.get(i) + " ";
+        }
+        Event tempEvent = new Event(temp, Parser.convertToDateTime(dateTime));
+        DataHandlerLayer.addToLog(tempEvent);
+        if (isWrittenToHistory) {
+            DataHandlerLayer.appendToHistory(tempEvent);
+        }
     }
 }

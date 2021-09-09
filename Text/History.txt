@@ -1,1 +1,3 @@
-[T][X] smth
+[T][X] something
+[D][X] deadline smth smthsmth smth                 23/01/2000 23:00
+[E][X] smthsmthsmth  23/01/2000 23:00

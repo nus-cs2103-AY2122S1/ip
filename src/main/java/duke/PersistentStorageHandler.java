@@ -1,6 +1,11 @@
 package duke;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -29,7 +34,7 @@ public class PersistentStorageHandler {
     public PersistentStorageHandler(String dirName, String fileName) {
         //Name the file
         File storedDir = new File(dirName);
-        if (!storedDir.exists()){
+        if (!storedDir.exists()) {
             storedDir.mkdirs();
         }
 

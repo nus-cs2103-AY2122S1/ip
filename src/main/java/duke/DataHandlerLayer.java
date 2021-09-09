@@ -1,6 +1,5 @@
 package duke;
 
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.function.Function;
@@ -19,8 +18,10 @@ public class DataHandlerLayer {
     /**
      * History file that will be written to
      */
-    private static String dirName = Paths.get(System.getProperty("user.dir"),"Text").toAbsolutePath().toString();
-    private static String fileName = Paths.get(System.getProperty("user.dir"),"Text", "History.txt").toAbsolutePath().toString();
+    private static String dirName = Paths.get(System.getProperty("user.dir"), "Text")
+            .toAbsolutePath().toString();
+    private static String fileName = Paths.get(System.getProperty("user.dir"), "Text", "History.txt")
+            .toAbsolutePath().toString();
 
     /**
      * Init data storage handler for history.
@@ -64,9 +65,10 @@ public class DataHandlerLayer {
 
     /**
      * Deletes any task in the specified postion of log
+     *
      * @param position in the log which is based on index.
      * @throws IndexOutOfBoundsException If the player specifies a postion outside the length of the log
-     * this error is thrown
+     *                                   this error is thrown
      */
     public static void delete(int position) throws IndexOutOfBoundsException {
         assert position >= 0;
@@ -94,6 +96,7 @@ public class DataHandlerLayer {
      * Packages the data(in string) into Commands in the persistent storage using
      * this commands. The data is packaged as
      * Command classes. To be passed to Logic for processing
+     *
      * @return An arraylist of packaged commands
      * @throws InvalidCommandException thrown when any of the commands in string cannot be packaged as a command class.
      */
@@ -103,6 +106,7 @@ public class DataHandlerLayer {
 
     /**
      * Appends any task written to history.
+     *
      * @param task
      */
     public static void appendToHistory(Task task) {

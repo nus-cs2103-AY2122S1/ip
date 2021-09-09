@@ -72,4 +72,5 @@ public class Command {
     public LocalDateTime getLocalDateTime() {
         return this.localDateTime;
     }
+
 }

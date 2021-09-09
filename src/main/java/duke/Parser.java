@@ -11,6 +11,24 @@ import java.util.Collections;
  */
 public class Parser {
 
+    public static void main(String[] args) {
+        Command temp;
+        //Non preloaded
+        String nonPreloadedDeadline = "deadline smth smthsmth smth /by 23/01/2000 23:00";
+        try {
+            temp = parse(nonPreloadedDeadline);
+
+            //Preloaded
+            String loggedDeadLine = "[D][X] smth smthsmth smth 23/01/2000 23:00";
+            ArrayList<String> loggedDeadlineArray = new ArrayList<>();
+            loggedDeadlineArray.add(loggedDeadLine);
+            Command preloadedTemp;
+            ArrayList<Command> tempCommandArr = parsePreloadedTasks(loggedDeadlineArray);
+            preloadedTemp = tempCommandArr.get(0);
+        } catch (InvalidCommandException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * Function that handles all the parsing of the duke.Parser system
      *
@@ -76,24 +94,26 @@ public class Parser {
             Task.TaskType eventType = Task.TaskType.NOTAPPLICABLE;
             char temp = packagedHistory.get(0).charAt(eventTypeIndex);
             switch (packagedHistory.get(0).charAt(eventTypeIndex)) {
-            case 'T':
-                eventType = Task.TaskType.TODO;
-                break;
-            case 'E':
-                eventType = Task.TaskType.EVENT;
-                packagedHistory.remove("event");
-                break;
-            case 'D':
-                eventType = Task.TaskType.DEADLINE;
-                packagedHistory.remove("deadline");
-                break;
-            case 'N':
-                eventType = Task.TaskType.NOTAPPLICABLE;
-                break;
-            default:
-                break;
+                case 'T':
+                    eventType = Task.TaskType.TODO;
+                    packagedHistory.remove(0);
+                    break;
+                case 'E':
+                    eventType = Task.TaskType.EVENT;
+                    packagedHistory.remove("[E][X]");
+                    packagedHistory.add(packagedHistory.size() - 2 , "/at");
+                    break;
+                case 'D':
+                    eventType = Task.TaskType.DEADLINE;
+                    packagedHistory.remove("[D][X]");
+                    packagedHistory.add(packagedHistory.size() - 2 , "/by");
+                    break;
+                case 'N':
+                    eventType = Task.TaskType.NOTAPPLICABLE;
+                    break;
+                default:
+                    break;
             }
-            packagedHistory.remove(0);
             Command command = new Command(eventType, packagedHistory, String.join(" ", packagedHistory));
             preloadedList.add(command);
         }
