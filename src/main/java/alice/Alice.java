@@ -6,14 +6,9 @@ import dialog.TaskDialog;
 import parser.Parser;
 import storage.Storage;
 import command.Command;
-import ui.StartPage;
 import ui.Ui;
 
 import java.io.IOException;
-
-import javafx.application.Application;
-import javafx.stage.Stage;
-
 
 /**
  * Main class of the chatbot.
@@ -25,7 +20,7 @@ import javafx.stage.Stage;
  * @version 0.02
  * @since 0.01
  */
-public class Alice extends Application {
+public class Alice {
     /** storage for alice.Alice */
     private final Storage storage;
     /** taskDialog dealing with the task that the bot wants to communicate back to the user */
@@ -51,7 +46,6 @@ public class Alice extends Application {
         // import the task from what the storage manage to load
         ui.importTaskList(storage.load());
         // set the current taskDialog of alice.Alice to the one ui fetch from the storage
-        // in future update the taskDialog of alice.Alice could change accordingly in case of reaching to other save file
         taskDialog = ui.getTaskDialog();
     }
 
@@ -73,6 +67,10 @@ public class Alice extends Application {
         return this.ui;
     }
 
+    public TaskDialog getTaskDialog() {
+        return this.taskDialog;
+    }
+
     /**
      * The method for running the personal assistant alice.Alice.
      *
@@ -81,16 +79,14 @@ public class Alice extends Application {
     public void run() throws DialogException {
         boolean isExit = false;
         while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(taskDialog, storage);
-                isExit = c.isExit();
-            } catch (AliceException e) {
-                taskDialog.getChatPage().printError(e);
-            }
+            String fullCommand = ui.readCommand();
+            Command c = Parser.parse(fullCommand);
+            c.execute(taskDialog, storage);
+            isExit = c.isExit();
+
         }
     }
+
 
     /**
      * Execute the fullCommand
@@ -98,30 +94,11 @@ public class Alice extends Application {
      * @param fullCommand the command as string including taggers and date
      */
     public void execute(String fullCommand) {
-        Command c = Parser.parse(fullCommand);
-        c.execute(taskDialog, storage);
-    }
-
-    /**
-     * Start method overridden from the Application of JavaFX
-     *
-     * @param stage stage for the app to distribute its system
-     * @throws IOException if the application fail to create a save file location
-     */
-    @Override
-    public void start(Stage stage) throws IOException {
-        stage.setTitle("Alice");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        if (!Storage.haveSaveLocation()) {
-            Storage.createSaveLocation();
+        try {
+            Command c = Parser.parse(fullCommand);
+            c.execute(taskDialog, storage);
+        } catch (AliceException e) {
+            taskDialog.getChatPage().printError(e);
         }
-
-        // Add the scene to the stage
-        stage.setScene(new StartPage().layout());
-        // Display
-        stage.show();
     }
 }

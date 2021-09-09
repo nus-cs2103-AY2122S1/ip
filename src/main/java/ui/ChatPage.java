@@ -2,19 +2,17 @@ package ui;
 
 import alice.Alice;
 import dialog.DialogException;
-import javafx.scene.Node;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import storage.Storage;
 
 import java.io.IOException;
 
@@ -26,35 +24,63 @@ import java.io.IOException;
  * @version 0.02
  * @since 0.01
  */
-public class ChatPage extends Page {
+public class ChatPage extends AnchorPane {
 
     private Alice alice;
     private String fileName;
-    private Stage stage;
 
+    @FXML
     private ScrollPane scrollPane = new ScrollPane();
+    @FXML
     private VBox dialogContainer = new VBox();
+    @FXML
     private TextField userInput = new TextField();
+    @FXML
     private Button sendButton = new Button("Send");
+    @FXML
+    private AnchorPane anchorPaneReference;
 
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpeg"));
     private final Image aliceImage = new Image(this.getClass().getResourceAsStream("/images/alice.png"));
 
+    public ChatPage() {
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        printWelcomeText();
+    }
+
     /**
      * Constructor for the chat page.
      *
      * @param fileName the filename that the user has chosen
-     * @param stage    the stage passed from the Start Page to navigate back
      * @throws IOException     if there is anything wrong with the IO
      * @throws DialogException Dialog with the sameId cannot exist at the same time while
      *                         the app is running
      */
-    ChatPage(String fileName, Stage stage) throws IOException, DialogException {
+    ChatPage(String fileName) throws IOException {
         this.fileName = fileName;
-        this.stage = stage;
         this.alice = new Alice(fileName);
         alice.getUi().getTaskDialog().setChatPage(this);
+
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        printWelcomeText();
     }
 
     /**
@@ -66,31 +92,30 @@ public class ChatPage extends Page {
         return this.alice;
     }
 
-    /**
-     * Return the layout of the chat page for interacting with Alice as Scene
-     *
-     * @return the layout of the chat page for interacting with Alice
-     */
-    @Override
-    public Scene layout() {
-        AnchorPane mainLayout = new AnchorPane();
-        // Set container into the scrolling pane
-        scrollPane.setContent(dialogContainer);
+    @FXML
+    public void initialize() {
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+    }
 
-        // add all components into the main layout
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+    public void setAlice(Alice a) {
+        alice = a;
+    }
 
-        mainLayout.setPrefSize(600.0, 600.0);
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
 
-        scrollPane.setPrefSize(600, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+    public void setAliceByFilename(String fileName) {
+        try {
+            this.alice = new Alice(fileName);
+            alice.getTaskDialog().setChatPage(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
+    }
 
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+    public void printWelcomeText() {
         try {
             Label logo = getDialogLabel("Alice");
             logo.setStyle("-fx-font: normal italic 72px 'verdana' ");
@@ -105,32 +130,8 @@ public class ChatPage extends Page {
         } catch (Exception e) {
             printError(e);
         }
-
-
-        userInput.setPrefWidth(545.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput, 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        return new Scene(mainLayout);
     }
+
 
     /**
      * Create label from String
@@ -147,10 +148,10 @@ public class ChatPage extends Page {
     }
 
     /** for executing the command */
+    @FXML
     private void handleUserInput() {
-        Label userText = getDialogLabel(userInput.getText());
         dialogContainer.getChildren().add(
-                DialogBox.getUserDialog(userText, new ImageView(userImage))
+                DialogBox.getUserDialog(userInput.getText(), userImage)
         );
         this.alice.execute(userInput.getText());
         userInput.clear();
@@ -160,8 +161,7 @@ public class ChatPage extends Page {
      * Print the list of tasks in this chat page
      */
     public void showCurrentList() {
-        Label currentList = getDialogLabel(alice.getUi().getCurrentList());
-        dialogContainer.getChildren().add(DialogBox.getAliceDialog(currentList, new ImageView(aliceImage)));
+        dialogContainer.getChildren().add(DialogBox.getAliceDialog(alice.getUi().getCurrentList(), aliceImage));
     }
 
     /**
@@ -170,8 +170,7 @@ public class ChatPage extends Page {
      * @param e exception to be print
      */
     public void printError(Exception e) {
-        Label errorText = getDialogLabel(Ui.getErrorText(e));
-        dialogContainer.getChildren().add(new DialogBox(errorText, new ImageView(aliceImage)));
+        dialogContainer.getChildren().add(DialogBox.getAliceDialog(Ui.getErrorText(e), aliceImage));
     }
 
     /**
@@ -180,19 +179,27 @@ public class ChatPage extends Page {
      * @param input string input to be printed
      */
     public void printAlicely(String input) {
-        Label textToPrint = getDialogLabel(input);
-        dialogContainer.getChildren().add(DialogBox.getAliceDialog(textToPrint, new ImageView(aliceImage)));
+        dialogContainer.getChildren().add(DialogBox.getAliceDialog(input, aliceImage));
     }
 
     /**
      * Exit the chat page and go back to the start page
      */
     public void exit() {
-        stage.setTitle("Alice");
-        // Add the scene to the stage
-        stage.setScene(new StartPage().layout());
-        // Display
-        stage.show();
+        try {
+            Stage stage = (Stage) anchorPaneReference.getScene().getWindow();
+
+            stage.setTitle("Alice");
+            FXMLLoader fxmlLoader = new FXMLLoader(StartPage.class.getResource("../view/StartPage.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<StartPage>getController().fetchSaveFiles();
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

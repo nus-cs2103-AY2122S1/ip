@@ -1,22 +1,27 @@
 package ui;
 
 import dialog.DialogException;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import javafx.fxml.FXML;
 
-import javafx.scene.Node;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
+import javafx.scene.layout.AnchorPane;
 
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import parser.Parser;
 import storage.Storage;
 
 import java.io.File;
@@ -32,109 +37,85 @@ import java.util.Arrays;
  * @version 0.02
  * @since 0.01
  */
-public class StartPage extends Page {
-    /**
-     * Return layout of the start page as Scene
-     *
-     * @return layout of the starting page
-     */
-    @Override
-    public Scene layout() {
-        // This starting page was partly inspired by Marcus
-        // Thank you Marcus :)
-        Label welcome = new Label("Welcome to");
-        Label logo = new Label("Alice");
-        Label label = new Label("Please select your save file to start the app!");
-        TextField inputField = new TextField();
-        Label output = new Label("");
-        Button button1 = new Button("Enter");
-        Button button2 = new Button("Clear");
+public class StartPage extends AnchorPane {
+    @FXML
+    private Button enterButton;
+    @FXML
+    private Button clearButton;
+    @FXML
+    private TextField inputField = new TextField();
+    @FXML
+    private ScrollPane saveFileScrollPane = new ScrollPane();
+    @FXML
+    private AnchorPane paneReference = new AnchorPane();
+    @FXML
+    private ListView<String> listView = new ListView<>();
+    @FXML
+    private Label output;
 
-        GridPane gridPane = new GridPane();
-        gridPane.setMinSize(600, 600);
-        gridPane.setPadding(new Insets(10, 10, 10, 10));
-        gridPane.setVgap(2);
-        gridPane.setHgap(2);
-        gridPane.setAlignment(Pos.CENTER);
+    private ArrayList<File> files;
 
-        int columnIndex = 1;
-        int rowIndex = 0;
-
-        gridPane.add(welcome, columnIndex, rowIndex++);
-        gridPane.add(logo, columnIndex, rowIndex++);
-
-        ArrayList<File> files = new ArrayList<>(Arrays.asList(Storage.getFilesFromDirectory(
-                Storage.DIRECTORY_PATH + Storage.DATA_PATH)));
-
-
-        rowIndex++;
-        for (int i = 0; i < files.size(); i++) {
-            if (files.get(i).isFile() && !files.get(i).isHidden()) {
-                String fullFileName = files.get(i).getName();
-                Button button = new Button(fullFileName.substring(0, fullFileName.indexOf(".")));
-                button.setOnAction(event -> {
-                    inputField.setText(button.getText());
-                });
-                gridPane.add(button, columnIndex, rowIndex++);
-            }
-        }
-
-        // Action event
-        inputField.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                output.setText(inputField.getText());
-            } else if (event.getCode() == KeyCode.ESCAPE) {
-                output.setText("Output cleared.\nPlease enter a new command");
-                inputField.setText("");
-            }
-        });
-
-        EventHandler<ActionEvent> changeScreen = event -> {
-            Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            String fullPath = this.getClass().getResource(".").getPath().toString();
-            appStage.setTitle("Chat");
-            try {
-                appStage.setScene(new ChatPage(inputField.getText(), appStage).layout());
-            } catch (IOException | DialogException e) {
-                output.setText("Error encountered: " + e.getMessage());
-            }
-            appStage.show();
-        };
-
-
-        EventHandler<ActionEvent> clear = event -> {
-            output.setText("Output cleared.\nPlease enter a new command");
-            inputField.setText("");
-        };
-
-        // When button is pressed
-        button1.setOnAction(changeScreen);
-        button2.setOnAction(clear);
-
-        // Arranging all the nodes in the grid
-        columnIndex = 1;
-        gridPane.add(label, columnIndex, rowIndex += 1);
-        gridPane.add(inputField, columnIndex, rowIndex += 4);
-        gridPane.add(button1, columnIndex, rowIndex += 3);
-        gridPane.add(button2, columnIndex, rowIndex += 3);
-        gridPane.add(output, columnIndex, rowIndex += 3);
-
-        // Styling nodes
-        button1.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white; ");
-        button1.setFont(Font.font("Calibri"));
-        button2.setStyle("-fx-background-color: grey; -fx-text-fill: white; ");
-        button2.setFont(Font.font("Calibri"));
-        welcome.setStyle("-fx-font: normal 16px 'robota'; -fx-text-fill: rgba(255, 230, 130) ");
-        label.setStyle("-fx-font: normal bold 20px 'calibri';" +
-                " -fx-text-fill: rgba(255, 230, 130);");
-        logo.setStyle("-fx-font: normal italic 72px 'verdana'; -fx-text-fill: rgba(255, 230, 130) ");
-        gridPane.setStyle("-fx-background-color:\n" +
-                "            linear-gradient(#5f6c99, #5f2c61),\n" +
-                "            repeating-image-pattern(\"https://edencoding.com/resources/wp-content/uploads/2021/02/Stars_128.png\"),\n" +
-                "            radial-gradient(center 50% 50%, radius 50%, #FFFFFF33, #00000033);");
-        output.setStyle("-fx-font: normal 16px 'robota' ");
-
-        return new Scene(gridPane);
+    public StartPage() {
+        fetchSaveFiles();
     }
 
+    @FXML
+    private void clearInputField() {
+        inputField.setText("");
+    }
+
+    public void fetchSaveFiles() {
+        files = new ArrayList<>(Arrays.asList(Storage.getFilesFromDirectory(
+                Storage.DIRECTORY_PATH + Storage.DATA_PATH)));
+        ObservableList<String> items = FXCollections.observableArrayList();
+        for (File file : files) {
+            if (file.isFile() && !file.isHidden()) {
+                String fullFileName = file.getName();
+                String fileName = fullFileName.substring(0, fullFileName.indexOf("."));
+//                button.setOnAction(event -> {
+//                    inputField.setText(button.getText());
+//                });
+                items.add(fileName);
+            }
+        }
+        listView.setItems(items);
+        listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                inputField.setText(newValue);
+            }
+        });
+    }
+
+    @FXML
+    private void handleFileNameInput() {
+        if (inputField.getText().isBlank() || inputField.getText().isEmpty()) {
+            return;
+        }
+        boolean containsFile = files.stream().anyMatch(
+                file -> file.getName().equals(inputField.getText() + ".txt"));
+
+        if (!containsFile) {
+            AlertBox.display("Are you sure you want to create new file '" + inputField.getText() + "'",
+                    e -> showChatPage());
+        } else {
+            showChatPage();
+        }
+    }
+
+    private void showChatPage() {
+        try {
+            Stage stage = (Stage) paneReference.getScene().getWindow();
+            FXMLLoader fxmlLoaderChatPage = new FXMLLoader(StartPage.class.getResource("/view/ChatPage.fxml"));
+            AnchorPane ap = fxmlLoaderChatPage.load();
+            Scene scene = new Scene(ap);
+            fxmlLoaderChatPage.<ChatPage>getController().setAliceByFilename(inputField.getText());
+            fxmlLoaderChatPage.<ChatPage>getController().setFileName(inputField.getText());
+            fxmlLoaderChatPage.<ChatPage>getController().printWelcomeText();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -45,7 +45,7 @@ public class Command {
      * @param fullCommand command with its arguments and tagger
      * @throws AliceException invalid argument for command
      */
-    public Command(String fullCommand) throws AliceException {
+    public Command(String fullCommand) {
         this.fullCommand = fullCommand;
         commandType = Parser.stringToCommand(fullCommand.split(" ")[0]);
         isExit = commandType == CommandType.BYE;
