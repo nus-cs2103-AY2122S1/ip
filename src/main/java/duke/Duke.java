@@ -9,6 +9,7 @@ package duke;
 
 import java.io.IOException;
 
+import duke.exceptions.DukeDataLoadException;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.scene.layout.AnchorPane;
@@ -27,8 +28,9 @@ public class Duke extends AnchorPane {
      * Constructs a Duke object.
      *
      * @throws IOException If the file saved fails to load.
+     * @throws DukeDataLoadException If the save file cannot be read properly
      */
-    public Duke() throws IOException {
+    public Duke() throws IOException, DukeDataLoadException {
         Ui ui = new Ui(); // Performs the self introduction upon successful initialization.
         Storage storage = new Storage("data/duke.txt");
         TaskList taskList = new TaskList(storage.load());

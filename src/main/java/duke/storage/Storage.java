@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import duke.exceptions.DukeDataLoadException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -40,8 +41,9 @@ public class Storage {
      *
      * @return an ArrayList of tasks for the todo list
      * @throws IOException If there are errors processing the file.
+     * @throws DukeDataLoadException If the save file cannot be read properly
      */
-    public ArrayList<Task> load() throws IOException {
+    public ArrayList<Task> load() throws IOException, DukeDataLoadException {
 
         final ArrayList<Task> tasks = new ArrayList<>();
 
@@ -85,6 +87,7 @@ public class Storage {
                         break;
                     }
                     default:
+                        throw new DukeDataLoadException("The task is not recognized!");
 
                     }
                 }
@@ -97,8 +100,8 @@ public class Storage {
 
         // If the file does not exist, create a new file
         } else {
-            System.out.println("Welcome new user!");
-            System.out.println("Let me create a save file for you :)");
+//            System.out.println("Welcome new user!");
+//            System.out.println("Let me create a save file for you :)");
             if (!FILE.getParentFile().exists()) {
                 FILE.getParentFile().mkdir();
             }
