@@ -5,12 +5,6 @@ public class GUI {
     private DataFile dataFile;
     private TaskList taskList;
 
-    private final String WELCOME_MESSAGE = " ____            _      \n"
-            + "|  _ \\ _   _  __| | ___ \n"
-            + "| | | | | | |/ _` |/ _ \\\n"
-            + "| |_| | |_| | (_| |  __/\n"
-            + "|____/ \\__,_|\\__,_|\\___|\n";
-
     public static void main(String[] args) {
         Launcher.main(args);
     }
@@ -21,19 +15,18 @@ public class GUI {
     }
 
     public String getResponse(String s) {
-
         return processInput(s);
     }
 
     String processInput(String str) {
 
+        assert str != "";
         Task newTask = Parser.parseInput(str);
 
         if (newTask == null) {
             if (str.equals("bye")) {
                 taskList.save();
-                return "Bye. Hope to see you again soon!";
-
+                return "Tasklist saved; exiting not implemented yet!";
             } else if (str.equals("list")) {
                 return taskList.list();
             } else if (str.startsWith("done")) {
@@ -55,8 +48,5 @@ public class GUI {
         }
 
     }
-
-
-
     
 }

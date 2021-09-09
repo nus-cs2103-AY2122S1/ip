@@ -31,6 +31,7 @@ abstract public class Task {
      * @return False if this task was previously marked as done, true otherwise.
      */
     public boolean markDone() {
+        assert !isDone;
         if (this.isDone) {
             return false;
         } else {

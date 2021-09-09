@@ -23,6 +23,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            assert fxmlLoader.<MainWindow>getController() instanceof MainWindow;
             fxmlLoader.<MainWindow>getController().setGUI(gui);
             stage.show();
             fxmlLoader.<MainWindow>getController().welcome();
