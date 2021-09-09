@@ -11,6 +11,8 @@ import duke.task.Todo;
 
 public class Duke {
 
+    private static final String NON_EXISTENT_TASK = "That task doesn't exist.\nPlease Try again.";
+
     /** Storage object that reads from and writes onto the hard disk  */
     private Storage storage;
 
@@ -90,6 +92,7 @@ public class Duke {
 
     private String addTask(String[] parsedCommand) throws IOException {
         Task newTask = null;
+
         switch (parsedCommand[1]) {
         case "todo":
             newTask = new Todo(parsedCommand[2]);
@@ -106,34 +109,38 @@ public class Duke {
         default:
             break;
         }
-        if (newTask != null) {
-            storage.storeAdd(newTask.toStorage());
-            String message = taskList.addTask(newTask);
-            return ui.showMessage(message);
+
+        if (newTask == null) {
+            return ui.showCommandFail();
         }
-        return ui.showCommandFail();
+
+        storage.storeAdd(newTask.toStorage());
+        String message = taskList.addTask(newTask);
+        return ui.showMessage(message);
     }
 
     private String markTaskDone(String[] parsedCommand) throws IOException {
         int taskIndex = Parser.parseIndex(parsedCommand[1]);
-        if (taskList.isIndexValid(taskIndex)) {
-            String message = taskList.markTaskDone(taskIndex);
-            String taskStorage = taskList.getTaskStorage(taskIndex);
-            storage.storeDone(taskIndex, taskStorage);
-            return ui.showMessage(message);
-        } else {
-            return ui.showError("That task doesn't exist.\nPlease Try again.");
+
+        if (!taskList.isIndexValid(taskIndex)) {
+            throw new DukeException(NON_EXISTENT_TASK);
         }
+
+        String message = taskList.markTaskDone(taskIndex);
+        String taskStorage = taskList.getTaskStorage(taskIndex);
+        storage.storeDone(taskIndex, taskStorage);
+        return ui.showMessage(message);
     }
 
     private String deleteTask(String[] parsedCommand) throws IOException {
         int taskIndex = Parser.parseIndex(parsedCommand[1]);
-        if (taskList.isIndexValid(taskIndex)) {
-            String message = taskList.deleteTask(taskIndex);
-            storage.storeDelete(taskIndex);
-            return ui.showMessage(message);
-        } else {
-            return ui.showError("That task doesn't exist.\nPlease Try again.");
+
+        if (!taskList.isIndexValid(taskIndex)) {
+            throw new DukeException(NON_EXISTENT_TASK);
         }
+
+        String message = taskList.deleteTask(taskIndex);
+        storage.storeDelete(taskIndex);
+        return ui.showMessage(message);
     }
 }
