@@ -1,8 +1,9 @@
 package duke.task;
 
+import java.util.ArrayList;
+
 import duke.DukeException;
 import duke.Ui;
-import java.util.ArrayList;
 
 /**
  * Encapsulates a list of tasks.

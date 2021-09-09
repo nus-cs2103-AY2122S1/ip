@@ -1,20 +1,21 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.ToDo;
-import java.util.Scanner;
 
 /**
  * Parses input commands.
  * @author Thomas Hogben
  */
 public class Parser {
-    Scanner sc;
-    Storage storage;
-    TaskList taskList;
-    Ui ui;
+    private Scanner sc;
+    private Storage storage;
+    private TaskList taskList;
+    private Ui ui;
 
     /**
      * Currently only scans System.in.

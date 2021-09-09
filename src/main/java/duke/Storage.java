@@ -1,19 +1,17 @@
 package duke;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
-
-import java.io.IOException;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Handles saving of tasks and loading said saves.
@@ -57,7 +55,7 @@ public class Storage {
             throw new DukeException(DukeException.CORRUPT_SAVE);
         }
 
-        while(sc.hasNextLine()) {
+        while (sc.hasNextLine()) {
             try {
                 Task newTask = getTaskFromSave(sc.nextLine());
                 tasks.add(newTask);

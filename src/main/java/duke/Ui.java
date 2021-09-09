@@ -1,8 +1,9 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.task.Task;
 import duke.task.TaskList;
-import java.util.ArrayList;
 
 /**
  * The User Interface of Duke.
@@ -36,8 +37,8 @@ public class Ui {
     public void addTask(Task task, TaskList taskList) {
         display("is added.");
         display(task.toString());
-        display("now is have " + taskList.size() + " task" +
-                (taskList.size() == 1 ? "" : "s") + ".");
+        display("now is have " + taskList.size() + " task"
+                + (taskList.size() == 1 ? "" : "s") + ".");
     }
 
     /**
@@ -59,8 +60,8 @@ public class Ui {
     public void deleteTask(Task task, TaskList taskList) {
         display("is deleted!");
         display(task.toString());
-        display("now is have " + taskList.size() + " task" +
-                (taskList.size() == 1 ? "" : "s") + ".");
+        display("now is have " + taskList.size() + " task"
+                + (taskList.size() == 1 ? "" : "s") + ".");
     }
 
     /**
