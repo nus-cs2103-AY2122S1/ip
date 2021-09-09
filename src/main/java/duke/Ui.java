@@ -88,4 +88,16 @@ public class Ui {
         System.out.println(task);
         System.out.println("Now you have " + length + " tasks in the list.");
     }
+
+    public void findTask(TaskList taskList) {
+        int length = taskList.noOfTask();
+
+        if (length != 0) {
+            System.out.println("Here are the matching tasks in your list:");
+            System.out.println(taskList);
+        } else {
+            System.out.println("Oh no there are no matching tasks in your list :((");
+        }
+
+    }
 }

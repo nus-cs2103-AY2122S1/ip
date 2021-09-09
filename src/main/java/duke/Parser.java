@@ -167,4 +167,12 @@ public class Parser {
             return false;
         }
     }
+
+    public boolean isFind() {
+        if (this.twoPart[0].equals("find")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -60,4 +60,19 @@ public class TaskList {
             this.mostRecent = task;
         }
     }
+
+    public TaskList find(String keyword) throws DukeException {
+        int length = this.tasks.size();
+        TaskList taskList = new TaskList();
+
+        for (int i = 0; i < length; i++) {
+            Task task = this.tasks.get(i);
+
+            if (task.isKeyword(keyword)) {
+                taskList.add(task);
+            }
+        }
+
+        return taskList;
+    }
 }

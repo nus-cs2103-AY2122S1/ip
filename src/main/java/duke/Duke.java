@@ -133,6 +133,17 @@ public class Duke {
                         // Scan for next command
                         parser = new Parser(sc.nextLine());
                     }
+                } else if (parser.isFind()) {
+                    try {
+                        TaskList taskList = this.tasks.find(parser.secondPart());
+                        ui.findTask(taskList);
+
+                        parser = new Parser(sc.nextLine());
+                    } catch (DukeException e) {
+                        ui.showError(e);
+
+                        parser = new Parser(sc.nextLine());
+                    }
                 } else {
                     throw new DukeException("I do not know what you want to do!");
                 }
