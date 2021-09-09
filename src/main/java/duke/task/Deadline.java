@@ -36,10 +36,10 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructor of Deadline. Including the information whether it's done or not.
+     * Constructor of Deadline.
      *
      * @param task The name of Deadline.
-     * @param isDone Whether the task is done or not.
+     * @param isDone Indicate whether the task has been done or not.
      * @param taskTime The time of Deadline.
      * @throws InvalidTaskException Throws exception if input is not valid.
      */

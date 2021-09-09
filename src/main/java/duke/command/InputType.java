@@ -5,7 +5,7 @@ package duke.command;
  */
 public enum InputType {
     BYE("bye"), TODO("todo"), DEADLINE("deadline"), EVENT("event"), LIST("list"),
-    DONE("done"), DELETE("delete"), UNKNOWN("unknown"), FIND("find");
+    DONE("done"), DELETE("delete"), UNKNOWN("unknown"), FIND("find"), HELP("help");
 
     private String value;
 

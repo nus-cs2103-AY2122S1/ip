@@ -95,7 +95,7 @@ public class Storage {
     /**
      * Adds new task to the file when it is added to the taskList.
      *
-     * @param task
+     * @param task The task want to store in the src file.
      * @throws IOException Throws IOException when FileWriter cannot be created with the given src.
      */
     public void saveNewTask(Task task) throws IOException {

@@ -18,6 +18,8 @@ public class Command {
     private final TaskList taskList;
     private final Response response;
     private final Storage storage;
+    private static final StringBuilder UNKNOWN_MESSAGE_RESPONSE =
+            new StringBuilder("Sorry, I don't understand what do you want me to do.");
 
     /**
      * Constructor of Command class.
@@ -82,13 +84,16 @@ public class Command {
                 return findTask(task);
             case BYE:
                 return goodByeToUser();
+            case HELP:
+                return getHelpMessage();
+            default:
+                return UNKNOWN_MESSAGE_RESPONSE;
             }
         } catch (DukeException dukeException) {
             return new StringBuilder(dukeException.getMessage());
         } catch (IOException ioException) {
             return new StringBuilder("Sorry, something goes wrong with the IO process.");
         }
-        return new StringBuilder("Sorry, I don't understand what do you want me to do.");
     }
 
     private StringBuilder addNewTodoTask(String task) throws DuplicateException, InvalidTaskException, IOException {
@@ -146,5 +151,9 @@ public class Command {
 
     private StringBuilder getTasks() {
         return response.getListMessage();
+    }
+
+    private StringBuilder getHelpMessage() {
+        return response.getHelpMessage();
     }
 }

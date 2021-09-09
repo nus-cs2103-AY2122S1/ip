@@ -1,32 +1,64 @@
 package duke.task;
 
+import duke.exception.InvalidTaskException;
+
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /**
  * Represents a special type of task, which contains the time for the event.
  */
 public class Event extends Task {
-    private String eventTime;
+    private LocalDate eventDate;
+    private LocalTime eventStartTime;
+    private LocalTime eventEndTime;
 
     /**
      * Constructor of Event.
      *
      * @param task The name of the event.
      * @param eventTime The time of the event.
+     * @throws InvalidTaskException Throws exception if input is not valid.
      */
-    public Event(String task, String eventTime) {
+    public Event(String task, String eventTime) throws InvalidTaskException {
         super(task);
-        this.eventTime = eventTime;
+        String[] dateAndTime = eventTime.split(" ");
+        if (dateAndTime.length == 4 && dateAndTime[2].equals("to")) {
+            try {
+                this.eventDate = LocalDate.parse(dateAndTime[0]);
+                this.eventStartTime = LocalTime.parse(dateAndTime[1]);
+                this.eventEndTime = LocalTime.parse(dateAndTime[3]);
+            } catch (DateTimeException dateTimeException) {
+                throw new InvalidTaskException("Event");
+            }
+        } else {
+            throw new InvalidTaskException("Event");
+        }
     }
 
     /**
      * Constructor of Event.
      *
      * @param task The name of the event.
-     * @param isDone Whether the task is done or not.
+     * @param isDone Indicate whether the event has been done or not.
      * @param eventTime The time of the event.
+     * @throws InvalidTaskException Throws exception if input is not valid.
      */
-    public Event(String task, boolean isDone, String eventTime) {
+    public Event(String task, boolean isDone, String eventTime) throws InvalidTaskException {
         super(task, isDone);
-        this.eventTime = eventTime;
+        String[] dateAndTime = eventTime.split(" ");
+        if (dateAndTime.length == 4 && dateAndTime[2].equals("to")) {
+            try {
+                this.eventDate = LocalDate.parse(dateAndTime[0]);
+                this.eventStartTime = LocalTime.parse(dateAndTime[1]);
+                this.eventEndTime = LocalTime.parse(dateAndTime[3]);
+            } catch (DateTimeException dateTimeException) {
+                throw new InvalidTaskException("Event");
+            }
+        } else {
+            throw new InvalidTaskException("Event");
+        }
     }
 
     /**
@@ -40,7 +72,8 @@ public class Event extends Task {
         if (this.isDone()) {
             finished = "X";
         }
-        return "[E]" + "[" + finished + "] " + this.getTaskName() + " (at: " + this.eventTime + ")";
+        return "[D]" + "[" + finished + "] " + this.getTaskName() + " (at: " + outputTaskTime() + ", "
+                + eventStartTime.toString() + "to" + eventEndTime.toString() +")";
     }
 
     /**
@@ -51,7 +84,8 @@ public class Event extends Task {
     @Override
     public String toStoredString() {
         int finished = this.isDone() ? 1 : 0;
-        return "E | " + finished + " | " + this.getTaskName() + " | " + eventTime;
+        return "E | " + finished + " | " + this.getTaskName() + " | " + eventDate + " " + eventStartTime
+                + " to " + eventEndTime;
     }
 
     /**
@@ -67,5 +101,10 @@ public class Event extends Task {
         }
         Event comparedEventTask = (Event) comparedObject;
         return comparedEventTask.toString().equals(this.toString());
+    }
+
+    private String outputTaskTime() {
+        return eventDate.getMonth().toString() + " " + eventDate.getDayOfMonth() + " " +
+                eventDate.getYear();
     }
 }

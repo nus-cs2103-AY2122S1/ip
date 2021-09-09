@@ -39,23 +39,27 @@ public class Parser {
      * @return the type of the operation that user wants.
      */
     public static InputType judgeType(String task) {
-        InputType type = InputType.UNKNOWN;
-        if (task.contains(InputType.TODO.getValue())) {
+        InputType type;
+        if (task.startsWith(InputType.TODO.getValue())) {
             type = InputType.TODO;
-        } else if (task.contains(InputType.DEADLINE.getValue())) {
+        } else if (task.startsWith(InputType.DEADLINE.getValue())) {
             type = InputType.DEADLINE;
-        } else if (task.contains(InputType.EVENT.getValue())) {
+        } else if (task.startsWith(InputType.EVENT.getValue())) {
             type = InputType.EVENT;
-        } else if (task.contains(InputType.DONE.getValue())) {
+        } else if (task.startsWith(InputType.DONE.getValue())) {
             type = InputType.DONE;
         } else if (task.equals(InputType.LIST.getValue())) {
             type = InputType.LIST;
-        } else if (task.contains(InputType.DELETE.getValue())) {
+        } else if (task.startsWith(InputType.DELETE.getValue())) {
             type = InputType.DELETE;
-        } else if (task.contains(InputType.FIND.getValue())) {
+        } else if (task.startsWith(InputType.FIND.getValue())) {
             type = InputType.FIND;
-        } else if (task.contains(InputType.BYE.getValue())) {
+        } else if (task.equals(InputType.BYE.getValue())) {
             type = InputType.BYE;
+        } else if (task.equals(InputType.HELP.getValue())) {
+            type = InputType.HELP;
+        } else {
+            type = InputType.UNKNOWN;
         }
         return type;
     }

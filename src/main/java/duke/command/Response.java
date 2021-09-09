@@ -28,7 +28,27 @@ public class Response {
     public StringBuilder getWelcomeMessage() {
         builder = new StringBuilder();
         builder.append("Hello! I'm Duke.\n");
-        builder.append("What can I do for you?\n");
+        builder.append("If you don't know how can I help you, please enter 'help' in the command :)");
+        return builder;
+    }
+
+    /**
+     * Stores command introduction message in a StringBuilder and return it.
+     *
+     * @return StringBuilder that contains the command introduction message.
+     */
+    public StringBuilder getHelpMessage() {
+        builder = new StringBuilder();
+        builder.append("In order to let me help you to store your tasks, ");
+        builder.append("please enter your command in this format:\n");
+        builder.append("Add Todo task: todo xxx\n");
+        builder.append("Add Event task: event xxx /at xxxx-xx-xx xx:xx to xx:xx\n");
+        builder.append("Add Deadline task: deadline xxx /by xxxx-xx-xx xx:xx\n");
+        builder.append("Show List: list\n");
+        builder.append("Mark item as done: done x\n");
+        builder.append("delete item: delete x\n");
+        builder.append("find item: find xxxx\n");
+        builder.append("Show the command list: help\n");
         return builder;
     }
 
