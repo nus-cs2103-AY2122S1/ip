@@ -1,3 +1,5 @@
 D | 0 | return book | Sunday
 T | 0 | borrow book
 T | 0 | return book
+T | 0 | buy book
+D | 0 | hand in assignment | 2020-12-18

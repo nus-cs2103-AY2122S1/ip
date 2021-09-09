@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -158,7 +155,9 @@ public class Duke extends Application {
      */
     private void handleUserInput() {
         String userText = userInput.getText();
+        assert userText != null;
         String dukeText = getResponse(userInput.getText());
+        assert dukeText != null;
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, user),
                 DialogBox.getDukeDialog(dukeText, duke)
