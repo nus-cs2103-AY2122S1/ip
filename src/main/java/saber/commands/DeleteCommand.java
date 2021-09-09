@@ -37,6 +37,7 @@ public class DeleteCommand extends SaberCommand {
             deleteUI.showUnableToFindTaskError();
             return;
         }
+        assert taskIndex < taskList.size() && taskIndex >= 0 : "Index out of bounds";
         Task task = taskList.get(taskIndex);
         taskList.delete(taskIndex);
         int totalTask = taskList.size();
@@ -54,6 +55,7 @@ public class DeleteCommand extends SaberCommand {
         if (taskIndex >= taskList.size() || taskIndex < 0) {
             return deleteUI.getUnableToFindTaskError();
         }
+        assert taskIndex < taskList.size() && taskIndex >= 0 : "Index out of bounds";
         Task task = taskList.get(taskIndex);
         taskList.delete(taskIndex);
         int totalTask = taskList.size();
