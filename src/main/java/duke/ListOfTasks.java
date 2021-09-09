@@ -2,26 +2,47 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Class includes methods for performing different actions to the list of tasks.
+ */
 public class ListOfTasks {
     private static int count;
     private ArrayList<Task> tasks;
     private Ui ui;
 
+    /**
+     * Constructor for creating a list of tasks.
+     */
     public ListOfTasks() {
         ui = new Ui();
         this.tasks = new ArrayList<>();
         this.count = 0;
     }
 
+    /**
+     * Returns the list of tasks
+     *
+     * @return tasks
+     */
     public ArrayList<Task> getList() {
         return tasks;
     }
 
-    public void includeAdditionalTask(Task x) {
-        tasks.add(this.count,x);
+    /**
+     * This method manages adding a task.
+     *
+     * @param newTask represents the new task to be added
+     */
+    public void includeAdditionalTask(Task newTask) {
+        tasks.add(this.count,newTask);
         count++;
     }
 
+    /**
+     * This method manages adding a task.
+     *
+     * @param information represents the information regarding task to be added
+     */
     public void addTask(String information) {
         ui.addTaskMessage();
         information = removeVal(information, "todo");
@@ -32,6 +53,9 @@ public class ListOfTasks {
         ui.printNumberOfTasks(count);
     }
 
+    /**
+     * This method manages listing out the tasks.
+     */
     public void listOut() {
         ui.listTaskMessage();
         int a = 0;
@@ -41,6 +65,11 @@ public class ListOfTasks {
         }
     }
 
+    /**
+     * This method manages marking a task as done.
+     *
+     * @param command represents command given by user to mark a task as done
+     */
     public void markDone(String command) {
         try {
             command = removeVal(command, "done");
@@ -59,6 +88,12 @@ public class ListOfTasks {
             ui.printInvalidTaskNumber();
         }
     }
+
+    /**
+     * This method manages deleting task.
+     *
+     * @param command represents command given by user to delete a task.
+     */
     public void delete(String command) {
         try {
             command = removeVal(command, "delete");
@@ -80,6 +115,13 @@ public class ListOfTasks {
             ui.printInvalidTaskNumber();
         }
     }
+
+    /**
+     * This method manages removing a value.
+     *
+     * @param command represents command given to remove value
+     * @param val represents value to be removed
+     */
     private String removeVal(String val, String command) {
         int len = command.length();
         val = val.strip();
@@ -88,6 +130,11 @@ public class ListOfTasks {
         return val;
     }
 
+    /**
+     * This method manages adding an event to list of tasks.
+     *
+     * @param information represents information pertaining event.
+     */
     public void addEvent(String information) {
 
         if (!information.contains("/at")) {
@@ -106,6 +153,11 @@ public class ListOfTasks {
         ui.printNumberOfTasks(count);
     }
 
+    /**
+     * This method manages adding a deadline to list of tasks.
+     *
+     * @param information represents information pertaining deadline.
+     */
     public void addDeadline(String information) {
 
         if (!information.contains("/by")) {

@@ -2,8 +2,18 @@ package duke;
 
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class includes method for processing user commands.
+ */
 public class Parser {
 
+    /**
+     * This method handling commands given by user.
+     *
+     * @param command represents command given by user
+     * @param xs represents list of tasks
+     * @return true if command can be handled
+     */
     public static boolean handleCommand(String command, ListOfTasks xs) {
         while (!command.equalsIgnoreCase("bye")) {
             try {

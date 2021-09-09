@@ -8,14 +8,26 @@ import java.nio.file.Paths;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
+/**
+ * Class includes methods required to read and write for saving a file.
+ */
 public class CompilationOfFiles {
     private static String filepath;
 
+    /**
+     * Constructor for path where file is saved.
+     *
+     * @param filepath path of the file
+     */
     public CompilationOfFiles(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * This is the main method for loading and saving files.
+     *
+     * @param tasks list of tasks
+     */
     public static void loadAndSaveFile(ListOfTasks tasks) {
         try {
             Task temp;
@@ -56,6 +68,11 @@ public class CompilationOfFiles {
 
     }
 
+    /**
+     * This is the method for updating list of files due to changes.
+     *
+     * @param list list of tasks
+     */
     public static void updateFile(ArrayList<Task> list) {
         try {
             FileWriter newFileWriter = new FileWriter(filepath);
@@ -68,6 +85,12 @@ public class CompilationOfFiles {
         }
     }
 
+    /**
+     * This is the method for updating a specific file according to changes.
+     *
+     * @param t list of tasks
+     * @param taskType type of task being saved
+     */
     public static void updateSavedFile(Task t, String taskType) {
         try {
             File newFile = new File(filepath);
