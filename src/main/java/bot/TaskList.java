@@ -13,7 +13,13 @@ public class TaskList {
     private List<Task> taskList;
     private final int MAX_TASKS = 100;
 
+    /**
+     * Constructor for TaskList
+     *
+     * @param taskList list of tasks
+     */
     public TaskList(List<Task> taskList) {
+        assert taskList != null : "TaskList cannot be initialized with null list";
         this.taskList = taskList;
     }
 
@@ -32,6 +38,7 @@ public class TaskList {
      * @param taskList list of tasks
      */
     public void set(List<Task> taskList) {
+        assert taskList != null : "TaskList cannot be null";
         this.taskList = taskList;
     }
 
@@ -45,6 +52,7 @@ public class TaskList {
         if (this.taskList.size() >= this.MAX_TASKS) {
             return new String[] { "Task list capacity reached" };
         }
+        assert newTask != null : "Task added cannot be null";
         this.taskList.add(newTask);
         return new String[]{
             "Got it. I've added this task:",
@@ -57,7 +65,7 @@ public class TaskList {
      * Remove task from the list
      *
      * @param index index of task in list
-     * @return success boolean
+     * @return message related to removing task
      */
     public String[] removeTask(int index) {
         if (index < 0 || index >= taskList.size()) {
@@ -79,9 +87,15 @@ public class TaskList {
      * @return Task at given index
      */
     public Task getTaskAt(int index) {
+        assert index >= 0 && index < taskList.size() : "Index is out of range";
         return this.taskList.get(index);
     }
 
+    /**
+     * Get list of serialized task strings
+     *
+     * @return list of string representation of tasks
+     */
     public List<String> getTaskStringList() {
         List<String> taskStrings = new ArrayList<>();
         for (Task t : taskList) {

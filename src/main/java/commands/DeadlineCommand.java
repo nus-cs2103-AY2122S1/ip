@@ -1,7 +1,6 @@
 package commands;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 
 import bot.Bot;
 import bot.Ui;

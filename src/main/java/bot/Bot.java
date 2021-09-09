@@ -35,6 +35,13 @@ public class Bot {
         Parser.closeScanner();
     }
 
+    /**
+     * Given an input string for a command, get the lines
+     * for the Bot's output
+     *
+     * @param input command string
+     * @return Bot output lines
+     */
     public String[] getOutput(String input) {
         try {
             Command cmd = Parser.commandFromString(input);
