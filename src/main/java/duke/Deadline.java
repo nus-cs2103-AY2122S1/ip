@@ -11,6 +11,7 @@ public class Deadline extends Task {
     public Deadline(String taskContent) {
         super(taskContent.split(" /by ")[0], "D");
         deadline = Parser.parseTiming(taskContent.split(" /by ")[1]);
+        assert this.getType().equals("D") : "Wrong type";
     }
 
     /**
@@ -23,6 +24,7 @@ public class Deadline extends Task {
     public Deadline(String taskContent, String deadline) {
         super(taskContent, "D");
         this.deadline = deadline;
+        assert this.getType().equals("D") : "Wrong type";
     }
 
     /**
@@ -32,6 +34,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getTiming() {
+        assert deadline != null: "Deadline cannot be null";
         return deadline;
     }
 

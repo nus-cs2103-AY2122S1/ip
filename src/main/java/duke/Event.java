@@ -10,6 +10,7 @@ public class Event extends Task{
     public Event(String taskContent) {
         super(taskContent.split(" /at ")[0], "E");
         eventTime = Parser.parseTiming(taskContent.split(" /at ")[1]);
+        assert this.getType().equals("E") : "Wrong type";
     }
 
     /**
@@ -22,6 +23,7 @@ public class Event extends Task{
     public Event(String taskContent, String eventTime) {
         super(taskContent, "E");
         this.eventTime = eventTime;
+        assert this.getType().equals("E") : "Wrong type";
     }
 
     /**
@@ -31,6 +33,7 @@ public class Event extends Task{
      */
     @Override
     public String getTiming() {
+        assert eventTime != null: "Event time cannot be null";
         return eventTime;
     }
 
