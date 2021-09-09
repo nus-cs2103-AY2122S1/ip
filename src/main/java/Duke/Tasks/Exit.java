@@ -4,6 +4,8 @@ import Duke.Ui.Ui;
 import Duke.Tool.Storage;
 import Duke.Tool.TaskList;
 
+import javafx.application.Platform;
+
 /**
  * Represents the Exit task class
  */
@@ -14,7 +16,6 @@ public class Exit extends Task {
     public Exit() {
         super("exit", false);
         this.isExit = true;
-
     }
 
     /**
@@ -26,6 +27,13 @@ public class Exit extends Task {
      */
     @Override
     public String execute(TaskList task, Ui ui, Storage storage) {
-        return ui.exit();
-    };
+        ui.exit();
+        applicationOff();
+        return null;
+    }
+
+    public void applicationOff() {
+        Platform.exit();
+        System.exit(0);
+    }
 }

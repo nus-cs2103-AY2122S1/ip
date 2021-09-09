@@ -43,8 +43,8 @@ test {
 }
 
 application {
-    mainClassName = "Duke.Duke"
-    //mainClassName = "Duke.Duke.Launcher"
+    //mainClassName = "Duke.Duke"
+    mainClassName = "Duke.Launcher"
 }
 
 shadowJar {

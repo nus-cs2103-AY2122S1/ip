@@ -27,8 +27,8 @@ public class Ui {
      * The method of exit
      * @return String
      */
-    public String exit() {
-        return "Bye. Hope to see you again soon!";
+    public void exit() {
+        System.out.println("Bye. Hope to see you again soon!");
     }
 
     /**
