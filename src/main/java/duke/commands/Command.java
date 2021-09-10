@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.DateTimeHandler;
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -23,6 +24,7 @@ public abstract class Command {
      */
     public abstract Command of(String arguments);
 
+
     /**
      * Executes the command and returns a String to be printed by Duke
      *
@@ -30,9 +32,10 @@ public abstract class Command {
      * @param s The Storage object to interact with the output file
      * @param ui The UI object to interact with the user interface
      * @param dth The DateTimeHandler object to interact with date-times.
-     * @return The String to be printed
+     * @return The String to be printed.
+     * @throws DukeException Contains the error message.
      */
-    public abstract String execute(TaskList tl, Storage s, Ui ui, DateTimeHandler dth);
+    public abstract String execute(TaskList tl, Storage s, Ui ui, DateTimeHandler dth) throws DukeException;
 
     /**
      * Returns the prefix of the command
