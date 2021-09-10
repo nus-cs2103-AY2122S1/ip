@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import duke.DateTimeHandler;
+import duke.DukeException;
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
@@ -25,10 +26,10 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tl, Storage s, Ui ui, DateTimeHandler dth) {
+    public String execute(TaskList tl, Storage s, Ui ui, DateTimeHandler dth) throws DukeException {
         String args = super.getArguments();
         if (args.length() == 0) {
-            return "Please enter the name of the task after todo";
+            throw new DukeException("Please enter the name of the task after todo");
         }
         String description;
         ArrayList<String> tags = new ArrayList<>();
