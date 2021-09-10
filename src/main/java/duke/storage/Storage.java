@@ -82,29 +82,16 @@ public class Storage {
                 LocalDate date;
                 switch (taskType) {
                 case "T":
-                    des = atHand.substring(7);
-                    t = new ToDo(done, des);
+                    t = readToDoFromFile(atHand);
                     break;
                 case "E":
-                    openBracket = atHand.indexOf('(');
-                    des = atHand.substring(7, openBracket - 1);
-                    date = LocalDate.parse(atHand.substring(openBracket + 5, openBracket + 15));
-                    ArrayList<LocalTime> startEnd = extractTimeEvent(atHand);
-                    t = new Event(done, des, date, startEnd.get(0), startEnd.get(1));
+                    t = readEventFromFile(atHand);
                     break;
                 case "D":
-                    openBracket = atHand.indexOf('(');
-                    des = atHand.substring(7, openBracket - 1);
-                    date = LocalDate.parse(atHand.substring(openBracket + 5, openBracket + 15));
-                    LocalTime time = extractTimeDeadline(atHand);
-                    t = new Deadline(done, des, date, time);
+                    t = readDeadlineFromFile(atHand);
                     break;
                 case "A":
-                    openBracket = atHand.indexOf('(');
-                    des = atHand.substring(7, openBracket - 1);
-                    int closeBracket = atHand.lastIndexOf(')');
-                    String prevTaskDescription = atHand.substring(openBracket + 18, closeBracket);
-                    t = new DoAfter(done, des, prevTaskDescription);
+                    t = readDoAfterFromFile(atHand);
                     break;
                 default:
                     throw new DukeException("Task Type not recognised. Task not loaded into Duke chat-bot");
@@ -172,5 +159,64 @@ public class Storage {
         } catch (DateTimeParseException e) {
             throw new DukeException("Time not properly formatted");
         }
+    }
+
+    /**
+     * Returns ToDo object read from String representation of a task.
+     *
+     * @param atHand String object representing a task.
+     * @return ToDo object read from string.
+     */
+    private static ToDo readToDoFromFile(String atHand) {
+        String des = atHand.substring(7);
+        String done = (atHand.charAt(4) == ' ') ? " " : "X";
+        return new ToDo(done, des);
+    }
+
+    /**
+     * Returns Event object read from String representation of a task.
+     *
+     * @param atHand String object representing a task.
+     * @return Event object read from string.
+     * @throws DukeException If String representation of task is not properly formatted for extractTimeEvent() method.
+     */
+    private static Event readEventFromFile(String atHand) throws DukeException {
+        int openBracket = atHand.indexOf('(');
+        String done = (atHand.charAt(4) == ' ') ? " " : "X";
+        String des = atHand.substring(7, openBracket - 1);
+        LocalDate date = LocalDate.parse(atHand.substring(openBracket + 5, openBracket + 15));
+        ArrayList<LocalTime> startEnd = extractTimeEvent(atHand);
+        return new Event(done, des, date, startEnd.get(0), startEnd.get(1));
+    }
+
+    /**
+     * Returns Deadline object read from String representation of a task.
+     *
+     * @param atHand String object representing a task.
+     * @return Deadline object read from string.
+     * @throws DukeException If String representation of task is not properly formatted for extractTimeEvent() method.
+     */
+    private static Deadline readDeadlineFromFile(String atHand) throws DukeException {
+        int openBracket = atHand.indexOf('(');
+        String done = (atHand.charAt(4) == ' ') ? " " : "X";
+        String des = atHand.substring(7, openBracket - 1);
+        LocalDate date = LocalDate.parse(atHand.substring(openBracket + 5, openBracket + 15));
+        LocalTime time = extractTimeDeadline(atHand);
+        return new Deadline(done, des, date, time);
+    }
+
+    /**
+     * Returns DoAfter object read from String representation of a task.
+     *
+     * @param atHand String object representing a task.
+     * @return DoAfter object read from string.
+     */
+    private static DoAfter readDoAfterFromFile(String atHand) {
+        int openBracket = atHand.indexOf('(');
+        String des = atHand.substring(7, openBracket - 1);
+        String done = (atHand.charAt(4) == ' ') ? " " : "X";
+        int closeBracket = atHand.lastIndexOf(')');
+        String prevTaskDescription = atHand.substring(openBracket + 18, closeBracket);
+        return new DoAfter(done, des, prevTaskDescription);
     }
 }

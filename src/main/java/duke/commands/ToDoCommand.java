@@ -28,19 +28,28 @@ public class ToDoCommand extends Command {
         if (des.equals("todo")) {
             throw new DukeException("\"todo\" command not correctly formatted \nPlease insert task argument");
         }
-        String description = des.substring(5);
-        ToDo atHand = new ToDo(description);
-        tList.add(atHand);
-        String result = "Sure. The following task has been added: \n";
-        result = result
+        ToDo atHand = addToDoFromDescriptionToTaskList(des, tList);
+        Storage.createFile();
+        Storage.writeToFile(tList);
+        return "Sure. The following task has been added: \n"
                 + atHand
                 + "\n"
                 + "\n"
                 + numberOfTasks(tList)
                 + "\n";
+    }
 
-        Storage.createFile();
-        Storage.writeToFile(tList);
-        return result;
+    /**
+     * Returns ToDo object after adding it into the given task list.
+     *
+     * @param des User input into the Duke chat-box.
+     * @param tList TaskList object used to keep track of all tasks.
+     * @return ToDo task that is the most recent addition to tList.
+     */
+    private ToDo addToDoFromDescriptionToTaskList(String des, TaskList tList) {
+        String description = des.substring(5);
+        ToDo atHand = new ToDo(description);
+        tList.add(atHand);
+        return atHand;
     }
 }

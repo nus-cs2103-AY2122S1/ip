@@ -43,11 +43,7 @@ public class EventCommand extends Command {
                 throw new DukeException("Format Error. "
                         + "Do not use the special character \"/\" within your task description.");
             }
-            String description = des.substring(6, des.indexOf('/') - 1);
-            LocalDate date = Storage.extractDate(des);
-            ArrayList<LocalTime> startEnd = Storage.extractTimeEvent(des);
-            Event atHand = new Event(description, date, startEnd.get(0), startEnd.get(1));
-            tList.add(atHand);
+            Event atHand = addEventFromDescriptionToTaskList(des, tList);
             Storage.createFile();
             Storage.writeToFile(tList);
             return "Sure. The following task has been added: \n"
@@ -59,5 +55,22 @@ public class EventCommand extends Command {
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("\"event\" command not correctly formatted");
         }
+    }
+
+    /**
+     * Returns Event object after adding it into the given task list.
+     *
+     * @param des User input into the Duke chat-box.
+     * @param tList TaskList object used to keep track of all tasks.
+     * @return Event task that is the most recent addition to tList.
+     * @throws DukeException If user input, des, is not properly formatted for extractDate() or extractTimeEvent().
+     */
+    private Event addEventFromDescriptionToTaskList(String des, TaskList tList) throws DukeException {
+        String description = des.substring(6, des.indexOf('/') - 1);
+        LocalDate date = Storage.extractDate(des);
+        ArrayList<LocalTime> startEnd = Storage.extractTimeEvent(des);
+        Event atHand = new Event(description, date, startEnd.get(0), startEnd.get(1));
+        tList.add(atHand);
+        return atHand;
     }
 }

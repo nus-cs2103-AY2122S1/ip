@@ -24,6 +24,18 @@ public class FindCommand extends Command {
         if (des.equals("find") || des.equals("find ")) {
             throw new DukeException("The \"find\" command accepts at least one search input.\nPlease add a keyword to search for.");
         }
+        String result = getRelevantTasks(des, tList);
+        return result;
+    }
+
+    /**
+     * Return String representation of relevant tasks that match the keywords being searched.
+     *
+     * @param des User input into the Duke chat-box.
+     * @param tList TaskList object used to keep track of all tasks.
+     * @return String object representing tasks that match keywords.
+     */
+    private String getRelevantTasks(String des, TaskList tList) {
         String searchInput = des.substring(des.indexOf(' ') + 1);
         String result = "";
         result = result + "Here are your tasks that contain \"" + searchInput + "\"\n";

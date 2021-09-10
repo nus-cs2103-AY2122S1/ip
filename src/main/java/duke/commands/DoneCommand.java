@@ -28,6 +28,27 @@ public class DoneCommand extends Command {
     @Override
     public String execute(String des, TaskList tList) throws DukeException {
         checkValidDes(des);
+        Task atHand = markTaskAsDone(des, tList);
+        Storage.createFile();
+        Storage.writeToFile(tList);
+        return "I see that you have completed a task. Keep up the good work!\n"
+                + "\n"
+                + "This task has now been marked as completed\n"
+                + atHand.getStatusIcon()
+                + " " + atHand.getDescription()
+                + "\n";
+    }
+
+    /**
+     * Returns Task object that is marked as done.
+     *
+     * @param des User input into the Duke chat-box.
+     * @param tList TaskList object used to keep track of all tasks.
+     * @return Task object marked as done.
+     * @throws DukeException If task has been completed, too many arguments are provided,
+     * or if input number is not valid.
+     */
+    private Task markTaskAsDone(String des, TaskList tList) throws DukeException {
         ArrayList<Task> tasks = tList.getTaskList();
         String stringNumber = des.substring(des.lastIndexOf(' ') + 1);
         int num = Integer.parseInt(stringNumber);
@@ -44,13 +65,6 @@ public class DoneCommand extends Command {
             throw new DukeException("You have already completed this task.");
         }
         atHand.markAsDone();
-        Storage.createFile();
-        Storage.writeToFile(tList);
-        return "I see that you have completed a task. Keep up the good work!\n"
-                + "\n"
-                + "This task has now been marked as completed\n"
-                + atHand.getStatusIcon()
-                + " " + atHand.getDescription()
-                + "\n";
+        return atHand;
     }
 }

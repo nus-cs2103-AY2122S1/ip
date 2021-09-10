@@ -21,7 +21,7 @@ public class DeadlineCommand extends Command {
     /**
      * Returns String object to describe execution of DeadlineCommand.
      *
-     * @param des   User input into the Duke chat-box.
+     * @param des User input into the Duke chat-box.
      * @param tList TaskList object used to keep track of all tasks.
      * @return String representation of DeadlineCommand.
      * @throws DukeException If input for deadline command is not properly formatted.
@@ -42,11 +42,7 @@ public class DeadlineCommand extends Command {
                 throw new DukeException("Format Error. "
                         + "Do not use the special character \"/\" within your task description.");
             }
-            String description = des.substring(9, des.indexOf('/') - 1);
-            LocalDate date = Storage.extractDate(des);
-            LocalTime time = Storage.extractTimeDeadline(des);
-            Deadline atHand = new Deadline(description, date, time);
-            tList.add(atHand);
+            Deadline atHand = addDeadlineFromDescriptionToTaskList(des, tList);
             Storage.createFile();
             Storage.writeToFile(tList);
             return "Sure. The following task has been added: \n"
@@ -59,5 +55,22 @@ public class DeadlineCommand extends Command {
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("\"deadline\" command not correctly formatted");
         }
+    }
+
+    /**
+     * Returns Deadline object after adding it into the given task list.
+     *
+     * @param des User input into the Duke chat-box.
+     * @param tList TaskList object used to keep track of all tasks.
+     * @return Deadline task that is the most recent addition to tList.
+     * @throws DukeException If user input, des, is not properly formatted for extractDate() or extractTimeDeadline().
+     */
+    private Deadline addDeadlineFromDescriptionToTaskList(String des, TaskList tList) throws DukeException {
+        String description = des.substring(9, des.indexOf('/') - 1);
+        LocalDate date = Storage.extractDate(des);
+        LocalTime time = Storage.extractTimeDeadline(des);
+        Deadline atHand = new Deadline(description, date, time);
+        tList.add(atHand);
+        return atHand;
     }
 }

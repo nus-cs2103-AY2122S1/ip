@@ -45,7 +45,7 @@ public class Parser {
         } else if (des.contains("doafter") && des.startsWith("doafter")) {
             try {
                 String stringNumber = des.substring(des.lastIndexOf(' ') + 1);
-                int num = Integer.parseInt(stringNumber);
+                Integer.parseInt(stringNumber);
                 return "doafter";
             } catch (NumberFormatException e) {
                 return null;

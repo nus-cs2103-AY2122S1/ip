@@ -3,11 +3,24 @@ package duke.tasks;
 public class DoAfter extends Task {
     private String prevTaskDescription;
 
+    /**
+     * Creates new DoAfter object.
+     *
+     * @param description String object representing the task being input into Duke.
+     * @param prevTaskDescription String object representing the task that has to be done before itself.
+     */
     public DoAfter(String description, String prevTaskDescription) {
         super(description);
         this.prevTaskDescription = prevTaskDescription;
     }
 
+    /**
+     * Creates new DoAfter object (overloaded constructor).
+     *
+     * @param done String object representing whether the task is completed.
+     * @param description String object representing the task being input into Duke.
+     * @param prevTaskDescription String object representing the task that has to be done before itself.
+     */
     public DoAfter(String done, String description, String prevTaskDescription) {
         super(description);
         this.prevTaskDescription = prevTaskDescription;
