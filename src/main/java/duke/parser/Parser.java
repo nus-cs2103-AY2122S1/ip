@@ -50,7 +50,9 @@ public class Parser {
         if (index > size || index < 1) {
             throw new OutOfBoundException(size);
         }
-        return index - 1;
+        index -= 1;
+        assert index >= 0 && index < size : "index x not within valid range";
+        return index;
     }
 
     /**
@@ -125,7 +127,6 @@ public class Parser {
     public String getEventDate() throws EventFormatException {
         String eventDescription = inputCommandAndDescription[1];
         String[] textAndDuration = eventDescription.split("/from ", 2);
-        String text = textAndDuration[0].trim();
         String duration = textAndDuration[1].trim();
 
         // split start date and end date
