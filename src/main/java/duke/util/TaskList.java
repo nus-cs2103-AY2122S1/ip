@@ -11,7 +11,7 @@ import java.util.List;
  * operations relating to the tasks.
  */
 public class TaskList {
-    private List<Task> list;
+    private List<Task> tasks;
 
     /**
      * Constructor method of TaskList.
@@ -19,11 +19,11 @@ public class TaskList {
      * @param tasks List of tasks.
      */
     public TaskList(List<Task> tasks) {
-        this.list = tasks;
+        this.tasks = tasks;
     }
 
     public List<Task> getTasks() {
-        return list;
+        return tasks;
     }
 
     /**
@@ -35,12 +35,12 @@ public class TaskList {
         ArrayList<String> outputs = new ArrayList<>();
         outputs.add("Got it. I've added this task:");
         outputs.add(task.toString());
-        list.add(task);
-        if (list.size() == 1) {
+        tasks.add(task);
+        if (tasks.size() == 1) {
             outputs.add("Now you have 1 task in the list.");
         } else {
             outputs.add(String.format("Now you have %d tasks in the list.", 
-                    list.size()));
+                    tasks.size()));
         }
         return outputs;
     }
@@ -50,16 +50,16 @@ public class TaskList {
      */
     public ArrayList<String> list() {
         ArrayList<String> outputs = new ArrayList<>();
-        if (list.isEmpty()) {
+        if (tasks.isEmpty()) {
             outputs.add("You have no task for now. Want to add a new task?");
             return outputs;
         }
 
         outputs.add("Here are the tasks in your list:");
 
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             outputs.add(String.format("%d. %s",
-                    i + 1, list.get(i)));
+                    i + 1, tasks.get(i)));
         }
         return outputs;
     }
@@ -73,16 +73,16 @@ public class TaskList {
     public ArrayList<String> setAsDone(int index) {
         ArrayList<String> outputs = new ArrayList<>();
         try {
-            if (index > list.size()) {
+            if (index > tasks.size()) {
                 throw new DukeIndexException("The input task number is too big.");
             }
             if (index < 1) {
                 throw new DukeIndexException("The input task number is non-positive.");
             }
-            list.get(index - 1).maskAsDone();
+            tasks.get(index - 1).maskAsDone();
 
             outputs.add("Nice! I've marked this task as done:");
-            outputs.add(list.get(index - 1).toString());
+            outputs.add(tasks.get(index - 1).toString());
         } catch (DukeIndexException e) {
             outputs.add(e.getMessage());
         }
@@ -98,14 +98,14 @@ public class TaskList {
     public ArrayList<String> deleteTask(int index) throws DukeIndexException {
         ArrayList<String> outputs = new ArrayList<>();
         try {
-            if (index > list.size()) {
+            if (index > tasks.size()) {
                 throw new DukeIndexException("The input task number is too big.");
             }
-            Task removedTask = list.remove(index - 1);
+            Task removedTask = tasks.remove(index - 1);
 
             outputs.add("Noted. I've removed this task:");
             outputs.add("  " + removedTask);
-            outputs.add(String.format("Now you have %d tasks in the list.", list.size()));
+            outputs.add(String.format("Now you have %d tasks in the list.", tasks.size()));
         } catch (DukeIndexException e) {
             outputs.add(e.getMessage());
         }
@@ -120,9 +120,9 @@ public class TaskList {
     public ArrayList<String> showFind(String keyword) {
         ArrayList<String> outputs = new ArrayList<>();
         outputs.add("Here are the matching tasks in your list:");
-        for (int i = 0; i < list.size(); i++) {
-            if(list.get(i).getDescription().contains(keyword)) {
-                outputs.add(list.get(i).toString());
+        for (int i = 0; i < tasks.size(); i++) {
+            if(tasks.get(i).getDescription().contains(keyword)) {
+                outputs.add(tasks.get(i).toString());
             }
         }
         return outputs;
