@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import main.java.duke.commands.Command;
 import main.java.duke.commands.ContactCommand;
+import main.java.duke.commands.ExitCommand;
 
 import java.io.IOException;
 
@@ -50,11 +51,15 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() throws IOException, DukeException {
         String input = userInput.getText();
-        String response = getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        try {
+            String response = getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+        } catch (DukeException e) {
+            showError(e.getMessage(), input);
+        }
         userInput.clear();
     }
 
@@ -63,14 +68,14 @@ public class MainWindow extends AnchorPane {
             try {
                 String fullCommand = readCommand();
                 Command c = Parser.parse(fullCommand);
-                if (c instanceof ContactCommand) {
+                if (c instanceof ExitCommand) {
+                    System.exit(0);
+                } else if (c instanceof ContactCommand) {
                     response = c.execute(duke.contacts, duke.gui, duke.contactsStorage);
                 } else {
                     response = c.execute(duke.tasks, duke.gui, duke.tasksStorage);
                 }
-            } catch (DukeException e) {
-                response = showError(e.getMessage());
-            } catch (IOException e) {
+            }  catch (IOException e) {
                 e.printStackTrace();
             }
 
@@ -81,8 +86,10 @@ public class MainWindow extends AnchorPane {
      * Shows welcome message and creates scanner for user input.
      * @return the welcome message
      */
-    public static String showWelcome() {
-        return "Hello from Neko!\nWhat can I do for you?\n" ;
+    public void showWelcome() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog("Hello from Neko!\nWhat can I do for you?\n", dukeImage)
+        );
     }
 
     /**
@@ -90,8 +97,11 @@ public class MainWindow extends AnchorPane {
      * @param error the error message
      * @return the error message
      */
-    public String showError(String error) {
-        return error;
+    public void showError(String error, String input) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(error, dukeImage)
+        );
     }
 
     /**

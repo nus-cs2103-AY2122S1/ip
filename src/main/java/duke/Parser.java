@@ -18,8 +18,15 @@ public class Parser {
      * @throws DukeException
      */
     public static Command parse(String userInput) throws DukeException {
+        if (userInput == "") {
+            throw new DukeException("A command cannot be empty!");
+        }
         int firstBlankIndex = userInput.indexOf(" ");
-        String commandWord = firstBlankIndex == -1 ? userInput : userInput.substring(0, firstBlankIndex);
+        String commandWord; if (firstBlankIndex == -1) {
+            commandWord = userInput;
+        }  else {
+            commandWord = userInput.substring(0, firstBlankIndex);
+        }
         switch (commandWord) {
         case "bye" : {
             return new ExitCommand();

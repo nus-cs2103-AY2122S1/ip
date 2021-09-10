@@ -24,7 +24,6 @@ public class ExitCommand extends Command {
      * @param storage given storage object
      */
     public String execute(TaskList tasks, MainWindow gui, Storage storage) throws IOException, DukeException {
-        Platform.exit();
         return ("Bye! Neko wishes to see you again soon!\n");
     }
 
