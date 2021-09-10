@@ -1,8 +1,13 @@
 package duke.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import duke.exceptions.DuplicateTaskException;
+import duke.tasks.Todo;
+import duke.utils.TaskList;
 
 public class AddTodoCommandTest {
 
@@ -23,6 +28,18 @@ public class AddTodoCommandTest {
         assertEquals(
                 expected,
                 actual.toString()
+        );
+    }
+
+    @Test
+    public void testAddDuplicateTodo() throws DuplicateTaskException {
+        TaskList taskList = new TaskList();
+        taskList.addTask(new Todo("Placeholder"));
+
+        AddTodoCommand addTodoCommand = new AddTodoCommand(new String[] {"Placeholder"});
+        assertThrows(
+                DuplicateTaskException.class,
+                () -> addTodoCommand.execute(taskList, null, null)
         );
     }
 }

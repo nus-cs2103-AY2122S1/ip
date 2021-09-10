@@ -4,8 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import duke.exceptions.DukeException;
+import duke.exceptions.DuplicateTaskException;
 import duke.exceptions.InvalidTimeStampException;
-
+import duke.tasks.Deadline;
+import duke.utils.TaskList;
 
 
 public class AddDeadlineCommandTest {
@@ -47,6 +50,18 @@ public class AddDeadlineCommandTest {
         assertThrows(
                 InvalidTimeStampException.class,
                 () -> new AddDeadlineCommand(new String[] {"PLACEHOLDER_EVENT_DETAILS", "32/4/2021 2460"})
+        );
+    }
+
+    @Test
+    public void testAddDuplicateDeadline() throws DukeException {
+        TaskList taskList = new TaskList();
+        taskList.addTask(new Deadline("Placeholder", "10/9/2021 2141"));
+
+        AddDeadlineCommand addDeadlineCommand = new AddDeadlineCommand(new String[]{"Placeholder", "10/9/2021 2141"});
+        assertThrows(
+                DuplicateTaskException.class,
+                () -> addDeadlineCommand.execute(taskList, null, null)
         );
     }
 }
