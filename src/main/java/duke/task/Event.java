@@ -29,9 +29,20 @@ public class Event extends Task {
         }
     }
 
+    public Event(String description, Priority priority, String at, boolean isDone) throws DukeException {
+        super(description, priority, isDone);
+
+        try {
+            this.at = LocalDate.parse(at);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid date format: " + at);
+        }
+    }
+
     @Override
     public String serialize() {
-        return String.join(" | ", "E", this.isDone ? "1" : "0", this.description, this.at.toString());
+        return String.join(" | ", "E", this.priority.toString(),
+                this.isDone ? "1" : "0", this.description, this.at.toString());
     }
 
     @Override

@@ -30,9 +30,20 @@ public class Deadline extends Task {
         }
     }
 
+    public Deadline(String description, Priority priority, String by, boolean isDone) throws DukeException {
+        super(description, priority, isDone);
+
+        try {
+            this.by = LocalDate.parse(by);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid date format: " + by);
+        }
+    }
+
     @Override
     public String serialize() {
-        return String.join(" | ", "D", this.isDone ? "1" : "0", this.description, this.by.toString());
+        return String.join(" | ", "D", this.priority.toString(),
+                this.isDone ? "1" : "0", this.description, this.by.toString());
     }
 
     @Override

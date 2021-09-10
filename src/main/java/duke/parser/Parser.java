@@ -1,5 +1,6 @@
 package duke.parser;
 
+import duke.Duke;
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.Commands;
@@ -8,10 +9,12 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.command.PrioritizeCommand;
 import duke.exception.DukeException;
 
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Priority;
 import duke.task.Todo;
 
 import java.util.Arrays;
@@ -86,6 +89,15 @@ public class Parser {
         return new AddCommand(new Event(description, at));
     }
 
+    private static Command parsePrioritize(String input) throws DukeException {
+        String[] params = getParams(input, 2);
+
+        int taskNum = Integer.parseInt(params[0]);
+        Priority priority = Priority.of(params[1]);
+
+        return new PrioritizeCommand(taskNum, priority);
+    }
+
     /**
      * Parses the input into its corresponding commands.
      *
@@ -117,6 +129,8 @@ public class Parser {
             return parseDeadline(input);
         case EVENT:
             return parseEvent(input);
+        case PRIORITIZE:
+            return parsePrioritize(input);
         }
 
         return null;
