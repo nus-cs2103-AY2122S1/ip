@@ -1,12 +1,11 @@
 package duke;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
-import duke.task.Undo;
-
 
 
 /**
@@ -31,6 +30,8 @@ public class Duke {
 
     private String deletedTask;
 
+    private ArrayList<String> undoTaskList;
+
 
     /**
      * Duke Constructor
@@ -46,6 +47,7 @@ public class Duke {
             items = new Items();
         }
         this.undo = new Undo(this.items);
+        this.undoTaskList = new ArrayList<>();
     }
 
     /**
@@ -84,7 +86,6 @@ public class Duke {
             case "list":
                 output = items.printList();
                 isUndoable = false;
-
                 break;
             case "done":
                 int idx = Integer.parseInt(inputWords[1]);
@@ -92,9 +93,7 @@ public class Duke {
                 fileTask = storage.getFileLine(idx);
                 fileTask = fileTask.substring(0, 4) + "1" + fileTask.substring(5);
                 storage.updateListTask(idx, fileTask);
-
                 isUndoable = true;
-
                 break;
             case "bye":
                 isRunning = false;
@@ -105,14 +104,12 @@ public class Duke {
                 fileTask = "T | 0 | " + task[0];
                 storage.addToFile(fileTask);
                 isUndoable = true;
-
                 break;
             case "event":
                 output = items.addItem(new Event(task[0], task[1]));
                 fileTask = "E | 0 | " + task[0] + " | " + task[1];
                 storage.addToFile(fileTask);
                 isUndoable = true;
-
                 break;
             case "deadline":
                 output = items.addItem(new Deadline(task[0], task[1]));
@@ -146,24 +143,7 @@ public class Duke {
                 break;
             }
             assert !output.equals(""): "Unable to generate response. Please try again.";
-            if (isUndoable) {
-                prevCommand = inputWords;
-            }
-                break;
-            case "delete":
-                int id = Integer.parseInt(inputWords[1]);
-                output = items.deleteItem(id);
-                storage.deleteFromFile(id);
-                break;
-            case "find":
-                output = items.findTask(task[0]);
-                break;
-            default:
-                output = "I don't recognise this command\n"
-                        + "Try 'list', 'todo', 'event', 'deadline', 'done', 'find' or 'bye'";
-                break;
-            }
-            assert !output.equals(""): "Unable to generate response. Please try again.";
+            prevCommand = inputWords;
             return output;
         } catch (Exception dukeException) {
             return dukeException.getMessage();
@@ -175,7 +155,7 @@ public class Duke {
      * Undoes the last command
      *
      * @param undoCommand the command to be undone
-     * @return
+     * @return output after undoing the latest task
      * @throws DukeException
      * @throws IOException
      */
