@@ -1,21 +1,24 @@
 package tasklist;
 
 import exception.InvalidDateTimeException;
-import exception.InvalidTaskTimeFormatException;
+import exception.InvalidFormatInStorageException;
+import exception.InvalidTaskFormatException;
 import exception.InvalidTaskTypeException;
 import type.CommandTypeEnum;
+import type.TaskIconTypeEnum;
 
 /**
  * Encapsulates a task containing a description and status.
  */
 public abstract class Task {
+    protected static final int LENGTH_OF_STATUS_ICON = 1;
     protected static final String STATUS_ICON_DONE = "X";
     protected static final String STATUS_ICON_NOT_DONE = " ";
     private String description;
     private boolean isDone;
 
     /**
-     * Constructor to instantiate a `entity.list.DukeTask`.
+     * Instantiates a `entity.list.DukeTask`.
      * The isDone field is set to false by default as new tasks should not be done yet.
      *
      * @param description describes what the task is
@@ -32,10 +35,10 @@ public abstract class Task {
      * @param description the full user input that may or may not be a valid type of task
      * @return `DukeTask`
      * @throws InvalidTaskTypeException when the type of task is not recognised
-     * @throws InvalidTaskTimeFormatException when a task does not have valid time inputs
+     * @throws InvalidTaskFormatException when a task does not have valid time inputs
      */
     public static Task createTask(String description, CommandTypeEnum commandType)
-            throws InvalidTaskTypeException, InvalidTaskTimeFormatException, InvalidDateTimeException {
+            throws InvalidTaskTypeException, InvalidTaskFormatException, InvalidDateTimeException {
         switch (commandType) {
         case TODO:
             return TodoTask.createTask(description);
@@ -49,25 +52,7 @@ public abstract class Task {
     }
 
     /**
-     * Utility method to split tasks into action and time parts.
-     *
-     * @param descriptionWithTime the description of a task including time information
-     * @param splitter the regex to split the description by
-     * @return a string array whose first item is the action description and second item is the time
-     */
-    public static String[] splitActionAndTime(String descriptionWithTime, String splitter) {
-        String[] splitParts = descriptionWithTime.split(splitter);
-
-        // Trim split parts to remove whitespace before and after
-        for (int i = 0; i < splitParts.length; i++) {
-            splitParts[i] = splitParts[i].trim();
-        }
-
-        return splitParts;
-    }
-
-    /**
-     * Method to mark a task as done.
+     * Marks a task as done.
      */
     public void markAsDone() {
         this.isDone = true;
@@ -89,19 +74,28 @@ public abstract class Task {
      * @param fullDescription Storage representation of the task including the task type.
      * @return App representation of the task.
      */
-    public static Task createTaskFromStoredString(String fullDescription) {
+    public static Task createTaskFromStoredString(String fullDescription) throws InvalidFormatInStorageException {
         String trimmedFullDescription = fullDescription.trim();
-        char taskType = trimmedFullDescription.charAt(1);
-        String descriptionWithoutTaskType = fullDescription.substring(3);
 
-        switch (taskType) {
-        case 'T':
-            return TodoTask.createTaskFromStoredString(descriptionWithoutTaskType);
-        case 'D':
+        int taskTypeStartPos = 1;
+        String taskType = trimmedFullDescription.substring(taskTypeStartPos, taskTypeStartPos + 1);
+        TaskIconTypeEnum taskIconTypeEnum = TaskIconTypeEnum.getEnum(taskType);
+        if (taskIconTypeEnum == null) {
+            throw new InvalidFormatInStorageException(fullDescription);
+        }
+
+        int descriptionStartPos = 3;
+        String descriptionWithoutTaskType = fullDescription.substring(descriptionStartPos);
+
+        switch (taskIconTypeEnum) {
+        case DEADLINE:
             return DeadlineTask.createTaskFromStoredString(descriptionWithoutTaskType);
-        case 'E':
+        case EVENT:
             return EventTask.createTaskFromStoredString(descriptionWithoutTaskType);
+        case TODO:
+            return TodoTask.createTaskFromStoredString(descriptionWithoutTaskType);
         default:
+            assert false : "taskTypeEnum should be valid and handled if it reaches the switch block";
             return null;
         }
     }
@@ -116,11 +110,44 @@ public abstract class Task {
         return this.description.contains(keyword);
     }
 
+    /**
+     * Split tasks into action and time parts.
+     *
+     * @param descriptionWithTime the description of a task including time information
+     * @param splitter the regex to split the description by
+     * @return a string array whose first item is the action description and second item is the time
+     */
+    protected static String[] splitActionAndTime(String descriptionWithTime, String splitter) {
+        String[] splitParts = descriptionWithTime.split(splitter);
+
+        // Trim split parts to remove whitespace before and after
+        for (int i = 0; i < splitParts.length; i++) {
+            splitParts[i] = splitParts[i].trim();
+        }
+
+        return splitParts;
+    }
+
+    protected static void validateCorrectNumberOfParts(
+            int expectedNumOfParts,
+            String[] splitParts,
+            CommandTypeEnum commandType) throws InvalidTaskFormatException {
+        if (splitParts.length != expectedNumOfParts) {
+            throw new InvalidTaskFormatException(commandType);
+        }
+    }
+
     protected boolean isSameDescription(Task task) {
         return this.description.equals(task.description);
     }
 
     protected abstract boolean isDuplicateOf(Task task);
+
+    protected static boolean isStorageTaskDone(String description) {
+        int statusIconStartPos = 1;
+        String statusIcon = description.substring(statusIconStartPos, statusIconStartPos + LENGTH_OF_STATUS_ICON);
+        return statusIcon.equals(STATUS_ICON_DONE);
+    }
 
     private String getStatusIcon() {
         return (this.isDone ? STATUS_ICON_DONE : STATUS_ICON_NOT_DONE);

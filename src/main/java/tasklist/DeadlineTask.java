@@ -5,9 +5,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import exception.InvalidDateTimeException;
-import exception.InvalidTaskTimeFormatException;
+import exception.InvalidFormatInStorageException;
+import exception.InvalidTaskFormatException;
 import type.CommandTypeEnum;
 import type.DatetimeTypeEnum;
+import type.TaskIconTypeEnum;
 
 /**
  * Encapsulates a task with a deadline.
@@ -30,31 +32,16 @@ public class DeadlineTask extends Task {
      * @return App representation of a task containing an action description and deadline information.
      */
     public static DeadlineTask createTask(String description) throws
-            InvalidTaskTimeFormatException,
+            InvalidTaskFormatException,
             InvalidDateTimeException {
-        // Split the description into its action and time parts
-        String[] splitPartsUsingBy = splitActionAndTime(
-                description,
-                DeadlineTask.TIME_SPLITTER_INPUT
-        );
+        String[] actionAndDateTimeDescriptions = splitActionAndTime(description, TIME_SPLITTER_INPUT);
+        validateCorrectNumberOfParts(2, actionAndDateTimeDescriptions, CommandTypeEnum.DEADLINE);
 
-        if (splitPartsUsingBy.length != 2) {
-            throw new InvalidTaskTimeFormatException(
-                    CommandTypeEnum.DEADLINE.toString(),
-                    DeadlineTask.TIME_SPLITTER_INPUT
-            );
-        }
+        String actionDescription = actionAndDateTimeDescriptions[0];
+        String dateTimeDescription = actionAndDateTimeDescriptions[1];
+        LocalDateTime deadline = changeDateTimeStringToDateTime(DatetimeTypeEnum.INPUT.toString(), dateTimeDescription);
 
-        String actionDescription = splitPartsUsingBy[0];
-        String datetimeDescription = splitPartsUsingBy[1];
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DatetimeTypeEnum.INPUT.toString());
-
-        try {
-            LocalDateTime deadline = LocalDateTime.from(dateTimeFormatter.parse(datetimeDescription));
-            return new DeadlineTask(actionDescription, false, deadline);
-        } catch (DateTimeParseException e) {
-            throw new InvalidDateTimeException(DatetimeTypeEnum.INPUT.toString());
-        }
+        return new DeadlineTask(actionDescription, false, deadline);
     }
 
     /**
@@ -66,7 +53,11 @@ public class DeadlineTask extends Task {
     public String toString() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DatetimeTypeEnum.OUTPUT.toString());
         String formattedDeadline = this.deadline.format(dateTimeFormatter);
-        return String.format("[D]%s (by: %s)", super.toString(), formattedDeadline);
+        return String.format("[%s]%s (by: %s)",
+                TaskIconTypeEnum.DEADLINE.toString(),
+                super.toString(),
+                formattedDeadline
+        );
     }
 
     /**
@@ -75,25 +66,26 @@ public class DeadlineTask extends Task {
      * @param description Storage representation of a deadline task.
      * @return App representation of a deadline task.
      */
-    public static DeadlineTask createTaskFromStoredString(String description) {
-        String statusIcon = description.substring(1, 2);
-        boolean isDone = false;
-        if (statusIcon.equals(STATUS_ICON_DONE)) {
-            isDone = true;
+    public static DeadlineTask createTaskFromStoredString(String description) throws InvalidFormatInStorageException {
+        try {
+            boolean isDone = Task.isStorageTaskDone(description);
+
+            int descriptionStartPos = 3;
+            String[] actionAndDateTimeDescriptions = splitActionAndTime(
+                    description.substring(descriptionStartPos),
+                    TIME_SPLITTER_DATA
+            );
+            validateCorrectNumberOfParts(2, actionAndDateTimeDescriptions, CommandTypeEnum.DEADLINE);
+
+            String actionDescription = actionAndDateTimeDescriptions[0];
+            String deadlineWithClosingBracket = actionAndDateTimeDescriptions[1];
+            String deadlineString = deadlineWithClosingBracket.substring(0, deadlineWithClosingBracket.length() - 1);
+            LocalDateTime deadline = changeDateTimeStringToDateTime(DatetimeTypeEnum.OUTPUT.toString(), deadlineString);
+
+            return new DeadlineTask(actionDescription, isDone, deadline);
+        } catch (InvalidDateTimeException | InvalidTaskFormatException e) {
+            throw new InvalidFormatInStorageException(e.getMessage() + ": " + description);
         }
-
-        String[] splitPartsUsingBy = splitActionAndTime(
-                description.substring(3),
-                TIME_SPLITTER_DATA
-        );
-
-        String actionDescription = splitPartsUsingBy[0];
-        String deadlineWithClosingBracket = splitPartsUsingBy[1];
-        String deadlineString = deadlineWithClosingBracket.substring(0, deadlineWithClosingBracket.length() - 1);
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DatetimeTypeEnum.OUTPUT.toString());
-        LocalDateTime deadline = LocalDateTime.from(dateTimeFormatter.parse(deadlineString));
-
-        return new DeadlineTask(actionDescription, isDone, deadline);
     }
 
     @Override
@@ -110,5 +102,16 @@ public class DeadlineTask extends Task {
 
         DeadlineTask deadlineTask = (DeadlineTask) task;
         return this.deadline.equals(deadlineTask.deadline);
+    }
+
+    private static LocalDateTime changeDateTimeStringToDateTime(String dateTimeFormat, String dateTimeString)
+            throws InvalidDateTimeException {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(dateTimeFormat);
+
+        try {
+            return LocalDateTime.from(dateTimeFormatter.parse(dateTimeString));
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeException(dateTimeFormat);
+        }
     }
 }

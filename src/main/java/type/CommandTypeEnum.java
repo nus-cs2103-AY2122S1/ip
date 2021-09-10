@@ -1,7 +1,7 @@
 package type;
 
 /**
- * Encapsulates valid values for command type
+ * Encapsulates valid values for command type.
  */
 public enum CommandTypeEnum {
     BYE("bye", "exit the app", "bye"),
@@ -46,5 +46,14 @@ public enum CommandTypeEnum {
         return this.value
                 + "\n\t" + "usage: " + this.usage
                 + "\n\t" + "format: " + this.format;
+    }
+
+    /**
+     * Gets format of command.
+     *
+     * @return format of command.
+     */
+    public String getFormat() {
+        return this.format;
     }
 }

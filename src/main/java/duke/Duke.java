@@ -3,6 +3,7 @@ package duke;
 import command.Command;
 import exception.DukeException;
 import exception.ErrorAccessingFileException;
+import exception.InvalidFormatInStorageException;
 import javafx.application.Platform;
 import message.ErrorMessage;
 import message.Message;
@@ -31,7 +32,7 @@ public class Duke {
             StorageFile storageFile = storage.loadListFile();
             TaskList list = storageFile.scanFileDataToNewTaskList();
             this.list = list;
-        } catch (ErrorAccessingFileException e) {
+        } catch (ErrorAccessingFileException | InvalidFormatInStorageException e) {
             this.loadErrorMessage = e.getOutputMessage();
         }
 

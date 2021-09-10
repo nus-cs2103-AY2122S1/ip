@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import exception.ErrorAccessingFileException;
+import exception.InvalidFormatInStorageException;
 import tasklist.Task;
 import tasklist.TaskList;
 
@@ -45,8 +46,9 @@ public class StorageFile {
      *
      * @return `TaskList`.
      * @throws ErrorAccessingFileException If there is an error scanning the file.
+     * @throws InvalidFormatInStorageException If there is data with incorrect format in storage.
      */
-    public TaskList scanFileDataToNewTaskList() throws ErrorAccessingFileException {
+    public TaskList scanFileDataToNewTaskList() throws ErrorAccessingFileException, InvalidFormatInStorageException {
         TaskList list = new TaskList(this);
 
         try {

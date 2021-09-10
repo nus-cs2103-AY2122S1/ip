@@ -1,5 +1,10 @@
 package tasklist;
 
+import exception.InvalidFormatInStorageException;
+import exception.InvalidTaskFormatException;
+import type.CommandTypeEnum;
+import type.TaskIconTypeEnum;
+
 /**
  * Encapsulates a task with only a description.
  */
@@ -25,7 +30,10 @@ public class TodoTask extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[T]%s", super.toString());
+        return String.format("[%s]%s",
+                TaskIconTypeEnum.TODO.toString(),
+                super.toString()
+        );
     }
 
     /**
@@ -34,14 +42,15 @@ public class TodoTask extends Task {
      * @param description Storage representation of a todo task.
      * @return App representation of a todo task.
      */
-    public static TodoTask createTaskFromStoredString(String description) {
-        String statusIcon = description.substring(1, 2);
-        boolean isDone = false;
-        if (statusIcon.equals(STATUS_ICON_DONE)) {
-            isDone = true;
-        }
+    public static TodoTask createTaskFromStoredString(String description) throws InvalidFormatInStorageException {
+        boolean isDone = Task.isStorageTaskDone(description);
 
-        String actionDescription = description.substring(3).trim();
+        int actionDescriptionStartPos = 3;
+        String actionDescription = description.substring(actionDescriptionStartPos).trim();
+        if (actionDescription.isEmpty()) {
+            InvalidTaskFormatException taskFormatException = new InvalidTaskFormatException(CommandTypeEnum.TODO);
+            throw new InvalidFormatInStorageException(taskFormatException.getMessage() + ": " + description);
+        }
 
         return new TodoTask(actionDescription, isDone);
     }

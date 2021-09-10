@@ -1,7 +1,9 @@
 package tasklist;
 
-import exception.InvalidTaskTimeFormatException;
+import exception.InvalidFormatInStorageException;
+import exception.InvalidTaskFormatException;
 import type.CommandTypeEnum;
+import type.TaskIconTypeEnum;
 
 /**
  * Encapsulates a task with that will occur at a specified time period.
@@ -23,21 +25,17 @@ public class EventTask extends Task {
      * @param description Input task string.
      * @return App representation of a task containing an action description and time information.
      */
-    public static EventTask createTask (String description) throws InvalidTaskTimeFormatException {
+    public static EventTask createTask (String description) throws InvalidTaskFormatException {
         // Split the description into its action and time parts
-        String[] splitPartsUsingAt = splitActionAndTime(
+        String[] actionAndTimeDescriptions = splitActionAndTime(
                 description,
                 EventTask.TIME_SPLITTER_INPUT
         );
+        validateCorrectNumberOfParts(2, actionAndTimeDescriptions, CommandTypeEnum.EVENT);
+        String actionDescription = actionAndTimeDescriptions[0];
+        String timeDescription = actionAndTimeDescriptions[1];
 
-        try {
-            return new EventTask(splitPartsUsingAt[0], false, splitPartsUsingAt[1]);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new InvalidTaskTimeFormatException(
-                    CommandTypeEnum.EVENT.toString(),
-                    EventTask.TIME_SPLITTER_INPUT
-            );
-        }
+        return new EventTask(actionDescription, false, timeDescription);
     }
 
     /**
@@ -47,7 +45,7 @@ public class EventTask extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.time);
+        return String.format("[%s]%s (at: %s)", TaskIconTypeEnum.EVENT.toString(), super.toString(), this.time);
     }
 
     /**
@@ -56,23 +54,26 @@ public class EventTask extends Task {
      * @param description Storage representation of an event task.
      * @return App representation of an event task.
      */
-    public static EventTask createTaskFromStoredString(String description) {
-        String statusIcon = description.substring(1, 2);
-        boolean isDone = false;
-        if (statusIcon.equals(STATUS_ICON_DONE)) {
-            isDone = true;
+    public static EventTask createTaskFromStoredString(String description) throws InvalidFormatInStorageException {
+        try {
+            boolean isDone = Task.isStorageTaskDone(description);
+
+            int descriptionStartPos = 3;
+            String[] actionAndTimeDescriptions = splitActionAndTime(
+                    description.substring(descriptionStartPos),
+                    TIME_SPLITTER_DATA
+            );
+            validateCorrectNumberOfParts(2, actionAndTimeDescriptions, CommandTypeEnum.EVENT);
+
+            String actionDescription = actionAndTimeDescriptions[0];
+            String timeWithClosingBracket = actionAndTimeDescriptions[1];
+            String time = timeWithClosingBracket.substring(0, timeWithClosingBracket.length() - 1);
+
+            return new EventTask(actionDescription, isDone, time);
+        } catch (InvalidTaskFormatException e) {
+            throw new InvalidFormatInStorageException(e.getMessage() + ": " + description);
         }
 
-        String[] splitPartsUsingBy = splitActionAndTime(
-                description.substring(3),
-                TIME_SPLITTER_DATA
-        );
-
-        String actionDescription = splitPartsUsingBy[0];
-        String timeWithClosingBracket = splitPartsUsingBy[1];
-        String time = timeWithClosingBracket.substring(0, timeWithClosingBracket.length() - 1);
-
-        return new EventTask(actionDescription, isDone, time);
     }
 
     @Override
