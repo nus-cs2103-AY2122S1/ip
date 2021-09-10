@@ -153,7 +153,7 @@ public class TaskList {
             taskToDelete.markUndone();
             tasks.remove(taskDeleteNum - 1);
             Storage.saveData(this);
-            return Ui.formatMessage("Noted, I've removed this task:" + taskToDelete, printTaskNumber(this));
+            return Ui.formatMessage("Noted, I've removed this task: " + taskToDelete, printTaskNumber(this));
         } catch (IndexOutOfBoundsException e) {
             return "☹ OOPS!!! No such task can be deleted!";
         }
@@ -239,7 +239,7 @@ public class TaskList {
             for (int i = 0; i < tasksFiltered.length; i++) {
                 sb.append(i + 1).append(".").append(tasksFiltered[i]).append('\n');
             }
-            return sb.toString();
+            return Ui.formatMessage("Here are the tasks that matches your keyword:", sb.toString());
         }
     }
 }

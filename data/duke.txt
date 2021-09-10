@@ -1,6 +1,4 @@
-D | 1 | return book | Oct 15 2019, 6:00pm
-D | 1 | group project | May 07 2021, 4:00pm
-D | 1 | group project | May 07 2021
-D | 0 | return book | Sep 06 2021, 3:00am
-D | 1 | eat food | Dec 12 2019
-E | 1 | sleep | Oct 24 2021
+E | 1 | 3x World Championships | Sep 08 2021
+E | 1 | 9x LCK | Sep 08 2021
+E | 1 | 2x MSI | Sep 08 2021
+E | 1 | Win Worlds 2021 | Nov 06 2021
