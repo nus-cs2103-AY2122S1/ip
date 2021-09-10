@@ -1,14 +1,14 @@
 package duke;
 
 public class Ui {
+    private static final String LINE = "    --------------------------------------------------\n";
+    private static final String INDENTATION = "      ";
     /**
      * Prints a response to the user.
      *
      * @param lines A variable number of lines to be printed as a repsonse to the user.
      */
     public static String getResponse(String ... lines) {
-        final String LINE = "    --------------------------------------------------\n";
-        final String INDENTATION = "      ";
         String stringToPrint = "";
         stringToPrint += LINE;
         for (String line : lines) {
