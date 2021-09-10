@@ -44,6 +44,24 @@ public class TaskList {
     }
 
     /**
+     * Finds all the task with keyword
+     */
+
+    public String find(String keyword) {
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list: \n");
+        for(int i = 0; i < list.size(); i++) {
+            int index = i + 1;
+            if (list.get(i).getDescription().contains(keyword)) {
+                sb.append( index + ". " + list.get(i) + "\n");
+            }
+        }
+        if (sb.length() == 0) {
+            return "There are no matching tasks.";
+        }
+        return (sb.toString());
+    }
+
+    /**
      * Adds a task at the end of the task list.
      * Prints out a response to indicate task was successfully added.
      *
@@ -84,8 +102,7 @@ public class TaskList {
 
         for(int i = 0; i < list.size(); i++) {
             int index = i + 1;
-            sb.append( index + ". " + list.get(i));
-            sb.append("\n");
+            sb.append( index + ". " + list.get(i) + "\n");
         }
         return (sb.toString());
     }
