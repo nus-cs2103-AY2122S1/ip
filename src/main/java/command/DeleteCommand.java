@@ -47,7 +47,6 @@ public class DeleteCommand extends Command {
     public Message execute(TaskList list) throws NonExistentTaskNumberException, ErrorAccessingFileException {
         Task task = list.deleteTaskFromList(this.taskNumber);
         return getOutputMessage(list, task);
-
     }
 
     private Message getOutputMessage(TaskList list, Task task) {

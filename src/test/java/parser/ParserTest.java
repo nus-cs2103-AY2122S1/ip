@@ -5,7 +5,13 @@ import java.io.ByteArrayInputStream;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Encapsulates tests for Parser.
+ */
 public class ParserTest {
+    /**
+     * Tests if exitCommand is detected as one.
+     */
     @Test
     public void detectExitCommand_exitCommand_true() {
         String exitCommand = "bye";
@@ -16,6 +22,9 @@ public class ParserTest {
         System.setIn(System.in);
     }
 
+    /**
+     * Tests if non exitCommand is not detected as an exitCommand.
+     */
     @Test
     public void detectExitCommand_nonExitCommand_false() {
         String nonExitCommand = "hey";
