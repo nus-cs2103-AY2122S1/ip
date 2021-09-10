@@ -1,6 +1,5 @@
 import command.Command;
 import exception.DukeException;
-import javafx.scene.image.Image;
 import storage.Storage;
 import task.TaskList;
 import ui.Ui;
@@ -17,9 +16,6 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
     /**
      * Creates the instance of Duke.
      * The path to the local file and tasklist will be initialised.
@@ -35,10 +31,6 @@ public class Duke {
         } catch (DukeException e) {
             tasks = new TaskList();
         }
-    }
-
-    public Duke() {
-
     }
 
     /**
@@ -64,6 +56,10 @@ public class Duke {
         }
     }
 
+    protected String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
     /**
      * Creates the initialization process and run the programme when completed.
      *
@@ -71,11 +67,6 @@ public class Duke {
      */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
-    }
-
-
-    String getResponse(String input) {
-        return "Duke heard: " + input;
     }
 
 }
