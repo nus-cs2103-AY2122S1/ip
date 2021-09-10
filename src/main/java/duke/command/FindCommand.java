@@ -12,8 +12,8 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Storage storage) {
-        taskList.findAndListTasks(keyword);
-        return "";
+        String output = taskList.findAndListTasks(keyword);
+        return output;
     }
 
     public boolean shouldExit() {

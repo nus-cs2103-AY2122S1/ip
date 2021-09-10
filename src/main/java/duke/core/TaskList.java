@@ -44,7 +44,7 @@ public class TaskList {
         return output;
     }
 
-    public void findAndListTasks(String keyword) {
+    public String findAndListTasks(String keyword) {
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
         int index = 1;
         String regex = " ";
@@ -62,7 +62,9 @@ public class TaskList {
                 }
             }
         }
-        Ui.formatAndPrint(sb.substring(0, sb.length() - 1));
+
+        // Remove the last \n for a nicer output
+        return sb.substring(0, sb.length() - 1);
     }
 
     /**
