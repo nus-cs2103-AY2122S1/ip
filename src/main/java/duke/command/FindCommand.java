@@ -25,12 +25,12 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(Duke duke, TaskList tasks, Storage storage) {
-        List<Task> filtered =
+        List<Task> filteredTasks =
             tasks.stream().filter(task -> task.getDescription().contains(keyword)).collect(Collectors.toList());
 
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
-        for (int i = 0; i < filtered.size(); i++) {
-            String item = i + 1 + ". " + filtered.get(i) + "\n";
+        for (int i = 0; i < filteredTasks.size(); i++) {
+            String item = i + 1 + ". " + filteredTasks.get(i) + "\n";
             sb.append(item);
         }
         String message = sb.toString();
