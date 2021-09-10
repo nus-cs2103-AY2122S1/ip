@@ -44,8 +44,8 @@
 
        <Menu mnemonicParsing="false" text="Export">
          <items>
-           <MenuItem mnemonicParsing="false" onAction="#setExportCsvListener" text="As CSV" />
-           <MenuItem mnemonicParsing="false" text="more Coming Soon" />
+           <MenuItem mnemonicParsing="false" onAction="#setExportCsvListener" text="places" />
+           <MenuItem mnemonicParsing="false" onAction="#setExportCsvListener" text="tasks" />
          </items>
        </Menu>
      </menus>

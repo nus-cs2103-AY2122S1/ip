@@ -5,6 +5,8 @@ import gnosis.ui.GnosisUI;
 import gnosis.util.GnosisConstants;
 import gnosis.util.GnosisException;
 
+import java.io.File;
+
 /**
  * Represents Logic flow of interaction of user input and, to specified
  * managers to perform from user command.
@@ -95,5 +97,15 @@ public class GnosisController {
      */
     public void loadGreetingMessage() {
         view.displayGreetMessage(taskController.isTaskLoaded(), placeController.isPlacesLoaded());
+    }
+
+    public boolean export(String fileName, File pathToExport) {
+        //TODO: improve implementation
+        if (fileName.equalsIgnoreCase("tasks")) {
+            return taskController.exportFile(pathToExport);
+        } else if (fileName.equalsIgnoreCase("places")) {
+            return placeController.exportFile(pathToExport);
+        }
+        return false;
     }
 }

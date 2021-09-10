@@ -1,5 +1,6 @@
 package gnosis.controller;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -70,6 +71,10 @@ public class TaskController implements CommandListener {
 
     public boolean isTaskLoaded() {
         return this.taskDbManager.isDataFileAvail();
+    }
+
+    public boolean exportFile(File pathToExport) {
+        return this.taskDbManager.copyFileToNewPath(pathToExport);
     }
 
 

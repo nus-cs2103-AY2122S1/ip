@@ -249,13 +249,20 @@ public class GnosisUI extends AnchorPane {
         fileChooser.getExtensionFilters().add(extFilter);
 
         //Show save file dialog
-        File file = fileChooser.showSaveDialog(((MenuItem) event.getTarget()).getParentPopup().getOwnerWindow());
+        MenuItem exportItem = (MenuItem) event.getTarget();
+        File file = fileChooser.showSaveDialog(exportItem.getParentPopup().getOwnerWindow());
 
         //TODO: IMPLEMENT EXPORTING
-//        if (file != null) {
-//            //TaskStorageManager.exportTasks(file);
-//
-//            //gnosisController.exportToCsv(file);
-//        }
+        boolean isExportSuccess = false;
+        if (file != null) {
+            isExportSuccess = gnosisController.export(exportItem.getText(), file);
+        }
+
+        if (!isExportSuccess) {
+            displayMessage("File not exported");
+        } else {
+            displayMessage("File Exported");
+        }
+
     }
 }

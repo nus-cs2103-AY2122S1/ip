@@ -45,13 +45,15 @@ public class DatabaseManager {
      *
      * @param pathToExport path to export file to
      */
-    public void copyFileToNewPath(File pathToExport) {
-
+    public boolean copyFileToNewPath(File pathToExport) {
+        boolean isCopySuccessful;
         try {
-
             Files.copy(this.file.toPath(), pathToExport.toPath());
+            isCopySuccessful = true;
         } catch (IOException e) {
+            isCopySuccessful = false;
             e.printStackTrace();
         }
+        return isCopySuccessful;
     }
 }

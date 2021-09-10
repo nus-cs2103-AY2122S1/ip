@@ -1,5 +1,6 @@
 package gnosis.controller;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -42,6 +43,10 @@ public class PlaceController implements CommandListener {
         }
 
         this.placeDbManager.writePlacesToFile(this.places);
+    }
+
+    public boolean exportFile(File pathToExport) {
+        return this.placeDbManager.copyFileToNewPath(pathToExport);
     }
 
     public boolean isPlacesLoaded() {
