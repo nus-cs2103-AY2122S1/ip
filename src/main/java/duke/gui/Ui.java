@@ -6,6 +6,8 @@ import java.util.List;
 
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.util.DukeException;
+import duke.util.Storage;
 
 /**
  * Class that encapsulates user interaction.
@@ -15,8 +17,14 @@ public class Ui {
      * Displays the welcome message.
      */
     public static String showWelcome() {
-        return "Hello! I'm Timothy Q. Mouse,\n"
-                + "What can I do for you?";
+        String welcome = "Hello! I'm Timothy Q. Mouse,\nWhat can I do for you?";
+        try {
+            Storage.load();
+        } catch (DukeException e) {
+            return "Corrupted file, new task list created.\n" + welcome;
+        }
+
+        return welcome;
     }
 
     /**

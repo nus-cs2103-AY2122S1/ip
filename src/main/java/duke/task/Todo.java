@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.util.DukeException;
+
 /**
  * Class that encapsulates a Todo task.
  */
@@ -9,8 +11,8 @@ public class Todo extends Task {
      * Returns a new Todo object.
      * @param todoName The user input.
      */
-    public Todo(String todoName) {
-        super(todoName.substring(5));
+    public Todo(String todoName) throws DukeException {
+        super(todoName, 5);
     }
 
     /**
@@ -19,7 +21,7 @@ public class Todo extends Task {
      * @param isDone Whether the task is done.
      */
     public Todo(String todoName, boolean isDone) {
-        super(todoName, isDone);
+        super(todoName, isDone, 0);
     }
 
     /**
