@@ -3,19 +3,19 @@ package duke.exception;
 /**
  * Throw this when data format is incorrect ie. parser fails to parse the data into a list.
  */
-public class DukeParseException extends DukeException {
+public class DukeIoException extends DukeException {
     /**
      * Constructs a DukeException with no detailed message.
      */
-    public DukeParseException() {
+    public DukeIoException() {
     }
 
     /**
-     * Constructs a DukeParseException with the specified detail message.
+     * Constructs a DukeIoException with the specified detail message.
      *
      * @param errorMessage Error message.
      */
-    public DukeParseException(String errorMessage) {
+    public DukeIoException(String errorMessage) {
         super(errorMessage);
     }
 }

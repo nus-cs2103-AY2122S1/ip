@@ -3,6 +3,7 @@ package duke.command;
 import duke.Duke;
 import duke.Storage;
 import duke.exception.DukeIndexOutOfRangeException;
+import duke.exception.DukeIoException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -25,7 +26,8 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(Duke duke, TaskList tasks, Storage storage) throws DukeIndexOutOfRangeException {
+    public void execute(Duke duke, TaskList tasks, Storage storage) throws DukeIndexOutOfRangeException,
+        DukeIoException {
         if (index < 1 || index > tasks.toArray().length) {
             throw new DukeIndexOutOfRangeException(tasks.toArray().length > 0
                 ? "OOPS!!! I'm sorry, index is out of range! " + "Please try with a number from 1 to " + tasks

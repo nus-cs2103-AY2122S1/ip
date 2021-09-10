@@ -39,7 +39,7 @@ public class Duke {
     private void setUpGui(String filePath) {
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load(false));
+            tasks = new TaskList(storage.load());
             String successMessage = "Data loaded successfully!";
             this.setResponse(successMessage);
         } catch (DukeException | IOException e) {
@@ -54,7 +54,7 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load(false));
+            tasks = new TaskList(storage.load());
         } catch (DukeException | IOException e) {
             ui.showLoadingError();
             tasks = new TaskList();
@@ -129,6 +129,7 @@ public class Duke {
                 ui.showLine();
             }
         }
+        Ui.getScanner().close();
     }
 
     private void sayWelcome() {

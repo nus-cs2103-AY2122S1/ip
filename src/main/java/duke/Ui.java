@@ -6,6 +6,11 @@ import java.util.Scanner;
  * Ui class deals with interactions with the user.
  */
 public class Ui {
+    private static final Scanner SCANNER = new Scanner(System.in);
+
+    public static Scanner getScanner() {
+        return Ui.SCANNER;
+    }
 
     /**
      * Prompts user input and returns it.
@@ -13,9 +18,7 @@ public class Ui {
      * @return Command entered by user.
      */
     public String readCommand() {
-        // TODO: close() scanner
-        Scanner sc = new Scanner(System.in);
-        String next = sc.nextLine();
+        String next = SCANNER.nextLine();
         return next;
     }
 
