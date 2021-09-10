@@ -26,7 +26,7 @@ Delete items from your task list.
 
 Mark items from your task list as done.
 
-### Feature Filter
+### Feature Find
 
 Filter your list and only see tasks with a certain string of
 characters within them.
@@ -49,7 +49,8 @@ Example of usage:
 `list`
 
 ```
-expected output
+Here are the tasks in your list:
+1. [T][ ] some task
 ```
 
 ### `todo` - add a to-do task
@@ -65,7 +66,9 @@ Expected outcome:
 The todo is added to your list.
 
 ```
-expected output
+Got it. I've added this task:
+[T][ ] some task
+Now you have <N> tasks in the list.
 ```
 
 ### `deadline` - add a deadline task
@@ -85,7 +88,9 @@ If time is not specified, the task is set to a default time of
 The deadline is added to your list.
 
 ```
-expected output
+Got it. I've added this task:
+[D][ ] some task (by: 2022-01-01 08:00)
+Now you have 3 tasks in the list.
 ```
 
 ### `event` - add an event task
@@ -105,7 +110,9 @@ If time is not specified, the task is set to a default time of
 The event is added to your list.
 
 ```
-expected output
+Got it. I've added this task:
+[E][ ] some event (at: 2022-01-01 00:00)
+Now you have 2 tasks in the list.
 ```
 
 ### `done` - marks a task as done
@@ -121,7 +128,8 @@ Expected outcome:
 Marks a task as done in the list.
 
 ```
-expected output
+Nice! I've marked this task as done:
+[T][X] some task
 ```
 
 ### `delete` - delete a task
@@ -137,26 +145,31 @@ Expected outcome:
 Deletes task from list.
 
 ```
-expected output
+Noted. I've removed this task:
+[T][ ] some task
+Now you have 0 tasks in the list.
 ```
 
-### `filter` - filters tasks
+### `find` - finds tasks
 
-Enter the 'filter' command to filter tasks.
+Enter the 'find' command to filter tasks.
 
 Example of usage:
 
-`filter <regex>`
+`find <regex>`
+
+`find some`
 
 Expected outcome:
 
-Shows a list with tasks containing the regex.
+Shows a sub-list with only tasks containing the regex.
 
 ```
-expected output
+Here are the tasks in your list:
+1. [T][X] some task
 ```
 
-### `sort` - filters tasks
+### `sort` - sorts tasks
 
 Enter the 'sort' command to sort events and deadlines.
 
@@ -171,7 +184,9 @@ Shows a list that contains the sorted sub-list of
 the events and deadlines in the list based on time.
 
 ```
-expected output
+Here are the tasks in your list:
+1. [E][ ] some event (at: 2022-01-01 00:00)
+2. [D][ ] some task (by: 2022-01-01 08:00)
 ```
 
 ### `bye` - Terminates chat session
@@ -187,5 +202,5 @@ Expected outcome:
 Kills the chatbot.
 
 ```
-expected output
+Bye. Hope to see you again soon!
 ```

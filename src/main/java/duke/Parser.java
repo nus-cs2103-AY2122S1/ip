@@ -89,14 +89,10 @@ public class Parser {
         // Use Java Assertions to check for unacceptable commands
         Boolean valid = true;
         if (input.equals("bye")) {
-            System.out.println(BYE_STRING);
             response = BYE_STRING;
         } else if (input.equals("list")) {
-            System.out.println(duke.TaskList.taskListString(tasks));
             response = duke.TaskList.taskListString(tasks);
         } else if (input.equals("hello")) {
-            System.out.println("Hello! I'm duke.Duke\n"
-                    + "What can I do for you?");
             response = "Hello! I'm duke.Duke\n"
                     + "What can I do for you?";
         } else if (input.startsWith("done ")) {
@@ -148,6 +144,7 @@ public class Parser {
         } catch (IOException err) {
             System.out.println(err);
         }
+        System.out.println(response);
         return response;
     }
 }

@@ -34,7 +34,6 @@ public class Command {
         tasks.set(taskNumber, task);
         String doneTaskString = "Nice! I've marked this task as done:\n"
                 + task.toString();
-        System.out.println(doneTaskString);
         return doneTaskString;
     }
 
@@ -49,7 +48,6 @@ public class Command {
         String deleteTaskString = String.format("Noted. I've removed this task:\n%s"
                         + "\nNow you have %d tasks in the list.",
                 task.toString(), tasks.size());
-        System.out.println(deleteTaskString);
         return deleteTaskString;
     }
 
@@ -66,7 +64,6 @@ public class Command {
                 filteredTasks.add(task);
             }
         }
-        System.out.println(filteredTasks);
         return filteredTasks;
     }
 
