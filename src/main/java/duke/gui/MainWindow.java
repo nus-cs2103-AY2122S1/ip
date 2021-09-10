@@ -40,12 +40,12 @@ public class MainWindow extends AnchorPane {
 
     public void greetUser() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(
-            "Hello! I'm Duke\nWhat can I do for you?", dukeImage));
+            "Good Day! I'm The Terminator\nWhat can I do for you?", dukeImage));
     }
 
     private void byeUser() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(
-            "Bye! Hope to see you again soon!", dukeImage));
+            "Goodbye Human, I shall terminate the program", dukeImage));
     }
 
     /**
@@ -58,7 +58,7 @@ public class MainWindow extends AnchorPane {
         String response = duke.getResponse(input);
         if (response.equals("bye")) {
             byeUser();
-            System.exit(0);
+            Main.closeDuke();
         } else {
             dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

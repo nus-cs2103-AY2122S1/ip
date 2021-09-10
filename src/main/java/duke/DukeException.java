@@ -14,47 +14,46 @@ public class DukeException extends IllegalArgumentException {
     public DukeException(String errorType) {
         switch (errorType) {
         case "invalid input":
-            errorString = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+            errorString = "I don't understand, come again?";
             break;
         case "empty command":
-            errorString = "OOPS!!! Please enter a command.";
+            errorString = "Enter the command.";
             break;
         case "invalid task index":
-            errorString = "OOPS!!! Please enter a valid task index.";
+            errorString = "Can you actually PLEASE enter a valid task index???";
             break;
         case "non-integer input":
-            errorString = "OOPS!!! Please enter an integer.";
+            errorString = "Do you know what an integer input is?";
             break;
         case "empty search term":
-            errorString = "OOPS!!! Please enter the term you want to search.";
+            errorString = "I cannot search for nothing, enter something!";
             break;
         case "empty todo description":
-            errorString = "OOPS!!! The description of a todo cannot be empty.";
+            errorString = "I'm not going to add a todo of nothing.";
             break;
         case "empty deadline description":
-            errorString = "OOPS!!! The description of a deadline cannot be empty.";
+            errorString = "I'm not going to add a deadline of nothing.";
             break;
         case "empty deadline deadline":
-            errorString = "OOPS!!! The deadline of a... deadline cannot be empty.";
+            errorString = "Well deadline of a... deadline cannot be empty.";
             break;
         case "invalid deadline":
-            errorString = "OOPS!!! Please enter a valid deadline!";
+            errorString = "Use a sensible deadline date/time format..";
             break;
         case "empty event description":
-            errorString = "OOPS!!! The description of an event cannot be empty.";
+            errorString = "I'm not going to add an event of nothing.";
             break;
         case "empty event duration":
-            errorString = "OOPS!!! The duration of an event cannot be empty.";
+            errorString = "Tell me how long the event lasts.";
             break;
         case "invalid event date":
-            errorString = "OOPS!!! Please enter a valid date in duration!";
+            errorString = "Use a sensible event date format..";
             break;
         case "invalid event time":
-            errorString = "OOPS!!! Please enter a valid time duration!"
-                + " Valid formats are (HHmm-HHmm or hh:mm a-hh:mm a)";
+            errorString = "Use a sensible event time format..";
             break;
         case "empty recurrence number":
-            errorString = "OOPS!!! Please enter a valid number of recurrence.";
+            errorString = "Can you give me a sensible number of repetitions???";
             break;
         default:
             assert false : "Unaccounted exception case";

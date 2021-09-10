@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import duke.Duke;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -25,9 +26,24 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().greetUser();
+            stage.setTitle("T-800");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * This method will close Duke after a 2 seconds delay.
+     */
+    public static void closeDuke() {
+        new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                System.out.println(e.getMessage());
+            }
+            Platform.exit();
+        }).start();
     }
 }
