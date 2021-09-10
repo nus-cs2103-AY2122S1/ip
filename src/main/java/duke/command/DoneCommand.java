@@ -17,6 +17,7 @@ public class DoneCommand extends Command {
      * @param indexOfCompleted Index of the task that has been completed.
      */
     public DoneCommand(int indexOfCompleted) {
+        assert indexOfCompleted > 0: "Index of completed task should be at least 1";
         this.indexOfCompleted = indexOfCompleted;
     }
 
