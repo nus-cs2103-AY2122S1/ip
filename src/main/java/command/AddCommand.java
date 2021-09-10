@@ -69,7 +69,6 @@ public class AddCommand extends Command {
             verifyDate(taskInfo, "event");
             break;
         default:
-            System.out.println("Something went wrong...");
             break;
         }
     }
@@ -92,9 +91,10 @@ public class AddCommand extends Command {
             newTask = new Event(eventDescription, eventDate, false);
             break;
         default:
-            System.out.println("Something went wrong...");
+            break;
         }
 
+        assert newTask != null;
 
         tasks.addTask(newTask);
         storage.write(tasks.getTaskList());
@@ -102,7 +102,6 @@ public class AddCommand extends Command {
                         + "%s\n"
                         + "Now you have %d tasks in the list.\n", newTask, tasks.size());
     }
-
 
     public boolean isExit() {
         return EXIT;
