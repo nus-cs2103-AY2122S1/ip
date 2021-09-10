@@ -71,7 +71,7 @@ public class Storage {
     }
 
     private void validateRow(String[] row, int minLength) throws DukeParseException {
-        if (row.length < 3) {
+        if (row.length < minLength) {
             throw new DukeParseException();
         }
     }
