@@ -54,7 +54,12 @@ public class Duke {
     }
 
     protected String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command c = Command.parse(input);
+            return "Duke: " + c.execute(tasks, ui, storage);
+        } catch (DukeException e){
+            return "Duke: " + e.getMessage();
+        }
     }
 
     /**
