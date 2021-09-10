@@ -60,7 +60,8 @@ public abstract class Command {
             throw new InvalidCommand();
     }
 
-    assert commandType != null : "command should be generated";
+    assert commandType != null : "CommandType should have been determined";
+
     return commandType;
     }
 
