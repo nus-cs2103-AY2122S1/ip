@@ -1,9 +1,8 @@
 package duke.task;
 
-import duke.Duke;
-import duke.exception.DukeException;
-
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
 
 /** A class that represents a task. */
 public class Task {
@@ -22,6 +21,12 @@ public class Task {
         this.priority = Priority.MEDIUM;
     }
 
+    /**
+     * Constructs a task with description and done state.
+     *
+     * @param description The description.
+     * @param isDone The state whether the task is done.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;

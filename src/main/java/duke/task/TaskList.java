@@ -90,6 +90,12 @@ public class TaskList {
         this.taskList.get(index).setPriority(priority);
     }
 
+    /**
+     * Filters tasks whose description contain the keyword.
+     *
+     * @param keyword The keyword.
+     * @return Filtered TaskList object.
+     */
     public TaskList filter(String keyword) {
         List<Task> filteredTasks = this.taskList.stream()
                 .filter(task -> task.getDescription().contains(keyword))

@@ -1,6 +1,7 @@
 package duke.parser;
 
-import duke.Duke;
+import java.util.Arrays;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.Commands;
@@ -11,13 +12,10 @@ import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.PrioritizeCommand;
 import duke.exception.DukeException;
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Priority;
 import duke.task.Todo;
-
-import java.util.Arrays;
 
 /** A parser class that parses user's commands. */
 public class Parser {
@@ -131,8 +129,8 @@ public class Parser {
             return parseEvent(input);
         case PRIORITIZE:
             return parsePrioritize(input);
+        default:
+            return null;
         }
-
-        return null;
     }
 }
