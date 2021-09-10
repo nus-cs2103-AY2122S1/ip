@@ -52,15 +52,14 @@ public class TaskList {
      * @throws InvalidTaskIdException If the index provided does not correspond to a Task in the TaskList.
      */
     public void delete(int index) throws InvalidTaskIdException {
-        if (index >= 0 && index < this.taskList.size()) {
-            this.taskList.remove(index);
-            try {
-                this.storage.saveData(this);
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
-        } else {
+        if (index < 0 || index >= this.taskList.size()) {
             throw new InvalidTaskIdException();
+        }
+        this.taskList.remove(index);
+        try {
+            this.storage.saveData(this);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -72,11 +71,10 @@ public class TaskList {
      * @throws InvalidTaskIdException If the index provided does not correspond to a Task in the TaskList.
      */
     public Task get(int index) throws InvalidTaskIdException {
-        if (index >= 0 && index < this.taskList.size()) {
-            return this.taskList.get(index);
-        } else {
+        if (index < 0 || index >= this.taskList.size()) {
             throw new InvalidTaskIdException();
         }
+        return this.taskList.get(index);
     }
 
     /**
@@ -86,16 +84,14 @@ public class TaskList {
      * @throws InvalidTaskIdException If the index provided does not correspond to a Task in the TaskList.
      */
     public void markAsCompleted(int index) throws InvalidTaskIdException {
-        if (index >= 0 && index < this.taskList.size()) {
-            this.taskList.get(index).markAsCompleted();
-            try {
-                this.storage.saveData(this);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-
-        } else {
+        if (index < 0 || index >= this.taskList.size()) {
             throw new InvalidTaskIdException();
+        }
+        this.taskList.get(index).markAsCompleted();
+        try {
+            this.storage.saveData(this);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 

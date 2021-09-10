@@ -36,26 +36,18 @@ public class Storage {
         TaskList taskList = new TaskList();
         for (String content : contents) {
             String[] taskDetails = content.split("=");
-
+            Task savedTask;
             if (taskDetails[0].equals("ToDo")) {
-                ToDo todo = new ToDo(taskDetails[2]);
-                if (taskDetails[1].equals("true")) {
-                    todo.markAsCompleted();
-                }
-                taskList.add(todo);
+                savedTask = new ToDo(taskDetails[2]);
             } else if (taskDetails[0].equals("Deadline")) {
-                Deadline deadline = new Deadline(taskDetails[2], taskDetails[3]);
-                if (taskDetails[1].equals("true")) {
-                    deadline.markAsCompleted();
-                }
-                taskList.add(deadline);
+                savedTask = new Deadline(taskDetails[2], taskDetails[3]);
             } else {
-                Event event = new Event(taskDetails[2], taskDetails[3]);
-                if (taskDetails[1].equals("true")) {
-                    event.markAsCompleted();
-                }
-                taskList.add(event);
+                savedTask = new Event(taskDetails[2], taskDetails[3]);
             }
+            if (taskDetails[1].equals("true")) {
+                savedTask.markAsCompleted();
+            }
+            taskList.add(savedTask);
         }
         return taskList;
     }
