@@ -29,6 +29,7 @@ public class Main extends Application {
             scene.getStylesheets().addAll(this.getClass().getResource("/view/application.css").toExternalForm());
 
             stage.setScene(scene);
+            stage.setTitle("TsunDuke");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
