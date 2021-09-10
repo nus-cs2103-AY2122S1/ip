@@ -6,7 +6,7 @@ import saber.tasklist.TaskList;
 import saber.ui.EventUI;
 
 /**
- * A class to encapsulate an EventCommand
+ * Encapsulates an EventCommand
  */
 public class EventCommand extends SaberCommand {
     private Event event;
@@ -17,7 +17,8 @@ public class EventCommand extends SaberCommand {
     private EventUI eventUI = new EventUI();
 
     /**
-     * A constructor for EventCommand
+     * Constructs for EventCommand
+     *
      * @param eventTask the description of the event to be added
      * @param eventTime the time of the event
      * @param isMissingDescription whether the event description is missing in the command
@@ -37,7 +38,8 @@ public class EventCommand extends SaberCommand {
     }
 
     /**
-     * A function to execute the EventCommand
+     * Executes the EventCommand
+     *
      * @param taskList the TaskList to which the newly created event is added to
      */
     public void execute(TaskList taskList) {

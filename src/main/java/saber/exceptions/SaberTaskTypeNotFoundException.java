@@ -6,7 +6,8 @@ package saber.exceptions;
 public class SaberTaskTypeNotFoundException extends SaberException {
 
     /**
-     * A constructor for SaberTaskTypeNotFoundException
+     * Constructs for SaberTaskTypeNotFoundException
+     *
      * @param message the error message
      */
     public SaberTaskTypeNotFoundException(String message) {

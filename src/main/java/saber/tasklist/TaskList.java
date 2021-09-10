@@ -1,19 +1,18 @@
 package saber.tasklist;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 import saber.task.Task;
 
 /**
- * A class to represent the TaskList used to store tasks when Saber application is still running
+ * Represents the TaskList used to store tasks when Saber application is still running
  */
 public class TaskList {
     protected ArrayList<Task> taskList;
 
     /**
-     * A constructor to TaskList object which takes in an ArrayList of tasks
+     * Constructs a TaskList object which takes in an ArrayList of tasks
+     *
      * @param taskList the taskList (an ArrayList) that will be used to store the tasks
      */
     public TaskList(ArrayList<Task> taskList) {
@@ -21,7 +20,8 @@ public class TaskList {
     }
 
     /**
-     * A function to add a task to the TaskList
+     * Adds a task to the TaskList
+     *
      * @param task the task that will be added
      */
     public void add(Task task) {
@@ -29,7 +29,8 @@ public class TaskList {
     }
 
     /**
-     * A function to delete a task given its index
+     * Deletes a task given its index
+     *
      * @param taskIndex the index of the task that will be deleted
      */
     public void delete(int taskIndex) {
@@ -37,7 +38,8 @@ public class TaskList {
     }
 
     /**
-     * A function to get the size of the TaskList
+     * Gets the size of the TaskList
+     *
      * @return size of the tasklist
      */
     public int size() {
@@ -45,7 +47,8 @@ public class TaskList {
     }
 
     /**
-     * A function to get a task given its index
+     * Gets a task given its index
+     *
      * @param index the index of the task that will be returned
      * @return the Task specified
      */

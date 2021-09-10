@@ -8,7 +8,7 @@ import java.time.format.DateTimeParseException;
 import saber.exceptions.SaberTimeParserException;
 
 /**
- * A class that encapsulates a time.
+ * Encapsulates a time.
  */
 public class SaberTime {
     private static final DateTimeFormatter DATE_FORMAT_WITH_HOURS_FOR_DISPLAY =
@@ -50,8 +50,9 @@ public class SaberTime {
     protected LocalDateTime localDateTime;
 
     /**
-     * A constructor for SaberTime. This constructor also parse the time to Java's LocalDate or LocalDateTime
+     * Constructs SaberTime. This constructor also parse the time to Java's LocalDate or LocalDateTime
      * to ensure that the date passed are in recognizable date formats
+     *
      * @param time the raw unparsed time
      * @throws SaberTimeParserException if an error occurs during the parsing of the time
      */
@@ -80,7 +81,8 @@ public class SaberTime {
     }
 
     /**
-     * A function to return the string representation of time
+     * Returns the string representation of time
+     *
      * @return String representation of time
      */
     @Override

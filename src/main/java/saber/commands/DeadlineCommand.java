@@ -6,7 +6,7 @@ import saber.tasklist.TaskList;
 import saber.ui.DeadlineUI;
 
 /**
- * A class to encapsulate a Deadline Command
+ * Encapsulates a Deadline Command
  */
 public class DeadlineCommand extends SaberCommand {
     private Deadline deadline;
@@ -17,7 +17,8 @@ public class DeadlineCommand extends SaberCommand {
     private DeadlineUI deadlineUI = new DeadlineUI();
 
     /**
-     * A constructor for DeadlineCommand
+     * Constructs for DeadlineCommand
+     *
      * @param deadlineTask the description of the deadline task to be added
      * @param deadlineTime the time the deadline task should be due by
      * @param isMissingDescription whether the deadline task description is missing in the command
@@ -37,7 +38,8 @@ public class DeadlineCommand extends SaberCommand {
     }
 
     /**
-     * A function to execute the DeadlineCommand
+     * Executes the DeadlineCommand
+     *
      * @param taskList the TaskList to which the newly created deadline task is added to
      */
     public void execute(TaskList taskList) {

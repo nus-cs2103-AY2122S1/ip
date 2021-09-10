@@ -3,7 +3,7 @@ package saber.ui;
 import saber.task.Task;
 
 /**
- * A class to encapsulates the UI corresponding to EventCommand
+ * Encapsulates the UI corresponding to EventCommand
  */
 public class EventUI extends SaberCommandUI {
     protected final String missingDescriptionError = "      I'm sorry, Master.\n"
@@ -23,14 +23,15 @@ public class EventUI extends SaberCommandUI {
     protected String successMessage;
 
     /**
-     * A constructor for EventUI which will initialize the success message to an empty string
+     * Constructs EventUI which will initialize the success message to an empty string
      */
     public EventUI() {
         this.successMessage = "";
     }
 
     /**
-     * Set the success message for the UI
+     * Sets the success message for the UI
+     *
      * @param event the event task to be added
      * @param totalTask the total task available in the TaskList
      */
@@ -55,6 +56,7 @@ public class EventUI extends SaberCommandUI {
 
     /**
      * Gets missing description error
+     *
      * @return missing description error
      */
     public String getMissingDescriptionError() {
@@ -80,28 +82,28 @@ public class EventUI extends SaberCommandUI {
     }
 
     /**
-     * Print out the success message
+     * Prints out the success message
      */
     public void showSuccess() {
         System.out.println(successMessage);
     }
 
     /**
-     * Print out the missing description error when there is no description supplied to the event command
+     * Prints out the missing description error when there is no description supplied to the event command
      */
     public void showMissingDescriptionError() {
         System.out.println(missingDescriptionError);
     }
 
     /**
-     * Print out the missing time error when there is no time supplied to the event command
+     * Prints out the missing time error when there is no time supplied to the event command
      */
     public void showMissingTimeError() {
         System.out.println(missingTimeError);
     }
 
     /**
-     * Print the parsing time error when the time supplied to the event command is invalid
+     * Prints the parsing time error when the time supplied to the event command is invalid
      */
     public void showParsingTimeError() {
         System.out.println(parsingTimeError);

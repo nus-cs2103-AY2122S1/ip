@@ -4,14 +4,15 @@ import saber.exceptions.SaberTimeParserException;
 import saber.time.SaberTime;
 
 /**
- * A class to encapsulate a deadline type task
+ * Encapsulates a deadline type task
  */
 public class Deadline extends Task {
 
     protected SaberTime by;
 
     /**
-     * A constructor for Deadline type task
+     * Constructs for Deadline type task
+     *
      * @param description the description of the deadline task
      * @param by the time the deadline task should be due by
      * @param isDone the completion status of the deadline task
@@ -23,7 +24,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * A function to get the time of the deadline
+     * Gets the time of the deadline
+     *
      * @return time of the deadline in string
      */
     public String getTimeInString() {
@@ -31,7 +33,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * A function to return the string representation of a deadline task
+     * Returns the string representation of a deadline task
+     *
      * @return String representation of a deadline task
      */
     @Override

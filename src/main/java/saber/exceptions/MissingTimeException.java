@@ -6,7 +6,8 @@ package saber.exceptions;
 public class MissingTimeException extends SaberException {
 
     /**
-     * A constructor for MissingTimeException
+     * Constructs for MissingTimeException
+     *
      * @param message the error message
      */
     public MissingTimeException(String message) {

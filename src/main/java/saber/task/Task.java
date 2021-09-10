@@ -1,14 +1,15 @@
 package saber.task;
 
 /**
- * A class to represent a task
+ * Represents a task
  */
 public class Task {
     protected final String description;
     protected boolean isDone;
 
     /**
-     * A constructor for a task
+     * Constructs for a task
+     *
      * @param description the description of the task
      * @param isDone the completion status of the task
      */
@@ -18,7 +19,8 @@ public class Task {
     }
 
     /**
-     * A function to get the status icon of the task depending on the completion status of the task
+     * Gets the status icon of the task depending on the completion status of the task
+     *
      * @return X if task is done, and an empty space string if the task is not done
      */
     public String getStatusIcon() {
@@ -26,7 +28,8 @@ public class Task {
     }
 
     /**
-     * A function to get the description of the task
+     * Gets the description of the task
+     *
      * @return description of the task in string
      */
     public String getDescription() {
@@ -43,14 +46,15 @@ public class Task {
     }
 
     /**
-     * A function to mark task as done
+     * Marks task as done
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * A function to return the string representation of a task
+     * Returns the string representation of a task
+     *
      * @return String representation of a task
      */
     @Override

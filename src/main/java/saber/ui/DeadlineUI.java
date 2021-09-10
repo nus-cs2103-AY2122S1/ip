@@ -3,7 +3,7 @@ package saber.ui;
 import saber.task.Task;
 
 /**
- * A class to encapsulates the UI corresponding to DeadlineCommand
+ * Encapsulates the UI corresponding to DeadlineCommand
  */
 public class DeadlineUI extends SaberCommandUI {
     protected final String missingDescriptionError = "      I'm really sorry, Master.\n"
@@ -31,6 +31,7 @@ public class DeadlineUI extends SaberCommandUI {
 
     /**
      * Sets the success message for the UI
+     *
      * @param deadline the deadline task to be added
      * @param totalTask the total task available in the TaskList
      */
@@ -56,6 +57,7 @@ public class DeadlineUI extends SaberCommandUI {
 
     /**
      * Gets missing description error
+     *
      * @return missing description error
      */
     public String getMissingDescriptionError() {

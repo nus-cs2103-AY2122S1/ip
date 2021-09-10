@@ -6,7 +6,8 @@ package saber.exceptions;
 public class SaberStorageStoreException extends SaberException {
 
     /**
-     * A constructor for SaberStorageStoreException
+     * Constructs for SaberStorageStoreException
+     *
      * @param message the error message
      */
     public SaberStorageStoreException(String message) {

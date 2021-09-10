@@ -4,7 +4,7 @@ import saber.tasklist.TaskList;
 import saber.ui.FindUI;
 
 /**
- * A class that represents a FindCommand
+ * Represents a FindCommand
  */
 public class FindCommand extends SaberCommand {
     private String findString;
@@ -13,7 +13,8 @@ public class FindCommand extends SaberCommand {
     private FindUI findUI = new FindUI();
 
     /**
-     * A constructor for FindCommand
+     * Constructs for FindCommand
+     *
      * @param findString the keyword
      * @param isMissingFindString whether the keyword is missing
      */
@@ -23,7 +24,8 @@ public class FindCommand extends SaberCommand {
     }
 
     /**
-     * A function to execute the FindCommand
+     * Executes the FindCommand
+     *
      * @param taskList the TaskList from where we search for tasks containing the keyword
      */
     public void execute(TaskList taskList) {

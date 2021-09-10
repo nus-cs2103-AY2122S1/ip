@@ -3,6 +3,9 @@ package saber.ui;
 import saber.task.Task;
 import saber.tasklist.TaskList;
 
+/**
+ * Encapsulates the UI corresponding to SortCommand
+ */
 public class SortUI {
     private final String successMessage;
 
