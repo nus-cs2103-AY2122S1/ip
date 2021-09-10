@@ -31,7 +31,10 @@ public class Parser {
      */
     public DukeStatus parse(String command, TaskList tasks, Ui ui) throws DukeException {
         DukeStatus currentStatus = DukeStatus.ACTIVE;
-        if (command.equals("list")) {
+        if (command.equals("help")) {
+            currentStatus = DukeStatus.MESSAGE;
+            currentStatus.setResponse(ui.getHelpMessage());
+        } else if (command.equals("list")) {
             String[] response = tasks.getStringArr();
             response[0] = "Here are the tasks in your list:";
             currentStatus = DukeStatus.MESSAGE;
