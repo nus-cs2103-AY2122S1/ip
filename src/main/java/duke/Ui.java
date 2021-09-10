@@ -88,4 +88,14 @@ public class Ui {
         return "Here are the matching tasks in your list: " + taskList;
     }
 
+    /**
+     * Displays the tasks due in the next 7 days.
+     *
+     * @param taskList List of matching tasks.
+     * @return A string with all matching tasks.
+     */
+    public String showReminderTasks(TaskList taskList) {
+        return "Reminder: These are the tasks due in the next 7 days." + taskList;
+    }
+
 }

@@ -1,7 +1,11 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import duke.tasks.Deadline;
+import duke.tasks.Event;
 import duke.tasks.Task;
 
 /**
@@ -61,6 +65,43 @@ public class TaskList {
      */
     public int size() {
         return taskList.size();
+    }
+
+    /**
+     * Returns if the task list is empty.
+     *
+     * @return If the task list is empty.
+     */
+    public boolean isEmpty() {
+        return taskList.isEmpty();
+    }
+
+    private boolean isTaskBefore(Task task, LocalDate date) {
+        if (task instanceof Deadline) {
+            LocalDate deadlineDateBy = ((Deadline) task).getDateBy();
+            return deadlineDateBy.isBefore(date) && !deadlineDateBy.isBefore(LocalDate.now());
+        }
+        if (task instanceof Event) {
+            LocalDateTime eventTimeAt = ((Event) task).getTimeAt();
+            return eventTimeAt.toLocalDate().isBefore(date) && !eventTimeAt.toLocalDate().isBefore(LocalDate.now());
+        }
+        return false;
+    }
+
+    /**
+     * Returns a TaskList containing all tasks that are due/occur before the given date.
+     *
+     * @param date The date the task has to be due before.
+     * @return A TaskList containing all tasks that are due/occur before the given date
+     */
+    public TaskList getTasksBefore(LocalDate date) {
+        TaskList tasks = new TaskList();
+        for (Task task : taskList) {
+            if (isTaskBefore(task, date)) {
+                tasks.addTask(task);
+            }
+        }
+        return tasks;
     }
 
     @Override

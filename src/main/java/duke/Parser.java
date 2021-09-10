@@ -11,6 +11,7 @@ import duke.commands.EventCommand;
 import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
+import duke.commands.ReminderCommand;
 import duke.commands.TodoCommand;
 
 /**
@@ -53,6 +54,8 @@ public class Parser {
             return new DeadlineCommand(arguments);
         case "find":
             return new FindCommand(arguments);
+        case "remind":
+            return new ReminderCommand();
         default:
             throw new DukeException("Invalid Command Entered");
         }

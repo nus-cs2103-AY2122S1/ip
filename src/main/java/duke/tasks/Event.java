@@ -17,6 +17,10 @@ public class Event extends Task {
         this.at = LocalDateTime.parse(at, formatter);
     }
 
+    public LocalDateTime getTimeAt() {
+        return at;
+    }
+
     @Override
     public String toString() {
         return "[E] " + super.toString() + " (at: " + at.format(formatter) + ")";

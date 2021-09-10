@@ -54,6 +54,10 @@ public class Duke extends Application {
         }
     }
 
+    public String showList() {
+        return ui.showList(taskList);
+    }
+
     @Override
     public void start(Stage stage) {
         Label helloWorld = new Label("Hello World!"); // Creating a new Label control
