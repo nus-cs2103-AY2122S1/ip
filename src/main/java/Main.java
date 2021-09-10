@@ -26,4 +26,11 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        //When platform.exit() is called, stop() will be called
+        System.out.println("Application is closed");
+    }
 }

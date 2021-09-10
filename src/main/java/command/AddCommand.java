@@ -95,6 +95,7 @@ public class AddCommand extends Command {
             System.out.println("Something went wrong...");
         }
 
+
         tasks.addTask(newTask);
         storage.write(tasks.getTaskList());
         return String.format("Got it. I've added this task:\n"
