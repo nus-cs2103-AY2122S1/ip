@@ -16,9 +16,9 @@ public class ListCommand extends Command {
 
         public String execute(TaskList tasks, Ui ui, Storage storage) {
             ArrayList<Task> taskList = tasks.getTaskList();
-            String returnedString = "";
+            String returnedString = "Here are your tasks: \n";
             for (int i = 0; i < taskList.size(); i++) {
-                returnedString += String.format("\t%d.%s%n", (i + 1), taskList.get(i));
+                returnedString += String.format("%d.%s\n", (i + 1), taskList.get(i));
             }
             return returnedString;
         }

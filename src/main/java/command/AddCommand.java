@@ -97,9 +97,9 @@ public class AddCommand extends Command {
 
         tasks.addTask(newTask);
         storage.write(tasks.getTaskList());
-        return String.format("\tGot it. I've added this task:\n"
-                        + "\t%s\n"
-                        + "\tNow you have %d tasks in the list.\n", newTask, tasks.size());
+        return String.format("Got it. I've added this task:\n"
+                        + "%s\n"
+                        + "Now you have %d tasks in the list.\n", newTask, tasks.size());
     }
 
 

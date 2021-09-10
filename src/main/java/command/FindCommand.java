@@ -25,7 +25,7 @@ public class FindCommand extends Command {
         int index = 1;
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i).getDescription().toLowerCase(Locale.ROOT).contains(keyword.toLowerCase(Locale.ROOT))) {
-                returnedString += String.format("\t%d.%s\n", index, taskList.get(i));
+                returnedString += String.format("%d.%s\n", index, taskList.get(i));
                 index++;
             }
         }

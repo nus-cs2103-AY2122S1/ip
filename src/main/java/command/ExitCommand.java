@@ -12,7 +12,7 @@ public class ExitCommand extends Command {
     private final boolean EXIT = true;
 
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return "\tBye. Hope to see you again soon!";
+        return "Bye. Hope to see you again soon!";
     }
 
     public boolean isExit() {

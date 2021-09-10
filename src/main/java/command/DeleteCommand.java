@@ -27,9 +27,9 @@ public class DeleteCommand extends Command {
         try {
             Task deletedTask = tasks.deleteTask(taskNumber);
             storage.write(tasks.getTaskList());
-            return String.format("\tNoted. I've removed this task:\n"
-                    + "\t%s\n"
-                    + "\tNow you have %d tasks in the list.\n", deletedTask, tasks.size());
+            return String.format("Noted. I've removed this task:\n"
+                    + "%s\n"
+                    + "Now you have %d tasks in the list.\n", deletedTask, tasks.size());
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidValue();
         }

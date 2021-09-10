@@ -21,8 +21,8 @@ public class DoneCommand extends Command {
         try {
             tasks.completeTask(taskNumber);
             storage.write(tasks.getTaskList());
-            return String.format("\tNice! I've marked this task as done:\n"
-                    + "\t%s\n", tasks.getTask(taskNumber));
+            return String.format("Nice! I've marked this task as done:\n"
+                    + "%s\n", tasks.getTask(taskNumber));
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidValue();
         }
