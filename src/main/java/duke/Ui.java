@@ -6,11 +6,11 @@ import java.util.Scanner;
  * Ui class deals with interactions with the user.
  */
 public class Ui {
-    private static final String LOGO = " ____        _        \n"
-        + "|  _ \\ _   _| | _____ \n"
-        + "| | | | | | | |/ / _ \\\n"
-        + "| |_| | |_| |   <  __/\n"
-        + "|____/ \\__,_|_|\\_\\___|\n";
+    private static final Scanner SCANNER = new Scanner(System.in);
+
+    public static Scanner getScanner() {
+        return Ui.SCANNER;
+    }
 
     /**
      * Prompts user input and returns it.
@@ -18,9 +18,7 @@ public class Ui {
      * @return Command entered by user.
      */
     public String readCommand() {
-        // TODO: close() scanner
-        Scanner sc = new Scanner(System.in);
-        String next = sc.nextLine();
+        String next = SCANNER.nextLine();
         return next;
     }
 
@@ -30,23 +28,6 @@ public class Ui {
     public void showLoadingError() {
         System.err.println(
             "☹ OOPS!!! Seems like your data is corrupted. " + "Please make sure you data file has the correct format.");
-    }
-
-    /**
-     * Prints welcome message.
-     */
-    public void showWelcome() {
-        this.showLine();
-        System.out.println(LOGO);
-        System.out.println("Hello! I'm duke.Duke\nWhat can I do for you?");
-        this.showLine();
-    }
-
-    /**
-     * Prints good bye message.
-     */
-    public void showGoodBye() {
-        System.out.println("Bye. Hope to see you again soon!");
     }
 
     /**

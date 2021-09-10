@@ -1,8 +1,9 @@
 package duke.command;
 
+import duke.Duke;
 import duke.Storage;
-import duke.Ui;
 import duke.exception.DukeIndexOutOfRangeException;
+import duke.exception.DukeIoException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -25,8 +26,8 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage, boolean shouldPrintMessage)
-        throws DukeIndexOutOfRangeException {
+    public void execute(Duke duke, TaskList tasks, Storage storage)
+        throws DukeIndexOutOfRangeException, DukeIoException {
         if (index < 1 || index > tasks.toArray().length) {
             throw new DukeIndexOutOfRangeException(
                 tasks.toArray().length > 0 ? "OOPS!!! I'm sorry, index is out of range! "
@@ -37,10 +38,7 @@ public class DoneCommand extends Command {
             tasks.markAsDone(task, storage);
 
             String message = "Nice! I've marked this task as done:\n  " + task;
-            if (shouldPrintMessage) {
-                ui.showMessage(message);
-            }
-            return message;
+            duke.setResponse(message);
         }
     }
 }
