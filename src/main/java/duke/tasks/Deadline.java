@@ -44,8 +44,8 @@ public class Deadline extends Task {
     private String[] checkDateTimeFormat(String datetime) throws UserInputError {
         String[] arr = datetime.split(" ");
         if (arr.length != 2) {
-            throw new UserInputError("Invalid datetime format. " +
-                    "Please ensure you leave a space between date and time");
+            throw new UserInputError("Invalid datetime format. "
+                    + "Please ensure you leave a space between date and time");
         }
 
         String time = arr[1];
@@ -53,8 +53,8 @@ public class Deadline extends Task {
             throw new UserInputError("Invalid time input. Please ensure it is in 24h format");
         }
 
-        int hour = Integer.parseInt(time.substring(0,2));
-        int min = Integer.parseInt(time.substring(2,4));
+        int hour = Integer.parseInt(time.substring(0, 2));
+        int min = Integer.parseInt(time.substring(2, 4));
 
         if (hour < 0 || hour > 23 || min < 0 || min > 59) { //checks hour and min are valid
             throw new UserInputError("Your hour/minute input is invalid. Please check and try again!");
