@@ -9,7 +9,7 @@ import exception.ErrorAccessingFileException;
  * Encapsulates the object handling data that is stored in the hard disk.
  */
 public class Storage {
-    private final String storageDirectoryPath = "./storage";
+    private static final String STORAGE_DIRECTORY_PATH = "./storage";
 
     /**
      * Loads storage file containing the list.
@@ -19,11 +19,11 @@ public class Storage {
      */
     public StorageFile loadListFile() throws ErrorAccessingFileException {
         try {
-            File directory = new File(storageDirectoryPath);
+            File directory = new File(STORAGE_DIRECTORY_PATH);
             directory.mkdirs();
 
             String listFileName = "duke.txt";
-            String filePath = String.format("%s/%s", storageDirectoryPath, listFileName);
+            String filePath = String.format("%s/%s", STORAGE_DIRECTORY_PATH, listFileName);
             return StorageFile.loadFile(filePath);
         } catch (IOException e) {
             throw new ErrorAccessingFileException("load the file");

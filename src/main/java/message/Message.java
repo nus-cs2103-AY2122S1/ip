@@ -7,7 +7,7 @@ import java.util.Arrays;
  * It includes methods to format the output message.
  */
 public class Message {
-    private final String[] texts;
+    private String[] texts;
 
     /**
      * Instantiates a Message holding texts to be output to the user.
@@ -18,13 +18,6 @@ public class Message {
         assert texts.length > 0 : "A message should have least one string";
 
         this.texts = texts;
-    }
-
-    /**
-     * Prints the formatted message for the user to see.
-     */
-    public void print() {
-        System.out.println(this.toString());
     }
 
     /**

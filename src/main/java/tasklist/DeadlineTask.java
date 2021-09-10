@@ -16,7 +16,7 @@ import type.DatetimeTypeEnum;
 public class DeadlineTask extends Task {
     private static final String TIME_SPLITTER_INPUT = "/by";
     private static final String TIME_SPLITTER_DATA = "\\(by:";
-    private final LocalDateTime deadline;
+    private LocalDateTime deadline;
 
     private DeadlineTask(String description, boolean isDone, LocalDateTime deadline) {
         super(description, isDone);
@@ -29,7 +29,7 @@ public class DeadlineTask extends Task {
      * @param description Input task string.
      * @return App representation of a task containing an action description and deadline information.
      */
-    public static DeadlineTask createTask (String description) throws
+    public static DeadlineTask createTask(String description) throws
             InvalidTaskTimeFormatException,
             InvalidDateTimeException {
         // Split the description into its action and time parts

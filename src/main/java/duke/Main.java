@@ -9,7 +9,7 @@ import javafx.stage.Stage;
  * Encapsulates main class that starts the application with duke and the user interface.
  */
 public class Main extends Application {
-    private final Duke duke = new Duke();
+    private Duke duke = new Duke();
 
     /**
      * Starts the application.

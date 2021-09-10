@@ -10,7 +10,7 @@ import type.CommandTypeEnum;
 public class EventTask extends Task {
     private static final String TIME_SPLITTER_INPUT = "/at";
     private static final String TIME_SPLITTER_DATA = "\\(at:";
-    private final String time;
+    private String time;
 
     private EventTask(String description, boolean isDone, String time) {
         super(description, isDone);
