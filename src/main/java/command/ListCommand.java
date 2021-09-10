@@ -14,11 +14,13 @@ public class ListCommand extends Command {
 
         private final boolean EXIT = false;
 
-        public void execute(TaskList tasks, Ui ui, Storage storage) {
+        public String execute(TaskList tasks, Ui ui, Storage storage) {
             ArrayList<Task> taskList = tasks.getTaskList();
+            String returnedString = "";
             for (int i = 0; i < taskList.size(); i++) {
-                System.out.printf("\t%d.%s%n", (i + 1), taskList.get(i));
+                returnedString += String.format("\t%d.%s%n", (i + 1), taskList.get(i));
             }
+            return returnedString;
         }
 
         public boolean isExit() {

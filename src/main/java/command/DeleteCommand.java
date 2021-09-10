@@ -23,11 +23,11 @@ public class DeleteCommand extends Command {
         this.taskNumber = i;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage)  throws InvalidValue {
+    public String execute(TaskList tasks, Ui ui, Storage storage)  throws InvalidValue {
         try {
             Task deletedTask = tasks.deleteTask(taskNumber);
             storage.write(tasks.getTaskList());
-            System.out.printf("\tNoted. I've removed this task:\n"
+            return String.format("\tNoted. I've removed this task:\n"
                     + "\t%s\n"
                     + "\tNow you have %d tasks in the list.\n", deletedTask, tasks.size());
         } catch (IndexOutOfBoundsException e) {

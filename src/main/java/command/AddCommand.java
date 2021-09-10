@@ -74,7 +74,7 @@ public class AddCommand extends Command {
         }
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateFormat {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateFormat {
         Task newTask = null;
 
         switch(taskType) {
@@ -97,7 +97,7 @@ public class AddCommand extends Command {
 
         tasks.addTask(newTask);
         storage.write(tasks.getTaskList());
-        System.out.printf("\tGot it. I've added this task:\n"
+        return String.format("\tGot it. I've added this task:\n"
                         + "\t%s\n"
                         + "\tNow you have %d tasks in the list.\n", newTask, tasks.size());
     }
