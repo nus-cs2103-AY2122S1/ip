@@ -45,6 +45,10 @@ checkstyle {
     toolVersion = '8.29'
 }
 
+compileJava {
+    options.compilerArgs << "-Xlint:unchecked"
+}
+
 run{
     standardInput = System.in
 }

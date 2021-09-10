@@ -36,27 +36,17 @@ import java.util.Scanner;
  * Chat bot katheryne.Katheryne, used for simple todo lists
  */
 public class Katheryne {
-    public static void main(String[] args) throws KatheryneExceptions {
+    
+    public static void main(String[] args) {
+        // initialise variables
+        Storage storage = new Storage();
+        Ui ui = new Ui();
         List<Task> lst = new ArrayList<>();
-        ObjectMapper mapper = new ObjectMapper().enableDefaultTyping();
-        mapper.registerModule(new JavaTimeModule());
-
-//        loadTaskList("tasks.json", mapper);
-        if (Files.isReadable(Paths.get("tasks.json"))) {
-            try {
-                lst.addAll(Arrays.asList(mapper.readValue(
-                        Paths.get("tasks.json").toFile(), 
-                        Task[].class)));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        System.out.println("Ad astra abyssosque! I am Katheryne, the receptionist here at the Adventurers' Guild.");
-        System.out.println("How may I assist?");
-        if (!lst.isEmpty()) {
-            System.out.println("I still have your list of tasks from last time, it has " + lst.size() + " items.");
-        }
+        
+        // initialise Katheryne
+        storage.loadTasks(lst,"tasks.json");
+        ui.greet(lst);
+        
         Scanner in = new Scanner(System.in);
         while (true) {
             try {
@@ -153,17 +143,12 @@ public class Katheryne {
                         + e.getMessage());
             }
         }
-        // give object mapper the ability to write the properties of tasks to json
-        mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-        ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
 
         // try to save the file
         try {
-            Files.write(Paths.get("tasks.json"), writer.writeValueAsString(lst).getBytes(StandardCharsets.UTF_8));
-            System.out.println("Ad Astra Abyssoque, Traveller!");
-        } catch (IOException e) {
-            System.out.println("Oh wait! Traveller, I couldn't catch that...");
-            e.printStackTrace();
+            storage.saveTasks(lst,"tasks.json");
+        } catch (KatheryneExceptions e) {
+            System.out.println(e.getMessage());
         }
     }
 }
