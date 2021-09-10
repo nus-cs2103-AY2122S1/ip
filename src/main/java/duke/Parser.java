@@ -2,25 +2,11 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Class that implements method to parse user inputs.
  */
 public class Parser {
-
-    private final String TERMINATION_COMMAND = "bye";
-    private final String LIST_ENTRIES_COMMAND = "list";
-    private final String MARK_ENTRY_DONE_COMMAND = "done";
-    private final String DELETE_ENTRY_COMMAND = "delete";
-    private final String TODO_COMMAND = "todo";
-    private final String EVENT_COMMAND = "event";
-    private final String DEADLINE_COMMAND = "deadline";
-    private final String FIND_COMMAND = "find";
-    private final List<String> commands =
-            List.of(TERMINATION_COMMAND, LIST_ENTRIES_COMMAND,
-                    MARK_ENTRY_DONE_COMMAND, DELETE_ENTRY_COMMAND,
-                    TODO_COMMAND, EVENT_COMMAND, DEADLINE_COMMAND, FIND_COMMAND);
 
     /**
      * Constructor for Parser Object.
@@ -52,7 +38,7 @@ public class Parser {
 
     private boolean isValidCommand(String command) {
         boolean isValid = false;
-        for (String knownCommand : commands) {
+        for (String knownCommand : Duke.commands) {
             if (knownCommand.equals(command)) {
                 isValid = true;
                 break;

@@ -158,6 +158,20 @@ public class Ui {
     }
 
     /**
+     * Returns all the commands in one large String.
+     *
+     * @return String containing all commands Duke uses.
+     */
+    public String getCommands() {
+        StringBuilder helpPage = new StringBuilder("These are the available commands:\n");
+        for (String command : Duke.commands) {
+            helpPage.append(command).append("\n");
+        }
+        return helpPage.toString();
+    }
+
+
+    /**
      * Prints out the Error Message received when loading data from memory.
      *
      * @param loadingError Error encountered while loading data from memory.

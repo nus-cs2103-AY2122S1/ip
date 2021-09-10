@@ -69,6 +69,7 @@ public class EntryList extends ArrayList<Entry> {
 
     /**
      * Finds entries with given keyword.
+     * Searches for partial entries as well.
      *
      * @param keyword to search for.
      * @param ui Ui to return info string.

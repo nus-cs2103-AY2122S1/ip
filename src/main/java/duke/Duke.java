@@ -3,6 +3,7 @@ package duke;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.List;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -32,14 +33,20 @@ public class Duke extends Application {
     private final Image USER = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaUser.png")));
     private final Image DUKE = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke.png")));
 
-    private final String TERMINATION_COMMAND = "bye";
-    private final String LIST_ENTRIES_COMMAND = "list";
-    private final String MARK_ENTRY_DONE_COMMAND = "done";
-    private final String DELETE_ENTRY_COMMAND = "delete";
-    private final String TODO_COMMAND = "todo";
-    private final String EVENT_COMMAND = "event";
-    private final String DEADLINE_COMMAND = "deadline";
-    private final String FIND_COMMAND = "find";
+    public static final String TERMINATION_COMMAND = "bye";
+    public static final String LIST_ENTRIES_COMMAND = "list";
+    public static final String MARK_ENTRY_DONE_COMMAND = "done";
+    public static final String DELETE_ENTRY_COMMAND = "delete";
+    public static final String TODO_COMMAND = "todo";
+    public static final String EVENT_COMMAND = "event";
+    public static final String DEADLINE_COMMAND = "deadline";
+    public static final String FIND_COMMAND = "find";
+    public static final String HELP_COMMAND = "help";
+    public static final List<String> commands =
+            List.of(TERMINATION_COMMAND, LIST_ENTRIES_COMMAND,
+                    MARK_ENTRY_DONE_COMMAND, DELETE_ENTRY_COMMAND,
+                    TODO_COMMAND, EVENT_COMMAND, DEADLINE_COMMAND,
+                    FIND_COMMAND, HELP_COMMAND);
 
     /**
      * Constructor for Duke Chatbot.
@@ -221,6 +228,10 @@ public class Duke extends Application {
 
             case FIND_COMMAND:
                 output = entries.getFindEntry(entry, this.dukeUi);
+                break;
+
+            case HELP_COMMAND:
+                output = this.dukeUi.getCommands();
                 break;
 
             default:
