@@ -1,4 +1,4 @@
-# Welcome to alice.Alice!
+# Welcome to Alice!
 ## _The Last Virtual Assistant You will ever need, Ever_
 
 
@@ -13,7 +13,8 @@ alice.Alice is a virtual assistant started off as Duke task manager before evolv
 - [X] Create local save files location for alice.Alice to remember the task
 - [X] Fetch certain deadlines and other tasks using the yyyy-MM-dd format
 - [X] Fetch certain deadlines and other tasks using "keywords"
-- [ ]  GUI (Coming Soon)
+- [X] GUI 
+- [x] Create, Save, Delete save files
 - [ ] Integration with Website (Coming Soon)
 
 > Let's make a slight change to create big difference
@@ -27,3 +28,4 @@ public class Main {
     }
 }
 ```
+![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/alice_0.03_demo.gif?raw=true)
