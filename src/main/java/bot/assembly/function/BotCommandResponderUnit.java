@@ -24,6 +24,7 @@ public class BotCommandResponderUnit {
     private BotTemporalUnit botTemporalUnit = new BotTemporalUnit();
     private BotDynamicMemoryUnit botDynamicMemoryUnit = BotDynamicMemoryUnit.getInstance();
     private BotMassOps botMassOps = new BotMassOps();
+    private BotCommandChecker botCommandChecker = new BotCommandChecker();
 
     /**
      * ArrayList as a main data structure to store Task
@@ -47,6 +48,99 @@ public class BotCommandResponderUnit {
         String[] token = input.split(" ", 2);
 
         return token;
+    }
+
+    /**
+     * A method to check off a task and mark it as done
+     * Then proceed to report feedback to user
+     * @param input command input
+     * @throws TaskOutOfRangeException if index entered is out of the range of the task list
+     * @throws InvalidTaskIndexException if the command input's index entered cannot be converted to Integer
+     */
+    public String markTaskAsDone(String input) throws TaskOutOfRangeException, InvalidTaskIndexException {
+
+        // verify the command entered
+        botCommandChecker.checkTaskListModificationCommand(input);
+
+        Integer index = Integer.parseInt(input.split(" ", 2)[1]);
+        Task completedTask = taskTracker.get(index - 1);
+        completedTask.markAsDone();
+
+        String output = String.format(
+                "%s\n\t\t%s%s\n\t%s",
+                botStaticMemoryUnit.MESSAGE_TASK_COMPLETE, (index) + ". ",
+                completedTask,
+                botStaticMemoryUnit.MESSAGE_CHEERING);
+
+        return output;
+    }
+
+    /**
+     * A method to delete a task from the list
+     * and provide feedback to notify the users
+     * @param input command input
+     * @throws TaskOutOfRangeException if index entered is out of the range of the task list
+     * @throws InvalidTaskIndexException if the command input's index entered cannot be converted to Integer
+     */
+    public String deleteTaskFromList(String input) throws TaskOutOfRangeException, InvalidTaskIndexException {
+
+        // verify the command entered
+        botCommandChecker.checkTaskListModificationCommand(input);
+
+        Integer index = Integer.parseInt(input.split(" ", 2)[1]);
+        Task removedTask = taskTracker.get(index - 1);
+
+        String output = String.format(
+                "%s\n\t\t%s%s\n\t",
+                botStaticMemoryUnit.MESSAGE_REMOVE_TASK, (index) + ". ",
+                removedTask);
+        output += String.format(botStaticMemoryUnit.MESSAGE_ADD_TASK_SUMMARY, taskTracker.size() - 1);
+
+        taskTracker.remove(removedTask);
+
+        return output;
+    }
+
+    /**
+     * A method to identify the purpose of the command
+     * and convert the purpose of the command from string to enum
+     * @param command
+     * @return enum CommandInput
+     * @throws InvalidCommandException if the command entered is not in CommandInput
+     */
+    public CommandInput identifyCommand(String command) throws InvalidCommandException {
+
+        String commandInitial = command.trim().split(" ")[0];
+
+        try {
+            CommandInput taskType = CommandInput.valueOf(commandInitial.toUpperCase());
+            return taskType;
+        } catch (Exception e) {
+            throw new InvalidCommandException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND);
+        }
+    }
+
+    /**
+     *
+     * @param input
+     * @return
+     * @throws InvalidCommandException
+     */
+    public void massOps(String input) throws InvalidCommandException {
+        CommandInput commandType = identifyCommand(tokenize(input)[1]);
+
+        switch (commandType) {
+        case DELETE:
+            botMassOps.deleteAll(taskTracker);
+            break;
+
+        case DONE:
+            botMassOps.doneAll(taskTracker);
+            break;
+
+        default:
+            throw new InvalidCommandException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND);
+        }
     }
 
     /**
@@ -111,109 +205,6 @@ public class BotCommandResponderUnit {
     }
 
     /**
-     * A method to check if the index entered by the user are truly an Integer:
-     * This method is specifically used by command type of:
-     * 1) Done
-     * 2) Delete
-     * @param str index of command input
-     * @return true if command input's index can be converted to Integer
-     */
-    private boolean isInteger(String str) {
-        try {
-            Integer.parseInt(str);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    /**
-     * A method to check the validity of the index entered
-     * This method is specifically used by command type of:
-     * 1) Done
-     * 2) Delete
-     * @param input command input
-     * @throws TaskOutOfRangeException if index entered is out of the range of the task list
-     * @throws InvalidTaskIndexException if the command input's index entered cannot be converted to Integer
-     */
-    private void checkTaskListModificationCommand(String input) throws TaskOutOfRangeException,
-            InvalidTaskIndexException {
-
-        // throw InvalidTaskIndexException if index entered is not an Integer
-        if (!isInteger(input.split(" ", 2)[1])) {
-            throw new InvalidTaskIndexException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_TASK_INDEX);
-        }
-
-        Integer index = Integer.parseInt(input.split(" ", 2)[1]);
-
-        // throw TaskOutOfRangeException if the index entered is out of task list's range or when the task list is empty
-        if (index - 1 > taskTracker.size() || taskTracker.size() == 0) {
-            throw new TaskOutOfRangeException(botStaticMemoryUnit.ERROR_MESSAGE_TASK_OUT_OF_RANGE);
-        }
-
-    }
-
-    /**
-     * A method to check off a task and mark it as done
-     * Then proceed to report feedback to user
-     * @param input command input
-     * @throws TaskOutOfRangeException if index entered is out of the range of the task list
-     * @throws InvalidTaskIndexException if the command input's index entered cannot be converted to Integer
-     */
-    public String markTaskAsDone(String input) throws TaskOutOfRangeException, InvalidTaskIndexException {
-
-        // verify the command entered
-        checkTaskListModificationCommand(input);
-
-        Integer index = Integer.parseInt(input.split(" ", 2)[1]);
-        Task completedTask = taskTracker.get(index - 1);
-        completedTask.markAsDone();
-
-        String output = String.format(
-                "%s\n\t\t%s%s\n\t%s",
-                botStaticMemoryUnit.MESSAGE_TASK_COMPLETE, (index) + ". ",
-                completedTask,
-                botStaticMemoryUnit.MESSAGE_CHEERING);
-
-        return output;
-    }
-
-    /**
-     * A method to delete a task from the list
-     * and provide feedback to notify the users
-     * @param input command input
-     * @throws TaskOutOfRangeException if index entered is out of the range of the task list
-     * @throws InvalidTaskIndexException if the command input's index entered cannot be converted to Integer
-     */
-    public String deleteTaskFromList(String input) throws TaskOutOfRangeException, InvalidTaskIndexException {
-
-        // verify the command entered
-        checkTaskListModificationCommand(input);
-
-        Integer index = Integer.parseInt(input.split(" ", 2)[1]);
-        Task removedTask = taskTracker.get(index - 1);
-
-        String output = String.format(
-                "%s\n\t\t%s%s\n\t",
-                botStaticMemoryUnit.MESSAGE_REMOVE_TASK, (index) + ". ",
-                removedTask);
-        output += String.format(botStaticMemoryUnit.MESSAGE_ADD_TASK_SUMMARY, taskTracker.size() - 1);
-
-        taskTracker.remove(removedTask);
-
-        return output;
-    }
-
-    // input: find fun
-    private void checkFindTaskFormat(String input) throws InvalidCommandFormatException {
-        String[] inputToken = tokenize(input);
-
-        if (inputToken.length == 1) {
-            throw new InvalidCommandFormatException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND_FORMAT);
-        }
-    }
-
-    /**
      * A method that takes in string input, parses them into tokens as keywords
      * Then proceed to iterate through the task list to filter the respective task that contains the keywords
      * @param input keyword in a continuous string format
@@ -221,7 +212,7 @@ public class BotCommandResponderUnit {
      */
     public String findTaskFromList(String input) throws InvalidCommandFormatException {
 
-        checkFindTaskFormat(input);
+        botCommandChecker.checkFindTaskFormat(input);
         // fun joy happy
         String keyword = tokenize(input)[1];
         // [fun, joy, happy]
@@ -262,48 +253,6 @@ public class BotCommandResponderUnit {
             );
         }
 
-    }
-
-    /**
-     * A method to identify the purpose of the command
-     * and convert the purpose of the command from string to enum
-     * @param command
-     * @return enum CommandInput
-     * @throws InvalidCommandException if the command entered is not in CommandInput
-     */
-    public CommandInput identifyCommand(String command) throws InvalidCommandException {
-
-        String commandInitial = command.trim().split(" ")[0];
-
-        try {
-            CommandInput taskType = CommandInput.valueOf(commandInitial.toUpperCase());
-            return taskType;
-        } catch (Exception e) {
-            throw new InvalidCommandException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND);
-        }
-    }
-
-    /**
-     *
-     * @param input
-     * @return
-     * @throws InvalidCommandException
-     */
-    public void massOps(String input) throws InvalidCommandException {
-        CommandInput commandType = identifyCommand(tokenize(input)[1]);
-
-        switch (commandType) {
-        case DELETE:
-            botMassOps.deleteAll(taskTracker);
-            break;
-
-        case DONE:
-            botMassOps.doneAll(taskTracker);
-            break;
-
-        default:
-            throw new InvalidCommandException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND);
-        }
     }
 
 }

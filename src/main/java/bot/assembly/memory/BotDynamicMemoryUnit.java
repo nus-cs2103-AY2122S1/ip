@@ -34,6 +34,37 @@ public class BotDynamicMemoryUnit {
     public BotDynamicMemoryUnit() {}
 
     /**
+     * A method to help parse the data from data.txt
+     * @param input
+     * @return String[] that contains the essential information of task
+     */
+    private String[] tokenizeData(String input) {
+        return input.split(" \\| ");
+    }
+
+    /**
+     * A method to get task tracker
+     * @return List of tasks
+     */
+    public List<Task> getTaskTacker() {
+        return this.taskTracker;
+    }
+
+    /**
+     * A method that tokenizes the command input to 2 parts:
+     * 1. Command Type
+     * 2. Rest of the command
+     * @param input command input
+     * @return [Command Type, Rest of the command]
+     */
+    private String[] tokenize(String input) {
+
+        String[] token = input.split(" ", 2);
+
+        return token;
+    }
+
+    /**
      * A method that users generateEasyDataTaskFormat() method and convert the data
      * in task list into String
      * @return String single line data string
@@ -44,6 +75,18 @@ public class BotDynamicMemoryUnit {
         taskTracker.stream().forEach(x -> outputData.append(generateEasyDataTaskFormat(x)));
 
         return outputData.toString();
+    }
+
+    /**
+     A method that ensures that only 1 BotDynamicMemoryUnit exists (Singleton)
+     */
+    public static BotDynamicMemoryUnit getInstance() {
+
+        // create new BotDynamicMemoryUnit if it doesn't exit
+        if (dynamicMemoryUnit == null) {
+            dynamicMemoryUnit = new BotDynamicMemoryUnit();
+        }
+        return dynamicMemoryUnit;
     }
 
     /**
@@ -95,15 +138,6 @@ public class BotDynamicMemoryUnit {
 
         fw.write(produceStringData());
         fw.close();
-    }
-
-    /**
-     * A method to help parse the data from data.txt
-     * @param input
-     * @return String[] that contains the essential information of task
-     */
-    private String[] tokenizeData(String input) {
-        return input.split(" \\| ");
     }
 
     /**
@@ -173,25 +207,5 @@ public class BotDynamicMemoryUnit {
         } catch (IOException e) {
             throw new InvalidFileException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_FILE);
         }
-    }
-
-    /**
-     * A method to get task tracker
-     * @return List of tasks
-     */
-    public List<Task> getTaskTacker() {
-        return this.taskTracker;
-    }
-
-    /**
-     A method that ensures that only 1 BotDynamicMemoryUnit exists (Singleton)
-     */
-    public static BotDynamicMemoryUnit getInstance() {
-
-        // create new BotDynamicMemoryUnit if it doesn't exit
-        if (dynamicMemoryUnit == null) {
-            dynamicMemoryUnit = new BotDynamicMemoryUnit();
-        }
-        return dynamicMemoryUnit;
     }
 }
