@@ -93,8 +93,7 @@ public class Deadline extends Task {
      * @return helper text of correct syntax
      */
     public static String syntax() {
-        return String.format("deadline command syntax: \n" +
-                "    '%s'\n" +
+        return String.format("deadline command syntax: \n" + "    '%s'\n" +
                 "Eg. 'deadline project /by 01-01-2020 2359'", Deadline.COMMAND_SYNTAX);
     }
 

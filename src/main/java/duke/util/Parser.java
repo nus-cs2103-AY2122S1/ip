@@ -44,36 +44,23 @@ public class Parser {
             // MainWindow handles termination logic (closure of application)
         } else if (userInput.matches(TaskList.FIND_COMMAND_REGEX)) {
             String keyword = userInput.split(" ", 2)[1];
-            Integer[] indexesFrom0 = TASKLIST.filter((task) -> task.isInTaskSummary(keyword));
-            String res = TASKLIST.selectedTasks(indexesFrom0);
-            return String.format("Here are the matching tasks in your list:\n%s", res);
+
+            return TASKLIST.executeFindCommand(keyword);
         } else if (userInput.matches(TaskList.DONE_COMMAND_REGEX)) {
-            //limits user to toggling first 99 tasks
             String inputBody = userInput.split(" ", 2)[1];
             int idxFrom0 = Integer.parseInt(inputBody) - 1;
-            if (TaskList.isValidIndex(idxFrom0, TASKLIST.length())) {
-                TASKLIST.toggleDone(idxFrom0);
-                return String.format(
-                        "Nice! I've marked this task as done:\n    %s",
-                        TASKLIST.get(idxFrom0).toString()
-                );
-            }
+
+            return TASKLIST.executeDoneCommand(idxFrom0);
         } else if (userInput.matches(TaskList.DELETE_COMMAND_REGEX)) {
             //eg. delete 3
             String inputBody = userInput.split(" ", 2)[1];
             int idxFrom0 = Integer.parseInt(inputBody) - 1;
-            if (TaskList.isValidIndex(idxFrom0, TASKLIST.length())) {
-                String reply = String.format(
-                        "Noted. I've removed this task:\n    %s\nNow you have %d tasks in the list.",
-                        TASKLIST.get(idxFrom0).toString(),
-                        TASKLIST.length() - 1
-                );
-                TASKLIST.removeTask(idxFrom0);
-                return reply;
-            }
+
+            return TASKLIST.executeDeleteCommand(idxFrom0);
         } else if (userInput.matches(ToDo.COMMAND_REGEX)) {
             //eg. todo xxx
             String inputBody = userInput.split(" ", 2)[1];
+
             Task newTask = ToDo.of(inputBody);
             String reply = String.format(
                     "Got it! I've added this task:\n %s\nNow you have %d tasks in the list.",
