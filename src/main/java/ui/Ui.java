@@ -19,8 +19,4 @@ public class Ui {
     public String showError(String errorMessage) {
         return errorMessage;
     }
-
-    public String showGoodBye() {
-        return "Bye. Hope to see you again soon!";
-    }
 }
