@@ -76,7 +76,7 @@ public class Duke {
     public String getResponse() {
         return this.response;
     }
-    
+
     /**
      * Returns Duke's response based on the input.
      *
