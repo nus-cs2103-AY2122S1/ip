@@ -29,11 +29,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String logo = "\t____         _        \n"
-                   + "\t|  _ \\ _   _| | _____ \n"
-                   + "\t| | | | | | | |/ / _ \\\n"
-                   + "\t| |_| | |_| |   <  __/\n"
-                   + "\t|____/ \\__,_|_|\\_\\___|\n";
+        String logo = "____         _        \n"
+                   + "|  _ \\ _   _| | _____ \n"
+                   + "| | | | | | | |/ / _ \\\n"
+                   + "| |_| | |_| |   <  __/\n"
+                   + "|____/ \\__,_|_|\\_\\___|\n";
         String welcomeMessage = logo + "Hello I'm Duke! What can I do for you?";
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(welcomeMessage, dukeImage)

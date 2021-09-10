@@ -53,7 +53,7 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
         dialog.setStyle(
-                "-fx-background-color: rgb(83, 194, 237); -fx-padding: 10 10 10 10; -fx-background-radius: 10px");
+                "-fx-background-color: rgb(83, 194, 237); -fx-background-radius: 0 10 10 10;");
     }
 
     /**
