@@ -43,4 +43,9 @@ public class Deadline extends Task {
     public String toStorage() {
         return ("D%" + isDone + "%" + description + "%" + byDateTime + "\n");
     }
+
+    @Override
+    protected LocalDateTime getDateTime() {
+        return byDateTime;
+    }
 }

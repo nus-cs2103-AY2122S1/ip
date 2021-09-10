@@ -111,6 +111,21 @@ public class TaskList {
         return filteredList;
     }
 
+    /**
+     * Returns an ArrayList of tasks maintained by this TaskList object sorted by time.
+     *
+     * @return ArrayList of Task objects.
+     */
+    public ArrayList<Task> sortTasks() {
+        ArrayList<Task> sortedList = new ArrayList<>();
+
+        tasks.stream()
+                .sorted()
+                .forEach(sortedList::add);
+
+        return sortedList;
+    }
+
     private String countTasks() {
         if (tasks.size() > 0) {
             return "Now you have " + tasks.size() + " tasks in the list.";

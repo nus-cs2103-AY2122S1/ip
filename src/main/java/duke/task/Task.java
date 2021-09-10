@@ -1,6 +1,8 @@
 package duke.task;
 
-public class Task {
+import java.time.LocalDateTime;
+
+public abstract class Task implements Comparable<Task> {
 
     protected String description;
     protected boolean isDone;
@@ -32,17 +34,29 @@ public class Task {
         return description.contains(content);
     }
 
-    @Override
-    public String toString() {
-        return (isDone ? "[X] " : "[ ] ") + description;
-    }
+    /**
+     * Returns a human-readable string representation of the Task to be used for printing/showing to the user.
+     *
+     * @return String to be used for printing.
+     */
+    public abstract String toString();
 
     /**
-     * String representation of the Task to be used for storage on the hard-disk purposes.
+     * Returns the string representation of the Task to be used for the purpose of storage on the hard-disk.
      *
      * @return String to be used for storage.
      */
-    public String toStorage() {
-        return (isDone + "%" + description + "\n");
+    public abstract String toStorage();
+
+    //@@author YeluriKetan-reused
+    //Reused from https://github.com/SkyBlaise99/ip/blob/master/src/main/java/sora/task/Task.java
+    // with minor modifications.
+    // Original author SkyBlaise99 - https://github.com/SkyBlaise99
+    protected abstract LocalDateTime getDateTime();
+
+    @Override
+    public int compareTo(Task otherTask) {
+        return this.getDateTime().compareTo(otherTask.getDateTime());
     }
+    //@@author
 }

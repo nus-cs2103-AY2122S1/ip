@@ -69,6 +69,8 @@ public class Duke {
                 return deleteTask(parsedCommand);
             case "find":
                 return ui.showFindList(taskList.findTasks(parsedCommand[1]));
+            case "sort":
+                return ui.getListMessage(taskList.sortTasks());
             case "fail":
                 return ui.showCommandFail();
             default:
