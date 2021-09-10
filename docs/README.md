@@ -4,6 +4,7 @@
 1. Ensure that `Java 11` or higher is installed in your computer.
 2. Download the latest version of `Duke.jar` from here.
 3. Double click on it to run.
+![Sample output for list](https://github.com/marcuspeh/iP/blob/master/docs/Ui.png?raw=true)
 4. You should be able to type in commands. Refer to usage or type in `help` to 
 view the available commands in the application.
 
@@ -102,7 +103,7 @@ Shows a message containing all the task that is stored
 
 Format: `list`
 
-![Sample output for list](https://github.com/marcuspeh/iP/blob/master/docs/list.png)
+![Sample output for list](https://github.com/marcuspeh/iP/blob/master/docs/list.png?raw=true)
 
 ### `done` - Marking a task
 
