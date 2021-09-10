@@ -72,38 +72,55 @@ public class AddCommand extends Command {
         // Extracts task description.
         String description = this.userInput.substring(userCommandString.length() + 1);
 
+        // Check empty/whitespace task description.
+        if (description.isBlank()) {
+            throw new MissingTaskDescriptionException(userCommand);
+        }
+
         // Parses description and adds the corresponding task to tasks.
         if (userCommandString.equals(UserCommands.TODO.getCommand())) {
             tasks.add(new Todo(description));
         } else if (userCommandString.equals(UserCommands.DEADLINE.getCommand())) {
-            // Parses description into task description and time.
-            String[] descriptions =
-                    Parser.parseUserDescriptionInput(description, Descriptors.BY, separator, UserCommands.DEADLINE);
-
-            LocalDate localDate = Parser.dateToLocalDate(descriptions[1]);
-
-            tasks.add(new Deadline(descriptions[0], localDate));
+            addDeadline(tasks, separator, description);
         } else if (userCommandString.equals(UserCommands.EVENT.getCommand())) {
-            // Parses description into task description and time.
-            String[] descriptions =
-                    Parser.parseUserDescriptionInput(description, Descriptors.AT, separator, UserCommands.EVENT);
-
-            LocalDate localDate = Parser.dateToLocalDate(descriptions[1]);
-
-            tasks.add(new Event(descriptions[0], localDate));
+            addEvent(tasks, separator, description);
         } else if (userCommandString.equals(UserCommands.PERIOD.getCommand())) {
-            // Parses description into task description and time period.
-            String[] descriptions =
-                    Parser.parseUserDescriptionInput(description, Descriptors.WITHIN, separator, UserCommands.PERIOD);
-
-            LocalDate[] startEndDates = Parser.periodToLocalDate(descriptions[1]);
-            LocalDate startDate = startEndDates[0];
-            LocalDate endDate = startEndDates[1];
-
-            tasks.add(new Period(descriptions[0], startDate, endDate));
+            addPeriod(tasks, separator, description);
         }
 
         return ui.getAddSuccessMessage(tasks.get(tasks.size() - 1), tasks.size());
+    }
+
+    private void addPeriod(TaskList tasks, char separator, String description) throws DukeException {
+        // Parses description into task description and time period.
+        String[] descriptions =
+                Parser.parseUserDescriptionInput(description, Descriptors.WITHIN, separator, UserCommands.PERIOD);
+
+        LocalDate[] startEndDates = Parser.periodToLocalDate(descriptions[1]);
+        LocalDate startDate = startEndDates[0];
+        LocalDate endDate = startEndDates[1];
+
+        tasks.add(new Period(descriptions[0], startDate, endDate));
+    }
+
+    private void addEvent(TaskList tasks, char separator, String description) throws DukeException {
+        // Parses description into task description and time.
+        String[] descriptions =
+                Parser.parseUserDescriptionInput(description, Descriptors.AT, separator, UserCommands.EVENT);
+
+        LocalDate localDate = Parser.dateToLocalDate(descriptions[1]);
+
+        tasks.add(new Event(descriptions[0], localDate));
+    }
+
+    private void addDeadline(TaskList tasks, char separator, String description) throws DukeException {
+        // Parses description into task description and time.
+        String[] descriptions =
+                Parser.parseUserDescriptionInput(description, Descriptors.BY, separator, UserCommands.DEADLINE);
+
+        LocalDate localDate = Parser.dateToLocalDate(descriptions[1]);
+
+        tasks.add(new Deadline(descriptions[0], localDate));
     }
 
     /**

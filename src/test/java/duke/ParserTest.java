@@ -17,7 +17,6 @@ import duke.exception.DukeException;
 import duke.exception.InvalidDateTimeFormatException;
 import duke.exception.InvalidNumberInputException;
 import duke.exception.MissingDateException;
-import duke.exception.MissingDescriptorException;
 import duke.exception.MissingIndexException;
 import duke.exception.MissingSpaceAfterCommandException;
 import duke.exception.MissingSpaceAfterDescriptorException;
@@ -198,7 +197,7 @@ class ParserTest {
         MissingTaskDescriptionException exception = new MissingTaskDescriptionException(command);
         // No separator.
         String invalidDescriptionInput1 = "at 1/1/2020";
-        MissingDescriptorException exception1 = new MissingDescriptorException(descriptor, command);
+        WrongDescriptorException exception1 = new WrongDescriptorException(descriptor, command);
         // No space before descriptor.
         String invalidDescriptionInput2 = "task description/at 1/1/2020";
         MissingSpaceBeforeDescriptorException exception2 = new MissingSpaceBeforeDescriptorException(descriptor);
@@ -217,7 +216,7 @@ class ParserTest {
 
         assertEquals(exception.getErrorMessage(), dukeException.getErrorMessage());
 
-        DukeException dukeException1 = assertThrows(MissingDescriptorException.class, () -> {
+        DukeException dukeException1 = assertThrows(WrongDescriptorException.class, () -> {
             Parser.parseUserDescriptionInput(invalidDescriptionInput1, descriptor, separator, command);
         });
 

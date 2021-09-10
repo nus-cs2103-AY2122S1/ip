@@ -20,7 +20,6 @@ import duke.exception.InvalidLocalDateException;
 import duke.exception.InvalidNumberInputException;
 import duke.exception.InvalidPeriodException;
 import duke.exception.MissingDateException;
-import duke.exception.MissingDescriptorException;
 import duke.exception.MissingSpaceAfterCommandException;
 import duke.exception.MissingSpaceAfterDescriptorException;
 import duke.exception.MissingSpaceBeforeDescriptorException;
@@ -208,7 +207,6 @@ public class Parser {
      * @param separator char that comes before the descriptor.
      * @param userCommand The initial command in user's input.
      * @return String array of 2 elements with the task description at index 0 and time at index 1.
-     * @throws MissingDescriptorException If user input is missing the expected descriptor.
      * @throws MissingDateException If user input is missing a date.
      * @throws MissingTaskDescriptionException If user input is missing a task description.
      * @throws WrongDescriptorException If user input is using the wrong descriptor.
@@ -220,62 +218,58 @@ public class Parser {
         // Index of separator in userDescription.
         int separatorIdx = findIndex(userDescription, separator);
 
-        // Index of space after descriptor
-        int indexDescriptorSpace = separatorIdx + descriptor.getLength() + 1;
-
-        // Check if separator exists. Then check if there could be time input after descriptor.
-        if ((separatorIdx == -1) || (userDescription.length() <= indexDescriptorSpace)) {
-            throw new MissingDateException();
-            //throw new MissingDescriptorException(descriptor, userCommand);
-        }
-
         // Events and duke.task.Deadline could have empty tasks but taken as they do due to their descriptors and time.
         // Need to run another check on whether their task descriptions are empty.
         if (separatorIdx == 0) {
             throw new MissingTaskDescriptionException(userCommand);
         }
 
+        // Index of space after descriptor
+        int indexDescriptorSpace = separatorIdx + descriptor.getLength() + 1;
+
+        // Check if separator exists. Then check if there could be time input after descriptor.
+        if ((separatorIdx == -1) || (userDescription.length() <= indexDescriptorSpace)) {
+            throw new MissingDateException();
+        }
+
         // Index of first character following space after descriptor.
-        int indexAfterDescriptorSpace = separatorIdx + descriptor.getLength() + 2;
+        int indexAfterDescriptorSpace = indexDescriptorSpace + 1;
 
         // Check if descriptor matches descriptor parameter.
-        String actualDescriptor = userDescription.substring(separatorIdx + 1, indexAfterDescriptorSpace - 1);
-        boolean isDescriptorIncorrect = false;
+        String actualDescriptor = userDescription.substring(separatorIdx + 1, indexDescriptorSpace);
         if (!actualDescriptor.equals(descriptor.getDescriptor())) {
-            isDescriptorIncorrect = true;
-        }
-
-        // Check whether the front of separatorIdx is an empty space.
-        boolean isNoSpaceBeforeSeparator = userDescription.charAt(separatorIdx - 1) != ' ';
-
-        // If descriptor wrong and no space before separator, it is likely that user did not provide descriptor.
-        if (isDescriptorIncorrect && isNoSpaceBeforeSeparator) {
-            throw new MissingDescriptorException(descriptor, userCommand);
-        }
-
-        // If only descriptor wrong, user gave wrong descriptor.
-        if (isDescriptorIncorrect) {
             throw new WrongDescriptorException(descriptor, userCommand);
         }
 
-        // If only no space, user did not include space before separator.
-        if (isNoSpaceBeforeSeparator) {
-            throw new MissingSpaceBeforeDescriptorException(descriptor);
-        }
-
-        // Check whether the back of descriptor is followed by a space.
-        if (userDescription.charAt(indexAfterDescriptorSpace - 1) != ' ') {
-            throw new MissingSpaceAfterDescriptorException(descriptor);
-        }
+        checkSeparatorSpaceFormatting(userDescription, descriptor, separatorIdx, indexDescriptorSpace);
 
         // User's time input.
         String time = userDescription.substring(indexAfterDescriptorSpace);
 
         // User's task description. Decrement by 1 as there is a space between task description and separator
-        String commandDescription = userDescription.substring(0, separatorIdx - 1);
+        String taskDescription = userDescription.substring(0, separatorIdx - 1);
+
+        // If task description is just whitespace, it is considered empty too.
+        if (taskDescription.isBlank()) {
+            throw new MissingTaskDescriptionException(userCommand);
+        }
 
         // Returns a String array with the task description and user input after descriptor.
-        return new String[] {commandDescription, time};
+        return new String[] {taskDescription, time};
+    }
+
+    private static void checkSeparatorSpaceFormatting(String userDescription, Descriptors descriptor,
+            int separatorIdx, int indexDescriptorSpace) throws MissingSpaceAfterDescriptorException,
+                    MissingSpaceBeforeDescriptorException {
+        // Check whether the front of separatorIdx is an empty space.
+        if (userDescription.charAt(separatorIdx - 1) != ' ') {
+            throw new MissingSpaceBeforeDescriptorException(descriptor);
+        }
+
+        // Check whether the back of descriptor is followed by a space.
+        if (userDescription.charAt(indexDescriptorSpace) != ' ') {
+            throw new MissingSpaceAfterDescriptorException(descriptor);
+        }
     }
 
     /**
