@@ -33,6 +33,12 @@ public class Storage {
     //todo make this method more substantial, put a check to see if file exist first.
     public void makeDir() {
         File f = new File("./data");
+        boolean bool = f.mkdir();
+        if (bool) {
+            System.out.println("file created successfully");
+        } else {
+            System.out.println("file creation failed");
+        }
     }
 
     /**
