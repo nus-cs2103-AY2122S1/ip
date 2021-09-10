@@ -69,7 +69,7 @@ public class Duke {
             return this.loadErrorMessage.toString() + "\nPlease exit and try again later.";
         }
 
-        Message greetingMessage = new Message("Hello! I'm Duke, what shall we do today?", "٩(｡•́‿•̀｡)۶");
+        Message greetingMessage = new Message("Hello! I'm JIJI, what shall we do today?", "٩(｡•́‿•̀｡)۶");
         return greetingMessage.toString();
     }
 }

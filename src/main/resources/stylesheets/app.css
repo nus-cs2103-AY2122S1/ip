@@ -38,7 +38,6 @@
 
 #sendButton{
     -fx-background-color: linear-gradient(to bottom right, #7500AC, #BE1499);
-    -fx-font-family: "Impact", "Helvetica", "Arial";
     -fx-text-fill: #FFFFFF;
     -fx-background-radius: 20;
     -float: right;

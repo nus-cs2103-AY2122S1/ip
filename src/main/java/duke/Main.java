@@ -23,7 +23,7 @@ public class Main extends Application {
         scene.getStylesheets().add(getClass().getResource("/stylesheets/app.css").toExternalForm());
 
         stage.setScene(scene);
-        stage.setTitle("Duke");
+        stage.setTitle("JIJI");
         stage.setResizable(false);
 
         stage.show();

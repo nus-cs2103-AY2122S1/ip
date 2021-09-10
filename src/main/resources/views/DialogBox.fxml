@@ -21,7 +21,6 @@
                 wrapText="true"
                 minHeight="-Infinity"
                 maxHeight="Infinity"
-                prefWidth="260"
         />
 
         <ImageView
