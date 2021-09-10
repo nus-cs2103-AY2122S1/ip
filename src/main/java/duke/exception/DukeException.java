@@ -3,6 +3,10 @@ package duke.exception;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
+import duke.util.Ui;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class DukeException extends IllegalArgumentException {
     private final String MESSAGE_REPLY;
@@ -42,25 +46,27 @@ public class DukeException extends IllegalArgumentException {
         this.MESSAGE_REPLY = messageReply;
     }
 
+    /**
+     * Replies a user input that has failed to identified as a valid command.
+     *
+     * @param userInput
+     * @return message reply that will be sent back to user
+     */
     private static String replyInput(String userInput) {
-        String defaultReply = "Invalid input!\n" +
-            "    Available commands: [todo, deadline, event, list, bye]";
+        String defaultReply = "Invalid input!\n\n" +
+                "Available commands:\n" +
+                Arrays.asList(Ui.USER_SUPPORTED_COMMANDS)
+                        .stream()
+                        .map(s -> "- " + s + "\n")
+                        .collect(Collectors.joining());
 
         if (userInput.matches("\\w+\\s*")) {
             String inputWord = userInput.split(" ", 2)[0].toLowerCase();
-            switch (inputWord) {
-            case "todo":
-                return ToDo.syntax();
-            case "deadline":
-                return Deadline.syntax();
-            case "event":
-                return Event.syntax();
-            default:
-                return defaultReply;
+            if (Arrays.asList(Ui.USER_SUPPORTED_COMMANDS).contains(inputWord)) {
+                return "Proper command syntax: \n" + Ui.INDENT + Ui.commandSyntax(inputWord);
             }
-        } else {
-            return defaultReply;
         }
+        return defaultReply;
     }
 
     @Override

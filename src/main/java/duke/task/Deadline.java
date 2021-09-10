@@ -1,6 +1,8 @@
 package duke.task;
 
 import duke.exception.DukeException;
+import duke.util.Ui;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -9,6 +11,7 @@ public class Deadline extends Task {
     public static final String SYMBOL = "D";
     public static final String COMMAND_REGEX = "deadline \\w[\\w, ]+\\w \\/by \\w[\\w,\\-, ]*";
     public static final String COMMAND_SYNTAX = "deadline <task> /by <eventTime>";
+    public static final String COMMAND_EXAMPLE_CALL = "deadline project /by 01-01-2020 2359";
 
     private String userInputDeadline;
     private LocalDateTime dateTimeDeadline;
@@ -72,7 +75,7 @@ public class Deadline extends Task {
             this.dateTimeDeadline = parsedDateTime;
         } catch (DateTimeParseException e) {
             throw DukeException.of("date",
-    String.format("Invalid date & time passed ('%s')\n\n", byDate) + Deadline.syntax());
+    String.format("Invalid date & time passed ('%s')\n\n", byDate) + Ui.commandSyntax("deadline"));
         } catch (IllegalArgumentException e) {
             throw DukeException.of("date",
     String.format("Invalid date & time passed ('%s')\n\n", byDate) + e.getMessage());
@@ -92,10 +95,10 @@ public class Deadline extends Task {
      *
      * @return helper text of correct syntax
      */
-    public static String syntax() {
-        return String.format("deadline command syntax: \n" + "    '%s'\n" +
-                "Eg. 'deadline project /by 01-01-2020 2359'", Deadline.COMMAND_SYNTAX);
-    }
+//    public static String syntax() {
+//        return String.format("deadline command syntax: \n" + "    '%s'\n" +
+//                "Eg. 'deadline project /by 01-01-2020 2359'", Deadline.COMMAND_SYNTAX);
+//    }
 
     /**
      * Converts an Task instance to a string to be stored.

@@ -16,11 +16,7 @@ import java.util.stream.IntStream;
 public final class TaskList {
     private final ArrayList<Task> TASKS;
     private final Storage STORAGE_FILE;
-    public static final String LIST_COMMAND_REGEX = "list";
-    public static final String BYE_COMMAND_REGEX = "bye";
-    public static final String DONE_COMMAND_REGEX = "done [0-9]{1,2}"; //done <num> //limits to 99
-    public static final String DELETE_COMMAND_REGEX = "delete [0-9]{1,2}"; //delete <num
-    public static final String FIND_COMMAND_REGEX = "find \\w+"; //find <word>
+
     /**
      * Factory method for TaskList.
      * Parses in Files containing Strings (line) of duke.task representation.
