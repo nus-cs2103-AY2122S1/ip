@@ -7,6 +7,7 @@ import bot.DukeException;
 import bot.Storage;
 import bot.TaskList;
 import bot.UserInterface;
+import task.DeadlineTask;
 import task.EventTask;
 
 /**
@@ -33,9 +34,9 @@ public class EventCommand extends Command {
      */
     public String execute(TaskList list, UserInterface ui) throws DukeException {
 
-        int position = input.indexOf("/at");
-        String newEvent = input.substring(6, position - 1);
-        String newTime = input.substring(position + 4);
+        int position = input.indexOf(" /at");
+        String newEvent = input.substring(6, position);
+        String newTime = input.substring(position + 5);
 
         if (newEvent.length() == 0) {
             throw new DukeException("The description of an event cannot be empty. Please try again!");
@@ -44,7 +45,12 @@ public class EventCommand extends Command {
         } else {
             try {
                 LocalDateTime time = LocalDateTime.parse(newTime.trim(), inputFormatter);
-                EventTask newTask = new EventTask(newEvent, time);
+                EventTask newTask;
+                if (!tags.isEmpty()) {
+                    newTask = new EventTask(newEvent, time, tags);
+                } else {
+                    newTask = new EventTask(newEvent, time);
+                }
                 list.addTask(newTask);
                 Storage.save(list);
                 return ui.showTaskAdded(newTask, list.getSize() - 1);

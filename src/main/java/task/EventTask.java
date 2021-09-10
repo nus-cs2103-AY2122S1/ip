@@ -23,14 +23,27 @@ public class EventTask extends Task {
 
     /**
      * Constructor for the EventTask class.
+     *
+     * @param task The task to be stored within this EventTask object.
+     * @param time The LocalDateTime object representation of the Event "at".
+     * @param tags The tags to be stored within this EventTask object.
+     */
+    public EventTask(String task, LocalDateTime time, String tags) {
+        super(task, tags);
+        this.time = time;
+    }
+
+    /**
+     * Constructor for the EventTask class.
      * This constructor is invoked when reading from the local data, in order to show the correct Task state.
      *
      * @param task The task to be stored within this EventTask object.
      * @param storedTime The String representation of the Event "at".
+     * @param tags The tags to be stored within this EventTask object.
      * @param isDone The state of the EventTask object.
      */
-    public EventTask(String task, String storedTime, boolean isDone) {
-        super(task, isDone);
+    public EventTask(String task, String storedTime, String tags, boolean isDone) {
+        super(task, tags, isDone);
         this.storedTime = storedTime;
     }
 
@@ -66,7 +79,7 @@ public class EventTask extends Task {
      */
     @Override
     public String getTaskState() {
-        return "[E]" + super.getTaskState() + " (At: " + this.getTime() + ")";
+        return "[E]" + super.getTaskState() + " (At: " + this.getTime() + ")" + "\n" + this.tags.toString();
     }
 
     /**
@@ -82,6 +95,8 @@ public class EventTask extends Task {
                 + (isDone ? "1," : "0,")
                 + task
                 + ","
-                + this.getTime();
+                + this.getTime()
+                + ","
+                + (tags.toString());
     }
 }

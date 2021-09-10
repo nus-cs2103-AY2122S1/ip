@@ -35,7 +35,12 @@ public class TodoCommand extends Command {
         if (newTodo.length() == 0) {
             throw new DukeException("The description of a todo cannot be empty. Please try again!");
         } else {
-            TodoTask newTask = new TodoTask(newTodo);
+            TodoTask newTask;
+            if (!tags.isEmpty()) {
+                newTask = new TodoTask(newTodo, tags);
+            } else {
+                newTask = new TodoTask(newTodo);
+            }
             list.addTask(newTask);
             Storage.save(list);
             return ui.showTaskAdded(newTask, list.getSize() - 1);

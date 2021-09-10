@@ -7,16 +7,16 @@ import bot.UserInterface;
 import task.Task;
 
 /**
- * A class that encapsulates a Done Command given to Duke.
+ * A class that encapsulates a Tag Command given to Duke.
  */
-public class DoneCommand extends Command {
+public class TagCommand extends Command {
 
     /**
-     * Constructor for the DoneCommand class.
+     * Constructor for the TagCommand class.
      *
      * @param input The input given by the user.
      */
-    public DoneCommand(String input) {
+    public TagCommand(String input) {
         super(input);
     }
 
@@ -30,20 +30,26 @@ public class DoneCommand extends Command {
      */
     public String execute(TaskList list, UserInterface ui) throws DukeException {
         try {
-
-            int index = Integer.parseInt(input.substring(5)) - 1;
+            int index = Integer.parseInt(input.substring(4)) - 1;
             if (index > list.getSize() || index <= 0) {
                 throw new DukeException("That task doesn't exist. Please try again!");
             }
             Task newTask = list.getTask(index);
-            newTask.markAsDone();
-            list.setTask(index, newTask);
-            Storage.save(list);
-            return ui.showTaskDone(list.getTask(index).getTaskState(), index + 1);
-
+            if (!tags.isEmpty()) {
+                String[] rawTags = tags.split(" ");
+                for (int i = 0; i < rawTags.length; i++) {
+                    newTask.addTag(rawTags[i]);
+                }
+                list.setTask(index, newTask);
+                Storage.save(list);
+                return ui.showTaskTagged(list.getTask(index));
+            } else {
+                throw new DukeException(
+                        "It looks like you did not enter any tags for the \"tag\" command. Please try again!");
+            }
         } catch (NumberFormatException e) {
             throw new DukeException(
-                    "It looks like you did not enter a valid integer for the \"done\" command. Please try again!");
+                    "It looks like you did not enter a valid integer for the \"tag\" command. Please try again!");
         }
     }
 }
