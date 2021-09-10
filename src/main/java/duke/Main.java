@@ -22,6 +22,12 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+
+            //@@author Uluk Biy
+            //Reused from https://stackoverflow.com/questions/9738146/javafx-how-to-set-scene-background-image
+            // with minor modifications in CSS file
+            scene.getStylesheets().addAll(this.getClass().getResource("/view/application.css").toExternalForm());
+
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();

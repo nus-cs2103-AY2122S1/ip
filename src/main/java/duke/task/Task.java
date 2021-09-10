@@ -69,11 +69,11 @@ public abstract class Task implements Comparable<Task> {
     /**
      * Returns the status of whether the task has been completed.
      *
-     * @return "X" if is completed, " " if not completed
+     * @return "✓" if is completed, "✗" if not completed
      */
     public String getStatusIcon() {
-        String doneIcon = "X";
-        String incompleteIcon = " ";
+        String doneIcon = "✓";
+        String incompleteIcon = "✗";
         return (this.isDone ? doneIcon : incompleteIcon);
     }
 

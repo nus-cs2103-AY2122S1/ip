@@ -15,7 +15,7 @@ public class TaskListTest {
     public void testAddToList_toDo_success() {
         assertEquals(
             "I've added this task but it's not like I did it for you or anything!\n"
-                + "  [T][ ] return book\n"
+                + "  [T][✗] return book\n"
                 + "Now you have 1 task in the list. Do your best doing them okay?",
             tasks.addToList("return book", "ToDo")
         );
@@ -25,7 +25,7 @@ public class TaskListTest {
     public void testAddToList_deadline_success() {
         assertEquals(
             "I've added this task but it's not like I did it for you or anything!\n"
-                + "  [D][ ] return book (by: Aug 23 2021 00:00)\n"
+                + "  [D][✗] return book (by: Aug 23 2021 00:00)\n"
                 + "Now you have 1 task in the list. Do your best doing them okay?",
             tasks.addToList("return book /by 23/08/2021 0000", "Deadline")
         );
@@ -36,7 +36,7 @@ public class TaskListTest {
         try {
             assertEquals(
                 "I've added this task but it's not like I did it for you or anything!\n"
-                    + "  [D][ ] return book (by: Aug 23 2021 00:00)\n"
+                    + "  [D][✗] return book (by: Aug 23 2021 00:00)\n"
                     + "Now you have 1 task in the list. Do your best doing them okay?",
                 tasks.addToList("return book /by 23/08/2021", "Deadline")
             );
@@ -51,7 +51,7 @@ public class TaskListTest {
     public void testAddToList_event_success() {
         assertEquals(
             "I've added this task but it's not like I did it for you or anything!\n"
-                + "  [E][ ] return book (by: Aug 23 2021 00:00-01:00)\n"
+                + "  [E][✗] return book (by: Aug 23 2021 00:00-01:00)\n"
                 + "Now you have 1 task in the list. Do your best doing them okay?",
             tasks.addToList("return book /at 23/08/2021 0000 0100", "Event")
         );
@@ -62,7 +62,7 @@ public class TaskListTest {
         try {
             assertEquals(
                 "I've added this task but it's not like I did it for you or anything!\n"
-                    + "  [D][ ] return book (by: Aug 23 2021 00:00)\n"
+                    + "  [D][✗] return book (by: Aug 23 2021 00:00)\n"
                     + "Now you have 1 task in the list. Do your best doing them okay?",
                 tasks.addToList("return book /by 23/08/2021 0000 0100", "Event")
             );
@@ -77,7 +77,7 @@ public class TaskListTest {
     public void testMarkTaskAsDone_singleUncompletedTask() {
         tasks.addToList("return book", "ToDo");
         assertEquals(
-            "You completed a task! Maybe you aren't so incompetent after all.\n  [T][X] return book\n",
+            "You completed a task! Maybe you aren't so incompetent after all.\n  [T][✓] return book\n",
             tasks.markTaskAsDone(1)
         );
     }
@@ -100,7 +100,7 @@ public class TaskListTest {
 
         assertEquals(
             "You completed some tasks! Maybe you aren't so incompetent after all.\n"
-                + "  [T][X] return book\n  [D][X] return book (by: Aug 23 2021 00:00)\n",
+                + "  [T][✓] return book\n  [D][✓] return book (by: Aug 23 2021 00:00)\n",
             tasks.markTaskAsDone(1, 2)
         );
     }
@@ -119,7 +119,7 @@ public class TaskListTest {
         tasks.addToList("read book", "ToDo");
         tasks.addToList("return book", "ToDo");
 
-        assertEquals("Reminder:\n  [T][ ] read book", tasks.getNextDueTask());
+        assertEquals("Reminder:\n  [T][✗] read book", tasks.getNextDueTask());
     }
 
     @Test
@@ -127,7 +127,7 @@ public class TaskListTest {
         tasks.addToList("return book /by 23/08/2021 1800", "Deadline");
         tasks.addToList("project meeting /at 2021-08-23 1400 1600", "Event");
 
-        assertEquals("Reminder:\n  [E][ ] project meeting (by: Aug 23 2021 14:00-16:00)",
+        assertEquals("Reminder:\n  [E][✗] project meeting (by: Aug 23 2021 14:00-16:00)",
             tasks.getNextDueTask()
         );
     }
@@ -137,7 +137,7 @@ public class TaskListTest {
         tasks.addToList("return book", "ToDo");
         assertEquals(
             "I've deleted this task so show me some gratitude!\n"
-                + "  [T][ ] return book\n"
+                + "  [T][✗] return book\n"
                 + "Now you have 0 tasks in the list. Do your best doing them okay?",
             tasks.deleteTask(1)
         );
@@ -150,8 +150,8 @@ public class TaskListTest {
         tasks.addToList("project meeting /at 2021-08-23 1400 1600", "Event");
 
         assertEquals(
-            "1:[T][ ] read book\n2:[D][ ] return book (by: Aug 23 2021 00:00)\n"
-                + "3:[E][ ] project meeting (by: Aug 23 2021 14:00-16:00)\n",
+            "1:[T][✗] read book\n2:[D][✗] return book (by: Aug 23 2021 00:00)\n"
+                + "3:[E][✗] project meeting (by: Aug 23 2021 14:00-16:00)\n",
             tasks.listTasks("all", null)
         );
     }
@@ -171,8 +171,8 @@ public class TaskListTest {
         tasks.addToList("project meeting /at 2021-08-23 1400 1600", "Event");
 
         assertEquals(
-            "1:[D][ ] return book (by: Aug 23 2021 00:00)\n"
-                    + "2:[E][ ] project meeting (by: Aug 23 2021 14:00-16:00)\n",
+            "1:[D][✗] return book (by: Aug 23 2021 00:00)\n"
+                    + "2:[E][✗] project meeting (by: Aug 23 2021 14:00-16:00)\n",
             tasks.listTasks("date", "2021-08-23")
         );
     }
@@ -184,37 +184,9 @@ public class TaskListTest {
         tasks.addToList("project meeting /at 2021-08-23 1400 1600", "Event");
 
         assertEquals(
-            "1:[T][ ] read book\n"
-                + "2:[D][ ] return book (by: Aug 23 2021 00:00)\n",
+            "1:[T][✗] read book\n"
+                + "2:[D][✗] return book (by: Aug 23 2021 00:00)\n",
             tasks.listTasks("keyword", "re")
-        );
-    }
-
-    @Test
-    public void testListTasks_byReminderToday() {
-        // Method uses current date (04/09/2021 as of writing this) so this check will fail after today.
-        tasks.addToList("read book", "ToDo");
-        tasks.addToList("return book /by 04/09/2021 0000", "Deadline");
-        tasks.addToList("project meeting /at 2021-09-04 1400 1600", "Event");
-
-        assertEquals(
-            "1:[D][ ] return book (by: Sep 4 2021 00:00)\n"
-                + "2:[E][ ] project meeting (by: Sep 4 2021 14:00-16:00)\n",
-            tasks.listTasks("reminder", "0")
-        );
-    }
-
-    @Test
-    public void testListTasks_byReminderWeek() {
-        // Method uses current date (04/09/2021 as of writing this) so this check will fail after today.
-        tasks.addToList("read book", "ToDo");
-        tasks.addToList("return book /by 04/09/2021 0000", "Deadline");
-        tasks.addToList("project meeting /at 2021-09-08 1400 1600", "Event");
-
-        assertEquals(
-            "1:[D][ ] return book (by: Sep 4 2021 00:00)\n"
-                + "2:[E][ ] project meeting (by: Sep 8 2021 14:00-16:00)\n",
-            tasks.listTasks("reminder", "6")
         );
     }
 
