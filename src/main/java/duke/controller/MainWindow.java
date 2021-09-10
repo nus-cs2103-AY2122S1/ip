@@ -49,8 +49,8 @@ public class MainWindow extends AnchorPane {
             new java.util.TimerTask() {
                 @Override
                 public void run() {
-                    Platform.exit();
-                    //System.exit() may be better
+                    //Platform.exit();
+                    System.exit(0);
                 }
             },
             secondsBeforeTerminate * 1000
