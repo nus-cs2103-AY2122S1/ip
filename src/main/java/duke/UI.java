@@ -27,7 +27,7 @@ public class UI {
      *
      * @param output is the string to be surrounded by the lines
      */
-    public void renderOutput(String output) {
+    public static void renderOutput(String output) {
         System.out.println("________________________________________________________");
         output.lines().map(x -> "     " + x).forEach(System.out::println);
         System.out.println("________________________________________________________");

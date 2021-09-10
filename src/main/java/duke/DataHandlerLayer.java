@@ -1,13 +1,14 @@
 package duke;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.function.Function;
 
 /**
  * Handles all things related to data. This includes the in-memory storage represented by an arrayList or
  * the persistent storage handled by the .txt files.
  */
 public class DataHandlerLayer {
-
 
     /**
      * In memory storage for log, for history, refer to the history variable
@@ -17,12 +18,15 @@ public class DataHandlerLayer {
     /**
      * History file that will be written to
      */
-    private static String fileName = "src/main/Text/History.txt";
+    private static String dirName = Paths.get(System.getProperty("user.dir"), "Text")
+            .toAbsolutePath().toString();
+    private static String fileName = Paths.get(System.getProperty("user.dir"), "Text", "History.txt")
+            .toAbsolutePath().toString();
 
     /**
      * Init data storage handler for history.
      */
-    private static PersistentStorageHandler history = new PersistentStorageHandler(fileName);
+    private static PersistentStorageHandler history = new PersistentStorageHandler(dirName, fileName);
 
 
     /**
@@ -45,59 +49,32 @@ public class DataHandlerLayer {
     }
 
     /**
-     * Prints log of tasks. No parameters needed. To change task representation, see duke.Task.
-     */
-    public static void printLog() {
-        System.out.println("Here are your tasks summoner. Please do complete them as fast as possible. I have"
-                + "been waiting for so many others for countless of centuries. Perhaps I am just an npc");
-        for (int i = 0; i < log.size(); i++) {
-            Task currentTask = log.get(i);
-            int taskNumber = i + 1;
-            System.out.println(taskNumber + ". " + currentTask.toString());
-        }
-    }
-
-    /**
      * Prints a log of tasks that are filtered. True for completed and False for not completed
      */
-    public static void printFilteredLog(boolean cond) {
+    public static String getFilteredLog(Function<Task, Boolean> function) {
         int taskNumber = 1;
+        StringBuilder sb = new StringBuilder();
         for (Task temp : log) {
-            if (temp.getCompleteStatus() == cond) {
-                System.out.println(taskNumber + ". " + temp.toString());
+            if (function.apply(temp)) {
+                sb.append(taskNumber + ". " + temp.toString() + "\n");
                 taskNumber++;
             }
         }
+        return sb.toString();
     }
-
-    /**
-     * Used for the filter keyword. Searches the log for any strings
-     * and prints any task that contains it.
-     * @param keyword keyword that is being searched
-     */
-    public static void filterLog(String keyword) {
-        for (int i = 0; i < log.size(); i++) {
-            Task temp = log.get(i);
-            if (temp.toString().contains(keyword)) {
-                Task currentTask = log.get(i);
-                int taskNumber = i + 1;
-                System.out.println(taskNumber + ". " + currentTask.toString());
-            }
-        }
-    }
-
 
     /**
      * Deletes any task in the specified postion of log
+     *
      * @param position in the log which is based on index.
      * @throws IndexOutOfBoundsException If the player specifies a postion outside the length of the log
-     * this error is thrown
+     *                                   this error is thrown
      */
     public static void delete(int position) throws IndexOutOfBoundsException {
+        assert position >= 0;
         if (position == 0) {
             throw new IndexOutOfBoundsException();
         }
-        ;
         log.remove(position - 1);
     }
 
@@ -119,6 +96,7 @@ public class DataHandlerLayer {
      * Packages the data(in string) into Commands in the persistent storage using
      * this commands. The data is packaged as
      * Command classes. To be passed to Logic for processing
+     *
      * @return An arraylist of packaged commands
      * @throws InvalidCommandException thrown when any of the commands in string cannot be packaged as a command class.
      */
@@ -128,6 +106,7 @@ public class DataHandlerLayer {
 
     /**
      * Appends any task written to history.
+     *
      * @param task
      */
     public static void appendToHistory(Task task) {
@@ -144,16 +123,5 @@ public class DataHandlerLayer {
                 appendToHistory(task);
             }
         }
-    }
-
-    public static String getLogAsString() {
-        String acc = "";
-        for (int i = 0; i < log.size(); i++) {
-            Task currTask = log.get(i);
-            String index = String.format("%d. ", i + 1);
-            acc += index + currTask.toString();
-            acc += "\n";
-        }
-        return acc;
     }
 }

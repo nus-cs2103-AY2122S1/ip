@@ -1,6 +1,11 @@
 package duke;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -16,8 +21,6 @@ public class PersistentStorageHandler {
     private final String fileName;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
-    private int numberOfLines = 0;
-    private final int maxNumberOfLines = 10;
     private boolean hasStorageTextFile = false;
     private final ArrayList<String> allLines = new ArrayList<>();
 
@@ -29,8 +32,14 @@ public class PersistentStorageHandler {
     public PersistentStorageHandler(String fileName) {
         assert fileName.contains(".txt") : "We should read and write to a .txt file only";
         //Name the file
+        File storedDir = new File(dirName);
+        if (!storedDir.exists()) {
+            storedDir.mkdirs();
+        }
+
+
         this.fileName = fileName;
-        this.file = new File(fileName);
+        this.file = new File(storedDir, fileName);
 
         // Create the writer and buffered writer
         try {
@@ -83,9 +92,6 @@ public class PersistentStorageHandler {
         } catch (NullPointerException | IOException e) {
             e.printStackTrace();
         }
-
-        //Add the number of lines
-        numberOfLines += linesInAddedText;
 
         //Accumulate all lines
         allLines.add(text);

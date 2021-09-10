@@ -76,25 +76,26 @@ public class Parser {
             Task.TaskType eventType = Task.TaskType.NOTAPPLICABLE;
             char temp = packagedHistory.get(0).charAt(eventTypeIndex);
             switch (packagedHistory.get(0).charAt(eventTypeIndex)) {
-            case 'T':
-                eventType = Task.TaskType.TODO;
-                break;
-            case 'E':
-                eventType = Task.TaskType.EVENT;
-                packagedHistory.remove("event");
-                break;
-            case 'D':
-                eventType = Task.TaskType.DEADLINE;
-                packagedHistory.remove("deadline");
-                break;
-            case 'N':
-                eventType = Task.TaskType.NOTAPPLICABLE;
-                break;
-            default:
-                break;
+                case 'T':
+                    eventType = Task.TaskType.TODO;
+                    packagedHistory.remove(0);
+                    break;
+                case 'E':
+                    eventType = Task.TaskType.EVENT;
+                    packagedHistory.remove("[E][X]");
+                    packagedHistory.add(packagedHistory.size() - 2 , "/at");
+                    break;
+                case 'D':
+                    eventType = Task.TaskType.DEADLINE;
+                    packagedHistory.remove("[D][X]");
+                    packagedHistory.add(packagedHistory.size() - 2 , "/by");
+                    break;
+                case 'N':
+                    eventType = Task.TaskType.NOTAPPLICABLE;
+                    break;
+                default:
+                    break;
             }
-            packagedHistory.remove(0);
-            System.out.println(eventType);
             Command command = new Command(eventType, packagedHistory, String.join(" ", packagedHistory));
             preloadedList.add(command);
             assert !eventType.equals(Task.TaskType.NOTAPPLICABLE): "Task type should not be N.A";
@@ -111,20 +112,14 @@ public class Parser {
     public static LocalDateTime convertToDateTime(String datetimeString) throws InvalidCommandException {
         assert datetimeString != "" : "dateTime should not be an empty string";
         try {
-            System.out.println(datetimeString);
             String[] temp = datetimeString.split(" ");
             String[] date = temp[0].split("/");
-            String[] time = temp[1].split(":");
             DateTimeFormatter formatter;
             if (date[0].length() == 2) {
                 formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
             } else {
                 formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
             }
-
-            int year = Integer.parseInt(date[2]);
-            int month = Integer.parseInt(date[1]);
-            int day = Integer.parseInt(date[0]);
 
             return LocalDateTime.parse(datetimeString, formatter);
         } catch (IndexOutOfBoundsException e) {

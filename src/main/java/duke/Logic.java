@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.function.Function;
 
 /**
  * This is the logic layer where most of the commands are processed and errors are handled.
@@ -14,61 +15,43 @@ public class Logic {
      * @param command refers to the parsed string. See presentation for parsing
      * @throws InvalidCommandException is throwed when there is an invalid command in the form of a string
      */
-    public static String checkIfSpecialComand(String command) throws InvalidCommandException {
+    public static String checkIfSpecialCommand(String command) {
         //duke.Logic to check each individual commands, checks for special commands first, then checks for other input
         //Use duke.Parser to package command into a packaged command
-        Command packagedCommand = Parser.parse(command);
-        ArrayList<String> listOfCommandInputs = packagedCommand.getListOfCommandInputs();
-        String loggedCommand = packagedCommand.getLog();
-        if (command.equals("")) {
-            throw new EmptyCommandException();
-        } else if (command.equals("bye")) {
-            Duke.stop();
-            DataHandlerLayer.updateHistory();
-            DataHandlerLayer.stopWriting();
-            return "See ya";
-        } else if (listOfCommandInputs.size() == 1 && listOfCommandInputs.get(0).equals("list")) {
-            return DataHandlerLayer.getLogAsString();
-        } else if (listOfCommandInputs.contains("delete")) {
-            int position = Integer.parseInt(listOfCommandInputs.get(listOfCommandInputs.indexOf("delete") + 1));
-            try {
-                DataHandlerLayer.delete(position);
-            } catch (IndexOutOfBoundsException exception) {
-                throw new InvalidCommandException();
+        try {
+            Command packagedCommand = Parser.parse(command);
+            ArrayList<String> listOfCommandInputs = packagedCommand.getListOfCommandInputs();
+            String loggedCommand = packagedCommand.getLog();
+            if (command.equals("")) {
+                throw new EmptyCommandException();
+            } else if (command.equals("bye")) {
+                return processBye();
+            } else if (listOfCommandInputs.size() == 1 && listOfCommandInputs.get(0).equals("list")) {
+                return processList();
+            } else if (listOfCommandInputs.contains("delete")) {
+                return processDelete(packagedCommand, listOfCommandInputs, loggedCommand);
+            } else if (listOfCommandInputs.contains("done")) {
+                return processDone(packagedCommand, listOfCommandInputs, loggedCommand);
+            } else if (listOfCommandInputs.contains("find")) {
+                return processFind(packagedCommand, listOfCommandInputs, loggedCommand);
+            } else {
+                processTask(packagedCommand, true);
+                return loggedCommand;
             }
-            DataHandlerLayer.updateHistory();
-            return "Cancel culture is real, even in this world";
-        } else if (listOfCommandInputs.contains("done")) {
-            int pos = Integer.parseInt(listOfCommandInputs.get(1));
-            if (pos > Task.getNumberOfTask()) {
-                throw new InvalidCommandException();
-            }
-            Task currentTask = DataHandlerLayer.getTask(pos - 1);
-            currentTask.completeTask();
-            DataHandlerLayer.updateHistory();
-            return "Ohhhh myyyy. I have been waiting for this quest to complete for ages.";
-        } else if (listOfCommandInputs.contains("find")) {
-            String temp = listOfCommandInputs.get(listOfCommandInputs.indexOf("find") + 1);
-            DataHandlerLayer.filterLog(temp);
-        } else {
-            processTask(packagedCommand, true);
-            return loggedCommand;
+        } catch (InvalidCommandException e) {
+            return e.getMessage();
         }
-        return "Acknowledged task";
     }
 
     /**
      * Loads in all the text history from previous times of running the bot
      */
     public static void preload() {
-        System.out.println("Preload called");
         try {
             ArrayList<Command> commandArrayList = DataHandlerLayer.loadPreset();
             for (Command command : commandArrayList) {
                 processTask(command, false);
             }
-            System.out.println("Preloadd");
-            System.out.println(DataHandlerLayer.getLogAsString());
         } catch (InvalidCommandException e) {
             e.printStackTrace();
         }
@@ -89,53 +72,111 @@ public class Logic {
         //Use duke.Parser to package command into a packaged command
         ArrayList<String> listOfCommandInputs = packagedCommand.getListOfCommandInputs();
         String loggedCommand = packagedCommand.getLog();
+        Task tempTask = null;
 
         switch (packagedCommand.getTaskType()) {
         case TODO:
-            Todo tempTodo = new Todo(loggedCommand);
-            DataHandlerLayer.addToLog(tempTodo);
-            if (isWrittenToHistory) {
-                DataHandlerLayer.appendToHistory(tempTodo);
-            }
+            tempTask = new Todo(loggedCommand);
             break;
         case DEADLINE:
-            int indicatorDeadline = listOfCommandInputs.indexOf("/by");
-            String tempDeadlineString = new String();
-            String deadlineDate = listOfCommandInputs.get(indicatorDeadline + 1);
-            String deadlineTime = listOfCommandInputs.get(indicatorDeadline + 2);
-            String deadlineDateTime = deadlineDate + " " + deadlineTime;
-            for (int i = 0; i < indicatorDeadline; i++) {
-                tempDeadlineString = tempDeadlineString + listOfCommandInputs.get(i);
-            }
-            Deadline tempDeadLine = new Deadline(tempDeadlineString, Parser.convertToDateTime(deadlineDateTime));
-            DataHandlerLayer.addToLog(tempDeadLine);
-            if (isWrittenToHistory) {
-                DataHandlerLayer.appendToHistory(tempDeadLine);
-            }
+            processDeadline(packagedCommand, listOfCommandInputs, loggedCommand, isWrittenToHistory);
             break;
         case EVENT:
-            int indicatorEvent = listOfCommandInputs.indexOf("/at");
-            String date = listOfCommandInputs.get(indicatorEvent + 1);
-            String time = listOfCommandInputs.get(indicatorEvent + 2);
-            String dateTime = date + " " + time;
-            String temp = new String();
-            for (int i = 0; i < indicatorEvent; i++) {
-                temp = temp + listOfCommandInputs.get(i);
-            }
-            Event tempEvent = new Event(temp, Parser.convertToDateTime(dateTime));
-            DataHandlerLayer.addToLog(tempEvent);
-            if (isWrittenToHistory) {
-                DataHandlerLayer.appendToHistory(tempEvent);
-            }
+            processEvent(packagedCommand, listOfCommandInputs, loggedCommand, isWrittenToHistory);
             break;
         case NOTAPPLICABLE:
-
-            //For echoing commands
-            break;
+            throw new InvalidCommandException();
         default:
             System.out.println("Should never reach here");
         }
+
+        if (tempTask != null) {
+            DataHandlerLayer.addToLog(tempTask);
+            if (isWrittenToHistory) {
+                DataHandlerLayer.appendToHistory(tempTask);
+            }
+        }
+
         DataHandlerLayer.updateHistory();
         DataHandlerLayer.printHistory();
+    }
+
+    private static String processBye() {
+        Duke.stop();
+        DataHandlerLayer.updateHistory();
+        DataHandlerLayer.stopWriting();
+        return "See ya";
+    }
+
+    private static String processList() {
+        return DataHandlerLayer.getFilteredLog(a-> true);
+    }
+
+    private static String processDelete(Command packagedCommand,
+                                        ArrayList<String> listOfCommandInputs, String loggedCommand) {
+        int position = Integer.parseInt(listOfCommandInputs.get(listOfCommandInputs.indexOf("delete") + 1));
+        DataHandlerLayer.delete(position);
+        DataHandlerLayer.updateHistory();
+        return "Cancel culture is real, even in this world";
+    }
+
+    private static String processDone(Command packagedCommand, ArrayList<String> listOfCommandInputs,
+                                      String loggedCommand) throws InvalidCommandException {
+        int pos = Integer.parseInt(listOfCommandInputs.get(1));
+        if (pos > Task.getNumberOfTask()) {
+            throw new InvalidCommandException();
+        }
+        Task currentTask = DataHandlerLayer.getTask(pos - 1);
+        currentTask.completeTask();
+        DataHandlerLayer.updateHistory();
+        return "Ohhhh myyyy. I have been waiting for this quest to complete for ages.";
+    }
+
+    private static String processFind(Command packagedCommand,
+                                      ArrayList<String> listOfCommandInputs, String loggedCommand) {
+        String temp = listOfCommandInputs.get(listOfCommandInputs.indexOf("find") + 1);
+        Function<Task, Boolean> findKeyword = a -> a.toString().contains(temp);
+        return DataHandlerLayer.getFilteredLog(findKeyword);
+    }
+
+
+    private static void processDeadline(Command packagedCommand,
+                                        ArrayList<String> listOfCommandInputs,
+                                        String loggedCommand,
+                                        boolean isWrittenToHistory) throws InvalidCommandException {
+
+        int indicatorDeadline = listOfCommandInputs.indexOf("/by");
+        String tempDeadlineString = new String();
+        String deadlineDate = listOfCommandInputs.get(indicatorDeadline + 1);
+        String deadlineTime = listOfCommandInputs.get(indicatorDeadline + 2);
+        String deadlineDateTime = deadlineDate + " " + deadlineTime;
+        for (int i = 0; i < indicatorDeadline; i++) {
+            tempDeadlineString = tempDeadlineString + listOfCommandInputs.get(i) + " ";
+        }
+
+        Deadline tempDeadLine = new Deadline(tempDeadlineString, Parser.convertToDateTime(deadlineDateTime));
+        DataHandlerLayer.addToLog(tempDeadLine);
+        if (isWrittenToHistory) {
+            DataHandlerLayer.appendToHistory(tempDeadLine);
+        }
+    }
+
+    private static void processEvent(Command packagedCommand,
+                                        ArrayList<String> listOfCommandInputs,
+                                        String loggedCommand,
+                                        boolean isWrittenToHistory) throws InvalidCommandException {
+        int indicatorEvent = listOfCommandInputs.indexOf("/at");
+        String date = listOfCommandInputs.get(indicatorEvent + 1);
+        String time = listOfCommandInputs.get(indicatorEvent + 2);
+        String dateTime = date + " " + time;
+        String temp = new String();
+        for (int i = 0; i < indicatorEvent; i++) {
+            temp = temp + listOfCommandInputs.get(i) + " ";
+        }
+        Event tempEvent = new Event(temp, Parser.convertToDateTime(dateTime));
+        DataHandlerLayer.addToLog(tempEvent);
+        if (isWrittenToHistory) {
+            DataHandlerLayer.appendToHistory(tempEvent);
+        }
     }
 }

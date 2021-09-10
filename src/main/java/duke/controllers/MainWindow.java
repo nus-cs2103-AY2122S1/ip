@@ -1,6 +1,8 @@
 package duke.controllers;
 
-import duke.*;
+import duke.DataHandlerLayer;
+import duke.Duke;
+import duke.Logic;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -35,7 +37,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         Logic.preload();
-        String text = startUpText + "\n" + DataHandlerLayer.getLogAsString();
+        String text = startUpText + "\n" + DataHandlerLayer.getFilteredLog(a -> true);
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(text, dukeImage)
         );
@@ -57,19 +59,15 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = null;
-        try {
-            String temp = Logic.checkIfSpecialComand(input);
-            if (temp == null) {
-                response = "There are no task my dear summoner <3";
-            } else {
-                response = temp;
-            }
-        } catch (InvalidCommandException e) {
-            e.printStackTrace();
+        String temp = Logic.checkIfSpecialCommand(input);
+        if (temp == null) {
+            response = "There are no task my dear summoner <3";
+        } else {
+            response = temp;
         }
         System.out.println(response);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
+            DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();

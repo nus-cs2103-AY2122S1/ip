@@ -18,12 +18,7 @@ public class Duke {
         Logic.preload();
         while (true) {
             String command = UI.scan();
-            try {
-                Logic.checkIfSpecialComand(command);
-            } catch (InvalidCommandException exception) {
-                System.out.println(exception.getMessage());
-            }
-
+            Logic.checkIfSpecialCommand(command);
             //Check if the logic has made any changes to quit the programme or continue running
             if (!isRunning) {
                 System.out.println("See ya");
@@ -36,6 +31,7 @@ public class Duke {
      * Stop the running of the bot
      */
     protected static void stop() {
+        assert isRunning;
         isRunning = false;
     }
 
