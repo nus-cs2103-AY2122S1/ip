@@ -1,5 +1,2 @@
 T|1|eat bfast
 T|1|eat
-T|1|eat until sleep
-T|1|rip again
-T|1|eat eat eat eat aaaa

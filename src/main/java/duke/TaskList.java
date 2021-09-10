@@ -25,13 +25,10 @@ public class TaskList {
     /**
      * Adds an item to the task list.
      *
-     * @param t The input entered by the user.
-     * @return The new task generated based on the user's input.
+     * @param t The task to be added by the user.
      */
-    public Task addItem(Task t) {
+    public void addItem(Task t) {
         taskList.add(t);
-
-        return t;
     }
 
     /**
@@ -41,6 +38,7 @@ public class TaskList {
      * @return The task that was just deleted.
      */
     public Task deleteItem(int index) {
+        assert index >= 0 && index < getSize() : "Index of item to be deleted is out of bounds";
         Task t = getTask(index);
         taskList.remove(index);
 
@@ -54,6 +52,7 @@ public class TaskList {
      * @return The item at the specified index.
      */
     public Task getTask(int index) {
+        assert index >= 0 && index < getSize() : "Index of item to be retrieved is out of bounds";
         return taskList.get(index);
     }
 
