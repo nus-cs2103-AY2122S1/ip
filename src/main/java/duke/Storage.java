@@ -1,4 +1,5 @@
 package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,6 +12,7 @@ public class Storage {
     private String filePath;
     static private File dir;
     static private File tmp;
+    static private Parser parser = new Parser();
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -20,13 +22,9 @@ public class Storage {
         dir = new File("data");
         dir.mkdirs();
         tmp = new File(dir, "alexa.txt");
-        try {
-            boolean successfulCreate = tmp.createNewFile();
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-        }
         ArrayList<duke.Task> newStorage = new ArrayList<>();
         try {
+            boolean successfulCreate = tmp.createNewFile();
             Scanner myReader = new Scanner(tmp);
             boolean hasNoTask = true;
             while (myReader.hasNextLine()) {
@@ -37,28 +35,22 @@ public class Storage {
                 String data = myReader.nextLine();
                 String taskType = data.substring(3, 4);
                 switch (taskType) {
-                    case "T":
-                        Todo newToDo = new Todo(data.substring(9));
-                        newStorage.add(newToDo);
-                        break;
-                    case "D":
-                        int indexOfOpenBracketD = data.indexOf("(");
-                        int indexOfCloseBracketD = data.indexOf(")");
-                        String deadlineDate = data.substring(indexOfOpenBracketD + 4, indexOfCloseBracketD);
-                        String deadlineTitle = data.substring(9, indexOfOpenBracketD);
-                        Deadline newDeadline = new Deadline(deadlineTitle, deadlineDate);
-                        newStorage.add(newDeadline);
-                        break;
-                    case "E":
-                        int indexOfOpenBracketE = data.indexOf("(");
-                        int indexOfCloseBracketE = data.indexOf(")");
-                        String eventDate = data.substring(indexOfOpenBracketE + 4, indexOfCloseBracketE);
-                        String eventTitle = data.substring(9, indexOfOpenBracketE);
-                        Event newEvent = new Event(eventTitle, eventDate);
-                        newStorage.add(newEvent);
-                        break;
-                    default:
-                        break;
+                case "T":
+                    Todo newToDo = new Todo(data.substring(9));
+                    newStorage.add(newToDo);
+                    break;
+                case "D":
+                    String[] deadlineData = parser.storageDeadline(data);
+                    Deadline newDeadline = new Deadline(deadlineData[0], deadlineData[1]);
+                    newStorage.add(newDeadline);
+                    break;
+                case "E":
+                    String[] eventData = parser.storageEvent(data);
+                    Event newEvent = new Event(eventData[0], eventData[1]);
+                    newStorage.add(newEvent);
+                    break;
+                default:
+                    break;
                 }
                 System.out.println("    " + data);
             }
@@ -66,7 +58,7 @@ public class Storage {
                 throw new DukeException("    Nice! You have no pending tasks!");
             }
             myReader.close();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }

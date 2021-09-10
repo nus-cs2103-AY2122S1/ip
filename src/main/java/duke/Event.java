@@ -1,7 +1,7 @@
 package duke;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends duke.Task {
+public class Event extends Task {
 
     private String date;
     private DateTimeFormatter test;

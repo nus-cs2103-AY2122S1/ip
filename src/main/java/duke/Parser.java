@@ -1,4 +1,5 @@
 package duke;
+
 public class Parser {
 
     public Parser() {
@@ -23,5 +24,23 @@ public class Parser {
 
     public boolean parseDelete(String input) {
         return input.length() >= 7 && input.substring(0, 7).equals("delete ");
+    }
+
+    public String[] storageDeadline(String input) {
+        int indexOfOpenBracketD = input.indexOf("(");
+        int indexOfCloseBracketD = input.indexOf(")");
+        String deadlineDate = input.substring(indexOfOpenBracketD + 4, indexOfCloseBracketD);
+        String deadlineTitle = input.substring(9, indexOfOpenBracketD);
+        String[] deadlineWords = {deadlineDate, deadlineTitle};
+        return deadlineWords;
+    }
+
+    public String[] storageEvent(String input) {
+        int indexOfOpenBracketE = input.indexOf("(");
+        int indexOfCloseBracketE = input.indexOf(")");
+        String eventDate = input.substring(indexOfOpenBracketE + 4, indexOfCloseBracketE);
+        String eventTitle = input.substring(9, indexOfOpenBracketE);
+        String[] eventWords = {eventDate, eventTitle};
+        return eventWords;
     }
 }

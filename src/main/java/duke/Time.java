@@ -10,9 +10,8 @@ public class Time {
         SimpleDateFormat sdfrmt = new SimpleDateFormat("dd/MM/yyyy");
         sdfrmt.setLenient(false);
 
-        try
-        {
-                Date javaDate = sdfrmt.parse(strDate);
+        try {
+            Date javaDate = sdfrmt.parse(strDate);
         }
         catch (ParseException e) {
             return false;
