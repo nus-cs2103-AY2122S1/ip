@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.DuplicateTaskException;
 import duke.tasks.Task;
 import duke.utils.CliUi;
 import duke.utils.Storage;
@@ -28,7 +29,7 @@ public abstract class AddTaskCommand extends Command {
      * @return String[] with the messages to be printed out to the Ui.
      */
     @Override
-    public String execute(TaskList taskList, CliUi cliUi, Storage storage) {
+    public String execute(TaskList taskList, CliUi cliUi, Storage storage) throws DuplicateTaskException {
         taskList.addTask(task);
         assert taskList.getSize() > 0 : "taskList should not be empty after adding a task";
         String[] messages = new String[] {

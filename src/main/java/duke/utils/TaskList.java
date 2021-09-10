@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import duke.exceptions.DuplicateTaskException;
 import duke.exceptions.InvalidTaskNumberException;
 import duke.tasks.Task;
 
@@ -50,9 +51,13 @@ public class TaskList {
      *
      * @param task Task to be added to taskList.
      */
-    public void addTask(Task task) {
+    public void addTask(Task task) throws DuplicateTaskException {
         assert (task != null) : "TaskList should not contain any null objects";
-        tasks.add(task);
+        if (!tasks.contains(task)) {
+            tasks.add(task);
+        } else {
+            throw new DuplicateTaskException(task);
+        }
     }
 
     /**
@@ -114,7 +119,11 @@ public class TaskList {
         TaskList filteredTasks = new TaskList();
         for (Task task : tasks) {
             if (task.containsKeywords(keywords)) {
-                filteredTasks.addTask(task);
+                try {
+                    filteredTasks.addTask(task);
+                } catch (DuplicateTaskException e) {
+                    // will never occur since the original taskList is correct
+                }
             }
         }
         if (filteredTasks.getSize() == 0) {
