@@ -21,8 +21,6 @@ public class PersistentStorageHandler {
     private final String fileName;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
-    private int numberOfLines = 0;
-    private final int maxNumberOfLines = 10;
     private boolean hasStorageTextFile = false;
     private final ArrayList<String> allLines = new ArrayList<>();
 
@@ -92,9 +90,6 @@ public class PersistentStorageHandler {
         } catch (NullPointerException | IOException e) {
             e.printStackTrace();
         }
-
-        //Add the number of lines
-        numberOfLines += linesInAddedText;
 
         //Accumulate all lines
         allLines.add(text);

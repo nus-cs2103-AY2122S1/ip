@@ -130,17 +130,12 @@ public class Parser {
         try {
             String[] temp = datetimeString.split(" ");
             String[] date = temp[0].split("/");
-            String[] time = temp[1].split(":");
             DateTimeFormatter formatter;
             if (date[0].length() == 2) {
                 formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
             } else {
                 formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
             }
-
-            int year = Integer.parseInt(date[2]);
-            int month = Integer.parseInt(date[1]);
-            int day = Integer.parseInt(date[0]);
 
             return LocalDateTime.parse(datetimeString, formatter);
         } catch (IndexOutOfBoundsException e) {

@@ -154,7 +154,6 @@ public class Logic {
             tempDeadlineString = tempDeadlineString + listOfCommandInputs.get(i) + " ";
         }
 
-        System.out.println(deadlineDateTime);
         Deadline tempDeadLine = new Deadline(tempDeadlineString, Parser.convertToDateTime(deadlineDateTime));
         DataHandlerLayer.addToLog(tempDeadLine);
         if (isWrittenToHistory) {
