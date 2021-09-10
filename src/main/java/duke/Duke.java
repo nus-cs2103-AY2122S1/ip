@@ -44,7 +44,7 @@ public class Duke {
      * @param input The given String input to be processed as a command.
      * @return The String to be displayed to the user.
      */
-    public String getResponse(String input) {
+    public String getResponse(String input) throws DukeException {
         Command command = parser.parse(input);
         if (command == null) {
             return ui.getUnrecognisedCommandMessage();

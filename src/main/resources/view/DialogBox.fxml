@@ -13,7 +13,7 @@
             <Insets left="15.0" right="15.0" />
          </padding>
          <font>
-            <Font name="SansSerif Regular" size="13.0" />
+            <Font name="Arial" size="13.0" />
          </font>
       </Label>
       <Circle fx:id="circle" fill="#3db5f5" radius="20.0" stroke="TRANSPARENT" strokeType="INSIDE">

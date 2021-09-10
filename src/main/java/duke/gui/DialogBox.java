@@ -34,7 +34,7 @@ public class DialogBox extends HBox {
         }
 
         if (isDuke) {
-            circle.setFill(new Color(0.92156862745, 0.35294117647, 0.32156862745, 1));
+            circle.setFill(Color.web("#eb5a52"));
             dialog.setAlignment(Pos.CENTER_LEFT);
         }
         dialog.setText(text);
@@ -70,7 +70,10 @@ public class DialogBox extends HBox {
         return db;
     }
 
-    public static DialogBox getDukeDialog(String text) {
+    public static DialogBox getDukeDialog(String text, boolean isError) {
+        if (isError) {
+            text = "ERROR: \n" + text;
+        }
         int numOfLines = countLines(text);
         var db = new DialogBox(text, numOfLines*20 + 20, true);
         db.setPrefHeight(numOfLines*20 + 20);
