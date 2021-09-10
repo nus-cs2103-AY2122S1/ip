@@ -10,13 +10,13 @@ import duke.logic.commands.UpdateCommand;
 import duke.logic.commands.UpdateTaskDescriptorBuilder;
 
 public class EventTest {
-    private final String DEFAULT_DESCRIPTION = "JUnit test iP";
-    private final boolean DEFAULT_DONE = true;
-    private final LocalDateTime DEFAULT_AT = LocalDateTime.of(2021, 1, 1, 0, 0);
-    private final LocalDateTime DEFAULT_END = LocalDateTime.of(2021, 12, 31, 0, 0);
-    private final String UPDATE_DESCRIPTION = "Test update description";
-    private final LocalDateTime UPDATE_AT = LocalDateTime.of(2022, 1, 1, 0, 0);
-    private final LocalDateTime UPDATE_END = LocalDateTime.of(2022, 12, 31, 0, 0);
+    private static final String DEFAULT_DESCRIPTION = "JUnit test iP";
+    private static final boolean DEFAULT_DONE = true;
+    private static final LocalDateTime DEFAULT_AT = LocalDateTime.of(2021, 1, 1, 0, 0);
+    private static final LocalDateTime DEFAULT_END = LocalDateTime.of(2021, 12, 31, 0, 0);
+    private static final String UPDATE_DESCRIPTION = "Test update description";
+    private static final LocalDateTime UPDATE_AT = LocalDateTime.of(2022, 1, 1, 0, 0);
+    private static final LocalDateTime UPDATE_END = LocalDateTime.of(2022, 12, 31, 0, 0);
 
     private Event e = new Event(DEFAULT_DESCRIPTION, DEFAULT_DONE, DEFAULT_AT, DEFAULT_END);
 

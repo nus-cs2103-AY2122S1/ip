@@ -32,6 +32,13 @@ public abstract class Task {
         return isDone;
     }
 
+    /**
+     * Copies this task, updates the field values as specified, then returns
+     * the updated task.
+     *
+     * @param updateDescriptor The field values to update.
+     * @return The updated task.
+     */
     public abstract Task createUpdatedCopy(UpdateTaskDescriptor updateDescriptor);
 
     /**

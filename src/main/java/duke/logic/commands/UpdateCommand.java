@@ -5,20 +5,40 @@ import java.util.Optional;
 
 import duke.logic.tasks.TaskList;
 
+/**
+ * Updates a task with the specified new information.
+ */
 public class UpdateCommand extends Command {
-     static final String TASK_UPDATED_MSG = "I've updated this task:\n  %s";
-     static final String EMPTY_TASK_LIST_MSG = "You don't have any tasks!";
-     static final String TASK_NUMBER_OUT_OF_BOUNDS_MSG = "Invalid task number! Must be between 1 and %d";
-     static final String NO_FIELD_PROVIDED_MSG = "Provide at lease one field to update.";
+    static final String TASK_UPDATED_MSG = "I've updated this task:\n  %s";
+    static final String EMPTY_TASK_LIST_MSG = "You don't have any tasks!";
+    static final String TASK_NUMBER_OUT_OF_BOUNDS_MSG = "Invalid task number! Must be between 1 and %d";
+    static final String NO_FIELD_PROVIDED_MSG = "Provide at lease one field to update.";
 
     private final int taskNo;
     private final UpdateTaskDescriptor updateTaskDescriptor;
 
-    public UpdateCommand(int taskNo, String newDescription, LocalDateTime newBy, LocalDateTime newAt, LocalDateTime newEnd) {
+    /**
+     * Creates a command to update a task.
+     *
+     * @param taskNo The number of the task to be updated.
+     * @param newDescription The new description, if any.
+     * @param newBy The new deadline (for a deadline task), if any.
+     * @param newAt The new starting time (for an event task), if any.
+     * @param newEnd The new ending time (for an event task), if any.
+     */
+    public UpdateCommand(
+            int taskNo, String newDescription, LocalDateTime newBy, LocalDateTime newAt, LocalDateTime newEnd) {
         this.taskNo = taskNo;
         this.updateTaskDescriptor = new UpdateTaskDescriptor(newDescription, newBy, newAt, newEnd);
     }
 
+    /**
+     * Updates the task with new information. No changes occur if the
+     * task number is non-positive or greater than the task list size,
+     * or if no fields are given to update.
+     *
+     * @return The execution result
+     */
     @Override
     public CommandResult execute() {
         TaskList taskList = getTaskList();
@@ -36,6 +56,12 @@ public class UpdateCommand extends Command {
         return new CommandResult(String.format(TASK_UPDATED_MSG, result));
     }
 
+    /**
+     * Encapsulates the possible fields to update and their values, if any.
+     * Each non-empty field value will replace the corresponding field value of the task, provided
+     * that the field exists in that task (e.g. a non-null field {@code at} will be ignored when
+     * updating a deadline task).
+     */
     public static class UpdateTaskDescriptor {
         private final String description;
         private final LocalDateTime by;
@@ -65,6 +91,11 @@ public class UpdateCommand extends Command {
             return Optional.ofNullable(end);
         }
 
+        /**
+         * Checks if at least one field value is non-empty.
+         *
+         * @return true if any one field is not null, false if all fields are null.
+         */
         public boolean isAnyFieldNonNull() {
             boolean isDescriptionNonNull = (description != null);
             boolean isNewByNonNull = (by != null);

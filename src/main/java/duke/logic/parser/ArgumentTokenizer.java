@@ -91,8 +91,8 @@ public class ArgumentTokenizer {
      * Stores the flag and the index it appears at.
      */
     private static class FlagOccurrence implements Comparable<FlagOccurrence> {
-        public String flag;
-        public Integer index;
+        private String flag;
+        private Integer index;
 
         public FlagOccurrence(String flag, Integer index) {
             this.flag = flag;

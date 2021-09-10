@@ -80,6 +80,13 @@ public class TaskList {
         return list.get(--taskNo).markAsDone();
     }
 
+    /**
+     * Updates a task with the new information supplied.
+     *
+     * @param taskNo The index of the task to be marked as done (1-based).
+     * @param updateDescriptor New information to be used for the update.
+     * @return The updated task.
+     */
     public Task update(int taskNo, UpdateTaskDescriptor updateDescriptor) {
         assert updateDescriptor != null;
         Task t = this.get(taskNo);

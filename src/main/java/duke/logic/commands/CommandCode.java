@@ -16,6 +16,7 @@ public enum CommandCode {
 
     /**
      * Returns the command code that matches the given string.
+     * The matching process is case insensitive.
      *
      * @param s The input string.
      * @return The corresponding command code, or null if no code matches the string.

@@ -16,15 +16,15 @@ import org.junit.jupiter.api.Test;
 import duke.logic.commands.UpdateCommand.UpdateTaskDescriptor;
 
 public class UpdateTaskDescriptorTest {
-    private final String DEFAULT_DESCRIPTION = "JUnit test iP";
-    private final LocalDateTime DEFAULT_BY = LocalDateTime.of(2021, 1, 1, 0, 0);
-    private final LocalDateTime DEFAULT_AT = LocalDateTime.of(2021, 1, 1, 0, 0);
-    private final LocalDateTime DEFAULT_END = LocalDateTime.of(2021, 12, 31, 0, 0);
+    private static final String DEFAULT_DESCRIPTION = "JUnit test iP";
+    private static final LocalDateTime DEFAULT_BY = LocalDateTime.of(2021, 1, 1, 0, 0);
+    private static final LocalDateTime DEFAULT_AT = LocalDateTime.of(2021, 1, 1, 0, 0);
+    private static final LocalDateTime DEFAULT_END = LocalDateTime.of(2021, 12, 31, 0, 0);
 
-    private final String ALTERNATIVE_DESCRIPTION = "Test description";
-    private final LocalDateTime ALTERNATIVE_BY = LocalDateTime.of(2000, 1, 1, 0, 0);
-    private final LocalDateTime ALTERNATIVE_AT = LocalDateTime.of(2000, 1, 1, 0, 0);
-    private final LocalDateTime ALTERNATIVE_END = LocalDateTime.of(2000, 12, 31, 0, 0);
+    private static final String ALTERNATIVE_DESCRIPTION = "Test description";
+    private static final LocalDateTime ALTERNATIVE_BY = LocalDateTime.of(2000, 1, 1, 0, 0);
+    private static final LocalDateTime ALTERNATIVE_AT = LocalDateTime.of(2000, 1, 1, 0, 0);
+    private static final LocalDateTime ALTERNATIVE_END = LocalDateTime.of(2000, 12, 31, 0, 0);
 
     private UpdateTaskDescriptor desc = new UpdateTaskDescriptor(
             DEFAULT_DESCRIPTION, DEFAULT_BY, DEFAULT_AT, DEFAULT_END);
