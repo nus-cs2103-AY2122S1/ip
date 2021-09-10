@@ -1,6 +1,10 @@
 package duke;
 
-import java.io.*;
+import tasks.*;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -8,12 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
-
-import tasks.TaskList;
-import tasks.Events;
-import tasks.Task;
-import tasks.Todo;
-import tasks.Deadline;
 
 public class Storage {
     private static final String DIRECTORY = "src/data";
@@ -55,37 +53,37 @@ public class Storage {
 
         while(sc.hasNext()) {
             String t = sc.next();
-
-            switch(t) {
-                case "T":
-                    int i = Integer.parseInt(sc.next());
-                    String desc = sc.next();
-                    Task task = new Todo(desc);
-                    if (i == 1) {
-                        task.taskDone();
-                    }
-                    tasks.add(task);
-                    break;
-                case "D":
-                    i = Integer.parseInt(sc.next());
-                    desc = sc.next();
-                    String by = sc.next();
-                    task = new Deadline(desc, by);
-                    if (i == 1) {
-                        task.taskDone();
-                    }
-                    tasks.add(task);
-                    break;
-                case "E":
-                    i = Integer.parseInt(sc.next());
-                    desc = sc.next();
-                    String at = sc.next();
-                    task = new Events(desc, at);
-                    if (i == 1) {
-                        task.taskDone();
-                    }
-                    tasks.add(task);
-                    break;
+            
+            switch(t) { 
+            case "T":
+                int i = Integer.parseInt(sc.next());
+                String desc = sc.next();
+                Task task = new Todo(desc);
+                if (i == 1) {
+                    task.taskDone();
+                }
+                tasks.add(task);
+                break;
+            case "D":
+                i = Integer.parseInt(sc.next());
+                desc = sc.next();
+                String by = sc.next();
+                task = new Deadline(desc, by);
+                if (i == 1) {
+                    task.taskDone();
+                }
+                tasks.add(task);
+                break;
+            case "E":
+                i = Integer.parseInt(sc.next());
+                desc = sc.next();
+                String at = sc.next();
+                task = new Events(desc, at);
+                if (i == 1) {
+                    task.taskDone();
+                }
+                tasks.add(task);
+                break;
             }
         }
         sc.close();
