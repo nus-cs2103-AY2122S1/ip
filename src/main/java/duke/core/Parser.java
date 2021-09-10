@@ -83,6 +83,11 @@ public class Parser {
         case "delete":
             checkValidityDoneOrDelete(input, taskList, "delete");
             break;
+        case "find":
+            checkValidityFind(input);
+            break;
+        default:
+            // No action needed due to the default case in parse()
         }
         return true;
     }
@@ -120,6 +125,11 @@ public class Parser {
     private static void checkValidityEvent(String input) throws DukeException {
         final int NUM_OF_ARGUMENTS = 2;
         checkNumOfArguments(input, NUM_OF_ARGUMENTS, "event");
+    }
+
+    private static void checkValidityFind(String input) throws DukeException {
+        final int NUM_OF_ARGUMENTS = 1;
+        checkNumOfArguments(input, NUM_OF_ARGUMENTS, "find");
     }
 
     private static void checkValidityDoneOrDelete(String input, TaskList taskList, String commandType)
