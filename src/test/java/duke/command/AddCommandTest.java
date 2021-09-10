@@ -86,25 +86,25 @@ class AddCommandTest {
     void execute_missingTaskDescription_noTaskAdded() {
         TaskList tasks = new TaskList();
         StorageStub storageStub = new StorageStub(tasks);
-        AddCommand addCommand = new AddCommand("event /at 1/1/2020");
-        AddCommand addCommand1 = new AddCommand("todo");
-        AddCommand addCommand2 = new AddCommand("todo ");
-        AddCommand addCommand3 = new AddCommand("event");
-        AddCommand addCommand4 = new AddCommand("event ");
-        AddCommand addCommand5 = new AddCommand("event /at 1/1/2020");
-        AddCommand addCommand6 = new AddCommand("deadline");
-        AddCommand addCommand7 = new AddCommand("deadline ");
-        AddCommand addCommand8 = new AddCommand("deadline /by 1/1/2020");
+        AddCommand addCommandTodoMissingSpaceDescription = new AddCommand("todo");
+        AddCommand addCommandTodoMissingDescription = new AddCommand("todo ");
+        AddCommand addCommandTodoBlankDescription = new AddCommand("todo  ");
 
-        addCommand.execute(tasks, this.ui, storageStub);
-        addCommand1.execute(tasks, this.ui, storageStub);
-        addCommand2.execute(tasks, this.ui, storageStub);
-        addCommand3.execute(tasks, this.ui, storageStub);
-        addCommand4.execute(tasks, this.ui, storageStub);
-        addCommand5.execute(tasks, this.ui, storageStub);
-        addCommand6.execute(tasks, this.ui, storageStub);
-        addCommand7.execute(tasks, this.ui, storageStub);
-        addCommand8.execute(tasks, this.ui, storageStub);
+        AddCommand addCommandEventMissingSpaceDescription = new AddCommand("event");
+        AddCommand addCommandEventMissingDescription = new AddCommand("event ");
+        AddCommand addCommandEventMissingDescription1 = new AddCommand("event /at 1/1/2020");
+        AddCommand addCommandEventBlankDescription = new AddCommand("event  ");
+        AddCommand addCommandEventBlankDescription1 = new AddCommand("event  /at 1/1/2020");
+
+        addCommandTodoMissingSpaceDescription.execute(tasks, this.ui, storageStub);
+        addCommandTodoMissingDescription.execute(tasks, this.ui, storageStub);
+        addCommandTodoBlankDescription.execute(tasks, this.ui, storageStub);
+
+        addCommandEventMissingSpaceDescription.execute(tasks, this.ui, storageStub);
+        addCommandEventMissingDescription.execute(tasks, this.ui, storageStub);
+        addCommandEventMissingDescription1.execute(tasks, this.ui, storageStub);
+        addCommandEventBlankDescription.execute(tasks, this.ui, storageStub);
+        addCommandEventBlankDescription1.execute(tasks, this.ui, storageStub);
 
         assertTrue(new TaskList().equals(tasks));
     }
@@ -113,23 +113,17 @@ class AddCommandTest {
     void execute_missingSpaces_noTaskAdded() {
         TaskList tasks = new TaskList();
         StorageStub storageStub = new StorageStub(tasks);
-        // User might want "a" as description.
-        AddCommand addCommand = new AddCommand("todoa");
-        AddCommand addCommand1 = new AddCommand("eventa");
-        AddCommand addCommand2 = new AddCommand("event abc/at 1/1/2020");
-        AddCommand addCommand3 = new AddCommand("eventabc /at1/1/2020");
-        AddCommand addCommand4 = new AddCommand("deadlinea");
-        AddCommand addCommand5 = new AddCommand("deadline abc/by 1/1/2020");
-        AddCommand addCommand6 = new AddCommand("deadlineabc /at1/1/2020");
+
+        AddCommand addCommandTodoMissingSpaceAfterCommand = new AddCommand("todoa");
+        AddCommand addCommandEventMissingSpaceAfterCommand = new AddCommand("eventa");
+        AddCommand addCommandEventMissingSpaceBeforeDescriptor = new AddCommand("event abc/at 1/1/2020");
+        AddCommand addCommandEventMissingSpaceAfterDescriptor = new AddCommand("event abc /at1/1/2020");
 
 
-        addCommand.execute(tasks, this.ui, storageStub);
-        addCommand1.execute(tasks, this.ui, storageStub);
-        addCommand2.execute(tasks, this.ui, storageStub);
-        addCommand3.execute(tasks, this.ui, storageStub);
-        addCommand4.execute(tasks, this.ui, storageStub);
-        addCommand5.execute(tasks, this.ui, storageStub);
-        addCommand6.execute(tasks, this.ui, storageStub);
+        addCommandTodoMissingSpaceAfterCommand.execute(tasks, this.ui, storageStub);
+        addCommandEventMissingSpaceAfterCommand.execute(tasks, this.ui, storageStub);
+        addCommandEventMissingSpaceBeforeDescriptor.execute(tasks, this.ui, storageStub);
+        addCommandEventMissingSpaceAfterDescriptor.execute(tasks, this.ui, storageStub);
 
         assertTrue(new TaskList().equals(tasks));
     }

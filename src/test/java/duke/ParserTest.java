@@ -192,56 +192,60 @@ class ParserTest {
         Ui.Descriptors descriptor = Ui.Descriptors.AT;
         char separator = '/';
 
-        // No task description.
-        String invalidDescriptionInput = "/at 1/1/2020";
-        MissingTaskDescriptionException exception = new MissingTaskDescriptionException(command);
-        // No separator.
-        String invalidDescriptionInput1 = "at 1/1/2020";
-        WrongDescriptorException exception1 = new WrongDescriptorException(descriptor, command);
-        // No space before descriptor.
-        String invalidDescriptionInput2 = "task description/at 1/1/2020";
-        MissingSpaceBeforeDescriptorException exception2 = new MissingSpaceBeforeDescriptorException(descriptor);
-        // No space after descriptor.
-        String invalidDescriptionInput3 = "task description /at1/1/2020";
-        MissingSpaceAfterDescriptorException exception3 = new MissingSpaceAfterDescriptorException(descriptor);
-        // Wrong descriptor used.
-        String invalidDescriptionInput4 = "task description /by 1/1/2020";
-        WrongDescriptorException exception4 = new WrongDescriptorException(descriptor, command);
+        String missingTaskDescription = "/at 1/1/2020";
+        MissingTaskDescriptionException missingTaskDescriptionException = new MissingTaskDescriptionException(command);
 
-        String invalidDescriptionInput5 = "task description /at";
+        String missingSeparator = "at 1/1/2020";
+        WrongDescriptorException missingSeparatorException = new WrongDescriptorException(descriptor, command);
+
+        String missingSpaceBeforeDescriptor = "task description/at 1/1/2020";
+        MissingSpaceBeforeDescriptorException missingSpaceBeforeDescriptorException =
+                new MissingSpaceBeforeDescriptorException(descriptor);
+
+        String missingSpaceAfterDescriptor = "task description /at1/1/2020";
+        MissingSpaceAfterDescriptorException missingSpaceAfterDescriptorException =
+                new MissingSpaceAfterDescriptorException(descriptor);
+
+        String wrongDescriptor = "task description /by 1/1/2020";
+        WrongDescriptorException wrongDescriptorException = new WrongDescriptorException(descriptor, command);
+
+        String missingDate = "task description /at";
+        MissingDateException missingDateException = new MissingDateException();
 
         DukeException dukeException = assertThrows(MissingTaskDescriptionException.class, () -> {
-            Parser.parseUserDescriptionInput(invalidDescriptionInput, descriptor, separator, command);
+            Parser.parseUserDescriptionInput(missingTaskDescription, descriptor, separator, command);
         });
 
-        assertEquals(exception.getErrorMessage(), dukeException.getErrorMessage());
+        assertEquals(missingTaskDescriptionException.getErrorMessage(), dukeException.getErrorMessage());
 
         DukeException dukeException1 = assertThrows(WrongDescriptorException.class, () -> {
-            Parser.parseUserDescriptionInput(invalidDescriptionInput1, descriptor, separator, command);
+            Parser.parseUserDescriptionInput(missingSeparator, descriptor, separator, command);
         });
 
-        assertEquals(exception1.getErrorMessage(), dukeException1.getErrorMessage());
+        assertEquals(missingSeparatorException.getErrorMessage(), dukeException1.getErrorMessage());
 
         DukeException dukeException2 = assertThrows(MissingSpaceBeforeDescriptorException.class, () -> {
-            Parser.parseUserDescriptionInput(invalidDescriptionInput2, descriptor, separator, command);
+            Parser.parseUserDescriptionInput(missingSpaceBeforeDescriptor, descriptor, separator, command);
         });
 
-        assertEquals(exception2.getErrorMessage(), dukeException2.getErrorMessage());
+        assertEquals(missingSpaceBeforeDescriptorException.getErrorMessage(), dukeException2.getErrorMessage());
 
         DukeException dukeException3 = assertThrows(MissingSpaceAfterDescriptorException.class, () -> {
-            Parser.parseUserDescriptionInput(invalidDescriptionInput3, descriptor, separator, command);
+            Parser.parseUserDescriptionInput(missingSpaceAfterDescriptor, descriptor, separator, command);
         });
 
-        assertEquals(exception3.getErrorMessage(), dukeException3.getErrorMessage());
+        assertEquals(missingSpaceAfterDescriptorException.getErrorMessage(), dukeException3.getErrorMessage());
 
         DukeException dukeException4 = assertThrows(WrongDescriptorException.class, () -> {
-            Parser.parseUserDescriptionInput(invalidDescriptionInput4, descriptor, separator, command);
+            Parser.parseUserDescriptionInput(wrongDescriptor, descriptor, separator, command);
         });
 
-        assertEquals(exception4.getErrorMessage(), dukeException4.getErrorMessage());
+        assertEquals(wrongDescriptorException.getErrorMessage(), dukeException4.getErrorMessage());
 
-        assertThrows(MissingDateException.class, () -> {
-            Parser.parseUserDescriptionInput(invalidDescriptionInput5, descriptor, separator, command);
+        DukeException dukeException5 = assertThrows(MissingDateException.class, () -> {
+            Parser.parseUserDescriptionInput(missingDate, descriptor, separator, command);
         });
+
+        assertEquals(missingDateException.getErrorMessage(), dukeException5.getErrorMessage());
     }
 }

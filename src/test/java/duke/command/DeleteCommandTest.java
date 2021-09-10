@@ -53,11 +53,11 @@ class DeleteCommandTest {
         TaskList taskList = new TaskList();
         taskList.add(new Todo(DESCRIPTION));
         StorageStub storageStub = new StorageStub(taskList);
-        DeleteCommand deleteCommand = new DeleteCommand("delete");
-        DeleteCommand deleteCommand1 = new DeleteCommand("delete ");
+        DeleteCommand deleteCommandMissingSpaceIndex = new DeleteCommand("delete");
+        DeleteCommand deleteCommandMissingIndex = new DeleteCommand("delete ");
 
-        deleteCommand.execute(taskList, this.ui, storageStub);
-        deleteCommand1.execute(taskList, this.ui, storageStub);
+        deleteCommandMissingSpaceIndex.execute(taskList, this.ui, storageStub);
+        deleteCommandMissingIndex.execute(taskList, this.ui, storageStub);
 
         assertTrue(getTaskListOneTodo().equals(taskList));
     }
@@ -67,11 +67,15 @@ class DeleteCommandTest {
         TaskList taskList = new TaskList();
         taskList.add(new Todo(DESCRIPTION));
         StorageStub storageStub = new StorageStub(taskList);
-        DeleteCommand deleteCommand = new DeleteCommand("delete 100");
-        DeleteCommand deleteCommand1 = new DeleteCommand("delete abc");
+        DeleteCommand deleteCommandInvalidLargeIndex = new DeleteCommand("delete 100");
+        DeleteCommand deleteCommandInvalidNegativeIndex = new DeleteCommand("delete -1");
+        DeleteCommand deleteCommandInvalidZeroIndex = new DeleteCommand("delete 0");
+        DeleteCommand deleteCommandInvalidFormatIndex = new DeleteCommand("delete abc");
 
-        deleteCommand.execute(taskList, this.ui, storageStub);
-        deleteCommand1.execute(taskList, this.ui, storageStub);
+        deleteCommandInvalidLargeIndex.execute(taskList, this.ui, storageStub);
+        deleteCommandInvalidNegativeIndex.execute(taskList, this.ui, storageStub);
+        deleteCommandInvalidZeroIndex.execute(taskList, this.ui, storageStub);
+        deleteCommandInvalidFormatIndex.execute(taskList, this.ui, storageStub);
 
         assertTrue(getTaskListOneTodo().equals(taskList));
     }

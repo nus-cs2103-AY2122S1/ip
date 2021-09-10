@@ -48,11 +48,11 @@ class MarkCommandTest {
     void execute_missingIndex_taskNotMarkedAsDone() {
         TaskList tasks = getTaskListOneUndoneTodo();
         StorageStub storageStub = new StorageStub(tasks);
-        MarkCommand markCommand = new MarkCommand("done");
-        MarkCommand markCommand1 = new MarkCommand("done ");
+        MarkCommand markCommandMissingSpaceIndex = new MarkCommand("done");
+        MarkCommand markCommandMissingIndex = new MarkCommand("done ");
 
-        markCommand.execute(tasks, this.ui, storageStub);
-        markCommand1.execute(tasks, this.ui, storageStub);
+        markCommandMissingSpaceIndex.execute(tasks, this.ui, storageStub);
+        markCommandMissingIndex.execute(tasks, this.ui, storageStub);
 
         assertTrue(getTaskListOneUndoneTodo().equals(tasks));
     }
@@ -72,11 +72,15 @@ class MarkCommandTest {
     void execute_invalidIndex_taskNotMarkedAsDone() {
         TaskList tasks = getTaskListOneUndoneTodo();
         StorageStub storageStub = new StorageStub(tasks);
-        MarkCommand markCommand = new MarkCommand("done 100");
-        MarkCommand markCommand1 = new MarkCommand("done abc");
+        MarkCommand markCommandInvalidLargeIndex = new MarkCommand("done 100");
+        MarkCommand markCommandInvalidNegativeIndex = new MarkCommand("done -1");
+        MarkCommand markCommandInvalidZeroIndex = new MarkCommand("done 0");
+        MarkCommand markCommandInvalidFormatIndex = new MarkCommand("done abc");
 
-        markCommand.execute(tasks, this.ui, storageStub);
-        markCommand1.execute(tasks, this.ui, storageStub);
+        markCommandInvalidLargeIndex.execute(tasks, this.ui, storageStub);
+        markCommandInvalidNegativeIndex.execute(tasks, this.ui, storageStub);
+        markCommandInvalidZeroIndex.execute(tasks, this.ui, storageStub);
+        markCommandInvalidFormatIndex.execute(tasks, this.ui, storageStub);
 
         assertTrue(getTaskListOneUndoneTodo().equals(tasks));
     }
