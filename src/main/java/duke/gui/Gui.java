@@ -35,6 +35,22 @@ public class Gui {
     private Button sendButton;
     private Image dukeImage = new Image(this.getClass().getResourceAsStream(DUKE_IMAGE_FILE_PATH));
     private Image userImage = new Image(this.getClass().getResourceAsStream(USER_IMAGE_FILE_PATH));
+    private Stage stage;
+
+    /**
+     * Gui constructor.
+     *
+     * @param stage
+     */
+    public Gui(Stage stage) {
+        this.stage = stage;
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+        userInput = new TextField();
+        sendButton = new Button("Send");
+        setup();
+    }
 
     /**
      * Creates a label with the specified text and adds it to the dialog container.
@@ -94,7 +110,7 @@ public class Gui {
         delay.play();
     }
 
-    private void formatStage(Stage stage) {
+    private void formatStage() {
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(ANCHOR_HEIGHT);
@@ -129,18 +145,7 @@ public class Gui {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
-    /**
-     * Sets up the Gui.
-     *
-     * @param stage Default stage of a javafx application.
-     */
-    public void setup(Stage stage) {
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
+    private void setup() {
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
         Scene scene = new Scene(mainLayout);
@@ -148,7 +153,7 @@ public class Gui {
         stage.show();
         mainLayout.setPrefSize(ANCHOR_WIDTH, ANCHOR_HEIGHT);
 
-        formatStage(stage);
+        formatStage();
         setupFunctionality();
     }
 }
