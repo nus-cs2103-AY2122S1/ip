@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 public class Todo extends Task {
 
     /**
@@ -30,5 +32,10 @@ public class Todo extends Task {
     @Override
     public String toStorage() {
         return "T%" + isDone + "%" + description + "\n";
+    }
+
+    @Override
+    protected LocalDateTime getDateTime() {
+        return LocalDateTime.MAX;
     }
 }

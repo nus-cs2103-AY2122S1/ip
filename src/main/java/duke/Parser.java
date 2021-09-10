@@ -16,6 +16,7 @@ public class Parser {
     private static final String CMD_DEADLINE = "(?i)deadline.*";
     private static final String CMD_EVENT = "(?i)event.*";
     private static final String CMD_FIND = "(?i)find.*";
+    private static final String CMD_SORT = "(?i)sort\\s*";
 
     /**
      * Returns a String array that contains the useful and necessary parts of a command to be executed.
@@ -40,6 +41,8 @@ public class Parser {
             return parseEvent(newCommand);
         } else if (Pattern.compile(CMD_FIND).matcher(newCommand).matches()) {
             return parseFind(newCommand);
+        } else if (Pattern.compile(CMD_SORT).matcher(newCommand).matches()) {
+            return new String[]{"sort"};
         } else {
             return new String[]{"fail"};
         }

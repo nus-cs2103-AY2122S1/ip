@@ -51,4 +51,9 @@ public class Event extends Task {
     public String toStorage() {
         return ("E%" + isDone + "%" + description + "%" + fromDateTime + "%" + toDateTime + "\n");
     }
+
+    @Override
+    protected LocalDateTime getDateTime() {
+        return fromDateTime;
+    }
 }
