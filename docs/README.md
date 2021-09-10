@@ -6,14 +6,14 @@ Duke is an application for managing your tasks via a CLI while having the benefi
 1. Ensure you have Java 11 or higher installed in your computer.
 2. Download the latest release of `duke.jar` from [here](https://github.com/benedictchuajj/ip/releases)
 3. Double-click on the jar file to start the application. You will see a GUI that is similar to this:
-   ![Background](https://github.com/benedictchuajj/ip/blob/master/docs/Start.png)
+   <img src="https://github.com/benedictchuajj/ip/blob/master/docs/Start.png" width="426" height="650">
    
 4. Input some commands to start using Duke! Here are some simple commands you can try:
     * `todo try app` : Adds a ToDo task named `try app` to the task list.
     * `list` : lists all tasks in the task list.
     * `bye` : closes the application. 
       
-You can check out the [Features](https://github.com/benedictchuajj/ip/blob/master/docs#features) section for an extensive list of the commands available in Duke.
+You can check out the [Features](https://github.com/benedictchuajj/ip/tree/master/docs#features) section for an extensive list of the commands available in Duke.
 
 ## Features 
 
