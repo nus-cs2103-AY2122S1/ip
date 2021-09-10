@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.util.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -13,8 +15,8 @@ public class Deadline extends Task {
      * Returns a new Deadline object.
      * @param deadlineName The user input.
      */
-    public Deadline(String deadlineName) {
-        super(deadlineName.substring(9, deadlineName.indexOf("/by ")));
+    public Deadline(String deadlineName) throws DukeException {
+        super(deadlineName, 9, deadlineName.indexOf("/by "));
         int start = deadlineName.indexOf("/by ");
         dueDate = LocalDate.parse(deadlineName.substring(start + 4));
     }
@@ -25,7 +27,7 @@ public class Deadline extends Task {
      * @param isDone Whether the task is done.
      */
     public Deadline(String deadlineName, boolean isDone) {
-        super(deadlineName.substring(0, deadlineName.indexOf("(by:")), isDone);
+        super(deadlineName, isDone, 0, deadlineName.indexOf("(by:"));
         int start = deadlineName.indexOf("(by:") + 5;
         dueDate = LocalDate.parse(deadlineName.substring(start, start + 11),
                 DateTimeFormatter.ofPattern("MMM d yyyy"));

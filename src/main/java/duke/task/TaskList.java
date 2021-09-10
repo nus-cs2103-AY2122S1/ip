@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.DukeException;
 import duke.gui.Ui;
+import duke.util.DukeException;
 
 /**
  * Class that encapsulates a list of tasks.
@@ -23,7 +23,7 @@ public class TaskList {
 
     /**
      * Returns a new TaskList object with the given tasks.
-     * @param tasks
+     * @param tasks Given tasks.
      */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
@@ -67,6 +67,7 @@ public class TaskList {
      * @param taskNo The number of the task to be marked as done.
      */
     public String markTaskDone(int taskNo) {
+        assert getTasks() != null : "Tasks not initiated";
         Task task = getTask(taskNo);
         task.setDone();
         return ui.showTaskDone(task);
@@ -88,8 +89,8 @@ public class TaskList {
      * @throws DukeException If the input is invalid.
      */
     public String addTask(String input) throws DukeException {
+        assert getTasks() != null : "Tasks not initiated";
         Task newTask;
-
         if (input.startsWith("todo ")) {
             newTask = new Todo(input);
         } else if (input.startsWith("deadline ") && input.contains("/by ")) {
@@ -100,7 +101,7 @@ public class TaskList {
             throw new DukeException("OOPS!!! Invalid task description.");
         }
 
-        this.getTasks().add(newTask);
+        getTasks().add(newTask);
         return addTaskSuffix(newTask);
     }
 
@@ -109,6 +110,7 @@ public class TaskList {
      * @param taskNo The number of the task to be deleted.
      */
     public String deleteTask(int taskNo) {
+        assert getTasks() != null : "Tasks not initiated";
         Task removedTask = getTasks().remove(taskNo - 1);
         int tasksLeft = getSize();
         String t = tasksLeft == 1 ? " task " : " tasks ";
@@ -120,6 +122,8 @@ public class TaskList {
      * @param date The specified date.
      */
     public String findTasksOnDate(LocalDate date) {
+        assert getTasks() != null : "Tasks not initiated";
+
         List<Task> foundTasks = new ArrayList<>();
         for (Task task : getTasks()) {
             if (task instanceof Deadline && ((Deadline) task).getDueDate().isEqual(date)) {
