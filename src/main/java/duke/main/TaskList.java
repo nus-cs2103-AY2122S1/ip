@@ -1,7 +1,5 @@
 package duke.main;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 
 import duke.task.Task;
@@ -41,6 +39,7 @@ public class TaskList {
      * @return the added duke.task.
      */
     public Task add(Task task) {
+        assert task != null : "task cannot be null";
         this.tasks.add(task);
         return task;
     }
@@ -65,6 +64,7 @@ public class TaskList {
      */
     public Task markDone(int taskIndex) throws IndexOutOfBoundsException {
         Task task = getTask(taskIndex);
+        assert task != null : "task cannot be null";
         task.markAsDone();
         return task;
     }
@@ -78,6 +78,7 @@ public class TaskList {
      */
     public Task delete(int taskIndex) throws IndexOutOfBoundsException {
         Task task = tasks.get(taskIndex);
+        assert task != null : "task deleted must exist";
         tasks.remove(task);
         return task;
     }

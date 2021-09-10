@@ -34,6 +34,7 @@ public class ExitCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
+            assert tasks != null : "the taskList cannot be null";
             storage.store(tasks);
             return ui.showFarewell();
         } catch (IOException e) {
@@ -48,6 +49,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public boolean isExit() {
+        assert IS_EXIT : "IS_EXIT must be true";
         return IS_EXIT;
     }
 }

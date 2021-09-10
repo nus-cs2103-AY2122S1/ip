@@ -22,7 +22,7 @@ public class AddCommand extends Command {
 
     /**
      * Class constructor.
-     * 
+     *
      * @param addCommand the user inputed string to add a task.
      */
     public AddCommand(String addCommand) {
@@ -49,7 +49,7 @@ public class AddCommand extends Command {
             } else {
                 task = new Todo(addCommand);
             }
-
+            assert task != null : "the task cannot be null";
             Task taskAdded = tasks.add(task);
             return ui.showTaskAdded(taskAdded, tasks.getNumTasks());
         } catch (StringIndexOutOfBoundsException e) {
@@ -58,5 +58,4 @@ public class AddCommand extends Command {
             throw new DukeException(e);
         }
     }
-    
 }

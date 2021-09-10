@@ -16,7 +16,7 @@ public abstract class Command {
     private boolean isExitCommand;
 
     /**
-     * Class constructor. 
+     * Class constructor.
      */
     public Command() {
         isExitCommand = false;
@@ -24,7 +24,7 @@ public abstract class Command {
 
     /**
      * Executes the given command.
-     * 
+     *
      * @param tasks lists of tasks
      * @param ui the user interface.
      * @param storage the storage file.
@@ -34,11 +34,10 @@ public abstract class Command {
 
     /**
      * Checks whether the command is an exit command.
-     * 
+     *
      * @return true if the command is an exit command, false otherwise.
      */
     public boolean isExit() {
         return isExitCommand;
     }
-    
 }

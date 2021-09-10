@@ -28,6 +28,7 @@ public class Todo extends Task {
                 throw new IllegalArgumentException();
             }
             int startingIndex = description.indexOf(TASK_KEYWORD);
+            assert startingIndex != -1 : "TASK KEYWORD must be in the description.";
             taskDescription = description.substring(startingIndex + TASK_KEYWORD.length());
             if (taskDescription == "") {
                 throw new StringIndexOutOfBoundsException();

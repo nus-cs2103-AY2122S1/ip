@@ -30,6 +30,7 @@ public class Parser {
      * @throws DukeException exception handled by DukeException class.
      */
     public static Command parse(String command) throws DukeException {
+        assert command != null : "command must be a string";
         String[] commandDescription = command.split(" ", 0);
         String action = commandDescription[0];
         try {

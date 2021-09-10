@@ -21,6 +21,8 @@ public class Duke {
      */
     public Duke(String filePath, String fileName) {
         ui = new Ui();
+        assert fileName != null : "filepath cannot be empty";
+        assert fileName != null : "filename cannot be empty";
         storage = new Storage(filePath, fileName);
         try {
             tasks = new TaskList(storage.load());

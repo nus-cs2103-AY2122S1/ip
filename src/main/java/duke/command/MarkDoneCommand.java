@@ -22,7 +22,6 @@ public class MarkDoneCommand extends Command {
      */
     public MarkDoneCommand(int taskNumber) {
         this.TASK_NUM = taskNumber;
-        assert TASK_NUM >= 0 : "Task number should be at least 0";
     }
 
     /**
@@ -33,7 +32,10 @@ public class MarkDoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
+            assert tasks != null : "the task list cannot be null";
+            assert TASK_NUM >= 1 : "TASK_NUM must be of a cardinal value";
             Task task = tasks.markDone(TASK_NUM - 1);
+            assert task != null : "task cannot be null";
             return ui.showMarkTaskDone(task);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(e);

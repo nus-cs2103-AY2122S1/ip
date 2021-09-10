@@ -37,6 +37,7 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task deletedTask = tasks.delete(TASK_NUM - 1);
+            assert deletedTask != null : "the deleted task cannot be null";
             int numTasksRemaining = tasks.getNumTasks();
             return ui.showTaskDeleted(deletedTask, numTasksRemaining);
         } catch (IndexOutOfBoundsException e) {

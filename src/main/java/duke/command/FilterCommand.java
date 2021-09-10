@@ -17,17 +17,14 @@ public class FilterCommand extends Command {
     /**
      * Class constructor.
      *
-     * @param dateString the date of interest.
+     * @param dateOfInterest the date of interest.
      */
-    public FilterCommand(String dateString) throws DukeException {
+    public FilterCommand(String dateOfInterest) throws DukeException {
         super();
-        String[] dateComponents = dateString.split("/");
-        try {
-            this.date = new Date(dateComponents);
-            assert date != null : "date should not be null";
-        } catch (Exception e) {
-            throw new DukeException(e);
-        }
+        assert dateOfInterest != null : "date cannot be empty";
+        String[] dateComponents = dateOfInterest.split("/");
+        date = new Date(dateComponents);
+        assert date != null : "date cannot be null";
     }
     /**
      * Executes a command to filter out tasks falling on the specified date.
@@ -37,9 +34,15 @@ public class FilterCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        TaskList matchingTasks = tasks.findMatchingTasks(date.toString());
-        String message = String.format("On %s, you have:", date.toString());
-        return ui.showMatchingTasks(matchingTasks, date.toString(), message);
-
+        TaskList matchingTasks = findMatchingTasks(tasks);
+        assert matchingTasks != null : "matching task list cannot be null";
+        String message = generateFilterCommandMessage();
+        return ui.showMatchingTasks(matchingTasks, message);
+    }
+    private TaskList findMatchingTasks(TaskList tasks) {
+        return tasks.findMatchingTasks(date.toString());
+    }
+    private String generateFilterCommandMessage() {
+        return String.format("On %s, you have:", date.toString());
     }
 }

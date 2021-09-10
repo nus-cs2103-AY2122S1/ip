@@ -95,6 +95,7 @@ public class Ui {
      */
     public String showMarkTaskDone(Task task) {
         String doneMessage = "Yay, one task down!\n";
+        assert task != null : "task cannot be null";
         doneMessage += String.format("~~%s~~", task.toString());
         return doneMessage;
     }
@@ -108,6 +109,8 @@ public class Ui {
     public String showTaskDeleted(Task task, int numTasksRemaining) {
         String deletionMessage = "Alrighty, I've removed this task:\n";
         deletionMessage += String.format("~~%s~~\n", task.toString());
+        assert task != null : "task cannot be null";
+        assert numTasksRemaining >= 0 : "number of task remaining cannot be a negative number";
         deletionMessage += String.format("Now, you have %s %s remaining", numTasksRemaining,
                 (numTasksRemaining > 1 ? "tasks" : "task"));
         return deletionMessage;
@@ -122,6 +125,8 @@ public class Ui {
     public String showTaskAdded(Task task, int newNumTasks) {
         String additionMessage = "Got it. I've added this task:\n";
         additionMessage += String.format("~~%S~~\n", task.toString());
+        assert task != null : "task cannot be null";
+        assert newNumTasks >= 0 : "new number of tasks cannot be a negative number";
         additionMessage += String.format("Now you have %s %s in the list.", newNumTasks,
                 (newNumTasks > 1 ? "tasks" : "task"));
         return additionMessage;
@@ -143,10 +148,11 @@ public class Ui {
      * @param tasks   list of duke.task that fall on the specified date.
      * @param message the header message.
      */
-    public String showMatchingTasks(TaskList tasks, String searchPhrase, String message) {
+    public String showMatchingTasks(TaskList tasks, String message) {
         return iterate(message, tasks);
     }
     private String iterate(String headerMessage, TaskList tasks) {
+        assert tasks != null : "task list cannot be null";
         String listOfTasksDisplay = headerMessage + "\n";
         for (int i = 0; i < tasks.getNumTasks(); i++) {
             listOfTasksDisplay += String.format("%s.%s\n", i + 1, tasks.getTask(i).toString());

@@ -35,6 +35,7 @@ public class Event extends Task {
         taskDescription = description.substring(startingIndex, startOfTimeIndex - 1);
         eventDate = description.substring(startOfTimeIndex + AT_KEYWORD.length());
         try {
+            assert eventDate != "" : "dueDate must not be empty";
             this.dueDate = new Date(eventDate);
         } catch (DateTimeParseException e) {
             throw new DukeException(e);
@@ -85,12 +86,13 @@ public class Event extends Task {
 
     /**
      * Checks if given datetime matches the tasks date time.
-     * 
+     *
      * @param dateString date to compare with in string form.
      * @return true if the task date time matches the date time given.
      */
     @Override
     public boolean isSameDate(String dateString) {
+        assert dueDate != null : "dueDate must not be unassigned";
         return this.dueDate.isSameDate(dateString);
     }
 }

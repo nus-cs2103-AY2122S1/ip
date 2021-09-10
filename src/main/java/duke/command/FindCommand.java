@@ -10,7 +10,7 @@ import duke.main.Ui;
  * @version CS2103T, Semester 2
  */
 public class FindCommand extends Command {
-    private final String KEYWORRD = "find ";
+    private final String KEYWORD = "find ";
     private String searchPhrase;
     private boolean isExitCommand;
     /**
@@ -20,14 +20,15 @@ public class FindCommand extends Command {
      * @throws StringIndexOutOfBoundsException if there is no search phrase.
      */
     public FindCommand(String userCommand) throws StringIndexOutOfBoundsException {
-        int startingIndex = userCommand.indexOf(KEYWORRD) + KEYWORRD.length();
-        this. searchPhrase = userCommand.substring(startingIndex);
-        if(searchPhrase.equals("")) {
+        super();
+        int startingIndex = userCommand.indexOf(KEYWORD) + KEYWORD.length();
+        assert startingIndex != -1 : "starting index should not be -1, the keyword should be in userCommand";
+        this.searchPhrase = userCommand.substring(startingIndex);
+        if (searchPhrase.equals("")) {
             throw new StringIndexOutOfBoundsException();
         }
         isExitCommand = false;
     }
-
     /**
      * Executes a command to filter out tasks falling on the specified date.
      * @param tasks lists of tasks
@@ -37,7 +38,11 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList matchingTasks = tasks.findMatchingTasks(searchPhrase);
-        String message = "Here are the matching tasks in your list:";
-        return ui.showMatchingTasks(matchingTasks, searchPhrase, message);
+        assert matchingTasks != null : "matching tasks cannot be null";
+        String executionMessage = generateExecutionMessage();
+        return ui.showMatchingTasks(matchingTasks, executionMessage);
+    }
+    private String generateExecutionMessage() {
+        return "Here are the matching tasks in your list:\n";
     }
 }

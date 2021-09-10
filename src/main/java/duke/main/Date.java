@@ -21,8 +21,10 @@ public class Date {
      * @throws DateTimeParseException exception caused by improper time format.
      */
     public Date(String ... dateComponents) throws DukeException {
+        assert dateComponents != null : "date must not be empty";
         try {
             localDate = LocalDate.parse(String.format("%s-%s-%s", "2021", dateComponents[1], dateComponents[0]));
+            assert localDate != null : "localDate must not be null";
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(e);
         } catch (DateTimeParseException e) {
@@ -70,8 +72,9 @@ public class Date {
         try {
             SimpleDateFormat monthDayFormat = new SimpleDateFormat("MMM D");
             java.util.Date monthDayDate = monthDayFormat.parse(dateString);
-            SimpleDateFormat dateFormatToDate = new SimpleDateFormat("DD/MM/YYYY");
-            return new Date(dateFormatToDate.format(monthDayDate));
+            SimpleDateFormat dateFormat = new SimpleDateFormat("DD/MM/YYYY");
+            assert dateFormat != null : "dateFormat cannot be null";
+            return new Date(dateFormat.format(monthDayDate));
         } catch (ParseException e) {
             throw new DukeException(e);
         }
