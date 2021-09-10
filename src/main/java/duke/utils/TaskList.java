@@ -27,6 +27,7 @@ public class TaskList {
      * @throws IOException If there is an error loading from the specified file.
      */
     public void loadFromDisk() throws IOException {
+        System.out.println(this.storage);
         this.taskList = this.storage.loadData().taskList;
     }
 
@@ -36,6 +37,7 @@ public class TaskList {
      * @param t The Task object to be added.
      */
     public void add(Task t) {
+        assert t != null : "task to add cannot be null";
         this.taskList.add(t);
         try {
             this.storage.saveData(this);
