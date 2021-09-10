@@ -53,4 +53,22 @@ public class Deadline extends Task {
         String timeInfoString = timeInfo.format(inputFormatter);
         return String.format("D | %s | %s", super.toDataString(), timeInfoString);
     }
+
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param obj Object to compare to
+     * @return boolean indicating whehter the other object is "equal" to this one.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof Deadline) {
+            Deadline tmp = (Deadline) obj;
+            return super.equals(obj) && timeInfo.equals(tmp.timeInfo);
+        } else {
+            return false;
+        }
+    }
 }

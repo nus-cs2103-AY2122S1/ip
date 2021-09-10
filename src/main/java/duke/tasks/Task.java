@@ -62,4 +62,24 @@ public abstract class Task {
     public String toString() {
         return String.format("[%s] %s", done ? "X" : " ", taskDetails);
     }
+
+    /**
+     * Indicates whether some other object is "equal to" this one. Done status
+     * does not affect equality of objects since no two tasks are supposed to
+     * have the same description.
+     *
+     * @param obj Object to compare to
+     * @return boolean indicating whehter the other object is "equal" to this one.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof Task) {
+            Task tmp = (Task) obj;
+            return taskDetails.equals(tmp.taskDetails);
+        } else {
+            return false;
+        }
+    }
 }
