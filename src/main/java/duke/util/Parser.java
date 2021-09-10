@@ -11,7 +11,8 @@ public class Parser {
     private final TaskList TASKLIST;
 
     /**
-     * Factory method of Parser class. Initializes tasklist.
+     * Factory method of Parser class.
+     * Initializes tasklist so commands parsed can be executed on the TaskList.
      *
      * @param taskList TaskList the commands will be working on
      */
@@ -62,7 +63,6 @@ public class Parser {
             String inputBody = userInput.split(" ", 2)[1];
             int idxFrom0 = Integer.parseInt(inputBody) - 1;
             if (TaskList.isValidIndex(idxFrom0, TASKLIST.length())) {
-
                 String reply = String.format(
                         "Noted. I've removed this task:\n    %s\nNow you have %d tasks in the list.",
                         TASKLIST.get(idxFrom0).toString(),
@@ -72,6 +72,7 @@ public class Parser {
                 return reply;
             }
         } else if (userInput.matches(ToDo.COMMAND_REGEX)) {
+            //eg. todo xxx
             String inputBody = userInput.split(" ", 2)[1];
             Task newTask = ToDo.of(inputBody);
             String reply = String.format(
