@@ -10,14 +10,12 @@ import duke.common.task.Task;
  */
 public class TaskList implements Serializable {
     private ArrayList<Task> tasks;
-    private int numberOfTasks;
 
     /**
      * Default constructor for TaskList
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
-        this.numberOfTasks = 0;
     }
 
     /**
@@ -27,11 +25,10 @@ public class TaskList implements Serializable {
      */
     public String addCustom(Task task) {
         tasks.add(task);
-        this.numberOfTasks++;
         return "Got it. I've added this task: \n"
                + String.format("  %s\n", task)
-               + String.format("Now you have %d %s in the list.", this.numberOfTasks,
-                                                                  this.numberOfTasks == 1 ? "task" : "tasks");
+               + String.format("Now you have %d %s in the list.", this.tasks.size(),
+                                                                  this.tasks.size() == 1 ? "task" : "tasks");
     }
 
     /**
@@ -39,7 +36,7 @@ public class TaskList implements Serializable {
      */
     public String list() {
         String result = "";
-        for (int i = 0; i < this.numberOfTasks; i++) {
+        for (int i = 0; i < this.tasks.size(); i++) {
             result += (i + 1) + ". " + tasks.get(i) + "\n";
         }
         return result;
@@ -67,9 +64,8 @@ public class TaskList implements Serializable {
         result += "Noted. I've removed this task:\n"
                   + "  " + task;
         tasks.remove(taskNumber - 1);
-        this.numberOfTasks--;
-        return result + String.format("Now you have %d %s in the list.\n", this.numberOfTasks,
-                                                                           this.numberOfTasks == 1 ? "task" : "tasks");
+        return result + String.format("Now you have %d %s in the list.\n", this.tasks,
+                                                                           this.tasks.size() == 1 ? "task" : "tasks");
     }
 
     /**
@@ -79,7 +75,7 @@ public class TaskList implements Serializable {
      */
     public ArrayList<Task> find(String query) {
         ArrayList<Task> results = new ArrayList<>();
-        for (int i = 0; i < this.numberOfTasks; i++) {
+        for (int i = 0; i < this.tasks.size(); i++) {
             Task tmp = this.tasks.get(i);
             if (tmp.getDescription().contains(query)) {
                 results.add(tmp);
@@ -95,12 +91,6 @@ public class TaskList implements Serializable {
      * @throws Duke.DukeException issue found in state of empty taskList
      */
     public boolean isEmpty() throws Duke.DukeException {
-        if (this.numberOfTasks == 0) {
-            if (!this.tasks.isEmpty()) {
-                throw new Duke.DukeException("TaskList is empty without any items");
-            }
-            return true;
-        }
-        return false;
+        return this.tasks.isEmpty();
     }
 }
