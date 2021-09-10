@@ -1,4 +1,4 @@
 D | 1 | CS2103T Quiz | [important] | Friday 4pm
 E | 1 | CS2101 OP1 | [] | Sep 13 2021
 T | 0 | play Pacman | []
-E | 0 | Pacman with Friend | [] | Sep 10 2021
+E | 0 | Pacman with Friend | [exciting] | Sep 10 2021
