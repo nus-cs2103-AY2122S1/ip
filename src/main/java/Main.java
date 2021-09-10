@@ -25,4 +25,13 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+    /*
+    Expenses
+    -add expense class
+    -add expense function e.g (money task 123)
+    -Total expenses in TaskList
+    -sum function
+    -delete expense
+    -sum expense
+     */
 }

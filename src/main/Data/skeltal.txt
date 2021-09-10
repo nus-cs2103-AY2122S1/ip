@@ -1,3 +1,1 @@
-T | 0 | aslkdja
-E | 0 | aslkdjasd | asjdhajsd
-D | 0 | alksdjalksd | asjkldad
+T | 0 | quick

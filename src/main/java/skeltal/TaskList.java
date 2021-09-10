@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class TaskList {
 
     private static ArrayList<Task> tasks = new ArrayList<>();
+    private static ArrayList<Expense> moneyList = new ArrayList<>();
 
     /**
      * A method to add a Task object into the list.
@@ -95,4 +96,5 @@ public class TaskList {
         }
         return toWrite;
     }
+
 }
