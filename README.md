@@ -3,11 +3,14 @@
 This is a greenfield Java project. It's named after the Java mascot _**Duke**_. Given below are instructions on how to use it.
 
 ## Introduction
-Duke Bot is an offline PC Task Manager that helps you to keep track of your tasks on the go.<br>Before you get started with Duke Bot, here is an introduction of the components and how you can work with them in Duke Bot:
+Duke Bot is an offline PC Task Manager that helps you to keep track of your tasks on the go.
+
+Before you get started with Duke Bot, here is an introduction of the components and how you can work with them in Duke Bot:
    1. Types of Tasks:
       1. Todo: Tasks without any date/time
       2. Event: Tasks that needs to be done on a specific date from a starting time to an ending time
       3. Deadline: Tasks that needs to be done by a specific date/time
+      
    1. Types of Commands:   
       1. Shows all tasks: `list` 
       2. Adds Todo task: `todo <description>`
