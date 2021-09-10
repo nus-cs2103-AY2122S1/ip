@@ -22,7 +22,9 @@ public class DeleteCommand extends Command {
      * @param taskNumber the serial number of the duke.task.
      */
     public DeleteCommand(int taskNumber) {
+        super();
         this.TASK_NUM = taskNumber;
+        assert !isExit() : "isExit should return false";
     }
 
     /**

@@ -3,7 +3,6 @@ package duke.main;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -42,7 +41,6 @@ public class Storage {
      * @return an arraylist of tasks.
      * @throws DukeException exception handled by DukeException class.
      */
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -55,8 +53,9 @@ public class Storage {
                 file.createNewFile();
             }
             if (file.length() == 0) {
+                return tasks;
             }
-            assert file != null : "file should not be null";
+            assert file.length() > 0 : "file must not be empty";
             Scanner sc = new Scanner(file);
             String line;
             while (sc.hasNext()) {
@@ -100,7 +99,6 @@ public class Storage {
      * @throws IOException exception caused in creating new file.
      */
     public void store(TaskList tasks) throws IOException {
-        assert tasks != null : "tasks should not be null";
         fileWriter = new FileWriter(file, false);
         String data = "";
         for (int i = 0; i < tasks.getNumTasks(); i++) {

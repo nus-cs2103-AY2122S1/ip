@@ -17,8 +17,7 @@ import duke.command.MarkDoneCommand;
  */
 public class Parser {
     
-    public enum Commands { done, list, delete, filter, others};
-    
+    public enum Commands { done, list, delete, filter, others }
     private Parser() {
     }
     
@@ -30,7 +29,6 @@ public class Parser {
      * @throws DukeException exception handled by DukeException class.
      */
     public static Command parse(String command) throws DukeException {
-        assert command != null : "command must be a string";
         String[] commandDescription = command.split(" ", 0);
         String action = commandDescription[0];
         try {
@@ -48,6 +46,7 @@ public class Parser {
             case "bye":
                     return new ExitCommand();
             default:
+                    assert action != "bye" : "action is not bye";
                     return new AddCommand(command);
             }
         } catch (ArrayIndexOutOfBoundsException e) {

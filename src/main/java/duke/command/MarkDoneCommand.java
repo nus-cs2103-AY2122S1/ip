@@ -21,7 +21,10 @@ public class MarkDoneCommand extends Command {
      * @param taskNumber the serial number of the duke.task.
      */
     public MarkDoneCommand(int taskNumber) {
+        super();
         this.TASK_NUM = taskNumber;
+        assert TASK_NUM >= 1 : "TASK_NUM must be of a cardinal value";
+        assert !isExit() : "isExit should return false";
     }
 
     /**
@@ -32,8 +35,6 @@ public class MarkDoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            assert tasks != null : "the task list cannot be null";
-            assert TASK_NUM >= 1 : "TASK_NUM must be of a cardinal value";
             Task task = tasks.markDone(TASK_NUM - 1);
             assert task != null : "task cannot be null";
             return ui.showMarkTaskDone(task);

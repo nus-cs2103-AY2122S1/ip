@@ -39,7 +39,6 @@ public class TaskList {
      * @return the added duke.task.
      */
     public Task add(Task task) {
-        assert task != null : "task cannot be null";
         this.tasks.add(task);
         return task;
     }
@@ -93,6 +92,7 @@ public class TaskList {
         TaskList matchingTasks = new TaskList();
         for (Task t : tasks) {
             if (t.toString().contains(searchPhrase)) {
+                assert t.toString().indexOf(searchPhrase) != 1 : "taskString must contain search phrase.";
                 matchingTasks.add(t);
             }
         }
@@ -105,6 +105,8 @@ public class TaskList {
      * @return size of tasks arraylist.
      */
     public int getNumTasks() {
-        return tasks.size();
+        int numTasks = tasks.size();
+        assert numTasks >= 0 : "number of tasks cannot be negative";
+        return numTasks;
     }
 }

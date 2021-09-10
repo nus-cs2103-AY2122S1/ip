@@ -7,7 +7,7 @@ import duke.main.Ui;
 
 /**
  * Represents a command given by the user.
- * 
+ *
  * @author Gordon Yit
  * @version CS2103T, Semester 2
  */
@@ -20,6 +20,7 @@ public abstract class Command {
      */
     public Command() {
         isExitCommand = false;
+        assert !isExit() : "isExit should return false";
     }
 
     /**

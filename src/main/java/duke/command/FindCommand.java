@@ -12,7 +12,6 @@ import duke.main.Ui;
 public class FindCommand extends Command {
     private final String KEYWORD = "find ";
     private String searchPhrase;
-    private boolean isExitCommand;
     /**
      * Class constructor.
      *
@@ -27,7 +26,7 @@ public class FindCommand extends Command {
         if (searchPhrase.equals("")) {
             throw new StringIndexOutOfBoundsException();
         }
-        isExitCommand = false;
+        assert !isExit() : "isExit should return false";
     }
     /**
      * Executes a command to filter out tasks falling on the specified date.

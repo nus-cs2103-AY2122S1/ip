@@ -25,6 +25,7 @@ public class FilterCommand extends Command {
         String[] dateComponents = dateOfInterest.split("/");
         date = new Date(dateComponents);
         assert date != null : "date cannot be null";
+        assert !isExit() : "isExit should return false";
     }
     /**
      * Executes a command to filter out tasks falling on the specified date.

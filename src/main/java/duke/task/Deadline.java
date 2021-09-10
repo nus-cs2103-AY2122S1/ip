@@ -32,9 +32,9 @@ public class Deadline extends Task {
         int startOfTimingIndex = description.indexOf(BY_KEYWORD);
         taskDescription = description.substring(startingIndex, startOfTimingIndex - 1);
         String deadlineDate = description.substring(startOfTimingIndex + BY_KEYWORD.length());
-        assert deadlineDate.contains("/") : "deadlineDate must be in the form dd/mm/yyyy";
         String[] dateComponents = deadlineDate.split("/");
         dueDate = new Date(dateComponents);
+        assert !isDone : false;
     }
 
     /**

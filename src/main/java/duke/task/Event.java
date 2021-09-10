@@ -1,15 +1,14 @@
 package duke.task;
 
-import duke.main.Date;
-import duke.main.Duke;
-import duke.main.DukeException;
-
 import java.text.ParseException;
 import java.time.format.DateTimeParseException;
 
+import duke.main.Date;
+import duke.main.DukeException;
+
 /**
  * Represents tasks with specific timing.
- * 
+ *
  * @author Gordon Yit
  * @version CS2103T, Semester 2
  */
@@ -35,11 +34,11 @@ public class Event extends Task {
         taskDescription = description.substring(startingIndex, startOfTimeIndex - 1);
         eventDate = description.substring(startOfTimeIndex + AT_KEYWORD.length());
         try {
-            assert eventDate != "" : "dueDate must not be empty";
             this.dueDate = new Date(eventDate);
         } catch (DateTimeParseException e) {
             throw new DukeException(e);
         }
+        assert !isDone : false;
     }
 
     /**

@@ -17,6 +17,7 @@ public class ListCommand extends Command {
      */
     public ListCommand() {
         super();
+        assert !isExit() : "isExit should return false";
     }
 
     /**
@@ -28,7 +29,6 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        assert tasks != null : "task list cannot be null";
         return ui.showListOfTasks(tasks);
     }
 }

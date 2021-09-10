@@ -1,4 +1,7 @@
 package duke.command;
+
+import java.time.format.DateTimeParseException;
+
 import duke.main.DukeException;
 import duke.main.Storage;
 import duke.main.TaskList;
@@ -8,17 +11,14 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.time.format.DateTimeParseException;
-
 /**
  * Represents a command to add a task.
- * 
+ *
  * @author Gordon Yit
  * @version CS2103T, Semester 2
  */
 public class AddCommand extends Command {
     private String addCommand;
-    private boolean isExitCommand;
 
     /**
      * Class constructor.
@@ -26,13 +26,14 @@ public class AddCommand extends Command {
      * @param addCommand the user inputed string to add a task.
      */
     public AddCommand(String addCommand) {
+        super();
         this.addCommand = addCommand;
-        isExitCommand = false;
+        assert !isExit() : "isExit should return false";
     }
 
     /**
      * Executes the command to add a task for Duke.Duke to keep track of.
-     * 
+     *
      * @param tasks lists of tasks
      * @param ui the user interface.
      * @param storage the storage file.

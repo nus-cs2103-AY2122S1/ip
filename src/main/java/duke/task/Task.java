@@ -1,8 +1,5 @@
 package duke.task;
 
-import javax.xml.stream.FactoryConfigurationError;
-import java.time.LocalDate;
-
 /**
  * Represents a duke.task which can be marked done.
  *
@@ -19,6 +16,7 @@ public class Task {
      */
     public Task() {
         this.isDone = false;
+        assert !isSameDate("") : false;
     }
 
     /**
