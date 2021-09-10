@@ -122,16 +122,10 @@ public class TaskList {
     public String findTasksOnDate(LocalDate date) {
         List<Task> foundTasks = new ArrayList<>();
         for (Task task : getTasks()) {
-            if (task instanceof Deadline) {
-                Deadline d = (Deadline) task;
-                if (d.getDueDate().isEqual(date)) {
-                    foundTasks.add(d);
-                }
-            } else if (task instanceof Event) {
-                Event e = (Event) task;
-                if (e.getEventDate().isEqual(date)) {
-                    foundTasks.add(e);
-                }
+            if (task instanceof Deadline && ((Deadline) task).getDueDate().isEqual(date)) {
+                foundTasks.add(task);
+            } else if (task instanceof Event && ((Event) task).getEventDate().isEqual(date)) {
+                foundTasks.add(task);
             }
         }
 
