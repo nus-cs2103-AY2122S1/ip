@@ -29,7 +29,8 @@ public class PersistentStorageHandler {
      *
      * @param fileName name that the storage handler will read and write to.
      */
-    public PersistentStorageHandler(String dirName, String fileName) {
+    public PersistentStorageHandler(String fileName) {
+        assert fileName.contains(".txt") : "We should read and write to a .txt file only";
         //Name the file
         File storedDir = new File(dirName);
         if (!storedDir.exists()) {
@@ -78,6 +79,7 @@ public class PersistentStorageHandler {
      * @param text string to be written
      */
     public void write(String text) {
+        assert text != "" : "String written should not be empty";
         //Count the number of lines in the string
         String[] tempStringArray = text.split("\r\n|\r|\n");
         int linesInAddedText = tempStringArray.length;

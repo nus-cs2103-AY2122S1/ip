@@ -98,6 +98,7 @@ public class Parser {
             }
             Command command = new Command(eventType, packagedHistory, String.join(" ", packagedHistory));
             preloadedList.add(command);
+            assert !eventType.equals(Task.TaskType.NOTAPPLICABLE): "Task type should not be N.A";
         }
         return preloadedList;
     }
@@ -109,6 +110,7 @@ public class Parser {
      * @throws InvalidCommandException when the string is not in the right format
      */
     public static LocalDateTime convertToDateTime(String datetimeString) throws InvalidCommandException {
+        assert datetimeString != "" : "dateTime should not be an empty string";
         try {
             String[] temp = datetimeString.split(" ");
             String[] date = temp[0].split("/");
