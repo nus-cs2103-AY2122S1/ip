@@ -54,8 +54,21 @@ public class Duke extends Application {
         }
     }
 
-    public String showList() {
-        return ui.showList(taskList);
+    /**
+     * Returns the TaskList.
+     *
+     * @return The TaskList
+     */
+    public TaskList getTaskList() {
+        return taskList;
+    }
+
+    /**
+     * Returns the Ui.
+     * @return The Ui.
+     */
+    public Ui getUi() {
+        return ui;
     }
 
     @Override
