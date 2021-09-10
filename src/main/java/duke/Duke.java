@@ -54,6 +54,23 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * Returns the TaskList.
+     *
+     * @return The TaskList
+     */
+    public TaskList getTaskList() {
+        return taskList;
+    }
+
+    /**
+     * Returns the Ui.
+     * @return The Ui.
+     */
+    public Ui getUi() {
+        return ui;
+    }
+
     @Override
     public void start(Stage stage) {
         Label helloWorld = new Label("Hello World!"); // Creating a new Label control

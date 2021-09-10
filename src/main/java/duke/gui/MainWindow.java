@@ -1,8 +1,10 @@
 package duke.gui;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 import duke.Duke;
+import duke.TaskList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -38,6 +40,31 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+    }
+
+    private void showWelcome() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog("Welcome to Duke!\n"
+                        + "Please enter the tasks (todo/event/deadline) to be added to the list.\n"
+                        + "(Enter 'list' to view the list, or 'bye' to exit.)", dukeImage)
+        );
+    }
+
+    private void showReminder() {
+        TaskList reminderList = duke.getTaskList().getTasksBefore(LocalDate.now().plusDays(7));
+        if (!reminderList.isEmpty()) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(duke.getUi().showReminderTasks(reminderList), dukeImage)
+            );
+        }
+    }
+
+    /**
+     * Displays the start messages after launching Duke.
+     */
+    public void showStartText() {
+        showWelcome();
+        showReminder();
     }
 
     /**
