@@ -10,6 +10,7 @@ import saber.commands.EventCommand;
 import saber.commands.FindCommand;
 import saber.commands.ListCommand;
 import saber.commands.SaberCommand;
+import saber.commands.SortCommand;
 import saber.commands.TodoCommand;
 import saber.exceptions.MissingArgumentException;
 import saber.exceptions.MissingTimeException;
@@ -19,6 +20,7 @@ import saber.exceptions.SaberCommandNotFoundException;
 public class SaberParser {
     private String[] parsedCommand;
     private String time;
+    private String according;
 
     /**
      * The constructor for the SaberParser class, this constructor will also parse the command
@@ -34,6 +36,7 @@ public class SaberParser {
         // deadline or event
         boolean isDeadlineCommandType = parsedCommandTemp[0].equals(Saber.InputCommand.deadline.name());
         boolean isEventCommandType = parsedCommandTemp[0].equals(Saber.InputCommand.event.name());
+        boolean isSortCommandType = parsedCommandTemp[0].equals(Saber.InputCommand.sort.name());
         boolean hasTime = unparsedCommand.contains(" /at ") || unparsedCommand.contains(" /by ");
 
         // Only parse /at and /by as time when the command is of type deadline or event
@@ -169,6 +172,9 @@ public class SaberParser {
             } catch (MissingArgumentException e) {
                 command = new TodoCommand("", true);
             }
+            break;
+        case sort:
+            command = new SortCommand();
             break;
         case list:
             command = new ListCommand();

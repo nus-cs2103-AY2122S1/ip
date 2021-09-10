@@ -38,9 +38,10 @@ public class Saber {
         deadline,
         delete,
         event,
+        find,
         todo,
         list,
-        find,
+        sort,
     }
 
     /** The enum that represents all the task types that are supported by the Saber application */

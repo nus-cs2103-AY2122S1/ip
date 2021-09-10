@@ -4,13 +4,14 @@ import saber.tasklist.TaskList;
 import saber.ui.ListUI;
 
 /**
- * A class that represents a ListCommand
+ * Represents a ListCommand
  */
 public class ListCommand extends SaberCommand {
     private ListUI listUI;
 
     /**
-     * A function to execute the ListCommand
+     * Executes the ListCommand
+     *
      * @param taskList the TaskList to be listed
      */
     public void execute(TaskList taskList) {

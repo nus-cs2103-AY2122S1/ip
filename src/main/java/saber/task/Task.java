@@ -34,7 +34,8 @@ public class Task {
     }
 
     /**
-     * A function to get the completion status of the task
+     * Gets the completion status of the task
+     *
      * @return true if the task is done and false otherwise
      */
     public boolean getIsDone() {
