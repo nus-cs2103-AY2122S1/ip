@@ -35,6 +35,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Parser {
     private static final String SPACE = " ";
+    private static final int ALL = -1;
 
     /**
      * Checks if dateString is in a valid date form depicted by dateFormatter.
@@ -420,7 +421,7 @@ public class Parser {
         if (isPositiveInteger(separated[1]) && !isOutOfRange(archiveList, separated[1])) {
             return new UnarchiveCommand(Integer.valueOf(separated[1]) - 1);
         } else if (isAll(separated[1])) {
-            return new UnarchiveCommand(-1);
+            return new UnarchiveCommand(ALL);
         } else {
             throw new IncompleteUnarchiveException();
         }
@@ -462,7 +463,7 @@ public class Parser {
         if (isPositiveInteger(separated[1]) && !isOutOfRange(taskList, separated[1])) {
             return new ArchiveCommand(Integer.valueOf(separated[1]) - 1);
         } else if (isAll(separated[1])) {
-            return new ArchiveCommand(-1);
+            return new ArchiveCommand(ALL);
         } else {
             throw new IncompleteArchiveException();
         }
@@ -589,7 +590,7 @@ public class Parser {
 
             return new DoneCommand(index);
         } else if (isAll(separated[1])) {
-            return new DoneCommand(-1);
+            return new DoneCommand(ALL);
         } else {
             throw new InvalidCommandException();
         }
@@ -610,7 +611,7 @@ public class Parser {
         } else if (isPositiveInteger(separated[2])) {
             return new RemoveArchiveCommand(Integer.valueOf(separated[2]) - 1);
         } else if (isAll(separated[2])) {
-            return new RemoveArchiveCommand(-1);
+            return new RemoveArchiveCommand(ALL);
         } else {
             throw new InvalidCommandException();
         }
@@ -634,7 +635,7 @@ public class Parser {
         } else if (isPositiveInteger(separated[1])) {
             return new RemoveCommand(Integer.valueOf(separated[1]) - 1);
         } else if (isAll(separated[1])) {
-            return new RemoveCommand(-1);
+            return new RemoveCommand(ALL);
         } else {
             throw new InvalidCommandException();
         }
