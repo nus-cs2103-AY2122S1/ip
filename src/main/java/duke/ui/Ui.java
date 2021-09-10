@@ -13,38 +13,40 @@ import duke.task.Task;
  */
 public class Ui {
     private static final String INDENTATION = "    ";
-    private static final String HORIZONTAL_LINE = "____________________________________________________________";
 
-    /**
-     * Introduction message with duke's logo.
-     */
-    private static final String INTRO = "Hello from\n"
-            + INDENTATION + " ____        _        \n"
-            + INDENTATION + "|  _  \\ _   _| | _____ \n"
-            + INDENTATION + "| | | | | | | |/ / _ \\\n"
-            + INDENTATION + "| |_| | |_| |   <  __/\n"
-            + INDENTATION + "|____/ \\__,_|_|\\_\\___|\n"
-            + INDENTATION + "What can I do for you?";
+    private static final String WELCOME_MSG = "Welcome to duke you little shit. What do you want from me?\n"
+            + "Type \"help\" if you are dumb and requires help.";
+    private static final String FAREWELL_MSG = "Bye bye, I go sleep already. See you again.";
 
-    /**
-     * Prints the argument with indentation and horizontal lines.
-     *
-     * @param s The message to be printed on screen in between horizontal lines and with indentation.
-     */
-    public static void printMessageWithFormat(String s) {
-        System.out.println(INDENTATION + HORIZONTAL_LINE);
-        System.out.println(INDENTATION + s);
-        System.out.println(INDENTATION + HORIZONTAL_LINE);
-    }
-
+    private static final String HELP_TODO = "todo <description> - Adds a Todo task with the specified description.";
+    private static final String HELP_DEADLINE = "deadline <description> </by> <yyyy-mm-dd> <hh:mm>"
+            + "- Adds a Deadline task.";
+    private static final String HELP_EVENT = "event <description> </by> <yyyy-mm-dd> <hh:mm>"
+            + "- Adds a Event.";
+    private static final String HELP_DELETE = "delete <task number> - Deletes the task corresponding to the number.";
+    private static final String HELP_DONE = "done <task number> - Mark the task corresponding to the number as done.";
+    private static final String HELP_LIST = "list - List out all the tasks added.";
+    private static final String HELP_FIND = "find <keyword> - Finds all task with description containing the keyword.";
+    private static final String HELP_BYE = "bye - Exits the application";
+    private static final String HELP_SORT = "sort <reverse> - Sorts the task list.\n"
+            + "Adding the optional reverse flag reverse the sorting order.";
 
     /**
      * Returns farewell message when the user exits duke.
      *
      * @return A farewell message
      */
-    public String farewellMessage() {
-        return "Bye bye, i go sleep already. See you again.";
+    public static String showFarewellMessage() {
+        return FAREWELL_MSG;
+    }
+
+    /**
+     * Returns greeting message when the user exits duke.
+     *
+     * @return A welcome message.
+     */
+    public static String showGreetingMessage() {
+        return WELCOME_MSG;
     }
 
     /**
@@ -111,7 +113,7 @@ public class Ui {
      * @param list The list of related tasks.
      * @return A string showing the list of related tasks.
      */
-    public String getRelatedTasks(List<Task> list) {
+    public String showRelatedTasks(List<Task> list) {
         StringBuilder s = new StringBuilder();
 
         if (list.size() > 0) {
@@ -136,5 +138,36 @@ public class Ui {
                 + "Here is the sorted list.\n");
         s.append(listTasks(list));
         return s.toString();
+    }
+
+    /**
+     * Shows a help message with instructions on how the commands work.
+     *
+     * @return A help message.
+     */
+    public String showHelpMessage() {
+        StringBuilder s = new StringBuilder(addLineBreakAfter("Here are the supported commands."));
+        s.append(addIndentationAndLineBreakAfter(HELP_BYE));
+        s.append(addIndentationAndLineBreakAfter(HELP_TODO));
+        s.append(addIndentationAndLineBreakAfter(HELP_DEADLINE));
+        s.append(addIndentationAndLineBreakAfter(HELP_EVENT));
+        s.append(addIndentationAndLineBreakAfter(HELP_DELETE));
+        s.append(addIndentationAndLineBreakAfter(HELP_DONE));
+        s.append(addIndentationAndLineBreakAfter(HELP_LIST));
+        s.append(addIndentationAndLineBreakAfter(HELP_FIND));
+        s.append(addIndentation(HELP_SORT));
+        return s.toString();
+    }
+
+    private String addIndentation(String s) {
+        return INDENTATION + s;
+    }
+
+    private String addLineBreakAfter(String s) {
+        return String.format("%s\n", s);
+    }
+
+    private String addIndentationAndLineBreakAfter(String s) {
+        return addLineBreakAfter(addIndentation(s));
     }
 }

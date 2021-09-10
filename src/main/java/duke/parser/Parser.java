@@ -10,6 +10,7 @@ import duke.command.DoneCommand;
 import duke.command.DukeCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.SortCommand;
 import duke.exception.DukeException;
@@ -87,6 +88,9 @@ public class Parser {
 
             case "sort":
                 return new SortCommand(ui, storage, list, checkReverseSort(commandDescription));
+
+            case "help":
+                return new HelpCommand(ui, storage, list);
 
             default:
                 throw new UnknownCommandException();

@@ -34,6 +34,6 @@ public class FindCommand extends DukeCommand {
      */
     @Override
     public String execute() {
-        return ui.getRelatedTasks(list.findRelatedTask(keyword));
+        return ui.showRelatedTasks(list.findRelatedTask(keyword));
     }
 }

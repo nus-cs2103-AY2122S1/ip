@@ -31,7 +31,7 @@ public class ExitCommand extends DukeCommand {
     @Override
     public String execute() {
         storage.save(list.getList());
-        return ui.farewellMessage();
+        return ui.showFarewellMessage();
     }
 
     /**
