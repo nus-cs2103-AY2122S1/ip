@@ -3,7 +3,6 @@ package duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -37,7 +36,7 @@ public class MainWindow extends AnchorPane{
 
     public void setDuke(Duke d) {
         duke = d;
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(duke.userInterface.greet(), dukeImage));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(duke.responseGenerator.greet(), dukeImage));
     }
 
     /**
@@ -75,9 +74,8 @@ public class MainWindow extends AnchorPane{
      */
     public String getResponse(String input) {
         try {
-            return duke.parser.parse(input, duke.taskList, duke.userInterface, duke.storage);
-        } catch (InvalidCommandException | MissingToDoDescriptionException | MissingDeadlineDescriptionException
-                | MissingEventDescriptionException e) {
+            return duke.parser.parse(input, duke.taskList, duke.responseGenerator, duke.storage);
+        } catch (InvalidCommandException e) {
             return e.getMessage();
         }
     }
