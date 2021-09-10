@@ -8,7 +8,7 @@ public class Command {
      * An enumeration that serves as an identifier of valid commands
      */
     public enum CommandName {
-        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, DATE, FIND
+        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, DOWITHINPERIOD, DATE, FIND
     }
 
     protected CommandName command;

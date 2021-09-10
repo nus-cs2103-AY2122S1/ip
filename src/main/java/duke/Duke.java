@@ -9,10 +9,7 @@ import duke.data.TaskList;
 import duke.io.Command;
 import duke.io.OutputFormatter;
 import duke.io.Parser;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
+import duke.tasks.*;
 
 /**
  * Main program managing all main functions.
@@ -87,6 +84,8 @@ public class Duke {
                     return getResponseDeadline(command);
                 case EVENT:
                     return getResponseEvent(command);
+                case DOWITHINPERIOD:
+                    return getResponseDoWithinPeriod(command);
                 case DATE:
                     return getResponseDate(userInput);
                 case FIND:
@@ -215,6 +214,28 @@ public class Duke {
 
         return "Got it. I've added this task:\n  "
                 + newEvent + "\nNow you have " + taskList.size()
+                + " tasks in the list.";
+    }
+
+    /**
+     * Returns a message that the application will respond to the user with when DOWITHINPERIOD command is used.
+     *
+     * @param command The object containing all the details about the requested action by the user
+     * @return A String containing the message to be transmitted to the user
+     * @throws IOException Thrown when IO exceptions occurs when saving task data to hard disk
+     */
+    public String getResponseDoWithinPeriod(Command command) throws IOException {
+        String description = command.getArgs()[0];
+        LocalDate startOfPeriod = LocalDate.parse(command.getArgs()[1]);
+        LocalDate endOfPeriod = LocalDate.parse(command.getArgs()[2]);
+        DoWithinPeriodTask newDoWithinPeriodTask = new DoWithinPeriodTask(description, startOfPeriod, endOfPeriod);
+        taskList.add(newDoWithinPeriodTask);
+
+        // update file
+        storage.saveTaskData(taskList);
+
+        return "Got it. I've added this task:\n  "
+                + newDoWithinPeriodTask + "\nNow you have " + taskList.size()
                 + " tasks in the list.";
     }
 

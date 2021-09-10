@@ -50,7 +50,10 @@ public class Parser {
         } else if (userInput.startsWith("event")) {
             // EVENT command
             return parseEvent(userInput);
-        } else if (userInput.startsWith("date")) {
+        } else if (userInput.startsWith("dowithinperiod")) {
+            // DOWITHINPERIOD command
+            return parseDoWithinPeriod(userInput);
+        }else if (userInput.startsWith("date")) {
             // DATE command
             return parseDate(userInput);
         } else if (userInput.startsWith("find")) {
@@ -143,13 +146,13 @@ public class Parser {
         }
 
         String description = userInput.substring(9, userInput.indexOf("/by")).trim();
-        String deadline = userInput.substring(userInput.indexOf("/by")).trim();
+        String deadline = userInput.substring(userInput.indexOf("/by")).trim().substring(4);
         if (description.length() == 0) {
             throw new DukeException("The description of a deadline cannot be empty");
         }
 
         // Command name + description + deadline
-        return new Command(CommandName.DEADLINE, new String[]{description, deadline.substring(4)});
+        return new Command(CommandName.DEADLINE, new String[]{description, deadline});
     }
 
     /**
@@ -170,14 +173,37 @@ public class Parser {
             throw new DukeException("An event must contain a datetime indicated after the /at command");
         }
 
-        String description = userInput.substring(5, userInput.indexOf("/at")).trim();
-        String dateTime = userInput.substring(userInput.indexOf("/at")).trim(); // Inclusive of the /by command
+        String description = userInput.substring(6, userInput.indexOf("/at")).trim();
+        String dateTime = userInput.substring(userInput.indexOf("/at")).trim().substring(4);
         if (description.length() == 0) {
             throw new DukeException("The description of an event cannot be empty");
         }
 
         // Command name + description + dateTime
-        return new Command(CommandName.EVENT, new String[]{description, dateTime.substring(4)});
+        return new Command(CommandName.EVENT, new String[]{description, dateTime});
+    }
+
+    protected static Command parseDoWithinPeriod(String userInput) throws DukeException {
+        if (userInput.length() == 14) {
+            throw new DukeException("A start and end date must be provided to specify the period to complete the task");
+        } else if(!userInput.startsWith("dowithinperiod ")) {
+            // If it does not start with "dowithinperiod " after trimming, it is an invalid command
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        } else if (!userInput.contains("/between ")) {
+            throw new DukeException("A DoWithinPeriodTask must contain a start of time period indicated after the /between command");
+        } else if (!userInput.contains("/and ")) {
+            throw new DukeException("A DoWithinPeriodTask must contains an end of time period indicated after the /and command");
+        }
+
+        String description = userInput.substring(15, userInput.indexOf("/between")).trim();
+        String startOfPeriod = userInput.substring(userInput.indexOf("/between"), userInput.indexOf("/and")).substring(9).trim();
+        String endOfPeriod = userInput.substring(userInput.indexOf("/and")).substring(5).trim();
+        if (description.length() == 0) {
+            throw new DukeException("The description of an event cannot be empty");
+        }
+
+        // Command name + description + startOfPeriod + endOfPeriod
+        return new Command(CommandName.DOWITHINPERIOD, new String[]{description, startOfPeriod, endOfPeriod});
     }
 
     /**

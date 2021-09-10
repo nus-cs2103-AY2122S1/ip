@@ -12,10 +12,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 import duke.DukeException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
+import duke.tasks.*;
 
 /**
  * Encapsulates the saving and loading of task data from a save file.
@@ -86,6 +83,10 @@ public class Storage {
                 case "E":
                     assert(taskDetails.length == 4);
                     taskData.add(new Event(taskDetails[2], LocalDate.parse(taskDetails[3]), taskDone));
+                    break;
+                case "P":
+                    assert(taskDetails.length == 5);
+                    taskData.add(new DoWithinPeriodTask(taskDetails[2], LocalDate.parse(taskDetails[3]), LocalDate.parse(taskDetails[4]), taskDone));
                     break;
                 default:
                     throw new DukeException("Error loading Task. Unrecognised Task identifier");
