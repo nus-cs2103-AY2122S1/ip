@@ -23,7 +23,7 @@ public class AddTodoCommand extends AddCommand {
             return new AddTodoCommand(task);
         } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
             throw new MalformedCommandException("Creating an todo needs to follow the following format: " +
-                "todo [description]");
+                    "todo [description]");
         }
     }
 
