@@ -20,6 +20,7 @@ public class Main extends Application {
     public void start(Stage stage) {
         MainWindow mainWindow = new MainWindow(this.duke);
         Scene scene = new Scene(mainWindow);
+        scene.getStylesheets().add(getClass().getResource("/stylesheets/app.css").toExternalForm());
 
         stage.setScene(scene);
         stage.setTitle("Duke");

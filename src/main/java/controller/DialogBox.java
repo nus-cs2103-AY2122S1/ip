@@ -21,10 +21,11 @@ import javafx.scene.shape.Ellipse;
  */
 public class DialogBox extends HBox {
     private String userDialogStyle =
-            "-fx-background-color: #74D9CA; -fx-padding: 8 16 8 16; -fx-background-radius: 5;";
+            "-fx-text-fill: #FFFFFF; " +
+                    "-fx-background-color: linear-gradient(to bottom right, #7500AC, #BE1499);";
     private String dukeDialogStyle =
-            "-fx-background-color: #F7EFC1; -fx-padding: 8 16 8 16; -fx-background-radius: 5;";
-    private Ellipse displayPictureClip = new Ellipse(50, 50, 40, 40);
+            "-fx-background-color: #F2F2F2;";
+    private Ellipse displayPictureClip = new Ellipse(30, 25, 25, 25);
 
     @FXML
     private Label dialog;
