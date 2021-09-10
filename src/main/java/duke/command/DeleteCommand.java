@@ -1,5 +1,9 @@
 package duke.command;
 
+import duke.exception.DukeException;
+import duke.exception.EmptyDescriptionException;
+import duke.exception.TaskNotFoundException;
+
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -10,7 +14,7 @@ import duke.Ui;
 /**
  * Represents the user command when the user is deletes a task.
  */
-public class deleteCommand extends Command {
+public class DeleteCommand extends Command {
     private String command;
 
     /**
@@ -18,7 +22,7 @@ public class deleteCommand extends Command {
      *
      * @param command Command entered by the user.
      */
-    public deleteCommand(String command) {
+    public DeleteCommand(String command) {
         super(command);
         this.command = command;
     }
@@ -40,13 +44,24 @@ public class deleteCommand extends Command {
      * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.
      * @return String representation of the task that is deleted by the user as well as the number of 
      * tasks remaining in the task list.
+     * @throws DukeException If user doesn't provide a description for the command or tries to access a task 
+     * that doesn't exist.
      */
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
+        if (command.trim().length() <= 6) {
+            throw new EmptyDescriptionException();
+        }
+        
         int value = Integer.parseInt(command.replaceAll("[^0-9]", ""));
+        if (value > taskList.getSize() || value < 0) {
+            throw new TaskNotFoundException();
+        }
+        
         Task task = taskList.getTask(value-1);
         taskList.removeTask(value-1);
         storage.writeToFile("./duke.txt", taskList);
-        String response = Ui.deleteResponse(task);
+        Ui ui = new Ui(taskList, storage);
+        String response = ui.deleteResponse(task);
         return response;
     }
 }

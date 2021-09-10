@@ -7,7 +7,7 @@ import duke.Storage;
 /**
  * Represents the user command when the user wants to view the task list.
  */
-public class listCommand extends Command {
+public class ListCommand extends Command {
     private String command;
 
     /**
@@ -15,7 +15,7 @@ public class listCommand extends Command {
      *
      * @param command Command entered by the user.
      */
-    public listCommand(String command) {
+    public ListCommand(String command) {
         super(command);
         this.command = command;
     }

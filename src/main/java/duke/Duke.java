@@ -1,5 +1,6 @@
 package duke;
 
+import duke.exception.DukeException;
 import duke.task.TaskList;
 
 import duke.command.Command;
@@ -16,7 +17,7 @@ public class Duke {
         ui = new Ui(taskList, storage);
     }
     
-    public void runCLI() {
+    public void runCLI() throws DukeException {
         this.ui.showWelcome();
         Ui.showLine();
         boolean isExit = false;
@@ -32,11 +33,11 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         new Duke().runCLI();
     } 
     
-    public String getResponse(String input) {
+    public String getResponse(String input) throws DukeException {
         Parser parser = new Parser(input);
         if (parser.isExit()) {
             String response = Ui.sayBye();

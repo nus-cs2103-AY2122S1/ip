@@ -1,8 +1,8 @@
 package duke.exception;
 
 public class EmptyDescriptionException extends DukeException {
-    public EmptyDescriptionException(String message) {
-        super(message);
+    public EmptyDescriptionException() {
+        super("OOPS!!! The description of a deadline cannot be empty.");
     }
     
     @Override

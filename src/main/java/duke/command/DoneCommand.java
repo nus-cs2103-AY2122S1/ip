@@ -1,5 +1,9 @@
 package duke.command;
 
+import duke.exception.DukeException;
+import duke.exception.EmptyDescriptionException;
+import duke.exception.TaskNotFoundException;
+
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -10,7 +14,7 @@ import duke.Ui;
 /**
  * Represents the user command when the user is done with a task.
  */
-public class doneCommand extends Command {
+public class DoneCommand extends Command {
     private String command;
 
     /**
@@ -18,7 +22,7 @@ public class doneCommand extends Command {
      *
      * @param command Command entered by the user.
      */
-    public doneCommand(String command) {
+    public DoneCommand(String command) {
         super(command);
         this.command = command;
     }
@@ -39,17 +43,25 @@ public class doneCommand extends Command {
      * @param taskList TaskList that stores the tasks.
      * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.
      * @return String representation of the task that is done by the user.
+     * @throws DukeException If user doesn't provide a description for the command or tries to access a task 
+     * that doesn't exist.
      */
-    public String execute(TaskList taskList, Storage storage) {
-        int value = Integer.parseInt(command.replaceAll("[^0-9]", ""));
-        if (value > taskList.getSize()) {
-            return "Sorry the task doesn't exist yet, please try again!";
-        } else {
-            Task t = taskList.getTask(value - 1);
-            t.markAsDone();
-            storage.writeToFile("./duke.txt", taskList);
-            String response = Ui.doneResponse(t);
-            return response;
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
+        if (command.trim().length() <= 4) {
+            throw new EmptyDescriptionException();
         }
+        
+        int value = Integer.parseInt(command.replaceAll("[^0-9]", ""));
+        if (value > taskList.getSize() || value < 0) {
+            throw new TaskNotFoundException();
+        }
+        
+        Task t = taskList.getTask(value - 1);
+        t.markAsDone();
+        storage.writeToFile("./duke.txt", taskList);
+        Ui ui = new Ui(taskList, storage);
+        String response = ui.doneResponse(t);
+        return response;
+        
     }
 }

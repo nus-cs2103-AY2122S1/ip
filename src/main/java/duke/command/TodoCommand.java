@@ -14,7 +14,7 @@ import duke.Ui;
 /**
  * Represents the user command when the user enters a todo task.
  */
-public class todoCommand extends Command {
+public class TodoCommand extends Command {
     private String command;
 
     /**
@@ -22,7 +22,7 @@ public class todoCommand extends Command {
      *
      * @param command Command entered by the user.
      */
-    public todoCommand(String command) {
+    public TodoCommand(String command) {
         super(command);
         this.command = command;
     }
@@ -43,17 +43,18 @@ public class todoCommand extends Command {
      * @param taskList TaskList that stores the tasks.
      * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.
      * @return String representation of the new todo task as well as the number of tasks in the task list.
+     * @throws DukeException If user doesn't provide a description for the todo command.
      */
-    public String execute(TaskList taskList, Storage storage) {
-        if (command.length() <= 5) {
-            DukeException exp = new EmptyDescriptionException("OOPS!!! The description of a todo cannot be empty.");
-            return exp.toString();
-        } else {
-            Task task = new Todo(command.substring(5));
-            taskList.addTask(task);
-            storage.writeToFile("./duke.txt", taskList);
-            String response = Ui.taskResponse(task);
-            return response;
-        }
+    public String execute(TaskList taskList, Storage storage) throws EmptyDescriptionException {
+        if (command.trim().length() <= 4) {
+            throw new EmptyDescriptionException();
+        } 
+        
+        Task task = new Todo(command.substring(5));
+        taskList.addTask(task);
+        storage.writeToFile("./duke.txt", taskList);
+        Ui ui = new Ui(taskList, storage);
+        String response = ui.taskResponse(task);
+        return response;
     }
 }

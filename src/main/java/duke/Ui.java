@@ -85,38 +85,38 @@ public class Ui {
     }
 
     /**
-     * Class method that returns the string response to the task command.
+     * Returns the string response to the task command.
      *
      * @param task Task object.
      * @return String representation of the task as well as the number of tasks in the task list.
      */
-    public static String taskResponse(Task task) {
-        String taskMessage = "Got it. I've added this task:" + System.lineSeparator() + task.toString() + System.lineSeparator()
-                + "Now you have " + taskList.getSize() + " tasks in the list.";
+    public String taskResponse(Task task) {
+        String taskMessage = "Got it. I've added this task:" + System.lineSeparator() + task.toString() 
+                + System.lineSeparator() + "Now you have " + taskList.getSize() + " tasks in the list.";
         System.out.println(taskMessage);
         return taskMessage;
     }
 
     /**
-     * Class method that returns the string response to the done command.
+     * Returns the string response to the done command.
      *
      * @param task Task object.
      * @return String representation of the task that is done by the user.
      */
-    public static String doneResponse(Task task) {
+    public String doneResponse(Task task) {
         String doneMessage = "Nice! I've marked this task as done:" + System.lineSeparator() + task.toString();
         System.out.println(doneMessage);
         return doneMessage;
     }
 
     /**
-     * Class method that returns the string response to the delete command.
+     * Returns the string response to the delete command.
      *
      * @param task Task object.
      * @return String representation of the task that is deleted by the user as well as the number of tasks 
      * remaining in the task list.
      */
-    public static String deleteResponse(Task task) {
+    public String deleteResponse(Task task) {
         String deleteMessage = "Noted. I've removed this task:" + System.lineSeparator() + task.toString() + System.lineSeparator()
                 + "Now you have " + taskList.getSize() + " tasks in the list.";
         System.out.println(deleteMessage);
@@ -133,13 +133,13 @@ public class Ui {
     }
 
     /**
-     * Class method that returns the string response to the find command.
+     * Returns the string response to the find command.
      *
      * @param wordToFind Task class.
      * @param taskList TaskList object.
      * @return String representation of the tasks in the task list that contain the wordToFind string.
      */
-    public static String findResponse(String wordToFind, TaskList taskList) {
+    public String findResponse(String wordToFind, TaskList taskList) {
         int count = 1;
         String response = "";
         for (int i = 0; i < taskList.getSize(); i++) {

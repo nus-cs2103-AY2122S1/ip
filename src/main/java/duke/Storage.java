@@ -37,7 +37,7 @@ public class Storage {
             }
             this.file = file;
         } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -48,7 +48,7 @@ public class Storage {
      */
     public void loadTaskListData(TaskList taskList) {
         try {
-            Scanner s = new Scanner(this.file); // create a Scanner using the File as the source
+            Scanner s = new Scanner(this.file); 
             if (!s.hasNext()) {
                 Ui.printMessage("There are no items in your task list!");
             } else {
@@ -85,7 +85,7 @@ public class Storage {
                 Ui.printMessage("End of task list");
             }
         } catch (FileNotFoundException e) {
-            System.out.println("File not found!");
+            e.printStackTrace();
         }
     }
     
@@ -104,7 +104,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

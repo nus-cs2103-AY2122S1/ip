@@ -1,5 +1,8 @@
 package duke.command;
 
+import duke.exception.DukeException;
+import duke.exception.EmptyDescriptionException;
+
 import duke.task.TaskList;
 
 import duke.Storage;
@@ -9,7 +12,7 @@ import duke.Ui;
 /**
  * Represents the user command when the user wants to filter tasks that contain a matching word.
  */
-public class findCommand extends Command {
+public class FindCommand extends Command {
     private String command;
 
     /**
@@ -17,7 +20,7 @@ public class findCommand extends Command {
      *
      * @param command Command entered by the user.
      */
-    public findCommand(String command) {
+    public FindCommand(String command) {
         super(command);
         this.command = command;
     }
@@ -38,11 +41,17 @@ public class findCommand extends Command {
      * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.
      * @return String representation of the filtered tasks in the task list that contain the matching word 
      * entered by the user in the find command.
+     * @throws DukeException If user doesn't provide a description for the find command.
      */
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) throws EmptyDescriptionException {
+        if (command.trim().length() <= 4) {
+            throw new EmptyDescriptionException();
+        }
+        
         String[] parts = this.command.split(" ", 2);
         String wordToFind = parts[1];
-        String response = Ui.findResponse(wordToFind, taskList);
+        Ui ui = new Ui(taskList, storage);
+        String response = ui.findResponse(wordToFind, taskList);
         return response;
     }
 }

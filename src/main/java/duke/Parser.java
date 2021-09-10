@@ -1,23 +1,23 @@
 package duke;
 
 import duke.command.Command;
-import duke.command.deadlineCommand;
-import duke.command.doneCommand;
-import duke.command.eventCommand;
-import duke.command.listCommand;
+import duke.command.DeadlineCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ListCommand;
 import duke.command.InvalidCommand;
-import duke.command.deleteCommand;
-import duke.command.todoCommand;
-import duke.command.findCommand;
+import duke.command.DeleteCommand;
+import duke.command.TodoCommand;
+import duke.command.FindCommand;
 
 /**
- * Deals with making sense of the user command
+ * Deals with making sense of the user command.
  */
 public class Parser {
     private String command;
 
     /**
-     * Constructor for the Parser class where the user command is initialized
+     * Constructor for the Parser class where the user command is initialized.
      *
      * @param command Command typed the user.
      */
@@ -32,20 +32,20 @@ public class Parser {
      */
     public Command parse() {
         if (command.equals("list")) {
-            return new listCommand(command);
+            return new ListCommand(command);
         } else if (command.startsWith("done") && Character.isDigit(command.charAt(command.length() - 1)) && command.length() <= 8 
                 && !Character.isAlphabetic(command.charAt(command.length() - 2))  && Character.isDigit(command.charAt(5))) {
-            return new doneCommand(command);
+            return new DoneCommand(command);
         } else if (command.startsWith("todo")) {
-            return new todoCommand(command);
+            return new TodoCommand(command);
         } else if (command.startsWith("deadline")) {
-            return new deadlineCommand(command);
+            return new DeadlineCommand(command);
         } else if (command.startsWith("event")) {
-            return new eventCommand(command);
+            return new EventCommand(command);
         } else if (command.startsWith("delete")) {
-            return new deleteCommand(command);
+            return new DeleteCommand(command);
         } else if (command.startsWith("find")) {
-            return new findCommand(command);
+            return new FindCommand(command);
         } else {
             return new InvalidCommand(command);
         }

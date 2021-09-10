@@ -4,9 +4,6 @@ import duke.task.TaskList;
 
 import duke.Storage;
 
-import duke.exception.DukeException;
-import duke.exception.InvalidCommandException;
-
 /**
  * Represents the user command when the user enters an invalid command.
  */
@@ -39,7 +36,6 @@ public class InvalidCommand extends Command {
      * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.            
      */
     public String execute(TaskList taskList, Storage storage) {
-        DukeException exp = new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-        return exp.toString();
+        return "OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 }

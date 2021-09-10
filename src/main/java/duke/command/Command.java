@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Storage;
 
+import duke.exception.DukeException;
 import duke.task.TaskList;
 
 /**
@@ -24,6 +25,7 @@ public abstract class Command {
      *
      * @param taskList TaskList where the tasks are stored.
      * @return String response to various types of commands.
+     * @throws DukeException If there is an error.
      */
-    public abstract String execute(TaskList taskList, Storage storage);
+    public abstract String execute(TaskList taskList, Storage storage) throws DukeException;
 }

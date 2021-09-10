@@ -19,7 +19,7 @@ import java.time.format.DateTimeParseException;
 /**
  * Represents the user command when the user enters an event.
  */
-public class eventCommand extends Command {
+public class EventCommand extends Command {
     private String command;
 
     /**
@@ -27,7 +27,7 @@ public class eventCommand extends Command {
      *
      * @param command Command entered by the user.
      */
-    public eventCommand(String command) {
+    public EventCommand(String command) {
         super(command);
         this.command = command;
     }
@@ -48,26 +48,25 @@ public class eventCommand extends Command {
      * @param taskList TaskList that stores the tasks.
      * @param storage Storage that deals with loading tasks from the file and saving tasks in the file. 
      * @return String representation of the new event task as well as the number of tasks in the task list.
+     * @throws DukeException If user doesn't provide a description for the command or enters the date in invalid format.
      */
-    public String execute(TaskList taskList, Storage storage) {
-        if (command.length() <= 6) {
-            DukeException exp = new EmptyDescriptionException("OOPS!!! The description of an event cannot be empty.");
-            return exp.toString();
-        } else {
-            String[] parts = command.split("/");
-            try {
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-                LocalDateTime dateTime = LocalDateTime.parse(parts[1].substring(3).trim(), dtf);
-                Task task = new Event(parts[0].substring(6), dateTime);
-                taskList.addTask(task);
-                storage.writeToFile("./duke.txt", taskList);
-                String response = Ui.taskResponse(task);
-                return response;
-            } catch (DateTimeParseException e) {
-                DukeException exp = new InvalidDateTimeException("The format of your command is incorrect! It should be event/at " 
-                        + "<yyyy-mm-dd HHmm>");
-                return exp.toString();
-            }
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
+        if (command.trim().length() <= 5) {
+            throw new EmptyDescriptionException();
+        } 
+        
+        String[] parts = command.split("/");
+        try {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            LocalDateTime dateTime = LocalDateTime.parse(parts[1].substring(3).trim(), dtf);
+            Task task = new Event(parts[0].substring(6), dateTime);
+            taskList.addTask(task);
+            storage.writeToFile("./duke.txt", taskList);
+            Ui ui = new Ui(taskList, storage);
+            String response = ui.taskResponse(task);
+            return response;
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeException();
         }
     }
 }
