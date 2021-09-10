@@ -9,7 +9,7 @@ public class EventTest {
     @Test
     public void test1() {
         assertEquals("[E][X] Celebrate End of uni (at: Oct 10 2020 0500PM)" ,
-                new Event("Celebrate End of uni", "2020-10-10 17:00").done());
+                new Event("Celebrate End of uni", "2020-10-10 17:00").markAsDone());
     }
 
     @Test

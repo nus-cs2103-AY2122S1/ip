@@ -9,7 +9,7 @@ import pika.ui.Ui;
  * FindCommand Class for the find commands.
  */
 public class FindCommand extends Command {
-    private final String string;
+    private String string;
 
     /**
      * FindCommand Constructor.

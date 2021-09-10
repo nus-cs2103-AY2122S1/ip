@@ -11,7 +11,7 @@ import pika.ui.Ui;
  * DoneCommand Class to handle the done command.
  */
 public class DoneCommand extends Command { //DoneCommand to handle the updating of list
-    private final int index;
+    private int index;
 
     /**
      * Constructor for the DoneCommand Class.

@@ -12,7 +12,7 @@ import pika.ui.Ui;
  * DeleteCommand class to handle the deletion of task from the list.
  */
 public class DeleteCommand extends Command {
-    private final int index;
+    private int index;
 
 
     /**

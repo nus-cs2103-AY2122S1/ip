@@ -18,6 +18,6 @@ public class TodoTest {
 
     @Test
     public void test3() {
-        assertEquals("[T][X] Do 2103", new Todo("Do 2103").done());
+        assertEquals("[T][X] Do 2103", new Todo("Do 2103").markAsDone());
     }
 }

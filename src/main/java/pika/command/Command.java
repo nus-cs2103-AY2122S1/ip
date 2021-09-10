@@ -10,7 +10,7 @@ import pika.ui.TaskList;
  * Base Command Class for the other Command classes.
  */
 public class Command {
-    private final boolean isRunning;
+    private boolean isRunning;
 
     /**
      * Constructor for the command class.

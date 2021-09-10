@@ -48,7 +48,7 @@ public class Pika extends Application {
     public Pika(String filePath) {
         storage = new Storage(filePath);
         try {
-            this.taskLists = new TaskList(storage.load());
+            this.taskLists = new TaskList(storage.loadTasks());
         } catch (PikaException | IOException e) {
             Ui.loadingErrorMessage(); //Inform user that the existing file is of the wrong format
             this.taskLists = new TaskList(); //Creates a new empty list
@@ -61,7 +61,7 @@ public class Pika extends Application {
     public Pika() {
         storage = new Storage("data");
         try {
-            this.taskLists = new TaskList(storage.load());
+            this.taskLists = new TaskList(storage.loadTasks());
         } catch (PikaException | IOException e) {
             Ui.loadingErrorMessage(); //Inform user that the existing file is of the wrong format
             this.taskLists = new TaskList(); //Creates a new empty list

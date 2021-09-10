@@ -24,7 +24,7 @@ public class Deadline extends Task {
      */
     @Override
     public String write() {
-        return "D " + super.write() + " | " + this.dueDate;
+        return "D " + super.write() + " | " + this.dueDate + " |" + getTags();
     }
 
     /**

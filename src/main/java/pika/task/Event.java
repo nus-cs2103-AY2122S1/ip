@@ -24,7 +24,7 @@ public class Event extends Task {
      */
     @Override
     public String write() {
-        return "E " + super.write() + " | " + this.eventTime;
+        return "E " + super.write() + " | " + this.eventTime + " |" + getTags();
     }
 
     /**

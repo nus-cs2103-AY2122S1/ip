@@ -1,5 +1,6 @@
 package pika.command;
 
+import pika.exception.PikaException;
 import pika.ui.Storage;
 import pika.ui.TaskList;
 import pika.ui.Ui;
@@ -9,8 +10,11 @@ public class ListCommand extends Command { //ListCommand to handle the showing o
     /**
      * Constructor for the ListCommand Class.
      */
-    public ListCommand() {
+    public ListCommand(String details) throws PikaException {
         super(true);
+        if (details != null) {
+            throw new PikaException("Pika pi!! I'm sorry, but I don't know what that means :-(");
+        }
     }
 
     /**
