@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -48,6 +50,9 @@ public class Task {
 
     //setter
     public void markCompleted() {
+        if (this.isDone) {
+            throw DukeException.of(this.toString(),"Task has already been marked as complete");
+        }
         this.isDone = true;
     }
 

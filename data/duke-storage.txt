@@ -1,3 +1,3 @@
-E | 1 | party | town
-E | 0 | smth | a time
-T | 0 | party even more
+E | 1 | smth | somewhere
+D | 1 | smth | 01-01-2022 1400
+T | 1 | bas

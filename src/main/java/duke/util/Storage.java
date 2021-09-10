@@ -8,10 +8,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Storage {
-    private String filePath;
+    private final String FILE_PATH;
     private File dir;
     private File file;
-    private FileWriter fw;
+    private FileWriter fileWriter;
 
     /**
      * Constructor for Storage class.
@@ -20,10 +20,13 @@ public class Storage {
      * @param filePathToStorageFile file path to the file used for storing details
      */
     public Storage(String filePathToStorageFile) {
-        this.filePath = filePathToStorageFile;
-        this.file = new File(this.filePath);
+        FILE_PATH = filePathToStorageFile;
+        this.file = new File(FILE_PATH);
         this.dir = this.file.getParentFile(); //may be null
-        //create directory and file if doesnt exist
+        createDirAndFileIfItDoesntExist();
+    }
+
+    private void createDirAndFileIfItDoesntExist() {
         if (!this.dir.exists()) {
             dir.mkdirs();
         }
@@ -55,11 +58,11 @@ public class Storage {
      *
      * @param text text to be written to file
      */
-    public void write(String text)  {
+    private void write(String text)  {
         try {
-            this.fw = new FileWriter(this.filePath);
-            fw.write(text);
-            fw.close();
+            fileWriter = new FileWriter(FILE_PATH);
+            fileWriter.write(text);
+            fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -79,4 +82,5 @@ public class Storage {
                         stringRes + stringTask + System.getProperty("line.separator"));
         this.write(text);
     }
+
 }
