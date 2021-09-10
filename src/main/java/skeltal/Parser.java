@@ -8,7 +8,6 @@ import java.time.format.DateTimeParseException;
  * A Parser class that handles the parsing of userInputs, to determine Skeltal's response.
  */
 public class Parser {
-
     /**
      * This method parses the user's input and determines skeltal's response accordingly.
      * userInput should be in the form "command arg1 arg2".
@@ -61,6 +60,7 @@ public class Parser {
         } catch (SkeltalException e) {
             reply = e.getMessage();
         } finally {
+            assert reply != "" : "Skeltal's reply cannot be empty";
             return reply;
         }
     }
@@ -73,6 +73,8 @@ public class Parser {
         }
 
         String time = taskAndTime[1];
+        assert time != null : "Time field cannot be empty";
+
         if (time.length() > 3) {
             String[] atOrBy = time.split(" ", 2);
             if (atOrBy[0].equals("by") || atOrBy[0].equals("at")) {
@@ -91,6 +93,8 @@ public class Parser {
 
     private static String[] parseInput(String userInput) {
         String[] commandDescriptionArr = userInput.split(" ", 2);
+        assert commandDescriptionArr[2] != null : "Description cannot be empty";
+
         return commandDescriptionArr;
     }
 }

@@ -1,5 +1,4 @@
 import javafx.application.Application;
-import skeltal.Skeltal;
 
 /**
  * The main Class of the Skeltal package that runs the program.
@@ -13,6 +12,5 @@ public class Launcher {
      */
     public static void main(String[] args) {
         Application.launch(Main.class, args);
-        Skeltal.run();
     }
 }
