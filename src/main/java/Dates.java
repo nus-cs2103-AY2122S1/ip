@@ -12,6 +12,5 @@ public class Event {
         this.eventDate = LocalDate.parse(input);
         this.eventDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
 
-        
     }
 }
