@@ -62,7 +62,8 @@ public class TaskList {
 
     private String handleSingleAddTask(Task task) {
         // @@author {zhuhangming}-reused
-        if (this.descriptions.containsKey(task.toString().toLowerCase())) {
+        boolean isDuplicated = this.descriptions.containsKey(task.toString().toLowerCase());
+        if (isDuplicated) {
             return ERROR_TASK_ALREADY_CREATED;
         }
 

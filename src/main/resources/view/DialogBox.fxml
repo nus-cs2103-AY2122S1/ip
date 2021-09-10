@@ -16,7 +16,7 @@
     </padding>
     <Label fx:id="dialog" alignment="CENTER" scaleShape="false" text="Label" wrapText="true">
         <font>
-            <Font size="14.0"/>
+            <Font name="Arial" size="14.0"/>
         </font>
         <HBox.margin>
             <Insets left="15.0"/>
