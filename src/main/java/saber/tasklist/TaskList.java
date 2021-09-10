@@ -1,6 +1,8 @@
 package saber.tasklist;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 import saber.task.Task;
 
@@ -49,5 +51,17 @@ public class TaskList {
      */
     public Task get(int index) {
         return taskList.get(index);
+    }
+
+    /**
+     * Sorts a TaskList according to its done level and return a new TaskList
+     *
+     * @return sorted tasklist
+     */
+    public TaskList sort() {
+        ArrayList<Task> temp = new ArrayList<>();
+        taskList.stream().forEach((task) -> temp.add(task));
+        temp.sort((Task a, Task b) -> Boolean.valueOf(a.getIsDone()).compareTo(Boolean.valueOf(b.getIsDone())));
+        return new TaskList(temp);
     }
 }
