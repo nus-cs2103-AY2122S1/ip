@@ -91,11 +91,22 @@ public class Parser {
         }
         return true;
     }
+    private static String trimDate(String input, String regex) {
+        return input.split(regex)[0].trim();
+    }
 
     private static void checkNumOfArguments(String input, int numOfArguments, String commandType) throws DukeException {
-        final String REGEX = " ";
-        String[] splittedInput = input.split(REGEX);
-        if (splittedInput.length != numOfArguments + 1) {
+        int length;
+        final String REGEX_FOR_INPUTS_WITHOUT_DATE = " ";
+        if (commandType.equals("deadline") || commandType.equals("event")) {
+            final String REGEX_TO_SPLIT_BY_DATE = commandType.equals("deadline") ? "/by" : "/at";
+            String inputWithoutDate = trimDate(input, REGEX_TO_SPLIT_BY_DATE);
+            length = inputWithoutDate.split(" ").length + 1;
+        } else {
+            length = input.split(REGEX_FOR_INPUTS_WITHOUT_DATE).length;
+        }
+
+        if (length != numOfArguments + 1) {
             throw new DukeException(
                     String.format(":( OOPS!!! There should be %s argument(s) in a %s command.", numOfArguments, commandType));
         }
@@ -116,13 +127,34 @@ public class Parser {
         final int NUM_OF_ARGUMENTS = 1;
         checkNumOfArguments(input, NUM_OF_ARGUMENTS, "todo");
     }
+    private static void checkPresenceOfDate(String input, String regexForDate) throws DukeException {
+        boolean containsRegex = false;
+        int regexIndex = -1;
+        String[] splittedInput = input.split(" ");
+        for (int i = 0; i < splittedInput.length; i++) {
+            if (splittedInput[i].equals(regexForDate)) {
+                containsRegex = true;
+                regexIndex = i;
+                break;
+            }
+        }
 
+        // If the second condition is met, it means that no date is written after the regexIndex
+        if (!containsRegex || regexIndex == splittedInput.length - 1) {
+            throw new DukeException(":( OOPS!!! Please specify a date using " + regexForDate);
+        }
+
+    }
     private static void checkValidityDeadline(String input) throws DukeException {
+        final String REGEX_FOR_DATE = "/by";
+        checkPresenceOfDate(input, REGEX_FOR_DATE);
         final int NUM_OF_ARGUMENTS = 2;
         checkNumOfArguments(input, NUM_OF_ARGUMENTS, "deadline");
     }
 
     private static void checkValidityEvent(String input) throws DukeException {
+        final String REGEX_FOR_DATE = "/at";
+        checkPresenceOfDate(input, REGEX_FOR_DATE);
         final int NUM_OF_ARGUMENTS = 2;
         checkNumOfArguments(input, NUM_OF_ARGUMENTS, "event");
     }
