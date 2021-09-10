@@ -5,6 +5,7 @@ import command.Command;
 import command.DeleteCommand;
 import command.DoneCommand;
 import command.FindCommand;
+import command.HelpCommand;
 import command.ListCommand;
 import exception.InvalidTaskNumberException;
 import exception.MissingCommandDescriptionException;
@@ -53,6 +54,8 @@ public class Parser {
             return DeleteCommand.createCommand(trimmedMessageWithoutCommand);
         case FIND:
             return FindCommand.createCommand(trimmedMessageWithoutCommand);
+        case HELP:
+            return HelpCommand.createCommand();
         case TODO:
             return AddCommand.createCommand(trimmedMessageWithoutCommand, commandType);
         case DEADLINE:
