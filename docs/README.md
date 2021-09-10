@@ -165,11 +165,6 @@ Example of usage:
 
 `bye`
 
-Expected outcome:
-
-```
-Bye. Thank you for using Neo! :)
-```
 
 ## Saving the data
 
