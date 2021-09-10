@@ -9,7 +9,9 @@
 <fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <ImageView fx:id="displayPicture" fitHeight="100.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
-        <Label fx:id="dialog" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="550.0" minHeight="-Infinity" style="-fx-background-color: #dcf8c6; -fx-background-radius: 10, 10, 0 0; -fx-border-radius: 10, 10, 0, 0;" text="Label" wrapText="true">
+        <Label fx:id="dialog" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="550.0" minHeight="-Infinity"
+               style="-fx-background-color: #D0effb; -fx-background-radius: 10, 10, 0 0; -fx-border-radius: 10, 10, 0, 0;"
+               text="Label" wrapText="true">
            <font>
               <Font name="Arial" size="14.0" />
            </font>
