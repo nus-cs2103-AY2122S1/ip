@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -163,5 +164,13 @@ public class Ui {
         String message;
         message = sc.nextLine();
         return message;
+    }
+
+    public String showCreateFile() {
+        return "File not found, creating empty save file!";
+    }
+
+    public String showCreateFileError(IOException e) {
+        return "Oops! Something went wrong: " + e.getMessage();
     }
 }

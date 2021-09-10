@@ -29,48 +29,76 @@ public class Storage {
         this.duke = duke;
     }
 
+    //@@author ryantianj-reused
     /**
      * Loads the existing <code>Task</code>s from the <code>TaskList</code> when Duke is ran.
      *
      * @throws FileNotFoundException if <code>filePath</code> specified is invalid.
      */
     protected String loadFileToList() throws FileNotFoundException {
-        File f = new File(filePath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        try {
+            File file = new File(filePath); // create a File for the given file path
+            Scanner s = new Scanner(file); // create a Scanner using the File as the source
 
-        while (s.hasNext()) {
-            String currentLine = s.nextLine();
-            String[] taskData = currentLine.split("\\|");
-            assert taskData.length >= 3 : "there should be a category, binary and description minimally";
-
-            String category = taskData[0].trim();
-            assert category.matches("T|D|E") : "only T, D or E valid";
-
-            String isDoneChar = taskData[1].trim();
-            assert isDoneChar.matches("1|0") : "only 0 or 1 valid";
-            boolean isDone = isDoneChar.equals("1");
-            String description = taskData[2].trim();
-            String tags = taskData[3].trim();
-
-            if (category.equals("T")) {
-                duke.getTasks().createTask(description, "", Task.Category.TODO, isDone, false, tags);
-                continue;
+            while (s.hasNext()) {
+                String currentLine = s.nextLine();
+                renderTask(currentLine);
             }
 
-            assert taskData.length == 5 : "there should be category, binary, description, tags and date";
-            String time = taskData[4].trim();
+            String showListMessage = duke.getUi().showListUponLoad();
+            return showListMessage;
 
-            if (category.equals("D")) {
-                duke.getTasks().createTask(description, time, Task.Category.DEADLINE, isDone, false, tags);
-                continue;
-            }
-            if (category.equals("E")) {
-                duke.getTasks().createTask(description, time, Task.Category.EVENT, isDone, false, tags);
-            }
+        } catch (FileNotFoundException e) {
+            return createFileDirectory();
+        }
+    }
+
+    private void renderTask(String currentLine) {
+        String[] taskData = currentLine.split("\\|");
+        assert taskData.length >= 3 : "there should be a category, binary and description minimally";
+
+        String category = taskData[0].trim();
+        assert category.matches("T|D|E") : "only T, D or E valid";
+
+        String isDoneChar = taskData[1].trim();
+        assert isDoneChar.matches("1|0") : "only 0 or 1 valid";
+        boolean isDone = isDoneChar.equals("1");
+        String description = taskData[2].trim();
+        String tags = taskData[3].trim();
+
+        if (category.equals("T")) {
+            duke.getTasks().createTask(description, "", Task.Category.TODO, isDone, false, tags);
+            return;
         }
 
-        String showListMessage = duke.getUi().showListUponLoad();
-        return showListMessage;
+        assert taskData.length == 5 : "there should be category, binary, description, tags and date";
+        String time = taskData[4].trim();
+
+        if (category.equals("D")) {
+            duke.getTasks().createTask(description, time, Task.Category.DEADLINE, isDone, false, tags);
+            return;
+        }
+        if (category.equals("E")) {
+            duke.getTasks().createTask(description, time, Task.Category.EVENT, isDone, false, tags);
+        }
+    }
+
+    private String createFileDirectory() {
+        String directoryName = "data";
+        String fileName = "list.txt";
+        File directory = new File(directoryName);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+        File file = new File(directoryName + "/" + fileName);
+        try {
+            FileWriter writeFile = new FileWriter(file.getAbsoluteFile());
+            writeFile.write("");
+            writeFile.close();
+            return duke.getUi().showCreateFile();
+        } catch (IOException e) {
+            return duke.getUi().showCreateFileError(e);
+        }
     }
 
     /**
