@@ -30,6 +30,8 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize(Stage stage) {
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.setStyle("-fx-background-image: url('images/background.png');");
         dialogContainer.getChildren().add(
                 DialogBox.getMeowDialog(ui.greet(), meowImage)
         );
