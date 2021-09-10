@@ -6,10 +6,7 @@ import duke.tasks.Todo;
 import duke.parser.Parser;
 import duke.tasks.Deadline;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -47,7 +44,7 @@ public class Storage {
      *
      * @throws IOException If an input or output exception occurred.
      */
-    public static void checkFile() throws IOException {
+    public void checkFile() throws IOException {
         final Path p = Paths.get(PATH);
         final String directory = p.getParent().toString();
         final String filename = p.getFileName().toString();
@@ -69,7 +66,7 @@ public class Storage {
      * @return Array list of Task.
      * @throws IOException If an input or output exception occurred.
      */
-    public static ArrayList<Task> loadTask() throws IOException {
+    public ArrayList<Task> loadTask() throws IOException {
         try {
             checkFile();
             File f = new File(PATH);

@@ -13,16 +13,16 @@ import duke.ui.Ui;
  * @version CS2103T AY21/22 Semester 1
  */
 public class CommandExecutor {
-    private final TaskList tasks;
-    private final Storage storage;
-    private final Ui ui;
+    protected final TaskList tasks;
+    protected final Storage storage;
+    protected final Ui ui;
 
     /**
      * A constructor for CommandExecutor.
      *
-     * @param tasks A list of current Tasks.
+     * @param tasks   A list of current Tasks.
      * @param storage Storage file.
-     * @param ui Ui to log the execution of the command.
+     * @param ui      Ui to log the execution of the command.
      */
     public CommandExecutor(TaskList tasks, Storage storage, Ui ui) {
         this.tasks = tasks;
@@ -44,19 +44,19 @@ public class CommandExecutor {
         if (command.equals("bye")) {
             return ui.showBye();
         } else if (command.equals("list")) {
-            return new ListCommand(tasks, input).list();
+            return new ListCommand(tasks, parser, storage, ui).list();
         } else if (command.equals("find")) {
-            return new FindCommand(tasks, input).find();
+            return new FindCommand(tasks, parser, storage, ui).find();
         } else if (command.equals("done")) {
-            return new DoneCommand(tasks, input).done();
+            return new DoneCommand(tasks, parser, storage, ui).done();
         } else if (command.equals("delete")) {
-            return new DeleteCommand(tasks, input).delete();
+            return new DeleteCommand(tasks, parser, storage, ui).delete();
         } else if (command.equals("todo")) {
-            return new AddCommand(tasks, input).addTodo();
+            return new AddCommand(tasks, parser, storage, ui).addTodo();
         } else if (command.equals("deadline")) {
-            return new AddCommand(tasks, input).addDeadline();
+            return new AddCommand(tasks, parser, storage, ui).addDeadline();
         } else if (command.equals("event")) {
-            return new AddCommand(tasks, input).addEvent();
+            return new AddCommand(tasks, parser, storage, ui).addEvent();
         } else {
             throw new DukeException("Command is not valid!");
         }

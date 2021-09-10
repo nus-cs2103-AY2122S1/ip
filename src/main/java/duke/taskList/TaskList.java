@@ -73,4 +73,8 @@ public class TaskList {
     public String getTask(int index) {
         return tasks.get(index).getTask();
     }
+
+    public Task get(int index) {
+        return tasks.get(index);
+    }
 }

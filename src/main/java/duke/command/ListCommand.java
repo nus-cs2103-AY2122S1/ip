@@ -1,6 +1,9 @@
 package duke.command;
 
+import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.taskList.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents a command class that list out all tasks.
@@ -13,11 +16,13 @@ public class ListCommand extends Command {
     /**
      * A constructor for ListCommand.
      *
-     * @param tasks A list of current Tasks.
-     * @param input User input.
+     * @param tasks   A list of current Tasks.
+     * @param parser  Parser to interpret user input.
+     * @param storage Storage to store data
+     * @param ui      Ui responsible for user interaction.
      */
-    public ListCommand(TaskList tasks, String input) {
-        super(tasks, input);
+    public ListCommand(TaskList tasks, Parser parser, Storage storage, Ui ui) {
+        super(tasks, parser, storage, ui);
     }
 
     /**
@@ -26,12 +31,6 @@ public class ListCommand extends Command {
      * @return String representation of the list of tasks.
      */
     public String list() {
-        int count = 1;
-        String str = "Here are the tasks in your list:";
-        for (int i = 0; i < tasks.getSize(); i++) {
-            str += "\n" + count + "." + tasks.getTask(i);
-            count += 1;
-        }
-        return str;
+        return ui.showList(tasks);
     }
 }
