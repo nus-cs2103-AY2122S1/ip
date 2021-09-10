@@ -3,7 +3,9 @@ package seedu.duke.commands;
 import seedu.duke.exceptions.storage.DukeStorageDeleteException;
 import seedu.duke.storage.Storage;
 import seedu.duke.storage.TaskList;
+import seedu.duke.tasks.ScheduledTask;
 import seedu.duke.tasks.Task;
+import seedu.duke.timetable.Timetable;
 
 public class DeleteCommand extends Command {
     private final String taskId;
@@ -26,13 +28,17 @@ public class DeleteCommand extends Command {
      * @param storage  the database where the Tasks are being saved for progression.
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Timetable timetable, Storage storage) {
         try {
+            String timetableMessage = "";
             int index = Integer.parseInt(this.taskId) - 1;
             Task deletedTask = taskList.deleteItem(index);
+            if (deletedTask.getSymbol().equals("ST")) {
+                timetableMessage = "\n" + timetable.deletePlanFromDay((ScheduledTask) deletedTask);
+            }
             storage.deleteTaskFromData(index);
 
-            return getReplyMessage(taskList, deletedTask);
+            return getReplyMessage(taskList, deletedTask) + timetableMessage;
         } catch (DukeStorageDeleteException err) {
             throw new DukeStorageDeleteException(err.toString());
         }

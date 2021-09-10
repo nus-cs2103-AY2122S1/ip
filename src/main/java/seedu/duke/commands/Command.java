@@ -2,6 +2,7 @@ package seedu.duke.commands;
 
 import seedu.duke.storage.Storage;
 import seedu.duke.storage.TaskList;
+import seedu.duke.timetable.Timetable;
 
 public abstract class Command {
     protected static final String DATA_STORAGE_ISDONE_FALSE = " | 0 | ";
@@ -14,7 +15,7 @@ public abstract class Command {
      *                 stored.
      * @param storage  the database where the Tasks are being saved for progression.
      */
-    public abstract String execute(TaskList taskList, Storage storage);
+    public abstract String execute(TaskList taskList, Timetable timetable, Storage storage);
 
     /**
      * Checks if the user wants to exit from the application.

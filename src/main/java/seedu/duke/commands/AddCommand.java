@@ -3,7 +3,9 @@ package seedu.duke.commands;
 import seedu.duke.exceptions.storage.DukeStorageSaveException;
 import seedu.duke.storage.Storage;
 import seedu.duke.storage.TaskList;
+import seedu.duke.tasks.ScheduledTask;
 import seedu.duke.tasks.Task;
+import seedu.duke.timetable.Timetable;
 
 public class AddCommand extends Command {
     private final Task task;
@@ -26,13 +28,15 @@ public class AddCommand extends Command {
      * @param storage  the database where the tasks are being saved for progression.
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Timetable timetable, Storage storage) {
         try {
+            String timetableMessage = "";
+            if (this.task.getSymbol().equals("ST")) {
+                timetableMessage = "\n" + timetable.addPlanToDay((ScheduledTask) this.task);
+            }
             taskList.addTask(this.task);
-
             storage.appendToData(getInputStorageDescription());
-
-            return getReplyMessage(taskList);
+            return getReplyMessage(taskList) + timetableMessage;
 
         } catch (DukeStorageSaveException err) {
             throw new DukeStorageSaveException(err.toString());

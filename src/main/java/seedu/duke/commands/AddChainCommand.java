@@ -3,6 +3,7 @@ package seedu.duke.commands;
 import seedu.duke.storage.Storage;
 import seedu.duke.storage.TaskList;
 import seedu.duke.tasks.AfterTask;
+import seedu.duke.timetable.Timetable;
 
 public class AddChainCommand extends Command {
     private final String description;
@@ -14,7 +15,7 @@ public class AddChainCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Timetable timetable, Storage storage) {
         int index = Integer.parseInt(this.taskId) - 1;
         taskList.getTaskList().get(index).setAfterTask(new AfterTask(this.description));
         return getReplyMessage();

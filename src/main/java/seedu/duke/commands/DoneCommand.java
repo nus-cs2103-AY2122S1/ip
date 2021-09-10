@@ -4,6 +4,7 @@ import seedu.duke.exceptions.storage.DukeStorageUpdateException;
 import seedu.duke.storage.Storage;
 import seedu.duke.storage.TaskList;
 import seedu.duke.tasks.Task;
+import seedu.duke.timetable.Timetable;
 
 public class DoneCommand extends Command {
     private final String taskId;
@@ -26,7 +27,7 @@ public class DoneCommand extends Command {
      * @param storage  the database where the Tasks are being saved for progression.
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Timetable timetable, Storage storage) {
         int index = Integer.parseInt(this.taskId) - 1;
         try {
             Task currTask = taskList.getTaskList().get(index);

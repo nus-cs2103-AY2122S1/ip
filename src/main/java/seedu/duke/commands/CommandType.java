@@ -13,6 +13,7 @@ public enum CommandType {
     TIMEDTASK("timedtask"),
     PERIODTASK("periodtask"),
     CHAINTASK("chaintask"),
+    SCHEDULETASK("scheduletask"),
     INVALID("invalid");
 
     private String command;
@@ -49,6 +50,8 @@ public enum CommandType {
             return CommandType.PERIODTASK;
         case "chaintask":
             return CommandType.CHAINTASK;
+        case "scheduletask":
+            return CommandType.SCHEDULETASK;
         case "":
             return CommandType.EMPTY;
         default:

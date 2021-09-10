@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import seedu.duke.storage.Storage;
 import seedu.duke.storage.TaskList;
 import seedu.duke.tasks.Task;
+import seedu.duke.timetable.Timetable;
 
 public class FindCommand extends Command {
     private final String word;
@@ -22,7 +23,7 @@ public class FindCommand extends Command {
      * @param storage  the database where the Tasks are being saved for progression.
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Timetable timetable, Storage storage) {
         ArrayList<Task> foundList = taskList.find(this.word);
         return Ui.printList(foundList, Ui.FIND_ZERO_SIZE, Ui.FIND_LIST_MESSAGE);
     }
