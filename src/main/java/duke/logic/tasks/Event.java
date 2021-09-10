@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+import duke.logic.commands.UpdateCommand;
+
 /**
  * Represents an event task.
  */
@@ -41,6 +43,14 @@ public class Event extends Task {
     }
 
     @Override
+    public Task createUpdatedCopy(UpdateCommand.UpdateTaskDescriptor updateDescriptor) {
+        String updatedDescription = updateDescriptor.getDescription().orElse(this.getDescription());
+        LocalDateTime updatedAt = updateDescriptor.getAt().orElse(this.at);
+        LocalDateTime updatedEnd = updateDescriptor.getEnd().orElse(this.end);
+        return new Event(updatedDescription, getIsDone(), updatedAt, updatedEnd);
+    }
+
+    @Override
     public String getSaveFormat() {
         return "E" + super.getSaveFormat() + " | " + at + " | " + end;
     }
@@ -55,5 +65,20 @@ public class Event extends Task {
                     + " — " + end.format(DateTimeFormatter.ofPattern(END_DATE_FORMAT, REGION)) + ")";
         }
         return s;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Event)) {
+            return false;
+        }
+        Event other = (Event) obj;
+        return getDescription().equals(other.getDescription())
+                && getIsDone() == other.getIsDone()
+                && at.equals(other.at)
+                && end.equals(other.end);
     }
 }

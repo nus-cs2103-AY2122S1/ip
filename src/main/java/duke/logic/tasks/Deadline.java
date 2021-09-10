@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+import duke.logic.commands.UpdateCommand;
+
 /**
  * Represents a deadline task.
  */
@@ -37,6 +39,13 @@ public class Deadline extends Task {
     }
 
     @Override
+    public Task createUpdatedCopy(UpdateCommand.UpdateTaskDescriptor updateDescriptor) {
+        String updatedDescription = updateDescriptor.getDescription().orElse(this.getDescription());
+        LocalDateTime updatedBy = updateDescriptor.getBy().orElse(this.by);
+        return new Deadline(updatedDescription, getIsDone(), updatedBy);
+    }
+
+    @Override
     public String getSaveFormat() {
         return "D" + super.getSaveFormat() + " | " + by;
     }
@@ -45,5 +54,19 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString()
                 + " (by: " + by.format(DateTimeFormatter.ofPattern(DEADLINE_DATE_FORMAT, REGION)) + ")";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Deadline)) {
+            return false;
+        }
+        Deadline other = (Deadline) obj;
+        return getDescription().equals(other.getDescription())
+                && getIsDone() == other.getIsDone()
+                && by.equals(other.by);
     }
 }

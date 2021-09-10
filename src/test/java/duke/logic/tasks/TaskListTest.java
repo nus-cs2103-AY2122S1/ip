@@ -6,13 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
+import duke.logic.commands.UpdateCommand.UpdateTaskDescriptor;
+import duke.logic.commands.UpdateTaskDescriptorBuilder;
+
 public class TaskListTest {
     private TaskList list = new TaskList();
-
-    @Test
-    public void testEmptyListToString() {
-        assertEquals("You have no tasks!", list.toString());
-    }
 
     @Test
     public void testAdd() {
@@ -38,6 +36,15 @@ public class TaskListTest {
     }
 
     @Test
+    public void testUpdate() {
+        list.add(new TaskStub(1));
+        list.add(new TaskStub(2));
+        Task updatedTask = list.update(1, new UpdateTaskDescriptorBuilder().build());
+        assertEquals(2, list.size());
+        assertEquals(new TaskStub(11), updatedTask);
+    }
+
+    @Test
     public void testFind() {
         for (int i = 1; i < 5; i++) {
             list.add(new TaskStub(i));
@@ -60,7 +67,12 @@ public class TaskListTest {
     }
 
     @Test
-    public void testNonEmptyListToString() {
+    public void testToString_emptyList() {
+        assertEquals("You have no tasks!", list.toString());
+    }
+
+    @Test
+    public void testToString_nonEmptyList() {
         StringBuilder s = new StringBuilder("Current tasks:\n");
         for (int i = 1; i < 5; i++) {
             list.add(new TaskStub(i));
@@ -69,4 +81,43 @@ public class TaskListTest {
         s.append("Total: ").append(4).append(" tasks");
         assertEquals(s.toString(), list.toString());
     }
+
+    /**
+     * A stub for Task.
+     */
+    public static class TaskStub extends Task {
+        private final int stubNo;
+
+        public TaskStub(int stubNo) {
+            super("Stub task " + stubNo, true);
+            this.stubNo = stubNo;
+        }
+
+        @Override
+        public Task createUpdatedCopy(UpdateTaskDescriptor updateDescriptor) {
+            return new TaskStub(stubNo + 10);
+        }
+
+        @Override
+        public String getStatusIcon() {
+            return "X";
+        }
+
+        @Override
+        public String getSaveFormat() {
+            return "S | 1 | Stub task " + stubNo;
+        }
+
+        @Override
+        public String toString() {
+            return "[S][X] Stub task " + stubNo;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            return obj == this
+                    || (obj instanceof TaskStub && stubNo == ((TaskStub) obj).stubNo);
+        }
+    }
+
 }

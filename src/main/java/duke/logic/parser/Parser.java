@@ -3,6 +3,7 @@ package duke.logic.parser;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Map;
 
 import duke.logic.commands.Command;
 import duke.logic.commands.CommandCode;
@@ -15,6 +16,7 @@ import duke.logic.commands.FindCommand;
 import duke.logic.commands.InvalidCommand;
 import duke.logic.commands.ListCommand;
 import duke.logic.commands.ToDoCommand;
+import duke.logic.commands.UpdateCommand;
 
 /**
  * Parses user input.
@@ -27,6 +29,9 @@ public class Parser {
     private static final String INVALID_LIST_ERR_MSG = GENERAL_ERR_MSG + " Did you mean 'list'?";
     private static final String INVALID_DONE_ERR_MSG = "Which task would you like to mark as done?";
     private static final String INVALID_DELETE_ERR_MSG = "Which task would you like to delete?";
+    private static final String INVALID_UPDATE_ERR_MSG = "Wrong format! "
+            + "Requires <task #> -[d|by|at|to] <new value>. Nonexistent fields will be ignored.";
+    private static final String WRONG_DATETIME_FORMAT = "Something is wrong with your datetime format!";
     private static final String REQUIRE_TASK_NUMBER_ERR_MSG = "I don't see a task number! >.<";
     private static final String INVALID_TODO_ERR_MSG = "The description of a todo cannot be empty.";
     private static final String INVALID_DEADLINE_ERR_MSG = "Wrong format! "
@@ -35,8 +40,8 @@ public class Parser {
             + "Requires \"event <task name> /at <DD-MM-YYYY hhmm[ to DD-MM-YYY hhmm]> (24hr time)\"";
     private static final String INVALID_FIND_ERR_MSG = "What would you like to find? Separate keywords with a space.";
 
-    /** Date format for deadline and event */
-    private static final String DATE_FORMAT = "dd-MM-yyyy HHmm";
+    /** Date formatter for deadline and event */
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
 
     /**
      * Parses user input into command for execution.
@@ -71,6 +76,8 @@ public class Parser {
             return handleDone(tokens);
         case DELETE:
             return handleDelete(tokens);
+        case UPDATE:
+            return handleUpdate(tokens);
         case TODO:
             return handleToDo(tokens);
         case DEADLINE:
@@ -151,6 +158,52 @@ public class Parser {
     }
 
     /**
+     * Parses the tokens for an update task command.
+     *
+     * @param tokens The tokenized input array.
+     * @return The prepared command.
+     */
+    private Command handleUpdate(String[] tokens) {
+        assert tokens.length > 0;
+        if (tokens.length < 2) {
+            return new InvalidCommand(INVALID_UPDATE_ERR_MSG);
+        }
+        String[] args = tokens[1].split("\\s+", 2);
+        assert args.length > 0;
+        if (args.length < 2) {
+            return new InvalidCommand(INVALID_UPDATE_ERR_MSG);
+        }
+
+        int taskNo;
+        String updatedDescription;
+        LocalDateTime updatedBy = null;
+        LocalDateTime updatedAt = null;
+        LocalDateTime updatedEnd = null;
+        try {
+            taskNo = Integer.parseInt(args[0]);
+
+            // parse arguments, find which fields the user wants to update
+            Map<String, String> flagToValue = ArgumentTokenizer.tokenize(args[1], "-d", "-by", "-at", "-to");
+
+            updatedDescription = flagToValue.getOrDefault("-d", null);
+            if (flagToValue.containsKey("-by")) {
+                updatedBy = LocalDateTime.parse(flagToValue.get("-by"), DATE_FORMATTER);
+            }
+            if (flagToValue.containsKey("-at")) {
+                updatedAt = LocalDateTime.parse(flagToValue.get("-at"), DATE_FORMATTER);
+            }
+            if (flagToValue.containsKey("-to")) {
+                updatedEnd = LocalDateTime.parse(flagToValue.get("-to"), DATE_FORMATTER);
+            }
+        } catch (NumberFormatException e) {
+            return new InvalidCommand(REQUIRE_TASK_NUMBER_ERR_MSG);
+        } catch (DateTimeParseException e) {
+            return new InvalidCommand(WRONG_DATETIME_FORMAT);
+        }
+        return new UpdateCommand(taskNo, updatedDescription, updatedBy, updatedAt, updatedEnd);
+    }
+
+    /**
      * Parses the tokens for an add to-do task command.
      *
      * @param tokens The tokenized input array.
@@ -180,10 +233,10 @@ public class Parser {
             return new InvalidCommand(INVALID_DEADLINE_ERR_MSG);
         }
         try {
-            LocalDateTime by = LocalDateTime.parse(args[1], DateTimeFormatter.ofPattern(DATE_FORMAT));
+            LocalDateTime by = LocalDateTime.parse(args[1], DATE_FORMATTER);
             return new DeadlineCommand(args[0], by);
         } catch (DateTimeParseException e) {
-            return new InvalidCommand(INVALID_DEADLINE_ERR_MSG);
+            return new InvalidCommand(WRONG_DATETIME_FORMAT);
         }
     }
 
@@ -204,14 +257,14 @@ public class Parser {
         }
         try {
             String[] times = args[1].split(" to ");
-            LocalDateTime at = LocalDateTime.parse(times[0], DateTimeFormatter.ofPattern(DATE_FORMAT));
+            LocalDateTime at = LocalDateTime.parse(times[0], DATE_FORMATTER);
             LocalDateTime end = null;
             if (times.length > 1) {
-                end = LocalDateTime.parse(times[1], DateTimeFormatter.ofPattern(DATE_FORMAT));
+                end = LocalDateTime.parse(times[1], DATE_FORMATTER);
             }
             return new EventCommand(args[0], at, end);
         } catch (DateTimeParseException e) {
-            return new InvalidCommand(INVALID_EVENT_ERR_MSG);
+            return new InvalidCommand(WRONG_DATETIME_FORMAT);
         }
     }
 

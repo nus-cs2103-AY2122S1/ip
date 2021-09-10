@@ -1,5 +1,7 @@
 package duke.logic.tasks;
 
+import duke.logic.commands.UpdateCommand.UpdateTaskDescriptor;
+
 /**
  * Represents a to-do task.
  */
@@ -25,6 +27,12 @@ public class ToDo extends Task {
     }
 
     @Override
+    public Task createUpdatedCopy(UpdateTaskDescriptor updateDescriptor) {
+        String updatedDescription = updateDescriptor.getDescription().orElse(this.getDescription());
+        return new ToDo(updatedDescription, getIsDone());
+    }
+
+    @Override
     public String getSaveFormat() {
         return "T" + super.getSaveFormat();
     }
@@ -32,5 +40,17 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof ToDo)) {
+            return false;
+        }
+        ToDo other = (ToDo) obj;
+        return getDescription().equals(other.getDescription()) && getIsDone() == other.getIsDone();
     }
 }

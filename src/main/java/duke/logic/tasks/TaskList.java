@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import duke.logic.commands.UpdateCommand.UpdateTaskDescriptor;
+
 /**
  * Represents a list of tasks.
  */
@@ -76,6 +78,21 @@ public class TaskList {
      */
     public boolean markAsDone(int taskNo) {
         return list.get(--taskNo).markAsDone();
+    }
+
+    /**
+     * Updates a task with the new information supplied.
+     *
+     * @param taskNo The index of the task to be marked as done (1-based).
+     * @param updateDescriptor New information to be used for the update.
+     * @return The updated task.
+     */
+    public Task update(int taskNo, UpdateTaskDescriptor updateDescriptor) {
+        assert updateDescriptor != null;
+        Task t = this.get(taskNo);
+        Task updatedTask = t.createUpdatedCopy(updateDescriptor);
+        list.set(--taskNo, updatedTask); // replace old task with updated task
+        return updatedTask;
     }
 
     /**
