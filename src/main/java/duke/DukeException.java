@@ -15,7 +15,7 @@ public class DukeException extends Exception {
     /**
      * Constructor for creating duke exception with provided message.
      *
-     * @param message provided message from user
+     * @param message provided message by user
      */
     public DukeException(String message) {
         super(message);
