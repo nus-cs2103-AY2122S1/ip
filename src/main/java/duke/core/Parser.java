@@ -29,8 +29,10 @@ public class Parser {
             checkValiditiy(input, taskList);
 
             // Return a Command based on the input type (determined by first word of input)
-            String[] splittedInput = input.split(" ");
-            switch (splittedInput[0]) {
+            final String REGEX = " ";
+            String[] splittedInput = input.split(REGEX);
+            String commandType = splittedInput[0];
+            switch (commandType) {
             case "list":
                 return new ListCommand();
             case "done":
@@ -59,12 +61,14 @@ public class Parser {
     }
 
     private static boolean checkValiditiy(String input, TaskList taskList) throws DukeException {
-        String[] splittedInput = input.split(" ");
+        final String REGEX = " ";
+        String[] splittedInput = input.split(REGEX);
+        String commandType = splittedInput[0];
         if (input.length() == 0) {
             throw new DukeException(":( OOPS!!! The input cannot be empty.");
         }
 
-        switch (splittedInput[0]) {
+        switch (commandType) {
         case "todo":
             checkValidityTodo(input);
             break;
@@ -85,28 +89,32 @@ public class Parser {
     }
 
     private static void checkValidityTodo(String input) throws DukeException {
-        String[] splittedInput = input.split(" ");
+        final String REGEX = " ";
+        String[] splittedInput = input.split(REGEX);
         if (splittedInput.length == 1) {
             throw new DukeException(":( OOPS!!! The description of a todo cannot be empty.");
         }
     }
 
     private static void checkValidityDeadline(String input) throws DukeException {
-        String[] splittedInput = input.split(" ");
+        final String REGEX = " ";
+        String[] splittedInput = input.split(REGEX);
         if (splittedInput.length == 1) {
             throw new DukeException(":( OOPS!!! The description of a deadline cannot be empty.");
         }
     }
 
     private static void checkValidityEvent(String input) throws DukeException {
-        String[] splittedInput = input.split(" ");
+        final String REGEX = " ";
+        String[] splittedInput = input.split(REGEX);
         if (splittedInput.length == 1) {
             throw new DukeException(":( OOPS!!! The description of an event cannot be empty.");
         }
     }
 
     private static void checkValidityDone(String input, TaskList taskList) throws DukeException {
-        String[] splittedInput = input.split(" ");
+        final String REGEX = " ";
+        String[] splittedInput = input.split(REGEX);
         if (splittedInput.length == 1) {
             throw new DukeException(":( OOPS!!! You must specify an index");
         } else {
@@ -122,7 +130,8 @@ public class Parser {
     }
 
     private static void checkValidityDelete(String input, TaskList taskList) throws DukeException {
-        String[] splittedInput = input.split(" ");
+        final String REGEX = " ";
+        String[] splittedInput = input.split(REGEX);
         if (splittedInput.length == 1) {
             throw new DukeException(":( OOPS!!! You must specify an index");
         } else {
@@ -138,21 +147,24 @@ public class Parser {
     }
 
     private static Command validTodoHandler(String input) {
-        String[] splittedInput = input.split(" ", 2);
+        final String REGEX = " ";
+        String[] splittedInput = input.split(REGEX, 2);
         return new TodoCommand(splittedInput[1]);
     }
 
     private static Command validDeadlineHandler(String input) {
-        String details = input.split(" ", 2)[1];
-        String regexForDetails = "/by";
-        String splittedDetails[] = details.split(regexForDetails);
+        final String REGEX_FOR_INPUT = " ";
+        String details = input.split(REGEX_FOR_INPUT, 2)[1];
+        final String REGEX_FOR_DETAILS = "/by";
+        String splittedDetails[] = details.split(REGEX_FOR_DETAILS);
         return new DeadlineCommand(splittedDetails[0].trim(), splittedDetails[1].trim());
     }
 
     private static Command validEventHandler(String input) {
-        String details = input.split(" ", 2)[1];
-        String regexForDetails = "/at";
-        String splittedDetails[] = details.split(regexForDetails);
+        final String REGEX_FOR_INPUT = " ";
+        String details = input.split(REGEX_FOR_INPUT, 2)[1];
+        final String REGEX_FOR_DETAILS = "/at";
+        String splittedDetails[] = details.split(REGEX_FOR_DETAILS);
         return new EventCommand(splittedDetails[0].trim(), splittedDetails[1].trim());
     }
 

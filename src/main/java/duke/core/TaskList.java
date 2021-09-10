@@ -47,9 +47,9 @@ public class TaskList {
     public String findAndListTasks(String keyword) {
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
         int index = 1;
-        String regex = " ";
+        final String REGEX = " ";
         for (Task task : listOfTasks) {
-            String[] splittedTaskString = task.toString().split(regex);
+            String[] splittedTaskString = task.toString().split(REGEX);
             for (String s : splittedTaskString) {
                 // Check whether final character of string is ')'. If so, remove the ')'.
                 if (s.charAt(s.length() - 1) == ')') {
