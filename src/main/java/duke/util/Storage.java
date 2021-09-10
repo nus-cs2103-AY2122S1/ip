@@ -12,6 +12,7 @@ public class Storage {
     private File dir;
     private File file;
     private FileWriter fileWriter;
+    private boolean isExistingUser = true;
 
     /**
      * Constructor for Storage class.
@@ -31,6 +32,7 @@ public class Storage {
             dir.mkdirs();
         }
         if (!this.file.exists()) {
+            isExistingUser = false;
             createFile(this.file);
         }
     }
