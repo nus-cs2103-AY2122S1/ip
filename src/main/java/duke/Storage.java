@@ -65,10 +65,6 @@ public class Storage {
                     } else if (task instanceof ToDoTask) {
                         ToDoTask todo = (ToDoTask) task;
                         storeData.write(todo.writeToFile());
-                    } else {
-                        ui.showLine();
-                        ui.showError("Error Occurred While Storing Data");
-                        ui.showLine();
                     }
                 }
                 storeData.close();
@@ -83,9 +79,7 @@ public class Storage {
             }
 
             if (shouldShow) {
-                ui.showLine();
-                ui.showError("Error Occurred While Storing Data");
-                ui.showLine();
+                return;
             }
         }
     }
@@ -115,19 +109,15 @@ public class Storage {
      */
     public List<Task> load() {
         List<Task> taskList = new ArrayList<>();
-        UI ui = new UI();
-
         try {
             Scanner dataInput = new Scanner(storageFile);
             String[] data;
-            boolean isDataCorrupted = false;
             while (dataInput.hasNextLine()) {
                 try {
                     data = dataInput.nextLine().split(" [|] ");
                     switch (getCommand(data[0])) {
                     case DEADLINE:
                         if (data.length != 4) {
-                            isDataCorrupted = true;
                             continue;
                         } else {
                             DeadlineTask deadline = new DeadlineTask(data[1], data[2], data[3]);
@@ -136,7 +126,6 @@ public class Storage {
                         break;
                     case EVENT:
                         if (data.length != 4) {
-                            isDataCorrupted = true;
                             continue;
                         } else {
                             EventTask event = new EventTask(data[1], data[2], data[3]);
@@ -145,7 +134,6 @@ public class Storage {
                         break;
                     case TODO:
                         if (data.length != 3) {
-                            isDataCorrupted = true;
                             continue;
                         } else {
                             ToDoTask todo = new ToDoTask(data[1], data[2]);
@@ -154,18 +142,10 @@ public class Storage {
                         break;
                     case UNKNOWN:
                     default:
-                        isDataCorrupted = true;
                     }
                 } catch (DateTimeParseException ignored) {
                     ignored.getMessage();
                 }
-            }
-
-
-            if (isDataCorrupted) {
-                ui.showLine();
-                ui.showError("Data was partially Corrupted");
-                ui.showLine();
             }
         } catch (FileNotFoundException ignored) {
             ignored.getMessage();

@@ -71,61 +71,66 @@ public class Command {
     }
 
     /**
-     * Method to check for the Bye Command and render the UI
+     * Method to check for the Bye Command and return the message to be displayed
      *
      * @param taskDetails The String describing the various attributes for the command
-     * @param ui The Object to render the UI
+     * @return The String Message for the Bye Command
      * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid
      */
-    private void goodbye(String taskDetails, UI ui) throws DukeException {
+    private String goodbye(String taskDetails) throws DukeException {
+        String output = "";
         if ((taskDetails != null) && (taskDetails.equals(""))) {
-            ui.display("Bye. Hope to see you again soon! \\_(\"v\")_/");
+            output += "Bye. Hope to see you again soon! \\_(\"v\")_/";
         } else {
             throw new DukeException("OOPS! I'm sorry, but I don't know that command");
         }
+        return output;
     }
 
     /**
-     * Method to check for the Deadline Command and render the UI
+     * Method to check for the Deadline Command and return the message to be displayed
      *
      * @param taskDetails The String describing the various attributes for the command
-     * @param ui The Object to render the UI
      * @param tasks The Object to contain the List of the Tasks
+     * @return The Message to be displayed for the Deadline Command
      * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid
      */
-    private void addDeadline(String taskDetails, UI ui, TaskList tasks) throws DukeException {
+    private String addDeadline(String taskDetails, TaskList tasks) throws DukeException {
+        String output = "";
         if ((taskDetails == null) || !(taskDetails.contains(" /by "))) {
-            throw new DukeException("Incorrect Format of the Deadline Command!!, Correct Format --> "
+            throw new DukeException("Incorrect Format of the Deadline Command!!, \nCorrect Format --> "
                     + "deadline <Description> /by <dd/MM/yyyy HHmm>");
         } else {
             String[] values = taskDetails.split(" /by ", 2);
             try {
                 DeadlineTask deadline = new DeadlineTask(values[0], values[1]);
                 tasks.addTask(deadline);
-                ui.display("Got it. I've added this task:");
-                ui.display("  " + deadline);
-                ui.display("Now you have " + tasks.getTaskListLength() + " tasks in the list.");
+                output += "Got it. I've added this task:\n";
+                output += "  " + deadline + "\n";
+                output += "Now you have " + tasks.getTaskListLength() + " tasks in the list.";
             } catch (DateTimeParseException e) {
-                throw new DukeException("Incorrect Format of the Deadline Command!!, Correct Format --> "
+                throw new DukeException("Incorrect Format of the Deadline Command!!, \nCorrect Format --> "
                         + "deadline <Description> /by <dd/MM/yyyy HHmm>");
             }
         }
+        return output;
     }
 
     /**
      * Method to check for the Delete Command and render the UI
      *
      * @param taskDetails The String describing the various attributes for the command
-     * @param ui The Object to render the UI
      * @param tasks The Object to contain the List of the Tasks
+     * @return The Message to be displayed for the Delete Command
      * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid
      */
-    private void deleteTask(String taskDetails, UI ui, TaskList tasks) throws DukeException {
+    private String deleteTask(String taskDetails, TaskList tasks) throws DukeException {
+        String output = "";
         try {
             int index = Integer.parseInt(taskDetails) - 1;
             if ((index >= 0) && (index < tasks.getTaskListLength())) {
-                ui.display("Noted. I've removed this task:");
-                ui.display("  " + tasks.deleteTaskAtIndex(index).toString());
+                output += "Noted. I've removed this task:\n";
+                output += "  " + tasks.deleteTaskAtIndex(index).toString();
             } else {
                 int numberOfTasks = tasks.getTaskListLength();
                 if (numberOfTasks == 0) {
@@ -135,25 +140,27 @@ public class Command {
                 }
             }
         } catch (NumberFormatException e) {
-            throw new DukeException("Incorrect Format of the Delete Command!!, Correct Format --> delete <index>");
+            throw new DukeException("Incorrect Format of the Delete Command!!, \nCorrect Format --> delete <index>");
         }
+        return output;
     }
 
     /**
      * Method to check for the Done Command and render the UI
      *
      * @param taskDetails The String describing the various attributes for the command
-     * @param ui The Object to render the UI
      * @param tasks The Object to contain the List of the Tasks
+     * @return The Message to be displayed for the Done Command
      * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid
      */
-    private void markTaskAsCompleted(String taskDetails, UI ui, TaskList tasks) throws DukeException {
+    private String markTaskAsCompleted(String taskDetails, TaskList tasks) throws DukeException {
+        String output = "";
         try {
             int index = Integer.parseInt(taskDetails) - 1;
             if ((index >= 0) && (index < tasks.getTaskListLength())) {
                 tasks.completeTask(index);
-                ui.display("Nice! I've marked this task as done:");
-                ui.display("  " + tasks.getTask(index));
+                output += "Nice! I've marked this task as done:\n";
+                output += "  " + tasks.getTask(index);
             } else {
                 int numberOfTasks = tasks.getTaskListLength();
                 if (numberOfTasks == 0) {
@@ -163,136 +170,127 @@ public class Command {
                 }
             }
         } catch (NumberFormatException e) {
-            throw new DukeException("Incorrect Format of the Done Command!!, Correct Format --> done <index>");
+            throw new DukeException("Incorrect Format of the Done Command!!, \nCorrect Format --> done <index>");
         }
+        return output;
     }
 
     /**
      * Method to check for the Event Command and render the UI
      *
      * @param taskDetails The String describing the various attributes for the command
-     * @param ui The Object to render the UI
      * @param tasks The Object to contain the List of the Tasks
      * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid
      */
-    private void addEvent(String taskDetails, UI ui, TaskList tasks) throws DukeException {
+    private String addEvent(String taskDetails, TaskList tasks) throws DukeException {
+        String output = "";
         if ((taskDetails == null) || !(taskDetails.contains(" /at "))) {
-            throw new DukeException("Incorrect Format of the Event Command!!, "
+            throw new DukeException("Incorrect Format of the Event Command!!, \n"
                     + "Correct Format --> event <Description> /at <dd/MM/yyyy HHmm>");
         } else {
             String[] values = taskDetails.split(" /at ", 2);
             try {
                 EventTask event = new EventTask(values[0], values[1]);
                 tasks.addTask(event);
-                ui.display("Got it. I've added this task:");
-                ui.display("  " + event);
-                ui.display("Now you have " + tasks.getTaskListLength() + " tasks in the list.");
+                output += "Got it. I've added this task:\n";
+                output += "  " + event + "\n";
+                output += "Now you have " + tasks.getTaskListLength() + " tasks in the list.";
             } catch (DateTimeParseException e) {
-                throw new DukeException("Incorrect Format of the Event Command!!, "
+                throw new DukeException("Incorrect Format of the Event Command!!, \n"
                         + "Correct Format --> event <Description> /at <dd/MM/yyyy HHmm>");
             }
         }
+        return output;
     }
 
     /**
      * Method to check for the Task with the given String in the Task List
      *
      * @param searchDetails The String to be Searched in the Task List
-     * @param ui The Object to render the UI
      * @param tasks The Object to contain the List of the Tasks
+     * @return The String displaying all the Tasks with the given input string
      * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid
      */
-    private void searchAndDisplayTaskList(String searchDetails, UI ui, TaskList tasks) throws DukeException {
+    private String searchAndDisplayTaskList(String searchDetails, TaskList tasks) throws DukeException {
+        String output = "";
+        UI ui = new UI();
         if (searchDetails != null && !searchDetails.equals("")) {
-            ui.printTaskList(tasks.searchTaskList(searchDetails));
+            output += ui.printTaskList(tasks.searchTaskList(searchDetails));
         } else {
             throw new DukeException("OOPS! I'm sorry, but I don't know that command");
         }
+        return output;
     }
     /**
      * Method to check for the List Command and render the UI
      *
      * @param taskDetails The String describing the various attributes for the command
-     * @param ui The Object to render the UI
      * @param tasks The Object to contain the List of the Tasks
+     * @return The Message to be displayed for the List Command
      * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid
      */
-    private void displayTaskList(String taskDetails, UI ui, TaskList tasks) throws DukeException {
+    private String displayTaskList(String taskDetails, TaskList tasks) throws DukeException {
+        String output = "";
+        UI ui = new UI();
         if (taskDetails != null && taskDetails.equals("")) {
-            ui.printTaskList(tasks);
+            output += ui.printTaskList(tasks);
         } else {
             throw new DukeException("OOPS! I'm sorry, but I don't know that command");
         }
+        return output;
     }
 
     /**
      * Method to check for the ToDO Command and render the UI
      *
      * @param taskDetails The String describing the various attributes for the command
-     * @param ui The Object to render the UI
      * @param tasks The Object to contain the List of the Tasks
+     * @return The Message to be displayed for the Todo command
      * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid
      */
-    private void addTodo(String taskDetails, UI ui, TaskList tasks) throws DukeException {
+    private String addTodo(String taskDetails, TaskList tasks) throws DukeException {
+        String output = "";
         if ((taskDetails == null) || (taskDetails.equals(""))) {
-            throw new DukeException("Incorrect Format of the ToDo Command!!, Correct Format --> todo <Description>");
+            throw new DukeException("Incorrect Format of the ToDo Command!!, \nCorrect Format --> todo <Description>");
         } else {
             ToDoTask todo = new ToDoTask(taskDetails);
             tasks.addTask(todo);
-            ui.display("Got it. I've added this task:");
-            ui.display("  " + todo);
-            ui.display("Now you have " + tasks.getTaskListLength() + " tasks in the list.");
+            output += "Got it. I've added this task:\n";
+            output += "  " + todo + "\n";
+            output += "Now you have " + tasks.getTaskListLength() + " tasks in the list.";
         }
+        return output;
     }
 
     /**
      * Method to check the type of the Command and distribute to the specific type of Command Handler.
      *
-     * @param ui The Object to render the UI
      * @param tasks The Object to contain the List of the Tasks
      * @param storage The Object to save the List of the Tasks
      * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid
      */
-    public void execute(UI ui, TaskList tasks, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         switch (typeOfCommand) {
         case BYE:
-            goodbye(taskDetails, ui);
             storage.saveTaskList(tasks);
-            break;
+            return goodbye(taskDetails);
         case DEADLINE:
-            addDeadline(taskDetails, ui, tasks);
-            break;
-
+            return addDeadline(taskDetails, tasks);
         case DELETE:
-            deleteTask(taskDetails, ui, tasks);
-            break;
+            return deleteTask(taskDetails, tasks);
         case DONE:
-            markTaskAsCompleted(taskDetails, ui, tasks);
-            break;
+            return markTaskAsCompleted(taskDetails, tasks);
         case EVENT:
-            addEvent(taskDetails, ui, tasks);
-            break;
+            return addEvent(taskDetails, tasks);
         case FIND:
-            searchAndDisplayTaskList(taskDetails, ui, tasks);
-            break;
+            return searchAndDisplayTaskList(taskDetails, tasks);
         case LIST:
-            displayTaskList(taskDetails, ui, tasks);
-            break;
+            return displayTaskList(taskDetails, tasks);
         case TODO:
-            addTodo(taskDetails, ui, tasks);
-            break;
+            return addTodo(taskDetails, tasks);
         case UNKNOWN:
         default:
             throw new DukeException("OOPS! I'm sorry, but I don't know that command");
         }
-    }
-
-    /**
-     * Method to check if the Command prompts an exit
-     *
-     * @return Return boolean if the program should exit
-     */
-    public boolean isExit() {
-        return typeOfCommand == Commands.BYE;
     }
 }
