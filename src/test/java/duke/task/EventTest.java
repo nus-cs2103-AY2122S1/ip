@@ -1,10 +1,11 @@
 package duke.task;
 
-import duke.exception.DukeException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
+import duke.exception.DukeException;
 
 public class EventTest {
     @Test
@@ -13,14 +14,23 @@ public class EventTest {
     }
 
     @Test
+    public void testNullPriority() {
+        assertThrows(DukeException.class, () -> new Event("description", null, "2021-12-01", true));
+    }
+
+    @Test
     public void testStringConversion() {
-        assertEquals("[E][ ] desc (at: 01 Dec 2021)", new Event("desc", "2021-12-01").toString());
-        assertEquals("[E][X] desc (at: 03 Oct 2021)", new Event("desc", "2021-10-03", true).toString());
+        assertEquals("[E][ ] [MEDIUM] desc (at: 01 Dec 2021)", new Event("desc", "2021-12-01").toString());
+        assertEquals("[E][X] [MEDIUM] desc (at: 03 Oct 2021)", new Event("desc", "2021-10-03", true).toString());
+        assertEquals("[E][X] [HIGH] desc (at: 03 Oct 2021)",
+                new Event("desc", Priority.HIGH, "2021-10-03", true).toString());
     }
 
     @Test
     public void serialize() {
-        assertEquals("E | 0 | desc | 2021-12-01", new Event("desc", "2021-12-01").serialize());
-        assertEquals("E | 1 | desc | 2021-10-03", new Event("desc", "2021-10-03", true).serialize());
+        assertEquals("E | MEDIUM | 0 | desc | 2021-12-01", new Event("desc", "2021-12-01").serialize());
+        assertEquals("E | MEDIUM | 1 | desc | 2021-10-03", new Event("desc", "2021-10-03", true).serialize());
+        assertEquals("E | HIGH | 1 | desc | 2021-10-03",
+                new Event("desc", Priority.HIGH, "2021-10-03", true).serialize());
     }
 }

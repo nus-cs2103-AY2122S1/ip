@@ -2,10 +2,13 @@ package duke.task;
 
 import java.time.format.DateTimeParseException;
 
+import duke.exception.DukeException;
+
 /** A class that represents a task. */
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected Priority priority;
 
     /**
      * Constructs a task with description.
@@ -15,17 +18,36 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.priority = Priority.MEDIUM;
     }
 
     /**
-     * Constructs a task with description and a state whether it has been done or not.
+     * Constructs a task with description and done state.
      *
      * @param description The description.
-     * @param isDone The state.
+     * @param isDone The state whether the task is done.
      */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
+        this.priority = Priority.MEDIUM;
+    }
+
+    /**
+     * Constructs a task with description, priority and a state whether it has been done or not.
+     *
+     * @param description The description.
+     * @param priority The priority.
+     * @param isDone The state.
+     */
+    public Task(String description, Priority priority, boolean isDone) throws DukeException {
+        if (priority == null) {
+            throw new DukeException("Invalid priority value.");
+        }
+
+        this.description = description;
+        this.isDone = isDone;
+        this.priority = priority;
     }
 
     public String getDescription() {
@@ -34,6 +56,20 @@ public class Task {
 
     public boolean isDone() {
         return this.isDone;
+    }
+
+    /**
+     * Sets priority of current task.
+     *
+     * @param priority The priority.
+     * @throws DukeException If priority is null.
+     */
+    public void setPriority(Priority priority) throws DukeException {
+        if (priority == null) {
+            throw new DukeException("Invalid priority value");
+        }
+
+        this.priority = priority;
     }
 
     /**
@@ -49,7 +85,7 @@ public class Task {
      * @return Serialized string representation.
      */
     public String serialize() {
-        return this.description;
+        return this.priority + " | " + this.description;
     }
 
     /**
@@ -63,26 +99,27 @@ public class Task {
     public static Task deserialize(String data) throws IllegalArgumentException, DateTimeParseException {
         try {
             // Format:
-            // "taskType | isDone | description | time"
+            // "taskType | priority | isDone | description [| time]"
             String[] params = data.split(" \\| ");
 
             String taskType = params[0];
-            boolean done = params[1].equals("1");
-            String description = params[2];
+            Priority priority = Priority.of(params[1]);
+            boolean done = params[2].equals("1");
+            String description = params[3];
 
             if (taskType.equals("T")) {
-                // To-do duke.task
-                return new Todo(description, done);
+                // To-do task
+                return new Todo(description, priority, done);
             } else if (taskType.equals("D")) {
-                // Deadline duke.task
-                String by = params[3];
+                // Deadline task
+                String by = params[4];
 
-                return new Deadline(description, by, done);
+                return new Deadline(description, priority, by, done);
             } else if (taskType.equals("E")) {
-                // Event duke.task
-                String at = params[3];
+                // Event task
+                String at = params[4];
 
-                return new Event(description, at, done);
+                return new Event(description, priority, at, done);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new IllegalArgumentException("Unable to deserialize string " + data + " -- invalid format");
@@ -95,6 +132,6 @@ public class Task {
     public String toString() {
         String doneSymbol = this.isDone ? "[X]" : "[ ]";
 
-        return doneSymbol + " " + this.description;
+        return doneSymbol + " [" + this.priority + "] " + this.description;
     }
 }

@@ -11,7 +11,8 @@ public enum Commands {
     EXIT,
     FIND,
     LIST,
-    MARK;
+    MARK,
+    PRIORITIZE;
 
     /**
      * Factory method for Commands enum. Returns null if there is no corresponding command.

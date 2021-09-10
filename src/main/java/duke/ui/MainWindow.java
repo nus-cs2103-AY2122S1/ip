@@ -54,6 +54,11 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Shows Duke message to GUI.
+     *
+     * @param msg The message to be shown.
+     */
     public void showDukeMessage(String msg) {
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(msg, dukeImage)

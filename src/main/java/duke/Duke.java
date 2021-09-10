@@ -1,7 +1,6 @@
 package duke;
 
 import java.io.IOException;
-
 import java.time.format.DateTimeParseException;
 
 import duke.command.Command;
@@ -14,17 +13,25 @@ import duke.ui.MainWindow;
 import duke.ui.Ui;
 import javafx.application.Application;
 
-/** A class for Duke program. */
+/**
+ * A class for Duke program.
+ */
 public class Duke {
-    private Ui ui;
+    private final Ui ui;
     private TaskList taskList;
-    private Storage storage;
+    private final Storage storage;
     private boolean isExit;
 
     public Duke(MainWindow mw) {
         this("data/duke.txt", mw);
     }
 
+    /**
+     * Returns a Duke object.
+     *
+     * @param filePath The path of the file of storage.
+     * @param mw The JavaFX MainWindow for GUI.
+     */
     public Duke(String filePath, MainWindow mw) {
         ui = new Ui(mw);
         storage = new Storage(filePath);
@@ -42,6 +49,11 @@ public class Duke {
         return this.isExit;
     }
 
+    /**
+     * Processes the response of user input.
+     *
+     * @param response User's response.
+     */
     public void process(String response) {
         try {
             Command c = Parser.parse(response);
@@ -53,11 +65,17 @@ public class Duke {
         }
     }
 
+    /**
+     * Boots the Duke.
+     */
     public void boot() {
         ui.sayGreet();
         ui.sayHelp();
     }
 
+    /**
+     * Shuts down the Duke.
+     */
     public void shutDown() {
         ui.sayGoodBye();
     }

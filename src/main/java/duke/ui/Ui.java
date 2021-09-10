@@ -1,5 +1,6 @@
 package duke.ui;
 
+import duke.task.Priority;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -23,6 +24,7 @@ public class Ui {
     public static final String MESSAGE_FOUND_TASKS = "Found the following task(s):\n"
             + "%1$s";
     public static final String MESSAGE_MARK_TASK = "Marked task %1$d as done";
+    public static final String MESSAGE_PRIORITIZE_TASK = "Prioritized task %1$d become %2$s";
     public static final String MESSAGE_LOADING_SUCCESS = "Data loaded";
     public static final String MESSAGE_LOADING_FAIL = "Failed to load data";
     public static final String MESSAGE_GOODBYE = "Good bye!";
@@ -54,6 +56,10 @@ public class Ui {
 
     public void sayMarkDoneTask(int taskNum) {
         this.say(String.format(MESSAGE_MARK_TASK, taskNum));
+    }
+
+    public void sayPrioritizeTask(int taskNum, Priority priority) {
+        this.say(String.format(MESSAGE_PRIORITIZE_TASK, taskNum, priority));
     }
 
     public void sayList(TaskList tl) {

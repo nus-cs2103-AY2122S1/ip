@@ -1,13 +1,11 @@
 package duke.command;
 
-import duke.storage.Storage;
+import java.io.IOException;
 
+import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-
 import duke.ui.Ui;
-
-import java.io.IOException;
 
 /** A class for add task command. */
 public class AddCommand extends Command {
