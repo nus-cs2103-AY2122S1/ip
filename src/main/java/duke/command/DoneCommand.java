@@ -2,7 +2,9 @@ package duke.command;
 
 import duke.exceptions.OutOfBoundException;
 import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.taskList.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents a command class that marks a task as done.
@@ -15,11 +17,13 @@ public class DoneCommand extends Command {
     /**
      * A constructor for DoneCommand.
      *
-     * @param tasks A list of current Tasks.
-     * @param input User input.
+     * @param tasks   A list of current Tasks.
+     * @param parser  Parser to interpret user input.
+     * @param storage Storage to store data
+     * @param ui      Ui responsible for user interaction.
      */
-    public DoneCommand(TaskList tasks, String input) {
-        super(tasks, input);
+    public DoneCommand(TaskList tasks, Parser parser, Storage storage, Ui ui) {
+        super(tasks, parser, storage, ui);
     }
 
     /**
@@ -29,8 +33,8 @@ public class DoneCommand extends Command {
      * @throws OutOfBoundException If user enter an invalid index.
      */
     public String done() throws OutOfBoundException {
-        Parser parser = new Parser(input);
         int index = parser.getIndex(tasks.getSize());
+        storage.updateTask(tasks.get(index));
         return tasks.done(index);
     }
 }

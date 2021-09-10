@@ -2,7 +2,9 @@ package duke.command;
 
 import duke.exceptions.OutOfBoundException;
 import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.taskList.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents a command class that deletes a task.
@@ -15,11 +17,13 @@ public class DeleteCommand extends Command {
     /**
      * A constructor for DeleteCommand.
      *
-     * @param tasks A list of current Tasks.
-     * @param input User input.
+     * @param tasks   A list of current Tasks.
+     * @param parser  Parser to interpret user input.
+     * @param storage Storage to store data
+     * @param ui      Ui responsible for user interaction.
      */
-    public DeleteCommand(TaskList tasks, String input) {
-        super(tasks, input);
+    public DeleteCommand(TaskList tasks, Parser parser, Storage storage, Ui ui) {
+        super(tasks, parser, storage, ui);
     }
 
     /**
@@ -29,9 +33,8 @@ public class DeleteCommand extends Command {
      * @throws OutOfBoundException If user enter an invalid index.
      */
     public String delete() throws OutOfBoundException {
-        Parser parser = new Parser(input);
         int index = parser.getIndex(tasks.getSize());
-        return "Noted. I've removed this task: \n" + tasks.delete(index) +
-                "\nNow you have " + (tasks.getSize()) + " tasks in the list.";
+        storage.deleteTask(tasks.get(index));
+        return ui.showDelete(tasks.delete(index), String.valueOf(tasks.getSize()));
     }
 }

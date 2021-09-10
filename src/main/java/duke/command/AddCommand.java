@@ -4,10 +4,12 @@ import duke.exceptions.DeadlineFormatException;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.EventFormatException;
 import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.taskList.TaskList;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Todo;
+import duke.ui.Ui;
 
 /**
  * Represents a command class that adds a task.
@@ -20,11 +22,13 @@ public class AddCommand extends Command {
     /**
      * A constructor for AddCommand.
      *
-     * @param tasks A list of current Tasks.
-     * @param input User input.
+     * @param tasks   A list of current Tasks.
+     * @param parser  Parser to interpret user input.
+     * @param storage Storage to store data
+     * @param ui      Ui responsible for user interaction.
      */
-    public AddCommand(TaskList tasks, String input) {
-        super(tasks, input);
+    public AddCommand(TaskList tasks, Parser parser, Storage storage, Ui ui) {
+        super(tasks, parser, storage, ui);
     }
 
     /**
@@ -34,12 +38,11 @@ public class AddCommand extends Command {
      * @throws EmptyDescriptionException If user input an empty description.
      */
     public String addTodo() throws EmptyDescriptionException {
-        Parser parser = new Parser(input);
         String taskDescription = parser.getTodoDescription();
         Todo todo = new Todo(taskDescription, false);
         String addedTask = tasks.addTask(todo);
-        return "Got it. I've added this task: \n" + addedTask + "\nNow you have "
-                + tasks.getSize() + " tasks in the list.";
+        storage.addTask(todo);
+        return ui.showAddTodo(addedTask, String.valueOf(tasks.getSize()));
     }
 
     /**
@@ -50,13 +53,12 @@ public class AddCommand extends Command {
      * @throws DeadlineFormatException   If user input description in the wrong format.
      */
     public String addDeadline() throws EmptyDescriptionException, DeadlineFormatException {
-        Parser parser = new Parser(input);
         String taskDescription = parser.getDeadlineDescription();
         String date = parser.getDeadlineDate();
         Deadline deadline = new Deadline(taskDescription, date, false);
         String addedTask = tasks.addTask(deadline);
-        return "Got it. I've added this task: \n" + addedTask + "\nNow you have "
-                + tasks.getSize() + " tasks in the list.";
+        storage.addTask(deadline);
+        return ui.showAddDeadline(addedTask, String.valueOf(tasks.getSize()));
     }
 
     /**
@@ -67,12 +69,11 @@ public class AddCommand extends Command {
      * @throws EventFormatException      If user input description in the wrong format.
      */
     public String addEvent() throws EmptyDescriptionException, EventFormatException {
-        Parser parser = new Parser(input);
         String taskDescription = parser.getEventDescription();
         String date = parser.getEventDate();
         Event event = new Event(taskDescription, date, false);
         String addedTask = tasks.addTask(event);
-        return "Got it. I've added this task: \n" + addedTask + "\nNow you have "
-                + tasks.getSize() + " tasks in the list.";
+        storage.addTask(event);
+        return ui.showAddEvent(addedTask, String.valueOf(tasks.getSize()));
     }
 }
