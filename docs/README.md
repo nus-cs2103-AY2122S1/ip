@@ -72,6 +72,7 @@ by <time: YYYY-MM-DDThh:mm> : Returns all tasks with deadline due before or at <
 
 all <time: YYYY-MM-DDThh:mm> : Returns all timed tasks with times up till <time>
 ```
+<br>
 
 ### `list` - Displays the current task list
 
@@ -91,6 +92,8 @@ Here are the tasks in your list:
 2.[D][ ] sleep (by: Sep 9 2021 04:00 AM)
 3.[E][ ] lesson (at: Sep 11 2021 11:00 AM
 ```
+<br>
+
 ### `todo <description>` - Adds a todo task
 
 Adds a todo task to the task list.
@@ -108,6 +111,9 @@ Noted. I've added this task:
   [T][ ] eat
 Now you have 3 tasks in the list.
 ```
+
+<br>
+
 ### `event <description> /at <time: YYYY-MM-DDThh:mm>` - Adds an event task
 
 Adds an event task to the task list.
@@ -125,6 +131,8 @@ Noted. I've added this task:
   [E][ ] lesson (at: Jan 12 2021 01:00 PM)
 Now you have 4 tasks in the list.
 ```
+<br>
+
 ### `deadline <description> /by <time: YYYY-MM-DDThh:mm>` - Adds a deadline task
 
 Adds a deadline task to the task list.
@@ -142,6 +150,8 @@ Noted. I've added this task:
   [D][ ] submission (by: Feb 11 2021 11:00 AM)
 Now you have 5 tasks in the list.
 ```
+<br>
+
 ### `find <description>` - Finds tasks based on a keyword
 
 Finds all tasks whose description contains the keyword.
@@ -158,6 +168,7 @@ Tasks that match the keyword are displayed on the screen.
 Here are the matching tasks in your list:
 1.[E][ ] lesson (at: Jan 12 2021 01:00 PM)
 ```
+<br>
 
 ### `done <index>` - Marks a task as done
 
@@ -175,6 +186,7 @@ The task that is marked as done is displayed on the screen with its status updat
 Noted. I've marked this task as done:
 [T][X] eat
 ```
+<br>
 
 ### `delete <index>` - Marks a task as done
 
@@ -193,6 +205,7 @@ Noted. I've removed this task:
 [T][X] eat
 Now you have 3 tasks in the list.
 ```
+<br>
 
 ### `at <time: YYYY-MM-DDThh:mm>` - Finds all event tasks by a certain date and time 
 
@@ -210,6 +223,7 @@ Events that occur at or before the given date and time are displayed on the scre
 Here are the Events happening before Jan 1 2022 12:00 AM:
 [E][ ] lesson (at: Jan 12 2021 01:00 PM) 
 ```
+<br>
 
 ### `by <time: YYYY-MM-DDThh:mm>` - Finds all deadline tasks by a certain date and time
 
@@ -227,6 +241,7 @@ Deadline tasks that are due at or before the given date and time are displayed o
 Here are the Deadlines to be completed by Jan 1 2022 12:00 AM:
 [D][ ] submission (by: Feb 11 2021 11:00 AM)
 ```
+<br>
 
 ### `all <time: YYYY-MM-DDThh:mm>` - Finds all tasks by a certain date and time
 
