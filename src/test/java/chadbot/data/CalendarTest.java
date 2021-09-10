@@ -1,7 +1,7 @@
-package duke.data;
+package chadbot.data;
 
-import duke.DukeException;
-import duke.task.Event;
+import chadbot.ChadException;
+import chadbot.task.Event;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class CalendarTest {
 
     class EventStub extends Event {
-        public EventStub() throws DukeException {
+        public EventStub() throws ChadException {
             super(new String[]{"test", "2015-02-20T06:30"});
         }
     }

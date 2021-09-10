@@ -1,11 +1,11 @@
-package duke.io;
+package chadbot.io;
 
 import java.time.LocalDateTime;
 
-import duke.Command;
-import duke.DukeException;
-import duke.data.TaskList;
-import duke.task.Task;
+import chadbot.ChadException;
+import chadbot.Command;
+import chadbot.data.TaskList;
+import chadbot.task.Task;
 
 public class Ui {
 
@@ -24,7 +24,7 @@ public class Ui {
     }
 
     /**
-     * Returns a formatted String that signifies Duke is launched.
+     * Returns a formatted String that signifies Chad is launched.
      *
      * @return String that shows a welcome message.
      */
@@ -60,12 +60,12 @@ public class Ui {
     }
 
     /**
-     * Returns a formatted String containing the DukeException error message.
+     * Returns a formatted String containing the ChadException error message.
      *
-     * @param e DukeException to whose error message will be returned.
-     * @return String that shows the DukeExeception error message.
+     * @param e ChadException to whose error message will be returned.
+     * @return String that shows the ChadExeception error message.
      */
-    public String showDukeException(DukeException e) {
+    public String showChadException(ChadException e) {
         return format(e.toString());
     }
 

@@ -1,4 +1,4 @@
-package duke.data;
+package chadbot.data;
 
 import java.io.File;
 import java.io.FileNotFoundException;

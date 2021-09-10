@@ -1,10 +1,10 @@
-package duke.task;
+package chadbot.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.DukeException;
+import chadbot.ChadException;
 
 public class Event extends DateTimeTask {
 
@@ -17,13 +17,13 @@ public class Event extends DateTimeTask {
      * Returns a new event.
      *
      * @param input String array containing the description and date and time information of the event.
-     * @throws DukeException If there is missing information or the declaration of the task is of the wrong format.
+     * @throws ChadException If there is missing information or the declaration of the task is of the wrong format.
      * @throws DateTimeParseException If the date and time are entered with the wrong format.
      */
-    public Event(String[] input) throws DukeException, DateTimeParseException {
+    public Event(String[] input) throws ChadException, DateTimeParseException {
         super(input[0]);
         if (input.length != 2) {
-            throw new DukeException(DukeException.Type.EVENT);
+            throw new ChadException(ChadException.Type.EVENT);
         }
         this.at = LocalDateTime.parse(input[1]);
     }

@@ -1,6 +1,6 @@
-package duke;
+package chadbot;
 
-public class DukeException extends Exception {
+public class ChadException extends Exception {
 
     /** String with details on the exception */
     private String errorMessage;
@@ -10,11 +10,11 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Returns a new DukeException object.
+     * Returns a new ChadException object.
      *
      * @param s Type of exception it is initialized to.
      */
-    public DukeException(Type s) {
+    public ChadException(Type s) {
         switch (s) {
         case DESCRIPTION:
             this.errorMessage = "The description of a task cannot be empty.";

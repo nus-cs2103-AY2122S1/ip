@@ -1,6 +1,6 @@
-package duke;
+package chadbot;
 
-import duke.io.Ui;
+import chadbot.io.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -21,11 +21,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Chad chad;
     private boolean isExit;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpeg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
+    private Image chadImage = new Image(this.getClass().getResourceAsStream("/images/chad.png"));
 
     /**
      * Initializes the scroll pane and adds a welcome message to the dialog container
@@ -33,29 +33,29 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.showWelcome(), dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getChadDialog(Ui.showWelcome(), chadImage));
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setChad(Chad d) {
+        chad = d;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Chad's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        setDukeOutput(input, response);
+        String response = chad.getResponse(input);
+        setChadOutput(input, response);
         userInput.clear();
     }
 
-    private void setDukeOutput(String input, String response) {
+    private void setChadOutput(String input, String response) {
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getChadDialog(response, chadImage)
         );
     }
 }

@@ -1,4 +1,4 @@
-package duke.data;
+package chadbot.data;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
@@ -6,12 +6,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import duke.DukeException;
-import duke.task.DateTimeTask;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import chadbot.ChadException;
+import chadbot.task.DateTimeTask;
+import chadbot.task.Deadline;
+import chadbot.task.Event;
+import chadbot.task.Task;
+import chadbot.task.Todo;
 
 public class TaskList {
 
@@ -37,10 +37,10 @@ public class TaskList {
      * Converts saved data to Task objects and initializes item list and calendar with saved data.
      *
      * @param taskArrayList ArrayList of String arrays, each representing a task.
-     * @throws DukeException If data is corrupt or missing information.
+     * @throws ChadException If data is corrupt or missing information.
      * @throws FileNotFoundException If data file cannot be found.
      */
-    public TaskList(ArrayList<String[]> taskArrayList) throws DukeException, FileNotFoundException {
+    public TaskList(ArrayList<String[]> taskArrayList) throws ChadException, FileNotFoundException {
         this.items = new ArrayList<>();
         this.calendar = new Calendar();
         for (String[] taskElements : taskArrayList) {
@@ -52,7 +52,7 @@ public class TaskList {
     }
 
 
-    private Task convertSavedDataToTask(String[] taskElements) throws DukeException {
+    private Task convertSavedDataToTask(String[] taskElements) throws ChadException {
         TaskType taskType = TaskType.valueOf(taskElements[0]);
         Task task;
         switch (taskType) {
@@ -133,11 +133,11 @@ public class TaskList {
      * @param index Index of task to be modified.
      * @param storage Storage object to save modification of task status.
      * @return Task that was modified.
-     * @throws DukeException If index is invalid.
+     * @throws ChadException If index is invalid.
      */
-    public Task markDone(int index, Storage storage) throws DukeException {
+    public Task markDone(int index, Storage storage) throws ChadException {
         if (!isValidIndex(index)) {
-            throw new DukeException(DukeException.Type.INDEX);
+            throw new ChadException(ChadException.Type.INDEX);
         }
         int storedIndex = index - 1;
         Task task = this.items.get(storedIndex);
@@ -183,11 +183,11 @@ public class TaskList {
      * @param index Index of task to be removed.
      * @param storage Storage object to save removal of task.
      * @return Task that was removed.
-     * @throws DukeException If index is invalid.
+     * @throws ChadException If index is invalid.
      */
-    public Task removeTask(int index, Storage storage) throws DukeException {
+    public Task removeTask(int index, Storage storage) throws ChadException {
         if (!isValidIndex(index)) {
-            throw new DukeException(DukeException.Type.INDEX);
+            throw new ChadException(ChadException.Type.INDEX);
         }
         int storedIndex = index - 1;
         storage.removeTask(storedIndex);

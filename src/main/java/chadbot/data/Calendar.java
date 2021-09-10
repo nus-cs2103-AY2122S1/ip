@@ -1,12 +1,12 @@
-package duke.data;
+package chadbot.data;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
-import duke.task.DateTimeTask;
-import duke.task.Deadline;
-import duke.task.Event;
+import chadbot.task.DateTimeTask;
+import chadbot.task.Deadline;
+import chadbot.task.Event;
 
 class Calendar {
 

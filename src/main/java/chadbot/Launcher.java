@@ -1,4 +1,4 @@
-package duke;
+package chadbot;
 
 import javafx.application.Application;
 

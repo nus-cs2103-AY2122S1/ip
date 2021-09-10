@@ -1,10 +1,10 @@
-package duke.io;
+package chadbot.io;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
-import duke.Command;
-import duke.DukeException;
+import chadbot.ChadException;
+import chadbot.Command;
 
 public class Parser {
 
@@ -15,10 +15,10 @@ public class Parser {
      * @return Command object.
      * @throws NumberFormatException If an int is expected to be inputted but the user fails to do so.
      * @throws DateTimeParseException If the user enters the date and time in a wrong format.
-     * @throws DukeException If the user enters the command in a wrong format.
+     * @throws ChadException If the user enters the command in a wrong format.
      */
     public static Command parse(String userRawInput) throws NumberFormatException, DateTimeParseException,
-            DukeException {
+            ChadException {
         String userCommandInput = "";
         String auxiliaryInputs = "";
         int indexOfWhitespace = userRawInput.indexOf(' ');
@@ -54,7 +54,7 @@ public class Parser {
         case "all":
             return new Command(Command.Commands.ALL, LocalDateTime.parse(auxiliaryInputs));
         default:
-            throw new DukeException(DukeException.Type.COMMAND);
+            throw new ChadException(ChadException.Type.COMMAND);
         }
     }
 }

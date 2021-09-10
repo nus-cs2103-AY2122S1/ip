@@ -1,8 +1,8 @@
-package duke.task;
+package chadbot.task;
 
 import java.time.LocalDateTime;
 
-import duke.DukeException;
+import chadbot.ChadException;
 
 public abstract class DateTimeTask extends Task {
 
@@ -10,9 +10,9 @@ public abstract class DateTimeTask extends Task {
      * Constructor for a timed task
      *
      * @param description Description of task.
-     * @throws DukeException If description of task is empty.
+     * @throws ChadException If description of task is empty.
      */
-    public DateTimeTask(String description) throws DukeException {
+    public DateTimeTask(String description) throws ChadException {
         super(description);
     }
 

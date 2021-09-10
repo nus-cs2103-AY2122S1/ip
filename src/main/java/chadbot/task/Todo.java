@@ -1,6 +1,6 @@
-package duke.task;
+package chadbot.task;
 
-import duke.DukeException;
+import chadbot.ChadException;
 
 public class Todo extends Task {
 
@@ -11,9 +11,9 @@ public class Todo extends Task {
      * Returns a new todo task.
      *
      * @param description Description of the todo task.
-     * @throws DukeException If there is missing information or the declaration of the task is of the wrong format.
+     * @throws ChadException If there is missing information or the declaration of the task is of the wrong format.
      */
-    public Todo(String description) throws DukeException {
+    public Todo(String description) throws ChadException {
         super(description);
     }
 

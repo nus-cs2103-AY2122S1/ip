@@ -1,4 +1,4 @@
-package duke;
+package chadbot;
 
 import java.io.IOException;
 
@@ -10,13 +10,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Chad using FXML.
  */
 public class Main extends Application {
 
     private static Stage stage;
-    private Duke duke = new Duke("duke.txt");
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
+    private Chad chad = new Chad("chadbot.txt");
+    private Image chadImage = new Image(this.getClass().getResourceAsStream("/images/chad.png"));
 
     @Override
     public void start(Stage stage) {
@@ -26,9 +26,9 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setChad(chad);
             stage.setTitle("Chadbot");
-            stage.getIcons().add(dukeImage);
+            stage.getIcons().add(chadImage);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,16 +1,16 @@
-package duke;
+package chadbot;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
-import duke.data.Storage;
-import duke.data.TaskList;
-import duke.io.Ui;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import chadbot.data.Storage;
+import chadbot.data.TaskList;
+import chadbot.io.Ui;
+import chadbot.task.Deadline;
+import chadbot.task.Event;
+import chadbot.task.Task;
+import chadbot.task.Todo;
 
 public class Command {
 
@@ -101,10 +101,10 @@ public class Command {
      * @param ui Ui object used to print to screen.
      * @param storage Storage object used to save any modifications
      * @return String that shows the command has been executed.
-     * @throws DukeException If there is missing information or the declaration of the task is of the wrong format.
+     * @throws ChadException If there is missing information or the declaration of the task is of the wrong format.
      * @throws IOException  If data file cannot be saved to.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException,
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws ChadException, IOException,
             DateTimeParseException, NumberFormatException {
         assert this.command != null : "Command should not be null";
         assert this.type != null : "Type should not be null";
@@ -120,7 +120,7 @@ public class Command {
         case DATETIME_INPUT:
             return executeDateTimeInputCommand(tasks, ui);
         default:
-            throw new DukeException(DukeException.Type.EXECUTE);
+            throw new ChadException(ChadException.Type.EXECUTE);
         }
     }
 
@@ -129,7 +129,7 @@ public class Command {
         return ui.displayDateTimeFilteredCommand(this.command, tasks, this.dateTime);
     }
 
-    private String executeStrArrInputCommand(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    private String executeStrArrInputCommand(TaskList tasks, Ui ui, Storage storage) throws ChadException, IOException {
         assert this.subInputs != null : "subInputs should not be null";
         Task task;
         if (this.command.equals(Commands.DEADLINE)) {
@@ -137,14 +137,14 @@ public class Command {
         } else if (this.command.equals(Commands.EVENT)) {
             task = new Event(subInputs);
         } else {
-            throw new DukeException(DukeException.Type.EXECUTE);
+            throw new ChadException(ChadException.Type.EXECUTE);
         }
         tasks.addItem(task, storage);
         storage.save();
         return ui.displayAddOrSingleInputCommand(this.command, tasks);
     }
 
-    private String executeStrInputCommand(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    private String executeStrInputCommand(TaskList tasks, Ui ui, Storage storage) throws ChadException, IOException {
         assert this.description != null : "Description should not be null";
         if (this.command.equals(Commands.TODO)) {
             tasks.addItem(new Todo(this.description), storage);
@@ -153,28 +153,28 @@ public class Command {
         } else if (this.command.equals(Commands.FIND)) {
             return ui.displayFindTaskCommand(this.command, this.description, tasks);
         }
-        throw new DukeException(DukeException.Type.EXECUTE);
+        throw new ChadException(ChadException.Type.EXECUTE);
     }
 
-    private String executeIntInputCommand(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    private String executeIntInputCommand(TaskList tasks, Ui ui, Storage storage) throws ChadException, IOException {
         Task t;
         if (this.command.equals(Commands.DONE)) {
             t = tasks.markDone(this.index, storage);
         } else if (this.command.equals(Commands.DELETE)) {
             t = tasks.removeTask(this.index, storage);
         } else {
-            throw new DukeException(DukeException.Type.EXECUTE);
+            throw new ChadException(ChadException.Type.EXECUTE);
         }
         storage.save();
         return ui.displayTaskModificationCommand(this.command, t, tasks);
     }
 
-    private String executeSingleInputCommand(TaskList tasks, Ui ui) throws DukeException {
+    private String executeSingleInputCommand(TaskList tasks, Ui ui) throws ChadException {
         if (this.command.equals(Commands.BYE)) {
             Main.exit();
         } else if (this.command.equals(Commands.LIST) || this.command.equals(Commands.HELP)) {
             return ui.displayAddOrSingleInputCommand(this.command, tasks);
         }
-        throw new DukeException(DukeException.Type.EXECUTE);
+        throw new ChadException(ChadException.Type.EXECUTE);
     }
 }

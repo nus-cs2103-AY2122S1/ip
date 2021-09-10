@@ -1,6 +1,6 @@
-package duke.task;
+package chadbot.task;
 
-import duke.DukeException;
+import chadbot.ChadException;
 
 public abstract class Task {
 
@@ -13,11 +13,11 @@ public abstract class Task {
      * Returns a new task.
      *
      * @param description Description of the task.
-     * @throws DukeException If there is missing information or the declaration of the task is of the wrong format.
+     * @throws ChadException If there is missing information or the declaration of the task is of the wrong format.
      */
-    public Task(String description) throws DukeException {
+    public Task(String description) throws ChadException {
         if (description.equals("")) {
-            throw new DukeException(DukeException.Type.DESCRIPTION);
+            throw new ChadException(ChadException.Type.DESCRIPTION);
         }
         this.description = description;
         this.isDone = false;
