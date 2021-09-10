@@ -1,7 +1,6 @@
 package kermit;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import kermit.tasks.Task;
@@ -58,18 +57,19 @@ public class TaskList extends ArrayList<Task> {
     /**
      * Filters tasks that contain a string.
      *
+     * Credits to baeldung for use of filter stream which has been modified
+     * https://www.baeldung.com/java-stream-filter-lambda
+     *
      * @param searchString String to search for.
      * @return ArrayList of all tasks that contain searchString.
      */
     public TaskList filter(String searchString) {
         TaskList filteredTasks = new TaskList();
-        Iterator<Task> taskIter = super.iterator();
-        while (taskIter.hasNext()) {
-            Task task = taskIter.next();
-            if (task.getDescription().contains(searchString)) {
-                filteredTasks.add(task);
-            }
-        }
+
+        super.stream()
+                .filter(task -> task.getDescription().contains(searchString))
+                .forEach(task -> filteredTasks.add(task));
+
         return filteredTasks;
     }
 
