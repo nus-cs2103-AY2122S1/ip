@@ -1,6 +1,3 @@
-E | 1 | hello | 1999-12-12
-T | 0 | hello
-T | 0 | how are you
-T | 0 | test this
-T | 0 | hello
-T | 0 | i am you
+T | 0 | hello | 
+T | 0 | nice | really
+T | 0 | facebook | hello really nice

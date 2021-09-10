@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.Arrays;
+
 import duke.exception.DukeException;
 import duke.exception.DukeIllegalFormatException;
 
@@ -14,7 +16,11 @@ public abstract class Task {
     /**
      * True if the task is done.
      */
-    protected Boolean isDone;
+    protected boolean isDone;
+    /**
+     * Tags of the tasks.
+     */
+    protected String[] tags;
 
     /**
      * Constructs a Task with the specified description.
@@ -22,11 +28,12 @@ public abstract class Task {
      * @param description Description of the task.
      * @throws DukeException If the description does not follow the format.
      */
-    public Task(String description) throws DukeException {
+    public Task(String description, String[] tags) throws DukeException {
         if (description.isEmpty()) {
             throw new DukeIllegalFormatException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
         this.description = description;
+        this.tags = tags;
         this.isDone = false;
     }
 
@@ -59,7 +66,19 @@ public abstract class Task {
      * @return String representation of the task to be saved in the db.
      */
     public String toDataString() {
-        return " | " + (this.getStatusIcon().equals("X") ? '1' : '0') + " | " + this.description;
+        return " | " + (this.getStatusIcon().equals("X") ? '1' : '0') + " | " + this.description + " | " + String
+            .join(" ", this.tags);
+    }
+
+    /**
+     * Returns true if this task contains the keyword.
+     *
+     * @param keyword Keyword.
+     * @return true if this task contains the keyoword.
+     */
+    public boolean contains(String keyword) {
+        // TODO: contain partially
+        return this.description.contains(keyword) || Arrays.asList(this.tags).contains(keyword);
     }
 
     private String getStatusIcon() {

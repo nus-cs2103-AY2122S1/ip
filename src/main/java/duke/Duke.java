@@ -88,7 +88,7 @@ public class Duke {
         try {
             Command c = Parser.parse(input);
             c.execute(this, tasks, storage);
-            return this.getResponse();
+            return this.response;
         } catch (DukeException e) {
             return e.getMessage();
         }
@@ -103,7 +103,7 @@ public class Duke {
         Command c = new WelcomeCommand();
         try {
             c.execute(this, tasks, storage);
-            return this.getResponse();
+            return this.response;
         } catch (DukeException e) {
             return e.getMessage();
         }
@@ -121,7 +121,7 @@ public class Duke {
                 ui.showLine();
                 Command c = Parser.parse(fullCommand);
                 c.execute(this, tasks, storage);
-                ui.showMessage(this.getResponse());
+                ui.showMessage(this.response);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
@@ -140,7 +140,7 @@ public class Duke {
         } catch (DukeException e) {
             ui.showError(e.getMessage());
         }
-        ui.showMessage(this.getResponse());
+        ui.showMessage(this.response);
         ui.showLine();
     }
 

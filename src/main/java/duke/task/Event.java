@@ -27,8 +27,8 @@ public class Event extends Task {
      * @param eventDate   Date of the event.
      * @throws DukeException If either the description or deadline does not follow the format.
      */
-    public Event(String description, String eventDate) throws DukeException {
-        super(description);
+    public Event(String description, String eventDate, String[] tags) throws DukeException {
+        super(description, tags);
         if (eventDate.isEmpty()) {
             throw new DukeIllegalFormatException("☹ OOPS!!! The date of an event cannot be empty.");
         }
@@ -45,12 +45,13 @@ public class Event extends Task {
     public String toString() {
         return "[" + LABEL + "]" + super.toString() + " (at: " + eventDate
             .format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+            + ")" + " (tags: " + String.join(", ", this.tags)
             + ")";
     }
 
     @Override
     public String toDataString() {
-        return LABEL + super.toDataString() + " | " + eventDate;
+        return LABEL + super.toDataString() + " | " + eventDate + " | " + String.join(" ", this.tags);
     }
 }
 

@@ -14,24 +14,26 @@ import duke.task.TaskList;
 public class EventCommand extends AddCommand {
 
     /**
-     * Constructs an EventCommand with the specified description.
+     * Constructs an EventCommand with the specified command.
      *
-     * @param description Description of the command.
+     * @param command Body of the command.
      */
-    public EventCommand(String description) {
-        super(description);
+    public EventCommand(String command) {
+        super(command);
     }
 
     @Override
     public void execute(Duke duke, TaskList tasks, Storage storage) throws DukeException {
-        String[] line = description.split(" /at ");
-        if (line.length != 2) {
+        String[] line = command.split(" /at | /tag ");
+        if (line.length < 2) {
             throw new DukeIllegalFormatException(
                 "☹ OOPS!!! Seems like you have entered a wrong format for an event task. "
-                    + "Try this instead: event <description> /at <date>"
+                    + "Try this instead: event <command> /at <date>"
             );
         }
-        Task task = new Event(line[0], line[1]);
+        Task task;
+        String[] tags = line.length > 2 ? line[2].split(" ") : new String[0];
+        task = new Event(line[0], line[1], tags);
         tasks.add(task, storage);
 
         String message = "Got it. I've added this task:\n  " + task + "\nNow you have " + tasks.toArray().length

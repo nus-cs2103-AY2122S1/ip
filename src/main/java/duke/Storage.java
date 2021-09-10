@@ -76,6 +76,12 @@ public class Storage {
         }
     }
 
+
+    private String[] getTagsFromRow(String[] row, int tagsIndex) {
+        String[] tags = row.length > tagsIndex ? row[tagsIndex].split(" ") : new String[0];
+        return tags;
+    }
+
     /**
      * Loads task from the file.
      *
@@ -97,7 +103,8 @@ public class Storage {
             try {
                 switch (row[0]) {
                 case "T": {
-                    Todo todo = new Todo(row[2]);
+                    String[] tags = getTagsFromRow(row, 3);
+                    Todo todo = new Todo(row[2], tags);
                     list.add(todo);
                     if (isDone) {
                         todo.markAsDone();
@@ -106,7 +113,8 @@ public class Storage {
                 }
                 case "E": {
                     validateRow(row, 4);
-                    Event event = new Event(row[2], row[3]);
+                    String[] tags = getTagsFromRow(row, 4);
+                    Event event = new Event(row[2], row[3], tags);
                     list.add(event);
                     if (isDone) {
                         event.markAsDone();
@@ -115,7 +123,8 @@ public class Storage {
                 }
                 case "D": {
                     validateRow(row, 4);
-                    Deadline deadline = new Deadline(row[2], row[3]);
+                    String[] tags = getTagsFromRow(row, 4);
+                    Deadline deadline = new Deadline(row[2], row[3], tags);
                     list.add(deadline);
                     if (isDone) {
                         deadline.markAsDone();

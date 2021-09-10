@@ -5,16 +5,16 @@ package duke.command;
  */
 public abstract class AddCommand extends Command {
     /**
-     * Description of the task
+     * Body of the command
      */
-    protected String description;
+    protected String command;
 
     /**
-     * Constructs an AddCommand with the specified description.
+     * Constructs an AddCommand with the specified command.
      *
-     * @param description Description of the command.
+     * @param command Body of the command.
      */
-    public AddCommand(String description) {
-        this.description = description;
+    public AddCommand(String command) {
+        this.command = command;
     }
 }

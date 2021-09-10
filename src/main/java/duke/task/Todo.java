@@ -14,13 +14,14 @@ public class Todo extends Task {
      * @param description Description of the todo.
      * @throws DukeException If the description does not follow the format.
      */
-    public Todo(String description) throws DukeException {
-        super(description);
+    public Todo(String description, String[] tags) throws DukeException {
+        super(description, tags);
     }
 
     @Override
     public String toString() {
-        return "[" + LABEL + "]" + super.toString();
+        return "[" + LABEL + "]" + super.toString() + " (tags: " + String.join(", ", this.tags)
+            + ")";
     }
 
     @Override

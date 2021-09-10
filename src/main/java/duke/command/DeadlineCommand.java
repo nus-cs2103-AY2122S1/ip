@@ -13,25 +13,27 @@ import duke.task.TaskList;
  */
 public class DeadlineCommand extends AddCommand {
     /**
-     * Constructs an DeadlineCommand with the specified description.
+     * Constructs an DeadlineCommand with the specified command.
      *
-     * @param description Description of the command.
+     * @param command Bodu of the command.
      */
-    public DeadlineCommand(String description) {
-        super(description);
+    public DeadlineCommand(String command) {
+        super(command);
     }
 
     @Override
     public void execute(Duke duke, TaskList tasks, Storage storage)
         throws DukeException {
-        String[] line = description.split(" /by ");
-        if (line.length != 2) {
+        String[] line = command.split(" /by | /tag ");
+        if (line.length < 2) {
             throw new DukeIllegalFormatException(
                 "☹ OOPS!!! Seems like you have entered a wrong format for a deadline task. "
-                    + "Try this instead: deadline <description> /by <date>"
+                    + "Try this instead: deadline <command> /by <date>"
             );
         }
-        Task task = new Deadline(line[0], line[1]);
+        Task task;
+        String[] tags = line.length > 2 ? line[2].split(" ") : new String[0];
+        task = new Deadline(line[0], line[1], tags);
         tasks.add(task, storage);
 
         String message = "Got it. I've added this task:\n  "

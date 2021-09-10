@@ -27,8 +27,8 @@ public class Deadline extends Task {
      * @param deadlineDate Deadline.
      * @throws DukeException If either the description or deadline does not follow the format.
      */
-    public Deadline(String description, String deadlineDate) throws DukeException {
-        super(description);
+    public Deadline(String description, String deadlineDate, String[] tags) throws DukeException {
+        super(description, tags);
         if (deadlineDate.isEmpty()) {
             throw new DukeIllegalFormatException("☹ OOPS!!! The deadline cannot be empty.");
         }
@@ -43,14 +43,15 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[" + LABEL + "]" + super.toString() + " (deadlineDate: " + deadlineDate
+        return "[" + LABEL + "]" + super.toString() + " (deadlineDate: " + this.deadlineDate
             .format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+            + ")" + " (tags: " + String.join(", ", this.tags)
             + ")";
     }
 
     @Override
     public String toDataString() {
-        return LABEL + super.toDataString() + " | " + deadlineDate;
+        return LABEL + super.toDataString() + " | " + this.deadlineDate + " | " + String.join(" ", this.tags);
     }
 
 }
