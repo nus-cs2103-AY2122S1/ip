@@ -44,7 +44,6 @@ public class Duke {
     public void run(String input) {
         Ui.welcome();
         commandExecutor.execute(input);
-        Storage.saveList();
     }
 
     /**
@@ -72,4 +71,3 @@ public class Duke {
         return response;
     }
 }
-

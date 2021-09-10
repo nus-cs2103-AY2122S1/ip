@@ -1,6 +1,9 @@
 package duke.command;
 
+import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.taskList.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents an abstract Command class.
@@ -10,16 +13,22 @@ import duke.taskList.TaskList;
  */
 public abstract class Command {
     protected TaskList tasks;
-    protected String input;
+    protected Parser parser;
+    protected Storage storage;
+    protected Ui ui;
 
     /**
      * A constructor for Command.
      *
-     * @param tasks A list of current Tasks.
-     * @param input User input.
+     * @param tasks   A list of current Tasks.
+     * @param parser  Parser to interpret user input.
+     * @param storage Storage to store data
+     * @param ui      Ui responsible for user interaction.
      */
-    public Command(TaskList tasks, String input) {
+    public Command(TaskList tasks, Parser parser, Storage storage, Ui ui) {
         this.tasks = tasks;
-        this.input = input;
+        this.parser = parser;
+        this.storage = storage;
+        this.ui = ui;
     }
 }
