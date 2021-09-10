@@ -21,8 +21,6 @@ public class Storage {
      * Returns a TaskList object de-serialised from the local data.
      * If no local data exists, returns an empty TaskList object.
      *
-     * Takes no parameters.
-     *
      * @return A TaskList object that will contain all the tasks given to Duke by the user.
      * @throws DukeException if there is an error loading the local data.
      */

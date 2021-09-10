@@ -11,8 +11,6 @@ public class TagList {
 
     /**
      * Constructor for the TagList class.
-     *
-     * Takes no parameters.
      */
     public TagList() {
         this.tags = new ArrayList<>();
@@ -29,8 +27,6 @@ public class TagList {
 
     /**
      * Returns an integer corresponding to the size of the TagList, i.e. the number of tags in the TagList.
-     *
-     * Takes no parameters.
      *
      * @return The size of the TagList.
      */

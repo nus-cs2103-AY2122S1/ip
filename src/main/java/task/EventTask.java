@@ -54,7 +54,7 @@ public class EventTask extends Task {
      */
     public String getTime() {
         if (storedTime.isEmpty()) {
-            return time.format(outputFormatter);
+            return time.format(OUTPUT_FORMATTER);
         } else {
             return storedTime;
         }
@@ -73,8 +73,6 @@ public class EventTask extends Task {
     /**
      * Returns the String representation of the EventTask object, showing the state and the task.
      *
-     * Takes no parameters.
-     *
      * @return A String enumerating this EventTask object.
      */
     @Override
@@ -84,8 +82,6 @@ public class EventTask extends Task {
 
     /**
      * Returns the storage format of this EventTask object.
-     *
-     * Takes no parameters.
      *
      * @return A String representation of the EventTask object, formatted for storage inside local hard disk.
      */

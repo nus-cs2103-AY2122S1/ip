@@ -13,7 +13,7 @@ public abstract class Command {
 
     protected String input;
     protected String tags;
-    protected DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy kkmm");
+    protected DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("d/MM/yyyy kkmm");
 
     /**
      * Constructor for the Command class.

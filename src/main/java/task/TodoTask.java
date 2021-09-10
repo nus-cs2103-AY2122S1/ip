@@ -48,8 +48,6 @@ public class TodoTask extends Task {
     /**
      * Returns the String representation of the TodoTask object, showing the state and the task.
      *
-     * Takes no parameters.
-     *
      * @return A String enumerating this TodoTask object.
      */
     @Override
@@ -59,8 +57,6 @@ public class TodoTask extends Task {
 
     /**
      * Returns the storage format of this TodoTask object.
-     *
-     * Takes no parameters.
      *
      * @return A String representation of the TodoTask object, formatted for storage inside local hard disk.
      */

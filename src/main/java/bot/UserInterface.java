@@ -15,8 +15,6 @@ public class UserInterface {
 
     /**
      * Constructor for the UserInterface class.
-     *
-     * Takes no parameters.
      */
     UserInterface() {
         this.reader = new Scanner(System.in);

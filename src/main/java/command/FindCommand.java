@@ -27,6 +27,7 @@ public class FindCommand extends Command {
      * @return A String representation of Duke's response according to the input given by the user.
      * @throws DukeException if the input given is not of the correct format.
      */
+    @Override
     public String execute(TaskList list, UserInterface ui) throws DukeException {
 
         String key = input.substring(5);

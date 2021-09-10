@@ -36,8 +36,6 @@ public class Bot extends Application {
 
     /**
      * Constructor for the Bot class.
-     *
-     * Takes no parameters.
      */
     public Bot() {
 
@@ -53,8 +51,6 @@ public class Bot extends Application {
 
     /**
      * Starts the main Duke bot and executes the main runtime operations of Duke.
-     *
-     * Takes no parameters.
      */
     @Override
     public void start(Stage stage) {
@@ -136,8 +132,6 @@ public class Bot extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply.
      * Appends them afterwards to the dialog container.
      * Clears the user input after processing.
-     *
-     * Takes no parameters.
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
@@ -166,8 +160,6 @@ public class Bot extends Application {
 
     /**
      * Stops the main Duke bot.
-     *
-     * Takes no parameters.
      */
     public static void stopBot() {
         Platform.exit();

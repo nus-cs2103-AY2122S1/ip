@@ -32,6 +32,7 @@ public class EventCommand extends Command {
      * @return A String representation of Duke's response according to the input given by the user.
      * @throws DukeException if the input given is not of the correct format.
      */
+    @Override
     public String execute(TaskList list, UserInterface ui) throws DukeException {
 
         int position = input.indexOf(" /at");
@@ -44,7 +45,7 @@ public class EventCommand extends Command {
             throw new DukeException("The date of an event cannot be empty. Please try again!");
         } else {
             try {
-                LocalDateTime time = LocalDateTime.parse(newTime.trim(), inputFormatter);
+                LocalDateTime time = LocalDateTime.parse(newTime.trim(), INPUT_FORMATTER);
                 EventTask newTask;
                 if (!tags.isEmpty()) {
                     newTask = new EventTask(newEvent, time, tags);

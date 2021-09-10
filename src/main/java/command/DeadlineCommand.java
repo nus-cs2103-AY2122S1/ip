@@ -32,6 +32,7 @@ public class DeadlineCommand extends Command {
      * @return A String representation of Duke's response according to the input given by the user.
      * @throws DukeException if the input given is not of the correct format.
      */
+    @Override
     public String execute(TaskList list, UserInterface ui) throws DukeException {
 
         int position = input.indexOf(" /by");
@@ -44,7 +45,7 @@ public class DeadlineCommand extends Command {
             throw new DukeException("The date of a deadline cannot be empty. Please try again!");
         } else {
             try {
-                LocalDateTime time = LocalDateTime.parse(newTime.trim(), inputFormatter);
+                LocalDateTime time = LocalDateTime.parse(newTime.trim(), INPUT_FORMATTER);
                 DeadlineTask newTask;
                 if (!tags.isEmpty()) {
                     newTask = new DeadlineTask(newDeadline, time, tags);

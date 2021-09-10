@@ -54,7 +54,7 @@ public class DeadlineTask extends Task {
      */
     public String getTime() {
         if (storedTime.isEmpty()) {
-            return time.format(outputFormatter);
+            return time.format(OUTPUT_FORMATTER);
         } else {
             return storedTime;
         }
@@ -73,8 +73,6 @@ public class DeadlineTask extends Task {
     /**
      * Returns the String representation of the DeadlineTask object, showing the state and the task.
      *
-     * Takes no parameters.
-     *
      * @return A String enumerating this DeadlineTask object.
      */
     @Override
@@ -84,8 +82,6 @@ public class DeadlineTask extends Task {
 
     /**
      * Returns the storage format of this DeadlineTask object.
-     *
-     * Takes no parameters.
      *
      * @return A String representation of the DeadlineTask object, formatted for storage inside local hard disk.
      */

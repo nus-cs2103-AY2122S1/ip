@@ -13,8 +13,7 @@ public class Task {
     protected String task;
     protected boolean isDone;
     protected TagList tags;
-    protected DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy kkmm");
-    protected DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy - hh:mm a");
+    protected DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy - hh:mm a");
 
     /**
      * Constructor for the Task class.
@@ -76,8 +75,6 @@ public class Task {
     /**
      * Returns the String representation of the Task object, showing the state and the task.
      *
-     * Takes no parameters.
-     *
      * @return A String enumerating this Task object.
      */
     public String getTaskState() {
@@ -108,8 +105,6 @@ public class Task {
 
     /**
      * Sets the current task state as completed.
-     *
-     * Takes no parameters.
      */
     public void markAsDone() {
         this.isDone = true;
@@ -140,8 +135,6 @@ public class Task {
 
     /**
      * Returns the storage format of this Task object.
-     *
-     * Takes no parameters.
      *
      * @return A String representation of the Task object, formatted for storage inside local hard disk.
      */

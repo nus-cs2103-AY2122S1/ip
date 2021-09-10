@@ -13,8 +13,6 @@ public class TaskList {
 
     /**
      * Constructor for the TaskList class.
-     *
-     * Takes no parameters.
      */
     TaskList() {
         this.tasks = new ArrayList<>();
@@ -22,8 +20,6 @@ public class TaskList {
 
     /**
      * Returns an ArrayList of Task objects currently stored in the TaskList.
-     *
-     * Takes no parameters.
      *
      * @return An ArrayList of Task objects.
      */
@@ -80,8 +76,6 @@ public class TaskList {
 
     /**
      * Returns an integer corresponding to the size of the TaskList, i.e. the number of tasks in the TaskList.
-     *
-     * Takes no parameters.
      *
      * @return The size of the TaskList.
      */
