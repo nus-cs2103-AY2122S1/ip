@@ -15,7 +15,7 @@ import pika.ui.Ui;
  * AddCommand class to handle all the adding of events to the list.
  */
 public class AddCommand extends Command {
-    private final Task inputTask;
+    private Task inputTask;
 
     /**
      * Constructor for AddCommand.
@@ -70,7 +70,6 @@ public class AddCommand extends Command {
      * @return The add task string for the Pikabot to say
      * @throws IOException if the filepath has any issues
      */
-
     @Override
     public String execute(TaskList taskList, Storage storage) throws IOException {
         taskList.add(this.inputTask);

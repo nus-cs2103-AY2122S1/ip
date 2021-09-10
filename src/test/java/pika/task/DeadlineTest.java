@@ -21,6 +21,6 @@ public class DeadlineTest {
     @Test
     public void test3() {
         assertEquals("[D][X] Test Deadline (by: Nov 10 2021 0900PM)" ,
-                new Deadline("Test Deadline", "2021-11-10 21:00").done());
+                new Deadline("Test Deadline", "2021-11-10 21:00").markAsDone());
     }
 }

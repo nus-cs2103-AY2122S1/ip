@@ -1,5 +1,6 @@
 package pika.command;
 
+import pika.exception.PikaException;
 import pika.ui.Storage;
 import pika.ui.TaskList;
 import pika.ui.Ui;
@@ -12,8 +13,11 @@ public class ExitCommand extends Command { //ExitCommand to handle the shutting 
     /**
      * Constructor for the ExitCommand Class.
      */
-    public ExitCommand() {
+    public ExitCommand(String details) throws PikaException {
         super(false);
+        if (details != null) {
+            throw new PikaException("Pika pi!! I'm sorry, but I don't know what that means :-(");
+        }
     }
 
     /**

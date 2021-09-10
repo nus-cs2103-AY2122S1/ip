@@ -7,13 +7,14 @@ import java.util.ArrayList;
 import pika.exception.PikaException;
 import pika.task.Deadline;
 import pika.task.Event;
+import pika.task.Tag;
 import pika.task.Task;
 import pika.task.TaskTime;
 import pika.task.Todo;
 
 public class TaskList { //TaskList class used to store the tasks and will be updated from the Command class
     protected int count;
-    private final ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /**
      * Constructor for TaskList.
@@ -58,11 +59,17 @@ public class TaskList { //TaskList class used to store the tasks and will be upd
             if (splits[1].equals("1")) {
                 t.markAsDone();
             }
+            if (splits.length == 5) {
+                t.addTag(parseAsTag(splits[4]));
+            }
             break;
         case "E":
             t = new Event(splits[2], TaskTime.unconvertDateTime(splits[3]));
             if (splits[1].equals("1")) {
                 t.markAsDone();
+            }
+            if (splits.length == 5) {
+                t.addTag(parseAsTag(splits[4]));
             }
             break;
         case "T":
@@ -70,11 +77,29 @@ public class TaskList { //TaskList class used to store the tasks and will be upd
             if (splits[1].equals("1")) {
                 t.markAsDone();
             }
+            if (splits.length == 4) {
+                t.addTag(parseAsTag(splits[3]));
+            }
             break;
         default:
             throw new PikaException("Your file format is invalid");
         }
         return t;
+    }
+
+    /**
+     * Parses the line for tags into an arrayList of tags
+     *
+     * @param line The line of tags from the laoded txt file
+     * @return The arrayList of tags to be added to the task
+     */
+    public ArrayList<Tag> parseAsTag(String line) {
+        ArrayList<Tag> tags = new ArrayList<>(30);
+        String[] splits = line.split("#");
+        for (int i = 1; i < splits.length; i++) {
+            tags.add(new Tag(splits[i]));
+        }
+        return tags;
     }
 
     /**
@@ -153,7 +178,11 @@ public class TaskList { //TaskList class used to store the tasks and will be upd
         } else {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < count; i++) {
-                sb.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
+                sb.append(i + 1)
+                        .append(". ")
+                        .append(tasks.get(i))
+                        .append(tasks.get(i).getTags())
+                        .append("\n");
             }
             return sb.toString();
         }

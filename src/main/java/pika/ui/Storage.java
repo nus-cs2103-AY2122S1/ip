@@ -12,7 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Storage { //Storage class used to handle the writing of the file after each actions
-    private static Path txtPath;
+    private static Path listPath;
 
     /**
      * Constructor for Storage Class.
@@ -25,7 +25,7 @@ public class Storage { //Storage class used to handle the writing of the file af
         if (!Files.exists(filePath)) {
             new File(filePath.toString()).mkdirs();
         }
-        txtPath = Paths.get(path, "task.txt");
+        listPath = Paths.get(path, "task.txt");
     }
 
     /**
@@ -35,22 +35,26 @@ public class Storage { //Storage class used to handle the writing of the file af
      * @throws FileNotFoundException Handles if the files was not there previously, meaning need make new file
      */
 
-    public BufferedReader load() throws FileNotFoundException {
-        return new BufferedReader(new FileReader(txtPath.toString()));
+    public BufferedReader loadTasks() throws FileNotFoundException {
+        return new BufferedReader(new FileReader(listPath.toString()));
+    }
+
+    public BufferedReader loadNotes() throws FileNotFoundException {
+        return new BufferedReader(new FileReader(listPath.toString()));
     }
 
     /**
      * Updates the text each time after any new action is done.
      *
-     * @param listArray The list of tasks that the bot is using
+     * @param tasks The list of tasks that the bot is using
      * @throws IOException handles if the filepath/file has issues
      */
 
-    public static void updateText(TaskList listArray) throws IOException {
+    public static void updateText(TaskList tasks) throws IOException {
         BufferedWriter botList = new BufferedWriter(
-                new FileWriter(txtPath.toString()));
-        for (int i = 0; i < listArray.getCount(); i++) {
-            botList.write(listArray.get(i).write() + "\n");
+                new FileWriter(listPath.toString()));
+        for (int i = 0; i < tasks.getCount(); i++) {
+            botList.write(tasks.get(i).write() + "\n");
         }
         botList.close();
     }

@@ -85,4 +85,15 @@ public class Ui { //IU Class used to handle the interactions with the user.
     public static String loadingErrorMessage() {
         return "Pika pi!! It seems like your file format is incorrect!";
     }
+
+    /**
+     * Prints the message to inform the user the tag has been added.
+     *
+     * @param index Index of the task that is to be tagged
+     * @param tag The tag name
+     * @return The tagged message
+     */
+    public static String addedTagMessage(int index, String tag) {
+        return "pika pika! I've added tag '" + tag + "' to task " + index + "!";
+    }
 }
