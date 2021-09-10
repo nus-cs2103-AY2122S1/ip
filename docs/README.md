@@ -2,7 +2,7 @@
 Welcome to Lifeline! Your all-in-one task manager! Don't worry about forgetting important tasks anymore! Lifeline helps 
 you to remember your todos, upcoming deadlines and events.
 
-![Lifeline CLI](https://github.com/Imranr2/ip/tree/master/docs/Ui.png)
+![Lifeline CLI](/docs/Ui.png)
 
 ## Features
 1. Add 3 different types of tasks 
@@ -34,7 +34,7 @@ efficiently find a task using a keyword.
 
 ### CLI
 
-![Lifeline CLI](https://github.com/Imranr2/ip/tree/master/docs/CLI.png)
+![Lifeline CLI](/docs/CLI.png)
 
 If you do not like to use GUI, you can run the following command to launch the CLI version of Lifeline.
 
@@ -59,7 +59,7 @@ Example of usage:
 
 Expected outcome:
 
-![Lifeline response to todo](https://github.com/Imranr2/ip/tree/master/docs/todo.png)
+![Lifeline response to todo](/docs/todo.png)
 
 ### `deadline <description> /by <date> <time>` - Adds a Deadline
 
@@ -73,7 +73,7 @@ Example of usage:
 
 Expected outcome:
 
-![Lifeline response to deadline](https://github.com/Imranr2/ip/tree/master/docs/deadline.png)
+![Lifeline response to deadline](/docs/deadline.png)
 
 ### `event <description> /at <date> <startTime> <endTime>` - Adds a Event
 
@@ -87,7 +87,7 @@ Example of usage:
 
 Expected outcome:
 
-![Lifeline response to event](https://github.com/Imranr2/ip/tree/master/docs/event.png)
+![Lifeline response to event](/docs/event.png)
 
 ### `find <keyword>` - Finds a task
 
@@ -101,7 +101,7 @@ Example of usage:
 
 Expected outcome:
 
-![Lifeline response to event](https://github.com/Imranr2/ip/tree/master/docs/find.png)
+![Lifeline response to event](/docs/find.png)
 
 ### `list` - Lists all the tasks you have added
 
@@ -116,7 +116,7 @@ Example of usage:
 
 Expected outcome:
 
-![Lifeline response to event](https://github.com/Imranr2/ip/tree/master/docs/list.png)
+![Lifeline response to event](/docs/list.png)
 
 ### `done <index>` - Marks tasks as completed
 
@@ -131,7 +131,7 @@ Example of usage:
 
 Expected outcome:
 
-![Lifeline response to event](https://github.com/Imranr2/ip/tree/master/docs/done.png)
+![Lifeline response to event](/docs/done.png)
 
 ### `delete <index>` - Delete tasks
 
@@ -145,7 +145,7 @@ Example of usage:
 
 Expected outcome:
 
-![Lifeline response to event](https://github.com/Imranr2/ip/tree/master/docs/delete.png)
+![Lifeline response to event](/docs/delete.png)
 
 ### `help` - Prints the help message
 
@@ -159,7 +159,7 @@ Example of usage:
 
 Expected outcome:
 
-![Lifeline response to event](https://github.com/Imranr2/ip/tree/master/docs/help.png)
+![Lifeline response to event](/docs/help.png)
 
 ### `alias` - Prints the aliases for each command
 
@@ -173,7 +173,7 @@ Example of usage:
 
 Expected outcome:
 
-![Lifeline response to event](https://github.com/Imranr2/ip/tree/master/docs/alias.png)
+![Lifeline response to event](/docs/alias.png)
 
 ### `bye` - Prints farewell message
 
@@ -187,22 +187,4 @@ Example of usage:
 
 Expected outcome:
 
-![Lifeline response to event](https://github.com/Imranr2/ip/tree/master/docs/bye.png)
-
-## Usage
-
-### `Keyword` - Describe action
-
-Describe the action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
-
-```
-expected output
-```
+![Lifeline response to event](/docs/bye.png)
