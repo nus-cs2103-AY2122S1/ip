@@ -1,6 +1,7 @@
 package duke.gui;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import duke.Duke;
 import javafx.application.Application;
@@ -38,7 +39,8 @@ public class Main extends Application {
             VBox dialogContainer = (VBox) dialogPane.getContent().lookup("#dialogContainer");
             dialogContainer.getChildren().add(
                     DialogBox.getDukeDialog("Hello! I'm Duke!\nWhat can I do for you?",
-                            new Image(this.getClass().getResourceAsStream("/images/dog.jpg")))
+                            new Image(Objects
+                                    .requireNonNull(this.getClass().getResourceAsStream("/images/dog.jpg"))))
             );
 
             ScrollPane feedbackPane = (ScrollPane) ap.getChildren().get(3);

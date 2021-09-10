@@ -2,6 +2,7 @@ package duke.tasklist;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import duke.exception.InvalidInputException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void getList_filledList_returnsTasks() {
+    public void getList_filledList_returnsTasks() throws InvalidInputException {
         TaskList taskList = new TaskList();
         taskList.addTask(new ToDo("Task 1"));
         taskList.addTask(new Deadline("Task 2", "2021-08-23 0134"));
@@ -30,7 +31,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testGetTask() {
+    public void testGetTask() throws InvalidInputException {
         TaskList taskList = new TaskList();
         taskList.addTask(new ToDo("Task 1"));
         assertEquals("[T][ ] Task 1", taskList.getTask(0).toString());

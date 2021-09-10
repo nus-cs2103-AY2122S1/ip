@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.InvalidInputException;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -25,12 +27,17 @@ public class Event extends Task {
      * @param details Details of the event task.
      * @param timing Timing of the event task.
      */
-    public Event(String details, String timing) throws DateTimeParseException {
+    public Event(String details, String timing) throws InvalidInputException {
         super(LABEL, details);
-        this.timing = LocalDateTime.parse(timing.substring(0, 15),
-                INPUT_DATE_TIME_FORMATTER);
-        endTime = LocalTime.parse(timing.substring(16),
-                INPUT_TIME_FORMATTER);
+        try {
+            this.timing = LocalDateTime.parse(timing.substring(0, 15),
+                    INPUT_DATE_TIME_FORMATTER);
+            endTime = LocalTime.parse(timing.substring(16),
+                    INPUT_TIME_FORMATTER);
+        } catch (DateTimeParseException | IndexOutOfBoundsException e) {
+            throw new InvalidInputException("To create an Event task, "
+                    + "date and time should be in the format: yyyy-mm-dd (24hr time)-(24hr time).");
+        }
     }
 
     /**

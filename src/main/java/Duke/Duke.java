@@ -46,10 +46,11 @@ public class Duke {
             ArrayList<String> savedTasks = storage.getStorageContents();
             taskList = new TaskList(savedTasks);
         } catch (StorageMissingException e) {
-            ui.storageMissing(e, "");
+            ui.printException(e, "");
             taskList = new TaskList();
         } catch (InvalidInputException e) {
-            ui.invalidInput(e, "Please check data in " + filePath);
+            ui.printException(e, "Please check data in " + filePath);
+            taskList = new TaskList();
         }
         parser = new Parser();
     }
@@ -59,7 +60,7 @@ public class Duke {
      *
      * @throws IOException If unable to write to storage file.
      */
-    private void saveTasks() throws IOException {
+    private void saveTasks() throws InvalidInputException, IOException {
 
         String contents = "";
 
@@ -75,13 +76,16 @@ public class Duke {
                     ? "done"
                     : "not-done";
             if (taskClass == ToDo.class) {
-                contents += type + ' ' + done + ' ' + details;
+                contents += type + ' ' + done
+                        + '\n' + details;
             } else if (taskClass == Deadline.class) {
-                contents += type + ' ' + done + ' ' + details + ' '
-                        + ((Deadline) task).getDeadline().format(DATE_TIME_FORMATTER);
+                contents += type + ' ' + done
+                        + '\n' + details
+                        + '\n' + ((Deadline) task).getDeadline().format(DATE_TIME_FORMATTER);
             } else if (taskClass == Event.class) {
-                contents += type + ' ' + done + ' ' + details + ' '
-                        + ((Event) task).getTiming().format(DATE_TIME_FORMATTER) + '-'
+                contents += type + ' ' + done
+                        + '\n' + details
+                        + '\n' + ((Event) task).getTiming().format(DATE_TIME_FORMATTER) + '-'
                         + ((Event) task).getEndTime().format(TIME_FORMATTER);
             }
             contents += System.lineSeparator();
@@ -93,9 +97,11 @@ public class Duke {
      * Gets Duke's response to the given input string.
      *
      * @param inputStr The user's input.
-     * @return A pair of strings: Duke's response and the appropriate task list to display.
+     * @return 3 values: Duke's response,
+     * the appropriate task list to display and
+     * whether Duke's response is an error message.
      */
-    public Pair<String, String> getResponse(String inputStr) {
+    public DukeResponse getResponse(String inputStr) {
 
         try {
             HashMap<String, Object> input = parser.parse(inputStr);
@@ -103,86 +109,57 @@ public class Duke {
             switch ((String) input.get("cmd")) {
             case "bye":
                 saveTasks();
-                return new Pair<>(ui.farewell(),
-                        null);
+                return new DukeResponse(ui.farewell(),
+                        null, false);
             case "list":
-                return new Pair<>(ui.listMsg(),
-                        getTasks());
+                return new DukeResponse(ui.listMsg(),
+                        getTasks(), false);
             case "done":
-                try {
-                    taskList.completeTask((Integer) input.get("index") - 1);
-                    return new Pair<>(ui.doneMsg(taskList.getTask((Integer) input.get("index") - 1)),
-                            getTasks());
-                } catch (IndexOutOfBoundsException e) {
-                    throw new InvalidInputException("Task number does not exist. Complete failed.");
-                }
+                taskList.completeTask((Integer) input.get("index") - 1);
+                return new DukeResponse(ui.doneMsg(taskList.getTask((Integer) input.get("index") - 1)),
+                        getTasks(), false);
             case "delete":
-                try {
-                    String reply = ui.deleteMsg(taskList.getTask((Integer) input.get("index") - 1));
-                    taskList.deleteTask((Integer) input.get("index") - 1);
-                    return new Pair<>(reply,
-                            getTasks());
-                } catch (IndexOutOfBoundsException e) {
-                    throw new InvalidInputException("Task number does not exist. Delete failed.");
-                }
+                String reply = ui.deleteMsg(taskList.getTask((Integer) input.get("index") - 1));
+                taskList.deleteTask((Integer) input.get("index") - 1);
+                return new DukeResponse(reply,
+                        getTasks(), false);
             case "todo":
                 ToDo todo = new ToDo((String) input.get("details"));
                 taskList.addTask(todo);
-                return new Pair<>(ui.addTaskMsg(todo),
-                        getTasks());
+                return new DukeResponse(ui.addTaskMsg(todo),
+                        getTasks(), false);
             case "deadline":
                 Deadline deadline;
-                try {
-                    deadline = new Deadline((String) input.get("details"), (String) input.get("deadline"));
-                } catch (DateTimeParseException e) {
-                    return new Pair<>(ui.invalidDateTimeFormat(
-                            "Date and Time should be in the format: yyyy-mm-dd (24hr time)."),
-                            getTasks());
-                }
+                deadline = new Deadline((String) input.get("details"), (String) input.get("deadline"));
                 taskList.addTask(deadline);
-                return new Pair<>(ui.addTaskMsg(deadline),
-                        getTasks());
+                return new DukeResponse(ui.addTaskMsg(deadline),
+                        getTasks(), false);
             case "event":
                 Event event;
-                try {
-                    event = new Event((String) input.get("details"), (String) input.get("timing"));
-                } catch (DateTimeParseException e) {
-                    return new Pair<>(ui.invalidDateTimeFormat(
-                            "Date and Time should be in the format: yyyy-mm-dd (24hr time)-(24hr time)."),
-                            getTasks());
-                }
+                event = new Event((String) input.get("details"), (String) input.get("timing"));
                 taskList.addTask(event);
-                return new Pair<>(ui.addTaskMsg(event),
-                        getTasks());
+                return new DukeResponse(ui.addTaskMsg(event),
+                        getTasks(), false);
             case "date":
                 LocalDate date = (LocalDate) input.get("date");
-                return new Pair<>(ui.matchingDate(date),
-                        getTasks(date));
+                return new DukeResponse(ui.matchingDate(date),
+                        getTasks(date), false);
             case "find":
                 String keyword = (String) input.get("keyword");
-                return new Pair<>(this.ui.matchingKeyword(keyword),
-                        getTasks(keyword));
+                return new DukeResponse(this.ui.matchingKeyword(keyword),
+                        getTasks(keyword), false);
             case "sort":
                 boolean reverse = (Boolean) input.get("reverse");
                 taskList.sort(reverse);
-                return new Pair<>(this.ui.sortMessage(reverse),
-                        getTasks());
+                return new DukeResponse(this.ui.sortMessage(reverse),
+                        getTasks(), false);
             default:
                 throw new InvalidInstructionException((String) input.get("cmd"));
             }
-        } catch (IllegalStateException | NoSuchElementException e) {
-            try {
-                saveTasks();
-            } catch (IOException ie) {
-                return new Pair<>(ui.printException(ie, "Tasks could not be saved."), getTasks());
-            }
-            return new Pair<>(ui.printException(e, ""), getTasks());
-        } catch (InvalidInputException e) {
-            return new Pair<>(ui.invalidInput(e, ""), getTasks());
-        } catch (IOException e) {
-            return new Pair<>(ui.printException(e, ""), getTasks());
-        } catch (InvalidInstructionException e) {
-            return new Pair<>(ui.invalidInstruction(e, ""), getTasks());
+        } catch (InvalidInputException | IOException | InvalidInstructionException
+                | IllegalStateException | NoSuchElementException | DateTimeParseException e) {
+            return new DukeResponse(ui.printException(e, ""),
+                    getTasks(), true);
         }
     }
 

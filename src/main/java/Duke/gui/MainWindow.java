@@ -1,7 +1,7 @@
 package duke.gui;
 
 import duke.Duke;
-import duke.Pair;
+import duke.DukeResponse;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -53,17 +53,20 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
 
-        Pair<String, String> response = duke.getResponse(input);
+        DukeResponse response = duke.getResponse(input);
 
+        DialogBox dukeDialog = response.isErrorMessage()
+                ? DialogBox.getErrorDialog(response.getResponse(), dukeImage)
+                : DialogBox.getDukeDialog(response.getResponse(), dukeImage);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response.getFirst(), dukeImage)
+                dukeDialog
         );
 
-        if (response.getSecond() == null) {
+        if (response.getListToPrint() == null) {
             new Thread(Main::exit).start();
         } else {
-            feedback.setText(response.getSecond());
+            feedback.setText(response.getListToPrint());
         }
 
         userInput.clear();

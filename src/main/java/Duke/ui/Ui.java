@@ -3,9 +3,6 @@ package duke.ui;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import duke.exception.InvalidInputException;
-import duke.exception.InvalidInstructionException;
-import duke.exception.StorageMissingException;
 import duke.task.Task;
 
 /**
@@ -108,60 +105,18 @@ public class Ui {
     }
 
     /**
-     * Prints an invalid input message.
-     * When the user enters an invalid input.
-     *
-     * @param e The InvalidInputException.
-     * @param extra Extra details about the exception.
-     * @return An invalid input message.
-     */
-    public String invalidInput(InvalidInputException e, String extra) {
-        return e.toString() + " " + extra;
-    }
-
-    /**
-     * Prints an invalid instruction message.
-     * When the user enters an invalid instruction.
-     *
-     * @param e The InvalidInputException.
-     * @param extra Extra details about the exception.
-     * @return An invalid instruction message.
-     */
-    public String invalidInstruction(InvalidInstructionException e, String extra) {
-        return e.toString() + " " + extra;
-    }
-
-    /**
-     * Prints a storage missing message.
-     * When the storage file is not found and cannot be created.
-     *
-     * @param e The StorageMissingException.
-     * @param extra Extra details about the exception.
-     * @return A storage missing message.
-     */
-    public String storageMissing(StorageMissingException e, String extra) {
-        return e.toString() + " " + extra;
-    }
-
-    /**
-     * Prints an invalid date time format message.
-     * When the user inputs an invalid date time format.
-     *
-     * @param error Details about the exception.
-     * @return An invalid date time format message.
-     */
-    public String invalidDateTimeFormat(String error) {
-        return error;
-    }
-    /**
      * Prints an exception message.
-     * When an exception that is not a Duke exception is thrown.
      *
-     * @param e The non-Duke Exception.
+     * @param e The Exception.
      * @param extra Extra details about the exception.
      * @return An exception message.
      */
     public String printException(Exception e, String extra) {
-        return e.toString() + " " + extra;
+        String errorMessage = "ERROR ERROR ERROR ERROR ERROR\n"
+                + e.toString();
+        if (!extra.isEmpty()) {
+            errorMessage += "\n";
+        }
+        return errorMessage + extra;
     }
 }

@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.InvalidInputException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -20,9 +22,14 @@ public class Deadline extends Task {
      * @param details Details of the deadline task.
      * @param deadline Deadline of the deadline task.
      */
-    public Deadline(String details, String deadline) throws DateTimeParseException {
+    public Deadline(String details, String deadline) throws InvalidInputException {
         super(LABEL, details);
-        this.deadline = LocalDateTime.parse(deadline, INPUT_FORMATTER);
+        try {
+            this.deadline = LocalDateTime.parse(deadline, INPUT_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new InvalidInputException("To create an Deadline task, "
+                    + "Date and Time should be in the format: yyyy-mm-dd (24hr time).");
+        }
     }
 
     /**

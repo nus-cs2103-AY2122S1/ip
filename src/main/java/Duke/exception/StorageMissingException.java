@@ -5,6 +5,8 @@ package duke.exception;
  */
 public class StorageMissingException extends DukeException {
 
+    private String message;
+
     /**
      * Constructor.
      *
@@ -12,5 +14,16 @@ public class StorageMissingException extends DukeException {
      */
     public StorageMissingException(String str) {
         super(str);
+        message = str;
+    }
+
+    /**
+     * Returns a String representation of the exception.
+     *
+     * @return String representation of the exception.
+     */
+    @Override
+    public String toString() {
+        return "Invalid instruction: " + message + " is not a valid instruction.";
     }
 }

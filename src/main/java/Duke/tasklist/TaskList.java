@@ -36,20 +36,20 @@ public class TaskList {
 
             String task = scanner.next();
 
-            String done = scanner.next();
+            String done = scanner.nextLine().trim();
 
-            String details = scanner.next();
+            String details = initial.get(++i);
 
             switch (task) {
             case "T":
                 taskList.add(new ToDo(details));
                 break;
             case "D":
-                String deadline = scanner.nextLine().trim();
+                String deadline = initial.get(++i);
                 taskList.add(new Deadline(details, deadline));
                 break;
             case "E":
-                String timing = scanner.nextLine().trim();
+                String timing = initial.get(++i);
                 taskList.add(new Event(details, timing));
                 break;
             default:
@@ -103,9 +103,13 @@ public class TaskList {
      * @param index The index of the task to be completed.
      * @throws IndexOutOfBoundsException If index exceeds the list.
      */
-    public void completeTask(int index) throws IndexOutOfBoundsException {
-        taskList.get(index)
-                .complete();
+    public void completeTask(int index) throws InvalidInputException {
+        try {
+            taskList.get(index)
+                    .complete();
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidInputException("Task number does not exist. Complete failed.");
+        }
     }
 
     /**
@@ -114,8 +118,12 @@ public class TaskList {
      * @param index The index of the task to be deleted.
      * @throws IndexOutOfBoundsException If index exceeds the list.
      */
-    public void deleteTask(int index) throws IndexOutOfBoundsException {
-        taskList.remove(index);
+    public void deleteTask(int index) throws InvalidInputException {
+        try {
+            taskList.remove(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidInputException("Task number does not exist. Delete failed.");
+        }
     }
 
     /**
@@ -125,8 +133,12 @@ public class TaskList {
      * @return The task at the given index.
      * @throws IndexOutOfBoundsException If index exceeds the list.
      */
-    public Task getTask(int index) throws IndexOutOfBoundsException {
-        return taskList.get(index);
+    public Task getTask(int index) throws InvalidInputException {
+        try {
+            return taskList.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidInputException("Task number does not exist. Unable to get task.");
+        }
     }
 
     /**
