@@ -1,12 +1,9 @@
 package ui;
 
-import dialog.DialogException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
 import javafx.fxml.FXML;
 
@@ -19,9 +16,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import parser.Parser;
 import storage.Storage;
 
 import java.io.File;
@@ -34,14 +29,16 @@ import java.util.Arrays;
  *
  * @author Kan Jitpakdi
  * @author GitHub: kanjitp
- * @version 0.02
- * @since 0.01
+ * @version 0.03
+ * @since 0.02
  */
 public class StartPage extends AnchorPane {
     @FXML
     private Button enterButton;
     @FXML
     private Button clearButton;
+    @FXML
+    private Button deleteButton;
     @FXML
     private TextField inputField = new TextField();
     @FXML
@@ -64,6 +61,9 @@ public class StartPage extends AnchorPane {
         inputField.setText("");
     }
 
+    /**
+     * populate the listview of this start page with file names
+     */
     public void fetchSaveFiles() {
         files = new ArrayList<>(Arrays.asList(Storage.getFilesFromDirectory(
                 Storage.DIRECTORY_PATH + Storage.DATA_PATH)));
@@ -72,9 +72,6 @@ public class StartPage extends AnchorPane {
             if (file.isFile() && !file.isHidden()) {
                 String fullFileName = file.getName();
                 String fileName = fullFileName.substring(0, fullFileName.indexOf("."));
-//                button.setOnAction(event -> {
-//                    inputField.setText(button.getText());
-//                });
                 items.add(fileName);
             }
         }
@@ -87,20 +84,58 @@ public class StartPage extends AnchorPane {
         });
     }
 
+    /**
+     * refresh the save files on the list view
+     */
+    public void refreshSaveFiles() {
+        listView.refresh();
+    }
+
     @FXML
     private void handleFileNameInput() {
         if (inputField.getText().isBlank() || inputField.getText().isEmpty()) {
             return;
         }
-        boolean containsFile = files.stream().anyMatch(
-                file -> file.getName().equals(inputField.getText() + ".txt"));
+        // check if the input name is one of the file name
+        boolean containsFile = listView.getItems().stream().anyMatch(
+                fileName -> fileName.equals(inputField.getText()));
 
         if (!containsFile) {
+            // prompt user to confirm creating new file first
             AlertBox.display("Are you sure you want to create new file '" + inputField.getText() + "'",
                     e -> showChatPage());
         } else {
+            // go to the chat page directly
             showChatPage();
         }
+    }
+
+    @FXML
+    private void handleDeleteFile() {
+        if (inputField.getText().isBlank() || inputField.getText().isEmpty()) {
+            return;
+        }
+        // check if the input name is one of the file name
+        boolean containsFile = listView.getItems().stream().anyMatch(
+                fileName -> fileName.equals(inputField.getText()));
+
+        if (containsFile) {
+            // prompt user to confirm creating new file first
+            AlertBox.display("Are you sure you want to delete your save file '" + inputField.getText() + "'",
+                    e -> {
+                deleteFile();
+                removeSaveFileFromListView();
+                refreshSaveFiles();
+            });
+        }
+    }
+
+    private void removeSaveFileFromListView() {
+        listView.getItems().remove(inputField.getText());
+    }
+
+    private void deleteFile() {
+        Storage.deleteFile(inputField.getText());
     }
 
     private void showChatPage() {

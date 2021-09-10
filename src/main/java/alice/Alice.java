@@ -17,8 +17,8 @@ import java.io.IOException;
  *
  * @author Kan Jitpakdi
  * @author GitHub: kanjitp
- * @version 0.02
- * @since 0.01
+ * @version 0.03
+ * @since 0.02
  */
 public class Alice {
     /** storage for alice.Alice */
@@ -44,7 +44,7 @@ public class Alice {
         ui = new Ui();
         storage = new Storage(fileName);
         // import the task from what the storage manage to load
-        ui.importTaskList(storage.load());
+        ui.importTaskList(storage.loadTaskList());
         // set the current taskDialog of alice.Alice to the one ui fetch from the storage
         taskDialog = ui.getTaskDialog();
     }

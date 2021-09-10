@@ -21,8 +21,8 @@ import java.io.IOException;
  *
  * @author Kan Jitpakdi
  * @author GitHub: kanjitp
- * @version 0.02
- * @since 0.01
+ * @version 0.03
+ * @since 0.02
  */
 public class ChatPage extends AnchorPane {
 
@@ -44,6 +44,10 @@ public class ChatPage extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpeg"));
     private final Image aliceImage = new Image(this.getClass().getResourceAsStream("/images/alice.png"));
 
+    /**
+     * Constructor for the chat Page.
+     * Create an empty chat page with no alice.
+     */
     public ChatPage() {
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -92,19 +96,36 @@ public class ChatPage extends AnchorPane {
         return this.alice;
     }
 
+    /** initialise when building chat page */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Setter for alice
+     *
+     * @param a Alice to be set to this chat page
+     */
     public void setAlice(Alice a) {
         alice = a;
     }
 
+    /**
+     * Setter for fileName of the chat page
+     *
+     * @param fileName name of file
+     */
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 
+    /**
+     * Setter for alice using a file name to automatically link alice
+     * to the specified file.
+     *
+     * @param fileName name of file
+     */
     public void setAliceByFilename(String fileName) {
         try {
             this.alice = new Alice(fileName);
@@ -115,6 +136,9 @@ public class ChatPage extends AnchorPane {
 
     }
 
+    /**
+     * Print initial welcoming message
+     */
     public void printWelcomeText() {
         try {
             Label logo = getDialogLabel("Alice");

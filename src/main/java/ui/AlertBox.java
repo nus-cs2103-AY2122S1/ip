@@ -11,10 +11,22 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.util.EventListener;
-
+/**
+ * Prompt Box for user to confirm about his/her action
+ *
+ * @author Kan Jitpakdi
+ * @author GitHub: kanjitp
+ * @version 0.03
+ * @since 0.00
+ */
 public class AlertBox {
 
+    /**
+     * Display a prompt window to the user to interact with
+     *
+     * @param title        the message at the top
+     * @param eventHandler eventHandler to execute when user click yes or press enter
+     */
     public static void display(String title, EventHandler<ActionEvent> eventHandler) {
         Stage window = new Stage();
 

@@ -93,7 +93,7 @@ public class Storage {
      *
      * @return TaskList read from the save file
      */
-    public TaskList load() {
+    public TaskList loadTaskList() {
 
         taskListRead = new TaskList();
 
@@ -144,7 +144,8 @@ public class Storage {
      * @return whether the directory path and the folder for the save file exist or not
      */
     public static boolean haveSaveLocation() {
-        return java.nio.file.Files.exists(Paths.get(DIRECTORY_PATH)) && java.nio.file.Files.exists(Paths.get(DIRECTORY_PATH + DATA_PATH));
+        return java.nio.file.Files.exists(Paths.get(DIRECTORY_PATH))
+                && java.nio.file.Files.exists(Paths.get(DIRECTORY_PATH + DATA_PATH));
     }
 
     /**
@@ -175,5 +176,19 @@ public class Storage {
         Files.write(path, fileContent, StandardCharsets.UTF_8);
         READER.close();
         WRITER.close();
+    }
+
+    /**
+     * Static method to delete save file in alice/data
+     *
+     * @param fileName file name without ".filetype"
+     */
+    public static void deleteFile(String fileName) {
+        try {
+            Path path = Paths.get(DIRECTORY_PATH + DATA_PATH + "/" + fileName + ".txt");
+            Files.deleteIfExists(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
