@@ -154,6 +154,10 @@ public class Duke extends Application{
                 int indexD = Integer.valueOf(parsedCommand[1]) - 1;
                 return tasks.deleteTask(indexD);
 
+            case "find":
+                String keyword = parsedCommand[1];
+                return tasks.find(keyword);
+
             case "todo":
                 //Adds a new Todo to the list
                 if (parsedCommand.length == 1) {

@@ -28,4 +28,8 @@ public class Task {
     public String toSavedAs() {
         return (this.type + "|" + this.isDone + "|" + this.name);
     }
+
+    public String getDescription() {
+        return name;
+    }
 }
