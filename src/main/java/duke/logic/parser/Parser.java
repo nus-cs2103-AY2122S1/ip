@@ -3,6 +3,7 @@ package duke.logic.parser;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Map;
 
 import duke.logic.commands.Command;
 import duke.logic.commands.CommandCode;
@@ -29,7 +30,8 @@ public class Parser {
     private static final String INVALID_DONE_ERR_MSG = "Which task would you like to mark as done?";
     private static final String INVALID_DELETE_ERR_MSG = "Which task would you like to delete?";
     private static final String INVALID_UPDATE_ERR_MSG = "Wrong format! "
-            + "Requires <task no.> -[d|by|at|to] <new description/datetime>. Nonexistent fields will be ignored.";
+            + "Requires <task #> -[d|by|at|to] <new value>. Nonexistent fields will be ignored.";
+    private static final String WRONG_DATETIME_FORMAT = "Something is wrong with your datetime format!";
     private static final String REQUIRE_TASK_NUMBER_ERR_MSG = "I don't see a task number! >.<";
     private static final String INVALID_TODO_ERR_MSG = "The description of a todo cannot be empty.";
     private static final String INVALID_DEADLINE_ERR_MSG = "Wrong format! "
@@ -155,6 +157,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the tokens for an update task command.
+     *
+     * @param tokens The tokenized input array.
+     * @return The prepared command.
+     */
     private Command handleUpdate(String[] tokens) {
         assert tokens.length > 0;
         if (tokens.length < 2) {
@@ -174,23 +182,23 @@ public class Parser {
         try {
             taskNo = Integer.parseInt(args[0]);
 
-            // parse arguments, find which fields user wants to update
-            ArgumentTokenizer tokenizer = new ArgumentTokenizer(args[1], "-d", "-by", "-at", "-to");
+            // parse arguments, find which fields the user wants to update
+            Map<String, String> flagToValue = ArgumentTokenizer.tokenize(args[1], "-d", "-by", "-at", "-to");
 
-            updatedDescription = tokenizer.getArgumentOf("-d");
-            if (tokenizer.getArgumentOf("-by") != null) {
-                updatedBy = LocalDateTime.parse(tokenizer.getArgumentOf("-by"), DATE_FORMATTER);
+            updatedDescription = flagToValue.getOrDefault("-d", null);
+            if (flagToValue.containsKey("-by")) {
+                updatedBy = LocalDateTime.parse(flagToValue.get("-by"), DATE_FORMATTER);
             }
-            if (tokenizer.getArgumentOf("-at") != null) {
-                updatedAt = LocalDateTime.parse(tokenizer.getArgumentOf("-at"), DATE_FORMATTER);
+            if (flagToValue.containsKey("-at")) {
+                updatedAt = LocalDateTime.parse(flagToValue.get("-at"), DATE_FORMATTER);
             }
-            if (tokenizer.getArgumentOf("-to") != null) {
-                updatedEnd = LocalDateTime.parse(tokenizer.getArgumentOf("-to"), DATE_FORMATTER);
+            if (flagToValue.containsKey("-to")) {
+                updatedEnd = LocalDateTime.parse(flagToValue.get("-to"), DATE_FORMATTER);
             }
         } catch (NumberFormatException e) {
             return new InvalidCommand(REQUIRE_TASK_NUMBER_ERR_MSG);
         } catch (DateTimeParseException e) {
-            return new InvalidCommand(INVALID_UPDATE_ERR_MSG);
+            return new InvalidCommand(WRONG_DATETIME_FORMAT);
         }
         return new UpdateCommand(taskNo, updatedDescription, updatedBy, updatedAt, updatedEnd);
     }
@@ -228,7 +236,7 @@ public class Parser {
             LocalDateTime by = LocalDateTime.parse(args[1], DATE_FORMATTER);
             return new DeadlineCommand(args[0], by);
         } catch (DateTimeParseException e) {
-            return new InvalidCommand(INVALID_DEADLINE_ERR_MSG);
+            return new InvalidCommand(WRONG_DATETIME_FORMAT);
         }
     }
 
@@ -256,7 +264,7 @@ public class Parser {
             }
             return new EventCommand(args[0], at, end);
         } catch (DateTimeParseException e) {
-            return new InvalidCommand(INVALID_EVENT_ERR_MSG);
+            return new InvalidCommand(WRONG_DATETIME_FORMAT);
         }
     }
 
