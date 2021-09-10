@@ -22,7 +22,13 @@ public class Todo extends Task {
      *
      * @return String representation of the Todo task in the storage format.
      */
+    @Override
     public String toStorageString() {
         return ("T|" + super.getStatusNumber() + "|" + super.getDescription());
+    }
+
+    @Override
+    public String toUndoneString() {
+        return ("[T]" + super.toUndoneString());
     }
 }

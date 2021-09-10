@@ -33,8 +33,14 @@ public class Deadline extends Task {
      *
      * @return String representation of the Deadline in the storage format.
      */
+    @Override
     public String toStorageString() {
         return ("D|" + super.getStatusNumber() + "|" + super.getDescription()
                 + "|" + this.by.format(formatter));
+    }
+
+    @Override
+    public String toUndoneString() {
+        return ("[D]" + super.toUndoneString() + " (by: " + this.by.format(displayFormatter) + ")");
     }
 }
