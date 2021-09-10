@@ -28,7 +28,7 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/KaigainikiUser.jpeg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/MonkeDuke.jpeg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/SuiseiDuke.jpeg"));
 
     /**
      * Initializes the GUI upon startup of the application.
@@ -36,7 +36,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String greetings = "Hey! I'm Duke (Tsun)!\nWhat do you want?\n"
+        String greetings = "Hey! I'm TsunDuke!\nWhat do you want?\n"
             + "...It's not like I want to help you or anything!";
         dialogContainer.getChildren().addAll(
             DialogBox.getDukeDialog(greetings, dukeImage)
@@ -60,9 +60,14 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+
+        DialogBox dukeDialog = duke.checkIfErrorMessage(response)
+            ? DialogBox.getDukeErrorDialog(response, dukeImage)
+            : DialogBox.getDukeDialog(response, dukeImage);
+
         dialogContainer.getChildren().addAll(
             DialogBox.getUserDialog(input, userImage),
-            DialogBox.getDukeDialog(response, dukeImage)
+            dukeDialog
         );
 
         if (response.equals("Hmph! It's not like I want to see you again or anything!")) {

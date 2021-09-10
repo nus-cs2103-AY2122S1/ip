@@ -42,6 +42,8 @@ import duke.util.TaskList;
  * @author Benedict Chua
  */
 public class Duke {
+    private static final String ERROR_PREFIX = "BAKA!";
+
     private Storage storage;
     private TaskList tasks;
     private Parser parser;
@@ -69,6 +71,15 @@ public class Duke {
         } catch (DukeException e) {
             return e.toString();
         }
+    }
 
+    /**
+     * Checks if the response from Duke is an error message.
+     *
+     * @param message String containing Duke's response.
+     * @return boolean of whether Duke's response is an error message.
+     */
+    public boolean checkIfErrorMessage(String message) {
+        return message.startsWith(ERROR_PREFIX);
     }
 }

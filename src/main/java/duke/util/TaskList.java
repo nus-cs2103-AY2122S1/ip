@@ -177,6 +177,7 @@ public class TaskList {
             int reminderIndex = 1;
             int numOfDays = parseInt(filterCondition);
             LocalDate remindDate = LocalDate.now().plusDays(numOfDays);
+            tasksString = REMINDER_MESSAGE;
 
             for (int i = 0; i < tasks.size(); i++) {
                 Task currTask = tasks.get(i);

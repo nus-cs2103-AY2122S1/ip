@@ -10,7 +10,7 @@ public class ToDoTest {
     @Test
     public void testToString() {
         ToDo task = new ToDo("read book");
-        assertEquals("[T][ ] read book", task.toString());
+        assertEquals("[T][✗] read book", task.toString());
     }
 
     @Test
@@ -22,7 +22,7 @@ public class ToDoTest {
     @Test
     public void testGetStatusIcon() {
         ToDo task = new ToDo(CompletionStatus.COMPLETED, "read book");
-        assertEquals("X", task.getStatusIcon());
+        assertEquals("✓", task.getStatusIcon());
     }
 
     @Test
@@ -48,7 +48,7 @@ public class ToDoTest {
     public void testMarkAsDone() {
         ToDo task = new ToDo(CompletionStatus.COMPLETED, "read book");
         task.markTaskAsDone();
-        assertEquals("[T][X] read book", task.toString());
+        assertEquals("[T][✓] read book", task.toString());
     }
 
     @Test

@@ -11,7 +11,7 @@ public class EventTest {
     @Test
     public void testToString() {
         Event task = new Event("project meeting", "23/08/2021 2000 2200");
-        assertEquals("[E][ ] project meeting (by: Aug 23 2021 20:00-22:00)", task.toString());
+        assertEquals("[E][✗] project meeting (by: Aug 23 2021 20:00-22:00)", task.toString());
     }
 
     @Test
@@ -25,7 +25,7 @@ public class EventTest {
     public void testGetStatusIcon() {
         Event task = new Event(CompletionStatus.COMPLETED, "project meeting",
             "23/08/2021 2000 2200");
-        assertEquals("X", task.getStatusIcon());
+        assertEquals("✓", task.getStatusIcon());
     }
 
     @Test
@@ -43,17 +43,10 @@ public class EventTest {
     }
 
     @Test
-    public void testCheckDueBeforeDate() {
-        LocalDate date = LocalDate.of(2021, 9, 4);
-        Event task = new Event("project meeting", "04/09/2021 2000 2200");
-        assertEquals(true, task.checkDueBeforeDate(date));
-    }
-
-    @Test
     public void testMarkAsDone() {
         Event task = new Event("project meeting", "23/08/2021 2000 2200");
         task.markTaskAsDone();
-        assertEquals("[E][X] project meeting (by: Aug 23 2021 20:00-22:00)", task.toString());
+        assertEquals("[E][✓] project meeting (by: Aug 23 2021 20:00-22:00)", task.toString());
     }
 
     @Test

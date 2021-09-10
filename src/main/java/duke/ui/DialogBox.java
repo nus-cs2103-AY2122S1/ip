@@ -35,7 +35,7 @@ public class DialogBox extends HBox {
     @FXML
     private Circle clip;
 
-    private DialogBox(String text, Image img, Insets labelMargin, Paint backgroundColor) {
+    private DialogBox(String text, Image img, Insets labelMargin, Paint backgroundColor, Paint textColor) {
         // Initialisation
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -47,6 +47,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setTextFill(textColor);
         displayPicture.setImage(img);
 
         // Set circle clip for ImageView
@@ -76,18 +77,35 @@ public class DialogBox extends HBox {
      * @return DialogBox containing the user's input.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img, new Insets(0, 16, 0, 0), Color.LIGHTBLUE);
+        return new DialogBox(text, img, new Insets(0, 16, 0, 0), Color.LIGHTBLUE, Color.BLACK);
     }
 
     /**
-     * Factory method to create a DialogBox for Duke's response.
+     * Factory method to create a DialogBox for Duke's usual response when the command is successful.
      *
      * @param text String containing Duke's response to the user's input command.
      * @param img Image of Duke's profile picture.
      * @return DialogBox containing Duke's response.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        DialogBox db = new DialogBox(text, img, new Insets(0, 0, 0, 16), Color.LIGHTGRAY);
+        DialogBox db = new DialogBox(text, img, new Insets(0, 0, 0, 16),
+            Color.LIGHTGRAY, Color.BLACK
+        );
+        db.flip();
+        return db;
+    }
+
+    /**
+     * Factory method to create a DialogBox for Duke's response when the command results in an error.
+     *
+     * @param text String containing Duke's response to the user's input command.
+     * @param img Image of Duke's profile picture.
+     * @return DialogBox containing Duke's response.
+     */
+    public static DialogBox getDukeErrorDialog(String text, Image img) {
+        DialogBox db = new DialogBox(text, img, new Insets(0, 0, 0, 16),
+            Color.LIGHTGRAY, Color.RED
+        );
         db.flip();
         return db;
     }

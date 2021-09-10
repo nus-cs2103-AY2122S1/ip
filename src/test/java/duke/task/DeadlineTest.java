@@ -11,7 +11,7 @@ public class DeadlineTest {
     @Test
     public void testToString() {
         Deadline task = new Deadline("return book", "23/08/2021 2000");
-        assertEquals("[D][ ] return book (by: Aug 23 2021 20:00)", task.toString());
+        assertEquals("[D][✗] return book (by: Aug 23 2021 20:00)", task.toString());
     }
 
     @Test
@@ -23,7 +23,7 @@ public class DeadlineTest {
     @Test
     public void testGetStatusIcon() {
         Deadline task = new Deadline(CompletionStatus.COMPLETED, "return book", "23/08/2021 2000");
-        assertEquals("X", task.getStatusIcon());
+        assertEquals("✓", task.getStatusIcon());
     }
 
     @Test
@@ -41,17 +41,10 @@ public class DeadlineTest {
     }
 
     @Test
-    public void testCheckDueBeforeDate() {
-        LocalDate date = LocalDate.of(2021, 9, 4);
-        Deadline task = new Deadline("return book", "04/09/2021 2000");
-        assertEquals(true, task.checkDueBeforeDate(date));
-    }
-
-    @Test
     public void testMarkAsDone() {
         Deadline task = new Deadline("return book", "23/08/2021 2000");
         task.markTaskAsDone();
-        assertEquals("[D][X] return book (by: Aug 23 2021 20:00)", task.toString());
+        assertEquals("[D][✓] return book (by: Aug 23 2021 20:00)", task.toString());
     }
 
     @Test
