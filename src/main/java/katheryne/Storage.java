@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -30,14 +28,14 @@ public class Storage {
         writer = mapper.writer(new DefaultPrettyPrinter());
     }
     
-    void loadTasks(List lst, String pathName) {
+    void loadTasks(TaskList lst, String pathName) throws KatheryneException{
         if (Files.isReadable(Paths.get("tasks.json"))) {
             try {
                 lst.addAll(Arrays.asList(this.mapper.readValue(
                         Paths.get("tasks.json").toFile(),
                         Task[].class)));
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new KatheryneException("I can't seem to find your files... Let's start over afresh.");
             }
         }
     }
@@ -47,11 +45,11 @@ public class Storage {
      * @param lst TaskList
      * @param pathName Location to store tasks.
      */
-    void saveTasks(List lst, String pathName) throws KatheryneExceptions{
+    void saveTasks(TaskList lst, String pathName) throws KatheryneException {
         try {
-            Files.write(Paths.get(pathName), writer.writeValueAsString(lst).getBytes(StandardCharsets.UTF_8));
+            Files.write(Paths.get(pathName), writer.writeValueAsString(lst.getList()).getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
-            throw new KatheryneExceptions("Oh wait! Traveller, I couldn't catch that... Your file wasn't saved");
+            throw new KatheryneException("Oh wait! Traveller, I couldn't catch that... Your file wasn't saved");
         }
     }
 }

@@ -3,8 +3,8 @@ package katheryne;
 /**
  * Class for exceptions generated when using katheryne.Katheryne
  */
-public class KatheryneExceptions extends Exception {
-    public KatheryneExceptions(String message) {
+public class KatheryneException extends Exception {
+    public KatheryneException(String message) {
         super(message);
     }
 }
