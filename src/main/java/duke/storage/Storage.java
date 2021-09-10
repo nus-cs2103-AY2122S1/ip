@@ -8,7 +8,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import duke.exception.DukeException;
+import duke.exception.IncorrectIndexException;
+import duke.exception.TimedTaskDateInputException;
 import duke.formatter.Formatter;
 import duke.task.Task;
 import duke.tasklist.TaskList;
@@ -78,21 +79,21 @@ public class Storage {
      * Loads a taskList with the tasks found in the stored .txt file.
      * @param taskList A TaskList to be filled with the tasks from the .txt file.
      * @return A complete TaskList with the tasks extracted from the .txt file.
-     * @throws DukeException which may be thrown.
+     * @throws TimedTaskDateInputException which may be thrown.
      */
-    public TaskList load(TaskList taskList) throws DukeException {
+    public TaskList load(TaskList taskList) throws TimedTaskDateInputException {
         try {
             String line = this.reader.readLine();
             if (isNullOrEmpty(line)) {
-                printPreviousRecordLine();
+                printMessage("No previous record found!");
                 return taskList;
             }
             while (line != null) {
-                taskList.addTask(this.formatter.formatStringToTask(line));
+                taskList.addTask(this.formatter.formatStorageStringToTask(line));
                 line = this.reader.readLine();
             }
         } catch (IOException e) {
-            printLoadFileError(e);
+            printExceptionError(e, "The Tasks were loaded with errors.");
         }
         return taskList;
     }
@@ -100,9 +101,8 @@ public class Storage {
     /**
      * Saves a taskList into the stored .txt file.
      * @param taskList A TaskList to be filled with the tasks from the .txt file.
-     * @throws DukeException which may be thrown.
      */
-    public void save(TaskList taskList) throws DukeException {
+    public void save(TaskList taskList) {
         try {
             setBufferedWriter();
         } catch (IOException e) {
@@ -117,12 +117,13 @@ public class Storage {
         }
     }
 
-    private void saveTasksInTaskList(TaskList taskList) throws DukeException {
+    private void saveTasksInTaskList(TaskList taskList)  {
         for (int i = 1; i <= taskList.size(); i++) {
             try {
                 writeTaskToWriterDestination(taskList.get(i));
             } catch (IOException e) {
                 printExceptionError(e, "Exception occurred while writing");
+            } catch (IncorrectIndexException ignored) {
             }
         }
     }
@@ -138,34 +139,26 @@ public class Storage {
                         .toAbsolutePath()
                         .normalize();
         if (!Files.exists(targetDirectory)) {
-            try {
-                Files.createDirectory(Paths.get(".", DEFAULT_FILE_DIRECTORY).toAbsolutePath().normalize());
-            } catch (java.nio.file.FileAlreadyExistsException e) {
-                printDirectoryExistsMessage();
-            }
+            Files.createDirectory(Paths.get(".", DEFAULT_FILE_DIRECTORY).toAbsolutePath().normalize());
             Files.createFile(targetDirectory);
         }
         return targetDirectory;
     }
 
-    private Path checkIfDirectoryExistsAndCreate(String[] args) throws IOException {
-        Path targetDirectory = Paths.get(".", args).toAbsolutePath().normalize();
+    private Path checkIfDirectoryExistsAndCreate(String[] directoryPath) throws IOException {
+        Path targetDirectory = Paths.get(".", directoryPath).toAbsolutePath().normalize();
         if (!java.nio.file.Files.exists(targetDirectory)) {
-            traverseDownDirectoryAndCreateSubDirectory(args);
+            traverseDirectoryAndCreateSubDirectory(directoryPath);
             Files.createFile(targetDirectory);
         }
         return targetDirectory;
     }
 
-    private void traverseDownDirectoryAndCreateSubDirectory(String[] args) throws IOException {
+    private void traverseDirectoryAndCreateSubDirectory(String[] args) throws IOException {
         int i = 0;
         StringBuilder directory = new StringBuilder("./");
         while (i < args.length - 1) {
-            try {
-                addSubdirectoryToPath(directory, args[i]);
-            } catch (java.nio.file.FileAlreadyExistsException e) {
-                printDirectoryExistsMessage();
-            }
+            addSubdirectoryToPath(directory, args[i]);
             i++;
         }
     }
@@ -176,10 +169,6 @@ public class Storage {
         directory.append("/");
     }
 
-    private void printDirectoryExistsMessage() {
-        printMessage("Directory exists but file does not. Creating file...");
-    }
-
     private void setBufferedReader(Path path) throws IOException {
         this.reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
     }
@@ -188,21 +177,12 @@ public class Storage {
         this.writer = Files.newBufferedWriter(this.targetDirectory, StandardCharsets.UTF_8);
     }
 
-    private void printLoadFileError(IOException e) {
-        printExceptionError(e, "Unable to load file.");
-    }
-
-    private void printPreviousRecordLine() {
-        printMessage("No previous record found.");
-    }
-
     private boolean isNullOrEmpty(String line) {
         return line == null || line.isEmpty();
     }
 
-    private void printExceptionError(IOException e, String s) {
-        printMessage(s);
-        e.printStackTrace();
+    private void printExceptionError(IOException e, String message) {
+        System.out.println(message + "\n" + e.getMessage());
     }
 
     private void printMessage(String s) {

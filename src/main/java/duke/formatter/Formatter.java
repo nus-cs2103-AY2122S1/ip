@@ -1,6 +1,6 @@
 package duke.formatter;
 
-import duke.exception.DukeException;
+import duke.exception.TimedTaskDateInputException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -16,9 +16,9 @@ public class Formatter {
      * Method that formats a String to a Task object.
      * @param input the string from file.
      * @return the formatted task.
-     * @throws DukeException if there are any errors.
+     * @throws TimedTaskDateInputException if there are any errors.
      */
-    public Task formatStringToTask(String input) throws DukeException {
+    public Task formatStorageStringToTask(String input) throws TimedTaskDateInputException {
         String[] delimitedInput = input.split("[|]");
         String taskType = delimitedInput[0];
         if (taskType.equals(TaskType.T.toString())) {

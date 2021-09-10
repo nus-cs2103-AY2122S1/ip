@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.exception.DukeException;
+import duke.exception.TimedTaskDateInputException;
 
 public abstract class Task {
     public static final EmptyTask EMPTY_TASK = EmptyTask.empty();
@@ -30,7 +31,7 @@ public abstract class Task {
 
     public abstract Task updateDateTime(String dateTime) throws DukeException;
 
-    public abstract Task complete();
+    public abstract Task complete() throws TimedTaskDateInputException;
 
     public abstract String getDetails();
 

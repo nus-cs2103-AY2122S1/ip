@@ -10,7 +10,7 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.command.UpdateCommand;
-import duke.exception.DukeException;
+import duke.exception.*;
 import duke.tasklist.TaskList;
 
 /**
@@ -39,50 +39,36 @@ public class Parser {
         String[] words = input.split(" ");
         String commandWord = words[0];
         String rest;
-        try {
-            switch (commandWord) {
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand(taskList);
-            case DoneCommand.COMMAND_WORD:
-                return new DoneCommand(taskList, Integer.parseInt(words[1]));
-            case DeleteCommand.COMMAND_WORD:
-                return new DeleteCommand(taskList, Integer.parseInt(words[1]));
-            case TodoCommand.COMMAND_WORD:
-                if (words.length == 1) {
-                    throw new DukeException("The description of a todo cannot be empty.");
-                }
-                return new TodoCommand(taskList, combine(words, words.length));
-            case DeadlineCommand.COMMAND_WORD:
-                rest = combine(words, words.length);
-                return new DeadlineCommand(taskList, rest);
-            case EventCommand.COMMAND_WORD:
-                rest = combine(words, words.length);
-                return new EventCommand(taskList, rest);
-            case FindCommand.COMMAND_WORD:
-                if (words.length < 2) {
-                    throw new DukeException("You need to include a search word.");
-                }
-                if (words.length > 2) {
-                    throw new DukeException("You can only include 1 search word.");
-                }
-                return new FindCommand(taskList, words[1]);
-            case UpdateCommand.COMMAND_WORD:
-                rest = combine(words, words.length);
-                return new UpdateCommand(taskList, rest);
-            case ExitCommand.COMMAND_WORD:
-                return new ExitCommand(taskList);
-            default:
-                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        switch (commandWord) {
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand(taskList);
+        case DoneCommand.COMMAND_WORD:
+            return new DoneCommand(taskList, Integer.parseInt(words[1]));
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommand(taskList, Integer.parseInt(words[1]));
+        case TodoCommand.COMMAND_WORD:
+        case DeadlineCommand.COMMAND_WORD:
+        case EventCommand.COMMAND_WORD:
+        case UpdateCommand.COMMAND_WORD:
+            rest = combine(words, words.length);
+            return convertAddOrUpdateCommandStringToCommand(commandWord, rest, taskList);
+        case FindCommand.COMMAND_WORD:
+            if (words.length != 2) {
+                throw new FindCommandWordSuppliedException();
             }
-        } catch (java.lang.NumberFormatException e) {
-            throw new DukeException("OOPS!!! "
-                    + e.getLocalizedMessage()
-                    + " was input instead of an integer.");
+            return new FindCommand(taskList, words[1]);
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand(taskList);
+        default:
+            throw new IncorrectCommandWordException();
         }
     }
 
-    private String combine(String[] splitList, int end) {
+    private String combine(String[] splitList, int end) throws TooLittleParametersSuppliedException {
         StringBuilder result = new StringBuilder();
+        if (splitList.length < 2) {
+            throw new TooLittleParametersSuppliedException();
+        }
         for (int i = 1; i < end; i++) {
             result.append(splitList[i]);
             result.append(" ");
@@ -90,4 +76,17 @@ public class Parser {
         return result.substring(0, result.length() - 1);
     }
 
+    private Command convertAddOrUpdateCommandStringToCommand(String commandWord, String commandOption,
+                                                           TaskList taskList) {
+        if (commandWord.equals(TodoCommand.COMMAND_WORD)) {
+            return new TodoCommand(taskList, commandOption);
+        }
+        if (commandWord.equals(DeadlineCommand.COMMAND_WORD)) {
+            return new DeadlineCommand(taskList, commandOption);
+        }
+        if (commandWord.equals(UpdateCommand.COMMAND_WORD)) {
+            return new UpdateCommand(taskList, commandOption);
+        }
+        return new EventCommand(taskList, commandOption);
+    }
 }

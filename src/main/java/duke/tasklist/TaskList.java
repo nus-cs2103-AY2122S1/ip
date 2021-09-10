@@ -3,7 +3,8 @@ package duke.tasklist;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.exception.DukeException;
+import duke.exception.IncorrectIndexException;
+import duke.exception.TimedTaskDateInputException;
 import duke.task.Task;
 
 /**
@@ -32,13 +33,13 @@ public class TaskList {
      * Returns the Task at the nth position
      * @param taskId the id of the task
      * @return The task in that position
-     * @throws DukeException if an invalid index is input
+     * @throws IncorrectIndexException if an invalid index is input
      */
-    public Task get(int taskId) throws DukeException {
+    public Task get(int taskId) throws IncorrectIndexException {
         try {
             return this.tasks.get(taskId - 1);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Wrong index input.");
+            throw new IncorrectIndexException();
         }
 
     }
@@ -55,24 +56,24 @@ public class TaskList {
      * Removes the task with the taskId from the list and returns it.
      * @param taskId The task to be removed.
      * @return The task which was removed.
-     * @throws DukeException if the taskId is invalid.
+     * @throws IncorrectIndexException if the taskId is invalid.
      */
-    public Task deleteTask(int taskId) throws DukeException {
+    public Task deleteTask(int taskId) throws IncorrectIndexException {
         try {
             return this.tasks.remove(taskId - 1);
         } catch (java.lang.IndexOutOfBoundsException e) {
-            throw new DukeException("That task does not exist.");
+            throw new IncorrectIndexException();
         }
     }
 
-    public Task updateTask(Task task, int taskId) throws DukeException {
+    public Task updateTask(Task task, int taskId) throws IncorrectIndexException {
         Task taskRetrieved;
         try {
             taskRetrieved = tasks.get(taskId - 1);
             tasks.set(taskId - 1, task);
             return taskRetrieved;
         } catch (java.lang.IndexOutOfBoundsException e) {
-            throw new DukeException("That task does not exist.");
+            throw new IncorrectIndexException();
         }
     }
 
@@ -80,16 +81,17 @@ public class TaskList {
      * Marks and returns a completed task.
      * @param taskId of the task that is to be completed.
      * @return The task which was completed.
-     * @throws DukeException if the taskId is invalid.
+     * @throws IncorrectIndexException if the taskId is invalid.
+     * @throws TimedTaskDateInputException if there is an issue with a created task.
      */
-    public Task markAsCompleted(int taskId) throws DukeException {
+    public Task markAsCompleted(int taskId) throws IncorrectIndexException, TimedTaskDateInputException {
         try {
             Task currentTask = this.tasks.get(taskId - 1);
             Task completedTask = currentTask.complete();
             this.tasks.set(taskId - 1, completedTask);
             return completedTask;
         } catch (java.lang.IndexOutOfBoundsException e) {
-            throw new DukeException("That task does not exist.");
+            throw new IncorrectIndexException();
         }
     }
 
@@ -117,15 +119,12 @@ public class TaskList {
     @Override()
     public String toString() {
         StringBuilder result = new StringBuilder();
-        for (int j = 1; j <= this.size(); j++) {
-            String line = "";
-            try {
-                line = j + "." + this.get(j).toString();
-            } catch (DukeException e) {
-                e.printStackTrace();
-            }
+        int indexOfLastElement = this.size() - 1;
+        for (int j = 0; j <= indexOfLastElement; j++) {
+            int correctIDNumber = j + 1;
+            String line = correctIDNumber + "." + tasks.get(j).toString();
             result.append(line);
-            if (j < this.size()) {
+            if (j < indexOfLastElement) {
                 result.append("\n");
             }
         }

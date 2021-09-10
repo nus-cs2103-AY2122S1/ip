@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.exception.DukeException;
+import duke.exception.TimedTaskDateInputException;
 import duke.formatter.DateTimeFormatCreator;
 
 public abstract class TimedTask extends Task {
@@ -14,12 +14,12 @@ public abstract class TimedTask extends Task {
     TimedTask(String name,
               String dateTime,
               TaskType taskType,
-              boolean isCompleted) throws DukeException {
+              boolean isCompleted) throws TimedTaskDateInputException {
         super(name, taskType, isCompleted);
         try {
             this.dateTime = LocalDateTime.parse(dateTime.trim(), DateTimeFormatCreator.format());
         } catch (DateTimeParseException e) {
-            throw new DukeException("Incorrect form of date input. Please try yyyy-MM-dd HH:mm instead.");
+            throw new TimedTaskDateInputException();
         }
     }
 

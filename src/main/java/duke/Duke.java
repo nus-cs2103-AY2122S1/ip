@@ -53,7 +53,7 @@ public class Duke {
         return new Parser(this.list).parse(input).execute();
     }
 
-    public void save() throws DukeException {
+    public void save() {
         this.storage.save(this.list);
     }
 
