@@ -107,6 +107,9 @@ public class TaskManager {
                     if (isNumeric(inData.substring(7, inDataLength))) {
                         int taskNo = Integer.parseInt(inData.substring(7, inDataLength));
                         if (taskNo <= 100 && taskNo <= i) {
+                            String type = taskList[taskNo - 1].getTask();
+                            String status = taskList[taskNo - 1].getStatusIcon();
+                            String task = taskList[taskNo - 1].getDescription();
                             taskList[taskNo - 1] = null;
                             if (taskNo < i + 1) {
                                 for (int n = taskNo - 1; n < i; n++) {
@@ -114,7 +117,7 @@ public class TaskManager {
                                 }
                             }
                             i--;
-                            return deletedTaskMessage(taskNo);
+                            return deletedTaskMessage(type, status, task, taskNo);
                         }
                     }
                 }
@@ -131,21 +134,21 @@ public class TaskManager {
                         done = "0|";
                     }
                     if (taskList[k].getTask() == "T") {
-                        String command = done + k + 1 + "|todo " + taskList[k].getDescription();
+                        String command = done + (k + 1) + "|todo " + taskList[k].getDescription();
                         if (k == 0) {
                             writeToFile(path, command);
                         } else {
                             appendToFile(path, command);
                         }
                     } else if (taskList[k].getTask() == "D") {
-                        String command = done + k + 1+ "|deadline " + taskList[k].getDescription() + "/by " + taskList[k].getDateNum();
+                        String command = done + (k + 1)+ "|deadline " + taskList[k].getDescription() + "/by " + taskList[k].getDateNum();
                         if (k == 0) {
                             writeToFile(path, command);
                         } else {
                             appendToFile(path, command);
                         }
                     } else if (taskList[k].getTask() == "E") {
-                        String command = done + k + 1+ "|event " + taskList[k].getDescription() + "/at " + taskList[k].getDateNum();
+                        String command = done + (k + 1)+ "|event " + taskList[k].getDescription() + "/at " + taskList[k].getDateNum();
                         if (k == 0) {
                             writeToFile(path, command);
                         } else {
@@ -165,44 +168,44 @@ public class TaskManager {
         String output = "";
         for (int j = 0; j < i; j++) {
             if (taskList[j] instanceof ToDo) {
-                output = j + 1 + ". [" + taskList[j].getTask() + "]" +
-                        "[" + taskList[j].getStatusIcon() + "] " + taskList[j].getDescription();
+                output += j + 1 + ". [" + taskList[j].getTask() + "]" +
+                        "[" + taskList[j].getStatusIcon() + "] " + taskList[j].getDescription() + "\n";
             } else {
-               output = j + 1 + ". [" + taskList[j].getTask() + "]" +
+               output += j + 1 + ". [" + taskList[j].getTask() + "]" +
                         "[" + taskList[j].getStatusIcon() + "] " + taskList[j].getDescription()
-                        + taskList[j].getDate();
+                        + taskList[j].getDate() + "\n";
             }
         }
-        return "Here are the tasks in your list: " + output;
+        return "Here are the tasks in your list: \n" + output;
     }
 
     public String toDoAddedMessage() {
         String output = "Got it. I've added this task: \n"
-                        + "[" + taskList[i].getTask() + "]"
-                        + "[" + taskList[i].getStatusIcon() + "] "
-                        + taskList[i].getDescription()
+                        + "[" + taskList[i - 1].getTask() + "]"
+                        + "[" + taskList[i - 1].getStatusIcon() + "] "
+                        + taskList[i - 1].getDescription()
                         + "\n"
-                        + "Now you have " + (i + 1) + " tasks in the list.";
+                        + "Now you have " + (i) + " tasks in the list.";
         return output;
     }
 
     public String deadlineAddedMessage() {
         String output = "Got it. I've added this task: \n"
-                        + "[" + taskList[i].getTask() + "]"
-                        + "[" + taskList[i].getStatusIcon() + "] "
-                        + taskList[i].getDescription()
+                        + "[" + taskList[i - 1].getTask() + "]"
+                        + "[" + taskList[i - 1].getStatusIcon() + "] "
+                        + taskList[i - 1].getDescription()
                         + "\n"
-                        + "Now you have " + (i + 1) + " tasks in the list.";
+                        + "Now you have " + (i) + " tasks in the list.";
         return output;
     }
 
     public String eventAddedMessage() {
         String output = "Got it. I've added this task: \n"
-                        + "[" + taskList[i].getTask() + "]"
-                        + "[" + taskList[i].getStatusIcon() + "] "
-                        + taskList[i].getDescription()
+                        + "[" + taskList[i - 1].getTask() + "]"
+                        + "[" + taskList[i - 1].getStatusIcon() + "] "
+                        + taskList[i - 1].getDescription()
                         + "\n"
-                        + "Now you have " + (i + 1) + " tasks in the list.";
+                        + "Now you have " + (i) + " tasks in the list.";
         return output;
     }
 
@@ -213,12 +216,13 @@ public class TaskManager {
         return output;
     }
 
-    public String deletedTaskMessage(int taskNo) {
+    public String deletedTaskMessage(String type, String status, String task, int taskNo) {
         String output = "Noted. I've removed this task: \n"
-                        + " [" + taskList[taskNo - 1].getStatusIcon() + "] "
-                        + taskList[taskNo - 1].getDescription()
+                        + " [" + type + "] "
+                        + "[" + status + "] "
+                        + task
                         + "\n"
-                        + "Now you have " + (i - 1) + " tasks in the list.";
+                        + "Now you have " + (i) + " tasks in the list.";
         return output;
     }
 

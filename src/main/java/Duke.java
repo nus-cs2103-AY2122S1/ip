@@ -26,8 +26,11 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private TaskManager taskManager;
 
-    public Duke() {}
+    public Duke() {
+        taskManager = new TaskManager();
+    }
 
 //    private Duke duke = new Duke();
 
@@ -107,10 +110,9 @@ public class Duke extends Application {
 
     }
 
-//    public String getResponse(String args) {
-//        TaskManager taskManager = new TaskManager();
-//        return taskManager.executeCommand(args);
-//    }
+    public String getResponse(String args) {
+        return taskManager.executeCommand(args);
+    }
 
     public static void main(String[] args) {
         String inData = "yo";
@@ -165,9 +167,9 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
+//    public String getResponse(String input) {
+//        return "Duke heard: " + input;
+//    }
 
 
 }
