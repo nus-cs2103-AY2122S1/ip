@@ -18,18 +18,7 @@ public class Ui {
      * Shows the error message when encountering a DukeException.
      */
     public static String showErrorMessage(DukeException e) {
-        String border = "******************************";
-        return border + border + "\n\n"
-                + e.toString() + "\n\n"
-                + border + border + "\n";
-    }
-
-    /**
-     * Shows the BreakLine that is shown at the start and end of each Duke's reply.
-     */
-    public static String showBreakLine() {
-        String breakLine = "------------------------------";
-        return breakLine + breakLine + "\n";
+        return "\n\n" + e.toString() + "\n\n" + "\n";
     }
 
     /**
@@ -38,15 +27,13 @@ public class Ui {
      * @param reply The String representation of the reply provided from Duke
      */
     public static String showReply(String reply) {
-        StringBuilder result = new StringBuilder(reply);
-        result.insert(0, showBreakLine()).append(showBreakLine());
-        return result.toString();
+        return reply;
     }
 
     /**
      * Shows the formatted reply for the TaskList addTask method.
      *
-     * @param task The name of thetask that is added to the taskList
+     * @param task The name of the task that is added to the taskList
      * @param size The new size of the taskList after adding the task
      * @return The String to be returned by the addTask method
      */

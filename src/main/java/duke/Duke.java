@@ -1,15 +1,11 @@
 package duke;
 
-import duke.gui.Gui;
-import javafx.application.Application;
-import javafx.stage.Stage;
-
 /**
  * Implementation for Duke.
  *
  * @author Wong Yun Rui Chris
  */
-public class Duke extends Application {
+public class Duke {
     private final TaskList list;
     private final Storage storage;
 
@@ -22,11 +18,6 @@ public class Duke extends Application {
         list = storage.readData();
     }
 
-    @Override
-    public void start(Stage stage) {
-        Gui gui = new Gui();
-        gui.start(stage, this);
-    }
 
     /**
      * Handles the saving of the TaskList's data by calling the saveData
