@@ -92,7 +92,7 @@ public class Storage {
         } catch (PixIoException e) {
             throw new PixIoException();
         } catch (FileNotFoundException e) {
-            throw new PixException("Loading error");
+            createNewFile();
         } catch (DateTimeException e) {
             throw new PixInvalidDateException();
         }
@@ -129,6 +129,20 @@ public class Storage {
         try {
             writeToFile(taskList.getTaskList());
         } catch (PixException e) {
+            throw new PixIoException();
+        }
+    }
+
+    /**
+     * Creates a new file for the data.
+     *
+     * @throws PixIoException
+     */
+    private void createNewFile() throws PixIoException {
+        try {
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+        } catch (IOException e) {
             throw new PixIoException();
         }
     }
