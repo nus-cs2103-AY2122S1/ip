@@ -15,9 +15,9 @@ public class Task {
     /**
      * A constructor for Task.
      *
-     * @param input User input.
+     * @param input  User input.
      * @param isDone Status of the task.
-     * @param type Type of task.
+     * @param type   Type of task.
      */
     public Task(String input, Boolean isDone, String type) {
         this.input = input;

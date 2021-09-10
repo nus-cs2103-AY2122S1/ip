@@ -24,12 +24,6 @@ public class TaskList {
     }
 
     /**
-     * A constructor for TaskList.
-     */
-    public TaskList() {
-    }
-
-    /**
      * Marks the task done and returns the task description.
      *
      * @param index Marks the task at index as done.

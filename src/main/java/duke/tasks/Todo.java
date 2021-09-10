@@ -1,7 +1,5 @@
 package duke.tasks;
 
-import duke.tasks.Task;
-
 /**
  * Represents a task that has no due date.
  *
@@ -14,7 +12,7 @@ public class Todo extends Task {
      * A constructor for the to-do task.
      *
      * @param description User input task description.
-     * @param isDone Status of the task.
+     * @param isDone      Status of the task.
      */
     public Todo(String description, Boolean isDone) {
         super(description, isDone, "T");
