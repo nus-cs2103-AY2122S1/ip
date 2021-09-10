@@ -25,4 +25,22 @@ public class Todo extends Task {
     public String toDataString() {
         return String.format("T | %s", super.toDataString());
     }
+
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param obj Object to compare to
+     * @return boolean indicating whehter the other object is "equal" to this one.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof Todo) {
+            Todo tmp = (Todo) obj;
+            return super.equals(obj);
+        } else {
+            return false;
+        }
+    }
 }

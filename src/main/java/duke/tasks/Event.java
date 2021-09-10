@@ -40,13 +40,20 @@ public class Event extends Task {
     }
 
     /**
-     * Returns a String which is used to save data to disk.
+     * Indicates whether some other object is "equal to" this one.
      *
-     * @return String representation of how data will be saved to disk.
+     * @param obj Object to compare to
+     * @return boolean indicating whehter the other object is "equal" to this one.
      */
     @Override
-    public String toDataString() {
-        String timeInfoString = timeInfo.format(inputFormatter);
-        return String.format("E | %s | %s", super.toDataString(), timeInfoString);
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof Event) {
+            Event tmp = (Event) obj;
+            return super.equals(obj) && timeInfo.equals(tmp.timeInfo);
+        } else {
+            return false;
+        }
     }
 }
