@@ -29,7 +29,7 @@ public class Ui {
      * @return String that shows a welcome message.
      */
     public static String showWelcome() {
-        return format("Hello! I'm Duke", "What can I do for you?");
+        return format("I am Chad.", "What can I do for you?");
     }
 
     /**
@@ -38,7 +38,7 @@ public class Ui {
      * @return String that shows a integer error.
      */
     public String showIntError() {
-        return format("OOPS!!! The index of a task must be specified.");
+        return format("The index of a task must be specified.");
     }
 
     /**
@@ -47,7 +47,7 @@ public class Ui {
      * @return String that shows a loading error.
      */
     public String showLoadingError() {
-        return format("Task description cannot be found in database", "A new file will be created");
+        return format("Task description cannot be found in database.", "A new file will be created.");
     }
 
     /**
@@ -56,7 +56,7 @@ public class Ui {
      * @return String that shows saving error.
      */
     public String showSavingError() {
-        return format("File cannot be saved");
+        return format("File cannot be saved.");
     }
 
     /**
@@ -107,7 +107,7 @@ public class Ui {
         case EVENT:
             //Fallthrough
         case DEADLINE:
-            return format("Got it. I've added this task:",
+            return format("Noted. I've added this task:",
                     "  " + list.returnLastTask(), list.returnItemCount(0));
         default:
             return "Oops an error has occurred";
@@ -132,7 +132,7 @@ public class Ui {
         case ALL:
             return format(list.getAllBy(dt));
         default:
-            return "Oops an error has occurred";
+            return "Oops an error has occurred.";
         }
     }
 
@@ -148,11 +148,11 @@ public class Ui {
     public String displayTaskModificationCommand(Command.Commands c, Task t, TaskList list) {
         switch (c) {
         case DONE:
-            return format("Nice! I've marked this task as done:", t.toString());
+            return format("Noted. I've marked this task as done:", t.toString());
         case DELETE:
             return format("Noted. I've removed this task:", t.toString(), list.returnItemCount(0));
         default:
-            return "Oops an error has occurred";
+            return "Oops an error has occurred.";
         }
     }
 

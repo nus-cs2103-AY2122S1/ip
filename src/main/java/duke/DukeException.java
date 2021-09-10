@@ -17,14 +17,14 @@ public class DukeException extends Exception {
     public DukeException(Type s) {
         switch (s) {
         case DESCRIPTION:
-            this.errorMessage = "The description of a task cannot be empty";
+            this.errorMessage = "The description of a task cannot be empty.";
             break;
         case INDEX:
-            this.errorMessage = "The index of the task is out of range";
+            this.errorMessage = "The index of the task is out of range.";
             break;
         case COMMAND:
-            this.errorMessage = "I don't know what that means\n"
-                    + "Type help to get a list of available commands!";
+            this.errorMessage = "I don't know what that means.\n"
+                    + "Type help to get a list of available commands.";
             break;
         case DEADLINE:
             this.errorMessage = "Usage of deadline does not match 'description' /by 'deadline'";
@@ -33,7 +33,7 @@ public class DukeException extends Exception {
             this.errorMessage = "Usage of event does not match 'description' /at 'timeframe'";
             break;
         case EXECUTE:
-            this.errorMessage = "There is a problem executing this command";
+            this.errorMessage = "There is a problem executing this command.";
             break;
         default:
             break;
