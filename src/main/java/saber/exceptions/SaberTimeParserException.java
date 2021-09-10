@@ -6,7 +6,8 @@ package saber.exceptions;
 public class SaberTimeParserException extends SaberException {
 
     /**
-     * A constructor for SaberTimeParserException
+     * Constructs for SaberTimeParserException
+     *
      * @param message the error message
      */
     public SaberTimeParserException(String message) {

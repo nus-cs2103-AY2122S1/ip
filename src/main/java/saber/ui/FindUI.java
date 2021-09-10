@@ -4,7 +4,7 @@ import saber.task.Task;
 import saber.tasklist.TaskList;
 
 /**
- * A class to encapsulate the UI corresponding to FindCommand
+ * Encapsulates the UI corresponding to FindCommand
  */
 public class FindUI extends SaberCommandUI {
     protected final String missingFindStringError = "      I'm really sorry, Master.\n"
@@ -14,14 +14,15 @@ public class FindUI extends SaberCommandUI {
     private String successMessage;
 
     /**
-     * A constructor for FindUI which will initialize the success message to an empty string
+     * Constructs FindUI which will initialize the success message to an empty string
      */
     public FindUI() {
         this.successMessage = "";
     }
 
     /**
-     * Set the success message for the UI
+     * Sets the success message for the UI
+     *
      * @param findString the keyword to find the related tasks with
      * @param taskList the TaskList from which we need to find all tasks containing the keyword
      */
@@ -68,14 +69,14 @@ public class FindUI extends SaberCommandUI {
     }
 
     /**
-     * Print out the success message
+     * Prints out the success message
      */
     public void showSuccess() {
         System.out.println(successMessage);
     }
 
     /**
-     * Print out the missing find string error when there is no keyword supplied to the find command
+     * Prints out the missing find string error when there is no keyword supplied to the find command
      */
     public void showMissingFindStringError() {
         System.out.println(missingFindStringError);

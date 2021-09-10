@@ -5,7 +5,7 @@ import saber.tasklist.TaskList;
 import saber.ui.TodoUI;
 
 /**
- * A class to represent a Todo Command
+ * Represents a Todo Command
  */
 public class TodoCommand extends SaberCommand {
     private Todo todo;
@@ -14,7 +14,8 @@ public class TodoCommand extends SaberCommand {
     private TodoUI todoUI = new TodoUI();
 
     /**
-     * A constructor for TodoCommand
+     * Constructs  for TodoCommand
+     *
      * @param task the description for the todo task to be added
      * @param isMissingDescription whether the todo task description is missing in the command
      */
@@ -25,7 +26,8 @@ public class TodoCommand extends SaberCommand {
     }
 
     /**
-     * A function to execute the TodoCommand
+     * Executes the TodoCommand
+     *
      * @param taskList the TaskList to which the newly created todo task is added to
      */
     public void execute(TaskList taskList) {

@@ -6,7 +6,8 @@ package saber.exceptions;
 public class MissingArgumentException extends SaberException {
 
     /**
-     * A constructor for MissingArgumentException
+     * Constructs for MissingArgumentException
+     *
      * @param message the error message
      */
     public MissingArgumentException(String message) {

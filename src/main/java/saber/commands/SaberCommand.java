@@ -8,7 +8,8 @@ import saber.tasklist.TaskList;
 public abstract class SaberCommand {
 
     /**
-     * A function to execute the SaberCommand
+     * Executes the SaberCommand
+     *
      * @param taskList the TaskList which will be used by the execute method of various commands
      */
     public abstract void execute(TaskList taskList);
@@ -22,7 +23,8 @@ public abstract class SaberCommand {
     public abstract String getResponse(TaskList taskList);
 
     /**
-     * A function to determine whether the current command is a terminating command (a ByeCommand)
+     * Determines whether the current command is a terminating command (a ByeCommand)
+     *
      * @return boolean isExit
      */
     public boolean isExit() {

@@ -16,15 +16,16 @@ import saber.exceptions.MissingArgumentException;
 import saber.exceptions.MissingTimeException;
 import saber.exceptions.SaberCommandNotFoundException;
 
-/** A class that encapsulates a parser for the Saber application (to parse user commands) */
+/** Encapsulates a parser for the Saber application (to parse user commands) */
 public class SaberParser {
     private String[] parsedCommand;
     private String time;
     private String according;
 
     /**
-     * The constructor for the SaberParser class, this constructor will also parse the command
+     * Constructs for the SaberParser class, this constructor will also parse the command
      * passed in the parameters
+     *
      * @param unparsedCommand the raw unparsed command (from the user)
      */
     public SaberParser(String unparsedCommand) {
@@ -59,7 +60,8 @@ public class SaberParser {
     }
 
     /**
-     * Get Command Type of the command
+     * Gets Command Type of the command
+     *
      * @return Command Type as Saber.InputCommand enums
      * @throws SaberCommandNotFoundException if the command is not recognisable by Saber application
      */
@@ -75,7 +77,8 @@ public class SaberParser {
     }
 
     /**
-     * Get Time from the command
+     * Gets Time from the command
+     *
      * @return the time parsed from the command as a String
      * @throws MissingTimeException if the command does not have a time component
      */
@@ -87,7 +90,8 @@ public class SaberParser {
     }
 
     /**
-     * Get argument from the command
+     * Gets argument from the command
+     *
      * @return the argument parsed from the command as a String
      * @throws MissingArgumentException if the command does not have an argument component
      */
@@ -99,7 +103,8 @@ public class SaberParser {
     }
 
     /**
-     * Get a SaberCommand object from the command
+     * Gets a SaberCommand object from the command
+     *
      * @return a SaberCommand object that the caller can use to execute the command
      * @throws SaberCommandNotFoundException if the command is not recognisable by Saber application
      */

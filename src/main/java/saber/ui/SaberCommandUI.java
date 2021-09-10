@@ -6,7 +6,7 @@ package saber.ui;
 public abstract class SaberCommandUI extends SaberUI {
 
     /**
-     * Print out the success message
+     * Prints out the success message
      */
     public abstract void showSuccess();
 }

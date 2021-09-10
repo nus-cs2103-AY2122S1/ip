@@ -5,7 +5,7 @@ import saber.tasklist.TaskList;
 import saber.ui.AddUI;
 
 /**
- * A class to represent an AddCommand
+ * Represents an AddCommand
  */
 public class AddCommand extends SaberCommand {
     private Task task;
@@ -14,7 +14,8 @@ public class AddCommand extends SaberCommand {
     private AddUI addUI = new AddUI();
 
     /**
-     * A constructor for AddCommand
+     * Constructs for AddCommand
+     *
      * @param task the description for the task to be added
      * @param isMissingDescription whether the task description is missing in the command
      */
@@ -25,7 +26,8 @@ public class AddCommand extends SaberCommand {
     }
 
     /**
-     * A function to execute the AddCommand
+     * Executes the AddCommand
+     *
      * @param taskList the TaskList to which the newly created task is added to
      */
     public void execute(TaskList taskList) {

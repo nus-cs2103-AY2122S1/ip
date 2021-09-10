@@ -15,7 +15,7 @@ import saber.tasklist.TaskList;
 import saber.ui.SaberUI;
 
 /***
- *  A class that represents the Saber application
+ *  Represents the Saber application
  */
 public class Saber {
 
@@ -52,9 +52,10 @@ public class Saber {
         todo,
     }
 
-    /***
-     * Saber constructor. Takes in a filepath for TaskStorage to know which file
+    /**
+     * Constructs Saber. Takes in a filepath for TaskStorage to know which file
      * to load the tasks from to TaskList and to save to from the TaskList
+     *
      * @param filePath the file path where the tasks will be saved to (the tasks will be saved at
      *                 filePath/data/tasks.json)
      */
@@ -71,7 +72,7 @@ public class Saber {
     }
 
     /***
-     * A function to store the entire existing TaskList to the hard disk
+     * Stores the entire existing TaskList to the hard disk
      * (to the file specified by the filepath)
      */
     public void storeExistingTaskList() {
@@ -96,7 +97,7 @@ public class Saber {
     }
 
     /***
-     * A function to run the Saber application
+     * Runs the Saber application
      */
     public void run() {
         boolean isEnd = false;
@@ -124,6 +125,12 @@ public class Saber {
         storeExistingTaskList();
     }
 
+    /**
+     * Gets saber responses
+     *
+     * @param input user input
+     * @return saber response to the input
+     */
     public String getResponse(String input) {
         SaberParser saberParser = new SaberParser(input);
         try {
@@ -140,6 +147,7 @@ public class Saber {
 
     /***
      * The main function
+     *
      * @param args the arguments of the main function when running the program
      */
     public static void main(String[] args) {

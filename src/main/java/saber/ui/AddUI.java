@@ -3,7 +3,7 @@ package saber.ui;
 import saber.task.Task;
 
 /**
- * A class to encapsulate the UI corresponding to AddCommand
+ * Encapsulates the UI corresponding to AddCommand
  */
 public class AddUI extends SaberCommandUI {
     protected String successMessage;
@@ -12,7 +12,7 @@ public class AddUI extends SaberCommandUI {
             + "      What ... exactly do you want me to add?\n";
 
     /**
-     * A constructor for AddUI which will initialize the success message to an empty string
+     * Constructs AddUI which will initialize the success message to an empty string
      */
     public AddUI() {
         this.successMessage = "";
@@ -20,6 +20,7 @@ public class AddUI extends SaberCommandUI {
 
     /**
      * Sets the success message for the UI
+     *
      * @param task the task to be added
      */
     public void setSuccessMessage(Task task) {

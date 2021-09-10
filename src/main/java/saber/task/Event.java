@@ -4,14 +4,15 @@ import saber.exceptions.SaberTimeParserException;
 import saber.time.SaberTime;
 
 /**
- * A class to encapsulate an event type task
+ * Encapsulates an event type task
  */
 public class Event extends Task {
 
     protected SaberTime at;
 
     /**
-     * A constructor for Event type task
+     * Constructs for Event type task
+     *
      * @param description the description of the event
      * @param at the time of the event
      * @param isDone the completion status of the event
@@ -23,7 +24,8 @@ public class Event extends Task {
     }
 
     /**
-     * A function to get the time of the event
+     * Gets the time of the event
+     *
      * @return time of the event in string
      */
     public String getTimeInString() {
@@ -31,7 +33,8 @@ public class Event extends Task {
     }
 
     /**
-     * A function to return the string representation of an event task
+     * Returns the string representation of an event task
+     *
      * @return String representation of an event task
      */
     @Override

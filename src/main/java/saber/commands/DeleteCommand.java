@@ -5,7 +5,7 @@ import saber.tasklist.TaskList;
 import saber.ui.DeleteUI;
 
 /**
- * A class to encapsulate a DeleteCommand
+ * Encapsulates a DeleteCommand
  */
 public class DeleteCommand extends SaberCommand {
     private int taskIndex;
@@ -14,7 +14,8 @@ public class DeleteCommand extends SaberCommand {
     private DeleteUI deleteUI = new DeleteUI();
 
     /**
-     * A constructor for DeleteCommand
+     * Constructs for DeleteCommand
+     *
      * @param taskIndex the index of the task to be deleted
      * @param isBadArgument whether the index of the task to be deleted is missing from the command
      *                      or is not an integer
@@ -25,7 +26,8 @@ public class DeleteCommand extends SaberCommand {
     }
 
     /**
-     * A function to execute the DeleteCommand
+     * Executes the DeleteCommand
+     *
      * @param taskList the TaskList from which the specified task is deleted
      */
     public void execute(TaskList taskList) {

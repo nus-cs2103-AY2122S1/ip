@@ -6,7 +6,8 @@ package saber.exceptions;
 public class SaberCommandNotFoundException extends SaberException {
 
     /**
-     * A constructor for SaberCommandNotFoundException
+     * Constructs for SaberCommandNotFoundException
+     *
      * @param message the error message
      */
     public SaberCommandNotFoundException(String message) {

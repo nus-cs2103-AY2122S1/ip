@@ -3,7 +3,7 @@ package saber.ui;
 import java.util.Scanner;
 
 /**
- * A class to encapsulate Saber responses
+ * Encapsulates Saber responses
  */
 public class SaberUI {
     protected static final String LOGO = "\n                            __,    _,  _ __  ______ _ __\n"
@@ -46,7 +46,8 @@ public class SaberUI {
     private Scanner input = new Scanner(System.in);
 
     /**
-     * A function to read input from the user
+     * Reads input from the user
+     *
      * @return input in string
      */
     public String readInput() {
@@ -55,14 +56,14 @@ public class SaberUI {
     }
 
     /**
-     * Print out the Saber line break
+     * Prints out the Saber line break
      */
     public void showLineBreak() {
         System.out.println(LINE_BREAK);
     }
 
     /**
-     * Print out the greeting
+     * Prints out the greeting
      */
     public void showGreeting() {
         showLineBreak();
@@ -71,14 +72,14 @@ public class SaberUI {
     }
 
     /**
-     * Print out the Saber logo
+     * Prints out the Saber logo
      */
     public void showLogo() {
         System.out.println(LOGO);
     }
 
     /**
-     * Print out the command not found error when user try to give commands that are unsupported by Saber
+     * Prints out the command not found error when user try to give commands that are unsupported by Saber
      */
     public void showCommandNotFoundError() {
         System.out.println(commandNotFound);
@@ -94,7 +95,7 @@ public class SaberUI {
     }
 
     /**
-     * Print out the storage storing error if any error occurs during storing of tasks to the hard disk
+     * Prints out the storage storing error if any error occurs during storing of tasks to the hard disk
      */
     public void showStorageStoringError() {
         showLineBreak();
@@ -139,7 +140,7 @@ public class SaberUI {
     }
 
     /**
-     * Print out the storage loading error if any error occurs during loading of tasks from the hard disk
+     * Prints out the storage loading error if any error occurs during loading of tasks from the hard disk
      */
     public void showStorageLoadingError() {
         showLineBreak();
@@ -148,7 +149,7 @@ public class SaberUI {
     }
 
     /**
-     * Print out the generic error
+     * Prints out the generic error
      */
     public void showGenericError() {
         System.out.println(genericError);
