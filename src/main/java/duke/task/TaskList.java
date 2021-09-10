@@ -81,6 +81,15 @@ public class TaskList {
         return this.taskList.get(index);
     }
 
+    /**
+     * Sets the priority of task at the specified index.
+     * @param index The index of the task.
+     * @param priority The priority level.
+     */
+    public void prioritizeTask(int index, Priority priority) {
+        this.taskList.get(index).setPriority(priority);
+    }
+
     public TaskList filter(String keyword) {
         List<Task> filteredTasks = this.taskList.stream()
                 .filter(task -> task.getDescription().contains(keyword))

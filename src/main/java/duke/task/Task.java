@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.Duke;
 import duke.exception.DukeException;
 
 import java.time.format.DateTimeParseException;
@@ -34,7 +35,11 @@ public class Task {
      * @param priority The priority.
      * @param isDone The state.
      */
-    public Task(String description, Priority priority, boolean isDone) {
+    public Task(String description, Priority priority, boolean isDone) throws DukeException {
+        if (priority == null) {
+            throw new DukeException("Invalid priority value.");
+        }
+
         this.description = description;
         this.isDone = isDone;
         this.priority = priority;

@@ -19,7 +19,7 @@ public class PrioritizeCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
-        taskList.getTask(this.index - 1).setPriority(this.priority);
+        taskList.prioritizeTask(this.index - 1, this.priority);
         ui.sayPrioritizeTask(this.index, this.priority);
         storage.store(taskList.serialize());
     }
