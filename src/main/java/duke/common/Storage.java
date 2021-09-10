@@ -19,8 +19,8 @@ public class Storage {
      * @param taskListFileName path to text file to store taskList in.
      */
     public Storage(String taskListFileName) {
-        assert taskListFileName != "": "Filename should not be empty.";
-        assert !taskListFileName.contains(" "): "Filename should not contain whitespaces.";
+        assert taskListFileName != "" : "Filename should not be empty.";
+        assert !taskListFileName.contains(" ") : "Filename should not contain whitespaces.";
         this.taskListFileName = taskListFileName;
         try {
             Files.createDirectories(Paths.get(this.taskListFileName).getParent().getFileName());

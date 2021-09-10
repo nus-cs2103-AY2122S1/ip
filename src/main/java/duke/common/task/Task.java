@@ -21,6 +21,7 @@ public class Task implements Serializable {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
     }
