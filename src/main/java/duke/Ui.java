@@ -5,10 +5,21 @@ package duke;
  */
 public class Ui {
     /**
+     * Shows the final message before terminating.
+     *
+     * @return The formatted error message to be printed on screen
+     */
+    public static String showByeMessage() {
+        return "\tLOOK no more!!\n";
+    }
+
+    /**
      * Shows the welcome message when first executing Duke.
+     *
+     * @return The formatted error message to be printed on screen
      */
     public static String showWelcomeMessage() {
-        String logo = "DUKE!!";
+        String logo = "L00K!!";
         StringBuilder result = new StringBuilder("\tHello from \n\tWhat can I do for you\n");
         result.insert(12, logo);
         return result.toString();
@@ -16,6 +27,8 @@ public class Ui {
 
     /**
      * Shows the error message when encountering a DukeException.
+     *
+     * @return The formatted error message to be printed on screen
      */
     public static String showErrorMessage(DukeException e) {
         return "\n\n" + e.toString() + "\n\n" + "\n";

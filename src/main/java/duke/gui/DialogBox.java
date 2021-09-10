@@ -6,11 +6,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
@@ -19,8 +23,16 @@ import javafx.scene.paint.Color;
  * Class to encapsulate each response dialogue box in Duke's GUI
  */
 public class DialogBox extends HBox {
-    private static final Image dukeImage = new Image(DialogBox.class.getResourceAsStream("/images/Duke.png"));
-    private static final Image userImage = new Image(DialogBox.class.getResourceAsStream("/images/User.png"));
+    private static final Image DUKE_IMAGE = new Image(DialogBox.class.getResourceAsStream("/images/Duke.png"));
+    private static final Image USER_IMAGE = new Image(DialogBox.class.getResourceAsStream("/images/User.png"));
+
+    private static final Background DUKE_BACKGROUND = new Background(
+                new BackgroundFill(new Color(100.0 / 255.0, 100.0 / 255.0, 1.0, 1.0),
+                new CornerRadii(0), new Insets(0, 0, 0, 0)));
+
+    private static final Background USER_BACKGROUND = new Background(
+            new BackgroundFill(new Color(50.0 / 255.0, 175.0 / 255.0, 50.0 / 255.0, 1.0),
+                    new CornerRadii(0), new Insets(0, 0, 0, 0)));
 
     @FXML
     private Label dialog;
@@ -43,6 +55,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        dialog.setTextFill(Color.WHITE);
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -64,7 +77,9 @@ public class DialogBox extends HBox {
      * @return The DialogBox with the user input
      */
     public static DialogBox getUserDialog(String s) {
-        return new DialogBox(s, userImage);
+        DialogBox db = new DialogBox(s, USER_IMAGE);
+        db.setBackground(USER_BACKGROUND);
+        return db;
     }
 
     /**
@@ -75,7 +90,8 @@ public class DialogBox extends HBox {
      * @return The DialogBox with Duke's respond
      */
     public static DialogBox getDukeDialog(String s) {
-        DialogBox db = new DialogBox(s, dukeImage);
+        DialogBox db = new DialogBox(s, DUKE_IMAGE);
+        db.setBackground(DUKE_BACKGROUND);
         db.flip();
         return db;
     }
@@ -89,7 +105,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getErrorDialog(String s) {
 
-        DialogBox db = new DialogBox(s, dukeImage);
+        DialogBox db = new DialogBox(s, DUKE_IMAGE);
         db.flip();
         db.dialog.setTextFill(Color.RED);
         return db;
