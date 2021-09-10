@@ -24,9 +24,11 @@ public class Parser {
     public static Command parse(String command) throws UnknownException {
         if (command.startsWith("todo")) {
             return new AddCommand(command, "todo");
-        } else if (command.startsWith("deadline")) {
+        } else if (command.startsWith("t")) {
+            return new AddCommand(command, "t");
+        } else if (command.startsWith("deadline") || command.startsWith("d")) {
             return new AddCommand(command, "deadline");
-        } else if (command.startsWith("event")) {
+        } else if (command.startsWith("event") || command.startsWith("e") ) {
             return new AddCommand(command, "event");
         } else if (command.startsWith("done")) {
             return new DoneCommand(command);
