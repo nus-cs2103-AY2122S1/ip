@@ -126,7 +126,7 @@ public class Deadline extends Task {
         return String.format(
             "[%s][%s] %s (by: %s)",
             Deadline.SYMBOL,
-            this.isCompleted() ? "X" : "",
+            this.completeStatus(),
             this.getTaskSummary(),
             Deadline.localDateTimeToString(this.dateTimeDeadline)
         );

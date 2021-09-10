@@ -74,7 +74,7 @@ public class Event extends Task {
         return String.format(
             "[%s][%s] %s (at: %s)",
             Event.SYMBOL,
-            this.isCompleted() ? "X" : "",
+            this.completeStatus(),
             this.getTaskSummary(),
             this.eventTime
         );

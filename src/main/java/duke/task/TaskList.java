@@ -7,9 +7,11 @@ import duke.util.Ui;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.function.Predicate;
+import java.util.stream.IntStream;
 
 public final class TaskList {
     private final ArrayList<Task> TASKS;
@@ -155,31 +157,27 @@ public final class TaskList {
     }
 
     //internal use only, hence assert statement
-    public String selectTasksAsString(Integer[] indexesFrom0) {
-        StringBuilder result = new StringBuilder();
-        int numOfTasks = this.TASKS.size();
+    private String selectTasksAsString(Integer[] indexesFrom0) {
         for (Integer i : indexesFrom0) {
-            assert true;
-            result.append(String.format("%d: %s\n", i + 1, this.TASKS.get(i).toString()));
-
+            assert isValidIndex(i, TASKS.size());
         }
-//        for (int i = 0; i < numOfTasks; i++) {
-//            List<Integer> listOfIndexesFrom0 = Arrays.asList(indexesFrom0);
-//            if (listOfIndexesFrom0.contains(i)) {
-//                result.append(String.format("%d: %s\n", i + 1, this.TASKS.get(i).toString()));
-//            }
-//        }
-        return result.toString();
+
+        return Arrays.stream(indexesFrom0)
+                .map(i -> (i+1) + ". " + TASKS.get(i).toString() + "\n")
+                .reduce("",(a,b) -> (a + b));
     }
 
     @Override
     public String toString() {
-        StringBuilder result = new StringBuilder();
+//        StringBuilder result = new StringBuilder();
         int numOfTasks = this.TASKS.size();
-        for (int i = 0; i < numOfTasks; i++) {
-            int idxFrom1 = i + 1;
-            result.append(String.format("%d: %s\n", idxFrom1, this.TASKS.get(i).toString()));
-        }
-        return result.toString();
+//        for (int i = 0; i < numOfTasks; i++) {
+//            int idxFrom1 = i + 1;
+//            result.append(String.format("%d: %s\n", idxFrom1, this.TASKS.get(i).toString()));
+//        }
+//        return result.toString();
+        return IntStream.range(0,numOfTasks)
+                .mapToObj(i -> (i+1) + ". " + TASKS.get(i).toString() + "\n")
+                .reduce("",(a,b) -> (a + b));
     }
 }

@@ -81,7 +81,7 @@ public class ToDo extends Task {
         return String.format(
             "[%s][%s] %s",
             ToDo.SYMBOL,
-            this.isCompleted() ? "X" : "",
+            completeStatus(),
             this.getTaskSummary()
         );
     }

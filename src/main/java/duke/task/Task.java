@@ -45,7 +45,7 @@ public class Task {
      * @return "x" or "" depending on whether task is complete
      */
     public String completeStatus() {
-        return this.isDone ? "x" : "";
+        return this.isDone ? "X" : " ";
     }
 
     //setter
@@ -76,7 +76,7 @@ public class Task {
     public String toStorageFormat() {
         return String.format(
             "? | %d | %s ",
-            this.isCompleted() ? 1 : 0,
+            this.completeStatus(),
             this.getTaskSummary()
         );
     }
