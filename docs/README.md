@@ -44,7 +44,7 @@ A task with a set date for completion and can be added with the following comman
 
 ### Event
 
-* An event is an occurrence at a certain time and can be added with the following command:
+An event is an occurrence at a certain time and can be added with the following command:
 
     event <Description> /at <Date>
 
