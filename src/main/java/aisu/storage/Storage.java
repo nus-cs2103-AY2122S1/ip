@@ -96,6 +96,13 @@ public class Storage {
                 if (isMarkedDone) {
                     currTaskToLoad.markAsDone();
                 }
+
+                // Add tags to task if there are tags
+                String[] tags = s.nextLine().split(";;");
+                for (String tagName : tags) {
+                    currTaskToLoad.addTag(tagName);
+                }
+
                 result.add(currTaskToLoad);
             }
             return result;

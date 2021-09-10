@@ -21,13 +21,13 @@ public class Todo extends Task {
     /** {@inheritDoc} */
     @Override
     public String parseData() {
-        return "T;;" + (this.isDone ? "1" : "0") + ";;" + this.description;
+        return "T;;" + (this.isDone ? "1" : "0") + ";;" + this.description + '\n' + this.tagsList.parseData();
     }
 
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return String.format("[To-do] %s %s\nTags: %s", this.getStatusIcon(), this.description, this.getTags());
+        return String.format("[To-do] %s %s\n%s", this.getStatusIcon(), this.description, this.getTags());
     }
 
 }

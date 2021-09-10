@@ -22,10 +22,17 @@ public class TaskList {
         T, D, E
     }
 
+    /**
+     * Constructor to initialise TaskList.
+     */
     public TaskList() {
         this.list = new ArrayList<>();
     }
 
+    /**
+     * Constructor to initialise TaskList.
+     * @param currList current task list data to be used.
+     */
     public TaskList(List<Task> currList) {
         this.list = currList;
     }
@@ -168,14 +175,14 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        if (this.list.isEmpty()) {
-            return "Oops, the list is empty! :O";
+        if (!this.list.isEmpty()) {
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < this.list.size(); i++) {
+                result.append(i + 1).append(". ").append(list.get(i)).append("\n");
+            }
+            return result.toString();
         }
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < this.list.size(); i++) {
-            result.append(i + 1).append(". ").append(list.get(i)).append("\n");
-        }
-        return result.toString();
+        return "Oops, the list is empty! :O";
     }
 
 }

@@ -25,13 +25,14 @@ public class Event extends Task {
     /** {@inheritDoc} */
     @Override
     public String parseData() {
-        return "E;;" + (this.isDone ? "1" : "0") + ";;" + this.description + ";;" + this.eventPeriod;
+        return "E;;" + (this.isDone ? "1" : "0") + ";;" + this.description + ";;" + this.eventPeriod
+                + '\n' + this.tagsList.parseData();
     }
 
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return String.format("[Event] %s %s (at: %s)\nTags: %s", this.getStatusIcon(), this.description,
+        return String.format("[Event] %s %s (at: %s)\n%s", this.getStatusIcon(), this.description,
                 this.eventPeriod, this.getTags());
     }
 }

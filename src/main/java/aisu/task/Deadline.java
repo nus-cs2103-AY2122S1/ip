@@ -33,13 +33,14 @@ public class Deadline extends Task {
     /** {@inheritDoc} */
     @Override
     public String parseData() {
-        return "D;;" + (this.isDone ? "1" : "0") + ";;" + this.description + ";;" + this.deadline;
+        return "D;;" + (this.isDone ? "1" : "0") + ";;" + this.description + ";;" + this.deadline
+                + '\n' + this.tagsList.parseData();
     }
 
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return String.format("[DeadL] %s %s (by: %s)\nTags: %s", this.getStatusIcon(), this.description,
+        return String.format("[DeadL] %s %s (by: %s)\n%s", this.getStatusIcon(), this.description,
                 this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy")), this.getTags());
     }
 }
