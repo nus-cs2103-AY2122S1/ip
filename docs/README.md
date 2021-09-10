@@ -37,7 +37,7 @@ Sort deadlines and events based on the time attached to them.
 
 ## Usage
 
-### `list` - lists your tasks
+### `list` - List your tasks
 
 Enter the 'list' command to see your tasks
 in a list format.
@@ -53,7 +53,7 @@ Here are the tasks in your list:
 1. [T][ ] some task
 ```
 
-### `todo` - add a to-do task
+### `todo` - Add a to-do task
 
 Enter the 'todo' command to add a task to-do to your list.
 
@@ -71,7 +71,7 @@ Got it. I've added this task:
 Now you have <N> tasks in the list.
 ```
 
-### `deadline` - add a deadline task
+### `deadline` - Add a deadline task
 
 Enter the 'deadline' command to add a task with a time deadline to your list.
 
@@ -93,7 +93,7 @@ Got it. I've added this task:
 Now you have 3 tasks in the list.
 ```
 
-### `event` - add an event task
+### `event` - Add an event task
 
 Enter the 'event' command to add an event with a time to your list.
 
@@ -115,7 +115,7 @@ Got it. I've added this task:
 Now you have 2 tasks in the list.
 ```
 
-### `done` - marks a task as done
+### `done` - Mark a task as done
 
 Enter the 'done' command to mark a task as done.
 
@@ -132,7 +132,7 @@ Nice! I've marked this task as done:
 [T][X] some task
 ```
 
-### `delete` - delete a task
+### `delete` - Delete a task
 
 Enter the 'delete' command to delete a task.
 
@@ -150,7 +150,7 @@ Noted. I've removed this task:
 Now you have 0 tasks in the list.
 ```
 
-### `find` - finds tasks
+### `find` - Find tasks
 
 Enter the 'find' command to filter tasks.
 
@@ -169,7 +169,7 @@ Here are the tasks in your list:
 1. [T][X] some task
 ```
 
-### `sort` - sorts tasks
+### `sort` - Sort tasks
 
 Enter the 'sort' command to sort events and deadlines.
 
@@ -189,7 +189,7 @@ Here are the tasks in your list:
 2. [D][ ] some task (by: 2022-01-01 08:00)
 ```
 
-### `bye` - Terminates chat session
+### `bye` - Terminate chat session
 
 Enter the 'bye' command to close the bot.
 
