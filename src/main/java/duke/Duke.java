@@ -90,8 +90,7 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        Gui gui = new Gui();
-        gui.setup(stage);
+        Gui gui = new Gui(stage);
         EventHandler<? super MouseEvent> mouseEventHandler;
         EventHandler<ActionEvent> buttonEventHandler;
         mouseEventHandler = e -> {

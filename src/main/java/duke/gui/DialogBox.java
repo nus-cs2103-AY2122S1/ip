@@ -19,7 +19,7 @@ public class DialogBox extends HBox {
     private static final Color DUKE_TEXT_COLOR = Color.LIGHTGRAY;
     private static final Color USER_TEXT_COLOR = Color.LIGHTBLUE;
     private static CornerRadii TEXT_CORNER_ROUNDING = new CornerRadii(10);
-    private static final Insets PADDING = new Insets(5, 0, 5, 0);
+    private static final Insets PADDING = new Insets(10);
     private static final BackgroundFill DUKE_TEXT_BACKGROUND = new BackgroundFill(
             DUKE_TEXT_COLOR,
             TEXT_CORNER_ROUNDING,
@@ -39,14 +39,15 @@ public class DialogBox extends HBox {
      *
      * @param label Label for created dialogBox.
      * @param imageView ImageView for created dialogBox.
+     * @param isUser true if the dialog is from the user, false if it is from Duke.
      */
-    public DialogBox(Label label, ImageView imageView, boolean isUser) {
+    private DialogBox(Label label, ImageView imageView, boolean isUser) {
         text = label;
         displayPicture = imageView;
 
 
         text.setBackground(new Background(isUser ? USER_TEXT_BACKGROUND : DUKE_TEXT_BACKGROUND));
-        text.setPadding(new Insets(10));
+        text.setPadding(new Insets(20));
         Circle clip = new Circle(50, 50, 40);
         imageView.setClip(clip);
 
