@@ -1,9 +1,9 @@
 package duke.task;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import duke.Storage;
+import duke.exception.DukeIoException;
 
 /**
  * TaskList class encapsulates a list of tasks.
@@ -31,12 +31,10 @@ public class TaskList extends ArrayList<Task> {
      * @param storage Storage used to save the task.
      * @return true (as specified by Collection.add).
      */
-    public boolean add(Task task, Storage storage) {
+    public boolean add(Task task, Storage storage) throws DukeIoException {
         boolean result = super.add(task);
-        try {
+        if (result) {
             storage.save(task);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
         return result;
     }
@@ -48,14 +46,11 @@ public class TaskList extends ArrayList<Task> {
      * @param storage Storage used to save the new tasks after removing the specified task.
      * @return The Task that was removed from the list
      */
-    public Task remove(int index, Storage storage) {
-        // TODO: find and remove from file O(N)
+    public Task remove(int index, Storage storage) throws DukeIoException {
+        assert index >= 0 : "`index` should be non-negative";
+        assert index < super.size() : "`index` should be less than size of task list";
         Task task = super.remove(index);
-        try {
-            storage.save(this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        storage.save(this);
         return task;
     }
 
@@ -65,12 +60,8 @@ public class TaskList extends ArrayList<Task> {
      * @param task    Task to be marked as done.
      * @param storage Storage used to save the new tasks after marking the specified task as done.
      */
-    public void markAsDone(Task task, Storage storage) {
+    public void markAsDone(Task task, Storage storage) throws DukeIoException {
         task.markAsDone();
-        try {
-            storage.save(this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        storage.save(this);
     }
 }

@@ -32,7 +32,24 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setDuke(Duke d) {
-        duke = d;
+        this.duke = d;
+        // get status response about data loading
+        String response = duke.getResponse();
+        this.showDukeDialog(response);
+        this.showWelcomeDialog();
+    }
+
+    private void showDukeDialog(String dukeResponse) {
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeResponse, dukeImage));
+    }
+
+    private void showUserDialog(String userInput) {
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(userInput, userImage));
+    }
+
+    private void showWelcomeDialog() {
+        String response = duke.getWelcomeResponse();
+        this.showDukeDialog(response);
     }
 
     /**
@@ -43,10 +60,8 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-            DialogBox.getUserDialog(input, userImage),
-            DialogBox.getDukeDialog(response, dukeImage)
-        );
+        this.showUserDialog(input);
+        this.showDukeDialog(response);
         userInput.clear();
     }
 }

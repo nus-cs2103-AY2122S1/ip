@@ -5,12 +5,12 @@ import duke.Storage;
 import duke.task.TaskList;
 
 /**
- * ExitCommand class encapsulates command to exit Duke.
+ * WelcomeCommand class encapsulates Duke's welcome.
  */
-public class ExitCommand extends Command {
+public class WelcomeCommand extends Command {
     @Override
     public void execute(Duke duke, TaskList tasks, Storage storage) {
-        String message = "\"Bye. Hope to see you again soon!\"";
+        String message = "Hello! I'm Duke.\nWhat can I do for you?";
         duke.setResponse(message);
     }
 }

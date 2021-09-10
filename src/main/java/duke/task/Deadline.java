@@ -18,22 +18,22 @@ public class Deadline extends Task {
     /**
      * Deadline
      */
-    protected LocalDate by;
+    protected LocalDate deadlineDate;
 
     /**
      * Constructs a Deadline with the specified description and deadline.
      *
-     * @param description Description.
-     * @param by          Deadline.
+     * @param description  Description.
+     * @param deadlineDate Deadline.
      * @throws DukeException If either the description or deadline does not follow the format.
      */
-    public Deadline(String description, String by) throws DukeException {
+    public Deadline(String description, String deadlineDate) throws DukeException {
         super(description);
-        if (by.isEmpty()) {
+        if (deadlineDate.isEmpty()) {
             throw new DukeIllegalFormatException("☹ OOPS!!! The deadline cannot be empty.");
         }
         try {
-            this.by = LocalDate.parse(by);
+            this.deadlineDate = LocalDate.parse(deadlineDate);
         } catch (DateTimeParseException e) {
             throw new DukeIllegalFormatException(
                 "☹ OOPS!!! Seems like you have entered a wrong date format. " + "Try this instead: YYYY-MM-DD"
@@ -43,13 +43,14 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[" + LABEL + "]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+        return "[" + LABEL + "]" + super.toString() + " (deadlineDate: " + deadlineDate
+            .format(DateTimeFormatter.ofPattern("MMM d yyyy"))
             + ")";
     }
 
     @Override
     public String toDataString() {
-        return LABEL + super.toDataString() + " | " + by;
+        return LABEL + super.toDataString() + " | " + deadlineDate;
     }
 
 }

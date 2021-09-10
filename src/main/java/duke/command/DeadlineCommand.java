@@ -1,7 +1,7 @@
 package duke.command;
 
+import duke.Duke;
 import duke.Storage;
-import duke.Ui;
 import duke.exception.DukeException;
 import duke.exception.DukeIllegalFormatException;
 import duke.task.Deadline;
@@ -22,7 +22,8 @@ public class DeadlineCommand extends AddCommand {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage, boolean shouldPrintMessage) throws DukeException {
+    public void execute(Duke duke, TaskList tasks, Storage storage)
+        throws DukeException {
         String[] line = description.split(" /by ");
         if (line.length != 2) {
             throw new DukeIllegalFormatException(
@@ -36,9 +37,6 @@ public class DeadlineCommand extends AddCommand {
         String message = "Got it. I've added this task:\n  "
             + task
             + "\nNow you have " + tasks.toArray().length + " task(s) in the list.";
-        if (shouldPrintMessage) {
-            ui.showMessage(message);
-        }
-        return message;
+        duke.setResponse(message);
     }
 }
