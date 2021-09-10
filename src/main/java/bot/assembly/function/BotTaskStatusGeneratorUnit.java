@@ -42,13 +42,13 @@ public class BotTaskStatusGeneratorUnit {
 
     /**
      * A method that generates a summary report of all task in task list to the user
-     * @throws EmptyTaskListException if the task list is empty
+     * @return task reports
      */
-    public String generateTaskTrackerReport() throws EmptyTaskListException {
+    public String generateTaskTrackerReport() {
 
         // throw empty list exception if task list is empty
         if (taskTracker.size() == 0) {
-            throw new EmptyTaskListException(botStaticMemoryUnit.ERROR_MESSAGE_EMPTY_TASKLIST);
+            return botStaticMemoryUnit.MESSAGE_EMPTY_TASKLIST;
         }
 
         StringBuilder formattedTask = new StringBuilder();
