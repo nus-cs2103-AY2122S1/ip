@@ -2,6 +2,7 @@ package duke;
 
 import duke.gui.Ui;
 import duke.task.TaskList;
+import duke.util.DukeException;
 import duke.util.Parser;
 import duke.util.Storage;
 

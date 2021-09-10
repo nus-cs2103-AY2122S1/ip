@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.util.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -13,8 +15,8 @@ public class Event extends Task {
      * Returns a new Event object.
      * @param eventName The user input.
      */
-    public Event(String eventName) {
-        super(eventName.substring(6, eventName.indexOf("/at")));
+    public Event(String eventName) throws DukeException {
+        super(eventName,6, eventName.indexOf("/at"));
         int start = eventName.indexOf("/at");
         this.eventDate = LocalDate.parse(eventName.substring(start + 4));
     }
@@ -25,7 +27,7 @@ public class Event extends Task {
      * @param isDone Whether the task is done.
      */
     public Event(String eventName, boolean isDone) {
-        super(eventName.substring(0, eventName.indexOf("(at:")), isDone);
+        super(eventName, isDone, 0, eventName.indexOf("(at:"));
         int start = eventName.indexOf("(at:") + 5;
         eventDate = LocalDate.parse(eventName.substring(start, start + 11),
                 DateTimeFormatter.ofPattern("MMM d yyyy"));

@@ -8,19 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import duke.DukeException;
-import duke.gui.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+
 
 /**
  * Class that stores Duke data to the hard disk and reads Duke data from the hard disk.
  */
 public class Storage {
     private static String saveLocation;
-    private static final Ui ui = new Ui();
 
     /**
      * Returns a new Storage object.
@@ -41,6 +39,8 @@ public class Storage {
         boolean isDone = input.charAt(7) == 'X';
         String taskName = input.substring(10);
         Task newTask;
+
+        assert taskType == 'T' || taskType == 'D' || taskType == 'E' : "Unexpected task type in save file";
 
         switch (taskType) {
         case 'T':
@@ -75,8 +75,8 @@ public class Storage {
             }
 
             reader.close();
-        } catch (IOException e) {
-            throw new DukeException("OOPS! File not found.");
+        } catch (IOException | DukeException e) {
+            throw new DukeException("Corrupted file");
         }
 
         return tasks;
@@ -86,7 +86,7 @@ public class Storage {
      * Saves the Duke file to hard disk.
      * @param input The tasks.
      */
-    public void saveFile(String input) {
+    public static void saveFile(String input) {
         try {
             FileWriter writer = new FileWriter(saveLocation);
             writer.write(input);
