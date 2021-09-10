@@ -25,15 +25,17 @@
                         onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0"
                         style="-fx-background-color: black;" text="Send" textFill="WHITE" />
                 <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0"
-                            prefHeight="557.0" prefWidth="400.0" vvalue="1.0" style="-fx-border-color: black">
-                    <content>
-                        <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0">
-                            <style>
-                                -fx-background-image: url("images/chatBackground.jpg");
-                                -fx-background-size: cover;
-                            </style>
-                        </VBox>
-                    </content>
+                            prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
+                    <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0"/>
+                    <style>
+                        -fx-border-color: black;
+                        -fx-background-image: url("images/chatBackground.jpg");
+                        -fx-background-size: cover;
+                        -fx-background-position: center;
+                        -fx-background-attachment: fixed;
+                        -fx-background-repeat: no-repeat;
+                        -fx-background: rgba(255,255,255,0.1);
+                    </style>
                 </ScrollPane>
             </AnchorPane>
         </Scene>
