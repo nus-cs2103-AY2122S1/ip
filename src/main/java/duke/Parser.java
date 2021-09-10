@@ -339,7 +339,7 @@ public class Parser {
                     throw new DukeException.DukeNoTimeGivenException();
                 } else { // proper description and by
                     if (isValidLocalDate(by)) {
-                        d1 = LocalDate.parse(by);
+                        d1 = LocalDate.parse(by, ACCEPTDATEFORMAT);
                     }
                     handleNewTask(description, d1, Category.DEADLINE);
                 }
@@ -373,7 +373,7 @@ public class Parser {
                 } else {
                     // proper description and at
                     if (isValidLocalDate(at)) {
-                        d1 = LocalDate.parse(at);
+                        d1 = LocalDate.parse(at, ACCEPTDATEFORMAT);
                     }
                     handleNewTask(description, d1, Category.EVENT);
                 }

@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static duke.Deadline.PRINTDATEFORMAT;
+
 /**
  * Represents a storage space that loads the <code>list.txt</code> of existing tasks and saves new
  * changes to the <code>list.txt</code>.
@@ -94,11 +96,13 @@ public class Storage {
                 break;
             case DEADLINE:
                 Deadline deadline = (Deadline) task;
-                newInput = newInput + ("D | " + done + " | " + description + " | " + tags + " | " + deadline.by + "\n");
+                Object storeBy = deadline.by == null ? deadline.byDate.format(PRINTDATEFORMAT) : deadline.by;
+                newInput = newInput + ("D | " + done + " | " + description + " | " + tags + " | " + storeBy + "\n");
                 break;
             case EVENT:
                 Event event = (Event) task;
-                newInput = newInput + ("E | " + done + " | " + description + " | " + tags + " | " + event.at + "\n");
+                Object storeAt = event.at == null ? event.atDate.format(PRINTDATEFORMAT) : event.at;
+                newInput = newInput + ("E | " + done + " | " + description + " | " + tags + " | " + storeAt + "\n");
                 break;
             default:
             }

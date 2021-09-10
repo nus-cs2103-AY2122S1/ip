@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
  */
 public class Ui {
 
-    protected static final String FRIENDGREETING = "(*^_^*) Friend says: \n";
+    protected static final String FRIENDGREETING = "Friend says: \n";
     protected static final String LOGO =
          " _____     _                          _        \n"
         + "|  ___|  __  _  ___   _,___       | |       \n"
