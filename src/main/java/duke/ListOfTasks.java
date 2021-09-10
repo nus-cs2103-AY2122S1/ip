@@ -178,6 +178,28 @@ public class ListOfTasks {
         count = count + 1;
         ui.printNumberOfTasks(count);
     }
+    /**
+     * This method manages listing out similar tasks.
+     *
+     * @param searchString represents information we
+     *                     are using to find similar tasks.
+     */
+    public void findSimilarTasks(String searchString) {
+        searchString = removeVal(searchString, "find");
+        ArrayList<String> similarTasks = new ArrayList<String>();
+        similarTasks.add("\t Here are the matching tasks in your list:");
+
+        int index = 1;
+        for (Task task :  this.tasks) {
+            if (task.isContainingSimilarInformation(searchString)) {
+                similarTasks.add("\t" + index + "." + task);
+                index++;
+            }
+        }
+        System.out.println(searchString);
+        ui.printSimilarTasks(similarTasks);
+    }
+
 
 }
 

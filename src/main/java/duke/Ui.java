@@ -108,4 +108,15 @@ public class Ui {
          System.out.println("     Noted. I've removed this task:");
     }
 
+    /**
+     * Method provides message for list of similar tasks.
+     *
+     * @param similarTasks represents array with common tasks
+     */
+    public void printSimilarTasks(ArrayList<String> similarTasks) {
+        for (int i = 0; i < similarTasks.size(); i++) {
+            System.out.println(similarTasks.get(i));
+        }
+    }
+
 }

@@ -74,4 +74,15 @@ public class Task {
             return  "[ ] ";
         }
     }
+
+    /**
+     * Returns boolean of whether string can be found in the task information.
+     *
+     * @param searchString words we are searching for in task information
+     * @return boolean depending on whether task consists of searchString
+     */
+    public boolean isContainingSimilarInformation(String searchString) {
+        return this.information.contains(searchString);
+    }
+
 }

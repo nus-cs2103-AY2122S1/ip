@@ -42,7 +42,8 @@ public class Parser {
                             try {
                                 tasks.addDeadline(command);
                             } catch (DateTimeParseException e) {
-                                throw new DukeException("    OOPS!!! The date for the deadline "
+                                throw new DukeException("    OOPS!!! The date "
+                                        + "for the deadline "
                                         + "should be written in the "
                                         + "form: yyyy-mm-dd.");
                             }
@@ -54,9 +55,9 @@ public class Parser {
                     try {
                         if (command.equals("event ")
                                 || command.equals("event")) {
-                            throw new DukeException("    OOPS!!! The description "
-                                    +
-                                    "of an event cannot be empty.");
+                            throw new DukeException("    OOPS!!! The "
+                                    + "description of an event "
+                                    + "cannot be empty.");
                         } else {
                             tasks.addEvent(command);
                         }
@@ -86,7 +87,20 @@ public class Parser {
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
-                }  else {
+                } else if (command.contains("find")) {
+                    try {
+                        if (command.equals("find ")
+                                || command.equals("find")) {
+                            throw new DukeException("    OOPS!!! The find "
+                                    +
+                                    "field cannot be empty.");
+                        } else {
+                            tasks.findSimilarTasks(command);
+                        }
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else {
                     throw new DukeException("    OOPS!!! I'm sorry, but "
                             +
                             "I don't know what that means :-(");
