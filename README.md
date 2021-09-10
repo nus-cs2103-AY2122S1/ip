@@ -8,7 +8,7 @@ Duke Bot is an offline PC Task Manager that helps you to keep track of your task
 Before you get started with Duke Bot, here is an introduction of the components and how you can work with them in Duke Bot:
    1. Types of Tasks:
       1. Todo: Tasks without any date/time
-      2. Event: Tasks that needs to be done on a specific date from a starting time to an ending time
+      2. Event: Tasks that needs to be done on a specific date from a start time to an end time
       3. Deadline: Tasks that needs to be done by a specific date/time
       
    1. Types of Commands:   
