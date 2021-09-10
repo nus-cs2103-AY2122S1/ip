@@ -1,7 +1,9 @@
 package duke.command;
 
 import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.taskList.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents a command class that find all tasks with matching keyword.
@@ -14,11 +16,13 @@ public class FindCommand extends Command {
     /**
      * A constructor for FindCommand.
      *
-     * @param tasks A list of current Tasks.
-     * @param input User input.
+     * @param tasks   A list of current Tasks.
+     * @param parser  Parser to interpret user input.
+     * @param storage Storage to store data
+     * @param ui      Ui responsible for user interaction.
      */
-    public FindCommand(TaskList tasks, String input) {
-        super(tasks, input);
+    public FindCommand(TaskList tasks, Parser parser, Storage storage, Ui ui) {
+        super(tasks, parser, storage, ui);
     }
 
     /**
@@ -27,16 +31,7 @@ public class FindCommand extends Command {
      * @return String representation of a list of matching tasks.
      */
     public String find() {
-        Parser parser = new Parser(input);
         String keyword = parser.getKeyword();
-        String result = "Here are the matching tasks in your list:";
-        int count = 1;
-        for (int i = 0; i < tasks.getSize(); i++) {
-            if (tasks.getTask(i).contains(keyword)) {
-                result += "\n" + count + "." + tasks.getTask(i);
-                count += 1;
-            }
-        }
-        return result;
+        return ui.showMatchList(keyword, tasks);
     }
 }

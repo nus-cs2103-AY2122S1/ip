@@ -1,4 +1,4 @@
 D, false, borrow book /by 2021-02-06T18:00
-E, false, project meeting /from 2021-02-04T18:00 /to 2021-02-05T23:59
-T, true, read
-T, false, hello
+T, true, join sport club
+E, true, borrow book /from 2021-02-06T18:00 /to 2021-02-06T23:00
+>>>>>>> 60942d61e0e2f1acc245dec66d7ba4ec01b2e66b
