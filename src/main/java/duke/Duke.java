@@ -1,10 +1,12 @@
 package duke;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.command.Command;
 import duke.command.Parser;
+import duke.task.Task;
 import duke.util.DukeException;
 import duke.util.Message;
 import duke.util.Storage;
@@ -48,6 +50,7 @@ public class Duke {
             taskList = new TaskList(storage.importTask(), ui, storage);
             return ui.formatLoadTaskSuccessMessage();
         } catch (FileNotFoundException e) {
+            taskList = new TaskList(new ArrayList<Task>(), ui, storage);
             return ui.formatHelpMessage();
         }
     }
