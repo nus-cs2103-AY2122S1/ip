@@ -106,7 +106,7 @@ public class Storage {
         BufferedWriter bw = new BufferedWriter(new FileWriter(txt));
         String curLine;
         for (int i = 0; i < t.size(); i++) {
-            curLine = t.getTask(i).toString();
+            curLine = t.getTask(i).toFileString();
             bw.write(curLine + "\n");
         }
         bw.close();

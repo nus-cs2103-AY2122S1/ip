@@ -72,4 +72,13 @@ public abstract class Task {
     public String toString() {
         return typeIcon() + " " + completionIcon() + " " + description;
     }
+
+    /**
+     * Returns a String to be written to the output file.
+     *
+     * @return The String.
+     */
+    public String toFileString() {
+        return typeIcon() + " " + completionIcon() + " " + description;
+    }
 }

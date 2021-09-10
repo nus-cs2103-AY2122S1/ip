@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -28,6 +29,11 @@ public class Event extends Task {
 
     @Override
     public String toString() {
+        return super.toString() + " (at: " + startDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a")) + ")" + super.getTags();
+    }
+
+    @Override
+    public String toFileString() {
         return super.toString() + " (at: " + startDate + ")" + super.getTags();
     }
 }
