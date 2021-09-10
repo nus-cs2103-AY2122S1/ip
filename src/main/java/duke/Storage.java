@@ -17,10 +17,16 @@ public class Storage {
     private final String PROJECT_ROOT = System.getProperty("user.dir");
     private final Path DATA_DIRECTORY_PATH = Paths.get(PROJECT_ROOT,"data");
 
+    private Path dataPath;
+    private File dukeData;
+
     /**
      * Constructor for Storage.
      */
-    Storage() {}
+    Storage() {
+        this.dataPath = DATA_DIRECTORY_PATH.resolve("duke.txt");
+        this.dukeData = new File(dataPath.toString());
+    }
 
     /**
      * Saves all Entries from entries into memory.
@@ -53,43 +59,9 @@ public class Storage {
      * @throws DukeException Error thrown if file is missing/corrupted.
      */
     public EntryList readData() throws DukeException {
-        Path dataPath = DATA_DIRECTORY_PATH.resolve("duke.txt");
-        File dukeData = new File(dataPath.toString());
         EntryList entries = new EntryList();
         try {
-            Scanner fileScanner = new Scanner(dukeData);
-            fileScanner.useDelimiter("[,\n]");
-            while (fileScanner.hasNext()) {
-                String entryType = fileScanner.next();
-                boolean isDone = Integer.parseInt(fileScanner.next()) == 1;
-                String entryData = fileScanner.next();
-                Entry nextEntry = new Todo("");
-                boolean hasNextEntry = true;
-                switch (entryType) {
-                case "T":
-                    nextEntry = new Todo(entryData);
-                    break;
-                case "D":
-                    String deadlineTiming = fileScanner.next();
-                    nextEntry = new Deadline(entryData, deadlineTiming);
-                    break;
-                case "E":
-                    String eventTiming = fileScanner.next();
-                    nextEntry = new Event(entryData, eventTiming);
-                    break;
-                default:
-                    //Corrupted Entry Case
-                    hasNextEntry = false;
-                    break;
-                }
-                if (hasNextEntry) {
-                    if (isDone) {
-                        nextEntry.setDone();
-                    }
-                    entries.addEntry(nextEntry);
-                }
-            }
-            return entries;
+            return addEntriesFromFile(entries);
         } catch (FileNotFoundException e) {
             try {
                 if (!(dukeData.createNewFile())) {
@@ -101,5 +73,38 @@ public class Storage {
                 throw new DukeException("Uh-Oh! Your Data can't be stored!");
             }
         }
+    }
+
+    private EntryList addEntriesFromFile(EntryList entries) throws DukeException, FileNotFoundException {
+        Scanner fileScanner = new Scanner(dukeData).useDelimiter("[,\n]");
+        while (fileScanner.hasNext()) {
+            String entryType = fileScanner.next();
+            boolean isDone = Integer.parseInt(fileScanner.next()) == 1;
+            String entryData = fileScanner.next();
+            Entry nextEntry = new Todo("");
+            boolean hasNextEntry = true;
+            switch (entryType) {
+                case "T":
+                    nextEntry = new Todo(entryData);
+                    break;
+                case "D":
+                    nextEntry = new Deadline(entryData, fileScanner.next()); //fileScanner.next() will contain timing
+                    break;
+                case "E":
+                    nextEntry = new Event(entryData, fileScanner.next()); //fileScanner.next() will contain timing
+                    break;
+                default:
+                    //Corrupted Entry Case
+                    hasNextEntry = false;
+                    break;
+            }
+            if (hasNextEntry) {
+                if (isDone) {
+                    nextEntry.setDone();
+                }
+                entries.addEntry(nextEntry);
+            }
+        }
+        return entries;
     }
 }

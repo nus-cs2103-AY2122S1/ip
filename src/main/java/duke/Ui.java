@@ -5,38 +5,26 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
+import java.util.Objects;
 
 /**
  * Class that implements methods to present the Duke.
  */
 public class Ui {
 
-//    private AnchorPane container;
-//    private ScrollPane scrollPane;
-//    private VBox dukeContainer;
-//    private Button sendButton;
-//    private Label sideLabel;
-//    private Scene dukeScene;
-//    private TextField dukeInput;
+    private final Image USER = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaUser.png")));
+    private final Image DUKE = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke.png")));
 
     /**
      * Constructor to create a UI object.
      */
     Ui() {
-//        container = new AnchorPane();
-//        scrollPane = new ScrollPane();
-//        dukeContainer = new VBox();
-//        sendButton = new Button("Send");
-//        sideLabel = new Label("DUKE");
-//        dukeScene = new Scene(dukeContainer);
-//        dukeInput = new TextField();
     }
 
     private final static String LOGO = " ____        _        \n"
@@ -56,44 +44,6 @@ public class Ui {
         System.out.println("What can Duke do for you today?");
         System.out.println(HORIZONTAL_DIVIDE);
     }
-
-//    public void startUi(Stage stage) {
-//        sideLabel.setStyle("-fx-start-margin: 150");
-//        sideLabel.setTextFill(Color.color(1,1,1));
-//        sideLabel.setFont(new Font("Helvetica", 45));
-//        container.setPrefSize(700.0, 500.0);
-//        container.setStyle("-fx-background-color: #13223b");
-//
-//        System.out.println("HERE");
-//        scrollPane.setContent(dukeContainer);
-//        scrollPane.setPrefSize(500.0, 473.3);
-//        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-//        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-//        scrollPane.setVvalue(1.0);
-//        scrollPane.setFitToWidth(true);
-//        HBox topRow = new HBox();
-//        topRow.getChildren().addAll(scrollPane, sideLabel);
-//
-//        container.getChildren().addAll(topRow, dukeInput, sendButton);
-//        dukeContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-//
-//        dukeInput.setPrefWidth(496.0);
-//
-//        sendButton.setPrefWidth(200.0);
-//
-//        AnchorPane.setTopAnchor(scrollPane, 1.0);
-//        AnchorPane.setBottomAnchor(sendButton, 1.0);
-//        AnchorPane.setRightAnchor(sendButton, 1.0);
-//        AnchorPane.setLeftAnchor(dukeInput , 1.0);
-//        AnchorPane.setBottomAnchor(dukeInput, 1.0);
-//
-//        stage.setTitle("Duke");
-//        stage.setResizable(false);
-//        stage.setMinHeight(500.0);
-//        stage.setMinWidth(700.0);
-//        stage.setScene(dukeScene);
-//        stage.show();
-//    }
 
     /**
      * Prints out the added entry.
@@ -173,7 +123,7 @@ public class Ui {
     /**
      * Prints out farewell message.
      *
-     * @return String to say farewell to user.
+     * @return String to say farewell to USER.
      */
     public String getGoodByeUser() {
         return "Bye. Hope to see you again soon!";

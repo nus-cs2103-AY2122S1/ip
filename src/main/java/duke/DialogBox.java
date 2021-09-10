@@ -11,18 +11,18 @@ import javafx.scene.layout.HBox;
 public class DialogBox extends HBox {
 
     private Label text;
-    private ImageView displayPicture;
+    private final ImageView DISPLAY_PICTURE;
 
     public DialogBox(Label l, ImageView iv) {
         text = l;
-        displayPicture = iv;
+        DISPLAY_PICTURE = iv;
 
         text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        DISPLAY_PICTURE.setFitWidth(100.0);
+        DISPLAY_PICTURE.setFitHeight(100.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
+        this.getChildren().addAll(text, DISPLAY_PICTURE);
     }
 
     /**
@@ -45,13 +45,8 @@ public class DialogBox extends HBox {
         return db;
     }
 
-    public DialogBox padDukeDialog(int padding) {
-        text.setStyle("-fx-padding: " + padding + " 0 0 0");
-        return this;
-    }
-
-    public DialogBox padUserDialog(int padding) {
-        text.setStyle("-fx-padding: " + padding + " 0 0 0");
+    public DialogBox padDialog(int padding) {
+        text.setAlignment(Pos.BASELINE_RIGHT);
         return this;
     }
 }
