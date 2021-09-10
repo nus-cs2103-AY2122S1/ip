@@ -13,6 +13,7 @@ public abstract class Task {
     public Task(String taskName) {
         this.taskName = taskName;
         this.isCompleted = false;
+        assert !taskName.equals("") : "task name should not be empty";
     }
 
     /**

@@ -15,6 +15,7 @@ public class Ui {
      * @param taskList The TaskList object with tasks to be displayed.
      */
     public void printTasks(TaskList taskList) {
+        assert taskList != null : "task list cannot be null";
         System.out.println(taskList);
     }
 
