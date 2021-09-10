@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import duke.DateTimeHandler;
 import duke.Deadline;
+import duke.DukeException;
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
@@ -26,14 +27,14 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tl, Storage s, Ui ui, DateTimeHandler dth) {
+    public String execute(TaskList tl, Storage s, Ui ui, DateTimeHandler dth) throws DukeException {
         String args = super.getArguments();
         if (args.length() == 0) {
-            return "Please enter the name of the task after deadline";
+            throw new DukeException("Please enter the name of the task after deadline");
 
         }
         if (!args.contains("/by")) {
-            return "Please enter the deadline of the task after /by";
+            throw new DukeException("Please enter the deadline of the task after /by");
         }
 
         String description;
@@ -52,7 +53,7 @@ public class DeadlineCommand extends Command {
         }
         LocalDateTime deadlineDate = dth.parseDate(dateString);
         if (deadlineDate == null) {
-            return dth.invalidFormat();
+            throw new DukeException(dth.invalidFormat());
         }
         Deadline d = new Deadline(description, false, deadlineDate, tags);
         tl.addToList(d);

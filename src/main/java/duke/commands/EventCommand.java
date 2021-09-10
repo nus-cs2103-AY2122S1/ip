@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import duke.DateTimeHandler;
+import duke.DukeException;
 import duke.Event;
 import duke.Parser;
 import duke.Storage;
@@ -26,14 +27,14 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tl, Storage s, Ui ui, DateTimeHandler dth) {
+    public String execute(TaskList tl, Storage s, Ui ui, DateTimeHandler dth) throws DukeException {
         String args = super.getArguments();
         if (args.length() == 0) {
-            return "Please enter the name of the task after event";
+            throw new DukeException("Please enter the name of the task after event");
 
         }
         if (!args.contains("/at")) {
-            return "Please enter the start date of the task after /at";
+            throw new DukeException("Please enter the start date of the task after /at");
         }
         String description;
         String dateString;
@@ -50,7 +51,7 @@ public class EventCommand extends Command {
         }
         LocalDateTime startDate = dth.parseDate(dateString);
         if (startDate == null) {
-            return dth.invalidFormat();
+            throw new DukeException(dth.invalidFormat());
         }
         Event e = new Event(description, false, startDate, tags);
         tl.addToList(e);

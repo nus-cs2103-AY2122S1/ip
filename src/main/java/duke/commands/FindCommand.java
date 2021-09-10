@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.DateTimeHandler;
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -17,10 +18,10 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tl, Storage s, Ui ui, DateTimeHandler dth) {
+    public String execute(TaskList tl, Storage s, Ui ui, DateTimeHandler dth) throws DukeException {
         String args = super.getArguments();
         if (args.length() == 0) {
-            return "Please enter a search term after find";
+            throw new DukeException("Please enter a search term after find");
 
         }
         String[] results = tl.findInTasks(args);

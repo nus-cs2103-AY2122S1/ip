@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.DateTimeHandler;
+import duke.DukeException;
 import duke.Storage;
 import duke.Task;
 import duke.TaskList;
@@ -21,24 +22,24 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tl, Storage s, Ui ui, DateTimeHandler dth) {
+    public String execute(TaskList tl, Storage s, Ui ui, DateTimeHandler dth) throws DukeException {
         String args = super.getArguments();
         if (args.length() == 0) {
-            return "Please enter a number after done";
+            throw new DukeException("Please enter a number after done");
         }
         try {
             int index = Integer.parseInt(args);
             if (index > tl.size()) {
-                return "There are only " + tl.size() + " tasks";
+                throw new DukeException("There are only " + tl.size() + " tasks");
             } else if (index == 0) {
-                return "There is no task 0";
+                throw new DukeException("There is no task 0");
             }
             Task t = tl.getTask(index - 1);
             t.completeTask();
             return ui.formatMessage(tl.taskCompletedMessage(t));
 
         } catch (NumberFormatException e) {
-            return "Please enter a number after done";
+            throw new DukeException("Please enter a number after done");
         }
     }
 

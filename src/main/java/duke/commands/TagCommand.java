@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.DateTimeHandler;
+import duke.DukeException;
 import duke.Storage;
 import duke.Task;
 import duke.TaskList;
@@ -18,20 +19,20 @@ public class TagCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tl, Storage s, Ui ui, DateTimeHandler dth) {
+    public String execute(TaskList tl, Storage s, Ui ui, DateTimeHandler dth) throws DukeException {
         String args = super.getArguments();
         if (args.equals("")) {
-            return "Input which task you want to add tags to, followed by the tags";
+            throw new DukeException("Input which task you want to add tags to, followed by the tags");
         }
         String[] parts = args.split(" ");
         try {
             int index = Integer.parseInt(parts[0]);
             if (index > tl.size()) {
-                return "There are only " + tl.size() + " tasks";
+                throw new DukeException("There are only " + tl.size() + " tasks");
             } else if (index == 0) {
-                return "There is no task 0";
+                throw new DukeException("There is no task 0");
             } else if (parts.length < 2) {
-                return "Input tags after the number";
+                throw new DukeException("Input tags after the number");
             }
             Task t = tl.getTask(index - 1);
 
@@ -41,7 +42,7 @@ public class TagCommand extends Command {
             return "Tags successfully added";
 
         } catch (NumberFormatException e) {
-            return "Please enter a number after tag";
+            throw new DukeException("Please enter a number after tag");
         }
     }
 
