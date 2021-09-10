@@ -84,8 +84,8 @@ public class Storage {
     }
 
     private void addTodoToList(String line, List<Task> listOfTasks, int lineNumber) {
-        String regex = "/";
-        String[] splittedLine = line.split(regex);
+        final String REGEX = "/";
+        String[] splittedLine = line.split(REGEX);
         try {
             checkStoredTodoValidity(splittedLine, lineNumber);
             Todo todo = new Todo(splittedLine[2]);
@@ -99,8 +99,8 @@ public class Storage {
     }
 
     private void addEventToList(String line, List<Task> listOfTasks, int lineNumber) {
-        String regex = "/";
-        String[] splittedLine = line.split(regex);
+        final String REGEX = "/";
+        String[] splittedLine = line.split(REGEX);
         try {
             checkStoredEventValidity(splittedLine, lineNumber);
             Event event = new Event(splittedLine[2], splittedLine[3]);
@@ -114,8 +114,8 @@ public class Storage {
     }
 
     private void addDeadlineToList(String line, List<Task> listOfTasks, int lineNumber) {
-        String regex = "/";
-        String[] splittedLine = line.split(regex);
+        final String REGEX = "/";
+        String[] splittedLine = line.split(REGEX);
         try {
             checkStoredDeadlineValidity(splittedLine, lineNumber);
             Deadline deadline = new Deadline(splittedLine[2], splittedLine[3]);
