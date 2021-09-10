@@ -35,20 +35,21 @@ public class Storage {
      * @throws DukeException If there is an issue creating or reading the storage file.
      */
     public Stream<String> load() throws DukeException {
-        Stream<String> lines = Stream.empty();
+        Stream<String> lines;
         if (!Files.exists(dataPath)) {
             try {
                 Files.createFile(dataPath);
             } catch (IOException e) {
                 throw new DukeException(e.getMessage());
             }
-        } else {
-            try {
-                lines = Files.lines(dataPath);
-            } catch (IOException e) {
-                throw new DukeException(e.getMessage());
-            }
         }
+
+        try {
+            lines = Files.lines(dataPath);
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
+        }
+
         return lines;
     }
 
