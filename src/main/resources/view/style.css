@@ -1,5 +1,5 @@
 .root {
-    -fx-font-size: 14px;
+    -fx-font-size: 13px;
     -fx-font-family: sans-serif;
     -fx-background-color: #ffffff;
 }
@@ -10,7 +10,7 @@
 }
 
 .dialog-box-section Text {
-    -fx-font-size: 15px;
+    -fx-font-size: 13px;
     /*-fx-font-family: "Times New Roman";*/
     -fx-background-color: #FDFEFE;
     /*-fx-fill: #ebfff6;*/

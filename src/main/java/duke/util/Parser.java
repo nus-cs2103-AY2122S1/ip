@@ -34,24 +34,24 @@ public class Parser {
      * @return System's reply message to user input
      */
     public String parseCommand(String userInput) {
-        if (userInput.matches(TaskList.LIST_COMMAND_REGEX)) {
+        if (userInput.matches(Ui.LIST_COMMAND_REGEX)) {
             return String.format(
                     "Here are the tasks in your list:\n%s",
                     TASKLIST.toString()
             );
-        } else if (userInput.matches(TaskList.BYE_COMMAND_REGEX)) {
+        } else if (userInput.matches(Ui.BYE_COMMAND_REGEX)) {
             return Ui.CLOSING_STATEMENT;
             // MainWindow handles termination logic (closure of application)
-        } else if (userInput.matches(TaskList.FIND_COMMAND_REGEX)) {
+        } else if (userInput.matches(Ui.FIND_COMMAND_REGEX)) {
             String keyword = userInput.split(" ", 2)[1];
 
             return TASKLIST.executeFindCommand(keyword);
-        } else if (userInput.matches(TaskList.DONE_COMMAND_REGEX)) {
+        } else if (userInput.matches(Ui.DONE_COMMAND_REGEX)) {
             String inputBody = userInput.split(" ", 2)[1];
             int idxFrom0 = Integer.parseInt(inputBody) - 1;
 
             return TASKLIST.executeDoneCommand(idxFrom0);
-        } else if (userInput.matches(TaskList.DELETE_COMMAND_REGEX)) {
+        } else if (userInput.matches(Ui.DELETE_COMMAND_REGEX)) {
             //eg. delete 3
             String inputBody = userInput.split(" ", 2)[1];
             int idxFrom0 = Integer.parseInt(inputBody) - 1;
@@ -99,6 +99,8 @@ public class Parser {
             );
             TASKLIST.addTask(newTask);
             return reply;
+        } else if (userInput.matches(Ui.HELP_COMMAND_REGEX)) {
+            return Ui.allUserCommandsSyntax();
         }
         throw DukeException.of(userInput);
     }
