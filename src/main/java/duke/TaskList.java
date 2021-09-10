@@ -157,7 +157,7 @@ public class TaskList {
      */
     private Task cleanData(String data) {
         String[] dataParts = data.split("[|]");
-        Task tempTask = new ToDo("temp");
+        Task tempTask = new ToDo("");
         if (dataParts.length == 3) {
             tempTask = new ToDo(dataParts[2]);
         } else if (dataParts[0].equals("D")) {
@@ -172,6 +172,7 @@ public class TaskList {
             tempTask.markAsDone();
         }
 
+        assert !tempTask.toString().equals(new ToDo("").toString()) : "Could not get task from data";
         return tempTask;
     }
 }
