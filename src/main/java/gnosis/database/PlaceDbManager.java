@@ -1,7 +1,6 @@
-package gnosis.place;
+package gnosis.database;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -13,27 +12,25 @@ import java.util.stream.Collectors;
 import gnosis.model.Place;
 
 
-public class PlaceStorageManager {
+public class PlaceDbManager extends DatabaseManager {
 
-    private static final String DIRECTORY_PATH = "data";
-    private static final String FILE_PATH = DIRECTORY_PATH + "/places.csv";
-    private static final File FILE = new File(FILE_PATH);
-    private static final String DELIMITER = ",";
-
+    public PlaceDbManager(String fileName) {
+        super(fileName);
+    }
 
     /**
      * Loads up Gnosis file to display.
      *
      * @return places Returns a list of places from file.
      */
-    public static List<Place> loadGnosisPlaces() {
+    public List<Place> loadGnosisPlaces() {
         //check if user has folder:
         // if no folder -> means no data found -> create one from scratch
         // if folder found -> load to arraylist places
-        if (PlaceStorageManager.isDataFileAvail()) {
-            return PlaceStorageManager.getTasksFromFile();
+        if (this.isDataFileAvail()) {
+            return this.getTasksFromFile();
         } else {
-            PlaceStorageManager.createDataFolder();
+            this.createDataFolder();
             return new ArrayList<>();
         }
     }
@@ -43,16 +40,16 @@ public class PlaceStorageManager {
      *
      * @param places List of places to write to file.
      */
-    public static void writePlacesToFile(List<Place> places) {
+    public void writePlacesToFile(List<Place> places) {
         try {
-            BufferedWriter writer = Files.newBufferedWriter(Paths.get(FILE_PATH));
+            BufferedWriter writer = Files.newBufferedWriter(Paths.get(this.getFilePath()));
             writer.write("Place visited,Address,DateTime");
             writer.newLine();
 
             for (Place record: places) {
 
-                String oneLine = record.getName() + DELIMITER
-                        + record.getAddress() + DELIMITER
+                String oneLine = record.getName() + DatabaseManager.DELIMITER
+                        + record.getAddress() + DatabaseManager.DELIMITER
                         + record.getDateVisited();
 
                 writer.write(oneLine);
@@ -68,14 +65,14 @@ public class PlaceStorageManager {
     }
 
 
-    private static List<Place> getTasksFromFile() {
+    private List<Place> getTasksFromFile() {
 
         List<Place> places = new ArrayList<>();
         try {
-            places = Files.newBufferedReader(Paths.get(FILE_PATH))
+            places = Files.newBufferedReader(Paths.get(this.getFilePath()))
                     .lines()
                     .skip(1)
-                    .map(PlaceStorageManager::parsePlace)
+                    .map(PlaceDbManager::parsePlace)
                     .collect(Collectors.toList());
 
         } catch (IOException e) {
@@ -92,31 +89,5 @@ public class PlaceStorageManager {
         String address = tokens[1];
         LocalDateTime dt = LocalDateTime.parse(tokens[2]);
         return new Place(name, address, dt);
-    }
-
-    // returns value whether data folder and file was created successfully
-    private static boolean createDataFolder() {
-        // create folder
-        return !FILE.exists() && FILE.getParentFile().mkdir();
-    }
-
-    public static boolean isDataFileAvail() {
-        return Files.isDirectory(Paths.get(DIRECTORY_PATH)) && FILE.exists();
-    }
-
-
-    /**
-     * copy saved tasked file to indicated path to export to.
-     *
-     * @param pathToExport path to export file to
-     */
-    public static void copyTaskToPath(File pathToExport) {
-
-        try {
-
-            Files.copy(FILE.toPath(), pathToExport.toPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

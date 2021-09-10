@@ -1,26 +1,51 @@
-package gnosis.place;
+package gnosis.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
+import gnosis.database.PlaceDbManager;
+import gnosis.model.Command;
+import gnosis.model.CommandListener;
 import gnosis.model.Place;
+import gnosis.ui.GnosisUI;
 import gnosis.util.GnosisConstants;
 import gnosis.util.GnosisException;
 
-/**
- * PlaceCommandManager class handles the
- * command logic based on user input.
- *
- * @author Pawandeep Singh
- * */
-public class PlaceCommandManager {
+
+
+public class PlaceController implements CommandListener {
 
     private List<Place> places;
+    private PlaceDbManager placeDbManager = new PlaceDbManager("places");
 
-    public PlaceCommandManager(List<Place> places) {
-        this.places = places;
+    public PlaceController() {
+        this.places = placeDbManager.loadGnosisPlaces();
+    }
+
+    @Override
+    public void executeCommand(Command commandToExecute, String userInput, GnosisUI view) throws GnosisException {
+        // do something
+        switch (commandToExecute) {
+        case VISITED:
+            // add place visited
+            Place place = this.addPlace(userInput);
+            view.updatePlaceManagementViewMessage(place, this.getNumOfPlaces());
+            break;
+        case PLACE:
+            // list places
+            view.displayAllPlaces(this.getPlaces());
+            break;
+        default:
+            throw new GnosisException(GnosisConstants.COMMAND_NOT_FOUND_MESSAGE);
+        }
+
+        this.placeDbManager.writePlacesToFile(this.places);
+    }
+
+    public boolean isPlacesLoaded() {
+        return placeDbManager.isDataFileAvail();
     }
 
     /**
@@ -83,5 +108,7 @@ public class PlaceCommandManager {
 
         return ldt;
     }
+
+
 
 }

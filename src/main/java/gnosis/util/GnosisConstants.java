@@ -34,10 +34,10 @@ public class GnosisConstants {
             + "NEW TASKS CAN NOW BE SAVED IN THE DATA FOLDER -- ";
 
     public static final String DATA_PLACE_FILE_FOUND_MESSAGE = "SAVED PLACE DATA FOUND -- "
-            + "YOU CAN VIEW YOUR SAVED PLACES -- ";
+            + "YOU CAN VIEW YOUR SAVED PLACE -- ";
 
     public static final String DATA_PLACE_FILE_NOT_FOUND_MESSAGE = "NO SAVED PLACE DATA FOUND -- "
-            + "NEW PLACES CAN NOW BE ADDED IN THE DATA FOLDER -- ";
+            + "NEW PLACE CAN NOW BE ADDED IN THE DATA FOLDER -- ";
 
     //TASK MESSAGE CONSTANTS
     public static final String TODO_EMPTY_EXCEPT_MESSAGE = "Todo description cannot be empty!";

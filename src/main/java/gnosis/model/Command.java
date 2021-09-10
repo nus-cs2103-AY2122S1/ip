@@ -1,9 +1,5 @@
 package gnosis.model;
 
-import java.util.List;
-
-import gnosis.place.PlaceCommandManager;
-import gnosis.task.TaskCommandManager;
 import gnosis.ui.GnosisUI;
 import gnosis.util.GnosisConstants;
 import gnosis.util.GnosisException;
@@ -14,7 +10,7 @@ import gnosis.util.GnosisException;
  *
  * @author Pawandeep Singh
  * */
-public enum Command implements ActionHandler {
+public enum Command {
     TODO,
     DEADLINE,
     EVENT,
@@ -22,13 +18,16 @@ public enum Command implements ActionHandler {
     FIND,
     DONE,
     DELETE,
-    PLACES,
+    PLACE,
     VISITED,
     BYE;
 
     public static String getCommandIdentifier(Command command) {
-        String identifier = "";
+        String identifier;
         switch (command) {
+        case BYE:
+            identifier = GnosisConstants.SYSTEM_EXIT_IDENTIFER;
+            break;
         case TODO:
         case DEADLINE:
         case EVENT:
@@ -38,72 +37,15 @@ public enum Command implements ActionHandler {
         case DELETE:
             identifier = GnosisConstants.TASK_COMMAND_IDENTIFIER;
             break;
-        case PLACES:
+        case PLACE:
         case VISITED:
             identifier = GnosisConstants.PLACE_COMMAND_IDENTIFIER;
             break;
         default:
-            return GnosisConstants.SYSTEM_EXIT_IDENTIFER;
+            return GnosisConstants.COMMAND_NOT_FOUND_MESSAGE;
 
         }
         return identifier;
-    }
-
-    @Override
-    public void setTaskActionHandler(GnosisUI view, TaskCommandManager taskCommandManager,
-                                     Command command, String input) throws GnosisException {
-        switch (command) {
-        case TODO:
-            Todo td = taskCommandManager.addTodo(input);
-            view.updateTaskManagementViewMessage(command.name(), td, taskCommandManager.getNumOfTasks());
-            break;
-        case DEADLINE:
-            Deadline dl = taskCommandManager.addDeadline(input);
-            view.updateTaskManagementViewMessage(command.name(), dl, taskCommandManager.getNumOfTasks());
-            break;
-        case EVENT:
-            Event evt = taskCommandManager.addEvent(input);
-            view.updateTaskManagementViewMessage(command.name(), evt, taskCommandManager.getNumOfTasks());
-            break;
-        case LIST:
-            view.displayAllTasksMessage(taskCommandManager.getTasks());
-            break;
-        case FIND:
-            List<Task> filteredTasks = taskCommandManager.findMatchingTasks(input);
-            view.displayFoundTasksMessage(filteredTasks, input);
-            break;
-        case DONE:
-            // only if "done" command is call, we retrieve task index from user
-            int taskIndex = Integer.parseInt(input.trim()) - 1;
-            view.displayMarkedTaskMessage(taskCommandManager.markTaskAsDone(taskIndex), taskIndex + 1);
-            break;
-        case DELETE:
-            taskIndex = Integer.parseInt(input.trim()) - 1;
-            Task task = taskCommandManager.deleteTask(taskIndex);
-            view.updateTaskManagementViewMessage(command.name(), task, taskCommandManager.getNumOfTasks());
-            break;
-        default:
-            throw new GnosisException(GnosisConstants.COMMAND_NOT_FOUND_MESSAGE);
-        }
-    }
-
-    @Override
-    public void setPlaceActionHandler(GnosisUI view, PlaceCommandManager placeCommandManager,
-                                      Command command, String input) throws GnosisException {
-        // do something
-        switch (command) {
-        case VISITED:
-            // add place visited
-            Place place = placeCommandManager.addPlace(input);
-            view.updatePlaceManagementViewMessage(place, placeCommandManager.getNumOfPlaces());
-            break;
-        case PLACES:
-            // list places
-            view.displayAllPlaces(placeCommandManager.getPlaces());
-            break;
-        default:
-            throw new GnosisException(GnosisConstants.COMMAND_NOT_FOUND_MESSAGE);
-        }
     }
 }
 

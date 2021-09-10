@@ -1,32 +1,25 @@
-package gnosis.task;
+package gnosis.controller;
+
+import gnosis.model.Todo;
+import gnosis.util.GnosisException;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import java.util.ArrayList;
-
-import org.junit.jupiter.api.Test;
-
-import gnosis.model.Todo;
-import gnosis.util.GnosisException;
-
-
-public class TaskCommandManagerTest {
-
+public class TaskControllerTest {
     @Test
     public void getTasksNullListNullPointerExceptionThrown() {
-        TaskCommandManager taskCommandManager = new TaskCommandManager(null);
+        TaskController taskCommandManager = new TaskController();
         assertNull(taskCommandManager.getTasks(), "ERROR: There is tasks");
     }
 
     @Test
     public void addTodoToTaskManager_someValue_success() throws GnosisException {
-        TaskCommandManager taskCommandManager = new TaskCommandManager(new ArrayList<>());
+        TaskController taskCommandManager = new TaskController();
         Todo td = taskCommandManager.addTodo("JUNIT Test");
         assertEquals(td, taskCommandManager.getTasks().get(0));
     }
-
-
-
-
 }

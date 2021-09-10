@@ -1,12 +1,6 @@
 package gnosis.controller;
 
-import java.io.File;
-
 import gnosis.model.Command;
-import gnosis.place.PlaceCommandManager;
-import gnosis.place.PlaceStorageManager;
-import gnosis.task.TaskCommandManager;
-import gnosis.task.TaskStorageManager;
 import gnosis.ui.GnosisUI;
 import gnosis.util.GnosisConstants;
 import gnosis.util.GnosisException;
@@ -19,11 +13,12 @@ import gnosis.util.GnosisException;
  * */
 public class GnosisController {
 
-    /** Task Manager to handle task commands */
-    private TaskCommandManager taskCommandManager;
+    /** Task Controller to handle task commands */
+    private TaskController taskController;
 
-    /** Place Manager to handle place commands */
-    private PlaceCommandManager placeCommandManager;
+    /** Place Controller to handle place commands */
+    private PlaceController placeController;
+
 
     /** UI view of Gnosis */
     private GnosisUI view;
@@ -36,39 +31,38 @@ public class GnosisController {
      */
     public GnosisController(GnosisUI view) {
         this.view = view;
-        this.taskCommandManager = new TaskCommandManager(TaskStorageManager.loadGnosisTasks());
-        //TODO: UPDATE GNOSIS PLACE STORAGE
-        this.placeCommandManager = new PlaceCommandManager(PlaceStorageManager.loadGnosisPlaces());
+        this.taskController = new TaskController();
+        this.placeController = new PlaceController();
     }
 
     /**
      * Executes specified command from input.
      *
-     * @param command Command specified by user.
+     * @param strCommand Command specified by user.
      * @param commandInput input to perform from command.
      * @throws GnosisException If command not found.
      */
-    public void executeCommand(String command, String commandInput) throws GnosisException {
-        Command gc;
-        String identifier;
+    public void executeUserCommand(String strCommand, String commandInput) throws GnosisException {
+        Command command;
+        String commandIdentifier;
         try {
-            gc = Command.valueOf(command.toUpperCase().trim());
-            identifier = Command.getCommandIdentifier(gc);
+            command = Command.valueOf(strCommand.toUpperCase().trim());
+            commandIdentifier = Command.getCommandIdentifier(command);
         } catch (IllegalArgumentException e) {
             throw new GnosisException(GnosisConstants.COMMAND_NOT_FOUND_MESSAGE);
         }
 
-        // parse commands
-        if (identifier.equalsIgnoreCase(GnosisConstants.SYSTEM_EXIT_IDENTIFER)) {
+        if (commandIdentifier.equalsIgnoreCase(GnosisConstants.SYSTEM_EXIT_IDENTIFER)) {
             view.displayByeMessage();
-        } else if (identifier.equalsIgnoreCase(GnosisConstants.TASK_COMMAND_IDENTIFIER)) {
-            this.executeTaskCommand(gc, commandInput);
-        } else if (identifier.equalsIgnoreCase(GnosisConstants.PLACE_COMMAND_IDENTIFIER)) {
-            this.executePlaceCommand(gc, commandInput);
+        } else if (commandIdentifier.equalsIgnoreCase(GnosisConstants.TASK_COMMAND_IDENTIFIER)) {
+            this.executeTaskCommand(command, commandInput);
+        } else if (commandIdentifier.equalsIgnoreCase(GnosisConstants.PLACE_COMMAND_IDENTIFIER)) {
+            this.executePlaceCommand(command, commandInput);
         } else {
             throw new GnosisException(GnosisConstants.COMMAND_NOT_FOUND_MESSAGE);
         }
     }
+
 
     /**
      * Executes specified command from input.
@@ -80,13 +74,8 @@ public class GnosisController {
      * @throws NumberFormatException if taskInput for DONE and DELETE command cannot be converted to integer.
      */
     public void executeTaskCommand(Command gc, String taskInput) throws GnosisException, NumberFormatException {
-        gc.setTaskActionHandler(this.view, taskCommandManager, gc, taskInput);
-
-        // For every command executed, update tasks to file
-        TaskStorageManager.writeTasksToFile(taskCommandManager.getTasks());
+        this.taskController.executeCommand(gc, taskInput, this.view);
     }
-
-
 
     /**
      * Executes specified place command from input.
@@ -97,9 +86,7 @@ public class GnosisController {
      * @throws GnosisException If command not found.
      */
     public void executePlaceCommand(Command gc, String input ) throws GnosisException {
-        gc.setPlaceActionHandler(this.view, this.placeCommandManager, gc, input);
-
-        PlaceStorageManager.writePlacesToFile(placeCommandManager.getPlaces());
+        this.placeController.executeCommand(gc, input, this.view);
     }
 
     /**
@@ -107,10 +94,6 @@ public class GnosisController {
      *
      */
     public void loadGreetingMessage() {
-        view.displayGreetMessage(TaskStorageManager.isDataFileAvail(), PlaceStorageManager.isDataFileAvail());
-    }
-
-    public void exportToCsv(File pathToExport) {
-        TaskStorageManager.copyTaskToPath(pathToExport);
+        view.displayGreetMessage(taskController.isTaskLoaded(), placeController.isPlacesLoaded());
     }
 }

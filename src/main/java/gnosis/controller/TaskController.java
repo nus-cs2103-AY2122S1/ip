@@ -1,4 +1,4 @@
-package gnosis.task;
+package gnosis.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -6,20 +6,70 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import gnosis.database.TaskDbManager;
+import gnosis.model.Command;
+import gnosis.model.CommandListener;
 import gnosis.model.Deadline;
 import gnosis.model.Event;
 import gnosis.model.Task;
 import gnosis.model.Todo;
+import gnosis.ui.GnosisUI;
 import gnosis.util.GnosisConstants;
 import gnosis.util.GnosisException;
 
 
-public class TaskCommandManager {
+public class TaskController implements CommandListener {
 
     private List<Task> tasks;
+    private TaskDbManager taskDbManager = new TaskDbManager("tasks");
 
-    public TaskCommandManager(List<Task> tasks) {
-        this.tasks = tasks;
+    public TaskController() {
+        this.tasks = taskDbManager.loadTasks();
+    }
+
+    @Override
+    public void executeCommand(Command commandToExecute, String userInput, GnosisUI view) throws GnosisException {
+        // execute command
+        switch (commandToExecute) {
+        case TODO:
+            Todo td = this.addTodo(userInput);
+            view.updateTaskManagementViewMessage(commandToExecute.name(), td, this.getNumOfTasks());
+            break;
+        case DEADLINE:
+            Deadline dl = this.addDeadline(userInput);
+            view.updateTaskManagementViewMessage(commandToExecute.name(), dl, this.getNumOfTasks());
+            break;
+        case EVENT:
+            Event evt = this.addEvent(userInput);
+            view.updateTaskManagementViewMessage(commandToExecute.name(), evt, this.getNumOfTasks());
+            break;
+        case LIST:
+            view.displayAllTasksMessage(this.getTasks());
+            break;
+        case FIND:
+            List<Task> filteredTasks = this.findMatchingTasks(userInput);
+            view.displayFoundTasksMessage(filteredTasks, userInput);
+            break;
+        case DONE:
+            // only if "done" command is call, we retrieve task index from user
+            int taskIndex = Integer.parseInt(userInput.trim()) - 1;
+            view.displayMarkedTaskMessage(this.markTaskAsDone(taskIndex), taskIndex + 1);
+            break;
+        case DELETE:
+            taskIndex = Integer.parseInt(userInput.trim()) - 1;
+            Task task = this.deleteTask(taskIndex);
+            view.updateTaskManagementViewMessage(commandToExecute.name(), task, this.getNumOfTasks());
+            break;
+        default:
+            throw new GnosisException(GnosisConstants.COMMAND_NOT_FOUND_MESSAGE);
+        }
+
+        // update storage for every execution
+        taskDbManager.writeTasksToFile(this.tasks);
+    }
+
+    public boolean isTaskLoaded() {
+        return this.taskDbManager.isDataFileAvail();
     }
 
 
@@ -164,5 +214,4 @@ public class TaskCommandManager {
 
         return ldt;
     }
-
 }

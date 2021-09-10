@@ -1,7 +1,6 @@
-package gnosis.task;
+package gnosis.database;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -16,26 +15,21 @@ import gnosis.model.Task;
 import gnosis.model.TaskType;
 import gnosis.model.Todo;
 
-public class TaskStorageManager {
 
-    private static final String DIRECTORY_PATH = "data";
-    private static final String FILE_PATH = DIRECTORY_PATH + "/tasks.csv";
-    private static final File FILE = new File(FILE_PATH);
-    private static final String DELIMITER = ",";
+public class TaskDbManager extends DatabaseManager {
 
-    /**
-     * Loads up Gnosis file to display.
-     *
-     * @return tasks Returns a list of tasks from file.
-     */
-    public static List<Task> loadGnosisTasks() {
+    public TaskDbManager(String fileName) {
+        super(fileName);
+    }
+
+    public List<Task> loadTasks() {
         //check if user has folder:
         // if no folder -> means no data found -> create one from scratch
         // if folder found -> load to arraylist tasks
-        if (TaskStorageManager.isDataFileAvail()) {
-            return TaskStorageManager.getTasksFromFile();
+        if (this.isDataFileAvail()) {
+            return this.getTasksFromFile();
         } else {
-            TaskStorageManager.createDataFolder();
+            this.createDataFolder();
             return new ArrayList<>();
         }
     }
@@ -45,18 +39,18 @@ public class TaskStorageManager {
      *
      * @param tasks List of tasks to write to file.
      */
-    public static void writeTasksToFile(List<Task> tasks) {
+    public void writeTasksToFile(List<Task> tasks) {
         try {
-            BufferedWriter writer = Files.newBufferedWriter(Paths.get(FILE_PATH));
+            BufferedWriter writer = Files.newBufferedWriter(Paths.get(this.getFilePath()));
             writer.write("Task Type,is task completed?,Task name,DateTime");
             writer.newLine();
 
             for (Task record: tasks) {
                 int taskDone = record.isTaskDone() == 'X' ? 1 : 0;
 
-                String oneLine = record.getTaskType() + DELIMITER
-                        + taskDone + DELIMITER
-                        + record.getTaskName() + DELIMITER
+                String oneLine = record.getTaskType() + DatabaseManager.DELIMITER
+                        + taskDone + DatabaseManager.DELIMITER
+                        + record.getTaskName() + DatabaseManager.DELIMITER
                         + record.getDatetime().toString();
 
                 writer.write(oneLine);
@@ -72,14 +66,14 @@ public class TaskStorageManager {
     }
 
 
-    private static List<Task> getTasksFromFile() {
+    private List<Task> getTasksFromFile() {
 
         List<Task> tasks = new ArrayList<>();
         try {
-            tasks = Files.newBufferedReader(Paths.get(FILE_PATH))
+            tasks = Files.newBufferedReader(Paths.get(this.getFilePath()))
                     .lines()
                     .skip(1)
-                    .map(TaskStorageManager::parseTask)
+                    .map(TaskDbManager::parseTask)
                     .collect(Collectors.toList());
 
         } catch (IOException e) {
@@ -110,31 +104,5 @@ public class TaskStorageManager {
             return new Deadline(taskName, isTaskDone, dt);
         }
         return new Task(taskName, taskType, null, isTaskDone);
-    }
-
-    // returns value whether data folder and file was created successfully
-    private static boolean createDataFolder() {
-        // create folder
-        return !FILE.exists() && FILE.getParentFile().mkdir();
-    }
-
-    public static boolean isDataFileAvail() {
-        return Files.isDirectory(Paths.get(DIRECTORY_PATH)) && FILE.exists();
-    }
-
-
-    /**
-     * copy saved tasked file to indicated path to export to.
-     *
-     * @param pathToExport path to export file to
-     */
-    public static void copyTaskToPath(File pathToExport) {
-
-        try {
-
-            Files.copy(FILE.toPath(), pathToExport.toPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

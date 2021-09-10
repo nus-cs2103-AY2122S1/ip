@@ -94,7 +94,7 @@ public class GnosisUI extends AnchorPane {
                 action = sc.nextLine();
             }
 
-            this.gnosisController.executeCommand(command, action);
+            this.gnosisController.executeUserCommand(command, action);
 
         } catch (GnosisException ge) {
             displayMessage(ge.toString());
@@ -136,7 +136,7 @@ public class GnosisUI extends AnchorPane {
         String message = "";
 
         for (Task task: foundTasks) {
-            message += task.toString() + "\n";
+            message = message.concat(task.toString() + "\n");
         }
         displayMessage(message);
     }
@@ -165,7 +165,7 @@ public class GnosisUI extends AnchorPane {
             displayMessage("Listing all tasks in list:");
             String message = "";
             for (int i = 0; i < len; i++) {
-                message += (i + 1) + ". " + tasks.get(i) + "\n";
+                message = message.concat((i + 1) + ". " + tasks.get(i) + "\n");
             }
 
             displayMessage(message);
@@ -205,7 +205,7 @@ public class GnosisUI extends AnchorPane {
             displayMessage("Listing all places visited:");
             String message = "";
             for (int i = 0; i < len; i++) {
-                message += (i + 1) + ". " + places.get(i) + "\n";
+                message = message.concat((i + 1) + ". " + places.get(i) + "\n");
             }
             displayMessage(message);
 
@@ -230,7 +230,7 @@ public class GnosisUI extends AnchorPane {
 
         String msgs = "";
         for (String msg: messages) {
-            msgs += msg + "\n";
+            msgs = msgs.concat(msg + "\n");
         }
 
         dialogContainer.getChildren().add(DialogBox.getGnosisDialog(msgs));
@@ -251,9 +251,11 @@ public class GnosisUI extends AnchorPane {
         //Show save file dialog
         File file = fileChooser.showSaveDialog(((MenuItem) event.getTarget()).getParentPopup().getOwnerWindow());
 
-        if (file != null) {
-            //TaskStorageManager.exportTasks(file);
-            gnosisController.exportToCsv(file);
-        }
+        //TODO: IMPLEMENT EXPORTING
+//        if (file != null) {
+//            //TaskStorageManager.exportTasks(file);
+//
+//            //gnosisController.exportToCsv(file);
+//        }
     }
 }
