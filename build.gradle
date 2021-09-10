@@ -47,11 +47,11 @@ test {
 }
 
 application {
-    mainClassName = "pix.Pix"
+    mainClassName = "pix.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "Pix"
     archiveClassifier = null
 }
 

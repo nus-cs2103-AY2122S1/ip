@@ -138,6 +138,7 @@ public class Storage {
      *
      * @throws PixIoException
      */
+    // @@author tenebrius1-reused
     private void createNewFile() throws PixIoException {
         try {
             file.getParentFile().mkdirs();
