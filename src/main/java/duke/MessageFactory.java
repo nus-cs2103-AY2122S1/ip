@@ -13,7 +13,7 @@ public class MessageFactory {
             } else if (userStr.length() >= 4 && userStr.substring(0,4).equals("done")) {
                 int len = userStr.length();
                 int taskIndex = userStr.charAt(len - 1) - 49;
-                if (taskIndex >= TaskList.getTaskList().getTasks().size())
+                if (taskIndex >= TaskList.getTaskList().getTasks().size() || taskIndex < 0)
                     throw new ArrayIndexOutOfBoundsException();
                 return new CompleteTaskMessage(taskIndex);
             } else if (userStr.length() >= 6 && userStr.substring(0,6).equals("delete")) {
@@ -26,7 +26,7 @@ public class MessageFactory {
                 int len = userStr.length();
                 String searchStr = userStr.substring(5);
                 return new FindMessage(searchStr);
-            }else {
+            } else {
                 return new AddTaskMessage(userStr);
             }
         } catch (ArrayIndexOutOfBoundsException e) {

@@ -28,10 +28,6 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    public static void main(String[] args) {
-        // ...
-    }
-
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -92,7 +88,8 @@ public class Duke extends Application {
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
+        //load list of tasks
+        TaskListCsvHandler.loadAll();
         //greeting
         greetUser();
     }
@@ -110,6 +107,8 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(goodbye, new ImageView(duke))
         );
         userInput.clear();
+        boolean isStoreSuccessful = TaskListCsvHandler.insertTasks();
+        assert isStoreSuccessful == true : "couldn't store tasks";
         Platform.exit();
     }
 
