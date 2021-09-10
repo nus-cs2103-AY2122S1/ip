@@ -1,5 +1,7 @@
 package main.java.duke;
 
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -24,6 +26,8 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML private javafx.scene.control.Button closeButton;
+
 
     private Duke duke;
 
@@ -103,5 +107,9 @@ public class MainWindow extends AnchorPane {
      */
     public String readCommand() {
         return userInput.getText();
+    }
+
+    public void closeButtonAction(ActionEvent actionEvent) {
+        Platform.exit();
     }
 }

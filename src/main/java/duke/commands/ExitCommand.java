@@ -2,6 +2,7 @@ package main.java.duke.commands;
 import main.java.duke.*;
 
 import java.io.IOException;
+import javafx.application.Platform;
 
 /**
  * A command that says bye to user.
@@ -23,6 +24,7 @@ public class ExitCommand extends Command {
      * @param storage given storage object
      */
     public String execute(TaskList tasks, MainWindow gui, Storage storage) throws IOException, DukeException {
+        Platform.exit();
         return ("Bye! Neko wishes to see you again soon!\n");
     }
 
