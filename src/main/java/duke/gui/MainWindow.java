@@ -33,7 +33,7 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setWelcomeMessage() {
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog("Welcome", false));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog("Welcome, I am Duke++\nHow may I help you?", false));
     }
 
     /**
