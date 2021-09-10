@@ -122,12 +122,12 @@ public class Parser {
      * @return string representation of help page.
      */
     public static String showHelp() {
-        return "Show all tasks:\nlist\n\n"
-                + "Add Todo:\ntodo <todo description>\n\n"
+        return "Add Todo:\ntodo <todo description>\n\n"
                 + "Add Event:\nevent <event description> /at <dd/MM/yy> <HHmm>-<HHmm>\n\n"
                 + "Add Deadline:\ndeadline <deadline description> /by <dd/MM/yy> <HHmm>\n\n"
                 + "Mark task as done:\ndone <task index>\n\n"
                 + "Delete task:\ndelete <task index>\n\n"
+                + "Show all tasks:\nlist\n\n"
                 + "Find task(s):\nfind <keyword to find>";
     }
 }

@@ -249,7 +249,7 @@ public class TaskList {
                 + "\nNow you have " + size
                 + (size <= 1
                   ? " task "
-                  : " tasks " + "in your list.");
+                  : " tasks ") + "in your list.";
     }
 
     /**
