@@ -32,31 +32,29 @@ As mentioned above, there are three types of tasks and each will be added to you
 
 ### ToDo
 
-* A task without a set date for completion and can be added with the following command:
-
+A task without a set date for completion and can be added with the following command:
 
     todo <Description>
 
 ### Deadline
 
-* A task with a set date for completion and can be added with the following command:
-
-
+A task with a set date for completion and can be added with the following command:
+    
     deadline <Description> /by <Date>
 
 ### Event
 
 * An event is an occurrence at a certain time and can be added with the following command:
 
-
     event <Description> /at <Date>
+
 ---
 ## Viewing the Task List
 
 InferiorDuke is able to display the tasks in your task list with the following command:
 
-
     list
+
 ---
 ## Editing the Task List
 
