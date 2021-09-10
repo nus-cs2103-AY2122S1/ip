@@ -31,7 +31,7 @@ public class TaskList {
      * @return returns List of all Tasks that contain the Query.
      */
     public String search(String query) {
-        String result = "Here's what I found!: \n";
+        String result = "Here's what I found! \n";
         List<Task> results = processQuery(query);
 
         // Concatenates tasks into specified format
@@ -164,7 +164,8 @@ public class TaskList {
                 taskList.remove(taskNumber - 1);
 
                 result += "   " + taskToDelete + "\n";
-                result += "Now you have " + taskList.size() + " tasks in the list.";
+                result += "Now you have " + taskList.size() + " task"
+                        + (taskList.size() == 1 ? "" : "s") + " in the list.";
                 return result;
             } else {
                 throw new NeoException("Unable to Delete: Task does not exist");

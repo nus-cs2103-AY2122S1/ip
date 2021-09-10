@@ -140,7 +140,8 @@ public class Ui {
         String result = "";
         result += "Got it. I've added this task:\n";
         result += task + "\n";
-        result += "Now you have " + commands + " tasks in the list.\n";
+        result += "Now you have " + commands + " task"
+                + (commands.toString().equals("1") ? "" : "s") + " in the list.";
         return result;
     }
 
