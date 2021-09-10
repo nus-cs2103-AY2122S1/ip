@@ -14,6 +14,7 @@ keep track of tasks that needs to be completed.
 - Find tasks
 - List tasks
 - Sort tasks
+
 ### Find tasks
 
 Finds the all tasks that matches the user input keyword.
