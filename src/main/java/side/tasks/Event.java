@@ -92,15 +92,15 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        StringBuilder deadlineLine = new StringBuilder();
+        StringBuilder eventString = new StringBuilder();
         if (this.isDone) {
-            deadlineLine.append("[E][x] ");
+            eventString.append("[E][x] ");
         } else {
-            deadlineLine.append("[E][ ] ");
+            eventString.append("[E][ ] ");
         }
-        String deadlineDetails = this.description.replaceFirst("event", "")
+        String eventDetails = this.description.replaceFirst("event", "")
                 + "(at: " + this.startDatetime.toString() + " to " + this.endDatetime.toString() + ")";
-        deadlineLine.append(deadlineDetails);
-        return deadlineLine.toString();
+        eventString.append(eventDetails);
+        return eventString.toString();
     }
 }

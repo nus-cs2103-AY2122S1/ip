@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import side.util.TaskList;
@@ -29,8 +30,11 @@ public class SideGui extends Application {
         taskList.retrieve();
 
         try {
+            Image sideImage = new Image(this.getClass().getResourceAsStream("/images/side.png"));
             FXMLLoader fxmlLoader = new FXMLLoader(SideGui.class.getResource("/view/GuiWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
+            stage.setTitle("Side");
+            stage.getIcons().add(sideImage);
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<GuiWindow>getController().setTaskList(taskList);

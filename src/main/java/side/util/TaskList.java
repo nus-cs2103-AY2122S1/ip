@@ -146,8 +146,8 @@ public class TaskList {
         }
 
         for (int i = 0; i < this.taskLabel; i++) {
-            String fullTaskLine = (i + 1) + ". " + this.tasks.get(i).toString() + "\n";
-            tasksList.append(fullTaskLine);
+            String fullTaskString = (i + 1) + ". " + this.tasks.get(i).toString() + "\n";
+            tasksList.append(fullTaskString);
         }
 
         return tasksList.toString();

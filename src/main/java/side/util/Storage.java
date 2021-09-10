@@ -51,24 +51,24 @@ public class Storage {
         }
 
         FileWriter writer = new FileWriter(filePath);
-        StringBuilder taskLine = new StringBuilder();
+        StringBuilder taskString = new StringBuilder();
 
         for (Task t : savedList) {
             if (t instanceof Deadline) {
                 String taskDetails = "D | " + ((Deadline) t).getDatetime().saveDatetime();
-                taskLine.append(taskDetails);
+                taskString.append(taskDetails);
             } else if (t instanceof Event) {
                 String taskDetails = "E | " + ((Event) t).getStartDatetime().saveDatetime()
                         + "/to" + ((Event) t).getEndDatetime().saveDatetime();
-                taskLine.append(taskDetails);
+                taskString.append(taskDetails);
             } else {
-                taskLine.append("T | No time");
+                taskString.append("T | No time");
             }
             String generalTaskDetails = " | " + t.getDescription() + " | " + (t.getIsDone() ? "T" : "F") + "\n";
-            taskLine.append(generalTaskDetails);
+            taskString.append(generalTaskDetails);
         }
 
-        writer.write(taskLine.toString());
+        writer.write(taskString.toString());
         writer.close();
     }
 

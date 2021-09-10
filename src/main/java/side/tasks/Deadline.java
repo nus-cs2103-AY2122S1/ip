@@ -68,15 +68,15 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        StringBuilder deadlineLine = new StringBuilder();
+        StringBuilder deadlineString = new StringBuilder();
         if (this.isDone) {
-            deadlineLine.append("[D][x] ");
+            deadlineString.append("[D][x] ");
         } else {
-            deadlineLine.append("[D][ ] ");
+            deadlineString.append("[D][ ] ");
         }
         String deadlineDetails = this.description.replaceFirst("deadline", "")
                 + "(by: " + this.datetime.toString() + ")";
-        deadlineLine.append(deadlineDetails);
-        return deadlineLine.toString();
+        deadlineString.append(deadlineDetails);
+        return deadlineString.toString();
     }
 }

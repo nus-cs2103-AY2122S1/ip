@@ -76,13 +76,13 @@ public class Task {
      */
     @Override
     public String toString() {
-        StringBuilder taskLine = new StringBuilder();
+        StringBuilder taskString = new StringBuilder();
         if (this.isDone) {
-            taskLine.append("[T][x]");
+            taskString.append("[T][x]");
         } else {
-            taskLine.append("[T][ ]");
+            taskString.append("[T][ ]");
         }
-        taskLine.append(this.description.replaceFirst("todo", ""));
-        return taskLine.toString();
+        taskString.append(this.description.replaceFirst("todo", ""));
+        return taskString.toString();
     }
 }
