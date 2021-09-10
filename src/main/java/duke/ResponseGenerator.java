@@ -14,6 +14,10 @@ public class ResponseGenerator {
 
     public String showGoodbyeMessage() { return "Bye. Hope to see you again soon!"; }
 
+    public String showDuplicateTaskMessage() {
+        return "You can't add a duplicate task.";
+    }
+
     public String showList(TaskList taskList) {
         String s = "Here are the tasks in your list:\n";
         for (int i = 1; i <= taskList.getSize(); i++) {

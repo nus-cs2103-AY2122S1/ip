@@ -87,6 +87,10 @@ public class Parser {
                 }
             }
 
+            if (taskList.contains(t)) {
+                return responseGenerator.showDuplicateTaskMessage();
+            }
+
             taskList.addItem(t);
             storage.write();
             return responseGenerator.showAddedTask(t, taskList);

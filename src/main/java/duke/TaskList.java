@@ -80,4 +80,14 @@ public class TaskList {
         Task t = getTask(index);
         t.setDone();
     }
+
+    public boolean contains(Task t) {
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = getTask(i);
+            if (task.equals(t)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
