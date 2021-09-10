@@ -19,6 +19,8 @@ public class Storage {
      * @param taskListFileName path to text file to store taskList in.
      */
     public Storage(String taskListFileName) {
+        assert taskListFileName != "": "Filename should not be empty.";
+        assert !taskListFileName.contains(" "): "Filename should not contain whitespaces.";
         this.taskListFileName = taskListFileName;
         try {
             Files.createDirectories(Paths.get(this.taskListFileName).getParent().getFileName());
@@ -43,14 +45,15 @@ public class Storage {
                 ois.close();
             }
         } catch (IOException e) {
-            System.out.println("IOException");
-            e.printStackTrace();
+            taskList = new TaskList();
         } catch (ClassNotFoundException e) {
             System.out.println("classnotfound");
             e.printStackTrace();
         }
+        assert taskList != null : "TaskList was not initialised";
         return taskList;
     }
+
 
     /**
      * Serialises a taskList into a text file for use in future sessions.
@@ -67,5 +70,6 @@ public class Storage {
             System.out.println("Problem storing");
             e.printStackTrace();
         }
+        assert new Storage(this.taskListFileName).initialise() == taskList : "Stored taskList is malformed";
     }
 }

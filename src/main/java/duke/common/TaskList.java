@@ -60,11 +60,14 @@ public class TaskList implements Serializable {
      */
     public String delete(int taskNumber) {
         String result = "";
+        if (taskNumber > this.tasks.size() || taskNumber <= 0) {
+            return "Sorry, that task does not exist!\n";
+        }
         Task task = tasks.get(taskNumber - 1);
         result += "Noted. I've removed this task:\n"
-                  + "  " + task;
+                  + "  " + task + "\n";
         tasks.remove(taskNumber - 1);
-        return result + String.format("Now you have %d %s in the list.\n", this.tasks,
+        return result + String.format("Now you have %d %s in the list.\n", this.tasks.size(),
                                                                            this.tasks.size() == 1 ? "task" : "tasks");
     }
 
@@ -92,5 +95,22 @@ public class TaskList implements Serializable {
      */
     public boolean isEmpty() throws Duke.DukeException {
         return this.tasks.isEmpty();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof TaskList)) {
+            return false;
+        }
+
+        TaskList t = (TaskList) o;
+        if (t.list() != this.list()) {
+            return false;
+        }
+        return true;
     }
 }

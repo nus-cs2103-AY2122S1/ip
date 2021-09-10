@@ -14,6 +14,7 @@ public class Task implements Serializable {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        assert this.description != "" : "Task description should not be empty";
     }
 
     protected String getStatusIcon() {
