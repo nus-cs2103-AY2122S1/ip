@@ -36,8 +36,7 @@ public class Deadline extends Task {
         String[] dateTimeArr = dueStr.split(" ");
         try {
             due = LocalDate.parse(dateTimeArr[0]);
-        }
-        catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             hasDate = false;
             hasTime = false;
         }
@@ -46,8 +45,7 @@ public class Deadline extends Task {
                 int time = -1;
                 try {
                     time = Integer.parseInt(dateTimeArr[1]);
-                }
-                catch (NumberFormatException e) {
+                } catch (NumberFormatException e) {
                     hasTime = false;
                 }
                 if (hasTime && 0 <= time && time <= 2359) {
