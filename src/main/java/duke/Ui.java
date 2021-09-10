@@ -27,7 +27,8 @@ public class Ui {
      */
     public void showLoadingError() {
         System.err.println(
-            "☹ OOPS!!! Seems like your data is corrupted. " + "Please make sure you data file has the correct format.");
+            "☹ OOPS!!! Seems like your data is corrupted. "
+                + "Please make sure you data file has the correct format.");
     }
 
     /**
