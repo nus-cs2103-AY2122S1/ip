@@ -1,4 +1,4 @@
-package duke;
+package neo;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -21,7 +21,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Neo neo;
     private final Intro intro = new Intro();
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.jpg"));
@@ -31,13 +31,13 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(intro.printIntro(), dukeImage)
+                DialogBoxNeo.getNeoDialog(intro.printIntro(), dukeImage)
         );
 
     }
 
-    public void setDuke(Duke duke) {
-        this.duke = duke;
+    public void setNeo(Neo neo) {
+        this.neo = neo;
     }
 
     /**
@@ -48,10 +48,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = neo.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBoxNeo.getNeoDialog(response, dukeImage)
         );
         userInput.clear();
     }

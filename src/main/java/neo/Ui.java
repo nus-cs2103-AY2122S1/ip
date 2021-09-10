@@ -1,4 +1,4 @@
-package duke;
+package neo;
 
 /**
  *  This class handles interactions with the user
@@ -18,8 +18,8 @@ public class Ui {
             this.userInput = command;
             Parser.Command commandType = parser.getCommandType();
             executeCommand(commandType);
-        } catch (DukeException dukeException) {
-            this.inputResult = dukeException + "\n";
+        } catch (NeoException neoException) {
+            this.inputResult = neoException + "\n";
         }
     }
 
@@ -52,10 +52,10 @@ public class Ui {
                 this.inputResult = commands.search(query);
             } else {
                 // Unknown Command, throw error
-                throw new DukeException("Error, Invalid Command" + "\n ");
+                throw new NeoException("Sorry, Neo doesn't understand :(" + "\n ");
             }
-        } catch (DukeException dukeException) {
-            this.inputResult = dukeException + "\n";
+        } catch (NeoException neoException) {
+            this.inputResult = neoException + "\n";
         }
     }
 

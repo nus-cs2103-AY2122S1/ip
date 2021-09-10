@@ -1,4 +1,4 @@
-package duke;
+package neo;
 
 /**
  *  This class represents the Exceptions thrown by Duke.
@@ -7,13 +7,13 @@ package duke;
  * @author Ryan Tian Jun.
  */
 
-public class DukeException extends Exception {
+public class NeoException extends Exception {
     private final String errorMessage;
 
     // -1 default, 0: WhiteSpace, 1: Empty description, 2: Delete/ mark as done range errors
     private int type = -1;
 
-    public DukeException(String errorMessage) {
+    public NeoException(String errorMessage) {
         super(errorMessage);
         this.errorMessage = errorMessage;
     }
@@ -25,7 +25,7 @@ public class DukeException extends Exception {
      * @param errorMessage Error Message to be Displayed.
      * @param type type of the error, denoted by comment above.
      */
-    public DukeException(String errorMessage, int type) {
+    public NeoException(String errorMessage, int type) {
         super(errorMessage);
         this.errorMessage = errorMessage;
         this.type = type;
@@ -40,13 +40,16 @@ public class DukeException extends Exception {
      */
     @Override
     public String toString() {
+        String highlight = "\n" + "-------------------------------------------" + "\n";
         if (type == 0) {
-            return "The " + errorMessage + " Command and Description must be separated by whitespace!";
+            return highlight + "The " + errorMessage
+                    + " Command and Description must be separated by whitespace!" + highlight;
         } else if (type == 1) {
-            return "The description of " + errorMessage + " cannot be empty!";
+            return highlight + "The description of " + errorMessage + " cannot be empty!" + highlight;
         } else if (type == 2) {
-            return errorMessage + " Invalid Number, only numbers greater than 0 are accepted";
+            return highlight + errorMessage
+                    + " Invalid Number, only numbers greater than 0 are accepted" + highlight;
         }
-        return errorMessage;
+        return highlight + errorMessage + highlight;
     }
 }

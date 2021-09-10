@@ -1,4 +1,4 @@
-package duke;
+package neo;
 
 /**
  *  This class represents the displayed logo throughout the program.

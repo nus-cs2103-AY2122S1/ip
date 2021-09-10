@@ -1,4 +1,4 @@
-package duke;
+package neo;
 
 import javafx.application.Application;
 

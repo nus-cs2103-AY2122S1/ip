@@ -5,3 +5,4 @@ E | 0 | lunch  | Sunday
 T | 0 | TEST
 T | 1 | test t
 E | 0 | dinner  | Friday
+T | 0 | there

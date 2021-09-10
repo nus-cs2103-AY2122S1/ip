@@ -1,4 +1,4 @@
-package duke;
+package neo;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ public class ParserTest {
         try {
             Parser parser = new Parser("todo testing");
             assertEquals(Parser.Command.TODO, parser.getCommandType());
-        } catch (DukeException e) {
+        } catch (NeoException e) {
             fail();
         }
     }
@@ -29,7 +29,7 @@ public class ParserTest {
             Ui ui = new Ui("todo testing");
             Parser parser = new Parser("done 1");
             assertEquals(1, parser.getTaskNumber());
-        } catch (DukeException e) {
+        } catch (NeoException e) {
             fail();
         }
     }

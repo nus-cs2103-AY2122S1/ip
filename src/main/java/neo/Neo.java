@@ -1,4 +1,4 @@
-package duke;
+package neo;
 
 /**
  *  This class is the entry point to all other classes,
@@ -6,11 +6,11 @@ package duke;
  *
  * @author Ryan Tian Jun.
  */
-public class Duke {
+public class Neo {
     private Storage storage;
     private final Farewell farewell;
 
-    public Duke() {
+    public Neo() {
         this.farewell = new Farewell();
         loadStoredList();
     }
@@ -35,15 +35,10 @@ public class Duke {
             TaskList.saveList();
             return farewell.printFarewell() + "\n" + " ";
         } else {
-            Ui parseInput = new Feature(input);
-<<<<<<< HEAD
-            String parsedInputResult = parseInput.getInputResult();
-            return parsedInputResult;
-=======
-            String inputResult = parseInput.getCommandResult();
+            Ui parseInput = new Ui(input);
+            String inputResult = parseInput.getInputResult();
             assert !inputResult.equals("") : "the response from Duke should not be empty";
             return inputResult;
->>>>>>> master
         }
     }
 }

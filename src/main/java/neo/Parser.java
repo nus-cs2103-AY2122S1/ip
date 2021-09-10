@@ -1,4 +1,4 @@
-package duke;
+package neo;
 
 /**
  *  This class makes sense of the user inputs.
@@ -15,7 +15,7 @@ public class Parser {
         TODO, EVENT, DEADLINE, DELETE, DONE, LIST, FIND, OTHER
     }
 
-    public Parser(String command) throws DukeException {
+    public Parser(String command) throws NeoException {
         if (isList(command)) {
             this.commandType = Command.LIST;
         } else if (isDone(command)) {
@@ -72,17 +72,17 @@ public class Parser {
      *
      * @param command Takes in command line input to process.
      * @return returns true if it is said command.
-     * @throws DukeException Either a syntax error or lack of number provided.
+     * @throws NeoException Either a syntax error or lack of number provided.
      */
-    private boolean isDone(String command) throws DukeException {
+    private boolean isDone(String command) throws NeoException {
         if (command.length() >= 4 && command.startsWith("done")) {
             if (command.length() == 4) {
-                throw new DukeException("The Done command must be followed by a number!");
+                throw new NeoException("The Done command must be followed by a number!");
             } else {
                 if (isNumeric(command.substring(5))) {
                     return true;
                 } else {
-                    throw new DukeException("The Done command requires a number, separated by whitespace!");
+                    throw new NeoException("The Done command requires a number, separated by whitespace!");
                 }
             }
         } else {
@@ -95,14 +95,14 @@ public class Parser {
      *
      * @param command Takes in command line input to process.
      * @return returns true if it is said command.
-     * @throws DukeException Either a syntax error or lack of description.
+     * @throws NeoException Either a syntax error or lack of description.
      */
-    private boolean isToDo(String command) throws DukeException {
+    private boolean isToDo(String command) throws NeoException {
         if (command.length() >= 4 && command.startsWith("todo")) {
             if (command.length() == 4) {
-                throw new DukeException("ToDo", 1);
+                throw new NeoException("ToDo", 1);
             } else if (command.charAt(4) != ' ') {
-                throw new DukeException("ToDo", 0);
+                throw new NeoException("ToDo", 0);
             } else {
                 return true;
             }
@@ -116,14 +116,14 @@ public class Parser {
      *
      * @param command Takes in command line input to process.
      * @return returns true if it is said command.
-     * @throws DukeException Either a syntax error or lack of description.
+     * @throws NeoException Either a syntax error or lack of description.
      */
-    private boolean isDeadLine(String command) throws DukeException {
+    private boolean isDeadLine(String command) throws NeoException {
         if (command.length() >= 8 && command.startsWith("deadline")) {
             if (command.length() == 8) {
-                throw new DukeException("Deadline", 1);
+                throw new NeoException("Deadline", 1);
             } else if (command.charAt(8) != ' ') {
-                throw new DukeException("Deadline", 0);
+                throw new NeoException("Deadline", 0);
             } else {
                 return true;
             }
@@ -137,14 +137,14 @@ public class Parser {
      *
      * @param command Takes in command line input to process.
      * @return returns true if it is said command.
-     * @throws DukeException Either a syntax error or lack of description.
+     * @throws NeoException Either a syntax error or lack of description.
      */
-    private boolean isEvent(String command) throws DukeException {
+    private boolean isEvent(String command) throws NeoException {
         if (command.length() >= 5 && command.startsWith("event")) {
             if (command.length() == 5) {
-                throw new DukeException("Event", 1);
+                throw new NeoException("Event", 1);
             } else if (command.charAt(5) != ' ') {
-                throw new DukeException("Event", 0);
+                throw new NeoException("Event", 0);
             } else {
                 return true;
             }
@@ -158,20 +158,20 @@ public class Parser {
      *
      * @param command Takes in command line input to process.
      * @return returns true if it is said command.
-     * @throws DukeException Syntax errors, spacing.
+     * @throws NeoException Syntax errors, spacing.
      */
-    private boolean isDelete(String command) throws DukeException {
+    private boolean isDelete(String command) throws NeoException {
         if (command.length() >= 6 && command.startsWith("delete")) {
             if (command.length() == 6) {
-                throw new DukeException("The Delete command must be followed by a number!");
+                throw new NeoException("The Delete command must be followed by a number!");
             } else {
                 if (command.charAt(6) != ' ') {
-                    throw new DukeException("The Delete command requires a number, separated by whitespace!");
+                    throw new NeoException("The Delete command requires a number, separated by whitespace!");
                 } else if (isNumeric(command.substring(7))) {
                     taskNumber = Integer.parseInt(command.substring(7));
                     return true;
                 } else {
-                    throw new DukeException("The Delete command requires a number, separated by whitespace!");
+                    throw new NeoException("The Delete command requires a number, separated by whitespace!");
                 }
             }
         } else {
@@ -179,13 +179,13 @@ public class Parser {
         }
     }
 
-    private boolean isFind(String command) throws DukeException {
+    private boolean isFind(String command) throws NeoException {
         int commandLength = command.length();
         if (commandLength >= 4 && command.startsWith("find")) {
             if (commandLength == 4) {
-                throw new DukeException("The Find command must be followed by a string!");
+                throw new NeoException("The Find command must be followed by a string!");
             } else if (command.charAt(4) != ' ') {
-                throw new DukeException("The Find command requires a string, separated by whitespace!");
+                throw new NeoException("The Find command requires a string, separated by whitespace!");
             } else {
                 query = command.substring(5).trim();
                 return true;

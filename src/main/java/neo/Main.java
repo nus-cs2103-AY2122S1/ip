@@ -1,4 +1,4 @@
-package duke;
+package neo;
 
 import java.io.IOException;
 
@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-    private Duke duke = new Duke();
+    private Neo neo = new Neo();
 
     @Override
     public void start(Stage stage) {
@@ -21,7 +21,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle("Neo :)");
+            fxmlLoader.<MainWindow>getController().setNeo(neo);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -2,11 +2,11 @@
 
 ## Features 
 
-### duke.Feature-ABC
+### neo.Feature-ABC
 
 Description of the feature.
 
-### duke.Feature-XYZ
+### neo.Feature-XYZ
 
 Description of the feature.
 

@@ -1,4 +1,4 @@
-package duke;
+package neo;
 
 /**
  *  This class represents the tasks in a list.
@@ -60,12 +60,12 @@ public class Task {
      *
      * @return returns true if it was successful.
      */
-    public boolean markAsDone() throws DukeException {
+    public boolean markAsDone() throws NeoException {
         if (!isDone) {
             isDone = true;
             return true;
         } else {
-            throw new DukeException("Task has already been marked as done!");
+            throw new NeoException("Task has already been marked as done!");
         }
     }
 

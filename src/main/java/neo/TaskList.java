@@ -1,4 +1,4 @@
-package duke;
+package neo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,11 +130,11 @@ public class TaskList {
      * Marks tasks as done.
      *
      * @return returns a String message.
-     * @throws DukeException Handles out of range errors.
+     * @throws NeoException Handles out of range errors.
      */
-    public String markDone(int taskNumber) throws DukeException {
+    public String markDone(int taskNumber) throws NeoException {
         if (taskNumber <= 0) {
-            throw new DukeException("Mark Done:", 2);
+            throw new NeoException("Mark Done:", 2);
         } else {
             if (taskNumber <= taskList.size()) {
                 Task taskToChange = taskList.get(taskNumber - 1);
@@ -142,7 +142,7 @@ public class TaskList {
 
                 return "Nice! I've marked this task as done: \n" + "   " + taskToChange;
             } else {
-                throw new DukeException("Task does not exist");
+                throw new NeoException("Task does not exist");
             }
         }
     }
@@ -151,11 +151,11 @@ public class TaskList {
      * Deletes Tasks from the list.
      *
      * @return returns a String message.
-     * @throws DukeException Handles out of range errors.
+     * @throws NeoException Handles out of range errors.
      */
-    public String deleteTask(int taskNumber) throws DukeException {
+    public String deleteTask(int taskNumber) throws NeoException {
         if (taskNumber <= 0) {
-            throw new DukeException("Delete Task:", 2);
+            throw new NeoException("Delete Task:", 2);
         } else {
             if (taskNumber <= taskList.size()) {
                 assert taskList.size() > 0: "Task list should at least contain something to delete";
@@ -167,7 +167,7 @@ public class TaskList {
                 result += "Now you have " + taskList.size() + " tasks in the list.";
                 return result;
             } else {
-                throw new DukeException("Unable to Delete: Task does not exist");
+                throw new NeoException("Unable to Delete: Task does not exist");
             }
         }
     }

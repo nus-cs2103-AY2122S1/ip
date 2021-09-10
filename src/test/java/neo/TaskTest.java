@@ -1,4 +1,4 @@
-package duke;
+package neo;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +20,7 @@ public class TaskTest {
         try {
             assertEquals(true, task.markAsDone());
             fail();
-        } catch (DukeException e) {
+        } catch (NeoException e) {
             assertEquals("Task has already been marked as done!", e.getMessage());
         }
     }
@@ -30,7 +30,7 @@ public class TaskTest {
         Task task = new ToDo(Task.Type.T, false, "");
         try {
             assertEquals(true, task.markAsDone());
-        } catch (DukeException e) {
+        } catch (NeoException e) {
             fail();
         }
     }

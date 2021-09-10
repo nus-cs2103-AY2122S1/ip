@@ -1,4 +1,4 @@
-package duke;
+package neo;
 
 /**
  *  This class handles the farewell when the user exits the program.
@@ -7,7 +7,7 @@ package duke;
  * @author Ryan Tian Jun.
  */
 public class Farewell {
-    private final String farewellMessage = "Bye. Thank You for using Duke!";
+    private final String farewellMessage = "Bye. Thank You for using Neo!";
 
     public Farewell() {
 
