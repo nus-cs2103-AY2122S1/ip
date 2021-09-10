@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDate;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -30,5 +32,9 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public String getType() {
+        return this.toString().substring(1,2);
     }
 }

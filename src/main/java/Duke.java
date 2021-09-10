@@ -1,16 +1,8 @@
-import duke.*;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.Parser;
+import duke.DukeException;
 
 import java.io.File;
 

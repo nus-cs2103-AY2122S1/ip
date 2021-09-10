@@ -1,9 +1,7 @@
 package duke;
 
-import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 public class Parser {
 
@@ -20,7 +18,6 @@ public class Parser {
         if (input.equals("list")) {
             String returnString = "";
             for (int i = 0; i < t.size(); i++) {
-                System.out.println(i + 1 + "." + t.get(i).toString());
                 returnString = returnString + String.valueOf(i + 1) + "." + t.get(i).toString() + "\n";
             }
             return returnString;
@@ -29,6 +26,7 @@ public class Parser {
                 && Character.isDigit(input.charAt(5))) {
             String returnString = "";
             int value = Integer.parseInt(input.replaceAll("[^0-9]", ""));
+            assert value > 0 : "Task to be marked done must have index greater than 0";
             t.get(value - 1).markAsDone();
             System.out.println(t.get(value - 1).toString());
             s.appendListToFile(t);
@@ -44,6 +42,7 @@ public class Parser {
                 return new NullTaskError().getMsg("todo");
             } else {
                 String firstTodo = input.substring(5);
+                assert firstTodo.length() > 0: "task description cannot be empty";
                 t.addTodo(firstTodo);
                 s.appendListToFile(t);
                 System.out.println("Got it. I've added this task: ");
@@ -58,7 +57,7 @@ public class Parser {
             String returnString = "";
             if (input.length() < 10) {
                 System.out.println(new NullTaskError().getMsg("deadline"));
-                return "no chicken";
+                return new NullTaskError().getMsg("deadline");
             } else {
                 String[] temp = input.split("/by");
                 String firstDeadline = temp[0].substring(9);
@@ -74,7 +73,6 @@ public class Parser {
                 }
                 String finalDateFormat = year + "-" + month + "-" + currentDate;
                 LocalDate date1 = LocalDate.parse(finalDateFormat);
-                String dateForObject = date1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
                 t.addDeadline(firstDeadline, date1);
                 s.appendListToFile(t);
                 returnString = returnString + "Got it. I've added this task: " + "\n";
@@ -89,7 +87,7 @@ public class Parser {
             String returnString = "";
             if (input.length() < 7) {
                 System.out.println(new NullTaskError().getMsg("event"));
-                return "no chicken";
+                return new NullTaskError().getMsg("event");
             } else {
                 String[] tempEvent = input.split("/at");
                 String firstEvent = tempEvent[0].substring(6);
@@ -106,7 +104,6 @@ public class Parser {
                 }
                 String finalDateFormat = year + "-" + month + "-" + currentDate;
                 LocalDate date1 = LocalDate.parse(finalDateFormat);
-                System.out.println(date1);
                 t.addEvent(firstEvent, date1);
                 System.out.println("Got it. I've added this task: ");
                 System.out.println(new Event(firstEvent, date1));
@@ -120,6 +117,7 @@ public class Parser {
         } else if (input.startsWith("delete") && input.length() < 11) {
             String returnString = "";
             int value = Integer.parseInt(input.replaceAll("[^0-9]", ""));
+            assert value > 0 : "task to be deleted must have index > 0";
             Task removedTask = t.get(value - 1);
             t.delete(value - 1);
             System.out.println("Noted. I've removed this task:");
@@ -133,7 +131,6 @@ public class Parser {
         } else if (input.startsWith("find")) {
             String keyword = input.substring(5);
             String returnString = "";
-            ArrayList<Task> output = new ArrayList<>();
             int count = 0;
             for (Task task : t.getTaskList()) {
                 String desc = task.description.substring(0, task.description.length() - 4);

@@ -9,10 +9,11 @@ public class Storage {
     private File file;
 
     public Storage(String filePath) {
+        assert filePath.length() != 0 : "Path of file cannot be empty";
         this.filePath = filePath;
         File file = new File(filePath);
+        assert file.exists();
         this.file = file;
-
     }
 
 
@@ -27,13 +28,13 @@ public class Storage {
     public static void appendListToFile(TaskList listOfTasks) {
         try {
             File fileStorage = new File("data/duke.txt");
+            assert fileStorage.exists(): "File to write to must exist";
             FileWriter w = new FileWriter(fileStorage);
-            String str = "";
+            String stringOfContents = "";
             for (Task t : listOfTasks.getTaskList()) {
-                //System.out.println(t.toString());
-                str += t.toString() + "\n";
+                stringOfContents += t.toString() + "\n";
             }
-            w.write(str);
+            w.write(stringOfContents);
             w.close();
         } catch (IOException e) {
             System.out.println("File does not exist");
