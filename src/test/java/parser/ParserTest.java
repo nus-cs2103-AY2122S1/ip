@@ -1,10 +1,9 @@
 package parser;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.ByteArrayInputStream;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class ParserTest {
     @Test
@@ -13,7 +12,7 @@ public class ParserTest {
         System.setIn(new ByteArrayInputStream(exitCommand.getBytes()));
         boolean isExitCommand = new Parser().detectExitCommand(exitCommand);
 
-        assertEquals(true, isExitCommand);
+        Assertions.assertEquals(true, isExitCommand);
         System.setIn(System.in);
     }
 
@@ -23,7 +22,7 @@ public class ParserTest {
         System.setIn(new ByteArrayInputStream(nonExitCommand.getBytes()));
         boolean isExitCommand = new Parser().detectExitCommand(nonExitCommand);
 
-        assertEquals(false, isExitCommand);
+        Assertions.assertEquals(false, isExitCommand);
         System.setIn(System.in);
     }
 }

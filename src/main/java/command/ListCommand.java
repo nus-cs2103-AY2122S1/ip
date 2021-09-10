@@ -7,8 +7,6 @@ import tasklist.TaskList;
  * Encapsulates a list command after it is parsed from the user input.
  */
 public class ListCommand extends Command {
-    private TaskList list;
-
     /**
      * Creates a `ListCommand`.
      *
