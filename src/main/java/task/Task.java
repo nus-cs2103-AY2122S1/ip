@@ -2,6 +2,9 @@ package task;
 
 import java.time.format.DateTimeFormatter;
 
+import bot.Tag;
+import bot.TagList;
+
 /**
  * A class that encapsulates a general Task stored by Duke.
  */
@@ -9,6 +12,7 @@ public class Task {
 
     protected String task;
     protected boolean isDone;
+    protected TagList tags;
     protected DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy kkmm");
     protected DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy - hh:mm a");
 
@@ -21,6 +25,24 @@ public class Task {
         assert !task.trim().equals("");
         this.task = task;
         this.isDone = false;
+        this.tags = new TagList();
+    }
+
+    /**
+     * Constructor for the Task class.
+     *
+     * @param task The task to be stored within this Task object.
+     */
+    public Task(String task, String tags) {
+        assert !task.trim().equals("");
+        this.task = task;
+        this.isDone = false;
+        this.tags = new TagList();
+
+        String[] rawTags = tags.split(" ");
+        for (int i = 0; i < rawTags.length; i++) {
+            this.tags.addTag(new Tag(rawTags[i]));
+        }
     }
 
     /**
@@ -30,10 +52,25 @@ public class Task {
      * @param task The task to be stored within this Task object.
      * @param isDone The state of the Task object.
      */
-    public Task(String task, boolean isDone) {
+    public Task(String task, String tags, boolean isDone) {
         assert !task.trim().equals("");
         this.task = task;
         this.isDone = isDone;
+        this.tags = new TagList();
+
+        String[] rawTags = tags.split(" ");
+        for (int i = 0; i < rawTags.length; i++) {
+            this.tags.addTag(new Tag(rawTags[i]));
+        }
+    }
+
+    /**
+     * Adds the given Task to the end of the TaskList.
+     *
+     * @param tag The String to be added to TaskList as a new Tag.
+     */
+    public void addTag(String tag) {
+        this.tags.addTag(new Tag(tag));
     }
 
     /**
@@ -91,11 +128,11 @@ public class Task {
 
         switch (taskType) {
         case "T":
-            return new TodoTask(splitTask[2], splitTask[1].equals("1"));
+            return new TodoTask(splitTask[2], splitTask[3], splitTask[1].equals("1"));
         case "D":
-            return new DeadlineTask(splitTask[2], splitTask[3], splitTask[1].equals("1"));
+            return new DeadlineTask(splitTask[2], splitTask[3], splitTask[4], splitTask[1].equals("1"));
         case "E":
-            return new EventTask(splitTask[2], splitTask[3], splitTask[1].equals("1"));
+            return new EventTask(splitTask[2], splitTask[3], splitTask[4], splitTask[1].equals("1"));
         default:
             return new Task("");
         }

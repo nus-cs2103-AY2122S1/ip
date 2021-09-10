@@ -34,9 +34,9 @@ public class DeadlineCommand extends Command {
      */
     public String execute(TaskList list, UserInterface ui) throws DukeException {
 
-        int position = input.indexOf("/by");
-        String newDeadline = input.substring(9, position - 1);
-        String newTime = input.substring(position + 4);
+        int position = input.indexOf(" /by");
+        String newDeadline = input.substring(9, position);
+        String newTime = input.substring(position + 5);
 
         if (newDeadline.length() == 0) {
             throw new DukeException("The description of a deadline cannot be empty. Please try again!");
@@ -45,7 +45,12 @@ public class DeadlineCommand extends Command {
         } else {
             try {
                 LocalDateTime time = LocalDateTime.parse(newTime.trim(), inputFormatter);
-                DeadlineTask newTask =new DeadlineTask(newDeadline, time);
+                DeadlineTask newTask;
+                if (!tags.isEmpty()) {
+                    newTask = new DeadlineTask(newDeadline, time, tags);
+                } else {
+                    newTask = new DeadlineTask(newDeadline, time);
+                }
                 list.addTask(newTask);
                 Storage.save(list);
                 return ui.showTaskAdded(newTask, list.getSize() - 1);

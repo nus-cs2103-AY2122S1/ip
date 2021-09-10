@@ -12,6 +12,7 @@ import bot.UserInterface;
 public abstract class Command {
 
     protected String input;
+    protected String tags;
     protected DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy kkmm");
 
     /**
@@ -21,7 +22,15 @@ public abstract class Command {
      */
     public Command(String input) {
         assert !input.trim().equals("");
-        this.input = input;
+
+        if (input.contains(" #")) {
+            int tagPosition = input.indexOf(" #");
+            this.input = input.substring(0, tagPosition).trim();
+            this.tags = input.substring(tagPosition + 1).trim();
+        } else {
+            this.input = input.trim();
+            this.tags = "";
+        }
     }
 
     /**

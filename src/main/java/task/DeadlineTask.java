@@ -23,14 +23,27 @@ public class DeadlineTask extends Task {
 
     /**
      * Constructor for the DeadlineTask class.
+     *
+     * @param task The task to be stored within this DeadlineTask object.
+     * @param time The LocalDateTime object representation of the Deadline "by".
+     * @param tags The tags to be stored within this DeadlineTask object.
+     */
+    public DeadlineTask(String task, LocalDateTime time, String tags) {
+        super(task, tags);
+        this.time = time;
+    }
+
+    /**
+     * Constructor for the DeadlineTask class.
      * This constructor is invoked when reading from the local data, in order to show the correct Task state.
      *
      * @param task The task to be stored within this DeadlineTask object.
      * @param storedTime The String representation of the Deadline "by".
+     * @param tags The tags to be stored within this DeadlineTask object.
      * @param isDone The state of the DeadlineTask object.
      */
-    public DeadlineTask(String task, String storedTime, boolean isDone) {
-        super(task, isDone);
+    public DeadlineTask(String task, String storedTime, String tags, boolean isDone) {
+        super(task, tags, isDone);
         this.storedTime = storedTime;
     }
 
@@ -66,7 +79,7 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String getTaskState() {
-        return "[D]" + super.getTaskState() + " (By: " + this.getTime() + ")";
+        return "[D]" + super.getTaskState() + " (By: " + this.getTime() + ")" + "\n" + this.tags.toString();
     }
 
     /**
@@ -82,6 +95,8 @@ public class DeadlineTask extends Task {
                 + (isDone ? "1," : "0,")
                 + task
                 + ","
-                + this.getTime();
+                + this.getTime()
+                + ","
+                + (tags.toString());
     }
 }

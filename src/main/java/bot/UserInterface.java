@@ -129,4 +129,17 @@ public class UserInterface {
                 + (length == 0 ? " task" : " tasks")
                 + " in the list.\n";
     }
+
+    /**
+     * Shows the message for a task being tagged, according to the type of task given.
+     *
+     * @param task  The task to be tagged.
+     * @return A String representation of the message.
+     */
+    public String showTaskTagged(Task task) {
+        return "Alright. I've tagged the following "
+                + task.getTaskType()
+                + ":\n--> "
+                + task.getTaskState();
+    }
 }

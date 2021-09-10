@@ -16,13 +16,23 @@ public class TodoTask extends Task {
 
     /**
      * Constructor for the TodoTask class.
+     *
+     * @param task The task to be stored within this TodoTask object.
+     * @param tags The tags to be stored within this TodoTask object.
+     */
+    public TodoTask(String task, String tags) {
+        super(task, tags);
+    }
+
+    /**
+     * Constructor for the TodoTask class.
      * This constructor is invoked when reading from the local data, in order to show the correct Task state.
      *
      * @param task The task to be stored within this TodoTask object.
      * @param isDone The state of the TodoTask object.
      */
-    public TodoTask(String task, boolean isDone) {
-        super(task, isDone);
+    public TodoTask(String task, String tags, boolean isDone) {
+        super(task, tags, isDone);
     }
 
     /**
@@ -44,7 +54,7 @@ public class TodoTask extends Task {
      */
     @Override
     public String getTaskState() {
-        return "[T]" + super.getTaskState();
+        return "[T]" + super.getTaskState() + "\n" + this.tags.toString();
     }
 
     /**
@@ -58,6 +68,8 @@ public class TodoTask extends Task {
     public String convertToStorageFormat() {
         return "T,"
                 + (isDone ? "1," : "0,")
-                + task;
+                + task
+                + ","
+                + (tags.toString());
     }
 }

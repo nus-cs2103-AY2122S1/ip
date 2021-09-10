@@ -8,6 +8,7 @@ import command.EventCommand;
 import command.ExitCommand;
 import command.FindCommand;
 import command.ListCommand;
+import command.TagCommand;
 import command.TodoCommand;
 
 /**
@@ -36,6 +37,10 @@ public class Parser {
         } else if (input.startsWith("delete ")) {
 
             return new DeleteCommand(input);
+
+        } else if (input.startsWith("tag ")) {
+
+            return new TagCommand(input);
 
         } else if (input.startsWith("todo ")) {
 
