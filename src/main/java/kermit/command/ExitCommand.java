@@ -47,7 +47,6 @@ public class ExitCommand extends Command {
      *
      * @return Syntax for how command is used.
      */
-    @Override
     protected static String getSyntax() {
         return "bye";
     }
