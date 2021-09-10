@@ -54,12 +54,14 @@ public class MainWindow extends Stage {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.setStyle("-fx-background: transparent; -fx-background-color: transparent;");
+        sendButton.setStyle("-fx-background-color: #2b2b2b; -fx-text-fill: white");
         BackgroundSize temp = new BackgroundSize(600, 400, true, true, true, false);
         BackgroundImage myBI = new BackgroundImage(
                                     new Image(this.getClass()
                                             .getResourceAsStream("/images/background.jpg")),
                                      null, null, null, temp);
-        dialogContainer.setBackground(new Background(myBI));
+//        dialogContainer.setBackground(new Background(myBI));
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog("Hello! I'm Duke\n" + "What can I do for you?", dukeImage)
         );

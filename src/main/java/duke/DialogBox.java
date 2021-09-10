@@ -43,7 +43,8 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
         dialog.setText(text);
-        dialog.setFont(new Font("Cambria", 20));
+        dialog.setFont(new Font("Lucida Sans Unicode", 15));
+        dialog.setTextFill(Color.BLACK);
         dialog.setPadding(new Insets(10));
         displayPicture.setImage(img);
         displayPicture.setFitHeight(100.0);

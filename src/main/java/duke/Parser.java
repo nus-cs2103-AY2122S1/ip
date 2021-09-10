@@ -18,7 +18,6 @@ public class Parser {
     public static String parse(String instruction, Ui ui, TaskList tasks)
             throws NoDescriptionError, UnknownCommandError {
 
-        System.out.println(instruction);
         String[] splitInstructions = instruction.split(" ", 2);
         String operative = splitInstructions[0];
         Commands command;
