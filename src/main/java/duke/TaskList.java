@@ -38,6 +38,23 @@ public class TaskList {
     }
 
     /**
+     * Returns a string representing the duplicate task in the list, if it exists.
+     *
+     * @param task New task to be duplicate-checked before adding.
+     * @return A string representing the duplicate task in the list, or null if no duplicate.
+     */
+    public String getDuplicate(Task task) {
+        String newTaskString = task.toString();
+        for (Task nextTask : taskList) {
+            String nextTaskUndoneString = nextTask.toUndoneString();
+            if (nextTaskUndoneString.equals(newTaskString)) {
+                return nextTask.toString();
+            }
+        }
+        return null;
+    }
+
+    /**
      * Marks a task in the list as done.
      *
      * @param index ArrayList index of the task to mark as done.

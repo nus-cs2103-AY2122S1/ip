@@ -24,6 +24,7 @@ public class Ui {
      *
      * @param taskString String representation of the added task.
      * @param taskList TaskList the new task was added to.
+     * @return A message confirming the task has been added.
      */
     public String getAddMessage(String taskString, TaskList taskList) {
         return "Got it. I've added this task:\n"
@@ -37,6 +38,7 @@ public class Ui {
      *
      * @param taskString String representation of the deleted task.
      * @param taskList TaskList the task was deleted from.
+     * @return A message confirming the task has been deleted.
      */
     public String getDeleteMessage(String taskString, TaskList taskList) {
         return "Noted. I've removed this task:\n"
@@ -50,6 +52,7 @@ public class Ui {
      * Shows a message informing the user of a task marked as done.
      *
      * @param taskString String representation of the task marked as done.
+     * @return A message confirming the task has been marked as done.
      */
     public String getDoneMessage(String taskString) {
         return "Nice! I've marked this task as done:\n"
@@ -61,12 +64,19 @@ public class Ui {
      * Shows all the tasks in the list.
      *
      * @param taskList TaskList containing the list of tasks.
+     * @return A string representing all tasks in the list.
      */
     public String getListMessage(TaskList taskList) {
         return "Here are the tasks in your list:\n"
                 + taskList.toString();
     }
 
+    /**
+     * Shows all tasks found with the "find" command.
+     *
+     * @param foundTasks A string of all tasks found.
+     * @return A message showing all tasks found.
+     */
     public String getFindMessage(String foundTasks) {
         if (foundTasks.equals("")) {
             return "No task found with the given keyword";
@@ -74,6 +84,18 @@ public class Ui {
             return "Here are the matching tasks in your list:\n"
                     + foundTasks;
         }
+    }
+
+    /**
+     * Returns a message with the task detected as duplicate.
+     *
+     * @param duplicateString A string representing the task detected as duplicate.
+     * @return A message informing that the task already exists in the list.
+     */
+    public String getDuplicateMessage(String duplicateString) {
+        return "This task already exists in the list:\n"
+                + "  "
+                + duplicateString;
     }
 
     /**

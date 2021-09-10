@@ -35,8 +35,14 @@ public class Event extends Task {
      *
      * @return String representation of the Event in the storage format.
      */
+    @Override
     public String toStorageString() {
         return ("E|" + super.getStatusNumber() + "|" + super.getDescription()
                 + "|" + this.at.format(formatter));
+    }
+
+    @Override
+    public String toUndoneString() {
+        return ("[E]" + super.toUndoneString() + " (at: " + this.at.format(displayFormatter) + ")");
     }
 }

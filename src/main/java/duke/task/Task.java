@@ -79,4 +79,8 @@ public abstract class Task {
      * @return String representation of the task in the storage format.
      */
     public abstract String toStorageString();
+
+    public String toUndoneString() {
+        return "[ ] " + this.getDescription();
+    };
 }
