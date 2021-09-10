@@ -64,5 +64,7 @@ public class Event extends Entry{
      * @return Boolean corresponding to Event's length.
      */
     @Override
-    public boolean isEmpty() { return super.isEmpty() || !event.isAfter(LocalDate.now()); }
+    public boolean isEmpty() {
+        return super.isEmpty() || !event.isAfter(LocalDate.now());
+    }
 }

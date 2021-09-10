@@ -43,7 +43,7 @@ public class EntryList extends ArrayList<Entry> {
         StringBuilder entryList = new StringBuilder();
         if (numberOfEntries > 0) {
             for (int i = 0; i < numberOfEntries; i++) {
-                entryList.append(super.get(i) + "\n");
+                entryList.append(super.get(i)).append("\n");
             }
             return entryList.toString();
         } else {
@@ -122,7 +122,7 @@ public class EntryList extends ArrayList<Entry> {
         if (entryNumber > 0 && entryNumber <= numberOfEntries) {
             if (super.get(entryNumber - 1).setDone()) {
                 output.append("Nice! I've marked this entry as done:");
-                output.append("\t" + super.get(entryNumber - 1));
+                output.append("\t").append(super.get(entryNumber - 1));
             } else {
                 output.append("Entry is already marked as done!");
             }
