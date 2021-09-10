@@ -64,7 +64,9 @@ public abstract class Task {
     }
 
     /**
-     * Indicates whether some other object is "equal to" this one.
+     * Indicates whether some other object is "equal to" this one. Done status
+     * does not affect equality of objects since no two tasks are supposed to
+     * have the same description.
      *
      * @param obj Object to compare to
      * @return boolean indicating whehter the other object is "equal" to this one.
@@ -75,7 +77,7 @@ public abstract class Task {
             return true;
         } else if (obj instanceof Task) {
             Task tmp = (Task) obj;
-            return taskDetails.equals(tmp.taskDetails) && done == tmp.done;
+            return taskDetails.equals(tmp.taskDetails);
         } else {
             return false;
         }
