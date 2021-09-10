@@ -3,7 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 /**
- * Class includes methods required for creating user interface.
+ * Class includes methods required for creating a user interface.
  */
 public class Ui {
 

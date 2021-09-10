@@ -79,8 +79,7 @@ public class Parser {
                         if (command.equals("delete ")
                                 || command.equals("delete")) {
                             throw new DukeException("    OOPS!!! The task "
-                                    +
-                                    "number cannot be empty.");
+                                    + "number cannot be empty.");
                         } else {
                             tasks.delete(command);
                         }
@@ -92,8 +91,7 @@ public class Parser {
                         if (command.equals("find ")
                                 || command.equals("find")) {
                             throw new DukeException("    OOPS!!! The find "
-                                    +
-                                    "field cannot be empty.");
+                                    + "field cannot be empty.");
                         } else {
                             tasks.findSimilarTasks(command);
                         }
@@ -102,8 +100,7 @@ public class Parser {
                     }
                 } else {
                     throw new DukeException("    OOPS!!! I'm sorry, but "
-                            +
-                            "I don't know what that means :-(");
+                            + "I don't know what that means :-(");
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
