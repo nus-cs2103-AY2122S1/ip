@@ -14,7 +14,9 @@ import duke.common.task.Todo;
  */
 public class Parser {
     /**
-     * Executes action associated with provided string input, and prints out relevant details to console.
+     * Checks whether provided string input is associated with a valid Duke action,
+     * then if so executes action associated with provided string input and returns a string response for UI to pass
+     * back to the user.
      *
      * @param input    command associated with an action
      * @param taskList storage used to carry out actions
