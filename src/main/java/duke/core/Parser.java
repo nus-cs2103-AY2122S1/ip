@@ -91,60 +91,12 @@ public class Parser {
         }
         return true;
     }
-    private static String trimDate(String input, String regex) {
-        return input.split(regex)[0].trim();
-    }
-
-    private static void checkNumOfArguments(String input, int numOfArguments, String commandType) throws DukeException {
-        int length;
-        final String REGEX_FOR_INPUTS_WITHOUT_DATE = " ";
-        if (commandType.equals("deadline") || commandType.equals("event")) {
-            final String REGEX_TO_SPLIT_BY_DATE = commandType.equals("deadline") ? "/by" : "/at";
-            String inputWithoutDate = trimDate(input, REGEX_TO_SPLIT_BY_DATE);
-            length = inputWithoutDate.split(" ").length + 1;
-        } else {
-            length = input.split(REGEX_FOR_INPUTS_WITHOUT_DATE).length;
-        }
-
-        if (length != numOfArguments + 1) {
-            throw new DukeException(
-                    String.format(":( OOPS!!! There should be %s argument(s) in a %s command.", numOfArguments, commandType));
-        }
-    }
-
-    private static void checkIndexArgument(String indexArgument, TaskList taskList) throws DukeException {
-        if (HelpfulFunctions.isInteger(indexArgument)) {
-            int index = Integer.parseInt(indexArgument);
-            if (index < 1 || index > taskList.getSize()) {
-                throw new DukeException(":( OOPS!!! Your index is out of range");
-            }
-        } else {
-            throw new DukeException(":( OOPS!!! Your second argument must be an integer");
-        }
-    }
 
     private static void checkValidityTodo(String input) throws DukeException {
         final int NUM_OF_ARGUMENTS = 1;
         checkNumOfArguments(input, NUM_OF_ARGUMENTS, "todo");
     }
-    private static void checkPresenceOfDate(String input, String regexForDate) throws DukeException {
-        boolean containsRegex = false;
-        int regexIndex = -1;
-        String[] splittedInput = input.split(" ");
-        for (int i = 0; i < splittedInput.length; i++) {
-            if (splittedInput[i].equals(regexForDate)) {
-                containsRegex = true;
-                regexIndex = i;
-                break;
-            }
-        }
 
-        // If the second condition is met, it means that no date is written after the regexIndex
-        if (!containsRegex || regexIndex == splittedInput.length - 1) {
-            throw new DukeException(":( OOPS!!! Please specify a date using " + regexForDate);
-        }
-
-    }
     private static void checkValidityDeadline(String input) throws DukeException {
         final String REGEX_FOR_DATE = "/by";
         checkPresenceOfDate(input, REGEX_FOR_DATE);
@@ -176,6 +128,52 @@ public class Parser {
         checkIndexArgument(indexArgument, taskList);
     }
 
+    private static void checkNumOfArguments(String input, int numOfArguments, String commandType) throws DukeException {
+        int length;
+        final String REGEX_FOR_INPUTS_WITHOUT_DATE = " ";
+        if (commandType.equals("deadline") || commandType.equals("event")) {
+            final String REGEX_TO_SPLIT_DATE = commandType.equals("deadline") ? "/by" : "/at";
+            String inputWithoutDate = trimDate(input, REGEX_TO_SPLIT_DATE);
+            length = inputWithoutDate.split(" ").length + 1;
+        } else {
+            length = input.split(REGEX_FOR_INPUTS_WITHOUT_DATE).length;
+        }
+
+        if (length != numOfArguments + 1) {
+            throw new DukeException(
+                    String.format(":( OOPS!!! There should be %s argument(s) in a %s command.", numOfArguments, commandType));
+        }
+    }
+
+    private static void checkIndexArgument(String indexArgument, TaskList taskList) throws DukeException {
+        if (HelpfulFunctions.isInteger(indexArgument)) {
+            int index = Integer.parseInt(indexArgument);
+            if (index < 1 || index > taskList.getSize()) {
+                throw new DukeException(":( OOPS!!! Your index is out of range");
+            }
+        } else {
+            throw new DukeException(":( OOPS!!! Your second argument must be an integer");
+        }
+    }
+
+    private static void checkPresenceOfDate(String input, String regexForDate) throws DukeException {
+        boolean containsRegex = false;
+        int regexIndex = -1;
+        String[] splittedInput = input.split(" ");
+        for (int i = 0; i < splittedInput.length; i++) {
+            if (splittedInput[i].equals(regexForDate)) {
+                containsRegex = true;
+                regexIndex = i;
+                break;
+            }
+        }
+
+        // If the second condition is met, it means that no date is written after the regexIndex
+        if (!containsRegex || regexIndex == splittedInput.length - 1) {
+            throw new DukeException(":( OOPS!!! Please specify a date using " + regexForDate);
+        }
+    }
+
     private static Command validTodoHandler(String input) {
         final String REGEX = " ";
         String[] splittedInput = input.split(REGEX, 2);
@@ -185,17 +183,25 @@ public class Parser {
     private static Command validDeadlineHandler(String input) {
         final String REGEX_FOR_INPUT = " ";
         String details = input.split(REGEX_FOR_INPUT, 2)[1];
-        final String REGEX_FOR_DETAILS = "/by";
-        String splittedDetails[] = details.split(REGEX_FOR_DETAILS);
-        return new DeadlineCommand(splittedDetails[0].trim(), splittedDetails[1].trim());
+
+        final String REGEX_TO_SPLIT_DATE = "/by";
+        String splittedByDate[] = details.split(REGEX_TO_SPLIT_DATE);
+
+        return new DeadlineCommand(splittedByDate[0].trim(), splittedByDate[1].trim());
     }
 
     private static Command validEventHandler(String input) {
         final String REGEX_FOR_INPUT = " ";
         String details = input.split(REGEX_FOR_INPUT, 2)[1];
-        final String REGEX_FOR_DETAILS = "/at";
-        String splittedDetails[] = details.split(REGEX_FOR_DETAILS);
-        return new EventCommand(splittedDetails[0].trim(), splittedDetails[1].trim());
+
+        final String REGEX_TO_SPLIT_DATE = "/at";
+        String splittedByDate[] = details.split(REGEX_TO_SPLIT_DATE);
+
+        return new EventCommand(splittedByDate[0].trim(), splittedByDate[1].trim());
+    }
+
+    private static String trimDate(String input, String regex) {
+        return input.split(regex)[0].trim();
     }
 
 }
