@@ -57,7 +57,6 @@ public class Parser {
         } catch (DukeException e) {
             return new ExceptionalCommand(e);
         }
-
     }
 
     private static boolean checkValiditiy(String input, TaskList taskList) throws DukeException {
@@ -79,71 +78,60 @@ public class Parser {
             checkValidityEvent(input);
             break;
         case "done":
-            checkValidityDone(input, taskList);
+            checkValidityDoneOrDelete(input, taskList, "done");
             break;
         case "delete":
-            checkValidityDelete(input, taskList);
+            checkValidityDoneOrDelete(input, taskList, "delete");
             break;
         }
         return true;
     }
 
-    private static void checkValidityTodo(String input) throws DukeException {
+    private static void checkNumOfArguments(String input, int numOfArguments, String commandType) throws DukeException {
         final String REGEX = " ";
         String[] splittedInput = input.split(REGEX);
-        if (splittedInput.length == 1) {
-            throw new DukeException(":( OOPS!!! The description of a todo cannot be empty.");
+        if (splittedInput.length != numOfArguments + 1) {
+            throw new DukeException(
+                    String.format(":( OOPS!!! There should be %s argument(s) in a %s command.", numOfArguments, commandType));
         }
+    }
+
+    private static void checkIndexArgument(String indexArgument, TaskList taskList) throws DukeException {
+        if (HelpfulFunctions.isInteger(indexArgument)) {
+            int index = Integer.parseInt(indexArgument);
+            if (index < 1 || index > taskList.getSize()) {
+                throw new DukeException(":( OOPS!!! Your index is out of range");
+            }
+        } else {
+            throw new DukeException(":( OOPS!!! Your second argument must be an integer");
+        }
+    }
+
+    private static void checkValidityTodo(String input) throws DukeException {
+        final int NUM_OF_ARGUMENTS = 1;
+        checkNumOfArguments(input, NUM_OF_ARGUMENTS, "todo");
     }
 
     private static void checkValidityDeadline(String input) throws DukeException {
-        final String REGEX = " ";
-        String[] splittedInput = input.split(REGEX);
-        if (splittedInput.length == 1) {
-            throw new DukeException(":( OOPS!!! The description of a deadline cannot be empty.");
-        }
+        final int NUM_OF_ARGUMENTS = 2;
+        checkNumOfArguments(input, NUM_OF_ARGUMENTS, "deadline");
     }
 
     private static void checkValidityEvent(String input) throws DukeException {
-        final String REGEX = " ";
-        String[] splittedInput = input.split(REGEX);
-        if (splittedInput.length == 1) {
-            throw new DukeException(":( OOPS!!! The description of an event cannot be empty.");
-        }
+        final int NUM_OF_ARGUMENTS = 2;
+        checkNumOfArguments(input, NUM_OF_ARGUMENTS, "event");
     }
 
-    private static void checkValidityDone(String input, TaskList taskList) throws DukeException {
-        final String REGEX = " ";
-        String[] splittedInput = input.split(REGEX);
-        if (splittedInput.length == 1) {
-            throw new DukeException(":( OOPS!!! You must specify an index");
-        } else {
-            if (HelpfulFunctions.isInteger(splittedInput[1])) {
-                int index = Integer.parseInt(splittedInput[1]);
-                if (index < 1 || index > taskList.getSize()) {
-                    throw new DukeException(":( OOPS!!! Your index is out of range");
-                }
-            } else {
-                throw new DukeException(":( OOPS!!! Your second argument must be an integer");
-            }
-        }
-    }
+    private static void checkValidityDoneOrDelete(String input, TaskList taskList, String commandType)
+            throws DukeException {
+        final int NUM_OF_ARGUMENTS = 1;
+        checkNumOfArguments(input, NUM_OF_ARGUMENTS, commandType);
 
-    private static void checkValidityDelete(String input, TaskList taskList) throws DukeException {
         final String REGEX = " ";
         String[] splittedInput = input.split(REGEX);
-        if (splittedInput.length == 1) {
-            throw new DukeException(":( OOPS!!! You must specify an index");
-        } else {
-            if (HelpfulFunctions.isInteger(splittedInput[1])) {
-                int index = Integer.parseInt(splittedInput[1]);
-                if (index < 1 || index > taskList.getSize()) {
-                    throw new DukeException(":( OOPS!!! Your index is out of range");
-                }
-            } else {
-                throw new DukeException(":( OOPS!!! Your second argument must be an integer");
-            }
-        }
+
+        String indexArgument = splittedInput[1];
+        checkIndexArgument(indexArgument, taskList);
     }
 
     private static Command validTodoHandler(String input) {
