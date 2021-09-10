@@ -70,19 +70,19 @@ public class Ui {
     public static String printHelp() {
         return "Here is the list of commands you can enter:\n"
                 + "- Create new tasks:\n"
-                + "\ttodo <task name>\n"
-                + "\tdeadline <task name> /by <YYYY-MM-DD>\n"
-                + "\tevent <task name> /at <YYYY-MM-DD>\n"
+                + "    todo <task name>\n"
+                + "    deadline <task name> /by <YYYY-MM-DD>\n"
+                + "    event <task name> /at <YYYY-MM-DD>\n"
                 + "- Display your list of tasks:\n"
-                + "\tlist\n"
+                + "    list\n"
                 + "- Mark a task as done\n"
-                + "\tdone <task number>\n"
+                + "    done <task number>\n"
                 + "- Delete a task\n"
-                + "\tdelete <task number>\n"
+                + "    delete <task number>\n"
                 + "- Search the list for tasks matching keyword\n"
-                + "\tfind <keyword>\n"
+                + "    find <keyword>\n"
                 + "- Exit the assistant\n"
-                + "\tbye\n";
+                + "    bye\n";
     }
 
     /**
