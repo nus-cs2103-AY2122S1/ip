@@ -137,21 +137,19 @@ public class TaskList {
 
     public ArrayList<Task> findTasksUsingDate(LocalDate ...dates) throws DukeException {
         ArrayList<Task> tasksWithDate = new ArrayList<>();
-        if (tasks.size() == 0) {
-            return tasksWithDate;
-        }
-        for (int i = 0; i < tasks.size(); i++) {
-            Task currentTask = tasks.get(i);
-            if (dates.length == 0) {
-                tasksWithDate.add(currentTask);
-            } else {
-                LocalDate date = dates[0];
-                if (currentTask.getType() == Task.TaskType.DEADLINE) {
+        if (tasks.size() != 0) {
+            for (int i = 0; i < tasks.size(); i++) {
+                Task currentTask = tasks.get(i);
+                if (dates.length == 0) {
+                    tasksWithDate.add(currentTask);
+                } else if (currentTask.getType() == Task.TaskType.DEADLINE) {
+                    LocalDate date = dates[0];
                     LocalDate deadlineDate = ((Deadline) currentTask).getDate();
                     if (deadlineDate.equals(date)) {
                         tasksWithDate.add(currentTask);
                     }
                 } else if (currentTask.getType() == Task.TaskType.EVENT) {
+                    LocalDate date = dates[0];
                     LocalDate eventDate = ((Event) currentTask).getDate();
                     if (eventDate.equals(date)) {
                         tasksWithDate.add(currentTask);
@@ -160,5 +158,28 @@ public class TaskList {
             }
         }
         return tasksWithDate;
+//        if (tasks.size() == 0) {
+//            return tasksWithDate;
+//        }
+//        for (int i = 0; i < tasks.size(); i++) {
+//            Task currentTask = tasks.get(i);
+//            if (dates.length == 0) {
+//                tasksWithDate.add(currentTask);
+//            } else {
+//                LocalDate date = dates[0];
+//                if (currentTask.getType() == Task.TaskType.DEADLINE) {
+//                    LocalDate deadlineDate = ((Deadline) currentTask).getDate();
+//                    if (deadlineDate.equals(date)) {
+//                        tasksWithDate.add(currentTask);
+//                    }
+//                } else if (currentTask.getType() == Task.TaskType.EVENT) {
+//                    LocalDate eventDate = ((Event) currentTask).getDate();
+//                    if (eventDate.equals(date)) {
+//                        tasksWithDate.add(currentTask);
+//                    }
+//                }
+//            }
+//        }
+//        return tasksWithDate;
     }
 }

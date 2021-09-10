@@ -1,9 +1,8 @@
 package duke;
 
 import java.time.LocalDate;
-import java.time.format.*;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -75,32 +74,29 @@ public class Duke {
         }
     }
 
+    public void stopRunningDuke() {
+        isRunning = false;
+    }
+
     private String respondToFirstCommand(String firstCommand) {
-        String response;
         switch (firstCommand) {
         case "bye":
-            response = ui.goodBye();
-            isRunning = false;
-            break;
+            stopRunningDuke();
+            return ui.goodBye();
         case "done":
-            response = markDone();
-            break;
+            return markDone();
         case "deadline":
         case "todo":
         case "event":
-            response = addTask();
-            break;
+            return addTask();
         case "delete":
-            response = deleteTask();
-            break;
+            return deleteTask();
         case "list":
-            response = tasks.listTasks();
-            break;
+            return tasks.listTasks();
         case "find":
             String keyword = parser.findKeyword();
             ArrayList<Task> tasksWithKeyword = tasks.findTasksUsingKeyword(keyword);
-            response = ui.showTasksWithKeyword(tasksWithKeyword);
-            break;
+            return ui.showTasksWithKeyword(tasksWithKeyword);
         case "schedule":
             String date = parser.findDateInCommand();
             ArrayList<Task> tasksWithDate;
@@ -110,16 +106,13 @@ public class Duke {
                 } catch (DateTimeParseException e) {
                     throw new DukeException("Wrong format for date! Use yyyy-mm-dd format!");
                 }
-            } else {
-                tasksWithDate = tasks.findTasksUsingDate();
+                return ui.showSchedule(tasksWithDate, date);
             }
-            response = ui.showSchedule(tasksWithDate, date);
-            break;
+            tasksWithDate = tasks.findTasksUsingDate();
+            return ui.showSchedule(tasksWithDate, date);
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-        assert !Objects.equals(response, "");
-        return response;
     }
 
     /**

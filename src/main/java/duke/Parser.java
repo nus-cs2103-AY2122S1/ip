@@ -13,8 +13,8 @@ public class Parser {
      * @param command The command to be split.
      */
     public void interpretCommand(String command) {
-        String lowerCaseCommand = command.toLowerCase();
-        currentLine = lowerCaseCommand.split(" ");
+        String commandInLowerCase = command.toLowerCase();
+        currentLine = commandInLowerCase.split(" ");
     }
 
     /**
@@ -48,12 +48,7 @@ public class Parser {
         return currentLine[1];
     }
 
-    /**
-     * Finds the date in the command if command is deadline or event.
-     *
-     * @return The date in the command (if any).
-     */
-    public String findDateInCommand() {
+    private int findStartingIndexOfDateInCommand() {
         int startingIndexOfDate = -1;
         for (int i = 0; i < currentLine.length; i++) {
             if (currentLine[i].equals("/by") && currentLine[0].equals("event")) {
@@ -65,6 +60,16 @@ public class Parser {
                 break;
             }
         }
+        return startingIndexOfDate;
+    }
+
+    /**
+     * Finds the date in the command if command is deadline or event.
+     *
+     * @return The date in the command (if any).
+     */
+    public String findDateInCommand() {
+        int startingIndexOfDate = findStartingIndexOfDateInCommand();
         if (getFirstCommand().equals("schedule")) {
             startingIndexOfDate = 1;
         }
@@ -92,9 +97,8 @@ public class Parser {
         for (int i = 1; i < currentLine.length; i++) {
             if (currentLine[i].equals("/by") || currentLine[i].equals("/at")) {
                 break;
-            } else {
-                taskDescription.append(currentLine[i]).append(" ");
             }
+            taskDescription.append(currentLine[i]).append(" ");
         }
         return taskDescription.toString();
     }

@@ -94,17 +94,18 @@ public class Storage {
             FileWriter fw = new FileWriter(this.filePath);
             for (int i = 1; i < tasks.getTasksLength() + 1; i++) {
                 Task task = tasks.getTask(i);
+                String taskStatusIconAndDescription = task.getStatusIcon() + "," + task.getTaskDescription();
                 switch (task.getType()) {
                 case DEADLINE:
                     Deadline dl = (Deadline) task;
-                    fw.write("deadline," + task.getStatusIcon() + "," + task.getTaskDescription() + "," + dl.getBy());
+                    fw.write("deadline," + taskStatusIconAndDescription + "," + dl.getBy());
                     break;
                 case TODO:
-                    fw.write("todo," + task.getStatusIcon() + "," + task.getTaskDescription());
+                    fw.write("todo," + taskStatusIconAndDescription);
                     break;
                 case EVENT:
                     Event e = (Event) task;
-                    fw.write("event," + task.getStatusIcon() + "," + task.getTaskDescription() + "," + e.getAt());
+                    fw.write("event," + taskStatusIconAndDescription + "," + e.getAt());
                     break;
                 default:
                     break;
