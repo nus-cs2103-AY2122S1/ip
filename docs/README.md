@@ -75,7 +75,7 @@ Expected outcome:
 
 <img src="deadline.png" alt=Lifeline response to deadline>
 
-### `event <description> /at <date> <startTime> <endTime>` - Adds a Event
+### `event <description> /at <date> <startTime> <endTime>` - Adds an Event
 
 Aliases: `e`, `event`
 
