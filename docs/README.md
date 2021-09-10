@@ -1,5 +1,7 @@
 # User Guide (Duke)
 
+![image](https://user-images.githubusercontent.com/61271749/132840301-295ef397-5d68-4e78-b506-c189e0802288.png)
+
 ## Features 
 
 ### Add and Delete Tasks
