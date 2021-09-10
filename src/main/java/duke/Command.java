@@ -14,12 +14,12 @@ public class Command {
      * @param type The type of the task: event, deadline, or other type.
      */
     public static String addTask(String task, Type type, LocalDateTime localDateTime, List<Task> tasks) {
-        Task taskObject = TaskList.initialiseByType(task, type, false, localDateTime);
-        tasks.add(taskObject);
+        Task taskObj = TaskList.initialiseByType(task, type, false, localDateTime);
+        tasks.add(taskObj);
         String addTaskString = String.format("Got it. I've added this task:\n"
                         + "%s"
                         + "\nNow you have %d tasks in the list.",
-                taskObject.toString(), tasks.size());
+                taskObj.toString(), tasks.size());
         return addTaskString;
     }
 
