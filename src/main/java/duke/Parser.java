@@ -2,7 +2,6 @@ package duke;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
 
 public class Parser {
     /**
@@ -14,67 +13,114 @@ public class Parser {
      * @throws MissingDeadlineDescriptionException
      * @throws MissingEventDescriptionException
      */
-    public String parse(String input, TaskList taskList, UserInterface userInterface, Storage storage)
-            throws InvalidCommandException,
-            MissingToDoDescriptionException,
-            MissingDeadlineDescriptionException,
-            MissingEventDescriptionException {
+    public String parse(String input, TaskList taskList, ResponseGenerator responseGenerator, Storage storage) throws
+            InvalidCommandException {
         try {
             input = input.trim().toLowerCase();
 
             if (input.equals("bye")) {
-                return "Bye. Hope to see you again soon!";
+                return responseGenerator.showGoodbyeMessage();
             } else if (input.equals("list")){
-                return userInterface.showList(taskList);
+                return responseGenerator.showList(taskList);
             } else if (input.contains("done")) {
-                int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                taskList.markAsDone(index);
-                storage.write();
-                return userInterface.showCompletedTask(taskList.getTask(index));
-            } else if (input.contains("todo") || input.contains("deadline") || input.contains("event")){
-                if (input.contains("todo") && input.length() == 4) {
-                    throw new MissingToDoDescriptionException();
-                } else if (input.contains("deadline") && input.length() == 8) {
-                    throw new MissingDeadlineDescriptionException();
-                } else if (input.contains("event") && input.length() == 5) {
-                    throw new MissingEventDescriptionException();
-                } else {
-                    Task t;
-
-                    if (input.contains("todo")) {
-                        String description = input.substring(input.indexOf(' ') + 1);
-                        t = new ToDo(description);
-                    } else {
-                        String description = input.substring(input.indexOf(' ') + 1, input.lastIndexOf('/') - 1);
-                        String time = input.substring(input.lastIndexOf("/") + 4);
-                        if (input.contains("deadline")) {
-                            t = new Deadline(description, time);
-                        } else {
-                            t = new Event(description, time);
-                        }
-                    }
-
-                    taskList.addItem(t);
-                    storage.write();
-                    return userInterface.showAddedTask(t, taskList);
-                }
+                return handleTaskCompletion(input, taskList, responseGenerator, storage);
+            } else if (containsValidTaskType(input)){
+                return handleAddTask(input, taskList, responseGenerator, storage);
             } else if (input.contains("delete")) {
-                int index = Integer.parseInt(input.split(" " )[1]) - 1;
-                if (index < 0 || index >= taskList.getSize()) {
-
-                }
-                Task t = taskList.deleteItem(index);
-                storage.write();
-                return userInterface.showDeletedTask(t, taskList);
+                return handleDeleteTask(input, taskList, responseGenerator, storage);
             } else if (input.contains("find")) {
-                String keyword = input.split(" ")[1];
-                List<Task> results = taskList.find(keyword);
-                return userInterface.showResults(results);
+                return handleFindTask(input, taskList, responseGenerator, storage);
             } else {
                 throw new InvalidCommandException();
             }
+        } catch (MissingToDoDescriptionException
+                | MissingDeadlineDescriptionException
+                | MissingEventDescriptionException e) {
+            return e.getMessage();
+        }
+    }
+
+    private static String handleTaskCompletion(String input, TaskList taskList,
+                                               ResponseGenerator responseGenerator, Storage storage) {
+        try {
+            int index = Integer.parseInt(input.split(" ")[1]) - 1;
+            taskList.markAsDone(index);
+            storage.write();
+            return responseGenerator.showCompletedTask(taskList.getTask(index));
         } catch (IOException e) {
             return e.getMessage();
         }
     }
+
+    private static String handleAddTask(String input, TaskList taskList,
+                                        ResponseGenerator responseGenerator, Storage storage)
+            throws MissingToDoDescriptionException,
+            MissingDeadlineDescriptionException,
+            MissingEventDescriptionException {
+        if (input.contains("todo") && input.length() == 4) {
+            throw new MissingToDoDescriptionException();
+        } else if (input.contains("deadline") && input.length() == 8) {
+            throw new MissingDeadlineDescriptionException();
+        } else if (input.contains("event") && input.length() == 5) {
+            throw new MissingEventDescriptionException();
+        } else {
+            return handleAddTaskWithDescription(input, taskList,
+                    responseGenerator, storage);
+        }
+    }
+
+    private static String handleAddTaskWithDescription(String input, TaskList taskList,
+                                                       ResponseGenerator responseGenerator, Storage storage) {
+        try {
+            Task t;
+
+            if (input.contains("todo")) {
+                String description = input.substring(input.indexOf(' ') + 1);
+                t = new ToDo(description);
+            } else {
+                String description = input.substring(input.indexOf(' ') + 1, input.lastIndexOf('/') - 1);
+                String time = input.substring(input.lastIndexOf("/") + 4);
+                if (input.contains("deadline")) {
+                    t = new Deadline(description, time);
+                } else {
+                    t = new Event(description, time);
+                }
+            }
+
+            taskList.addItem(t);
+            storage.write();
+            return responseGenerator.showAddedTask(t, taskList);
+        } catch (IOException e) {
+            return e.getMessage();
+        }
+    }
+
+    private static String handleDeleteTask(String input, TaskList taskList,
+                                           ResponseGenerator responseGenerator, Storage storage) {
+        try {
+            int index = Integer.parseInt(input.split(" " )[1]) - 1;
+            if (index < 0 || index >= taskList.getSize()) {
+
+            }
+            Task t = taskList.deleteItem(index);
+            storage.write();
+            return responseGenerator.showDeletedTask(t, taskList);
+        } catch (IOException e) {
+            return e.getMessage();
+        }
+    }
+
+    private boolean containsValidTaskType(String input) {
+        return input.contains("todo") || input.contains("deadline") || input.contains("event");
+    }
+
+    private static String handleFindTask(String input, TaskList taskList,
+                                         ResponseGenerator responseGenerator, Storage storage) {
+        String keyword = input.split(" ")[1];
+        List<Task> results = taskList.find(keyword);
+        return responseGenerator.showResults(results);
+    }
+
+
 }
+
