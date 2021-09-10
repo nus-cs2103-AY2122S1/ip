@@ -98,7 +98,7 @@ Expected outcome:
 
 ```
 Got it. I've removed the following task:
-[T][] read book
+[T][X] read book
 Now you have 2 tasks in your list.
 ```
 
