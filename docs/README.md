@@ -26,11 +26,23 @@ Shows the available commands supported.
 
 Format: `help`
 
+Example of usage:
+`help`
+
+Expected outcome:
+A list of supported commands and how to use them will be shown.
+
 ### `list`
 
 Lists all the tasks in the task list. 
 
 Format: `list`
+
+Example of usage:
+`list`
+
+Expected outcome:
+A list containing the tasks will be printed.
 
 
 ### `todo`
@@ -82,7 +94,7 @@ Now you have 1 task in the list.
 
 Creates a Task of Event Type. 
 
-Format: `event <DESCRIPTION> (by: <DATE> <TIME>)`
+Format: `event <DESCRIPTION> (at: <DATE> <TIME>)`
 
 *Date should follow `YYYY-MM-DD` format and time should follow `HH:mm` format. Time is optional.* 
 
