@@ -11,7 +11,7 @@ public class TaskManager {
 
     TaskManager() {
         File txtFile;
-        System.out.println(System.getProperty("user.dir"));
+//        System.out.println(System.getProperty("user.dir"));
         String path = System.getProperty("user.dir") + "\\src\\main\\data\\duke.txt";
         txtFile = new File(path);
         this.txtFile = txtFile;
@@ -46,21 +46,21 @@ public class TaskManager {
         }
     }
 
-    public void executeCommand(String inData) {
+    public String executeCommand(String inData) {
         int inDataLength = inData.length();
         if (!Objects.equals(inData.toLowerCase(), "bye")) {
             if (Objects.equals(inData, "list")) {
-                listAll();
+                return listAll();
             } else if (inData.contains("todo")) {
                 try {
                     inData.substring(0, 6);
                     if (Objects.equals(inData.substring(0, 5), "todo ")) {
                         taskList[i] = new ToDo(inData.substring(5, inDataLength));
-                        toDoAddedMessage();
                         i++;
+                        return toDoAddedMessage();
                     }
                 } catch (Exception e) {
-                    errorEmptyMessage("todo");
+                    return errorEmptyMessage("todo");
                 }
             } else if (inData.contains("deadline ")) {
                 if (Objects.equals(inData.substring(0, 9), "deadline ")) {
@@ -71,10 +71,10 @@ public class TaskManager {
                     String description = segments[0].substring(9, segmentedLength);
                     try {
                         taskList[i] = new Deadline(description, date);
-                        deadlineAddedMessage();
                         i++;
+                        return deadlineAddedMessage();
                     } catch (Exception e) {
-                        System.out.println("Please enter date in this format: yyyy-mm-dd (e.g., 2019-10-15)");
+                        return "Please enter date in this format: yyyy-mm-dd (e.g., 2019-10-15)";
                     }
                 }
             } else if (inData.contains("event ")) {
@@ -86,10 +86,10 @@ public class TaskManager {
                     String description = segments[0].substring(6, segmentedLength);
                     try {
                         taskList[i] = new Event(description, date);
-                        eventAddedMessage();
                         i++;
+                        return eventAddedMessage();
                     } catch (Exception e) {
-                        System.out.println("Please enter date in this format: yyyy-mm-dd (e.g., 2019-10-15)");
+                        return "Please enter date in this format: yyyy-mm-dd (e.g., 2019-10-15)";
                     }
                 }
             } else if (inData.contains("done ")) {
@@ -97,9 +97,9 @@ public class TaskManager {
                     int taskNo = Integer.parseInt(inData.substring(5, inDataLength));
                     if (taskNo <= 100 && taskNo <= i) {
                         taskList[taskNo - 1].markAsDone();
-                        doneTaskMessage(taskNo);
+                        return doneTaskMessage(taskNo);
                     } else {
-                        errorInvalidTaskNo();
+                        return errorInvalidTaskNo();
                     }
                 }
             } else if (inData.contains("delete ")) {
@@ -107,7 +107,6 @@ public class TaskManager {
                     if (isNumeric(inData.substring(7, inDataLength))) {
                         int taskNo = Integer.parseInt(inData.substring(7, inDataLength));
                         if (taskNo <= 100 && taskNo <= i) {
-                            deletedTaskMessage(taskNo);
                             taskList[taskNo - 1] = null;
                             if (taskNo < i + 1) {
                                 for (int n = taskNo - 1; n < i; n++) {
@@ -115,14 +114,14 @@ public class TaskManager {
                                 }
                             }
                             i--;
+                            return deletedTaskMessage(taskNo);
                         }
                     }
                 }
             } else {
-                errorUnknownCommandMessage();
+                return errorUnknownCommandMessage();
             }
         } else {
-            byeMessage();
             try {
                 for (int k = 0; k < i; k++) {
                     String done;
@@ -155,108 +154,88 @@ public class TaskManager {
                     }
                 }
             } catch (Exception e) {
-                System.out.println("Unable to write to file");
+                return "Unable to write to file";
             }
+            return byeMessage();
         }
-
+        return "";
     }
 
-    public void listAll() {
-        System.out.println("____________________________________________________________\n" +
-                "Here are the tasks in your list: ");
+    public String listAll() {
+        String output = "";
         for (int j = 0; j < i; j++) {
             if (taskList[j] instanceof ToDo) {
-                System.out.println(j + 1 + ". [" + taskList[j].getTask() + "]" +
-                        "[" + taskList[j].getStatusIcon() + "] " + taskList[j].getDescription());
+                output = j + 1 + ". [" + taskList[j].getTask() + "]" +
+                        "[" + taskList[j].getStatusIcon() + "] " + taskList[j].getDescription();
             } else {
-                System.out.println(j + 1 + ". [" + taskList[j].getTask() + "]" +
+               output = j + 1 + ". [" + taskList[j].getTask() + "]" +
                         "[" + taskList[j].getStatusIcon() + "] " + taskList[j].getDescription()
-                        + taskList[j].getDate());
+                        + taskList[j].getDate();
             }
         }
-        System.out.println("____________________________________________________________");
+        return "Here are the tasks in your list: " + output;
     }
 
-    public void toDoAddedMessage() {
-        System.out.println(
-                "____________________________________________________________ \n"
-                        + "Got it. I've added this task: \n"
+    public String toDoAddedMessage() {
+        String output = "Got it. I've added this task: \n"
                         + "[" + taskList[i].getTask() + "]"
                         + "[" + taskList[i].getStatusIcon() + "] "
                         + taskList[i].getDescription()
                         + "\n"
-                        + "Now you have " + (i + 1) + " tasks in the list.\n"
-                        + "____________________________________________________________");
+                        + "Now you have " + (i + 1) + " tasks in the list.";
+        return output;
     }
 
-    public void deadlineAddedMessage() {
-        System.out.println(
-                "____________________________________________________________ \n"
-                        + "Got it. I've added this task: \n"
+    public String deadlineAddedMessage() {
+        String output = "Got it. I've added this task: \n"
                         + "[" + taskList[i].getTask() + "]"
                         + "[" + taskList[i].getStatusIcon() + "] "
                         + taskList[i].getDescription()
                         + "\n"
-                        + "Now you have " + (i + 1) + " tasks in the list.\n"
-                        + "____________________________________________________________");
+                        + "Now you have " + (i + 1) + " tasks in the list.";
+        return output;
     }
 
-    public void eventAddedMessage() {
-        System.out.println(
-                "____________________________________________________________ \n"
-                        + "Got it. I've added this task: \n"
+    public String eventAddedMessage() {
+        String output = "Got it. I've added this task: \n"
                         + "[" + taskList[i].getTask() + "]"
                         + "[" + taskList[i].getStatusIcon() + "] "
                         + taskList[i].getDescription()
                         + "\n"
-                        + "Now you have " + (i + 1) + " tasks in the list.\n"
-                        + "____________________________________________________________");
+                        + "Now you have " + (i + 1) + " tasks in the list.";
+        return output;
     }
 
-    public void doneTaskMessage(int taskNo) {
-        System.out.println(
-                "____________________________________________________________\n"
-                        + "Nice! I've marked this task as done: \n"
+    public String doneTaskMessage(int taskNo) {
+        String output = "Nice! I've marked this task as done: \n"
                         + " [" + taskList[taskNo - 1].getStatusIcon() + "] "
-                        + taskList[taskNo - 1].getDescription()
-                        + "\n____________________________________________________________");
+                        + taskList[taskNo - 1].getDescription();
+        return output;
     }
 
-    public void deletedTaskMessage(int taskNo) {
-        System.out.println(
-                "____________________________________________________________\n"
-                        + "Noted. I've removed this task: \n"
+    public String deletedTaskMessage(int taskNo) {
+        String output = "Noted. I've removed this task: \n"
                         + " [" + taskList[taskNo - 1].getStatusIcon() + "] "
                         + taskList[taskNo - 1].getDescription()
                         + "\n"
-                        + "Now you have " + (i - 1) + " tasks in the list.\n"
-                        + "____________________________________________________________");
+                        + "Now you have " + (i - 1) + " tasks in the list.";
+        return output;
     }
 
-    public void errorUnknownCommandMessage() {
-        System.out.println("____________________________________________________________\n" +
-                "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                "____________________________________________________________");
+    public String errorUnknownCommandMessage() {
+        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
     }
 
-    public void byeMessage() {
-        System.out.println(
-                "____________________________________________________________ \n"
-                        + "Bye. Hope to see you again soon! \n"
-                        + "____________________________________________________________");
+    public String byeMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
-    public void errorEmptyMessage(String task) {
-        System.out.println("____________________________________________________________\n" +
-                "☹ OOPS!!! The description of a " + task + " cannot be empty.\n" +
-                "____________________________________________________________");
+    public String errorEmptyMessage(String task) {
+        return "☹ OOPS!!! The description of a " + task + " cannot be empty.";
     }
 
-    public void errorInvalidTaskNo() {
-        System.out.println(
-                "____________________________________________________________ \n"
-                        + "invalid number!"
-                        + "\n____________________________________________________________");
+    public String errorInvalidTaskNo() {
+        return "invalid number!";
     }
 
     public static boolean isNumeric(String string) {
