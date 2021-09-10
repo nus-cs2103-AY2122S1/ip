@@ -56,8 +56,7 @@ public class DoneCommand extends Command {
         assert task != null : "task should not be null";
 
         String prefix = "Nice! I've marked this task as done:";
-        String kaomoji = "≧(´▽｀)≦";
 
-        return new Message(prefix, task.toString(), kaomoji);
+        return new Message(prefix, task.toString());
     }
 }

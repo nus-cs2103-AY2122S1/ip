@@ -48,8 +48,7 @@ public class FindCommand extends Command {
         assert list != null : "task list should not be null";
 
         String prefix = "Here are the matching tasks in your list:";
-        String kaomoji = "ヽ(°〇°)ﾉ";
 
-        return new Message(prefix, this.list.toString(), kaomoji);
+        return new Message(prefix, this.list.toString());
     }
 }

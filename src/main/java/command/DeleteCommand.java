@@ -65,8 +65,6 @@ public class DeleteCommand extends Command {
         String taskWord = numOfTasks == 1 ? "task" : "tasks";
         String suffix = String.format("Now you have %d %s in the list", list.getNumberOfTasks(), taskWord);
 
-        String kaomoji = "(＾＾)b";
-
-        return new Message(prefix, task.toString(), suffix, kaomoji);
+        return new Message(prefix, task.toString(), suffix);
     }
 }

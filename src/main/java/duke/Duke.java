@@ -5,7 +5,6 @@ import exception.DukeException;
 import exception.ErrorAccessingFileException;
 import exception.InvalidFormatInStorageException;
 import javafx.application.Platform;
-import message.ErrorMessage;
 import message.Message;
 import parser.Parser;
 import storage.Storage;
@@ -21,7 +20,7 @@ import tasklist.TaskList;
 public class Duke {
     private TaskList list;
     private Parser parser;
-    private ErrorMessage loadErrorMessage;
+    private Message loadErrorMessage;
 
     /**
      * Instantiates a `Duke` chat bot.
@@ -69,7 +68,7 @@ public class Duke {
             return this.loadErrorMessage.toString() + "\nPlease exit and try again later.";
         }
 
-        Message greetingMessage = new Message("Hello! I'm JIJI, what shall we do today?", "٩(｡•́‿•̀｡)۶");
+        Message greetingMessage = new Message("Hello! I'm JIJI, what shall we do today?");
         return greetingMessage.toString();
     }
 }

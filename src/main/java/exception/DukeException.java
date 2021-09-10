@@ -1,6 +1,6 @@
 package exception;
 
-import message.ErrorMessage;
+import message.Message;
 
 /**
  * Encapsulates an exception that contains a method to get an `ErrorMessage`.
@@ -15,9 +15,9 @@ public class DukeException extends Exception {
      * Gets an output message containing information about why the error occurred.
      * And/or how the user can correct the error.
      *
-     * @return `ErrorMessage`.
+     * @return `Message`.
      */
-    public ErrorMessage getOutputMessage() {
-        return new ErrorMessage(this.getMessage());
+    public Message getOutputMessage() {
+        return new Message(this.getMessage());
     }
 }
