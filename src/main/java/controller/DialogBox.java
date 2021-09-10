@@ -21,8 +21,7 @@ import javafx.scene.shape.Ellipse;
  */
 public class DialogBox extends HBox {
     private String userDialogStyle =
-            "-fx-text-fill: #FFFFFF; " +
-                    "-fx-background-color: linear-gradient(to bottom right, #7500AC, #BE1499);";
+            "-fx-text-fill: #FFFFFF; -fx-background-color: linear-gradient(to bottom right, #7500AC, #BE1499);";
     private String dukeDialogStyle =
             "-fx-background-color: #F2F2F2;";
     private Ellipse displayPictureClip = new Ellipse(30, 25, 25, 25);
