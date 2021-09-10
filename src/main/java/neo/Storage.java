@@ -18,6 +18,10 @@ public class Storage {
 
     private static String commandResult = "";
 
+    /**
+     * This constructor initializes the Storage. If the save file is not found,
+     * creates one. If the save file is found, loads the information saved.
+     */
     public Storage(String path) {
         try {
             File file = new File(path);
@@ -35,7 +39,7 @@ public class Storage {
      */
     private void createFileAndDirectory() {
         String directoryName = "data";
-        String fileName = "duke.txt";
+        String fileName = "neo.txt";
         File directory = new File(directoryName);
         if (!directory.exists()) {
             directory.mkdir();
@@ -116,7 +120,7 @@ public class Storage {
         assert !toSave.equals("") : "toSave cannot be empty";
 
         String directoryName = "data";
-        String fileName = "duke.txt";
+        String fileName = "neo.txt";
 
         File file = new File(directoryName + "/" + fileName);
         try {
@@ -133,7 +137,7 @@ public class Storage {
      */
     public static void wipeOldSave() {
         String directoryName = "data";
-        String fileName = "duke.txt";
+        String fileName = "neo.txt";
 
         File file = new File(directoryName + "/" + fileName);
         try {

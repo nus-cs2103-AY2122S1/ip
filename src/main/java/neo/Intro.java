@@ -8,7 +8,6 @@ package neo;
 public class Intro {
     private String introMessage = "Hello! I'm Neo!\n"
             + "What can I do for you? Type something to get started!";
-    private final Logo logo = new Logo();
 
     public Intro() {
 

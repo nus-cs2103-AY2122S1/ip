@@ -26,7 +26,7 @@ public class TaskTest {
     }
 
     @Test
-    public void markAsDone_markDone_writtenCorrectly(){
+    public void markAsDone_markDone_writtenCorrectly() {
         Task task = new ToDo(Task.Type.T, false, "");
         try {
             assertEquals(true, task.markAsDone());

@@ -27,13 +27,15 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.jpg"));
 
+    /**
+     * This method initializes the main GUI window with the welcome message.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
                 DialogBoxNeo.getNeoDialog(intro.printIntro(), dukeImage)
         );
-
     }
 
     public void setNeo(Neo neo) {

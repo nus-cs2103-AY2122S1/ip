@@ -15,6 +15,10 @@ public class Parser {
         TODO, EVENT, DEADLINE, DELETE, DONE, LIST, FIND, OTHER
     }
 
+    /**
+     * This constructor initializes the Parser, which parses all user commands
+     * and returns the result (which command it is).
+     */
     public Parser(String command) throws NeoException {
         if (isList(command)) {
             this.commandType = Command.LIST;
@@ -179,6 +183,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if it is a 'Find' command.
+     *
+     * @param command Takes in command line input to process.
+     * @return returns true if it is said command.
+     * @throws NeoException Syntax errors, spacing.
+     */
     private boolean isFind(String command) throws NeoException {
         int commandLength = command.length();
         if (commandLength >= 4 && command.startsWith("find")) {

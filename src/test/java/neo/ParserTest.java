@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class ParserTest {
 
     @Test
-    public void getCommandType_returnCommandType_ReturnEnum() {
+    public void getCommandType_returnCommandType_returnEnum() {
         try {
             Parser parser = new Parser("todo testing");
             assertEquals(Parser.Command.TODO, parser.getCommandType());
@@ -24,7 +24,7 @@ public class ParserTest {
     }
 
     @Test
-    public void getTaskNumber_returnTaskNumber_ReturnNumber() {
+    public void getTaskNumber_returnTaskNumber_returnNumber() {
         try {
             Ui ui = new Ui("todo testing");
             Parser parser = new Parser("done 1");

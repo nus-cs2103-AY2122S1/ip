@@ -89,7 +89,7 @@ public class TaskList {
     private boolean isTaskType(Task task, String queryTag, String queryLowerCase) {
         Task.Type taskType = task.getType();
         if (queryTag.contains("-t")) {
-            String queryTaskType = queryLowerCase.length() >= 2 ?queryLowerCase.substring(2).trim() : "";
+            String queryTaskType = queryLowerCase.length() >= 2 ? queryLowerCase.substring(2).trim() : "";
             if (taskType == Task.Type.T && queryTaskType.equals("t")) {
                 return true;
             } else if (taskType == Task.Type.D && queryTaskType.equals("d")) {
@@ -113,7 +113,7 @@ public class TaskList {
      */
     public static String listCommand() {
         int count = 1;
-        String result = "";
+        String result = "Here are your tasks!\n";
 
         if (taskList.size() == 0) {
             return "List is Empty!";
@@ -158,7 +158,7 @@ public class TaskList {
             throw new NeoException("Delete Task:", 2);
         } else {
             if (taskNumber <= taskList.size()) {
-                assert taskList.size() > 0: "Task list should at least contain something to delete";
+                assert taskList.size() > 0 : "Task list should at least contain something to delete";
                 String result = "Noted. I've removed this task: \n";
                 Task taskToDelete = taskList.get(taskNumber - 1);
                 taskList.remove(taskNumber - 1);

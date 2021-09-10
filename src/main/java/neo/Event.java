@@ -13,20 +13,18 @@ import java.time.format.DateTimeParseException;
 public class Event extends Task {
 
     private String at;
-    private LocalDate date;
 
     /**
      * This constructor handles the creation af a new Event Task.
      *
      * @param description Task description.
      * @param type Task type: Event.
-     * @param at Event timeline.
+     * @param at Event timeline yyyy-mm-dd.
      */
     public Event(String description, Type type, String at) {
         super(description, type);
         try {
             LocalDate d1 = LocalDate.parse(at);
-            this.date = d1;
             this.at = d1.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         } catch (DateTimeParseException dateTimeParseException) {
             this.at = at;

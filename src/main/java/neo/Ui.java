@@ -11,6 +11,10 @@ public class Ui {
     private Parser parsedUserInput;
     private String inputResult;
 
+    /**
+     * This constructor initializes the main UI. It executes the result of the
+     * user inputs processed by the Parser.
+     */
     public Ui(String command) {
         try {
             Parser parser = new Parser(command);
@@ -136,7 +140,7 @@ public class Ui {
         String result = "";
         result += "Got it. I've added this task:\n";
         result += task + "\n";
-        result +="Now you have " + commands + " tasks in the list.\n";
+        result += "Now you have " + commands + " tasks in the list.\n";
         return result;
     }
 

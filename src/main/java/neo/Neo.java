@@ -10,6 +10,10 @@ public class Neo {
     private Storage storage;
     private final Farewell farewell;
 
+    /**
+     * This constructor initializes the stored list (if any) and
+     * loads the farewell to be used when the program ends.
+     */
     public Neo() {
         this.farewell = new Farewell();
         loadStoredList();
@@ -20,12 +24,12 @@ public class Neo {
      * Loads list (if any) stored locally.
      */
     private void loadStoredList() {
-        String filePath = "data/duke.txt";
+        String filePath = "data/neo.txt";
         this.storage = new Storage(filePath);
     }
 
     /**
-     * Retrieves response from Duke.
+     * Retrieves response from Neo.
      *
      * @param input String input from the user GUI.
      * @return returns a string to be displayed on the GUI.
@@ -37,7 +41,7 @@ public class Neo {
         } else {
             Ui parseInput = new Ui(input);
             String inputResult = parseInput.getInputResult();
-            assert !inputResult.equals("") : "the response from Duke should not be empty";
+            assert !inputResult.equals("") : "the response from Neo should not be empty";
             return inputResult;
         }
     }

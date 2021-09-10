@@ -1,7 +1,7 @@
 package neo;
 
 /**
- *  This class represents the Exceptions thrown by Duke.
+ *  This class represents the Exceptions thrown by Neo.
  *  Consult comments for error codes.
  *
  * @author Ryan Tian Jun.
@@ -13,6 +13,10 @@ public class NeoException extends Exception {
     // -1 default, 0: WhiteSpace, 1: Empty description, 2: Delete/ mark as done range errors
     private int type = -1;
 
+    /**
+     * This constructor creates a new NeoException object, which will
+     * then prompt the user why their command was erroneous.
+     */
     public NeoException(String errorMessage) {
         super(errorMessage);
         this.errorMessage = errorMessage;
@@ -32,11 +36,11 @@ public class NeoException extends Exception {
     }
 
     /**
-     * Returns the String representation of a DukeException.
+     * Returns the String representation of a NeoException.
      * Contains some general exceptions applied to across the program.
      * Error codes can be found above.
      *
-     * @return returns the String representation of a DukeException.
+     * @return returns the String representation of a NeoException.
      */
     @Override
     public String toString() {
