@@ -2,7 +2,7 @@
 Welcome to Lifeline! Your all-in-one task manager! Don't worry about forgetting important tasks anymore! Lifeline helps 
 you to remember your todos, upcoming deadlines and events.
 
-![Lifeline CLI](/docs/Ui.png)
+<img src="Ui.png" alt=Lifeline GUI>
 
 ## Features
 1. Add 3 different types of tasks 
@@ -34,7 +34,7 @@ efficiently find a task using a keyword.
 
 ### CLI
 
-![Lifeline CLI](/docs/CLI.png)
+<img src="CLI.png" alt=Lifeline CLI>
 
 If you do not like to use GUI, you can run the following command to launch the CLI version of Lifeline.
 
@@ -59,7 +59,7 @@ Example of usage:
 
 Expected outcome:
 
-![Lifeline response to todo](/docs/todo.png)
+<img src="todo.png" alt=Lifeline response to todo>
 
 ### `deadline <description> /by <date> <time>` - Adds a Deadline
 
@@ -73,7 +73,7 @@ Example of usage:
 
 Expected outcome:
 
-![Lifeline response to deadline](/docs/deadline.png)
+<img src="deadline.png" alt=Lifeline response to deadline>
 
 ### `event <description> /at <date> <startTime> <endTime>` - Adds a Event
 
@@ -87,7 +87,7 @@ Example of usage:
 
 Expected outcome:
 
-![Lifeline response to event](/docs/event.png)
+<img src="event.png" alt=Lifeline response to event>
 
 ### `find <keyword>` - Finds a task
 
@@ -101,7 +101,7 @@ Example of usage:
 
 Expected outcome:
 
-![Lifeline response to event](/docs/find.png)
+<img src="find.png" alt=Lifeline response to find>
 
 ### `list` - Lists all the tasks you have added
 
@@ -116,7 +116,7 @@ Example of usage:
 
 Expected outcome:
 
-![Lifeline response to event](/docs/list.png)
+<img src="list.png" alt=Lifeline response to list>
 
 ### `done <index>` - Marks tasks as completed
 
@@ -131,7 +131,7 @@ Example of usage:
 
 Expected outcome:
 
-![Lifeline response to event](/docs/done.png)
+<img src="done.png" alt=Lifeline response to done">
 
 ### `delete <index>` - Delete tasks
 
@@ -145,7 +145,7 @@ Example of usage:
 
 Expected outcome:
 
-![Lifeline response to event](/docs/delete.png)
+<img src="delete.png" alt=Lifeline delete>   
 
 ### `help` - Prints the help message
 
@@ -159,7 +159,7 @@ Example of usage:
 
 Expected outcome:
 
-![Lifeline response to event](/docs/help.png)
+<img src="help.png" alt=Lifeline response to help>
 
 ### `alias` - Prints the aliases for each command
 
@@ -173,7 +173,7 @@ Example of usage:
 
 Expected outcome:
 
-![Lifeline response to event](/docs/alias.png)
+<img src="alias.png" alt=Lifeline response to alias>
 
 ### `bye` - Prints farewell message
 
@@ -187,4 +187,4 @@ Example of usage:
 
 Expected outcome:
 
-![Lifeline response to event](/docs/bye.png)
+<img src="bye.png" alt=Lifeline response to bye>                    
