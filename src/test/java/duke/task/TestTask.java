@@ -10,6 +10,11 @@ public class TestTask {
     public void testTask() {
         Task stubTask = new Task("stub") {
             @Override
+            public Task completedTask() {
+                markAsCompleted();
+                return this;
+            }
+            @Override
             public String save() {
                 return "save task";
             }
@@ -26,5 +31,26 @@ public class TestTask {
         assertEquals("[X] stub", stubTask.toString());
         assertEquals("save task", stubTask.save());
         assertEquals("no date", stubTask.getDate());
+
+        Task stubTask2 = new Task("temp2") {
+            @Override
+            public Task completedTask() {
+                markAsCompleted();
+                return this;
+            }
+
+            @Override
+            public String save() {
+                return null;
+            }
+
+            @Override
+            public String getDate() {
+                return null;
+            }
+        };
+        assertEquals("[X] temp2", stubTask2.completedTask().toString());
+        assertTrue(stubTask2.contains("emp"));
+        assertFalse(stubTask2.contains("stub"));
     }
 }
