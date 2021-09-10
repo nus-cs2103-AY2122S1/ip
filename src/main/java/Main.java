@@ -3,7 +3,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import skeltal.Skeltal;
 
 import java.io.IOException;
 
@@ -12,8 +11,6 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Skeltal skeltal = new Skeltal();
-
     @Override
     public void start(Stage stage) {
         try {
@@ -21,9 +18,9 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().introduction();
-            fxmlLoader.<MainWindow>getController().setSkeltal(skeltal);
             stage.show();
+            fxmlLoader.<MainWindow>getController().loadTasks();
+            fxmlLoader.<MainWindow>getController().introduction();
         } catch (IOException e) {
             e.printStackTrace();
         }

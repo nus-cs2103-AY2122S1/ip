@@ -4,11 +4,10 @@ package skeltal;
  * A class that handles interaction with the user, Eg printing responses.
  */
 public class Ui {
-
-    private static String line = "---------------------------------------------";
-
     /**
+     * Return a boolean to the Skeltal system to introduce the chatbot to the user.
      * Prints an introduction statement.
+     * @return A String containing the introduction statement.
      */
     public static String introduction() {
         String intro =
@@ -42,26 +41,13 @@ public class Ui {
 
     /**
      * Returns a boolean to the skeltal system to signal a shutdown.
-     * Prints a goodbye statement to the user.
      * @return A boolean with a true value.
      */
     public static boolean bye() {
-        System.out.println(Ui.line);
-        System.out.println("Thanks for chatting! Hope to see you again soon! ");
-        System.out.println(Ui.line);
         return true;
-    }
-
-    /**
-     * Returns a line that is used to enclose Skeltal's responses.
-     * @return A String of a line.
-     */
-    public static String line() {
-        return Ui.line;
     }
 
     public static String skeltalReply(String reply) {
         return Parser.parse(reply);
     }
-
 }

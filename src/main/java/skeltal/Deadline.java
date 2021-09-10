@@ -1,9 +1,5 @@
 package skeltal;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 /**
  * This class is a child of task that has the additional attribute of time,
  * to allow the storing of deadlines.

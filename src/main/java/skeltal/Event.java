@@ -18,10 +18,6 @@ public class Event extends Task {
         this.time = Parser.parseDescription(description, "event");
     }
 
-    private String formatTime() {
-        return "(at: " + this.time + ")";
-    }
-
     /**
      * A method that overrides the store() function in the Task parent class,
      * to include the task type and time description of the Event object.
@@ -40,5 +36,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + formatTime();
+    }
+
+    private String formatTime() {
+        return "(at: " + this.time + ")";
     }
 }

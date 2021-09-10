@@ -77,7 +77,7 @@ public class TaskList {
         String reply = "";
         reply += "Here are the matching tasks in your list.";
         for (Task task : tasks) {
-            if (task.getTask().contains(str)) {
+            if (task.getTaskDescription().contains(str)) {
                 reply += task + "\n";
             }
         }
@@ -96,4 +96,3 @@ public class TaskList {
         return toWrite;
     }
 }
-
