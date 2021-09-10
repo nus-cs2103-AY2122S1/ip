@@ -10,14 +10,15 @@ public class Deadline extends Task {
     private LocalDate due;
     /** Whether the task has a date it is due in a recognisable format. */
     private boolean hasDate = true;
-    /** The time the task is due, in Integer format. */
-    private int timeInt;
     /** The time the task is due, in String format. */
     private String timeStr;
     /**  Whether the task has a time it is due in a recognisable, 24-hour format. */
     private boolean hasTime = true;
     /** The information on when the task is due. */
     private String dueStr;
+
+    private final int EARLIEST_TIME = 0;
+    private final int LATEST_TIME = 2359;
 
     /**
      * Constructs a new Deadline task.
@@ -31,67 +32,91 @@ public class Deadline extends Task {
     public Deadline(String name, String dueStr) {
         super(name);
         this.dueStr = dueStr;
+        checkForDateTime();
+        getDueDateTime();
+    }
 
-        // Handle date and time representation, if any
+    private void checkForDateTime() {
         String[] dateTimeArr = dueStr.split(" ");
         try {
             due = LocalDate.parse(dateTimeArr[0]);
-        }
-        catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             hasDate = false;
             hasTime = false;
         }
-        if (hasDate) {
-            if (dateTimeArr.length >= 2) {
-                int time = -1;
-                try {
-                    time = Integer.parseInt(dateTimeArr[1]);
-                }
-                catch (NumberFormatException e) {
-                    hasTime = false;
-                }
-                if (hasTime && 0 <= time && time <= 2359) {
-                    timeStr = dateTimeArr[1];
-                } else {
-                    hasTime = false;
-                }
-            } else {
-                hasTime = false;
-            }
+
+        if (!hasDate || !(dateTimeArr.length >= 2)) {
+            hasTime = false;
+            return;
         }
 
-        // Handle representation of information based on whether there is a recognisable date and time
-        int startIndex = hasTime ? 2 : hasDate ? 1 : 0;
-        this.dueStr = "";
-        for (int i = startIndex; i < dateTimeArr.length; i++) {
-            if (i != 0) {
-                this.dueStr += " ";
-            }
-            this.dueStr += dateTimeArr[i];
+        int time = -1;
+        try {
+            time = Integer.parseInt(dateTimeArr[1]);
+        } catch (NumberFormatException e) {
+            hasTime = false;
         }
+        if (hasTime && EARLIEST_TIME <= time && time <= LATEST_TIME) {
+            timeStr = dateTimeArr[1];
+        } else {
+            hasTime = false;
+        }
+    }
+
+    private void getDueDateTime() {
+        int startIndex = getStartIndex();
+        addNonDateTimeToDueStr(startIndex);
         if (hasTime) {
-            int hours = Integer.parseInt(timeStr.substring(0, 2));
-            int mins = Integer.parseInt(timeStr.substring(2));
-            String mornAftStr = "";
-            if (hours > 12) {
-                hours -= 12;
-                mornAftStr = "pm";
-            } else {
-                if (hours == 0) {
-                    hours = 12;
-                }
-                mornAftStr = "am";
-            }
-            String minPrependStr = "";
-            if (mins < 10) {
-                minPrependStr = "0";
-            }
-            timeStr = hours + ":" + minPrependStr + mins + mornAftStr;
-            this.dueStr = " " + timeStr + this.dueStr;
+            addTimeToDueStr();
         }
         if (hasDate) {
-            this.dueStr = due.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + this.dueStr;
+            addDateToDueStr();
         }
+    }
+
+    private int getStartIndex() {
+        final int TIME_START_INDEX = 2;
+        final int DATE_START_INDEX = 1;
+        final int NO_DATETIME_START_INDEX = 0;
+        return hasTime ? TIME_START_INDEX
+                : hasDate ? DATE_START_INDEX
+                : NO_DATETIME_START_INDEX;
+    }
+
+    private void addNonDateTimeToDueStr(int startIndex) {
+        String[] dateTimeArr = dueStr.split(" ");
+        dueStr = "";
+        for (int i = startIndex; i < dateTimeArr.length; i++) {
+            if (i != 0) {
+                dueStr += " ";
+            }
+            dueStr += dateTimeArr[i];
+        }
+    }
+
+    private void addTimeToDueStr() {
+        int hours = Integer.parseInt(timeStr.substring(0, 2));
+        int minutes = Integer.parseInt(timeStr.substring(2));
+        String mornAftStr = "";
+        if (hours > 12) {
+            hours -= 12;
+            mornAftStr = "pm";
+        } else {
+            if (hours == 0) {
+                hours = 12;
+            }
+            mornAftStr = "am";
+        }
+        String minPrependStr = "";
+        if (minutes < 10) {
+            minPrependStr = "0";
+        }
+        timeStr = hours + ":" + minPrependStr + minutes + mornAftStr;
+        dueStr = " " + timeStr + dueStr;
+    }
+
+    private void addDateToDueStr() {
+        dueStr = due.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + dueStr;
     }
 
     /**

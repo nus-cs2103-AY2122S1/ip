@@ -19,24 +19,22 @@ public class Duke extends Application {
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
+    private AnchorPane mainLayout;
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/duke.jpg"));
 
     /** Encapsulates the storage of tasks in a file within the user's computer for continuity across Duke sessions. */
-    private Storage storage;
+    private final Storage STORAGE;
     /**
      * Stores the tasks when the Duke program runs.
      * Allows one to perform actions on those tasks like add and delete.
      */
     private TaskList tasks;
     /** Handles the UI aspect of the Duke program, relaying messages to the user. */
-    private Ui ui;
+    private final Ui UI;
 
-    /** The file path of the file containing the list of tasks. */
-    private String filePath = "dukedata.txt";
-
-    private Parser parser;
+    private final Parser PARSER;
 
     // TODO: check
     /**
@@ -45,41 +43,49 @@ public class Duke extends Application {
      * else, the tasks in the file will be read and saved.
      */
     public Duke() {
-        ui = new Ui();
-        storage = new Storage(filePath);
+        UI = new Ui();
+        final String FILEPATH = "dukedata.txt";
+        STORAGE = new Storage(FILEPATH);
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(STORAGE.load());
         } catch (DukeException e) {
             // TODO: smth with this
-            ui.getResponse(e.getMessage());
+            UI.getResponse(e.getMessage());
             tasks = new TaskList();
         }
 
-        ui.getResponse("Hello! I'm Duke", "What can I do for you?");
-        parser = new Parser();
+        UI.getResponse("Hello! I'm Duke", "What can I do for you?");
+        PARSER = new Parser();
     }
 
     // TODO: check
     @Override
     public void start(Stage stage) {
-        //Step 1. Setting up required components
+        // insert assert here
+        setUpComponents(stage);
+        formatWindow(stage);
+    }
 
-        //The container for the content of the chat to scroll.
+    private void setUpComponents(Stage stage) {
+        // insert assert here?
+        //Step 1. Setting up required components
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
         sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
+        mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.show();
+    }
 
+    private void formatWindow(Stage stage) {
+        // insert assert here?
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
@@ -91,26 +97,20 @@ public class Duke extends Application {
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
-
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
 
         sendButton.setPrefWidth(55.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
-
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
-
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-
-        //Scroll down to the end every time dialogContainer's height changes.
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
@@ -123,15 +123,15 @@ public class Duke extends Application {
     public String getResponse(String input) {
         DukeStatus currentStatus = DukeStatus.ACTIVE;
         try {
-            currentStatus = parser.parse(input, tasks, ui);
+            currentStatus = PARSER.parse(input, tasks, UI);
         } catch (DukeException e) {
-            ui.getResponse(e.getMessage());
+            UI.getResponse(e.getMessage());
         }
         try {
-            storage.rewriteData(tasks.convertToSaveFormat());
+            STORAGE.rewriteData(tasks.convertToSaveFormat());
         } catch (DukeException e) {
             // TODO
-            ui.getResponse(e.getMessage());
+            UI.getResponse(e.getMessage());
         }
 
         if (currentStatus == DukeStatus.INACTIVE) {

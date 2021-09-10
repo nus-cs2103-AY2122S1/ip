@@ -127,6 +127,9 @@ public class TaskList {
      */
     public String convertToSaveFormat() {
         String dataStr = "";
+        if (userTasks.size() == 0) {
+            return dataStr;
+        }
         for (int i = 0; i < userTasks.size() - 1; i++) {
             Task data = userTasks.get(i);
             dataStr += data.convertToSaveFormat() + "\n";

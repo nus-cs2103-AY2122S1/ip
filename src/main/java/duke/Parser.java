@@ -17,6 +17,7 @@ public class Parser {
     /** Regex for a Find command. */
     private final String REGEX_FIND = "find [\\w\\s-]+";
 
+    // TODO: split this into various classes
     /**
      * Handles all user commands.
      * Takes in a user command and checks which command it is. Upon determining the command, performs the
