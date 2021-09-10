@@ -20,17 +20,14 @@ public class HelpCommand extends Command {
     /**
      * Executes a `HelpCommand`.
      *
+     * @return Message representing the command is executed.
      * @param list `TaskList` containing all tasks.
      */
     @Override
-    public void execute(TaskList list) {}
+    public Message execute(TaskList list) {
+        return this.getOutputMessage();
+    }
 
-    /**
-     * Gets the output message representing the command is executed.
-     *
-     * @return `Message`.
-     */
-    @Override
     public Message getOutputMessage() {
         String prefix = "These are the available commands:";
 

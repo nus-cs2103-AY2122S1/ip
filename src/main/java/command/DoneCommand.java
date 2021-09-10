@@ -14,7 +14,6 @@ import type.CommandTypeEnum;
  */
 public class DoneCommand extends Command {
     private int taskNumber;
-    private Task task;
 
     private DoneCommand(int taskNumber) {
         this.taskNumber = taskNumber;
@@ -40,19 +39,16 @@ public class DoneCommand extends Command {
      * Executes a `DoneCommand` marking a task in the list as done.
      *
      * @param list `TaskList` containing all tasks.
+     * @return Message representing the command is executed.
      * @throws NonExistentTaskNumberException If the task number does not exist in the list.
      * @throws ErrorAccessingFileException If there is an error accessing the storage file.
      */
-    public void execute(TaskList list) throws NonExistentTaskNumberException, ErrorAccessingFileException {
-        this.task = list.markTaskAsDone(taskNumber);
+    public Message execute(TaskList list) throws NonExistentTaskNumberException, ErrorAccessingFileException {
+        Task task = list.markTaskAsDone(this.taskNumber);
+        return this.getOutputMessage(task);
     }
 
-    /**
-     * Gets the output message representing the command is executed.
-     *
-     * @return `Message`.
-     */
-    public Message getOutputMessage() {
+    private Message getOutputMessage(Task task) {
         assert task != null : "task should not be null";
 
         String prefix = "Nice! I've marked this task as done:";

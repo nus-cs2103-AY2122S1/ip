@@ -47,12 +47,5 @@ public abstract class Command {
      * @param list `TaskList` containing all tasks.
      * @throws DukeException If there is any error.
      */
-    public abstract void execute(TaskList list) throws DukeException;
-
-    /**
-     * Gets the output message representing the command is done.
-     *
-     * @return `Message`.
-     */
-    public abstract Message getOutputMessage();
+    public abstract Message execute(TaskList list) throws DukeException;
 }

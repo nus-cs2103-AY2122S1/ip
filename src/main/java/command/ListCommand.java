@@ -22,21 +22,18 @@ public class ListCommand extends Command {
      * Executes a `ListCommand` by retrieving the list.
      *
      * @param list `TaskList` containing all tasks.
+     * @return Message representing the command is executed.
      */
-    public void execute(TaskList list) {
-        this.list = list.getFullList();
+    public Message execute(TaskList list) {
+        TaskList fullList = list.getFullList();
+        return getOutputMessage(fullList);
     }
 
-    /**
-     * Gets the output message representing the command is executed.
-     *
-     * @return `Message`.
-     */
-    public Message getOutputMessage() {
+    private Message getOutputMessage(TaskList list) {
         assert list != null : "task list should not be null";
 
         String prefix = "Here are the tasks in your list:";
 
-        return new Message(prefix, this.list.toString());
+        return new Message(prefix, list.toString());
     }
 }

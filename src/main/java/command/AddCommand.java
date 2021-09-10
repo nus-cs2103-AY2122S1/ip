@@ -17,8 +17,6 @@ import type.CommandTypeEnum;
 public class AddCommand extends Command {
     private String description;
     private CommandTypeEnum commandType;
-    private Task task;
-    private TaskList list;
 
     private AddCommand(String description, CommandTypeEnum commandType) {
         this.description = description;
@@ -45,32 +43,39 @@ public class AddCommand extends Command {
      * Executes an `AddCommand` by adding a new task to the list.
      *
      * @param list `TaskList` containing all tasks.
+     * @return Message representing the command is executed.
      * @throws InvalidTaskTypeException If the task type is not valid.
-     * @throws InvalidTaskFormatException If a task meant to contain time information is not formatted properly.
+     * @throws InvalidTaskFormatException If a task is not formatted properly.
      * @throws ErrorAccessingFileException If there is an error accessing the storage file.
      * @throws InvalidDateTimeException If a task meant to contain time information has an invalid datetime format.
+     * @throws DuplicateTaskException If there is an attempt to add a duplicate task.
      */
-    public void execute(TaskList list) throws
+    public Message execute(TaskList list) throws
             InvalidTaskTypeException,
             InvalidTaskFormatException,
             ErrorAccessingFileException,
             InvalidDateTimeException,
             DuplicateTaskException {
+        Task task = addTask(list);
+        Message message = getOutputMessage(list, task);
+        return message;
+    }
+
+    private Task addTask(TaskList list) throws
+            InvalidTaskTypeException,
+            InvalidDateTimeException,
+            InvalidTaskFormatException,
+            DuplicateTaskException,
+            ErrorAccessingFileException {
         Task task = Task.createTask(this.description, this.commandType);
 
         list.validateTaskNotDuplicate(task);
         list.addTaskToList(task);
 
-        this.task = task;
-        this.list = list;
+        return task;
     }
 
-    /**
-     * Gets the output message representing the command is executed.
-     *
-     * @return `Message`.
-     */
-    public Message getOutputMessage() {
+    private Message getOutputMessage(TaskList list, Task task) {
         assert list != null : "task list should not be null";
         assert task != null : "task should not be null";
 

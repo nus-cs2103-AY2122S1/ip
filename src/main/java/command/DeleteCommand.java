@@ -14,8 +14,6 @@ import type.CommandTypeEnum;
  */
 public class DeleteCommand extends Command {
     private int taskNumber;
-    private Task task;
-    private TaskList list;
 
     private DeleteCommand(int taskNumber) {
         this.taskNumber = taskNumber;
@@ -42,20 +40,17 @@ public class DeleteCommand extends Command {
      * Executes a `DeleteCommand` by deleting a task from the list.
      *
      * @param list `TaskList` containing all tasks.
+     * @return Message representing the command is executed.
      * @throws NonExistentTaskNumberException If the task number does not exist in the list.
      * @throws ErrorAccessingFileException If there is an error accessing the storage file.
      */
-    public void execute(TaskList list) throws NonExistentTaskNumberException, ErrorAccessingFileException {
-        this.task = list.deleteTaskFromList(this.taskNumber);
-        this.list = list;
+    public Message execute(TaskList list) throws NonExistentTaskNumberException, ErrorAccessingFileException {
+        Task task = list.deleteTaskFromList(this.taskNumber);
+        return getOutputMessage(list, task);
+
     }
 
-    /**
-     * Gets the output message representing the command is executed.
-     *
-     * @return `Message`.
-     */
-    public Message getOutputMessage() {
+    private Message getOutputMessage(TaskList list, Task task) {
         assert list != null : "task list should not be null";
         assert task != null : "task should not be null";
 
