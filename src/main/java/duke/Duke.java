@@ -28,7 +28,7 @@ public class Duke {
     public Duke() {
         try {
             Storage storage = new Storage();
-            StorageFile storageFile = storage.loadListFile();
+            StorageFile storageFile = storage.loadListFile("duke.txt");
             TaskList list = storageFile.scanFileDataToNewTaskList();
             this.list = list;
         } catch (ErrorAccessingFileException | InvalidFormatInStorageException e) {
