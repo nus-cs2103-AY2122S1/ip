@@ -11,24 +11,6 @@ import java.util.Collections;
  */
 public class Parser {
 
-    public static void main(String[] args) {
-        Command temp;
-        //Non preloaded
-        String nonPreloadedDeadline = "deadline smth smthsmth smth /by 23/01/2000 23:00";
-        try {
-            temp = parse(nonPreloadedDeadline);
-
-            //Preloaded
-            String loggedDeadLine = "[D][X] smth smthsmth smth 23/01/2000 23:00";
-            ArrayList<String> loggedDeadlineArray = new ArrayList<>();
-            loggedDeadlineArray.add(loggedDeadLine);
-            Command preloadedTemp;
-            ArrayList<Command> tempCommandArr = parsePreloadedTasks(loggedDeadlineArray);
-            preloadedTemp = tempCommandArr.get(0);
-        } catch (InvalidCommandException e) {
-            e.printStackTrace();
-        }
-    }
     /**
      * Function that handles all the parsing of the duke.Parser system
      *
