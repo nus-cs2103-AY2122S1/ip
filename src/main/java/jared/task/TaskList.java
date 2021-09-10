@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import jared.common.DukeException;
+import jared.common.Message;
 import jared.storage.Storage;
 
 /**
@@ -198,5 +199,9 @@ public class TaskList {
     public String sort() {
         Collections.sort(this.tasks);
         return listTasks(this.tasks);
+    }
+
+    public String help() {
+        return Message.MESSAGE_HELP;
     }
 }

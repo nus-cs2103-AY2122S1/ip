@@ -39,7 +39,7 @@ public class Jared {
     }
 
     public String getResponse(String input) {
-        return "Duke heard: " + ui.runLogic(input, tasks);
+        return "Duke heard:\n" + ui.runLogic(input, tasks);
     }
 
     /**
