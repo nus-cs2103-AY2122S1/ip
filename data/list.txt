@@ -1,5 +1,4 @@
-D | 1 | CS2103T Quiz | [hi, sth] | Friday 4pm
-E | 1 | project | [] | Sep 2 2021
-T | 0 | sorijhgiorsdhugioiouhious | [funny]
-D | 0 | owirjf | [] | 5pm
-E | 0 | osiejt | [] | Sep 9 2019
+D | 1 | CS2103T Quiz | [important] | Friday 4pm
+E | 1 | CS2101 OP1 | [] | Sep 13 2021
+T | 0 | play Pacman | []
+E | 0 | Pacman with Friend | [] | Sep 10 2021

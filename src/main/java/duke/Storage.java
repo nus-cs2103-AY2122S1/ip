@@ -1,13 +1,13 @@
 package duke;
 
+import static duke.Deadline.PRINTDATEFORMAT;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import static duke.Deadline.PRINTDATEFORMAT;
 
 /**
  * Represents a storage space that loads the <code>list.txt</code> of existing tasks and saves new

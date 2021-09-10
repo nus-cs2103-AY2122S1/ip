@@ -49,7 +49,7 @@ public class TaskList {
         return listToString;
     }
 
-    private void handleAddTags(Task task, String tags){
+    private void handleAddTags(Task task, String tags) {
         if (!tags.equals("[]")) { // if there are tags
             String tagsCleaned = tags.substring(1, tags.length() - 1); // remove "[]"
             ArrayList<String> tagsList = new ArrayList<>(Arrays.asList(tagsCleaned.split(", ")));;

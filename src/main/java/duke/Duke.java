@@ -54,9 +54,8 @@ public class Duke {
      * Runs the duke chatbot by loading the TaskList and calling the Ui and Parser
      */
     private void run() {
-        System.out.println(ui.showWelcomeMessage1());
+        System.out.println(ui.showWelcomeMessage());
         System.out.println(Ui.LOGO);
-        System.out.println(ui.showWelcomeMessage2());
         //noinspection finally
         try {
             System.out.println(storage.loadFileToList());

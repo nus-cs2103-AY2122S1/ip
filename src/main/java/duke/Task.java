@@ -43,6 +43,11 @@ public class Task {
         return this.tags;
     }
 
+    /**
+     * Returns tags.
+     *
+     * @return String of tags formatted with '#' signs
+     */
     public String printTags() {
         if (this.tags.isEmpty()) {
             return "";
@@ -55,6 +60,11 @@ public class Task {
         return tagsList;
     }
 
+    /**
+     * Adds tag to the task after converting to lower case and checking that it does not exist.
+     *
+     * @param newTag to be added
+     */
     public void addTag(String newTag) {
         String tagToAdd = newTag.toLowerCase();
 

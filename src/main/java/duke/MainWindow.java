@@ -30,8 +30,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke duke) {
         this.duke = duke;
-        dialogContainer.getChildren().add(ChatBox.getDukeDialog(duke.getUi().showWelcomeMessage1(), dukeImage));
-        dialogContainer.getChildren().add(ChatBox.getDukeDialog(duke.getUi().showWelcomeMessage2(), dukeImage));
+        dialogContainer.getChildren().add(ChatBox.getDukeDialog(duke.getUi().showWelcomeMessage(), dukeImage));
         dialogContainer.getChildren().add(ChatBox.getDukeDialog(duke.loadListGui(), dukeImage));
     }
 
