@@ -39,7 +39,7 @@ public class Duke {
      * @return message for user
      */
     public String getResponse(String command) {
-        String message = "Duke:\n";
+        String message = "";
         try {
             message = message.concat(Parser.parse(command).execute(taskList));
             storage.saveFile(taskList);

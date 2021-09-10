@@ -217,35 +217,24 @@ public class TaskList {
      * @throws EmptyListException if TaskList is empty
      */
     public String printTaskList(List<Task> tasks) throws EmptyListException {
-        String s = "";
         int size = tasks.size();
+        String s = "Here "
+                + (size > 1
+                ? "are the tasks"
+                : "is the task") + " in your list:\n";
 
         if (size == 0) {
             throw new EmptyListException();
         }
 
         for (int i = 0; i < size; i++) {
+            s = s.concat(i + 1 + ". ");
             s = s.concat(tasks.get(i).toString());
             if (i < tasks.size() - 1) {
                 s = s.concat("\n");
             }
         }
         return s;
-    }
-
-    /**
-     * Shows help page to guide user in usage of Duke bot.
-     *
-     * @return string representation of help page.
-     */
-    public String showHelp() {
-        return "Show all tasks -> list\n"
-                + "Add Todo -> todo <todo description>\n"
-                + "Add Event -> event <event description> /at <dd/MM/yy> <HHmm>-<HHmm>\n"
-                + "Add Deadline -> deadline <deadline description> /by <dd/MM/yy> <HHmm>\n"
-                + "Mark task as done -> done <task index>\n"
-                + "Delete task -> delete <task index>\n"
-                + "Find task(s) -> find <keyword to find>";
     }
 
     /**

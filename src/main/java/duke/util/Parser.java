@@ -18,7 +18,7 @@ public class Parser {
     public static Command parse(String command) throws IllegalFormatException, UnknownCommandException {
         if (command.contains("help")) {
             checkCommandFormat("help", command);
-            return TaskList::showHelp;
+            return taskList -> showHelp();
         } else if (command.contains("list")) {
             checkCommandFormat("list", command);
             return TaskList::printFullTaskList;
@@ -32,13 +32,13 @@ public class Parser {
             checkCommandFormat("deadline", command);
             return taskList -> taskList.addDeadline(command);
         } else if (command.contains("delete")) {
-            checkCommandFormat("delete", command);
+            checkCommandFormat("deleteTask", command);
             return taskList -> taskList.deleteTask(command);
         } else if (command.contains("done")) {
-            checkCommandFormat("done", command);
+            checkCommandFormat("markTaskDone", command);
             return taskList -> taskList.markTaskDone(command);
         } else if (command.contains("find")) {
-            checkCommandFormat("find", command);
+            checkCommandFormat("findTask", command);
             return taskList -> taskList.findFromList(command);
         } else {
             throw new UnknownCommandException();
@@ -114,5 +114,20 @@ public class Parser {
         if (!command.matches(regex)) {
             throw new IllegalFormatException(correctFormat);
         }
+    }
+
+    /**
+     * Shows help page to guide user in usage of Duke bot.
+     *
+     * @return string representation of help page.
+     */
+    public static String showHelp() {
+        return "Show all tasks -> list\n"
+                + "Add Todo -> todo <todo description>\n"
+                + "Add Event -> event <event description> /at <dd/MM/yy> <HHmm>-<HHmm>\n"
+                + "Add Deadline -> deadline <deadline description> /by <dd/MM/yy> <HHmm>\n"
+                + "Mark task as done -> done <task index>\n"
+                + "Delete task -> delete <task index>\n"
+                + "Find task(s) -> find <keyword to find>";
     }
 }
