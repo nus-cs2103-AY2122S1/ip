@@ -6,8 +6,8 @@ import duke.DukeException;
 
 import java.io.File;
 
+/** The main class of the application */
 public class Duke {
-
     private Storage storage;
     private TaskList tasks;
     private File file;
@@ -18,6 +18,11 @@ public class Duke {
 
     }
 
+    /**
+     * Constructor the Duke class
+     *
+     * @param filePath The file path of the file that holds the contents
+     */
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         try {

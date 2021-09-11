@@ -4,10 +4,16 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/** Class that handles operations to and from the text file */
 public class Storage {
     private String filePath;
     private File file;
 
+    /**
+     * Constructor for the Storage class
+     *
+     * @param filePath The path of the file that holds the contents of the list
+     */
     public Storage(String filePath) {
         assert filePath.length() != 0 : "Path of file cannot be empty";
         this.filePath = filePath;
@@ -16,14 +22,10 @@ public class Storage {
         this.file = file;
     }
 
-
-
     /**
-     * Method that adds the Tasklist arraylist into the text file
+     * Adds the Tasklist arraylist into the text file
      *
      * @param listOfTasks The TaskList that contains all the tasks added
-     *
-     * @return void
      */
     public static void appendListToFile(TaskList listOfTasks) {
         try {
