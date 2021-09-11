@@ -53,7 +53,9 @@ public class Deadline extends Task {
      */
     @Override
     public String execute(TaskList task, Ui ui, Storage storage) {
+        int numOfBeforeTask = task.size();
         task.add(this);
+        assert task.size() - numOfBeforeTask == 1 : "Add Deadline task not successful";
         storage.writeData(task.getTasks());
         return ui.showAddOnTask(task, task.size() - 1);
     }
