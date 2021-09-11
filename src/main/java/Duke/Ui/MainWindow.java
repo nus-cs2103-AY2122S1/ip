@@ -34,7 +34,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * The metod of setDuke, start with Duke Greeting
+     * Sets the duke and starts with Duke Greeting
      * @param d
      */
     public void setDuke(Duke d) {
@@ -43,7 +43,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * The Method of handleUserInput
+     * Handles the user input
      */
     @FXML
     private void handleUserInput() {

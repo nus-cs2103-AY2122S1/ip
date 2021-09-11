@@ -59,17 +59,19 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * The method for getUserDialog
+     * Gets the user dialog
+     *
      * @param text
      * @param img
-     * @return DialogBix for User Dialog
+     * @return DialogBox for User Dialog
      */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
     /**
-     * The method of geyDukeDialog
+     * Gets the duke dialog
+     *
      * @param text
      * @param img
      * @return DialogBox of Duke

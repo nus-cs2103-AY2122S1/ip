@@ -25,47 +25,50 @@ import javafx.scene.image.Image;
 public class Duke {
 
     private Storage storage;
-    private TaskList task;
+    private TaskList tasks;
     private Ui ui;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/User.jpeg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/Duke.jpeg"));
 
     /**
-     * The constructor of Duke
+     * Constructs Duke class server with input filepath
+     *
      * @param filePath
      */
     public Duke(String filePath)  {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            task = new TaskList(storage.readData());
+            tasks = new TaskList(storage.readData());
         } catch (IOException e) {
             ui.showLoadingError();
-            task = new TaskList();
+            tasks = new TaskList();
         }
     }
 
 
     /**
-     * The Contructor for Duke Class
+     * Constructs Duke class server
      */
     public Duke() {
         this("data/tasks.txt");
     }
 
     /**
-     * The method of getResponse
+     * Gets response from input message
+     *
      * @param input
-     * @return String the value of getResponse for run layncher
+     * @return String the value of getResponse for run launcher
      */
     public String getResponse(String input) {
-        Task comingCmdTask = Parser.parse(input, task);
-        return comingCmdTask.execute(task, ui, storage);
+        Task comingCmdTask = Parser.parse(input, tasks);
+        return comingCmdTask.execute(tasks, ui, storage);
     }
 
     /**
-     * The method of getUi
+     * Gets Ui
+     *
      * @return Ui
      */
     public Ui getUi() {

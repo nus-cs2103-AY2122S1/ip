@@ -8,70 +8,77 @@ import java.util.ArrayList;
  * Represents TaskList class: contains the task list e.g., it has operations to add/delete tasks in the list
  */
 public class TaskList {
-    private static ArrayList<Task> task;
+    private static ArrayList<Task> tasks;
 
     /**
-     * The constructor for no input
+     * Constructs TaskList class
      */
     public TaskList() {
-        this.task = new ArrayList<Task>();
+        this.tasks = new ArrayList<Task>();
     }
 
     /**
-     * The constructor with input ArrayList
-     * @param task
+     * Constructs TaskList class with input ArrayList
+     *
+     * @param tasks
      */
-    public TaskList(ArrayList<Task> task) {
-        this.task = task;
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
-     * The method of add task
+     * Adds task in tasks list
+     *
      * @param t
      */
     public void add(Task t) {
-        task.add(t);
+        tasks.add(t);
     }
 
     /**
-     * The method of remove task
+     * Removes the task from the tasks list
+     *
      * @param i
      * @return Task obeject
      */
     public Task remove(int i) {
-        return task.remove(i);
+        return tasks.remove(i);
     }
 
     /**
-     * The method of markDone
+     * Marks down the tasks
+     *
      * @param i
      */
     public void markDone(int i) {
-        task.get(i).markDone();
+        tasks.get(i).markDone();
     }
 
     /**
-     * The method of get
+     * Gets the tasks from given index i
+     *
      * @param i
      * @return Task object
      */
     public Task get(int i) {
-        return task.get(i);
+        return tasks.get(i);
     }
 
     /**
-     * The method of size
+     * Gets the size of tasks list
+     *
      * @return
      */
     public int size() {
-        return task.size();
+        return tasks.size();
     }
 
     /**
-     * The method of getTask
+     * Gets the tasks list
+     *
      * @return Arraylist
      */
     public ArrayList<Task> getTasks() {
-        return this.task;
+        return this.tasks;
     }
 }

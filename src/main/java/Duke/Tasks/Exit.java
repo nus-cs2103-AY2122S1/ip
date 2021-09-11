@@ -10,8 +10,9 @@ import javafx.application.Platform;
  * Represents the Exit task class
  */
 public class Exit extends Task {
+
     /**
-     * The constructor for Exit task
+     * Constructs Exit class
      */
     public Exit() {
         super("exit", false);
@@ -19,20 +20,24 @@ public class Exit extends Task {
     }
 
     /**
-     * Execute the task.  
-     * @param task
+     * Executes input exit task
+     *
+     * @param tasks
      * @param ui
      * @param storage
-     * @return
+     * @return String null
      */
     @Override
-    public String execute(TaskList task, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ui.exit();
-        applicationOff();
+        offApplication();
         return null;
     }
 
-    public void applicationOff() {
+    /**
+     * Off the application and exit
+     */
+    public void offApplication() {
         Platform.exit();
         System.exit(0);
     }

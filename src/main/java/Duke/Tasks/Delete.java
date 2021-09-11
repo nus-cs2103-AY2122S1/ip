@@ -4,7 +4,6 @@ import Duke.Tool.Storage;
 import Duke.Tool.TaskList;
 import Duke.Ui.Ui;
 
-import java.io.IOException;
 
 /**
  * Represents the Delete task
@@ -14,7 +13,8 @@ public class Delete extends Task {
     int num;
 
     /**
-     * The constructor for Delete task
+     * Constructs Delete class
+     *
      * @param num
      */
     public Delete(int num) {
@@ -24,15 +24,16 @@ public class Delete extends Task {
 
     /**
      * Executes input delete task
-     * @param task
+     *
+     * @param tasks
      * @param ui
      * @param storage
-     * @return String
+     * @return String delete task details
      */
     @Override
-    public String execute(TaskList task, Ui ui, Storage storage) {
-        Task taskDeleted = task.remove(num);
-        storage.writeData(task.getTasks());
-        return ui.showDeletedMessage(task, taskDeleted);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        Task taskDeleted = tasks.remove(num);
+        storage.writeData(tasks.getTasks());
+        return ui.showDeletedMessage(tasks, taskDeleted);
     }
 }
