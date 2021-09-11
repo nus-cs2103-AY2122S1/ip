@@ -3,11 +3,16 @@
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.application.Platform;
 
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -43,6 +48,15 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        //below if-condition adapted from forum thread #172
+        if (input.equals("bye")) {
+            new Timer().schedule(new TimerTask() {
+                public void run () { Platform.exit();; }
+            }, 1000);
+            new Timer().schedule(new TimerTask() {
+                public void run () { System.exit(0);; }
+            }, 2000);
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

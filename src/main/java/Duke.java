@@ -1,21 +1,13 @@
-import duke.*;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.Parser;
+import duke.DukeException;
 
 import java.io.File;
 
+/** The main class of the application */
 public class Duke {
-
     private Storage storage;
     private TaskList tasks;
     private File file;
@@ -26,6 +18,11 @@ public class Duke {
 
     }
 
+    /**
+     * Constructor the Duke class
+     *
+     * @param filePath The file path of the file that holds the contents
+     */
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         try {

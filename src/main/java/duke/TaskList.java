@@ -9,36 +9,35 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/** Class that holds that task in the form of a list and does operations
+ * on the elements inside  */
 public class TaskList {
     private ArrayList<Task> tasks;
     private File file;
 
+    /**
+     * Constructor for TaskList
+     *
+     * @param filePath The file path of the file that holds the contents
+     */
     public TaskList(String filePath) {
         tasks = new ArrayList<Task>();
         this.file = new File(filePath);
     }
 
-
+    /**
+     * Returns the number of elements (tasks) in the task list
+     *
+     * @return int The number of elements in the list
+     */
     public int size() {
         return tasks.size();
     }
 
     /**
-     * Method that adds a To-Do task onto TaskList
-     *
-     * @param description The string that contains the description of the task.
-     *
-     * @return void
-     */
-    public void addTodo(String description) {
-        tasks.add(new Todo(description));
-    }
-
-    /**
-     * Method that returns the particular element of the list of tasks
+     * Returns the particular element of the list of tasks
      *
      * @param index The index of the task that needs to be got
-     *
      * @return Task The task object that is required
      */
     public Task get(int index) {
@@ -46,93 +45,71 @@ public class TaskList {
     }
 
     /**
-     * Method that adds a Deadline task onto TaskList
+     * Adds a To-Do task onto TaskList
+     *
+     * @param description The string that contains the description of the task.
+     */
+    public void addTodo(String description) {
+        tasks.add(new Todo(description));
+    }
+
+    /**
+     * Adds a Deadline task onto TaskList
      *
      * @param description The string that contains the description of the task.
      * @param date The date mentioned in the task initialization.
-     *
-     * @return void
      */
     public void addDeadline(String description, LocalDate date) {
         tasks.add(new Deadline(description, date));
     }
 
     /**
-     * Method that adds an Event onto TaskList
+     * Adds an Event onto TaskList
      *
      * @param description The string that contains the description of the task.
      * @param date The date mentioned in the task initialization.
-     *
-     *
-     * @return void
      */
     public void addEvent(String description, LocalDate date) {
         tasks.add(new Event(description, date));
     }
 
     /**
-     * Method that deletes a task from the TaskList
+     * Deletes a task from the TaskList
      *
      * @param index The index of the task that needs to be deleted
-     *
-     * @return void
      */
     public void delete(int index) {
         tasks.remove(index);
     }
 
+    /**
+     * Returns the entire task list as a whole as an ArrayList
+     *
+     * @return ArrayList<Task> A collection of Task objects
+     */
     public ArrayList<Task> getTaskList() {
         return this.tasks;
     }
 
     /**
-     * Method that runs the Duke by asking for user input
-     *
-     * @param
-     *
-     * @return void
+     * Reads the data from text file and adds it to task list
      */
-
     public void readFromFile() {
         try {
             Scanner r = new Scanner(this.file);
             while (r.hasNextLine()) {
                 String userInput = r.nextLine();
-                String noBrackets = userInput.substring(7);
-                String[] split = noBrackets.split(" ");
+                String[] split = userInput.substring(7).split(" ");
                 String description = "";
                 for (int i = 0; i < split.length - 2; i++) {
                     description = description + split[i] + " ";
                 }
-                String day = split[split.length - 1].substring(0, split[split.length - 1].length() - 1);
                 if (userInput.substring(0,3).equals("[T]")) {
-                    this.addTodo(description);
-                    int index = this.size();
-                    if (userInput.substring(3,6).equals("[X]")) {
-                        this.get(index-1).markAsDone();
-                    }
+                    readTodo(userInput, description);
                 } else if (userInput.substring(0,3).equals("[D]")) {
-                    String[] temp = userInput.split("by");
-                    String firstDeadline = temp[0].substring(9);
-                    String[] splitDate = temp[1].split(":");
-                    System.out.println(splitDate[0]);
-                    LocalDate date1 = LocalDate.parse(splitDate[1].substring(1));
-                    this.addDeadline(description, date1);
-                    int index = this.size();
-                    if (userInput.substring(3,6).equals("[X]")) {
-                        this.get(index-1).markAsDone();
-                    }
+                    readDeadline(userInput, description);
                 } else if (userInput.substring(0,3).equals("[E]")) {
-                    String[] tempEvent = userInput.split("at");
-                    String firstEvent = tempEvent[0].substring(6);
-                    String[] splitDate = tempEvent[1].split(":");
-                    System.out.println(splitDate[0]);
-                    LocalDate date1 = LocalDate.parse(splitDate[1].substring(1));
-                    this.addEvent(description, date1);
-                    int index = this.size();
-                    if (userInput.substring(3,6).equals("[X]")) {
-                        this.get(index-1).markAsDone();
-                    }
+                    readEvent(userInput, description);
                 }
             }
             r.close();
@@ -145,6 +122,54 @@ public class TaskList {
             } catch (IOException a) {
                 System.out.println("Error encountered");
             }
+        }
+    }
+
+    /**
+     * Adds the To-Do task to the list and marks it as done if it is completed
+     *
+     * @param userInput The input entered by the user
+     * @param description The description of the task
+     */
+    public void readTodo(String userInput, String description) {
+        this.addTodo(description);
+        int index = this.size();
+        if (userInput.substring(3,6).equals("[X]")) {
+            this.get(index-1).markAsDone();
+        }
+    }
+
+    /**
+     * Adds the Deadline task to the list and marks it as done if it is completed
+     *
+     * @param userInput The input entered by the user
+     * @param description The description of the task
+     */
+    public void readDeadline(String userInput, String description) {
+        String[] temp = userInput.split("by:");
+        assert temp[1].length() > 0 : "Date cannot be empty";
+        LocalDate date1 = LocalDate.parse(temp[1].substring(1));
+        this.addDeadline(description, date1);
+        int index = this.size();
+        if (userInput.substring(3,6).equals("[X]")) {
+            this.get(index-1).markAsDone();
+        }
+    }
+
+    /**
+     * Adds the Event task to the list and marks it as done if it is completed
+     *
+     * @param userInput The input entered by the user
+     * @param description The description of the task
+     */
+    public void readEvent(String userInput, String description) {
+        String[] tempEvent = userInput.split("at:");
+        assert tempEvent[1].length() > 0 : "Date cannot be empty";
+        LocalDate date1 = LocalDate.parse(tempEvent[1].substring(1));
+        this.addEvent(description, date1);
+        int index = this.size();
+        if (userInput.substring(3,6).equals("[X]")) {
+            this.get(index-1).markAsDone();
         }
     }
 }
