@@ -75,7 +75,7 @@ public class Duke {
             Command c = Parser.parse(input.split(" "));
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
-            return e.getMessage();
+            return "Error: " + e.getMessage();
         }
     }
 }
