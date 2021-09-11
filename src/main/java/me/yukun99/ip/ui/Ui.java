@@ -43,6 +43,10 @@ public class Ui {
      * Constructor for a Ui instance.
      *
      * @param name Name of the HelpBot.
+     * @param taskList TaskList instance from the current HelpBot.
+     * @param storage Storage instance from the current HelpBot.
+     * @param taskFinder TaskFinder instance from the current HelpBot.
+     * @param parser Parser instance from the current HelpBot.
      */
     public Ui(String name, TaskList taskList, Storage storage, TaskFinder taskFinder, Parser parser) {
         this.name = name;
@@ -54,13 +58,16 @@ public class Ui {
 
     /**
      * Sends user instructions and bot information on startup.
+     *
+     * @param stage Stage to do startup for.
+     * @param fxmlLoader FXMLLoader instance used to load fxml files to the stage.
      */
     public void start(Stage stage, FXMLLoader fxmlLoader) {
         this.stage = stage;
         stage.setResizable(false);
         try {
             AnchorPane anchorPane = fxmlLoader.load();
-            fxmlLoader.<Window>getController().setup(parser, storage, name);
+            fxmlLoader.<Window>getController().setup(parser, storage, name, taskList);
             assert anchorPane != null;
             Scene scene = new Scene(anchorPane);
 

@@ -113,7 +113,7 @@ public class Parser {
         if (message.startsWith("done ")) {
             String strIndex = message.replaceFirst("done ", "");
             String[] args = {strIndex};
-            command = new DoneCommand(args, taskList);
+            command = new DoneCommand(args, taskList, storage);
         }
         if (message.equals("help")) {
             command = new HelpCommand(null, null);

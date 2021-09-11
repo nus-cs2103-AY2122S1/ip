@@ -15,11 +15,15 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, boolean isBot) {
+    private DialogBox(String text, boolean isBot, boolean error) {
         try {
             FXMLLoader fxmlLoader;
             if (isBot) {
-                fxmlLoader = new FXMLLoader(Window.class.getResource("/views/BotDialogBox.fxml"));
+                if (error) {
+                    fxmlLoader = new FXMLLoader(Window.class.getResource("/views/ErrorDialogBox.fxml"));
+                } else {
+                    fxmlLoader = new FXMLLoader(Window.class.getResource("/views/BotDialogBox.fxml"));
+                }
             } else {
                 fxmlLoader = new FXMLLoader(Window.class.getResource("/views/UserDialogBox.fxml"));
             }
@@ -37,22 +41,23 @@ public class DialogBox extends HBox {
     }
 
     /**
+     * Factory method for a new DialogBox instance for bot messages.
+     *
+     * @param text Bot message to include in the DialogBox.
+     * @param isError Whether the message is an error message.
+     * @return DialogBox instance created.
+     */
+    public static DialogBox getBotDialog(String text, boolean isError) {
+        return new DialogBox(text, true, isError);
+    }
+
+    /**
      * Factory method for a new DialogBox instance for user messages.
      *
      * @param text User message to include in the DialogBox.
      * @return DialogBox instance created.
      */
-    public static DialogBox getBotDialog(String text) {
-        return new DialogBox(text, true);
-    }
-
-    /**
-     * Factory method for a new DialogBox instance for bot messages.
-     *
-     * @param text Bot message to include in the DialogBox.
-     * @return DialogBox instance created.
-     */
     public static DialogBox getUserDialog(String text) {
-        return new DialogBox(text, false);
+        return new DialogBox(text, false, false);
     }
 }

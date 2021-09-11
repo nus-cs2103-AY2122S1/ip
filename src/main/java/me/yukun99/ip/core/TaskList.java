@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import javafx.scene.control.Label;
 import me.yukun99.ip.exceptions.HelpBotDateTimeFormatException;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskException;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskTypeException;
@@ -239,6 +240,23 @@ public class TaskList {
             result.append(task.saveString()).append(System.lineSeparator());
         }
         return result.toString();
+    }
+
+    /**
+     * Updates the task amount on the current task amount label.
+     *
+     * @param label Label to update task amount for.
+     * @return Updated label with new task amount.
+     */
+    public Label updateTaskAmount(Label label) {
+        int doneCount = 0;
+        for (Task task : taskList) {
+            if (task.isDone()) {
+                ++doneCount;
+            }
+        }
+        label.setText("Remaining Tasks: " + taskList.size() + System.lineSeparator() + "Completed tasks: " + doneCount);
+        return label;
     }
 
     @Override

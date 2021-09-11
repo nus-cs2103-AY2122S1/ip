@@ -43,6 +43,15 @@ public abstract class Task {
     }
 
     /**
+     * Checks if a task is done.
+     *
+     * @return Whether a task is done.
+     */
+    public boolean isDone() {
+        return isDone;
+    }
+
+    /**
      * Updates the date of an event or deadline task.
      *
      * @param date New date to be updated.
