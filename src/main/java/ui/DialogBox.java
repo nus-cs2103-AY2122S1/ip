@@ -28,7 +28,6 @@ public class DialogBox extends HBox {
 
     /**
      * Constructor for the dialog box
-     *
      */
     public DialogBox(String text, Image image) {
         try {

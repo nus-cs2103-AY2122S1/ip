@@ -52,7 +52,8 @@ public class Command {
     }
 
     /**
-     * Return whether the command given is of type Bye
+     * Return whether the command given is of type Bye.
+     * The program is expected to exit if it runs on command line console.
      *
      * @return if the command is bye or not
      */

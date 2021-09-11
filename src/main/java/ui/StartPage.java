@@ -134,10 +134,10 @@ public class StartPage extends AnchorPane {
             // prompt user to confirm creating new file first
             AlertBox.display("Are you sure you want to delete your save file '" + inputField.getText() + "'",
                     e -> {
-                deleteFile();
-                removeSaveFileFromListView();
-                refreshSaveFiles();
-            });
+                        deleteFile();
+                        removeSaveFileFromListView();
+                        refreshSaveFiles();
+                    });
         }
     }
 

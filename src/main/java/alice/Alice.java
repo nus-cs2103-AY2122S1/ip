@@ -72,7 +72,9 @@ public class Alice {
     }
 
     /**
-     * The method for running the personal assistant alice.Alice.
+     * The method for running the personal assistant Alice.
+     * ALice will take what she receives from the Ui before parsing it to command
+     * and finally execute it and exit accordingly.
      *
      * @throws DialogException dialog cannot have the same id while the app is running
      */
@@ -89,7 +91,9 @@ public class Alice {
 
 
     /**
-     * Execute the fullCommand
+     * Execute the fullCommand.
+     * Execute the fullCommand by parsing the command
+     * and executing it without caring if it is exit or not.
      *
      * @param fullCommand the command as string including taggers and date
      */
