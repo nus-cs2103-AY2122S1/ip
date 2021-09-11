@@ -30,6 +30,15 @@ public abstract class Parser {
             }
             return new Pair(Command.DELETE, List.of(
                     input.substring("delete ".length())));
+        } else if (input.matches("snooze.*")) {
+            if (!input.matches("snooze \\d+")) {
+                throw new DukeException.MissingArgumentException("index of task to be snoozed");
+            }
+            if (!input.matches("snooze \\d+ \\d+")) {
+                throw new DukeException.MissingArgumentException("amount of time task should be snoozed for");
+            }
+            return new Pair(Command.SNOOZE, List.of(
+                    input.substring("snooze ".length())));
         } else if (input.matches("event.*")) {
             int k = input.indexOf("/at");
             if (k < 0) {

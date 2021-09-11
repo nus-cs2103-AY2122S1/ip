@@ -45,14 +45,20 @@ public class Duke {
                     filteredTasks.toString());
             case UPDATE_MARKASDONE:
                 i = Integer.parseInt(varargs.get(0));
-                    t = this.tasks.markAsComplete(i);
+                t = this.tasks.markAsComplete(i);
                 this.storage.writeFile(this.tasks.toRepr());
                 return String.format("Nice! I've marked this task as done:\n%s", t);
             case DELETE:
                 i = Integer.parseInt(varargs.get(0));
-                    t = this.tasks.deleteTask(i);
+                t = this.tasks.deleteTask(i);
                 this.storage.writeFile(this.tasks.toRepr());
                 return String.format("Noted. I've removed this task:\n%s", t);
+            case SNOOZE:
+                i = Integer.parseInt(varargs.get(0));
+                int d = Integer.parseInt(varargs.get(1));
+                t = this.tasks.snoozeTask(i, d);
+                this.storage.writeFile(this.tasks.toRepr());
+                return String.format("Noted. I've snoozed for %d this task:\n%s", d, t);
             case CREATE_DEADLINE:
                 t = new Task.Deadline(false, varargs.get(0), varargs.get(1));
                 this.tasks.addTask(t);

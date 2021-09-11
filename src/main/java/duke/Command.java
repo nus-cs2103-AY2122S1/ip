@@ -7,5 +7,6 @@ public enum Command {
     READ,
     UPDATE_MARKASDONE,
     DELETE,
-    FIND
+    FIND,
+    SNOOZE
 }

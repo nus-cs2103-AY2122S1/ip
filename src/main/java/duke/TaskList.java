@@ -55,6 +55,16 @@ public class TaskList {
         return tasks.remove(i - 1);
     }
 
+    public Task snoozeTask(int i, int d)  throws IndexOutOfBoundsException {
+        Task t = tasks.get(i - 1);
+        try {
+            t.snooze(d);
+        } catch (Exception e) {
+            // TODO
+        }
+        return t;
+    }
+
     /**
      * @return the number of tasks in the list
      */

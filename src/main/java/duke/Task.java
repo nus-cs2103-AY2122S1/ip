@@ -23,6 +23,9 @@ public abstract class Task {
     public void markAsComplete() {
         this.isComplete = true;
     }
+    public void snooze(int d) {
+        // TODO
+    }
 
     public String getRepr() {
         return String.format("%d|%s", this.isComplete ? 1 : 0, this.desc);
