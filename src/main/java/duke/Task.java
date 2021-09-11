@@ -1,11 +1,15 @@
 package duke;
 
-import java.time.LocalDate;
-
+/** Class that handles writing and reading of the tasks */
 public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor for Task class
+     *
+     * @param description The description of the task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -16,7 +20,7 @@ public class Task {
     }
 
     /**
-     * Method that returns the status icon of the task based on whether it is completed.
+     * Returns the status icon of the task based on whether it is completed.
      * or not
      *
      * @return String Either "X" or " " based on the status
@@ -26,7 +30,7 @@ public class Task {
     }
 
     /**
-     * Method that marks a task as done.
+     * Marks a task as done.
      *
      * @return void
      */
