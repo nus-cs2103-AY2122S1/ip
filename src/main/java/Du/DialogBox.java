@@ -57,4 +57,7 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
+    public static DialogBox getSeparation(Image img) {
+        return new DialogBox("-----------------------------------------", img);
+    }
 }

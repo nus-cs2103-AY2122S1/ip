@@ -26,8 +26,9 @@ public class MainWindow extends AnchorPane {
 
     private Du du;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image emptyImage = new Image(this.getClass().getResourceAsStream("/images/Empty.png"));
 
     @FXML
     public void initialize() {
@@ -39,11 +40,14 @@ public class MainWindow extends AnchorPane {
     }
 
     public void start() throws IOException {
+//        Text t = new Text("This is a text sample");
+//        t.setFont(Font.font ("Verdana", 20));
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(du.getUi().greet(), dukeImage),
                 DialogBox.getDukeDialog("Previous records (if there are any):\n" +
                                             du.getStorage().load(), dukeImage),
-                DialogBox.getDukeDialog("Is there anything I can do for you?", dukeImage)
+                DialogBox.getDukeDialog("Is there anything I can do for you?", dukeImage),
+                DialogBox.getSeparation(emptyImage)
                 );
     }
 
@@ -60,7 +64,9 @@ public class MainWindow extends AnchorPane {
         String response = p.parse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getSeparation(emptyImage),
+                DialogBox.getDukeDialog(response, dukeImage),
+                DialogBox.getSeparation(emptyImage)
         );
         userInput.clear();
     }
