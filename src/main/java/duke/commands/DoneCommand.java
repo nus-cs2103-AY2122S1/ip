@@ -1,8 +1,14 @@
 package duke.commands;
 
-import duke.tasks.Task;
-import duke.utils.*;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.utils.Ui;
 
+/**
+ * Class that is a subclass of Command class
+ * and handles the behaviour of the Command for
+ * marking a task as done
+ */
 public class DoneCommand extends Command{
 
     String commandString;

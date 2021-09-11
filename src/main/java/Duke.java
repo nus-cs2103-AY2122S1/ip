@@ -1,14 +1,16 @@
 import duke.commands.Command;
-import duke.tasks.*;
-import duke.exceptions.DukeException;
 import duke.utils.Parser;
 import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
+
+/**
+ * Command Line Task Manager called Duke
+ *
+ * @author Rama Venkatesh
+ */
 
 public class Duke {
 
@@ -17,6 +19,9 @@ public class Duke {
     private Parser parser;
     private Storage storage;
 
+    /**
+     * Constructor that instantiates Duke
+     */
     public Duke(){
         ui = new Ui();
         parser = new Parser();
@@ -51,6 +56,11 @@ public class Duke {
 
     }
 
+
+    /**
+     * Commences Duke
+     * @param args CLI arguments
+     */
     public static void main(String[] args){
 
         new Duke().run();

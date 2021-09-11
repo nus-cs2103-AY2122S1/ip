@@ -3,8 +3,19 @@ package duke.utils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
+/**
+ * Class that handles formatting the input date
+ */
 public class DukeDate {
 
+    /**
+     * Formats the input datetime that was entered in dd/MM/YYYY HHMM
+     * format into a Date object
+     *
+     * @param dateLiteral date that was typed in by user
+     * @return Date object
+     */
     public static Date formatDate(String dateLiteral){
         if(dateLiteral.length()==14 || dateLiteral.length()==15){
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
@@ -39,6 +50,11 @@ public class DukeDate {
 
     }
 
+    /**
+     * Parses a Date object and converts it into a reader-friendly format
+     * @param date Date object
+     * @return String dateStr
+     */
     public static String parseDateToString(Date date){
         String[] dateArr = date.toString().split(" ");
         String dateStr = "";

@@ -12,6 +12,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class that handles storage of data by writing to disk
+ * and reading from disk
+ */
 
 public class Storage {
 
@@ -20,6 +24,14 @@ public class Storage {
 
     private static final String DELIMITER = ";";
 
+    /**
+     * Loads task list as a TaskList object from the data.txt file
+     * in the directory, and creates a new file if it does not
+     * already exist.
+     *
+     * @return TaskList containing tasks
+     * @throws FileNotFoundException
+     */
     public TaskList loadTaskList() throws FileNotFoundException {
 
         File f = new File(dataFilePath);
@@ -48,7 +60,14 @@ public class Storage {
 
     }
 
-    public void saveTaskListToDisk(TaskList taskList){
+    /**
+     * Saves the tasks data from the TaskList into the
+     * data.txt file in the directory.
+     *
+     * @param taskList tasklist
+     * @throws IOException
+     */
+    public void saveTaskListToDisk(TaskList taskList) throws IOException{
 
         File f = new File(dataFilePath);
         if(!f.exists()) {
@@ -81,6 +100,13 @@ public class Storage {
 
     }
 
+    /**
+     * Converts a Task object to its String representation
+     * in an acceptable format to be stored in the data.txt file.
+     *
+     * @param task
+     * @return String representation of the task
+     */
     public String convertTaskToString(Task task){
 
 
@@ -111,6 +137,13 @@ public class Storage {
 
     }
 
+    /**
+     * Converts a task from the String format that is stored in the
+     * data.txt file into a Task Object.
+     *
+     * @param line String representation of a task
+     * @return
+     */
     public Task convertStringToTask(String line){
 
          // Example storage in file:
@@ -152,10 +185,5 @@ public class Storage {
 
     }
 
-    public String convertSavedStringDateToDukeDate(String savedDate){
-
-        return "";
-
-    }
 
 }

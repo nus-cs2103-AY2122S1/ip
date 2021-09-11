@@ -1,11 +1,14 @@
 package duke.commands;
 
 import duke.tasks.Task;
-import duke.tasks.TodoTask;
 import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
+/**
+ * Class that is a subclass of Command class
+ * and handles the behaviour of the Command for deleting a task
+ */
 public class DeleteCommand extends Command{
 
 
