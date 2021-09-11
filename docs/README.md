@@ -134,14 +134,14 @@ Format: `exit`
 
 ## Command summary
 
-Action | Format, Examples
------------- | -------------
-List | `list`
-Todo | `todo TASK_DESCRIPTION` e.g. `todo read book`
-Event | `event TASK_DESCRIPTION /at AT` e.g. `event go party /at midnight`
-Deadline | `deadline TASK_DESCRIPTION /by BY` e.g. `deadline submit assignment /by 2020-09-16`
-Done | `done INDEX` e.g. `done 1`
-Delete | `delete INDEX` e.g. delete 2`
-Find | `find KEYWORD` e.g. `find read`
-Sort | `sort`
-Exit | `bye`
+| Action | Format, Examples |
+| --- | --- |
+| List | `list` |
+| Todo | `todo TASK_DESCRIPTION` e.g. `todo read book` |
+| Event | `event TASK_DESCRIPTION /at AT` e.g. `event go party /at midnight` |
+| Deadline | `deadline TASK_DESCRIPTION /by BY` e.g. `deadline submit assignment /by 2020-09-16` |
+| Done | `done INDEX` e.g. `done 1` |
+| Delete | `delete INDEX` e.g. delete 2` |
+| Find | `find KEYWORD` e.g. `find read` |
+| Sort | `sort` |
+| Exit | `bye` |
