@@ -3,12 +3,20 @@ import duke.utils.DukeDate;
 
 import java.util.Date;
 
+/**
+ * Class for deadline tasks that contain a
+ * date or datetime
+ */
 public class DeadlineTask extends Task{
     String dateLiteral;
     Date dateFormatted;
     String dateReadable;
 
-
+    /**
+     * Constructor that initializes an EventTask object
+     * @param description description of event
+     * @param by date of deadline
+     */
     public DeadlineTask(String description, String by) {
         super(description, TaskType.DEADLINE);
         this.dateLiteral = by;
@@ -16,6 +24,12 @@ public class DeadlineTask extends Task{
         this.dateReadable = DukeDate.parseDateToString(dateFormatted);
     }
 
+    /**
+     * Gives the date associated to this task, in the same format
+     * as it was keyed in by the user in the CLI.
+     *
+     * @return String date
+     */
     public String getDate(){
         return dateLiteral;
     }

@@ -1,11 +1,14 @@
 package duke.commands;
 
 import duke.tasks.EventTask;
-import duke.tasks.TodoTask;
 import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
+/**
+ * Class that is a subclass of Command class
+ * and handles the behaviour of the Command for event tasks
+ */
 public class EventCommand extends Command{
 
 

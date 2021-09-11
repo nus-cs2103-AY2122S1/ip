@@ -4,6 +4,10 @@ import duke.tasks.TodoTask;
 import duke.utils.Storage;
 import duke.utils.*;
 
+/**
+ * Class that is a subclass of Command class
+ * and handles the behaviour of the Command for todotasks
+ */
 public class TodoCommand extends Command{
 
     private String commandString;

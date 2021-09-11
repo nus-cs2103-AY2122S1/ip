@@ -2,6 +2,11 @@ package duke.commands;
 
 import duke.utils.*;
 
+/**
+ * Class that is a subclass of Command class
+ * and handles the behaviour of the Command for returning
+ * a list of the Tasks currently in the TaskList
+ */
 public class ListCommand extends Command{
 
     @Override

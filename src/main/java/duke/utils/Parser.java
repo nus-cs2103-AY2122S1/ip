@@ -1,8 +1,18 @@
 package duke.utils;
 import duke.commands.*;
 
+/**
+ * Class that parses user input and perfoms the corresponding
+ * function dictated by user input
+ */
 public class Parser {
 
+    /**
+     * Parses the user input and returns the corresponding Command
+     *
+     * @param fullCommand the user's input into the CLI
+     * @return Command command to be executed
+     */
     public Command parseInput(String fullCommand){
 
         String[] commandSplit = fullCommand.split(" ");

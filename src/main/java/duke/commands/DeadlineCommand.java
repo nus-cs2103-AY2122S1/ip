@@ -1,11 +1,14 @@
 package duke.commands;
 
 import duke.tasks.DeadlineTask;
-import duke.tasks.TodoTask;
 import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
+/**
+ * Class that is a subclass of Command class
+ * and handles the behaviour of the Command for deadline tasks
+ */
 public class DeadlineCommand extends Command{
 
     private String commandString;

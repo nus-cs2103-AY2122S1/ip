@@ -2,6 +2,9 @@ package duke.utils;
 
 import java.util.Scanner;
 
+/**
+ * Class that handles taking in user input
+ */
 public class Ui {
 
     private static final String LOGO =
@@ -16,26 +19,46 @@ public class Ui {
 
     private Scanner scanner;
 
+    /**
+     * Constructor that initializes a Ui object
+     */
     public Ui(){
         scanner = new Scanner(System.in);
     }
 
+    /**
+     *
+     * @return String contents entered into the CLI
+     */
     public String readCommand(){
         return scanner.nextLine();
     }
 
+    /**
+     * Returns the intro statement when app first launches
+     */
     public void start(){
         System.out.println(INTRO);
     }
 
+    /**
+     * returns the ending statement before app closes
+     */
     public void end(){
         System.out.println(ENDING);
     }
 
+    /**
+     * Prints a dashed divider line
+     */
     public void showLine(){
         System.out.println( "\n________________________________________________________ \n");
     }
 
+    /**
+     * Prints out the string message of the given Exception.
+     * @param e Exception
+     */
     public void showError(Exception e){
         System.out.println(e.toString());
     }
