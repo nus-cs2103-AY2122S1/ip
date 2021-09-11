@@ -116,6 +116,9 @@ public class AddCommand extends Command {
         default:
             break;
         }
+
+        assert newTask != null;
+
         tasks.addTask(newTask);
         storage.write(tasks.getTaskList());
         return String.format("Got it. I've added this task:\n"

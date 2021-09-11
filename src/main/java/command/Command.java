@@ -59,6 +59,9 @@ public abstract class Command {
         default:
             throw new InvalidCommand();
     }
+
+    assert commandType != null : "CommandType should have been determined";
+
     return commandType;
     }
 
