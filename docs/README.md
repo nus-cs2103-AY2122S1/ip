@@ -29,6 +29,8 @@ specified
   the dashes are required.
   * HHmm: input is in the 24hr format where HH is the hour and
   mm is the minutes
+  
+  
 ### 1. Adding tasks
 
 Adds a task to the task list.
@@ -101,5 +103,5 @@ in a specific order and format.
 not be saved.
 
 
-Hope you enjoy using DaC!!! :-) 
+__*Hope you enjoy using DaC!!!*__
 
