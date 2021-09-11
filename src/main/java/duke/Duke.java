@@ -28,8 +28,8 @@ public class Duke {
      * @return Response to be displayed.
      */
     public String getResponse(String input) {
-        Parser parser = new Parser(input);
         try {
+            Parser parser = new Parser(input);
             assert list instanceof TaskList : "Task list cannot be found";
             Command command = parser.parse();
             String response = command.execute(list);

@@ -22,10 +22,20 @@ public class Parser {
      *
      * @param input The user input to be parsed.
      */
-    public Parser(String input) {
+    public Parser(String input) throws DukeException {
         this.input = input.strip();
+        
+        checkForEmptyInput();
+        
         this.inputArr = input.split(" ");
         this.command = inputArr[0];
+    }
+
+    private void checkForEmptyInput() throws DukeException {
+        boolean isEmptyInput = input.length() == 0;
+        if (isEmptyInput) {
+            throw new DukeException("Enter a valid command to start!");
+        }
     }
 
     private boolean isEditingTask() {
