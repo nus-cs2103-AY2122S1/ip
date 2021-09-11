@@ -1,6 +1,7 @@
 package duke.utils;
 
 import duke.exceptions.DukeException;
+import duke.exceptions.DuplicateTaskException;
 import duke.exceptions.EmptyTaskDescriptionException;
 import duke.exceptions.InvalidCommandException;
 import duke.exceptions.InvalidTaskIdException;
@@ -26,14 +27,14 @@ public class Parser {
             return taskList;
         } else if (commandInput.matches("done\\s[0-9][0-9]?")) {
             int taskToComplete = Integer.valueOf(commandInput.split(" ")[1]);
-            if (taskToComplete < 0 || taskToComplete >= taskList.getSize()) {
+            if (taskToComplete <= 0 || taskToComplete > taskList.getSize()) {
                 throw new InvalidTaskIdException();
             }
             taskList.markAsCompleted(taskToComplete - 1);
             return taskList;
         } else if (commandInput.matches("delete\\s[0-9][0-9]?")) {
             int taskToComplete = Integer.valueOf(commandInput.split(" ")[1]);
-            if (taskToComplete < 0 || taskToComplete >= taskList.getSize()) {
+            if (taskToComplete <= 0 || taskToComplete > taskList.getSize()) {
                 throw new InvalidTaskIdException();
             }
             taskList.delete(taskToComplete - 1);
