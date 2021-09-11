@@ -13,7 +13,8 @@ public class Event extends Task {
     }
 
     /**
-     *  Returns the time of the event stored in the list
+     * Returns the time of the event stored in the list
+     *
      * @return time of the event
      */
     public String getTime() {

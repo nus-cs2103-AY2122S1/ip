@@ -14,7 +14,8 @@ public class Tasklist {
     }
 
     /**
-     * Add a task to the list of tasks.
+     * Adds a task to the list of tasks.
+     *
      * @param task - the task which is to be added in the list
      */
     public static void add(Task task) {
@@ -22,7 +23,8 @@ public class Tasklist {
     }
 
     /**
-     * Removing a task from the list of the tasks.
+     * Removes a task from the list of the tasks.
+     *
      * @param taskIndex - the index of the task to be deleted
      */
     public static void delete(int taskIndex) {
@@ -30,15 +32,16 @@ public class Tasklist {
     }
 
     /**
-     * Find the Tasks in the list which contain the keyword in their
+     * Finds the Tasks in the list which contain the keyword in their
      * description.
-     * @param keyword   keyword to look for in the descriptions
-     * @return          the list of Tasks which have the keyword
+     *
+     * @param keyword keyword to look for in the descriptions
+     * @return the list of Tasks which have the keyword
      */
     public static ArrayList<Task> find(String keyword) {
         ArrayList<Task> foundTasks = new ArrayList<>();
-        for (int i = 0; i < dukeList.size(); i++ ) {
-            if(dukeList.get(i).getDescription().contains(keyword)) {
+        for (int i = 0; i < dukeList.size(); i++) {
+            if (dukeList.get(i).getDescription().contains(keyword)) {
                 foundTasks.add(dukeList.get(i));
             }
         }

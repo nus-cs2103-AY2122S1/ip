@@ -19,13 +19,12 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
-
 /**
  * Representing the Duke project. Used to store Tasks and can be marked complete
  * when done
  */
 
-public class Duke extends Application{
+public class Duke extends Application {
     private Scanner sc = new Scanner(System.in);
     private Ui ui;
     private Tasklist dukeList;
@@ -41,12 +40,12 @@ public class Duke extends Application{
 
     public Duke() {
         ui = new Ui();
-        dukeList= new Tasklist();
+        dukeList = new Tasklist();
         storage = new Storage("./data/saved-tasks.txt");
     }
 
     @Override
-    public void start(Stage stage) throws DukeException{
+    public void start(Stage stage) throws DukeException {
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -57,7 +56,7 @@ public class Duke extends Application{
         userInput = new TextField();
         sendButton = new Button("Send");
         AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane,userInput, sendButton);
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
 
@@ -90,7 +89,7 @@ public class Duke extends Application{
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.
@@ -128,6 +127,7 @@ public class Duke extends Application{
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -143,7 +143,7 @@ public class Duke extends Application{
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() throws DukeException{
+    private void handleUserInput() throws DukeException {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
@@ -160,10 +160,11 @@ public class Duke extends Application{
         String[] splitInput = input.split(" ", 2);
         String command = splitInput[0];
         String description = "";
-        if(splitInput.length > 1) {
+        if (splitInput.length > 1) {
             description = " " + splitInput[1];
         }
-        if(!command.equals("bye")) {
+
+        if (!command.equals("bye")) {
             String response = ui.executeCommand(command, description);
             return response;
         } else {
@@ -177,16 +178,16 @@ public class Duke extends Application{
         Duke duke = new Duke();
         duke.runDuke();
     }
-    
+
     public void runDuke() throws DukeException, IOException {
         storage.fetchData();
         ui.displayWelcomeMessage();
         String command = sc.next();
         String description = sc.nextLine();
-        while(!command.equals("bye")) {
-            handleCommandExecution(command,description);
+        while (!command.equals("bye")) {
+            handleCommandExecution(command, description);
             command = sc.next();
-            if(!command.equals("bye")) {
+            if (!command.equals("bye")) {
                 description = sc.nextLine();
             }
             storage.saveData();
@@ -194,8 +195,8 @@ public class Duke extends Application{
         ui.displayByeMessage();
     }
 
-    public void handleCommandExecution(String command, String description)throws DukeException {
-        ui.executeCommand(command,description);
+    public void handleCommandExecution(String command, String description) throws DukeException {
+        ui.executeCommand(command, description);
     }
 
 }

@@ -24,18 +24,18 @@ public class Storage {
     public void saveData() {
         try {
             File file = new File("./data/saved-tasks.txt");
-            if(!file.exists()) {
+            if (!file.exists()) {
                 file.createNewFile();
             }
             FileWriter writer = new FileWriter(file, false);
-            for(Task task: Tasklist.dukeList) {
+            for (Task task : Tasklist.dukeList) {
                 String commandLine = "";
-                if(task instanceof Deadline) {
+                if (task instanceof Deadline) {
                     commandLine = "D | " + (task.getIsDone() ? "1 | " : "0 | ") + task.getDescription() + " | " + ((Deadline) task).getTime() + '\n';
-                } else if(task instanceof Event) {
+                } else if (task instanceof Event) {
                     commandLine = "E | " + (task.getIsDone() ? "1 | " : "0 | ") + task.getDescription() + " | " + ((Event) task).getTime() + '\n';
                 } else {
-                    commandLine =  "T | " + (task.getIsDone() ? "1 | " : "0 | ") + task.getDescription() + '\n';
+                    commandLine = "T | " + (task.getIsDone() ? "1 | " : "0 | ") + task.getDescription() + '\n';
                 }
                 writer.write(commandLine);
                 writer.flush();
@@ -47,12 +47,12 @@ public class Storage {
     }
 
     /**
-     * Fetches the task list stored on the hard disk
+     * Fetches the task list stored on the hard disk.
      */
     public void fetchData() throws IOException {
 
         File savedFile = new File("./data/saved-tasks.txt");
-        if(!savedFile.exists()) {
+        if (!savedFile.exists()) {
             savedFile.getParentFile().mkdirs();
             savedFile.createNewFile();
         }
