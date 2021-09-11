@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -15,7 +16,7 @@ public abstract class Command {
      * @param ui The Ui of Duke.
      * @param storage The Storage of Duke.
      */
-    public abstract String execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Returns if the current command is an exit command.

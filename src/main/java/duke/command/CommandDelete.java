@@ -32,12 +32,8 @@ public class CommandDelete extends Command {
      * @return String from UI.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
-        try {
-            return ui.displayDeleteUi(taskList, taskList.delete(taskNumber));
-        } catch (DukeException e) {
-            return ui.displayDukeExceptionMessage(e);
-        }
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        return ui.displayDeleteUi(taskList, taskList.delete(taskNumber));
     }
 
     @Override

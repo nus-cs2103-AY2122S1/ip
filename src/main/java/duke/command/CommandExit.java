@@ -25,7 +25,6 @@ public class CommandExit extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         storage.write(taskList);
-
         return ui.displayExitUi();
     }
 

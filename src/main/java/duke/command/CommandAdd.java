@@ -41,14 +41,9 @@ public class CommandAdd extends Command {
      * @return String from UI.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
-        try {
-            Task task = taskList.add(taskType, input);
-
-            return ui.displayAddUi(taskList, task);
-        } catch (DukeException e) {
-            return ui.displayDukeExceptionMessage(e);
-        }
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        Task task = taskList.add(taskType, input);
+        return ui.displayAddUi(taskList, task);
     }
 
     @Override

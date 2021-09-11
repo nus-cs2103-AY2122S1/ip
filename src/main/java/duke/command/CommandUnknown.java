@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -22,8 +23,8 @@ public class CommandUnknown extends Command {
      * @return String from UI.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
-        return ui.displayUnknownUi();
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        throw new DukeException(ui.displayUnknownUi());
     }
 
     @Override

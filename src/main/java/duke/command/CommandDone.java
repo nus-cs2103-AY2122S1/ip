@@ -32,12 +32,8 @@ public class CommandDone extends Command {
      * @return String from UI.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
-        try {
-            return ui.displayDoneUi(taskList.done(taskNumber));
-        } catch (DukeException e) {
-            return ui.displayDukeExceptionMessage(e);
-        }
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        return ui.displayDoneUi(taskList.done(taskNumber));
     }
 
     @Override

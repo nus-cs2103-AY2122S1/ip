@@ -47,7 +47,7 @@ public class Duke {
         }
     }
 
-    public String getResponse(String input) {
+    public String getResponse(String input) throws DukeException {
         return run(input);
     }
 
@@ -56,13 +56,9 @@ public class Duke {
      *
      * @return String representation of the program's respond to the given command.
      */
-    public String run(String input) {
-        try {
-            Command c = Parser.parse(input);
-            return c.execute(taskList, ui, storage);
-        } catch (DukeException e) {
-            return ui.displayDukeExceptionMessage(e);
-        }
+    public String run(String input) throws DukeException {
+        Command c = Parser.parse(input);
+        return c.execute(taskList, ui, storage);
     }
 
     public static void main(String[] args) {
