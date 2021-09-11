@@ -297,8 +297,8 @@ public class TaskList {
         } catch (DateTimeParseException e) {
             return messages.wrongDateInputMessageGui();
         } catch (Exception e) {
-            return messages.displayTextGui("Need to have a yyyy-mm-dd after /by and # " +
-                    "should not come before yyyy-mm-dd");
+            return messages.displayTextGui("Need to have a yyyy-mm-dd after /by and # "
+                    + "should not come before yyyy-mm-dd");
         }
     }
 
@@ -549,6 +549,12 @@ public class TaskList {
         return messages.displayFilteredTasksGui(filteredList);
     }
 
+    /**
+     * Checks if a description input is invalid.
+     *
+     * @param inputArr array containing user input.
+     * @return boolean indicating if the input is valid or not.
+     */
     public boolean descriptionInvalid(String[] inputArr) {
         return inputArr.length < 2;
     }

@@ -1,10 +1,10 @@
 package task;
 
-import model.Tag;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import model.Tag;
 
 /**
  * Task is the superclass of classes to be stored in the database.

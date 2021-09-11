@@ -57,7 +57,7 @@ public class Parser {
     }
 
     /**
-     * Decodes an event stored as base64 from storage.
+     * Decodes an event object stored as base64 from storage.
      *
      * @param dataArr string array retrieved from storage.
      * @return Event object that the stored data represents.
@@ -98,6 +98,12 @@ public class Parser {
         return dbEntry;
     }
 
+    /**
+     * Decodes a deadline object stored as base64 from storage.
+     *
+     * @param dataArr string array retrieved from storage.
+     * @return Deadline object that the stored data represents.
+     */
     public static Deadline decodeDeadline(String[] dataArr) {
         Boolean isDone = Boolean.valueOf(dataArr[1]);
         LocalDate by = LocalDate.parse(dataArr[2]);
@@ -134,6 +140,12 @@ public class Parser {
         return dbEntry;
     }
 
+    /**
+     * Decodes a Todo object stored as base64 from storage.
+     *
+     * @param dataArr string array retrieved from storage.
+     * @return Todo object that the stored data represents.
+     */
     public static Todo decodeTodo(String[] dataArr) {
         Boolean isDone = Boolean.valueOf(dataArr[1]);
         String description = new String(Base64.getDecoder().decode(dataArr[2]));
@@ -151,20 +163,44 @@ public class Parser {
         return todoTask;
     }
 
+    /**
+     * Encodes the description of a Task object to base64 for storage.
+     *
+     * @param task Task whose description is to be stored as base64.
+     * @return base64 string for storage.
+     */
     public static String encodeDescription(Task task) {
         return Base64.getEncoder()
                 .encodeToString(task.getDescription().getBytes());
     }
 
+    /**
+     * Decodes a Task object's description stored as base64 from storage.
+     *
+     * @param dbString base64 string stored in storage.
+     * @return string description of the Task object.
+     */
     public static String decodeDescription(String dbString) {
         return new String(Base64.getDecoder().decode(dbString));
     }
 
+    /**
+     * Encodes the tags of a Task object to base64 for storage.
+     *
+     * @param task Task whose tags are to be stored as base64.
+     * @return base64 string for storage.
+     */
     public static String encodeTags(Task task) {
         return Base64.getEncoder()
                 .encodeToString(task.getTags().getBytes());
     }
 
+    /**
+     * Decodes a Task object's tags stored as base64 from storage.
+     *
+     * @param tagsArr base64 string stored in storage.
+     * @return string tags of the Task object.
+     */
     public static List<Tag> decodeTags(String[] tagsArr) {
         List<Tag> tagsList = Arrays.stream(tagsArr).map(tagStr -> {
             return new Tag(tagStr);
@@ -172,12 +208,25 @@ public class Parser {
         return tagsList;
     }
 
+    /**
+     * Adds a tag to a Task object.
+     *
+     * @param task Task object to have a tag added to.
+     * @param tag string tag to add to Task object.
+     */
     public static void addTag(Task task, String tag) {
         String tagContent = tag.substring(1);
         Tag currentTag = new Tag(tagContent);
         task.addTag(currentTag);
     }
 
+    /**
+     * Adds tags to a task object.
+     *
+     * @param task Task object to have tags added to.
+     * @param inputArr array of string tags to be added to Task object.
+     * @param tagStart starting index of the tags section.
+     */
     public static void addTags(Task task, String[] inputArr, int tagStart) {
         if (tagStart != INVALID) {
             for (int j = tagStart; j < inputArr.length; j++) {
@@ -186,15 +235,27 @@ public class Parser {
         }
     }
 
+    /**
+     * Adds tags to a task object.
+     *
+     * @param tagsList List of tags to be added to Task object.
+     * @param task Task object to have tags added to.
+     */
     public static void addTags(List<Tag> tagsList, Task task) {
         for (Tag tag: tagsList) {
             task.addTag(tag);
         }
     }
 
+    /**
+     * Retrieves the starting index of the tags from the user's input.
+     *
+     * @param inputArr array containing user input.
+     * @return index of the first tag in the user input. -1 if no tags are found.
+     */
     public static int getTagsStart(String[] inputArr) {
         int tagStart = INVALID;
-        for (int i = inputArr.length - 1; i >=0; i--) {
+        for (int i = inputArr.length - 1; i >= 0; i--) {
             String currentString = inputArr[i];
             if (currentString.charAt(0) == '#') {
                 tagStart = i;
@@ -203,12 +264,26 @@ public class Parser {
         return tagStart;
     }
 
+    /**
+     * Retrieves the Task's description from the user's input.
+     *
+     * @param inputArr array containing user input.
+     * @param commandIndex index of the end of the description.
+     * @return string description of the Task object.
+     */
     public static String getDescription(String[] inputArr, int commandIndex) {
         String[] descriptionArray = Arrays.copyOfRange(inputArr, DESCRIPTION_START, commandIndex);
         String description = String.join(" ", descriptionArray);
         return description;
     }
 
+    /**
+     * Retrieves the index of the command.
+     *
+     * @param inputArr array containing user input.
+     * @param command command to be searched for.
+     * @return Integer index of the command.
+     */
     public static int getCommandIndex(String[] inputArr, String command) {
         int commandIndex = INVALID;
         for (int i = 0; i < inputArr.length; i++) {
