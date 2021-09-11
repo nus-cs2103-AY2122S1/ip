@@ -14,22 +14,24 @@ public class Task {
     }
 
     /**
-     * If the task is marked done X is shown
-     * @return  X if task is completed else whitespace
+     * Shows X if the task is marked done.
+     *
+     * @return X if task is completed else whitespace
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
 
     /**
-     * The status of the task is set to completed
+     * The status of the task is set to completed.
      */
     public void completeTask() {
         this.isDone = true;
     }
 
     /**
-     * Returns the description for the task
+     * Returns the description for the task.
+     *
      * @return the description for the task
      */
     public String getDescription() {
@@ -37,7 +39,8 @@ public class Task {
     }
 
     /**
-     * Returns whether the task is completed or not
+     * Returns whether the task is completed or not.
+     *
      * @return whether the task is completed or not
      */
     public boolean getIsDone() {
