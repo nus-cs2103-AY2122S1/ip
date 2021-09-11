@@ -14,11 +14,7 @@ public class ParserTest {
             fail();
             // the test should not reach this line
         } catch (InvalidDateTimeException e) {
-            String errorMessage = "------------------------------------------------------------------------------\n"
-                    +
-                    "Meow: The format of your deadline is invalid, please try again~\n"
-                    +
-                    "------------------------------------------------------------------------------";
+            String errorMessage = "Meow: The format of your deadline is invalid, please try again~";
             assertEquals(errorMessage,
                     e.toString());
         }
