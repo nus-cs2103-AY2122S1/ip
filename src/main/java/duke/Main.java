@@ -18,6 +18,11 @@ public class Main extends Application {
 
     private final Duke duke = new Duke();
 
+    /**
+     * This method is called after the system is loaded.
+     *
+     * @param stage The stage to set the scene.
+     */
     @Override
     public void start(Stage stage) {
         try {

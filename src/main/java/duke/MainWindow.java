@@ -1,12 +1,9 @@
 package duke;
 
 import java.util.Timer;
-import java.util.TimerTask;
 
 import duke.ui.Ui;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -15,17 +12,19 @@ import javafx.scene.layout.VBox;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
+ *
+ * @author Cheong Yee Ming
+ * @version Duke Level-10
  */
 public class MainWindow extends AnchorPane {
     private final Ui ui;
+    private final ExitProgram exitProgram;
     @FXML
     private ScrollPane scrollPane;
     @FXML
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Duke duke;
 
@@ -40,6 +39,7 @@ public class MainWindow extends AnchorPane {
     public MainWindow() {
         ui = new Ui();
         seconds = 2;
+        exitProgram = new ExitProgram();
     }
     /**
      * Method called upon starting of Duke.
@@ -77,12 +77,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         if (response.equals("Bye. Hope to see you again soon!")) {
-            class ExitProgram extends TimerTask {
-                public void run() {
-                    Platform.exit();
-                }
-            }
-            new Timer().schedule(new ExitProgram(), seconds * 1000);
+            new Timer().schedule(exitProgram, seconds * 1000);
         }
         userInput.clear();
     }
