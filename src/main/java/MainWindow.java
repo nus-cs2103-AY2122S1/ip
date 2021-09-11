@@ -51,7 +51,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        boolean isError = duke.isError(input);
+        boolean isError = duke.hasError();
         DialogBox userDialog = DialogBox.getUserDialog(input, userImage);
         DialogBox dukeDialog = DialogBox.getDukeDialog(response, dukeImage, isError);
         dialogContainer.getChildren().addAll(userDialog, dukeDialog);

@@ -8,6 +8,7 @@ import duke.commands.Command;
 public class Duke {
     private static TaskList list;
     private static FileManager fm;
+    private static boolean hasError = false;
 
     /**
      * Constructor for Duke.
@@ -21,15 +22,8 @@ public class Duke {
         }
     }
 
-    public boolean isError(String input) {
-        try {
-            Parser parser = new Parser(input);
-            Command command = parser.parse();
-            String response = command.execute(list);
-            return false;
-        } catch (DukeException e) {
-            return true;
-        }
+    public boolean hasError() {
+        return hasError;
     }
 
     /**
@@ -45,8 +39,10 @@ public class Duke {
             Command command = parser.parse();
             String response = command.execute(list);
             fm.writeToFile(list);
+            hasError = false;
             return response;
         } catch (DukeException e) {
+            hasError = true;
             return e.getMessage();
         }
     }
