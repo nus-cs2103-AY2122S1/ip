@@ -41,7 +41,7 @@ public class Ui {
     }
 
     /**
-     * Print response specific to adding tasks.
+     * Prints response specific to adding tasks.
      *
      * @param input String representation of task to add.
      * @param tasks TaskList to be added to.
