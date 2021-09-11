@@ -52,12 +52,19 @@ public class Ui {
     }
 
 
-    String executeCommand(String command, String description, int i) throws DukeException {
+    /**
+     * Returns the appropriate response as per the command given
+     * @param command           the command entered
+     * @param description       the description of the task
+     * @return                  response from duke
+     */
+    String executeCommand(String command, String description) throws DukeException {
         try {
             if (command.equals("list")) {
                return showDukeList();
             } else if (command.equals("done")) {
                 int taskIndex = Integer.parseInt(description.substring(1)) - 1;
+                assert taskIndex < Tasklist.dukeList.size() : "Index cannot be greater than the size of list";
                 Task toBeCompleted = Tasklist.dukeList.get(taskIndex);
                 toBeCompleted.completeTask();
                 return showTaskCompletion(toBeCompleted);
@@ -92,6 +99,7 @@ public class Ui {
                     str.append(newTodo+"\n");
                 } else if (command.equals("delete")) {
                     int taskIndex = Integer.parseInt(description.substring(1)) - 1;
+                    assert taskIndex < Tasklist.dukeList.size() : "Index cannot be greater than the size of list";
                     str.append(LINES+"\n");
                     str.append("Noted. I've removed this task:\n");
                     Task taskToBeDeleted = Tasklist.dukeList.get(taskIndex);
@@ -125,6 +133,7 @@ public class Ui {
      * @param toBeCompleted the Task which is to be marked done
      */
     String showTaskCompletion(Task toBeCompleted) {
+        assert toBeCompleted != null : "Task to be completed should not be null";
         StringBuilder str = new StringBuilder();
         str.append(LINES+"\n");
         str.append("Nice! I've marked this task as done:\n");
@@ -145,76 +154,7 @@ public class Ui {
         return str.toString();
     }
 
-    /**
-     * Executes the commands entered by the user.
-     * @param command        valid command entered by the user
-     * @param description    description for the Task
-     * @throws DukeException if the command is invalid or event has an empty description
-     */
-    void executeCommand(String command, String description)  throws DukeException {
-        try {
-            if (command.equals("list")) {
-                displayDukeList();
-            } else if (command.equals("done")) {
-                int taskIndex = Integer.parseInt(description.substring(1)) - 1;
-                Task toBeCompleted = Tasklist.dukeList.get(taskIndex);
-                toBeCompleted.completeTask();
-                displayTaskCompletion(toBeCompleted);
-            } else {
-                if (command.equals("deadline")) {
-                    String[] description_and_time = Parser.splitDescriptionAndTime(description);
-                    String deadlineDescription = Parser.getDescription(description_and_time);
-                    String time = Parser.getTime(description_and_time);
-                    Deadline newDeadline = new Deadline(deadlineDescription, time);
-                    Tasklist.dukeList.add(newDeadline);
-                    printLines();
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(newDeadline);
-                } else if (command.equals("event")) {
-                    String[] event_and_time = Parser.splitDescriptionAndTime(description);
-                    String eventDescription = Parser.getDescription(event_and_time);
-                    String time = Parser.getTime(event_and_time);
-                    Event newEvent = new Event(eventDescription, time);
-                    Tasklist.dukeList.add(newEvent);
-                    printLines();
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(newEvent);
-                } else if (command.equals("todo")) {
-                    if (description.trim().equals("")) {
-                        throw new DukeEmptyTodoDescriptionException();
-                    }
-                    printLines();
-                    System.out.println("Got it. I've added this task:");
-                    ToDo newTodo = new ToDo(description.substring(1));
-                    Tasklist.add(newTodo);
-                    System.out.println(newTodo);
-                } else if (command.equals("delete")) {
-                    int taskIndex = Integer.parseInt(description.substring(1)) - 1;
-                    printLines();
-                    System.out.println("Noted. I've removed this task:");
-                    Task taskToBeDeleted = Tasklist.dukeList.get(taskIndex);
-                    System.out.println(taskToBeDeleted);
-                    deleteTask(taskIndex);
-                } else if (command.equals("find")) {
-                    String keyword = description.substring(1);
-                    ArrayList<Task> foundTasks = Tasklist.find(keyword);
-                    displayFoundDukeList(foundTasks);
-                } else {
-                    throw new DukeUnknownCommandException();
-                }
 
-                if (!command.equals("find")) {
-                    System.out.println("Now you have " + Tasklist.dukeList.size() + " tasks in the list.");
-                    printLines();
-                }
-            }
-        } catch ( DukeEmptyTodoDescriptionException | DukeUnknownCommandException e) {
-            printLines();
-            System.out.println(e.getMessage());
-            printLines();
-        }
-
-    }
 
     /**
      * Remove a Task from the list

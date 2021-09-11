@@ -164,7 +164,7 @@ public class Duke extends Application{
             description = " " + splitInput[1];
         }
         if(!command.equals("bye")) {
-            String response = ui.executeCommand(command, description, 1);
+            String response = ui.executeCommand(command, description);
             return response;
         } else {
             return ui.showByeMessage();

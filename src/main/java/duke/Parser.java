@@ -17,6 +17,7 @@ public class Parser {
      * @return          array containing the description and time info
      */
     public static String[] splitDescriptionAndTime(String string) {
+        assert string != "" : "string to split cannot be empty";
         return string.split("/");
     }
 
@@ -26,6 +27,7 @@ public class Parser {
      * @return                      the description of the Task
      */
     public static String getDescription(String[] description_and_time) {
+        assert description_and_time != null : "Tasks description and time cannot be null";
         return description_and_time[0].split(" ", 2)[1];
     }
 
@@ -35,6 +37,7 @@ public class Parser {
      * @return                      the description of the Task
      */
     public static String getTime (String[] description_and_time) {
+        assert description_and_time != null : "Tasks description and time cannot be null";
         LocalDate localDate = LocalDate.parse(description_and_time[1].split(" ", 2)[1]);
         String time = localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         return time;
