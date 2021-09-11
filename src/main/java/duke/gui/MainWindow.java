@@ -82,9 +82,10 @@ public class MainWindow extends AnchorPane {
             + "4. event [task description] /at [date] [start time]-[end time] -> Add an event task with a duration.\n"
             + "5. done [task number] -> Mark the task as done.\n"
             + "6. delete [task number] -> Delete the task.\n"
-            + "7. find [task description] -> Get a list of matching tasks.\n"
-            + "8. commands -> Get a list of available commands.\n"
-            + "9. bye -> Goodbye Human :)\n\n"
+            + "7. clear -> Delete all existing tasks.\n"
+            + "8. find [task description] -> Get a list of matching tasks.\n"
+            + "9. commands -> Get a list of available commands.\n"
+            + "10. bye -> Goodbye Human :)\n\n"
             + "You can also add /weekly or /daily "
             + "+ [no. of repetition] behind deadline task type to add recurring tasks.";
         return output;
