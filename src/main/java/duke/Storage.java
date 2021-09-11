@@ -131,12 +131,24 @@ public class Storage {
     }
 
     /**
+     * Updates a task in the file as done.
+     * @param id The task line to be updated.
+     * @throws DukeException When saving the file fails.
+     */
+    public void markLineDone(int id) throws DukeException {
+        int doneIndex = 4;
+        String task = this.getFileLine(id);
+        String newTask = task.substring(0, doneIndex) + "1" + task.substring(doneIndex + 1);
+        this.updateLineFile(id, newTask);
+    }
+
+    /**
      * Updates a task to the saved file.
      * @param id The line to be updated.
      * @param task The task as a String.
      * @throws DukeException When saving the file fails.
      */
-    public void updateLineFile(int id, String task) throws DukeException {
+    private void updateLineFile(int id, String task) throws DukeException {
         assert task != null : "[duke.Storage.updateLineFile]: task parameter should not be null.";
         fileContents.set(id, task);
         commitChanges();

@@ -30,6 +30,7 @@ public class Event extends Task {
      * Returns the string representation of an Event task in the saved file.
      * @return The string representation of an Event task in the saved file.
      */
+    @Override
     public String savedToString() {
         String doneStatus = super.isDone ? "1" : "0";
         return "E | " + doneStatus + " | " + super.description + " | " + dateString;

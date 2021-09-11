@@ -17,6 +17,7 @@ public class Todo extends Task {
      * Returns the string representation of a Todo task in the saved file.
      * @return The string representation of a Todo task in the saved file.
      */
+    @Override
     public String savedToString() {
         String doneStatus = super.isDone ? "1" : "0";
         return "T | " + doneStatus + " | " + super.description;

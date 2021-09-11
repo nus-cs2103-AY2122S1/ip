@@ -37,6 +37,15 @@ public class Task {
     }
 
     /**
+     * Returns the string representation of a Todo task in the saved file.
+     * @return The string representation of a Todo task in the saved file.
+     */
+    public String savedToString() {
+        String doneStatus = isDone ? "1" : "0";
+        return "T | " + doneStatus + " | " + this.description;
+    }
+
+    /**
      * Returns the string representation of a task.
      * @return The description of the task.
      */
