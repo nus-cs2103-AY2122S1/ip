@@ -12,7 +12,9 @@ import duke.ui.Ui;
  * @version Duke Level-10
  */
 public class UndoCommand extends Command {
+
     private final Command command;
+
     /**
      * Constructor for an UndoCommand.
      *

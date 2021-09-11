@@ -4,6 +4,7 @@ import java.util.Timer;
 
 import duke.ui.Ui;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -17,14 +18,18 @@ import javafx.scene.layout.VBox;
  * @version Duke Level-10
  */
 public class MainWindow extends AnchorPane {
+
     private final Ui ui;
     private final ExitProgram exitProgram;
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
+    @FXML
+    private Button sendButton;
 
     private Duke duke;
 
@@ -41,6 +46,7 @@ public class MainWindow extends AnchorPane {
         seconds = 2;
         exitProgram = new ExitProgram();
     }
+
     /**
      * Method called upon starting of Duke.
      * Sets height of scroll panel and

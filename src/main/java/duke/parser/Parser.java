@@ -19,6 +19,7 @@ import duke.exception.InvalidDateTimeException;
 import duke.exception.NoDateTimeException;
 import duke.exception.NoPreviousCommandException;
 import duke.exception.NoSuchCommandException;
+import duke.exception.NoSuchTaskException;
 import duke.exception.NoTaskDescriptionException;
 import duke.storage.Storage;
 import duke.task.Deadline;
@@ -74,7 +75,7 @@ public class Parser {
         String commandDetails = getCommandDetails(userInput);
         if (!(commandType.equals("list") || commandType.equals("bye") || commandType.equals("undo"))
                 && (commandDetails.isBlank() || !userInput.contains(" "))) {
-            throw new NoTaskDescriptionException(ui);
+            throw new NoTaskDescriptionException();
         }
         storePreviousCommand(userInput);
 
@@ -107,7 +108,7 @@ public class Parser {
             return new UndoCommand(taskList, storage, ui, parseUndoInput(getPreviousCommand()));
 
         default:
-            throw new NoSuchCommandException(ui);
+            throw new NoSuchCommandException();
         }
     }
 
@@ -123,55 +124,84 @@ public class Parser {
         assert !userInput.isBlank() : "There is no user input to be parsed.";
         String commandDetails = getCommandDetails(userInput);
         if (commandDetails.isBlank() || !userInput.contains(" ")) {
-            throw new NoTaskDescriptionException(ui);
+            throw new NoTaskDescriptionException();
         }
 
         switch (taskType) {
         case DEADLINE:
             try {
-                int byIndex = commandDetails.indexOf("/by") - 1;
-                if (byIndex <= 0) {
-                    throw new NoDateTimeException(ui);
-                }
-                String deadlineDetails = commandDetails.substring(0, byIndex);
-                if (deadlineDetails.isBlank()) {
-                    throw new NoTaskDescriptionException(ui);
-                }
-                try {
-                    LocalDateTime by = LocalDateTime.parse(commandDetails.substring(commandDetails.indexOf("by") + 3),
-                            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-                    return new Deadline(deadlineDetails, false, by);
-                } catch (DateTimeParseException e) {
-                    throw new InvalidDateTimeException(ui);
-                }
+                return createDeadline(commandDetails);
             } catch (StringIndexOutOfBoundsException e) {
-                throw new NoTaskDescriptionException(ui);
+                throw new NoTaskDescriptionException();
             }
-
 
         case EVENT:
             try {
-                int atIndex = commandDetails.indexOf("/at") - 1;
-                if (atIndex <= 0) {
-                    throw new NoDateTimeException(ui);
-                }
-                String eventDetails = commandDetails.substring(0, atIndex);
-                if (eventDetails.isBlank()) {
-                    throw new NoTaskDescriptionException(ui);
-                }
-                try {
-                    LocalDateTime at = LocalDateTime.parse(commandDetails.substring(commandDetails.indexOf("at") + 3),
-                            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-                    return new Event(eventDetails, false, at);
-                } catch (DateTimeParseException e) {
-                    throw new InvalidDateTimeException(ui);
-                }
+                return createEvent(commandDetails);
             } catch (StringIndexOutOfBoundsException e) {
-                throw new NoTaskDescriptionException(ui);
+                throw new NoTaskDescriptionException();
             }
 
         default:
             return new ToDo(commandDetails, false);
+        }
+    }
+
+    /**
+     * Method to create Deadline
+     *
+     * @param commandDetails Deadline of this task.
+     * @return Deadline task if command details are valid.
+     * @throws DukeException if command details are invalid.
+     */
+    public Deadline createDeadline(String commandDetails) throws DukeException {
+        try {
+            int byIndex = commandDetails.indexOf("/by") - 1;
+            if (byIndex <= 0) {
+                throw new NoDateTimeException();
+            }
+            String deadlineDetails = commandDetails.substring(0, byIndex);
+            if (deadlineDetails.isBlank()) {
+                throw new NoTaskDescriptionException();
+            }
+            try {
+                LocalDateTime by = LocalDateTime.parse(commandDetails.substring(commandDetails.indexOf("by") + 3),
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                return new Deadline(deadlineDetails, false, by);
+            } catch (DateTimeParseException e) {
+                throw new InvalidDateTimeException();
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new NoTaskDescriptionException();
+        }
+    }
+
+    /**
+     * Method to create Event
+     *
+     * @param commandDetails Event task.
+     * @return Event task if command details are valid.
+     * @throws DukeException if command details are invalid.
+     */
+    public Event createEvent(String commandDetails) throws DukeException {
+        try {
+            int atIndex = commandDetails.indexOf("/at") - 1;
+            if (atIndex <= 0) {
+                throw new NoDateTimeException();
+            }
+            String eventDetails = commandDetails.substring(0, atIndex);
+            if (eventDetails.isBlank()) {
+                throw new NoTaskDescriptionException();
+            }
+            try {
+                LocalDateTime at = LocalDateTime.parse(commandDetails.substring(commandDetails.indexOf("at") + 3),
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                return new Event(eventDetails, false, at);
+            } catch (DateTimeParseException e) {
+                throw new InvalidDateTimeException();
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new NoTaskDescriptionException();
         }
     }
 
@@ -255,7 +285,7 @@ public class Parser {
         try {
             return previousCommand.remove(previousCommand.size() - 1);
         } catch (IndexOutOfBoundsException e) {
-            throw new NoPreviousCommandException(ui);
+            throw new NoPreviousCommandException();
         }
     }
 
@@ -263,8 +293,9 @@ public class Parser {
      * Stores only commands that can be undone.
      *
      * @param userInput The user's input command.
+     * @throws NoSuchTaskException when task does not exist.
      */
-    private void storePreviousCommand(String userInput) {
+    private void storePreviousCommand(String userInput) throws NoSuchTaskException {
         assert !userInput.isBlank() : "There is no user input to be stored.";
         String commandType = getCommandType(userInput);
         String commandDetails = getCommandDetails(userInput);
@@ -274,11 +305,13 @@ public class Parser {
             previousCommand.add(userInput);
             break;
         case "delete":
-            System.out.println(userInput + taskList.getTask(getTaskNumber(commandDetails)).toString());
-            previousCommand.add(userInput + " " + taskList.getTask(getTaskNumber(commandDetails)).toString());
+            try {
+                previousCommand.add(userInput + " " + taskList.getTask(getTaskNumber(commandDetails)).toString());
+            } catch (NoSuchTaskException e) {
+                throw new NoSuchTaskException();
+            }
             break;
         default:
         }
-
     }
 }

@@ -10,6 +10,7 @@ package duke.task;
  * @version Duke Level-10
  */
 public abstract class Task {
+
     public final TaskType taskType;
     protected final String description;
     protected boolean isDone;

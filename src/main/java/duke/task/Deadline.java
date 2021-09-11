@@ -15,7 +15,7 @@ public class Deadline extends Task {
     protected final LocalDateTime by;
 
     /**
-     * Construtor of a Deadline.
+     * Constructor of a Deadline.
      *
      * @param description Description of task to be done.
      * @param isDone      Boolean representation of completion of task.

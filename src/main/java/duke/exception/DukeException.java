@@ -11,16 +11,6 @@ import duke.ui.Ui;
  * @version Duke Level-10
  */
 public abstract class DukeException extends Exception {
-    private Ui ui;
-
-    /**
-     * Constructor for an exception.
-     *
-     * @param ui Prints message with respect to user input.
-     */
-    protected DukeException(Ui ui) {
-        this.ui = ui;
-    }
 
     /**
      * Returns an error message.
@@ -29,6 +19,6 @@ public abstract class DukeException extends Exception {
      * @return The error message.
      */
     protected String errorMessage(String errorMessage) {
-        return ui.formatErrorMessage(errorMessage);
+        return Ui.formatErrorMessage(errorMessage);
     }
 }

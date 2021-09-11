@@ -11,6 +11,7 @@ import duke.ui.Ui;
  * @version Duke Level-10
  */
 public class ExitCommand extends Command {
+
     /**
      * Constructor for a ExitCommand.
      *

@@ -1,7 +1,5 @@
 package duke.exception;
 
-import duke.ui.Ui;
-
 /**
  * This exception is thrown when
  * the date or time is missing in user input.
@@ -10,14 +8,6 @@ import duke.ui.Ui;
  * @version Duke Level-10
  */
 public class NoDateTimeException extends DukeException {
-    /**
-     * Constructor for an NoDateTimeException.
-     *
-     * @param ui Prints message with respect to user input.
-     */
-    public NoDateTimeException(Ui ui) {
-        super(ui);
-    }
 
     /**
      * Returns an error message to highlight that

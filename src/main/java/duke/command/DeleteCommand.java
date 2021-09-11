@@ -13,6 +13,7 @@ import duke.ui.Ui;
  * @version Duke Level-10
  */
 public class DeleteCommand extends Command {
+
     private final int taskNumber;
 
     /**

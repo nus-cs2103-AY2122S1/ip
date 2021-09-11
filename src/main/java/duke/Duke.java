@@ -1,7 +1,6 @@
 package duke;
 
 import duke.command.Command;
-import duke.command.ExitCommand;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -15,11 +14,12 @@ import duke.ui.Ui;
  * @version Duke Level-10
  */
 public class Duke {
+
     private final TaskList taskList;
     private final Storage storage;
     private final Ui ui;
     private final Parser parser;
-    private boolean isActive;
+
     /**
      * Constructor for Duke.
      */
@@ -29,7 +29,6 @@ public class Duke {
         taskList.loadFromStorage(storage.load());
         ui = new Ui();
         parser = new Parser(taskList, storage, ui);
-        isActive = true;
     }
 
     /**
@@ -39,18 +38,13 @@ public class Duke {
      * @return A string of the response of Duke
      */
     protected String getResponse(String input) {
-        if (isActive) {
-            try {
-                if (!input.isBlank()) {
-                    Command command = parser.parseUserInput(input);
-                    if (command instanceof ExitCommand) {
-                        isActive = false;
-                    }
-                    return command.runCommand();
-                }
-            } catch (DukeException e) {
-                return e.getMessage();
+        try {
+            if (!input.isBlank()) {
+                Command command = parser.parseUserInput(input);
+                return command.runCommand();
             }
+        } catch (DukeException e) {
+            return e.getMessage();
         }
         return "";
     }

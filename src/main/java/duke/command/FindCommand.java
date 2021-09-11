@@ -11,6 +11,7 @@ import duke.ui.Ui;
  * @version Duke Level-10
  */
 public class FindCommand extends Command {
+
     private final String keyword;
 
     /**

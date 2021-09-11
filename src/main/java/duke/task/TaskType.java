@@ -7,6 +7,7 @@ package duke.task;
  * @version Duke Level-10
  */
 public enum TaskType {
+
     DEADLINE(),
     EVENT(),
     TODO();

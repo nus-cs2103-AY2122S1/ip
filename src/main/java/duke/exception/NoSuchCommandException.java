@@ -1,7 +1,5 @@
 package duke.exception;
 
-import duke.ui.Ui;
-
 /**
  * This exception is thrown when
  * an invalid command is input.
@@ -10,14 +8,6 @@ import duke.ui.Ui;
  * @version Duke Level-10
  */
 public class NoSuchCommandException extends DukeException {
-    /**
-     * Constructor for an NoSuchCommandException.
-     *
-     * @param ui Prints message with respect to user input.
-     */
-    public NoSuchCommandException(Ui ui) {
-        super(ui);
-    }
 
     /**
      * Returns an error message to highlight that

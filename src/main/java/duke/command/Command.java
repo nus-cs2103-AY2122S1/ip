@@ -12,6 +12,7 @@ import duke.ui.Ui;
  * @version Duke Level-10
  */
 public abstract class Command {
+
     protected final TaskList taskList;
     protected final Storage storage;
     protected final Ui ui;

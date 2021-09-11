@@ -12,6 +12,7 @@ import duke.ui.Ui;
  * @version Duke Level-10
  */
 public class AddCommand extends Command {
+
     private final Task task;
 
     /**

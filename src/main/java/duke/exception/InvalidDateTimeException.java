@@ -1,7 +1,5 @@
 package duke.exception;
 
-import duke.ui.Ui;
-
 /**
  * This exception is thrown when an unsupported
  * format of date or time is input.
@@ -10,15 +8,6 @@ import duke.ui.Ui;
  * @version Duke Level-10
  */
 public class InvalidDateTimeException extends DukeException {
-
-    /**
-     * Constructor for an InvalidDateTimeException.
-     *
-     * @param ui Prints message with respect to user input.
-     */
-    public InvalidDateTimeException(Ui ui) {
-        super(ui);
-    }
 
     /**
      * Returns an error message to highlight that

@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import duke.exception.NoSuchTaskException;
-import duke.ui.Ui;
 
 /**
  * Encapsulates the representation of a list of task.
@@ -23,6 +22,7 @@ public class TaskList {
     public TaskList() {
         list = new ArrayList<>();
     }
+
     /**
      * Static method converting a task
      * from string form to Task form
@@ -54,9 +54,14 @@ public class TaskList {
      *
      * @param taskNumber The index of task to be returned.
      * @return Task at the index task number minus one.
+     * @throws NoSuchTaskException when task does not exist.
      */
-    public Task getTask(int taskNumber) {
-        return list.get(taskNumber - 1);
+    public Task getTask(int taskNumber) throws NoSuchTaskException {
+        try {
+            return list.get(taskNumber - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new NoSuchTaskException();
+        }
     }
 
     /**
@@ -79,7 +84,7 @@ public class TaskList {
      */
     public Task deleteTask(int taskNumber) throws NoSuchTaskException {
         if (taskNumber <= 0 || taskNumber > list.size()) {
-            throw new NoSuchTaskException(new Ui());
+            throw new NoSuchTaskException();
         }
         return list.remove(taskNumber - 1);
     }
@@ -94,7 +99,7 @@ public class TaskList {
      */
     public Task markAsDone(int taskNumber) throws NoSuchTaskException {
         if (taskNumber <= 0 || taskNumber > list.size()) {
-            throw new NoSuchTaskException(new Ui());
+            throw new NoSuchTaskException();
         }
         Task task = list.get(taskNumber - 1);
         assert task != null : "Task cannot be null.";
@@ -112,7 +117,7 @@ public class TaskList {
      */
     public Task markAsUndone(int taskNumber) throws NoSuchTaskException {
         if (taskNumber <= 0 || taskNumber > list.size()) {
-            throw new NoSuchTaskException(new Ui());
+            throw new NoSuchTaskException();
         }
         Task task = list.get(taskNumber - 1);
         assert task != null : "Task cannot be null.";

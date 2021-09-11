@@ -2,6 +2,7 @@ package duke.ui;
 
 import java.util.ArrayList;
 
+import duke.exception.NoSuchTaskException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -87,12 +88,21 @@ public class Ui {
      *
      * @param taskList The task list to be printed.
      * @return String representation of the list of tasks.
+     * @throws NoSuchTaskException when task does not exist.
      */
-    public String guiListTaskMessage(TaskList taskList) {
+    public String guiListTaskMessage(TaskList taskList) throws NoSuchTaskException {
+        if (taskList.size() == 0) {
+            return "There is currently no task at hand.";
+        }
         StringBuilder msg = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 1; i <= taskList.size(); i++) {
-            msg.append(i).append(".").append(taskList.getTask(i).getStatus()).append("\n");
+            try {
+                msg.append(i).append(".").append(taskList.getTask(i).getStatus()).append("\n");
+            } catch (NoSuchTaskException e) {
+                throw new NoSuchTaskException();
+            }
         }
+        msg.append("\n");
         return msg.toString();
     }
 
@@ -122,11 +132,15 @@ public class Ui {
      * @return String representation of related tasks.
      */
     public String getFindTask(ArrayList<Task> taskList) {
+        if (taskList.isEmpty()) {
+            return "None of the tasks matched the keyword provided.";
+        }
         StringBuilder relatedTaskMessage = new StringBuilder("Here are the matching tasks in your list:");
         for (int i = 1; i <= taskList.size(); i++) {
             relatedTaskMessage.append("\n").append(i)
                     .append(". ").append(taskList.get(i - 1).getStatus());
         }
+        relatedTaskMessage.append("\n");
         return relatedTaskMessage.toString();
     }
 

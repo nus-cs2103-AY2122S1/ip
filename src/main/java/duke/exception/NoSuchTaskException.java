@@ -1,7 +1,5 @@
 package duke.exception;
 
-import duke.ui.Ui;
-
 /**
  * This exception is thrown when
  * user inputs a non-existent task number
@@ -11,14 +9,6 @@ import duke.ui.Ui;
  * @version Duke Level-10
  */
 public class NoSuchTaskException extends DukeException {
-    /**
-     * Constructor for an NoSuchCommandException.
-     *
-     * @param ui Prints message with respect to user input.
-     */
-    public NoSuchTaskException(Ui ui) {
-        super(ui);
-    }
 
     /**
      * Returns an error message to highlight that
