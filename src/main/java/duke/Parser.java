@@ -10,6 +10,7 @@ import duke.commands.AddEventCommand;
 import duke.commands.AddTodoCommand;
 import duke.commands.Command;
 import duke.commands.CommandListCommand;
+import duke.commands.ClearCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.ExitCommand;
@@ -76,6 +77,8 @@ public class Parser {
                     throw new DukeException("empty task list");
                 }
                 return new ListCommand();
+            case "clear":
+                return new ClearCommand(taskList);
             case "commands":
                 return new CommandListCommand();
             default:
