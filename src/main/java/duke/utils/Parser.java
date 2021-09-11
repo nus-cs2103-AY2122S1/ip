@@ -40,6 +40,12 @@ public class Parser {
             case "delete":
                 return new DeleteCommand(fullCommand);
 
+            case "find":
+                return new FindCommand(fullCommand);
+
+            case "help":
+                return new HelpCommand();
+
         }
 
         return new ErrorCommand();
