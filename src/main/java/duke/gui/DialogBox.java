@@ -1,18 +1,20 @@
 package duke.gui;
 
 
+import com.sun.scenario.effect.impl.prism.PrRenderInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+
 
 import java.io.IOException;
 import java.util.Collections;
@@ -21,11 +23,9 @@ import java.util.Collections;
  * Controller for dialogBox
  */
 public class DialogBox extends HBox {
-    @FXML
-    private Label dialog;
 
     @FXML
-    private Text textDialog;
+    private Text dialog;
 
     @FXML
     private ImageView displayPicture;
@@ -50,11 +50,9 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        dialog.setWrapText(true);
-        dialog.setMaxWidth(Double.MAX_VALUE);
-
         alignDialogBoxBasedOnSpeaker(isDukeSpeaking);
         circleCropDisplayPicture(speakerImage);
+        displayPicture.setImage(speakerImage);
     }
 
     /**
@@ -64,9 +62,9 @@ public class DialogBox extends HBox {
      */
     private void alignDialogBoxBasedOnSpeaker(boolean isDukeSpeaking) {
         if (isDukeSpeaking) {
-            dialog.setAlignment(Pos.TOP_LEFT);
+            dialog.setTextAlignment(TextAlignment.LEFT);
         } else {
-            dialog.setAlignment(Pos.TOP_RIGHT);
+            dialog.setTextAlignment(TextAlignment.RIGHT);
         }
     }
 
@@ -76,7 +74,9 @@ public class DialogBox extends HBox {
      * @param speakerImage
      */
     private void circleCropDisplayPicture(Image speakerImage) {
-        Rectangle crop = createCircleCrop();
+
+
+        Rectangle crop = createCircleCrop(speakerImage);
         displayPicture.setClip(crop);
         displayPicture.setImage(speakerImage);
     }
@@ -86,10 +86,10 @@ public class DialogBox extends HBox {
      *
      * @return rectangle crop
      */
-    private Rectangle createCircleCrop() {
+    private Rectangle createCircleCrop(Image image) {
+
         double pictureWidth = displayPicture.getFitWidth();
         double pictureHeight = displayPicture.getFitHeight();
-
         Rectangle rectangle = new Rectangle(pictureWidth, pictureHeight);
         rectangle.setArcHeight(pictureHeight);
         rectangle.setArcWidth(pictureWidth);
@@ -100,7 +100,7 @@ public class DialogBox extends HBox {
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
-    private void flip() {
+    private void flipDialogBoxContentAlignment() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
@@ -127,8 +127,19 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var dialogBox = new DialogBox(text, img, true);
-        dialogBox.flip();
+        dialogBox.flipDialogBoxContentAlignment();
         return dialogBox;
     }
 
 }
+
+//
+//<Label fx:id="dialog" alignment="TOP_RIGHT" contentDisplay="CENTER" lineSpacing="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Label" textAlignment="JUSTIFY" wrapText="true">
+//
+//<font>
+//<Font size="18.0" />
+//</font>
+//<padding>
+//<Insets left="5.0" right="5.0" />
+//</padding>
+//</Label>

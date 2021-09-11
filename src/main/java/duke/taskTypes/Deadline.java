@@ -25,7 +25,7 @@ public class Deadline extends Task{
     public Deadline(String input, boolean isDone) throws DukeException {
         super(isDone);
         List<String> formattedInput = formatInput(input);
-
+        System.out.println(formattedInput);
         boolean isMissingDescriptionTimestamp = formattedInput.size() == 0;
         boolean isMissingTimestamp = formattedInput.size() == 1;
 
@@ -50,7 +50,6 @@ public class Deadline extends Task{
      * @return list
      */
     private List<String> formatInput(String input) {
-        System.out.println(input);
         return Pattern.compile("/by")
                 .splitAsStream(input)
                 .map(String::trim)

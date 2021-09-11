@@ -3,9 +3,7 @@ package duke.gui;
 import duke.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -49,7 +47,7 @@ public class MainWindow extends AnchorPane {
         dialogContainer.heightProperty()
                 .addListener((observable) -> scrollPane.setVvalue(1.0));
         dialogContainer.autosize();
-
+        userInput.setText("Say something to duke");
     }
 
     /**
@@ -76,6 +74,12 @@ public class MainWindow extends AnchorPane {
         checkExit();
     }
 
+//    @FXML
+//    private void handleAddEvent() throws InterruptedException {
+//        runAddDialogPopup();
+//    }
+
+
     /**
      * Add user and duke response into dialog container
      *
@@ -90,6 +94,17 @@ public class MainWindow extends AnchorPane {
         this.dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeStringInput, dukeImage));
         this.userInput.clear();
     }
+
+//    /**
+//     * Popup Dialog
+//     */
+//    private void runAddDialogPopup() {
+//        Dialog<ButtonType> popup = new Dialog<>();
+//        popup.showAndWait();
+//    }
+
+
+
 
     /**
      * Check whether to continue duke operations

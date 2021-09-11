@@ -1,9 +1,13 @@
 package duke.taskTypes;
 
 import duke.exception.DukeException;
+import duke.exception.InvalidFormatException;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Task class that sets description of task, date, time
@@ -30,12 +34,26 @@ public class Todo extends Task{
         return "T";
     }
 
-    private List<String> formatInput(String input) {
+    private List<String> formatInput(String input) throws DukeException {
+        checkIfHaveTimeIncluded(input.trim());
         return Arrays.asList(input.trim(), getEmptyTime());
     }
 
     private String getEmptyTime() {
         return null;
+    }
+
+
+    private void checkIfHaveTimeIncluded(String input) throws DukeException {
+        String[] userInputArray = input.split(" ");
+        for (String word : userInputArray) {
+            if (word.equals("/by")) {
+                throw new InvalidFormatException("todo does not have /by");
+            }
+            if (word.equals("/at")) {
+                throw new InvalidFormatException("todo does not have /at");
+            }
+        }
     }
 
 

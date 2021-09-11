@@ -2,6 +2,7 @@ package duke.taskTypes;
 
 import duke.exception.*;
 
+import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -57,7 +58,6 @@ public class Task {
 
         try {
             String[] formattedDateTime = formatDateTime(input);
-            assert formattedDateTime.length == 2;
             setDate(formattedDateTime);
             setTime(formattedDateTime);
         } catch (DateTimeParseException e) {

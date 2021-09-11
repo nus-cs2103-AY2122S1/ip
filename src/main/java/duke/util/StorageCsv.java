@@ -49,7 +49,9 @@ public class StorageCsv implements Storage {
         try {
             Scanner scanner = new Scanner(csvFile);
             scanner.nextLine();
+
             while (scanner.hasNextLine()) {
+
                 String line = scanner.nextLine();
 
                 List<String> fields = new ArrayList<>();
@@ -102,8 +104,12 @@ public class StorageCsv implements Storage {
     public void saveUpdateTask(TaskList taskList) throws DukeException {
         String[] currentState = taskList.saveStateCsv();
         try {
+            // Deletes past history
+            FileWriter fileWriter = new FileWriter(csvFile,false);
+            fileWriter.write(System.lineSeparator());
 
-            FileWriter fileWriter = new FileWriter(csvFile, true);
+            // Updates the history with current state of taskList
+            fileWriter = new FileWriter(csvFile, true);
             fileWriter.write(System.lineSeparator());
             for( String msg : currentState){
                 fileWriter.write(msg);

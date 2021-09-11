@@ -26,6 +26,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
             setPrimaryScene(primaryStage);
             setupMainWindow();
+            primaryStage.setOnHiding( event ->  setupCloseEvent());
             primaryStage.show();
     }
 
@@ -50,6 +51,11 @@ public class Main extends Application {
     private void setupMainWindow() {
         fxmlLoader.<MainWindow>getController().setDuke(duke);
         fxmlLoader.<MainWindow>getController().setScrollPane();
+    }
+
+    private void setupCloseEvent() {
+        System.out.println("Closing Stage");
+        duke.saveOnClosed();
     }
 
 }

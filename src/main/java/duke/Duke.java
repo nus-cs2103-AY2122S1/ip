@@ -6,7 +6,6 @@ import duke.exception.DukeException;
 
 import duke.util.Parser;
 import duke.util.Storage;
-import duke.util.StorageTxt;
 import duke.util.StorageCsv;
 import duke.util.TaskList;
 
@@ -17,9 +16,9 @@ import java.util.Scanner;
  */
 public class Duke {
 
-    private final Parser parser;
-    private final TaskList taskList;
-    private final Storage storage;
+    private final TaskList taskList = new TaskList();;
+    private final Storage storage = new StorageCsv("src/main/java/savedOutput");;
+    private final Parser parser = new Parser(storage, taskList);
     private boolean isBye;
 
     /**
@@ -28,11 +27,15 @@ public class Duke {
      * @throws DukeException
      */
     public Duke(){
-//        storage = new StorageTxt("src/main/java/resources");
-        storage = new StorageCsv("src/main/java/resources");
-        taskList = new TaskList();
-        parser = new Parser(storage, taskList);
         parser.loadTask();
+    }
+
+    public void saveOnClosed() {
+        try {
+            this.storage.saveUpdateTask(taskList);
+        } catch (DukeException e) {
+            System.out.println(e.toString());
+        }
     }
 
     /**
