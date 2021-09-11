@@ -114,7 +114,7 @@ public class Ui {
     }
 
 
-     * Returns the appropriate response as per the command given
+     /** Returns the appropriate response as per the command given
      * @param command           the command entered
      * @param description       the description of the task
      * @return                  response from duke
