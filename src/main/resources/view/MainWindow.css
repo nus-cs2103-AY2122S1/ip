@@ -1,6 +1,17 @@
 .disableFocus {
-        -fx-focus-color: -fx-control-inner-background ;
+    -fx-focus-color: -fx-control-inner-background ;
     -fx-faint-focus-color: -fx-control-inner-background ;
+}
+
+#header {
+    -fx-background-color: #3f3f3f;
+    -fx-background-size: 100% 100%;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+#title {
+    -fx-image: url("../images/title.png");
+    -fx-background-color: transparent;
 }
 
 #sendButton {
