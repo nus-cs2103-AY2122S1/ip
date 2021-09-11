@@ -69,7 +69,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        char statusIcon = this.isDone ? 'X' : ' ';
+        char statusIcon = isDone ? '\u2713' : ' ';
         String timeString = Utility.DATE_MED_FORMATTER.format(this.on);
 
         return String.format("[%c] Event: %s (on: %s)",

@@ -42,7 +42,7 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        char statusIcon = this.isDone ? 'X' : ' ';
+        char statusIcon = isDone ? '\u2713' : ' ';
         return String.format("[%c] ToDo: %s", statusIcon, this.description);
     }
 

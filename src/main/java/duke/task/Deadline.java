@@ -71,7 +71,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        char statusIcon = this.isDone ? 'X' : ' ';
+        char statusIcon = isDone ? '\u2713' : ' ';
         String timeString = Utility.DATE_MED_FORMATTER.format(this.by);
 
         return String.format("[%c] Deadline: %s (by: %s)",

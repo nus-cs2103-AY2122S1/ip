@@ -46,7 +46,7 @@ public class Task implements Serializable {
 
     @Override
     public String toString() {
-        char statusIcon = this.isDone ? 'X' : ' ';
+        char statusIcon = isDone ? '\u2713' : ' ';
         return String.format("[%c] %s", statusIcon, this.description);
     }
 
