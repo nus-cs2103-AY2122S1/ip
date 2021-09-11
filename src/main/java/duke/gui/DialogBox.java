@@ -71,7 +71,7 @@ public class DialogBox extends HBox {
      * Gets the dialog box for the AI.
      *
      * @param text String that is the AI's response to commands.
-     * @param img The AI's profile iamge.
+     * @param img The AI's profile image.
      * @return Dialog to be displayed.
      */
     public static DialogBox getDukeDialog(String text, Image img) {

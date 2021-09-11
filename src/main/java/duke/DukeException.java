@@ -19,6 +19,9 @@ public class DukeException extends IllegalArgumentException {
         case "empty command":
             errorString = "Enter the command.";
             break;
+        case "empty task list":
+            errorString = "You have no tasks to begin with...";
+            break;
         case "invalid task index":
             errorString = "Can you actually PLEASE enter a valid task index???";
             break;

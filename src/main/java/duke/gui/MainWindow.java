@@ -41,7 +41,7 @@ public class MainWindow extends AnchorPane {
      */
     public void greetUser() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(
-            "Good Day! I'm The Terminator\nWhat can I do for you?", dukeImage));
+            "Good Day! I'm The Terminator\nWhat can I do for you?\n\n" + getCommandList(), dukeImage));
     }
 
     private void byeUser() {
@@ -67,5 +67,26 @@ public class MainWindow extends AnchorPane {
             );
             userInput.clear();
         }
+    }
+
+    /**
+     * Get a list of available commands.
+     *
+     * @return String of commands and descriptions.
+     */
+    public static String getCommandList() {
+        String output = "Command List:\n"
+            + "1. list -> Get a list of your tasks.\n"
+            + "2. todo [task description] -> Add a todo task.\n"
+            + "3. deadline [task description] /by [datetime] -> Add a deadline task with a deadline.\n"
+            + "4. event [task description] /at [date] [start time]-[end time] -> Add an event task with a duration.\n"
+            + "5. done [task number] -> Mark the task as done.\n"
+            + "6. delete [task number] -> Delete the task.\n"
+            + "7. find [task description] -> Get a list of matching tasks.\n"
+            + "8. commands -> Get a list of available commands.\n"
+            + "9. bye -> Goodbye Human :)\n\n"
+            + "You can also add /weekly or /daily "
+            + "+ [no. of repetition] behind deadline task type to add recurring tasks.";
+        return output;
     }
 }
