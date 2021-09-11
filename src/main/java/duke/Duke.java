@@ -2,8 +2,6 @@ package duke;
 
 import duke.commands.Command;
 
-import java.util.Scanner;
-
 /**
  * Class that contains Duke
  *
@@ -29,40 +27,23 @@ public class Duke {
         try {
             this.taskList = this.storage.readTasks();
         } catch (DukeException e) {
-            ui.loadErrorMessage();
             taskList = new TaskList();
         }
     }
 
     /**
-     * Method that starts Duke
+     * Method that returns a String to be displayed as duke's response
      *
+     * @param input The input string that the user enters
+     * @return The response string that duke gives to be displayed
      */
-    public void run() {
-        Scanner scanner = new Scanner(System.in);
-        ui.startMessage();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String strCommand = scanner.nextLine();
-                ui.showLine();
-                Command command = Parser.parse(strCommand);
-                command.execute(taskList, ui, storage);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                ui.errorMessage(e);
-            }
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(taskList, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
-    }
 
-    /**
-     * Main method that starts Duke
-     *
-     * @param args Command line for arguments passed
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke("tasklist.txt");
-        duke.run();
     }
 }

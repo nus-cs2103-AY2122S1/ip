@@ -23,25 +23,16 @@ public class ExitCommand extends Command {
      * @param taskList The list of tasks that is associated with the instance of Duke
      * @param ui The UI that is associated with the instance of Duke
      * @param storage The storage that is associated with the instance of Duke
+     * @return Duke's String response
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, DukeStorage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, DukeStorage storage) throws DukeException {
         try {
-            ui.byeMessage();
             storage.writeTasks(taskList);
+            return ui.byeMessage();
         } catch (DukeException error) {
-            System.out.println(error.getMessage());
+            return (error.getMessage());
         }
-    }
-
-    /**
-     * Method that returns boolean depending on if Duke is to be exited
-     *
-     * @return boolean that returns true
-     */
-    @Override
-    public boolean isExit() {
-        return true;
     }
 }

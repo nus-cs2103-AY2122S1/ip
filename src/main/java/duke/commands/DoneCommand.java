@@ -30,25 +30,16 @@ public class DoneCommand extends Command {
      * @param taskList The list of tasks that is associated with the instance of Duke
      * @param ui The UI that is associated with the instance of Duke
      * @param storage The storage that is associated with the instance of Duke
+     * @return Duke's String response
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, DukeStorage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, DukeStorage storage) throws DukeException {
         if (this.index < 1 || this.index > taskList.size()) {
             throw new DukeException("OOPS!!! Please enter a valid index number :(\n");
         }
 
         Task done = taskList.setDone(index);
-        ui.doneMessage(done);
-    }
-
-    /**
-     * Method to return boolean depending on if Duke is to be exited
-     *
-     * @return boolean that returns false
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+        return ui.doneMessage(done);
     }
 }

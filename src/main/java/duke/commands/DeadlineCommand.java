@@ -37,22 +37,13 @@ public class DeadlineCommand extends Command {
      * @param taskList The list of tasks that is associated with the instance of Duke
      * @param ui The UI that is associated with the instance of Duke
      * @param storage The storage that is associated with the instance of Duke
+     * @return Duke's String response
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, DukeStorage storage) {
+    public String execute(TaskList taskList, Ui ui, DukeStorage storage) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         Deadline deadline = new Deadline(description, byDateTime.format(formatter));
         taskList.add(deadline);
-        ui.addedMessage(taskList, deadline);
-    }
-
-    /**
-     * Method to return boolean depending on if Duke is to be exited
-     *
-     * @return boolean that returns false
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+        return ui.addedMessage(taskList, deadline);
     }
 }
