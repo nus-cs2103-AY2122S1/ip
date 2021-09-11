@@ -8,6 +8,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.task.TimedTask;
 import duke.task.Todo;
 
 /**
@@ -18,6 +19,7 @@ public class Parser {
     private static final String LIST_MESSAGE = "Here are the tasks in your list:\n";
     private static final String DONE_MESSAGE = "Nice! I've marked this task as done:\n";
     private static final String TODO_MESSAGE = "Got it. I've added this task:\n";
+    private static final String SNOOZE_MESSAGE = "Okay, I've snoozed this task:\n";
     private static final String DELETE_MESSAGE = "Noted. I've removed this task:\n";
     private static final String FIND_MESSAGE = "Here are the matching tasks in your list:\n";
 
@@ -43,6 +45,7 @@ public class Parser {
         String[] taskItems;
         String taskName;
         Task task;
+        int intParam;
         StringBuilder output = new StringBuilder();
 
         switch (command) {
@@ -61,10 +64,10 @@ public class Parser {
         case "list":
             List<String> enumerate = taskList.enumerate();
 
+            output.append(LIST_MESSAGE);
             for (String currentTaskName : enumerate) {
                 output.append(currentTaskName).append(System.lineSeparator());
             }
-            output.append(LIST_MESSAGE);
             output.append("There are currently ").append(taskList.getSize()).append(" tasks in your list.");
             break;
         case "find":
@@ -87,6 +90,7 @@ public class Parser {
             }
 
             output.append(TODO_MESSAGE);
+            output.append(taskList.get(taskList.getSize()));
             output.append(String.format("Now you have %d tasks in the list.\n", taskList.getSize()));
             break;
         case "event":
@@ -101,11 +105,28 @@ public class Parser {
             }
 
             output.append(TODO_MESSAGE);
+            output.append(taskList.get(taskList.getSize()));
             output.append(String.format("Now you have %d tasks in the list.\n", taskList.getSize()));
+            break;
+        case "snooze":
+            assert param != null;
+            taskItems = param.split(" /to ", 2);
+            intParam = Integer.parseInt(taskItems[0].strip()) - 1;
+
+            if (!(taskList.get(intParam) instanceof TimedTask)) {
+                output.append("Error: This is not a TimedTask.");
+                break;
+            }
+
+            TimedTask taskToBeChanged = (TimedTask) taskList.get(intParam);
+            taskToBeChanged.changeDate(taskItems[1].strip());
+
+            output.append(SNOOZE_MESSAGE);
+            output.append(taskList.get(intParam)).append(System.lineSeparator());
             break;
         case "done":
             assert param != null;
-            int intParam = Integer.parseInt(param) - 1;
+            intParam = Integer.parseInt(param) - 1;
             taskList.get(intParam).markAsDone();
 
             output.append(DONE_MESSAGE);
