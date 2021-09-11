@@ -33,6 +33,9 @@ Remove tasks from the task list.
 
 Filters event and deadline tasks by their inputted dates. Options are available for filtering of only events, deadlines, or both.
 
+### Automatically saves tasks
+
+Automatically saves task list to local memory after every command.
 ***
 
 ## Usage
@@ -188,7 +191,7 @@ Noted. I've marked this task as done:
 ```
 <br>
 
-### `delete <index>` - Marks a task as done
+### `delete <index>` - Deletes a task
 
 Deletes a task at a given index.
 
