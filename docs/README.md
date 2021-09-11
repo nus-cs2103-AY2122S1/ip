@@ -2,28 +2,30 @@
 
 ## Features 
 
-### Feature-ABC
+### Types of task
 
-Description of the feature.
+1. Todo
+2. Deadline
+3. Event
+4. Recurring task
 
-### Feature-XYZ
+## Command
 
-Description of the feature.
+### List all the tasks
+    list
 
-## Usage
+### Add task command
+    1. Todo: todo [task name]
+    2. Deadline: deadline [task name] /by [task time]
+    3. Event: event [task name] /at [task time]
+    4. Recurring task: recur [task name] /at [task time] /[task counter]
 
-### `Keyword` - Describe action
+### Mark a task as done
+    done [task index]
 
-Describe the action and its outcome.
+### Delete a task
+    delete [task index]
 
-Example of usage: 
+### Find a class by task name
+    find [task name]
 
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
-
-```
-expected output
-```
