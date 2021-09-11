@@ -1,7 +1,8 @@
 package dialog;
 
-import command.InvalidTimeFormatException;
+import command.exceptions.InvalidTimeFormatException;
 
+import dialog.exceptions.DialogException;
 import parser.Parser;
 import task.Task;
 import task.TimeTask;
@@ -93,7 +94,7 @@ public class TaskDialog extends Dialog {
      * @throws DialogException dialog cannot have the same id while the app is running
      */
     public void addTask(Task task) throws DialogException {
-        Dialog addDialog = Dialog.generate(Integer.toString(task.hashCode()));
+        Dialog addDialog = Dialog.generate(task.getDescription());
         taskList.add(task);
         addDialog.add("Got it. I've added this task:");
         addDialog.add("  " + task);
@@ -148,48 +149,42 @@ public class TaskDialog extends Dialog {
      * Mark the task in TaskList with the specified index and print feedback to the user
      *
      * @param index the index of the Task in TaskList in this TaskDialog to mark as done
-     * @throws IndexOutOfBoundsException illegal index
-     * @throws DialogException           dialog cannot have the same id while the app is running
+     * @throws DialogException dialog cannot have the same id while the app is running
      */
-    public void markTaskAsDone(int index) throws IndexOutOfBoundsException, DialogException {
-        if (index < 0 || index > this.taskList.length()) {
-            throw new IndexOutOfBoundsException();
-        } else {
-            Task task = taskList.get(index);
-            task.markAsDone();
-            String id = "markAsDone" + task.hashCode();
-            Dialog markAsDoneDialog = Dialog.generate(id);
-            markAsDoneDialog.add("Nice! I've marked this task as done:");
-            markAsDoneDialog.add("  " + task);
-            chatPage.printAlicely(markAsDoneDialog.toString());
+    public void markTaskAsDone(int index) throws DialogException {
+        assert index < 0 || index > this.taskList.length() : "Index out of bound";
+        Task task = taskList.get(index);
+        task.markAsDone();
+        String id = "markAsDone" + task.hashCode();
+        Dialog markAsDoneDialog = Dialog.generate(id);
+        markAsDoneDialog.add("Nice! I've marked this task as done:");
+        markAsDoneDialog.add("  " + task);
+        chatPage.printAlicely(markAsDoneDialog.toString());
 
-            // allow duplicates later
-            Dialog.archive.remove(id);
-        }
+        // allow duplicates later
+        Dialog.archive.remove(id);
+
     }
 
     /**
      * Delete the task by index and print feedback to the user
      *
      * @param index the index of the task to be deleted in TaskList of this TaskDialog
-     * @throws IndexOutOfBoundsException illegal index
-     * @throws DialogException           dialog cannot have the same id while the app is running
+     * @throws DialogException dialog cannot have the same id while the app is running
      */
-    public void deleteTaskByIndex(int index) throws IndexOutOfBoundsException, DialogException {
-        if (index < 0 || index > this.taskList.length()) {
-            throw new IndexOutOfBoundsException();
-        } else {
-            Task task = taskList.get(index);
-            taskList.remove(index);
-            String id = "remove" + task.hashCode();
-            Dialog removeDialog = Dialog.generate(id);
-            removeDialog.add("Noted. I've removed this task:");
-            removeDialog.add("  " + task);
-            removeDialog.add("Now you have " + this.taskList.length() + " tasks in the list.");
-            chatPage.printAlicely(removeDialog.toString());
-            Dialog.archive.remove(id);
-            Dialog.archive.remove(task.toString());
-        }
+    public void deleteTaskByIndex(int index) throws DialogException {
+        assert index < 0 || index > this.taskList.length() : "Index out of bound";
+        Task task = taskList.get(index);
+        taskList.remove(index);
+        String id = "remove" + task.hashCode();
+        Dialog removeDialog = Dialog.generate(id);
+        removeDialog.add("Noted. I've removed this task:");
+        removeDialog.add("  " + task);
+        removeDialog.add("Now you have " + this.taskList.length() + " tasks in the list.");
+        chatPage.printAlicely(removeDialog.toString());
+        Dialog.archive.remove(id);
+        Dialog.archive.remove(task.toString());
+
     }
 
 

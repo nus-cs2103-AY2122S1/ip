@@ -1,9 +1,8 @@
 package storage;
 
-import dialog.DialogException;
+import dialog.exceptions.DialogException;
 import parser.Parser;
 import task.TaskList;
-import ui.Ui;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -62,7 +61,7 @@ public class Storage {
      * Constructor using the specified fileName as the name of the save file to read and write to
      *
      * @param fileName the name of the file without file type suffix
-     * @throws DialogException dialog cannot have the same id while the app is running
+     * @throws IOException there is error registering writer and reader
      */
     public Storage(String fileName) throws IOException {
         // the save file to be used as simple text file in this update

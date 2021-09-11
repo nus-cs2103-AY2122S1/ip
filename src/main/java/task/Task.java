@@ -1,5 +1,7 @@
 package task;
 
+import java.util.Objects;
+
 /**
  * Abstract class for Task.
  * The task is made of description and whether it is done or not.
@@ -67,6 +69,11 @@ public abstract class Task {
     /** mark the current task as done. */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description);
     }
 
     /**

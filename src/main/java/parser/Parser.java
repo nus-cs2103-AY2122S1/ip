@@ -1,9 +1,9 @@
 package parser;
 
-import alice.AliceException;
+import alice.exceptions.AliceException;
 
 import command.Command;
-import command.InvalidTimeFormatException;
+import command.exceptions.InvalidTimeFormatException;
 
 import task.Deadline;
 import task.Event;
