@@ -8,6 +8,7 @@ import javafx.application.Application;
  * @author Jay Aljelo Saez Ting
  */
 public class Chad {
+
     /**
      * Runs the Chad chatbot.
      *

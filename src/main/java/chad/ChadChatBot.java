@@ -41,14 +41,14 @@ public class ChadChatBot extends Application {
             Command command = commandParser.getCommandInstance(input);
             command.execute(taskHandler, ui);
             if (hasErrorOnSave) {
-                ui.printUnexpectedErrorMessage();
+                ui.displayUnexpectedErrorMessage();
                 Platform.exit();
             }
             if (command.mustExit()) {
                 Platform.exit();
             }
         } catch (ChadInvalidCommandException e) {
-            ui.printInvalidCommandErrorMessage(e.getMessage());
+            ui.displayInvalidCommandErrorMessage(e.getMessage());
         }
     }
 
@@ -61,11 +61,11 @@ public class ChadChatBot extends Application {
             initialiseStage(stage, scene);
             initialiseComponents(fxmlLoader);
             stage.show();
-            ui.printGreeting();
+            ui.displayGreeting();
         } catch (IOException e) {
             e.printStackTrace();
             if (ui != null) {
-                ui.printUnexpectedErrorMessage();
+                ui.displayUnexpectedErrorMessage();
             }
             Platform.exit();
         }

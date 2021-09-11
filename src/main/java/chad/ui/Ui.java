@@ -106,11 +106,11 @@ public class Ui extends AnchorPane {
         }
 
         /**
-         * Displays the message in with formatting.
+         * Displays the message.
          */
-        public void printFormatted() {
+        public void displayMessage() {
             String message = messageSb.toString().stripTrailing();
-            displayMessage(message);
+            Ui.this.displayMessage(message);
         }
     }
 
@@ -157,14 +157,14 @@ public class Ui extends AnchorPane {
     /**
      * Displays the greeting.
      */
-    public void printGreeting() {
+    public void displayGreeting() {
         displayMessage(GREETING_MESSAGE);
     }
 
     /**
      * Displays the generic error message for unexpected errors.
      */
-    public void printUnexpectedErrorMessage() {
+    public void displayUnexpectedErrorMessage() {
         displayErrorMessage(UNEXPECTED_ERROR_MESSAGE);
     }
 
@@ -173,14 +173,14 @@ public class Ui extends AnchorPane {
      *
      * @param message The error message.
      */
-    public void printInvalidCommandErrorMessage(String message) {
+    public void displayInvalidCommandErrorMessage(String message) {
         displayErrorMessage(String.format(INVALID_COMMAND_ERROR_TEMPLATE, message));
     }
 
     /**
      * Displays the exit message.
      */
-    public void printExitMessage() {
+    public void displayExitMessage() {
         displayMessage(EXIT_MESSAGE);
     }
 
