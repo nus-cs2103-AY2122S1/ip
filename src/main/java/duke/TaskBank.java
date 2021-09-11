@@ -40,7 +40,7 @@ public class TaskBank {
     public void addTask(String formattedString, Function<String, ? extends Task> create) {
         Task e = create.apply(formattedString);
         this.taskList.add(e);
-        Ui.print(String.format("added: %s", e));
+        Ui.print(String.format("Accepted, I've added the following task\n%s", e));
         this.storage.writeToDisk(this.taskList);
     }
 
@@ -56,9 +56,9 @@ public class TaskBank {
             taskId = Utility.getIdFromString(input, "done ");
             Task t = this.taskList.get(taskId - 1);
             t.markAsDone();
-            Ui.print("Cool, I've marked this duke.task as done\n" + t);
+            Ui.print("Approved, I've marked this duke.task as done\n" + t);
         } catch (IndexOutOfBoundsException e) {
-            Ui.print(String.format("Oops, Task.Task #%d doesn't exist\n", taskId));
+            Ui.print(String.format("Nonsense, Task.Task #%d doesn't exist\n", taskId));
         }
         this.storage.writeToDisk(this.taskList);
     }
@@ -75,9 +75,9 @@ public class TaskBank {
             taskId = Utility.getIdFromString(input, "delete ");
             Task t = this.taskList.get(taskId - 1);
             this.taskList.remove(taskId - 1);
-            Ui.print("Okay, I've removed this duke.task\n" + t);
+            Ui.print("Approved, I've removed this duke.task\n" + t);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(String.format("Oops, Task.Task #%d doesn't exist\n", taskId));
+            throw new DukeException(String.format("Nonsense, Task.Task #%d doesn't exist\n", taskId));
         }
         this.storage.writeToDisk(this.taskList);
     }

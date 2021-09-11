@@ -37,7 +37,7 @@ public class Duke {
     private static void parseInput(String input) {
         String keyword = input.split(" ", 2)[0];
         if (!commandTable.containsKey(keyword)) {
-            Ui.print("Oops, I'm not sure what you mean");
+            Ui.print("I cannot understand you");
             return;
         }
 

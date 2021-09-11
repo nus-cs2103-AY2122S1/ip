@@ -24,14 +24,7 @@ public class Ui extends Application {
      * Get Duke to send a welcome message.
      */
     private static void welcomeMessage() {
-        print("Greetings");
-    }
-
-    /**
-     * Get Duke to send a goodbye message.
-     */
-    public static void goodbyeMessage() {
-        print("Bye. Hope to see you soon!");
+        print("Greetings, my subject.");
     }
 
     /**
@@ -83,5 +76,7 @@ public class Ui extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        Ui.welcomeMessage();
     }
 }
