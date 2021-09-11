@@ -3,8 +3,9 @@
 Duke is a chatbot for managing tasks through a CLI.
 
 ## Getting Started
-1. Download the JAR file from build/libs
-2. Use the `java -jar` to run the JAR file
+1. Download the JAR file from [here](https://github.com/jovyntls/ip/releases/tag/A-Release)
+2. Use the `java -jar` command to run the JAR file
+3. A duke_storage.txt file will be created in the same directory as the JAR file; this is used to store data locally.
 
 ## Features
 
