@@ -36,7 +36,7 @@ public abstract class Task {
     }
 
     /**
-     * Change status of task such that is is mark as done.
+     * Changes status of task such that it is mark as done.
      */
     public void markDone() {
         this.isDone = true;

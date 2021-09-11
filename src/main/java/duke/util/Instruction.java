@@ -23,7 +23,7 @@ public enum Instruction {
     }
 
     /**
-     * Look up an enum value by our label field.
+     * Looks up an enum value by our label field.
      *
      * @param label command that user input.
      * @return a Command that corresponds to user input. Returns INVALID if input does not match any Commands.
