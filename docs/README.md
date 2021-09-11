@@ -13,7 +13,7 @@ their tasks through text-based interaction with a GUI (Graphical User Interface)
 
 1. [Quick Start](#quick-start)
 2. [Features](#features)
-3. [Usage](#user-guide)
+3. [Usage](#usage)
 
 ## Quick Start
 
