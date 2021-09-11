@@ -22,7 +22,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 //@@author wanyu-l-reused
-//Reused from https://se-education.org/guides/tutorials/javaFxPart3.html
+//Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
 // with minor modifications
 public final class DialogBox extends HBox {
     @FXML

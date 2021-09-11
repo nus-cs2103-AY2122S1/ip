@@ -24,6 +24,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import parser.Parser;
 
+
+//@@author wanyu-l-reused
+//Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
+// with minor modifications
 /**
  * Controller for ui.MainWindow. Provides the layout for the other controls.
  */
@@ -42,14 +46,6 @@ public final class MainWindow extends AnchorPane {
     private Image userImage;
     private Image dukeImage;
     private Image icon;
-
-    /**
-     * Sets the stage as a class field for this instance of MainWindow.
-     * @param stage the input Stage
-     */
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
 
     @FXML
     private void initialize() {
@@ -75,10 +71,15 @@ public final class MainWindow extends AnchorPane {
             System.out.println("daUser image not found");
         }
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        //@@author
+
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.getWelcomeMessage(), dukeImage));
         checkAnyDueToday();
     }
 
+    //@@author wanyu-l-reused
+    //Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
+    // with minor modifications
     @FXML
     private void handleUserInput() {
         String inputText = userInput.getText();
@@ -98,6 +99,15 @@ public final class MainWindow extends AnchorPane {
                     DialogBox.getDukeDialog(Ui.getHelperMessage(), dukeImage));
         }
         userInput.clear();
+    }
+    //@@author
+
+    /**
+     * Sets the stage as a class field for this instance of MainWindow.
+     * @param stage the input Stage
+     */
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     private void checkAnyDueToday() {
