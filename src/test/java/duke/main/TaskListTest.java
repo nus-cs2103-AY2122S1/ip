@@ -2,6 +2,7 @@ package duke.main;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import javax.annotation.processing.SupportedSourceVersion;
 import org.junit.jupiter.api.Test;
 
 import duke.task.Deadline;
@@ -18,10 +19,14 @@ public class TaskListTest {
      * Tests the findTasksMatchingDate method.
      */
     @Test
-    public void findMatchingTasks_thirdOfSep_OneTask() {
+    public void findMatchingTasks() {
         tasks = new TaskList();
-        tasks.add(new Deadline("deadline submit report by 30/08/2021"));
-        tasks.add(new Event("event attend workshop at 03/09/2021"));
+        try {
+            tasks.add(new Deadline("deadline submit report by 30/08/2021"));
+            tasks.add(new Event("event attend workshop at 03/09/2021"));
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
         TaskList matchingTasks = tasks.findMatchingTasks("Sep 03");
         assertEquals(matchingTasks.getNumTasks(), 1);
     }
@@ -30,10 +35,14 @@ public class TaskListTest {
      * Tests the markDone method.
      */
     @Test
-    public void markDone_markSecondTaskDone_submitReportBy30Sep_void() {
+    public void markDone() {
         tasks = new TaskList();
-        tasks.add(new Deadline("deadline submit report by 30/08/2021"));
-        tasks.add(new Event("event attend workshop at 03/09/2021"));
+        try {
+            tasks.add(new Deadline("deadline submit report by 30/08/2021"));
+            tasks.add(new Event("event attend workshop at 03/09/2021"));
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
         Task taskMarkedDone = tasks.markDone(1);
         assertEquals(taskMarkedDone.toString(), "[E][X] attend workshop (at: Sep 03)");
     }

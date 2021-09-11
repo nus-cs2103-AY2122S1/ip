@@ -1,12 +1,17 @@
 package IP.duke.main;
 
-import IP.duke.task.Deadline;
-import IP.duke.task.Event;
-import IP.duke.task.Task;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.main.Date;
+import duke.main.DukeException;
+import duke.main.TaskList;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
 
 /**
  * Represents testing the TaskList class.
@@ -17,7 +22,7 @@ public class TaskListTest {
      * Represents a stub for TaskList class.
      */
     public class StubTaskList {
-        TaskList taskList;
+        private TaskList taskList;
         public StubTaskList() {
             try {
                 Task[] taskArray = new Task[] {new Event("event attend concert at 03/09/2021"),
@@ -36,7 +41,7 @@ public class TaskListTest {
 
         /**
          * Retrieves the list of tasks.
-         * 
+         *
          * @return taskList.
          */
         public TaskList getTaskListTest() {
@@ -55,12 +60,12 @@ public class TaskListTest {
          * Class constructor.
          */
         public DateStub() throws DukeException {
-            date = new Date("03/09/2021");    
+            date = new Date("03", "09", "2021");
         }
 
         /**
          * Gets date object.
-         * 
+         *
          * @return date of this dateStub.
          */
         public Date getDate() {

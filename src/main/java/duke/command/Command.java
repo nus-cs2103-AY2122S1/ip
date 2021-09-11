@@ -7,7 +7,7 @@ import duke.main.Ui;
 
 /**
  * Represents a command given by the user.
- * 
+ *
  * @author Gordon Yit
  * @version CS2103T, Semester 2
  */
@@ -16,15 +16,16 @@ public abstract class Command {
     private boolean isExitCommand;
 
     /**
-     * Class constructor. 
+     * Class constructor.
      */
     public Command() {
         isExitCommand = false;
+        assert !isExit() : "isExit should return false";
     }
 
     /**
      * Executes the given command.
-     * 
+     *
      * @param tasks lists of tasks
      * @param ui the user interface.
      * @param storage the storage file.
@@ -34,11 +35,10 @@ public abstract class Command {
 
     /**
      * Checks whether the command is an exit command.
-     * 
+     *
      * @return true if the command is an exit command, false otherwise.
      */
     public boolean isExit() {
         return isExitCommand;
     }
-    
 }

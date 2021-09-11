@@ -1,12 +1,9 @@
 package duke.task;
 
-import IP.duke.main.Date;
-import IP.duke.main.DukeException;
-
 import java.text.ParseException;
-import java.time.format.DateTimeParseException;
 
 import duke.main.Date;
+import duke.main.DukeException;
 
 /**
  * Represents tasks with deadline.
@@ -15,8 +12,11 @@ import duke.main.Date;
  * @version CS2103T, Semester 1
  */
 public class Deadline extends Task {
+    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     private final String TASK_MARKER = "D";
+    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     private final String TASK_KEYWORD = "deadline ";
+    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     private final String BY_KEYWORD = "by ";
     private String taskDescription;
     private Date dueDate;
@@ -34,6 +34,7 @@ public class Deadline extends Task {
         String deadlineDate = description.substring(startOfTimingIndex + BY_KEYWORD.length());
         String[] dateComponents = deadlineDate.split("/");
         dueDate = new Date(dateComponents);
+        assert !isDone : false;
     }
 
     /**
@@ -87,6 +88,7 @@ public class Deadline extends Task {
      */
     @Override
     public boolean isSameDate(String dateString) {
-        return this.dueDate.isSameDate(dateString);
+        assert dueDate != null : "dueDate must not be unassigned";
+        return dueDate.isSameDate(dateString);
     }
 }

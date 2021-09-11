@@ -1,18 +1,10 @@
 package duke.command;
 
 import duke.main.DukeException;
-<<<<<<< HEAD:src/main/java/duke/command/DeleteCommand.java
 import duke.main.Storage;
 import duke.main.TaskList;
 import duke.main.Ui;
 import duke.task.Task;
-
-=======
-import duke.task.Task;
-import duke.main.Storage;
-import duke.main.TaskList;
-import duke.main.Ui;
->>>>>>> branch-A-Level-10:src/main/java/IP/duke/command/DeleteCommand.java
 
 /**
  * Represents a duke.command to delete a duke.task.
@@ -30,7 +22,9 @@ public class DeleteCommand extends Command {
      * @param taskNumber the serial number of the duke.task.
      */
     public DeleteCommand(int taskNumber) {
+        super();
         this.TASK_NUM = taskNumber;
+        assert !isExit() : "isExit should return false";
     }
 
     /**
@@ -45,6 +39,7 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task deletedTask = tasks.delete(TASK_NUM - 1);
+            assert deletedTask != null : "the deleted task cannot be null";
             int numTasksRemaining = tasks.getNumTasks();
             return ui.showTaskDeleted(deletedTask, numTasksRemaining);
         } catch (IndexOutOfBoundsException e) {

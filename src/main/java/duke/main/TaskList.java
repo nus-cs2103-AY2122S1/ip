@@ -1,7 +1,5 @@
 package duke.main;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 
 import duke.task.Task;
@@ -65,6 +63,7 @@ public class TaskList {
      */
     public Task markDone(int taskIndex) throws IndexOutOfBoundsException {
         Task task = getTask(taskIndex);
+        assert task != null : "task cannot be null";
         task.markAsDone();
         return task;
     }
@@ -78,6 +77,7 @@ public class TaskList {
      */
     public Task delete(int taskIndex) throws IndexOutOfBoundsException {
         Task task = tasks.get(taskIndex);
+        assert task != null : "task deleted must exist";
         tasks.remove(task);
         return task;
     }
@@ -92,6 +92,7 @@ public class TaskList {
         TaskList matchingTasks = new TaskList();
         for (Task t : tasks) {
             if (t.toString().contains(searchPhrase)) {
+                assert t.toString().indexOf(searchPhrase) != 1 : "taskString must contain search phrase.";
                 matchingTasks.add(t);
             }
         }
@@ -104,6 +105,8 @@ public class TaskList {
      * @return size of tasks arraylist.
      */
     public int getNumTasks() {
-        return tasks.size();
+        int numTasks = tasks.size();
+        assert numTasks >= 0 : "number of tasks cannot be negative";
+        return numTasks;
     }
 }

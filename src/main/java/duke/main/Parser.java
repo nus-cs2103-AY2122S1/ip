@@ -17,8 +17,7 @@ import duke.command.MarkDoneCommand;
  */
 public class Parser {
     
-    public enum Commands { done, list, delete, filter, others};
-    
+    public enum Commands { done, list, delete, filter, others }
     private Parser() {
     }
     
@@ -47,6 +46,7 @@ public class Parser {
             case "bye":
                     return new ExitCommand();
             default:
+                    assert action != "bye" : "action is not bye";
                     return new AddCommand(command);
             }
         } catch (ArrayIndexOutOfBoundsException e) {

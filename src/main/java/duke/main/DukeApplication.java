@@ -1,25 +1,23 @@
 package duke.main;
 
+import duke.command.Command;
+
+
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.Region;
+import javafx.stage.Stage;
 
-import duke.main.Parser;
-import duke.command.Command;
-import duke.main.DukeException;
-import duke.main.Ui;
-import duke.main.Storage;
-import duke.main.TaskList;
+
+
+
 
 public class DukeApplication extends Application {
 
