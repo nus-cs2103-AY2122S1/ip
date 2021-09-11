@@ -56,7 +56,7 @@ public class TaskList {
         tasks.add(task);
         String res = "Got it. I've added this task: \n" +
                 "  " + task.toString() + "\n" +
-                "Now you have \" + tasks.size() + \" tasks in the tasks";
+                "Now you have " + tasks.size() + " tasks in the tasks";
 
         storage.addToFile(task.savedToString());
         return res;
@@ -87,7 +87,7 @@ public class TaskList {
         tasks.remove(index);
         String res = "Got it. I've removed this task: \n" +
                 "  " + task.toString() + "\n" +
-                "Now you have \" + tasks.size() + \" tasks in the list";
+                "Now you have " + tasks.size() + " tasks in the list";
 
         storage.removeFromFile(index);
         return res;

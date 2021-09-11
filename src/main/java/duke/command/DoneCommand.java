@@ -11,7 +11,7 @@ public class DoneCommand extends Command {
     private TaskList taskList;
     private int index;
 
-    public DoneCommand(TaskList taskList, int index) {
+    public DoneCommand(int index, TaskList taskList) {
         this.taskList = taskList;
         this.index = index;
     }

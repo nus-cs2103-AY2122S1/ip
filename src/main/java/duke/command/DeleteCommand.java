@@ -11,7 +11,7 @@ public class DeleteCommand extends Command {
     private TaskList taskList;
     private int index;
 
-    public DeleteCommand(TaskList taskList, int index) {
+    public DeleteCommand(int index, TaskList taskList) {
         this.taskList = taskList;
         this.index = index;
     }

@@ -1,5 +1,7 @@
 package duke;
 
+import duke.command.*;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -7,12 +9,22 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAdjusters;
 
-import java.util.HashMap;
 
 /**
  * The parser for Duke.
  */
 public class Parser {
+
+    /** The list of tasks */
+    private TaskList taskList;
+
+    /**
+     * Constructor for parser.
+     * @param taskList The list of tasks.
+     */
+    public Parser(TaskList taskList) {
+        this.taskList = taskList;
+    }
 
     /**
      * Returns a HashMap from the parsed user input string.
@@ -20,7 +32,7 @@ public class Parser {
      * @return HashMap from the parsed input {"command": "event", "description": "desc", ...}.
      * @throws DukeException An invalid user input will produce this exception.
      */
-    public HashMap<String, String> parseInput(String rawInput) throws DukeException {
+    public Command parseInput(String rawInput) throws DukeException {
         assert rawInput != null : "[duke.Parser.parseInput]: rawInput is null";
 
         String[] inputs = rawInput.split("\\s+");
@@ -35,16 +47,14 @@ public class Parser {
             throw new DukeException(DukeException.Errors.INVALID_COMMAND.toString());
         }
 
-        HashMap<String, String> parsedInput = new HashMap<>();
         switch (command) {
         case LIST:
             if (inputs.length != 1) {
                 throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString()
                         + " `list` command has no arguments");
             }
-            parsedInput.put("command", commandStr);
+            return new ListCommand(taskList);
 
-            break;
         case DONE:
             if (inputs.length != 2) {
                 throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString()
@@ -52,25 +62,21 @@ public class Parser {
             }
             try {
                 // Checks if the argument is a number.
-                Integer.parseInt(inputs[1]);
+                int index = Integer.parseInt(inputs[1]) - 1;
+                return new DoneCommand(index, taskList);
             } catch (Exception e) {
                 throw new DukeException(DukeException.Errors.WRONG_ARGUMENT_TYPE.toString()
                         + " (example: 'done 5')");
             }
-            parsedInput.put("command", commandStr);
-            parsedInput.put("index", inputs[1]);
 
-            break;
         case TODO:
             if (inputs.length < 2) {
                 throw new DukeException(DukeException.Errors.MISSING_DESCRIPTION.toString()
                         + " (example: 'todo watch Borat')");
             }
             String description = combineStringArray(inputs, 1, inputs.length);
-            parsedInput.put("command", commandStr);
-            parsedInput.put("description", description);
+            return new TodoCommand(description, taskList);
 
-            break;
         case DEADLINE:
             if (inputs.length < 2) {
                 throw new DukeException(DukeException.Errors.MISSING_DESCRIPTION.toString()
@@ -86,11 +92,8 @@ public class Parser {
                         + " (example: 'deadline watch Borat /by 2021-08-21 18:00')");
             }
             String date = parseDateTime(arguments[1]);
-            parsedInput.put("command", commandStr);
-            parsedInput.put("description", arguments[0]);
-            parsedInput.put("date", date);
+            return new DeadlineCommand(arguments[0], date, taskList);
 
-            break;
         case EVENT:
             if (inputs.length < 2) {
                 throw new DukeException(DukeException.Errors.MISSING_DESCRIPTION.toString()
@@ -105,20 +108,16 @@ public class Parser {
                 throw new DukeException(DukeException.Errors.INVALID_DATE.toString()
                         + " (example: 'event watch Borat /at 2021-08-21 18:00')");
             }
-            String dateTest = parseDateTime(args[1]);
-            parsedInput.put("command", commandStr);
-            parsedInput.put("description", args[0]);
-            parsedInput.put("date", dateTest);
+            String eventDate = parseDateTime(args[1]);
+            return new EventCommand(args[0], eventDate, taskList);
 
-            break;
         case BYE:
             if (inputs.length != 1) {
                 throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString()
                         + " `bye` command has no arguments");
             }
-            parsedInput.put("command", commandStr);
+            return new ByeCommand();
 
-            break;
         case DELETE:
             if (inputs.length != 2) {
                 throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString()
@@ -126,46 +125,39 @@ public class Parser {
             }
             try {
                 // Check if the argument is a number
-                Integer.parseInt(inputs[1]);
+                int index = Integer.parseInt(inputs[1]) - 1;
+                return new DeleteCommand(index, taskList);
             } catch (Exception e) {
                 throw new DukeException(DukeException.Errors.WRONG_ARGUMENT_TYPE.toString()
                         + " (example: 'delete 5')");
             }
-            parsedInput.put("command", commandStr);
-            parsedInput.put("index", inputs[1]);
 
-            break;
         case HELP:
             if (inputs.length != 1) {
                 throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString()
                         + " `help` command has no arguments");
             };
-            parsedInput.put("command", commandStr);
+            return new HelpCommand();
 
-            break;
         case DATES:
             if (inputs.length != 1) {
                 throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString()
                         + " `dates` command has no arguments");
             }
-            parsedInput.put("command", commandStr);
+            return new DatesCommand();
 
-            break;
         case FIND:
             if (inputs.length < 2) {
                 throw new DukeException(DukeException.Errors.MISSING_DESCRIPTION.toString()
                         + " (example: 'find book')");
             }
             String keyword = combineStringArray(inputs, 1, inputs.length);
-            parsedInput.put("command", commandStr);
-            parsedInput.put("keyword", keyword);
+            return new FindCommand(keyword, taskList);
 
-            break;
         default:
             // Invalid command
             throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString());
         }
-        return parsedInput;
     }
 
     /**
