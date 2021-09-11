@@ -26,6 +26,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Lollipop Chatbot");
 
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             String firstMessage = duke.initializeTaskList();
