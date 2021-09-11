@@ -39,7 +39,7 @@ public class Storage {
      */
     public void save() throws DukeException {
         try {
-            FileWriter fileWriter = new FileWriter(path + "\\data\\data.txt");
+            FileWriter fileWriter = new FileWriter(path + "/data/data.txt");
             fileWriter.write(list.toString());
             fileWriter.close();
         } catch (IOException e) {
@@ -56,7 +56,7 @@ public class Storage {
             checkPath();
 
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path
-                    + "\\data\\data.txt"));
+                    + "/data/data.txt"));
 
             String data = bufferedReader.readLine();
             String type;
@@ -84,20 +84,20 @@ public class Storage {
 
     private void checkPath() throws DukeException {
         try {
-            Path folderPath = Paths.get(path + "\\data");
-            Path filePath = Paths.get(path + "\\data\\data.txt");
+            Path folderPath = Paths.get(path + "/data");
+            Path filePath = Paths.get(path + "/data/data.txt");
 
             boolean hasDirectory = Files.exists(folderPath);
             boolean hasSaveFile = Files.exists(filePath);
 
             if (!hasDirectory) {
-                File folder = new File(path + "\\data");
-                File saveFile = new File(path + "\\data\\data.txt");
+                File folder = new File(path + "/data");
+                File saveFile = new File(path + "/data/data.txt");
 
                 folder.mkdir();
                 saveFile.createNewFile();
             } else if (!hasSaveFile) {
-                File saveFile = new File(path + "\\data\\data.txt");
+                File saveFile = new File(path + "/data/data.txt");
                 saveFile.createNewFile();
             }
         } catch (IOException e) {
