@@ -42,7 +42,7 @@ public class Ui {
     /**
      * Load the taskList to the Ui TaskDialog.
      *
-     * @param taskList the taskList to be imported
+     * @param taskList the taskList to be imported.
      */
     public void importTaskList(TaskList taskList) {
         this.taskDialog = (TaskDialog) TaskDialog.generate("taskList: " + taskList.hashCode(), taskList);
@@ -52,7 +52,7 @@ public class Ui {
      * Return the current taskDialog of the Ui object.
      * The TaskDialog equal to null if it has not loaded a TaskList yet.
      *
-     * @return taskDialog of the current Ui to be pass around to other method or fields
+     * @return taskDialog of the current Ui to be pass around to other method or fields.
      */
     public TaskDialog getTaskDialog() {
         return this.taskDialog;
@@ -61,8 +61,8 @@ public class Ui {
     /**
      * Static method for printing an error to the Ui.
      *
-     * @param exception the exception with its message to be printed to the user
-     * @throws DialogException the dialog cannot have the same id while the app is running
+     * @param exception the exception with its message to be printed to the user.
+     * @throws DialogException the dialog cannot have the same id while the app is running.
      */
     public static String getErrorText(Exception exception) {
         if (Dialog.containsId(exception.toString())) {
@@ -82,8 +82,8 @@ public class Ui {
     /**
      * Static method for printing to the user the current save file names in the system.
      *
-     * @throws DialogException the dialog cannot have the same id while the app is running
-     * @throws IOException     if there is any error dealing with the system IO
+     * @throws DialogException the dialog cannot have the same id while the app is running.
+     * @throws IOException     if there is any error dealing with the system IO.
      */
     public static String getSelectSaveFileText() throws DialogException, IOException {
         String dialogId = "selectSaveFile";
@@ -114,7 +114,7 @@ public class Ui {
     /**
      * Static method for printing to the user a welcome message and alice self-introduction.
      *
-     * @throws DialogException the dialog cannot have the same id while the app is running
+     * @throws DialogException the dialog cannot have the same id while the app is running.
      */
     public static String getWelcomeText() throws DialogException {
         String dialogId = "greeting";
@@ -130,8 +130,8 @@ public class Ui {
     /**
      * Static method for printing to the user a confirmation message if the user really want to create a new file.
      *
-     * @param fileName the filename to be printed along with the confirmation message
-     * @throws DialogException the dialog cannot have the same id while the app is running
+     * @param fileName the filename to be printed along with the confirmation message.
+     * @throws DialogException the dialog cannot have the same id while the app is running.
      */
     public static String getConfirmCreateNewFileText(String fileName) throws DialogException {
         String dialogId = "confirmCreateNewFile" + fileName;
@@ -147,7 +147,7 @@ public class Ui {
     /**
      * Static method for showing to the user the command in which alice can perform.
      *
-     * @throws DialogException the dialog cannot have the same id while the app is running
+     * @throws DialogException the dialog cannot have the same id while the app is running.
      */
     public static String getCommandListText() throws DialogException {
         String dialogId = "commands";
@@ -173,7 +173,7 @@ public class Ui {
         }
     }
 
-    /** Print to the user the taskList stored in the Ui in a taskDialog format */
+    /** Print to the user the taskList stored in the Ui in a taskDialog format. */
     public String getCurrentList() {
         return taskDialog.toString();
     }
@@ -181,7 +181,7 @@ public class Ui {
     /**
      * Static method for printing to the user a good bye message.
      *
-     * @throws DialogException the dialog cannot have the same id while the app is running
+     * @throws DialogException the dialog cannot have the same id while the app is running.
      */
     public static String getGoodByeText() throws DialogException {
         // a good bye will always be shown only once in this update
@@ -194,7 +194,7 @@ public class Ui {
      * Static method for quickly asking the user to input something to the Ui without storing it into the input
      * of the Ui and return it right away.
      *
-     * @return the String read by the Scanner until the next line
+     * @return the String read by the Scanner until the next line.
      */
     public static String fastRead() {
         System.out.print("> ");
@@ -204,7 +204,7 @@ public class Ui {
     /**
      * Read the command input by the user until the next line while storing the input in the Ui for future reference.
      *
-     * @return the input from the user
+     * @return the input from the user.
      */
     public String readCommand() {
         System.out.print("> ");
@@ -215,7 +215,7 @@ public class Ui {
     /**
      * The getter for the input stored in the Ui.
      *
-     * @return the input stored in the current ui object
+     * @return the input stored in the current ui object.
      */
     public String getLatestInput() {
         return this.input;

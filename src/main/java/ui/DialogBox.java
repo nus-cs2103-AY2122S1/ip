@@ -28,7 +28,6 @@ public class DialogBox extends HBox {
 
     /**
      * Constructor for the dialog box
-     *
      */
     public DialogBox(String text, Image image) {
         try {
@@ -59,23 +58,23 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Return a DialogBox object for user
+     * Return a DialogBox object for user.
      *
-     * @param l  label to print as the message
-     * @param iv image to use as the avatar
-     * @return DialogBox for user
+     * @param l  label to print as the message.
+     * @param iv image to use as the avatar.
+     * @return DialogBox for user.
      */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
     /**
-     * Return a DialogBox object for Alice
+     * Return a DialogBox object for Alice.
      *
-     * @return DialogBox for Alice
+     * @return DialogBox for Alice.
      */
     public static DialogBox getAliceDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
         db.flip();
         return db;
     }
