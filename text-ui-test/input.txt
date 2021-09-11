@@ -1,6 +1,6 @@
 invalid attempt
 todo
-todo a todo duke.task
+todo a todo jackie.task
 deadline
 deadline 1
 deadline cs2103t ip /thur 2359
