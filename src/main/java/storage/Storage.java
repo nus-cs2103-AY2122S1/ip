@@ -1,7 +1,13 @@
 package storage;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+
 import duke.DukeException;
 import tasks.DeadLineTask;
 import tasks.EventTask;
@@ -14,8 +20,8 @@ import ui.Ui;
  * of data stored locally on the computer.
  */
 
-public final class Storage{
-    private final static String FILE_PATH = "./data/duke.txt";
+public final class Storage {
+    private static final String DATA_PATH = "./data/duke.txt";
 
     /**
      * Checks if folder and text files for where the information
@@ -27,13 +33,13 @@ public final class Storage{
      */
     public void createFiles() throws DukeException {
         File folder = new File("./data");
-        File saves = new File(FILE_PATH);
+        File saves = new File(DATA_PATH);
         try {
             if (!folder.exists() || !folder.isDirectory()) {
-              boolean isFolderCreated = folder.mkdir();
+                folder.mkdir();
             }
             if (!saves.exists()) {
-              boolean isSavesCreated = saves.createNewFile();
+                saves.createNewFile();
             }
         } catch (IOException e) {
             Ui.showInput(e.getMessage());
@@ -44,23 +50,25 @@ public final class Storage{
     /**
      * Saves the tasks to specified folder and file.
      *
-     * @param currTasks the list of tasks to be saved
+     * @param tasks the list of tasks to be saved
      */
-    public void resetFile(ArrayList<Task> currTasks) {
-        File file = new File(FILE_PATH);
-        if (!file.delete()) {
-            Ui.showInput("something went wrong");
-        }
-        try {
-            boolean isFileCreated = file.createNewFile();
-            FileWriter writer = new FileWriter(FILE_PATH, true);
-            for (Task t : currTasks) {
-                writer.write(t.getSaveFormat() + "\n");
-                writer.flush();
+    public void resetFile(ArrayList<Task> tasks) {
+        File file = new File(DATA_PATH);
+        boolean deleted = file.delete();
+        if (deleted) {
+            try {
+                file.createNewFile();
+                FileWriter writer = new FileWriter(DATA_PATH, true);
+                for (Task t : tasks) {
+                    writer.write(t.getSaveFormat() + "\n");
+                    writer.flush();
+                }
+                writer.close();
+            } catch (IOException e) {
+                Ui.showInput("Unable to write, something went wrong");
             }
-            writer.close();
-        } catch (IOException e) {
-            Ui.showInput("Unable to write, something went wrong");
+        } else {
+            Ui.showInput("Something went wrong... could not overwrite");
         }
     }
 
@@ -72,7 +80,7 @@ public final class Storage{
     public ArrayList<Task> loadSaves() {
         ArrayList<Task> tasksLoaded = new ArrayList<>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH));
+            BufferedReader reader = new BufferedReader(new FileReader(DATA_PATH));
             String line = reader.readLine();
             while (line != null) {
                 String[] words = line.split("\\|");

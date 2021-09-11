@@ -1,40 +1,42 @@
 package commands;
 
+import java.util.ArrayList;
+
 import storage.Storage;
 import tasks.Task;
 import tasks.TaskList;
 import ui.Ui;
 
-import java.util.ArrayList;
-
 /**
  * The DoneCommand Class inherits Command and is
  * a specific type of executable command.
  */
-public final class DoneCommand extends Command{
-
+public final class DoneCommand extends Command {
 
     /**
      * Constructs the DoneCommand object.
      *
-     * @param s the entire line of user input
+     * @param userInput the entire line of user input
      */
-    public DoneCommand(ArrayList<String> s) {
-        super(s);
+    public DoneCommand(ArrayList<String> userInput) {
+        super(userInput);
     }
-
 
     /**
      * Executes the command.
      *
-     * @param lst the TaskList object that stores the list of tasks
-     * @param ui the Ui object that interacts with the user
+     * @param list the TaskList object that stores the list of tasks
+     * @param ui the ui.Ui object that interacts with the user
      * @param storage the Storage object that saves changes to stored tasks, if any
      * @return the message displaying the result
      */
     @Override
-    public String execute(TaskList lst, Ui ui, Storage storage) {
-        ArrayList<Task> tasks = lst.getTasks();
+    public String execute(TaskList list, Ui ui, Storage storage) {
+        assert list != null : "invalid TaskList object detected";
+        assert ui != null : "invalid ui.Ui object detected";
+        assert storage != null : "invalid Storage object detected";
+        ArrayList<Task> tasks = list.getTasks();
+        String result = "";
         try {
             if (getInput().size() == 1) {
                 throw new IllegalArgumentException("Please input index :)");
@@ -46,16 +48,17 @@ public final class DoneCommand extends Command{
             if (index >= tasks.size() || index < 0) {
                 throw new IllegalArgumentException("No such index. Please input correct index, no such index :(");
             }
-            tasks.get(index).setIsDone();
+            result = tasks.get(index).setIsDone();
             storage.resetFile(tasks);
         } catch (IndexOutOfBoundsException e) {
-            return "Please input a valid index :)\n"
-                    + "Note: 'list' can be used to see the current tasks.";
+            return "     Please input a valid index :)\n"
+                    + "     Note: 'list' can be used to see the current tasks.";
         } catch (NumberFormatException e) {
-            return "Please use a number instead :(";
+            return "     Please use a number instead :(";
         } catch (IllegalArgumentException e) {
-            return e.getMessage();
+            return "     " + e.getMessage();
         }
-        return "";
+        assert !result.equals("") : "message for executing done is null";
+        return result;
     }
 }

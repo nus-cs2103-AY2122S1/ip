@@ -1,39 +1,36 @@
 package tasks;
 
 import java.time.LocalDate;
-import ui.Ui;
 
 /**
  * The Task class implements the tasks to be tracked by the
  * Duke assistant.
  */
-public class Task{
+public class Task {
 
-    /**
-     * Description of the task.
-     */
+    /** Description of the task */
     private final String task;
 
-    /**
-     * Status of the task.
-     */
+    /** Status of the task */
     private String isDone;
 
     /**
      * Constructs a Task.
      *
-     * @param s the input string to describe the task
+     * @param description the input string to describe the task
      */
-    public Task(String s) {
-        this.task = s;
+    public Task(String description) {
+        this.task = description;
         this.isDone = "[ ]";
     }
 
     /**
      * Sets a task as complete by changing
      * the String representation and display a confirmation message.
+     *
+     * @return the message in response to the action
      */
-    public void setIsDone() {
+    public String setIsDone() {
         String result = "";
         if (this.isDone.equals("[ ]")) {
             this.isDone = "[X]";
@@ -41,7 +38,7 @@ public class Task{
         } else {
             result = "You have already completed this task before!";
         }
-        Ui.showInput(result, this.getType() + isDone + " " + this.getTask());
+        return "     " + result + "\n" + "     " + getType() + isDone + " " + getDescription();
     }
 
     /**
@@ -67,7 +64,7 @@ public class Task{
      *
      * @return the String that is the description of the task
      */
-    public String getTask() {
+    public String getDescription() {
         return this.task;
     }
 
@@ -97,4 +94,16 @@ public class Task{
     public LocalDate getLocalDate() {
         return null;
     }
+
+    /**
+     * Sets the date as a valid date.
+     * @param localDate the specific valid date to store
+     */
+    public void setLocalDate(LocalDate localDate) {}
+
+    /**
+     * Changes stored date to a new date.
+     * @param newDate date to be changed to
+     */
+    public void updateDate(String newDate) {}
 }

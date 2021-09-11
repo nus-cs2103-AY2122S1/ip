@@ -5,22 +5,19 @@ package tasks;
  * to support different specificities of a task
  * as per input by user.
  */
-public final class ToDoTask extends Task{
+public final class ToDoTask extends Task {
 
 
-    /**
-     * Stores the type of task information
-     * that identifies a ToDoTask.
-     */
-    private final String TYPE = "[T]";
+    /** Stores the type of task information that identifies a ToDoTask */
+    private final String taskType = "[T]";
 
     /**
      * Constructs a ToDoTask.
      *
-     * @param s the input string to describe the task
+     * @param description the input string to describe the task
      */
-    public ToDoTask(String s) {
-        super(s);
+    public ToDoTask(String description) {
+        super(description);
     }
 
     /**
@@ -30,7 +27,7 @@ public final class ToDoTask extends Task{
      */
     @Override
     public String getType() {
-      return this.TYPE;
+        return this.taskType;
     }
 
     /**
@@ -40,10 +37,10 @@ public final class ToDoTask extends Task{
      */
     @Override
     public String getSaveFormat() {
-        if (super.getStatus().equals("[ ]")) {
-            return "T" + "|" + this.getTask().strip() + "|" + 0;
+        if (getStatus().equals("[ ]")) {
+            return "T" + "|" + getDescription().strip() + "|" + 0;
         } else {
-            return "T" + "|" + this.getTask().strip() + "|" + 1;
+            return "T" + "|" + getDescription().strip() + "|" + 1;
         }
     }
 }

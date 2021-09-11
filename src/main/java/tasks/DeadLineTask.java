@@ -1,30 +1,27 @@
 package tasks;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import duke.DukeException;
 
 /**
  * The DeadlineTask Class inherits Task Class
  * to support different specificities of a task
  * as per input by user.
  */
-public final class DeadLineTask extends Task{
-    /**
-     * Stores the type of task information
-     * that identifies a DeadlineTask.
-     */
-    private final String TYPE = "[D]";
+public final class DeadLineTask extends Task {
 
-    /**
-     * Stores the do-by-date information.
-     */
-    private final String dueDate;
+    /** Stores the type of task information that identifies a DeadlineTask */
+    private final String taskType = "[D]";
 
-    /**
-     * Stores the do-by-date information as a LocalDate.
-     */
+    /** Stores the do-by-date information */
+    private String dueDate;
+
+    /** Stores the do-by-date information as a LocalDate */
     private LocalDate localDate;
 
     /**
@@ -32,35 +29,36 @@ public final class DeadLineTask extends Task{
      * stored as LocalDate. If so, save it, otherwise save
      * date as per user input.
      *
-     * @param s the input string to describe the Deadline task
+     * @param description the input string to describe the Deadline task
      * @param date the do-by-date
+     * @throws DukeException thrown when date input format is not supported
      */
-    public DeadLineTask(String s, String date) {
-        super(s);
+    public DeadLineTask(String description, String date) {
+        super(description);
         this.dueDate = date;
-        String day = checkForDate(date);
-        if (!day.equals("")) {
-            LocalDate ld = convertDate(day);
-            setLocalDate(ld);
-        }
+        LocalDate day = getDate(date);
+        setLocalDate(day);
     }
 
-    private String checkForDate(String s) {
-        String temp = "^[0-9]{1,2}[\\\\/][0-9]{1,2}[\\\\/][0-9]{4}\\s[0-9]{4}$";
+    private LocalDate getDate(String userInput) {
+        String str = userInput.replaceAll(" ", "");
+        String temp = "[0-9]{1,2}[\\\\/][0-9]{1,2}[\\\\/][0-9]{4}";
         Pattern p = Pattern.compile(temp);
-        Matcher m = p.matcher(s);
+        Matcher m = p.matcher(str);
+        String dateStr;
         if (m.find()) {
-            return m.group();
+            dateStr = m.group();
+            try {
+                String[] date = dateStr.split("/");
+                int day = Integer.parseInt(date[0]);
+                int month = Integer.parseInt(date[1]);
+                int year = Integer.parseInt(date[2]);
+                return LocalDate.of(year, month, day);
+            } catch (DateTimeException e) {
+                return null;
+            }
         }
-        return "";
-    }
-
-    private LocalDate convertDate(String s) {
-        String[] date = s.substring(0, s.length() - 4).split("/");
-        int day = Integer.parseInt(date[0].replaceAll(" ", ""));
-        int month = Integer.parseInt(date[1].replaceAll(" ", ""));
-        int year = Integer.parseInt(date[2].replaceAll(" ", ""));
-        return LocalDate.of(year, month, day);
+        return null;
     }
 
     /**
@@ -69,11 +67,23 @@ public final class DeadLineTask extends Task{
      * @return the String description of the type of task
      */
     public String getType() {
-        return this.TYPE;
+        return this.taskType;
     }
 
-    private void setLocalDate(LocalDate localDate) {
+    /**
+     * Sets the date as a valid date.
+     * @param localDate the specific valid date to store
+     */
+    public void setLocalDate(LocalDate localDate) {
         this.localDate = localDate;
+    }
+
+    /**
+     * Changes stored date to a new date.
+     * @param newDate date to be changed to
+     */
+    public void updateDate(String newDate) {
+        this.dueDate = newDate;
     }
 
     /**
@@ -93,12 +103,12 @@ public final class DeadLineTask extends Task{
      * @return the description specific to the Deadline task
      */
     @Override
-    public String getTask() {
+    public String getDescription() {
         if (this.localDate == null) {
-            return super.getTask() + " " + "(by: " + this.dueDate + ")";
+            return super.getDescription() + " " + "(by: " + this.dueDate + ")";
         } else {
-            return super.getTask() + " " + "(by: " + Month.of(this.localDate.getMonthValue()) + " "
-                    + this.localDate.getDayOfMonth() + " " + this.localDate.getYear() + ")";
+            return super.getDescription() + " " + "(by: " + this.localDate.getDayOfMonth() + " "
+                    + Month.of(this.localDate.getMonthValue()) + " " + this.localDate.getYear() + ")";
         }
     }
 
@@ -108,7 +118,7 @@ public final class DeadLineTask extends Task{
      * @return the simple description of the task
      */
     public String getSimpleTaskDescription() {
-        return super.getTask();
+        return super.getDescription();
     }
 
     /**
@@ -118,10 +128,10 @@ public final class DeadLineTask extends Task{
      */
     @Override
     public String getSaveFormat() {
-        if (super.getStatus().equals("[ ]")) {
-            return "D" + "|" + this.getSimpleTaskDescription().strip() + "|" + this.dueDate + "|" + 0;
+        if (getStatus().equals("[ ]")) {
+            return "D" + "|" + getSimpleTaskDescription().strip() + "|" + this.dueDate + "|" + 0;
         } else {
-            return "D" + "|" + this.getSimpleTaskDescription().strip() + "|" + this.dueDate + "|" + 1;
+            return "D" + "|" + getSimpleTaskDescription().strip() + "|" + this.dueDate + "|" + 1;
         }
     }
 }

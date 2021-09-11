@@ -1,50 +1,55 @@
 package commands;
 
+import java.util.ArrayList;
+
+import duke.DukeException;
 import storage.Storage;
 import tasks.DeadLineTask;
 import tasks.TaskList;
 import ui.Ui;
 
-import java.util.ArrayList;
-
 /**
  * The DeadlineCommand Class inherits Command and is
  * a specific type of executable command.
  */
-public final class DeadlineCommand extends Command{
-
+public final class DeadlineCommand extends Command {
 
     /**
      * Constructs the DeadlineCommand object.
      *
-     * @param s the entire line of user input
+     * @param userInput the entire line of user input
      */
-    public DeadlineCommand(ArrayList<String> s) {
-        super(s);
+    public DeadlineCommand(ArrayList<String> userInput) {
+        super(userInput);
     }
 
     /**
      * Executes the command.
      *
-     * @param lst the TaskList object that stores the list of tasks
-     * @param ui the Ui object that interacts with the user
+     * @param list the TaskList object that stores the list of tasks
+     * @param ui the ui.Ui object that interacts with the user
      * @param storage the Storage object that saves changes to stored tasks, if any
      * @return the message displaying the result
      */
     @Override
-    public String execute(TaskList lst, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
+        assert list != null : "invalid TaskList object detected";
+        assert ui != null : "invalid ui.Ui object detected";
+        assert storage != null : "invalid Storage object detected";
         try {
-            DeadLineTask d = new DeadLineTask(lst.filterInfo(getInput()),
-                    lst.lookForDeadline(getInput()));
-            String result = lst.addTask(d);
-            storage.resetFile(lst.getTasks());
+            DeadLineTask task = new DeadLineTask(list.filterInfo(getInput()),
+                    list.getDeadline(getInput()));
+            String result = list.addTask(task);
+            storage.resetFile(list.getTasks());
             return result;
-        } catch (IllegalArgumentException e) {
+        } catch (DukeException e) {
             if (e.getMessage().equals("deadline")) {
-                return "Invalid input :(\n" +
-                        "Please input in the form: 'deadline <Name> /by <Date>'.";
+                return "     Invalid input :(\n"
+                        + "     Please input in the form: 'deadline <Name> /by <Date>'.";
             } else {
-               return e.getMessage() + "\n" + "Hey, no deadline recorded does not mean no deadline >:(";
+                return "     " + e.getMessage() + "\n"
+                        + "     Hey, no deadline recorded does not mean no deadline >:(\n"
+                        + "     An estimation will be fine, I will remind you on that day.";
             }
         }
     }

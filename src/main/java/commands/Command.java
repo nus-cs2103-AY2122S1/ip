@@ -1,25 +1,25 @@
 package commands;
 
+import java.util.ArrayList;
+
 import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
 
-import java.util.ArrayList;
-
 /**
  * The Command class represents the action to be done.
  */
-public abstract class Command{
+public abstract class Command {
 
-    private final ArrayList<String> input;
+    private final ArrayList<String> userInput;
 
     /**
      * Constructs the Command object.
      *
-     * @param s the entire line of user input
+     * @param userInput the entire line of user input
      */
-    public Command(ArrayList<String> s) {
-        this.input = s;
+    public Command(ArrayList<String> userInput) {
+        this.userInput = userInput;
     }
 
     /**
@@ -28,7 +28,7 @@ public abstract class Command{
      * @return the user's line of input
      */
     public ArrayList<String> getInput() {
-        return input;
+        return userInput;
     }
 
     /**
@@ -43,10 +43,10 @@ public abstract class Command{
     /**
      * Executes the command.
      *
-     * @param lst the TaskList object that stores the list of tasks
-     * @param ui the Ui object that interacts with the user
+     * @param list the TaskList object that stores the list of tasks
+     * @param ui the ui.Ui object that interacts with the user
      * @param storage the Storage object that saves changes to stored tasks, if any
      * @return the message displaying the result
      */
-    public abstract String execute(TaskList lst, Ui ui, Storage storage);
+    public abstract String execute(TaskList list, Ui ui, Storage storage);
 }

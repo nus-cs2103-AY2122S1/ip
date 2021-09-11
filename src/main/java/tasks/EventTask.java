@@ -1,30 +1,27 @@
 package tasks;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import duke.DukeException;
 
 /**
  * The EventTask Class inherits Task Class
  * to support different specificities of a task
  * as per input by user.
  */
-public final class EventTask extends Task{
-    /**
-     * Stores the type of task information
-     * that identifies a EventTask.
-     */
-    private final String TYPE = "[E]";
+public final class EventTask extends Task {
 
-    /**
-     * Stores the date information of an Event task.
-     */
-    private final String date;
+    /** Stores the type of task information that identifies a EventTask */
+    private final String taskType = "[E]";
 
-    /**
-     * Stores the date information as a LocalDate.
-     */
+    /** Stores the date information of an Event task */
+    private String date;
+
+    /** Stores the date information as a LocalDate */
     private LocalDate localDate;
 
     /**
@@ -32,35 +29,36 @@ public final class EventTask extends Task{
      * stored as LocalDate. If so, save it, otherwise save
      * date as per user input.
      *
-     * @param s the input string to describe the Event task
+     * @param description the input string to describe the Event task
      * @param date the date of the event
+     * @throws DukeException thrown when date input format is not supported
      */
-    public EventTask(String s, String date) {
-        super(s);
+    public EventTask(String description, String date) {
+        super(description);
+        LocalDate day = getDate(date);
         this.date = date;
-        String day = checkForDate(date);
-        if (!day.equals("")) {
-            LocalDate ld = convertDate(day);
-            setLocalDate(ld);
-        }
+        setLocalDate(day);
     }
 
-    private String checkForDate(String s) {
-        String temp = "^[0-9]{1,2}[\\\\/][0-9]{1,2}[\\\\/][0-9]{4}\\s[0-9]{4}$";
+    private LocalDate getDate(String userInput) {
+        String str = userInput.replaceAll(" ", "");
+        String temp = "[0-9]{1,2}[\\\\/][0-9]{1,2}[\\\\/][0-9]{4}";
         Pattern p = Pattern.compile(temp);
-        Matcher m = p.matcher(s);
+        Matcher m = p.matcher(str);
+        String dateStr;
         if (m.find()) {
-            return m.group();
+            dateStr = m.group();
+            try {
+                String[] date = dateStr.split("/");
+                int day = Integer.parseInt(date[0]);
+                int month = Integer.parseInt(date[1]);
+                int year = Integer.parseInt(date[2]);
+                return LocalDate.of(year, month, day);
+            } catch (DateTimeException e) {
+                return null;
+            }
         }
-        return "";
-    }
-
-    private LocalDate convertDate(String s) {
-        String[] date = s.substring(0, s.length() - 4).split("/");
-        int day = Integer.parseInt(date[0].replaceAll(" ", ""));
-        int month = Integer.parseInt(date[1].replaceAll(" ", ""));
-        int year = Integer.parseInt(date[2].replaceAll(" ", ""));
-        return LocalDate.of(year, month, day);
+        return null;
     }
 
     /**
@@ -69,13 +67,24 @@ public final class EventTask extends Task{
      * @return the String description of the type of task
      */
     public String getType() {
-        return this.TYPE;
+        return this.taskType;
     }
 
-    private void setLocalDate(LocalDate localDate) {
+    /**
+     * Sets the date as a valid date.
+     * @param localDate the specific valid date to store
+     */
+    public void setLocalDate(LocalDate localDate) {
         this.localDate = localDate;
     }
 
+    /**
+     * Changes stored date to a new date.
+     * @param newDate date to be changed to
+     */
+    public void updateDate(String newDate) {
+        this.date = newDate;
+    }
 
     /**
      * Retrieves the information on the date associated with task.
@@ -94,15 +103,14 @@ public final class EventTask extends Task{
      * @return the description specific to the Event task
      */
     @Override
-    public String getTask() {
+    public String getDescription() {
         if (this.localDate == null) {
-            return super.getTask() + " " + "(at: " + this.date + ")";
+            return super.getDescription() + " " + "(at: " + this.date + ")";
         } else {
-            return super.getTask() + " " + "(at: " + Month.of(this.localDate.getMonthValue()) + " "
-                    + this.localDate.getDayOfMonth() + " " + this.localDate.getYear() + ")";
+            return super.getDescription() + " " + "(at: " + this.localDate.getDayOfMonth() + " "
+                    + Month.of(this.localDate.getMonthValue()) + " " + this.localDate.getYear() + ")";
         }
     }
-
 
     /**
      * Retrieves the simple description of the task.
@@ -110,7 +118,7 @@ public final class EventTask extends Task{
      * @return the simple description of the task
      */
     public String getSimpleTaskDescription() {
-        return super.getTask();
+        return super.getDescription();
     }
 
     /**
@@ -120,10 +128,10 @@ public final class EventTask extends Task{
      */
     @Override
     public String getSaveFormat() {
-        if (super.getStatus().equals("[ ]")) {
-            return "E" + "|" + this.getSimpleTaskDescription().strip() + "|" + this.date + "|" + 0;
+        if (getStatus().equals("[ ]")) {
+            return "E" + "|" + getSimpleTaskDescription().strip() + "|" + this.date + "|" + 0;
         } else {
-            return "E" + "|" + this.getSimpleTaskDescription().strip() + "|" + this.date + "|" + 1;
+            return "E" + "|" + getSimpleTaskDescription().strip() + "|" + this.date + "|" + 1;
         }
     }
 }
