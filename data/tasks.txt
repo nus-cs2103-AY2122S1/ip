@@ -1,5 +1,4 @@
 [E][X] event 1 (at: Sep 09 2021 15:00)
-[D][ ] assignment 1 (by: Sep 16 2021)
 [T][X] task 1
 [T][X] task 2
-[T][ ] task 2
+[D][ ] deadline 1 (by: Sep 01 2021)

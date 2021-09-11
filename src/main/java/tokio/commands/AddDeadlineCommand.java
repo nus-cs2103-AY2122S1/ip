@@ -23,7 +23,9 @@ public class AddDeadlineCommand extends Command {
         String deadlineDesc = descDateArray[0].trim();
         String deadlineDate = descDateArray[1].trim();
         Deadlines addDeadline = new Deadlines(deadlineDesc, deadlineDate);
-        tasks.addTask(addDeadline);
+        if (!tasks.addTask(addDeadline)) {
+            return ui.printDuplicateTask();
+        }
         storage.writeTask(addDeadline);
         return ui.printAddCommand(addDeadline, tasks);
     }

@@ -29,7 +29,9 @@ public class AddEventCommand extends Command {
         String eventDate = dateTimeArray[0].trim();
         String eventTime = dateTimeArray[1].trim();
         Events addEvent = new Events(eventDesc, eventDate, eventTime);
-        tasks.addTask(addEvent);
+        if (!tasks.addTask(addEvent)) {
+            return ui.printDuplicateTask();
+        }
         storage.writeTask(addEvent);
         return ui.printAddCommand(addEvent, tasks);
     }

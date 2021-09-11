@@ -11,6 +11,7 @@ import tokio.exceptions.DukeException;
  * Represents an event task that takes in date and time.
  */
 public class Events extends Task {
+    protected String description;
     protected LocalDate date;
     protected LocalTime time;
 
@@ -24,6 +25,7 @@ public class Events extends Task {
      */
     public Events(String description, String date, String time) throws DukeException {
         super(description, Instruction.EVENT);
+        this.description = description;
         try {
             this.date = LocalDate.parse(date);
             this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm"));
@@ -37,5 +39,17 @@ public class Events extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + " " + time + ")";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof Events) {
+            Events e = (Events) obj;
+            return this.description.equals(e.description) && this.date.equals(e.date) && this.time.equals(e.time);
+        } else {
+            return false;
+        }
     }
 }

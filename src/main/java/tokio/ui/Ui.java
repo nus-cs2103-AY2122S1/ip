@@ -1,6 +1,6 @@
 package tokio.ui;
 
-import java.util.Scanner;
+import java.util.*;
 
 import tokio.tasks.Task;
 import tokio.tasks.TaskList;
@@ -36,8 +36,8 @@ public class Ui {
     /**
      * Prints invalid type error, to be shown when Type command is not included in Instructions enum.
      */
-    public String printInvalidTypeError() {
-        return "Oh no, I do not understand this type...\n";
+    public String printDuplicateTask() {
+        return "Oops Rio, this task already exists!\n";
     }
 
     /**
