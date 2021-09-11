@@ -1,5 +1,8 @@
 package duke.tasks;
 
+import duke.DukeException;
+import duke.commands.EditCommand;
+
 /**
  * This class represents a Task. It is a superclass from which more specific Task classes will extend from.
  */
@@ -74,5 +77,10 @@ public class Task {
             return description.equals(other.description) && isDone == other.isDone;
         }
         return false;
+    }
+    
+    public Task getUpdatedTask(EditCommand edit) throws DukeException {
+        String newDescription = edit.getDescription() == null ? description : edit.getDescription();
+        return new Task(newDescription, isDone);
     }
 }
