@@ -1,24 +1,107 @@
-# Duke project template
+# Duke Personal Chatbot
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Duke is a personal chatbot that acts as a task manager. With a helpful and open personality, Duke helps keep track of your tasks. Users who are great at typing will enjoy Duke's easiness.
 
-## Setting up in Intellij
+It's 
+* text-based
+* easy to learn
+* *SUPER FAST* to use!
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+AND it is **FREE**! 🥰
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+## Features
+
+### Managing Tasks
+Duke supports three main types of tasks:
+1. ToDo
+2. Deadline
+3. Event
+
+#### Deadline
+A Deadline is defined as a task that has a specific date of completion. These tasks have to be completed by the specified date. 
+
+#### Event
+An Event is a task that occurs at a particular date. Events are tasks where the user has to attend. 
+
+#### ToDo
+A ToDo is defined as a task that does not have a specific date of completion. They are meant as a quick way to record tasks that do not have a hard date of completion, or if the date of completion is pending. 
+
+### Sorting Tasks
+
+#### Date
+Duke supports sorting of tasks by the earliest date. Since ToDo tasks do not have a date associated with them, they are automatically appended to the back of the list upon sorting.
+
+Note: only dates in the format ```YYYY-MM-DD``` are accepted. 
+
+
+## Usage (How-it-works)
+
+### Commands
+
+```bye``` - Exits chatbot
+
+Example of usage:
+```java
+bye
+```
+
+```delete``` - Deletes a task from the task list, indicated by the index
+
+Example of usage:
+```java
+delete 1
+```
+
+```done``` - Marks a task, indicated by the index, as done
+
+Example of usage:
+``` java
+done 1
+```
+
+```deadline``` - Adds a Deadline task
+
+Example of usage:
+
+``` java
+deadline school assignment /by 2021-12-02
+```
+
+```event``` - Adds an Event task
+
+Example of usage: 
+
+``` java
+event Google Day /at 2021-09-15
+```
+
+```find``` - Finds a task based on the given keyword
+
+Example of usage: 
+
+``` java
+find school
+```
+
+```list``` - Lists all tasks stored in the task list
+
+Example of usage:
+``` java
+list
+```
+
+```sort``` - Sorts all tasks from earliest date to latest date, followed by ToDo
+
+Example of usage:
+``` java
+sort
+```
+
+```todo``` - Adds a Todo task
+
+Example of usage:
+
+``` java
+todo read book 
+```
+
