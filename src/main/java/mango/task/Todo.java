@@ -47,7 +47,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns the string representation of the todo.
+     * Returns the string representation of the todo for saving.
      *
      * @return The string representation of the todo.
      */

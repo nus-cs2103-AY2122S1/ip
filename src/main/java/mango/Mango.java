@@ -6,31 +6,31 @@ import java.io.IOException;
  * Represents a chat-bot named Mango that keeps track of a list of tasks that the user
  * can manipulate by adding, deleting, or completing.
  */
-public class Duke {
+public class Mango {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
     /**
-     * Constructor for a Duke chat-bot.
+     * Constructor for a Mango chat-bot.
      */
-    public Duke() {
+    public Mango() {
         this("data/mango.txt");
     }
 
     /**
-     * Constructor for a Duke chat-bot.
+     * Constructor for a Mango chat-bot.
      *
      * @param filePath The path for the file that will contain the list of tasks tracked by the chat-bot.
      */
-    public Duke(String filePath) {
+    public Mango(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
 
         try {
             tasks = new TaskList(storage.load());
         } catch (IOException e) {
-            ui.showLoadingError(new DukeException(e.getMessage()));
+            ui.showLoadingError(new MangoException(e.getMessage()));
             tasks = new TaskList();
         }
     }
@@ -42,6 +42,15 @@ public class Duke {
      */
     public String greet() {
         return this.ui.greet();
+    }
+
+    /**
+     * Returns a greeting from the ui.
+     *
+     * @return A greeting message to the user.
+     */
+    public String showLogo() {
+        return this.ui.showLogo();
     }
 
     /**

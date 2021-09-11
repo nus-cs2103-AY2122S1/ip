@@ -13,17 +13,25 @@ public class Ui {
     }
 
     /**
-     * Greets the user with the chat-bot logo and an introduction.
+     * Shows the user the chat-bot logo.
      *
-     * @return A greeting message with an introduction.
+     * @return Mango's logo.
+     */
+    public String showLogo() {
+        String logo =
+                "    +---+---+---+---+\n" +
+                "   | m | a | n | g | o |\n" +
+                "    +---+---+---+---+";
+
+        return "Hello from\n" + logo;
+    }
+
+    /**
+     * Greets the user with an introduction.
+     * @return Mango's introduction.
      */
     public String greet() {
-        String logo =
-                "   +--+--+--+--+\n" +
-                "   | m | a | n | g | o |\n" +
-                "   +--+--+--+--+\n\n";
-
-        return "Hello from\n" + logo + "Hello! I'm Mango\nWhat can I do for you?";
+        return "Hello! I'm Mango.\nWhat can I do for you?";
     }
 
     /**

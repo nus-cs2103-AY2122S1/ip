@@ -1,6 +1,6 @@
 package mango.task;
 
-import mango.DukeException;
+import mango.MangoException;
 
 /**
  * Represents a task. A <code>Task</code> object has a description and a completion status.
@@ -19,7 +19,7 @@ public class Task {
      */
     public Task(String description, String tag, boolean isDone) {
         this.description = description;
-        this.tag = "#" + tag;
+        this.tag = tag;
         this.isDone = isDone;
     }
     
@@ -50,12 +50,12 @@ public class Task {
     }
 
     /**
-     * Returns the string representation of the task.
+     * Returns the string representation of the task for saving.
      *
      * @return The string representation of the task.
      */
     public String getSaveFormatString() {
-        return String.format("%s:%s:%s:\n", this.getType(), this.getStatus(), this.description);
+        return String.format("%s:%s:%s::%s\n", this.getType(), this.getStatus(), this.description, this.tag);
     }
 
     /**
@@ -77,15 +77,15 @@ public class Task {
     }
 
     /**
-     * Checks if the input string array is valid.
+     * Checks if the user's command minimally includes a description of the task during creation.
      *
-     * @param arr The input string array.
+     * @param userCommand The user's commands in a string array.
      * @return True if the string array is valid, else false.
-     * @throws DukeException If the input array has a length of 1.
+     * @throws MangoException If the input array has a length of 1.
      */
-    public static boolean isValid(String[] arr) throws DukeException {
-        if (arr.length == 1) {
-            throw new DukeException(" ☹ OOPS!!! The description of a event cannot be empty.");
+    public static boolean isValid(String[] userCommand) throws MangoException {
+        if (userCommand.length == 1) {
+            throw new MangoException(" ☹ OOPS!!! The description of a event cannot be empty.");
         }
 
         return true;

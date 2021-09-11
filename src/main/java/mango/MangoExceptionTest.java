@@ -4,9 +4,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class DukeExceptionTest {
+public class MangoExceptionTest {
     @Test
     public void testException() {
-        assertEquals("hello", new DukeException("hello").getMessage());
+        assertEquals("hello", new MangoException("hello").getMessage());
     }
 }

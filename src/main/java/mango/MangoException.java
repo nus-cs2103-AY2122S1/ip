@@ -1,13 +1,13 @@
 package mango;
 
-public class DukeException extends Exception {
+public class MangoException extends Exception {
 
     /**
      * Constructor for a DukeException.
      *
      * @param message The error message.
      */
-    public DukeException(String message) {
+    public MangoException(String message) {
         super(message);
     }
 }

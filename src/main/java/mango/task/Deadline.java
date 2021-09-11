@@ -14,7 +14,7 @@ public class Deadline extends Task {
      * Constructor for a Deadline.
      *
      * @param description The description of the deadline.
-     * @param date The date on which the deadline falls.
+     * @param date The date on which the deadline falls in yyyy-mm-dd format.
      * @param tag The tag attached to this deadline.
      */
     public Deadline(String description, String date, String tag) {
@@ -26,7 +26,7 @@ public class Deadline extends Task {
      * Constructor for a Deadline, initialised with a completion status.
      *
      * @param description The description of the deadline.
-     * @param date The date on which the deadline falls.
+     * @param date The date on which the deadline falls in yyyy-mm-dd format.
      * @param status The completion status of the deadline.
      * @param tag The tag attached to this deadline.
      */
@@ -56,7 +56,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the string representation of the deadline.
+     * Returns the string representation of the deadline for saving.
      *
      * @return The string representation of the deadline.
      */

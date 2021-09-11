@@ -48,65 +48,97 @@ public class TaskList {
      *
      * @param str The input string that contains the user's command.
      * @return The confirmation message that the task has been added.
-     * @throws DukeException If the input string does not make sense.
+     * @throws MangoException If the input string does not make sense.
      */
-    public String addTask(String str) throws DukeException {
+    public String addTask(String str) throws MangoException {
         Task newTask = null;
         String[] splitUserInput = str.split(" ", 2);
         String taskType = splitUserInput[0];
-        String taskDesc;
-        String taskDate;
-        String taskTag;
 
         switch (taskType) {
         case "todo":
             if (Todo.isValid(splitUserInput)) {
-                String[] splitUserInputForTag = splitUserInput[1].split(" /", 2);
-                taskDesc = splitUserInputForTag[0];
-                taskTag = splitUserInputForTag[1].substring(4);
-                newTask = new Todo(taskDesc, taskTag);
+                newTask = createTodo(splitUserInput);
             }
             break;
         case "deadline":
             if (Deadline.isValid(splitUserInput)) {
-                String[] splitUserInputForDateAndTag = splitUserInput[1].split(" /", 3);
-                taskDesc = splitUserInputForDateAndTag[0];
-                taskDate = splitUserInputForDateAndTag[1].substring(3);
-                taskTag = splitUserInputForDateAndTag[2].substring(4);
-
-                newTask = new Deadline(taskDesc, taskDate, taskTag);
+                newTask = createDeadline(splitUserInput);
             }
             break;
         case "event":
             if (Event.isValid(splitUserInput)) {
-                String[] splitUserInputForDateAndTag = splitUserInput[1].split(" /", 3);
-                taskDesc = splitUserInputForDateAndTag[0];
-                taskDate = splitUserInputForDateAndTag[1].substring(3);
-                taskTag = splitUserInputForDateAndTag[2].substring(4);
-
-                newTask = new Event(taskDesc, taskDate, taskTag);
+                newTask = createEvent(splitUserInput);
             }
             break;
         default:
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new MangoException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
         tasks.add(listIndex, newTask);
+        assert newTask != null;
+        listIndex++;
 
+        return getAddTaskMessage(newTask);
+    }
+
+    /**
+     * Returns a confirmation that the Task is added, and the new total number of tasks in the list.
+     * @param newTask The task that was added.
+     * @return A confirmation that the Task is added, and the new total number of tasks in the list.
+     */
+    public String getAddTaskMessage(Task newTask) {
+        // for correct grammar
         String word;
-        if (listIndex == 0) {
+        if (this.listIndex == 0) {
             word = "task";
         } else {
             word = "tasks";
         }
 
-        assert newTask != null;
-        String output = "Got it. I've added this task:\n" + String.format("   [%s][%s] %s %s\n",
-                newTask.getType(), newTask.getStatusIcon(), newTask.getDescription(), newTask.getTag())
-                + String.format("Now you have %d %s in the list.%n", listIndex + 1, word);
+        return "Got it. I've added this task:\n" + String.format("   [%s][%s] %s %s\n",
+                newTask.getType(), newTask.getStatusIcon(), newTask.getDescription(), "#" + newTask.getTag())
+                + String.format("Now you have %d %s in the list.%n", this.listIndex, word);
+    }
 
-        listIndex++;
-        return output;
+    /**
+     * Creates a new Event based on the user input given.
+     * @param splitUserInput The user's input.
+     * @return An Event that corresponds to the user's input.
+     */
+    public Event createEvent(String[] splitUserInput) {
+        String[] splitUserInputForDateAndTag = splitUserInput[1].split(" /", 3);
+        String taskDesc = splitUserInputForDateAndTag[0];
+        String taskDate = splitUserInputForDateAndTag[1].substring(3);
+        String taskTag = splitUserInputForDateAndTag[2].substring(4);
+
+        return new Event(taskDesc, taskDate, taskTag);
+    }
+
+    /**
+     * Creates a new Todo based on the user input given.
+     * @param splitUserInput The user's input.
+     * @return A Todo that corresponds to the user's input.
+     */
+    public Todo createTodo(String[] splitUserInput) {
+        String[] splitUserInputForTag = splitUserInput[1].split(" /", 2);
+        String taskDesc = splitUserInputForTag[0];
+        String taskTag = splitUserInputForTag[1].substring(4);
+        return new Todo(taskDesc, taskTag);
+    }
+
+    /**
+     * Creates a new Deadline based on the user input given.
+     * @param splitUserInput The user's input.
+     * @return A Deadline that corresponds to the user's input.
+     */
+    public Deadline createDeadline(String[] splitUserInput) {
+        String[] splitUserInputForDateAndTag = splitUserInput[1].split(" /", 3);
+        String taskDesc = splitUserInputForDateAndTag[0];
+        String taskDate = splitUserInputForDateAndTag[1].substring(3);
+        String taskTag = splitUserInputForDateAndTag[2].substring(4);
+
+        return new Deadline(taskDesc, taskDate, taskTag);
     }
 
     /**
@@ -118,14 +150,24 @@ public class TaskList {
      */
     public String completeTask(int completedTask) {
         Task currentTask = tasks.get(completedTask - 1);
+
         if (!currentTask.isDone()) {
             currentTask.markDone();
         }
 
-        String output = "Nice! I've marked this task as done:\n"
-                + String.format("[%s][X] %s %s\n", currentTask.getType(), currentTask.getDescription(), currentTask.getTag());
+        return getCompleteTaskMessage(currentTask);
+    }
 
-        return output;
+    /**
+     * Returns a confirmation that the Task has been marked complete.
+     * @param currentTask The task that was marked as done.
+     * @return The confirmation message that the task has been marked completed.
+     */
+    public String getCompleteTaskMessage(Task currentTask) {
+        return "Nice! I've marked this task as done:\n"
+                + String.format("[%s][X] %s %s\n",
+                currentTask.getType(), currentTask.getDescription(), "#" + currentTask.getTag());
+
     }
 
     /**
@@ -138,18 +180,27 @@ public class TaskList {
     public String deleteTask(int deleteTask) {
         Task delTask = tasks.remove(deleteTask - 1);
         listIndex--;
-        String output = "Noted. I've removed this task:\n" + String.format("[%s][%s] %s %s\n",
-                delTask.getType(), delTask.getStatusIcon(), delTask.getDescription(), delTask.getTag());
 
+        return getDeleteTaskMessage(delTask);
+    }
+
+    /**
+     * Returns a confirmation that the Task is deleted, and the new total number of tasks in the list.
+     * @param delTask The task that was deleted.
+     * @return A confirmation that the Task is deleted, and the new total number of tasks in the list.
+     */
+    public String getDeleteTaskMessage(Task delTask) {
+        // for correct grammar
         String word;
-        if (listIndex == 1) {
+        if (this.listIndex == 1) {
             word = "task";
         } else {
             word = "tasks";
         }
 
-        output += String.format("Now you have %d %s in the list.%n", listIndex, word);
-        return output;
+        return "Noted. I've removed this task:\n" + String.format("[%s][%s] %s %s\n",
+                delTask.getType(), delTask.getStatusIcon(), delTask.getDescription(), "#" + delTask.getTag()) +
+                String.format("Now you have %d %s in the list.%n", this.listIndex, word);
     }
 
 
@@ -167,7 +218,7 @@ public class TaskList {
             Task curr = tasks.get(i);
             if (curr.getDescription().contains(str)) {
                 output += String.format("%d. [%s][%s] %s %s\n",
-                        num, curr.getType(), curr.getStatusIcon(), curr.getDescription(), curr.getTag());
+                        num, curr.getType(), curr.getStatusIcon(), curr.getDescription(), "#" + curr.getTag());
             }
             i++;
         }
@@ -187,7 +238,7 @@ public class TaskList {
             int num = i+1;
             Task curr = tasks.get(i);
             completeList += String.format("%d. [%s][%s] %s %s\n",
-                    num, curr.getType(), curr.getStatusIcon(), curr.getDescription(), curr.getTag());
+                    num, curr.getType(), curr.getStatusIcon(), curr.getDescription(), "#" + curr.getTag());
             i++;
         }
 

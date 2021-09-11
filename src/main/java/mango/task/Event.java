@@ -53,7 +53,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the string representation of the event.
+     * Returns the string representation of the event for saving.
      *
      * @return The string representation of the event.
      */

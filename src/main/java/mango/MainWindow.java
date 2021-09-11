@@ -21,10 +21,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Mango mango;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Mango.jpg"));
+    private Image mangoImage = new Image(this.getClass().getResourceAsStream("/images/Mango.jpg"));
 
     @FXML
     public void initialize() {
@@ -35,25 +35,26 @@ public class MainWindow extends AnchorPane {
      * Sets the instance of Mango that will interact in the MainWindow.
      * @param d The instance of Mango.
      */
-    public void setDuke(Duke d) {
-        duke = d;
-        DialogBox greet = DialogBox.getDukeDialog(duke.greet(), dukeImage);
+    public void setMango(Mango d) {
+        mango = d;
+        MangoDialogBox showLogo = MangoDialogBox.getMangoDialog(mango.showLogo(), mangoImage);
+        dialogContainer.getChildren().addAll(showLogo);
+        MangoDialogBox greet = MangoDialogBox.getMangoDialog(mango.greet(), mangoImage);
         dialogContainer.getChildren().addAll(greet);
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Mango's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-
+        String response = mango.getResponse(input);
 
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                UserDialogBox.getUserDialog(input, userImage),
+                MangoDialogBox.getMangoDialog(response, mangoImage)
         );
         userInput.clear();
     }

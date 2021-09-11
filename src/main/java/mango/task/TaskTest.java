@@ -31,6 +31,4 @@ public class TaskTest {
             assertEquals(" ☹ OOPS!!! The description of a deadline cannot be empty.", e.getMessage());
         }
     }
-
-
 }
