@@ -21,14 +21,6 @@ public class TagList {
     }
 
     /**
-     * Constructor to initialise TagList.
-     * @param currTags current task list data to be used.
-     */
-    public TagList(List<Tag> currTags) {
-        this.tags = currTags;
-    }
-
-    /**
      * Checks if the tag list contains the tag.
      * @param tagName the tag to be checked.
      * @return true if the tag list contains the tag.
@@ -70,7 +62,7 @@ public class TagList {
     @Override
     public String toString() {
         if (!this.tags.isEmpty()) {
-            StringBuilder result = new StringBuilder("Tags: ");
+            StringBuilder result = new StringBuilder("\nTags: ");
             for (Tag tag : this.tags) {
                 result.append(String.format("#%s ", tag));
             }

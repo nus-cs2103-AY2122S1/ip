@@ -27,7 +27,7 @@ public class Todo extends Task {
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return String.format("[To-do] %s %s\n%s", this.getStatusIcon(), this.description, this.getTags());
+        return String.format("[To-do] %s %s %s", this.getStatusIcon(), this.description, this.getTags());
     }
 
 }

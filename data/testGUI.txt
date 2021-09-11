@@ -1,2 +1,6 @@
-T;;0;;task1
-hey;;bye;;
+T;;0;;task2
+NM;;
+E;;0;;CS2103T Lecture;;2021-09-10 1600
+
+D;;0;;CS2100 Assignment;;2021-09-15
+
