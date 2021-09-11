@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -15,10 +17,23 @@ public class FindMessage extends DukeMessage {
     public String display() {
         ArrayList<Task> taskList = (ArrayList<Task>) TaskList.getTaskList().getTasks();
         ArrayList<Task> searchResults = new ArrayList<>();
-        for(Task task: taskList) {
-            String taskStr = task.getTaskString();
-            if(taskStr.contains(searchStr)) {
-                searchResults.add(task);
+
+        if (searchStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            String dateQuery =
+                    LocalDate.parse(searchStr).format(DateTimeFormatter
+                            .ofPattern("MMM dd yyyy"));
+            for (Task task : taskList) {
+                String taskStr = task.getTaskString();
+                if (taskStr.contains(dateQuery)) {
+                    searchResults.add(task);
+                }
+            }
+        } else {
+            for (Task task : taskList) {
+                String taskStr = task.getTaskString();
+                if (taskStr.contains(searchStr)) {
+                    searchResults.add(task);
+                }
             }
         }
         int count = 1;
