@@ -38,8 +38,8 @@ public class DoneCommand extends Command {
 
         tasks.getTask(doneTask).markAsDone();
 
-        String response = "     Nice! I've marked this task as done:\n"
-                + "       " + tasks.getTask(doneTask);
+        String response = "Nice! I've marked this task as done:\n"
+                + " " + tasks.getTask(doneTask);
 
         storage.save(tasks.getTaskList());
 

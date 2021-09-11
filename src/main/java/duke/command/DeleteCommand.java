@@ -36,9 +36,9 @@ public class DeleteCommand extends Command {
             throw new InvalidArgumentException(tasks.getSize());
         }
 
-        String response = "     Noted. I've removed this task:\n"
-                + "       " + tasks.getTask(deleteTask) + "\n"
-                + "     Now you have "
+        String response = "Noted. I've removed this task:\n"
+                + " " + tasks.getTask(deleteTask) + "\n"
+                + "Now you have "
                 + (tasks.getSize() - 1) + (tasks.getSize() - 1 > 1 ? " tasks" : " task")
                 + " in the list.";
 

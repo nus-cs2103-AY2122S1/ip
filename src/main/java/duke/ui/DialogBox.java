@@ -11,8 +11,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -23,7 +25,7 @@ public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
-    private ImageView displayPicture;
+    private Circle displayPicture;
 
     private DialogBox(String text, Image img) {
         try {
@@ -36,7 +38,22 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        displayPicture.setImage(img);
+        displayPicture.setFill(new ImagePattern(img));
+    }
+
+    /**
+     * Sets dialog red.
+     */
+    private void setBlackBackground() {
+        dialog.setStyle("-fx-background-color: black; -fx-background-radius: 10;");
+    }
+
+    private void setRedBackground() {
+        dialog.setStyle("-fx-background-color: red; -fx-background-radius: 10;");
+    }
+
+    private void setWhiteText() {
+        dialog.setTextFill(Color.WHITE);
     }
 
     /**
@@ -70,6 +87,23 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.setBlackBackground();
+        db.setWhiteText();
+        return db;
+    }
+
+    /**
+     * Returns a Duke dialog with given image and text.
+     *
+     * @param text Text in the user dialog.
+     * @param img Image in the user dialog.
+     * @return Duke dialog with given image and text.
+     */
+    public static DialogBox getDukeFailureDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
+        db.flip();
+        db.setRedBackground();
+        db.setWhiteText();
         return db;
     }
 }

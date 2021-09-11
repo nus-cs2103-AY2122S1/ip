@@ -32,12 +32,12 @@ public class SortCommand extends Command {
         String deadlineTasksString = "";
         for (int i = 0; i < deadlineTasks.size(); i++) {
             deadlineTasksString = i == deadlineTasks.size() - 1
-                    ? deadlineTasksString + "     " + (i + 1) + "." + deadlineTasks.get(i)
-                    : deadlineTasksString + "     " + (i + 1) + "." + deadlineTasks.get(i) + "\n";
+                    ? deadlineTasksString + (i + 1) + "." + deadlineTasks.get(i)
+                    : deadlineTasksString + (i + 1) + "." + deadlineTasks.get(i) + "\n";
         }
         String response = deadlineTasks.size() == 0
-                ? "     There are no Deadline tasks."
-                : "     Here are the sorted Deadline tasks in your list:\n" + deadlineTasksString;
+                ? "There are no Deadline tasks."
+                : "Here are the sorted Deadline tasks in your list:\n" + deadlineTasksString;
         return response;
     }
 

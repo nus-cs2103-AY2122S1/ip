@@ -33,9 +33,9 @@ public class TodoCommand extends Command {
     public String executeAndGetResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(todo);
 
-        String response = "     Got it. I've added this task:\n"
-                + "       " + todo + "\n"
-                + "     Now you have "
+        String response = "Got it. I've added this task:\n"
+                + " " + todo + "\n"
+                + "Now you have "
                 + tasks.getSize() + (tasks.getSize() > 1 ? " tasks" : " task")
                 + " in the list.";
 
