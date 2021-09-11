@@ -14,7 +14,6 @@ public abstract class Command {
      * @param storage Storage used to deal with making sense of the user command.
      * @throws ShyBotException If the command is erroneous.
      */
-    // TODO: let UI class handle shouldPrintMessage logic
     public abstract void execute(ShyBot shybot, TaskList tasks, Storage storage)
         throws ShyBotException;
 
