@@ -236,7 +236,7 @@ public class CommandHandler {
 
     private static String[] splitCommands(String command) throws LifelineException {
         String[] commands = command.split("\\s", 2);
-        if (commands.length < 2) {
+        if (commands.length < 2 || commands[1].trim().startsWith("/by") || commands[1].trim().startsWith("/at")) {
             handleIncompleteCommand(commands[0]);
         }
         return commands;
