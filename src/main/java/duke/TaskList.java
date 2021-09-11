@@ -3,14 +3,14 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    static private ArrayList<duke.Task> storage;
+    static private ArrayList<Task> storage;
 
-    public TaskList (ArrayList<duke.Task> filledStorage) {
+    public TaskList (ArrayList<Task> filledStorage) {
         storage = filledStorage;
     }
 
     public TaskList () {
-        storage = new ArrayList<duke.Task>();
+        storage = new ArrayList<Task>();
     }
 
     public static int noOfTasks() {
@@ -40,7 +40,6 @@ public class TaskList {
 
         if (Time.validateJavaDate(deadlineDate)) {
             String deadlineTitle = deadlineEntry.substring(9, indexOfSlash);
-            System.out.println(deadlineDate);
             deadlineDate = Time.changeDateFormat(deadlineDate);
             Deadline newDeadline = new Deadline(deadlineTitle, deadlineDate);
             storage.add(newDeadline);
@@ -84,7 +83,7 @@ public class TaskList {
                 + "\nNow there are " + storage.size() + " tasks in the list");
     }
 
-    public static duke.Task getCurrentTask(int taskNumber) {
+    public static Task getCurrentTask(int taskNumber) {
         return storage.get(taskNumber);
     }
 

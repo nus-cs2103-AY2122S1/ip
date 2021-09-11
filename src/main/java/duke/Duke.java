@@ -37,6 +37,8 @@ public class Duke {
                     Ui.list();
                 } else if (parser.parseDone(input)) {
                     Ui.done(input);
+                } else if (parser.parseFind(input)) {
+                    Ui.find(input);
                 } else if (parser.parseToDo(input)) {
                     TaskList.todo(input);
                 } else if (parser.parseDeadline(input)) {

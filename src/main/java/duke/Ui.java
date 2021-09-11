@@ -1,14 +1,19 @@
 package duke;
+
+import java.util.ArrayList;
+
 public class Ui {
+
+    private static final String separator = "=======================================";
 
     public Ui() {
 
     }
 
     public static void print(String text) {
-        System.out.println("=======================================");
+        System.out.println(separator);
         text.lines().map(x -> "    " + x).forEach(x -> System.out.println(x));
-        System.out.println("=======================================");
+        System.out.println(separator);
     }
 
     public static void done(String doneEntry) throws DukeException {
@@ -29,9 +34,33 @@ public class Ui {
         int len = TaskList.noOfTasks();
         String sentence = "";
         for (int i = 1; i < len + 1; i++) {
-            duke.Task currentTask = TaskList.getCurrentTask(i - 1);
+            Task currentTask = TaskList.getCurrentTask(i - 1);
             sentence = sentence + i + "." + currentTask.toString() + "\n";
         }
-        print(sentence);
+        if (len == 0) {
+            print("You currently have no pending tasks!");
+        } else {
+            sentence = "Here are your current tasks!" + "\n" + sentence;
+            print(sentence);
+        }
+    }
+
+    public static void find(String findWord) {
+        String word = findWord.substring(5);
+        int len = TaskList.noOfTasks();
+        String sentence = "";
+        for (int i = 1; i < len + 1; i++) {
+            Task currentTask = TaskList.getCurrentTask(i - 1);
+            String currentDescription = currentTask.getDescription();
+            if (currentDescription.contains(word)) {
+                sentence = sentence + i + "." + currentTask.toString() + "\n";
+            }
+        }
+        if (sentence.equals("")) {
+            print("Sorry! I can't find any task that matches your keyword ☹");
+        } else {
+            sentence = "Here are the matching tasks I found:" + "\n" + sentence;
+            print(sentence);
+        }
     }
 }
