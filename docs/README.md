@@ -1,6 +1,6 @@
 # User Guide
 
-Duii is a todo-list application that allows users to keep track of their tasks through a Graphical User Interface (GUI). This project is adapted from Project Duke.
+Duii is a todo-list application that allows users to keep track of their tasks through a Graphical User Interface (GUI). This project is adapted from Project Duke. Display pictures used are taken from Pinterest, original author 不觉晓晓.
 
 ## Starting the Program
 
