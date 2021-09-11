@@ -74,16 +74,6 @@ public class TaskList {
     }
 
     /**
-     * Displays the add task message.
-     * @param task The task to be added.
-     */
-    public String addTaskSuffix(Task task) {
-        int taskNo = getSize();
-        String t = taskNo == 1 ? " task " : " tasks ";
-        return ui.showAddTask(task, taskNo, t);
-    }
-
-    /**
      * Adds a task to the task list.
      * @param input The user input.
      * @throws DukeException If the input is invalid.
@@ -101,8 +91,12 @@ public class TaskList {
             throw new DukeException("OOPS!!! Invalid task description.");
         }
 
+        if (isDuplicate(newTask)) {
+            return ui.showDuplicate();
+        }
         getTasks().add(newTask);
-        return addTaskSuffix(newTask);
+        return ui.showAddTask(this, newTask);
+
     }
 
     /**
@@ -135,5 +129,9 @@ public class TaskList {
 
         int num = foundTasks.size();
         return ui.showTasksOnDate(date, num, foundTasks);
+    }
+
+    public boolean isDuplicate(Task task) {
+        return tasks.contains(task);
     }
 }

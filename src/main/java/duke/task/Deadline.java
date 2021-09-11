@@ -30,7 +30,7 @@ public class Deadline extends Task {
         super(deadlineName, isDone, 0, deadlineName.indexOf("(by:"));
         int start = deadlineName.indexOf("(by:") + 5;
         dueDate = LocalDate.parse(deadlineName.substring(start, start + 11),
-                DateTimeFormatter.ofPattern("MMM d yyyy"));
+                DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
     public LocalDate getDueDate() {
@@ -46,7 +46,17 @@ public class Deadline extends Task {
         return "[D]"
                 + super.toString()
                 + "(by: "
-                + getDueDate().format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + getDueDate().format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + ")";
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (o instanceof Deadline) {
+            Deadline d = (Deadline) o;
+            return d.getTaskName().equals(this.getTaskName())
+                    && d.getDueDate().isEqual(this.getDueDate());
+        }
+        return false;
     }
 }

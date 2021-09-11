@@ -46,7 +46,17 @@ public class Event extends Task {
         return "[E]"
                 + super.toString()
                 + "(at: "
-                + getEventDate().format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + getEventDate().format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + ")";
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (o instanceof Event) {
+            Event e = (Event) o;
+            return e.getTaskName().equals(this.getTaskName())
+                    && e.getEventDate().isEqual(this.getEventDate());
+        }
+        return false;
     }
 }

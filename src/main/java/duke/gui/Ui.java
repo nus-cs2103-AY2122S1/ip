@@ -37,15 +37,15 @@ public class Ui {
 
     /**
      * Displays add task message.
+     * @param tasks The list of tasks to add task to.
      * @param task The added task.
-     * @param taskNo Task number.
-     * @param t "task" or "tasks".
      */
-    public String showAddTask(Task task, int taskNo, String t) {
+    public String showAddTask(TaskList tasks, Task task) {
+        int taskNo = tasks.getSize();
+        String t = taskNo == 1 ? " task " : " tasks ";
         return "Got it. I've added this task:\n"
                 + task.toString()
-                + "\n"
-                + "Now you have "
+                + "\nNow you have "
                 + taskNo
                 + t
                 + "in the list.";
@@ -125,5 +125,9 @@ public class Ui {
      */
     public String showFarewell() {
         return "Bye dude! Hope to see you again soon!";
+    }
+
+    public String showDuplicate() {
+        return "This task already exists!";
     }
 }
