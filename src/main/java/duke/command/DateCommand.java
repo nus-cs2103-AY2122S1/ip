@@ -70,7 +70,7 @@ public class DateCommand extends Command {
 
         StringBuilder datesBuilder = new StringBuilder();
         // finds Deadlines and Events with LocalDate that matches date input from user.
-        System.out.println(tasks.size());
+
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             // Increment by 1 to change index to be 1-based.
