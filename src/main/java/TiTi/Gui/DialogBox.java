@@ -17,6 +17,7 @@ import javafx.scene.paint.Color;
 /**
  * Represents a dialog box consisting of an ImageView to represent the speaker
  * and a label containing text from the speaker.
+ * Adapted from https://se-education.org/guides/index.html
  */
 public class DialogBox extends HBox {
 

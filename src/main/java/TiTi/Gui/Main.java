@@ -1,6 +1,7 @@
 package TiTi.Gui;
 
 import javafx.application.Application;
+import javafx.geometry.*;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,9 +9,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.*;
 import javafx.stage.Stage;
 
 import TiTi.util.SavedHistory;
@@ -20,6 +20,7 @@ import TiTi.util.Ui;
 
 /**
  * A GUI for TiTI using javaFX.
+ * Adapted from https://se-education.org/guides/index.html
  */
 public class Main extends Application {
 
@@ -32,8 +33,8 @@ public class Main extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/Setsu.jpg"));
-    private Image tiTi = new Image(this.getClass().getResourceAsStream("/images/TiTi.jpg"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/Setsu.PNG"));
+    private Image tiTi = new Image(this.getClass().getResourceAsStream("/images/TiTi.PNG"));
 
 
     /**
@@ -107,7 +108,7 @@ public class Main extends Application {
         stage.show();
 
         // Display welcome message
-        Label tiTiText = new Label(ui.getWelcomeMessage());
+        Label tiTiText = new Label("\n" + ui.getWelcomeMessage());
         dialogContainer.getChildren().addAll(
             DialogBox.getTiTiDialog(tiTiText, new ImageView(tiTi))
         );
@@ -120,8 +121,8 @@ public class Main extends Application {
      * Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label tiTiText = new Label(getResponse(userInput.getText()));
+        Label userText = new Label("\n" + userInput.getText() + "\n" );
+        Label tiTiText = new Label("\n" + getResponse(userInput.getText()) + "\n");
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getTiTiDialog(tiTiText, new ImageView(tiTi))

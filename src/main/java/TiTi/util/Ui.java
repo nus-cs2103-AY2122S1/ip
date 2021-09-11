@@ -148,7 +148,7 @@ public class Ui {
             return result;
         }
 
-        result += STARTER_BUFFER + "I'll mark this tasks as done: \n";
+        result += STARTER_BUFFER + "I'll mark these tasks as done: \n";
         for (int i = 0; i < tempTaskList.size(); i++) {
             result += STARTER_BUFFER + (i + 1) + ". " + tempTaskList.get(i) + " \n";
         }
@@ -165,7 +165,7 @@ public class Ui {
             return result;
         }
 
-        result += STARTER_NORMAL + "Nya! This tasks shall be removed: \n";
+        result += STARTER_NORMAL + "Nya! These tasks shall be removed: \n";
         for (int i = 0; i < tempTaskList.size(); i++) {
             result += STARTER_BUFFER + (i + 1) + ". " + tempTaskList.get(i) + " \n";
         }
