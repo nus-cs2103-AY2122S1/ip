@@ -35,7 +35,7 @@ public class DukeGUI extends Application {
     private void initialize() throws IOException{
         TaskList taskList = new TaskList();
         Response response = new Response(taskList);
-        Storage storage = new Storage("src/main/Resources/duke.txt", taskList);
+        Storage storage = new Storage("duke.txt", taskList);
         DukeGUI.command = new Command(taskList, response, storage);
     }
 }

@@ -1,6 +1,7 @@
 package duke.gui;
 
 import duke.exception.DukeException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,8 +9,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
 import java.io.IOException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -32,6 +39,8 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
+        userInput.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 14));
+        sendButton.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 14));
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(DukeGUI.command.welcomeToUser().toString(), dukeImage));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         try {
@@ -55,11 +64,19 @@ public class MainWindow extends AnchorPane {
         assert dukeImage != null : "Duke's Image should not be null";
         String input = userInput.getText();
         String response = DukeGUI.command.getCorrespondingMessage(input).toString();
-        assert response.equals("") : "response should not be an empty String";
+        assert !response.isEmpty() : "response should not be an empty String";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (input.equals("bye")) {
+            exit();
+        }
+    }
+
+    private void exit() {
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+        executorService.schedule(Platform::exit, 2, TimeUnit.SECONDS);
     }
 }

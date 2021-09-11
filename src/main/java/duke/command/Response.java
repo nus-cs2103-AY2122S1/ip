@@ -49,6 +49,7 @@ public class Response {
         builder.append("delete item: delete x\n");
         builder.append("find item: find xxxx\n");
         builder.append("Show the command list: help\n");
+        builder.append("exit the program: bye");
         return builder;
     }
 

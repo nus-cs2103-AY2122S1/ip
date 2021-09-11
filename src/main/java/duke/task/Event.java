@@ -73,7 +73,7 @@ public class Event extends Task {
             finished = "X";
         }
         return "[D]" + "[" + finished + "] " + this.getTaskName() + " (at: " + outputTaskTime() + ", "
-                + eventStartTime.toString() + "to" + eventEndTime.toString() +")";
+                + eventStartTime.toString() + " to " + eventEndTime.toString() +")";
     }
 
     /**
