@@ -1,5 +1,6 @@
 package duke.utils;
 
+import duke.commands.*;
 import duke.exceptions.DukeException;
 import duke.exceptions.EmptyTaskDescriptionException;
 import duke.exceptions.InvalidCommandException;
@@ -15,6 +16,44 @@ import duke.tasks.ToDo;
 public class Parser {
 
     /**
+     * Returns a Command object based on the user's input
+     *
+     * @param input The input provided by the user.
+     * @return A Command object corresponding to the action intended by the user.
+     */
+    private static Command createCommand(String input) throws DukeException {
+        if (input.equals("list")) {
+            return new List();
+        } else if (input.matches("done\\s[0-9][0-9]?")) {
+            int index = Integer.valueOf(input.split(" ")[1]);
+            return new Done(index);
+        } else if (input.matches("delete\\s[0-9][0-9]?")) {
+            int index = Integer.valueOf(input.split(" ")[1]);
+            return new Delete(index);
+        } else if (input.matches("todo(.*?)")) {
+            if (input.split(" ").length < 2) throw new EmptyTaskDescriptionException();
+            String taskName = input.split(" ", 2)[1];
+            return new AddTodo(taskName);
+        } else if (input.matches("deadline(.*?)")) {
+            if (input.split(" ").length < 2) throw new EmptyTaskDescriptionException();
+            String firstCommand = input.split("/by", 2)[0];
+            String taskName = firstCommand.split(" ", 2)[1];
+            String dueDate = input.split("/by", 2)[1];
+            return new AddDeadline(taskName.trim(), dueDate.trim());
+        } else if (input.matches("event(.*?)")) {
+            if (input.split(" ").length < 2) throw new EmptyTaskDescriptionException();
+            String firstCommand = input.split("/at", 2)[0];
+            String taskName = firstCommand.split(" ", 2)[1];
+            String duration = input.split("/at", 2)[1];
+            return new AddEvent(taskName.trim(), duration.trim());
+        } else if (input.matches("find\\s(.*?)")) {
+            return new Find(input.split(" ")[1]);
+        } else {
+            throw new InvalidCommandException();
+        }
+    }
+
+    /**
      * Reads the user input and performs the corresponding action to the TaskList.
      *
      * @param taskList A TaskList object storing tasks.
@@ -22,54 +61,7 @@ public class Parser {
      * @throws DukeException If the user input is an invalid command.
      */
     public static TaskList parseInput(TaskList taskList, String commandInput) throws DukeException {
-        if (commandInput.equals("list")) {
-            return taskList;
-        } else if (commandInput.matches("done\\s[0-9][0-9]?")) {
-            int taskToComplete = Integer.valueOf(commandInput.split(" ")[1]);
-            if (taskToComplete < 0 || taskToComplete >= taskList.getSize()) {
-                throw new InvalidTaskIdException();
-            }
-            taskList.markAsCompleted(taskToComplete - 1);
-            return taskList;
-        } else if (commandInput.matches("delete\\s[0-9][0-9]?")) {
-            int taskToComplete = Integer.valueOf(commandInput.split(" ")[1]);
-            if (taskToComplete < 0 || taskToComplete >= taskList.getSize()) {
-                throw new InvalidTaskIdException();
-            }
-            taskList.delete(taskToComplete - 1);
-            return taskList;
-        } else if (commandInput.matches("todo(.*?)")) {
-            if (commandInput.split(" ").length < 2) {
-                throw new EmptyTaskDescriptionException();
-            }
-            String taskname = commandInput.split(" ", 2)[1];
-            ToDo todo = new ToDo(taskname);
-            taskList.add(todo);
-            return taskList;
-        } else if (commandInput.matches("deadline(.*?)")) {
-            if (commandInput.split(" ").length < 2) {
-                throw new EmptyTaskDescriptionException();
-            }
-            String firstCommand = commandInput.split("/by", 2)[0];
-            String taskname = firstCommand.split(" ", 2)[1];
-            String dueDate = commandInput.split("/by", 2)[1];
-            Deadline deadline = new Deadline(taskname.trim(), dueDate.trim());
-            taskList.add(deadline);
-            return taskList;
-        } else if (commandInput.matches("event(.*?)")) {
-            if (commandInput.split(" ").length < 2) {
-                throw new EmptyTaskDescriptionException();
-            }
-            String firstCommand = commandInput.split("/at", 2)[0];
-            String taskname = firstCommand.split(" ", 2)[1];
-            String duration = commandInput.split("/at", 2)[1];
-            Event event = new Event(taskname.trim(), duration.trim());
-            taskList.add(event);
-            return taskList;
-        } else if (commandInput.matches("find\\s(.*?)")) {
-            return taskList.search(commandInput.split(" ")[1]);
-        } else {
-            throw new InvalidCommandException();
-        }
+        Command userCommand = createCommand(commandInput);
+        return userCommand.execute(taskList);
     }
 }
