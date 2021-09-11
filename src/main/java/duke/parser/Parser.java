@@ -21,6 +21,12 @@ public class Parser {
     private static final String DELETE_MESSAGE = "Noted. I've removed this task:\n";
     private static final String FIND_MESSAGE = "Here are the matching tasks in your list:\n";
 
+    private static final String INVALID_INPUT = "OOPS!!! I'm sorry, but I don't know what that means :(";
+    private static final String EMPTY_LIST = "Yay, you have no items in your list!";
+    private static final String EMPTY_DESCRIPTION = "OOPS!!! The description of a Task cannot be empty.";
+    private static final String WORD_NOT_FOUND = "OOPS!!! There's no such word in your list.";
+    private static final String MISSING_FIND_PARAMETER = "Please include the word to be searched.";
+
     /**
      * Turns the user's input into a command.
      *
@@ -28,7 +34,6 @@ public class Parser {
      * @param taskList  the list containing the tasks.
      * @param duke      the Duke object running.
      * @return a string to be shown in the GUI.
-     * @throws DukeException if the inputs are not expected.
      */
     public static String parse(String userInput, TaskList taskList, Duke duke) throws DukeException {
         String[] tokens = userInput.split("\\s+", 2);

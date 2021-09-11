@@ -3,7 +3,6 @@ package duke.ui.controller;
 import duke.Duke;
 import duke.DukeException;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -21,12 +20,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     private TextField userInput;
     @FXML
-    private Button sendButton;
 
     private Duke duke;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Biscuit.png"));
 
     @FXML
     public void initialize() {
@@ -52,5 +50,22 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        //@@author luffingluffy-reused
+        // Closes the window if the "bye" input is given.
+        // Reused from https://github.com/jiayushe/duke/blob/master/src/main/java/duke/MainWindow.java
+        if (input.equals("bye")) {
+            new Thread(() -> {
+                try {
+                    Thread.sleep(250);
+                    System.exit(0);
+                } catch (InterruptedException e) {
+                    dialogContainer.getChildren().add(
+                            DialogBox.getDukeDialog("Exiting!", dukeImage)
+                    );
+                }
+            }).start();
+        }
+        //@@author
     }
 }

@@ -18,10 +18,6 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    public boolean isEmpty() {
-        return tasks.isEmpty();
-    }
-
     public int getSize() {
         return tasks.size();
     }
