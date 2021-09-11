@@ -197,6 +197,9 @@ public class Ui extends AnchorPane {
         this.chadChatBot = chadChatBot;
     }
 
+    /**
+     * Initialises the JavaFX nodes of the chatbot GUI.
+     */
     @FXML
     public void initialize() {
         initialiseScrollPane();
