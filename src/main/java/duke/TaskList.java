@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.DateTimeException;
 import java.util.ArrayList;
 
 /**
@@ -55,12 +56,12 @@ public class TaskList {
         return tasks.remove(i - 1);
     }
 
-    public Task snoozeTask(int i, int d)  throws IndexOutOfBoundsException {
+    public Task snoozeTask(int i, int numberOfDays) throws IndexOutOfBoundsException, DukeException.DateException {
         Task t = tasks.get(i - 1);
-        try {
-            t.snooze(d);
-        } catch (Exception e) {
-            // TODO
+        if (t instanceof Task.Deadline) {
+            ((Task.Deadline) t).snooze(numberOfDays);
+        } else {
+            throw new DukeException.DateException();
         }
         return t;
     }

@@ -1,4 +1,5 @@
 package duke;
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class Parser {
@@ -31,14 +32,10 @@ public abstract class Parser {
             return new Pair(Command.DELETE, List.of(
                     input.substring("delete ".length())));
         } else if (input.matches("snooze.*")) {
-            if (!input.matches("snooze \\d+")) {
-                throw new DukeException.MissingArgumentException("index of task to be snoozed");
-            }
             if (!input.matches("snooze \\d+ \\d+")) {
-                throw new DukeException.MissingArgumentException("amount of time task should be snoozed for");
+                throw new DukeException.MissingArgumentException("index of task, number of days for task to be snoozed");
             }
-            return new Pair(Command.SNOOZE, List.of(
-                    input.substring("snooze ".length())));
+            return new Pair(Command.SNOOZE, Arrays.asList(input.split(" ")).subList(1,3));
         } else if (input.matches("event.*")) {
             int k = input.indexOf("/at");
             if (k < 0) {

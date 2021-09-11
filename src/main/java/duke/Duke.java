@@ -55,10 +55,10 @@ public class Duke {
                 return String.format("Noted. I've removed this task:\n%s", t);
             case SNOOZE:
                 i = Integer.parseInt(varargs.get(0));
-                int d = Integer.parseInt(varargs.get(1));
-                t = this.tasks.snoozeTask(i, d);
+                int numberOfDays = Integer.parseInt(varargs.get(1));
+                t = this.tasks.snoozeTask(i, numberOfDays);
                 this.storage.writeFile(this.tasks.toRepr());
-                return String.format("Noted. I've snoozed for %d this task:\n%s", d, t);
+                return String.format("Noted. I've snoozed this task:\n%s\nfor %d days", t, numberOfDays);
             case CREATE_DEADLINE:
                 t = new Task.Deadline(false, varargs.get(0), varargs.get(1));
                 this.tasks.addTask(t);

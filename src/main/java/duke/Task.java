@@ -23,9 +23,6 @@ public abstract class Task {
     public void markAsComplete() {
         this.isComplete = true;
     }
-    public void snooze(int d) {
-        // TODO
-    }
 
     public String getRepr() {
         return String.format("%d|%s", this.isComplete ? 1 : 0, this.desc);
@@ -65,7 +62,6 @@ public abstract class Task {
 
     public static class Event extends Task {
         String at;
-        LocalDate date;
 
         public Event(boolean isComplete, String desc, String at) throws DukeException.EmptyTaskDescriptionException {
             super(isComplete, desc);
@@ -83,7 +79,9 @@ public abstract class Task {
         }
     }
 
-
+    /**
+     * Represents a task with a deadline, given in the form of YYYY-MM-DD
+     */
     public static class Deadline extends Task {
         String by;
         Optional<LocalDate> date;
@@ -102,14 +100,22 @@ public abstract class Task {
                     .orElse(this.by);
         }
 
+        public void snooze(int numberOfDays) throws DukeException.DateException {
+            if (this.date.isPresent()) {
+                this.date = this.date.map(localDate -> localDate.plusDays(numberOfDays));
+            } else {
+                throw new DukeException.DateException();
+            }
+        }
+
         @Override
         public String getRepr() {
-            return String.format("D|%s|%s", super.getRepr(), this.getDate("yyyy-MM-d"));
+            return String.format("D|%s|%s", super.getRepr(), this.getDate("yyyy-MM-dd"));
         }
 
         @Override
         public String toString() {
-            return String.format("[D]%s (by: %s)", super.toString(), this.getDate("MMM d yyyy"));
+            return String.format("[D]%s (by: %s)", super.toString(), this.getDate("MMM dd yyyy"));
         }
     }
 
