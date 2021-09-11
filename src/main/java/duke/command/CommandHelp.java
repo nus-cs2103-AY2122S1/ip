@@ -22,7 +22,11 @@ public class CommandHelp extends Command {
             + "4. Deadline,\n"
             + "5. Event,\n"
             + "6. Delete,\n"
-            + "7. Check,\n";
+            + "7. Check,\n"
+            + "8. Contacts,\n"
+            + "9. AddContact,\n"
+            + "10. DelContact,\n"
+            + "11. Find.\n";
 
 
     @Override
