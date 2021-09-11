@@ -85,7 +85,7 @@ public class Task {
      */
     public static boolean isValid(String[] userCommand) throws MangoException {
         if (userCommand.length == 1) {
-            throw new MangoException(" ☹ OOPS!!! The description of a event cannot be empty.");
+            throw new MangoException(" OOPS!!! The description of a event cannot be empty.");
         }
 
         return true;
