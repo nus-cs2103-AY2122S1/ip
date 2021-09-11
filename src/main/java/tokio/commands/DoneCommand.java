@@ -31,6 +31,7 @@ public class DoneCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+        assert index >= 0 : "index cannot be < 0";
         if (index < tasks.getSize() + 1) {
             Task curr = tasks.getTask(index - 1);
             storage.doneTask(curr);

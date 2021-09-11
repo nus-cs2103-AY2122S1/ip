@@ -50,6 +50,7 @@ public class Storage {
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
             String readStr = sc.nextLine();
+            assert readStr.length() != 0 : "Line to be read cannot be empty";
             String[] readLineArray = readStr.split("]", 3);
             String taskInstruction = readLineArray[0].substring(1);
             String taskIsDone = readLineArray[1].substring(1);
@@ -83,8 +84,6 @@ public class Storage {
                 int colonIndex = eventDescTimeArray[1].indexOf(":");
                 String dateStr = eventDescTimeArray[1].substring(0, colonIndex - 2);
                 String timeStr = eventDescTimeArray[1].substring(colonIndex - 2, colonIndex + 3);
-                System.out.println("date: " + dateStr);
-                System.out.println("time: " + timeStr);
                 //convert date to the correct input format
                 DateFormat inputEventDateFormat = new SimpleDateFormat("MMM dd yyyy");
                 Date inputEventDate = inputEventDateFormat.parse(dateStr.trim());
