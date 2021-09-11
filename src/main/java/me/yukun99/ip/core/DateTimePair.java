@@ -76,6 +76,19 @@ public class DateTimePair {
         return date.equals(o.date);
     }
 
+    /**
+     * Gets the task saving formatting of the DateTimePair.
+     *
+     * @return Task saving formatting of the DateTimePair.
+     */
+    public String saveString() {
+        if (time == null) {
+            return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        }
+        return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " "
+                + time.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

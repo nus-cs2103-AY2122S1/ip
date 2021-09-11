@@ -52,7 +52,7 @@ public class Storage {
     public void saveMessage(String message) throws HelpBotIoException {
         try {
             FileWriter output = getFile(outputPath);
-            output.write(message);
+            output.write(message + System.lineSeparator());
             output.close();
         } catch (IOException e) {
             throw new HelpBotIoException(e, outputPath);
@@ -117,7 +117,7 @@ public class Storage {
      * @return Task from save file.
      */
     private Task parseTask(String line) {
-        String[] lineSplit = line.split(":");
+        String[] lineSplit = line.split(":", 4);
         try {
             String strType = lineSplit[0];
             String strDone = lineSplit[1];

@@ -50,12 +50,12 @@ public class TaskList {
     }
 
     /**
-     * Marks task at specified index as done.
+     * Gets task at specified index.
      *
      * @param strIndex String representing the index of the task in the TaskList.
      * @throws HelpBotInvalidTaskException If strIndex is not an Integer.
      */
-    public Task doneTask(String strIndex) throws HelpBotInvalidTaskException {
+    public Task getTask(String strIndex) throws HelpBotInvalidTaskException {
         try {
             int index = Integer.parseInt(strIndex) - 1;
             return taskList.get(index);

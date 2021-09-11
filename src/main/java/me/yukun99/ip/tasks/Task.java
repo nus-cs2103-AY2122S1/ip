@@ -80,15 +80,6 @@ public abstract class Task {
     }
 
     /**
-     * Gets message sent when user marks a task as done.
-     *
-     * @return Message sent when user marks a task as done.
-     */
-    public String getDoneMessage() {
-        return Message.getDoneMessage(this, isDone);
-    }
-
-    /**
      * Updates TaskFinder instance when task is added or deleted.
      *
      * @param taskFinder TaskFinder instance to be updated.

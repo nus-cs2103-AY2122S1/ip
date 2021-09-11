@@ -19,7 +19,7 @@ public class Message {
     private static final String REPLY_HEADER =
             "===================To Your Royal Highness===================" + NEW_LINE;
     private static final String REPLY_FOOTER =
-            NEW_LINE + "======================================================";
+            NEW_LINE + "=====================================================";
 
     // Command help prefix.
     private static final String CMD_PREFIX = "  > ";
@@ -33,6 +33,7 @@ public class Message {
     private static final String HELP_DATE = "     - date format: yyyy-mm-dd";
     private static final String HELP_TIME = "     - time format: hh:mm:ss";
     private static final String HELP_UPDATE = "modify the date/time of task at specified index";
+    private static final String HELP_DONE = "marks a task as done";
     private static final String HELP_DELETE = "delete multiple tasks (LIFT MY BURDEN!)";
     private static final String HELP_DELETE_ALL = "delete all tasks (YES YES YES YES YES)";
     private static final String HELP_ARCHIVE_SAVE = "archives multiple tasks (ahh... temporal relief...)";
@@ -48,11 +49,12 @@ public class Message {
             + NEW_LINE + CMD_PREFIX + "'list [date]' - " + HELP_LIST
             + NEW_LINE + CMD_PREFIX + "'find (keyword)' - " + HELP_FIND
             + NEW_LINE + CMD_PREFIX + "'todo (task)' - " + HELP_TODO
-            + NEW_LINE + CMD_PREFIX + "'deadline (task) /by (date) (time)' - " + HELP_DEADLINE
-            + NEW_LINE + CMD_PREFIX + "'event (task) /at (date) (time)' - " + HELP_EVENT
-            + NEW_LINE + CMD_PREFIX + "'update (task index) /to (date) (time)' - " + HELP_UPDATE
+            + NEW_LINE + CMD_PREFIX + "'deadline (task) /by (date) [time]' - " + HELP_DEADLINE
+            + NEW_LINE + CMD_PREFIX + "'event (task) /at (date) [time]' - " + HELP_EVENT
+            + NEW_LINE + CMD_PREFIX + "'update (task index) /to (date) [time]' - " + HELP_UPDATE
             + NEW_LINE + HELP_DATE
             + NEW_LINE + HELP_TIME
+            + NEW_LINE + CMD_PREFIX + "'done (task index)' - " + HELP_DONE
             + NEW_LINE + CMD_PREFIX + "'delete (task index) (task index 2) ...' - " + HELP_DELETE
             + NEW_LINE + CMD_PREFIX + "'delete all' - " + HELP_DELETE_ALL
             + NEW_LINE + CMD_PREFIX + "'archive (task index) (task index 2) ...' - " + HELP_ARCHIVE_SAVE
@@ -65,11 +67,12 @@ public class Message {
             + NEW_LINE + CMD_PREFIX + "'list [date]' - " + HELP_LIST
             + NEW_LINE + CMD_PREFIX + "'find (keyword)' - " + HELP_FIND
             + NEW_LINE + CMD_PREFIX + "'todo (task)' - " + HELP_TODO
-            + NEW_LINE + CMD_PREFIX + "'deadline (task) (date/time)' - " + HELP_DEADLINE
-            + NEW_LINE + CMD_PREFIX + "'event (task) (date/time)' - " + HELP_EVENT
-            + NEW_LINE + CMD_PREFIX + "'update (task index) (date/time)' - " + HELP_UPDATE
+            + NEW_LINE + CMD_PREFIX + "'deadline (task) /by (date) [time]' - " + HELP_DEADLINE
+            + NEW_LINE + CMD_PREFIX + "'event (task) /at (date) [time]' - " + HELP_EVENT
+            + NEW_LINE + CMD_PREFIX + "'update (task index) /to (date) [time]' - " + HELP_UPDATE
             + NEW_LINE + HELP_DATE
             + NEW_LINE + HELP_TIME
+            + NEW_LINE + CMD_PREFIX + "'done (task index)' - " + HELP_DONE
             + NEW_LINE + CMD_PREFIX + "'delete (task index) (task index 2) ...' - " + HELP_DELETE
             + NEW_LINE + CMD_PREFIX + "'archive (task index) (task index 2) ...' - " + HELP_ARCHIVE_SAVE
             + NEW_LINE + CMD_PREFIX + "'archive load' - " + HELP_ARCHIVE_LOAD
@@ -94,9 +97,9 @@ public class Message {
     private static final String DELETE_MULTIPLE_LARGE =
             "HOW LONG HAVE YOU BEEN LETTING THESE PILE UP? DAMN IT, DELETED THESE:";
     private static final String ARCHIVE_SAVE = "Finally gonna take some load off me, are you?"
-            + "These better not come back anytime soon:";
+            + " These better not come back anytime soon:";
     private static final String ARCHIVE_LOAD = "I knew it... Sometimes I wonder why I even try with you."
-            + "Archived tasks loaded:";
+            + " Archived tasks loaded:";
     // Message sent to user when user marks an undone task as done.
     private static final String DONE_UNCOMPLETED =
             "About time you did your work, you lazy bum! I GUESS I'll mark it as done for you:";
@@ -108,7 +111,7 @@ public class Message {
     // Message sent to user when user exits HelpBot.
     private static final String EXIT = "Good riddance.";
     // Message sent to user to tell user how many tasks are left in the TaskList.
-    private static final String REMAINING = "You now have " + TASKNUM_PLACEHOLDER + " tasks to do.";
+    private static final String REMAINING = "You now have " + TASKNUM_PLACEHOLDER + " task(s) to do.";
 
     /**
      * Gets message sent when user starts up the bot.

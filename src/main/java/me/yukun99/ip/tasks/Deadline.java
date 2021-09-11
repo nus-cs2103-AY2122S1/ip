@@ -58,7 +58,7 @@ public class Deadline extends Task {
         } else {
             save += "F:";
         }
-        save += name + ":" + pair.toString();
+        save += name + ":" + pair.saveString();
         return save + super.saveString();
     }
 
