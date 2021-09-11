@@ -56,7 +56,6 @@ public class ToDo extends Task {
         return new ToDo(this.taskDescription, newStatus, this.date);
     }
 
-
     @Override
     public String toString() {
         String assignmentProg = assignmentType +

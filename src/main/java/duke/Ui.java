@@ -22,6 +22,19 @@ public class Ui {
     }
 
     /**
+     * Displays all the task matching to the user input date.
+     * 
+     * @param displayMessage String of display message
+     * @return String of final displayed message on GUI
+     */
+    public String displayTaskMatchingDate(
+            String displayMessage) {
+        return "Here are the tasks matching your search date:"
+                + "\n"
+                + displayMessage;
+    }
+
+    /**
      * Prints out that reading from storage of past stored tasks have failed.
      */
     protected void showLoadingError() {

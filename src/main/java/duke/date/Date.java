@@ -41,6 +41,23 @@ public class Date {
         this.globalTime = inputTime;
     }
 
+    /**
+     * Utilized by the the schedule command class
+     * to have compare dates against all the task in tasklist.
+     * 
+     * @param commandWithDate Array of string that
+     * consists of command name and the date input from user.
+     * @throws WrongDateFormatException throws error when the date
+     * format is not in the standards acceptable of 12:12:2020,
+     * 12-12-2020 or 12/12/2020
+     */
+    public Date(String[] commandWithDate) throws WrongDateFormatException {
+        String actualDate = commandWithDate[1];
+        LocalDate inputDate = formatDate(actualDate);
+        this.globalDate = inputDate;
+        this.globalTime = LocalTime.now();
+    }
+
     private LocalTime formatTime(
             String timeString) throws NumberFormatException,
             WrongTimeFormatException, DateTimeParseException {
@@ -97,6 +114,16 @@ public class Date {
                 + this.globalDate.getYear()
                 + " "
                 + this.getStringTime();
+    }
+
+    /**
+     * checks if 2 dates are equivalent.
+     * 
+     * @param otherDate Another date object to be compared
+     * @return boolean if 2 dates are equivalent
+     */
+    public boolean isEquivalentDate(Date otherDate) {
+        return this.globalDate.equals(otherDate.globalDate);
     }
 
     private String getStringTime() {

@@ -36,20 +36,33 @@ public class TaskCommand extends Command {
                 Arrays.copyOfRange(instructions,
                         1, instructions.length));
         String identity = instructions[0];
+        Task task = this.
+                convertInstructionToTask(
+                        identity,
+                        importantInstructions);
+        taskList.addNewTask(task);
+        storage.updateStorageList(taskList.getTaskList());
+        return ui.displayTaskInstructions(task.toString(), taskList.getTaskListLength());
+    }
+
+    private Task convertInstructionToTask(
+            String taskIdentity,
+            String taskBody) throws WrongDateFormatException,
+            WrongTimeFormatException,
+            WrongEventOrDeadlineFormatException,
+            NoSuchCommandException {
         Task task;
-        if (identity.equals(typeTask.TODO.getTask())) {
-            task = new ToDo(importantInstructions);
-        } else if (identity.equals(typeTask.DEADLINE.getTask())) {
-            task = new Deadline(importantInstructions);
-        } else if (identity.equals(typeTask.EVENT.getTask())) {
-            task = new Event(importantInstructions); 
+        if (taskIdentity.equals(typeTask.TODO.getTask())) {
+            task = new ToDo(taskBody);
+        } else if (taskIdentity.equals(typeTask.DEADLINE.getTask())) {
+            task = new Deadline(taskBody);
+        } else if (taskIdentity.equals(typeTask.EVENT.getTask())) {
+            task = new Event(taskBody); 
         } else {
             String errorCommand = "No such command!";
             throw new NoSuchCommandException(errorCommand);
         }
-        taskList.addNewTask(task);
-        storage.updateStorageList(taskList.getTaskList());
-        return ui.displayTaskInstructions(task.toString(), taskList.getTaskListLength());
+        return task;
     }
     
 }

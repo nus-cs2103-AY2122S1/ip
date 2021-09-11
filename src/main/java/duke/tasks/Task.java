@@ -70,7 +70,28 @@ public abstract class Task {
         this.date = date;
     }
 
+    /**
+     * Converts to appropriate format for storing of tasks.
+     * 
+     * @return String format of tasks.
+     */
     public abstract String getOriginalFormatForStorage();
 
+    /**
+     * Changes the status of a task if it is marked
+     * completed by the user.
+     * 
+     * @param newStatus String of new status task should be changed to.
+     * @return Task with a status changed if its completed or not.
+     */
     public abstract Task updateStatus(String newStatus);
+
+    /**
+     *rreturns an optional date object.
+     * 
+     * @return Optional date
+     */
+    public Optional<Date> getOptionalDate() {
+        return this.date;
+    }
 }
