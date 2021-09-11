@@ -94,7 +94,7 @@ public class Parser {
         } else if (input.startsWith("deadline ")) {
             response = deadlineResponse(input, tasks);
         } else if (input.startsWith("event ")) {
-            response = eventResponse(input, tasks)
+            response = eventResponse(input, tasks);
         } else if (input.startsWith("delete ")) {
             response = deleteResponse(input, tasks);
         } else if (input.startsWith("find ")) {
@@ -130,7 +130,7 @@ public class Parser {
     }
 
     private static String deleteResponse(String input, List<Task> tasks) {
-        Command.deleteTask(Integer.parseInt(input.substring(7)), tasks);
+        return Command.deleteTask(Integer.parseInt(input.substring(7)), tasks);
     }
 
     private static String eventResponse(String input, List<Task> tasks) {
