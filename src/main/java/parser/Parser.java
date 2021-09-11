@@ -22,6 +22,12 @@ public class Parser {
 
     public static final int DESCRIPTION_START = 1;
     public static final int INVALID = -1;
+    public static final int IS_DONE_DATABASE_INDEX = 1;
+    public static final int AT_BY_DATABASE_INDEX = 2;
+    public static final int DESCRIPTION_EVENT_DEADLINE_DATABASE_INDEX = 3;
+    public static final int DESCRIPTION_TODO_DATABASE_INDEX = 2;
+    public static final int TAGS_EVENT_DEADLINE_DATABASE_INDEX = 4;
+    public static final int TAGS_TODO_DATABASE_INDEX = 3;
 
     /**
      * Splits string into an array, removing spaces.
@@ -63,10 +69,11 @@ public class Parser {
      * @return Event object that the stored data represents.
      */
     public static Event decodeEvent(String[] dataArr) {
-        Boolean isDone = Boolean.valueOf(dataArr[1]);
-        String at = new String(Base64.getDecoder().decode(dataArr[2]));
-        String description = Parser.decodeDescription(dataArr[3]);
-        String[] tagsArr = Parser.sanitizeInput(new String(Base64.getDecoder().decode(dataArr[4])));
+        Boolean isDone = Boolean.valueOf(dataArr[IS_DONE_DATABASE_INDEX]);
+        String at = new String(Base64.getDecoder().decode(dataArr[AT_BY_DATABASE_INDEX]));
+        String description = Parser.decodeDescription(dataArr[DESCRIPTION_EVENT_DEADLINE_DATABASE_INDEX]);
+        String[] tagsArr = Parser
+                .sanitizeInput(new String(Base64.getDecoder().decode(dataArr[TAGS_EVENT_DEADLINE_DATABASE_INDEX])));
 
         Event eventTask = new Event(description, at);
         if (isDone) {
@@ -105,10 +112,11 @@ public class Parser {
      * @return Deadline object that the stored data represents.
      */
     public static Deadline decodeDeadline(String[] dataArr) {
-        Boolean isDone = Boolean.valueOf(dataArr[1]);
-        LocalDate by = LocalDate.parse(dataArr[2]);
-        String description = Parser.decodeDescription(dataArr[3]);
-        String[] tagsArr = Parser.sanitizeInput(new String(Base64.getDecoder().decode(dataArr[4])));
+        Boolean isDone = Boolean.valueOf(dataArr[IS_DONE_DATABASE_INDEX]);
+        LocalDate by = LocalDate.parse(dataArr[AT_BY_DATABASE_INDEX]);
+        String description = Parser.decodeDescription(dataArr[DESCRIPTION_EVENT_DEADLINE_DATABASE_INDEX]);
+        String[] tagsArr = Parser
+                .sanitizeInput(new String(Base64.getDecoder().decode(dataArr[TAGS_EVENT_DEADLINE_DATABASE_INDEX])));
 
         Deadline deadlineTask = new Deadline(description, by);
         if (isDone) {
@@ -147,14 +155,15 @@ public class Parser {
      * @return Todo object that the stored data represents.
      */
     public static Todo decodeTodo(String[] dataArr) {
-        Boolean isDone = Boolean.valueOf(dataArr[1]);
-        String description = new String(Base64.getDecoder().decode(dataArr[2]));
+        Boolean isDone = Boolean.valueOf(dataArr[IS_DONE_DATABASE_INDEX]);
+        String description = new String(Base64.getDecoder().decode(dataArr[DESCRIPTION_TODO_DATABASE_INDEX]));
         Todo todoTask = new Todo(description);
         if (isDone) {
             todoTask.markDone();
         }
 
-        String[] tagsArr = Parser.sanitizeInput(new String(Base64.getDecoder().decode(dataArr[3])));
+        String[] tagsArr = Parser
+                .sanitizeInput(new String(Base64.getDecoder().decode(dataArr[TAGS_TODO_DATABASE_INDEX])));
         if (!tagsArr[0].equals("None")) {
 
             List<Tag> tagsList = Parser.decodeTags(tagsArr);
