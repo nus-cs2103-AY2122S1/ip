@@ -1,4 +1,4 @@
-# Petal 🌸
+# Petal
 > *In joy or sadness, flowers are our constant friends.*
 > **Okakura Kakuzo**
 
