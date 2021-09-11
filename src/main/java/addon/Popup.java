@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -18,30 +20,36 @@ public class Popup {
 
     private static final Insets INSETS = new Insets(10, 10, 10, 10);
     private static boolean returnBoolean;
+    private static Image backIcon = new Image(Popup.class.getResourceAsStream("/images/back.png"), 16, 16, true, true);
+    private static Image yesIcon = new Image(Popup.class.getResourceAsStream("/images/yes.png"), 16, 16, true, true);
+    private static Image cancelIcon = new Image(Popup.class.getResourceAsStream("/images/cancel.png"), 16, 16, true, true);
+
     /**
      * Creates a popup window with the given message and an acknowledgement button.
      *
      * @param message Message to be displayed.
      */
     public static void errorPopup(String message) {
-        Stage window = new Stage();
+        Stage errorStage = new Stage();
+        errorStage.getIcons().add(cancelIcon);
 
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Error");
-        window.setMinWidth(250);
+        errorStage.initModality(Modality.APPLICATION_MODAL); //Have to be dealt with.
+        errorStage.setTitle("Error");
+        errorStage.setMinWidth(250);
 
         Label errorMessage = new Label();
         errorMessage.setText(message);
         Button back = new Button("Ok");
-        back.setOnAction(a -> window.close());
+        back.setGraphic(new ImageView(yesIcon));
+        back.setOnAction(a -> errorStage.close());
 
         VBox layout = new VBox(10);
         layout.getChildren().addAll(errorMessage, back);
         layout.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(layout);
-        window.setScene(scene);
-        window.show();
+        errorStage.setScene(scene);
+        errorStage.show();
     }
 
     /**
@@ -51,11 +59,13 @@ public class Popup {
      * @return boolean True if user clicks confirm.
      */
     public static boolean confirmationPopup(String message) {
-        Stage window = new Stage();
+        Stage confirmationStage = new Stage();
+        Image confirmationAppIcon = new Image(Popup.class.getResourceAsStream("/images/confirmation.png"));
+        confirmationStage.getIcons().add(confirmationAppIcon);
 
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Confirm action");
-        window.setMinWidth(250);
+        confirmationStage.initModality(Modality.APPLICATION_MODAL); //Have to be dealt with.
+        confirmationStage.setTitle("Confirm action");
+        confirmationStage.setMinWidth(250);
 
         Label confirmationMessage = new Label();
         confirmationMessage.setText(message);
@@ -63,12 +73,15 @@ public class Popup {
         buttons.setSpacing(10);
         buttons.setPadding(INSETS);
         Button confirm = new Button("Yep");
+        confirm.setGraphic(new ImageView(yesIcon));
+
         confirm.setOnAction(a -> {
             returnBoolean = true;
-            window.close();
+            confirmationStage.close();
         });
         Button back = new Button("Nep");
-        back.setOnAction(a -> window.close());
+        back.setGraphic(new ImageView(cancelIcon));
+        back.setOnAction(a -> confirmationStage.close());
         buttons.getChildren().addAll(confirm, back);
         buttons.setAlignment(Pos.CENTER);
 
@@ -77,8 +90,8 @@ public class Popup {
         layout.getChildren().addAll(confirmationMessage, buttons);
         layout.setAlignment(Pos.CENTER);
         Scene scene = new Scene(layout);
-        window.setScene(scene);
-        window.showAndWait();
+        confirmationStage.setScene(scene);
+        confirmationStage.showAndWait();
         boolean returnBooleanTrue = returnBoolean;
         returnBoolean = false;
         return returnBooleanTrue;
@@ -91,25 +104,32 @@ public class Popup {
      * @param str String representation of the terms used for the filtering.
      */
     public static void filterPopup(ObservableList<String> list, String str) {
-        Stage window = new Stage();
+        Stage filterStage = new Stage();
+        Image filterAppIcon = new Image(Popup.class.getResourceAsStream("/images/filter.png"));
+        filterStage.getIcons().add(filterAppIcon);
 
         ObservableList<String> filteredTasks = FXCollections.observableArrayList();
         ListView<String> listView = new ListView<>(filteredTasks);
         listView.getItems().addAll(list);
 
-        window.setTitle("Filter results for " + str);
-        window.setMinWidth(250);
+        filterStage.setTitle("Filter results for " + str);
+        filterStage.setMinWidth(250);
 
         Label explain = new Label();
         explain.setText("Here are your filtered results for \"" + str + "\"");
         explain.setAlignment(Pos.CENTER);
+
+        Button exit = new Button("Exit");
+        exit.setGraphic(new ImageView(backIcon));
+        exit.setOnAction(e -> filterStage.close());
         BorderPane pain = new BorderPane();
         pain.setTop(explain);
         pain.setPadding(INSETS);
         pain.setCenter(listView);
+        pain.setBottom(exit);
 
-        Scene scene = new Scene(pain);
-        window.setScene(scene);
-        window.show();
+        Scene scene = new Scene(pain, 450, 150);
+        filterStage.setScene(scene);
+        filterStage.show();
     }
 }

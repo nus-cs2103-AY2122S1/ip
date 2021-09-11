@@ -31,13 +31,15 @@ public class Task {
      * @return Boolean true if found, false otherwise.
      */
     public boolean queryIfNameContains(String query) {
+        //Splits the query into words
         String[] querySplit = query.split(" ");
-        int queryLength = querySplit.length;
+        int queryLength = querySplit.length; //Length of query
 
+        //Splits the taskName into individual words
         String[] nameSplit = taskName.split(" ");
-        int taskNameLength = nameSplit.length;
+        int taskNameLength = nameSplit.length; //Length of task name
 
-        if (taskNameLength < queryLength) {
+        if (taskNameLength < queryLength) { //If query length is clearly too long
             return false;
         } else if (taskNameLength == queryLength) {
             return taskName.equalsIgnoreCase(query);
@@ -65,7 +67,7 @@ public class Task {
         int resultArrayLength = sourceArrayLength - queryLength + 1;
         String[] resultArray = new String[resultArrayLength];
         for (int i = 0; i < resultArrayLength; i++) {
-            StringBuilder resultString = new StringBuilder();
+            StringBuilder resultString = new StringBuilder(); //Each string is a new one with the (i)th to (i+queryLength) word
             resultString.append(sourceArray[i]);
             for (int j = 1; j < queryLength; j++) {
                 resultString.append(" ").append(sourceArray[i + j]);

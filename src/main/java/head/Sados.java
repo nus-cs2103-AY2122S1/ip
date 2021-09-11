@@ -24,6 +24,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -42,15 +44,22 @@ public class Sados extends Application {
     public void start(Stage stage) {
 
         stage.setTitle("SaDOS");
+        Image appIcon = new Image(getClass().getResourceAsStream("/images/cake.png"));
+        stage.getIcons().add(appIcon);
 
         //top left buttons
         HBox saveLoad = new HBox();
         Button save = new Button("Save");
+        Image saveIcon = new Image(getClass().getResourceAsStream("/images/save.png"), 16, 16, true, true);
+        save.setGraphic(new ImageView(saveIcon));
+
         save.setOnAction(a -> {
             ArrayList<Task> list = new ArrayList<>(tasks);
             Storage.saveToFile(list);
         });
         Button load = new Button("Load");
+        Image loadIcon = new Image(getClass().getResourceAsStream("/images/load.png"), 16, 16, true, true);
+        load.setGraphic(new ImageView(loadIcon));
         load.setOnAction(a -> {
             if (new File("./save.txt").isFile()) {
                 try {
@@ -71,6 +80,8 @@ public class Sados extends Application {
         //top right buttons
         HBox deleteDone = new HBox();
         Button delete = new Button("Delete");
+        Image deleteIcon = new Image(getClass().getResourceAsStream("/images/delete.png"), 16, 16, true, true);
+        delete.setGraphic(new ImageView(deleteIcon));
         delete.setOnAction(e -> {
             Task selected = listView.getSelectionModel().getSelectedItem();
             boolean isConfirm = Popup.confirmationPopup("Are you sure you want to delete the following task:\n"
@@ -80,6 +91,8 @@ public class Sados extends Application {
             }
         });
         Button done = new Button("Done");
+        Image doneIcon = new Image(getClass().getResourceAsStream("/images/done.png"), 16, 16, true, true);
+        done.setGraphic(new ImageView(doneIcon));
         done.setOnAction(e -> {
             Task selected = listView.getSelectionModel().getSelectedItem();
             selected.markDone();
@@ -106,6 +119,8 @@ public class Sados extends Application {
         actions.getItems().addAll("Todo", "Event", "Deadline", "Search");
         actions.getSelectionModel().select(0);
         Button go = new Button("Go!");
+        Image goIcon = new Image(Sados.class.getResourceAsStream("/images/go.png"), 16, 16, true, true);
+        go.setGraphic(new ImageView(goIcon));
 
         //text inputs parsing
         go.setOnAction(e -> {
