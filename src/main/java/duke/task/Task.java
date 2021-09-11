@@ -73,7 +73,7 @@ public class Task {
         if (this.duration == null) {
             return this.taskName;
         } else {
-            return this.taskName + "(needs " + this.duration + ")";
+            return this.taskName + " (needs " + this.duration + ")";
         }
     }
 

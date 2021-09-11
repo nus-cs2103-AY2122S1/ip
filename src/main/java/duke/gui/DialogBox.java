@@ -40,7 +40,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        dialog.setFont(new Font("Helvetica Neue", 14));
+        dialog.setFont(new Font("Helvetica Neue", 13));
         if (person.equals("Duke")) {
             dialog.setStyle("-fx-background-color:#f3f3f3;"
                     + "-fx-background-radius: 0 15 15 15;"

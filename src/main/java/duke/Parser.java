@@ -36,6 +36,7 @@ public class Parser {
      * @throws DukeException This exception is thrown when the input is invalid.
      */
     public static Command parse(String input) throws DukeException {
+        input = input.toLowerCase();
         String[] inputArr = input.split(" ");
         switch (inputArr[0]) {
         case "list":
@@ -211,10 +212,16 @@ public class Parser {
         if (inputArr.length < 4) {
             throw new DukeException("Indicate the task and the tag with the format: tag *add/delete* *task* *tag*!");
         } else {
+            String tag = inputArr[inputArr.length - 1];
+            String description = inputArr[2];
+            for (int i = 3; i < inputArr.length - 1; i++) {
+                description += (" " + inputArr[i]);
+            }
+            System.out.println(description);
             if (inputArr[1].equals("add")) {
-                return new AddTagCommand(inputArr[2], inputArr[3]);
+                return new AddTagCommand(description, tag);
             } else if (inputArr[1].equals("delete")) {
-                return new DeleteTagCommand(inputArr[2], inputArr[3]);
+                return new DeleteTagCommand(description, tag);
             } else {
                 return new InvalidCommand();
             }
