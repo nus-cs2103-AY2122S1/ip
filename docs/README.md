@@ -3,7 +3,7 @@ Duke is a task manager designed with the command line in mind. It is suitable fo
 
 ## Quick start
 1. Ensure you have Java 11 or above installed in your Computer.
-1. Download the latest release from here.
+1. Download the latest release from [here](https://github.com/yongxiangng/ip/releases/tag/A-Release).
 1. Copy the file to the folder you want to use as the home folder for your Duke.
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds after executing some commands.<br> ![Screenshot](Ui.png)
 1. Type the command in the command box and press Enter to execute it. <br>
