@@ -1,7 +1,3 @@
-[E][X] project meeting                         at: 2015-10-15
-[E][X] project meet2                        at: 2015-10-15
-[D][ ] return book      by: 2019-12-02
-[E][ ] project meeting     at: 2015-10-15
-[E][ ] project meeting    at: 2015-10-15
-[D][ ] return book      by: 2019-12-02
-[D][ ] return book  by: 2019-12-02
+[E][X] project meeting                             at: 2015-10-15
+[T][ ] return book today or tomorrow 
+[T][X] return book 

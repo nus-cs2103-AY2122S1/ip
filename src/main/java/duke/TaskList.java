@@ -105,7 +105,11 @@ public class TaskList {
                     description = description + split[i] + " ";
                 }
                 if (userInput.substring(0,3).equals("[T]")) {
-                    readTodo(userInput, description);
+                    String descriptionTodo = "";
+                    for (int i = 0; i < split.length; i++) {
+                        descriptionTodo = descriptionTodo + split[i] + " ";
+                    }
+                    readTodo(userInput, descriptionTodo);
                 } else if (userInput.substring(0,3).equals("[D]")) {
                     readDeadline(userInput, description);
                 } else if (userInput.substring(0,3).equals("[E]")) {
