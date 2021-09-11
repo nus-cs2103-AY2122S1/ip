@@ -1,1 +1,4 @@
-theme: jekyll-theme-tactile
+title: "Duke"
+theme: minima
+
+markdown: GFM
