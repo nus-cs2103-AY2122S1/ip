@@ -2,9 +2,7 @@
 
 ## Riludduma is here! 
 
-### 
-
-Riladduma helps you with all your tasks including:
+###Riladduma helps you with all your tasks including:
 * Todos
 * Deadlines
 * Events
