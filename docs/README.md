@@ -12,6 +12,12 @@ Tasks are classified into 3 types of catergories: Todos, Events or Deadlines. Ev
 
 Commands include a keyword, some mandatory arguments, and some optional arguments. The general usage is that the keyword comes first, then the mandatory arguments, then the optional arguments, ie. `[keyword] [mandatory arguments] [optional arguments].`
 
+## Setting up
+**For all platforms:** `cd` to the directory containing `Tiger.jar,` and run:
+```
+java -jar Tiger.jar
+```
+
 ## Features 
 
 The features offered are:
@@ -303,4 +309,5 @@ Please enter Y or N only
 ```
 At this point, the user has tried to alter Tiger's data files and is not following simple instructions. Tiger is clearly pissed and does not bother put in a full-stop at the end of its sentences anymore.
 
-### **And that's all! Tiger is ready for you to use!**
+## Uninstallation
+To uninstall, simply delete the `data` and `Tiger.jar.`
