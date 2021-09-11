@@ -72,9 +72,9 @@ Example of usage:
 ### `AddContact` - Add a contact.
 
 Example of usage: 
-`addContact name phoneNumber email notes`
+`addcontact name phoneNumber email notes`
 
 ### `DelContact` - Delete a contact.
 
 Example of usage: 
-`delContact index` (index being a positive integer)
+`delcontact index` (index being a positive integer)
