@@ -5,9 +5,10 @@ import java.time.LocalDate;
 
 public class TaskFactory {
     /**
-     * This is the method responsible for instantiating the right subtype of task.
+     * Instantiates the right subtype of task.
+     *
      * @param taskStr The string input from the user to be stored as a task
-     * @return Task A task object with the user's
+     * @return Task A task object with the user's specifications
      * @exception IllegalFormatException Incorrect format for creating a task, prompts to correct format
      * @exception EmptyDescriptionException If the description of a todo task is empty
      * @exception InvalidCommandException If the taskStr doesn't match any task's format at all

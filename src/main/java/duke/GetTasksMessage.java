@@ -3,7 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 /**
- * The class for creating Duke' response when the user requests for list of tasks.
+ * Represents Duke' response when the user requests for list of tasks.
  */
 public class GetTasksMessage extends DukeMessage{
     public String display() {
