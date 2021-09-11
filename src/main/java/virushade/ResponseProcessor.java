@@ -90,6 +90,9 @@ public class ResponseProcessor {
             case "delete":
                 return TaskList.delete(instruction);
 
+            case "sort":
+                return TaskList.sort(instruction);
+
             default:
             }
         }
