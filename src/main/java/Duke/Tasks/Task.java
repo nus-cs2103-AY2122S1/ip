@@ -38,6 +38,7 @@ public class Task {
      */
     public Task markDone() {
         this.isDone = true;
+        assert isDone: "Mark unsuccessful";
         return this;
 
     }
