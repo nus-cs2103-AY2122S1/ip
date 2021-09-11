@@ -50,6 +50,7 @@ public class Ui {
 
     /**
      * The method of showDoneMessage
+     *
      * @param task
      * @param numRemoved
      */
@@ -60,6 +61,7 @@ public class Ui {
 
     /**
      * The method of showDeletedMessage
+     *
      * @param task
      * @param taskDeleted
      */
@@ -71,6 +73,7 @@ public class Ui {
 
     /**
      * The method of showAddOnTask
+     *
      * @param task
      * @param numAdded
      */
@@ -81,28 +84,32 @@ public class Ui {
     }
 
     /**
-     * The method of showListDetails
+     * Shows the list of Details using stream
+     *
      * @param task
+     * @return  task the list of all tasks
      */
     public String showListDetails(TaskList task) {
-        StringBuilder showListDetailsString = new StringBuilder("Here are the tasks in your list:\n");
-        for (int i = 0; i < task.size(); i ++) {
-            showListDetailsString.append((i + 1) + "." + INDENTATION + task.get(i) + "\n");
-        }
-        return showListDetailsString.toString();
+        String startSentence = "Here are the tasks in your list:\n";
+
+        return task.getTasks().stream()
+                .reduce(startSentence,
+                        (string, singleTask) ->
+                                string + (INDENTATION + (task.getTasks().indexOf(singleTask) + 1)
+                                        + "." + singleTask +"\n"), (str1, str2) -> str1 + str2);
     }
 
     /**
      * The method of showFindDetails
+     *
      * @param task
      * @param findTarget
      */
     public String showFindDetails(TaskList task, String findTarget) {
-
-        StringBuilder showFindDetailsString = new StringBuilder("Here are the matching tasks in your list:");
+        StringBuilder showFindDetailsString = new StringBuilder("Here are the matching tasks in your list:\n");
         for (int i = 0; i < task.size(); i++) {
             if(task.getTasks().get(i).getDescription().contains(findTarget)) {
-                showFindDetailsString.append(INDENTATION + (i + 1) + "." + INDENTATION + task.get(i));
+                showFindDetailsString.append(INDENTATION + (i + 1) + "." + INDENTATION + task.get(i) + "\n");
             }
         }
        return showFindDetailsString.toString();
