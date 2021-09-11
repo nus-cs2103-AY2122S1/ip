@@ -1,3 +1,7 @@
 T | 0 | hello | 
-T | 0 | nice | really
+T | 1 | nice | really
 T | 0 | facebook | hello really nice
+T | 0 | one | 
+T | 0 | two | 
+T | 0 | three | 
+T | 0 | nice | 

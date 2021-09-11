@@ -10,7 +10,7 @@ import duke.task.TaskList;
 public class WelcomeCommand extends Command {
     @Override
     public void execute(Duke duke, TaskList tasks, Storage storage) {
-        String message = "Hello! I'm Duke.\nWhat can I do for you?";
+        String message = "Jiii~ \nWhat can I do for you?";
         duke.setResponse(message);
     }
 }

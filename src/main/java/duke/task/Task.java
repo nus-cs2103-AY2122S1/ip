@@ -66,7 +66,7 @@ public abstract class Task {
      * @return String representation of the task to be saved in the db.
      */
     public String toDataString() {
-        return " | " + (this.getStatusIcon().equals("X") ? '1' : '0') + " | " + this.description + " | " + String
+        return " | " + (this.getStatusIcon().equals("✔️") ? '1' : '0') + " | " + this.description + " | " + String
             .join(" ", this.tags);
     }
 
@@ -82,6 +82,6 @@ public abstract class Task {
     }
 
     private String getStatusIcon() {
-        return isDone ? "X" : " ";
+        return isDone ? "✔️" : "⚔️";
     }
 }
