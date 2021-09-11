@@ -54,17 +54,17 @@ The following is an exhaustive list of commands you can use with Petal.
     ``
     deadline Go for a run /by 2/12/2021 1800
     ``
-      _Add a deadline with a date to be completed by._
+    _Add a deadline with a date to be completed by._
 3. **event**
     ``
     event Go for a run /at 2/12/2021 1800 2100
     ``
-      _Add an event with a date, and start/end time._
+    _Add an event with a date, and start/end time._
 4.  **list** 
     ``
     list
     ``
-      _Shows all currently added tasks._
+    _Shows all currently added tasks._
 5. **delete (delete *number*)**
     ``
     delete 1 
@@ -74,24 +74,24 @@ The following is an exhaustive list of commands you can use with Petal.
     ``
     archive 1
     ``
-     _Archives the task, whose number corresponds to that in the list._
+    _Archives the task, whose number corresponds to that in the list._
 8.  **date (date *date*)** 
 ``
     date 2/12/2021
     ``
-     _Shows all tasks on the given date._
+    _Shows all tasks on the given date._
 9.  **done (done *number*)** 
     ``
     done 1
     ``
-     _Marks the task, whose number correpsonds to that in the list, as done._
+    _Marks the task, whose number correpsonds to that in the list, as done._
 10.  **dossiers** 
     ``
     dossiers
     ``
-     _Shows all items in the archive._
+    _Shows all items in the archive._
 11.  **bye** 
     ``
     bye
     ``
-     _Exits the bot._
+    _Exits the bot._
