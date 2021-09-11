@@ -7,6 +7,7 @@
 3. Copy the file to the folder you want to use as the home folder for your ShyBot.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
    contains some sample data.
+<img width="402" alt="Ui" src="https://user-images.githubusercontent.com/24221801/132957831-ec7634d0-5133-4546-a182-7e911f2b2646.png">
 5. Type the command in the input box and press Enter or `Send` button to execute it.  
    Some example commands you can try:
 
