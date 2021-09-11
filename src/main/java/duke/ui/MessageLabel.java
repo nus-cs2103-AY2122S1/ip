@@ -1,7 +1,6 @@
 package duke.ui;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -30,13 +29,9 @@ public class MessageLabel extends Label {
         this.setWrapText(true);
         VBox.setMargin(this, insets);
 
-        try {
-            FileInputStream iconInput = new FileInputStream(imagePath);
-            Image icon = new Image(iconInput);
-            ImageView iconView = new ImageView(icon);
-            this.setGraphic(iconView);
-        } catch (FileNotFoundException e) {
-            // do nothing, no image to add
-        }
+        InputStream iconInput = this.getClass().getResourceAsStream(imagePath);
+        Image icon = new Image(iconInput);
+        ImageView iconView = new ImageView(icon);
+        this.setGraphic(iconView);
     }
 }
