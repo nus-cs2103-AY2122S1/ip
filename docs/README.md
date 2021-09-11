@@ -43,7 +43,7 @@ _________________________
 
 To add a new Todo, the usage is: `todo [task description] /priority [H|M|L]`. The `/priority` command is optional.
 
-Example: `todo homework`: adds a new Todo named "Homework".
+Example: `todo homework:` adds a new Todo named "Homework".
 
 Expected outcome:
 ```
@@ -52,7 +52,7 @@ Excellent! I've added this task:
 ```
 **By default, if the priority is not assigned, the task is classified as medium priority.** To change the tasks' priority, use the priority flag.
 
-Example: `todo homework /priority H`: adds a new Todo that is named "Homework" that is of high priority.
+Example: `todo homework /priority H:` adds a new Todo that is named "Homework" that is of high priority.
 
 Expected outcome:
 ```
@@ -63,9 +63,9 @@ Tiger autocapitalises the first letter of `homework` for the user. This is becau
 
 _________________________
 
-To add a new Event, the usage is: `event [event description] /at [event time] /priority [H|M|L]`. The `/priority` command is optional. Accepted date formats are `HH:mm` or `YYYY-MM-DD HH:mm`. The year input string should be **exactly** 4 characters, and their other date parameters should be **exactly** 2 characters. The year cannot be 0000. 
+To add a new Event, the usage is: `event [event description] /at [event time] /priority [H|M|L].` The `/priority` command is optional. Accepted date formats are `HH:mm` or `YYYY-MM-DD HH:mm.` The year input string should be **exactly** 4 characters, and their other date parameters should be **exactly** 2 characters. The year cannot be 0000. 
 
-Example: `event eat dinner /at 2021-05-21 16:00`: creates a new Event named "eat dinner" at 2021-05-21 16:00.
+Example: `event eat dinner /at 2021-05-21 16:00:` creates a new Event named "eat dinner" at 2021-05-21 16:00.
 
 Expected outcome:
 ```
@@ -74,7 +74,7 @@ Excellent! I've added this event:
 ```
 **If the user only specifies the time, but not the date, Tiger guesses that the date is today.**
 
-Example: `event eat dinner /at 16:00`: creates a new Event named "eat dinner" at [today's date] 16:00.
+Example: `event eat dinner /at 16:00:` creates a new Event named "eat dinner" at [today's date] 16:00.
 
 Expected outcome: (assume today's date is 2021-08-31).
 ```
@@ -83,7 +83,7 @@ Excellent! I've added this event:
 ```
 Much like Todos, you can also specify a priority for your events.
 
-Example: `event eat dinner /at 15:29 /priority L`: creates a new event named "eat dinner" at [today's date] 16:00 of low priority.
+Example: `event eat dinner /at 15:29 /priority L:` creates a new event named "eat dinner" at [today's date] 16:00 of low priority.
 
 Expected outcome: (assume today's date is 2021-08-31).
 ```
@@ -92,9 +92,9 @@ Excellent! I've added this event:
 ```
 _________________________
 
-To add a new Deadline, the usage is: `deadline [deadline description] /by [deadline due date] /priority [H|M|L]`. The `/priority` command is optional. Accepted date formats are `HH:mm` or `YYYY-MM-DD HH:mm`. The year input string should be **exactly** 4 characters, and their other date parameters should be **exactly** 2 characters. The year cannot be 0000. 
+To add a new Deadline, the usage is: `deadline [deadline description] /by [deadline due date] /priority [H|M|L].` The `/priority` command is optional. Accepted date formats are `HH:mm` or `YYYY-MM-DD HH:mm.` The year input string should be **exactly** 4 characters, and their other date parameters should be **exactly** 2 characters. The year cannot be 0000. 
 
-Example: `deadline eat dinner /by 16:00`: creates a new Deadline named "eat dinner" at [today's date] 16:00.
+Example: `deadline eat dinner /by 16:00:` creates a new Deadline named "eat dinner" at [today's date] 16:00.
 
 Expected outcome: (assume today's date is 2021-08-31).
 ```
@@ -103,37 +103,37 @@ Excellent! I've added this event:
 ```
 Much like Todos, you can also specify a priority for your deadlines.
 
-Example: `deadline eat dinner /by 15:29 /priority L`: creates a new Deadline named "eat dinner" at [today's date] 16:00 of low priority.
+Example: `deadline eat dinner /by 15:29 /priority L:` creates a new Deadline named "eat dinner" at [today's date] 16:00 of low priority.
 
 Expected outcome: (assume today's date is 2021-08-31).
 ```
 Excellent! I've added this event:
 [D] [L] Eat dinner (by 2021-08-31 16:00)
 ```
-> Substitutable keywords: `dateline`.
+> Substitutable keywords: `dateline.`
 
 **Due to the way data is stored, Tiger bans users from inputting semicolons (;).**
 
 _________________________
 
 ### Deleting a task
-Deletes the task at the specified index. Use `list` to get the list of tasks and indicies. The usage is `delete [task index]`.
+Deletes the task at the specified index. Use `list` to get the list of tasks and indicies. The usage is `delete [task index].`
 
-Example: `delete 1`: deletes the task at index 1.
+Example: `delete 1:` deletes the task at index 1.
 
 Expected outcome: 
 ```
 Feeling lazy today? I've deleted:
 [T] [M] CS2103 Code Review
 ```
-> Substitutable keywords: `del`, `remove`.
+> Substitutable keywords: `del, remove`.
 
 _________
 
 ### Marking a task as done
-Marks the task at a specified index as done. `list` to get the list of tasks and indicies. The usage is `done [task index]`.
+Marks the task at a specified index as done. `list` to get the list of tasks and indicies. The usage is `done [task index].`
 
-Example: `done 1`: marks the task at index 1 as done.
+Example: `done 1:` marks the task at index 1 as done.
 
 Expected outcome: 
 ```
@@ -143,22 +143,22 @@ Nice! I've marked this tasks as done:
 _________________________
 
 ### Finding a task
-Tiger can also help find tasks based on a specific keyword. The search is not case sensitive, ie. `search woodlands` and `search Woodlands` should return the same list. The usage is `search [substring]`. 
+Tiger can also help find tasks based on a specific keyword. The search is not case sensitive, ie. `search woodlands` and `search Woodlands` should return the same list. The usage is `search [substring].`
 
-Example: `search Woodlands`: searches for tasks with task description containing the string "Woodlands".
+Example: `search Woodlands:` searches for tasks with task description containing the string "Woodlands".
 
 Expected outcome: 
 ```
 [T] [M] Buy earphones at Woodlands
 ```
-> Substitutable keywords: `find`. 
+> Substitutable keywords: `find.`
 
 _________________________
 
 ### Clearing all tasks
-If for some reason the list of tasks is too full, or the user is too lazy, the user can clear all the tasks at one go. The usage is `clear`.
+If for some reason the list of tasks is too full, or the user is too lazy, the user can clear all the tasks at one go. The usage is `clear.`
 
-Example: `clear`: clears all tasks.
+Example: `clear:` clears all tasks.
 
 Expected outcome: 
 ```
@@ -167,9 +167,9 @@ I've cleared all your tasks!
 _________________________
 
 ### Listing all tasks
-Tiger can help list tasks. (After all, that's the whole point of a Todo app right?) The usage is `list`.
+Tiger can help list tasks. (After all, that's the whole point of a Todo app right?) The usage is `list.`
 
-Example: `list`: lists all tasks.
+Example: `list:` lists all tasks.
 
 Expected outcome:
 ```
@@ -177,14 +177,14 @@ Expected outcome:
 2. [E] [H] Feed fish (at 2021-09-01 16:00)
 3. [D] [L] Graph theory assignment (by 2022-11-21 14:25)
 ```
-> Substitutable keywords: `ls`. 
+> Substitutable keywords: `ls`
 
 _________________________
 
 ### Searching by priority
 Other than listing all tasks, Tiger can help you search tasks based on a certain priority. The usage is `priority [L|M|H]`. **If the task is already marked as done, it won't show up in the search**.
 
-Example: `priority H`: lists all tasks with high priority.
+Example: `priority H:` lists all tasks with high priority.
 
 Expected outcome:
 ```
@@ -197,7 +197,7 @@ _________________________
 ### Exiting the app
 To quit the app, the usage is `bye`. 
 
-Example: `bye`: quits the app.
+Example: `bye:` quits the app.
 
 Expected outcome:
 ```
@@ -205,7 +205,7 @@ Bye! Hope to see you again!
 ```
 Note that the window waits a second to close.
 
-> Substitutable keywords: `exit`, `quit`.
+> Substitutable keywords: `exit, quit`
 
 ## Advanced features
 
@@ -214,7 +214,7 @@ Tiger understands that some users are just bad at reading user manuals, so some 
 
 For instance, `find` performs the same action as `search`. 
 
-Example: `find Woodlands`.
+Example: `find Woodlands`
 
 Expected outcome:
 ```
@@ -223,7 +223,7 @@ Expected outcome:
 
 Similarly, `ls` lists all the tasks.
 
-Example: `ls`.
+Example: `ls`
 
 Expected outcome:
 ```
@@ -238,7 +238,7 @@ On top of interpreting the current date as today if the user doesn't specify the
 
 For example, Tiger "rounds off" the date if the day number is between 1 and 31. 
 
-Example: `event Event /at 2021-09-31 15:00`.
+Example: `event Event /at 2021-09-31 15:00`
 
 Expected outcome:
 ```
