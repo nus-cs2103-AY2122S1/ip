@@ -29,6 +29,9 @@ public class Tasklist {
      * @return The completed task
      */
     public Task markAsDone(int index) {
+        // index should be at least 1
+        assert index >= 1 : "Target index for markAsDone should be at least 1!";
+
         this.taskList.get(index - 1).completeTask();
         return this.taskList.get(index - 1);
     }
@@ -59,6 +62,9 @@ public class Tasklist {
      * @return The deleted task
      */
     public Task deleteTask(int index) {
+        // index should be at least 1
+        assert index >= 1 : "Target index for deleteTask should be at least 1!";
+
         Task removed = this.taskList.get(index - 1);
         this.taskList.remove(index - 1);
         this.lastItem--;

@@ -40,6 +40,9 @@ public class DoneCommand extends Command {
             throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
         }
 
+        // Target index should be at least 1
+        assert target >= 1 : "Target index for Done should be at least 1!";
+
         Task completed = taskList.markAsDone(target);
         return new CommandResult(response.showCompletedTask(completed));
     }

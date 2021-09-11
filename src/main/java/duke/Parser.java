@@ -28,6 +28,14 @@ public class Parser {
      * @throws DukeException In the event of parse or invalid argument errors
      */
     public static Command parse(String fullCommand) throws DukeException {
+        // Check if user input is empty
+        if (fullCommand.equals("")) {
+            throw new DukeException("Please enter a command!");
+        }
+
+        // Command by the user should at least have 1 word
+        assert fullCommand.split(" ").length >= 1 : "Input should not be empty!";
+
         String firstToken = fullCommand.split(" ")[0];
 
         // Check if fullCommand is "bye"
@@ -76,6 +84,10 @@ public class Parser {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
             }
             String description = fullCommand.substring(5);
+
+            // Substring extracted for description should not be empty
+            assert !description.equals("") : "ToDo description should not be empty";
+
             return new TodoCommand(description);
 
         // Check if user adding a Deadline
@@ -92,6 +104,9 @@ public class Parser {
                 }
                 String rawDueDate = fullCommand.split("/by")[1].strip();
 
+                // rawDueDate provided by user should not be an empty string
+                assert !rawDueDate.equals("") : "Datetime provided for Deadline cannot be empty!";
+
                 // Initialize datetime formatter
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
                 LocalDateTime dueDateTime = LocalDateTime.parse(rawDueDate, formatter);
@@ -99,6 +114,10 @@ public class Parser {
                     .split("/by")[0]
                     .strip()
                     .substring(9);
+
+                // Provided description should not be empty
+                assert !description.equals("") : "Description provided for Deadline cannot be empty!";
+
                 return new DeadlineCommand(description, dueDateTime);
             } catch (DateTimeParseException e) {
                 throw new DukeException("☹ OOPS!!! Please provide a valid due date.");
@@ -118,6 +137,9 @@ public class Parser {
                 }
                 String rawEventDateTime = fullCommand.split("/at")[1].strip();
 
+                // rawEventDateTime should not be empty
+                assert !rawEventDateTime.equals("") : "Datetime input for Event should not be empty!";
+
                 // Initialize datetime formatter
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
                 LocalDateTime eventDateTime = LocalDateTime.parse(rawEventDateTime, formatter);
@@ -125,6 +147,10 @@ public class Parser {
                     .split("/at")[0]
                     .strip()
                     .substring(6);
+
+                // Description for Event should not be empty
+                assert !description.equals("") : "Description for Event should not be empty";
+
                 return new EventCommand(description, eventDateTime);
             } catch (DateTimeParseException e) {
                 throw new DukeException("☹ OOPS!!! Please provide a valid event time.");
@@ -139,6 +165,9 @@ public class Parser {
 
             // Parse search terms
             String searchTerms = fullCommand.substring(5).strip();
+
+            // Search terms should not be empty
+            assert !searchTerms.equals("") : "Search terms for Find should not be empty!";
 
             return new FindCommand(searchTerms);
 

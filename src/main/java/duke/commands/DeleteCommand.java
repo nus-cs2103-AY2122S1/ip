@@ -40,6 +40,9 @@ public class DeleteCommand extends Command {
             throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
         }
 
+        // Target index of task to be deleted should be 1 or greater
+        assert target >= 1 : "Target index for Delete should be at least 1!";
+
         Task removed = taskList.deleteTask(target);
         return new CommandResult(response.showRemovedTask(taskList, removed));
     }
