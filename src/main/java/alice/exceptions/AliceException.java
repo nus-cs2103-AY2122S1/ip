@@ -1,4 +1,4 @@
-package alice;
+package alice.exceptions;
 
 /**
  * Exception to do with Alice to be thrown when the user interact incorrectly

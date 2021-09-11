@@ -1,7 +1,7 @@
 package ui;
 
 import dialog.Dialog;
-import dialog.DialogException;
+import dialog.exceptions.DialogException;
 import dialog.TaskDialog;
 import storage.Storage;
 

@@ -1,6 +1,7 @@
 package alice;
 
-import dialog.DialogException;
+import alice.exceptions.AliceException;
+import dialog.exceptions.DialogException;
 import dialog.TaskDialog;
 
 import parser.Parser;

@@ -1,7 +1,7 @@
 package ui;
 
 import alice.Alice;
-import dialog.DialogException;
+import dialog.exceptions.DialogException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

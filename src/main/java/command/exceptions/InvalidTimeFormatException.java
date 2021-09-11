@@ -1,4 +1,4 @@
-package command;
+package command.exceptions;
 
 /**
  * Exception to do with Command to be thrown when the user input invalid time
