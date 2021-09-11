@@ -28,11 +28,11 @@ Shows a list of all tasks stored in the database.
 
 ### Finding tasks by a keyword
 
-Finds tasks which matches the given keyword.
+Finds tasks which match the given keyword.
 
 ### Finding tasks by date
 
-Finds Deadline and Event tasks which matches the given date.
+Finds Deadline and Event tasks which match the given date.
 
 ## Usage
 
@@ -159,7 +159,7 @@ Finds all tasks that contains the given date and prints them as a list.
 
 Example of usage:
 
-`dt 2021-10-01`
+`dt 2021-11-16`
 
 Expected outcome:
 
@@ -167,8 +167,7 @@ Prints a list of tasks where the given date is matches the task's deadline or ev
 
 ```
 Lollipop: Here are the tasks that occurs on the specified date:
-1. [T][] finish up script for presentation
-2. [D][] finish up cs2103t user guide (by: 16 November 2021)
+1. [D][] finish up cs2103t user guide (by: 16 November 2021)
 ```
 
 ### `q` - Quits the program
