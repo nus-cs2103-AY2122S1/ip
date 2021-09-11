@@ -35,11 +35,15 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    //@@author Jeffry Lum-reused
+    //Reused from https://se-education.org/guides/tutorials/javaFx.html
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    //@@author Jeffry Lum-reused
+    //Reused from https://se-education.org/guides/tutorials/javaFx.html
     public void setDuke(Duke d) {
         duke = d;
     }
@@ -48,6 +52,9 @@ public class MainWindow extends AnchorPane {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
+    //@@author Jeffry Lum-reused
+    //Reused from https://se-education.org/guides/tutorials/javaFx.html
+    //with minor modifications
     @FXML
     private void handleUserInput() throws IOException, DukeException {
         String input = userInput.getText();
@@ -63,6 +70,8 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    //@@author Jeffry Lum-reused
+    //Reused from https://se-education.org/guides/tutorials/javaFx.html
     protected String getResponse(String input) throws DukeException, IOException {
         String response = "";
             try {
@@ -107,8 +116,10 @@ public class MainWindow extends AnchorPane {
     /**
      * Displays loading error message.
      */
-    public String showLoadingError() {
-        return "Oops! Error in loading the document...";
+    public void showLoadingError() {
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog("Oops, error in loading document...", dukeImage)
+        );
     }
 
     /**

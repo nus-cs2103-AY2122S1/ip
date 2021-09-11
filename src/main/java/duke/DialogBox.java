@@ -25,6 +25,8 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    //@@author Jeffry Lum-reused
+    //Reused from https://se-education.org/guides/tutorials/javaFx.html
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -42,6 +44,8 @@ public class DialogBox extends HBox {
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
+    //@@author Jeffry Lum-reused
+    //Reused from https://se-education.org/guides/tutorials/javaFx.html
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
