@@ -10,17 +10,28 @@ import java.time.format.DateTimeParseException;
  * @version CS2103T, Semester 2.
  */
 public class DukeException extends Exception {
-    private Exception exception;
+    private Exceptions exception;
 
     /**
      * Class constructor.
      *
      * @param exception the exception thrown.
      */
-    public DukeException(Exception exception) {
+    public DukeException(Exceptions exception) {
         this.exception = exception;
     }
 
+    /**
+     * Enum of exceptions handled by DukeException.
+     */
+    public enum Exceptions {
+        StringIndexOutOfBoundsException,
+        ArrayIndexOutOfBoundsException,
+        IndexOutOfBoundsException,
+        IOException,
+        DateTimeParseException,
+        EXCEPTIONS;
+    }
     /**
      * Returns a message notifying user of an error.
      *
@@ -29,17 +40,22 @@ public class DukeException extends Exception {
     @Override
     public String getMessage() {
         String message;
-        if (exception instanceof StringIndexOutOfBoundsException
-            || exception instanceof ArrayIndexOutOfBoundsException) {
+        String exceptionName = exception.toString().split(":")[0];
+        switch (exception) {
+        case StringIndexOutOfBoundsException:
+        case ArrayIndexOutOfBoundsException:
             message = "☹ The duke.task description or duke.command is incomplete.:$\n";
-        } else if (
-            exception instanceof IndexOutOfBoundsException) {
+            break;
+        case IndexOutOfBoundsException:
             message = "☹ OH NO!!! The duke.task does not exist.>:(\n";
-        } else if (exception instanceof IOException) {
+            break;
+        case IOException:
             message = "☹ OH NO!!! I cannot find the file.\n";
-        } else if (exception instanceof DateTimeParseException) {
+            break;
+        case DateTimeParseException:
             message = "Please enter a proper date and time format.";
-        } else {
+            break;
+        default:
             message = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
         }
         return message;

@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import duke.main.DukeException;
 import duke.main.Storage;
-import duke.main.TaskList;
+import duke.task.TaskList;
 import duke.main.Ui;
 
 /**
@@ -38,7 +38,7 @@ public class ExitCommand extends Command {
             storage.store(tasks);
             return ui.showFarewell();
         } catch (IOException e) {
-            throw new DukeException(e);
+            throw new DukeException(DukeException.Exceptions.IOException);
         }
     }
 

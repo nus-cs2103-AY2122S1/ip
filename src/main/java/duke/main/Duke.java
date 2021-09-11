@@ -1,6 +1,7 @@
 package duke.main;
 
 import duke.command.Command;
+import duke.task.TaskList;
 
 /**
  * Represents the duke chat bot, which has the ability to log and track and delete tasks.
@@ -25,7 +26,7 @@ public class Duke {
         assert fileName != null : "filename cannot be empty";
         storage = new Storage(filePath, fileName);
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(storage.loadTasks());
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();

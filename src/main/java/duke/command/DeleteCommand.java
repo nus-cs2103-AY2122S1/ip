@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.main.DukeException;
 import duke.main.Storage;
-import duke.main.TaskList;
+import duke.task.TaskList;
 import duke.main.Ui;
 import duke.task.Task;
 
@@ -21,10 +21,14 @@ public class DeleteCommand extends Command {
      *
      * @param taskNumber the serial number of the duke.task.
      */
-    public DeleteCommand(int taskNumber) {
-        super();
-        this.TASK_NUM = taskNumber;
-        assert !isExit() : "isExit should return false";
+        
+    public DeleteCommand(String taskNumber) throws DukeException {
+	assert !isExit() : "isExit should return false";
+        try {
+            this.TASK_NUM = Integer.parseInt(taskNumber);
+        } catch (NumberFormatException e) {
+            throw new DukeException(DukeException.Exceptions.EXCEPTIONS);
+        }
     }
 
     /**
@@ -43,7 +47,7 @@ public class DeleteCommand extends Command {
             int numTasksRemaining = tasks.getNumTasks();
             return ui.showTaskDeleted(deletedTask, numTasksRemaining);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(e);
+            throw new DukeException(DukeException.Exceptions.IndexOutOfBoundsException);
         }
     }
 }

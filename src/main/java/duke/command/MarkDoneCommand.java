@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.main.DukeException;
 import duke.main.Storage;
-import duke.main.TaskList;
+import duke.task.TaskList;
 import duke.main.Ui;
 import duke.task.Task;
 
@@ -20,10 +20,13 @@ public class MarkDoneCommand extends Command {
      *
      * @param taskNumber the serial number of the duke.task.
      */
-    public MarkDoneCommand(int taskNumber) {
-        super();
-        this.TASK_NUM = taskNumber;
-        assert TASK_NUM >= 1 : "TASK_NUM must be of a cardinal value";
+    public MarkDoneCommand(String taskNumber) throws DukeException {
+        try {
+            this.TASK_NUM = Integer.parseInt(taskNumber);
+        } catch (NumberFormatException e) {
+            throw new DukeException(DukeException.Exceptions.EXCEPTIONS);
+        }
+	assert TASK_NUM >= 1 : "TASK_NUM must be a cardinal value";
         assert !isExit() : "isExit should return false";
     }
 
@@ -39,7 +42,7 @@ public class MarkDoneCommand extends Command {
             assert task != null : "task cannot be null";
             return ui.showMarkTaskDone(task);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(e);
+            throw new DukeException(DukeException.Exceptions.IndexOutOfBoundsException);
         }
     }
 }

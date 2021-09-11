@@ -11,9 +11,9 @@ import duke.main.DukeException;
  */
 public class Todo extends Task {
 
-    private final String TASK_MARKER = "T";
-    private final String TASK_KEYWORD = "todo ";
-    private String taskDescription;
+    private final String TODO_MARKER = "T";
+    private final String TODO_KEYWORD = "todo ";
+    private String todoDescription;
 
     /**
      * Class constructor.
@@ -24,19 +24,14 @@ public class Todo extends Task {
     public Todo(String description) throws DukeException {
         super();
         try {
-            if (!description.contains("todo")) {
-                throw new IllegalArgumentException();
-            }
-            int startingIndex = description.indexOf(TASK_KEYWORD);
-            assert startingIndex != -1 : "TASK KEYWORD must be in the description.";
-            taskDescription = description.substring(startingIndex + TASK_KEYWORD.length());
-            if (taskDescription == "") {
+            int startOfDescriptionIndex = getStartingIndexAfter(description, TODO_KEYWORD);
+	    assert startOfDescriptionIndex != -1 : "TASK KEYWORD must be in the description.";
+            todoDescription = getSubString(description, startOfDescriptionIndex);
+            if (todoDescription == "") {
                 throw new StringIndexOutOfBoundsException();
             }
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException(e);
-        } catch (IllegalArgumentException e) {
-            throw new DukeException(e);
+            throw new DukeException(DukeException.Exceptions.StringIndexOutOfBoundsException);
         }
     }
 
@@ -47,9 +42,8 @@ public class Todo extends Task {
      * @param dateOfTask      date of the todo duke.task (unused).
      */
     public Todo(String todoDescription, String dateOfTask) {
-        taskDescription = todoDescription;
+        this.todoDescription = todoDescription;
     }
-
     /**
      * Prints out the duke.task.
      *
@@ -58,7 +52,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s]%s %s", TASK_MARKER, super.toString(), taskDescription);
+        return String.format("[%s]%s %s", TODO_MARKER, super.toString(), todoDescription);
     }
 
     /**
@@ -67,16 +61,7 @@ public class Todo extends Task {
      * @return storage format of the duke.task.
      */
     public String formatToStore() {
-        return String.format("%s | %s | %s", TASK_MARKER, getStatusIcon() == " " ? 1 : 0,
-            taskDescription);
-    }
-
-    /**
-     * Returns duke.task marker.
-     *
-     * @return a one character string that is a marker for this duke.task.
-     */
-    public String getTaskMarker() {
-        return TASK_MARKER;
+        return String.format("%s | %s | %s", TODO_MARKER, getStatusIcon() == " " ? 1 : 0,
+            todoDescription);
     }
 }

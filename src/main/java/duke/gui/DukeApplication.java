@@ -1,7 +1,6 @@
-package duke.main;
+package duke.gui;
 
 import duke.command.Command;
-
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -12,12 +11,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
+
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
-
-
-
+import duke.main.Parser;
+import duke.command.Command;
+import duke.main.DukeException;
+import duke.main.Ui;
+import duke.main.Storage;
+import duke.task.TaskList;
 
 public class DukeApplication extends Application {
 

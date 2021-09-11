@@ -1,7 +1,9 @@
 package duke.task;
 
 import java.text.ParseException;
-import java.time.format.DateTimeParseException;
+
+import duke.main.DukeException;
+import duke.main.TaskDate;
 
 import duke.main.Date;
 import duke.main.DukeException;
@@ -14,14 +16,14 @@ import duke.main.DukeException;
  */
 public class Event extends Task {
     @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final String TASK_MARKER = "E";
-    private String taskDescription;
-    private String eventDate;
-    private Date dueDate;
+    private final String EVENT_MARKER = "E";
+    private String eventDescription;
+    private TaskDate eventDate;
     @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     private final String TASK_KEYWORD = "event ";
     @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final String AT_KEYWORD = "at ";
+    private final String AT_CONNECTOR = "at ";
+    private String dateString;
     /**
      * Class constructor.
      *
@@ -29,18 +31,15 @@ public class Event extends Task {
      */
     public Event(String description) throws DukeException {
         super();
-        int startingIndex = description.indexOf(TASK_KEYWORD) + TASK_KEYWORD.length();
-        int startOfTimeIndex = description.indexOf(AT_KEYWORD);
-        taskDescription = description.substring(startingIndex, startOfTimeIndex - 1);
-        eventDate = description.substring(startOfTimeIndex + AT_KEYWORD.length());
-        try {
-            this.dueDate = new Date(eventDate);
-        } catch (DateTimeParseException e) {
-            throw new DukeException(e);
-        }
-        assert !isDone : false;
+        int startOfDescriptionIndex = getStartingIndexAfter(description, TASK_KEYWORD);
+        int startOfTimeIndex = getStartingIndexAfter(description, AT_CONNECTOR);
+        eventDescription = getSubString(description, startOfDescriptionIndex,
+                startOfTimeIndex - AT_CONNECTOR.length());
+        String descriptionDate = getSubString(description, startOfTimeIndex);
+        eventDate = new TaskDate(descriptionDate);
+        dateString = getDateString();
+	assert !isDone : false;
     }
-
     /**
      * Class constructor for loading tasks from storage file.
      *
@@ -49,9 +48,16 @@ public class Event extends Task {
      * @throws ParseException due to improper date format.
      */
     public Event(String eventDescription, String dateOfTask) throws DukeException {
-        taskDescription = eventDescription;
-        dueDate = Date.convertDateStringToDate(dateOfTask);
+        super();
+        this.eventDescription = eventDescription;
+        eventDate = TaskDate.convertDateStringToDate(dateOfTask);
+        dateString = getDateString();
     }
+
+    private String getDateString() {
+        return eventDate.toString();
+    }
+
     /**
      * Print out the event task,
      *
@@ -60,29 +66,18 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s]%s %s (at: %s)", TASK_MARKER, super.toString(), taskDescription,
-                dueDate.toString());
+        return String.format("[%s]%s %s (at: %s)", EVENT_MARKER, super.toString(), eventDescription,
+                dateString);
     }
-
     /**
      * Formats the task in to the storage format.
      *
      * @return storage format of the task.
      */
     public String formatToStore() {
-        return String.format("%s | %s | %s | %s", TASK_MARKER, getStatusIcon() == " " ? 1 : 0,
-                taskDescription, dueDate.toString());
+        return String.format("%s | %s | %s | %s", EVENT_MARKER, getStatusIcon() == " " ? 1 : 0,
+            eventDescription, dateString);
     }
-
-    /**
-     * Returns task marker.
-     *
-     * @return a one character string that is a marker for this task.
-     */
-    public String getTaskMarker() {
-        return TASK_MARKER;
-    }
-
     /**
      * Checks if given datetime matches the tasks date time.
      *
@@ -90,8 +85,26 @@ public class Event extends Task {
      * @return true if the task date time matches the date time given.
      */
     @Override
-    public boolean isSameDate(String dateString) {
-        assert dueDate != null : "dueDate must not be unassigned";
-        return this.dueDate.isSameDate(dateString);
+    public boolean isSameDateAs(String dateString) throws DukeException {
+        assert evenDate != null : "even date must not be unassigned";
+	return eventDate.equals(dateString);
+    }
+
+    /**
+     * Overrides contains in task by adding an additional check for date, if the search phrase is a date.
+     *
+     * @param searchPhrase the phrase or word or date of interest.
+     * @return
+     */
+    @Override
+    public boolean contains(String searchPhrase) {
+        if (searchPhrase.contains("/")) {
+            try {
+                return isSameDateAs(searchPhrase);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return toString().contains(searchPhrase);
     }
 }

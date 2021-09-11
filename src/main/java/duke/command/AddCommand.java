@@ -4,7 +4,7 @@ import java.time.format.DateTimeParseException;
 
 import duke.main.DukeException;
 import duke.main.Storage;
-import duke.main.TaskList;
+import duke.task.TaskList;
 import duke.main.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -29,6 +29,7 @@ public class AddCommand extends Command {
         super();
         this.addCommand = addCommand;
         assert !isExit() : "isExit should return false";
+
     }
 
     /**
@@ -41,22 +42,28 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String taskType = addCommand.split(" ")[0];
+        Task task;
         try {
-            Task task;
-            if (addCommand.contains("deadline")) {
+            System.out.println(taskType);
+            switch (taskType) {
+            case "deadline" :
                 task = new Deadline(addCommand);
-            } else if (addCommand.contains("event")) {
+                break;
+            case "event":
                 task = new Event(addCommand);
-            } else {
+                break;
+            case "todo" :
                 task = new Todo(addCommand);
+                break;
+            default:
+                throw new IllegalArgumentException();
             }
             assert task != null : "the task cannot be null";
             Task taskAdded = tasks.add(task);
             return ui.showTaskAdded(taskAdded, tasks.getNumTasks());
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException(e);
-        } catch (DateTimeParseException e) {
-            throw new DukeException(e);
+        } catch (IllegalArgumentException e) {
+            throw new DukeException(DukeException.Exceptions.EXCEPTIONS);
         }
     }
 }

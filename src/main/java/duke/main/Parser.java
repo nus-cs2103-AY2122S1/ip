@@ -1,5 +1,6 @@
 package duke.main;
 
+import com.sun.prism.shader.Solid_RadialGradient_REFLECT_AlphaTest_Loader;
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -16,45 +17,46 @@ import duke.command.MarkDoneCommand;
  * @version CS2103T, Semester 2
  */
 public class Parser {
-    
-    public enum Commands { done, list, delete, filter, others }
-    private Parser() {
-    }
-    
+
+    private enum Commands { delete, done, filter, list, deadline, event, todo }
     /**
      * Takes in a user command, logic decides which command to call.
-     * 
-     * @param command a string of user input command.
+     *
+     * @param userInput a string of user input command.
      * @return a command object to execute the user command.
      * @throws DukeException exception handled by DukeException class.
      */
-    public static Command parse(String command) throws DukeException {
-        String[] commandDescription = command.split(" ", 0);
-        String action = commandDescription[0];
+    public static Command parse(String userInput) throws DukeException {
+        String commandAction = splitActionAndDetails(userInput)[0];
         try {
-            switch (action) {
-            case "done": 
-                    return new MarkDoneCommand(Integer.parseInt(commandDescription[1])); 
-            case "list": 
+            switch (commandAction) {
+            case "done":
+                    return new MarkDoneCommand(splitActionAndDetails(userInput)[1]);
+            case "list":
                     return new ListCommand();
             case "delete":
-                    return new DeleteCommand(Integer.parseInt(commandDescription[1]));
+                    return new DeleteCommand(splitActionAndDetails(userInput)[1]);
             case "filter":
-                    return new FilterCommand(commandDescription[1]);
+                    return new FilterCommand(splitActionAndDetails(userInput)[1]);
             case "find":
-                    return new FindCommand(command);
+                    return new FindCommand(userInput);
             case "bye":
                     return new ExitCommand();
+            case "deadline" :
+            case "event" :
+            case "todo" :
+                    return new AddCommand(userInput);
             default:
-                    assert action != "bye" : "action is not bye";
-                    return new AddCommand(command);
+                assert action != "bye" : "action is not bye";
+                throw new IllegalArgumentException();
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(e);
-        } catch (NumberFormatException e) {
-            throw new DukeException(e);
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException(e);
+            throw new DukeException(DukeException.Exceptions.ArrayIndexOutOfBoundsException);
+        } catch (IllegalArgumentException e) {
+            throw new DukeException(DukeException.Exceptions.EXCEPTIONS);
         }
+    }
+    private static String[] splitActionAndDetails(String userInput) {
+        return userInput.split(" ", 0);
     }
 }
