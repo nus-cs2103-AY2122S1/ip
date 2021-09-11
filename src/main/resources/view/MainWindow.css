@@ -1,0 +1,22 @@
+.disableFocus {
+        -fx-focus-color: -fx-control-inner-background ;
+    -fx-faint-focus-color: -fx-control-inner-background ;
+}
+
+#sendButton {
+    -fx-background-image: url("../images/send-icon.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 20 20;
+    -fx-background-color: transparent;
+    -fx-background-position: center;
+    -fx-background-radius: 50px;
+}
+
+#sendButton:hover {
+    -fx-background-size: 24 24;
+}
+
+#sendButton:pressed {
+    -fx-background-size: 20 20;
+    -fx-background-color: #e9e9e9;
+}

@@ -1,6 +1,5 @@
 .DialogBox {
     -fx-spacing: 10px;
-    -fx-min-width: 400px;
 }
 
 #displayPicture {
@@ -11,11 +10,10 @@
     -fx-font-size: 14px;
 }
 
-
 #chatBubble {
     -fx-padding: 10px;
     -fx-background-radius: 5px;
-    -fx-min-width: 100;
+    -fx-min-width: 70;
 }
 
 .userBubble {

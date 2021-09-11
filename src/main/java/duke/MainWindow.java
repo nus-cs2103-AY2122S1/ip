@@ -40,6 +40,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        userInput.setPromptText("Type your message here...");
     }
 
     public void setInputHandler(Consumer<String> handler) {
