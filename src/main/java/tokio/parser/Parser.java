@@ -1,11 +1,14 @@
 package tokio.parser;
 
-import tokio.commands.AddCommand;
+import tokio.commands.AddDeadlineCommand;
+import tokio.commands.AddEventCommand;
+import tokio.commands.AddTodoCommand;
 import tokio.commands.ByeCommand;
 import tokio.commands.Command;
 import tokio.commands.DeleteCommand;
 import tokio.commands.DoneCommand;
 import tokio.commands.FindCommand;
+import tokio.commands.Instruction;
 import tokio.commands.ListCommand;
 import tokio.exceptions.DukeException;
 import tokio.ui.Ui;
@@ -27,21 +30,25 @@ public class Parser {
         assert str.length() != 0 : "Command cannot be blank";
         try {
             String[] splitStr = str.split(" ", 2);
-            if (splitStr[0].equalsIgnoreCase("list")) {
+            String commandType = splitStr[0].trim();
+            switch (Instruction.comparesTo(commandType)) {
+            case LIST:
                 return new ListCommand();
-            } else if (splitStr[0].equalsIgnoreCase("done")) {
-                return new DoneCommand(str);
-            } else if (splitStr[0].equalsIgnoreCase("delete")) {
-                return new DeleteCommand(str);
-            } else if (splitStr[0].equalsIgnoreCase("todo")
-                    || splitStr[0].equalsIgnoreCase("deadline")
-                    || splitStr[0].equalsIgnoreCase("event")) {
-                return new AddCommand(str);
-            } else if (splitStr[0].equalsIgnoreCase("find")) {
-                return new FindCommand(splitStr[1]);
-            } else if (splitStr[0].equalsIgnoreCase("bye")) {
+            case DONE:
+                return new DoneCommand(Integer.parseInt(splitStr[1].trim()));
+            case DELETE:
+                return new DeleteCommand(Integer.parseInt(splitStr[1].trim()));
+            case TODO:
+                return new AddTodoCommand(splitStr[1].trim());
+            case DEADLINE:
+                return new AddDeadlineCommand(splitStr[1].trim());
+            case EVENT:
+                return new AddEventCommand(splitStr[1].trim());
+            case FIND:
+                return new FindCommand(splitStr[1].trim());
+            case BYE:
                 return new ByeCommand();
-            } else {
+            default:
                 throw new DukeException("Please enter a valid command so that I will be able to help you...");
             }
         } catch (Exception e) {

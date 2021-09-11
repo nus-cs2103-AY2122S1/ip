@@ -11,35 +11,27 @@ import tokio.ui.Ui;
  * Marks task specified by user as done, using index.
  */
 public class DoneCommand extends Command {
-    protected String cmdLine;
     protected int index;
 
-    /**
-     * Marks task as done based on user input.
-     *
-     * @param cmdLine User input.
-     */
-    public DoneCommand(String cmdLine) {
-        this.cmdLine = cmdLine;
-        String[] splitLine = cmdLine.split(" ", 2);
-        if (splitLine.length < 2) {
-            index = Integer.MAX_VALUE;
-        } else {
-            index = Integer.parseInt(splitLine[1]);
-        }
+    public DoneCommand(int index) {
+        this.index = index;
     }
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         assert index >= 0 : "index cannot be < 0";
-        if (index < tasks.getSize() + 1) {
-            Task curr = tasks.getTask(index - 1);
-            storage.doneTask(curr);
-            tasks.doneTask(index - 1);
-            return ui.printDoneCommand(curr, tasks);
-        } else {
+        if (index < 1) {
             return ui.printInvalidIndexError();
         }
+        int maxIndex = tasks.getSize();
+        int doneIndex = index - 1;
+        if (doneIndex >= maxIndex) {
+            return ui.printInvalidIndexError();
+        }
+        Task doneTask = tasks.getTask(doneIndex);
+        storage.doneTask(doneTask);
+        tasks.doneTask(doneIndex);
+        return ui.printDoneCommand(doneTask, tasks);
     }
 
     @Override

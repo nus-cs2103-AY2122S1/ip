@@ -129,9 +129,8 @@ public class Storage {
             String currLine = sc.nextLine();
             if (currLine.equals(lineDone)) {
                 fw.write("");
-            } else {
-                fw.write(currLine + System.lineSeparator());
             }
+            fw.write(currLine + System.lineSeparator());
         }
         fw.close();
         tempFile.renameTo(file);
@@ -153,9 +152,8 @@ public class Storage {
             if (currLine.equals(lineDone)) {
                 task.setDone();
                 fw.write(task + System.lineSeparator());
-            } else {
-                fw.write(currLine + System.lineSeparator());
             }
+            fw.write(currLine + System.lineSeparator());
         }
         fw.close();
         tempFile.renameTo(file);
