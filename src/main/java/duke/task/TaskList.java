@@ -2,6 +2,7 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
+import java.util.Locale;
 
 /**
  * The TaskList encapsulates a list of Tasks.
@@ -133,7 +134,7 @@ public class TaskList {
 
         while (iter.hasNext()) {
             Task t = iter.next();
-            if (t.getName().contains(key)) {
+            if (t.getName().toLowerCase().contains(key.toLowerCase())) {
                 found.add(t);
             }
         }
