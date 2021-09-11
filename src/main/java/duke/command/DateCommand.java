@@ -70,10 +70,13 @@ public class DateCommand extends Command {
 
         StringBuilder datesBuilder = new StringBuilder();
         // finds Deadlines and Events with LocalDate that matches date input from user.
-        for (int idx = 0; idx < tasks.size(); idx++) {
-            Task task = tasks.get(idx);
+        System.out.println(tasks.size());
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
             // Increment by 1 to change index to be 1-based.
-            idx = idx + 1;
+            int idx = i + 1;
+
+            System.out.println(task);
             if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
                 if (localDate.equals(deadline.getTime())) {
@@ -105,6 +108,8 @@ public class DateCommand extends Command {
                     datesBuilder.append(idx).append(".").append(period).append("\n");
                 }
             }
+
+            System.out.println(datesBuilder);
         }
 
         return ui.getDateListSuccessMessage(formattedDateString,
