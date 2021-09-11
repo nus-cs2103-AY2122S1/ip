@@ -55,7 +55,7 @@ application {
 shadowJar {
     archiveBaseName = "duke"
     archiveClassifier = null
-    mainClassName = "duke.main.Launcher"
+    mainClassName = "duke.gui.Launcher"
 }
 
 checkstyle {

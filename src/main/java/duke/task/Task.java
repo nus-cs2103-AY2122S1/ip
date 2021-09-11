@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.main.DukeException;
+
 /**
  * Represents a duke.task which can be marked done.
  *
@@ -69,7 +71,7 @@ public class Task {
      * @param dateString date in string form to to compare with.
      * @return false.
      */
-    public boolean isSameDate(String dateString) {
+    public boolean isSameDateAs(String dateString) throws DukeException {
         return false;
     }
 
@@ -81,5 +83,16 @@ public class Task {
      */
     public boolean contains(String searchPhrase) {
         return toString().contains(searchPhrase);
+    }
+
+    public int getStartingIndexAfter(String description, String wordSlicer) {
+        return description.indexOf(wordSlicer) + wordSlicer.length();
+    }
+
+    public String getSubString(String taskDescription, int ... startAndEndIndex) {
+        if (startAndEndIndex.length == 1) {
+            return taskDescription.substring(startAndEndIndex[0]);
+        }
+        return taskDescription.substring(startAndEndIndex[0], startAndEndIndex[1]);
     }
 }

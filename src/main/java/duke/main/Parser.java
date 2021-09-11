@@ -17,7 +17,7 @@ import duke.command.MarkDoneCommand;
  * @version CS2103T, Semester 2
  */
 public class Parser {
-    private enum Commands { delete, done, filter, list, others }
+    private enum Commands { delete, done, filter, list, deadline, event, todo }
     /**
      * Takes in a user command, logic decides which command to call.
      *
@@ -26,29 +26,35 @@ public class Parser {
      * @throws DukeException exception handled by DukeException class.
      */
     public static Command parse(String userInput) throws DukeException {
-        String action = getAction(userInput)[0];
+        String commandAction = splitActionAndDetails(userInput)[0];
         try {
-            switch (action) {
+            switch (commandAction) {
             case "done":
-                    return new MarkDoneCommand(getAction(userInput)[1]);
+                    return new MarkDoneCommand(splitActionAndDetails(userInput)[1]);
             case "list":
                     return new ListCommand();
             case "delete":
-                    return new DeleteCommand(getAction(userInput)[1]);
+                    return new DeleteCommand(splitActionAndDetails(userInput)[1]);
             case "filter":
-                    return new FilterCommand(getAction(userInput)[1]);
+                    return new FilterCommand(splitActionAndDetails(userInput)[1]);
             case "find":
                     return new FindCommand(userInput);
             case "bye":
                     return new ExitCommand();
+            case "deadline" :
+            case "event" :
+            case "todo" :
+                return new AddCommand(userInput);
             default:
-                    return new AddCommand(getAction(userInput)[1]);
+                throw new IllegalArgumentException();
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(DukeException.Exceptions.ArrayIndexOutOfBoundsException);
+        } catch (IllegalArgumentException e) {
+            throw new DukeException(DukeException.Exceptions.EXCEPTIONS);
         }
     }
-    private static String[] getAction(String userInput) {
+    private static String[] splitActionAndDetails(String userInput) {
         return userInput.split(" ", 0);
     }
 }

@@ -1,15 +1,12 @@
 package duke.command;
 import duke.main.DukeException;
 import duke.main.Storage;
-import duke.main.TaskList;
+import duke.task.TaskList;
 import duke.main.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-import javafx.scene.chart.ScatterChart;
-
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents a command to add a task.
@@ -43,6 +40,7 @@ public class AddCommand extends Command {
         String taskType = addCommand.split(" ")[0];
         Task task;
         try {
+            System.out.println(taskType);
             switch (taskType) {
             case "deadline" :
                 task = new Deadline(addCommand);

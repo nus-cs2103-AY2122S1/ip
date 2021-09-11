@@ -1,6 +1,7 @@
 package duke.main;
 
 import duke.command.Command;
+import duke.task.TaskList;
 
 /**
  * Represents the duke chat bot, which has the ability to log and track and delete tasks.

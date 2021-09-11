@@ -3,7 +3,7 @@ package duke.command;
 import duke.main.DukeException;
 import duke.main.Storage;
 import duke.main.TaskDate;
-import duke.main.TaskList;
+import duke.task.TaskList;
 import duke.main.Ui;
 
 /**
@@ -22,9 +22,8 @@ public class FilterCommand extends Command {
      */
     public FilterCommand(String dateString) throws DukeException {
         super();
-        String[] dateComponents = dateString.split("/");
-        date = new TaskDate(dateComponents);
-        dateString = date.toString();
+        date = new TaskDate(dateString);
+        this.dateString = date.toString();
     }
     /**
      * Executes a command to filter out tasks falling on the specified date.
@@ -34,15 +33,15 @@ public class FilterCommand extends Command {
      * @return message displaying all tasks that falls on the specified date.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         TaskList matchingTasks = findMatchingTasks(tasks);
-        String message = generateFilterCommandMessage();
-        return ui.showMatchingTasks(matchingTasks, dateString, message, tasks.getNumTasks());
+        String headerMessage = generateHeaderMessage();
+        return ui.showMatchingTasks(matchingTasks, headerMessage);
     }
     private TaskList findMatchingTasks(TaskList tasks) {
         return tasks.findMatchingTasks(dateString);
     }
-    private String generateFilterCommandMessage() {
+    private String generateHeaderMessage() {
         return String.format("On %s, you have:", dateString);
     }
 }

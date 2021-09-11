@@ -1,6 +1,7 @@
 package duke.command;
+import duke.main.DukeException;
 import duke.main.Storage;
-import duke.main.TaskList;
+import duke.task.TaskList;
 import duke.main.Ui;
 
 /**
@@ -13,25 +14,26 @@ public class FindCommand extends Command {
     @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     private final String KEYWORD = "find ";
     private String searchPhrase;
+    private final String EXECUTION_MESSAGE = "Here are the matching tasks in your list:\n";
     /**
      * Class constructor.
      *
      * @param userCommand to filter out tasks containing a searchPhrase.
      * @throws StringIndexOutOfBoundsException if there is no search phrase.
      */
-    public FindCommand(String userCommand) throws StringIndexOutOfBoundsException {
+    public FindCommand(String userCommand) throws DukeException {
         super();
         int startingIndex = findStartingIndex(userCommand);
         this.searchPhrase = getSearchPhrase(userCommand, startingIndex);
         if (searchPhrase.equals("")) {
-            throw new StringIndexOutOfBoundsException();
+            throw new DukeException(DukeException.Exceptions.StringIndexOutOfBoundsException);
         }
     }
     private int findStartingIndex(String userCommand) {
         return userCommand.indexOf(KEYWORD) + KEYWORD.length();
     }
-    private String getSearchPhrase(String userInput, int startingIndex) {
-        return userInput.substring(startingIndex);
+    private String getSearchPhrase(String userCommand, int startingIndex) {
+        return userCommand.substring(startingIndex);
     }
     /**
      * Executes a command to filter out tasks falling on the specified date.
@@ -42,10 +44,6 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList matchingTasks = tasks.findMatchingTasks(searchPhrase);
-        String executionMessage = generateExecutionMessage();
-        return ui.showMatchingTasks(matchingTasks, searchPhrase, executionMessage, tasks.getNumTasks());
-    }
-    private String generateExecutionMessage() {
-        return "Here are the matching tasks in your list:\n";
+        return ui.showMatchingTasks(matchingTasks, EXECUTION_MESSAGE);
     }
 }

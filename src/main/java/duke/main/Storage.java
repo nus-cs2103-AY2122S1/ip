@@ -9,6 +9,7 @@ import java.util.Scanner;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.task.Todo;
 
 /**
@@ -22,8 +23,6 @@ public class Storage {
     private String fileName;
     private File file;
     private FileWriter fileWriter;
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final String DIVIDER = " | ";
 
     /**
      * Class constructor.
@@ -91,13 +90,14 @@ public class Storage {
     private Task createNewTask(String taskString) throws DukeException {
         Task task;
         if (taskString.contains("D |")) {
-            String[] taskDescriptionAndDate = removeTaskTag(taskString, "| D | ", "by ");
+            String[] taskDescriptionAndDate = getTaskDescriptionAndDate(taskString, "| D | ", "by ");
             task = new Deadline(taskDescriptionAndDate[0], taskDescriptionAndDate[1]);
         } else if (taskString.contains("E |")) {
-            String[] taskDescriptionAndDate = removeTaskTag(taskString, "| E | ", "at ");
+            String[] taskDescriptionAndDate = getTaskDescriptionAndDate(taskString, "| E | ", "at ");
             task = new Event(taskDescriptionAndDate[0], taskDescriptionAndDate[1]);
         } else {
-            String taskDescription = removeTaskTag(taskString, "| T | ")[0];
+            // todo tasks have no dates, so only take task description.
+            String taskDescription = getTaskDescriptionAndDate(taskString, "| T | ")[0];
             task = new Todo(taskDescription);
         }
         if (taskString.contains("| 0 |")) {
@@ -105,18 +105,18 @@ public class Storage {
         }
         return task;
     }
-    private String[] removeTaskTag(String taskString, String taskTag, String ... timeTag) {
-        int startOfTaskDescriptionIndex = sliceString(taskString, taskTag);
+    private String[] getTaskDescriptionAndDate(String taskString, String taskTag, String ... timeTag) {
+        int startOfTaskDescriptionIndex = getStartingIndex(taskString, taskTag);
         int startOfTaskDateIndex = -1;
         if (timeTag != null) {
-            startOfTaskDateIndex = sliceString(taskString, timeTag[0]);
+            startOfTaskDateIndex = getStartingIndex(taskString, timeTag[0]);
         }
         String taskDescription = taskString.substring(startOfTaskDescriptionIndex,
                 startOfTaskDateIndex);
         String taskDate = taskDescription.substring(startOfTaskDateIndex);
         return new String[]{taskDescription, taskDate};
     }
-    private int sliceString(String string, String stringSlicer) {
+    private int getStartingIndex(String string, String stringSlicer) {
         return string.indexOf(stringSlicer) + stringSlicer.length();
     }
     /**

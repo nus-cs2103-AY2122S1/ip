@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Represents testing the TaskList class.
@@ -20,8 +21,12 @@ public class TaskListTest {
     @Test
     public void findMatchingTasks_thirdOfSep_OneTask() {
         tasks = new TaskList();
-        tasks.add(new Deadline("deadline submit report by 30/08/2021"));
-        tasks.add(new Event("event attend workshop at 03/09/2021"));
+        try {
+            tasks.add(new Deadline("deadline submit report by 30/08/2021"));
+            tasks.add(new Event("event attend workshop at 03/09/2021"));
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
         TaskList matchingTasks = tasks.findMatchingTasks("Sep 03");
         assertEquals(matchingTasks.getNumTasks(), 1);
     }
@@ -32,8 +37,12 @@ public class TaskListTest {
     @Test
     public void markDone_markSecondTaskDone_submitReportBy30Sep_void() {
         tasks = new TaskList();
-        tasks.add(new Deadline("deadline submit report by 30/08/2021"));
-        tasks.add(new Event("event attend workshop at 03/09/2021"));
+        try {
+            tasks.add(new Deadline("deadline submit report by 30/08/2021"));
+            tasks.add(new Event("event attend workshop at 03/09/2021"));
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
         Task taskMarkedDone = tasks.markDone(1);
         assertEquals(taskMarkedDone.toString(), "[E][X] attend workshop (at: Sep 03)");
     }

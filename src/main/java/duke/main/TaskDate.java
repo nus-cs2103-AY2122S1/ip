@@ -18,19 +18,25 @@ public class TaskDate {
     /**
      * Class constructor.
      *
-     * @param dayMonthYear the day, month and year of the given date.
+     * @param dateString given in the form dd/mm/yyyy or dd/mm.
      * @throws DateTimeParseException exception caused by improper time format.
      */
-    public TaskDate(String ... dayMonthYear) throws DukeException {
+    public TaskDate(String dateString) throws DukeException {
+        String[] dayMonthYear = dateString.split("/");
         try {
-            localDate = LocalDate.parse(String.format("%s-%s-%s", "2021", dayMonthYear[1], dayMonthYear[0]));
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(DukeException.Exceptions.ArrayIndexOutOfBoundsException);
+            localDate = LocalDate.parse(reformatDateString(dayMonthYear));
         } catch (DateTimeParseException e) {
             throw new DukeException(DukeException.Exceptions.DateTimeParseException);
         }
     }
 
+    private String reformatDateString(String ... dayMonthYear) throws DukeException {
+        try {
+            return String.format("%s-%s-%s", "2021", dayMonthYear[1], dayMonthYear[0]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException(DukeException.Exceptions.ArrayIndexOutOfBoundsException);
+        }
+    }
     /**
      * Returns string format of the datetime.
      *
@@ -42,6 +48,7 @@ public class TaskDate {
     }
 
     private DateTimeFormatter getDateFormat() {
+        //formats the date in the form mmm dd, ie Jan 01.
         return DateTimeFormatter.ofPattern("MMM dd");
     }
     /**
@@ -57,14 +64,15 @@ public class TaskDate {
      * Checks if a given local date equals this local date.
      *
      * @param dateString the given local date object.
-     * @return true if both local dates are equal, false otherwise.
+     * @return true if both dates are equal, false otherwise.
      */
-    public boolean isSameDate(String dateString) {
-        return toString().equals(dateString);
+    public boolean equals(String dateString) throws DukeException {
+        LocalDate date = LocalDate.parse(reformatDateString(dateString.split("/")));
+        return localDate.isEqual(date);
     }
 
     /**
-     * converts a given date string into a date object.
+     * Converts a given date string into a date object.
      *
      * @param dateString in form of DD MMM YYYY.
      * @return a date object corresponding to the date string.
@@ -72,7 +80,7 @@ public class TaskDate {
      */
     public static TaskDate convertDateStringToDate(String dateString) throws DukeException {
         try {
-            java.util.Date monthDayDate = getFormattedDate("MMM D", dateString);
+            Date monthDayDate = getFormattedDate("MMM D", dateString);
             SimpleDateFormat dateFormat = new SimpleDateFormat("DD/MM/YYYY");
             return new TaskDate(getFormattedDateString(dateFormat, monthDayDate));
         } catch (ParseException e) {
@@ -83,7 +91,7 @@ public class TaskDate {
         SimpleDateFormat monthDayFormat = new SimpleDateFormat(dateFormatString);
         return monthDayFormat.parse(dateString);
     }
-    private static String getFormattedDateString(SimpleDateFormat simpleDateFormat, java.util.Date monthDayDate) {
+    private static String getFormattedDateString(SimpleDateFormat simpleDateFormat, Date monthDayDate) {
         return simpleDateFormat.format(monthDayDate);
     }
 }

@@ -3,6 +3,7 @@ package duke.main;
 import java.util.Scanner;
 
 import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Represents user interface abstraction.
@@ -134,7 +135,7 @@ public class Ui {
      */
     public String showListOfTasks(TaskList tasks, int numTasks) {
         String header = "Here are the tasks in your list:";
-        return iterate(header, tasks, numTasks);
+        return iterate(header, tasks);
     }
 
     /**
@@ -143,16 +144,14 @@ public class Ui {
      * @param tasks   list of duke.task that fall on the specified date.
      * @param message the header message.
      */
-    public String showMatchingTasks(TaskList tasks, String searchPhrase, String message, int numTasks) {
-        return iterate(message, tasks, numTasks);
+    public String showMatchingTasks(TaskList tasks, String message) {
+        return iterate(message, tasks);
     }
-    private String iterate(String headerMessage, TaskList tasks, int numTasks) {
+    private String iterate(String headerMessage, TaskList tasks) {
         String listOfTasksDisplay = String.format("%s\n", headerMessage);
-        Task task;
         String taskString;
-        for (int i = 0; i < numTasks; i++) {
-            task = tasks.getTask(i);
-            taskString = task.toString();
+        for (int i = 0; i < tasks.getNumTasks(); i++) {
+            taskString = tasks.getTask(i).toString();
             listOfTasksDisplay += String.format("%s.%s\n", i + 1, taskString);
         }
         return listOfTasksDisplay;
