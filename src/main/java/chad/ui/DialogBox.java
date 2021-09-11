@@ -143,7 +143,7 @@ public class DialogBox extends HBox {
         return db;
     }
 
-    static DialogBox getResponseDialog(String text, Image image) {
+    private static DialogBox getResponseDialog(String text, Image image) {
         DialogBox db = getDialog(text, image);
         String newStyle = db.dialog.getStyle() + RESPONSE_DIALOG_BACKGROUND_RADIUS_STYLE;
         db.dialog.setStyle(newStyle);

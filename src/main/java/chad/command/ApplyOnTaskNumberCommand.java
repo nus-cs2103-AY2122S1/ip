@@ -14,18 +14,18 @@ public abstract class ApplyOnTaskNumberCommand extends Command implements Undoab
      *
      * @param command The command represented by the instance.
      */
-    public ApplyOnTaskNumberCommand(String command) {
+    public ApplyOnTaskNumberCommand(String command) throws ChadInvalidCommandException {
         super(command);
     }
 
     @Override
-    void parseCommand(String[] tokens) {
+    void parseCommand(String[] tokens) throws ChadInvalidCommandException {
         String taskNumberString = parseTaskNumberString(tokens);
         checkTaskNumberStringLength(taskNumberString);
         parseTaskIndex(taskNumberString);
     }
 
-    private void checkTaskNumberStringLength(String taskNumberString) {
+    private void checkTaskNumberStringLength(String taskNumberString) throws ChadInvalidCommandException {
         if (taskNumberString.length() == 0) {
             throw new ChadInvalidCommandException(String.format("A task number is required for \"%s\" commands.",
                     getCommandType().getCommandDescription()));

@@ -18,7 +18,7 @@ public class AddEventTaskCommand extends AddTemporalTaskCommand {
      *
      * @param command The command represented by the instance.
      */
-    public AddEventTaskCommand(String command) {
+    public AddEventTaskCommand(String command) throws ChadInvalidCommandException {
         super(command);
     }
 

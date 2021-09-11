@@ -36,19 +36,19 @@ public class FindTasksCommand extends Command {
         case 0:
             ui.startMessage()
                     .addLine("No matching tasks were found.")
-                    .printFormatted();
+                    .displayMessage();
             break;
         case 1:
             ui.startMessage()
                     .addLine("Here is the 1 matching task in your list:")
                     .addFindTasksResultsList(queryResults)
-                    .printFormatted();
+                    .displayMessage();
             break;
         default:
             ui.startMessage()
                     .addLine(String.format("Here are the %d matching tasks in your list:", n))
                     .addFindTasksResultsList(queryResults)
-                    .printFormatted();
+                    .displayMessage();
             break;
         }
     }
@@ -60,7 +60,7 @@ public class FindTasksCommand extends Command {
         this.queryTaskDescription = queryTaskDescription;
     }
 
-    private void checkQueryTaskDescriptionLength(String queryTaskDescription) {
+    private void checkQueryTaskDescriptionLength(String queryTaskDescription) throws ChadInvalidCommandException {
         if (queryTaskDescription.length() == 0) {
             throw new ChadInvalidCommandException(String.format("A query is required for \"%s\" commands.",
                     getCommandType().getCommandDescription()));

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 public class ToDoTaskTest {
+
     @Test
     public void getFileRepresentation_notDoneToDoTask_success() {
         ToDoTask toDoTask = new ToDoTask("Task description");

@@ -6,6 +6,7 @@ package chad.command;
  * @author Jay Aljelo Saez Ting
  */
 public class ChadInvalidCommandException extends IllegalArgumentException {
+
     /**
      * Constructs a ChadInvalidCommandException instance with the given error message.
      *

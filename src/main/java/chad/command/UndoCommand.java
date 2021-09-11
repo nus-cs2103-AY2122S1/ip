@@ -3,12 +3,17 @@ package chad.command;
 import chad.task.TaskHandler;
 import chad.ui.Ui;
 
+/**
+ * Represents an "Undo" command.
+ *
+ * @author Jay Aljelo Saez Ting
+ */
 public class UndoCommand extends Command {
 
     private static final CommandType COMMAND_TYPE = CommandType.UNDO;
 
     /**
-     * Creates a Command instance.
+     * Creates an UndoCommand instance.
      *
      * @param command The command represented by the instance.
      */
@@ -23,17 +28,21 @@ public class UndoCommand extends Command {
         if (command == null) {
             ui.startMessage()
                     .addLine("There are no commands (left over) to undo.")
-                    .printFormatted();
+                    .displayMessage();
         } else {
             ui.startMessage()
                     .addLine("Okay, I have undone the following command:")
                     .addCommand(command)
-                    .printFormatted();
+                    .displayMessage();
         }
     }
 
     @Override
-    void parseCommand(String[] tokens) throws ChadInvalidCommandException {}
+    void parseCommand(String[] tokens) throws ChadInvalidCommandException {
+        if (tokens.length > 1) {
+            throw new ChadInvalidCommandException("There were unnecessary arguments.");
+        }
+    }
 
     @Override
     CommandType getCommandType() {

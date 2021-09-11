@@ -18,12 +18,12 @@ public class MarkTaskDoneCommand extends ApplyOnTaskNumberCommand {
      *
      * @param command The command represented by the instance.
      */
-    public MarkTaskDoneCommand(String command) {
+    public MarkTaskDoneCommand(String command) throws ChadInvalidCommandException {
         super(command);
     }
 
     @Override
-    public void execute(TaskHandler taskHandler, Ui ui) {
+    public void execute(TaskHandler taskHandler, Ui ui) throws ChadInvalidCommandException {
         Task task;
         try {
             task = taskHandler.markTaskDone(getTaskIndex());
@@ -33,7 +33,7 @@ public class MarkTaskDoneCommand extends ApplyOnTaskNumberCommand {
         ui.startMessage()
                 .addLine("Nice! I've marked this task as done:")
                 .addTask(task)
-                .printFormatted();
+                .displayMessage();
         CommandHandler commandHandler = CommandHandler.getInstance();
         commandHandler.addToUndoableCommands(this);
     }

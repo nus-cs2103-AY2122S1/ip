@@ -17,26 +17,30 @@ public class ListTasksCommand extends Command {
      *
      * @param command The command represented by the instance.
      */
-    public ListTasksCommand(String command) {
+    public ListTasksCommand(String command) throws ChadInvalidCommandException {
         super(command);
     }
 
     @Override
-    public void execute(TaskHandler taskHandler, Ui ui) {
+    public void execute(TaskHandler taskHandler, Ui ui) throws ChadInvalidCommandException {
         if (taskHandler.getNumberOfTasks() == 0) {
             ui.startMessage()
                     .addLine("You have no tasks in the list.")
-                    .printFormatted();
+                    .displayMessage();
         } else {
             ui.startMessage()
                     .addLine("Here are the tasks in your list:")
                     .addTasksList(taskHandler.getTasks())
-                    .printFormatted();
+                    .displayMessage();
         }
     }
 
     @Override
-    void parseCommand(String[] tokens) {}
+    void parseCommand(String[] tokens) throws ChadInvalidCommandException {
+        if (tokens.length > 1) {
+            throw new ChadInvalidCommandException("There were unnecessary arguments.");
+        }
+    }
 
     @Override
     CommandType getCommandType() {

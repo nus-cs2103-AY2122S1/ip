@@ -21,14 +21,14 @@ public abstract class AddTemporalTaskCommand extends AddTaskCommand {
      *
      * @param command The command represented by the instance.
      */
-    public AddTemporalTaskCommand(String command) {
+    public AddTemporalTaskCommand(String command) throws ChadInvalidCommandException {
         super(command);
     }
 
     abstract String getTimeRelation();
 
     @Override
-    void parseCommand(String[] tokens) {
+    void parseCommand(String[] tokens) throws ChadInvalidCommandException {
         int timeRelationIndex = findTimeRelationIndex(tokens);
         int timeStartIndex = timeRelationIndex + 1;
         String taskDescription = getTokenSequence(tokens, 1, timeRelationIndex);
@@ -62,7 +62,7 @@ public abstract class AddTemporalTaskCommand extends AddTaskCommand {
         }
     }
 
-    private void checkTimeStringLength(String timeStr) {
+    private void checkTimeStringLength(String timeStr) throws ChadInvalidCommandException {
         if (timeStr.length() == 0) {
             throw new ChadInvalidCommandException(String.format("A date and time is required for \"%s\" commands.",
                     getCommandType().getCommandDescription()));
