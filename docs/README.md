@@ -61,7 +61,7 @@ The following is an exhaustive list of commands you can use with Petal.
     ``
       _Add an event with a date, and start/end time._
 4.  **list** 
-``
+    ``
     list
     ``
       _Shows all currently added tasks._
@@ -81,17 +81,17 @@ The following is an exhaustive list of commands you can use with Petal.
     ``
      _Shows all tasks on the given date._
 9.  **done (done *number*)** 
-``
+    ``
     done 1
     ``
      _Marks the task, whose number correpsonds to that in the list, as done._
 10.  **dossiers** 
-``
+    ``
     dossiers
     ``
      _Shows all items in the archive._
 11.  **bye** 
-``
+    ``
     bye
     ``
      _Exits the bot._
