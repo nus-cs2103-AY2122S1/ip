@@ -36,6 +36,7 @@ Filters event and deadline tasks by their inputted dates. Options are available 
 ### Automatically saves tasks
 
 Automatically saves task list to local memory after every command.
+
 ***
 
 ## Usage
