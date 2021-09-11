@@ -30,7 +30,9 @@ public class DialogBox extends HBox {
     private Text dialog;
     @FXML
     private ImageView displayPicture;
-    
+
+    private static final Background ERROR_BACKGROUND = new Background(
+            new BackgroundFill(Color.LIGHTPINK, CornerRadii.EMPTY, Insets.EMPTY));
     private static final Background USER_BACKGROUND = new Background(
             new BackgroundFill(Color.GAINSBORO, CornerRadii.EMPTY, Insets.EMPTY));
     private static final Font USER_FONT = Font.font("Arial", FontWeight.BOLD, 14);
@@ -81,7 +83,10 @@ public class DialogBox extends HBox {
         dialog.setFont(USER_FONT);
     }
     
-    public void setDukeStyle() {
+    public void setDukeStyle(boolean isError) {
+        if (isError) {
+            setBackground(ERROR_BACKGROUND);
+        }
         dialog.setFont(DUKE_FONT);
     }
     /**
@@ -104,9 +109,9 @@ public class DialogBox extends HBox {
      * @param img The profile image for Duke.
      * @return DialogBox containing the response from Duke.
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getDukeDialog(String text, Image img, boolean isError) {
         var db = new DialogBox(text, img);
-        db.setDukeStyle();
+        db.setDukeStyle(isError);
         db.flip();
         return db;
     }

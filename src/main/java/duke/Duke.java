@@ -21,6 +21,17 @@ public class Duke {
         }
     }
 
+    public boolean isError(String input) {
+        try {
+            Parser parser = new Parser(input);
+            Command command = parser.parse();
+            String response = command.execute(list);
+            return false;
+        } catch (DukeException e) {
+            return true;
+        }
+    }
+
     /**
      * A method that gets the response from Duke to be displayed in the GUI.
      *
