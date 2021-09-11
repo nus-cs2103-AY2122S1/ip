@@ -20,6 +20,9 @@ import task.Todo;
  */
 public class Parser {
 
+    public static final int DESCRIPTION_START = 1;
+    public static final int INVALID = -1;
+
     /**
      * Splits string into an array, removing spaces.
      *
@@ -53,6 +56,12 @@ public class Parser {
         return dbEntry;
     }
 
+    /**
+     * Decodes an event stored as base64 from storage.
+     *
+     * @param dataArr string array retrieved from storage.
+     * @return Event object that the stored data represents.
+     */
     public static Event decodeEvent(String[] dataArr) {
         Boolean isDone = Boolean.valueOf(dataArr[1]);
         String at = new String(Base64.getDecoder().decode(dataArr[2]));
@@ -170,7 +179,7 @@ public class Parser {
     }
 
     public static void addTags(Task task, String[] inputArr, int tagStart) {
-        if (tagStart != -1) {
+        if (tagStart != INVALID) {
             for (int j = tagStart; j < inputArr.length; j++) {
                 Parser.addTag(task, inputArr[j]);
             }
@@ -184,7 +193,7 @@ public class Parser {
     }
 
     public static int getTagsStart(String[] inputArr) {
-        int tagStart = -1;
+        int tagStart = INVALID;
         for (int i = inputArr.length - 1; i >=0; i--) {
             String currentString = inputArr[i];
             if (currentString.charAt(0) == '#') {
@@ -195,13 +204,13 @@ public class Parser {
     }
 
     public static String getDescription(String[] inputArr, int commandIndex) {
-        String[] descriptionArray = Arrays.copyOfRange(inputArr, 1, commandIndex);
+        String[] descriptionArray = Arrays.copyOfRange(inputArr, DESCRIPTION_START, commandIndex);
         String description = String.join(" ", descriptionArray);
         return description;
     }
 
     public static int getCommandIndex(String[] inputArr, String command) {
-        int commandIndex = -1;
+        int commandIndex = INVALID;
         for (int i = 0; i < inputArr.length; i++) {
             String currentStr = inputArr[i];
             if (currentStr.equals(command)) {

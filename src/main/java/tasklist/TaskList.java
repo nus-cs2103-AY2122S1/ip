@@ -13,7 +13,6 @@ import exception.DescriptionException;
 import exception.DukeException;
 import exception.InvalidCommandException;
 import exception.TaskNumberException;
-import model.Tag;
 import parser.Parser;
 import storage.Storage;
 import task.Deadline;
@@ -26,6 +25,10 @@ import ui.Ui;
  * The TaskList class provides the functionality of editing the tasks list.
  */
 public class TaskList {
+    public static final int DESCRIPTION_START = 1;
+    public static final int INVALID = -1;
+
+
     private final Ui messages = new Ui();
     private final Storage databaseEngine = new Storage();
 
@@ -176,15 +179,15 @@ public class TaskList {
         int tagStart = Parser.getTagsStart(inputArr);
 
         String[] descriptionArray;
-        if (tagStart == -1) {
-            descriptionArray = Arrays.copyOfRange(inputArr, 1, inputArr.length);
+        if (tagStart == INVALID) {
+            descriptionArray = Arrays.copyOfRange(inputArr, DESCRIPTION_START, inputArr.length);
         } else {
-            descriptionArray = Arrays.copyOfRange(inputArr, 1, tagStart);
+            descriptionArray = Arrays.copyOfRange(inputArr, DESCRIPTION_START, tagStart);
         }
         String description = String.join(" ", descriptionArray);
         Todo todoTask = new Todo(description);
 
-        if (tagStart != -1) {
+        if (tagStart != INVALID) {
             for (int j = tagStart; j < inputArr.length; j++) {
                 Parser.addTag(todoTask, inputArr[j]);
             }
@@ -210,15 +213,15 @@ public class TaskList {
         int tagStart = Parser.getTagsStart(inputArr);
 
         String[] descriptionArray;
-        if (tagStart == -1) {
-            descriptionArray = Arrays.copyOfRange(inputArr, 1, inputArr.length);
+        if (tagStart == INVALID) {
+            descriptionArray = Arrays.copyOfRange(inputArr, DESCRIPTION_START, inputArr.length);
         } else {
-            descriptionArray = Arrays.copyOfRange(inputArr, 1, tagStart);
+            descriptionArray = Arrays.copyOfRange(inputArr, DESCRIPTION_START, tagStart);
         }
         String description = String.join(" ", descriptionArray);
         Todo todoTask = new Todo(description);
 
-        if (tagStart != -1) {
+        if (tagStart != INVALID) {
             for (int j = tagStart; j < inputArr.length; j++) {
                 Parser.addTag(todoTask, inputArr[j]);
             }
@@ -226,16 +229,6 @@ public class TaskList {
 
         this.taskList.add(todoTask);
         return messages.taskAddMessageGui(todoTask.toString(), this.taskList.size());
-        /*
-        if (this.descriptionInvalid(inputArr)) {
-            throw new DescriptionException("todo");
-        }
-        String[] descriptionArray = Arrays.copyOfRange(inputArr, 1, inputArr.length);
-        String description = String.join(" ", descriptionArray);
-        Todo todoTask = new Todo(description);
-        this.taskList.add(todoTask);
-        return messages.taskAddMessageGui(todoTask.toString(), this.taskList.size());
-         */
     }
 
     /**
@@ -251,9 +244,9 @@ public class TaskList {
         }
 
         int commandIndex = Parser.getCommandIndex(inputArr, "/by");
-        if (commandIndex == -1) {
+        if (commandIndex == INVALID) {
             throw new CommandException("deadline", "/by");
-        } else if (commandIndex == 1) {
+        } else if (commandIndex == DESCRIPTION_START) {
             throw new DescriptionException("deadline");
         }
         int tagStart = Parser.getTagsStart(inputArr);
@@ -286,9 +279,9 @@ public class TaskList {
         }
 
         int commandIndex = Parser.getCommandIndex(inputArr, "/by");
-        if (commandIndex == -1) {
+        if (commandIndex == INVALID) {
             throw new CommandException("deadline", "/by");
-        } else if (commandIndex == 1) {
+        } else if (commandIndex == DESCRIPTION_START) {
             throw new DescriptionException("deadline");
         }
         int tagStart = Parser.getTagsStart(inputArr);
@@ -322,9 +315,9 @@ public class TaskList {
         }
 
         int commandIndex = Parser.getCommandIndex(inputArr, "/at");
-        if (commandIndex == -1) {
+        if (commandIndex == INVALID) {
             throw new CommandException("event", "/at");
-        } else if (commandIndex == 1) {
+        } else if (commandIndex == DESCRIPTION_START) {
             throw new DescriptionException("event");
         }
 
@@ -336,7 +329,7 @@ public class TaskList {
             if ((tagStart > commandIndex) && (commandIndex + 1 != inputArr.length)) {
                 String[] atArray = Arrays.copyOfRange(inputArr, commandIndex + 1, tagStart);
                 at = String.join(" ", atArray);
-            } else if (tagStart == -1 && (commandIndex + 1 != inputArr.length)) {
+            } else if (tagStart == INVALID && (commandIndex + 1 != inputArr.length)) {
                 String[] atArray = Arrays.copyOfRange(inputArr, commandIndex + 1, inputArr.length);
                 at = String.join(" ", atArray);
             } else if ((tagStart < commandIndex) && (commandIndex + 1 != inputArr.length)) {
@@ -372,9 +365,9 @@ public class TaskList {
         }
 
         int commandIndex = Parser.getCommandIndex(inputArr, "/at");
-        if (commandIndex == -1) {
+        if (commandIndex == INVALID) {
             throw new CommandException("event", "/at");
-        } else if (commandIndex == 1) {
+        } else if (commandIndex == DESCRIPTION_START) {
             throw new DescriptionException("event");
         }
 
@@ -386,7 +379,7 @@ public class TaskList {
             if ((tagStart > commandIndex) && (commandIndex + 1 != inputArr.length)) {
                 String[] atArray = Arrays.copyOfRange(inputArr, commandIndex + 1, tagStart);
                 at = String.join(" ", atArray);
-            } else if (tagStart == -1 && (commandIndex + 1 != inputArr.length)) {
+            } else if (tagStart == INVALID && (commandIndex + 1 != inputArr.length)) {
                 String[] atArray = Arrays.copyOfRange(inputArr, commandIndex + 1, inputArr.length);
                 at = String.join(" ", atArray);
             } else if ((tagStart < commandIndex) && (commandIndex + 1 != inputArr.length)) {
