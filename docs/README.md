@@ -4,7 +4,7 @@
 
 Tiger is a personal assistant that helps you manage the tasks you're too lazy to do right now. 
 
-![Screenshot](./images/TigerIntro.png)
+![Screenshot](./images/Ui.png)
 
 Tasks are classified into 3 types of catergories: Todos, Events or Deadlines. Events and deadlines are tasks associated with a date/time, and hence the user is required to enter in the date/time parameter. Tasks can be either marked as completed, or not completed and are classified into 3 priorities, low, medium and high. 
 
