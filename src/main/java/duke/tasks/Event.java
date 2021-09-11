@@ -29,13 +29,4 @@ public class Event extends Task {
         return "Event: " + super.toString() + " (at "
                 + this.timePeriod.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Event) {
-            return ((Event) obj).getTaskName().equals(this.getTaskName())
-                    && ((Event) obj).timePeriod.equals(this.timePeriod);
-        }
-        return false;
-    }
 }

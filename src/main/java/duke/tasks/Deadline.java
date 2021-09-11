@@ -30,13 +30,4 @@ public class Deadline extends Task {
         return "Deadline: " + super.toString() + " (by "
                 + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Deadline) {
-            return ((Deadline) obj).getTaskName().equals(this.getTaskName())
-                    && ((Deadline) obj).deadline.equals(this.deadline);
-        }
-        return false;
-    }
 }

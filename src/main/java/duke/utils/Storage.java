@@ -1,6 +1,5 @@
 package duke.utils;
 
-import duke.exceptions.DuplicateTaskException;
 import duke.exceptions.InvalidTaskIdException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -52,12 +51,7 @@ public class Storage {
             if (taskDetails[1].equals("true")) {
                 savedTask.markAsCompleted();
             }
-            try {
-                taskList.add(savedTask);
-            } catch (DuplicateTaskException e) {
-                assert false : "Duplicated tasks should not be saved";
-            }
-
+            taskList.add(savedTask);
         }
         return taskList;
     }

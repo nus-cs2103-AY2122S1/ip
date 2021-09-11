@@ -1,15 +1,12 @@
 package duke.utils;
 
-import duke.exceptions.DuplicateTaskException;
 import duke.exceptions.InvalidTaskIdException;
 import duke.tasks.Task;
-import duke.tasks.ToDo;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -39,20 +36,15 @@ public class TaskList {
      *
      * @param t The Task object to be added.
      */
-    public void add(Task t) throws DuplicateTaskException {
+    public void add(Task t) {
         assert t != null : "task to add cannot be null";
-
-        for (Task task : this.taskList) {
-            if (t.equals(task)) {
-                throw new DuplicateTaskException();
-            }
-        }
         this.taskList.add(t);
         try {
             this.storage.saveData(this);
         } catch(IOException e) {
             System.out.println(e.getMessage());
         }
+
     }
 
     /**
@@ -118,30 +110,10 @@ public class TaskList {
         TaskList result = new TaskList();
         for (Task task : taskList) {
             if (task.getTaskName().toUpperCase().contains(query.toUpperCase())) {
-                try {
-                    result.add(task);
-                } catch (DuplicateTaskException e) {
-                    assert false : "tasks in task list should not be duplicated";
-                }
+                result.add(task);
             }
         }
         return result;
-    }
-
-    /**
-     * Check if the task name already exists in the TaskList.
-     *
-     * @param t The Task object to check with the task list.
-     * @return Boolean value of whether the task is a duplicate.
-     */
-    private boolean isDuplicate(Task t) {
-        for (Task task : this.taskList) {
-            if (task.getTaskName().equals(t.getTaskName())) {
-                return true;
-            }
-        }
-        return false;
-
     }
 
     @Override
