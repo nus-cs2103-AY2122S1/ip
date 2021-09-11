@@ -53,4 +53,8 @@ public class Parser {
     public boolean parseDelete(String input) {
         return input.length() >= 7 && input.substring(0, 7).equals("delete ");
     }
+
+    public boolean parseFind(String input) {
+        return input.length() >= 5 && input.substring(0, 5).equals("find ");
+    }
 }

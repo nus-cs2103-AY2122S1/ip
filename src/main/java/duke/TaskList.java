@@ -6,13 +6,13 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    static private ArrayList<duke.Task> storage;
+    static private ArrayList<Task> storage;
 
     /**
      * Constructor for the TaskList if there already is an existing Storage.
      * @param filledStorage existing ArrayList.
      */
-    public TaskList (ArrayList<duke.Task> filledStorage) {
+    public TaskList (ArrayList<Task> filledStorage) {
         storage = filledStorage;
     }
 
@@ -20,7 +20,7 @@ public class TaskList {
      * Constructor for the TaskList if there is no storage yet.
      */
     public TaskList () {
-        storage = new ArrayList<duke.Task>();
+        storage = new ArrayList<Task>();
     }
 
     /**
@@ -65,7 +65,6 @@ public class TaskList {
 
         if (Time.validateJavaDate(deadlineDate)) {
             String deadlineTitle = deadlineEntry.substring(9, indexOfSlash);
-            System.out.println(deadlineDate);
             deadlineDate = Time.changeDateFormat(deadlineDate);
             Deadline newDeadline = new Deadline(deadlineTitle, deadlineDate);
             storage.add(newDeadline);
@@ -120,12 +119,14 @@ public class TaskList {
                 + "\nNow there are " + storage.size() + " tasks in the list");
     }
 
+
     /**
      * Returns the task that has the task number inputted.
      * @param taskNumber task number that the User wants to get.
      * @return the Task that has the Task number that the User inputted.
      */
-    public static duke.Task getCurrentTask(int taskNumber) {
+
+    public static Task getCurrentTask(int taskNumber) {
         return storage.get(taskNumber);
     }
 
