@@ -23,7 +23,7 @@ public class AddCommand extends Command {
             throw new jackie.JackieException(" ☹ OOPS!!! The description of a task cannot be empty.");
         } else if (command[0].equals("todo")) {
             task = new jackie.task.Todo(command);
-        } else if (Arrays.asList(command).contains("/") && command.length <= 3) {
+        } else if (Arrays.asList(command).contains("/") || command.length <= 3) {
             // guard clause
             throw new jackie.JackieException(
                     " ☹ HEY DEAR! Please enter a date after / following the task description");
