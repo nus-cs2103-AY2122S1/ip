@@ -6,6 +6,7 @@ package duke.items;
  */
 public abstract class Item {
     private String name;
+    private String tag = null;
     private boolean isDone = false;
 
     public Item(String name) {
@@ -49,6 +50,10 @@ public abstract class Item {
 
     @Override
     public String toString() {
-        return (isDone ? "[X] " : "[] ") + this.name;
+        return (this.isDone ? "[X] " : "[] ") + this.name + (this.tag == null ? "" : " (tag: " + this.tag + ")");
+    }
+
+    public void addTag(String tag) {
+        this.tag = tag;
     }
 }

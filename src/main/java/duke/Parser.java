@@ -10,6 +10,7 @@ import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
+import duke.commands.TagAddCommand;
 
 /**
  * Represents a decoder for user inputs to initialize
@@ -54,6 +55,9 @@ public class Parser {
             break;
         case "find":
             c = new FindCommand();
+            break;
+        case "tag":
+            c = new TagAddCommand();
             break;
         default:
             throw new DukeException("Command not understood");

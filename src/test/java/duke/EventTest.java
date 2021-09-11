@@ -11,7 +11,8 @@ public class EventTest {
     void EventPrintTest() {
         try {
             Event t1 = new Event("thing", "1998-03-10");
-            assertEquals(t1.toString(), "[E][] thing (at: Mar 10 1998)");
+            t1.addTag("mytag");
+            assertEquals(t1.toString(), "[E][] thing (tag: mytag) (at: Mar 10 1998)");
         } catch (DukeException e) {
             e.printStackTrace();
         }

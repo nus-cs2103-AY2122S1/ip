@@ -35,7 +35,7 @@ public class AddDeadlineCommand extends Command {
             throw new DukeException("Message cannot be emptyyy!1!");
         }
 
-        this.content = line.substring(COMMAND_LENGTH + 1, idx - 1);
+        this.content = line.substring(COMMAND_LENGTH, idx - 1);
         this.time = line.substring(idx + BY_LENGTH + 1);
     }
 
