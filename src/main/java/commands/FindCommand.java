@@ -26,14 +26,14 @@ public final class FindCommand extends Command {
      * Executes the command.
      *
      * @param list the TaskList object that stores the list of tasks
-     * @param ui the Ui object that interacts with the user
+     * @param ui the ui.Ui object that interacts with the user
      * @param storage the Storage object that saves changes to stored tasks, if any
      * @return the message displaying the result
      */
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
         assert list != null : "invalid TaskList object detected";
-        assert ui != null : "invalid Ui object detected";
+        assert ui != null : "invalid ui.Ui object detected";
         assert storage != null : "invalid Storage object detected";
         String keyword = "";
         for (int i = 1; i < getInput().size(); i++) {

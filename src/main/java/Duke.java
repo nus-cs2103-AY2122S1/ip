@@ -11,7 +11,7 @@ public class Duke {
      * detected by parser as per user input.
      */
     public void run() {
-        Launcher.run();
+        new Launcher().launch();
     }
 
     public static void main(String[] args) {

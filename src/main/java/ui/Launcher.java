@@ -3,18 +3,15 @@ package ui;
 import javafx.application.Application;
 
 /**
- * A class for easier usage of DukeApp.
+ * A class for easier usage of the Main class.
  */
 public final class Launcher {
 
     public static void main(String[] args) {
-        run();
+        new Launcher().launch();
     }
 
-    /**
-     * Starts the DukeApp.
-     */
-    public static void run() {
-        Application.launch(DukeApp.class, "");
+    public void launch() {
+        Application.launch(Main.class, "");
     }
 }

@@ -5,14 +5,8 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
-
-
 repositories {
     mavenCentral()
-}
-
-configurations {
-    dukeIcon
 }
 
 dependencies {
@@ -33,7 +27,6 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
-    dukeIcon files('ui/images/DukeMascot.png')
 }
 
 

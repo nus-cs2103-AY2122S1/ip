@@ -15,7 +15,7 @@ import ui.Ui;
  * The RescheduleCommand Class inherits Command and is
  * a specific type of executable command.
  */
-public class RescheduleCommand extends Command {
+public final class RescheduleCommand extends Command {
 
     /**
      * Constructs the RescheduleCommand object.
@@ -30,7 +30,7 @@ public class RescheduleCommand extends Command {
      * Executes the command.
      *
      * @param list    the TaskList object that stores the list of tasks
-     * @param ui      the Ui object that interacts with the user
+     * @param ui      the ui.Ui object that interacts with the user
      * @param storage the Storage object that saves changes to stored tasks, if any
      * @return the message displaying the result
      */
