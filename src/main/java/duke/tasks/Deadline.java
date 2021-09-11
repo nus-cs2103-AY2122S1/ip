@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Class to encapsulate a Deadline
+ */
 public class Deadline extends Task {
 
     protected LocalDate date;
@@ -19,7 +22,6 @@ public class Deadline extends Task {
         super(description);
         this.date = date;
         this.time = null;
-
     }
 
     /**
@@ -35,6 +37,11 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    /**
+     * Returns a string representing this object.
+     *
+     * @return String representing this object
+     */
     @Override
     public String toString() {
         String dateString = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
@@ -46,6 +53,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns a string used for saving a task.
+     *
+     * @return String for saving
+     */
     @Override
     public String toSaveString() {
         String dateString = this.date.format(DateTimeFormatter.ISO_LOCAL_DATE);
@@ -57,6 +69,12 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns -1, 0, 1 to implement a comparison rank between Task objects.
+     *
+     * @param o Object to be compared to
+     * @return integer 0 is equal, -1 is less and 1 is more
+     */
     @Override
     public int compareTo(Task o) {
         if (!(o instanceof Deadline)) {

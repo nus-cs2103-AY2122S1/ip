@@ -2,12 +2,12 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.ui.UiInterface;
 import duke.exception.DukeException;
 import duke.exception.InvalidFormatException;
 import duke.exception.InvalidIntegerException;
 import duke.exception.InvalidTaskNumberException;
 import duke.tasks.Task;
+import duke.ui.UiInterface;
 
 /**
  * Class that handles the Done and Delete command
@@ -23,7 +23,7 @@ public class Action extends Command {
     private final String[] words;
 
     /**
-     * Constructs an Action object for Done and Delete commands.
+     * Constructs an Action instance for Done and Delete commands.
      *
      * @param type 0 for Done and 1 for Delete
      * @param words User input split by whitespace
@@ -79,6 +79,11 @@ public class Action extends Command {
         }
     }
 
+    /**
+     * Returns if the command is an exit.
+     *
+     * @return boolean indicating if command is exit
+     */
     @Override
     public boolean isExit() {
         return false;

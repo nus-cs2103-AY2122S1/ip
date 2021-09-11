@@ -40,7 +40,7 @@ public class DialogBox extends HBox {
         clip.setArcWidth(100);
         clip.setArcHeight(100);
         displayPicture.setClip(clip);
-        
+
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -55,10 +55,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a DialogBox with given text and image for User side.
+     *
+     * @param text Text to include
+     * @param img Image to include
+     * @return DialogBox with given text and image
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a DialogBox with given text and image for Duke side.
+     *
+     * @param text Text to include
+     * @param img Image to include
+     * @return DialogBox with given text and image
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

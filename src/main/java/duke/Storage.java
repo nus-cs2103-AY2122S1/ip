@@ -31,7 +31,7 @@ public class Storage {
     private final String filepath;
 
     /**
-     * Storage constructor.
+     * Constructs a new Storage instance.
      *
      * @param filepath The filepath of the task list from the project root
      */

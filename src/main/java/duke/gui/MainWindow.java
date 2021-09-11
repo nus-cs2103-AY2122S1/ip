@@ -5,7 +5,6 @@ import java.util.concurrent.TimeUnit;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -24,19 +23,25 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/mallow.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/herb.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/mallow.jpg"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/herb.png"));
 
+    /**
+     * Initializes the scroll pane.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the Duke instance.
+     *
+     * @param d The Duke instance to be used
+     */
     public void setDuke(Duke d) {
         duke = d;
         this.handleUserInput(duke.getWelcomeMessage());

@@ -3,14 +3,22 @@ package duke.ui;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
+// This class was created to allow both the GUI and CLI to function simultaneously
+// without the Ui class requiring modification.
+
 /**
- * Class that intercepts calls to methods in a given target class
+ * Class that intercepts calls to methods in a given target class.
  */
 public class DynamicInvocationHandler implements InvocationHandler {
 
     private final Ui target;
     private String latestResponse;
 
+    /**
+     * Constructs a new DynamicInvocationHandler instance.
+     *
+     * @param ui Ui instance to intercept
+     */
     public DynamicInvocationHandler(Ui ui) {
         this.target = ui;
     }

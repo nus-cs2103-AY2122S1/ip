@@ -2,12 +2,12 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.ui.UiInterface;
 import duke.exception.DukeException;
 import duke.exception.InvalidFormatException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.ToDo;
+import duke.ui.UiInterface;
 
 /**
  * Class that handles the Sort command
@@ -16,10 +16,23 @@ public class Sort extends Command {
 
     private final String[] words;
 
+    /**
+     * Constructs a Sort instance.
+     *
+     * @param words Array of strings representing the flag options
+     */
     public Sort(String[] words) {
         this.words = words;
     }
 
+    /**
+     * Executes the Sort command.
+     *
+     * @param taskList Current list of tasks
+     * @param ui Ui to interact with user
+     * @param storage Storage that allows loading/saving
+     * @throws DukeException if an error is encountered
+     */
     @Override
     public void execute(TaskList taskList, UiInterface ui, Storage storage) throws DukeException {
         if (this.words.length > 2) {
@@ -58,6 +71,11 @@ public class Sort extends Command {
         ui.print(res);
     }
 
+    /**
+     * Returns if the command is an exit.
+     *
+     * @return boolean indicating if command is exit
+     */
     @Override
     public boolean isExit() {
         return false;

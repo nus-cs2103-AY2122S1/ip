@@ -17,6 +17,11 @@ public class Main extends Application {
 
     private final Duke duke = new Duke("data/tasklist.txt");
 
+    /**
+     * Initializes and sets up the Stage for the Application.
+     *
+     * @param stage Stage for the application
+     */
     @Override
     public void start(Stage stage) {
         try {

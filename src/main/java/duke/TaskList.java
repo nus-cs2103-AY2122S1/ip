@@ -26,14 +26,14 @@ public class TaskList {
     }
 
     /**
-     * TaskList constructor for empty tasks list.
+     * Constructs a TaskList for empty tasks list.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
     /**
-     * TaskList constructor for a given tasks list.
+     * Constructs a TaskList for a given tasks list.
      *
      * @param taskList list of tasks
      */

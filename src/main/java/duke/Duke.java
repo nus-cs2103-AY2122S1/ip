@@ -35,7 +35,7 @@ public class Duke {
     private boolean isExit = false;
 
     /**
-     * Duke constructor.
+     * Constructs a Duke instance.
      *
      * @param filePath The filepath of the task list from the project root
      */
@@ -56,7 +56,7 @@ public class Duke {
     }
 
     /**
-     * Main method that starts and runs the bot.
+     * Runs the main method that starts and activates the bot.
      */
     public void run() {
         uiInterface.showWelcome(WELCOME_MESSAGE);
@@ -111,6 +111,11 @@ public class Duke {
         return WELCOME_MESSAGE;
     }
 
+    /**
+     * Runs a new Duke instance.
+     *
+     * @param args Arguments provided; unused
+     */
     public static void main(String[] args) {
         new Duke("data/tasklist.txt").run();
     }

@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.ui.UiInterface;
 import duke.exception.DukeException;
+import duke.ui.UiInterface;
 
 /**
  * Abstract class to encapsulate a generic Command.

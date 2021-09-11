@@ -36,24 +36,34 @@ public abstract class Task implements Comparable<Task> {
         return (isDone ? "1" : "0");
     }
 
+    /**
+     * Returns the Task description.
+     *
+     * @return Task description
+     */
     public String getDescription() {
         return this.description;
     }
 
+    /**
+     * Returns a string representing this object.
+     *
+     * @return String representing this object
+     */
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
     /**
-     * To mark a task as done.
+     * Marks a task as done.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * String for saving a task.
+     * Returns a string used for saving a task.
      *
      * @return String for saving
      */
@@ -61,6 +71,12 @@ public abstract class Task implements Comparable<Task> {
         return this.getSaveIcon() + " | " + this.description;
     }
 
+    /**
+     * Returns -1, 0, 1 to implement a comparison rank between Task objects.
+     *
+     * @param o Object to be compared to
+     * @return integer 0 is equal, -1 is less and 1 is more
+     */
     @Override
     public int compareTo(Task o) {
         // 1: T, E, D
@@ -69,13 +85,8 @@ public abstract class Task implements Comparable<Task> {
         //    DateTime for E, D
         // 4: Lexicographical for E, D description
         if (this instanceof ToDo) {
-            if (!(o instanceof ToDo)) {
-                return 1;
-            }
-            if (this.isDone ^ o.isDone) {
-                return this.isDone ? 1 : -1;
-            }
-            return this.description.compareTo(o.description);
+            ToDo o1 = (ToDo) this;
+            return o1.compareTo(o);
         }
 
         if (this instanceof Event) {
