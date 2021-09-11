@@ -27,7 +27,7 @@ public class ParserTest {
             Parser.identifyCommand("jksbfaskj bafjkb bjaskfb");
             fail();
         } catch (DukeException e) {
-            assertEquals("Sorry, I don't understand what you are saying!",
+            assertEquals("I don't understand what you mean :(",
                     e.getMessage());
         }
     }

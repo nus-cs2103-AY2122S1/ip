@@ -24,7 +24,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().greetUser();
-            stage.setTitle("Kobayashi Dragon Maid | Tohru");
+            stage.setTitle("Dragon Maid Tohru");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

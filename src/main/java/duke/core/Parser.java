@@ -55,7 +55,7 @@ public class Parser {
         case "find":
             return new FindCommand(description);
         default:
-            throw new DukeException("Sorry, I don't understand what you are saying!");
+            throw new DukeException("I don't understand what you mean :(");
         }
     }
 }

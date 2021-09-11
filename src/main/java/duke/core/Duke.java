@@ -29,7 +29,7 @@ public class Duke {
     }
 
     /**
-     * Sends a greeting message when the user first starts up Duke.
+     * Returns a String representation of the greeting message when the user first starts up Duke.
      *
      * @return the greeting message when user starts up Duke
      */

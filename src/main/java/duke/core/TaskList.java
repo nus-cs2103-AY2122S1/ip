@@ -14,7 +14,7 @@ import duke.task.TaskComparator;
 import duke.task.Todo;
 
 /**
- * Encapsulates a checkList which can hold 100 tasks, display task information, add, delete, mark
+ * Encapsulates a checkList which can hold 100 tasks, display task information, add, delete, sort, mark
  * task as done. If TaskList is linked with a Storage, any changes to the TaskList will be saved.
  *
  * @author Clifford
@@ -151,7 +151,8 @@ public class TaskList {
         try {
             if (overTaskLimitCapacity) {
                 throw new IndexOutOfBoundsException(
-                        String.format("ChatBot can only record maximum of %d responses.", TASKS_LIMIT));
+                        String.format("I can only record maximum of %d tasks.:(\n"
+                                + "Maybe remove your expired or done task?", TASKS_LIMIT));
             }
             tasks.add(task);
             currentIdx++;
@@ -192,7 +193,10 @@ public class TaskList {
             final boolean isOutOfTaskIdRange = taskId <= 0 || taskId > currentIdx;
             if (isOutOfTaskIdRange) {
                 throw new IllegalArgumentException(
-                        String.format("taskId of %1$d invalid as there are %2$d recorded task(s)", taskId, currentIdx));
+                        String.format("I'm a smart dragon!"
+                                + "There is no taskId of %1$d as there are %2$d recorded task(s)!",
+                                taskId,
+                                currentIdx));
             }
             Task task = tasks.get(taskId - 1);
             boolean isDone = task.isDone();
@@ -220,7 +224,10 @@ public class TaskList {
         try {
             if (isOutOfTaskIdRange) {
                 throw new IllegalArgumentException(
-                        String.format("taskId of %1$d invalid as there are %2$d recorded task(s)", taskId, currentIdx));
+                        String.format("I'm a smart dragon!"
+                                + "There is no taskId of %1$d as there are %2$d recorded task(s)!",
+                                taskId,
+                                currentIdx));
             }
             Task deletedTask = tasks.get(taskId - 1);
             tasks.remove(taskId - 1);
@@ -254,15 +261,15 @@ public class TaskList {
     }
 
     /**
-     * Sorts taskList based on chronological order followed by description lexicographical order.
-     * Ranks Todo Task to the bottom of the list.
+     * Sorts permanently the taskList based on chronological order followed by
+     * description lexicographical order and ranks Todo Task to the bottom of the list.
      *
      * @return a String showing that sorting is done and the sorted TaskList.
      */
     public String sortTasks() throws DukeException {
         Collections.sort(tasks, new TaskComparator());
         saveTasks();
-        return "I have sorted your tasks chronologically!\n\n" + printTasks();
+        return "I have sorted your tasks chronologically! ^_^\n\n" + printTasks();
     }
 }
 

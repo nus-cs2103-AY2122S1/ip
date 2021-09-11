@@ -10,16 +10,16 @@ import duke.exception.DukeException;
  */
 public class Ui {
     /**
-     * Greets User when the user starts up application.
+     * Returns String that Duke sends when user starts up application.
      *
      * @return the greeting message by Duke.
      */
     public String greetUser() {
-        return "Hello! I'm Duke!\nHow may I be of service to you?";
+        return "Hello! I'm the Dragon Maid, Tohru! \nHow may I be of service to you?";
     }
 
     /**
-     * Shows the Error from the user interaction with Duke.
+     * Returns String due to the error from the user interaction with Duke.
      * @param e the Exception that was thrown
      * @return the exception message on why it was thrown
      */

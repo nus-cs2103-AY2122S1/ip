@@ -5,7 +5,7 @@ import duke.core.TaskList;
 import duke.core.Ui;
 import duke.exception.DukeException;
 
-public class AddTodoCommand extends AddCommand {
+public class AddTodoCommand extends AddTaskCommand {
     private String description;
 
     public AddTodoCommand(String description) {
@@ -14,10 +14,9 @@ public class AddTodoCommand extends AddCommand {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        try {
-            return tasks.recordTodo(description);
-        } catch (IndexOutOfBoundsException e) {
+        if (description.equals("")) {
             throw new DukeException("todo should be in format: todo [DESCRIPTION]");
         }
+        return tasks.recordTodo(description);
     }
 }

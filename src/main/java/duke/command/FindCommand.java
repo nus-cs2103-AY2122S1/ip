@@ -17,7 +17,7 @@ public class FindCommand implements Command {
     public FindCommand(String description) throws DukeException {
         String[] wordArray = description.split(" ");
         if (wordArray.length > 1) {
-            throw new DukeException("I can only find using ONE keyword, you have too many!");
+            throw new DukeException("With my magic, I can only find using ONE keyword :(");
         }
         this.word = wordArray[0];
     }

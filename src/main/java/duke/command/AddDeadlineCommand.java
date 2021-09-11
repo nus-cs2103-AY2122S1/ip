@@ -8,7 +8,7 @@ import duke.core.Ui;
 import duke.exception.DukeException;
 
 
-public class AddDeadlineCommand extends AddCommand {
+public class AddDeadlineCommand extends AddTaskCommand {
     private String description;
 
     public AddDeadlineCommand(String description) {
@@ -21,8 +21,7 @@ public class AddDeadlineCommand extends AddCommand {
             String[] descriptionDatePair = description.split("/by", 2);
             return tasks.recordDeadline(descriptionDatePair[0].trim(), descriptionDatePair[1].trim());
         } catch (IndexOutOfBoundsException | DateTimeParseException e) {
-            throw new DukeException("deadline should be in format: [DESCRIPTION] /by [DATE]!\n"
-                    + "Only accepted [DATE] format is: date/month/year HHMM (24h time)");
+            throw new DukeException("deadline should be in format:\ndeadline [DESCRIPTION] /by DD/MM/YYYY HHMM");
         }
     }
 }
