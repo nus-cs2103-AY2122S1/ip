@@ -1,7 +1,7 @@
 package duke;
 
-import java.io.IOException;
-
+import duke.errors.DukeException;
+import duke.errors.FileException;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -33,7 +33,7 @@ public class Duke {
      * Constructor.
      *
      * @param filePath path of the file that stores previously entered tasks (Hard Disk).
-     * @throws IOException
+     * @throws duke.errors.FileException
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -41,9 +41,9 @@ public class Duke {
         try {
             storage = new Storage(filePath, this.ui);
             tasks = new TaskList(storage.load());
-        } catch (IOException ioException) {
-            System.out.println(ioException);
+        } catch (FileException fileException) {
             tasks = new TaskList();
+            ui.showError("Unable to load from hard disk, new task list created.");
         }
         this.parser = new Parser(this.tasks);
     }
@@ -89,7 +89,7 @@ public class Duke {
             duke.command.Command result = parser.parse(input);
             return result.execute(this.tasks, this.ui, this.storage, this.archive);
         } catch (DukeException dukeException) {
-            return "Error Encountered: \n" + dukeException.toString();
+            return dukeException.toString();
         }
     }
 

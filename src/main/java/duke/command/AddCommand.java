@@ -4,6 +4,7 @@ import duke.Archive;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.errors.FileException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -32,7 +33,7 @@ public class AddCommand extends Command {
      * @param archive
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage, Archive archive) {
+    public String execute(TaskList taskList, Ui ui, Storage storage, Archive archive) throws FileException {
         taskList.addTask(this.task);
 
         if (task instanceof Todo) {

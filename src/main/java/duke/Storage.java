@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.errors.ArchiveException;
+import duke.errors.DukeException;
+import duke.errors.FileException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -25,9 +28,9 @@ public class Storage {
      * Constructor.
      *
      * @param filePath to hard disk that stores the tasks.
-     * @throws IOException
+     * @throws FileException
      */
-    public Storage(String filePath, Ui ui) throws IOException {
+    public Storage(String filePath, Ui ui) throws FileException {
         this.ui = ui;
 
         try {
@@ -37,7 +40,7 @@ public class Storage {
 
             this.filePath = filePath;
         } catch (IOException ioException) {
-            ui.showError(ioException.getMessage());
+            throw new FileException("create new directory or file.");
         }
     }
 
@@ -45,9 +48,9 @@ public class Storage {
      * Loads in tasks from hard disk to a task list, when Duke starts up.
      *
      * @return ArrayList of tasks that is loaded in from hard disk.
-     * @throws IOException
+     * @throws FileException
      */
-    public ArrayList<Task> load() throws IOException {
+    public ArrayList<Task> load() throws FileException {
         ArrayList<Task> result = new ArrayList<>(100);
         int counter = 0;
 
@@ -59,7 +62,7 @@ public class Storage {
                 counter++;
             }
         } catch (IOException ioException) {
-            ui.showError(ioException.getMessage());
+            throw new FileException("load data from hard disk.");
         }
 
         return result;
@@ -70,7 +73,7 @@ public class Storage {
      *
      * @param task task to add.
      */
-    public void add(Task task) {
+    public void add(Task task) throws FileException {
         String textToSave = task.getTaskType() + "/~/0/~/" + task.toSavedFormat() + "\n";
 
         try {
@@ -78,7 +81,7 @@ public class Storage {
             fw.write(textToSave);
             fw.close();
         } catch (IOException ioException) {
-            ui.showError(ioException.getMessage());
+            throw new FileException("add Task to hard disk.");
         }
     }
 
@@ -88,7 +91,7 @@ public class Storage {
      * @param taskList list of tasks.
      * @param taskToMark position of task to mark as done in task list.
      */
-    public void markAsDone(TaskList taskList, int taskToMark) {
+    public void markAsDone(TaskList taskList, int taskToMark) throws FileException {
         try {
             Task t = taskList.getTasks().get(taskToMark - 1);
             assert t != null : "task to get from taskList is null";
@@ -103,7 +106,7 @@ public class Storage {
 
             Files.write(Path.of("src/data/duke.txt"), fileContent);
         } catch (IOException ioException) {
-            ui.showError(ioException.getMessage());
+            throw new FileException("mark task as done in hard disk.");
         }
     }
 
@@ -112,7 +115,7 @@ public class Storage {
      *
      * @param taskToDelete position of task to delete from task list.
      */
-    public void delete(int taskToDelete) {
+    public void delete(int taskToDelete) throws FileException {
         try {
             List<String> fileContent = new ArrayList<>(Files.readAllLines(Path
                     .of("src/data/duke.txt")));
@@ -120,21 +123,21 @@ public class Storage {
 
             Files.write(Path.of("src/data/duke.txt"), fileContent);
         } catch (IOException ioException) {
-            ui.showError(ioException.getMessage());
+            throw new FileException("delete task from hard disk.");
         }
     }
 
     /**
      * Clears the hard disk.
      */
-    public void clear() {
+    public void clear() throws FileException {
         File file = new File(filePath);
         try {
             if (file.delete()) {
                 file.createNewFile();
             }
         } catch (IOException ioException) {
-            ui.showError(ioException.getMessage());
+            throw new FileException("clear the hard disk.");
         }
     }
 
@@ -179,20 +182,20 @@ public class Storage {
      * @param taskList to load into.
      * @throws DukeException if task list or hard disk are not empty.
      */
-    public void loadArchive(String archiveName, TaskList taskList) throws DukeException {
+    public void loadArchive(String archiveName, TaskList taskList) throws ArchiveException {
         if (!taskList.getTasks().isEmpty()) {
-            throw new DukeException("List is not empty, cannot load Archive.");
+            throw new ArchiveException("as task list is not empty, cannot load Archive.");
         }
 
         File file = new File(this.filePath);
         if (file.length() != 0) {
-            throw new DukeException("Hard disk is not empty, cannot load Archive.");
+            throw new ArchiveException("as hard disk is not empty, cannot load Archive.");
         }
 
         String archivePath = "src/archive/" + archiveName + ".txt";
         File archiveFile = new File(archivePath);
         if (!archiveFile.exists()) {
-            throw new DukeException("Archive to load from does not exist.");
+            throw new ArchiveException("that does not exist.");
         }
 
         try {
@@ -213,7 +216,7 @@ public class Storage {
             }
 
         } catch (IOException ioException) {
-            ioException.printStackTrace();
+            throw new ArchiveException("to save a new Archive.");
         }
 
     }

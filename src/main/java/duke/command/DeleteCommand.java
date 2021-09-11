@@ -4,6 +4,7 @@ import duke.Archive;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.errors.FileException;
 
 /**
  * Type of Command that deletes a task from the task list.
@@ -28,7 +29,7 @@ public class DeleteCommand extends Command {
      * @param archive
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage, Archive archive) {
+    public String execute(TaskList taskList, Ui ui, Storage storage, Archive archive) throws FileException {
         storage.delete(this.taskToDelete);
         String message = ui.delete(taskList, this.taskToDelete);
         taskList.deleteTask(this.taskToDelete);

@@ -3,6 +3,9 @@ package duke;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import duke.errors.ArchiveException;
+import duke.errors.DukeException;
+import duke.errors.InvalidUserInputException;
 import org.junit.jupiter.api.Test;
 
 import duke.stubs.TaskListStub;
@@ -100,9 +103,9 @@ class ParserTest {
         Parser p = new Parser(new TaskListStub());
         try {
             duke.command.Command actual = p.parse("bleh");
-            assertTrue(actual instanceof duke.command.InvalidCommand);
         } catch (DukeException dukeException) {
-            fail("Duke Exception thrown when parsing Invalid Command");
+            assertTrue(dukeException instanceof InvalidUserInputException,
+                    "Duke Exception thrown when parsing Invalid Command");
         }
     }
 }

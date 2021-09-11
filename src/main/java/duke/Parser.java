@@ -15,6 +15,14 @@ import duke.command.ListArchiveCommand;
 import duke.command.ListCommand;
 import duke.command.LoadArchiveCommand;
 import duke.command.NewArchiveCommand;
+import duke.errors.ArchiveException;
+import duke.errors.DukeException;
+import duke.errors.InvalidDeadlineException;
+import duke.errors.InvalidDeleteException;
+import duke.errors.InvalidDoneException;
+import duke.errors.InvalidEventException;
+import duke.errors.InvalidTodoException;
+import duke.errors.InvalidUserInputException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -45,7 +53,7 @@ public class Parser {
      *
      * @param input by the user from Command Line.
      * @return Command.
-     * @throws DukeException
+     * @throws InvalidUserInputException
      */
     public duke.command.Command parse(String input) throws DukeException {
 
@@ -130,14 +138,26 @@ public class Parser {
 
         case Archive:
             if (input.contains("/delete")) {
+                if (input.split(" /delete ").length == 1) {
+                    throw new ArchiveException(": missing file name of Archive to delete.");
+                }
                 String fileName = input.split(" /delete ")[1];
+
                 c = new DeleteArchiveCommand(fileName);
 
             } else if (input.contains("/load")) {
+
+                if (input.split(" /load ").length == 1) {
+                    throw new ArchiveException(": missing file name of Archive to load.");
+                }
                 String fileName = input.split(" /load ")[1];
                 c = new LoadArchiveCommand(fileName);
 
             } else if (input.contains("/saveAs")) {
+
+                if (input.split(" /saveAs ").length == 1) {
+                    throw new ArchiveException(": missing file name of Archive to save as.");
+                }
                 String fileName = input.split(" /saveAs ")[1];
                 c = new NewArchiveCommand(fileName);
 
@@ -145,10 +165,11 @@ public class Parser {
                 c = new ListArchiveCommand();
 
             } else {
-                throw new DukeException("invalid Archive command");
+                throw new ArchiveException(": Archive command is invalid.");
             }
             break;
         default:
+            throw new InvalidUserInputException("invalid command");
         }
         return c;
     }
@@ -191,20 +212,20 @@ public class Parser {
      * Checks if the user input is a valid Done command.
      *
      * @param input by user.
-     * @throws DukeException if format is invalid
+     * @throws InvalidDoneException if format is invalid
      */
-    private void isValidDone(String input) throws DukeException {
+    private void isValidDone(String input) throws InvalidDoneException {
         if (!input.startsWith("done ")) {
-            throw new DukeException("Oops! Improper formatting for done. " + "Please use: done <task number>");
+            throw new InvalidDoneException("Please use: done <task number>");
         }
         if (input.length() == 5) {
-            throw new DukeException("Oops! The number following 'done' cannot be empty.");
+            throw new InvalidDoneException("Missing number (following 'done').");
         }
         int donePos = Integer.valueOf(input.substring(5));
 
         //checks if the task to be marked as done is within the range of the list
         if (donePos <= 0 || donePos > taskList.getTasks().size()) {
-            throw new DukeException("Oops! " + "The task to mark as done is not within the range of the list.");
+            throw new InvalidDoneException("Task to mark as done is not within the range of the list.");
         }
     }
 
@@ -212,18 +233,18 @@ public class Parser {
      * Checks if user input is a valid Delete command.
      *
      * @param input by user.
-     * @throws DukeException if format is invalid.
+     * @throws InvalidDeleteException if format is invalid.
      */
-    private void isValidDelete(String input) throws DukeException {
+    private void isValidDelete(String input) throws InvalidDeleteException {
         if (!input.startsWith("delete ")) {
-            throw new DukeException("Oops! Improper formatting for delete. " + "Please use: delete <task number>");
+            throw new InvalidDeleteException("Please use: delete <task number>");
         }
         if (input.length() == 7) {
-            throw new DukeException("Oops! The number following 'delete' cannot be empty.");
+            throw new InvalidDeleteException("Missing number (following 'delete').");
         }
         int deletePos = Integer.valueOf(input.substring(7));
         if (deletePos <= 0 || deletePos > this.taskList.getTasks().size()) {
-            throw new DukeException("Oops! " + "The task to delete is not within the range of the list.");
+            throw new InvalidDeleteException("Task to delete is not within the range of the list.");
         }
     }
 
@@ -231,15 +252,15 @@ public class Parser {
      * Checks if user input is a valid Todo command.
      *
      * @param input by user.
-     * @throws DukeException if format is invalid.
+     * @throws InvalidTodoException if format is invalid.
      */
-    private void isValidTodo(String input) throws DukeException {
+    private void isValidTodo(String input) throws InvalidTodoException {
         // handles any characters after 'todo' that are not white space
         if (!input.startsWith("todo ")) {
-            throw new DukeException("Oops! Improper formatting for todo. " + "Please use: todo <description>");
+            throw new InvalidTodoException("Please use: todo <description>");
         }
         if (input.length() == 5) {
-            throw new DukeException("Oops! The description of todo cannot be empty.");
+            throw new InvalidTodoException("Missing Description.");
         }
     }
 
@@ -247,24 +268,23 @@ public class Parser {
      * Checks if user input is a valid Deadline command.
      *
      * @param input by user.
-     * @throws DukeException if format is invalid.
+     * @throws InvalidDeadlineException if format is invalid.
      */
-    private void isValidDeadline(String input) throws DukeException {
+    private void isValidDeadline(String input) throws InvalidDeadlineException {
         // handles any characters after 'deadline' that are not white space
         if (!input.startsWith("deadline ")) {
-            throw new DukeException("Oops! Improper formatting for deadline. "
-                    + "Please use: deadline <description> /by <date/time>");
+            throw new InvalidDeadlineException("Please use: deadline <description> /by <date/time>");
         }
         // handles case of no description and date/time
         if (input.length() == 9) {
-            throw new DukeException("Oops! The description and date/time of deadline cannot be empty.");
+            throw new InvalidDeadlineException("Description and date/time of deadline cannot be empty.");
         }
         if (!input.contains(" /by ")) {
-            throw new DukeException("Oops! Inappropriate formatting for deadlines.");
+            throw new InvalidDeadlineException("Missing /by field.");
         }
         // handles: deadline /by <time>
         if (input.split(" /by ")[0].equals("deadline")) {
-            throw new DukeException("Oops! Missing description for deadline.");
+            throw new InvalidDeadlineException("Missing description.");
         }
     }
 
@@ -272,22 +292,21 @@ public class Parser {
      * Checks if user input is a valid Event command.
      *
      * @param input by user.
-     * @throws DukeException if format is invalid.
+     * @throws InvalidEventException if format is invalid.
      */
-    private void isValidEvent(String input) throws DukeException {
+    private void isValidEvent(String input) throws InvalidEventException {
         // handles any characters after 'event' that are not white space
         if (!input.startsWith("event ")) {
-            throw new DukeException("Oops! Improper formatting for event. "
-                    + "Please use: event <description> /at <date/time>");
+            throw new InvalidEventException("Please use: event <description> /at <date/time>");
         }
         if (input.length() == 6) {
-            throw new DukeException("Oops! The description and date/time of event cannot be empty.");
+            throw new InvalidEventException("Description and date/time of event cannot be empty.");
         }
         if (!input.contains(" /at ")) {
-            throw new DukeException("Oops! Inappropriate formatting for events.");
+            throw new InvalidEventException("Missing /at field.");
         }
         if (input.split(" /at ")[0].equals("event")) {
-            throw new DukeException("Oops! Missing description for event.");
+            throw new InvalidEventException("Missing description.");
         }
     }
 }

@@ -1,10 +1,11 @@
 package duke.command;
 
 import duke.Archive;
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.errors.DukeException;
+
 
 /**
  * Abstract Command class that executes a series of operations depending on the type of Command.

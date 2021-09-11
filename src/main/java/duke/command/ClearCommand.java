@@ -1,10 +1,10 @@
 package duke.command;
 
 import duke.Archive;
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.errors.DukeException;
 
 public class ClearCommand extends Command {
 

@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 import java.io.IOException;
 
+import duke.errors.ArchiveException;
+import duke.errors.DukeException;
 import org.junit.jupiter.api.Test;
 
 
@@ -17,9 +19,9 @@ class ArchiveTest {
         Archive archive = new Archive();
         try {
             archive.newArchive("stubTest");
-        } catch (DukeException dukeException) {
-            dukeException.printStackTrace();
-            assertFalse(false, "newArchive method causes a Duke Exception");
+        } catch (ArchiveException archiveException) {
+            archiveException.printStackTrace();
+            assertFalse(false, "newArchive method causes an Archive Exception");
         }
 
         File archiveFile = new File("src/archive/stubTest.txt");
@@ -51,9 +53,9 @@ class ArchiveTest {
         Archive archive = new Archive();
         try {
             archive.deleteArchive("Testing");
-        } catch (DukeException dukeException) {
-            dukeException.printStackTrace();
-            assertFalse(true, "deleteArchive method causes a DukeExpection");
+        } catch (ArchiveException archiveException) {
+            archiveException.printStackTrace();
+            assertFalse(true, "deleteArchive method causes an Archive Expection");
         }
 
         assertTrue(!f.exists());

@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.errors.DukeException;
 import duke.task.Task;
 
 /**
@@ -116,7 +117,7 @@ public class Ui {
      * @throws DukeException
      */
     public String invalidUserInput() throws DukeException {
-        return new DukeException("Oops! I'm sorry, but I don't know what that means :-(").toString();
+        throw new DukeException("Oops! I'm sorry, but I don't know what that means :-(");
     }
 
     /**

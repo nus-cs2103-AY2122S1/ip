@@ -1,10 +1,11 @@
 package duke.command;
 
 import duke.Archive;
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.errors.DukeException;
+
 
 /**
  * Type of Command that is called when user gives an invalid input.
