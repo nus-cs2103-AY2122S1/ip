@@ -1,4 +1,6 @@
 package duke;
+import duke.Ui.Ui;
+
 import java.util.ArrayList;
 import java.util.List;
 
