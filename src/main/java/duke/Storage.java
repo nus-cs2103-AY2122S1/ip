@@ -15,8 +15,10 @@ public class Storage {
      * @param filePath The path of the file that holds the contents of the list
      */
     public Storage(String filePath) {
+        assert filePath.length() != 0 : "Path of file cannot be empty";
         this.filePath = filePath;
         File file = new File(filePath);
+        assert file.exists();
         this.file = file;
     }
 
@@ -30,11 +32,11 @@ public class Storage {
             File fileStorage = new File("data/duke.txt");
             assert fileStorage.exists(): "File to write to must exist";
             FileWriter w = new FileWriter(fileStorage);
-            String str = "";
+            String stringOfContents = "";
             for (Task t : listOfTasks.getTaskList()) {
-                str += t.toString() + "\n";
+                stringOfContents += t.toString() + "\n";
             }
-            w.write(str);
+            w.write(stringOfContents);
             w.close();
         } catch (IOException e) {
             System.out.println("File does not exist");

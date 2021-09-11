@@ -1,3 +1,11 @@
-[E][X] project meeting                             at: 2015-10-15
-[T][ ] return book today or tomorrow 
-[T][X] return book 
+[D][ ] project water      by: 2015-10-15
+[E][ ] project water     at: 2015-10-13
+[D][X] project water      by: 2015-10-12
+[E][X] project water     at: 2015-10-11
+[D][X] project water      by: 2015-10-10
+[E][ ] project water     at: 2015-10-15
+[D][ ] project water      by: 2015-10-14
+[E][ ] project water     at: 2015-10-15
+[D][ ] project water      by: 2015-10-19
+[E][ ] project water     at: 2015-10-17
+
