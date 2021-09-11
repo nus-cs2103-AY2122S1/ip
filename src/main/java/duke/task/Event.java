@@ -16,7 +16,7 @@ public class Event extends Task {
      * @param eventName The user input.
      */
     public Event(String eventName) throws DukeException {
-        super(eventName,6, eventName.indexOf("/at"));
+        super(eventName,6, eventName.indexOf("/at") - 1);
         int start = eventName.indexOf("/at");
         this.eventDate = LocalDate.parse(eventName.substring(start + 4));
     }
@@ -27,7 +27,7 @@ public class Event extends Task {
      * @param isDone Whether the task is done.
      */
     public Event(String eventName, boolean isDone) {
-        super(eventName, isDone, 0, eventName.indexOf("(at:"));
+        super(eventName, isDone, 0, eventName.indexOf("(at:") - 1);
         int start = eventName.indexOf("(at:") + 5;
         eventDate = LocalDate.parse(eventName.substring(start, start + 11),
                 DateTimeFormatter.ofPattern("MMM d yyyy"));
@@ -35,6 +35,10 @@ public class Event extends Task {
 
     public LocalDate getEventDate() {
         return eventDate;
+    }
+
+    public void setEventDate(LocalDate date) {
+        this.eventDate = date;
     }
 
     /**
@@ -45,7 +49,7 @@ public class Event extends Task {
     public String toString() {
         return "[E]"
                 + super.toString()
-                + "(at: "
+                + " (at: "
                 + getEventDate().format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + ")";
     }

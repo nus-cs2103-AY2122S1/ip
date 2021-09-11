@@ -46,15 +46,19 @@ public class TaskList {
      * @param taskNo Specified index.
      * @return The task at the specified index.
      */
-    public Task getTask(int taskNo) {
-        return tasks.get(taskNo - 1);
+    public Task getTask(int taskNo) throws DukeException {
+        try {
+            return tasks.get(taskNo - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("You don't have that many tasks!");
+        }
     }
 
     /**
      * Turns the task list into a String.
      * @return The String representation of the list to be saved to the hard disk.
      */
-    public String saveList() {
+    public String saveList() throws DukeException {
         StringBuilder lst = new StringBuilder();
         for (int i = 1; i <= getSize(); i++) {
             lst.append(i).append(". ").append(getTask(i).toString()).append("\n");
@@ -66,7 +70,7 @@ public class TaskList {
      * Marks a specified task as done.
      * @param taskNo The number of the task to be marked as done.
      */
-    public String markTaskDone(int taskNo) {
+    public String markTaskDone(int taskNo) throws DukeException {
         assert getTasks() != null : "Tasks not initiated";
         Task task = getTask(taskNo);
         task.setDone();
@@ -103,12 +107,16 @@ public class TaskList {
      * Deletes a task from the task list.
      * @param taskNo The number of the task to be deleted.
      */
-    public String deleteTask(int taskNo) {
-        assert getTasks() != null : "Tasks not initiated";
-        Task removedTask = getTasks().remove(taskNo - 1);
-        int tasksLeft = getSize();
-        String t = tasksLeft == 1 ? " task " : " tasks ";
-        return ui.showDeleteTask(removedTask, tasksLeft, t);
+    public String deleteTask(int taskNo) throws DukeException {
+        try {
+            assert getTasks() != null : "Tasks not initiated";
+            Task removedTask = getTasks().remove(taskNo - 1);
+            int tasksLeft = getSize();
+            String t = tasksLeft == 1 ? " task " : " tasks ";
+            return ui.showDeleteTask(removedTask, tasksLeft, t);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("You don't have that many tasks!");
+        }
     }
 
     /**

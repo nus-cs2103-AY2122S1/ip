@@ -30,7 +30,7 @@ public class DoneCommand extends Command {
      * @param ui The Ui object.
      * @param storage The Storage object.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         return tasks.markTaskDone(taskNo);
     }
 

@@ -57,6 +57,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public void setTaskName(String name) {
+        this.taskName = name;
+    }
+
     /**
      * Overrides the toString method in Object.
      * @return The String representation of the Task object.

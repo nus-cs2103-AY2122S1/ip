@@ -1,15 +1,6 @@
 package duke.util;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.HelpCommand;
-import duke.command.ListCommand;
-import duke.command.OccurringOnCommand;
-import duke.command.UnknownCommand;
+import duke.command.*;
 
 /**
  * Class that parses the user's input.
@@ -42,6 +33,12 @@ public class Parser {
             return new FindCommand(command.substring(5));
         } else if (command.equals("help")) {
             return new HelpCommand();
+        } else if (command.startsWith("edit ")) {
+            char fieldToEdit = command.charAt(5);
+            int pos = command.indexOf("/to");
+            String taskNo = command.substring(7, pos - 1);
+            String thingToChangeTo = command.substring(pos + 4);
+            return new EditCommand(taskNo, fieldToEdit, thingToChangeTo);
         } else {
             return new UnknownCommand();
         }

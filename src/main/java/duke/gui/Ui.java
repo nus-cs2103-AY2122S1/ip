@@ -90,7 +90,7 @@ public class Ui {
      * Displays all the tasks in the list.
      * @param tasks List of the tasks.
      */
-    public String printList(TaskList tasks) {
+    public String printList(TaskList tasks) throws DukeException {
         return "Here are the tasks in your list:\n"
                 + tasks.saveList();
     }
@@ -99,7 +99,7 @@ public class Ui {
      * Displays tasks in the list that matches a keyword.
      * @param tasks The list of matching tasks.
      */
-    public String showMatchingTasks(TaskList tasks) {
+    public String showMatchingTasks(TaskList tasks) throws DukeException {
         return "Here are the matching tasks in your list:\n"
                 + tasks.saveList();
     }
@@ -117,6 +117,7 @@ public class Ui {
                 + "delete <task number>: deletes the specific task from your task list.\n"
                 + "occurring on <yyyy-mm-dd>: displays tasks occurring on the specified day.\n"
                 + "find <keyword>: displays tasks that contain the keyword.\n"
+                + "edit <n or d> <task number> /to <new name or date>: changes the name or date of the task.\n"
                 + "bye: quits the program.";
     }
 
@@ -130,4 +131,10 @@ public class Ui {
     public String showDuplicate() {
         return "This task already exists!";
     }
+
+    public String showChangedTask(Task task) {
+        return "Okay! I've updated your task to \n" + task;
+    }
+
+
 }

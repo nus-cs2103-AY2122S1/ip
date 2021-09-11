@@ -16,7 +16,7 @@ public class Deadline extends Task {
      * @param deadlineName The user input.
      */
     public Deadline(String deadlineName) throws DukeException {
-        super(deadlineName, 9, deadlineName.indexOf("/by "));
+        super(deadlineName, 9, deadlineName.indexOf("/by ") - 1);
         int start = deadlineName.indexOf("/by ");
         dueDate = LocalDate.parse(deadlineName.substring(start + 4));
     }
@@ -27,7 +27,7 @@ public class Deadline extends Task {
      * @param isDone Whether the task is done.
      */
     public Deadline(String deadlineName, boolean isDone) {
-        super(deadlineName, isDone, 0, deadlineName.indexOf("(by:"));
+        super(deadlineName, isDone, 0, deadlineName.indexOf("(by:") - 1);
         int start = deadlineName.indexOf("(by:") + 5;
         dueDate = LocalDate.parse(deadlineName.substring(start, start + 11),
                 DateTimeFormatter.ofPattern("MMM dd yyyy"));
@@ -35,6 +35,10 @@ public class Deadline extends Task {
 
     public LocalDate getDueDate() {
         return dueDate;
+    }
+
+    public void setDeadlineDate(LocalDate date) {
+        this.dueDate = date;
     }
 
     /**
@@ -45,7 +49,7 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]"
                 + super.toString()
-                + "(by: "
+                + " (by: "
                 + getDueDate().format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + ")";
     }
