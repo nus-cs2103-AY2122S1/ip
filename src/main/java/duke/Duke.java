@@ -10,7 +10,6 @@ public class Duke {
     private Storage storage;
     private Ui userInt;
     private TaskList tasks;
-    private User user;
 
     /**
      * Constructor of Duke instance, which initalises the other

@@ -1,25 +1,26 @@
 package duke.command;
 
-import java.util.ArrayList;
-
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
-/**
- * FindCommand class which searches for tasks with matching keywords in the description or tags.
- */
-public class FindCommand extends Command {
+import java.util.ArrayList;
+
+public class DeleteTagCommand extends Command {
     private static final boolean IS_EXIT = false;
+    private String taskDescription;
     private String keyword;
 
     /**
-     * Public constructor of the FindCommand
+     * Public constructor for a tag command.
      *
-     * @param keyword The keyword used to search for the matching tasks.
+     * @param taskDescription The description of the task.
+     * @param keyword The keyword to tag the specific task.
      */
-    public FindCommand(String keyword) {
+
+    public DeleteTagCommand(String taskDescription, String keyword) {
+        this.taskDescription = taskDescription;
         this.keyword = keyword;
     }
 
@@ -39,15 +40,16 @@ public class FindCommand extends Command {
         for (int i = 0; i < listLength; i++) {
             Task currTask = taskArrList.get(i);
             String description = currTask.getTaskName();
-            if (description.contains(this.keyword) || currTask.hasGivenTag(this.keyword)) {
+            if (description.contains(this.taskDescription)) {
                 matches.add(currTask);
+                currTask.removeTag(this.keyword);
             }
         }
-
+        storage.save(tasks);
         if (matches.size() == 0) {
             return userInt.notifyNoMatching();
         } else {
-            return userInt.notifyMatchingList(matches);
+            return userInt.notifyRemovedTaggedList(matches, this.keyword);
         }
     }
 

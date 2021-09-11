@@ -14,7 +14,9 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
-import duke.command.TagCommand;
+import duke.command.InvalidCommand;
+import duke.command.AddTagCommand;
+import duke.command.DeleteTagCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -49,15 +51,15 @@ public class Parser {
         case "deadline":
             return parseDeadline(input);
         case "bye":
-            return new ExitCommand();
+            return parseExit();
         case "find":
             return parseFind(inputArr);
         case "tag":
             return parseTag(inputArr);
         case "/help":
-            return new HelpCommand();
+            return parseHelp();
         default:
-            throw new DukeException("I don't get what you mean? Try again!");
+            return parseInvalidCommand();
         }
     }
 
@@ -206,11 +208,44 @@ public class Parser {
      * @return The corresponding command for tag.
      */
     public static Command parseTag(String[] inputArr) {
-        if (inputArr.length < 3) {
-            throw new DukeException("Indicate the task and the tag with the format: tag *task* *tag*!");
+        if (inputArr.length < 4) {
+            throw new DukeException("Indicate the task and the tag with the format: tag *add/delete* *task* *tag*!");
         } else {
-            return new TagCommand(inputArr[1], inputArr[2]);
+            if (inputArr[1].equals("add")) {
+                return new AddTagCommand(inputArr[2], inputArr[3]);
+            } else if (inputArr[1].equals("delete")) {
+                return new DeleteTagCommand(inputArr[2], inputArr[3]);
+            } else {
+                return new InvalidCommand();
+            }
         }
+    }
+
+    /**
+     * Parses the input in the case of an unrecognised command.
+     *
+     * @return The corresponding command for invalid inputs.
+     */
+    public static Command parseInvalidCommand() {
+        return new InvalidCommand();
+    }
+
+    /**
+     * Parses the input in the case of an exit command.
+     *
+     * @return The corresponding command for exit.
+     */
+    public static Command parseExit() {
+        return new ExitCommand();
+    }
+
+    /**
+     * Parses the input in the case of a help command.
+     *
+     * @return The corresponding command for help.
+     */
+    public static Command parseHelp() {
+        return new HelpCommand();
     }
 
 }

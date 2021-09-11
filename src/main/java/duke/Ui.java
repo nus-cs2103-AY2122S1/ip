@@ -1,7 +1,6 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import duke.task.Task;
 
@@ -10,6 +9,32 @@ import duke.task.Task;
  * UI class which handles all the interactions with the user.
  */
 public class Ui {
+    private final static String exitMessage = "You're going already? Hope to see you again soon!";
+    private final static String loadingErrorMessage = "Error starting up Duii.\n";
+    private final static String createFileErrorMessage = "Error creating local record file. This session may not be saved.\n";
+    private final static String saveErrorMessage = "Error saving current session.\n";
+    private final static String noMatchMessage = "There were no keyword matches!";
+    private final static String botDescription = "Duii is a task manager which helps you keep track your upcoming tasks!\n";
+    private final static String commandList = "The following commands are available:\n"
+            + "list - Lists all the tasks in the current task list.\n"
+            + "done - Marks the tasks with the specified IDs as done.\n"
+            + "Eg. done 1,2,3 \n"
+            + "delete - Deletes the tasks with the specified IDs.\n"
+            + "Eg. delete 5,1,2 \n"
+            + "tag add - Tags a certain task with the relevant keywords with a tag.\n"
+            + "Eg. tag add book nerd\n"
+            + "tag delete - Removes a certain tag from task(s) with the relevant keywords.\n"
+            + "Eg. tag delete book nerd\n"
+            + "todo - Adds a toDo activity to the list. Optional to specify duration in brackets.\n"
+            + "Eg. todo read book (2h)\n"
+            + "event - Adds an event activity to the list.\n"
+            + "Eg. event Dinner /at 19/02/2021 1900\n"
+            + "deadline - Adds a deadline activity to the list. \n"
+            + "Eg. deadline Assignment 1 /by 19/03/2021 1500\n"
+            + "find - Lists all the tasks with the specified keyword in its description.\n"
+            + "Eg. find books \n"
+            + "bye - Exits the program.";
+
     /**
      * Prints the welcome message to the user's terminal.
      */
@@ -24,23 +49,21 @@ public class Ui {
      * Prints the error message which has occurred during loading of file.
      */
     public String showLoadingError() {
-        return "Error starting up Duii.";
+        return loadingErrorMessage;
     }
 
     /**
-     * Gets the input passed in by the user.
-     *
-     * @return The input keyed in by the user.
+     * Prints the error message which has occurred during creation of file.
      */
-    public String readCommand(Scanner sc) {
-        return sc.nextLine().toLowerCase();
+    public static String showFileError() {
+        return createFileErrorMessage;
     }
 
     /**
-     * Prints the error message from the thrown exception.
+     * Prints the error message which has occurred during creation of file.
      */
-    public String showError(String error) {
-        return error;
+    public static String saveSessionError() {
+        return saveErrorMessage;
     }
 
     /**
@@ -104,7 +127,7 @@ public class Ui {
      * Updates the user that there are no matches in the list.
      */
     public String notifyNoMatching() {
-        return "There were no keyword matches!";
+        return noMatchMessage;
     }
 
     /**
@@ -128,6 +151,20 @@ public class Ui {
      */
     public String notifyTaggedList(ArrayList<Task> taskArrList, String keyword) {
         String output = "Here's are the tasks which are tagged with #" + keyword + ":\n";
+        int listLength = taskArrList.size();
+        for (int i = 0; i < listLength; i++) {
+            output += String.format("%d. %s\n", i + 1, taskArrList.get(i).displayInfo());
+        }
+        return output;
+    }
+
+    /**
+     * Updates the user of the tasks in the list which have had the tag removed.
+     *
+     * @param taskArrList The ArrayList of tasks with matching keywords.
+     */
+    public String notifyRemovedTaggedList(ArrayList<Task> taskArrList, String keyword) {
+        String output = "Here's are the tasks which have the tag #" + keyword + " removed:\n";
         int listLength = taskArrList.size();
         for (int i = 0; i < listLength; i++) {
             output += String.format("%d. %s\n", i + 1, taskArrList.get(i).displayInfo());
@@ -168,6 +205,19 @@ public class Ui {
         }
     }
 
+    /**
+     * Displays the list of commands available for the user.
+     */
+    public static String displayHelp() {
+        return botDescription + commandList;
+    }
+
+    /**
+     * Prints the exit message to the user's terminal.
+     */
+    public String exit() {
+        return exitMessage;
+    }
 
     /**
      * Prints the directory not found message to the user's terminal.
@@ -195,37 +245,5 @@ public class Ui {
      */
     public static void notifyCreatedFile() {
         System.out.println("File created.");
-    }
-
-    /**
-     * Displays the list of commands available for the user.
-     */
-    public static String displayHelp() {
-        String botDescription = "Duii is a task manager which helps you keep track your upcoming tasks!\n";
-        String commandList = "The following commands available:\n"
-                + "list - Lists all the tasks in the current task list.\n"
-                + "done - Marks the tasks with the specified IDs as done.\n"
-                + "Eg. done 1,2,3 \n"
-                + "delete - Deletes the tasks with the specified IDs.\n"
-                + "Eg. delete 5,1,2 \n"
-                + "tag - Tags a certain task with the relevant keywords with a tag.\n"
-                + "Eg. tag book nerd\n"
-                + "todo - Adds a toDo activity to the list. Optional to specify duration in brackets.\n"
-                + "Eg. todo read book (2h)\n"
-                + "event - Adds an event activity to the list.\n"
-                + "Eg. event Dinner /at 19/02/2021 1900\n"
-                + "deadline - Adds a deadline activity to the list. \n"
-                + "Eg. deadline Assignment 1 /by 19/03/2021 1500\n"
-                + "find - Lists all the tasks with the specified keyword in its description.\n"
-                + "Eg. find books \n"
-                + "bye - Exits the program.";
-        return botDescription + commandList;
-    }
-
-    /**
-     * Prints the exit message to the user's terminal.
-     */
-    public String exit() {
-        return "You're going already? Hope to see you again soon!";
     }
 }

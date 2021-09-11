@@ -7,7 +7,7 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
-public class TagCommand extends Command {
+public class AddTagCommand extends Command {
     private static final boolean IS_EXIT = false;
     private String taskDescription;
     private String keyword;
@@ -19,7 +19,7 @@ public class TagCommand extends Command {
      * @param keyword The keyword to tag the specific task.
      */
 
-    public TagCommand(String taskDescription, String keyword) {
+    public AddTagCommand(String taskDescription, String keyword) {
         this.taskDescription = taskDescription;
         this.keyword = keyword;
     }
@@ -42,7 +42,7 @@ public class TagCommand extends Command {
             String description = currTask.getTaskName();
             if (description.contains(this.taskDescription)) {
                 matches.add(currTask);
-                currTask.tag(this.keyword);
+                currTask.addTag(this.keyword);
             }
         }
         storage.save(tasks);

@@ -104,21 +104,33 @@ public class Task {
      */
     public String getSaveInfo() {
         if (this.isDone()) {
-            return String.format("T | 1 | %s | %s", this.getTaskName(), this.getTagsString());
+            return String.format("T | 1 | %s | %s", this.getTaskName(), this.getTagsInString());
         } else {
-            return String.format("T | 0 | %s | %s", this.getTaskName(), this.getTagsString());
+            return String.format("T | 0 | %s | %s", this.getTaskName(), this.getTagsInString());
         }
     }
 
     /**
      * Tags a keyword to the task.
      */
-    public void tag(String keyword) {
+    public void addTag(String keyword) {
         this.tags.add(keyword.toLowerCase());
     }
 
     /**
+     * Removes a tag with a keyword from the task.
+     */
+    public void removeTag(String keyword) {
+        String savedTag = keyword.toLowerCase();
+        if (this.tags.contains(savedTag)){
+            this.tags.remove(savedTag);
+        }
+    }
+
+    /**
      * Checks if a given tag is present in the tasks tags.
+     *
+     * @return If a given keyword is a tag for the task.
      */
     public boolean hasGivenTag(String keyword) {
         for (int i = 0; i < tags.size(); i++) {
@@ -132,7 +144,7 @@ public class Task {
     /**
      * Get string combination of all tags relevant to a task.
      */
-    public String getTagsString() {
+    public String getTagsInString() {
         String stringTags = "";
         if (this.tags.size() == 0) {
             return "#";

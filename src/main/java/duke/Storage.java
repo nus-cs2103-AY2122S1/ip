@@ -58,7 +58,7 @@ public class Storage {
                 assert(fileCreated) : "Error Creating file.";
                 Ui.notifyCreatedFile();
             } catch (IOException e) {
-                System.out.println("IO error occurred");
+                Ui.showFileError();
             }
         }
         assert(file != null) : "System file used for tasks cannot be null!";
@@ -120,7 +120,7 @@ public class Storage {
         }
         String[] tags = lineArr[3].split("#");
         for (int i = 1; i < tags.length; i++) {
-            toDo.tag(tags[i]);
+            toDo.addTag(tags[i]);
         }
 
         return toDo;
@@ -139,7 +139,7 @@ public class Storage {
         }
         String[] tags = lineArr[4].split("#");
         for (int i = 1; i < tags.length; i++) {
-            deadline.tag(tags[i]);
+            deadline.addTag(tags[i]);
         }
         return deadline;
     }
@@ -157,7 +157,7 @@ public class Storage {
         String savedTags = lineArr[4].replaceFirst("#", "");
         String[] tags = savedTags.split("#");
         for (int i = 1; i < tags.length; i++) {
-            event.tag(tags[i]);
+            event.addTag(tags[i]);
         }
         return event;
     }
@@ -178,7 +178,7 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            throw new DukeException(e.getMessage());
+            Ui.saveSessionError();
         }
     }
 }
