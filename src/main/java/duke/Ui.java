@@ -9,13 +9,15 @@ import duke.task.Task;
  * UI class which handles all the interactions with the user.
  */
 public class Ui {
-    private final static String exitMessage = "You're going already? Hope to see you again soon!";
-    private final static String loadingErrorMessage = "Error starting up Duii.\n";
-    private final static String createFileErrorMessage = "Error creating local record file. This session may not be saved.\n";
-    private final static String saveErrorMessage = "Error saving current session.\n";
-    private final static String noMatchMessage = "There were no keyword matches!";
-    private final static String botDescription = "Duii is a task manager which helps you keep track your upcoming tasks!\n";
-    private final static String commandList = "The following commands are available:\n"
+    private static final String exitMessage = "You're going already? Hope to see you again soon!";
+    private static final String loadingErrorMessage = "Error starting up Duii.\n";
+    private static final String createFileErrorMessage = "Error creating local record file."
+            + "This session may not be saved.\n";
+    private static final String saveErrorMessage = "Error saving current session.\n";
+    private static final String noMatchMessage = "There were no keyword matches!";
+    private static final String botDescription = "Duii is a task manager which helps you keep "
+            + "track your upcoming tasks!\n";
+    private static final String commandList = "The following commands are available:\n"
             + "list - Lists all the tasks in the current task list.\n"
             + "done - Marks the tasks with the specified IDs as done.\n"
             + "Eg. done 1,2,3 \n"
@@ -31,7 +33,7 @@ public class Ui {
             + "Eg. event Dinner /at 19/02/2021 1900\n"
             + "deadline - Adds a deadline activity to the list. \n"
             + "Eg. deadline Assignment 1 /by 19/03/2021 1500\n"
-            + "find - Lists all the tasks with the specified keyword in its description.\n"
+            + "find - Lists all the tasks with the specified keyword in its description or tag.\n"
             + "Eg. find books \n"
             + "bye - Exits the program.";
 

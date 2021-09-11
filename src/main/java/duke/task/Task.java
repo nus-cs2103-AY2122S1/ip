@@ -122,7 +122,7 @@ public class Task {
      */
     public void removeTag(String keyword) {
         String savedTag = keyword.toLowerCase();
-        if (this.tags.contains(savedTag)){
+        if (this.tags.contains(savedTag)) {
             this.tags.remove(savedTag);
         }
     }

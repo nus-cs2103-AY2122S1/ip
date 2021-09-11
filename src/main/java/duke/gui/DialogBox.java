@@ -40,14 +40,22 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        dialog.setFont(new Font("Futura", 14));
+        dialog.setFont(new Font("Helvetica Neue", 14));
         if (person.equals("Duke")) {
-            dialog.setStyle("-fx-background-color:#c4d4e2; -fx-background-radius: 15; -fx-label-padding: 5, 5, 5, 5");
+            dialog.setStyle("-fx-background-color:#e5e8e8;"
+                    + "-fx-background-radius: 15, 15, 15, 0;"
+                    + "-fx-label-padding: 5, 5, 5, 5;"
+                    + "-fx-effect:dropshadow(gaussian, #949494, 5, 0.0, 0, 0)");
         } else {
-            dialog.setStyle("-fx-background-color:#bca0dc; -fx-background-radius: 15; -fx-label-padding: 5, 5, 5, 5");
+            dialog.setStyle("-fx-background-color:#a9dfbf; "
+                    + "-fx-background-radius: 15, 0, 15, 15; "
+                    + "-fx-label-padding: 5, 5, 5, 5;"
+                    + "-fx-effect:dropshadow(gaussian, #949494, 5, 0.0, 0, 0)");
         }
         displayPicture.setImage(img);
-        displayPicture.setClip(new Circle(40, 40, 40));
+        displayPicture.setFitHeight(40);
+        displayPicture.setFitWidth(40);
+        displayPicture.setClip(new Circle(20, 20, 20));
     }
 
     /**![](../../../resources/images/user.png)

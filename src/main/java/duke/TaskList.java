@@ -53,8 +53,8 @@ public class TaskList {
      * and updates the total number of tasks.
      *
      * @param id The id of the task as per display with the list() method.
-     * @throws DukeException This error is thrown if the id specified is invalid.
      * @return The task object which was removed from the list.
+     * @throws DukeException This error is thrown if the id specified is invalid.
      */
     public Task delete(int id) throws DukeException {
         if (id - 1 > this.listLength) {
@@ -76,8 +76,8 @@ public class TaskList {
      * Marks a specific task with the corresponding id as completed.
      *
      * @param id The id of the task as per display with the list() method.
-     * @throws DukeException This error is thrown if the id specified is invalid.
      * @return The task object which was marked as done.
+     * @throws DukeException This error is thrown if the id specified is invalid.
      */
     public Task markDone(int id) throws DukeException {
         if (id - 1 > this.listLength) {

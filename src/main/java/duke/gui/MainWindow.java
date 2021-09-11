@@ -46,11 +46,13 @@ public class MainWindow extends AnchorPane {
      * Starts up the Main Window of the GUI.
      */
     public void start() {
+        sendButton.setStyle("-fx-background-color: #52be80; -fx-background-radius:80");
         Ui userInterface = bot.getUi();
         String greetings = userInterface.greet(bot.getTasks());
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(greetings, dukeImage));
     }
+
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
