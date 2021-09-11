@@ -44,19 +44,27 @@ public class AddCommand extends Command {
     private void verifyDate(String dateInfo, TaskType type) throws InvalidDateFormat {
         switch(type) {
         case DEADLINE:
-            if (dateInfo.split(" /by ").length != 2 ||
-                    dateInfo.split(" /by ")[1].split(" ").length != 2) {
-                throw new InvalidDateFormat();
-            };
+            checkDeadlineFormatError(dateInfo);
             break;
         case EVENT:
-            if (dateInfo.split(" /at ").length != 2 ||
-                    dateInfo.split(" /at ")[1].split(" ").length != 2) {
-                throw new InvalidDateFormat();
-            };
+            checkEventFormatError(dateInfo);
             break;
         default:
             break;
+        }
+    }
+
+    private void checkDeadlineFormatError(String dateInfo) throws  InvalidDateFormat {
+        if (dateInfo.split(" /by ").length != 2 ||
+                dateInfo.split(" /by ")[1].split(" ").length != 2) {
+            throw new InvalidDateFormat();
+        }
+    }
+
+    private void checkEventFormatError(String dateInfo) throws InvalidDateFormat {
+        if (dateInfo.split(" /at ").length != 2 ||
+                dateInfo.split(" /at ")[1].split(" ").length != 2) {
+            throw new InvalidDateFormat();
         }
     }
 
