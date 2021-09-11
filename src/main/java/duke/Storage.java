@@ -43,6 +43,7 @@ class Storage {
      */
     void write(String s) throws IOException {
         writer.write(s + '\n');
+        writer.flush();
     }
 
     /**
