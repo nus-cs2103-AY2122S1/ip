@@ -1,5 +1,8 @@
 package virushade;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,9 +16,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import virushade.tasks.TaskList;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * The Main class of the application.
@@ -31,8 +31,9 @@ public class Virushade extends Application {
     private Button sendButton;
     private Scene scene;
     private AnchorPane mainLayout;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image virushade = new Image(this.getClass().getResourceAsStream("/images/Virushade.png"));
+
+    private final Image USER = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image VIRUSHADE = new Image(this.getClass().getResourceAsStream("/images/Virushade.png"));
 
     /**
      * The constructor for Virushade.
@@ -53,9 +54,14 @@ public class Virushade extends Application {
      */
     @Override
     public void start(Stage stage) {
-        //Step 1. Setting up required components
+        initializeGuiFields();
+        setTheStage(stage);
+        tweakGuiDisplay();
+        sayHello();
+        listenForUserInput();
+    }
 
-        //The container for the content of the chat to scroll.
+    private void initializeGuiFields() {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -67,7 +73,9 @@ public class Virushade extends Application {
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
+    }
 
+    private void setTheStage(Stage stage) {
         stage.setScene(scene);
         stage.show();
 
@@ -75,7 +83,9 @@ public class Virushade extends Application {
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
+    }
 
+    private void tweakGuiDisplay() {
         mainLayout.setPrefSize(400.0, 600.0);
 
         scrollPane.setPrefSize(385, 535);
@@ -98,19 +108,9 @@ public class Virushade extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+    }
 
-        sayHello();
-
-        sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
+    private void listenForUserInput() {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         //Functionality to handle user input.
@@ -124,24 +124,12 @@ public class Virushade extends Application {
     }
 
     /**
-     *
+     * Gets Virushade to greet the user. Always ran when Virushade is launched.
      */
     private void sayHello() {
         Label virushadeText = new Label(ResponseProcessor.greet());
-        dialogContainer.getChildren().addAll(DialogBox.getVirushadeDialog(virushadeText, new ImageView(virushade)));
+        dialogContainer.getChildren().addAll(DialogBox.getVirushadeDialog(virushadeText, new ImageView(VIRUSHADE)));
         userInput.clear();
-    }
-
-    /**
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
     }
 
     /**
@@ -152,34 +140,42 @@ public class Virushade extends Application {
         String input = userInput.getText();
         String output = getResponse(input);
 
-        Label userText = new Label(input);
-        Label virushadeText = new Label(output);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getVirushadeDialog(virushadeText, new ImageView(virushade))
-        );
+        reply(input, output);
 
-        // Shutdown upon receiving exit message. Inspired by Zhang Shi Chen.
         if (input.equals("bye")) {
-            // Disable all mode of input
-            userInput.setDisable(true);
-            sendButton.setDisable(true);
-
-            // Display exit message then exit after 1s.
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    System.exit(0);
-                }
-            }, 1000);
+            shutdownVirushade();
         }
 
         userInput.clear();
     }
 
+    private void reply(String input, String output) {
+        Label userText = new Label(input);
+        Label virushadeText = new Label(output);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(USER)),
+                DialogBox.getVirushadeDialog(virushadeText, new ImageView(VIRUSHADE))
+        );
+    }
+
+    private void shutdownVirushade() {
+        // Disable all mode of input
+        userInput.setDisable(true);
+        sendButton.setDisable(true);
+
+        // Exit after 1s for the user to view the exit message.
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.exit(0);
+            }
+        }, 1000);
+    }
+
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * The function that gives a response to the user actions.
+     * @param input The user input.
+     * @return A string that represents the response by Virushade.
      */
     private String getResponse(String input) {
         return ResponseProcessor.handleMessage(input);

@@ -1,10 +1,10 @@
 package virushade.tasks;
 
+import java.util.ArrayList;
+
 import virushade.Storage;
 import virushade.StringManipulator;
 import virushade.VirushadeException;
-
-import java.util.ArrayList;
 
 public class TaskList {
     /**
@@ -114,13 +114,7 @@ public class TaskList {
             if (index <= 0) {
                 throw new VirushadeException("Please enter an integer greater than 0.");
             } else if (index <= listCount) {
-                Task deletedTask = TASKS.get(index - 1);
-                TASKS.remove(index - 1);
-                deletedTask.deleteMessage();
-                listCount--;
-                updateFile(generateList());
-
-                return "You have " + listCount + " tasks in the list.\n";
+                return deleteTaskAndReturnString(index);
             } else {
                 throw new VirushadeException("Please check that you have entered the correct number!");
             }
@@ -129,6 +123,19 @@ public class TaskList {
             // Tells the user that he did not enter a number.
             throw new VirushadeException("Please enter an integer after 'done ' instead.\n" + e);
         }
+    }
+
+    private static String deleteTaskAndReturnString(int index) throws VirushadeException {
+        Task deletedTask = TASKS.get(index - 1);
+        TASKS.remove(index - 1);
+        StringBuilder sb = new StringBuilder(deletedTask.deleteMessage());
+        listCount--;
+        updateFile(generateList());
+
+        String taskCountRepresentation = "You have " + listCount + " tasks in the list.\n";
+        sb.append(System.lineSeparator()).append(taskCountRepresentation);
+
+        return sb.toString();
     }
 
     /**

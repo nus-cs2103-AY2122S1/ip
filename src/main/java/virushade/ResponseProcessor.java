@@ -115,22 +115,6 @@ public class ResponseProcessor {
     }
 
     /**
-     * Notifies the user that Virushade is creating files.
-     * @return A string message telling the user that the file is under creation.
-     */
-    public static String showCreatingFiles() {
-        return "Creating data files...";
-    }
-
-    /**
-     * Notifies the user that Virushade is creating directories.
-     * @return A string message telling the user that the file is under creation.
-     */
-    public static String showCreatingDirectory() {
-        return "Creating data directory...";
-    }
-
-    /**
      * Handles mostly incorrect inputs by the user.
      * @param e The error message.
      * @return The error message in e.
