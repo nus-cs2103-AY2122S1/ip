@@ -1,5 +1,7 @@
 package dialog;
 
+import dialog.exceptions.DialogException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -58,11 +60,10 @@ public class Dialog {
     public static Dialog generate(String id) throws DialogException {
         if (archive.containsKey(id)) {
             throw new DialogException(id + " already exists");
-        } else {
-            final Dialog newDialog = new Dialog(new ArrayList<>());
-            archive.put(id, newDialog);
-            return newDialog;
         }
+        final Dialog newDialog = new Dialog(new ArrayList<>());
+        archive.put(id, newDialog);
+        return newDialog;
     }
 
     /**

@@ -1,7 +1,13 @@
 package command;
 
-import alice.AliceException;
-import dialog.DialogException;
+import alice.exceptions.AliceException;
+import command.exceptions.EmptyDescriptionException;
+import command.exceptions.EmptyIndexException;
+import command.exceptions.EmptyTaggerException;
+import command.exceptions.InvalidArgumentException;
+import command.exceptions.InvalidIndexException;
+import command.exceptions.InvalidTimeFormatException;
+import dialog.exceptions.DialogException;
 import dialog.TaskDialog;
 
 import parser.Parser;

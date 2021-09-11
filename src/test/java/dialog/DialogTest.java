@@ -1,5 +1,6 @@
 package dialog;
 
+import dialog.exceptions.DialogException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

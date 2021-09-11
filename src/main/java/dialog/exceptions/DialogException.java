@@ -1,4 +1,4 @@
-package dialog;
+package dialog.exceptions;
 
 /**
  * Exception to do with Dialog to be thrown when a Dialog of existing id
