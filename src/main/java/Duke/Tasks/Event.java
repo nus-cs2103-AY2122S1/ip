@@ -53,7 +53,9 @@ public class Event extends Task {
      */
     @Override
     public String execute(TaskList task, Ui ui, Storage storage) {
+        int numOfBeforeExecute = task.size();
         task.add(this);
+        assert task.size() - numOfBeforeExecute== 1 : "Add event task not successful";
         storage.writeData(task.getTasks());
         return ui.showAddOnTask(task, (task.size() - 1));
     }
