@@ -78,7 +78,6 @@ public class Parser {
             throw new InvalidTaskException("Todo");
         }
         String taskName = task.substring(TODO_LENGTH + 1);
-        assert !taskName.equals("") : "taskName should not be null";
         return new Todo(taskName);
     }
 

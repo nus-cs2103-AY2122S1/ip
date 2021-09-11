@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.InvalidTaskException;
+
 /**
  * A type of task which only contains the name of the task.
  */
@@ -8,19 +10,27 @@ public class Todo extends Task {
      * Constructor of Todo task.
      *
      * @param task The name of task.
+     * @throws InvalidTaskException Throws when the taskName is empty.
      */
-    public Todo(String task) {
+    public Todo(String task) throws InvalidTaskException {
         super(task);
+        if (task.isBlank()) {
+            throw new InvalidTaskException("Todo");
+        }
     }
 
     /**
      * Constructor of Todo task, indicating whether the task is done or not.
      *
-     * @param task The name of task.
+     * @param task   The name of task.
      * @param isDone Whether the task is done or not.
+     * @throws InvalidTaskException Throws when the taskName is empty.
      */
-    public Todo(String task, boolean isDone) {
+    public Todo(String task, boolean isDone) throws InvalidTaskException {
         super(task, isDone);
+        if (task.isBlank()) {
+            throw new InvalidTaskException("Todo");
+        }
     }
 
     /**

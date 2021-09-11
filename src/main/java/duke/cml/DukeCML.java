@@ -1,20 +1,28 @@
-package duke;
+package duke.cml;
 
 import duke.command.Command;
 import duke.command.Response;
 import duke.command.Storage;
+import duke.command.TaskList;
 
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * A CML version of Duke which contains the same functionality of the GUI version of Duke.
+ */
 public class DukeCML {
     private Command command;
 
-
+    /**
+     * Constructor of DukeCML.
+     *
+     * @throws IOException Throws when there is a IOException thrown during the creation of storage object.
+     */
     public DukeCML() throws IOException {
         TaskList taskList = new TaskList();
         Response response = new Response(taskList);
-        Storage storage = new Storage("duke.txt", taskList);
+        Storage storage = new Storage("src/main/Resources/duke.txt", taskList);
         this.command = new Command(taskList, response, storage);
     }
 

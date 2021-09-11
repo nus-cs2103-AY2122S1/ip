@@ -32,10 +32,10 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Duke.command.welcomeToUser().toString(), dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(DukeGUI.command.welcomeToUser().toString(), dukeImage));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         try {
-            Duke.command.loadSavedTasks();
+            DukeGUI.command.loadSavedTasks();
         } catch (IOException ioException) {
             String messageToUser = "Sorry, there is something wrong with the given file. I cannot load" +
                     "current tasks.";
@@ -54,7 +54,7 @@ public class MainWindow extends AnchorPane {
         assert userImage != null : "User's Image should not be null";
         assert dukeImage != null : "Duke's Image should not be null";
         String input = userInput.getText();
-        String response = Duke.command.getCorrespondingMessage(input).toString();
+        String response = DukeGUI.command.getCorrespondingMessage(input).toString();
         assert response.equals("") : "response should not be an empty String";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

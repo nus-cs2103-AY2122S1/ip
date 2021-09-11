@@ -5,7 +5,6 @@ import duke.exception.DuplicateException;
 import duke.exception.IndexOutOfBoundException;
 import duke.exception.InvalidTaskException;
 import duke.task.Task;
-import duke.TaskList;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,7 +18,8 @@ public class Command {
     private final Response response;
     private final Storage storage;
     private static final StringBuilder UNKNOWN_MESSAGE_RESPONSE =
-            new StringBuilder("Sorry, I don't understand what do you want me to do.");
+            new StringBuilder("Sorry, I don't understand what do you want me to do :( Can you give" +
+                    "me a more specific instruction?");
 
     /**
      * Constructor of Command class.

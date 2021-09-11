@@ -1,6 +1,7 @@
 package command;
 
-import duke.TaskList;
+import duke.command.TaskList;
+import duke.exception.DuplicateException;
 import duke.task.Task;
 import org.junit.jupiter.api.Test;
 
@@ -14,30 +15,42 @@ public class TaskListTest {
 
     @Test
     public void sizeTest() {
-        testingList = new TaskList();
-        assertEquals(0, testingList.size());
-        testingList.add(task1);
-        testingList.add(task2);
-        assertEquals(2, testingList.size());
-        testingList.add(task3);
-        assertEquals(3, testingList.size());
+        try {
+            testingList = new TaskList();
+            assertEquals(0, testingList.size());
+            testingList.addTask(task1);
+            testingList.addTask(task2);
+            assertEquals(2, testingList.size());
+            testingList.addTask(task3);
+            assertEquals(3, testingList.size());
+        } catch (DuplicateException e) {
+            System.out.println("There are duplicate elements want to be added in the list");
+        }
     }
 
     @Test
     public void getTest() {
         testingList = new TaskList();
-        testingList.add(task1);
-        testingList.add(task2);
-        assertEquals(task1, testingList.get(0));
-        assertEquals(task2, testingList.get(1));
+        try {
+            testingList.addTask(task1);
+            testingList.addTask(task2);
+            assertEquals(task1, testingList.getTask(0));
+            assertEquals(task2, testingList.getTask(1));
+        } catch (DuplicateException e) {
+            System.out.println("There are duplicate elements want to be added in the list");
+        }
     }
 
     @Test
     public void removeTest() {
-        testingList = new TaskList();
-        testingList.add(task1);
-        testingList.add(task2);
-        assertEquals(task2, testingList.remove(1));
-        assertEquals(task1, testingList.remove(0));
+        try {
+            testingList = new TaskList();
+            testingList.addTask(task1);
+            testingList.addTask(task2);
+            assertEquals(task2, testingList.removeTask(1));
+            assertEquals(task1, testingList.removeTask(0));
+        } catch (DuplicateException e) {
+            System.out.println("There are duplicate elements want to be added in the list");
+        }
     }
 }
