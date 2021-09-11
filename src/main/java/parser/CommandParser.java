@@ -7,7 +7,7 @@ import command.DoneCommand;
 import command.FindCommand;
 import command.HelpCommand;
 import command.ListCommand;
-import exception.InvalidCommandFormatException;
+import exception.InvalidNumOfStringPartsException;
 import exception.InvalidTaskNumberException;
 import exception.MissingCommandDescriptionException;
 import exception.NonExistentCommandTypeException;
@@ -90,15 +90,13 @@ public class CommandParser {
      *
      * @param expectedNumOfParts Expected number of parts.
      * @param splitParts Array of strings.
-     * @param commandType Command Type.
-     * @throws InvalidCommandFormatException If the number of parts is wrong for the command type.
+     * @throws InvalidNumOfStringPartsException If the number of parts is wrong.
      */
     public static void validateCorrectNumOfParts(
             int expectedNumOfParts,
-            String[] splitParts,
-            CommandTypeEnum commandType) throws InvalidCommandFormatException {
+            String[] splitParts) throws InvalidNumOfStringPartsException {
         if (splitParts.length != expectedNumOfParts) {
-            throw new InvalidCommandFormatException(commandType);
+            throw new InvalidNumOfStringPartsException(expectedNumOfParts, splitParts);
         }
     }
 

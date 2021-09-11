@@ -45,17 +45,17 @@ public class AddCommand extends Command {
      * @param list `TaskList` containing all tasks.
      * @return Message representing the command is executed.
      * @throws InvalidTaskTypeException If the task type is not valid.
-     * @throws InvalidCommandFormatException If a task is not formatted properly.
      * @throws ErrorAccessingFileException If there is an error accessing the storage file.
      * @throws InvalidDateTimeException If a task meant to contain time information has an invalid datetime format.
      * @throws DuplicateTaskException If there is an attempt to add a duplicate task.
+     * @throws InvalidCommandFormatException If the task has an incorrect format.
      */
     public Message execute(TaskList list) throws
             InvalidTaskTypeException,
-            InvalidCommandFormatException,
             ErrorAccessingFileException,
             InvalidDateTimeException,
-            DuplicateTaskException {
+            DuplicateTaskException,
+            InvalidCommandFormatException {
         Task task = addTask(list);
         Message message = getOutputMessage(list, task);
         return message;
@@ -64,9 +64,9 @@ public class AddCommand extends Command {
     private Task addTask(TaskList list) throws
             InvalidTaskTypeException,
             InvalidDateTimeException,
-            InvalidCommandFormatException,
             DuplicateTaskException,
-            ErrorAccessingFileException {
+            ErrorAccessingFileException,
+            InvalidCommandFormatException {
         Task task = Task.createTask(this.description, this.commandType);
 
         list.validateTaskNotDuplicate(task);

@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import exception.InvalidCommandFormatException;
 import exception.InvalidDateTimeException;
 import exception.InvalidFormatInStorageException;
+import exception.InvalidNumOfStringPartsException;
 import parser.CommandParser;
 import parser.DateTimeParser;
 import type.CommandTypeEnum;
@@ -35,23 +36,28 @@ public class DeadlineTask extends Task {
      * @param description Input task string.
      * @return App representation of a task containing an action description and deadline information.
      */
-    public static DeadlineTask createTask(String description) throws
-            InvalidCommandFormatException,
-            InvalidDateTimeException {
-        String[] actionAndDateTimeDescriptions = CommandParser.splitStringBySplitter(description, SPLITTER_ACTION_TIME);
-        CommandParser.validateCorrectNumOfParts(2, actionAndDateTimeDescriptions, CommandTypeEnum.DEADLINE);
+    public static DeadlineTask createTask(String description)
+            throws InvalidDateTimeException, InvalidCommandFormatException {
+        try {
+            String[] actionAndDateTimeDescriptions = CommandParser.splitStringBySplitter(
+                    description, SPLITTER_ACTION_TIME);
+            CommandParser.validateCorrectNumOfParts(2, actionAndDateTimeDescriptions);
 
-        String actionDescription = actionAndDateTimeDescriptions[0];
-        String dateTimeDescription = actionAndDateTimeDescriptions[1];
+            String actionDescription = actionAndDateTimeDescriptions[0];
+            String dateTimeDescription = actionAndDateTimeDescriptions[1];
 
-        String[] dateTimeDescriptions = CommandParser.splitStringBySplitter(dateTimeDescription, SPLITTER_DATE_TIME);
-        CommandParser.validateCorrectNumOfParts(2, dateTimeDescriptions, CommandTypeEnum.DEADLINE);
-        LocalDate date = DateTimeParser.changeDateStringToDate(
-                dateTimeDescriptions[0], DateFormatTypeEnum.INPUT.toString());
-        LocalTime time = DateTimeParser.changeTimeStringToTime(
-                dateTimeDescriptions[1], TimeFormatTypeEnum.INPUT.toString());
+            String[] dateTimeDescriptions = CommandParser.splitStringBySplitter(
+                    dateTimeDescription, SPLITTER_DATE_TIME);
+            CommandParser.validateCorrectNumOfParts(2, dateTimeDescriptions);
+            LocalDate date = DateTimeParser.changeDateStringToDate(
+                    dateTimeDescriptions[0], DateFormatTypeEnum.INPUT.toString());
+            LocalTime time = DateTimeParser.changeTimeStringToTime(
+                    dateTimeDescriptions[1], TimeFormatTypeEnum.INPUT.toString());
 
-        return new DeadlineTask(actionDescription, false, date, time);
+            return new DeadlineTask(actionDescription, false, date, time);
+        } catch (InvalidNumOfStringPartsException e) {
+            throw new InvalidCommandFormatException(CommandTypeEnum.DEADLINE);
+        }
     }
 
     /**
@@ -92,6 +98,9 @@ public class DeadlineTask extends Task {
      * @return App representation of a deadline task.
      */
     public static DeadlineTask createTaskFromStoredString(String description) throws InvalidFormatInStorageException {
+        String dateFormat = DateFormatTypeEnum.INPUT.toString();
+        String timeFormat = TimeFormatTypeEnum.INPUT.toString();
+
         try {
             boolean isDone = Task.isStorageTaskDone(description);
 
@@ -100,22 +109,22 @@ public class DeadlineTask extends Task {
                     description.substring(descriptionStartPos),
                     SPLITTER_ACTION_TIME
             );
-            CommandParser.validateCorrectNumOfParts(2, actionAndDateTimeDescriptions, CommandTypeEnum.DEADLINE);
+            CommandParser.validateCorrectNumOfParts(2, actionAndDateTimeDescriptions);
 
             String actionDescription = actionAndDateTimeDescriptions[0];
             String dateTimeDescription = actionAndDateTimeDescriptions[1];
 
             String[] dateTimeDescriptions = CommandParser.splitStringBySplitter(
                     dateTimeDescription, SPLITTER_DATE_TIME);
-            CommandParser.validateCorrectNumOfParts(2, dateTimeDescriptions, CommandTypeEnum.DEADLINE);
-            LocalDate date = DateTimeParser.changeDateStringToDate(
-                    dateTimeDescriptions[0], DateFormatTypeEnum.INPUT.toString());
-            LocalTime time = DateTimeParser.changeTimeStringToTime(
-                    dateTimeDescriptions[1], TimeFormatTypeEnum.INPUT.toString());
+            CommandParser.validateCorrectNumOfParts(2, dateTimeDescriptions);
+            LocalDate date = DateTimeParser.changeDateStringToDate(dateTimeDescriptions[0], dateFormat);
+            LocalTime time = DateTimeParser.changeTimeStringToTime(dateTimeDescriptions[1], timeFormat);
 
             return new DeadlineTask(actionDescription, isDone, date, time);
-        } catch (InvalidDateTimeException | InvalidCommandFormatException e) {
-            throw new InvalidFormatInStorageException(e.getMessage() + ": " + description);
+        } catch (InvalidDateTimeException | InvalidNumOfStringPartsException e) {
+            String expectedFormat = String.format("[ ] <description> %s %s %s",
+                    SPLITTER_ACTION_TIME, dateFormat, timeFormat);
+            throw new InvalidFormatInStorageException(description, expectedFormat);
         }
     }
 

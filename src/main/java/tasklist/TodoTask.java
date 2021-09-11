@@ -1,8 +1,6 @@
 package tasklist;
 
-import exception.InvalidCommandFormatException;
 import exception.InvalidFormatInStorageException;
-import type.CommandTypeEnum;
 import type.TaskIconTypeEnum;
 
 /**
@@ -58,8 +56,8 @@ public class TodoTask extends Task {
         int actionDescriptionStartPos = 3;
         String actionDescription = description.substring(actionDescriptionStartPos).trim();
         if (actionDescription.isEmpty()) {
-            InvalidCommandFormatException taskFormatException = new InvalidCommandFormatException(CommandTypeEnum.TODO);
-            throw new InvalidFormatInStorageException(taskFormatException.getMessage() + ": " + description);
+            String expectedFormat = "[] <description>";
+            throw new InvalidFormatInStorageException(description, expectedFormat);
         }
 
         return new TodoTask(actionDescription, isDone);

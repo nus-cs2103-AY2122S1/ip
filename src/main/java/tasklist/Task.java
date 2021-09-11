@@ -1,5 +1,7 @@
 package tasklist;
 
+import java.util.Arrays;
+
 import exception.InvalidCommandFormatException;
 import exception.InvalidDateTimeException;
 import exception.InvalidFormatInStorageException;
@@ -18,10 +20,10 @@ public abstract class Task {
     private boolean isDone;
 
     /**
-     * Instantiates a `entity.list.DukeTask`.
-     * The isDone field is set to false by default as new tasks should not be done yet.
+     * Instantiates a `Task`.
      *
-     * @param description describes what the task is
+     * @param description Description of task is.
+     * @param isDone The status of a task, either done or not.
      */
     public Task(String description, boolean isDone) {
         this.description = description;
@@ -29,13 +31,13 @@ public abstract class Task {
     }
 
     /**
-     * Creates a specific `entity.list.DukeTask` based on the prefix in the user input.
-     * Supported types of tasks include todo, deadline and event.
-     *
-     * @param description the full user input that may or may not be a valid type of task
-     * @return `DukeTask`
-     * @throws InvalidTaskTypeException when the type of task is not recognised
-     * @throws InvalidCommandFormatException when a task does not have valid time inputs
+     * Creates a specific Task based on the prefix in the user input.
+     * @param description User input that may or may not be a valid type of task.
+     * @param commandType Command Type.
+     * @return `Task`.
+     * @throws InvalidTaskTypeException If the type of task is not recognised.
+     * @throws InvalidCommandFormatException If the command is incorrectly formatted.
+     * @throws InvalidDateTimeException If there is an invalid date time.
      */
     public static Task createTask(String description, CommandTypeEnum commandType)
             throws InvalidTaskTypeException, InvalidCommandFormatException, InvalidDateTimeException {
@@ -81,7 +83,8 @@ public abstract class Task {
         String taskType = trimmedFullDescription.substring(taskTypeStartPos, taskTypeStartPos + 1);
         TaskIconTypeEnum taskIconTypeEnum = TaskIconTypeEnum.getEnum(taskType);
         if (taskIconTypeEnum == null) {
-            throw new InvalidFormatInStorageException(fullDescription);
+            String expectedFormat = "One of these task icons " + Arrays.toString(TaskIconTypeEnum.values());
+            throw new InvalidFormatInStorageException(fullDescription, expectedFormat);
         }
 
         int descriptionStartPos = 3;
