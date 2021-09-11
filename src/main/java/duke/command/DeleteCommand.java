@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
     private final int taskNumber;
 
     /**
-     * Constructor for an AddCommand.
+     * Constructor for a DeleteCommand.
      *
      * @param taskList   Handles all operations regarding tasks.
      * @param storage    Save and load data from local directory.

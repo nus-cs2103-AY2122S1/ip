@@ -54,6 +54,13 @@ public abstract class Task {
     }
 
     /**
+     * Marks a task as undone.
+     */
+    public void markUndone() {
+        isDone = false;
+    }
+
+    /**
      * Returns a string representation of task
      * used when saving task to local directory.
      *

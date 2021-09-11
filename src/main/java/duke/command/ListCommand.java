@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.NoSuchTaskException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -12,7 +13,7 @@ import duke.ui.Ui;
  */
 public class ListCommand extends Command {
     /**
-     * Constructor for a DukeCommand.
+     * Constructor for a ListCommand.
      *
      * @param taskList Handles all operations regarding tasks.
      * @param storage  Save and load data from local directory.
@@ -30,7 +31,7 @@ public class ListCommand extends Command {
      * @return String representation of list of tasks.
      */
     @Override
-    public String runCommand() {
+    public String runCommand() throws NoSuchTaskException {
         return ui.guiListTaskMessage(taskList);
     }
 }

@@ -54,12 +54,8 @@ public class TaskList {
      *
      * @param taskNumber The index of task to be returned.
      * @return Task at the index task number minus one.
-     * @throws NoSuchTaskException If task index number does not exist.
      */
-    public Task getTask(int taskNumber) throws NoSuchTaskException {
-        if (taskNumber <= 0 || taskNumber > list.size()) {
-            throw new NoSuchTaskException(new Ui());
-        }
+    public Task getTask(int taskNumber) {
         return list.get(taskNumber - 1);
     }
 
@@ -103,6 +99,24 @@ public class TaskList {
         Task task = list.get(taskNumber - 1);
         assert task != null : "Task cannot be null.";
         task.markDone();
+        return task;
+    }
+
+    /**
+     * Marks a task as undone in the list.
+     * Throws an exception if task does not exist.
+     *
+     * @param taskNumber Index number of task to be marked as undone.
+     * @return Task that is marked as undone in the list.
+     * @throws NoSuchTaskException If task index number does not exist.
+     */
+    public Task markAsUndone(int taskNumber) throws NoSuchTaskException {
+        if (taskNumber <= 0 || taskNumber > list.size()) {
+            throw new NoSuchTaskException(new Ui());
+        }
+        Task task = list.get(taskNumber - 1);
+        assert task != null : "Task cannot be null.";
+        task.markUndone();
         return task;
     }
 

@@ -3,6 +3,7 @@ package duke.parser;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 import duke.command.AddCommand;
 import duke.command.Command;
@@ -11,9 +12,12 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.UndoCommand;
+import duke.command.UndoneCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.NoDateTimeException;
+import duke.exception.NoPreviousCommandException;
 import duke.exception.NoSuchCommandException;
 import duke.exception.NoTaskDescriptionException;
 import duke.storage.Storage;
@@ -37,6 +41,7 @@ public class Parser {
     private final TaskList taskList;
     private final Storage storage;
     private final Ui ui;
+    private final ArrayList<String> previousCommand;
 
     /**
      * Constructor for a Parser.
@@ -52,6 +57,7 @@ public class Parser {
         this.taskList = taskList;
         this.storage = storage;
         this.ui = ui;
+        this.previousCommand = new ArrayList<>();
     }
 
     /**
@@ -64,13 +70,13 @@ public class Parser {
      */
     public Command parseUserInput(String userInput) throws DukeException {
         assert !userInput.isBlank() : "There is no user input to be parsed.";
-        String[] splitUserInput = userInput.split(" ");
-        String commandType = splitUserInput[0];
-        String commandDetails = userInput.substring(userInput.indexOf(" ") + 1);
-        if (!(commandType.equals("list") || commandType.equals("bye"))
+        String commandType = getCommandType(userInput);
+        String commandDetails = getCommandDetails(userInput);
+        if (!(commandType.equals("list") || commandType.equals("bye") || commandType.equals("undo"))
                 && (commandDetails.isBlank() || !userInput.contains(" "))) {
             throw new NoTaskDescriptionException(ui);
         }
+        storePreviousCommand(userInput);
 
         switch (commandType) {
         case "list":
@@ -89,13 +95,16 @@ public class Parser {
             return new AddCommand(taskList, storage, ui, parseTaskInput(TaskType.TODO, userInput));
 
         case "done":
-            return new DoneCommand(taskList, storage, ui, Integer.parseInt(splitUserInput[1]));
+            return new DoneCommand(taskList, storage, ui, getTaskNumber(commandDetails));
 
         case "delete":
-            return new DeleteCommand(taskList, storage, ui, Integer.parseInt(splitUserInput[1]));
+            return new DeleteCommand(taskList, storage, ui, getTaskNumber(commandDetails));
 
         case "find":
             return new FindCommand(taskList, storage, ui, commandDetails);
+
+        case "undo":
+            return new UndoCommand(taskList, storage, ui, parseUndoInput(getPreviousCommand()));
 
         default:
             throw new NoSuchCommandException(ui);
@@ -103,6 +112,7 @@ public class Parser {
     }
 
     /**
+     * Method to determine what type of task is to be added.
      *
      * @param taskType  The type of task.
      * @param userInput User's input on what they want duke to do.
@@ -111,7 +121,7 @@ public class Parser {
      */
     public Task parseTaskInput(TaskType taskType, String userInput) throws DukeException {
         assert !userInput.isBlank() : "There is no user input to be parsed.";
-        String commandDetails = userInput.substring(userInput.indexOf(" ") + 1);
+        String commandDetails = getCommandDetails(userInput);
         if (commandDetails.isBlank() || !userInput.contains(" ")) {
             throw new NoTaskDescriptionException(ui);
         }
@@ -163,5 +173,112 @@ public class Parser {
         default:
             return new ToDo(commandDetails, false);
         }
+    }
+
+    /**
+     * Method to determine the command for undo.
+     *
+     * @param previousUserInput User's input on what they want duke to do.
+     * @return The respective Command object.
+     */
+    public Command parseUndoInput(String previousUserInput) {
+        assert !previousUserInput.isBlank() : "There is no user input to be parsed.";
+        System.out.println(previousUserInput);
+        String commandType = getCommandType(previousUserInput);
+        String commandDetails = getCommandDetails(previousUserInput);
+
+        switch (commandType) {
+        case "deadline": case "event": case "todo":
+            return new DeleteCommand(taskList, storage, ui, taskList.size());
+
+        case "done":
+            return new UndoneCommand(taskList, storage, ui, getTaskNumber(commandDetails));
+
+        case "delete":
+            Task task = TaskList.stringToTask(getDeletedTask(commandDetails));
+            return new AddCommand(taskList, storage, ui , task);
+        default:
+            return null;
+        }
+    }
+
+    /**
+     * Method to return the deleted task in string form.
+     *
+     * @param commandDetails The task number to execute command
+     *                       on and task in string representation.
+     * @return String representation of task previously deleted.
+     */
+    public String getDeletedTask(String commandDetails) {
+        int index = commandDetails.indexOf(" ");
+        return commandDetails.substring(index + 1);
+    }
+
+    /**
+     * Method to retrieve the type of command.
+     *
+     * @param userInput The user's input command.
+     * @return String representation of command type.
+     */
+    private String getCommandType(String userInput) {
+        return userInput.split(" ")[0];
+    }
+
+    /**
+     * Method to retrieve the details of command.
+     *
+     * @param userInput The user's input command.
+     * @return String representation of command details.
+     */
+    private String getCommandDetails(String userInput) {
+        int index = userInput.indexOf(" ");
+        return userInput.substring(index + 1);
+    }
+
+    /**
+     * Method to retrieve task number from user input.
+     *
+     * @param commandDetails The task number to execute command on.
+     * @return Task number of task.
+     */
+    private int getTaskNumber(String commandDetails) {
+        return Integer.parseInt(commandDetails);
+    }
+
+    /**
+     * Undo the previous user command.
+     *
+     * @return Previously executed user command that has yet to be undone.
+     * @throws NoPreviousCommandException if there are no more commands to undo.
+     */
+    private String getPreviousCommand() throws NoPreviousCommandException {
+        try {
+            return previousCommand.remove(previousCommand.size() - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new NoPreviousCommandException(ui);
+        }
+    }
+
+    /**
+     * Stores only commands that can be undone.
+     *
+     * @param userInput The user's input command.
+     */
+    private void storePreviousCommand(String userInput) {
+        assert !userInput.isBlank() : "There is no user input to be stored.";
+        String commandType = getCommandType(userInput);
+        String commandDetails = getCommandDetails(userInput);
+
+        switch (commandType) {
+        case "deadline": case "done": case "event": case "todo":
+            previousCommand.add(userInput);
+            break;
+        case "delete":
+            System.out.println(userInput + taskList.getTask(getTaskNumber(commandDetails)).toString());
+            previousCommand.add(userInput + " " + taskList.getTask(getTaskNumber(commandDetails)).toString());
+            break;
+        default:
+        }
+
     }
 }

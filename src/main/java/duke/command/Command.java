@@ -17,7 +17,7 @@ public abstract class Command {
     protected final Ui ui;
 
     /**
-     * Constructor for a DukeCommand.
+     * Constructor for a Command.
      *
      * @param taskList Handles all operations regarding tasks.
      * @param storage  Save and load data from local directory.

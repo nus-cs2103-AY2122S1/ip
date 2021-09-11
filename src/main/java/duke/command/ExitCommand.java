@@ -12,7 +12,7 @@ import duke.ui.Ui;
  */
 public class ExitCommand extends Command {
     /**
-     * Constructor for a DukeCommand.
+     * Constructor for a ExitCommand.
      *
      * @param taskList Handles all operations regarding tasks.
      * @param storage  Save and load data from local directory.

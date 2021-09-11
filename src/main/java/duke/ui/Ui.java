@@ -2,7 +2,6 @@ package duke.ui;
 
 import java.util.ArrayList;
 
-import duke.exception.NoSuchTaskException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -73,19 +72,26 @@ public class Ui {
     }
 
     /**
+     * Message to notify users that a task has been
+     * marked as undone in the task list.
+     *
+     * @param task Task to be marked as undone.
+     * @return String representation when Duke successfully marks a task as undone.
+     */
+    public String guiTaskUndoneMessage(Task task) {
+        return "Nice! I've marked this task as undone:\n" + task.getStatus();
+    }
+
+    /**
      * Message to list out all the tasks in the task list.
      *
      * @param taskList The task list to be printed.
      * @return String representation of the list of tasks.
      */
-    public String guiListTaskMessage(TaskList taskList) throws NoSuchTaskException {
+    public String guiListTaskMessage(TaskList taskList) {
         StringBuilder msg = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 1; i <= taskList.size(); i++) {
-            try {
-                msg.append(i).append(".").append(taskList.getTask(i).getStatus()).append("\n");
-            } catch (NoSuchTaskException e) {
-                throw new NoSuchTaskException(this);
-            }
+            msg.append(i).append(".").append(taskList.getTask(i).getStatus()).append("\n");
         }
         return msg.toString();
     }
@@ -100,7 +106,7 @@ public class Ui {
     }
 
     /**
-     * Prints all error messages in a certain format.
+     * Returns string representation of all error messages.
      *
      * @param message Error message to be printed.
      * @return String representation of error message.
@@ -110,7 +116,7 @@ public class Ui {
     }
 
     /**
-     * Prints the list of task related to the keyword input by user.
+     * Returns string representation of task related to the keyword input by user.
      *
      * @param taskList List of related tasks.
      * @return String representation of related tasks.
@@ -122,5 +128,15 @@ public class Ui {
                     .append(". ").append(taskList.get(i - 1).getStatus());
         }
         return relatedTaskMessage.toString();
+    }
+
+    /**
+     * Message to notify user that previous Command
+     * has been undone.
+     *
+     * @return String representation of undo command message.
+     */
+    public String guiUndoMessage() {
+        return "Your most recent command has been reverted!!!\n";
     }
 }
