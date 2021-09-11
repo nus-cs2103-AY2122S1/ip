@@ -36,6 +36,7 @@ public class AddCommand extends Command {
      */
     @Override
     public String runCommand() {
+        assert task != null : "There is no task.";
         taskList.addTask(task);
         storage.save(taskList.getList());
         return ui.guiTaskAddedMessage(task, taskList.size());

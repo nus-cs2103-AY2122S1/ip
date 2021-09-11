@@ -54,8 +54,12 @@ public class TaskList {
      *
      * @param taskNumber The index of task to be returned.
      * @return Task at the index task number minus one.
+     * @throws NoSuchTaskException If task index number does not exist.
      */
-    public Task getTask(int taskNumber) {
+    public Task getTask(int taskNumber) throws NoSuchTaskException {
+        if (taskNumber <= 0 || taskNumber > list.size()) {
+            throw new NoSuchTaskException(new Ui());
+        }
         return list.get(taskNumber - 1);
     }
 
@@ -65,6 +69,7 @@ public class TaskList {
      * @param task Task to be added to the list.
      */
     public void addTask(Task task) {
+        assert task != null : "Task cannot be null.";
         list.add(task);
     }
 
@@ -77,7 +82,7 @@ public class TaskList {
      * @throws NoSuchTaskException If task index number does not exist.
      */
     public Task deleteTask(int taskNumber) throws NoSuchTaskException {
-        if (taskNumber < 0 || taskNumber > list.size()) {
+        if (taskNumber <= 0 || taskNumber > list.size()) {
             throw new NoSuchTaskException(new Ui());
         }
         return list.remove(taskNumber - 1);
@@ -92,10 +97,11 @@ public class TaskList {
      * @throws NoSuchTaskException If task index number does not exist.
      */
     public Task markAsDone(int taskNumber) throws NoSuchTaskException {
-        if (taskNumber < 0 || taskNumber > list.size()) {
+        if (taskNumber <= 0 || taskNumber > list.size()) {
             throw new NoSuchTaskException(new Ui());
         }
         Task task = list.get(taskNumber - 1);
+        assert task != null : "Task cannot be null.";
         task.markDone();
         return task;
     }

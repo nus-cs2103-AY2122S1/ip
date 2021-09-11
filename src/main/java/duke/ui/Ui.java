@@ -2,6 +2,7 @@ package duke.ui;
 
 import java.util.ArrayList;
 
+import duke.exception.NoSuchTaskException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -77,10 +78,14 @@ public class Ui {
      * @param taskList The task list to be printed.
      * @return String representation of the list of tasks.
      */
-    public String guiListTaskMessage(TaskList taskList) {
+    public String guiListTaskMessage(TaskList taskList) throws NoSuchTaskException {
         StringBuilder msg = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 1; i <= taskList.size(); i++) {
-            msg.append(i).append(".").append(taskList.getTask(i).getStatus()).append("\n");
+            try {
+                msg.append(i).append(".").append(taskList.getTask(i).getStatus()).append("\n");
+            } catch (NoSuchTaskException e) {
+                throw new NoSuchTaskException(this);
+            }
         }
         return msg.toString();
     }

@@ -37,6 +37,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String runCommand() throws NoSuchTaskException {
+        assert taskNumber <= taskList.size() : "There is no such task.";
         Task deletedTask = taskList.deleteTask(taskNumber);
         storage.save(taskList.getList());
         return ui.guiTaskDeletedMessage(deletedTask, taskList.size());

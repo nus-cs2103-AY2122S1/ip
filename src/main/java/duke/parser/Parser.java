@@ -46,6 +46,9 @@ public class Parser {
      * @param ui       Prints message with respect to user input.
      */
     public Parser(TaskList taskList, Storage storage, Ui ui) {
+        assert taskList != null : "There should be a task list.";
+        assert storage != null : "There should be a storage.";
+        assert ui != null : "There should be a ui.";
         this.taskList = taskList;
         this.storage = storage;
         this.ui = ui;
@@ -60,11 +63,12 @@ public class Parser {
      * @throws DukeException If user input is invalid.
      */
     public Command parseUserInput(String userInput) throws DukeException {
+        assert !userInput.isBlank() : "There is no user input to be parsed.";
         String[] splitUserInput = userInput.split(" ");
         String commandType = splitUserInput[0];
         String commandDetails = userInput.substring(userInput.indexOf(" ") + 1);
         if (!(commandType.equals("list") || commandType.equals("bye"))
-                && (commandDetails.isBlank() || userInput.indexOf(" ") == -1)) {
+                && (commandDetails.isBlank() || !userInput.contains(" "))) {
             throw new NoTaskDescriptionException(ui);
         }
 
@@ -106,9 +110,9 @@ public class Parser {
      * @throws DukeException If description of task is invalid.
      */
     public Task parseTaskInput(TaskType taskType, String userInput) throws DukeException {
-        String[] splitUserInput = userInput.split(" ");
+        assert !userInput.isBlank() : "There is no user input to be parsed.";
         String commandDetails = userInput.substring(userInput.indexOf(" ") + 1);
-        if (commandDetails.isBlank() || userInput.indexOf(" ") == -1) {
+        if (commandDetails.isBlank() || !userInput.contains(" ")) {
             throw new NoTaskDescriptionException(ui);
         }
 

@@ -7,26 +7,14 @@ package duke.task;
  * @version Duke Level-10
  */
 public enum TaskType {
-    DEADLINE("D"),
-    EVENT("E"),
-    TODO("T");
-
-    private final String taskType;
+    DEADLINE(),
+    EVENT(),
+    TODO();
 
     /**
      * Constructor for task type.
      *
-     * @param taskType Type of task.
      */
-    private TaskType(final String taskType) {
-        this.taskType = taskType;
-    }
-
-    /**
-     * Returns the character representation of task type.
-     * @return Character representation of task type.
-     */
-    public String getTaskType() {
-        return taskType;
+    TaskType() {
     }
 }

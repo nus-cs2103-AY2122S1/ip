@@ -36,6 +36,7 @@ public class DoneCommand extends Command {
      */
     @Override
     public String runCommand() throws NoSuchTaskException {
+        assert taskNumber <= taskList.size() : "There is no such task.";
         storage.save(taskList.getList());
         return ui.guiTaskDoneMessage(taskList.markAsDone(taskNumber));
     }

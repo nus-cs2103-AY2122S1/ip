@@ -22,6 +22,7 @@ public abstract class Task {
      * @param taskType    Type of the task.
      */
     protected Task(String description, boolean isDone, TaskType taskType) {
+        assert !description.isBlank() : "Description of task cannot be blank.";
         this.description = description;
         this.isDone = isDone;
         this.taskType = taskType;
