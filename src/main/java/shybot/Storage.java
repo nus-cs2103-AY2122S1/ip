@@ -38,8 +38,6 @@ public class Storage {
      *                           does not exist but cannot be created, or cannot be opened for any other reason.
      */
     public void save(TaskList tasks) throws ShyBotIoException {
-
-
         try (FileWriter fw = new FileWriter(filePath)) {
             StringBuilder dataString = new StringBuilder();
             for (Task task : tasks) {
@@ -75,8 +73,7 @@ public class Storage {
             throw new ShyBotParseException();
         }
     }
-
-
+    
     private String[] getTagsFromRow(String[] row, int tagsIndex) {
         String[] tags = row.length > tagsIndex ? row[tagsIndex].split(" ") : new String[0];
         return tags;

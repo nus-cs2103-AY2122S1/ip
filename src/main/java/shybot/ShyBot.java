@@ -33,7 +33,6 @@ public class ShyBot {
         } else {
             this.setUpUi(filePath);
         }
-
     }
 
     private void setUpGui(String filePath) {
