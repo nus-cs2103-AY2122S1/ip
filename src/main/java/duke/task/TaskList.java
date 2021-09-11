@@ -134,11 +134,7 @@ public class TaskList {
      */
     public ArrayList<Task> findRelatedTask(String keyword) {
         ArrayList<Task> relatedTaskList = new ArrayList<>();
-        for (Task task: this.list) {
-            if (task.containsKeyword(keyword)) {
-                relatedTaskList.add(task);
-            }
-        }
+        list.stream().filter(task -> task.containsKeyword(keyword)).forEach(relatedTaskList::add);
         return relatedTaskList;
     }
 }

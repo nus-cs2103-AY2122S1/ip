@@ -112,7 +112,7 @@ public class Ui {
      */
     public String getFindTask(ArrayList<Task> taskList) {
         StringBuilder relatedTaskMessage = new StringBuilder("Here are the matching tasks in your list:");
-        for (int i = 1; i < taskList.size(); i++) {
+        for (int i = 1; i <= taskList.size(); i++) {
             relatedTaskMessage.append("\n").append(i)
                     .append(". ").append(taskList.get(i - 1).getStatus());
         }

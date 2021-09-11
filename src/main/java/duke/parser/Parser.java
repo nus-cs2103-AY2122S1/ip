@@ -91,7 +91,7 @@ public class Parser {
             return new DeleteCommand(taskList, storage, ui, Integer.parseInt(splitUserInput[1]));
 
         case "find":
-            return new FindCommand(taskList, storage, ui, userInput.substring(userInput.indexOf(" ") + 1));
+            return new FindCommand(taskList, storage, ui, commandDetails);
 
         default:
             throw new NoSuchCommandException(ui);
