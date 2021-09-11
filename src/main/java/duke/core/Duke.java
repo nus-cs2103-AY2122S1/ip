@@ -203,7 +203,7 @@ public class Duke extends Application {
                         s2 = task.get(i).getName() + " " + "(" + " " + ((Event) task.get(i)).getTime() + " )";
                     } else if (task.get(i) instanceof RecurringTask) {
                         s += (i + 1) + "." + " [R]";
-                        s2 = task.get(i).getName() + " " + "(" + " " + ((RecurringTask) task.get(i)).getTime() + " )";
+                        s2 = task.get(i).getName() + " " + "(" + " " + ((RecurringTask) task.get(i)).getTime() + " ) " + ((RecurringTask) task.get(i)).getCounter() + " lessons";
                     }
                     if (task.get(i).isDone() == false) {
                         s += "[ ] " + s2;
@@ -222,12 +222,17 @@ public class Duke extends Application {
         case DONE:
             try {
                 Integer num = Integer.valueOf(keyword[1]) - 1;
-                task.get(num).setDone(true);
-                database.updateData(task.get(num), num + 1);
+                if (task.get(num) instanceof RecurringTask) {
+                    int counter = ((RecurringTask) task.get(num)).getCounter();
+                    ((RecurringTask) task.get(num)).setCounter(counter - 1);
+                    database.updateData(task.get(num), num + 1);
+                } else {
+                    task.get(num).setDone(true);
+                    database.updateData(task.get(num), num + 1);
+                }
                 String s = indentation;
                 String s2 = "";
                 if (task.get(num) instanceof Todo) {
-
                     s += (task.get(num).getIndex() + 1) + "." + " [T]";
                     s2 = task.get(num).getName();
                 } else if (task.get(num) instanceof Deadline) {
@@ -236,16 +241,24 @@ public class Duke extends Application {
                 } else if (task.get(num) instanceof Event) {
                     s += (task.get(num).getIndex() + 1) + "." + " [E]";
                     s2 = task.get(num).getName() + " " + "(" + " " + ((Event) task.get(num)).getTime() + " )";
+
                 } else if (task.get(num) instanceof RecurringTask) {
                     s += (task.get(num).getIndex() + 1) + "." + " [R]";
-                    s2 = task.get(num).getName() + " " + "(" + " " + ((Event) task.get(num)).getTime() + " )";
+                    s2 = task.get(num).getName() + " " + "(" + " " + ((RecurringTask) task.get(num)).getTime() + " ) " + ((RecurringTask) task.get(num)).getCounter() + " lessons";
+
                 }
 
-                s += "[X]" + s2;
-                response += ui.done_message + "\n";
+
+                if (task.get(num) instanceof RecurringTask) {
+                    s += "[ ]" + s2;
+                    response += "Nice! I've remove one lesson from this task:\n";
+                } else {
+                    s += "[X]" + s2;
+                    response += ui.done_message + "\n";
+
+                }
                 response += s;
                 return response;
-
 
             } catch (NullPointerException e) {
                 return ui.no_task_message;
@@ -282,7 +295,6 @@ public class Duke extends Application {
                 task.remove(num.intValue());
                 response += s + "\n";
                 response += indentation + "Now you have " + task.size() + " " + "tasks in the list." + "\n";
-
                 return response;
             } catch (NullPointerException e) {
                 return ui.no_task_message;
@@ -332,11 +344,14 @@ public class Duke extends Application {
                     }
                     String taskname_recur = "";
                     String tasktime_recur = "";
+                    int counter = 0;
                     boolean timepart_recur = false;
                     for (int i = 1; i < keyword.length; i++) {
-                        if (keyword[i].startsWith("/")) {
+                        if (keyword[i].startsWith("/") && timepart_recur == false) {
                             timepart_recur = true;
                             tasktime_recur = keyword[i].substring(1) + ":";
+                        } else if (keyword[i].startsWith("/") && timepart_recur == true) {
+                            counter = Integer.valueOf(keyword[i].substring(1));
                         } else if (timepart_recur) {
                             tasktime_recur += " " + keyword[i];
                         } else {
@@ -350,12 +365,12 @@ public class Duke extends Application {
                     if (tasktime_recur.equals("")) {
                         return ui.lack_content_message;
                     }
-                    Task recur = new RecurringTask(taskname_recur, false, tasktime_recur);
+                    Task recur = new RecurringTask(taskname_recur, false, tasktime_recur, counter);
                     task.add(recur);
                     database.writeToDatabase(recur);
                     taskNum++;
                     response += "Got it. I've added this task:" + "\n";
-                    response += indentation + "   [R][ ] " + taskname_recur + " ( " + tasktime_recur + " )\n";
+                    response += indentation + "   [R][ ] " + taskname_recur + " ( " + tasktime_recur + " ) "+ counter + " lessons\n";
                     response += indentation + "Now you have" + " " + taskNum + " " + "tasks in the list \n";
                     return response;
                 case "todo":
@@ -525,6 +540,9 @@ public class Duke extends Application {
                     } else if (task.get(num) instanceof Event) {
                         s += (task.get(num).getIndex() + 1) + "." + " [E]";
                         s2 = task.get(num).getName() + " " + "(" + " " + ((Event) task.get(num)).getTime() + " )";
+                    } else if (task.get(num) instanceof RecurringTask) {
+                        s += (task.get(num).getIndex() + 1) + "." + " [R]";
+                        s2 = task.get(num).getName() + " " + "(" + " " + ((RecurringTask) task.get(num)).getTime() + " )";
                     }
                     s += "[X]" + s2;
                     System.out.println(s);
@@ -618,6 +636,7 @@ public class Duke extends Application {
                             System.out.println(ui.lack_content_message);
                             break;
                         }
+                        int counter = 0;
                         String taskname_recur = "";
                         String tasktime_recur = "";
                         boolean timepart_recur = false;
@@ -625,6 +644,8 @@ public class Duke extends Application {
                             if (keyword[i].startsWith("/")) {
                                 timepart_recur = true;
                                 tasktime_recur = keyword[i].substring(1) + ":";
+                            } else if (keyword[i].startsWith("/") && timepart_recur == true) {
+                                counter = Integer.valueOf(keyword[i].substring(1));
                             } else if (timepart_recur) {
                                 tasktime_recur += " " + keyword[i];
                             } else {
@@ -639,7 +660,7 @@ public class Duke extends Application {
                             System.out.println(ui.lack_content_message);
                             break;
                         }
-                        Task recur = new RecurringTask(taskname_recur, false, tasktime_recur);
+                        Task recur = new RecurringTask(taskname_recur, false, tasktime_recur, counter);
                         task.add(recur);
                         database.writeToDatabase(recur);
                         taskNum++;

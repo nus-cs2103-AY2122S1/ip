@@ -6,6 +6,23 @@ public class RecurringTask extends Task {
     private String name;
     private boolean isDone;
     private String time;
+    private int counter;
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getCounter() {
+        return counter;
+    }
 
     /**
      * constructor
@@ -13,11 +30,12 @@ public class RecurringTask extends Task {
      * @param isDone
      * @param time
      */
-    public RecurringTask(String name, boolean isDone, String time) {
+    public RecurringTask(String name, boolean isDone, String time, int counter) {
         super();
         this.name = name;
         this.isDone = isDone;
         this.time = time;
+        this.counter = counter;
     }
 
     @Override
@@ -30,6 +48,11 @@ public class RecurringTask extends Task {
         return isDone;
     }
 
+    @Override
+    public String toString() {
+        return "R" + " " + name + " "
+                + "/" + time + " " + "/" + counter + " " + isDone + '\n';
+    }
 
     /**
      * get time in a certain format
@@ -59,9 +82,4 @@ public class RecurringTask extends Task {
         isDone = done;
     }
 
-    @Override
-    public String toString() {
-        return "R" + " " + name + " "
-                + "/" + time + " " + isDone + '\n';
-    }
 }

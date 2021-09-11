@@ -119,11 +119,14 @@ public class Database {
         case "R":
             String taskname_recur = "";
             String tasktime_recur = "";
+            int counter = 0;
             boolean timepart_recur = false;
             for (int i = 1; i < s.length - 1; i++) {
-                if (s[i].startsWith("/")) {
+                if (s[i].startsWith("/") && timepart_recur == false) {
                     timepart_recur = true;
                     tasktime_recur = s[i].substring(1);
+                } else if (s[i].startsWith("/") && timepart_recur == true) {
+                    counter = Integer.valueOf(s[i].substring(1));
                 } else if (timepart_recur) {
                     tasktime_recur += " " + s[i];
                 } else {
@@ -134,7 +137,7 @@ public class Database {
                     }
                 }
             }
-            RecurringTask recurringTask = new RecurringTask(taskname_recur, isDone, tasktime_recur);
+            RecurringTask recurringTask = new RecurringTask(taskname_recur, isDone, tasktime_recur, counter);
             return recurringTask;
         default:
             break;
