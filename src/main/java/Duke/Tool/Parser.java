@@ -6,15 +6,7 @@ import Duke.Exceptions.NoDescriptionException;
 import Duke.Exceptions.NoCommandException;
 import Duke.Exceptions.NoTimeException;
 import Duke.Exceptions.WrongTimeFormatException;
-import Duke.Tasks.Find;
-import Duke.Tasks.Task;
-import Duke.Tasks.Done;
-import Duke.Tasks.Delete;
-import Duke.Tasks.Todo;
-import Duke.Tasks.Deadline;
-import Duke.Tasks.Event;
-import Duke.Tasks.List;
-import Duke.Tasks.Exit;
+import Duke.Tasks.*;
 
 import java.time.LocalDateTime;
 import java.lang.String;
@@ -27,7 +19,7 @@ public class Parser {
 
     private final static DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private static enum Operation {
-        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, FIND
+        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, FIND, PERIOD
     }
 
     /**
@@ -169,6 +161,27 @@ public class Parser {
 
                 }
 
+            case PERIOD:
+                String subString_period = cmd.substring(7);
+                if (subString_period.split(" /from ").length == 1) {
+                    throw new NoTimeException(instruction.name());
+
+                } else {
+                    try{
+                        int endOfDescription = subString_period.indexOf("/from ");
+                        int endOfStartTime = subString_period.indexOf("/to ");
+                        String description = subString_period.substring(0, endOfDescription - 1);
+                        String startTime = subString_period.substring(endOfDescription + 6, endOfStartTime - 1);
+                        String endTime = subString_period.substring(endOfStartTime + 4);
+                        LocalDateTime startDate =  LocalDateTime.parse(startTime, timeFormat);
+                        LocalDateTime endDate = LocalDateTime.parse(endTime, timeFormat);
+                        return new Period(description, startDate, endDate, false);
+                    } catch (Exception e) {
+                        throw new WrongTimeFormatException(subString_period.split(" /at ")[1]);
+                    }
+
+                }
+
             default:
                 throw new NoCommandException(instruction.name());
             }
@@ -250,6 +263,9 @@ public class Parser {
 
             case FIND:
                 return find(cmd, tasks);
+
+            case PERIOD:
+                return addTask(cmd, tasks);
 
             default:
                 throw new NoCommandException(cmd);

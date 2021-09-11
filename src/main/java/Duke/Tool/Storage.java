@@ -1,9 +1,6 @@
 package Duke.Tool;
 
-import Duke.Tasks.Deadline;
-import Duke.Tasks.Event;
-import Duke.Tasks.Task;
-import Duke.Tasks.Todo;
+import Duke.Tasks.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -54,6 +51,8 @@ public class Storage {
                     task.add(new Deadline(curTask[2], LocalDateTime.parse(curTask[3], timeFormat), isDone));
                 } else if(curTask[0].equals("E")) {
                     task.add(new Event(curTask[2], LocalDateTime.parse(curTask[3], timeFormat), isDone));
+                } else if(curTask[0].equals("P")) {
+                    task.add(new Period(curTask[2], LocalDateTime.parse(curTask[3], timeFormat), LocalDateTime.parse(curTask[4], timeFormat), isDone));
                 } else {}
             }
 

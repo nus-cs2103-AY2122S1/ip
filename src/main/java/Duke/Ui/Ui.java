@@ -85,7 +85,7 @@ public class Ui {
      */
     public String showAddOnTask(TaskList tasks, int numAdded) {
         return "Got it. I've added this task:\n" +
-                INDENTATION + tasks.get(numAdded) + //toString in Deadline or Event
+                INDENTATION + tasks.get(numAdded) + "\n" + //toString in Deadline or Event or Period
                 "Now you have " + (numAdded + 1) + " tasks in the list.";
     }
 

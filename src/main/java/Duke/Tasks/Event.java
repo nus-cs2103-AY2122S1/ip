@@ -66,7 +66,7 @@ public class Event extends Task {
     }
 
     /**
-     * Overridden toString method to print Event task details
+     * Overrides toString method to print Event task details
      * @return String of event task details
      */
     @Override
