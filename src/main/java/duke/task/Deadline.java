@@ -23,6 +23,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, boolean isDone, LocalDateTime by) {
         super(description, isDone, TaskType.DEADLINE);
+        assert !description.isBlank() : "Description of deadline cannot be blank.";
         this.by = by;
     }
 

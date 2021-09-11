@@ -23,6 +23,7 @@ public class Event extends Task {
      */
     public Event(String description, boolean isDone, LocalDateTime at) {
         super(description, isDone, TaskType.EVENT);
+        assert !description.isBlank() : "Description of event cannot be blank.";
         this.at = at;
     }
 

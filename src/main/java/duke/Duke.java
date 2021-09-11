@@ -41,11 +41,13 @@ public class Duke {
     protected String getResponse(String input) {
         if (isActive) {
             try {
-                Command command = parser.parseUserInput(input);
-                if (command instanceof ExitCommand) {
-                    isActive = false;
+                if (!input.isBlank()) {
+                    Command command = parser.parseUserInput(input);
+                    if (command instanceof ExitCommand) {
+                        isActive = false;
+                    }
+                    return command.runCommand();
                 }
-                return command.runCommand();
             } catch (DukeException e) {
                 return e.getMessage();
             }

@@ -69,6 +69,7 @@ public class Storage {
                 Task task = TaskList.stringToTask(curr);
                 taskList.add(task);
             }
+            assert !sc.hasNextLine() : "There are tasks not loaded.";
             sc.close();
         } catch (FileNotFoundException e) {
             System.out.println("No data found, initializing empty list.");
