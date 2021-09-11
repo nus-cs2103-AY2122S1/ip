@@ -1,10 +1,11 @@
 package duke.task;
 
-import duke.exception.InvalidInputException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.InvalidInputException;
 
 /**
  * Represents a deadline task. A deadline task has to be completed by a certain date and time.
@@ -14,7 +15,7 @@ public class Deadline extends Task {
     private static final char LABEL = 'D';
     private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a");
-    private LocalDateTime deadline;
+    private final LocalDateTime deadline;
 
     /**
      * Constructor.

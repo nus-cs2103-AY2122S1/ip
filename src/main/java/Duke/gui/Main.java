@@ -52,7 +52,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(daC);
 
-            stage.setTitle("Duke");
+            stage.setTitle("Dog-and-Cat (DaC)");
             stage.setResizable(false);
             stage.show();
 
