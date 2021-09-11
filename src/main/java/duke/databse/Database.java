@@ -18,6 +18,7 @@ public class Database {
 
     private File file;
     private UI ui;
+    private String filepath;
 
     /**
      * Constructor for database
@@ -25,13 +26,24 @@ public class Database {
      */
     public Database(String filePath) {
         try {
+            this.filepath = filePath;
+
             file = new File(filePath);
             ui = new UI();
-            if (file.createNewFile()) {
-                System.out.println(ui.creating_file_message);
-            } else {
-                System.out.println(ui.reading_file_message);
+
+            if (!file.getParentFile().exists()) {
+                boolean hasDir = file.getParentFile().mkdir();
+
             }
+
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+//            if (file.createNewFile()) {
+//                System.out.println(ui.creating_file_message);
+//            } else {
+//                System.out.println(ui.reading_file_message);
+//            }
         } catch (IOException e) {
             System.out.println("An error occurred in creating or opening file.");
         }
@@ -152,7 +164,7 @@ public class Database {
     public void writeToDatabase(Task todo) {
         try {
             BufferedWriter out = new BufferedWriter(
-                    new FileWriter("todoList.txt", true));
+                    new FileWriter(filepath, true));
             out.write(todo.toString());
             out.close();
         }

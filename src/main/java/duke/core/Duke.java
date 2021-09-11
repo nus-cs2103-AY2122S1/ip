@@ -1,5 +1,7 @@
 package duke.core;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -146,7 +148,7 @@ public class Duke extends Application {
         if (input.equals("")) {
             return ui.logo + "\n" + "\n" + ui.greeting + "\n";
         }
-        database = new Database("todoList.txt");
+        database = new Database("data/todoList2.txt");
         ArrayList<Task> task = database.getData();
         int taskNum = task.size();
         String indentation = "       ";
@@ -313,12 +315,21 @@ public class Duke extends Application {
                     String taskname_ddl = "";
                     String tasktime_ddl = "";
                     boolean timepart_ddl = false;
+                    int count = 0;
                     for (int i = 1; i < keyword.length; i++) {
                         if (keyword[i].startsWith("/")) {
                             timepart_ddl = true;
                             tasktime_ddl = keyword[i].substring(1) + ":";
-                        } else if (timepart_ddl) {
+                        } else if (timepart_ddl ) {
                             tasktime_ddl += " " + keyword[i];
+                            if (count == 0) {
+                                try {
+                                    LocalDate date = LocalDate.parse(keyword[i]);
+                                } catch (DateTimeException e) {
+                                    return "Please follow the template:\n deadline [name] /by yyyy-mm-dd ....";
+                                }
+                            }
+                            count++;
                         } else {
                             if (keyword[i + 1].startsWith("/")) {
                                 taskname_ddl += keyword[i];
@@ -330,6 +341,7 @@ public class Duke extends Application {
                     if (tasktime_ddl.equals("")) {
                         return ui.lack_content_message;
                     }
+
                     Task ddl = new Deadline(taskname_ddl, false, tasktime_ddl);
                     task.add(ddl);
                     database.writeToDatabase(ddl);
@@ -402,6 +414,7 @@ public class Duke extends Application {
 
                     String taskname_event = "";
                     String tasktime_event = "";
+                    int count1 = 0;
                     boolean timepart_event = false;
                     for (int i = 1; i < keyword.length; i++) {
                         if (keyword[i].startsWith("/")) {
@@ -409,6 +422,15 @@ public class Duke extends Application {
                             tasktime_event = keyword[i].substring(1) + ":";
                         } else if (timepart_event) {
                             tasktime_event += " " + keyword[i];
+                            System.out.println(keyword[i]);
+                            if (count1 == 0) {
+                                try {
+                                    LocalDate date = LocalDate.parse(keyword[i]);
+                                } catch (DateTimeException e) {
+                                    return "Please follow the template: \n event [name] /at yyyy-mm-dd ....";
+                                }
+                            }
+                            count1++;
                         } else {
                             if (keyword[i + 1].startsWith("/")) {
                                 taskname_event += keyword[i];
