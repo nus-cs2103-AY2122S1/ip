@@ -6,8 +6,8 @@ package duke.task;
  */
 public abstract class Task {
 
-    private static final String DONE_MARKER = "X";
     protected static final String DELIMITER = " | ";
+    private static final String DONE_MARKER = "X";
 
     private String name;
     private boolean isDone;

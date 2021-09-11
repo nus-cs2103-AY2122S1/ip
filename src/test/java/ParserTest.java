@@ -3,8 +3,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import duke.exception.DukeException;
 import duke.Parser;
+import duke.exception.DukeException;
 
 public class ParserTest {
 
@@ -14,7 +14,7 @@ public class ParserTest {
             assertEquals(0, Parser.parse("abc"));
             fail(); // should not reach this line
         } catch (DukeException e) {
-            assertEquals("you typed in something i cannot recognise!", e.getMessage());
+            assertEquals("oh no! you typed in something i cannot recognise!", e.getMessage());
         }
     }
 

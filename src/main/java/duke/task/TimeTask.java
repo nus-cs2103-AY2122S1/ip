@@ -25,6 +25,11 @@ public abstract class TimeTask extends Task {
         editTime(time);
     }
 
+    /**
+     * Edits the time of a task to a given new Time
+     *
+     * @param newTime the given new Time.
+     */
     public void editTime(String newTime) {
 
         // cannot have both timeDate and timeString containing values

@@ -15,7 +15,7 @@ public class EventTest {
 
     @Test
     public void testDateHandling() {
-        assertEquals("[E][ ] abc def (at: 05/12/2021)", new Event("abc def","2021-12-05").toString());
+        assertEquals("[E][ ] abc def (at: 05/12/2021)", new Event("abc def", "2021-12-05").toString());
     }
 
     @Test
@@ -33,6 +33,6 @@ public class EventTest {
         e.markDone();
         assertEquals("E | 1 | abc def | today", e.printToFile());
 
-        assertEquals("E | 0 | abc def | 2021-12-05", new Event("abc def","2021-12-05").printToFile());
+        assertEquals("E | 0 | abc def | 2021-12-05", new Event("abc def", "2021-12-05").printToFile());
     }
 }

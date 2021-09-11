@@ -59,7 +59,7 @@ public class AddCommand extends Command {
             throw new DukeException(BAD_ADD_ERROR_MSG);
         }
 
-        assert newTask!= null;
+        assert newTask != null;
 
         tasks.add(newTask);
         storage.save(tasks);

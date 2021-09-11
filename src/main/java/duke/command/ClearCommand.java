@@ -10,7 +10,7 @@ import duke.task.TaskList;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    private static final String SUCCESS_MSG = "All entries in the list of tasks have been removed. To undo, type restore";
+    private static final String SUCCESS_MSG = "All tasks have been removed. To undo, type restore";
 
     public ClearCommand() {
 

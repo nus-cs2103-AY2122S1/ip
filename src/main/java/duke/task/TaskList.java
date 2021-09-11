@@ -2,7 +2,6 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
-import java.util.Locale;
 
 /**
  * The TaskList encapsulates a list of Tasks.

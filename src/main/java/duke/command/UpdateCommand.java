@@ -19,12 +19,26 @@ public class UpdateCommand extends Command {
     private String newName;
     private String newTime;
 
+    /**
+     * Creates new UpdateCommand that updates both the name and time of a given task.
+     *
+     * @param taskNum the index of the specified task
+     * @param newName the given new name of the task
+     * @param newTime the given new time of the task
+     */
     public UpdateCommand(int taskNum, String newName, String newTime) {
         this.taskNum = taskNum;
         this.newName = newName;
         this.newTime = newTime;
     }
 
+    /**
+     * Creates new UpdateCommand that updates either the name or time of a given task.
+     *
+     * @param taskNum the index of the specified task
+     * @param newField the given new name or time of the task
+     * @param isName true if name is updated, false if time is updated.
+     */
     public UpdateCommand(int taskNum, String newField, boolean isName) {
         this.taskNum = taskNum;
         if (isName) {

@@ -1,6 +1,15 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.ClearCommand;
+import duke.command.Command;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.RemoveCommand;
+import duke.command.RestoreCommand;
+import duke.command.UpdateCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidTaskNumException;
 import duke.exception.MissingArgumentException;
@@ -57,9 +66,9 @@ public class Parser {
 
     private static Command prepareAdd(String[] args) throws DukeException {
 
-        checkStrArrayMinLength(args, 2, new MissingArgumentException());
+        checkStrArrLength(args, 2, new MissingArgumentException());
         String[] taskArgs = splitStringBySpace(args[1], 2);
-        checkStrArrayMinLength(taskArgs, 2, new MissingArgumentException());
+        checkStrArrLength(taskArgs, 2, new MissingArgumentException());
 
         String taskCommandWord = taskArgs[0];
         String taskDescription = taskArgs[1];
@@ -77,7 +86,7 @@ public class Parser {
     }
 
     private static Command prepareDone(String[] args) throws DukeException {
-        checkStrArrayMinLength(args, 2, new MissingTaskNumException("mark done"));
+        checkStrArrLength(args, 2, new MissingTaskNumException("mark done"));
         int num = parseNum(args[1]);
         return new DoneCommand(num - 1);
     }
@@ -88,7 +97,7 @@ public class Parser {
     }
 
     private static Command prepareRemove(String[] args) throws DukeException {
-        checkStrArrayMinLength(args, 2, new MissingTaskNumException("remove"));
+        checkStrArrLength(args, 2, new MissingTaskNumException("remove"));
         int num = parseNum(args[1]);
         return new RemoveCommand(num - 1);
     }
@@ -109,12 +118,12 @@ public class Parser {
     }
 
     private static Command prepareFind(String[] args) throws DukeException {
-        checkStrArrayMinLength(args, 2, new MissingArgumentException());
+        checkStrArrLength(args, 2, new MissingArgumentException());
         return new FindCommand(args[1]);
     }
 
     private static Command prepareUpdate(String[] args) throws DukeException {
-        checkStrArrayMinLength(args, 2, new MissingArgumentException());
+        checkStrArrLength(args, 2, new MissingArgumentException());
         String nameKeyword = UpdateCommand.NAME_KEYWORD;
         String timeKeyword = UpdateCommand.TIME_KEYWORD;
 
@@ -161,7 +170,7 @@ public class Parser {
         return str.split("\\s", limit);
     }
 
-    private static void checkStrArrayMinLength(String[] input, int minLength, DukeException exception) throws DukeException {
+    private static void checkStrArrLength(String[] input, int minLength, DukeException exception) throws DukeException {
         if (input.length < minLength || input[minLength - 1].isBlank()) {
             throw exception;
         }
