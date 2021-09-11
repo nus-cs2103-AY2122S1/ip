@@ -25,6 +25,11 @@ public class Duke extends Application {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             this.tasks = new TaskList();
+            try {
+                storage.save(tasks);
+            } catch (DukeException ex) {
+                // do nothing
+            }
         }
         this.ui = new Ui(storage, tasks);
     }
