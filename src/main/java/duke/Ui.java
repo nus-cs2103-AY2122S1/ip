@@ -80,4 +80,9 @@ public class Ui {
     public String showAddTask(TaskList tasks, Task task) {
         return "Got it. I've added this task:\n\t" + task + "\n" + printTasksCount(tasks);
     }
+    
+//    TODO: add javadoc
+    public String showEditedTask(int taskIndex, Task task) {
+        return "Task " + taskIndex + " has been successfully edited to:\n\t" + task;
+    }
 }

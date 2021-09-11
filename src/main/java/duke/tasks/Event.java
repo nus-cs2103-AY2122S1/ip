@@ -1,6 +1,7 @@
 package duke.tasks;
 
 import duke.DukeException;
+import duke.commands.EditCommand;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -36,6 +37,10 @@ public class Event extends Task {
         this.date = parseDateTime(at);
     }
 
+    public LocalDateTime getDate() {
+        return date;
+    }
+
     private LocalDateTime parseDateTime(String at) throws DukeException {
         try {
             return LocalDateTime.parse(at, FORMATTER);
@@ -62,5 +67,12 @@ public class Event extends Task {
             return super.equals(obj) && date.equals(other.date);
         }
         return false;
+    }
+
+    @Override
+    public Task getUpdatedTask(EditCommand edit) throws DukeException {
+        String newDescription = edit.getDescription() == null ? description : edit.getDescription();
+        String newDate = edit.getDate() == null ? date.format(FORMATTER) : edit.getDate();
+        return new Event(newDescription, newDate, isDone);
     }
 }

@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.commands.EditCommand;
+
 /**
  * This class represents a Todo Task.
  */
@@ -40,5 +42,11 @@ public class Todo extends Task {
             return super.equals(obj);
         }
         return false;
+    }
+
+    @Override
+    public Task getUpdatedTask(EditCommand edit) {
+        String newDescription = edit.getDescription() == null ? description : edit.getDescription();
+        return new Todo(newDescription, isDone);
     }
 }

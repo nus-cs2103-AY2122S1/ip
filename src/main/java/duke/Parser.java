@@ -5,6 +5,7 @@ import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
+import duke.commands.EditCommand;
 import duke.commands.FindTasksCommand;
 import duke.commands.ListCommand;
 import duke.tasks.Deadline;
@@ -47,7 +48,9 @@ public class Parser {
         case "deadline":
             return parseDeadlineCommand(taskDetails);
         case "find":
-            return parseFindCommand(taskDetails);
+            return parseFindCommand(taskDetails); 
+        case "edit":
+            return parseEditCommand(answer);
         case "bye":
             return parseByeCommand();
         default:
@@ -55,11 +58,21 @@ public class Parser {
         }
     }
 
-    private static String parseKeyword(String taskDetails) throws DukeException {
-        if (taskDetails.isEmpty()) {
-            throw new DukeException("Keyword for find command cannot be empty");
+    private static EditCommand parseEditCommand(String taskDetails) throws DukeException {
+        int taskIndex = getTaskIndex(taskDetails);
+        String[] editDescParts = taskDetails.split("/desc", 2);
+        String[] editDateParts = taskDetails.split("/date", 2);
+        if (editDescParts.length < 2 && editDateParts.length < 2) {
+            throw new DukeException("Nothing to edit.");
         }
-        return taskDetails;
+        
+        if (editDateParts.length >= 2 && editDescParts.length >= 2) {
+            return new EditCommand(taskIndex, editDescParts[1].trim(), editDateParts[1].trim());
+        } else if (editDateParts.length >= 2) {
+            return new EditCommand(taskIndex, null, editDateParts[1].trim());
+        } else {
+            return new EditCommand(taskIndex, editDescParts[1].trim(), null);
+        }
     }
 
     private static void checkEmptyTaskDetails(String taskDetails) throws DukeException {
@@ -99,14 +112,14 @@ public class Parser {
     }
 
     protected static int getTaskIndex(String answer) throws DukeException {
-        String taskNo = answer.substring(answer.indexOf(" ") + 1);
         try {
+            String taskNo = answer.split(" ")[1];
             int taskIndex = Integer.parseInt(taskNo) - 1;
             if (taskIndex < 0) {
                 throw new DukeException("Invalid task number. Task number should be positive.");
             }
             return taskIndex;
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Invalid task number. Sample input with correct format: [command] [taskNo]"
                     + " eg. 'done 2'");
         }

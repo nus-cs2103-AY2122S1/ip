@@ -129,6 +129,16 @@ public class TaskList {
         }
         return new TaskList(arrListTasks);
     }
+    
+    // TODO: add javadoc
+    public ArrayList<Task> getAllTasks() {
+        return tasks;
+    }
+    
+    // TODO: add javadoc
+    public void editTask(int taskIndex, Task updatedTask) {
+        tasks.set(taskIndex, updatedTask);
+    }
 
     private void validateTaskIndex(int taskIndex) throws DukeException {
         int taskCount = tasks.size();
