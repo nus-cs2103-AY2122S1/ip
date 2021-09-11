@@ -3,8 +3,6 @@ import java.util.ArrayList;
 
 import duke.task.Task;
 
-
-
 /**
  * Represents a RAM for Duke.
  */

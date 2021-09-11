@@ -68,13 +68,5 @@ public class Event extends Task {
         return string;
     }
 
-//    /**
-//     * Tests Event class.
-//     * @param args
-//     */
-//    public static void main(String[] args) {
-//        Event e = new Event("return book", "2/12/2019 1800");
-//        System.out.println(e);
-//    }
 }
 

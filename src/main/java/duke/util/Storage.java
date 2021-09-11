@@ -7,7 +7,7 @@ import duke.task.Task;
  * Represents the storage operation of a hard disk.
  */
 public class Storage {
-    private Database database;
+    private final Database database;
 
     public Storage(String filePath) {
         database = new Database(filePath);

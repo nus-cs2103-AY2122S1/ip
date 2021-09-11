@@ -68,12 +68,4 @@ public class Deadline extends Task {
         return string;
     }
 
-//    /**
-//     * Tests Deadline class.
-//     * @param args
-//     */
-//    public static void main(String[] args) {
-//        Deadline d = new Deadline("return book", "2/12/2019 1800");
-//        System.out.println(d);
-//    }
 }

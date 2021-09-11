@@ -21,15 +21,6 @@ public class Ui {
         return words1 + words2;
     }
 
-//    /**
-//     * Prints a Goodbye.
-//     */
-//    public String showGoodBye() {
-//        String words = "Bye! Hope to see you again!";
-//        return words;
-//    }
-
-
     /**
      * Outputs the whole existing task list.
      *
@@ -89,17 +80,5 @@ public class Ui {
         }
         return words;
     }
-
-
-//    /**
-//     * Reads command from the terminal.
-//     *
-//     * @return an input String
-//     */
-//    public String readCommand() {
-//        Scanner scanner = new Scanner(System.in);
-//        String command = scanner.nextLine().trim();
-//        return command;
-//    }
 
 }

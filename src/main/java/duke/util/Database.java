@@ -100,7 +100,6 @@ public class Database {
         try {
             FileWriter fileWriter = new FileWriter(file);
             for (int i = 0; i < tasks.size(); i++) {
-
                 Task task = tasks.get(i);
                 String out;
                 if (i > 0) {
@@ -115,13 +114,11 @@ public class Database {
                 } else if (task instanceof Event) {
                     out += "E &";
                 }
-
                 if (task.isDone()) {
                     out += " 1 & ";
                 } else {
                     out += " 0 & ";
                 }
-
                 out += task.getDescription();
                 if (task instanceof Deadline) {
                     out += " & " + ((Deadline) task).getBy().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm"));
