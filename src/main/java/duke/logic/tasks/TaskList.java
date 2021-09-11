@@ -42,7 +42,7 @@ public class TaskList {
         if (tasks.size() == 1) {
             response.append(" task in the list.");
         } else {
-            response.append(" duke.logic.tasks in the list.");
+            response.append(" tasks in the list.");
         }
         Storage.saveTaskListToHardDisk(tasks);
         return response.toString();
@@ -78,7 +78,7 @@ public class TaskList {
         if (tasks.size() == 1) {
             response.append(" task in the list.");
         } else {
-            response.append(" duke.logic.tasks in the list.");
+            response.append(" tasks in the list.");
         }
         Storage.saveTaskListToHardDisk(tasks);
         return response.toString();
@@ -92,7 +92,7 @@ public class TaskList {
      */
     public String findTask(String keyword) {
         int count = 0;
-        StringBuilder res = new StringBuilder("Here are the matching duke.logic.tasks in your list:\n");
+        StringBuilder res = new StringBuilder("Here are the matching tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDescription().contains(keyword)) {
                 String temp = "\t" + " " + (i + 1) + "." + tasks.get(i).toString() + "\n";
@@ -102,7 +102,7 @@ public class TaskList {
         }
         res.deleteCharAt(res.toString().length() - 1);
         if (count == 0) {
-            return "There are no duke.logic.tasks with the given keyword";
+            return "There are no tasks with the given keyword";
         } else {
             return res.toString();
         }
@@ -122,7 +122,7 @@ public class TaskList {
         if (this.getSize() == 0) {
             return "There is no task in the list";
         } else {
-            StringBuilder res = new StringBuilder("Here are the duke.logic.tasks in your list:\n");
+            StringBuilder res = new StringBuilder("Here are the tasks in your list:\n");
             for (int i = 0; i < tasks.size(); i++) {
                 String temp = "\t" + " " + (i + 1) + "." + tasks.get(i).toString();
                 if (i < tasks.size() - 1) { // remove the last \n char, ugly but get the job done

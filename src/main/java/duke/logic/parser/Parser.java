@@ -38,10 +38,23 @@ public class Parser {
     private static final String INVALID_NUMBER_ARGUMENT_ERR_MSG = "OOPS!!! The task number you type in is not a number.";
     private static final String OUT_OF_BOUNDS_ERR_MSG = "OOPS!!! The task number should be between 0 and ";
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private enum CommandName {
+        LIST, DONE, DELETE, TODO, DEADLINE, EVENT, FIND;
+        
+        private static CommandName getCommandCode(String input) {
+            CommandName result;
+            try {
+                result = valueOf(input.trim().toUpperCase());
+            } catch (IllegalArgumentException e) {
+                result = null;
+            }
+            return result;
+        }
+    }
     private final TaskList taskList;
     
     /**
-     * Constructor for the class.
+     * Constructs for the class.
      */
     public Parser(TaskList taskList) {
         this.taskList = taskList;
@@ -60,7 +73,9 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new DukeInvalidCommandException(INVALID_NUMBER_ARGUMENT_ERR_MSG);
         }
-        if (parsedNumber < 0 || parsedNumber > taskList.getSize()) {
+        boolean isNegativeIndex = parsedNumber < 0;
+        boolean isOutOfBoundsIndex = parsedNumber > taskList.getSize();
+        if (isNegativeIndex || isOutOfBoundsIndex) {
             throw new DukeInvalidCommandException(OUT_OF_BOUNDS_ERR_MSG + taskList.getSize() + ".");
         }
         return parsedNumber;
@@ -153,20 +168,21 @@ public class Parser {
 
     public String invokeCommand(String input) throws DukeInvalidCommandException {
         String[] parsedInput = parseInput(input);
-        switch (parsedInput[0]) {
-        case "list":
+        CommandName commandName = CommandName.getCommandCode(parsedInput[0]);
+        switch (commandName) {
+        case LIST:
             return handleList(parsedInput);
-        case "done":
+        case DONE:
             return handleDone(parsedInput);
-        case "deadline":
+        case DEADLINE:
             return handleDeadline(parsedInput);
-        case "event":
+        case EVENT:
             return handleEvent(parsedInput);
-        case "todo":
+        case TODO:
             return handleTodo(parsedInput);
-        case "delete":
+        case DELETE:
             return handleDelete(parsedInput);
-        case "find":
+        case FIND:
             return handleFind(parsedInput);
         default:
             throw new DukeInvalidCommandException(UNKNOWN_COMMAND_ERR_MSG);

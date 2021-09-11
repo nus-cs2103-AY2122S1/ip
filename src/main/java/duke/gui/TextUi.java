@@ -14,7 +14,7 @@ public class TextUi {
     private final Scanner sc = new Scanner(System.in);
     private final TaskList tasks = new TaskList();
     /**
-     * Greet the user.
+     * Greets the user.
      */
     private void sendGreetings() {
         String logo = "\t  ____        _        \n"
@@ -31,7 +31,7 @@ public class TextUi {
     }
 
     /**
-     * Print out the separation line between elements of the program
+     * Prints out the separation line between elements of the program
      */
     public static void insertSeparateLine() {
         String separateLine =
@@ -40,7 +40,7 @@ public class TextUi {
     }
 
     /**
-     * Print out the formatted version of any string content
+     * Prints out the formatted version of any string content
      *
      * @param content Content to display.
      */
@@ -49,7 +49,7 @@ public class TextUi {
     }
 
     /**
-     * Print out the formatted version of any string content between two horizontal lines
+     * Prints out the formatted version of any string content between two horizontal lines
      *
      * @param content Content to display.
      */
@@ -60,7 +60,7 @@ public class TextUi {
     }
 
     /**
-     * Start the user interface and begin the program
+     * Starts the user interface and begin the program
      */
     public void start() {
         sendGreetings();
