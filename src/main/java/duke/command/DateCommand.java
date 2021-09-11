@@ -72,6 +72,8 @@ public class DateCommand extends Command {
         // finds Deadlines and Events with LocalDate that matches date input from user.
         for (int idx = 0; idx < tasks.size(); idx++) {
             Task task = tasks.get(idx);
+            // Increment by 1 to change index to be 1-based.
+            idx = idx + 1;
             if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
                 if (localDate.equals(deadline.getTime())) {
