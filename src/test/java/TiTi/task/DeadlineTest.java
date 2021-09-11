@@ -1,6 +1,5 @@
 package TiTi.task;
 
-import TiTi.task.Deadline;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,7 +13,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void DateTest(){
+    public void dateTest(){
         Deadline testDeadline = new Deadline("script", "2021-08-31");
         assertEquals(testDeadline.toString(), "[D][ ] script (by: Aug 31 2021)");
     }

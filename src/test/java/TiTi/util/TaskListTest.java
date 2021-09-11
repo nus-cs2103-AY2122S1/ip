@@ -1,14 +1,13 @@
 package TiTi.util;
 
-import TiTi.util.TaskList;
-import TiTi.task.Deadline;
-import TiTi.task.ToDo;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import TiTi.task.ToDo;
+
 
 public class TaskListTest {
 
