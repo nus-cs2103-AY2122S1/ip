@@ -114,6 +114,11 @@ public class Ui {
     }
 
 
+     * Returns the appropriate response as per the command given
+     * @param command           the command entered
+     * @param description       the description of the task
+     * @return                  response from duke
+     */
     String executeCommand(String command, String description) throws DukeException {
         try {
             if (command.equals("list")) {
@@ -141,6 +146,9 @@ public class Ui {
                     str.append(displayAddMessage(newTodo));
                 } else if (command.equals("delete")) {
                     int taskIndex = Integer.parseInt(description.substring(1)) - 1;
+                    assert taskIndex < Tasklist.dukeList.size() : "Index cannot be greater than the size of list";
+                    str.append(LINES+"\n");
+                    str.append("Noted. I've removed this task:\n");
                     Task taskToBeDeleted = Tasklist.dukeList.get(taskIndex);
                     str.append(displayDeleteMessage(taskToBeDeleted));
                     deleteTask(taskIndex);
@@ -173,6 +181,7 @@ public class Ui {
      * @param toBeCompleted the Task which is to be marked done
      */
     String showTaskCompletion(Task toBeCompleted) {
+        assert toBeCompleted != null : "Task to be completed should not be null";
         StringBuilder str = new StringBuilder();
         str.append(LINES + "\n");
         str.append("Nice! I've marked this task as done:\n");
@@ -180,6 +189,7 @@ public class Ui {
         str.append(LINES + "\n");
         return str.toString();
     }
+
 
     /**
      * Displays the tasks in the DukeList.
