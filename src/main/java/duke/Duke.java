@@ -56,8 +56,10 @@ class Duke {
             String[] out = parser.parse(command);
             storage.write(command);
             return out;
-        } catch (Exception e) {
+        } catch (DukeException e) {
             return new String[]{e.getMessage()};
+        } catch (Exception e) {
+            return new String[]{"OOPS!!! " + e.getMessage()};
         }
     }
 
