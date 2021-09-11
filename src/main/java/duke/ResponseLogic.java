@@ -94,7 +94,7 @@ public class ResponseLogic {
 
     /** Returns a response for IndexOutOfBoundsException. */
     public String indexOutOfBoundsExceptionResponse() {
-        return "Lollipop: No such duke.task number found.";
+        return "Lollipop: No such task number found.";
     }
 
     /** Returns a response for NumberFormatException. */
