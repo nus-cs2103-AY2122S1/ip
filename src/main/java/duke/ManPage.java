@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ManPage {
     // items, completed, todo, event, deadline, delete, find, bye
-    private List<String> listOfCommands = new ArrayList<>(List.of(
+    private final List<String> listOfCommands = new ArrayList<>(List.of(
             "items: Returns the list of tasks in the tasklist\n",
             "completed: Marks a specified task as complete. \n[format: completed <index>]\n",
             "todo: Adds a todo task to the task list. \n[format: todo <task name>]\n",
@@ -19,6 +19,7 @@ public class ManPage {
     public ManPage() {
 
     }
+
 
     @Override
     public String toString() {
