@@ -55,6 +55,7 @@ public class TaskList {
      * @return The status of the operation.
      */
     public String markTaskAsDone(int index) {
+        assert index <= tasks.size() && index > 0 : "Done index out of bounds";
         StringBuilder response = new StringBuilder();
         if (tasks.get(index - 1).markAsDone()) {
             response.append("Nice! I've marked this task as done:\n");
@@ -67,6 +68,7 @@ public class TaskList {
     }
 
     public String deleteTask(int index) {
+        assert index <= tasks.size() && index > 0 : "Deleted index out of bounds";
         Task temp = tasks.get(index - 1);
         tasks.remove(index - 1);
 
