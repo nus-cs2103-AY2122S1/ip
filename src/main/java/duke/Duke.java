@@ -36,7 +36,7 @@ public class Duke extends DukeGui implements duke.Parser {
      */
     public Duke() {
         taskList = new TaskList();
-        storage = new Storage("../../../../data/duke_storage.txt");
+        storage = new Storage(System.getProperty("user.dir") + "/duke_storage.txt");
         loadData();
     }
 
