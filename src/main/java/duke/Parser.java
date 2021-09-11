@@ -5,10 +5,11 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.commands.AddTodoCommand;
 import duke.commands.AddDeadlineCommand;
 import duke.commands.AddEventCommand;
+import duke.commands.AddTodoCommand;
 import duke.commands.Command;
+import duke.commands.CommandListCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.ExitCommand;
@@ -71,7 +72,12 @@ public class Parser {
             case "bye":
                 return new ExitCommand();
             case "list":
+                if (taskList.taskCount() == 0) {
+                    throw new DukeException("empty task list");
+                }
                 return new ListCommand();
+            case "commands":
+                return new CommandListCommand();
             default:
                 throw new DukeException("invalid input");
             }
@@ -122,6 +128,9 @@ public class Parser {
             boolean isIndexAboveLowerBound = index > 0;
             boolean isIndexBelowUpperBound = index < taskList.taskCount() + 1;
             boolean isIndexInRange = isIndexAboveLowerBound && isIndexBelowUpperBound;
+            if (taskList.taskCount() == 0) {
+                throw new DukeException("empty task list");
+            }
 
             if (isIndexInRange) {
                 return new DeleteCommand(index);
@@ -254,7 +263,7 @@ public class Parser {
         }
     }
     /**
-     * This method reads the stored String of text file in the Hard Disk which corresponds to a
+     * This method reads the stored String of text file in the Hard Disk which corresponds to an
      * Event type task and transforms it into an Event task object.
      *
      * @param input String from text file.
@@ -282,7 +291,7 @@ public class Parser {
                 detectedFormat = i;
                 isDateAndTime = true;
             } catch (Exception e) {
-                String exception = e.getMessage();
+                System.out.println(e.getMessage());
             }
         }
         return isDateAndTime;
@@ -298,7 +307,7 @@ public class Parser {
                 detectedFormat = i;
                 isDate = true;
             } catch (Exception e) {
-                String exception = e.getMessage();
+                System.out.println(e.getMessage());
             }
         }
         return isDate;
@@ -316,7 +325,7 @@ public class Parser {
                     startTime = LocalTime.parse(start, DateTimeFormatter.ofPattern(i));
                     isStartATime = true;
                 } catch (Exception e) {
-                    String exception = e.getMessage();
+                    System.out.println(e.getMessage());
                 }
             }
 
@@ -325,7 +334,7 @@ public class Parser {
                     endTime = LocalTime.parse(end, DateTimeFormatter.ofPattern(i));
                     isEndATime = true;
                 } catch (Exception e) {
-                    String exception = e.getMessage();
+                    System.out.println(e.getMessage());
                 }
             }
 
