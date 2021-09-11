@@ -19,7 +19,6 @@ final class DukeApp {
     public DukeApp() {
         this.ui = new Ui();
         this.storage = new Storage();
-        this.parser = new Parser();
         try {
             storage.createFiles();
         } catch (DukeException e) {
