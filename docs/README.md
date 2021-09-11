@@ -85,7 +85,6 @@ delete 1
 
 ### `find` - Find tasks
 Searches tasks for descriptions matching the *search string*
-
 ```
 find book
 	____________________________________
@@ -93,3 +92,6 @@ find book
 	 1.[D][ ] return book (by: Fri, 20 Aug 2021 03:00PM)
 	____________________________________
 ```
+
+### `bye` - Exit application
+Exits the app
