@@ -2,6 +2,7 @@ package duke;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -85,8 +86,9 @@ public class Ui {
         ArrayList<Task> matchingDates = taskList.checkDate(localDate);
 
         StringBuilder output = new StringBuilder();
+        output.append("Here are the tasks on " + localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ": \n");
         for (int i = 1; i <= matchingDates.size(); i++) {
-            output = output.append(i + ". " + matchingDates.get(i - 1).toString() + "\n");
+            output = output.append("  " + i + ". " + matchingDates.get(i - 1).toString() + "\n");
         }
         return output.toString();
     }
