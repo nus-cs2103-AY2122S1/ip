@@ -29,7 +29,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Lifeline lifeline;
+    private Lifeline lifeline = new Lifeline("save" + File.separator + "tasks.json");
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image lifelineImage = new Image(this.getClass().getResourceAsStream("/images/DaLifeline.png"));
@@ -40,9 +40,8 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-        lifeline = new Lifeline("save" + File.separator + "tasks.json");
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String greetingMessage = lifeline.getGreetingMessage();
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(DialogBox.getLifelineDialog(greetingMessage, lifelineImage));
     }
 
