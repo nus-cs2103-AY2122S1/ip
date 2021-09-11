@@ -94,7 +94,7 @@ public class Task {
     }
 
     /**
-     * Custom prints the task based on category.
+     * Prints the task based on category.
      *
      * @return String comprising the type and content of the task.
      */

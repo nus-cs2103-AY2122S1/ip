@@ -23,22 +23,22 @@ public class Find extends Command {
      */
     public String run(TaskList tasks, Ui ui, Storage storage) {
         String res = "";
-        boolean flag = true;
+        boolean isNotFound = true;
         int i = 1;
         for (int j = 0; j < tasks.numberOfTasks(); j++) {
             if (!tasks.getTaskFromList(j).getPreExisting()) {
                 if (tasks.getTaskFromList(j).toString().contains(name)) {
-                    flag = false;
+                    isNotFound = false;
                     res = res + "    " + (i++) + ". " + tasks.getTaskFromList(j).toString() + "\n";
                 }
             } else {
                 if (tasks.getTaskFromList(j).getDescription().contains(name)) {
-                    flag = false;
+                    isNotFound = false;
                     res = res + "    " + (i++) + ". " + tasks.getTaskFromList(j).getDescription() + "\n";
                 }
             }
         }
-        if (flag) {
+        if (isNotFound) {
             return "oops! sorry you do not have any matching tasks";
         } else {
             return ui.showFind(res);

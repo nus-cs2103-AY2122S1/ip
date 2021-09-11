@@ -45,8 +45,6 @@ public class Parser {
      */
     public static Command parseCommand(String inpCommand) {
 
-        //insert java assertion to check for invalid commands.
-        Boolean valid = true;
         String input = inpCommand.toLowerCase();
         if (input.contains("done")) {
             int ind = Integer.parseInt((input.split("\\s", 2))[1]) - 1;
@@ -64,8 +62,6 @@ public class Parser {
         } else if (input.contains("bye")) {
             return new Bye();
         } else {
-            valid = false;
-            assert valid : "INVALID COMMAND";
             return new Invalid();
         }
     }

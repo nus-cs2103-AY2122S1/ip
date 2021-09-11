@@ -70,7 +70,6 @@ public class Ui {
     public String showBye() {
         String bye = "Bye. Hope to see you again soon! Just a little reminder : "
                 + "YOU ARE AWESOME - THAT'S WHAT SHE SAID :))";
-        System.out.println(bye);
         return bye;
     }
 

@@ -40,11 +40,11 @@ public class Storage {
     public ArrayList<Task> load() {
         Path dirPath = Paths.get("data");
         Path path = Paths.get("data/duke.txt");
-        boolean existsDirPath = Files.exists(dirPath);
-        boolean existsFilePath = Files.exists(path);
+        boolean hasDirPath = Files.exists(dirPath);
+        boolean hasFilePath = Files.exists(path);
         ArrayList<Task> tasks = new ArrayList<>();
-        if (existsDirPath) {
-            if (existsFilePath) {
+        if (hasDirPath) {
+            if (hasFilePath) {
                 loadHelper(path, tasks);
             } else {
                 try {
@@ -65,7 +65,7 @@ public class Storage {
     }
 
     /**
-     * Helper method that supplements the load method
+     * Supplements the load method
      * to load tasks from the disk when the bot starts.
      *
      * @param path The path of the data text file.
