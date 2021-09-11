@@ -6,8 +6,9 @@ public class Ui {
 
     private final Scanner sc = new Scanner(System.in);
 
-    public void showWelcome() {
-        System.out.println("\tHello! I'm Duke. \n\tWhat can I do for you?");
+    public String showWelcome() {
+        return "Hello! I'm Duke. "
+                + "\nWhat can I do for you?";
     }
 
     public String readCommand() {
@@ -15,11 +16,7 @@ public class Ui {
         return input;
     }
 
-    public void showError(String errorMessage) {
-        System.out.println(errorMessage);
-    }
-
-    public void showLine() {
-        System.out.println("\t____________________________________________________________");
+    public String showError(String errorMessage) {
+        return errorMessage;
     }
 }

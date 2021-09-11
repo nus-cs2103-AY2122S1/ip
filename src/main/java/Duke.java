@@ -33,40 +33,13 @@ public class Duke {
         }
     }
 
-    /**
-     * Starts the Duke program.
-     * Programme will ask for input until user enters the 'bye' command.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Command.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
 
     protected String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command c = Command.parse(input);
+            return "Duke: " + c.execute(tasks, ui, storage);
+        } catch (DukeException e){
+            return "Duke: " + e.getMessage();
+        }
     }
-
-    /**
-     * Creates the initialization process and run the programme when completed.
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
-
 }

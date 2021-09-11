@@ -98,7 +98,7 @@ public class Storage {
         try {
             writeToFile(this.filePath, output);
         } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

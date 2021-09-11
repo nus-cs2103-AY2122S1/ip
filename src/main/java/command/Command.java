@@ -59,6 +59,9 @@ public abstract class Command {
         default:
             throw new InvalidCommand();
     }
+
+    assert commandType != null : "CommandType should have been determined";
+
     return commandType;
     }
 
@@ -71,7 +74,7 @@ public abstract class Command {
      * @param storage accesses the file location in local storage.
      * @throws DukeException If the execution contains unexpected behaviour
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Returns true if the command is an exit command.

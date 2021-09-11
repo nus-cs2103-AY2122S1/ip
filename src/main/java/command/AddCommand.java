@@ -69,12 +69,11 @@ public class AddCommand extends Command {
             verifyDate(taskInfo, "event");
             break;
         default:
-            System.out.println("Something went wrong...");
             break;
         }
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateFormat {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateFormat {
         Task newTask = null;
 
         switch(taskType) {
@@ -92,16 +91,17 @@ public class AddCommand extends Command {
             newTask = new Event(eventDescription, eventDate, false);
             break;
         default:
-            System.out.println("Something went wrong...");
+            break;
         }
+
+        assert newTask != null;
 
         tasks.addTask(newTask);
         storage.write(tasks.getTaskList());
-        System.out.printf("\tGot it. I've added this task:\n"
-                        + "\t%s\n"
-                        + "\tNow you have %d tasks in the list.\n", newTask, tasks.size());
+        return String.format("Got it. I've added this task:\n"
+                        + "%s\n"
+                        + "Now you have %d tasks in the list.\n", newTask, tasks.size());
     }
-
 
     public boolean isExit() {
         return EXIT;
