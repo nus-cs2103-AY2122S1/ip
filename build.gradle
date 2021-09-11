@@ -42,7 +42,7 @@ test {
 }
 
 application {
-    mainClassName = "duke.Ui"
+    mainClassName = "duke.Ui.Ui"
 }
 
 javafx {

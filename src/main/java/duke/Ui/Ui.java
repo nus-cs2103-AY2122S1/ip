@@ -1,4 +1,5 @@
-package duke;
+package duke.Ui;
+import duke.Duke;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -8,10 +9,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
-import javafx.geometry.Pos;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.image.Image;
 
 /**
@@ -32,7 +29,10 @@ public class Ui extends Application {
         this.duke = new Duke();
         this.scrollPane.setContent(this.dialogContainer);
         this.duke.init();
-        this.dialogContainer.getChildren().add(new DialogBox("hi i'm Duke, what do you want?", this.dukeImg, false));
+        this.dialogContainer.
+                getChildren().add(
+                    DialogBox.DukeDialogBox("hi i'm Duke, what do you want?",
+                            this.dukeImg));
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(this.scrollPane, this.userInputField, this.sendButton);
@@ -75,32 +75,10 @@ public class Ui extends Application {
         String userInput = this.userInputField.getText();
         String dukeResponse = this.duke.getResponse(userInput);
         this.dialogContainer.getChildren().addAll(
-                new DialogBox(userInput, userImg, true),
-                new DialogBox(dukeResponse, dukeImg, false)
+                DialogBox.UserDialogBox(userInput, userImg),
+                DialogBox.DukeDialogBox(dukeResponse, dukeImg)
         );
         this.userInputField.clear();
-    }
-
-    private class DialogBox extends HBox {
-        private Label text;
-        private ImageView dp;
-
-        public DialogBox(String str, Image img, boolean isUser) {
-            this.text = new Label(str);
-            this.dp = new ImageView(img);
-
-            this.text.setWrapText(true);
-            this.dp.setFitWidth(99);
-            this.dp.setFitHeight(99);
-
-            if (isUser) {
-                this.setAlignment(Pos.TOP_RIGHT);
-                this.getChildren().addAll(text, dp);
-            } else {
-                this.setAlignment(Pos.TOP_LEFT);
-                this.getChildren().addAll(dp, text);
-            }
-        }
     }
 
     public static void main(String[] args) {
