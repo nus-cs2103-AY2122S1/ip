@@ -22,9 +22,9 @@ public class Storage {
     private final String filePath;
     private final DateTimeFormatter  timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-
     /**
-     * The constructor for Storage
+     * Constructs Storage class
+     *
      * @param filePath
      */
     public Storage(String filePath) {
@@ -32,9 +32,11 @@ public class Storage {
     }
 
     /**
-     * The method readdata for reading data from input file path
+     * Reads data from input file path
+     *
      * @return ArrayList
      * @throws IOException
+     * @return ArrayList a list of read data from input path
      */
     public ArrayList<Task> readData() throws IOException {
         ArrayList<Task> task = new ArrayList<>();
@@ -66,14 +68,14 @@ public class Storage {
     }
 
     /**
-     * The method of write data to input file path
-     * @param task
+     * Writes data to input file path
+     * @param tasks
      */
-    public void writeData(ArrayList<Task> task) {
+    public void writeData(ArrayList<Task> tasks) {
         try {
             FileWriter fw = new FileWriter(filePath, false);
-            for (Task t : task) {
-                fw.write(t.formatChange() + "\n");
+            for (Task t : tasks) {
+                fw.write(t.changeFormat() + "\n");
             }
             fw.close();
         } catch (IOException exception) {

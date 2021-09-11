@@ -14,7 +14,8 @@ public class Task {
     public boolean isExit;
 
     /**
-     * The constructor for task
+     * Constructs Task class
+     *
      * @param description
      * @param isDone
      */
@@ -25,15 +26,17 @@ public class Task {
     }
 
     /**
-     * The method of getStatus
-     * @return
+     * Gets the status icon
+     *
+     * @return String of status of icon
      */
     public String getStatusIcon() {
         return (this.isDone ? "[X] " : "[ ] ");
     }
 
     /**
-     * The method of markDone, change status to done
+     * Marks down the task
+     *
      * @return Task object
      */
     public Task markDone() {
@@ -44,26 +47,29 @@ public class Task {
     }
 
     /**
-     * The method of getDescription
-     * @return String
+     * Gets the description of task
+     *
+     * @return String the description
      */
     public String getDescription() {
         return this.description;
     }
 
     /**
-     * The formatChange method for change the done x -> 1 in Writing record tasks.txt version
-     * @return String
+     * Changes the format let "X" -> 1 and record to tasks.txt version
+     *
+     * @return String changed format of  task in record
      */
-    public String formatChange() {
+    public String changeFormat() {
         String mark = isDone ? "1" : "0";
         return "|" + mark + "0" + this.description;
 
     }
 
     /**
-     * Overridden toString method to task details
-     * @return String
+     * Overrides toString method to task details
+     *
+     * @return String of task details
      */
     @Override
     public String toString() {
@@ -72,12 +78,13 @@ public class Task {
 
     /**
      * Executes input task
-     * @param task
+     *
+     * @param tasks
      * @param ui
      * @param storage
-     * @return
+     * @return String null
      */
-    public String execute(TaskList task, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         return null;
     };
 

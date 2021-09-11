@@ -12,26 +12,26 @@ public class Done extends Task {
     int num;
 
     /**
-     * The constructor for Done task
+     * Constructs Done class
      * @param num
      */
     public Done(int num) {
         super("done", true);
         this.num = num;
-
     }
 
     /**
-     * Executes the Done task
-     * @param task
+     * Executes the input done task
+     *
+     * @param tasks
      * @param ui
      * @param storage
-     * @return
+     * @return String of deadline task details
      */
     @Override
-    public String execute(TaskList task, Ui ui, Storage storage) {
-        task.markDone(num);
-        storage.writeData(task.getTasks());
-        return ui.showDoneMessage(task, num);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        tasks.markDone(num);
+        storage.writeData(tasks.getTasks());
+        return ui.showDoneMessage(tasks, num);
     }
 }

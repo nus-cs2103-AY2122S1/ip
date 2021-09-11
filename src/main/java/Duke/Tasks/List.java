@@ -10,7 +10,7 @@ import Duke.Ui.Ui;
 public class List extends Task {
 
     /**
-     * The constructor for List task
+     * Constructs List class
      */
     public List() {
         super("list", false);
@@ -18,12 +18,14 @@ public class List extends Task {
 
     /**
      * Executes input list task
-     * @param task
+     *
+     * @param tasks
      * @param ui
      * @param storage
+     * @return String of a list of task
      */
     @Override
-    public String execute(TaskList task, Ui ui, Storage storage) {
-        return ui.showListDetails(task);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showListDetails(tasks);
     }
 }

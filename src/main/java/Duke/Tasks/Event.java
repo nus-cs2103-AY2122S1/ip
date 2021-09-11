@@ -15,7 +15,8 @@ public class Event extends Task {
     protected LocalDateTime at;
 
     /**
-     * The constructor for Event task
+     * Constructs Event class
+     *
      * @param description
      * @param at
      * @param isDone
@@ -26,8 +27,9 @@ public class Event extends Task {
     }
 
     /**
-     * the markDone method for marking the Event task as done
-     * @return Event object
+     * Marks down the event task
+     *
+     * @return Event the object of event task
      */
     @Override
     public Event markDone() {
@@ -36,33 +38,36 @@ public class Event extends Task {
     }
 
     /**
-     * The formatChange method for change the done x -> 1 in Writing record tasks.txt version
-     * @return String
+     * Changes the format let "X" -> 1 and record to tasks.txt version
+     *
+     * @return String changed format of event task in record
      */
     @Override
-    public String formatChange() {
+    public String changeFormat() {
         String mark = isDone ? "1" : "0";
         return "E | " + mark + " | " + this.description +" | " + this.at.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     /**
      * Executes input delete task
-     * @param task
+     *
+     * @param tasks
      * @param ui
      * @param storage
+     * @return String the details of event task
      */
     @Override
-    public String execute(TaskList task, Ui ui, Storage storage) {
-        int numOfBeforeExecute = task.size();
-        task.add(this);
-        assert task.size() - numOfBeforeExecute== 1 : "Add event task not successful";
-        storage.writeData(task.getTasks());
-        return ui.showAddOnTask(task, (task.size() - 1));
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        int numOfBeforeExecute = tasks.size();
+        tasks.add(this);
+        assert tasks.size() - numOfBeforeExecute== 1 : "Add event task not successful";
+        storage.writeData(tasks.getTasks());
+        return ui.showAddOnTask(tasks, (tasks.size() - 1));
     }
 
     /**
      * Overridden toString method to print Event task details
-     * @return String
+     * @return String of event task details
      */
     @Override
     public String toString() {

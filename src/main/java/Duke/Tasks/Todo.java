@@ -30,11 +30,12 @@ public class Todo extends Task {
     }
 
     /**
-     * The formatChange method for change the done x -> 1 in Writing record tasks.txt version
+     * Changes the format let "X" -> 1 and record to tasks.txt version
+     *
      * @return String
      */
     @Override
-    public String formatChange() {
+    public String changeFormat() {
         String mark = isDone ? "1" : "0";
         return "T | " + mark + " | " + this.description;
     }
