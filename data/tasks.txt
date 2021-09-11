@@ -1,2 +1,3 @@
-D | 0 | sayhi | 2018-08-13 17:30
-T | 1 | hey | 
+E | 0 | idk | 13/08/1999 | idkdkdkdk
+T | 0 | lolol |  |  
+T | 0 | lololol |  |  

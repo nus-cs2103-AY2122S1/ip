@@ -41,62 +41,40 @@ public class AddCommand extends Command {
         }
     }
 
-    private void verifyDate(String dateInfo, TaskType type) throws InvalidDateFormat {
-        switch(type) {
-        case DEADLINE:
-            checkDeadlineFormatError(dateInfo);
-            break;
-        case EVENT:
-            checkEventFormatError(dateInfo);
-            break;
-        default:
-            break;
-        }
-    }
-
-    private void checkDeadlineFormatError(String dateInfo) throws  InvalidDateFormat {
-        if (dateInfo.split(" /by ").length != 2 ||
-                dateInfo.split(" /by ")[1].split(" ").length != 2) {
-            throw new InvalidDateFormat();
-        }
-    }
-
-    private void checkEventFormatError(String dateInfo) throws InvalidDateFormat {
-        if (dateInfo.split(" /at ").length != 2 ||
-                dateInfo.split(" /at ")[1].split(" ").length != 2) {
-            throw new InvalidDateFormat();
-        }
-    }
-
     /**
      * Abstracts out the critical information from the user's input and insert task as the taskType.
      * Initialises taskInfo and taskType with respective information.
      *
      * @param input The complete string input by users
      * @throws NullDescription If the description of task is empty or contains only spaces.
-     * @throws InvalidDateFormat If the input does not follow the specified format YYYY-MM-DD HH:MM
      */
-    public AddCommand(String input) throws NullDescription, InvalidDateFormat {
+    public AddCommand(String input) throws NullDescription {
         switch (input.split(" ")[0]) {
         case "todo":
             this.taskType = TaskType.TODO;
             checkDescription(input, TaskType.TODO);
-            this.taskInfo = input.substring(5);
+            this.taskInfo = padTaskInfo(input.substring(5));
             break;
         case "deadline":
             this.taskType = TaskType.DEADLINE;
             checkDescription(input, TaskType.DEADLINE);
-            this.taskInfo = input.substring(9);
-            verifyDate(taskInfo, TaskType.DEADLINE);
+            this.taskInfo = padTaskInfo(input.substring(9));
             break;
         case "event":
             this.taskType = TaskType.EVENT;
             checkDescription(input, TaskType.EVENT);
-            this.taskInfo = input.substring(6);
-            verifyDate(taskInfo, TaskType.EVENT);
+            this.taskInfo = padTaskInfo(input.substring(6));
             break;
         default:
             break;
+        }
+    }
+
+    private String padTaskInfo(String taskInfo) {
+        if (!taskInfo.contains(" --")) {
+            return taskInfo + " -- ";
+        } else {
+            return taskInfo;
         }
     }
 
@@ -130,17 +108,23 @@ public class AddCommand extends Command {
         Task outputTask = null;
         switch (type) {
         case TODO:
-            outputTask = new Todo(taskInfo, false);
+            String todoDescription = taskInfo.split(" --")[0];
+            String todoNotes = taskInfo.split(" --")[1];
+            outputTask = new Todo(todoDescription, todoNotes, false);
             break;
         case DEADLINE:
             String deadlineDescription = taskInfo.split(" /by ")[0];
-            String deadlineDate = taskInfo.split(" /by ")[1];
-            outputTask = new Deadline(deadlineDescription, deadlineDate, false);
+            String deadlineDateAndNotes = taskInfo.split(" /by ")[1];
+            String deadlineDate = deadlineDateAndNotes.split(" --")[0];
+            String deadlineNotes = deadlineDateAndNotes.split(" --")[1];
+            outputTask = new Deadline(deadlineDescription, deadlineDate, deadlineNotes, false);
             break;
         case EVENT:
             String eventDescription = taskInfo.split(" /at ")[0];
-            String eventDate = taskInfo.split(" /at ")[1];
-            outputTask = new Event(eventDescription, eventDate, false);
+            String eventDateAndNotes = taskInfo.split(" /at ")[1];
+            String eventDate = eventDateAndNotes.split(" --")[0];
+            String eventNotes = eventDateAndNotes.split(" --")[1];
+            outputTask = new Event(eventDescription, eventDate, eventNotes, false);
             break;
         default:
             break;

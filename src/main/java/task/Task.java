@@ -3,10 +3,12 @@ package task;
 public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected String notes;
 
-    public Task(String description, boolean completed) {
+    public Task(String description, String notes, boolean completed) {
         this.description = description;
         this.isDone = completed;
+        this.notes = notes;
     }
 
     public String getStatusIcon() {
@@ -24,9 +26,13 @@ public abstract class Task {
         return this.isDone;
     }
 
+    public String getNotes() {
+        return this.notes;
+    }
+
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), this.description);
+        return String.format("[%s] %s\nNote: %s\n", this.getStatusIcon(), this.description, this.notes);
 
     }
 
