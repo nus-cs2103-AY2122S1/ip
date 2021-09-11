@@ -30,7 +30,7 @@ public class ToDo extends Task {
                 ? this.taskDescription
                 : taskDescription;
         if (dateAndTime != null) {
-            throw new DukeException("☹ Sorry kid, A todo cannot have a date and time.");
+            throw new DukeException("Sorry kid, A todo cannot have a date or time.");
         } else {
             return new ToDo(updatedDescription, this.isDone);
         }

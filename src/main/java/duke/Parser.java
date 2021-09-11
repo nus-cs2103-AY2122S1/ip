@@ -116,7 +116,7 @@ public abstract class Parser {
             }
             return LocalDateTime.parse(toFormat);
         } catch (Exception e) {
-            throw new DukeException("☹ OOPS!!! Please use the following format for date and time:\n"
+            throw new DukeException("Hey!!! Use the following format for date and time:\n"
                     + "yyyy-MM-dd, HH:mm");
         }
     }
@@ -139,8 +139,8 @@ public abstract class Parser {
             return Integer.parseInt(splitBySpace[1].trim());
 
         } else {
-            throw new DukeException("☹ OOPS!!! Please state which task number "
-                    + "you want to mark\n as done.");
+            throw new DukeException("Hey!!! Please give a task number "
+                    + "you want me to mark as done.");
         }
     }
 
@@ -213,11 +213,11 @@ public abstract class Parser {
             return numberDescriptionAndTime;
 
         } else if (!hasTaskNumber) {
-            throw new DukeException("☹ OOPS!!! Please state which task number "
-                    + "you want to update.");
+            throw new DukeException("Hey!!! Please state which task number "
+                    + "you want me to update.");
         } else {
-            throw new DukeException("☹ OOPS!!! Please provide a description or "
-                    + "time to update.");
+            throw new DukeException("Hey!!! Please provide a description or "
+                    + "time to me update.");
         }
     }
 
@@ -239,8 +239,8 @@ public abstract class Parser {
             return Integer.parseInt(splitBySpace[1].trim());
 
         } else {
-            throw new DukeException("☹ OOPS!!! Please state which task number "
-                    + "you want to\n delete.");
+            throw new DukeException("Hey!!! Please state which task number "
+                    + "you want me to delete.");
         }
     }
 
@@ -262,7 +262,8 @@ public abstract class Parser {
             return splitBySpace[1].trim();
 
         } else {
-            throw new DukeException("☹ OOPS!!! Please give a search query.");
+            throw new DukeException("Hey!!! Give me something to "
+                    + "actually search for.");
         }
     }
 
@@ -299,7 +300,7 @@ public abstract class Parser {
                     false);
 
         } else {
-            throw new DukeException("☹ OOPS!!! Please provide a date or "
+            throw new DukeException("Hey!!! Please provide a date or "
                     + "time for the deadline.");
         }
     }
@@ -331,12 +332,12 @@ public abstract class Parser {
                         eventTime, endTime, false);
 
             } else {
-                throw new DukeException("☹ OOPS!!! Please provide an end "
+                throw new DukeException("Hey!!! Please provide an end "
                         + "time for the event.");
             }
 
         } else {
-            throw new DukeException("☹ OOPS!!! Please provide a date or "
+            throw new DukeException("Hey!!! Please provide a date or "
                     + "time for the event.");
         }
     }

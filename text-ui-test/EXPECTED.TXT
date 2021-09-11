@@ -1,33 +1,33 @@
 ____________________________________________________________
-Hello! I'm Duke
-What can I do for you?
+I'm Duke Nukem.
+What can I do for you kid?
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 Your list is currently empty.
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task:
+You've got it kid. I've added this task:
   [T][ ] read book
 Now you have 1 task in the list.
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task:
+You've got it kid. I've added this task:
   [D][ ] return book (by: 06 Jun 2021 at 12:00 am)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task:
+You've got it kid. I've added this task:
   [E][ ] project meeting (at: 06 Aug 2021 from 2:00 pm - 4:00 pm)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task:
+You've got it kid. I've added this task:
   [T][ ] join sports club
 Now you have 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task:
+You've got it kid. I've added this task:
   [T][ ] borrow book
 Now you have 5 tasks in the list.
 ____________________________________________________________
@@ -40,11 +40,11 @@ Here are the tasks in your list:
 5.[T][ ] borrow book
 ____________________________________________________________
 ____________________________________________________________
-Nice! I've marked this task as done:
+Nice work! I've marked this task as done:
   [T][X] read book
 ____________________________________________________________
 ____________________________________________________________
-Nice! I've marked this task as done:
+Nice work! I've marked this task as done:
   [T][X] join sports club
 ____________________________________________________________
 ____________________________________________________________
@@ -56,10 +56,10 @@ Here are the tasks in your list:
 5.[T][ ] borrow book
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! That task does not exist.
+What!!! That task does not exist!
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! That task does not exist.
+What!!! That task does not exist!
 ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this task:
@@ -67,8 +67,7 @@ Noted. I've removed this task:
 Now you have 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Please state which task number you want to
- delete.
+Hey!!! Please state which task number you want me to delete.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
@@ -78,48 +77,48 @@ Here are the tasks in your list:
 4.[T][ ] borrow book
 ____________________________________________________________
 ____________________________________________________________
-Here are the matching tasks in your list:
+Here's what I found:
 1.[D][ ] return book (by: 06 Jun 2021 at 12:00 am)
 2.[T][ ] borrow book
 ____________________________________________________________
 ____________________________________________________________
-Here are the matching tasks in your list:
+Here's what I found:
 1.[T][X] join sports club
 ____________________________________________________________
 ____________________________________________________________
-No matching tasks were found.
+Sorry, I couldn't find anything that matched.
 ____________________________________________________________
 ____________________________________________________________
-No matching tasks were found.
+Sorry, I couldn't find anything that matched.
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Please give a search query.
+Hey!!! Give me something to actually search for.
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! The description of a todo cannot be empty.
+Hey kid!!! The description of a todo cannot be empty.
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! The description of a deadline cannot be empty.
+Hey kid!!! The description of a deadline cannot be empty.
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! The description of a event cannot be empty.
+Hey kid!!! The description of a event cannot be empty.
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Please provide a date or time for the deadline.
+Hey!!! Please provide a date or time for the deadline.
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Please provide a date or time for the event.
+Hey!!! Please provide a date or time for the event.
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Please use the following format for date and time:
+Hey!!! Use the following format for date and time:
 yyyy-MM-dd, HH:mm
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Please use the following format for date and time:
+Hey!!! Use the following format for date and time:
 yyyy-MM-dd, HH:mm
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Please provide an end time for the event.
+Hey!!! Please provide an end time for the event.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
@@ -129,54 +128,53 @@ Here are the tasks in your list:
 4.[T][ ] borrow book
 ____________________________________________________________
 ____________________________________________________________
-Sure thing. I've replaced the following task:
+Sure thing kid. I've replaced the following task:
 [T][ ] borrow book
 with this task:
 [T][ ] buy bread from store
 ____________________________________________________________
 ____________________________________________________________
-Sure thing. I've replaced the following task:
+Sure thing kid. I've replaced the following task:
 [E][ ] project meeting (at: 06 Aug 2021 from 2:00 pm - 4:00 pm)
 with this task:
 [E][ ] project discussion (at: 06 Aug 2021 from 3:00 pm - 4:00 pm)
 ____________________________________________________________
 ____________________________________________________________
-Sure thing. I've replaced the following task:
+Sure thing kid. I've replaced the following task:
 [D][ ] return book (by: 06 Jun 2021 at 12:00 am)
 with this task:
 [D][ ] return book (by: 13 Jun 2021 at 12:00 am)
 ____________________________________________________________
 ____________________________________________________________
-Sure thing. I've replaced the following task:
+Sure thing kid. I've replaced the following task:
 [E][ ] project discussion (at: 06 Aug 2021 from 3:00 pm - 4:00 pm)
 with this task:
 [E][ ] project discussion on Zoom (at: 06 Aug 2021 from 3:00 pm - 4:00 pm)
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Please state which task number you want to update.
+Hey!!! Please state which task number you want me to update.
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Please provide a description or time to update.
+Hey!!! Please provide a description or time to me update.
 ____________________________________________________________
 ____________________________________________________________
-☹ Sorry kid, A todo cannot have a date and time.
+Sorry kid, A todo cannot have a date or time.
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! That task does not exist.
+What!!! That task does not exist!
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! That task does not exist.
+What!!! That task does not exist!
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! That task does not exist.
+What!!! That task does not exist!
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Please state which task number you want to mark
- as done.
+Hey!!! Please give a task number you want me to mark as done.
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+Sorry kid, no idea what that means.
 ____________________________________________________________
 ____________________________________________________________
-Bye. Hope to see you again soon!
+See you around kid!
 ____________________________________________________________

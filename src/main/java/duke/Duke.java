@@ -9,6 +9,7 @@ import duke.task.Task;
  * Handles the logic of Duke e.g. adding, saving and deleting tasks.
  */
 public class Duke {
+    static final String UNKNOWN_COMMAND = "Sorry kid, no idea what that means.";
 
     private TaskList taskList;
     private Storage storage;
@@ -77,8 +78,7 @@ public class Duke {
             return this.taskList.findTasksWithSubstring(toSearch);
 
         } else {
-            throw new DukeException(
-                    "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException(UNKNOWN_COMMAND);
         }
     }
 
@@ -100,14 +100,13 @@ public class Duke {
                 newTask = Parser.parseEventCommand(substring);
 
             } else {
-                throw new DukeException(
-                        "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException(UNKNOWN_COMMAND);
             }
             this.storage.save(this.taskList);
             return this.taskList.addTask(newTask);
 
         } else {
-            throw new DukeException("☹ OOPS!!! The description of a " + splitBySpace[0]
+            throw new DukeException("Hey kid!!! The description of a " + splitBySpace[0]
                     + " cannot be empty.");
         }
     }
@@ -134,8 +133,7 @@ public class Duke {
                     ui.printMessage(this.handleTaskCommand(type, userInput));
 
                 } else {
-                    throw new DukeException(
-                            "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    throw new DukeException(UNKNOWN_COMMAND);
                 }
             } catch (DukeException de) {
                 this.ui.showError(de);
@@ -158,8 +156,7 @@ public class Duke {
                 return this.handleTaskCommand(type, userInput);
 
             } else {
-                throw new DukeException(
-                        "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException(UNKNOWN_COMMAND);
             }
         } catch (DukeException de) {
             return de.getMessage();

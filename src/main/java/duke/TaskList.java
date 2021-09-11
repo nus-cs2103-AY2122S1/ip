@@ -37,7 +37,7 @@ public class TaskList {
         this.tasks.add(task);
         this.taskCount++;
         String taskCount = (this.taskCount == 1) ? "1 task" : this.taskCount + " tasks";
-        return "Got it. I've added this task:\n" + "  " + task.toString()
+        return "You've got it kid. I've added this task:\n" + "  " + task.toString()
                 + "\n" + "Now you have " + taskCount + " in the list.\n";
     }
 
@@ -75,10 +75,10 @@ public class TaskList {
         try {
             Task doneTask = this.tasks.get(taskNumber - 1);
             doneTask.markDone();
-            return "Nice! I've marked this task as done:\n" + "  "
+            return "Nice work! I've marked this task as done:\n" + "  "
                     + doneTask.toString() + "\n";
         } catch (Exception e) {
-            throw new DukeException("☹ OOPS!!! That task does not exist.");
+            throw new DukeException("What!!! That task does not exist!");
         }
     }
 
@@ -95,14 +95,14 @@ public class TaskList {
                 : "Not enough information provided to update task.";
         int taskNumber = Integer.parseInt(valuesToUpdate[0]) - 1;
         if (taskNumber >= this.tasks.size()) {
-            throw new DukeException("☹ OOPS!!! That task does not exist.");
+            throw new DukeException("What!!! That task does not exist!");
         }
 
         Task taskToUpdate = this.tasks.get(taskNumber);
         try {
             this.tasks.set(taskNumber,
                     taskToUpdate.update(valuesToUpdate[1], valuesToUpdate[2]));
-            return "Sure thing. I've replaced the following task:\n"
+            return "Sure thing kid. I've replaced the following task:\n"
                     + taskToUpdate.toString() + "\n"
                     + "with this task:\n"
                     + this.tasks.get(taskNumber).toString()
@@ -130,7 +130,7 @@ public class TaskList {
                     + " in the list.\n";
 
         } catch (Exception e) {
-            throw new DukeException("☹ OOPS!!! That task does not exist.");
+            throw new DukeException("What!!! That task does not exist!");
         }
     }
 
@@ -150,9 +150,9 @@ public class TaskList {
         }
 
         if (found.size() == 0) {
-            return "No matching tasks were found.\n";
+            return "Sorry, I couldn't find anything that matched.\n";
         } else {
-            StringBuilder result = new StringBuilder("Here are the matching tasks in your list:\n");
+            StringBuilder result = new StringBuilder("Here's what I found:\n");
             int i = 0;
             for (Task task : found) {
                 result.append(++i).append(".").append(task.toString()).append("\n");

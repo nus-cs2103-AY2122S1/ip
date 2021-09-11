@@ -8,9 +8,9 @@ import duke.exception.DukeException;
  * Handles the tasks of scanning in user inputs and displaying responses to the console.
  */
 public class Ui {
-    static final String OPENING_MESSAGE = "Hello! I'm Duke\n"
-            + "What can I do for you?\n";
-    static final String CLOSING_MESSAGE = "Bye. Hope to see you again soon!\n";
+    static final String OPENING_MESSAGE = "I'm Duke Nukem.\n"
+            + "What can I do for you kid?\n";
+    static final String CLOSING_MESSAGE = "See you around kid!\n";
     static final String LINE_SEPARATOR = "____________________________________________________________";
     private final Scanner sc;
 

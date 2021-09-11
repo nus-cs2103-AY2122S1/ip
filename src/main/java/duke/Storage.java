@@ -53,7 +53,7 @@ public class Storage {
             }
             return savedList;
         } catch (Exception e) {
-            throw new DukeException("☹ OOPS!!! There was an error starting Duke.\n"
+            throw new DukeException("Damn!!! The save file was too intimidated to form.\n"
             + "Your changes may not be saved.");
         }
     }
@@ -73,7 +73,8 @@ public class Storage {
             }
             bw.close();
         } catch (Exception e) {
-            throw new DukeException("☹ OOPS!!! There was an error updating your task list.");
+            throw new DukeException("What the!!! The save file is too terrified to "
+                + "let me save your task list!");
         }
     }
 }
