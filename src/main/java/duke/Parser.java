@@ -83,10 +83,11 @@ public class Parser {
             Todo todoTask = new Todo(getTodoDesc(input), DEFAULT_STATUS);
             return new TodoCommand(todoTask);
         case DEADLINE_TAG:
-            Deadline deadlineTask = new Deadline(getTaskDesc(input), getDeadlineDates(input), DEFAULT_STATUS);
+            Deadline deadlineTask = new Deadline(getTaskDesc("deadline", input),
+                    getDeadlineDates(input), DEFAULT_STATUS);
             return new DeadlineCommand(deadlineTask);
         case EVENT_TAG:
-            Event eventTask = new Event(getTaskDesc(input), getEventDates(input), DEFAULT_STATUS);
+            Event eventTask = new Event(getTaskDesc("event", input), getEventDates(input), DEFAULT_STATUS);
             return new EventCommand(eventTask);
         case DONE_TAG:
             int doneId = getTaskId(input);
@@ -133,17 +134,26 @@ public class Parser {
      * @return A String representing the description.
      * @throws IllegalFormatException Wrong format used by user.
      */
-    private String getTaskDesc(String input) throws IllegalFormatException {
-        String key = " ";
-        String[] details = spiltInputByKey(input, key, 3);
+    private String getTaskDesc(String type, String input) throws IllegalFormatException {
+        String key = type + " ";
+        String[] initialSplit = spiltInputByKey(input, key);
 
-        if (details.length != 3) {
+        if (initialSplit.length != 2) {
             String errorMsg = "Please follow the format:\n type description /xx yyyy-mm-dd\n"
                     + " Use /by for deadline, /at for event.";
             throw new IllegalFormatException(errorMsg);
         }
 
-        return details[1].trim();
+        String nextKey = "/";
+        String[] details = spiltInputByKey(initialSplit[1], nextKey);
+
+        if (details.length != 2) {
+            String errorMsg = "Please follow the format:\n type description /xx yyyy-mm-dd\n"
+                    + " Use /by for deadline, /at for event.";
+            throw new IllegalFormatException(errorMsg);
+        }
+
+        return details[0].trim();
     }
 
     /**

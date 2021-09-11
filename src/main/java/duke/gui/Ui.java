@@ -8,12 +8,12 @@ public class Ui {
     private enum Message {
         WELCOME_MSG("Hello! I am Iron Bot!\nWhat can I do for you?"),
         EXIT_MSG("Good Bye. Don't have a good day... Have a great day!!!"),
-        DISPLAY_LIST_MSG("There are the tasks you have:"),
+        DISPLAY_LIST_MSG("These are the task(s) you have:"),
         EMPTY_LIST_MSG("There is current no task in your list!"),
         TASK_DONE_MSG("Well done! You have completed: \n"),
         TASK_ADDED_MSG("Roger. I've added this task: \n"),
         TASK_DELETED_MSG("Roger. I've deleted this task: \n"),
-        CHECK_TASK_COUNT_MSG(" tasks are in your list now!"),
+        CHECK_TASK_COUNT_MSG(" task(s) are in your list now!"),
         NONE_MATCH_MSG("Sorry, I can't find anything that matches the keyword."),
         UPDATE_TASK_MSG("Roger! I have updated this task: \n");
 
