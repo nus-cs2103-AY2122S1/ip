@@ -20,9 +20,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui) {
-        String output = taskList.printList();
-        ui.displayText(output);
-        return output;
+        return taskList.printList();
     }
 
 }

@@ -62,7 +62,6 @@ public class DoneCommand extends Command {
             }
         }
         output.setLength(output.length() - 1);
-        ui.displayText(output.toString());
         return output.toString();
     }
 

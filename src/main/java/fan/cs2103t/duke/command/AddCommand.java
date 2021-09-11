@@ -40,7 +40,6 @@ public class AddCommand extends Command {
         if (taskList.addTask(task)) {
             output = String.format(MESSAGE_SUCCESSFULLY_ADDED_FORMAT,
                     task.getDescriptionWithStatus(), taskList.getNumOfTasks());
-            ui.displayText(output);
             return output;
         } else {
             System.exit(1);

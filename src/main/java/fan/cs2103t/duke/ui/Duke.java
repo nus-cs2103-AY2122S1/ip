@@ -46,25 +46,6 @@ public class Duke {
     }
 
     /**
-     * Runs Duke. The method is not in use since GUI was added.
-     */
-    public void run() {
-        ui.greet();
-        boolean isExit = false;
-        do {
-            try {
-                String input = ui.readLine();
-                Command command = parser.parseCommand(input);
-                command.execute(tasks, ui);
-                storage.saveTaskList(tasks); // save the latest task list no matter what command it is
-                isExit = ExitCommand.isExit(command);
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
-        } while (!isExit);
-    }
-
-    /**
      * Gets and returns Duke's response message for every input.
      * Terminates the current program immediately if the specified command is an exit command.
      *
@@ -82,7 +63,6 @@ public class Duke {
                 System.exit(0); // TODO: better handle this
             }
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
             output = e.getMessage();
         }
         return output;

@@ -63,7 +63,6 @@ public class FindCommand extends Command {
         } else {
             output = MESSAGE_NOTHING_MATCHING_QUERY;
         }
-        ui.displayText(output);
         return output;
     }
 
