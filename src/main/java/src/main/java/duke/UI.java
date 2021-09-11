@@ -13,6 +13,7 @@ public class UI {
      * intance of src.main.java.duke.TaskList to manipulate the list
      */
     private TaskList list;
+
     /**
      * instance of storage to add data to the hardisk
      */
@@ -28,11 +29,15 @@ public class UI {
      *
      * @param n the task number entered by the user
      */
-    void markAsDone(int n) throws DukeException {
+    String markAsDone(int n) throws DukeException {
         list.markAsDone(n);
         storage.writeToFile();
+        String output = "";
         System.out.println("Nice! I have marked this task as done:");
+        output += "Nice! I have marked this task as done:\n";
         System.out.println(list.get(n - 1).toString());
+        output += list.get(n - 1).toString();
+        return output;
     }
 
     /**
@@ -40,12 +45,17 @@ public class UI {
      *
      * @param n the task number entered by the user
      */
-    void deleteTask(int n) throws DukeException {
+    String deleteTask(int n) throws DukeException {
         String deletedTask = list.remove(n);
         storage.writeToFile();
+        String output = "";
         System.out.println("Noted. I've removed this task:");
+        output += "Noted. I've removed this task:";
         System.out.println(deletedTask);
+        output += deletedTask + "\n";
         System.out.println("Now you have " + list.getSize() + " tasks in the list.");
+        output += "Now you have " + list.getSize() + " tasks in the list.";
+        return output;
     }
 
 
@@ -54,13 +64,18 @@ public class UI {
      *
      * @param input String input from the user
      */
-    void addToList(Task input) {
+    String addToList(Task input) {
         //Task task = new Task(input, false);
         list.add(input);
         storage.writeToFile();
+        String output = "";
         System.out.println("Got it. I've added this task:");
+        output += "Got it. I've added this task:\n";
         System.out.println(input.toString());
+        output += input.toString() + '\n';
         System.out.println("Now you have " + list.getSize() + " tasks in the list.");
+        output += "Now you have " + list.getSize() + " tasks in the list.\n";
+        return output;
     }
 
     /**
@@ -70,9 +85,9 @@ public class UI {
      * @param input String task name
      * @param time  String time of event
      */
-    void createEvent(String input, String time) {
+    String createEvent(String input, String time) {
         Event event = new Event(input, false, time);
-        addToList(event);
+        return addToList(event);
     }
 
     /**
@@ -81,9 +96,9 @@ public class UI {
      *
      * @param input String task name
      */
-    void createTodo(String input) {
+    String createTodo(String input) {
         Todo todo = new Todo(input, false);
-        addToList(todo);
+        return addToList(todo);
     }
 
     /**
@@ -93,19 +108,23 @@ public class UI {
      * @param input String task name
      * @param time  String time of deadline
      */
-    void createDeadline(String input, String time) {
+    String createDeadline(String input, String time) {
         Deadline deadline = new Deadline(input, false, time);
-        addToList(deadline);
+        return addToList(deadline);
     }
 
     /**
      * method to greet the user in the beginning of the session and also show
      * the tasks in the list
      */
-    void greet() {
+    String greet() {
         System.out.println("Hello, I'm Duke");
-        printList();
+        String text = "Hello, I'm Duke\n";
+        text = text + "Here are the tasks in your list:\n";
+        text = text + printList();
+        text = text + "What can I do for you";
         System.out.println("What can I do for you");
+        return text;
     }
 
     /**
@@ -113,20 +132,24 @@ public class UI {
      *
      * @param text the keyword to be searched
      */
-    void find(String text) {
+    String find(String text) {
+        StringBuilder output = new StringBuilder();
         List<Task> content = list.find(text);
         System.out.println("Here are the matching tasks in your list:");
+        output.append("Here are the matching tasks in your list:\n");
         for (int i = 0; i < content.size(); i++) {
             System.out.println((i + 1) + ". " + content.get(i).toString());
+            output.append(i + 1).append(". ").append(content.get(i).toString()).append("\n");
         }
+        return output.toString();
     }
 
     /**
      * method to invoke print method of the Tasklist class and show the tasks in the
      * list
      */
-    void printList() {
+    String printList() {
         System.out.println("Here are the tasks in your list:");
-        list.printList();
+        return list.printList();
     }
 }

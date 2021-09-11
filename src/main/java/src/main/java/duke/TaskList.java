@@ -53,7 +53,6 @@ public class TaskList {
         if (n > list.size()) {
             throw new TaskNotFoundException("list has only " + list.size() + " tasks. Enter a valid task");
         }
-
         list.get(n - 1).markAsDone();
     }
 
@@ -99,14 +98,18 @@ public class TaskList {
     /**
      * method to print task list on command
      */
-    void printList() {
+    String printList() {
+        StringBuilder text = new StringBuilder();
         if (list.size() == 0) {
             System.out.println("The list has no tasks");
+            text = new StringBuilder("The list has no tasks");
         } else {
             for (int i = 0; i < this.list.size(); i++) {
                 System.out.println((i + 1) + ". " + list.get(i).toString());
+                text.append(i + 1).append(". ").append(list.get(i).toString()).append("\n");
             }
         }
+        return text.toString();
     }
 
     int getSize() {
