@@ -22,38 +22,48 @@ import javafx.stage.Stage;
 public class AlertBox {
 
     /**
-     * Display a prompt window to the user to interact with
+     * Display a prompt window to the user to interact with by either clicking yes or no
+     * to commence with the passed in event handling or not.
      *
-     * @param title        the message at the top
-     * @param eventHandler eventHandler to execute when user click yes or press enter
+     * @param title        the message at the top.
+     * @param eventHandler eventHandler to execute when user click yes or press enter.
      */
     public static void display(String title, EventHandler<ActionEvent> eventHandler) {
-        Stage window = new Stage();
+        Stage stage = new Stage();
+        setUpStage(title, eventHandler, stage);
+        stage.showAndWait();
+    }
 
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.setMinWidth(250);
+    private static void setUpStage(String title, EventHandler<ActionEvent> eventHandler, Stage stage) {
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setMinWidth(250);
+        VBox vBoxLayout = new VBox(10);
+        vBoxLayout.setAlignment(Pos.CENTER);
+        addTitle(title, vBoxLayout);
+        addButtons(eventHandler, stage, vBoxLayout);
+        Scene scene = new Scene(vBoxLayout);
+        stage.setScene(scene);
+    }
 
+    private static void addTitle(String title, VBox vBoxLayout) {
         Label label = new Label();
         label.setText(title);
+        vBoxLayout.getChildren().add(label);
+    }
+
+    private static void addButtons(EventHandler<ActionEvent> eventHandler, Stage stage, VBox vBoxLayout) {
+        HBox horizontal = new HBox(10);
         Button yesButton = new Button("Yes");
         yesButton.setDefaultButton(true);
         Button noButton = new Button("No");
         yesButton.setOnAction(e -> {
             eventHandler.handle(e);
-            window.close();
+            stage.close();
         });
-        noButton.setOnAction(e -> window.close());
-
-        VBox layout = new VBox(10);
-        HBox horizontal = new HBox(10);
+        noButton.setOnAction(e -> stage.close());
         horizontal.setAlignment(Pos.CENTER);
         horizontal.getChildren().addAll(yesButton, noButton);
-        layout.getChildren().addAll(label, horizontal);
-        layout.setAlignment(Pos.CENTER);
-
-        Scene scene = new Scene(layout);
-        window.setScene(scene);
-        window.showAndWait();
+        vBoxLayout.getChildren().add(horizontal);
     }
 
 }
