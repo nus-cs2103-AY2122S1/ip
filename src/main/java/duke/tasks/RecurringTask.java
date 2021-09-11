@@ -29,6 +29,10 @@ public class RecurringTask extends Task {
                 delimiter, intervalInDays);
     }
 
+    /**
+     * Returns the same task but at the next deadline
+     * @return A recurring task object representing the same task but one deadline later
+     */
     @Override
     public Task getNextTask() {
         return new RecurringTask(taskName, nextDeadline.plusDays(intervalInDays),

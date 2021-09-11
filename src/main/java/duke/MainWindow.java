@@ -6,7 +6,12 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+//@@author tanhuakun-reused
+//Reused from https://se-education.org/guides/tutorials/javaFx.html
+// with minor modifications
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -19,6 +24,7 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+
 
     private Duke duke;
 
@@ -44,7 +50,9 @@ public class MainWindow extends AnchorPane {
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                createPadding(),
+                DialogBox.getDukeDialog(response, dukeImage),
+                createPadding()
         );
         userInput.clear();
     }
@@ -52,7 +60,15 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void showDukeMessage(String msg) {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(msg, dukeImage)
+                DialogBox.getDukeDialog(msg, dukeImage),
+                createPadding()
         );
     }
+
+    public HBox createPadding() {
+        HBox padding = new HBox();
+        padding.setMinHeight(6);
+        return padding;
+    }
 }
+//@@author

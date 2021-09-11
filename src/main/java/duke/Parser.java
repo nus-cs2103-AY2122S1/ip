@@ -71,6 +71,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a Command that adds a Todo task
+     * @param args String containing Todo task details
+     * @return Command that adds the given Todo task when executed
+     */
     private Command addTodo(String args) {
         return new AddTaskCommand(new Todo(args));
     }
@@ -87,6 +92,12 @@ public class Parser {
 
     }
 
+    /**
+     * Returns a Command that adds an Event task
+     * @param args String containing Event task details
+     * @return Command that adds the given Event task when executed
+     * @throws WrongArgumentDukeException if argument is wrongly formatted.
+     */
     private Command addEvent(String args) throws WrongArgumentDukeException {
         String[] strArr = args.split(EVENT_DELIMITER, 2);
         if (strArr.length >= 2) {
@@ -98,6 +109,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a Command that adds a Recurring task
+     * @param args String containing Recurring task details
+     * @return Command that adds the given Recurring task when executed
+     * @throws WrongArgumentDukeException if argument is wrongly formatted.
+     */
     private Command addRecurring(String args) throws WrongArgumentDukeException {
         String[] strArr = args.split(RECURRING_DELIMITER_1);
         if (strArr.length < 2) {

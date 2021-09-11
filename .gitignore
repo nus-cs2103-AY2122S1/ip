@@ -11,6 +11,7 @@
 /build/
 src/main/resources/docs/
 build.gradle
+gradle.properties
 
 # MacOS custom attributes files created by Finder
 .DS_Store
