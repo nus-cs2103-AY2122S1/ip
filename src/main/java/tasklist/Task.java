@@ -1,8 +1,8 @@
 package tasklist;
 
+import exception.InvalidCommandFormatException;
 import exception.InvalidDateTimeException;
 import exception.InvalidFormatInStorageException;
-import exception.InvalidTaskFormatException;
 import exception.InvalidTaskTypeException;
 import type.CommandTypeEnum;
 import type.TaskIconTypeEnum;
@@ -35,10 +35,10 @@ public abstract class Task {
      * @param description the full user input that may or may not be a valid type of task
      * @return `DukeTask`
      * @throws InvalidTaskTypeException when the type of task is not recognised
-     * @throws InvalidTaskFormatException when a task does not have valid time inputs
+     * @throws InvalidCommandFormatException when a task does not have valid time inputs
      */
     public static Task createTask(String description, CommandTypeEnum commandType)
-            throws InvalidTaskTypeException, InvalidTaskFormatException, InvalidDateTimeException {
+            throws InvalidTaskTypeException, InvalidCommandFormatException, InvalidDateTimeException {
         switch (commandType) {
         case TODO:
             return TodoTask.createTask(description);
@@ -101,6 +101,13 @@ public abstract class Task {
     }
 
     /**
+     * Formats the task to storage string form.
+     *
+     * @return Task in storage string format.
+     */
+    public abstract String toStorageString();
+
+    /**
      * Checks if the task description contains a keyword.
      *
      * @param keyword Keyword to search for.
@@ -108,33 +115,6 @@ public abstract class Task {
      */
     protected boolean contains(String keyword) {
         return this.description.contains(keyword);
-    }
-
-    /**
-     * Split tasks into action and time parts.
-     *
-     * @param descriptionWithTime the description of a task including time information
-     * @param splitter the regex to split the description by
-     * @return a string array whose first item is the action description and second item is the time
-     */
-    protected static String[] splitActionAndTime(String descriptionWithTime, String splitter) {
-        String[] splitParts = descriptionWithTime.split(splitter);
-
-        // Trim split parts to remove whitespace before and after
-        for (int i = 0; i < splitParts.length; i++) {
-            splitParts[i] = splitParts[i].trim();
-        }
-
-        return splitParts;
-    }
-
-    protected static void validateCorrectNumberOfParts(
-            int expectedNumOfParts,
-            String[] splitParts,
-            CommandTypeEnum commandType) throws InvalidTaskFormatException {
-        if (splitParts.length != expectedNumOfParts) {
-            throw new InvalidTaskFormatException(commandType);
-        }
     }
 
     protected boolean isSameDescription(Task task) {

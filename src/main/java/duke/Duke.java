@@ -6,7 +6,7 @@ import exception.ErrorAccessingFileException;
 import exception.InvalidFormatInStorageException;
 import javafx.application.Platform;
 import message.Message;
-import parser.Parser;
+import parser.CommandParser;
 import storage.Storage;
 import storage.StorageFile;
 import tasklist.TaskList;
@@ -19,7 +19,7 @@ import tasklist.TaskList;
  */
 public class Duke {
     private TaskList list;
-    private Parser parser;
+    private CommandParser parser;
     private Message loadErrorMessage;
 
     /**
@@ -35,7 +35,7 @@ public class Duke {
             this.loadErrorMessage = e.getOutputMessage();
         }
 
-        this.parser = new Parser();
+        this.parser = new CommandParser();
     }
 
     /**

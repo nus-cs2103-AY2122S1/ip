@@ -66,26 +66,26 @@ public class StorageFile {
     }
 
     /**
-     * Adds item to a new line at the end of the file in the hard disk.
+     * Adds task to a new line at the end of the file in the hard disk.
      *
-     * @param item Item to be added.
+     * @param task Task to be added.
      * @throws IOException If there is an exception when accessing the file.
      */
-    public void add(String item) throws IOException {
+    public void add(Task task) throws IOException {
         FileWriter fw = new FileWriter(this.filePath, true);
-        fw.write(item + System.lineSeparator());
+        fw.write(task.toStorageString() + System.lineSeparator());
         fw.close();
     }
 
     /**
      * Rewrites the file with new content.
      *
-     * @param items Items to rewrite the new file with.
+     * @param tasks Tasks to rewrite the new file with.
      * @throws IOException If there is an exception when accessing the file.
      */
-    public void rewriteFile(List<?> items) throws IOException {
+    public void rewriteFile(List<Task> tasks) throws IOException {
         List<String> lines = new ArrayList<>();
-        items.forEach((item) -> lines.add(item.toString()));
+        tasks.forEach((item) -> lines.add(item.toStorageString()));
         Path path = Paths.get(this.filePath);
         Files.write(path, lines);
     }

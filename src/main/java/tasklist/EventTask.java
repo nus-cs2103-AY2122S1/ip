@@ -1,22 +1,34 @@
 package tasklist;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+import exception.InvalidCommandFormatException;
+import exception.InvalidDateTimeException;
 import exception.InvalidFormatInStorageException;
-import exception.InvalidTaskFormatException;
+import parser.CommandParser;
+import parser.DateTimeParser;
 import type.CommandTypeEnum;
+import type.DateFormatTypeEnum;
 import type.TaskIconTypeEnum;
+import type.TimeFormatTypeEnum;
 
 /**
  * Encapsulates a task with that will occur at a specified time period.
  * It inherits from `DukeTask`.
  */
 public class EventTask extends Task {
-    private static final String TIME_SPLITTER_INPUT = "/at";
-    private static final String TIME_SPLITTER_DATA = "\\(at:";
-    private String time;
+    private static final String SPLITTER_ACTION_TIME = "/at";
+    private static final String SPLITTER_DATE_TIME = " ";
+    private LocalDate date;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
-    private EventTask(String description, boolean isDone, String time) {
+    private EventTask(String description, boolean isDone, LocalDate date, LocalTime startTime, LocalTime endTime) {
         super(description, isDone);
-        this.time = time;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     /**
@@ -25,17 +37,27 @@ public class EventTask extends Task {
      * @param description Input task string.
      * @return App representation of a task containing an action description and time information.
      */
-    public static EventTask createTask (String description) throws InvalidTaskFormatException {
-        // Split the description into its action and time parts
-        String[] actionAndTimeDescriptions = splitActionAndTime(
+    public static EventTask createTask (String description) throws
+            InvalidCommandFormatException,
+            InvalidDateTimeException {
+        String[] actionAndTimeDescriptions = CommandParser.splitStringBySplitter(
                 description,
-                EventTask.TIME_SPLITTER_INPUT
+                EventTask.SPLITTER_ACTION_TIME
         );
-        validateCorrectNumberOfParts(2, actionAndTimeDescriptions, CommandTypeEnum.EVENT);
+        CommandParser.validateCorrectNumOfParts(2, actionAndTimeDescriptions, CommandTypeEnum.EVENT);
         String actionDescription = actionAndTimeDescriptions[0];
-        String timeDescription = actionAndTimeDescriptions[1];
+        String dateTimeDescription = actionAndTimeDescriptions[1];
 
-        return new EventTask(actionDescription, false, timeDescription);
+        String[] dateTimeDescriptions = CommandParser.splitStringBySplitter(dateTimeDescription, SPLITTER_DATE_TIME);
+        CommandParser.validateCorrectNumOfParts(3, dateTimeDescriptions, CommandTypeEnum.EVENT);
+        LocalDate date = DateTimeParser.changeDateStringToDate(
+                dateTimeDescriptions[0], DateFormatTypeEnum.INPUT.toString());
+        LocalTime startTime = DateTimeParser.changeTimeStringToTime(
+                dateTimeDescriptions[1], TimeFormatTypeEnum.INPUT.toString());
+        LocalTime endTime = DateTimeParser.changeTimeStringToTime(
+                dateTimeDescriptions[2], TimeFormatTypeEnum.INPUT.toString());
+
+        return new EventTask(actionDescription, false, date, startTime, endTime);
     }
 
     /**
@@ -45,7 +67,31 @@ public class EventTask extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s]%s (at: %s)", TaskIconTypeEnum.EVENT.toString(), super.toString(), this.time);
+        return String.format(
+                "[%s]%s (at: %s %s - %s)",
+                TaskIconTypeEnum.EVENT.toString(),
+                super.toString(),
+                DateTimeParser.changeDateToDateString(this.date, DateFormatTypeEnum.OUTPUT.toString()),
+                DateTimeParser.changeTimeToTimeString(this.startTime, TimeFormatTypeEnum.OUTPUT.toString()),
+                DateTimeParser.changeTimeToTimeString(this.endTime, TimeFormatTypeEnum.OUTPUT.toString())
+        );
+    }
+
+    /**
+     * Formats the task to storage string form.
+     *
+     * @return Task in storage string format.
+     */
+    public String toStorageString() {
+        return String.format(
+                "[%s]%s %s %s %s %s",
+                TaskIconTypeEnum.EVENT.toString(),
+                super.toString(),
+                SPLITTER_ACTION_TIME,
+                DateTimeParser.changeDateToDateString(this.date, DateFormatTypeEnum.INPUT.toString()),
+                DateTimeParser.changeTimeToTimeString(this.startTime, TimeFormatTypeEnum.INPUT.toString()),
+                DateTimeParser.changeTimeToTimeString(this.endTime, TimeFormatTypeEnum.INPUT.toString())
+        );
     }
 
     /**
@@ -59,21 +105,29 @@ public class EventTask extends Task {
             boolean isDone = Task.isStorageTaskDone(description);
 
             int descriptionStartPos = 3;
-            String[] actionAndTimeDescriptions = splitActionAndTime(
+            String[] actionAndTimeDescriptions = CommandParser.splitStringBySplitter(
                     description.substring(descriptionStartPos),
-                    TIME_SPLITTER_DATA
+                    SPLITTER_ACTION_TIME
             );
-            validateCorrectNumberOfParts(2, actionAndTimeDescriptions, CommandTypeEnum.EVENT);
+            CommandParser.validateCorrectNumOfParts(
+                    2, actionAndTimeDescriptions, CommandTypeEnum.EVENT);
 
             String actionDescription = actionAndTimeDescriptions[0];
-            String timeWithClosingBracket = actionAndTimeDescriptions[1];
-            String time = timeWithClosingBracket.substring(0, timeWithClosingBracket.length() - 1);
+            String timeDescription = actionAndTimeDescriptions[1];
 
-            return new EventTask(actionDescription, isDone, time);
-        } catch (InvalidTaskFormatException e) {
+            String[] dateTimeDescriptions = CommandParser.splitStringBySplitter(timeDescription, SPLITTER_DATE_TIME);
+            CommandParser.validateCorrectNumOfParts(3, dateTimeDescriptions, CommandTypeEnum.EVENT);
+            LocalDate date = DateTimeParser.changeDateStringToDate(
+                    dateTimeDescriptions[0], DateFormatTypeEnum.INPUT.toString());
+            LocalTime startTime = DateTimeParser.changeTimeStringToTime(
+                    dateTimeDescriptions[1], TimeFormatTypeEnum.INPUT.toString());
+            LocalTime endTime = DateTimeParser.changeTimeStringToTime(
+                    dateTimeDescriptions[2], TimeFormatTypeEnum.INPUT.toString());
+
+            return new EventTask(actionDescription, isDone, date, startTime, endTime);
+        } catch (InvalidCommandFormatException | InvalidDateTimeException e) {
             throw new InvalidFormatInStorageException(e.getMessage() + ": " + description);
         }
-
     }
 
     @Override
@@ -89,6 +143,15 @@ public class EventTask extends Task {
         }
 
         EventTask eventTask = (EventTask) task;
-        return this.time.equals(eventTask.time);
+
+        if (!this.date.equals(eventTask.date)) {
+            return false;
+        }
+
+        if (!this.startTime.equals(eventTask.startTime)) {
+            return false;
+        }
+
+        return this.endTime.equals(eventTask.endTime);
     }
 }

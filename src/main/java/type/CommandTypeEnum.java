@@ -7,11 +7,21 @@ public enum CommandTypeEnum {
     BYE("bye", "exit the app", "bye"),
     DEADLINE("deadline",
             "add a task with a deadline",
-            String.format("deadline <description> /by <%s>", DatetimeTypeEnum.INPUT.toString())
+            String.format("deadline <description> /by <%s %s>",
+                    DateFormatTypeEnum.INPUT.toString(),
+                    TimeFormatTypeEnum.INPUT.toString()
+            )
     ),
     DELETE("delete", "delete a task", "delete <task number in last shown list>"),
     DONE("done", "mark a task as done", "done <task number in last shown list>"),
-    EVENT("event", "add a task occurring at a time", "event <description> /at <time>"),
+    EVENT("event",
+            "add a task occurring at a time",
+            String.format("event <description> /at <%s %s %s>",
+                    DateFormatTypeEnum.INPUT.toString(),
+                    TimeFormatTypeEnum.INPUT.toString(),
+                    TimeFormatTypeEnum.INPUT.toString()
+                    )
+    ),
     FIND("find", "find all tasks containing a keyword", "find <keyword>"),
     HELP("help", "list all available commands", "help"),
     LIST("list", "list all tasks", "list"),

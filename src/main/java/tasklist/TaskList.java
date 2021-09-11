@@ -43,7 +43,7 @@ public class TaskList {
     public void addTaskToList(Task task) throws ErrorAccessingFileException {
         try {
             this.list.add(task);
-            this.listFile.add(task.toString());
+            this.listFile.add(task);
         } catch (IOException e) {
             throw new ErrorAccessingFileException("add");
         }

@@ -7,6 +7,7 @@ import command.DoneCommand;
 import command.FindCommand;
 import command.HelpCommand;
 import command.ListCommand;
+import exception.InvalidCommandFormatException;
 import exception.InvalidTaskNumberException;
 import exception.MissingCommandDescriptionException;
 import exception.NonExistentCommandTypeException;
@@ -16,7 +17,7 @@ import type.CommandTypeEnum;
 /**
  * Encapsulates a `Parser` that parses string inputs to commands or throws exceptions if they are invalid.
  */
-public class Parser {
+public class CommandParser {
     /**
      * Detects if an input is the exit command.
      *
@@ -64,6 +65,40 @@ public class Parser {
             return AddCommand.createCommand(trimmedMessageWithoutCommand, commandType);
         default:
             throw new UnhandledCommandException(commandType);
+        }
+    }
+
+    /**
+     * Splits a string into an array of elements by a given splitter.
+     * @param input Input to split.
+     * @param splitter Splitter to split the string by.
+     * @return Array of strings.
+     */
+    public static String[] splitStringBySplitter(String input, String splitter) {
+        String[] splitParts = input.split(splitter);
+
+        // Trim split parts to remove whitespace before and after
+        for (int i = 0; i < splitParts.length; i++) {
+            splitParts[i] = splitParts[i].trim();
+        }
+
+        return splitParts;
+    }
+
+    /**
+     * Validates that an array of strings has the correct number of parts.
+     *
+     * @param expectedNumOfParts Expected number of parts.
+     * @param splitParts Array of strings.
+     * @param commandType Command Type.
+     * @throws InvalidCommandFormatException If the number of parts is wrong for the command type.
+     */
+    public static void validateCorrectNumOfParts(
+            int expectedNumOfParts,
+            String[] splitParts,
+            CommandTypeEnum commandType) throws InvalidCommandFormatException {
+        if (splitParts.length != expectedNumOfParts) {
+            throw new InvalidCommandFormatException(commandType);
         }
     }
 
