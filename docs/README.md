@@ -21,11 +21,11 @@
     4. Recurring task: recur [task name] /at [task time] /[task counter]
 
 ### Mark a task as done
-    done [task index]
+    done [task index] Example: done 1
 
 ### Delete a task
-    delete [task index]
+    delete [task index] Example: delete 1
 
 ### Find a class by task name
-    find [task name]
+    find [task name] Example: find run
 
