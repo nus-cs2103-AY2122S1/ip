@@ -10,8 +10,8 @@ public class Parser {
      * action to deal with the input
      *
      * @param input The string that contains the user input
-     * @param t The TaskList that contains the tasks to be added
-     * @param s The Storage that handles the reading and writing to a text file
+     * @param t     The TaskList that contains the tasks to be added
+     * @param s     The Storage that handles the reading and writing to a text file
      */
     public static String parse(String input, TaskList t, Storage s) {
         if (input.equals("list")) {
@@ -28,6 +28,12 @@ public class Parser {
             return returnDeleteString(input, t, s);
         } else if (input.startsWith("find")) {
             return returnFindString(input, t);
+        } else if (input.startsWith("schedule on")) {
+            return returnScheduleOnString(input, t);
+        } else if (input.startsWith("schedule until")) {
+            return returnScheduleUntilString(input, t);
+        } else if (input.startsWith("schedule after")) {
+            return returnScheduleAfterString(input, t);
         } else {
             DukeException e = new NonExistentKeyword();
             return e.getMsg();
@@ -196,7 +202,7 @@ public class Parser {
      * Returns the date of the task (event/deadline)
      *
      * @param tempEvent An array of string that contains the userInput
-     * split into two parts
+     *                  split into two parts
      * @return LocalDate The date of the task
      */
     public static LocalDate getDate(String[] tempEvent) {
@@ -214,4 +220,99 @@ public class Parser {
         LocalDate date1 = LocalDate.parse(finalDateFormat);
         return date1;
     }
+
+    public static String returnScheduleOnString(String input, TaskList t) {
+        String stringOfDate = input.substring(12);
+        LocalDate scheduleOnDate = getScheduleDate(stringOfDate);
+        String output = "";
+        for (Task task : t.getTaskList()) {
+            if (task.getType().equals("E")) {
+                String[] split = task.toString().split("at:");
+                String eventDateString = split[1].substring(1);
+                LocalDate eventOnDate = LocalDate.parse(eventDateString);
+                if (eventOnDate.compareTo(scheduleOnDate) == 0) {
+                    output = output + task.toString() + "\n";
+                }
+            } else if (task.getType().equals("D")) {
+                String[] split = task.toString().split("by:");
+                String deadlineDateString = split[1].substring(1);
+                LocalDate deadlineByDate = LocalDate.parse(deadlineDateString);
+                if (deadlineByDate.compareTo(scheduleOnDate) == 0) {
+                    output = output + task.toString() + "\n";
+                }
+            } else {
+                continue;
+            }
+        }
+        return output;
+    }
+
+    public static String returnScheduleUntilString(String input, TaskList t) {
+        String stringOfDate = input.substring(15);
+        LocalDate scheduleOnDate = getScheduleDate(stringOfDate);
+        String output = "";
+        for (Task task : t.getTaskList()) {
+            if (task.getType().equals("E")) {
+                String[] split = task.toString().split("at:");
+                String eventDateString = split[1].substring(1);
+                LocalDate eventOnDate = LocalDate.parse(eventDateString);
+                if (eventOnDate.compareTo(scheduleOnDate) < 0) {
+                    output = output + task.toString() + "\n";
+                }
+            } else if (task.getType().equals("D")) {
+                String[] split = task.toString().split("by:");
+                String deadlineDateString = split[1].substring(1);
+                LocalDate deadlineByDate = LocalDate.parse(deadlineDateString);
+                if (deadlineByDate.compareTo(scheduleOnDate) < 0) {
+                    output = output + task.toString() + "\n";
+                }
+            } else {
+                continue;
+            }
+        }
+        return output;
+    }
+
+    public static String returnScheduleAfterString(String input, TaskList t) {
+        String stringOfDate = input.substring(15);
+        LocalDate scheduleOnDate = getScheduleDate(stringOfDate);
+        String output = "";
+        for (Task task : t.getTaskList()) {
+            if (task.getType().equals("E")) {
+                String[] split = task.toString().split("at:");
+                String eventDateString = split[1].substring(1);
+                LocalDate eventOnDate = LocalDate.parse(eventDateString);
+                if (eventOnDate.compareTo(scheduleOnDate) > 0) {
+                    output = output + task.toString() + "\n";
+                }
+            } else if (task.getType().equals("D")) {
+                String[] split = task.toString().split("by:");
+                String deadlineDateString = split[1].substring(1);
+                LocalDate deadlineByDate = LocalDate.parse(deadlineDateString);
+                if (deadlineByDate.compareTo(scheduleOnDate) > 0) {
+                    output = output + task.toString() + "\n";
+                }
+            } else {
+                continue;
+            }
+        }
+        return output;
+    }
+
+    public static LocalDate getScheduleDate(String stringOfDate) {
+        String[] breakingDate = stringOfDate.split("/");
+        String year = breakingDate[2];
+        String month = breakingDate[1];
+        String currentDate = breakingDate[0];
+        if (currentDate.length() == 1) {
+            currentDate = "0" + currentDate;
+        }
+        if (month.length() == 1) {
+            month = "0" + month;
+        }
+        String finalDateFormat = year + "-" + month + "-" + currentDate;
+        LocalDate scheduleOnDate = LocalDate.parse(finalDateFormat);
+        return scheduleOnDate;
+    }
 }
+
