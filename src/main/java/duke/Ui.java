@@ -13,12 +13,12 @@ public class Ui {
             + "██████   ██████  ██   ██ ██   ██    ██";
     public static final String BOT_LINE = "============================================================";
     public static final String USER_LINE = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _";
-    private Scanner sc = new Scanner(System.in);
+    private static Scanner sc = new Scanner(System.in);
 
     /**
      * Displays the Greetings
      */
-    public void showGreetings() {
+    public static void showGreetings() {
         System.out.println(SPACE + BOT_LINE);
         System.out.println(LOGO);
         System.out.println(SPACE + BOT_LINE);
@@ -30,15 +30,15 @@ public class Ui {
     /**
      * Displays the goodbye message
      */
-    public void showGoodBye() {
-        this.showMessage("Bye. Have a good time!");
+    public static String getGoodByeMessage() {
+        return "Bye. Have a good time!";
     }
 
     /**
      * Displays Borat's message to the user
      * @param message The message content to be displayed
      */
-    public void showMessage(String message) {
+    public static void showMessage(String message) {
         assert message != null : "[duke.Ui.showMessage]: message parameter should not be null.";
         message = SPACE + message.replace("\n", "\n" + SPACE);
         System.out.println(SPACE + USER_LINE);
@@ -51,7 +51,7 @@ public class Ui {
      * Get the user input
      * @return The string representation of the user input
      */
-    public String getInput() {
+    public static String getInput() {
         return sc.nextLine();
     }
 
@@ -59,7 +59,7 @@ public class Ui {
      * Returns the manual for all the commands
      * @return A String of all the commands and their description
      */
-    public String getHelpMenu() {
+    public static String getHelpMenu() {
         StringBuilder sb = new StringBuilder();
         int i = 1;
         for (Constant.Command c : Constant.Command.values()) {
@@ -74,7 +74,7 @@ public class Ui {
      * Show the list of accepted dates type
      * @return A String of all the dates and their description
      */
-    public String getAllAcceptedDates() {
+    public static String getAllAcceptedDates() {
         StringBuilder sb = new StringBuilder();
         int i = 1;
         for (Constant.Date c : Constant.Date.values()) {

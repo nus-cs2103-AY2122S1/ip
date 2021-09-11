@@ -59,35 +59,8 @@ public class Storage {
             while (fileReader.hasNextLine()) {
                 String rawData = fileReader.nextLine();
                 fileContents.add(rawData);
-                String[] datas = rawData.split(" \\| ");
-                String taskType = datas[0];
-                boolean isDone = datas[1].equals("1");
-                Task task = null;
-                switch (taskType) {
-                case "T":
-                    // Add a todo task.
-                    task = new Todo(datas[2]);
-
-                    break;
-                case "D":
-                    // Add a deadline task.
-                    task = new Deadline(datas[2], datas[3]);
-
-                    break;
-                case "E":
-                    // Add an event task.
-                    task = new Event(datas[2], datas[3]);
-
-                    break;
-                default:
-                    throw new DukeException(DukeException.Errors.INVALID_COMMAND.toString());
-                }
-                if (task != null) {
-                    if (isDone) {
-                        task.markDone();
-                    }
-                    tasks.add(task);
-                }
+                Task task = Parser.parseSavedFile(rawData);
+                tasks.add(task);
             }
         } catch (FileNotFoundException e) {
             throw new DukeException(DukeException.Errors.FILE_NOT_FOUND.toString());
@@ -131,12 +104,24 @@ public class Storage {
     }
 
     /**
+     * Updates a task in the file as done.
+     * @param id The task line to be updated.
+     * @throws DukeException When saving the file fails.
+     */
+    public void markLineDone(int id) throws DukeException {
+        int doneIndex = 4;
+        String task = this.getFileLine(id);
+        String newTask = task.substring(0, doneIndex) + "1" + task.substring(doneIndex + 1);
+        this.updateLineFile(id, newTask);
+    }
+
+    /**
      * Updates a task to the saved file.
      * @param id The line to be updated.
      * @param task The task as a String.
      * @throws DukeException When saving the file fails.
      */
-    public void updateLineFile(int id, String task) throws DukeException {
+    private void updateLineFile(int id, String task) throws DukeException {
         assert task != null : "[duke.Storage.updateLineFile]: task parameter should not be null.";
         fileContents.set(id, task);
         commitChanges();

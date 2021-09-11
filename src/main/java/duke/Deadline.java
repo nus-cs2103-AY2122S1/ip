@@ -29,6 +29,7 @@ public class Deadline extends Task {
      * Returns the string representation of a Deadline task in the saved file.
      * @return The string representation of a Deadline task in the saved file.
      */
+    @Override
     public String savedToString() {
         String doneStatus = super.isDone ? "1" : "0";
         return "D | " + doneStatus + " | " + super.description + " | " + dateString;

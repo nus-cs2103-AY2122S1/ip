@@ -10,20 +10,39 @@ public class TaskList {
     /** The tasks are stored in a list */
     private ArrayList<Task> tasks;
 
+    /** The data storage */
+    private Storage storage;
+
     /**
      * Constructor for TaskList.
      */
     public TaskList() {
-        tasks = new ArrayList<>();
+        this.tasks = new ArrayList<>();
+        this.storage = new Storage("./data", "duke.txt");
+    }
+
+    /**
+     * Constructor for TaskList
+     * @param storage The storage to keep the saved data.
+     */
+    public TaskList(Storage storage) {
+        assert storage != null : "[duke.TaskList.TaskList]: storage parameter should not be null.";
+
+        this.tasks = new ArrayList<>();
+        this.storage = storage;
     }
 
     /**
      * Constructor for TaskList.
      * @param tasks An ArrayList of Tasks.
+     * @param storage The storage to keep the saved data.
      */
-    public TaskList(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks, Storage storage) {
         assert tasks != null : "[duke.TaskList.TaskList]: tasks parameter should not be null.";
+        assert storage != null : "[duke.TaskList.TaskList]: storage parameter should not be null.";
+
         this.tasks = tasks;
+        this.storage = storage;
     }
 
     /**
@@ -33,9 +52,13 @@ public class TaskList {
      */
     public String addItem(Task task) throws DukeException {
         assert tasks != null : "[duke.TaskList.addItem]: tasks parameter should not be null.";
+
         tasks.add(task);
-        String res = "Got it. I've added this task: \n" + "  " + task.toString() + "\n";
-        res += ("Now you have " + tasks.size() + " tasks in the tasks");
+        String res = "Got it. I've added this task: \n" +
+                "  " + task.toString() + "\n" +
+                "Now you have " + tasks.size() + " tasks in the tasks";
+
+        storage.addToFile(task.savedToString());
         return res;
     }
 
@@ -46,8 +69,10 @@ public class TaskList {
      * @throws DukeException when a task is not found
      */
     public String markDone(int index) throws DukeException {
-        Task task = getTask(index - 1);
+        Task task = getTask(index);
         task.markDone();
+
+        storage.markLineDone(index);
         return "Great success! Task Complete: \n" + "  " + task.toString();
     }
 
@@ -58,11 +83,13 @@ public class TaskList {
      * @throws DukeException when a task is not found.
      */
     public String removeItem(int index) throws DukeException {
-        index = index - 1;
         Task task = getTask(index);
         tasks.remove(index);
-        String res = "Got it. I've removed this task: \n" + "  " + task.toString() + "\n";
-        res += ("Now you have " + tasks.size() + " tasks in the list");
+        String res = "Got it. I've removed this task: \n" +
+                "  " + task.toString() + "\n" +
+                "Now you have " + tasks.size() + " tasks in the list";
+
+        storage.removeFromFile(index);
         return res;
     }
 
@@ -73,6 +100,7 @@ public class TaskList {
      */
     public String find(String keyword) {
         assert keyword != null : "[duke.TaskList.find]: keyword parameter should not be null.";
+
         StringBuilder str = new StringBuilder();
         str.append("Here are the matching tasks in your list:\n");
         int id = 1;
@@ -80,19 +108,6 @@ public class TaskList {
             if (task.toString().contains(keyword)) {
                 str.append(id++).append(". ").append(task.toString()).append("\n");
             }
-        }
-        return str.toString();
-    }
-
-    /**
-     * The String representation of the TaskList object.
-     * @return The string representation of the TaskList object.
-     */
-    @Override
-    public String toString() {
-        StringBuilder str = new StringBuilder();
-        for (Task task : tasks) {
-            str.append(task.toString()).append("\n");
         }
         return str.toString();
     }
@@ -110,6 +125,18 @@ public class TaskList {
         return size == 0 ? "You currently have nothing in your list" : str.substring(0, str.length() - 1);
     }
 
+    /**
+     * The String representation of the TaskList object.
+     * @return The string representation of the TaskList object.
+     */
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        for (Task task : tasks) {
+            str.append(task.toString()).append("\n");
+        }
+        return str.toString();
+    }
 
     private Task getTask(int index) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
