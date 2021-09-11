@@ -13,6 +13,6 @@ public class DukeException extends IllegalArgumentException {
      */
     @Override
     public String toString() {
-        return "Oops! ";
+        return "RAWR!! ";
     }
 }

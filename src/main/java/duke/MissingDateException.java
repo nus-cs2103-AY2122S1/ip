@@ -13,6 +13,6 @@ public class MissingDateException extends DukeException {
      */
     @Override
     public String toString() {
-        return super.toString() + "Sorry can't have missing date for task type!";
+        return super.toString() + "Can't have missing date for task type!";
     }
 }

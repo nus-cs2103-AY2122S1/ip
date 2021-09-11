@@ -13,6 +13,6 @@ public class WrongInputException extends DukeException {
      */
     @Override
     public String toString() {
-        return super.toString() + "Sorry I do not know what is this!";
+        return super.toString() + "I do not know what is this!";
     }
 }

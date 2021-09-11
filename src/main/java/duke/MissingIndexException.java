@@ -1,8 +1,8 @@
 package duke;
 
-public class TaskDescriptionException extends DukeException {
+public class MissingIndexException extends DukeException {
 
-    TaskDescriptionException() {
+    MissingIndexException() {
         super();
     }
 
@@ -13,6 +13,6 @@ public class TaskDescriptionException extends DukeException {
      */
     @Override
     public String toString() {
-        return super.toString() + "Can't have missing description for task!";
+        return super.toString() + "Can't have missing index!";
     }
 }

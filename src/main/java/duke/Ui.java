@@ -25,18 +25,20 @@ public class Ui {
     }
 
     /**
-     * Prints task list.
+     * Returns task list.
      *
      * @param taskList Task list to be printed.
+     * @return Task list in string.
      */
     public String listTaskList(TaskList taskList) {
         return taskList.toString();
     }
 
     /**
-     * Prints done task message.
+     * Returns done task message.
      *
      * @param task Task to be printed.
+     * @return String message for done command.
      */
     public String doneTaskMsg(Task task) {
         return ("Well Done, I'll get it marked:\n"
@@ -44,9 +46,10 @@ public class Ui {
     }
 
     /**
-     * Prints delete task message.
+     * Returns delete task message.
      *
      * @param task Task to be printed.
+     * @return String message for delete command.
      */
     public String deleteTaskMsg(Task task, int noOfTask) {
         return ("Roger! I will remove this task from the list: \n"
@@ -57,9 +60,10 @@ public class Ui {
     }
 
     /**
-     * Prints add task message.
+     * Return add task message.
      *
      * @param task Task to be printed.
+     * @return String message for new task command.
      */
     public String addTaskMsg(Task task, int noOfTask) {
         return ("Roger! I will add this task in: \n"
@@ -70,9 +74,10 @@ public class Ui {
     }
 
     /**
-     * Prints find task message and lists relevant tasks.
+     * Return find task message and lists relevant tasks.
      *
      * @param taskList Task list that contains relevant tasks to be printed.
+     * @return Task list that contains the keyword.
      */
     public String findTaskMsg(TaskList taskList) {
         return ("Are these what you were looking for?\n"
@@ -80,17 +85,57 @@ public class Ui {
     }
 
     public String helpMsg() {
-        return "COMMAND | FORMAT\n"
-                + "todo            | todo {task}\n"
-                + "deadline      | deadline {task} /by {date in yyyy-mm-dd} {time in hhmm 24hr format}\n"
-                + "                    | eg. deadline homework /by 2020-12-31 2359\n"
-                + "event           | event {task} /at {date in yyyy-mm-dd} {time in hhmm 24hr format}\n"
-                + "                    | eg. event meeting /at 2020-12-31 2100\n"
-                + "list               | list\n"
-                + "done            | done {index}\n"
-                + "                    | eg. done 1\n"
-                + "delete          | delete {index}\n"
-                + "find             | find {keyword}\n"
-                + "                   | eg. find book\n";
+        return "Available commands:"
+                + "todo, "
+                + "deadline, "
+                + "event, "
+                + "list, "
+                + "done, "
+                + "delete, "
+                + "find\n"
+                + "for more format of commands input:\n"
+                + "help {command}";
+    }
+
+    /**
+     * Return the format of command specified.
+     *
+     * @param input The command specified.
+     * @return the format of the command specified.
+     */
+    public String helpCommandMsg(String input) {
+        String command = input;
+        String response;
+        switch(input) {
+        case("todo"):
+            response = "todo {task}";
+            break;
+        case("deadline"):
+            response = "deadline {task} /by {date in yyyy-mm-dd} {time in hhmm 24hr format}\n"
+                    + "eg. deadline homework /by 2020-12-31 2359\n";
+            break;
+        case("event"):
+            response = "event {task} /at {date in yyyy-mm-dd} {time in hhmm 24hr format}\n"
+                    + "eg. event meeting /at 2020-12-31 2100\n";
+            break;
+        case("list"):
+            response = "list\n";
+            break;
+        case("done"):
+            response = "done {index}\n"
+                    + "eg. done 1\n";
+            break;
+        case("delete"):
+            response = "delete          | delete {index}\n"
+                    + "eg.delete 1\n";
+            break;
+        case("find"):
+            response = "find {keyword}\n"
+                    + "eg. find book\n";
+            break;
+        default:
+            response = "ROAR!!! Enter the correct command input";
+        }
+        return response;
     }
 }

@@ -12,6 +12,6 @@ public class IndexOutOfBoundException extends DukeException {
      */
     @Override
     public String toString() {
-        return super.toString() + "Sorry! There is no such index in the task list";
+        return super.toString() + "There is no such index in the task list";
     }
 }

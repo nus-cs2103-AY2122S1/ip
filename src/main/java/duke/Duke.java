@@ -34,15 +34,15 @@ public class Duke {
         String response;
         try {
             if (input.equals("list")) {
-                //List task list
+                //List task list.
                 response = this.ui.listTaskList(this.taskList);
-            } else if (input.contains("done ")) {
-                //Set task as done
+            } else if (input.contains("done")) {
+                //Set task as done.
                 Integer listIndex = parser.doneInputParser(input);
                 this.taskList.setTaskDone(listIndex);
                 response = this.ui.doneTaskMsg(this.taskList.getTask(listIndex));
-            } else if (input.contains("delete ")) {
-                //Deletes task
+            } else if (input.contains("delete")) {
+                //Deletes task.
                 Integer removeTaskIndex = parser.deleteInputParser(input);
                 Task removedTask = taskList.removeTask(removeTaskIndex);
                 response = this.ui.deleteTaskMsg(removedTask, this.taskList.taskListSize());
@@ -51,8 +51,13 @@ public class Duke {
                 String keyword = parser.findInputParser(input);
                 TaskList taskListWithKeyword = this.taskList.findTasks(keyword);
                 response = this.ui.findTaskMsg(taskListWithKeyword);
-            } else if(input.equals("help")) {
+            } else if (input.equals("help")) {
+                //Help message.
                 response = this.ui.helpMsg();
+            } else if (input.contains("help")) {
+                //Returns format of command.
+                String helpCommand = parser.helpInputParser(input);
+                response = this.ui.helpCommandMsg(helpCommand);
             } else {
                 //Initialise the task if its a valid input.
                 Task newTask = null;
@@ -70,7 +75,7 @@ public class Duke {
                     taskList.addTask(newTask);
                     response = this.ui.addTaskMsg(newTask, this.taskList.taskListSize());
                 } else {
-                    //For invalid input message
+                    //For invalid input message.
                     throw new WrongInputException();
                 }
 

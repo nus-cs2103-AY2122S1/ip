@@ -9,6 +9,9 @@ public class Parser {
      * @return The index of the task to be marked done.
      */
     public Integer doneInputParser(String input) {
+        if (input.length() < 6) {
+            throw new MissingIndexException();
+        }
         return Integer.parseInt(input.substring(5)) - 1;
     }
 
@@ -19,6 +22,9 @@ public class Parser {
      * @return The index of the task to be deleted.
      */
     public Integer deleteInputParser(String input) {
+        if (input.length() < 9) {
+            throw new MissingIndexException();
+        }
         return Integer.parseInt(input.substring(7)) - 1;
     }
 
@@ -64,11 +70,27 @@ public class Parser {
         return parts;
     }
 
+    /**
+     *
+     *
+     * @param input
+     * @return
+     */
     public String findInputParser(String input) {
-        if (input.length() < 5) {
+        if (input.length() < 6) {
             throw new MissingKeywordException();
         }
         String keyword = input.substring(5);
         return keyword;
+    }
+    /**
+     *
+     *
+     * @param input
+     * @return
+     */
+    public String helpInputParser(String input) {
+        String command = input.substring(5);
+        return command;
     }
 }

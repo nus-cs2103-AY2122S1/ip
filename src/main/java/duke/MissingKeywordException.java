@@ -12,6 +12,6 @@ public class MissingKeywordException extends DukeException {
      */
     @Override
     public String toString() {
-        return super.toString() + "Sorry! You are missing the keyword";
+        return super.toString() + "You are missing the keyword";
     }
 }
