@@ -24,6 +24,7 @@ public class Parser {
      * @throws DukeException If user input is invalid.
      */
     public static Command parse(String str) throws DukeException {
+        assert str.length() != 0 : "Command cannot be blank";
         try {
             String[] splitStr = str.split(" ", 2);
             if (splitStr[0].equalsIgnoreCase("list")) {
