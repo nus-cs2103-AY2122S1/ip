@@ -1,8 +1,8 @@
-package duke;
+package shybot;
 
 import org.junit.jupiter.api.Test;
 
-class DukeTest {
+class ShyBotTest {
 
     @Test
     void run() {

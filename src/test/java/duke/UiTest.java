@@ -1,4 +1,4 @@
-package duke;
+package shybot;
 
 import org.junit.jupiter.api.Test;
 
