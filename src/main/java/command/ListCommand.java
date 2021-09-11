@@ -30,8 +30,11 @@ public class ListCommand extends Command {
     private Message getOutputMessage(TaskList list) {
         assert list != null : "task list should not be null";
 
-        String prefix = "Here are the tasks in your list:";
+        if (list.isActiveListEmpty()) {
+            return new Message("There are no tasks in the list yet!");
+        }
 
+        String prefix = "Here are the tasks in your list:";
         return new Message(prefix, list.toString());
     }
 }

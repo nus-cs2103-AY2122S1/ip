@@ -58,7 +58,7 @@ public class TaskList {
         try {
             validateTaskNumberExists(taskNumber);
 
-            Task task = this.getTaskByTaskNumber(taskNumber);
+            Task task = this.getTaskByNumberInActiveList(taskNumber);
             this.list.remove(task);
             this.listFile.rewriteFile(this.list);
 
@@ -80,7 +80,7 @@ public class TaskList {
         try {
             validateTaskNumberExists(taskNumber);
 
-            Task task = this.getTaskByTaskNumber(taskNumber);
+            Task task = this.getTaskByNumberInActiveList(taskNumber);
             task.markAsDone();
             this.listFile.rewriteFile(this.list);
 
@@ -122,13 +122,22 @@ public class TaskList {
     }
 
     /**
+     * Returns true if the active list is empty.
+     *
+     * @return True if active list is empty, false otherwise.
+     */
+    public boolean isActiveListEmpty() {
+        return this.activeList.isEmpty();
+    }
+
+    /**
      * Validates that the task is not a duplicate of an existing task in the list.
      *
      * @param task Task to be checked.
      * @throws DuplicateTaskException If the task is a duplicate of a task in the task.
      */
     public void validateTaskNotDuplicate(Task task) throws DuplicateTaskException {
-        if (this.contains(task)) {
+        if (this.isInUnderlyingList(task)) {
             throw new DuplicateTaskException(task);
         }
     }
@@ -151,15 +160,15 @@ public class TaskList {
         return stringBuilderList.toString();
     }
 
-    private Task getTaskByTaskNumber(int taskNumber) {
+    private Task getTaskByNumberInActiveList(int taskNumber) {
         return this.activeList.get(taskNumber - 1);
     }
 
-    private boolean contains(int taskNumber) {
+    private boolean isInActiveList(int taskNumber) {
         return taskNumber > 0 && taskNumber <= this.activeList.size();
     }
 
-    private boolean contains(Task task) {
+    private boolean isInUnderlyingList(Task task) {
         for (Task existingTask : this.list) {
             if (task.isDuplicateOf(existingTask)) {
                 return true;
@@ -170,7 +179,7 @@ public class TaskList {
     }
 
     private void validateTaskNumberExists(int taskNumber) throws NonExistentTaskNumberException {
-        if (!this.contains(taskNumber)) {
+        if (!this.isInActiveList(taskNumber)) {
             throw new NonExistentTaskNumberException(taskNumber);
         }
     }

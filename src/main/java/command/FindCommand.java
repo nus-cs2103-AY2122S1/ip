@@ -43,8 +43,11 @@ public class FindCommand extends Command {
     private Message getOutputMessage(TaskList list) {
         assert list != null : "task list should not be null";
 
-        String prefix = "Here are the matching tasks in your list:";
+        if (list.isActiveListEmpty()) {
+            return new Message("There are no tasks that match the keyword in your list");
+        }
 
+        String prefix = "Here are the matching tasks in your list:";
         return new Message(prefix, list.toString());
     }
 }
