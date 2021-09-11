@@ -93,6 +93,9 @@ public class Parser {
                     getScheduledTaskDate(descriptions), getScheduledTimeFrom(descriptions),
                     getScheduledTimeTo(descriptions));
             return new AddCommand(scheduledTask);
+        
+        case VIEWSCHEDULE:
+            return new ViewScheduleCommand();
 
         case DELETE:
             return new DeleteCommand(getDescriptions(actionDescription));

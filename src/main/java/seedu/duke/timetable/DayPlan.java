@@ -23,7 +23,6 @@ public class DayPlan {
 
         this.scheduledTasks.stream().filter(task -> task.getTimeFrom() < currTimeTo || task.getTimeTo() > currTimeFrom)
                 .forEach(task -> clashList.add(task));
-
         return clashList.size() != 0;
     }
 
@@ -68,4 +67,39 @@ public class DayPlan {
         this.addSchedule(to);
         return "Changes have been made successfully.";
     }
+
+    public void markeDone(ScheduledTask currTask) {
+        int  index = isExist(currTask);
+        if (index < 0) {
+            return;
+        }
+        scheduledTasks.set(index, currTask.markAsDone());
+    }
+
+    public int isExist(ScheduledTask currTask) {
+        int currTimeFrom = currTask.getTimeFrom();
+        int currTimeTo = currTask.getTimeTo();
+        String description = currTask.getDescription();
+
+        for (int i = 0; i < this.scheduledTasks.size(); i++) {
+            ScheduledTask pointerTask = this.scheduledTasks.get(i);
+            if (isSameTask(pointerTask, currTimeFrom, currTimeTo, description)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public boolean hasSchedule() {
+        return this.scheduledTasks.size() != 0;
+    }
+
+    private boolean isSameTask(ScheduledTask pointerTask, int currTimeFrom, int currTimeTo, String description) {
+        int pointerFrom = pointerTask.getTimeFrom();
+        int pointerTo = pointerTask.getTimeTo();
+        String pointerDescription = pointerTask.getDescription();
+
+        return (pointerFrom == currTimeFrom && currTimeTo == pointerTo && description.equals(pointerDescription));
+    }
+
 }

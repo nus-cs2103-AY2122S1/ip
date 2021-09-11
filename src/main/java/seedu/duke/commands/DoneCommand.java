@@ -3,6 +3,7 @@ package seedu.duke.commands;
 import seedu.duke.exceptions.storage.DukeStorageUpdateException;
 import seedu.duke.storage.Storage;
 import seedu.duke.storage.TaskList;
+import seedu.duke.tasks.ScheduledTask;
 import seedu.duke.tasks.Task;
 import seedu.duke.timetable.Timetable;
 
@@ -32,6 +33,9 @@ public class DoneCommand extends Command {
         try {
             Task currTask = taskList.getTaskList().get(index);
             Task updatedTask = taskList.doneItem(index);
+            if (currTask.getSymbol().equals("ST")) {
+                timetable.markDone((ScheduledTask) currTask);
+            }
             if (currTask.hasAfterTask()) {
                 String afterTaskDescription = currTask.getAfterTask().getDescription();
                 taskList.addTask(currTask.getAfterTask().getTask());

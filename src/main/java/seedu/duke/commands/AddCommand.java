@@ -32,6 +32,9 @@ public class AddCommand extends Command {
         try {
             String timetableMessage = "";
             if (this.task.getSymbol().equals("ST")) {
+                if (timetable.isClash((ScheduledTask) this.task)) {
+                    return ("\n" + timetable.addPlanToDay((ScheduledTask) this.task));
+                }
                 timetableMessage = "\n" + timetable.addPlanToDay((ScheduledTask) this.task);
             }
             taskList.addTask(this.task);

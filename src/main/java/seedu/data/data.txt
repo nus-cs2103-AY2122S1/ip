@@ -1,3 +1,6 @@
-T | 1 | do nothing
 T | 1 | reading
 T | 1 | ace this
+ST | 0 | run this | 
+ST | 0 | run this | 
+ST | 0 | run this | 
+ST | 0 | run this | 

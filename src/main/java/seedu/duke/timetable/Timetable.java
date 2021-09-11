@@ -23,7 +23,11 @@ public class Timetable {
     }
 
     public String deletePlanFromDay(ScheduledTask currTask) {
-        return this.timetable.get(currTask.getDate()).removeSchedule(currTask);
+        String UIMessage = this.timetable.get(currTask.getDate()).removeSchedule(currTask);
+        if (!this.timetable.get(currTask.getDate()).hasSchedule()) {
+            this.timetable.remove(currTask.getDate());
+        }
+        return UIMessage;
     }
 
     public DayPlan getDayPlan(String date) {
@@ -44,8 +48,20 @@ public class Timetable {
 
         while (activeDates.hasNext()) {
             String currDate = activeDates.next();
-            allScheduledTasks += currDate + "\n" + this.timetable.get(currDate).toString();
+            allScheduledTasks += currDate + "\n" + this.timetable.get(currDate).viewDayPlan();
         }
         return allScheduledTasks;
+    }
+
+    public boolean isClash(ScheduledTask currTask) {
+        try {
+            return this.timetable.get(currTask.getDate()).isClash(currTask);
+        } catch (NullPointerException e) {
+            return false;
+        }
+    }
+
+    public void markDone(ScheduledTask currTask) {
+        this.timetable.get(currTask.getDate()).markeDone(currTask);
     }
 }
