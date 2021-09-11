@@ -31,10 +31,11 @@ public class TaskListTest {
     @Test
     public void removeTest(){
         TaskList testTaskList = new TaskList(new ArrayList<>());
-        testTaskList.add(new ToDo("test 1"));
+        ToDo todo = new ToDo("delete");
+        testTaskList.add(todo);
         testTaskList.add(new ToDo("test 2"));
         testTaskList.add(new ToDo("test 3"));
-        testTaskList.remove(0);
+        testTaskList.remove(todo);
         assertEquals(testTaskList.get(0).toString(), "[T][ ] test 2");
     }
 

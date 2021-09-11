@@ -86,24 +86,40 @@ public class Parser {
 
     private Response parseDone(String input) {
         int numberOfTasks = taskList.size();
-        int taskNumber = Integer.parseInt("" + input.charAt(5));
-        if (taskNumber > numberOfTasks) {
-            return new Response(Response.Cue.TASK_ERROR);
+        String[] taskNumberStrings = input.substring(5).split(" ");
+        TaskList tempList = new TaskList();
+
+        for (String taskNumberString: taskNumberStrings) {
+            int taskNumber = Integer.parseInt("" + taskNumberString);
+            if (taskNumber > numberOfTasks) {
+                return new Response(Response.Cue.TASK_ERROR);
+            }
+            Task task = taskList.get(taskNumber - 1);
+            task.complete();
+            tempList.add(task);
         }
-        Task task = taskList.get(taskNumber - 1);
-        task.complete();
-        return new Response(Response.Cue.DONE, task);
+        return new Response(Response.Cue.DONE, tempList);
     }
 
     private Response parseDelete(String input) {
         int numberOfTasks = taskList.size();
-        int taskNumber = Integer.parseInt("" + input.charAt(7));
-        if (taskNumber > numberOfTasks) {
-            return new Response(Response.Cue.TASK_ERROR);
+        String[] taskNumberStrings = input.substring(7).split(" ");
+        TaskList tempList = new TaskList();
+
+        for (String taskNumberString: taskNumberStrings) {
+            int taskNumber = Integer.parseInt("" + taskNumberString);
+            if (taskNumber > numberOfTasks) {
+                return new Response(Response.Cue.TASK_ERROR);
+            }
+            Task task = taskList.get(taskNumber - 1);
+            tempList.add(task);
         }
-        Task task = taskList.get(taskNumber - 1);
-        taskList.remove(taskNumber - 1);
-        return new Response(Response.Cue.DELETE, task);
+
+        for (int i = 0; i < tempList.size(); i++) {
+            taskList.remove(tempList.get(i));
+        }
+
+        return new Response(Response.Cue.DELETE, tempList);
     }
 
     private Response parseTodo(String input) {
@@ -134,6 +150,7 @@ public class Parser {
     private Response parseFind(String input) {
         String description = input.split(" ", 2)[1];
         TaskList tempList = new TaskList();
+
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
             if (task.isContain(description)) {

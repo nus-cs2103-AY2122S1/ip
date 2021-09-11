@@ -59,12 +59,12 @@ public class TaskList {
     }
 
     /**
-     * Removes task from the list.
+     * Removes task from the list by task.
      *
-     * @param taskNumber the item number of the task
+     * @param task the task to be removed
      */
-    public void remove(int taskNumber) {
-        list.remove(taskNumber);
+    public void remove(Task task) {
+        list.remove(list.indexOf(task));
     }
 
 }

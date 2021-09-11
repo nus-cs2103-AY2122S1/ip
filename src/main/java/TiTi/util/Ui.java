@@ -141,16 +141,34 @@ public class Ui {
     private String getDoneResponse(TaskList tempTaskList) {
         String result = "";
         result += STARTER_HAPPY + "Nya! You've worked hard haven't you! \n";
-        result += STARTER_BUFFER + "I'll mark this task as done: \n";
-        result += STARTER_BUFFER + "  " + tempTaskList.get(0) + " \n";
+
+        if (taskList.size() == 0) {
+            result += STARTER_BUFFER + "I'll mark this task as done: \n";
+            result += STARTER_BUFFER + "  " + tempTaskList.get(0) + " \n";
+            return result;
+        }
+
+        result += STARTER_BUFFER + "I'll mark this tasks as done: \n";
+        for (int i = 0; i < tempTaskList.size(); i++) {
+            result += STARTER_BUFFER + (i + 1) + ". " + tempTaskList.get(i) + " \n";
+        }
         return result;
     }
 
 
     private String getDeleteResponse(TaskList tempTaskList) {
         String result = "";
-        result += STARTER_NORMAL + "Nya! This task shall be removed: \n";
-        result += STARTER_BUFFER + "  " + tempTaskList.get(0) + " \n";
+        if (taskList.size() == 0) {
+            result += STARTER_NORMAL + "Nya! This task shall be removed: \n";
+            result += STARTER_BUFFER + "  " + tempTaskList.get(0) + " \n";
+            result += STARTER_BUFFER + printTaskCount(taskList) + " \n";
+            return result;
+        }
+
+        result += STARTER_NORMAL + "Nya! This tasks shall be removed: \n";
+        for (int i = 0; i < tempTaskList.size(); i++) {
+            result += STARTER_BUFFER + (i + 1) + ". " + tempTaskList.get(i) + " \n";
+        }
         result += STARTER_BUFFER + printTaskCount(taskList) + " \n";
         return result;
     }
