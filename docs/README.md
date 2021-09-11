@@ -1,29 +1,61 @@
 # User Guide
+Duke is a desktop application to help manage your tasks.
 
-## Features 
+![Ui](Ui.png)
 
-### Feature-ABC
+## Features
 
-Description of the feature.
+### View list of commands
 
-### Feature-XYZ
+Displays a message containing the list of commands
 
-Description of the feature.
+Usage: `help`
 
-## Usage
+### View list of tasks
 
-### `Keyword` - Describe action
+Shows all of your tasks in the list
 
-Describe the action and its outcome.
+Usage: `list`
 
-Example of usage: 
+### Add todo task
 
-`keyword (optional arguments)`
+Adds a todo to your list of tasks
 
-Expected outcome:
+Usage: `todo <Name>`
 
-Description of the outcome.
+### Add event task
 
-```
-expected output
-```
+Adds an event to your list of tasks
+
+Usage: `event <Name> /at <d/M/yyyy> <HHmm>` 
+
+### Add deadline task
+
+Adds a deadline to your list of tasks
+
+Usage: `deadline <Name> /by <d/M/yyyy> <HHmm>`
+
+### Mark task as done
+
+Marks a task in the list as done
+
+Usage: `done <Number>` 
+
+### Delete task
+
+Deletes a task from the list
+
+Usage: `delete <Number>` 
+
+### Find tasks with matching keywords
+
+Find tasks in the list with matching keywords
+
+Usage: `find <keywords>`
+
+### Exit Duke
+
+Exit Duke
+
+Usage: `bye`
+
