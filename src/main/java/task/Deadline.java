@@ -14,7 +14,7 @@ public class Deadline extends Task {
     private LocalDate date;
     private LocalTime time;
 
-    DateTimeFormatter dayOutputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    DateTimeFormatter dayOutputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
     DateTimeFormatter timeOutputFormatter = DateTimeFormatter.ofPattern("ha");
 
     DateTimeFormatter dayInputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
