@@ -3,7 +3,9 @@ package duke;
 import duke.commands.Command;
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeFileException;
-import duke.gui.DialogBox;
+import duke.gui.DukeDialogBox;
+import duke.gui.DukeExceptionDialogBox;
+import duke.gui.UserDialogBox;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
@@ -51,7 +53,7 @@ public class Duke {
      */
     public void setDialogContainer(VBox dialogContainer) {
         this.dialogContainer = dialogContainer;
-        this.dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(ui.showWelcomeMessage(), dukeAvatar));
+        this.dialogContainer.getChildren().addAll(DukeDialogBox.getDukeDialog(ui.showWelcomeMessage(), dukeAvatar));
     }
 
     /**
@@ -84,16 +86,17 @@ public class Duke {
 
     private void showDukeErrorMessage(String error) {
         String dukeTextWhenException = "FullOfBugs:\n" + error;
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeTextWhenException, dukeAvatarWhenException));
+        dialogContainer.getChildren()
+                .add(DukeExceptionDialogBox.getDukeExceptionDialog(dukeTextWhenException, dukeAvatarWhenException));
     }
 
     private void showDukeResponse(String message) {
         String dukeText = "FullOfBugs:\n" + message;
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeText, dukeAvatar));
+        dialogContainer.getChildren().add(DukeDialogBox.getDukeDialog(dukeText, dukeAvatar));
     }
 
     private void showUserInput(String userInput) {
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(userInput, userAvatar));
+        dialogContainer.getChildren().add(UserDialogBox.getUserDialog(userInput, userAvatar));
     }
 
     /**

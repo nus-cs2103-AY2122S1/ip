@@ -13,25 +13,21 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-
-/**
- * This is a DialogBox that displays user's and Duke's Avatar and the contents.
- */
-public class DialogBox extends HBox {
+public class DukeExceptionDialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
     /**
-     * This is a private constructor of a DialogBox.
+     * This is a private constructor of a DukeExceptionDialogBox.
      *
      * @param text  A String representing text in Label
      * @param img  An Image instance of the Avatar.
      */
-    private DialogBox(String text, Image img) {
+    private DukeExceptionDialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DukeExceptionDialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -54,26 +50,16 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Displays the User's dialog box and user's avatar.
-     *
-     * @param text  A String representing text in Label
-     * @param img  An Image instance of the Avatar.
-     * @return    Returns a User's dialog box.
-     */
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
-    }
-
-    /**
-     * Displays Duke's dialog box and Duke's avatar.
+     * Displays Duke's dialog box and Duke's exception avatar.
      *
      * @param text  A String representing text in Label
      * @param img  An Image instance of the Avatar.
      * @return    Returns a Duke's dialog box.
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DukeExceptionDialogBox getDukeExceptionDialog(String text, Image img) {
+        var db = new DukeExceptionDialogBox(text, img);
         db.flip();
         return db;
     }
 }
+
