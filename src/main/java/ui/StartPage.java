@@ -52,6 +52,9 @@ public class StartPage extends AnchorPane {
 
     private ArrayList<File> files;
 
+    /**
+     *
+     */
     public StartPage() {
         fetchSaveFiles();
     }
@@ -65,9 +68,14 @@ public class StartPage extends AnchorPane {
      * populate the listview of this start page with file names
      */
     public void fetchSaveFiles() {
+        ObservableList<String> items = FXCollections.observableArrayList();
+        addFileNamesToItems(items);
+        setUpListViewWithItems(items);
+    }
+
+    private void addFileNamesToItems(ObservableList<String> items) {
         files = new ArrayList<>(Arrays.asList(Storage.getFilesFromDirectory(
                 Storage.DIRECTORY_PATH + Storage.DATA_PATH)));
-        ObservableList<String> items = FXCollections.observableArrayList();
         for (File file : files) {
             if (file.isFile() && !file.isHidden()) {
                 String fullFileName = file.getName();
@@ -75,6 +83,9 @@ public class StartPage extends AnchorPane {
                 items.add(fileName);
             }
         }
+    }
+
+    private void setUpListViewWithItems(ObservableList<String> items) {
         listView.setItems(items);
         listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -93,7 +104,7 @@ public class StartPage extends AnchorPane {
 
     @FXML
     private void handleFileNameInput() {
-        if (inputField.getText().isBlank() || inputField.getText().isEmpty()) {
+        if (inputField.getText().isBlank()) {
             return;
         }
         // check if the input name is one of the file name
@@ -112,7 +123,7 @@ public class StartPage extends AnchorPane {
 
     @FXML
     private void handleDeleteFile() {
-        if (inputField.getText().isBlank() || inputField.getText().isEmpty()) {
+        if (inputField.getText().isBlank()) {
             return;
         }
         // check if the input name is one of the file name
@@ -139,16 +150,23 @@ public class StartPage extends AnchorPane {
     }
 
     private void showChatPage() {
+        Stage stage = (Stage) paneReference.getScene().getWindow();
+        setUpStage(stage);
+        stage.show();
+    }
+
+    private void setUpStage(Stage stage) {
         try {
-            Stage stage = (Stage) paneReference.getScene().getWindow();
             FXMLLoader fxmlLoaderChatPage = new FXMLLoader(StartPage.class.getResource("/view/ChatPage.fxml"));
             AnchorPane ap = fxmlLoaderChatPage.load();
+            // set scene
             Scene scene = new Scene(ap);
+            // implement alice before setting the scene to stage
             fxmlLoaderChatPage.<ChatPage>getController().setAliceByFilename(inputField.getText());
             fxmlLoaderChatPage.<ChatPage>getController().setFileName(inputField.getText());
             fxmlLoaderChatPage.<ChatPage>getController().printWelcomeText();
+            // set and show scene to finalise
             stage.setScene(scene);
-            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -49,16 +49,7 @@ public class ChatPage extends AnchorPane {
      * Create an empty chat page with no alice.
      */
     public ChatPage() {
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-        printWelcomeText();
+        setActionToElements();
     }
 
     /**
@@ -73,7 +64,11 @@ public class ChatPage extends AnchorPane {
         this.fileName = fileName;
         this.alice = new Alice(fileName);
         alice.getUi().getTaskDialog().setChatPage(this);
+        setActionToElements();
+        printWelcomeText();
+    }
 
+    private void setActionToElements() {
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -82,9 +77,8 @@ public class ChatPage extends AnchorPane {
             handleUserInput();
         });
 
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        printWelcomeText();
+        dialogContainer.heightProperty().addListener((observable)
+                -> scrollPane.setVvalue(1.0));
     }
 
     /**
@@ -156,7 +150,6 @@ public class ChatPage extends AnchorPane {
         }
     }
 
-
     /**
      * Create label from String
      *
@@ -210,19 +203,22 @@ public class ChatPage extends AnchorPane {
      * Exit the chat page and go back to the start page
      */
     public void exit() {
+        Stage stage = (Stage) anchorPaneReference.getScene().getWindow();
+        setUpStage(stage);
+        stage.show();
+    }
+
+    private void setUpStage(Stage stage) {
         try {
-            Stage stage = (Stage) anchorPaneReference.getScene().getWindow();
             stage.setTitle("Alice");
             FXMLLoader fxmlLoader = new FXMLLoader(StartPage.class.getResource("/view/StartPage.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<StartPage>getController().fetchSaveFiles();
-            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
 }

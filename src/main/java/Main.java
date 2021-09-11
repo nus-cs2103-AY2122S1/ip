@@ -19,10 +19,6 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage stage) {
-
-        stage.setTitle("Alice");
-        stage.setResizable(false);
-
         try {
             if (!Storage.haveSaveLocation()) {
                 Storage.createSaveLocation();
@@ -31,6 +27,13 @@ public class Main extends Application {
             e.printStackTrace();
         }
 
+        stage.setTitle("Alice");
+        stage.setResizable(false);
+        setUpStage(stage);
+        stage.show();
+    }
+
+    private void setUpStage(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/StartPage.fxml"));
             AnchorPane ap = fxmlLoader.load();
@@ -38,11 +41,8 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<StartPage>getController().fetchSaveFiles();
             // Add the scene to the stage
-            stage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }
