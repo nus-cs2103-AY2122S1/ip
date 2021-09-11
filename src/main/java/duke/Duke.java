@@ -1,7 +1,10 @@
 package duke;
 import java.util.Scanner;
 
-
+/**
+ * Represents the Duke chatbot. The chatbot currently acts as a to-do list that can take down 3 different types of tasks.
+ * You can mark the tasks as done and delete them when you're done with the tasks.
+ */
 public class Duke {
 
     private duke.Storage storage;
@@ -9,6 +12,10 @@ public class Duke {
     private Ui ui;
     private static Parser parser = new Parser();
 
+    /**
+     * Constructor for the Duke class.
+     * @param filePath file path of the previously saved Tasks (If Duke had been run previously).
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new duke.Storage(filePath);
@@ -24,6 +31,10 @@ public class Duke {
         new Duke("data/alexa.txt").run();
     }
 
+    /**
+     * Runs the Duke chatbot.
+     * It is actively waiting for inputs from the User in order to perform its functions.
+     */
     public static void run() {
         Scanner newInput = new Scanner(System.in);
         while(newInput.hasNextLine()) {
@@ -37,6 +48,8 @@ public class Duke {
                     Ui.list();
                 } else if (parser.parseDone(input)) {
                     Ui.done(input);
+                } else if (parser.parseFind(input)) {
+                    Ui.find(input);
                 } else if (parser.parseToDo(input)) {
                     TaskList.todo(input);
                 } else if (parser.parseDeadline(input)) {

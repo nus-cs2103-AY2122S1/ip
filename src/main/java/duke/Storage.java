@@ -7,6 +7,9 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the class that helps to manage the storage of Task files.
+ */
 public class Storage {
 
     private String filePath;
@@ -14,10 +17,19 @@ public class Storage {
     static private File tmp;
     static private Parser parser = new Parser();
 
+    /**
+     * Constructor for the Storage.
+     * @param filePath the file path of the storage file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * It loads existing task lists (If there is one) or creates a new empty task list if a previous one does not exist.
+     * @return an ArrayList that acts as a storage for the Tasks.
+     * @throws DukeException if you have no pending tasks (list was empty when Duke is started).
+     */
     public static ArrayList<duke.Task> load() throws DukeException {
         dir = new File("data");
         dir.mkdirs();
@@ -66,6 +78,10 @@ public class Storage {
         return newStorage;
     }
 
+    /**
+     * Writes new tasks into the text file to be saved.
+     * The text file will then be loaded when Duke is started again.
+     */
     public static void writeTasks() {
         String sentence = "";
         for (int i = 1; i < TaskList.noOfTasks() + 1; i++) {
