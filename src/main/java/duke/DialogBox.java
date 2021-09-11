@@ -28,7 +28,6 @@ public class DialogBox extends HBox {
 
     // sets the minimum height of Dialog Panel
     private final int Min_Height;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
 
 
     private DialogBox(String text, Image img) {
