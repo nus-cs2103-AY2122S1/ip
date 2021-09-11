@@ -1,7 +1,5 @@
 package task;
 
-import task.Task;
-
 /**
  * task.Todo is a subclass of a task.Task.
  * It has the same behaviour of a task except printing out the task.Task type when using
@@ -14,8 +12,8 @@ public class Todo extends Task {
      *
      * @param description the task description
      */
-    public Todo(String description, boolean completed) {
-        super(description, completed);
+    public Todo(String description, String notes, boolean completed) {
+        super(description, notes, completed);
     }
 
     /**

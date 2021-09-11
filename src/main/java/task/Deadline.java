@@ -25,8 +25,8 @@ public class Deadline extends Task {
      * @param completed true if the task is completed
      * @throws InvalidDateFormat
      */
-    public Deadline(String description, String deadline, boolean completed) throws InvalidDateFormat {
-        super(description, completed);
+    public Deadline(String description, String deadline, String notes, boolean completed) throws InvalidDateFormat {
+        super(description, notes, completed);
         try {
             this.date = LocalDate.parse(deadline,dayInputFormatter);
         } catch (DateTimeParseException e) {

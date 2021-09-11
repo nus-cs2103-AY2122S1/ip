@@ -13,8 +13,8 @@ public class Event extends Task {
     DateTimeFormatter dayOutputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
     DateTimeFormatter dayInputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public Event(String description, String deadline, boolean completed) throws InvalidDateFormat {
-        super(description, completed);
+    public Event(String description, String deadline, String notes, boolean completed) throws InvalidDateFormat {
+        super(description, notes, completed);
         try {
             this.date = LocalDate.parse(deadline,dayInputFormatter);
         } catch (DateTimeParseException e) {
@@ -35,6 +35,6 @@ public class Event extends Task {
 
     @Override
     public String getDeadline() {
-        return this.date.toString();
+        return this.date.format(dayInputFormatter);
     }
 }

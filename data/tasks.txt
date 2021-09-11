@@ -1,1 +1,3 @@
-D | 0 | idk | 1999-08-13
+E | 0 | idk | 13/08/1999 | idkdkdkdk
+T | 0 | lolol |  |  
+T | 0 | lololol |  |  
