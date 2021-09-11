@@ -1,11 +1,18 @@
 package duke.gui;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 
-public class DukeDialogBox extends HBox {
+public class DukeDialogBox extends HBox implements DialogBoxStyle {
 
     private Label text;
     private ImageView displayPicture;
@@ -19,9 +26,8 @@ public class DukeDialogBox extends HBox {
         text = l;
         displayPicture = iv;
 
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        styleDukeTextLabels(text);
+        styleDisplayPicture(displayPicture);
 
         this.setAlignment(Pos.TOP_LEFT);
         this.getChildren().addAll(displayPicture, text);

@@ -1,11 +1,17 @@
 package duke.gui;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
-public class UserDialogBox extends HBox {
+public class UserDialogBox extends HBox implements DialogBoxStyle {
 
     private Label text;
     private ImageView displayPicture;
@@ -19,9 +25,8 @@ public class UserDialogBox extends HBox {
         text = l;
         displayPicture = iv;
 
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        styleUserTextLabels(text);
+        styleDisplayPicture(displayPicture);
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
