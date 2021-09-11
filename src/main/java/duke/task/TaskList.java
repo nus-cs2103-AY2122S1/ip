@@ -66,8 +66,6 @@ public class TaskList {
                     sb.append(responseLogic.taskWithIndexReponse(index, task));
                     index++;
                 }
-            } else {
-                assert false : task;
             }
         }
         return sb.toString();
