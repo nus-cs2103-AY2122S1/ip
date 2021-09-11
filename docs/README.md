@@ -7,7 +7,7 @@ Duke helps you to manage your tasks via commands with a simple GUI.
 
 ## Features 
 
-### *Add tasks to record down
+### Add tasks to record down
 Duke contains support for four types of tasks, namely `Todo`, `Deadline`, `Event` and `Recurring` tasks.
 
 #### Todo
@@ -24,16 +24,16 @@ A task to be done by a given date, and will need to be done again after a set in
 
 **Take not that the recurring task will only be added when the current one is done.**
 
-### *Listing tasks and finding them
+### Listing tasks and finding them
 You can use the `list` and `find` commands to lookup tasks easily.
 
-### *Checking off tasks
+### Checking off tasks
 You can mark tasks as done to keep track of tasks that are not completed yet.
 
-### *Delete tasks
+### Delete tasks
 You can delete tasks to reduce clutter.
 
-### *Local storage
+### Local storage
 Tasks are saved between sessions, even after PC reboot.
 
 ## Command Reference
