@@ -95,10 +95,16 @@ public class Response {
      * @return Return a StringBuilder that contains information of the current tasks stored in the list.
      */
     public StringBuilder getListMessage() {
+        if (taskList.size() == 0) {
+            return new StringBuilder("There is no task in your List yet!");
+        }
         builder = new StringBuilder();
         builder.append("Here are the tasks in your list:").append('\n');
         for (int i = 1; i <= taskList.size(); i++) {
-            builder.append(i).append(". ").append(taskList.getTask(i - 1).toString()).append('\n');
+            if (i > 1) {
+                builder.append("\n");
+            }
+            builder.append(i).append(". ").append(taskList.getTask(i - 1).toString());
         }
         return builder;
     }
