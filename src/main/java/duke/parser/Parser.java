@@ -7,9 +7,9 @@ import duke.commands.DoneCommand;
 import duke.commands.EventCommand;
 import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
+import duke.commands.HelpCommand;
 import duke.commands.ListCommand;
 import duke.commands.TodoCommand;
-
 import duke.data.exception.DukeException;
 import duke.data.exception.InvalidCommandException;
 
@@ -21,7 +21,7 @@ public class Parser {
 
     /** All Possible commands */
     private enum Commands {
-        LIST, TODO, DEADLINE, EVENT, DONE, DELETE, BYE, FIND
+        LIST, TODO, DEADLINE, EVENT, DONE, DELETE, BYE, FIND, HELP 
     }
 
     /**
@@ -59,6 +59,8 @@ public class Parser {
                 return new FindCommand(rest);
             case BYE:
                 return new ExitCommand();
+            case HELP:
+                return new HelpCommand();
             default:
                 throw new InvalidCommandException();
             }

@@ -18,7 +18,7 @@ public class Ui {
      * @return greeting message
      */
     public String greet() {
-        return "Hello, I'm Duke!\n" + "\nWhat can I do for you?";
+        return "Hello, I'm Duke!\n\nWhat can I do for you?\nEnter 'help' to see the list of commands!";
     }
 
     /**
