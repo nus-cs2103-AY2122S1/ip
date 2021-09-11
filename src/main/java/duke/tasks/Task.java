@@ -45,4 +45,12 @@ public abstract class Task {
     public String toString() {
         return this.taskName + " " + (this.isCompleted ? "[X]" : "[ ]");
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Task) {
+            return ((Task) obj).taskName.equals(this.taskName);
+        }
+        return false;
+    }
 }

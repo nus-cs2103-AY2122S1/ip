@@ -1,6 +1,7 @@
 package duke.utils;
 
 import duke.exceptions.InvalidTaskIdException;
+import duke.exceptions.DuplicateTaskException;
 import duke.tasks.Task;
 
 import java.io.IOException;
@@ -36,8 +37,15 @@ public class TaskList {
      *
      * @param t The Task object to be added.
      */
-    public void add(Task t) {
+    public void add(Task t) throws DuplicateTaskException {
         assert t != null : "task to add cannot be null";
+
+        for (Task task : this.taskList) {
+            if (t.equals(task)) {
+                throw new DuplicateTaskException();
+            }
+        }
+
         this.taskList.add(t);
         try {
             this.storage.saveData(this);
@@ -110,7 +118,11 @@ public class TaskList {
         TaskList result = new TaskList();
         for (Task task : taskList) {
             if (task.getTaskName().toUpperCase().contains(query.toUpperCase())) {
-                result.add(task);
+                try {
+                    result.add(task);
+                } catch (DuplicateTaskException e) {
+                    assert false : "tasks in task list should not be duplicated";
+                }
             }
         }
         return result;
