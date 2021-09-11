@@ -20,8 +20,8 @@ public class Duke {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/thinkingCat1.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/CuteDuke.png"));
 
     private Archive archive;
     private Storage storage;

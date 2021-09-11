@@ -13,6 +13,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import jdk.jshell.Diag;
 
 /**
  * An example of a custom control using FXML.
@@ -25,6 +28,10 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    // sets the minimum height of Dialog Panel
+    private final int Min_Height;
+
+
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -35,8 +42,17 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        // Min_Height of DialogBox is the number of lines that Duke's response will return to the User and
+        // multiplied by the height for each line (18)
+        Min_Height = (text.split("\n").length + 1) * 20;
+
+        dialog.setMinHeight(Min_Height);
         dialog.setText(text);
+        dialog.setStyle("-fx-border-color: #897caa; -fx-border-image-insets: 5; -fx-border-radius: 8; " +
+                "-fx-border-width: 2; -fx-label-padding: 7");
+
         displayPicture.setImage(img);
+        displayPicture.setClip(new Circle(49.5, 49.5, 49.5));
     }
 
     /**
