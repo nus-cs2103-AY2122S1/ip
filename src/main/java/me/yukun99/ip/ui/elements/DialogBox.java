@@ -15,11 +15,11 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, boolean isBot, boolean error) {
+    private DialogBox(String text, boolean isBot, boolean isError) {
         try {
             FXMLLoader fxmlLoader;
             if (isBot) {
-                if (error) {
+                if (isError) {
                     fxmlLoader = new FXMLLoader(Window.class.getResource("/views/ErrorDialogBox.fxml"));
                 } else {
                     fxmlLoader = new FXMLLoader(Window.class.getResource("/views/BotDialogBox.fxml"));

@@ -179,11 +179,11 @@ public class Message {
      * Gets message sent when user marks a task as done.
      *
      * @param task Task marked as done by the user.
-     * @param done Whether task is already done.
+     * @param isDone Whether task is already done.
      * @return Message sent when user marks a task as done.
      */
-    public static String getDoneMessage(Task task, boolean done) {
-        if (done) {
+    public static String getDoneMessage(Task task, boolean isDone) {
+        if (isDone) {
             return formatMessage(DONE_COMPLETED + NEW_LINE + task);
         } else {
             return formatMessage(DONE_UNCOMPLETED + NEW_LINE + task);
@@ -204,13 +204,13 @@ public class Message {
      * Gets message sent when user deletes a task.
      *
      * @param task Task deleted by the user.
-     * @param done Whether task is already done.
+     * @param isDone Whether task is already done.
      * @param taskList TaskList that user deleted the task from.
      * @return Message sent when user deletes a task.
      */
-    public static String getDeleteMesage(Task task, boolean done, TaskList taskList) {
+    public static String getDeleteMesage(Task task, boolean isDone, TaskList taskList) {
         String reply;
-        if (done) {
+        if (isDone) {
             reply = DELETE_DONE;
         } else {
             reply = DELETE_UNDONE;

@@ -85,7 +85,7 @@ public class Storage {
         }
     }
 
-    private List<Task> loadTasks(File file, boolean archived) throws HelpBotIoException {
+    private List<Task> loadTasks(File file, boolean isArchived) throws HelpBotIoException {
         List<Task> loadedTasks = new ArrayList<>();
         Scanner scanner;
         try {
@@ -102,7 +102,7 @@ public class Storage {
                     taskList.addTask(task, null);
                 }
             }
-            if (archived) {
+            if (isArchived) {
                 saveTask(task);
             }
             loadedTasks.add(task);

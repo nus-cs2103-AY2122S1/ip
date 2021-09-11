@@ -83,10 +83,10 @@ public abstract class Task {
      * Updates TaskFinder instance when task is added or deleted.
      *
      * @param taskFinder TaskFinder instance to be updated.
-     * @param delete True if task is being deleted, false otherwise.
+     * @param toDelete True if task is being deleted, false otherwise.
      */
-    public void updateFinder(TaskFinder taskFinder, boolean delete) {
-        if (!delete) {
+    public void updateFinder(TaskFinder taskFinder, boolean toDelete) {
+        if (!toDelete) {
             taskFinder.addTask(this, name);
         } else {
             taskFinder.deleteTask(this, name);

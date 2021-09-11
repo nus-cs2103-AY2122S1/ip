@@ -7,9 +7,9 @@ import javafx.application.Application;
  */
 public class Main {
     /**
-     * Entry point for my help bot.
+     * Launches the application.
      *
-     * @param args Command line arguments specified when running the program.
+     * @param args Arguments specified when running the program.
      */
     public static void main(String[] args) {
         Application.launch(HelpBot.class);

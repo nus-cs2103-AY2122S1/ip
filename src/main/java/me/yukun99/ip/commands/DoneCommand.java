@@ -25,9 +25,9 @@ public class DoneCommand extends Command {
     @Override
     public String getResponse() throws HelpBotInvalidTaskException, HelpBotIoException {
         Task task = taskList.getTask(args[0]);
-        boolean done = task.isDone();
+        boolean isDone = task.isDone();
         task.setDone();
         storage.updateTasks();
-        return Message.getDoneMessage(task, done);
+        return Message.getDoneMessage(task, isDone);
     }
 }

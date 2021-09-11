@@ -22,8 +22,8 @@ public class Deadline extends Task {
         setDate(date, false);
     }
 
-    private void setDate(String strDate, boolean create) throws HelpBotDateTimeFormatException {
-        if (create) {
+    private void setDate(String strDate, boolean doCreate) throws HelpBotDateTimeFormatException {
+        if (doCreate) {
             pair = DateTimePair.parse(strDate);
         } else {
             pair.update(DateTimePair.parse(strDate));
