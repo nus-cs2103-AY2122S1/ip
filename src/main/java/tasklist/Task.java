@@ -112,12 +112,13 @@ public abstract class Task {
 
     /**
      * Checks if the task description contains a keyword.
+     * The search is case insensitive.
      *
      * @param keyword Keyword to search for.
      * @return True if task description contains the keyword, false otherwise.
      */
     protected boolean contains(String keyword) {
-        return this.description.contains(keyword);
+        return this.description.toLowerCase().contains(keyword.toLowerCase());
     }
 
     protected boolean isSameDescription(Task task) {
