@@ -20,13 +20,13 @@ public class AddCommand extends Command {
     public AddCommand(String... command) throws jackie.JackieException {
         if (command.length == 1) {
             // guard clause
-            throw new jackie.JackieException(" ☹ OOPS!!! The description of a task cannot be empty.");
+            throw new jackie.JackieException(" D: OOPS!!! The description of a task cannot be empty.");
         } else if (command[0].equals("todo")) {
             task = new jackie.task.Todo(command);
-        } else if (Arrays.asList(command).contains("/") || command.length <= 3) {
+        } else if (Arrays.asList(command).contains("/") && command.length <= 3) {
             // guard clause
             throw new jackie.JackieException(
-                    " ☹ HEY DEAR! Please enter a date after / following the task description");
+                    " D: HEY DEAR! Please enter a date after / following the task description");
         } else if (command[0].equals("deadline")) {
             task = new jackie.task.Deadline(command);
         } else if (command[0].equals("event")) {
