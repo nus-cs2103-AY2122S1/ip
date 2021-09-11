@@ -35,7 +35,7 @@ public abstract class Item {
      * @return The encoding.
      */
     public String getPickle() {
-        return this.name;
+        return "name&&&" + this.name + (this.tag == null ? "" : "###tag&&&" + this.tag);
     }
     
     /**

@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.StringBuilder;
 import java.util.ListIterator;
+import java.util.Objects;
 import java.util.Scanner;
 
 import duke.items.Deadline;
@@ -85,15 +86,36 @@ public class Storage {
                 String[] currArgs = currLine.split(SEPARATOR);
                 Item toAdd = null;
 
+                String name = null;
+                String time = null;
+                String tag = null;
+
+                for (String s : currArgs) {
+                    String[] flagArgs = s.split("&&&");
+                    switch (flagArgs[0]) {
+                    case "name":
+                        name = flagArgs[1];
+                        break;
+                    case "time":
+                        time = flagArgs[1];
+                        break;
+                    case "tag":
+                        tag = flagArgs[1];
+                        break;
+                    default:
+                        break;
+                    }
+                }
+
                 switch (currArgs[0]) {
                 case "T":
-                    toAdd = new ToDo(currArgs[2]);
+                    toAdd = new ToDo(name);
                     break;
                 case "D":
-                    toAdd = new Deadline(currArgs[2], currArgs[3]);
+                    toAdd = new Deadline(name, time);
                     break;
                 case "E":
-                    toAdd = new Event(currArgs[2], currArgs[3]);
+                    toAdd = new Event(name, time);
                     break;
                 default:
                     throw new DukeException("Storage error");
@@ -101,6 +123,10 @@ public class Storage {
 
                 if (currArgs[1].equals("X")) {
                     toAdd.markAsDone();
+                }
+
+                if (!Objects.isNull(tag)) {
+                    toAdd.addTag(tag);
                 }
 
                 items.add(toAdd);

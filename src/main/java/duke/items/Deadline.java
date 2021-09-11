@@ -27,7 +27,7 @@ public class Deadline extends Item {
 
     @Override
     public String getPickle() {
-        return super.getPickle() + "###" + this.time;
+        return super.getPickle() + "###time&&&" + this.time;
     }
 
     @Override
