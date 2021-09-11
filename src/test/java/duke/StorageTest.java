@@ -24,9 +24,9 @@ public class StorageTest {
         } catch (IOException e) {
             fail();
         }
-        saved.add(new ToDo("go to school"));
-        saved.add(new Deadline("read book", LocalDate.parse("2020-10-10")));
-        saved.add(new Event("read book", LocalDate.parse("2020-10-10")));
+        saved.add(new ToDo("go to school", ""));
+        saved.add(new Deadline("read book", "", LocalDate.parse("2020-10-10")));
+        saved.add(new Event("read book", "", LocalDate.parse("2020-10-10")));
         Storage.saveTaskListToHardDisk(saved);
 
         File file = new File("src/data/duke.txt");

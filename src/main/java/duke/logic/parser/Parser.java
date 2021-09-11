@@ -1,13 +1,7 @@
 package duke.logic.parser;
 
 import duke.exception.DukeInvalidCommandException;
-import duke.logic.command.DeadlineCommand;
-import duke.logic.command.DeleteCommand;
-import duke.logic.command.DoneCommand;
-import duke.logic.command.EventCommand;
-import duke.logic.command.FindCommand;
-import duke.logic.command.ListCommand;
-import duke.logic.command.ToDoCommand;
+import duke.logic.command.*;
 import duke.logic.tasks.Deadline;
 import duke.logic.tasks.Event;
 import duke.logic.tasks.TaskList;
@@ -38,8 +32,10 @@ public class Parser {
     private static final String INVALID_NUMBER_ARGUMENT_ERR_MSG = "OOPS!!! The task number you type in is not a number.";
     private static final String OUT_OF_BOUNDS_ERR_MSG = "OOPS!!! The task number should be between 0 and ";
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static final String INVALID_TAG_COMMAND_ERR_MSG = "OOPS!!! The tag command format is /tag <index> <tag>";
+
     private enum CommandName {
-        LIST, DONE, DELETE, TODO, DEADLINE, EVENT, FIND;
+        LIST, DONE, DELETE, TODO, DEADLINE, EVENT, FIND, TAG;
         
         private static CommandName getCommandCode(String input) {
             CommandName result;
@@ -121,7 +117,7 @@ public class Parser {
         String[] parsedArguments = getTaskArguments(parsedInput[1], " /by ", WRONG_DEADLINE_FORMAT_ERR_MSG);
         try {
             LocalDate date = LocalDate.parse(parsedArguments[1], DATE_TIME_FORMATTER);
-            return new DeadlineCommand(new Deadline(parsedArguments[0], date)).executeCommand(taskList);
+            return new DeadlineCommand(new Deadline(parsedArguments[0], "", date)).executeCommand(taskList);
         } catch (DateTimeParseException e) {
             throw new DukeInvalidCommandException(WRONG_TIME_FORMAT_ERR_MSG);
         }
@@ -133,7 +129,7 @@ public class Parser {
         String[] parsedArguments = getTaskArguments(parsedInput[1], " /at ", WRONG_EVENT_FORMAT_ERR_MSG);
         try {
             LocalDate date = LocalDate.parse(parsedArguments[1], DATE_TIME_FORMATTER);
-            return new EventCommand(new Event(parsedArguments[0], date)).executeCommand(taskList);
+            return new EventCommand(new Event(parsedArguments[0], "", date)).executeCommand(taskList);
         } catch (DateTimeParseException e) {
             throw new DukeInvalidCommandException(WRONG_TIME_FORMAT_ERR_MSG);
         }
@@ -144,7 +140,7 @@ public class Parser {
             throw new DukeInvalidCommandException(EMPTY_TODO_DESCRIPTION_ERR_MSG);
         }
         checkValidTaskCreation(parsedInput, EMPTY_TODO_DESCRIPTION_ERR_MSG);
-        return new ToDoCommand(new ToDo(parsedInput[1])).executeCommand(taskList);
+        return new ToDoCommand(new ToDo(parsedInput[1], "")).executeCommand(taskList);
     }
 
     private String handleDelete(String[] parsedInput) throws DukeInvalidCommandException {
@@ -165,7 +161,23 @@ public class Parser {
         }
         return new FindCommand(parsedInput[1]).executeCommand(taskList);
     }
-
+    
+    private String handleTag(String[] parsedInput) throws DukeInvalidCommandException {
+        if (parsedInput.length < 2) {
+            throw new DukeInvalidCommandException(INVALID_TAG_COMMAND_ERR_MSG);
+        }
+        String[] arguments = parsedInput[1].split(" ");
+        if (arguments.length != 2) {
+            throw new DukeInvalidCommandException(INVALID_TAG_COMMAND_ERR_MSG);
+        }
+        if (taskList.getSize() == 0) {
+            throw new DukeInvalidCommandException(EMPTY_LIST_ERR_MSG);
+        }
+        int taskIndex = parseTaskIndex(arguments[0]);
+        String tag = arguments[1];
+        return new TagCommand(taskIndex, tag).executeCommand(taskList);
+    }
+    
     public String invokeCommand(String input) throws DukeInvalidCommandException {
         String[] parsedInput = parseInput(input);
         CommandName commandName = CommandName.getCommandCode(parsedInput[0]);
@@ -184,6 +196,8 @@ public class Parser {
             return handleDelete(parsedInput);
         case FIND:
             return handleFind(parsedInput);
+        case TAG:
+            return handleTag(parsedInput);
         default:
             throw new DukeInvalidCommandException(UNKNOWN_COMMAND_ERR_MSG);
         }

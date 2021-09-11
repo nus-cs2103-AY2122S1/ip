@@ -16,8 +16,8 @@ public class Deadline extends Task {
      * @param description Task description.
      * @param by          Desired time.
      */
-    public Deadline(String description, LocalDate by) {
-        super(description);
+    public Deadline(String description, String tag, LocalDate by) {
+        super(description, tag);
         this.by = by;
     }
 
@@ -29,9 +29,9 @@ public class Deadline extends Task {
     @Override
     public String toSaveInHardDisk() {
         if (this.isDone) {
-            return "D ; 1 ; " + this.description + " ; " + this.by;
+            return "D ; 1 ; " + this.description + " ; " + this.by + " ; " + this.tag;
         } else {
-            return "D ; 0 ; " + this.description + " ; " + this.by;
+            return "D ; 0 ; " + this.description + " ; " + this.by + " ; " + this.tag;
         }
     }
 
@@ -42,6 +42,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D] " + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D] " + super.toString() + " (by: " 
+                + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")" 
+                + (this.tag.equals("") ? "" : " #" + this.tag);
     }
 }

@@ -10,8 +10,8 @@ public class ToDo extends Task {
      *
      * @param description Description of the task.
      */
-    public ToDo(String description) {
-        super(description);
+    public ToDo(String description, String tag) {
+        super(description, tag);
     }
 
     /**
@@ -22,9 +22,9 @@ public class ToDo extends Task {
     @Override
     public String toSaveInHardDisk() {
         if (this.isDone) {
-            return "T ; 1 ; " + this.description;
+            return "T ; 1 ; " + this.description + " ; " + this.tag ;
         } else {
-            return "T ; 0 ; " + this.description;
+            return "T ; 0 ; " + this.description + " ; " + this.tag;
         }
     }
 

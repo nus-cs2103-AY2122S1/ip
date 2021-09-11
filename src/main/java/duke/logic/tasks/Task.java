@@ -6,15 +6,17 @@ package duke.logic.tasks;
 public abstract class Task {
     protected String description;
     protected boolean isDone;
-
+    protected String tag;
+    
     /**
      * Constructor for the duke.logic.tasks.Task class
      *
      * @param description The description of the task.
      */
-    public Task(String description) {
+    public Task(String description, String tag) {
         this.description = description;
         this.isDone = false;
+        this.tag = tag;
     }
 
     /**
@@ -50,6 +52,17 @@ public abstract class Task {
     }
 
     /**
+     * Tags a task with the given tag
+     * 
+     * @param tag The desired tag
+     * @return Response whether the task is tagged.
+     */
+    public boolean tag(String tag) {
+        this.tag = tag;
+        return true;
+    }
+    
+    /**
      * Return string representation of the task to write to hard disk.
      *
      * @return The string representation.
@@ -58,7 +71,8 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return ("[" + this.getStatusIcon() + "] " + this.getDescription());
+        return ("[" + this.getStatusIcon() + "] " + this.getDescription() + 
+                (this.tag.equals("") ? "" : " #" + this.tag));
     }
 
 }

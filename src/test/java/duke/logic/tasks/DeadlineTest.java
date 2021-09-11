@@ -10,7 +10,7 @@ public class DeadlineTest {
     @Test
     public void createDeadline() {
         assertEquals("[D] [ ] run (by: Oct 20 2020)",
-                new Deadline("run", LocalDate.parse("2020-10-20")).toString());
+                new Deadline("run", "", LocalDate.parse("2020-10-20")).toString());
     }
 
 }

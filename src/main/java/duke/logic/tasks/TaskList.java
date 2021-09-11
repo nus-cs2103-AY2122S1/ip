@@ -14,7 +14,7 @@ public class TaskList {
     private final ArrayList<Task> tasks;
 
     /**
-     * Constructor for duke.logic.tasks.TaskList
+     * Constructs for TaskList
      */
     public TaskList() {
         ArrayList<Task> temp;
@@ -28,7 +28,7 @@ public class TaskList {
     }
 
     /**
-     * Add a task to the list
+     * Adds a task to the list
      *
      * @param task The added task.
      * @return The result of the operation.
@@ -49,7 +49,7 @@ public class TaskList {
     }
 
     /**
-     * Mark a task in the task list as done
+     * Marks a task in the task list as done
      *
      * @param index The user requested index.
      * @return The status of the operation.
@@ -67,6 +67,12 @@ public class TaskList {
         return response.toString();
     }
 
+    /**
+     * Deletes a task with a given index.
+     * 
+     * @param index The given index.
+     * @return The status of the operation.
+     */
     public String deleteTask(int index) {
         assert index <= tasks.size() && index > 0 : "Deleted index out of bounds";
         Task temp = tasks.get(index - 1);
@@ -108,6 +114,25 @@ public class TaskList {
         }
     }
 
+    /**
+     * Tags a task with the given index and tag.
+     * 
+     * @param index The given index.
+     * @param tag The tag description.
+     * @return Response of the operation.
+     */
+    public String tagTask(int index, String tag) {
+        StringBuilder response = new StringBuilder();
+        if (tasks.get(index - 1).tag(tag)) {
+            response.append("Nice! I've tagged this task:\n");
+        } else {
+            response.append("This task is already tagged!");
+        }
+        response.append("\t" + "  ").append(tasks.get(index - 1).toString());
+        Storage.saveTaskListToHardDisk(tasks);
+        return response.toString();
+    }
+    
     /**
      * Return the size of the task list
      *

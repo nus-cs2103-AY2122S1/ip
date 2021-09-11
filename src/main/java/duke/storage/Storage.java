@@ -79,27 +79,15 @@ public class Storage {
             String[] currentLine = sc.nextLine().split(" ; ");
             switch (currentLine[0].trim()) {
             case "T": {
-                Task temp = new ToDo(currentLine[2].trim());
-                if (currentLine[1].equals("1")) {
-                    temp.markAsDone();
-                }
-                tasks.add(temp);
+                handleTodo(tasks, currentLine);
                 break;
             }
             case "D": {
-                Task temp = new Deadline(currentLine[2].trim(), LocalDate.parse(currentLine[3]));
-                if (currentLine[1].equals("1")) {
-                    temp.markAsDone();
-                }
-                tasks.add(temp);
+                handleDeadline(tasks, currentLine);
                 break;
             }
             case "E": {
-                Task temp = new Event(currentLine[2].trim(), LocalDate.parse(currentLine[3].trim()));
-                if (currentLine[1].equals("1")) {
-                    temp.markAsDone();
-                }
-                tasks.add(temp);
+                handleEvent(tasks, currentLine);
                 break;
             }
             default:
@@ -107,5 +95,49 @@ public class Storage {
             }
         }
         return tasks;
+    }
+
+    private static void handleEvent(ArrayList<Task> tasks, String[] currentLine) {
+        Task temp;
+        if (currentLine.length == 4) {
+            temp = new Event(currentLine[2].trim(), "",
+                    LocalDate.parse(currentLine[3]));
+        } else {
+            temp = new Event(currentLine[2].trim(),
+                    currentLine[4].trim(), LocalDate.parse(currentLine[3]));
+        }
+        if (currentLine[1].equals("1")) {
+            temp.markAsDone();
+        }
+        tasks.add(temp);
+    }
+
+    private static void handleDeadline(ArrayList<Task> tasks, String[] currentLine) {
+        Task temp;
+        if (currentLine.length == 4) {
+            temp = new Deadline(currentLine[2].trim(), "", 
+                    LocalDate.parse(currentLine[3]));
+        } else {
+            temp = new Deadline(currentLine[2].trim(), 
+                    currentLine[4].trim(), LocalDate.parse(currentLine[3]));
+        }
+
+        if (currentLine[1].equals("1")) {
+            temp.markAsDone();
+        }
+        tasks.add(temp);
+    }
+
+    private static void handleTodo(ArrayList<Task> tasks, String[] currentLine) {
+        Task temp;
+        if (currentLine.length == 3) {
+            temp = new ToDo(currentLine[2].trim(), "");
+        } else {
+            temp = new ToDo(currentLine[2].trim(), currentLine[3].trim());
+        }
+        if (currentLine[1].equals("1")) {
+            temp.markAsDone();
+        }
+        tasks.add(temp);
     }
 }
