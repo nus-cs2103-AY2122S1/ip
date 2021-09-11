@@ -2,8 +2,6 @@ package duke;
 
 import duke.command.Command;
 
-import java.util.HashMap;
-
 /**
  * The Duke chat-bot app.
  */
@@ -85,6 +83,7 @@ public class Duke {
             // Parse user input and execute the command
             Command command = parser.parseInput(input);
             String output = command.execute();
+
             quitIfBye(output);
             return output;
         } catch (Exception e) {

@@ -59,35 +59,8 @@ public class Storage {
             while (fileReader.hasNextLine()) {
                 String rawData = fileReader.nextLine();
                 fileContents.add(rawData);
-                String[] datas = rawData.split(" \\| ");
-                String taskType = datas[0];
-                boolean isDone = datas[1].equals("1");
-                Task task = null;
-                switch (taskType) {
-                case "T":
-                    // Add a todo task.
-                    task = new Todo(datas[2]);
-
-                    break;
-                case "D":
-                    // Add a deadline task.
-                    task = new Deadline(datas[2], datas[3]);
-
-                    break;
-                case "E":
-                    // Add an event task.
-                    task = new Event(datas[2], datas[3]);
-
-                    break;
-                default:
-                    throw new DukeException(DukeException.Errors.INVALID_COMMAND.toString());
-                }
-                if (task != null) {
-                    if (isDone) {
-                        task.markDone();
-                    }
-                    tasks.add(task);
-                }
+                Task task = Parser.parseSavedFile(rawData);
+                tasks.add(task);
             }
         } catch (FileNotFoundException e) {
             throw new DukeException(DukeException.Errors.FILE_NOT_FOUND.toString());

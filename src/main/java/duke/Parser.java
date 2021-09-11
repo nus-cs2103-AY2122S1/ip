@@ -35,10 +35,13 @@ public class Parser {
     public Command parseInput(String rawInput) throws DukeException {
         assert rawInput != null : "[duke.Parser.parseInput]: rawInput is null";
 
+        // Splitting of raw input by white space.
         String[] inputs = rawInput.split("\\s+");
         if (inputs.length < 1) {
             throw new DukeException(DukeException.Errors.INVALID_COMMAND.toString());
         }
+
+        // Check if the command is valid.
         Constant.Command command;
         String commandStr = inputs[0].toUpperCase();
         try {
@@ -47,6 +50,7 @@ public class Parser {
             throw new DukeException(DukeException.Errors.INVALID_COMMAND.toString());
         }
 
+        // Process the command and the raw input.
         switch (command) {
         case LIST:
             if (inputs.length != 1) {
@@ -61,8 +65,8 @@ public class Parser {
                         + " (example: 'done 5')");
             }
             try {
-                // Checks if the argument is a number.
-                int index = Integer.parseInt(inputs[1]) - 1;
+                // The index in the backend is 0-based (that's why the input is subtracted by 1).
+                int index = convertToInt(inputs[1]) - 1;
                 return new DoneCommand(index, taskList);
             } catch (Exception e) {
                 throw new DukeException(DukeException.Errors.WRONG_ARGUMENT_TYPE.toString()
@@ -82,6 +86,8 @@ public class Parser {
                 throw new DukeException(DukeException.Errors.MISSING_DESCRIPTION.toString()
                         + " (example: 'deadline watch Borat /by 2021-08-21 18:00')");
             }
+
+            // Split the deadline description and date.
             String argument = combineStringArray(inputs, 1, inputs.length);
             String[] arguments = argument.split(" /by ");
             if (arguments.length < 2) {
@@ -91,6 +97,8 @@ public class Parser {
                 throw new DukeException(DukeException.Errors.INVALID_DATE.toString()
                         + " (example: 'deadline watch Borat /by 2021-08-21 18:00')");
             }
+
+            // Get the deadline date.
             String date = parseDateTime(arguments[1]);
             return new DeadlineCommand(arguments[0], date, taskList);
 
@@ -99,6 +107,8 @@ public class Parser {
                 throw new DukeException(DukeException.Errors.MISSING_DESCRIPTION.toString()
                         + " (example: 'event Borat concert /at 2021-08-21 18:00')");
             }
+
+            // Split the event description and date.
             String arg = combineStringArray(inputs, 1, inputs.length);
             String[] args = arg.split(" /at ");
             if (args.length < 2) {
@@ -108,6 +118,8 @@ public class Parser {
                 throw new DukeException(DukeException.Errors.INVALID_DATE.toString()
                         + " (example: 'event watch Borat /at 2021-08-21 18:00')");
             }
+
+            // Get the event date.
             String eventDate = parseDateTime(args[1]);
             return new EventCommand(args[0], eventDate, taskList);
 
@@ -124,8 +136,8 @@ public class Parser {
                         + " (example: 'delete 5')");
             }
             try {
-                // Check if the argument is a number
-                int index = Integer.parseInt(inputs[1]) - 1;
+                // The index in the backend is 0-based (that's why the input is subtracted by 1).
+                int index = convertToInt(inputs[1]) - 1;
                 return new DeleteCommand(index, taskList);
             } catch (Exception e) {
                 throw new DukeException(DukeException.Errors.WRONG_ARGUMENT_TYPE.toString()
@@ -160,13 +172,49 @@ public class Parser {
         }
     }
 
+    public static Task parseSavedFile(String line) throws DukeException {
+        // Split by '|' character
+        String[] datas = line.split(" \\| ");
+
+        // Parsing the saved data.
+        String taskType = datas[0];
+        boolean isDone = datas[1].equals("1");
+        Task task = null;
+        switch (taskType) {
+        case "T":
+            // Add a todo task.
+            task = new Todo(datas[2]);
+
+            break;
+        case "D":
+            // Add a deadline task.
+            task = new Deadline(datas[2], datas[3]);
+
+            break;
+        case "E":
+            // Add an event task.
+            task = new Event(datas[2], datas[3]);
+
+            break;
+        default:
+            throw new DukeException(DukeException.Errors.INVALID_COMMAND.toString());
+        }
+        if (task != null) {
+            if (isDone) {
+                task.markDone();
+            }
+            return task;
+        }
+        throw new DukeException(DukeException.Errors.INVALID_COMMAND.toString());
+    }
+
     /**
      * Returns an integer from a number in string form.
      * @param number A number in string form.
      * @return An integer form of the given string.
      * @throws DukeException when the given argument is not a number.
      */
-    public int convertToInt(String number) throws DukeException {
+    public static int convertToInt(String number) throws DukeException {
         assert number != null : "[duke.Parser.convertToInt]: number parameter should not be null.";
         try {
             return Integer.parseInt(number);
@@ -304,7 +352,7 @@ public class Parser {
         for (String s : splitTime) {
             try {
                 // Check if all the string are numbers:
-                Integer.parseInt(s);
+                convertToInt(s);
             } catch (Exception e) {
                 System.out.println("Time is not a number");
                 throw new DukeException(DukeException.Errors.INVALID_TIME.toString());
@@ -314,8 +362,8 @@ public class Parser {
             // in the form of [hh, mm]
             if ((splitTime[0].length() == 2 || splitTime[0].length() == 1)
                     && (splitTime[1].length() == 2)) {
-                String hh = String.format("%02d", Integer.parseInt(splitTime[0]));
-                String mm = String.format("%02d", Integer.parseInt(splitTime[1]));
+                String hh = String.format("%02d", convertToInt(splitTime[0]));
+                String mm = String.format("%02d", convertToInt(splitTime[1]));
                 return hh + ":" + mm;
             }
         } else {
@@ -323,8 +371,8 @@ public class Parser {
             if (splitTime[0].length() == 3 || splitTime[0].length() == 4) {
                 String hh = splitTime[0].length() == 3 ? splitTime[0].substring(0, 1) : splitTime[0].substring(0, 2);
                 String mm = splitTime[0].length() == 3 ? splitTime[0].substring(1, 3) : splitTime[0].substring(2, 4);
-                hh = String.format("%02d", Integer.parseInt(hh));
-                mm = String.format("%02d", Integer.parseInt(mm));
+                hh = String.format("%02d", convertToInt(hh));
+                mm = String.format("%02d", convertToInt(mm));
                 return hh + ":" + mm;
             }
         }
@@ -342,9 +390,9 @@ public class Parser {
         // can be [yyyy, mm, dd] or [dd, mm, yyyy]
         try {
             // Check if all the string are numbers:
-            Integer.parseInt(date[0]);
-            Integer.parseInt(date[1]);
-            Integer.parseInt(date[2]);
+            convertToInt(date[0]);
+            convertToInt(date[1]);
+            convertToInt(date[2]);
         } catch (Exception e) {
             throw new DukeException(DukeException.Errors.INVALID_DATE.toString() + " Date is not a number.");
         }
@@ -354,8 +402,8 @@ public class Parser {
                 && (date[2].length() == 1 || date[2].length() == 2)) {
             // In the form of [yyyy, mm, dd]
             String year = date[0];
-            String month = String.format("%02d", Integer.parseInt(date[1]));
-            String day = String.format("%02d", Integer.parseInt(date[2]));
+            String month = String.format("%02d", convertToInt(date[1]));
+            String day = String.format("%02d", convertToInt(date[2]));
             return year + "-" + month + "-" + day;
         } else if ((date[0].length() == 1 || date[0].length() == 2)
                 && (date[1].length() == 1 || date[1].length() == 2)
@@ -363,8 +411,8 @@ public class Parser {
         ) {
             // In the form of [dd, mm, yyyy]
             String year = date[2];
-            String month = String.format("%02d", Integer.parseInt(date[1]));
-            String day = String.format("%02d", Integer.parseInt(date[0]));
+            String month = String.format("%02d", convertToInt(date[1]));
+            String day = String.format("%02d", convertToInt(date[0]));
             return year + "-" + month + "-" + day;
         }
         throw new DukeException(DukeException.Errors.INVALID_DATE.toString());
