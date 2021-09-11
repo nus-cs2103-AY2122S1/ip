@@ -216,8 +216,9 @@ public class TaskList {
      * @throws DukeException when a task that does not exist is selected for deletion
      */
     public String deleteTask(int taskId) throws DukeException {
+        final boolean isOutOfTaskIdRange = taskId <= 0 || taskId > currentIdx;
         try {
-            if (taskId <= 0 || taskId > currentIdx) {
+            if (isOutOfTaskIdRange) {
                 throw new IllegalArgumentException(
                         String.format("taskId of %1$d invalid as there are %2$d recorded task(s)", taskId, currentIdx));
             }
