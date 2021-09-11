@@ -15,7 +15,7 @@ public class Deadline extends Task {
 
     DateTimeFormatter dayOutputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
-    DateTimeFormatter dayInputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    DateTimeFormatter dayInputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     /**
      * Initialises the description, deadline and isComplete status of task.
