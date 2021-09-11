@@ -3,7 +3,7 @@
 > Free thing is great thing. \
 > -[Jack](https://github.com/jackgugz)
 
-### Duke frees your mind of having to remember things you need to do. It's,
+### Jackie frees your mind of having to remember things you need to do. It's,
 - text-based
 - easy to learn
 - ~~FAST~~ SUPER FAST to use
