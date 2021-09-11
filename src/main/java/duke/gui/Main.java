@@ -1,4 +1,4 @@
-package duke;
+package duke.gui;
 
 import static duke.Duke.FILE;
 import static duke.Duke.OUTER_DIR;
@@ -6,8 +6,7 @@ import static duke.Duke.OUTER_DIR;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-import duke.gui.DukeDialogBox;
-import duke.gui.MainWindow;
+import duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

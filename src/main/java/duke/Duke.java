@@ -3,11 +3,13 @@ package duke;
 import java.nio.file.Path;
 
 import duke.command.Command;
+import duke.gui.Main;
 import duke.task.TaskList;
 import duke.util.DukeException;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
+import javafx.application.Application;
 
 /**
  * The Duke program. The input loop is abstracted here.
@@ -64,5 +66,14 @@ public class Duke {
      */
     public void closeScanner() {
         this.ui.closeScanner();
+    }
+
+    /**
+     * Launches the Duke application.
+     *
+     * @param args Arguments to be passed on to Main
+     */
+    public static void main(String[] args) {
+        Application.launch(Main.class, args);
     }
 }
