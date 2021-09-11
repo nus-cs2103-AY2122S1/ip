@@ -37,6 +37,7 @@ public class Task {
             throw new VirushadeException("Error: File cannot be parsed.");
         }
 
+        // Sieve out important information for task creation.
         String taskCategory = text.substring(0, 3);
         String taskCompletionStatus = text.substring(3, 6);
         String taskDescription = text.substring(6).trim();
@@ -44,39 +45,51 @@ public class Task {
 
         switch(taskCategory) {
         case "[T]":
-            if (taskCompletionStatus.equals("[x]")) {
-                return new ToDo(taskDescription, true);
-            } else if (taskCompletionStatus.equals("[ ]")) {
-                return new ToDo(taskDescription, false);
-            } else {
-                throw new VirushadeException("Error: File cannot be parsed.");
-            }
+            return createToDoTask(taskCompletionStatus, taskDescription);
 
         case "[E]":
-            if (taskCompletionStatus.equals("[x]")) {
-                return new Event(strings[0], strings[1].substring(3), true);
-            } else if (taskCompletionStatus.equals("[ ]")) {
-                return new Event(strings[0], strings[1].substring(3), false);
-            } else {
-                throw new VirushadeException("Error: File cannot be parsed.");
-            }
+            return createEventTask(taskCompletionStatus, strings);
 
         case "[D]":
-            if (taskCompletionStatus.equals("[x]")) {
-                return new Deadline(strings[0], strings[1].substring(3), true);
-            } else if (taskCompletionStatus.equals("[ ]")) {
-                return new Deadline(strings[0], strings[1].substring(3), false);
-            } else {
-                throw new VirushadeException("Error: File cannot be parsed.");
-            }
+            return createDeadlineTask(taskCompletionStatus, strings);
 
         default:
             throw new VirushadeException("Error: File cannot be parsed.");
         }
     }
 
+    private static ToDo createToDoTask(String taskCompletionStatus, String taskDescription) throws VirushadeException {
+        if (taskCompletionStatus.equals("[x]")) {
+            return new ToDo(taskDescription, true);
+        } else if (taskCompletionStatus.equals("[ ]")) {
+            return new ToDo(taskDescription, false);
+        } else {
+            throw new VirushadeException("Error: File cannot be parsed.");
+        }
+    }
+
+    private static Event createEventTask(String taskCompletionStatus, String[] strings) throws VirushadeException {
+        if (taskCompletionStatus.equals("[x]")) {
+            return new Event(strings[0], strings[1].substring(3), true);
+        } else if (taskCompletionStatus.equals("[ ]")) {
+            return new Event(strings[0], strings[1].substring(3), false);
+        } else {
+            throw new VirushadeException("Error: File cannot be parsed.");
+        }
+    }
+
+    private static Deadline createDeadlineTask(String taskCompletionStatus, String[] strings) throws VirushadeException {
+        if (taskCompletionStatus.equals("[x]")) {
+            return new Deadline(strings[0], strings[1].substring(3), true);
+        } else if (taskCompletionStatus.equals("[ ]")) {
+            return new Deadline(strings[0], strings[1].substring(3), false);
+        } else {
+            throw new VirushadeException("Error: File cannot be parsed.");
+        }
+    }
+
     /**
-     * Updates the task status of completion as done.
+     * @return Updates the task status of completion as done.
      */
     public String completeTask() {
         this.isDone = true;
@@ -84,14 +97,13 @@ public class Task {
     }
 
     /**
-     * The output message when the task is deleted.
+     * @return The output message when the task is deleted.
      */
     public String deleteMessage() {
         return "Noted. I've removed this task: \n" + this;
     }
 
     /**
-     * Gets the task name.
      * @return Task name.
      */
     public String getTaskDescription() {

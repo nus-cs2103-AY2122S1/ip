@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 public class Launcher {
     /**
      * Runs the program.
-     *
      * @param args Not used.
      */
     public static void main(String[] args) {

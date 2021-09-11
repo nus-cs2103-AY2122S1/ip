@@ -22,6 +22,7 @@ public class ResponseProcessor {
 
     /**
      * Virushade first says goodbye before exiting.
+     * @return The exit message.
      */
     private static String exitMessage() {
         return "Bye. Hope to see you again soon!";
@@ -62,7 +63,6 @@ public class ResponseProcessor {
 
     /**
      * Determines what Virushade should do with given string str.
-     *
      * @param str The input instructional string.
      */
     private static String assignTask(String str) throws VirushadeException {
@@ -98,7 +98,6 @@ public class ResponseProcessor {
 
     /**
      * Returns a string according to the input string str.
-     *
      * @param str The input string.
      * @return The resultant string message.
      */
@@ -112,22 +111,6 @@ public class ResponseProcessor {
         }
 
         return resultantString;
-    }
-
-    /**
-     * Notifies the user that Virushade is creating files.
-     * @return A string message telling the user that the file is under creation.
-     */
-    public static String showCreatingFiles() {
-        return "Creating data files...";
-    }
-
-    /**
-     * Notifies the user that Virushade is creating directories.
-     * @return A string message telling the user that the file is under creation.
-     */
-    public static String showCreatingDirectory() {
-        return "Creating data directory...";
     }
 
     /**

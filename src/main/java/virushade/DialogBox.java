@@ -15,8 +15,7 @@ public class DialogBox extends HBox {
 
     /**
      * The JavaFX dialog box.
-     *
-     * @param l The input label.
+     * @param l The input label
      * @param iv The images.
      */
     public DialogBox(Label l, ImageView iv) {

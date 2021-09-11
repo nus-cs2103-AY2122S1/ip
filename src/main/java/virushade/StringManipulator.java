@@ -9,13 +9,13 @@ import java.time.format.DateTimeParseException;
  */
 public class StringManipulator {
     /**
-     * Partitions the string into 2, seperated by the first '/'.
-     *
-     * @param str The input string
-     * @return The pair of strings.
+     * Separates the string by the first instance of the given character.
+     * @param str The input string.
+     * @param character The character to partition the string by.
+     * @return The pair of string, separated by the partition character.
      */
-    public static String[] slashPartition(String str) {
-        int index = str.indexOf('/');
+    private static String[] partition(String str, char character) {
+        int index = str.indexOf(character);
 
         String[] pair = new String[2];
 
@@ -32,32 +32,27 @@ public class StringManipulator {
     }
 
     /**
+     * Partitions the string into 2, seperated by the first '/'.
+     * @param str The input string
+     * @return The pair of strings.
+     */
+    public static String[] slashPartition(String str) {
+        return partition(str, '/');
+    }
+
+    /**
      * Returns the first word and everything after the first ' ' of the String.
-     *
      * @param input The input word.
      * @return The pair of strings
      */
     public static String[] wordSeparator(String input) {
-        int index = input.indexOf(' ');
-
-        String[] pair = new String[2];
-
-        if (index > 1) {
-            pair[0] = input.substring(0, index).trim();
-            pair[1] = input.substring(index + 1).trim();
-        } else {
-            pair[0] = input;
-            pair[1] = "";
-        }
-
-        return pair;
+        return partition(input, ' ');
     }
 
     /**
-     * A function that returns everything after the first instance of '.'.
-     *
+     * Returns everything after the first instance of a period.
      * @param str The input string.
-     * @return The substring of str after the first '.'.
+     * @return The string after the first period.
      */
     public static String everythingAfterDot(String str) {
         int index = str.indexOf('.');
@@ -71,59 +66,66 @@ public class StringManipulator {
 
     /**
      * Converts the input string from 24-hour time to 12-hour time representation.
-     *
      * @param timeString The input string
      * @return The converted string.
      */
     private static String convertTime(String timeString) {
         try {
             int timeIn24hRepresentation = Integer.parseInt(timeString);
+            int hours = timeIn24hRepresentation / 100;
+            int minutes = timeIn24hRepresentation % 100;
+            boolean isOutOfBounds = hours < 0 || hours > 24 || minutes < 0 || minutes > 60;
+            boolean cannotConvertToTime = Integer.parseInt(timeString.substring(2, 3)) > 5;
 
-            if (timeIn24hRepresentation < 0 || timeIn24hRepresentation > 2359
-                    || Integer.parseInt(timeString.substring(2, 3)) > 5) {
+            if (isOutOfBounds || cannotConvertToTime) {
                 return timeString;
             } else {
-                int hours = timeIn24hRepresentation / 100;
-                int minutes = timeIn24hRepresentation % 100;
-
-                if (hours > 11) {
-                    if (hours != 12) {
-                        hours -= 12;
-                    }
-
-                    if (hours < 10 && minutes < 10) {
-                        return "0" + hours + ":0" + minutes + "PM";
-                    } else if (hours < 10) {
-                        return "0" + hours + ":" + minutes + "PM";
-                    } else if (minutes < 10) {
-                        return hours + ":0" + minutes + "PM";
-                    } else {
-                        return hours + ":" + minutes + "PM";
-                    }
-                } else {
-                    if (hours == 0) {
-                        hours += 12;
-                    }
-
-                    if (hours < 10 && minutes < 10) {
-                        return "0" + hours + ":0" + minutes + "AM";
-                    } else if (hours < 10) {
-                        return "0" + hours + ":" + minutes + "AM";
-                    } else if (minutes < 10) {
-                        return hours + ":0" + minutes + "AM";
-                    } else {
-                        return hours + ":" + minutes + "AM";
-                    }
-                }
+                return convertTimeToStringRepresentation(hours, minutes);
             }
         } catch (NumberFormatException e) {
             return timeString;
         }
     }
 
+    private static String convertTimeToStringRepresentation(int hours, int minutes) {
+        assert hours > -1;
+        assert hours < 24;
+        assert minutes > -1;
+        assert minutes < 60;
+
+        if (hours > 11) {
+            if (hours != 12) {
+                hours -= 12;
+            }
+
+            if (hours < 10 && minutes < 10) {
+                return "0" + hours + ":0" + minutes + "PM";
+            } else if (hours < 10) {
+                return "0" + hours + ":" + minutes + "PM";
+            } else if (minutes < 10) {
+                return hours + ":0" + minutes + "PM";
+            } else {
+                return hours + ":" + minutes + "PM";
+            }
+        } else {
+            if (hours == 0) {
+                hours += 12;
+            }
+
+            if (hours < 10 && minutes < 10) {
+                return "0" + hours + ":0" + minutes + "AM";
+            } else if (hours < 10) {
+                return "0" + hours + ":" + minutes + "AM";
+            } else if (minutes < 10) {
+                return hours + ":0" + minutes + "AM";
+            } else {
+                return hours + ":" + minutes + "AM";
+            }
+        }
+    }
+
     /**
      * Converts the inputString into DD MMM YYYY format, or 12-hour time representation if applicable.
-     *
      * @param inputString The input string.
      * @return A string in DD MMM YYYY TIME format if inputString is in "YYYY-MM-DD TIME" format.
      */
