@@ -63,7 +63,12 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return (this.prefix + " " + super.showStatus() + this.name + ":" + this.dateFormatted + "\n");
+        if (canBeFormattedDate(this.date)) {
+            return (this.prefix + " " + super.showStatus() + this.name + ":" + this.dateFormatted + "\n");
+        } else {
+            return (this.prefix + super.showStatus() + this.name + ":" + this.date + "\n");
+        }
+
     }
 
     /**
@@ -73,7 +78,7 @@ public class Deadline extends Task {
     public void showThisTask() {
         if (canBeFormattedDate(this.date)) {
             System.out.println(this.prefix + super.showStatus()
-                    + this.name + "(by:" + this.dateFormatted.format(DateTimeFormatter.ofPattern("MMM d uuuu")) + ")");
+                    + this.name + "(by:" + this.dateFormatted.format(DateTimeFormatter.ofPattern("MMM dd uuuu")) + ")");
         } else {
             System.out.println(this.prefix + super.showStatus() + this.name + "(by:" + this.date + ")");
         }
