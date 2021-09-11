@@ -170,3 +170,11 @@ Lollipop: Here are the tasks that occurs on the specified date:
 1. [T][] finish up script for presentation
 2. [D][] finish up cs2103t user guide (by: 16 November 2021)
 ```
+
+### `q` - Quits the program
+
+Quits the program.
+
+Example of usage:
+
+`q`

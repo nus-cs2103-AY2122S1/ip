@@ -58,11 +58,13 @@ public class TaskList {
                 LocalDate deadline = ((Deadline) task).getDeadline();
                 if (deadline.equals(date)) {
                     sb.append(responseLogic.taskWithIndexReponse(index, task));
+                    index++;
                 }
             } else if (task instanceof Event) {
                 LocalDate time = ((Event) task).getTime();
                 if (time.equals(date)) {
                     sb.append(responseLogic.taskWithIndexReponse(index, task));
+                    index++;
                 }
             } else {
                 assert false : task;
@@ -83,6 +85,7 @@ public class TaskList {
         for (Task task : this.tasks) {
             if (task.toString().contains(keyword)) {
                 sb.append(responseLogic.taskWithIndexReponse(index, task));
+                index++;
             }
         }
         return sb.toString();
