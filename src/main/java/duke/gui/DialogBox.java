@@ -40,6 +40,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setMinSize(30,Double.parseDouble("-Infinity"));
         dialog.setFont(new Font("Helvetica Neue", 13));
         if (person.equals("Duke")) {
             dialog.setStyle("-fx-background-color:#f3f3f3;"

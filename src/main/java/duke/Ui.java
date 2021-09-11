@@ -84,11 +84,11 @@ public class Ui {
     public String notifyMultiDone(ArrayList<Task> doneTasks) {
         assert (doneTasks.size() > 1);
         String output = "You've finished the task? Good job!\n"
-                + "This task has been marked as done:\n";
+                + "These tasks have been marked as done:\n";
         for (int i = 0; i < doneTasks.size(); i++) {
             output += doneTasks.get(i).displayInfo() + "\n";
         }
-        return output;
+        return output + " ";
     }
 
     /**
@@ -105,11 +105,11 @@ public class Ui {
      */
     public String notifyMultiDelete(ArrayList<Task> removedTasks) {
         assert (removedTasks.size() > 1);
-        String output = "Okay! Removing the task:\n";
+        String output = "Okay! Removing these tasks:\n";
         for (int i = 0; i < removedTasks.size(); i++) {
             output += removedTasks.get(i).displayInfo() + "\n";
         }
-        return output;
+        return output + " ";
     }
 
     /**
@@ -122,7 +122,7 @@ public class Ui {
         for (int i = 0; i < listLength; i++) {
             output += String.format("%d. %s\n", i + 1, taskArrList.get(i).displayInfo());
         }
-        return output;
+        return output + " ";
     }
 
     /**
@@ -143,7 +143,7 @@ public class Ui {
         for (int i = 0; i < listLength; i++) {
             output += String.format("%d. %s\n", i + 1, taskArrList.get(i).displayInfo());
         }
-        return output;
+        return output + " ";
     }
 
     /**
@@ -152,12 +152,12 @@ public class Ui {
      * @param taskArrList The ArrayList of tasks with matching keywords.
      */
     public String notifyTaggedList(ArrayList<Task> taskArrList, String keyword) {
-        String output = "Here's are the tasks which are tagged with #" + keyword + ":\n";
+        String output = "Here are the tasks which have been tagged with #" + keyword + ":\n";
         int listLength = taskArrList.size();
         for (int i = 0; i < listLength; i++) {
             output += String.format("%d. %s\n", i + 1, taskArrList.get(i).displayInfo());
         }
-        return output;
+        return output + " ";
     }
 
     /**
@@ -166,12 +166,12 @@ public class Ui {
      * @param taskArrList The ArrayList of tasks with matching keywords.
      */
     public String notifyRemovedTaggedList(ArrayList<Task> taskArrList, String keyword) {
-        String output = "Here's are the tasks which have the tag #" + keyword + " removed:\n";
+        String output = "Here are the tasks which have the tag #" + keyword + " removed:\n";
         int listLength = taskArrList.size();
         for (int i = 0; i < listLength; i++) {
             output += String.format("%d. %s\n", i + 1, taskArrList.get(i).displayInfo());
         }
-        return output;
+        return output + " ";
     }
 
     /**

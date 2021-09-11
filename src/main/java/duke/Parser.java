@@ -217,7 +217,6 @@ public class Parser {
             for (int i = 3; i < inputArr.length - 1; i++) {
                 description += (" " + inputArr[i]);
             }
-            System.out.println(description);
             if (inputArr[1].equals("add")) {
                 return new AddTagCommand(description, tag);
             } else if (inputArr[1].equals("delete")) {
