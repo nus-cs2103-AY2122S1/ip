@@ -60,16 +60,24 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = null;
         String temp = Logic.checkIfSpecialCommand(input);
+
         if (temp == null) {
             response = "There are no task my dear summoner <3";
         } else {
             response = temp;
         }
         System.out.println(response);
-        dialogContainer.getChildren().addAll(
-            DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        if (input.contains("help")) {
+            dialogContainer.getChildren().clear();
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+        } else {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+        }
         userInput.clear();
     }
 }

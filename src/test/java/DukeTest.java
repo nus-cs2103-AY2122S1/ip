@@ -1,4 +1,5 @@
 import duke.Deadline;
+import duke.HelpCommand;
 import duke.Todo;
 import org.junit.jupiter.api.Test;
 
@@ -39,5 +40,10 @@ public class DukeTest {
         Deadline deadlineDummy = new Deadline("Test deadline", testDeadlineDateTime);
         assertEquals("[D][X] Test deadline 28/02/2020 23:00", deadlineDummy.toString());
 
+    }
+
+    @Test
+    public void HelpCommandTest() {
+        assertEquals(HelpCommand.getCommand(0), HelpCommand.getCommand("generalHelp"));
     }
 }

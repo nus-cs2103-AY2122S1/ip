@@ -34,6 +34,8 @@ public class Logic {
                 return processDone(packagedCommand, listOfCommandInputs, loggedCommand);
             } else if (listOfCommandInputs.contains("find")) {
                 return processFind(packagedCommand, listOfCommandInputs, loggedCommand);
+            } else if (listOfCommandInputs.get(0).equals("help")){
+                return processHelp(listOfCommandInputs);
             } else {
                 processTask(packagedCommand, true);
                 return loggedCommand;
@@ -139,6 +141,14 @@ public class Logic {
         return DataHandlerLayer.getFilteredLog(findKeyword);
     }
 
+    private static String processHelp(ArrayList<String> listOfCommandInputs) throws InvalidCommandException {
+        if (listOfCommandInputs.size() > 2) {
+            throw new InvalidCommandException();
+        } else if (listOfCommandInputs.size() == 1) {
+            return HelpCommand.getCommand(0);
+        }
+        return HelpCommand.getCommand(Integer.parseInt(listOfCommandInputs.get(1)));
+    }
 
     private static void processDeadline(Command packagedCommand,
                                         ArrayList<String> listOfCommandInputs,
