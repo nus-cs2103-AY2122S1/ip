@@ -9,6 +9,8 @@ public class Pair {
     private List<String> lst;
 
     public Pair(Command cmd, List<String> lst) {
+        assert cmd != null;
+        assert lst != null;
         this.cmd = cmd;
         this.lst = lst;
     }

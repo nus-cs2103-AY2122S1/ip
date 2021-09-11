@@ -70,7 +70,7 @@ public class Duke {
                 return String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list\n",
                         t, tasks.numberOfTasks());
             default:
-                return ""; // shouldn't reach here
+                throw new DukeException.UnknownInputException();
             }
         } catch (DukeException | java.io.IOException | IndexOutOfBoundsException e) {
             return e.getMessage();
