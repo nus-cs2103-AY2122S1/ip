@@ -22,7 +22,7 @@ public class Parser {
      * @return The index of the task to be deleted.
      */
     public Integer deleteInputParser(String input) {
-        if (input.length() < 9) {
+        if (input.length() < 8) {
             throw new MissingIndexException();
         }
         return Integer.parseInt(input.substring(7)) - 1;

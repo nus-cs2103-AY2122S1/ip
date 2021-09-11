@@ -134,7 +134,7 @@ public class Ui {
                     + "eg. find book\n";
             break;
         default:
-            response = "ROAR!!! Enter the correct command input";
+            response = "RAWR!!! Enter the correct command input";
         }
         return response;
     }
