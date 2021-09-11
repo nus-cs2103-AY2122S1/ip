@@ -22,7 +22,7 @@
         prefHeight="600.0"
         prefWidth="400.0"
         stylesheets="@../css/styles.css"
-        fx:controller="duke.ui.Ui">
+        fx:controller="chad.ui.Ui">
 
     <children>
 
