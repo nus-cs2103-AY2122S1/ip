@@ -66,7 +66,7 @@ public class Storage {
      *
      * @param taskList the TaskList.
      */
-    public void readTaskFile(TaskList taskList) {
+    public void readTaskFile(TaskList taskList) throws DukeException {
         try {
             Scanner taskScanner = new Scanner(this.taskFile);
             while (taskScanner.hasNextLine()) {
@@ -75,11 +75,9 @@ public class Storage {
             }
             taskScanner.close();
         } catch (FileNotFoundException err) {
-            Ui.displayMessage(FILE_NOT_FOUND_MESSAGE);
+            throw new DukeException(FILE_NOT_FOUND_MESSAGE);
         } catch (ArrayIndexOutOfBoundsException err) {
-            Ui.displayMessage(INVALID_TASKLIST_MESSAGE);
-        } catch (DukeException err) {
-            Ui.displayMessage(err.getMessage());
+            throw new DukeException(INVALID_TASKLIST_MESSAGE);
         }
     }
 

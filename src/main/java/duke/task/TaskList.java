@@ -1,7 +1,5 @@
 package duke.task;
 
-import static duke.task.TimedToDo.TIMED_TODO_DELIMITER;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class TaskList {
     private List<Task> taskArr;
 
     /**
-     * Constructor for TaskList
+     * Constructor for TaskList to create a taskList from taskList.txt
      */
     public TaskList(String taskList) throws DukeException {
         this.taskArr = new ArrayList<>();
@@ -34,6 +32,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Constructor for TaskList to create an empty taskList
+     */
     public TaskList() {
         this.taskArr = new ArrayList<>();
     }
@@ -46,6 +47,7 @@ public class TaskList {
 
     /**
      * The size of the array storing the Tasks.
+     *
      * @return The size of the array storing the Tasks.
      */
     public int getSize() {
@@ -89,11 +91,11 @@ public class TaskList {
     }
 
     /**
-     * Adds a task from the format in taskList.txt
+     * Adds a task from the format in taskList.txt.
      *
-     * @param input The format in taskList.txt
-     * @throws ArrayIndexOutOfBoundsException When
-     * @throws DukeException An exception thrown according to the message given
+     * @param input The format in taskList.txt.
+     * @throws ArrayIndexOutOfBoundsException Error when for invalid taskList.
+     * @throws DukeException An exception thrown according to the message given.
      */
     public void addSavedTask(String input) throws ArrayIndexOutOfBoundsException, DukeException {
         if (input == null || input.equals("")) {
@@ -126,11 +128,11 @@ public class TaskList {
     }
 
     /**
-     * Marks a task as done according to the index
+     * Marks a task as done according to the index.
      *
-     * @param taskIndex Index of task to be done
-     * @return Returns the String message when the task is done
-     * @throws DukeException An exception thrown according to the message given
+     * @param taskIndex Index of task to be done.
+     * @return Returns the String message when the task is done.
+     * @throws DukeException An exception thrown according to the message given.
      */
     public String markTaskAsDone(int taskIndex) throws DukeException {
         // Task index starts from 1
@@ -145,11 +147,11 @@ public class TaskList {
     }
 
     /**
-     * Deletes the task from the taskList
+     * Deletes the task from the taskList.
      *
-     * @param taskIndex The index to delete
-     * @return Returns the String message when the task is done
-     * @throws DukeException An exception thrown according to the message given
+     * @param taskIndex The index to delete.
+     * @return Returns the String message when the task is done.
+     * @throws DukeException An exception thrown according to the message given.
      */
     public String deleteTask(int taskIndex) throws DukeException {
         // Task index starts from 1
@@ -163,9 +165,9 @@ public class TaskList {
     }
 
     /**
-     * Gets all the tasks in the format for taskList.txt
+     * Gets all the tasks in the format for taskList.txt.
      *
-     * @return the tasks in the format for taskList.txt
+     * @return the tasks in the format for taskList.txt.
      */
     public String getSaveFormat() {
         StringBuilder printedList = new StringBuilder();
@@ -177,9 +179,9 @@ public class TaskList {
     }
 
     /**
-     * Gets all the tasks in the format for the console
+     * Gets all the tasks in the format for the console.
      *
-     * @return the tasks in the format for the console
+     * @return the tasks in the format for the console.
      */
     @Override
     public String toString() {

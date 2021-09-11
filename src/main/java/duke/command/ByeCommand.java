@@ -3,7 +3,6 @@ package duke.command;
 import static duke.util.Ui.EXIT_MESSAGE;
 
 import duke.task.TaskList;
-import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.Ui;
 

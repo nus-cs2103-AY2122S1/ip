@@ -4,15 +4,31 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 
+/**
+ * The Dialog box belonging to Duke.
+ */
 public class DukeDialogBox extends DialogBox {
     @FXML
     private Label dukeDialog;
 
+    /**
+     * Constructor for the Dialog Box belonging to Duke.
+     *
+     * @param text The text of the dialog box.
+     * @param img The Profile picture of the user saying dialog box.
+     */
     private DukeDialogBox(String text, Image img) {
         super("/view/DukeDialogBox.fxml", img);
         dukeDialog.setText(text);
     }
 
+    /**
+     * Returns the dialog box facing the appropriate side.
+     *
+     * @param text The text of the dialog box.
+     * @param img The Profile picture of the user saying dialog box.
+     * @return The dialog box facing the appropriate side.
+     */
     public static DialogBox getDialog(String text, Image img) {
         var db = new DukeDialogBox(text, img);
         db.flip();

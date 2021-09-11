@@ -14,7 +14,7 @@ public class Event extends Task {
 
     private static final String EVENT_DELIMITER = "/at";
 
-    // Messages
+    /* Messages */
     private static final String INVALID_EVENT_MESSAGE = "Invalid use of event command."
             + " Use 'event <text> /at <datetime>'";
     private static final String INVALID_EVENT_FORMAT_MESSAGE = "Invalid DateTime format for event. "
@@ -27,9 +27,9 @@ public class Event extends Task {
     /**
      * Constructor for the event object.
      *
-     * @param text The description of the event
-     * @param eventDatetime The date where it is due, to be converted to a DateTime object
-     * @param isDone Whether the Event is finished
+     * @param text The description of the event.
+     * @param eventDatetime The date where it is due, to be converted to a DateTime object.
+     * @param isDone Whether the Event is finished.
      */
     private Event(String text, String eventDatetime, boolean isDone) throws DukeException {
         super(text, isDone);
@@ -42,10 +42,11 @@ public class Event extends Task {
 
     /**
      * Factory method for creating an event object.
-     * @param input The remaining input after the initial 'event' string
-     * @param isDone Whether the Event is finished
-     * @return An Event object
-     * @throws DukeException An exception thrown according to the message given
+     *
+     * @param input The remaining input after the initial 'event' string.
+     * @param isDone Whether the Event is finished.
+     * @return An Event object.
+     * @throws DukeException An exception thrown according to the message given.
      */
     public static Event createNewEvent(String input, boolean isDone) throws DukeException {
         if (input.split(" ").length < 3) {
@@ -63,9 +64,10 @@ public class Event extends Task {
 
     /**
      * Factory method for creating an event object from taskList.txt.
+     *
      * @param input The remaining string after the 'E |' string.
-     * @return A Event object
-     * @throws DukeException An exception thrown according to the message given
+     * @return A Event object.
+     * @throws DukeException An exception thrown according to the message given.
      */
     public static Event createNewEventFromSave(String input) throws DukeException {
         String[] inputArr = input.split("\\|");
@@ -79,8 +81,9 @@ public class Event extends Task {
     }
 
     /**
-     * The format of the Event in taskList.txt
-     * @return The String format of the Event in taskList.txt
+     * The format of the Event in taskList.txt.
+     *
+     * @return The String format of the Event in taskList.txt.
      */
     public String getSaveFormat() {
         return String.format("%c | %d | %s | %s", SYMBOL, super.getDoneInt(), this.getText(),
@@ -89,6 +92,7 @@ public class Event extends Task {
 
     /**
      * The format of the event in console.
+     *
      * @return The String format of the event in console.
      */
     @Override

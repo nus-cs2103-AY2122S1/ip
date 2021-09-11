@@ -14,7 +14,7 @@ public class Deadline extends Task {
 
     private static final String DEADLINE_DELIMITER = "/by";
 
-    // Messages
+    /* Messages */
     private static final String INVALID_DEADLINE_MESSAGE = "Invalid use of deadline command. "
             + "Use 'deadline <text> /by <datetime>'";
     private static final String INVALID_DEADLINE_FORMAT_MESSAGE = "Invalid DateTime format for deadline. "
@@ -43,6 +43,7 @@ public class Deadline extends Task {
 
     /**
      * Factory method for creating a deadline object.
+     *
      * @param input The remaining input after the initial 'deadline' string.
      * @param isDone Whether the Deadline is finished.
      * @return A Deadline object.
@@ -64,9 +65,10 @@ public class Deadline extends Task {
 
     /**
      * Factory method for creating a deadline object from taskList.txt.
+     *
      * @param input The remaining string after the 'D |' string.
-     * @return A Deadline object
-     * @throws DukeException An exception thrown according to the message given
+     * @return A Deadline object.
+     * @throws DukeException An exception thrown according to the message given.
      */
     public static Deadline createNewDeadlineFromSave(String input) throws DukeException {
         String[] inputArr = input.split("\\|");
@@ -80,8 +82,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * The format of the Deadline in taskList.txt
-     * @return The String format of the Deadline in taskList.txt
+     * The format of the Deadline in taskList.txt.
+     *
+     * @return The String format of the Deadline in taskList.txt.
      */
     public String getSaveFormat() {
         return String.format("%c | %d | %s | %s", SYMBOL, super.getDoneInt(),
@@ -90,6 +93,7 @@ public class Deadline extends Task {
 
     /**
      * The format of the deadline in console.
+     *
      * @return The String format of the deadline in console.
      */
     @Override

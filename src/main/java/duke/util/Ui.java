@@ -39,16 +39,17 @@ public class Ui {
     }
 
     /**
-     * Prints a horizontal line to the console
+     * Prints a horizontal line to the console.
      */
     private static void printHorizontalLine() {
         System.out.print("_".repeat(BOX_LENGTH) + "\n");
     }
 
     /**
-     * Displays the message in a text box
+     * Displays the message in a text box.
+     * Only used for tests and error messages handled before duke is initialised.
      *
-     * @param message The message to display
+     * @param message The message to display.
      */
     public static void displayMessage(String message) {
         printHorizontalLine();
@@ -66,14 +67,5 @@ public class Ui {
      */
     public void closeScanner() {
         sc.close();
-    }
-
-    /**
-     * Outputs the next line in the scanner.
-     *
-     * @return the next line in the scanner
-     */
-    public String readCommand() {
-        return sc.nextLine();
     }
 }

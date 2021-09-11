@@ -33,14 +33,17 @@ public class Duke {
         try {
             taskList = new TaskList(myStorage.load());
         } catch (DukeException err) {
+            // Only time where error messages are displayed in the cli
             Ui.displayMessage(err.getMessage());
             taskList = new TaskList();
         }
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns Duke's response as a String.
+     *
+     * @param input The user's input.
+     * @return Duke's response as a String.
      */
     public String getResponse(String input) {
         try {
@@ -54,5 +57,12 @@ public class Duke {
         } catch (DukeException err) {
             return err.getMessage();
         }
+    }
+
+    /**
+     * Closes the Scanner from Ui.
+     */
+    public void closeScanner() {
+        this.ui.closeScanner();
     }
 }

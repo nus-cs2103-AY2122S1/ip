@@ -126,7 +126,7 @@ public class DukeTest {
             // Clear the file after use
             FileWriter fileWriterClearFile = new FileWriter(String.join(File.separator, FILE_PATH_ARR), false);
             fileWriterClearFile.close();
-        } catch (FileNotFoundException err) {
+        } catch (FileNotFoundException | DukeException err) {
             Ui.displayMessage("An error occurred. Unable to find file.");
         } catch (IOException err) {
             System.out.println(err.getMessage());

@@ -32,8 +32,13 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    /**
+     * Sets the MainWindow object to the correct instance of Duke.
+     *
+     * @param duke The appropriate instance of duke.
+     */
+    public void setDuke(Duke duke) {
+        this.duke = duke;
     }
 
     /**
@@ -48,11 +53,14 @@ public class MainWindow extends AnchorPane {
         if (input.equals("")) {
             return;
         }
+
         // Idea and code from alissayarmantho's issue
         if (response.equals(EXIT_MESSAGE)) {
+            duke.closeScanner();
             Platform.exit();
         }
 
+        /* Alternates between user and Duke dialog boxes. */
         dialogContainer.getChildren().addAll(
                 UserDialogBox.getDialog(input, userImage),
                 DukeDialogBox.getDialog(response, dukeImage)

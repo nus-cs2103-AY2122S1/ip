@@ -4,7 +4,6 @@ import duke.util.DukeException;
 
 /**
  * TimedToDos are created by 'todo eat breakfast /for 2 hours'.
- * TimedToDos are a type of Task, and are a subset of ToDos.
  */
 public class TimedToDo extends Task {
     public static final char SYMBOL = 'F';
@@ -34,10 +33,10 @@ public class TimedToDo extends Task {
     /**
      * Factory method for creating a timed todo object.
      *
-     * @param input The remaining input after the initial 'todo' string
-     * @param isDone Whether the Timed Todo is finished
-     * @return A timed todo object
-     * @throws DukeException An exception thrown according to the message given
+     * @param input The remaining input after the initial 'todo' string.
+     * @param isDone Whether the Timed Todo is finished.
+     * @return A timed todo object.
+     * @throws DukeException An exception thrown according to the message given.
      */
     public static TimedToDo createNewTimedTodo(String input, boolean isDone) throws DukeException {
         if (input.split(" ").length < 3) {
@@ -57,8 +56,8 @@ public class TimedToDo extends Task {
      * Factory method for creating a timed todo object from taskList.txt.
      *
      * @param input The remaining string after the 'F |' string.
-     * @return A Timed Todo object
-     * @throws DukeException An exception thrown according to the message given
+     * @return A Timed Todo object.
+     * @throws DukeException An exception thrown according to the message given.
      */
     public static TimedToDo createNewTimedTodoFromSave(String input) throws DukeException {
         String[] inputArr = input.split("\\|");
