@@ -25,7 +25,7 @@ import duke.tasks.Todo;
  * the chat bot to execute accordingly.
  */
 public class Parser {
-    private final boolean DEFAULT_STATUS = false;
+    private final boolean IS_DEFAULT_STATUS = false;
 
     // Command Tags for the chat bot
     private final String LIST_TAG = "list";
@@ -80,14 +80,14 @@ public class Parser {
         case LIST_TAG:
             return new ListCommand();
         case TODO_TAG:
-            Todo todoTask = new Todo(getTodoDesc(input), DEFAULT_STATUS);
+            Todo todoTask = new Todo(getTodoDesc(input), IS_DEFAULT_STATUS);
             return new TodoCommand(todoTask);
         case DEADLINE_TAG:
             Deadline deadlineTask = new Deadline(getTaskDesc("deadline", input),
-                    getDeadlineDates(input), DEFAULT_STATUS);
+                    getDeadlineDates(input), IS_DEFAULT_STATUS);
             return new DeadlineCommand(deadlineTask);
         case EVENT_TAG:
-            Event eventTask = new Event(getTaskDesc("event", input), getEventDates(input), DEFAULT_STATUS);
+            Event eventTask = new Event(getTaskDesc("event", input), getEventDates(input), IS_DEFAULT_STATUS);
             return new EventCommand(eventTask);
         case DONE_TAG:
             int doneId = getTaskId(input);
