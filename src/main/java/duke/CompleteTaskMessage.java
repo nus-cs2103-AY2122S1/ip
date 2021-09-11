@@ -3,7 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 /**
- * The class for creating Duke' response after a task is marked as done.
+ * Represents Duke's response after a task is marked as done.
  */
 public class CompleteTaskMessage extends DukeMessage{
     private int taskIndex;

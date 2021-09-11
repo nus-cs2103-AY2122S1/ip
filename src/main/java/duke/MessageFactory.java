@@ -6,6 +6,14 @@ import duke.AddTaskMessage;
  * The factory class responsible for instantiating the right sub-type of DukeMessage.
  */
 public class MessageFactory {
+
+    /**
+     * Instantiates the right subtype of DukeMessage.
+     *
+     * @param userStr The string input from the user
+     * @return DukeMessage A DukeMessage object which handles user's
+     *                      command
+     */
     public static DukeMessage createMessage(String userStr) {
         try {
             if (userStr.equals("list")) {

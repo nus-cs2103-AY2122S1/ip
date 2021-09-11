@@ -3,7 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 /**
- * The class for creating Duke' response when the user searches for a keyword.
+ * Represents Duke' response when the user searches for a keyword.
  */
 public class FindMessage extends DukeMessage {
     private String searchStr;

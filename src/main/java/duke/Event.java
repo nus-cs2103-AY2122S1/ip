@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * The class for creating and managing Events added to TaskList. Extends Task.
+ * Represents the Events that are added to TaskList. Extends Task.
  */
 public class Event extends Task{
     private boolean done;

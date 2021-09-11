@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * The class for creating Duke' response after a task is deleted from the list.
+ * Represents Duke' response after a task is deleted from the list.
  */
 public class DeleteTaskMessage extends DukeMessage{
     private Task deletedTask;
@@ -11,6 +11,7 @@ public class DeleteTaskMessage extends DukeMessage{
         this.taskIndex = index;
         this.deletedTask = TaskList.getTaskList().getTasks().remove(taskIndex);
     }
+
     public String display() {
         String reply = "Theek h bhai... ye task hata diya\n" +
                 deletedTask.getTaskString() +
