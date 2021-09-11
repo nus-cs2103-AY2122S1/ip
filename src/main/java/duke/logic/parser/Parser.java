@@ -30,10 +30,12 @@ public class Parser {
     }
 
     private String[] parseInput(String input) {
+        assert(input.length() > 0);
         return input.trim().split(" ", 2);
     }
 
     private int parseTaskIndex(String input) throws DukeInvalidCommandException {
+        assert(input.length() > 0);
         int parsedNumber;
         try {
             parsedNumber = Integer.parseInt(input);
@@ -48,6 +50,7 @@ public class Parser {
     }
 
     private String handleList(String[] parsedInput) throws DukeInvalidCommandException {
+        assert(parsedInput.length != 0);
         if (parsedInput.length >= 2) {
             throw new DukeInvalidCommandException("OOPS!!! Do you mean 'list' ?");
         } else {
@@ -56,6 +59,7 @@ public class Parser {
     }
 
     private String handleDone(String[] parsedInput) throws DukeInvalidCommandException {
+        assert(parsedInput.length != 0);
         if (parsedInput.length < 2) {
             throw new DukeInvalidCommandException("OOPS!!! Which task do you want to mark as done?");
         }
@@ -68,6 +72,7 @@ public class Parser {
     }
 
     private String handleDeadline(String[] parsedInput) throws DukeInvalidCommandException {
+        assert(parsedInput.length != 0);
         if (parsedInput.length < 2) {
             throw new DukeInvalidCommandException("OOPS!!! The description of a deadline cannot be empty.");
         }
@@ -85,6 +90,7 @@ public class Parser {
     }
 
     private String handleEvent(String[] parsedInput) throws DukeInvalidCommandException {
+        assert(parsedInput.length != 0);
         if (parsedInput.length < 2) {
             throw new DukeInvalidCommandException("OOPS!!! The description of an event cannot be empty.");
         }
