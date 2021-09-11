@@ -1,5 +1,6 @@
 package duke;
 
+import duke.exception.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -25,6 +26,7 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image dukeErrorImage = new Image(this.getClass().getResourceAsStream("/images/DaDukeError.png"));
 
     @FXML
     public void initialize() {
@@ -43,6 +45,10 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeResponse, dukeImage));
     }
 
+    private void showDukeErrorDialog(String dukeResponse) {
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeResponse, dukeErrorImage));
+    }
+
     private void showUserDialog(String userInput) {
         dialogContainer.getChildren().add(DialogBox.getUserDialog(userInput, userImage));
     }
@@ -59,9 +65,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        this.showUserDialog(input);
-        this.showDukeDialog(response);
+        try {
+            String response = duke.getResponse(input);
+            this.showUserDialog(input);
+            this.showDukeDialog(response);
+        } catch (DukeException e) {
+            this.showUserDialog(input);
+            this.showDukeErrorDialog(e.getMessage());
+        }
         userInput.clear();
     }
 }

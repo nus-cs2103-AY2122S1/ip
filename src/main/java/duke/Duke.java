@@ -5,6 +5,7 @@ import java.io.IOException;
 import duke.command.Command;
 import duke.command.WelcomeCommand;
 import duke.exception.DukeException;
+import duke.exception.DukeParseException;
 import duke.task.TaskList;
 
 /**
@@ -83,14 +84,10 @@ public class Duke {
      * @param input User input.
      * @return Duke's response.
      */
-    public String getResponse(String input) {
-        try {
-            Command c = Parser.parse(input);
-            c.execute(this, tasks, storage);
-            return this.response;
-        } catch (DukeException e) {
-            return e.getMessage();
-        }
+    public String getResponse(String input) throws DukeException {
+        Command c = Parser.parse(input);
+        c.execute(this, tasks, storage);
+        return this.response;
     }
 
     /**
