@@ -57,7 +57,8 @@ public class MainWindow extends AnchorPane {
         } catch (DukeException e) {
             Ui ui = new Ui();
             response = ui.displayDukeExceptionMessage(e);
-            responseDialogBox = DialogBox.getDukeDialog(response, dukeShockImage);
+            responseDialogBox = DialogBox.getDukeDialog(response + "\nYour input is: " + input,
+                    dukeShockImage);
         }
         dialogContainer.getChildren().addAll(inputDialogBox, responseDialogBox);
         userInput.clear();
