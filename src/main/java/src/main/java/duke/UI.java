@@ -144,6 +144,17 @@ public class UI {
         return output.toString();
     }
 
+    String update(String task, String time) throws DukeException {
+        String[] split = task.split(" ", 2);
+        if (!(split[0].equals("event") || split[0].equals("deadline"))) {
+            throw new TimeNotFoundException("Given task doesn't have time");
+        }
+        int index = Integer.parseInt(split[1]);
+        String output = "The task has been updated:\n";
+        output += list.update(index, time, split[0]);
+        return output;
+    }
+
     /**
      * method to invoke print method of the Tasklist class and show the tasks in the
      * list

@@ -26,6 +26,10 @@ public class Event extends Task {
         this.isDone = true;
     }
 
+    void setTime(String time) {
+        this.time = time;
+    }
+
     /**
      * overridden method to give the String representation of the task
      *

@@ -66,6 +66,10 @@ public class Parser {
             String time = split[1].split(" /by ", 2)[1];
             String task = split[1].split(" /by ", 2)[0];
             return ui.createDeadline(task, time);
+        } else if (split[0].equals("update")) {
+            String task = split[1].split(" /to ", 2)[0];
+            String time = split[1].split(" /to ", 2)[1];
+            return ui.update(task, time);
         }
         //}
         return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";

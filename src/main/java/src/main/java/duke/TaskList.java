@@ -112,6 +112,18 @@ public class TaskList {
         return text.toString();
     }
 
+    String update(int index, String time, String task) {
+        if (task.equals("event")) {
+            Event event = (Event) list.get(index - 1);
+            event.setTime(time);
+            return event.toString();
+        } else {
+            Deadline deadline = (Deadline) list.get(index - 1);
+            deadline.setTime(time);
+            return deadline.toString();
+        }
+    }
+
     int getSize() {
         return list.size();
     }

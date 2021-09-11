@@ -37,6 +37,15 @@ public class Deadline extends Task {
         this.isDone = true;
     }
 
+    void setTime(String time) {
+        try {
+            this.time = LocalDate.parse(time);
+        } catch (DateTimeParseException error) {
+            System.out.println("Please Enter date in this format 'YYYY-MM-dd'");
+            return;
+        }
+    }
+
     /**
      * method to convert deadline to a string with time interpreted by the chat bot
      */
