@@ -71,15 +71,16 @@ public class Ui {
     public String printFindResults(TaskList taskList, String keyword) {
         StringBuilder findResultsMsg;
         if (taskList.getSize() > 0) {
-            findResultsMsg = new StringBuilder("Okay Rio, this is what I have found based on the keyword: " + keyword);
+            findResultsMsg = new StringBuilder("Sure Rio!\n" + "This is what I have found based on the keyword: \""
+                    + keyword + "\"\n");
             for (int i = 0; i < taskList.getSize(); i++) {
                 int taskNo = i + 1;
                 Task curr = taskList.getTask(i);
                 findResultsMsg.append(taskNo).append(". ").append(curr.toString()).append("\n");
             }
         } else {
-            findResultsMsg = new StringBuilder("Oops Rio, based on your keyword: "
-                    + keyword + ", I am not able to find any match :(");
+            findResultsMsg = new StringBuilder("Oops Rio, based on your keyword: \""
+                    + keyword + "\", I am not able to find any match :(");
         }
         return findResultsMsg.toString();
     }
@@ -92,8 +93,8 @@ public class Ui {
      * @return Success message.
      */
     public String printAddCommand(Task task, TaskList taskList) {
-        return "Sure Rio! I Have added " + task.toString() + " to your list.\n"
-                + "Now you have a total of " + taskList.getSize() + " tasks!";
+        return "Sure Rio! I Have added \"" + task.toString() + "\" to your list.\n"
+                + "You have a total of " + taskList.getSize() + " tasks!";
     }
 
     /**
@@ -104,8 +105,8 @@ public class Ui {
      * @return Success message.
      */
     public String printDoneCommand(Task task, TaskList taskList) {
-        return "Good job on completing your task Rio!\n" + "I have marked this task as done: "
-                + task.toString() + "\nNow you have " + taskList.getSize() + " tasks left.";
+        return "Good job on completing your task Rio!\n" + "I have marked this task as done: \""
+                + task.toString() + "\"\n" + "Now you have " + taskList.getSize() + " task(s) left.";
     }
 
     /**
@@ -114,7 +115,7 @@ public class Ui {
      * @return Message.
      */
     public String printEmptyList() {
-        return "Wow Rio, there's nothing on your list\n"
+        return "Wow Rio, there's nothing on your list!\n"
                 + "Feel free to let me know if you would like to add anything.";
     }
 
@@ -126,8 +127,8 @@ public class Ui {
      * @return Success message.
      */
     public String printDeleteCommand(Task task, TaskList taskList) {
-        return "Okay Rio, I have deleted this task from you list:\n" + task.toString()
-                + "\nNow, you have " + taskList.getSize() + " tasks left.";
+        return "Okay Rio, I have deleted this task from your list:\n" + task.toString()
+                + "\nYou have " + taskList.getSize() + " task(s) left.";
     }
 
     /**
@@ -137,7 +138,7 @@ public class Ui {
      * @return Warning message.
      */
     public String printSomethingMissing(String cmdType) {
-        return "Oh no Rio, I think something is missing from this " + cmdType;
+        return "Oh no Rio, I think something is missing from this " + cmdType + " command";
     }
 
     /**
