@@ -12,6 +12,9 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final String START_MESSAGE = "Hi, what can I do for you?\n"
+            + "Type \"help\" for the list of commands.";
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -23,8 +26,9 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Sana.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Winter.jpg"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/Sana.jpg"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Winter.jpg"));
+
 
     /**
      * Initialises the GUI.
@@ -32,6 +36,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(START_MESSAGE, dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {

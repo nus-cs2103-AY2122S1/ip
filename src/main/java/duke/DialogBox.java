@@ -11,12 +11,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
 /**
@@ -48,7 +44,6 @@ public class DialogBox extends HBox {
 
     private void setDisplay(String text, Image img) {
         dialog.setText(text);
-        dialog.setMinHeight(Region.USE_PREF_SIZE);
         displayPicture.setFill(new ImagePattern(img));
     }
 
@@ -60,7 +55,6 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-        this.setBackground(new Background(new BackgroundFill(Paint.valueOf("#B0C4DE"), null, null)));
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
