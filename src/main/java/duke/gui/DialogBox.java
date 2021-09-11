@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 
 /**
  * This class represents a dialog box consisting of an ImageView to represent the duke's and user's face and
@@ -41,6 +42,7 @@ public class DialogBox extends HBox {
         fxmlLoader.load();
 
         dialog.setText(text);
+        dialog.setFont(Font.font("Comic Sans MS", 13));
         displayPicture.setImage(img);
     }
 
@@ -59,7 +61,9 @@ public class DialogBox extends HBox {
      * @return A DialogBox for the user.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.setStyle("-fx-background-color: #000042; -fx-border-color: #FFFFFF");
+        return db;
     }
 
     /**
@@ -71,6 +75,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.setStyle("-fx-background-color: #4b0908; -fx-border-color: #b97d10");
         db.flip();
         return db;
     }

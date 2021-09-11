@@ -20,6 +20,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setChatBot(chatBot);
+            stage.setTitle("Your Friendly Neighbourhood Chat Bot");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

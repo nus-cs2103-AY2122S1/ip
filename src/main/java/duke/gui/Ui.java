@@ -6,7 +6,7 @@ import duke.tasks.TaskList;
 public class Ui {
 
     private enum Message {
-        WELCOME_MSG("Hello! I am Stoner!\nWhat can I do for you?"),
+        WELCOME_MSG("Hello! I am Iron Bot!\nWhat can I do for you?"),
         EXIT_MSG("Good Bye. Don't have a good day... Have a great day!!!"),
         DISPLAY_LIST_MSG("There are the tasks you have:"),
         EMPTY_LIST_MSG("There is current no task in your list!"),
