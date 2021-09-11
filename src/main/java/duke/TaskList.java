@@ -115,7 +115,7 @@ public class TaskList {
 
         for (int i = 0; i < tasks.size(); i++) {
             assert tasks.get(i) != null : "tasklist has no tasks";
-            result += counter + "." + tasks.get(i) + "\n";
+            result += counter + ". " + tasks.get(i) + "\n";
             counter++;
         }
 

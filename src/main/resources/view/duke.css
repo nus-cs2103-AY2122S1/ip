@@ -1,0 +1,8 @@
+.anchor {
+    -fx-background-image: url('../images/blackgreen.jpg');
+    -fx-background-size: cover;
+}
+.text-input {
+    -fx-background-color: black;
+    -fx-text-inner-color: green;
+}

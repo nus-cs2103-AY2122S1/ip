@@ -61,6 +61,6 @@ public class DukeException extends IllegalArgumentException {
     }
     @Override
     public String getMessage() {
-        return errorString;
+        return "ERROR: " + errorString;
     }
 }

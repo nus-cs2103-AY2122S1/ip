@@ -42,7 +42,7 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         setMinHeight(Region.USE_PREF_SIZE);
         displayPicture.setImage(img);
-        Circle circle = new Circle(70, 50, 50);
+        Circle circle = new Circle(50, 50, 50);
         displayPicture.setClip(circle);
     }
 
@@ -56,12 +56,33 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Gets the dialog box for user side.
+     *
+     * @param text String that is what the user inputs.
+     * @param img The user's profile image.
+     * @return DialogBox to be displayed.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Gets the dialog box for the AI.
+     *
+     * @param text String that is the AI's response to commands.
+     * @param img The AI's profile iamge.
+     * @return Dialog to be displayed.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+
+        if (text.contains("ERROR:")) {
+            Node innerHBox = db.getChildren().get(0);
+            innerHBox.setStyle("-fx-background-color: red");
+            innerHBox.setOpacity(0.7);
+        }
+
         db.flip();
         return db;
     }

@@ -1,7 +1,5 @@
 package duke.gui;
 
-import java.util.concurrent.TimeUnit;
-
 import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -38,6 +36,9 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    /**
+     * Shows the user the AI's greeting.
+     */
     public void greetUser() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(
             "Good Day! I'm The Terminator\nWhat can I do for you?", dukeImage));
