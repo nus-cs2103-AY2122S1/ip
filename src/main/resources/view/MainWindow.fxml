@@ -16,7 +16,7 @@
         <Button fx:id="sendButton" layoutX="454.0" layoutY="631.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="35.0" prefWidth="76.0" text="Send" />
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="631.0" prefWidth="530.0" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="631.0" prefWidth="513.0">
+                <VBox fx:id="dialogContainer" prefHeight="631.0" prefWidth="513.0" style="-fx-background-color: #FFF8E5;">
                 </VBox>
             </content>
         </ScrollPane>

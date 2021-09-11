@@ -44,8 +44,8 @@ public class Ui {
      */
     public String printWelcomeMessage() {
         String logo = " ______           _          __\n"
-                + "|   __    \\      /   \\      |   |\n"
-                + "|  |_|  /     /  /\\  \\    |   |\n"
+                + "|   __    \\      /   \\       |   |\n"
+                + "|  |_|  /     /  /\\  \\     |   |\n"
                 + "|  |_|  \\   /    __   \\   |   |\n"
                 + "|______/ /__/    \\__\\ |__|\n";
         return logo + "Hello! I'm Bai. （ ● ___ ●.）\nWhat can I do for you?";
@@ -113,7 +113,7 @@ public class Ui {
      * @return Error message.
      */
     public String printError(String err) {
-        return err;
+        return "(*´д｀*) " + err;
     }
 
     /**

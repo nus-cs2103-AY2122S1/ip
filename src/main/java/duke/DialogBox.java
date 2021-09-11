@@ -41,7 +41,7 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         dialog.setMinHeight(Region.USE_PREF_SIZE);
         displayPicture.setImage(img);
-        displayPicture.setClip(new Circle(50, 50, 50));
+        displayPicture.setClip(new Circle(49, 49, 49));
     }
 
     /**
@@ -61,7 +61,12 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
-        db.setStyle("-fx-background-color: #B8DFD8");
+        if (text.startsWith("(*´д｀*)")) {
+            db.setStyle("-fx-background-color: #FFCBCB");
+        } else {
+            db.setStyle("-fx-background-color: #B8DFD8");
+        }
+
         return db;
     }
 }
