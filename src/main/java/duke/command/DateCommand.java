@@ -76,7 +76,6 @@ public class DateCommand extends Command {
             // Increment by 1 to change index to be 1-based.
             int idx = i + 1;
 
-            System.out.println(task);
             if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
                 if (localDate.equals(deadline.getTime())) {
@@ -108,8 +107,6 @@ public class DateCommand extends Command {
                     datesBuilder.append(idx).append(".").append(period).append("\n");
                 }
             }
-
-            System.out.println(datesBuilder);
         }
 
         return ui.getDateListSuccessMessage(formattedDateString,
