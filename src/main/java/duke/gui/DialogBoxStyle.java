@@ -12,6 +12,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 public interface DialogBoxStyle {
+    /**
+     * Applies styles to a given ImageView.
+     * @param img the ImageView to be styled
+     */
     default void styleDisplayPicture(ImageView img) {
         img.setFitWidth(80.0);
         img.setFitHeight(80.0);
@@ -33,12 +37,20 @@ public interface DialogBoxStyle {
         img.setImage(image);
     }
 
+    /**
+     * Applies User styles to a given text label.
+     * @param label The label to be styled.
+     */
     default void styleUserTextLabels(Label label) {
         label.setWrapText(true);
         label.setPadding(new Insets(10));
         label.setFont(Font.font("Arial", FontWeight.BOLD, 13));
     }
 
+    /**
+     * Applies Duke styles to a given text label.
+     * @param label The label to be styled.
+     */
     default void styleDukeTextLabels(Label label) {
         label.setWrapText(true);
         label.setPadding(new Insets(10));
