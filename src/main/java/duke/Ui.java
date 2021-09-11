@@ -11,8 +11,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.util.Scanner;
-
 /**
  * Ui handles all of the text interface functionality of the program
  *
@@ -40,7 +38,6 @@ public class Ui {
     }
 
     /**
-     * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
      *
      * @param text String containing text to add
@@ -52,28 +49,32 @@ public class Ui {
         textToAdd.setWrapText(true);
 
         if (isDobie) {
-            dialogContainer.getChildren().add(DialogBox.getDukeDialog(textToAdd, dukeImage));
+            DialogBox dobieDialogBox = DialogBox.getDukeDialog(textToAdd, dukeImage);
+            dialogContainer.getChildren().add(dobieDialogBox);
         } else {
-            dialogContainer.getChildren().add(DialogBox.getDukeDialog(textToAdd, userImage));
+            DialogBox userDialogBox = DialogBox.getUserDialog(textToAdd, userImage);
+            dialogContainer.getChildren().add(userDialogBox);
         }
 
     }
 
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(userText, userImage));
         //assert duke object is not empty
         assert this.duke != null;
-        this.duke.runCommand(userInput.getText());
+        String text = userInput.getText();
+        this.duke.runCommand(text);
         userInput.clear();
     }
 
-
+    /**
+     * Initialises the scene and the UI for the program.
+     *
+     * @param stage The specified stage to be used.
+     */
     public Scene initialiseScene(Stage stage) {
 
         //Step 1. Setting up required components

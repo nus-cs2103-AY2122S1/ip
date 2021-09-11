@@ -54,6 +54,9 @@ public class Parser {
      * @return A command responding to the user input.
      */
     public static Command parseCommand(String userInput) {
+        if (userInput == null || userInput.isEmpty() || userInput.trim().isEmpty()) {
+            return new CommandHelp();
+        }
         Scanner scanner = new Scanner(userInput);
         String keyword = scanner.next();
         ArrayList<String> arguments = new ArrayList<>();

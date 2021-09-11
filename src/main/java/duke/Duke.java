@@ -49,6 +49,7 @@ public class Duke extends Application {
             assert this.storage != null;
             assert this.contacts != null;
             assert this.ui != null;
+            this.ui.addDialog(userInput, false);
             c.execute(tasks, storage, ui, contacts);
         } catch (DukeException e) {
             ui.addDialog(e.getMessage(), true);
