@@ -1,13 +1,13 @@
 package tiger.components;
 
-import tiger.constants.Priority;
-import tiger.exceptions.actions.TigerIndexOutOfBoundsException;
-import tiger.exceptions.storage.TigerStorageLoadException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
+
+import tiger.constants.Priority;
+import tiger.exceptions.actions.TigerIndexOutOfBoundsException;
+import tiger.exceptions.storage.TigerStorageLoadException;
 
 
 /**
@@ -131,7 +131,11 @@ public class TaskList {
 
     public TaskList findRelevantTasks(String searchString) {
         List<Task> newTasks = this.taskList.stream()
-                .filter(t -> t.getTaskDescription().toLowerCase(Locale.ENGLISH).contains(searchString.toLowerCase(Locale.ENGLISH)))
+                .filter(
+                    t -> t.getTaskDescription()
+                            .toLowerCase(Locale.ENGLISH)
+                            .contains(searchString.toLowerCase(Locale.ENGLISH))
+                )
                 .collect(Collectors.toList());
 
         TaskList taskList = new TaskList(new ArrayList<>(newTasks));

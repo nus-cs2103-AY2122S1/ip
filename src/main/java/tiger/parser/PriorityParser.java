@@ -6,8 +6,6 @@ import tiger.exceptions.inputs.TigerInvalidArgumentException;
 import tiger.exceptions.inputs.TigerInvalidInputException;
 import tiger.utils.StringUtils;
 
-import java.util.Locale;
-
 /**
  * The {@code FindParser} parser takes in an input String and parses it, so that the {@code FindAction} class
  * can access the class fields and understand user input.

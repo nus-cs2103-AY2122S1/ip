@@ -1,14 +1,14 @@
 package tiger.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 import tiger.constants.Priority;
 import tiger.exceptions.TigerException;
 import tiger.exceptions.inputs.TigerEmptyStringException;
 import tiger.exceptions.inputs.TigerInvalidArgumentException;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class EventParserTest {
     @Test
@@ -46,8 +46,8 @@ public class EventParserTest {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             new EventParser("event /at 2020-11-21 08:35").parse();
         });
-        assertTrue(thrown.toString().contains("Event description property cannot be empty.\nPlease ensure you key " +
-                "in the command in the format specified."));
+        assertTrue(thrown.toString().contains("Event description property cannot be empty.\nPlease ensure you key "
+                + "in the command in the format specified."));
     }
 
     @Test
@@ -55,8 +55,8 @@ public class EventParserTest {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             new EventParser("event QQ /at").parse();
         });
-        assertTrue(thrown.toString().contains("Event date property cannot be empty.\nPlease ensure you key " +
-                "in the command in the format specified."));
+        assertTrue(thrown.toString().contains("Event date property cannot be empty.\nPlease ensure you key "
+                + "in the command in the format specified."));
     }
 
     @Test
@@ -64,8 +64,8 @@ public class EventParserTest {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             new EventParser("event Q /by 2020-11-21 08:35").parse();
         });
-        assertTrue(thrown.toString().contains("Event date property cannot be empty.\nPlease ensure you key " +
-                "in the command in the format specified."));
+        assertTrue(thrown.toString().contains("Event date property cannot be empty.\nPlease ensure you key "
+                + "in the command in the format specified."));
     }
 
     @Test
@@ -107,8 +107,8 @@ public class EventParserTest {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             new EventParser("event ").parse();
         });
-        assertTrue(thrown.toString().contains("Event description property cannot be empty.\nPlease ensure you key in " +
-                "the command in the format specified."));
+        assertTrue(thrown.toString().contains("Event description property cannot be empty.\nPlease ensure you key in "
+                + "the command in the format specified."));
     }
 
     @Test
@@ -116,8 +116,8 @@ public class EventParserTest {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             new EventParser("event fish").parse();
         });
-        assertTrue(thrown.toString().contains("Event date property cannot be empty.\nPlease ensure you key in " +
-                "the command in the format specified."));
+        assertTrue(thrown.toString().contains("Event date property cannot be empty.\nPlease ensure you key in "
+                + "the command in the format specified."));
     }
 
     @Test
@@ -125,8 +125,8 @@ public class EventParserTest {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             new EventParser("event fish /at /priority H").parse();
         });
-        assertTrue(thrown.toString().contains("Event date property cannot be empty.\nPlease ensure you key in " +
-                "the command in the format specified."));
+        assertTrue(thrown.toString().contains("Event date property cannot be empty.\nPlease ensure you key in "
+                + "the command in the format specified."));
     }
 
     @Test
@@ -134,8 +134,8 @@ public class EventParserTest {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             new EventParser("event /at 15:24 /priority H").parse();
         });
-        assertTrue(thrown.toString().contains("Event description property cannot be empty.\nPlease ensure you key in " +
-                "the command in the format specified."));
+        assertTrue(thrown.toString().contains("Event description property cannot be empty.\nPlease ensure you key in "
+                + "the command in the format specified."));
     }
 
     @Test
@@ -143,8 +143,8 @@ public class EventParserTest {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             new EventParser("event fa fa /at 15:24 /priority").parse();
         });
-        assertTrue(thrown.toString().contains("Event priority property cannot be empty.\nPlease ensure you key in " +
-                "the command in the format specified."));
+        assertTrue(thrown.toString().contains("Event priority property cannot be empty.\nPlease ensure you key in "
+                + "the command in the format specified."));
     }
 
     @Test
@@ -152,8 +152,8 @@ public class EventParserTest {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             new EventParser("event fa fa /at  /priority H").parse();
         });
-        assertTrue(thrown.toString().contains("Event date property cannot be empty.\nPlease ensure you key in " +
-                "the command in the format specified."));
+        assertTrue(thrown.toString().contains("Event date property cannot be empty.\nPlease ensure you key in "
+                + "the command in the format specified."));
     }
 
     @Test

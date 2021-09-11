@@ -1,14 +1,8 @@
-import tiger.app.Ui;
-import tiger.exceptions.TigerException;
-
 import java.util.Scanner;
 
+import tiger.app.Ui;
 
 public class Tiger {
-
-    // TODO: implement flags for delete done combination, invalid todo combination
-    // features: fallthrough commands
-    // priority
 
     private Ui ui;
 
@@ -16,19 +10,41 @@ public class Tiger {
         this.ui = new Ui();
     }
 
+    /**
+     * Starts the interaction with {@code Ui}.
+     *
+     * @return the {@code Ui} response.
+     */
     public String start() {
         ui.start();
         return ui.getResponse();
     }
 
+    /**
+     * Gets the response of the {@code Ui} after one iteration.
+     *
+     * @return the {@code Ui} response.
+     */
     public String getResponse(String input) {
         ui.iterateOnce(input);
         return ui.getResponse();
     }
 
+    /**
+     * Check if the user has exited the app.
+     *
+     * @return whether the user has exited the app.
+     */
+
     public boolean isExited() {
         return ui.isExited();
     }
+
+    /**
+     * Starts a new CLI session, will not render a window.
+     *
+     * @param args java default args.
+     */
 
     public static void main(String[] args) {
         Tiger tiger = new Tiger();

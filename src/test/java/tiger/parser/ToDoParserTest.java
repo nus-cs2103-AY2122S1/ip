@@ -1,14 +1,15 @@
 package tiger.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 import tiger.constants.Priority;
 import tiger.exceptions.TigerException;
 import tiger.exceptions.inputs.TigerEmptyStringException;
 import tiger.exceptions.inputs.TigerInvalidArgumentException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ToDoParserTest {
     @Test
@@ -44,8 +45,8 @@ public class ToDoParserTest {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             new ToDoParser("todo").parse();
         });
-        assertTrue(thrown.toString().contains("ToDo description property cannot be empty.\nPlease ensure you key in " +
-                "the command in the format specified."));
+        assertTrue(thrown.toString().contains("ToDo description property cannot be empty.\nPlease ensure you key in "
+                + "the command in the format specified."));
     }
 
     @Test
@@ -87,8 +88,8 @@ public class ToDoParserTest {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             new ToDoParser("todo 4444 /priority ").parse();
         });
-        assertTrue(thrown.toString().contains("ToDo priority property cannot be empty.\nPlease ensure you key in " +
-                "the command in the format specified."));
+        assertTrue(thrown.toString().contains("ToDo priority property cannot be empty.\nPlease ensure you key in "
+                + "the command in the format specified."));
     }
 
     @Test
@@ -96,8 +97,8 @@ public class ToDoParserTest {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             new ToDoParser("todo 4444 /priority").parse();
         });
-        assertTrue(thrown.toString().contains("ToDo priority property cannot be empty.\nPlease ensure you key in " +
-                "the command in the format specified."));
+        assertTrue(thrown.toString().contains("ToDo priority property cannot be empty.\nPlease ensure you key in "
+                + "the command in the format specified."));
     }
 
     @Test
@@ -113,8 +114,8 @@ public class ToDoParserTest {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             new ToDoParser("todo /priority H").parse();
         });
-        assertTrue(thrown.toString().contains("ToDo description property cannot be empty.\nPlease ensure you key in " +
-                "the command in the format specified."));
+        assertTrue(thrown.toString().contains("ToDo description property cannot be empty.\nPlease ensure you key in "
+                + "the command in the format specified."));
     }
 
     @Test
@@ -122,7 +123,7 @@ public class ToDoParserTest {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             new ToDoParser("todo /priority ").parse();
         });
-        assertTrue(thrown.toString().contains("ToDo priority property cannot be empty.\nPlease ensure you key in " +
-                "the command in the format specified."));
+        assertTrue(thrown.toString().contains("ToDo priority property cannot be empty.\nPlease ensure you key in "
+                + "the command in the format specified."));
     }
 }

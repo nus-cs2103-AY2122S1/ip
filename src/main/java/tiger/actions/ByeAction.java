@@ -31,6 +31,7 @@ public class ByeAction extends Action {
 
     @Override
     public AppState run() {
-        return new AppState(this.applicationState.getTaskList(), Messages.TIGER_BYE_MESSAGE.getMessage(), Flag.IS_EXITED);
+        return new AppState(this.applicationState.getTaskList(), Messages.TIGER_BYE_MESSAGE.getMessage(),
+                Flag.IS_EXITED);
     }
 }

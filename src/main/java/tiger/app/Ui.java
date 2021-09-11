@@ -1,6 +1,5 @@
 package tiger.app;
 
-import tiger.actions.ByeAction;
 import tiger.actions.StorageLoadAction;
 import tiger.command.Command;
 import tiger.components.TaskList;
@@ -36,6 +35,12 @@ public class Ui {
         this.applicationState = storageLoadAction.run();
     }
 
+    /**
+     * Simulates one iteration of interaction with the user, based on the given user input.
+     *
+     * @param userInput the given user input.
+     */
+
     public void iterateOnce(String userInput) {
         if (this.applicationState.checkFlag().equals(Flag.STORAGE_FAILED)) {
             StorageLoadAction storageLoadAction = (StorageLoadAction) Command.getActionFromCommand(userInput,
@@ -43,14 +48,24 @@ public class Ui {
             this.applicationState = storageLoadAction.run();
         } else if (this.applicationState.checkFlag().equals(Flag.DEFAULT)) {
             this.applicationState = new Pipeline(userInput, this.applicationState).run();
-        } else if (this.applicationState.checkFlag().equals(Flag.IS_EXITED)) {
-            // do nothing
         }
     }
+
+    /**
+     * Checks if the user has exited the app.
+     *
+     * @return a boolean representing if the user has exited the app.
+     */
 
     public boolean isExited() {
         return this.applicationState.checkFlag().equals(Flag.IS_EXITED);
     }
+
+    /**
+     * Gets the response from the bot.
+     *
+     * @return the response from the bot.
+     */
 
     public String getResponse() {
         return this.applicationState.getResponse();

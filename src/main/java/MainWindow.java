@@ -29,7 +29,9 @@ public class MainWindow extends AnchorPane {
     private final Image USER_IMAGE_LOCATION = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image BOT_IMAGE_LOCATION = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-
+    /**
+     * Initialises the {@code javafx} window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -64,20 +66,18 @@ public class MainWindow extends AnchorPane {
     }
 
     private void checkExit() {
-        new Thread(
-                () -> {
-                    // this whole thing is to show the last command before the user exits, so the app does not instantly
-                    // exit once the user types bye.
-                    if (this.tiger.isExited()) {
-                        try {
-                            Thread.sleep(MILISECONDS_TO_SLEEP_BEFORE_QUITTING);
-                        } catch (InterruptedException e) {
-                            System.out.println(e.getStackTrace());
-                        }
-                        Platform.exit();
-                    }
+        new Thread(() -> {
+            // The purpose of this line is to pause before the app exits, so the app does not instantly
+            // exit once the user types bye.
+            if (this.tiger.isExited()) {
+                try {
+                    Thread.sleep(MILISECONDS_TO_SLEEP_BEFORE_QUITTING);
+                } catch (InterruptedException e) {
+                    System.out.println(e.getStackTrace());
                 }
-        ).start();
+                Platform.exit();
+            }
+        }).start();
     }
 
     @FXML

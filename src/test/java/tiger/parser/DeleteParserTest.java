@@ -1,15 +1,15 @@
 package tiger.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
+import tiger.constants.Messages;
 import tiger.exceptions.TigerException;
 import tiger.exceptions.inputs.TigerEmptyStringException;
 import tiger.exceptions.inputs.TigerInvalidArgumentException;
 import tiger.exceptions.inputs.TigerTooManyInputsException;
-import tiger.constants.Messages;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DeleteParserTest {
     @Test
@@ -32,8 +32,7 @@ public class DeleteParserTest {
             DeleteParser deleteParser = new DeleteParser("delete 0");
             deleteParser.parse();
         });
-        assertTrue(thrown.toString().contains("0 is not a valid argument " +
-                "for the Delete command."));
+        assertTrue(thrown.toString().contains("0 is not a valid argument for the Delete command."));
     }
 
     @Test
@@ -42,8 +41,7 @@ public class DeleteParserTest {
             DeleteParser deleteParser = new DeleteParser("delete -55");
             deleteParser.parse();
         });
-        assertTrue(thrown.toString().contains("-55 is not a valid argument " +
-                "for the Delete command."));
+        assertTrue(thrown.toString().contains("-55 is not a valid argument for the Delete command."));
     }
 
     @Test
@@ -52,8 +50,7 @@ public class DeleteParserTest {
             DeleteParser deleteParser = new DeleteParser("delete 5.5");
             deleteParser.parse();
         });
-        assertTrue(thrown.toString().contains("5.5 is not a valid argument " +
-                "for the Delete command."));
+        assertTrue(thrown.toString().contains("5.5 is not a valid argument for the Delete command."));
     }
 
     @Test
@@ -78,7 +75,7 @@ public class DeleteParserTest {
             DeleteParser deleteParser = new DeleteParser("delete");
             deleteParser.parse();
         });
-        assertTrue(thrown.toString().contains("Delete index property cannot be empty.\nPlease ensure you key in the " +
-                "command in the format specified."));
+        assertTrue(thrown.toString().contains("Delete index property cannot be empty.\nPlease ensure you key in the "
+                + "command in the format specified."));
     }
 }

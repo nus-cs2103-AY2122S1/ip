@@ -1,14 +1,14 @@
 package tiger.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 import tiger.constants.Priority;
 import tiger.exceptions.TigerException;
 import tiger.exceptions.inputs.TigerEmptyStringException;
 import tiger.exceptions.inputs.TigerInvalidArgumentException;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DeadLineParserTest {
     @Test
@@ -46,8 +46,8 @@ public class DeadLineParserTest {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             new DeadLineParser("dateline /by 2020-11-21 08:35").parse();
         });
-        assertTrue(thrown.toString().contains("Deadline description property cannot be empty.\nPlease ensure you key " +
-                "in the command in the format specified."));
+        assertTrue(thrown.toString().contains("Deadline description property cannot be empty.\nPlease ensure you key "
+                + "in the command in the format specified."));
     }
 
     @Test
@@ -56,8 +56,8 @@ public class DeadLineParserTest {
             new DeadLineParser("dateline QQ /by").parse();
         });
         System.out.println(thrown.toString());
-        assertTrue(thrown.toString().contains("Deadline date property cannot be empty.\nPlease ensure you key " +
-                "in the command in the format specified."));
+        assertTrue(thrown.toString().contains("Deadline date property cannot be empty.\nPlease ensure you key "
+                + "in the command in the format specified."));
     }
 
     @Test
@@ -99,8 +99,8 @@ public class DeadLineParserTest {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             new DeadLineParser("deadline ").parse();
         });
-        assertTrue(thrown.toString().contains("Deadline description property cannot be empty.\nPlease ensure you key in " +
-                "the command in the format specified."));
+        assertTrue(thrown.toString().contains("Deadline description property cannot be empty.\nPlease ensure you key "
+                + "in the command in the format specified."));
     }
 
     @Test
@@ -108,8 +108,8 @@ public class DeadLineParserTest {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             new DeadLineParser("deadline fish").parse();
         });
-        assertTrue(thrown.toString().contains("Deadline date property cannot be empty.\nPlease ensure you key in " +
-                "the command in the format specified."));
+        assertTrue(thrown.toString().contains("Deadline date property cannot be empty.\nPlease ensure you key in "
+                + "the command in the format specified."));
     }
 
     @Test
@@ -117,8 +117,8 @@ public class DeadLineParserTest {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             new DeadLineParser("deadline fish /by /priority H").parse();
         });
-        assertTrue(thrown.toString().contains("Deadline date property cannot be empty.\nPlease ensure you key in " +
-                "the command in the format specified."));
+        assertTrue(thrown.toString().contains("Deadline date property cannot be empty.\nPlease ensure you key in "
+                + "the command in the format specified."));
     }
 
     @Test
@@ -126,8 +126,8 @@ public class DeadLineParserTest {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             new DeadLineParser("deadline /by 15:24 /priority H").parse();
         });
-        assertTrue(thrown.toString().contains("Deadline description property cannot be empty.\nPlease ensure you key in " +
-                "the command in the format specified."));
+        assertTrue(thrown.toString().contains("Deadline description property cannot be empty.\nPlease ensure you key "
+                + "in the command in the format specified."));
     }
 
     @Test
@@ -135,8 +135,8 @@ public class DeadLineParserTest {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             new DeadLineParser("deadline fa fa /by 15:24 /priority").parse();
         });
-        assertTrue(thrown.toString().contains("Deadline priority property cannot be empty.\nPlease ensure you key in " +
-                "the command in the format specified."));
+        assertTrue(thrown.toString().contains("Deadline priority property cannot be empty.\nPlease ensure you key in "
+                + "the command in the format specified."));
     }
 
     @Test
@@ -144,8 +144,8 @@ public class DeadLineParserTest {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             new DeadLineParser("deadline fa fa /by  /priority H").parse();
         });
-        assertTrue(thrown.toString().contains("Deadline date property cannot be empty.\nPlease ensure you key in " +
-                "the command in the format specified."));
+        assertTrue(thrown.toString().contains("Deadline date property cannot be empty.\nPlease ensure you key in "
+                + "the command in the format specified."));
     }
 
     @Test

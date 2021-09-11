@@ -1,18 +1,21 @@
 package tiger.utils;
 
-import org.junit.jupiter.api.Test;
-import tiger.exceptions.TigerException;
-import tiger.exceptions.inputs.TigerDateParsingException;
-import tiger.constants.Messages;
-
-import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
+
+import org.junit.jupiter.api.Test;
+import tiger.constants.Messages;
+import tiger.exceptions.TigerException;
+import tiger.exceptions.inputs.TigerDateParsingException;
+
+
+
 public class DateStringConverterTest {
-    DateStringConverter dateStringConverter = new DateStringConverter();
+    private DateStringConverter dateStringConverter = new DateStringConverter();
 
     @Test
     public void parseDateTime_dateAndTime_success() {
@@ -39,7 +42,7 @@ public class DateStringConverterTest {
     }
 
     @Test
-    public void parseDateTime_InFuture_success() {
+    public void parseDateTime_inFuture_success() {
         assertEquals(String.format("2030-11-30", LocalDate.now()),
                 dateStringConverter.getDateFromString("2030-11-31").toString());
     }
@@ -93,8 +96,7 @@ public class DateStringConverterTest {
         assertEquals(String.format("0045-11-16", LocalDate.now()),
                 dateStringConverter.getDateFromString("    0045-11-16").toString());
         assertEquals(String.format("0005-11-16 08:00", LocalDate.now()),
-                dateStringConverter.getDateFromString("     0005-11-16 08:00 " +
-                        "   ").toString());
+                dateStringConverter.getDateFromString("     0005-11-16 08:00    ").toString());
     }
 
     @Test

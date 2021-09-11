@@ -50,7 +50,7 @@ Expected outcome:
 Excellent! I've added this task:
 [T] [M] Homework
 ```
-**By default, if the priority is not assigned, the task is classified as medium priority.** To change the tasks' priority, use the priority flag.
+**By default, if the priority is not assigned, the task is classified as medium priority.** To change the task's priority, use the priority flag.
 
 Example: `todo homework /priority H` adds a new Todo that is named "Homework" that is of high priority.
 
@@ -110,7 +110,7 @@ Expected outcome: (assume today's date is 2021-08-31).
 Excellent! I've added this event:
 [D] [L] Eat dinner (by 2021-08-31 16:00)
 ```
-> Substitutable keywords: `dateline.`
+> Substitutable keywords: `dateline`
 
 **Due to the way data is stored, Tiger bans users from inputting semicolons (;).**
 
@@ -126,7 +126,7 @@ Expected outcome:
 Feeling lazy today? I've deleted:
 [T] [M] CS2103 Code Review
 ```
-> Substitutable keywords: `del, remove`.
+> Substitutable keywords: `del, remove`
 
 _________
 
@@ -151,7 +151,7 @@ Expected outcome:
 ```
 [T] [M] Buy earphones at Woodlands
 ```
-> Substitutable keywords: `find.`
+> Substitutable keywords: `find`
 
 _________________________
 

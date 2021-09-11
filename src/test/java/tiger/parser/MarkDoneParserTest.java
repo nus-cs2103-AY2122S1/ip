@@ -1,15 +1,16 @@
 package tiger.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
+import tiger.constants.Messages;
 import tiger.exceptions.TigerException;
 import tiger.exceptions.inputs.TigerEmptyStringException;
 import tiger.exceptions.inputs.TigerInvalidArgumentException;
 import tiger.exceptions.inputs.TigerTooManyInputsException;
-import tiger.constants.Messages;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MarkDoneParserTest {
     @Test
@@ -70,7 +71,7 @@ public class MarkDoneParserTest {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             new MarkDoneParser("done").parse();
         });
-        assertTrue(thrown.toString().contains("Done index property cannot be empty.\nPlease ensure you key " +
-                "in the command in the format specified."));
+        assertTrue(thrown.toString().contains("Done index property cannot be empty.\nPlease ensure you key "
+                + "in the command in the format specified."));
     }
 }
