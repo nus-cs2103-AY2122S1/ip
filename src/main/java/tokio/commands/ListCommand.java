@@ -10,11 +10,10 @@ import tokio.ui.Ui;
 public class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        if (tasks.getSize() > 0) {
-            return ui.printList(tasks);
-        } else {
+        if (tasks.getSize() == 0) {
             return ui.printEmptyList();
         }
+        return ui.printList(tasks);
     }
 
     @Override

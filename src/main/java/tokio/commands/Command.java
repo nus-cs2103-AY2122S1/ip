@@ -2,6 +2,7 @@ package tokio.commands;
 
 import java.io.IOException;
 
+import tokio.exceptions.DukeException;
 import tokio.storage.Storage;
 import tokio.tasks.TaskList;
 import tokio.ui.Ui;
@@ -18,7 +19,7 @@ public abstract class Command {
      * @param storage Stores created command into the txt file
      * @throws IOException If is no user input
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws IOException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException;
 
     /**
      * Represents the end of program

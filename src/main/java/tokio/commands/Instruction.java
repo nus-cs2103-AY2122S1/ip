@@ -14,9 +14,9 @@ public enum Instruction {
     INVALID("invalid"),
     FIND("find");
 
-    private final String s;
-    Instruction(String s) {
-        this.s = s;
+    private final String name;
+    Instruction(String name) {
+        this.name = name;
     }
 
     /**
@@ -26,7 +26,7 @@ public enum Instruction {
      */
     public static Instruction comparesTo(String str) {
         for (Instruction i : Instruction.values()) {
-            if (i.s.equalsIgnoreCase(str)) {
+            if (i.name.equalsIgnoreCase(str)) {
                 return i;
             }
         }

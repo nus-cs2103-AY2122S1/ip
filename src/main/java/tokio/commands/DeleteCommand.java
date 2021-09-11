@@ -11,7 +11,6 @@ import tokio.ui.Ui;
  * Deletes command specified by user based on index
  */
 public class DeleteCommand extends Command {
-    private String cmdLine;
     private int index;
 
     /**
@@ -19,14 +18,8 @@ public class DeleteCommand extends Command {
      *
      * @param cmdLine User input.
      */
-    public DeleteCommand(String cmdLine) {
-        this.cmdLine = cmdLine;
-        String[] splitLine = cmdLine.split(" ", 2);
-        if (splitLine.length < 2) {
-            this.index = Integer.MAX_VALUE;
-        } else {
-            this.index = Integer.parseInt(splitLine[1]);
-        }
+    public DeleteCommand(int index) {
+        this.index = index;
     }
 
     /**
@@ -39,14 +32,18 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        if (index < tasks.getSize() + 1) {
-            Task deleteTask = tasks.getTask(index - 1);
-            tasks.deleteTask(index - 1);
-            storage.deleteTask(deleteTask);
-            return ui.printDeleteCommand(deleteTask, tasks);
-        } else {
+        if (index < 1) {
             return ui.printInvalidIndexError();
         }
+        int maxIndex = tasks.getSize();
+        int deleteIndex = index - 1;
+        if (deleteIndex >= maxIndex) {
+            return ui.printInvalidIndexError();
+        }
+        Task deleteTask = tasks.getTask(deleteIndex);
+        tasks.deleteTask(deleteIndex);
+        storage.deleteTask(deleteTask);
+        return ui.printDeleteCommand(deleteTask, tasks);
     }
 
     @Override

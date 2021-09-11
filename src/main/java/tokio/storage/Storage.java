@@ -83,8 +83,6 @@ public class Storage {
                 int colonIndex = eventDescTimeArray[1].indexOf(":");
                 String dateStr = eventDescTimeArray[1].substring(0, colonIndex - 2);
                 String timeStr = eventDescTimeArray[1].substring(colonIndex - 2, colonIndex + 3);
-                System.out.println("date: " + dateStr);
-                System.out.println("time: " + timeStr);
                 //convert date to the correct input format
                 DateFormat inputEventDateFormat = new SimpleDateFormat("MMM dd yyyy");
                 Date inputEventDate = inputEventDateFormat.parse(dateStr.trim());
@@ -130,9 +128,8 @@ public class Storage {
             String currLine = sc.nextLine();
             if (currLine.equals(lineDone)) {
                 fw.write("");
-            } else {
-                fw.write(currLine + System.lineSeparator());
             }
+            fw.write(currLine + System.lineSeparator());
         }
         fw.close();
         tempFile.renameTo(file);
@@ -154,9 +151,8 @@ public class Storage {
             if (currLine.equals(lineDone)) {
                 task.setDone();
                 fw.write(task + System.lineSeparator());
-            } else {
-                fw.write(currLine + System.lineSeparator());
             }
+            fw.write(currLine + System.lineSeparator());
         }
         fw.close();
         tempFile.renameTo(file);
