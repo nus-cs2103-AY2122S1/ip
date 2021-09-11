@@ -15,6 +15,7 @@ public class HelpCommand {
             "5. Done command" +
             "6. Find command" +
             "7. Delete command" +
+            "8. List command" +
             "\n \n" +
             "For in depth details for each command enter help followed by the number above or help and lowercase action" +
             "\n e.g help todo or help 1";
@@ -48,6 +49,10 @@ public class HelpCommand {
             "filter. " +
             "\n \n The syntax of the command is: find **insert keyword here";
 
+    private static String delete = "Delete command allows for deleting of files. Simple enter delete followed by the" +
+            "file number";
+
+    private static String list = "List command allows for seeing the current log of the file. Simply type list";
 
 
     private static String[] helpCommands = {
@@ -57,7 +62,9 @@ public class HelpCommand {
             event,
             bye,
             done,
-            find
+            find,
+            delete,
+            list
     };
 
     private static ArrayList<String> helpCommandString = new ArrayList<>(
@@ -68,7 +75,8 @@ public class HelpCommand {
                     "event",
                     "bye",
                     "done",
-                    "find"
+                    "find",
+                    "list"
             )
     );
 

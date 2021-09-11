@@ -14,7 +14,8 @@ import javafx.scene.layout.VBox;
  * Controller for duke.controllers.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
-    private static String startUpText = "Oh my..... Looks like u have an old scroll..";
+    private static String startUpText = "Oh my..... Looks like u have an old scroll.." +
+            "\n \n Enter help command for any assistance you may need";
 
     @FXML
     private ScrollPane scrollPane;
