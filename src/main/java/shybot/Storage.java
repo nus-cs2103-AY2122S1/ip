@@ -73,7 +73,7 @@ public class Storage {
             throw new ShyBotParseException();
         }
     }
-    
+
     private String[] getTagsFromRow(String[] row, int tagsIndex) {
         String[] tags = row.length > tagsIndex ? row[tagsIndex].split(" ") : new String[0];
         return tags;
