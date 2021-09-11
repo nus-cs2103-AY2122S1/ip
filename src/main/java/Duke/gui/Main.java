@@ -3,7 +3,7 @@ package duke.gui;
 import java.io.IOException;
 import java.util.Objects;
 
-import duke.Duke;
+import duke.DaC;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +22,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("taskList.txt");
+    private DaC daC = new DaC("taskList.txt");
 
     /**
      * Launches the GUI.
@@ -38,18 +38,19 @@ public class Main extends Application {
             ScrollPane dialogPane = (ScrollPane) ap.getChildren().get(2);
             VBox dialogContainer = (VBox) dialogPane.getContent().lookup("#dialogContainer");
             dialogContainer.getChildren().add(
-                    DialogBox.getDukeDialog("Hello! I'm Duke!\nWhat can I do for you?",
+                    DialogBox.getDukeDialog("Hello! Welcome to Dog-and-Cat! I am a dog and you are a cat.\n"
+                            + "What can I do for you?",
                             new Image(Objects
                                     .requireNonNull(this.getClass().getResourceAsStream("/images/dog.jpg"))))
             );
 
             ScrollPane feedbackPane = (ScrollPane) ap.getChildren().get(3);
             Label feedback = (Label) feedbackPane.getContent().lookup("#feedback");
-            feedback.setText(duke.getTasks());
+            feedback.setText(daC.getTasks());
 
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuke(daC);
 
             stage.setTitle("Duke");
             stage.setResizable(false);

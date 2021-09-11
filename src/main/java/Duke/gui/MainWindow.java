@@ -1,7 +1,7 @@
 package duke.gui;
 
-import duke.Duke;
-import duke.DukeResponse;
+import duke.DaC;
+import duke.DaCResponse;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -29,7 +29,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Label feedback;
 
-    private Duke duke;
+    private DaC daC;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/cat.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/dog.jpg"));
@@ -39,8 +39,8 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(DaC d) {
+        daC = d;
     }
 
     /**
@@ -53,7 +53,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
 
-        DukeResponse response = duke.getResponse(input);
+        DaCResponse response = daC.getResponse(input);
 
         DialogBox dukeDialog = response.isErrorMessage()
                 ? DialogBox.getErrorDialog(response.getResponse(), dukeImage)

@@ -4,7 +4,7 @@ package duke;
  * This class represents Duke's response to the user input.
  * The class contains the relevant fields for the GUI to output.
  */
-public class DukeResponse {
+public class DaCResponse {
     private final String response;
     private final String listToPrint;
     private final Boolean isErrorMessage;
@@ -16,7 +16,7 @@ public class DukeResponse {
      * @param listToPrint The appropriate list of tasks to print.
      * @param isErrorMessage Whether Duke's response is an error message
      */
-    public DukeResponse(String response, String listToPrint, boolean isErrorMessage) {
+    public DaCResponse(String response, String listToPrint, boolean isErrorMessage) {
         this.response = response;
         this.listToPrint = listToPrint;
         this.isErrorMessage = isErrorMessage;

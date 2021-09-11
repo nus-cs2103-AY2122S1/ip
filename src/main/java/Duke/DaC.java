@@ -23,9 +23,9 @@ import duke.ui.Ui;
 import javafx.application.Application;
 
 /**
- * Represents a chat-bot named Duke.
+ * Represents a chat-bot named Dog-and-Cat (DaC).
  */
-public class Duke {
+public class DaC {
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
@@ -39,7 +39,7 @@ public class Duke {
      *
      * @param filePath File path of storage file.
      */
-    public Duke(String filePath) {
+    public DaC(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui();
         try {
@@ -101,7 +101,7 @@ public class Duke {
      * the appropriate task list to display and
      * whether Duke's response is an error message.
      */
-    public DukeResponse getResponse(String inputStr) {
+    public DaCResponse getResponse(String inputStr) {
 
         try {
             HashMap<String, Object> input = parser.parse(inputStr);
@@ -109,56 +109,56 @@ public class Duke {
             switch ((String) input.get("cmd")) {
             case "bye":
                 saveTasks();
-                return new DukeResponse(ui.farewell(),
+                return new DaCResponse(ui.farewell(),
                         null, false);
             case "list":
-                return new DukeResponse(ui.listMsg(),
+                return new DaCResponse(ui.listMsg(),
                         getTasks(), false);
             case "done":
                 taskList.completeTask((Integer) input.get("index") - 1);
-                return new DukeResponse(ui.doneMsg(taskList.getTask((Integer) input.get("index") - 1)),
+                return new DaCResponse(ui.doneMsg(taskList.getTask((Integer) input.get("index") - 1)),
                         getTasks(), false);
             case "delete":
                 String reply = ui.deleteMsg(taskList.getTask((Integer) input.get("index") - 1));
                 taskList.deleteTask((Integer) input.get("index") - 1);
-                return new DukeResponse(reply,
+                return new DaCResponse(reply,
                         getTasks(), false);
             case "todo":
                 ToDo todo = new ToDo((String) input.get("details"));
                 taskList.addTask(todo);
-                return new DukeResponse(ui.addTaskMsg(todo),
+                return new DaCResponse(ui.addTaskMsg(todo),
                         getTasks(), false);
             case "deadline":
                 Deadline deadline;
                 deadline = new Deadline((String) input.get("details"), (String) input.get("deadline"));
                 taskList.addTask(deadline);
-                return new DukeResponse(ui.addTaskMsg(deadline),
+                return new DaCResponse(ui.addTaskMsg(deadline),
                         getTasks(), false);
             case "event":
                 Event event;
                 event = new Event((String) input.get("details"), (String) input.get("timing"));
                 taskList.addTask(event);
-                return new DukeResponse(ui.addTaskMsg(event),
+                return new DaCResponse(ui.addTaskMsg(event),
                         getTasks(), false);
             case "date":
                 LocalDate date = (LocalDate) input.get("date");
-                return new DukeResponse(ui.matchingDate(date),
+                return new DaCResponse(ui.matchingDate(date),
                         getTasks(date), false);
             case "find":
                 String keyword = (String) input.get("keyword");
-                return new DukeResponse(this.ui.matchingKeyword(keyword),
+                return new DaCResponse(this.ui.matchingKeyword(keyword),
                         getTasks(keyword), false);
             case "sort":
                 boolean reverse = (Boolean) input.get("reverse");
                 taskList.sort(reverse);
-                return new DukeResponse(this.ui.sortMessage(reverse),
+                return new DaCResponse(this.ui.sortMessage(reverse),
                         getTasks(), false);
             default:
                 throw new InvalidInstructionException((String) input.get("cmd"));
             }
         } catch (InvalidInputException | IOException | InvalidInstructionException
                 | IllegalStateException | NoSuchElementException | DateTimeParseException e) {
-            return new DukeResponse(ui.printException(e, ""),
+            return new DaCResponse(ui.printException(e, ""),
                     getTasks(), true);
         }
     }
