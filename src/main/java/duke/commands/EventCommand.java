@@ -18,13 +18,13 @@ public class EventCommand extends Command{
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage){
 
-        String[] dateArr = commandString.split("/");
+        String[] dateArray = commandString.split("/");
         String date = "";
-        for(int i=1; i< dateArr.length; i++){
+        for(int i=1; i< dateArray.length; i++){
             if (i==1){
-                date+=dateArr[1].substring(3);
+                date+=dateArray[1].substring(3);
             } else {
-                date += "/" + dateArr[i];
+                date += "/" + dateArray[i];
             }
         }
 
