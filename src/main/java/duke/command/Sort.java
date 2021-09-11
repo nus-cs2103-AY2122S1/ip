@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.UiInterface;
+import duke.ui.UiInterface;
 import duke.exception.DukeException;
 import duke.exception.InvalidFormatException;
 import duke.tasks.Deadline;

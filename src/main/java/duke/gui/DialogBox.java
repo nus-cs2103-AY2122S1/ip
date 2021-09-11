@@ -1,3 +1,5 @@
+package duke.gui;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -11,9 +13,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Rectangle;
 
 /**
- * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
@@ -33,6 +35,12 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        // Adapted the following snippet from https://github.com/royleochan/ip/
+        Rectangle clip = new Rectangle(displayPicture.getFitWidth(), displayPicture.getFitHeight());
+        clip.setArcWidth(100);
+        clip.setArcHeight(100);
+        displayPicture.setClip(clip);
+        
         dialog.setText(text);
         displayPicture.setImage(img);
     }

@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.UiInterface;
+import duke.ui.UiInterface;
 
 /**
  * Class that handles the List command

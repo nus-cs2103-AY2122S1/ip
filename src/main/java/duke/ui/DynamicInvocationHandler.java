@@ -1,14 +1,17 @@
-package duke;
+package duke.ui;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
+/**
+ * Class that intercepts calls to methods in a given target class
+ */
 public class DynamicInvocationHandler implements InvocationHandler {
 
     private final Ui target;
     private String latestResponse;
 
-    DynamicInvocationHandler(Ui ui) {
+    public DynamicInvocationHandler(Ui ui) {
         this.target = ui;
     }
 

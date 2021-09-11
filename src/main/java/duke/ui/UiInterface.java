@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 public interface UiInterface {
     void print(String message);

@@ -4,13 +4,16 @@ import java.lang.reflect.Proxy;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.ui.DynamicInvocationHandler;
+import duke.ui.Ui;
+import duke.ui.UiInterface;
 
 /**
- * A terminal based chat bot to track tasks.
+ * A terminal and CLI based chat bot to track tasks.
  */
 public class Duke {
 
-    private static final String WELCOME_MESSAGE = "\n\tHi! I'm Herbert, you can call me Herb  ٩(˘◡˘)۶\n"
+    private static final String WELCOME_MESSAGE = "Hi! I'm Herbert, you can call me Herb :)\n"
             + "\tHow can I help you?\n\n"
             + "\tYou can type:\n"
             + "\t\t `list` to get a list of tasks\n"
@@ -26,7 +29,7 @@ public class Duke {
     private final Storage storage;
     private final UiInterface uiInterface;
     // Invocation handler that acts as a wrapper around methods in the Ui class
-    // so that Ui messages can be sent to the GUI prior to display.
+    // so that Ui messages can be sent to the GUI prior to display in the CLI.
     private final DynamicInvocationHandler interceptor;
     private TaskList taskList;
     private boolean isExit = false;
@@ -100,7 +103,7 @@ public class Duke {
     }
 
     /**
-     * Returns welcome message.
+     * Returns the welcome message.
      *
      * @return welcome message
      */
