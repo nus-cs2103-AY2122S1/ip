@@ -15,15 +15,21 @@ import javafx.scene.paint.Color;
 
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * Represents a dialog box consisting of an ImageView to represent the speaker
+ * and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
 
     private Label text;
     private ImageView displayPicture;
 
+
+    /**
+     * Initialises a DialogBox instance.
+     *
+     * @param l text label
+     * @param iv picture
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
@@ -48,6 +54,13 @@ public class DialogBox extends HBox {
     }
 
 
+    /**
+     * Returns the dialogue box to represent user input.
+     *
+     * @param l user input text label
+     * @param iv uer profile picture
+     * @return dialogue box containing label and picture aligned to the right
+     */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         var b = new DialogBox(l, iv);
         b.setBackground(new Background(new BackgroundFill(
@@ -55,7 +68,13 @@ public class DialogBox extends HBox {
         return b;
     }
 
-
+    /**
+     * Returns the dialogue box to represent TiTi output.
+     *
+     * @param l output text label
+     * @param iv TiTi profile picture
+     * @return dialogue box containing picture and label aligned to left
+     */
     public static DialogBox getTiTiDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();

@@ -1,18 +1,20 @@
 package TiTi.util;
 
-import TiTi.task.Task;
-
 import java.util.ArrayList;
 
+import TiTi.task.Task;
+
+
 /**
- * Contain the list of tasks of the user in an ArrayList.
+ * Represents a list to store tasks.
+ * Contains the list of tasks of the user in an ArrayList.
  */
 public class TaskList {
 
     protected ArrayList<Task> list;
 
     /**
-     * Constructor for TaskList class.
+     * Initialises a TaskList instance.
      *
      * @param list ArrayList of tasks
      */
@@ -21,7 +23,7 @@ public class TaskList {
     }
 
     /**
-     * Constructor for TaskList class.
+     * Initialises a TaskList instance.
      * Does not require parameter inputs and create a new empty ArrayList list.
      */
     public TaskList() {
@@ -29,7 +31,7 @@ public class TaskList {
     }
 
     /**
-     * Retrieve the required task from the list.
+     * Retrieves the required task from the list.
      *
      * @param taskNumber the item number of the task
      * @return the Task object wanted
@@ -39,7 +41,7 @@ public class TaskList {
     }
 
     /**
-     * Append new task to end of the list.
+     * Appends new task to end of the list.
      *
      * @param task new task to be added
      */
@@ -48,7 +50,7 @@ public class TaskList {
     }
 
     /**
-     * Return the number of tasks in the list.
+     * Returns the number of tasks in the list.
      *
      * @return size of list
      */
@@ -57,7 +59,7 @@ public class TaskList {
     }
 
     /**
-     * Remove task from the list.
+     * Removes task from the list.
      *
      * @param taskNumber the item number of the task
      */

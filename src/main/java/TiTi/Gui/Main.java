@@ -1,9 +1,5 @@
 package TiTi.Gui;
 
-import TiTi.util.SavedHistory;
-import TiTi.util.TaskList;
-import TiTi.util.Ui;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,8 +13,13 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import TiTi.util.SavedHistory;
+import TiTi.util.TaskList;
+import TiTi.util.Ui;
+
+
 /**
- * A GUI for Duke using FXML.
+ * A GUI for TiTI using javaFX.
  */
 public class Main extends Application {
 
@@ -35,14 +36,19 @@ public class Main extends Application {
     private Image tiTi = new Image(this.getClass().getResourceAsStream("/images/TiTi.jpg"));
 
 
+    /**
+     * Sets up user interface and display.
+     *
+     * @param stage stage for display
+     */
     @Override
     public void start(Stage stage) {
         savedHistory = new SavedHistory();
         taskList = new TaskList(savedHistory.readHistory());
         ui = new Ui(savedHistory, taskList);
 
-        //Step 1. Setting up required components
-        //The container for the content of the chat to scroll.
+        // Setting up required components
+        // The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -62,6 +68,7 @@ public class Main extends Application {
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
 
+        // Setting up dimensions
         mainLayout.setPrefSize(300.0, 600.0);
 
         scrollPane.setPrefSize(430, 556);
@@ -71,7 +78,6 @@ public class Main extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
@@ -89,6 +95,7 @@ public class Main extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        // Setting up user interactions
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -99,7 +106,8 @@ public class Main extends Application {
 
         stage.show();
 
-        Label tiTiText = new Label(ui.welcomeMessage());
+        // Display welcome message
+        Label tiTiText = new Label(ui.getWelcomeMessage());
         dialogContainer.getChildren().addAll(
             DialogBox.getTiTiDialog(tiTiText, new ImageView(tiTi))
         );
@@ -107,9 +115,9 @@ public class Main extends Application {
 
 
     /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing TiTi's reply
+     * then appends them to the dialog container.
+     * Clears the user input after processing.
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
@@ -123,8 +131,10 @@ public class Main extends Application {
 
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response to user input.
+     *
+     * @param input user input
+     * @return String representing TiTi's response
      */
     public String getResponse(String input) {
         return ui.getResponse(input);
