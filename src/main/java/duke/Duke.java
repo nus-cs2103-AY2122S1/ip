@@ -174,8 +174,8 @@ public class Duke {
     }
 
     /**
-     * The main method.
-     * @param args Any CLI arguments. (Not used)
+     * Initialises Duke and runs it.
+     * @param args Any CLI arguments. (not used)
      */
     public static void main(String[] args) {
         Duke duke = new Duke();
