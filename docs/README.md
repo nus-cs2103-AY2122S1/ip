@@ -8,7 +8,7 @@ Tiger is a personal assistant that helps you manage the tasks you're too lazy to
 
 ### <ins>Font Credits:</ins> [Victor Mono](https://rubjo.github.io/victor-mono/)
 
-Tasks are classified into 3 types of catergories: Todos, Events or Deadlines. Events and deadlines are tasks associated with a date/time, and hence the user is required to enter in the date/time parameter. Tasks can be either marked as completed, or not completed and are classified into 3 priorities, low, medium and high. 
+Tasks are classified into 3 types of catergories: Todos, Events or Deadlines. Events and deadlines are tasks associated with a date/time, and hence the user is required to enter in the date/time parameter. Tasks can be either marked as completed, or not completed and are classified into 3 priorities: low, medium and high. 
 
 Commands include a keyword, some mandatory arguments, and some optional arguments. The general usage is that the keyword comes first, then the mandatory arguments, then the optional arguments, ie. `[keyword] [mandatory arguments] [optional arguments].`
 
@@ -25,7 +25,7 @@ The features offered are:
 - [Searching by priority](#searching-by-priority)
 - [Exiting the app](#exiting-the-app)
 
-Some advanced features include
+Some advanced features include:
 - [Substitutable keywords](#substitutable-keywords)
 - [Automatic date correction](#automatic-date-correction)
 - [Partial loading in case the storage file is corrupted](#partial-loading)
@@ -41,9 +41,9 @@ Tiger can help you keep track of 3 types of tasks: Todos, Events and Deadlines. 
 
 _________________________
 
-To add a new Todo, the usage is: `todo [task description] /priority [H|M|L]`. The `/priority` command is optional.
+To add a new Todo, the usage is: `todo [task description] /priority [H|M|L].` The `/priority` command is optional.
 
-Example: `todo homework:` adds a new Todo named "Homework".
+Example: `todo homework` adds a new Todo named "Homework".
 
 Expected outcome:
 ```
@@ -52,7 +52,7 @@ Excellent! I've added this task:
 ```
 **By default, if the priority is not assigned, the task is classified as medium priority.** To change the tasks' priority, use the priority flag.
 
-Example: `todo homework /priority H:` adds a new Todo that is named "Homework" that is of high priority.
+Example: `todo homework /priority H` adds a new Todo that is named "Homework" that is of high priority.
 
 Expected outcome:
 ```
@@ -65,7 +65,7 @@ _________________________
 
 To add a new Event, the usage is: `event [event description] /at [event time] /priority [H|M|L].` The `/priority` command is optional. Accepted date formats are `HH:mm` or `YYYY-MM-DD HH:mm.` The year input string should be **exactly** 4 characters, and their other date parameters should be **exactly** 2 characters. The year cannot be 0000. 
 
-Example: `event eat dinner /at 2021-05-21 16:00:` creates a new Event named "eat dinner" at 2021-05-21 16:00.
+Example: `event eat dinner /at 2021-05-21 16:00` creates a new Event named "eat dinner" at 2021-05-21 16:00.
 
 Expected outcome:
 ```
@@ -74,7 +74,7 @@ Excellent! I've added this event:
 ```
 **If the user only specifies the time, but not the date, Tiger guesses that the date is today.**
 
-Example: `event eat dinner /at 16:00:` creates a new Event named "eat dinner" at [today's date] 16:00.
+Example: `event eat dinner /at 16:00` creates a new Event named "eat dinner" at [today's date] 16:00.
 
 Expected outcome: (assume today's date is 2021-08-31).
 ```
@@ -83,7 +83,7 @@ Excellent! I've added this event:
 ```
 Much like Todos, you can also specify a priority for your events.
 
-Example: `event eat dinner /at 15:29 /priority L:` creates a new event named "eat dinner" at [today's date] 16:00 of low priority.
+Example: `event eat dinner /at 15:29 /priority L` creates a new event named "eat dinner" at [today's date] 16:00 of low priority.
 
 Expected outcome: (assume today's date is 2021-08-31).
 ```
@@ -94,7 +94,7 @@ _________________________
 
 To add a new Deadline, the usage is: `deadline [deadline description] /by [deadline due date] /priority [H|M|L].` The `/priority` command is optional. Accepted date formats are `HH:mm` or `YYYY-MM-DD HH:mm.` The year input string should be **exactly** 4 characters, and their other date parameters should be **exactly** 2 characters. The year cannot be 0000. 
 
-Example: `deadline eat dinner /by 16:00:` creates a new Deadline named "eat dinner" at [today's date] 16:00.
+Example: `deadline eat dinner /by 16:00` creates a new Deadline named "eat dinner" at [today's date] 16:00.
 
 Expected outcome: (assume today's date is 2021-08-31).
 ```
@@ -103,7 +103,7 @@ Excellent! I've added this event:
 ```
 Much like Todos, you can also specify a priority for your deadlines.
 
-Example: `deadline eat dinner /by 15:29 /priority L:` creates a new Deadline named "eat dinner" at [today's date] 16:00 of low priority.
+Example: `deadline eat dinner /by 15:29 /priority L` creates a new Deadline named "eat dinner" at [today's date] 16:00 of low priority.
 
 Expected outcome: (assume today's date is 2021-08-31).
 ```
@@ -119,7 +119,7 @@ _________________________
 ### Deleting a task
 Deletes the task at the specified index. Use `list` to get the list of tasks and indicies. The usage is `delete [task index].`
 
-Example: `delete 1:` deletes the task at index 1.
+Example: `delete 1` deletes the task at index 1.
 
 Expected outcome: 
 ```
@@ -133,7 +133,7 @@ _________
 ### Marking a task as done
 Marks the task at a specified index as done. `list` to get the list of tasks and indicies. The usage is `done [task index].`
 
-Example: `done 1:` marks the task at index 1 as done.
+Example: `done 1` marks the task at index 1 as done.
 
 Expected outcome: 
 ```
@@ -145,7 +145,7 @@ _________________________
 ### Finding a task
 Tiger can also help find tasks based on a specific keyword. The search is not case sensitive, ie. `search woodlands` and `search Woodlands` should return the same list. The usage is `search [substring].`
 
-Example: `search Woodlands:` searches for tasks with task description containing the string "Woodlands".
+Example: `search Woodlands` searches for tasks with task description containing the string "Woodlands".
 
 Expected outcome: 
 ```
@@ -158,7 +158,7 @@ _________________________
 ### Clearing all tasks
 If for some reason the list of tasks is too full, or the user is too lazy, the user can clear all the tasks at one go. The usage is `clear.`
 
-Example: `clear:` clears all tasks.
+Example: `clear` clears all tasks.
 
 Expected outcome: 
 ```
@@ -169,7 +169,7 @@ _________________________
 ### Listing all tasks
 Tiger can help list tasks. (After all, that's the whole point of a Todo app right?) The usage is `list.`
 
-Example: `list:` lists all tasks.
+Example: `list` lists all tasks.
 
 Expected outcome:
 ```
@@ -184,7 +184,7 @@ _________________________
 ### Searching by priority
 Other than listing all tasks, Tiger can help you search tasks based on a certain priority. The usage is `priority [L|M|H]`. **If the task is already marked as done, it won't show up in the search**.
 
-Example: `priority H:` lists all tasks with high priority.
+Example: `priority H` lists all tasks with high priority.
 
 Expected outcome:
 ```
@@ -197,7 +197,7 @@ _________________________
 ### Exiting the app
 To quit the app, the usage is `bye`. 
 
-Example: `bye:` quits the app.
+Example: `bye` quits the app.
 
 Expected outcome:
 ```
