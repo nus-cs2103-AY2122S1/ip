@@ -63,7 +63,9 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        if (input.equals("bye")) {
+        String[] inputCommand = input.split(" ");
+        int inputLen = inputCommand.length;
+        if (inputLen > 0 && inputCommand[0].equals("bye")) {
             duke.exit();
             PauseTransition delay = new PauseTransition(Duration.seconds(3));
             delay.setOnFinished(event -> Platform.exit());
