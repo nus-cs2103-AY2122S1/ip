@@ -25,9 +25,11 @@ public class MainWindow extends AnchorPane {
     private Duke chatBot;
 
     // Image by André Santana AndreMS from Pixabay
+    // Image from: https://pixabay.com/vectors/captain-america-marvel-hero-6192855/
     private final Image userIcon = new Image(this.getClass().getResourceAsStream("/images/UserIcon.png"));
 
     // Image by Ega Maulana from Pixabay
+    // Image from: https://pixabay.com/vectors/iron-man-chibi-cartoon-superhero-5783522/
     private final Image botImage = new Image(this.getClass().getResourceAsStream("/images/BotIcon.png"));
 
     /**
