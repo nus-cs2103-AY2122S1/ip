@@ -24,7 +24,10 @@ public class MainWindow extends AnchorPane {
 
     private Duke chatBot;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserIcon.png"));
+    // Image by André Santana AndreMS from Pixabay
+    private final Image userIcon = new Image(this.getClass().getResourceAsStream("/images/UserIcon.png"));
+
+    // Image by Ega Maulana from Pixabay
     private final Image botImage = new Image(this.getClass().getResourceAsStream("/images/BotIcon.png"));
 
     /**
@@ -53,11 +56,11 @@ public class MainWindow extends AnchorPane {
         String response = chatBot.getResponse(input);
 
         assert (botImage != null) : "Image resource cannot be null";
-        assert (userImage != null) : "Image resource cannot be null";
-        assert (!userImage.isBackgroundLoading()) : "User Icon not loaded in GUI";
+        assert (userIcon != null) : "Image resource cannot be null";
+        assert (!userIcon.isBackgroundLoading()) : "User Icon not loaded in GUI";
         assert (!botImage.isBackgroundLoading()) : "Chat Bot Icon not loaded in GUI";
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input + "    ", userImage),
+                DialogBox.getUserDialog(input + "    ", userIcon),
                 DialogBox.getDukeDialog(response, botImage)
         );
 
