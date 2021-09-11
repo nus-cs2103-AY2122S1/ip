@@ -65,6 +65,7 @@ public class Storage {
      * Copies taskList.txt into TaskList.
      *
      * @param taskList the TaskList.
+     * @throws DukeException The exception to be thrown.
      */
     public void readTaskFile(TaskList taskList) throws DukeException {
         try {

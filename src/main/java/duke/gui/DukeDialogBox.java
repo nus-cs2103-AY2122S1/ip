@@ -1,8 +1,11 @@
 package duke.gui;
 
+import static duke.util.Ui.WELCOME_MESSAGE;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 
 /**
  * The Dialog box belonging to Duke.
@@ -33,5 +36,15 @@ public class DukeDialogBox extends DialogBox {
         var db = new DukeDialogBox(text, img);
         db.flip();
         return db;
+    }
+
+    /**
+     * Welcomes the user to Duke.
+     *
+     * @param dialogContainer The dialogContainer to put the dialog in.
+     * @param dukeImage The image of Duke.
+     */
+    public static void welcomeUser(VBox dialogContainer, Image dukeImage) {
+        dialogContainer.getChildren().add(DukeDialogBox.getDialog(WELCOME_MESSAGE, dukeImage));
     }
 }

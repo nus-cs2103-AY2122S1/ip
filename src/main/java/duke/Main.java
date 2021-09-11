@@ -6,6 +6,7 @@ import static duke.Duke.OUTER_DIR;
 import java.io.IOException;
 import java.nio.file.Paths;
 
+import duke.gui.DukeDialogBox;
 import duke.gui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +26,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().welcomeuser();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

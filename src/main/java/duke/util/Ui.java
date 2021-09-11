@@ -10,7 +10,6 @@ import java.util.Scanner;
 public class Ui {
     /** Messages */
     public static final String WELCOME_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
-    public static final String REWELCOME_MESSAGE = "Welcome back!\nWhat can Duke do for you once again?";
     public static final String LIST_MESSAGE = "Here are the tasks in your list:\n%s";
     public static final String NO_TASKS_IN_LIST_MESSAGE = "You have no tasks currently. Go create some!";
     public static final String DONE_MESSAGE = "Nice! I've marked this task as done:\n %s";
