@@ -7,7 +7,9 @@ public class ResponseLogic {
 
     /** Returns the welcome message response. */
     public String welcomeResponse() {
-        return "Lollipop: Hello! I am your personal chatbot, Lollipop! "
+        return "Lollipop icon is taken from https://dryicons.com.\n"
+                + "User icon is taken from https://www.flaticon.com/authors/vitaly-gorbachev.\n\n"
+                + "Lollipop: Hello! I am your personal chatbot, Lollipop! "
                 + "What would you like to do today?";
     }
 
