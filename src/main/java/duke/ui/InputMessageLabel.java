@@ -7,7 +7,7 @@ import javafx.scene.control.ContentDisplay;
 public class InputMessageLabel extends MessageLabel {
 
     private static final Insets INPUT_MSG_INSETS = new Insets(10, 10, 0, 100);
-    private static final String PERSON_IMG_PATH = "resources/images/personicon.png";
+    private static final String PERSON_IMG_PATH = "src/main/resources/images/personicon.png";
 
     /**
      * Creates an InputMessageLabel with the given message and specified insets.
