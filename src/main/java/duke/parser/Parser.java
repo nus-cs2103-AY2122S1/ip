@@ -3,7 +3,6 @@ package duke.parser;
 import java.util.List;
 
 import duke.Duke;
-import duke.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -37,7 +36,7 @@ public class Parser {
      * @param duke      the Duke object running.
      * @return a string to be shown in the GUI.
      */
-    public static String parse(String userInput, TaskList taskList, Duke duke) throws DukeException {
+    public static String parse(String userInput, TaskList taskList, Duke duke) {
         String[] tokens = userInput.split("\\s+", 2);
         String command = tokens[0];
         String param = tokens.length == 1 ? null : tokens[1].strip();
@@ -51,7 +50,8 @@ public class Parser {
         switch (command) {
         case "todo":
             if (param == null) {
-                throw DukeException.emptyDescription();
+                output.append(EMPTY_DESCRIPTION);
+                break;
             }
 
             task = new Todo(param);
@@ -63,6 +63,10 @@ public class Parser {
             break;
         case "list":
             List<String> enumerate = taskList.enumerate();
+            if (enumerate.isEmpty()) {
+                output.append(EMPTY_LIST);
+                break;
+            }
 
             output.append(LIST_MESSAGE);
             for (String currentTaskName : enumerate) {
@@ -72,6 +76,13 @@ public class Parser {
             break;
         case "find":
             enumerate = taskList.filter(param).enumerate();
+            if (param == null) {
+                output.append(MISSING_FIND_PARAMETER);
+                break;
+            } else if (enumerate.isEmpty()) {
+                output.append(WORD_NOT_FOUND);
+                break;
+            }
 
             output.append(FIND_MESSAGE);
             for (String currentTaskName : enumerate) {
@@ -145,7 +156,7 @@ public class Parser {
             output.append(BYE_MESSAGE);
             break;
         default:
-            throw DukeException.invalidInput();
+            output.append(INVALID_INPUT);
         }
         duke.save(taskList);
         return output.toString();
