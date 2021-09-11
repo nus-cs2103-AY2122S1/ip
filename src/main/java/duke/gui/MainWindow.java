@@ -76,6 +76,7 @@ public class MainWindow extends AnchorPane {
         String response = duke.getResponse(input);
 
         // @@author CheyanneSim-reused
+        // with minor modifications
         if (response.contains("Data has been saved! Goodbye!")) {
             PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
             pause.setOnFinished(event -> {
