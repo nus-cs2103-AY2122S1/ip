@@ -20,9 +20,12 @@ public class Popup {
 
     private static final Insets INSETS = new Insets(10, 10, 10, 10);
     private static boolean returnBoolean;
-    private static Image backIcon = new Image(Popup.class.getResourceAsStream("/images/back.png"), 16, 16, true, true);
-    private static Image yesIcon = new Image(Popup.class.getResourceAsStream("/images/yes.png"), 16, 16, true, true);
-    private static Image cancelIcon = new Image(Popup.class.getResourceAsStream("/images/cancel.png"), 16, 16, true, true);
+    private static Image backIcon = new Image(Popup.class.getResourceAsStream("/images/back.png"), 16,
+            16, true, true);
+    private static Image yesIcon = new Image(Popup.class.getResourceAsStream("/images/yes.png"), 16,
+            16, true, true);
+    private static Image cancelIcon = new Image(Popup.class.getResourceAsStream("/images/cancel.png"),
+            16, 16, true, true);
 
     /**
      * Creates a popup window with the given message and an acknowledgement button.

@@ -67,7 +67,8 @@ public class Task {
         int resultArrayLength = sourceArrayLength - queryLength + 1;
         String[] resultArray = new String[resultArrayLength];
         for (int i = 0; i < resultArrayLength; i++) {
-            StringBuilder resultString = new StringBuilder(); //Each string is a new one with the (i)th to (i+queryLength) word
+            //Each string is a new one with the (i)th to (i+queryLength) word
+            StringBuilder resultString = new StringBuilder();
             resultString.append(sourceArray[i]);
             for (int j = 1; j < queryLength; j++) {
                 resultString.append(" ").append(sourceArray[i + j]);
