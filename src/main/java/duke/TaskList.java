@@ -104,30 +104,26 @@ public class TaskList {
                 for (int i = 0; i < split.length - 2; i++) {
                     description = description + split[i] + " ";
                 }
-                String day = split[split.length - 1].substring(0, split[split.length - 1].length() - 1);
                 if (userInput.substring(0,3).equals("[T]")) {
                     this.addTodo(description);
                     int index = this.size();
+                    assert index > 0: "task list cannot be empty";
                     if (userInput.substring(3,6).equals("[X]")) {
                         this.get(index-1).markAsDone();
                     }
                 } else if (userInput.substring(0,3).equals("[D]")) {
-                    String[] temp = userInput.split("by");
-                    String firstDeadline = temp[0].substring(9);
-                    String[] splitDate = temp[1].split(":");
-                    System.out.println(splitDate[0]);
-                    LocalDate date1 = LocalDate.parse(splitDate[1].substring(1));
+                    String[] temp = userInput.split("by:");
+                    assert temp[1].length() > 0 : "Date cannot be empty";
+                    LocalDate date1 = LocalDate.parse(temp[1].substring(1));
                     this.addDeadline(description, date1);
                     int index = this.size();
                     if (userInput.substring(3,6).equals("[X]")) {
                         this.get(index-1).markAsDone();
                     }
                 } else if (userInput.substring(0,3).equals("[E]")) {
-                    String[] tempEvent = userInput.split("at");
-                    String firstEvent = tempEvent[0].substring(6);
-                    String[] splitDate = tempEvent[1].split(":");
-                    System.out.println(splitDate[0]);
-                    LocalDate date1 = LocalDate.parse(splitDate[1].substring(1));
+                    String[] tempEvent = userInput.split("at:");
+                    assert tempEvent[1].length() > 0 : "Date cannot be empty";
+                    LocalDate date1 = LocalDate.parse(tempEvent[1].substring(1));
                     this.addEvent(description, date1);
                     int index = this.size();
                     if (userInput.substring(3,6).equals("[X]")) {
