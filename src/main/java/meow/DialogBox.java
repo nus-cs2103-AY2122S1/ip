@@ -41,7 +41,6 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-//        displayPicture.setImage(img);
         profile.setStroke(Color.TRANSPARENT);
         profile.setFill(new ImagePattern(img));
 

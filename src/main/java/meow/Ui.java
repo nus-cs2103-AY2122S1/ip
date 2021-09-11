@@ -17,10 +17,19 @@ public class Ui {
     /**
      * Prints the greeting message from the chat bot cat Meow.
      *
-     * @return A String representation of the goodbye message from the chat bot.
+     * @return A String representation of the greeting message from the chat bot.
      */
     public String greet() {
         return "Meow: Hi human, I'm your cat Meow~ What can I do for you?";
+    }
+
+    /**
+     * Prints the bye message from the chat bot cat Meow.
+     *
+     * @return A String representation of the goodbye message from the chat bot.
+     */
+    public String exit() {
+        return "Meow: Bye human~ Your cat is going to sleep now~";
     }
 
 

@@ -46,6 +46,7 @@ public class Meow {
             switch (userCommand) {
             case BYE:
                 System.exit(0);
+                return this.ui.exit();
             case LIST:
                 return this.ui.displayList(this.tasks.getTasksList());
             case DONE:

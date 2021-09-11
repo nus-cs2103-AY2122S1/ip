@@ -28,8 +28,14 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/doge.png"));
     private Image meowImage = new Image(this.getClass().getResourceAsStream("/images/cat.jpeg"));
 
+    /**
+     * Start of the application.
+     *
+     * @param stage The given stage.
+     */
     @FXML
     public void initialize(Stage stage) {
+        stage.setTitle("Meow - An Automated Reminder Chat Bot");
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.setStyle("-fx-background-image: url('images/background.png');");
         dialogContainer.getChildren().add(
